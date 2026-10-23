@@ -1,0 +1,216 @@
+{
+  "stand": "2026-10-23",
+  "geloescht": ["beispiel"],
+  "videos": [
+    {
+      "id": "evi-regenbogen",
+      "areaId": "zeichnen",
+      "title": "Regenbogen",
+      "source": { "type": "youtube", "id": "2aH_EQvrkpY" },
+      "steps": [
+        { "t": 0, "label": "Blatt und schwarzen Stift bereitlegen" },
+        { "t": 12, "label": "Links eine Wolke malen, mit kreisenden Bewegungen" },
+        { "t": 27, "label": "Rechts eine zweite Wolke malen" },
+        { "t": 42, "label": "Einen grossen Bogen von Wolke zu Wolke" },
+        { "t": 53, "label": "Mehr Bögen darunter, immer gleicher Abstand" },
+        { "t": 87, "label": "Farben aussuchen: blau, grün, gelb, rot, lila – oder deine eigenen" },
+        { "t": 106, "label": "Regenbogen ausmalen, so bunt wie möglich" },
+        { "t": 232, "label": "Fertig – schau deinen Regenbogen an" }
+      ],
+      "task": { "text": "Mal deinen eigenen Regenbogen mit zwei Wolken und mach ein Foto davon.", "deliverable": "foto" }
+    },
+    {
+      "id": "evi-buntstift",
+      "areaId": "zeichnen",
+      "title": "Buntstift",
+      "source": { "type": "youtube", "id": "rtkSeIR_RzI" },
+      "steps": [
+        { "t": 0, "label": "Blatt und schwarzen Filzstift bereitlegen" },
+        { "t": 12, "label": "In der Mitte eine gerade Linie zeichnen" },
+        { "t": 22, "label": "Darunter eine zweite Linie, gleicher Abstand" },
+        { "t": 37, "label": "Links beide Linien mit einem kleinen Bogen verbinden" },
+        { "t": 46, "label": "Rechts auch mit einem Bogen verbinden" },
+        { "t": 52, "label": "Rechts die Spitze: zwei schräge Linien" },
+        { "t": 72, "label": "Vorne einen Bogen für die Mine" },
+        { "t": 90, "label": "Zwei Bögen in den Stift zeichnen" },
+        { "t": 100, "label": "Hinten zwei Linien nach aussen" },
+        { "t": 118, "label": "Das Ende mit einem Bogen schliessen und halbieren" },
+        { "t": 126, "label": "In der Mitte ein längliches Oval" },
+        { "t": 140, "label": "Ausmalen" },
+        { "t": 175, "label": "Fertig – schau deinen Buntstift an" }
+      ],
+      "task": { "text": "Mal deinen eigenen Buntstift in deiner Lieblingsfarbe und mach ein Foto davon.", "deliverable": "foto" }
+    },
+    {
+      "id": "evi-bleistift",
+      "areaId": "zeichnen",
+      "title": "Bleistift",
+      "source": { "type": "youtube", "id": "kSsPXKM_zrc" },
+      "steps": [
+        { "t": 0, "label": "Blatt und schwarzen Filzstift bereitlegen" },
+        { "t": 9, "label": "In der Mitte eine Linie senkrecht nach unten" },
+        { "t": 26, "label": "Daneben eine zweite Linie, gleich lang" },
+        { "t": 41, "label": "Unten beide Linien mit einem Strich verbinden" },
+        { "t": 52, "label": "Von den unteren Ecken zwei schräge Linien zur Spitze" },
+        { "t": 69, "label": "Unten einen kleinen Bogen für die Mine" },
+        { "t": 81, "label": "Oben die offene Seite mit einem Strich schliessen" },
+        { "t": 108, "label": "Etwas weiter oben noch einen Strich" },
+        { "t": 126, "label": "Die Enden an den Seiten mit kleinen Bögen verbinden" },
+        { "t": 141, "label": "Oben den Radiergummi: ein Rechteck mit runden Ecken" },
+        { "t": 158, "label": "Zwei gerade Linien in den Bleistift zeichnen" },
+        { "t": 174, "label": "Ausmalen" },
+        { "t": 210, "label": "Fertig – schau deinen Bleistift an" }
+      ],
+      "task": { "text": "Mal deinen eigenen Bleistift und mach ein Foto davon.", "deliverable": "foto" }
+    },
+    {
+      "id": "evi-meloneneis",
+      "areaId": "zeichnen",
+      "title": "Meloneneis",
+      "source": { "type": "youtube", "id": "Cjpxy9n_MjE" },
+      "steps": [
+        { "t": 0, "label": "Blatt und schwarzen Filzstift bereitlegen" },
+        { "t": 12, "label": "Unten auf dem Blatt einen langen Bogen zeichnen" },
+        { "t": 26, "label": "Die Mitte suchen und weiter oben einen Punkt machen" },
+        { "t": 39, "label": "Vom Punkt zwei gerade Striche zum Bogen – ein Dreieck" },
+        { "t": 56, "label": "Unten entlang noch einen Bogen für die Schale" },
+        { "t": 72, "label": "Kerne als Tropfen ins Dreieck zeichnen" },
+        { "t": 90, "label": "Unten den Stiel zeichnen" },
+        { "t": 102, "label": "Ein paar Striche in den Stiel – das ist das Holz" },
+        { "t": 118, "label": "Alles ausmalen" },
+        { "t": 156, "label": "Fertig – schau dein Eis an" }
+      ],
+      "task": { "text": "Mal dein eigenes Meloneneis und mach ein Foto davon.", "deliverable": "foto" }
+    },
+    {
+      "id": "evi-regenbogenflagge",
+      "areaId": "zeichnen",
+      "title": "Regenbogenflagge",
+      "source": { "type": "youtube", "id": "jgRKOMbTBUU" },
+      "steps": [
+        { "t": 0, "label": "Blatt und schwarzen Filzstift bereitlegen" },
+        { "t": 10, "label": "Eine grosse gewellte Linie zeichnen" },
+        { "t": 22, "label": "Weiter unten eine zweite gewellte Linie, gleich lang" },
+        { "t": 37, "label": "Rechts die Enden mit einem Strich verbinden" },
+        { "t": 44, "label": "Links auch mit einem Strich verbinden" },
+        { "t": 54, "label": "Links den Fahnenmast: eine lange Linie nach unten" },
+        { "t": 71, "label": "Daneben die zweite Linie für den Mast" },
+        { "t": 87, "label": "Mast oben und unten mit kleinen Strichen schliessen" },
+        { "t": 110, "label": "Fünf gewellte Linien in die Flagge zeichnen" },
+        { "t": 148, "label": "Ausmalen – sechs Farben" },
+        { "t": 186, "label": "Fertig – schau deine Flagge an" }
+      ],
+      "task": { "text": "Mal deine eigene Regenbogenflagge und mach ein Foto davon.", "deliverable": "foto" }
+    },
+    {
+      "id": "evi-muschel",
+      "areaId": "zeichnen",
+      "title": "Muschel",
+      "source": { "type": "youtube", "id": "u6pRk9k50qA" },
+      "steps": [
+        { "t": 0, "label": "Blatt und schwarzen Filzstift bereitlegen" },
+        { "t": 10, "label": "In der Mitte einen grossen Bogen, er darf schräg sein" },
+        { "t": 21, "label": "An die Enden je eine schräge Linie" },
+        { "t": 37, "label": "Unten mit einem Bogen schliessen" },
+        { "t": 45, "label": "Rechts oben eine Form nach aussen anhängen" },
+        { "t": 52, "label": "In der Mitte eine Form obendrauf" },
+        { "t": 69, "label": "Nach oben immer kleinere Formen bis zur Spitze" },
+        { "t": 85, "label": "Links eine rundliche Form dran" },
+        { "t": 95, "label": "Noch eine Form mit gewellter Unterseite" },
+        { "t": 110, "label": "Bögen in die grosse Mitte zeichnen, bis kein Platz mehr ist" },
+        { "t": 126, "label": "Ausmalen" },
+        { "t": 154, "label": "Fertig – schau deine Muschel an" }
+      ],
+      "task": { "text": "Mal deine eigene Muschel und mach ein Foto davon.", "deliverable": "foto" }
+    },
+    {
+      "id": "evi-spiegelei",
+      "areaId": "zeichnen",
+      "title": "Spiegelei",
+      "source": { "type": "youtube", "id": "IjPg5l6aX8Y" },
+      "steps": [
+        { "t": 0, "label": "Blatt und schwarzen Filzstift bereitlegen" },
+        { "t": 9, "label": "In der Mitte eine grosse wellige Form – das Eiweiss" },
+        { "t": 25, "label": "In die Mitte einen Bogen – das Eigelb" },
+        { "t": 34, "label": "Unten mit einem flachen Bogen schliessen" },
+        { "t": 44, "label": "Oben die erste Eierschale zeichnen" },
+        { "t": 53, "label": "Aussen eine gezackte Linie" },
+        { "t": 69, "label": "Daneben die zweite Schale" },
+        { "t": 81, "label": "Auch hier eine gezackte Linie" },
+        { "t": 89, "label": "Ausmalen" },
+        { "t": 117, "label": "Fertig – schau dein Spiegelei an" }
+      ],
+      "task": { "text": "Mal dein eigenes Spiegelei und mach ein Foto davon.", "deliverable": "foto" }
+    },
+    {
+      "id": "evi-specki",
+      "areaId": "zeichnen",
+      "title": "Specki (Toy Story)",
+      "source": { "type": "youtube", "id": "I1RLk0mxkKQ" },
+      "steps": [
+        { "t": 0, "label": "Blatt und schwarzen Filzstift bereitlegen" },
+        { "t": 10, "label": "In der Mitte ein Oval – die Nase" },
+        { "t": 20, "label": "Um die Nase eine grosse Rundung – der Kopf" },
+        { "t": 33, "label": "Links unten ein Fuss" },
+        { "t": 40, "label": "Rechts der zweite Fuss" },
+        { "t": 46, "label": "In der Mitte mit einem Bogen verbinden" },
+        { "t": 53, "label": "Die Ohren zeichnen" },
+        { "t": 68, "label": "In jedes Ohr die gleiche Form, nur kleiner" },
+        { "t": 79, "label": "In die Nase ein kleineres Oval" },
+        { "t": 86, "label": "Zwei kleine Ovale – die Nasenlöcher" },
+        { "t": 94, "label": "Die Augen über der Nase" },
+        { "t": 105, "label": "Linke Augenbraue" },
+        { "t": 114, "label": "Rechte Augenbraue" },
+        { "t": 122, "label": "Ausmalen" },
+        { "t": 147, "label": "Fertig – schau dein Bild an" }
+      ],
+      "task": { "text": "Mal deinen eigenen Specki und mach ein Foto davon.", "deliverable": "foto" }
+    },
+    {
+      "id": "evi-luma",
+      "areaId": "zeichnen",
+      "title": "Luma (Super Mario)",
+      "source": { "type": "youtube", "id": "eSGxCyV4xcI" },
+      "steps": [
+        { "t": 0, "label": "Blatt und Stifte bereitlegen" },
+        { "t": 13, "label": "Unten beginnen: eine grosse Rundung nach oben" },
+        { "t": 23, "label": "Geschwungene Linie wieder nach unten, oben eine runde Spitze" },
+        { "t": 32, "label": "Unten ein flacher Bogen" },
+        { "t": 38, "label": "Unten eine Rundung bis zum Bogen" },
+        { "t": 45, "label": "Rechts eine leichte Rundung, eine Lücke lassen" },
+        { "t": 58, "label": "In die Lücke einen spitzen Bogen – der Arm" },
+        { "t": 65, "label": "Links das Gleiche" },
+        { "t": 73, "label": "Zwei längliche Ovale – die Augen" },
+        { "t": 86, "label": "Kleine Kreise in die Augen – der Glanz" },
+        { "t": 96, "label": "Ausmalen" },
+        { "t": 120, "label": "Fertig – schau dein Bild an" }
+      ],
+      "task": { "text": "Mal deinen eigenen Luma und mach ein Foto davon.", "deliverable": "foto" }
+    },
+    {
+      "id": "evi-macarons",
+      "areaId": "zeichnen",
+      "title": "Macarons",
+      "source": { "type": "youtube", "id": "QoJSAnVh8_I" },
+      "steps": [
+        { "t": 0, "label": "Blatt und Stifte bereitlegen" },
+        { "t": 12, "label": "In die Mitte einen Bogen" },
+        { "t": 19, "label": "Unten eine gewellte Linie" },
+        { "t": 28, "label": "Innen zwei leichte Bögen nach unten" },
+        { "t": 35, "label": "Unten wieder eine gewellte Linie" },
+        { "t": 42, "label": "Die flache Unterseite, Seiten abgerundet" },
+        { "t": 51, "label": "Zwei schräge Linien nach unten – das zweite Macaron beginnt" },
+        { "t": 66, "label": "Zwei kleine Bögen nach unten" },
+        { "t": 70, "label": "Gewellte Linie dazu" },
+        { "t": 77, "label": "Untere Hälfte des zweiten Macarons" },
+        { "t": 85, "label": "Drittes Macaron: zwei Bögen nach unten" },
+        { "t": 91, "label": "Gewellte Linie dazu" },
+        { "t": 102, "label": "Die letzte gewellte Linie" },
+        { "t": 109, "label": "Die flache Unterseite" },
+        { "t": 116, "label": "Ausmalen" },
+        { "t": 141, "label": "Fertig – schau deine Macarons an" }
+      ],
+      "task": { "text": "Mal deine eigenen Macarons und mach ein Foto davon.", "deliverable": "foto" }
+    }
+  ]
+}
