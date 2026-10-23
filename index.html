@@ -168,7 +168,9 @@ p{margin:0}
 .plabel{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600;letter-spacing:.1em;color:var(--wmuted);min-height:36px}
 .plabel .punkt{width:14px;height:14px;border-radius:50%;flex:none}
 .video-box{position:relative;aspect-ratio:16/9;max-width:100%;background:#000;border-radius:14px;overflow:hidden;border:6px solid var(--bezel);box-shadow:4px 6px 0 var(--sh)}
-.video-box .host,.video-box .host iframe,.video-box .host video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+.video-box .host,.video-box .host video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+.video-box .host iframe{position:absolute;left:0;width:100%;top:-60px;height:calc(100% + 120px);border:0;background:#000}
+.video-box.yt-frei .host iframe{top:0;height:100%}
 .video-box .host video{object-fit:contain}
 .shield{position:absolute;inset:0;background:transparent}
 .overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px;text-align:center;color:#FFF4DF;background:var(--screen)}
@@ -545,6 +547,7 @@ function gateSpass(v,then){
 const YT_READY=new Promise(res=>{ window.onYouTubeIframeAPIReady=()=>res(); });
 let ytLoading=false;
 function loadYT(){ if(window.YT&&window.YT.Player) return Promise.resolve(); if(!ytLoading){ ytLoading=true; const s=document.createElement('script'); s.src='https://www.youtube.com/iframe_api'; s.onerror=()=>{ ytLoading=false; }; document.head.appendChild(s); } return YT_READY; }
+function ccOff(p){ try{ p.unloadModule('captions'); p.unloadModule('cc'); }catch(e){} }
 function mapYT(s){ return ({'-1':'idle',0:'ended',1:'playing',2:'paused',3:'buffering',5:'cued'})[s]||'idle'; }
 function makePlayer(host,source,opts={}){
   const api={ready:false,kind:source.type,dead:false};
@@ -554,7 +557,7 @@ function makePlayer(host,source,opts={}){
       const vars={controls:opts.controls?1:0,rel:0,iv_load_policy:3,disablekb:1,playsinline:1,fs:0,cc_load_policy:0,autoplay:0};
       if(/^https?:/.test(location.protocol)) vars.origin=location.origin;
       p=new YT.Player(div,{host:'https://www.youtube-nocookie.com',width:'100%',height:'100%',videoId:source.id,playerVars:vars,
-        events:{onReady:()=>{api.ready=true;opts.onReady&&opts.onReady();},onStateChange:e=>opts.onState&&opts.onState(mapYT(e.data)),onError:e=>opts.onError&&opts.onError(e.data)}});
+        events:{onReady:()=>{api.ready=true;ccOff(p);opts.onReady&&opts.onReady();},onStateChange:e=>{ if(e.data===1) ccOff(p); opts.onState&&opts.onState(mapYT(e.data)); },onError:e=>opts.onError&&opts.onError(e.data)}});
     });
     const ok=()=>p&&api.ready;
     api.play=()=>{ if(ok()) p.playVideo(); }; api.pause=()=>{ if(ok()) p.pauseVideo(); }; api.seek=t=>{ if(ok()) p.seekTo(t,true); };
@@ -781,7 +784,7 @@ function tabVideoEditor(root,acts,{videoId}){
     <div class="field"><label for="ed-area">Bereich</label><select class="inp" id="ed-area" data-bind="areaId">${S.areas.map(a=>`<option value="${a.id}" ${a.id===ED.areaId?'selected':''}>${a.emoji} ${esc(a.name)}${a.kind==='spass'?' (Spass)':''}</option>`).join('')}</select></div>
   </div>
   <div class="panel"><h3>Schritte</h3><p class="small muted">Spiel das Video ab, halte an der Stelle an, an der das Kind etwas nachmachen soll, und setz dort einen Schritt. Das Video stoppt dann für das Kind automatisch am Ende jedes Schritts.</p>
-    <div class="video-box" id="ed-box" hidden style="border:0"><div class="host" id="ed-host"></div></div>
+    <div class="video-box yt-frei" id="ed-box" hidden style="border:0"><div class="host" id="ed-host"></div></div>
     <div class="row" style="flex-wrap:nowrap"><input class="inp" id="ed-label" data-bind="label" placeholder="Was soll das Kind hier tun? z. B. Papier falten"><button class="btn primary" data-act="addstep" style="flex:none">${ico('plus')} <span id="ed-at">bei 0:00</span></button></div>
     <ol class="steps-list" id="ed-steps"></ol>
     <div class="row"><input class="inp" id="ed-mtime" placeholder="mm:ss" style="width:100px" inputmode="numeric"><button class="btn sm" data-act="addmanual">Schritt bei dieser Zeit</button></div>
