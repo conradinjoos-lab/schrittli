@@ -1,5 +1,5 @@
 {
- "stand": "2026-10-23",
+ "stand": "2026-10-24",
  "eintraege": [
   {
    "id": "srf-huhn",
@@ -1122,6 +1122,1106 @@
    "task": {
     "text": "",
     "deliverable": "keine"
+   }
+  },
+  {
+   "id": "wl-fingerstricken",
+   "areaId": "werken",
+   "title": "Fingerstricken – Armband",
+   "source": {
+    "type": "youtube",
+    "id": "1pE8xLKyxAk"
+   },
+   "kanal": "die Werklehrerin",
+   "dauer": "3:54",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Nur Wolle nötig. Am Anfang hilft es, wenn jemand die Daumenschlaufe zeigt.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So geht Fingerstricken"
+    },
+    {
+     "t": 5,
+     "label": "Anfangsschlaufe: Faden kreuzen und durchziehen"
+    },
+    {
+     "t": 21,
+     "label": "Schlaufe über den Daumen, Faden hinter und vor den Fingern durchfädeln"
+    },
+    {
+     "t": 35,
+     "label": "Zurück: wieder hinter und vor den Fingern"
+    },
+    {
+     "t": 46,
+     "label": "Faden um alle vier Finger legen, untere Schlaufe über jeden Finger heben"
+    },
+    {
+     "t": 80,
+     "label": "Nächste Reihe genauso – Finger beugen hilft"
+    },
+    {
+     "t": 100,
+     "label": "Daumenschlaufe lösen und am Fadenende ziehen"
+    },
+    {
+     "t": 120,
+     "label": "Immer weiter: Faden drüber, untere Schlaufe drüberheben"
+    },
+    {
+     "t": 160,
+     "label": "Abschluss: Fadenende durch die Schlaufen ziehen"
+    },
+    {
+     "t": 200,
+     "label": "Zum Armband verknoten – fertig!"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem gestrickten Armband.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "wl-kiludo-fingerstricken",
+   "areaId": "werken",
+   "title": "Fingerstricke (Mundart)",
+   "source": {
+    "type": "youtube",
+    "id": "7P6-Ag9Tcp4"
+   },
+   "kanal": "KILUDO",
+   "dauer": "3:57",
+   "alter": "ab 6",
+   "sprache": "Schweizerdeutsch",
+   "hinweis": "Schweizer Kinder-Kreativplattform. Gleiche Technik wie bei der Werklehrerin, auf Mundart erklärt.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Material bereitlegen"
+    },
+    {
+     "t": 20,
+     "label": "Faden hinter und vor den Fingern durch"
+    },
+    {
+     "t": 40,
+     "label": "Zweite Runde zurück"
+    },
+    {
+     "t": 60,
+     "label": "Untere Schlaufe über jeden Finger heben"
+    },
+    {
+     "t": 100,
+     "label": "Immer weiter stricken"
+    },
+    {
+     "t": 140,
+     "label": "Schau, wie der Schlauch wächst"
+    },
+    {
+     "t": 200,
+     "label": "Abschluss: Schlaufen zusammenführen"
+    },
+    {
+     "t": 225,
+     "label": "Fertig!"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem Strickschlauch.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "wl-strickliesel",
+   "areaId": "werken",
+   "title": "Strickliesel – von Anfang bis Schluss",
+   "source": {
+    "type": "youtube",
+    "id": "Yfh1FpEMTtc"
+   },
+   "kanal": "die Werklehrerin",
+   "dauer": "2:55",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Braucht eine Strickliesel (gibt es für wenig Geld). Der Anfang ist das Schwierigste – langsam schauen.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Faden durch die Strickliesel ziehen"
+    },
+    {
+     "t": 20,
+     "label": "Jeden Haken einmal umwickeln, im Uhrzeigersinn"
+    },
+    {
+     "t": 40,
+     "label": "Faden über dem ersten Haken entlangführen"
+    },
+    {
+     "t": 58,
+     "label": "Untere Schlaufe mit dem Stab über den Haken heben, unten am Faden ziehen"
+    },
+    {
+     "t": 80,
+     "label": "Immer so weiter, Haken für Haken"
+    },
+    {
+     "t": 100,
+     "label": "Lang genug? Faden abschneiden"
+    },
+    {
+     "t": 112,
+     "label": "Abschluss: Schlaufe über den Haken, Faden durchziehen – bei jedem Haken"
+    },
+    {
+     "t": 140,
+     "label": "Schlauch herausziehen – fertig!"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem Strickschlauch.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "wl-wickeldrache",
+   "areaId": "werken",
+   "title": "Wickeldrachen aus zwei Holzspateln",
+   "source": {
+    "type": "youtube",
+    "id": "cJOAV5-L1SE"
+   },
+   "kanal": "die Werklehrerin",
+   "dauer": "1:14",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Zwei Holzspatel, Wolle. Die Spatel werden mit Heisskleber verbunden – das macht ein Erwachsener; sonst gehen auch Klebeband oder normaler Leim.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Zwei Holzspatel zum Kreuz kleben, Wolle festknoten"
+    },
+    {
+     "t": 14,
+     "label": "Wickeltechnik: Faden um einen Stab, einmal ganz herum"
+    },
+    {
+     "t": 22,
+     "label": "Zum nächsten Stab, wieder einmal herum"
+    },
+    {
+     "t": 32,
+     "label": "Immer weiter – die Fäden eng nebeneinander"
+    },
+    {
+     "t": 48,
+     "label": "Farbe wechseln: alten und neuen Faden verknoten"
+    },
+    {
+     "t": 58,
+     "label": "Fadenende festkleben – fertig!"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem Wickeldrachen.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "wl-armband-karton",
+   "areaId": "werken",
+   "title": "Armband knüpfen mit der Kartonscheibe",
+   "source": {
+    "type": "youtube",
+    "id": "IKmyEXdF4Oo"
+   },
+   "kanal": "die Werklehrerin",
+   "dauer": "4:05",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Kartonscheibe mit Loch und 8 Schlitzen, 7 Wollfäden. Sehr beruhigende Arbeit, gut für zwischendurch.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht das Armband aus"
+    },
+    {
+     "t": 5,
+     "label": "Kreis aus Karton (10 cm), Loch in die Mitte, 8 Schlitze am Rand"
+    },
+    {
+     "t": 20,
+     "label": "Sieben Wollfäden, je 40 cm lang"
+    },
+    {
+     "t": 40,
+     "label": "Alle Fäden zusammen, am Ende einen Knoten"
+    },
+    {
+     "t": 73,
+     "label": "Knoten durch das Loch stecken"
+    },
+    {
+     "t": 86,
+     "label": "Jeden Faden in einen Schlitz – ein Schlitz bleibt frei"
+    },
+    {
+     "t": 109,
+     "label": "Knüpfen: leerer Schlitz nach unten, 1-2-3, dritten Faden in den leeren Schlitz"
+    },
+    {
+     "t": 143,
+     "label": "Immer so weiter, hinten ab und zu am Knoten ziehen"
+    },
+    {
+     "t": 184,
+     "label": "Lang genug? Fäden aus den Schlitzen, Armband durchs Loch ziehen"
+    },
+    {
+     "t": 204,
+     "label": "Ende verknoten – fertig!"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem Armband am Handgelenk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "wl-webrahmen-karton",
+   "areaId": "werken",
+   "title": "Mini-Webrahmen aus Karton",
+   "source": {
+    "type": "youtube",
+    "id": "Nk_h6mEHVvs"
+   },
+   "kanal": "BassenaStuwerviertel",
+   "dauer": "1:34",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Ohne Worte, nur Musik – zeigt alles sehr klar. Karton, Wolle, stumpfe Nadel.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Material – Karton, Wolle, Schere, Nadel"
+    },
+    {
+     "t": 8,
+     "label": "Oben und unten kleine Schlitze in den Karton schneiden"
+    },
+    {
+     "t": 17,
+     "label": "Kettfaden spannen: von Schlitz zu Schlitz, oben und unten"
+    },
+    {
+     "t": 33,
+     "label": "Bunten Faden mit der Nadel über–unter durchweben"
+    },
+    {
+     "t": 50,
+     "label": "Weiter weben, Farben wechseln"
+    },
+    {
+     "t": 70,
+     "label": "Fertig gewebt: Fäden hinten lösen"
+    },
+    {
+     "t": 80,
+     "label": "Vom Karton nehmen, Enden verknoten – fertig!"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem kleinen Teppich.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "wl-vorstich",
+   "areaId": "werken",
+   "title": "Vorstich – der einfachste Handstich",
+   "source": {
+    "type": "youtube",
+    "id": "d3oupYpTqJs"
+   },
+   "kanal": "Kreativ mit Miss B",
+   "dauer": "1:56",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Ohne Worte. Filz, Nadel, Garn. Ein Wal aus Filz als Beispiel – geht mit jeder Form.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: der Wal mit Vorstich"
+    },
+    {
+     "t": 20,
+     "label": "Material: Filz, Faden, Nadel, Schere"
+    },
+    {
+     "t": 30,
+     "label": "Faden einfädeln, Knoten ans Ende"
+    },
+    {
+     "t": 40,
+     "label": "Von hinten einstechen, Nadel nach vorne ziehen"
+    },
+    {
+     "t": 50,
+     "label": "Kleines Stück weiter wieder runter, dann wieder hoch"
+    },
+    {
+     "t": 65,
+     "label": "Immer weiter: gleich lange Stiche, gleich lange Abstände"
+    },
+    {
+     "t": 95,
+     "label": "Hinten verknoten, Faden abschneiden"
+    },
+    {
+     "t": 108,
+     "label": "Fertig – schau dir deine Naht an"
+    }
+   ],
+   "task": {
+    "text": "Foto von deiner Naht.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "wl-zopf",
+   "areaId": "werken",
+   "title": "Zopf flechten aus 3 Strängen",
+   "source": {
+    "type": "youtube",
+    "id": "ECMahTpP14U"
+   },
+   "kanal": "Kreativ mit Miss B",
+   "dauer": "1:23",
+   "alter": "ab 5",
+   "sprache": "ohne Sprache",
+   "hinweis": "Ohne Worte. Drei dicke Fäden oder Wollstränge und Klebeband.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: drei Fäden, Klebeband"
+    },
+    {
+     "t": 10,
+     "label": "Fäden oben mit Klebeband festkleben"
+    },
+    {
+     "t": 17,
+     "label": "Rechter Faden über die Mitte"
+    },
+    {
+     "t": 31,
+     "label": "Linker Faden über die Mitte"
+    },
+    {
+     "t": 37,
+     "label": "Immer abwechselnd: rechts, links, rechts …"
+    },
+    {
+     "t": 65,
+     "label": "Unten einen Knoten machen"
+    },
+    {
+     "t": 72,
+     "label": "Klebeband lösen – fertig!"
+    }
+   ],
+   "task": {
+    "text": "Flechte einen Zopf und zeig ihn jemandem.",
+    "deliverable": "fertig"
+   }
+  },
+  {
+   "id": "wl-flechten",
+   "areaId": "werken",
+   "title": "Flechten – Grundlagen",
+   "source": {
+    "type": "youtube",
+    "id": "_7eCeENd_Ek"
+   },
+   "kanal": "digital4teacher",
+   "dauer": "1:42",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Ruhig und genau erklärt, aus dem Werkunterricht.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: drei Fäden oben verknoten"
+    },
+    {
+     "t": 20,
+     "label": "Knoten festkleben, damit nichts rutscht"
+    },
+    {
+     "t": 40,
+     "label": "Fäden aufteilen: links, rechts, Mitte"
+    },
+    {
+     "t": 50,
+     "label": "Rechter Faden über den mittleren"
+    },
+    {
+     "t": 62,
+     "label": "Linker Faden über den mittleren"
+    },
+    {
+     "t": 75,
+     "label": "Fest anziehen, damit keine Löcher entstehen"
+    },
+    {
+     "t": 85,
+     "label": "Rechts über die Mitte, links über die Mitte – bis unten"
+    },
+    {
+     "t": 95,
+     "label": "Unten verknoten – fertig!"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem Zopf.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "wl-armband-zwei",
+   "areaId": "werken",
+   "title": "Armband aus zwei Fäden knüpfen",
+   "source": {
+    "type": "youtube",
+    "id": "PgYuSEEJtoY"
+   },
+   "kanal": "Kreativ mit Miss B",
+   "dauer": "3:37",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Ohne Worte. Zwei Fäden, Klebeband – immer derselbe Knoten.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So wird das Armband"
+    },
+    {
+     "t": 20,
+     "label": "Zwei Fäden abmessen – etwa dreimal ums Handgelenk"
+    },
+    {
+     "t": 55,
+     "label": "Oben zusammenknoten und mit Klebeband festkleben"
+    },
+    {
+     "t": 75,
+     "label": "Erster Knoten: einen Faden um den anderen schlingen und hochziehen"
+    },
+    {
+     "t": 95,
+     "label": "Immer wieder derselbe Knoten mit demselben Faden"
+    },
+    {
+     "t": 140,
+     "label": "Weiter, bis das Band lang genug ist"
+    },
+    {
+     "t": 165,
+     "label": "Ums Handgelenk legen und zuknoten"
+    },
+    {
+     "t": 185,
+     "label": "Enden abschneiden"
+    },
+    {
+     "t": 205,
+     "label": "Fertig!"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem Armband.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "wl-fingerhaekeln",
+   "areaId": "werken",
+   "title": "Armband fingerhäkeln",
+   "source": {
+    "type": "youtube",
+    "id": "0uhYJpyHk3U"
+   },
+   "kanal": "Kreativ mit Miss B",
+   "dauer": "1:55",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Ohne Worte. Nur Wolle und Finger – Luftmaschen ohne Häkelnadel.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: das fertige Armband"
+    },
+    {
+     "t": 10,
+     "label": "Drei Wollfäden abmessen und abschneiden"
+    },
+    {
+     "t": 30,
+     "label": "Anfangsschlaufe machen und festziehen"
+    },
+    {
+     "t": 48,
+     "label": "Faden mit dem Finger durch die Schlaufe ziehen – neue Schlaufe"
+    },
+    {
+     "t": 65,
+     "label": "Immer wieder durchziehen, die Kette wird länger"
+    },
+    {
+     "t": 95,
+     "label": "Letzte Schlaufe: Faden ganz durchziehen und festknoten"
+    },
+    {
+     "t": 108,
+     "label": "Fertig – ums Handgelenk binden"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem gehäkelten Armband.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "ex-ballonrakete",
+   "areaId": "experimente",
+   "title": "Raketenstart mit Luft",
+   "source": {
+    "type": "youtube",
+    "id": "uGh-oF2n02w"
+   },
+   "kanal": "Stiftung Kinder forschen",
+   "dauer": "2:07",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Luftballon, Trinkhalm, Schnur, Klebeband, Wäscheklammer. Rückstoss – geht im Zimmer.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Was brauchst du?"
+    },
+    {
+     "t": 28,
+     "label": "Schnur durch den Trinkhalm fädeln"
+    },
+    {
+     "t": 36,
+     "label": "Ballon aufblasen und mit der Klammer zuhalten"
+    },
+    {
+     "t": 42,
+     "label": "Trinkhalm mit Klebeband auf den Ballon kleben"
+    },
+    {
+     "t": 50,
+     "label": "Schnur straff zwischen zwei Stühle spannen"
+    },
+    {
+     "t": 68,
+     "label": "Klammer lösen – 3, 2, 1, Start!"
+    },
+    {
+     "t": 80,
+     "label": "Warum fliegt die Rakete? Die Luft strömt hinten raus"
+    },
+    {
+     "t": 95,
+     "label": "Probier: grosser gegen kleiner Ballon, steil oder flach"
+    }
+   ],
+   "task": {
+    "text": "Lass deine Rakete fliegen – wie weit kommt sie?",
+    "deliverable": "fertig"
+   }
+  },
+  {
+   "id": "ex-brauserakete",
+   "areaId": "experimente",
+   "title": "Brausepulverrakete",
+   "source": {
+    "type": "youtube",
+    "id": "WPDku_zuCQ8"
+   },
+   "kanal": "Stiftung Kinder forschen",
+   "dauer": "3:47",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Brausetablette, Wasser, Dose mit Schnappdeckel (Filmdose oder Tablettenröhrchen). Nur mit Erwachsenen und mit Abstand!",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Was brauchst du?"
+    },
+    {
+     "t": 40,
+     "label": "Dose mit etwas Wasser füllen"
+    },
+    {
+     "t": 60,
+     "label": "Erst mit einer halben Tablette probieren"
+    },
+    {
+     "t": 75,
+     "label": "Deckel drauf, umdrehen, hinstellen – zurücktreten!"
+    },
+    {
+     "t": 100,
+     "label": "Hat nicht geklappt? Dose trocknen, nochmal"
+    },
+    {
+     "t": 120,
+     "label": "Grösseres Stück – bumm!"
+    },
+    {
+     "t": 150,
+     "label": "Warum? In der Tablette steckt Gas, der Druck wird zu gross"
+    },
+    {
+     "t": 200,
+     "label": "Probier: mit Backpulver und Wasser"
+    }
+   ],
+   "task": {
+    "text": "Lass deine Rakete starten – draussen, mit einem Erwachsenen.",
+    "deliverable": "fertig"
+   }
+  },
+  {
+   "id": "ex-luft-wiegt",
+   "areaId": "experimente",
+   "title": "Luft wiegt etwas",
+   "source": {
+    "type": "youtube",
+    "id": "sUZNnAlEz1Q"
+   },
+   "kanal": "WetterOnline – WetterSchule",
+   "dauer": "3:54",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Zwei Luftballons, Faden, Stab, Nadel. Die Luftballonwaage – ein Erwachsener hilft beim Kleben.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Wiegt Luft etwas?"
+    },
+    {
+     "t": 20,
+     "label": "Material: zwei Ballons, Faden, Stab, Nadel"
+    },
+    {
+     "t": 40,
+     "label": "Schlaufe in der Mitte des Stabs, Stab aufhängen"
+    },
+    {
+     "t": 58,
+     "label": "Ballons an den Enden festbinden"
+    },
+    {
+     "t": 70,
+     "label": "Stab ausbalancieren, bis er gerade hängt"
+    },
+    {
+     "t": 95,
+     "label": "Einen Ballon mit der Nadel anstechen"
+    },
+    {
+     "t": 118,
+     "label": "Schau: Die Seite mit dem vollen Ballon geht runter"
+    },
+    {
+     "t": 140,
+     "label": "Ein Würfel Luft, ein Meter gross, wiegt ein Kilo!"
+    },
+    {
+     "t": 180,
+     "label": "Darum drückt die Luft auf uns – das ist der Luftdruck"
+    }
+   ],
+   "task": {
+    "text": "Baue die Luftballonwaage nach und zeig sie jemandem.",
+    "deliverable": "fertig"
+   }
+  },
+  {
+   "id": "ex-hefeballon",
+   "areaId": "experimente",
+   "title": "Hefeballon",
+   "source": {
+    "type": "youtube",
+    "id": "GmVxCSHsCzM"
+   },
+   "kanal": "Helmholtz-Gemeinschaft",
+   "dauer": "2:30",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Hefe, Zucker, Flasche, Ballon, warmes Wasser. Der Ballon bläst sich von allein auf – braucht etwas Geduld.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Was macht die Hefe?"
+    },
+    {
+     "t": 20,
+     "label": "Material: Hefe, Zucker, Flasche, Trichter, Ballon, warmes Wasser"
+    },
+    {
+     "t": 40,
+     "label": "Hefe und Zucker mit dem Trichter in die Flasche"
+    },
+    {
+     "t": 65,
+     "label": "Ein paar Löffel warmes Wasser dazu, Flasche schütteln"
+    },
+    {
+     "t": 85,
+     "label": "Ballon über die Flasche stülpen"
+    },
+    {
+     "t": 100,
+     "label": "Flasche ins warme Wasser stellen – warten"
+    },
+    {
+     "t": 112,
+     "label": "Der Ballon wird dicker! Die Hefe frisst den Zucker und macht Gas"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem aufgeblasenen Hefeballon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "ex-moos",
+   "areaId": "experimente",
+   "title": "Was macht Regen mit Moos?",
+   "source": {
+    "type": "youtube",
+    "id": "XiJ1Dc0V6kk"
+   },
+   "kanal": "Stiftung Kinder forschen",
+   "dauer": "0:59",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Kurz und klar. Moos aus dem Wald, Schale, Wasser.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Was passiert mit Moos, wenn es regnet?"
+    },
+    {
+     "t": 4,
+     "label": "Was brauchst du?"
+    },
+    {
+     "t": 10,
+     "label": "Vorbereitung"
+    },
+    {
+     "t": 15,
+     "label": "Wasser marsch – und beobachten"
+    },
+    {
+     "t": 32,
+     "label": "Was ist passiert?"
+    },
+    {
+     "t": 39,
+     "label": "Weiterfragen: Wie viel Wasser hält das Moos?"
+    }
+   ],
+   "task": {
+    "text": "Probier es mit Moos aus dem Wald.",
+    "deliverable": "fertig"
+   }
+  },
+  {
+   "id": "ex-pfeffer-salz",
+   "areaId": "experimente",
+   "title": "Pfeffer und Salz trennen",
+   "source": {
+    "type": "youtube",
+    "id": "a5EHGfGeq74"
+   },
+   "kanal": "Der Elefant (WDR)",
+   "dauer": "1:44",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Salz, Pfeffer, Plastiklöffel, Wollpullover. Zaubertrick mit Reibung.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Dara zeigt Tanja einen Trick"
+    },
+    {
+     "t": 10,
+     "label": "Salz und Pfeffer mischen und aufs Blatt streuen"
+    },
+    {
+     "t": 50,
+     "label": "Plastiklöffel kräftig am Pullover reiben"
+    },
+    {
+     "t": 65,
+     "label": "Löffel knapp über die Mischung halten – der Pfeffer springt hoch!"
+    },
+    {
+     "t": 85,
+     "label": "Warum? Reiben macht den Löffel elektrisch, der leichte Pfeffer springt zuerst"
+    },
+    {
+     "t": 98,
+     "label": "Fertig – probier es selbst"
+    }
+   ],
+   "task": {
+    "text": "Trenne Pfeffer und Salz mit dem Zaubertrick.",
+    "deliverable": "fertig"
+   }
+  },
+  {
+   "id": "ex-starke-eier",
+   "areaId": "experimente",
+   "title": "Starke Eier",
+   "source": {
+    "type": "youtube",
+    "id": "qf54yUZv2Ks"
+   },
+   "kanal": "Der Elefant (WDR)",
+   "dauer": "2:27",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Vier rohe Eier, Eierbecher, Bücher. Nur wenn ein Erwachsener dabei ist – falls doch eines bricht.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Halten rohe Eier Bücher aus?"
+    },
+    {
+     "t": 25,
+     "label": "Vier rohe Eier in Eierbecher stellen, alle gleich hoch"
+    },
+    {
+     "t": 50,
+     "label": "Ein Buch vorsichtig drauflegen"
+    },
+    {
+     "t": 65,
+     "label": "Noch mehr Bücher – wie viele halten die Eier?"
+    },
+    {
+     "t": 100,
+     "label": "Warum? Die runde Form verteilt das Gewicht"
+    },
+    {
+     "t": 125,
+     "label": "Aufräumen: Ei in die Pfanne"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem Eierturm.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "ex-tag-nacht",
+   "areaId": "experimente",
+   "title": "Wie entstehen Tag und Nacht?",
+   "source": {
+    "type": "youtube",
+    "id": "I4VnZqWlvO4"
+   },
+   "kanal": "Stiftung Kinder forschen",
+   "dauer": "1:18",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Ohne Worte, mit Texttafeln. Kugel (Orange, Apfel oder Styroporkugel), Zahnstocher, Taschenlampe, dunkler Raum.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Tag und Nacht durch Drehung"
+    },
+    {
+     "t": 8,
+     "label": "Du brauchst: Kugel, Zahnstocher, Taschenlampe"
+    },
+    {
+     "t": 20,
+     "label": "Zahnstocher in die Kugel stecken – das bist du"
+    },
+    {
+     "t": 33,
+     "label": "Raum dunkel: Die Taschenlampe ist die Sonne"
+    },
+    {
+     "t": 45,
+     "label": "Kugel langsam drehen – wann ist bei dir Tag, wann Nacht?"
+    },
+    {
+     "t": 60,
+     "label": "Forschungsfrage: Wo auf der Kugel ist jetzt Nacht?"
+    }
+   ],
+   "task": {
+    "text": "Mach es im dunklen Zimmer nach – mit Taschenlampe und Apfel.",
+    "deliverable": "fertig"
+   }
+  },
+  {
+   "id": "ex-wasserfilter",
+   "areaId": "experimente",
+   "title": "Wasserfilter selber bauen",
+   "source": {
+    "type": "youtube",
+    "id": "wsPqHD-DbJI"
+   },
+   "kanal": "Stiftung Kinder forschen",
+   "dauer": "1:47",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Plastikflasche, Sand, Kies, Watte oder Kaffeefilter, Dreckwasser. Das Wasser danach nicht trinken!",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Wie wird Dreckwasser sauber?"
+    },
+    {
+     "t": 14,
+     "label": "Was brauchst du?"
+    },
+    {
+     "t": 26,
+     "label": "Flasche schichten: unten Watte, dann Sand, dann Kies"
+    },
+    {
+     "t": 40,
+     "label": "Dreckwasser langsam oben hineingiessen"
+    },
+    {
+     "t": 49,
+     "label": "Schau: Was kommt unten raus?"
+    },
+    {
+     "t": 55,
+     "label": "Warum? Die Schichten halten den Dreck zurück"
+    },
+    {
+     "t": 75,
+     "label": "Probier: andere Schichten, anderer Dreck"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem Filter mit dem Wasser davor und danach.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "ex-ballon-essig",
+   "areaId": "experimente",
+   "title": "Luftballon mit Essig und Backpulver",
+   "source": {
+    "type": "youtube",
+    "id": "9N25ofqiPFs"
+   },
+   "kanal": "BaumhausBande",
+   "dauer": "0:45",
+   "alter": "ab 5",
+   "sprache": "ohne Sprache",
+   "hinweis": "Kurz und ohne Worte. Flasche mit Essig, Backpulver, Ballon, Trichter. Schäumt – auf die Unterlage achten.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Flasche mit Essig, Ballon, Backpulver"
+    },
+    {
+     "t": 6,
+     "label": "Backpulver mit dem Trichter in den Ballon füllen"
+    },
+    {
+     "t": 13,
+     "label": "Ballon über den Flaschenhals stülpen"
+    },
+    {
+     "t": 19,
+     "label": "Ballon hochheben – das Pulver fällt in den Essig"
+    },
+    {
+     "t": 24,
+     "label": "Es schäumt – der Ballon bläst sich auf!"
+    },
+    {
+     "t": 33,
+     "label": "Warum? Essig und Backpulver machen Gas"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem aufgeblasenen Ballon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "ex-magnet",
+   "areaId": "experimente",
+   "title": "Dinge bewegen ohne Berührung – Magnet",
+   "source": {
+    "type": "youtube",
+    "id": "Q0XiO-UWRKY"
+   },
+   "kanal": "Neugier schafft Wissen",
+   "dauer": "3:16",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Starke Magnete, Büroklammern, Karton, Trinkhalme. Magnet-Labyrinth zum Selberbauen.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Büroklammern tanzen von allein"
+    },
+    {
+     "t": 40,
+     "label": "Das Geheimnis: Magnete unter dem Tisch"
+    },
+    {
+     "t": 62,
+     "label": "Magnet unterm Tisch drehen – oben dreht sich einer mit"
+    },
+    {
+     "t": 90,
+     "label": "Bau ein Labyrinth: Karton bemalen, Trinkhalme aufkleben"
+    },
+    {
+     "t": 110,
+     "label": "Mutter oder Büroklammer mit dem Magnet von unten durchs Labyrinth ziehen"
+    },
+    {
+     "t": 125,
+     "label": "Bachlauf malen, Papierfisch auf eine Büroklammer kleben"
+    },
+    {
+     "t": 150,
+     "label": "Schwieriger: Kronkorken als Hindernisse"
+    },
+    {
+     "t": 180,
+     "label": "Probier eigene Ideen aus"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem Magnet-Labyrinth.",
+    "deliverable": "foto"
    }
   }
  ]
