@@ -25,11 +25,12 @@ Kinder, Sterne, Fortschritt und Werke liegen im Browser des Geräts (localStorag
 - Oberstes Regalbrett = Spass-Bereiche (kosten einen Stern), darunter die Lern-Bereiche.
 - Abendwerkstatt ab 18 Uhr (dunkle Wand, Lampe, Lichterkette); im Elternbereich umstellbar.
 - Player: links das Video («Schau zu»), rechts die Schritte als grosse Knöpfe – erledigte grün, der aktuelle gelb, Tipp auf einen Schritt springt dorthin.
+- Regal: jeder Bereich zeigt «gemacht/alle» (z. B. 2/10), grün mit Haken, wenn alles gemacht ist.
 - Elternbereich → Tab «Katalog»: Vorauswahl aus `katalog.json` (SRF Kids, Die Maus, Schwiizergoofe …), pro Video «Hinzufügen».
 
 ## Was die App macht
 
-- **Schritt-Modus:** Video stoppt automatisch am Ende jedes Schritts, Kind sieht «Jetzt du: …», tippt «Nochmal» oder «Weiter». Schritte werden vorgelesen.
+- **Schritt-Modus:** Video stoppt automatisch am Ende jedes Schritts (kleines Schild «Jetzt du» im Bild, kein Zwischenbildschirm). Tipp aufs Video oder auf ▶ = Weiter, ↺ = Nochmal. Vorlesen nur auf Knopfdruck (Lautsprecher); automatisches Vorlesen ist in den Einstellungen abschaltbar/einschaltbar, die Stimme hängt vom Gerät ab.
 - **Lern-Bereiche** unbegrenzt, **Spass-Bereiche** kosten einen Stern pro Video und Tag (Anzahl in den Einstellungen). Abgegebene Aufgabe = ein Bonus-Stern pro Tag (abschaltbar).
 - **Aufgabe nach dem Video:** Foto, Bild malen, Tonaufnahme oder nur Fertig-Knopf. Landet in «Meine Werke», Eltern geben Rückmeldung (Emoji + Satz).
 - **Schul-Link:** trägt Video, Schritte und Aufgabe im Link selbst. Kind scannt QR, landet direkt im Player. Keine Anmeldung, keine Sterne, nichts wird gespeichert.
