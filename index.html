@@ -459,7 +459,7 @@ function leaveScreen(){ if(P){ P.destroy(); P=null; } if(ED&&ED.api){ ED.api.des
 function render(){ const app=$('#app'); app.innerHTML=''; app.onclick=null; app.oninput=null; app.onchange=null; (SCREENS[view.name]||SCREENS.home)(app,view.params); }
 function wire(app,actions){ app.onclick=e=>{ const b=e.target.closest('[data-act]'); if(!b||!app.contains(b)) return; const fn=actions[b.dataset.act]; if(fn){ e.preventDefault(); fn(b,e); } }; }
 function kopf(title,{back,right='',sub=''}={}){ return `<div class="inner kopf" style="padding-left:max(16px,env(safe-area-inset-left,0px))">${back?`<a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a>`:''}<div class="schild"><h1>${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:''}</div><div class="kopf-rechts">${right}</div></div>`; }
-function bank(opts={}){ const n=abend(); const p=profile(); return `<div class="bank"><div class="inner deko-reihe">${n?DEKO.kegel:''}${DEKO.kiste}<span class="nur-breit">${DEKO.becher}</span><span class="nur-breit" style="margin-left:10px">${DEKO.lineal}</span><span class="grow"></span>${n?DEKO.lampe:''}${p?`<button class="du" data-act="who" aria-label="Kind wechseln"><span class="av" style="--c:${p.color}">${p.emoji}</span><span class="lbl">Du</span></button>`:''}</div><div class="platte"></div><div class="schubladen"><div class="lade"><i></i></div><div class="lade"><i></i></div><div class="lade"><i></i></div><div class="lade"><i></i></div></div></div>`; }
+function bank(opts={}){ const n=abend(); const p=profile(); return `<div class="bank"><div class="inner deko-reihe">${n?DEKO.kegel:''}<span class="grow"></span>${n?DEKO.lampe:''}${p?`<button class="du" data-act="who" aria-label="Kind wechseln"><span class="av" style="--c:${p.color}">${p.emoji}</span><span class="lbl">Du</span></button>`:''}</div><div class="platte"></div><div class="schubladen"><div class="lade"><i></i></div><div class="lade"><i></i></div><div class="lade"><i></i></div><div class="lade"><i></i></div></div></div>`; }
 
 /* ============================== Inhaltsdatei & Start ============================== */
 let contentInfo=null;
@@ -509,7 +509,7 @@ SCREENS.profiles=app=>{
 };
 
 /* ============================== Kind: Werkstatt (Start) ============================== */
-function dingHtml(a,kind){ const nvid=videosIn(a.id).length; return `<button class="ding${nvid?'':' leer'}" data-act="area" data-id="${a.id}">${dingSvg(a.ding,a.emoji)}<span class="tag">${kind==='spass'?`<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color:#F2B705"><path d="${ICONS.star}"/></svg>`:''}${esc(a.name)}<span class="cnt">${nvid}</span></span></button>`; }
+function dingHtml(a,kind){ const nvid=videosIn(a.id).length; return `<button class="ding${nvid?'':' leer'}" data-act="area" data-id="${a.id}">${dingSvg(a.ding,a.emoji)}<span class="tag">${kind==='spass'?`<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color:#F2B705"><path d="${ICONS.star}"/></svg>`:''}${esc(a.name)}</span></button>`; }
 SCREENS.home=app=>{
   const p=profile(); if(!p){ go('firstrun'); return; } const n=abend();
   const newFb=S.works.filter(w=>w.profileId===p.id&&w.feedback&&!w.fbSeen).length;
@@ -519,7 +519,7 @@ SCREENS.home=app=>{
       <div class="schild hallo"><h1>Hallo ${esc(p.name)}!</h1><div class="sub">Was nimmst du heute?</div></div>
       <div class="kopf-rechts">${glasSterne(p.id)}<button class="werke-btn" data-act="gallery"><span class="fotos"><i></i><i></i></span>Meine Werke${newFb?`<span class="neu">${newFb}</span>`:''}</button><button class="lock-btn" data-act="parent" aria-label="Elternbereich">${ico('lock')}</button></div>
     </div>
-    ${spass.length?`<div class="inner regal-wrap"><span class="zettel links"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color:#F2B705"><path d="${ICONS.star}"/></svg>Oberstes Brett: kostet einen Stern</span><div class="regal"><div class="ding deko">${dingSvg('glas')}</div><div class="ding deko">${dingSvg('pflanze')}</div>${spass.map(a=>dingHtml(a,'spass')).join('')}</div></div>`:''}
+    ${spass.length?`<div class="inner regal-wrap"><span class="zettel links"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color:#F2B705"><path d="${ICONS.star}"/></svg>Kostet einen Stern</span><div class="regal">${spass.map(a=>dingHtml(a,'spass')).join('')}</div></div>`:''}
     <div class="inner regal-wrap"><div class="regal">${lern.map(a=>dingHtml(a,'lern')).join('')||'<div class="empty">Noch kein Bereich</div>'}</div></div>
     ${bank()}
   </div>`;
