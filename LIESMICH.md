@@ -19,6 +19,14 @@ Kinder, Sterne, Fortschritt und Werke liegen im Browser des Geräts (localStorag
 2. Die Videos aus `inhalte.json` liegen schon in «Zeichnen» (Malen mit Evi, 10 Videos).
 3. Elternbereich (Schloss oben rechts), PIN **1234**: Sterne, Kinder, Rückmeldungen zu Werken. Videos kann man dort auch von Hand anlegen; Videos aus `inhalte.json` werden aber beim nächsten Laden wieder aus der Datei genommen.
 
+## Werkstatt-Look
+
+- Kinderseite als Werkstatt: Lochwand, Regale mit den Bereichen als Gegenstände, Werkbank unten. Alles in Grossbuchstaben.
+- Oberstes Regalbrett = Spass-Bereiche (kosten einen Stern), darunter die Lern-Bereiche.
+- Abendwerkstatt ab 18 Uhr (dunkle Wand, Lampe, Lichterkette); im Elternbereich umstellbar.
+- Player mit zwei Fenstern: «Schau zu» (Video) und «Du machst nach» (iPad-Kamera auf das Blatt, Knopf «Kamera an»; der Foto-Knopf nimmt dann direkt aus der Kamera). Schritte als Kärtchen auf der Schneidematte.
+- Elternbereich → Tab «Katalog»: Vorauswahl aus `katalog.json` (SRF Kids, Die Maus, Schwiizergoofe …), pro Video «Hinzufügen».
+
 ## Was die App macht
 
 - **Schritt-Modus:** Video stoppt automatisch am Ende jedes Schritts, Kind sieht «Jetzt du: …», tippt «Nochmal» oder «Weiter». Schritte werden vorgelesen.
