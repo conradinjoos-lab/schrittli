@@ -312,6 +312,17 @@ code{font-size:13px;word-break:break-all;background:var(--surface2);padding:2px 
 .tag{white-space:normal;height:auto;min-height:36px;text-align:center;line-height:1.1;padding:5px 10px;justify-content:center}
 @media (max-width:599px){.ding.deko{display:none}.kopf .schild h1{font-size:24px}}
 .kid input,.kid textarea{text-transform:none;letter-spacing:0}
+/* Schritte als Knöpfe neben dem Video */
+.schritte{display:flex;flex-direction:column;gap:8px;padding:10px;border-radius:14px;background:var(--paper);border:3px solid var(--kink);box-shadow:4px 6px 0 var(--sh);overflow-y:auto;max-height:360px}
+@media (min-width:900px){.schritte{aspect-ratio:16/9;max-height:none}}
+.sbtn{display:flex;align-items:center;gap:12px;padding:10px 12px;border:2px solid var(--kink);border-radius:10px;background:#fff;color:var(--kink);text-align:left;font:inherit;font-size:17px;line-height:1.15;text-transform:inherit;letter-spacing:inherit;flex:none;min-height:54px}
+.sbtn .num{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--kink);color:#fff;font-size:16px;flex:none}
+.sbtn .lbl{flex:1;min-width:0}
+.sbtn .say{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:#fff;border:2px solid var(--kink);flex:none}
+.sbtn.cur{background:var(--sign);border-width:3px;box-shadow:3px 4px 0 var(--kink);font-size:19px;min-height:64px}
+.sbtn.done{background:#BFE8C8;color:#4A4038}.sbtn.done .num{background:#1F7A4A}
+.schritte .frei{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;flex:1;min-height:120px;text-align:center}
+.schritte .zeit{font-size:34px;font-variant-numeric:tabular-nums}.schritte .hint{font-size:15px;color:var(--wmuted)}
 </style>
 </head>
 <body>
@@ -572,12 +583,12 @@ SCREENS.player=(app,{videoId,school})=>{
     <div class="inner kopf pl-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))">${school?'':`<a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a>`}<div class="schild"><h1>${esc(v.title)}</h1></div><div class="kopf-rechts"><span class="zettel" id="zettel"></span>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}</div></div>
     <div class="inner panes">
       <div class="pane"><div class="plabel"><i class="punkt" style="background:#4C6EF5"></i>Schau zu</div><div class="video-box"><div class="host" id="host"></div><div class="shield" id="shield" data-act="shield"></div><div class="overlay" id="overlay"></div></div><div class="fuss"></div></div>
-      <div class="pane"><div class="plabel"><i class="punkt" style="background:#E8554E"></i>Du machst nach<span class="grow"></span><button class="btn sm" id="cambtn" data-act="cam">${ico('camera')} Kamera an</button></div><div class="cam-box off" id="cambox"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width:40px;height:40px"><path d="${ICONS.camera}"/></svg><div style="font-size:15px">Richte die Kamera auf dein Blatt – dann siehst du dich neben dem Video</div></div><div class="fuss hell"></div></div>
+      <div class="pane"><div class="plabel"><i class="punkt" style="background:#E8554E"></i><span id="zettel2">Die Schritte</span></div><div class="schritte" id="schritte"></div></div>
     </div>
-    <div class="pl-bank"><div class="inner"><div class="matte" id="matte"></div><div class="steuer"><div class="controls" id="controls"></div><div class="auftrag" id="task"></div></div></div></div>
+    <div class="pl-bank"><div class="inner"><div class="steuer"><div class="controls" id="controls"></div><div class="auftrag" id="task"></div></div></div></div>
   </div>`;
-  P={v,steps,pr,school,idx:Math.min(pr.step||0,Math.max(0,steps.length-1)),mode:'start',needsTap:false,err:null,playAt:0,api:null,tick:null,lastSave:0,cam:null,
-    destroy(){ clearInterval(this.tick); if(this.api) this.api.destroy(); camOff(); if(!school) save(); }};
+  P={v,steps,pr,school,idx:Math.min(pr.step||0,Math.max(0,steps.length-1)),mode:'start',needsTap:false,err:null,playAt:0,api:null,tick:null,lastSave:0,
+    destroy(){ clearInterval(this.tick); if(this.api) this.api.destroy(); if(!school) save(); }};
   P.api=makePlayer($('#host'),v.source,{
     onReady:()=>{ P.api.rate(pr.slow?S.settings.slowRate:1); },
     onState:s=>{ if(!P) return;
@@ -599,15 +610,12 @@ SCREENS.player=(app,{videoId,school})=>{
     back10:()=>{ P.api.seek(Math.max(0,P.api.time()-10)); }, fwd10:()=>{ P.api.seek(P.api.time()+10); },
     speed:()=>{ pr.slow=!pr.slow; P.api.rate(pr.slow?S.settings.slowRate:1); updatePlayerUI(); },
     say:b=>speak(b.dataset.text), restart:()=>{ P.idx=0; startPlaying(false); },
-    cam:()=>{ if(P.cam) camOff(); else camOn(); },
     foto:()=>takePhoto(v.id), malen:()=>go('paint',{videoId:v.id,back:'player'}), ton:()=>go('record',{videoId:v.id,back:'player'}),
     fertig:()=>{ if(school){ confetti(); toast('Super gemacht!'); return; } const first=!pr.done; pr.done=true; let star=false; if(first&&S.settings.earnStar) star=earnStar(); save(); confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Super gemacht!'); updatePlayerUI(); },
     gallery:()=>go('gallery')
   });
   if(S.settings.voiceControl) startListening();
 };
-async function camOn(){ if(!P) return; try{ const s=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false}); if(!P){ s.getTracks().forEach(t=>t.stop()); return; } P.cam=s; const box=$('#cambox'); const vid=document.createElement('video'); vid.autoplay=true; vid.muted=true; vid.playsInline=true; vid.setAttribute('playsinline',''); vid.srcObject=s; box.innerHTML=''; box.appendChild(vid); box.insertAdjacentHTML('beforeend','<span class="live"><i></i>Live</span><span class="hinweis">Dein Blatt</span>'); box.classList.remove('off'); const b=$('#cambtn'); if(b) b.innerHTML=ico('camera')+' Kamera aus'; }catch(e){ toast('Kamera nicht erlaubt oder nicht da'); } }
-function camOff(){ if(P&&P.cam){ P.cam.getTracks().forEach(t=>t.stop()); P.cam=null; } const box=$('#cambox'); if(box){ box.classList.add('off'); box.innerHTML=`<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width:40px;height:40px"><path d="${ICONS.camera}"/></svg><div style="font-size:15px">Richte die Kamera auf dein Blatt – dann siehst du dich neben dem Video</div>`; } const b=$('#cambtn'); if(b) b.innerHTML=ico('camera')+' Kamera an'; }
 function curStep(){ return P.steps[P.idx]; }
 function stepEnd(){ return P.idx<P.steps.length-1?P.steps[P.idx+1].t:Infinity; }
 function startPlaying(resume){ unlockTTS(); if(!P.api.ready){ toast('Video lädt noch…',1200); return; }
@@ -641,11 +649,11 @@ function updatePlayerUI(){ if(!P) return;
   ov.hidden=!show; ov.classList.toggle('transparent',transparent); ov.innerHTML=html;
   sh.hidden=P.needsTap||S.settings.passTouches||m!=='playing';
   const z=$('#zettel'); if(z) z.textContent=n?`Schritt ${P.idx+1} von ${n}`:'Frei schauen';
-  // Kärtchen auf der Matte
-  const mat=$('#matte');
-  if(n){ mat.innerHTML=steps.map((s,i)=>{ if(i===P.idx) return `<button class="karte cur" data-act="dot" data-i="${i}"><span class="k">Karte ${i+1}</span><span class="t">${esc(s.label)}</span></button>`; if(i<P.idx) return `<button class="karte done" data-act="dot" data-i="${i}" aria-label="Schritt ${i+1}">${ico('check')}</button>`; return `<button class="karte" data-act="dot" data-i="${i}">${i+1}</button>`; }).join('')+`<button class="btn icon" data-act="say" data-text="${esc('Schritt '+(P.idx+1)+': '+steps[P.idx].label)}" aria-label="Vorlesen" style="flex:none;margin-left:6px;align-self:center">${ico('speaker')}</button>`;
-    const cur=$('.karte.cur',mat); if(cur) cur.scrollIntoView({block:'nearest',inline:'center'}); }
-  else mat.innerHTML=`<div class="zeit" id="captime">${fmt(P.api.time())} / ${fmt(P.api.duration())}</div>`;
+  // Schritte als Knöpfe rechts neben dem Video
+  const sl=$('#schritte');
+  if(n){ sl.innerHTML=steps.map((s,i)=>`<button class="sbtn${i===P.idx?' cur':i<P.idx?' done':''}" data-act="dot" data-i="${i}"><span class="num">${i<P.idx?ico('check'):i+1}</span><span class="lbl">${esc(s.label)}</span>${i===P.idx?`<span class="say" data-act="say" data-text="${esc('Schritt '+(i+1)+': '+s.label)}" aria-label="Vorlesen">${ico('speaker')}</span>`:''}</button>`).join('');
+    const cur=$('.sbtn.cur',sl); if(cur) cur.scrollIntoView({block:'nearest'}); }
+  else sl.innerHTML=`<div class="frei"><div class="zeit" id="captime">${fmt(P.api.time())} / ${fmt(P.api.duration())}</div><div class="hint">Dieses Video läuft frei – mit Pause-Knopf</div></div>`;
   // Steuerung
   const playing=m==='playing'; const mid=`<button class="kbtn round big primary" data-act="toggle" aria-label="${playing?'Pause':'Abspielen'}">${ico(playing?'pause':'play')}</button>`;
   const spd=`<button class="speed${pr.slow?' slow':''}" data-act="speed" aria-label="Langsam oder normal">${pr.slow?'🐢':'🐇'}<span class="lab">${pr.slow?'langsam':'normal'}</span></button>`;
@@ -664,8 +672,6 @@ document.addEventListener('visibilitychange',()=>{ if(document.hidden&&P&&P.mode
 
 function takePhoto(videoId){
   const done=async b=>{ const star=await saveWork({type:'foto',blob:b,videoId}); confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Foto gespeichert!'); if(P) updatePlayerUI(); };
-  const camVid=P&&P.cam?$('#cambox video'):null;
-  if(camVid&&camVid.videoWidth){ const c=document.createElement('canvas'); const sc=Math.min(1,1400/Math.max(camVid.videoWidth,camVid.videoHeight)); c.width=Math.round(camVid.videoWidth*sc); c.height=Math.round(camVid.videoHeight*sc); c.getContext('2d').drawImage(camVid,0,0,c.width,c.height); c.toBlob(b=>{ if(b) done(b); else toast('Foto ging nicht'); },'image/jpeg',.85); return; }
   const inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.setAttribute('capture','environment');
   inp.onchange=()=>{ const f=inp.files[0]; if(!f) return; const img=new Image(); const u=URL.createObjectURL(f);
     img.onload=()=>{ const max=1400, sc=Math.min(1,max/Math.max(img.width,img.height)); const c=document.createElement('canvas'); c.width=Math.round(img.width*sc); c.height=Math.round(img.height*sc); c.getContext('2d').drawImage(img,0,0,c.width,c.height); URL.revokeObjectURL(u); c.toBlob(b=>done(b),'image/jpeg',.85); };
@@ -912,7 +918,7 @@ function tabSettings(root,acts){
     ${tog('passTouches','Tippen ans Video durchlassen','Normalerweise blockiert die App Tipps aufs YouTube-Bild (Titel, Vorschläge). Ohne YouTube Premium erscheint Werbung, die man nur direkt im Video überspringen kann – dann hier einschalten.')}
     ${SR?tog('voiceControl','Sprachsteuerung (experimentell)','«Stopp», «Weiter», «Nochmal» rufen. Braucht Mikrofon-Erlaubnis und Internet; auf dem iPad nicht immer zuverlässig.'):''}</div>
   <div class="panel"><h3>PIN</h3><div class="row" style="flex-wrap:nowrap"><input class="inp" id="st-pin" inputmode="numeric" maxlength="4" placeholder="Neue 4-stellige PIN"><button class="btn" data-act="pin">Ändern</button></div></div>
-  <div class="panel"><h3>iPad-Tipps</h3><ul class="small muted" style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px"><li>Seite in Safari öffnen → Teilen → «Zum Home-Bildschirm» → läuft dann als Vollbild-App.</li><li>«Geführter Zugriff» (Einstellungen → Bedienungshilfen) sperrt das Kind in der App ein; Dreifachklick auf die Seitentaste beendet ihn.</li><li>Die Spiegel-Kamera im Player braucht einen Ständer, damit das iPad aufs Blatt schaut.</li><li>YouTube ohne Werbung nur, wenn in diesem Browser ein Premium-Konto angemeldet ist.</li></ul></div>`;
+  <div class="panel"><h3>iPad-Tipps</h3><ul class="small muted" style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px"><li>Seite in Safari öffnen → Teilen → «Zum Home-Bildschirm» → läuft dann als Vollbild-App.</li><li>«Geführter Zugriff» (Einstellungen → Bedienungshilfen) sperrt das Kind in der App ein; Dreifachklick auf die Seitentaste beendet ihn.</li><li>YouTube ohne Werbung nur, wenn in diesem Browser ein Premium-Konto angemeldet ist.</li></ul></div>`;
   root.onchange=e=>{ const el=e.target.closest('[data-set]'); if(!el) return; const k=el.dataset.set; s[k]=(k==='voice'||k==='abend')?el.value:+el.value; save(); };
   Object.assign(acts,{ tog:b=>{ s[b.dataset.k]=!s[b.dataset.k]; save(); b.classList.toggle('on',s[b.dataset.k]); b.setAttribute('aria-checked',String(!!s[b.dataset.k])); },
     testvoice:()=>{ unlockTTS(); speak('Hallo! Jetzt du: Papier falten.'); },
