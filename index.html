@@ -325,6 +325,14 @@ code{font-size:13px;word-break:break-all;background:var(--surface2);padding:2px 
 .sbtn.done{background:#BFE8C8;color:#4A4038}.sbtn.done .num{background:#1F7A4A}
 .schritte .frei{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;flex:1;min-height:120px;text-align:center}
 .schritte .zeit{font-size:34px;font-variant-numeric:tabular-nums}.schritte .hint{font-size:15px;color:var(--wmuted)}
+/* Gutachten-Fixes */
+.kid button,.kid a,.kid .btn,.kid .kbtn,.kid .tag,.kid .zettel{text-transform:inherit;letter-spacing:inherit}
+.kid{--paper-muted:#7A4E2D}
+.auftrag .k,.schritte .hint,.speed .lab,.kid .btn.ghost,.kid .kbtn.ghost,.cam-box,.karte.cur .k{color:var(--paper-muted)}
+.schritte .zeit{color:var(--kink)}
+.overlay{overflow:auto}
+@media (max-width:520px){.overlay{gap:8px;padding:10px}.overlay h2{font-size:20px}.overlay .lbl{font-size:16px}.overlay .kbtn.round.big{width:72px;min-height:72px}.overlay .kbtn{min-height:46px;font-size:16px;padding:0 12px}.overlay .hint{display:none}}
+.modal.kid .bubble{background:#fff;border:2px solid #2B2320;font-size:22px;text-align:left}
 </style>
 </head>
 <body>
@@ -401,7 +409,7 @@ function defaultState(){
     settings:{starsPerDay:3,earnStar:true,tts:true,autoRead:true,voice:'',slowRate:0.75,voiceControl:false,passTouches:false,pin:'1234',abend:'auto'}};
 }
 let S=load();
-function load(){ try{ const raw=localStorage.getItem(KEY); if(raw){ const s=JSON.parse(raw); const d=defaultState(); const st=Object.assign(d,s,{settings:Object.assign(d.settings,s.settings||{})}); (st.areas||[]).forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; }); return st; } }catch(e){} return defaultState(); }
+function load(){ try{ const raw=localStorage.getItem(KEY); if(raw){ const s=JSON.parse(raw); const d=defaultState(); const st=Object.assign(d,s,{settings:Object.assign(d.settings,s.settings||{})}); (st.areas||[]).forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; }); st.videos=(st.videos||[]).filter(validVideo); return st; } }catch(e){} return defaultState(); }
 let saveT=null;
 function save(){ clearTimeout(saveT); saveT=setTimeout(()=>{ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ toast('Speichern nicht möglich (Speicher voll?)'); } },120); }
 
@@ -427,7 +435,7 @@ const blobs={db:null,mem:new Map(),urls:new Map(),
   async url(k){ if(this.urls.has(k)) return this.urls.get(k); const b=await this.get(k); if(!b) return null; const u=URL.createObjectURL(b); this.urls.set(k,u); return u; }
 };
 async function saveWork({type,blob,videoId}){
-  const id=uid(); await blobs.put(id,blob);
+  const id=uid(); try{ await blobs.put(id,blob); }catch(e){ toast('Konnte nicht speichern – sag es deinen Eltern',4000); throw e; }
   S.works.unshift({id,profileId:S.activeProfile,videoId:videoId||null,type,createdAt:Date.now(),feedback:null,fbSeen:true});
   let star=false;
   if(videoId&&S.activeProfile){ const p=prog(videoId); if(!p.done){ p.done=true; if(S.settings.earnStar) star=earnStar(); } }
@@ -465,10 +473,12 @@ function bank(opts={}){ const n=abend(); const p=profile(); return `<div class="
 
 /* ============================== Inhaltsdatei & Start ============================== */
 let contentInfo=null;
+function validVideo(v){ return v&&typeof v.id==='string'&&typeof v.title==='string'&&v.source&&(v.source.type==='youtube'&&/^[A-Za-z0-9_-]{11}$/.test(v.source.id)||v.source.type==='file'&&typeof v.source.url==='string')&&Array.isArray(v.steps||[]); }
 async function loadContentFile(){
   if(!/^https?:/.test(location.protocol)) return;
   try{ const r=await fetch('inhalte.json',{cache:'no-store'}); if(!r.ok) return; const j=await r.json(); if(!j||!Array.isArray(j.videos)) return;
     (j.bereiche||[]).forEach(a=>{ const ex=areaOf(a.id); if(ex) Object.assign(ex,a); else S.areas.push(a); });
+    j.videos=j.videos.filter(validVideo);
     j.videos.forEach(v=>{ v.quelle='datei'; const ex=videoOf(v.id); if(ex) Object.assign(ex,v); else S.videos.push(v); });
     (j.geloescht||[]).forEach(id=>{ S.videos=S.videos.filter(v=>v.id!==id); });
     S.videos.sort((a,b)=>{ const ia=j.videos.findIndex(v=>v.id===a.id), ib=j.videos.findIndex(v=>v.id===b.id); return (ia<0?1e9:ia)-(ib<0?1e9:ib); });
@@ -494,7 +504,7 @@ SCREENS.firstrun=app=>{
     <div class="field"><label for="fr-name" style="color:var(--wmuted)">Name des Kindes</label><input class="inp" id="fr-name" placeholder="z. B. Lina" autocomplete="off"></div>
     <div class="field"><label style="color:var(--wmuted)">Tier</label><div class="emoji-pick" id="fr-em">${AVATARS.map(e=>`<button type="button" data-act="em" data-v="${e}" class="${e===emoji?'on':''}">${e}</button>`).join('')}</div></div>
     <div class="field"><label style="color:var(--wmuted)">Farbe</label><div class="color-pick" id="fr-col">${COLORS.map(c=>`<button type="button" data-act="col" data-v="${c}" style="background:${c}" class="${c===color?'on':''}" aria-label="Farbe"></button>`).join('')}</div></div>
-    <div class="zettel links" style="align-self:flex-start;text-transform:none;letter-spacing:0;white-space:normal">Elternbereich: PIN 1234 (dort änderbar)</div>
+    ${/iPad|iPhone/.test(navigator.userAgent)&&!navigator.standalone?`<div class="zettel links" style="align-self:flex-start;text-transform:none;letter-spacing:0;white-space:normal">Tipp fürs iPad: zuerst in Safari «Teilen → Zum Home-Bildschirm», dann dort einrichten – sonst landen die Daten im falschen Speicher.</div>`:''}
     <button class="kbtn primary" data-act="ok">Los geht's</button>
   </div></div>${bank()}</div>`;
   wire(app,{
@@ -595,13 +605,14 @@ SCREENS.player=(app,{videoId,school})=>{
   P.api=makePlayer($('#host'),v.source,{
     onReady:()=>{ P.api.rate(pr.slow?S.settings.slowRate:1); },
     onState:s=>{ if(!P) return;
-      if(s==='playing'){ P.needsTap=false; if(P.mode==='paused'||P.mode==='start'||P.mode==='buffering') P.mode='playing'; }
+      if(s==='playing'){ P.needsTap=false; if(P.mode==='paused'||P.mode==='start'||P.mode==='buffering') P.mode='playing'; if(P.steps.length&&P.seekTarget!=null&&Date.now()-P.seekAt<6000&&Math.abs(P.api.time()-P.seekTarget)>3) seekTo(P.seekTarget); }
       else if(s==='paused'){ if(P.mode==='playing') P.mode='paused'; }
-      else if(s==='ended'){ P.mode='ended'; if(!school){ pr.pos=0; pr.step=0; } if(steps.length===0&&!(v.task&&v.task.text)&&!school){ pr.done=true; } }
+      else if(s==='ended'){ P.mode='ended'; if(!school){ pr.pos=0; pr.step=0; } if(!(v.task&&v.task.text&&v.task.deliverable!=='keine')&&!school){ pr.done=true; } if(!school){ setTimeout(()=>{ const t=$('#task'); if(t&&!t.hidden) t.scrollIntoView({behavior:'smooth',block:'center'}); },300); } }
       updatePlayerUI(); },
     onError:()=>{ if(!P) return; P.err=true; P.mode='error'; updatePlayerUI(); }
   });
   P.tick=setInterval(tickPlayer,100);
+  setTimeout(()=>{ if(P&&P.v===v&&!P.api.ready&&P.mode==='start'){ P.mode='error'; updatePlayerUI(); } },12000);
   updatePlayerUI();
   wire(app,{
     back:()=>go(a?'area':'home',a?{id:a.id}:{}),
@@ -614,7 +625,7 @@ SCREENS.player=(app,{videoId,school})=>{
     speed:()=>{ pr.slow=!pr.slow; P.api.rate(pr.slow?S.settings.slowRate:1); updatePlayerUI(); },
     say:b=>speak(b.dataset.text), restart:()=>{ P.idx=0; startPlaying(false); },
     foto:()=>takePhoto(v.id), malen:()=>go('paint',{videoId:v.id,back:'player'}), ton:()=>go('record',{videoId:v.id,back:'player'}),
-    fertig:()=>{ if(school){ confetti(); toast('Super gemacht!'); return; } const first=!pr.done; pr.done=true; let star=false; if(first&&S.settings.earnStar) star=earnStar(); save(); confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Super gemacht!'); updatePlayerUI(); },
+    fertig:()=>{ if(school){ confetti(); toast('Super gemacht!'); return; } const first=!pr.done; const ohne=(v.task&&v.task.deliverable)!=='fertig'; pr.done=true; let star=false; if(first&&!ohne&&S.settings.earnStar) star=earnStar(); save(); confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Super gemacht!'); updatePlayerUI(); },
     gallery:()=>go('gallery')
   });
   if(S.settings.voiceControl) startListening();
@@ -622,18 +633,20 @@ SCREENS.player=(app,{videoId,school})=>{
 function curStep(){ return P.steps[P.idx]; }
 function stepEnd(){ return P.idx<P.steps.length-1?P.steps[P.idx+1].t:Infinity; }
 function startPlaying(resume){ unlockTTS(); if(!P.api.ready){ toast('Video lädt noch…',1200); return; }
-  if(P.steps.length){ if(!resume) P.idx=0; P.api.seek(curStep().t); } else { P.api.seek(resume?P.pr.pos:0); }
+  if(P.steps.length){ if(!resume) P.idx=0; seekTo(curStep().t); } else { seekTo(resume?P.pr.pos:0); }
   P.mode='playing'; P.playAt=Date.now(); P.needsTap=false; P.api.play(); updatePlayerUI(); }
 function userPause(){ P.mode='paused'; P.api.pause(); updatePlayerUI(); }
 function userPlay(){ P.mode='playing'; P.playAt=Date.now(); P.api.play(); updatePlayerUI(); }
-function jumpStep(){ P.mode='playing'; P.playAt=Date.now(); P.api.seek(curStep().t); P.api.play(); updatePlayerUI(); }
+function jumpStep(){ P.mode='playing'; P.playAt=Date.now(); seekTo(curStep().t); P.api.play(); updatePlayerUI(); }
+function seekTo(t){ P.seekAt=Date.now(); P.seekTarget=t; P.api.seek(t); }
+function seekSettled(){ if(!P.seekAt) return true; if(Date.now()-P.seekAt>900) return true; return Math.abs(P.api.time()-P.seekTarget)<1.5; }
 function replayStep(){ jumpStep(); }
 function nextStep(){ if(P.idx<P.steps.length-1){ P.idx++; jumpStep(); } else { P.mode='ended'; updatePlayerUI(); } }
 function tickPlayer(){ if(!P||!P.api.ready) return;
   const t=P.api.time();
   if(P.mode==='playing'){
-    if(P.steps.length&&t>=stepEnd()-0.08){ P.mode='stepdone'; P.api.pause(); updatePlayerUI(); if(S.settings.autoRead) speak('Jetzt du: '+curStep().label); return; }
-    if(!P.needsTap&&P.api.state()!=='playing'&&Date.now()-P.playAt>1800&&P.api.state()!=='buffering'){ P.needsTap=true; updatePlayerUI(); }
+    if(P.steps.length&&seekSettled()&&t>=stepEnd()-0.08){ P.mode='stepdone'; P.api.pause(); updatePlayerUI(); if(S.settings.autoRead) speak(/^(zuschauen|schau )/i.test(curStep().label)?'Weiter?':'Jetzt du: '+curStep().label); return; }
+    if(!P.needsTap&&P.api.state()!=='playing'&&Date.now()-P.playAt>3500&&P.api.state()!=='buffering'){ P.needsTap=true; updatePlayerUI(); }
     if(Date.now()-P.lastSave>2000){ P.lastSave=Date.now(); if(!P.school){ P.pr.pos=t; P.pr.step=P.idx; save(); } }
     const cap=$('#captime'); if(cap) cap.textContent=fmt(t)+' / '+fmt(P.api.duration());
   }
@@ -647,7 +660,7 @@ function updatePlayerUI(){ if(!P) return;
     html=`${bigPlay(canResume?'resume':'start',canResume?(n?`Weiter bei Schritt ${pr.step+1}`:'Weiter schauen'):'Los geht\'s')}${canResume?`<button class="kbtn ghost" data-act="start">Von vorne</button>`:''}${n?`<div class="hint">${n} Schritte – das Video hält nach jedem Schritt an.</div>`:''}`; }
   else if(m==='playing'){ if(P.needsTap){ transparent=true; html=`<div class="lbl" style="background:rgba(0,0,0,.5);padding:10px 18px;border-radius:14px">Tippe auf das Video ▶</div>`; } else show=false; }
   else if(m==='paused'){ html=bigPlay('play','Weiter schauen'); }
-  else if(m==='stepdone'){ const s=curStep(); html=`<h2>Jetzt du!</h2><div class="lbl">${esc(s.label)}</div><div class="row center"><button class="kbtn" data-act="replay">${ico('replay')} Nochmal</button><button class="kbtn primary" data-act="next">Weiter ${ico('next')}</button></div><button class="kbtn ghost" data-act="say" data-text="${esc(s.label)}">${ico('speaker')} Vorlesen</button>`; }
+  else if(m==='stepdone'){ const s=curStep(); html=`<h2>${/^(zuschauen|schau )/i.test(s.label)?'Weiter?':'Jetzt du!'}</h2><div class="lbl">${esc(s.label)}</div><div class="row center"><button class="kbtn" data-act="replay">${ico('replay')} Nochmal</button><button class="kbtn primary" data-act="next">Weiter ${ico('next')}</button></div><button class="kbtn ghost" data-act="say" data-text="${esc(s.label)}">${ico('speaker')} Vorlesen</button>`; }
   else if(m==='ended'){ html=`<div class="em">🎉</div><h2>Fertig geschaut!</h2>${v.task&&v.task.text&&v.task.deliverable!=='keine'?`<div class="hint">Jetzt kommt deine Aufgabe ↓</div>`:''}<button class="kbtn ghost" data-act="restart">${ico('replay')} Nochmal von vorne</button>`; }
   ov.hidden=!show; ov.classList.toggle('transparent',transparent); ov.innerHTML=html;
   sh.hidden=P.needsTap||S.settings.passTouches||m!=='playing';
@@ -669,17 +682,17 @@ function updatePlayerUI(){ if(!P) return;
     const btns={foto:`<button class="kbtn primary" data-act="foto">${ico('camera')} Foto</button>`,bild:`<button class="kbtn primary" data-act="malen">${ico('brush')} Malen</button>`,ton:`<button class="kbtn primary" data-act="ton">${ico('mic')} Aufnehmen</button>`,fertig:`<button class="kbtn primary" data-act="fertig">${ico('check')} Fertig</button>`};
     tk.innerHTML=`<div class="row between"><span class="k">Am Schluss</span><button class="btn icon" data-act="say" data-text="${esc(task.text)}" aria-label="Aufgabe vorlesen" style="width:40px;min-height:40px">${ico('speaker')}</button></div><div class="txt">${esc(task.text)}</div>
       ${pr.done?`<div class="done">${ico('check')} Abgegeben – super!</div>${P.school?'':`<button class="btn" data-act="gallery">${ico('gallery')} Meine Werke</button>`}<div class="btn-grid">${btns[d]||''}</div>`
-      :`<div class="btn-grid">${btns[d]||''}</div>${d!=='fertig'?`<button class="btn ghost sm" data-act="fertig">Ohne Abgabe fertig</button>`:''}`}`; }
+      :`<div class="btn-grid">${btns[d]||''}</div>${d!=='fertig'&&m==='ended'?`<button class="btn ghost sm" data-act="fertig">Ohne Abgabe fertig</button>`:''}`}`; }
 }
 document.addEventListener('visibilitychange',()=>{ if(document.hidden&&P&&P.mode==='playing'&&P.api.ready) userPause(); });
 
 function takePhoto(videoId){
-  const done=async b=>{ const star=await saveWork({type:'foto',blob:b,videoId}); confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Foto gespeichert!'); if(P) updatePlayerUI(); };
+  const done=async b=>{ let star=false; try{ star=await saveWork({type:'foto',blob:b,videoId}); }catch(e){ return; } confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Foto gespeichert!'); if(P) updatePlayerUI(); };
   const inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.setAttribute('capture','environment');
   inp.onchange=()=>{ const f=inp.files[0]; if(!f) return; const img=new Image(); const u=URL.createObjectURL(f);
     img.onload=()=>{ const max=1400, sc=Math.min(1,max/Math.max(img.width,img.height)); const c=document.createElement('canvas'); c.width=Math.round(img.width*sc); c.height=Math.round(img.height*sc); c.getContext('2d').drawImage(img,0,0,c.width,c.height); URL.revokeObjectURL(u); c.toBlob(b=>done(b),'image/jpeg',.85); };
     img.onerror=()=>toast('Das Bild konnte nicht gelesen werden'); img.src=u; };
-  inp.click();
+  inp.hidden=true; document.body.appendChild(inp); inp.addEventListener('change',()=>setTimeout(()=>inp.remove(),2000)); inp.click();
 }
 function afterWork(pr,star){ confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Gespeichert!'); if(pr.back==='player'&&pr.videoId) go('player',{videoId:pr.videoId}); else go('gallery'); }
 
@@ -703,7 +716,7 @@ SCREENS.paint=(app,pr)=>{
     color:b=>{ color=b.dataset.v; eraser=false; $$('.sw').forEach(x=>x.classList.toggle('on',x===b)); $('#eraser').classList.remove('on'); },
     size:b=>{ size=+b.dataset.v; $$('.sz').forEach(x=>x.classList.toggle('on',x===b)); },
     eraser:b=>{ eraser=!eraser; b.classList.toggle('on',eraser); if(eraser) $$('.sw').forEach(x=>x.classList.remove('on')); },
-    keep:()=>{ ro.disconnect(); cv.toBlob(async b=>{ const star=await saveWork({type:'bild',blob:b,videoId:pr.videoId}); afterWork(pr,star); },'image/png'); }
+    keep:()=>{ ro.disconnect(); cv.toBlob(async b=>{ try{ const star=await saveWork({type:'bild',blob:b,videoId:pr.videoId}); afterWork(pr,star); }catch(e){} },'image/png'); }
   });
 };
 
@@ -722,7 +735,7 @@ SCREENS.record=(app,pr)=>{
     start:async()=>{ try{ stream=await navigator.mediaDevices.getUserMedia({audio:true}); const mime=['audio/webm;codecs=opus','audio/mp4','audio/webm','audio/ogg'].find(m=>window.MediaRecorder&&MediaRecorder.isTypeSupported(m))||''; mr=new MediaRecorder(stream,mime?{mimeType:mime}:undefined); chunks=[]; mr.ondataavailable=e=>{ if(e.data.size) chunks.push(e.data); }; mr.onstop=()=>{ blob=new Blob(chunks,{type:mr.mimeType||'audio/webm'}); url=URL.createObjectURL(blob); stream.getTracks().forEach(t=>t.stop()); state='done'; ui(); }; mr.start(); t0=Date.now(); state='rec'; ui(); timer=setInterval(()=>{ const el=$('#tm'); if(el) el.textContent=fmt((Date.now()-t0)/1000); if(Date.now()-t0>180000) mr.stop(); },250); }catch(e){ state='err'; ui(); } },
     stop:()=>{ clearInterval(timer); if(mr&&mr.state!=='inactive') mr.stop(); },
     again:()=>{ if(url) URL.revokeObjectURL(url); url=null; blob=null; state='idle'; ui(); },
-    keep:async()=>{ if(!blob) return; const star=await saveWork({type:'ton',blob,videoId:pr.videoId}); cleanup(); afterWork(pr,star); }
+    keep:async()=>{ if(!blob) return; try{ const star=await saveWork({type:'ton',blob,videoId:pr.videoId}); cleanup(); afterWork(pr,star); }catch(e){} }
   });
   ui();
 };
@@ -738,11 +751,11 @@ SCREENS.gallery=app=>{
 async function openWork(id,parentMode){
   const w=S.works.find(x=>x.id===id); if(!w) return; const u=await blobs.url(id); const v=w.videoId?videoOf(w.videoId):null; const kid=S.profiles.find(p=>p.id===w.profileId);
   if(w.feedback&&!w.fbSeen&&!parentMode){ w.fbSeen=true; save(); }
-  modal(`<div class="viewer">${w.type==='ton'?`<div style="text-align:center;font-size:64px">🎧</div><audio controls src="${u||''}" style="width:100%"></audio>`:`<img src="${u||''}" alt="">`}</div>
+  (parentMode?modal:kidModal)(`<div class="viewer">${w.type==='ton'?`<div style="text-align:center;font-size:64px">🎧</div><audio controls src="${u||''}" style="width:100%"></audio>`:`<img src="${u||''}" alt="">`}</div>
     <p class="muted small">${esc(kid?kid.name+' · ':'')}${dateDE(w.createdAt)}${v?' · '+esc(v.title):''}</p>
-    ${w.feedback?`<div class="bubble"><span class="em">${w.feedback.emoji}</span><span>${esc(w.feedback.text||'')}</span></div>`:''}
+    ${w.feedback?`<div class="bubble"><span class="em">${w.feedback.emoji}</span><span>${esc(w.feedback.text||'')}</span>${!parentMode&&w.feedback.text?`<button class="btn icon" data-act="say" aria-label="Vorlesen" style="margin-left:auto">${ico('speaker')}</button>`:''}</div>`:''}
     <div class="row" style="justify-content:flex-end">${parentMode?`<button class="btn danger sm" data-act="del">${ico('trash')} Löschen</button>`:''}<button class="btn" data-close>Schliessen</button></div>`,
-    {del:(b,close)=>{ close(); confirmBox('Werk löschen?','Das kann nicht rückgängig gemacht werden.','Löschen',async()=>{ await blobs.del(id); S.works=S.works.filter(x=>x.id!==id); save(); render(); },true); }});
+    {say:()=>{ unlockTTS(); speak(w.feedback&&w.feedback.text||''); }, del:(b,close)=>{ close(); confirmBox('Werk löschen?','Das kann nicht rückgängig gemacht werden.','Löschen',async()=>{ await blobs.del(id); S.works=S.works.filter(x=>x.id!==id); save(); render(); },true); }});
 }
 
 /* ============================== Elternbereich ============================== */
@@ -920,8 +933,8 @@ function tabSettings(root,acts){
     <div class="field"><label for="st-voice">Stimme</label><select class="inp" id="st-voice" data-set="voice"><option value="">Automatisch (Deutsch)</option>${deVoices.map(v=>`<option value="${esc(v.name)}" ${v.name===s.voice?'selected':''}>${esc(v.name)} (${v.lang})</option>`).join('')}</select><button class="btn sm" data-act="testvoice" style="align-self:flex-start">Stimme testen</button></div>
     ${tog('passTouches','Tippen ans Video durchlassen','Normalerweise blockiert die App Tipps aufs YouTube-Bild (Titel, Vorschläge). Ohne YouTube Premium erscheint Werbung, die man nur direkt im Video überspringen kann – dann hier einschalten.')}
     ${SR?tog('voiceControl','Sprachsteuerung (experimentell)','«Stopp», «Weiter», «Nochmal» rufen. Braucht Mikrofon-Erlaubnis und Internet; auf dem iPad nicht immer zuverlässig.'):''}</div>
-  <div class="panel"><h3>PIN</h3><div class="row" style="flex-wrap:nowrap"><input class="inp" id="st-pin" inputmode="numeric" maxlength="4" placeholder="Neue 4-stellige PIN"><button class="btn" data-act="pin">Ändern</button></div></div>
-  <div class="panel"><h3>iPad-Tipps</h3><ul class="small muted" style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px"><li>Seite in Safari öffnen → Teilen → «Zum Home-Bildschirm» → läuft dann als Vollbild-App.</li><li>«Geführter Zugriff» (Einstellungen → Bedienungshilfen) sperrt das Kind in der App ein; Dreifachklick auf die Seitentaste beendet ihn.</li><li>YouTube ohne Werbung nur, wenn in diesem Browser ein Premium-Konto angemeldet ist.</li></ul></div>`;
+  <div class="panel"><h3>PIN</h3><p class="small muted">${s.pin==='1234'?'Noch die Standard-PIN 1234 – bitte ändern.':'Eigene PIN gesetzt.'}</p><div class="row" style="flex-wrap:nowrap"><input class="inp" id="st-pin" inputmode="numeric" maxlength="4" placeholder="Neue 4-stellige PIN"><button class="btn" data-act="pin">Ändern</button></div></div>
+  <div class="panel"><h3>iPad-Tipps</h3><ul class="small muted" style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px"><li>Seite in Safari öffnen → Teilen → «Zum Home-Bildschirm» → läuft dann als Vollbild-App. Wichtig: Safari-Tab und Home-App haben getrennte Speicher – erst hinzufügen, dann dort einrichten.</li><li>«Geführter Zugriff» (Einstellungen → Bedienungshilfen) sperrt das Kind in der App ein; Dreifachklick auf die Seitentaste beendet ihn.</li><li>YouTube ohne Werbung nur, wenn in diesem Browser ein Premium-Konto angemeldet ist.</li></ul></div>`;
   root.onchange=e=>{ const el=e.target.closest('[data-set]'); if(!el) return; const k=el.dataset.set; s[k]=(k==='voice'||k==='abend')?el.value:+el.value; save(); };
   Object.assign(acts,{ tog:b=>{ s[b.dataset.k]=!s[b.dataset.k]; save(); b.classList.toggle('on',s[b.dataset.k]); b.setAttribute('aria-checked',String(!!s[b.dataset.k])); },
     testvoice:()=>{ unlockTTS(); speak('Hallo! Jetzt du: Papier falten.'); },
@@ -936,9 +949,9 @@ function tabData(root,acts){
     <div class="row"><button class="btn" data-act="export">Videos & Einstellungen exportieren</button><label class="btn" for="imp">Importieren</label><input type="file" id="imp" accept="application/json,.json" hidden></div><div id="storage" class="small muted"></div></div>
   <div class="panel"><h3>Zurücksetzen</h3><button class="btn danger" data-act="reset" style="align-self:flex-start">Alles löschen</button></div>`;
   if(navigator.storage&&navigator.storage.estimate) navigator.storage.estimate().then(e=>{ const el=$('#storage'); if(el&&e.usage) el.textContent='Belegt: '+(e.usage/1048576).toFixed(1)+' MB'; });
-  $('#imp').onchange=e=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{ try{ const j=JSON.parse(r.result); if(!Array.isArray(j.areas)||!Array.isArray(j.videos)) throw 0; confirmBox('Importieren?','Bereiche, Videos, Kinder und Einstellungen werden ersetzt. Werke bleiben.','Importieren',()=>{ S.areas=j.areas; S.videos=j.videos; if(Array.isArray(j.profiles)&&j.profiles.length) S.profiles=j.profiles; if(j.settings) Object.assign(S.settings,j.settings,{pin:S.settings.pin}); if(!S.profiles.find(p=>p.id===S.activeProfile)) S.activeProfile=S.profiles[0]&&S.profiles[0].id; S.areas.forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; }); save(); toast('Importiert'); render(); }); }catch(err){ toast('Datei nicht lesbar'); } }; r.readAsText(f); };
+  $('#imp').onchange=e=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{ try{ const j=JSON.parse(r.result); if(!Array.isArray(j.areas)||!Array.isArray(j.videos)) throw 0; confirmBox('Importieren?','Bereiche, Videos, Kinder und Einstellungen werden ersetzt. Werke bleiben.','Importieren',()=>{ S.areas=j.areas.filter(a=>a&&a.id&&a.name); S.videos=j.videos.filter(validVideo); if(Array.isArray(j.profiles)&&j.profiles.length) S.profiles=j.profiles; if(j.settings) Object.assign(S.settings,j.settings,{pin:S.settings.pin}); if(!S.profiles.find(p=>p.id===S.activeProfile)) S.activeProfile=S.profiles[0]&&S.profiles[0].id; S.areas.forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; }); save(); toast('Importiert'); render(); }); }catch(err){ toast('Datei nicht lesbar'); } }; r.readAsText(f); };
   Object.assign(acts,{ export:()=>{ const data={app:'schrittli',version:1,exported:new Date().toISOString(),profiles:S.profiles,areas:S.areas,videos:S.videos,settings:{...S.settings,pin:undefined}}; const b=new Blob([JSON.stringify(data,null,1)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='schrittli-'+todayStr()+'.json'; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },1000); },
-    reset:()=>confirmBox('Wirklich alles löschen?','Videos, Bereiche, Kinder, Werke und Einstellungen.','Alles löschen',async()=>{ for(const w of S.works) await blobs.del(w.id); localStorage.removeItem(KEY); S=defaultState(); parentOpen=false; go('firstrun'); },true) });
+    reset:()=>confirmBox('Wirklich alles löschen?','Videos, Bereiche, Kinder, Werke und Einstellungen.','Alles löschen',async()=>{ for(const w of S.works) await blobs.del(w.id); localStorage.removeItem(KEY); location.reload(); },true) });
 }
 
 boot();

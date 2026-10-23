@@ -1,95 +1,1128 @@
 {
-  "stand": "2026-10-23",
-  "eintraege": [
-    {"id": "srf-huhn", "areaId": "zeichnen", "title": "Huhn zeichnen", "source": {"type": "youtube", "id": "QMH__wHQzbM"}, "kanal": "SRF Kids · Der Zauberstift", "dauer": "1:05", "alter": "ab 5", "sprache": "Hochdeutsch", "hinweis": "Kurz und klar, mit Wiederholung aller Schritte am Schluss.",
-     "steps": [{"t": 0, "label": "Zuschauen: Samira zeigt das Huhn"}, {"t": 12, "label": "Eine weiche runde Form – der Körper"}, {"t": 19, "label": "Auge, Schnabel und der Kamm"}, {"t": 29, "label": "Hinten der Schwanz, unten die Beine"}, {"t": 39, "label": "Schau nochmal alle Schritte"}, {"t": 56, "label": "Fertig – schau dein Huhn an"}],
-     "task": {"text": "Zeichne dein eigenes Huhn und mach ein Foto davon.", "deliverable": "foto"}},
-    {"id": "srf-schaf", "areaId": "zeichnen", "title": "Schaf zeichnen", "source": {"type": "youtube", "id": "hsrZD5y4y18"}, "kanal": "SRF Kids · Der Zauberstift", "dauer": "2:19", "alter": "ab 5", "sprache": "Hochdeutsch", "hinweis": "Mit Bleistift und Radiergummi – Wellen für die Wolle.",
-     "steps": [{"t": 0, "label": "Zuschauen"}, {"t": 15, "label": "Einen Kreis zeichnen – der Kopf"}, {"t": 17, "label": "Einen Halbkreis darunter – der Körper"}, {"t": 24, "label": "Kleine Wellen um den Körper – die Wolle"}, {"t": 32, "label": "Ohren links und rechts, dann die Nase"}, {"t": 46, "label": "Mund und Augen"}, {"t": 55, "label": "Oben am Kopf radieren, ein Oval mit Wellen zeichnen"}, {"t": 76, "label": "Unten radieren und die Beine zeichnen"}, {"t": 89, "label": "Zwei kleine Linien – die Hufe"}, {"t": 99, "label": "Schau nochmal alle Schritte"}, {"t": 132, "label": "Fertig – schau dein Schaf an"}],
-     "task": {"text": "Zeichne dein eigenes Schaf und mach ein Foto davon.", "deliverable": "foto"}},
-    {"id": "srf-pferd", "areaId": "zeichnen", "title": "Pferd zeichnen", "source": {"type": "youtube", "id": "NY1c8DraNyY"}, "kanal": "SRF Kids · Der Zauberstift", "dauer": "1:36", "alter": "ab 5", "sprache": "Hochdeutsch", "hinweis": "Aus Kreis, Oval und Rechtecken.",
-     "steps": [{"t": 0, "label": "Zuschauen"}, {"t": 15, "label": "Ein Kreis – der Kopf"}, {"t": 20, "label": "Ein Oval – der Körper"}, {"t": 24, "label": "Zwei Ohren auf den Kopf"}, {"t": 34, "label": "Zwei Punkte – die Augen"}, {"t": 37, "label": "Vier Beine als kleine Rechtecke"}, {"t": 50, "label": "Stirnfransen und Mähne"}, {"t": 58, "label": "Eine Linie übers Gesicht, dann die Nasenlöcher"}, {"t": 67, "label": "Der Schweif"}, {"t": 77, "label": "Schau nochmal alle Schritte"}, {"t": 88, "label": "Fertig – schau dein Pferd an"}],
-     "task": {"text": "Zeichne dein eigenes Pferd und mach ein Foto davon.", "deliverable": "foto"}},
-    {"id": "srf-schwein", "areaId": "zeichnen", "title": "Schwein zeichnen", "source": {"type": "youtube", "id": "qSHtmmZEm8c"}, "kanal": "SRF Kids · Der Zauberstift", "dauer": "1:52", "alter": "ab 5", "sprache": "Hochdeutsch", "hinweis": "Grosses Oval, kleines Oval, Kartoffel-Körper.",
-     "steps": [{"t": 0, "label": "Zuschauen"}, {"t": 12, "label": "Ein grosses Oval in die Mitte"}, {"t": 17, "label": "Ein kleineres Oval darin – die Nase"}, {"t": 23, "label": "Nasenlöcher und Augen"}, {"t": 31, "label": "Zwei Blätter an den Seiten – die Ohren"}, {"t": 46, "label": "Ein Halbkreis wie eine Kartoffel – der Körper"}, {"t": 61, "label": "Die Beine"}, {"t": 70, "label": "Eine Locke – der Schwanz"}, {"t": 83, "label": "Schau nochmal alle Schritte"}, {"t": 105, "label": "Fertig – schau dein Schwein an"}],
-     "task": {"text": "Zeichne dein eigenes Schweinchen und mach ein Foto davon.", "deliverable": "foto"}},
-    {"id": "srf-kuh", "areaId": "zeichnen", "title": "Kuh zeichnen", "source": {"type": "youtube", "id": "5PJJGFKbiSU"}, "kanal": "SRF Kids · Der Zauberstift", "dauer": "2:43", "alter": "ab 6", "sprache": "Hochdeutsch", "hinweis": "Etwas mehr Schritte – mit Hörnern, Euter und Flecken.",
-     "steps": [{"t": 0, "label": "Zuschauen"}, {"t": 14, "label": "Ein Oval – die Schnauze"}, {"t": 19, "label": "Der Kopf, darin zwei kleine Ovale – die Augen"}, {"t": 27, "label": "Zwei Kreise – die Nasenlöcher, dann der Mund"}, {"t": 40, "label": "Die Hörner"}, {"t": 43, "label": "Zwei Blätter – die Ohren"}, {"t": 53, "label": "Eine Linie bei den Augen, dann eine Kurve nach unten – der Rücken"}, {"t": 67, "label": "Vom Mund eine Linie nach unten, dann die Vorderbeine"}, {"t": 85, "label": "Das Hinterbein"}, {"t": 96, "label": "Das Euter"}, {"t": 114, "label": "Die Flecken"}, {"t": 128, "label": "Schau nochmal alle Schritte"}, {"t": 158, "label": "Fertig – schau deine Kuh an"}],
-     "task": {"text": "Zeichne deine eigene Kuh mit Flecken und mach ein Foto davon.", "deliverable": "foto"}},
-    {"id": "srf-traktor", "areaId": "zeichnen", "title": "Traktor zeichnen", "source": {"type": "youtube", "id": "59nxLr0-SyI"}, "kanal": "SRF Kids · Der Zauberstift", "dauer": "2:05", "alter": "ab 6", "sprache": "Hochdeutsch", "hinweis": "Zwei Räder, dann die Kabine.",
-     "steps": [{"t": 0, "label": "Zuschauen"}, {"t": 16, "label": "Zwei Kreise: links klein, rechts gross"}, {"t": 26, "label": "In jeden Kreis ein kleinerer – die Räder"}, {"t": 40, "label": "Die Räder unten mit einer Linie verbinden"}, {"t": 44, "label": "Oben eine zweite Linie bis zum kleinen Rad"}, {"t": 57, "label": "Vom grossen Rad eine Linie hoch – die Kabine"}, {"t": 68, "label": "Das Dach"}, {"t": 72, "label": "Das Fenster"}, {"t": 82, "label": "Auspuff und Licht"}, {"t": 95, "label": "Schau nochmal alle Schritte"}, {"t": 118, "label": "Fertig – schau deinen Traktor an"}],
-     "task": {"text": "Zeichne deinen eigenen Traktor und mach ein Foto davon.", "deliverable": "foto"}},
-
-    {"id": "kat-papierschiff", "areaId": "basteln", "title": "Papierschiff falten", "source": {"type": "youtube", "id": "ra8TzYlprNw"}, "kanal": "Einfach Basteln", "dauer": "2:34", "alter": "ab 5", "sprache": "ohne Sprache", "hinweis": "Nur Musik, keine Erklärung – die Schritte stoppen das Video an den richtigen Stellen. Ein A4-Blatt reicht.",
-     "steps": [{"t": 0, "label": "Ein Blatt bereitlegen"}, {"t": 6, "label": "Das Blatt in der Mitte falten"}, {"t": 26, "label": "Die oberen Ecken zur Mitte falten – ein Dreieck"}, {"t": 50, "label": "Den unteren Rand nach oben falten, hinten auch"}, {"t": 76, "label": "Das Dreieck öffnen und zum Quadrat drücken"}, {"t": 100, "label": "Die untere Spitze nach oben falten, hinten auch"}, {"t": 124, "label": "An den Spitzen ziehen – das Schiff klappt auf"}, {"t": 146, "label": "Fertig – schau dein Schiff an"}],
-     "task": {"text": "Falte dein eigenes Schiff und mach ein Foto davon.", "deliverable": "foto"}},
-    {"id": "kat-papierflieger", "areaId": "basteln", "title": "Papierflieger falten", "source": {"type": "youtube", "id": "jKPYmrDRb_E"}, "kanal": "Allerlei Channel", "dauer": "2:28", "alter": "ab 5", "sprache": "ohne Sprache", "hinweis": "Nur Musik – die Schritte stoppen das Video. Fliegt weit.",
-     "steps": [{"t": 0, "label": "Ein Blatt bereitlegen"}, {"t": 4, "label": "Das Blatt längs in der Mitte falten und wieder öffnen"}, {"t": 30, "label": "Die oberen Ecken zur Mittellinie falten"}, {"t": 56, "label": "Die schrägen Kanten nochmal zur Mitte falten"}, {"t": 84, "label": "Den Flieger in der Mitte zusammenklappen"}, {"t": 102, "label": "Den ersten Flügel nach unten falten"}, {"t": 118, "label": "Umdrehen – den zweiten Flügel genauso"}, {"t": 130, "label": "Flügel gerade richten – fertig zum Fliegen"}],
-     "task": {"text": "Falte deinen Flieger, lass ihn fliegen und mach ein Foto davon.", "deliverable": "foto"}},
-    {"id": "kat-frosch", "areaId": "basteln", "title": "Hüpf-Frosch falten", "source": {"type": "youtube", "id": "ChrVW4ruOPQ"}, "kanal": "Basteln mit Papier", "dauer": "5:20", "alter": "ab 6", "sprache": "ohne Sprache", "hinweis": "Papier 15 × 7,5 cm. Nur Musik – die Schritte stoppen das Video. Der Frosch hüpft wirklich.",
-     "steps": [{"t": 0, "label": "Papier 15 × 7,5 cm bereitlegen"}, {"t": 20, "label": "Längs in der Mitte falten und wieder öffnen"}, {"t": 40, "label": "Oben beide Ecken schräg falten – ein X entsteht"}, {"t": 62, "label": "Das X zu einem Dreieck zusammendrücken"}, {"t": 100, "label": "Die Dreieck-Spitzen nach oben falten – die Vorderbeine"}, {"t": 124, "label": "Beide Seiten zur Mitte falten"}, {"t": 144, "label": "Unten nach oben falten"}, {"t": 165, "label": "Die Hälfte wieder nach unten – die Sprungfeder"}, {"t": 200, "label": "Beine nach aussen klappen – der Frosch ist fertig"}, {"t": 260, "label": "Auf den Rücken drücken – er hüpft!"}, {"t": 305, "label": "Fertig"}],
-     "task": {"text": "Falte deinen Frosch und lass ihn hüpfen. Mach ein Foto davon.", "deliverable": "foto"}},
-    {"id": "srf-geist", "areaId": "basteln", "title": "Geist aus Zündholzschachteln", "source": {"type": "youtube", "id": "2Dj5ev-fV70"}, "kanal": "SRF Kids · Bastelidee mit Paul Klee", "dauer": "4:03", "alter": "ab 6", "sprache": "Schweizerdeutsch", "hinweis": "Andrin vom Zentrum Paul Klee. Material: Zündholzschachteln, Zündhölzer, schwarzes Papier, Leim, Schere, Filzstift.",
-     "steps": [{"t": 0, "label": "Zuschauen: Andrin zeigt das Bild und das Material"}, {"t": 34, "label": "Zündholzschachteln aufs schwarze Papier legen – das Gesicht"}, {"t": 65, "label": "Schachteln zurechtschneiden und aufkleben"}, {"t": 95, "label": "Mit Filzstift Augen und Mund zeichnen"}, {"t": 125, "label": "Zündhölzer als Haare aufkleben"}, {"t": 155, "label": "Zündhölzer als Bart und Zähne"}, {"t": 185, "label": "Fertig – schau deinen Geist an"}],
-     "task": {"text": "Bastle deinen eigenen Geist und mach ein Foto davon.", "deliverable": "foto"}},
-
-    {"id": "maus-igel", "areaId": "natur", "title": "Warum hat der Igel Stacheln?", "source": {"type": "youtube", "id": "r7V_bOcFwD8"}, "kanal": "Die Maus (WDR)", "dauer": "6:27", "alter": "ab 5", "sprache": "Hochdeutsch", "hinweis": "Sachgeschichte mit Experiment. Die Pausen sind zum Raten und Erzählen gedacht.",
-     "steps": [{"t": 0, "label": "Wo hat sich der Kopf vom Igel versteckt?"}, {"t": 53, "label": "Zeig mit der Hand, wie sich die Stacheln anfühlen"}, {"t": 96, "label": "Rate: Wie viele Münzen hält der Ballon aus?"}, {"t": 174, "label": "Hattest du recht?"}, {"t": 224, "label": "Wie sehen die Stacheln der Baby-Igel aus?"}, {"t": 277, "label": "Erzähl: Warum hat der Igel Stacheln?"}],
-     "task": {"text": "Erzähl, warum der Igel Stacheln hat. Nimm es mit dem Mikrofon auf.", "deliverable": "ton"}},
-    {"id": "maus-ohrenkneifer", "areaId": "natur", "title": "Wofür hat der Ohrenkneifer Zangen?", "source": {"type": "youtube", "id": "1BokgWr8GcE"}, "kanal": "Die Maus (WDR)", "dauer": "7:27", "alter": "ab 5", "sprache": "Hochdeutsch", "hinweis": "Sachgeschichte. Mit Überraschung: Ohrenkneifer können fliegen.",
-     "steps": [{"t": 0, "label": "Erzähl: Wozu könnte die Zange gut sein?"}, {"t": 75, "label": "Wie viele Beine und Fühler hat er?"}, {"t": 126, "label": "Zeig mit den Armen, wie er die Zange hebt"}, {"t": 167, "label": "Haben Ohrenkneifer Flügel? Was meinst du?"}, {"t": 243, "label": "Wo haben sie die Ohrenkneifer gesucht?"}, {"t": 298, "label": "Schau genau: Wie klappt er die Flügel aus?"}, {"t": 390, "label": "Erzähl, wofür die Zange gut ist"}],
-     "task": {"text": "Erzähl, was du über den Ohrenkneifer gelernt hast. Nimm es auf.", "deliverable": "ton"}},
-    {"id": "maus-elefant", "areaId": "natur", "title": "Wie tröten Elefanten?", "source": {"type": "youtube", "id": "UvGZfjOuMXk"}, "kanal": "Die Maus (WDR)", "dauer": "8:18", "alter": "ab 5", "sprache": "Hochdeutsch", "hinweis": "Sachgeschichte aus dem Zoo. Zum Mitmachen: tröten!",
-     "steps": [{"t": 0, "label": "Mach das Elefanten-Geräusch nach"}, {"t": 57, "label": "Was lernen die Elefanten auf Kommando?"}, {"t": 110, "label": "Zeig mit dem Arm, wie sich ein Rüssel bewegt"}, {"t": 180, "label": "Trompete wie ein Elefant!"}, {"t": 270, "label": "Erzähl, was du bis jetzt gesehen hast"}, {"t": 390, "label": "Erzähl, wozu Elefanten tröten"}],
-     "task": {"text": "Mach ein Elefanten-Tröten und erzähl, wie es geht. Nimm es auf.", "deliverable": "ton"}},
-    {"id": "srf-biene", "areaId": "natur", "title": "Superheldin Biene", "source": {"type": "youtube", "id": "r3G7HVzTXK4"}, "kanal": "SRF Kids · Superhelden der Natur", "dauer": "2:36", "alter": "ab 5", "sprache": "Hochdeutsch", "hinweis": "Kurzer Tierfilm. Eine Pause in der Mitte zum Erzählen.",
-     "steps": [{"t": 0, "label": "Zuschauen"}, {"t": 78, "label": "Erzähl: Was kann die Biene besonders gut?"}, {"t": 150, "label": "Fertig – was hast du gelernt?"}],
-     "task": {"text": "Erzähl, was die Biene besonders gut kann. Nimm es auf.", "deliverable": "ton"}},
-    {"id": "srf-chamaeleon", "areaId": "natur", "title": "Superheld Chamäleon", "source": {"type": "youtube", "id": "wn-K2DnYyUM"}, "kanal": "SRF Kids · Superhelden der Natur", "dauer": "2:32", "alter": "ab 5", "sprache": "Hochdeutsch", "hinweis": "Kurzer Tierfilm.",
-     "steps": [{"t": 0, "label": "Zuschauen"}, {"t": 76, "label": "Erzähl: Was kann das Chamäleon besonders gut?"}, {"t": 146, "label": "Fertig – was hast du gelernt?"}],
-     "task": {"text": "Erzähl, was das Chamäleon besonders gut kann. Nimm es auf.", "deliverable": "ton"}},
-    {"id": "srf-schnabeltier", "areaId": "natur", "title": "Superheld Schnabeltier", "source": {"type": "youtube", "id": "7Z7vHDFl2V4"}, "kanal": "SRF Kids · Superhelden der Natur", "dauer": "2:42", "alter": "ab 5", "sprache": "Hochdeutsch", "hinweis": "Kurzer Tierfilm.",
-     "steps": [{"t": 0, "label": "Zuschauen"}, {"t": 80, "label": "Erzähl: Was ist am Schnabeltier so besonders?"}, {"t": 156, "label": "Fertig – was hast du gelernt?"}],
-     "task": {"text": "Erzähl, was am Schnabeltier besonders ist. Nimm es auf.", "deliverable": "ton"}},
-
-    {"id": "maerchen-bremer", "areaId": "geschichten", "title": "Die Bremer Stadtmusikanten", "source": {"type": "youtube", "id": "g9TOGqVSmdI"}, "kanal": "Deine Märchenwelt", "dauer": "7:21", "alter": "ab 5", "sprache": "Hochdeutsch", "hinweis": "Märchen der Brüder Grimm, gezeichnet. Pausen zum Raten, wie es weitergeht.",
-     "steps": [{"t": 0, "label": "Wen trifft der Esel wohl als Nächstes?"}, {"t": 64, "label": "Wer könnte noch dazukommen?"}, {"t": 132, "label": "Wohin wollen die vier? Erzähl!"}, {"t": 175, "label": "Was haben sie vor? Rate!"}, {"t": 228, "label": "Zeig, wie die Tiere übereinander stehen"}, {"t": 277, "label": "Was passiert dem Räuber im Haus?"}, {"t": 377, "label": "Erzähl die Geschichte zu Ende"}],
-     "task": {"text": "Erzähl die Geschichte mit deinen eigenen Worten. Nimm es auf.", "deliverable": "ton"}},
-    {"id": "maerchen-hase-igel", "areaId": "geschichten", "title": "Der Hase und der Igel", "source": {"type": "youtube", "id": "A4zkaSRY1o0"}, "kanal": "Deine Märchenwelt", "dauer": "6:02", "alter": "ab 5", "sprache": "Hochdeutsch", "hinweis": "Märchen, gezeichnet. Mit einem Trick, den man erraten kann.",
-     "steps": [{"t": 0, "label": "Warum ist der Igel beleidigt?"}, {"t": 84, "label": "Was hat der Igel vor? Rate!"}, {"t": 135, "label": "Wie trickst der Igel den Hasen aus?"}, {"t": 215, "label": "Wer gewinnt? Erzähl!"}, {"t": 299, "label": "Erzähl die Geschichte zu Ende"}],
-     "task": {"text": "Erzähl, wie der Igel den Hasen ausgetrickst hat. Nimm es auf.", "deliverable": "ton"}},
-    {"id": "wilma-mupf", "areaId": "geschichten", "title": "Mupf das Müllmonster", "source": {"type": "youtube", "id": "XOO0Siywh44"}, "kanal": "Wilma Wochenwurm (Hörspiel)", "dauer": "7:00", "alter": "ab 5", "sprache": "Hochdeutsch", "hinweis": "Hörspiel ohne viel Bild – gut zum Zuhören. Thema Müll und Aufräumen.",
-     "steps": [{"t": 0, "label": "Was macht Mupf mit dem Müll?"}, {"t": 90, "label": "Warum sind die Tiere traurig?"}, {"t": 187, "label": "Was erzählen die Tiere Mupf?"}, {"t": 284, "label": "Wie räumen sie auf? Erzähl!"}],
-     "task": {"text": "Erzähl, was Mupf gelernt hat. Nimm es auf.", "deliverable": "ton"}},
-    {"id": "srf-pompon-zaubertrick", "areaId": "geschichten", "title": "Pompon: En Zaubertrick", "source": {"type": "youtube", "id": "rib4n10OIec"}, "kanal": "SRF Kids · Guetnachtgschichtli", "dauer": "7:04", "alter": "ab 4", "sprache": "Schweizerdeutsch", "hinweis": "Pompon der kleine Bär, auf Schweizerdeutsch. Zwei Pausen zum Nacherzählen.",
-     "steps": [{"t": 0, "label": "Zuschauen"}, {"t": 140, "label": "Erzähl: Was ist bis jetzt passiert?"}, {"t": 280, "label": "Wie geht es wohl weiter?"}, {"t": 410, "label": "Fertig – erzähl das Ende"}],
-     "task": {"text": "Erzähl die Geschichte von Pompon. Nimm es auf.", "deliverable": "ton"}},
-    {"id": "srf-pompon-hatschibum", "areaId": "geschichten", "title": "Pompon: Hatschibum", "source": {"type": "youtube", "id": "M6_H_lnWJIw"}, "kanal": "SRF Kids · Guetnachtgschichtli", "dauer": "7:04", "alter": "ab 4", "sprache": "Schweizerdeutsch", "hinweis": "Pompon der kleine Bär, auf Schweizerdeutsch.",
-     "steps": [{"t": 0, "label": "Zuschauen"}, {"t": 140, "label": "Erzähl: Was ist bis jetzt passiert?"}, {"t": 280, "label": "Wie geht es wohl weiter?"}, {"t": 410, "label": "Fertig – erzähl das Ende"}],
-     "task": {"text": "Erzähl die Geschichte von Pompon. Nimm es auf.", "deliverable": "ton"}},
-    {"id": "srf-kiri-versteckis", "areaId": "geschichten", "title": "Kiri und Lou: Immer wider Versteckis", "source": {"type": "youtube", "id": "8ustPSjSugw"}, "kanal": "SRF Kids · Guetnachtgschichtli", "dauer": "4:51", "alter": "ab 4", "sprache": "Schweizerdeutsch", "hinweis": "Zwei Dinos, auf Schweizerdeutsch.",
-     "steps": [{"t": 0, "label": "Zuschauen"}, {"t": 95, "label": "Erzähl: Was ist bis jetzt passiert?"}, {"t": 190, "label": "Wie geht es wohl weiter?"}, {"t": 280, "label": "Fertig – erzähl das Ende"}],
-     "task": {"text": "Erzähl die Geschichte von Kiri und Lou. Nimm es auf.", "deliverable": "ton"}},
-
-    {"id": "lesen-silben-dajuu", "areaId": "schule", "title": "Silben lesen", "source": {"type": "youtube", "id": "n-M_qg7--PM"}, "kanal": "DAJUU – Mit Spass lernen", "dauer": "13:37", "alter": "1. Klasse", "sprache": "Hochdeutsch", "hinweis": "Langes Lernvideo – die Pausen alle zwei Minuten zum Mitlesen. Besser in zwei Portionen schauen.",
-     "steps": [{"t": 0, "label": "Zuschauen"}, {"t": 90, "label": "Lies die Silben laut mit"}, {"t": 240, "label": "Lies die Silben laut mit"}, {"t": 390, "label": "Lies die Silben laut mit"}, {"t": 540, "label": "Lies die Silben laut mit"}, {"t": 690, "label": "Lies die Silben laut mit"}, {"t": 800, "label": "Fertig – super gelesen!"}],
-     "task": {"text": "Lies drei Silben laut vor und nimm es auf.", "deliverable": "ton"}},
-    {"id": "mathe-plus-10", "areaId": "schule", "title": "Plus rechnen bis 10", "source": {"type": "youtube", "id": "__65WMUR1s4"}, "kanal": "Grundschullehrerin Diana Wegel", "dauer": "8:39", "alter": "1. Klasse", "sprache": "Hochdeutsch", "hinweis": "Plusaufgaben bis 10, ruhig erklärt. Pausen zum Mitrechnen.",
-     "steps": [{"t": 0, "label": "Zuschauen"}, {"t": 100, "label": "Rechne die Aufgabe mit"}, {"t": 220, "label": "Rechne die Aufgabe mit"}, {"t": 340, "label": "Rechne die Aufgabe mit"}, {"t": 460, "label": "Fertig – super gerechnet!"}],
-     "task": {"text": "Sag eine Plusaufgabe, die 10 ergibt, und nimm es auf.", "deliverable": "ton"}},
-
-    {"id": "shaun-hitzefrei", "areaId": "lustiges", "title": "Shaun das Schaf: Hitzefrei", "source": {"type": "youtube", "id": "AJeUPdHkQ1U"}, "kanal": "Shaun das Schaf (offiziell)", "dauer": "7:00", "alter": "ab 4", "sprache": "ohne Sprache", "hinweis": "Ganze Folge, ohne Worte – für alle verständlich.", "steps": [], "task": {"text": "", "deliverable": "keine"}},
-    {"id": "shaun-maulwurf", "areaId": "lustiges", "title": "Shaun das Schaf: Der Maulwurfshügel", "source": {"type": "youtube", "id": "nCQhZDgQTiY"}, "kanal": "Shaun das Schaf (offiziell)", "dauer": "7:00", "alter": "ab 4", "sprache": "ohne Sprache", "hinweis": "Ganze Folge.", "steps": [], "task": {"text": "", "deliverable": "keine"}},
-    {"id": "shaun-bitzer", "areaId": "lustiges", "title": "Shaun das Schaf: Bitzer ist verliebt", "source": {"type": "youtube", "id": "fzPomktocSs"}, "kanal": "Shaun das Schaf (offiziell)", "dauer": "7:00", "alter": "ab 4", "sprache": "ohne Sprache", "hinweis": "Ganze Folge.", "steps": [], "task": {"text": "", "deliverable": "keine"}},
-    {"id": "srf-kiri-ueberraschigsei", "areaId": "lustiges", "title": "Kiri und Lou: Überraschigsei", "source": {"type": "youtube", "id": "cGDgmSwyFAY"}, "kanal": "SRF Kids · Guetnachtgschichtli", "dauer": "4:51", "alter": "ab 4", "sprache": "Schweizerdeutsch", "hinweis": "Auf Schweizerdeutsch.", "steps": [], "task": {"text": "", "deliverable": "keine"}},
-
-    {"id": "ilko-alli-zaeme", "areaId": "lieder", "title": "ILKO: Alli zäme", "source": {"type": "youtube", "id": "Lv4xToo29Bw"}, "kanal": "SRF Kids · #SayHi 2026", "dauer": "3:27", "alter": "ab 5", "sprache": "Schweizerdeutsch", "hinweis": "Das SRF-Kids-Lied 2026 gegen Ausgrenzung, Mundart. Dazu gibt es Mitmach-Videos.", "steps": [], "task": {"text": "", "deliverable": "keine"}},
-    {"id": "ilko-mitmach-1", "areaId": "lieder", "title": "Alli zäme – Mitmach-Video", "source": {"type": "youtube", "id": "Juw-U4h_RZA"}, "kanal": "SRF Kids · #SayHi 2026", "dauer": "2:46", "alter": "ab 5", "sprache": "Schweizerdeutsch", "hinweis": "Zum Mittanzen.", "steps": [], "task": {"text": "", "deliverable": "keine"}},
-    {"id": "goofe-fuchs", "areaId": "lieder", "title": "Lueged nöd ume, de Fuchs gaht ume", "source": {"type": "youtube", "id": "YzJUgtyjFv8"}, "kanal": "Schwiizergoofe", "dauer": "1:41", "alter": "ab 4", "sprache": "Schweizerdeutsch", "hinweis": "Mundart-Kinderlied, von Kindern gesungen.", "steps": [], "task": {"text": "", "deliverable": "keine"}},
-    {"id": "goofe-herr-mueller", "areaId": "lieder", "title": "De Herr Müller het en Hof", "source": {"type": "youtube", "id": "bpynO08O1og"}, "kanal": "Schwiizergoofe", "dauer": "3:15", "alter": "ab 4", "sprache": "Schweizerdeutsch", "hinweis": "Old MacDonald auf Mundart.", "steps": [], "task": {"text": "", "deliverable": "keine"}},
-    {"id": "goofe-chopf", "areaId": "lieder", "title": "Chopf, Schultre, Chnü und Fuess", "source": {"type": "youtube", "id": "5VnYtr7DuRE"}, "kanal": "Schwiizergoofe", "dauer": "2:19", "alter": "ab 4", "sprache": "Schweizerdeutsch", "hinweis": "Bewegungslied auf Mundart.", "steps": [], "task": {"text": "", "deliverable": "keine"}},
-    {"id": "bond-suneschtraal", "areaId": "lieder", "title": "Andrew Bond: Suneschtraal tanz emaal", "source": {"type": "youtube", "id": "F2pwU158cd0"}, "kanal": "Andrew Bond", "dauer": "3:00", "alter": "ab 4", "sprache": "Schweizerdeutsch", "hinweis": "Nur Ton mit Standbild – gut zum Mitsingen.", "steps": [], "task": {"text": "", "deliverable": "keine"}},
-    {"id": "bond-fruelig", "areaId": "lieder", "title": "Andrew Bond: Früelig isch i de Luft", "source": {"type": "youtube", "id": "9jJE-5ciCsI"}, "kanal": "Andrew Bond", "dauer": "1:58", "alter": "ab 4", "sprache": "Schweizerdeutsch", "hinweis": "Nur Ton mit Standbild.", "steps": [], "task": {"text": "", "deliverable": "keine"}},
-    {"id": "lichterkinder-koerperteil", "areaId": "lieder", "title": "Körperteil Blues", "source": {"type": "youtube", "id": "iXFAunwnIxE"}, "kanal": "Lichterkinder", "dauer": "3:30", "alter": "ab 4", "sprache": "Hochdeutsch", "hinweis": "Bewegungslied mit Tanzvideo.", "steps": [], "task": {"text": "", "deliverable": "keine"}}
-  ]
+ "stand": "2026-10-23",
+ "eintraege": [
+  {
+   "id": "srf-huhn",
+   "areaId": "zeichnen",
+   "title": "Huhn zeichnen",
+   "source": {
+    "type": "youtube",
+    "id": "QMH__wHQzbM"
+   },
+   "kanal": "SRF Kids · Der Zauberstift",
+   "dauer": "1:05",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Kurz und klar, mit Wiederholung aller Schritte am Schluss.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Samira zeigt das Huhn"
+    },
+    {
+     "t": 12,
+     "label": "Eine weiche runde Form – der Körper"
+    },
+    {
+     "t": 19,
+     "label": "Auge, Schnabel und der Kamm"
+    },
+    {
+     "t": 29,
+     "label": "Hinten der Schwanz, unten die Beine"
+    },
+    {
+     "t": 39,
+     "label": "Schau nochmal alle Schritte"
+    },
+    {
+     "t": 56,
+     "label": "Fertig – schau dein Huhn an"
+    }
+   ],
+   "task": {
+    "text": "Zeichne dein eigenes Huhn und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "srf-schaf",
+   "areaId": "zeichnen",
+   "title": "Schaf zeichnen",
+   "source": {
+    "type": "youtube",
+    "id": "hsrZD5y4y18"
+   },
+   "kanal": "SRF Kids · Der Zauberstift",
+   "dauer": "2:19",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Mit Bleistift und Radiergummi – Wellen für die Wolle.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen"
+    },
+    {
+     "t": 15,
+     "label": "Einen Kreis zeichnen – der Kopf, einen Halbkreis darunter – der Körper"
+    },
+    {
+     "t": 24,
+     "label": "Kleine Wellen um den Körper – die Wolle"
+    },
+    {
+     "t": 32,
+     "label": "Ohren links und rechts, dann die Nase"
+    },
+    {
+     "t": 46,
+     "label": "Mund und Augen"
+    },
+    {
+     "t": 55,
+     "label": "Oben am Kopf radieren, ein Oval mit Wellen zeichnen"
+    },
+    {
+     "t": 76,
+     "label": "Unten radieren und die Beine zeichnen"
+    },
+    {
+     "t": 89,
+     "label": "Zwei kleine Linien – die Hufe"
+    },
+    {
+     "t": 99,
+     "label": "Schau nochmal alle Schritte"
+    },
+    {
+     "t": 132,
+     "label": "Fertig – schau dein Schaf an"
+    }
+   ],
+   "task": {
+    "text": "Zeichne dein eigenes Schaf und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "srf-pferd",
+   "areaId": "zeichnen",
+   "title": "Pferd zeichnen",
+   "source": {
+    "type": "youtube",
+    "id": "NY1c8DraNyY"
+   },
+   "kanal": "SRF Kids · Der Zauberstift",
+   "dauer": "1:36",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Aus Kreis, Oval und Rechtecken.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen"
+    },
+    {
+     "t": 15,
+     "label": "Ein Kreis – der Kopf, ein Oval – der Körper"
+    },
+    {
+     "t": 24,
+     "label": "Zwei Ohren auf den Kopf"
+    },
+    {
+     "t": 34,
+     "label": "Zwei Punkte – die Augen, vier Beine als kleine Rechtecke"
+    },
+    {
+     "t": 50,
+     "label": "Stirnfransen und Mähne"
+    },
+    {
+     "t": 58,
+     "label": "Eine Linie übers Gesicht, dann die Nasenlöcher"
+    },
+    {
+     "t": 67,
+     "label": "Der Schweif"
+    },
+    {
+     "t": 77,
+     "label": "Schau nochmal alle Schritte"
+    },
+    {
+     "t": 88,
+     "label": "Fertig – schau dein Pferd an"
+    }
+   ],
+   "task": {
+    "text": "Zeichne dein eigenes Pferd und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "srf-schwein",
+   "areaId": "zeichnen",
+   "title": "Schwein zeichnen",
+   "source": {
+    "type": "youtube",
+    "id": "qSHtmmZEm8c"
+   },
+   "kanal": "SRF Kids · Der Zauberstift",
+   "dauer": "1:52",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Grosses Oval, kleines Oval, Kartoffel-Körper.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen"
+    },
+    {
+     "t": 12,
+     "label": "Ein grosses Oval in die Mitte, ein kleineres Oval darin – die Nase"
+    },
+    {
+     "t": 23,
+     "label": "Nasenlöcher und Augen"
+    },
+    {
+     "t": 31,
+     "label": "Zwei Blätter an den Seiten – die Ohren"
+    },
+    {
+     "t": 46,
+     "label": "Ein Halbkreis wie eine Kartoffel – der Körper"
+    },
+    {
+     "t": 61,
+     "label": "Die Beine"
+    },
+    {
+     "t": 70,
+     "label": "Eine Locke – der Schwanz"
+    },
+    {
+     "t": 83,
+     "label": "Schau nochmal alle Schritte"
+    },
+    {
+     "t": 105,
+     "label": "Fertig – schau dein Schwein an"
+    }
+   ],
+   "task": {
+    "text": "Zeichne dein eigenes Schweinchen und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "srf-kuh",
+   "areaId": "zeichnen",
+   "title": "Kuh zeichnen",
+   "source": {
+    "type": "youtube",
+    "id": "5PJJGFKbiSU"
+   },
+   "kanal": "SRF Kids · Der Zauberstift",
+   "dauer": "2:43",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Etwas mehr Schritte – mit Hörnern, Euter und Flecken.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen"
+    },
+    {
+     "t": 14,
+     "label": "Ein Oval – die Schnauze, der Kopf, darin zwei kleine Ovale – die Augen"
+    },
+    {
+     "t": 27,
+     "label": "Zwei Kreise – die Nasenlöcher, dann der Mund"
+    },
+    {
+     "t": 40,
+     "label": "Die Hörner, zwei Blätter – die Ohren"
+    },
+    {
+     "t": 53,
+     "label": "Eine Linie bei den Augen, dann eine Kurve nach unten – der Rücken"
+    },
+    {
+     "t": 67,
+     "label": "Vom Mund eine Linie nach unten, dann die Vorderbeine"
+    },
+    {
+     "t": 85,
+     "label": "Das Hinterbein"
+    },
+    {
+     "t": 96,
+     "label": "Das Euter"
+    },
+    {
+     "t": 114,
+     "label": "Die Flecken"
+    },
+    {
+     "t": 128,
+     "label": "Schau nochmal alle Schritte"
+    },
+    {
+     "t": 158,
+     "label": "Fertig – schau deine Kuh an"
+    }
+   ],
+   "task": {
+    "text": "Zeichne deine eigene Kuh mit Flecken und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "srf-traktor",
+   "areaId": "zeichnen",
+   "title": "Traktor zeichnen",
+   "source": {
+    "type": "youtube",
+    "id": "59nxLr0-SyI"
+   },
+   "kanal": "SRF Kids · Der Zauberstift",
+   "dauer": "2:05",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Zwei Räder, dann die Kabine.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen"
+    },
+    {
+     "t": 16,
+     "label": "Zwei Kreise: links klein, rechts gross"
+    },
+    {
+     "t": 26,
+     "label": "In jeden Kreis ein kleinerer – die Räder"
+    },
+    {
+     "t": 40,
+     "label": "Die Räder unten mit einer Linie verbinden, oben eine zweite Linie bis zum kleinen Rad"
+    },
+    {
+     "t": 57,
+     "label": "Vom grossen Rad eine Linie hoch – die Kabine"
+    },
+    {
+     "t": 68,
+     "label": "Das Dach, das Fenster"
+    },
+    {
+     "t": 82,
+     "label": "Auspuff und Licht"
+    },
+    {
+     "t": 95,
+     "label": "Schau nochmal alle Schritte"
+    },
+    {
+     "t": 118,
+     "label": "Fertig – schau deinen Traktor an"
+    }
+   ],
+   "task": {
+    "text": "Zeichne deinen eigenen Traktor und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "kat-papierschiff",
+   "areaId": "basteln",
+   "title": "Papierschiff falten",
+   "source": {
+    "type": "youtube",
+    "id": "ra8TzYlprNw"
+   },
+   "kanal": "Einfach Basteln",
+   "dauer": "2:34",
+   "alter": "ab 5",
+   "sprache": "ohne Sprache",
+   "hinweis": "Nur Musik, keine Erklärung – die Schritte stoppen das Video an den richtigen Stellen. Ein A4-Blatt reicht.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Ein Blatt bereitlegen"
+    },
+    {
+     "t": 6,
+     "label": "Das Blatt in der Mitte falten"
+    },
+    {
+     "t": 26,
+     "label": "Die oberen Ecken zur Mitte falten – ein Dreieck"
+    },
+    {
+     "t": 50,
+     "label": "Den unteren Rand nach oben falten, hinten auch"
+    },
+    {
+     "t": 76,
+     "label": "Das Dreieck öffnen und zum Quadrat drücken"
+    },
+    {
+     "t": 100,
+     "label": "Die untere Spitze nach oben falten, hinten auch"
+    },
+    {
+     "t": 124,
+     "label": "An den Spitzen ziehen – das Schiff klappt auf"
+    },
+    {
+     "t": 146,
+     "label": "Fertig – schau dein Schiff an"
+    }
+   ],
+   "task": {
+    "text": "Falte dein eigenes Schiff und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "kat-papierflieger",
+   "areaId": "basteln",
+   "title": "Papierflieger falten",
+   "source": {
+    "type": "youtube",
+    "id": "jKPYmrDRb_E"
+   },
+   "kanal": "Allerlei Channel",
+   "dauer": "2:28",
+   "alter": "ab 5",
+   "sprache": "ohne Sprache",
+   "hinweis": "Nur Musik – die Schritte stoppen das Video. Fliegt weit.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Ein Blatt bereitlegen, das Blatt längs in der Mitte falten und wieder öffnen"
+    },
+    {
+     "t": 30,
+     "label": "Die oberen Ecken zur Mittellinie falten"
+    },
+    {
+     "t": 56,
+     "label": "Die schrägen Kanten nochmal zur Mitte falten"
+    },
+    {
+     "t": 84,
+     "label": "Den Flieger in der Mitte zusammenklappen"
+    },
+    {
+     "t": 102,
+     "label": "Den ersten Flügel nach unten falten"
+    },
+    {
+     "t": 118,
+     "label": "Umdrehen – den zweiten Flügel genauso"
+    },
+    {
+     "t": 130,
+     "label": "Flügel gerade richten – fertig zum Fliegen"
+    }
+   ],
+   "task": {
+    "text": "Falte deinen Flieger, lass ihn fliegen und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "kat-frosch",
+   "areaId": "basteln",
+   "title": "Hüpf-Frosch falten",
+   "source": {
+    "type": "youtube",
+    "id": "ChrVW4ruOPQ"
+   },
+   "kanal": "Basteln mit Papier",
+   "dauer": "5:20",
+   "alter": "ab 6, mit Hilfe",
+   "sprache": "ohne Sprache",
+   "hinweis": "Papier 15 × 7,5 cm. Nur Musik – die Schritte stoppen das Video. Die Sprungfeder-Faltung braucht Hilfe von einem Erwachsenen; der Frosch hüpft wirklich.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Papier 15 × 7,5 cm bereitlegen"
+    },
+    {
+     "t": 20,
+     "label": "Längs in der Mitte falten und wieder öffnen"
+    },
+    {
+     "t": 40,
+     "label": "Oben beide Ecken schräg falten – ein X entsteht"
+    },
+    {
+     "t": 62,
+     "label": "Das X zu einem Dreieck zusammendrücken"
+    },
+    {
+     "t": 100,
+     "label": "Die Dreieck-Spitzen nach oben falten – die Vorderbeine"
+    },
+    {
+     "t": 124,
+     "label": "Beide Seiten zur Mitte falten"
+    },
+    {
+     "t": 144,
+     "label": "Unten nach oben falten"
+    },
+    {
+     "t": 165,
+     "label": "Die Hälfte wieder nach unten – die Sprungfeder"
+    },
+    {
+     "t": 200,
+     "label": "Beine nach aussen klappen – der Frosch ist fertig"
+    },
+    {
+     "t": 260,
+     "label": "Auf den Rücken drücken – er hüpft!"
+    },
+    {
+     "t": 305,
+     "label": "Fertig"
+    }
+   ],
+   "task": {
+    "text": "Falte deinen Frosch und lass ihn hüpfen. Mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "srf-geist",
+   "areaId": "basteln",
+   "title": "Geist aus Zündholzschachteln",
+   "source": {
+    "type": "youtube",
+    "id": "2Dj5ev-fV70"
+   },
+   "kanal": "SRF Kids · Bastelidee mit Paul Klee",
+   "dauer": "4:03",
+   "alter": "ab 6",
+   "sprache": "Schweizerdeutsch",
+   "hinweis": "Andrin vom Zentrum Paul Klee, Schweizerdeutsch. Material: Zündholzschachteln, Zündhölzer, schwarzes Papier, Leim, Schere, Filzstift – mit einem Erwachsenen basteln. Ohne Schritte, Aufgabe am Schluss.",
+   "steps": [],
+   "task": {
+    "text": "Bastle deinen eigenen Geist und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "maus-igel",
+   "areaId": "natur",
+   "title": "Warum hat der Igel Stacheln?",
+   "source": {
+    "type": "youtube",
+    "id": "r7V_bOcFwD8"
+   },
+   "kanal": "Die Maus (WDR)",
+   "dauer": "6:27",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Sachgeschichte mit Experiment. Die Pausen sind zum Raten und Erzählen gedacht.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Wo hat sich der Kopf vom Igel versteckt?"
+    },
+    {
+     "t": 53,
+     "label": "Zeig mit der Hand, wie sich die Stacheln anfühlen"
+    },
+    {
+     "t": 96,
+     "label": "Rate: Wie viele Münzen hält der Ballon aus?"
+    },
+    {
+     "t": 174,
+     "label": "Hattest du recht?"
+    },
+    {
+     "t": 224,
+     "label": "Wie sehen die Stacheln der Baby-Igel aus?"
+    },
+    {
+     "t": 277,
+     "label": "Erzähl: Warum hat der Igel Stacheln?"
+    }
+   ],
+   "task": {
+    "text": "Erzähl, warum der Igel Stacheln hat. Nimm es mit dem Mikrofon auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "maus-ohrenkneifer",
+   "areaId": "natur",
+   "title": "Wofür hat der Ohrenkneifer Zangen?",
+   "source": {
+    "type": "youtube",
+    "id": "1BokgWr8GcE"
+   },
+   "kanal": "Die Maus (WDR)",
+   "dauer": "7:27",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Sachgeschichte. Mit Überraschung: Ohrenkneifer können fliegen.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Erzähl: Wozu könnte die Zange gut sein?"
+    },
+    {
+     "t": 75,
+     "label": "Wie viele Beine und Fühler hat er?"
+    },
+    {
+     "t": 126,
+     "label": "Zeig mit den Armen, wie er die Zange hebt"
+    },
+    {
+     "t": 167,
+     "label": "Haben Ohrenkneifer Flügel? Was meinst du?"
+    },
+    {
+     "t": 243,
+     "label": "Wo haben sie die Ohrenkneifer gesucht?"
+    },
+    {
+     "t": 298,
+     "label": "Schau genau: Wie klappt er die Flügel aus?"
+    },
+    {
+     "t": 390,
+     "label": "Erzähl, wofür die Zange gut ist"
+    }
+   ],
+   "task": {
+    "text": "Erzähl, was du über den Ohrenkneifer gelernt hast. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "maus-elefant",
+   "areaId": "natur",
+   "title": "Wie tröten Elefanten?",
+   "source": {
+    "type": "youtube",
+    "id": "UvGZfjOuMXk"
+   },
+   "kanal": "Die Maus (WDR)",
+   "dauer": "8:18",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Sachgeschichte aus dem Zoo. Zum Mitmachen: tröten!",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Mach das Elefanten-Geräusch nach"
+    },
+    {
+     "t": 57,
+     "label": "Was lernen die Elefanten auf Kommando?"
+    },
+    {
+     "t": 110,
+     "label": "Zeig mit dem Arm, wie sich ein Rüssel bewegt"
+    },
+    {
+     "t": 180,
+     "label": "Trompete wie ein Elefant!"
+    },
+    {
+     "t": 270,
+     "label": "Erzähl, was du bis jetzt gesehen hast"
+    },
+    {
+     "t": 390,
+     "label": "Erzähl, wozu Elefanten tröten"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Elefanten-Tröten und erzähl, wie es geht. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "srf-biene",
+   "areaId": "natur",
+   "title": "Superheldin Biene",
+   "source": {
+    "type": "youtube",
+    "id": "r3G7HVzTXK4"
+   },
+   "kanal": "SRF Kids · Superhelden der Natur",
+   "dauer": "2:36",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Kurzer Tierfilm. Eine Pause in der Mitte zum Erzählen. Ohne Schritte – läuft frei, Aufgabe am Schluss.",
+   "steps": [],
+   "task": {
+    "text": "Erzähl, was die Biene besonders gut kann. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "srf-chamaeleon",
+   "areaId": "natur",
+   "title": "Superheld Chamäleon",
+   "source": {
+    "type": "youtube",
+    "id": "wn-K2DnYyUM"
+   },
+   "kanal": "SRF Kids · Superhelden der Natur",
+   "dauer": "2:32",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Kurzer Tierfilm. Ohne Schritte – läuft frei, Aufgabe am Schluss.",
+   "steps": [],
+   "task": {
+    "text": "Erzähl, was das Chamäleon besonders gut kann. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "srf-schnabeltier",
+   "areaId": "natur",
+   "title": "Superheld Schnabeltier",
+   "source": {
+    "type": "youtube",
+    "id": "7Z7vHDFl2V4"
+   },
+   "kanal": "SRF Kids · Superhelden der Natur",
+   "dauer": "2:42",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Kurzer Tierfilm. Ohne Schritte – läuft frei, Aufgabe am Schluss.",
+   "steps": [],
+   "task": {
+    "text": "Erzähl, was am Schnabeltier besonders ist. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "maerchen-bremer",
+   "areaId": "geschichten",
+   "title": "Die Bremer Stadtmusikanten",
+   "source": {
+    "type": "youtube",
+    "id": "g9TOGqVSmdI"
+   },
+   "kanal": "Deine Märchenwelt",
+   "dauer": "7:21",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Märchen der Brüder Grimm, gezeichnet. Pausen zum Raten, wie es weitergeht.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Wen trifft der Esel wohl als Nächstes?"
+    },
+    {
+     "t": 64,
+     "label": "Wer könnte noch dazukommen?"
+    },
+    {
+     "t": 132,
+     "label": "Wohin wollen die vier? Erzähl!"
+    },
+    {
+     "t": 175,
+     "label": "Was haben sie vor? Rate!"
+    },
+    {
+     "t": 228,
+     "label": "Zeig, wie die Tiere übereinander stehen"
+    },
+    {
+     "t": 277,
+     "label": "Was passiert dem Räuber im Haus?"
+    },
+    {
+     "t": 377,
+     "label": "Erzähl die Geschichte zu Ende"
+    }
+   ],
+   "task": {
+    "text": "Erzähl die Geschichte mit deinen eigenen Worten. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "maerchen-hase-igel",
+   "areaId": "geschichten",
+   "title": "Der Hase und der Igel",
+   "source": {
+    "type": "youtube",
+    "id": "A4zkaSRY1o0"
+   },
+   "kanal": "Deine Märchenwelt",
+   "dauer": "6:02",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Märchen, gezeichnet. Mit einem Trick, den man erraten kann.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Warum ist der Igel beleidigt?"
+    },
+    {
+     "t": 84,
+     "label": "Was hat der Igel vor? Rate!"
+    },
+    {
+     "t": 135,
+     "label": "Wie trickst der Igel den Hasen aus?"
+    },
+    {
+     "t": 215,
+     "label": "Wer gewinnt? Erzähl!"
+    },
+    {
+     "t": 299,
+     "label": "Erzähl die Geschichte zu Ende"
+    }
+   ],
+   "task": {
+    "text": "Erzähl, wie der Igel den Hasen ausgetrickst hat. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "wilma-mupf",
+   "areaId": "geschichten",
+   "title": "Mupf das Müllmonster",
+   "source": {
+    "type": "youtube",
+    "id": "XOO0Siywh44"
+   },
+   "kanal": "Wilma Wochenwurm (Hörspiel)",
+   "dauer": "7:00",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Hörspiel ohne viel Bild – gut zum Zuhören. Thema Müll und Aufräumen. Ohne Schritte – läuft frei, Aufgabe am Schluss.",
+   "steps": [],
+   "task": {
+    "text": "Erzähl, was Mupf gelernt hat. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "srf-pompon-zaubertrick",
+   "areaId": "geschichten",
+   "title": "Pompon: En Zaubertrick",
+   "source": {
+    "type": "youtube",
+    "id": "rib4n10OIec"
+   },
+   "kanal": "SRF Kids · Guetnachtgschichtli",
+   "dauer": "7:04",
+   "alter": "ab 4",
+   "sprache": "Schweizerdeutsch",
+   "hinweis": "Pompon der kleine Bär, auf Schweizerdeutsch. Zwei Pausen zum Nacherzählen. Ohne Schritte – läuft frei, Aufgabe am Schluss.",
+   "steps": [],
+   "task": {
+    "text": "Erzähl die Geschichte von Pompon. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "srf-pompon-hatschibum",
+   "areaId": "geschichten",
+   "title": "Pompon: Hatschibum",
+   "source": {
+    "type": "youtube",
+    "id": "M6_H_lnWJIw"
+   },
+   "kanal": "SRF Kids · Guetnachtgschichtli",
+   "dauer": "7:04",
+   "alter": "ab 4",
+   "sprache": "Schweizerdeutsch",
+   "hinweis": "Pompon der kleine Bär, auf Schweizerdeutsch. Ohne Schritte – läuft frei, Aufgabe am Schluss.",
+   "steps": [],
+   "task": {
+    "text": "Erzähl die Geschichte von Pompon. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "srf-kiri-versteckis",
+   "areaId": "geschichten",
+   "title": "Kiri und Lou: Immer wider Versteckis",
+   "source": {
+    "type": "youtube",
+    "id": "8ustPSjSugw"
+   },
+   "kanal": "SRF Kids · Guetnachtgschichtli",
+   "dauer": "4:51",
+   "alter": "ab 4",
+   "sprache": "Schweizerdeutsch",
+   "hinweis": "Zwei Dinos, auf Schweizerdeutsch. Ohne Schritte – läuft frei, Aufgabe am Schluss.",
+   "steps": [],
+   "task": {
+    "text": "Erzähl die Geschichte von Kiri und Lou. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "mathe-plus-10",
+   "areaId": "schule",
+   "title": "Plus rechnen bis 10",
+   "source": {
+    "type": "youtube",
+    "id": "__65WMUR1s4"
+   },
+   "kanal": "Grundschullehrerin Diana Wegel",
+   "dauer": "8:39",
+   "alter": "1. Klasse",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Plusaufgaben bis 10, ruhig erklärt. Pausen zum Mitrechnen. Ohne Schritte – läuft frei, Aufgabe am Schluss.",
+   "steps": [],
+   "task": {
+    "text": "Sag eine Plusaufgabe, die 10 ergibt, und nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "shaun-hitzefrei",
+   "areaId": "lustiges",
+   "title": "Shaun das Schaf: Hitzefrei",
+   "source": {
+    "type": "youtube",
+    "id": "AJeUPdHkQ1U"
+   },
+   "kanal": "Shaun das Schaf (offiziell)",
+   "dauer": "7:00",
+   "alter": "ab 4",
+   "sprache": "ohne Sprache",
+   "hinweis": "Ganze Folge, ohne Worte – für alle verständlich.",
+   "steps": [],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "shaun-maulwurf",
+   "areaId": "lustiges",
+   "title": "Shaun das Schaf: Der Maulwurfshügel",
+   "source": {
+    "type": "youtube",
+    "id": "nCQhZDgQTiY"
+   },
+   "kanal": "Shaun das Schaf (offiziell)",
+   "dauer": "7:00",
+   "alter": "ab 4",
+   "sprache": "ohne Sprache",
+   "hinweis": "Ganze Folge.",
+   "steps": [],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "shaun-bitzer",
+   "areaId": "lustiges",
+   "title": "Shaun das Schaf: Bitzer ist verliebt",
+   "source": {
+    "type": "youtube",
+    "id": "fzPomktocSs"
+   },
+   "kanal": "Shaun das Schaf (offiziell)",
+   "dauer": "7:00",
+   "alter": "ab 4",
+   "sprache": "ohne Sprache",
+   "hinweis": "Ganze Folge.",
+   "steps": [],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "srf-kiri-ueberraschigsei",
+   "areaId": "lustiges",
+   "title": "Kiri und Lou: Überraschigsei",
+   "source": {
+    "type": "youtube",
+    "id": "cGDgmSwyFAY"
+   },
+   "kanal": "SRF Kids · Guetnachtgschichtli",
+   "dauer": "4:51",
+   "alter": "ab 4",
+   "sprache": "Schweizerdeutsch",
+   "hinweis": "Auf Schweizerdeutsch.",
+   "steps": [],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "ilko-alli-zaeme",
+   "areaId": "lieder",
+   "title": "ILKO: Alli zäme",
+   "source": {
+    "type": "youtube",
+    "id": "Lv4xToo29Bw"
+   },
+   "kanal": "SRF Kids · #SayHi 2026",
+   "dauer": "3:27",
+   "alter": "ab 5",
+   "sprache": "Schweizerdeutsch",
+   "hinweis": "Das SRF-Kids-Lied 2026 gegen Ausgrenzung, Mundart. Dazu gibt es Mitmach-Videos.",
+   "steps": [],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "ilko-mitmach-1",
+   "areaId": "lieder",
+   "title": "Alli zäme – Mitmach-Video",
+   "source": {
+    "type": "youtube",
+    "id": "Juw-U4h_RZA"
+   },
+   "kanal": "SRF Kids · #SayHi 2026",
+   "dauer": "2:46",
+   "alter": "ab 5",
+   "sprache": "Schweizerdeutsch",
+   "hinweis": "Zum Mittanzen.",
+   "steps": [],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "goofe-fuchs",
+   "areaId": "lieder",
+   "title": "Lueged nöd ume, de Fuchs gaht ume",
+   "source": {
+    "type": "youtube",
+    "id": "YzJUgtyjFv8"
+   },
+   "kanal": "Schwiizergoofe",
+   "dauer": "1:41",
+   "alter": "ab 4",
+   "sprache": "Schweizerdeutsch",
+   "hinweis": "Mundart-Kinderlied, von Kindern gesungen.",
+   "steps": [],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "goofe-herr-mueller",
+   "areaId": "lieder",
+   "title": "De Herr Müller het en Hof",
+   "source": {
+    "type": "youtube",
+    "id": "bpynO08O1og"
+   },
+   "kanal": "Schwiizergoofe",
+   "dauer": "3:15",
+   "alter": "ab 4",
+   "sprache": "Schweizerdeutsch",
+   "hinweis": "Old MacDonald auf Mundart.",
+   "steps": [],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "goofe-chopf",
+   "areaId": "lieder",
+   "title": "Chopf, Schultre, Chnü und Fuess",
+   "source": {
+    "type": "youtube",
+    "id": "5VnYtr7DuRE"
+   },
+   "kanal": "Schwiizergoofe",
+   "dauer": "2:19",
+   "alter": "ab 4",
+   "sprache": "Schweizerdeutsch",
+   "hinweis": "Bewegungslied auf Mundart.",
+   "steps": [],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "bond-suneschtraal",
+   "areaId": "lieder",
+   "title": "Andrew Bond: Suneschtraal tanz emaal",
+   "source": {
+    "type": "youtube",
+    "id": "F2pwU158cd0"
+   },
+   "kanal": "Andrew Bond",
+   "dauer": "3:00",
+   "alter": "ab 4",
+   "sprache": "Schweizerdeutsch",
+   "hinweis": "Nur Ton mit Standbild – gut zum Mitsingen.",
+   "steps": [],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "bond-fruelig",
+   "areaId": "lieder",
+   "title": "Andrew Bond: Früelig isch i de Luft",
+   "source": {
+    "type": "youtube",
+    "id": "9jJE-5ciCsI"
+   },
+   "kanal": "Andrew Bond",
+   "dauer": "1:58",
+   "alter": "ab 4",
+   "sprache": "Schweizerdeutsch",
+   "hinweis": "Nur Ton mit Standbild.",
+   "steps": [],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "lichterkinder-koerperteil",
+   "areaId": "lieder",
+   "title": "Körperteil Blues",
+   "source": {
+    "type": "youtube",
+    "id": "iXFAunwnIxE"
+   },
+   "kanal": "Lichterkinder",
+   "dauer": "3:30",
+   "alter": "ab 4",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Bewegungslied mit Tanzvideo.",
+   "steps": [],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  }
+ ]
 }
