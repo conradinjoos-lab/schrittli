@@ -3774,6 +3774,4182 @@
     "text": "",
     "deliverable": "keine"
    }
+  },
+  {
+   "id": "zw-eulen-kartoffelstempel",
+   "areaId": "drucken",
+   "zeit": 15,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Eulen-Bild mit Kartoffelstempeln",
+   "source": {
+    "type": "youtube",
+    "id": "3X87V7Z2U00"
+   },
+   "kanal": "We Love Kids' Songs",
+   "dauer": "0:57",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Kurzes Mini-Projekt, passt gut in eine kurze Sequenz; Kartoffel halbieren und Kerbe schneiden nur mit Erwachsenen, dazu Farbe auf einem Teller, Pinsel, Leim und Wackelaugen bereitlegen.",
+   "material": [
+    "kartoffel",
+    "messer",
+    "farbe",
+    "pinsel",
+    "papier",
+    "teller",
+    "leim",
+    "wackelaugen"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Kartoffeln, Farbe, Pinsel, Papier"
+    },
+    {
+     "t": 7.5,
+     "label": "Kartoffel halbieren, Kerbe für Ohren schneiden"
+    },
+    {
+     "t": 16.5,
+     "label": "Kartoffel in Farbe tupfen, Eulen stempeln"
+    },
+    {
+     "t": 25.5,
+     "label": "Mit dem Pinsel braunen Ast malen"
+    },
+    {
+     "t": 29.0,
+     "label": "Grüne Blätter an den Ast tupfen"
+    },
+    {
+     "t": 32.5,
+     "label": "Gesicht und Bauch weiss malen"
+    },
+    {
+     "t": 39.5,
+     "label": "Gelben Schnabel und Füsse malen"
+    },
+    {
+     "t": 43.0,
+     "label": "Wackelaugen mit Leim aufkleben"
+    },
+    {
+     "t": 51.0,
+     "label": "Fertig – schau dein Eulenbild an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-frottage-buchstaben",
+   "areaId": "drucken",
+   "zeit": 10,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Frottage: Buchstaben durchreiben",
+   "source": {
+    "type": "youtube",
+    "id": "FV5hiOo6KKs"
+   },
+   "kanal": "Dominik Ratisbona",
+   "dauer": "1:02",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Dünnes Papier, einen weichen Bleistift und Kartonbuchstaben oder andere flache Formen zum Unterlegen bereitlegen; das Video hat keine Sprache und eignet sich als kurze Sequenz – Stolperstein ist ein verrutschendes Blatt und zu wenig Druck mit dem flach gehaltenen Stift.",
+   "material": [
+    "papier",
+    "bleistift",
+    "karton"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Welche Technik ist das?"
+    },
+    {
+     "t": 7.0,
+     "label": "Papier auf die Buchstaben, Bleistift flach ansetzen"
+    },
+    {
+     "t": 12.0,
+     "label": "Mit dem flachen Stift Streifen reiben"
+    },
+    {
+     "t": 20.0,
+     "label": "Immer weiter, bis das Wort erscheint"
+    },
+    {
+     "t": 29.0,
+     "label": "Neues Blatt auf andere Buchstaben legen"
+    },
+    {
+     "t": 36.0,
+     "label": "Stift ganz flach, dicht nebeneinander reiben"
+    },
+    {
+     "t": 46.0,
+     "label": "Weiter reiben, bis alle Buchstaben da sind"
+    },
+    {
+     "t": 54.0,
+     "label": "Fertig – schau deine Frottage an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-blumenwiese-monotypie",
+   "areaId": "drucken",
+   "zeit": 10,
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Blumenwiese drucken",
+   "source": {
+    "type": "youtube",
+    "id": "RzZS4FV5Xrg"
+   },
+   "kanal": "MGKSiegen",
+   "dauer": "2:06",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Glas- oder Plexiplatte, Linol- oder Acrylfarbe und Walze bereitstellen; Farbe nur dünn ausrollen, sonst verschmiert der Druck – Unterlage und Lappen nicht vergessen.",
+   "material": [
+    "platte",
+    "farbe",
+    "walze",
+    "papier",
+    "bleistift",
+    "stifte"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Platte, Farbe, Walze, Papier, Stift"
+    },
+    {
+     "t": 17.5,
+     "label": "Drei Farben auf die Platte drücken"
+    },
+    {
+     "t": 43.5,
+     "label": "Farbe mit der Walze gleichmässig verteilen"
+    },
+    {
+     "t": 57.5,
+     "label": "Papier auf die Farbe legen, sanft andrücken"
+    },
+    {
+     "t": 67.5,
+     "label": "Mit dem Stift Blumen aufs Papier zeichnen"
+    },
+    {
+     "t": 86.0,
+     "label": "Weiter zeichnen, bis die Wiese voll ist"
+    },
+    {
+     "t": 108.0,
+     "label": "Papier an einer Ecke vorsichtig abziehen"
+    },
+    {
+     "t": 118.0,
+     "label": "Fertig – schau deine Blumenwiese an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-blaetterdruck",
+   "areaId": "drucken",
+   "zeit": 15,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Blätterdruck mit Wasserfarben",
+   "source": {
+    "type": "youtube",
+    "id": "lY3Bmcpt2X4"
+   },
+   "kanal": "KidsLoveIT",
+   "dauer": "1:12",
+   "alter": "ab 4",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Flache Herbstblätter, Wasserfarben, Pinsel, Wasserglas, Papier und eine Unterlage bereitlegen; eignet sich für eine kurze Sequenz von etwa 15 Minuten – Stolperstein: die Unterseite des Blatts (mit den Rillen) anmalen, nicht die Oberseite.",
+   "material": [
+    "blaetter",
+    "farbe",
+    "pinsel",
+    "papier",
+    "wasser"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So entsteht ein Blätterdruck"
+    },
+    {
+     "t": 6.0,
+     "label": "Material richten: Blätter, Wasserfarben, Pinsel, Wasser, Papier"
+    },
+    {
+     "t": 14.0,
+     "label": "Zuschauen: Bunte Blätter sammeln"
+    },
+    {
+     "t": 20.0,
+     "label": "Unterseite vom Blatt mit dem Pinsel anmalen"
+    },
+    {
+     "t": 28.0,
+     "label": "Blatt mit Farbseite aufs Papier, fest andrücken"
+    },
+    {
+     "t": 36.0,
+     "label": "Blatt vorsichtig abziehen"
+    },
+    {
+     "t": 44.0,
+     "label": "Mit anderen Blättern und Farben weiterdrucken"
+    },
+    {
+     "t": 50.0,
+     "label": "Trick: Zwei Farben auf ein Blatt malen"
+    },
+    {
+     "t": 58.0,
+     "label": "Zuschauen: Herbstbild als Karte oder fürs Fenster"
+    },
+    {
+     "t": 65.0,
+     "label": "Fertig – schau dein Herbstbild an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-blaetterdruck-anhaenger",
+   "areaId": "drucken",
+   "zeit": 10,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Geschenkanhänger mit Blätterdruck",
+   "source": {
+    "type": "youtube",
+    "id": "rIFv3sZSu24"
+   },
+   "kanal": "shesmile DIY",
+   "dauer": "0:42",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Kurzes Video ohne Sprache, nur Texteinblendungen – eignet sich für eine kurze Sequenz; frische, flache Blätter mit kräftigen Adern mitbringen, Blatt mit der Aderseite nach oben unter dünnes Papier legen und den Farbstift flach halten.",
+   "material": [
+    "blaetter",
+    "papier",
+    "stifte",
+    "schere",
+    "schnur"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Blätter sammeln"
+    },
+    {
+     "t": 3.5,
+     "label": "Blatt unter Papier, mit Farbstift abreiben"
+    },
+    {
+     "t": 19.0,
+     "label": "Abgeriebene Blätter ausschneiden"
+    },
+    {
+     "t": 25.5,
+     "label": "Namen auf die Blätter schreiben"
+    },
+    {
+     "t": 29.5,
+     "label": "Anhänger mit Schnur ans Geschenk binden"
+    },
+    {
+     "t": 33.0,
+     "label": "Fertig – schau deinen Anhänger an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-papier-becher",
+   "areaId": "falten",
+   "zeit": 5,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Becher aus Papier falten",
+   "source": {
+    "type": "youtube",
+    "id": "16hZk5Nklk8"
+   },
+   "kanal": "Kikisweb.de",
+   "dauer": "1:32",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Nur ein quadratisches Blatt Papier nötig, eignet sich für eine kurze Sequenz; das Video ist ohne Sprache, Stolperstein sind die beiden Ecken, die genau bis zur gegenüberliegenden Kante gefaltet werden müssen.",
+   "material": [
+    "papier",
+    "wasser"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: quadratisches Blatt Papier"
+    },
+    {
+     "t": 2.5,
+     "label": "Blatt zum Dreieck falten, Spitze nach oben"
+    },
+    {
+     "t": 11.0,
+     "label": "Rechte Ecke zur linken Kante falten"
+    },
+    {
+     "t": 17.5,
+     "label": "Linke Ecke zur rechten Kante falten"
+    },
+    {
+     "t": 23.0,
+     "label": "Obere Spitze nach vorne in die Tasche stecken"
+    },
+    {
+     "t": 38.5,
+     "label": "Umdrehen, andere Spitze nach hinten in die Tasche"
+    },
+    {
+     "t": 58.5,
+     "label": "Becher an den Seiten aufdrücken"
+    },
+    {
+     "t": 79.5,
+     "label": "Wasser einfüllen und ausprobieren"
+    },
+    {
+     "t": 84.0,
+     "label": "Fertig – schau deinen Becher an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-origami-katze",
+   "areaId": "falten",
+   "zeit": 10,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Origami-Katze falten",
+   "source": {
+    "type": "youtube",
+    "id": "AXCQOs3_5Sg"
+   },
+   "kanal": "Fun & Creative Channel",
+   "dauer": "1:29",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Ein quadratisches Papier (Origami-Papier) und Stifte für das Gesicht; das Video zeigt nur Hände ohne Erklärung, eignet sich für eine kurze Sequenz von etwa 10 Minuten – Stolperstein: beide Ohren gleich schräg und gleich hoch falten.",
+   "material": [
+    "papier",
+    "stifte"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: quadratisches Papier, Stifte"
+    },
+    {
+     "t": 5.0,
+     "label": "Weisse Seite oben, diagonal zum Dreieck falten"
+    },
+    {
+     "t": 16.5,
+     "label": "Dreieck drehen, Spitze nach oben"
+    },
+    {
+     "t": 23.0,
+     "label": "Dreieck in der Mitte falten, wieder öffnen"
+    },
+    {
+     "t": 43.5,
+     "label": "Obere Spitze ein Stück nach unten falten"
+    },
+    {
+     "t": 52.5,
+     "label": "Rechte Ecke schräg nach oben falten: Ohr"
+    },
+    {
+     "t": 58.5,
+     "label": "Linke Ecke genauso falten: zweites Ohr"
+    },
+    {
+     "t": 69.0,
+     "label": "Untere Spitze nach hinten falten, umdrehen"
+    },
+    {
+     "t": 73.5,
+     "label": "Gesicht malen: Augen, Nase, Schnurrhaare"
+    },
+    {
+     "t": 80.0,
+     "label": "Fertig – schau deine Katze an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-origami-hund",
+   "areaId": "falten",
+   "zeit": 10,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Origami-Hund aus Papier",
+   "source": {
+    "type": "youtube",
+    "id": "KU81_gI4af8"
+   },
+   "kanal": "Pinaria - Einfach Basteln",
+   "dauer": "1:43",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Mini-Projekt für eine kurze Sequenz (ca. 10 Minuten): quadratisches Papier, Wackelaugen und ein kleines blaues Papierdreieck als Nase bereitlegen; die Kinder müssen beim Drehen des Dreiecks genau hinschauen.",
+   "material": [
+    "papier",
+    "wackelaugen",
+    "stifte",
+    "leim",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: zwei fertige Papierhunde"
+    },
+    {
+     "t": 7.0,
+     "label": "Papier als Raute legen, zum Dreieck falten"
+    },
+    {
+     "t": 24.0,
+     "label": "Dreieck drehen: Spitze zeigt nach unten"
+    },
+    {
+     "t": 28.5,
+     "label": "Rechte Ecke schräg nach unten falten: Ohr"
+    },
+    {
+     "t": 35.5,
+     "label": "Linke Ecke genauso falten: zweites Ohr"
+    },
+    {
+     "t": 53.5,
+     "label": "Obere Spitze nach hinten falten"
+    },
+    {
+     "t": 57.5,
+     "label": "Untere Spitze nach oben falten: Schnauze"
+    },
+    {
+     "t": 68.0,
+     "label": "Wackelaugen und blaue Nase aufkleben"
+    },
+    {
+     "t": 84.5,
+     "label": "Mund mit Stift zeichnen"
+    },
+    {
+     "t": 94.0,
+     "label": "Fertig – schau deinen Hund an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-melonenfaecher",
+   "areaId": "falten",
+   "zeit": 15,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Melonenfächer aus Papier",
+   "source": {
+    "type": "youtube",
+    "id": "htmw4qrFR7o"
+   },
+   "kanal": "ARD Kinder und Familie",
+   "dauer": "1:00",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Mini-Projekt für eine kurze Sequenz (ca. 15 Minuten): zwei Blatt Papier längs halbieren, drei Streifen anmalen, falten und zusammenkleben; Eisstiele als Griffe bereitlegen, das Klebeband unten ist der Stolperstein.",
+   "material": [
+    "papier",
+    "stifte",
+    "schere",
+    "leim",
+    "klebeband",
+    "eisstiel",
+    "lineal",
+    "bleistift"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten, zwei Blatt Papier längs halbieren"
+    },
+    {
+     "t": 5.5,
+     "label": "Drei Streifen anmalen wie eine Melone"
+    },
+    {
+     "t": 9.5,
+     "label": "Streifen wie eine Ziehharmonika falten"
+    },
+    {
+     "t": 25.0,
+     "label": "Drei Teile zu einem langen Streifen kleben"
+    },
+    {
+     "t": 33.5,
+     "label": "Unten zusammendrücken, mit Klebeband umwickeln"
+    },
+    {
+     "t": 43.0,
+     "label": "Eisstiele als Griffe an die Seiten kleben"
+    },
+    {
+     "t": 50.5,
+     "label": "Fertig – schau deinen Fächer an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-filzseife",
+   "areaId": "filzen",
+   "zeit": 15,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Seife mit Wolle umfilzen",
+   "source": {
+    "type": "youtube",
+    "id": "0jhesQq2ET0"
+   },
+   "kanal": "Frau WerkenundGestalten",
+   "dauer": "1:39",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Mini-Projekt für eine kurze Sequenz (ca. 15 Min.): pro Kind ein Stück Seife, Filzwolle, Waschlappen und eine Schale warmes Wasser; die Wolle muss die Seife lückenlos umhüllen, sonst löst sie sich beim Reiben.",
+   "material": [
+    "seife",
+    "filzwolle",
+    "wasser",
+    "schuessel",
+    "handtuch"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Seife, Filzwolle, Waschlappen, warmes Wasser"
+    },
+    {
+     "t": 8.0,
+     "label": "Weisse Wolle in dünne Streifen zupfen"
+    },
+    {
+     "t": 18.0,
+     "label": "Streifen dicht nebeneinander, farbige Wolle drauf"
+    },
+    {
+     "t": 25.0,
+     "label": "Wollteppich umdrehen, Seife in die Mitte"
+    },
+    {
+     "t": 41.5,
+     "label": "Seife von allen Seiten einwickeln, andrücken"
+    },
+    {
+     "t": 51.5,
+     "label": "Warmes Wasser darauf träufeln"
+    },
+    {
+     "t": 56.5,
+     "label": "Seife von einer Hand in die andere legen"
+    },
+    {
+     "t": 69.5,
+     "label": "Mit den Händen fest reiben"
+    },
+    {
+     "t": 79.0,
+     "label": "Seife mit dem Waschlappen abtrocknen"
+    },
+    {
+     "t": 89.0,
+     "label": "Fertig – schau deine Filzseife an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-osternest",
+   "areaId": "filzen",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Osternest nass filzen",
+   "source": {
+    "type": "youtube",
+    "id": "Nlv7WyHj5JU"
+   },
+   "kanal": "Filzpackerl.at Shop Frankenburg",
+   "dauer": "2:36",
+   "alter": "ab 7",
+   "sprache": "ohne Sprache",
+   "hinweis": "Nassfilzen über einer Schablone aus dünnem Schaumstoff (Moosgummi) auf Noppenfolie oder Backblech mit warmem Seifenwasser; viel Reiben nötig, zum Schluss mit Essigwasser spülen und lange Trockenzeit einplanen.",
+   "material": [
+    "filzwolle",
+    "moosgummi",
+    "schere",
+    "seife",
+    "wasser",
+    "noppenfolie",
+    "schuessel",
+    "handtuch"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: das fertige Osternest"
+    },
+    {
+     "t": 8.5,
+     "label": "Schablone: Kreis zeichnen und ausschneiden"
+    },
+    {
+     "t": 17.5,
+     "label": "Rosa Wolle um die Schablone wickeln"
+    },
+    {
+     "t": 36.0,
+     "label": "Grüne Wolle rundherum wickeln"
+    },
+    {
+     "t": 53.0,
+     "label": "Auf Noppenfolie, Seifenwasser darauf, flach reiben"
+    },
+    {
+     "t": 73.0,
+     "label": "Umdrehen, Ränder besonders gut reiben"
+    },
+    {
+     "t": 87.0,
+     "label": "Im klaren Wasser spülen, im Handtuch ausdrücken"
+    },
+    {
+     "t": 96.0,
+     "label": "Zwei Öffnungen schneiden, Henkel stehen lassen"
+    },
+    {
+     "t": 106.0,
+     "label": "Umstülpen, Schablone raus, innen weiterfilzen"
+    },
+    {
+     "t": 129.5,
+     "label": "Mit Essigwasser spülen, ausdrücken, in Form ziehen"
+    },
+    {
+     "t": 151.0,
+     "label": "Fertig – schau dein Osternest an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-eierwaermer-filzen",
+   "areaId": "filzen",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Eierwärmer trocken filzen",
+   "source": {
+    "type": "youtube",
+    "id": "uzfcTV4zSQM"
+   },
+   "kanal": "wocomoKIDS",
+   "dauer": "2:11",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Filznadeln sind sehr spitz: langsam und senkrecht stechen, Haltehand weg von der Nadel; Schablone (Halbkreis) vorher auf Papier zeichnen und mit Stecknadeln auf Schaumstoff feststecken.",
+   "material": [
+    "filzwolle",
+    "filznadel",
+    "schaumstoff",
+    "papier",
+    "stecknadeln",
+    "ei"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Lara und Lilly lernen Trockenfilzen"
+    },
+    {
+     "t": 13.0,
+     "label": "Material richten: Filzwolle, Filznadel, Schaumstoff, Schablone"
+    },
+    {
+     "t": 19.3,
+     "label": "Schablone feststecken, Wolle drauflegen, Nadel einstechen"
+    },
+    {
+     "t": 41.6,
+     "label": "Etwas Wolle zusammenrollen, auf die Form drücken"
+    },
+    {
+     "t": 51.9,
+     "label": "Weiter pickern, bis die Wolle fest verfilzt ist"
+    },
+    {
+     "t": 63.9,
+     "label": "Filz vorsichtig von der Schablone lösen"
+    },
+    {
+     "t": 69.1,
+     "label": "Filz zum Hütchen zusammenlegen, Naht festfilzen"
+    },
+    {
+     "t": 81.5,
+     "label": "Hütchen mit bunten Punkten verzieren"
+    },
+    {
+     "t": 91.7,
+     "label": "Zuschauen: Fertig ist das Erdbeer-Hütchen"
+    },
+    {
+     "t": 121.2,
+     "label": "Fertig – setz den Eierwärmer aufs Ei"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-zauberstein",
+   "areaId": "filzen",
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Zauberstein aus Filzwolle",
+   "source": {
+    "type": "youtube",
+    "id": "x1WEljb9bWc"
+   },
+   "kanal": "Trolle & Wolle",
+   "dauer": "4:43",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Der Ball muss vor dem Aufschneiden ganz trocken sein (anderer Tag); Aufschneiden nur durch Erwachsene mit scharfem Messer und Handtuch als Schutz.",
+   "material": [
+    "filzwolle",
+    "steine",
+    "wasser",
+    "seife",
+    "handtuch",
+    "messer",
+    "schere",
+    "essig"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Stein, Filzwolle, Wasser, Seife"
+    },
+    {
+     "t": 14.5,
+     "label": "Wolle in dünnen Schichten bereitlegen"
+    },
+    {
+     "t": 29.5,
+     "label": "Stein stramm in die erste Farbe wickeln"
+    },
+    {
+     "t": 37.5,
+     "label": "Nächste Farben darüber, in alle Richtungen"
+    },
+    {
+     "t": 82.5,
+     "label": "Ball nass machen, Hände gut einseifen"
+    },
+    {
+     "t": 98.5,
+     "label": "Ball ganz sanft in der Hand kreisen"
+    },
+    {
+     "t": 150.0,
+     "label": "Jetzt fester drücken und rollen"
+    },
+    {
+     "t": 185.0,
+     "label": "Fest kneten, dann ausspülen und trocknen lassen"
+    },
+    {
+     "t": 216.0,
+     "label": "Zuschauen: Erwachsene schneiden den Ball auf"
+    },
+    {
+     "t": 272.5,
+     "label": "Fertig – schau deinen Zauberstein an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-ton-regeln",
+   "areaId": "formen",
+   "stufen": [
+    3,
+    4
+   ],
+   "title": "Regeln beim Arbeiten mit Ton",
+   "source": {
+    "type": "youtube",
+    "id": "EqeomFl47FU"
+   },
+   "kanal": "Fachlehrerin N.K",
+   "dauer": "1:36",
+   "alter": "ab 8",
+   "sprache": "ohne Sprache",
+   "hinweis": "Regel-Video ohne Stimme, nur Text und Musik: Ton, ein feuchtes Tuch und einen Plastiksack bereitlegen; Stolperstein ist das Kneten, das Luft in den Ton bringt – der Ton wird geschlagen, nicht geknetet.",
+   "material": [
+    "ton",
+    "handtuch"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Die Regeln beim Arbeiten mit Ton"
+    },
+    {
+     "t": 5.0,
+     "label": "Zuschauen: Ton trocknet schnell aus"
+    },
+    {
+     "t": 12.0,
+     "label": "Darum immer zügig arbeiten"
+    },
+    {
+     "t": 18.5,
+     "label": "Ton nicht kneten, sonst kommt Luft hinein"
+    },
+    {
+     "t": 32.0,
+     "label": "Ton 10 Mal auf den Tisch schlagen"
+    },
+    {
+     "t": 47.0,
+     "label": "Zuschauen: So kann die Luft entweichen"
+    },
+    {
+     "t": 53.0,
+     "label": "Zuschauen: So reisst der Ton beim Brennen nicht"
+    },
+    {
+     "t": 71.0,
+     "label": "Tonreste in ein feuchtes Tuch wickeln"
+    },
+    {
+     "t": 80.5,
+     "label": "Unfertiges Werkstück im Plastiksack lagern"
+    },
+    {
+     "t": 89.0,
+     "label": "Fertig – jetzt bist du der Ton-Profi"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-kleister-pappmache",
+   "areaId": "formen",
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Kleister für Pappmaché anrühren",
+   "source": {
+    "type": "youtube",
+    "id": "F5HKkTFEYXc"
+   },
+   "kanal": "Schule und Familie",
+   "dauer": "1:25",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Kleister aus Mehl, Wasser und Salz anrühren, dann Zeitungsstreifen auf einen Ballon kleistern; Tisch mit Zeitung abdecken, die Mischung soll dick wie Pudding sein, drei bis vier Schichten und lange Trockenzeit einplanen.",
+   "material": [
+    "mehl",
+    "wasser",
+    "salz",
+    "schuessel",
+    "loeffel",
+    "zeitung",
+    "luftballon",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Mehl, Salz, Wasser, Schüssel, Löffel, Zeitung"
+    },
+    {
+     "t": 34.0,
+     "label": "Zeitung auf den Tisch legen"
+    },
+    {
+     "t": 41.0,
+     "label": "Mehl, Wasser und Salz in die Schüssel"
+    },
+    {
+     "t": 46.5,
+     "label": "Rühren, bis der Kleister dick ist"
+    },
+    {
+     "t": 52.0,
+     "label": "Zeitung in 5 cm breite Streifen schneiden"
+    },
+    {
+     "t": 60.5,
+     "label": "Streifen eintunken, zwischen den Fingern abstreifen"
+    },
+    {
+     "t": 67.0,
+     "label": "Streifen auf den Ballon legen, 3 Schichten"
+    },
+    {
+     "t": 72.5,
+     "label": "Fertig – schau die Pappmaché-Figuren an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-ton-schildkroete",
+   "areaId": "formen",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Schildkröte aus Ton",
+   "source": {
+    "type": "youtube",
+    "id": "Qr9Rt96_Tcg"
+   },
+   "kanal": "Reitmayr Keramik",
+   "dauer": "1:23",
+   "alter": "ab 7",
+   "sprache": "ohne Sprache",
+   "hinweis": "Ton, kleine Schüssel als Form, Holzspatel und feuchter Schwamm; der Panzer wird im Video kurz geföhnt – sonst vor dem Stürzen etwas antrocknen lassen, und alle Teile gut von innen andrücken.",
+   "material": [
+    "ton",
+    "schuessel",
+    "holzspatel",
+    "schwamm",
+    "wasser"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Kleine Tonplättchen in eine Schüssel drücken"
+    },
+    {
+     "t": 16.0,
+     "label": "Innen glatt drücken, föhnen, Panzer stürzen"
+    },
+    {
+     "t": 19.5,
+     "label": "Vier Beine, Kopf und Schwanz formen"
+    },
+    {
+     "t": 36.0,
+     "label": "Rand anrauen, Beine und Kopf innen andrücken"
+    },
+    {
+     "t": 44.0,
+     "label": "Umdrehen, Kopf und Beine zurechtdrücken"
+    },
+    {
+     "t": 55.5,
+     "label": "Panzer anheben, Teile von innen festdrücken"
+    },
+    {
+     "t": 63.5,
+     "label": "Mit feuchtem Schwamm glätten"
+    },
+    {
+     "t": 69.5,
+     "label": "Augen, Mund und Zehen einritzen"
+    },
+    {
+     "t": 79.0,
+     "label": "Fertig – schau deine Schildkröte an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-fadenring",
+   "areaId": "haekeln",
+   "zeit": 5,
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "title": "Fadenring (Magic Ring) häkeln",
+   "source": {
+    "type": "youtube",
+    "id": "c3Vcks7keys"
+   },
+   "kanal": "Hobbii Germany",
+   "dauer": "0:51",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Kurze Mini-Technik, eignet sich für eine kurze Sequenz von etwa 5 Minuten: Wolle und Häkelnadel genügen, Luftmaschen sollten die Kinder schon können, Stolperstein ist das Halten des Fadenkreuzes auf den Fingern.",
+   "material": [
+    "wolle",
+    "haekelnadel",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Wolle, Häkelnadel, Schere"
+    },
+    {
+     "t": 4.4,
+     "label": "Fadenende zwischen Daumen und Zeigefinger klemmen"
+    },
+    {
+     "t": 7.5,
+     "label": "Faden um Zeige- und Mittelfinger, hinten festhalten"
+    },
+    {
+     "t": 16.5,
+     "label": "Nadel von oben unter den oberen Faden"
+    },
+    {
+     "t": 21.0,
+     "label": "Unteren Faden greifen und zurückziehen"
+    },
+    {
+     "t": 24.0,
+     "label": "Schlaufe einmal um sich selbst drehen"
+    },
+    {
+     "t": 27.0,
+     "label": "Eine Luftmasche häkeln, Ring ist fixiert"
+    },
+    {
+     "t": 30.5,
+     "label": "Jetzt in den Ring hineinhäkeln"
+    },
+    {
+     "t": 37.5,
+     "label": "Am kurzen Ende ziehen, Ring festziehen"
+    },
+    {
+     "t": 40.0,
+     "label": "Fertig – schau deinen Fadenring an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-fadenring-linkshaender",
+   "areaId": "haekeln",
+   "zeit": 5,
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "title": "Fadenring häkeln für Linkshänder",
+   "source": {
+    "type": "youtube",
+    "id": "okSdLwnOHRI"
+   },
+   "kanal": "Hobbii Germany",
+   "dauer": "0:51",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Mini-Technik für Linkshänder (Faden in der rechten Hand, Nadel in der linken): Wolle und Häkelnadel bereitlegen; eignet sich für eine kurze Sequenz von wenigen Minuten, Stolperstein ist das Festhalten des Fadenkreuzes mit Ring- und Kleinfinger.",
+   "material": [
+    "wolle",
+    "haekelnadel",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Wolle, Häkelnadel, Schere"
+    },
+    {
+     "t": 4.4,
+     "label": "Fadenende zwischen Daumen und Zeigefinger klemmen"
+    },
+    {
+     "t": 8.0,
+     "label": "Faden um Zeige- und Mittelfinger, hinten festhalten"
+    },
+    {
+     "t": 17.0,
+     "label": "Nadel unter den oberen Faden schieben"
+    },
+    {
+     "t": 22.0,
+     "label": "Unteren Faden greifen und zurückziehen"
+    },
+    {
+     "t": 25.5,
+     "label": "Schlaufe einmal um sich selbst drehen"
+    },
+    {
+     "t": 28.5,
+     "label": "Eine Luftmasche häkeln, das hält den Ring"
+    },
+    {
+     "t": 32.0,
+     "label": "Jetzt in den Ring hineinhäkeln"
+    },
+    {
+     "t": 37.5,
+     "label": "Am kurzen Faden ziehen, Ring zuziehen"
+    },
+    {
+     "t": 40.0,
+     "label": "Fertig – schau deinen Fadenring an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-luftmaschen-linkshaender",
+   "areaId": "haekeln",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Luftmaschen für Linkshänder",
+   "source": {
+    "type": "youtube",
+    "id": "vPdTchRxy1Y"
+   },
+   "kanal": "Kreatives Werken",
+   "dauer": "3:46",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Video für Linkshänder (Nadel links, Faden über die rechte Hand); Material Wolle und Häkelnadel, Stolperstein ist die Anfangsschlinge mit dem Knoten.",
+   "material": [
+    "wolle",
+    "haekelnadel"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Wolle und Häkelnadel, Fadenende links"
+    },
+    {
+     "t": 12.5,
+     "label": "Schlinge legen wie ein L"
+    },
+    {
+     "t": 23.5,
+     "label": "Faden durch die Schlinge, Knoten festziehen"
+    },
+    {
+     "t": 51.0,
+     "label": "Nadel von unten in die Schlinge, festziehen"
+    },
+    {
+     "t": 76.5,
+     "label": "Zuschauen: langer Faden kommt auf die rechte Hand"
+    },
+    {
+     "t": 90.0,
+     "label": "Zeigefinger hinter den Faden, Knoten festhalten"
+    },
+    {
+     "t": 115.0,
+     "label": "Haken nach unten drehen, Faden durchziehen"
+    },
+    {
+     "t": 129.5,
+     "label": "Zuschauen: Fadenspannung regulieren"
+    },
+    {
+     "t": 148.5,
+     "label": "Nadel um den Faden, durchziehen, immer weiter"
+    },
+    {
+     "t": 203.5,
+     "label": "Fertig – schau deine Luftmaschen an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-feilen-teelichthalter",
+   "areaId": "holz",
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "title": "Teelichthalter feilen und raspeln",
+   "source": {
+    "type": "youtube",
+    "id": "Dl6fncjiPtE"
+   },
+   "kanal": "die Werklehrerin",
+   "dauer": "1:04",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Holzklotz mit vorgebohrtem Teelichtloch, Dreikant-, Flach- und Halbrundfeile, Raspel und Schraubstock bereitlegen; Stolperstein ist die Haltung: eine Hand am Heft, die Finger der anderen nur leicht vorne auf dem Blatt, und nur beim Vorwärtsschieben drücken.",
+   "material": [
+    "holzklotz",
+    "feile",
+    "raspel",
+    "schraubstock",
+    "kerze"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Teelichthalter aus Holz mit Kerben"
+    },
+    {
+     "t": 3.0,
+     "label": "Material richten: Feilen, Raspel, Holzklotz"
+    },
+    {
+     "t": 10.0,
+     "label": "Zuschauen: Dreikant-, Flach- und Halbrundfeile"
+    },
+    {
+     "t": 17.0,
+     "label": "Zuschauen: Raspel mit grossen Zähnen"
+    },
+    {
+     "t": 24.4,
+     "label": "Holzklotz in den Schraubstock spannen"
+    },
+    {
+     "t": 28.7,
+     "label": "Eine Hand am Heft, Finger vorne aufs Blatt"
+    },
+    {
+     "t": 40.0,
+     "label": "Kanten mit der Feile glätten"
+    },
+    {
+     "t": 43.9,
+     "label": "Zuschauen: Fertige Teelichthalter anschauen"
+    },
+    {
+     "t": 58.5,
+     "label": "Fertig – schau deinen Teelichthalter an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-holzauto",
+   "areaId": "holz",
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "title": "Kleines Auto aus Holz",
+   "source": {
+    "type": "youtube",
+    "id": "qwl_Z2h5mRA"
+   },
+   "kanal": "Die Werkkiste",
+   "dauer": "2:19",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Bausatz-Projekt mit Holzleiste, 4 Rädern, Schrauben und je 2 Unterlegscheiben pro Rad; dazu Bleistift, Schraubstock, Nagel und Holzkugel bereitlegen – Vorbohren und Nageln der Kugel mit Erwachsenen.",
+   "material": [
+    "holzbrett",
+    "holzraeder",
+    "schrauben",
+    "schraubendreher",
+    "saege",
+    "raspel",
+    "schleifpapier",
+    "hammer"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Mike zeigt das fertige Auto"
+    },
+    {
+     "t": 9.7,
+     "label": "Material richten: Leiste, Räder, Schrauben, Kugel, Nagel"
+    },
+    {
+     "t": 37.3,
+     "label": "Spitze Form vorne auf die Leiste zeichnen"
+    },
+    {
+     "t": 47.5,
+     "label": "Ecken mit der Säge absägen"
+    },
+    {
+     "t": 50.5,
+     "label": "Kanten mit Raspel und Feile rund machen"
+    },
+    {
+     "t": 67.2,
+     "label": "Löcher für die Räder vorbohren, gleich hoch"
+    },
+    {
+     "t": 83.2,
+     "label": "Alles mit Schleifpapier glatt schleifen"
+    },
+    {
+     "t": 88.0,
+     "label": "Einspannen, Räder mit 2 Scheiben anschrauben"
+    },
+    {
+     "t": 111.4,
+     "label": "Holzkugel hinten mit Nagel festhämmern"
+    },
+    {
+     "t": 118.4,
+     "label": "Fertig – schau dein Auto an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-igel-holz",
+   "areaId": "holz",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Igel aus Holz mit Nägeln",
+   "source": {
+    "type": "youtube",
+    "id": "uLU0VRnBYW4"
+   },
+   "kanal": "Die Werkkiste",
+   "dauer": "2:45",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Holzklotz (Fichte, ca. 3 cm dick) sägen, feilen, schleifen und mit vielen kurzen Nägeln bestücken – Schraubstock oder Schraubzwinge, Bleistift und Zange bereitlegen; Nägel dürfen nicht durch das Holz gehen.",
+   "material": [
+    "holzklotz",
+    "naegel",
+    "hammer",
+    "saege",
+    "schleifpapier",
+    "wackelaugen",
+    "perle",
+    "leim"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht der Igel aus"
+    },
+    {
+     "t": 14.2,
+     "label": "Material richten: Holz, Nägel, Wackelaugen, Holzkugel"
+    },
+    {
+     "t": 44.1,
+     "label": "Schnittlinien für den Kopf anzeichnen"
+    },
+    {
+     "t": 55.4,
+     "label": "Holz einspannen, Ecken absägen"
+    },
+    {
+     "t": 58.9,
+     "label": "Kanten feilen, alles glatt schleifen"
+    },
+    {
+     "t": 74.4,
+     "label": "Linie anzeichnen, Holz festklemmen"
+    },
+    {
+     "t": 91.3,
+     "label": "Viele Nägel bis zur Linie einschlagen"
+    },
+    {
+     "t": 110.6,
+     "label": "Wackelaugen aufkleben"
+    },
+    {
+     "t": 117.6,
+     "label": "Leim auf die Nase, Holzkugel annageln"
+    },
+    {
+     "t": 131.1,
+     "label": "Fertig – schau deinen Igel an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-schiebeknoten",
+   "areaId": "knuepfen",
+   "zeit": 10,
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Schiebeknoten fürs Freundschaftsband",
+   "source": {
+    "type": "youtube",
+    "id": "Bz4nbqFQU88"
+   },
+   "kanal": "Kreativ mit Miss B",
+   "dauer": "1:56",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Braucht ein fertiges Freundschaftsband (oder eine geknüpfte Schnur) und eine Schere; eignet sich für eine kurze Sequenz von etwa 10 Minuten. Stolperstein: den zweiten Knoten machen, bevor der erste angezogen wird.",
+   "material": [
+    "garn",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Armband mit Schiebeknoten"
+    },
+    {
+     "t": 10.0,
+     "label": "Material richten: Freundschaftsband und Schere"
+    },
+    {
+     "t": 21.0,
+     "label": "Eine Seite: Knoten mit beiden Fadenenden"
+    },
+    {
+     "t": 31.5,
+     "label": "Andere Seite: Enden über die anderen, ein A"
+    },
+    {
+     "t": 47.5,
+     "label": "Enden von unten ins A stecken"
+    },
+    {
+     "t": 57.0,
+     "label": "Normalen Knoten über den oberen Faden machen"
+    },
+    {
+     "t": 63.5,
+     "label": "Nicht anziehen, gleichen Knoten nochmals machen"
+    },
+    {
+     "t": 70.0,
+     "label": "Beide Knoten anziehen, dann hin- und herschieben"
+    },
+    {
+     "t": 93.5,
+     "label": "Überschüssige Fäden abschneiden"
+    },
+    {
+     "t": 107.0,
+     "label": "Armband ums Handgelenk legen, Band zuziehen"
+    },
+    {
+     "t": 113.5,
+     "label": "Fertig – schau dein Armband an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-scoubidou-rund",
+   "areaId": "knuepfen",
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "title": "Rundes Scoubidou-Geflecht",
+   "source": {
+    "type": "youtube",
+    "id": "Gg4h12vXvoY"
+   },
+   "kanal": "Dreadlock Doris",
+   "dauer": "4:01",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Pro Kind 2 Scoubidou-Bänder in 2 Farben; der Anfangsknoten (zwei Bänder in der Mitte verknotet) muss vorher gemacht sein – Stolperstein: die Schlaufen beim zweiten Knoten immer dort legen, wo vorher die andere Farbe war.",
+   "material": [
+    "scoubidou",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So wird das runde Geflecht"
+    },
+    {
+     "t": 5.0,
+     "label": "Schnüre abwechselnd sortieren: weiss, lila, weiss, lila"
+    },
+    {
+     "t": 20.0,
+     "label": "Beide weissen Schnüre über eine lila legen"
+    },
+    {
+     "t": 30.0,
+     "label": "Lila Schnüre durch die Schlaufen stecken"
+    },
+    {
+     "t": 47.5,
+     "label": "Erst weiss festziehen, dann lila, mit Fingern nachziehen"
+    },
+    {
+     "t": 66.0,
+     "label": "Weiss dorthin legen, wo vorher lila war"
+    },
+    {
+     "t": 93.0,
+     "label": "Lila durch hintere Schlaufe stecken, festziehen"
+    },
+    {
+     "t": 120.0,
+     "label": "Dritter Knoten: lila Schlaufen, weiss durchstecken, festziehen"
+    },
+    {
+     "t": 161.5,
+     "label": "Immer so weiter: noch zwei Knoten"
+    },
+    {
+     "t": 193.0,
+     "label": "Und nochmals: Schlaufen, durchstecken, festziehen"
+    },
+    {
+     "t": 227.5,
+     "label": "Fertig – schau dein Geflecht an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-fadenspiel-stern",
+   "areaId": "knuepfen",
+   "zeit": 5,
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "title": "Fadenspiel: Der Stern",
+   "source": {
+    "type": "youtube",
+    "id": "HDn_SuJJpfQ"
+   },
+   "kanal": "Warum! Magazin",
+   "dauer": "2:23",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Eine zum Ring geknotete Schnur (ca. 2 m, doppelt gelegt) genügt; knifflig ist das Holen der Fäden von unten – eignet sich gut für eine kurze Sequenz von wenigen Minuten.",
+   "material": [
+    "schnur"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Fadenschlaufe doppelt legen"
+    },
+    {
+     "t": 19.0,
+     "label": "Daumen und kleine Finger in die Schlaufe"
+    },
+    {
+     "t": 28.0,
+     "label": "Mittelfinger holt Handflächenfaden der anderen Hand"
+    },
+    {
+     "t": 40.5,
+     "label": "Anderer Mittelfinger genauso, zurück in Position"
+    },
+    {
+     "t": 51.0,
+     "label": "Daumen aus der Schlaufe, straff ziehen"
+    },
+    {
+     "t": 60.0,
+     "label": "Daumen holen unten den Faden am kleinen Finger"
+    },
+    {
+     "t": 85.0,
+     "label": "Kleine Finger raus, straff ziehen"
+    },
+    {
+     "t": 90.0,
+     "label": "Kleine Finger holen den schrägen Faden von unten"
+    },
+    {
+     "t": 116.0,
+     "label": "Mittelfaden mit Zähnen fassen, Daumen rein, festziehen"
+    },
+    {
+     "t": 138.0,
+     "label": "Fertig – schau deinen Stern an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-brezelknoten",
+   "areaId": "knuepfen",
+   "zeit": 5,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Brezelknoten binden",
+   "source": {
+    "type": "youtube",
+    "id": "Ir_S-Kx0EQs"
+   },
+   "kanal": "digital4teacher",
+   "dauer": "1:09",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Eine dicke Schnur pro Kind genügt; eignet sich für eine kurze Sequenz von etwa 5 Minuten. Stolperstein: den Knoten erst fest ziehen, wenn er am richtigen Platz sitzt.",
+   "material": [
+    "schnur"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht der Brezelknoten aus"
+    },
+    {
+     "t": 17.0,
+     "label": "Lege eine Schlaufe"
+    },
+    {
+     "t": 21.5,
+     "label": "Der Faden liegt über der Schlaufe"
+    },
+    {
+     "t": 27.5,
+     "label": "Faden von unten durch die Schlaufe"
+    },
+    {
+     "t": 34.0,
+     "label": "Leicht anziehen, die Brezel entsteht"
+    },
+    {
+     "t": 44.0,
+     "label": "Knoten mit dem Finger verschieben"
+    },
+    {
+     "t": 52.0,
+     "label": "Platz passt? An beiden Enden ziehen"
+    },
+    {
+     "t": 57.0,
+     "label": "Zuschauen: Knoten wieder lösen"
+    },
+    {
+     "t": 65.0,
+     "label": "Fertig – schau deinen Knoten an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-fadenspiel-maus",
+   "areaId": "knuepfen",
+   "zeit": 5,
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Fadenspiel: Die Maus",
+   "source": {
+    "type": "youtube",
+    "id": "s3YRQjPfVH4"
+   },
+   "kanal": "Waldorf-Ideen-Pool",
+   "dauer": "2:25",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Pro Kind eine zum Ring geknotete Schnur (etwa 1.5 m); eignet sich für eine kurze Sequenz von etwa 5 Minuten. Stolperstein: die beiden Fäden müssen immer parallel und unverdreht liegen, sonst erscheint die Maus nicht.",
+   "material": [
+    "schnur"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Die Maus im Fadenspiel"
+    },
+    {
+     "t": 19.5,
+     "label": "Zuschauen: Einmal schnell vorgezeigt"
+    },
+    {
+     "t": 44.0,
+     "label": "Faden um den kleinen Finger, parallel halten"
+    },
+    {
+     "t": 59.0,
+     "label": "Drei Finger holen den unteren Faden"
+    },
+    {
+     "t": 73.5,
+     "label": "Fäden hinter den Daumen, nicht verdreht"
+    },
+    {
+     "t": 88.5,
+     "label": "Vier Finger holen den unteren Faden"
+    },
+    {
+     "t": 106.5,
+     "label": "Finger etwas auseinanderziehen"
+    },
+    {
+     "t": 112.5,
+     "label": "Daumen rausziehen – die Maus erscheint"
+    },
+    {
+     "t": 122.5,
+     "label": "Rechte Hand zieht nach unten – Maus weg"
+    },
+    {
+     "t": 134.0,
+     "label": "Fertig – zeig jemandem deine Maus"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-knopf-annaehen",
+   "areaId": "naehen",
+   "zeit": 10,
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Knopf annähen",
+   "source": {
+    "type": "youtube",
+    "id": "34NZtWTYd7Y"
+   },
+   "kanal": "Karins Herzenssachen",
+   "dauer": "2:21",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Mini-Projekt für eine kurze Sequenz (ca. 10 Minuten): Stoffrest, Zweilochknopf, Nadel, Garn, Schere und einen Stift zum Markieren bereitlegen; Stolperstein ist das doppelte Garn mit der Schlaufe zum Befestigen ohne Knoten – kurz vorzeigen.",
+   "material": [
+    "knopf",
+    "nadel",
+    "garn",
+    "stoff",
+    "schere",
+    "bleistift"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Stoff, Knopf, Nadel, Garn, Schere"
+    },
+    {
+     "t": 16.0,
+     "label": "Mit Stift markieren, wo der Knopf hinkommt"
+    },
+    {
+     "t": 22.0,
+     "label": "Garn doppelt nehmen, offene Enden einfädeln"
+    },
+    {
+     "t": 40.0,
+     "label": "Einstechen, Garn nur bis zur Schlaufe ziehen"
+    },
+    {
+     "t": 50.5,
+     "label": "Nadel durch die Schlaufe, festziehen"
+    },
+    {
+     "t": 62.5,
+     "label": "Stoff falten, Knopf dahinter halten"
+    },
+    {
+     "t": 69.0,
+     "label": "Durch Knopfloch und Stoff nähen, zwei- bis dreimal"
+    },
+    {
+     "t": 92.0,
+     "label": "Knopf zurückklappen, Garn zwei- bis dreimal herumwickeln"
+    },
+    {
+     "t": 103.0,
+     "label": "Nadel durch den Steg und die Schlaufe, festziehen"
+    },
+    {
+     "t": 117.5,
+     "label": "Garn abschneiden"
+    },
+    {
+     "t": 121.0,
+     "label": "Fertig – schau deinen Knopf an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-nadel-einfaedeln",
+   "areaId": "naehen",
+   "zeit": 5,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Nadel einfädeln: 3 Tricks",
+   "source": {
+    "type": "youtube",
+    "id": "7QD0A4gabUU"
+   },
+   "kanal": "digital4teacher",
+   "dauer": "1:34",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Nähnadel mit grossem Öhr, Nähgarn und ein schmaler Papierstreifen bereitlegen; das Video zeigt drei Tricks nacheinander (Finger, Schlaufe, Papierstreifen), der Papierstreifen-Trick klappt für Kinder am sichersten – eignet sich für eine kurze Sequenz.",
+   "material": [
+    "nadel",
+    "garn",
+    "papier"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Tipp 1: Faden ganz kurz fassen"
+    },
+    {
+     "t": 7.5,
+     "label": "Nadelöhr von oben auf den Faden setzen"
+    },
+    {
+     "t": 13.0,
+     "label": "Fadenende glatt drehen, nochmals versuchen"
+    },
+    {
+     "t": 27.0,
+     "label": "Tipp 2: Faden eng um die Nadel legen"
+    },
+    {
+     "t": 35.5,
+     "label": "Nadel herausziehen, Schlaufe gut festhalten"
+    },
+    {
+     "t": 41.5,
+     "label": "Nadelöhr auf die Schlaufe, Faden durchschieben"
+    },
+    {
+     "t": 56.0,
+     "label": "Tipp 3: Papierstreifen in der Mitte falten"
+    },
+    {
+     "t": 67.0,
+     "label": "Papierstreifen durchs Nadelöhr schieben, Öse öffnen"
+    },
+    {
+     "t": 75.5,
+     "label": "Faden durch die Papieröse, Streifen zurückziehen"
+    },
+    {
+     "t": 88.0,
+     "label": "Fertig – schau deine Nadel an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-anfangsknoten",
+   "areaId": "naehen",
+   "zeit": 5,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Anfangsknoten im Faden",
+   "source": {
+    "type": "youtube",
+    "id": "b-61RARbk5I"
+   },
+   "kanal": "ich_lerne",
+   "dauer": "3:12",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Mini-Technik für eine kurze Sequenz (ca. 5 Minuten): nur Nadel und Garn nötig; Stolperstein ist das Festhalten der Wicklungen zwischen Daumen und Zeigefinger, während die Nadel herausgezogen wird.",
+   "material": [
+    "garn",
+    "nadel"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Nadel und Faden"
+    },
+    {
+     "t": 4.0,
+     "label": "Faden durch das Nadelöhr fädeln"
+    },
+    {
+     "t": 11.5,
+     "label": "Fadenenden zusammenlegen, Faden glatt streichen"
+    },
+    {
+     "t": 37.0,
+     "label": "Nadel zwischen linken Daumen und Zeigefinger halten"
+    },
+    {
+     "t": 50.5,
+     "label": "Fadenenden über die Nadel legen, kurz überstehen"
+    },
+    {
+     "t": 93.0,
+     "label": "Schlaufe sechsmal um die Nadel wickeln"
+    },
+    {
+     "t": 116.0,
+     "label": "Kringel zusammenschieben und unter den Fingern festhalten"
+    },
+    {
+     "t": 134.5,
+     "label": "Nadel mit rechts vorsichtig herausziehen"
+    },
+    {
+     "t": 156.0,
+     "label": "Faden ziehen bis zum Ende"
+    },
+    {
+     "t": 174.0,
+     "label": "Fertig – Finger öffnen, schau deinen Knoten an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-filzmaeppchen",
+   "areaId": "naehen",
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "title": "Stiftemäppchen aus Filz",
+   "source": {
+    "type": "youtube",
+    "id": "hHFghFqwnhI"
+   },
+   "kanal": "Kindergarten Schloss Falkenegg",
+   "dauer": "2:48",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Filzstück (ca. A4, selbst gefilzt oder Bastelfilz) mit einer am Rand angenähten Schnur, festes Gummiband, Nadel, Garn und die eigenen Stifte bereitlegen; das Video richtet sich an Eltern – zwischen den Schlaufen immer etwas Gummi frei lassen, sonst passt der Stift nicht hinein.",
+   "material": [
+    "filz",
+    "gummiband",
+    "nadel",
+    "garn",
+    "schnur",
+    "stifte",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Filzmäppchen und fertiges Werk"
+    },
+    {
+     "t": 41.5,
+     "label": "Material richten: Filz, Gummiband, Nadel, Garn"
+    },
+    {
+     "t": 50.5,
+     "label": "Gummiband am Rand neben der Schnur festnähen"
+    },
+    {
+     "t": 67.5,
+     "label": "Gummi um den Radiergummi legen, festnähen"
+    },
+    {
+     "t": 74.0,
+     "label": "Ein Stück Gummi frei lassen, dann festnähen"
+    },
+    {
+     "t": 92.5,
+     "label": "Immer so weiter: Stift rein, Platz lassen, nähen"
+    },
+    {
+     "t": 114.5,
+     "label": "Zuschauen: 13 Schlaufen für alle Stifte"
+    },
+    {
+     "t": 144.5,
+     "label": "Mäppchen mit den Stiften aufrollen"
+    },
+    {
+     "t": 151.0,
+     "label": "Schnur herumwickeln und zubinden"
+    },
+    {
+     "t": 161.5,
+     "label": "Fertig – schau dein Mäppchen an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-blaetter-tiere",
+   "areaId": "schneiden",
+   "zeit": 10,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Tiere aus Herbstblättern",
+   "source": {
+    "type": "youtube",
+    "id": "CXxvF0ACYgQ"
+   },
+   "kanal": "We Love Kids' Songs.",
+   "dauer": "0:49",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Zeitraffer ohne Erklärung, eignet sich für eine kurze Sequenz; flache, trockene Herbstblätter und einen schwarzen Filzstift bereitlegen.",
+   "material": [
+    "blaetter",
+    "papier",
+    "leim",
+    "stifte"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Blätter, Papier, Leim, Stifte"
+    },
+    {
+     "t": 7.5,
+     "label": "Grosses Blatt einleimen und aufs Papier kleben"
+    },
+    {
+     "t": 12.0,
+     "label": "Zwei kleinere Blätter dazukleben"
+    },
+    {
+     "t": 18.0,
+     "label": "Stacheln auf den Igel zeichnen"
+    },
+    {
+     "t": 21.5,
+     "label": "Auge, Nase und Beine zeichnen"
+    },
+    {
+     "t": 31.5,
+     "label": "Augen und Füsse für die anderen Tiere"
+    },
+    {
+     "t": 38.5,
+     "label": "Punkte, Striche und ein Herz dazumalen"
+    },
+    {
+     "t": 45.4,
+     "label": "Fertig – schau deine Blätter-Tiere an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-schneeflocke",
+   "areaId": "schneiden",
+   "zeit": 10,
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Schneeflocke aus Papier",
+   "source": {
+    "type": "youtube",
+    "id": "KFR_zBwP2P8"
+   },
+   "kanal": "Sterne basteln",
+   "dauer": "1:15",
+   "alter": "ab 7",
+   "sprache": "ohne Sprache",
+   "hinweis": "Pro Kind ein Papierquadrat 11×11 cm (dünnes Papier, sonst wird das Schneiden durch die Lagen zu hart), Schere und Bleistift; eignet sich als kurze Sequenz von etwa 10 Minuten, Stolperstein ist das Falten des Dreiecks in drei gleiche Teile.",
+   "material": [
+    "papier",
+    "schere",
+    "bleistift"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Papier 11×11 cm, Schere, Bleistift"
+    },
+    {
+     "t": 5.0,
+     "label": "Papier in der Mitte falten"
+    },
+    {
+     "t": 14.5,
+     "label": "Nochmals in der Mitte falten: kleines Quadrat"
+    },
+    {
+     "t": 22.5,
+     "label": "Quadrat zum Dreieck falten"
+    },
+    {
+     "t": 29.5,
+     "label": "Dreieck in drei Teile falten"
+    },
+    {
+     "t": 38.0,
+     "label": "Die Spitzen oben gerade abschneiden"
+    },
+    {
+     "t": 46.5,
+     "label": "Muster mit Bleistift aufzeichnen"
+    },
+    {
+     "t": 56.5,
+     "label": "Muster auf den Linien ausschneiden"
+    },
+    {
+     "t": 59.5,
+     "label": "Vorsichtig auffalten"
+    },
+    {
+     "t": 69.5,
+     "label": "Fertig – schau deine Schneeflocke an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-blaetterente",
+   "areaId": "schneiden",
+   "zeit": 10,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Ente aus Blättern",
+   "source": {
+    "type": "youtube",
+    "id": "PJS_xo-GjYc"
+   },
+   "kanal": "Kinderoutdoor Kinderoutdoor",
+   "dauer": "1:16",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Mini-Projekt für eine kurze Sequenz (ca. 10 Min.), am besten draussen: pro Kind ein grosses weiches Blatt (z. B. Ampfer) und ein langes Grasblatt; der Schlitz wird mit dem Messer geschnitten, das macht die Lehrperson oder es braucht Aufsicht.",
+   "material": [
+    "blaetter",
+    "taschenmesser",
+    "wasser"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Der Mann erklärt die Blätter-Ente"
+    },
+    {
+     "t": 17.5,
+     "label": "Ein grosses Blatt und ein langes Gras suchen"
+    },
+    {
+     "t": 25.0,
+     "label": "Ins lange Gras einen Knoten binden: Kopf"
+    },
+    {
+     "t": 33.5,
+     "label": "Gras mit dem Messer schmal schneiden"
+    },
+    {
+     "t": 39.5,
+     "label": "Schlitz ins grosse Blatt schneiden"
+    },
+    {
+     "t": 47.0,
+     "label": "Gras durch den Schlitz stecken: Hals und Kopf"
+    },
+    {
+     "t": 55.0,
+     "label": "Ente aufs Wasser setzen und zuschauen"
+    },
+    {
+     "t": 63.5,
+     "label": "Fertig – schau deine Ente an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-scherenschnitt-blume",
+   "areaId": "schneiden",
+   "zeit": 10,
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Scherenschnitt-Blume fürs Fenster",
+   "source": {
+    "type": "youtube",
+    "id": "dQMzazTOJe4"
+   },
+   "kanal": "Happy Shabby",
+   "dauer": "1:19",
+   "alter": "ab 7",
+   "sprache": "ohne Sprache",
+   "hinweis": "Im Video wird der Kreis mit einem Kreisschneider ausgeschnitten – Kinder zeichnen ihn mit dem Zirkel und schneiden ihn aus; dünnes Papier nehmen, sonst lässt sich das achtfach gefaltete Dreieck kaum schneiden.",
+   "material": [
+    "papier",
+    "schere",
+    "zirkel",
+    "stifte"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Blume und Schneeflocke aus Papier"
+    },
+    {
+     "t": 6.2,
+     "label": "Kreis aufs Papier zeichnen und ausschneiden"
+    },
+    {
+     "t": 10.2,
+     "label": "Kreis dreimal in der Mitte falten"
+    },
+    {
+     "t": 17.9,
+     "label": "Blütenblatt-Form aufs Dreieck zeichnen"
+    },
+    {
+     "t": 29.5,
+     "label": "Der Linie entlang ausschneiden"
+    },
+    {
+     "t": 37.8,
+     "label": "Vorsichtig auseinanderfalten: die Blume"
+    },
+    {
+     "t": 45.0,
+     "label": "Zweiter Kreis: falten, Muster zeichnen"
+    },
+    {
+     "t": 56.9,
+     "label": "Muster ausschneiden, auch die Löcher"
+    },
+    {
+     "t": 65.6,
+     "label": "Auseinanderfalten: die Schneeflocke"
+    },
+    {
+     "t": 72.6,
+     "label": "Fertig – schau deine Blumen an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-tischlaterne",
+   "areaId": "schneiden",
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "title": "Tischlaterne aus einem Blatt",
+   "source": {
+    "type": "youtube",
+    "id": "ghhuDYmPQG0"
+   },
+   "kanal": "Lifehackerin",
+   "dauer": "2:15",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Nur ein A4-Blatt, Klebestift, Schere und Lineal; die zehn Diagonalfalze mit dem Lineal brauchen Genauigkeit, und das Teelicht gehört ins Glas (besser LED-Teelicht) und nie unbeaufsichtigt.",
+   "material": [
+    "papier",
+    "leim",
+    "schere",
+    "lineal",
+    "glas",
+    "kerze"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: die fertige Tischlaterne"
+    },
+    {
+     "t": 8.0,
+     "label": "Material richten: Papier, Klebestift, Schere, Lineal"
+    },
+    {
+     "t": 16.0,
+     "label": "Schmalen Streifen 2 cm umklappen"
+    },
+    {
+     "t": 20.5,
+     "label": "Mitte falten, öffnen, beide Seiten zur Mitte"
+    },
+    {
+     "t": 29.5,
+     "label": "Das Gleiche der Länge nach: 16 Rechtecke"
+    },
+    {
+     "t": 39.6,
+     "label": "Diagonalen mit Lineal falten, dann alles öffnen"
+    },
+    {
+     "t": 60.7,
+     "label": "Streifen unten wegschneiden, drei Linien einschneiden"
+    },
+    {
+     "t": 69.8,
+     "label": "Andere Seite doppelt umknicken bis zur Querlinie"
+    },
+    {
+     "t": 76.6,
+     "label": "Klebstoff drauf, Seiten und Boden zusammenkleben"
+    },
+    {
+     "t": 85.8,
+     "label": "Rauten eindrücken, Teelicht im Glas hineinstellen"
+    },
+    {
+     "t": 96.0,
+     "label": "Fertig – schau deine Laterne an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-menschenkette",
+   "areaId": "schneiden",
+   "zeit": 10,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Menschenkette aus Papier",
+   "source": {
+    "type": "youtube",
+    "id": "rU1KJcpfBqg"
+   },
+   "kanal": "ibz.karlsruhe",
+   "dauer": "1:06",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Mini-Projekt für eine kurze Sequenz (ca. 10 Min.): pro Kind ein farbiges Blatt, Schere und Bleistift; die Hände des Männchens müssen bis an beide Faltkanten reichen und dürfen nicht abgeschnitten werden, sonst zerfällt die Kette.",
+   "material": [
+    "papier",
+    "schere",
+    "bleistift"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: farbiges Papier, Schere, Bleistift"
+    },
+    {
+     "t": 7.5,
+     "label": "Zuschauen: so sieht die Menschenkette aus"
+    },
+    {
+     "t": 13.0,
+     "label": "Papier der Länge nach in der Mitte falten"
+    },
+    {
+     "t": 17.0,
+     "label": "Streifen wie eine Ziehharmonika falten"
+    },
+    {
+     "t": 21.5,
+     "label": "Männchen zeichnen, Hände bis zum Rand"
+    },
+    {
+     "t": 31.0,
+     "label": "Ausschneiden, Hände am Rand stehen lassen"
+    },
+    {
+     "t": 44.0,
+     "label": "Kette vorsichtig auseinanderfalten"
+    },
+    {
+     "t": 54.0,
+     "label": "Fertig – schau deine Menschenkette an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-stoecke-schnitzen-1",
+   "areaId": "schnitzen",
+   "zeit": 10,
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "title": "Stöcke schnitzen: Ast absägen",
+   "source": {
+    "type": "youtube",
+    "id": "38sCB0cw5f0"
+   },
+   "kanal": "Haus des Kindes",
+   "dauer": "1:03",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Teil 1 zeigt nur das Aussuchen und Absägen eines Haselstocks (Säge, kurzes Schnitzmesser, Spannbock) – eignet sich für eine kurze Sequenz draussen; Säge und Messer nur mit Erwachsenen, vorher die Schnitzregeln besprechen (Schnitzhandschuh, vom Körper weg schneiden, sitzen, Abstand).",
+   "material": [
+    "ast",
+    "saege",
+    "taschenmesser",
+    "schnitzhandschuh",
+    "schraubstock"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Stöcke schnitzen im Frühling"
+    },
+    {
+     "t": 7.0,
+     "label": "Material richten: Baumsäge und Schnitzmesser"
+    },
+    {
+     "t": 12.0,
+     "label": "Zuschauen: Schnitzmesser mit Griff und kurzer Klinge"
+    },
+    {
+     "t": 32.4,
+     "label": "Geraden jungen Ast am Busch aussuchen"
+    },
+    {
+     "t": 37.0,
+     "label": "Ast mit der Säge gerade absägen"
+    },
+    {
+     "t": 45.9,
+     "label": "Stock einspannen und Ende gerade absägen"
+    },
+    {
+     "t": 55.0,
+     "label": "Zuschauen: Wanderstock, etwa ein Meter lang"
+    },
+    {
+     "t": 58.5,
+     "label": "Fertig – schau deinen Stock an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-zauberstab",
+   "areaId": "schnitzen",
+   "zeit": 15,
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "title": "Zauberstab aus Ast schnitzen",
+   "source": {
+    "type": "youtube",
+    "id": "5KEApj-jwLY"
+   },
+   "kanal": "Anke Krieger",
+   "dauer": "3:23",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Nur mit Erwachsenen und nach den Schnitzregeln (sitzen, feste Unterlage, Klinge vom Körper weg, Schnitzhandschuh an der Haltehand, Messer danach sofort zuklappen); im Video wird ein feststehendes Messer und ein Bastband benutzt, mit Taschenmesser und Schnur geht es genauso.",
+   "material": [
+    "ast",
+    "taschenmesser",
+    "schnitzhandschuh",
+    "schnur",
+    "holzbrett"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Ast, Messer, Band, Unterlage"
+    },
+    {
+     "t": 29.5,
+     "label": "Ast aufsetzen, Spitze vom Körper weg schnitzen"
+    },
+    {
+     "t": 59.0,
+     "label": "Ast drehen, Spitze rundherum schnitzen"
+    },
+    {
+     "t": 89.0,
+     "label": "Messer sicher in die Hülle stecken"
+    },
+    {
+     "t": 96.0,
+     "label": "Band um die Spitze knoten"
+    },
+    {
+     "t": 120.0,
+     "label": "Beide Enden gleich lang machen"
+    },
+    {
+     "t": 129.0,
+     "label": "Enden kreuzen, von unten nach oben binden"
+    },
+    {
+     "t": 169.0,
+     "label": "Enden mit dem Messer abschneiden"
+    },
+    {
+     "t": 176.5,
+     "label": "Oben einen doppelten Knoten machen"
+    },
+    {
+     "t": 186.0,
+     "label": "Fertig – schau deinen Zauberstab an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-eule-schnitzen",
+   "areaId": "schnitzen",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Eule aus einer Astgabel",
+   "source": {
+    "type": "youtube",
+    "id": "6DgsAPeiJCw"
+   },
+   "kanal": "Kinderoutdoor",
+   "dauer": "1:34",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Nur mit Erwachsenen und nach den Schnitzregeln (Schnitzhandschuh an der Haltehand, immer vom Körper weg, sitzend, Abstand zu anderen); pro Kind eine frische Astgabel mit etwa fingerdicken Zweigen, die Gabelspitzen werden die Ohren.",
+   "material": [
+    "ast",
+    "taschenmesser",
+    "schnitzhandschuh"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht die fertige Eule aus"
+    },
+    {
+     "t": 26.5,
+     "label": "Material richten: Taschenmesser, Astgabel"
+    },
+    {
+     "t": 30.0,
+     "label": "Kopf schnitzen: Rinde über der Gabel weg"
+    },
+    {
+     "t": 36.7,
+     "label": "Ohren schnitzen: beide Gabelspitzen zuspitzen"
+    },
+    {
+     "t": 43.5,
+     "label": "Augen und Schnabel in die Rinde ritzen"
+    },
+    {
+     "t": 51.0,
+     "label": "Rinde rund um Augen und Schnabel entfernen"
+    },
+    {
+     "t": 56.9,
+     "label": "Zuschauen: die fertige Eule"
+    },
+    {
+     "t": 85.5,
+     "label": "Fertig – schau deine Eule an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-schnitzregeln",
+   "areaId": "schnitzen",
+   "stufen": [
+    3,
+    4,
+    5,
+    6
+   ],
+   "title": "Schnitzregeln fürs Taschenmesser",
+   "source": {
+    "type": "youtube",
+    "id": "RMzThMtbKIw"
+   },
+   "kanal": "Peter Diethelm",
+   "dauer": "1:20",
+   "alter": "ab 8",
+   "sprache": "ohne Sprache",
+   "hinweis": "Schnitzen nur mit Erwachsenen: Das Video zeigt ohne Ton neun Regeln als Texteinblendungen (sitzen, vom Körper weg schneiden, eine Armlänge Abstand, nur ein Werkzeug aufklappen, Messer zuklappen und nur geschlossen weitergeben); Taschenmesser, frischen Ast und Schnitzhandschuh bereitlegen und jede Regel am Stopp gemeinsam vormachen.",
+   "material": [
+    "taschenmesser",
+    "ast",
+    "schnitzhandschuh"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: die neun Schnitzregeln"
+    },
+    {
+     "t": 4.2,
+     "label": "Regel 1: Wer schnitzt, der sitzt"
+    },
+    {
+     "t": 15.2,
+     "label": "Regel 2: vom Körper weg schneiden"
+    },
+    {
+     "t": 20.9,
+     "label": "Regel 3: eine Armlänge Abstand halten"
+    },
+    {
+     "t": 30.8,
+     "label": "Regel 4: nur mit scharfer Klinge schnitzen"
+    },
+    {
+     "t": 39.8,
+     "label": "Regel 5: nur ein Werkzeug aufklappen"
+    },
+    {
+     "t": 49.4,
+     "label": "Regel 6: Messer zuklappen, wenn nicht gebraucht"
+    },
+    {
+     "t": 59.0,
+     "label": "Regel 7: Messer nur geschlossen weitergeben"
+    },
+    {
+     "t": 66.5,
+     "label": "Zuschauen: keine Bäume ritzen, keine Waffe"
+    },
+    {
+     "t": 76.2,
+     "label": "Fertig – du kennst die Schnitzregeln"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-stock-spitzen",
+   "areaId": "schnitzen",
+   "zeit": 10,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Stock spitz schnitzen",
+   "source": {
+    "type": "youtube",
+    "id": "dU0D6tiV1_0"
+   },
+   "kanal": "Be_creative_wme",
+   "dauer": "1:10",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Kurzes Mini-Projekt (ca. 10 Min.), eignet sich für eine kurze Sequenz oder den Waldtag: ein dicker Ast wird mit dem Taschenmesser gespitzt, ein dünner Ast mit einem Bleistiftspitzer (Spitzer bereitlegen, nicht im Vokabular); nur mit Erwachsenen schnitzen und die Schnitzregeln beachten (sitzen, Schnitzhandschuh an der Haltehand, immer vom Körper weg, Messer nach Gebrauch schliessen).",
+   "material": [
+    "ast",
+    "taschenmesser",
+    "schnitzhandschuh"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Ast, Taschenmesser, Spitzer"
+    },
+    {
+     "t": 3.0,
+     "label": "Mit dem Messer vom Körper weg schnitzen"
+    },
+    {
+     "t": 12.0,
+     "label": "Ast drehen und weiter schnitzen"
+    },
+    {
+     "t": 16.0,
+     "label": "Spitze prüfen, sonst weiter schnitzen"
+    },
+    {
+     "t": 20.0,
+     "label": "Dünnen Ast nehmen, Spitzer holen"
+    },
+    {
+     "t": 23.0,
+     "label": "Ast in den Spitzer stecken und drehen"
+    },
+    {
+     "t": 37.0,
+     "label": "Spitze anschauen: fein wie ein Bleistift"
+    },
+    {
+     "t": 42.5,
+     "label": "Zuschauen: Beide Spitzen vergleichen"
+    },
+    {
+     "t": 49.5,
+     "label": "Fertig – schau deinen spitzen Stock an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-wassermuehle",
+   "areaId": "schnitzen",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Wassermühle mit dem Taschenmesser",
+   "source": {
+    "type": "youtube",
+    "id": "f2C87WDoS3M"
+   },
+   "kanal": "Kinderoutdoor",
+   "dauer": "1:22",
+   "alter": "ab 9",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Schnitzen nur mit Erwachsenen und nach den Schnitzregeln (sitzen, Abstand, vom Körper weg schnitzen, Schnitzhandschuh an der Haltehand, Klinge zuklappen beim Ablegen); nötig sind Taschenmesser mit Säge, frische Äste und ein Bach oder eine Wasserschale zum Ausprobieren – der Ton ist undeutlich, die Bilder zeigen die Schritte.",
+   "material": [
+    "taschenmesser",
+    "saege",
+    "ast",
+    "schnitzhandschuh"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: die fertige Wassermühle im Bach"
+    },
+    {
+     "t": 10.0,
+     "label": "Material richten: Taschenmesser mit Säge, Äste"
+    },
+    {
+     "t": 29.0,
+     "label": "Kerbe in den Ast schnitzen"
+    },
+    {
+     "t": 33.0,
+     "label": "Mit der Säge den Ast durchsägen"
+    },
+    {
+     "t": 40.5,
+     "label": "Achse am Ende spitz schnitzen"
+    },
+    {
+     "t": 47.0,
+     "label": "Achse in den Ast stecken"
+    },
+    {
+     "t": 50.0,
+     "label": "Flache Blätter schnitzen, in die Schlitze stecken"
+    },
+    {
+     "t": 56.0,
+     "label": "Mühle ins fliessende Wasser halten"
+    },
+    {
+     "t": 61.6,
+     "label": "Fertig – schau deine Wassermühle an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-astdose",
+   "areaId": "schnitzen",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Dose aus einem Ast",
+   "source": {
+    "type": "youtube",
+    "id": "sYCSQAl17Wk"
+   },
+   "kanal": "Kinderoutdoor",
+   "dauer": "1:49",
+   "alter": "ab 9",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Nur mit Erwachsenen und nach den Schnitzregeln (sitzen, Klinge vom Körper weg, Schnitzhandschuh an der Haltehand): trockener Holunderast mit weichem Mark und ein Taschenmesser mit Säge; das Aushöhlen braucht Geduld.",
+   "material": [
+    "ast",
+    "taschenmesser",
+    "saege",
+    "schnitzhandschuh"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: die fertige Astdose"
+    },
+    {
+     "t": 4.0,
+     "label": "Zuschauen: Dose mit Deckel, so wird sie"
+    },
+    {
+     "t": 29.0,
+     "label": "Zuschauen: trockener Holunderast und Taschenmesser"
+    },
+    {
+     "t": 43.5,
+     "label": "Material richten: Ast, Taschenmesser mit Säge"
+    },
+    {
+     "t": 51.5,
+     "label": "Mit der Säge ein Stück absägen"
+    },
+    {
+     "t": 55.6,
+     "label": "Zweites Stück absägen: Deckel und Dose"
+    },
+    {
+     "t": 62.1,
+     "label": "Dose mit dem Messer aushöhlen"
+    },
+    {
+     "t": 69.6,
+     "label": "Deckel zurechtschnitzen, bis er passt"
+    },
+    {
+     "t": 78.1,
+     "label": "Zuschauen: Deckel drauf, alles aus einem Stück"
+    },
+    {
+     "t": 90.5,
+     "label": "Fertig – schau deine Astdose an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-knoetchenstich",
+   "areaId": "sticken",
+   "zeit": 10,
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "title": "Knötchenstich sticken",
+   "source": {
+    "type": "youtube",
+    "id": "1HI5uN02NmY"
+   },
+   "kanal": "Pumora stickt",
+   "dauer": "2:25",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Kurze Sequenz, die Schritte werden mit Texteinblendungen erklärt: Stickgarn, Nadel und Stoff im Stickrahmen bereitlegen; Stolperstein: die Nadel gleich neben dem Austrittsloch einstechen (nicht ins gleiche Loch) und den Faden beim Durchziehen straff halten.",
+   "material": [
+    "garn",
+    "nadel",
+    "stoff",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht der Knötchenstich aus"
+    },
+    {
+     "t": 15.5,
+     "label": "Nadel hochstechen, kleinen Stich zum Verankern"
+    },
+    {
+     "t": 28.5,
+     "label": "Nadel wieder von unten nach oben stechen"
+    },
+    {
+     "t": 34.0,
+     "label": "Faden um die Nadel wickeln"
+    },
+    {
+     "t": 39.5,
+     "label": "Nadel gleich neben dem Loch einstechen"
+    },
+    {
+     "t": 42.5,
+     "label": "Faden straff halten, Nadel nach unten ziehen"
+    },
+    {
+     "t": 53.0,
+     "label": "Zweites Knötchen gleich daneben machen"
+    },
+    {
+     "t": 72.8,
+     "label": "Zuschauen: Tipp – zwei Finger unter den Stoff"
+    },
+    {
+     "t": 100.0,
+     "label": "Immer so weiter, Knötchen an Knötchen"
+    },
+    {
+     "t": 139.5,
+     "label": "Fertig – schau deine Knötchen an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-stielstich",
+   "areaId": "sticken",
+   "zeit": 10,
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "title": "Stielstich sticken",
+   "source": {
+    "type": "youtube",
+    "id": "3TDN585KIHU"
+   },
+   "kanal": "Pumora stickt",
+   "dauer": "3:01",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Kurze Sequenz, die Schritte werden mit Texteinblendungen erklärt: Stickgarn (2-fädig), Sticknadel und Stoff im Stickrahmen bereitlegen; Stolperstein: die Nadel immer genau in der Mitte des letzten Stichs hochbringen und den Faden stets auf derselben Seite der Linie halten.",
+   "material": [
+    "garn",
+    "nadel",
+    "stoff",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht der Stielstich aus"
+    },
+    {
+     "t": 11.0,
+     "label": "Material richten: Stoff im Rahmen, Garn, Nadel"
+    },
+    {
+     "t": 16.5,
+     "label": "Nadel hochstechen, einen langen Stich sticken"
+    },
+    {
+     "t": 25.5,
+     "label": "Nadel in der Mitte des Stichs hochbringen"
+    },
+    {
+     "t": 35.5,
+     "label": "Nächster Stich: gleich weit nach vorn"
+    },
+    {
+     "t": 43.5,
+     "label": "Immer so weiter: Mitte hoch, Stich vor"
+    },
+    {
+     "t": 55.5,
+     "label": "Zuschauen: Nähmethode, Nadel in einem Zug durch"
+    },
+    {
+     "t": 86.5,
+     "label": "Gerade Linie sticken, Faden immer auf gleicher Seite"
+    },
+    {
+     "t": 140.0,
+     "label": "Weiter sticken bis ans Ende der Linie"
+    },
+    {
+     "t": 161.4,
+     "label": "Fertig – schau Vorder- und Rückseite an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-kreuzstich",
+   "areaId": "sticken",
+   "zeit": 10,
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Kreuzstich sticken",
+   "source": {
+    "type": "youtube",
+    "id": "42D200Rh08o"
+   },
+   "kanal": "HandarbeitenHeimann",
+   "dauer": "1:20",
+   "alter": "ab 7",
+   "sprache": "ohne Sprache",
+   "hinweis": "Kurze Sequenz ohne Sprache, ideal als Mini-Technik (ca. 10 Minuten): Stickstoff mit sichtbaren Löchern (Aida), stumpfe Sticknadel und Garn bereitlegen; Stolperstein ist der Richtungswechsel beim Deckstich, da hilft es, zuerst alle Schrägstriche nach rechts und erst dann alle zurück nach links zu sticken.",
+   "material": [
+    "stoff",
+    "garn",
+    "nadel",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Kreuzstich – das lernst du jetzt"
+    },
+    {
+     "t": 4.0,
+     "label": "Material richten: Stickstoff, Nadel, Garn"
+    },
+    {
+     "t": 8.0,
+     "label": "Nadel von hinten durch ein Loch stechen"
+    },
+    {
+     "t": 12.1,
+     "label": "Schräg nach oben einstechen: ein halbes Kreuz"
+    },
+    {
+     "t": 18.5,
+     "label": "Immer so weiter: Schrägstriche nach rechts"
+    },
+    {
+     "t": 36.5,
+     "label": "Zurück nach links: schräg darüber kreuzen"
+    },
+    {
+     "t": 47.0,
+     "label": "Immer so weiter, bis alle Kreuze fertig sind"
+    },
+    {
+     "t": 58.8,
+     "label": "Zuschauen: fertige Reihe, vorne und hinten"
+    },
+    {
+     "t": 69.5,
+     "label": "Fertig – schau deine Kreuzstiche an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-kettenstich",
+   "areaId": "sticken",
+   "zeit": 10,
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Kettenstich sticken",
+   "source": {
+    "type": "youtube",
+    "id": "QthTh1JwQLA"
+   },
+   "kanal": "HandarbeitenHeimann",
+   "dauer": "0:58",
+   "alter": "ab 7",
+   "sprache": "ohne Sprache",
+   "hinweis": "Mini-Technik Kettenstich, eignet sich für eine kurze Sequenz: Stickgarn, Sticknadel und grober Stoff (Aida) mit vorgezeichneter Linie, kein Stickrahmen nötig; Stolperstein: der Faden muss unter der Nadelspitze liegen, bevor man durchzieht.",
+   "material": [
+    "garn",
+    "nadel",
+    "stoff",
+    "bleistift",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Der Kettenstich"
+    },
+    {
+     "t": 4.0,
+     "label": "Von hinten hoch, im gleichen Loch wieder rein"
+    },
+    {
+     "t": 8.5,
+     "label": "Weiter unten ausstechen, Faden unter die Nadel"
+    },
+    {
+     "t": 11.0,
+     "label": "Faden durchziehen, die erste Schlinge ist da"
+    },
+    {
+     "t": 14.0,
+     "label": "In der Schlinge einstechen, unten ausstechen"
+    },
+    {
+     "t": 18.0,
+     "label": "Durchziehen, immer so weiter Glied für Glied"
+    },
+    {
+     "t": 32.5,
+     "label": "Letzte Schlinge mit kleinem Stich festnähen"
+    },
+    {
+     "t": 40.0,
+     "label": "Stoff wenden, Faden hinten vernähen"
+    },
+    {
+     "t": 44.0,
+     "label": "Fertig – schau deine Kette an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-langettenstich",
+   "areaId": "sticken",
+   "zeit": 10,
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Langettenstich sticken",
+   "source": {
+    "type": "youtube",
+    "id": "vM7mBcTXo28"
+   },
+   "kanal": "HandarbeitenHeimann",
+   "dauer": "0:48",
+   "alter": "ab 7",
+   "sprache": "ohne Sprache",
+   "hinweis": "Stummes Kurzvideo ohne Erklärung – eignet sich für eine kurze Sequenz (Mini-Technik, etwa 10 Minuten): Stickstoff (Aida), Sticktwist und Sticknadel bereitlegen, vorher zwei Linien vorzeichnen; Stolperstein: beim Ausstechen unten muss der Faden unter der Nadelspitze liegen, sonst gibt es keine Schlinge.",
+   "material": [
+    "stoff",
+    "garn",
+    "nadel",
+    "schere",
+    "bleistift"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So heisst der Stich: Langettenstich"
+    },
+    {
+     "t": 5.0,
+     "label": "Nadel von unten durch den Stoff stechen"
+    },
+    {
+     "t": 10.0,
+     "label": "Rechts oben einstechen, gerade darunter ausstechen"
+    },
+    {
+     "t": 13.0,
+     "label": "Faden unter die Nadelspitze legen, anziehen"
+    },
+    {
+     "t": 15.9,
+     "label": "Gleich daneben den nächsten Stich machen"
+    },
+    {
+     "t": 24.9,
+     "label": "Immer so weiter, Stich an Stich"
+    },
+    {
+     "t": 34.0,
+     "label": "Fertig – schau: Stiche lang oder kurz"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-strickgabel-schnur",
+   "areaId": "stricken",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Schnur mit der Strickgabel",
+   "source": {
+    "type": "youtube",
+    "id": "4hhhI_U65pM"
+   },
+   "kanal": "Kikisweb.de",
+   "dauer": "1:38",
+   "alter": "ab 7",
+   "sprache": "ohne Sprache",
+   "hinweis": "Pro Kind eine Strickgabel (Holzgabel mit zwei Zinken und Loch im Griff) und dicke Wolle bereitlegen; das Video ist stumm, Stolperstein ist das Drüberheben der unteren Schlaufe, ohne dass die obere mitrutscht.",
+   "material": [
+    "strickgabel",
+    "wolle"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Strickgabel, dicke Wolle"
+    },
+    {
+     "t": 3.5,
+     "label": "Wollfaden von oben durch das Loch ziehen"
+    },
+    {
+     "t": 8.5,
+     "label": "Faden als Acht um beide Zinken wickeln"
+    },
+    {
+     "t": 16.5,
+     "label": "Faden nochmals vorne um beide Zinken legen"
+    },
+    {
+     "t": 20.5,
+     "label": "Untere Schlaufe über die Zinke heben"
+    },
+    {
+     "t": 26.0,
+     "label": "Immer so weiter: wickeln und drüberheben"
+    },
+    {
+     "t": 44.5,
+     "label": "Schnur unten aus dem Loch ziehen"
+    },
+    {
+     "t": 48.0,
+     "label": "Weiterstricken, Schnur immer wieder nach unten ziehen"
+    },
+    {
+     "t": 90.0,
+     "label": "Fertig – schau deine Strickschnur an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-fingerstricken-offen",
+   "areaId": "stricken",
+   "zeit": 10,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Strickschnur mit vier Fingern",
+   "source": {
+    "type": "youtube",
+    "id": "lF66ckwiJpY"
+   },
+   "kanal": "Anita Gisler",
+   "dauer": "1:38",
+   "alter": "ab 6",
+   "sprache": "Schweizerdeutsch",
+   "hinweis": "Nur ein Knäuel dickere Wolle nötig; die kurze Sequenz (1:38) zeigt den Anfang und ein paar Runden mit dem Eichhörnli-Sprüchli – Stolperstein: die untere Schlaufe muss ganz über die Fingerspitze, sonst rutscht sie zurück.",
+   "material": [
+    "wolle"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Wolle"
+    },
+    {
+     "t": 5.5,
+     "label": "Fadenende in die Hand, Daumen hält fest"
+    },
+    {
+     "t": 10.0,
+     "label": "Zickzack um die Finger, hin und zurück"
+    },
+    {
+     "t": 25.5,
+     "label": "Faden quer über alle Finger legen"
+    },
+    {
+     "t": 32.0,
+     "label": "Untere Schlaufe über die Fingerspitze heben, Kleinfinger zuerst"
+    },
+    {
+     "t": 36.0,
+     "label": "Dann Ringfinger, Mittelfinger und Zeigefinger"
+    },
+    {
+     "t": 42.0,
+     "label": "Faden um den Zeigefinger, dann wieder quer legen"
+    },
+    {
+     "t": 51.0,
+     "label": "Immer so weiter: quer legen, Schlaufen heben"
+    },
+    {
+     "t": 71.0,
+     "label": "Zuschauen: hinten wächst die Strickschnur"
+    },
+    {
+     "t": 94.0,
+     "label": "Fertig – schau deine Strickschnur an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-linke-masche",
+   "areaId": "stricken",
+   "zeit": 10,
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "title": "Linke Masche stricken",
+   "source": {
+    "type": "youtube",
+    "id": "z4KcMHne_XM"
+   },
+   "kanal": "Maschenmarie",
+   "dauer": "3:01",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Kurze Sequenz zum Üben: Maschenanschlag muss schon auf der Nadel sein, rechte Masche sollte bekannt sein; Stolperstein: der Arbeitsfaden muss vor der Arbeit liegen und rutscht beim Durchziehen gern ab.",
+   "material": [
+    "wolle",
+    "stricknadeln"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Maschen auf der Nadel, Faden am Knäuel"
+    },
+    {
+     "t": 8.0,
+     "label": "Arbeitsfaden nach vorne holen, vor die Arbeit"
+    },
+    {
+     "t": 21.0,
+     "label": "Rechte Nadel von oben in die Masche stechen"
+    },
+    {
+     "t": 29.0,
+     "label": "Faden um die rechte Nadel legen, Finger hilft"
+    },
+    {
+     "t": 40.0,
+     "label": "Faden durch die Schlinge ziehen, alte Masche abheben"
+    },
+    {
+     "t": 57.5,
+     "label": "Nochmals ganz langsam: eine linke Masche"
+    },
+    {
+     "t": 95.0,
+     "label": "Noch eine Masche: Faden vor, rein, durch, abheben"
+    },
+    {
+     "t": 120.0,
+     "label": "Weiter üben: Daumen hält den Faden fest"
+    },
+    {
+     "t": 139.0,
+     "label": "Finger drückt den Faden runter, dann durchziehen"
+    },
+    {
+     "t": 170.0,
+     "label": "Fertig – schau deine linke Masche an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-webschiffchen-umwickeln",
+   "areaId": "weben",
+   "zeit": 5,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Webschiffchen mit Wolle umwickeln",
+   "source": {
+    "type": "youtube",
+    "id": "4QeJWUpDRkk"
+   },
+   "kanal": "Fachlehrerin N.K",
+   "dauer": "1:20",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Mini-Technik für eine kurze Sequenz (etwa 5 Minuten) vor dem Weben: pro Kind ein Holz-Webschiffchen, Wolle und Schere bereitlegen; das Video hat nur Texteinblendungen, Stolperstein ist die 8 am Anfang, die den Faden in den Zacken festhält.",
+   "material": [
+    "webschiffchen",
+    "wolle",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Webschiffchen und Wolle"
+    },
+    {
+     "t": 11.5,
+     "label": "Fadenende in den Schlitz legen"
+    },
+    {
+     "t": 15.5,
+     "label": "Zweimal eine 8 um die Zacken wickeln"
+    },
+    {
+     "t": 37.0,
+     "label": "Faden der Länge nach ums Schiffchen wickeln"
+    },
+    {
+     "t": 57.0,
+     "label": "Zuschauen: etwa 15 Mal rundherum"
+    },
+    {
+     "t": 61.5,
+     "label": "Wolle abschneiden, Ende hängen lassen"
+    },
+    {
+     "t": 72.0,
+     "label": "Fertig – schau dein Schiffchen an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-zeitungskorb",
+   "areaId": "weben",
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "title": "Korb aus Zeitungsstreifen flechten",
+   "source": {
+    "type": "youtube",
+    "id": "HhwxqmMH1dw"
+   },
+   "kanal": "Damir Z",
+   "dauer": "2:23",
+   "alter": "ab 8",
+   "sprache": "ohne Sprache",
+   "hinweis": "Braucht sehr viele gefaltete Zeitungs- oder Prospektstreifen (am besten vorbereiten lassen) und einen Heftapparat zum Fixieren; Klebeband geht auch.",
+   "material": [
+    "zeitung",
+    "hefter",
+    "klebeband",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: der fertige Zeitungskorb"
+    },
+    {
+     "t": 23.5,
+     "label": "Zeitungsseite in der Mitte falten"
+    },
+    {
+     "t": 34.0,
+     "label": "Weiter falten, bis ein schmaler Streifen bleibt"
+    },
+    {
+     "t": 53.5,
+     "label": "Streifen kreuzweise flechten: über, unter, über"
+    },
+    {
+     "t": 64.0,
+     "label": "Matte zusammenschieben, Lücken schliessen"
+    },
+    {
+     "t": 67.0,
+     "label": "Ränder mit dem Hefter festmachen"
+    },
+    {
+     "t": 89.0,
+     "label": "Seiten hochbiegen, Streifen aufstellen"
+    },
+    {
+     "t": 96.0,
+     "label": "Seitenstreifen rundherum zusammenheften"
+    },
+    {
+     "t": 122.0,
+     "label": "Zuschauen: der fertige Korb von allen Seiten"
+    },
+    {
+     "t": 136.5,
+     "label": "Fertig – schau deinen Korb an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-pappteller-weben",
+   "areaId": "weben",
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Weben auf dem Pappteller",
+   "source": {
+    "type": "youtube",
+    "id": "JxX9MCLMGFY"
+   },
+   "kanal": "Jugendpflege Hösbach",
+   "dauer": "1:20",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Ohne Ton, nur kleine Texteinblendungen – Lehrperson liest vor; Material: Pappteller (statt Karton), Wolle in zwei Farben, Schere, Bleistift, Lineal; Stolperstein: Netzfaden straff spannen und hinten festknoten, sonst rutscht er beim Weben.",
+   "material": [
+    "pappteller",
+    "wolle",
+    "schere",
+    "bleistift",
+    "lineal",
+    "bueroklammer"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: das fertige Webbild"
+    },
+    {
+     "t": 3.0,
+     "label": "Kreis auf den Pappteller zeichnen"
+    },
+    {
+     "t": 8.0,
+     "label": "Kreis ausschneiden"
+    },
+    {
+     "t": 21.0,
+     "label": "Striche ziehen: Teller wie eine Pizza teilen"
+    },
+    {
+     "t": 31.5,
+     "label": "Am Rand bei jedem Strich einschneiden"
+    },
+    {
+     "t": 40.0,
+     "label": "Faden von hinten durch, rundherum zum Netz spannen"
+    },
+    {
+     "t": 56.0,
+     "label": "Faden abschneiden, Ende hinten festknoten"
+    },
+    {
+     "t": 65.5,
+     "label": "Webfaden in der Mitte festknoten"
+    },
+    {
+     "t": 69.5,
+     "label": "Immer unter und über die Fäden weben"
+    },
+    {
+     "t": 76.0,
+     "label": "Fertig – schau dein Webbild an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-traumfaenger-pappteller",
+   "areaId": "weben",
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Traumfänger aus Pappteller",
+   "source": {
+    "type": "youtube",
+    "id": "VE-8ZYs63lM"
+   },
+   "kanal": "Betzold",
+   "dauer": "1:38",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Material: Pappteller, Locher, Jutekordel, Farbe und Pinsel, Klebestift, Holzperlen, Federn (Blumen aus Bastelpapier oder Sticker); der Ring muss nach dem Anmalen trocknen, bevor geklebt und gefädelt wird – am besten am Vortag anmalen.",
+   "material": [
+    "pappteller",
+    "schnur",
+    "schere",
+    "locher",
+    "farbe",
+    "leim",
+    "perle",
+    "feder"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: so sieht der Traumfänger aus"
+    },
+    {
+     "t": 2.5,
+     "label": "Mitte ausschneiden, Löcher rundherum lochen"
+    },
+    {
+     "t": 11.5,
+     "label": "Ring bunt anmalen"
+    },
+    {
+     "t": 16.0,
+     "label": "Blumen aus Papier stanzen"
+    },
+    {
+     "t": 31.5,
+     "label": "Blumen auf den Ring kleben"
+    },
+    {
+     "t": 42.5,
+     "label": "Schnur kreuz und quer durch die Löcher fädeln"
+    },
+    {
+     "t": 67.5,
+     "label": "Perlen auf die Schnur fädeln"
+    },
+    {
+     "t": 78.5,
+     "label": "Schnur hinten verknoten, Aufhänger anknoten"
+    },
+    {
+     "t": 85.5,
+     "label": "Unten lochen, Schnüre mit Perlen und Federn anknoten"
+    },
+    {
+     "t": 94.5,
+     "label": "Fertig – schau deinen Traumfänger an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-quaste",
+   "areaId": "wickeln",
+   "zeit": 10,
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Quaste aus Garn",
+   "source": {
+    "type": "youtube",
+    "id": "11R0IFQ6CV8"
+   },
+   "kanal": "Museum Villa Stuck",
+   "dauer": "1:31",
+   "alter": "ab 7",
+   "sprache": "ohne Sprache",
+   "hinweis": "Eignet sich für eine kurze Sequenz von etwa 10 Minuten: Garn oder dünne Wolle, ein Papier- oder Kartonstreifen so lang wie die Quaste, Schere, vorab zwei Fäden von 20 cm abschneiden; die Perle am Schluss ist freiwillig, das Video läuft ohne Sprache.",
+   "material": [
+    "garn",
+    "karton",
+    "schere",
+    "perle"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sehen fertige Quasten aus"
+    },
+    {
+     "t": 6.0,
+     "label": "Material richten: Garn, Streifen, Schere, zwei Fäden"
+    },
+    {
+     "t": 10.5,
+     "label": "Garn etwa 30 Mal um den Streifen wickeln"
+    },
+    {
+     "t": 22.0,
+     "label": "Garn abschneiden, Faden oben durchziehen"
+    },
+    {
+     "t": 29.0,
+     "label": "Faden oben fest verknoten"
+    },
+    {
+     "t": 40.0,
+     "label": "Garn unten aufschneiden, Streifen wegziehen"
+    },
+    {
+     "t": 50.0,
+     "label": "Zweiten Faden um den Hals wickeln, verknoten"
+    },
+    {
+     "t": 62.5,
+     "label": "Perle auf die Fäden oben fädeln"
+    },
+    {
+     "t": 72.0,
+     "label": "Quaste unten gleich lang schneiden"
+    },
+    {
+     "t": 85.0,
+     "label": "Fertig – schau deine Quaste an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-pompon-gabel",
+   "areaId": "wickeln",
+   "zeit": 10,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Pompon mit der Gabel",
+   "source": {
+    "type": "youtube",
+    "id": "ndGz_4x4sIU"
+   },
+   "kanal": "sevilart",
+   "dauer": "2:31",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Mini-Projekt für eine kurze Sequenz (ca. 10 Minuten): Wolle, eine Gabel und eine Schere genügen; Stolperstein ist das feste Zubinden in der Mitte, bevor die Wolle von der Gabel rutscht.",
+   "material": [
+    "wolle",
+    "gabel",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Wolle, Gabel, Schere"
+    },
+    {
+     "t": 12.5,
+     "label": "Wolle mehrmals um die Gabel wickeln"
+    },
+    {
+     "t": 36.0,
+     "label": "Dick genug? Faden lang abziehen, abschneiden"
+    },
+    {
+     "t": 43.5,
+     "label": "Faden durch die Gabelmitte, um die Wolle"
+    },
+    {
+     "t": 48.0,
+     "label": "Von der Gabel ziehen, fest zubinden"
+    },
+    {
+     "t": 70.5,
+     "label": "Noch einmal fest knoten"
+    },
+    {
+     "t": 85.0,
+     "label": "Schlaufen mit der Schere aufschneiden"
+    },
+    {
+     "t": 112.5,
+     "label": "Pompon rundherum schön rund schneiden"
+    },
+    {
+     "t": 143.5,
+     "label": "Fertig – schau deinen Pompon an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-wollgespenst",
+   "areaId": "wickeln",
+   "zeit": 15,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Gespenst aus Wolle",
+   "source": {
+    "type": "youtube",
+    "id": "opdRGI_mFGU"
+   },
+   "kanal": "Wunderlich's",
+   "dauer": "1:25",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Mini-Projekt für eine kurze Sequenz (ca. 15 Min.): weisse Wolle, Schere, eine kleine Karte aus Karton und Wackelaugen; die Augen im Video mit Heisskleber (nur Lehrperson), sonst mit Leim ankleben – Video ohne Sprache, nur zuschauen und nachmachen.",
+   "material": [
+    "wolle",
+    "karton",
+    "schere",
+    "wackelaugen",
+    "leim"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: das fertige Gespenst"
+    },
+    {
+     "t": 4.5,
+     "label": "Material richten: Wolle, Schere, Karte, Wackelaugen"
+    },
+    {
+     "t": 12.5,
+     "label": "Wolle viele Male um die Karte wickeln"
+    },
+    {
+     "t": 24.5,
+     "label": "Wolle abschneiden, zwei Fäden abschneiden"
+    },
+    {
+     "t": 32.5,
+     "label": "Faden oben durch die Schlaufe, fest knoten"
+    },
+    {
+     "t": 39.0,
+     "label": "Unten aufschneiden, Karte herausziehen"
+    },
+    {
+     "t": 47.5,
+     "label": "Faden um den Hals knoten, Enden abschneiden"
+    },
+    {
+     "t": 62.5,
+     "label": "Augen ankleben, Heisskleber nur mit Erwachsenen"
+    },
+    {
+     "t": 73.5,
+     "label": "Zuschauen: die fertigen Gespenster"
+    },
+    {
+     "t": 80.5,
+     "label": "Fertig – schau dein Gespenst an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-windrad-falten",
+   "areaId": "falten",
+   "zeit": 10,
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Windrad falten",
+   "source": {
+    "type": "youtube",
+    "id": "x0BPKPtky24"
+   },
+   "kanal": "Kikisweb.de",
+   "dauer": "2:01",
+   "alter": "ab 7",
+   "sprache": "ohne Sprache",
+   "hinweis": "Stummes Video, nur Hände: pro Kind ein Quadrat Faltpapier; das Zusammendrücken zum Doppelboot (0:56–1:26) ist der Stolperstein, vorher selbst probieren – Stab und Stecknadel zum Aufstecken werden am Schluss nur gezeigt.",
+   "material": [
+    "papier",
+    "stab",
+    "stecknadeln"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: ein quadratisches Papier"
+    },
+    {
+     "t": 1.0,
+     "label": "Papier in der Mitte falten, wieder öffnen"
+    },
+    {
+     "t": 15.5,
+     "label": "Oben und unten zur Mittellinie falten"
+    },
+    {
+     "t": 22.5,
+     "label": "Drehen, in der Mitte knicken, wieder öffnen"
+    },
+    {
+     "t": 28.0,
+     "label": "Beide Enden zur Mittellinie falten"
+    },
+    {
+     "t": 39.0,
+     "label": "Quadrat zweimal schräg falten, wieder öffnen"
+    },
+    {
+     "t": 56.5,
+     "label": "Eine Seite zum Boot zusammendrücken"
+    },
+    {
+     "t": 64.0,
+     "label": "Umdrehen, andere Seite auch zum Boot"
+    },
+    {
+     "t": 86.5,
+     "label": "Zwei Spitzen gegenüber umklappen: Windrad"
+    },
+    {
+     "t": 105.5,
+     "label": "Zuschauen: Windrad auf einem Stab"
+    },
+    {
+     "t": 114.0,
+     "label": "Fertig – schau dein Windrad an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
   }
  ]
 }

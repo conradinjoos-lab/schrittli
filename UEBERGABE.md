@@ -20,7 +20,7 @@ Repo: `conradinjoos-lab/schrittli` (GitHub Pages, Branch main, Cache bis 10 Min 
 | `quelle/bauen.sh` | erzeugt `index.html` (Familie) und `schule/index.html` (Schule, mit `window.SCHULE=true`) – **nie die index.html direkt editieren** |
 | `inhalte.json` | Videos der Familienversion (55), wird beim Start geladen und überschreibt gleichnamige IDs |
 | `katalog.json` | Vorauswahl für Eltern (76), im Elternbereich → Katalog mit «Hinzufügen» |
-| `schule/schule.json` | Videos der Schulversion (59 veröffentlicht, 24.10.2026): `areaId` = Verfahren, `stufen` = Klassen [1–6], `material` = IDs, optional `zeit` = Minuten (1–15) für Mini-Projekte |
+| `schule/schule.json` | Videos der Schulversion (119 veröffentlicht, 24.10.2026): `areaId` = Verfahren, `stufen` = Klassen [1–6], `material` = IDs, optional `zeit` = Minuten (1–15) für Mini-Projekte |
 | `material/` | Material-Fotos `<id>.png/.jpg` + `fotos.json` (Liste der vorhandenen Dateinamen) + `PROMPTS-GROK.md` |
 | `quelle/agenten/` | Briefings für Agenten: Schritte schreiben (`SCHRITTE-BRIEF.md`), Materiallisten, Piktogramme, Vokabular |
 | `LIESMICH.md` | Funktionsbeschreibung für Conradin |
