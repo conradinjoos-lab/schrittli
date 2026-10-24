@@ -87,7 +87,7 @@ const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 const fmt=s=>s?Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0'):'';
 $('#hilfe').innerHTML=W.LOKAL
  ?'<p>In Claude Code <code>/schritte &lt;Links&gt;</code>, oder <code>python werkzeug/holen.py &lt;Link&gt;</code> und die Schritte nach <code>werkzeug/SCHRITTE-LOKAL.md</code> schreiben lassen.</p><p>Danach <code>python werkzeug/werkstatt.py</code> – dann sind sie auch online.</p>'
- :'<p>Neue Entwürfe entstehen in Claude Code (<code>/schritte &lt;Links&gt;</code>) und kommen mit <code>python werkzeug/werkstatt.py</code> hierher.</p><p><a id="weg">Schlüssel auf diesem Gerät entfernen</a></p>';
+ :'<p>Neue Entwürfe entstehen in Claude Code (<code>/schritte &lt;Links&gt;</code>) und kommen mit <code>python werkzeug/werkstatt.py</code> hierher.</p><p><a id="weg">Auf diesem Gerät abmelden</a></p>';
 if($('#weg'))$('#weg').onclick=W.abmelden;
 $('#liste').innerHTML='<div class="nichts">Lade Entwürfe …</div>';
 let D;try{await W.bereit();D=await W.liste()}catch(x){$('#liste').innerHTML=`<div class="nichts">Laden ging nicht: ${esc(x.message||x)}</div>`;return}

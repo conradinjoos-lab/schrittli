@@ -1,19 +1,26 @@
 /* Schrittli – Kontrolle: Datenzugang für index.html und video.html.
    Lokal (python werkzeug/kontrolle.py): über /api und /f vom eigenen Server.
-   Online (GitHub Pages): über die GitHub-API mit einem persönlichen Schlüssel, der nur auf diesem Gerät liegt.
+   Online (GitHub Pages): über die GitHub-API. Anmelden mit GitHub über den Worker werkzeug/anmelden (GitHub App «Schrittli Kontrolle»),
+   der Schlüssel bleibt nur in diesem Browser und wird selbst erneuert. Ein eingefügter Fine-grained-Schlüssel geht weiterhin.
    Entwürfe, Transkripte und Filmstreifen liegen im privaten Repo schrittli-werkstatt (siehe werkzeug/werkstatt.py),
    Veröffentlichen schreibt schule/schule.json im App-Repo. */
 const W=(()=>{
  const LOKAL=/^(127\.0\.0\.1|localhost)$/.test(location.hostname);
  const API='https://api.github.com',WERK='conradinjoos-lab/schrittli-werkstatt',APP='conradinjoos-lab/schrittli',SCHULE='schule/schule.json';
  const SP=20,B=160,H=90,VSP=16,VB=256,VH=144;   // Filmstreifen und Vorschau, wie werkstatt.py
- const KEY='werkstatt-schluessel';
- let schluessel='';try{schluessel=localStorage.getItem(KEY)||''}catch{}
+ const ANMELDEN='https://schrittli-anmelden.conradinjoos.workers.dev',KEY='werkstatt-anmeldung';
+ let an={};try{an=JSON.parse(localStorage.getItem(KEY)||'{}')}catch{}   // {token, ablauf (ms, 0 = nie), refresh}
+ const merke=d=>{an=d;try{localStorage.setItem(KEY,JSON.stringify(d))}catch{}};
+ async function erneuern(){
+  if(!an.refresh)return false;
+  const r=await fetch(ANMELDEN+'/erneuern',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({refresh:an.refresh})}).catch(()=>null);
+  if(!r||!r.ok)return false;merke(await r.json());return true}
 
  /* ---------- GitHub ---------- */
- async function gh(pfad,opt={}){
-  const r=await fetch(API+pfad,{cache:'no-store',...opt,headers:{Authorization:'Bearer '+schluessel,'X-GitHub-Api-Version':'2022-11-28',Accept:'application/vnd.github+json',...opt.headers}});
-  if(r.status===401){abmelden();throw new Error('Schlüssel ungültig oder abgelaufen')}
+ async function gh(pfad,opt={},nochmals=true){
+  if(an.ablauf&&Date.now()>an.ablauf-120000)await erneuern();
+  const r=await fetch(API+pfad,{cache:'no-store',...opt,headers:{Authorization:'Bearer '+an.token,'X-GitHub-Api-Version':'2022-11-28',Accept:'application/vnd.github+json',...opt.headers}});
+  if(r.status===401){if(nochmals&&await erneuern())return gh(pfad,opt,false);abmelden();throw new Error('Anmeldung abgelaufen')}
   return r}
  async function json(pfad,opt){const r=await gh(pfad,opt);if(!r.ok)throw new Error('GitHub '+r.status+': '+pfad);return r.json()}
  async function datei(repo,pfad,art='text',ref='main'){
@@ -47,25 +54,42 @@ const W=(()=>{
  function zuschnitt(im,x,y,b,h){const c=document.createElement('canvas');c.width=b;c.height=h;c.getContext('2d').drawImage(im,x,y,b,h,0,0,b,h);return c.toDataURL('image/jpeg',.85)}
 
  /* ---------- Anmelden (nur online) ---------- */
- function abmelden(){try{localStorage.removeItem(KEY)}catch{}schluessel='';location.reload()}
- function bereit(){
-  if(LOKAL||schluessel)return Promise.resolve();
+ function abmelden(){try{localStorage.removeItem(KEY)}catch{}an={};location.reload()}
+ async function pruefen(){   // Zugriff auf beide Repos, Schreibrecht im App-Repo
+  const [a,b]=await Promise.all([gh('/repos/'+WERK,{},false),gh('/repos/'+APP,{},false)]);
+  if(!a.ok)return 'Kein Zugriff auf schrittli-werkstatt – auf GitHub die App «Schrittli Kontrolle» bzw. den Schlüssel für dieses Repo freigeben.';
+  const p=b.ok?(await b.json()).permissions:null;if(!p||!p.push)return 'Kein Schreibrecht auf schrittli – Contents: Read and write freigeben.';
+  return ''}
+ async function bereit(){
+  if(LOKAL)return;
+  const m=location.hash.match(/^#anmeldung=(\w+)$/);
+  if(m){history.replaceState(null,'',location.pathname+location.search);   // Abholschein aus der Adresse entfernen
+   let state='';try{state=sessionStorage.getItem('anmelde-state')||'';sessionStorage.removeItem('anmelde-state')}catch{}
+   const r=await fetch(ANMELDEN+'/abholen',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({schein:m[1],state})}).catch(()=>null);
+   if(r&&r.ok)merke(await r.json())}
+  if(an.token&&!m)return;
   return new Promise(ok=>{
-   const d=document.createElement('dialog');d.style.cssText='border:0;border-radius:18px;padding:24px 26px;max-width:520px;font:15px/1.45 "Atkinson Hyperlegible",system-ui,sans-serif;color:#17212F;box-shadow:0 16px 48px rgba(23,33,47,.25)';
-   d.innerHTML=`<h3 style="font:600 21px Fredoka,system-ui,sans-serif;margin:0 0 10px">Schlüssel für die Werkstatt</h3>
-    <p style="margin:0 0 10px">Die Entwürfe liegen im privaten Repo <b>schrittli-werkstatt</b>. Einmal pro Gerät braucht die Seite einen GitHub-Schlüssel. Er bleibt nur in diesem Browser.</p>
-    <ol style="margin:0 0 12px;padding-left:20px"><li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener" style="color:#0F7A61;font-weight:700">Neuen Schlüssel auf GitHub erstellen</a> (Fine-grained token)</li>
-     <li>Repository access: <i>Only select repositories</i> → <b>schrittli</b> und <b>schrittli-werkstatt</b></li>
-     <li>Permissions: <b>Contents</b> → <i>Read and write</i></li><li>Erstellen, kopieren und hier einfügen</li></ol>
-    <form method="dialog" style="display:flex;gap:8px"><input name="s" type="password" autocomplete="off" placeholder="github_pat_…" style="flex:1;font:inherit;padding:8px 12px;border:1px solid #D5DEE9;border-radius:10px">
-     <button style="font:700 15px inherit;border:0;border-radius:999px;background:#17997A;color:#fff;padding:8px 16px;cursor:pointer">Speichern</button></form>
-    <p class="f" style="color:#D64545;margin:8px 0 0;min-height:1.2em"></p>`;
+   const d=document.createElement('dialog');d.style.cssText='border:0;border-radius:18px;padding:24px 26px;max-width:480px;font:15px/1.45 "Atkinson Hyperlegible",system-ui,sans-serif;color:#17212F;box-shadow:0 16px 48px rgba(23,33,47,.25)';
+   const knopf='font:700 15px inherit;border:0;border-radius:999px;background:#17997A;color:#fff;padding:10px 20px;cursor:pointer';
+   d.innerHTML=`<h3 style="font:600 21px Fredoka,system-ui,sans-serif;margin:0 0 10px">Werkstatt öffnen</h3>
+    <p style="margin:0 0 16px">Die Entwürfe liegen im privaten Repo <b>schrittli-werkstatt</b>. Melde dich einmal pro Gerät mit GitHub an.</p>
+    <button class="gh" style="${knopf}">Mit GitHub anmelden</button>
+    <p class="f" style="color:#D64545;margin:10px 0 0;min-height:1.2em"></p>
+    <details style="margin-top:6px;color:#5B6B80;font-size:13px"><summary style="cursor:pointer">Ohne Anmeldung: Schlüssel einfügen</summary>
+     <p style="margin:8px 0">Auf GitHub einen <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener" style="color:#0F7A61">Fine-grained token</a> erstellen:
+      Repositories <b>schrittli</b> und <b>schrittli-werkstatt</b>, Contents <i>Read and write</i>.</p>
+     <form style="display:flex;gap:8px"><input type="password" autocomplete="off" placeholder="github_pat_…" style="flex:1;font:inherit;padding:8px 12px;border:1px solid #D5DEE9;border-radius:10px">
+      <button style="${knopf};padding:8px 16px">Speichern</button></form></details>`;
    document.body.appendChild(d);d.addEventListener('cancel',e=>e.preventDefault());d.showModal();
-   d.querySelector('form').onsubmit=async e=>{e.preventDefault();schluessel=d.querySelector('input').value.trim();const f=d.querySelector('.f');f.textContent='prüfe …';
-    try{const [a,b]=await Promise.all([gh('/repos/'+WERK),gh('/repos/'+APP)]);
-     if(!a.ok){f.textContent='Kein Zugriff auf schrittli-werkstatt – Repository access prüfen.';return}
-     const p=b.ok?(await b.json()).permissions:null;if(p&&!p.push){f.textContent='Kein Schreibrecht auf schrittli – Contents: Read and write prüfen.';return}
-     try{localStorage.setItem(KEY,schluessel)}catch{}d.close();d.remove();ok()}catch(x){f.textContent=String(x.message||x)}}})}
+   const f=d.querySelector('.f');
+   if(m&&!an.token)f.textContent='Anmeldung hat nicht geklappt – bitte nochmals.';
+   d.querySelector('.gh').onclick=()=>{
+    const state=crypto.randomUUID().replace(/-/g,'');try{sessionStorage.setItem('anmelde-state',state)}catch{}
+    location.href=ANMELDEN+'/login?'+new URLSearchParams({state,zurueck:location.pathname+location.search})};
+   const fertig=async()=>{f.textContent='prüfe …';
+    try{const fehler=await pruefen();if(fehler){f.textContent=fehler;return}d.close();d.remove();ok()}catch(x){f.textContent=String(x.message||x)}};
+   d.querySelector('form').onsubmit=e=>{e.preventDefault();merke({token:d.querySelector('input').value.trim(),ablauf:0,refresh:''});fertig()};
+   if(an.token)fertig()})}
 
  /* ---------- Liste ---------- */
  async function liste(){
