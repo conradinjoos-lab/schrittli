@@ -1439,19 +1439,66 @@
     "type": "youtube",
     "id": "2Dj5ev-fV70"
    },
-   "kanal": "SRF Kids · Bastelidee mit Paul Klee",
-   "steps": [],
+   "kanal": "SRF Kids",
+   "dauer": "4:03",
+   "alter": "ab 6",
+   "sprache": "Schweizerdeutsch",
+   "hinweis": "Pro Kind 2–3 leere Zündholzschachteln, schwarzer Karton, Zündhölzer ohne Köpfe und zwei Holzscheiben oder grosse Knöpfe als Augen bereitlegen; Weissleim braucht Zeit zum Trocknen. Sandrine spricht Schweizerdeutsch.",
+   "material": [
+    "zuendholzschachtel",
+    "karton",
+    "leim",
+    "schere",
+    "zuendhoelzer",
+    "knopf",
+    "stifte"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht der Geist aus"
+    },
+    {
+     "t": 21.8,
+     "label": "Material richten: Zündholzschachteln, Karton, Leim, Schere, Stift"
+    },
+    {
+     "t": 33.0,
+     "label": "Schachteln auseinandernehmen, Schubladen auf Karton kleben"
+    },
+    {
+     "t": 66.6,
+     "label": "Hülle zerschneiden, Streifen rund um die Schachteln kleben"
+    },
+    {
+     "t": 78.2,
+     "label": "Zacken schneiden, schwarz anmalen, unter die Augen kleben"
+    },
+    {
+     "t": 120.0,
+     "label": "Augen aufkleben, Pupillen malen"
+    },
+    {
+     "t": 147.6,
+     "label": "Zündhölzer als Schnurrhaare ankleben"
+    },
+    {
+     "t": 169.1,
+     "label": "Noch mehr Zündhölzer und Ohren ankleben"
+    },
+    {
+     "t": 196.2,
+     "label": "Striche malen, Zündhölzer als Haare ankleben"
+    },
+    {
+     "t": 215.0,
+     "label": "Fertig – schau deinen Geist an"
+    }
+   ],
    "task": {
     "text": "",
     "deliverable": "keine"
-   },
-   "material": [
-    "zuendholzschachtel",
-    "papier",
-    "schere",
-    "leim",
-    "stifte"
-   ]
+   }
   },
   {
    "id": "zw-luftmaschen",
@@ -2712,6 +2759,1021 @@
     "garn",
     "schere"
    ]
+  },
+  {
+   "id": "zw-daumenschale",
+   "areaId": "formen",
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Daumenschale aus Ton",
+   "source": {
+    "type": "youtube",
+    "id": "2gaSD-Ic6fI"
+   },
+   "kanal": "Frau_KriSa",
+   "dauer": "1:51",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Ton, Unterlage, Holzspatel und feuchtes Tuch bereitlegen; Stolperstein ist der gleichmässig dicke Rand und Boden beim Drücken und Drehen.",
+   "material": [
+    "ton",
+    "holzbrett",
+    "holzspatel",
+    "handtuch",
+    "wasser"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht die Daumenschale aus"
+    },
+    {
+     "t": 4.1,
+     "label": "Material richten: Ton, Unterlage, Spatel, feuchtes Tuch"
+    },
+    {
+     "t": 9.5,
+     "label": "Tuch weglegen, Ton auf die Unterlage schlagen"
+    },
+    {
+     "t": 23.0,
+     "label": "Ecken flach klopfen"
+    },
+    {
+     "t": 32.5,
+     "label": "Ton in die Hand nehmen, Kugel formen"
+    },
+    {
+     "t": 38.5,
+     "label": "Daumen in die Mitte der Kugel drücken"
+    },
+    {
+     "t": 44.0,
+     "label": "Drücken und drehen, immer weiter, überall gleich dick"
+    },
+    {
+     "t": 73.5,
+     "label": "Schale innen und aussen glatt streichen"
+    },
+    {
+     "t": 86.0,
+     "label": "Mit Spatel klopfen, mit Holz glatt streichen"
+    },
+    {
+     "t": 103.4,
+     "label": "Fertig – schau deine Schale an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-tonwulst-vase",
+   "areaId": "formen",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Vase aus Tonwülsten",
+   "source": {
+    "type": "youtube",
+    "id": "1Z3h5_aI0xE"
+   },
+   "kanal": "Staatsinstitut für die Ausbildung von Fachlehrern",
+   "dauer": "4:12",
+   "alter": "ab 7",
+   "sprache": "ohne Sprache",
+   "hinweis": "Ton, Modellierstäbchen, Wasserschale, Lappen und Unterlage bereitlegen; jede Wulst innen und aussen gut verstreichen, sonst bricht das Gefäss beim Trocknen.",
+   "material": [
+    "ton",
+    "holzspatel",
+    "wasser",
+    "handtuch",
+    "holzbrett"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Ton, Modellierstab, Wasserschale, Lappen"
+    },
+    {
+     "t": 26.0,
+     "label": "Ein Stück Ton abschneiden"
+    },
+    {
+     "t": 34.0,
+     "label": "Ton zu einer langen dünnen Wulst rollen"
+    },
+    {
+     "t": 74.0,
+     "label": "Wulst zu einer Schnecke aufrollen"
+    },
+    {
+     "t": 86.5,
+     "label": "Schnecke mit Stäbchen und Finger glatt streichen"
+    },
+    {
+     "t": 111.4,
+     "label": "Neue Wulst rollen"
+    },
+    {
+     "t": 125.0,
+     "label": "Wulst auf die Bodenplatte setzen"
+    },
+    {
+     "t": 138.5,
+     "label": "Übergang innen und aussen glatt streichen"
+    },
+    {
+     "t": 178.5,
+     "label": "Immer so weiter: Wulst setzen und verstreichen"
+    },
+    {
+     "t": 245.4,
+     "label": "Fertig – schau dein Gefäss an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-salzteig-herz",
+   "areaId": "formen",
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Blumenherzen aus Salzteig",
+   "source": {
+    "type": "youtube",
+    "id": "FRHTer58Z14"
+   },
+   "kanal": "ARD Kinder und Familie",
+   "dauer": "1:52",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Rezept: 180 g Mehl, 220 g Salz, ca. 130 ml Wasser, 1 TL Öl – dazu Herz-Ausstechform, Wallholz, gepresste Blüten, Trinkhalm und Kordel; das Backen (1 Stunde bei 150 °C) macht die Lehrperson.",
+   "material": [
+    "mehl",
+    "salz",
+    "wasser",
+    "schuessel",
+    "ausstechform",
+    "blueten",
+    "trinkhalm",
+    "schnur"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Blumige Herzen aus Salzteig"
+    },
+    {
+     "t": 4.0,
+     "label": "Material richten: Mehl, Salz, Wasser, Öl, Blüten"
+    },
+    {
+     "t": 7.6,
+     "label": "Mehl und Salz in die Schüssel geben"
+    },
+    {
+     "t": 15.5,
+     "label": "Wasser und Öl dazugeben"
+    },
+    {
+     "t": 29.0,
+     "label": "Mit den Händen zu einem Teig kneten"
+    },
+    {
+     "t": 42.0,
+     "label": "Teig flach rollen, Herzen ausstechen"
+    },
+    {
+     "t": 56.8,
+     "label": "Blümchen auflegen, Loch mit Strohhalm stechen"
+    },
+    {
+     "t": 68.4,
+     "label": "Zuschauen: Herzen 1 Stunde im Ofen backen"
+    },
+    {
+     "t": 78.6,
+     "label": "Kordel durchs Loch fädeln und knoten"
+    },
+    {
+     "t": 108.0,
+     "label": "Fertig – schau dein Herz an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-kartoffeldruck",
+   "areaId": "drucken",
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Kartoffeldruck auf Stoff",
+   "source": {
+    "type": "youtube",
+    "id": "UDm8XGnTEzA"
+   },
+   "kanal": "wocomoKIDS",
+   "dauer": "2:07",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Kartoffeln halbieren und das Wegschneiden rund um die Ausstechform macht die Lehrperson mit dem Messer; Stempelkissen oder Deckfarbe, Ausstechformen und Zeitungspapier als Unterlage bereitlegen.",
+   "material": [
+    "kartoffel",
+    "ausstechform",
+    "messer",
+    "stempelkissen",
+    "stoff",
+    "papier"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Kartoffeldruck auf Stoff"
+    },
+    {
+     "t": 10.0,
+     "label": "Material richten: Kartoffeln, Ausstechform, Messer, Stempelkissen, Stoff"
+    },
+    {
+     "t": 15.0,
+     "label": "Kartoffel halbieren, Ausstechform in die Schnittfläche drücken"
+    },
+    {
+     "t": 35.0,
+     "label": "Mit dem Messer rund um die Form wegschneiden"
+    },
+    {
+     "t": 51.8,
+     "label": "Zuschauen: Tipp – grosse, festkochende Kartoffeln nehmen"
+    },
+    {
+     "t": 60.2,
+     "label": "Form herausziehen, Stempel kurz antrocknen lassen"
+    },
+    {
+     "t": 74.3,
+     "label": "Stempel aufs Kissen, dann auf den Stoff drücken"
+    },
+    {
+     "t": 81.2,
+     "label": "Immer wieder stempeln, bis ein Muster entsteht"
+    },
+    {
+     "t": 90.3,
+     "label": "Zuschauen: der Vater erzählt von früher"
+    },
+    {
+     "t": 110.0,
+     "label": "Fertig – schau deinen Stoff an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-kartoffeldruck-kacheln",
+   "areaId": "drucken",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Kartoffeldruck mit viereckigen Kacheln",
+   "source": {
+    "type": "youtube",
+    "id": "A4wiYD8e7LM"
+   },
+   "kanal": "kunstundunterricht",
+   "dauer": "1:23",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Kartoffel wird mit dem Messer geschnitten (Aufsicht nötig); Wasserfarben, Pinsel, Wasserglas und einen grossen Papierbogen bereitlegen.",
+   "material": [
+    "kartoffel",
+    "messer",
+    "farbe",
+    "pinsel",
+    "papier",
+    "wasser"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: fertiges Kachelmuster anschauen"
+    },
+    {
+     "t": 5.0,
+     "label": "Viereck aus der Kartoffel schneiden"
+    },
+    {
+     "t": 15.5,
+     "label": "Kerben in die Fläche schneiden"
+    },
+    {
+     "t": 26.3,
+     "label": "Stempel mit dem Pinsel anmalen"
+    },
+    {
+     "t": 31.8,
+     "label": "Zuschauen: so sehen die Abdrücke aus"
+    },
+    {
+     "t": 36.8,
+     "label": "Hinten eine Kerbe als Merkzeichen schneiden"
+    },
+    {
+     "t": 50.0,
+     "label": "Anmalen, drucken, Stempel um 90 Grad drehen"
+    },
+    {
+     "t": 56.5,
+     "label": "Nächste Reihe drucken, immer weiter drehen"
+    },
+    {
+     "t": 64.6,
+     "label": "Zuschauen: Variante ohne Drehen"
+    },
+    {
+     "t": 69.5,
+     "label": "Fertig – schau dein Geschenkpapier an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-moosgummi-stempel",
+   "areaId": "drucken",
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "title": "Stempel aus Moosgummi",
+   "source": {
+    "type": "youtube",
+    "id": "neKu5UqWaYo"
+   },
+   "kanal": "Talu.de",
+   "dauer": "2:32",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Moosgummi, Holzklotz oder Schwamm als Griff, Weissleim, Deckfarbe, Pinsel und eine Schale bereitlegen; nur Musik, keine Erklärung. Die Figur stempelt spiegelverkehrt, darum einfache Formen wählen.",
+   "material": [
+    "moosgummi",
+    "papier",
+    "bleistift",
+    "schere",
+    "holzbrett",
+    "leim",
+    "farbe",
+    "pinsel"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Moosgummi, Papier, Bleistift, Schere, Klotz"
+    },
+    {
+     "t": 2.0,
+     "label": "Figur auf Papier zeichnen"
+    },
+    {
+     "t": 6.0,
+     "label": "Figur aus dem Papier ausschneiden"
+    },
+    {
+     "t": 14.5,
+     "label": "Papierfigur auf Moosgummi legen, nachfahren"
+    },
+    {
+     "t": 38.0,
+     "label": "Figur aus Moosgummi ausschneiden"
+    },
+    {
+     "t": 45.5,
+     "label": "Klotz nehmen, Leim auf die Figur"
+    },
+    {
+     "t": 61.0,
+     "label": "Figur auf den Klotz drücken"
+    },
+    {
+     "t": 80.5,
+     "label": "Farbe in Schale giessen, Figur bemalen"
+    },
+    {
+     "t": 109.0,
+     "label": "Stempel aufs Papier drücken"
+    },
+    {
+     "t": 125.5,
+     "label": "Fertig – schau deinen Stempel an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-polystyroldruck",
+   "areaId": "drucken",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Drucken mit Polystyrol",
+   "source": {
+    "type": "youtube",
+    "id": "iQYZTNlKkS4"
+   },
+   "kanal": "Schuldruckzentrum Darmstadt",
+   "dauer": "3:13",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Wasserlösliche Druckfarbe, Polystyrolplatte, Handwalze und Glasplatte bereitlegen; beim Reiben darf das Papier nicht verrutschen.",
+   "material": [
+    "styropor",
+    "farbe",
+    "walze",
+    "teller",
+    "papier",
+    "bleistift",
+    "loeffel"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Die Druckerei in der Kiste"
+    },
+    {
+     "t": 23.2,
+     "label": "Material richten: Farbe, Polystyrol, Stift, Walze, Papier, Löffel"
+    },
+    {
+     "t": 48.1,
+     "label": "Motiv mit spitzem Stift ins Polystyrol ritzen"
+    },
+    {
+     "t": 62.7,
+     "label": "Klecks Farbe auf die Platte, mit Walze ausrollen"
+    },
+    {
+     "t": 89.0,
+     "label": "Druckstock mit der Walze einfärben"
+    },
+    {
+     "t": 95.3,
+     "label": "Papier auflegen, mit den Händen streichen"
+    },
+    {
+     "t": 111.6,
+     "label": "Mit dem Löffel in Kreisen reiben"
+    },
+    {
+     "t": 117.5,
+     "label": "Ecke anheben, prüfen, nachreiben, dann abziehen"
+    },
+    {
+     "t": 136.6,
+     "label": "Zuschauen: mehrere Farben probieren, Walze abwaschen"
+    },
+    {
+     "t": 160.6,
+     "label": "Fertig – schau deinen Druck an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-papierweben",
+   "areaId": "weben",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Weben mit Papierstreifen",
+   "source": {
+    "type": "youtube",
+    "id": "XiNqemuIytc"
+   },
+   "kanal": "Schneiderlein",
+   "dauer": "3:32",
+   "alter": "ab 7",
+   "sprache": "ohne Sprache",
+   "hinweis": "Zwei verschiedenfarbige Blätter, Lineal, Bleistift, Schere und Klebestift; das Messen alle 1 cm braucht bei Jüngeren Hilfe, und die Schlitze nur bis zur oberen Linie schneiden.",
+   "material": [
+    "papier",
+    "schere",
+    "lineal",
+    "bleistift",
+    "leim"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Tonpapier, farbiges Blatt, Schere, Klebestift, Lineal"
+    },
+    {
+     "t": 15.0,
+     "label": "Linie 2 cm vom oberen Rand ziehen"
+    },
+    {
+     "t": 24.5,
+     "label": "Alle 1 cm markieren, Punkte senkrecht verbinden"
+    },
+    {
+     "t": 53.9,
+     "label": "Linien bis zur oberen Linie einschneiden"
+    },
+    {
+     "t": 76.4,
+     "label": "Farbiges Blatt falten, markieren, Linien ziehen"
+    },
+    {
+     "t": 112.0,
+     "label": "Streifen schneiden, Rahmen und Streifen bereitlegen"
+    },
+    {
+     "t": 141.2,
+     "label": "Ersten Streifen einweben: drüber, drunter, drüber"
+    },
+    {
+     "t": 162.5,
+     "label": "Streifen rechts und links festkleben"
+    },
+    {
+     "t": 191.5,
+     "label": "Nächste Reihe umgekehrt weben, immer so weiter"
+    },
+    {
+     "t": 207.5,
+     "label": "Fertig – schau dein Gewebe an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-webrahmen-karton",
+   "areaId": "weben",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Webrahmen aus Karton",
+   "source": {
+    "type": "youtube",
+    "id": "xj5U7qFXkXg"
+   },
+   "kanal": "Die Eigenmacherei",
+   "dauer": "1:13",
+   "alter": "ab 7",
+   "sprache": "ohne Sprache",
+   "hinweis": "Keine Stimme, nur Texteinblendungen (vorlesen helfen); doppelseitiges Klebeband und eine stumpfe Nadel oder Büroklammer als Webnadel bereitlegen.",
+   "material": [
+    "karton",
+    "schnur",
+    "wolle",
+    "klebeband",
+    "schere",
+    "lineal",
+    "bleistift",
+    "stopfnadel"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Karton, Schnur, Wolle, Klebeband, Schere"
+    },
+    {
+     "t": 21.1,
+     "label": "Karton und zwei schmale Streifen zuschneiden"
+    },
+    {
+     "t": 23.1,
+     "label": "Striche anzeichnen und Karton einschneiden"
+    },
+    {
+     "t": 27.4,
+     "label": "Streifen mit Klebeband über die Striche kleben"
+    },
+    {
+     "t": 31.4,
+     "label": "Schnur rundherum spannen, Enden verknoten"
+    },
+    {
+     "t": 38.0,
+     "label": "Weben: Nadel über und unter den Faden"
+    },
+    {
+     "t": 45.6,
+     "label": "Reihen eng zusammenschieben, dann Enden verknoten"
+    },
+    {
+     "t": 53.3,
+     "label": "Umdrehen, Schnur durchschneiden, hinten festkleben"
+    },
+    {
+     "t": 60.4,
+     "label": "Schnüre mittig durchschneiden, je zwei Enden verknoten"
+    },
+    {
+     "t": 66.9,
+     "label": "Fertig – schau dein Webstück an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-lama-weben",
+   "areaId": "weben",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "title": "Lama weben aus Karton",
+   "source": {
+    "type": "youtube",
+    "id": "bFTEuY18FqM"
+   },
+   "kanal": "die Werklehrerin",
+   "dauer": "1:00",
+   "alter": "ab 7",
+   "sprache": "ohne Sprache",
+   "hinweis": "Lama-Vorlage aus Karton vorbereiten; oben und unten gleich viele Kerben einschneiden, sonst geht der gelbe Spannfaden nicht auf. Das Video ist ein Zeitraffer von einer Minute – die Stopps liegen eng, pro Stopp genügend Zeit lassen.",
+   "material": [
+    "karton",
+    "wolle",
+    "schere",
+    "stopfnadel",
+    "perle",
+    "stifte",
+    "klebeband"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: das fertige Lama"
+    },
+    {
+     "t": 2.4,
+     "label": "Lama aus Karton ausschneiden, Kerben einschneiden"
+    },
+    {
+     "t": 5.8,
+     "label": "Gelbe Wolle um die Kerben spannen, verknoten"
+    },
+    {
+     "t": 14.8,
+     "label": "Rote Wolle drüber, drunter weben, zusammenschieben"
+    },
+    {
+     "t": 30.5,
+     "label": "Farbe wechseln: Orange und Gelb weben"
+    },
+    {
+     "t": 37.0,
+     "label": "Perlen unten an die Fäden nähen"
+    },
+    {
+     "t": 46.0,
+     "label": "Gesicht mit Stift zeichnen"
+    },
+    {
+     "t": 51.5,
+     "label": "Perlenkette um den Hals legen"
+    },
+    {
+     "t": 53.0,
+     "label": "Hinten: Fäden abschneiden und festkleben"
+    },
+    {
+     "t": 56.5,
+     "label": "Fertig – schau dein Lama an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-laubsaege-erste-schnitte",
+   "areaId": "holz",
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "title": "Laubsäge: Erste Sägeschnitte",
+   "source": {
+    "type": "youtube",
+    "id": "-2R1D2mWD_k"
+   },
+   "kanal": "FEINSCHNITTkreativ",
+   "dauer": "1:54",
+   "alter": "ab 8",
+   "sprache": "ohne Sprache",
+   "hinweis": "Laubsäge, Sägetischchen mit Schraubzwinge und ein Sperrholzbrettchen mit aufgeklebter Vorlage bereitlegen; das Video hat nur Texteinblendungen, Stolperstein ist zu starker Druck beim Sägen.",
+   "material": [
+    "saege",
+    "schraubzwinge",
+    "holzbrett",
+    "papier"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Laubsäge, Sägetisch, Holzbrett mit Vorlage"
+    },
+    {
+     "t": 7.0,
+     "label": "Sägetisch mit der Klemme am Tisch festschrauben"
+    },
+    {
+     "t": 22.4,
+     "label": "Bequem hinsitzen, Säge im rechten Winkel halten"
+    },
+    {
+     "t": 37.5,
+     "label": "Säge schräg ansetzen, ersten Schnitt beginnen"
+    },
+    {
+     "t": 45.0,
+     "label": "Säge waagrecht halten, ohne Druck sägen"
+    },
+    {
+     "t": 56.9,
+     "label": "Locker und gleichmässig auf und ab sägen"
+    },
+    {
+     "t": 62.0,
+     "label": "Beim Richtungswechsel das Holz drehen"
+    },
+    {
+     "t": 75.7,
+     "label": "Enge Kurven mit kleinen Bewegungen sägen"
+    },
+    {
+     "t": 80.9,
+     "label": "Säge mit Sägebewegungen zurückziehen"
+    },
+    {
+     "t": 99.5,
+     "label": "Fertig – schau deine Sägeschnitte an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-saegen",
+   "areaId": "holz",
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "title": "Richtig sägen lernen",
+   "source": {
+    "type": "youtube",
+    "id": "fiGUw5_eUEo"
+   },
+   "kanal": "Die Werkkiste",
+   "dauer": "3:36",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Werkzeug-Video ohne eigenes Werkstück: Säge, Schraubstock und Restholz bereitlegen; Stolperstein ist das Verkanten, dabei reisst das Laubsägeblatt.",
+   "material": [
+    "saege",
+    "holzbrett",
+    "stab",
+    "schraubstock"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Lukas zeigt vier Sägen"
+    },
+    {
+     "t": 36.6,
+     "label": "Zuschauen: Japansäge sägt beim Ziehen"
+    },
+    {
+     "t": 57.1,
+     "label": "Einspannen, seitlich stehen, Hand sicher daneben"
+    },
+    {
+     "t": 82.2,
+     "label": "An der Kante klein anfangen, dann sägen"
+    },
+    {
+     "t": 93.0,
+     "label": "Gerade bleiben, locker aus dem Handgelenk"
+    },
+    {
+     "t": 105.2,
+     "label": "Zuschauen: PUK-Säge, Rundstab absägen"
+    },
+    {
+     "t": 134.0,
+     "label": "Zuschauen: Fuchsschwanz für grobe Arbeiten"
+    },
+    {
+     "t": 156.5,
+     "label": "Mit der Laubsäge einen Kreis sägen"
+    },
+    {
+     "t": 177.6,
+     "label": "Zuschauen: Gerissenes Sägeblatt ersetzen"
+    },
+    {
+     "t": 200.2,
+     "label": "Fertig – schau deine Sägeschnitte an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-kreuzanschlag",
+   "areaId": "stricken",
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "title": "Maschen anschlagen: Kreuzanschlag",
+   "source": {
+    "type": "youtube",
+    "id": "ERWAgvkH7wQ"
+   },
+   "kanal": "Andrea’s Loops",
+   "dauer": "1:56",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Dicke Wolle und eine Stricknadel genügen; Stolperstein ist die Fadenhaltung um Daumen und Zeigefinger – zuerst ohne Nadel üben.",
+   "material": [
+    "wolle",
+    "stricknadeln"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Wolle und Stricknadel"
+    },
+    {
+     "t": 11.5,
+     "label": "Fadenende zwischen kleinem Finger und Ringfinger klemmen"
+    },
+    {
+     "t": 17.0,
+     "label": "Faden aussen um Hand und Zeigefinger legen"
+    },
+    {
+     "t": 26.0,
+     "label": "Von innen um den Daumen, Faden festhalten"
+    },
+    {
+     "t": 35.0,
+     "label": "Nadel unter Daumenschlinge, Faden vom Zeigefinger holen"
+    },
+    {
+     "t": 49.0,
+     "label": "Durch die Daumenschlinge fahren, Masche festziehen"
+    },
+    {
+     "t": 62.0,
+     "label": "Daumen wieder hinein, Nadel wieder in Schlinge"
+    },
+    {
+     "t": 79.0,
+     "label": "Immer so weiter, Masche für Masche"
+    },
+    {
+     "t": 91.0,
+     "label": "Zuschauen: Faden abgerutscht – einfach wieder aufnehmen"
+    },
+    {
+     "t": 113.5,
+     "label": "Fertig – schau deinen Anschlag an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-rechte-masche",
+   "areaId": "stricken",
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "title": "Rechte Masche stricken",
+   "source": {
+    "type": "youtube",
+    "id": "EVUF6q6_Mrc"
+   },
+   "kanal": "Maschenmarie",
+   "dauer": "3:12",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Der Maschenanschlag muss schon auf der Nadel sein; Stolperstein: der Arbeitsfaden vom Knäuel muss hinter der Arbeit liegen.",
+   "material": [
+    "wolle",
+    "stricknadeln"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Maschen auf der Nadel, Knötchen nach rechts"
+    },
+    {
+     "t": 22.5,
+     "label": "Arbeitsfaden vom Knäuel hinter die Arbeit legen"
+    },
+    {
+     "t": 41.0,
+     "label": "Rechte Nadel von vorne in die Masche stechen"
+    },
+    {
+     "t": 60.0,
+     "label": "Arbeitsfaden von hinten um die Nadel holen"
+    },
+    {
+     "t": 71.0,
+     "label": "Faden durchziehen, Masche von links abheben"
+    },
+    {
+     "t": 85.5,
+     "label": "Nochmals ganz langsam: eine Masche stricken"
+    },
+    {
+     "t": 127.0,
+     "label": "Noch eine Masche: rein, holen, durch, abheben"
+    },
+    {
+     "t": 141.0,
+     "label": "Zuschauen: Faden zweimal um den Zeigefinger wickeln"
+    },
+    {
+     "t": 165.0,
+     "label": "Weiter stricken, Finger hält die Masche fest"
+    },
+    {
+     "t": 184.0,
+     "label": "Fertig – schau deine Maschen an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
   }
  ]
 }
