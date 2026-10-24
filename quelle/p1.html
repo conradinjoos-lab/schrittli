@@ -436,6 +436,18 @@ code{font-size:13px;word-break:break-all;background:var(--surface2);padding:2px 
 .kid.pl.kino .mat .ico,.kid.pl.kino .mat .ico .mat-svg{width:104px;height:96px}.kid.pl.kino .mat .ico .mat-emoji{font-size:70px}
 .kid.pl.kino .mat .nm{font-size:16px}
 @media (max-width:520px){.mat .ico,.mat .ico .mat-svg{width:48px;height:44px}.mat .ico .mat-emoji{font-size:34px}.mats-grid{grid-template-columns:repeat(auto-fit,minmax(70px,1fr))}.matkarte .kbtn{min-height:46px;font-size:16px}}
+/* Schule: Lochwand mit Haken statt Regal */
+.kid .regal.lochwand{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));row-gap:28px;column-gap:8px;align-items:start;margin-top:0}
+.kid .haken{display:flex;flex-direction:column;align-items:center;padding:0 4px;position:relative;color:var(--kink);font:inherit;text-transform:inherit;letter-spacing:inherit;background:none;border:0;min-width:0;max-width:100%}
+.kid .haken .hk{width:26px;height:30px;display:block;flex:none}
+.kid .haken .slot{position:absolute;top:27px;left:50%;width:104px;height:104px;margin-left:-55px;border:3px dashed var(--hole);border-radius:50%;pointer-events:none}
+.kid .haken .disc{position:relative;width:96px;height:96px;flex:none;border-radius:50%;border:4px solid var(--kink);box-shadow:4px 5px 0 var(--sh);display:flex;align-items:center;justify-content:center;transition:transform .12s}
+.kid .haken .disc svg{width:52px;height:52px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.kid .haken .disc.hell svg{stroke:var(--kink)}
+.kid .haken:active .disc{transform:translateY(-5px) rotate(-5deg)}
+.kid .haken .tag{margin-top:10px}
+.kid .haken.leer{opacity:.6}
+@media (max-width:420px){.kid .regal.lochwand{grid-template-columns:repeat(2,minmax(0,1fr))}.kid .haken .disc{width:84px;height:84px}.kid .haken .disc svg{width:46px;height:46px}.kid .haken .slot{width:92px;height:92px;margin-left:-49px}}
 </style>
 </head>
 <body>

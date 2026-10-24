@@ -53,6 +53,25 @@ const DINGE={
   kiste:emoji=>`<path d="M14 40h92v62H14z" fill="#D9A066" stroke="#2B2320" stroke-width="4"/><path d="M8 28h104v14H8z" fill="#C98A4E" stroke="#2B2320" stroke-width="4"/><rect x="34" y="56" width="52" height="36" rx="4" fill="#FFF1C9" stroke="#2B2320" stroke-width="3"/><text x="60" y="82" font-size="26" text-anchor="middle">${emoji}</text>`
 };
 const DING_NAMES={schere:'Schere & Leim',wolle:'Wollknäuel',farbkasten:'Farbkasten',kaeferglas:'Käferglas',kolben:'Kolben',buecher:'Bücher',wuerfel:'Würfel',popcorn:'Popcorn',radio:'Radio',kiste:'Kiste mit Symbol'};
+const WERK_ICONS={
+ naehen:'M3 21L17 7M19 5m-2 0a2 2 0 1 0 4 0a2 2 0 1 0-4 0M14 10c5 1 7 6 4 11',
+ sticken:'M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0-18 0M12 12m-6 0a6 6 0 1 0 12 0a6 6 0 1 0-12 0M12 9v6M9 12h6',
+ haekeln:'M9 21V6a3 3 0 1 1 6 0v2c0 2-3 3-3 3',
+ stricken:'M12 15m-6 0a6 6 0 1 0 12 0a6 6 0 1 0-12 0M4 4l8 11M20 4l-8 11',
+ weben:'M5 4v16M9 4v16M13 4v16M17 4v16M3 8h18M3 12h18M3 16h18',
+ knuepfen:'M6 21c0-9 12-9 12-18M18 21c0-9-12-9-12-18',
+ wickeln:'M12 12a1 1 0 0 1 2 0a3 3 0 0 0-6 0a5 5 0 0 1 10 0a7 7 0 0 0-14 0a9 9 0 0 1 18 0',
+ filzen:'M7 18h10a4 4 0 0 0 0-8 5 5 0 0 0-9.6-1A4 4 0 0 0 7 18z',
+ falten:'M3 11l18-8-6 18-3-7zM12 14l9-11',
+ schneiden:'M6 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0M6 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0M8.5 8l12 12M8.5 16l12-12',
+ holz:'M3 21l8-8M11 13l-2-2 6-6 4 4-6 6zM13 5l2-2 4 4-2 2',
+ schnitzen:'M4 20c4-6 10-10 16-16l-2-2c-6 6-10 12-16 16zM8 16l-4 4',
+ formen:'M7 8h10l-1 12H8zM5 8h14M9 4h6v4',
+ drucken:'M5 21h14M8 16h8v5H8zM10 11h4v5h-4zM12 4v7M9 4h6',
+ experimente:'M10 3h4M11 3v6l-6 10a1 1 0 0 0 1 2h12a1 1 0 0 0 1-2l-6-10V3M8 15h8',
+ kiste:'M3 7l9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10'};
+function hellFarbe(hex){ const m=/^#?([0-9a-f]{6})$/i.exec(hex||''); if(!m) return false; const n=parseInt(m[1],16); const r=n>>16&255,g=n>>8&255,b=n&255; return (0.299*r+0.587*g+0.114*b)/255>0.62; }
+function hakenHtml(a){ const nvid=videosIn(a.id).length; const hell=hellFarbe(a.color); return `<button class="haken${nvid?'':' leer'}" data-act="area" data-id="${a.id}" aria-label="${esc(a.name)}, ${nvid} Videos"><svg class="hk" viewBox="0 0 26 30" aria-hidden="true"><path d="M13 2v8c0 8 10 8 10 0" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="13" cy="3" r="3" fill="currentColor"/></svg><span class="slot" aria-hidden="true"></span><span class="disc${hell?' hell':''}" style="background:${a.color}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${WERK_ICONS[a.id]||WERK_ICONS.kiste}"/></svg></span><span class="tag">${esc(a.name)}${nvid?`<span class="zaehl" aria-hidden="true">${nvid}</span>`:''}</span></button>`; }
 const DING_BY_ID={basteln:'schere',werken:'wolle',zeichnen:'farbkasten',natur:'kaeferglas',experimente:'kolben',geschichten:'buecher',schule:'wuerfel',lustiges:'popcorn',lieder:'radio'};
 
 /* ---- Material (Vokabular, Piktogramme kommen aus MAT_SVG) ---- */
@@ -229,7 +248,7 @@ function homeSchule(app){ const n=abend(); const k=S.settings.klasse; if(!k){ go
     <div class="inner kopf mitfenster">
       <div class="schild hallo tipp" data-act="klasse" role="button"><h1>${k}. Klasse</h1><div class="sub">Andere Klasse? Tipp hier</div></div>
     </div>
-    <div class="inner regal-wrap"><div class="regal">${themen.map(a=>dingHtml(a,'lern')).join('')||'<div class="empty zettel">Für diese Klasse ist noch nichts da</div>'}</div></div>
+    <div class="inner regal-wrap"><div class="regal lochwand">${themen.map(hakenHtml).join('')||'<div class="empty zettel">Für diese Klasse ist noch nichts da</div>'}</div></div>
     <div class="inner lehrer-zeile"><button class="lehrer-link" data-act="lehrer">Für Lehrpersonen</button></div>
     ${bank()}
   </div>`;
