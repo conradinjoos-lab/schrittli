@@ -5,10 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Schrittli">
+<meta name="apple-mobile-web-app-title" content="Bibo & Fila">
 <meta name="theme-color" content="#F1E3CB" id="themecolor">
-<title>Schrittli</title>
-<link rel="manifest" href='data:application/manifest+json,{"name":"Schrittli","short_name":"Schrittli","display":"standalone","start_url":".","background_color":"%23F1E3CB","theme_color":"%23C98A4E"}'>
+<title>Bibo & Fila</title>
+<link rel="icon" href="grafik/figuren/icon.png">
+<link rel="apple-touch-icon" href="grafik/figuren/icon.png">
+<link rel="manifest" href='data:application/manifest+json,{"name":"Bibo %26 Fila","short_name":"Bibo %26 Fila","display":"standalone","start_url":".","background_color":"%23F1E3CB","theme_color":"%23C98A4E"}'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@700;800;900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
@@ -469,8 +471,8 @@ body:has(.v3){background:#F5F6F8}
 .v3 img{mix-blend-mode:multiply}
 .v3 .grow{flex:1}
 .v3-kopf{display:flex;align-items:center;gap:12px;min-height:52px}
-.v3-logo{width:44px;height:44px;border-radius:14px;background:#fff;overflow:hidden;flex:none;box-shadow:0 2px 8px rgba(28,36,48,.08)}
-.v3-logo img{width:100%;height:100%;object-fit:cover;display:block}
+.v3-logo{width:44px;height:44px;border-radius:14px;background:#F3E8D4;overflow:hidden;flex:none;box-shadow:0 2px 8px rgba(28,36,48,.08)}
+.v3-logo img{width:100%;height:100%;object-fit:cover;object-position:50% 6%;display:block}
 .v3-name{font-weight:900;font-size:20px}
 .v3-pill{border:0;background:#fff;border-radius:999px;padding:10px 18px;font-weight:800;font-size:15px;box-shadow:0 2px 8px rgba(28,36,48,.08);white-space:nowrap}
 .v3-rund{width:44px;height:44px;border-radius:50%;border:0;background:#fff;font-size:22px;font-weight:900;box-shadow:0 2px 8px rgba(28,36,48,.08);flex:none;display:grid;place-items:center}
@@ -599,6 +601,19 @@ body:has(.v3){background:#F5F6F8}
 @media (max-width:820px){.v3-thema{grid-template-columns:1fr}.v3-links{position:static;display:grid;grid-template-columns:160px 1fr;align-items:start}.v3-mat{grid-template-columns:repeat(4,1fr)}}
 @media (max-width:640px){.v3-themen{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.v3-raeume{grid-template-columns:1fr;gap:14px}.v3-raum b{font-size:26px}.v3-h1{font-size:30px}.v3-h1.gross{font-size:34px;margin-top:20px}
  .v3-links{grid-template-columns:96px 1fr;gap:12px}.v3-mat{grid-template-columns:repeat(3,1fr)}.v3-lektion .th{width:84px}.v3-lektion b{font-size:16px}.v3-pill{padding:10px 14px;font-size:14px}.v3-name{display:none}}
+/* Bibo & Fila: freigestellte Figuren (grafik/figuren/*.webp) */
+.figur{display:block;width:auto;max-width:100%;object-fit:contain;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.fig-gruss{display:flex;align-items:flex-end;justify-content:center;gap:12px;margin:0 auto;max-width:100%}
+.fig-gruss .figur{height:120px;margin-bottom:-4px}
+.papier .fig-gruss .figur{height:150px}
+.overlay .figur{flex:0 1 200px;min-height:56px;max-height:200px}   /* schrumpft im kleinen Videofeld */
+.mat-kopf{display:flex;align-items:center;justify-content:center;gap:10px}
+.mat-kopf .figur{height:clamp(44px,9vh,80px)}
+.empty .figur,.v3-leer .figur{height:140px;margin:0 auto 12px}
+.an-ende .figur{height:190px;margin:0 auto}
+.modebadge .figur{height:50px;margin:-8px -2px -6px -12px}
+.kid.pl.kino .modebadge .figur{height:58px}
+@media (max-width:640px){.fig-gruss{flex-direction:column;align-items:center;gap:6px}.fig-gruss .figur,.papier .fig-gruss .figur{height:100px;margin:0}}
 </style>
 </head>
 <body>

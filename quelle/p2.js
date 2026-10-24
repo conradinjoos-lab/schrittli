@@ -92,7 +92,7 @@ async function loadAnleitungen(){ if(!/^https?:/.test(location.protocol)) return
   S.videos=S.videos.filter(v=>v.quelle!=='anleitung').concat(neu); }catch(e){} }
 function werkeHtml(ws){ return ws.length?`<h2 class="pw-grp andere-titel">Das haben andere gemacht</h2><div class="kork andere">${ws.map(w=>`<button class="foto" data-act="andere" data-i="${WERKE.indexOf(w)}"><div class="bild"><img src="${WERKE_BASE}${esc(w.bild)}" alt="" loading="lazy" onerror="this.closest('.foto').remove()"></div><span class="nm">${esc(w.titel)}</span></button>`).join('')}</div>`:''; }
 function zeigeWerk(b){ const w=WERKE[+b.dataset.i]; if(!w) return; kidModal(`<img class="andere-gross" src="${WERKE_BASE}${esc(w.bild)}" alt=""><h2 style="font-size:20px;margin:10px 0 0">${esc(w.titel)}</h2><div class="row center" style="margin-top:12px"><button class="kbtn ghost" data-close>Schliessen</button></div>`); }
-function matCard(mat,btns){ return `<div class="matkarte"><h2>Material richten</h2><div class="mats-grid">${mat.map(id=>`<div class="mat"><div class="ico">${matIcon(id)}</div><div class="nm">${esc(matName(id))}</div></div>`).join('')}</div><div class="row center" style="flex-wrap:wrap">${btns}</div></div>`; }
+function matCard(mat,btns){ return `<div class="matkarte"><div class="mat-kopf">${figur('material')}<h2>Material richten</h2></div><div class="mats-grid">${mat.map(id=>`<div class="mat"><div class="ico">${matIcon(id)}</div><div class="nm">${esc(matName(id))}</div></div>`).join('')}</div><div class="row center" style="flex-wrap:wrap">${btns}</div></div>`; }
 function dingSvg(key,emoji,cls='obj'){ const inner=(key==='kiste'||!DINGE[key])?DINGE.kiste(emoji||'📦'):DINGE[key]; return `<svg class="${cls}" viewBox="0 0 120 110" aria-hidden="true">${inner}</svg>`; }
 const DEKO={
   kiste:'<svg viewBox="0 0 120 110" width="110" height="100" aria-hidden="true"><rect x="30" y="50" width="60" height="54" rx="6" fill="#E8554E" stroke="#2B2320" stroke-width="4"/><rect x="24" y="40" width="72" height="14" rx="4" fill="#2B2320"/><path d="M48 40V30h24v10" fill="none" stroke="#2B2320" stroke-width="4"/><rect x="52" y="66" width="16" height="10" rx="2" fill="#FFE58A" stroke="#2B2320" stroke-width="3"/></svg>',
@@ -226,7 +226,7 @@ window.addEventListener('hashchange',()=>{ const s=parseSchool(); if(s) go('scho
 SCREENS.firstrun=app=>{
   let emoji=AVATARS[0], color=COLORS[1]; const n=abend();
   app.innerHTML=`<div class="${kidClass()}">${girlande(n)}<div class="inner" style="max-width:600px;margin:30px auto 0;width:100%"><div class="papier">
-    <div class="schild hallo"><h1>Willkommen</h1><div class="sub">bei Schrittli</div></div>
+    <div class="fig-gruss">${figur(n?'abend':'hallo')}<div class="schild hallo"><h1>Willkommen</h1><div class="sub">bei Bibo & Fila</div></div></div>
     <p style="text-transform:none;letter-spacing:0">Videos Schritt für Schritt anschauen, nachmachen, zeigen. Zuerst: Für wen ist die App?</p>
     <div class="field"><label for="fr-name" style="color:var(--wmuted)">Name des Kindes</label><input class="inp" id="fr-name" placeholder="z. B. Lina" autocomplete="off"></div>
     <div class="field"><label style="color:var(--wmuted)">Tier</label><div class="emoji-pick" id="fr-em">${AVATARS.map(e=>`<button type="button" data-act="em" data-v="${e}" class="${e===emoji?'on':''}">${e}</button>`).join('')}</div></div>
@@ -250,25 +250,26 @@ SCREENS.profiles=app=>{
 /* ============================== Schule ============================== */
 SCREENS.klasse=app=>{ const n=abend();
   app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${fenster(n)}
-    <div class="inner kopf mitfenster"><div class="schild hallo"><h1>Hallo!</h1><div class="sub">In welche Klasse gehst du?</div></div></div>
+    <div class="inner kopf mitfenster"><div class="fig-gruss">${figur(n?'abend':'hallo')}<div class="schild hallo"><h1>Hallo!</h1><div class="sub">In welche Klasse gehst du?</div></div></div></div>
     <div class="inner"><div class="klassen">${STUFEN.map(k=>`<button class="klasse-btn" data-act="k" data-k="${k}"><span class="z">${k}.</span><span class="w">Klasse</span></button>`).join('')}</div></div>
     ${bank()}</div>`;
   wire(app,{ k:b=>{ S.settings.klasse=+b.dataset.k; save(); go('home'); } });
 };
 /* Variante 3a «Luftig & klar»: zuerst der Raum (wird gemerkt), dann Themen als Kacheln, im Thema die Lektionen nach Niveau */
 const GRAFIK=SCHULE?'../grafik/':'grafik/';
-const RAEUME=[{id:'hand',name:'Handarbeitszimmer',bild:'naehen',soft:'#FBE3DE',themen:['naehen','sticken','haekeln','stricken','weben','knuepfen','wickeln','filzen']},
- {id:'werk',name:'Werkraum',bild:'hammer',soft:'#F6E4C8'}];  // Werkraum: alles, was nicht ins Handarbeitszimmer gehört
+const figur=(name,cls='')=>`<img class="figur${cls?' '+cls:''}" src="${GRAFIK}figuren/${name}.webp" alt="" onerror="this.remove()">`;  // Bibo & Fila
+const RAEUME=[{id:'hand',name:'Handarbeitszimmer',bild:'figuren/fila-faden',soft:'#FBE3DE',themen:['naehen','sticken','haekeln','stricken','weben','knuepfen','wickeln','filzen']},
+ {id:'werk',name:'Werkraum',bild:'figuren/bibo-holz',soft:'#F6E4C8'}];  // Werkraum: alles, was nicht ins Handarbeitszimmer gehört
 const NIV3=[null,['Erkunden & üben','#DDF1E4','#1F6B45'],['Selbstständig & genau','#DCE8F7','#2B5A8C'],['Gezielt anwenden','#FBE9C9','#9A6A12']];
 const raumOf=aid=>RAEUME[0].themen.includes(aid)?RAEUME[0]:RAEUME[1];
 const raumThemen=r=>S.areas.filter(a=>raumOf(a.id)===r&&videosIn(a.id).length);
 const soft=a=>`color-mix(in oklch,${a.color} 16%,white)`;
 const prSchule=v=>S.progress[S.activeProfile+':'+v.id]||{};
-function v3Kopf(links,titel){ return `<div class="v3-kopf">${links}<span class="v3-logo"><img src="${GRAFIK}logo.webp" alt=""></span>${titel||'<b class="v3-name">Schrittli</b>'}<span class="grow"></span><button class="v3-pill" data-act="gallery">Unsere Werke${S.works.length?' · '+S.works.length:''}</button></div>`; }
+function v3Kopf(links,titel){ return `<div class="v3-kopf">${links}<span class="v3-logo"><img src="${GRAFIK}figuren/logo.webp" alt=""></span>${titel||'<b class="v3-name">Bibo & Fila</b>'}<span class="grow"></span><button class="v3-pill" data-act="gallery">Unsere Werke${S.works.length?' · '+S.works.length:''}</button></div>`; }
 function weiterMit(r){ const v=videoOf(S.settings.zuletzt); if(!v||raumOf(v.areaId)!==r||!videosIn(v.areaId).includes(v)) return null; const pr=prSchule(v); return !pr.done&&(pr.pos>5||pr.step>0)?{v,a:areaOf(v.areaId),schritt:(pr.step||0)+1}:null; }
 SCREENS.raum=app=>{ const akt=S.settings.raum;
   app.innerHTML=`<div class="v3"><div class="v3-in">${v3Kopf('')}
-    <h1 class="v3-h1 gross">Wo arbeitest du heute?</h1><p class="v3-sub">${akt?'Tipp auf den Raum, in dem du arbeitest.':'Nur beim ersten Start – danach merkt sich Schrittli deinen Raum.'}</p>
+    <h1 class="v3-h1 gross">Wo arbeitest du heute?</h1><p class="v3-sub">${akt?'Tipp auf den Raum, in dem du arbeitest.':'Nur beim ersten Start – danach merken sich Bibo & Fila deinen Raum.'}</p>
     <div class="v3-raeume">${RAEUME.map(r=>`<button class="v3-raum${r.id===akt?' an':''}" data-act="r" data-id="${r.id}"><span class="bild" style="background:${r.soft}"><img src="${GRAFIK}${r.bild}.webp" alt=""></span><b>${r.name}</b><span class="v3-meta">${raumThemen(r).length} Themen</span></button>`).join('')}</div>
     <div class="v3-fuss"><button class="v3-link" data-act="lehrer">Für Lehrpersonen</button></div></div></div>`;
   wire(app,{ r:b=>{ S.settings.raum=b.dataset.id; save(); go('home'); }, gallery:()=>go('gallery'), lehrer:()=>go('lehrer') });
@@ -282,7 +283,7 @@ function homeSchule(app){ const r=RAEUME.find(x=>x.id===S.settings.raum); if(!r)
       <div class="v3-schalter v3-klassen" role="group" aria-label="Klasse">${STUFEN.map(s=>`<button class="${s===k?'an':''}" data-act="klasse" data-k="${s}" aria-label="${s}. Klasse">${s}.</button>`).join('')}</div></div>
     <div class="v3-titel"><h1 class="v3-h1">${r.name}</h1>${w?`<button class="v3-weiter" data-act="weiter" data-id="${w.v.id}"><span class="bild" style="background:${soft(w.a)}"><img src="${GRAFIK}${w.a.id}.webp" alt=""></span><span class="txt"><small>Weiter mit</small><b>${esc(w.a.name)} · Schritt ${w.schritt}</b></span><span class="play" aria-hidden="true">▶</span></button>`:''}</div>
     ${k?'':'<p class="v3-sub">Tipp oben auf deine Klasse – dann siehst du nur, was zu dir passt.</p>'}
-    <div class="v3-themen">${themen.map(themaKachel).join('')||'<div class="v3-leer">Für diese Klasse ist hier noch nichts da.</div>'}</div>
+    <div class="v3-themen">${themen.map(themaKachel).join('')||`<div class="v3-leer">${figur('nachdenken')}Für diese Klasse ist hier noch nichts da.</div>`}</div>
     <div class="v3-fuss"><button class="v3-link" data-act="lehrer">Für Lehrpersonen</button></div></div></div>`;
   wire(app,{ raeume:()=>go('raum'), raum:b=>{ S.settings.raum=b.dataset.id; save(); render(); }, klasse:b=>{ S.settings.klasse=+b.dataset.k; save(); render(); },
     area:b=>go('area',{id:b.dataset.id}), weiter:b=>go('player',{videoId:b.dataset.id}), lehrer:()=>go('lehrer'), gallery:()=>go('gallery') });
@@ -298,7 +299,7 @@ function areaSchule(app,a){ const vs=[1,2,3].flatMap(n=>videoOrdnung(videosIn(a.
     <div class="v3-thema">
       <div class="v3-links"><div class="v3-held" style="background:${soft(a)}"><img src="${GRAFIK}${a.id}.webp" alt="" onerror="this.remove()"></div>
         ${mat.length?`<div class="v3-karte"><h2>Du brauchst</h2><div class="v3-mat">${mat.map(id=>`<div><span class="pik">${matIcon(id)}</span><b>${esc(matName(id))}</b></div>`).join('')}</div></div>`:''}</div>
-      <div class="v3-liste">${liste||'<div class="v3-leer">Hier ist noch nichts drin.</div>'}${werkeHtml(WERKE.filter(w=>w.bereich===a.id))}</div>
+      <div class="v3-liste">${liste||`<div class="v3-leer">${figur('nachdenken')}Hier ist noch nichts drin.</div>`}${werkeHtml(WERKE.filter(w=>w.bereich===a.id))}</div>
     </div></div></div>`;
   wire(app,{ back:()=>go('home'), andere:zeigeWerk, video:b=>go('player',{videoId:b.dataset.id}), gallery:()=>go('gallery') });
 }
@@ -324,7 +325,7 @@ SCREENS.home=app=>{
       <div class="kopf-rechts">${S.settings.spass?glasSterne(p.id):''}<button class="werke-btn" data-act="gallery"><span class="fotos"><i></i><i></i></span>Meine Werke${newFb?`<span class="neu">${newFb}</span>`:''}</button><button class="lock-btn" data-act="parent" aria-label="Elternbereich">${ico('lock')}</button></div>
     </div>
     ${spass.length?`<div class="inner regal-wrap"><span class="zettel links"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color:#F2B705"><path d="${ICONS.star}"/></svg>Kostet einen Stern</span><div class="regal">${spass.map(a=>dingHtml(a,'spass')).join('')}</div></div>`:''}
-    <div class="inner regal-wrap"><div class="regal">${lern.map(a=>dingHtml(a,'lern')).join('')||'<div class="empty zettel">Noch keine Videos – Eltern: Schloss oben rechts</div>'}</div></div>
+    <div class="inner regal-wrap"><div class="regal">${lern.map(a=>dingHtml(a,'lern')).join('')||`<div class="empty zettel">${figur('nachdenken')}Noch keine Videos – Eltern: Schloss oben rechts</div>`}</div></div>
     ${bank()}
   </div>`;
   wire(app,{ area:b=>go('area',{id:b.dataset.id}), gallery:()=>go('gallery'), parent:()=>go('parent',{tab:'videos'}), who:()=>{ if(S.profiles.length>1) go('profiles'); } });
@@ -402,7 +403,7 @@ SCREENS.anleitung=(app,{v,school})=>{
         ${vorlageHtml()}
         <div class="an-nav">${weiter?`<button class="an-weiter" data-act="geh" data-i="${pr.step}">Weiter bei Schritt ${pr.step+1} →</button><button class="v3-pill" data-act="geh" data-i="0">Von vorne</button>`:`<button class="an-weiter" data-act="geh" data-i="0">Los geht's →</button>`}</div>
         ${(v.material||[]).length?`<div class="v3-karte"><h2>Du brauchst</h2><div class="v3-mat">${v.material.map(id=>`<div><span class="pik">${matIcon(id)}</span><b>${esc(matName(id))}</b></div>`).join('')}</div></div>`:''}</div></div>`; }
-    else if(i>=n){ inhalt=`<div class="an-ende v3-karte"><div class="em">😀</div><h2>${esc(v.fertig||'Bravo! Geschafft.')}</h2>
+    else if(i>=n){ inhalt=`<div class="an-ende v3-karte">${figur('geschafft')}<h2>${esc(v.fertig||'Bravo! Geschafft.')}</h2>
         <div class="an-nav mitte">${naechste?`<button class="an-weiter" data-act="naechste">Weiter: ${esc(naechste.title.replace(/^.*?:\s*/,''))} →</button>`:''}<button class="${naechste?'v3-pill':'an-weiter'}" data-act="foto">📷 Foto von deinem Werk</button>${S.works.some(w=>w.videoId===v.id&&w.profileId===S.activeProfile)?`<button class="v3-pill" data-act="werke">${SCHULE?'Unsere':'Meine'} Werke</button>`:''}<button class="v3-pill" data-act="geh" data-i="0">Nochmal anschauen</button></div></div>`; }
     else { const bt=s.bildtext||[];
       inhalt=`<div class="an-schritt"><div class="an-bilder${(s.bilder||[]).length>1?' zwei':''}">${(s.bilder||[]).map((f,k)=>`<figure><button data-act="gross" data-src="${esc(bild(f))}" aria-label="Foto gross anzeigen"><img src="${esc(bild(f))}" alt=""></button>${bt[k]?`<figcaption>${esc(bt[k])}</figcaption>`:''}</figure>`).join('')}</div>
@@ -508,17 +509,17 @@ function updatePlayerUI(){ if(!P) return;
   const isKino=!!$('.kid.pl.kino');
   const bigPlay=(act,label)=>`<button class="kbtn round big" data-act="${act}" aria-label="${label}">${ico('play')}</button><div class="lbl">${label}</div>`;
   let html='', show=true, transparent=false;
-  if(m==='error'){ html=`<div class="em">🙈</div><h2>Dieses Video geht hier nicht</h2><div class="hint">Sag es deinen Eltern.</div>`; }
+  if(m==='error'){ html=`${figur('nachdenken')}<h2>Dieses Video geht hier nicht</h2><div class="hint">Sag es deinen Eltern.</div>`; }
   else if(m==='start'&&steps[0]&&steps[0].material){ const canResume=pr.step>1; html=matCard(steps[0].material,`<button class="kbtn primary" data-act="start">${ico('check')} Habe ich alles – los!</button>${canResume?`<button class="kbtn ghost" data-act="resume">Weiter bei Schritt ${pr.step+1}</button>`:''}`); }
   else if(m==='material'){ html=matCard(curStep().material,`<button class="kbtn primary" data-act="next">${ico('check')} Habe ich alles – weiter</button>`); }
   else if(m==='start'){ const canResume=n?pr.step>0:pr.pos>3;
     html=`${bigPlay(canResume?'resume':'start',canResume?(n?`Weiter bei Schritt ${pr.step+1}`:'Weiter schauen'):'Los geht\'s')}${canResume?`<button class="kbtn ghost" data-act="start">Von vorne</button>`:''}${n?`<div class="hint">${n} Schritte – das Video hält nach jedem Schritt an.</div>`:''}`; }
   else if(m==='playing'){ if(P.needsTap){ transparent=true; html=`<div class="lbl" style="background:rgba(0,0,0,.5);padding:10px 18px;border-radius:14px">Tippe auf das Video ▶</div>`; } else show=false; }
   else if(m==='paused'||m==='stepdone'){ show=false; }
-  else if(m==='ended'){ html=`<div class="em">🎉</div><h2>Fertig geschaut!</h2>${v.task&&v.task.text&&v.task.deliverable!=='keine'?`<div class="hint">Jetzt kommt deine Aufgabe ↓</div>`:''}${!SCHULE&&v.task&&v.task.text&&v.task.deliverable==='foto'?'':`<button class="kbtn primary" data-act="foto">${ico('camera')} Foto von deinem Werk</button>`}${S.works.some(w=>w.videoId===v.id&&w.profileId===S.activeProfile)?`<button class="kbtn ghost" data-act="gallery">${ico('gallery')} ${SCHULE?'Unsere':'Meine'} Werke</button>`:''}<button class="kbtn ghost" data-act="restart">${ico('replay')} Nochmal von vorne</button>`; }
+  else if(m==='ended'){ html=`${figur('geschafft')}<h2>Fertig geschaut!</h2>${v.task&&v.task.text&&v.task.deliverable!=='keine'?`<div class="hint">Jetzt kommt deine Aufgabe ↓</div>`:''}${!SCHULE&&v.task&&v.task.text&&v.task.deliverable==='foto'?'':`<button class="kbtn primary" data-act="foto">${ico('camera')} Foto von deinem Werk</button>`}${S.works.some(w=>w.videoId===v.id&&w.profileId===S.activeProfile)?`<button class="kbtn ghost" data-act="gallery">${ico('gallery')} ${SCHULE?'Unsere':'Meine'} Werke</button>`:''}<button class="kbtn ghost" data-act="restart">${ico('replay')} Nochmal von vorne</button>`; }
   ov.hidden=!show; ov.classList.toggle('transparent',transparent); ov.innerHTML=html;
   sh.hidden=P.needsTap||S.settings.passTouches||show;
-  const mb=$('#modebadge'); if(mb){ mb.hidden=!(m==='paused'||m==='stepdone'); mb.textContent=m==='stepdone'?(/^(zuschauen|schau )/i.test(curStep().label)?'Weiter?':'Jetzt du'):'Pause'; }
+  const mb=$('#modebadge'); if(mb){ mb.hidden=!(m==='paused'||m==='stepdone'); const jetzt=m==='stepdone'&&!/^(zuschauen|schau )/i.test(curStep().label); mb.innerHTML=jetzt?figur('jetzt-du')+'Jetzt du':m==='stepdone'?'Weiter?':'Pause'; }
   const z=$('#zettel'); if(z) z.textContent=n?`Schritt ${P.idx+1} von ${n}`:'Frei schauen';
   // Schritte als Knöpfe rechts neben dem Video
   const sl=$('#schritte');
@@ -601,7 +602,7 @@ SCREENS.record=(app,pr)=>{
 SCREENS.gallery=(app,{school}={})=>{
   const p=profile(); const pid=p?p.id:null; const ws=S.works.filter(w=>w.profileId===pid); const n=abend();
   app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${kopf(SCHULE?'Unsere Werke':'Meine Werke',{back:true,right:SCHULE||school?'':`<button class="btn" data-act="malen">${ico('brush')} Malen</button><button class="btn" data-act="ton">${ico('mic')} Aufnehmen</button>`})}
-    <div class="inner">${ws.length?`<div class="kork">${ws.map(w=>`<button class="foto" data-act="open" data-id="${w.id}" aria-label="Werk öffnen"><div class="bild">${w.type==='ton'?'🎧':`<img data-blob="${w.id}" alt="">`}</div><span class="dt">${dateDE(w.createdAt)}</span>${w.feedback?`<span class="fb${w.fbSeen?'':' new'}">${w.feedback.emoji}</span>`:''}</button>`).join('')}</div>`:`<div class="empty" style="margin-top:20px">Noch keine Werke.<br><span class="small">Mal etwas, nimm etwas auf oder mach ein Foto nach einem Video.</span></div>`}</div>${bank()}</div>`;
+    <div class="inner">${ws.length?`<div class="kork">${ws.map(w=>`<button class="foto" data-act="open" data-id="${w.id}" aria-label="Werk öffnen"><div class="bild">${w.type==='ton'?'🎧':`<img data-blob="${w.id}" alt="">`}</div><span class="dt">${dateDE(w.createdAt)}</span>${w.feedback?`<span class="fb${w.fbSeen?'':' new'}">${w.feedback.emoji}</span>`:''}</button>`).join('')}</div>`:`<div class="empty" style="margin-top:20px">${figur('foto')}Noch keine Werke.<br><span class="small">Mal etwas, nimm etwas auf oder mach ein Foto nach einem Video.</span></div>`}</div>${bank()}</div>`;
   fillThumbs(app);
   wire(app,{ back:()=>school?go('school',{video:school}):go('home'), who:()=>{}, malen:()=>go('paint',{back:'gallery'}), ton:()=>go('record',{back:'gallery'}), open:b=>openWork(b.dataset.id,false) });
 };

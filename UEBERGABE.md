@@ -1,4 +1,4 @@
-# Übergabe «Schrittli» – Stand 24.10.2026, 11:30
+# Übergabe «Bibo & Fila» (vorher «Schrittli») – Stand 24.10.2026, 11:30
 
 Für die nächste Claude-Sitzung (anderes Konto, kein Gedächtnis). Alles Nötige liegt in diesem Repo.
 
