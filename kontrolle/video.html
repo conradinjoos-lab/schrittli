@@ -350,7 +350,7 @@ function ladePlayer(){const tag=document.createElement('script');tag.src='https:
 function satzBei(t){return D.analyse.transkript.find(([s,e])=>t>s+1.5&&t<e-1.0)}
 function hinweise(i){const s=E.steps[i],w=[];const n=words(s.label);
  if(!s.label.trim())w.push(['Titel fehlt',1]);if(n>8)w.push([n+' Wörter (max. 8)',1]);if(/ß/.test(s.label))w.push(['ß → ss',1]);if(/["«»„“]/.test(s.label))w.push(['Anführungszeichen',1]);
- if(i===0&&s.t!==0)w.push(['erster Schritt nicht bei 0:00',1]);if(i>0&&s.t<=E.steps[i-1].t)w.push(['Zeit nicht aufsteigend',1]);
+ if(/^\s*zuschau/i.test(s.label))w.push(['«Zuschauen» ist kein Schritt – löschen',1]);if(i===0&&s.t!==0&&!E.material.length)w.push(['erster Schritt nicht bei 0:00',1]);if(i>0&&s.t<=E.steps[i-1].t)w.push(['Zeit nicht aufsteigend',1]);
  const nx=E.steps[i+1];if(nx&&nx.t-s.t<3&&nx.t>s.t)w.push(['nur '+(nx.t-s.t).toFixed(1)+' s lang',0]);
  if(i>0){const z=satzBei(s.t);if(z)w.push(['beginnt mitten im Satz («'+z[2].slice(0,36)+(z[2].length>36?'…':'')+'» '+fmt(z[0])+'–'+fmt(z[1])+')',0])}
  return w}
@@ -372,7 +372,7 @@ function renderCheck(){const items=checkliste();const ok=items.filter(x=>x[1]).l
 const uebersprungen=()=>E.material.length>0&&E.steps.length>0&&/^material richten/i.test(E.steps[0].label||'');
 function vorschauSchritte(){const s=E.steps.map((x,i)=>({ref:i,label:x.label}));
  if(E.material.length&&s.length){if(uebersprungen())s.shift();s.unshift({ref:'mat',label:'Material richten'})}
- else if(E.steps.length&&E.steps[0].t>1.5)s.unshift({ref:'zu',label:'Zuschauen'});return s}
+ return s}
 function renderVorschau(){PV=vorschauSchritte();
  let cur=PV.findIndex(p=>matSicht||(sel===0&&uebersprungen())?p.ref==='mat':p.ref===sel);
  $('#vorschau').innerHTML=PV.map((p,k)=>{const fertig=cur>=0&&k<cur;
@@ -452,7 +452,7 @@ function vorschlag(){const a=D.analyse,cand=[];
  if(!cand.length){quelle='starke Bildwechsel';for(const t of strong())cand.push({t,label:''})}
  cand.sort((p,q)=>p.t-q.t);const st=[];
  for(const c of cand){const t=quelle==='starke Bildwechsel'?r1(c.t):beginnVor(c.t);if(st.length&&t-st[st.length-1].t<3)continue;if(t<1.5)continue;st.push({t,label:kurz(c.label)})}
- st.unshift({t:0,label:(a.transkript[0]&&a.transkript[0][0]>3)?'Material richten: ':'Zuschauen: Einleitung'});
+ st.unshift({t:0,label:'Material richten: '});
  const outro=strong().find(t=>t>a.dauer*0.85);if(outro&&outro-st[st.length-1].t>3)st.push({t:r1(outro),label:'Fertig – schau dein Werk an'});
  if(E.steps.length>1&&!confirm('Die '+E.steps.length+' bestehenden Schritte durch den Vorschlag ('+st.length+' Schritte aus '+quelle+') ersetzen? Rückgängig mit Ctrl+Z.'))return;
  pushHist();E.steps=st;sel=0;markDirty();zeige('A');render();renderChips();msg('Vorschlag aus '+quelle+': '+st.length+' Schritte – Titel und Stopps prüfen')}

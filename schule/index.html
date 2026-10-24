@@ -1003,7 +1003,7 @@ function makePlayer(host,source,opts={}){
 
 /* ============================== Kind: Player auf der Werkbank ============================== */
 let P=null;
-function buildVideoSteps(v){ const s=(v.steps||[]).slice().sort((a,b)=>a.t-b.t); const mat=(v.material||[]).filter(Boolean); if(mat.length&&s.length){ if(/^material richten/i.test(s[0].label||'')) s.shift(); s.unshift({t:-1,label:'Material richten',material:mat}); } else if(s.length&&s[0].t>1.5) s.unshift({t:0,label:'Zuschauen'}); return s; }
+function buildVideoSteps(v){ const s=(v.steps||[]).slice().sort((a,b)=>a.t-b.t); const mat=(v.material||[]).filter(Boolean); if(mat.length&&s.length){ if(/^material richten/i.test(s[0].label||'')) s.shift(); s.unshift({t:-1,label:'Material richten',material:mat}); } return s; }
 /* ============================== Foto-Anleitung (Schritte mit Fotos statt Video) ============================== */
 // Schritt: {text, bilder[], bildtext[], achtung[], tipp[], frage, zeigen}. «zeigen» sperrt «Weiter», bis jemand bestätigt, dass die Lehrperson es gesehen hat.
 SCREENS.anleitung=(app,{v,school})=>{

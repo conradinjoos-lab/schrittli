@@ -84,13 +84,14 @@ def pruefe(vid, vok):
         mind, maxd = (6, 10) if dauer <= 300 else (6, 12)
         if dauer < 60: mind = 3
         if not mind <= len(steps) <= maxd: h(f'{len(steps)} Schritte bei {dauer} s (Regel {mind}–{maxd})')
-    if steps and steps[0].get('t') != 0: f(f'erster Schritt bei {steps[0].get("t")} statt 0')
-    if steps and not re.match(r'(Material richten|Zuschauen)', steps[0].get('label', '')): h('erstes Label beginnt nicht mit «Material richten:» oder «Zuschauen:»')
+    if steps and steps[0].get('t') != 0 and not v.get('material'): f(f'erster Schritt bei {steps[0].get("t")} statt 0')
+    if steps and not steps[0].get('label', '').startswith('Material richten'): h('erstes Label beginnt nicht mit «Material richten:»')
     if steps and not steps[-1].get('label', '').startswith('Fertig'): f('letztes Label beginnt nicht mit «Fertig»')
     if steps and dauer and steps[-1]['t'] > dauer - 2: f(f'letzter Schritt {steps[-1]["t"]} liegt praktisch am Videoende ({dauer} s)')
     for i, s in enumerate(steps):
         lab = (s.get('label') or '').strip(); t = s.get('t')
         if not lab: f(f'Schritt {i+1}: Label leer')
+        if re.match(r'zuschau', lab, re.I): f(f'Schritt {i+1}: «Zuschauen» ist nie ein Schritt: {lab}')
         if len(lab.split()) > 8: f(f'Schritt {i+1}: {len(lab.split())} Wörter: {lab}')
         if 'ß' in lab: f(f'Schritt {i+1}: ß → ss: {lab}')
         if re.search(r'[«»"„“”‚‘’\']', lab): f(f'Schritt {i+1}: Anführungszeichen: {lab}')

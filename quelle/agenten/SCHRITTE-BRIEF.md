@@ -19,7 +19,7 @@ Pro Video genau eine Datei:
  "alter": "ab 6",
  "sprache": "Hochdeutsch" | "Schweizerdeutsch" | "ohne Sprache",
  "hinweis": "<1 Satz für Lehrperson: Material, Stolperstein>",
- "steps": [{"t": 0, "label": "Zuschauen: …"}, {"t": 12, "label": "…"}],
+ "steps": [{"t": 0, "label": "Material richten: …"}, {"t": 12, "label": "…"}],
  "task": {"text":"", "deliverable":"keine"}
 }
 ```
@@ -27,7 +27,7 @@ Pro Video genau eine Datei:
 ## Regeln für die Schritte
 
 - `t` = Sekunde, an der die Anweisung für diesen Schritt **beginnt**. Das Video stoppt automatisch kurz vor dem `t` des nächsten Schritts. Darum: Ein Schritt muss so geschnitten sein, dass das Kind am Stopp etwas Konkretes nachmachen kann.
-- Erster Schritt bei `t: 0`. Zeigt das Video zuerst das Material, heisst der Schritt «Material richten: Wolle, Schere, …» (das Kind holt es) und der zweite Schritt beginnt genau dort, wo das Materialbild endet – nicht erst, wenn die Sprecherin die erste Anweisung sagt. Nur wenn das Video mit einer Vorschau des fertigen Werks beginnt, heisst der erste Schritt «Zuschauen: …».
+- Erster Schritt bei `t: 0`. Zeigt das Video zuerst das Material, heisst der Schritt «Material richten: Wolle, Schere, …» (das Kind holt es) und der zweite Schritt beginnt genau dort, wo das Materialbild endet – nicht erst, wenn die Sprecherin die erste Anweisung sagt. Beginnt das Video mit einer Vorschau des fertigen Werks, gehört sie trotzdem zum ersten Schritt «Material richten: …». **Nie ein Schritt «Zuschauen: …»**: Tipps, Varianten und Vorführungen gehören zum vorherigen Arbeitsschritt, kurz vor dem Schluss zum Schritt «Fertig – …».
 - Gesprochene Anweisungen hinken dem Bild meist 1–2 Sekunden hinterher. Setze `t` darum 1–2 Sekunden **vor** den Beginn der gesprochenen Anweisung bzw. auf den Bildwechsel. Im Zweifel ein Kontaktblatt (Schritt 2 unten) mit engen Zeiten um die fragliche Stelle machen und den Bildwechsel ablesen.
 - 6–10 Schritte für 1–4 Minuten Video; bei langen Videos (> 5 Min) höchstens 12. Nicht jeden Satz zu einem Schritt machen – ein Schritt = eine Handlung, die man nachmachen kann.
 - Letzter Schritt am Beginn des Abspanns/Outros, Label z. B. «Fertig – schau dein Werk an». So verschwindet das Kanal-Geschwätz am Schluss hinter dem Stopp.
