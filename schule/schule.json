@@ -9,6 +9,11 @@
     2,
     3
    ],
+   "niveau": 1,
+   "techniken": [
+    "fingerstricken",
+    "knoten"
+   ],
    "title": "Fingerstricken – Armband",
    "source": {
     "type": "youtube",
@@ -73,6 +78,10 @@
     2,
     3
    ],
+   "niveau": 1,
+   "techniken": [
+    "fingerstricken"
+   ],
    "title": "Fingerstricke (Mundart)",
    "source": {
     "type": "youtube",
@@ -129,6 +138,11 @@
     2,
     3,
     4
+   ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "schnurstricken"
    ],
    "title": "Strickliesel – von Anfang bis Schluss",
    "source": {
@@ -188,6 +202,12 @@
     2,
     3
    ],
+   "niveau": 1,
+   "techniken": [
+    "wickeln",
+    "kleben",
+    "knoten"
+   ],
    "title": "Wickeldrachen aus zwei Holzspateln",
    "source": {
     "type": "youtube",
@@ -237,6 +257,11 @@
    "stufen": [
     3,
     4
+   ],
+   "niveau": 2,
+   "techniken": [
+    "flechten",
+    "schneiden"
    ],
    "title": "Armband knüpfen mit der Kartonscheibe",
    "source": {
@@ -303,6 +328,12 @@
     2,
     3
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "weben",
+    "kette spannen"
+   ],
    "title": "Mini-Webrahmen aus Karton",
    "source": {
     "type": "youtube",
@@ -356,6 +387,13 @@
    "stufen": [
     1,
     2
+   ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "vorstich",
+    "einfaedeln",
+    "knoten"
    ],
    "title": "Vorstich – der einfachste Handstich",
    "source": {
@@ -415,6 +453,12 @@
     2,
     3
    ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "flechten",
+    "knoten"
+   ],
    "title": "Zopf flechten aus 3 Strängen",
    "source": {
     "type": "youtube",
@@ -467,6 +511,12 @@
    "stufen": [
     2,
     3
+   ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "flechten",
+    "knoten"
    ],
    "title": "Flechten – Grundlagen",
    "source": {
@@ -524,6 +574,11 @@
    "stufen": [
     3,
     4
+   ],
+   "niveau": 2,
+   "techniken": [
+    "knuepfen",
+    "knoten"
    ],
    "title": "Armband aus zwei Fäden knüpfen",
    "source": {
@@ -586,6 +641,10 @@
     1,
     2
    ],
+   "niveau": 1,
+   "techniken": [
+    "luftmaschen"
+   ],
    "title": "Armband fingerhäkeln",
    "source": {
     "type": "youtube",
@@ -639,6 +698,11 @@
     2,
     3,
     4
+   ],
+   "niveau": 1,
+   "techniken": [
+    "experimentieren",
+    "kleben"
    ],
    "title": "Raketenstart mit Luft",
    "source": {
@@ -701,6 +765,10 @@
     4,
     5
    ],
+   "niveau": 2,
+   "techniken": [
+    "experimentieren"
+   ],
    "title": "Brausepulverrakete",
    "source": {
     "type": "youtube",
@@ -759,6 +827,11 @@
     3,
     4,
     5
+   ],
+   "niveau": 2,
+   "techniken": [
+    "experimentieren",
+    "knoten"
    ],
    "title": "Luft wiegt etwas",
    "source": {
@@ -824,6 +897,10 @@
     4,
     5
    ],
+   "niveau": 2,
+   "techniken": [
+    "experimentieren"
+   ],
    "title": "Hefeballon",
    "source": {
     "type": "youtube",
@@ -882,6 +959,10 @@
     2,
     3
    ],
+   "niveau": 1,
+   "techniken": [
+    "experimentieren"
+   ],
    "title": "Was macht Regen mit Moos?",
    "source": {
     "type": "youtube",
@@ -931,6 +1012,10 @@
     1,
     2,
     3
+   ],
+   "niveau": 1,
+   "techniken": [
+    "experimentieren"
    ],
    "title": "Pfeffer und Salz trennen",
    "source": {
@@ -983,6 +1068,10 @@
     2,
     3
    ],
+   "niveau": 1,
+   "techniken": [
+    "experimentieren"
+   ],
    "title": "Starke Eier",
    "source": {
     "type": "youtube",
@@ -1032,6 +1121,10 @@
     2,
     3,
     4
+   ],
+   "niveau": 2,
+   "techniken": [
+    "experimentieren"
    ],
    "title": "Wie entstehen Tag und Nacht?",
    "source": {
@@ -1083,6 +1176,10 @@
     3,
     4,
     5
+   ],
+   "niveau": 2,
+   "techniken": [
+    "experimentieren"
    ],
    "title": "Wasserfilter selber bauen",
    "source": {
@@ -1141,6 +1238,10 @@
     2,
     3
    ],
+   "niveau": 1,
+   "techniken": [
+    "experimentieren"
+   ],
    "title": "Luftballon mit Essig und Backpulver",
    "source": {
     "type": "youtube",
@@ -1193,6 +1294,11 @@
     2,
     3,
     4
+   ],
+   "niveau": 1,
+   "techniken": [
+    "experimentieren",
+    "kleben"
    ],
    "title": "Dinge bewegen ohne Berührung – Magnet",
    "source": {
@@ -1256,6 +1362,10 @@
     2,
     3
    ],
+   "niveau": 1,
+   "techniken": [
+    "falten"
+   ],
    "title": "Papierschiff falten",
    "source": {
     "type": "youtube",
@@ -1313,6 +1423,10 @@
     3,
     4
    ],
+   "niveau": 1,
+   "techniken": [
+    "falten"
+   ],
    "title": "Papierflieger falten",
    "source": {
     "type": "youtube",
@@ -1364,6 +1478,10 @@
     1,
     2,
     3
+   ],
+   "niveau": 1,
+   "techniken": [
+    "falten"
    ],
    "title": "Hüpf-Frosch falten",
    "source": {
@@ -1433,6 +1551,11 @@
     1,
     2,
     3
+   ],
+   "niveau": 1,
+   "techniken": [
+    "kleben",
+    "schneiden"
    ],
    "title": "Geist aus Zündholzschachteln",
    "source": {
@@ -1507,6 +1630,11 @@
     2,
     3
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "luftmaschen"
+   ],
    "title": "Luftmaschen häkeln",
    "source": {
     "type": "youtube",
@@ -1575,6 +1703,11 @@
     2,
     3
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "steppstich"
+   ],
    "title": "Rückstich sticken",
    "source": {
     "type": "youtube",
@@ -1632,6 +1765,12 @@
    "stufen": [
     1,
     2
+   ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "kordel drehen",
+    "knoten"
    ],
    "title": "Kordel drehen an der Türklinke",
    "source": {
@@ -1703,6 +1842,11 @@
     2,
     3
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "steppstich"
+   ],
    "title": "Steppstich nähen",
    "source": {
     "type": "youtube",
@@ -1769,6 +1913,11 @@
     1,
     2,
     3
+   ],
+   "niveau": 2,
+   "techniken": [
+    "nageln",
+    "knoten"
    ],
    "title": "Fadenbild mit Nägeln",
    "source": {
@@ -1839,6 +1988,11 @@
     4,
     5
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "maschenanschlag"
+   ],
    "title": "Endloser Maschenanschlag",
    "source": {
     "type": "youtube",
@@ -1904,6 +2058,10 @@
     2,
     3
    ],
+   "niveau": 1,
+   "techniken": [
+    "falten"
+   ],
    "title": "Himmel und Hölle falten",
    "source": {
     "type": "youtube",
@@ -1968,6 +2126,12 @@
     3,
     4,
     5
+   ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "abketten",
+    "rechte maschen"
    ],
    "title": "Maschen abketten",
    "source": {
@@ -2042,6 +2206,10 @@
     3,
     4
    ],
+   "niveau": 1,
+   "techniken": [
+    "nassfilzen"
+   ],
    "title": "Kinder filzen eine Kugel",
    "source": {
     "type": "youtube",
@@ -2103,6 +2271,11 @@
    "stufen": [
     3,
     4
+   ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "nassfilzen"
    ],
    "title": "Filzkugeln in 2 Minuten",
    "source": {
@@ -2170,6 +2343,11 @@
     3,
     4
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "feste maschen"
+   ],
    "title": "Feste Masche kurz erklärt",
    "source": {
     "type": "youtube",
@@ -2226,6 +2404,11 @@
     1,
     2
    ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "knoten"
+   ],
    "title": "Schleife binden mit Spruch",
    "source": {
     "type": "youtube",
@@ -2278,6 +2461,11 @@
     3,
     4,
     5
+   ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "maschenanschlag"
    ],
    "title": "Maschen aufnehmen mit Daumen",
    "source": {
@@ -2350,6 +2538,10 @@
    "stufen": [
     2,
     3
+   ],
+   "niveau": 2,
+   "techniken": [
+    "nageln"
    ],
    "title": "Nagelbild: Nägel einschlagen",
    "source": {
@@ -2425,6 +2617,11 @@
     3,
     4
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "schlingstich"
+   ],
    "title": "Schlingstich am Filzelefant",
    "source": {
     "type": "youtube",
@@ -2494,6 +2691,13 @@
    "stufen": [
     1,
     2
+   ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "wickeln",
+    "schneiden",
+    "knoten"
    ],
    "title": "Pompon mit Kartonringen",
    "source": {
@@ -2565,6 +2769,11 @@
     3,
     4
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "feste maschen"
+   ],
    "title": "Feste Maschen häkeln",
    "source": {
     "type": "youtube",
@@ -2632,6 +2841,11 @@
    "stufen": [
     1,
     2
+   ],
+   "niveau": 1,
+   "techniken": [
+    "falten",
+    "knoten"
    ],
    "title": "Fangbecher aus Papier falten",
    "source": {
@@ -2701,6 +2915,11 @@
     3,
     4
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "ueberwendlingsstich"
+   ],
    "title": "Überwendlingsstich am Filzbär",
    "source": {
     "type": "youtube",
@@ -2767,6 +2986,11 @@
     1,
     2,
     3
+   ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "modellieren"
    ],
    "title": "Daumenschale aus Ton",
    "source": {
@@ -2840,6 +3064,11 @@
     3,
     4
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "modellieren"
+   ],
    "title": "Vase aus Tonwülsten",
    "source": {
     "type": "youtube",
@@ -2911,6 +3140,10 @@
     1,
     2,
     3
+   ],
+   "niveau": 1,
+   "techniken": [
+    "modellieren"
    ],
    "title": "Blumenherzen aus Salzteig",
    "source": {
@@ -2987,6 +3220,12 @@
     2,
     3
    ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "drucken",
+    "schneiden"
+   ],
    "title": "Kartoffeldruck auf Stoff",
    "source": {
     "type": "youtube",
@@ -3060,6 +3299,11 @@
     3,
     4
    ],
+   "niveau": 2,
+   "techniken": [
+    "drucken",
+    "schneiden"
+   ],
    "title": "Kartoffeldruck mit viereckigen Kacheln",
    "source": {
     "type": "youtube",
@@ -3132,6 +3376,13 @@
     1,
     2,
     3
+   ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "drucken",
+    "schneiden",
+    "kleben"
    ],
    "title": "Stempel aus Moosgummi",
    "source": {
@@ -3208,6 +3459,11 @@
     3,
     4
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "drucken"
+   ],
    "title": "Drucken mit Polystyrol",
    "source": {
     "type": "youtube",
@@ -3282,6 +3538,12 @@
     3,
     4
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "weben",
+    "schneiden"
+   ],
    "title": "Weben mit Papierstreifen",
    "source": {
     "type": "youtube",
@@ -3353,6 +3615,11 @@
     2,
     3,
     4
+   ],
+   "niveau": 2,
+   "techniken": [
+    "weben",
+    "kette spannen"
    ],
    "title": "Webrahmen aus Karton",
    "source": {
@@ -3429,6 +3696,11 @@
     3,
     4
    ],
+   "niveau": 2,
+   "techniken": [
+    "weben",
+    "kette spannen"
+   ],
    "title": "Lama weben aus Karton",
    "source": {
     "type": "youtube",
@@ -3503,6 +3775,11 @@
     4,
     5
    ],
+   "niveau": 3,
+   "grundtechnik": true,
+   "techniken": [
+    "saegen"
+   ],
    "title": "Laubsäge: Erste Sägeschnitte",
    "source": {
     "type": "youtube",
@@ -3573,6 +3850,11 @@
     3,
     4,
     5
+   ],
+   "niveau": 3,
+   "grundtechnik": true,
+   "techniken": [
+    "saegen"
    ],
    "title": "Richtig sägen lernen",
    "source": {
@@ -3645,6 +3927,11 @@
     4,
     5
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "maschenanschlag"
+   ],
    "title": "Maschen anschlagen: Kreuzanschlag",
    "source": {
     "type": "youtube",
@@ -3713,6 +4000,11 @@
     3,
     4,
     5
+   ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "rechte maschen"
    ],
    "title": "Rechte Masche stricken",
    "source": {
@@ -3783,6 +4075,11 @@
     1,
     2,
     3
+   ],
+   "niveau": 1,
+   "techniken": [
+    "drucken",
+    "kleben"
    ],
    "title": "Eulen-Bild mit Kartoffelstempeln",
    "source": {
@@ -3856,6 +4153,11 @@
     2,
     3
    ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "drucken"
+   ],
    "title": "Frottage: Buchstaben durchreiben",
    "source": {
     "type": "youtube",
@@ -3918,6 +4220,10 @@
     2,
     3,
     4
+   ],
+   "niveau": 1,
+   "techniken": [
+    "drucken"
    ],
    "title": "Blumenwiese drucken",
    "source": {
@@ -3984,6 +4290,10 @@
     1,
     2,
     3
+   ],
+   "niveau": 1,
+   "techniken": [
+    "drucken"
    ],
    "title": "Blätterdruck mit Wasserfarben",
    "source": {
@@ -4058,6 +4368,11 @@
     2,
     3
    ],
+   "niveau": 1,
+   "techniken": [
+    "drucken",
+    "schneiden"
+   ],
    "title": "Geschenkanhänger mit Blätterdruck",
    "source": {
     "type": "youtube",
@@ -4114,6 +4429,10 @@
     1,
     2,
     3
+   ],
+   "niveau": 1,
+   "techniken": [
+    "falten"
    ],
    "title": "Becher aus Papier falten",
    "source": {
@@ -4180,6 +4499,10 @@
     1,
     2,
     3
+   ],
+   "niveau": 1,
+   "techniken": [
+    "falten"
    ],
    "title": "Origami-Katze falten",
    "source": {
@@ -4250,6 +4573,11 @@
     1,
     2,
     3
+   ],
+   "niveau": 1,
+   "techniken": [
+    "falten",
+    "kleben"
    ],
    "title": "Origami-Hund aus Papier",
    "source": {
@@ -4324,6 +4652,11 @@
     2,
     3
    ],
+   "niveau": 1,
+   "techniken": [
+    "falten",
+    "kleben"
+   ],
    "title": "Melonenfächer aus Papier",
    "source": {
     "type": "youtube",
@@ -4387,6 +4720,10 @@
     1,
     2,
     3
+   ],
+   "niveau": 1,
+   "techniken": [
+    "nassfilzen"
    ],
    "title": "Seife mit Wolle umfilzen",
    "source": {
@@ -4459,6 +4796,12 @@
     2,
     3,
     4
+   ],
+   "niveau": 2,
+   "techniken": [
+    "nassfilzen",
+    "wickeln",
+    "schneiden"
    ],
    "title": "Osternest nass filzen",
    "source": {
@@ -4539,6 +4882,10 @@
     3,
     4
    ],
+   "niveau": 2,
+   "techniken": [
+    "trockenfilzen"
+   ],
    "title": "Eierwärmer trocken filzen",
    "source": {
     "type": "youtube",
@@ -4611,6 +4958,11 @@
     1,
     2,
     3
+   ],
+   "niveau": 1,
+   "techniken": [
+    "nassfilzen",
+    "wickeln"
    ],
    "title": "Zauberstein aus Filzwolle",
    "source": {
@@ -4686,6 +5038,10 @@
     3,
     4
    ],
+   "niveau": 1,
+   "techniken": [
+    "modellieren"
+   ],
    "title": "Regeln beim Arbeiten mit Ton",
    "source": {
     "type": "youtube",
@@ -4755,6 +5111,12 @@
     2,
     3
    ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "modellieren",
+    "kleben"
+   ],
    "title": "Kleister für Pappmaché anrühren",
    "source": {
     "type": "youtube",
@@ -4821,6 +5183,10 @@
     2,
     3,
     4
+   ],
+   "niveau": 2,
+   "techniken": [
+    "modellieren"
    ],
    "title": "Schildkröte aus Ton",
    "source": {
@@ -4890,6 +5256,11 @@
     3,
     4,
     5
+   ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "fadenring"
    ],
    "title": "Fadenring (Magic Ring) häkeln",
    "source": {
@@ -4962,6 +5333,11 @@
     4,
     5
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "fadenring"
+   ],
    "title": "Fadenring häkeln für Linkshänder",
    "source": {
     "type": "youtube",
@@ -5032,6 +5408,11 @@
     3,
     4
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "luftmaschen"
+   ],
    "title": "Luftmaschen für Linkshänder",
    "source": {
     "type": "youtube",
@@ -5101,6 +5482,11 @@
     4,
     5
    ],
+   "niveau": 3,
+   "grundtechnik": true,
+   "techniken": [
+    "feilen"
+   ],
    "title": "Teelichthalter feilen und raspeln",
    "source": {
     "type": "youtube",
@@ -5168,6 +5554,12 @@
     3,
     4,
     5
+   ],
+   "niveau": 3,
+   "techniken": [
+    "saegen",
+    "feilen",
+    "bohren"
    ],
    "title": "Kleines Auto aus Holz",
    "source": {
@@ -5243,6 +5635,12 @@
     2,
     3,
     4
+   ],
+   "niveau": 3,
+   "techniken": [
+    "saegen",
+    "schleifen",
+    "nageln"
    ],
    "title": "Igel aus Holz mit Nägeln",
    "source": {
@@ -5320,6 +5718,11 @@
     3,
     4
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "knoten"
+   ],
    "title": "Schiebeknoten fürs Freundschaftsband",
    "source": {
     "type": "youtube",
@@ -5392,6 +5795,10 @@
     3,
     4,
     5
+   ],
+   "niveau": 2,
+   "techniken": [
+    "flechten"
    ],
    "title": "Rundes Scoubidou-Geflecht",
    "source": {
@@ -5467,6 +5874,10 @@
     4,
     5
    ],
+   "niveau": 2,
+   "techniken": [
+    "fadenspiel"
+   ],
    "title": "Fadenspiel: Der Stern",
    "source": {
     "type": "youtube",
@@ -5536,6 +5947,11 @@
     2,
     3
    ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "knoten"
+   ],
    "title": "Brezelknoten binden",
    "source": {
     "type": "youtube",
@@ -5600,6 +6016,10 @@
     2,
     3,
     4
+   ],
+   "niveau": 1,
+   "techniken": [
+    "fadenspiel"
    ],
    "title": "Fadenspiel: Die Maus",
    "source": {
@@ -5669,6 +6089,11 @@
     2,
     3,
     4
+   ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "knopf annaehen"
    ],
    "title": "Knopf annähen",
    "source": {
@@ -5748,6 +6173,11 @@
     2,
     3
    ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "einfaedeln"
+   ],
    "title": "Nadel einfädeln: 3 Tricks",
    "source": {
     "type": "youtube",
@@ -5819,6 +6249,12 @@
     2,
     3
    ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "knoten",
+    "einfaedeln"
+   ],
    "title": "Anfangsknoten im Faden",
    "source": {
     "type": "youtube",
@@ -5887,6 +6323,11 @@
     3,
     4,
     5
+   ],
+   "niveau": 2,
+   "techniken": [
+    "einfaedeln",
+    "knoten"
    ],
    "title": "Stiftemäppchen aus Filz",
    "source": {
@@ -5963,6 +6404,10 @@
     2,
     3
    ],
+   "niveau": 1,
+   "techniken": [
+    "kleben"
+   ],
    "title": "Tiere aus Herbstblättern",
    "source": {
     "type": "youtube",
@@ -6026,6 +6471,11 @@
     2,
     3,
     4
+   ],
+   "niveau": 2,
+   "techniken": [
+    "falten",
+    "schneiden"
    ],
    "title": "Schneeflocke aus Papier",
    "source": {
@@ -6098,6 +6548,11 @@
     2,
     3
    ],
+   "niveau": 1,
+   "techniken": [
+    "knoten",
+    "schneiden"
+   ],
    "title": "Ente aus Blättern",
    "source": {
     "type": "youtube",
@@ -6160,6 +6615,11 @@
     2,
     3,
     4
+   ],
+   "niveau": 2,
+   "techniken": [
+    "falten",
+    "schneiden"
    ],
    "title": "Scherenschnitt-Blume fürs Fenster",
    "source": {
@@ -6231,6 +6691,12 @@
     3,
     4,
     5
+   ],
+   "niveau": 2,
+   "techniken": [
+    "falten",
+    "schneiden",
+    "kleben"
    ],
    "title": "Tischlaterne aus einem Blatt",
    "source": {
@@ -6310,6 +6776,11 @@
     2,
     3
    ],
+   "niveau": 1,
+   "techniken": [
+    "falten",
+    "schneiden"
+   ],
    "title": "Menschenkette aus Papier",
    "source": {
     "type": "youtube",
@@ -6372,6 +6843,11 @@
     3,
     4,
     5
+   ],
+   "niveau": 3,
+   "techniken": [
+    "saegen",
+    "schnitzen"
    ],
    "title": "Stöcke schnitzen: Ast absägen",
    "source": {
@@ -6437,6 +6913,11 @@
     3,
     4,
     5
+   ],
+   "niveau": 2,
+   "techniken": [
+    "schnitzen",
+    "knoten"
    ],
    "title": "Zauberstab aus Ast schnitzen",
    "source": {
@@ -6510,6 +6991,10 @@
     3,
     4
    ],
+   "niveau": 2,
+   "techniken": [
+    "schnitzen"
+   ],
    "title": "Eule aus einer Astgabel",
    "source": {
     "type": "youtube",
@@ -6572,6 +7057,10 @@
     4,
     5,
     6
+   ],
+   "niveau": 2,
+   "techniken": [
+    "schnitzen"
    ],
    "title": "Schnitzregeln fürs Taschenmesser",
    "source": {
@@ -6644,6 +7133,11 @@
     2,
     3
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "schnitzen"
+   ],
    "title": "Stock spitz schnitzen",
    "source": {
     "type": "youtube",
@@ -6709,6 +7203,11 @@
     4,
     5,
     6
+   ],
+   "niveau": 3,
+   "techniken": [
+    "schnitzen",
+    "saegen"
    ],
    "title": "Wassermühle mit dem Taschenmesser",
    "source": {
@@ -6776,6 +7275,11 @@
     4,
     5,
     6
+   ],
+   "niveau": 3,
+   "techniken": [
+    "schnitzen",
+    "saegen"
    ],
    "title": "Dose aus einem Ast",
    "source": {
@@ -6849,6 +7353,10 @@
     4,
     5
    ],
+   "niveau": 2,
+   "techniken": [
+    "zierstich"
+   ],
    "title": "Knötchenstich sticken",
    "source": {
     "type": "youtube",
@@ -6920,6 +7428,11 @@
     3,
     4,
     5
+   ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "zierstich"
    ],
    "title": "Stielstich sticken",
    "source": {
@@ -6993,6 +7506,11 @@
     3,
     4
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "zierstich"
+   ],
    "title": "Kreuzstich sticken",
    "source": {
     "type": "youtube",
@@ -7060,6 +7578,11 @@
     2,
     3,
     4
+   ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "zierstich"
    ],
    "title": "Kettenstich sticken",
    "source": {
@@ -7130,6 +7653,11 @@
     3,
     4
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "schlingstich"
+   ],
    "title": "Langettenstich sticken",
    "source": {
     "type": "youtube",
@@ -7189,6 +7717,11 @@
     2,
     3,
     4
+   ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "schnurstricken"
    ],
    "title": "Schnur mit der Strickgabel",
    "source": {
@@ -7255,6 +7788,11 @@
     1,
     2,
     3
+   ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "fingerstricken"
    ],
    "title": "Strickschnur mit vier Fingern",
    "source": {
@@ -7324,6 +7862,11 @@
     3,
     4,
     5
+   ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "linke maschen"
    ],
    "title": "Linke Masche stricken",
    "source": {
@@ -7395,6 +7938,11 @@
     2,
     3
    ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "wickeln"
+   ],
    "title": "Webschiffchen mit Wolle umwickeln",
    "source": {
     "type": "youtube",
@@ -7452,6 +8000,11 @@
     3,
     4,
     5
+   ],
+   "niveau": 2,
+   "techniken": [
+    "flechten",
+    "falten"
    ],
    "title": "Korb aus Zeitungsstreifen flechten",
    "source": {
@@ -7523,6 +8076,12 @@
     1,
     2,
     3
+   ],
+   "niveau": 1,
+   "techniken": [
+    "weben",
+    "kette spannen",
+    "schneiden"
    ],
    "title": "Weben auf dem Pappteller",
    "source": {
@@ -7596,6 +8155,12 @@
     1,
     2,
     3
+   ],
+   "niveau": 1,
+   "techniken": [
+    "perlen faedeln",
+    "knoten",
+    "kleben"
    ],
    "title": "Traumfänger aus Pappteller",
    "source": {
@@ -7673,6 +8238,12 @@
     3,
     4
    ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "wickeln",
+    "knoten"
+   ],
    "title": "Quaste aus Garn",
    "source": {
     "type": "youtube",
@@ -7745,6 +8316,12 @@
     2,
     3
    ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "wickeln",
+    "knoten"
+   ],
    "title": "Pompon mit der Gabel",
    "source": {
     "type": "youtube",
@@ -7811,6 +8388,12 @@
     1,
     2,
     3
+   ],
+   "niveau": 1,
+   "techniken": [
+    "wickeln",
+    "knoten",
+    "kleben"
    ],
    "title": "Gespenst aus Wolle",
    "source": {
@@ -7885,6 +8468,10 @@
     3,
     4
    ],
+   "niveau": 2,
+   "techniken": [
+    "falten"
+   ],
    "title": "Windrad falten",
    "source": {
     "type": "youtube",
@@ -7957,6 +8544,10 @@
    "stufen": [
     5,
     6
+   ],
+   "niveau": 2,
+   "techniken": [
+    "knuepfen"
    ],
    "zeit": 15,
    "title": "Paracord-Schlüsselanhänger knüpfen",
@@ -8038,6 +8629,10 @@
     5,
     6
    ],
+   "niveau": 3,
+   "techniken": [
+    "knuepfen"
+   ],
    "title": "Paracord-Armband mit Fischgrätmuster",
    "source": {
     "type": "youtube",
@@ -8117,6 +8712,10 @@
    "stufen": [
     5,
     6
+   ],
+   "niveau": 3,
+   "techniken": [
+    "knuepfen"
    ],
    "title": "Zweifarbiges Paracord-Armband mit Verschluss",
    "source": {
@@ -8200,6 +8799,10 @@
     5,
     6
    ],
+   "niveau": 2,
+   "techniken": [
+    "knuepfen"
+   ],
    "title": "Paracord-Anhänger mit Karabiner",
    "source": {
     "type": "youtube",
@@ -8279,6 +8882,10 @@
     5,
     6
    ],
+   "niveau": 3,
+   "techniken": [
+    "knuepfen"
+   ],
    "title": "Survival-Armband aus Paracord",
    "source": {
     "type": "youtube",
@@ -8357,6 +8964,11 @@
     5,
     6
    ],
+   "niveau": 3,
+   "techniken": [
+    "knuepfen",
+    "wickeln"
+   ],
    "title": "Affenfaust aus Paracord",
    "source": {
     "type": "youtube",
@@ -8434,6 +9046,11 @@
     5,
     6
    ],
+   "niveau": 3,
+   "techniken": [
+    "knuepfen",
+    "wickeln"
+   ],
    "title": "Affenfaust: Ball aus Kordel",
    "source": {
     "type": "youtube",
@@ -8506,6 +9123,10 @@
    "stufen": [
     5,
     6
+   ],
+   "niveau": 2,
+   "techniken": [
+    "knuepfen"
    ],
    "title": "Paracord-Armband knüpfen",
    "source": {
@@ -8587,6 +9208,10 @@
     5,
     6
    ],
+   "niveau": 2,
+   "techniken": [
+    "flechten"
+   ],
    "title": "Scoubidou eckig flechten",
    "source": {
     "type": "youtube",
@@ -8659,6 +9284,11 @@
     4,
     5,
     6
+   ],
+   "niveau": 2,
+   "techniken": [
+    "flechten",
+    "schneiden"
    ],
    "title": "Freundschaftsband mit Kartonscheibe",
    "source": {
@@ -8736,6 +9366,10 @@
     5,
     6
    ],
+   "niveau": 2,
+   "techniken": [
+    "knuepfen"
+   ],
    "title": "Freundschaftsband mit Streifen",
    "source": {
     "type": "youtube",
@@ -8805,6 +9439,10 @@
     4,
     5,
     6
+   ],
+   "niveau": 2,
+   "techniken": [
+    "knuepfen"
    ],
    "title": "Armband mit Spiralknoten",
    "source": {
@@ -8876,6 +9514,11 @@
     4,
     5,
     6
+   ],
+   "niveau": 2,
+   "techniken": [
+    "knuepfen",
+    "perlen faedeln"
    ],
    "title": "Perlenarmband mit Kreuzknoten",
    "source": {
@@ -8951,6 +9594,11 @@
     4,
     5,
     6
+   ],
+   "niveau": 2,
+   "techniken": [
+    "flechten",
+    "schneiden"
    ],
    "title": "Freundschaftsbändeli mit Drehscheibe",
    "source": {
@@ -9032,6 +9680,10 @@
     5,
     6
    ],
+   "niveau": 2,
+   "techniken": [
+    "flechten"
+   ],
    "title": "Rundzopf aus vier Fäden",
    "source": {
     "type": "youtube",
@@ -9098,6 +9750,10 @@
     4,
     5,
     6
+   ],
+   "niveau": 2,
+   "techniken": [
+    "flechten"
    ],
    "title": "Nestelband aus drei Schlaufen",
    "source": {
@@ -9169,6 +9825,12 @@
     4,
     5,
     6
+   ],
+   "niveau": 2,
+   "techniken": [
+    "knuepfen",
+    "knoten",
+    "perlen faedeln"
    ],
    "title": "Verstellbares Armband mit Schiebeknoten",
    "source": {
@@ -9251,6 +9913,11 @@
     5,
     6
    ],
+   "niveau": 2,
+   "techniken": [
+    "knuepfen",
+    "schneiden"
+   ],
    "title": "Makramee-Feder aus Restfäden",
    "source": {
     "type": "youtube",
@@ -9330,6 +9997,12 @@
     5,
     6
    ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "wickeln",
+    "knoten"
+   ],
    "zeit": 15,
    "title": "Quaste aus Wolle",
    "source": {
@@ -9401,6 +10074,11 @@
     4,
     5,
     6
+   ],
+   "niveau": 2,
+   "techniken": [
+    "flechten",
+    "schneiden"
    ],
    "title": "Kordel mit Kartonscheibe drehen",
    "source": {
@@ -9482,6 +10160,11 @@
     5,
     6
    ],
+   "niveau": 3,
+   "grundtechnik": true,
+   "techniken": [
+    "perlenweben"
+   ],
    "title": "Perlenweben am Webrahmen",
    "source": {
     "type": "youtube",
@@ -9553,6 +10236,11 @@
     5,
     6
    ],
+   "niveau": 2,
+   "techniken": [
+    "kette spannen",
+    "knoten"
+   ],
    "title": "Perlenwebrahmen bespannen",
    "source": {
     "type": "youtube",
@@ -9621,6 +10309,11 @@
    "stufen": [
     5,
     6
+   ],
+   "niveau": 3,
+   "techniken": [
+    "perlenweben",
+    "einfaedeln"
    ],
    "title": "Faden vernähen beim Perlenweben",
    "source": {
@@ -9692,6 +10385,11 @@
    "stufen": [
     5,
     6
+   ],
+   "niveau": 3,
+   "techniken": [
+    "kette spannen",
+    "perlenweben"
    ],
    "title": "Perlenband weben",
    "source": {
@@ -9768,6 +10466,10 @@
     4,
     5,
     6
+   ],
+   "niveau": 2,
+   "techniken": [
+    "kette spannen"
    ],
    "title": "Perlenweben: Rahmen bespannen",
    "source": {
@@ -9851,6 +10553,12 @@
     5,
     6
    ],
+   "niveau": 2,
+   "techniken": [
+    "kette spannen",
+    "schneiden",
+    "kleben"
+   ],
    "title": "Perlenwebrahmen aus Karton",
    "source": {
     "type": "youtube",
@@ -9928,6 +10636,11 @@
    "stufen": [
     5,
     6
+   ],
+   "niveau": 3,
+   "techniken": [
+    "perlenweben",
+    "kette spannen"
    ],
    "title": "Perlenarmband mit der Schachtel weben",
    "source": {
@@ -10010,6 +10723,10 @@
     5,
     6
    ],
+   "niveau": 3,
+   "techniken": [
+    "perlen faedeln"
+   ],
    "title": "Perlenfisch aus Draht",
    "source": {
     "type": "youtube",
@@ -10087,6 +10804,10 @@
    "stufen": [
     5,
     6
+   ],
+   "niveau": 3,
+   "techniken": [
+    "perlen faedeln"
    ],
    "title": "Krokodil aus Perlen",
    "source": {
@@ -10166,6 +10887,10 @@
     5,
     6
    ],
+   "niveau": 3,
+   "techniken": [
+    "perlen faedeln"
+   ],
    "title": "Perlenarmband in Flechtoptik",
    "source": {
     "type": "youtube",
@@ -10239,6 +10964,11 @@
     5,
     6
    ],
+   "niveau": 2,
+   "techniken": [
+    "perlen faedeln",
+    "knoten"
+   ],
    "title": "Blumenarmband aus Perlen",
    "source": {
     "type": "youtube",
@@ -10309,6 +11039,10 @@
     4,
     5,
     6
+   ],
+   "niveau": 2,
+   "techniken": [
+    "falten"
    ],
    "title": "Schachtel mit Deckel falten",
    "source": {
@@ -10384,6 +11118,10 @@
     5,
     6
    ],
+   "niveau": 2,
+   "techniken": [
+    "falten"
+   ],
    "title": "Origami-Schachtel aus Papier",
    "source": {
     "type": "youtube",
@@ -10451,6 +11189,10 @@
    "stufen": [
     5,
     6
+   ],
+   "niveau": 3,
+   "techniken": [
+    "falten"
    ],
    "title": "Origami-Sternbox",
    "source": {
@@ -10522,6 +11264,10 @@
    "stufen": [
     5,
     6
+   ],
+   "niveau": 3,
+   "techniken": [
+    "falten"
    ],
    "title": "Origami Kranich",
    "source": {
@@ -10598,6 +11344,11 @@
     5,
     6
    ],
+   "niveau": 2,
+   "techniken": [
+    "falten",
+    "knoten"
+   ],
    "title": "Origami-Schmetterling am Ast",
    "source": {
     "type": "youtube",
@@ -10669,6 +11420,11 @@
     5,
     6
    ],
+   "niveau": 2,
+   "techniken": [
+    "falten",
+    "schneiden"
+   ],
    "title": "Einfacher Papier-Schmetterling",
    "source": {
     "type": "youtube",
@@ -10739,6 +11495,10 @@
     5,
     6
    ],
+   "niveau": 2,
+   "techniken": [
+    "falten"
+   ],
    "title": "Origami-Herz falten",
    "source": {
     "type": "youtube",
@@ -10805,6 +11565,10 @@
    "stufen": [
     5,
     6
+   ],
+   "niveau": 3,
+   "techniken": [
+    "falten"
    ],
    "title": "Fröbelstern aus Papierstreifen",
    "source": {
@@ -10884,6 +11648,10 @@
     5,
     6
    ],
+   "niveau": 2,
+   "techniken": [
+    "falten"
+   ],
    "title": "Mini-3D-Sterne aus Papierstreifen",
    "source": {
     "type": "youtube",
@@ -10953,6 +11721,10 @@
     4,
     5,
     6
+   ],
+   "niveau": 2,
+   "techniken": [
+    "falten"
    ],
    "title": "Eckenlesezeichen aus Origami-Papier",
    "zeit": 10,
@@ -11025,6 +11797,10 @@
     5,
     6
    ],
+   "niveau": 1,
+   "techniken": [
+    "falten"
+   ],
    "title": "Fuchskopf aus Papier falten",
    "source": {
     "type": "youtube",
@@ -11093,6 +11869,11 @@
     4,
     5,
     6
+   ],
+   "niveau": 2,
+   "techniken": [
+    "falten",
+    "kleben"
    ],
    "title": "Origami-Tulpe mit Blättern",
    "source": {
@@ -11171,6 +11952,11 @@
     5,
     6
    ],
+   "niveau": 1,
+   "techniken": [
+    "falten",
+    "kleben"
+   ],
    "zeit": 15,
    "title": "Hexentreppe aus Papierstreifen",
    "source": {
@@ -11243,6 +12029,10 @@
     5,
     6
    ],
+   "niveau": 2,
+   "techniken": [
+    "falten"
+   ],
    "title": "Origami-Fisch mit Schwanzflosse",
    "source": {
     "type": "youtube",
@@ -11314,6 +12104,10 @@
    "stufen": [
     5,
     6
+   ],
+   "niveau": 2,
+   "techniken": [
+    "falten"
    ],
    "title": "Briefumschlag ohne Kleber falten",
    "source": {
@@ -11390,6 +12184,10 @@
     5,
     6
    ],
+   "niveau": 2,
+   "techniken": [
+    "falten"
+   ],
    "title": "Stehender Origami-Pinguin",
    "source": {
     "type": "youtube",
@@ -11459,6 +12257,10 @@
     4,
     5,
     6
+   ],
+   "niveau": 2,
+   "techniken": [
+    "zierstich"
    ],
    "title": "Fliegenstich sticken",
    "source": {
@@ -11535,6 +12337,10 @@
     5,
     6
    ],
+   "niveau": 3,
+   "techniken": [
+    "zierstich"
+   ],
    "title": "Geschlossener Federstich",
    "source": {
     "type": "youtube",
@@ -11598,6 +12404,10 @@
    "stufen": [
     5,
     6
+   ],
+   "niveau": 3,
+   "techniken": [
+    "zierstich"
    ],
    "title": "Namen mit Kettenstich sticken",
    "source": {
@@ -11675,6 +12485,10 @@
     5,
     6
    ],
+   "niveau": 3,
+   "techniken": [
+    "zierstich"
+   ],
    "title": "Knopflochstich sticken",
    "source": {
     "type": "youtube",
@@ -11747,6 +12561,10 @@
     4,
     5,
     6
+   ],
+   "niveau": 2,
+   "techniken": [
+    "schlingstich"
    ],
    "title": "Schlingstich am Filzrand",
    "source": {
@@ -11823,6 +12641,11 @@
     5,
     6
    ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "knopf annaehen"
+   ],
    "title": "Knopf annähen ohne Knoten",
    "source": {
     "type": "youtube",
@@ -11894,6 +12717,11 @@
     5,
     6
    ],
+   "niveau": 3,
+   "grundtechnik": true,
+   "techniken": [
+    "saumstich"
+   ],
    "title": "Saum nähen mit Blindstich",
    "source": {
     "type": "youtube",
@@ -11957,6 +12785,11 @@
     5,
     6
    ],
+   "niveau": 3,
+   "grundtechnik": true,
+   "techniken": [
+    "saumstich"
+   ],
    "title": "Saum nähen mit Hexenstich",
    "source": {
     "type": "youtube",
@@ -12018,6 +12851,10 @@
    "stufen": [
     5,
     6
+   ],
+   "niveau": 3,
+   "techniken": [
+    "saumstich"
    ],
    "title": "Unsichtbarer Saum mit Zaubertrick",
    "source": {
@@ -12090,6 +12927,12 @@
    "stufen": [
     5,
     6
+   ],
+   "niveau": 3,
+   "techniken": [
+    "fadenring",
+    "staebchen",
+    "luftmaschen"
    ],
    "title": "Buntes Granny Square häkeln",
    "source": {
@@ -12167,6 +13010,11 @@
    "stufen": [
     5,
     6
+   ],
+   "niveau": 3,
+   "techniken": [
+    "luftmaschen",
+    "staebchen"
    ],
    "title": "Topflappen mit halben Stäbchen",
    "source": {
@@ -12248,6 +13096,12 @@
     5,
     6
    ],
+   "niveau": 2,
+   "techniken": [
+    "fingerstricken",
+    "abketten",
+    "knoten"
+   ],
    "title": "Loopschal mit Fingerstricken",
    "source": {
     "type": "youtube",
@@ -12320,6 +13174,12 @@
     4,
     5,
     6
+   ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "fingerstricken",
+    "abketten"
    ],
    "title": "Fingerstrick-Schnur mit Abketten",
    "source": {
