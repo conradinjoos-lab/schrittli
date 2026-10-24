@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Kontrolle __ID__</title>
+<style>
+:root{--b:#1b5fd1;--r:#d33;--g:#1a8f3c;--o:#f08c00;--bg:#f3f4f7;--line:#dcdfe5;--top:0px}
+*{box-sizing:border-box}
+body{font:14px/1.35 system-ui,sans-serif;margin:0;color:#222;background:var(--bg)}
+button{font:inherit;padding:5px 10px;border:1px solid #bbb;border-radius:6px;background:#fff;cursor:pointer;white-space:nowrap}
+button.p{background:var(--b);color:#fff;border-color:var(--b)}
+button.sm{padding:2px 7px;font-size:12px}
+button.on{background:#e3ecff;border-color:var(--b);color:var(--b)}
+button:disabled{opacity:.4;cursor:default}
+input,select,textarea{font:inherit;padding:4px 6px;border:1px solid #bbb;border-radius:5px;min-width:0}
+kbd{background:#eee;border:1px solid #ccc;border-radius:3px;padding:0 4px;font-size:11px}
+a{color:var(--b)}
+.q{display:inline-block;width:16px;height:16px;border-radius:50%;background:#ddd;color:#555;font-size:11px;line-height:16px;text-align:center;cursor:help;margin-left:4px;vertical-align:middle}
+
+/* Kopf + Zeitleiste, zusammen sticky */
+#top{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+header{display:flex;gap:10px;align-items:center;padding:7px 14px}
+header h1{font-size:16px;margin:0;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#status{font-size:12px;color:#777;min-width:110px}
+#msg{font-size:13px;color:var(--g);flex:1;text-align:right}
+.tlwrap{position:relative;padding:4px 14px 8px}
+#tl{position:relative;height:46px;background:#eceef2;border-radius:6px;cursor:crosshair;user-select:none}
+#tl .c{position:absolute;top:24px;width:2px;height:22px;background:var(--o);margin-left:-1px;pointer-events:none}
+#tl .c.w{top:34px;height:12px;background:#f7c87a}
+#tl .s{position:absolute;top:3px;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:var(--b);color:#fff;font-size:10px;text-align:center;line-height:18px;cursor:grab;z-index:2}
+#tl .s.sel{background:var(--r);transform:scale(1.15)}
+#tl .pos{position:absolute;top:0;width:2px;height:100%;background:#000;margin-left:-1px;pointer-events:none;z-index:3}
+#tip{position:absolute;display:none;bottom:60px;transform:translateX(-50%);background:#222;color:#fff;border-radius:6px;padding:4px;font:600 12px ui-monospace,monospace;text-align:center;z-index:30;pointer-events:none}
+#tip img{display:block;width:160px;height:90px;object-fit:cover;border-radius:3px;margin-bottom:3px}
+
+main{display:grid;grid-template-columns:minmax(300px,31%) minmax(380px,1fr) minmax(240px,24%);gap:12px;padding:12px 14px;align-items:start}
+main>*{min-width:0}
+.sticky{position:sticky;top:calc(var(--top) + 12px)}
+.box{background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px;margin-bottom:12px}
+.box h2{font-size:12px;margin:0 0 8px;text-transform:uppercase;letter-spacing:.05em;color:#666;display:flex;align-items:center;gap:6px}
+.box h2 .sp{flex:1}
+.player{aspect-ratio:16/9;width:100%;background:#000;border-radius:6px;overflow:hidden}
+.player iframe{width:100%;height:100%;display:block}
+.row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:8px}
+#zeit{font:600 22px/1 ui-monospace,monospace;min-width:92px}
+.keys{font-size:12px;color:#777;margin-top:8px;line-height:1.7}
+
+/* Schritte */
+.steps{list-style:none;margin:0;padding:0}
+.step{border:1px solid transparent;border-radius:7px;padding:4px 6px;margin-bottom:2px}
+.step.sel{background:#eaf1ff;border-color:#b9cdf5}
+.step .hd{display:grid;grid-template-columns:22px 70px auto auto 1fr auto;gap:4px;align-items:center}
+.step .n{color:#888;text-align:right;font-size:12px}
+.step .t{font-family:ui-monospace,monospace;text-align:center;width:70px}
+.step .l{width:100%}
+.step .acts{display:flex;gap:2px}
+.step .warn{grid-column:3/-1;font-size:12px;color:var(--r);margin-top:2px}
+.step .warn.soft{color:#a66}
+.step .body{margin-top:6px;padding-top:6px;border-top:1px dashed #cdd}
+.lbl{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.04em;margin:4px 0 3px;display:flex;gap:6px;align-items:center}
+.lbl b{font-family:ui-monospace,monospace;text-transform:none;letter-spacing:0;color:#222}
+.strip{display:flex;gap:2px;overflow-x:auto;padding-bottom:3px}
+.strip .f{position:relative;flex:none;cursor:pointer}
+.strip img{width:104px;height:59px;object-fit:cover;display:block;border:2px solid transparent;border-radius:3px}
+.strip .hit img{border-color:var(--r)}
+.strip .cut img{outline:2px solid var(--o);outline-offset:-2px}
+.strip .f span{position:absolute;left:3px;top:3px;background:rgba(0,0,0,.7);color:#ff0;font:600 10px ui-monospace,monospace;padding:1px 3px;border-radius:2px}
+
+/* Angaben */
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px}
+.meta label{display:flex;flex-direction:column;font-size:12px;color:#555;min-width:0}
+.meta .w{grid-column:1/-1}
+.pills{display:flex;gap:4px;flex-wrap:wrap}
+.pills button{padding:3px 10px}
+.chips{display:flex;gap:4px;flex-wrap:wrap;margin:4px 0}
+.chip{background:#eef;border:1px solid #ccd;border-radius:12px;padding:1px 6px 1px 9px;font-size:12px;cursor:grab;display:inline-flex;gap:4px;align-items:center}
+.chip.drag{opacity:.4}
+.chip b{cursor:pointer;color:#888}.chip b:hover{color:var(--r)}
+.chip.unk{border-color:var(--o);background:#fff4e0}
+details.det summary{cursor:pointer;font-size:12px;color:#666;margin:4px 0}
+.check{list-style:none;margin:0;padding:0;font-size:13px}
+.check li{padding:2px 0}
+.check .ok{color:var(--g)}.check .no{color:var(--r)}
+
+/* Transkript */
+.tx{overflow:auto;max-height:calc(100vh - var(--top) - 70px);font-size:13px}
+.tx .z{display:flex;gap:5px;padding:2px 4px;border-radius:4px;align-items:baseline}
+.tx .z:hover{background:#f0f0f0}
+.tx .z.cur{background:#fff3cd}
+.tx .z.bnd{box-shadow:inset 3px 0 var(--b)}
+.tx .tt{font-family:ui-monospace,monospace;color:#666;width:48px;flex:none;cursor:pointer;font-size:12px}
+.tx .tt:hover{color:var(--b);text-decoration:underline}
+.tx .kap{font-weight:600;margin-top:6px}
+
+dialog{border:1px solid #bbb;border-radius:10px;padding:16px 18px;max-width:560px;font-size:14px}
+dialog h3{margin:0 0 8px}
+dialog ul{margin:6px 0;padding-left:18px;max-height:300px;overflow:auto}
+dialog .row{justify-content:flex-end}
+#toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:8px 14px;border-radius:8px;display:none;z-index:40;font-size:13px}
+#toast button{margin-left:10px;padding:2px 8px}
+
+@media (max-width:1250px){main{grid-template-columns:minmax(300px,36%) 1fr}.col3{grid-column:2}.tx{max-height:50vh}}
+@media (max-width:820px){main{grid-template-columns:1fr}.sticky{position:static}.col3{grid-column:1}.tx{max-height:40vh}}
+</style>
+</head>
+<body>
+<div id="top">
+ <header>
+  <a href="/">← Liste</a>
+  <h1 id="h1">__ID__</h1>
+  <span id="status">noch nicht gespeichert</span>
+  <span id="msg"></span>
+  <button id="snap" class="on" title="Beim Schubsen und Ziehen am nächsten Bildwechsel einrasten (bis 0.4 s)">Einrasten</button>
+  <button id="link" title="Live-App mit genau diesen Schritten öffnen; Link in die Zwischenablage">Schul-Link</button>
+  <button id="take" class="p">Veröffentlichen…</button>
+ </header>
+ <div class="tlwrap"><div id="tl"></div><div id="tip"><img alt=""><span></span></div></div>
+</div>
+
+<main>
+ <div class="sticky">
+  <div class="box">
+   <div class="player"><div id="yt"></div></div>
+   <div class="row"><span id="zeit">0:00.0</span>
+    <button data-seek="-2">−2 s</button><button data-seek="-0.5">−0.5</button><button data-seek="0.5">+0.5</button><button data-seek="2">+2 s</button>
+    <button id="pp">Play / Pause</button></div>
+   <div class="row">
+    <button id="test" class="p" title="Spielt den gewählten Schritt ab und hält, wo das Kind den Stopp sieht (T)">Schritt testen</button>
+    <button id="testend" title="Nur die letzten 3 s vor dem Stopp (Shift+T)">Ende testen</button>
+    <button id="here" title="Aktuelle Spielzeit wird Beginn des gewählten Schritts (S)">Hier = Beginn</button>
+    <button id="hereend" title="Aktuelle Spielzeit wird Ende des gewählten Schritts, also Beginn des nächsten (E)">Hier = Ende</button>
+   </div>
+   <div class="keys"><kbd>Leer</kbd> Play/Pause · <kbd>←</kbd><kbd>→</kbd> ±0.5 s spulen, <kbd>Shift</kbd> ±2 s · <kbd>S</kbd>/<kbd>E</kbd> Hier = Beginn/Ende · <kbd>T</kbd> testen · <kbd>,</kbd><kbd>.</kbd> Beginn ±0.1 s (<kbd>Shift</kbd>: Ende) · <kbd>[</kbd><kbd>]</kbd> Beginn zum Bildwechsel davor/danach · <kbd>1</kbd>–<kbd>9</kbd> Schritt wählen · <kbd>↑</kbd><kbd>↓</kbd> · <kbd>Ctrl+Z</kbd> rückgängig · <kbd>Ctrl+S</kbd> speichern</div>
+  </div>
+ </div>
+
+ <div>
+  <div class="box">
+   <h2>Schritte <span id="nsteps" style="text-transform:none;letter-spacing:0;color:#999"></span><span class="sp"></span>
+    <button class="sm" id="suggest" title="Erster Entwurf aus Transkript, YouTube-Kapiteln und Bildwechseln">Schritte vorschlagen</button>
+    <button class="sm" id="add">+ Schritt bei aktueller Zeit</button></h2>
+   <ol class="steps" id="steps"></ol>
+  </div>
+  <div class="box"><h2>Angaben</h2><div class="meta" id="meta"></div></div>
+  <div class="box"><h2>Fertig?</h2><ul class="check" id="check"></ul></div>
+ </div>
+
+ <div class="col3">
+  <div class="sticky box">
+   <h2>Transkript <span id="txart" style="text-transform:none;letter-spacing:0;color:#999"></span><span class="q" title="Klick auf die Zeit: Beginn des gewählten Schritts auf den Bildwechsel davor (sonst 1.5 s davor). «+» legt dort einen neuen Schritt an. Gelb = Zeile zum gewählten Schritt.">?</span></h2>
+   <div class="tx" id="tx"></div>
+  </div>
+ </div>
+</main>
+
+<dialog id="pub"><h3>In schule.json veröffentlichen</h3><div id="pubbody"></div><div class="row"><button id="pubno">Abbrechen</button><button id="pubyes" class="p">Veröffentlichen</button></div></dialog>
+<div id="toast"><span></span><button id="undo">Rückgängig</button></div>
+<datalist id="vok"></datalist>
+
+<script>
+const ID='__ID__';
+let D=null,E=null,sel=0,yt=null,ready=false,testEnde=null,hist=[],fut=[],dirty=false,saveTimer=null,snap=true;
+const $=s=>document.querySelector(s);
+const r1=x=>Math.round(x*10)/10;
+const fmt=t=>{t=Math.max(0,+t||0);const m=Math.floor(t/60),s=t-m*60;return m+':'+(s<10?'0':'')+s.toFixed(1)};
+const parseT=s=>{s=String(s).trim().replace(',','.');if(!s)return NaN;const p=s.split(':');return p.length===1?+p[0]:+p[0]*60+ +p[1]};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const frame=t=>'/f/'+ID+'/'+(Math.round(Math.max(0,t)*D.analyse.fps)+1);
+const cuts=()=>D.analyse.bildwechsel.map(c=>c[0]);
+const strong=()=>D.analyse.bildwechsel.filter(c=>c[1]>=0.28).map(c=>c[0]);
+const nearCut=(t,w)=>{let b=null;for(const c of cuts())if(Math.abs(c-t)<=w&&(b===null||Math.abs(c-t)<Math.abs(b-t)))b=c;return b};
+const prevCut=t=>cuts().filter(c=>c<t-0.05).pop();
+const nextCut=t=>cuts().find(c=>c>t+0.05);
+const words=s=>s.trim().split(/\s+/).filter(Boolean).length;
+
+function msg(s,err){const m=$('#msg');m.textContent=s;m.style.color=err?'var(--r)':'var(--g)';clearTimeout(msg.t);msg.t=setTimeout(()=>m.textContent='',4000)}
+function toast(text,undoFn){const t=$('#toast');t.firstElementChild.textContent=text;t.style.display='block';$('#undo').onclick=()=>{undoFn();t.style.display='none'};clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',6000)}
+
+/* ---------- Laden ---------- */
+async function lade(){
+ D=await (await fetch('/api/'+ID)).json();const a=D.analyse;
+ E=D.entwurf||D.schule||{id:'zw-video',areaId:'',stufen:[],title:a.title||'',source:{type:'youtube',id:ID},kanal:a.kanal||'',dauer:fmt(a.dauer).replace(/\.\d$/,''),alter:'ab 6',sprache:'Hochdeutsch',hinweis:'',material:[],steps:[{t:0,label:'Material richten: '}],task:{text:'',deliverable:'keine'}};
+ E.steps=(E.steps||[]).map(s=>({t:+s.t,label:String(s.label||'')}));E.material=E.material||[];E.stufen=E.stufen||[];E.task=E.task||{text:'',deliverable:'keine'};
+ $('#h1').textContent=(E.title||ID)+' · '+ID;document.title='Kontrolle – '+(E.title||ID);
+ if(D.entwurf)$('#status').textContent='Entwurf geladen';else msg(D.schule?'Kein Entwurf – zeige den Eintrag aus schule.json':'Kein Entwurf – leere Vorlage',true);
+ $('#vok').innerHTML=D.vokabular.map(([i,n])=>`<option value="${esc(n)}">${i}</option>`).join('');
+ renderMeta();renderTx();render();ladePlayer();
+ const top=()=>document.documentElement.style.setProperty('--top',$('#top').offsetHeight+'px');top();addEventListener('resize',top);
+}
+
+/* ---------- Verlauf / Speichern ---------- */
+function pushHist(){hist.push(JSON.stringify(E.steps));if(hist.length>100)hist.shift();fut=[]}
+function undo(){if(!hist.length)return;fut.push(JSON.stringify(E.steps));E.steps=JSON.parse(hist.pop());sel=Math.min(sel,E.steps.length-1);markDirty();render();msg('Rückgängig')}
+function redo(){if(!fut.length)return;hist.push(JSON.stringify(E.steps));E.steps=JSON.parse(fut.pop());sel=Math.min(sel,E.steps.length-1);markDirty();render();msg('Wiederholt')}
+function markDirty(){dirty=true;$('#status').textContent='ungespeichert…';clearTimeout(saveTimer);saveTimer=setTimeout(()=>speichern(),1500)}
+function nutzlast(){const e=JSON.parse(JSON.stringify(E));e.steps=e.steps.map(s=>({t:r1(s.t),label:s.label.trim()})).sort((a,b)=>a.t-b.t);return e}
+async function post(pfad){const r=await fetch(pfad,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(nutzlast())});const j=await r.json().catch(()=>({}));if(!r.ok)msg(j.fehler||'Fehler beim Speichern',true);return r.ok?j:null}
+async function speichern(){clearTimeout(saveTimer);if(await post('/api/'+ID+'/speichern')){dirty=false;$('#status').textContent='gespeichert '+new Date().toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'})}}
+addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
+
+/* ---------- Zeiten setzen ---------- */
+function setT(i,t,opt={}){if(!E.steps[i])return;t=r1(Math.max(0,Math.min(D.analyse.dauer,t)));if(opt.snap&&snap){const c=nearCut(t,0.4);if(c!==null)t=r1(c)}if(!opt.quiet)pushHist();E.steps[i].t=t;markDirty();render();return t}
+function seek(t,play){if(!ready)return;yt.seekTo(Math.max(0,t),true);if(play)yt.playVideo()}
+function testSchritt(i,nurEnde){if(!ready)return;const s=E.steps[i];if(!s)return;const nx=E.steps[i+1];if(nurEnde&&!nx){msg('Letzter Schritt – kein Stopp');return}
+ testEnde=nx?nx.t-0.08:null;seek(nurEnde?Math.max(s.t,nx.t-3):s.t,true);msg((nurEnde?'Ende':'Schritt')+' '+(i+1)+(nx?' – stoppt bei '+fmt(nx.t):' – läuft bis zum Schluss'))}
+function tick(){if(!ready)return;const t=yt.getCurrentTime()||0;$('#zeit').textContent=fmt(t);const p=$('#tl .pos');if(p)p.style.left=t/D.analyse.dauer*100+'%';
+ if(testEnde!=null&&yt.getPlayerState()===1&&t>=testEnde){yt.pauseVideo();testEnde=null;msg('Stopp bei '+fmt(t)+' – so sieht es das Kind')}}
+function ladePlayer(){const tag=document.createElement('script');tag.src='https://www.youtube.com/iframe_api';document.head.appendChild(tag);
+ window.onYouTubeIframeAPIReady=()=>{yt=new YT.Player('yt',{videoId:ID,playerVars:{controls:1,rel:0,modestbranding:1,playsinline:1},events:{onReady:()=>{ready=true;setInterval(tick,80)},onError:()=>msg('YouTube-Fehler – Video nicht einbettbar?',true)}})}}
+
+/* ---------- Prüfhinweise ---------- */
+function satzBei(t){return D.analyse.transkript.find(([s,e])=>t>s+1.5&&t<e-1.0)}
+function hinweise(i){const s=E.steps[i],w=[];const n=words(s.label);
+ if(!s.label.trim())w.push(['Titel fehlt',1]);if(n>8)w.push([n+' Wörter (max. 8)',1]);if(/ß/.test(s.label))w.push(['ß → ss',1]);if(/["«»„“]/.test(s.label))w.push(['Anführungszeichen',1]);
+ if(i===0&&s.t!==0)w.push(['erster Schritt nicht bei 0:00',1]);if(i>0&&s.t<=E.steps[i-1].t)w.push(['Zeit nicht aufsteigend',1]);
+ const nx=E.steps[i+1];if(nx&&nx.t-s.t<3&&nx.t>s.t)w.push(['nur '+(nx.t-s.t).toFixed(1)+' s lang',0]);
+ if(i>0){const z=satzBei(s.t);if(z)w.push(['Beginn mitten im Satz «'+z[2].slice(0,40)+(z[2].length>40?'…':'')+'» '+fmt(z[0])+'–'+fmt(z[1]),0])}
+ return w}
+function renderCheck(){const names=Object.fromEntries(D.vokabular);const items=[
+ ['Mindestens 2 Schritte, alle mit Titel',E.steps.length>=2&&E.steps.every(s=>s.label.trim())],
+ ['Keine roten Hinweise bei den Schritten',E.steps.every((s,i)=>!hinweise(i).some(h=>h[1]===1))],
+ ['Letzter Schritt «Fertig …»',/^fertig/i.test(E.steps[E.steps.length-1]?.label||'')],
+ ['Titel, Verfahren und Klassen gesetzt',!!(E.title.trim()&&E.areaId&&E.stufen.length)],
+ ['Material gesetzt, alle Wörter bekannt',E.material.length>0&&E.material.every(m=>names[m])]];
+ $('#check').innerHTML=items.map(([t,ok])=>`<li class="${ok?'ok':'no'}">${ok?'✓':'✗'} ${t}</li>`).join('')+
+  `<li><label><input type="checkbox" id="gepr" ${E._geprueft?'checked':''}> Alle Stopps im Player getestet</label></li>`;
+ $('#gepr').onchange=e=>{E._geprueft=e.target.checked;markDirty()}}
+
+/* ---------- Schritte ---------- */
+function render(){sel=Math.max(0,Math.min(sel,E.steps.length-1));renderSteps();renderTl();highlightTx();renderCheck()}
+function renderSteps(){const ol=$('#steps');
+ ol.innerHTML=E.steps.map((s,i)=>{const h=hinweise(i);const nx=E.steps[i+1];
+  return `<li class="step ${i===sel?'sel':''}" data-i="${i}">
+   <div class="hd"><span class="n">${i+1}</span><input class="t" value="${fmt(s.t)}" data-t="${i}" title="m:ss.s">
+    <button class="sm" data-d="-0.5" data-i="${i}" title="0.5 s früher (rastet ein)">−</button><button class="sm" data-d="0.5" data-i="${i}" title="0.5 s später (rastet ein)">+</button>
+    <input class="l" value="${esc(s.label)}" data-l="${i}" placeholder="Was das Kind jetzt macht (max. 8 Wörter)">
+    <span class="acts"><button class="sm" data-play="${i}" title="ab hier abspielen, am Ende stoppen">▶</button><button class="sm" data-ins="${i}" title="Schritt danach einfügen">＋</button><button class="sm" data-rm="${i}" title="löschen">✕</button></span>
+    ${h.length?`<div class="warn ${h.every(x=>x[1]===0)?'soft':''}">${h.map(x=>esc(x[0])).join(' · ')}</div>`:''}</div>
+   ${i===sel?`<div class="body">
+    <div class="lbl">Beginn <b>${fmt(s.t)}</b><span class="q" title="Klick auf ein Bild setzt den Beginn auf diese Zeit. Rot = aktueller Wert, orange = Bildwechsel.">?</span></div>${strip(s.t,i)}
+    <div class="lbl">Stopp am Ende <b>${nx?fmt(nx.t):'–'}</b> ${nx?'= Beginn von «'+esc(nx.label)+'»':'(letzter Schritt, läuft bis zum Schluss)'}<span class="q" title="Das Video hält 0.08 s vor dieser Zeit. Hier sollte das Kind das Ergebnis des Schritts sehen, nicht schon den nächsten.">?</span></div>${nx?strip(nx.t,i+1):''}
+   </div>`:''}</li>`}).join('');
+ $('#nsteps').textContent=E.steps.length+' Schritte';
+ const li=ol.querySelector('.step.sel');if(li&&render.scrollTo){li.scrollIntoView({block:'nearest'});render.scrollTo=false}}
+function strip(t,idx){let h='<div class="strip">';for(let d=-2.5;d<=2.5;d+=0.5){const tt=r1(t+d);if(tt<0||tt>D.analyse.dauer)continue;const cut=nearCut(tt,0.26)!==null;
+ h+=`<div class="f ${Math.abs(d)<0.01?'hit':''} ${cut?'cut':''}" data-set="${idx}" data-tt="${tt}"><img src="${frame(tt)}" loading="lazy" alt=""><span>${fmt(tt)}</span></div>`}return h+'</div>'}
+
+/* ---------- Zeitleiste ---------- */
+function renderTl(){const tl=$('#tl'),dur=D.analyse.dauer;let h='';
+ for(const [t,sc] of D.analyse.bildwechsel)h+=`<div class="c ${sc<0.28?'w':''}" style="left:${t/dur*100}%"></div>`;
+ E.steps.forEach((s,i)=>h+=`<div class="s ${i===sel?'sel':''}" style="left:${s.t/dur*100}%" data-sel="${i}" title="${esc(s.label)} – ziehen zum Verschieben">${i+1}</div>`);
+ tl.innerHTML=h+'<div class="pos"></div>'}
+(function tlEvents(){const tl=$('#tl'),tip=$('#tip');let drag=null;
+ const tAt=x=>{const r=tl.getBoundingClientRect();return Math.max(0,Math.min(D.analyse.dauer,(x-r.left)/r.width*D.analyse.dauer))};
+ tl.addEventListener('mousemove',e=>{const t=tAt(e.clientX);if(drag!==null){const nt=setT(drag,t,{snap:true,quiet:true});tip.lastElementChild.textContent=fmt(nt);tip.firstElementChild.src=frame(nt)}else{tip.lastElementChild.textContent=fmt(t);tip.firstElementChild.src=frame(t)}
+  tip.style.display='block';tip.style.left=(e.clientX-tl.parentElement.getBoundingClientRect().left)+'px'});
+ tl.addEventListener('mouseleave',()=>{if(drag===null)tip.style.display='none'});
+ tl.addEventListener('mousedown',e=>{const m=e.target.closest('[data-sel]');if(m){drag=+m.dataset.sel;sel=drag;pushHist();renderSteps();e.preventDefault()}});
+ addEventListener('mouseup',e=>{if(drag!==null){const i=drag;drag=null;tip.style.display='none';render();seek(E.steps[i].t)}});
+ tl.addEventListener('click',e=>{if(e.target.closest('[data-sel]'))return;seek(tAt(e.clientX))});
+})();
+
+/* ---------- Transkript ---------- */
+function renderTx(){const a=D.analyse;$('#txart').textContent='('+a.transkript_art+')';
+ let h=a.transkript.map(([s,e,x],i)=>`<div class="z" data-i="${i}" data-s="${s}" data-e="${e}"><span class="tt" data-tx="${s}">${fmt(s)}</span><button class="sm" data-new="${s}" title="neuer Schritt hier">+</button><span>${esc(x)}</span></div>`).join('');
+ if(a.kapitel&&a.kapitel.length)h+='<div class="kap">YouTube-Kapitel</div>'+a.kapitel.map(k=>`<div class="z"><span class="tt" data-tx="${k.start_time}">${fmt(k.start_time)}</span><button class="sm" data-new="${k.start_time}">+</button><span>${esc(k.title)}</span></div>`).join('');
+ $('#tx').innerHTML=h||'<span style="color:#999">kein Transkript</span>'}
+function highlightTx(){const s=E.steps[sel];if(!s)return;const rows=[...document.querySelectorAll('#tx .z[data-s]')];let cur=null;
+ rows.forEach(z=>{const a=+z.dataset.s,b=+z.dataset.e;z.classList.toggle('bnd',E.steps.some(st=>st.t>a+1.5&&st.t<b-1.0));const hit=s.t>=a-0.05&&s.t<b;z.classList.toggle('cur',hit);if(hit&&!cur)cur=z});
+ if(!cur)cur=rows.find(z=>+z.dataset.s>=s.t);if(cur){const box=$('#tx');box.scrollTop=cur.offsetTop-box.offsetTop-box.clientHeight/2+cur.offsetHeight/2}}
+function beginnVor(t){const c=prevCut(t);return r1(c!==undefined&&t-c<=4?c:Math.max(0,t-1.5))}
+
+/* ---------- Vorschlag ---------- */
+function kurz(s){s=String(s||'').replace(/^[\s\d.):\-–]+/,'').replace(/[.!?\s]+$/,'').trim();const w=s.split(/\s+/).slice(0,8);s=w.join(' ');return s.charAt(0).toUpperCase()+s.slice(1)}
+function vorschlag(){const a=D.analyse,cand=[];
+ for(const k of a.kapitel||[])cand.push({t:+k.start_time,label:k.title});
+ for(const [s,e,x] of a.transkript){const m=x.match(/^\s*(?:(\d+)\s*\.?\s*schritt|schritt\s*(\d+))\s*[:.\-–]?\s*(.*)$/i);if(m)cand.push({t:s,label:m[3]||x});}
+ let quelle='Kapitel/Transkript';
+ if(!cand.length){quelle='starke Bildwechsel';for(const t of strong())cand.push({t,label:''})}
+ cand.sort((p,q)=>p.t-q.t);const st=[];
+ for(const c of cand){const t=quelle==='starke Bildwechsel'?r1(c.t):beginnVor(c.t);if(st.length&&t-st[st.length-1].t<3)continue;if(t<1.5)continue;st.push({t,label:kurz(c.label)})}
+ st.unshift({t:0,label:(a.transkript[0]&&a.transkript[0][0]>3)?'Material richten: ':'Zuschauen: Einleitung'});
+ const outro=strong().find(t=>t>a.dauer*0.85);if(outro&&outro-st[st.length-1].t>3)st.push({t:r1(outro),label:'Fertig – schau dein Werk an'});
+ if(E.steps.length>1&&!confirm('Die '+E.steps.length+' bestehenden Schritte durch den Vorschlag ('+st.length+' Schritte aus '+quelle+') ersetzen? Rückgängig mit Ctrl+Z.'))return;
+ pushHist();E.steps=st;sel=0;markDirty();render();msg('Vorschlag aus '+quelle+': '+st.length+' Schritte – Titel und Stopps prüfen')}
+
+/* ---------- Angaben ---------- */
+function renderMeta(){const m=$('#meta');
+ m.innerHTML=`<label class="w">Titel (max. 5 Wörter)<input data-k="title" value="${esc(E.title)}"></label>
+ <label>Verfahren<select data-k="areaId"><option value="">–</option>${D.themen.map(([i,n])=>`<option value="${i}" ${i===E.areaId?'selected':''}>${esc(n)}</option>`).join('')}</select></label>
+ <label>Klassen<div class="pills" id="stufen">${[1,2,3,4,5,6].map(s=>`<button class="${E.stufen.includes(s)?'on':''}" data-st="${s}">${s}</button>`).join('')}</div></label>
+ <label class="w">Material – Reihenfolge wie auf der Materialkarte, Chips ziehen zum Sortieren<div class="chips" id="chips"></div><input id="matadd" list="vok" placeholder="Material tippen und Enter …"></label>
+ <label class="w">Hinweis für die Lehrperson<textarea data-k="hinweis" rows="2">${esc(E.hinweis||'')}</textarea></label>
+ <label class="w">Aufgabe danach (leer = keine)<input data-k="task.text" value="${esc(E.task.text||'')}"></label>
+ <details class="det w"><summary>Details (id, Kanal, Dauer, Alter, Sprache)</summary><div class="meta">
+  <label>id<input data-k="id" value="${esc(E.id)}"></label><label>Kanal<input data-k="kanal" value="${esc(E.kanal||'')}"></label>
+  <label>Dauer<input data-k="dauer" value="${esc(E.dauer||'')}"></label><label>Alter<input data-k="alter" value="${esc(E.alter||'')}"></label>
+  <label>Sprache<select data-k="sprache">${['Hochdeutsch','Schweizerdeutsch','ohne Sprache','Englisch'].map(s=>`<option ${s===E.sprache?'selected':''}>${s}</option>`).join('')}</select></label></div></details>`;
+ renderChips();
+ m.oninput=e=>{const k=e.target.dataset.k;if(!k)return;if(k==='task.text'){E.task.text=e.target.value;E.task.deliverable=e.target.value.trim()?'fertig':'keine'}else E[k]=e.target.value;if(k==='title')$('#h1').textContent=E.title+' · '+ID;markDirty();renderCheck()};
+ m.onclick=e=>{const b=e.target.closest('[data-st]');if(b){const s=+b.dataset.st;E.stufen=E.stufen.includes(s)?E.stufen.filter(x=>x!==s):[...E.stufen,s].sort();b.classList.toggle('on');markDirty();renderCheck()}};
+ $('#matadd').onchange=e=>{const v=e.target.value.trim().toLowerCase();if(!v)return;const hit=D.vokabular.find(([i,n])=>i===v||n.toLowerCase()===v);const id=hit?hit[0]:v.replace(/[^a-z]/g,'');
+  if(id&&!E.material.includes(id)){E.material.push(id);markDirty();renderChips();renderCheck()}e.target.value=''};
+ $('#matadd').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#matadd').onchange({target:$('#matadd')})}}}
+function renderChips(){const names=Object.fromEntries(D.vokabular);const c=$('#chips');
+ c.innerHTML=E.material.map((id,i)=>`<span class="chip ${names[id]?'':'unk'}" draggable="true" data-i="${i}" title="${names[id]?id:'nicht im Vokabular – bekommt kein Bild'}">${esc(names[id]||id)}<b data-rm="${i}">✕</b></span>`).join('')||'<span style="color:#999;font-size:12px">noch kein Material</span>';
+ let from=null;c.querySelectorAll('.chip').forEach(ch=>{ch.ondragstart=()=>{from=+ch.dataset.i;ch.classList.add('drag')};ch.ondragover=e=>e.preventDefault();
+  ch.ondrop=e=>{e.preventDefault();const to=+ch.dataset.i;if(from===null||from===to)return;const [m]=E.material.splice(from,1);E.material.splice(to,0,m);from=null;markDirty();renderChips()};ch.ondragend=()=>ch.classList.remove('drag')});
+ c.onclick=e=>{if(e.target.dataset.rm!==undefined){E.material.splice(+e.target.dataset.rm,1);markDirty();renderChips();renderCheck()}}}
+
+/* ---------- Veröffentlichen ---------- */
+function oeffnePub(){const fehlt=[];if(!E.title.trim())fehlt.push('Titel');if(!E.areaId)fehlt.push('Verfahren');if(!E.stufen.length)fehlt.push('Klassen');
+ if(fehlt.length){msg('Fehlt: '+fehlt.join(', '),true);return}
+ const alt=D.schule;let h='';
+ if(!alt)h=`<p>Neuer Eintrag <b>${esc(E.title)}</b> (${esc(E.id)}) wird an schule.json angehängt.</p>`;
+ else{h=`<p>Ersetzt den bestehenden Eintrag <b>${esc(alt.title)}</b> (${esc(alt.id)}).</p><ul>`;
+  const n=Math.max(alt.steps.length,E.steps.length);for(let i=0;i<n;i++){const a=alt.steps[i],b=E.steps[i];
+   if(!a)h+=`<li>+ ${fmt(b.t)} ${esc(b.label)}</li>`;else if(!b)h+=`<li>− ${fmt(a.t)} ${esc(a.label)}</li>`;
+   else if(a.t!==b.t||a.label!==b.label)h+=`<li>${fmt(a.t)} → <b>${fmt(b.t)}</b> ${a.label!==b.label?esc(a.label)+' → <b>'+esc(b.label)+'</b>':esc(b.label)}</li>`}
+  if(h.endsWith('<ul>'))h+='<li>Schritte unverändert</li>';h+='</ul>';
+  const ma=(alt.material||[]).join(', '),mb=E.material.join(', ');if(ma!==mb)h+=`<p>Material: ${esc(ma||'–')} → <b>${esc(mb||'–')}</b></p>`;
+  const sa=(alt.stufen||[]).join(''),sb=E.stufen.join('');if(sa!==sb)h+=`<p>Klassen: ${sa||'–'} → <b>${sb}</b></p>`}
+ h+='<p style="color:#777;font-size:12px">Danach noch: git commit &amp; push.</p>';$('#pubbody').innerHTML=h;$('#pub').showModal()}
+$('#pubno').onclick=()=>$('#pub').close();
+$('#pubyes').onclick=async()=>{$('#pub').close();const j=await post('/api/'+ID+'/uebernehmen');if(j){dirty=false;D.schule=nutzlast();$('#status').textContent='veröffentlicht';msg('In schule.json – jetzt '+j.anzahl+' Videos. Noch committen und pushen.')}};
+
+/* ---------- Ereignisse ---------- */
+document.addEventListener('click',e=>{const b=e.target.closest('[data-seek],[data-d],[data-play],[data-ins],[data-rm],[data-set],[data-tx],[data-new],.step');if(!b)return;const ds=b.dataset;
+ if(ds.seek){seek((yt?.getCurrentTime()||0)+ +ds.seek);return}
+ if(ds.d){setT(+ds.i,E.steps[+ds.i].t+ +ds.d,{snap:true});return}
+ if(ds.play){sel=+ds.play;render();testSchritt(sel);return}
+ if(ds.ins!==undefined){const i=+ds.ins,a=E.steps[i].t,b2=E.steps[i+1]?E.steps[i+1].t:Math.min(D.analyse.dauer,a+10);pushHist();E.steps.splice(i+1,0,{t:r1((a+b2)/2),label:''});sel=i+1;markDirty();render();$(`[data-l="${sel}"]`)?.focus();return}
+ if(ds.rm!==undefined){if(E.steps.length<=1)return;const i=+ds.rm,weg=E.steps[i];pushHist();E.steps.splice(i,1);sel=Math.min(sel,E.steps.length-1);markDirty();render();toast('Schritt '+(i+1)+' «'+weg.label+'» gelöscht',undo);return}
+ if(ds.set!==undefined){setT(+ds.set,+ds.tt);seek(+ds.tt);return}
+ if(ds.tx){setT(sel,beginnVor(+ds.tx));seek(E.steps[sel].t);return}
+ if(ds.new){const t=beginnVor(+ds.new);pushHist();E.steps.push({t,label:''});E.steps.sort((a,b)=>a.t-b.t);sel=E.steps.findIndex(s=>s.t===t);markDirty();render();$(`[data-l="${sel}"]`)?.focus();return}
+ if(b.classList.contains('step')&&!e.target.matches('input,button')&&+ds.i!==sel){sel=+ds.i;render()}
+});
+$('#steps').addEventListener('change',e=>{const t=e.target;if(t.dataset.t!==undefined){const v=parseT(t.value);if(isNaN(v)){t.value=fmt(E.steps[+t.dataset.t].t);return}setT(+t.dataset.t,v)}
+ if(t.dataset.l!==undefined){pushHist();E.steps[+t.dataset.l].label=t.value;markDirty();render()}});
+$('#steps').addEventListener('input',e=>{if(e.target.dataset.l!==undefined){E.steps[+e.target.dataset.l].label=e.target.value;markDirty()}});
+$('#steps').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.dataset.l!==undefined){e.preventDefault();const i=+e.target.dataset.l;e.target.blur();if(E.steps[i+1]){sel=i+1;render();$(`[data-l="${sel}"]`)?.focus()}}});
+$('#steps').addEventListener('focusin',e=>{const li=e.target.closest('.step');if(li&&+li.dataset.i!==sel){sel=+li.dataset.i;render();const again=$(`[data-${e.target.dataset.l!==undefined?'l':'t'}="${sel}"]`);again?.focus()}});
+$('#pp').onclick=()=>{if(!ready)return;yt.getPlayerState()===1?yt.pauseVideo():yt.playVideo()};
+$('#test').onclick=()=>testSchritt(sel);$('#testend').onclick=()=>testSchritt(sel,true);
+$('#here').onclick=()=>{if(ready)setT(sel,yt.getCurrentTime())};
+$('#hereend').onclick=()=>{if(!ready)return;if(!E.steps[sel+1]){msg('Letzter Schritt hat kein Ende – zuerst einen Schritt danach anlegen',true);return}setT(sel+1,yt.getCurrentTime())};
+$('#add').onclick=()=>{const t=ready?r1(yt.getCurrentTime()):0;pushHist();E.steps.push({t,label:''});E.steps.sort((a,b)=>a.t-b.t);sel=E.steps.findIndex(s=>s.t===t);markDirty();render();$(`[data-l="${sel}"]`)?.focus()};
+$('#suggest').onclick=vorschlag;
+$('#snap').onclick=()=>{snap=!snap;$('#snap').classList.toggle('on',snap);msg(snap?'Einrasten an':'Einrasten aus')};
+$('#take').onclick=oeffnePub;
+$('#link').onclick=()=>{const p={t:E.title,s:E.steps.map(s=>[r1(s.t),s.label]),a:E.task.text||'',y:ID};if(E.material.length)p.m=E.material;
+ const b=btoa(unescape(encodeURIComponent(JSON.stringify(p)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');const u='https://conradinjoos-lab.github.io/schrittli/schule/#s='+b;
+ window.open(u,'_blank');navigator.clipboard?.writeText(u);msg('Schul-Link geöffnet und kopiert')};
+document.addEventListener('keydown',e=>{
+ if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();speichern();return}
+ if(e.target.matches?.('input,textarea,select')){if(e.key==='Escape')e.target.blur();return}
+ if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();e.shiftKey?redo():undo();return}
+ if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='y'){e.preventDefault();redo();return}
+ const cur=yt?.getCurrentTime()||0,s=E.steps[sel],nx=E.steps[sel+1];
+ switch(e.key){
+  case ' ':e.preventDefault();$('#pp').click();break;
+  case 'ArrowLeft':seek(cur-(e.shiftKey?2:0.5));break;
+  case 'ArrowRight':seek(cur+(e.shiftKey?2:0.5));break;
+  case 'ArrowDown':e.preventDefault();sel=Math.min(E.steps.length-1,sel+1);render.scrollTo=true;render();break;
+  case 'ArrowUp':e.preventDefault();sel=Math.max(0,sel-1);render.scrollTo=true;render();break;
+  case 's':case 'S':$('#here').click();break;
+  case 'e':case 'E':$('#hereend').click();break;
+  case 't':testSchritt(sel);break;case 'T':testSchritt(sel,true);break;
+  case ',':setT(sel,s.t-0.1);seek(E.steps[sel].t);break;case '.':setT(sel,s.t+0.1);seek(E.steps[sel].t);break;
+  case ';':if(nx){setT(sel+1,nx.t-0.1);seek(nx.t-0.1)}break;case ':':if(nx){setT(sel+1,nx.t+0.1);seek(nx.t+0.1)}break;
+  case '[':{const c=prevCut(s.t);if(c!==undefined){setT(sel,c);seek(c)}break}
+  case ']':{const c=nextCut(s.t);if(c!==undefined){setT(sel,c);seek(c)}break}
+  default:if(/^[1-9]$/.test(e.key)&&E.steps[+e.key-1]){sel=+e.key-1;render.scrollTo=true;render();seek(E.steps[sel].t)}
+ }});
+lade();
+</script>
+</body>
+</html>

@@ -31,7 +31,7 @@ Zustand im Browser: localStorage `schrittli.v1` (Familie) bzw. `schrittli.schule
 
 1. Conradin schickt YouTube-Link(s) oder nennt Techniken.
 2. In Claude Code im Repo: `/schritte <Links>`. Das ruft `python werkzeug/holen.py` (yt-dlp: Einbettbarkeit, Transkript, 360p-Video; ffmpeg: Bildwechsel, Sprechpausen, Einzelbilder 2/s; Pillow: Kontaktblätter) und startet pro Video einen Agenten mit `werkzeug/SCHRITTE-LOKAL.md`. Ergebnis: `werkzeug/entwurf/<ID>/video.json`. Kein Browser nötig.
-3. Kontrolle: `python werkzeug/kontrolle.py` → http://127.0.0.1:8765/ – Player, Filmstreifen um jeden Stopp, Transkript, Bildwechsel; Stopps auf Zehntelsekunden setzen, «Schritt testen» zeigt genau den Halt, den das Kind sieht. Knopf «In schule.json übernehmen» schreibt den Eintrag (ersetzt gleiche id / gleiches Video). Bedienung: `werkzeug/LIESMICH.md`.
+3. Kontrolle: `python werkzeug/kontrolle.py` → http://127.0.0.1:8765/ – Player, Filmstreifen um jeden Stopp, Transkript, Bildwechsel; Stopps auf Zehntelsekunden setzen, «Schritt testen» zeigt genau den Halt, den das Kind sieht. Knopf «Veröffentlichen…» zeigt die Änderung an schule.json und schreibt den Eintrag (ersetzt gleiche id / gleiches Video). Bedienung: `werkzeug/LIESMICH.md`.
 4. Commit, push. `bash quelle/bauen.sh` nur bei Code-Änderungen.
 
 Erkenntnis aus dem Pompon-Test: die starken Bildwechsel (scene score ≥ 0.28) liegen fast genau auf den von Hand gesetzten Stopps. Regel im Brief: Stopp auf den Bildwechsel vor dem Sprechbeginn, nie auf den Sprechbeginn selbst.

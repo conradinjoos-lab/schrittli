@@ -28,7 +28,7 @@ Alles läuft lokal (yt-dlp, ffmpeg, Pillow). Nichts im Repo ausser `werkzeug/ent
    ```
    Dann `http://127.0.0.1:8765/` öffnen (Browser-Pane über `preview_start`, sonst dem Nutzer den Link nennen). Pro Video: `http://127.0.0.1:8765/v/<VIDEOID>`.
 
-4. Conradin prüft, verschiebt Stopps, klickt «In schule.json übernehmen». Danach auf Wunsch: `git add schule/schule.json && git commit`, kein Build nötig (nur JSON). Push nur auf Anfrage.
+4. Conradin prüft, verschiebt Stopps, klickt «Veröffentlichen…». Danach auf Wunsch: `git add schule/schule.json && git commit`, kein Build nötig (nur JSON). Push nur auf Anfrage.
 
 ## Was die Agenten bekommen
 
