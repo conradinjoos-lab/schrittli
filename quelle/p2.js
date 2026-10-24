@@ -126,7 +126,7 @@ function defaultState(){
     settings:{starsPerDay:3,earnStar:true,tts:true,autoRead:false,sv:3,spass:false,voice:'',slowRate:0.75,voiceControl:false,passTouches:false,pin:'1234',abend:'auto'}};
 }
 let S=load();
-function load(){ try{ const raw=localStorage.getItem(KEY); if(raw){ const s=JSON.parse(raw); const d=defaultState(); const st=Object.assign(d,s,{settings:Object.assign(d.settings,s.settings||{})}); if(SCHULE){ st.progress={}; st.works=(st.works||[]).filter(w=>w.profileId==='klasse'); st.profiles=d.profiles; st.activeProfile='klasse'; st.areas=THEMEN.map(a=>Object.assign({},a)); st.videos=[]; st.settings.spass=false; st.settings.abend='tag'; return st; } (st.areas||[]).forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; }); st.videos=(st.videos||[]).filter(validVideo); if(!(st.settings.sv>=2)){ st.settings.autoRead=false; st.settings.sv=2; } if(!(st.settings.sv>=3)){ const d3=defaultState().areas; const add=(id,after)=>{ if(st.areas.some(a=>a.id===id)) return; const a=d3.find(x=>x.id===id); const i=st.areas.findIndex(x=>x.id===after); st.areas.splice(i>=0?i+1:st.areas.length,0,a); }; add('werken','basteln'); add('experimente','natur'); st.settings.sv=3; } return st; } }catch(e){} return defaultState(); }
+function load(){ try{ const raw=localStorage.getItem(KEY); if(raw){ const s=JSON.parse(raw); const d=defaultState(); const st=Object.assign(d,s,{settings:Object.assign(d.settings,s.settings||{})}); if(SCHULE){ st.progress={}; st.settings.zuletzt=null; st.works=(st.works||[]).filter(w=>w.profileId==='klasse'); st.profiles=d.profiles; st.activeProfile='klasse'; st.areas=THEMEN.map(a=>Object.assign({},a)); st.videos=[]; st.settings.spass=false; st.settings.abend='tag'; return st; } (st.areas||[]).forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; }); st.videos=(st.videos||[]).filter(validVideo); if(!(st.settings.sv>=2)){ st.settings.autoRead=false; st.settings.sv=2; } if(!(st.settings.sv>=3)){ const d3=defaultState().areas; const add=(id,after)=>{ if(st.areas.some(a=>a.id===id)) return; const a=d3.find(x=>x.id===id); const i=st.areas.findIndex(x=>x.id===after); st.areas.splice(i>=0?i+1:st.areas.length,0,a); }; add('werken','basteln'); add('experimente','natur'); st.settings.sv=3; } return st; } }catch(e){} return defaultState(); }
 let saveT=null;
 function save(){ clearTimeout(saveT); saveT=setTimeout(()=>{ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ toast('Speichern nicht möglich (Speicher voll?)'); } },120); }
 
@@ -250,18 +250,52 @@ SCREENS.klasse=app=>{ const n=abend();
     ${bank()}</div>`;
   wire(app,{ k:b=>{ S.settings.klasse=+b.dataset.k; save(); go('home'); } });
 };
-function homeSchule(app){ const n=abend(); const k=S.settings.klasse; if(!k){ go('klasse'); return; }
-  const themen=S.areas.filter(a=>videosIn(a.id).length);
-  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${fenster(n)}
-    <div class="inner kopf mitfenster">
-      <div class="schild hallo tipp" data-act="klasse" role="button"><h1>${k}. Klasse</h1><div class="sub">Andere Klasse? Tipp hier</div></div>
-      ${S.works.length?`<div class="kopf-rechts"><button class="werke-btn" data-act="gallery"><span class="fotos"><i></i><i></i></span>Unsere Werke</button></div>`:''}
-    </div>
-    <div class="inner regal-wrap"><div class="regal lochwand">${themen.map(hakenHtml).join('')||'<div class="empty zettel">Für diese Klasse ist noch nichts da</div>'}</div></div>
-    <div class="inner lehrer-zeile"><button class="lehrer-link" data-act="lehrer">Für Lehrpersonen</button></div>
-    ${bank()}
-  </div>`;
-  wire(app,{ area:b=>go('area',{id:b.dataset.id}), klasse:()=>go('klasse'), lehrer:()=>go('lehrer'), gallery:()=>go('gallery') });
+/* Variante 3a «Luftig & klar»: zuerst der Raum (wird gemerkt), dann Themen als Kacheln, im Thema die Lektionen nach Niveau */
+const GRAFIK=SCHULE?'../grafik/':'grafik/';
+const RAEUME=[{id:'hand',name:'Handarbeitszimmer',bild:'naehen',soft:'#FBE3DE',themen:['naehen','sticken','haekeln','stricken','weben','knuepfen','wickeln','filzen']},
+ {id:'werk',name:'Werkraum',bild:'hammer',soft:'#F6E4C8'}];  // Werkraum: alles, was nicht ins Handarbeitszimmer gehört
+const NIV3=[null,['Erkunden & üben','#DDF1E4','#1F6B45'],['Selbstständig & genau','#DCE8F7','#2B5A8C'],['Gezielt anwenden','#FBE9C9','#9A6A12']];
+const raumOf=aid=>RAEUME[0].themen.includes(aid)?RAEUME[0]:RAEUME[1];
+const raumThemen=r=>S.areas.filter(a=>raumOf(a.id)===r&&videosIn(a.id).length);
+const soft=a=>`color-mix(in oklch,${a.color} 16%,white)`;
+const prSchule=v=>S.progress[S.activeProfile+':'+v.id]||{};
+function v3Kopf(links,titel){ return `<div class="v3-kopf">${links}<span class="v3-logo"><img src="${GRAFIK}logo.webp" alt=""></span>${titel||'<b class="v3-name">Schrittli</b>'}<span class="grow"></span><button class="v3-pill" data-act="gallery">Unsere Werke${S.works.length?' · '+S.works.length:''}</button></div>`; }
+function weiterMit(r){ const v=videoOf(S.settings.zuletzt); if(!v||raumOf(v.areaId)!==r||!videosIn(v.areaId).includes(v)) return null; const pr=prSchule(v); return !pr.done&&(pr.pos>5||pr.step>0)?{v,a:areaOf(v.areaId),schritt:(pr.step||0)+1}:null; }
+SCREENS.raum=app=>{ const akt=S.settings.raum;
+  app.innerHTML=`<div class="v3"><div class="v3-in">${v3Kopf('')}
+    <h1 class="v3-h1 gross">Wo arbeitest du heute?</h1><p class="v3-sub">${akt?'Tipp auf den Raum, in dem du arbeitest.':'Nur beim ersten Start – danach merkt sich Schrittli deinen Raum.'}</p>
+    <div class="v3-raeume">${RAEUME.map(r=>`<button class="v3-raum${r.id===akt?' an':''}" data-act="r" data-id="${r.id}"><span class="bild" style="background:${r.soft}"><img src="${GRAFIK}${r.bild}.webp" alt=""></span><b>${r.name}</b><span class="v3-meta">${raumThemen(r).length} Themen</span></button>`).join('')}</div>
+    <div class="v3-fuss"><button class="v3-link" data-act="lehrer">Für Lehrpersonen</button></div></div></div>`;
+  wire(app,{ r:b=>{ S.settings.raum=b.dataset.id; save(); go('home'); }, gallery:()=>go('gallery'), lehrer:()=>go('lehrer') });
+};
+function themaKachel(a){ const vs=videosIn(a.id); const da=[1,2,3].map(n=>vs.some(v=>(+v.niveau||2)===n)); const tip='Niveaus: '+[1,2,3].filter(n=>da[n-1]).map(n=>NIVEAU[n]).join(', ');
+  return `<button class="v3-kachel" data-act="area" data-id="${a.id}"><span class="bild" style="background:${soft(a)}"><img src="${GRAFIK}${a.id}.webp" alt="" onerror="this.remove()"></span><b>${esc(a.name)}</b><span class="v3-zeile"><span class="v3-meta">${vs.length} Video${vs.length===1?'':'s'}</span><span class="v3-dots" title="${tip}" aria-label="${tip}">${da.map(x=>`<i${x?' class="an"':''}></i>`).join('')}</span></span></button>`; }
+function homeSchule(app){ const r=RAEUME.find(x=>x.id===S.settings.raum); if(!r){ go('raum'); return; } const k=S.settings.klasse; const themen=raumThemen(r); const w=weiterMit(r);
+  app.innerHTML=`<div class="v3"><div class="v3-in">
+    ${v3Kopf('<button class="v3-rund" data-act="raeume" aria-label="Anderer Raum">←</button>')}
+    <div class="v3-leiste"><div class="v3-schalter" role="group" aria-label="Raum">${RAEUME.map(x=>`<button class="${x===r?'an':''}" data-act="raum" data-id="${x.id}">${x.name}</button>`).join('')}</div>
+      <div class="v3-schalter v3-klassen" role="group" aria-label="Klasse">${STUFEN.map(s=>`<button class="${s===k?'an':''}" data-act="klasse" data-k="${s}" aria-label="${s}. Klasse">${s}.</button>`).join('')}</div></div>
+    <div class="v3-titel"><h1 class="v3-h1">${r.name}</h1>${w?`<button class="v3-weiter" data-act="weiter" data-id="${w.v.id}"><span class="bild" style="background:${soft(w.a)}"><img src="${GRAFIK}${w.a.id}.webp" alt=""></span><span class="txt"><small>Weiter mit</small><b>${esc(w.a.name)} · Schritt ${w.schritt}</b></span><span class="play" aria-hidden="true">▶</span></button>`:''}</div>
+    ${k?'':'<p class="v3-sub">Tipp oben auf deine Klasse – dann siehst du nur, was zu dir passt.</p>'}
+    <div class="v3-themen">${themen.map(themaKachel).join('')||'<div class="v3-leer">Für diese Klasse ist hier noch nichts da.</div>'}</div>
+    <div class="v3-fuss"><button class="v3-link" data-act="lehrer">Für Lehrpersonen</button></div></div></div>`;
+  wire(app,{ raeume:()=>go('raum'), raum:b=>{ S.settings.raum=b.dataset.id; save(); render(); }, klasse:b=>{ S.settings.klasse=+b.dataset.k; save(); render(); },
+    area:b=>go('area',{id:b.dataset.id}), weiter:b=>go('player',{videoId:b.dataset.id}), lehrer:()=>go('lehrer'), gallery:()=>go('gallery') });
+}
+function areaSchule(app,a){ const vs=[1,2,3].flatMap(n=>videoOrdnung(videosIn(a.id)).filter(v=>(+v.niveau||2)===n)); const jetzt=vs.find(v=>v.id===S.settings.zuletzt&&!prSchule(v).done)||vs.find(v=>!prSchule(v).done); let nr=0;
+  const zeile=v=>{ nr++; const pr=prSchule(v); const [cls,sym]=pr.done?['fertig','✓']:v===jetzt?['jetzt',nr]:['offen',nr]; const th=thumbOf(v);
+    const auf=v.task&&v.task.text&&v.task.deliverable!=='keine'?`<button class="v3-lektion aufgabe" data-act="video" data-id="${v.id}"><span class="th stern" aria-hidden="true">★</span><span class="grow"><b>${esc(v.task.text)}</b><span class="v3-meta">Aufgabe${v.task.deliverable==='foto'?' · Foto machen':''}</span></span><span class="v3-badge aufgabe">★</span></button>`:'';
+    return `<button class="v3-lektion${v===jetzt?' jetzt':''}" data-act="video" data-id="${v.id}"><span class="th">${th?`<img src="${th}" alt="" loading="lazy">`:''}<i aria-hidden="true">▶</i></span><span class="grow"><b>${esc(v.title)}</b><span class="v3-meta">${[(v.steps||[]).length?v.steps.length+' Schritte':'',v.zeit?v.zeit+' Min.':'',v.grundtechnik?'Grundtechnik':''].filter(Boolean).join(' · ')}</span></span><span class="v3-badge ${cls}" aria-label="${pr.done?'fertig':v===jetzt?'jetzt dran':'noch offen'}">${sym}</span></button>${auf}`; };
+  const liste=[1,2,3].map(n=>{ const g=vs.filter(v=>(+v.niveau||2)===n); return g.length?`<h2 class="v3-niv" style="--h:${NIV3[n][1]};--d:${NIV3[n][2]}"><span>${n}</span>${NIV3[n][0]}</h2>${g.map(zeile).join('')}`:''; }).join('');
+  const mat=(jetzt||vs[0]||{}).material||[];
+  app.innerHTML=`<div class="v3"><div class="v3-in">
+    ${v3Kopf('<button class="v3-rund gross" data-act="back" aria-label="Zurück">←</button>',`<div class="v3-thema-titel"><small>${raumOf(a.id).name}</small><h1>${esc(a.name)}</h1></div>`)}
+    <div class="v3-thema">
+      <div class="v3-links"><div class="v3-held" style="background:${soft(a)}"><img src="${GRAFIK}${a.id}.webp" alt="" onerror="this.remove()"></div>
+        ${mat.length?`<div class="v3-karte"><h2>Du brauchst</h2><div class="v3-mat">${mat.map(id=>`<div><span class="pik">${matIcon(id)}</span><b>${esc(matName(id))}</b></div>`).join('')}</div></div>`:''}</div>
+      <div class="v3-liste">${liste||'<div class="v3-leer">Hier ist noch nichts drin.</div>'}${werkeHtml(WERKE.filter(w=>w.bereich===a.id))}</div>
+    </div></div></div>`;
+  wire(app,{ back:()=>go('home'), andere:zeigeWerk, video:b=>go('player',{videoId:b.dataset.id}), gallery:()=>go('gallery') });
 }
 SCREENS.lehrer=app=>{ const n=abend();
   const vids=S.videos.slice().sort((a,b)=>(a.areaId+a.title).localeCompare(b.areaId+b.title,'de'));
@@ -292,7 +326,7 @@ SCREENS.home=app=>{
 };
 
 SCREENS.area=(app,{id})=>{
-  const a=areaOf(id); if(!a){ go('home'); return; } const p=profile(); const vids=videoOrdnung(videosIn(id)); const gruppen=vids.some(v=>v.grundtechnik)&&vids.some(v=>!v.grundtechnik); const st=starState(p.id); const left=starsLeft(p.id); const n=abend();
+  const a=areaOf(id); if(!a){ go('home'); return; } if(SCHULE) return areaSchule(app,a); const p=profile(); const vids=videoOrdnung(videosIn(id)); const gruppen=vids.some(v=>v.grundtechnik)&&vids.some(v=>!v.grundtechnik); const st=starState(p.id); const left=starsLeft(p.id); const n=abend();
   app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${kopf(a.name,{back:true,right:S.settings.spass?glasSterne(p.id,true):''})}
     <div class="inner">${vids.length?`<div class="pinwand">${vids.map((v,i)=>{ const grp=gruppen&&(i===0||!!vids[i-1].grundtechnik!==!!v.grundtechnik)?`<h2 class="pw-grp">${v.grundtechnik?'Grundtechniken':'Projekte'}</h2>`:''; const pr=S.progress[p.id+':'+v.id]; const th=thumbOf(v); const locked=a.kind==='spass'&&!st.unlocked.includes(v.id)&&left<=0;
       return `${grp}<button class="vcard${locked?' disabled':''}" data-act="video" data-id="${v.id}"><div class="th">${th?`<img src="${th}" alt="" loading="lazy">`:'🎬'}${v.grundtechnik?'<span class="gt">Grundtechnik</span>':''}${niveauHtml(v)}${pr&&pr.done?`<span class="badge">${ico('check')} fertig</span>`:pr&&(pr.pos>5||pr.step>0)?`<span class="badge prog">angefangen</span>`:''}${v.zeit?`<span class="zeit">⏱ ${v.zeit} Min.</span>`:''}${locked?`<span class="lock">😴</span>`:''}</div><div class="tt"><span class="grow">${esc(v.title)}</span>${a.kind==='spass'&&!st.unlocked.includes(v.id)?`<span class="stern">${ico('star')}</span>`:''}</div></button>`; }).join('')}</div>`
@@ -345,6 +379,7 @@ SCREENS.player=(app,{videoId,school})=>{
   const v=school||videoOf(videoId); if(!v){ go('home'); return; }
   const a=v.areaId?areaOf(v.areaId):null; const p=school?null:profile(); const n=abend();
   const steps=buildVideoSteps(v); const pr=school?{pos:0,step:0,done:false,slow:false}:prog(v.id);
+  if(SCHULE&&!school){ S.settings.zuletzt=v.id; save(); }
   app.innerHTML=`<div class="${kidClass('pl'+(S.settings.kino&&!school?' kino':''))}">${girlande(n)}
     <div class="inner kopf pl-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a><div class="schild"><h1>${esc(v.title)}</h1></div><div class="kopf-rechts"><span class="zettel" id="zettel"></span>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}</div></div>
     <div class="inner panes">
