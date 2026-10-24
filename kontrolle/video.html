@@ -151,6 +151,7 @@ details summary{cursor:pointer;color:var(--b-dk);font-weight:700;font-size:14px;
 .meta label{display:flex;flex-direction:column;font-size:12px;font-weight:700;color:var(--mute);min-width:0;gap:4px}
 .meta label>input,.meta label>select,.meta label>textarea{font-size:14px;font-weight:400;color:var(--ink)}
 .meta .w{grid-column:1/-1}
+.meta label.chk{flex-direction:row;align-items:center;gap:8px;font-size:13px;font-weight:400;color:var(--ink)}
 .pills{display:flex;gap:4px;flex-wrap:wrap}
 .pills button{padding:5px 13px;border:1px solid var(--line);color:var(--ink);font-weight:400}
 .pills button.on{background:var(--b);border-color:var(--b);color:#fff;font-weight:700}
@@ -305,7 +306,8 @@ async function lade(){
  try{await W.bereit();D=await W.daten(ID)}catch(x){$('#h1').textContent='Laden ging nicht: '+(x.message||x);return}
  const a=D.analyse;
  E=D.entwurf||D.schule||{id:'zw-video',areaId:'',stufen:[],title:a.title||'',source:{type:'youtube',id:ID},kanal:a.kanal||'',dauer:fmt(a.dauer).replace(/\.\d$/,''),alter:'ab 6',sprache:'Hochdeutsch',hinweis:'',material:[],steps:[],task:{text:'',deliverable:'keine'}};
- E.steps=(E.steps||[]).map(s=>({t:+s.t,label:String(s.label||'')}));E.material=E.material||[];E.stufen=E.stufen||[];E.task=E.task||{text:'',deliverable:'keine'};
+ E.steps=(E.steps||[]).map(s=>({t:+s.t,label:String(s.label||'')}));E.material=E.material||[];E.stufen=E.stufen||[];for(const k of ['niveau','techniken','grundtechnik'])if(E['_'+k]!==undefined){if(E[k]===undefined)E[k]=E['_'+k];delete E['_'+k]}  // ältere Agenten-Entwürfe
+E.task=E.task||{text:'',deliverable:'keine'};
  $('#h1').textContent=E.title||ID;document.title='Kontrolle – '+(E.title||ID);
  if(D.entwurf)$('#status').textContent='Entwurf geladen';else msg(D.schule?'Kein Entwurf – Eintrag aus schule.json':'Kein Entwurf – leere Vorlage',true);
  $('#vok').innerHTML=D.vokabular.map(([i,n])=>`<option value="${esc(n)}">${i}</option>`).join('');
@@ -460,14 +462,18 @@ function renderMeta(){const m=$('#meta');
  m.innerHTML=`<label class="w">Titel (max. 5 Wörter)<input data-k="title" value="${esc(E.title)}"></label>
  <label>Verfahren<select data-k="areaId"><option value="">–</option>${D.themen.map(([i,n])=>`<option value="${i}" ${i===E.areaId?'selected':''}>${esc(n)}</option>`).join('')}</select></label>
  <label>Klassen<div class="pills" id="stufen">${[1,2,3,4,5,6].map(s=>`<button class="${E.stufen.includes(s)?'on':''}" data-st="${s}">${s}</button>`).join('')}</div></label>
+ <label>Schwierigkeit<div class="pills" id="niveau">${['leicht','mittel','anspruchsvoll'].map((n,i)=>`<button class="${+E.niveau===i+1?'on':''}" data-niv="${i+1}">${i+1} ${n}</button>`).join('')}</div></label>
+ <label>Techniken (mit Komma)<input data-k="techniken" value="${esc((E.techniken||[]).join(', '))}" placeholder="z. B. vorstich, knoten"></label>
+ <label class="chk w"><input type="checkbox" data-k="grundtechnik" ${E.grundtechnik?'checked':''}> Grundtechnik: zeigt vor allem eine Technik, die in vielen Projekten vorkommt</label>
  <label class="w">Hinweis für die Lehrperson<textarea data-k="hinweis" rows="2">${esc(E.hinweis||'')}</textarea></label>
  <details class="w"><summary>Details</summary><div class="meta" style="margin-top:8px">
   <label class="w">Aufgabe danach (leer = keine)<input data-k="task.text" value="${esc(E.task.text||'')}"></label>
   <label>id<input data-k="id" value="${esc(E.id)}"></label><label>Kanal<input data-k="kanal" value="${esc(E.kanal||'')}"></label>
   <label>Dauer<input data-k="dauer" value="${esc(E.dauer||'')}"></label><label>Zeit (Min., nur Mini ≤ 15)<input data-k="zeit" type="number" min="1" max="15" value="${E.zeit||''}"></label><label>Alter<input data-k="alter" value="${esc(E.alter||'')}"></label>
   <label>Sprache<select data-k="sprache">${['Hochdeutsch','Schweizerdeutsch','ohne Sprache','Englisch'].map(s=>`<option ${s===E.sprache?'selected':''}>${s}</option>`).join('')}</select></label></div></details>`;
- m.oninput=e=>{const k=e.target.dataset.k;if(!k)return;if(k==='task.text'){E.task.text=e.target.value;E.task.deliverable=e.target.value.trim()?'fertig':'keine'}else if(k==='zeit'){const n=parseInt(e.target.value,10);if(n>0)E.zeit=n;else delete E.zeit}else E[k]=e.target.value;if(k==='title')$('#h1').textContent=E.title||ID;markDirty();renderCheck()};
- m.onclick=e=>{const b=e.target.closest('[data-st]');if(b){const s=+b.dataset.st;E.stufen=E.stufen.includes(s)?E.stufen.filter(x=>x!==s):[...E.stufen,s].sort();b.classList.toggle('on');markDirty();renderCheck()}}}
+ m.oninput=e=>{const k=e.target.dataset.k;if(!k)return;if(k==='task.text'){E.task.text=e.target.value;E.task.deliverable=e.target.value.trim()?'fertig':'keine'}else if(k==='techniken'){const t=e.target.value.split(',').map(x=>x.trim().toLowerCase()).filter(Boolean);if(t.length)E.techniken=t;else delete E.techniken}else if(k==='grundtechnik'){if(e.target.checked)E.grundtechnik=true;else delete E.grundtechnik}else if(k==='zeit'){const n=parseInt(e.target.value,10);if(n>0)E.zeit=n;else delete E.zeit}else E[k]=e.target.value;if(k==='title')$('#h1').textContent=E.title||ID;markDirty();renderCheck()};
+ m.onclick=e=>{const nv=e.target.closest('[data-niv]');if(nv){e.preventDefault();const n=+nv.dataset.niv;if(+E.niveau===n)delete E.niveau;else E.niveau=n;document.querySelectorAll('#niveau button').forEach(x=>x.classList.toggle('on',+x.dataset.niv===+E.niveau));markDirty();return}
+ const b=e.target.closest('[data-st]');if(b){const s=+b.dataset.st;E.stufen=E.stufen.includes(s)?E.stufen.filter(x=>x!==s):[...E.stufen,s].sort();b.classList.toggle('on');markDirty();renderCheck()}}}
 
 /* ---------- Veröffentlichen ---------- */
 function oeffnePub(){const fehlt=[];if(!E.title.trim())fehlt.push('Titel');if(!E.areaId)fehlt.push('Verfahren');if(!E.stufen.length)fehlt.push('Klassen');
@@ -480,7 +486,9 @@ function oeffnePub(){const fehlt=[];if(!E.title.trim())fehlt.push('Titel');if(!E
    else if(a.t!==b.t||a.label!==b.label)h+=`<li>${fmt(a.t)} → <b>${fmt(b.t)}</b> ${a.label!==b.label?esc(a.label)+' → <b>'+esc(b.label)+'</b>':esc(b.label)}</li>`}
   if(h.endsWith('<ul>'))h+='<li>Schritte unverändert</li>';h+='</ul>';
   const ma=(alt.material||[]).join(', '),mb=E.material.join(', ');if(ma!==mb)h+=`<p>Material: ${esc(ma||'–')} → <b>${esc(mb||'–')}</b></p>`;
-  const sa=(alt.stufen||[]).join(''),sb=E.stufen.join('');if(sa!==sb)h+=`<p>Klassen: ${sa||'–'} → <b>${sb}</b></p>`}
+  const sa=(alt.stufen||[]).join(''),sb=E.stufen.join('');if(sa!==sb)h+=`<p>Klassen: ${sa||'–'} → <b>${sb}</b></p>`;
+  if((alt.niveau||'')!==(E.niveau||''))h+=`<p>Schwierigkeit: ${alt.niveau||'–'} → <b>${E.niveau||'–'}</b></p>`;
+  if(!!alt.grundtechnik!==!!E.grundtechnik)h+=`<p>Grundtechnik: ${alt.grundtechnik?'ja':'nein'} → <b>${E.grundtechnik?'ja':'nein'}</b></p>`}
  const offen=checkliste().filter(x=>!x[1]);if(offen.length)h+=`<p style="color:var(--r)">Noch offen: ${offen.map(x=>esc(x[0])).join(' · ')}</p>`;
  h+=W.LOKAL?'<p class="mute">Danach noch: git commit &amp; push.</p>':'<p class="mute">Geht direkt auf GitHub – die Schul-App zeigt es nach etwa einer Minute.</p>';$('#pubbody').innerHTML=h;$('#pub').showModal()}
 $('#pubno').onclick=()=>$('#pub').close();

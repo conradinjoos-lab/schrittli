@@ -135,6 +135,9 @@ function starState(pid){ const t=todayStr(); let st=S.stars[pid]; if(!st||st.dat
 function starsLeft(pid){ const st=starState(pid); return S.settings.starsPerDay+st.bonus-st.used; }
 function earnStar(){ const st=starState(S.activeProfile); if(st.bonus<1){ st.bonus++; return true; } return false; }
 function thumbOf(v){ return v.source.type==='youtube'?`https://i.ytimg.com/vi/${v.source.id}/mqdefault.jpg`:(v.thumb||null); }
+const NIVEAU=['','leicht','mittel','anspruchsvoll'];
+function niveauHtml(v){ const n=+v.niveau; if(!(n>=1&&n<=3)) return ''; return `<span class="niv n${n}" title="${NIVEAU[n]}" aria-label="${NIVEAU[n]}">${[1,2,3].map(k=>`<i${k<=n?' class="an"':''}></i>`).join('')}</span>`; }
+function videoOrdnung(vs){ return vs.slice().sort((a,b)=>(!!b.grundtechnik-!!a.grundtechnik)||((+a.niveau||2)-(+b.niveau||2))); }  // Grundtechniken zuerst, dann leicht → anspruchsvoll
 function abend(){ const a=S.settings.abend||'auto'; if(a==='tag') return false; if(a==='abend') return true; const h=new Date().getHours(); return h>=18||h<6; }
 function kidClass(extra=''){ const n=abend(); const tc=$('#themecolor'); if(tc) tc.setAttribute('content',n?'#2E3A4A':'#F1E3CB'); return 'screen kid'+(n?' abend':'')+(SCHULE&&S.settings.klasse>=3?' schrift-normal':'')+(extra?' '+extra:''); }
 
@@ -258,7 +261,7 @@ SCREENS.lehrer=app=>{ const n=abend();
   const vids=S.videos.slice().sort((a,b)=>(a.areaId+a.title).localeCompare(b.areaId+b.title,'de'));
   app.innerHTML=`<div class="${kidClass()} schrift-normal">${girlande(n)}${kopf('Für Lehrpersonen',{back:true})}
     <div class="inner"><div class="lehrer-info">Ohne Anmeldung, nichts wird gespeichert. Pro Video gibt es einen QR-Code: Kinder scannen ihn und landen direkt im Player mit den Schritten – auch von zuhause. Klassenzuordnung und neue Videos: Link an Conradin.</div>
-    <div class="lehrer-liste">${S.areas.map(a=>{ const vs=vids.filter(v=>v.areaId===a.id); if(!vs.length) return ''; return `<h2 style="color:${a.color};margin:14px 0 6px">${a.emoji} ${esc(a.name)}</h2>${vs.map(v=>`<div class="lrow"><span class="grow">${esc(v.title)}</span><span class="stufen">${(v.stufen||[]).map(s=>`<b>${s}</b>`).join('')}</span><span class="muted small">${v.zeit?`⏱ ${v.zeit} Min. · `:''}${(v.steps||[]).length?v.steps.length+' Schritte':'ohne Schritte'}${(v.material||[]).length?' · '+v.material.map(matName).join(', '):''}</span><button class="btn sm" data-act="qr" data-id="${v.id}">QR-Code</button></div>`).join('')}`; }).join('')}</div></div>
+    <div class="lehrer-liste">${S.areas.map(a=>{ const vs=vids.filter(v=>v.areaId===a.id); if(!vs.length) return ''; return `<h2 style="color:${a.color};margin:14px 0 6px">${a.emoji} ${esc(a.name)}</h2>${vs.map(v=>`<div class="lrow"><span class="grow">${esc(v.title)}${v.grundtechnik?' <span class="gt">Grundtechnik</span>':''}</span>${niveauHtml(v)}<span class="stufen">${(v.stufen||[]).map(s=>`<b>${s}</b>`).join('')}</span><span class="muted small">${v.zeit?`⏱ ${v.zeit} Min. · `:''}${(v.steps||[]).length?v.steps.length+' Schritte':'ohne Schritte'}${(v.material||[]).length?' · '+v.material.map(matName).join(', '):''}</span><button class="btn sm" data-act="qr" data-id="${v.id}">QR-Code</button></div>`).join('')}`; }).join('')}</div></div>
     ${bank()}</div>`;
   wire(app,{ back:()=>go('home'), qr:async b=>{ const v=videoOf(b.dataset.id); const link=schoolLink(v); kidModal(`<h2 style="font-size:20px">${esc(v.title)}</h2><div class="qr" id="qr" style="margin:10px auto"></div><code style="font-size:11px;word-break:break-all;display:block;max-width:360px">${esc(link)}</code><div class="row center" style="margin-top:12px"><button class="btn sm" data-act="copylink" data-link="${esc(link)}">Link kopieren</button><button class="kbtn ghost" data-close>Schliessen</button></div>`,{copylink:(b2)=>{ navigator.clipboard&&navigator.clipboard.writeText(b2.dataset.link).then(()=>toast('Kopiert')).catch(()=>toast('Kopieren nicht möglich')); }}); try{ if(!window.QRCode) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'); new QRCode($('#qr'),{text:link,width:240,height:240,correctLevel:QRCode.CorrectLevel.L}); }catch(e){ const q=$('#qr'); if(q) q.textContent='QR-Code konnte nicht geladen werden.'; } } });
 };
@@ -283,10 +286,10 @@ SCREENS.home=app=>{
 };
 
 SCREENS.area=(app,{id})=>{
-  const a=areaOf(id); if(!a){ go('home'); return; } const p=profile(); const vids=videosIn(id); const st=starState(p.id); const left=starsLeft(p.id); const n=abend();
+  const a=areaOf(id); if(!a){ go('home'); return; } const p=profile(); const vids=videoOrdnung(videosIn(id)); const gruppen=vids.some(v=>v.grundtechnik)&&vids.some(v=>!v.grundtechnik); const st=starState(p.id); const left=starsLeft(p.id); const n=abend();
   app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${kopf(a.name,{back:true,right:S.settings.spass?glasSterne(p.id,true):''})}
-    <div class="inner">${vids.length?`<div class="pinwand">${vids.map(v=>{ const pr=S.progress[p.id+':'+v.id]; const th=thumbOf(v); const locked=a.kind==='spass'&&!st.unlocked.includes(v.id)&&left<=0;
-      return `<button class="vcard${locked?' disabled':''}" data-act="video" data-id="${v.id}"><div class="th">${th?`<img src="${th}" alt="" loading="lazy">`:'🎬'}${pr&&pr.done?`<span class="badge">${ico('check')} fertig</span>`:pr&&(pr.pos>5||pr.step>0)?`<span class="badge prog">angefangen</span>`:''}${v.zeit?`<span class="zeit">⏱ ${v.zeit} Min.</span>`:''}${locked?`<span class="lock">😴</span>`:''}</div><div class="tt"><span class="grow">${esc(v.title)}</span>${a.kind==='spass'&&!st.unlocked.includes(v.id)?`<span class="stern">${ico('star')}</span>`:''}</div></button>`; }).join('')}</div>`
+    <div class="inner">${vids.length?`<div class="pinwand">${vids.map((v,i)=>{ const grp=gruppen&&(i===0||!!vids[i-1].grundtechnik!==!!v.grundtechnik)?`<h2 class="pw-grp">${v.grundtechnik?'Grundtechniken':'Projekte'}</h2>`:''; const pr=S.progress[p.id+':'+v.id]; const th=thumbOf(v); const locked=a.kind==='spass'&&!st.unlocked.includes(v.id)&&left<=0;
+      return `${grp}<button class="vcard${locked?' disabled':''}" data-act="video" data-id="${v.id}"><div class="th">${th?`<img src="${th}" alt="" loading="lazy">`:'🎬'}${v.grundtechnik?'<span class="gt">Grundtechnik</span>':''}${niveauHtml(v)}${pr&&pr.done?`<span class="badge">${ico('check')} fertig</span>`:pr&&(pr.pos>5||pr.step>0)?`<span class="badge prog">angefangen</span>`:''}${v.zeit?`<span class="zeit">⏱ ${v.zeit} Min.</span>`:''}${locked?`<span class="lock">😴</span>`:''}</div><div class="tt"><span class="grow">${esc(v.title)}</span>${a.kind==='spass'&&!st.unlocked.includes(v.id)?`<span class="stern">${ico('star')}</span>`:''}</div></button>`; }).join('')}</div>`
       :`<div class="empty" style="margin-top:20px">Hier ist noch nichts drin.${SCHULE?'':'<br><span class="small">Im Elternbereich kannst du Videos hinzufügen.</span>'}</div>`}</div>
     ${bank()}</div>`;
   wire(app,{ back:()=>go('home'), who:()=>{}, video:b=>{ const v=videoOf(b.dataset.id); if(a.kind==='spass') gateSpass(v,()=>go('player',{videoId:v.id})); else go('player',{videoId:v.id}); } });
@@ -337,7 +340,7 @@ SCREENS.player=(app,{videoId,school})=>{
   const a=v.areaId?areaOf(v.areaId):null; const p=school?null:profile(); const n=abend();
   const steps=buildVideoSteps(v); const pr=school?{pos:0,step:0,done:false,slow:false}:prog(v.id);
   app.innerHTML=`<div class="${kidClass('pl'+(S.settings.kino&&!school?' kino':''))}">${girlande(n)}
-    <div class="inner kopf pl-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))">${school?'':`<a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a>`}<div class="schild"><h1>${esc(v.title)}</h1></div><div class="kopf-rechts"><span class="zettel" id="zettel"></span>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}</div></div>
+    <div class="inner kopf pl-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a><div class="schild"><h1>${esc(v.title)}</h1></div><div class="kopf-rechts"><span class="zettel" id="zettel"></span>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}</div></div>
     <div class="inner panes">
       <div class="pane"><div class="plabel"><i class="punkt" style="background:#4C6EF5"></i>Schau zu</div><div class="video-box"><div class="host" id="host"></div><div class="shield" id="shield" data-act="shield"></div><div class="overlay" id="overlay"></div><span class="modebadge" id="modebadge" hidden></span></div><div class="fuss"></div></div>
       <div class="pane"><div class="plabel"><i class="punkt" style="background:#E8554E"></i><span id="zettel2">Die Schritte</span></div><div class="schritte" id="schritte"></div></div>
@@ -359,7 +362,7 @@ SCREENS.player=(app,{videoId,school})=>{
   setTimeout(()=>{ if(P&&P.v===v&&!P.api.ready&&P.mode==='start'){ P.mode='error'; updatePlayerUI(); } },12000);
   updatePlayerUI();
   wire(app,{
-    back:()=>go(a?'area':'home',a?{id:a.id}:{}),
+    back:()=>{ if(school) history.replaceState(null,'',location.pathname+location.search); go(a&&!school?'area':'home',a&&!school?{id:a.id}:{}); },
     shield:()=>{ const k=$('.kid.pl.liste'); if(k){ k.classList.remove('liste'); return; } if(P.mode==='playing') userPause(); else if(P.mode==='paused') userPlay(); else if(P.mode==='stepdone') nextStep(); },
     kino:()=>toggleKino(), liste:()=>{ const k=$('.kid.pl'); if(k) k.classList.toggle('liste'); },
     start:()=>startPlaying(false), resume:()=>startPlaying(true), play:()=>userPlay(), pause:()=>userPause(),

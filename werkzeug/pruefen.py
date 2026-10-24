@@ -42,6 +42,10 @@ def pruefe(vid, vok):
     elif not re.match(r'(zw|ex)-', v.get('id', '')): h(f'id «{v.get("id")}» beginnt nicht mit zw-/ex- (nur für bestehende Einträge in Ordnung)')
     if v.get('areaId') not in AREAS: f(f'areaId «{v.get("areaId")}» unbekannt')
     if 'zeit' in v and not (isinstance(v['zeit'], int) and 1 <= v['zeit'] <= 15): f(f'zeit {v.get("zeit")} ungültig (ganze Minuten 1–15, nur Mini-Projekte)')
+    if 'niveau' not in v: h('niveau fehlt (1 leicht, 2 mittel, 3 anspruchsvoll)')
+    elif v['niveau'] not in (1, 2, 3): f(f'niveau {v.get("niveau")} ungültig (1–3)')
+    if 'grundtechnik' in v and not isinstance(v['grundtechnik'], bool): f('grundtechnik muss true oder false sein')
+    if 'techniken' in v and not (isinstance(v['techniken'], list) and all(isinstance(t, str) and t == t.lower() for t in v['techniken'])): f('techniken: Liste mit Begriffen in Kleinbuchstaben')
     if v.get('areaId') == 'experimente' and not v.get('id', '').startswith('ex-'): h('Experiment, aber id nicht ex-…')
     st = v.get('stufen') or []
     if not st or not all(isinstance(s, int) and 1 <= s <= 6 for s in st): f(f'stufen {st} ungültig (1–6)')

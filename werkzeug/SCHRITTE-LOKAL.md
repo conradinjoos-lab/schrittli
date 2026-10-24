@@ -20,6 +20,9 @@ Genau eine Datei: `werkzeug/entwurf/<VIDEOID>/video.json`
  "id": "zw-pompon",
  "areaId": "wickeln",
  "stufen": [1, 2],
+ "niveau": 1,
+ "grundtechnik": false,
+ "techniken": ["pompon wickeln"],
  "title": "Pompon mit Kartonringen",
  "source": {"type": "youtube", "id": "<VIDEOID>"},
  "kanal": "Schule und Familie",
@@ -37,6 +40,9 @@ Genau eine Datei: `werkzeug/entwurf/<VIDEOID>/video.json`
 - `areaId`: eines von naehen, sticken, haekeln, stricken, weben, knuepfen, wickeln, filzen, falten, schneiden, holz, schnitzen, formen, drucken, experimente.
 - `zeit` (optional): Arbeitszeit des Projekts in Minuten, nur bei Mini-Projekten setzen, die ein Kind in höchstens 15 Minuten fertig hat (z. B. `"zeit": 10`). Nicht die Videolänge.
 - `stufen`: Klassen 1–6, für die das Video passt (meist 2–3 Werte).
+- `niveau`: Schwierigkeit 1 = leicht (ab 1./2. Klasse, wenige klare Schritte, Schere/Leim/Wolle, kein gefährliches Werkzeug), 2 = mittel (etwa 3./4. Klasse, Nadel und Faden, Grundmaschen, Bohren mit Hilfe), 3 = anspruchsvoll (eher 5./6. Klasse: Säge, Feile, Lötkolben, Bügeleisen, Nähmaschine, Cutter, lange Abfolge). Die App sortiert danach und zeigt 1–3 Punkte.
+- `grundtechnik`: `true` nur, wenn das Video hauptsächlich eine wiederverwendbare Technik lehrt (Vorstich, Luftmaschen, Knoten, Sägen, Pompon wickeln …). Ein Projekt, das ein Objekt herstellt, ist `false`. Die App zeigt Grundtechniken zuoberst mit Schild.
+- `techniken`: 1–3 Begriffe in Kleinbuchstaben, z. B. `["vorstich", "knoten"]`.
 - `title`: höchstens 5 Wörter, kindertauglich, sagt, was entsteht.
 - `sprache`: Hochdeutsch | Schweizerdeutsch | ohne Sprache | Englisch.
 - `material`: nur IDs aus `quelle/agenten/VOKABULAR.md`, wichtigstes zuerst, höchstens 8. Fehlt ein wichtiges Material, nimm die nächstliegende ID und nenne es im Bericht.

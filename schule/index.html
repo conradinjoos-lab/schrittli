@@ -153,6 +153,13 @@ p{margin:0}
 .vcard .th{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:6px;overflow:hidden;background:#E9E1D4;display:flex;align-items:center;justify-content:center;font-size:40px}
 .vcard .th img{width:100%;height:100%;object-fit:cover;display:block}
 .vcard .th .badge{position:absolute;right:6px;bottom:6px;background:#3BB273;color:#fff;border-radius:999px;padding:2px 10px;font-size:13px;display:flex;align-items:center;gap:4px;border:2px solid var(--kink)}
+.vcard .th .gt{position:absolute;right:6px;top:6px;background:var(--sign);color:var(--kink);border:2px solid var(--kink);border-radius:999px;padding:1px 8px;font-size:12px;font-weight:700}
+.niv{display:inline-flex;gap:3px;align-items:center;background:#fff;border:2px solid var(--kink);border-radius:999px;padding:3px 5px;flex:none}
+.niv i{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--kink);background:#fff}
+.niv.n1 i.an{background:#3BB273}.niv.n2 i.an{background:#F2B705}.niv.n3 i.an{background:#E8554E}
+.vcard .th .niv{position:absolute;left:6px;top:6px}
+.pw-grp{grid-column:1/-1;margin:4px 0 -14px;font-size:20px}
+.lrow .gt{background:var(--sign);border:1.5px solid var(--kink);border-radius:999px;padding:0 6px;font-size:11px;font-weight:700;white-space:nowrap}
 .vcard .th .zeit{position:absolute;left:6px;bottom:6px;background:rgba(43,35,32,.78);color:#fff;border-radius:999px;padding:2px 8px;font-size:12px;font-weight:600}
 .vcard .th .badge.prog{background:var(--sign);color:var(--kink)}
 .vcard .th .lock{position:absolute;inset:0;background:rgba(43,35,32,.55);color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px}
@@ -592,6 +599,9 @@ function starState(pid){ const t=todayStr(); let st=S.stars[pid]; if(!st||st.dat
 function starsLeft(pid){ const st=starState(pid); return S.settings.starsPerDay+st.bonus-st.used; }
 function earnStar(){ const st=starState(S.activeProfile); if(st.bonus<1){ st.bonus++; return true; } return false; }
 function thumbOf(v){ return v.source.type==='youtube'?`https://i.ytimg.com/vi/${v.source.id}/mqdefault.jpg`:(v.thumb||null); }
+const NIVEAU=['','leicht','mittel','anspruchsvoll'];
+function niveauHtml(v){ const n=+v.niveau; if(!(n>=1&&n<=3)) return ''; return `<span class="niv n${n}" title="${NIVEAU[n]}" aria-label="${NIVEAU[n]}">${[1,2,3].map(k=>`<i${k<=n?' class="an"':''}></i>`).join('')}</span>`; }
+function videoOrdnung(vs){ return vs.slice().sort((a,b)=>(!!b.grundtechnik-!!a.grundtechnik)||((+a.niveau||2)-(+b.niveau||2))); }  // Grundtechniken zuerst, dann leicht → anspruchsvoll
 function abend(){ const a=S.settings.abend||'auto'; if(a==='tag') return false; if(a==='abend') return true; const h=new Date().getHours(); return h>=18||h<6; }
 function kidClass(extra=''){ const n=abend(); const tc=$('#themecolor'); if(tc) tc.setAttribute('content',n?'#2E3A4A':'#F1E3CB'); return 'screen kid'+(n?' abend':'')+(SCHULE&&S.settings.klasse>=3?' schrift-normal':'')+(extra?' '+extra:''); }
 
@@ -715,7 +725,7 @@ SCREENS.lehrer=app=>{ const n=abend();
   const vids=S.videos.slice().sort((a,b)=>(a.areaId+a.title).localeCompare(b.areaId+b.title,'de'));
   app.innerHTML=`<div class="${kidClass()} schrift-normal">${girlande(n)}${kopf('Für Lehrpersonen',{back:true})}
     <div class="inner"><div class="lehrer-info">Ohne Anmeldung, nichts wird gespeichert. Pro Video gibt es einen QR-Code: Kinder scannen ihn und landen direkt im Player mit den Schritten – auch von zuhause. Klassenzuordnung und neue Videos: Link an Conradin.</div>
-    <div class="lehrer-liste">${S.areas.map(a=>{ const vs=vids.filter(v=>v.areaId===a.id); if(!vs.length) return ''; return `<h2 style="color:${a.color};margin:14px 0 6px">${a.emoji} ${esc(a.name)}</h2>${vs.map(v=>`<div class="lrow"><span class="grow">${esc(v.title)}</span><span class="stufen">${(v.stufen||[]).map(s=>`<b>${s}</b>`).join('')}</span><span class="muted small">${v.zeit?`⏱ ${v.zeit} Min. · `:''}${(v.steps||[]).length?v.steps.length+' Schritte':'ohne Schritte'}${(v.material||[]).length?' · '+v.material.map(matName).join(', '):''}</span><button class="btn sm" data-act="qr" data-id="${v.id}">QR-Code</button></div>`).join('')}`; }).join('')}</div></div>
+    <div class="lehrer-liste">${S.areas.map(a=>{ const vs=vids.filter(v=>v.areaId===a.id); if(!vs.length) return ''; return `<h2 style="color:${a.color};margin:14px 0 6px">${a.emoji} ${esc(a.name)}</h2>${vs.map(v=>`<div class="lrow"><span class="grow">${esc(v.title)}${v.grundtechnik?' <span class="gt">Grundtechnik</span>':''}</span>${niveauHtml(v)}<span class="stufen">${(v.stufen||[]).map(s=>`<b>${s}</b>`).join('')}</span><span class="muted small">${v.zeit?`⏱ ${v.zeit} Min. · `:''}${(v.steps||[]).length?v.steps.length+' Schritte':'ohne Schritte'}${(v.material||[]).length?' · '+v.material.map(matName).join(', '):''}</span><button class="btn sm" data-act="qr" data-id="${v.id}">QR-Code</button></div>`).join('')}`; }).join('')}</div></div>
     ${bank()}</div>`;
   wire(app,{ back:()=>go('home'), qr:async b=>{ const v=videoOf(b.dataset.id); const link=schoolLink(v); kidModal(`<h2 style="font-size:20px">${esc(v.title)}</h2><div class="qr" id="qr" style="margin:10px auto"></div><code style="font-size:11px;word-break:break-all;display:block;max-width:360px">${esc(link)}</code><div class="row center" style="margin-top:12px"><button class="btn sm" data-act="copylink" data-link="${esc(link)}">Link kopieren</button><button class="kbtn ghost" data-close>Schliessen</button></div>`,{copylink:(b2)=>{ navigator.clipboard&&navigator.clipboard.writeText(b2.dataset.link).then(()=>toast('Kopiert')).catch(()=>toast('Kopieren nicht möglich')); }}); try{ if(!window.QRCode) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'); new QRCode($('#qr'),{text:link,width:240,height:240,correctLevel:QRCode.CorrectLevel.L}); }catch(e){ const q=$('#qr'); if(q) q.textContent='QR-Code konnte nicht geladen werden.'; } } });
 };
@@ -740,10 +750,10 @@ SCREENS.home=app=>{
 };
 
 SCREENS.area=(app,{id})=>{
-  const a=areaOf(id); if(!a){ go('home'); return; } const p=profile(); const vids=videosIn(id); const st=starState(p.id); const left=starsLeft(p.id); const n=abend();
+  const a=areaOf(id); if(!a){ go('home'); return; } const p=profile(); const vids=videoOrdnung(videosIn(id)); const gruppen=vids.some(v=>v.grundtechnik)&&vids.some(v=>!v.grundtechnik); const st=starState(p.id); const left=starsLeft(p.id); const n=abend();
   app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${kopf(a.name,{back:true,right:S.settings.spass?glasSterne(p.id,true):''})}
-    <div class="inner">${vids.length?`<div class="pinwand">${vids.map(v=>{ const pr=S.progress[p.id+':'+v.id]; const th=thumbOf(v); const locked=a.kind==='spass'&&!st.unlocked.includes(v.id)&&left<=0;
-      return `<button class="vcard${locked?' disabled':''}" data-act="video" data-id="${v.id}"><div class="th">${th?`<img src="${th}" alt="" loading="lazy">`:'🎬'}${pr&&pr.done?`<span class="badge">${ico('check')} fertig</span>`:pr&&(pr.pos>5||pr.step>0)?`<span class="badge prog">angefangen</span>`:''}${v.zeit?`<span class="zeit">⏱ ${v.zeit} Min.</span>`:''}${locked?`<span class="lock">😴</span>`:''}</div><div class="tt"><span class="grow">${esc(v.title)}</span>${a.kind==='spass'&&!st.unlocked.includes(v.id)?`<span class="stern">${ico('star')}</span>`:''}</div></button>`; }).join('')}</div>`
+    <div class="inner">${vids.length?`<div class="pinwand">${vids.map((v,i)=>{ const grp=gruppen&&(i===0||!!vids[i-1].grundtechnik!==!!v.grundtechnik)?`<h2 class="pw-grp">${v.grundtechnik?'Grundtechniken':'Projekte'}</h2>`:''; const pr=S.progress[p.id+':'+v.id]; const th=thumbOf(v); const locked=a.kind==='spass'&&!st.unlocked.includes(v.id)&&left<=0;
+      return `${grp}<button class="vcard${locked?' disabled':''}" data-act="video" data-id="${v.id}"><div class="th">${th?`<img src="${th}" alt="" loading="lazy">`:'🎬'}${v.grundtechnik?'<span class="gt">Grundtechnik</span>':''}${niveauHtml(v)}${pr&&pr.done?`<span class="badge">${ico('check')} fertig</span>`:pr&&(pr.pos>5||pr.step>0)?`<span class="badge prog">angefangen</span>`:''}${v.zeit?`<span class="zeit">⏱ ${v.zeit} Min.</span>`:''}${locked?`<span class="lock">😴</span>`:''}</div><div class="tt"><span class="grow">${esc(v.title)}</span>${a.kind==='spass'&&!st.unlocked.includes(v.id)?`<span class="stern">${ico('star')}</span>`:''}</div></button>`; }).join('')}</div>`
       :`<div class="empty" style="margin-top:20px">Hier ist noch nichts drin.${SCHULE?'':'<br><span class="small">Im Elternbereich kannst du Videos hinzufügen.</span>'}</div>`}</div>
     ${bank()}</div>`;
   wire(app,{ back:()=>go('home'), who:()=>{}, video:b=>{ const v=videoOf(b.dataset.id); if(a.kind==='spass') gateSpass(v,()=>go('player',{videoId:v.id})); else go('player',{videoId:v.id}); } });
