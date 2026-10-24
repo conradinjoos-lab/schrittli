@@ -26,6 +26,7 @@ Kinder, Sterne, Fortschritt und Werke liegen im Browser des Geräts (localStorag
 - Kind wechseln: Tipp aufs Hallo-Schild (nur wenn mehrere Kinder angelegt sind).
 - Abendwerkstatt ab 18 Uhr (dunkle Wand, Lichterkette); im Elternbereich umstellbar.
 - Player: links das Video («Schau zu»), rechts die Schritte als grosse Knöpfe – erledigte grün, der aktuelle gelb, Tipp auf einen Schritt springt dorthin.
+- Kino-Modus: Knopf ⤢ in der Player-Leiste. Video füllt den Bildschirm (auf dem iPad echtes Vollbild), unten ein schwarzes Band mit Steuerung und dem aktuellen Schritt; Tipp aufs Band klappt alle Schritte auf. Die Wahl wird gemerkt; am Videoende geht es zurück zur normalen Ansicht mit der Aufgabe.
 - Regal: jeder Bereich zeigt «gemacht/alle» (z. B. 2/10), grün mit Haken, wenn alles gemacht ist.
 - Elternbereich → Tab «Katalog»: Vorauswahl aus `katalog.json` (SRF Kids, Die Maus, Schwiizergoofe, Werklehrerin, Stiftung Kinder forschen …), pro Video «Hinzufügen». 57 Einträge, davon Werken (Fingerstricken, Weben, Nähen, Knüpfen, Flechten) und Experimente (kleine Versuche mit Haushaltsmaterial) komplett mit Schritten.
 - Bereiche ab Werk: Basteln, Werken, Zeichnen, Natur, Experimente, Geschichten, Lesen & Zahlen (Lern) sowie Lustiges, Lieder (Spass). Neue Bereiche kommen bei bestehenden Geräten beim nächsten Laden automatisch dazu.
