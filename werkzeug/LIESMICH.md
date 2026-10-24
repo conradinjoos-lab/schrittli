@@ -14,6 +14,7 @@ Läuft nur auf dem Rechner, der Videos erfasst. Die App selbst braucht nichts da
 |---|---|---|
 | 1 Holen | `python werkzeug/holen.py <Link oder ID> …` | `cache/<ID>/` (video.mp4, Einzelbilder 2/s, analyse.json) und `entwurf/<ID>/` (brief.md, Kontaktblätter) |
 | 2 Entwerfen | in Claude Code: `/schritte <Links>` – oder einen Agenten mit `SCHRITTE-LOKAL.md` losschicken | `entwurf/<ID>/video.json` |
+| 2a Regeln prüfen | `python werkzeug/pruefen.py [<ID> …]` | prüft alle Entwürfe (oder nur die genannten) gegen `SCHRITTE-LOKAL.md`: `!` Fehler müssen weg (Exit 1), `?` Hinweise anschauen (z. B. kein Bildwechsel nahe am Stopp, Stopps unter 3 s) |
 | 3 Kontrollieren | `python werkzeug/kontrolle.py` → http://127.0.0.1:8765/ | Stopps auf Zehntelsekunden setzen, Material, Klassen, Hinweis prüfen |
 | 4 Übernehmen | Knopf «Veröffentlichen…» (oder `python werkzeug/kontrolle.py --uebernehmen <ID>`) | Eintrag in `schule/schule.json`, bestehender Eintrag mit gleicher id oder gleichem Video wird ersetzt |
 | 5 Veröffentlichen | `git add schule/schule.json && git commit && git push` | kein Build nötig |
@@ -41,6 +42,7 @@ Gespeichert wird automatisch 1.5 s nach jeder Änderung nach `entwurf/<ID>/video
 
 ## Grenzen
 
-- Nicht einbettbare Videos werden ausgelassen (würden in der App nicht laufen).
+- Nicht einbettbare Videos werden ausgelassen (würden in der App nicht laufen). Schlägt ein Video fehl, läuft `holen.py` mit den übrigen weiter und meldet am Ende «Nicht geholt: …». IDs mit führendem `-` funktionieren.
+- Entwürfe (`entwurf/<ID>/video.json`) sind gitignored und liegen nur auf diesem Rechner – erst «Veröffentlichen» in schule.json macht sie dauerhaft.
 - Ohne Untertitel/Transkript arbeitet der Agent nur mit Standbildern; dann in der Kontrolle genauer prüfen.
 - `cache/` wird gross (ca. 10–30 MB pro Video); kann jederzeit gelöscht werden, `holen.py` lädt neu.

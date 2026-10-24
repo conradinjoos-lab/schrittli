@@ -63,5 +63,33 @@ Jedes Video bekommt `material: ["id", "id", …]`. Nur diese IDs verwenden (Spal
 | pfeffer | Pfeffer | |
 | stab | Stab | Holzstab, Kochlöffel |
 | schnuersenkel | Schnürsenkel | |
+| ton | Ton | Töpferton, Modelliermasse |
+| mehl | Mehl |  |
+| oel | Öl | Speiseöl |
+| schuessel | Schüssel | Rührschüssel, Schale |
+| wallholz | Wallholz | Nudelholz |
+| ausstechform | Ausstechform | Guetzliform |
+| blueten | Blüten | gepresste Blüten und Blätter |
+| kartoffel | Kartoffel | gross, festkochend |
+| messer | Messer | nur mit Erwachsenen |
+| farbe | Farbe | Wasserfarbe, Deckfarbe, Druckfarbe |
+| pinsel | Pinsel |  |
+| stempelkissen | Stempelkissen |  |
+| moosgummi | Moosgummi |  |
+| schwamm | Schwamm |  |
+| styropor | Styroporplatte | Polystyrol, Druckplatte |
+| walze | Walze | Handwalze, Farbwalze |
+| teller | Teller | flacher Teller oder Glasplatte zum Farbe ausrollen |
+| saege | Säge | Laubsäge, Japansäge, Fuchsschwanz |
+| schraubzwinge | Schraubzwinge | auch Laubsägetischchen |
+| schraubstock | Schraubstock |  |
+| schleifpapier | Schleifpapier |  |
+| zuendhoelzer | Zündhölzer | abgebrannt oder ohne Kopf |
+| handtuch | Handtuch | auch feuchtes Tuch |
+| holzspatel | Holzspatel | Modellierholz |
+| kerze | Kerze | nur mit Erwachsenen |
+| eierbecher | Eierbecher |  |
+| zuendholzschachtel | Zündholzschachtel | leer |
+| plastikloeffel | Plastiklöffel |  |
 
 Fehlt etwas Wichtiges, darf eine neue id ergänzt werden – dann bitte im Bericht nennen (id + Name).

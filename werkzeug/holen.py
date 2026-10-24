@@ -56,7 +56,7 @@ def bestehend(vid):
 def lade_info(vid, c, neu):
     p = c / 'info.json'
     if p.exists() and not neu: return json.loads(p.read_text(encoding='utf-8'))
-    r = run(['yt-dlp', '-J', '--no-playlist', vid])
+    r = run(['yt-dlp', '-J', '--no-playlist', '--', vid])
     if r.returncode or not r.stdout.strip():
         sys.exit(f'yt-dlp konnte {vid} nicht laden:\n{r.stderr[-800:]}')
     d = json.loads(r.stdout)
@@ -72,7 +72,7 @@ def lade_untertitel(vid, c, neu):
     """Gibt (art, [[start,ende,text],…]) zurück. art: manuell | automatisch | keine."""
     if not list(c.glob('sub.*.json3')) or neu:
         run(['yt-dlp', '--skip-download', '--write-subs', '--write-auto-subs', '--sub-langs', 'de,de-orig,de-DE,de-CH,en',
-             '--sub-format', 'json3', '--no-playlist', '-o', str(c / 'sub'), vid])
+             '--sub-format', 'json3', '--no-playlist', '-o', str(c / 'sub'), '--', vid])
     reihenfolge = [('sub.de.json3', 'manuell'), ('sub.de-DE.json3', 'manuell'), ('sub.de-CH.json3', 'manuell'),
                    ('sub.de-orig.json3', 'automatisch'), ('sub.en.json3', 'manuell (englisch)'), ('sub.en-orig.json3', 'automatisch (englisch)')]
     for name, art in reihenfolge:
@@ -94,7 +94,7 @@ def lade_video(vid, c, neu):
     vorhanden = [p for p in c.glob('video.*') if p.suffix in ('.mp4', '.webm', '.mkv')]
     if vorhanden and not neu: return vorhanden[0]
     r = run(['yt-dlp', '-f', '18/134/160/bestvideo[height<=360]/best[height<=480]', '--no-playlist',
-             '-o', str(c / 'video.%(ext)s'), vid])
+             '-o', str(c / 'video.%(ext)s'), '--', vid])
     vorhanden = [p for p in c.glob('video.*') if p.suffix in ('.mp4', '.webm', '.mkv')]
     if not vorhanden: sys.exit(f'Video {vid} konnte nicht geladen werden:\n{r.stderr[-800:]}')
     return vorhanden[0]
@@ -274,4 +274,9 @@ if __name__ == '__main__':
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
     neu = '--neu' in sys.argv
     if not args: sys.exit(__doc__)
-    for a in args: verarbeite(yt_id(a), neu)
+    fehler = []
+    for a in args:
+        try: verarbeite(yt_id(a), neu)
+        except SystemExit as ex:  # ein Video scheitert – die anderen trotzdem holen
+            print(f'[{a}] ÜBERSPRUNGEN: {ex}', flush=True); fehler.append(a)
+    if fehler: print(chr(10) + 'Nicht geholt: ' + ', '.join(fehler), flush=True)
