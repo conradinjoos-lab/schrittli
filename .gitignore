@@ -1,3 +1,4 @@
 werkzeug/cache/
 werkzeug/entwurf/
 __pycache__/
+.wrangler/
