@@ -7,7 +7,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <style>
 /* Farben und Schriften wie die Lehrpersonen-Ansicht der App (quelle/p1.html), --b/--r/--g bleiben als Kurznamen */
-:root{--b:#17997A;--b-dk:#0F7A61;--b-soft:#D5F1E8;--r:#D64545;--g:#2E9E5B;--o:#EF6C2E;--ink:#17212F;--mute:#5B6B80;--line:#D5DEE9;--soft:#F5F8FB;--bg:#EEF3F8;--top:0px;
+:root{--b:#17997A;--b-dk:#0F7A61;--b-soft:#D5F1E8;--r:#D64545;--g:#2E9E5B;--o:#EF6C2E;--ink:#17212F;--mute:#5B6B80;--line:#D5DEE9;--soft:#F5F8FB;--bg:#EEF3F8;
+ --wall:#F1E3CB;--kohle:#2B2320;--gelb:#FFE58A;--gruen-hell:#D8F3E3;
  --display:'Fredoka','Arial Rounded MT Bold',system-ui,sans-serif;--body:'Atkinson Hyperlegible',system-ui,'Segoe UI',sans-serif;--mono:ui-monospace,'Cascadia Mono',Consolas,monospace;
  --shadow:0 6px 18px rgba(23,33,47,.10);--shadow-sm:0 2px 6px rgba(23,33,47,.08)}
 *{box-sizing:border-box}
@@ -29,7 +30,7 @@ a{color:var(--b-dk)}
 .q{display:inline-block;width:16px;height:16px;border-radius:50%;background:var(--line);color:var(--mute);font-size:11px;line-height:16px;text-align:center;cursor:help;margin-left:4px;vertical-align:middle;font-weight:700}
 [hidden]{display:none!important}
 
-/* Kopf + Zeitleiste */
+/* Kopf */
 #top{position:sticky;top:0;z-index:20;background:#fff;box-shadow:var(--shadow-sm)}
 header{display:flex;gap:8px;align-items:center;padding:10px 18px}
 header>a{font:500 14px var(--display);text-decoration:none;color:var(--mute);background:var(--soft);border-radius:999px;padding:6px 12px;white-space:nowrap}
@@ -38,55 +39,111 @@ header h1{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margi
 #status{font-size:12px;color:var(--mute);min-width:120px;text-align:right}
 #msg{font-size:12px;color:var(--g);font-weight:700;min-width:160px;text-align:right}
 #hilfe{width:32px;height:32px;padding:0;background:var(--soft)}
-.tlwrap{position:relative;padding:2px 18px 10px}
-#tl{position:relative;height:36px;cursor:crosshair;user-select:none}
-#tl:before{content:'';position:absolute;left:0;right:0;top:16px;height:4px;border-radius:2px;background:var(--line)}
-#tl .s{position:absolute;top:7px;width:22px;height:22px;margin-left:-11px;border-radius:50%;background:#fff;border:2px solid var(--b);color:var(--b-dk);font:600 11px/18px var(--display);text-align:center;cursor:grab;z-index:2}
-#tl .s.sel{background:var(--b);color:#fff;transform:scale(1.2);box-shadow:var(--shadow-sm)}
-#tl .pos{position:absolute;top:2px;width:3px;height:32px;background:var(--o);border-radius:2px;margin-left:-1.5px;pointer-events:none;z-index:3}
-#tip{position:absolute;display:none;bottom:48px;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:10px;padding:4px;font:600 12px var(--mono);text-align:center;z-index:30;pointer-events:none;box-shadow:var(--shadow)}
-#tip img{display:block;width:160px;height:90px;object-fit:cover;border-radius:7px;margin-bottom:3px}
 
 /* Arbeitsansicht */
-#arbeit{display:grid;grid-template-columns:minmax(300px,38%) minmax(380px,1fr);gap:20px;padding:18px;align-items:start;max-width:1500px;margin:0 auto}
-#arbeit>*{min-width:0}
-#arbeit>*:last-child{background:#fff;border-radius:18px;box-shadow:var(--shadow-sm);padding:10px 10px 12px}
-.sticky{position:sticky;top:calc(var(--top) + 18px);background:#fff;border-radius:18px;box-shadow:var(--shadow-sm);padding:10px}
-.player{aspect-ratio:16/9;width:100%;background:#000;border-radius:12px;overflow:hidden;position:relative}
+#arbeit{max-width:1320px;margin:0 auto;padding:16px 18px 60px;display:flex;flex-direction:column;gap:14px}
+.karte{background:#fff;border-radius:18px;box-shadow:var(--shadow-sm);padding:14px 16px}
+.karte h3{font:600 16px var(--display);margin:0 0 8px;display:flex;gap:8px;align-items:baseline}
+.karte h3 .mute{font:400 13px var(--body)}
+
+/* Bühne = so sieht es das Kind in der App */
+.buehne{background:var(--wall);border-radius:22px;padding:12px 14px 14px;display:grid;grid-template-columns:minmax(0,min(100%,calc(46vh * 16 / 9))) minmax(240px,1fr);gap:14px;justify-content:center}
+.blabel{font:600 13px var(--display);color:var(--kohle);display:flex;align-items:center;gap:6px;margin:0 0 6px 4px}
+.blabel i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.vbox{background:var(--kohle);border-radius:16px;padding:7px}
+.player{aspect-ratio:16/9;width:100%;background:#000;border-radius:11px;overflow:hidden;position:relative}
 /* wie in der App: Iframe höher als sichtbar, damit Titelzeile und «Weitere Videos» ausserhalb liegen; Schild fängt Hover ab */
 .player iframe{position:absolute;left:0;top:-100px;width:100%;height:calc(100% + 200px);border:0;display:block}
 .player .schild{position:absolute;inset:0;cursor:pointer}
-.row{display:flex;gap:4px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.matkarte{position:absolute;inset:0;background:#FFF8E6;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:14px;text-align:center}
+.matkarte h4{margin:0;font:600 clamp(16px,2.4vw,24px) var(--display);color:var(--kohle)}
+.matkarte .dinge{display:flex;flex-wrap:wrap;gap:10px 14px;justify-content:center;max-width:100%}
+.matkarte .ding{display:flex;flex-direction:column;align-items:center;gap:2px;font:500 13px var(--display);color:var(--kohle);width:78px}
+.matkarte .ding svg,.matkarte .ding .emo{width:60px;height:55px}
+.matkarte .ding .emo{font-size:38px;line-height:55px}
+.matkarte button{background:var(--g);color:#fff;font:600 16px var(--display);padding:9px 20px;box-shadow:0 3px 0 var(--kohle)}
+.liste{position:relative;min-height:220px}
+.liste>div{position:absolute;inset:0;display:flex;flex-direction:column;min-height:0}
+.zettel{align-self:flex-start;background:#FFF8E6;border:2px solid var(--kohle);border-radius:10px;padding:2px 10px;font:600 13px var(--display);color:var(--kohle);transform:rotate(-1.5deg);margin:0 0 8px 4px}
+#vorschau{overflow:auto;display:flex;flex-direction:column;gap:7px;padding:2px 4px 6px 2px;min-height:0}
+.sbtn{display:flex;gap:9px;align-items:center;background:#fff;border:3px solid var(--kohle);border-radius:14px;padding:6px 10px 6px 7px;font:600 15px/1.2 var(--display);text-align:left;color:var(--kohle);width:100%;white-space:normal;position:relative;flex:none}
+.sbtn:hover{background:#FFFBEF}
+.sbtn .nr{flex:none;width:28px;height:28px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-size:14px}
+.sbtn.done{background:var(--gruen-hell)}.sbtn.done .nr{background:var(--g);color:#fff}
+.sbtn.cur{background:var(--gelb);box-shadow:0 4px 0 var(--kohle);transform:translateY(-1px)}
+.sbtn .txt{flex:1;min-width:0}
+.sbtn i.fehlt{color:var(--mute);font-weight:500}
+.sbtn .mats{display:flex;gap:3px;margin-top:3px;flex-wrap:wrap}
+.sbtn .mats svg,.sbtn .mats .emo{width:26px;height:24px;font-size:18px;line-height:24px}
+.rot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--r);flex:none}
+.sbtn .rot{position:absolute;top:5px;right:6px}
+
+.steuer{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:0 4px}
 #zeit{font:600 22px/1 var(--mono);min-width:92px;margin:0 6px 0 4px}
 #pp{background:var(--ink);color:#fff}#pp:hover{background:#2C3A4E}
-#txlive{margin-top:10px;min-height:3em;font-size:14px;color:var(--ink);background:var(--soft);border-radius:12px;padding:9px 12px}
+#txlive{flex:1;min-width:240px;min-height:2.6em;font-size:14px;color:var(--ink);background:#fff;border-radius:12px;padding:7px 12px;box-shadow:var(--shadow-sm)}
 #txlive.leer{color:var(--mute)}
 #txlive .tt{font:12px var(--mono);color:var(--mute);margin-right:8px}
 
-.steps{list-style:none;margin:0;padding:0}
-.step{border-radius:12px;padding:5px 8px;margin-bottom:2px}
-.step:hover{background:var(--soft)}
-.step.sel{background:var(--soft);box-shadow:inset 0 0 0 2px var(--b-soft);padding-bottom:10px}
-.step .hd{display:grid;grid-template-columns:24px 72px 1fr;gap:6px;align-items:center}
-.step .n{color:var(--mute);text-align:center;font:600 12px/22px var(--display);width:22px;height:22px;border-radius:50%;background:var(--bg)}
-.step.sel .n{background:var(--b);color:#fff}
-.step .t{font-family:var(--mono);text-align:center;width:72px;border-color:transparent;background:transparent;padding:4px 2px}
-.step .l{width:100%;border-color:transparent;background:transparent;font-weight:700}
-.step:not(.sel) .t:hover,.step:not(.sel) .l:hover{border-color:var(--line)}
-.step.sel .t,.step.sel .l{border-color:var(--line);background:#fff}
-.step .warn{grid-column:3;font-size:12px;color:var(--r);margin-top:1px}
-.step .warn.soft{color:var(--mute)}
-.step .tools{display:flex;gap:2px;align-items:center;margin:8px 0 6px 30px}
-.step .tools .sp{flex:1}
-.lbl{font-size:12px;color:var(--mute);margin:8px 0 4px 30px}
+/* Zeitleiste mit Abschnitten */
+.tlwrap{position:relative;padding:8px 0 0}
+#tl{position:relative;height:58px;user-select:none;touch-action:none}
+#tl .seg{position:absolute;top:0;bottom:0;border-radius:10px;background:var(--b-soft);border:2px solid #fff;overflow:hidden;cursor:pointer;display:flex;align-items:center;gap:6px;padding:0 6px;font:600 13px var(--display);color:var(--ink)}
+#tl .seg.alt{background:#BFE6D8}
+#tl .seg:hover{filter:brightness(.96)}
+#tl .seg.sel{background:var(--b);color:#fff;box-shadow:inset 0 0 0 2px var(--b-dk)}
+#tl .seg.skip{background:repeating-linear-gradient(45deg,var(--wall) 0 8px,#E3CFAD 8px 16px);color:var(--kohle)}
+#tl .seg.skip.sel{box-shadow:inset 0 0 0 3px var(--b)}
+#tl .seg img{height:40px;width:71px;object-fit:cover;border-radius:6px;flex:none;pointer-events:none}
+#tl .seg .nr{flex:none;width:22px;height:22px;border-radius:50%;background:#fff;color:var(--b-dk);display:grid;place-items:center;font-size:12px}
+#tl .seg .lb{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+#tl .seg .rot{position:absolute;top:4px;right:5px}
+#tl .grip{position:absolute;top:-7px;bottom:-7px;width:18px;margin-left:-9px;cursor:ew-resize;z-index:3;display:flex;justify-content:center}
+#tl .grip:before{content:'';width:5px;border-radius:3px;background:var(--ink);box-shadow:0 0 0 2px #fff}
+#tl .grip:hover:before,#tl .grip.on:before{background:var(--o)}
+#tl .pos{position:absolute;top:-9px;bottom:-9px;width:3px;margin-left:-1.5px;border-radius:2px;background:var(--o);pointer-events:none;z-index:4}
+#achse{position:relative;height:18px;margin-top:8px;font:11px var(--mono);color:var(--mute)}
+#achse span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+#achse span:first-child{transform:none}#achse span:last-child{transform:translateX(-100%)}
+#tip{position:absolute;display:none;bottom:92px;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:10px;padding:4px;font:600 12px var(--mono);text-align:center;z-index:30;pointer-events:none;box-shadow:var(--shadow)}
+#tip img{display:block;width:160px;height:90px;object-fit:cover;border-radius:7px;margin-bottom:3px}
+
+/* Bearbeiten + Material */
+.unten{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,1fr);gap:14px;align-items:start}
+.ehd{display:flex;gap:8px;align-items:center}
+.enr{flex:none;width:30px;height:30px;border-radius:50%;background:var(--b);color:#fff;display:grid;place-items:center;font:600 15px var(--display)}
+.enr.skip{background:var(--wall);color:var(--kohle)}
+#elabel{flex:1;font-weight:700;font-size:16px}
+.skipnote{margin:8px 0 0;font-size:13px;background:#FFF8E6;border-radius:10px;padding:6px 10px}
+.warn{display:flex;flex-wrap:wrap;gap:4px 12px;margin:8px 0 0 38px;font-size:12px}
+.warn .r{color:var(--r);font-weight:700}.warn .g{color:var(--mute)}
+.zeiten{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin:12px 0 2px 38px}
+.zt{display:flex;align-items:center;gap:2px}
+.zt b{font:600 13px var(--display);color:var(--mute);width:26px}
+.zt input{width:78px;text-align:center;font-family:var(--mono)}
+.zt button.ic{width:30px;padding:6px 0;font-size:16px;line-height:1}
+.schluss{font:13px var(--mono);color:var(--mute);padding:0 6px}
+.dauer{font:600 13px var(--mono);color:var(--ink);background:var(--soft);border-radius:999px;padding:4px 10px}
+.erow{display:flex;gap:4px;flex-wrap:wrap;margin:10px 0 0 32px}
+details summary{cursor:pointer;color:var(--b-dk);font-weight:700;font-size:14px;margin:6px 0}
+#fein{margin:10px 0 0 38px}
+.lbl{font-size:12px;color:var(--mute);margin:8px 0 4px}
 .lbl b{font-family:var(--mono);color:var(--ink)}
-.strip{display:flex;gap:4px;overflow-x:auto;padding:0 0 6px 30px}
+.strip{display:flex;gap:4px;overflow-x:auto;padding:0 0 6px}
 .strip .f{position:relative;flex:none;cursor:pointer}
 .strip img{width:104px;height:59px;object-fit:cover;display:block;border:3px solid transparent;border-radius:8px}
 .strip .hit img{border-color:var(--b)}
 .strip .cut img{outline:2px solid var(--o);outline-offset:-3px}
 .strip .f span{position:absolute;left:5px;top:5px;background:rgba(23,33,47,.75);color:#fff;font:600 10px var(--mono);padding:1px 4px;border-radius:4px}
-#leer{padding:28px;text-align:center;color:var(--mute);font:500 16px var(--display)}
+#leer{padding:20px;text-align:center;color:var(--mute);font:500 16px var(--display)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 8px}
+.chip{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:3px 8px 3px 4px;font-size:13px;color:var(--ink);cursor:grab;display:inline-flex;gap:5px;align-items:center}
+.chip svg,.chip .emo{width:26px;height:24px;font-size:18px;line-height:24px;text-align:center}
+.chip.drag{opacity:.4}
+.chip b{cursor:pointer;color:var(--mute);font-weight:400;padding:0 2px}.chip b:hover{color:var(--r)}
+.chip.unk{border-color:var(--o);background:#FFE4D4}
+#matadd{width:100%}
+#mathin{margin:8px 0 0}
 
 /* Abschlussansicht */
 #abschluss{max-width:780px;margin:18px auto 60px;padding:22px 26px 28px;background:#fff;border-radius:18px;box-shadow:var(--shadow-sm)}
@@ -97,12 +154,6 @@ header h1{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margi
 .pills{display:flex;gap:4px;flex-wrap:wrap}
 .pills button{padding:5px 13px;border:1px solid var(--line);color:var(--ink);font-weight:400}
 .pills button.on{background:var(--b);border-color:var(--b);color:#fff;font-weight:700}
-.chips{display:flex;gap:5px;flex-wrap:wrap;margin:2px 0 4px}
-.chip{background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:3px 8px 3px 11px;font-size:13px;font-weight:400;color:var(--ink);cursor:grab;display:inline-flex;gap:5px;align-items:center}
-.chip.drag{opacity:.4}
-.chip b{cursor:pointer;color:var(--mute);font-weight:400}.chip b:hover{color:var(--r)}
-.chip.unk{border-color:var(--o);background:#FFE4D4}
-details summary{cursor:pointer;color:var(--b-dk);font-weight:700;font-size:14px;margin:6px 0}
 .check{margin:0;padding:0;list-style:none}
 .check li{padding:4px 0}
 .check .no{color:var(--r)}
@@ -121,12 +172,13 @@ dialog{border:0;border-radius:18px;padding:22px 24px;max-width:560px;font-size:1
 dialog::backdrop{background:rgba(23,33,47,.35)}
 dialog h3{margin:0 0 12px;font:600 19px var(--display)}
 dialog ul{margin:6px 0;padding-left:18px;max-height:300px;overflow:auto}
-dialog .row{justify-content:flex-end;margin-top:16px}
+dialog .row{display:flex;gap:4px;justify-content:flex-end;margin-top:16px}
 .keys{line-height:2.1;column-count:2;column-gap:24px;font-size:13px}
 #toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:9px 16px;border-radius:999px;display:none;z-index:40;font-size:13px;box-shadow:var(--shadow)}
 #toast button{margin-left:10px;padding:2px 10px;color:#7FE0C4}#toast button:hover{background:rgba(255,255,255,.12)}
 
-@media (max-width:820px){#arbeit{grid-template-columns:1fr;padding:12px}.sticky{position:static}.meta{grid-template-columns:1fr}#abschluss{margin:12px;padding:18px 16px}#status,#msg{min-width:0}}
+@media (max-width:900px){.buehne,.unten{grid-template-columns:1fr}.liste{min-height:0}.liste>div{position:static;max-height:320px}}
+@media (max-width:820px){#arbeit{padding:12px}.meta{grid-template-columns:1fr}#abschluss{margin:12px;padding:18px 16px}#status,#msg{min-width:0}}
 </style>
 </head>
 <body>
@@ -140,24 +192,43 @@ dialog .row{justify-content:flex-end;margin-top:16px}
   <button class="nurA p" id="zuAngaben">Weiter zu Angaben →</button>
   <button class="nurB" id="zuSchritten" hidden>← Zurück zu den Schritten</button>
  </header>
- <div class="tlwrap nurA"><div id="tl"></div><div id="tip"><img alt=""><span></span></div></div>
 </div>
 
 <div id="arbeit">
- <div class="sticky">
-  <div class="player"><div id="yt"></div><div class="schild" id="schild" title="Play / Pause"></div></div>
-  <div class="row"><span id="zeit">0:00.0</span>
-   <button id="pp" class="ic">Play / Pause</button>
-   <button id="test" title="Spielt den gewählten Schritt ab und hält, wo das Kind den Stopp sieht (T, Shift+T nur die letzten 3 s)">Schritt testen</button>
-   <button id="here" title="Aktuelle Spielzeit wird Beginn des gewählten Schritts (S)">Hier = Beginn</button>
-   <button id="hereend" title="Aktuelle Spielzeit wird Ende des gewählten Schritts (E)">Hier = Ende</button>
+ <section class="buehne">
+  <div>
+   <div class="blabel"><i style="background:#4C6EF5"></i>So sieht es das Kind</div>
+   <div class="vbox"><div class="player"><div id="yt"></div><div class="schild" id="schild" title="Play / Pause"></div><div class="matkarte" id="matkarte" hidden></div></div></div>
   </div>
+  <div class="liste"><div>
+   <div class="blabel"><i style="background:#E8554E"></i>Die Schritte</div>
+   <span class="zettel" id="zettel">–</span>
+   <div id="vorschau"></div>
+  </div></div>
+ </section>
+
+ <div class="steuer"><span id="zeit">0:00.0</span>
+  <button id="pp" class="ic">Play / Pause</button>
+  <button id="test" class="p" title="Spielt den gewählten Schritt ab und hält, wo das Kind den Stopp sieht (T, Shift+T nur die letzten 3 s)">▶ Schritt abspielen</button>
   <div id="txlive" class="leer">…</div>
  </div>
- <div>
-  <ol class="steps" id="steps"></ol>
-  <div id="leer" hidden>Noch keine Schritte.<br><button class="p" id="suggest" style="margin-top:10px">Schritte vorschlagen</button> <button id="add0">Leer beginnen</button></div>
-  <div class="row" style="margin-left:28px"><button id="add" class="ic">+ Schritt bei aktueller Zeit</button></div>
+
+ <section class="karte">
+  <h3>Zeitleiste <span class="mute">Klick wählt einen Schritt · Grenze ziehen = von/bis verschieben · Doppelklick teilt</span></h3>
+  <div class="tlwrap"><div id="tl"></div><div id="achse"></div><div id="tip"><img alt=""><span></span></div></div>
+ </section>
+
+ <div class="unten">
+  <section class="karte">
+   <div id="edit"></div>
+   <div id="leer" hidden>Noch keine Schritte.<br><button class="p" id="suggest" style="margin-top:10px">Schritte vorschlagen</button> <button id="add0">Leer beginnen</button></div>
+  </section>
+  <section class="karte">
+   <h3>Material <span class="mute">wird vor dem Video als Karte gezeigt</span></h3>
+   <div class="chips" id="chips"></div>
+   <input id="matadd" list="vok" placeholder="Material tippen, Enter">
+   <p class="mute" id="mathin"></p>
+  </section>
  </div>
 </div>
 
@@ -177,16 +248,16 @@ dialog .row{justify-content:flex-end;margin-top:16px}
 <dialog id="hilfedlg"><h3>Tasten</h3>
  <div class="keys">
   <div><kbd>Leer</kbd> Play / Pause</div><div><kbd>←</kbd> <kbd>→</kbd> ±0.5 s, mit <kbd>Shift</kbd> ±2 s</div>
-  <div><kbd>S</kbd> Hier = Beginn</div><div><kbd>E</kbd> Hier = Ende</div>
-  <div><kbd>T</kbd> Schritt testen</div><div><kbd>Shift+T</kbd> nur die letzten 3 s</div>
-  <div><kbd>,</kbd> <kbd>.</kbd> Beginn ±0.1 s</div><div><kbd>;</kbd> <kbd>:</kbd> Ende ±0.1 s</div>
-  <div><kbd>[</kbd> <kbd>]</kbd> Beginn zum Bildwechsel davor / danach</div><div><kbd>1</kbd>–<kbd>9</kbd> Schritt wählen</div>
+  <div><kbd>S</kbd> Hier = von</div><div><kbd>E</kbd> Hier = bis</div>
+  <div><kbd>T</kbd> Schritt abspielen</div><div><kbd>Shift+T</kbd> nur die letzten 3 s</div>
+  <div><kbd>,</kbd> <kbd>.</kbd> von ±0.1 s</div><div><kbd>;</kbd> <kbd>:</kbd> bis ±0.1 s</div>
+  <div><kbd>[</kbd> <kbd>]</kbd> von zum Bildwechsel davor / danach</div><div><kbd>1</kbd>–<kbd>9</kbd> Schritt wählen</div>
   <div><kbd>↑</kbd> <kbd>↓</kbd> Schritt wählen</div><div><kbd>Enter</kbd> im Titel: nächster Schritt</div>
   <div><kbd>Ctrl+Z</kbd> rückgängig</div><div><kbd>Ctrl+S</kbd> speichern</div>
  </div>
  <h3 style="margin-top:16px">Einstellungen</h3>
- <label><input type="checkbox" id="snap" checked> Einrasten: −/+ und Ziehen in der Zeitleiste springen auf den nächsten Bildwechsel (bis 0.4 s)</label>
- <p class="mute">In den Vorschaubildern: blau = aktueller Wert, orange = Bildwechsel. Das Video hält 0.08 s vor dem Ende eines Schritts; dort sollte das Kind das Ergebnis sehen, nicht schon den nächsten Schritt.</p>
+ <label><input type="checkbox" id="snap" checked> Einrasten: Ziehen in der Zeitleiste springt auf den nächsten Bildwechsel (bis 0.4 s)</label>
+ <p class="mute">Ein Schritt geht von seinem Beginn bis zum Beginn des nächsten. Das Video hält 0.08 s davor; dort sollte das Kind das Ergebnis sehen, nicht schon den nächsten Schritt. In den Standbildern: blau = aktueller Wert, orange = Bildwechsel.</p>
  <div class="row"><button id="suggest2">Schritte neu vorschlagen</button><button id="hilfezu" class="p">Schliessen</button></div>
 </dialog>
 <div id="toast"><span></span><button id="undo">Rückgängig</button></div>
@@ -195,7 +266,7 @@ dialog .row{justify-content:flex-end;margin-top:16px}
 <script src="werkstatt.js"></script>
 <script>
 const ID=new URLSearchParams(location.search).get('id')||'';
-let D=null,E=null,sel=0,yt=null,ready=false,testEnde=null,hist=[],fut=[],dirty=false,saveTimer=null,snap=true,ansicht='A',txIdx=-1;
+let D=null,E=null,sel=0,yt=null,ready=false,testEnde=null,hist=[],fut=[],dirty=false,saveTimer=null,snap=true,ansicht='A',txIdx=-1,drag=null,matSicht=false,PV=[];
 const $=s=>document.querySelector(s);
 const r1=x=>Math.round(x*10)/10;
 const fmt=t=>{t=Math.max(0,+t||0);const m=Math.floor(t/60),s=t-m*60;return m+':'+(s<10?'0':'')+s.toFixed(1)};
@@ -208,13 +279,29 @@ const nearCut=(t,w)=>{let b=null;for(const c of cuts())if(Math.abs(c-t)<=w&&(b==
 const prevCut=t=>cuts().filter(c=>c<t-0.05).pop();
 const nextCut=t=>cuts().find(c=>c>t+0.05);
 const words=s=>s.trim().split(/\s+/).filter(Boolean).length;
+const ende=i=>E.steps[i+1]?E.steps[i+1].t:D.analyse.dauer;
+const tippt=()=>document.activeElement?.matches?.('input,textarea,select');
 
 function msg(s,err){const m=$('#msg');m.textContent=s;m.style.color=err?'var(--r)':'var(--g)';clearTimeout(msg.t);msg.t=setTimeout(()=>m.textContent='',4000)}
 function toast(text,undoFn){const t=$('#toast');t.firstElementChild.textContent=text;t.style.display='block';$('#undo').onclick=()=>{undoFn();t.style.display='none'};clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',6000)}
 
+/* ---------- Piktogramme aus der Schul-App (MATERIAL, MAT_SVG, DINGE), Fotos aus material/fotos.json ---------- */
+let MAT={},MSVG={},DINGE={},MFOTO=new Map();
+async function ladeBilder(){
+ try{const h=await (await fetch('../schule/index.html')).text();
+  const g=n=>{const m=h.match(new RegExp('^const '+n+'=(\\{.*\\});?\\s*$','m'));return m?Function('return '+m[1])():{}};
+  MAT=g('MATERIAL');MSVG=g('MAT_SVG');const d=h.match(/^const DINGE=(\{[\s\S]*?\n\});/m);if(d)DINGE=Function('return '+d[1])()}catch(e){}
+ try{const j=await (await fetch('../material/fotos.json')).json();(j.fotos||j||[]).forEach(x=>{const f=String(x);MFOTO.set(f.replace(/\.[a-z0-9]+$/i,''),f)})}catch(e){}
+ if(E){renderVorschau();renderChips()}}
+function ico(id,foto){const svg=MSVG[id]||(id==='wolle'||id==='schere'?DINGE[id]:null);
+ const p=svg?`<svg viewBox="0 0 120 110" aria-hidden="true">${svg}</svg>`:`<span class="emo" aria-hidden="true">${MAT[id]?MAT[id][1]:'📦'}</span>`;
+ return foto&&MFOTO.has(id)?`<span class="mi"><img src="../material/${MFOTO.get(id)}" alt="" onerror="this.remove()">${p}</span>`:p}
+const matName=id=>(Object.fromEntries(D.vokabular)[id])||(MAT[id]?MAT[id][0]:id);
+
 /* ---------- Laden ---------- */
 async function lade(){
  $('#pubhin').textContent=W.LOKAL?' (danach noch git commit und push)':' – nach etwa einer Minute in der Schul-App';
+ ladeBilder();
  try{await W.bereit();D=await W.daten(ID)}catch(x){$('#h1').textContent='Laden ging nicht: '+(x.message||x);return}
  const a=D.analyse;
  E=D.entwurf||D.schule||{id:'zw-video',areaId:'',stufen:[],title:a.title||'',source:{type:'youtube',id:ID},kanal:a.kanal||'',dauer:fmt(a.dauer).replace(/\.\d$/,''),alter:'ab 6',sprache:'Hochdeutsch',hinweis:'',material:[],steps:[],task:{text:'',deliverable:'keine'}};
@@ -222,12 +309,11 @@ async function lade(){
  $('#h1').textContent=E.title||ID;document.title='Kontrolle – '+(E.title||ID);
  if(D.entwurf)$('#status').textContent='Entwurf geladen';else msg(D.schule?'Kein Entwurf – Eintrag aus schule.json':'Kein Entwurf – leere Vorlage',true);
  $('#vok').innerHTML=D.vokabular.map(([i,n])=>`<option value="${esc(n)}">${i}</option>`).join('');
- renderMeta();renderTx();render();ladePlayer();
- const top=()=>document.documentElement.style.setProperty('--top',$('#top').offsetHeight+'px');top();addEventListener('resize',top);
+ renderMeta();renderChips();renderTx();render();ladePlayer();
+ addEventListener('resize',()=>renderTl());
 }
 function zeige(v){ansicht=v;document.querySelectorAll('.nurA').forEach(e=>e.hidden=v!=='A');document.querySelectorAll('.nurB').forEach(e=>e.hidden=v!=='B');
- $('#arbeit').hidden=v==='B';$('#abschluss').hidden=v!=='B';if(v==='B'){if(ready&&yt.getPlayerState()===1)yt.pauseVideo();renderCheck();highlightTx()}scrollTo(0,0);
- document.documentElement.style.setProperty('--top',$('#top').offsetHeight+'px')}
+ $('#arbeit').hidden=v==='B';$('#abschluss').hidden=v!=='B';if(v==='B'){if(ready&&yt.getPlayerState()===1)yt.pauseVideo();renderCheck();highlightTx()}else renderTl();scrollTo(0,0)}
 
 /* ---------- Verlauf / Speichern ---------- */
 function pushHist(){hist.push(JSON.stringify(E.steps));if(hist.length>100)hist.shift();fut=[]}
@@ -241,14 +327,22 @@ addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue='
 
 /* ---------- Zeiten setzen ---------- */
 function setT(i,t,opt={}){if(!E.steps[i])return;t=r1(Math.max(0,Math.min(D.analyse.dauer,t)));if(opt.snap&&snap){const c=nearCut(t,0.4);if(c!==null)t=r1(c)}if(!opt.quiet)pushHist();E.steps[i].t=t;markDirty();render();return t}
-function seek(t,play){if(!ready)return;yt.seekTo(Math.max(0,t),true);if(play)yt.playVideo()}
+let anhalten=false;  // noch nie gestartetes Video: seekTo spielt los und zeigt erst dann ein Bild – stumm starten, beim ersten Bild anhalten
+function seek(t,play){if(!ready)return;const st=yt.getPlayerState(),lief=st===1;if(!play&&(st===-1||st===5)){anhalten=true;yt.mute()}yt.seekTo(Math.max(0,t),true);if(play){anhalten=false;yt.unMute();yt.playVideo()}else if(!lief&&!anhalten)yt.pauseVideo()}
 function testSchritt(i,nurEnde){if(!ready)return;const s=E.steps[i];if(!s)return;const nx=E.steps[i+1];if(nurEnde&&!nx){msg('Letzter Schritt – kein Stopp');return}
- testEnde=nx?nx.t-0.08:null;seek(nurEnde?Math.max(s.t,nx.t-3):s.t,true);msg('Schritt '+(i+1)+(nx?' – stoppt bei '+fmt(nx.t):' – läuft bis zum Schluss'))}
-function tick(){if(!ready)return;const t=yt.getCurrentTime()||0;$('#zeit').textContent=fmt(t);const p=$('#tl .pos');if(p)p.style.left=t/D.analyse.dauer*100+'%';
+ matSicht=false;sel=i;render();testEnde=nx?nx.t-0.08:null;seek(nurEnde?Math.max(s.t,nx.t-3):s.t,true);msg('Schritt '+(i+1)+(nx?' – stoppt bei '+fmt(nx.t):' – läuft bis zum Schluss'))}
+function hierVon(){if(ready&&E.steps.length)setT(sel,yt.getCurrentTime())}
+function hierBis(){if(!ready)return;if(!E.steps[sel+1]){msg('Letzter Schritt geht bis zum Schluss – für ein früheres Ende «Hier teilen»',true);return}setT(sel+1,yt.getCurrentTime())}
+function neuerSchritt(){const t=ready?r1(yt.getCurrentTime()):0;if(E.steps.some(s=>Math.abs(s.t-t)<0.3)){msg('Hier beginnt schon ein Schritt',true);return}
+ pushHist();E.steps.push({t,label:''});E.steps.sort((a,b)=>a.t-b.t);sel=E.steps.findIndex(s=>s.t===t);markDirty();render();$('#elabel')?.focus()}
+const schrittBei=t=>{let i=-1;E.steps.forEach((s,k)=>{if(s.t<=t)i=k});return i};
+function tick(){if(!ready)return;const t=yt.getCurrentTime()||0,spielt=yt.getPlayerState()===1;$('#zeit').textContent=fmt(t);const p=$('#tl .pos');if(p)p.style.left=t/D.analyse.dauer*100+'%';
  const i=D.analyse.transkript.findIndex(([s,e])=>t>=s&&t<e);if(i!==txIdx){txIdx=i;const z=D.analyse.transkript[i];const el=$('#txlive');el.classList.toggle('leer',!z);el.innerHTML=z?`<span class="tt">${fmt(z[0])}–${fmt(z[1])}</span>${esc(z[2])}`:'…'}
- if(testEnde!=null&&yt.getPlayerState()===1&&t>=testEnde){yt.pauseVideo();testEnde=null;msg('Stopp bei '+fmt(t)+' – so sieht es das Kind')}}
+ if(spielt&&matSicht){matSicht=false;renderVorschau()}
+ if(spielt&&drag===null&&!tippt()&&ansicht==='A'){const k=schrittBei(t+0.15);if(k>=0&&k!==sel){sel=k;render()}}  // gewählter Schritt folgt dem Abspielen
+ if(testEnde!=null&&spielt&&t>=testEnde){yt.pauseVideo();testEnde=null;msg('Stopp bei '+fmt(t)+' – so sieht es das Kind')}}
 function ladePlayer(){const tag=document.createElement('script');tag.src='https://www.youtube.com/iframe_api';document.head.appendChild(tag);
- window.onYouTubeIframeAPIReady=()=>{yt=new YT.Player('yt',{host:'https://www.youtube-nocookie.com',videoId:ID,playerVars:{controls:0,rel:0,iv_load_policy:3,disablekb:1,fs:0,cc_load_policy:0,playsinline:1},events:{onReady:()=>{ready=true;setInterval(tick,80)},onError:()=>msg('YouTube-Fehler – Video nicht einbettbar?',true)}})}}
+ window.onYouTubeIframeAPIReady=()=>{yt=new YT.Player('yt',{host:'https://www.youtube-nocookie.com',videoId:ID,playerVars:{controls:0,rel:0,iv_load_policy:3,disablekb:1,fs:0,cc_load_policy:0,playsinline:1},events:{onReady:()=>{ready=true;setInterval(tick,80)},onStateChange:e=>{if(anhalten&&e.data===1){anhalten=false;yt.pauseVideo();yt.unMute()}},onError:()=>msg('YouTube-Fehler – Video nicht einbettbar?',true)}})}}
 
 /* ---------- Prüfhinweise ---------- */
 function satzBei(t){return D.analyse.transkript.find(([s,e])=>t>s+1.5&&t<e-1.0)}
@@ -256,52 +350,89 @@ function hinweise(i){const s=E.steps[i],w=[];const n=words(s.label);
  if(!s.label.trim())w.push(['Titel fehlt',1]);if(n>8)w.push([n+' Wörter (max. 8)',1]);if(/ß/.test(s.label))w.push(['ß → ss',1]);if(/["«»„“]/.test(s.label))w.push(['Anführungszeichen',1]);
  if(i===0&&s.t!==0)w.push(['erster Schritt nicht bei 0:00',1]);if(i>0&&s.t<=E.steps[i-1].t)w.push(['Zeit nicht aufsteigend',1]);
  const nx=E.steps[i+1];if(nx&&nx.t-s.t<3&&nx.t>s.t)w.push(['nur '+(nx.t-s.t).toFixed(1)+' s lang',0]);
- if(i>0){const z=satzBei(s.t);if(z)w.push(['mitten im Satz («'+z[2].slice(0,36)+(z[2].length>36?'…':'')+'» '+fmt(z[0])+'–'+fmt(z[1])+')',0])}
+ if(i>0){const z=satzBei(s.t);if(z)w.push(['beginnt mitten im Satz («'+z[2].slice(0,36)+(z[2].length>36?'…':'')+'» '+fmt(z[0])+'–'+fmt(z[1])+')',0])}
  return w}
+const rotBei=i=>hinweise(i).some(h=>h[1]===1);
 function checkliste(){const names=Object.fromEntries(D.vokabular);return [
  ['Mindestens 2 Schritte, alle mit Titel',E.steps.length>=2&&E.steps.every(s=>s.label.trim())],
- ['Keine roten Hinweise bei den Schritten',E.steps.every((s,i)=>!hinweise(i).some(h=>h[1]===1))],
+ ['Keine roten Hinweise bei den Schritten',E.steps.every((s,i)=>!rotBei(i))],
  ['Letzter Schritt heisst «Fertig …»',/^fertig/i.test(E.steps[E.steps.length-1]?.label||'')],
  ['Titel, Verfahren und Klassen gesetzt',!!(E.title.trim()&&E.areaId&&E.stufen.length)],
- ['Material gesetzt, alle Wörter im Vokabular',E.material.length>0&&E.material.every(m=>names[m])],
+ ['Material gesetzt (bei den Schritten), alle Wörter im Vokabular',E.material.length>0&&E.material.every(m=>names[m])],
  ['Alle Stopps im Player getestet',!!E._geprueft]]}
 function renderCheck(){const items=checkliste();const ok=items.filter(x=>x[1]).length;
  $('#check').innerHTML=`<li class="sum">${ok===items.length?'✓ Alles erledigt':ok+' von '+items.length+' erledigt'}</li>`+items.slice(0,-1).filter(x=>!x[1]).map(([t])=>`<li class="no">✗ ${t}</li>`).join('')+
   `<li class="${E._geprueft?'':'no'}"><label><input type="checkbox" id="gepr" ${E._geprueft?'checked':''}> Alle Stopps im Player getestet</label></li>`;
  $('#gepr').onchange=e=>{E._geprueft=e.target.checked;markDirty();renderCheck()}}
 
-/* ---------- Schritte ---------- */
-function render(){sel=Math.max(0,Math.min(sel,E.steps.length-1));renderSteps();renderTl();if(ansicht==='B'){highlightTx();renderCheck()}}
-function renderSteps(){const ol=$('#steps');$('#leer').hidden=E.steps.length>0;$('#add').parentElement.hidden=!E.steps.length;
- ol.innerHTML=E.steps.map((s,i)=>{const h=hinweise(i);const nx=E.steps[i+1];
-  return `<li class="step ${i===sel?'sel':''}" data-i="${i}">
-   <div class="hd"><span class="n">${i+1}</span><input class="t" value="${fmt(s.t)}" data-t="${i}" title="m:ss.s">
-    <input class="l" value="${esc(s.label)}" data-l="${i}" placeholder="Was das Kind jetzt macht (max. 8 Wörter)">
-    ${h.length?`<div class="warn ${h.every(x=>x[1]===0)?'soft':''}">${h.map(x=>esc(x[0])).join(' · ')}</div>`:''}</div>
-   ${i===sel?`<div class="tools">
-     <button class="ic" data-d="-0.5" data-i="${i}" title="0.5 s früher">− 0.5</button><button class="ic" data-d="0.5" data-i="${i}" title="0.5 s später">+ 0.5</button>
-     <button data-play="${i}" title="ab hier abspielen, am Ende stoppen (T)">▶ testen</button><span class="sp"></span>
-     <button class="ic" data-ins="${i}" title="Schritt danach einfügen">＋ danach</button><button class="x" data-rm="${i}" title="löschen">✕</button></div>
-    <div class="lbl">Beginn <b>${fmt(s.t)}</b></div>${strip(s.t,i)}
-    <div class="lbl">Ende <b>${nx?fmt(nx.t):'–'}</b> ${nx?'= Beginn Schritt '+(i+2):'(letzter Schritt, läuft bis zum Schluss)'}</div>${nx?strip(nx.t,i+1):''}
-   `:''}</li>`}).join('');
- const li=ol.querySelector('.step.sel');if(li&&render.scrollTo){li.scrollIntoView({block:'nearest'});render.scrollTo=false}}
+/* ---------- Vorschau: Schritte wie in der App (buildVideoSteps in schule/index.html) ---------- */
+// Mit Material ersetzt die Materialkarte einen ersten Schritt «Material richten …», dessen Videoteil übersprungen wird.
+const uebersprungen=()=>E.material.length>0&&E.steps.length>0&&/^material richten/i.test(E.steps[0].label||'');
+function vorschauSchritte(){const s=E.steps.map((x,i)=>({ref:i,label:x.label}));
+ if(E.material.length&&s.length){if(uebersprungen())s.shift();s.unshift({ref:'mat',label:'Material richten'})}
+ else if(E.steps.length&&E.steps[0].t>1.5)s.unshift({ref:'zu',label:'Zuschauen'});return s}
+function renderVorschau(){PV=vorschauSchritte();
+ let cur=PV.findIndex(p=>matSicht||(sel===0&&uebersprungen())?p.ref==='mat':p.ref===sel);
+ $('#vorschau').innerHTML=PV.map((p,k)=>{const fertig=cur>=0&&k<cur;
+  const txt=p.ref==='mat'?`Material richten<span class="mats">${E.material.slice(0,8).map(id=>ico(id)).join('')}</span>`:p.label.trim()?esc(p.label):'<i class="fehlt">Titel fehlt</i>';
+  return `<button class="sbtn ${k===cur?'cur':''} ${fertig?'done':''}" data-pv="${k}"><span class="nr">${fertig?'✓':k+1}</span><span class="txt">${txt}</span>${typeof p.ref==='number'&&rotBei(p.ref)?'<i class="rot" title="roter Hinweis"></i>':''}</button>`}).join('')||'<p class="mute">Noch keine Schritte</p>';
+ $('#zettel').textContent=PV.length?'Schritt '+(Math.max(0,cur)+1)+' von '+PV.length:'–';
+ $('#vorschau .cur')?.scrollIntoView({block:'nearest'});
+ const mk=$('#matkarte');mk.hidden=!matSicht;
+ if(matSicht)mk.innerHTML=`<h4>Das brauchst du:</h4><div class="dinge">${E.material.map(id=>`<span class="ding">${ico(id,true)}${esc(matName(id))}</span>`).join('')}</div><button data-los>Habe ich alles – los!</button>`}
+
+/* ---------- Bearbeiten ---------- */
+function render(){sel=Math.max(0,Math.min(sel,E.steps.length-1));renderVorschau();renderTl();renderEdit();if(ansicht==='B'){highlightTx();renderCheck()}}
+function renderEdit(){const ed=$('#edit');$('#leer').hidden=E.steps.length>0;ed.hidden=!E.steps.length;if(!E.steps.length)return;
+ const i=sel,s=E.steps[i],nx=E.steps[i+1],h=hinweise(i),skip=i===0&&uebersprungen(),offen=$('#fein')?.open;
+ ed.innerHTML=`<div class="ehd"><span class="enr ${skip?'skip':''}">${i+1}</span><input id="elabel" value="${esc(s.label)}" placeholder="Was das Kind jetzt macht (max. 8 Wörter)"><button class="x" data-rm="${i}" title="Schritt löschen">✕</button></div>
+  ${skip?'<p class="skipnote">In der App ersetzt die Materialkarte diesen Videoteil – er wird übersprungen.</p>':''}
+  ${h.length?`<div class="warn">${h.map(x=>`<span class="${x[1]?'r':'g'}">${esc(x[0])}</span>`).join('')}</div>`:''}
+  <div class="zeiten">
+   <div class="zt"><b>von</b><button class="ic" data-nud="0" data-d="-0.1" title="0.1 s früher (,)">−</button><input id="evon" value="${fmt(s.t)}" title="m:ss.s"><button class="ic" data-nud="0" data-d="0.1" title="0.1 s später (.)">+</button><button data-hier="0" title="aktuelle Spielzeit (S)">Hier</button></div>
+   <div class="zt"><b>bis</b>${nx?`<button class="ic" data-nud="1" data-d="-0.1" title="0.1 s früher (;)">−</button><input id="ebis" value="${fmt(nx.t)}" title="m:ss.s = Beginn Schritt ${i+2}"><button class="ic" data-nud="1" data-d="0.1" title="0.1 s später (:)">+</button><button data-hier="1" title="aktuelle Spielzeit (E)">Hier</button>`:`<span class="schluss">${fmt(D.analyse.dauer)} Schluss</span>`}</div>
+   <span class="dauer">${(ende(i)-s.t).toFixed(1)} s</span></div>
+  <div class="erow"><button class="p" data-play="${i}">▶ Schritt abspielen</button>${nx?`<button data-ende="${i}" title="Shift+T">nur Ende (3 s)</button>`:''}<button data-teilen title="Neuer Schritt ab der aktuellen Spielzeit">✂ Hier teilen</button><button data-ins="${i}">＋ Schritt danach</button></div>
+  <details id="fein" ${offen?'open':''}><summary>Feinjustieren mit Standbildern</summary><div class="lbl">von <b>${fmt(s.t)}</b></div>${strip(s.t,i)}${nx?`<div class="lbl">bis <b>${fmt(nx.t)}</b> = Beginn Schritt ${i+2}</div>${strip(nx.t,i+1)}`:''}</details>`}
 function strip(t,idx){let h='<div class="strip">';for(let d=-2.5;d<=2.5;d+=0.5){const tt=r1(t+d);if(tt<0||tt>D.analyse.dauer)continue;const cut=nearCut(tt,0.26)!==null;
  h+=`<div class="f ${Math.abs(d)<0.01?'hit':''} ${cut?'cut':''}" data-set="${idx}" data-tt="${tt}"><img src="${frame(tt)}" loading="lazy" alt=""><span>${fmt(tt)}</span></div>`}return h+'</div>'}
 
-/* ---------- Zeitleiste ---------- */
-function renderTl(){const tl=$('#tl'),dur=D.analyse.dauer;let h='';
- E.steps.forEach((s,i)=>h+=`<div class="s ${i===sel?'sel':''}" style="left:${s.t/dur*100}%" data-sel="${i}" title="${esc(s.label)} – ziehen zum Verschieben">${i+1}</div>`);
- tl.innerHTML=h+'<div class="pos"></div>'}
-(function tlEvents(){const tl=$('#tl'),tip=$('#tip');let drag=null;
+/* ---------- Zeitleiste: ein Abschnitt pro Schritt, Grenzen ziehen ---------- */
+function renderTl(){const tl=$('#tl'),dur=D.analyse.dauer,bw=tl.clientWidth||800;let h='';
+ E.steps.forEach((s,i)=>{const w=(ende(i)-s.t)/dur*bw,skip=i===0&&uebersprungen();
+  h+=`<div class="seg ${i%2?'alt':''} ${i===sel?'sel':''} ${skip?'skip':''}" style="left:${s.t/dur*100}%;width:${Math.max(0,ende(i)-s.t)/dur*100}%" data-seg="${i}" title="${i+1}. ${esc(s.label)}${skip?' (wird übersprungen)':''} · ${fmt(s.t)}–${fmt(ende(i))}">`+
+   (w>170?`<img src="${frame(s.t+0.5)}" alt="" loading="lazy">`:'')+(w>34?`<span class="nr">${i+1}</span>`:'')+(w>80?`<span class="lb">${skip?'Materialkarte':esc(s.label)}</span>`:'')+(rotBei(i)&&w>20?'<i class="rot"></i>':'')+'</div>'});
+ E.steps.forEach((s,i)=>{if(i>0)h+=`<div class="grip ${drag===i?'on':''}" style="left:${s.t/dur*100}%" data-grip="${i}" title="ziehen: Ende von ${i} / Beginn von ${i+1}"></div>`});
+ tl.innerHTML=h+'<div class="pos"></div>';
+ const st=[1,2,5,10,15,30,60,120].find(x=>dur/x<=12)||300;let a='';for(let t=0;t<dur-st*0.4;t+=st)a+=`<span style="left:${t/dur*100}%">${fmt(t).replace(/\.0$/,'')}</span>`;
+ $('#achse').innerHTML=a+`<span style="left:100%">${fmt(dur)}</span>`}
+(function tlEvents(){const tl=$('#tl'),tip=$('#tip');
  const tAt=x=>{const r=tl.getBoundingClientRect();return Math.max(0,Math.min(D.analyse.dauer,(x-r.left)/r.width*D.analyse.dauer))};
- tl.addEventListener('mousemove',e=>{const t=tAt(e.clientX);let st=t;if(drag!==null)st=setT(drag,t,{snap:true,quiet:true});tip.lastElementChild.textContent=fmt(st);tip.firstElementChild.src=frame(st);
-  tip.style.display='block';tip.style.left=(e.clientX-tl.parentElement.getBoundingClientRect().left)+'px'});
- tl.addEventListener('mouseleave',()=>{if(drag===null)tip.style.display='none'});
- tl.addEventListener('mousedown',e=>{const m=e.target.closest('[data-sel]');if(m){drag=+m.dataset.sel;sel=drag;pushHist();renderSteps();e.preventDefault()}});
- addEventListener('mouseup',()=>{if(drag!==null){const i=drag;drag=null;tip.style.display='none';render();seek(E.steps[i].t)}});
- tl.addEventListener('click',e=>{if(e.target.closest('[data-sel]'))return;seek(tAt(e.clientX))});
+ const zeigTip=(x,t)=>{tip.lastElementChild.textContent=fmt(t);tip.firstElementChild.src=frame(t);tip.style.display='block';tip.style.left=(x-tl.parentElement.getBoundingClientRect().left)+'px'};
+ tl.addEventListener('pointermove',e=>{if(drag===null&&D)zeigTip(e.clientX,tAt(e.clientX))});
+ tl.addEventListener('pointerleave',()=>{if(drag===null)tip.style.display='none'});
+ tl.addEventListener('pointerdown',e=>{const g=e.target.closest('[data-grip]');if(!g)return;drag=+g.dataset.grip;if(sel!==drag&&sel!==drag-1)sel=drag;pushHist();e.preventDefault()});
+ addEventListener('pointermove',e=>{if(drag===null)return;const lo=E.steps[drag-1].t+0.5,hi=(E.steps[drag+1]?E.steps[drag+1].t:D.analyse.dauer)-0.5;
+  let t=Math.max(lo,Math.min(hi,tAt(e.clientX)));if(snap){const c=nearCut(t,0.4);if(c!==null&&c>=lo&&c<=hi)t=c}
+  E.steps[drag].t=r1(t);markDirty();renderTl();renderEdit();zeigTip(e.clientX,E.steps[drag].t)});
+ addEventListener('pointerup',()=>{if(drag===null)return;const i=drag;drag=null;tip.style.display='none';render();seek(E.steps[i].t-0.1)});
+ tl.addEventListener('click',e=>{const s=e.target.closest('[data-seg]');if(!s)return;matSicht=false;sel=+s.dataset.seg;render();seek(E.steps[sel].t)});
+ tl.addEventListener('dblclick',e=>{const s=e.target.closest('[data-seg]');if(!s)return;const t=r1(tAt(e.clientX));if(E.steps.some(x=>Math.abs(x.t-t)<0.5))return;
+  pushHist();E.steps.push({t,label:''});E.steps.sort((a,b)=>a.t-b.t);sel=E.steps.findIndex(x=>x.t===t);markDirty();render();seek(t);$('#elabel')?.focus();msg('Geteilt bei '+fmt(t))});
 })();
+
+/* ---------- Material (Arbeitsansicht) ---------- */
+function renderChips(){const names=Object.fromEntries(D.vokabular);const c=$('#chips');
+ c.innerHTML=E.material.map((id,i)=>`<span class="chip ${names[id]?'':'unk'}" draggable="true" data-i="${i}" title="${names[id]?id+' – ziehen zum Sortieren':'nicht im Vokabular – bekommt kein Bild'}">${ico(id)}${esc(names[id]||id)}<b data-rmm="${i}" title="entfernen">✕</b></span>`).join('')||'<span class="mute">noch kein Material – ohne Material zeigt die App keine Karte</span>';
+ let from=null;c.querySelectorAll('.chip').forEach(ch=>{ch.ondragstart=()=>{from=+ch.dataset.i;ch.classList.add('drag')};ch.ondragover=e=>e.preventDefault();
+  ch.ondrop=e=>{e.preventDefault();const to=+ch.dataset.i;if(from===null||from===to)return;const [m]=E.material.splice(from,1);E.material.splice(to,0,m);from=null;matGeaendert()};ch.ondragend=()=>ch.classList.remove('drag')});
+ $('#mathin').innerHTML=!E.material.length?'':uebersprungen()?'Die Karte ersetzt Schritt 1 «'+esc(E.steps[0].label)+'»; dieser Videoteil wird übersprungen (gestreift in der Zeitleiste).':
+  'Die Karte kommt vor Schritt 1. Tipp: Heisst Schritt 1 «Material richten …», ersetzt die Karte diesen Videoteil.'}
+function matGeaendert(){markDirty();renderChips();render()}
+$('#chips').onclick=e=>{if(e.target.dataset.rmm!==undefined){E.material.splice(+e.target.dataset.rmm,1);matGeaendert()}};
+$('#matadd').onchange=e=>{const v=e.target.value.trim().toLowerCase();if(!v)return;const hit=D.vokabular.find(([i,n])=>i===v||n.toLowerCase()===v);const id=hit?hit[0]:v.replace(/[^a-z]/g,'');
+ if(id&&!E.material.includes(id)){E.material.push(id);matGeaendert()}e.target.value=''};
+$('#matadd').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#matadd').onchange({target:$('#matadd')})}};
 
 /* ---------- Transkript (Abschlussansicht) ---------- */
 function renderTx(){const a=D.analyse;$('#txart').textContent='('+a.transkript_art+')';
@@ -322,31 +453,21 @@ function vorschlag(){const a=D.analyse,cand=[];
  st.unshift({t:0,label:(a.transkript[0]&&a.transkript[0][0]>3)?'Material richten: ':'Zuschauen: Einleitung'});
  const outro=strong().find(t=>t>a.dauer*0.85);if(outro&&outro-st[st.length-1].t>3)st.push({t:r1(outro),label:'Fertig – schau dein Werk an'});
  if(E.steps.length>1&&!confirm('Die '+E.steps.length+' bestehenden Schritte durch den Vorschlag ('+st.length+' Schritte aus '+quelle+') ersetzen? Rückgängig mit Ctrl+Z.'))return;
- pushHist();E.steps=st;sel=0;markDirty();zeige('A');render();msg('Vorschlag aus '+quelle+': '+st.length+' Schritte – Titel und Stopps prüfen')}
+ pushHist();E.steps=st;sel=0;markDirty();zeige('A');render();renderChips();msg('Vorschlag aus '+quelle+': '+st.length+' Schritte – Titel und Stopps prüfen')}
 
 /* ---------- Angaben ---------- */
 function renderMeta(){const m=$('#meta');
  m.innerHTML=`<label class="w">Titel (max. 5 Wörter)<input data-k="title" value="${esc(E.title)}"></label>
  <label>Verfahren<select data-k="areaId"><option value="">–</option>${D.themen.map(([i,n])=>`<option value="${i}" ${i===E.areaId?'selected':''}>${esc(n)}</option>`).join('')}</select></label>
  <label>Klassen<div class="pills" id="stufen">${[1,2,3,4,5,6].map(s=>`<button class="${E.stufen.includes(s)?'on':''}" data-st="${s}">${s}</button>`).join('')}</div></label>
- <label class="w"><span>Material<span class="q" title="Wird in der App als Materialkarte vor dem Video gezeigt, in dieser Reihenfolge. Chips ziehen zum Sortieren. Wörter ausserhalb des Vokabulars bekommen kein Bild (oranger Rand).">?</span></span><div class="chips" id="chips"></div><input id="matadd" list="vok" placeholder="Material tippen, Enter"></label>
  <label class="w">Hinweis für die Lehrperson<textarea data-k="hinweis" rows="2">${esc(E.hinweis||'')}</textarea></label>
  <details class="w"><summary>Details</summary><div class="meta" style="margin-top:8px">
   <label class="w">Aufgabe danach (leer = keine)<input data-k="task.text" value="${esc(E.task.text||'')}"></label>
   <label>id<input data-k="id" value="${esc(E.id)}"></label><label>Kanal<input data-k="kanal" value="${esc(E.kanal||'')}"></label>
   <label>Dauer<input data-k="dauer" value="${esc(E.dauer||'')}"></label><label>Zeit (Min., nur Mini ≤ 15)<input data-k="zeit" type="number" min="1" max="15" value="${E.zeit||''}"></label><label>Alter<input data-k="alter" value="${esc(E.alter||'')}"></label>
   <label>Sprache<select data-k="sprache">${['Hochdeutsch','Schweizerdeutsch','ohne Sprache','Englisch'].map(s=>`<option ${s===E.sprache?'selected':''}>${s}</option>`).join('')}</select></label></div></details>`;
- renderChips();
  m.oninput=e=>{const k=e.target.dataset.k;if(!k)return;if(k==='task.text'){E.task.text=e.target.value;E.task.deliverable=e.target.value.trim()?'fertig':'keine'}else if(k==='zeit'){const n=parseInt(e.target.value,10);if(n>0)E.zeit=n;else delete E.zeit}else E[k]=e.target.value;if(k==='title')$('#h1').textContent=E.title||ID;markDirty();renderCheck()};
- m.onclick=e=>{const b=e.target.closest('[data-st]');if(b){const s=+b.dataset.st;E.stufen=E.stufen.includes(s)?E.stufen.filter(x=>x!==s):[...E.stufen,s].sort();b.classList.toggle('on');markDirty();renderCheck()}};
- $('#matadd').onchange=e=>{const v=e.target.value.trim().toLowerCase();if(!v)return;const hit=D.vokabular.find(([i,n])=>i===v||n.toLowerCase()===v);const id=hit?hit[0]:v.replace(/[^a-z]/g,'');
-  if(id&&!E.material.includes(id)){E.material.push(id);markDirty();renderChips();renderCheck()}e.target.value=''};
- $('#matadd').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('#matadd').onchange({target:$('#matadd')})}}}
-function renderChips(){const names=Object.fromEntries(D.vokabular);const c=$('#chips');
- c.innerHTML=E.material.map((id,i)=>`<span class="chip ${names[id]?'':'unk'}" draggable="true" data-i="${i}" title="${names[id]?id:'nicht im Vokabular – bekommt kein Bild'}">${esc(names[id]||id)}<b data-rm="${i}">✕</b></span>`).join('')||'<span class="mute">noch kein Material</span>';
- let from=null;c.querySelectorAll('.chip').forEach(ch=>{ch.ondragstart=()=>{from=+ch.dataset.i;ch.classList.add('drag')};ch.ondragover=e=>e.preventDefault();
-  ch.ondrop=e=>{e.preventDefault();const to=+ch.dataset.i;if(from===null||from===to)return;const [m]=E.material.splice(from,1);E.material.splice(to,0,m);from=null;markDirty();renderChips()};ch.ondragend=()=>ch.classList.remove('drag')});
- c.onclick=e=>{if(e.target.dataset.rm!==undefined){E.material.splice(+e.target.dataset.rm,1);markDirty();renderChips();renderCheck()}}}
+ m.onclick=e=>{const b=e.target.closest('[data-st]');if(b){const s=+b.dataset.st;E.stufen=E.stufen.includes(s)?E.stufen.filter(x=>x!==s):[...E.stufen,s].sort();b.classList.toggle('on');markDirty();renderCheck()}}}
 
 /* ---------- Veröffentlichen ---------- */
 function oeffnePub(){const fehlt=[];if(!E.title.trim())fehlt.push('Titel');if(!E.areaId)fehlt.push('Verfahren');if(!E.stufen.length)fehlt.push('Klassen');
@@ -366,27 +487,31 @@ $('#pubno').onclick=()=>$('#pub').close();
 $('#pubyes').onclick=async()=>{$('#pub').close();clearTimeout(saveTimer);$('#status').textContent='veröffentliche…';const j=await post(W.veroeffentlichen);if(j){dirty=false;D.schule=nutzlast();$('#status').textContent='veröffentlicht';msg('In schule.json – jetzt '+j.anzahl+' Videos. '+W.nachPub)}};
 
 /* ---------- Ereignisse ---------- */
-document.addEventListener('click',e=>{const b=e.target.closest('[data-d],[data-play],[data-ins],[data-rm],[data-set],[data-tx],[data-new],.step');if(!b)return;const ds=b.dataset;
- if(ds.d){setT(+ds.i,E.steps[+ds.i].t+ +ds.d,{snap:true});seek(E.steps[+ds.i].t);return}
- if(ds.play){sel=+ds.play;render();testSchritt(sel);return}
- if(ds.ins!==undefined){const i=+ds.ins,a=E.steps[i].t,b2=E.steps[i+1]?E.steps[i+1].t:Math.min(D.analyse.dauer,a+10);pushHist();E.steps.splice(i+1,0,{t:r1((a+b2)/2),label:''});sel=i+1;markDirty();render();$(`[data-l="${sel}"]`)?.focus();return}
- if(ds.rm!==undefined){const i=+ds.rm,weg=E.steps[i];pushHist();E.steps.splice(i,1);sel=Math.min(sel,E.steps.length-1);markDirty();render();toast('Schritt '+(i+1)+' «'+weg.label+'» gelöscht',undo);return}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-pv],[data-los],[data-nud],[data-hier],[data-play],[data-ende],[data-teilen],[data-ins],[data-rm],[data-set],[data-tx],[data-new]');if(!b)return;const ds=b.dataset;
+ if(ds.pv!==undefined){const p=PV[+ds.pv];if(!p)return;
+  if(p.ref==='mat'){matSicht=true;if(ready&&yt.getPlayerState()===1)yt.pauseVideo();sel=0;render();return}
+  matSicht=false;if(p.ref==='zu'){seek(0);render();return}sel=p.ref;render();seek(E.steps[sel].t);return}
+ if(ds.los!==undefined){const p=PV.find(x=>typeof x.ref==='number');matSicht=false;if(p)testSchritt(p.ref);else render();return}
+ if(ds.nud!==undefined){const i=sel+ +ds.nud;if(!E.steps[i])return;setT(i,E.steps[i].t+ +ds.d);seek(E.steps[i].t-(+ds.nud?0.1:0));return}
+ if(ds.hier!==undefined){+ds.hier?hierBis():hierVon();return}
+ if(ds.play!==undefined){testSchritt(+ds.play);return}
+ if(ds.ende!==undefined){testSchritt(+ds.ende,true);return}
+ if(ds.teilen!==undefined){neuerSchritt();return}
+ if(ds.ins!==undefined){const i=+ds.ins,a=E.steps[i].t,b2=ende(i);if(b2-a<1){msg('Zu kurz zum Einfügen',true);return}pushHist();E.steps.splice(i+1,0,{t:r1((a+b2)/2),label:''});sel=i+1;markDirty();render();$('#elabel')?.focus();return}
+ if(ds.rm!==undefined){const i=+ds.rm,weg=E.steps[i];pushHist();E.steps.splice(i,1);sel=Math.min(sel,E.steps.length-1);markDirty();render();renderChips();toast('Schritt '+(i+1)+' «'+weg.label+'» gelöscht',()=>{undo();renderChips()});return}
  if(ds.set!==undefined){setT(+ds.set,+ds.tt);seek(+ds.tt);return}
  if(ds.tx){if(!E.steps.length)return;setT(sel,beginnVor(+ds.tx));seek(E.steps[sel].t);return}
- if(ds.new){const t=beginnVor(+ds.new);pushHist();E.steps.push({t,label:''});E.steps.sort((a,b)=>a.t-b.t);sel=E.steps.findIndex(s=>s.t===t);markDirty();zeige('A');render();$(`[data-l="${sel}"]`)?.focus();return}
- if(b.classList.contains('step')&&!e.target.matches('input,button')&&+ds.i!==sel){sel=+ds.i;render()}
+ if(ds.new){const t=beginnVor(+ds.new);pushHist();E.steps.push({t,label:''});E.steps.sort((a,b)=>a.t-b.t);sel=E.steps.findIndex(s=>s.t===t);markDirty();zeige('A');render();$('#elabel')?.focus();return}
 });
-$('#steps').addEventListener('change',e=>{const t=e.target;if(t.dataset.t!==undefined){const v=parseT(t.value);if(isNaN(v)){t.value=fmt(E.steps[+t.dataset.t].t);return}setT(+t.dataset.t,v)}
- if(t.dataset.l!==undefined){pushHist();E.steps[+t.dataset.l].label=t.value;markDirty();render()}});
-$('#steps').addEventListener('input',e=>{if(e.target.dataset.l!==undefined){E.steps[+e.target.dataset.l].label=e.target.value;markDirty()}});
-$('#steps').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.dataset.l!==undefined){e.preventDefault();const i=+e.target.dataset.l;e.target.blur();if(E.steps[i+1]){sel=i+1;render();$(`[data-l="${sel}"]`)?.focus()}}});
-$('#steps').addEventListener('focusin',e=>{const li=e.target.closest('.step');if(li&&+li.dataset.i!==sel){sel=+li.dataset.i;render();const again=$(`[data-${e.target.dataset.l!==undefined?'l':'t'}="${sel}"]`);again?.focus()}});
+$('#edit').addEventListener('focusin',e=>{if(e.target.id==='elabel')pushHist()});
+$('#edit').addEventListener('input',e=>{if(e.target.id==='elabel'){E.steps[sel].label=e.target.value;markDirty();renderVorschau();renderTl()}});
+$('#edit').addEventListener('change',e=>{const t=e.target;
+ if(t.id==='elabel'){renderEdit();renderChips();return}  // Hinweise neu, Materialkarte kann Schritt 1 ersetzen
+ if(t.id==='evon'||t.id==='ebis'){const i=sel+(t.id==='ebis'?1:0),v=parseT(t.value);if(isNaN(v)){t.value=fmt(E.steps[i].t);return}setT(i,v);seek(E.steps[i].t)}});
+$('#edit').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='elabel'){e.preventDefault();e.target.blur();if(E.steps[sel+1]){sel++;render();$('#elabel')?.focus()}}});
 $('#pp').onclick=$('#schild').onclick=()=>{if(!ready)return;yt.getPlayerState()===1?yt.pauseVideo():yt.playVideo()};
 $('#test').onclick=()=>testSchritt(sel);
-$('#here').onclick=()=>{if(ready&&E.steps.length)setT(sel,yt.getCurrentTime())};
-$('#hereend').onclick=()=>{if(!ready)return;if(!E.steps[sel+1]){msg('Letzter Schritt hat kein Ende – zuerst einen Schritt danach anlegen',true);return}setT(sel+1,yt.getCurrentTime())};
-function neuerSchritt(){const t=ready?r1(yt.getCurrentTime()):0;pushHist();E.steps.push({t,label:''});E.steps.sort((a,b)=>a.t-b.t);sel=E.steps.findIndex(s=>s.t===t);markDirty();render();$(`[data-l="${sel}"]`)?.focus()}
-$('#add').onclick=neuerSchritt;$('#add0').onclick=()=>{pushHist();E.steps=[{t:0,label:'Material richten: '}];sel=0;markDirty();render();$('[data-l="0"]')?.focus()};
+$('#add0').onclick=()=>{pushHist();E.steps=[{t:0,label:'Material richten: '}];sel=0;markDirty();render();renderChips();$('#elabel')?.focus()};
 $('#suggest').onclick=vorschlag;$('#suggest2').onclick=()=>{$('#hilfedlg').close();vorschlag()};
 $('#snap').onchange=e=>{snap=e.target.checked};
 $('#hilfe').onclick=()=>$('#hilfedlg').showModal();$('#hilfezu').onclick=()=>$('#hilfedlg').close();
@@ -408,16 +533,16 @@ document.addEventListener('keydown',e=>{
   case ' ':e.preventDefault();$('#pp').click();break;
   case 'ArrowLeft':seek(cur-(e.shiftKey?2:0.5));break;
   case 'ArrowRight':seek(cur+(e.shiftKey?2:0.5));break;
-  case 'ArrowDown':e.preventDefault();sel=Math.min(E.steps.length-1,sel+1);render.scrollTo=true;render();break;
-  case 'ArrowUp':e.preventDefault();sel=Math.max(0,sel-1);render.scrollTo=true;render();break;
-  case 's':case 'S':$('#here').click();break;
-  case 'e':case 'E':$('#hereend').click();break;
+  case 'ArrowDown':e.preventDefault();matSicht=false;sel=Math.min(E.steps.length-1,sel+1);render();if(E.steps[sel])seek(E.steps[sel].t);break;
+  case 'ArrowUp':e.preventDefault();matSicht=false;sel=Math.max(0,sel-1);render();if(E.steps[sel])seek(E.steps[sel].t);break;
+  case 's':case 'S':hierVon();break;
+  case 'e':case 'E':hierBis();break;
   case 't':testSchritt(sel);break;case 'T':testSchritt(sel,true);break;
   case ',':if(s){setT(sel,s.t-0.1);seek(E.steps[sel].t)}break;case '.':if(s){setT(sel,s.t+0.1);seek(E.steps[sel].t)}break;
-  case ';':if(nx){setT(sel+1,nx.t-0.1);seek(nx.t-0.1)}break;case ':':if(nx){setT(sel+1,nx.t+0.1);seek(nx.t+0.1)}break;
+  case ';':if(nx){setT(sel+1,nx.t-0.1);seek(nx.t-0.1)}break;case ':':if(nx){setT(sel+1,nx.t+0.1);seek(nx.t-0.1)}break;
   case '[':{if(!s)break;const c=prevCut(s.t);if(c!==undefined){setT(sel,c);seek(c)}break}
   case ']':{if(!s)break;const c=nextCut(s.t);if(c!==undefined){setT(sel,c);seek(c)}break}
-  default:if(/^[1-9]$/.test(e.key)&&E.steps[+e.key-1]){sel=+e.key-1;render.scrollTo=true;render();seek(E.steps[sel].t)}
+  default:if(/^[1-9]$/.test(e.key)&&E.steps[+e.key-1]){matSicht=false;sel=+e.key-1;render();seek(E.steps[sel].t)}
  }});
 lade();
 </script>

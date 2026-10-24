@@ -123,6 +123,13 @@ class H(BaseHTTPRequestHandler):
         p = urlparse(self.path).path
         seite = {'/': 'index.html', '/video.html': 'video.html', '/werkstatt.js': 'werkstatt.js'}.get(p)
         if seite: return self.send(200, (SEITEN / seite).read_bytes(), 'text/javascript; charset=utf-8' if seite.endswith('.js') else 'text/html; charset=utf-8')
+        if p == '/schule/index.html':  # video.html liest daraus die Material-Piktogramme
+            return self.send(200, (WURZEL / 'schule' / 'index.html').read_bytes())
+        m = re.fullmatch(r'/material/([A-Za-z0-9_.-]+\.(json|jpg|jpeg|png|webp|svg))', p)
+        if m:
+            datei = WURZEL / 'material' / m.group(1)
+            typ = {'json': 'application/json; charset=utf-8', 'svg': 'image/svg+xml', 'png': 'image/png', 'webp': 'image/webp'}.get(m.group(2), 'image/jpeg')
+            return self.send(200, datei.read_bytes(), typ) if datei.is_file() else self.send(404, 'nicht gefunden')
         m = re.fullmatch(r'/v/([A-Za-z0-9_-]{11})', p)  # alte Links
         if m:
             self.send_response(302); self.send_header('Location', '/video.html?id=' + m.group(1)); self.end_headers(); return

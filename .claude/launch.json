@@ -4,8 +4,15 @@
     {
       "name": "kontrolle",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["werkzeug/kontrolle.py"],
-      "port": 8765
+      "runtimeArgs": ["werkzeug/kontrolle.py", "--port", "8767"],
+      "port": 8767,
+      "autoPort": false
+    },
+    {
+      "name": "app",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8770", "--bind", "127.0.0.1"],
+      "port": 8770
     }
   ]
 }
