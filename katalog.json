@@ -43,7 +43,11 @@
    "task": {
     "text": "Zeichne dein eigenes Huhn und mach ein Foto davon.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "papier",
+    "stifte"
+   ]
   },
   {
    "id": "srf-schaf",
@@ -103,7 +107,11 @@
    "task": {
     "text": "Zeichne dein eigenes Schaf und mach ein Foto davon.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "papier",
+    "stifte"
+   ]
   },
   {
    "id": "srf-pferd",
@@ -159,7 +167,11 @@
    "task": {
     "text": "Zeichne dein eigenes Pferd und mach ein Foto davon.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "papier",
+    "stifte"
+   ]
   },
   {
    "id": "srf-schwein",
@@ -215,7 +227,11 @@
    "task": {
     "text": "Zeichne dein eigenes Schweinchen und mach ein Foto davon.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "papier",
+    "stifte"
+   ]
   },
   {
    "id": "srf-kuh",
@@ -279,7 +295,11 @@
    "task": {
     "text": "Zeichne deine eigene Kuh mit Flecken und mach ein Foto davon.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "papier",
+    "stifte"
+   ]
   },
   {
    "id": "srf-traktor",
@@ -335,7 +355,11 @@
    "task": {
     "text": "Zeichne deinen eigenen Traktor und mach ein Foto davon.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "papier",
+    "stifte"
+   ]
   },
   {
    "id": "kat-papierschiff",
@@ -387,7 +411,10 @@
    "task": {
     "text": "Falte dein eigenes Schiff und mach ein Foto davon.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "papier"
+   ]
   },
   {
    "id": "kat-papierflieger",
@@ -435,7 +462,10 @@
    "task": {
     "text": "Falte deinen Flieger, lass ihn fliegen und mach ein Foto davon.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "papier"
+   ]
   },
   {
    "id": "kat-frosch",
@@ -499,7 +529,11 @@
    "task": {
     "text": "Falte deinen Frosch und lass ihn hüpfen. Mach ein Foto davon.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "papier",
+    "schere"
+   ]
   },
   {
    "id": "srf-geist",
@@ -518,7 +552,14 @@
    "task": {
     "text": "Bastle deinen eigenen Geist und mach ein Foto davon.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "zuendholzschachtel",
+    "papier",
+    "schere",
+    "leim",
+    "stifte"
+   ]
   },
   {
    "id": "maus-igel",
@@ -1182,7 +1223,11 @@
    "task": {
     "text": "Mach ein Foto von deinem gestrickten Armband.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "wolle",
+    "schere"
+   ]
   },
   {
    "id": "wl-kiludo-fingerstricken",
@@ -1234,7 +1279,11 @@
    "task": {
     "text": "Foto von deinem Strickschlauch.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "wolle",
+    "schere"
+   ]
   },
   {
    "id": "wl-strickliesel",
@@ -1286,7 +1335,12 @@
    "task": {
     "text": "Foto von deinem Strickschlauch.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "strickliesel",
+    "wolle",
+    "schere"
+   ]
   },
   {
    "id": "wl-wickeldrache",
@@ -1330,7 +1384,13 @@
    "task": {
     "text": "Foto von deinem Wickeldrachen.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "holzspatel",
+    "wolle",
+    "leim",
+    "schere"
+   ]
   },
   {
    "id": "wl-armband-karton",
@@ -1390,7 +1450,12 @@
    "task": {
     "text": "Foto von deinem Armband am Handgelenk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "wolle",
+    "karton",
+    "schere"
+   ]
   },
   {
    "id": "wl-webrahmen-karton",
@@ -1438,7 +1503,13 @@
    "task": {
     "text": "Foto von deinem kleinen Teppich.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "karton",
+    "wolle",
+    "schere",
+    "stopfnadel"
+   ]
   },
   {
    "id": "wl-vorstich",
@@ -1490,7 +1561,13 @@
    "task": {
     "text": "Foto von deiner Naht.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "filz",
+    "nadel",
+    "garn",
+    "schere"
+   ]
   },
   {
    "id": "wl-zopf",
@@ -1538,7 +1615,12 @@
    "task": {
     "text": "Flechte einen Zopf und zeig ihn jemandem.",
     "deliverable": "fertig"
-   }
+   },
+   "material": [
+    "wolle",
+    "klebeband",
+    "schere"
+   ]
   },
   {
    "id": "wl-flechten",
@@ -1590,7 +1672,12 @@
    "task": {
     "text": "Foto von deinem Zopf.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "wolle",
+    "klebeband",
+    "schere"
+   ]
   },
   {
    "id": "wl-armband-zwei",
@@ -1646,7 +1733,12 @@
    "task": {
     "text": "Foto von deinem Armband.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "wolle",
+    "klebeband",
+    "schere"
+   ]
   },
   {
    "id": "wl-fingerhaekeln",
@@ -1694,7 +1786,11 @@
    "task": {
     "text": "Foto von deinem gehäkelten Armband.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "wolle",
+    "schere"
+   ]
   },
   {
    "id": "ex-ballonrakete",
@@ -1746,7 +1842,14 @@
    "task": {
     "text": "Lass deine Rakete fliegen – wie weit kommt sie?",
     "deliverable": "fertig"
-   }
+   },
+   "material": [
+    "luftballon",
+    "trinkhalm",
+    "schnur",
+    "klebeband",
+    "waescheklammer"
+   ]
   },
   {
    "id": "ex-brauserakete",
@@ -1798,7 +1901,12 @@
    "task": {
     "text": "Lass deine Rakete starten – draussen, mit einem Erwachsenen.",
     "deliverable": "fertig"
-   }
+   },
+   "material": [
+    "dose",
+    "brausetablette",
+    "wasser"
+   ]
   },
   {
    "id": "ex-luft-wiegt",
@@ -1854,7 +1962,13 @@
    "task": {
     "text": "Baue die Luftballonwaage nach und zeig sie jemandem.",
     "deliverable": "fertig"
-   }
+   },
+   "material": [
+    "luftballon",
+    "stab",
+    "schnur",
+    "nadel"
+   ]
   },
   {
    "id": "ex-hefeballon",
@@ -1902,7 +2016,16 @@
    "task": {
     "text": "Foto von deinem aufgeblasenen Hefeballon.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "hefe",
+    "zucker",
+    "flasche",
+    "luftballon",
+    "wasser",
+    "trichter",
+    "loeffel"
+   ]
   },
   {
    "id": "ex-moos",
@@ -1946,7 +2069,12 @@
    "task": {
     "text": "Probier es mit Moos aus dem Wald.",
     "deliverable": "fertig"
-   }
+   },
+   "material": [
+    "moos",
+    "wasser",
+    "glas"
+   ]
   },
   {
    "id": "ex-pfeffer-salz",
@@ -1990,7 +2118,13 @@
    "task": {
     "text": "Trenne Pfeffer und Salz mit dem Zaubertrick.",
     "deliverable": "fertig"
-   }
+   },
+   "material": [
+    "salz",
+    "pfeffer",
+    "plastikloeffel",
+    "papier"
+   ]
   },
   {
    "id": "ex-starke-eier",
@@ -2034,7 +2168,12 @@
    "task": {
     "text": "Foto von deinem Eierturm.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "ei",
+    "eierbecher",
+    "buecher"
+   ]
   },
   {
    "id": "ex-tag-nacht",
@@ -2078,7 +2217,12 @@
    "task": {
     "text": "Mach es im dunklen Zimmer nach – mit Taschenlampe und Apfel.",
     "deliverable": "fertig"
-   }
+   },
+   "material": [
+    "frucht",
+    "zahnstocher",
+    "taschenlampe"
+   ]
   },
   {
    "id": "ex-wasserfilter",
@@ -2126,7 +2270,15 @@
    "task": {
     "text": "Foto von deinem Filter mit dem Wasser davor und danach.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "flasche",
+    "watte",
+    "sand",
+    "steine",
+    "wasser",
+    "glas"
+   ]
   },
   {
    "id": "ex-ballon-essig",
@@ -2170,7 +2322,14 @@
    "task": {
     "text": "Foto von deinem aufgeblasenen Ballon.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "flasche",
+    "essig",
+    "backpulver",
+    "luftballon",
+    "trichter"
+   ]
   },
   {
    "id": "ex-magnet",
@@ -2222,7 +2381,16 @@
    "task": {
     "text": "Foto von deinem Magnet-Labyrinth.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "magnet",
+    "bueroklammer",
+    "karton",
+    "trinkhalm",
+    "stifte",
+    "leim",
+    "papier"
+   ]
   },
   {
    "id": "zw-luftmaschen",
@@ -2282,7 +2450,11 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "wolle",
+    "haekelnadel"
+   ]
   },
   {
    "id": "zw-rueckstich",
@@ -2330,7 +2502,13 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "stoff",
+    "nadel",
+    "garn",
+    "schere"
+   ]
   },
   {
    "id": "zw-kordel",
@@ -2390,7 +2568,13 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "wolle",
+    "tuerklinke",
+    "bleistift",
+    "schere"
+   ]
   },
   {
    "id": "zw-steppstich",
@@ -2446,7 +2630,13 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "filz",
+    "nadel",
+    "garn",
+    "schere"
+   ]
   },
   {
    "id": "zw-fadenbild",
@@ -2502,7 +2692,15 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "holzbrett",
+    "naegel",
+    "garn",
+    "hammer",
+    "klebeband",
+    "papier"
+   ]
   },
   {
    "id": "zw-maschenanschlag",
@@ -2558,7 +2756,11 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "wolle",
+    "stricknadeln"
+   ]
   },
   {
    "id": "zw-himmel-hoelle",
@@ -2614,7 +2816,11 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "papier",
+    "schere"
+   ]
   },
   {
    "id": "zw-abketten",
@@ -2678,7 +2884,12 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "stricknadeln",
+    "wolle",
+    "schere"
+   ]
   },
   {
    "id": "zw-filzkugel-kinder",
@@ -2730,7 +2941,13 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "filzwolle",
+    "seife",
+    "wasser",
+    "handtuch"
+   ]
   },
   {
    "id": "zw-filzkugeln",
@@ -2786,7 +3003,13 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "filzwolle",
+    "seife",
+    "wasser",
+    "handtuch"
+   ]
   },
   {
    "id": "zw-feste-maschen-kurz",
@@ -2834,7 +3057,11 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "wolle",
+    "haekelnadel"
+   ]
   },
   {
    "id": "zw-schleife",
@@ -2878,7 +3105,11 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "schuh",
+    "schnuersenkel"
+   ]
   },
   {
    "id": "zw-maschen-aufnehmen",
@@ -2942,7 +3173,11 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "wolle",
+    "stricknadeln"
+   ]
   },
   {
    "id": "zw-nagelbild",
@@ -3002,7 +3237,17 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "holzbrett",
+    "naegel",
+    "hammer",
+    "zange",
+    "papier",
+    "bleistift",
+    "schere",
+    "klebeband"
+   ]
   },
   {
    "id": "zw-schlingstich",
@@ -3062,7 +3307,13 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "filz",
+    "nadel",
+    "garn",
+    "schere"
+   ]
   },
   {
    "id": "zw-pompon",
@@ -3122,7 +3373,13 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "wolle",
+    "karton",
+    "schere",
+    "zirkel"
+   ]
   },
   {
    "id": "zw-feste-maschen",
@@ -3182,7 +3439,11 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "wolle",
+    "haekelnadel"
+   ]
   },
   {
    "id": "zw-fangbecher",
@@ -3238,7 +3499,15 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "papier",
+    "schnur",
+    "perle",
+    "schere",
+    "nadel",
+    "leim"
+   ]
   },
   {
    "id": "zw-ueberwendling",
@@ -3294,7 +3563,13 @@
    "task": {
     "text": "Mach ein Foto von deinem Werk.",
     "deliverable": "foto"
-   }
+   },
+   "material": [
+    "filz",
+    "nadel",
+    "garn",
+    "schere"
+   ]
   }
  ]
 }

@@ -43,6 +43,7 @@ Kinder, Sterne, Fortschritt und Werke liegen im Browser des Geräts (localStorag
 
 ## Was die App macht
 
+- **Materialkarte:** Hat ein Video eine Materialliste (`material: ["wolle","schere",…]`), ist Schritt 1 immer «Material richten»: eine Karte mit Piktogrammen statt Video. «Habe ich alles» startet das Video direkt beim ersten Arbeitsschritt. Im Elternbereich-Editor als Komma-Liste eingeben (bekannte Wörter bekommen ein Bild, unbekannte ein Paket-Symbol). Vokabular der Piktogramme steht in der App (`MATERIAL`). Echte Fotos: quadratische JPGs als `material/<id>.jpg` (z. B. `material/wolle.jpg`) ablegen und die ID in `material/fotos.json` eintragen – dann zeigt die Karte das Foto statt des Piktogramms.
 - **Schritt-Modus:** Video stoppt automatisch am Ende jedes Schritts (kleines Schild «Jetzt du» im Bild, kein Zwischenbildschirm). Tipp aufs Video oder auf ▶ = Weiter, ↺ = Nochmal. Vorlesen nur auf Knopfdruck (Lautsprecher); automatisches Vorlesen ist in den Einstellungen abschaltbar/einschaltbar, die Stimme hängt vom Gerät ab.
 - **Lern-Bereiche** unbegrenzt, **Spass-Bereiche** kosten einen Stern pro Video und Tag (Anzahl in den Einstellungen). Abgegebene Aufgabe = ein Bonus-Stern pro Tag (abschaltbar).
 - **Aufgabe nach dem Video:** Foto, Bild malen, Tonaufnahme oder nur Fertig-Knopf. Landet in «Meine Werke», Eltern geben Rückmeldung (Emoji + Satz).
