@@ -30,7 +30,13 @@ Die Seiten liegen in `kontrolle/` (index.html, video.html, werkstatt.js), der lo
 
 - Entwürfe, Transkripte und Filmstreifen im privaten Repo `schrittli-werkstatt`. `werkzeug/entwurf` ist dessen Klon (`python werkzeug/werkstatt.py --einrichten`, einmalig). `python werkzeug/werkstatt.py` gleicht ab: holt online Gespeichertes, erneuert `liste.json`, `vorschau.jpg`, `meta.json` und die Filmstreifen, lädt hoch.
 - Speichern = ein Commit im Werkstatt-Repo. «Veröffentlichen» = ein Commit auf `schule/schule.json` im App-Repo, nach etwa einer Minute live. Danach lokal `git pull`, bevor du selber committest.
-- Einmal pro Gerät fragt die Seite nach einem GitHub-Schlüssel (Fine-grained token, nur die Repos `schrittli` und `schrittli-werkstatt`, Contents: Read and write). Er bleibt im Browser; «Schlüssel entfernen» unter «Neue Videos holen?».
+- Einmal pro Gerät **Mit GitHub anmelden**. Der Schlüssel bleibt im Browser, gilt 8 Stunden und wird von selbst erneuert; «Auf diesem Gerät abmelden» unter «Neue Videos holen?». Notlösung ohne Anmeldung: unter «Ohne Anmeldung» einen Fine-grained token einfügen (Repos `schrittli` und `schrittli-werkstatt`, Contents: Read and write).
+
+**Anmeldestelle** (`werkzeug/anmelden/`, Cloudflare Worker unter https://schrittli-anmelden.conradinjoos.workers.dev): hält Client-ID und Geheimnis der GitHub App «Schrittli Kontrolle» (Konto conradinjoos-lab, installiert nur auf `schrittli` und `schrittli-werkstatt`, Recht: Contents lesen und schreiben). Zurück zur Seite kommt nur ein Abholschein, der Schlüssel selbst geht per POST, und nur an `conradinjoos-lab.github.io`. Darum lässt sich die Anmeldung lokal nicht testen; lokal braucht es sie auch nicht.
+
+- Ändern: `worker.js` bearbeiten, dann `cd werkzeug/anmelden && npx wrangler deploy` (eigenes Cloudflare-Konto, `npx wrangler login`).
+- Weiteres Repo freigeben: GitHub → Settings → Applications → Schrittli Kontrolle → Configure.
+- Neu einrichten (z. B. nach Löschen der App): https://schrittli-anmelden.conradinjoos.workers.dev/einrichten in einem Zug durchklicken, nicht neu laden. Die Seite gilt 15 Minuten; GitHub springt danach von selbst zur Installation.
 
  Die Liste zeigt pro Video drei Häkchen: Schritte gesetzt, Angaben vollständig, geprüft. Pro Video gibt es zwei Ansichten.
 
