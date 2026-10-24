@@ -25,7 +25,24 @@ def vokabular():
     return ids
 
 
+def belegt():
+    """id → Video-IDs, die sie schon tragen (schule.json und alle Entwürfe); Veröffentlichen ersetzt nach id."""
+    out = {}
+    try: schule = json.loads((WURZEL / 'schule' / 'schule.json').read_text(encoding='utf-8'))['videos']
+    except Exception: schule = []
+    for e in schule: out.setdefault(e.get('id'), set()).add((e.get('source') or {}).get('id'))
+    for p in ENTWURF.glob('*/video.json'):
+        try: out.setdefault(json.loads(p.read_text(encoding='utf-8')).get('id'), set()).add(p.parent.name)
+        except Exception: pass
+    return out
+
+
+BELEGT = None
+
+
 def pruefe(vid, vok):
+    global BELEGT
+    BELEGT = BELEGT or belegt()
     p = ENTWURF / vid / 'video.json'
     if not p.exists(): return [f'! kein Entwurf ({p.relative_to(WURZEL)})']
     try: v = json.loads(p.read_text(encoding='utf-8'))
@@ -50,6 +67,8 @@ def pruefe(vid, vok):
     st = v.get('stufen') or []
     if not st or not all(isinstance(s, int) and 1 <= s <= 6 for s in st): f(f'stufen {st} ungültig (1–6)')
     if (v.get('source') or {}).get('id') != vid: f('source.id stimmt nicht mit dem Ordner überein')
+    andere = sorted(BELEGT.get(v.get('id'), set()) - {vid})
+    if andere: f(f'id «{v.get("id")}» trägt schon {", ".join(andere)} – Veröffentlichen würde es ersetzen')
     if len((v.get('title') or '').split()) > 5: f(f'Titel hat mehr als 5 Wörter: {v.get("title")}')
     if v.get('sprache') not in ('Hochdeutsch', 'Schweizerdeutsch', 'ohne Sprache', 'Englisch'): f(f'sprache «{v.get("sprache")}» unbekannt')
     if not (v.get('hinweis') or '').strip(): h('Hinweis für die Lehrperson fehlt')
