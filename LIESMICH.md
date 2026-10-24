@@ -35,10 +35,11 @@ Kinder, Sterne, Fortschritt und Werke liegen im Browser des Geräts (localStorag
 
 - Eigener Ordner `schule/` mit `index.html` und `schule.json`; läuft unter `…/schrittli/schule/`. Gleiche Technik, eigener Speicher (die Familienversion bleibt unberührt).
 - Kein Login, keine PIN, keine Sterne, keine Aufgaben, kein Elternbereich. Gespeichert wird nur die zuletzt gewählte Klasse; Fortschritt gilt nur für die laufende Sitzung (geteilte iPads).
-- Ablauf: Klasse wählen (1.–6.) → Themenbereiche mit Videos für diese Klasse (Textil, Papier & Karton, Holz & Material, Experimente & Technik, Zeichnen, Sachwissen) → Video → Player mit Schritten, Tempo, Kino-Modus.
+- Ablauf: Klasse wählen (1.–6.) → Verfahren mit Videos für diese Klasse → Video → Player mit Schritten, Tempo, Kino-Modus.
 - Grossbuchstaben für 1. und 2. Klasse, ab 3. Klasse normale Schrift.
 - «Für Lehrpersonen» (unten): Liste aller Videos mit Klassenzuordnung und QR-Code pro Video (Schul-Link mit Schritten, auch von zuhause nutzbar).
-- Pflege: `schule/schule.json` – pro Video `areaId` (Thema) und `stufen` (Liste 1–6). Klassenzuordnung ist ein Vorschlag von Claude und soll von der Lehrperson geprüft werden.
+- Ordnung nach TTG-Verfahren: Nähen, Sticken, Häkeln, Stricken, Weben, Flechten & Knüpfen, Wickeln, Filzen, Falten, Schneiden & Kleben, Sägen & Nageln, Formen, Drucken, Experimentieren. Gedacht vor allem als Zwischenarbeiten für Kinder, die früher fertig sind.
+- Pflege: `schule/schule.json` – pro Video `areaId` (Verfahren) und `stufen` (Liste 1–6). Klassenzuordnung ist ein Vorschlag von Claude und soll von der Lehrperson geprüft werden.
 
 ## Was die App macht
 

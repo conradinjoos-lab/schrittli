@@ -2223,6 +2223,1078 @@
     "text": "Foto von deinem Magnet-Labyrinth.",
     "deliverable": "foto"
    }
+  },
+  {
+   "id": "zw-luftmaschen",
+   "areaId": "werken",
+   "title": "Luftmaschen häkeln",
+   "source": {
+    "type": "youtube",
+    "id": "8Fv-jwp4Mek"
+   },
+   "kanal": "Häkelwelt",
+   "dauer": "3:49",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Dickeres Garn und Häkelnadel bereitlegen; Anfangsknoten und Fadenhaltung werden je zweimal gezeigt, Stolperstein ist die Fadenspannung mit gestrecktem Zeigefinger.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Garn und Häkelnadel bereitlegen"
+    },
+    {
+     "t": 20,
+     "label": "Garn abwickeln, zweimal um den Zeigefinger"
+    },
+    {
+     "t": 42,
+     "label": "Hintere Schlaufe über den Finger, festziehen"
+    },
+    {
+     "t": 62,
+     "label": "Nochmals üben: Anfangsknoten machen"
+    },
+    {
+     "t": 100,
+     "label": "Faden um kleinen Finger und Zeigefinger legen"
+    },
+    {
+     "t": 147,
+     "label": "Nadel in die Schlaufe, Knoten festziehen"
+    },
+    {
+     "t": 154,
+     "label": "Garn holen, durch die Schlaufe ziehen"
+    },
+    {
+     "t": 169,
+     "label": "Nochmals Garn holen und durchziehen"
+    },
+    {
+     "t": 194,
+     "label": "Immer so weiter, Zeigefinger gestreckt"
+    },
+    {
+     "t": 220,
+     "label": "Fertig – schau deine Kette an"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "zw-rueckstich",
+   "areaId": "werken",
+   "title": "Rückstich sticken",
+   "source": {
+    "type": "youtube",
+    "id": "EonsMpzVis0"
+   },
+   "kanal": "Zucker&Zimt Design",
+   "dauer": "1:22",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Stoff mit vorgezeichneter Linie, Sticknadel und Stickgarn bereitlegen; Stolperstein: der erste Stich beginnt eine Stichlänge nach dem Linienanfang, weil man beim Rückstich immer zurück sticht.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Stoff, Nadel und Faden bereit"
+    },
+    {
+     "t": 22,
+     "label": "Nadel von unten hoch, einen Stich zurück"
+    },
+    {
+     "t": 38,
+     "label": "Zwei Stichlängen nach vorn ausstechen"
+    },
+    {
+     "t": 47,
+     "label": "Nadel zurück ins Loch vom letzten Stich"
+    },
+    {
+     "t": 53,
+     "label": "Zurück und zwei vor in einem Zug"
+    },
+    {
+     "t": 62,
+     "label": "Immer so weiter bis zum Linienende"
+    },
+    {
+     "t": 67,
+     "label": "Fertig – schau dein Werk an"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "zw-kordel",
+   "areaId": "werken",
+   "title": "Kordel drehen an der Türklinke",
+   "source": {
+    "type": "youtube",
+    "id": "EyI8rlYg-MA"
+   },
+   "kanal": "Basteln rund ums Jahr",
+   "dauer": "2:05",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Wolle oder Garn fünfmal so lang wie die fertige Kordel, dazu ein Bleistift und eine Türklinke; beim Loslassen die Mitte gut festhalten, sonst verdreht sich die Kordel.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Faden, Türklinke und Stift"
+    },
+    {
+     "t": 8,
+     "label": "Faden fünfmal so lang abmessen, Enden zusammen"
+    },
+    {
+     "t": 28,
+     "label": "Beide Enden zusammen verknoten"
+    },
+    {
+     "t": 39,
+     "label": "Knoten an Türklinke, Stift ans andere Ende"
+    },
+    {
+     "t": 50,
+     "label": "Stift drehen wie ein Propeller"
+    },
+    {
+     "t": 59,
+     "label": "Weiterdrehen, bis die Kordel fest ist"
+    },
+    {
+     "t": 87,
+     "label": "Finger in die Mitte, Enden zusammen"
+    },
+    {
+     "t": 96,
+     "label": "Stückchen für Stückchen loslassen"
+    },
+    {
+     "t": 105,
+     "label": "Stift raus, Knoten ans Ende"
+    },
+    {
+     "t": 120,
+     "label": "Fertig – schau deine Kordel an"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "zw-steppstich",
+   "areaId": "werken",
+   "title": "Steppstich nähen",
+   "source": {
+    "type": "youtube",
+    "id": "I5hJ4R_94Ak"
+   },
+   "kanal": "Kreativ mit Miss B",
+   "dauer": "1:47",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Ein Filzteil zum Aufnähen (im Video der Bauch eines Bären), spitze Nadel, Faden mit Knoten; Stolperstein: beim zweiten Stich genau ins Ende des ersten Stichs zurückstechen, sonst bleibt eine Lücke.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Bär mit Bauch zum Annähen"
+    },
+    {
+     "t": 18,
+     "label": "Faden einfädeln, Knoten ans Ende"
+    },
+    {
+     "t": 30,
+     "label": "Von hinten nach vorne stechen"
+    },
+    {
+     "t": 39,
+     "label": "Ein Stück zurück einstechen"
+    },
+    {
+     "t": 45,
+     "label": "Ein Stück vor dem Loch wieder hoch"
+    },
+    {
+     "t": 57,
+     "label": "Zurück ins Ende vom ersten Stich"
+    },
+    {
+     "t": 68,
+     "label": "Wieder ein Stück vorne hoch, gleich lang"
+    },
+    {
+     "t": 83,
+     "label": "Immer so weiter rund um den Bauch"
+    },
+    {
+     "t": 90,
+     "label": "Fertig – schau dein Werk an"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "zw-fadenbild",
+   "areaId": "werken",
+   "title": "Fadenbild mit Nägeln",
+   "source": {
+    "type": "youtube",
+    "id": "IONISsDIxMI"
+   },
+   "kanal": "Gleis Eins",
+   "dauer": "1:38",
+   "alter": "ab 5",
+   "sprache": "ohne Sprache",
+   "hinweis": "Keine Sprache, Anleitung nur als Text im Bild (für die 1. Klasse vorlesen); Brett, Nägel, Hammer, Faden, Kreppband und Herz-Vorlage bereitlegen.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Brett, Hammer, Nägel, Faden, Kreppband"
+    },
+    {
+     "t": 14,
+     "label": "Kreppband rollen, Klebeseite nach aussen"
+    },
+    {
+     "t": 22,
+     "label": "Kreppband aufs Brett, Vorlage daraufkleben"
+    },
+    {
+     "t": 34,
+     "label": "Nägel der Linie nach, ein Finger Abstand"
+    },
+    {
+     "t": 47,
+     "label": "Alle Nägel etwa gleich hoch"
+    },
+    {
+     "t": 55,
+     "label": "Faden mit Knoten am Nagel festmachen"
+    },
+    {
+     "t": 63,
+     "label": "Kreuz und quer spannen, nicht abrutschen lassen"
+    },
+    {
+     "t": 75,
+     "label": "Zum Schluss wieder einen Knoten"
+    },
+    {
+     "t": 83,
+     "label": "Fertig – schau dein Fadenbild an"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "zw-maschenanschlag",
+   "areaId": "werken",
+   "title": "Endloser Maschenanschlag",
+   "source": {
+    "type": "youtube",
+    "id": "IhI-O0C45BU"
+   },
+   "kanal": "Woolpedia",
+   "dauer": "2:37",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Wolle und zwei Stricknadeln; die neue Schlaufe wird rückwärts auf die erste Nadel gesetzt – locker lassen, sonst wird der Anschlag zu eng.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Wolle und zwei Nadeln bereitlegen"
+    },
+    {
+     "t": 24,
+     "label": "Knoten: Kreis legen, Faden durchziehen"
+    },
+    {
+     "t": 40,
+     "label": "Nadel in die Schlaufe, Garn festziehen"
+    },
+    {
+     "t": 57,
+     "label": "Zweite Nadel von unten in die Masche"
+    },
+    {
+     "t": 70,
+     "label": "Garn greifen und locker durchziehen"
+    },
+    {
+     "t": 88,
+     "label": "Schlaufe rückwärts auf die erste Nadel"
+    },
+    {
+     "t": 103,
+     "label": "Nochmals: durchziehen, locker, rückwärts aufsetzen"
+    },
+    {
+     "t": 122,
+     "label": "Immer so weiter bis genug Maschen"
+    },
+    {
+     "t": 149,
+     "label": "Fertig – schau deine Maschen an"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "zw-himmel-hoelle",
+   "areaId": "basteln",
+   "title": "Himmel und Hölle falten",
+   "source": {
+    "type": "youtube",
+    "id": "IvrqFCQ1IeY"
+   },
+   "kanal": "Kikisweb.de",
+   "dauer": "1:55",
+   "alter": "ab 5",
+   "sprache": "ohne Sprache",
+   "hinweis": "Quadratisches Papier (ca. 20 × 20 cm) nötig; das Video hat keine Sprache, Falzkanten gut nachstreichen lassen, Stolperstein ist das zweite Mal Ecken falten nach dem Umdrehen.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Quadratisches Papier bereitlegen"
+    },
+    {
+     "t": 3,
+     "label": "Papier diagonal falten, wieder öffnen"
+    },
+    {
+     "t": 16,
+     "label": "Andere Diagonale falten, wieder öffnen"
+    },
+    {
+     "t": 28,
+     "label": "Alle vier Ecken zur Mitte falten"
+    },
+    {
+     "t": 45,
+     "label": "Umdrehen, wieder alle Ecken zur Mitte"
+    },
+    {
+     "t": 69,
+     "label": "In der Mitte falten, beide Richtungen"
+    },
+    {
+     "t": 78,
+     "label": "Daumen und Finger unter die Klappen"
+    },
+    {
+     "t": 90,
+     "label": "Öffnen und schliessen – spielen"
+    },
+    {
+     "t": 106,
+     "label": "Fertig – schau dein Himmel und Hölle an"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "zw-abketten",
+   "areaId": "werken",
+   "title": "Maschen abketten",
+   "source": {
+    "type": "youtube",
+    "id": "MJnlv7a9bDk"
+   },
+   "kanal": "Soul Wool",
+   "dauer": "4:25",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Bis 1:48 das einfache Abketten – das reicht für die Unterstufe; danach folgt als Zusatz die elastische Variante mit Umschlag.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Strickstück mit Maschen auf der Nadel"
+    },
+    {
+     "t": 22,
+     "label": "Zwei Maschen rechts stricken"
+    },
+    {
+     "t": 38,
+     "label": "Erste Masche über die zweite heben"
+    },
+    {
+     "t": 52,
+     "label": "Nochmals: eine rechts, erste überheben"
+    },
+    {
+     "t": 68,
+     "label": "Immer so weiter bis die Reihe fertig ist"
+    },
+    {
+     "t": 78,
+     "label": "Faden abschneiden, ein Stück übrig lassen"
+    },
+    {
+     "t": 90,
+     "label": "Faden durch die letzte Masche ziehen"
+    },
+    {
+     "t": 110,
+     "label": "Extra: Masche rechts, Umschlag, Masche rechts"
+    },
+    {
+     "t": 132,
+     "label": "Umschlag und erste Masche überheben"
+    },
+    {
+     "t": 150,
+     "label": "Weiter bis zum Schluss, Faden durchziehen"
+    },
+    {
+     "t": 212,
+     "label": "Fertig – vergleiche die beiden Kanten"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "zw-filzkugel-kinder",
+   "areaId": "werken",
+   "title": "Kinder filzen eine Kugel",
+   "source": {
+    "type": "youtube",
+    "id": "Mg5XYicZQd4"
+   },
+   "kanal": "Kinderoutdoor",
+   "dauer": "1:57",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Filzwolle in zwei Farben, warmes Seifenwasser und Handtuch bereitlegen; der Ton ist bayerisch gefärbt und teils undeutlich, die Bilder zeigen den Ablauf aber klar.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht die Filzkugel aus"
+    },
+    {
+     "t": 24,
+     "label": "Ein kleines Stück Filzwolle abzupfen"
+    },
+    {
+     "t": 33,
+     "label": "Hände nass machen, Wolle einseifen"
+    },
+    {
+     "t": 45,
+     "label": "Wolle zwischen den Händen zur Kugel rollen"
+    },
+    {
+     "t": 60,
+     "label": "Mehr Wolle darumlegen, nass machen, rollen"
+    },
+    {
+     "t": 75,
+     "label": "Zweite Farbe vorsichtig darüberlegen"
+    },
+    {
+     "t": 86,
+     "label": "Weiter rollen, bis die Kugel fest ist"
+    },
+    {
+     "t": 96,
+     "label": "Fertig – schau deine Kugel an"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "zw-filzkugeln",
+   "areaId": "werken",
+   "title": "Filzkugeln in 2 Minuten",
+   "source": {
+    "type": "youtube",
+    "id": "Uv9vb-NGkZ0"
+   },
+   "kanal": "Gerti G. die HäkelFee",
+   "dauer": "2:29",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Filzwolle, heisses Seifenwasser (Olivenölseife), kaltes Wasser und Handtuch bereitlegen; die Filznadel zum Vorformen ist spitz – Kinder formen die Kugel besser nur mit den Händen vor.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Filzwolle und Seifenlauge bereit"
+    },
+    {
+     "t": 8,
+     "label": "Wollstrang in der Mitte verknoten"
+    },
+    {
+     "t": 16,
+     "label": "Wolle locker zur Kugel vorformen"
+    },
+    {
+     "t": 29,
+     "label": "Kugel in die Seifenlauge tauchen"
+    },
+    {
+     "t": 42,
+     "label": "Zwischen den Händen drehen, erst sanft"
+    },
+    {
+     "t": 60,
+     "label": "Fester drücken und schneller drehen"
+    },
+    {
+     "t": 102,
+     "label": "Weiterdrehen, bis die Kugel richtig fest ist"
+    },
+    {
+     "t": 118,
+     "label": "Fertige Kugel in kaltes Wasser tauchen"
+    },
+    {
+     "t": 134,
+     "label": "Fertig – schau deine Kugel an"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "zw-feste-maschen-kurz",
+   "areaId": "werken",
+   "title": "Feste Masche kurz erklärt",
+   "source": {
+    "type": "youtube",
+    "id": "VdgFPuDmgZY"
+   },
+   "kanal": "Caros Fummeley",
+   "dauer": "1:08",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Zeigt nur eine einzelne feste Masche mitten in einer Reihe – Kinder brauchen ein angefangenes Häkelstück, Wendeluftmasche und Reihenanfang werden nicht erklärt.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Häkelstück und Nadel bereit"
+    },
+    {
+     "t": 6,
+     "label": "Nadel in die nächste Masche einstechen"
+    },
+    {
+     "t": 18,
+     "label": "Prüfen: zwei Fäden liegen auf der Nadel"
+    },
+    {
+     "t": 36,
+     "label": "Faden von unten holen, durchziehen"
+    },
+    {
+     "t": 47,
+     "label": "Nochmals Faden holen, durch beide Schlaufen ziehen"
+    },
+    {
+     "t": 58,
+     "label": "Leicht anziehen, Masche fertig"
+    },
+    {
+     "t": 64,
+     "label": "Fertig – häkle so die ganze Reihe"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "zw-schleife",
+   "areaId": "werken",
+   "title": "Schleife binden mit Spruch",
+   "source": {
+    "type": "youtube",
+    "id": "ZVaQWs2DgZg"
+   },
+   "kanal": "GO at home",
+   "dauer": "1:07",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Schuh mit Schnürsenkel oder ein dickes Band am Stuhlbein; die Sprüche (drüber, drunter, durch / die Maus baut ein Haus) laut mitsprechen lassen, das Video ist sehr kurz und darf mehrmals laufen.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Schuh mit Schnürsenkel bereitlegen"
+    },
+    {
+     "t": 21,
+     "label": "Knoten: drüber, drunter und durch, festziehen"
+    },
+    {
+     "t": 36,
+     "label": "Die Maus baut ein Haus, einmal drumherum"
+    },
+    {
+     "t": 43,
+     "label": "Hinten rein und vorne wieder raus"
+    },
+    {
+     "t": 50,
+     "label": "Beide Schlaufen festziehen"
+    },
+    {
+     "t": 56,
+     "label": "Fertig – schau deine Schleife an"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "zw-maschen-aufnehmen",
+   "areaId": "werken",
+   "title": "Maschen aufnehmen mit Daumen",
+   "source": {
+    "type": "youtube",
+    "id": "Zvz4YBSJqOk"
+   },
+   "kanal": "Soul Wool",
+   "dauer": "4:52",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Kreuzanschlag mit Daumen und Zeigefinger; das Fadenende vorher etwa dreimal so lang lassen, wie das Strickstück breit wird, sonst geht der Faden aus.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Wolle und zwei Stricknadeln"
+    },
+    {
+     "t": 28,
+     "label": "Faden abmessen: dreimal so lang wie dein Stück"
+    },
+    {
+     "t": 45,
+     "label": "Schlaufe machen, kurzes Ende durchziehen"
+    },
+    {
+     "t": 62,
+     "label": "Nadel in die Schlaufe, festziehen"
+    },
+    {
+     "t": 78,
+     "label": "Daumen und Zeigefinger rein, Masche nach unten"
+    },
+    {
+     "t": 126,
+     "label": "Nadel von unten in die Daumenschlaufe"
+    },
+    {
+     "t": 136,
+     "label": "Faden vom Zeigefinger holen, durch Daumen ziehen"
+    },
+    {
+     "t": 154,
+     "label": "Nochmals langsam: zuschauen und mitmachen"
+    },
+    {
+     "t": 183,
+     "label": "Weiter: Daumen loslassen, anziehen, umklappen"
+    },
+    {
+     "t": 220,
+     "label": "Immer so weiter bis genug Maschen"
+    },
+    {
+     "t": 265,
+     "label": "Fertig – schau deinen Anschlag an"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "zw-nagelbild",
+   "areaId": "werken",
+   "title": "Nagelbild: Nägel einschlagen",
+   "source": {
+    "type": "youtube",
+    "id": "gpZeBLqJCFw"
+   },
+   "kanal": "Grundschule Ludwigsfelde",
+   "dauer": "3:41",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Teil 1 endet nach dem Nageln (Faden spannen folgt in Teil 2); Holzbrett, Nägel, Hammer, Zange zum Halten der Nägel, Papier und Klebeband bereitlegen.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Hammer, Zange, Papier, Holz bereitlegen"
+    },
+    {
+     "t": 30,
+     "label": "Papier aufs Holz legen, knicken, zuschneiden"
+    },
+    {
+     "t": 60,
+     "label": "Hasen oder dein Motiv aufzeichnen"
+    },
+    {
+     "t": 82,
+     "label": "Papier mit Klebeband aufs Holz kleben"
+    },
+    {
+     "t": 105,
+     "label": "Nagel mit der Zange festklemmen"
+    },
+    {
+     "t": 148,
+     "label": "Nagel gerade ansetzen und einhämmern"
+    },
+    {
+     "t": 165,
+     "label": "Nächster Nagel, einen Finger Abstand"
+    },
+    {
+     "t": 180,
+     "label": "Rund ums ganze Bild nageln"
+    },
+    {
+     "t": 193,
+     "label": "Alle Nägel nochmals nachklopfen"
+    },
+    {
+     "t": 208,
+     "label": "Fertig – schau dein Nagelbild an"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "zw-schlingstich",
+   "areaId": "werken",
+   "title": "Schlingstich am Filzelefant",
+   "source": {
+    "type": "youtube",
+    "id": "i366CAkgqKU"
+   },
+   "kanal": "Kreativ mit Miss B",
+   "dauer": "2:42",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Zwei Filzteile (im Video ein Elefant), spitze Nadel, Faden mit Knoten; Stolperstein: der allererste Stich ist anders – zuerst zwischen den Teilen hochstechen und unter dem Faden durch, erst danach immer den Faden über die Nadel legen.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Elefant aus Filz, zwei Teile"
+    },
+    {
+     "t": 27,
+     "label": "Faden einfädeln, Knoten ans Ende"
+    },
+    {
+     "t": 35,
+     "label": "Zwischen den Teilen nach oben stechen"
+    },
+    {
+     "t": 46,
+     "label": "Von unten hoch, genau beim ersten Faden raus"
+    },
+    {
+     "t": 65,
+     "label": "Nadel von rechts nach links unter dem Faden"
+    },
+    {
+     "t": 73,
+     "label": "Von unten hoch, Faden über die Nadel"
+    },
+    {
+     "t": 90,
+     "label": "Immer so weiter: hoch und Faden drüber"
+    },
+    {
+     "t": 105,
+     "label": "Abstände gleich gross, Schlinge am Rand"
+    },
+    {
+     "t": 118,
+     "label": "Weiter nähen bis ans Ende der Kante"
+    },
+    {
+     "t": 148,
+     "label": "Fertig – schau dein Werk an"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "zw-pompon",
+   "areaId": "werken",
+   "title": "Pompon mit Kartonringen",
+   "source": {
+    "type": "youtube",
+    "id": "m4yHVY9X93U"
+   },
+   "kanal": "Schule und Familie",
+   "dauer": "2:36",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Karton, Zirkel oder Schale, Schere und ca. 4 m Wolle; das Aufschneiden zwischen den Ringen und der feste Knoten in der Mitte brauchen bei Kleinen Hilfe.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Wolle, Schere, Zirkel, Karton"
+    },
+    {
+     "t": 22,
+     "label": "Karton falten, grossen und kleinen Kreis zeichnen"
+    },
+    {
+     "t": 50,
+     "label": "Ringe ausschneiden, beide Lagen zusammen"
+    },
+    {
+     "t": 69,
+     "label": "Vier Meter Wolle abschneiden, vierfach legen"
+    },
+    {
+     "t": 76,
+     "label": "Fäden festmachen, Ringe ganz umwickeln"
+    },
+    {
+     "t": 99,
+     "label": "Schere zwischen die Ringe, Wolle aufschneiden"
+    },
+    {
+     "t": 111,
+     "label": "Faden zwischen den Ringen fest verknoten"
+    },
+    {
+     "t": 117,
+     "label": "Ringe zerschneiden, abziehen, Pompon rund schneiden"
+    },
+    {
+     "t": 125,
+     "label": "Zuschauen: Tipp für bunte Pompons"
+    },
+    {
+     "t": 144,
+     "label": "Fertig – schau deinen Pompon an"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "zw-feste-maschen",
+   "areaId": "werken",
+   "title": "Feste Maschen häkeln",
+   "source": {
+    "type": "youtube",
+    "id": "sldZhr15_a8"
+   },
+   "kanal": "ars textura",
+   "dauer": "4:49",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Eine fertige Luftmaschenkette muss schon da sein; Stolpersteine sind das Einstechen unter beide Fäden der Vorreihe und die Wendeluftmasche am Reihenende.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Luftmaschenkette und Nadel bereit"
+    },
+    {
+     "t": 22,
+     "label": "In die vorletzte Luftmasche einstechen"
+    },
+    {
+     "t": 45,
+     "label": "Faden umschlagen, einmal durchholen"
+    },
+    {
+     "t": 60,
+     "label": "Faden durch beide Schlaufen ziehen"
+    },
+    {
+     "t": 78,
+     "label": "Nächste Masche: einstechen, holen, durchziehen"
+    },
+    {
+     "t": 120,
+     "label": "Nochmals langsam: feste Masche nachmachen"
+    },
+    {
+     "t": 180,
+     "label": "Am Ende der Reihe: Luftmasche, dann wenden"
+    },
+    {
+     "t": 195,
+     "label": "Neue Reihe: unter beide Fäden einstechen"
+    },
+    {
+     "t": 225,
+     "label": "Immer so weiter, Reihe für Reihe"
+    },
+    {
+     "t": 270,
+     "label": "Fertig – schau dein Werk an"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "zw-fangbecher",
+   "areaId": "basteln",
+   "title": "Fangbecher aus Papier falten",
+   "source": {
+    "type": "youtube",
+    "id": "vVvoskMeeF4"
+   },
+   "kanal": "die Werklehrerin",
+   "dauer": "0:58",
+   "alter": "ab 5",
+   "sprache": "ohne Sprache",
+   "hinweis": "A4-Papier, Schere, Klebestift, ca. 50 cm Schnur, Nadel und Perle; das Video hat keine Sprache, Durchstechen mit der Nadel und die Knoten brauchen bei den Kleinsten Hilfe.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Papier, Leim, Schnur, Perle"
+    },
+    {
+     "t": 4,
+     "label": "Ecke schräg falten, Streifen abschneiden"
+    },
+    {
+     "t": 13,
+     "label": "Eine Ecke zur anderen Seite falten"
+    },
+    {
+     "t": 18,
+     "label": "Andere Ecke darüber falten"
+    },
+    {
+     "t": 23,
+     "label": "Obere Klappe nach unten, festkleben"
+    },
+    {
+     "t": 30,
+     "label": "Schnur mit Nadel durch den Becher ziehen"
+    },
+    {
+     "t": 37,
+     "label": "Schnur am Becher festknoten"
+    },
+    {
+     "t": 44,
+     "label": "Perle auffädeln und festknoten"
+    },
+    {
+     "t": 52,
+     "label": "Fertig – fang die Perle im Becher"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "zw-ueberwendling",
+   "areaId": "werken",
+   "title": "Überwendlingsstich am Filzbär",
+   "source": {
+    "type": "youtube",
+    "id": "vhRSt17DsNY"
+   },
+   "kanal": "Kreativ mit Miss B",
+   "dauer": "2:07",
+   "alter": "ab 7",
+   "sprache": "ohne Sprache",
+   "hinweis": "Zwei gleiche Filzteile (im Video ein Bär), spitze Sticknadel und Sticktwist; das Video ist ohne Sprache, nur Bilder – Stolperstein: der Knoten wird zwischen den Filzteilen versteckt und der Faden läuft bei jedem Stich über die Kante nach hinten.",
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Zwei Filzteile, Nadel und Sticktwist"
+    },
+    {
+     "t": 30,
+     "label": "Faden einfädeln, Knoten ans Ende"
+    },
+    {
+     "t": 38,
+     "label": "Beide Filzteile genau aufeinanderlegen"
+    },
+    {
+     "t": 41,
+     "label": "Nadel zwischen den Teilen nach oben stechen"
+    },
+    {
+     "t": 48,
+     "label": "Faden über die Kante, von hinten durchstechen"
+    },
+    {
+     "t": 55,
+     "label": "Nächster Stich: wieder über die Kante"
+    },
+    {
+     "t": 70,
+     "label": "Immer so weiter rund um den Bären"
+    },
+    {
+     "t": 98,
+     "label": "Zum Schluss Faden zwischen den Teilen verstecken"
+    },
+    {
+     "t": 116,
+     "label": "Fertig – schau dein Werk an"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem Werk.",
+    "deliverable": "foto"
+   }
   }
  ]
 }
