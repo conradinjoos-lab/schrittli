@@ -43,8 +43,10 @@ header h1{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #arbeit{display:grid;grid-template-columns:minmax(300px,38%) minmax(380px,1fr);gap:28px;padding:16px;align-items:start}
 #arbeit>*{min-width:0}
 .sticky{position:sticky;top:calc(var(--top) + 16px)}
-.player{aspect-ratio:16/9;width:100%;background:#000;border-radius:8px;overflow:hidden}
-.player iframe{width:100%;height:100%;display:block}
+.player{aspect-ratio:16/9;width:100%;background:#000;border-radius:8px;overflow:hidden;position:relative}
+/* wie in der App: Iframe höher als sichtbar, damit Titelzeile und «Weitere Videos» ausserhalb liegen; Schild fängt Hover ab */
+.player iframe{position:absolute;left:0;top:-100px;width:100%;height:calc(100% + 200px);border:0;display:block}
+.player .schild{position:absolute;inset:0;cursor:pointer}
 .row{display:flex;gap:4px;align-items:center;flex-wrap:wrap;margin-top:10px}
 #zeit{font:600 20px/1 ui-monospace,monospace;min-width:84px;margin-right:6px}
 #txlive{margin-top:12px;min-height:3em;font-size:14px;color:var(--ink);background:var(--soft);border-radius:8px;padding:8px 12px}
@@ -132,7 +134,7 @@ dialog .row{justify-content:flex-end;margin-top:14px}
 
 <div id="arbeit">
  <div class="sticky">
-  <div class="player"><div id="yt"></div></div>
+  <div class="player"><div id="yt"></div><div class="schild" id="schild" title="Play / Pause"></div></div>
   <div class="row"><span id="zeit">0:00.0</span>
    <button id="pp" class="ic">Play / Pause</button>
    <button id="test" title="Spielt den gewählten Schritt ab und hält, wo das Kind den Stopp sieht (T, Shift+T nur die letzten 3 s)">Schritt testen</button>
@@ -232,7 +234,7 @@ function tick(){if(!ready)return;const t=yt.getCurrentTime()||0;$('#zeit').textC
  const i=D.analyse.transkript.findIndex(([s,e])=>t>=s&&t<e);if(i!==txIdx){txIdx=i;const z=D.analyse.transkript[i];const el=$('#txlive');el.classList.toggle('leer',!z);el.innerHTML=z?`<span class="tt">${fmt(z[0])}–${fmt(z[1])}</span>${esc(z[2])}`:'…'}
  if(testEnde!=null&&yt.getPlayerState()===1&&t>=testEnde){yt.pauseVideo();testEnde=null;msg('Stopp bei '+fmt(t)+' – so sieht es das Kind')}}
 function ladePlayer(){const tag=document.createElement('script');tag.src='https://www.youtube.com/iframe_api';document.head.appendChild(tag);
- window.onYouTubeIframeAPIReady=()=>{yt=new YT.Player('yt',{videoId:ID,playerVars:{controls:1,rel:0,modestbranding:1,playsinline:1},events:{onReady:()=>{ready=true;setInterval(tick,80)},onError:()=>msg('YouTube-Fehler – Video nicht einbettbar?',true)}})}}
+ window.onYouTubeIframeAPIReady=()=>{yt=new YT.Player('yt',{host:'https://www.youtube-nocookie.com',videoId:ID,playerVars:{controls:0,rel:0,iv_load_policy:3,disablekb:1,fs:0,cc_load_policy:0,playsinline:1},events:{onReady:()=>{ready=true;setInterval(tick,80)},onError:()=>msg('YouTube-Fehler – Video nicht einbettbar?',true)}})}}
 
 /* ---------- Prüfhinweise ---------- */
 function satzBei(t){return D.analyse.transkript.find(([s,e])=>t>s+1.5&&t<e-1.0)}
@@ -365,7 +367,7 @@ $('#steps').addEventListener('change',e=>{const t=e.target;if(t.dataset.t!==unde
 $('#steps').addEventListener('input',e=>{if(e.target.dataset.l!==undefined){E.steps[+e.target.dataset.l].label=e.target.value;markDirty()}});
 $('#steps').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.dataset.l!==undefined){e.preventDefault();const i=+e.target.dataset.l;e.target.blur();if(E.steps[i+1]){sel=i+1;render();$(`[data-l="${sel}"]`)?.focus()}}});
 $('#steps').addEventListener('focusin',e=>{const li=e.target.closest('.step');if(li&&+li.dataset.i!==sel){sel=+li.dataset.i;render();const again=$(`[data-${e.target.dataset.l!==undefined?'l':'t'}="${sel}"]`);again?.focus()}});
-$('#pp').onclick=()=>{if(!ready)return;yt.getPlayerState()===1?yt.pauseVideo():yt.playVideo()};
+$('#pp').onclick=$('#schild').onclick=()=>{if(!ready)return;yt.getPlayerState()===1?yt.pauseVideo():yt.playVideo()};
 $('#test').onclick=()=>testSchritt(sel);
 $('#here').onclick=()=>{if(ready&&E.steps.length)setT(sel,yt.getCurrentTime())};
 $('#hereend').onclick=()=>{if(!ready)return;if(!E.steps[sel+1]){msg('Letzter Schritt hat kein Ende – zuerst einen Schritt danach anlegen',true);return}setT(sel+1,yt.getCurrentTime())};
