@@ -90,6 +90,7 @@ Jedes Video bekommt `material: ["id", "id", …]`. Nur diese IDs verwenden (Spal
 | schutzbrille | Schutzbrille |  |
 | reissnadel | Reissnadel | zum Anreissen auf Metall |
 | koerner | Körner | zum Markieren des Bohrlochs |
+| ahle | Ahle | spitzes Werkzeug zum Vorstechen und Markieren |
 | webschiffchen | Webschiffchen | Holzschiffchen mit Zacken |
 | strickgabel | Strickgabel | Holzgabel mit zwei Zinken |
 | pappteller | Pappteller |  |

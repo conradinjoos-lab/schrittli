@@ -1,0 +1,68 @@
+{
+ "anleitungen": [
+  {
+   "id": "raketenstation-1",
+   "title": "Raketenstation 1: Startrampe",
+   "areaId": "holz",
+   "stufen": [2],
+   "niveau": 3,
+   "ordner": "raketenstation",
+   "titelbild": "startrampe.webp",
+   "material": ["holzbrett", "papier", "schere", "leim", "saege", "ahle", "schleifpapier", "stab", "bohrer", "schraubzwinge", "gummiband"],
+   "steps": [
+    {"text": "Hol bei der Lehrperson die Vorlage. Schneide alle Papierformen mit der Schere grob aus.", "bilder": ["ausschneiden.webp"]},
+    {"text": "Klebe die Papierformen mit dem Klebestift auf das Holz.", "bilder": ["aufkleben.webp"],
+     "achtung": ["Trage den Klebstoff nur den Strichen entlang auf.", "Klebe die Formen so auf, dass wenig Holz übrig bleibt."],
+     "zeigen": "Zeig der Lehrperson, wie du die Papierformen aufgeklebt hast."},
+    {"text": "Säge die Holzteile mit der Dekupiersäge aus.", "bilder": ["aussaegen.webp"]},
+    {"text": "Markiere mit der Ahle die Mitte des Bohrlochs.", "bilder": ["ahle-markieren.webp"],
+     "zeigen": "Das Loch (20 mm) bohrst du nur zusammen mit der Lehrperson an der Ständerbohrmaschine."},
+    {"text": "Zieh das Papier ab. Schleife alle Teile mit 100er Schleifpapier.", "bilder": ["schleifen.webp"],
+     "tipp": ["Für eine schönere Oberfläche schleifst du danach mit 150er und 240er Schleifpapier nach."]},
+    {"text": "Schleife die Kanten so, dass man sich keine Holzspiesse holen kann.", "bilder": ["kanten.webp"]},
+    {"text": "Nimm dein Rundholz und säge den Mittelteil heraus.", "bilder": ["rundholz-saegen.webp"]},
+    {"text": "Markiere mit Hilfe des Plans das Bohrloch.", "bilder": ["plan.webp"],
+     "frage": "Findest du selber heraus, wie gross der Bohrer für das Bohrloch sein muss?"},
+    {"text": "Markiere das Bohrloch mit der Ahle.", "bilder": ["rundholz-ahle.webp"]},
+    {"text": "Bohre mit dem 7-mm-Bohrer ein Loch ganz durch.", "bilder": ["rundholz-bohren.webp"]},
+    {"text": "Versenke das Bohrloch mit dem Versenker.", "bilder": ["versenken.webp", "versenkt.webp"],
+     "bildtext": ["", "Vorher und nachher"]},
+    {"text": "Nimm deine Holzkugel und bohre sie mit dem 6-mm-Bohrer auf.", "bilder": ["kugel-bohren.webp"]},
+    {"text": "Klebe einen 6-mm-Holzdübel mit Weissleim in deine Kugel.", "bilder": ["kugel-duebel.webp"]},
+    {"text": "Säge 4 Holzleisten (1 × 1 cm) zu.", "bilder": ["leisten-anzeichnen.webp", "saegehilfe.webp"],
+     "achtung": ["Die Länge zeichnest du an deiner Startrampe an.", "Säge die Leisten lieber 2 mm länger ab.", "Nimm die Sägehilfe, dann wird der Schnitt gerade."]},
+    {"text": "Klebe die Holzleisten mit Weissleim an deine Startrampe. Halte sie mit einer Holzklemme fest.", "bilder": ["leisten-kleben.webp"],
+     "zeigen": "Bevor du klebst, zeigst du es der Lehrperson."},
+    {"text": "So sieht die fertige Verklebung aus. Stell die Teile auf den Tisch: Sie müssen schön gerade stehen.", "bilder": ["leisten-fertig.webp"],
+     "frage": "Mit welchem Werkzeug kannst du kontrollieren, ob die Holzteile im rechten Winkel stehen?",
+     "zeigen": "Stehen die Teile nicht gerade, schleift die Lehrperson sie an der Schleifmaschine nach."},
+    {"text": "Verklebe die restlichen Teile wie auf dem Bild.", "bilder": ["verkleben.webp"],
+     "zeigen": "Gleich nach dem Kleben zeigst du es der Lehrperson."},
+    {"text": "Damit die Gummis nicht wegspicken, machst du mit der Dekupiersäge solche Einschnitte.", "bilder": ["einschnitte.webp"]},
+    {"text": "Knüpfe zwei Gummis zusammen. Du kannst verschiedene Gummis ausprobieren.", "bilder": ["gummi-1.webp", "gummi-2.webp"],
+     "frage": "Mit welchen Gummis fliegt die Rakete am höchsten?"}
+   ],
+   "fertig": "Bravo! Die Startrampe ist fertig. Jetzt kommt die Rakete."
+  },
+  {
+   "id": "raketenstation-2",
+   "title": "Raketenstation 2: Rakete",
+   "areaId": "holz",
+   "stufen": [2],
+   "niveau": 3,
+   "ordner": "raketenstation",
+   "titelbild": "rakete.webp",
+   "material": ["papier", "schere", "stab", "schraubstock", "leim", "klebeband", "farbe", "pinsel"],
+   "steps": [
+    {"text": "Hol bei der Lehrperson die Vorlage für die Papierrakete. Schneide alle Teile mit der Schere aus.", "bilder": ["vorlage.webp"]},
+    {"text": "Spanne ein Rundholz (20 mm) in den Schraubstock. Wickle das Papier darum und klebe es mit dem Klebestift zu.", "bilder": ["wickeln.webp"],
+     "achtung": ["Nicht zu eng wickeln! Die Rakete muss gut über den Holzstab rutschen."],
+     "tipp": ["Die Nähte kannst du mit Klebeband verstärken."]},
+    {"text": "Schneide die Raketenspitze aus. Mach sie so weit, dass sie gut auf die Rakete passt. Klebe die Spitze mit Klebeband an.", "bilder": ["spitze-vorlage.webp", "spitze.webp"]},
+    {"text": "Schneide die Flügel aus und falte sie wie auf dem Bild.", "bilder": ["fluegel-vorlage.webp", "fluegel.webp"]},
+    {"text": "Klebe die Flügel mit dem Klebestift gleichmässig um die Rakete. Jetzt kannst du die Rakete bemalen oder ansprayen.", "bilder": ["rakete.webp"]}
+   ],
+   "fertig": "Bravo! Deine Rakete ist fertig. Ab auf die Startrampe!"
+  }
+ ]
+}

@@ -548,6 +548,51 @@ body:has(.v3){background:#F5F6F8}
 .v3-badge.aufgabe{background:#FBE9C9;color:#9A6A12}
 .v3-badge.offen{background:#F5F6F8;color:#9AA3AE}
 .v3-liste .andere-titel{font-family:'Nunito',system-ui,sans-serif;font-weight:900;font-size:20px;color:#1C2430}
+.v3.an .v3-thema-titel h1{font-size:26px}
+.an-zahl{flex:none}
+.an-balken{display:flex;gap:4px;margin-top:14px}
+.an-balken button{flex:1;height:12px;min-width:0;border:0;border-radius:999px;background:#DDE1E6;padding:0}
+.an-balken button.an{background:#9AA3AE}
+.an-balken button.jetzt{background:#1C2430}
+.an-balken button:disabled{cursor:default}
+.an-schritt,.an-start{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px;margin-top:18px;align-items:start}
+.an-spalte{display:flex;flex-direction:column;gap:14px;min-width:0}
+.an-bilder{display:grid;gap:10px;background:#fff;border-radius:24px;padding:10px;box-shadow:0 2px 10px rgba(28,36,48,.06)}
+.an-bilder.zwei{grid-template-columns:1fr 1fr}
+.an-bilder figure{margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.an-bilder button{border:0;padding:0;background:#F5F6F8;border-radius:16px;overflow:hidden;display:block;width:100%;cursor:zoom-in}
+.v3 .an-bilder img{display:block;width:100%;height:auto;max-height:68vh;object-fit:contain;margin:0 auto;mix-blend-mode:normal}
+.an-bilder figcaption{text-align:center;color:#5B6672;font-weight:800;font-size:14px}
+.an-start .v3-mat{grid-template-columns:repeat(auto-fill,minmax(88px,1fr))}
+.an-held{background:#fff;border-radius:24px;padding:10px;box-shadow:0 2px 10px rgba(28,36,48,.06)}
+.v3 .an-held img{display:block;width:100%;max-height:60vh;object-fit:contain;border-radius:16px;mix-blend-mode:normal}
+.an-text{display:flex;align-items:flex-start;gap:14px;background:#fff;border-radius:20px;padding:16px;box-shadow:0 2px 10px rgba(28,36,48,.06)}
+.an-text p{flex:1;margin:4px 0 0;font-weight:800;font-size:24px;line-height:1.3}
+.an-nr{width:52px;height:52px;border-radius:50%;background:#1C2430;color:#fff;font-weight:900;font-size:24px;display:grid;place-items:center;flex:none}
+.an-text .v3-rund{font-size:20px}
+.an-box{display:flex;gap:12px;border-radius:18px;padding:14px 16px;font-weight:700;font-size:18px;line-height:1.35}
+.an-box p{margin:0}.an-box p+p{margin-top:6px}
+.an-box .sym{font-size:26px;line-height:1;flex:none}
+.an-box>div{flex:1;min-width:0}
+.an-box.achtung{background:#FDE8E4;color:#8A2A1C}
+.an-box.tipp{background:#FFF4D6;color:#6E520A}
+.an-box.frage{background:#E7EEFF;color:#23408E}
+.an-box.zeigen{background:#FFF;color:#1C2430;border:3px solid #E8554E}
+.an-box.zeigen.ok{border-color:#3BB273;background:#E6F4EC;color:#1F5C3D}
+.an-antwort{display:flex;flex-direction:column;gap:4px;margin-top:10px;font-size:14px}
+.an-antwort textarea{font:inherit;font-size:18px;color:#1C2430;border:2px solid #C9D3F5;border-radius:12px;padding:8px 10px;resize:vertical;background:#fff}
+.an-gesehen{margin-top:10px;border:0;border-radius:999px;background:#1C2430;color:#fff!important;font-weight:900;font-size:16px;min-height:48px;padding:0 18px}
+.an-box.zeigen.ok .an-gesehen{background:#3BB273}
+.an-nav{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.an-nav.mitte{justify-content:center}
+.an-weiter{flex:1;min-width:200px;border:0;border-radius:999px;background:#1C2430;color:#fff!important;font-weight:900;font-size:20px;min-height:60px;padding:0 24px}
+.an-weiter:disabled{opacity:.3;cursor:not-allowed}
+.an-nav .v3-pill{min-height:60px}
+.an-hinweis{margin:0;text-align:center;color:#8A2A1C;font-weight:800}
+.an-ende{max-width:640px;margin:40px auto 0;text-align:center;padding:28px}
+.an-ende .em{font-size:64px}
+.an-ende h2{font-size:26px;margin:8px 0 20px}
+@media (max-width:820px){.an-schritt,.an-start{grid-template-columns:1fr;gap:14px}.v3 .an-bilder img{max-height:52vh}.an-text p{font-size:21px}.an-box{font-size:16px}.v3.an .v3-thema-titel h1{font-size:21px}.an-zahl{display:none}}
 @media (max-width:1100px){.v3-themen{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (max-width:820px){.v3-thema{grid-template-columns:1fr}.v3-links{position:static;display:grid;grid-template-columns:160px 1fr;align-items:start}.v3-mat{grid-template-columns:repeat(4,1fr)}}
 @media (max-width:640px){.v3-themen{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.v3-raeume{grid-template-columns:1fr;gap:14px}.v3-raum b{font-size:26px}.v3-h1{font-size:30px}.v3-h1.gross{font-size:34px;margin-top:20px}
