@@ -31,6 +31,15 @@ Kinder, Sterne, Fortschritt und Werke liegen im Browser des Geräts (localStorag
 - Elternbereich → Tab «Katalog»: Vorauswahl aus `katalog.json` (SRF Kids, Die Maus, Schwiizergoofe, Werklehrerin, Stiftung Kinder forschen …), pro Video «Hinzufügen». 57 Einträge, davon Werken (Fingerstricken, Weben, Nähen, Knüpfen, Flechten) und Experimente (kleine Versuche mit Haushaltsmaterial) komplett mit Schritten.
 - Bereiche ab Werk: Basteln, Werken, Zeichnen, Natur, Experimente, Geschichten, Lesen & Zahlen (Lern) sowie Lustiges, Lieder (Spass). Neue Bereiche kommen bei bestehenden Geräten beim nächsten Laden automatisch dazu.
 
+## Schulversion (`schule/`)
+
+- Eigener Ordner `schule/` mit `index.html` und `schule.json`; läuft unter `…/schrittli/schule/`. Gleiche Technik, eigener Speicher (die Familienversion bleibt unberührt).
+- Kein Login, keine PIN, keine Sterne, keine Aufgaben, kein Elternbereich. Gespeichert wird nur die zuletzt gewählte Klasse; Fortschritt gilt nur für die laufende Sitzung (geteilte iPads).
+- Ablauf: Klasse wählen (1.–6.) → Themenbereiche mit Videos für diese Klasse (Textil, Papier & Karton, Holz & Material, Experimente & Technik, Zeichnen, Sachwissen) → Video → Player mit Schritten, Tempo, Kino-Modus.
+- Grossbuchstaben für 1. und 2. Klasse, ab 3. Klasse normale Schrift.
+- «Für Lehrpersonen» (unten): Liste aller Videos mit Klassenzuordnung und QR-Code pro Video (Schul-Link mit Schritten, auch von zuhause nutzbar).
+- Pflege: `schule/schule.json` – pro Video `areaId` (Thema) und `stufen` (Liste 1–6). Klassenzuordnung ist ein Vorschlag von Claude und soll von der Lehrperson geprüft werden.
+
 ## Was die App macht
 
 - **Schritt-Modus:** Video stoppt automatisch am Ende jedes Schritts (kleines Schild «Jetzt du» im Bild, kein Zwischenbildschirm). Tipp aufs Video oder auf ▶ = Weiter, ↺ = Nochmal. Vorlesen nur auf Knopfdruck (Lautsprecher); automatisches Vorlesen ist in den Einstellungen abschaltbar/einschaltbar, die Stimme hängt vom Gerät ab.

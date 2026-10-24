@@ -398,6 +398,25 @@ code{font-size:13px;word-break:break-all;background:var(--surface2);padding:2px 
  .kid.pl:not(.kino) .pl-bank{order:2;margin-top:14px}
  .kid.pl:not(.kino) .pane:nth-child(2){order:3;margin-top:18px;margin-bottom:10px}
 }
+.kid.schrift-normal{text-transform:none;letter-spacing:.01em}
+.klassen{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;margin:30px auto 10px;max-width:760px}
+.klasse-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:118px;border-radius:14px;background:var(--paper);border:3px solid var(--kink);color:var(--kink);box-shadow:4px 6px 0 var(--sh);font:inherit;text-transform:inherit;letter-spacing:inherit}
+.klasse-btn .z{font-size:44px;font-weight:700;line-height:1}.klasse-btn .w{font-size:15px;letter-spacing:.08em;color:var(--wmuted)}
+.klasse-btn:active{transform:translateY(3px);box-shadow:2px 3px 0 var(--sh)}
+.lehrer-zeile{text-align:center;padding:10px 16px 6px;margin-top:auto}
+.kid .lehrer-zeile+.bank{margin-top:0;padding-top:30px}
+.lehrer-link{background:none;border:0;color:var(--wmuted);font:inherit;font-size:13px;letter-spacing:.08em;text-decoration:underline;text-underline-offset:3px;opacity:.8;padding:8px 12px}
+.kid.abend .lehrer-link{color:#C9C2B8}
+.lehrer-info{background:var(--sign);border:2px solid var(--kink);border-radius:8px;padding:10px 14px;margin:6px 0 14px;font-size:15px;line-height:1.35;color:var(--kink);box-shadow:2px 3px 0 var(--sh)}
+.lehrer-liste{background:var(--paper);border:3px solid var(--kink);border-radius:14px;padding:6px 16px 14px;box-shadow:4px 6px 0 var(--sh);color:var(--kink)}
+.lrow{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(43,35,32,.15);font-size:16px}
+.lrow:last-child{border-bottom:0}
+.lrow .stufen{display:inline-flex;gap:3px}.lrow .stufen b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:6px;background:var(--kink);color:#fff;font-size:13px}
+.lrow .btn.sm{flex:none}
+.kid.pl .lehrer-zeile{display:none}
+.kid:not(.pl) .inner.kopf{margin-top:14px}
+.kid .regal-wrap:first-of-type{margin-top:48px}
+@media (min-width:700px){.kid .regal-wrap:first-of-type{margin-top:70px}.klassen{margin-top:120px}}
 </style>
 </head>
 <body>
@@ -406,7 +425,10 @@ code{font-size:13px;word-break:break-all;background:var(--surface2);padding:2px 
 <script>
 'use strict';
 /* ============================== Grundlagen ============================== */
-const KEY='schrittli.v1';
+const SCHULE=!!window.SCHULE;
+const KEY=SCHULE?'schrittli.schule.v1':'schrittli.v1';
+const STUFEN=[1,2,3,4,5,6];
+const THEMEN=[{id:'textil',name:'Textil',emoji:'🧶',color:'#2BB3A3',kind:'lern',ding:'wolle'},{id:'papier',name:'Papier & Karton',emoji:'✂️',color:'#3BB273',kind:'lern',ding:'schere'},{id:'holz',name:'Holz & Material',emoji:'🪵',color:'#C98A4E',kind:'lern',ding:'kiste'},{id:'experimente',name:'Experimente & Technik',emoji:'🧪',color:'#9B5DE5',kind:'lern',ding:'kolben'},{id:'zeichnen',name:'Zeichnen',emoji:'🖍️',color:'#4C6EF5',kind:'lern',ding:'farbkasten'},{id:'wissen',name:'Sachwissen',emoji:'📖',color:'#F2C12E',kind:'lern',ding:'buecher'}];
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
 const uid=()=>Math.random().toString(36).slice(2,10);
@@ -464,6 +486,7 @@ function glasSterne(pid,sm){ const st=starState(pid); const total=S.settings.sta
 
 /* ============================== Zustand ============================== */
 function defaultState(){
+  if(SCHULE) return {v:1,profiles:[{id:'klasse',name:'Klasse',emoji:'🏫',color:'#4C6EF5'}],activeProfile:'klasse',areas:THEMEN.map(a=>Object.assign({},a)),videos:[],progress:{},stars:{},works:[],settings:{starsPerDay:0,earnStar:false,tts:true,autoRead:false,sv:3,spass:false,voice:'',slowRate:0.75,voiceControl:false,passTouches:false,pin:'',abend:'tag',kino:false,klasse:null}};
   return {version:1,profiles:[],activeProfile:null,
     areas:[
       {id:'basteln',name:'Basteln',emoji:'✂️',color:'#3BB273',kind:'lern',ding:'schere'},
@@ -479,21 +502,22 @@ function defaultState(){
     settings:{starsPerDay:3,earnStar:true,tts:true,autoRead:false,sv:3,spass:false,voice:'',slowRate:0.75,voiceControl:false,passTouches:false,pin:'1234',abend:'auto'}};
 }
 let S=load();
-function load(){ try{ const raw=localStorage.getItem(KEY); if(raw){ const s=JSON.parse(raw); const d=defaultState(); const st=Object.assign(d,s,{settings:Object.assign(d.settings,s.settings||{})}); (st.areas||[]).forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; }); st.videos=(st.videos||[]).filter(validVideo); if(!(st.settings.sv>=2)){ st.settings.autoRead=false; st.settings.sv=2; } if(!(st.settings.sv>=3)){ const d3=defaultState().areas; const add=(id,after)=>{ if(st.areas.some(a=>a.id===id)) return; const a=d3.find(x=>x.id===id); const i=st.areas.findIndex(x=>x.id===after); st.areas.splice(i>=0?i+1:st.areas.length,0,a); }; add('werken','basteln'); add('experimente','natur'); st.settings.sv=3; } return st; } }catch(e){} return defaultState(); }
+function load(){ try{ const raw=localStorage.getItem(KEY); if(raw){ const s=JSON.parse(raw); const d=defaultState(); const st=Object.assign(d,s,{settings:Object.assign(d.settings,s.settings||{})}); if(SCHULE){ st.progress={}; st.works=[]; st.profiles=d.profiles; st.activeProfile='klasse'; st.areas=d.areas; st.videos=[]; st.settings.spass=false; st.settings.abend='tag'; return st; } (st.areas||[]).forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; }); st.videos=(st.videos||[]).filter(validVideo); if(!(st.settings.sv>=2)){ st.settings.autoRead=false; st.settings.sv=2; } if(!(st.settings.sv>=3)){ const d3=defaultState().areas; const add=(id,after)=>{ if(st.areas.some(a=>a.id===id)) return; const a=d3.find(x=>x.id===id); const i=st.areas.findIndex(x=>x.id===after); st.areas.splice(i>=0?i+1:st.areas.length,0,a); }; add('werken','basteln'); add('experimente','natur'); st.settings.sv=3; } return st; } }catch(e){} return defaultState(); }
 let saveT=null;
 function save(){ clearTimeout(saveT); saveT=setTimeout(()=>{ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ toast('Speichern nicht möglich (Speicher voll?)'); } },120); }
 
 const profile=()=>S.profiles.find(p=>p.id===S.activeProfile)||S.profiles[0]||null;
 const areaOf=id=>S.areas.find(a=>a.id===id);
 const videoOf=id=>S.videos.find(v=>v.id===id);
-const videosIn=aid=>S.videos.filter(v=>v.areaId===aid);
+const videosIn=aid=>S.videos.filter(v=>v.areaId===aid&&(!SCHULE||!S.settings.klasse||(v.stufen||[]).includes(S.settings.klasse)));
+const klasseName=k=>k?`${k}. Klasse`:'';
 function prog(vid){ const k=(S.activeProfile||'school')+':'+vid; return S.progress[k]||(S.progress[k]={pos:0,step:0,done:false,slow:false}); }
 function starState(pid){ const t=todayStr(); let st=S.stars[pid]; if(!st||st.date!==t){ st=S.stars[pid]={date:t,used:0,bonus:0,unlocked:[]}; } return st; }
 function starsLeft(pid){ const st=starState(pid); return S.settings.starsPerDay+st.bonus-st.used; }
 function earnStar(){ const st=starState(S.activeProfile); if(st.bonus<1){ st.bonus++; return true; } return false; }
 function thumbOf(v){ return v.source.type==='youtube'?`https://i.ytimg.com/vi/${v.source.id}/mqdefault.jpg`:(v.thumb||null); }
 function abend(){ const a=S.settings.abend||'auto'; if(a==='tag') return false; if(a==='abend') return true; const h=new Date().getHours(); return h>=18||h<6; }
-function kidClass(extra=''){ const n=abend(); const tc=$('#themecolor'); if(tc) tc.setAttribute('content',n?'#2E3A4A':'#F1E3CB'); return 'screen kid'+(n?' abend':'')+(extra?' '+extra:''); }
+function kidClass(extra=''){ const n=abend(); const tc=$('#themecolor'); if(tc) tc.setAttribute('content',n?'#2E3A4A':'#F1E3CB'); return 'screen kid'+(n?' abend':'')+(SCHULE&&S.settings.klasse>=3?' schrift-normal':'')+(extra?' '+extra:''); }
 
 /* ---- Blobs (Werke) in IndexedDB, Fallback im Speicher ---- */
 const blobs={db:null,mem:new Map(),urls:new Map(),
@@ -534,7 +558,7 @@ function kidModal(html,actions={}){ return modal(html,actions,'kid'); }
 
 /* ============================== Router ============================== */
 const SCREENS={}; let view={name:'boot',params:{}}; let parentOpen=false;
-function go(name,params={}){ leaveScreen(); if(name!=='parent') parentOpen=false; view={name,params}; render(); window.scrollTo(0,0); }
+function go(name,params={}){ if(SCHULE&&(name==='parent'||name==='gallery'||name==='firstrun'||name==='profiles')) name='home'; leaveScreen(); if(name!=='parent') parentOpen=false; view={name,params}; render(); window.scrollTo(0,0); }
 function leaveScreen(){ if(P){ P._fsLeaving=true; P.destroy(); P=null; } fsExit(); if(ED&&ED.api){ ED.api.destroy(); ED.api=null; } stopListening(); try{ speechSynthesis.cancel(); }catch(e){} }
 function render(){ const app=$('#app'); app.innerHTML=''; app.onclick=null; app.oninput=null; app.onchange=null; (SCREENS[view.name]||SCREENS.home)(app,view.params); }
 function wire(app,actions){ app.onclick=e=>{ const b=e.target.closest('[data-act]'); if(!b||!app.contains(b)) return; const fn=actions[b.dataset.act]; if(fn){ e.preventDefault(); fn(b,e); } }; }
@@ -546,7 +570,7 @@ let contentInfo=null;
 function validVideo(v){ return v&&typeof v.id==='string'&&typeof v.title==='string'&&v.source&&(v.source.type==='youtube'&&/^[A-Za-z0-9_-]{11}$/.test(v.source.id)||v.source.type==='file'&&typeof v.source.url==='string')&&Array.isArray(v.steps||[]); }
 async function loadContentFile(){
   if(!/^https?:/.test(location.protocol)) return;
-  try{ const r=await fetch('inhalte.json',{cache:'no-store'}); if(!r.ok) return; const j=await r.json(); if(!j||!Array.isArray(j.videos)) return;
+  try{ const r=await fetch(SCHULE?'schule.json':'inhalte.json',{cache:'no-store'}); if(!r.ok) return; const j=await r.json(); if(!j||!Array.isArray(j.videos)) return;
     (j.bereiche||[]).forEach(a=>{ const ex=areaOf(a.id); if(ex) Object.assign(ex,a); else S.areas.push(a); });
     j.videos=j.videos.filter(validVideo);
     j.videos.forEach(v=>{ v.quelle='datei'; const ex=videoOf(v.id); if(ex) Object.assign(ex,v); else S.videos.push(v); });
@@ -560,6 +584,7 @@ SCREENS.boot=app=>{ app.innerHTML='<div class="screen"><p class="muted">Lädt…
 async function boot(){
   await blobs.open(); await loadContentFile();
   const school=parseSchool(); if(school){ go('school',{video:school}); return; }
+  if(SCHULE){ go(S.settings.klasse?'home':'klasse'); return; }
   if(!S.profiles.length){ go('firstrun'); return; }
   if(!S.activeProfile||!profile()) S.activeProfile=S.profiles[0].id;
   go(S.profiles.length>1?'profiles':'home');
@@ -590,9 +615,39 @@ SCREENS.profiles=app=>{
   wire(app,{ pick:b=>{ S.activeProfile=b.dataset.id; save(); go('home'); }, parent:()=>go('parent',{tab:'videos'}), who:()=>{} });
 };
 
+/* ============================== Schule ============================== */
+SCREENS.klasse=app=>{ const n=abend();
+  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${fenster(n)}
+    <div class="inner kopf mitfenster"><div class="schild hallo"><h1>Hallo!</h1><div class="sub">In welche Klasse gehst du?</div></div></div>
+    <div class="inner"><div class="klassen">${STUFEN.map(k=>`<button class="klasse-btn" data-act="k" data-k="${k}"><span class="z">${k}.</span><span class="w">Klasse</span></button>`).join('')}</div></div>
+    ${bank()}</div>`;
+  wire(app,{ k:b=>{ S.settings.klasse=+b.dataset.k; save(); go('home'); } });
+};
+function homeSchule(app){ const n=abend(); const k=S.settings.klasse; if(!k){ go('klasse'); return; }
+  const themen=S.areas.filter(a=>videosIn(a.id).length);
+  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${fenster(n)}
+    <div class="inner kopf mitfenster">
+      <div class="schild hallo tipp" data-act="klasse" role="button"><h1>${k}. Klasse</h1><div class="sub">Andere Klasse? Tipp hier</div></div>
+    </div>
+    <div class="inner regal-wrap"><div class="regal">${themen.map(a=>dingHtml(a,'lern')).join('')||'<div class="empty zettel">Für diese Klasse ist noch nichts da</div>'}</div></div>
+    <div class="inner lehrer-zeile"><button class="lehrer-link" data-act="lehrer">Für Lehrpersonen</button></div>
+    ${bank()}
+  </div>`;
+  wire(app,{ area:b=>go('area',{id:b.dataset.id}), klasse:()=>go('klasse'), lehrer:()=>go('lehrer') });
+}
+SCREENS.lehrer=app=>{ const n=abend();
+  const vids=S.videos.slice().sort((a,b)=>(a.areaId+a.title).localeCompare(b.areaId+b.title,'de'));
+  app.innerHTML=`<div class="${kidClass()} schrift-normal">${girlande(n)}${kopf('Für Lehrpersonen',{back:true})}
+    <div class="inner"><div class="lehrer-info">Ohne Anmeldung, nichts wird gespeichert. Pro Video gibt es einen QR-Code: Kinder scannen ihn und landen direkt im Player mit den Schritten – auch von zuhause. Klassenzuordnung und neue Videos: Link an Conradin.</div>
+    <div class="lehrer-liste">${S.areas.map(a=>{ const vs=vids.filter(v=>v.areaId===a.id); if(!vs.length) return ''; return `<h2 style="color:${a.color};margin:14px 0 6px">${a.emoji} ${esc(a.name)}</h2>${vs.map(v=>`<div class="lrow"><span class="grow">${esc(v.title)}</span><span class="stufen">${(v.stufen||[]).map(s=>`<b>${s}</b>`).join('')}</span><span class="muted small">${(v.steps||[]).length?v.steps.length+' Schritte':'ohne Schritte'}</span><button class="btn sm" data-act="qr" data-id="${v.id}">QR-Code</button></div>`).join('')}`; }).join('')}</div></div>
+    ${bank()}</div>`;
+  wire(app,{ back:()=>go('home'), qr:async b=>{ const v=videoOf(b.dataset.id); const link=schoolLink(v); kidModal(`<h2 style="font-size:20px">${esc(v.title)}</h2><div class="qr" id="qr" style="margin:10px auto"></div><code style="font-size:11px;word-break:break-all;display:block;max-width:360px">${esc(link)}</code><div class="row center" style="margin-top:12px"><button class="btn sm" data-act="copylink" data-link="${esc(link)}">Link kopieren</button><button class="kbtn ghost" data-close>Schliessen</button></div>`,{copylink:(b2)=>{ navigator.clipboard&&navigator.clipboard.writeText(b2.dataset.link).then(()=>toast('Kopiert')).catch(()=>toast('Kopieren nicht möglich')); }}); try{ if(!window.QRCode) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'); new QRCode($('#qr'),{text:link,width:240,height:240,correctLevel:QRCode.CorrectLevel.L}); }catch(e){ const q=$('#qr'); if(q) q.textContent='QR-Code konnte nicht geladen werden.'; } } });
+};
+
 /* ============================== Kind: Werkstatt (Start) ============================== */
-function dingHtml(a,kind){ const vids=videosIn(a.id), nvid=vids.length; const pid=S.activeProfile; const done=pid?vids.filter(v=>(S.progress[pid+':'+v.id]||{}).done).length:0; const alle=nvid&&done===nvid; const zaehl=nvid?`<span class="zaehl${alle?' alle':''}" aria-label="${done} von ${nvid} gemacht">${alle?'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="'+ICONS.check+'"/></svg>':''}${done}/${nvid}</span>`:''; return `<button class="ding${nvid?'':' leer'}" data-act="area" data-id="${a.id}">${dingSvg(a.ding,a.emoji)}<span class="tag">${kind==='spass'?`<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color:#F2B705"><path d="${ICONS.star}"/></svg>`:''}${esc(a.name)}${zaehl}</span></button>`; }
+function dingHtml(a,kind){ const vids=videosIn(a.id), nvid=vids.length; const pid=S.activeProfile; const done=pid?vids.filter(v=>(S.progress[pid+':'+v.id]||{}).done).length:0; const alle=!SCHULE&&nvid&&done===nvid; const zaehl=nvid?`<span class="zaehl${alle?' alle':''}" aria-label="${SCHULE?nvid+' Videos':done+' von '+nvid+' gemacht'}">${alle?'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="'+ICONS.check+'"/></svg>':''}${SCHULE?nvid:done+'/'+nvid}</span>`:''; return `<button class="ding${nvid?'':' leer'}" data-act="area" data-id="${a.id}">${dingSvg(a.ding,a.emoji)}<span class="tag">${kind==='spass'?`<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color:#F2B705"><path d="${ICONS.star}"/></svg>`:''}${esc(a.name)}${zaehl}</span></button>`; }
 SCREENS.home=app=>{
+  if(SCHULE){ return homeSchule(app); }
   const p=profile(); if(!p){ go('firstrun'); return; } const n=abend();
   const newFb=S.works.filter(w=>w.profileId===p.id&&w.feedback&&!w.fbSeen).length;
   const spass=S.settings.spass?S.areas.filter(a=>a.kind==='spass'&&videosIn(a.id).length):[], lern=S.areas.filter(a=>a.kind!=='spass'&&videosIn(a.id).length);
@@ -613,7 +668,7 @@ SCREENS.area=(app,{id})=>{
   app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${kopf(a.name,{back:true,right:S.settings.spass?glasSterne(p.id,true):''})}
     <div class="inner">${vids.length?`<div class="pinwand">${vids.map(v=>{ const pr=S.progress[p.id+':'+v.id]; const th=thumbOf(v); const locked=a.kind==='spass'&&!st.unlocked.includes(v.id)&&left<=0;
       return `<button class="vcard${locked?' disabled':''}" data-act="video" data-id="${v.id}"><div class="th">${th?`<img src="${th}" alt="" loading="lazy">`:'🎬'}${pr&&pr.done?`<span class="badge">${ico('check')} fertig</span>`:pr&&(pr.pos>5||pr.step>0)?`<span class="badge prog">angefangen</span>`:''}${locked?`<span class="lock">😴</span>`:''}</div><div class="tt"><span class="grow">${esc(v.title)}</span>${a.kind==='spass'&&!st.unlocked.includes(v.id)?`<span class="stern">${ico('star')}</span>`:''}</div></button>`; }).join('')}</div>`
-      :`<div class="empty" style="margin-top:20px">Hier ist noch nichts drin.<br><span class="small">Im Elternbereich kannst du Videos hinzufügen.</span></div>`}</div>
+      :`<div class="empty" style="margin-top:20px">Hier ist noch nichts drin.${SCHULE?'':'<br><span class="small">Im Elternbereich kannst du Videos hinzufügen.</span>'}</div>`}</div>
     ${bank()}</div>`;
   wire(app,{ back:()=>go('home'), who:()=>{}, video:b=>{ const v=videoOf(b.dataset.id); if(a.kind==='spass') gateSpass(v,()=>go('player',{videoId:v.id})); else go('player',{videoId:v.id}); } });
 };
@@ -756,7 +811,7 @@ function updatePlayerUI(){ if(!P) return;
   $('#controls').innerHTML=n?`<button class="kbtn round" data-act="prevstep" aria-label="Schritt zurück" ${P.idx===0?'disabled':''}>${ico('prev')}</button>${mid}<button class="kbtn round" data-act="replay" aria-label="Schritt nochmal">${ico('replay')}</button>${spd}`
     :`<button class="kbtn round" data-act="back10" aria-label="10 Sekunden zurück">${ico('replay')}</button>${mid}<button class="kbtn round" data-act="fwd10" aria-label="10 Sekunden vor">${ico('next')}</button>${spd}`;
   // Auftrag
-  const tk=$('#task'); const task=v.task||{text:'',deliverable:'keine'};
+  const tk=$('#task'); const task=(SCHULE?null:v.task)||{text:'',deliverable:'keine'};
   if(!task.text||task.deliverable==='keine'){ tk.hidden=true; }
   else { tk.hidden=false; const d=task.deliverable;
     const btns={foto:`<button class="kbtn primary" data-act="foto">${ico('camera')} Foto</button>`,bild:`<button class="kbtn primary" data-act="malen">${ico('brush')} Malen</button>`,ton:`<button class="kbtn primary" data-act="ton">${ico('mic')} Aufnehmen</button>`,fertig:`<button class="kbtn primary" data-act="fertig">${ico('check')} Fertig</button>`};
