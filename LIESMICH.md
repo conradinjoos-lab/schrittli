@@ -21,9 +21,10 @@ Kinder, Sterne, Fortschritt und Werke liegen im Browser des Geräts (localStorag
 
 ## Werkstatt-Look
 
-- Kinderseite als Werkstatt: Lochwand, Regale mit den Bereichen als Gegenstände, Werkbank unten. Alles in Grossbuchstaben.
-- Oberstes Regalbrett = Spass-Bereiche (kosten einen Stern), darunter die Lern-Bereiche.
-- Abendwerkstatt ab 18 Uhr (dunkle Wand, Lampe, Lichterkette); im Elternbereich umstellbar.
+- Kinderseite als Werkstatt: Lochwand, ein Regal mit den Bereichen als Gegenstände, Werkbank unten. Alles in Grossbuchstaben. Bewusst wenig drauf: Es erscheinen nur Bereiche, die Videos haben.
+- Spass-Bereiche (Lustiges, Lieder – kosten einen Stern) sind standardmässig ausgeblendet; Einstellungen → «Spass-Bereiche zeigen» holt sie aufs oberste Regalbrett, zusammen mit dem Sterneglas.
+- Kind wechseln: Tipp aufs Hallo-Schild (nur wenn mehrere Kinder angelegt sind).
+- Abendwerkstatt ab 18 Uhr (dunkle Wand, Lichterkette); im Elternbereich umstellbar.
 - Player: links das Video («Schau zu»), rechts die Schritte als grosse Knöpfe – erledigte grün, der aktuelle gelb, Tipp auf einen Schritt springt dorthin.
 - Regal: jeder Bereich zeigt «gemacht/alle» (z. B. 2/10), grün mit Haken, wenn alles gemacht ist.
 - Elternbereich → Tab «Katalog»: Vorauswahl aus `katalog.json` (SRF Kids, Die Maus, Schwiizergoofe, Werklehrerin, Stiftung Kinder forschen …), pro Video «Hinzufügen». 57 Einträge, davon Werken (Fingerstricken, Weben, Nähen, Knüpfen, Flechten) und Experimente (kleine Versuche mit Haushaltsmaterial) komplett mit Schritten.
