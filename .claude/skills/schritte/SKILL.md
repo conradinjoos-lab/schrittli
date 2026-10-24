@@ -26,7 +26,7 @@ Alles läuft lokal (yt-dlp, ffmpeg, Pillow). Nichts im Repo ausser `werkzeug/ent
    ```bash
    python werkzeug/kontrolle.py
    ```
-   Dann `http://127.0.0.1:8765/` öffnen (Browser-Pane über `preview_start`, sonst dem Nutzer den Link nennen). Pro Video: `http://127.0.0.1:8765/v/<VIDEOID>`.
+   Dann `http://127.0.0.1:8765/` öffnen (Browser-Pane über `preview_start`, sonst dem Nutzer den Link nennen). Pro Video: `http://127.0.0.1:8765/video.html?id=<VIDEOID>`. Danach `python werkzeug/werkstatt.py`, damit die Entwürfe auch online in der Kontrolle (https://conradinjoos-lab.github.io/schrittli/kontrolle/) erscheinen.
 
 4. Conradin prüft, verschiebt Stopps, klickt «Veröffentlichen…». Danach auf Wunsch: `git add schule/schule.json && git commit`, kein Build nötig (nur JSON). Push nur auf Anfrage.
 

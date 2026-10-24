@@ -6,7 +6,8 @@ Dann im Browser:  http://127.0.0.1:8765/
 
 Ohne Browser übernehmen:  python werkzeug/kontrolle.py --uebernehmen <VIDEOID> [<VIDEOID> …]
 
-Seiten: werkzeug/kontrolle-liste.html und werkzeug/kontrolle.html (werden bei jedem Aufruf frisch gelesen). Zeigt pro Entwurf den Player, die Schritte mit Einzelbildern
+Seiten: kontrolle/index.html, kontrolle/video.html und kontrolle/werkstatt.js (werden bei jedem Aufruf frisch gelesen;
+dieselben Seiten laufen online auf GitHub Pages, siehe werkstatt.py). Zeigt pro Entwurf den Player, die Schritte mit Einzelbildern
 rund um jeden Stopp, das Transkript und die erkannten Bildwechsel. Speichern schreibt video.json;
 «Übernehmen» trägt den Eintrag in schule/schule.json ein (ersetzt einen bestehenden mit gleicher id oder gleichem Video).
 """
@@ -20,6 +21,8 @@ WURZEL = Path(__file__).resolve().parent.parent
 CACHE = WURZEL / 'werkzeug' / 'cache'
 ENTWURF = WURZEL / 'werkzeug' / 'entwurf'
 SCHULE = WURZEL / 'schule' / 'schule.json'
+SEITEN = WURZEL / 'kontrolle'
+ID_MUSTER = re.compile(r'[A-Za-z0-9_-]{11}')
 
 
 def themen():
@@ -47,6 +50,10 @@ def schreibe_json(p, daten):
     p.write_text(text.replace('\n', '\r\n') + '\r\n', encoding='utf-8', newline='')
 
 
+def analyse(vid):
+    return lies(CACHE / vid / 'analyse.json') or lies(ENTWURF / vid / 'analyse.json')  # Kopie im Werkstatt-Repo, falls online entstanden
+
+
 def schul_eintrag(vid):
     d = lies(SCHULE, {'videos': []})
     for e in d['videos']:
@@ -66,8 +73,8 @@ def liste():
     out = []
     if not ENTWURF.exists(): return out
     for d in sorted(ENTWURF.iterdir()):
-        if not d.is_dir(): continue
-        a = lies(CACHE / d.name / 'analyse.json', {})
+        if not d.is_dir() or not ID_MUSTER.fullmatch(d.name): continue
+        a = analyse(d.name) or {}
         v = lies(d / 'video.json')
         s = schul_eintrag(d.name)
         steps = (v or {}).get('steps') or []
@@ -79,7 +86,7 @@ def liste():
 
 
 def daten(vid):
-    a = lies(CACHE / vid / 'analyse.json')
+    a = analyse(vid)
     if not a: return None
     v = lies(ENTWURF / vid / 'video.json')
     blaetter = sorted(p.name for p in (ENTWURF / vid).glob('blatt-*.jpg'))
@@ -102,10 +109,6 @@ def uebernehmen(vid, eintrag=None):
     return len(vids)
 
 
-SEITE = WURZEL / 'werkzeug' / 'kontrolle.html'
-LISTE = WURZEL / 'werkzeug' / 'kontrolle-liste.html'
-
-
 class H(BaseHTTPRequestHandler):
     def log_message(self, f, *a): pass
 
@@ -118,11 +121,12 @@ class H(BaseHTTPRequestHandler):
 
     def do_GET(self):
         p = urlparse(self.path).path
-        if p == '/':
-            d = json.dumps({'videos': liste(), 'themen': themen()}, ensure_ascii=False).replace('</', '<\\/')
-            return self.send(200, LISTE.read_text(encoding='utf-8').replace('__DATEN__', d))
-        m = re.fullmatch(r'/v/([A-Za-z0-9_-]{11})', p)
-        if m: return self.send(200, SEITE.read_text(encoding='utf-8').replace('__ID__', m.group(1)))
+        seite = {'/': 'index.html', '/video.html': 'video.html', '/werkstatt.js': 'werkstatt.js'}.get(p)
+        if seite: return self.send(200, (SEITEN / seite).read_bytes(), 'text/javascript; charset=utf-8' if seite.endswith('.js') else 'text/html; charset=utf-8')
+        m = re.fullmatch(r'/v/([A-Za-z0-9_-]{11})', p)  # alte Links
+        if m:
+            self.send_response(302); self.send_header('Location', '/video.html?id=' + m.group(1)); self.end_headers(); return
+        if p == '/api/liste': return self.js(200, {'videos': liste(), 'themen': themen()})
         m = re.fullmatch(r'/api/([A-Za-z0-9_-]{11})', p)
         if m:
             d = daten(m.group(1))

@@ -15,15 +15,24 @@ Läuft nur auf dem Rechner, der Videos erfasst. Die App selbst braucht nichts da
 | 1 Holen | `python werkzeug/holen.py <Link oder ID> …` | `cache/<ID>/` (video.mp4, Einzelbilder 2/s, analyse.json) und `entwurf/<ID>/` (brief.md, Kontaktblätter) |
 | 2 Entwerfen | in Claude Code: `/schritte <Links>` – oder einen Agenten mit `SCHRITTE-LOKAL.md` losschicken | `entwurf/<ID>/video.json` |
 | 2a Regeln prüfen | `python werkzeug/pruefen.py [<ID> …]` | prüft alle Entwürfe (oder nur die genannten) gegen `SCHRITTE-LOKAL.md`: `!` Fehler müssen weg (Exit 1), `?` Hinweise anschauen (z. B. kein Bildwechsel nahe am Stopp, Stopps unter 3 s) |
-| 3 Kontrollieren | `python werkzeug/kontrolle.py` → http://127.0.0.1:8765/ | Stopps auf Zehntelsekunden setzen, Material, Klassen, Hinweis prüfen |
+| 2b Hochladen | `python werkzeug/werkstatt.py` | Entwürfe, Transkripte und Filmstreifen ins private Repo `schrittli-werkstatt` (holt vorher online Gespeichertes) |
+| 3 Kontrollieren | `python werkzeug/kontrolle.py` → http://127.0.0.1:8765/ – oder online https://conradinjoos-lab.github.io/schrittli/kontrolle/ | Stopps auf Zehntelsekunden setzen, Material, Klassen, Hinweis prüfen |
 | 4 Übernehmen | Knopf «Veröffentlichen…» (oder `python werkzeug/kontrolle.py --uebernehmen <ID>`) | Eintrag in `schule/schule.json`, bestehender Eintrag mit gleicher id oder gleichem Video wird ersetzt |
-| 5 Veröffentlichen | `git add schule/schule.json && git commit && git push` | kein Build nötig |
+| 5 Veröffentlichen | lokal: `git add schule/schule.json && git commit && git push` · online: geschieht beim Klick direkt | kein Build nötig |
 
 `/schritte` macht 1–3 in einem Zug.
 
 ## Kontrollseite – Bedienung
 
-Die Seite liegt in `kontrolle.html`, der Server in `kontrolle.py`. Die Liste zeigt pro Video drei Häkchen: Schritte gesetzt, Angaben vollständig, geprüft. Pro Video gibt es zwei Ansichten.
+Die Seiten liegen in `kontrolle/` (index.html, video.html, werkstatt.js), der lokale Server ist `kontrolle.py`.
+
+**Online:** Dieselben Seiten laufen auf GitHub Pages unter https://conradinjoos-lab.github.io/schrittli/kontrolle/. Sie lesen und schreiben über die GitHub-API:
+
+- Entwürfe, Transkripte und Filmstreifen im privaten Repo `schrittli-werkstatt`. `werkzeug/entwurf` ist dessen Klon (`python werkzeug/werkstatt.py --einrichten`, einmalig). `python werkzeug/werkstatt.py` gleicht ab: holt online Gespeichertes, erneuert `liste.json`, `vorschau.jpg`, `meta.json` und die Filmstreifen, lädt hoch.
+- Speichern = ein Commit im Werkstatt-Repo. «Veröffentlichen» = ein Commit auf `schule/schule.json` im App-Repo, nach etwa einer Minute live. Danach lokal `git pull`, bevor du selber committest.
+- Einmal pro Gerät fragt die Seite nach einem GitHub-Schlüssel (Fine-grained token, nur die Repos `schrittli` und `schrittli-werkstatt`, Contents: Read and write). Er bleibt im Browser; «Schlüssel entfernen» unter «Neue Videos holen?».
+
+ Die Liste zeigt pro Video drei Häkchen: Schritte gesetzt, Angaben vollständig, geprüft. Pro Video gibt es zwei Ansichten.
 
 **Arbeitsansicht** (Schritte setzen, möglichst wenig Ablenkung):
 

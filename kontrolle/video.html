@@ -2,7 +2,8 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<title>Kontrolle __ID__</title>
+<meta name="robots" content="noindex">
+<title>Kontrolle</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <style>
 /* Farben und Schriften wie die Lehrpersonen-Ansicht der App (quelle/p1.html), --b/--r/--g bleiben als Kurznamen */
@@ -131,8 +132,8 @@ dialog .row{justify-content:flex-end;margin-top:16px}
 <body>
 <div id="top">
  <header>
-  <a href="/">← Liste</a>
-  <h1 id="h1">__ID__</h1>
+  <a href="./">← Liste</a>
+  <h1 id="h1">Lade …</h1>
   <span id="msg"></span>
   <span id="status">noch nicht gespeichert</span>
   <button class="nurA ic" id="hilfe" title="Hilfe und Tasten (?)">?</button>
@@ -164,7 +165,7 @@ dialog .row{justify-content:flex-end;margin-top:16px}
  <h2>Angaben</h2><div class="meta" id="meta"></div>
  <h2>Fertig?</h2><ul class="check" id="check"></ul>
  <h2>Veröffentlichen</h2>
- <p class="mute" style="margin:0">Der Schul-Link zeigt die Live-App mit genau diesen Schritten und dem Material. Veröffentlichen schreibt den Eintrag in schule.json (danach noch git commit und push).</p>
+ <p class="mute" style="margin:0">Der Schul-Link zeigt die Live-App mit genau diesen Schritten und dem Material. Veröffentlichen schreibt den Eintrag in schule.json<span id="pubhin"></span>.</p>
  <div class="pubrow"><button id="link">Schul-Link öffnen</button><button id="take2" class="p">Veröffentlichen…</button></div>
  <h2>Transkript <span id="txart" style="text-transform:none;letter-spacing:0;font-weight:400"></span></h2>
  <p class="mute" style="margin:0 0 6px">Klick auf die Zeit setzt den Beginn des gewählten Schritts auf den Bildwechsel davor; «+» legt dort einen neuen Schritt an. Blauer Rand = ein Stopp liegt mitten in dieser Zeile.</p>
@@ -191,15 +192,16 @@ dialog .row{justify-content:flex-end;margin-top:16px}
 <div id="toast"><span></span><button id="undo">Rückgängig</button></div>
 <datalist id="vok"></datalist>
 
+<script src="werkstatt.js"></script>
 <script>
-const ID='__ID__';
+const ID=new URLSearchParams(location.search).get('id')||'';
 let D=null,E=null,sel=0,yt=null,ready=false,testEnde=null,hist=[],fut=[],dirty=false,saveTimer=null,snap=true,ansicht='A',txIdx=-1;
 const $=s=>document.querySelector(s);
 const r1=x=>Math.round(x*10)/10;
 const fmt=t=>{t=Math.max(0,+t||0);const m=Math.floor(t/60),s=t-m*60;return m+':'+(s<10?'0':'')+s.toFixed(1)};
 const parseT=s=>{s=String(s).trim().replace(',','.');if(!s)return NaN;const p=s.split(':');return p.length===1?+p[0]:+p[0]*60+ +p[1]};
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const frame=t=>'/f/'+ID+'/'+(Math.round(Math.max(0,t)*D.analyse.fps)+1);
+const frame=t=>W.bild(ID,Math.round(Math.max(0,t)*D.analyse.fps)+1);
 const cuts=()=>D.analyse.bildwechsel.map(c=>c[0]);
 const strong=()=>D.analyse.bildwechsel.filter(c=>c[1]>=0.28).map(c=>c[0]);
 const nearCut=(t,w)=>{let b=null;for(const c of cuts())if(Math.abs(c-t)<=w&&(b===null||Math.abs(c-t)<Math.abs(b-t)))b=c;return b};
@@ -212,7 +214,9 @@ function toast(text,undoFn){const t=$('#toast');t.firstElementChild.textContent=
 
 /* ---------- Laden ---------- */
 async function lade(){
- D=await (await fetch('/api/'+ID)).json();const a=D.analyse;
+ $('#pubhin').textContent=W.LOKAL?' (danach noch git commit und push)':' – nach etwa einer Minute in der Schul-App';
+ try{await W.bereit();D=await W.daten(ID)}catch(x){$('#h1').textContent='Laden ging nicht: '+(x.message||x);return}
+ const a=D.analyse;
  E=D.entwurf||D.schule||{id:'zw-video',areaId:'',stufen:[],title:a.title||'',source:{type:'youtube',id:ID},kanal:a.kanal||'',dauer:fmt(a.dauer).replace(/\.\d$/,''),alter:'ab 6',sprache:'Hochdeutsch',hinweis:'',material:[],steps:[],task:{text:'',deliverable:'keine'}};
  E.steps=(E.steps||[]).map(s=>({t:+s.t,label:String(s.label||'')}));E.material=E.material||[];E.stufen=E.stufen||[];E.task=E.task||{text:'',deliverable:'keine'};
  $('#h1').textContent=E.title||ID;document.title='Kontrolle – '+(E.title||ID);
@@ -229,10 +233,10 @@ function zeige(v){ansicht=v;document.querySelectorAll('.nurA').forEach(e=>e.hidd
 function pushHist(){hist.push(JSON.stringify(E.steps));if(hist.length>100)hist.shift();fut=[]}
 function undo(){if(!hist.length)return;fut.push(JSON.stringify(E.steps));E.steps=JSON.parse(hist.pop());sel=Math.min(sel,E.steps.length-1);markDirty();render();msg('Rückgängig')}
 function redo(){if(!fut.length)return;hist.push(JSON.stringify(E.steps));E.steps=JSON.parse(fut.pop());sel=Math.min(sel,E.steps.length-1);markDirty();render();msg('Wiederholt')}
-function markDirty(){dirty=true;$('#status').textContent='ungespeichert…';clearTimeout(saveTimer);saveTimer=setTimeout(()=>speichern(),1500)}
+function markDirty(){dirty=true;$('#status').textContent='ungespeichert…';clearTimeout(saveTimer);saveTimer=setTimeout(()=>speichern(),W.pause)}
 function nutzlast(){const e=JSON.parse(JSON.stringify(E));e.steps=e.steps.map(s=>({t:r1(s.t),label:s.label.trim()})).sort((a,b)=>a.t-b.t);return e}
-async function post(pfad){const r=await fetch(pfad,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(nutzlast())});const j=await r.json().catch(()=>({}));if(!r.ok)msg(j.fehler||'Fehler beim Speichern',true);return r.ok?j:null}
-async function speichern(){clearTimeout(saveTimer);if(await post('/api/'+ID+'/speichern')){dirty=false;$('#status').textContent='gespeichert '+new Date().toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'})}}
+async function post(fn){try{return await fn(ID,nutzlast())||{}}catch(x){msg(x.message||'Fehler beim Speichern',true);return null}}
+async function speichern(){clearTimeout(saveTimer);$('#status').textContent='speichere…';const stand=JSON.stringify(nutzlast());if(await post(W.speichern)){dirty=JSON.stringify(nutzlast())!==stand;if(dirty)return markDirty();$('#status').textContent='gespeichert '+new Date().toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'})}}
 addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
 
 /* ---------- Zeiten setzen ---------- */
@@ -357,9 +361,9 @@ function oeffnePub(){const fehlt=[];if(!E.title.trim())fehlt.push('Titel');if(!E
   const ma=(alt.material||[]).join(', '),mb=E.material.join(', ');if(ma!==mb)h+=`<p>Material: ${esc(ma||'–')} → <b>${esc(mb||'–')}</b></p>`;
   const sa=(alt.stufen||[]).join(''),sb=E.stufen.join('');if(sa!==sb)h+=`<p>Klassen: ${sa||'–'} → <b>${sb}</b></p>`}
  const offen=checkliste().filter(x=>!x[1]);if(offen.length)h+=`<p style="color:var(--r)">Noch offen: ${offen.map(x=>esc(x[0])).join(' · ')}</p>`;
- h+='<p class="mute">Danach noch: git commit &amp; push.</p>';$('#pubbody').innerHTML=h;$('#pub').showModal()}
+ h+=W.LOKAL?'<p class="mute">Danach noch: git commit &amp; push.</p>':'<p class="mute">Geht direkt auf GitHub – die Schul-App zeigt es nach etwa einer Minute.</p>';$('#pubbody').innerHTML=h;$('#pub').showModal()}
 $('#pubno').onclick=()=>$('#pub').close();
-$('#pubyes').onclick=async()=>{$('#pub').close();const j=await post('/api/'+ID+'/uebernehmen');if(j){dirty=false;D.schule=nutzlast();$('#status').textContent='veröffentlicht';msg('In schule.json – jetzt '+j.anzahl+' Videos. Noch committen und pushen.')}};
+$('#pubyes').onclick=async()=>{$('#pub').close();clearTimeout(saveTimer);$('#status').textContent='veröffentliche…';const j=await post(W.veroeffentlichen);if(j){dirty=false;D.schule=nutzlast();$('#status').textContent='veröffentlicht';msg('In schule.json – jetzt '+j.anzahl+' Videos. '+W.nachPub)}};
 
 /* ---------- Ereignisse ---------- */
 document.addEventListener('click',e=>{const b=e.target.closest('[data-d],[data-play],[data-ins],[data-rm],[data-set],[data-tx],[data-new],.step');if(!b)return;const ds=b.dataset;
