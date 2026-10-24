@@ -1,0 +1,697 @@
+'use strict';
+/* ============================== Grundlagen ============================== */
+const SCHULE=!!window.SCHULE;
+const KEY=SCHULE?'schrittli.schule.v1':'schrittli.v1';
+const STUFEN=[1,2,3,4,5,6];
+const THEMEN=[
+ {id:'naehen',name:'Nähen',emoji:'🪡',color:'#E8554E',kind:'lern',ding:'kiste'},
+ {id:'sticken',name:'Sticken',emoji:'🧵',color:'#E05297',kind:'lern',ding:'kiste'},
+ {id:'haekeln',name:'Häkeln',emoji:'🧶',color:'#9B5DE5',kind:'lern',ding:'kiste'},
+ {id:'stricken',name:'Stricken',emoji:'🧶',color:'#2BB3A3',kind:'lern',ding:'wolle'},
+ {id:'weben',name:'Weben',emoji:'🧺',color:'#C98A4E',kind:'lern',ding:'kiste'},
+ {id:'knuepfen',name:'Flechten & Knüpfen',emoji:'🪢',color:'#F2C12E',kind:'lern',ding:'kiste'},
+ {id:'wickeln',name:'Wickeln',emoji:'🪁',color:'#4C6EF5',kind:'lern',ding:'kiste'},
+ {id:'filzen',name:'Filzen',emoji:'☁️',color:'#8FB8DE',kind:'lern',ding:'kiste'},
+ {id:'falten',name:'Falten',emoji:'📄',color:'#3BB273',kind:'lern',ding:'kiste'},
+ {id:'schneiden',name:'Schneiden & Kleben',emoji:'✂️',color:'#3BB273',kind:'lern',ding:'schere'},
+ {id:'holz',name:'Sägen & Nageln',emoji:'🔨',color:'#8F5A2E',kind:'lern',ding:'kiste'},
+ {id:'formen',name:'Formen',emoji:'🏺',color:'#B8794A',kind:'lern',ding:'kiste'},
+ {id:'drucken',name:'Drucken',emoji:'🖐️',color:'#EF6C2E',kind:'lern',ding:'kiste'},
+ {id:'experimente',name:'Experimentieren',emoji:'🧪',color:'#9B5DE5',kind:'lern',ding:'kolben'}];
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const uid=()=>Math.random().toString(36).slice(2,10);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=t=>{t=Math.max(0,Math.floor(t||0));return Math.floor(t/60)+':'+String(t%60).padStart(2,'0')};
+const parseTime=s=>{s=String(s).trim();if(!s)return NaN;const p=s.split(':').map(Number);if(p.some(isNaN))return NaN;return p.length===1?p[0]:p.length===2?p[0]*60+p[1]:p[0]*3600+p[1]*60+p[2]};
+const todayStr=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const dateDE=ts=>new Date(ts).toLocaleDateString('de-CH',{day:'numeric',month:'short'});
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const ICONS={play:'M8 5v14l11-7z',pause:'M6 5h4v14H6zM14 5h4v14h-4z',replay:'M12 5V2L7 7l5 5V8a5 5 0 1 1-5 5H5a7 7 0 1 0 7-8z',next:'M6 6l8 6-8 6zM16 6h2v12h-2z',prev:'M18 6l-8 6 8 6zM6 6h2v12H6z',back:'M20 11H7.8l5.6-5.6L12 4l-8 8 8 8 1.4-1.4L7.8 13H20z',speaker:'M3 9v6h4l5 5V4L7 9zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z',lock:'M17 8h-1V6a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zm-7-2a2 2 0 0 1 4 0v2h-4z',check:'M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z',camera:'M9 3L7.2 5H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3.2L15 3zm3 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z',mic:'M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-3.1A7 7 0 0 0 19 11z',brush:'M7 14a3 3 0 0 0-3 3c0 1.3-1.1 2-2 2 1 1.3 2.7 2 4 2a4 4 0 0 0 4-4 3 3 0 0 0-3-3zm13.7-9.3l-1.4-1.4a1 1 0 0 0-1.4 0L9 12.2l2.8 2.8 8.9-8.9a1 1 0 0 0 0-1.4z',gallery:'M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM8.5 13.5l2.5 3 3.5-4.5 4.5 6H5z',star:'M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z',x:'M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z',plus:'M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z',trash:'M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6zm3-9h2v8H9zm4 0h2v8h-2zM15.5 4l-1-1h-5l-1 1H5v2h14V4z',undo:'M12.5 8c-2.7 0-5 1-6.9 2.6L2 7v9h9l-3.6-3.6A8 8 0 0 1 12.5 10a8 8 0 0 1 7.6 5.5l2.4-.8A10.5 10.5 0 0 0 12.5 8z',link:'M3.9 12a3.1 3.1 0 0 1 3.1-3.1h4V7H7a5 5 0 0 0 0 10h4v-1.9H7A3.1 3.1 0 0 1 3.9 12zM8 13h8v-2H8zm9-6h-4v1.9h4a3.1 3.1 0 0 1 0 6.2h-4V17h4a5 5 0 0 0 0-10z',up:'M7.4 15.4L12 10.8l4.6 4.6L18 14l-6-6-6 6z',down:'M7.4 8.6L12 13.2l4.6-4.6L18 10l-6 6-6-6z',pencil:'M3 17.3V21h3.7L17.8 9.9l-3.7-3.7zm17.7-10.1a1 1 0 0 0 0-1.4l-2.3-2.3a1 1 0 0 0-1.4 0l-1.8 1.8 3.7 3.7z',expand:'M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z',compress:'M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z'};
+const ico=n=>`<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="${ICONS[n]}"/></svg>`;
+
+const AVATARS=['🦊','🐻','🐰','🐱','🐶','🦄','🐸','🐼','🦁','🐧','🦋','🐢'];
+const AREA_EMOJI=['✂️','🖍️','🎨','🐞','🌳','🔤','🔢','📖','🎵','🎬','🧩','⚽','🧪','🧵','🪵','🧶','🍪','🌍','🎭','🤸','🎹','🐴'];
+const COLORS=['#E8554E','#F28C28','#F2C12E','#3BB273','#2A9DB8','#4C6EF5','#9B5DE5','#E05297'];
+const DELIV={foto:'Foto machen',bild:'Bild malen',ton:'Tonaufnahme',fertig:'Nur Fertig-Knopf',keine:'Keine Aufgabe'};
+
+/* ============================== Dinge (Illustrationen fürs Regal) ============================== */
+const DINGE={
+  schere:'<path d="M30 52h60l-6 54H36z" fill="#3BB273" stroke="#2B2320" stroke-width="4" stroke-linejoin="round"/><circle cx="48" cy="26" r="9" fill="none" stroke="#2B2320" stroke-width="4"/><circle cx="72" cy="26" r="9" fill="none" stroke="#2B2320" stroke-width="4"/><path d="M52 33l20 24M68 33L48 57" stroke="#2B2320" stroke-width="4" stroke-linecap="round"/><rect x="84" y="14" width="22" height="40" rx="4" fill="#fff" stroke="#2B2320" stroke-width="4"/><rect x="90" y="6" width="10" height="10" rx="2" fill="#E8554E" stroke="#2B2320" stroke-width="3"/>',
+  farbkasten:'<rect x="10" y="46" width="100" height="58" rx="6" fill="#4C6EF5" stroke="#2B2320" stroke-width="4"/><rect x="10" y="30" width="100" height="22" rx="6" fill="#fff" stroke="#2B2320" stroke-width="4"/><circle cx="28" cy="74" r="10" fill="#E8554E" stroke="#2B2320" stroke-width="3"/><circle cx="56" cy="74" r="10" fill="#FFE58A" stroke="#2B2320" stroke-width="3"/><circle cx="84" cy="74" r="10" fill="#3BB273" stroke="#2B2320" stroke-width="3"/><path d="M98 8l12 12-30 30-16 4 4-16z" fill="#F2B705" stroke="#2B2320" stroke-width="3" stroke-linejoin="round"/>',
+  kaeferglas:'<path d="M30 30h60v62a10 10 0 0 1-10 10H40a10 10 0 0 1-10-10z" fill="#E8F6FF" stroke="#2B2320" stroke-width="4"/><rect x="26" y="18" width="68" height="14" rx="3" fill="#C98A4E" stroke="#2B2320" stroke-width="4"/><ellipse cx="60" cy="72" rx="16" ry="12" fill="#E8554E" stroke="#2B2320" stroke-width="3"/><path d="M60 60v24" stroke="#2B2320" stroke-width="3"/><circle cx="53" cy="70" r="2.5" fill="#2B2320"/><circle cx="67" cy="74" r="2.5" fill="#2B2320"/><circle cx="60" cy="58" r="5" fill="#2B2320"/><path d="M44 48l6-6M76 48l-6-6" stroke="#2B2320" stroke-width="3" stroke-linecap="round"/>',
+  buecher:'<rect x="18" y="26" width="22" height="78" rx="3" fill="#B388FF" stroke="#2B2320" stroke-width="4"/><rect x="42" y="14" width="22" height="90" rx="3" fill="#FF8A5B" stroke="#2B2320" stroke-width="4"/><rect x="66" y="36" width="22" height="68" rx="3" fill="#3FD3E6" stroke="#2B2320" stroke-width="4"/><path d="M88 40l18-6 8 64-18 6z" fill="#FFE58A" stroke="#2B2320" stroke-width="4" stroke-linejoin="round"/><path d="M29 40v50M53 28v62M77 50v40" stroke="#2B2320" stroke-width="3" stroke-dasharray="4 6"/>',
+  wuerfel:'<rect x="10" y="56" width="48" height="48" rx="6" fill="#FFE58A" stroke="#2B2320" stroke-width="4"/><rect x="62" y="56" width="48" height="48" rx="6" fill="#3BB273" stroke="#2B2320" stroke-width="4"/><rect x="36" y="8" width="48" height="48" rx="6" fill="#4C6EF5" stroke="#2B2320" stroke-width="4"/><text x="34" y="90" font-family="Fredoka,sans-serif" font-weight="700" font-size="30" fill="#2B2320" text-anchor="middle">1</text><text x="86" y="90" font-family="Fredoka,sans-serif" font-weight="700" font-size="30" fill="#fff" text-anchor="middle">2</text><text x="60" y="42" font-family="Fredoka,sans-serif" font-weight="700" font-size="30" fill="#fff" text-anchor="middle">A</text>',
+  popcorn:'<path d="M24 40h72l-8 64H32z" fill="#fff" stroke="#2B2320" stroke-width="4" stroke-linejoin="round"/><path d="M40 40l4 64M56 40l2 64M72 40l-2 64M88 40l-4 64" stroke="#E8554E" stroke-width="8"/><circle cx="40" cy="30" r="12" fill="#FFE58A" stroke="#2B2320" stroke-width="3"/><circle cx="62" cy="22" r="13" fill="#FFF1C9" stroke="#2B2320" stroke-width="3"/><circle cx="84" cy="30" r="11" fill="#FFE58A" stroke="#2B2320" stroke-width="3"/><circle cx="54" cy="38" r="9" fill="#FFF1C9" stroke="#2B2320" stroke-width="3"/>',
+  radio:'<rect x="12" y="40" width="96" height="64" rx="10" fill="#E05297" stroke="#2B2320" stroke-width="4"/><circle cx="40" cy="72" r="18" fill="#fff" stroke="#2B2320" stroke-width="4"/><circle cx="40" cy="72" r="6" fill="#2B2320"/><rect x="68" y="56" width="30" height="8" rx="4" fill="#fff" stroke="#2B2320" stroke-width="3"/><rect x="68" y="72" width="30" height="8" rx="4" fill="#fff" stroke="#2B2320" stroke-width="3"/><path d="M86 40L104 8" stroke="#2B2320" stroke-width="4" stroke-linecap="round"/><circle cx="104" cy="8" r="4" fill="#2B2320"/>',
+  wolle:'<path d="M28 96L96 30M92 96L24 30" stroke="#2B2320" stroke-width="5" stroke-linecap="round"/><circle cx="98" cy="28" r="5" fill="#C98A4E" stroke="#2B2320" stroke-width="3"/><circle cx="22" cy="28" r="5" fill="#C98A4E" stroke="#2B2320" stroke-width="3"/><circle cx="60" cy="72" r="30" fill="#2BB3A3" stroke="#2B2320" stroke-width="4"/><path d="M34 62c14 6 38 6 52 0M32 80c16 6 40 6 56 0M50 44c-8 14-8 40 0 56M70 44c8 14 8 40 0 56" fill="none" stroke="#2B2320" stroke-width="3" stroke-linecap="round" opacity=".75"/><path d="M88 84c10 4 16 10 14 20" fill="none" stroke="#2B2320" stroke-width="8" stroke-linecap="round"/><path d="M88 84c10 4 16 10 14 20" fill="none" stroke="#2BB3A3" stroke-width="4" stroke-linecap="round"/>',
+  kolben:'<path d="M48 16h24v28l22 50a6 6 0 0 1-6 8H32a6 6 0 0 1-6-8l22-50z" fill="#E8F6FF" stroke="#2B2320" stroke-width="4" stroke-linejoin="round"/><path d="M35 74h50l9 20a4 4 0 0 1-4 4H30a4 4 0 0 1-4-4z" fill="#9B5DE5"/><path d="M48 16h24v28l22 50a6 6 0 0 1-6 8H32a6 6 0 0 1-6-8l22-50z" fill="none" stroke="#2B2320" stroke-width="4" stroke-linejoin="round"/><rect x="44" y="10" width="32" height="8" rx="3" fill="#C98A4E" stroke="#2B2320" stroke-width="3"/><circle cx="56" cy="85" r="4" fill="#fff" opacity=".8"/><circle cx="70" cy="91" r="3" fill="#fff" opacity=".8"/><circle cx="88" cy="22" r="5" fill="#E8F6FF" stroke="#2B2320" stroke-width="3"/><circle cx="99" cy="10" r="3.5" fill="#E8F6FF" stroke="#2B2320" stroke-width="3"/>',
+  glas:'<rect x="40" y="40" width="40" height="64" rx="6" fill="#E8F6FF" stroke="#2B2320" stroke-width="4"/><path d="M48 56h24M48 72h24M48 88h24" stroke="#2B2320" stroke-width="3" stroke-linecap="round"/><path d="M60 40V18" stroke="#2B2320" stroke-width="4"/><circle cx="60" cy="16" r="10" fill="#fff" stroke="#2B2320" stroke-width="4"/>',
+  pflanze:'<path d="M42 70h36l-4 34H46z" fill="#E8554E" stroke="#2B2320" stroke-width="4" stroke-linejoin="round"/><path d="M60 70V40M60 48c-14-3-22-14-20-30 14 3 21 14 20 30zM60 54c14-3 22-14 20-30-14 3-21 14-20 30z" fill="#3BB273" stroke="#2B2320" stroke-width="4" stroke-linejoin="round"/>',
+  kiste:emoji=>`<path d="M14 40h92v62H14z" fill="#D9A066" stroke="#2B2320" stroke-width="4"/><path d="M8 28h104v14H8z" fill="#C98A4E" stroke="#2B2320" stroke-width="4"/><rect x="34" y="56" width="52" height="36" rx="4" fill="#FFF1C9" stroke="#2B2320" stroke-width="3"/><text x="60" y="82" font-size="26" text-anchor="middle">${emoji}</text>`
+};
+const DING_NAMES={schere:'Schere & Leim',wolle:'Wollknäuel',farbkasten:'Farbkasten',kaeferglas:'Käferglas',kolben:'Kolben',buecher:'Bücher',wuerfel:'Würfel',popcorn:'Popcorn',radio:'Radio',kiste:'Kiste mit Symbol'};
+const DING_BY_ID={basteln:'schere',werken:'wolle',zeichnen:'farbkasten',natur:'kaeferglas',experimente:'kolben',geschichten:'buecher',schule:'wuerfel',lustiges:'popcorn',lieder:'radio'};
+
+/* ---- Material (Vokabular, Piktogramme kommen aus MAT_SVG) ---- */
+const MATERIAL={wolle:['Wolle','🧶'],garn:['Garn','🧵'],schnur:['Schnur','🪢'],schere:['Schere','✂️'],karton:['Karton','📦'],papier:['Papier','📄'],nadel:['Nadel','🪡'],stopfnadel:['Stumpfe Nadel','🪡'],filz:['Filz','🟩'],stoff:['Stoff','🧵'],leim:['Leim','🧴'],klebeband:['Klebeband','🩹'],heisskleber:['Heisskleber','🔫'],zirkel:['Zirkel','📐'],lineal:['Lineal','📏'],bleistift:['Bleistift','✏️'],stifte:['Farbstifte','🖍️'],hammer:['Hammer','🔨'],naegel:['Nägel','📌'],holzbrett:['Holzbrett','🪵'],zange:['Zange','🔧'],perle:['Perle','📿'],knopf:['Knopf','🔘'],haekelnadel:['Häkelnadel','🪝'],stricknadeln:['Stricknadeln','🥢'],strickliesel:['Strickliesel','🧶'],filzwolle:['Filzwolle','☁️'],seife:['Seife','🧼'],wasser:['Wasser','💧'],glas:['Glas','🥛'],flasche:['Flasche','🍾'],luftballon:['Luftballon','🎈'],trinkhalm:['Trinkhalm','🥤'],waescheklammer:['Wäscheklammer','🧷'],magnet:['Magnet','🧲'],bueroklammer:['Büroklammern','📎'],taschenlampe:['Taschenlampe','🔦'],ei:['Eier','🥚'],buecher:['Bücher','📚'],hefe:['Hefe','🍞'],zucker:['Zucker','🍬'],loeffel:['Löffel','🥄'],trichter:['Trichter','🔻'],backpulver:['Backpulver','🧂'],essig:['Essig','🫙'],brausetablette:['Brausetablette','💊'],dose:['Dose','🥫'],moos:['Moos','🌿'],steine:['Steine','🪨'],sand:['Sand','⏳'],watte:['Watte','☁️'],zahnstocher:['Zahnstocher','🪥'],frucht:['Apfel oder Orange','🍊'],schuh:['Schuh','👟'],tuerklinke:['Türklinke','🚪'],salz:['Salz','🧂'],pfeffer:['Pfeffer','🌶️'],stab:['Stab','🥢'],schnuersenkel:['Schnürsenkel','👟'],handtuch:['Handtuch','🧻'],holzspatel:['Holzspatel','🪵'],kerze:['Kerze','🕯️'],eierbecher:['Eierbecher','🥚'],zuendholzschachtel:['Zündholzschachtel','📦'],plastikloeffel:['Plastiklöffel','🥄']};
+const MAT_SVG={"karton": "<g transform=\"rotate(-6 60 56)\"><rect x=\"12\" y=\"20\" width=\"96\" height=\"72\" rx=\"3\" fill=\"#C98A4E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M12 72h96\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M17 82c3.5-9 7-9 10.5 0s7 9 10.5 0 7-9 10.5 0 7 9 10.5 0 7-9 10.5 0 7 9 10.5 0 7-9 10.5 0 7 9 10.5 0\" fill=\"none\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></g>", "papier": "<g transform=\"rotate(-6 60 55)\"><path d=\"M22 8h54l24 24v70H22z\" fill=\"#fff\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M76 8v24h24z\" fill=\"#FFF1C9\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></g>", "nadel": "<path d=\"M16 102L86 15A8 8 0 0 1 98 25Z\" fill=\"#C9C2B8\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M84 30C72 12 50 16 56 34C60 46 90 42 98 56C106 70 98 90 80 102\" fill=\"none\" stroke=\"#2B2320\" stroke-width=\"8\" stroke-linecap=\"round\"/><path d=\"M84 30C72 12 50 16 56 34C60 46 90 42 98 56C106 70 98 90 80 102\" fill=\"none\" stroke=\"#E8554E\" stroke-width=\"4\" stroke-linecap=\"round\"/><ellipse cx=\"84\" cy=\"30\" rx=\"6\" ry=\"2.4\" transform=\"rotate(-51 84 30)\" fill=\"#FFF1C9\" stroke=\"#2B2320\" stroke-width=\"2.5\"/>", "filz": "<rect x=\"34\" y=\"12\" width=\"74\" height=\"56\" rx=\"4\" transform=\"rotate(6 71 40)\" fill=\"#E05297\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M14 38q8-8 16 0t16 0t16 0t16 0t16 0v58H14z\" transform=\"rotate(-5 54 67)\" fill=\"#3BB273\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M24 86h60\" transform=\"rotate(-5 54 67)\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\" stroke-dasharray=\"6 8\" stroke-linecap=\"round\"/>", "leim": "<g transform=\"rotate(-8 60 56)\"><path d=\"M30 50q0-16 16-20h28q16 4 16 20v46a6 6 0 0 1-6 6H36a6 6 0 0 1-6-6z\" fill=\"#fff\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><rect x=\"40\" y=\"56\" width=\"40\" height=\"28\" rx=\"4\" fill=\"#4C6EF5\" stroke=\"#2B2320\" stroke-width=\"3\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M46 30v-8l9-14h10l9 14v8z\" fill=\"#E8554E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M64 10c10 2 17 10 17 17a8 8 0 0 1-16 0c0-7-1-11-1-17z\" fill=\"#fff\" stroke=\"#2B2320\" stroke-width=\"3\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></g>", "klebeband": "<path d=\"M46 34c0-12 6-18 16-18h44l-5 5 5 5-5 5 5 5H62c-8 0-12 4-14 12z\" fill=\"#F2C12E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"50\" cy=\"60\" r=\"36\" fill=\"#F2C12E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"50\" cy=\"60\" r=\"20\" fill=\"#C98A4E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"50\" cy=\"60\" r=\"13\" fill=\"#FFF1C9\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "zirkel": "<path d=\"M60 26L28 96\" stroke=\"#2B2320\" stroke-width=\"13\" stroke-linecap=\"round\"/><path d=\"M60 26L92 96\" stroke=\"#2B2320\" stroke-width=\"13\" stroke-linecap=\"round\"/><path d=\"M60 26L33 86\" stroke=\"#C9C2B8\" stroke-width=\"5\" stroke-linecap=\"round\"/><path d=\"M60 26L76 62\" stroke=\"#C9C2B8\" stroke-width=\"5\" stroke-linecap=\"round\"/><path d=\"M76 62L88 88\" stroke=\"#F2C12E\" stroke-width=\"5\" stroke-linecap=\"butt\"/><circle cx=\"60\" cy=\"26\" r=\"9\" fill=\"#4C6EF5\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><rect x=\"55\" y=\"4\" width=\"10\" height=\"14\" rx=\"3\" fill=\"#C9C2B8\" stroke=\"#2B2320\" stroke-width=\"3\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "lineal": "<g transform=\"rotate(-35 60 55)\"><rect x=\"8\" y=\"42\" width=\"104\" height=\"26\" rx=\"3\" fill=\"#C98A4E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M18 44v10M28 44v6M38 44v10M48 44v6M58 44v10M68 44v6M78 44v10M88 44v6M98 44v10\" stroke=\"#2B2320\" stroke-width=\"3\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></g>", "bleistift": "<g transform=\"rotate(-40 60 55)\"><rect x=\"6\" y=\"45\" width=\"16\" height=\"20\" rx=\"3\" fill=\"#E05297\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><rect x=\"20\" y=\"45\" width=\"10\" height=\"20\" fill=\"#C9C2B8\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><rect x=\"28\" y=\"45\" width=\"58\" height=\"20\" fill=\"#F2C12E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M86 45l26 10-26 10z\" fill=\"#C98A4E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M102 51l10 4-10 4z\" fill=\"#2B2320\"/></g>", "stifte": "<g transform=\"rotate(-8 36 100)\"><rect x=\"27\" y=\"10\" width=\"18\" height=\"66\" rx=\"4\" fill=\"#E8554E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M27 76l9 22 9-22z\" fill=\"#fff\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></g><rect x=\"51\" y=\"10\" width=\"18\" height=\"66\" rx=\"4\" fill=\"#4C6EF5\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M51 76l9 22 9-22z\" fill=\"#fff\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><g transform=\"rotate(8 84 100)\"><rect x=\"75\" y=\"10\" width=\"18\" height=\"66\" rx=\"4\" fill=\"#F2C12E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M75 76l9 22 9-22z\" fill=\"#fff\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></g>", "hammer": "<g transform=\"rotate(-14 60 58)\"><rect x=\"53\" y=\"36\" width=\"14\" height=\"66\" rx=\"5\" fill=\"#C98A4E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><rect x=\"53\" y=\"84\" width=\"14\" height=\"18\" rx=\"4\" fill=\"#8F5A2E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M32 14h54a6 6 0 0 1 6 6v14a6 6 0 0 1-6 6H32L18 31v-8z\" fill=\"#C9C2B8\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M80 18v14\" stroke=\"#2B2320\" stroke-width=\"3\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></g>", "naegel": "<g transform=\"rotate(-18 60 112)\"><rect x=\"49\" y=\"8\" width=\"22\" height=\"8\" rx=\"2\" fill=\"#C9C2B8\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M55 16h10v56l-5 20-5-20z\" fill=\"#C9C2B8\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></g><g transform=\"rotate(18 60 112)\"><rect x=\"49\" y=\"8\" width=\"22\" height=\"8\" rx=\"2\" fill=\"#C9C2B8\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M55 16h10v56l-5 20-5-20z\" fill=\"#C9C2B8\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></g><rect x=\"49\" y=\"8\" width=\"22\" height=\"8\" rx=\"2\" fill=\"#C9C2B8\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M55 16h10v56l-5 20-5-20z\" fill=\"#C9C2B8\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "holzbrett": "<g transform=\"rotate(-6 60 55)\"><rect x=\"12\" y=\"34\" width=\"96\" height=\"50\" rx=\"5\" fill=\"#8F5A2E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><rect x=\"12\" y=\"26\" width=\"96\" height=\"48\" rx=\"5\" fill=\"#C98A4E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M22 40c14-5 28 6 44 2s22-6 34-1M22 62c16 6 34-7 52-2s18 6 26 2\" fill=\"none\" stroke=\"#8F5A2E\" stroke-width=\"3\" stroke-linecap=\"round\"/><ellipse cx=\"80\" cy=\"52\" rx=\"7\" ry=\"5\" fill=\"#8F5A2E\" stroke=\"#2B2320\" stroke-width=\"3\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/></g>", "perle": "<circle cx=\"48\" cy=\"60\" r=\"36\" fill=\"#C98A4E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><ellipse cx=\"48\" cy=\"60\" rx=\"10\" ry=\"14\" fill=\"#8F5A2E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><ellipse cx=\"51\" cy=\"60\" rx=\"5\" ry=\"11\" fill=\"#2B2320\"/><circle cx=\"100\" cy=\"30\" r=\"12\" fill=\"#E8554E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"100\" cy=\"30\" r=\"3.5\" fill=\"#2B2320\"/><circle cx=\"100\" cy=\"86\" r=\"12\" fill=\"#4C6EF5\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"100\" cy=\"86\" r=\"3.5\" fill=\"#2B2320\"/>", "schnur": "<path d=\"M18 56a38 38 0 1 0 76 0a38 38 0 1 0-76 0zM40 56a16 16 0 1 0 32 0a16 16 0 1 0-32 0z\" fill-rule=\"evenodd\" fill=\"#C98A4E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M71.7 62.6L83.8 80.4M60.6 72.4L54.3 93.0M46.1 69.8L26.0 77.7M39.0 56.8L20.4 46.1M44.8 43.2L41.5 21.9M59.0 39.3L73.6 23.5M70.9 47.9L92.4 49.5\" fill=\"none\" stroke=\"#2B2320\" stroke-width=\"3\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M84 82c10 6 16 12 22 20\" fill=\"none\" stroke=\"#2B2320\" stroke-width=\"11\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M84 82c10 6 16 12 22 20\" fill=\"none\" stroke=\"#C98A4E\" stroke-width=\"5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M30 84c-6 6-12 10-18 16\" fill=\"none\" stroke=\"#2B2320\" stroke-width=\"11\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M30 84c-6 6-12 10-18 16\" fill=\"none\" stroke=\"#C98A4E\" stroke-width=\"5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>", "haekelnadel": "<rect x=\"36\" y=\"64\" width=\"18\" height=\"40\" rx=\"7\" fill=\"#C98A4E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M45 68V30c0-14-18-14-18 0v4\" fill=\"none\" stroke=\"#2B2320\" stroke-width=\"14\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M45 68V30c0-14-18-14-18 0v4\" fill=\"none\" stroke=\"#C9C2B8\" stroke-width=\"6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M104 98C92 76 80 56 60 48 44 42 32 40 32 32s16-6 20 2c3 6-4 12-12 12\" fill=\"none\" stroke=\"#2B2320\" stroke-width=\"11\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M104 98C92 76 80 56 60 48 44 42 32 40 32 32s16-6 20 2c3 6-4 12-12 12\" fill=\"none\" stroke=\"#E05297\" stroke-width=\"5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>", "stricknadeln": "<path d=\"M16 96L98 14\" fill=\"none\" stroke=\"#2B2320\" stroke-width=\"11\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M16 96L98 14\" fill=\"none\" stroke=\"#2BB3A3\" stroke-width=\"5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M104 96L22 14\" fill=\"none\" stroke=\"#2B2320\" stroke-width=\"11\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M104 96L22 14\" fill=\"none\" stroke=\"#2BB3A3\" stroke-width=\"5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"16\" cy=\"96\" r=\"7\" fill=\"#E8554E\" stroke=\"#2B2320\" stroke-width=\"3\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><circle cx=\"104\" cy=\"96\" r=\"7\" fill=\"#E8554E\" stroke=\"#2B2320\" stroke-width=\"3\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M44 56h32v36a4 4 0 0 1-4 4H48a4 4 0 0 1-4-4z\" fill=\"#9B5DE5\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M48 66l6 6 6-6 6 6 6-6M48 80l6 6 6-6 6 6 6-6\" fill=\"none\" stroke=\"#2B2320\" stroke-width=\"3\" stroke-linejoin=\"round\" stroke-linecap=\"round\" opacity=\".7\"/><path d=\"M48 56a6 6 0 0 1 12 0M60 56a6 6 0 0 1 12 0\" fill=\"none\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>", "luftballon": "<path d=\"M60 8c26 0 36 22 36 42 0 20-18 36-36 36S24 70 24 50c0-20 10-42 36-42z\" fill=\"#E8554E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M53 86h14l3 9H50z\" fill=\"#E8554E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M60 95c-8 4 8 6-2 11\" fill=\"none\" stroke=\"#2B2320\" stroke-width=\"3\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M40 30c3-8 9-13 16-15\" fill=\"none\" stroke=\"#fff\" stroke-width=\"5\" stroke-linecap=\"round\" opacity=\".85\"/>", "glas": "<path d=\"M30 12h60l-6 86a6 6 0 0 1-6 6H42a6 6 0 0 1-6-6z\" fill=\"#E8F6FF\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M33.2 58h53.6L84 98a6 6 0 0 1-6 6H42a6 6 0 0 1-6-6z\" fill=\"#4C6EF5\" stroke=\"#2B2320\" stroke-width=\"3\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M30 12h60l-6 86a6 6 0 0 1-6 6H42a6 6 0 0 1-6-6z\" fill=\"none\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M41 24l-3 46\" fill=\"none\" stroke=\"#fff\" stroke-width=\"5\" stroke-linecap=\"round\" opacity=\".8\"/>", "garn": "<rect x=\"36\" y=\"20\" width=\"48\" height=\"70\" fill=\"#E05297\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M36 32l48 6M36 46l48 6M36 60l48 6M36 74l48 6\" fill=\"none\" stroke=\"#2B2320\" stroke-width=\"3\" stroke-linejoin=\"round\" stroke-linecap=\"round\" opacity=\".5\"/><rect x=\"26\" y=\"8\" width=\"68\" height=\"14\" rx=\"4\" fill=\"#C98A4E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><rect x=\"26\" y=\"88\" width=\"68\" height=\"14\" rx=\"4\" fill=\"#C98A4E\" stroke=\"#2B2320\" stroke-width=\"4\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/><path d=\"M84 66c12-2 16 10 24 30\" fill=\"none\" stroke=\"#2B2320\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M84 66c12-2 16 10 24 30\" fill=\"none\" stroke=\"#E05297\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"};
+function matName(id){ const m=MATERIAL[id]; return m?m[0]:String(id).replace(/[-_]/g,' ').replace(/^./,c=>c.toUpperCase()); }
+const MAT_BASE=SCHULE?'../material/':'material/';
+const MAT_FOTOS=new Map(); // id -> Dateiname, aus material/fotos.json
+function matIcon(id,foto=true){ const svg=MAT_SVG[id]||(id==='wolle'?DINGE.wolle:id==='schere'?DINGE.schere:null); const m=MATERIAL[id]; const pikto=svg?`<svg class="mat-svg" viewBox="0 0 120 110" aria-hidden="true">${svg}</svg>`:`<span class="mat-emoji" aria-hidden="true">${m?m[1]:'📦'}</span>`; if(foto&&MAT_FOTOS.has(id)) return `<span class="mat-ico"><img class="mat-foto" src="${MAT_BASE}${MAT_FOTOS.get(id)}" alt="" loading="lazy" onerror="this.remove()">${pikto}</span>`; return pikto; }
+async function loadMatFotos(){ if(!/^https?:/.test(location.protocol)) return; try{ const r=await fetch(MAT_BASE+'fotos.json',{cache:'no-store'}); if(!r.ok) return; const j=await r.json(); (j.fotos||j||[]).forEach(x=>{ const f=String(x); MAT_FOTOS.set(f.replace(/\.[a-z0-9]+$/i,''),f); }); }catch(e){} }
+function matCard(mat,btns){ return `<div class="matkarte"><h2>Material richten</h2><div class="mats-grid">${mat.map(id=>`<div class="mat"><div class="ico">${matIcon(id)}</div><div class="nm">${esc(matName(id))}</div></div>`).join('')}</div><div class="row center" style="flex-wrap:wrap">${btns}</div></div>`; }
+function dingSvg(key,emoji,cls='obj'){ const inner=(key==='kiste'||!DINGE[key])?DINGE.kiste(emoji||'📦'):DINGE[key]; return `<svg class="${cls}" viewBox="0 0 120 110" aria-hidden="true">${inner}</svg>`; }
+const DEKO={
+  kiste:'<svg viewBox="0 0 120 110" width="110" height="100" aria-hidden="true"><rect x="30" y="50" width="60" height="54" rx="6" fill="#E8554E" stroke="#2B2320" stroke-width="4"/><rect x="24" y="40" width="72" height="14" rx="4" fill="#2B2320"/><path d="M48 40V30h24v10" fill="none" stroke="#2B2320" stroke-width="4"/><rect x="52" y="66" width="16" height="10" rx="2" fill="#FFE58A" stroke="#2B2320" stroke-width="3"/></svg>',
+  becher:'<svg viewBox="0 0 120 110" width="90" height="84" aria-hidden="true"><path d="M36 54h48l-4 50H40z" fill="#4C6EF5" stroke="#2B2320" stroke-width="4" stroke-linejoin="round"/><path d="M46 54V18M58 54V12M70 54V22M82 54V16" stroke="#2B2320" stroke-width="4" stroke-linecap="round"/><path d="M46 18l-4 8h8zM58 12l-4 8h8zM70 22l-4 8h8zM82 16l-4 8h8z" fill="#FFE58A" stroke="#2B2320" stroke-width="2"/></svg>',
+  lineal:'<svg viewBox="0 0 200 60" width="180" height="34" aria-hidden="true"><rect x="2" y="10" width="196" height="40" rx="4" fill="#FFE58A" stroke="#2B2320" stroke-width="3"/><path d="M20 10v14M40 10v8M60 10v14M80 10v8M100 10v14M120 10v8M140 10v14M160 10v8M180 10v14" stroke="#2B2320" stroke-width="2"/></svg>',
+  lampe:'<svg viewBox="0 0 160 170" width="130" height="138" aria-hidden="true"><ellipse cx="110" cy="160" rx="34" ry="8" fill="#14191F"/><path d="M110 158L110 110L60 70" fill="none" stroke="#14191F" stroke-width="8" stroke-linecap="round"/><path d="M40 60L84 60L70 92L26 92Z" fill="#E8554E" stroke="#14191F" stroke-width="4" stroke-linejoin="round"/><ellipse cx="48" cy="94" rx="22" ry="6" fill="#FFF1C9"/></svg>',
+  kegel:'<svg class="kegel" viewBox="0 0 520 220" preserveAspectRatio="none" aria-hidden="true"><path d="M318 70L352 70L520 220L40 220Z" fill="#FFD27A" opacity="0.14"/></svg>'
+};
+function girlande(nacht){
+  if(!nacht) return '';
+  if(false) return `<svg class="girlande" viewBox="0 0 1180 90" preserveAspectRatio="none" aria-hidden="true"><path d="M0 6 Q 590 98, 1180 6" fill="none" stroke="#2B2320" stroke-width="3"/>${[[44,15,'#E8554E'],[104,23,'#FFE58A'],[164,30,'#3BB273'],[224,36,'#4C6EF5'],[284,41,'#E05297'],[344,45,'#FF8A5B'],[404,48,'#3FD3E6'],[464,50,'#E8554E'],[524,51,'#FFE58A'],[584,52,'#3BB273'],[644,51,'#4C6EF5'],[704,50,'#E05297'],[764,47,'#FF8A5B'],[824,44,'#3FD3E6'],[884,39,'#E8554E'],[944,34,'#FFE58A'],[1004,28,'#3BB273'],[1064,20,'#4C6EF5'],[1124,12,'#E05297']].map(([x,y,c])=>`<path d="M${x} ${y}l32 0-16 30z" fill="${c}"/>`).join('')}</svg>`;
+  return `<svg class="girlande" viewBox="0 0 1180 90" preserveAspectRatio="none" aria-hidden="true"><path d="M0 6 Q 590 98, 1180 6" fill="none" stroke="#14191F" stroke-width="3"/>${[[60,15,'#FFD27A'],[150,27,'#FF8A5B'],[240,36,'#FFD27A'],[330,43,'#3FD3E6'],[420,48,'#FFD27A'],[510,51,'#FF6FAE'],[590,52,'#FFD27A'],[670,51,'#3FD3E6'],[760,48,'#FFD27A'],[850,43,'#FF8A5B'],[940,36,'#FFD27A'],[1030,27,'#FF6FAE'],[1120,15,'#FFD27A']].map(([x,y,c])=>`<circle cx="${x}" cy="${y}" r="14" fill="${c}" opacity="0.22"/><circle cx="${x}" cy="${y}" r="6" fill="${c}"/>`).join('')}</svg>`;
+}
+function fenster(nacht){
+  const inner=nacht?`<circle cx="170" cy="30" r="18" fill="#FFF1C9"/><circle cx="178" cy="24" r="15" fill="#141C2C"/><circle cx="40" cy="22" r="2" fill="#fff"/><circle cx="80" cy="40" r="1.6" fill="#fff"/><circle cx="120" cy="18" r="2" fill="#fff"/><circle cx="60" cy="60" r="1.5" fill="#fff"/><circle cx="200" cy="64" r="2" fill="#fff"/><path d="M0 84 Q 60 60, 120 82 T 224 78 V102 H0z" fill="#1F3A2E"/>`
+    :`<circle cx="186" cy="26" r="18" fill="#FFE27A"/><rect x="18" y="28" width="62" height="20" rx="10" fill="#fff"/><rect x="40" y="16" width="44" height="22" rx="11" fill="#fff"/><rect x="108" y="54" width="54" height="16" rx="8" fill="#fff"/><path d="M0 84 Q 60 60, 120 82 T 224 78 V102 H0z" fill="#9CD6A4"/>`;
+  return `<div class="fenster${nacht?' nacht':''}"><svg viewBox="0 0 224 102" aria-hidden="true">${inner}<rect x="108" y="0" width="8" height="102" fill="${nacht?'#6B4121':'#8F5A2E'}"/><rect x="0" y="48" width="224" height="8" fill="${nacht?'#6B4121':'#8F5A2E'}"/></svg></div><div class="fensterbank"></div><svg class="fenster-pflanze" viewBox="0 0 60 70" aria-hidden="true"><path d="M18 46h24l-3 22H21z" fill="#E8554E" stroke="#2B2320" stroke-width="3" stroke-linejoin="round"/><path d="M30 46V24M30 30c-10-2-16-10-14-20 10 2 15 10 14 20zM30 34c10-2 16-10 14-20-10 2-15 10-14 20z" fill="#3BB273" stroke="#2B2320" stroke-width="3" stroke-linejoin="round"/></svg>`;
+}
+function glasSterne(pid,sm){ const st=starState(pid); const total=S.settings.starsPerDay+st.bonus, left=total-st.used; return `<div class="glas-sterne${sm?' sm':''}" aria-label="${left} von ${total} Sternen"><svg viewBox="0 0 40 48" aria-hidden="true"><path d="M8 10h24v30a6 6 0 0 1-6 6H14a6 6 0 0 1-6-6z" fill="#E8F6FF" stroke="#2B2320" stroke-width="3"/><rect x="6" y="4" width="28" height="8" rx="2" fill="#C98A4E" stroke="#2B2320" stroke-width="3"/>${left>0?'<path d="M15 30l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z" fill="#F2B705"/>':''}${left>1?'<path d="M25 22l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z" fill="#F2B705"/>':''}${left>2?'<path d="M20 36l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z" fill="#F2B705"/>':''}</svg><span>${left} ${left===1?'Stern':'Sterne'}</span></div>`; }
+
+/* ============================== Zustand ============================== */
+function defaultState(){
+  if(SCHULE) return {v:1,profiles:[{id:'klasse',name:'Klasse',emoji:'🏫',color:'#4C6EF5'}],activeProfile:'klasse',areas:THEMEN.map(a=>Object.assign({},a)),videos:[],progress:{},stars:{},works:[],settings:{starsPerDay:0,earnStar:false,tts:true,autoRead:false,sv:3,spass:false,voice:'',slowRate:0.75,voiceControl:false,passTouches:false,pin:'',abend:'tag',kino:false,klasse:null}};
+  return {version:1,profiles:[],activeProfile:null,
+    areas:[
+      {id:'basteln',name:'Basteln',emoji:'✂️',color:'#3BB273',kind:'lern',ding:'schere'},
+      {id:'werken',name:'Werken',emoji:'🧶',color:'#2BB3A3',kind:'lern',ding:'wolle'},
+      {id:'zeichnen',name:'Zeichnen',emoji:'🖍️',color:'#4C6EF5',kind:'lern',ding:'farbkasten'},
+      {id:'natur',name:'Natur',emoji:'🐞',color:'#F2C12E',kind:'lern',ding:'kaeferglas'},
+      {id:'experimente',name:'Experimente',emoji:'🧪',color:'#9B5DE5',kind:'lern',ding:'kolben'},
+      {id:'geschichten',name:'Geschichten',emoji:'📖',color:'#9B5DE5',kind:'lern',ding:'buecher'},
+      {id:'schule',name:'Lesen & Zahlen',emoji:'🔤',color:'#2A9DB8',kind:'lern',ding:'wuerfel'},
+      {id:'lustiges',name:'Lustiges',emoji:'🎬',color:'#EF6C2E',kind:'spass',ding:'popcorn'},
+      {id:'lieder',name:'Lieder',emoji:'🎵',color:'#E05297',kind:'spass',ding:'radio'}],
+    videos:[],progress:{},stars:{},works:[],
+    settings:{starsPerDay:3,earnStar:true,tts:true,autoRead:false,sv:3,spass:false,voice:'',slowRate:0.75,voiceControl:false,passTouches:false,pin:'1234',abend:'auto'}};
+}
+let S=load();
+function load(){ try{ const raw=localStorage.getItem(KEY); if(raw){ const s=JSON.parse(raw); const d=defaultState(); const st=Object.assign(d,s,{settings:Object.assign(d.settings,s.settings||{})}); if(SCHULE){ st.progress={}; st.works=[]; st.profiles=d.profiles; st.activeProfile='klasse'; st.areas=d.areas; st.videos=[]; st.settings.spass=false; st.settings.abend='tag'; return st; } (st.areas||[]).forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; }); st.videos=(st.videos||[]).filter(validVideo); if(!(st.settings.sv>=2)){ st.settings.autoRead=false; st.settings.sv=2; } if(!(st.settings.sv>=3)){ const d3=defaultState().areas; const add=(id,after)=>{ if(st.areas.some(a=>a.id===id)) return; const a=d3.find(x=>x.id===id); const i=st.areas.findIndex(x=>x.id===after); st.areas.splice(i>=0?i+1:st.areas.length,0,a); }; add('werken','basteln'); add('experimente','natur'); st.settings.sv=3; } return st; } }catch(e){} return defaultState(); }
+let saveT=null;
+function save(){ clearTimeout(saveT); saveT=setTimeout(()=>{ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ toast('Speichern nicht möglich (Speicher voll?)'); } },120); }
+
+const profile=()=>S.profiles.find(p=>p.id===S.activeProfile)||S.profiles[0]||null;
+const areaOf=id=>S.areas.find(a=>a.id===id);
+const videoOf=id=>S.videos.find(v=>v.id===id);
+const videosIn=aid=>S.videos.filter(v=>v.areaId===aid&&(!SCHULE||!S.settings.klasse||(v.stufen||[]).includes(S.settings.klasse)));
+const klasseName=k=>k?`${k}. Klasse`:'';
+function prog(vid){ const k=(S.activeProfile||'school')+':'+vid; return S.progress[k]||(S.progress[k]={pos:0,step:0,done:false,slow:false}); }
+function starState(pid){ const t=todayStr(); let st=S.stars[pid]; if(!st||st.date!==t){ st=S.stars[pid]={date:t,used:0,bonus:0,unlocked:[]}; } return st; }
+function starsLeft(pid){ const st=starState(pid); return S.settings.starsPerDay+st.bonus-st.used; }
+function earnStar(){ const st=starState(S.activeProfile); if(st.bonus<1){ st.bonus++; return true; } return false; }
+function thumbOf(v){ return v.source.type==='youtube'?`https://i.ytimg.com/vi/${v.source.id}/mqdefault.jpg`:(v.thumb||null); }
+function abend(){ const a=S.settings.abend||'auto'; if(a==='tag') return false; if(a==='abend') return true; const h=new Date().getHours(); return h>=18||h<6; }
+function kidClass(extra=''){ const n=abend(); const tc=$('#themecolor'); if(tc) tc.setAttribute('content',n?'#2E3A4A':'#F1E3CB'); return 'screen kid'+(n?' abend':'')+(SCHULE&&S.settings.klasse>=3?' schrift-normal':'')+(extra?' '+extra:''); }
+
+/* ---- Blobs (Werke) in IndexedDB, Fallback im Speicher ---- */
+const blobs={db:null,mem:new Map(),urls:new Map(),
+  open(){ return new Promise(res=>{ if(!('indexedDB' in window)) return res(); try{ const r=indexedDB.open('schrittli',1); r.onupgradeneeded=()=>r.result.createObjectStore('blobs'); r.onsuccess=()=>{this.db=r.result;res()}; r.onerror=()=>res(); }catch(e){res()} }); },
+  tx(mode){ return this.db.transaction('blobs',mode).objectStore('blobs'); },
+  put(k,b){ if(!this.db){this.mem.set(k,b);return Promise.resolve();} return new Promise((res,rej)=>{ const r=this.tx('readwrite').put(b,k); r.onsuccess=()=>res(); r.onerror=()=>rej(r.error); }); },
+  get(k){ if(!this.db) return Promise.resolve(this.mem.get(k)||null); return new Promise(res=>{ const r=this.tx('readonly').get(k); r.onsuccess=()=>res(r.result||null); r.onerror=()=>res(null); }); },
+  del(k){ this.urls.delete(k); if(!this.db){this.mem.delete(k);return Promise.resolve();} return new Promise(res=>{ const r=this.tx('readwrite').delete(k); r.onsuccess=()=>res(); r.onerror=()=>res(); }); },
+  async url(k){ if(this.urls.has(k)) return this.urls.get(k); const b=await this.get(k); if(!b) return null; const u=URL.createObjectURL(b); this.urls.set(k,u); return u; }
+};
+async function saveWork({type,blob,videoId}){
+  const id=uid(); try{ await blobs.put(id,blob); }catch(e){ toast('Konnte nicht speichern – sag es deinen Eltern',4000); throw e; }
+  S.works.unshift({id,profileId:S.activeProfile,videoId:videoId||null,type,createdAt:Date.now(),feedback:null,fbSeen:true});
+  let star=false;
+  if(videoId&&S.activeProfile){ const p=prog(videoId); if(!p.done){ p.done=true; if(S.settings.earnStar) star=earnStar(); } }
+  save(); return star;
+}
+async function fillThumbs(root){ for(const el of $$('[data-blob]',root)){ const u=await blobs.url(el.dataset.blob); if(u&&el.tagName==='IMG') el.src=u; } }
+
+/* ============================== Sprache ============================== */
+let voices=[]; function loadVoices(){ try{ voices=speechSynthesis.getVoices(); }catch(e){} }
+if('speechSynthesis' in window){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; }
+function pickVoice(){ if(!voices.length) return null; if(S.settings.voice){ const v=voices.find(v=>v.name===S.settings.voice); if(v) return v; } return voices.find(v=>/^de[-_]CH/i.test(v.lang))||voices.find(v=>/^de/i.test(v.lang))||null; }
+function speak(text){ if(!('speechSynthesis' in window)||!S.settings.tts||!text) return; try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.lang='de-DE'; u.rate=0.9; const v=pickVoice(); if(v) u.voice=v; speechSynthesis.speak(u); }catch(e){} }
+let ttsUnlocked=false; function unlockTTS(){ if(ttsUnlocked||!('speechSynthesis' in window)) return; ttsUnlocked=true; try{ const u=new SpeechSynthesisUtterance(' '); u.volume=0; speechSynthesis.speak(u); }catch(e){} }
+let rec=null, listening=false;
+function startListening(){ const SR=window.SpeechRecognition||window.webkitSpeechRecognition; if(!SR||!S.settings.voiceControl||listening) return; try{ rec=new SR(); rec.lang='de-DE'; rec.continuous=true; rec.interimResults=true; rec.onresult=e=>{ for(let i=e.resultIndex;i<e.results.length;i++){ const t=e.results[i][0].transcript.toLowerCase(); if(!P) return; if(/stop/.test(t)&&P.mode==='playing'){ userPause(); } else if(/weiter/.test(t)&&(P.mode==='paused'||P.mode==='stepdone')){ P.mode==='paused'?userPlay():nextStep(); } else if(/noch ?mal/.test(t)&&P.mode==='stepdone'){ replayStep(); } } }; rec.onend=()=>{ listening=false; if(P&&S.settings.voiceControl) setTimeout(startListening,400); }; rec.onerror=()=>{}; rec.start(); listening=true; }catch(e){ listening=false; } }
+function stopListening(){ if(rec){ try{ rec.onend=null; rec.stop(); }catch(e){} rec=null; } listening=false; }
+
+/* ============================== UI-Helfer ============================== */
+function toast(msg,ms=2200){ const t=document.createElement('div'); t.className='toast'; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),ms); }
+function modal(html,actions={},cls=''){ const m=document.createElement('div'); m.className='modal-bg'; m.innerHTML=`<div class="modal ${cls}">${html}</div>`; document.body.appendChild(m); const close=()=>m.remove(); m.addEventListener('click',e=>{ if(e.target===m){close();return;} const b=e.target.closest('[data-act],[data-close]'); if(!b) return; if(b.hasAttribute('data-close')){close();return;} const fn=actions[b.dataset.act]; if(fn) fn(b,close,m); }); return close; }
+function confirmBox(title,text,okLabel,onOk,danger){ modal(`<h2>${esc(title)}</h2><p>${esc(text)}</p><div class="row" style="justify-content:flex-end"><button class="btn ghost" data-close>Abbrechen</button><button class="btn ${danger?'danger':'primary'}" data-act="ok">${esc(okLabel)}</button></div>`,{ok:(b,close)=>{close();onOk();}}); }
+function confetti(){ if(reduced) return; const c=$('#confetti'),ctx=c.getContext('2d'); c.width=innerWidth; c.height=innerHeight; c.style.display='block'; const ps=[]; for(let i=0;i<110;i++) ps.push({x:innerWidth/2,y:innerHeight*.45,vx:(Math.random()-.5)*16,vy:-Math.random()*13-4,r:Math.random()*7+4,c:['#F3B51B','#E8554E','#3BB273','#4C6EF5','#9B5DE5','#F28C28'][i%6],a:Math.random()*6,s:Math.random()*.2+.05}); const t0=performance.now(); (function f(t){ ctx.clearRect(0,0,c.width,c.height); ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.35;p.vx*=.99;p.a+=p.s;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.a);ctx.fillStyle=p.c;ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*.6);ctx.restore();}); if(t-t0<2200) requestAnimationFrame(f); else{ c.style.display='none'; } })(t0); }
+function starsHtml(pid,sm){ const st=starState(pid); const total=S.settings.starsPerDay+st.bonus, left=total-st.used; let h=`<div class="stars${sm?' sm':''}" aria-label="${left} von ${total} Sternen">`; for(let i=0;i<total;i++) h+=`<span class="st${i<left?' on':''}">${ico('star')}</span>`; return h+'</div>'; }
+function loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); }
+function kidModal(html,actions={}){ return modal(html,actions,'kid'); }
+
+/* ============================== Router ============================== */
+const SCREENS={}; let view={name:'boot',params:{}}; let parentOpen=false;
+function go(name,params={}){ if(SCHULE&&(name==='parent'||name==='gallery'||name==='firstrun'||name==='profiles')) name='home'; leaveScreen(); if(name!=='parent') parentOpen=false; view={name,params}; render(); window.scrollTo(0,0); }
+function leaveScreen(){ if(P){ P._fsLeaving=true; P.destroy(); P=null; } fsExit(); if(ED&&ED.api){ ED.api.destroy(); ED.api=null; } stopListening(); try{ speechSynthesis.cancel(); }catch(e){} }
+function render(){ const app=$('#app'); app.innerHTML=''; app.onclick=null; app.oninput=null; app.onchange=null; (SCREENS[view.name]||SCREENS.home)(app,view.params); }
+function wire(app,actions){ app.onclick=e=>{ const b=e.target.closest('[data-act]'); if(!b||!app.contains(b)) return; const fn=actions[b.dataset.act]; if(fn){ e.preventDefault(); fn(b,e); } }; }
+function kopf(title,{back,right='',sub=''}={}){ return `<div class="inner kopf" style="padding-left:max(16px,env(safe-area-inset-left,0px))">${back?`<a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a>`:''}<div class="schild"><h1>${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:''}</div><div class="kopf-rechts">${right}</div></div>`; }
+function bank(opts={}){ return `<div class="bank"><div class="inner deko-reihe"><span class="grow"></span></div><div class="platte"></div><div class="front"></div></div>`; }
+
+/* ============================== Inhaltsdatei & Start ============================== */
+let contentInfo=null;
+function validVideo(v){ return v&&typeof v.id==='string'&&typeof v.title==='string'&&v.source&&(v.source.type==='youtube'&&/^[A-Za-z0-9_-]{11}$/.test(v.source.id)||v.source.type==='file'&&typeof v.source.url==='string')&&Array.isArray(v.steps||[]); }
+async function loadContentFile(){
+  if(!/^https?:/.test(location.protocol)) return;
+  try{ const r=await fetch(SCHULE?'schule.json':'inhalte.json',{cache:'no-store'}); if(!r.ok) return; const j=await r.json(); if(!j||!Array.isArray(j.videos)) return;
+    (j.bereiche||[]).forEach(a=>{ const ex=areaOf(a.id); if(ex) Object.assign(ex,a); else S.areas.push(a); });
+    j.videos=j.videos.filter(validVideo);
+    j.videos.forEach(v=>{ v.quelle='datei'; const ex=videoOf(v.id); if(ex) Object.assign(ex,v); else S.videos.push(v); });
+    (j.geloescht||[]).forEach(id=>{ S.videos=S.videos.filter(v=>v.id!==id); });
+    S.videos.sort((a,b)=>{ const ia=j.videos.findIndex(v=>v.id===a.id), ib=j.videos.findIndex(v=>v.id===b.id); return (ia<0?1e9:ia)-(ib<0?1e9:ib); });
+    S.areas.forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; });
+    contentInfo={n:j.videos.length,stand:j.stand||''}; save();
+  }catch(e){}
+}
+SCREENS.boot=app=>{ app.innerHTML='<div class="screen"><p class="muted">Lädt…</p></div>'; };
+async function boot(){
+  await blobs.open(); await Promise.all([loadContentFile(),loadMatFotos()]);
+  const school=parseSchool(); if(school){ go('school',{video:school}); return; }
+  if(SCHULE){ go(S.settings.klasse?'home':'klasse'); return; }
+  if(!S.profiles.length){ go('firstrun'); return; }
+  if(!S.activeProfile||!profile()) S.activeProfile=S.profiles[0].id;
+  go(S.profiles.length>1?'profiles':'home');
+}
+window.addEventListener('hashchange',()=>{ const s=parseSchool(); if(s) go('school',{video:s}); });
+
+SCREENS.firstrun=app=>{
+  let emoji=AVATARS[0], color=COLORS[1]; const n=abend();
+  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}<div class="inner" style="max-width:600px;margin:30px auto 0;width:100%"><div class="papier">
+    <div class="schild hallo"><h1>Willkommen</h1><div class="sub">bei Schrittli</div></div>
+    <p style="text-transform:none;letter-spacing:0">Videos Schritt für Schritt anschauen, nachmachen, zeigen. Zuerst: Für wen ist die App?</p>
+    <div class="field"><label for="fr-name" style="color:var(--wmuted)">Name des Kindes</label><input class="inp" id="fr-name" placeholder="z. B. Lina" autocomplete="off"></div>
+    <div class="field"><label style="color:var(--wmuted)">Tier</label><div class="emoji-pick" id="fr-em">${AVATARS.map(e=>`<button type="button" data-act="em" data-v="${e}" class="${e===emoji?'on':''}">${e}</button>`).join('')}</div></div>
+    <div class="field"><label style="color:var(--wmuted)">Farbe</label><div class="color-pick" id="fr-col">${COLORS.map(c=>`<button type="button" data-act="col" data-v="${c}" style="background:${c}" class="${c===color?'on':''}" aria-label="Farbe"></button>`).join('')}</div></div>
+    ${/iPad|iPhone/.test(navigator.userAgent)&&!navigator.standalone?`<div class="zettel links" style="align-self:flex-start;text-transform:none;letter-spacing:0;white-space:normal">Tipp fürs iPad: zuerst in Safari «Teilen → Zum Home-Bildschirm», dann dort einrichten – sonst landen die Daten im falschen Speicher.</div>`:''}
+    <button class="kbtn primary" data-act="ok">Los geht's</button>
+  </div></div>${bank()}</div>`;
+  wire(app,{
+    em:b=>{ emoji=b.dataset.v; $$('#fr-em button').forEach(x=>x.classList.toggle('on',x===b)); },
+    col:b=>{ color=b.dataset.v; $$('#fr-col button').forEach(x=>x.classList.toggle('on',x===b)); },
+    ok:()=>{ const name=$('#fr-name').value.trim()||'Ich'; const id=uid(); S.profiles.push({id,name,emoji,color}); S.activeProfile=id; save(); go('home'); }
+  });
+};
+SCREENS.profiles=app=>{
+  const n=abend();
+  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${kopf('Wer bist du?',{right:`<button class="lock-btn" data-act="parent" aria-label="Elternbereich">${ico('lock')}</button>`})}
+    <div class="inner" style="margin-top:20px"><div class="avatars">${S.profiles.map(p=>`<button class="avatar-btn" data-act="pick" data-id="${p.id}" style="--c:${p.color}"><span class="em">${p.emoji}</span>${esc(p.name)}</button>`).join('')}</div></div>${bank()}</div>`;
+  wire(app,{ pick:b=>{ S.activeProfile=b.dataset.id; save(); go('home'); }, parent:()=>go('parent',{tab:'videos'}), who:()=>{} });
+};
+
+/* ============================== Schule ============================== */
+SCREENS.klasse=app=>{ const n=abend();
+  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${fenster(n)}
+    <div class="inner kopf mitfenster"><div class="schild hallo"><h1>Hallo!</h1><div class="sub">In welche Klasse gehst du?</div></div></div>
+    <div class="inner"><div class="klassen">${STUFEN.map(k=>`<button class="klasse-btn" data-act="k" data-k="${k}"><span class="z">${k}.</span><span class="w">Klasse</span></button>`).join('')}</div></div>
+    ${bank()}</div>`;
+  wire(app,{ k:b=>{ S.settings.klasse=+b.dataset.k; save(); go('home'); } });
+};
+function homeSchule(app){ const n=abend(); const k=S.settings.klasse; if(!k){ go('klasse'); return; }
+  const themen=S.areas.filter(a=>videosIn(a.id).length);
+  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${fenster(n)}
+    <div class="inner kopf mitfenster">
+      <div class="schild hallo tipp" data-act="klasse" role="button"><h1>${k}. Klasse</h1><div class="sub">Andere Klasse? Tipp hier</div></div>
+    </div>
+    <div class="inner regal-wrap"><div class="regal">${themen.map(a=>dingHtml(a,'lern')).join('')||'<div class="empty zettel">Für diese Klasse ist noch nichts da</div>'}</div></div>
+    <div class="inner lehrer-zeile"><button class="lehrer-link" data-act="lehrer">Für Lehrpersonen</button></div>
+    ${bank()}
+  </div>`;
+  wire(app,{ area:b=>go('area',{id:b.dataset.id}), klasse:()=>go('klasse'), lehrer:()=>go('lehrer') });
+}
+SCREENS.lehrer=app=>{ const n=abend();
+  const vids=S.videos.slice().sort((a,b)=>(a.areaId+a.title).localeCompare(b.areaId+b.title,'de'));
+  app.innerHTML=`<div class="${kidClass()} schrift-normal">${girlande(n)}${kopf('Für Lehrpersonen',{back:true})}
+    <div class="inner"><div class="lehrer-info">Ohne Anmeldung, nichts wird gespeichert. Pro Video gibt es einen QR-Code: Kinder scannen ihn und landen direkt im Player mit den Schritten – auch von zuhause. Klassenzuordnung und neue Videos: Link an Conradin.</div>
+    <div class="lehrer-liste">${S.areas.map(a=>{ const vs=vids.filter(v=>v.areaId===a.id); if(!vs.length) return ''; return `<h2 style="color:${a.color};margin:14px 0 6px">${a.emoji} ${esc(a.name)}</h2>${vs.map(v=>`<div class="lrow"><span class="grow">${esc(v.title)}</span><span class="stufen">${(v.stufen||[]).map(s=>`<b>${s}</b>`).join('')}</span><span class="muted small">${(v.steps||[]).length?v.steps.length+' Schritte':'ohne Schritte'}${(v.material||[]).length?' · '+v.material.map(matName).join(', '):''}</span><button class="btn sm" data-act="qr" data-id="${v.id}">QR-Code</button></div>`).join('')}`; }).join('')}</div></div>
+    ${bank()}</div>`;
+  wire(app,{ back:()=>go('home'), qr:async b=>{ const v=videoOf(b.dataset.id); const link=schoolLink(v); kidModal(`<h2 style="font-size:20px">${esc(v.title)}</h2><div class="qr" id="qr" style="margin:10px auto"></div><code style="font-size:11px;word-break:break-all;display:block;max-width:360px">${esc(link)}</code><div class="row center" style="margin-top:12px"><button class="btn sm" data-act="copylink" data-link="${esc(link)}">Link kopieren</button><button class="kbtn ghost" data-close>Schliessen</button></div>`,{copylink:(b2)=>{ navigator.clipboard&&navigator.clipboard.writeText(b2.dataset.link).then(()=>toast('Kopiert')).catch(()=>toast('Kopieren nicht möglich')); }}); try{ if(!window.QRCode) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'); new QRCode($('#qr'),{text:link,width:240,height:240,correctLevel:QRCode.CorrectLevel.L}); }catch(e){ const q=$('#qr'); if(q) q.textContent='QR-Code konnte nicht geladen werden.'; } } });
+};
+
+/* ============================== Kind: Werkstatt (Start) ============================== */
+function dingHtml(a,kind){ const vids=videosIn(a.id), nvid=vids.length; const pid=S.activeProfile; const done=pid?vids.filter(v=>(S.progress[pid+':'+v.id]||{}).done).length:0; const alle=!SCHULE&&nvid&&done===nvid; const zaehl=nvid?`<span class="zaehl${alle?' alle':''}" aria-label="${SCHULE?nvid+' Videos':done+' von '+nvid+' gemacht'}">${alle?'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="'+ICONS.check+'"/></svg>':''}${SCHULE?nvid:done+'/'+nvid}</span>`:''; return `<button class="ding${nvid?'':' leer'}" data-act="area" data-id="${a.id}">${dingSvg(a.ding,a.emoji)}<span class="tag">${kind==='spass'?`<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color:#F2B705"><path d="${ICONS.star}"/></svg>`:''}${esc(a.name)}${zaehl}</span></button>`; }
+SCREENS.home=app=>{
+  if(SCHULE){ return homeSchule(app); }
+  const p=profile(); if(!p){ go('firstrun'); return; } const n=abend();
+  const newFb=S.works.filter(w=>w.profileId===p.id&&w.feedback&&!w.fbSeen).length;
+  const spass=S.settings.spass?S.areas.filter(a=>a.kind==='spass'&&videosIn(a.id).length):[], lern=S.areas.filter(a=>a.kind!=='spass'&&videosIn(a.id).length);
+  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${fenster(n)}
+    <div class="inner kopf mitfenster">
+      <div class="schild hallo${S.profiles.length>1?' tipp':''}" data-act="who" role="button"><h1>Hallo ${esc(p.name)}!</h1><div class="sub">${S.profiles.length>1?'Nicht du? Tipp hier':'Was nimmst du heute?'}</div></div>
+      <div class="kopf-rechts">${S.settings.spass?glasSterne(p.id):''}<button class="werke-btn" data-act="gallery"><span class="fotos"><i></i><i></i></span>Meine Werke${newFb?`<span class="neu">${newFb}</span>`:''}</button><button class="lock-btn" data-act="parent" aria-label="Elternbereich">${ico('lock')}</button></div>
+    </div>
+    ${spass.length?`<div class="inner regal-wrap"><span class="zettel links"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color:#F2B705"><path d="${ICONS.star}"/></svg>Kostet einen Stern</span><div class="regal">${spass.map(a=>dingHtml(a,'spass')).join('')}</div></div>`:''}
+    <div class="inner regal-wrap"><div class="regal">${lern.map(a=>dingHtml(a,'lern')).join('')||'<div class="empty zettel">Noch keine Videos – Eltern: Schloss oben rechts</div>'}</div></div>
+    ${bank()}
+  </div>`;
+  wire(app,{ area:b=>go('area',{id:b.dataset.id}), gallery:()=>go('gallery'), parent:()=>go('parent',{tab:'videos'}), who:()=>{ if(S.profiles.length>1) go('profiles'); } });
+};
+
+SCREENS.area=(app,{id})=>{
+  const a=areaOf(id); if(!a){ go('home'); return; } const p=profile(); const vids=videosIn(id); const st=starState(p.id); const left=starsLeft(p.id); const n=abend();
+  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${kopf(a.name,{back:true,right:S.settings.spass?glasSterne(p.id,true):''})}
+    <div class="inner">${vids.length?`<div class="pinwand">${vids.map(v=>{ const pr=S.progress[p.id+':'+v.id]; const th=thumbOf(v); const locked=a.kind==='spass'&&!st.unlocked.includes(v.id)&&left<=0;
+      return `<button class="vcard${locked?' disabled':''}" data-act="video" data-id="${v.id}"><div class="th">${th?`<img src="${th}" alt="" loading="lazy">`:'🎬'}${pr&&pr.done?`<span class="badge">${ico('check')} fertig</span>`:pr&&(pr.pos>5||pr.step>0)?`<span class="badge prog">angefangen</span>`:''}${locked?`<span class="lock">😴</span>`:''}</div><div class="tt"><span class="grow">${esc(v.title)}</span>${a.kind==='spass'&&!st.unlocked.includes(v.id)?`<span class="stern">${ico('star')}</span>`:''}</div></button>`; }).join('')}</div>`
+      :`<div class="empty" style="margin-top:20px">Hier ist noch nichts drin.${SCHULE?'':'<br><span class="small">Im Elternbereich kannst du Videos hinzufügen.</span>'}</div>`}</div>
+    ${bank()}</div>`;
+  wire(app,{ back:()=>go('home'), who:()=>{}, video:b=>{ const v=videoOf(b.dataset.id); if(a.kind==='spass') gateSpass(v,()=>go('player',{videoId:v.id})); else go('player',{videoId:v.id}); } });
+};
+function gateSpass(v,then){
+  const p=profile(); const st=starState(p.id); if(st.unlocked.includes(v.id)) return then();
+  if(starsLeft(p.id)<=0){ kidModal(`<div class="big-emoji">😴</div><h2>Keine Sterne mehr heute</h2><p>Morgen gibt es wieder neue.</p><button class="kbtn" data-close>Okay</button>`); return; }
+  kidModal(`<div class="big-emoji">⭐</div><h2>Einen Stern einlösen?</h2><p>${esc(v.title)}</p><div class="row center"><button class="kbtn ghost" data-close>Nein</button><button class="kbtn spass" data-act="yes">Ja, schauen</button></div>`,{yes:(b,close)=>{ st.used++; st.unlocked.push(v.id); save(); close(); then(); }});
+}
+
+/* ============================== Player-Adapter (YouTube / Datei) ============================== */
+const YT_READY=new Promise(res=>{ window.onYouTubeIframeAPIReady=()=>res(); });
+let ytLoading=false;
+function loadYT(){ if(window.YT&&window.YT.Player) return Promise.resolve(); if(!ytLoading){ ytLoading=true; const s=document.createElement('script'); s.src='https://www.youtube.com/iframe_api'; s.onerror=()=>{ ytLoading=false; }; document.head.appendChild(s); } return YT_READY; }
+function ccOff(p){ try{ p.unloadModule('captions'); p.unloadModule('cc'); }catch(e){} }
+function mapYT(s){ return ({'-1':'idle',0:'ended',1:'playing',2:'paused',3:'buffering',5:'cued'})[s]||'idle'; }
+function makePlayer(host,source,opts={}){
+  const api={ready:false,kind:source.type,dead:false};
+  if(source.type==='youtube'){
+    const div=document.createElement('div'); host.appendChild(div); let p=null;
+    loadYT().then(()=>{ if(api.dead) return;
+      const vars={controls:opts.controls?1:0,rel:0,iv_load_policy:3,disablekb:1,playsinline:1,fs:0,cc_load_policy:0,autoplay:0};
+      if(/^https?:/.test(location.protocol)) vars.origin=location.origin;
+      p=new YT.Player(div,{host:'https://www.youtube-nocookie.com',width:'100%',height:'100%',videoId:source.id,playerVars:vars,
+        events:{onReady:()=>{api.ready=true;ccOff(p);opts.onReady&&opts.onReady();},onStateChange:e=>{ if(e.data===1) ccOff(p); opts.onState&&opts.onState(mapYT(e.data)); },onError:e=>opts.onError&&opts.onError(e.data)}});
+    });
+    const ok=()=>p&&api.ready;
+    api.play=()=>{ if(ok()) p.playVideo(); }; api.pause=()=>{ if(ok()) p.pauseVideo(); }; api.seek=t=>{ if(ok()) p.seekTo(t,true); };
+    api.time=()=>ok()?(p.getCurrentTime()||0):0; api.duration=()=>ok()?(p.getDuration()||0):0; api.rate=r=>{ if(ok()) p.setPlaybackRate(r); };
+    api.state=()=>ok()?mapYT(p.getPlayerState()):'idle'; api.destroy=()=>{ api.dead=true; try{ p&&p.destroy(); }catch(e){} };
+  } else {
+    const v=document.createElement('video'); v.src=source.url; v.playsInline=true; v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline',''); v.preload='metadata'; v.controls=!!opts.controls; host.appendChild(v);
+    v.addEventListener('loadedmetadata',()=>{ api.ready=true; opts.onReady&&opts.onReady(); });
+    v.addEventListener('play',()=>opts.onState&&opts.onState('playing')); v.addEventListener('pause',()=>{ if(!v.ended) opts.onState&&opts.onState('paused'); });
+    v.addEventListener('ended',()=>opts.onState&&opts.onState('ended')); v.addEventListener('error',()=>opts.onError&&opts.onError('file'));
+    api.play=()=>v.play().catch(()=>{}); api.pause=()=>v.pause(); api.seek=t=>{ v.currentTime=t; }; api.time=()=>v.currentTime||0; api.duration=()=>v.duration||0;
+    api.rate=r=>{ v.playbackRate=r; try{ v.preservesPitch=true; v.webkitPreservesPitch=true; }catch(e){} }; api.state=()=>v.ended?'ended':v.paused?'paused':'playing';
+    api.destroy=()=>{ api.dead=true; try{ v.pause(); v.removeAttribute('src'); v.load(); }catch(e){} v.remove(); };
+  }
+  return api;
+}
+
+/* ============================== Kind: Player auf der Werkbank ============================== */
+let P=null;
+function buildVideoSteps(v){ const s=(v.steps||[]).slice().sort((a,b)=>a.t-b.t); const mat=(v.material||[]).filter(Boolean); if(mat.length&&s.length){ if(/^material richten/i.test(s[0].label||'')) s.shift(); s.unshift({t:-1,label:'Material richten',material:mat}); } else if(s.length&&s[0].t>1.5) s.unshift({t:0,label:'Zuschauen'}); return s; }
+SCREENS.player=(app,{videoId,school})=>{
+  const v=school||videoOf(videoId); if(!v){ go('home'); return; }
+  const a=v.areaId?areaOf(v.areaId):null; const p=school?null:profile(); const n=abend();
+  const steps=buildVideoSteps(v); const pr=school?{pos:0,step:0,done:false,slow:false}:prog(v.id);
+  app.innerHTML=`<div class="${kidClass('pl'+(S.settings.kino&&!school?' kino':''))}">${girlande(n)}
+    <div class="inner kopf pl-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))">${school?'':`<a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a>`}<div class="schild"><h1>${esc(v.title)}</h1></div><div class="kopf-rechts"><span class="zettel" id="zettel"></span>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}</div></div>
+    <div class="inner panes">
+      <div class="pane"><div class="plabel"><i class="punkt" style="background:#4C6EF5"></i>Schau zu</div><div class="video-box"><div class="host" id="host"></div><div class="shield" id="shield" data-act="shield"></div><div class="overlay" id="overlay"></div><span class="modebadge" id="modebadge" hidden></span></div><div class="fuss"></div></div>
+      <div class="pane"><div class="plabel"><i class="punkt" style="background:#E8554E"></i><span id="zettel2">Die Schritte</span></div><div class="schritte" id="schritte"></div></div>
+    </div>
+    <div class="pl-bank"><div class="inner"><div class="steuer"><div class="controls" id="controls"></div><div class="kino-step" id="kinostep" data-act="liste" role="button"></div><div class="auftrag" id="task"></div></div></div></div>
+  </div>`;
+  P={v,steps,pr,school,idx:Math.min(pr.step||0,Math.max(0,steps.length-1)),mode:'start',needsTap:false,err:null,playAt:0,api:null,tick:null,lastSave:0,
+    destroy(){ clearInterval(this.tick); if(this.api) this.api.destroy(); if(!school) save(); }};
+  P.api=makePlayer($('#host'),v.source,{
+    onReady:()=>{ P.api.rate(pr.slow?S.settings.slowRate:1); },
+    onState:s=>{ if(!P) return;
+      if(s==='playing'){ P.needsTap=false; if(P.mode==='paused'||P.mode==='start'||P.mode==='buffering') P.mode='playing'; if(P.steps.length&&P.seekTarget!=null&&Date.now()-P.seekAt<6000&&Math.abs(P.api.time()-P.seekTarget)>3) seekTo(P.seekTarget); }
+      else if(s==='paused'){ if(P.mode==='playing') P.mode='paused'; }
+      else if(s==='ended'){ P.mode='ended'; if(!school){ pr.pos=0; pr.step=0; } if(!(v.task&&v.task.text&&v.task.deliverable!=='keine')&&!school){ pr.done=true; } if(!school){ setTimeout(()=>{ const t=$('#task'); if(t&&!t.hidden) t.scrollIntoView({behavior:'smooth',block:'center'}); },300); } }
+      updatePlayerUI(); },
+    onError:()=>{ if(!P) return; P.err=true; P.mode='error'; updatePlayerUI(); }
+  });
+  P.tick=setInterval(tickPlayer,100); requestAnimationFrame(fitPlayer); setTimeout(fitPlayer,300);
+  setTimeout(()=>{ if(P&&P.v===v&&!P.api.ready&&P.mode==='start'){ P.mode='error'; updatePlayerUI(); } },12000);
+  updatePlayerUI();
+  wire(app,{
+    back:()=>go(a?'area':'home',a?{id:a.id}:{}),
+    shield:()=>{ const k=$('.kid.pl.liste'); if(k){ k.classList.remove('liste'); return; } if(P.mode==='playing') userPause(); else if(P.mode==='paused') userPlay(); else if(P.mode==='stepdone') nextStep(); },
+    kino:()=>toggleKino(), liste:()=>{ const k=$('.kid.pl'); if(k) k.classList.toggle('liste'); },
+    start:()=>startPlaying(false), resume:()=>startPlaying(true), play:()=>userPlay(), pause:()=>userPause(),
+    toggle:()=>{ if(P.mode==='playing') userPause(); else if(P.mode==='paused') userPlay(); else if(P.mode==='material') nextStep(); else if(P.mode==='start') startPlaying(!!(pr.step||pr.pos>3)); else if(P.mode==='stepdone') nextStep(); else if(P.mode==='ended') startPlaying(false); },
+    replay:()=>replayStep(), next:()=>nextStep(), prevstep:()=>{ if(P.idx>0){ P.idx--; jumpStep(); } },
+    dot:b=>{ P.idx=+b.dataset.i; const k=$('.kid.pl'); if(k) k.classList.remove('liste'); jumpStep(); },
+    back10:()=>{ P.api.seek(Math.max(0,P.api.time()-10)); }, fwd10:()=>{ P.api.seek(P.api.time()+10); },
+    speed:()=>{ pr.slow=!pr.slow; P.api.rate(pr.slow?S.settings.slowRate:1); updatePlayerUI(); },
+    say:b=>speak(b.dataset.text), restart:()=>{ P.idx=0; startPlaying(false); },
+    foto:()=>takePhoto(v.id), malen:()=>go('paint',{videoId:v.id,back:'player'}), ton:()=>go('record',{videoId:v.id,back:'player'}),
+    fertig:()=>{ if(school){ confetti(); toast('Super gemacht!'); return; } const first=!pr.done; const ohne=(v.task&&v.task.deliverable)!=='fertig'; pr.done=true; let star=false; if(first&&!ohne&&S.settings.earnStar) star=earnStar(); save(); confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Super gemacht!'); updatePlayerUI(); },
+    gallery:()=>go('gallery')
+  });
+  if(S.settings.voiceControl) startListening();
+};
+function curStep(){ return P.steps[P.idx]; }
+function fitPlayer(){ const el=$('.kid.pl'); if(!el||el.classList.contains('kino')) return; const panes=$('.panes',el), pane=$('.pane',el); if(!panes||!pane) return; if(!matchMedia('(min-width:900px) and (min-height:540px)').matches){ el.style.removeProperty('--pl-avail'); return; } const lab=$('.plabel',pane), fuss=$('.fuss',pane); const h=panes.clientHeight-(lab?lab.offsetHeight+8:0)-(fuss?fuss.offsetHeight+8:0); el.style.setProperty('--pl-avail',Math.max(180,Math.floor(h))+'px'); }
+window.addEventListener('resize',()=>{ if(P) fitPlayer(); });
+function toggleKino(on){ const el=$('.kid.pl'); if(!el||(P&&P.school)) return; const want=on==null?!el.classList.contains('kino'):!!on; el.classList.toggle('kino',want); el.classList.remove('liste'); if(S.settings.kino!==want){ S.settings.kino=want; save(); } if(want) fsEnter(); else fsExit(); if(P) updatePlayerUI(); }
+function fsEnter(){ try{ const d=document.documentElement; if(document.fullscreenElement||document.webkitFullscreenElement) return; const f=d.requestFullscreen||d.webkitRequestFullscreen; if(f){ const r=f.call(d,{navigationUI:'hide'}); if(r&&r.catch) r.catch(()=>{}); } }catch(e){} }
+function fsExit(){ try{ if(document.fullscreenElement||document.webkitFullscreenElement){ const r=(document.exitFullscreen||document.webkitExitFullscreen).call(document); if(r&&r.catch) r.catch(()=>{}); } }catch(e){} }
+['fullscreenchange','webkitfullscreenchange'].forEach(ev=>document.addEventListener(ev,()=>{ if(!document.fullscreenElement&&!document.webkitFullscreenElement){ const el=$('.kid.pl.kino'); if(el&&P&&!P._fsLeaving){ el.classList.remove('kino','liste'); S.settings.kino=false; save(); updatePlayerUI(); } } }));
+function stepEnd(){ return P.idx<P.steps.length-1?P.steps[P.idx+1].t:Infinity; }
+function startPlaying(resume){ unlockTTS(); if($('.kid.pl.kino')) fsEnter(); if(!P.api.ready){ toast('Video lädt noch…',1200); return; }
+  if(P.steps.length){ if(!resume) P.idx=P.steps[0].material?1:0; if(curStep().material){ jumpStep(); return; } seekTo(curStep().t); } else { seekTo(resume?P.pr.pos:0); }
+  P.mode='playing'; P.playAt=Date.now(); P.needsTap=false; P.api.play(); updatePlayerUI(); }
+function userPause(){ P.mode='paused'; P.api.pause(); updatePlayerUI(); }
+function userPlay(){ P.mode='playing'; P.playAt=Date.now(); P.api.play(); updatePlayerUI(); }
+function jumpStep(){ const s=curStep(); if(s.material){ P.mode='material'; try{ P.api.pause(); const nx=P.steps[P.idx+1]; if(nx) P.api.seek(nx.t); }catch(e){} updatePlayerUI(); return; } P.mode='playing'; P.playAt=Date.now(); seekTo(s.t); P.api.play(); updatePlayerUI(); }
+function seekTo(t){ P.seekAt=Date.now(); P.seekTarget=t; P.api.seek(t); }
+function seekSettled(){ if(!P.seekAt) return true; if(Date.now()-P.seekAt>900) return true; return Math.abs(P.api.time()-P.seekTarget)<1.5; }
+function replayStep(){ jumpStep(); }
+function nextStep(){ if(P.idx<P.steps.length-1){ P.idx++; jumpStep(); } else { P.mode='ended'; updatePlayerUI(); } }
+function tickPlayer(){ if(!P||!P.api.ready) return;
+  const t=P.api.time();
+  if(P.mode==='playing'){
+    if(P.steps.length&&seekSettled()&&t>=stepEnd()-0.08){ P.mode='stepdone'; P.api.pause(); updatePlayerUI(); if(S.settings.autoRead) speak(/^(zuschauen|schau )/i.test(curStep().label)?'Weiter?':'Jetzt du: '+curStep().label); return; }
+    if(!P.needsTap&&P.api.state()!=='playing'&&Date.now()-P.playAt>3500&&P.api.state()!=='buffering'){ P.needsTap=true; updatePlayerUI(); }
+    if(Date.now()-P.lastSave>2000){ P.lastSave=Date.now(); if(!P.school){ P.pr.pos=t; P.pr.step=P.idx; save(); } }
+    const cap=$('#captime'); if(cap) cap.textContent=fmt(t)+' / '+fmt(P.api.duration());
+  }
+}
+function updatePlayerUI(){ if(!P) return;
+  const ov=$('#overlay'), sh=$('#shield'), v=P.v, steps=P.steps, n=steps.length, m=P.mode, pr=P.pr;
+  const kinoEl=$('.kid.pl.kino'); if(kinoEl&&(m==='ended'||m==='error')){ kinoEl.classList.remove('kino','liste'); fsExit(); }
+  const isKino=!!$('.kid.pl.kino');
+  const bigPlay=(act,label)=>`<button class="kbtn round big" data-act="${act}" aria-label="${label}">${ico('play')}</button><div class="lbl">${label}</div>`;
+  let html='', show=true, transparent=false;
+  if(m==='error'){ html=`<div class="em">🙈</div><h2>Dieses Video geht hier nicht</h2><div class="hint">Sag es deinen Eltern.</div>`; }
+  else if(m==='start'&&steps[0]&&steps[0].material){ const canResume=pr.step>1; html=matCard(steps[0].material,`<button class="kbtn primary" data-act="start">${ico('check')} Habe ich alles – los!</button>${canResume?`<button class="kbtn ghost" data-act="resume">Weiter bei Schritt ${pr.step+1}</button>`:''}`); }
+  else if(m==='material'){ html=matCard(curStep().material,`<button class="kbtn primary" data-act="next">${ico('check')} Habe ich alles – weiter</button>`); }
+  else if(m==='start'){ const canResume=n?pr.step>0:pr.pos>3;
+    html=`${bigPlay(canResume?'resume':'start',canResume?(n?`Weiter bei Schritt ${pr.step+1}`:'Weiter schauen'):'Los geht\'s')}${canResume?`<button class="kbtn ghost" data-act="start">Von vorne</button>`:''}${n?`<div class="hint">${n} Schritte – das Video hält nach jedem Schritt an.</div>`:''}`; }
+  else if(m==='playing'){ if(P.needsTap){ transparent=true; html=`<div class="lbl" style="background:rgba(0,0,0,.5);padding:10px 18px;border-radius:14px">Tippe auf das Video ▶</div>`; } else show=false; }
+  else if(m==='paused'||m==='stepdone'){ show=false; }
+  else if(m==='ended'){ html=`<div class="em">🎉</div><h2>Fertig geschaut!</h2>${v.task&&v.task.text&&v.task.deliverable!=='keine'?`<div class="hint">Jetzt kommt deine Aufgabe ↓</div>`:''}<button class="kbtn ghost" data-act="restart">${ico('replay')} Nochmal von vorne</button>`; }
+  ov.hidden=!show; ov.classList.toggle('transparent',transparent); ov.innerHTML=html;
+  sh.hidden=P.needsTap||S.settings.passTouches||show;
+  const mb=$('#modebadge'); if(mb){ mb.hidden=!(m==='paused'||m==='stepdone'); mb.textContent=m==='stepdone'?(/^(zuschauen|schau )/i.test(curStep().label)?'Weiter?':'Jetzt du'):'Pause'; }
+  const z=$('#zettel'); if(z) z.textContent=n?`Schritt ${P.idx+1} von ${n}`:'Frei schauen';
+  // Schritte als Knöpfe rechts neben dem Video
+  const sl=$('#schritte');
+  if(n){ sl.innerHTML=steps.map((s,i)=>`<button class="sbtn${i===P.idx?' cur':i<P.idx?' done':''}" data-act="dot" data-i="${i}"><span class="num">${i<P.idx?ico('check'):i+1}</span><span class="lbl">${esc(s.label)}${s.material?`<span class="mats">${s.material.map(id=>matIcon(id,false)).join('')}</span>`:''}</span>${i===P.idx&&!s.material?`<span class="say" data-act="say" data-text="${esc('Schritt '+(i+1)+': '+s.label)}" aria-label="Vorlesen">${ico('speaker')}</span>`:''}</button>`).join('');
+    const cur=$('.sbtn.cur',sl); if(cur) cur.scrollIntoView({block:'nearest'}); }
+  else sl.innerHTML=`<div class="frei"><div class="zeit" id="captime">${fmt(P.api.time())} / ${fmt(P.api.duration())}</div><div class="hint">Dieses Video läuft frei – mit Pause-Knopf</div></div>`;
+  // Steuerung
+  const playing=m==='playing'; const mid=`<button class="kbtn round big primary" data-act="toggle" aria-label="${playing?'Pause':(m==='stepdone'||m==='material')?'Weiter':'Abspielen'}">${ico(playing?'pause':(m==='stepdone'||m==='material')?'next':'play')}</button>`;
+  const spd=`<button class="speed${pr.slow?' slow':''}" data-act="speed" aria-label="Langsam oder normal">${pr.slow?'🐢':'🐇'}<span class="lab">${pr.slow?'langsam':'normal'}</span></button>`+(P.school?'':`<button class="kbtn round kino-btn" data-act="kino" aria-label="${isKino?'Klein':'Gross'}">${ico(isKino?'compress':'expand')}</button>`);
+  const ks=$('#kinostep'); if(ks){ ks.innerHTML=n?`<span class="k">Schritt ${P.idx+1} von ${n}${isKino?' · Tipp für alle Schritte':''}</span><span class="lbl">${esc(curStep().label)}</span>`:`<span class="k">Frei schauen</span><span class="lbl">${esc(v.title)}</span>`; }
+  $('#controls').innerHTML=n?`<button class="kbtn round" data-act="prevstep" aria-label="Schritt zurück" ${P.idx===0?'disabled':''}>${ico('prev')}</button>${mid}<button class="kbtn round" data-act="replay" aria-label="Schritt nochmal">${ico('replay')}</button>${spd}`
+    :`<button class="kbtn round" data-act="back10" aria-label="10 Sekunden zurück">${ico('replay')}</button>${mid}<button class="kbtn round" data-act="fwd10" aria-label="10 Sekunden vor">${ico('next')}</button>${spd}`;
+  // Auftrag
+  const tk=$('#task'); const task=(SCHULE?null:v.task)||{text:'',deliverable:'keine'};
+  if(!task.text||task.deliverable==='keine'){ tk.hidden=true; }
+  else { tk.hidden=false; const d=task.deliverable;
+    const btns={foto:`<button class="kbtn primary" data-act="foto">${ico('camera')} Foto</button>`,bild:`<button class="kbtn primary" data-act="malen">${ico('brush')} Malen</button>`,ton:`<button class="kbtn primary" data-act="ton">${ico('mic')} Aufnehmen</button>`,fertig:`<button class="kbtn primary" data-act="fertig">${ico('check')} Fertig</button>`};
+    tk.innerHTML=`<div class="row between"><span class="k">Am Schluss</span><button class="btn icon" data-act="say" data-text="${esc(task.text)}" aria-label="Aufgabe vorlesen" style="width:40px;min-height:40px">${ico('speaker')}</button></div><div class="txt">${esc(task.text)}</div>
+      ${pr.done?`<div class="done">${ico('check')} Abgegeben – super!</div>${P.school?'':`<button class="btn" data-act="gallery">${ico('gallery')} Meine Werke</button>`}<div class="btn-grid">${btns[d]||''}</div>`
+      :`<div class="btn-grid">${btns[d]||''}</div>${d!=='fertig'&&m==='ended'?`<button class="btn ghost sm" data-act="fertig">Ohne Abgabe fertig</button>`:''}`}`; }
+  fitPlayer();
+}
+document.addEventListener('visibilitychange',()=>{ if(document.hidden&&P&&P.mode==='playing'&&P.api.ready) userPause(); });
+
+function takePhoto(videoId){
+  const done=async b=>{ let star=false; try{ star=await saveWork({type:'foto',blob:b,videoId}); }catch(e){ return; } confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Foto gespeichert!'); if(P) updatePlayerUI(); };
+  const inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.setAttribute('capture','environment');
+  inp.onchange=()=>{ const f=inp.files[0]; if(!f) return; const img=new Image(); const u=URL.createObjectURL(f);
+    img.onload=()=>{ const max=1400, sc=Math.min(1,max/Math.max(img.width,img.height)); const c=document.createElement('canvas'); c.width=Math.round(img.width*sc); c.height=Math.round(img.height*sc); c.getContext('2d').drawImage(img,0,0,c.width,c.height); URL.revokeObjectURL(u); c.toBlob(b=>done(b),'image/jpeg',.85); };
+    img.onerror=()=>toast('Das Bild konnte nicht gelesen werden'); img.src=u; };
+  inp.hidden=true; document.body.appendChild(inp); inp.addEventListener('change',()=>setTimeout(()=>inp.remove(),2000)); inp.click();
+}
+function afterWork(pr,star){ confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Gespeichert!'); if(pr.back==='player'&&pr.videoId) go('player',{videoId:pr.videoId}); else go('gallery'); }
+
+/* ============================== Kind: Malen ============================== */
+SCREENS.paint=(app,pr)=>{
+  const PAL=['#2B2320','#E8554E','#F28C28','#F2C12E','#3BB273','#2A9DB8','#4C6EF5','#9B5DE5','#8B5A2B','#F5A3C7'];
+  const SIZES=[4,10,22]; let color=PAL[0], size=10, eraser=false; const undo=[]; let drawing=false; const n=abend();
+  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}<div class="inner kopf tool-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><a href="#" class="schild-btn" data-act="cancel" aria-label="Abbrechen">${ico('x')}</a><div class="schild"><h1>Malen</h1></div><div class="kopf-rechts"><button class="schild-btn" data-act="undo" aria-label="Rückgängig">${ico('undo')}</button><button class="kbtn primary" data-act="keep" style="min-height:54px;font-size:19px">${ico('check')} Behalten</button></div></div>
+    <div class="inner" style="display:flex;flex-direction:column;gap:10px;flex:1;margin-top:12px"><div class="canvas-wrap" id="wrap"><canvas id="pc"></canvas></div>
+    <div class="palette">${PAL.map(c=>`<button class="sw${c===color?' on':''}" data-act="color" data-v="${c}" style="background:${c}" aria-label="Farbe"></button>`).join('')}<span class="sep"></span>${SIZES.map(s=>`<button class="sz${s===size?' on':''}" data-act="size" data-v="${s}" aria-label="Pinsel ${s}"><i style="width:${s+6}px;height:${s+6}px"></i></button>`).join('')}<span class="sep"></span><button class="sz" id="eraser" data-act="eraser" aria-label="Radiergummi" style="font-size:22px">🧽</button></div></div></div>`;
+  const cv=$('#pc'), wrap=$('#wrap'), ctx=cv.getContext('2d'); let dpr=Math.min(2,devicePixelRatio||1);
+  function fit(){ const r=wrap.getBoundingClientRect(); const snap=cv.width?ctx.getImageData(0,0,cv.width,cv.height):null; cv.width=Math.round(r.width*dpr); cv.height=Math.round(r.height*dpr); cv.style.width=r.width+'px'; cv.style.height=r.height+'px'; ctx.setTransform(1,0,0,1,0,0); ctx.fillStyle='#fff'; ctx.fillRect(0,0,cv.width,cv.height); if(snap) ctx.putImageData(snap,0,0); ctx.setTransform(dpr,0,0,dpr,0,0); ctx.lineCap='round'; ctx.lineJoin='round'; }
+  fit(); const ro=new ResizeObserver(()=>{ if(!drawing) fit(); }); ro.observe(wrap);
+  const pos=e=>{ const r=cv.getBoundingClientRect(); return [e.clientX-r.left,e.clientY-r.top]; };
+  cv.addEventListener('pointerdown',e=>{ e.preventDefault(); cv.setPointerCapture(e.pointerId); if(undo.length>25) undo.shift(); undo.push(ctx.getImageData(0,0,cv.width,cv.height)); drawing=true; ctx.strokeStyle=eraser?'#fff':color; ctx.lineWidth=eraser?size*3:size; const [x,y]=pos(e); ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+.01,y); ctx.stroke(); });
+  cv.addEventListener('pointermove',e=>{ if(!drawing) return; e.preventDefault(); const evs=e.getCoalescedEvents?e.getCoalescedEvents():[e]; for(const ev of evs){ const [x,y]=pos(ev); ctx.lineTo(x,y); } ctx.stroke(); });
+  const end=()=>{ drawing=false; }; cv.addEventListener('pointerup',end); cv.addEventListener('pointercancel',end);
+  wire(app,{
+    cancel:()=>{ ro.disconnect(); go(pr.back==='player'?'player':'gallery',{videoId:pr.videoId}); },
+    undo:()=>{ const s=undo.pop(); if(s){ ctx.setTransform(1,0,0,1,0,0); ctx.putImageData(s,0,0); ctx.setTransform(dpr,0,0,dpr,0,0); } },
+    color:b=>{ color=b.dataset.v; eraser=false; $$('.sw').forEach(x=>x.classList.toggle('on',x===b)); $('#eraser').classList.remove('on'); },
+    size:b=>{ size=+b.dataset.v; $$('.sz').forEach(x=>x.classList.toggle('on',x===b)); },
+    eraser:b=>{ eraser=!eraser; b.classList.toggle('on',eraser); if(eraser) $$('.sw').forEach(x=>x.classList.remove('on')); },
+    keep:()=>{ ro.disconnect(); cv.toBlob(async b=>{ try{ const star=await saveWork({type:'bild',blob:b,videoId:pr.videoId}); afterWork(pr,star); }catch(e){} },'image/png'); }
+  });
+};
+
+/* ============================== Kind: Aufnehmen ============================== */
+SCREENS.record=(app,pr)=>{
+  let state='idle', mr=null, chunks=[], blob=null, url=null, stream=null, t0=0, timer=null; const n=abend();
+  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}<div class="inner kopf tool-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><a href="#" class="schild-btn" data-act="cancel" aria-label="Abbrechen">${ico('x')}</a><div class="schild"><h1>Aufnehmen</h1></div><div class="kopf-rechts"></div></div><div class="inner" style="margin-top:20px"><div class="papier" id="rec" style="align-items:center;gap:22px"></div></div>${bank()}</div>`;
+  const ui=()=>{ const r=$('#rec'); if(!r) return;
+    if(state==='idle') r.innerHTML=`<p style="font-size:22px;text-align:center">Drück den roten Knopf und sprich.</p><button class="recbtn" data-act="start" aria-label="Aufnahme starten">${ico('mic')}</button>`;
+    else if(state==='rec') r.innerHTML=`<div class="timer" id="tm">0:00</div><button class="recbtn on" data-act="stop" aria-label="Aufnahme stoppen"><span style="display:block;width:48px;height:48px;background:#fff;border-radius:8px"></span></button><p style="color:var(--wmuted)">Nochmal drücken zum Stoppen</p>`;
+    else if(state==='done') r.innerHTML=`<div style="font-size:64px;line-height:1">🎧</div><audio controls src="${url}" style="width:min(100%,420px)"></audio><div class="row center"><button class="kbtn" data-act="again">${ico('replay')} Nochmal</button><button class="kbtn primary" data-act="keep">${ico('check')} Behalten</button></div>`;
+    else if(state==='err') r.innerHTML=`<div style="font-size:64px;line-height:1">🙈</div><p style="font-size:20px;text-align:center">Das Mikrofon geht gerade nicht.<br><span class="small" style="text-transform:none;letter-spacing:0">Erlaubnis fehlt, oder die Seite läuft nicht über https.</span></p>`; };
+  const cleanup=()=>{ clearInterval(timer); if(stream) stream.getTracks().forEach(t=>t.stop()); stream=null; if(url) URL.revokeObjectURL(url); };
+  wire(app,{
+    cancel:()=>{ cleanup(); go(pr.back==='player'?'player':'gallery',{videoId:pr.videoId}); }, who:()=>{},
+    start:async()=>{ try{ stream=await navigator.mediaDevices.getUserMedia({audio:true}); const mime=['audio/webm;codecs=opus','audio/mp4','audio/webm','audio/ogg'].find(m=>window.MediaRecorder&&MediaRecorder.isTypeSupported(m))||''; mr=new MediaRecorder(stream,mime?{mimeType:mime}:undefined); chunks=[]; mr.ondataavailable=e=>{ if(e.data.size) chunks.push(e.data); }; mr.onstop=()=>{ blob=new Blob(chunks,{type:mr.mimeType||'audio/webm'}); url=URL.createObjectURL(blob); stream.getTracks().forEach(t=>t.stop()); state='done'; ui(); }; mr.start(); t0=Date.now(); state='rec'; ui(); timer=setInterval(()=>{ const el=$('#tm'); if(el) el.textContent=fmt((Date.now()-t0)/1000); if(Date.now()-t0>180000) mr.stop(); },250); }catch(e){ state='err'; ui(); } },
+    stop:()=>{ clearInterval(timer); if(mr&&mr.state!=='inactive') mr.stop(); },
+    again:()=>{ if(url) URL.revokeObjectURL(url); url=null; blob=null; state='idle'; ui(); },
+    keep:async()=>{ if(!blob) return; try{ const star=await saveWork({type:'ton',blob,videoId:pr.videoId}); cleanup(); afterWork(pr,star); }catch(e){} }
+  });
+  ui();
+};
+
+/* ============================== Kind: Galerie (Korkwand) ============================== */
+SCREENS.gallery=app=>{
+  const p=profile(); const ws=S.works.filter(w=>w.profileId===p.id); const n=abend();
+  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${kopf('Meine Werke',{back:true,right:`<button class="btn" data-act="malen">${ico('brush')} Malen</button><button class="btn" data-act="ton">${ico('mic')} Aufnehmen</button>`})}
+    <div class="inner">${ws.length?`<div class="kork">${ws.map(w=>`<button class="foto" data-act="open" data-id="${w.id}" aria-label="Werk öffnen"><div class="bild">${w.type==='ton'?'🎧':`<img data-blob="${w.id}" alt="">`}</div><span class="dt">${dateDE(w.createdAt)}</span>${w.feedback?`<span class="fb${w.fbSeen?'':' new'}">${w.feedback.emoji}</span>`:''}</button>`).join('')}</div>`:`<div class="empty" style="margin-top:20px">Noch keine Werke.<br><span class="small">Mal etwas, nimm etwas auf oder mach ein Foto nach einem Video.</span></div>`}</div>${bank()}</div>`;
+  fillThumbs(app);
+  wire(app,{ back:()=>go('home'), who:()=>{}, malen:()=>go('paint',{back:'gallery'}), ton:()=>go('record',{back:'gallery'}), open:b=>openWork(b.dataset.id,false) });
+};
+async function openWork(id,parentMode){
+  const w=S.works.find(x=>x.id===id); if(!w) return; const u=await blobs.url(id); const v=w.videoId?videoOf(w.videoId):null; const kid=S.profiles.find(p=>p.id===w.profileId);
+  if(w.feedback&&!w.fbSeen&&!parentMode){ w.fbSeen=true; save(); }
+  (parentMode?modal:kidModal)(`<div class="viewer">${w.type==='ton'?`<div style="text-align:center;font-size:64px">🎧</div><audio controls src="${u||''}" style="width:100%"></audio>`:`<img src="${u||''}" alt="">`}</div>
+    <p class="muted small">${esc(kid?kid.name+' · ':'')}${dateDE(w.createdAt)}${v?' · '+esc(v.title):''}</p>
+    ${w.feedback?`<div class="bubble"><span class="em">${w.feedback.emoji}</span><span>${esc(w.feedback.text||'')}</span>${!parentMode&&w.feedback.text?`<button class="btn icon" data-act="say" aria-label="Vorlesen" style="margin-left:auto">${ico('speaker')}</button>`:''}</div>`:''}
+    <div class="row" style="justify-content:flex-end">${parentMode?`<button class="btn danger sm" data-act="del">${ico('trash')} Löschen</button>`:''}<button class="btn" data-close>Schliessen</button></div>`,
+    {say:()=>{ unlockTTS(); speak(w.feedback&&w.feedback.text||''); }, del:(b,close)=>{ close(); confirmBox('Werk löschen?','Das kann nicht rückgängig gemacht werden.','Löschen',async()=>{ await blobs.del(id); S.works=S.works.filter(x=>x.id!==id); save(); render(); },true); }});
+}
+
+/* ============================== Elternbereich ============================== */
+let ED=null;
+SCREENS.parent=(app,{tab='videos',videoId})=>{
+  if(!parentOpen){ renderPin(app); return; }
+  const tabs=[['videos','Videos'],['katalog','Katalog'],['bereiche','Bereiche'],['kinder','Kinder'],['werke','Werke'],['einstellungen','Einstellungen'],['daten','Daten']];
+  app.innerHTML=`<div class="screen parent"><div class="topbar"><button class="btn icon" data-act="back" aria-label="Zurück">${ico('back')}</button><h1 class="grow">Elternbereich</h1></div><div class="tabs">${tabs.map(([k,l])=>`<button data-act="tab" data-t="${k}" class="${k===tab?'on':''}">${l}</button>`).join('')}</div><div id="ptab" class="stack"></div></div>`;
+  const acts={back:()=>go('home'),tab:b=>go('parent',{tab:b.dataset.t})};
+  const root=$('#ptab');
+  ({videos:tabVideos,video:tabVideoEditor,katalog:tabKatalog,bereiche:tabAreas,kinder:tabKids,werke:tabWorks,einstellungen:tabSettings,daten:tabData})[tab](root,acts,{videoId});
+  wire(app,acts);
+};
+function renderPin(app){
+  let pin='';
+  app.innerHTML=`<div class="screen" style="justify-content:center;max-width:420px;text-align:center;gap:22px"><h1>Elternbereich</h1><p class="muted">PIN eingeben</p><div class="pin-dots" id="dots"></div><div class="pinpad">${[1,2,3,4,5,6,7,8,9].map(n=>`<button data-act="d" data-v="${n}">${n}</button>`).join('')}<button data-act="back" aria-label="Zurück">${ico('back')}</button><button data-act="d" data-v="0">0</button><button data-act="del" aria-label="Löschen">⌫</button></div></div>`;
+  const dots=()=>{ $('#dots').textContent='●'.repeat(pin.length)+'○'.repeat(Math.max(0,4-pin.length)); }; dots();
+  wire(app,{ back:()=>go('home'), del:()=>{ pin=pin.slice(0,-1); dots(); },
+    d:b=>{ if(pin.length>=4) return; pin+=b.dataset.v; dots(); if(pin.length===4){ if(pin===S.settings.pin){ parentOpen=true; render(); } else { const d=$('#dots'); d.classList.add('shake'); setTimeout(()=>{ pin=''; dots(); d.classList.remove('shake'); },450); } } } });
+}
+
+/* ---- Videos ---- */
+function tabVideos(root,acts){
+  root.innerHTML=`<div class="row between"><h2>Videos</h2><button class="btn primary" data-act="new">${ico('plus')} Video hinzufügen</button></div>
+    ${S.areas.map(a=>{ const vs=videosIn(a.id); return `<div class="panel"><div class="row between"><h3 style="color:${a.color}">${a.emoji} ${esc(a.name)} <span class="muted small">${a.kind==='spass'?'· Spass':''}</span></h3></div>
+      ${vs.length?`<div class="list">${vs.map(v=>`<div class="li"><div class="th">${thumbOf(v)?`<img src="${thumbOf(v)}" alt="">`:'🎬'}</div><div class="grow" style="min-width:0"><div class="t">${esc(v.title)}</div><div class="small muted">${(v.steps||[]).length} Schritte · ${DELIV[(v.task&&v.task.deliverable)||'keine']}${v.quelle==='datei'?' · aus inhalte.json':v.quelle==='katalog'?' · aus dem Katalog':''}</div></div><div class="acts"><button class="btn icon sm" data-act="edit" data-id="${v.id}" aria-label="Bearbeiten">${ico('pencil')}</button></div></div>`).join('')}</div>`:`<p class="muted small">Noch keine Videos.</p>`}</div>`; }).join('')}`;
+  acts.new=()=>{ ED=null; go('parent',{tab:'video'}); };
+  acts.edit=b=>{ ED=null; go('parent',{tab:'video',videoId:b.dataset.id}); };
+}
+function tabVideoEditor(root,acts,{videoId}){
+  const existing=videoId?videoOf(videoId):null;
+  if(!ED||ED.id!==(existing?existing.id:'new')) ED={id:existing?existing.id:'new',title:existing?existing.title:'',source:existing?{...existing.source}:null,areaId:existing?existing.areaId:(S.areas[0]||{}).id,material:existing?(existing.material||[]).slice():[],task:existing?{...(existing.task||{text:'',deliverable:'keine'})}:{text:'',deliverable:'keine'},steps:existing?existing.steps.map(s=>({...s})):[],url:existing?(existing.source.type==='youtube'?'https://www.youtube.com/watch?v='+existing.source.id:existing.source.url):'',api:null,label:''};
+  root.innerHTML=`<div class="row between"><h2>${existing?'Video bearbeiten':'Neues Video'}</h2><button class="btn ghost" data-act="cancel">Abbrechen</button></div>
+  ${existing&&existing.quelle==='datei'?`<div class="note warn">Dieses Video kommt aus <b>inhalte.json</b>. Änderungen hier gelten nur, bis die Datei das nächste Mal geladen wird – dauerhafte Änderungen gehören in die Datei.</div>`:''}
+  <div class="panel">
+    <div class="field"><label for="ed-url">YouTube-Link oder Video-Datei (URL)</label><div class="row" style="flex-wrap:nowrap"><input class="inp" id="ed-url" data-bind="url" value="${esc(ED.url)}" placeholder="https://www.youtube.com/watch?v=…" inputmode="url" autocomplete="off"><button class="btn" data-act="check">Prüfen</button></div></div>
+    <div id="ed-preview"></div>
+    <div class="field"><label for="ed-title">Titel (so sieht ihn das Kind)</label><input class="inp" id="ed-title" data-bind="title" value="${esc(ED.title)}"></div>
+    <div class="field"><label for="ed-material">Material (durch Komma getrennt – erscheint als Materialkarte vor dem Video)</label><input class="inp" id="ed-material" data-bind="materialText" value="${esc((ED.material||[]).map(matName).join(', '))}" placeholder="z. B. Wolle, Schere, Karton"><div class="small muted" style="margin-top:4px">Bekannte Wörter bekommen ein Bild: ${Object.values(MATERIAL).map(m=>m[0]).slice(0,14).join(', ')} …</div></div>
+    <div class="field"><label for="ed-area">Bereich</label><select class="inp" id="ed-area" data-bind="areaId">${S.areas.map(a=>`<option value="${a.id}" ${a.id===ED.areaId?'selected':''}>${a.emoji} ${esc(a.name)}${a.kind==='spass'?' (Spass)':''}</option>`).join('')}</select></div>
+  </div>
+  <div class="panel"><h3>Schritte</h3><p class="small muted">Spiel das Video ab, halte an der Stelle an, an der das Kind etwas nachmachen soll, und setz dort einen Schritt. Das Video stoppt dann für das Kind automatisch am Ende jedes Schritts.</p>
+    <div class="video-box yt-frei" id="ed-box" hidden style="border:0"><div class="host" id="ed-host"></div></div>
+    <div class="row" style="flex-wrap:nowrap"><input class="inp" id="ed-label" data-bind="label" placeholder="Was soll das Kind hier tun? z. B. Papier falten"><button class="btn primary" data-act="addstep" style="flex:none">${ico('plus')} <span id="ed-at">bei 0:00</span></button></div>
+    <ol class="steps-list" id="ed-steps"></ol>
+    <div class="row"><input class="inp" id="ed-mtime" placeholder="mm:ss" style="width:100px" inputmode="numeric"><button class="btn sm" data-act="addmanual">Schritt bei dieser Zeit</button></div>
+    <details><summary class="small muted" style="cursor:pointer">Schritte als Liste einfügen (eine Zeile pro Schritt: Zeit, dann Text)</summary><div class="stack" style="margin-top:8px"><textarea class="inp" id="ed-paste" placeholder="0:12 Unten einen Bogen zeichnen&#10;0:31 In der Mitte einen Punkt setzen"></textarea><div class="row"><button class="btn sm" data-act="pastesteps">Liste übernehmen</button><span class="small muted">Ersetzt die bisherigen Schritte.</span></div></div></details>
+  </div>
+  <div class="panel"><h3>Aufgabe danach</h3>
+    <div class="field"><label for="ed-task">Text (wird vorgelesen)</label><textarea class="inp" id="ed-task" data-bind="task.text" placeholder="z. B. Falte einen Frosch und mach ein Foto davon.">${esc(ED.task.text)}</textarea></div>
+    <div class="field"><label for="ed-deliv">Abgabe</label><select class="inp" id="ed-deliv" data-bind="task.deliverable">${Object.entries(DELIV).map(([k,l])=>`<option value="${k}" ${k===ED.task.deliverable?'selected':''}>${l}</option>`).join('')}</select></div>
+  </div>
+  <div class="panel"><h3>Link für die Schule</h3><p class="small muted">Der Link enthält das ganze Video samt Schritten und Aufgabe. Ein Kind tippt den QR-Code und landet direkt im Player – ohne Anmeldung, ohne Sterne.</p><button class="btn" data-act="schoollink">${ico('link')} Link und QR-Code zeigen</button><div id="ed-link"></div></div>
+  <div class="row between"><div>${existing?`<button class="btn danger" data-act="delete">${ico('trash')} Löschen</button>`:''}</div><button class="btn primary" data-act="save">${ico('check')} Speichern</button></div>`;
+  root.oninput=e=>{ const el=e.target.closest('[data-bind]'); if(!el) return; const path=el.dataset.bind.split('.'); let o=ED; while(path.length>1) o=o[path.shift()]; o[path[0]]=el.value; };
+  const renderSteps=()=>{ ED.steps.sort((a,b)=>a.t-b.t); $('#ed-steps').innerHTML=ED.steps.length?ED.steps.map((s,i)=>`<li class="step-li"><input class="inp tm" value="${fmt(s.t)}" data-stime="${i}" aria-label="Zeit"><input class="inp grow" value="${esc(s.label)}" data-slabel="${i}" aria-label="Beschriftung"><button class="btn icon sm" data-act="test" data-i="${i}" aria-label="Anspielen">${ico('play')}</button><button class="btn icon sm" data-act="rmstep" data-i="${i}" aria-label="Entfernen">${ico('x')}</button></li>`).join(''):'<li class="muted small" style="list-style:none">Noch keine Schritte. Ohne Schritte läuft das Video frei mit Pause-Knopf.</li>'; };
+  root.onchange=e=>{ const t=e.target; if(t.dataset.stime!==undefined){ const v=parseTime(t.value); if(!isNaN(v)){ ED.steps[+t.dataset.stime].t=v; renderSteps(); } else t.value=fmt(ED.steps[+t.dataset.stime].t); } if(t.dataset.slabel!==undefined){ ED.steps[+t.dataset.slabel].label=t.value; } };
+  renderSteps();
+  const mountPreview=async()=>{ const src=parseSource(ED.url); const pv=$('#ed-preview'); if(ED.api){ ED.api.destroy(); ED.api=null; }
+    if(!src){ ED.source=null; pv.innerHTML=ED.url?`<div class="note warn">Diesen Link verstehe ich nicht. Erlaubt: YouTube-Links (watch, youtu.be, shorts) oder eine direkte Videodatei (.mp4, .webm).</div>`:''; $('#ed-box').hidden=true; return; }
+    ED.source=src; pv.innerHTML=`<div class="note">${src.type==='youtube'?'YouTube-Video erkannt: <code>'+esc(src.id)+'</code>':'Videodatei erkannt'}</div>`; $('#ed-box').hidden=false; $('#ed-host').innerHTML='';
+    ED.api=makePlayer($('#ed-host'),src,{controls:true,onError:()=>{ pv.innerHTML=`<div class="note warn">Dieses Video lässt sich nicht einbetten (vom Kanal gesperrt oder nicht gefunden).</div>`; }});
+    if(src.type==='youtube'&&!ED.title){ const t=await fetchTitle(src.id); if(t&&!ED.title){ ED.title=t; const ti=$('#ed-title'); if(ti) ti.value=t; } } };
+  if(ED.url) mountPreview();
+  const atTimer=setInterval(()=>{ const el=$('#ed-at'); if(!el){ clearInterval(atTimer); return; } el.textContent='bei '+fmt(ED.api&&ED.api.ready?ED.api.time():0); },300);
+  Object.assign(acts,{
+    cancel:()=>{ ED=null; go('parent',{tab:'videos'}); },
+    check:()=>mountPreview(),
+    addstep:()=>{ if(!ED.api||!ED.api.ready){ toast('Zuerst Link prüfen und Video laden'); return; } const t=Math.round(ED.api.time()*10)/10; const label=(ED.label||'').trim()||('Schritt '+(ED.steps.length+1)); ED.steps.push({t,label}); ED.label=''; $('#ed-label').value=''; renderSteps(); },
+    addmanual:()=>{ const t=parseTime($('#ed-mtime').value); if(isNaN(t)){ toast('Zeit als mm:ss eingeben'); return; } const label=(ED.label||'').trim()||('Schritt '+(ED.steps.length+1)); ED.steps.push({t,label}); ED.label=''; $('#ed-label').value=''; $('#ed-mtime').value=''; renderSteps(); },
+    rmstep:b=>{ ED.steps.splice(+b.dataset.i,1); renderSteps(); },
+    pastesteps:()=>{ const lines=$('#ed-paste').value.split('\n'); const steps=[]; for(const ln of lines){ const m=ln.trim().match(/^[-*•]?\s*(\d+:\d\d(?::\d\d)?)\s*[-–:]?\s*(.+)$/); if(m){ const t=parseTime(m[1]); if(!isNaN(t)) steps.push({t,label:m[2].trim()}); } } if(!steps.length){ toast('Keine Zeile erkannt – Format: 0:12 Text'); return; } ED.steps=steps; $('#ed-paste').value=''; renderSteps(); toast(steps.length+' Schritte übernommen'); },
+    test:b=>{ if(ED.api&&ED.api.ready){ ED.api.seek(ED.steps[+b.dataset.i].t); ED.api.play(); } },
+    schoollink:async()=>{ if(!ED.source){ toast('Zuerst einen Link prüfen'); return; } const v={title:ED.title||'Video',source:ED.source,steps:ED.steps,task:ED.task}; const link=schoolLink(v); const box=$('#ed-link');
+      if(!/^https?:/.test(location.protocol)){ box.innerHTML=`<div class="note warn">Der Schul-Link funktioniert erst, wenn die App im Internet liegt. Lokal geöffnet zeigt er auf diese Datei.</div><code>${esc(link)}</code>`; return; }
+      box.innerHTML=`<div class="stack"><code>${esc(link)}</code><div class="row"><button class="btn sm" data-act="copylink" data-link="${esc(link)}">Kopieren</button><a class="btn sm" href="${esc(link)}" target="_blank" rel="noopener">Öffnen</a></div><div class="qr" id="qr"></div></div>`;
+      try{ if(!window.QRCode) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'); new QRCode($('#qr'),{text:link,width:220,height:220,correctLevel:QRCode.CorrectLevel.L}); }catch(e){ $('#qr').innerHTML='<span class="small muted">QR-Code konnte nicht geladen werden (offline?). Der Link funktioniert trotzdem.</span>'; } },
+    copylink:b=>{ navigator.clipboard&&navigator.clipboard.writeText(b.dataset.link).then(()=>toast('Kopiert')).catch(()=>toast('Kopieren nicht möglich')); },
+    save:()=>{ if(!ED.source){ toast('Bitte zuerst einen gültigen Link prüfen'); return; } if(!ED.title.trim()){ toast('Bitte einen Titel eingeben'); return; }
+      const matIds=(ED.materialText!=null?ED.materialText:(ED.material||[]).map(matName).join(', ')).split(/[,;]+/).map(x=>x.trim()).filter(Boolean).map(x=>{ const k=Object.keys(MATERIAL).find(k=>k===x.toLowerCase()||MATERIAL[k][0].toLowerCase()===x.toLowerCase()); return k||x; });
+      const rec={id:existing?existing.id:uid(),areaId:ED.areaId,title:ED.title.trim(),source:ED.source,material:matIds,steps:ED.steps.map(s=>({t:s.t,label:s.label.trim()||'Schritt'})),task:{text:ED.task.text.trim(),deliverable:ED.task.text.trim()?ED.task.deliverable:'keine'}};
+      if(existing) Object.assign(existing,rec); else S.videos.push(rec); save(); ED=null; toast('Gespeichert'); go('parent',{tab:'videos'}); },
+    delete:()=>confirmBox('Video löschen?',ED.title,'Löschen',()=>{ S.videos=S.videos.filter(v=>v.id!==existing.id); save(); ED=null; go('parent',{tab:'videos'}); },true)
+  });
+}
+function parseSource(s){ s=(s||'').trim(); if(!s) return null; let m=s.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/); if(m) return {type:'youtube',id:m[1]}; if(/^[A-Za-z0-9_-]{11}$/.test(s)) return {type:'youtube',id:s}; if(/^https?:\/\//.test(s)&&!/youtube|youtu\.be/.test(s)) return {type:'file',url:s}; return null; }
+async function fetchTitle(id){ const url=encodeURIComponent('https://www.youtube.com/watch?v='+id); for(const ep of ['https://www.youtube.com/oembed?format=json&url='+url,'https://noembed.com/embed?url='+url]){ try{ const r=await fetch(ep); if(r.ok){ const j=await r.json(); if(j.title) return j.title; } }catch(e){} } return ''; }
+function schoolLink(v){ const payload={t:v.title,s:(v.steps||[]).map(s=>[Math.round(s.t*10)/10,s.label]),a:(v.task&&v.task.text)||''}; if(v.source.type==='youtube') payload.y=v.source.id; else payload.u=v.source.url; const b64=btoa(unescape(encodeURIComponent(JSON.stringify(payload)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); return location.origin.replace('null','')+location.pathname+'#s='+b64; }
+function parseSchool(){ const m=location.hash.match(/[#&]s=([A-Za-z0-9_-]+)/); if(!m) return null; try{ let b=m[1].replace(/-/g,'+').replace(/_/g,'/'); while(b.length%4) b+='='; const j=JSON.parse(decodeURIComponent(escape(atob(b)))); return {id:'school',title:j.t||'Video',source:j.y?{type:'youtube',id:j.y}:{type:'file',url:j.u},steps:(j.s||[]).map(([t,label])=>({t:+t,label:String(label)})),task:{text:j.a||'',deliverable:j.a?'fertig':'keine'},areaId:null}; }catch(e){ return null; } }
+SCREENS.school=(app,{video})=>{ SCREENS.player(app,{school:video}); };
+
+/* ---- Katalog ---- */
+async function tabKatalog(root,acts){
+  root.innerHTML=`<h2>Katalog</h2><p class="small muted">Vorauswahl von Claude – mit einem Tipp ins Regal des Kindes.</p><div id="kat" class="stack"><p class="muted small">Lädt…</p></div>`;
+  let data=null; try{ if(/^https?:/.test(location.protocol)){ const r=await fetch('katalog.json',{cache:'no-store'}); if(r.ok) data=await r.json(); } }catch(e){}
+  const box=$('#kat'); if(!box) return;
+  if(!data||!Array.isArray(data.eintraege)){ box.innerHTML=`<div class="note warn">Kein <b>katalog.json</b> gefunden. Der Katalog lädt nur, wenn die App über http/https läuft.</div>`; return; }
+  const groups=S.areas.map(a=>({a,items:data.eintraege.filter(e=>e.areaId===a.id)})).filter(g=>g.items.length);
+  const rest=data.eintraege.filter(e=>!areaOf(e.areaId)); if(rest.length) groups.push({a:null,items:rest});
+  box.innerHTML=`<p class="small muted">${data.eintraege.length} Videos${data.stand?', Stand '+esc(data.stand):''}</p>`+groups.map(g=>`<div class="panel"><h3 ${g.a?`style="color:${g.a.color}"`:''}>${g.a?esc(g.a.emoji+' '+g.a.name):'Weitere'}</h3><div class="list">${g.items.map(e=>{ const drin=!!videoOf(e.id); const th=e.source&&e.source.type==='youtube'?`<img src="https://i.ytimg.com/vi/${esc(e.source.id)}/mqdefault.jpg" alt="" loading="lazy">`:'🎬';
+    return `<div class="li" style="align-items:flex-start"><div class="th">${th}</div><div class="grow" style="min-width:0"><div class="t" style="white-space:normal">${esc(e.title)}</div><div class="small muted">${esc([e.kanal,e.dauer,(e.steps||[]).length?(e.steps.length+' Schritte'):'ohne Schritte',DELIV[(e.task&&e.task.deliverable)||'keine'],e.sprache].filter(Boolean).join(' · '))}</div>${e.hinweis?`<div class="small" style="margin-top:4px">${esc(e.hinweis)}</div>`:''}</div><div class="acts">${drin?'<span class="badge-ok">✓ Schon drin</span>':`<button class="btn primary sm" data-act="katadd" data-id="${esc(e.id)}">Hinzufügen</button>`}</div></div>`; }).join('')}</div></div>`).join('');
+  acts.katadd=b=>{ const e=data.eintraege.find(x=>x.id===b.dataset.id); if(!e||videoOf(e.id)) return; const areaId=areaOf(e.areaId)?e.areaId:(S.areas.find(a=>a.kind==='lern')||S.areas[0]).id;
+    S.videos.push({id:e.id,areaId,title:e.title,source:e.source,steps:(e.steps||[]).map(s=>({t:+s.t,label:String(s.label)})),task:e.task&&e.task.text?{text:e.task.text,deliverable:e.task.deliverable||'fertig'}:{text:'',deliverable:'keine'},quelle:'katalog'}); save(); toast('Hinzugefügt: '+e.title);
+    b.outerHTML='<span class="badge-ok">✓ Schon drin</span>'; };
+}
+
+/* ---- Bereiche ---- */
+function tabAreas(root,acts){
+  root.innerHTML=`<div class="row between"><h2>Bereiche</h2><button class="btn primary" data-act="add">${ico('plus')} Bereich</button></div><p class="small muted">Lern-Bereiche sind unbegrenzt. Spass-Bereiche erscheinen nur, wenn sie in den Einstellungen eingeschaltet sind; sie stehen dann auf dem obersten Regalbrett und kosten pro Video einen Stern.</p>
+    <div class="list">${S.areas.map((a,i)=>`<div class="li"><span style="width:52px;height:48px;flex:none">${dingSvg(a.ding,a.emoji,'')}</span><div class="grow" style="min-width:0"><div class="t">${esc(a.name)}</div><div class="small muted">${a.kind==='spass'?'Spass (Sterne)':'Lernen'} · ${videosIn(a.id).length} Videos</div></div><div class="acts"><button class="btn icon sm" data-act="up" data-i="${i}" aria-label="Nach oben" ${i===0?'disabled':''}>${ico('up')}</button><button class="btn icon sm" data-act="down" data-i="${i}" aria-label="Nach unten" ${i===S.areas.length-1?'disabled':''}>${ico('down')}</button><button class="btn icon sm" data-act="edit" data-id="${a.id}" aria-label="Bearbeiten">${ico('pencil')}</button></div></div>`).join('')}</div>`;
+  $$('.li svg',root).forEach(s=>{ s.style.width='52px'; s.style.height='48px'; });
+  const editor=a=>{ const d=a?{...a}:{id:uid(),name:'',emoji:AREA_EMOJI[0],color:COLORS[3],kind:'lern',ding:'kiste'};
+    modal(`<h2>${a?'Bereich bearbeiten':'Neuer Bereich'}</h2>
+      <div class="field"><label for="ar-name">Name</label><input class="inp" id="ar-name" value="${esc(d.name)}"></div>
+      <div class="field"><label>Gegenstand im Regal</label><div class="ding-pick" id="ar-ding">${Object.keys(DING_NAMES).map(k=>`<button type="button" data-act="ding" data-v="${k}" class="${k===d.ding?'on':''}" title="${DING_NAMES[k]}">${dingSvg(k,d.emoji,'')}</button>`).join('')}</div></div>
+      <div class="field"><label>Symbol (für die Kiste und die Liste)</label><div class="emoji-pick" id="ar-em">${AREA_EMOJI.map(e=>`<button type="button" data-act="em" data-v="${e}" class="${e===d.emoji?'on':''}">${e}</button>`).join('')}</div></div>
+      <div class="field"><label>Farbe</label><div class="color-pick" id="ar-col">${COLORS.map(c=>`<button type="button" data-act="col" data-v="${c}" style="background:${c}" class="${c===d.color?'on':''}" aria-label="Farbe"></button>`).join('')}</div></div>
+      <div class="field"><label>Art</label><div class="row"><label class="row" style="gap:6px"><input type="radio" name="ar-kind" value="lern" ${d.kind==='lern'?'checked':''}> Lernen</label><label class="row" style="gap:6px"><input type="radio" name="ar-kind" value="spass" ${d.kind==='spass'?'checked':''}> Spass (Sterne)</label></div></div>
+      <div class="row between">${a?`<button class="btn danger sm" data-act="del">${ico('trash')} Löschen</button>`:'<span></span>'}<div class="row"><button class="btn ghost" data-close>Abbrechen</button><button class="btn primary" data-act="ok">Speichern</button></div></div>`,
+      {ding:(b,c,m)=>{ d.ding=b.dataset.v; $$('#ar-ding button',m).forEach(x=>x.classList.toggle('on',x===b)); },
+       em:(b,c,m)=>{ d.emoji=b.dataset.v; $$('#ar-em button',m).forEach(x=>x.classList.toggle('on',x===b)); const kb=$('#ar-ding button[data-v=kiste]',m); if(kb) kb.innerHTML=dingSvg('kiste',d.emoji,''); },
+       col:(b,c,m)=>{ d.color=b.dataset.v; $$('#ar-col button',m).forEach(x=>x.classList.toggle('on',x===b)); },
+       ok:(b,close,m)=>{ d.name=$('#ar-name',m).value.trim(); if(!d.name){ toast('Name fehlt'); return; } d.kind=$('input[name=ar-kind]:checked',m).value; if(a) Object.assign(a,d); else S.areas.push(d); save(); close(); render(); },
+       del:(b,close)=>{ if(videosIn(a.id).length){ toast('Zuerst die Videos verschieben oder löschen'); return; } close(); confirmBox('Bereich löschen?',a.name,'Löschen',()=>{ S.areas=S.areas.filter(x=>x.id!==a.id); save(); render(); },true); }}); };
+  Object.assign(acts,{ add:()=>editor(null), edit:b=>editor(areaOf(b.dataset.id)),
+    up:b=>{ const i=+b.dataset.i; [S.areas[i-1],S.areas[i]]=[S.areas[i],S.areas[i-1]]; save(); render(); },
+    down:b=>{ const i=+b.dataset.i; [S.areas[i+1],S.areas[i]]=[S.areas[i],S.areas[i+1]]; save(); render(); } });
+}
+
+/* ---- Kinder ---- */
+function tabKids(root,acts){
+  root.innerHTML=`<div class="row between"><h2>Kinder</h2><button class="btn primary" data-act="add">${ico('plus')} Kind</button></div>
+    <div class="list">${S.profiles.map(p=>{ const st=starState(p.id); return `<div class="li"><span class="av" style="--c:${p.color}">${p.emoji}</span><div class="grow"><div class="t">${esc(p.name)}</div><div class="small muted">Heute ${starsLeft(p.id)} von ${S.settings.starsPerDay+st.bonus} Sternen übrig · ${S.works.filter(w=>w.profileId===p.id).length} Werke</div></div><div class="acts"><button class="btn sm" data-act="resetstars" data-id="${p.id}">Sterne auffüllen</button><button class="btn icon sm" data-act="edit" data-id="${p.id}" aria-label="Bearbeiten">${ico('pencil')}</button></div></div>`; }).join('')}</div>`;
+  const editor=p=>{ const d=p?{...p}:{id:uid(),name:'',emoji:AVATARS[0],color:COLORS[1]};
+    modal(`<h2>${p?'Kind bearbeiten':'Neues Kind'}</h2><div class="field"><label for="k-name">Name</label><input class="inp" id="k-name" value="${esc(d.name)}"></div>
+      <div class="field"><label>Tier</label><div class="emoji-pick" id="k-em">${AVATARS.map(e=>`<button type="button" data-act="em" data-v="${e}" class="${e===d.emoji?'on':''}">${e}</button>`).join('')}</div></div>
+      <div class="field"><label>Farbe</label><div class="color-pick" id="k-col">${COLORS.map(c=>`<button type="button" data-act="col" data-v="${c}" style="background:${c}" class="${c===d.color?'on':''}" aria-label="Farbe"></button>`).join('')}</div></div>
+      <div class="row between">${p&&S.profiles.length>1?`<button class="btn danger sm" data-act="del">${ico('trash')} Löschen</button>`:'<span></span>'}<div class="row"><button class="btn ghost" data-close>Abbrechen</button><button class="btn primary" data-act="ok">Speichern</button></div></div>`,
+      {em:(b,c,m)=>{ d.emoji=b.dataset.v; $$('#k-em button',m).forEach(x=>x.classList.toggle('on',x===b)); },
+       col:(b,c,m)=>{ d.color=b.dataset.v; $$('#k-col button',m).forEach(x=>x.classList.toggle('on',x===b)); },
+       ok:(b,close,m)=>{ d.name=$('#k-name',m).value.trim(); if(!d.name){ toast('Name fehlt'); return; } if(p) Object.assign(p,d); else S.profiles.push(d); save(); close(); render(); },
+       del:(b,close)=>{ close(); confirmBox('Kind löschen?','Alle Werke und Fortschritte von '+p.name+' werden gelöscht.','Löschen',async()=>{ for(const w of S.works.filter(w=>w.profileId===p.id)) await blobs.del(w.id); S.works=S.works.filter(w=>w.profileId!==p.id); S.profiles=S.profiles.filter(x=>x.id!==p.id); Object.keys(S.progress).forEach(k=>{ if(k.startsWith(p.id+':')) delete S.progress[k]; }); delete S.stars[p.id]; if(S.activeProfile===p.id) S.activeProfile=S.profiles[0].id; save(); render(); },true); }}); };
+  Object.assign(acts,{ add:()=>editor(null), edit:b=>editor(S.profiles.find(p=>p.id===b.dataset.id)), resetstars:b=>{ const st=starState(b.dataset.id); st.used=0; save(); toast('Sterne aufgefüllt'); render(); } });
+}
+
+/* ---- Werke ---- */
+function tabWorks(root,acts){
+  const EMO=['👍','⭐','❤️','🎉','🌟','😍'];
+  root.innerHTML=`<h2>Werke</h2><p class="small muted">Gib eine kurze Rückmeldung. Das Kind sieht sie an der Korkwand bei «Meine Werke».</p>
+    ${S.works.length?`<div class="list">${S.works.map(w=>{ const kid=S.profiles.find(p=>p.id===w.profileId); const v=w.videoId?videoOf(w.videoId):null;
+      return `<div class="li" style="align-items:flex-start;flex-wrap:wrap"><button class="th" data-act="open" data-id="${w.id}" style="width:110px;aspect-ratio:1;border-radius:10px">${w.type==='ton'?'🎧':`<img data-blob="${w.id}" alt="">`}</button>
+        <div class="grow" style="min-width:200px"><div class="t">${esc(kid?kid.name:'?')} · ${({bild:'Bild',foto:'Foto',ton:'Tonaufnahme'})[w.type]}</div><div class="small muted">${dateDE(w.createdAt)}${v?' · '+esc(v.title):''}</div>
+          <div class="row" style="margin-top:8px;gap:6px">${EMO.map(e=>`<button class="btn icon sm ${w.feedback&&w.feedback.emoji===e?'primary':''}" data-act="emo" data-id="${w.id}" data-v="${e}" style="width:40px;min-height:40px;font-size:20px">${e}</button>`).join('')}</div>
+          <div class="row" style="margin-top:8px;flex-wrap:nowrap"><input class="inp" data-fbtext="${w.id}" value="${esc(w.feedback?w.feedback.text:'')}" placeholder="Kurzer Satz (optional)"><button class="btn sm" data-act="fbsend" data-id="${w.id}" style="flex:none">Senden</button></div></div></div>`; }).join('')}</div>`:'<div class="empty">Noch keine Werke.</div>'}`;
+  fillThumbs(root);
+  const setFb=(id,patch)=>{ const w=S.works.find(x=>x.id===id); w.feedback=Object.assign(w.feedback||{emoji:'👍',text:''},patch,{at:Date.now()}); w.fbSeen=false; save(); };
+  Object.assign(acts,{ open:b=>openWork(b.dataset.id,true),
+    emo:b=>{ setFb(b.dataset.id,{emoji:b.dataset.v}); render(); toast('Rückmeldung gespeichert'); },
+    fbsend:b=>{ const t=$(`[data-fbtext="${b.dataset.id}"]`).value.trim(); setFb(b.dataset.id,{text:t}); toast('Rückmeldung gespeichert'); } });
+}
+
+/* ---- Einstellungen ---- */
+function tabSettings(root,acts){
+  const s=S.settings; const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  const tog=(k,label,desc)=>`<div class="toggle"><div><div>${label}</div>${desc?`<div class="desc">${desc}</div>`:''}</div><button class="sw-tog ${s[k]?'on':''}" data-act="tog" data-k="${k}" role="switch" aria-checked="${!!s[k]}" aria-label="${label}"></button></div>`;
+  const deVoices=voices.filter(v=>/^de/i.test(v.lang));
+  root.innerHTML=`<h2>Einstellungen</h2>
+  <div class="panel"><h3>Werkstatt</h3>
+    ${tog('spass','Spass-Bereiche zeigen','Lustiges und Lieder im Regal, mit Sternen als Tageslimit. Aus = nur Lern-Bereiche, kein Sterneglas.')}
+    <div class="field"><label for="st-abend">Abendwerkstatt (dunkle Wand, Lichterkette)</label><select class="inp" id="st-abend" data-set="abend"><option value="auto" ${s.abend==='auto'?'selected':''}>Automatisch ab 18 Uhr bis 6 Uhr</option><option value="tag" ${s.abend==='tag'?'selected':''}>Immer Tag</option><option value="abend" ${s.abend==='abend'?'selected':''}>Immer Abend</option></select></div></div>
+  <div class="panel"><h3>Sterne</h3>
+    <div class="field"><label for="st-n">Sterne pro Tag (für Spass-Videos)</label><select class="inp" id="st-n" data-set="starsPerDay">${[1,2,3,4,5,6].map(n=>`<option ${n===s.starsPerDay?'selected':''}>${n}</option>`).join('')}</select></div>
+    ${tog('earnStar','Stern verdienen','Wer eine Aufgabe abgibt, bekommt heute einen Stern dazu (höchstens einen pro Tag).')}</div>
+  <div class="panel"><h3>Player</h3>
+    <div class="field"><label for="st-slow">Tempo bei «langsam» 🐢</label><select class="inp" id="st-slow" data-set="slowRate">${[[0.5,'halb so schnell'],[0.75,'etwas langsamer']].map(([v,l])=>`<option value="${v}" ${v===s.slowRate?'selected':''}>${l}</option>`).join('')}</select></div>
+    ${tog('tts','Vorlesen','Schritte und Aufgaben können per Lautsprecher-Knopf vorgelesen werden.')}
+    ${tog('autoRead','Schritt automatisch vorlesen','Wenn das Video am Ende eines Schritts anhält.')}
+    <div class="field"><label for="st-voice">Stimme</label><select class="inp" id="st-voice" data-set="voice"><option value="">Automatisch (Deutsch)</option>${deVoices.map(v=>`<option value="${esc(v.name)}" ${v.name===s.voice?'selected':''}>${esc(v.name)} (${v.lang})</option>`).join('')}</select><button class="btn sm" data-act="testvoice" style="align-self:flex-start">Stimme testen</button></div>
+    ${tog('passTouches','Tippen ans Video durchlassen','Normalerweise blockiert die App Tipps aufs YouTube-Bild (Titel, Vorschläge). Ohne YouTube Premium erscheint Werbung, die man nur direkt im Video überspringen kann – dann hier einschalten.')}
+    ${SR?tog('voiceControl','Sprachsteuerung (experimentell)','«Stopp», «Weiter», «Nochmal» rufen. Braucht Mikrofon-Erlaubnis und Internet; auf dem iPad nicht immer zuverlässig.'):''}</div>
+  <div class="panel"><h3>PIN</h3><p class="small muted">${s.pin==='1234'?'Noch die Standard-PIN 1234 – bitte ändern.':'Eigene PIN gesetzt.'}</p><div class="row" style="flex-wrap:nowrap"><input class="inp" id="st-pin" inputmode="numeric" maxlength="4" placeholder="Neue 4-stellige PIN"><button class="btn" data-act="pin">Ändern</button></div></div>
+  <div class="panel"><h3>iPad-Tipps</h3><ul class="small muted" style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px"><li>Seite in Safari öffnen → Teilen → «Zum Home-Bildschirm» → läuft dann als Vollbild-App. Wichtig: Safari-Tab und Home-App haben getrennte Speicher – erst hinzufügen, dann dort einrichten.</li><li>«Geführter Zugriff» (Einstellungen → Bedienungshilfen) sperrt das Kind in der App ein; Dreifachklick auf die Seitentaste beendet ihn.</li><li>YouTube ohne Werbung nur, wenn in diesem Browser ein Premium-Konto angemeldet ist.</li></ul></div>`;
+  root.onchange=e=>{ const el=e.target.closest('[data-set]'); if(!el) return; const k=el.dataset.set; s[k]=(k==='voice'||k==='abend')?el.value:+el.value; save(); };
+  Object.assign(acts,{ tog:b=>{ s[b.dataset.k]=!s[b.dataset.k]; save(); b.classList.toggle('on',s[b.dataset.k]); b.setAttribute('aria-checked',String(!!s[b.dataset.k])); },
+    testvoice:()=>{ unlockTTS(); speak('Hallo! Jetzt du: Papier falten.'); },
+    pin:()=>{ const v=$('#st-pin').value.trim(); if(!/^\d{4}$/.test(v)){ toast('Genau 4 Ziffern'); return; } s.pin=v; save(); $('#st-pin').value=''; toast('PIN geändert'); } });
+}
+
+/* ---- Daten ---- */
+function tabData(root,acts){
+  root.innerHTML=`<h2>Daten</h2>
+  <div class="panel"><h3>Inhaltsdatei</h3><p class="small muted">${contentInfo?`<b>inhalte.json</b> geladen: ${contentInfo.n} Videos${contentInfo.stand?', Stand '+esc(contentInfo.stand):''}. Diese Videos werden aus der Datei gepflegt.`:/^https?:/.test(location.protocol)?'Keine <b>inhalte.json</b> neben der App gefunden – Videos werden nur hier im Elternbereich gepflegt.':'Die App wurde direkt als Datei geöffnet; <b>inhalte.json</b> wird nur geladen, wenn die App über einen Server (http/https) läuft.'}</p></div>
+  <div class="panel"><h3>Sichern und übertragen</h3><p class="small muted">Kinder, Sterne, Fortschritt und Werke liegen nur in diesem Browser auf diesem Gerät. Zum Übertragen auf ein anderes Gerät: hier exportieren, dort importieren. Werke (Bilder, Aufnahmen) bleiben auf dem Gerät.</p>
+    <div class="row"><button class="btn" data-act="export">Videos & Einstellungen exportieren</button><label class="btn" for="imp">Importieren</label><input type="file" id="imp" accept="application/json,.json" hidden></div><div id="storage" class="small muted"></div></div>
+  <div class="panel"><h3>Zurücksetzen</h3><button class="btn danger" data-act="reset" style="align-self:flex-start">Alles löschen</button></div>`;
+  if(navigator.storage&&navigator.storage.estimate) navigator.storage.estimate().then(e=>{ const el=$('#storage'); if(el&&e.usage) el.textContent='Belegt: '+(e.usage/1048576).toFixed(1)+' MB'; });
+  $('#imp').onchange=e=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{ try{ const j=JSON.parse(r.result); if(!Array.isArray(j.areas)||!Array.isArray(j.videos)) throw 0; confirmBox('Importieren?','Bereiche, Videos, Kinder und Einstellungen werden ersetzt. Werke bleiben.','Importieren',()=>{ S.areas=j.areas.filter(a=>a&&a.id&&a.name); S.videos=j.videos.filter(validVideo); if(Array.isArray(j.profiles)&&j.profiles.length) S.profiles=j.profiles; if(j.settings) Object.assign(S.settings,j.settings,{pin:S.settings.pin}); if(!S.profiles.find(p=>p.id===S.activeProfile)) S.activeProfile=S.profiles[0]&&S.profiles[0].id; S.areas.forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; }); save(); toast('Importiert'); render(); }); }catch(err){ toast('Datei nicht lesbar'); } }; r.readAsText(f); };
+  Object.assign(acts,{ export:()=>{ const data={app:'schrittli',version:1,exported:new Date().toISOString(),profiles:S.profiles,areas:S.areas,videos:S.videos,settings:{...S.settings,pin:undefined}}; const b=new Blob([JSON.stringify(data,null,1)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='schrittli-'+todayStr()+'.json'; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },1000); },
+    reset:()=>confirmBox('Wirklich alles löschen?','Videos, Bereiche, Kinder, Werke und Einstellungen.','Alles löschen',async()=>{ for(const w of S.works) await blobs.del(w.id); localStorage.removeItem(KEY); location.reload(); },true) });
+}
+
+boot();
