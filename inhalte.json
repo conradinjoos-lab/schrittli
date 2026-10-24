@@ -1480,7 +1480,7 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Material bereitlegen"
+     "label": "Material richten: Wolle bereitlegen"
     },
     {
      "t": 20,
@@ -1668,7 +1668,7 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Material – Karton, Wolle, Schere, Nadel"
+     "label": "Material richten: Karton, Wolle, Schere, Nadel"
     },
     {
      "t": 8,
@@ -1758,7 +1758,7 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: drei Fäden, Klebeband"
+     "label": "Material richten: drei Fäden, Klebeband"
     },
     {
      "t": 10,
@@ -1942,7 +1942,7 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Was brauchst du?"
+     "label": "Material richten: Was brauchst du?"
     },
     {
      "t": 28,
@@ -1989,7 +1989,7 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Was brauchst du?"
+     "label": "Material richten: Was brauchst du?"
     },
     {
      "t": 40,
@@ -2329,7 +2329,7 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Flasche mit Essig, Ballon, Backpulver"
+     "label": "Material richten: Flasche mit Essig, Ballon, Backpulver"
     },
     {
      "t": 6,

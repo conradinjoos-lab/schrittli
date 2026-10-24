@@ -1200,7 +1200,7 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Material bereitlegen"
+     "label": "Material richten: Wolle bereitlegen"
     },
     {
      "t": 20,
@@ -1408,7 +1408,7 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Material – Karton, Wolle, Schere, Nadel"
+     "label": "Material richten: Karton, Wolle, Schere, Nadel"
     },
     {
      "t": 8,
@@ -1508,7 +1508,7 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: drei Fäden, Klebeband"
+     "label": "Material richten: drei Fäden, Klebeband"
     },
     {
      "t": 10,
@@ -1712,7 +1712,7 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Was brauchst du?"
+     "label": "Material richten: Was brauchst du?"
     },
     {
      "t": 28,
@@ -1764,7 +1764,7 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Was brauchst du?"
+     "label": "Material richten: Was brauchst du?"
     },
     {
      "t": 40,
@@ -2144,7 +2144,7 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Flasche mit Essig, Ballon, Backpulver"
+     "label": "Material richten: Flasche mit Essig, Ballon, Backpulver"
     },
     {
      "t": 6,
@@ -2240,42 +2240,42 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Garn und Häkelnadel bereitlegen"
+     "label": "Material richten: Garn und Häkelnadel"
     },
     {
-     "t": 20,
+     "t": 19,
      "label": "Garn abwickeln, zweimal um den Zeigefinger"
     },
     {
-     "t": 42,
+     "t": 41,
      "label": "Hintere Schlaufe über den Finger, festziehen"
     },
     {
-     "t": 62,
+     "t": 61,
      "label": "Nochmals üben: Anfangsknoten machen"
     },
     {
-     "t": 100,
+     "t": 99,
      "label": "Faden um kleinen Finger und Zeigefinger legen"
     },
     {
-     "t": 147,
+     "t": 146,
      "label": "Nadel in die Schlaufe, Knoten festziehen"
     },
     {
-     "t": 154,
+     "t": 153,
      "label": "Garn holen, durch die Schlaufe ziehen"
     },
     {
-     "t": 169,
+     "t": 168,
      "label": "Nochmals Garn holen und durchziehen"
     },
     {
-     "t": 194,
+     "t": 193,
      "label": "Immer so weiter, Zeigefinger gestreckt"
     },
     {
-     "t": 220,
+     "t": 219,
      "label": "Fertig – schau deine Kette an"
     }
    ],
@@ -2300,30 +2300,30 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Stoff, Nadel und Faden bereit"
+     "label": "Material richten: Stoff, Nadel und Faden"
     },
     {
-     "t": 22,
+     "t": 21,
      "label": "Nadel von unten hoch, einen Stich zurück"
     },
     {
-     "t": 38,
+     "t": 37,
      "label": "Zwei Stichlängen nach vorn ausstechen"
     },
     {
-     "t": 47,
+     "t": 46,
      "label": "Nadel zurück ins Loch vom letzten Stich"
     },
     {
-     "t": 53,
+     "t": 52,
      "label": "Zurück und zwei vor in einem Zug"
     },
     {
-     "t": 62,
+     "t": 61,
      "label": "Immer so weiter bis zum Linienende"
     },
     {
-     "t": 67,
+     "t": 66,
      "label": "Fertig – schau dein Werk an"
     }
    ],
@@ -2348,42 +2348,42 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Faden, Türklinke und Stift"
+     "label": "Material richten: Faden, Türklinke und Stift"
     },
     {
-     "t": 8,
+     "t": 7,
      "label": "Faden fünfmal so lang abmessen, Enden zusammen"
     },
     {
-     "t": 28,
+     "t": 27,
      "label": "Beide Enden zusammen verknoten"
     },
     {
-     "t": 39,
+     "t": 38,
      "label": "Knoten an Türklinke, Stift ans andere Ende"
     },
     {
-     "t": 50,
+     "t": 49,
      "label": "Stift drehen wie ein Propeller"
     },
     {
-     "t": 59,
+     "t": 58,
      "label": "Weiterdrehen, bis die Kordel fest ist"
     },
     {
-     "t": 87,
+     "t": 86,
      "label": "Finger in die Mitte, Enden zusammen"
     },
     {
-     "t": 96,
+     "t": 95,
      "label": "Stückchen für Stückchen loslassen"
     },
     {
-     "t": 105,
+     "t": 104,
      "label": "Stift raus, Knoten ans Ende"
     },
     {
-     "t": 120,
+     "t": 119,
      "label": "Fertig – schau deine Kordel an"
     }
    ],
@@ -2411,35 +2411,35 @@
      "label": "Zuschauen: Bär mit Bauch zum Annähen"
     },
     {
-     "t": 18,
+     "t": 17,
      "label": "Faden einfädeln, Knoten ans Ende"
     },
     {
-     "t": 30,
+     "t": 29,
      "label": "Von hinten nach vorne stechen"
     },
     {
-     "t": 39,
+     "t": 38,
      "label": "Ein Stück zurück einstechen"
     },
     {
-     "t": 45,
+     "t": 44,
      "label": "Ein Stück vor dem Loch wieder hoch"
     },
     {
-     "t": 57,
+     "t": 56,
      "label": "Zurück ins Ende vom ersten Stich"
     },
     {
-     "t": 68,
+     "t": 67,
      "label": "Wieder ein Stück vorne hoch, gleich lang"
     },
     {
-     "t": 83,
+     "t": 82,
      "label": "Immer so weiter rund um den Bauch"
     },
     {
-     "t": 90,
+     "t": 89,
      "label": "Fertig – schau dein Werk an"
     }
    ],
@@ -2464,7 +2464,7 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Brett, Hammer, Nägel, Faden, Kreppband"
+     "label": "Material richten: Brett, Hammer, Nägel, Faden, Kreppband"
     },
     {
      "t": 14,
@@ -2520,38 +2520,38 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Wolle und zwei Nadeln bereitlegen"
+     "label": "Material richten: Wolle und zwei Nadeln"
     },
     {
-     "t": 24,
+     "t": 23,
      "label": "Knoten: Kreis legen, Faden durchziehen"
     },
     {
-     "t": 40,
+     "t": 39,
      "label": "Nadel in die Schlaufe, Garn festziehen"
     },
     {
-     "t": 57,
+     "t": 56,
      "label": "Zweite Nadel von unten in die Masche"
     },
     {
-     "t": 70,
+     "t": 69,
      "label": "Garn greifen und locker durchziehen"
     },
     {
-     "t": 88,
+     "t": 87,
      "label": "Schlaufe rückwärts auf die erste Nadel"
     },
     {
-     "t": 103,
+     "t": 102,
      "label": "Nochmals: durchziehen, locker, rückwärts aufsetzen"
     },
     {
-     "t": 122,
+     "t": 121,
      "label": "Immer so weiter bis genug Maschen"
     },
     {
-     "t": 149,
+     "t": 148,
      "label": "Fertig – schau deine Maschen an"
     }
    ],
@@ -2576,7 +2576,7 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Quadratisches Papier bereitlegen"
+     "label": "Material richten: quadratisches Papier"
     },
     {
      "t": 3,
@@ -2632,46 +2632,46 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Strickstück mit Maschen auf der Nadel"
+     "label": "Material richten: Strickstück auf der Nadel"
     },
     {
-     "t": 22,
+     "t": 21,
      "label": "Zwei Maschen rechts stricken"
     },
     {
-     "t": 38,
+     "t": 37,
      "label": "Erste Masche über die zweite heben"
     },
     {
-     "t": 52,
+     "t": 51,
      "label": "Nochmals: eine rechts, erste überheben"
     },
     {
-     "t": 68,
+     "t": 67,
      "label": "Immer so weiter bis die Reihe fertig ist"
     },
     {
-     "t": 78,
+     "t": 77,
      "label": "Faden abschneiden, ein Stück übrig lassen"
     },
     {
-     "t": 90,
+     "t": 89,
      "label": "Faden durch die letzte Masche ziehen"
     },
     {
-     "t": 110,
+     "t": 109,
      "label": "Extra: Masche rechts, Umschlag, Masche rechts"
     },
     {
-     "t": 132,
+     "t": 131,
      "label": "Umschlag und erste Masche überheben"
     },
     {
-     "t": 150,
+     "t": 149,
      "label": "Weiter bis zum Schluss, Faden durchziehen"
     },
     {
-     "t": 212,
+     "t": 211,
      "label": "Fertig – vergleiche die beiden Kanten"
     }
    ],
@@ -2699,31 +2699,31 @@
      "label": "Zuschauen: So sieht die Filzkugel aus"
     },
     {
-     "t": 24,
+     "t": 23,
      "label": "Ein kleines Stück Filzwolle abzupfen"
     },
     {
-     "t": 33,
+     "t": 32,
      "label": "Hände nass machen, Wolle einseifen"
     },
     {
-     "t": 45,
+     "t": 44,
      "label": "Wolle zwischen den Händen zur Kugel rollen"
     },
     {
-     "t": 60,
+     "t": 59,
      "label": "Mehr Wolle darumlegen, nass machen, rollen"
     },
     {
-     "t": 75,
+     "t": 74,
      "label": "Zweite Farbe vorsichtig darüberlegen"
     },
     {
-     "t": 86,
+     "t": 85,
      "label": "Weiter rollen, bis die Kugel fest ist"
     },
     {
-     "t": 96,
+     "t": 95,
      "label": "Fertig – schau deine Kugel an"
     }
    ],
@@ -2748,38 +2748,38 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Filzwolle und Seifenlauge bereit"
+     "label": "Material richten: Filzwolle und Seifenlauge"
     },
     {
-     "t": 8,
+     "t": 7,
      "label": "Wollstrang in der Mitte verknoten"
     },
     {
-     "t": 16,
+     "t": 15,
      "label": "Wolle locker zur Kugel vorformen"
     },
     {
-     "t": 29,
+     "t": 28,
      "label": "Kugel in die Seifenlauge tauchen"
     },
     {
-     "t": 42,
+     "t": 41,
      "label": "Zwischen den Händen drehen, erst sanft"
     },
     {
-     "t": 60,
+     "t": 59,
      "label": "Fester drücken und schneller drehen"
     },
     {
-     "t": 102,
+     "t": 101,
      "label": "Weiterdrehen, bis die Kugel richtig fest ist"
     },
     {
-     "t": 118,
+     "t": 117,
      "label": "Fertige Kugel in kaltes Wasser tauchen"
     },
     {
-     "t": 134,
+     "t": 133,
      "label": "Fertig – schau deine Kugel an"
     }
    ],
@@ -2804,30 +2804,30 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Häkelstück und Nadel bereit"
+     "label": "Material richten: Häkelstück und Nadel"
     },
     {
-     "t": 6,
+     "t": 5,
      "label": "Nadel in die nächste Masche einstechen"
     },
     {
-     "t": 18,
+     "t": 17,
      "label": "Prüfen: zwei Fäden liegen auf der Nadel"
     },
     {
-     "t": 36,
+     "t": 35,
      "label": "Faden von unten holen, durchziehen"
     },
     {
-     "t": 47,
+     "t": 46,
      "label": "Nochmals Faden holen, durch beide Schlaufen ziehen"
     },
     {
-     "t": 58,
+     "t": 57,
      "label": "Leicht anziehen, Masche fertig"
     },
     {
-     "t": 64,
+     "t": 63,
      "label": "Fertig – häkle so die ganze Reihe"
     }
    ],
@@ -2852,26 +2852,26 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Schuh mit Schnürsenkel bereitlegen"
+     "label": "Material richten: Schuh mit Schnürsenkel"
     },
     {
-     "t": 21,
+     "t": 20,
      "label": "Knoten: drüber, drunter und durch, festziehen"
     },
     {
-     "t": 36,
+     "t": 35,
      "label": "Die Maus baut ein Haus, einmal drumherum"
     },
     {
-     "t": 43,
+     "t": 42,
      "label": "Hinten rein und vorne wieder raus"
     },
     {
-     "t": 50,
+     "t": 49,
      "label": "Beide Schlaufen festziehen"
     },
     {
-     "t": 56,
+     "t": 55,
      "label": "Fertig – schau deine Schleife an"
     }
    ],
@@ -2896,46 +2896,46 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Wolle und zwei Stricknadeln"
+     "label": "Material richten: Wolle und zwei Stricknadeln"
     },
     {
-     "t": 28,
+     "t": 27,
      "label": "Faden abmessen: dreimal so lang wie dein Stück"
     },
     {
-     "t": 45,
+     "t": 44,
      "label": "Schlaufe machen, kurzes Ende durchziehen"
     },
     {
-     "t": 62,
+     "t": 61,
      "label": "Nadel in die Schlaufe, festziehen"
     },
     {
-     "t": 78,
+     "t": 77,
      "label": "Daumen und Zeigefinger rein, Masche nach unten"
     },
     {
-     "t": 126,
+     "t": 125,
      "label": "Nadel von unten in die Daumenschlaufe"
     },
     {
-     "t": 136,
+     "t": 135,
      "label": "Faden vom Zeigefinger holen, durch Daumen ziehen"
     },
     {
-     "t": 154,
+     "t": 153,
      "label": "Nochmals langsam: zuschauen und mitmachen"
     },
     {
-     "t": 183,
+     "t": 182,
      "label": "Weiter: Daumen loslassen, anziehen, umklappen"
     },
     {
-     "t": 220,
+     "t": 219,
      "label": "Immer so weiter bis genug Maschen"
     },
     {
-     "t": 265,
+     "t": 264,
      "label": "Fertig – schau deinen Anschlag an"
     }
    ],
@@ -2960,42 +2960,42 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Hammer, Zange, Papier, Holz bereitlegen"
+     "label": "Material richten: Hammer, Zange, Papier, Holz"
     },
     {
-     "t": 30,
+     "t": 29,
      "label": "Papier aufs Holz legen, knicken, zuschneiden"
     },
     {
-     "t": 60,
+     "t": 59,
      "label": "Hasen oder dein Motiv aufzeichnen"
     },
     {
-     "t": 82,
+     "t": 81,
      "label": "Papier mit Klebeband aufs Holz kleben"
     },
     {
-     "t": 105,
+     "t": 104,
      "label": "Nagel mit der Zange festklemmen"
     },
     {
-     "t": 148,
+     "t": 147,
      "label": "Nagel gerade ansetzen und einhämmern"
     },
     {
-     "t": 165,
+     "t": 164,
      "label": "Nächster Nagel, einen Finger Abstand"
     },
     {
-     "t": 180,
+     "t": 179,
      "label": "Rund ums ganze Bild nageln"
     },
     {
-     "t": 193,
+     "t": 192,
      "label": "Alle Nägel nochmals nachklopfen"
     },
     {
-     "t": 208,
+     "t": 207,
      "label": "Fertig – schau dein Nagelbild an"
     }
    ],
@@ -3020,42 +3020,42 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Elefant aus Filz, zwei Teile"
+     "label": "Material richten: Elefant aus Filz, zwei Teile"
     },
     {
-     "t": 27,
+     "t": 26,
      "label": "Faden einfädeln, Knoten ans Ende"
     },
     {
-     "t": 35,
+     "t": 34,
      "label": "Zwischen den Teilen nach oben stechen"
     },
     {
-     "t": 46,
+     "t": 45,
      "label": "Von unten hoch, genau beim ersten Faden raus"
     },
     {
-     "t": 65,
+     "t": 64,
      "label": "Nadel von rechts nach links unter dem Faden"
     },
     {
-     "t": 73,
+     "t": 72,
      "label": "Von unten hoch, Faden über die Nadel"
     },
     {
-     "t": 90,
+     "t": 89,
      "label": "Immer so weiter: hoch und Faden drüber"
     },
     {
-     "t": 105,
+     "t": 104,
      "label": "Abstände gleich gross, Schlinge am Rand"
     },
     {
-     "t": 118,
+     "t": 117,
      "label": "Weiter nähen bis ans Ende der Kante"
     },
     {
-     "t": 148,
+     "t": 147,
      "label": "Fertig – schau dein Werk an"
     }
    ],
@@ -3080,10 +3080,10 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Wolle, Schere, Zirkel, Karton"
+     "label": "Material richten: Wolle, Schere, Zirkel, Karton"
     },
     {
-     "t": 22,
+     "t": 17.5,
      "label": "Karton falten, grossen und kleinen Kreis zeichnen"
     },
     {
@@ -3140,42 +3140,42 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Luftmaschenkette und Nadel bereit"
+     "label": "Material richten: Luftmaschenkette und Nadel"
     },
     {
-     "t": 22,
+     "t": 21,
      "label": "In die vorletzte Luftmasche einstechen"
     },
     {
-     "t": 45,
+     "t": 44,
      "label": "Faden umschlagen, einmal durchholen"
     },
     {
-     "t": 60,
+     "t": 59,
      "label": "Faden durch beide Schlaufen ziehen"
     },
     {
-     "t": 78,
+     "t": 77,
      "label": "Nächste Masche: einstechen, holen, durchziehen"
     },
     {
-     "t": 120,
+     "t": 119,
      "label": "Nochmals langsam: feste Masche nachmachen"
     },
     {
-     "t": 180,
+     "t": 179,
      "label": "Am Ende der Reihe: Luftmasche, dann wenden"
     },
     {
-     "t": 195,
+     "t": 194,
      "label": "Neue Reihe: unter beide Fäden einstechen"
     },
     {
-     "t": 225,
+     "t": 224,
      "label": "Immer so weiter, Reihe für Reihe"
     },
     {
-     "t": 270,
+     "t": 269,
      "label": "Fertig – schau dein Werk an"
     }
    ],
@@ -3200,7 +3200,7 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Papier, Leim, Schnur, Perle"
+     "label": "Material richten: Papier, Leim, Schnur, Perle"
     },
     {
      "t": 4,
@@ -3256,7 +3256,7 @@
    "steps": [
     {
      "t": 0,
-     "label": "Zuschauen: Zwei Filzteile, Nadel und Sticktwist"
+     "label": "Material richten: zwei Filzteile, Nadel, Sticktwist"
     },
     {
      "t": 30,
