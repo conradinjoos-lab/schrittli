@@ -363,6 +363,41 @@ code{font-size:13px;word-break:break-all;background:var(--surface2);padding:2px 
 .kid.pl.kino .speed .lab{display:none}
 .kid.pl.kino .modebadge{left:50%;transform:translateX(-50%);top:14px;height:40px;font-size:17px}
 @media (max-width:700px){ .kid.pl.kino .video-box{width:min(100vw,calc((100vh - 170px)*16/9));width:min(100dvw,calc((100dvh - 170px)*16/9))} .kid.pl.kino .pl-bank{min-height:170px} .kid.pl.kino .steuer{flex-wrap:wrap;gap:8px} .kid.pl.kino .kino-step{flex-basis:100%;order:-1} .kid.pl.kino .schritte{bottom:180px;width:calc(100vw - 32px);right:16px} .kid.pl.kino .modebadge{left:12px;transform:none} }
+@media (min-width:900px) and (min-height:540px){
+ .kid.pl:not(.kino){height:100vh;height:100dvh;min-height:0;overflow:hidden;padding-bottom:0;display:flex;flex-direction:column}
+ .kid.pl:not(.kino) .pl-top{flex:none}
+ .kid.pl:not(.kino) .panes{flex:1;min-height:0;margin-top:6px;align-items:start;grid-template-columns:minmax(0,3fr) minmax(0,2fr)}
+ .kid.pl:not(.kino) .pane{min-height:0}
+ .kid.pl:not(.kino) .video-box{width:min(100%,calc(var(--pl-avail,520px)*16/9));margin:0 auto}
+ .kid.pl:not(.kino) .schritte{aspect-ratio:auto;height:var(--pl-avail,520px);max-height:none}
+ .kid.pl:not(.kino) .pl-bank{flex:none;margin-top:10px;padding:12px 0 calc(12px + env(safe-area-inset-bottom,0px))}
+ .kid.pl:not(.kino) .steuer{margin-top:0;flex-wrap:nowrap;align-items:center}
+ .kid.pl:not(.kino) .controls{flex:none}
+ .kid.pl:not(.kino) .auftrag{flex:1 1 0;min-width:0;margin-left:auto}
+ .kid.pl:not(.kino) .kbtn.round{width:64px;min-height:64px;font-size:26px}
+ .kid.pl:not(.kino) .kbtn.round.big{width:84px;min-height:84px;font-size:38px}
+ .kid.pl:not(.kino) .girlande{display:none}
+ .kid.pl:not(.kino) .pl-top{margin-top:10px;min-height:0}
+ .kid.pl:not(.kino) .pl-top .schild{min-height:48px;padding:2px 16px}.kid.pl:not(.kino) .pl-top .schild h1{font-size:22px}
+ .kid.pl:not(.kino) .auftrag{flex-direction:row;align-items:center;flex-wrap:wrap;gap:6px 14px;padding:8px 14px;max-width:620px;transform:none}
+ .kid.pl:not(.kino) .auftrag .row.between{display:contents}
+ .kid.pl:not(.kino) .auftrag .k{order:1;flex:none}
+ .kid.pl:not(.kino) .auftrag .btn.icon{order:4;width:36px!important;min-height:36px!important}
+ .kid.pl:not(.kino) .auftrag .txt{order:2;flex:1 1 220px;min-width:0;font-size:16px;line-height:1.25}
+ .kid.pl:not(.kino) .auftrag .btn-grid{order:3;flex:none}
+ .kid.pl:not(.kino) .auftrag .done{order:3;font-size:16px}
+ .kid.pl:not(.kino) .auftrag .btn:not(.icon){order:5}
+ .kid.pl:not(.kino) .auftrag .kbtn{min-height:46px;font-size:17px;padding:0 14px}
+}
+@media (max-width:899px){
+ .kid.pl:not(.kino){display:flex;flex-direction:column}
+ .kid.pl:not(.kino) .girlande{order:0}.kid.pl:not(.kino) .pl-top{order:0}
+ .kid.pl:not(.kino) .panes{display:contents}
+ .kid.pl:not(.kino) .pane{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+ .kid.pl:not(.kino) .pane:nth-child(1){order:1;margin-top:14px}
+ .kid.pl:not(.kino) .pl-bank{order:2;margin-top:14px}
+ .kid.pl:not(.kino) .pane:nth-child(2){order:3;margin-top:18px;margin-bottom:10px}
+}
 </style>
 </head>
 <body>
@@ -646,7 +681,7 @@ SCREENS.player=(app,{videoId,school})=>{
       updatePlayerUI(); },
     onError:()=>{ if(!P) return; P.err=true; P.mode='error'; updatePlayerUI(); }
   });
-  P.tick=setInterval(tickPlayer,100);
+  P.tick=setInterval(tickPlayer,100); requestAnimationFrame(fitPlayer); setTimeout(fitPlayer,300);
   setTimeout(()=>{ if(P&&P.v===v&&!P.api.ready&&P.mode==='start'){ P.mode='error'; updatePlayerUI(); } },12000);
   updatePlayerUI();
   wire(app,{
@@ -667,6 +702,8 @@ SCREENS.player=(app,{videoId,school})=>{
   if(S.settings.voiceControl) startListening();
 };
 function curStep(){ return P.steps[P.idx]; }
+function fitPlayer(){ const el=$('.kid.pl'); if(!el||el.classList.contains('kino')) return; const panes=$('.panes',el), pane=$('.pane',el); if(!panes||!pane) return; if(!matchMedia('(min-width:900px) and (min-height:540px)').matches){ el.style.removeProperty('--pl-avail'); return; } const lab=$('.plabel',pane), fuss=$('.fuss',pane); const h=panes.clientHeight-(lab?lab.offsetHeight+8:0)-(fuss?fuss.offsetHeight+8:0); el.style.setProperty('--pl-avail',Math.max(180,Math.floor(h))+'px'); }
+window.addEventListener('resize',()=>{ if(P) fitPlayer(); });
 function toggleKino(on){ const el=$('.kid.pl'); if(!el||(P&&P.school)) return; const want=on==null?!el.classList.contains('kino'):!!on; el.classList.toggle('kino',want); el.classList.remove('liste'); if(S.settings.kino!==want){ S.settings.kino=want; save(); } if(want) fsEnter(); else fsExit(); if(P) updatePlayerUI(); }
 function fsEnter(){ try{ const d=document.documentElement; if(document.fullscreenElement||document.webkitFullscreenElement) return; const f=d.requestFullscreen||d.webkitRequestFullscreen; if(f){ const r=f.call(d,{navigationUI:'hide'}); if(r&&r.catch) r.catch(()=>{}); } }catch(e){} }
 function fsExit(){ try{ if(document.fullscreenElement||document.webkitFullscreenElement){ const r=(document.exitFullscreen||document.webkitExitFullscreen).call(document); if(r&&r.catch) r.catch(()=>{}); } }catch(e){} }
@@ -726,6 +763,7 @@ function updatePlayerUI(){ if(!P) return;
     tk.innerHTML=`<div class="row between"><span class="k">Am Schluss</span><button class="btn icon" data-act="say" data-text="${esc(task.text)}" aria-label="Aufgabe vorlesen" style="width:40px;min-height:40px">${ico('speaker')}</button></div><div class="txt">${esc(task.text)}</div>
       ${pr.done?`<div class="done">${ico('check')} Abgegeben – super!</div>${P.school?'':`<button class="btn" data-act="gallery">${ico('gallery')} Meine Werke</button>`}<div class="btn-grid">${btns[d]||''}</div>`
       :`<div class="btn-grid">${btns[d]||''}</div>${d!=='fertig'&&m==='ended'?`<button class="btn ghost sm" data-act="fertig">Ohne Abgabe fertig</button>`:''}`}`; }
+  fitPlayer();
 }
 document.addEventListener('visibilitychange',()=>{ if(document.hidden&&P&&P.mode==='playing'&&P.api.ready) userPause(); });
 
