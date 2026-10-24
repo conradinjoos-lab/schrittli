@@ -29,7 +29,30 @@ def themen():
     src = (WURZEL / 'quelle' / 'p2.js').read_text(encoding='utf-8')
     block = src[src.find('const THEMEN='):]
     block = block[:block.find('];')]
-    return re.findall(r"\{id:'(\w+)',name:'([^']+)'", block)
+    return [list(t) for t in re.findall(r"\{id:'(\w+)',name:'([^']+)'(?:,emoji:'[^']*')?(?:,color:'(#\w+)')?", block)]  # [id, Name, Farbe]
+
+
+SCHAERFE = {}
+
+
+def vorschaubild(vid, t, fps):
+    """Nummer (ab 1) des schärfsten Einzelbilds in den 2.5 s ab t (Fertig-Schritt) – fürs Vorschaubild.
+    Nur Bilder, die dem bei t ähnlich sehen: sonst gewinnt ein Abspann mit Schrift (Text ist «scharf»)."""
+    n0 = int(t * fps) + 1
+    f = CACHE / vid / 'f'
+    kandidaten = [n for n in range(n0, n0 + int(2.5 * fps) + 1) if (f / f'{n:05d}.jpg').exists()]
+    if len(kandidaten) < 2: return n0
+    from PIL import Image, ImageChops, ImageFilter, ImageStat
+    def masse(n):  # (Schärfe, kleines Graubild)
+        k = (vid, n)
+        if k not in SCHAERFE:
+            with Image.open(f / f'{n:05d}.jpg') as b:
+                g = b.convert('L')
+                SCHAERFE[k] = (ImageStat.Stat(g.filter(ImageFilter.FIND_EDGES)).var[0], g.resize((32, 18)))
+        return SCHAERFE[k]
+    start = masse(kandidaten[0])[1]
+    aehnlich = [n for n in kandidaten if ImageStat.Stat(ImageChops.difference(masse(n)[1], start)).mean[0] < 20]
+    return max(aehnlich, key=lambda n: masse(n)[0])
 
 
 def vokabular():
@@ -81,7 +104,7 @@ def liste():
         t = steps[-1].get('t') or 0 if steps else (a.get('dauer') or 0) / 2  # Vorschaubild: Fertig-Schritt, sonst Mitte
         out.append({'id': d.name, 'title': (v or {}).get('title') or a.get('title') or d.name, 'dauer': a.get('dauer'),
                     'entwurf': bool(v), 'schritte': len(steps), 'drin': bool(s), 'brief': (d / 'brief.md').exists(),
-                    'status': status(v), 'area': (s or v or {}).get('areaId') or '', 'bild': int(t * (a.get('fps') or 2)) + 1})
+                    'status': status(v), 'area': (s or v or {}).get('areaId') or '', 'bild': vorschaubild(d.name, t, a.get('fps') or 2)})
     return out
 
 

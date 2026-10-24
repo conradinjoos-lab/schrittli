@@ -10,17 +10,19 @@ Aufruf:  python werkzeug/werkstatt.py              abgleichen: holen, Filmstreif
 Pro Video legt es neben video.json, brief.md und blatt-*.jpg ab:
   analyse.json   Kopie aus werkzeug/cache (Transkript, Bildwechsel) plus _bilder = Anzahl Einzelbilder
   streifen.jpg   alle Einzelbilder klein (160×90, 20 pro Zeile) für Filmstreifen und Zeitleiste
-Dazu im Wurzelordner liste.json (eine Zeile pro Video), vorschau.jpg (ein Bild pro Video) und meta.json (Verfahren, Vokabular).
+Dazu im Wurzelordner liste.json (eine Zeile pro Video), kacheln.jpg (ein quadratisches Bild pro Video, schwarze Ränder weg;
+vorschau.jpg dasselbe in 16:9 für ältere Kontrollseiten) und meta.json (Verfahren mit Farbe, Vokabular, Raster der Kacheln).
 """
 import json, re, subprocess, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from kontrolle import CACHE, ENTWURF, lies, schreibe_json, status, themen, vokabular, ID_MUSTER
+from kontrolle import CACHE, ENTWURF, lies, schreibe_json, status, themen, vokabular, vorschaubild, ID_MUSTER
 
 REPO = 'https://github.com/conradinjoos-lab/schrittli-werkstatt.git'
 SPALTEN, B, H = 20, 160, 90          # Filmstreifen
-VB, VH, VSPALTEN = 256, 144, 16      # Vorschau
+VB, VH, VSPALTEN = 256, 144, 16      # Vorschau (alt, 16:9)
+KB = 160                             # Kacheln, quadratisch, gleich viele Spalten
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
 
@@ -62,20 +64,46 @@ def zeile(vid):
     t = steps[-1].get('t') or 0 if steps else (a.get('dauer') or 0) / 2
     return {'id': vid, 'title': (v or {}).get('title') or a.get('title') or vid, 'dauer': a.get('dauer'), 'fps': a.get('fps') or 2,
             'entwurf': bool(v), 'schritte': len(steps), 'brief': (d / 'brief.md').exists(), 'status': status(v),
-            'area': (v or {}).get('areaId') or '', 'bild': int(t * (a.get('fps') or 2)) + 1}
+            'area': (v or {}).get('areaId') or '', 'bild': vorschaubild(vid, t, a.get('fps') or 2)}
+
+
+def ohne_raender(b):
+    """Schwarze Balken (Letterbox) abschneiden, höchstens je ein Drittel."""
+    from PIL import ImageStat
+    g = b.convert('L'); w, h = g.size
+    dunkel = lambda box: ImageStat.Stat(g.crop(box)).mean[0] < 22
+    o, u, l, r = 0, h, 0, w
+    while o < h // 3 and dunkel((0, o, w, o + 1)): o += 1
+    while u > h * 2 // 3 and dunkel((0, u - 1, w, u)): u -= 1
+    while l < w // 3 and dunkel((l, o, l + 1, u)): l += 1
+    while r > w * 2 // 3 and dunkel((r - 1, o, r, u)): r -= 1
+    return b.crop((l, o, r, u))
+
+
+def fuellen(b, w, h):
+    """Ohne Verzerren auf w×h: skalieren, bis es füllt, dann die Mitte nehmen."""
+    from PIL import Image
+    s = max(w / b.width, h / b.height)
+    b = b.resize((max(w, round(b.width * s)), max(h, round(b.height * s))), Image.LANCZOS)
+    x, y = (b.width - w) // 2, (b.height - h) // 2
+    return b.crop((x, y, x + w, y + h))
 
 
 def vorschau(liste):
     from PIL import Image
-    zeilen = (len(liste) + VSPALTEN - 1) // VSPALTEN
-    im = Image.new('RGB', (VSPALTEN * VB, max(1, zeilen) * VH), (245, 248, 251))
+    zeilen = max(1, (len(liste) + VSPALTEN - 1) // VSPALTEN)
+    im = Image.new('RGB', (VSPALTEN * VB, zeilen * VH), (245, 248, 251))
+    ka = Image.new('RGB', (VSPALTEN * KB, zeilen * KB), (245, 248, 251))
     for i, e in enumerate(liste):
         fs = bilder(e['id'])
         if not fs: continue
         with Image.open(fs[min(e['bild'], len(fs)) - 1]) as b:
-            im.paste(b.convert('RGB').resize((VB, VH), Image.LANCZOS), ((i % VSPALTEN) * VB, (i // VSPALTEN) * VH))
+            b = ohne_raender(b.convert('RGB'))
+            im.paste(fuellen(b, VB, VH), ((i % VSPALTEN) * VB, (i // VSPALTEN) * VH))
+            ka.paste(fuellen(b, KB, KB), ((i % VSPALTEN) * KB, (i // VSPALTEN) * KB))
         e['v'] = i
     im.save(ENTWURF / 'vorschau.jpg', 'JPEG', quality=72, optimize=True, progressive=True)
+    ka.save(ENTWURF / 'kacheln.jpg', 'JPEG', quality=72, optimize=True, progressive=True)
 
 
 def erneuern():
@@ -93,7 +121,7 @@ def erneuern():
     liste = [zeile(v) for v in vids]
     vorschau(liste)
     schreibe_json(ENTWURF / 'liste.json', liste)
-    schreibe_json(ENTWURF / 'meta.json', {'themen': themen(), 'vokabular': vokabular()})
+    schreibe_json(ENTWURF / 'meta.json', {'themen': themen(), 'vokabular': vokabular(), 'kacheln': [VSPALTEN, KB, KB]})
     print(f'{len(vids)} Videos, {neu} neue Filmstreifen')
 
 
@@ -101,7 +129,7 @@ def abgleichen():
     if not (ENTWURF / '.git').exists(): raise SystemExit('Zuerst: python werkzeug/werkstatt.py --einrichten')
     git('add', '-A')
     if git('status', '--porcelain'):
-        git('reset', '-q', '--', 'liste.json', 'vorschau.jpg', 'meta.json', pruefen=False)  # abgeleitet, wird neu erzeugt
+        git('reset', '-q', '--', 'liste.json', 'vorschau.jpg', 'kacheln.jpg', 'meta.json', pruefen=False)  # abgeleitet, wird neu erzeugt
         git('commit', '-q', '-m', 'Lokal bearbeitet')
         git('checkout', '-q', '--', '.', pruefen=False)
     if git('ls-remote', '--heads', 'origin', 'main'):

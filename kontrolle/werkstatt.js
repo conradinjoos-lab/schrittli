@@ -7,7 +7,7 @@
 const W=(()=>{
  const LOKAL=/^(127\.0\.0\.1|localhost)$/.test(location.hostname);
  const API='https://api.github.com',WERK='conradinjoos-lab/schrittli-werkstatt',APP='conradinjoos-lab/schrittli',SCHULE='schule/schule.json';
- const SP=20,B=160,H=90,VSP=16,VB=256,VH=144;   // Filmstreifen und Vorschau, wie werkstatt.py
+ const SP=20,B=160,H=90,VSP=16,VB=256,VH=144;   // Filmstreifen und alte 16:9-Vorschau, wie werkstatt.py
  const ANMELDEN='https://schrittli-anmelden.conradinjoos.workers.dev',KEY='werkstatt-anmeldung';
  let an={};try{an=JSON.parse(localStorage.getItem(KEY)||'{}')}catch{}   // {token, ablauf (ms, 0 = nie), refresh}
  const merke=d=>{an=d;try{localStorage.setItem(KEY,JSON.stringify(d))}catch{}};
@@ -94,11 +94,13 @@ const W=(()=>{
  /* ---------- Liste ---------- */
  async function liste(){
   if(LOKAL){const j=await (await fetch('/api/liste')).json();j.videos.forEach(e=>e.vorschau='/f/'+e.id+'/'+e.bild);return j}
-  const [l,meta,schule,vor]=await Promise.all([datei(WERK,'liste.json'),datei(WERK,'meta.json'),datei(APP,SCHULE),datei(WERK,'vorschau.jpg','blob').then(bildLaden)]);
-  const sv=JSON.parse(schule).videos;
+  const [l,meta,schule,ka]=await Promise.all([datei(WERK,'liste.json'),datei(WERK,'meta.json'),datei(APP,SCHULE),datei(WERK,'kacheln.jpg','blob').then(bildLaden)]);
+  const sv=JSON.parse(schule).videos,m=JSON.parse(meta);
+  let [sp,b,h]=m.kacheln||[],vor=ka;   // quadratische Kacheln; fehlen sie noch, die alte 16:9-Vorschau
+  if(!vor||!m.kacheln){[sp,b,h]=[VSP,VB,VH];vor=await datei(WERK,'vorschau.jpg','blob').then(bildLaden)}
   const videos=JSON.parse(l||'[]').map(e=>{const s=zuSchule(sv,e.id);
-   return {...e,drin:!!s,area:(s||{}).areaId||e.area,vorschau:vor&&e.v!=null?zuschnitt(vor,(e.v%VSP)*VB,Math.floor(e.v/VSP)*VH,VB,VH):`https://i.ytimg.com/vi/${e.id}/mqdefault.jpg`}});
-  return {videos,themen:JSON.parse(meta).themen}}
+   return {...e,drin:!!s,area:(s||{}).areaId||e.area,vorschau:vor&&e.v!=null?zuschnitt(vor,(e.v%sp)*b,Math.floor(e.v/sp)*h,b,h):`https://i.ytimg.com/vi/${e.id}/mqdefault.jpg`}});
+  return {videos,themen:m.themen}}
 
  /* ---------- Ein Video ---------- */
  let streifen=null,anzahl=0;const zuschnitte=new Map();
