@@ -318,10 +318,10 @@ function renderMeta(){const m=$('#meta');
  <details class="w"><summary>Details</summary><div class="meta" style="margin-top:8px">
   <label class="w">Aufgabe danach (leer = keine)<input data-k="task.text" value="${esc(E.task.text||'')}"></label>
   <label>id<input data-k="id" value="${esc(E.id)}"></label><label>Kanal<input data-k="kanal" value="${esc(E.kanal||'')}"></label>
-  <label>Dauer<input data-k="dauer" value="${esc(E.dauer||'')}"></label><label>Alter<input data-k="alter" value="${esc(E.alter||'')}"></label>
+  <label>Dauer<input data-k="dauer" value="${esc(E.dauer||'')}"></label><label>Zeit (Min., nur Mini ≤ 15)<input data-k="zeit" type="number" min="1" max="15" value="${E.zeit||''}"></label><label>Alter<input data-k="alter" value="${esc(E.alter||'')}"></label>
   <label>Sprache<select data-k="sprache">${['Hochdeutsch','Schweizerdeutsch','ohne Sprache','Englisch'].map(s=>`<option ${s===E.sprache?'selected':''}>${s}</option>`).join('')}</select></label></div></details>`;
  renderChips();
- m.oninput=e=>{const k=e.target.dataset.k;if(!k)return;if(k==='task.text'){E.task.text=e.target.value;E.task.deliverable=e.target.value.trim()?'fertig':'keine'}else E[k]=e.target.value;if(k==='title')$('#h1').textContent=E.title||ID;markDirty();renderCheck()};
+ m.oninput=e=>{const k=e.target.dataset.k;if(!k)return;if(k==='task.text'){E.task.text=e.target.value;E.task.deliverable=e.target.value.trim()?'fertig':'keine'}else if(k==='zeit'){const n=parseInt(e.target.value,10);if(n>0)E.zeit=n;else delete E.zeit}else E[k]=e.target.value;if(k==='title')$('#h1').textContent=E.title||ID;markDirty();renderCheck()};
  m.onclick=e=>{const b=e.target.closest('[data-st]');if(b){const s=+b.dataset.st;E.stufen=E.stufen.includes(s)?E.stufen.filter(x=>x!==s):[...E.stufen,s].sort();b.classList.toggle('on');markDirty();renderCheck()}};
  $('#matadd').onchange=e=>{const v=e.target.value.trim().toLowerCase();if(!v)return;const hit=D.vokabular.find(([i,n])=>i===v||n.toLowerCase()===v);const id=hit?hit[0]:v.replace(/[^a-z]/g,'');
   if(id&&!E.material.includes(id)){E.material.push(id);markDirty();renderChips();renderCheck()}e.target.value=''};

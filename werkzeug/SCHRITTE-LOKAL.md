@@ -34,7 +34,8 @@ Genau eine Datei: `werkzeug/entwurf/<VIDEOID>/video.json`
 ```
 
 - `id`: Kürzel wie im Brief vorgeschlagen (`ex-…` für Experimente, sonst `zw-…`), Kleinbuchstaben, keine Umlaute.
-- `areaId`: eines von naehen, sticken, haekeln, stricken, weben, knuepfen, wickeln, filzen, falten, schneiden, holz, formen, drucken, experimente.
+- `areaId`: eines von naehen, sticken, haekeln, stricken, weben, knuepfen, wickeln, filzen, falten, schneiden, holz, schnitzen, formen, drucken, experimente.
+- `zeit` (optional): Arbeitszeit des Projekts in Minuten, nur bei Mini-Projekten setzen, die ein Kind in höchstens 15 Minuten fertig hat (z. B. `"zeit": 10`). Nicht die Videolänge.
 - `stufen`: Klassen 1–6, für die das Video passt (meist 2–3 Werte).
 - `title`: höchstens 5 Wörter, kindertauglich, sagt, was entsteht.
 - `sprache`: Hochdeutsch | Schweizerdeutsch | ohne Sprache | Englisch.

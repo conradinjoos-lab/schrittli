@@ -14,7 +14,7 @@ sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 WURZEL = Path(__file__).resolve().parent.parent
 ENTWURF = WURZEL / 'werkzeug' / 'entwurf'
 CACHE = WURZEL / 'werkzeug' / 'cache'
-AREAS = 'naehen sticken haekeln haekeln stricken weben knuepfen wickeln filzen falten schneiden holz formen drucken experimente'.split()
+AREAS = 'naehen sticken haekeln haekeln stricken weben knuepfen wickeln filzen falten schneiden holz schnitzen formen drucken experimente'.split()
 
 
 def vokabular():
@@ -41,6 +41,7 @@ def pruefe(vid, vok):
     if not re.fullmatch(r'[a-z]+-[a-z0-9-]+', v.get('id', '')): f(f'id «{v.get("id")}» ungültig (klein, Bindestriche)')
     elif not re.match(r'(zw|ex)-', v.get('id', '')): h(f'id «{v.get("id")}» beginnt nicht mit zw-/ex- (nur für bestehende Einträge in Ordnung)')
     if v.get('areaId') not in AREAS: f(f'areaId «{v.get("areaId")}» unbekannt')
+    if 'zeit' in v and not (isinstance(v['zeit'], int) and 1 <= v['zeit'] <= 15): f(f'zeit {v.get("zeit")} ungültig (ganze Minuten 1–15, nur Mini-Projekte)')
     if v.get('areaId') == 'experimente' and not v.get('id', '').startswith('ex-'): h('Experiment, aber id nicht ex-…')
     st = v.get('stufen') or []
     if not st or not all(isinstance(s, int) and 1 <= s <= 6 for s in st): f(f'stufen {st} ungültig (1–6)')

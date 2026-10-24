@@ -72,6 +72,40 @@ Jedes Video bekommt `material: ["id", "id", …]`. Nur diese IDs verwenden (Spal
 | blueten | Blüten | gepresste Blüten und Blätter |
 | kartoffel | Kartoffel | gross, festkochend |
 | messer | Messer | nur mit Erwachsenen |
+| taschenmesser | Taschenmesser | Schnitzmesser, Sackmesser – nur mit Erwachsenen |
+| ast | Ast | frisches Holz zum Schnitzen, Haselnuss, Weide |
+| schnitzhandschuh | Schnitzhandschuh | Schnittschutz, für die Haltehand |
+| holzklotz | Holzklotz | Kantholz, Holzrest |
+| wackelaugen | Wackelaugen |  |
+| holzraeder | Holzräder | fertige Holzräder aus dem Bastelladen |
+| schrauben | Schrauben |  |
+| schraubendreher | Schraubendreher |  |
+| raspel | Raspel | Holzraspel |
+| feile | Feile |  |
+| schwemmholz | Schwemmholz | Treibholz vom Ufer |
+| feder | Feder | Vogelfeder |
+| platte | Druckplatte | Styropor-, Moosgummi- oder Linolplatte |
+| metallplatte | Metallplatte | Blech, Alu |
+| bohrer | Bohrer | Handbohrer, Bohrmaschine nur mit Erwachsenen |
+| schutzbrille | Schutzbrille |  |
+| reissnadel | Reissnadel | zum Anreissen auf Metall |
+| koerner | Körner | zum Markieren des Bohrlochs |
+| webschiffchen | Webschiffchen | Holzschiffchen mit Zacken |
+| strickgabel | Strickgabel | Holzgabel mit zwei Zinken |
+| pappteller | Pappteller |  |
+| locher | Locher |  |
+| gummiband | Gummiband | flaches Wäschegummi |
+| stickrahmen | Stickrahmen |  |
+| blaetter | Blätter | Herbstblätter, grosse frische Blätter, Grashalme |
+| gabel | Gabel | Essgabel, z. B. als Pompon-Hilfe |
+| zeitung | Zeitung | Zeitungsseiten, Prospekte |
+| hefter | Heftapparat | Bostitch |
+| filznadel | Filznadel | Nadel mit Widerhaken zum Trockenfilzen |
+| schaumstoff | Schaumstoffkissen | Unterlage zum Trockenfilzen |
+| stecknadeln | Stecknadeln |  |
+| noppenfolie | Noppenfolie | Luftpolsterfolie zum Nassfilzen |
+| scoubidou | Scoubidou-Bänder | Plastikschnüre |
+| eisstiel | Eisstiele | Glacestängel, Holzstäbchen |
 | farbe | Farbe | Wasserfarbe, Deckfarbe, Druckfarbe |
 | pinsel | Pinsel |  |
 | stempelkissen | Stempelkissen |  |

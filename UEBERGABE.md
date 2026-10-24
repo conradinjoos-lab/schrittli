@@ -7,7 +7,7 @@ Für die nächste Claude-Sitzung (anderes Konto, kein Gedächtnis). Alles Nötig
 Kinder-Lern-App mit Schritt-Modus-Videoplayer (YouTube-Videos halten am Ende jedes Schritts an). Zwei Ausgaben aus einem Code:
 
 - **Familie:** https://conradinjoos-lab.github.io/schrittli/ – für Conradins Tochter (1. Klasse, liest nur Grossbuchstaben). Elternbereich mit PIN 1234, Katalog, Sterne (aus), Aufgaben, Werke.
-- **Schule:** https://conradinjoos-lab.github.io/schrittli/schule/ – TTG-Unterricht Primarschule Neunkirch, kein Login, Klasse wählen (1–6), dann nach **Verfahren** geordnet (Nähen, Sticken, Häkeln, Stricken, Weben, Flechten & Knüpfen, Wickeln, Filzen, Falten, Schneiden & Kleben, Sägen & Nageln, Formen, Drucken, Experimentieren). Zweck: **Zwischenarbeiten** für Kinder, die früher fertig sind. Unten «Für Lehrpersonen»: Liste mit Klassen, Material, QR-Code pro Video.
+- **Schule:** https://conradinjoos-lab.github.io/schrittli/schule/ – TTG-Unterricht Primarschule Neunkirch, kein Login, Klasse wählen (1–6), dann nach **Verfahren** geordnet (Nähen, Sticken, Häkeln, Stricken, Weben, Flechten & Knüpfen, Wickeln, Filzen, Falten, Schneiden & Kleben, Sägen & Nageln, Schnitzen, Formen, Drucken, Experimentieren). Zweck: **Zwischenarbeiten** für Kinder, die früher fertig sind. Unten «Für Lehrpersonen»: Liste mit Klassen, Material, QR-Code pro Video.
 
 Repo: `conradinjoos-lab/schrittli` (GitHub Pages, Branch main, Cache bis 10 Min – zum Prüfen `?neu=N` anhängen).
 
@@ -20,7 +20,7 @@ Repo: `conradinjoos-lab/schrittli` (GitHub Pages, Branch main, Cache bis 10 Min 
 | `quelle/bauen.sh` | erzeugt `index.html` (Familie) und `schule/index.html` (Schule, mit `window.SCHULE=true`) – **nie die index.html direkt editieren** |
 | `inhalte.json` | Videos der Familienversion (55), wird beim Start geladen und überschreibt gleichnamige IDs |
 | `katalog.json` | Vorauswahl für Eltern (76), im Elternbereich → Katalog mit «Hinzufügen» |
-| `schule/schule.json` | Videos der Schulversion (45): `areaId` = Verfahren, `stufen` = Klassen [1–6], `material` = IDs |
+| `schule/schule.json` | Videos der Schulversion (59 veröffentlicht, 24.10.2026): `areaId` = Verfahren, `stufen` = Klassen [1–6], `material` = IDs, optional `zeit` = Minuten (1–15) für Mini-Projekte |
 | `material/` | Material-Fotos `<id>.png/.jpg` + `fotos.json` (Liste der vorhandenen Dateinamen) + `PROMPTS-GROK.md` |
 | `quelle/agenten/` | Briefings für Agenten: Schritte schreiben (`SCHRITTE-BRIEF.md`), Materiallisten, Piktogramme, Vokabular |
 | `LIESMICH.md` | Funktionsbeschreibung für Conradin |
@@ -33,6 +33,8 @@ Zustand im Browser: localStorage `schrittli.v1` (Familie) bzw. `schrittli.schule
 2. In Claude Code im Repo: `/schritte <Links>`. Das ruft `python werkzeug/holen.py` (yt-dlp: Einbettbarkeit, Transkript, 360p-Video; ffmpeg: Bildwechsel, Sprechpausen, Einzelbilder 2/s; Pillow: Kontaktblätter) und startet pro Video einen Agenten mit `werkzeug/SCHRITTE-LOKAL.md`. Ergebnis: `werkzeug/entwurf/<ID>/video.json`. Kein Browser nötig.
 3. Kontrolle: `python werkzeug/kontrolle.py` → http://127.0.0.1:8765/ – Player, Filmstreifen um jeden Stopp, Transkript, Bildwechsel; Stopps auf Zehntelsekunden setzen, «Schritt testen» zeigt genau den Halt, den das Kind sieht. Knopf «Veröffentlichen…» zeigt die Änderung an schule.json und schreibt den Eintrag (ersetzt gleiche id / gleiches Video). Bedienung: `werkzeug/LIESMICH.md`.
 4. Commit, push. `bash quelle/bauen.sh` nur bei Code-Änderungen.
+
+**Serienproduktion (24.10.2026, 63 Entwürfe in einem Durchgang, 60 nach Kontrolle):** Kandidaten über die YouTube-Suche (`yt-dlp "ytsearch…"`) nach dünn besetzten Verfahren suchen, `holen.py` für alle, dann pro Video ein Entwurfsagent (bis 20 parallel). Danach `python werkzeug/pruefen.py` (`!` = Fehler, `?` = Hinweis) und eine zweite Runde **Kontrollagenten** (je ~8 Videos): sie prüfen jeden Stopp gegen Einzelbilder, Schreibweise (ss statt ß, Du-Form), Sicherheit im `hinweis`, Material-IDs gegen `quelle/agenten/VOKABULAR.md`, und korrigieren direkt in `video.json`. Erst dann Veröffentlichen. Neue Material-IDs müssen gleichzeitig in VOKABULAR.md **und** in `MATERIAL` in `quelle/p2.js` eingetragen werden, sonst meldet pruefen.py einen Fehler.
 
 Erkenntnis aus dem Pompon-Test: die starken Bildwechsel (scene score ≥ 0.28) liegen fast genau auf den von Hand gesetzten Stopps. Regel im Brief: Stopp auf den Bildwechsel vor dem Sprechbeginn, nie auf den Sprechbeginn selbst.
 
@@ -47,6 +49,7 @@ Playwright-Smoke-Tests: Chromium unter `/opt/pw-browsers/chromium`, `NODE_PATH=$
 - Kino-Modus (Knopf ⤢): Video bildschirmfüllend, Schritte als Band unten. **Echtes Vollbild auf dem iPad noch nicht geprüft.**
 - Player muss ohne Scrollen auf PC/iPad quer passen (gelöst über `--pl-avail`, `fitPlayer()`).
 - Schulversion: **eigener Ordner**, Klassen 1–6 einzeln (sehr wichtig), Ordnung nach Verfahren, kein Zeichnen/Sachwissen, keine Aufgabe am Schluss. Experimentieren ist drin, obwohl kein TTG-Verfahren – offen, ob es bleibt.
+- **Schnitzen** ist seit 24.10.2026 ein eigenes Verfahren (`areaId: schnitzen`, Klassen 3–6; jeder `hinweis` nennt Schnitzregeln und Handschuh). **Mini-Projekte** unter 15 Minuten (kurze Reels) tragen das Feld `zeit`; die App zeigt es als Zeitschild auf der Karte und in der Lehrpersonen-Liste, damit Kinder mit wenig Restzeit etwas finden.
 - Schritt 1 ist immer **Material richten** (Materialkarte statt Video). Conradin will dafür **echte Fotos von oben, freigestellt** – nicht Piktogramme. Entscheid: Bilder mit **Grok** erzeugen; die Prompts liegen fertig in `material/PROMPTS-GROK.md` (65 Materialien). Piktogramme (20 gezeichnet + Emoji) bleiben Platzhalter.
 - Für die Ex-Frau muss alles ohne Conradin laufen: kein Server, kein API-Schlüssel. Deshalb liegt die Automatik getrennt in `werkzeug/` (nur auf Conradins Rechner); die App selbst bleibt ohne Server.
 - Material aus `G:\Meine Ablage\01_TTG\40_Bausteine` (buntgewerkt.de, © 2021) darf **nicht** öffentlich ins Repo. Conradins eigene Liste «Ideen 1.–3. Klasse» (70_Fundus/Ideen) bestimmt die Klassenzuordnung der Techniken.
