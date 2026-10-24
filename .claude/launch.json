@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "kontrolle",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["werkzeug/kontrolle.py"],
+      "port": 8765
+    }
+  ]
+}

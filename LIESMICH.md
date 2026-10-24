@@ -40,6 +40,7 @@ Kinder, Sterne, Fortschritt und Werke liegen im Browser des Geräts (localStorag
 - «Für Lehrpersonen» (unten): Liste aller Videos mit Klassenzuordnung und QR-Code pro Video (Schul-Link mit Schritten, auch von zuhause nutzbar).
 - Ordnung nach TTG-Verfahren: Nähen, Sticken, Häkeln, Stricken, Weben, Flechten & Knüpfen, Wickeln, Filzen, Falten, Schneiden & Kleben, Sägen & Nageln, Formen, Drucken, Experimentieren. Gedacht vor allem als Zwischenarbeiten für Kinder, die früher fertig sind.
 - Pflege: `schule/schule.json` – pro Video `areaId` (Verfahren) und `stufen` (Liste 1–6). Klassenzuordnung ist ein Vorschlag von Claude und soll von der Lehrperson geprüft werden.
+- Neue Videos halbautomatisch erfassen (Transkript, Bildwechsel, Schritte-Entwurf, Kontrollseite zum Feinstellen der Stopps): siehe `werkzeug/LIESMICH.md`. Braucht nur der Rechner, der Videos erfasst – die App selbst nicht.
 
 ## Was die App macht
 
@@ -47,7 +48,7 @@ Kinder, Sterne, Fortschritt und Werke liegen im Browser des Geräts (localStorag
 - **Schritt-Modus:** Video stoppt automatisch am Ende jedes Schritts (kleines Schild «Jetzt du» im Bild, kein Zwischenbildschirm). Tipp aufs Video oder auf ▶ = Weiter, ↺ = Nochmal. Vorlesen nur auf Knopfdruck (Lautsprecher); automatisches Vorlesen ist in den Einstellungen abschaltbar/einschaltbar, die Stimme hängt vom Gerät ab.
 - **Lern-Bereiche** unbegrenzt, **Spass-Bereiche** kosten einen Stern pro Video und Tag (Anzahl in den Einstellungen). Abgegebene Aufgabe = ein Bonus-Stern pro Tag (abschaltbar).
 - **Aufgabe nach dem Video:** Foto, Bild malen, Tonaufnahme oder nur Fertig-Knopf. Landet in «Meine Werke», Eltern geben Rückmeldung (Emoji + Satz).
-- **Schul-Link:** trägt Video, Schritte und Aufgabe im Link selbst. Kind scannt QR, landet direkt im Player. Keine Anmeldung, keine Sterne, nichts wird gespeichert.
+- **Schul-Link:** trägt Video, Schritte, Material und Aufgabe im Link selbst. Kind scannt QR, landet direkt im Player. Keine Anmeldung, keine Sterne, nichts wird gespeichert.
 - **Mehrere Kinder:** im Elternbereich anlegen, Auswahl beim Start.
 - **Daten → Export/Import:** Videos und Einstellungen zwischen Geräten übertragen. Werke bleiben auf dem Gerät.
 
