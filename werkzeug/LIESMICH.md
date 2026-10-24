@@ -22,18 +22,18 @@ Läuft nur auf dem Rechner, der Videos erfasst. Die App selbst braucht nichts da
 
 ## Kontrollseite – Bedienung
 
-Die Seite liegt in `kontrolle.html`, der Server in `kontrolle.py`. Die Liste zeigt pro Video drei Häkchen: Schritte gesetzt, Angaben vollständig, geprüft.
+Die Seite liegt in `kontrolle.html`, der Server in `kontrolle.py`. Die Liste zeigt pro Video drei Häkchen: Schritte gesetzt, Angaben vollständig, geprüft. Pro Video gibt es zwei Ansichten.
 
-- Oben die **Zeitleiste** über die ganze Breite: Punkte = Schritte (ziehen verschiebt sie), orange Striche = Bildwechsel, Hover zeigt Zeit und Standbild, Klick spult. Links der Player (bleibt beim Scrollen stehen), Mitte die Schritte, rechts das Transkript (scrollt zum gewählten Schritt, gelb = passende Zeile, blauer Rand = ein Stopp liegt mitten in dieser Zeile).
-- Ein Schritt ist immer gewählt (blau). Unter ihm klappen zwei Filmstreifen auf: Beginn und Stopp am Ende (= Beginn des nächsten). Rot = aktueller Wert, orange = Bildwechsel, Klick auf ein Bild setzt die Zeit.
-- **Schritt testen** (`T`, oder ▶ beim Schritt) spielt ab dem Beginn und hält genau dort, wo das Kind den Stopp sieht. **Ende testen** (`Shift+T`) nur die letzten 3 s.
-- **Hier = Beginn** (`S`) und **Hier = Ende** (`E`) übernehmen die aktuelle Spielzeit. `,` `.` schieben den Beginn um 0.1 s, `;` `:` das Ende. `[` `]` springen zum Bildwechsel davor/danach. **Einrasten** (an/aus im Kopf) zieht −/+ und Ziehen in der Zeitleiste auf den nächsten Bildwechsel innerhalb 0.4 s.
-- Tasten: `Leer` Play/Pause, `←` `→` ±0.5 s (`Shift` ±2 s), `1`–`9` Schritt wählen, `↑` `↓`, `Enter` im Titel = nächster Schritt, `Ctrl+Z` rückgängig, `Ctrl+S` speichern.
-- **Schritte vorschlagen** baut einen ersten Entwurf aus Transkript-Sätzen wie «1. Schritt: …», YouTube-Kapiteln oder (ohne beides) aus starken Bildwechseln; Beginn = Bildwechsel vor dem Satz. Danach Titel und Stopps prüfen.
-- Hinweise direkt beim Schritt: rot (Titel fehlt, über 8 Wörter, ß, Anführungszeichen, Reihenfolge) muss weg; grau (Schritt unter 3 s, Beginn mitten in einer Transkriptzeile) ist eine Prüfbitte. **Fertig?** fasst zusammen; das Häkchen «alle Stopps getestet» setzt man selbst.
-- Gespeichert wird automatisch 1.5 s nach jeder Änderung nach `entwurf/<ID>/video.json` («gespeichert HH:MM» im Kopf). Löschen eines Schritts lässt sich 6 s lang rückgängig machen.
-- **Veröffentlichen…** zeigt vorher, was sich in schule.json ändert (geänderte Zeiten und Titel, Material, Klassen), und schreibt erst nach dem zweiten Klick. **Schul-Link** öffnet die Live-App mit genau diesen Schritten und dem Material (Link in der Zwischenablage).
-- Ohne Entwurf zeigt die Seite den bestehenden Eintrag aus schule.json oder eine leere Vorlage – so lassen sich auch alte Einträge nachjustieren (vorher `holen.py` für das Video laufen lassen).
+**Arbeitsansicht** (Schritte setzen, möglichst wenig Ablenkung):
+
+- Oben die **Zeitleiste**: Punkte = Schritte (ziehen verschiebt sie), Hover zeigt Zeit und Standbild, Klick spult. Links der Player mit Zeit, darunter nur Play/Pause, **Schritt testen**, **Hier = Beginn**, **Hier = Ende** und eine Zeile mit dem, was gerade gesagt wird.
+- Rechts die Schritte als Zeilen (Nummer, Zeit, Titel). Nur der gewählte Schritt klappt auf: −/+ 0.5 s, ▶ testen, ＋ danach, ✕, dazu zwei Filmstreifen (Beginn und Ende = Beginn des nächsten Schritts; blau = aktueller Wert, orange = Bildwechsel, Klick setzt die Zeit). Rote Hinweise (Titel fehlt, über 8 Wörter, ß, Anführungszeichen, Reihenfolge) müssen weg, graue (unter 3 s, Beginn mitten im Satz) sind eine Prüfbitte.
+- **Schritt testen** (`T`, oder ▶) spielt ab dem Beginn und hält genau dort, wo das Kind den Stopp sieht; `Shift+T` nur die letzten 3 s. `S` / `E` übernehmen die Spielzeit als Beginn / Ende, `,` `.` schieben den Beginn um 0.1 s, `;` `:` das Ende, `[` `]` springen zum Bildwechsel davor/danach. Alle Tasten und die Einstellung **Einrasten** (−/+ und Ziehen springen auf den Bildwechsel innerhalb 0.4 s) stehen hinter «?».
+- **Schritte vorschlagen** erscheint, solange noch keine Schritte da sind (sonst unter «?» als «neu vorschlagen»): erster Entwurf aus Transkript-Sätzen wie «1. Schritt: …», YouTube-Kapiteln oder starken Bildwechseln; Beginn = Bildwechsel vor dem Satz.
+
+**Abschlussansicht** (Knopf «Weiter zu Angaben»): Titel, Verfahren, Klassen, Material (Chips, ziehen sortiert; oranger Rand = nicht im Vokabular, kein Bild), Hinweis für die Lehrperson, Details (Aufgabe danach, id, Kanal …). **Fertig?** zeigt «n von 6 erledigt» plus die offenen Punkte; das Häkchen «alle Stopps getestet» setzt man selbst. **Schul-Link** öffnet die Live-App mit genau diesen Schritten (Link in der Zwischenablage). **Veröffentlichen…** zeigt vorher, was sich in schule.json ändert, und schreibt erst nach dem zweiten Klick. Darunter das ganze Transkript: Klick auf die Zeit setzt den Beginn des gewählten Schritts, «+» legt dort einen neuen Schritt an (wechselt zurück in die Arbeitsansicht); YouTube-Kapitel sind eingeklappt.
+
+Gespeichert wird automatisch 1.5 s nach jeder Änderung nach `entwurf/<ID>/video.json` («gespeichert HH:MM» im Kopf), `Ctrl+Z` macht rückgängig, Löschen eines Schritts lässt sich 6 s lang per Knopf zurücknehmen. Ohne Entwurf zeigt die Seite den bestehenden Eintrag aus schule.json oder eine leere Vorlage – so lassen sich auch alte Einträge nachjustieren (vorher `holen.py` für das Video laufen lassen).
 
 ## Wie die Stopps gefunden werden
 
