@@ -6,7 +6,7 @@ Dann im Browser:  http://127.0.0.1:8765/
 
 Ohne Browser übernehmen:  python werkzeug/kontrolle.py --uebernehmen <VIDEOID> [<VIDEOID> …]
 
-Seite: werkzeug/kontrolle.html (wird bei jedem Aufruf frisch gelesen). Zeigt pro Entwurf den Player, die Schritte mit Einzelbildern
+Seiten: werkzeug/kontrolle-liste.html und werkzeug/kontrolle.html (werden bei jedem Aufruf frisch gelesen). Zeigt pro Entwurf den Player, die Schritte mit Einzelbildern
 rund um jeden Stopp, das Transkript und die erkannten Bildwechsel. Speichern schreibt video.json;
 «Übernehmen» trägt den Eintrag in schule/schule.json ein (ersetzt einen bestehenden mit gleicher id oder gleichem Video).
 """
@@ -70,9 +70,11 @@ def liste():
         a = lies(CACHE / d.name / 'analyse.json', {})
         v = lies(d / 'video.json')
         s = schul_eintrag(d.name)
+        steps = (v or {}).get('steps') or []
+        t = steps[-1].get('t') or 0 if steps else (a.get('dauer') or 0) / 2  # Vorschaubild: Fertig-Schritt, sonst Mitte
         out.append({'id': d.name, 'title': (v or {}).get('title') or a.get('title') or d.name, 'dauer': a.get('dauer'),
-                    'entwurf': bool(v), 'schritte': len((v or {}).get('steps') or []), 'drin': bool(s), 'brief': (d / 'brief.md').exists(),
-                    'status': status(v)})
+                    'entwurf': bool(v), 'schritte': len(steps), 'drin': bool(s), 'brief': (d / 'brief.md').exists(),
+                    'status': status(v), 'area': (s or v or {}).get('areaId') or '', 'bild': int(t * (a.get('fps') or 2)) + 1})
     return out
 
 
@@ -100,24 +102,8 @@ def uebernehmen(vid, eintrag=None):
     return len(vids)
 
 
-HTML_LISTE = '''<!doctype html><html lang="de"><head><meta charset="utf-8"><title>Schrittli – Kontrolle</title>
-<style>body{font:15px/1.4 system-ui,sans-serif;margin:24px;max-width:960px;color:#222}table{border-collapse:collapse;width:100%}td,th{padding:8px 10px;border-bottom:1px solid #ddd;text-align:left;vertical-align:top}a{color:#1b5fd1}
-.ok{color:#1a8f3c}.no{color:#bbb}.muted{color:#888}code{background:#f3f3f3;padding:1px 5px;border-radius:4px}.st span{display:inline-block;margin-right:10px;white-space:nowrap}</style></head><body>
-<h1>Schrittli – Kontrolle</h1><p class="muted">Entwürfe aus <code>werkzeug/entwurf/</code>. Neue Videos: in Claude Code <code>/schritte &lt;Links&gt;</code>, oder <code>python werkzeug/holen.py &lt;Link&gt;</code> und Schritte nach <code>werkzeug/SCHRITTE-LOKAL.md</code> schreiben lassen.</p>
-<table><tr><th>Video</th><th>Dauer</th><th>Stand</th><th>Veröffentlicht</th></tr>__ZEILEN__</table></body></html>'''
-
 SEITE = WURZEL / 'werkzeug' / 'kontrolle.html'
-
-
-def zeile(e):
-    def hk(ok, text): return f'<span class="{"ok" if ok else "no"}">{"✓" if ok else "○"} {text}</span>'
-    if e['entwurf']:
-        st = hk(e['status'][0], f'{e["schritte"]} Schritte') + hk(e['status'][1], 'Angaben') + hk(e['status'][2], 'geprüft')
-    else:
-        st = '<span class="muted">nur Brief – noch kein Entwurf</span>' if e['brief'] else '<span class="muted">leer</span>'
-    dauer = f'{int(e["dauer"] // 60)}:{int(e["dauer"] % 60):02d}' if e['dauer'] else ''
-    return (f'<tr><td><a href="/v/{e["id"]}">{e["title"]}</a><br><span class="muted"><code>{e["id"]}</code></span></td><td>{dauer}</td>'
-            f'<td class="st">{st}</td><td>{"<span class=ok>✓ in schule.json</span>" if e["drin"] else ""}</td></tr>')
+LISTE = WURZEL / 'werkzeug' / 'kontrolle-liste.html'
 
 
 class H(BaseHTTPRequestHandler):
@@ -133,8 +119,8 @@ class H(BaseHTTPRequestHandler):
     def do_GET(self):
         p = urlparse(self.path).path
         if p == '/':
-            zeilen = ''.join(zeile(e) for e in liste()) or '<tr><td colspan=4 class="muted">Noch keine Entwürfe.</td></tr>'
-            return self.send(200, HTML_LISTE.replace('__ZEILEN__', zeilen))
+            d = json.dumps({'videos': liste(), 'themen': themen()}, ensure_ascii=False).replace('</', '<\\/')
+            return self.send(200, LISTE.read_text(encoding='utf-8').replace('__DATEN__', d))
         m = re.fullmatch(r'/v/([A-Za-z0-9_-]{11})', p)
         if m: return self.send(200, SEITE.read_text(encoding='utf-8').replace('__ID__', m.group(1)))
         m = re.fullmatch(r'/api/([A-Za-z0-9_-]{11})', p)
