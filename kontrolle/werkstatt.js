@@ -3,7 +3,7 @@
    Online (GitHub Pages): über die GitHub-API. Anmelden mit GitHub über den Worker werkzeug/anmelden (GitHub App «Schrittli Kontrolle»),
    der Schlüssel bleibt nur in diesem Browser und wird selbst erneuert. Ein eingefügter Fine-grained-Schlüssel geht weiterhin.
    Entwürfe, Transkripte und Filmstreifen liegen im privaten Repo schrittli-werkstatt (siehe werkzeug/werkstatt.py),
-   Veröffentlichen schreibt schule/schule.json im App-Repo. */
+   Veröffentlichen schreibt schule/schule.json im App-Repo. Die Hall of Fame (werke.html) liest werke/ aus der Werkstatt. */
 const W=(()=>{
  const LOKAL=/^(127\.0\.0\.1|localhost)$/.test(location.hostname);
  const API='https://api.github.com',WERK='conradinjoos-lab/schrittli-werkstatt',APP='conradinjoos-lab/schrittli',SCHULE='schule/schule.json';
@@ -137,7 +137,14 @@ const W=(()=>{
    if(i>=0)d.videos[i]=eintrag;else d.videos.push(eintrag);anzahl=d.videos.length;return {[SCHULE]:jsonText(d,alt)}},'Schule: «'+(e.title||id)+'» veröffentlicht');
   return {anzahl}}
 
- return {LOKAL,bereit,abmelden,liste,daten,bild,speichern,veroeffentlichen,jsonText,
+ /* ---------- Hall of Fame (werke/ in der Werkstatt, siehe werkzeug/werke.py) ---------- */
+ async function werke(){
+  if(LOKAL)return (await fetch('/werke/werke.json',{cache:'no-store'})).json();
+  const [w,meta]=await Promise.all([datei(WERK,'werke/werke.json'),datei(WERK,'meta.json')]);
+  return {...JSON.parse(w||'{"werke":[]}'),themen:JSON.parse(meta).themen}}
+ async function werkBild(pfad){return LOKAL?'/werke/'+pfad:URL.createObjectURL(await datei(WERK,'werke/'+pfad,'blob'))}
+
+ return {LOKAL,bereit,abmelden,liste,daten,bild,speichern,veroeffentlichen,jsonText,werke,werkBild,
   nachPub:LOKAL?'Noch committen und pushen.':'In etwa einer Minute in der Schul-App.',
   pause:LOKAL?1500:6000}  // Autospeichern: online seltener, jeder Stand ist ein Commit
 })();

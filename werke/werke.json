@@ -1,0 +1,154 @@
+{
+ "werke": [
+  {
+   "bild": "stromkreise-auf-brett.jpg",
+   "titel": "Stromkreise auf Brett",
+   "bereich": "experimente"
+  },
+  {
+   "bild": "holzauto.jpg",
+   "titel": "Holzauto",
+   "bereich": "holz"
+  },
+  {
+   "bild": "kordelkorb.jpg",
+   "titel": "Kordelkorb",
+   "bereich": "wickeln"
+  },
+  {
+   "bild": "holzschwerter.jpg",
+   "titel": "Holzschwerter",
+   "bereich": "schnitzen"
+  },
+  {
+   "bild": "schluesselanhaenger-aus-holz.jpg",
+   "titel": "Schlüsselanhänger aus Holz",
+   "bereich": "holz"
+  },
+  {
+   "bild": "rennautos-aus-holz.jpg",
+   "titel": "Rennautos aus Holz",
+   "bereich": "holz"
+  },
+  {
+   "bild": "auto-mit-anhaenger.jpg",
+   "titel": "Auto mit Anhänger",
+   "bereich": "holz"
+  },
+  {
+   "bild": "tuerhaenger-mit-wolle.jpg",
+   "titel": "Türhänger mit Wolle",
+   "bereich": "wickeln"
+  },
+  {
+   "bild": "schnecke-aus-pappmache.jpg",
+   "titel": "Schnecke aus Pappmaché",
+   "bereich": "formen"
+  },
+  {
+   "bild": "korb-aus-zeitungspapier.jpg",
+   "titel": "Korb aus Zeitungspapier",
+   "bereich": "knuepfen"
+  },
+  {
+   "bild": "uhr-mit-bunten-zahlen.jpg",
+   "titel": "Uhr mit bunten Zahlen",
+   "bereich": ""
+  },
+  {
+   "bild": "tiere-aus-pappmache.jpg",
+   "titel": "Tiere aus Pappmaché",
+   "bereich": "formen"
+  },
+  {
+   "bild": "perlentier.jpg",
+   "titel": "Perlentier",
+   "bereich": "knuepfen"
+  },
+  {
+   "bild": "boote-aus-holz.jpg",
+   "titel": "Boote aus Holz",
+   "bereich": "holz"
+  },
+  {
+   "bild": "bauen-mit-karton.jpg",
+   "titel": "Bauen mit Karton",
+   "bereich": "schneiden"
+  },
+  {
+   "bild": "fadenstern.jpg",
+   "titel": "Fadenstern",
+   "bereich": "sticken"
+  },
+  {
+   "bild": "filzseifen.jpg",
+   "titel": "Filzseifen",
+   "bereich": "filzen"
+  },
+  {
+   "bild": "dino-aus-filz.jpg",
+   "titel": "Dino aus Filz",
+   "bereich": "filzen"
+  },
+  {
+   "bild": "propellerboot-mit-motor.jpg",
+   "titel": "Propellerboot mit Motor",
+   "bereich": "experimente"
+  },
+  {
+   "bild": "libelle-aus-holz.jpg",
+   "titel": "Libelle aus Holz",
+   "bereich": "holz"
+  },
+  {
+   "bild": "roboter-mit-leuchtaugen.jpg",
+   "titel": "Roboter mit Leuchtaugen",
+   "bereich": "holz"
+  },
+  {
+   "bild": "schneidebretter.jpg",
+   "titel": "Schneidebretter",
+   "bereich": "holz"
+  },
+  {
+   "bild": "herz-auf-staender.jpg",
+   "titel": "Herz auf Ständer",
+   "bereich": "holz"
+  },
+  {
+   "bild": "holzfigur-auf-rollbrett.jpg",
+   "titel": "Holzfigur auf Rollbrett",
+   "bereich": "holz"
+  },
+  {
+   "bild": "holzfigur-mit-muetze.jpg",
+   "titel": "Holzfigur mit Mütze",
+   "bereich": "holz"
+  },
+  {
+   "bild": "schild-aus-holz.jpg",
+   "titel": "Schild aus Holz",
+   "bereich": "holz"
+  },
+  {
+   "bild": "holzkiste-mit-muster.jpg",
+   "titel": "Holzkiste mit Muster",
+   "bereich": "holz"
+  },
+  {
+   "bild": "kaefer-aus-holz.jpg",
+   "titel": "Käfer aus Holz",
+   "bereich": "holz"
+  },
+  {
+   "bild": "lastwagen-aus-holz.jpg",
+   "titel": "Lastwagen aus Holz",
+   "bereich": "holz"
+  },
+  {
+   "bild": "bild-aus-filzwolle.jpg",
+   "titel": "Bild aus Filzwolle",
+   "bereich": "filzen"
+  }
+ ]
+}

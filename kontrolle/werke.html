@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Schrittli – Hall of Fame</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Wie index.html */
+:root{--bg:#EEF3F8;--surface:#fff;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--lern:#17997A;--lern-soft:#D5F1E8;--spass:#EF6C2E;--spass-soft:#FFE4D4;
+ --display:'Fredoka','Arial Rounded MT Bold',system-ui,sans-serif;--body:'Atkinson Hyperlegible',system-ui,'Segoe UI',sans-serif;--shadow:0 6px 18px rgba(23,33,47,.10);--shadow-sm:0 2px 6px rgba(23,33,47,.08)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.4 var(--body)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 24px 60px}
+header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.zurueck{width:40px;height:40px;border-radius:12px;background:var(--surface);display:grid;place-items:center;box-shadow:var(--shadow-sm);font-size:20px}
+.logo{width:46px;height:46px;border-radius:14px;background:#F2C12E;display:grid;place-items:center;box-shadow:var(--shadow-sm);font-size:26px}
+h1{font:600 30px/1 var(--display);margin:0}
+.unter{color:var(--muted);font-size:14px;margin-top:4px}
+.leiste{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0 12px;display:flex;gap:8px;flex-wrap:wrap}
+.leiste button{font:500 14px var(--display);border:0;background:var(--surface);color:var(--muted);padding:6px 14px;border-radius:999px;cursor:pointer;box-shadow:var(--shadow-sm)}
+.leiste button.on{background:var(--ink);color:#fff}
+.leiste button em{font-style:normal;opacity:.7;margin-left:5px}
+.gitter{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:6px}
+.werk{background:var(--surface);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-sm);cursor:pointer;border:0;padding:0;text-align:left;font:inherit;color:inherit;transition:transform .12s,box-shadow .12s}
+.werk:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.werk .bild{position:relative;aspect-ratio:1;background:color-mix(in srgb,var(--farbe,#8a96a8) 30%,var(--surface))}
+.werk img{width:100%;height:100%;object-fit:cover;display:block}
+.marke{position:absolute;left:8px;top:8px;font:600 12px var(--display);padding:3px 10px;border-radius:999px;background:var(--lern);color:#fff}
+.marke.idee{background:#F2C12E;color:var(--ink)}
+.text{padding:9px 12px 11px}
+.titel{font:600 15px/1.2 var(--display)}
+.klein{font-size:12px;color:var(--muted);margin-top:3px;display:flex;align-items:center;gap:6px}
+.punkt{width:9px;height:9px;border-radius:50%;background:var(--farbe,#8a96a8)}
+.nichts{text-align:center;color:var(--muted);padding:60px 0;font:500 18px var(--display)}
+dialog{border:0;border-radius:18px;padding:0;max-width:min(92vw,1100px);max-height:92vh;background:var(--surface);box-shadow:0 16px 48px rgba(23,33,47,.35)}
+dialog::backdrop{background:rgba(23,33,47,.7)}
+dialog img{display:block;max-width:100%;max-height:calc(92vh - 64px);margin:0 auto}
+dialog .unten{display:flex;align-items:center;gap:10px;padding:12px 16px}
+dialog .unten b{font:600 18px var(--display);flex:1}
+dialog button{font:600 14px var(--display);border:0;border-radius:999px;background:var(--surface2);padding:7px 14px;cursor:pointer}
+@media (max-width:600px){.wrap{padding:18px 16px 40px}.gitter{grid-template-columns:repeat(2,1fr);gap:10px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <header>
+  <a class="zurueck" href="./" title="Zurück zur Kontrolle">←</a>
+  <div class="logo">🏆</div>
+  <div><h1>Hall of Fame</h1><div class="unter">Gemachte Arbeiten als Gedankenstütze · «in der App» = öffentlich unter «Das haben andere gemacht»</div></div>
+ </header>
+ <div class="leiste" id="filter"></div>
+ <main id="liste"><div class="nichts">Lade Fotos …</div></main>
+</div>
+<dialog id="gross"><img alt=""><div class="unten"><b></b><span class="klein"></span><button>Schliessen</button></div></dialog>
+<script src="werkstatt.js"></script>
+<script>
+(async()=>{
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+const datum=d=>d?d.split('-').reverse().join('.'):'';
+let D;try{await W.bereit();D=await W.werke()}catch(x){$('#liste').innerHTML=`<div class="nichts">Laden ging nicht: ${esc(x.message||x)}</div>`;return}
+const werke=D.werke.slice().sort((a,b)=>(b.datum||'').localeCompare(a.datum||''));   // neueste zuerst
+const thema=id=>D.themen.find(t=>t[0]===id)||[id,'',''];
+const bereiche=[...new Set(werke.filter(w=>!w.idee&&w.bereich).map(w=>w.bereich))].sort((a,b)=>D.themen.findIndex(t=>t[0]===a)-D.themen.findIndex(t=>t[0]===b));
+const FILTER=[['alle','Alle',werke.length],['idee','Ideen',werke.filter(w=>w.idee).length],['app','In der App',werke.filter(w=>w.oeffentlich).length],
+ ...bereiche.map(b=>[b,thema(b)[1],werke.filter(w=>!w.idee&&w.bereich===b).length])].filter(f=>f[2]);
+let filter='alle';
+const sieht=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;sieht.unobserve(e.target);
+ W.werkBild('klein/'+e.target.dataset.datei).then(u=>e.target.src=u).catch(()=>{})}),{rootMargin:'300px'});
+function zeichne(){
+ $('#filter').innerHTML=FILTER.map(([k,t,n])=>`<button data-f="${k}" class="${k===filter?'on':''}">${esc(t)}<em>${n}</em></button>`).join('');
+ const sicht=werke.filter(w=>filter==='alle'||(filter==='idee'?w.idee:filter==='app'?w.oeffentlich:!w.idee&&w.bereich===filter));
+ $('#liste').innerHTML=sicht.length?`<div class="gitter">${sicht.map(w=>{const [,name,farbe]=thema(w.bereich);
+  return `<button class="werk" data-datei="${esc(w.datei)}"${farbe?` style="--farbe:${farbe}"`:''}><div class="bild"><img alt="" data-datei="${esc(w.datei)}">${w.idee?'<span class="marke idee">Idee</span>':w.oeffentlich?'<span class="marke">in der App</span>':''}</div>
+   <div class="text"><div class="titel">${esc(w.titel||'Ohne Titel')}</div><div class="klein">${name?`<span class="punkt"></span>${esc(name)} · `:''}${datum(w.datum)}</div></div></button>`}).join('')}</div>`:'<div class="nichts">Keine Fotos.</div>';
+ document.querySelectorAll('.werk img').forEach(i=>sieht.observe(i))}
+$('#filter').onclick=ev=>{const b=ev.target.closest('button');if(!b)return;filter=b.dataset.f;zeichne()};
+$('#liste').onclick=async ev=>{const b=ev.target.closest('.werk');if(!b)return;const w=werke.find(x=>x.datei===b.dataset.datei),g=$('#gross');
+ g.querySelector('img').src=b.querySelector('img').src||'';g.querySelector('b').textContent=w.titel||'Ohne Titel';
+ g.querySelector('.klein').textContent=[thema(w.bereich)[1],datum(w.datum),w.idee?'Idee (Screenshot)':w.oeffentlich?'in der App':'nur hier'].filter(Boolean).join(' · ');
+ g.showModal();g.querySelector('img').src=await W.werkBild(w.datei)};
+$('#gross button').onclick=()=>$('#gross').close();
+$('#gross').onclick=ev=>{if(ev.target.id==='gross')ev.target.close()};
+zeichne();
+})();
+</script>
+</body>
+</html>

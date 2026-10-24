@@ -48,7 +48,9 @@ Kinder, Sterne, Fortschritt und Werke liegen im Browser des Geräts (localStorag
 - **Schritt-Modus:** Video stoppt automatisch am Ende jedes Schritts (kleines Schild «Jetzt du» im Bild, kein Zwischenbildschirm). Tipp aufs Video oder auf ▶ = Weiter, ↺ = Nochmal. Vorlesen nur auf Knopfdruck (Lautsprecher); automatisches Vorlesen ist in den Einstellungen abschaltbar/einschaltbar, die Stimme hängt vom Gerät ab.
 - **Lern-Bereiche** unbegrenzt, **Spass-Bereiche** kosten einen Stern pro Video und Tag (Anzahl in den Einstellungen). Abgegebene Aufgabe = ein Bonus-Stern pro Tag (abschaltbar).
 - **Aufgabe nach dem Video:** Foto, Bild malen, Tonaufnahme oder nur Fertig-Knopf. Landet in «Meine Werke», Eltern geben Rückmeldung (Emoji + Satz).
-- **Schul-Link:** trägt Video, Schritte, Material und Aufgabe im Link selbst. Kind scannt QR, landet direkt im Player. Keine Anmeldung, keine Sterne, nichts wird gespeichert.
+- **Foto vom Werk:** Am Ende jedes Videos (auch Schule und Schul-Link) gibt es «Foto von deinem Werk». Das Foto bleibt nur auf dem Gerät (IndexedDB), nichts wird hochgeladen. In der Schule heisst die Sammlung «Unsere Werke» und überlebt das Neuladen.
+- **Das haben andere gemacht:** Unter den Videos eines Bereichs Fotos fertiger Arbeiten aus `werke/werke.json` (erzeugt von `werkzeug/werke.py`, nur Fotos ohne Kinder, Hände und Screenshots).
+- **Schul-Link:** trägt Video, Schritte, Material und Aufgabe im Link selbst. Kind scannt QR, landet direkt im Player. Keine Anmeldung, keine Sterne; nur Fotos vom Werk bleiben auf dem Gerät.
 - **Mehrere Kinder:** im Elternbereich anlegen, Auswahl beim Start.
 - **Daten → Export/Import:** Videos und Einstellungen zwischen Geräten übertragen. Werke bleiben auf dem Gerät.
 

@@ -6,7 +6,7 @@ Dann im Browser:  http://127.0.0.1:8765/
 
 Ohne Browser übernehmen:  python werkzeug/kontrolle.py --uebernehmen <VIDEOID> [<VIDEOID> …]
 
-Seiten: kontrolle/index.html, kontrolle/video.html und kontrolle/werkstatt.js (werden bei jedem Aufruf frisch gelesen;
+Seiten: kontrolle/index.html, kontrolle/video.html, kontrolle/werke.html (Hall of Fame) und kontrolle/werkstatt.js (werden bei jedem Aufruf frisch gelesen;
 dieselben Seiten laufen online auf GitHub Pages, siehe werkstatt.py). Zeigt pro Entwurf den Player, die Schritte mit Einzelbildern
 rund um jeden Stopp, das Transkript und die erkannten Bildwechsel. Speichern schreibt video.json;
 «Übernehmen» trägt den Eintrag in schule/schule.json ein (ersetzt einen bestehenden mit gleicher id oder gleichem Video).
@@ -144,7 +144,7 @@ class H(BaseHTTPRequestHandler):
 
     def do_GET(self):
         p = urlparse(self.path).path
-        seite = {'/': 'index.html', '/video.html': 'video.html', '/werkstatt.js': 'werkstatt.js'}.get(p)
+        seite = {'/': 'index.html', '/video.html': 'video.html', '/werke.html': 'werke.html', '/werkstatt.js': 'werkstatt.js'}.get(p)
         if seite: return self.send(200, (SEITEN / seite).read_bytes(), 'text/javascript; charset=utf-8' if seite.endswith('.js') else 'text/html; charset=utf-8')
         if p == '/schule/index.html':  # video.html liest daraus die Material-Piktogramme
             return self.send(200, (WURZEL / 'schule' / 'index.html').read_bytes())
@@ -153,6 +153,12 @@ class H(BaseHTTPRequestHandler):
             datei = WURZEL / 'material' / m.group(1)
             typ = {'json': 'application/json; charset=utf-8', 'svg': 'image/svg+xml', 'png': 'image/png', 'webp': 'image/webp'}.get(m.group(2), 'image/jpeg')
             return self.send(200, datei.read_bytes(), typ) if datei.is_file() else self.send(404, 'nicht gefunden')
+        if p == '/werke/werke.json':  # Hall of Fame, siehe werke.py
+            return self.js(200, {**(lies(ENTWURF / 'werke' / 'werke.json') or {'werke': []}), 'themen': themen()})
+        m = re.fullmatch(r'/werke/((?:klein/)?[a-z0-9-]+\.jpg)', p)
+        if m:
+            datei = ENTWURF / 'werke' / m.group(1)
+            return self.send(200, datei.read_bytes(), 'image/jpeg') if datei.is_file() else self.send(404, 'kein Bild')
         m = re.fullmatch(r'/v/([A-Za-z0-9_-]{11})', p)  # alte Links
         if m:
             self.send_response(302); self.send_header('Location', '/video.html?id=' + m.group(1)); self.end_headers(); return
