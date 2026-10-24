@@ -8,8 +8,10 @@ Pro Video entsteht
   werkzeug/entwurf/<ID>/    brief.md (alles, was man zum Schreiben der Schritte braucht), Kontaktblätter blatt-*.jpg
 
 Braucht yt-dlp und ffmpeg im PATH sowie Pillow (pip install pillow).
+Sperrt YouTube («Sign in to confirm you're not a bot»): Umgebungsvariable YTDLP_COOKIES auf eine cookies.txt setzen
+(einmal erzeugen mit  yt-dlp --cookies-from-browser firefox --cookies cookies.txt --simulate <ID>), nie ins Repo.
 """
-import json, math, re, subprocess, sys
+import json, math, os, re, subprocess, sys
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
@@ -32,6 +34,7 @@ def yt_id(s):
 
 
 def run(cmd, **kw):
+    if cmd[0] == 'yt-dlp' and os.environ.get('YTDLP_COOKIES'): cmd = [cmd[0], '--cookies', os.environ['YTDLP_COOKIES'], *cmd[1:]]
     return subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', **kw)
 
 
@@ -93,7 +96,8 @@ def lade_untertitel(vid, c, neu):
 def lade_video(vid, c, neu):
     vorhanden = [p for p in c.glob('video.*') if p.suffix in ('.mp4', '.webm', '.mkv')]
     if vorhanden and not neu: return vorhanden[0]
-    r = run(['yt-dlp', '-f', '18/134/160/bestvideo[height<=360]/best[height<=480]', '--no-playlist',
+    # 18 (mit Ton) bricht seit Okt. 2026 oft ab und trägt teils eine KI-Synchronisation, darum getrennt laden; ba = Originalton
+    r = run(['yt-dlp', '-f', '134+ba/160+ba/bv*[height<=360]+ba/18/best[height<=480]', '--merge-output-format', 'mp4', '--no-playlist',
              '-o', str(c / 'video.%(ext)s'), '--', vid])
     vorhanden = [p for p in c.glob('video.*') if p.suffix in ('.mp4', '.webm', '.mkv')]
     if not vorhanden: sys.exit(f'Video {vid} konnte nicht geladen werden:\n{r.stderr[-800:]}')
