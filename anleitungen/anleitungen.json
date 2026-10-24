@@ -8,9 +8,10 @@
    "niveau": 3,
    "ordner": "raketenstation",
    "titelbild": "startrampe.webp",
+   "vorlagen": [{"datei": "vorlage-startrampe-a3.pdf", "name": "Vorlage Startrampe", "format": "A3"}],
    "material": ["holzbrett", "papier", "schere", "leim", "saege", "ahle", "schleifpapier", "stab", "bohrer", "schraubzwinge", "gummiband"],
    "steps": [
-    {"text": "Hol bei der Lehrperson die Vorlage. Schneide alle Papierformen mit der Schere grob aus.", "bilder": ["ausschneiden.webp"]},
+    {"text": "Hol bei der Lehrperson die Vorlage. Schneide alle Papierformen mit der Schere grob aus.", "bilder": ["ausschneiden.webp"], "vorlage": true},
     {"text": "Klebe die Papierformen mit dem Klebestift auf das Holz.", "bilder": ["aufkleben.webp"],
      "achtung": ["Trage den Klebstoff nur den Strichen entlang auf.", "Klebe die Formen so auf, dass wenig Holz übrig bleibt."],
      "zeigen": "Zeig der Lehrperson, wie du die Papierformen aufgeklebt hast."},
@@ -52,9 +53,10 @@
    "niveau": 3,
    "ordner": "raketenstation",
    "titelbild": "rakete.webp",
+   "vorlagen": [{"datei": "vorlage-rakete-a4.pdf", "name": "Vorlage Papierrakete", "format": "A4"}],
    "material": ["papier", "schere", "stab", "schraubstock", "leim", "klebeband", "farbe", "pinsel"],
    "steps": [
-    {"text": "Hol bei der Lehrperson die Vorlage für die Papierrakete. Schneide alle Teile mit der Schere aus.", "bilder": ["vorlage.webp"]},
+    {"text": "Hol bei der Lehrperson die Vorlage für die Papierrakete. Schneide alle Teile mit der Schere aus.", "bilder": ["vorlage.webp"], "vorlage": true},
     {"text": "Spanne ein Rundholz (20 mm) in den Schraubstock. Wickle das Papier darum und klebe es mit dem Klebestift zu.", "bilder": ["wickeln.webp"],
      "achtung": ["Nicht zu eng wickeln! Die Rakete muss gut über den Holzstab rutschen."],
      "tipp": ["Die Nähte kannst du mit Klebeband verstärken."]},

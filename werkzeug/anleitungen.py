@@ -4,7 +4,7 @@
 Aufruf:  python werkzeug/anleitungen.py
 
 Prüft: Pflichtfelder, eindeutige id (auch gegenüber schule/schule.json), areaId, Stufen, Material aus dem Vokabular,
-jeder Schritt mit Text und 1–2 Fotos, alle Fotos vorhanden, keine verwaisten Fotos im Ordner.
+jeder Schritt mit Text und 1–2 Fotos, alle Fotos und Vorlagen (PDF) vorhanden, keine verwaisten Fotos im Ordner.
 Fehler (!) müssen weg, Hinweise (?) sind eine Prüfbitte.
 """
 import json, re, sys
@@ -14,7 +14,7 @@ sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 WURZEL = Path(__file__).resolve().parent.parent
 ANL = WURZEL / 'anleitungen'
 AREAS = 'naehen sticken haekeln stricken weben knuepfen wickeln filzen falten schneiden holz schnitzen formen drucken experimente'.split()
-FELDER = {'text', 'bilder', 'bildtext', 'achtung', 'tipp', 'frage', 'zeigen'}
+FELDER = {'text', 'bilder', 'bildtext', 'achtung', 'tipp', 'frage', 'zeigen', 'vorlage'}
 
 
 def vokabular():
@@ -52,8 +52,12 @@ def main():
             if len(str(s.get('text', '')).split()) > 30: out.append(f'? Schritt {n}: Text über 30 Wörter')
             if 'ß' in json.dumps(s, ensure_ascii=False): out.append(f'! Schritt {n}: ß statt ss')
             bilder += s.get('bilder', [])
+            if s.get('vorlage') and not a.get('vorlagen'): out.append(f'! Schritt {n}: vorlage, aber keine vorlagen')
+        for v in a.get('vorlagen', []):
+            if not str(v.get('datei', '')).endswith('.pdf') or not v.get('name'): out.append('! vorlagen: datei (.pdf) und name nötig')
+            bilder.append(v.get('datei', ''))
         for b in bilder:
-            if not (ordner / b).is_file(): out.append(f'! Foto {ordner.name}/{b} fehlt')
+            if not (ordner / b).is_file(): out.append(f'! Datei {ordner.name}/{b} fehlt')
         benutzt.setdefault(ordner, set()).update(bilder)
         fehler += sum(x.startswith('!') for x in out)
         print(f"{aid}: {len(a.get('steps', []))} Schritte" + ('' if out else ' – ok'))

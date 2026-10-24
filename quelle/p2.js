@@ -390,6 +390,7 @@ SCREENS.anleitung=(app,{v,school})=>{
   const wer=SCHULE?'Die Lehrperson':'Ein Erwachsener';
   const reihe=v.ordner?S.videos.filter(x=>x.quelle==='anleitung'&&x.ordner===v.ordner):[]; const naechste=school?null:reihe[reihe.findIndex(x=>x.id===v.id)+1]||null;
   const bild=f=>v.bildpfad+encodeURIComponent(f);
+  const vorlageHtml=()=>(v.vorlagen||[]).length?`<div class="an-box vorlage"><span class="sym" aria-hidden="true">📄</span><div><p>Vorlage zum Ausdrucken</p>${v.vorlagen.map(x=>`<a class="an-laden" href="${esc(bild(x.datei))}" download target="_blank" rel="noopener">⬇ ${esc(x.name)}${x.format?` (${esc(x.format)})`:''}</a>`).join('')}</div></div>`:'';
   const vorlesen=s=>[s.text,...(s.achtung||[]).map(x=>'Achtung: '+x),...(s.tipp||[]).map(x=>'Tipp: '+x),s.frage?'Frage: '+s.frage:'',s.zeigen||''].filter(Boolean).join(' ');
   const zeichne=()=>{ const s=steps[i]; const gesperrt=s&&s.zeigen&&!pr.gesehen[i];
     const kopfHtml=`<div class="v3-kopf"><button class="v3-rund gross" data-act="back" aria-label="Zurück">←</button><div class="v3-thema-titel"><small>${a?esc(a.name)+' · ':''}Foto-Anleitung</small><h1>${esc(v.title)}</h1></div><span class="grow"></span>${s?`<span class="v3-pill an-zahl">Schritt ${i+1} von ${n}</span>`:''}</div>`;
@@ -398,6 +399,7 @@ SCREENS.anleitung=(app,{v,school})=>{
     if(i<0){ const weiter=!pr.done&&pr.step>0;
       inhalt=`<div class="an-start"><div class="an-held"><img src="${esc(v.thumb||'')}" alt=""></div><div class="an-spalte">
         <p class="v3-sub" style="margin:0">${n} Schritte mit Fotos. Lies jeden Schritt, schau das Foto an und mach es nach.</p>
+        ${vorlageHtml()}
         <div class="an-nav">${weiter?`<button class="an-weiter" data-act="geh" data-i="${pr.step}">Weiter bei Schritt ${pr.step+1} →</button><button class="v3-pill" data-act="geh" data-i="0">Von vorne</button>`:`<button class="an-weiter" data-act="geh" data-i="0">Los geht's →</button>`}</div>
         ${(v.material||[]).length?`<div class="v3-karte"><h2>Du brauchst</h2><div class="v3-mat">${v.material.map(id=>`<div><span class="pik">${matIcon(id)}</span><b>${esc(matName(id))}</b></div>`).join('')}</div></div>`:''}</div></div>`; }
     else if(i>=n){ inhalt=`<div class="an-ende v3-karte"><div class="em">😀</div><h2>${esc(v.fertig||'Bravo! Geschafft.')}</h2>
@@ -408,6 +410,7 @@ SCREENS.anleitung=(app,{v,school})=>{
         ${(s.achtung||[]).length?`<div class="an-box achtung"><span class="sym" aria-hidden="true">⚠️</span><div>${s.achtung.map(x=>`<p>${esc(x)}</p>`).join('')}</div></div>`:''}
         ${(s.tipp||[]).length?`<div class="an-box tipp"><span class="sym" aria-hidden="true">💡</span><div>${s.tipp.map(x=>`<p>${esc(x)}</p>`).join('')}</div></div>`:''}
         ${s.frage?`<div class="an-box frage"><span class="sym" aria-hidden="true">❓</span><div><p>${esc(s.frage)}</p><label class="an-antwort"><span>Deine Antwort</span><textarea id="an-antwort" rows="2">${esc(pr.antworten[i]||'')}</textarea></label></div></div>`:''}
+        ${s.vorlage?vorlageHtml():''}
         ${s.zeigen?`<div class="an-box zeigen${gesperrt?'':' ok'}"><span class="sym" aria-hidden="true">👀</span><div><p>${esc(s.zeigen)}</p><button class="an-gesehen" data-act="gesehen" aria-pressed="${!gesperrt}">${gesperrt?'☐':'☑'} ${wer} hat es gesehen</button></div></div>`:''}
         <div class="an-nav"><button class="v3-pill" data-act="geh" data-i="${i-1}">← Zurück</button><button class="an-weiter" data-act="geh" data-i="${i+1}" ${gesperrt?'disabled':''}>${i===n-1?'Fertig ✓':'Weiter →'}</button></div>
         ${gesperrt?`<p class="an-hinweis">Erst zeigen, dann geht es weiter.</p>`:''}</div></div>`; }
