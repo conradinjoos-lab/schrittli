@@ -7950,6 +7950,4437 @@
     "text": "",
     "deliverable": "keine"
    }
+  },
+  {
+   "id": "zw-paracord-schluesselanhaenger",
+   "areaId": "knuepfen",
+   "stufen": [
+    5,
+    6
+   ],
+   "zeit": 15,
+   "title": "Paracord-Schlüsselanhänger knüpfen",
+   "source": {
+    "type": "youtube",
+    "id": "SNfNuaKIekw"
+   },
+   "kanal": "Trailguide Pictures",
+   "dauer": "2:18",
+   "alter": "ab 10",
+   "sprache": "ohne Sprache",
+   "hinweis": "Ohne Ton, nur englische Texteinblendungen; Kobra-Knoten mit rechts/links abwechselnd, Enden verschmilzt die Lehrperson mit dem Feuerzeug.",
+   "material": [
+    "paracord",
+    "schluesselring",
+    "schere",
+    "feuerzeug",
+    "lineal"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Paracord, Schlüsselring, Schere"
+    },
+    {
+     "t": 20.4,
+     "label": "Etwa 1 Meter abschneiden, Enden verschmelzen lassen"
+    },
+    {
+     "t": 28.5,
+     "label": "Mitte der Schnur durch den Ring stecken"
+    },
+    {
+     "t": 39.5,
+     "label": "Enden durch die Schlaufe ziehen, festziehen"
+    },
+    {
+     "t": 47.5,
+     "label": "Eine Handbreit unter dem Ring abmessen"
+    },
+    {
+     "t": 52.5,
+     "label": "Umdrehen, rechte Schnur über beide legen"
+    },
+    {
+     "t": 58.0,
+     "label": "Linke Schnur drüber, unten durch, Schlaufe hoch"
+    },
+    {
+     "t": 66.5,
+     "label": "Festziehen, dann linke Schnur über beide"
+    },
+    {
+     "t": 75.0,
+     "label": "Rechte Schnur drüber, unten durch, Schlaufe hoch"
+    },
+    {
+     "t": 84.5,
+     "label": "Fest anziehen, so weiter bis zum Ring"
+    },
+    {
+     "t": 101.5,
+     "label": "Enden abschneiden, Lehrperson verschmilzt sie"
+    },
+    {
+     "t": 117.5,
+     "label": "Fertig – schau deinen Anhänger an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-paracord-fischgraet",
+   "areaId": "knuepfen",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Paracord-Armband mit Fischgrätmuster",
+   "source": {
+    "type": "youtube",
+    "id": "rx9noTLsp-E"
+   },
+   "kanal": "Küma Tutorials",
+   "dauer": "6:59",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Pro Kind zwei Paracord-Schnüre à 1.2 m in zwei Farben und ein Steckverschluss; Enden verschmilzt die Lehrperson, die Arbeit wird mit Klebeband am Tisch festgeklebt. Von 0:18 bis 1:04 läuft Werbung für einen Paracord-Shop.",
+   "material": [
+    "paracord",
+    "steckverschluss",
+    "schere",
+    "klebeband",
+    "lineal",
+    "feuerzeug"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht das Armband aus"
+    },
+    {
+     "t": 64.6,
+     "label": "Material richten: Paracord, Verschluss, Schere, Klebeband, Meterstab"
+    },
+    {
+     "t": 87.2,
+     "label": "Schnüre messen, Enden verschmilzt die Lehrperson"
+    },
+    {
+     "t": 123.0,
+     "label": "Durch den Verschluss, dann durch die Schlaufe ziehen"
+    },
+    {
+     "t": 161.8,
+     "label": "Beide Schnüre durch das andere Verschlussteil ziehen"
+    },
+    {
+     "t": 191.0,
+     "label": "Um das Handgelenk legen, Länge einstellen"
+    },
+    {
+     "t": 210.1,
+     "label": "Verschluss mit Klebeband am Tisch festkleben"
+    },
+    {
+     "t": 228.0,
+     "label": "Gelb über die Mitte und unter Gelb durch"
+    },
+    {
+     "t": 250.0,
+     "label": "Blau durch die Schlaufe, unter Blau durch, festziehen"
+    },
+    {
+     "t": 272.6,
+     "label": "Immer so weiter: Blau, dann Gelb"
+    },
+    {
+     "t": 343.1,
+     "label": "Klebeband ab, Enden abschneiden und verschmelzen lassen"
+    },
+    {
+     "t": 399.0,
+     "label": "Fertig – schau dein Armband an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-paracord-armband",
+   "areaId": "knuepfen",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Zweifarbiges Paracord-Armband mit Verschluss",
+   "source": {
+    "type": "youtube",
+    "id": "DLhTq2Jwhrg"
+   },
+   "kanal": "Andrea's Loops",
+   "dauer": "5:58",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Steckverschluss und drei Paracord-Stücke bereitlegen; Enden verschmilzt die Lehrperson (oder Sekundenkleber), ein Brett mit Nagel hilft beim Festhalten.",
+   "material": [
+    "paracord",
+    "steckverschluss",
+    "schere",
+    "feuerzeug",
+    "stecknadeln",
+    "holzbrett",
+    "naegel",
+    "leim"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Armband und Verschluss anschauen"
+    },
+    {
+     "t": 27.0,
+     "label": "Band abmessen: Handgelenk plus 3 cm, doppelt"
+    },
+    {
+     "t": 40.5,
+     "label": "Enden zusammenschmelzen: das macht die Lehrperson"
+    },
+    {
+     "t": 63.5,
+     "label": "Schmelzstelle in die Mitte, Enden durch beide Verschlussteile"
+    },
+    {
+     "t": 95.0,
+     "label": "Zwei farbige Bänder, Enden zusammenschmelzen lassen"
+    },
+    {
+     "t": 125.6,
+     "label": "Arbeitsband über Grundschnüre legen, mit Nadel fixieren"
+    },
+    {
+     "t": 150.5,
+     "label": "Erster Knoten: rechts unter, blau von oben durch"
+    },
+    {
+     "t": 196.0,
+     "label": "Zweiter Knoten: rechts über, links von unten durch"
+    },
+    {
+     "t": 229.5,
+     "label": "Festziehen, dann nochmals Knoten eins und zwei"
+    },
+    {
+     "t": 295.0,
+     "label": "Zuschauen: nochmals beide Knoten, dann immer weiter"
+    },
+    {
+     "t": 339.5,
+     "label": "Enden abschneiden, Lehrperson verschmilzt sie"
+    },
+    {
+     "t": 355.5,
+     "label": "Fertig – schau dein Armband an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-paracord-karabiner",
+   "areaId": "knuepfen",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Paracord-Anhänger mit Karabiner",
+   "source": {
+    "type": "youtube",
+    "id": "xMAvJrKgr00"
+   },
+   "kanal": "einfachPraktisch",
+   "dauer": "6:12",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "160 cm Paracord, Karabiner und Schlüsselring (25 mm); Kreuzknoten immer abwechselnd rechts und links, die kleine Schlaufe zeigt die nächste Seite; Enden verschmilzt die Lehrperson.",
+   "material": [
+    "paracord",
+    "schluesselring",
+    "schere",
+    "feuerzeug",
+    "lineal"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: der fertige Karabiner-Anhänger"
+    },
+    {
+     "t": 24.0,
+     "label": "Material richten: Karabiner, Schlüsselring, 160 cm Paracord"
+    },
+    {
+     "t": 55.0,
+     "label": "Mitte durch den Ring, Enden durchziehen, festziehen"
+    },
+    {
+     "t": 81.0,
+     "label": "Beide Schnüre durch den Karabiner, links und rechts"
+    },
+    {
+     "t": 113.5,
+     "label": "Rechts Schlaufe, linke Schnur drüber und durch"
+    },
+    {
+     "t": 137.5,
+     "label": "Zuschauen: Länge planen, etwa 9 cm Paracord"
+    },
+    {
+     "t": 179.5,
+     "label": "Links Schlaufe, rechte Schnur drüber und durch"
+    },
+    {
+     "t": 197.5,
+     "label": "Zuschauen: Kleine Schlaufe zeigt die nächste Seite"
+    },
+    {
+     "t": 226.5,
+     "label": "Immer so weiter, abwechseln, bis zum Schlüsselring"
+    },
+    {
+     "t": 279.5,
+     "label": "Letzte Schlaufe ganz fest bis zum Ring"
+    },
+    {
+     "t": 312.5,
+     "label": "Enden abschneiden, Lehrperson verschmilzt sie"
+    },
+    {
+     "t": 355.5,
+     "label": "Fertig – schau deinen Anhänger an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-survival-armband",
+   "areaId": "knuepfen",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Survival-Armband aus Paracord",
+   "source": {
+    "type": "youtube",
+    "id": "P7l2lYKE66s"
+   },
+   "kanal": "Arthur Konze",
+   "dauer": "4:59",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Zwei Stücke Paracord (60 cm und 2.5 m) vorbereiten; der Anfangsknoten ist die kniffligste Stelle, Enden verschmilzt die Lehrperson.",
+   "material": [
+    "paracord",
+    "schere",
+    "lineal",
+    "feuerzeug"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Survival-Armband aus Paracord"
+    },
+    {
+     "t": 30.5,
+     "label": "Material richten: Paracord 60 cm und 2.5 m"
+    },
+    {
+     "t": 51.8,
+     "label": "Kurzes Stück verknoten, locker ums Handgelenk"
+    },
+    {
+     "t": 86.5,
+     "label": "Langes Stück mittig unter die Schlaufe, links drüber"
+    },
+    {
+     "t": 98.2,
+     "label": "Rechtes Ende drüber, unters Armband, über die Schlaufe"
+    },
+    {
+     "t": 111.5,
+     "label": "Zusammenziehen: oben bleibt eine Schlaufe von 2 cm"
+    },
+    {
+     "t": 143.5,
+     "label": "Rechtes Ende als umgedrehtes S legen"
+    },
+    {
+     "t": 151.0,
+     "label": "Linkes Ende durch beide Schlaufen fädeln, stramm ziehen"
+    },
+    {
+     "t": 173.5,
+     "label": "Normales S, durchfädeln – immer abwechselnd weiter"
+    },
+    {
+     "t": 229.5,
+     "label": "Letzten Knoten fest ziehen, Reste abschneiden"
+    },
+    {
+     "t": 250.6,
+     "label": "Zuschauen: Enden verschmelzen – macht die Lehrperson"
+    },
+    {
+     "t": 259.3,
+     "label": "Fertig – schau dein Armband an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-affenfaust",
+   "areaId": "knuepfen",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Affenfaust aus Paracord",
+   "source": {
+    "type": "youtube",
+    "id": "fDy4WODZgl0"
+   },
+   "kanal": "einfachPraktisch",
+   "dauer": "7:02",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "130 cm Paracord pro Kind; Stolperstein: die drei Wicklungen müssen sauber nebeneinander liegen; Enden verschmilzt die Lehrperson mit dem Feuerzeug.",
+   "material": [
+    "paracord",
+    "schere",
+    "feuerzeug"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: 130 cm Paracord, Schere"
+    },
+    {
+     "t": 30.8,
+     "label": "Knoten ans Ende der Schnur"
+    },
+    {
+     "t": 58.0,
+     "label": "Schnur dreimal um zwei Finger wickeln"
+    },
+    {
+     "t": 75.5,
+     "label": "Dreimal von der Seite durch, vom Finger ziehen"
+    },
+    {
+     "t": 125.4,
+     "label": "Durch oberes und unteres Loch, je dreimal"
+    },
+    {
+     "t": 167.8,
+     "label": "Noch ein viertes Mal von oben durch"
+    },
+    {
+     "t": 188.6,
+     "label": "Vom Knoten aus Schnur für Schnur nachziehen"
+    },
+    {
+     "t": 242.0,
+     "label": "Nochmals festziehen, Kugel rund rollen"
+    },
+    {
+     "t": 282.5,
+     "label": "Zwei Schlaufen legen, fünfmal umwickeln"
+    },
+    {
+     "t": 319.5,
+     "label": "Ende durch untere Schlaufe, oben anziehen"
+    },
+    {
+     "t": 375.5,
+     "label": "Schnur abschneiden, Lehrperson verschmilzt das Ende"
+    },
+    {
+     "t": 404.0,
+     "label": "Fertig – schau deine Affenfaust an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-affenfaust-kordel",
+   "areaId": "knuepfen",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Affenfaust: Ball aus Kordel",
+   "source": {
+    "type": "youtube",
+    "id": "jfyY7wMWs-Q"
+   },
+   "kanal": "handgemachtes Zeug",
+   "dauer": "4:20",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Pro Kind 120 cm dicke Baumwollkordel (ca. 8 mm); das Strammziehen am Schluss braucht Geduld, immer beim Startknoten beginnen.",
+   "material": [
+    "schnur",
+    "schere",
+    "leim"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht der Seilball aus"
+    },
+    {
+     "t": 11.0,
+     "label": "Kordel 120 cm: Knoten an ein Ende"
+    },
+    {
+     "t": 33.0,
+     "label": "Knoten zwischen die Finger, dreimal drumwickeln"
+    },
+    {
+     "t": 58.5,
+     "label": "Richtung wechseln: Kordel oben zwischen Fingern durch"
+    },
+    {
+     "t": 79.0,
+     "label": "Zwei weitere Runden, immer unter die vorige"
+    },
+    {
+     "t": 105.0,
+     "label": "Vorsichtig von den Fingern ziehen, festhalten"
+    },
+    {
+     "t": 116.0,
+     "label": "Ende durchs obere Loch führen"
+    },
+    {
+     "t": 132.5,
+     "label": "Noch zweimal durch beide Löcher, bis drei Reihen"
+    },
+    {
+     "t": 188.5,
+     "label": "Beim Knoten anfangen, Reihe für Reihe strammziehen"
+    },
+    {
+     "t": 233.5,
+     "label": "Ende kurz abschneiden, bei Bedarf kleben"
+    },
+    {
+     "t": 250.5,
+     "label": "Fertig – schau deinen Ball an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-paracord-armband-einfach",
+   "areaId": "knuepfen",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Paracord-Armband knüpfen",
+   "source": {
+    "type": "youtube",
+    "id": "vrP7sMIvfdY"
+   },
+   "kanal": "lernfoerderung",
+   "dauer": "7:57",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Steckverschluss (Klickschnalle) nötig; weisse Innenfäden vorher herausziehen; Enden verschmilzt die Lehrperson mit dem Feuerzeug.",
+   "material": [
+    "paracord",
+    "steckverschluss",
+    "schere",
+    "lineal",
+    "feuerzeug"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Paracord, Verschluss, Schere, Lineal"
+    },
+    {
+     "t": 5.0,
+     "label": "Zwei Farben je 1 Meter 20 abschneiden"
+    },
+    {
+     "t": 31.0,
+     "label": "Enden abschneiden, weisse Fäden herausziehen"
+    },
+    {
+     "t": 88.0,
+     "label": "Zuschauen: Lehrperson verschmilzt die beiden Enden"
+    },
+    {
+     "t": 125.5,
+     "label": "Schlaufe von oben in den Verschluss, Enden durchziehen"
+    },
+    {
+     "t": 152.0,
+     "label": "Beide Bänder von oben durch den zweiten Verschlussteil"
+    },
+    {
+     "t": 181.0,
+     "label": "Handgelenk messen, umdrehen, Schnüre gerade ziehen"
+    },
+    {
+     "t": 210.0,
+     "label": "Braun über die Mitte, Gelb durch die Schlaufe"
+    },
+    {
+     "t": 237.5,
+     "label": "Gelb hinter die Mitte, Braun durch die Schlaufe"
+    },
+    {
+     "t": 263.5,
+     "label": "Abwechseln weiterknüpfen, bis kein Platz mehr ist"
+    },
+    {
+     "t": 384.0,
+     "label": "Enden abschneiden, Lehrperson verschmilzt sie"
+    },
+    {
+     "t": 449.0,
+     "label": "Fertig – schau dein Armband an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-scoubidou-eckig",
+   "areaId": "knuepfen",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Scoubidou eckig flechten",
+   "source": {
+    "type": "youtube",
+    "id": "TN3HYbB5Vro"
+   },
+   "kanal": "Dreadlock Doris",
+   "dauer": "4:04",
+   "alter": "ab 9",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Der Anfangsknoten mit 4 Bändern (2 Farben, abwechselnd) muss vor dem Video fertig sein; am Schluss wird nur der Grundknoten wiederholt.",
+   "material": [
+    "scoubidou",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: fertiges eckiges Geflecht"
+    },
+    {
+     "t": 5.5,
+     "label": "Anfangsknoten festhalten, Farben abwechselnd legen"
+    },
+    {
+     "t": 29.5,
+     "label": "Erstes Blau als Schlaufe über Schwarz legen"
+    },
+    {
+     "t": 38.0,
+     "label": "Zweites Blau als Schlaufe über Schwarz legen"
+    },
+    {
+     "t": 49.0,
+     "label": "Schwarz vorne durch die hintere Schlaufe"
+    },
+    {
+     "t": 58.5,
+     "label": "Schwarz hinten durch die vordere Schlaufe"
+    },
+    {
+     "t": 67.0,
+     "label": "Festziehen: zuerst Blau, dann Schwarz"
+    },
+    {
+     "t": 87.5,
+     "label": "Beide Blau wieder Schlaufen, gleiche Stelle"
+    },
+    {
+     "t": 117.5,
+     "label": "Beide Schwarz durchstecken und festziehen"
+    },
+    {
+     "t": 146.0,
+     "label": "Immer so weiter, bis es lang genug ist"
+    },
+    {
+     "t": 233.0,
+     "label": "Fertig – schau dein Geflecht an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-freundschaftsband-kartonscheibe",
+   "areaId": "knuepfen",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Freundschaftsband mit Kartonscheibe",
+   "source": {
+    "type": "youtube",
+    "id": "i7yVGBrlQeA"
+   },
+   "kanal": "teach love & be happy",
+   "dauer": "3:02",
+   "alter": "ab 9",
+   "sprache": "ohne Sprache",
+   "hinweis": "Kumihimo-Scheibe aus Karton (Becher als Schablone, 8 Kerben), 7 Fäden Häkelgarn à ca. 30 cm; nur Texteinblendungen, keine Stimme – Kinder müssen die eingeblendeten Sätze lesen.",
+   "material": [
+    "garn",
+    "karton",
+    "schere",
+    "bleistift",
+    "glas"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So wird das Freundschaftsband"
+    },
+    {
+     "t": 11.2,
+     "label": "Material richten: Garn, Karton, Schere, Becher, Stift"
+    },
+    {
+     "t": 16.3,
+     "label": "Kreis um den Becher zeichnen, ausschneiden"
+    },
+    {
+     "t": 28.9,
+     "label": "Acht Kerben einschneiden, Mitte durchstechen"
+    },
+    {
+     "t": 47.7,
+     "label": "Sieben Fäden 30 cm abschneiden, zusammenknoten"
+    },
+    {
+     "t": 60.5,
+     "label": "Knoten durchs Loch, in jede Kerbe ein Faden"
+    },
+    {
+     "t": 86.5,
+     "label": "Freie Kerbe unten: dritten Faden hinunterlegen"
+    },
+    {
+     "t": 101.0,
+     "label": "Scheibe drehen, freie Kerbe wieder unten"
+    },
+    {
+     "t": 127.6,
+     "label": "Immer so weiter, bis es lang genug ist"
+    },
+    {
+     "t": 153.6,
+     "label": "Fäden lösen, Enden zusammenknoten"
+    },
+    {
+     "t": 161.4,
+     "label": "Fertig – schau dein Armband an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-freundschaftsband-streifen",
+   "areaId": "knuepfen",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Freundschaftsband mit Streifen",
+   "source": {
+    "type": "youtube",
+    "id": "L226q6qkL60"
+   },
+   "kanal": "Andrea's Loops",
+   "dauer": "4:17",
+   "alter": "ab 9",
+   "sprache": "Hochdeutsch",
+   "hinweis": "8 Baumwollfäden à 80–90 cm, oben und unten mit Klebeband am Tisch fixieren; ein Knoten besteht immer aus zwei halben Knoten, Faden für Faden von links nach rechts.",
+   "material": [
+    "garn",
+    "klebeband",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: 8 Fäden Garn, Klebeband, Schere"
+    },
+    {
+     "t": 17.0,
+     "label": "Knoten oben, mit Klebeband am Tisch festkleben"
+    },
+    {
+     "t": 38.0,
+     "label": "Fäden paarweise ordnen, unten festkleben"
+    },
+    {
+     "t": 67.0,
+     "label": "Linker Faden: Vierer legen, unten durch, festziehen"
+    },
+    {
+     "t": 108.0,
+     "label": "Gleichen Knoten nochmals machen und festziehen"
+    },
+    {
+     "t": 120.5,
+     "label": "Nächster Faden: wieder zweimal knoten"
+    },
+    {
+     "t": 159.0,
+     "label": "Faden für Faden weiter bis zum letzten"
+    },
+    {
+     "t": 175.5,
+     "label": "Reihe fertig: links wieder von vorne beginnen"
+    },
+    {
+     "t": 197.7,
+     "label": "Zuschauen: Verschluss flechten und verknoten"
+    },
+    {
+     "t": 240.5,
+     "label": "Fertig – schau dein Armband an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-spiralknoten-armband",
+   "areaId": "knuepfen",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Armband mit Spiralknoten",
+   "source": {
+    "type": "youtube",
+    "id": "ulj5JDD9a6M"
+   },
+   "kanal": "Kreativ mit Miss B",
+   "dauer": "2:04",
+   "alter": "ab 9",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Drei Fäden Perlgarn oder Sticktwist je 100 cm; Stolperstein: wenn die Spirale rechts angekommen ist, den Arbeitsfaden unter den beiden anderen nach links holen.",
+   "material": [
+    "garn",
+    "klebeband",
+    "schere",
+    "lineal"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: das fertige Spiralband"
+    },
+    {
+     "t": 7.9,
+     "label": "Material richten: 3 Fäden je 100 cm, Klebeband"
+    },
+    {
+     "t": 14.8,
+     "label": "Knoten 10 cm vom Ende, Fäden ankleben"
+    },
+    {
+     "t": 24.0,
+     "label": "Linker Faden: 4 legen, Ende von unten durch"
+    },
+    {
+     "t": 42.0,
+     "label": "Knoten anziehen, immer wieder so weiter"
+    },
+    {
+     "t": 52.7,
+     "label": "Faden rechts angekommen: unten durch nach links"
+    },
+    {
+     "t": 72.9,
+     "label": "Weiter knüpfen, rechts angekommen: wieder nach links"
+    },
+    {
+     "t": 96.1,
+     "label": "Nach 20 Knoten Farbe wechseln, weiter knüpfen"
+    },
+    {
+     "t": 109.0,
+     "label": "Langes Band in der Mitte ankleben"
+    },
+    {
+     "t": 118.0,
+     "label": "Fertig – Enden flechten, Armband anschauen"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-perlenarmband-kreuzknoten",
+   "areaId": "knuepfen",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Perlenarmband mit Kreuzknoten",
+   "source": {
+    "type": "youtube",
+    "id": "UlIamOgHAiw"
+   },
+   "kanal": "Bell Bano",
+   "dauer": "3:26",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Dünne Nylonschnur (ca. 1 mm) und Perlen mit grossem Loch bereitstellen; die Armbandschnur lang lassen – der Schiebeverschluss wird nicht gezeigt, die Enden einfach verknoten oder zuerst mit dicker Schnur den Knoten üben.",
+   "material": [
+    "schnur",
+    "perle",
+    "klebeband",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: das fertige Perlenarmband"
+    },
+    {
+     "t": 19.4,
+     "label": "Armbandschnur festkleben, Knüpfschnur bereitlegen"
+    },
+    {
+     "t": 39.2,
+     "label": "Knüpfschnur unten durch, kreuzen, oberes Ende durch Schlaufe"
+    },
+    {
+     "t": 59.5,
+     "label": "Links Schlaufe legen, rechten Faden darüber"
+    },
+    {
+     "t": 69.5,
+     "label": "Rechtes Ende unter die Armbandschnur, durch die Schlaufe"
+    },
+    {
+     "t": 83.5,
+     "label": "Dasselbe von rechts: Schlaufe, linker Faden, unten durch"
+    },
+    {
+     "t": 112.9,
+     "label": "Am Armband drei Kreuzknoten knüpfen"
+    },
+    {
+     "t": 129.5,
+     "label": "Auf jedes Ende eine Perle schieben"
+    },
+    {
+     "t": 139.5,
+     "label": "Kreuzknoten knüpfen: einmal links, einmal rechts"
+    },
+    {
+     "t": 149.5,
+     "label": "Immer so weiter, zum Schluss drei Kreuzknoten"
+    },
+    {
+     "t": 184.4,
+     "label": "Fertig – schau dein Armband an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-drehscheiben-baendeli",
+   "areaId": "knuepfen",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Freundschaftsbändeli mit Drehscheibe",
+   "source": {
+    "type": "youtube",
+    "id": "jNwuBm-_1TY"
+   },
+   "kanal": "TRYTRYTRY - Food & DIY",
+   "dauer": "4:39",
+   "alter": "ab 9",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Sieben Garnfäden à 30 cm; Kerben eher gross einschneiden, sonst bleiben die Fäden hängen.",
+   "material": [
+    "garn",
+    "karton",
+    "schere",
+    "glas",
+    "bleistift"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: fertige Bändeli und Drehscheiben"
+    },
+    {
+     "t": 12.0,
+     "label": "Glas auf Karton, Kreis nachziehen und ausschneiden"
+    },
+    {
+     "t": 40.0,
+     "label": "Acht Striche am Rand, Punkt in der Mitte"
+    },
+    {
+     "t": 53.0,
+     "label": "Striche einschneiden, Mitte durchstechen"
+    },
+    {
+     "t": 90.0,
+     "label": "Sieben Fäden 30 cm, ein Ende zusammenknoten"
+    },
+    {
+     "t": 112.0,
+     "label": "Knoten durch das Loch stecken"
+    },
+    {
+     "t": 119.5,
+     "label": "Fäden in die Kerben, eine bleibt leer"
+    },
+    {
+     "t": 135.0,
+     "label": "Leere Kerbe unten, dritten Faden von rechts runter"
+    },
+    {
+     "t": 143.0,
+     "label": "Scheibe drehen, wieder dritten Faden nach unten"
+    },
+    {
+     "t": 159.0,
+     "label": "Immer so weiter, bis das Band passt"
+    },
+    {
+     "t": 230.3,
+     "label": "Band herausziehen, Ende verknoten, Fäden kürzen"
+    },
+    {
+     "t": 258.4,
+     "label": "Fertig – schau dein Bändeli an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-rundzopf-vier-faeden",
+   "areaId": "knuepfen",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Rundzopf aus vier Fäden",
+   "source": {
+    "type": "youtube",
+    "id": "K__SDc71U64"
+   },
+   "kanal": "KreativGlück",
+   "dauer": "1:58",
+   "alter": "ab 9",
+   "sprache": "ohne Sprache",
+   "zeit": 15,
+   "hinweis": "Vier gleich lange Schnüre (ca. 80 cm) oben zusammenknoten und mit Klebeband am Tisch festmachen; Stop-Motion ohne Ton, Merkregel: Aussenfaden unter zwei, über einen zurück.",
+   "material": [
+    "schnur",
+    "klebeband",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: vier Schnüre, oben zusammenknoten"
+    },
+    {
+     "t": 13.0,
+     "label": "Vier Fäden nebeneinander ausbreiten"
+    },
+    {
+     "t": 24.0,
+     "label": "Rechter Faden unter zwei, über einen zurück"
+    },
+    {
+     "t": 29.5,
+     "label": "Linker Faden unter zwei, über einen zurück"
+    },
+    {
+     "t": 36.5,
+     "label": "Fäden nach oben festziehen"
+    },
+    {
+     "t": 42.0,
+     "label": "Wieder rechts, dann links, dann festziehen"
+    },
+    {
+     "t": 62.0,
+     "label": "Nochmals rechts, links, festziehen"
+    },
+    {
+     "t": 82.0,
+     "label": "Immer so weiter bis zur gewünschten Länge"
+    },
+    {
+     "t": 113.0,
+     "label": "Fertig – schau deinen Zopf an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-nestelband",
+   "areaId": "knuepfen",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Nestelband aus drei Schlaufen",
+   "source": {
+    "type": "youtube",
+    "id": "hl9z4Zyk5no"
+   },
+   "kanal": "Kreativ mit Miss B",
+   "dauer": "3:07",
+   "alter": "ab 9",
+   "sprache": "ohne Sprache",
+   "hinweis": "Fingerschlaufen-Flechten: drei Fäden doppelt nehmen, Knoten mit Klebeband am Tisch fixieren; Stolperstein ist das Nachrücken der Schlaufe vom Zeige- auf den Mittelfinger.",
+   "material": [
+    "garn",
+    "schere",
+    "klebeband",
+    "lineal"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: das fertige Nestelband"
+    },
+    {
+     "t": 15.2,
+     "label": "Material richten: Garn in 3 Farben, Schere, Klebeband"
+    },
+    {
+     "t": 19.2,
+     "label": "Drei Fäden gleich lang abmessen und abschneiden"
+    },
+    {
+     "t": 42.2,
+     "label": "Fäden falten, alle Enden zusammen verknoten"
+    },
+    {
+     "t": 70.0,
+     "label": "Knoten festkleben, drei Schlaufen auf die Finger"
+    },
+    {
+     "t": 87.4,
+     "label": "Zeigefinger durch die Schlaufe, hintere Schlaufe holen"
+    },
+    {
+     "t": 101.7,
+     "label": "Andere Hand gleich, Schlaufe nachrücken"
+    },
+    {
+     "t": 120.1,
+     "label": "Immer abwechseln bis zum Schluss"
+    },
+    {
+     "t": 162.0,
+     "label": "Schlaufen abnehmen, Ende verknoten"
+    },
+    {
+     "t": 173.0,
+     "label": "Fertig – schau dein Nestelband an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-schiebeknoten-armband",
+   "areaId": "knuepfen",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Verstellbares Armband mit Schiebeknoten",
+   "source": {
+    "type": "youtube",
+    "id": "vvL4SFZo2jI"
+   },
+   "kanal": "Bell Bano",
+   "dauer": "5:03",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Dünne Nylon-Armbandschnur und kleine Perlen; der Knoten wird ab 2:00 an dicker Schnur in gross gezeigt, die Enden verschmilzt die Lehrperson an der Kerze.",
+   "material": [
+    "schnur",
+    "perle",
+    "schere",
+    "klebeband",
+    "kerze",
+    "lineal"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So wird das Armband verstellbar"
+    },
+    {
+     "t": 23.5,
+     "label": "Material richten: Schnur, Perlen, Schere, Klebeband"
+    },
+    {
+     "t": 40.5,
+     "label": "Schnur ums Handgelenk messen, zweite Schnur abschneiden"
+    },
+    {
+     "t": 73.2,
+     "label": "Perlen auffädeln, in die Mitte schieben"
+    },
+    {
+     "t": 86.5,
+     "label": "Enden überkreuzen, parallel legen, festkleben"
+    },
+    {
+     "t": 104.5,
+     "label": "Kurze Schnur unten durch, Knoten machen"
+    },
+    {
+     "t": 119.8,
+     "label": "Linke Schlaufe, rechtes Ende drüber und durch"
+    },
+    {
+     "t": 154.5,
+     "label": "Gleich von rechts, abwechseln bis Grösse passt"
+    },
+    {
+     "t": 196.1,
+     "label": "Enden abschneiden, Armband anprobieren"
+    },
+    {
+     "t": 219.4,
+     "label": "Stopperknoten links und rechts, Enden kürzen"
+    },
+    {
+     "t": 236.2,
+     "label": "Zuschauen: Enden verschmilzt die Lehrperson"
+    },
+    {
+     "t": 285.8,
+     "label": "Fertig – schau dein Armband an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-makramee-feder",
+   "areaId": "knuepfen",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Makramee-Feder aus Restfäden",
+   "source": {
+    "type": "youtube",
+    "id": "dN17PwS4aoM"
+   },
+   "kanal": "Emmas Lieblingsstücke",
+   "dauer": "5:11",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Makramee-Schnur-Reste (ca. 4 mm, Baumwolle) und einen Kamm bereitlegen; Haarspray vor dem Zuschneiden macht die Feder stabiler, geht aber auch ohne.",
+   "material": [
+    "schnur",
+    "schere",
+    "papier",
+    "bleistift"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Makramee-Feder aus Restfäden"
+    },
+    {
+     "t": 15.2,
+     "label": "Material richten: Schnur-Reste, Kamm, Schere, Haarspray"
+    },
+    {
+     "t": 21.0,
+     "label": "Fäden nach Länge sortieren: kurze oben"
+    },
+    {
+     "t": 27.0,
+     "label": "Mittelschnur doppelt legen, Fäden aufdrehen"
+    },
+    {
+     "t": 53.5,
+     "label": "Erste Schlaufe unter die Mitte, Bogen nach rechts"
+    },
+    {
+     "t": 62.5,
+     "label": "Zweite Schlaufe durchziehen, Knoten fest ziehen"
+    },
+    {
+     "t": 90.5,
+     "label": "Immer so weiter: etwa 20 Knoten"
+    },
+    {
+     "t": 163.0,
+     "label": "Alle Fäden mit dem Kamm auskämmen"
+    },
+    {
+     "t": 199.0,
+     "label": "Papier falten, halbe Feder zeichnen, ausschneiden"
+    },
+    {
+     "t": 226.0,
+     "label": "Haarspray drauf, nochmals kämmen"
+    },
+    {
+     "t": 244.0,
+     "label": "Schablone auflegen, Feder rundherum schneiden"
+    },
+    {
+     "t": 277.5,
+     "label": "Fertig – schau deine Feder an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-quaste-karton",
+   "areaId": "wickeln",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "zeit": 15,
+   "title": "Quaste aus Wolle",
+   "source": {
+    "type": "youtube",
+    "id": "9f1L1SGTbwo"
+   },
+   "kanal": "DIY Craft NonStop",
+   "dauer": "3:33",
+   "alter": "ab 9",
+   "sprache": "ohne Sprache",
+   "hinweis": "Dünnes Garn oder Wolle, Kartonstück als Wickelhilfe; zum Durchziehen des Fadens hilft eine Nadel oder eine Drahtschlaufe, am Schluss die Schlaufen unten aufschneiden.",
+   "material": [
+    "wolle",
+    "karton",
+    "schere",
+    "nadel"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht die fertige Quaste aus"
+    },
+    {
+     "t": 3.1,
+     "label": "Wolle viele Male um den Karton wickeln"
+    },
+    {
+     "t": 27.5,
+     "label": "Faden oben unter der Wolle durchziehen"
+    },
+    {
+     "t": 57.0,
+     "label": "Faden oben fest verknoten"
+    },
+    {
+     "t": 83.0,
+     "label": "Wolle vorsichtig vom Karton schieben"
+    },
+    {
+     "t": 96.0,
+     "label": "Zweiten Faden unter dem Knoten anknoten"
+    },
+    {
+     "t": 118.0,
+     "label": "Faden viele Male um den Hals wickeln"
+    },
+    {
+     "t": 164.0,
+     "label": "Fadenende mit Nadel unter die Wicklung ziehen"
+    },
+    {
+     "t": 186.0,
+     "label": "Schlaufen unten aufschneiden, Enden gerade schneiden"
+    },
+    {
+     "t": 203.8,
+     "label": "Fertig – schau deine Quaste an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-kordel-kartonscheibe",
+   "areaId": "knuepfen",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Kordel mit Kartonscheibe drehen",
+   "source": {
+    "type": "youtube",
+    "id": "xdQgc0Bzl1k"
+   },
+   "kanal": "Swissys Art",
+   "dauer": "5:31",
+   "alter": "ab 9",
+   "sprache": "ohne Sprache",
+   "hinweis": "Kartonscheibe mit 8 Schlitzen und Loch in der Mitte (Kreis mit rundem Deckel oder Zirkel; die 8 Striche entstehen, wenn man das Lineal viermal durch den Mittelpunkt legt); 7 Wollfäden à ca. 80 cm in 2–3 Farben, Loch nötigenfalls mit der Schere etwas weiten.",
+   "material": [
+    "wolle",
+    "karton",
+    "schere",
+    "lineal",
+    "stifte",
+    "zirkel"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Karton, Deckel, Stift, Schere, Wolle, Lineal"
+    },
+    {
+     "t": 16.5,
+     "label": "Kreis mit dem Deckel zeichnen und ausschneiden"
+    },
+    {
+     "t": 44.0,
+     "label": "8 Striche am Rand, Punkt in der Mitte"
+    },
+    {
+     "t": 86.5,
+     "label": "8 Schlitze einschneiden, Loch in die Mitte"
+    },
+    {
+     "t": 102.5,
+     "label": "7 gleich lange Fäden abschneiden, nebeneinander legen"
+    },
+    {
+     "t": 165.5,
+     "label": "Fäden zusammennehmen, am Ende einen Knoten machen"
+    },
+    {
+     "t": 186.5,
+     "label": "Knoten durch das Loch in der Scheibe stecken"
+    },
+    {
+     "t": 196.5,
+     "label": "Jeden Faden in einen Schlitz, einer bleibt leer"
+    },
+    {
+     "t": 224.0,
+     "label": "Faden schräg oben rechts in die Lücke unten"
+    },
+    {
+     "t": 227.5,
+     "label": "Scheibe drehen: Lücke wieder unten. Immer so weiter"
+    },
+    {
+     "t": 289.5,
+     "label": "Kordel herausnehmen, Ende verknoten, Fäden abschneiden"
+    },
+    {
+     "t": 317.5,
+     "label": "Fertig – schau deine Kordel an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-perlenweben",
+   "areaId": "weben",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Perlenweben am Webrahmen",
+   "source": {
+    "type": "youtube",
+    "id": "h6klpr_EiZI"
+   },
+   "kanal": "Creativschub",
+   "dauer": "3:04",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Teil 2 der Reihe: Rahmen vorher bespannen (njKL8tkCdQc), Fadenwechsel und Vernähen in w5bUV0XsesE; Abnehmen und Verknoten der Kettfäden zeigt keines der Videos. Dünne Perlenwebnadel und Nylonfaden nötig; Stolperstein: beim Zurückstechen muss die Nadel über den Kettfäden bleiben.",
+   "material": [
+    "perlenwebrahmen",
+    "perle",
+    "nadel",
+    "garn"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Perlen, Nadel, Nylonfaden, Rahmen"
+    },
+    {
+     "t": 28.5,
+     "label": "Faden aussen am ersten Kettfaden anknoten"
+    },
+    {
+     "t": 52.5,
+     "label": "7 Perlen auffädeln: eine weniger als Kettfäden"
+    },
+    {
+     "t": 76.5,
+     "label": "Nadel unter die Kettfäden, Perlen hochdrücken"
+    },
+    {
+     "t": 90.5,
+     "label": "Nadel ganz durchschieben, Faden durchziehen"
+    },
+    {
+     "t": 107.0,
+     "label": "Nicht loslassen: über den Kettfäden zurückstechen"
+    },
+    {
+     "t": 120.0,
+     "label": "Faden ganz durchziehen – Perlen sitzen fest"
+    },
+    {
+     "t": 137.0,
+     "label": "Nächste Reihe: Perlen auffädeln, unter Kettfäden"
+    },
+    {
+     "t": 164.5,
+     "label": "Über den Kettfäden zurückstechen, ganz durchziehen"
+    },
+    {
+     "t": 178.0,
+     "label": "Fertig – schau deine Perlenreihen an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-perlenwebrahmen-bespannen",
+   "areaId": "weben",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Perlenwebrahmen bespannen",
+   "source": {
+    "type": "youtube",
+    "id": "njKL8tkCdQc"
+   },
+   "kanal": "Creativschub",
+   "dauer": "2:15",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Teil 1 der Reihe: danach Perlen weben (h6klpr_EiZI) und Faden vernähen (w5bUV0XsesE); Abnehmen vom Rahmen fehlt. Dünnes Häkel- oder Knopflochgarn als Kettfaden; immer ein Faden mehr als Perlen pro Reihe, Faden beim Wickeln straff halten.",
+   "material": [
+    "perlenwebrahmen",
+    "garn",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Perlenwebrahmen, Garn, Schere"
+    },
+    {
+     "t": 28.0,
+     "label": "Langes Fadenende hängen lassen"
+    },
+    {
+     "t": 33.0,
+     "label": "Faden in Einschnitt, aussen mit Daumen halten"
+    },
+    {
+     "t": 40.0,
+     "label": "Faden spannen, gegenüber in Einschnitt legen"
+    },
+    {
+     "t": 47.5,
+     "label": "Unten herum und zurück, nicht oben quer"
+    },
+    {
+     "t": 67.5,
+     "label": "Weiter wickeln: ein Faden mehr als Perlen"
+    },
+    {
+     "t": 88.5,
+     "label": "Straff halten, umdrehen, Faden abschneiden"
+    },
+    {
+     "t": 97.5,
+     "label": "Hinten quer verknoten, fest anziehen"
+    },
+    {
+     "t": 123.0,
+     "label": "Noch mehrere Knoten darüber machen"
+    },
+    {
+     "t": 129.0,
+     "label": "Fertig – schau deinen Webrahmen an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-perlenweben-vernaehen",
+   "areaId": "weben",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Faden vernähen beim Perlenweben",
+   "source": {
+    "type": "youtube",
+    "id": "w5bUV0XsesE"
+   },
+   "kanal": "Creativschub",
+   "dauer": "2:32",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Teil 3 der Reihe (nach njKL8tkCdQc und h6klpr_EiZI): Schussfaden vernähen und neuen Faden ansetzen; Abnehmen vom Rahmen und Verknoten der Kettfäden fehlt. Stolperstein: mit dem neuen Faden auf der Gegenseite derselben Reihe einstechen.",
+   "material": [
+    "perle",
+    "perlenwebrahmen",
+    "garn",
+    "nadel",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Warum man den Schussfaden vernäht"
+    },
+    {
+     "t": 15.5,
+     "label": "Nadel zwei Reihen tiefer durch die Perlen stechen"
+    },
+    {
+     "t": 31.0,
+     "label": "Im Zickzack nach unten durch die Perlen"
+    },
+    {
+     "t": 45.5,
+     "label": "Alten Faden hängen lassen, neuen Faden einfädeln"
+    },
+    {
+     "t": 61.0,
+     "label": "Neuen Faden gegenüber in die gleiche Reihe stechen"
+    },
+    {
+     "t": 75.0,
+     "label": "Kurzes Ende lassen, im Zickzack nach oben"
+    },
+    {
+     "t": 99.5,
+     "label": "Zuschauen: Immer gegenüber einstechen"
+    },
+    {
+     "t": 115.0,
+     "label": "Oben rechts: Faden durchziehen, weiterweben"
+    },
+    {
+     "t": 137.5,
+     "label": "Fadenenden knapp am Rand abschneiden"
+    },
+    {
+     "t": 145.0,
+     "label": "Fertig – schau dein Perlenband an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-perlenband-weben",
+   "areaId": "weben",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Perlenband weben",
+   "source": {
+    "type": "youtube",
+    "id": "NGA30jD27pU"
+   },
+   "kanal": "Kikisweb.de",
+   "dauer": "4:15",
+   "alter": "ab 10",
+   "sprache": "ohne Sprache",
+   "hinweis": "Bespannen und Weben in einem Video, aber stumm: Kettfäden gleichmässig in die Rillen legen, pro Reihe eine Perle weniger als Kettfäden; Abnehmen vom Rahmen und Vernähen fehlen (Vernähen: w5bUV0XsesE). Feine Nadel und Rocailles bereitstellen.",
+   "material": [
+    "perlenwebrahmen",
+    "perle",
+    "garn",
+    "nadel",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Perlenwebrahmen und Garn"
+    },
+    {
+     "t": 4.0,
+     "label": "Fadenanfang am Rahmen festknoten"
+    },
+    {
+     "t": 28.5,
+     "label": "Faden längs um den Rahmen spannen"
+    },
+    {
+     "t": 58.0,
+     "label": "Faden abschneiden, Ende festknoten"
+    },
+    {
+     "t": 91.0,
+     "label": "Fäden einzeln in die Rillen legen"
+    },
+    {
+     "t": 116.5,
+     "label": "Webfaden einfädeln, aussen anknoten"
+    },
+    {
+     "t": 128.0,
+     "label": "Perlen auffädeln: eine pro Lücke"
+    },
+    {
+     "t": 152.0,
+     "label": "Perlenreihe unter die Fäden hochdrücken"
+    },
+    {
+     "t": 161.0,
+     "label": "Nadel oben zurück durch alle Perlen"
+    },
+    {
+     "t": 177.0,
+     "label": "Nächste Reihe: Perlen aufnehmen, unten durch, oben zurück"
+    },
+    {
+     "t": 243.0,
+     "label": "Fertig – schau dein Perlenband an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-perlenweben-rahmen",
+   "areaId": "weben",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Perlenweben: Rahmen bespannen",
+   "source": {
+    "type": "youtube",
+    "id": "ovCxeysS8T4"
+   },
+   "kanal": "Grundschule Ludwigsfeld",
+   "dauer": "4:59",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Teil 1 von 2 einer Klassenreihe: fertiger Kartonwebrahmen mit Lücken (selber bauen: 3bom9DxoGWY) mit sechs Kettfäden bespannen und Muster auf Rasterblatt mit fünf Spalten entwerfen; Rasterblatt selber bereitstellen. Teil 2 (Weben) fehlt – dafür h6klpr_EiZI.",
+   "material": [
+    "perlenwebrahmen",
+    "garn",
+    "klebeband",
+    "papier",
+    "stifte",
+    "bleistift",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Webrahmen und fertiger Entwurf"
+    },
+    {
+     "t": 14.0,
+     "label": "Material richten: Webrahmen, Klebeband, Faden, Arbeitsblatt"
+    },
+    {
+     "t": 29.5,
+     "label": "Name und Klasse hinten aufschreiben"
+    },
+    {
+     "t": 44.0,
+     "label": "Faden oben in die zehnte Lücke, unten auch"
+    },
+    {
+     "t": 83.0,
+     "label": "Umdrehen, Fadenende hinten festkleben"
+    },
+    {
+     "t": 92.5,
+     "label": "Immer ein Loch weiter, sechs Fäden spannen"
+    },
+    {
+     "t": 114.0,
+     "label": "Umdrehen, Klebeband lösen, Enden mittig verknoten"
+    },
+    {
+     "t": 131.0,
+     "label": "Festziehen, Klebeband über den Knoten, Rest abschneiden"
+    },
+    {
+     "t": 163.0,
+     "label": "Arbeitsblatt und drei Farbstifte richten"
+    },
+    {
+     "t": 192.0,
+     "label": "Erste und letzte drei Reihen einfarbig ausmalen"
+    },
+    {
+     "t": 228.0,
+     "label": "Muster mit Punkten vorzeichnen, dann ausmalen"
+    },
+    {
+     "t": 283.5,
+     "label": "Fertig – schau deinen Entwurf an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-perlenwebrahmen-karton",
+   "areaId": "weben",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Perlenwebrahmen aus Karton",
+   "source": {
+    "type": "youtube",
+    "id": "3bom9DxoGWY"
+   },
+   "kanal": "Frau WerkenundGestalten",
+   "dauer": "5:53",
+   "alter": "ab 9",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Rahmen bauen und bespannen; Weben danach mit h6klpr_EiZI, Abschliessen fehlt. Zwei Varianten: Wellkarton 25 x 10 cm mit je 3 aufgeklebten Streifen (ab 0:15) oder dünner Karton ohne Streifen (ab 3:07); je 8 Schlitze pro Seite, beim dünnen Karton nur leicht spannen, sonst biegt er sich.",
+   "material": [
+    "karton",
+    "schnur",
+    "leim",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Karton, Streifen, Schnur, Leim, Schere"
+    },
+    {
+     "t": 15.0,
+     "label": "Karton 25 x 10 cm, 6 Streifen schneiden"
+    },
+    {
+     "t": 32.0,
+     "label": "Oben 3 Streifen aufeinanderkleben, 1 cm vom Rand"
+    },
+    {
+     "t": 53.5,
+     "label": "Unten auch 3 Streifen aufkleben, fest andrücken"
+    },
+    {
+     "t": 77.5,
+     "label": "Oben und unten je 8 Schlitze, genau gegenüber"
+    },
+    {
+     "t": 119.5,
+     "label": "Knoten in die Schnur, ersten Schlitz einfädeln"
+    },
+    {
+     "t": 127.5,
+     "label": "Schnur straff von Schlitz zu Schlitz spannen"
+    },
+    {
+     "t": 161.0,
+     "label": "Schnur abschneiden und am Ende verknoten"
+    },
+    {
+     "t": 187.0,
+     "label": "Variante 2: dünner Karton, je 8 Schlitze"
+    },
+    {
+     "t": 223.5,
+     "label": "Knoten, einfädeln, nur leicht und gleichmässig spannen"
+    },
+    {
+     "t": 311.5,
+     "label": "Umdrehen, hinten verknoten"
+    },
+    {
+     "t": 330.0,
+     "label": "Fertig – schau deinen Webrahmen an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-perlenarmband-schachtel",
+   "areaId": "weben",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Perlenarmband mit der Schachtel weben",
+   "source": {
+    "type": "youtube",
+    "id": "mBSYbfJ-4lc"
+   },
+   "kanal": "Pimp Your Stuff - DIY",
+   "dauer": "8:32",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Eine Schachtel mit Deckel ersetzt den Perlenwebrahmen; mit grösseren Perlen und dünner Nadel klappt es leichter als mit den winzigen Rocailles im Video, viel Zwischengerede.",
+   "material": [
+    "perle",
+    "garn",
+    "nadel",
+    "schere",
+    "karton",
+    "klebeband",
+    "papier"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: so sieht das Perlenarmband aus"
+    },
+    {
+     "t": 103.1,
+     "label": "Material richten: Perlen, Garn, Nadel, Schere, Schachtel"
+    },
+    {
+     "t": 216.4,
+     "label": "Oben und unten vier Schnitte in die Schachtel"
+    },
+    {
+     "t": 225.4,
+     "label": "Faden in die Schnitte spannen, hinten festkleben"
+    },
+    {
+     "t": 275.1,
+     "label": "Webfaden rechts unten mit Doppelknoten anknoten"
+    },
+    {
+     "t": 304.2,
+     "label": "Drei Perlen auffädeln, von unten zwischen die Fäden"
+    },
+    {
+     "t": 323.1,
+     "label": "Nadel um linken Faden, oben zurück durch Perlen"
+    },
+    {
+     "t": 346.7,
+     "label": "Immer so weiter, Reihe für Reihe"
+    },
+    {
+     "t": 377.2,
+     "label": "Faden zu kurz: Knoten, einweben, neuer Faden"
+    },
+    {
+     "t": 445.5,
+     "label": "Zum Schluss Doppelknoten, Fäden hinten aufschneiden"
+    },
+    {
+     "t": 478.2,
+     "label": "Enden knoten, flechten, Rest abschneiden"
+    },
+    {
+     "t": 487.0,
+     "label": "Fertig – schau dein Armband an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-perlenfisch",
+   "areaId": "weben",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Perlenfisch aus Draht",
+   "source": {
+    "type": "youtube",
+    "id": "14oVbZTv0Gw"
+   },
+   "kanal": "UrPearlyGirly",
+   "dauer": "6:18",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Dünner Schmuckdraht (ca. 0.3 mm), Rocailles und eine kleine Zange; die Quetschkalotte weglassen, der Ring kommt zum Schluss an den Draht – das Überkreuz-Fädeln zuerst mit grossen Perlen üben.",
+   "material": [
+    "perle",
+    "draht",
+    "zange",
+    "schluesselring"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: der fertige Perlenfisch"
+    },
+    {
+     "t": 14.9,
+     "label": "Material richten, Draht armlang abschneiden, Mitte suchen"
+    },
+    {
+     "t": 48.8,
+     "label": "Mund: 2 Perlen auffädeln, Drähte überkreuz durch"
+    },
+    {
+     "t": 70.8,
+     "label": "Reihen: 3, 4, 5, 6 Perlen, dreimal 6"
+    },
+    {
+     "t": 103.0,
+     "label": "Auge einbauen, danach Reihen wieder kleiner"
+    },
+    {
+     "t": 154.3,
+     "label": "Schwanz: 1 blaue, 1 überkreuz, je 5 Perlen"
+    },
+    {
+     "t": 171.5,
+     "label": "Schlaufe: zurück durch vorletzte, Mitte, Seitenperle"
+    },
+    {
+     "t": 197.8,
+     "label": "Zweite Hälfte gleich, mit Auge, ohne Mund"
+    },
+    {
+     "t": 257.3,
+     "label": "Hälften verbinden: Draht durch den Mund"
+    },
+    {
+     "t": 285.5,
+     "label": "Seiten verweben: Draht durch die Ösen"
+    },
+    {
+     "t": 343.0,
+     "label": "Drahtenden umwickeln, abschneiden, Ring anbringen"
+    },
+    {
+     "t": 373.5,
+     "label": "Fertig – schau deinen Perlenfisch an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-perlenkrokodil",
+   "areaId": "weben",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Krokodil aus Perlen",
+   "source": {
+    "type": "youtube",
+    "id": "6hmH_Aae9K8"
+   },
+   "kanal": "Justin Bennett",
+   "dauer": "6:37",
+   "alter": "ab 10",
+   "sprache": "ohne Sprache",
+   "hinweis": "Pro Kind: Schlüsselring, 150 cm Schnur (Scoubidou-Band oder dünne Kordel), 2 rote, 45 hellgrüne und 51 dunkelgrüne Ponyperlen; die Reihenangaben erscheinen nur als englische Einblendung (z. B. Row-5: 1Red 1Green 1Green 1Green 1Red), das Video hat Musik statt Sprache.",
+   "material": [
+    "perle",
+    "schnur",
+    "schluesselring",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Vorspann"
+    },
+    {
+     "t": 30.5,
+     "label": "Material richten: Ring, 150 cm Schnur, 98 Perlen"
+    },
+    {
+     "t": 37.6,
+     "label": "Schnur halbieren, Schlaufe durch Ring, Enden durchziehen"
+    },
+    {
+     "t": 65.5,
+     "label": "Reihe 1: 4 Perlen, anderer Faden gegenläufig durch"
+    },
+    {
+     "t": 106.5,
+     "label": "Kopf: Reihen 2 bis 4 wie eingeblendet"
+    },
+    {
+     "t": 131.5,
+     "label": "Reihe 5 mit roten Augen, dann Reihen 6–7"
+    },
+    {
+     "t": 149.5,
+     "label": "Vorderbeine: 5 Perlen auffädeln, zurück durch 4"
+    },
+    {
+     "t": 207.0,
+     "label": "Rumpf: Reihen 8 bis 12 wie eingeblendet"
+    },
+    {
+     "t": 235.5,
+     "label": "Hinterbeine gleich wie die Vorderbeine"
+    },
+    {
+     "t": 280.5,
+     "label": "Schwanz: Reihen 13 bis 25, immer schmaler"
+    },
+    {
+     "t": 355.5,
+     "label": "Enden doppelt verknoten, Schnur abschneiden"
+    },
+    {
+     "t": 371.5,
+     "label": "Fertig – schau dein Krokodil an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-perlen-flechtarmband",
+   "areaId": "weben",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Perlenarmband in Flechtoptik",
+   "source": {
+    "type": "youtube",
+    "id": "M5CWZulSHuI"
+   },
+   "kanal": "Ideen mit Herz",
+   "dauer": "2:56",
+   "alter": "ab 10",
+   "sprache": "ohne Sprache",
+   "hinweis": "Pro Armband rund 240 Perlen (4 mm) und 2 Nylonfäden à 70 cm; Spaltringe und Magnetverschluss brauchen eine kleine Zange – ohne Verschluss die Fäden einfach verknoten.",
+   "material": [
+    "perle",
+    "schnur",
+    "schluesselring",
+    "steckverschluss",
+    "zange",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: so sieht das Armband aus"
+    },
+    {
+     "t": 6.2,
+     "label": "Material richten, Nylonband 70 cm abschneiden"
+    },
+    {
+     "t": 19.0,
+     "label": "13 Perlen auffädeln, Ende zurück durch erste Perle"
+    },
+    {
+     "t": 38.5,
+     "label": "Je 6 Perlen auffädeln, durch eine Perle kreuzen"
+    },
+    {
+     "t": 55.5,
+     "label": "Bis 9 Ringe, dann zweiten Strang machen"
+    },
+    {
+     "t": 64.5,
+     "label": "Spaltring öffnen, beide Stränge einhängen, schliessen"
+    },
+    {
+     "t": 81.0,
+     "label": "Stränge verflechten: Ring durch Ring stecken"
+    },
+    {
+     "t": 136.5,
+     "label": "Enden einhängen, Spaltringe und Magnetverschluss anbringen"
+    },
+    {
+     "t": 156.5,
+     "label": "Zuschauen: fertige Armbänder, Tipp mit drei Strängen"
+    },
+    {
+     "t": 171.0,
+     "label": "Fertig – schau dein Armband an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-blumenarmband-perlen",
+   "areaId": "weben",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Blumenarmband aus Perlen",
+   "source": {
+    "type": "youtube",
+    "id": "G2o-VofTggE"
+   },
+   "kanal": "TRYTRYTRY - Food & DIY",
+   "dauer": "3:26",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Pro Kind zwei elastische Perlenfäden (je 80–100 cm) und Rocailles in drei Farben bereitlegen; der Verschluss wird am Anfang angeknotet, Stolperstein ist das Zurückfädeln von unten durch die Seitenperlen.",
+   "material": [
+    "perle",
+    "schnur",
+    "schluesselring",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: so wird das Blumenarmband"
+    },
+    {
+     "t": 12.5,
+     "label": "Zwei Gummifäden, 80 bis 100 cm, Ende zusammenknoten"
+    },
+    {
+     "t": 25.0,
+     "label": "Zwischenperle: Fäden von beiden Seiten durch, zuziehen"
+    },
+    {
+     "t": 53.2,
+     "label": "Blumenperle genauso auffädeln und festziehen"
+    },
+    {
+     "t": 71.8,
+     "label": "Vier Blumenperlen: zwei pro Faden auffädeln"
+    },
+    {
+     "t": 93.5,
+     "label": "Mittelperle: beide Fäden von derselben Seite durch"
+    },
+    {
+     "t": 107.4,
+     "label": "Jeden Faden von unten zurück durch zwei Seitenperlen"
+    },
+    {
+     "t": 131.3,
+     "label": "Letzte Blumenperle von beiden Seiten durch, zuziehen"
+    },
+    {
+     "t": 155.5,
+     "label": "Weiter bis etwa 12 Blumen, Verschluss anknoten"
+    },
+    {
+     "t": 170.4,
+     "label": "Fertig – schau dein Armband an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-schachtel-deckel",
+   "areaId": "falten",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Schachtel mit Deckel falten",
+   "source": {
+    "type": "youtube",
+    "id": "fOiL61-O-ho"
+   },
+   "kanal": "Basteln mit Papier: Craft ideas",
+   "dauer": "3:08",
+   "alter": "ab 9",
+   "sprache": "ohne Sprache",
+   "hinweis": "Zwei Papierquadrate vorbereiten, 24 cm (Deckel) und 23 cm (Boden). Das Video faltet nur den Deckel aus 24 cm; den Boden aus 23 cm falten die Kinder genau gleich (wird nicht gezeigt). Das Einlegen der Zipfel ist knifflig, ev. vorzeigen.",
+   "material": [
+    "papier",
+    "lineal",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Quadrate 24 cm und 23 cm"
+    },
+    {
+     "t": 5.0,
+     "label": "Beide Diagonalen falten, wieder öffnen"
+    },
+    {
+     "t": 27.5,
+     "label": "Alle vier Ecken zur Mitte falten"
+    },
+    {
+     "t": 61.5,
+     "label": "Zwei Kanten zur Mitte falten, öffnen"
+    },
+    {
+     "t": 72.5,
+     "label": "Kanten bis zur Falzlinie falten, öffnen"
+    },
+    {
+     "t": 98.5,
+     "label": "Zwei Ecken gegenüber wieder aufklappen"
+    },
+    {
+     "t": 103.5,
+     "label": "Seiten hochstellen, Ecken nach innen knicken"
+    },
+    {
+     "t": 119.5,
+     "label": "Zipfel über den Rand nach innen legen"
+    },
+    {
+     "t": 140.5,
+     "label": "Andere Seite gleich hochstellen und einlegen"
+    },
+    {
+     "t": 175.5,
+     "label": "Zweite Schachtel aus 23 cm gleich falten"
+    },
+    {
+     "t": 179.0,
+     "label": "Fertig – Deckel drauf, schau deine Schachtel an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-origami-schachtel",
+   "areaId": "falten",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Origami-Schachtel aus Papier",
+   "source": {
+    "type": "youtube",
+    "id": "FsxNSkfEyfM"
+   },
+   "kanal": "mmeorigami",
+   "dauer": "1:52",
+   "alter": "ab 9",
+   "sprache": "ohne Sprache",
+   "hinweis": "Ein A4-Blatt genügt (fester Farbkarton gibt eine stabilere Schachtel); Falze mit Falzbein oder Lineal scharf streichen, die Ecken müssen genau auf die Falzlinie, sonst wird die Schachtel schief. Keine Sprache – Kinder müssen genau hinschauen.",
+   "material": [
+    "papier",
+    "lineal"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: ein Blatt Papier A4"
+    },
+    {
+     "t": 2.0,
+     "label": "Papier längs halbieren, Falz gut streichen"
+    },
+    {
+     "t": 11.0,
+     "label": "Aufklappen, beide langen Kanten zur Mitte falten"
+    },
+    {
+     "t": 26.0,
+     "label": "Aufklappen, Papier quer in der Mitte falten"
+    },
+    {
+     "t": 35.5,
+     "label": "Aufklappen, beide kurzen Kanten zur Mitte falten"
+    },
+    {
+     "t": 53.0,
+     "label": "Alle vier Ecken schräg zur Falzlinie falten"
+    },
+    {
+     "t": 79.5,
+     "label": "Unteren Streifen über die Ecken klappen"
+    },
+    {
+     "t": 88.5,
+     "label": "Drehen, anderen Streifen über die Ecken klappen"
+    },
+    {
+     "t": 95.5,
+     "label": "Seiten hochziehen, Schachtel öffnen und formen"
+    },
+    {
+     "t": 103.5,
+     "label": "Fertig – schau deine Schachtel an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-sternbox",
+   "areaId": "falten",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Origami-Sternbox",
+   "source": {
+    "type": "youtube",
+    "id": "L6KszxGUvko"
+   },
+   "kanal": "Die Kreativecke",
+   "dauer": "3:08",
+   "alter": "ab 10",
+   "sprache": "ohne Sprache",
+   "hinweis": "Ohne Sprache, nur Bilder: quadratisches Origamipapier (15 cm); Stolperstein sind die Taschen, die geöffnet und flach gedrückt werden (Schritt 6 und 7).",
+   "material": [
+    "papier"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: quadratisches Papier"
+    },
+    {
+     "t": 7.5,
+     "label": "Beide Diagonalen falten und wieder öffnen"
+    },
+    {
+     "t": 28.5,
+     "label": "Zweimal halb falten und wieder öffnen"
+    },
+    {
+     "t": 49.5,
+     "label": "Zum flachen Quadrat zusammenschieben, Spitze oben"
+    },
+    {
+     "t": 60.0,
+     "label": "Beide Ecken zur Mitte falten, vorne und hinten"
+    },
+    {
+     "t": 83.0,
+     "label": "Vorne beide Taschen öffnen und flach drücken"
+    },
+    {
+     "t": 100.0,
+     "label": "Wenden, hinten beide Taschen flach drücken"
+    },
+    {
+     "t": 123.0,
+     "label": "Untere Ecken zur Mitte falten, alle vier Seiten"
+    },
+    {
+     "t": 156.5,
+     "label": "Alle vier Spitzen nach aussen unten falten"
+    },
+    {
+     "t": 169.0,
+     "label": "Box öffnen, Boden flach drücken"
+    },
+    {
+     "t": 181.5,
+     "label": "Fertig – schau deine Sternbox an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-origami-kranich",
+   "areaId": "falten",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Origami Kranich",
+   "source": {
+    "type": "youtube",
+    "id": "QuNjh0HyD7Q"
+   },
+   "kanal": "todoki - Dein Japan Shop",
+   "dauer": "5:20",
+   "alter": "ab 10",
+   "sprache": "ohne Sprache",
+   "hinweis": "Quadratisches Origami-Papier (15 cm) bereitlegen; das Video hat nur Musik und zeigt jede Faltung einmal. Stolperstein ist das Hochklappen der untersten Lage (Schritt 6 und 7, ab 2:01), dort bei Bedarf zurückspulen oder vorzeigen.",
+   "material": [
+    "papier"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht der fertige Kranich aus"
+    },
+    {
+     "t": 10.5,
+     "label": "Papier zweimal halbieren, beide Diagonalen falten, öffnen"
+    },
+    {
+     "t": 57.5,
+     "label": "Seiten nach innen drücken: kleines Quadrat"
+    },
+    {
+     "t": 70.5,
+     "label": "Kanten zur Mitte, Spitze runter, alles öffnen"
+    },
+    {
+     "t": 98.5,
+     "label": "Umdrehen, hinten auch Kanten zur Mitte, öffnen"
+    },
+    {
+     "t": 121.0,
+     "label": "Unterste Lage hochklappen, Seiten flach drücken"
+    },
+    {
+     "t": 130.5,
+     "label": "Umdrehen, hinten Lage hochklappen, flach drücken"
+    },
+    {
+     "t": 175.5,
+     "label": "Untere Kanten zur Mitte, vorne und hinten"
+    },
+    {
+     "t": 216.5,
+     "label": "Beide Spitzen hochfalten und nach innen stülpen"
+    },
+    {
+     "t": 264.5,
+     "label": "Kopf: Halsspitze nach innen stülpen"
+    },
+    {
+     "t": 284.0,
+     "label": "Flügel runterfalten, Körper aufblasen"
+    },
+    {
+     "t": 316.0,
+     "label": "Fertig – schau deinen Kranich an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-origami-schmetterling",
+   "areaId": "falten",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Origami-Schmetterling am Ast",
+   "source": {
+    "type": "youtube",
+    "id": "Oh09fWlNSLo"
+   },
+   "kanal": "Migros",
+   "dauer": "2:37",
+   "alter": "ab 10",
+   "sprache": "ohne Sprache",
+   "hinweis": "Video ohne Worte, die Flügelfaltungen ab 0:47 sind schnell und knifflig: ev. mehrmals anschauen oder vorzeigen; zum Aufhängen braucht es einen dünnen Faden (Nylon) und einen Ast.",
+   "material": [
+    "papier",
+    "garn",
+    "schere",
+    "ast"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Quadrat diagonal falten, wieder öffnen"
+    },
+    {
+     "t": 10.5,
+     "label": "In der Mitte falten, quer und längs"
+    },
+    {
+     "t": 23.5,
+     "label": "Wenden, zum Dreieck zusammenlegen"
+    },
+    {
+     "t": 33.5,
+     "label": "Vordere Ecken zur Spitze falten"
+    },
+    {
+     "t": 46.5,
+     "label": "Ersten Flügel aufklappen und flach drücken"
+    },
+    {
+     "t": 62,
+     "label": "Zweiten Flügel genauso falten"
+    },
+    {
+     "t": 76,
+     "label": "Umdrehen, Flügel in Form drücken"
+    },
+    {
+     "t": 91,
+     "label": "Faden abschneiden, um die Mitte knoten"
+    },
+    {
+     "t": 121.5,
+     "label": "Faden an den Ast knoten"
+    },
+    {
+     "t": 149.5,
+     "label": "Fertig – schau deinen Schmetterling an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-schmetterling-einfach",
+   "areaId": "falten",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Einfacher Papier-Schmetterling",
+   "source": {
+    "type": "youtube",
+    "id": "JVGvUarWP3Y"
+   },
+   "kanal": "meinesvenja",
+   "dauer": "3:18",
+   "alter": "ab 9",
+   "sprache": "ohne Sprache",
+   "hinweis": "Quadratisches Papier nötig (z. B. Origami-Papier 20 x 20 cm, oder Druckerpapier quadratisch zuschneiden); Video nur mit Musik, das Zusammenlegen zum Dreieck ab 0:45 ist der Stolperstein – ev. vorzeigen.",
+   "material": [
+    "papier",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Quadrat zweimal schräg falten, wieder öffnen"
+    },
+    {
+     "t": 24.5,
+     "label": "Zweimal gerade zum Rechteck falten, öffnen"
+    },
+    {
+     "t": 45,
+     "label": "Papier zum Dreieck zusammenlegen"
+    },
+    {
+     "t": 90.5,
+     "label": "Dreieck in der Mitte zusammenfalten"
+    },
+    {
+     "t": 102.5,
+     "label": "Mit der Schere die Ecken rund schneiden"
+    },
+    {
+     "t": 117.5,
+     "label": "Öffnen, Spitze nach unten legen"
+    },
+    {
+     "t": 122.5,
+     "label": "Obere Ecken nach unten zur Spitze falten"
+    },
+    {
+     "t": 141,
+     "label": "Wenden, Spitze über die Kante falten"
+    },
+    {
+     "t": 156.5,
+     "label": "In der Mitte falten, Flügel formen"
+    },
+    {
+     "t": 180,
+     "label": "Fertig – schau deinen Schmetterling an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-origami-herz",
+   "areaId": "falten",
+   "zeit": 10,
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Origami-Herz falten",
+   "source": {
+    "type": "youtube",
+    "id": "hlHMbFV-AFc"
+   },
+   "kanal": "lovely diys",
+   "dauer": "2:16",
+   "alter": "ab 9",
+   "sprache": "ohne Sprache",
+   "hinweis": "Quadratisches Origamipapier 10 x 10 cm bereitlegen; die letzten Eckfaltungen sind klein und fummelig, das Video zeigt sie nur mit Bildern.",
+   "material": [
+    "papier"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Herzen aus Papier"
+    },
+    {
+     "t": 6.0,
+     "label": "Quadrat diagonal falten und wieder öffnen"
+    },
+    {
+     "t": 15.0,
+     "label": "Andere Diagonale falten und öffnen"
+    },
+    {
+     "t": 22.0,
+     "label": "Obere Spitze zur Mitte falten"
+    },
+    {
+     "t": 30.0,
+     "label": "Untere Spitze zur oberen Kante falten"
+    },
+    {
+     "t": 42.0,
+     "label": "Beide Seiten an der Mittellinie hochfalten"
+    },
+    {
+     "t": 54.0,
+     "label": "Umdrehen, obere Spitzen nach unten falten"
+    },
+    {
+     "t": 71.0,
+     "label": "Kleine Ecken oben und seitlich einfalten"
+    },
+    {
+     "t": 91.0,
+     "label": "Ecken nach hinten drücken, Herz runden"
+    },
+    {
+     "t": 119.0,
+     "label": "Fertig – schau dein Herz an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-froebelstern-wiemann",
+   "areaId": "falten",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Fröbelstern aus Papierstreifen",
+   "source": {
+    "type": "youtube",
+    "id": "AQmLNnQ62FM"
+   },
+   "kanal": "Wiemann Lehrmittel GmbH",
+   "dauer": "3:16",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Vier fertige Fröbelstreifen (in der Mitte gefaltet) nehmen; die flachen Zacken und besonders die 3D-Spitzen sind knifflig, die Lehrperson zeigt am besten die erste vor.",
+   "material": [
+    "papier",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: 4 Papierstreifen, Schere"
+    },
+    {
+     "t": 10.0,
+     "label": "Enden der Streifen schräg abschneiden"
+    },
+    {
+     "t": 16.5,
+     "label": "Vier Streifen ineinanderstecken: kleines Quadrat"
+    },
+    {
+     "t": 24.5,
+     "label": "Obere Streifen reihum umlegen, letzten durchziehen"
+    },
+    {
+     "t": 38.5,
+     "label": "Oberen Streifen zweimal falten: zwei Dreiecke"
+    },
+    {
+     "t": 49.5,
+     "label": "Dreiecke aufeinanderlegen, Streifen in Schlaufe fädeln"
+    },
+    {
+     "t": 62.0,
+     "label": "Übrige Zacken falten, Stern wenden, auch hinten"
+    },
+    {
+     "t": 106.5,
+     "label": "Alle Streifen auf die Gegenseite umklappen"
+    },
+    {
+     "t": 127.0,
+     "label": "Spitze: Streifen zur Tüte drehen, durchstecken"
+    },
+    {
+     "t": 137.0,
+     "label": "Stern drehen, alle Spitzen formen, auch hinten"
+    },
+    {
+     "t": 175.5,
+     "label": "Überstehende Streifenenden abschneiden"
+    },
+    {
+     "t": 184.5,
+     "label": "Fertig – schau deinen Fröbelstern an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-mini-papierstern-streifen",
+   "areaId": "falten",
+   "zeit": 10,
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Mini-3D-Sterne aus Papierstreifen",
+   "source": {
+    "type": "youtube",
+    "id": "YMGS7iY2xkY"
+   },
+   "kanal": "TRYTRYTRY - Food & DIY",
+   "dauer": "2:08",
+   "alter": "ab 9",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Pro Stern einen Papierstreifen von etwa 24 x 1 cm zuschneiden (oder fertige Sternstreifen); Stolperstein ist das Eindrücken der Kanten mit dem Fingernagel am Schluss.",
+   "material": [
+    "papier",
+    "schere",
+    "lineal"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Mini-Sterne aus Papier"
+    },
+    {
+     "t": 11.2,
+     "label": "Streifen 24x1 cm, Knoten ins Ende machen"
+    },
+    {
+     "t": 23.5,
+     "label": "Knoten flach drücken, ein Fünfeck entsteht"
+    },
+    {
+     "t": 31.0,
+     "label": "Kurzes Ende umknicken und abreissen"
+    },
+    {
+     "t": 39.0,
+     "label": "Fünfeck halten, Streifen darüberlegen"
+    },
+    {
+     "t": 47.0,
+     "label": "Drehen, Streifen wieder darüberlegen"
+    },
+    {
+     "t": 58.0,
+     "label": "Immer so weiter, bis der Streifen kurz ist"
+    },
+    {
+     "t": 78.0,
+     "label": "Ende in die Lasche stecken, Rest abreissen"
+    },
+    {
+     "t": 90.0,
+     "label": "Mit dem Fingernagel jede Kante eindrücken"
+    },
+    {
+     "t": 110.0,
+     "label": "Fertig – schau deinen Stern an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-eckenlesezeichen-origami",
+   "areaId": "falten",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Eckenlesezeichen aus Origami-Papier",
+   "zeit": 10,
+   "source": {
+    "type": "youtube",
+    "id": "gq4wnk-ULCs"
+   },
+   "kanal": "Willis Welt",
+   "dauer": "2:00",
+   "alter": "ab 9",
+   "sprache": "ohne Sprache",
+   "hinweis": "Quadratisches Papier 10–20 cm, am besten zweifarbig bereitlegen; das Video hat nur Musik, Stolperstein ist das Einstecken der Seitenecken in die Tasche.",
+   "material": [
+    "papier",
+    "buecher"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: fertige Eckenlesezeichen"
+    },
+    {
+     "t": 7.0,
+     "label": "Quadrat zum Dreieck falten, Spitze nach oben"
+    },
+    {
+     "t": 19.5,
+     "label": "Rechte Ecke zur Spitze falten"
+    },
+    {
+     "t": 31.0,
+     "label": "Linke Ecke auch zur Spitze falten"
+    },
+    {
+     "t": 42.5,
+     "label": "Ecken aufklappen, obere Schicht nach unten falten"
+    },
+    {
+     "t": 54.5,
+     "label": "Seitenecken wieder nach oben falten"
+    },
+    {
+     "t": 62.5,
+     "label": "Erste Ecke in die Tasche stecken"
+    },
+    {
+     "t": 72.5,
+     "label": "Zweite Ecke einstecken, alles flach drücken"
+    },
+    {
+     "t": 91.5,
+     "label": "Zuschauen: Lesezeichen an die Buchecke stecken"
+    },
+    {
+     "t": 112.0,
+     "label": "Fertig – schau dein Lesezeichen an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-origami-fuchskopf",
+   "areaId": "falten",
+   "zeit": 10,
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Fuchskopf aus Papier falten",
+   "source": {
+    "type": "youtube",
+    "id": "JY51sJ5IwJM"
+   },
+   "kanal": "DIY Club",
+   "dauer": "2:24",
+   "alter": "ab 9",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Nur ein quadratisches Blatt (z. B. Origami-Papier) und ein dunkler Stift nötig; Stolperstein ist die Mittelmarkierung, die nur kurz geknickt und wieder geöffnet wird.",
+   "material": [
+    "papier",
+    "stifte"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht der Fuchskopf aus"
+    },
+    {
+     "t": 10.1,
+     "label": "Material richten: quadratisches Papier, Stifte"
+    },
+    {
+     "t": 18.0,
+     "label": "Spitze auf Spitze falten zum Dreieck"
+    },
+    {
+     "t": 37.0,
+     "label": "Dreieck halbieren, Mitte nur kurz knicken"
+    },
+    {
+     "t": 50.5,
+     "label": "Obere Spitze zur Mitte falten"
+    },
+    {
+     "t": 68.0,
+     "label": "Eine Seitenspitze an die Kante falten"
+    },
+    {
+     "t": 80.0,
+     "label": "Andere Seitenspitze genauso falten"
+    },
+    {
+     "t": 92.0,
+     "label": "Fuchs umdrehen und flach drücken"
+    },
+    {
+     "t": 99.0,
+     "label": "Augen und Nase aufmalen"
+    },
+    {
+     "t": 111.0,
+     "label": "Fertig – schau deinen Fuchs an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-origami-tulpe-mit-blaettern",
+   "areaId": "falten",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Origami-Tulpe mit Blättern",
+   "source": {
+    "type": "youtube",
+    "id": "0uA8lEwtfrs"
+   },
+   "kanal": "Willis Welt",
+   "dauer": "3:38",
+   "alter": "ab 9",
+   "sprache": "ohne Sprache",
+   "hinweis": "Zwei Origami-Quadrate 10 x 10 cm (rot und grün) bereitlegen; die Blüte wird am Schluss auf die Blätter geklebt.",
+   "material": [
+    "papier",
+    "leim"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht die Tulpe aus"
+    },
+    {
+     "t": 4.5,
+     "label": "Material richten: rotes und grünes Papier, Leim"
+    },
+    {
+     "t": 8.0,
+     "label": "Rotes Papier zum Dreieck falten, Mitte knicken"
+    },
+    {
+     "t": 45.0,
+     "label": "Beide Ecken schräg nach oben falten"
+    },
+    {
+     "t": 68.5,
+     "label": "Untere Spitze nach hinten falten"
+    },
+    {
+     "t": 76.5,
+     "label": "Umdrehen, Seitenecken nach innen falten"
+    },
+    {
+     "t": 107.0,
+     "label": "Grünes Papier zum Dreieck falten, Mitte knicken"
+    },
+    {
+     "t": 133.5,
+     "label": "Beide Seiten zur Mittellinie falten"
+    },
+    {
+     "t": 171.5,
+     "label": "Untere Spitze nach oben falten"
+    },
+    {
+     "t": 182.5,
+     "label": "Blätter seitlich herausziehen, flach drücken"
+    },
+    {
+     "t": 202.0,
+     "label": "Blüte auf die Blätter kleben"
+    },
+    {
+     "t": 209.0,
+     "label": "Fertig – schau deine Tulpe an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-hexentreppe-papierstreifen",
+   "areaId": "falten",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "zeit": 15,
+   "title": "Hexentreppe aus Papierstreifen",
+   "source": {
+    "type": "youtube",
+    "id": "OBM8ifj7GtU"
+   },
+   "kanal": "DIY Club",
+   "dauer": "2:34",
+   "alter": "ab 9",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Zwei lange Streifen (ca. 1,5 cm breit, am besten zwei Farben) vorher zuschneiden, das Zuschneiden zeigt das Video nicht; Stolperstein: immer den Streifen falten, der gerade unten liegt, und jede Faltung satt andrücken.",
+   "material": [
+    "papier",
+    "schere",
+    "lineal",
+    "leim"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: 2 Papierstreifen, 1,5 cm breit"
+    },
+    {
+     "t": 24.5,
+     "label": "Streifen im rechten Winkel aufeinanderlegen"
+    },
+    {
+     "t": 31.5,
+     "label": "Unteren Streifen über den oberen klappen"
+    },
+    {
+     "t": 38.0,
+     "label": "Jetzt den anderen Streifen darüberklappen"
+    },
+    {
+     "t": 43.5,
+     "label": "Immer abwechselnd weiterfalten bis zum Ende"
+    },
+    {
+     "t": 60.5,
+     "label": "Ende mit Leim bestreichen und umklappen"
+    },
+    {
+     "t": 75.5,
+     "label": "Zweites Ende auch festkleben"
+    },
+    {
+     "t": 80.5,
+     "label": "Umdrehen, unten aufklappen und festkleben"
+    },
+    {
+     "t": 95.0,
+     "label": "Hexentreppe vorsichtig auseinanderziehen"
+    },
+    {
+     "t": 133.4,
+     "label": "Fertig – schau deine Hexentreppe an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-origami-fisch-kreativecke",
+   "areaId": "falten",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Origami-Fisch mit Schwanzflosse",
+   "source": {
+    "type": "youtube",
+    "id": "PoJlW316y_M"
+   },
+   "kanal": "Die Kreativecke",
+   "dauer": "2:38",
+   "alter": "ab 9",
+   "sprache": "ohne Sprache",
+   "hinweis": "Video ohne Erklärungen, nur Bilder: Ab der Wasserbombe-Grundform (Zusammenlegen zum Dreieck) lohnt es sich, den Ablauf einmal vorzuzeigen.",
+   "material": [
+    "papier",
+    "stifte"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Quadratisches Papier, Stift"
+    },
+    {
+     "t": 11.0,
+     "label": "Zweimal in der Mitte falten, öffnen"
+    },
+    {
+     "t": 40.5,
+     "label": "Wenden, beide Diagonalen falten, öffnen"
+    },
+    {
+     "t": 68.5,
+     "label": "Papier zum Dreieck zusammenlegen"
+    },
+    {
+     "t": 81.0,
+     "label": "Obere Lage: rechte Ecke nach unten falten"
+    },
+    {
+     "t": 88.0,
+     "label": "Diese Spitze schräg nach links falten: Flosse"
+    },
+    {
+     "t": 100.0,
+     "label": "Wenden, rechte Spitze schräg nach oben falten"
+    },
+    {
+     "t": 109.5,
+     "label": "Zweite Spitze nach rechts falten: Schwanz"
+    },
+    {
+     "t": 128.5,
+     "label": "Mit dem Stift ein Auge malen"
+    },
+    {
+     "t": 138.5,
+     "label": "Fisch drehen, Kanten glatt streichen"
+    },
+    {
+     "t": 147.0,
+     "label": "Fertig – schau deinen Fisch an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-briefumschlag-a4",
+   "areaId": "falten",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Briefumschlag ohne Kleber falten",
+   "source": {
+    "type": "youtube",
+    "id": "ZNQ-FZJUZ4k"
+   },
+   "kanal": "Lifehackerin",
+   "dauer": "4:18",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Ein A4-Blatt wird zuerst zum Quadrat gefaltet und der Rest abgerissen; das Ineinanderschieben der Seitenteile ab 2:40 ist knifflig und lohnt sich vorzuzeigen.",
+   "material": [
+    "papier"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So entsteht der Briefumschlag"
+    },
+    {
+     "t": 28.6,
+     "label": "Quadrat falten, Reststreifen knicken und abreissen"
+    },
+    {
+     "t": 68.5,
+     "label": "Spitzen aufeinander falten, wieder öffnen"
+    },
+    {
+     "t": 79.5,
+     "label": "Linke und rechte Spitze zur Mitte falten"
+    },
+    {
+     "t": 100.5,
+     "label": "Obere Spitze zur Mitte falten, wieder öffnen"
+    },
+    {
+     "t": 111.0,
+     "label": "Untere Spitze zur Falzlinie, öffnen, neu falten"
+    },
+    {
+     "t": 127.5,
+     "label": "Beide unteren Ecken an die Falzlinie falten"
+    },
+    {
+     "t": 146.5,
+     "label": "Unteren Teil nach oben klappen"
+    },
+    {
+     "t": 159.5,
+     "label": "Wieder öffnen, Seiten einklappen, Spitze darüber"
+    },
+    {
+     "t": 185.0,
+     "label": "Hochklappen, Seiten zwischen Spitze und Rest schieben"
+    },
+    {
+     "t": 198.5,
+     "label": "Karte einlegen, Spitze darunter schieben"
+    },
+    {
+     "t": 226.3,
+     "label": "Fertig – schau deinen Briefumschlag an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-origami-pinguin-stehend",
+   "areaId": "falten",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Stehender Origami-Pinguin",
+   "source": {
+    "type": "youtube",
+    "id": "NGMpRUpntrQ"
+   },
+   "kanal": "KIKI_kreative ideen",
+   "dauer": "3:23",
+   "alter": "ab 10",
+   "sprache": "ohne Sprache",
+   "hinweis": "Quadratisches, zweifarbiges Origami-Papier (Farbe aussen) nehmen; Kopf, Fuss und Schnabel sind Gegenbrüche ohne Erklärung, diese am besten einmal vorzeigen.",
+   "material": [
+    "papier",
+    "stifte"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Quadrat diagonal falten, wieder öffnen"
+    },
+    {
+     "t": 28.5,
+     "label": "Beide Kanten zur Mittellinie falten"
+    },
+    {
+     "t": 53.5,
+     "label": "Weisse Ecken oben und unten umfalten"
+    },
+    {
+     "t": 64.5,
+     "label": "Ecken zurückfalten, es gibt einen Zickzack"
+    },
+    {
+     "t": 75.5,
+     "label": "Form der Länge nach halbieren"
+    },
+    {
+     "t": 90.5,
+     "label": "Spitze nach unten knicken: Kopf"
+    },
+    {
+     "t": 113.0,
+     "label": "Unten Ecke nach innen falten: Fuss"
+    },
+    {
+     "t": 155.5,
+     "label": "Schnabelspitze nach innen falten"
+    },
+    {
+     "t": 182.5,
+     "label": "Augen aufmalen"
+    },
+    {
+     "t": 192.5,
+     "label": "Fertig – schau deinen Pinguin an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-fliegenstich",
+   "areaId": "sticken",
+   "zeit": 10,
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Fliegenstich sticken",
+   "source": {
+    "type": "youtube",
+    "id": "kNEeBeSve4o"
+   },
+   "kanal": "Pumora stickt",
+   "dauer": "1:48",
+   "alter": "ab 9",
+   "sprache": "ohne Sprache",
+   "hinweis": "Keine gesprochene Erklärung, nur deutsche Texteinblendungen; Stickgarn 2-fädig, Sticknadel und Stoff im Stickrahmen bereitlegen. Stolperstein: Die Schlaufe nicht ganz zuziehen, bevor die Nadel in der Mitte hochkommt, und der Faden muss unter der Nadel liegen.",
+   "material": [
+    "garn",
+    "nadel",
+    "stoff",
+    "stickrahmen",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht der Fliegenstich aus"
+    },
+    {
+     "t": 11.0,
+     "label": "Links oben von hinten hochstechen"
+    },
+    {
+     "t": 19.5,
+     "label": "Rechts daneben einstechen, Schlaufe lassen"
+    },
+    {
+     "t": 31.0,
+     "label": "Unten in der Mitte in der Schlaufe hochstechen"
+    },
+    {
+     "t": 35.0,
+     "label": "Mit kleinem Stich die Schlaufe sichern"
+    },
+    {
+     "t": 46.5,
+     "label": "Neben dem ersten Stich wieder hochstechen"
+    },
+    {
+     "t": 59.5,
+     "label": "Oben einstechen, in der Mitte heraus"
+    },
+    {
+     "t": 67.0,
+     "label": "Schlaufe mit kleinem Stich sichern"
+    },
+    {
+     "t": 73.5,
+     "label": "Immer so weiter, gleiche Abstände halten"
+    },
+    {
+     "t": 94.0,
+     "label": "Letzte Schlaufe mit einem Stich sichern"
+    },
+    {
+     "t": 102.9,
+     "label": "Fertig – schau deine Fliegenstiche an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-federstich-geschlossen",
+   "areaId": "sticken",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Geschlossener Federstich",
+   "source": {
+    "type": "youtube",
+    "id": "pG1nlwA5b2U"
+   },
+   "kanal": "Practical Embroidery",
+   "dauer": "1:56",
+   "alter": "ab 10",
+   "sprache": "Englisch",
+   "hinweis": "Ohne Ton verständlich; vorher zwei parallele Hilfslinien (ca. 1 cm Abstand) auf den Stoff zeichnen, beim Ausstechen den Faden immer unter der Nadel halten.",
+   "material": [
+    "nadel",
+    "garn",
+    "stoff",
+    "stickrahmen",
+    "bleistift",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Hilfslinien zeichnen, links oben ausstechen"
+    },
+    {
+     "t": 4.5,
+     "label": "Rechts oben einstechen, tiefer ausstechen, Schlinge"
+    },
+    {
+     "t": 13.5,
+     "label": "Links oben einstechen, tiefer ausstechen, Schlinge"
+    },
+    {
+     "t": 23.5,
+     "label": "Rechts beim letzten Stich einstechen, tiefer ausstechen"
+    },
+    {
+     "t": 32.5,
+     "label": "Links beim letzten Stich einstechen, tiefer ausstechen"
+    },
+    {
+     "t": 46.5,
+     "label": "Immer abwechselnd rechts und links weiter"
+    },
+    {
+     "t": 101.0,
+     "label": "Zum Schluss unten kleinen Haltestich machen"
+    },
+    {
+     "t": 104.4,
+     "label": "Fertig – schau deinen Federstich an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-kettenstich-schrift",
+   "areaId": "sticken",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Namen mit Kettenstich sticken",
+   "source": {
+    "type": "youtube",
+    "id": "-nvWiKOqkwo"
+   },
+   "kanal": "Kreativ mit Miss B",
+   "dauer": "3:03",
+   "alter": "ab 10",
+   "sprache": "ohne Sprache",
+   "hinweis": "Schrift vorher gross und in Schreibschrift mit wasserlöslichem oder Frixion-Stift vorzeichnen; immer in die letzte Schlaufe zurückstechen, sonst reisst die Kette ab. Im Video wird ein englischer Spruch gestickt; die Kinder sticken stattdessen ihren eigenen Namen.",
+   "material": [
+    "stickrahmen",
+    "stoff",
+    "garn",
+    "nadel",
+    "stifte",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: fertige Schrift im Stickrahmen"
+    },
+    {
+     "t": 16.5,
+     "label": "Schrift mit Stift auf den Stoff schreiben"
+    },
+    {
+     "t": 23.9,
+     "label": "Garn einfädeln, Knoten ans Ende"
+    },
+    {
+     "t": 31.5,
+     "label": "Am Buchstabenanfang von hinten hochstechen"
+    },
+    {
+     "t": 45.1,
+     "label": "Ins gleiche Loch stechen, vorne wieder heraus"
+    },
+    {
+     "t": 81.6,
+     "label": "Faden unter die Nadel, Schlaufe zuziehen"
+    },
+    {
+     "t": 108.8,
+     "label": "In die Schlaufe stechen, immer so weiter"
+    },
+    {
+     "t": 137.0,
+     "label": "Letzte Schlaufe mit kleinem Stich festhalten"
+    },
+    {
+     "t": 147.0,
+     "label": "Hinten Faden unter Stiche ziehen, abschneiden"
+    },
+    {
+     "t": 158.0,
+     "label": "Neu ansetzen, nächsten Teil sticken"
+    },
+    {
+     "t": 176.1,
+     "label": "Fertig – schau deine Schrift an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-knopflochstich",
+   "areaId": "sticken",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Knopflochstich sticken",
+   "source": {
+    "type": "youtube",
+    "id": "dkvHwFih3-4"
+   },
+   "kanal": "Pumora stickt",
+   "dauer": "2:39",
+   "alter": "ab 10",
+   "sprache": "ohne Sprache",
+   "hinweis": "Ohne Sprache, nur kurze deutsche Texteinblendungen; zwei parallele Linien vorzeichnen und den Langettenstich vorher kennen. Stolperstein: Faden rechts herum um die Nadel wickeln und danach langsam nach unten ziehen, sonst entsteht kein sauberer Knoten.",
+   "material": [
+    "stoff",
+    "garn",
+    "nadel",
+    "stickrahmen",
+    "bleistift",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht der Knopflochstich aus"
+    },
+    {
+     "t": 11.0,
+     "label": "Faden heraufholen, oben ein-, unten ausstechen"
+    },
+    {
+     "t": 25.8,
+     "label": "Faden rechts herum um die Nadel wickeln"
+    },
+    {
+     "t": 33.0,
+     "label": "Nadel vorsichtig durchziehen"
+    },
+    {
+     "t": 39.5,
+     "label": "Faden langsam nach unten ziehen, Knoten festigen"
+    },
+    {
+     "t": 49.5,
+     "label": "Zuschauen: Der Stich noch einmal ganz nah"
+    },
+    {
+     "t": 86.5,
+     "label": "Nächsten Stich ganz dicht daneben setzen"
+    },
+    {
+     "t": 104.8,
+     "label": "Immer so weiter, Stich an Stich"
+    },
+    {
+     "t": 136.5,
+     "label": "Neben dem letzten Knoten nach hinten stechen"
+    },
+    {
+     "t": 142.2,
+     "label": "Fertig – schau deinen Knopflochstich an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-schlingstich-filzrand",
+   "areaId": "naehen",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Schlingstich am Filzrand",
+   "source": {
+    "type": "youtube",
+    "id": "Hj4YRj3tUtQ"
+   },
+   "kanal": "Handwerks Produkt",
+   "dauer": "2:36",
+   "alter": "ab 9",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Zwei Filzstücke werden mit Stickgarn am Rand zusammengenäht; Stolperstein ist der Anfangsstich, bei dem man zweimal durchs gleiche Loch im hinteren Filzstück sticht.",
+   "material": [
+    "nadel",
+    "garn",
+    "filz",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: zwei Filzstücke mit Schlingstich"
+    },
+    {
+     "t": 8.1,
+     "label": "Einfädeln, Doppelknoten machen, Rest abschneiden"
+    },
+    {
+     "t": 26.9,
+     "label": "Von innen durchs hintere Filzstück stechen"
+    },
+    {
+     "t": 37.9,
+     "label": "Von vorne durchs vordere Filzstück stechen"
+    },
+    {
+     "t": 44.5,
+     "label": "Hinten nochmals durchs gleiche Loch stechen"
+    },
+    {
+     "t": 56.5,
+     "label": "Durch die Schlaufe stechen und festziehen"
+    },
+    {
+     "t": 76.7,
+     "label": "5 mm weiter stechen, durch die Schlaufe"
+    },
+    {
+     "t": 91.5,
+     "label": "Immer so weiter bis zum Ende"
+    },
+    {
+     "t": 125.1,
+     "label": "Am Ende einen Knoten machen"
+    },
+    {
+     "t": 134.5,
+     "label": "Faden innen durchziehen und abschneiden"
+    },
+    {
+     "t": 148.7,
+     "label": "Fertig – schau deine Naht an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-knopf-ohne-knoten",
+   "areaId": "naehen",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Knopf annähen ohne Knoten",
+   "source": {
+    "type": "youtube",
+    "id": "YhyD_Rfp854"
+   },
+   "kanal": "Stoffe Hemmers",
+   "dauer": "3:25",
+   "alter": "ab 9",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Nähgarn doppelt nehmen und den Schlaufentrick am Anfang vorzeigen (kein Knoten nötig); für den Einstieg einen Zweilochknopf wählen, Vierloch- und Ösenknopf folgen als Erweiterung.",
+   "material": [
+    "knopf",
+    "nadel",
+    "garn",
+    "stoff",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Stoff, Knopf, Nadel, Garn, Schere"
+    },
+    {
+     "t": 7.3,
+     "label": "Faden doppelt einfädeln, ohne Knoten"
+    },
+    {
+     "t": 16.6,
+     "label": "Kleinen Stich machen, Nadel durch die Schlaufe"
+    },
+    {
+     "t": 36.5,
+     "label": "Knopf aufrecht halten und annähen"
+    },
+    {
+     "t": 78.5,
+     "label": "Faden um den Steg wickeln, durchstechen"
+    },
+    {
+     "t": 88.5,
+     "label": "Mit Schlaufe sichern, Faden abschneiden"
+    },
+    {
+     "t": 109.0,
+     "label": "Vierlochknopf: Schlaufentrick, dann Kreuz oder parallel"
+    },
+    {
+     "t": 139.5,
+     "label": "Umwickeln, durchstechen, mit Schlaufe sichern"
+    },
+    {
+     "t": 163.1,
+     "label": "Knopf mit Öse genauso annähen"
+    },
+    {
+     "t": 198.0,
+     "label": "Fertig – schau deine Knöpfe an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-blindstich-saum-v",
+   "areaId": "naehen",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Saum nähen mit Blindstich",
+   "source": {
+    "type": "youtube",
+    "id": "8k8UjXkph_4"
+   },
+   "kanal": "dieAngewandte",
+   "dauer": "1:28",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Kurzes Fachvideo mit viel Musik und wenig Erklärung: Saum vorher umbügeln oder mit Stecknadeln feststecken, im Stoff nur ein Fädchen fassen und den Faden locker lassen, sonst sieht man den Stich vorne.",
+   "material": [
+    "stoff",
+    "nadel",
+    "garn",
+    "schere",
+    "stecknadeln"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Blindstich geht von rechts nach links"
+    },
+    {
+     "t": 14.5,
+     "label": "Saum umlegen, Faden im Einschlag herausholen"
+    },
+    {
+     "t": 19.5,
+     "label": "Knapp am Saum ein Fädchen im Stoff fassen"
+    },
+    {
+     "t": 33.0,
+     "label": "Nächster Stich wieder im Saumeinschlag"
+    },
+    {
+     "t": 44.0,
+     "label": "Nochmals näher: Fädchen, dann Einschlag fassen"
+    },
+    {
+     "t": 57.5,
+     "label": "Immer so weiter, Faden locker lassen"
+    },
+    {
+     "t": 65.5,
+     "label": "Zuschauen: Vorne ist der Saum fast unsichtbar"
+    },
+    {
+     "t": 84.5,
+     "label": "Fertig – schau deinen Saum an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-hexenstich-saum",
+   "areaId": "naehen",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Saum nähen mit Hexenstich",
+   "source": {
+    "type": "youtube",
+    "id": "5N4_Y0mG2Ws"
+   },
+   "kanal": "Stoffe Hemmers",
+   "dauer": "1:51",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Saum vorher gleichmässig umbügeln (Bügeleisen mit Lehrperson); im Aussenstoff nur 1 bis 2 Fäden fassen und den Faden nur leicht anziehen, sonst kräuselt sich der Stoff. Im Video ist die Stoffkante bereits versäubert; vorher mit Zickzackstich versäubern lassen.",
+   "material": [
+    "stoff",
+    "nadel",
+    "garn",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht der Hexenstich aus"
+    },
+    {
+     "t": 10.0,
+     "label": "Saum hinlegen, Faden im Saumrand sichern"
+    },
+    {
+     "t": 27.5,
+     "label": "Im Aussenstoff nur 1 bis 2 Fäden fassen"
+    },
+    {
+     "t": 35.5,
+     "label": "Schräg versetzt in den Saumrand stechen"
+    },
+    {
+     "t": 40.5,
+     "label": "Zickzack weiter, Faden nur leicht anziehen"
+    },
+    {
+     "t": 78.0,
+     "label": "Zuschauen: So sieht die Naht aussen aus"
+    },
+    {
+     "t": 87.3,
+     "label": "Am Ende Faden im Saumrand vernähen"
+    },
+    {
+     "t": 104.2,
+     "label": "Fertig – schau deinen Saum an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-zaubersaum-schlaufen",
+   "areaId": "naehen",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Unsichtbarer Saum mit Zaubertrick",
+   "source": {
+    "type": "youtube",
+    "id": "PNxKW1UAeqY"
+   },
+   "kanal": "einfach nähen",
+   "dauer": "3:52",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Variante zum klassischen Blindstich: Schlaufen, die sich beim Ziehen am Faden zu einer unsichtbaren Saumnaht auflösen; die Einleitung bis 1:18 ist reines Gespräch (vorspulen), und der Faden muss bei jedem Stich unter der Nadel liegen.",
+   "material": [
+    "nadel",
+    "garn",
+    "stoff",
+    "lineal",
+    "bleistift",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Anna erklärt den Zaubersaum"
+    },
+    {
+     "t": 77.8,
+     "label": "Stoffrand umlegen, Linie 3 cm vom Rand"
+    },
+    {
+     "t": 87.0,
+     "label": "Faden mit Knoten, links durch beide Lagen"
+    },
+    {
+     "t": 105.5,
+     "label": "Schlaufe legen, 2 cm stechen, Faden unter Nadel"
+    },
+    {
+     "t": 135.5,
+     "label": "In die Schlaufe stechen, nächster Stich"
+    },
+    {
+     "t": 155.5,
+     "label": "So weiter den ganzen Saum entlang"
+    },
+    {
+     "t": 168.2,
+     "label": "Letzter Stich: Faden nicht unter die Nadel"
+    },
+    {
+     "t": 187.0,
+     "label": "Am Faden ziehen, Schlaufen lösen sich"
+    },
+    {
+     "t": 200.0,
+     "label": "Stoff glatt ziehen, Naht ist unsichtbar"
+    },
+    {
+     "t": 220.6,
+     "label": "Fertig – schau deinen Zaubersaum an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-granny-square-bunt",
+   "areaId": "haekeln",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Buntes Granny Square häkeln",
+   "source": {
+    "type": "youtube",
+    "id": "2J6seiWRnI4"
+   },
+   "kanal": "Hobbii Germany",
+   "dauer": "6:51",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Baumwollgarn in 4 bis 5 Farben und eine Häkelnadel 4 mm; Fadenring, Luftmasche, Stäbchen und Kettmasche sollten vorher geübt sein – Stolperstein sind ab Runde 3 die Stäbchengruppen zwischen den Ecken, das Vernähen der Fäden zeigt das Video nicht.",
+   "material": [
+    "wolle",
+    "haekelnadel",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Garn in 5 Farben, Häkelnadel, Schere"
+    },
+    {
+     "t": 16.1,
+     "label": "Fadenring um die Finger legen"
+    },
+    {
+     "t": 34.5,
+     "label": "3 Luftmaschen, 2 Stäbchen in den Ring"
+    },
+    {
+     "t": 73.7,
+     "label": "3 Mal: 2 Luftmaschen, 3 Stäbchen"
+    },
+    {
+     "t": 125.8,
+     "label": "Kettmasche, Ring zuziehen, Faden abschneiden"
+    },
+    {
+     "t": 145.0,
+     "label": "Gelb ansetzen, erste Ecke häkeln"
+    },
+    {
+     "t": 198.9,
+     "label": "Jede Ecke: 3 Stäbchen, 2 Luftmaschen, 3 Stäbchen"
+    },
+    {
+     "t": 248.4,
+     "label": "Pink ansetzen, erste Ecke häkeln"
+    },
+    {
+     "t": 274.0,
+     "label": "Zwischen den Ecken 3 Stäbchen in den Bogen"
+    },
+    {
+     "t": 317.8,
+     "label": "Orange: zwischen Ecken zwei Stäbchengruppen"
+    },
+    {
+     "t": 355.8,
+     "label": "Lila: in jeden Bogen eine Gruppe"
+    },
+    {
+     "t": 395.8,
+     "label": "Fertig – schau dein Granny Square an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-topflappen-halbstaebchen",
+   "areaId": "haekeln",
+   "stufen": [
+    5,
+    6
+   ],
+   "title": "Topflappen mit halben Stäbchen",
+   "source": {
+    "type": "youtube",
+    "id": "P4PXmaN8Mpg"
+   },
+   "kanal": "ars textura - Häkeln & DIY",
+   "dauer": "7:37",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Dickes Baumwoll-Schlauchgarn mit Häkelnadel Nr. 5 und eine stumpfe Wollnadel bereitlegen; Luftmaschen sollten bekannt sein, Stolperstein ist die vergessene erste oder letzte Masche einer Reihe, dann wird der Topflappen schief.",
+   "material": [
+    "wolle",
+    "haekelnadel",
+    "schere",
+    "stopfnadel",
+    "lineal"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht der Topflappen aus"
+    },
+    {
+     "t": 33.5,
+     "label": "Material richten: Baumwollgarn, Häkelnadel 5, Schere, Wollnadel"
+    },
+    {
+     "t": 51.5,
+     "label": "Schlinge machen, 25 Luftmaschen häkeln"
+    },
+    {
+     "t": 88.8,
+     "label": "Wenden, halbe Stäbchen bis ans Reihenende"
+    },
+    {
+     "t": 157.5,
+     "label": "Eine Luftmasche häkeln, Arbeit wenden"
+    },
+    {
+     "t": 178.3,
+     "label": "Halbe Stäbchen in die Zwischenräume häkeln"
+    },
+    {
+     "t": 248.0,
+     "label": "Luftmasche, wenden, erstes Loch nicht vergessen"
+    },
+    {
+     "t": 282.2,
+     "label": "Weiterhäkeln bis 25 Reihen, Ränder gerade halten"
+    },
+    {
+     "t": 346.8,
+     "label": "Nachmessen: Ist es ein Quadrat?"
+    },
+    {
+     "t": 364.4,
+     "label": "Aufhänger: 12 Luftmaschen, Faden abschneiden, durchziehen"
+    },
+    {
+     "t": 392.5,
+     "label": "Beide Fäden mit Nadel vernähen, abschneiden"
+    },
+    {
+     "t": 436.3,
+     "label": "Fertig – schau deinen Topflappen an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-fingerstricken-loopschal",
+   "areaId": "stricken",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Loopschal mit Fingerstricken",
+   "source": {
+    "type": "youtube",
+    "id": "BR8kJaXp_IQ"
+   },
+   "kanal": "Kreativ mit Miss B",
+   "dauer": "4:05",
+   "alter": "ab 9",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Gestrickt wird mit drei Fäden aus drei Knäueln zusammen; der Schal ist lang genug, wenn er mehrmals um den Kopf passt – das braucht mehrere Lektionen, und beim Abketten und Verknoten brauchen manche Kinder Hilfe.",
+   "material": [
+    "wolle",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht der Loopschal aus"
+    },
+    {
+     "t": 9.6,
+     "label": "Material richten: drei Knäuel Wolle, Schere"
+    },
+    {
+     "t": 21.0,
+     "label": "Drei Fäden zusammen, Schlinge machen"
+    },
+    {
+     "t": 36.0,
+     "label": "Schlinge auf Daumen, Faden hin und zurück flechten"
+    },
+    {
+     "t": 63.0,
+     "label": "Faden um die Hand, untere Schlaufen drüberheben"
+    },
+    {
+     "t": 90.8,
+     "label": "Wiederholen: Faden herum, Schlaufen drüberheben"
+    },
+    {
+     "t": 138.0,
+     "label": "Schlinge vom Daumen nehmen, lange weiterstricken"
+    },
+    {
+     "t": 173.3,
+     "label": "Fäden abschneiden, 20 cm Ende lassen"
+    },
+    {
+     "t": 178.6,
+     "label": "Abketten: Ende durch Schlaufe, Schlaufe abnehmen"
+    },
+    {
+     "t": 203.5,
+     "label": "Anfang und Ende verknoten, Fäden abschneiden"
+    },
+    {
+     "t": 231.0,
+     "label": "Fertig – schau deinen Loopschal an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-fingerstricken-grundtechnik",
+   "areaId": "stricken",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "title": "Fingerstrick-Schnur mit Abketten",
+   "source": {
+    "type": "youtube",
+    "id": "AOp1MpNp8Yw"
+   },
+   "kanal": "Andrea’s Loops",
+   "dauer": "2:34",
+   "alter": "ab 9",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Nur dicke Wolle und eine Schere nötig; das Video wechselt oft zwischen dem Kind (von hinten, klein) und der Nahaufnahme, das Abnehmen der Daumenschlaufe ist kaum zu sehen und sollte kurz vorgezeigt werden – Stolperstein ist das Durchflechten vor und hinter den Fingern.",
+   "material": [
+    "wolle",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Anfangsschlaufe: U legen, kreuzen, durchziehen"
+    },
+    {
+     "t": 30.8,
+     "label": "Schlaufe über den Daumen legen"
+    },
+    {
+     "t": 34.5,
+     "label": "Faden hin und zurück durch die Finger flechten"
+    },
+    {
+     "t": 53.5,
+     "label": "Faden einmal ganz um alle Finger"
+    },
+    {
+     "t": 58.5,
+     "label": "Untere Schlaufe über jeden Finger heben"
+    },
+    {
+     "t": 77.5,
+     "label": "Faden wieder herumlegen, Schlaufen abheben"
+    },
+    {
+     "t": 85.5,
+     "label": "Weiterstricken, später Daumenschlaufe abnehmen"
+    },
+    {
+     "t": 111.0,
+     "label": "Abketten: herumlegen, Faden 10 cm abschneiden"
+    },
+    {
+     "t": 117.5,
+     "label": "Bei jedem Finger: abheben, Faden durchziehen"
+    },
+    {
+     "t": 142.0,
+     "label": "Fertig – schau deine Strickschnur an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
   }
  ]
 }

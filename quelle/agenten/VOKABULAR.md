@@ -25,7 +25,7 @@ Jedes Video bekommt `material: ["id", "id", …]`. Nur diese IDs verwenden (Spal
 | naegel | Nägel | |
 | holzbrett | Holzbrett | Brettchen, Holzspatel |
 | zange | Zange | |
-| perle | Perle | Holzperle |
+| perle | Perle | Holzperle, Rocailles (kleine Glasperlen) |
 | knopf | Knopf | |
 | haekelnadel | Häkelnadel | |
 | stricknadeln | Stricknadeln | |
@@ -106,6 +106,12 @@ Jedes Video bekommt `material: ["id", "id", …]`. Nur diese IDs verwenden (Spal
 | noppenfolie | Noppenfolie | Luftpolsterfolie zum Nassfilzen |
 | scoubidou | Scoubidou-Bänder | Plastikschnüre |
 | eisstiel | Eisstiele | Glacestängel, Holzstäbchen |
+| paracord | Paracord | Fallschirmschnur 4 mm, Enden verschmilzt die Lehrperson |
+| perlenwebrahmen | Perlenwebrahmen | auch selbst gebaut aus Karton |
+| schluesselring | Schlüsselring | Karabiner, Ring für Anhänger |
+| feuerzeug | Feuerzeug | nur Lehrperson, Paracord-Enden verschmelzen |
+| draht | Draht | dünner Basteldraht, Perlendraht |
+| steckverschluss | Steckverschluss | Klickverschluss für Paracord-Armbänder |
 | farbe | Farbe | Wasserfarbe, Deckfarbe, Druckfarbe |
 | pinsel | Pinsel |  |
 | stempelkissen | Stempelkissen |  |
