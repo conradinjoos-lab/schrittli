@@ -429,7 +429,21 @@ window.SCHULE=true;
 const SCHULE=!!window.SCHULE;
 const KEY=SCHULE?'schrittli.schule.v1':'schrittli.v1';
 const STUFEN=[1,2,3,4,5,6];
-const THEMEN=[{id:'textil',name:'Textil',emoji:'🧶',color:'#2BB3A3',kind:'lern',ding:'wolle'},{id:'papier',name:'Papier & Karton',emoji:'✂️',color:'#3BB273',kind:'lern',ding:'schere'},{id:'holz',name:'Holz & Material',emoji:'🪵',color:'#C98A4E',kind:'lern',ding:'kiste'},{id:'experimente',name:'Experimente & Technik',emoji:'🧪',color:'#9B5DE5',kind:'lern',ding:'kolben'},{id:'zeichnen',name:'Zeichnen',emoji:'🖍️',color:'#4C6EF5',kind:'lern',ding:'farbkasten'},{id:'wissen',name:'Sachwissen',emoji:'📖',color:'#F2C12E',kind:'lern',ding:'buecher'}];
+const THEMEN=[
+ {id:'naehen',name:'Nähen',emoji:'🪡',color:'#E8554E',kind:'lern',ding:'kiste'},
+ {id:'sticken',name:'Sticken',emoji:'🧵',color:'#E05297',kind:'lern',ding:'kiste'},
+ {id:'haekeln',name:'Häkeln',emoji:'🧶',color:'#9B5DE5',kind:'lern',ding:'kiste'},
+ {id:'stricken',name:'Stricken',emoji:'🧶',color:'#2BB3A3',kind:'lern',ding:'wolle'},
+ {id:'weben',name:'Weben',emoji:'🧺',color:'#C98A4E',kind:'lern',ding:'kiste'},
+ {id:'knuepfen',name:'Flechten & Knüpfen',emoji:'🪢',color:'#F2C12E',kind:'lern',ding:'kiste'},
+ {id:'wickeln',name:'Wickeln',emoji:'🪁',color:'#4C6EF5',kind:'lern',ding:'kiste'},
+ {id:'filzen',name:'Filzen',emoji:'☁️',color:'#8FB8DE',kind:'lern',ding:'kiste'},
+ {id:'falten',name:'Falten',emoji:'📄',color:'#3BB273',kind:'lern',ding:'kiste'},
+ {id:'schneiden',name:'Schneiden & Kleben',emoji:'✂️',color:'#3BB273',kind:'lern',ding:'schere'},
+ {id:'holz',name:'Sägen & Nageln',emoji:'🔨',color:'#8F5A2E',kind:'lern',ding:'kiste'},
+ {id:'formen',name:'Formen',emoji:'🏺',color:'#B8794A',kind:'lern',ding:'kiste'},
+ {id:'drucken',name:'Drucken',emoji:'🖐️',color:'#EF6C2E',kind:'lern',ding:'kiste'},
+ {id:'experimente',name:'Experimentieren',emoji:'🧪',color:'#9B5DE5',kind:'lern',ding:'kolben'}];
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
 const uid=()=>Math.random().toString(36).slice(2,10);
