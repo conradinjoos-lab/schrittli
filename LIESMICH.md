@@ -16,7 +16,7 @@ Kinder, Sterne, Fortschritt und Werke liegen im Browser des Geräts (localStorag
 ## Erster Start
 
 1. Name und Tier des Kindes eingeben.
-2. Die Videos aus `inhalte.json` liegen schon in «Zeichnen» (Malen mit Evi, 10 Videos).
+2. Die Videos aus `inhalte.json` liegen schon in allen Lern-Bereichen (49 Videos: Zeichnen, Werken, Experimente, Basteln, Natur, Geschichten, Lesen & Zahlen). Spass-Videos (Lustiges, Lieder) holt man bei Bedarf aus dem Katalog.
 3. Elternbereich (Schloss oben rechts), PIN **1234**: Sterne, Kinder, Rückmeldungen zu Werken. Videos kann man dort auch von Hand anlegen; Videos aus `inhalte.json` werden aber beim nächsten Laden wieder aus der Datei genommen.
 
 ## Werkstatt-Look

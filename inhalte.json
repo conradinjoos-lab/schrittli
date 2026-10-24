@@ -1,216 +1,2408 @@
 {
-  "stand": "2026-10-23",
-  "geloescht": ["beispiel"],
-  "videos": [
+ "stand": "2026-10-24",
+ "geloescht": [
+  "beispiel"
+ ],
+ "videos": [
+  {
+   "id": "evi-regenbogen",
+   "areaId": "zeichnen",
+   "title": "Regenbogen",
+   "source": {
+    "type": "youtube",
+    "id": "2aH_EQvrkpY"
+   },
+   "steps": [
     {
-      "id": "evi-regenbogen",
-      "areaId": "zeichnen",
-      "title": "Regenbogen",
-      "source": { "type": "youtube", "id": "2aH_EQvrkpY" },
-      "steps": [
-        { "t": 0, "label": "Blatt und schwarzen Stift bereitlegen" },
-        { "t": 12, "label": "Links eine Wolke malen, mit kreisenden Bewegungen" },
-        { "t": 27, "label": "Rechts eine zweite Wolke malen" },
-        { "t": 42, "label": "Einen grossen Bogen von Wolke zu Wolke" },
-        { "t": 53, "label": "Mehr Bögen darunter, immer gleicher Abstand" },
-        { "t": 87, "label": "Farben aussuchen: blau, grün, gelb, rot, lila – oder deine eigenen" },
-        { "t": 106, "label": "Regenbogen ausmalen, so bunt wie möglich" },
-        { "t": 232, "label": "Fertig – schau deinen Regenbogen an" }
-      ],
-      "task": { "text": "Mal deinen eigenen Regenbogen mit zwei Wolken und mach ein Foto davon.", "deliverable": "foto" }
+     "t": 0,
+     "label": "Blatt und schwarzen Stift bereitlegen"
     },
     {
-      "id": "evi-buntstift",
-      "areaId": "zeichnen",
-      "title": "Buntstift",
-      "source": { "type": "youtube", "id": "rtkSeIR_RzI" },
-      "steps": [
-        { "t": 0, "label": "Blatt und schwarzen Filzstift bereitlegen" },
-        { "t": 12, "label": "In der Mitte eine gerade Linie zeichnen" },
-        { "t": 22, "label": "Darunter eine zweite Linie, gleicher Abstand" },
-        { "t": 37, "label": "Links beide Linien mit einem kleinen Bogen verbinden" },
-        { "t": 46, "label": "Rechts auch mit einem Bogen verbinden" },
-        { "t": 52, "label": "Rechts die Spitze: zwei schräge Linien" },
-        { "t": 72, "label": "Vorne einen Bogen für die Mine" },
-        { "t": 90, "label": "Zwei Bögen in den Stift zeichnen" },
-        { "t": 100, "label": "Hinten zwei Linien nach aussen" },
-        { "t": 118, "label": "Das Ende mit einem Bogen schliessen und halbieren" },
-        { "t": 126, "label": "In der Mitte ein längliches Oval" },
-        { "t": 140, "label": "Ausmalen" },
-        { "t": 175, "label": "Fertig – schau deinen Buntstift an" }
-      ],
-      "task": { "text": "Mal deinen eigenen Buntstift in deiner Lieblingsfarbe und mach ein Foto davon.", "deliverable": "foto" }
+     "t": 12,
+     "label": "Links eine Wolke malen, mit kreisenden Bewegungen"
     },
     {
-      "id": "evi-bleistift",
-      "areaId": "zeichnen",
-      "title": "Bleistift",
-      "source": { "type": "youtube", "id": "kSsPXKM_zrc" },
-      "steps": [
-        { "t": 0, "label": "Blatt und schwarzen Filzstift bereitlegen" },
-        { "t": 9, "label": "In der Mitte eine Linie senkrecht nach unten" },
-        { "t": 26, "label": "Daneben eine zweite Linie, gleich lang" },
-        { "t": 41, "label": "Unten beide Linien mit einem Strich verbinden" },
-        { "t": 52, "label": "Von den unteren Ecken zwei schräge Linien zur Spitze" },
-        { "t": 69, "label": "Unten einen kleinen Bogen für die Mine" },
-        { "t": 81, "label": "Oben die offene Seite mit einem Strich schliessen" },
-        { "t": 108, "label": "Etwas weiter oben noch einen Strich" },
-        { "t": 126, "label": "Die Enden an den Seiten mit kleinen Bögen verbinden" },
-        { "t": 141, "label": "Oben den Radiergummi: ein Rechteck mit runden Ecken" },
-        { "t": 158, "label": "Zwei gerade Linien in den Bleistift zeichnen" },
-        { "t": 174, "label": "Ausmalen" },
-        { "t": 210, "label": "Fertig – schau deinen Bleistift an" }
-      ],
-      "task": { "text": "Mal deinen eigenen Bleistift und mach ein Foto davon.", "deliverable": "foto" }
+     "t": 27,
+     "label": "Rechts eine zweite Wolke malen"
     },
     {
-      "id": "evi-meloneneis",
-      "areaId": "zeichnen",
-      "title": "Meloneneis",
-      "source": { "type": "youtube", "id": "Cjpxy9n_MjE" },
-      "steps": [
-        { "t": 0, "label": "Blatt und schwarzen Filzstift bereitlegen" },
-        { "t": 12, "label": "Unten auf dem Blatt einen langen Bogen zeichnen" },
-        { "t": 26, "label": "Die Mitte suchen und weiter oben einen Punkt machen" },
-        { "t": 39, "label": "Vom Punkt zwei gerade Striche zum Bogen – ein Dreieck" },
-        { "t": 56, "label": "Unten entlang noch einen Bogen für die Schale" },
-        { "t": 72, "label": "Kerne als Tropfen ins Dreieck zeichnen" },
-        { "t": 90, "label": "Unten den Stiel zeichnen" },
-        { "t": 102, "label": "Ein paar Striche in den Stiel – das ist das Holz" },
-        { "t": 118, "label": "Alles ausmalen" },
-        { "t": 156, "label": "Fertig – schau dein Eis an" }
-      ],
-      "task": { "text": "Mal dein eigenes Meloneneis und mach ein Foto davon.", "deliverable": "foto" }
+     "t": 42,
+     "label": "Einen grossen Bogen von Wolke zu Wolke"
     },
     {
-      "id": "evi-regenbogenflagge",
-      "areaId": "zeichnen",
-      "title": "Regenbogenflagge",
-      "source": { "type": "youtube", "id": "jgRKOMbTBUU" },
-      "steps": [
-        { "t": 0, "label": "Blatt und schwarzen Filzstift bereitlegen" },
-        { "t": 10, "label": "Eine grosse gewellte Linie zeichnen" },
-        { "t": 22, "label": "Weiter unten eine zweite gewellte Linie, gleich lang" },
-        { "t": 37, "label": "Rechts die Enden mit einem Strich verbinden" },
-        { "t": 44, "label": "Links auch mit einem Strich verbinden" },
-        { "t": 54, "label": "Links den Fahnenmast: eine lange Linie nach unten" },
-        { "t": 71, "label": "Daneben die zweite Linie für den Mast" },
-        { "t": 87, "label": "Mast oben und unten mit kleinen Strichen schliessen" },
-        { "t": 110, "label": "Fünf gewellte Linien in die Flagge zeichnen" },
-        { "t": 148, "label": "Ausmalen – sechs Farben" },
-        { "t": 186, "label": "Fertig – schau deine Flagge an" }
-      ],
-      "task": { "text": "Mal deine eigene Regenbogenflagge und mach ein Foto davon.", "deliverable": "foto" }
+     "t": 53,
+     "label": "Mehr Bögen darunter, immer gleicher Abstand"
     },
     {
-      "id": "evi-muschel",
-      "areaId": "zeichnen",
-      "title": "Muschel",
-      "source": { "type": "youtube", "id": "u6pRk9k50qA" },
-      "steps": [
-        { "t": 0, "label": "Blatt und schwarzen Filzstift bereitlegen" },
-        { "t": 10, "label": "In der Mitte einen grossen Bogen, er darf schräg sein" },
-        { "t": 21, "label": "An die Enden je eine schräge Linie" },
-        { "t": 37, "label": "Unten mit einem Bogen schliessen" },
-        { "t": 45, "label": "Rechts oben eine Form nach aussen anhängen" },
-        { "t": 52, "label": "In der Mitte eine Form obendrauf" },
-        { "t": 69, "label": "Nach oben immer kleinere Formen bis zur Spitze" },
-        { "t": 85, "label": "Links eine rundliche Form dran" },
-        { "t": 95, "label": "Noch eine Form mit gewellter Unterseite" },
-        { "t": 110, "label": "Bögen in die grosse Mitte zeichnen, bis kein Platz mehr ist" },
-        { "t": 126, "label": "Ausmalen" },
-        { "t": 154, "label": "Fertig – schau deine Muschel an" }
-      ],
-      "task": { "text": "Mal deine eigene Muschel und mach ein Foto davon.", "deliverable": "foto" }
+     "t": 87,
+     "label": "Farben aussuchen: blau, grün, gelb, rot, lila – oder deine eigenen"
     },
     {
-      "id": "evi-spiegelei",
-      "areaId": "zeichnen",
-      "title": "Spiegelei",
-      "source": { "type": "youtube", "id": "IjPg5l6aX8Y" },
-      "steps": [
-        { "t": 0, "label": "Blatt und schwarzen Filzstift bereitlegen" },
-        { "t": 9, "label": "In der Mitte eine grosse wellige Form – das Eiweiss" },
-        { "t": 25, "label": "In die Mitte einen Bogen – das Eigelb" },
-        { "t": 34, "label": "Unten mit einem flachen Bogen schliessen" },
-        { "t": 44, "label": "Oben die erste Eierschale zeichnen" },
-        { "t": 53, "label": "Aussen eine gezackte Linie" },
-        { "t": 69, "label": "Daneben die zweite Schale" },
-        { "t": 81, "label": "Auch hier eine gezackte Linie" },
-        { "t": 89, "label": "Ausmalen" },
-        { "t": 117, "label": "Fertig – schau dein Spiegelei an" }
-      ],
-      "task": { "text": "Mal dein eigenes Spiegelei und mach ein Foto davon.", "deliverable": "foto" }
+     "t": 106,
+     "label": "Regenbogen ausmalen, so bunt wie möglich"
     },
     {
-      "id": "evi-specki",
-      "areaId": "zeichnen",
-      "title": "Specki (Toy Story)",
-      "source": { "type": "youtube", "id": "I1RLk0mxkKQ" },
-      "steps": [
-        { "t": 0, "label": "Blatt und schwarzen Filzstift bereitlegen" },
-        { "t": 10, "label": "In der Mitte ein Oval – die Nase" },
-        { "t": 20, "label": "Um die Nase eine grosse Rundung – der Kopf" },
-        { "t": 33, "label": "Links unten ein Fuss" },
-        { "t": 40, "label": "Rechts der zweite Fuss" },
-        { "t": 46, "label": "In der Mitte mit einem Bogen verbinden" },
-        { "t": 53, "label": "Die Ohren zeichnen" },
-        { "t": 68, "label": "In jedes Ohr die gleiche Form, nur kleiner" },
-        { "t": 79, "label": "In die Nase ein kleineres Oval" },
-        { "t": 86, "label": "Zwei kleine Ovale – die Nasenlöcher" },
-        { "t": 94, "label": "Die Augen über der Nase" },
-        { "t": 105, "label": "Linke Augenbraue" },
-        { "t": 114, "label": "Rechte Augenbraue" },
-        { "t": 122, "label": "Ausmalen" },
-        { "t": 147, "label": "Fertig – schau dein Bild an" }
-      ],
-      "task": { "text": "Mal deinen eigenen Specki und mach ein Foto davon.", "deliverable": "foto" }
-    },
-    {
-      "id": "evi-luma",
-      "areaId": "zeichnen",
-      "title": "Luma (Super Mario)",
-      "source": { "type": "youtube", "id": "eSGxCyV4xcI" },
-      "steps": [
-        { "t": 0, "label": "Blatt und Stifte bereitlegen" },
-        { "t": 13, "label": "Unten beginnen: eine grosse Rundung nach oben" },
-        { "t": 23, "label": "Geschwungene Linie wieder nach unten, oben eine runde Spitze" },
-        { "t": 32, "label": "Unten ein flacher Bogen" },
-        { "t": 38, "label": "Unten eine Rundung bis zum Bogen" },
-        { "t": 45, "label": "Rechts eine leichte Rundung, eine Lücke lassen" },
-        { "t": 58, "label": "In die Lücke einen spitzen Bogen – der Arm" },
-        { "t": 65, "label": "Links das Gleiche" },
-        { "t": 73, "label": "Zwei längliche Ovale – die Augen" },
-        { "t": 86, "label": "Kleine Kreise in die Augen – der Glanz" },
-        { "t": 96, "label": "Ausmalen" },
-        { "t": 120, "label": "Fertig – schau dein Bild an" }
-      ],
-      "task": { "text": "Mal deinen eigenen Luma und mach ein Foto davon.", "deliverable": "foto" }
-    },
-    {
-      "id": "evi-macarons",
-      "areaId": "zeichnen",
-      "title": "Macarons",
-      "source": { "type": "youtube", "id": "QoJSAnVh8_I" },
-      "steps": [
-        { "t": 0, "label": "Blatt und Stifte bereitlegen" },
-        { "t": 12, "label": "In die Mitte einen Bogen" },
-        { "t": 19, "label": "Unten eine gewellte Linie" },
-        { "t": 28, "label": "Innen zwei leichte Bögen nach unten" },
-        { "t": 35, "label": "Unten wieder eine gewellte Linie" },
-        { "t": 42, "label": "Die flache Unterseite, Seiten abgerundet" },
-        { "t": 51, "label": "Zwei schräge Linien nach unten – das zweite Macaron beginnt" },
-        { "t": 66, "label": "Zwei kleine Bögen nach unten" },
-        { "t": 70, "label": "Gewellte Linie dazu" },
-        { "t": 77, "label": "Untere Hälfte des zweiten Macarons" },
-        { "t": 85, "label": "Drittes Macaron: zwei Bögen nach unten" },
-        { "t": 91, "label": "Gewellte Linie dazu" },
-        { "t": 102, "label": "Die letzte gewellte Linie" },
-        { "t": 109, "label": "Die flache Unterseite" },
-        { "t": 116, "label": "Ausmalen" },
-        { "t": 141, "label": "Fertig – schau deine Macarons an" }
-      ],
-      "task": { "text": "Mal deine eigenen Macarons und mach ein Foto davon.", "deliverable": "foto" }
+     "t": 232,
+     "label": "Fertig – schau deinen Regenbogen an"
     }
-  ]
+   ],
+   "task": {
+    "text": "Mal deinen eigenen Regenbogen mit zwei Wolken und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "evi-buntstift",
+   "areaId": "zeichnen",
+   "title": "Buntstift",
+   "source": {
+    "type": "youtube",
+    "id": "rtkSeIR_RzI"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Blatt und schwarzen Filzstift bereitlegen"
+    },
+    {
+     "t": 12,
+     "label": "In der Mitte eine gerade Linie zeichnen"
+    },
+    {
+     "t": 22,
+     "label": "Darunter eine zweite Linie, gleicher Abstand"
+    },
+    {
+     "t": 37,
+     "label": "Links beide Linien mit einem kleinen Bogen verbinden"
+    },
+    {
+     "t": 46,
+     "label": "Rechts auch mit einem Bogen verbinden"
+    },
+    {
+     "t": 52,
+     "label": "Rechts die Spitze: zwei schräge Linien"
+    },
+    {
+     "t": 72,
+     "label": "Vorne einen Bogen für die Mine"
+    },
+    {
+     "t": 90,
+     "label": "Zwei Bögen in den Stift zeichnen"
+    },
+    {
+     "t": 100,
+     "label": "Hinten zwei Linien nach aussen"
+    },
+    {
+     "t": 118,
+     "label": "Das Ende mit einem Bogen schliessen und halbieren"
+    },
+    {
+     "t": 126,
+     "label": "In der Mitte ein längliches Oval"
+    },
+    {
+     "t": 140,
+     "label": "Ausmalen"
+    },
+    {
+     "t": 175,
+     "label": "Fertig – schau deinen Buntstift an"
+    }
+   ],
+   "task": {
+    "text": "Mal deinen eigenen Buntstift in deiner Lieblingsfarbe und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "evi-bleistift",
+   "areaId": "zeichnen",
+   "title": "Bleistift",
+   "source": {
+    "type": "youtube",
+    "id": "kSsPXKM_zrc"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Blatt und schwarzen Filzstift bereitlegen"
+    },
+    {
+     "t": 9,
+     "label": "In der Mitte eine Linie senkrecht nach unten"
+    },
+    {
+     "t": 26,
+     "label": "Daneben eine zweite Linie, gleich lang"
+    },
+    {
+     "t": 41,
+     "label": "Unten beide Linien mit einem Strich verbinden"
+    },
+    {
+     "t": 52,
+     "label": "Von den unteren Ecken zwei schräge Linien zur Spitze"
+    },
+    {
+     "t": 69,
+     "label": "Unten einen kleinen Bogen für die Mine"
+    },
+    {
+     "t": 81,
+     "label": "Oben die offene Seite mit einem Strich schliessen"
+    },
+    {
+     "t": 108,
+     "label": "Etwas weiter oben noch einen Strich"
+    },
+    {
+     "t": 126,
+     "label": "Die Enden an den Seiten mit kleinen Bögen verbinden"
+    },
+    {
+     "t": 141,
+     "label": "Oben den Radiergummi: ein Rechteck mit runden Ecken"
+    },
+    {
+     "t": 158,
+     "label": "Zwei gerade Linien in den Bleistift zeichnen"
+    },
+    {
+     "t": 174,
+     "label": "Ausmalen"
+    },
+    {
+     "t": 210,
+     "label": "Fertig – schau deinen Bleistift an"
+    }
+   ],
+   "task": {
+    "text": "Mal deinen eigenen Bleistift und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "evi-meloneneis",
+   "areaId": "zeichnen",
+   "title": "Meloneneis",
+   "source": {
+    "type": "youtube",
+    "id": "Cjpxy9n_MjE"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Blatt und schwarzen Filzstift bereitlegen"
+    },
+    {
+     "t": 12,
+     "label": "Unten auf dem Blatt einen langen Bogen zeichnen"
+    },
+    {
+     "t": 26,
+     "label": "Die Mitte suchen und weiter oben einen Punkt machen"
+    },
+    {
+     "t": 39,
+     "label": "Vom Punkt zwei gerade Striche zum Bogen – ein Dreieck"
+    },
+    {
+     "t": 56,
+     "label": "Unten entlang noch einen Bogen für die Schale"
+    },
+    {
+     "t": 72,
+     "label": "Kerne als Tropfen ins Dreieck zeichnen"
+    },
+    {
+     "t": 90,
+     "label": "Unten den Stiel zeichnen"
+    },
+    {
+     "t": 102,
+     "label": "Ein paar Striche in den Stiel – das ist das Holz"
+    },
+    {
+     "t": 118,
+     "label": "Alles ausmalen"
+    },
+    {
+     "t": 156,
+     "label": "Fertig – schau dein Eis an"
+    }
+   ],
+   "task": {
+    "text": "Mal dein eigenes Meloneneis und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "evi-regenbogenflagge",
+   "areaId": "zeichnen",
+   "title": "Regenbogenflagge",
+   "source": {
+    "type": "youtube",
+    "id": "jgRKOMbTBUU"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Blatt und schwarzen Filzstift bereitlegen"
+    },
+    {
+     "t": 10,
+     "label": "Eine grosse gewellte Linie zeichnen"
+    },
+    {
+     "t": 22,
+     "label": "Weiter unten eine zweite gewellte Linie, gleich lang"
+    },
+    {
+     "t": 37,
+     "label": "Rechts die Enden mit einem Strich verbinden"
+    },
+    {
+     "t": 44,
+     "label": "Links auch mit einem Strich verbinden"
+    },
+    {
+     "t": 54,
+     "label": "Links den Fahnenmast: eine lange Linie nach unten"
+    },
+    {
+     "t": 71,
+     "label": "Daneben die zweite Linie für den Mast"
+    },
+    {
+     "t": 87,
+     "label": "Mast oben und unten mit kleinen Strichen schliessen"
+    },
+    {
+     "t": 110,
+     "label": "Fünf gewellte Linien in die Flagge zeichnen"
+    },
+    {
+     "t": 148,
+     "label": "Ausmalen – sechs Farben"
+    },
+    {
+     "t": 186,
+     "label": "Fertig – schau deine Flagge an"
+    }
+   ],
+   "task": {
+    "text": "Mal deine eigene Regenbogenflagge und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "evi-muschel",
+   "areaId": "zeichnen",
+   "title": "Muschel",
+   "source": {
+    "type": "youtube",
+    "id": "u6pRk9k50qA"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Blatt und schwarzen Filzstift bereitlegen"
+    },
+    {
+     "t": 10,
+     "label": "In der Mitte einen grossen Bogen, er darf schräg sein"
+    },
+    {
+     "t": 21,
+     "label": "An die Enden je eine schräge Linie"
+    },
+    {
+     "t": 37,
+     "label": "Unten mit einem Bogen schliessen"
+    },
+    {
+     "t": 45,
+     "label": "Rechts oben eine Form nach aussen anhängen"
+    },
+    {
+     "t": 52,
+     "label": "In der Mitte eine Form obendrauf"
+    },
+    {
+     "t": 69,
+     "label": "Nach oben immer kleinere Formen bis zur Spitze"
+    },
+    {
+     "t": 85,
+     "label": "Links eine rundliche Form dran"
+    },
+    {
+     "t": 95,
+     "label": "Noch eine Form mit gewellter Unterseite"
+    },
+    {
+     "t": 110,
+     "label": "Bögen in die grosse Mitte zeichnen, bis kein Platz mehr ist"
+    },
+    {
+     "t": 126,
+     "label": "Ausmalen"
+    },
+    {
+     "t": 154,
+     "label": "Fertig – schau deine Muschel an"
+    }
+   ],
+   "task": {
+    "text": "Mal deine eigene Muschel und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "evi-spiegelei",
+   "areaId": "zeichnen",
+   "title": "Spiegelei",
+   "source": {
+    "type": "youtube",
+    "id": "IjPg5l6aX8Y"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Blatt und schwarzen Filzstift bereitlegen"
+    },
+    {
+     "t": 9,
+     "label": "In der Mitte eine grosse wellige Form – das Eiweiss"
+    },
+    {
+     "t": 25,
+     "label": "In die Mitte einen Bogen – das Eigelb"
+    },
+    {
+     "t": 34,
+     "label": "Unten mit einem flachen Bogen schliessen"
+    },
+    {
+     "t": 44,
+     "label": "Oben die erste Eierschale zeichnen"
+    },
+    {
+     "t": 53,
+     "label": "Aussen eine gezackte Linie"
+    },
+    {
+     "t": 69,
+     "label": "Daneben die zweite Schale"
+    },
+    {
+     "t": 81,
+     "label": "Auch hier eine gezackte Linie"
+    },
+    {
+     "t": 89,
+     "label": "Ausmalen"
+    },
+    {
+     "t": 117,
+     "label": "Fertig – schau dein Spiegelei an"
+    }
+   ],
+   "task": {
+    "text": "Mal dein eigenes Spiegelei und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "evi-specki",
+   "areaId": "zeichnen",
+   "title": "Specki (Toy Story)",
+   "source": {
+    "type": "youtube",
+    "id": "I1RLk0mxkKQ"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Blatt und schwarzen Filzstift bereitlegen"
+    },
+    {
+     "t": 10,
+     "label": "In der Mitte ein Oval – die Nase"
+    },
+    {
+     "t": 20,
+     "label": "Um die Nase eine grosse Rundung – der Kopf"
+    },
+    {
+     "t": 33,
+     "label": "Links unten ein Fuss"
+    },
+    {
+     "t": 40,
+     "label": "Rechts der zweite Fuss"
+    },
+    {
+     "t": 46,
+     "label": "In der Mitte mit einem Bogen verbinden"
+    },
+    {
+     "t": 53,
+     "label": "Die Ohren zeichnen"
+    },
+    {
+     "t": 68,
+     "label": "In jedes Ohr die gleiche Form, nur kleiner"
+    },
+    {
+     "t": 79,
+     "label": "In die Nase ein kleineres Oval"
+    },
+    {
+     "t": 86,
+     "label": "Zwei kleine Ovale – die Nasenlöcher"
+    },
+    {
+     "t": 94,
+     "label": "Die Augen über der Nase"
+    },
+    {
+     "t": 105,
+     "label": "Linke Augenbraue"
+    },
+    {
+     "t": 114,
+     "label": "Rechte Augenbraue"
+    },
+    {
+     "t": 122,
+     "label": "Ausmalen"
+    },
+    {
+     "t": 147,
+     "label": "Fertig – schau dein Bild an"
+    }
+   ],
+   "task": {
+    "text": "Mal deinen eigenen Specki und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "evi-luma",
+   "areaId": "zeichnen",
+   "title": "Luma (Super Mario)",
+   "source": {
+    "type": "youtube",
+    "id": "eSGxCyV4xcI"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Blatt und Stifte bereitlegen"
+    },
+    {
+     "t": 13,
+     "label": "Unten beginnen: eine grosse Rundung nach oben"
+    },
+    {
+     "t": 23,
+     "label": "Geschwungene Linie wieder nach unten, oben eine runde Spitze"
+    },
+    {
+     "t": 32,
+     "label": "Unten ein flacher Bogen"
+    },
+    {
+     "t": 38,
+     "label": "Unten eine Rundung bis zum Bogen"
+    },
+    {
+     "t": 45,
+     "label": "Rechts eine leichte Rundung, eine Lücke lassen"
+    },
+    {
+     "t": 58,
+     "label": "In die Lücke einen spitzen Bogen – der Arm"
+    },
+    {
+     "t": 65,
+     "label": "Links das Gleiche"
+    },
+    {
+     "t": 73,
+     "label": "Zwei längliche Ovale – die Augen"
+    },
+    {
+     "t": 86,
+     "label": "Kleine Kreise in die Augen – der Glanz"
+    },
+    {
+     "t": 96,
+     "label": "Ausmalen"
+    },
+    {
+     "t": 120,
+     "label": "Fertig – schau dein Bild an"
+    }
+   ],
+   "task": {
+    "text": "Mal deinen eigenen Luma und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "evi-macarons",
+   "areaId": "zeichnen",
+   "title": "Macarons",
+   "source": {
+    "type": "youtube",
+    "id": "QoJSAnVh8_I"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Blatt und Stifte bereitlegen"
+    },
+    {
+     "t": 12,
+     "label": "In die Mitte einen Bogen"
+    },
+    {
+     "t": 19,
+     "label": "Unten eine gewellte Linie"
+    },
+    {
+     "t": 28,
+     "label": "Innen zwei leichte Bögen nach unten"
+    },
+    {
+     "t": 35,
+     "label": "Unten wieder eine gewellte Linie"
+    },
+    {
+     "t": 42,
+     "label": "Die flache Unterseite, Seiten abgerundet"
+    },
+    {
+     "t": 51,
+     "label": "Zwei schräge Linien nach unten – das zweite Macaron beginnt"
+    },
+    {
+     "t": 66,
+     "label": "Zwei kleine Bögen nach unten"
+    },
+    {
+     "t": 70,
+     "label": "Gewellte Linie dazu"
+    },
+    {
+     "t": 77,
+     "label": "Untere Hälfte des zweiten Macarons"
+    },
+    {
+     "t": 85,
+     "label": "Drittes Macaron: zwei Bögen nach unten"
+    },
+    {
+     "t": 91,
+     "label": "Gewellte Linie dazu"
+    },
+    {
+     "t": 102,
+     "label": "Die letzte gewellte Linie"
+    },
+    {
+     "t": 109,
+     "label": "Die flache Unterseite"
+    },
+    {
+     "t": 116,
+     "label": "Ausmalen"
+    },
+    {
+     "t": 141,
+     "label": "Fertig – schau deine Macarons an"
+    }
+   ],
+   "task": {
+    "text": "Mal deine eigenen Macarons und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "srf-huhn",
+   "areaId": "zeichnen",
+   "title": "Huhn zeichnen",
+   "source": {
+    "type": "youtube",
+    "id": "QMH__wHQzbM"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Samira zeigt das Huhn"
+    },
+    {
+     "t": 12,
+     "label": "Eine weiche runde Form – der Körper"
+    },
+    {
+     "t": 19,
+     "label": "Auge, Schnabel und der Kamm"
+    },
+    {
+     "t": 29,
+     "label": "Hinten der Schwanz, unten die Beine"
+    },
+    {
+     "t": 39,
+     "label": "Schau nochmal alle Schritte"
+    },
+    {
+     "t": 56,
+     "label": "Fertig – schau dein Huhn an"
+    }
+   ],
+   "task": {
+    "text": "Zeichne dein eigenes Huhn und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "srf-schaf",
+   "areaId": "zeichnen",
+   "title": "Schaf zeichnen",
+   "source": {
+    "type": "youtube",
+    "id": "hsrZD5y4y18"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen"
+    },
+    {
+     "t": 15,
+     "label": "Einen Kreis zeichnen – der Kopf, einen Halbkreis darunter – der Körper"
+    },
+    {
+     "t": 24,
+     "label": "Kleine Wellen um den Körper – die Wolle"
+    },
+    {
+     "t": 32,
+     "label": "Ohren links und rechts, dann die Nase"
+    },
+    {
+     "t": 46,
+     "label": "Mund und Augen"
+    },
+    {
+     "t": 55,
+     "label": "Oben am Kopf radieren, ein Oval mit Wellen zeichnen"
+    },
+    {
+     "t": 76,
+     "label": "Unten radieren und die Beine zeichnen"
+    },
+    {
+     "t": 89,
+     "label": "Zwei kleine Linien – die Hufe"
+    },
+    {
+     "t": 99,
+     "label": "Schau nochmal alle Schritte"
+    },
+    {
+     "t": 132,
+     "label": "Fertig – schau dein Schaf an"
+    }
+   ],
+   "task": {
+    "text": "Zeichne dein eigenes Schaf und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "srf-pferd",
+   "areaId": "zeichnen",
+   "title": "Pferd zeichnen",
+   "source": {
+    "type": "youtube",
+    "id": "NY1c8DraNyY"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen"
+    },
+    {
+     "t": 15,
+     "label": "Ein Kreis – der Kopf, ein Oval – der Körper"
+    },
+    {
+     "t": 24,
+     "label": "Zwei Ohren auf den Kopf"
+    },
+    {
+     "t": 34,
+     "label": "Zwei Punkte – die Augen, vier Beine als kleine Rechtecke"
+    },
+    {
+     "t": 50,
+     "label": "Stirnfransen und Mähne"
+    },
+    {
+     "t": 58,
+     "label": "Eine Linie übers Gesicht, dann die Nasenlöcher"
+    },
+    {
+     "t": 67,
+     "label": "Der Schweif"
+    },
+    {
+     "t": 77,
+     "label": "Schau nochmal alle Schritte"
+    },
+    {
+     "t": 88,
+     "label": "Fertig – schau dein Pferd an"
+    }
+   ],
+   "task": {
+    "text": "Zeichne dein eigenes Pferd und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "srf-schwein",
+   "areaId": "zeichnen",
+   "title": "Schwein zeichnen",
+   "source": {
+    "type": "youtube",
+    "id": "qSHtmmZEm8c"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen"
+    },
+    {
+     "t": 12,
+     "label": "Ein grosses Oval in die Mitte, ein kleineres Oval darin – die Nase"
+    },
+    {
+     "t": 23,
+     "label": "Nasenlöcher und Augen"
+    },
+    {
+     "t": 31,
+     "label": "Zwei Blätter an den Seiten – die Ohren"
+    },
+    {
+     "t": 46,
+     "label": "Ein Halbkreis wie eine Kartoffel – der Körper"
+    },
+    {
+     "t": 61,
+     "label": "Die Beine"
+    },
+    {
+     "t": 70,
+     "label": "Eine Locke – der Schwanz"
+    },
+    {
+     "t": 83,
+     "label": "Schau nochmal alle Schritte"
+    },
+    {
+     "t": 105,
+     "label": "Fertig – schau dein Schwein an"
+    }
+   ],
+   "task": {
+    "text": "Zeichne dein eigenes Schweinchen und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "srf-kuh",
+   "areaId": "zeichnen",
+   "title": "Kuh zeichnen",
+   "source": {
+    "type": "youtube",
+    "id": "5PJJGFKbiSU"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen"
+    },
+    {
+     "t": 14,
+     "label": "Ein Oval – die Schnauze, der Kopf, darin zwei kleine Ovale – die Augen"
+    },
+    {
+     "t": 27,
+     "label": "Zwei Kreise – die Nasenlöcher, dann der Mund"
+    },
+    {
+     "t": 40,
+     "label": "Die Hörner, zwei Blätter – die Ohren"
+    },
+    {
+     "t": 53,
+     "label": "Eine Linie bei den Augen, dann eine Kurve nach unten – der Rücken"
+    },
+    {
+     "t": 67,
+     "label": "Vom Mund eine Linie nach unten, dann die Vorderbeine"
+    },
+    {
+     "t": 85,
+     "label": "Das Hinterbein"
+    },
+    {
+     "t": 96,
+     "label": "Das Euter"
+    },
+    {
+     "t": 114,
+     "label": "Die Flecken"
+    },
+    {
+     "t": 128,
+     "label": "Schau nochmal alle Schritte"
+    },
+    {
+     "t": 158,
+     "label": "Fertig – schau deine Kuh an"
+    }
+   ],
+   "task": {
+    "text": "Zeichne deine eigene Kuh mit Flecken und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "srf-traktor",
+   "areaId": "zeichnen",
+   "title": "Traktor zeichnen",
+   "source": {
+    "type": "youtube",
+    "id": "59nxLr0-SyI"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen"
+    },
+    {
+     "t": 16,
+     "label": "Zwei Kreise: links klein, rechts gross"
+    },
+    {
+     "t": 26,
+     "label": "In jeden Kreis ein kleinerer – die Räder"
+    },
+    {
+     "t": 40,
+     "label": "Die Räder unten mit einer Linie verbinden, oben eine zweite Linie bis zum kleinen Rad"
+    },
+    {
+     "t": 57,
+     "label": "Vom grossen Rad eine Linie hoch – die Kabine"
+    },
+    {
+     "t": 68,
+     "label": "Das Dach, das Fenster"
+    },
+    {
+     "t": 82,
+     "label": "Auspuff und Licht"
+    },
+    {
+     "t": 95,
+     "label": "Schau nochmal alle Schritte"
+    },
+    {
+     "t": 118,
+     "label": "Fertig – schau deinen Traktor an"
+    }
+   ],
+   "task": {
+    "text": "Zeichne deinen eigenen Traktor und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "kat-papierschiff",
+   "areaId": "basteln",
+   "title": "Papierschiff falten",
+   "source": {
+    "type": "youtube",
+    "id": "ra8TzYlprNw"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Ein Blatt bereitlegen"
+    },
+    {
+     "t": 6,
+     "label": "Das Blatt in der Mitte falten"
+    },
+    {
+     "t": 26,
+     "label": "Die oberen Ecken zur Mitte falten – ein Dreieck"
+    },
+    {
+     "t": 50,
+     "label": "Den unteren Rand nach oben falten, hinten auch"
+    },
+    {
+     "t": 76,
+     "label": "Das Dreieck öffnen und zum Quadrat drücken"
+    },
+    {
+     "t": 100,
+     "label": "Die untere Spitze nach oben falten, hinten auch"
+    },
+    {
+     "t": 124,
+     "label": "An den Spitzen ziehen – das Schiff klappt auf"
+    },
+    {
+     "t": 146,
+     "label": "Fertig – schau dein Schiff an"
+    }
+   ],
+   "task": {
+    "text": "Falte dein eigenes Schiff und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "kat-papierflieger",
+   "areaId": "basteln",
+   "title": "Papierflieger falten",
+   "source": {
+    "type": "youtube",
+    "id": "jKPYmrDRb_E"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Ein Blatt bereitlegen, das Blatt längs in der Mitte falten und wieder öffnen"
+    },
+    {
+     "t": 30,
+     "label": "Die oberen Ecken zur Mittellinie falten"
+    },
+    {
+     "t": 56,
+     "label": "Die schrägen Kanten nochmal zur Mitte falten"
+    },
+    {
+     "t": 84,
+     "label": "Den Flieger in der Mitte zusammenklappen"
+    },
+    {
+     "t": 102,
+     "label": "Den ersten Flügel nach unten falten"
+    },
+    {
+     "t": 118,
+     "label": "Umdrehen – den zweiten Flügel genauso"
+    },
+    {
+     "t": 130,
+     "label": "Flügel gerade richten – fertig zum Fliegen"
+    }
+   ],
+   "task": {
+    "text": "Falte deinen Flieger, lass ihn fliegen und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "kat-frosch",
+   "areaId": "basteln",
+   "title": "Hüpf-Frosch falten",
+   "source": {
+    "type": "youtube",
+    "id": "ChrVW4ruOPQ"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Papier 15 × 7,5 cm bereitlegen"
+    },
+    {
+     "t": 20,
+     "label": "Längs in der Mitte falten und wieder öffnen"
+    },
+    {
+     "t": 40,
+     "label": "Oben beide Ecken schräg falten – ein X entsteht"
+    },
+    {
+     "t": 62,
+     "label": "Das X zu einem Dreieck zusammendrücken"
+    },
+    {
+     "t": 100,
+     "label": "Die Dreieck-Spitzen nach oben falten – die Vorderbeine"
+    },
+    {
+     "t": 124,
+     "label": "Beide Seiten zur Mitte falten"
+    },
+    {
+     "t": 144,
+     "label": "Unten nach oben falten"
+    },
+    {
+     "t": 165,
+     "label": "Die Hälfte wieder nach unten – die Sprungfeder"
+    },
+    {
+     "t": 200,
+     "label": "Beine nach aussen klappen – der Frosch ist fertig"
+    },
+    {
+     "t": 260,
+     "label": "Auf den Rücken drücken – er hüpft!"
+    },
+    {
+     "t": 305,
+     "label": "Fertig"
+    }
+   ],
+   "task": {
+    "text": "Falte deinen Frosch und lass ihn hüpfen. Mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "srf-geist",
+   "areaId": "basteln",
+   "title": "Geist aus Zündholzschachteln",
+   "source": {
+    "type": "youtube",
+    "id": "2Dj5ev-fV70"
+   },
+   "steps": [],
+   "task": {
+    "text": "Bastle deinen eigenen Geist und mach ein Foto davon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "maus-igel",
+   "areaId": "natur",
+   "title": "Warum hat der Igel Stacheln?",
+   "source": {
+    "type": "youtube",
+    "id": "r7V_bOcFwD8"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Wo hat sich der Kopf vom Igel versteckt?"
+    },
+    {
+     "t": 53,
+     "label": "Zeig mit der Hand, wie sich die Stacheln anfühlen"
+    },
+    {
+     "t": 96,
+     "label": "Rate: Wie viele Münzen hält der Ballon aus?"
+    },
+    {
+     "t": 174,
+     "label": "Hattest du recht?"
+    },
+    {
+     "t": 224,
+     "label": "Wie sehen die Stacheln der Baby-Igel aus?"
+    },
+    {
+     "t": 277,
+     "label": "Erzähl: Warum hat der Igel Stacheln?"
+    }
+   ],
+   "task": {
+    "text": "Erzähl, warum der Igel Stacheln hat. Nimm es mit dem Mikrofon auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "maus-ohrenkneifer",
+   "areaId": "natur",
+   "title": "Wofür hat der Ohrenkneifer Zangen?",
+   "source": {
+    "type": "youtube",
+    "id": "1BokgWr8GcE"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Erzähl: Wozu könnte die Zange gut sein?"
+    },
+    {
+     "t": 75,
+     "label": "Wie viele Beine und Fühler hat er?"
+    },
+    {
+     "t": 126,
+     "label": "Zeig mit den Armen, wie er die Zange hebt"
+    },
+    {
+     "t": 167,
+     "label": "Haben Ohrenkneifer Flügel? Was meinst du?"
+    },
+    {
+     "t": 243,
+     "label": "Wo haben sie die Ohrenkneifer gesucht?"
+    },
+    {
+     "t": 298,
+     "label": "Schau genau: Wie klappt er die Flügel aus?"
+    },
+    {
+     "t": 390,
+     "label": "Erzähl, wofür die Zange gut ist"
+    }
+   ],
+   "task": {
+    "text": "Erzähl, was du über den Ohrenkneifer gelernt hast. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "maus-elefant",
+   "areaId": "natur",
+   "title": "Wie tröten Elefanten?",
+   "source": {
+    "type": "youtube",
+    "id": "UvGZfjOuMXk"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Mach das Elefanten-Geräusch nach"
+    },
+    {
+     "t": 57,
+     "label": "Was lernen die Elefanten auf Kommando?"
+    },
+    {
+     "t": 110,
+     "label": "Zeig mit dem Arm, wie sich ein Rüssel bewegt"
+    },
+    {
+     "t": 180,
+     "label": "Trompete wie ein Elefant!"
+    },
+    {
+     "t": 270,
+     "label": "Erzähl, was du bis jetzt gesehen hast"
+    },
+    {
+     "t": 390,
+     "label": "Erzähl, wozu Elefanten tröten"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Elefanten-Tröten und erzähl, wie es geht. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "srf-biene",
+   "areaId": "natur",
+   "title": "Superheldin Biene",
+   "source": {
+    "type": "youtube",
+    "id": "r3G7HVzTXK4"
+   },
+   "steps": [],
+   "task": {
+    "text": "Erzähl, was die Biene besonders gut kann. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "srf-chamaeleon",
+   "areaId": "natur",
+   "title": "Superheld Chamäleon",
+   "source": {
+    "type": "youtube",
+    "id": "wn-K2DnYyUM"
+   },
+   "steps": [],
+   "task": {
+    "text": "Erzähl, was das Chamäleon besonders gut kann. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "srf-schnabeltier",
+   "areaId": "natur",
+   "title": "Superheld Schnabeltier",
+   "source": {
+    "type": "youtube",
+    "id": "7Z7vHDFl2V4"
+   },
+   "steps": [],
+   "task": {
+    "text": "Erzähl, was am Schnabeltier besonders ist. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "maerchen-bremer",
+   "areaId": "geschichten",
+   "title": "Die Bremer Stadtmusikanten",
+   "source": {
+    "type": "youtube",
+    "id": "g9TOGqVSmdI"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Wen trifft der Esel wohl als Nächstes?"
+    },
+    {
+     "t": 64,
+     "label": "Wer könnte noch dazukommen?"
+    },
+    {
+     "t": 132,
+     "label": "Wohin wollen die vier? Erzähl!"
+    },
+    {
+     "t": 175,
+     "label": "Was haben sie vor? Rate!"
+    },
+    {
+     "t": 228,
+     "label": "Zeig, wie die Tiere übereinander stehen"
+    },
+    {
+     "t": 277,
+     "label": "Was passiert dem Räuber im Haus?"
+    },
+    {
+     "t": 377,
+     "label": "Erzähl die Geschichte zu Ende"
+    }
+   ],
+   "task": {
+    "text": "Erzähl die Geschichte mit deinen eigenen Worten. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "maerchen-hase-igel",
+   "areaId": "geschichten",
+   "title": "Der Hase und der Igel",
+   "source": {
+    "type": "youtube",
+    "id": "A4zkaSRY1o0"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Warum ist der Igel beleidigt?"
+    },
+    {
+     "t": 84,
+     "label": "Was hat der Igel vor? Rate!"
+    },
+    {
+     "t": 135,
+     "label": "Wie trickst der Igel den Hasen aus?"
+    },
+    {
+     "t": 215,
+     "label": "Wer gewinnt? Erzähl!"
+    },
+    {
+     "t": 299,
+     "label": "Erzähl die Geschichte zu Ende"
+    }
+   ],
+   "task": {
+    "text": "Erzähl, wie der Igel den Hasen ausgetrickst hat. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "wilma-mupf",
+   "areaId": "geschichten",
+   "title": "Mupf das Müllmonster",
+   "source": {
+    "type": "youtube",
+    "id": "XOO0Siywh44"
+   },
+   "steps": [],
+   "task": {
+    "text": "Erzähl, was Mupf gelernt hat. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "srf-pompon-zaubertrick",
+   "areaId": "geschichten",
+   "title": "Pompon: En Zaubertrick",
+   "source": {
+    "type": "youtube",
+    "id": "rib4n10OIec"
+   },
+   "steps": [],
+   "task": {
+    "text": "Erzähl die Geschichte von Pompon. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "srf-pompon-hatschibum",
+   "areaId": "geschichten",
+   "title": "Pompon: Hatschibum",
+   "source": {
+    "type": "youtube",
+    "id": "M6_H_lnWJIw"
+   },
+   "steps": [],
+   "task": {
+    "text": "Erzähl die Geschichte von Pompon. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "srf-kiri-versteckis",
+   "areaId": "geschichten",
+   "title": "Kiri und Lou: Immer wider Versteckis",
+   "source": {
+    "type": "youtube",
+    "id": "8ustPSjSugw"
+   },
+   "steps": [],
+   "task": {
+    "text": "Erzähl die Geschichte von Kiri und Lou. Nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "mathe-plus-10",
+   "areaId": "schule",
+   "title": "Plus rechnen bis 10",
+   "source": {
+    "type": "youtube",
+    "id": "__65WMUR1s4"
+   },
+   "steps": [],
+   "task": {
+    "text": "Sag eine Plusaufgabe, die 10 ergibt, und nimm es auf.",
+    "deliverable": "ton"
+   }
+  },
+  {
+   "id": "wl-fingerstricken",
+   "areaId": "werken",
+   "title": "Fingerstricken – Armband",
+   "source": {
+    "type": "youtube",
+    "id": "1pE8xLKyxAk"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So geht Fingerstricken"
+    },
+    {
+     "t": 5,
+     "label": "Anfangsschlaufe: Faden kreuzen und durchziehen"
+    },
+    {
+     "t": 21,
+     "label": "Schlaufe über den Daumen, Faden hinter und vor den Fingern durchfädeln"
+    },
+    {
+     "t": 35,
+     "label": "Zurück: wieder hinter und vor den Fingern"
+    },
+    {
+     "t": 46,
+     "label": "Faden um alle vier Finger legen, untere Schlaufe über jeden Finger heben"
+    },
+    {
+     "t": 80,
+     "label": "Nächste Reihe genauso – Finger beugen hilft"
+    },
+    {
+     "t": 100,
+     "label": "Daumenschlaufe lösen und am Fadenende ziehen"
+    },
+    {
+     "t": 120,
+     "label": "Immer weiter: Faden drüber, untere Schlaufe drüberheben"
+    },
+    {
+     "t": 160,
+     "label": "Abschluss: Fadenende durch die Schlaufen ziehen"
+    },
+    {
+     "t": 200,
+     "label": "Zum Armband verknoten – fertig!"
+    }
+   ],
+   "task": {
+    "text": "Mach ein Foto von deinem gestrickten Armband.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "wl-kiludo-fingerstricken",
+   "areaId": "werken",
+   "title": "Fingerstricke (Mundart)",
+   "source": {
+    "type": "youtube",
+    "id": "7P6-Ag9Tcp4"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Material bereitlegen"
+    },
+    {
+     "t": 20,
+     "label": "Faden hinter und vor den Fingern durch"
+    },
+    {
+     "t": 40,
+     "label": "Zweite Runde zurück"
+    },
+    {
+     "t": 60,
+     "label": "Untere Schlaufe über jeden Finger heben"
+    },
+    {
+     "t": 100,
+     "label": "Immer weiter stricken"
+    },
+    {
+     "t": 140,
+     "label": "Schau, wie der Schlauch wächst"
+    },
+    {
+     "t": 200,
+     "label": "Abschluss: Schlaufen zusammenführen"
+    },
+    {
+     "t": 225,
+     "label": "Fertig!"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem Strickschlauch.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "wl-strickliesel",
+   "areaId": "werken",
+   "title": "Strickliesel – von Anfang bis Schluss",
+   "source": {
+    "type": "youtube",
+    "id": "Yfh1FpEMTtc"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Faden durch die Strickliesel ziehen"
+    },
+    {
+     "t": 20,
+     "label": "Jeden Haken einmal umwickeln, im Uhrzeigersinn"
+    },
+    {
+     "t": 40,
+     "label": "Faden über dem ersten Haken entlangführen"
+    },
+    {
+     "t": 58,
+     "label": "Untere Schlaufe mit dem Stab über den Haken heben, unten am Faden ziehen"
+    },
+    {
+     "t": 80,
+     "label": "Immer so weiter, Haken für Haken"
+    },
+    {
+     "t": 100,
+     "label": "Lang genug? Faden abschneiden"
+    },
+    {
+     "t": 112,
+     "label": "Abschluss: Schlaufe über den Haken, Faden durchziehen – bei jedem Haken"
+    },
+    {
+     "t": 140,
+     "label": "Schlauch herausziehen – fertig!"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem Strickschlauch.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "wl-wickeldrache",
+   "areaId": "werken",
+   "title": "Wickeldrachen aus zwei Holzspateln",
+   "source": {
+    "type": "youtube",
+    "id": "cJOAV5-L1SE"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Zwei Holzspatel zum Kreuz kleben, Wolle festknoten"
+    },
+    {
+     "t": 14,
+     "label": "Wickeltechnik: Faden um einen Stab, einmal ganz herum"
+    },
+    {
+     "t": 22,
+     "label": "Zum nächsten Stab, wieder einmal herum"
+    },
+    {
+     "t": 32,
+     "label": "Immer weiter – die Fäden eng nebeneinander"
+    },
+    {
+     "t": 48,
+     "label": "Farbe wechseln: alten und neuen Faden verknoten"
+    },
+    {
+     "t": 58,
+     "label": "Fadenende festkleben – fertig!"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem Wickeldrachen.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "wl-armband-karton",
+   "areaId": "werken",
+   "title": "Armband knüpfen mit der Kartonscheibe",
+   "source": {
+    "type": "youtube",
+    "id": "IKmyEXdF4Oo"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So sieht das Armband aus"
+    },
+    {
+     "t": 5,
+     "label": "Kreis aus Karton (10 cm), Loch in die Mitte, 8 Schlitze am Rand"
+    },
+    {
+     "t": 20,
+     "label": "Sieben Wollfäden, je 40 cm lang"
+    },
+    {
+     "t": 40,
+     "label": "Alle Fäden zusammen, am Ende einen Knoten"
+    },
+    {
+     "t": 73,
+     "label": "Knoten durch das Loch stecken"
+    },
+    {
+     "t": 86,
+     "label": "Jeden Faden in einen Schlitz – ein Schlitz bleibt frei"
+    },
+    {
+     "t": 109,
+     "label": "Knüpfen: leerer Schlitz nach unten, 1-2-3, dritten Faden in den leeren Schlitz"
+    },
+    {
+     "t": 143,
+     "label": "Immer so weiter, hinten ab und zu am Knoten ziehen"
+    },
+    {
+     "t": 184,
+     "label": "Lang genug? Fäden aus den Schlitzen, Armband durchs Loch ziehen"
+    },
+    {
+     "t": 204,
+     "label": "Ende verknoten – fertig!"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem Armband am Handgelenk.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "wl-webrahmen-karton",
+   "areaId": "werken",
+   "title": "Mini-Webrahmen aus Karton",
+   "source": {
+    "type": "youtube",
+    "id": "Nk_h6mEHVvs"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Material – Karton, Wolle, Schere, Nadel"
+    },
+    {
+     "t": 8,
+     "label": "Oben und unten kleine Schlitze in den Karton schneiden"
+    },
+    {
+     "t": 17,
+     "label": "Kettfaden spannen: von Schlitz zu Schlitz, oben und unten"
+    },
+    {
+     "t": 33,
+     "label": "Bunten Faden mit der Nadel über–unter durchweben"
+    },
+    {
+     "t": 50,
+     "label": "Weiter weben, Farben wechseln"
+    },
+    {
+     "t": 70,
+     "label": "Fertig gewebt: Fäden hinten lösen"
+    },
+    {
+     "t": 80,
+     "label": "Vom Karton nehmen, Enden verknoten – fertig!"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem kleinen Teppich.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "wl-vorstich",
+   "areaId": "werken",
+   "title": "Vorstich – der einfachste Handstich",
+   "source": {
+    "type": "youtube",
+    "id": "d3oupYpTqJs"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: der Wal mit Vorstich"
+    },
+    {
+     "t": 20,
+     "label": "Material: Filz, Faden, Nadel, Schere"
+    },
+    {
+     "t": 30,
+     "label": "Faden einfädeln, Knoten ans Ende"
+    },
+    {
+     "t": 40,
+     "label": "Von hinten einstechen, Nadel nach vorne ziehen"
+    },
+    {
+     "t": 50,
+     "label": "Kleines Stück weiter wieder runter, dann wieder hoch"
+    },
+    {
+     "t": 65,
+     "label": "Immer weiter: gleich lange Stiche, gleich lange Abstände"
+    },
+    {
+     "t": 95,
+     "label": "Hinten verknoten, Faden abschneiden"
+    },
+    {
+     "t": 108,
+     "label": "Fertig – schau dir deine Naht an"
+    }
+   ],
+   "task": {
+    "text": "Foto von deiner Naht.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "wl-zopf",
+   "areaId": "werken",
+   "title": "Zopf flechten aus 3 Strängen",
+   "source": {
+    "type": "youtube",
+    "id": "ECMahTpP14U"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: drei Fäden, Klebeband"
+    },
+    {
+     "t": 10,
+     "label": "Fäden oben mit Klebeband festkleben"
+    },
+    {
+     "t": 17,
+     "label": "Rechter Faden über die Mitte"
+    },
+    {
+     "t": 31,
+     "label": "Linker Faden über die Mitte"
+    },
+    {
+     "t": 37,
+     "label": "Immer abwechselnd: rechts, links, rechts …"
+    },
+    {
+     "t": 65,
+     "label": "Unten einen Knoten machen"
+    },
+    {
+     "t": 72,
+     "label": "Klebeband lösen – fertig!"
+    }
+   ],
+   "task": {
+    "text": "Flechte einen Zopf und zeig ihn jemandem.",
+    "deliverable": "fertig"
+   }
+  },
+  {
+   "id": "wl-flechten",
+   "areaId": "werken",
+   "title": "Flechten – Grundlagen",
+   "source": {
+    "type": "youtube",
+    "id": "_7eCeENd_Ek"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: drei Fäden oben verknoten"
+    },
+    {
+     "t": 20,
+     "label": "Knoten festkleben, damit nichts rutscht"
+    },
+    {
+     "t": 40,
+     "label": "Fäden aufteilen: links, rechts, Mitte"
+    },
+    {
+     "t": 50,
+     "label": "Rechter Faden über den mittleren"
+    },
+    {
+     "t": 62,
+     "label": "Linker Faden über den mittleren"
+    },
+    {
+     "t": 75,
+     "label": "Fest anziehen, damit keine Löcher entstehen"
+    },
+    {
+     "t": 85,
+     "label": "Rechts über die Mitte, links über die Mitte – bis unten"
+    },
+    {
+     "t": 95,
+     "label": "Unten verknoten – fertig!"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem Zopf.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "wl-armband-zwei",
+   "areaId": "werken",
+   "title": "Armband aus zwei Fäden knüpfen",
+   "source": {
+    "type": "youtube",
+    "id": "PgYuSEEJtoY"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: So wird das Armband"
+    },
+    {
+     "t": 20,
+     "label": "Zwei Fäden abmessen – etwa dreimal ums Handgelenk"
+    },
+    {
+     "t": 55,
+     "label": "Oben zusammenknoten und mit Klebeband festkleben"
+    },
+    {
+     "t": 75,
+     "label": "Erster Knoten: einen Faden um den anderen schlingen und hochziehen"
+    },
+    {
+     "t": 95,
+     "label": "Immer wieder derselbe Knoten mit demselben Faden"
+    },
+    {
+     "t": 140,
+     "label": "Weiter, bis das Band lang genug ist"
+    },
+    {
+     "t": 165,
+     "label": "Ums Handgelenk legen und zuknoten"
+    },
+    {
+     "t": 185,
+     "label": "Enden abschneiden"
+    },
+    {
+     "t": 205,
+     "label": "Fertig!"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem Armband.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "wl-fingerhaekeln",
+   "areaId": "werken",
+   "title": "Armband fingerhäkeln",
+   "source": {
+    "type": "youtube",
+    "id": "0uhYJpyHk3U"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: das fertige Armband"
+    },
+    {
+     "t": 10,
+     "label": "Drei Wollfäden abmessen und abschneiden"
+    },
+    {
+     "t": 30,
+     "label": "Anfangsschlaufe machen und festziehen"
+    },
+    {
+     "t": 48,
+     "label": "Faden mit dem Finger durch die Schlaufe ziehen – neue Schlaufe"
+    },
+    {
+     "t": 65,
+     "label": "Immer wieder durchziehen, die Kette wird länger"
+    },
+    {
+     "t": 95,
+     "label": "Letzte Schlaufe: Faden ganz durchziehen und festknoten"
+    },
+    {
+     "t": 108,
+     "label": "Fertig – ums Handgelenk binden"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem gehäkelten Armband.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "ex-ballonrakete",
+   "areaId": "experimente",
+   "title": "Raketenstart mit Luft",
+   "source": {
+    "type": "youtube",
+    "id": "uGh-oF2n02w"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Was brauchst du?"
+    },
+    {
+     "t": 28,
+     "label": "Schnur durch den Trinkhalm fädeln"
+    },
+    {
+     "t": 36,
+     "label": "Ballon aufblasen und mit der Klammer zuhalten"
+    },
+    {
+     "t": 42,
+     "label": "Trinkhalm mit Klebeband auf den Ballon kleben"
+    },
+    {
+     "t": 50,
+     "label": "Schnur straff zwischen zwei Stühle spannen"
+    },
+    {
+     "t": 68,
+     "label": "Klammer lösen – 3, 2, 1, Start!"
+    },
+    {
+     "t": 80,
+     "label": "Warum fliegt die Rakete? Die Luft strömt hinten raus"
+    },
+    {
+     "t": 95,
+     "label": "Probier: grosser gegen kleiner Ballon, steil oder flach"
+    }
+   ],
+   "task": {
+    "text": "Lass deine Rakete fliegen – wie weit kommt sie?",
+    "deliverable": "fertig"
+   }
+  },
+  {
+   "id": "ex-brauserakete",
+   "areaId": "experimente",
+   "title": "Brausepulverrakete",
+   "source": {
+    "type": "youtube",
+    "id": "WPDku_zuCQ8"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Was brauchst du?"
+    },
+    {
+     "t": 40,
+     "label": "Dose mit etwas Wasser füllen"
+    },
+    {
+     "t": 60,
+     "label": "Erst mit einer halben Tablette probieren"
+    },
+    {
+     "t": 75,
+     "label": "Deckel drauf, umdrehen, hinstellen – zurücktreten!"
+    },
+    {
+     "t": 100,
+     "label": "Hat nicht geklappt? Dose trocknen, nochmal"
+    },
+    {
+     "t": 120,
+     "label": "Grösseres Stück – bumm!"
+    },
+    {
+     "t": 150,
+     "label": "Warum? In der Tablette steckt Gas, der Druck wird zu gross"
+    },
+    {
+     "t": 200,
+     "label": "Probier: mit Backpulver und Wasser"
+    }
+   ],
+   "task": {
+    "text": "Lass deine Rakete starten – draussen, mit einem Erwachsenen.",
+    "deliverable": "fertig"
+   }
+  },
+  {
+   "id": "ex-luft-wiegt",
+   "areaId": "experimente",
+   "title": "Luft wiegt etwas",
+   "source": {
+    "type": "youtube",
+    "id": "sUZNnAlEz1Q"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Wiegt Luft etwas?"
+    },
+    {
+     "t": 20,
+     "label": "Material: zwei Ballons, Faden, Stab, Nadel"
+    },
+    {
+     "t": 40,
+     "label": "Schlaufe in der Mitte des Stabs, Stab aufhängen"
+    },
+    {
+     "t": 58,
+     "label": "Ballons an den Enden festbinden"
+    },
+    {
+     "t": 70,
+     "label": "Stab ausbalancieren, bis er gerade hängt"
+    },
+    {
+     "t": 95,
+     "label": "Einen Ballon mit der Nadel anstechen"
+    },
+    {
+     "t": 118,
+     "label": "Schau: Die Seite mit dem vollen Ballon geht runter"
+    },
+    {
+     "t": 140,
+     "label": "Ein Würfel Luft, ein Meter gross, wiegt ein Kilo!"
+    },
+    {
+     "t": 180,
+     "label": "Darum drückt die Luft auf uns – das ist der Luftdruck"
+    }
+   ],
+   "task": {
+    "text": "Baue die Luftballonwaage nach und zeig sie jemandem.",
+    "deliverable": "fertig"
+   }
+  },
+  {
+   "id": "ex-hefeballon",
+   "areaId": "experimente",
+   "title": "Hefeballon",
+   "source": {
+    "type": "youtube",
+    "id": "GmVxCSHsCzM"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Was macht die Hefe?"
+    },
+    {
+     "t": 20,
+     "label": "Material: Hefe, Zucker, Flasche, Trichter, Ballon, warmes Wasser"
+    },
+    {
+     "t": 40,
+     "label": "Hefe und Zucker mit dem Trichter in die Flasche"
+    },
+    {
+     "t": 65,
+     "label": "Ein paar Löffel warmes Wasser dazu, Flasche schütteln"
+    },
+    {
+     "t": 85,
+     "label": "Ballon über die Flasche stülpen"
+    },
+    {
+     "t": 100,
+     "label": "Flasche ins warme Wasser stellen – warten"
+    },
+    {
+     "t": 112,
+     "label": "Der Ballon wird dicker! Die Hefe frisst den Zucker und macht Gas"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem aufgeblasenen Hefeballon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "ex-moos",
+   "areaId": "experimente",
+   "title": "Was macht Regen mit Moos?",
+   "source": {
+    "type": "youtube",
+    "id": "XiJ1Dc0V6kk"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Was passiert mit Moos, wenn es regnet?"
+    },
+    {
+     "t": 4,
+     "label": "Was brauchst du?"
+    },
+    {
+     "t": 10,
+     "label": "Vorbereitung"
+    },
+    {
+     "t": 15,
+     "label": "Wasser marsch – und beobachten"
+    },
+    {
+     "t": 32,
+     "label": "Was ist passiert?"
+    },
+    {
+     "t": 39,
+     "label": "Weiterfragen: Wie viel Wasser hält das Moos?"
+    }
+   ],
+   "task": {
+    "text": "Probier es mit Moos aus dem Wald.",
+    "deliverable": "fertig"
+   }
+  },
+  {
+   "id": "ex-pfeffer-salz",
+   "areaId": "experimente",
+   "title": "Pfeffer und Salz trennen",
+   "source": {
+    "type": "youtube",
+    "id": "a5EHGfGeq74"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Dara zeigt Tanja einen Trick"
+    },
+    {
+     "t": 10,
+     "label": "Salz und Pfeffer mischen und aufs Blatt streuen"
+    },
+    {
+     "t": 50,
+     "label": "Plastiklöffel kräftig am Pullover reiben"
+    },
+    {
+     "t": 65,
+     "label": "Löffel knapp über die Mischung halten – der Pfeffer springt hoch!"
+    },
+    {
+     "t": 85,
+     "label": "Warum? Reiben macht den Löffel elektrisch, der leichte Pfeffer springt zuerst"
+    },
+    {
+     "t": 98,
+     "label": "Fertig – probier es selbst"
+    }
+   ],
+   "task": {
+    "text": "Trenne Pfeffer und Salz mit dem Zaubertrick.",
+    "deliverable": "fertig"
+   }
+  },
+  {
+   "id": "ex-starke-eier",
+   "areaId": "experimente",
+   "title": "Starke Eier",
+   "source": {
+    "type": "youtube",
+    "id": "qf54yUZv2Ks"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Halten rohe Eier Bücher aus?"
+    },
+    {
+     "t": 25,
+     "label": "Vier rohe Eier in Eierbecher stellen, alle gleich hoch"
+    },
+    {
+     "t": 50,
+     "label": "Ein Buch vorsichtig drauflegen"
+    },
+    {
+     "t": 65,
+     "label": "Noch mehr Bücher – wie viele halten die Eier?"
+    },
+    {
+     "t": 100,
+     "label": "Warum? Die runde Form verteilt das Gewicht"
+    },
+    {
+     "t": 125,
+     "label": "Aufräumen: Ei in die Pfanne"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem Eierturm.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "ex-tag-nacht",
+   "areaId": "experimente",
+   "title": "Wie entstehen Tag und Nacht?",
+   "source": {
+    "type": "youtube",
+    "id": "I4VnZqWlvO4"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Tag und Nacht durch Drehung"
+    },
+    {
+     "t": 8,
+     "label": "Du brauchst: Kugel, Zahnstocher, Taschenlampe"
+    },
+    {
+     "t": 20,
+     "label": "Zahnstocher in die Kugel stecken – das bist du"
+    },
+    {
+     "t": 33,
+     "label": "Raum dunkel: Die Taschenlampe ist die Sonne"
+    },
+    {
+     "t": 45,
+     "label": "Kugel langsam drehen – wann ist bei dir Tag, wann Nacht?"
+    },
+    {
+     "t": 60,
+     "label": "Forschungsfrage: Wo auf der Kugel ist jetzt Nacht?"
+    }
+   ],
+   "task": {
+    "text": "Mach es im dunklen Zimmer nach – mit Taschenlampe und Apfel.",
+    "deliverable": "fertig"
+   }
+  },
+  {
+   "id": "ex-wasserfilter",
+   "areaId": "experimente",
+   "title": "Wasserfilter selber bauen",
+   "source": {
+    "type": "youtube",
+    "id": "wsPqHD-DbJI"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Wie wird Dreckwasser sauber?"
+    },
+    {
+     "t": 14,
+     "label": "Was brauchst du?"
+    },
+    {
+     "t": 26,
+     "label": "Flasche schichten: unten Watte, dann Sand, dann Kies"
+    },
+    {
+     "t": 40,
+     "label": "Dreckwasser langsam oben hineingiessen"
+    },
+    {
+     "t": 49,
+     "label": "Schau: Was kommt unten raus?"
+    },
+    {
+     "t": 55,
+     "label": "Warum? Die Schichten halten den Dreck zurück"
+    },
+    {
+     "t": 75,
+     "label": "Probier: andere Schichten, anderer Dreck"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem Filter mit dem Wasser davor und danach.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "ex-ballon-essig",
+   "areaId": "experimente",
+   "title": "Luftballon mit Essig und Backpulver",
+   "source": {
+    "type": "youtube",
+    "id": "9N25ofqiPFs"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Flasche mit Essig, Ballon, Backpulver"
+    },
+    {
+     "t": 6,
+     "label": "Backpulver mit dem Trichter in den Ballon füllen"
+    },
+    {
+     "t": 13,
+     "label": "Ballon über den Flaschenhals stülpen"
+    },
+    {
+     "t": 19,
+     "label": "Ballon hochheben – das Pulver fällt in den Essig"
+    },
+    {
+     "t": 24,
+     "label": "Es schäumt – der Ballon bläst sich auf!"
+    },
+    {
+     "t": 33,
+     "label": "Warum? Essig und Backpulver machen Gas"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem aufgeblasenen Ballon.",
+    "deliverable": "foto"
+   }
+  },
+  {
+   "id": "ex-magnet",
+   "areaId": "experimente",
+   "title": "Dinge bewegen ohne Berührung – Magnet",
+   "source": {
+    "type": "youtube",
+    "id": "Q0XiO-UWRKY"
+   },
+   "steps": [
+    {
+     "t": 0,
+     "label": "Zuschauen: Büroklammern tanzen von allein"
+    },
+    {
+     "t": 40,
+     "label": "Das Geheimnis: Magnete unter dem Tisch"
+    },
+    {
+     "t": 62,
+     "label": "Magnet unterm Tisch drehen – oben dreht sich einer mit"
+    },
+    {
+     "t": 90,
+     "label": "Bau ein Labyrinth: Karton bemalen, Trinkhalme aufkleben"
+    },
+    {
+     "t": 110,
+     "label": "Mutter oder Büroklammer mit dem Magnet von unten durchs Labyrinth ziehen"
+    },
+    {
+     "t": 125,
+     "label": "Bachlauf malen, Papierfisch auf eine Büroklammer kleben"
+    },
+    {
+     "t": 150,
+     "label": "Schwieriger: Kronkorken als Hindernisse"
+    },
+    {
+     "t": 180,
+     "label": "Probier eigene Ideen aus"
+    }
+   ],
+   "task": {
+    "text": "Foto von deinem Magnet-Labyrinth.",
+    "deliverable": "foto"
+   }
+  }
+ ]
 }
