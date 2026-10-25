@@ -24,16 +24,16 @@
   "notiz": "Rote Fingerstrick-Kette auf weissem Tuch, ab 217.5 kein Wasserzeichen; Hand beginnt erst bei x≈0.82, also 8 % ausserhalb des Ausschnitts."
  },
  "wl-strickliesel": {
-  "t": 160.0,
+  "t": 148.5,
   "aus": [
-   0.14,
-   0.07,
-   0.8,
-   0.8
+   0.1,
+   0.02,
+   0.85,
+   0.82
   ],
   "frei": false,
   "schwach": false,
-  "notiz": "Blaue Strickliesel-Schnur liegt als Ring mit Fadenenden auf dem Holztisch; das ganze Bild ist ohne Hand (kurz vor dem Schlusslogo)."
+  "notiz": "Fertige blaue Strickliesel-Schnur als Schlaufe auf Holztisch; Hand am unteren Rand weggeschnitten."
  },
  "wl-wickeldrache": {
   "t": 60.0,
@@ -1911,5 +1911,1537 @@
   "frei": false,
   "schwach": true,
   "notiz": "Die Maschen gibt es nur auf den Fingern; sonst sind Kind (Haare, Arme) oder Hände im Bild. Der Wollknäuel allein auf dem Tisch wäre schmaler als 0.45 und zeigt das Thema nicht."
+ },
+ "zw-brettchenweben-perlen": {
+  "t": 187,
+  "aus": [
+   0,
+   0.3,
+   1,
+   1
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiges Brettchenband mit Glasperlen auf Schwarz; Wasserzeichen oben weggeschnitten, keine Hand; etwas unscharf."
+ },
+ "zw-mandala-hochdruck": {
+  "t": 237,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Bunter Mandala-Hochdruck auf Holzbrettern, ganzes Bild ohne Person."
+ },
+ "zw-schneiden-trennen-loecher": {
+  "t": 127,
+  "aus": [
+   0,
+   0.28,
+   0.9,
+   1
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Schere schneidet Milchkarton; bedruckter Kartonteil weggeschnitten, keine Hand im Bild."
+ },
+ "zw-schmetterling-nadelfilz": {
+  "t": 239.8,
+  "aus": [
+   0.3,
+   0.18,
+   0.92,
+   0.93
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "Fertiger violetter Filzschmetterling mit Aufhänger auf hellem Grund; Fingerspitze unten rechts weggeschnitten."
+ },
+ "zw-blumensieb-kurz": {
+  "t": 22.5,
+  "aus": [
+   0,
+   0.3,
+   1,
+   0.65
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Glasiertes Blumensieb mit Löchern auf Gras (Hochformat); haltende Hand unten weggeschnitten."
+ },
+ "zw-pusteblume-deko": {
+  "t": 55.5,
+  "aus": [
+   0.27,
+   0,
+   0.73,
+   0.44
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Haltbar gemachte Pusteblume, nur der Kopf; Hand und Holzsockel unten weggeschnitten."
+ },
+ "zw-tonkugel-lochmuster": {
+  "t": 277.5,
+  "aus": [
+   0,
+   0.2,
+   0.55,
+   0.95
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "Dunkle Tonkugel mit Lochmuster auf Arbeitsunterlage, ohne Person."
+ },
+ "zw-eierbecher-ton": {
+  "t": 39.7,
+  "aus": [
+   0.19,
+   0.2,
+   0.81,
+   0.95
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Gelber Eierbecher mit Ei auf Holz; Werbe-Schriftzug und unscharfe Ränder weggeschnitten, keine Hand; Ei oben leicht angeschnitten."
+ },
+ "zw-hase-haekeln-oberkoerper": {
+  "t": 1017.5,
+  "aus": [
+   0,
+   0.05,
+   0.82,
+   0.9
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Gehäkelter Hasenkörper mit Hose auf Marmor, mit Wolle und Häkelnadel; unscharfe Hand rechts weggeschnitten."
+ },
+ "zw-kerze-holz-keramik": {
+  "t": 313.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige Holzkerzen mit Flammen und roten Kugeln in einer Hausecke, ohne Person."
+ },
+ "zw-becher-eindrueckform": {
+  "t": 235.6,
+  "aus": [
+   0.36,
+   0.38,
+   0.9,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Tonbecher mit rundem Boden allein auf Tisch; Ärmel und Werbung oben rechts weggeschnitten."
+ },
+ "zw-hase-haekeln-beine": {
+  "t": 2.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Zwei fertige Häkelhasen auf gelbem Stoff, Anfangsbild ohne Schrift und ohne Hand."
+ },
+ "zw-wackeltier-tonpapier": {
+  "t": 760.0,
+  "aus": [
+   0.12,
+   0.33,
+   0.78,
+   0.72
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Getupftes Wackeltier und weisses Rohbau-Tier gross auf violettem Karton. Dunkler Fleck links oben (x<0.06) und eingeblendeter Titel (y<0.25) ausserhalb; Hände kommen erst später ins Bild."
+ },
+ "zw-flamingo-bommel": {
+  "t": 56.5,
+  "aus": [
+   0,
+   0.17,
+   1,
+   0.5
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiger Bommel-Flamingo mit Papierkopf auf blauem Grund, Schlussbild nachdem die Hand losgelassen hat; Beine unten angeschnitten."
+ },
+ "zw-taschengriff-cobra": {
+  "t": 6.5,
+  "aus": [
+   0.1,
+   0.1,
+   1,
+   1
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiger Paracord-Taschengriff an Stofftasche mit Hummer-Druck; Intro ohne Titel-Einblendung, keine Hand."
+ },
+ "zw-papierflieger": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Der fertige Flieger wird in jedem Bild unten von einer Hand gehalten (0.5-3 s, 47-50 s); ein ganzer Flieger in 16:9 braucht so viel Höhe, dass Finger mit ins Bild kämen. Darum YouTube-Bild."
+ },
+ "zw-wandhaken-ton": {
+  "t": 2.5,
+  "aus": [
+   0.1,
+   0,
+   0.95,
+   0.9
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "Einzelner glasierter Keramik-Wandhaken mit Blumenmuster an weisser Wand, ohne Person."
+ },
+ "zw-hase-haekeln-ohren-arme": {
+  "t": 700.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Hase mit Pullover und Armen liegt auf Marmor, ohne Hand."
+ },
+ "zw-olla-ton": {
+  "t": 265.5,
+  "aus": [
+   0.3,
+   0.3,
+   0.85,
+   0.98
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Die beiden gegossenen Olla-Hälften liegen scharf nebeneinander auf dem Tisch (vor dem Zusammenfügen). Hände und dunkler Stoff nur oben links (x<0.2, y<0.35), ausserhalb. Die fertige Olla ist am Ende immer in der Hand."
+ },
+ "ex-eier-zwiebelschalen": {
+  "t": 28.5,
+  "aus": [
+   0,
+   0.36,
+   1,
+   0.68
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Zwei mit Zwiebelschalen gefärbte Eier mit Streifen im Osterkorb neben Keramikhase; Schlussbild ohne Text-Einblendung und ohne Hand."
+ },
+ "zw-seifenschale-toepfern": {
+  "t": 505.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige grün glasierte Seifenschale mit Ginkgoblatt auf rosa Stoff mit Trockenblumen; keine Hand, kein Text im Bild."
+ },
+ "zw-teller-sechseck-ton": {
+  "t": 47.5,
+  "aus": [
+   0.1,
+   0.12,
+   0.98,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Sechseckiger grauer Tonteller auf Brett; Werbung-Hinweis weggeschnitten, oberer Rand leicht angeschnitten; keine Hand."
+ },
+ "zw-hase-haekeln-zusammennaehen": {
+  "t": 780.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiger Häkelhase mit blauer Latzhose und zwei Wollknäuel auf Marmor; keine Hände, kein Text (Einblendung nur 772-779)."
+ },
+ "zw-tonkugel-gipsform": {
+  "t": 159.0,
+  "aus": [
+   0.05,
+   0.08,
+   0.9,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Tonschale in weisser Gips-Halbform, ohne Hände, Hinweis weggeschnitten; fertige Kugel wird immer in der Hand gehalten."
+ },
+ "zw-gartenkugel-ton": {
+  "t": 92.4,
+  "aus": [
+   0.13,
+   0.02,
+   0.8,
+   0.98
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Tonkugel mit geritztem Mandala-Muster und Löchern, fast fertig; Hände rechts weggeschnitten, Kugel rechts leicht angeschnitten."
+ },
+ "zw-armband-nassfilzen": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Armband nur am Handgelenk oder in Händen zu sehen, Ring auf Noppenfolie immer berührt; kein handfreies Bild."
+ },
+ "zw-origami-hemd": {
+  "t": 63.9,
+  "aus": [
+   0.0,
+   0.45,
+   0.9,
+   0.73
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Hochformat; fertiges grünes Falthemd mit rosa Krawatte (oberer Teil); Hände unten und rechts weggeschnitten."
+ },
+ "zw-glasieren-pinsel": {
+  "t": 336.0,
+  "aus": [
+   0.24,
+   0.64,
+   0.56,
+   0.925
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Nahaufnahme der grau glasierten Seifenschale mit Muster und drei Löchern, liegt allein. Schlagzeile «Mehr als nur ein Jubiläum» (y>0.93) und Zeitungsfoto mit Person (y<0.62) liegen ausserhalb; oben links nur verschwommene, unlesbare Kleinschrift. Hand nur rechts oben (x>0.78), ausserhalb. Schwach: Schale nicht ganz im Bild, etwas weich. Am Ende (Brennofen) hält immer eine Hand die Schale."
+ },
+ "zw-mini-bommel-waescheklammer": {
+  "t": 12.5,
+  "aus": [
+   0.05,
+   0.45,
+   0.8,
+   0.75
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Hochformat; Wäscheklammer mit gewickelter oranger Wolle neben Wollknäuel auf Holztisch; keine Hände."
+ },
+ "zw-trick-track-wuerfelspiel": {
+  "t": 101.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Spielbrett aus Karton mit nummerierten Klappen 1-9 und zwei grünen Würfeln; keine Hände."
+ },
+ "zw-herzballon-ton": {
+  "t": 931.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Rot glasierter Herzballon aus Keramik mit Schnur auf Holzbrettern; keine Hände."
+ },
+ "zw-tonkugel-styropor": {
+  "t": 66.0,
+  "aus": [
+   0.31,
+   0.27,
+   0.95,
+   0.95
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Ausgewallte Tonplatte und weisse Styroporkugel auf Brett (Ausgangsmaterial); Person weggeschnitten, fertige Kugel nur mit Person zu sehen."
+ },
+ "zw-strickgabel-schmetterling": {
+  "t": 214.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Zwei fertige Strickschnur-Schmetterlinge (rot und bunt) auf Holztisch; keine Hände, kein Text."
+ },
+ "zw-hase-ton": {
+  "t": 767.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Ungebrannter Tonhase auf Arbeitsplatte mit Werkzeugen, Schlickerglas und Pinsel; keine Hände (Endbild 793 hat unscharfe Seitenbalken)."
+ },
+ "zw-fuchstasse-glasieren": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Tasse wird durchgehend in der Hand gehalten (Werkstatt und Endergebnis); nur Glasur-Nahaufnahme ohne Aussage möglich, daher null."
+ },
+ "zw-nikolausstiefel-papier": {
+  "t": 227.0,
+  "aus": [
+   0.1,
+   0.1,
+   1.0,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Roter gefalteter Papierstiefel mit weisser Schnur auf Werktisch; Werbung-Hinweis oben links weggeschnitten; keine Hände."
+ },
+ "zw-pfauenmuster-glasur": {
+  "t": 52.5,
+  "aus": [
+   0.05,
+   0.0,
+   0.7,
+   0.62
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Blau-weiss glasierte Schale im Brennofen, daneben Stütze und zweite Schale; Hand unten weggeschnitten."
+ },
+ "zw-schrumpffolie-schluesselanhaenger": {
+  "t": 337.0,
+  "aus": [
+   0.28,
+   0.5,
+   0.72,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Bunt bemalter Schlüsselanhänger in Handform (Werkstück, keine echte Hand) mit Ring auf weissem Papier; Finger oben weggeschnitten."
+ },
+ "zw-gecko-eindrueckform": {
+  "t": 213.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiger grün glasierter Ton-Gecko auf verwitterten Holzbrettern; keine Hände, kein Text."
+ },
+ "ex-papier-propeller": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Papierstreifen immer in Händen oder mit Text; Fallszenen unscharf im Hochformat mit Person; kein handfreies Bild."
+ },
+ "zw-blumenstecker-herz-filzen": {
+  "t": 2.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiges rotes Filzherz auf Stab mit oranger Schleife auf Holztisch; keine Hände, kein Text."
+ },
+ "zw-fuchsmotiv-henkel": {
+  "t": 46.0,
+  "aus": [
+   0.17,
+   0.22,
+   0.63,
+   0.68
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Nahaufnahme Fuchsmotiv auf dem Becher, haltende Hand ganz weggeschnitten; leicht unscharf"
+ },
+ "zw-schmetterling-fleece": {
+  "t": 537.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Vier fertige Fleece-Schmetterlinge auf kariertem Tisch, keine Hände im Bild"
+ },
+ "zw-drahtvogel": {
+  "t": 550.5,
+  "aus": [
+   0.15,
+   0.08,
+   0.85,
+   0.85
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Drahtvogel mit Feder und Perle auf Holztisch, niemand berührt ihn"
+ },
+ "zw-nisthilfe-wildbienen": {
+  "t": 40.0,
+  "aus": [
+   0.24,
+   0.08,
+   0.78,
+   0.72
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Gebrannter Tonblock mit Bienenrelief und Löchern, ohne Hand, Unschärferänder weggeschnitten"
+ },
+ "zw-heissluftballon-futterhaus": {
+  "t": 2.0,
+  "aus": [
+   0.0,
+   0.06,
+   0.76,
+   0.88
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Ton-Heissluftballon auf Holztisch, ohne Hand, Steckdose weggeschnitten"
+ },
+ "zw-karte-herz-weben": {
+  "t": 257.5,
+  "aus": [
+   0.12,
+   0.15,
+   0.78,
+   0.87
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "Fertige Karte mit gewobenem Herz allein auf blauem Grund"
+ },
+ "zw-becherpuppe-zappelt": {
+  "t": 132.0,
+  "aus": [
+   0.24,
+   0.0,
+   0.96,
+   0.76
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Becherpuppe mit gelbem Kopf und Stift, ohne Hand, Wasserzeichen weggeschnitten"
+ },
+ "zw-geldschein-schmetterling": {
+  "t": 11.3,
+  "aus": [
+   0.42,
+   0.25,
+   0.92,
+   0.88
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Ein einzelner gefalteter Geldschein-Schmetterling mit Faden auf Holztisch, ganz im Bild. Keine flachen Geldscheine, kein «EURO», keine Hand (ab 11.5 s kommen Hand und 20er-Schein, ausserhalb des Probefensters). Auf den Falten nur winzige, unlesbare Druckreste."
+ },
+ "zw-hohles-herz-ton": {
+  "t": 467.0,
+  "aus": [
+   0.02,
+   0.15,
+   0.74,
+   0.95
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Tonherz mit Spitzenmuster auf dunklem Tuch, keine Hand"
+ },
+ "zw-regenbogenspirale": {
+  "t": 0.5,
+  "aus": [
+   0.0,
+   0.18,
+   1.0,
+   0.56
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Drehende Regenbogenspirale vor weisser Wand, Hand unten weggeschnitten; Hochformat, Spirale leicht angeschnitten und bewegt"
+ },
+ "zw-nadelkissen-maus": {
+  "t": 1.0,
+  "aus": [
+   0.0,
+   0.41,
+   1.0,
+   0.76
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Gewobene Nadelkissen-Maus auf farbbespritztem Tisch, keine Hand"
+ },
+ "zw-schnappi-fangspiel": {
+  "t": 72.5,
+  "aus": [
+   0.15,
+   0.0,
+   1.0,
+   0.85
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Schnappi-Kopf aus Karton mit Korken und roter Zunge, ohne Kind und ohne Hand"
+ },
+ "zw-schale-stellring-ton": {
+  "t": 7.0,
+  "aus": [
+   0.0,
+   0.08,
+   0.8,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Glasierte blaue Schale schräg von unten mit Stellring auf Holzboden, keine Hand, «enthält Werbung» weggeschnitten"
+ },
+ "zw-tulpenkarte-aquarell": {
+  "t": 591.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige Tulpenkarte neben Farbkasten und Becher, Pinsel-Hand und Föhn gerade weg; nur kleine Signatur auf der Karte"
+ },
+ "zw-traumfaenger-ton": {
+  "t": 163.0,
+  "aus": [
+   0.0,
+   0.12,
+   0.84,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Ton-Traumfänger (Blume des Lebens, Anhänger, Federn) auf Holztisch, Hände oben rechts und «Werbung» weggeschnitten"
+ },
+ "zw-kleines-ei-eindrueckform": {
+  "t": 55.0,
+  "aus": [
+   0.22,
+   0.58,
+   1.0,
+   0.8
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Zwei Tonei mit Drahtöse auf gelbem Noppenschaumstoff. Schwarzer Stoff (x<0.2) und Hand mit drittem Ei (y<0.55) liegen ausserhalb, im Probebild nichts davon zu sehen."
+ },
+ "zw-clown-hampelfigur-papier": {
+  "t": 224.0,
+  "aus": [
+   0.22,
+   0.12,
+   1.0,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiger Papier-Clown mit Fächerrock und Hexentreppen-Armen, Hände oben links/rechts und Stab weggeschnitten"
+ },
+ "zw-glasur-effektverstaerker": {
+  "t": 6.5,
+  "aus": [
+   0.2,
+   0.05,
+   0.86,
+   0.85
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Glasierte Schale mit blauem Verlauf auf Holzbrett, keine Hand, Werbe-Hinweis und Unschärferänder weggeschnitten"
+ },
+ "zw-sternteller-ton": {
+  "t": 41.0,
+  "aus": [
+   0.0,
+   0.44,
+   1.0,
+   0.76
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Weisser Sternteller mit Beeren-Malerei auf Holzbrett, keine Hand, beschrifteter blauer Teller weggeschnitten"
+ },
+ "zw-gartenstecker-ton": {
+  "t": 47.5,
+  "aus": [
+   0.348,
+   0.05,
+   0.652,
+   0.6
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Bemalte Ton-Sonnenblume im Garten, keine Hand; Hochformat-Streifen, darum stark vergrössert und etwas unscharf"
+ },
+ "zw-crictor-papierschlange": {
+  "t": 84.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Viele bemalte Papierschlangen auf schwarzem Grund, keine Kinder und keine Hände"
+ },
+ "zw-schale-staebchenablage-ton": {
+  "t": 5.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige Tonschale mit Essstäbchen auf Ränderscheibe vor Wand; Probe ohne Hand, nur Steckdose am Rand."
+ },
+ "zw-acrylic-pouring": {
+  "t": 42.5,
+  "aus": [
+   0.3,
+   0.3,
+   0.68,
+   0.75
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Ausschnitt ganz innerhalb des fertigen runden Fliessbilds: grün-braun-goldene Farbströme auf Weiss. Karton mit Webadresse, blauer Sack mit Schrift und verwischte Seitenbalken liegen ausserhalb."
+ },
+ "zw-hahn-nadelfilzen": {
+  "t": 0.1,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiger Filzhahn mit roten Schwanzfedern stehend auf Holztisch (Hochformat mit unscharfen Seiten); erst ab 0.5 s greifen Finger hinein, Probe sauber."
+ },
+ "ex-elektromotor": {
+  "t": 22.0,
+  "aus": [
+   0.28,
+   0.08,
+   0.73,
+   0.65
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Batterie mit drehender Kupferdrahtschleife auf Steinplatte; Probe ohne Hand, Hände nur vor 17 s."
+ },
+ "zw-insektentraenke-ton": {
+  "t": 108.0,
+  "aus": [
+   0.02,
+   0.08,
+   0.86,
+   0.92
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige blaue Tränke mit Prägemedaillons auf Gebüsch von oben; «Werbung»-Schild rechts oben weggeschnitten, keine Hand."
+ },
+ "zw-batik-murmeln": {
+  "t": 2.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige blaue Batik-Tasche mit Kreismustern flach auf Holztisch; Probe ohne Hand."
+ },
+ "zw-fische-metallpraegen": {
+  "t": 40.0,
+  "aus": [
+   0.0,
+   0.15,
+   1.0,
+   0.5
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Geprägter Metallfolienfisch auf bemaltem Holztisch mit Garnknäuel; Hände unten weggeschnitten, Probe sauber."
+ },
+ "zw-kiwi-untersetzer-filzen": {
+  "t": 183.0,
+  "aus": [
+   0.4,
+   0.15,
+   1.0,
+   0.95
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiger Kiwi-Filzuntersetzer auf Luftpolsterfolie; keine eingeblendete Schrift in diesem Moment, roter Pulli oben weggeschnitten."
+ },
+ "zw-teller-blaetter-ton": {
+  "t": 663.0,
+  "aus": [
+   0.05,
+   0.0,
+   0.95,
+   0.9
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertig glasierter Teller mit grün-blauem Blätterkranz auf Holzdeck, gross angeschnitten; Probe ohne Finger."
+ },
+ "zw-kreisel-wellkarton": {
+  "t": 178.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Kreisel aus Wellkarton mit rot-blau gestreiftem Deckel und Holzstab auf Weiss; keine Hand, keine Schrift."
+ },
+ "zw-mosaik-untersetzer": {
+  "t": 50.9,
+  "aus": [
+   0.02,
+   0.38,
+   0.84,
+   0.74
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Verfugtes Mosaik-Herz (Nahaufnahme) auf Blau; Ärmel rechts und «Werbung» oben weggeschnitten, Probe sauber."
+ },
+ "zw-kieselteller-ueberform": {
+  "t": 31.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Mehrere graue kieselförmige Tonteller auf Holzbrett; Band aus Hochformat ohne Hand und ohne «Werbung»."
+ },
+ "zw-plastikgarn-tueten": {
+  "t": 104.0,
+  "aus": [
+   0.25,
+   0.3,
+   0.95,
+   1.0
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Gefaltete, geschnittene Tütenstücke auf Tisch; zeigt nur Zwischenschritt, das gehäkelte Netz ist immer in Händen und die Tüten tragen Schrift."
+ },
+ "zw-gartenstele-ammonit": {
+  "t": 239.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Ganze Gartenstele mit Ammonit im Garten (Hochformat, unscharfe Seiten); keine Person, keine Schrift."
+ },
+ "zw-schriftzug-glasieren": {
+  "t": 56.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fünf fertige Kräuterstecker mit deutschem Schriftzug auf Holzbrett; Schrift ist das Werkstück selbst, keine Hand."
+ },
+ "zw-froebelstern-streifen": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Durchgehend Hände beim Flechten; fertiger Stern nur winzig im Abspann mit Schrift."
+ },
+ "zw-glocke-ton": {
+  "t": 47.0,
+  "aus": [
+   0.25,
+   0.36,
+   0.75,
+   0.86
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertig glasierte Tonglocke hängend über Holztisch; haltende Finger oben weggeschnitten, Probe sauber."
+ },
+ "zw-blumenstecker-granulat": {
+  "t": 51.5,
+  "aus": [
+   0.25,
+   0.0,
+   0.75,
+   0.5
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Drei Granulat-Blumen (blau, gelb, rot) vor Himmel; haltende Hand unten und «Werbung» weggeschnitten."
+ },
+ "zw-kerze-papierform": {
+  "t": 51.0,
+  "aus": [
+   0.0,
+   0.3,
+   0.76,
+   0.96
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Geometrische Kerzen pastellfarben auf Lila; BRIT+CO-Logo rechts unten weggeschnitten, keine Hand."
+ },
+ "zw-regenmacher": {
+  "t": 38.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Rot-gelb bemalte Kartonrolle aufrecht mit Folie oben (vor Endkappe) auf Papier; keine Hand im Bild."
+ },
+ "zw-karton-biegen-verstaerken": {
+  "t": 52.5,
+  "aus": [
+   0.19,
+   0.17,
+   0.89,
+   0.87
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Gerillter Kartonstreifen auf Graukarton; sonst fast immer Hände, fertige Kiste nur in Händen."
+ },
+ "zw-gartenwurm-ton": {
+  "t": 58,
+  "aus": [
+   0,
+   0.07,
+   1,
+   0.39
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Wurmkopf mit grünem Hut vor orangen Blumen; Hochformat, Werbung-Schriftzug oben rechts weggeschnitten, keine Hand im Bild"
+ },
+ "zw-blumenstecker-ton-margerite": {
+  "t": 510.5,
+  "aus": [
+   0.22,
+   0.27,
+   0.78,
+   0.83
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Zwei Tonblumen (ungebrannt) auf Schaumstoff; Finger am unteren Rand weggeschnitten"
+ },
+ "zw-kerze-klorolle": {
+  "t": 471,
+  "aus": [
+   0.5,
+   0.45,
+   1,
+   1
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige weisse Kerze auf dem Tisch mit Kartonresten; Pullover, Arm und zweite Kerze weggeschnitten"
+ },
+ "zw-zaunhocker-huhn-ton": {
+  "t": 6,
+  "aus": [
+   0.08,
+   0.13,
+   0.88,
+   0.93
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Glasiertes Huhn auf dem Zaun vor Thuja; Werbung-Hinweis weggeschnitten, keine Person"
+ },
+ "zw-kartenbuch-papierweben": {
+  "t": 186,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Offenes Kartenbuch mit gewebtem Herz und Muster auf grau; keine Hand, ohne englische Karte (t 223 gemieden)"
+ },
+ "ex-stromkreis-kupferband": {
+  "t": 96.5,
+  "aus": [
+   0.27,
+   0.17,
+   0.73,
+   0.6
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Oberer Teil des Kupferband-Stromkreises mit LED; Untertitel oben und Finger unten weggeschnitten, nur Ausschnitt des Kreises"
+ },
+ "zw-wichtel-holzring": {
+  "t": 57,
+  "aus": [
+   0.12,
+   0.0,
+   0.88,
+   0.68
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Wichtel mit roter Mütze und weissem Bart, leicht angeschnitten; Finger unten weggeschnitten"
+ },
+ "zw-qualle-ton": {
+  "t": 1,
+  "aus": [
+   0.28,
+   0.17,
+   0.72,
+   0.61
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Türkise Keramikqualle im Garten, Hochformat-Clip mittig; Werbung-Schriftzug weggeschnitten, keine Person"
+ },
+ "zw-raeucherhalter-hand-ton": {
+  "t": 0,
+  "aus": [
+   0,
+   0.38,
+   1,
+   0.7
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Glasierter Hamsa-Räucherhalter (Handform aus Ton, keine echte Hand) auf Holzbrett; Hochformat, keine Person"
+ },
+ "zw-memoscheibe-tshirt": {
+  "t": 96,
+  "aus": null,
+  "frei": true,
+  "schwach": false,
+  "notiz": "Fertige runde Memoscheibe mit rotem Faden auf grauem Grund, allein, keine Hand"
+ },
+ "ex-fallschirm": {
+  "t": 35,
+  "aus": [
+   0.25,
+   0.1,
+   0.75,
+   0.6
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Tyvek-Fallschirm ausgebreitet auf Holzboden, Hochformat-Clip mit unscharfen Seiten weggeschnitten; keine Person"
+ },
+ "zw-weihnachtsmann-holzring": {
+  "t": 1.5,
+  "aus": [
+   0,
+   0.23,
+   1,
+   0.55
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Weihnachtsmann aus Holzring: Mütze, Gesicht, Bartansatz; Hochformat, keine Hand"
+ },
+ "zw-stern-papiertueten": {
+  "t": 37,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Zwei weisse Papiertüten-Sterne auf Holztisch, keine Hand"
+ },
+ "zw-schlicker-herstellen": {
+  "t": 240,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Ammonit-Form und zwei Tonmuschelhälften auf der Werkbank, keine Hand (t 198 hatte Finger)"
+ },
+ "zw-sinterengobe-muster": {
+  "t": 54,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Stern mit schwarzer Engobe und türkiser Glasur auf Holz, Ränder weiterer Stücke sichtbar; keine Hand"
+ },
+ "zw-crossboccia-socken": {
+  "t": 164,
+  "aus": [
+   0.08,
+   0.05,
+   0.68,
+   0.65
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige Sockenbälle auf dem Tisch; Wasserzeichen und Hände weggeschnitten"
+ },
+ "zw-mischpalette-ton": {
+  "t": 310.5,
+  "aus": [
+   0.04,
+   0.1,
+   0.94,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Weisse Keramik-Mischpalette mit Pinsel neben Aquarellkasten auf Holz; Werbung-Hinweis weggeschnitten, keine Hand"
+ },
+ "zw-tonkugel-haekelmuster": {
+  "t": 626.0,
+  "aus": [
+   0.31,
+   0.08,
+   0.69,
+   0.58
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Tonkugel mit Häkel-Wabenmuster gross, oben/unten leicht angeschnitten; links unten nur weisses Häkelnetz. Schwarzer Hut/Stoff (x<0.3) und Hände (y>0.6) ausserhalb."
+ },
+ "zw-dreieck-saeckchen": {
+  "t": 138.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige Dreieck-Säckchen (rot und gemustert) auf weissem Tisch vor grauer Wand, keine Hand"
+ },
+ "zw-ammonit-toepfern": {
+  "t": 507.5,
+  "aus": [
+   0.2,
+   0.12,
+   0.8,
+   0.72
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Gartenstele mit Ton-Ammonit und Kugeln vor Wiese; mittiger Hochformat-Clip, unscharfe Seiten weggeschnitten, keine Person"
+ },
+ "zw-glasuren-kombinieren": {
+  "t": 8,
+  "aus": [
+   0,
+   0.12,
+   0.86,
+   0.98
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Nahaufnahme der blau-weissen Glasur im Tasseninneren; Werbung-Schriftzug weggeschnitten. Sonst hält immer eine Hand die Tasse, Tasse als Ganzes nicht erkennbar"
+ },
+ "zw-blattschale-monstera": {
+  "t": 0.5,
+  "aus": [
+   0.05,
+   0.08,
+   0.85,
+   0.98
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Grün glasierte Monstera-Blattschale allein auf Holzbrettern; Logo weggeschnitten, keine Hand im Bild"
+ },
+ "zw-lesezeichen-herz-falten": {
+  "t": 33.2,
+  "aus": [
+   0.12,
+   0.05,
+   0.78,
+   0.71
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Panda-Eckenlesezeichen, gelbes Monster, Papierherz, Eulenkopf; Hände nur weiter unten, oberer Ausschnitt sauber"
+ },
+ "zw-klappen-drehteile-karton": {
+  "t": 79.5,
+  "aus": [
+   0.17,
+   0.22,
+   0.77,
+   0.82
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Kartonklappe mit gelbem Stoffscharnier, Stück Klebebandabroller; Finger am linken Rand weggeschnitten; einfache Demo"
+ },
+ "zw-stoffmotte-perlen": {
+  "t": 205,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Vier fertige Stoffmotten auf Tablett mit Trockenblumen, niemand im Bild"
+ },
+ "zw-papiertueten-blume": {
+  "t": 46,
+  "aus": [
+   0.04,
+   0.0,
+   0.96,
+   0.92
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Zwei weisse Papiertüten-Margeriten; Hochformat mit unscharfen Seiten; dunkler Fleck am unteren Rand weggeschnitten"
+ },
+ "zw-hase-haekeln-kopf": {
+  "t": 1527.5,
+  "aus": [
+   0.0,
+   0.3,
+   0.68,
+   0.98
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Gestopfter Häkelkopf mit gesticktem Gesicht auf Marmor, liegt allein; links angeschnitten"
+ },
+ "zw-gespenst-wolle": {
+  "t": 66.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiges Wollgespenst hängt frei; Hochformat mit unscharfen Seiten, keine Hand"
+ },
+ "zw-glasur-abkleben": {
+  "t": 31,
+  "aus": [
+   0.06,
+   0.07,
+   0.93,
+   0.99
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Orange-weiss glasierte Schale auf Brettern, allein; Werbung-Logo weggeschnitten"
+ },
+ "zw-mohnkapsel-ton": {
+  "t": 52,
+  "aus": [
+   0.28,
+   0.0,
+   0.75,
+   0.47
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Ausschnitt mit zwei bis drei goldenen Ton-Mohnkapseln auf Holz; Hände unten und links weggeschnitten"
+ },
+ "zw-baum-toepfern": {
+  "t": 271,
+  "aus": [
+   0.0,
+   0.06,
+   0.88,
+   0.98
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "Glasierter Tonbaum allein auf dem Tisch, ruhiger Hintergrund, niemand im Bild"
+ },
+ "zw-makramee-feder-kamm": {
+  "t": 355,
+  "aus": [
+   0.24,
+   0.02,
+   0.9,
+   0.72
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Gekämmte Makramee-Feder auf gemustertem Stoff; Werkzeug und rechter Rand weggeschnitten, keine Hand"
+ },
+ "zw-gartenkugel-blaetter": {
+  "t": 2.5,
+  "aus": [
+   0.0,
+   0.2,
+   1.0,
+   0.56
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Gartenkugel mit Blattabdrücken und roten Steinen; Hochformat, Kugel füllt das Bild und ist leicht angeschnitten"
+ },
+ "zw-makramee-blatt": {
+  "t": 55.4,
+  "aus": [
+   0.16,
+   0.36,
+   1.0,
+   0.8
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Makramee-Blatt auf gemustertem Stoff, gross, oben und unten angeschnitten; Hochformat; Bügeleisen- und Handbilder gemieden"
+ },
+ "zw-haekeln-anfaenger": {
+  "t": 498,
+  "aus": [
+   0.3,
+   0.18,
+   0.92,
+   0.8
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Kleines Häkelmuster mit Häkelnadel auf grauem Tisch, keine Hand"
+ },
+ "zw-sonnenblume-weben": {
+  "t": 2.5,
+  "aus": [
+   0.0,
+   0.13,
+   1.0,
+   0.47
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Zwei gewebte Pappteller-Sonnenblumen (braun, blau); Hochformat; Hand unten weggeschnitten"
+ },
+ "zw-wichtel-stempel-folie": {
+  "t": 36,
+  "aus": [
+   0.0,
+   0.23,
+   1.0,
+   0.55
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Glasierte Ton-Wichtelanhänger, obere Reihe und Teil der nächsten; Hochformat, keine Hand"
+ },
+ "zw-popup-karte-tannenbaum": {
+  "t": 134,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Offene Pop-up-Karte mit Papiertannenbaum und grün gestreiftem Rand, niemand im Bild"
+ },
+ "zw-grosse-tonkugel-lebensbaum": {
+  "t": 1,
+  "aus": [
+   0.06,
+   0.1,
+   0.82,
+   0.96
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Grosse Tonkugel mit eingeritztem Lebensbaum; Steckdose an der Wand sichtbar, keine Hand"
+ },
+ "zw-drahtschmetterling-ast": {
+  "t": 250,
+  "aus": [
+   0.2,
+   0.22,
+   0.95,
+   0.97
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Draht-Schmetterling am Ast auf Holzbrett; Schriftfeld «Arbeitsschritte» oben links weggeschnitten, Hände nur in früheren Bildern"
+ },
+ "zw-libellenbecher-ton": {
+  "t": 117.7,
+  "aus": [
+   0.22,
+   0.25,
+   0.72,
+   0.95
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Rosa-blau glasierter Libellenbecher steht allein auf Holz vor blauer Wand; Hochformat mit unscharfen Seitenstreifen; Hand erst ab 117.9, Nachbarbilder geprüft"
+ },
+ "zw-schneemann-papierdraht": {
+  "t": 40.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Ganzer fertiger Schneemann am Holzspiess zwischen Pflanzenblättern, ganzes Bild (Seiten verwischt). Schneemann nur ca. 55 px breit, Zeitungstext darauf in 480x270 nicht lesbar. Keine Hand, kein Titel."
+ },
+ "zw-punktemuster-keramik": {
+  "t": 208.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Nahaufnahme Punktemandala auf dunkel glasierter Schale, keine Hand im Bild"
+ },
+ "zw-glasieren-grundlagen": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Hochformatvideo, in jedem Bild Hände (fertige Stücke werden gehalten), dazu Zeitungsschrift und Werbung-Hinweis"
+ },
+ "zw-grosses-ei-ton": {
+  "t": 473.5,
+  "aus": [
+   0.1,
+   0.15,
+   0.7,
+   0.75
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "Tonei allein auf dem Brett, niemand berührt es"
+ },
+ "zw-stern-toepfern": {
+  "t": 163.0,
+  "aus": [
+   0.47,
+   0.2,
+   0.93,
+   0.85
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Lederharter Hohlstern auf dem Tisch neben Schalenrand, Hand ausserhalb des Ausschnitts"
+ },
+ "zw-garnschale-ton": {
+  "t": 51.0,
+  "aus": [
+   0.18,
+   0.1,
+   0.84,
+   0.9
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "Fertige blaue Garnschale allein auf Holzdielen"
+ },
+ "zw-oktopus-haekeln": {
+  "t": 757.5,
+  "aus": [
+   0.15,
+   0.0,
+   0.75,
+   0.6
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Gehäkelter Oktopuskörper mit Fäden und Wollknäuel, Hand weggeschnitten"
+ },
+ "zw-nadelfilzen-schmetterling-form": {
+  "t": 719.0,
+  "aus": [
+   0.2,
+   0.2,
+   0.65,
+   0.85
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "Gefilzter Schmetterling allein auf weissem Tisch"
+ },
+ "zw-zaunhocker-fisch-ton": {
+  "t": 592.0,
+  "aus": [
+   0.15,
+   0.0,
+   0.97,
+   0.68
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Tonfisch auf Pfosten, Hand unten weggeschnitten, Vorhang im Hintergrund"
+ },
+ "zw-blubberglasur-schale": {
+  "t": 48.0,
+  "aus": [
+   0.24,
+   0.0,
+   0.76,
+   1.0
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Fertige Schale mit Nachos und Dip, Glasur kaum sichtbar; Ofenbilder hatten Finger"
+ },
+ "zw-teller-ueberform-ton": {
+  "t": 49.0,
+  "aus": [
+   0.15,
+   0.33,
+   0.85,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Teller mit Blattrand auf Holz, Hand oben und Werbung-Hinweis weggeschnitten, Teller oben leicht angeschnitten"
+ },
+ "zw-grosse-schuessel-ton": {
+  "t": 439.0,
+  "aus": [
+   0.12,
+   0.11,
+   0.92,
+   0.95
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Grosse ungebrannte Tonschüssel auf Ränderscheibe, Werbung-Hinweis weggeschnitten; glasierte Bilder alle mit Händen"
+ },
+ "zw-fliegenpilz-ton": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige Fliegenpilze nur mit Person oder Händen zu sehen"
+ },
+ "zw-tonblume-traenke": {
+  "t": 419.5,
+  "aus": [
+   0.1,
+   0.1,
+   0.95,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Rot-weisse Tonblumen im Gartenbeet, Werbung-Hinweis weggeschnitten, keine Hand"
+ },
+ "zw-wichtel-wolle": {
+  "t": 0.3,
+  "aus": [
+   0.15,
+   0.1,
+   0.85,
+   0.9
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Zwei hängende Wollwichtel, keine Hand, Ränder leicht unscharfe Seitenbalken"
+ },
+ "zw-kochloeffelablage-marmor": {
+  "t": 520.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Zwei marmorierte Löffelablagen auf Holz, keine Hand"
+ },
+ "zw-gipsmaske-fasnacht": {
+  "t": 54.0,
+  "aus": [
+   0.25,
+   0.0,
+   0.75,
+   1.0
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Bemalte Gipsmaske mit Federn, Hochformat mit unscharfen Seitenbalken, keine Hand"
+ },
+ "zw-wolf-aquarell-kreis": {
+  "t": 539.5,
+  "aus": [
+   0.29,
+   0.02,
+   0.91,
+   0.98
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiges Wolf-Aquarell im Kreis, Signatur weggeschnitten, keine Hand"
+ },
+ "zw-osterei-blueten-ton": {
+  "t": 4.5,
+  "aus": [
+   0.2,
+   0.0,
+   0.8,
+   0.7
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Toneier mit Blüten, leicht weich, Werbung-Hinweis weggeschnitten, keine Hand"
+ },
+ "zw-vogeltraenke-blatt": {
+  "t": 392.5,
+  "aus": null,
+  "frei": true,
+  "schwach": false,
+  "notiz": "Blattförmige Tränke allein auf Holztisch"
+ },
+ "zw-balancier-schmetterling": {
+  "t": 26.1,
+  "aus": [
+   0.1,
+   0.15,
+   0.9,
+   0.95
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Zwei Papierschmetterlinge, einer mit Streichholz und Münzen beklebt, Hände kurz weg (Probe sauber); fertiger Schmetterling nur auf dem Finger"
+ },
+ "zw-ammonitenbecher-ton": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Becher in allen Bildern in der Hand gehalten oder mit Händen glasiert, dazu Werbung-Hinweis"
  }
 }
