@@ -65,6 +65,69 @@
     {"text": "Klebe die Flügel mit dem Klebestift gleichmässig um die Rakete. Jetzt kannst du die Rakete bemalen oder ansprayen.", "bilder": ["rakete.webp"]}
    ],
    "fertig": "Bravo! Deine Rakete ist fertig. Ab auf die Startrampe!"
+  },
+  {
+   "id": "stifteetui-ungefuettert",
+   "title": "Stifteetui",
+   "areaId": "naehen",
+   "stufen": [5],
+   "niveau": 3,
+   "titelbild": "schieber.webp",
+   "material": ["stoff", "reissverschluss", "baumwollband", "schere", "bleistift", "klebeband", "stecknadeln", "naehmaschine", "garn"],
+   "steps": [
+    {"text": "Leg das Schnittmuster auf den Aussenstoff und zeichne rundherum nach. Schneide genau auf der Linie aus.", "bilder": ["schnittmuster.webp"],
+     "tipp": ["Das Schnittmuster bekommst du von der Lehrperson."]},
+    {"text": "Klebe doppelseitiges Klebeband an die zwei langen Seiten. Ganz an den Rand!", "bilder": ["klebeband.webp"]},
+    {"text": "Teile den Reissverschluss in zwei Hälften. Leg je eine Hälfte an eine lange Seite, schöne Seite auf schöne Seite. Stecke sie fest.", "bilder": ["anstecken.webp"],
+     "achtung": ["Der Reissverschluss liegt ganz am Rand."],
+     "tipp": ["Der Reissverschluss ist 3 cm länger als die lange Seite."]},
+    {"text": "Nähe beide Hälften mit dem Reissverschlussfuss an.", "bilder": ["annaehen.webp", "angenaeht.webp"],
+     "tipp": ["Geradstich, Stichlänge 2, Nadel links."],
+     "bildtext": ["", "Beide Hälften sind angenäht."]},
+    {"text": "Wende den Stoff vom Reissverschluss weg und streiche ihn glatt. Hefte ihn fest. Steppe dann ganz schmal am Rand ab.", "bilder": ["absteppen.webp"],
+     "tipp": ["Geradstich, Stichlänge 3, Nadel rechts. Der Nähfuss läuft ganz auf dem Stoff."]},
+    {"text": "Fädle den Schieber ein und schliess den Reissverschluss.", "bilder": ["schieber.webp"],
+     "zeigen": "Das Einfädeln machst du zusammen mit der Lehrperson."},
+    {"text": "Wende das Etui vorsichtig. Leg das gefaltete Baumwollband an einer Seite ein. Nähe die zwei Seitennähte, 1 cm tief.", "bilder": ["seitennaht-1.webp", "seitennaht-2.webp"],
+     "achtung": ["Der Reissverschluss bleibt zu!"],
+     "tipp": ["Geradstich, Stichlänge 3, Nadel links."]},
+    {"text": "Zieh jede Ecke auseinander, bis die Kanten aufeinander liegen. Stecke sie fest. Nähe 1 cm tief zu und zickzacke die Kante.", "bilder": ["ecken.webp"],
+     "achtung": ["Öffne zuerst den Reissverschluss! Sonst kannst du das Etui am Schluss nicht wenden."],
+     "tipp": ["Geradstich, Stichlänge 2, Nadel links."]}
+   ],
+   "fertig": "Wende dein Etui durch den Reissverschluss. Bravo! Dein Stifteetui ist fertig."
+  },
+  {
+   "id": "stifteetui-gefuettert",
+   "title": "Stifteetui gefüttert",
+   "areaId": "naehen",
+   "stufen": [5],
+   "niveau": 3,
+   "titelbild": "schieber.webp",
+   "material": ["stoff", "vlieseline", "reissverschluss", "baumwollband", "schere", "bleistift", "klebeband", "stecknadeln", "naehmaschine", "garn"],
+   "steps": [
+    {"text": "Leg das Schnittmuster auf den Stoff und zeichne nach. Schneide Aussenstoff, Innenstoff und Vlieseline je einmal aus.", "bilder": ["schnittmuster.webp", "teile.webp"],
+     "tipp": ["Das Schnittmuster bekommst du von der Lehrperson."],
+     "bildtext": ["", "Alle Teile mit dem Baumwollband"]},
+    {"text": "Klebe doppelseitiges Klebeband an die zwei langen Seiten vom Aussenstoff. Ganz an den Rand!", "bilder": ["klebeband.webp"]},
+    {"text": "Teile den Reissverschluss. Leg eine Hälfte auf den Aussenstoff. Darauf kommt der Innenstoff, zuoberst die Vlieseline. Stecke alles fest.", "bilder": ["lagen.webp"],
+     "achtung": ["Schöne Seite auf schöne Seite. Alles liegt ganz am Rand."],
+     "tipp": ["Der Reissverschluss ist 3 cm länger als die lange Seite."]},
+    {"text": "Nähe alle Lagen mit dem Reissverschlussfuss zusammen. Mach es auf der anderen langen Seite gleich.", "bilder": ["annaehen-1.webp", "annaehen-2.webp"],
+     "tipp": ["Geradstich, Stichlänge 2, Nadel links."]},
+    {"text": "Wende das Etui. Streiche den Stoff vom Reissverschluss weg und hefte ihn fest. Steppe ganz schmal am Rand ab.", "bilder": ["aussen.webp", "innen.webp"],
+     "tipp": ["Geradstich, Stichlänge 3, Nadel rechts. Der Nähfuss läuft ganz auf dem Stoff."],
+     "bildtext": ["Aussen", "Innen"]},
+    {"text": "Fädle den Schieber ein und schliess den Reissverschluss.", "bilder": ["schieber.webp"],
+     "zeigen": "Das Einfädeln machst du zusammen mit der Lehrperson."},
+    {"text": "Wende das Etui vorsichtig. Leg das gefaltete Baumwollband an einer Seite ein. Nähe die zwei Seitennähte, 1 cm tief.", "bilder": ["seitennaht-1.webp", "seitennaht-2.webp"],
+     "achtung": ["Der Reissverschluss bleibt zu!"],
+     "tipp": ["Geradstich, Stichlänge 3, Nadel links. Über den Reissverschluss nähst du langsam."]},
+    {"text": "Zieh jede Ecke auseinander, bis die Kanten aufeinander liegen. Stecke sie fest. Nähe 1 cm tief zu und zickzacke die Kante.", "bilder": ["ecken.webp"],
+     "achtung": ["Öffne zuerst den Reissverschluss! Sonst kannst du das Etui am Schluss nicht wenden."],
+     "tipp": ["Geradstich, Stichlänge 2, Nadel links."]}
+   ],
+   "fertig": "Wende dein Etui durch den Reissverschluss. Bravo! Dein gefüttertes Stifteetui ist fertig."
   }
  ]
 }

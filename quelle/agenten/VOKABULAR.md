@@ -132,5 +132,9 @@ Jedes Video bekommt `material: ["id", "id", …]`. Nur diese IDs verwenden (Spal
 | eierbecher | Eierbecher |  |
 | zuendholzschachtel | Zündholzschachtel | leer |
 | plastikloeffel | Plastiklöffel |  |
+| reissverschluss | Reissverschluss | teilbar, mit Schieber |
+| baumwollband | Baumwollband | Schlaufe, z. B. am Etui |
+| naehmaschine | Nähmaschine |  |
+| vlieseline | Vlieseline | Polster-Einlage, Verstärkung |
 
 Fehlt etwas Wichtiges, darf eine neue id ergänzt werden – dann bitte im Bericht nennen (id + Name).
