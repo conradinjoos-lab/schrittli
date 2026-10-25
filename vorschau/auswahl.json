@@ -1,0 +1,1915 @@
+{
+ "wl-fingerstricken": {
+  "t": 222.1,
+  "aus": [
+   0.17,
+   0.45,
+   0.67,
+   0.98
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "Orange Fingerstrick-Ring allein auf hellgrauer Fläche; Hände erst vor 221.8 und nach 222.4 s, Build wählt d=0."
+ },
+ "wl-kiludo-fingerstricken": {
+  "t": 218.0,
+  "aus": [
+   0.0,
+   0.1,
+   0.74,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Rote Fingerstrick-Kette auf weissem Tuch, ab 217.5 kein Wasserzeichen; Hand beginnt erst bei x≈0.82, also 8 % ausserhalb des Ausschnitts."
+ },
+ "wl-strickliesel": {
+  "t": 160.0,
+  "aus": [
+   0.14,
+   0.07,
+   0.8,
+   0.8
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Blaue Strickliesel-Schnur liegt als Ring mit Fadenenden auf dem Holztisch; das ganze Bild ist ohne Hand (kurz vor dem Schlusslogo)."
+ },
+ "wl-wickeldrache": {
+  "t": 60.0,
+  "aus": [
+   0.01,
+   0.08,
+   0.77,
+   0.84
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Grüner und roter fertiger Drache auf Holztisch; Tischkante, Tasche und Tuch rechts weggeschnitten, im ganzen Bild keine Hand."
+ },
+ "wl-armband-karton": {
+  "t": 239.5,
+  "aus": [
+   0.1,
+   0.1,
+   0.85,
+   0.85
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Zwei fertige geknüpfte Armbänder auf grauem Tisch, ohne Hände"
+ },
+ "wl-webrahmen-karton": {
+  "t": 91.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiges gestreiftes Webstück (rot/orange/grün) mit Fransen auf hellem Grund, Hochformat-Video"
+ },
+ "wl-vorstich": {
+  "t": 109.0,
+  "aus": [
+   0.25,
+   0.05,
+   0.85,
+   0.85
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Hellblauer Filzwal mit Vorstichen am Rand und Faden auf dunklem Tisch, ohne Hände"
+ },
+ "wl-zopf": {
+  "t": 62.0,
+  "aus": [
+   0.25,
+   0.05,
+   0.75,
+   0.65
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Geflochtener Zopf am Klebeband auf schwarzem Grund, Hände unten weggeschnitten; Zopf nur dünn im Bild"
+ },
+ "wl-flechten": {
+  "t": 97.5,
+  "aus": [
+   0.25,
+   0.0,
+   0.75,
+   0.78
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Dreifarbiger Zopf (grün/orange/schwarz) auf hellem Tisch, Logo und Beschriftungskärtchen weggeschnitten"
+ },
+ "wl-armband-zwei": {
+  "t": 4.5,
+  "aus": [
+   0.2,
+   0.0,
+   1.0,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Drei fertige Knüpfarmbänder um einen Holzast, ohne Hände"
+ },
+ "wl-fingerhaekeln": {
+  "t": 11.5,
+  "aus": [
+   0.0,
+   0.1,
+   0.9,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige fingergehäkelte Bänder links und rechts, Garnknäuel und Schere auf dunklem Grund, Logo weggeschnitten; Bänder recht dünn"
+ },
+ "ex-ballonrakete": {
+  "t": 68.0,
+  "aus": [
+   0.05,
+   0.1,
+   0.55,
+   0.9
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Gelber Ballon an der Schnur vor dem Start, Person rechts weggeschnitten"
+ },
+ "ex-brauserakete": {
+  "t": 126.0,
+  "aus": [
+   0.39,
+   0.53,
+   0.86,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Bunte Brausepulver-Rakete auf weissem Teller; Person endet bei x≈0.34, Krug rechts ausserhalb, keine Einblendung bei 126 s."
+ },
+ "ex-luft-wiegt": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Überall Personen im Bild, Ballone tragen wetteronline-Logo; reiner Material-Ausschnitt zeigt Ellbogen und ist zu klein."
+ },
+ "ex-hefeballon": {
+  "t": 112.5,
+  "aus": [
+   0.2,
+   0.0,
+   0.75,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Roter Ballon richtet sich auf der Flasche auf (Hefe-Gas), vor den eingeblendeten Pfeilen; Ballon noch klein, Logo weggeschnitten"
+ },
+ "ex-moos": {
+  "t": 19.0,
+  "aus": [
+   0.1,
+   0.0,
+   1.0,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Grünes Moos in Glasschale auf Holztisch, ohne Schrift"
+ },
+ "ex-pfeffer-salz": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": true,
+  "notiz": "Die Vorführenden sind immer im Bild; Nahaufnahmen zeigen nur einen unscharfen roten Streifen mit Körnern, dahinter Pullover oder Hand. Kein Bild ohne Menschen."
+ },
+ "ex-starke-eier": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": true,
+  "notiz": "Kein sauberes Bild: Bücher auf Eiern stehen immer direkt neben der Plüsch-Fernsehfigur und vor der Moderatorin; ein Ausschnitt ohne beide wäre nur ca. 0.2 breit. Nahaufnahmen zeigen die Puppe gross."
+ },
+ "ex-tag-nacht": {
+  "t": 58.0,
+  "aus": [
+   0.14,
+   0.26,
+   0.55,
+   0.67
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Beleuchtete Styroporkugel am Faden vor Schwarz; obere Hand endet bei y<0.27, untere beginnt bei y 0.70, aufgehellt geprüft: kein Arm in der Ecke."
+ },
+ "ex-wasserfilter": {
+  "t": 44.5,
+  "aus": [
+   0.27,
+   0.3,
+   0.83,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Von oben: Schmutzwasser fliesst aus dem Krug in den Flaschenfilter mit Kieseln. Die Fingernägel am oberen Rand (y<0.08) und das grüne Textfeld oben links liegen ausserhalb des Ausschnitts."
+ },
+ "ex-ballon-essig": {
+  "t": 34.0,
+  "aus": [
+   0.53,
+   0.1,
+   1.0,
+   0.57
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Aufgeblasener blauer Ballon auf Flaschenhals vor grüner Wand; Kreideformel links weggeschnitten. Keine Person im Video-Ausschnitt, ±0.4 s geprüft. Ballon am Rand, Bildaufbau schwach."
+ },
+ "ex-magnet": {
+  "t": 76.5,
+  "aus": [
+   0.36,
+   0.08,
+   0.98,
+   0.8
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Tisch von oben: blaue Kugel rollt auf ruhig liegende, scharfe bunte Büroklammern zu, Glasnuggets am Rand. Keine Hand (Hand bei 75.0 weg). Die späteren Bilder mit Klammern an der Kugel sind alle bewegungsunscharf; einen Magneten sieht man nirgends, darum schwach."
+ },
+ "kat-papierschiff": {
+  "t": 152.0,
+  "aus": [
+   0.3,
+   0.18,
+   0.72,
+   0.62
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "fertiges Papierschiff flach auf gelbem Grund von oben; Daumen links/rechts knapp am Rand, beim Freistellen weg"
+ },
+ "kat-papierflieger": {
+  "t": 138.5,
+  "aus": [
+   0.36,
+   0.1,
+   1.0,
+   0.7
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Hintere Hälfte des fertigen blauen Papierfliegers vor hellem Grund. Die haltende Hand beginnt erst bei y≈0.77, unterhalb des Ausschnitts."
+ },
+ "kat-frosch": {
+  "t": 314.0,
+  "aus": [
+   0.3,
+   0.02,
+   0.85,
+   0.51
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "fertiger Papierfrosch auf Seerosenblatt, blauer Grund; Kanal-Schriftzug und Hand unten weggeschnitten"
+ },
+ "srf-geist": {
+  "t": 228.0,
+  "aus": [
+   0.335,
+   0.0,
+   0.69,
+   0.48
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Geisterkopf auf schwarzem Karton (Haarbüschel, Augen, Arme); Haare links (x<0.32) und Fingerspitzen unten rechts (y>=0.54) liegen ausserhalb, keine Schachtelschrift. Prüfung: unscharfe Fläche rechts → Ausschnitt enger."
+ },
+ "zw-luftmaschen": {
+  "t": null,
+  "aus": [
+   0.42,
+   0.1,
+   0.92,
+   0.6
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Kein Bild: in allen Bildern mit Luftmaschen sind Hände."
+ },
+ "zw-rueckstich": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Daumen liegt immer direkt neben der kurzen Stichlinie; ohne Daumen bleibt nur weisser Stoffstreifen."
+ },
+ "zw-kordel": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": true,
+  "notiz": "Die Person (Shirt, Hände) ist immer im Bild; der Faden an der Türklinke ist zu dünn, um das Thema zu zeigen."
+ },
+ "zw-steppstich": {
+  "t": 100.3,
+  "aus": [
+   0.05,
+   0.11,
+   0.8,
+   0.87
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Filzbär mit weiss abgestepptem Bauch füllt das Bild; keine Hand, feine Schrift rechts (x>=0.82) weggeschnitten."
+ },
+ "zw-fadenbild": {
+  "t": 88.0,
+  "aus": [
+   0.42,
+   0.12,
+   1.0,
+   0.8
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Fertiges rosa Herz auf Holzbrett; Ausschnitt rechts vom Textfeld (Koordinaten nach Randentfernung)."
+ },
+ "zw-maschenanschlag": {
+  "t": 154.0,
+  "aus": [
+   0.2,
+   0.25,
+   0.77,
+   0.85
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "angeschlagene Maschen auf Stricknadel auf Holztisch, Hand rechts weggeschnitten; Maschen eher klein"
+ },
+ "zw-himmel-hoelle": {
+  "t": 106.0,
+  "aus": [
+   0.14,
+   0.25,
+   0.64,
+   0.85
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "fertiges grünes Himmel-und-Hölle allein auf schwarzem Grund; Webadresse oben weggeschnitten"
+ },
+ "zw-abketten": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Hände durchgehend im Bild, auch am Schluss."
+ },
+ "zw-filzkugel-kinder": {
+  "t": 101.0,
+  "aus": [
+   0.05,
+   0.0,
+   0.65,
+   0.65
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "fertige pinke Filzkugel allein auf grauem Steinboden, leicht unscharf"
+ },
+ "zw-filzkugeln": {
+  "t": 144.9,
+  "aus": [
+   0.14,
+   0.13,
+   0.545,
+   0.535
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Reihen Filzkugeln auf Spiessen auf rotem Tupfentuch mit Teesieben; Handtuch (x>0.65), Etikett/Packung und Arm (y>0.7) ausgeschnitten. Etwas weich."
+ },
+ "zw-feste-maschen-kurz": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": true,
+  "notiz": "Finger und Daumen liegen immer eng um das Häkelstück; ein Ausschnitt ohne Finger wäre schmaler als 0.45 oder zeigte noch Fingerränder. Am Schluss Abo-Schrift."
+ },
+ "zw-schleife": {
+  "t": 55.5,
+  "aus": [
+   0.16,
+   0.0,
+   0.82,
+   0.78
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Schwarzer Schuh mit gebundener weisser Schleife auf gepunktetem Tuch; Hände haben das Bild verlassen, rechter und unterer Rand bewusst knapp gehalten (Finger lag im Hi-Res-Bild unten rechts in der Ecke)."
+ },
+ "zw-maschen-aufnehmen": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Maschen auf der Nadel immer neben einer Hand; handfreier Ausschnitt zu schmal."
+ },
+ "zw-nagelbild": {
+  "t": 219.5,
+  "aus": [
+   0.27,
+   0.32,
+   0.77,
+   0.95
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "fertiges Nagelbild Hase auf Brett, ohne Hände; Schild «Arbeitsschritte» weggeschnitten"
+ },
+ "zw-schlingstich": {
+  "t": 2.5,
+  "aus": [
+   0.42,
+   0.0,
+   0.97,
+   0.62
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "fertiger gefüllter Filzelefant mit Schlingstichrand allein auf schwarzem Grund"
+ },
+ "zw-pompon": {
+  "t": 147.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Drei fertige Pompons (blau/türkis, bunt, rot) mit Aufhänger auf hellem Grund"
+ },
+ "zw-feste-maschen": {
+  "t": 272.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "fertiges blaues Häkelquadrat mit Häkelnadel auf weissem Marmor, ohne Hände"
+ },
+ "zw-fangbecher": {
+  "t": 52.0,
+  "aus": [
+   0.1,
+   0.02,
+   0.92,
+   0.98
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Gefalteter Fangbecher liegt flach mit Faden und Perle auf blauem Grund. Das ganze Bild ist leer von Händen (Schere schon weg, Hände kommen erst bei 52.5)."
+ },
+ "zw-ueberwendling": {
+  "t": 120.0,
+  "aus": [
+   0.25,
+   0.25,
+   0.78,
+   0.9
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Filzbär mit Überwendlingsstich am Rand auf schwarzem Grund, ohne Hände; Faden rechts"
+ },
+ "zw-daumenschale": {
+  "t": 105.0,
+  "aus": null,
+  "frei": true,
+  "schwach": false,
+  "notiz": "Fertige Daumenschale aus hellem Ton auf grauem Grund"
+ },
+ "zw-tonwulst-vase": {
+  "t": 245.0,
+  "aus": [
+   0.34,
+   0.1,
+   0.8,
+   0.7
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Zwei Tonwulst-Gefässe auf dem Brett ohne Hände; unscharfe Hände oben links/rechts in den Ecken und Untertitel unten liegen ausserhalb (16:9 y≈0.17–0.63)."
+ },
+ "zw-salzteig-herz": {
+  "t": 109.0,
+  "aus": [
+   0.0,
+   0.12,
+   0.9,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Salzteig-Herz mit gepressten Blumen, Ast und Blüten auf weissem Grund, SWR-Logo weggeschnitten"
+ },
+ "zw-kartoffeldruck": {
+  "t": 117.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Stoff mit gedruckten Hunden und Herzen, ohne Hand und ohne Bauchbinde"
+ },
+ "zw-kartoffeldruck-kacheln": {
+  "t": 75.0,
+  "aus": [
+   0.0,
+   0.08,
+   0.85,
+   0.8
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Geschenk in blauem Kachel-Druckpapier mit roter Schleife, Musik-Einblendung unten rechts weggeschnitten"
+ },
+ "zw-moosgummi-stempel": {
+  "t": 128.5,
+  "aus": [
+   0.12,
+   0.12,
+   0.84,
+   0.84
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Anker-Abdruck und Anker-Stempel nebeneinander, Logo weggeschnitten"
+ },
+ "zw-polystyroldruck": {
+  "t": 145.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "fertiger Druck: weisses Auto auf rot-blauem Grund"
+ },
+ "zw-papierweben": {
+  "t": 197.0,
+  "aus": [
+   0.0,
+   0.0,
+   1.0,
+   0.78
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "gelbe Kettstreifen mit ersten rosa eingewebten Reihen; nur angefangen, Untertitel unten weggeschnitten"
+ },
+ "zw-webrahmen-karton": {
+  "t": 68.0,
+  "aus": [
+   0.25,
+   0.33,
+   0.92,
+   1.0
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "fertiges gewebtes Stück blau/oliv gestreift, «Geschafft»-Schrift weggeschnitten"
+ },
+ "zw-lama-weben": {
+  "t": 42.5,
+  "aus": [
+   0.23,
+   0.29,
+   0.81,
+   0.88
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "Gewobenes Karton-Lama (rot/orange/gelb, Perlen) allein auf grauem Tisch; 41–43.5 s ganz ohne Hand, ±0.4 s geprüft."
+ },
+ "zw-laubsaege-erste-schnitte": {
+  "t": 89.5,
+  "aus": [
+   0.08,
+   0.2,
+   0.64,
+   0.76
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Nahaufnahme: Sägeblatt in der Schnittkurve auf dem Vorlagebrett. Der Daumen oben (y<0.11) und die Sprechblase unten rechts (y>0.8) liegen ausserhalb des Ausschnitts. Bild etwas unscharf."
+ },
+ "zw-saegen": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": true,
+  "notiz": "Kein sauberes Bild: Totalen zeigen immer den Mann, alle Nahaufnahmen von Schraubstock/Holz haben seine dunkle Kleidung oder Hand im Hintergrund, Anfang/Ende sind Logotafeln."
+ },
+ "zw-kreuzanschlag": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Maschen werden immer von Fingern gehalten."
+ },
+ "zw-rechte-masche": {
+  "t": 30.0,
+  "aus": [
+   0.25,
+   0.22,
+   1.0,
+   0.97
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Türkiser Wollfaden und Gestrick auf der Holznadel rechts, Ecke des Knäuels oben links. Fingerspitzen am linken Rand liegen bei x<0.07 (und oben links y<0.1); 16:9 = x 0.25-1.0, y 0.22-0.97, also deutlich ausserhalb. Ruhiges Bild (30.5 fast gleich)."
+ },
+ "zw-eulen-kartoffelstempel": {
+  "t": 52.0,
+  "aus": [
+   0.08,
+   0.15,
+   0.88,
+   0.95
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "fertiges Bild: vier gestempelte Eulen auf braunem Ast, grünes Papier"
+ },
+ "zw-frottage-buchstaben": {
+  "t": 54.8,
+  "aus": [
+   0.0,
+   0.0,
+   1.0,
+   0.94
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige Bleistift-Frottage, das Wort FROTTAGE ist das Werk selbst; kein Stift, keine Hand, Schlusstext erst ab 55.4 s."
+ },
+ "zw-blumenwiese-monotypie": {
+  "t": 123.5,
+  "aus": [
+   0.17,
+   0.35,
+   0.83,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "fertiger Monotypie-Druck Blumenwiese rot/blau/gelb, ohne Hände"
+ },
+ "zw-blaetterdruck": {
+  "t": 58.5,
+  "aus": [
+   0.1,
+   0.05,
+   0.9,
+   0.95
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Blätterdrucke am Fenster aufgehängt, Karte und Herbstlaub auf dem Sims"
+ },
+ "zw-blaetterdruck-anhaenger": {
+  "t": 33.5,
+  "aus": [
+   0.05,
+   0.0,
+   0.85,
+   0.78
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Geschenk mit Blatt-Anhänger und gedruckten Blättern, Schrift unten weggeschnitten"
+ },
+ "zw-papier-becher": {
+  "t": 0.0,
+  "aus": [
+   0.12,
+   0.22,
+   0.84,
+   0.98
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Nur gelbes Faltpapier-Quadrat auf schwarzem Tisch (Material); der Becher wird immer gehalten. URL oben links (y<0.2) ausserhalb, Hände erst ab 0.5 s."
+ },
+ "zw-origami-katze": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Katzenkopf wird immer gehalten; Ausschnitt über den Händen schneidet durch die Augen."
+ },
+ "zw-origami-hund": {
+  "t": 101.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "zwei fertige Origami-Hundeköpfe hellblau und rosa auf Holztisch"
+ },
+ "zw-melonenfaecher": {
+  "t": 54.5,
+  "aus": [
+   0.4,
+   0.1,
+   1.0,
+   0.72
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "fertiger Melonenfächer mit Holzstielen, Senderlogo und Textbalken weggeschnitten"
+ },
+ "zw-filzseife": {
+  "t": 92.5,
+  "aus": null,
+  "frei": true,
+  "schwach": false,
+  "notiz": "fertig umfilzte Seife weiss mit orangen und blauen Streifen auf grünem Grund"
+ },
+ "zw-osternest": {
+  "t": 152.5,
+  "aus": [
+   0.19,
+   0.0,
+   0.85,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "pinkes Filznest mit Filzhasen auf Holzbrett, Logo weggeschnitten"
+ },
+ "zw-eierwaermer-filzen": {
+  "t": 121.5,
+  "aus": [
+   0.0,
+   0.17,
+   0.62,
+   0.79
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Zwei fertige Filzhüte (blaugrün, violett mit Tupfen); braunes Unschärfe-Objekt oben rechts und Untertitelbalken (y>=0.85) ausgeschlossen, keine Hand im Bild."
+ },
+ "zw-zauberstein": {
+  "t": 270.0,
+  "aus": [
+   0.15,
+   0.1,
+   0.75,
+   0.82
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "mehrere aufgeschnittene Filz-Zaubersteine auf schwarzer Matte, Webadresse weggeschnitten"
+ },
+ "zw-ton-regeln": {
+  "t": 31.0,
+  "aus": [
+   0.14,
+   0.1,
+   0.74,
+   0.9
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "Tonklumpen liegt allein auf weissem Tisch; das ganze Bild ist ohne Hände und ohne Schrift."
+ },
+ "zw-kleister-pappmache": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": true,
+  "notiz": "Kein sauberes Bild: Kleisterschüssel liegt immer auf Zeitungspapier mit Schrift, dazu Hände und Untertitel; Materialbild und Zwischentitel sind beschriftet, fertige Figuren werden in der Hand gehalten."
+ },
+ "zw-ton-schildkroete": {
+  "t": 80.5,
+  "aus": [
+   0.0,
+   0.4,
+   1.0,
+   0.72
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "glasierte Ton-Schildkröte im Garten (Hochformat, Panzer und Kopf), Like-Knopf weggeschnitten"
+ },
+ "zw-fadenring": {
+  "t": 2.3,
+  "aus": [
+   0.3,
+   0.0,
+   0.97,
+   0.66
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Gehäkelte Granny-Quadrate und weisser Faden auf Lila; Hobbii-Logo und Garnetiketten weggeschnitten. Bild mit Logo (1.9) und Hand (2.5/2.7) fallen in der Auswahl raus (geprüft). Zeigt Häkelquadrate statt Fadenring selbst."
+ },
+ "zw-fadenring-linkshaender": {
+  "t": 2.0,
+  "aus": [
+   0.0,
+   0.04,
+   0.8,
+   0.84
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Material: Granny Squares, weisser Faden und Schere auf violettem Grund. Im ganzen Bild keine Hand; die Garn-Banderolen mit Schrift rechts (x>0.85) sind weggeschnitten."
+ },
+ "zw-luftmaschen-linkshaender": {
+  "t": 13.0,
+  "aus": [
+   0.3,
+   0.0,
+   1.0,
+   0.7
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Grüne Häkelnadel und roter Wollknäuel mit Faden auf hellem Holztisch (Material); 9–13 s ganz ohne Hand, die Hand kommt danach nur unten links (x<0.1) ins Bild."
+ },
+ "zw-feilen-teelichthalter": {
+  "t": 1.1,
+  "aus": [
+   0.18,
+   0.0,
+   0.7,
+   0.52
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Zwei fertig gefeilte Holz-Teelichthalter; Hände liegen erst ab y 0.62, also ausserhalb."
+ },
+ "zw-holzauto": {
+  "t": 120.5,
+  "aus": [
+   0.25,
+   0.3,
+   0.85,
+   0.95
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiges Holzauto liegt auf der Werkbank, Schraubstock im Hintergrund, keine Hände"
+ },
+ "zw-igel-holz": {
+  "t": 133.0,
+  "aus": [
+   0.12,
+   0.0,
+   0.88,
+   0.85
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiger Holzigel mit Nagelstacheln und Kugelnase liegt auf der Werkbank, Nahaufnahme ohne Hände"
+ },
+ "zw-schiebeknoten": {
+  "t": 1.0,
+  "aus": [
+   0.06,
+   0.12,
+   1.0,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiges orange-weisses Freundschaftsband liegt allein auf hellem Tisch, dahinter unscharf Schere und Garnrolle; Anfangsbild 0–5 s ganz ohne Hände und ohne Einblendung."
+ },
+ "zw-scoubidou-rund": {
+  "t": 3.0,
+  "aus": [
+   0.18,
+   0.1,
+   1.0,
+   0.92
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "Fertiges oranges rundes Scoubidou liegt allein auf hellblauem Stoff"
+ },
+ "zw-fadenspiel-stern": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fadenfigur hängt in jedem Bild zwischen den Händen, Person dahinter; sonst nur Titel/Logo."
+ },
+ "zw-brezelknoten": {
+  "t": 14.5,
+  "aus": [
+   0.2,
+   0.08,
+   0.76,
+   0.64
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Schwarze Schnur mit fertigem Brezelknoten auf grauem Grund, Untertitel und Logo weggeschnitten"
+ },
+ "zw-fadenspiel-maus": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": true,
+  "notiz": "Die Fadenfigur gibt es nur an der Hand, das Gesicht ist im Bild. Kein Bild ohne Menschen."
+ },
+ "zw-knopf-annaehen": {
+  "t": 126.0,
+  "aus": [
+   0.4,
+   0.46,
+   0.82,
+   0.92
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Hellblauer Knopf mit rotem Faden mittig auf blauem Stoff; Hand oben links (y<0.35, x<0.42) weit ausserhalb des Ausschnitts. Prüfung: heller Fleck oben links → Ausschnitt enger."
+ },
+ "zw-nadel-einfaedeln": {
+  "t": 0.5,
+  "aus": [
+   0.55,
+   0.3,
+   1.0,
+   0.75
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Nur die Nähnadel auf grauem Grund; Hand mit Faden reicht höchstens bis x≈0.47, Untertitel ab y≈0.78 und Logo oben rechts (y<0.1) liegen ausserhalb."
+ },
+ "zw-anfangsknoten": {
+  "t": 191.0,
+  "aus": [
+   0.28,
+   0.26,
+   0.93,
+   0.91
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Roter Faden mit Nadel und Knoten allein auf Holz am Schluss; Schrift «Viel Erfolg…» endet bei y≈0.21, Ausschnitt beginnt bei 0.26. Hände erst vor 190 s, ±0.4 s geprüft."
+ },
+ "zw-filzmaeppchen": {
+  "t": 28.5,
+  "aus": [
+   0.12,
+   0.0,
+   1.0,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiges weisses Filzmäppchen ausgebreitet mit Farbstiften im Gummiband, keine Hände"
+ },
+ "zw-blaetter-tiere": {
+  "t": 45.5,
+  "aus": [
+   0.04,
+   0.1,
+   0.94,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiges Blätterbild (Vogel, Igel, Fisch) auf violettem Papier, daneben Herbstblätter und Malkasten. Keine Hand im Bild."
+ },
+ "zw-schneeflocke": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige Schneeflocke immer mit Wasserzeichen «Channel: Sterne basteln» mitten darüber und Händen daneben; danach leerer Hintergrund."
+ },
+ "zw-blaetterente": {
+  "t": 58.0,
+  "aus": [
+   0.45,
+   0.36,
+   1.0,
+   0.92
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Blätterente mit orangem Schnabel schwimmt im Teich; keine Person im Bild, rötliches Laub unten links weggeschnitten."
+ },
+ "zw-scherenschnitt-blume": {
+  "t": 44.0,
+  "aus": null,
+  "frei": true,
+  "schwach": false,
+  "notiz": "Fertige rosa Scherenschnitt-Blume liegt allein auf Korkgrund"
+ },
+ "zw-tischlaterne": {
+  "t": 120.0,
+  "aus": [
+   0.0,
+   0.0,
+   0.64,
+   0.75
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige gefaltete Tischlaterne mit Teelicht im Glas auf Holztisch, Abspann-Schrift rechts weggeschnitten, unterer Teil abgeschnitten"
+ },
+ "zw-menschenkette": {
+  "t": 33.5,
+  "aus": [
+   0.2,
+   0.5,
+   0.95,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige grüne Papier-Menschenkette liegt auf weissem Tisch, Hände oben weggeschnitten"
+ },
+ "zw-stoecke-schnitzen-1": {
+  "t": 44.5,
+  "aus": [
+   0.42,
+   0.38,
+   1.0,
+   0.96
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Haselstamm mit frischer Sägestelle im Grün; Person steht links (x<0.32) ausserhalb. Kein fertiges Werkstück, daher schwach."
+ },
+ "zw-zauberstab": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": true,
+  "notiz": "Der Mann ist immer im Bild; kein Bild des Stabs ohne Person."
+ },
+ "zw-eule-schnitzen": {
+  "t": 2.0,
+  "aus": null,
+  "frei": false,
+  "schwach": true,
+  "notiz": "Geschnitzte Ast-Eule steht auf Holzstamm vor unscharfem Gras, Anfangsbild 0–4 s ohne Person; Kopf oben leicht angeschnitten, darum schwach (sonst nur in der Hand)."
+ },
+ "zw-schnitzregeln": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Durchgehend Jugendliche, Untertitel und Kreuz/Haken-Symbole; einziges Messer allein auf Bank liegt neben Bein, Ausschnitt zu klein."
+ },
+ "zw-stock-spitzen": {
+  "t": 48.0,
+  "aus": [
+   0.3,
+   0.0,
+   1.0,
+   0.85
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Zwei gespitzte Stöcke im Gras mit Spänen; Video unscharf, Hand unten rechts am Rand"
+ },
+ "zw-wassermuehle": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": true,
+  "notiz": "Die Mühle wird immer an den Achsenden von Händen gehalten oder vor dem Pullover gezeigt; der Mittelteil ohne Hände wäre zu schmal."
+ },
+ "zw-astdose": {
+  "t": 25.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige Astdose mit Deckel daneben, Holzlöffel, Ast und Taschenmesser auf dem Tisch; 24.5–25.5 s ohne Hand (Hände bei 24 und 26 s), keine Schrift."
+ },
+ "zw-knoetchenstich": {
+  "t": 143.5,
+  "aus": [
+   0.1,
+   0.15,
+   0.85,
+   0.9
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Bisherige Wahl bleibt: neun blaue Knötchenstiche auf hellem Stoff; das angewendete Bild zeigt keine Hand, das Logo ist weggeschnitten."
+ },
+ "zw-stielstich": {
+  "t": 164.5,
+  "aus": [
+   0.0,
+   0.2,
+   0.47,
+   0.78
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Linke Bildhälfte: zwei blaue Stielstich-Linien auf Stoff; Schrift und rechte Hälfte weggeschnitten"
+ },
+ "zw-kreuzstich": {
+  "t": 72.0,
+  "aus": [
+   0.15,
+   0.2,
+   0.85,
+   0.9
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Reihe grüner Kreuzstiche auf Stickstoff, ohne Hände"
+ },
+ "zw-kettenstich": {
+  "t": 45.0,
+  "aus": [
+   0.25,
+   0.2,
+   0.85,
+   0.86
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Grüne Kettenstich-Reihe auf Stickstoff, Daumen unten links weggeschnitten"
+ },
+ "zw-langettenstich": {
+  "t": 35.5,
+  "aus": [
+   0.15,
+   0.15,
+   0.85,
+   0.85
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Zwei Reihen grüner Langettenstiche auf Stickstoff, ohne Hände"
+ },
+ "zw-strickgabel-schnur": {
+  "t": 97.0,
+  "aus": [
+   0.1,
+   0.18,
+   0.9,
+   1.0
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Strickgabel mit angefangener Schnur und Wollknäuel auf dunklem Grund; Schnur erst kurz, Webadresse oben weggeschnitten"
+ },
+ "zw-fingerstricken-offen": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Immer Hand mit Schlaufen im Bild; Materialbild am Anfang hat Titel und Hand am Rand, Ausschnitt zu schmal."
+ },
+ "zw-linke-masche": {
+  "t": 179.5,
+  "aus": [
+   0.48,
+   0.42,
+   1.0,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Türkisfarbene Maschen auf der Holznadel in Nahaufnahme. Die Hand oben links (Fingerspitze x≈0.57, y<0.35) und der Finger unten links (x<0.33) liegen ausserhalb des Ausschnitts; im Bild geprüft."
+ },
+ "zw-webschiffchen-umwickeln": {
+  "t": 72.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertig umwickeltes Webschiffchen mit Wollfaden und Knäuel auf weissem Grund"
+ },
+ "zw-zeitungskorb": {
+  "t": null,
+  "aus": [
+   0.0,
+   0.1,
+   0.8,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Kein Bild: nach zwei Neuwahlen noch Schrift bzw. unklar, ob getragene Kleidung."
+ },
+ "zw-pappteller-weben": {
+  "t": 64.0,
+  "aus": [
+   0.1,
+   0.0,
+   0.6,
+   0.5
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Pappteller-Scheibe mit Kettfäden, rosa Faden in der Mitte; Weben kaum begonnen, Video zeigt kein fertiges Stück"
+ },
+ "zw-traumfaenger-pappteller": {
+  "t": 95.5,
+  "aus": [
+   0.21,
+   0.0,
+   1.0,
+   0.79
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige Traumfänger hängen vor violetter Wand mit Federn; Betzold-Logo links oben weggeschnitten, linker Traumfänger angeschnitten"
+ },
+ "zw-quaste": {
+  "t": 88.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Blaue Quasten am Schlüsselbund und einzeln, Ohrringe, auf weissem Grund"
+ },
+ "zw-pompon-gabel": {
+  "t": 3.0,
+  "aus": [
+   0.1,
+   0.1,
+   0.85,
+   0.85
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiger hellblauer Pompon, Wollknäuel, zwei Gabeln und Schere auf dem Tisch; 3–3.5 s ohne Hände (Titelblatt davor, Hände erst ab 4 s unten), keine Schrift."
+ },
+ "zw-wollgespenst": {
+  "t": 77.5,
+  "aus": [
+   0.06,
+   0.22,
+   0.94,
+   0.74
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Drei Wollgespenster mit Wackelaugen auf Holz (quadratisches Video); gestrichelter Rahmen weggeschnitten, Aufhängeschlaufen angeschnitten"
+ },
+ "zw-windrad-falten": {
+  "t": 119.5,
+  "aus": [
+   0.06,
+   0.22,
+   0.84,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Rosa und blaues Windrad am Holzstab auf dunklem Grund, Webadresse weggeschnitten"
+ },
+ "zw-paracord-schluesselanhaenger": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiger Anhänger nur in Händen; handfreie Bilder zeigen nur Stoppuhr-Handy, Titel oder Logo."
+ },
+ "zw-paracord-fischgraet": {
+  "t": 353.75,
+  "aus": [
+   0.26,
+   0.04,
+   0.72,
+   0.5
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Langes gelb-blaues Fischgrät-Geflecht senkrecht am Clip unter Folie; Hand nur unten links (x<0.15, y>0.7) und rechts erst ab x≈0.77, beides ausserhalb."
+ },
+ "zw-paracord-armband": {
+  "t": 2.5,
+  "aus": [
+   0.2,
+   0.05,
+   0.66,
+   0.75
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Fast fertiges blau-graues Armband mit Schnalle auf Holzbrett; Hand rechts weggeschnitten, Schnurenden sichtbar, Ausschnitt eher klein"
+ },
+ "zw-paracord-karabiner": {
+  "t": 366.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Drei fertige Paracord-Anhänger mit Karabiner und Ring auf hellem Grund"
+ },
+ "zw-survival-armband": {
+  "t": 279.0,
+  "aus": [
+   0.1,
+   0.1,
+   0.9,
+   0.98
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "Zwei verbundene Paracord-Armbänder, freigestellt geprüft (sauber, Kistenschrift verschwindet); keine Hand, Kerzenflamme (255-259 s) gemieden."
+ },
+ "zw-affenfaust": {
+  "t": 410.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Mehrere fertige Affenfaust-Anhänger in verschiedenen Farben auf hellem Grund"
+ },
+ "zw-affenfaust-kordel": {
+  "t": 253.5,
+  "aus": [
+   0.3,
+   0.0,
+   0.9,
+   0.6
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "Fertige graue Affenfaust-Kugel aus Kordel auf rosa Grund, vor der Dankeschön-Schrift"
+ },
+ "zw-paracord-armband-einfach": {
+  "t": 470.0,
+  "aus": [
+   0.455,
+   0.12,
+   0.925,
+   0.72
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiges gelb-braunes Paracord-Armband mit Schere und Schnallen; Feuerzeug (x<0.44) weggeschnitten, keine Hand, Build wählt d=0."
+ },
+ "zw-scoubidou-eckig": {
+  "t": 238.0,
+  "aus": [
+   0.2,
+   0.25,
+   0.9,
+   0.95
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Eckig geflochtener Scoubidou mit Schnurenden auf hellgrauem Tuch"
+ },
+ "zw-freundschaftsband-kartonscheibe": {
+  "t": 167.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Mehrere fertige Bänder auf Holztisch, Garnknäuel hinten; zwischen den Schriften «Viel Spass!» und «Im nächsten Video», alle Bilder 167.1–167.9 ohne Schrift und ohne Hand (geprüft)."
+ },
+ "zw-freundschaftsband-streifen": {
+  "t": 210.0,
+  "aus": [
+   0.19,
+   0.0,
+   0.81,
+   0.68
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Lila-türkis gestreiftes Band senkrecht auf grauem Tisch, mit Klebestreifen fixiert (noch in Arbeit). 16:9 = x 0.19-0.81, y 0.03-0.65; Hände erst ab y≈0.82, Regenbogenfäden nur bei x<0.13, beides ausserhalb. Ruhig, kein Übergang. Ende des Videos hat überall Hände."
+ },
+ "zw-spiralknoten-armband": {
+  "t": 112.0,
+  "aus": [
+   0.14,
+   0.0,
+   0.76,
+   0.62
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Buntes Spiralknoten-Band mit rosa Klebeband auf dunklem Grund; 112–112.5 s ohne Hände, Hände sonst nur unten rechts (y>0.65), Logo oben rechts (x>0.9) ausserhalb."
+ },
+ "zw-perlenarmband-kreuzknoten": {
+  "t": 193.5,
+  "aus": [
+   0.1,
+   0.17,
+   0.65,
+   0.72
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "fertiges Perlenarmband mit Schiebeverschluss allein auf weissem Grund"
+ },
+ "zw-drehscheiben-baendeli": {
+  "t": 10.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "mehrere fertige bunte Bändeli mit Quasten auf hellem Steingrund"
+ },
+ "zw-rundzopf-vier-faeden": {
+  "t": 116.5,
+  "aus": [
+   0.1,
+   0.0,
+   0.95,
+   0.76
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiger rosa Rundzopf auf Holz, links weisse, rechts rosa Papierrose mit Blättern; die rosa Rose ist jetzt mit sichtbarer Blütenspirale drin statt nur als Ecke. 16:9 = x 0.145-0.905, y 0-0.76; Logo und Wasserzeichen unten (y>0.85) ausserhalb. Oben die mit Klebeband fixierten Fadenenden. Keine Hand (bei 112 Fingerspitze unten, hier nicht)."
+ },
+ "zw-nestelband": {
+  "t": 129.5,
+  "aus": [
+   0.42,
+   0.0,
+   0.92,
+   0.5
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "fertiges Muster-Nestelband als Ring oben rechts auf dunklem Tisch, Hände unten weggeschnitten; eher klein"
+ },
+ "zw-schiebeknoten-armband": {
+  "t": 201.5,
+  "aus": [
+   0.25,
+   0.2,
+   0.95,
+   0.95
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "fertiges graues Armband mit Schiebeknoten und Buchstabenperlen, ohne Hände"
+ },
+ "zw-makramee-feder": {
+  "t": 293.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "zwei fertige Makramee-Federn hängend am Ast vor Holzwand"
+ },
+ "zw-quaste-karton": {
+  "t": 211.0,
+  "aus": null,
+  "frei": true,
+  "schwach": false,
+  "notiz": "fertige olivgrüne Quaste allein auf dunklem Grund"
+ },
+ "zw-kordel-kartonscheibe": {
+  "t": 324.0,
+  "aus": [
+   0.15,
+   0.15,
+   0.75,
+   0.75
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "fertige gedrehte Kordel rosa-blau allein auf Holztisch"
+ },
+ "zw-perlenweben": {
+  "t": 182.0,
+  "aus": [
+   0.1,
+   0.55,
+   1.0,
+   0.9
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Kettfäden mit erst zwei Perlenreihen auf schwarzem Grund; Werkstück noch sehr klein"
+ },
+ "zw-perlenwebrahmen-bespannen": {
+  "t": 133.0,
+  "aus": [
+   0.12,
+   0.34,
+   0.98,
+   0.88
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "fertig bespannter Holz-Perlenwebrahmen auf dunklem Grund, ohne Hände"
+ },
+ "zw-perlenweben-vernaehen": {
+  "t": 148.0,
+  "aus": [
+   0.0,
+   0.4,
+   0.85,
+   0.85
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "gewebtes Perlenstück schwarz-silber auf Kettfäden, lila Grund, ohne Hände"
+ },
+ "zw-perlenband-weben": {
+  "t": 250.0,
+  "aus": [
+   0.05,
+   0.12,
+   0.8,
+   0.87
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "orangefarbenes Perlenband auf dem Webrahmen in Nahaufnahme, Webadresse oben weggeschnitten"
+ },
+ "zw-perlenweben-rahmen": {
+  "t": 157.0,
+  "aus": [
+   0.23,
+   0.36,
+   0.79,
+   0.92
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Bespannter Kartonrahmen allein auf Holztisch; Schrift 'Arbeitsschritte' (y<0.22), Fingerspitzen an den Rändern und Schere ausserhalb."
+ },
+ "zw-perlenwebrahmen-karton": {
+  "t": 341.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "fertiger Kartonrahmen mit schwarzen Kettfäden neben Papiervorlage, ohne Hände"
+ },
+ "zw-perlenarmband-schachtel": {
+  "t": 156.0,
+  "aus": [
+   0.05,
+   0.0,
+   0.8,
+   0.9
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "fertige Perlenarmbänder neben der Schachtel auf grünem Grund, Fingerspitzen unten weggeschnitten"
+ },
+ "zw-perlenfisch": {
+  "t": 164.0,
+  "aus": [
+   0.22,
+   0.14,
+   0.68,
+   0.6
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Halbfertiger pinker Perlenfisch liegt mit Drahtschlaufe allein auf dem hellen Tisch. Die Hand unten rechts beginnt erst bei x≈0.78/y≈0.65, also ausserhalb des Ausschnitts. Fisch klein und etwas unscharf; der fertige Fisch wird immer gehalten."
+ },
+ "zw-perlenkrokodil": {
+  "t": 339.6,
+  "aus": [
+   0.15,
+   0.12,
+   0.85,
+   0.86
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fast fertiges Perlenkrokodil liegt allein auf Folie; Buchstabenperlen und Einblendung oben, TB-Logo unten rechts weggeschnitten; Hände erst ab 340.4 s, Build nimmt 339.8."
+ },
+ "zw-perlen-flechtarmband": {
+  "t": 135.0,
+  "aus": [
+   0.1,
+   0.05,
+   0.88,
+   0.95
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Perlenarmband in Flechtoptik diagonal auf schwarzem Grund, Fingerspitzen und Logo weggeschnitten"
+ },
+ "zw-blumenarmband-perlen": {
+  "t": 205.0,
+  "aus": [
+   0.1,
+   0.05,
+   0.8,
+   0.95
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "mehrere fertige Blumenarmbänder nebeneinander auf hellem Steingrund"
+ },
+ "zw-schachtel-deckel": {
+  "t": 140.0,
+  "aus": [
+   0.22,
+   0.0,
+   0.84,
+   0.64
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "pinke Schachtel halb aufgestellt ohne Hände; fertige Schachtel nur mit Händen und Kanal-Schrift darüber"
+ },
+ "zw-origami-schachtel": {
+  "t": 108.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "fertige lila Origami-Schachtel auf Holztisch, Falzbein am Rand"
+ },
+ "zw-sternbox": {
+  "t": 187.0,
+  "aus": [
+   0.25,
+   0.1,
+   0.75,
+   0.9
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "fertige rote Origami-Sternbox allein auf hellgrünem Grund"
+ },
+ "zw-origami-kranich": {
+  "t": 0.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "roter Origami-Kranich auf Zweigen eines Bäumchens, ohne Schrift"
+ },
+ "zw-origami-schmetterling": {
+  "t": 120.4,
+  "aus": [
+   0.29,
+   0.15,
+   0.75,
+   0.85
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "Fertiger grauer Origami-Schmetterling allein auf Weiss; 119.8-121.0 s ist keine Hand im ganzen Bild, Klebebandrolle links (x<0.28) ausgeschnitten, Freistellen geprüft ok."
+ },
+ "zw-schmetterling-einfach": {
+  "t": 189.0,
+  "aus": [
+   0.02,
+   0.05,
+   0.88,
+   0.95
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Sechs fertige rosa Papier-Schmetterlinge auf Türkis; 188.5–189.5 s ohne Hände (bei 187.5 noch Hände unten), danach Abspann."
+ },
+ "zw-origami-herz": {
+  "t": 0.1,
+  "aus": [
+   0.0,
+   0.2,
+   0.66,
+   0.98
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Rosa Origami-Herz (und rotes am Rand) auf Beton im allerersten Bild, vor dem Titel. Folgebilder mit Titelecke fallen in der Auswahl raus, gewählt wird 0.1 (geprüft). Keine Hand."
+ },
+ "zw-froebelstern-wiemann": {
+  "t": 193.0,
+  "aus": [
+   0.18,
+   0.12,
+   0.72,
+   0.78
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "fertiger rot-rosa Fröbelstern auf Holztisch, Papierstreifen und Deko am Rand, Banner unten weggeschnitten"
+ },
+ "zw-mini-papierstern-streifen": {
+  "t": 121.5,
+  "aus": [
+   0.08,
+   0.05,
+   0.92,
+   0.95
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "viele bunte Mini-Glückssterne lose ausgestreut, keine Hände"
+ },
+ "zw-eckenlesezeichen-origami": {
+  "t": 6.0,
+  "aus": [
+   0.27,
+   0.0,
+   1.0,
+   0.73
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Grünes und blaues fertiges Eckenlesezeichen auf hellem Grund. Bisheriges Bild hatte den eingeblendeten Titel; bei 6.0 ist er weg, keine Hand im ganzen Bild, die Buchseite mit Text links (x<0.27) ist weggeschnitten."
+ },
+ "zw-origami-fuchskopf": {
+  "t": 111.0,
+  "aus": [
+   0.1,
+   0.2,
+   0.75,
+   0.95
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "fertiger Fuchskopf mit Augen und Nase liegt allein auf weissem Tisch, etwas schräg gedreht; sonst nur in Händen gezeigt"
+ },
+ "zw-origami-tulpe-mit-blaettern": {
+  "t": 216.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "rote und gelbe Tulpe mit grünen Blättern auf dunklem Grund, Schlussbild ohne Schrift"
+ },
+ "zw-hexentreppe-papierstreifen": {
+  "t": 107.0,
+  "aus": [
+   0.32,
+   0.08,
+   0.78,
+   0.54
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Mittelteil der fertigen rosa Hexentreppe vor Pinnwand; linke Hand endet bei x≈0.27, rechte beginnt bei x≈0.8, auch bei 106.5/107.5 s geprüft."
+ },
+ "zw-origami-fisch-kreativecke": {
+  "t": 149.5,
+  "aus": [
+   0.1,
+   0.12,
+   0.9,
+   1.0
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "fertiger blauer Origami-Fisch mit Auge allein auf grünem Grund"
+ },
+ "zw-briefumschlag-a4": {
+  "t": 60.0,
+  "aus": [
+   0.06,
+   0.0,
+   0.6,
+   0.62
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "gefalteter blauer Briefumschlag auf Holztisch, Papierbogen am rechten Rand; Moderatorin-Szenen gemieden"
+ },
+ "zw-origami-pinguin-stehend": {
+  "t": 192.0,
+  "aus": [
+   0.2,
+   0.05,
+   0.8,
+   0.8
+  ],
+  "frei": true,
+  "schwach": false,
+  "notiz": "fertiger blau-weisser Pinguin auf braunem Grund, kurz bevor Glitzer und Like-Buttons erscheinen"
+ },
+ "zw-fliegenstich": {
+  "t": 106.5,
+  "aus": [
+   0.0,
+   0.05,
+   0.86,
+   0.95
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "fertige Reihe blauer Fliegenstiche auf hellem Stoff, Pumora-Logo rechts oben weggeschnitten"
+ },
+ "zw-federstich-geschlossen": {
+  "t": 103.0,
+  "aus": [
+   0.12,
+   0.0,
+   0.78,
+   0.85
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "zwei fertige Reihen geschlossener Federstich im Stickrahmen, ohne Hand"
+ },
+ "zw-kettenstich-schrift": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Gestickte Schrift ist immer «Thug Life» (unpassend), sonst Hände; jeder genügend breite Ausschnitt enthält lesbare Buchstaben."
+ },
+ "zw-knopflochstich": {
+  "t": 149.5,
+  "aus": [
+   0.0,
+   0.49,
+   1.0,
+   0.97
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "fertige Reihe blauer Knopflochstiche, Abspann-Schrift darüber weggeschnitten; Reihe sitzt im oberen Bilddrittel"
+ },
+ "zw-schlingstich-filzrand": {
+  "t": 155.0,
+  "aus": [
+   0.22,
+   0.16,
+   0.68,
+   0.62
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Orange Schlingstiche am oberen Rand des grauen Filzes. Bisheriges Bild hatte einen Finger unten links; jetzt ist der Finger (x<0.14) und der Daumennagel (ab y≈0.70) per Pixelprüfung ausserhalb des Ausschnitts. Etwas unscharf."
+ },
+ "zw-knopf-ohne-knoten": {
+  "t": 200.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "drei angenähte Knöpfe (hellblau, pink, oranger Stern) auf weissem Stoff, geringe Schärfentiefe"
+ },
+ "zw-blindstich-saum-v": {
+  "t": null,
+  "aus": [
+   0.385,
+   0.23,
+   0.8,
+   0.65
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Kein Bild: nach zwei Neuwahlen noch Schrift bzw. unklar, ob getragene Kleidung."
+ },
+ "zw-hexenstich-saum": {
+  "t": 3.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Nahaufnahme roter Hexenstich über versäuberter Saumkante, ohne Hände und Schrift"
+ },
+ "zw-zaubersaum-schlaufen": {
+  "t": 220.0,
+  "aus": [
+   0.15,
+   0.24,
+   0.63,
+   0.84
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Pinker Stoff mit fertigem unsichtbarem Saum (Naht kaum zu sehen); Finger unten links (x<0.11) und rechte Hand (x>0.68) ausserhalb, Logo und Nadel oben ausserhalb."
+ },
+ "zw-granny-square-bunt": {
+  "t": 400.5,
+  "aus": [
+   0.12,
+   0.08,
+   1.0,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Nahaufnahme mehrerer bunter Granny Squares, hobbii-Logo links oben weggeschnitten"
+ },
+ "zw-topflappen-halbstaebchen": {
+  "t": 442.0,
+  "aus": [
+   0.15,
+   0.0,
+   1.0,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "fertige rosa und graue Topflappen hängen an Küchenleiste neben Kelle und Schwingbesen"
+ },
+ "zw-fingerstricken-loopschal": {
+  "t": 10.6,
+  "aus": [
+   0.3,
+   0.0,
+   1.0,
+   0.7
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiger Loopschal oben rechts, Massband und Faden auf dunklem Tisch, kurz nach dem Intro. PLAY-Schrift bei 10.2 fällt in der Auswahl raus, Hand erst ab 11 s unten (unterhalb 0.7). Geprüft."
+ },
+ "zw-fingerstricken-grundtechnik": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": true,
+  "notiz": "Die Maschen gibt es nur auf den Fingern; sonst sind Kind (Haare, Arme) oder Hände im Bild. Der Wollknäuel allein auf dem Tisch wäre schmaler als 0.45 und zeigt das Thema nicht."
+ }
+}

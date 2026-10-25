@@ -5,11 +5,12 @@
                                                → werkzeug/cache/_vorschau/bogen/<id>.jpg
 2. Claude wählt pro Bogen (ein Agent für etwa 30 Bögen) Zeit, Ausschnitt und ob freigestellt wird → vorschau/auswahl.json
      {"<id>": {"t": 105.0, "aus": [x0, y0, x1, y1], "frei": true, "notiz": "…"}}   aus = Bildanteile 0..1, weglassen = ganzes Bild
+     "t": null = kein Bild ohne Menschen zu finden → die App zeigt weiter die YouTube-Vorschau
 3. python werkzeug/vorschau.py bauen [id …]   → vorschau/<YouTube-ID>.webp (480×270) und vorschau/vorschau.json
                                                Kontrolle: werkzeug/cache/_vorschau/echt/<id>.jpg (ohne Freistellen) und uebersicht-*.jpg
 
-Regeln für die Wahl: fertiges Werkstück, ruhig und scharf; nie Kinder oder Gesichter, keine Schrift, keine Logos, Hände nur wenn es
-nicht anders geht. Freistellen (rembg, lokal, nichts geht ins Internet) nur bei einem einzelnen Werkstück, das niemand in der Hand hält.
+Regeln für die Wahl (die Bilder sind öffentlich): fertiges Werkstück, ruhig und scharf; nichts von einem Menschen im Bild, auch keine
+Hand und keinen Finger am Rand; keine eingeblendete Schrift, keine Logos. Freistellen (rembg, lokal, nichts geht ins Internet) nur bei einem einzelnen Werkstück, das niemand in der Hand hält.
 Braucht die Einzelbilder und video.mp4 im Cache (holen.py), ffmpeg, opencv-python, numpy, Pillow; fürs Freistellen rembg.
 """
 import json, os, subprocess, sys
@@ -160,6 +161,8 @@ def bauen(ids):
         w = wahl.get(v['id'])
         if not w or (ids and v['id'] not in ids): continue
         yt = v['source']['id']
+        if w.get('t') is None:
+            (ZIEL / f'{yt}.webp').unlink(missing_ok=True); print(v['id'], 'kein Bild'); continue
         video = next((p for p in (CACHE / yt).glob('video.*') if p.suffix in ('.mp4', '.webm', '.mkv')), None)
         if not video: print(v['id'], 'kein video.mp4 im Cache'); continue
         t = float(w['t'])
