@@ -1,6 +1,6 @@
-# Bibo & Fila
+# Stop & Mach
 
-Die App heisst seit 25.10.2026 «Bibo & Fila» (vorher «Schrittli»). Intern bleibt `schrittli`: Repo, Speicher im Browser, Exportdateien. So gehen keine Fortschritte verloren.
+Die App heisst seit 25.10.2026 «Stop & Mach» (vorher «Schrittli», danach kurz «Bibo & Fila»). Bibo und Fila sind die Figuren in der App. Intern bleibt `schrittli`: Repo, Speicher im Browser, Exportdateien. So gehen keine Fortschritte verloren.
 
 Zwei Dateien, die zusammen in einem Ordner liegen müssen:
 
