@@ -3,12 +3,14 @@
    /einrichten        einmalig: legt die GitHub App per Manifest an, merkt sich Client-ID und Geheimnis im KV
    /login             leitet zu GitHub; zurück kommt nur ein Abholschein (60 s gültig), nie der Schlüssel selbst
    /abholen  (POST)   Abholschein gegen Schlüssel tauschen
-   /erneuern (POST)   frischer Schlüssel mit dem Refresh-Token (GitHub-App-Schlüssel laufen nach 8 h ab) */
-const SEITE='https://conradinjoos-lab.github.io',PFAD=/^\/schrittli\/kontrolle\/[\w.\-]*(\?[\w=&%.\-]*)?$/,STATE=/^[\w-]{16,64}$/;
+   /erneuern (POST)   frischer Schlüssel mit dem Refresh-Token (GitHub-App-Schlüssel laufen nach 8 h ab)
+   /melden   (POST)   Fehlermeldung aus der App (ohne Anmeldung), landet im KV unter meldung:…
+   /meldungen         Liste für die Kontrolle (GitHub-Schlüssel mit Schreibrecht auf schrittli), /meldungen/erledigt (POST) löscht eine */
+const SEITE='https://conradinjoos-lab.github.io',MELDE_HER=new Set([SEITE,'http://127.0.0.1:8770','http://localhost:8770']),PFAD=/^\/schrittli\/kontrolle\/[\w.\-]*(\?[\w=&%.\-]*)?$/,STATE=/^[\w-]{16,64}$/;
 
 const html=(b,code=200)=>new Response(`<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width"><title>Schrittli – Anmelden</title>
 <body style="font:16px/1.5 system-ui,sans-serif;max-width:560px;margin:40px auto;padding:0 16px;color:#17212F">${b}`,{status:code,headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'}});
-const json=(d,code=200)=>new Response(JSON.stringify(d),{status:code,headers:{'Content-Type':'application/json','Access-Control-Allow-Origin':SEITE,'Cache-Control':'no-store'}});
+const json=(d,code=200,her=SEITE)=>new Response(JSON.stringify(d),{status:code,headers:{'Content-Type':'application/json','Access-Control-Allow-Origin':MELDE_HER.has(her)?her:SEITE,'Cache-Control':'no-store'}});
 const esc=s=>String(s).replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
 const zufall=()=>crypto.randomUUID().replace(/-/g,'');
 
@@ -20,7 +22,31 @@ async function token(app,felder){
 
 export default {async fetch(req,env){
  const u=new URL(req.url),basis=u.origin,p=u.pathname,q=u.searchParams;
- if(req.method==='OPTIONS')return new Response(null,{headers:{'Access-Control-Allow-Origin':SEITE,'Access-Control-Allow-Methods':'POST','Access-Control-Allow-Headers':'Content-Type','Access-Control-Max-Age':'86400'}});
+ const her=req.headers.get('Origin')||'';
+ if(req.method==='OPTIONS')return new Response(null,{headers:{'Access-Control-Allow-Origin':MELDE_HER.has(her)?her:SEITE,'Access-Control-Allow-Methods':'GET, POST','Access-Control-Allow-Headers':'Content-Type, Authorization','Access-Control-Max-Age':'86400'}});
+ /* Fehler melden aus der App: annehmen ohne Anmeldung (höchstens 20 pro Stunde und Adresse), lesen und abhaken nur mit Schreibrecht auf schrittli */
+ if(p==='/melden'&&req.method==='POST'){
+  if(!MELDE_HER.has(her))return json({fehler:'nicht erlaubt'},403,her);
+  const ip=req.headers.get('CF-Connecting-IP')||'?',rk='rl:'+ip+':'+Math.floor(Date.now()/3600000),n=+(await env.KV.get(rk)||0);
+  if(n>=20)return json({fehler:'zu viele'},429,her);
+  await env.KV.put(rk,String(n+1),{expirationTtl:3700});
+  const b=await req.json().catch(()=>null);if(!b||typeof b!=='object')return json({fehler:'leer'},400,her);
+  const s=(x,l)=>String(x??'').slice(0,l);
+  const m={zeit:new Date().toISOString(),art:['video','stopp','text','anderes'].includes(b.art)?b.art:'anderes',text:s(b.text,600),app:s(b.app,10),seite:s(b.seite,20),
+   video:s(b.video,60),titel:s(b.titel,120),schritt:Math.max(0,Math.min(99,+b.schritt||0)),zeit_video:b.zeit==null?null:Math.max(0,Math.min(36000,+b.zeit||0)),
+   adresse:s(b.adresse,200),geraet:s(b.geraet,40),fenster:s(b.fenster,20)};
+  await env.KV.put('meldung:'+String(9e12-Date.now()).padStart(13,'0')+':'+zufall().slice(0,6),JSON.stringify(m),{expirationTtl:180*86400});
+  return json({ok:true},200,her)}
+ if(p==='/meldungen'||p==='/meldungen/erledigt'){
+  if(her!==SEITE)return json({fehler:'nicht erlaubt'},403);
+  const t=(req.headers.get('Authorization')||'').replace(/^Bearer\s+/,'');
+  const r=t&&await fetch('https://api.github.com/repos/conradinjoos-lab/schrittli',{headers:{Authorization:'Bearer '+t,Accept:'application/vnd.github+json','User-Agent':'schrittli-anmelden'}});
+  if(!r||!r.ok||!((await r.json()).permissions||{}).push)return json({fehler:'nicht angemeldet'},401);
+  if(p==='/meldungen/erledigt'){
+   const k=String((await req.json().catch(()=>({}))).key||'');if(!/^meldung:\d{13}:\w{6}$/.test(k))return json({fehler:'ungültig'},400);
+   await env.KV.delete(k);return json({ok:true})}
+  const l=await env.KV.list({prefix:'meldung:',limit:200});
+  return json(await Promise.all(l.keys.map(async k=>({key:k.name,...JSON.parse(await env.KV.get(k.name)||'{}')}))))}
  const app=await env.KV.get('app',{type:'json'});
 
  if(p==='/einrichten'){

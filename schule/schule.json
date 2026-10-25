@@ -6709,7 +6709,7 @@
    "material": [
     "ast",
     "saege",
-    "taschenmesser",
+    "schnitzmesser",
     "schnitzhandschuh",
     "schraubstock"
    ],
@@ -6763,10 +6763,10 @@
    "dauer": "3:23",
    "alter": "ab 8",
    "sprache": "Hochdeutsch",
-   "hinweis": "Nur mit Erwachsenen und nach den Schnitzregeln (sitzen, feste Unterlage, Klinge vom Körper weg, Schnitzhandschuh an der Haltehand, Messer danach sofort zuklappen); im Video wird ein feststehendes Messer und ein Bastband benutzt, mit Taschenmesser und Schnur geht es genauso.",
+   "hinweis": "Nur mit Erwachsenen und nach den Schnitzregeln (sitzen, feste Unterlage, Klinge vom Körper weg, Schnitzhandschuh an der Haltehand, Messer danach sofort in die Hülle); im Video werden ein Schnitzmesser und ein Bastband benutzt, mit Schnur geht es genauso.",
    "material": [
     "ast",
-    "taschenmesser",
+    "schnitzmesser",
     "schnitzhandschuh",
     "schnur",
     "holzbrett"
@@ -6842,13 +6842,13 @@
    "hinweis": "Nur mit Erwachsenen und nach den Schnitzregeln (Schnitzhandschuh an der Haltehand, immer vom Körper weg, sitzend, Abstand zu anderen); pro Kind eine frische Astgabel mit etwa fingerdicken Zweigen, die Gabelspitzen werden die Ohren.",
    "material": [
     "ast",
-    "taschenmesser",
+    "schnitzmesser",
     "schnitzhandschuh"
    ],
    "steps": [
     {
      "t": 0,
-     "label": "Material richten: Taschenmesser, Astgabel"
+     "label": "Material richten: Schnitzmesser, Astgabel"
     },
     {
      "t": 30.0,
@@ -6970,16 +6970,16 @@
    "dauer": "1:10",
    "alter": "ab 6",
    "sprache": "ohne Sprache",
-   "hinweis": "Kurzes Mini-Projekt (ca. 10 Min.), eignet sich für eine kurze Sequenz oder den Waldtag: ein dicker Ast wird mit dem Taschenmesser gespitzt, ein dünner Ast mit einem Bleistiftspitzer (Spitzer bereitlegen, nicht im Vokabular); nur mit Erwachsenen schnitzen und die Schnitzregeln beachten (sitzen, Schnitzhandschuh an der Haltehand, immer vom Körper weg, Messer nach Gebrauch schliessen).",
+   "hinweis": "Kurzes Mini-Projekt (ca. 10 Min.), eignet sich für eine kurze Sequenz oder den Waldtag: ein dicker Ast wird mit dem Schnitzmesser gespitzt, ein dünner Ast mit einem Bleistiftspitzer (Spitzer bereitlegen, nicht im Vokabular); nur mit Erwachsenen schnitzen und die Schnitzregeln beachten (sitzen, Schnitzhandschuh an der Haltehand, immer vom Körper weg, Messer nach Gebrauch in die Hülle).",
    "material": [
     "ast",
-    "taschenmesser",
+    "schnitzmesser",
     "schnitzhandschuh"
    ],
    "steps": [
     {
      "t": 0,
-     "label": "Material richten: Ast, Taschenmesser, Spitzer"
+     "label": "Material richten: Ast, Schnitzmesser, Spitzer"
     },
     {
      "t": 3.0,
@@ -7028,7 +7028,7 @@
     "schnitzen",
     "saegen"
    ],
-   "title": "Wassermühle mit dem Taschenmesser",
+   "title": "Wassermühle aus Ästen schnitzen",
    "source": {
     "type": "youtube",
     "id": "f2C87WDoS3M"
@@ -7037,9 +7037,9 @@
    "dauer": "1:22",
    "alter": "ab 9",
    "sprache": "Hochdeutsch",
-   "hinweis": "Schnitzen nur mit Erwachsenen und nach den Schnitzregeln (sitzen, Abstand, vom Körper weg schnitzen, Schnitzhandschuh an der Haltehand, Klinge zuklappen beim Ablegen); nötig sind Taschenmesser mit Säge, frische Äste und ein Bach oder eine Wasserschale zum Ausprobieren – der Ton ist undeutlich, die Bilder zeigen die Schritte.",
+   "hinweis": "Schnitzen nur mit Erwachsenen und nach den Schnitzregeln (sitzen, Abstand, vom Körper weg schnitzen, Schnitzhandschuh an der Haltehand, Messer beim Ablegen in die Hülle); nötig sind Schnitzmesser und kleine Säge (im Video ein Taschenmesser mit Säge), frische Äste und ein Bach oder eine Wasserschale zum Ausprobieren – der Ton ist undeutlich, die Bilder zeigen die Schritte.",
    "material": [
-    "taschenmesser",
+    "schnitzmesser",
     "saege",
     "ast",
     "schnitzhandschuh"
@@ -7047,7 +7047,7 @@
    "steps": [
     {
      "t": 0,
-     "label": "Material richten: Taschenmesser mit Säge, Äste"
+     "label": "Material richten: Schnitzmesser, Säge, Äste"
     },
     {
      "t": 29.0,
@@ -7105,10 +7105,10 @@
    "dauer": "1:49",
    "alter": "ab 9",
    "sprache": "Hochdeutsch",
-   "hinweis": "Nur mit Erwachsenen und nach den Schnitzregeln (sitzen, Klinge vom Körper weg, Schnitzhandschuh an der Haltehand): trockener Holunderast mit weichem Mark und ein Taschenmesser mit Säge; das Aushöhlen braucht Geduld.",
+   "hinweis": "Nur mit Erwachsenen und nach den Schnitzregeln (sitzen, Klinge vom Körper weg, Schnitzhandschuh an der Haltehand): trockener Holunderast mit weichem Mark und ein Schnitzmesser und eine kleine Säge (im Video ein Taschenmesser mit Säge); das Aushöhlen braucht Geduld.",
    "material": [
     "ast",
-    "taschenmesser",
+    "schnitzmesser",
     "saege",
     "schnitzhandschuh"
    ],
@@ -7119,7 +7119,7 @@
     },
     {
      "t": 43.5,
-     "label": "Material richten: Ast, Taschenmesser mit Säge"
+     "label": "Material richten: Ast, Schnitzmesser, Säge"
     },
     {
      "t": 51.5,

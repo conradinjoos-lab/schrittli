@@ -144,7 +144,16 @@ const W=(()=>{
   return {...JSON.parse(w||'{"werke":[]}'),themen:JSON.parse(meta).themen}}
  async function werkBild(pfad){return LOKAL?'/werke/'+pfad:URL.createObjectURL(await datei(WERK,'werke/'+pfad,'blob'))}
 
- return {LOKAL,bereit,abmelden,liste,daten,bild,speichern,veroeffentlichen,jsonText,werke,werkBild,
+ /* ---------- Fehlermeldungen aus der App (Worker /meldungen, braucht Schreibrecht auf schrittli; lokal keine) ---------- */
+ async function melde(pfad,opt={},nochmals=true){
+  if(an.ablauf&&Date.now()>an.ablauf-120000)await erneuern();
+  const r=await fetch(ANMELDEN+pfad,{cache:'no-store',...opt,headers:{'Content-Type':'application/json',Authorization:'Bearer '+an.token}});
+  if(r.status===401&&nochmals&&await erneuern())return melde(pfad,opt,false);
+  if(!r.ok)throw new Error('Meldungen '+r.status);return r.json()}
+ const meldungen=()=>LOKAL?Promise.resolve(null):melde('/meldungen');
+ const erledigt=key=>melde('/meldungen/erledigt',{method:'POST',body:JSON.stringify({key})});
+
+ return {LOKAL,bereit,abmelden,liste,daten,bild,speichern,veroeffentlichen,jsonText,werke,werkBild,meldungen,erledigt,
   nachPub:LOKAL?'Noch committen und pushen.':'In etwa einer Minute in der Schul-App.',
   pause:LOKAL?1500:6000}  // Autospeichern: online seltener, jeder Stand ist ein Commit
 })();

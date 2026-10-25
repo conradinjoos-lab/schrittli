@@ -64,6 +64,18 @@ h1{font:600 30px/1 var(--display);margin:0}
 .fuss code{margin-left:auto}
 .nichts{text-align:center;color:var(--muted);padding:60px 0;font:500 18px var(--display)}
 @media (max-width:600px){.wrap{padding:18px 16px 40px}.zahlen{width:100%}.zahl{flex:1;min-width:0}.hilfe{display:none}#suche{max-width:none}}
+.meldungen{margin-top:16px;background:var(--surface);border-radius:18px;padding:12px 16px;box-shadow:var(--shadow-sm)}
+.meldungen h2{font:600 18px var(--display);margin:0 0 6px;display:flex;align-items:center;gap:10px}
+.meldungen h2 span{font:700 12px var(--body);color:#fff;background:#D64545;border-radius:999px;padding:2px 10px}
+.meldung{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line)}
+.meldung:first-of-type{border-top:0}
+.meldung .was{flex:1;min-width:0}
+.meldung .kopf{font-weight:700}
+.meldung .kopf a{color:#0F7A61}
+.meldung .wort{margin:2px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.meldung .klein{font-size:12px;color:var(--muted)}
+.meldung button{font:500 14px var(--display);border:0;border-radius:999px;background:var(--lern-soft);color:#0F6E57;padding:6px 14px;cursor:pointer}
+.meldung button:disabled{opacity:.5}
 </style>
 </head>
 <body>
@@ -80,6 +92,7 @@ h1{font:600 30px/1 var(--display);margin:0}
   <input id="suche" type="search" placeholder="Titel oder Video-ID suchen" autocomplete="off">
   <details class="hilfe"><summary>Neue Videos holen?</summary><div id="hilfe"></div></details>
  </div>
+ <section class="meldungen" id="meldungen" hidden></section>
  <main id="liste"></main>
 </div>
 <script src="werkstatt.js"></script>
@@ -117,6 +130,18 @@ function zeichne(){
 $('#filter').onclick=ev=>{const b=ev.target.closest('button');if(!b)return;filter=b.dataset.f;try{localStorage.setItem('kontrolle-filter',filter)}catch{}zeichne()};
 $('#suche').oninput=zeichne;
 zeichne();
+/* Fehlermeldungen aus der App: oben als Liste, «erledigt» löscht sie im Worker */
+const ARTEN={video:'Video läuft nicht',stopp:'Stopp an falscher Stelle',text:'Text/Material falsch',anderes:'Anderes'};
+W.meldungen().then(M=>{
+ if(!M||!M.length)return;
+ const zeile=m=>{const wo=m.video?`<a href="video.html?id=${esc(m.video)}">${esc(m.titel||m.video)}</a>${m.schritt?' · Schritt '+m.schritt:''}${m.zeit_video!=null?' · bei '+(fmt(m.zeit_video)||'0:00'):''}`:esc(m.seite||'');
+  return `<div class="meldung"><div class="was"><div class="kopf">${esc(ARTEN[m.art]||m.art)} – ${wo}</div>${m.text?`<div class="wort">${esc(m.text)}</div>`:''}
+  <div class="klein">${esc(new Date(m.zeit).toLocaleString('de-CH',{dateStyle:'short',timeStyle:'short'}))} · ${esc(m.app)} · ${esc(m.geraet)} ${esc(m.fenster)}</div></div><button data-k="${esc(m.key)}">erledigt</button></div>`};
+ const zeig=()=>{$('#meldungen').hidden=!M.length;$('#meldungen').innerHTML=`<h2>Meldungen aus der App<span>${M.length}</span></h2>`+M.map(zeile).join('')};
+ zeig();
+ $('#meldungen').onclick=async ev=>{const b=ev.target.closest('button[data-k]');if(!b)return;b.disabled=true;
+  try{await W.erledigt(b.dataset.k);M=M.filter(m=>m.key!==b.dataset.k);zeig()}catch(x){b.disabled=false;b.textContent='nochmals'}};
+}).catch(()=>{});
 })();
 </script>
 </body>
