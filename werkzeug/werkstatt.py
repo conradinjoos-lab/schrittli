@@ -17,7 +17,7 @@ import json, re, subprocess, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from kontrolle import CACHE, ENTWURF, lies, schreibe_json, status, themen, vorlage_fehlt, vokabular, vorschaubild, ID_MUSTER
+from kontrolle import CACHE, ENTWURF, lies, schreibe_json, status, themen, vorlage_fehlt, weggelassen, vokabular, vorschaubild, ID_MUSTER
 
 REPO = 'https://github.com/conradinjoos-lab/schrittli-werkstatt.git'
 SPALTEN, B, H = 20, 160, 90          # Filmstreifen
@@ -63,7 +63,7 @@ def zeile(vid):
     steps = (v or {}).get('steps') or []
     t = steps[-1].get('t') or 0 if steps else (a.get('dauer') or 0) / 2
     return {'id': vid, 'title': (v or {}).get('title') or a.get('title') or vid, 'dauer': a.get('dauer'), 'fps': a.get('fps') or 2,
-            'entwurf': bool(v), 'schritte': len(steps), 'brief': (d / 'brief.md').exists(), 'status': status(v), 'vorlage_fehlt': vorlage_fehlt(v),
+            'entwurf': bool(v), 'schritte': len(steps), 'brief': (d / 'brief.md').exists(), 'status': status(v), 'vorlage_fehlt': vorlage_fehlt(v), 'weggelassen': weggelassen(v),
             'area': (v or {}).get('areaId') or '', 'bild': vorschaubild(vid, t, a.get('fps') or 2)}
 
 

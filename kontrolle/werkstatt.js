@@ -125,7 +125,7 @@ const W=(()=>{
   e=sauber(id,e);
   const p=kette.then(()=>commit(WERK,async basis=>{
    const l=JSON.parse(await datei(WERK,'liste.json','text',basis)||'[]');let z=l.find(x=>x.id===id);if(!z){z={id,dauer:null,fps:2,brief:false,bild:1};l.push(z)}
-   Object.assign(z,{title:e.title||z.title||id,entwurf:true,schritte:e.steps.length,status:status(e),area:e.areaId||''});
+   Object.assign(z,{title:e.title||z.title||id,entwurf:true,schritte:e.steps.length,status:status(e),weggelassen:e._weglassen||'',area:e.areaId||''});
    return {[id+'/video.json']:jsonText(e),'liste.json':jsonText(l)}},'Kontrolle: '+(e.title||id)));
   kette=p.catch(()=>{});return p}
  async function veroeffentlichen(id,e){

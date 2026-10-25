@@ -53,12 +53,14 @@ h1{font:600 30px/1 var(--display);margin:0}
 .stand.drin{background:var(--lern);color:#fff}
 .stand.offen{background:var(--spass);color:#fff}
 .stand.leer{background:var(--surface);color:var(--muted)}
+.stand.weg{background:var(--surface2);color:var(--muted)}
 .text{padding:10px 14px 12px;display:flex;flex-direction:column;gap:8px;flex:1}
 .titel{font:600 16px/1.2 var(--display)}
 .fuss{display:flex;align-items:center;gap:6px;margin-top:auto;flex-wrap:wrap}
 .pill{font-size:12px;padding:2px 8px;border-radius:999px;background:var(--surface2);color:var(--muted)}
 .pill.ok{background:var(--lern-soft);color:#0F6E57}
 .pill.vorlage{background:#FBE3E3;color:#B03A3A;font-weight:700}
+.pill.weg{background:var(--surface2);color:var(--ink)}
 .fuss code{margin-left:auto}
 .nichts{text-align:center;color:var(--muted);padding:60px 0;font:500 18px var(--display)}
 @media (max-width:600px){.wrap{padding:18px 16px 40px}.zahlen{width:100%}.zahl{flex:1;min-width:0}.hilfe{display:none}#suche{max-width:none}}
@@ -92,15 +94,15 @@ $('#hilfe').innerHTML=W.LOKAL
 if($('#weg'))$('#weg').onclick=W.abmelden;
 $('#liste').innerHTML='<div class="nichts">Lade Entwürfe …</div>';
 let D;try{await W.bereit();D=await W.liste()}catch(x){$('#liste').innerHTML=`<div class="nichts">Laden ging nicht: ${esc(x.message||x)}</div>`;return}
-const art=e=>e.drin?'drin':e.entwurf?'offen':'leer';
-const anzahl={offen:0,drin:0,leer:0};D.videos.forEach(e=>anzahl[art(e)]++);
-const FILTER=[['offen','Zu prüfen'],['drin','Veröffentlicht'],...(anzahl.leer?[['leer','Ohne Entwurf']]:[]),['alle','Alle']];
+const art=e=>e.drin?'drin':e.weggelassen?'weg':e.entwurf?'offen':'leer';
+const anzahl={offen:0,drin:0,weg:0,leer:0};D.videos.forEach(e=>anzahl[art(e)]++);
+const FILTER=[['offen','Zu prüfen'],['drin','Veröffentlicht'],...(anzahl.weg?[['weg','Weggelassen']]:[]),...(anzahl.leer?[['leer','Ohne Entwurf']]:[]),['alle','Alle']];
 let filter='';try{filter=localStorage.getItem('kontrolle-filter')||''}catch{}
 if(!FILTER.some(f=>f[0]===filter)||(filter==='offen'&&!anzahl.offen))filter=anzahl.offen?'offen':'alle';
 $('#zahlen').innerHTML=`<div class="zahl offen"><b>${anzahl.offen}</b><span>zu prüfen</span></div><div class="zahl drin"><b>${anzahl.drin}</b><span>veröffentlicht</span></div>`;
 function karte(e){
- const a=art(e),stand={drin:'Veröffentlicht',offen:'Zu prüfen',leer:e.brief?'Nur Brief':'Kein Entwurf'}[a];
- const pills=(e.vorlage_fehlt?'<span class="pill vorlage">📄 braucht Vorlage</span>':'')+(e.entwurf?[[e.status[0],e.schritte+' Schritte'],[e.status[1],'Angaben'],[e.status[2],'geprüft']].map(([ok,t])=>`<span class="pill${ok?' ok':''}">${ok?'✓ ':''}${t}</span>`).join(''):'');
+ const a=art(e),stand={drin:'Veröffentlicht',offen:'Zu prüfen',weg:'Weggelassen',leer:e.brief?'Nur Brief':'Kein Entwurf'}[a];
+ const pills=(a==='weg'?`<span class="pill weg">${esc(e.weggelassen)}</span>`:e.vorlage_fehlt?'<span class="pill vorlage">📄 braucht Vorlage</span>':'')+(e.entwurf&&a!=='weg'?[[e.status[0],e.schritte+' Schritte'],[e.status[1],'Angaben'],[e.status[2],'geprüft']].map(([ok,t])=>`<span class="pill${ok?' ok':''}">${ok?'✓ ':''}${t}</span>`).join(''):'');
  const farbe=(D.themen.find(t=>t[0]===e.area)||[])[2];
  return `<a class="karte" href="video.html?id=${e.id}"><div class="bild"${farbe?` style="--farbe:${farbe}"`:''}><img loading="lazy" alt="" src="${e.vorschau}" onerror="this.remove()"><span class="stand ${a}">${stand}</span>${e.dauer?`<span class="dauer">${fmt(e.dauer)}</span>`:''}</div>
  <div class="text"><div class="titel">${esc(e.title)}</div><div class="fuss">${pills}<code>${esc(e.id)}</code></div></div></a>`}

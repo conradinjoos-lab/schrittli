@@ -97,6 +97,11 @@ def vorlage_fehlt(v):
     return bool(v and v.get('_vorlage') == 'fehlt' and not v.get('vorlagen'))
 
 
+def weggelassen(v):
+    """Grund, warum ein Entwurf nicht in die App kommt (Doppel, Kurzfassung, Werbung …); leer = noch zu prüfen."""
+    return (v or {}).get('_weglassen') or ''
+
+
 def liste():
     out = []
     if not ENTWURF.exists(): return out
@@ -109,7 +114,7 @@ def liste():
         t = steps[-1].get('t') or 0 if steps else (a.get('dauer') or 0) / 2  # Vorschaubild: Fertig-Schritt, sonst Mitte
         out.append({'id': d.name, 'title': (v or {}).get('title') or a.get('title') or d.name, 'dauer': a.get('dauer'),
                     'entwurf': bool(v), 'schritte': len(steps), 'drin': bool(s), 'brief': (d / 'brief.md').exists(),
-                    'status': status(v), 'vorlage_fehlt': vorlage_fehlt(v), 'area': (s or v or {}).get('areaId') or '', 'bild': vorschaubild(d.name, t, a.get('fps') or 2)})
+                    'status': status(v), 'vorlage_fehlt': vorlage_fehlt(v), 'weggelassen': weggelassen(v), 'area': (s or v or {}).get('areaId') or '', 'bild': vorschaubild(d.name, t, a.get('fps') or 2)})
     return out
 
 
