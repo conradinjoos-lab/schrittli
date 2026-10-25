@@ -422,6 +422,8 @@ code{font-size:13px;word-break:break-all;background:var(--surface2);padding:2px 
 .kid .lehrer-zeile+.bank{margin-top:0;padding-top:30px}
 .lehrer-link{background:none;border:0;color:var(--wmuted);font:inherit;font-size:13px;letter-spacing:.08em;text-decoration:underline;text-underline-offset:3px;opacity:.8;padding:8px 12px}
 .kid.abend .lehrer-link{color:#C9C2B8}
+a.btn{text-decoration:none;color:inherit}
+.lehrer-gen{display:flex;align-items:center;gap:12px;background:#EAF3F8;color:#1C4A63;border:2px solid #1C4A63;border-radius:8px;padding:10px 14px;margin:0 0 14px;text-decoration:none;box-shadow:2px 3px 0 var(--sh)}.lehrer-gen .sym{font-size:26px}.lehrer-gen b{font-size:17px}
 .lehrer-info{background:var(--sign);border:2px solid var(--kink);border-radius:8px;padding:10px 14px;margin:6px 0 14px;font-size:15px;line-height:1.35;color:var(--kink);box-shadow:2px 3px 0 var(--sh)}
 .lehrer-liste{background:var(--paper);border:3px solid var(--kink);border-radius:14px;padding:6px 16px 14px;box-shadow:4px 6px 0 var(--sh);color:var(--kink)}
 .lrow{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(43,35,32,.15);font-size:16px}
@@ -733,6 +735,7 @@ async function loadAnleitungen(){ if(!/^https?:/.test(location.protocol)) return
 function werkeHtml(ws){ return ws.length?`<h2 class="pw-grp andere-titel">Das haben andere gemacht</h2><div class="kork andere">${ws.map(w=>`<button class="foto" data-act="andere" data-i="${WERKE.indexOf(w)}"><div class="bild"><img src="${WERKE_BASE}${esc(w.bild)}" alt="" loading="lazy" onerror="this.closest('.foto').remove()"></div><span class="nm">${esc(w.titel)}</span></button>`).join('')}</div>`:''; }
 function zeigeWerk(b){ const w=WERKE[+b.dataset.i]; if(!w) return; kidModal(`<img class="andere-gross" src="${WERKE_BASE}${esc(w.bild)}" alt=""><h2 style="font-size:20px;margin:10px 0 0">${esc(w.titel)}</h2><div class="row center" style="margin-top:12px"><button class="kbtn ghost" data-close>Schliessen</button></div>`); }
 const VORL_BASE=SCHULE?'../vorlagen/':'vorlagen/';   // eigene Vorlagen zu Videos, z. B. vorlagen/vorlage-nikolausstiefel-a4.pdf
+const vlLink=(cls,txt='Vorlagen drucken')=>`<a class="${cls}" href="${VORL_BASE}" target="_blank" rel="noopener">${txt}</a>`;   // Vorlagen-Generator (vorlagen/index.html): Form wählen, Grösse in cm, drucken
 function vorlagenBox(vl){ return (vl||[]).length?`<div class="an-box vorlage"><span class="sym" aria-hidden="true">📄</span><div><p>Vorlage zum Ausdrucken</p>${vl.map(x=>`<a class="an-laden" href="${esc(VORL_BASE+x.datei)}" download target="_blank" rel="noopener">⬇ ${esc(x.name)}${x.format?` (${esc(x.format)})`:''}</a>`).join('')}</div></div>`:''; }
 function matCard(mat,btns,vl){ return `<div class="matkarte"><div class="mat-kopf">${figur('material')}<h2>Material richten</h2></div><div class="mats-grid">${mat.map(id=>`<div class="mat"><div class="ico">${matIcon(id)}</div><div class="nm">${esc(matName(id))}</div></div>`).join('')}</div>${vorlagenBox(vl)}<div class="row center" style="flex-wrap:wrap">${btns}</div></div>`; }
 function dingSvg(key,emoji,cls='obj'){ const inner=(key==='kiste'||!DINGE[key])?DINGE.kiste(emoji||'📦'):DINGE[key]; return `<svg class="${cls}" viewBox="0 0 120 110" aria-hidden="true">${inner}</svg>`; }
@@ -944,7 +947,7 @@ SCREENS.raum=app=>{ const akt=S.settings.raum;
   app.innerHTML=`<div class="v3"><div class="v3-in">${v3Kopf('')}
     <h1 class="v3-h1 gross">Wo arbeitest du heute?</h1><p class="v3-sub">${akt?'Tipp auf den Raum, in dem du arbeitest.':'Nur beim ersten Start – danach merken sich Bibo & Fila deinen Raum.'}</p>
     <div class="v3-raeume">${RAEUME.map(r=>`<button class="v3-raum${r.id===akt?' an':''}" data-act="r" data-id="${r.id}"><span class="bild" style="background:${r.soft}"><img src="${GRAFIK}${r.bild}.webp" alt=""></span><b>${r.name}</b><span class="v3-meta">${raumThemen(r).length} Themen</span></button>`).join('')}</div>
-    <div class="v3-fuss"><button class="v3-link" data-act="lehrer">Für Lehrpersonen</button></div></div></div>`;
+    <div class="v3-fuss"><button class="v3-link" data-act="lehrer">Für Lehrpersonen</button>${vlLink('v3-link')}</div></div></div>`;
   wire(app,{ r:b=>{ S.settings.raum=b.dataset.id; save(); go('home'); }, gallery:()=>go('gallery'), lehrer:()=>go('lehrer') });
 };
 function themaKachel(a){ const vs=videosIn(a.id); const da=[1,2,3].map(n=>vs.some(v=>(+v.niveau||2)===n)); const tip='Niveaus: '+[1,2,3].filter(n=>da[n-1]).map(n=>NIVEAU[n]).join(', ');
@@ -957,7 +960,7 @@ function homeSchule(app,rid){ const r=RAEUME.find(x=>x.id===(rid||S.settings.rau
     <div class="v3-titel"><h1 class="v3-h1">${r.name}</h1>${w?`<button class="v3-weiter" data-act="weiter" data-id="${w.v.id}"><span class="bild" style="background:${soft(w.a)}"><img src="${GRAFIK}${w.a.id}.webp" alt=""></span><span class="txt"><small>Weiter mit</small><b>${esc(w.a.name)} · Schritt ${w.schritt}</b></span><span class="play" aria-hidden="true">▶</span></button>`:''}</div>
     ${k||!SCHULE?'':'<p class="v3-sub">Tipp oben auf deine Klasse – dann siehst du nur, was zu dir passt.</p>'}
     <div class="v3-themen">${themen.map(themaKachel).join('')||`<div class="v3-leer">${figur('nachdenken')}Für diese Klasse ist hier noch nichts da.</div>`}</div>
-    ${SCHULE?'<div class="v3-fuss"><button class="v3-link" data-act="lehrer">Für Lehrpersonen</button></div>':''}</div></div>`;
+    ${SCHULE?'<div class="v3-fuss"><button class="v3-link" data-act="lehrer">Für Lehrpersonen</button>'+vlLink('v3-link')+'</div>':''}</div></div>`;
   wire(app,{ raeume:()=>go(SCHULE?'raum':'home'), raum:b=>{ if(!SCHULE){ go('zimmer',{r:b.dataset.id}); return; } S.settings.raum=b.dataset.id; save(); render(); }, klasse:b=>{ S.settings.klasse=+b.dataset.k; save(); render(); },
     area:b=>go('area',{id:b.dataset.id}), weiter:b=>go('player',{videoId:b.dataset.id}), lehrer:()=>go('lehrer'), gallery:()=>go('gallery') });
 }
@@ -981,6 +984,7 @@ SCREENS.lehrer=app=>{ const n=abend();
   const vids=S.videos.slice().sort((a,b)=>(a.areaId+a.title).localeCompare(b.areaId+b.title,'de'));
   app.innerHTML=`<div class="${kidClass()} schrift-normal">${girlande(n)}${kopf('Für Lehrpersonen',{back:true})}
     <div class="inner"><div class="lehrer-info">Ohne Anmeldung. Fotos von fertigen Werken bleiben nur auf diesem Gerät. Pro Video gibt es einen QR-Code: Kinder scannen ihn und landen direkt im Player mit den Schritten – auch von zuhause. Klassenzuordnung und neue Videos: Link an Conradin.</div>
+    <a class="lehrer-gen" href="${VORL_BASE}" target="_blank" rel="noopener"><span class="sym" aria-hidden="true">✂️</span><span class="grow"><b>Vorlagen-Generator</b><br><span class="small">Herz, Stern, Bär und über 100 weitere Formen – Grösse in cm eingeben, ausdrucken.</span></span><span aria-hidden="true">→</span></a>
     <div class="lehrer-liste">${S.areas.map(a=>{ const vs=vids.filter(v=>v.areaId===a.id); if(!vs.length) return ''; return `<h2 style="color:${a.color};margin:14px 0 6px">${a.emoji} ${esc(a.name)}</h2>${vs.map(v=>`<div class="lrow"><span class="grow">${esc(v.title)}${v.grundtechnik?' <span class="gt">Grundtechnik</span>':''}</span>${niveauHtml(v)}<span class="stufen">${(v.stufen||[]).map(s=>`<b>${s}</b>`).join('')}</span><span class="muted small">${v.zeit?`⏱ ${v.zeit} Min. · `:''}${(v.steps||[]).length?v.steps.length+' Schritte':'ohne Schritte'}${(v.material||[]).length?' · '+v.material.map(matName).join(', '):''}</span><button class="btn sm" data-act="qr" data-id="${v.id}">QR-Code</button></div>`).join('')}`; }).join('')}</div></div>
     ${bank()}</div>`;
   wire(app,{ back:()=>go('home'), qr:async b=>{ const v=videoOf(b.dataset.id); const link=schoolLink(v); kidModal(`<h2 style="font-size:20px">${esc(v.title)}</h2><div class="qr" id="qr" style="margin:10px auto"></div><code style="font-size:11px;word-break:break-all;display:block;max-width:360px">${esc(link)}</code><div class="row center" style="margin-top:12px"><button class="btn sm" data-act="copylink" data-link="${esc(link)}">Link kopieren</button><button class="kbtn ghost" data-close>Schliessen</button></div>`,{copylink:(b2)=>{ navigator.clipboard&&navigator.clipboard.writeText(b2.dataset.link).then(()=>toast('Kopiert')).catch(()=>toast('Kopieren nicht möglich')); }}); try{ if(!window.QRCode) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'); new QRCode($('#qr'),{text:link,width:240,height:240,correctLevel:QRCode.CorrectLevel.L}); }catch(e){ const q=$('#qr'); if(q) q.textContent='QR-Code konnte nicht geladen werden.'; } } });
@@ -1296,7 +1300,7 @@ let ED=null;
 SCREENS.parent=(app,{tab='videos',videoId})=>{
   if(!parentOpen){ renderPin(app); return; }
   const tabs=[['videos','Videos'],['katalog','Katalog'],['bereiche','Bereiche'],['kinder','Kinder'],['werke','Werke'],['einstellungen','Einstellungen'],['daten','Daten']];
-  app.innerHTML=`<div class="screen parent"><div class="topbar"><button class="btn icon" data-act="back" aria-label="Zurück">${ico('back')}</button><h1 class="grow">Elternbereich</h1></div><div class="tabs">${tabs.map(([k,l])=>`<button data-act="tab" data-t="${k}" class="${k===tab?'on':''}">${l}</button>`).join('')}</div><div id="ptab" class="stack"></div></div>`;
+  app.innerHTML=`<div class="screen parent"><div class="topbar"><button class="btn icon" data-act="back" aria-label="Zurück">${ico('back')}</button><h1 class="grow">Elternbereich</h1>${vlLink('btn sm','✂️ Vorlagen')}</div><div class="tabs">${tabs.map(([k,l])=>`<button data-act="tab" data-t="${k}" class="${k===tab?'on':''}">${l}</button>`).join('')}</div><div id="ptab" class="stack"></div></div>`;
   const acts={back:()=>go('home'),tab:b=>go('parent',{tab:b.dataset.t})};
   const root=$('#ptab');
   ({videos:tabVideos,video:tabVideoEditor,katalog:tabKatalog,bereiche:tabAreas,kinder:tabKids,werke:tabWorks,einstellungen:tabSettings,daten:tabData})[tab](root,acts,{videoId});
