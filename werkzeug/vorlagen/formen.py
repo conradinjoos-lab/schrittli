@@ -3,6 +3,7 @@ Schreibt vorlagen/formen.js (window.FORMEN) und auf Wunsch eine Übersicht als P
 Aufruf: python formen.py [<übersicht.png>]"""
 import os, sys, json, glob, importlib
 from zeichnen import *
+from shapely.geometry.polygon import orient
 
 HIER = os.path.dirname(os.path.abspath(__file__))
 ZIEL = os.path.join(HIER, '..', '..', 'vorlagen', 'formen.js')
@@ -210,7 +211,8 @@ def export():
         g = g.simplify(0.12)
         x0, y0, x1, y1 = g.bounds; s = 100 / max(x1-x0, y1-y0)
         tr = lambda p: [[round((x-x0)*s, 2), round((y1-y)*s, 2)] for x, y in p]    # SVG: y nach unten
-        d = [tr(np.asarray(g.exterior.coords)[:-1])]
+        if g.interiors: g = orient(g)                                          # Löcher (Ring) gegenläufig, damit sie frei bleiben
+        d = [tr(np.asarray(r.coords)[:-1]) for r in [g.exterior, *g.interiors]]
         dl = [tr(l) for t in det for l in linien(t.simplify(0.12) if hasattr(t, 'simplify') else t)]
         out.append(dict(id=fid, name=name, gruppe=gruppe, w=round((x1-x0)*s, 2), h=round((y1-y0)*s, 2), d=d, det=dl))
     with open(ZIEL, 'w', encoding='utf-8') as f:
@@ -225,7 +227,7 @@ def uebersicht(out, png):
     fig, axs = plt.subplots(zl, sp, figsize=(sp*1.6, zl*1.8))
     for ax in axs.flat: ax.axis('off')
     for ax, f in zip(axs.flat, out):
-        for p in f['d']: q = np.array(p + p[:1]); ax.fill(q[:, 0], -q[:, 1], color='#f3e3d3', ec='#1c2430', lw=1)
+        for i, p in enumerate(f['d']): q = np.array(p + p[:1]); ax.fill(q[:, 0], -q[:, 1], color='#f3e3d3' if i == 0 else 'white', ec='#1c2430', lw=1)
         for l in f['det']: q = np.array(l); ax.plot(q[:, 0], -q[:, 1], color='#8a8178', lw=.7)
         ax.set_aspect('equal'); ax.set_title(f['name'], fontsize=9)
     fig.tight_layout(); fig.savefig(png, dpi=90)

@@ -2779,6 +2779,12 @@
     "karton",
     "schere",
     "zirkel"
+   ],
+   "vorlagen": [
+    {
+     "datei": "?form=ring&b=7&n=2",
+     "name": "Pomponring, 7 cm"
+    }
    ]
   },
   {
@@ -3766,7 +3772,7 @@
     4,
     5
    ],
-   "niveau": 3,
+   "niveau": 1,
    "grundtechnik": true,
    "techniken": [
     "saegen"
@@ -3842,7 +3848,7 @@
     4,
     5
    ],
-   "niveau": 3,
+   "niveau": 2,
    "grundtechnik": true,
    "techniken": [
     "saegen"
@@ -4902,7 +4908,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=halbkreis&b=14",
+     "name": "Halbkreis, 14 cm breit"
+    }
+   ]
   },
   {
    "id": "zw-zauberstein",
@@ -18381,7 +18393,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=kreisel&b=10",
+     "name": "Kreiselscheibe, 10 cm"
+    }
+   ]
   },
   {
    "id": "zw-mosaik-untersetzer",
@@ -20575,7 +20593,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=saeckchen&b=20&linie=zugabe",
+     "name": "Stoffstück, 20 cm breit"
+    }
+   ]
   },
   {
    "id": "zw-ammonit-toepfern",
@@ -21032,7 +21056,17 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=motte&b=10",
+     "name": "Mottenflügel, 10 cm breit"
+    },
+    {
+     "datei": "?form=tropfen&h=7&n=2",
+     "name": "Mottenkörper, 7 cm hoch"
+    }
+   ]
   },
   {
    "id": "zw-papiertueten-blume",
