@@ -355,7 +355,9 @@ function hinweise(i){const s=E.steps[i],w=[];const n=words(s.label);
  if(i>0){const z=satzBei(s.t);if(z)w.push(['beginnt mitten im Satz («'+z[2].slice(0,36)+(z[2].length>36?'…':'')+'» '+fmt(z[0])+'–'+fmt(z[1])+')',0])}
  return w}
 const rotBei=i=>hinweise(i).some(h=>h[1]===1);
+const vorlageFehlt=()=>E._vorlage==='fehlt'&&!(E.vorlagen||[]).length;  // eduki-Vorlage: darf nicht in die App, eigene zeichnen (vorlagen/)
 function checkliste(){const names=Object.fromEntries(D.vokabular);return [
+ ...(vorlageFehlt()?[['Braucht Vorlage: eigene zeichnen (die im Video ist von eduki)',false]]:[]),
  ['Mindestens 2 Schritte, alle mit Titel',E.steps.length>=2&&E.steps.every(s=>s.label.trim())],
  ['Keine roten Hinweise bei den Schritten',E.steps.every((s,i)=>!rotBei(i))],
  ['Letzter Schritt heisst «Fertig …»',/^fertig/i.test(E.steps[E.steps.length-1]?.label||'')],
@@ -465,6 +467,7 @@ function renderMeta(){const m=$('#meta');
  <label>Schwierigkeit<div class="pills" id="niveau">${['leicht','mittel','anspruchsvoll'].map((n,i)=>`<button class="${+E.niveau===i+1?'on':''}" data-niv="${i+1}">${i+1} ${n}</button>`).join('')}</div></label>
  <label>Techniken (mit Komma)<input data-k="techniken" value="${esc((E.techniken||[]).join(', '))}" placeholder="z. B. vorstich, knoten"></label>
  <label class="chk w"><input type="checkbox" data-k="grundtechnik" ${E.grundtechnik?'checked':''}> Grundtechnik: zeigt vor allem eine Technik, die in vielen Projekten vorkommt</label>
+ ${vorlageFehlt()?'<p class="w" style="margin:0;color:var(--r);font-weight:700">📄 Braucht Vorlage – die im Video ist von eduki und darf nicht in die App. Eine eigene zeichnen lassen (Ordner vorlagen/).</p>':(E.vorlagen||[]).length?`<p class="w" style="margin:0">📄 Vorlage in der App: ${E.vorlagen.map(x=>esc(x.name)+(x.format?' ('+esc(x.format)+')':'')).join(', ')}</p>`:''}
  <label class="w">Hinweis für die Lehrperson<textarea data-k="hinweis" rows="2">${esc(E.hinweis||'')}</textarea></label>
  <details class="w"><summary>Details</summary><div class="meta" style="margin-top:8px">
   <label class="w">Aufgabe danach (leer = keine)<input data-k="task.text" value="${esc(E.task.text||'')}"></label>

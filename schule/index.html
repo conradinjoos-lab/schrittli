@@ -443,6 +443,7 @@ code{font-size:13px;word-break:break-all;background:var(--surface2);padding:2px 
 .mat .ico .mat-svg{width:64px;height:60px}.mat .ico .mat-emoji{font-size:44px;line-height:1}
 .mat .nm{font-size:13px;font-weight:600;letter-spacing:.04em;line-height:1.1;text-align:center}
 .matkarte .kbtn{min-height:54px;font-size:19px}
+.matkarte .an-box{text-align:left;font-size:16px;padding:10px 14px;width:100%;max-width:520px}.matkarte .an-laden{margin-top:6px}
 .sbtn .mats{display:inline-flex;gap:4px;margin-left:8px;vertical-align:middle}
 .sbtn .mats .mat-svg{width:26px;height:24px}.sbtn .mats .mat-emoji{font-size:18px;line-height:1}
 .kid.pl.kino .matkarte{max-width:min(96%,1000px);padding:18px 24px}
@@ -706,6 +707,9 @@ const MAT_FOTOS=new Map(); // id -> Dateiname, aus material/fotos.json
 function matIcon(id,foto=true){ const svg=MAT_SVG[id]||(id==='wolle'?DINGE.wolle:id==='schere'?DINGE.schere:null); const m=MATERIAL[id]; const pikto=svg?`<svg class="mat-svg" viewBox="0 0 120 110" aria-hidden="true">${svg}</svg>`:`<span class="mat-emoji" aria-hidden="true">${m?m[1]:'📦'}</span>`; if(foto&&MAT_FOTOS.has(id)) return `<span class="mat-ico"><img class="mat-foto" src="${MAT_BASE}${MAT_FOTOS.get(id)}" alt="" loading="lazy" onerror="this.remove()">${pikto}</span>`; return pikto; }
 async function loadMatFotos(){ if(!/^https?:/.test(location.protocol)) return; try{ const r=await fetch(MAT_BASE+'fotos.json',{cache:'no-store'}); if(!r.ok) return; const j=await r.json(); (j.fotos||j||[]).forEach(x=>{ const f=String(x); MAT_FOTOS.set(f.replace(/\.[a-z0-9]+$/i,''),f); }); }catch(e){} }
 const WERKE_BASE=SCHULE?'../werke/':'werke/';
+const VOR_BASE=SCHULE?'../vorschau/':'vorschau/'; const VORSCHAU=new Set();   // ruhige Standbilder statt YouTube-Vorschau (werkzeug/vorschau.py)
+async function loadVorschau(){ if(!/^https?:/.test(location.protocol)) return; try{ const r=await fetch(VOR_BASE+'vorschau.json',{cache:'no-store'}); if(!r.ok) return; const j=await r.json(); (j.bilder||[]).forEach(x=>VORSCHAU.add(String(x))); }catch(e){} }
+function ytThumb(id){ return VORSCHAU.has(id)?`${VOR_BASE}${id}.webp`:`https://i.ytimg.com/vi/${id}/mqdefault.jpg`; }
 let WERKE=[]; // {bild,titel,bereich}, aus werke/werke.json: Fotos fertiger Arbeiten («Das haben andere gemacht»)
 async function loadWerke(){ if(!/^https?:/.test(location.protocol)) return; try{ const r=await fetch(WERKE_BASE+'werke.json',{cache:'no-store'}); if(!r.ok) return; const j=await r.json(); WERKE=(j.werke||[]).filter(w=>w&&w.bild); }catch(e){} }
 const ANL_BASE=SCHULE?'../anleitungen/':'anleitungen/';
@@ -715,7 +719,9 @@ async function loadAnleitungen(){ if(!/^https?:/.test(location.protocol)) return
   S.videos=S.videos.filter(v=>v.quelle!=='anleitung').concat(neu); }catch(e){} }
 function werkeHtml(ws){ return ws.length?`<h2 class="pw-grp andere-titel">Das haben andere gemacht</h2><div class="kork andere">${ws.map(w=>`<button class="foto" data-act="andere" data-i="${WERKE.indexOf(w)}"><div class="bild"><img src="${WERKE_BASE}${esc(w.bild)}" alt="" loading="lazy" onerror="this.closest('.foto').remove()"></div><span class="nm">${esc(w.titel)}</span></button>`).join('')}</div>`:''; }
 function zeigeWerk(b){ const w=WERKE[+b.dataset.i]; if(!w) return; kidModal(`<img class="andere-gross" src="${WERKE_BASE}${esc(w.bild)}" alt=""><h2 style="font-size:20px;margin:10px 0 0">${esc(w.titel)}</h2><div class="row center" style="margin-top:12px"><button class="kbtn ghost" data-close>Schliessen</button></div>`); }
-function matCard(mat,btns){ return `<div class="matkarte"><div class="mat-kopf">${figur('material')}<h2>Material richten</h2></div><div class="mats-grid">${mat.map(id=>`<div class="mat"><div class="ico">${matIcon(id)}</div><div class="nm">${esc(matName(id))}</div></div>`).join('')}</div><div class="row center" style="flex-wrap:wrap">${btns}</div></div>`; }
+const VORL_BASE=SCHULE?'../vorlagen/':'vorlagen/';   // eigene Vorlagen zu Videos, z. B. vorlagen/vorlage-nikolausstiefel-a4.pdf
+function vorlagenBox(vl){ return (vl||[]).length?`<div class="an-box vorlage"><span class="sym" aria-hidden="true">📄</span><div><p>Vorlage zum Ausdrucken</p>${vl.map(x=>`<a class="an-laden" href="${esc(VORL_BASE+x.datei)}" download target="_blank" rel="noopener">⬇ ${esc(x.name)}${x.format?` (${esc(x.format)})`:''}</a>`).join('')}</div></div>`:''; }
+function matCard(mat,btns,vl){ return `<div class="matkarte"><div class="mat-kopf">${figur('material')}<h2>Material richten</h2></div><div class="mats-grid">${mat.map(id=>`<div class="mat"><div class="ico">${matIcon(id)}</div><div class="nm">${esc(matName(id))}</div></div>`).join('')}</div>${vorlagenBox(vl)}<div class="row center" style="flex-wrap:wrap">${btns}</div></div>`; }
 function dingSvg(key,emoji,cls='obj'){ const inner=(key==='kiste'||!DINGE[key])?DINGE.kiste(emoji||'📦'):DINGE[key]; return `<svg class="${cls}" viewBox="0 0 120 110" aria-hidden="true">${inner}</svg>`; }
 const DEKO={
   kiste:'<svg viewBox="0 0 120 110" width="110" height="100" aria-hidden="true"><rect x="30" y="50" width="60" height="54" rx="6" fill="#E8554E" stroke="#2B2320" stroke-width="4"/><rect x="24" y="40" width="72" height="14" rx="4" fill="#2B2320"/><path d="M48 40V30h24v10" fill="none" stroke="#2B2320" stroke-width="4"/><rect x="52" y="66" width="16" height="10" rx="2" fill="#FFE58A" stroke="#2B2320" stroke-width="3"/></svg>',
@@ -767,7 +773,7 @@ function prog(vid){ const k=(S.activeProfile||'school')+':'+vid; return S.progre
 function starState(pid){ const t=todayStr(); let st=S.stars[pid]; if(!st||st.date!==t){ st=S.stars[pid]={date:t,used:0,bonus:0,unlocked:[]}; } return st; }
 function starsLeft(pid){ const st=starState(pid); return S.settings.starsPerDay+st.bonus-st.used; }
 function earnStar(){ const st=starState(S.activeProfile); if(st.bonus<1){ st.bonus++; return true; } return false; }
-function thumbOf(v){ return v.source.type==='youtube'?`https://i.ytimg.com/vi/${v.source.id}/mqdefault.jpg`:(v.thumb||null); }
+function thumbOf(v){ return v.source.type==='youtube'?ytThumb(v.source.id):(v.thumb||null); }
 const NIVEAU=['','leicht','mittel','anspruchsvoll'];
 function niveauHtml(v){ const n=+v.niveau; if(!(n>=1&&n<=3)) return ''; return `<span class="niv n${n}" title="${NIVEAU[n]}" aria-label="${NIVEAU[n]}">${[1,2,3].map(k=>`<i${k<=n?' class="an"':''}></i>`).join('')}</span>`; }
 function videoOrdnung(vs){ return vs.slice().sort((a,b)=>(!!b.grundtechnik-!!a.grundtechnik)||((+a.niveau||2)-(+b.niveau||2))); }  // Grundtechniken zuerst, dann leicht → anspruchsvoll
@@ -837,7 +843,7 @@ async function loadContentFile(){
 }
 SCREENS.boot=app=>{ app.innerHTML='<div class="screen"><p class="muted">Lädt…</p></div>'; };
 async function boot(){
-  await blobs.open(); await Promise.all([loadContentFile(),loadMatFotos(),loadWerke(),loadAnleitungen()]);
+  await blobs.open(); await Promise.all([loadContentFile(),loadMatFotos(),loadWerke(),loadAnleitungen(),loadVorschau()]);
   const school=parseSchool(); if(school){ go('school',{video:school}); return; }
   if(SCHULE){ go(S.settings.klasse?'home':'klasse'); return; }
   if(!S.profiles.length){ go('firstrun'); return; }
@@ -1133,8 +1139,8 @@ function updatePlayerUI(){ if(!P) return;
   const bigPlay=(act,label)=>`<button class="kbtn round big" data-act="${act}" aria-label="${label}">${ico('play')}</button><div class="lbl">${label}</div>`;
   let html='', show=true, transparent=false;
   if(m==='error'){ html=`${figur('nachdenken')}<h2>Dieses Video geht hier nicht</h2><div class="hint">Sag es deinen Eltern.</div>`; }
-  else if(m==='start'&&steps[0]&&steps[0].material){ const canResume=pr.step>1; html=matCard(steps[0].material,`<button class="kbtn primary" data-act="start">${ico('check')} Habe ich alles – los!</button>${canResume?`<button class="kbtn ghost" data-act="resume">Weiter bei Schritt ${pr.step+1}</button>`:''}`); }
-  else if(m==='material'){ html=matCard(curStep().material,`<button class="kbtn primary" data-act="next">${ico('check')} Habe ich alles – weiter</button>`); }
+  else if(m==='start'&&steps[0]&&steps[0].material){ const canResume=pr.step>1; html=matCard(steps[0].material,`<button class="kbtn primary" data-act="start">${ico('check')} Habe ich alles – los!</button>${canResume?`<button class="kbtn ghost" data-act="resume">Weiter bei Schritt ${pr.step+1}</button>`:''}`,v.vorlagen); }
+  else if(m==='material'){ html=matCard(curStep().material,`<button class="kbtn primary" data-act="next">${ico('check')} Habe ich alles – weiter</button>`,v.vorlagen); }
   else if(m==='start'){ const canResume=n?pr.step>0:pr.pos>3;
     html=`${bigPlay(canResume?'resume':'start',canResume?(n?`Weiter bei Schritt ${pr.step+1}`:'Weiter schauen'):'Los geht\'s')}${canResume?`<button class="kbtn ghost" data-act="start">Von vorne</button>`:''}${n?`<div class="hint">${n} Schritte – das Video hält nach jedem Schritt an.</div>`:''}`; }
   else if(m==='playing'){ if(P.needsTap){ transparent=true; html=`<div class="lbl" style="background:rgba(0,0,0,.5);padding:10px 18px;border-radius:14px">Tippe auf das Video ▶</div>`; } else show=false; }
@@ -1336,7 +1342,7 @@ async function tabKatalog(root,acts){
   if(!data||!Array.isArray(data.eintraege)){ box.innerHTML=`<div class="note warn">Kein <b>katalog.json</b> gefunden. Der Katalog lädt nur, wenn die App über http/https läuft.</div>`; return; }
   const groups=S.areas.map(a=>({a,items:data.eintraege.filter(e=>e.areaId===a.id)})).filter(g=>g.items.length);
   const rest=data.eintraege.filter(e=>!areaOf(e.areaId)); if(rest.length) groups.push({a:null,items:rest});
-  box.innerHTML=`<p class="small muted">${data.eintraege.length} Videos${data.stand?', Stand '+esc(data.stand):''}</p>`+groups.map(g=>`<div class="panel"><h3 ${g.a?`style="color:${g.a.color}"`:''}>${g.a?esc(g.a.emoji+' '+g.a.name):'Weitere'}</h3><div class="list">${g.items.map(e=>{ const drin=!!videoOf(e.id); const th=e.source&&e.source.type==='youtube'?`<img src="https://i.ytimg.com/vi/${esc(e.source.id)}/mqdefault.jpg" alt="" loading="lazy">`:'🎬';
+  box.innerHTML=`<p class="small muted">${data.eintraege.length} Videos${data.stand?', Stand '+esc(data.stand):''}</p>`+groups.map(g=>`<div class="panel"><h3 ${g.a?`style="color:${g.a.color}"`:''}>${g.a?esc(g.a.emoji+' '+g.a.name):'Weitere'}</h3><div class="list">${g.items.map(e=>{ const drin=!!videoOf(e.id); const th=e.source&&e.source.type==='youtube'?`<img src="${esc(ytThumb(e.source.id))}" alt="" loading="lazy">`:'🎬';
     return `<div class="li" style="align-items:flex-start"><div class="th">${th}</div><div class="grow" style="min-width:0"><div class="t" style="white-space:normal">${esc(e.title)}</div><div class="small muted">${esc([e.kanal,e.dauer,(e.steps||[]).length?(e.steps.length+' Schritte'):'ohne Schritte',DELIV[(e.task&&e.task.deliverable)||'keine'],e.sprache].filter(Boolean).join(' · '))}</div>${e.hinweis?`<div class="small" style="margin-top:4px">${esc(e.hinweis)}</div>`:''}</div><div class="acts">${drin?'<span class="badge-ok">✓ Schon drin</span>':`<button class="btn primary sm" data-act="katadd" data-id="${esc(e.id)}">Hinzufügen</button>`}</div></div>`; }).join('')}</div></div>`).join('');
   acts.katadd=b=>{ const e=data.eintraege.find(x=>x.id===b.dataset.id); if(!e||videoOf(e.id)) return; const areaId=areaOf(e.areaId)?e.areaId:(S.areas.find(a=>a.kind==='lern')||S.areas[0]).id;
     S.videos.push({id:e.id,areaId,title:e.title,source:e.source,steps:(e.steps||[]).map(s=>({t:+s.t,label:String(s.label)})),task:e.task&&e.task.text?{text:e.task.text,deliverable:e.task.deliverable||'fertig'}:{text:'',deliverable:'keine'},quelle:'katalog'}); save(); toast('Hinzugefügt: '+e.title);

@@ -58,6 +58,7 @@ h1{font:600 30px/1 var(--display);margin:0}
 .fuss{display:flex;align-items:center;gap:6px;margin-top:auto;flex-wrap:wrap}
 .pill{font-size:12px;padding:2px 8px;border-radius:999px;background:var(--surface2);color:var(--muted)}
 .pill.ok{background:var(--lern-soft);color:#0F6E57}
+.pill.vorlage{background:#FBE3E3;color:#B03A3A;font-weight:700}
 .fuss code{margin-left:auto}
 .nichts{text-align:center;color:var(--muted);padding:60px 0;font:500 18px var(--display)}
 @media (max-width:600px){.wrap{padding:18px 16px 40px}.zahlen{width:100%}.zahl{flex:1;min-width:0}.hilfe{display:none}#suche{max-width:none}}
@@ -99,7 +100,7 @@ if(!FILTER.some(f=>f[0]===filter)||(filter==='offen'&&!anzahl.offen))filter=anza
 $('#zahlen').innerHTML=`<div class="zahl offen"><b>${anzahl.offen}</b><span>zu prüfen</span></div><div class="zahl drin"><b>${anzahl.drin}</b><span>veröffentlicht</span></div>`;
 function karte(e){
  const a=art(e),stand={drin:'Veröffentlicht',offen:'Zu prüfen',leer:e.brief?'Nur Brief':'Kein Entwurf'}[a];
- const pills=e.entwurf?[[e.status[0],e.schritte+' Schritte'],[e.status[1],'Angaben'],[e.status[2],'geprüft']].map(([ok,t])=>`<span class="pill${ok?' ok':''}">${ok?'✓ ':''}${t}</span>`).join(''):'';
+ const pills=(e.vorlage_fehlt?'<span class="pill vorlage">📄 braucht Vorlage</span>':'')+(e.entwurf?[[e.status[0],e.schritte+' Schritte'],[e.status[1],'Angaben'],[e.status[2],'geprüft']].map(([ok,t])=>`<span class="pill${ok?' ok':''}">${ok?'✓ ':''}${t}</span>`).join(''):'');
  const farbe=(D.themen.find(t=>t[0]===e.area)||[])[2];
  return `<a class="karte" href="video.html?id=${e.id}"><div class="bild"${farbe?` style="--farbe:${farbe}"`:''}><img loading="lazy" alt="" src="${e.vorschau}" onerror="this.remove()"><span class="stand ${a}">${stand}</span>${e.dauer?`<span class="dauer">${fmt(e.dauer)}</span>`:''}</div>
  <div class="text"><div class="titel">${esc(e.title)}</div><div class="fuss">${pills}<code>${esc(e.id)}</code></div></div></a>`}
