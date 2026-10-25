@@ -142,57 +142,72 @@
    "niveau": 1,
    "grundtechnik": true,
    "techniken": [
-    "schnurstricken"
+    "schnurstricken",
+    "abketten"
    ],
-   "title": "Strickliesel – von Anfang bis Schluss",
+   "title": "Strickliesel: Anfang und Abschluss",
    "source": {
     "type": "youtube",
-    "id": "Yfh1FpEMTtc"
+    "id": "5ffeZDaTQbE"
    },
    "kanal": "die Werklehrerin",
+   "dauer": "2:34",
+   "alter": "ab 7",
+   "sprache": "ohne Sprache",
+   "hinweis": "Video ohne Worte; beim Abketten jede Masche auf den Nachbarstift heben und die untere darüberziehen – das am besten einmal langsam vorzeigen.",
+   "material": [
+    "strickliesel",
+    "wolle",
+    "haekelnadel",
+    "stab",
+    "schere"
+   ],
    "steps": [
     {
      "t": 0,
-     "label": "Material richten"
+     "label": "Material richten: Strickliesel, Wolle, Häkelnadel, Stäbchen"
     },
     {
-     "t": 20,
-     "label": "Jeden Haken einmal umwickeln, im Uhrzeigersinn"
+     "t": 6.0,
+     "label": "Faden mit der Häkelnadel durchziehen"
     },
     {
-     "t": 40,
-     "label": "Faden über dem ersten Haken entlangführen"
+     "t": 24.0,
+     "label": "Faden um jeden Stift schlingen"
     },
     {
-     "t": 58,
-     "label": "Untere Schlaufe mit dem Stab über den Haken heben, unten am Faden ziehen"
+     "t": 36.0,
+     "label": "Faden vorlegen, untere Schlinge überheben"
     },
     {
-     "t": 80,
-     "label": "Immer so weiter, Haken für Haken"
+     "t": 52.0,
+     "label": "Mit dem Stäbchen Stift um Stift weiterstricken"
     },
     {
-     "t": 100,
-     "label": "Lang genug? Faden abschneiden"
+     "t": 90.5,
+     "label": "Faden lang abschneiden"
     },
     {
-     "t": 112,
-     "label": "Abschluss: Schlaufe über den Haken, Faden durchziehen – bei jedem Haken"
+     "t": 96.0,
+     "label": "Masche auf den nächsten Stift heben"
     },
     {
-     "t": 140,
-     "label": "Schlauch herausziehen – fertig!"
+     "t": 135.5,
+     "label": "Faden durch die letzte Masche ziehen"
+    },
+    {
+     "t": 142.5,
+     "label": "Schnur herausziehen und zusammenknoten"
+    },
+    {
+     "t": 147.0,
+     "label": "Fertig – schau deine Schnur an"
     }
    ],
    "task": {
     "text": "",
     "deliverable": "keine"
-   },
-   "material": [
-    "strickliesel",
-    "wolle",
-    "schere"
-   ]
+   }
   },
   {
    "id": "wl-wickeldrache",
@@ -2829,7 +2844,7 @@
   },
   {
    "id": "zw-fangbecher",
-   "areaId": "schneiden",
+   "areaId": "falten",
    "stufen": [
     1,
     2
