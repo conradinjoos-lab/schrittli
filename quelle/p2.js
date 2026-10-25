@@ -477,7 +477,7 @@ SCREENS.player=(app,{videoId,school})=>{
   const steps=buildVideoSteps(v); const pr=school?{pos:0,step:0,done:false,slow:false}:prog(v.id);
   if(!school){ S.settings.zuletzt=v.id; save(); }
   app.innerHTML=`<div class="${kidClass('pl'+(S.settings.kino&&!school?' kino':''))}">${girlande(n)}
-    <div class="inner kopf pl-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a><div class="schild"><h1>${esc(v.title)}</h1></div><div class="kopf-rechts"><span class="zettel" id="zettel"></span>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}</div></div>
+    <div class="inner kopf pl-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a><div class="schild"><h1>${esc(v.title)}</h1></div><div class="kopf-rechts"><button type="button" class="fm-pill" data-act="melden" title="Fehler melden">${ico('flag')}<span>Fehler melden</span></button><span class="zettel" id="zettel"></span>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}</div></div>
     <div class="inner panes">
       <div class="pane"><div class="plabel"><i class="punkt" style="background:#4C6EF5"></i>Schau zu</div><div class="video-box"><div class="host" id="host"></div><div class="shield" id="shield" data-act="shield"></div><div class="overlay" id="overlay"></div><span class="modebadge" id="modebadge" hidden></span></div><div class="fuss"></div></div>
       <div class="pane"><div class="plabel"><i class="punkt" style="background:#E8554E"></i><span id="zettel2">Die Schritte</span></div><div class="schritte" id="schritte"></div></div>
@@ -501,7 +501,7 @@ SCREENS.player=(app,{videoId,school})=>{
   wire(app,{
     back:()=>{ if(school) history.replaceState(null,'',location.pathname+location.search); go(a&&!school?'area':'home',a&&!school?{id:a.id}:{}); },
     shield:()=>{ const k=$('.kid.pl.liste'); if(k){ k.classList.remove('liste'); return; } if(P.mode==='playing') userPause(); else if(P.mode==='paused') userPlay(); else if(P.mode==='stepdone') nextStep(); },
-    kino:()=>toggleKino(), liste:()=>{ const k=$('.kid.pl'); if(k) k.classList.toggle('liste'); },
+    melden:()=>fehlerMelden(), kino:()=>toggleKino(), liste:()=>{ const k=$('.kid.pl'); if(k) k.classList.toggle('liste'); },
     start:()=>startPlaying(false), resume:()=>startPlaying(true), play:()=>userPlay(), pause:()=>userPause(),
     toggle:()=>{ if(P.mode==='playing') userPause(); else if(P.mode==='paused') userPlay(); else if(P.mode==='material') nextStep(); else if(P.mode==='start') startPlaying(!!(pr.step||pr.pos>3)); else if(P.mode==='stepdone') nextStep(); else if(P.mode==='ended') startPlaying(false); },
     replay:()=>replayStep(), next:()=>nextStep(), prevstep:()=>{ if(P.idx>0){ P.idx--; jumpStep(); } },
