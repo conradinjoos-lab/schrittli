@@ -70,6 +70,31 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 .mehr{font-size:14px;color:var(--muted);text-align:center}
 @media (max-width:860px){main{grid-template-columns:minmax(0,1fr)}.seite-rechts{position:static}h1{font-size:24px}}
 @media (max-width:480px){.raster{grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px}.form{min-height:80px;font-size:12px}.form svg{width:40px;height:40px}}
+/* Abpausen am Bildschirm: immer hell, damit die Linie durchs Papier scheint */
+.pausen-auf{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:10px;min-height:48px}
+.pausen-auf svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+#pausen{position:fixed;inset:0;z-index:50;background:#fff;color:#17212F;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overscroll-behavior:none}
+.p-flaeche{position:absolute;inset:0;display:grid;place-items:center}
+.p-flaeche svg{display:block}
+.p-flaeche .warn{max-width:420px;padding:16px;text-align:center}
+.p-leiste{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 12px;background:rgba(238,243,248,.94);border-bottom:1px solid #D5DEE9}
+.p-titel{flex:1;font-weight:800;min-width:8em}
+#pausen .knopf{background:#fff;color:#17212F;border-color:#D5DEE9}
+#pausen .knopf.p-sperren{background:#17997A;color:#fff;border-color:#17997A}
+#pausen .knopf:disabled{opacity:.45}
+.p-hilfe{position:absolute;left:12px;right:12px;bottom:10px;margin:0;font-size:13px;color:#5B6B80;background:rgba(255,255,255,.9)}
+.p-hilfe b{color:#17212F}
+.p-eichung{position:absolute;inset:0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:16px;text-align:center}
+.p-eichung p{margin:0;max-width:460px}
+.p-karte{border:2px solid #17212F;background:#F5F8FB}
+.p-regler{display:flex;align-items:center;gap:10px;width:min(460px,100%)}
+.p-regler .knopf{width:48px;font-size:22px;padding:4px 0}
+.p-eichung .drucken{max-width:260px}
+.p-schloss{position:absolute;right:12px;bottom:12px;width:56px;height:56px;border-radius:50%;border:2px solid #D5DEE9;background:#fff;color:#9DACBF;display:grid;place-items:center;padding:0;cursor:pointer;touch-action:none}
+.p-schloss svg{grid-area:1/1;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+.p-schloss svg.ring{width:56px;height:56px;transform:rotate(-90deg);stroke:#17997A;stroke-width:4;stroke-dasharray:163.4;stroke-dashoffset:163.4}
+.p-schloss.halten svg.ring{stroke-dashoffset:0;transition:stroke-dashoffset 3s linear}
+.p-tipp{position:absolute;right:76px;bottom:24px;margin:0;font-size:14px;color:#5B6B80;background:#fff}
 #druck{display:none}
 @page{size:A4 portrait;margin:0}
 @media print{
@@ -127,6 +152,7 @@ input[type=range]{width:100%;accent-color:var(--acc)}
         <label><input type="checkbox" id="spiegel"> spiegeln</label>
       </div>
       <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
+      <button type="button" class="knopf pausen-auf" id="pausen-auf"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 8.5c-1.2-1.7-4-1.1-4 1 0 2 2.4 3.6 4 5 1.6-1.4 4-3 4-5 0-2.1-2.8-2.7-4-1z"/></svg><span>Auf dem Bildschirm abpausen</span></button>
       <p class="info" id="info" aria-live="polite"></p>
       <p class="hinweis">Beim Drucken «Tatsächliche Grösse» oder 100 % wählen, nicht «An Seite anpassen». Die 5-cm-Linie unten auf dem Blatt zeigt, ob es stimmt.</p>
     </section>
@@ -137,6 +163,25 @@ input[type=range]{width:100%;accent-color:var(--acc)}
   </div>
 </main>
 <div id="druck"></div>
+<div id="pausen" hidden role="dialog" aria-modal="true" aria-label="Abpausen">
+  <div class="p-flaeche" id="p-flaeche"></div>
+  <div class="p-leiste" id="p-leiste">
+    <button type="button" class="knopf" id="p-zu">← Zurück</button>
+    <span class="p-titel" id="p-titel"></span>
+    <button type="button" class="knopf" id="p-eichen">Grösse prüfen</button>
+    <button type="button" class="knopf p-sperren" id="p-sperren">Sperren</button>
+  </div>
+  <p class="p-hilfe" id="p-hilfe"><b>☀ Helligkeit ganz hoch:</b> oben rechts nach unten wischen, Regler ganz hinauf. Dann «Sperren» drücken und Papier auflegen. Ganz sicher sperren: Einstellungen → Bedienungshilfen → Geführter Zugriff.</p>
+  <button type="button" class="p-schloss" id="p-schloss" hidden aria-label="Zum Entsperren 3 Sekunden drücken"><svg class="ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
+  <p class="p-tipp" id="p-tipp" hidden>Gesperrt. Zum Entsperren das Schloss 3 Sekunden drücken.</p>
+  <div class="p-eichung" id="p-eichung" hidden>
+    <h2>Stimmt die Grösse?</h2>
+    <p>Leg eine Bankkarte oder einen Ausweis auf den Rahmen. Mach den Rahmen genau gleich gross wie die Karte.</p>
+    <div class="p-karte" id="p-karte"></div>
+    <div class="p-regler"><button type="button" class="knopf" id="p-minus" aria-label="Kleiner">−</button><input type="range" id="p-regler" min="25" max="90" step="0.05" aria-label="Grösse anpassen"><button type="button" class="knopf" id="p-plus" aria-label="Grösser">+</button></div>
+    <button type="button" class="drucken" id="p-ok">Passt</button>
+  </div>
+</div>
 <script src="formen.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/clipper-lib@6.4.2/clipper.js"></script>
 <script>
@@ -359,6 +404,94 @@ document.querySelectorAll('[name=linie]').forEach(r=>r.addEventListener('change'
 $('det').addEventListener('change',()=>{S.det=$('det').checked;zeichnen()});
 $('spiegel').addEventListener('change',()=>{S.spiegel=$('spiegel').checked;zeichnen()});
 $('drucken').addEventListener('click',()=>window.print());
+
+// Abpausen: Form in echter Grösse auf dem Bildschirm. Wie viele Bildschirmpunkte ein cm sind, weiss der Browser nicht –
+// darum einmal pro Gerät mit einer Karte (85,6 × 54 mm) eichen. Die Helligkeit kann eine Webseite nicht stellen: nur Hinweis.
+const PXCM_KEY='schrittli-pausen-pxcm',KARTE={w:85.6,h:53.98,r:3.18};
+function schaetzen(){
+  const ipad=/iPad/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  if(!ipad)return 96/2.54;
+  return Math.min(screen.width,screen.height)<768?163/2.54:132/2.54;   // iPad mini 326 ppi, sonst 264 ppi
+}
+let pxcm=0;try{pxcm=+localStorage.getItem(PXCM_KEY)||0}catch(e){}
+let gesperrt=false,wach=null;
+function pausenZeichnen(){
+  if(!pxcm)return;
+  const st=stueck(),px=pxcm/10,rand=1.5;
+  const fw=innerWidth/px-2*rand,fh=innerHeight/px-2*rand;    // Platz in mm
+  const dreh=!(st.w<=fw&&st.h<=fh)&&st.h<=fw&&st.w<=fh;      // quer, wenn es nur so passt
+  const w=dreh?st.h:st.w,h=dreh?st.w:st.h,ok=w<=fw&&h<=fh;
+  $('p-titel').textContent=`${form().name} · ${cm(S.b)} × ${cm(S.h)} cm`;
+  $('p-sperren').disabled=!ok;
+  if(!ok){$('p-flaeche').innerHTML=`<p class="warn">Zu gross für diesen Bildschirm. Höchstens etwa ${cm(Math.max(fw,fh)/10)} × ${cm(Math.min(fw,fh)/10)} cm – bitte kleiner wählen oder drucken.</p>`;return}
+  const d=.8;   // Strichdicke in mm
+  $('p-flaeche').innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" width="${(w+2*d)*px}" height="${(h+2*d)*px}" viewBox="${-d} ${-d} ${w+2*d} ${h+2*d}" role="img" aria-label="${form().name} in echter Grösse"><g${dreh?` transform="rotate(90) translate(0 ${-st.h})"`:''}>`+
+    (st.det.length?`<path d="${st.det.map(l=>pfad(l,0)).join('')}" fill="none" stroke="#8a8178" stroke-width=".5" stroke-linecap="round"/>`:'')+
+    (st.naht.length?`<path d="${st.naht.map(r=>pfad(r,1)).join('')}" fill="none" stroke="#5b6573" stroke-width=".5" stroke-dasharray="2.5 1.8"/>`:'')+
+    `<path d="${st.schnitt.map(r=>pfad(r,1)).join('')}" fill="none" stroke="#000" stroke-width="${d}" stroke-linejoin="round"/></g></svg>`;
+}
+async function wachHalten(an){
+  try{
+    if(an&&'wakeLock' in navigator&&!wach){wach=await navigator.wakeLock.request('screen');wach.addEventListener('release',()=>{wach=null})}
+    else if(!an&&wach){const w=wach;wach=null;await w.release()}
+  }catch(e){}
+}
+function eichKarte(){
+  const px=pxcm/10,k=$('p-karte');
+  k.style.width=KARTE.w*px+'px';k.style.height=KARTE.h*px+'px';k.style.borderRadius=KARTE.r*px+'px';
+}
+function eichung(an){
+  $('p-eichung').hidden=!an;
+  if(!an)return;
+  if(!pxcm)pxcm=schaetzen();
+  $('p-regler').value=pxcm;eichKarte();
+}
+function eichen(v){pxcm=Math.max(25,Math.min(90,v));$('p-regler').value=pxcm;eichKarte()}
+$('p-regler').addEventListener('input',()=>eichen(+$('p-regler').value));
+$('p-minus').addEventListener('click',()=>eichen(pxcm-.1));
+$('p-plus').addEventListener('click',()=>eichen(pxcm+.1));
+$('p-ok').addEventListener('click',()=>{try{localStorage.setItem(PXCM_KEY,pxcm)}catch(e){}eichung(false);pausenZeichnen()});
+$('p-eichen').addEventListener('click',()=>eichung(true));
+function sperren(an){
+  gesperrt=an;
+  $('p-leiste').hidden=$('p-hilfe').hidden=an;$('p-schloss').hidden=!an;$('p-tipp').hidden=true;
+  (an?$('p-schloss'):$('p-sperren')).focus({preventScroll:true});
+}
+$('p-sperren').addEventListener('click',()=>sperren(true));
+function pausenAuf(){
+  $('pausen').hidden=false;document.documentElement.style.overflow='hidden';
+  const el=document.documentElement,fs=el.requestFullscreen||el.webkitRequestFullscreen;
+  try{const r=fs&&fs.call(el);if(r&&r.catch)r.catch(()=>{})}catch(e){}
+  wachHalten(true);sperren(false);
+  let gespeichert=0;try{gespeichert=+localStorage.getItem(PXCM_KEY)||0}catch(e){}
+  eichung(!gespeichert);pausenZeichnen();
+}
+function pausenZu(){
+  $('pausen').hidden=true;document.documentElement.style.overflow='';
+  const ex=document.exitFullscreen||document.webkitExitFullscreen;
+  try{if(document.fullscreenElement||document.webkitFullscreenElement){const r=ex.call(document);if(r&&r.catch)r.catch(()=>{})}}catch(e){}
+  wachHalten(false);$('pausen-auf').focus();
+}
+$('pausen-auf').addEventListener('click',pausenAuf);
+$('p-zu').addEventListener('click',pausenZu);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('pausen').hidden&&!gesperrt)pausenZu()});
+addEventListener('resize',()=>{if(!$('pausen').hidden)pausenZeichnen()});
+document.addEventListener('visibilitychange',()=>{if(!$('pausen').hidden&&document.visibilityState==='visible')wachHalten(true)});
+// Gesperrt: jede Berührung schlucken, ausser am Schloss (3 Sekunden halten)
+let tippZeit=0,haltZeit=0;
+const schlucken=e=>{
+  if(!gesperrt||e.target.closest('#p-schloss'))return;
+  e.preventDefault();e.stopPropagation();
+  if(e.type==='touchstart'||e.type==='mousedown'){$('p-tipp').hidden=false;clearTimeout(tippZeit);tippZeit=setTimeout(()=>{$('p-tipp').hidden=true},2500)}
+};
+['touchstart','touchmove','touchend','gesturestart','gesturechange','contextmenu','dblclick','wheel','mousedown','click','keydown'].forEach(t=>$('pausen').addEventListener(t,schlucken,{passive:false,capture:true}));
+document.addEventListener('touchmove',e=>{if(!$('pausen').hidden)e.preventDefault()},{passive:false});
+const loslassen=()=>{clearTimeout(haltZeit);$('p-schloss').classList.remove('halten')};
+$('p-schloss').addEventListener('pointerdown',e=>{
+  e.preventDefault();$('p-schloss').classList.add('halten');
+  haltZeit=setTimeout(()=>{loslassen();sperren(false)},3000);
+});
+['pointerup','pointercancel','pointerleave'].forEach(t=>$('p-schloss').addEventListener(t,loslassen));
 
 if(S.lock){const f=form();if(q.has('h')&&!q.has('b'))S.b=S.h*f.w/f.h;else S.h=S.b*f.h/f.w}
 auswahl();felder();zeichnen();

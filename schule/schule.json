@@ -1989,6 +1989,12 @@
     "hammer",
     "klebeband",
     "papier"
+   ],
+   "vorlagen": [
+    {
+     "datei": "?form=herz&b=12",
+     "name": "Herz, 12 cm breit"
+    }
    ]
   },
   {
@@ -2619,6 +2625,12 @@
     "bleistift",
     "schere",
     "klebeband"
+   ],
+   "vorlagen": [
+    {
+     "datei": "?form=hase&h=15",
+     "name": "Hase, 15 cm hoch"
+    }
    ]
   },
   {
@@ -3424,7 +3436,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=stern&b=5",
+     "name": "Stern, 5 cm"
+    }
+   ]
   },
   {
    "id": "zw-polystyroldruck",
@@ -3732,7 +3750,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=lama&h=15",
+     "name": "Lama, 15 cm hoch"
+    }
+   ]
   },
   {
    "id": "zw-laubsaege-erste-schnitte",
@@ -4803,7 +4827,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=kreis&b=16",
+     "name": "Kreis, 16 cm"
+    }
+   ]
   },
   {
    "id": "zw-eierwaermer-filzen",
@@ -6537,7 +6567,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=kreis&b=12&n=2",
+     "name": "Kreis, 12 cm"
+    }
+   ]
   },
   {
    "id": "zw-tischlaterne",
@@ -15806,7 +15842,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=eule&h=10",
+     "name": "Eule, 10 cm hoch"
+    }
+   ]
   },
   {
    "id": "zw-gecko-eindrueckform",
@@ -16257,7 +16299,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=vogel&b=12",
+     "name": "Vogel, 12 cm lang"
+    }
+   ]
   },
   {
    "id": "zw-nisthilfe-wildbienen",
@@ -16485,7 +16533,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=herz&b=7",
+     "name": "Herz, 7 cm breit"
+    }
+   ]
   },
   {
    "id": "zw-becherpuppe-zappelt",
@@ -16853,7 +16907,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=kreis&b=10",
+     "name": "Kreis, 10 cm"
+    }
+   ]
   },
   {
    "id": "zw-schnappi-fangspiel",
@@ -18067,7 +18127,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=fisch&b=8&n=3",
+     "name": "Fisch, 8 cm lang"
+    }
+   ]
   },
   {
    "id": "zw-kiwi-untersetzer-filzen",
@@ -20793,7 +20859,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=herz&b=5",
+     "name": "Herz, 5 cm breit"
+    }
+   ]
   },
   {
    "id": "zw-klappen-drehteile-karton",
@@ -22205,7 +22277,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=schneemann&h=15",
+     "name": "Schneemann, 15 cm hoch"
+    }
+   ]
   },
   {
    "id": "zw-punktemuster-keramik",
@@ -23533,7 +23611,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=kreis&b=15",
+     "name": "Kreis, 15 cm"
+    }
+   ]
   },
   {
    "id": "zw-osterei-blueten-ton",
@@ -23748,7 +23832,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=schmetterling&b=9&n=2",
+     "name": "Schmetterling, 9 cm breit"
+    }
+   ]
   },
   {
    "id": "zw-ammonitenbecher-ton",
