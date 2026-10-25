@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Schrittli Vorlagen</title>
+<meta name="description" content="Form wählen, Grösse in cm eingeben, drucken: Schablonen in echter Grösse für den TTG-Unterricht.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<style>
+:root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--bad:#D64545;--papier:#FFFFFF;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
+h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
+h1{font-size:28px}
+h2{font-size:17px;margin-bottom:10px}
+.kopf{max-width:1200px;margin:0 auto;padding:20px 16px 8px}
+.kopf p{margin:4px 0 0;color:var(--muted)}
+main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:20px;align-items:start}
+.karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
+.suchkopf{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.suchkopf h2{margin:0}
+.suchkopf input{flex:1;max-width:280px;font:inherit;font-size:16px;color:var(--ink);background:var(--surface2);border:2px solid var(--line);border-radius:12px;padding:7px 12px;min-width:0}
+.gruppe{margin:4px 0 14px}
+.gruppe h3{font:700 13px Nunito,sans-serif;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin:0 0 8px}
+.raster{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
+.form{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px 6px;border:2px solid var(--line);border-radius:14px;background:var(--surface2);color:var(--ink);font:inherit;font-size:13px;cursor:pointer;min-height:92px}
+.form svg{width:52px;height:52px}
+.form svg path{fill:var(--acc-soft);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.form[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
+.form[aria-pressed="true"] svg path{fill:var(--surface)}
+.form:hover{border-color:var(--acc)}
+.form:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.seite-rechts{position:sticky;top:12px;display:flex;flex-direction:column;gap:14px}
+.feld{margin-bottom:14px}
+.feld>label,.feld>.lbl{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
+.masse{display:flex;align-items:center;gap:8px}
+.masse input{width:100%}
+input[type=text],input[type=number]{font:inherit;font-size:20px;color:var(--ink);background:var(--surface2);border:2px solid var(--line);border-radius:12px;padding:8px 10px;min-width:0}
+.einheit{color:var(--muted);font-size:15px}
+.schloss{flex:none;width:44px;height:44px;border-radius:12px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.schloss[aria-pressed="true"]{border-color:var(--acc);color:var(--acc)}
+.schloss svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{font:inherit;font-size:14px;padding:6px 12px;border-radius:999px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--acc)}
+.chip[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
+.zeile{display:flex;gap:8px;align-items:center}
+.zeile input[type=number]{width:96px}
+.knopf{font:inherit;font-size:15px;padding:9px 14px;border-radius:12px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer}
+.knopf:hover{border-color:var(--acc)}
+.wahl{display:flex;flex-direction:column;gap:6px}
+.wahl label{display:flex;align-items:center;gap:8px;font-size:15px;cursor:pointer}
+.wahl input{accent-color:var(--acc);width:18px;height:18px}
+.mm{display:flex;align-items:center;gap:6px;margin:4px 0 0 26px;font-size:14px;color:var(--muted)}
+.mm input{width:70px;font-size:16px;padding:5px 8px}
+input[type=range]{width:100%;accent-color:var(--acc)}
+.drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
+.drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
+.drucken:disabled{opacity:.45;cursor:not-allowed}
+.info{font-size:15px;margin:10px 0 0}
+.hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
+.warn{color:var(--bad)}
+.vorschau{display:flex;flex-direction:column;gap:14px;align-items:center}
+.vorschau svg{display:block;width:100%;height:auto;background:var(--papier);border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+.mehr{font-size:14px;color:var(--muted);text-align:center}
+@media (max-width:860px){main{grid-template-columns:minmax(0,1fr)}.seite-rechts{position:static}h1{font-size:24px}}
+@media (max-width:480px){.raster{grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px}.form{min-height:80px;font-size:12px}.form svg{width:40px;height:40px}}
+#druck{display:none}
+@page{size:A4 portrait;margin:0}
+@media print{
+  body{background:#fff}
+  .kopf,main{display:none!important}
+  #druck{display:block}
+  #druck svg{display:block;width:210mm;height:297mm;break-after:page;page-break-after:always}
+  #druck svg:last-child{break-after:auto;page-break-after:auto}
+}
+</style>
+</head>
+<body>
+<header class="kopf">
+  <h1>Vorlagen-Generator</h1>
+  <p>Form wählen, Grösse eingeben, drucken. Die Vorlage kommt in echter Grösse aus dem Drucker.</p>
+</header>
+<main>
+  <section class="karte" aria-label="Form wählen" id="formen"></section>
+  <div class="seite-rechts">
+    <section class="karte" aria-label="Einstellungen">
+      <div class="feld">
+        <span class="lbl" id="lbl-groesse">Grösse (Breite × Höhe)</span>
+        <div class="masse" role="group" aria-labelledby="lbl-groesse">
+          <input type="text" inputmode="decimal" id="b" aria-label="Breite in cm">
+          <span class="einheit">×</span>
+          <input type="text" inputmode="decimal" id="h" aria-label="Höhe in cm">
+          <span class="einheit">cm</span>
+          <button type="button" class="schloss" id="schloss" aria-pressed="true" title="Seitenverhältnis behalten"></button>
+        </div>
+        <div class="chips" id="chips" aria-label="Schnell wählen (längste Seite)"></div>
+      </div>
+      <div class="feld" id="feld-param" hidden>
+        <label for="param" id="lbl-param">Zacken</label>
+        <input type="range" id="param" min="3" max="12" step="1">
+      </div>
+      <div class="feld">
+        <label for="n">Anzahl</label>
+        <div class="zeile">
+          <input type="number" id="n" min="1" max="500" step="1" inputmode="numeric">
+          <button type="button" class="knopf" id="fuellen">Blatt füllen</button>
+        </div>
+      </div>
+      <div class="feld">
+        <span class="lbl">Linien</span>
+        <div class="wahl" role="radiogroup" aria-label="Linien">
+          <label><input type="radio" name="linie" value="schnitt"> nur Schnittlinie</label>
+          <label><input type="radio" name="linie" value="naht"> mit Nählinie innen</label>
+          <div class="mm" id="mm-naht"><input type="number" id="naht" min="1" max="20" step="1" aria-label="Abstand der Nählinie in mm"> mm vom Rand</div>
+          <label><input type="radio" name="linie" value="zugabe"> mit Nahtzugabe aussen</label>
+          <div class="mm" id="mm-zugabe"><input type="number" id="zugabe" min="1" max="20" step="1" aria-label="Nahtzugabe in mm"> mm dazu</div>
+        </div>
+      </div>
+      <div class="feld wahl">
+        <label id="feld-det"><input type="checkbox" id="det"> Augen und Linien zeigen</label>
+        <label><input type="checkbox" id="spiegel"> spiegeln</label>
+      </div>
+      <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
+      <p class="info" id="info" aria-live="polite"></p>
+      <p class="hinweis">Beim Drucken «Tatsächliche Grösse» oder 100 % wählen, nicht «An Seite anpassen». Die 5-cm-Linie unten auf dem Blatt zeigt, ob es stimmt.</p>
+    </section>
+    <section class="karte" aria-label="Vorschau">
+      <h2>Vorschau</h2>
+      <div class="vorschau" id="vorschau"></div>
+    </section>
+  </div>
+</main>
+<div id="druck"></div>
+<script src="formen.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipper-lib@6.4.2/clipper.js"></script>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const BLATT={w:210,h:297,rand:10,oben:24,unten:24,abstand:3};   // mm
+const NUTZ={x:BLATT.rand,y:BLATT.oben,w:BLATT.w-2*BLATT.rand,h:BLATT.h-BLATT.oben-BLATT.unten};
+const CHIPS=[2,3,4,5,6,8,10,12,15];
+const PARAM={stern:{label:'Zacken',def:5},vieleck:{label:'Ecken',def:6}};
+const MAXSEITEN=30;
+const FORMEN=window.FORMEN||[];
+const byId=Object.fromEntries(FORMEN.map(f=>[f.id,f]));
+
+// Stern und Vieleck mit einstellbarer Zahl
+function normal(rings){
+  let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  rings.forEach(r=>r.forEach(([x,y])=>{x0=Math.min(x0,x);y0=Math.min(y0,y);x1=Math.max(x1,x);y1=Math.max(y1,y)}));
+  const s=100/Math.max(x1-x0,y1-y0);
+  return {w:(x1-x0)*s,h:(y1-y0)*s,d:rings.map(r=>r.map(([x,y])=>[(x-x0)*s,(y-y0)*s]))};
+}
+function paramForm(id,n){
+  const pts=[];
+  if(id==='stern'){
+    const ri=Math.min(.55,.25+n*.03);
+    for(let k=0;k<2*n;k++){const a=-Math.PI/2+Math.PI*k/n,r=k%2?ri:1;pts.push([r*Math.cos(a),r*Math.sin(a)])}
+  }else{
+    const a0=n%2?-Math.PI/2:-Math.PI/2+Math.PI/n;   // gerade Ecken: Kante unten flach
+    for(let k=0;k<n;k++){const a=a0+2*Math.PI*k/n;pts.push([Math.cos(a),Math.sin(a)])}
+  }
+  return Object.assign({},byId[id],normal([pts]),{det:[]});
+}
+
+// Zustand: aus der Adresse, sonst vom letzten Mal
+const S={id:'herz',b:5,h:5,lock:true,n:1,linie:'schnitt',naht:5,zugabe:7,det:true,spiegel:false,param:5};
+try{Object.assign(S,JSON.parse(localStorage.getItem('schrittli-vorlagen')||'{}'))}catch(e){}
+const q=new URLSearchParams(location.search);
+if(q.has('form')&&byId[q.get('form')]){
+  S.id=q.get('form');S.lock=!(q.has('b')&&q.has('h'));S.n=1;S.linie='schnitt';S.spiegel=false;
+  if(PARAM[S.id])S.param=PARAM[S.id].def;
+}
+const zahl=(v,d)=>{const x=parseFloat(String(v).replace(',','.'));return isFinite(x)&&x>0?x:d};
+if(q.has('b'))S.b=zahl(q.get('b'),S.b);
+if(q.has('h'))S.h=zahl(q.get('h'),S.h);
+if(q.has('n'))S.n=Math.round(zahl(q.get('n'),1));
+if(q.has('z'))S.param=Math.round(zahl(q.get('z'),S.param));
+if(q.has('linie'))S.linie=q.get('linie');
+if(!byId[S.id])S.id='herz';
+
+const form=()=>PARAM[S.id]?paramForm(S.id,S.param):byId[S.id];
+const cm=v=>(Math.round(v*10)/10).toLocaleString('de-CH');
+const pfad=(r,zu)=>'M'+r.map(([x,y])=>x.toFixed(2)+' '+y.toFixed(2)).join('L')+(zu?'Z':'');
+
+// Formen-Auswahl
+const einfach=s=>s.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').normalize('NFD').replace(/[̀-ͯ]/g,'');
+function auswahl(){
+  const gruppen={};FORMEN.forEach(f=>(gruppen[f.gruppe]=gruppen[f.gruppe]||[]).push(f));
+  $('formen').innerHTML='<div class="suchkopf"><h2>Form</h2><input type="search" id="suche" placeholder="Suchen, z.B. Herz" aria-label="Form suchen" autocomplete="off"></div>'
+    +Object.entries(gruppen).map(([g,fs])=>
+    `<div class="gruppe"><h3>${g}</h3><div class="raster">`+fs.map(f=>{
+      const p=PARAM[f.id]?paramForm(f.id,PARAM[f.id].def):f,pad=6;
+      return `<button type="button" class="form" data-id="${f.id}" data-such="${einfach(f.name+' '+f.id+' '+g)}" aria-pressed="false"><svg viewBox="${-pad-(100-p.w)/2} ${-pad-(100-p.h)/2} ${100+2*pad} ${100+2*pad}" aria-hidden="true"><path d="${p.d.map(r=>pfad(r,1)).join('')}"/></svg>${f.name}</button>`;
+    }).join('')+'</div></div>').join('')+'<p class="hinweis" id="nichts" hidden>Keine passende Form gefunden.</p>';
+  $('suche').addEventListener('input',e=>{
+    const t=einfach(e.target.value.trim());let alle=0;
+    document.querySelectorAll('#formen .gruppe').forEach(gr=>{
+      let n=0;gr.querySelectorAll('.form').forEach(k=>{const ja=!t||k.dataset.such.includes(t);k.hidden=!ja;n+=ja});
+      gr.hidden=!n;alle+=n;
+    });
+    $('nichts').hidden=alle>0;
+  });
+  $('formen').addEventListener('click',e=>{
+    const k=e.target.closest('.form');if(!k)return;
+    S.id=k.dataset.id;if(PARAM[S.id])S.param=PARAM[S.id].def;
+    const f=form(),l=Math.max(S.b,S.h);           // längste Seite bleibt, Verhältnis der neuen Form
+    S.lock=true;S.b=l*f.w/100;S.h=l*f.h/100;
+    felder();zeichnen();
+    if(matchMedia('(max-width:860px)').matches)$('b').closest('.karte').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
+
+// Geometrie in mm
+function offset(rings,mm){
+  const co=new ClipperLib.ClipperOffset(2,5),sol=new ClipperLib.Paths();
+  co.AddPaths(rings.map(r=>r.map(([x,y])=>({X:Math.round(x*100),Y:Math.round(y*100)}))),ClipperLib.JoinType.jtRound,ClipperLib.EndType.etClosedPolygon);
+  co.Execute(sol,mm*100);
+  return sol.map(p=>p.map(o=>[o.X/100,o.Y/100]));
+}
+function stueck(){
+  const f=form(),sx=S.b*10/f.w,sy=S.h*10/f.h;
+  const tr=([x,y])=>[(S.spiegel?f.w-x:x)*sx,y*sy];
+  const umriss=f.d.map(r=>r.map(tr)),det=S.det?f.det.map(l=>l.map(tr)):[];
+  let schnitt=umriss,naht=[];
+  if(S.linie==='naht'){naht=offset(umriss,-S.naht)}
+  else if(S.linie==='zugabe'){schnitt=offset(umriss,S.zugabe);naht=umriss}
+  let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  schnitt.forEach(r=>r.forEach(([x,y])=>{x0=Math.min(x0,x);y0=Math.min(y0,y);x1=Math.max(x1,x);y1=Math.max(y1,y)}));
+  const verschieben=a=>a.map(r=>r.map(([x,y])=>[x-x0,y-y0]));
+  return {w:x1-x0,h:y1-y0,schnitt:verschieben(schnitt),naht:verschieben(naht),det:verschieben(det)};
+}
+function platz(w,h){
+  const g=BLATT.abstand,sp=Math.floor((NUTZ.w+g)/(w+g)),ze=Math.floor((NUTZ.h+g)/(h+g));
+  return {sp,ze,pro:sp*ze};
+}
+function anordnen(st){
+  const a=platz(st.w,st.h),b=platz(st.h,st.w);
+  const dreh=b.pro>a.pro;                       // quer legen, wenn mehr Platz hat
+  return Object.assign(dreh?b:a,{dreh,w:dreh?st.h:st.w,h:dreh?st.w:st.h});
+}
+
+// Blätter als SVG in mm
+function blaetter(st,lay){
+  const name=form().name+(PARAM[S.id]?` (${S.param} ${PARAM[S.id].label})`:'');
+  const seiten=Math.min(MAXSEITEN,Math.ceil(S.n/lay.pro)),g=BLATT.abstand;
+  const breite=lay.sp*lay.w+(lay.sp-1)*g,x0=NUTZ.x+(NUTZ.w-breite)/2;
+  const teil=`<path d="${st.schnitt.map(r=>pfad(r,1)).join('')}" fill="none" stroke="#1c2430" stroke-width=".35" stroke-linejoin="round"/>`+
+    (st.naht.length?`<path d="${st.naht.map(r=>pfad(r,1)).join('')}" fill="none" stroke="#5b6573" stroke-width=".3" stroke-dasharray="2 1.5"/>`:'')+
+    (st.det.length?`<path d="${st.det.map(l=>pfad(l,0)).join('')}" fill="none" stroke="#8a8178" stroke-width=".25" stroke-linecap="round"/>`:'');
+  const legende=S.linie==='schnitt'?'':
+    `<g font-size="3.2" fill="#5b6573"><line x1="128" y1="15" x2="138" y2="15" stroke="#1c2430" stroke-width=".35"/><text x="140" y="16.1">schneiden</text>`+
+    `<line x1="162" y1="15" x2="172" y2="15" stroke="#5b6573" stroke-width=".3" stroke-dasharray="2 1.5"/><text x="174" y="16.1">nähen</text></g>`;
+  const out=[];let rest=S.n;
+  for(let s=0;s<seiten;s++){
+    const hier=Math.min(rest,lay.pro);rest-=hier;
+    let teile='';
+    for(let i=0;i<hier;i++){
+      const x=x0+(i%lay.sp)*(lay.w+g),y=NUTZ.y+Math.floor(i/lay.sp)*(lay.h+g);
+      teile+=`<g transform="translate(${x.toFixed(2)} ${y.toFixed(2)})${lay.dreh?` rotate(90) translate(0 ${-lay.w})`:''}">${teil}</g>`;
+    }
+    out.push(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${BLATT.w} ${BLATT.h}" width="${BLATT.w}mm" height="${BLATT.h}mm" font-family="Nunito,Arial,sans-serif" role="img" aria-label="Blatt ${s+1}: ${hier} × ${name}">`+
+      `<rect width="${BLATT.w}" height="${BLATT.h}" fill="#fff"/>`+
+      `<text x="10" y="16.5" font-size="6" font-weight="800" fill="#1c2430">${name}</text>`+
+      `<text x="10" y="21" font-size="3.4" fill="#5b6573">${cm(S.b)} × ${cm(S.h)} cm${S.linie==='naht'?` · Nählinie ${S.naht} mm innen`:S.linie==='zugabe'?` · Nahtzugabe ${S.zugabe} mm`:''}${seiten>1?` · Blatt ${s+1} von ${seiten}`:''}</text>`+
+      legende+teile+
+      `<g stroke="#1c2430" stroke-width=".45"><line x1="10" y1="285" x2="60" y2="285"/><line x1="10" y1="283" x2="10" y2="287"/><line x1="60" y1="283" x2="60" y2="287"/></g>`+
+      `<text x="10" y="281.5" font-size="2.8" fill="#5b6573">Diese Linie muss 5 cm lang sein. Drucke in Originalgrösse (100 %).</text>`+
+      `<text x="200" y="286" font-size="2.6" fill="#5b6573" text-anchor="end">Schrittli · eigene Vorlage, frei für den Unterricht</text></svg>`);
+  }
+  return out;
+}
+
+function zeichnen(){
+  document.querySelectorAll('.form').forEach(k=>k.setAttribute('aria-pressed',k.dataset.id===S.id));
+  const st=stueck(),lay=anordnen(st);
+  let info,ok=lay.pro>0;
+  if(!ok){
+    info=`<span class="warn">Zu gross für ein A4-Blatt. Höchstens ${cm(NUTZ.w/10)} × ${cm(NUTZ.h/10)} cm.</span>`;
+    $('vorschau').innerHTML='';$('druck').innerHTML='';
+  }else{
+    const seiten=Math.ceil(S.n/lay.pro),svg=blaetter(st,lay);
+    info=`${S.n} Stück · ${lay.pro} pro Blatt · ${seiten} ${seiten===1?'Blatt':'Blätter'}`+
+      (seiten>MAXSEITEN?`<br><span class="warn">Es werden nur ${MAXSEITEN} Blätter gedruckt.</span>`:'')+
+      (S.linie==='zugabe'?`<br>Zum Schneiden: ${cm(st.w/10)} × ${cm(st.h/10)} cm`:'');
+    $('vorschau').innerHTML=svg.slice(0,2).join('')+(svg.length>2?`<p class="mehr">… und ${svg.length-2} weitere Blätter</p>`:'');
+    $('druck').innerHTML=svg.join('');
+  }
+  $('info').innerHTML=info;$('drucken').disabled=!ok;
+  speichern();
+}
+
+function speichern(){
+  try{localStorage.setItem('schrittli-vorlagen',JSON.stringify(S))}catch(e){}
+  const p=new URLSearchParams({form:S.id,b:+S.b.toFixed(2),h:+S.h.toFixed(2)});
+  if(S.n>1)p.set('n',S.n);if(PARAM[S.id])p.set('z',S.param);if(S.linie!=='schnitt')p.set('linie',S.linie);
+  try{history.replaceState(null,'','?'+p)}catch(e){}
+}
+
+// Eingaben
+const SCHLOSS_ZU='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+const SCHLOSS_AUF='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/></svg>';
+function felder(){
+  const f=form();
+  $('b').value=cm(S.b);$('h').value=cm(S.h);
+  $('schloss').setAttribute('aria-pressed',S.lock);$('schloss').innerHTML=S.lock?SCHLOSS_ZU:SCHLOSS_AUF;
+  $('schloss').title=S.lock?'Seitenverhältnis behalten (klicken zum Strecken)':'Form wird gestreckt (klicken zum Behalten)';
+  const l=Math.max(S.b,S.h);
+  $('chips').innerHTML=CHIPS.map(c=>`<button type="button" class="chip" data-cm="${c}" aria-pressed="${S.lock&&Math.abs(l-c)<.01}">${c} cm</button>`).join('');
+  $('feld-param').hidden=!PARAM[S.id];
+  if(PARAM[S.id]){$('lbl-param').textContent=`${PARAM[S.id].label}: ${S.param}`;$('param').value=S.param}
+  $('n').value=S.n;$('naht').value=S.naht;$('zugabe').value=S.zugabe;
+  document.querySelectorAll('[name=linie]').forEach(r=>r.checked=r.value===S.linie);
+  $('mm-naht').hidden=S.linie!=='naht';$('mm-zugabe').hidden=S.linie!=='zugabe';
+  $('feld-det').hidden=!f.det.length;$('det').checked=S.det;$('spiegel').checked=S.spiegel;
+}
+function mass(welche){
+  const f=form(),v=zahl($(welche).value,null);if(!v)return;
+  S[welche]=Math.min(v,100);
+  if(S.lock){if(welche==='b')S.h=S.b*f.h/f.w;else S.b=S.h*f.w/f.h}
+  zeichnen();
+}
+['b','h'].forEach(k=>{
+  $(k).addEventListener('input',()=>mass(k));
+  $(k).addEventListener('change',felder);
+  $(k).addEventListener('focus',e=>e.target.select());
+});
+$('schloss').addEventListener('click',()=>{
+  S.lock=!S.lock;
+  if(S.lock){const f=form();S.h=S.b*f.h/f.w}
+  felder();zeichnen();
+});
+$('chips').addEventListener('click',e=>{
+  const c=e.target.closest('.chip');if(!c)return;
+  const f=form(),l=+c.dataset.cm;S.lock=true;
+  if(f.w>=f.h){S.b=l;S.h=l*f.h/f.w}else{S.h=l;S.b=l*f.w/f.h}
+  felder();zeichnen();
+});
+$('param').addEventListener('input',()=>{
+  S.param=+$('param').value;const f=form();
+  if(S.lock)S.h=S.b*f.h/f.w;
+  felder();zeichnen();
+});
+$('n').addEventListener('input',()=>{S.n=Math.max(1,Math.min(500,Math.round(zahl($('n').value,S.n))));zeichnen()});
+$('n').addEventListener('change',felder);
+$('fuellen').addEventListener('click',()=>{
+  const lay=anordnen(stueck());if(!lay.pro)return;
+  S.n=Math.max(1,Math.ceil(S.n/lay.pro))*lay.pro;felder();zeichnen();
+});
+document.querySelectorAll('[name=linie]').forEach(r=>r.addEventListener('change',()=>{S.linie=r.value;felder();zeichnen()}));
+['naht','zugabe'].forEach(k=>$(k).addEventListener('input',()=>{S[k]=Math.max(1,Math.min(20,zahl($(k).value,S[k])));zeichnen()}));
+$('det').addEventListener('change',()=>{S.det=$('det').checked;zeichnen()});
+$('spiegel').addEventListener('change',()=>{S.spiegel=$('spiegel').checked;zeichnen()});
+$('drucken').addEventListener('click',()=>window.print());
+
+if(S.lock){const f=form();if(q.has('h')&&!q.has('b'))S.b=S.h*f.w/f.h;else S.h=S.b*f.h/f.w}
+auswahl();felder();zeichnen();
+})();
+</script>
+</body>
+</html>
