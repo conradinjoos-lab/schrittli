@@ -378,6 +378,25 @@ code{font-size:13px;word-break:break-all;background:var(--surface2);padding:2px 
 .kid.pl.kino .speed .lab{display:none}
 .kid.pl.kino .modebadge{left:50%;transform:translateX(-50%);top:14px;height:40px;font-size:17px}
 @media (max-width:700px){ .kid.pl.kino .video-box{width:min(100vw,calc((100vh - 170px)*16/9));width:min(100dvw,calc((100dvh - 170px)*16/9))} .kid.pl.kino .pl-bank{min-height:170px} .kid.pl.kino .steuer{flex-wrap:wrap;gap:8px} .kid.pl.kino .kino-step{flex-basis:100%;order:-1} .kid.pl.kino .schritte{bottom:180px;width:calc(100vw - 32px);right:16px} .kid.pl.kino .modebadge{left:12px;transform:none} }
+/* Handy hochkant: Video mittig über der Leiste */
+@media (orientation:portrait) and (max-width:700px){ .kid.pl.kino .video-box{top:max(0px,calc((100vh - 170px - 56.25vw)/2));top:max(0px,calc((100dvh - 170px - 56.25dvw)/2))} }
+/* Handy quer: Leiste rechts, Video nimmt die ganze Höhe */
+@media (orientation:landscape) and (max-height:500px){
+ .kid.pl.kino{--kb:max(150px,calc(100dvw - 100dvh*16/9 - env(safe-area-inset-left,0px)))}
+ .kid.pl.kino .video-box{left:env(safe-area-inset-left,0px);top:50%;transform:translateY(-50%);width:min(calc(100vw - 150px),calc(100vh*16/9));width:min(calc(100dvw - var(--kb) - env(safe-area-inset-left,0px)),calc(100dvh*16/9))}
+ .kid.pl.kino .pl-bank{left:auto;top:0;width:var(--kb);min-height:0;padding:8px calc(8px + env(safe-area-inset-right,0px)) 8px 8px;box-sizing:border-box}
+ .kid.pl.kino .steuer{flex-direction:column;flex-wrap:nowrap;align-items:stretch;justify-content:center;gap:10px;height:100%}
+ .kid.pl.kino .kino-step{flex:none;order:-1;padding:4px 6px;text-align:center}
+ .kino-step .k{font-size:11px;letter-spacing:.04em}
+ .kino-step .lbl{font-size:15px;-webkit-line-clamp:3}
+ .kid.pl.kino .pl-bank .inner{padding:0;height:100%}
+ .kid.pl.kino .controls{flex-wrap:wrap;justify-content:center;align-items:center;gap:8px}
+ .kid.pl.kino .controls .kbtn.round{width:46px;min-height:46px;font-size:20px}.kid.pl.kino .controls .kbtn.round.big{width:60px;min-height:60px;font-size:28px}
+ .kid.pl.kino .schritte{top:12px;bottom:12px;right:calc(var(--kb) + 12px);width:min(380px,calc(100vw - var(--kb) - 24px))}
+ .kid.pl.kino .modebadge{left:calc((100dvw - var(--kb))/2);transform:translateX(-50%)}
+ .kid.pl.kino .matkarte{padding:10px 14px}
+ .kid.pl.kino .mat .ico,.kid.pl.kino .mat .ico .mat-svg{width:72px;height:66px}.kid.pl.kino .mat .ico .mat-emoji{font-size:48px}
+}
 @media (min-width:900px) and (min-height:540px){
  .kid.pl:not(.kino){height:100vh;height:100dvh;min-height:0;overflow:hidden;padding-bottom:0;display:flex;flex-direction:column}
  .kid.pl:not(.kino) .pl-top{flex:none}
@@ -621,6 +640,8 @@ body:has(.v3){background:#F5F6F8}
 .fm-knopf:hover,.fm-knopf:focus-visible{opacity:1;color:#D64545}.fm-knopf .ico{width:20px;height:20px;fill:currentColor}
 body:has(.kid.pl:not(.kino)) .fm-knopf{left:auto;right:calc(10px + env(safe-area-inset-right,0px))}
 body:has(.kid.pl.kino) .fm-knopf{bottom:calc(124px + env(safe-area-inset-bottom,0px));background:rgba(255,255,255,.14);color:#fff}
+@media (max-width:700px){ body:has(.kid.pl.kino) .fm-knopf{bottom:calc(180px + env(safe-area-inset-bottom,0px))} }
+@media (orientation:landscape) and (max-height:500px){ body:has(.kid.pl.kino) .fm-knopf{left:auto;right:calc(8px + env(safe-area-inset-right,0px));bottom:8px;width:34px;height:34px} }
 body:has(.modal-bg) .fm-knopf{display:none}
 body:has(.kid.pl:not(.kino)) .fm-knopf{display:none}
 .fm-pill{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:999px;border:2px solid #D64545;background:#FFF5F3;color:#B83232;font:inherit;font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap}
