@@ -650,6 +650,7 @@ const THEMEN=[
  {id:'formen',name:'Formen',emoji:'🏺',color:'#B8794A',kind:'lern',ding:'kiste'},
  {id:'drucken',name:'Drucken',emoji:'🖐️',color:'#EF6C2E',kind:'lern',ding:'kiste'},
  {id:'experimente',name:'Experimentieren',emoji:'🧪',color:'#9B5DE5',kind:'lern',ding:'kolben'}];
+const THEMA_ID=new Set(THEMEN.map(a=>a.id));   // Familie: diese Themen liegen in den Räumen (Handarbeit, Werkraum), nicht einzeln im Regal
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
 const uid=()=>Math.random().toString(36).slice(2,10);
@@ -764,7 +765,7 @@ function defaultState(){
       {id:'lustiges',name:'Lustiges',emoji:'🎬',color:'#EF6C2E',kind:'spass',ding:'popcorn'},
       {id:'lieder',name:'Lieder',emoji:'🎵',color:'#E05297',kind:'spass',ding:'radio'}],
     videos:[],progress:{},stars:{},works:[],
-    settings:{starsPerDay:3,earnStar:true,tts:true,autoRead:false,sv:3,spass:false,voice:'',slowRate:0.75,voiceControl:false,passTouches:false,pin:'1234',abend:'auto'}};
+    settings:{starsPerDay:3,earnStar:true,tts:true,autoRead:false,sv:3,spass:false,voice:'',slowRate:0.75,voiceControl:false,passTouches:false,pin:'1234',abend:'auto',schrift:'gross'}};
 }
 let S=load();
 function load(){ try{ const raw=localStorage.getItem(KEY); if(raw){ const s=JSON.parse(raw); const d=defaultState(); const st=Object.assign(d,s,{settings:Object.assign(d.settings,s.settings||{})}); if(SCHULE){ st.progress={}; st.settings.zuletzt=null; st.works=(st.works||[]).filter(w=>w.profileId==='klasse'); st.profiles=d.profiles; st.activeProfile='klasse'; st.areas=THEMEN.map(a=>Object.assign({},a)); st.videos=[]; st.settings.spass=false; st.settings.abend='tag'; return st; } (st.areas||[]).forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; }); st.videos=(st.videos||[]).filter(validVideo); if(!(st.settings.sv>=2)){ st.settings.autoRead=false; st.settings.sv=2; } if(!(st.settings.sv>=3)){ const d3=defaultState().areas; const add=(id,after)=>{ if(st.areas.some(a=>a.id===id)) return; const a=d3.find(x=>x.id===id); const i=st.areas.findIndex(x=>x.id===after); st.areas.splice(i>=0?i+1:st.areas.length,0,a); }; add('werken','basteln'); add('experimente','natur'); st.settings.sv=3; } return st; } }catch(e){} return defaultState(); }
@@ -785,7 +786,7 @@ const NIVEAU=['','leicht','mittel','anspruchsvoll'];
 function niveauHtml(v){ const n=+v.niveau; if(!(n>=1&&n<=3)) return ''; return `<span class="niv n${n}" title="${NIVEAU[n]}" aria-label="${NIVEAU[n]}">${[1,2,3].map(k=>`<i${k<=n?' class="an"':''}></i>`).join('')}</span>`; }
 function videoOrdnung(vs){ return vs.slice().sort((a,b)=>(!!b.grundtechnik-!!a.grundtechnik)||((+a.niveau||2)-(+b.niveau||2))); }  // Grundtechniken zuerst, dann leicht → anspruchsvoll
 function abend(){ const a=S.settings.abend||'auto'; if(a==='tag') return false; if(a==='abend') return true; const h=new Date().getHours(); return h>=18||h<6; }
-function kidClass(extra=''){ const n=abend(); const tc=$('#themecolor'); if(tc) tc.setAttribute('content',n?'#2E3A4A':'#F1E3CB'); return 'screen kid'+(n?' abend':'')+(SCHULE&&S.settings.klasse>=3?' schrift-normal':'')+(extra?' '+extra:''); }
+function kidClass(extra=''){ const n=abend(); const tc=$('#themecolor'); if(tc) tc.setAttribute('content',n?'#2E3A4A':'#F1E3CB'); return 'screen kid'+(n?' abend':'')+((SCHULE?S.settings.klasse>=3:S.settings.schrift==='normal')?' schrift-normal':'')+(extra?' '+extra:''); }
 
 /* ---- Blobs (Werke) in IndexedDB, Fallback im Speicher ---- */
 const blobs={db:null,mem:new Map(),urls:new Map(),
@@ -861,16 +862,22 @@ function bank(opts={}){ return `<div class="bank"><div class="inner deko-reihe">
 /* ============================== Inhaltsdatei & Start ============================== */
 let contentInfo=null;
 function validVideo(v){ return v&&typeof v.id==='string'&&typeof v.title==='string'&&v.source&&(v.source.type==='youtube'&&/^[A-Za-z0-9_-]{11}$/.test(v.source.id)||v.source.type==='file'&&typeof v.source.url==='string')&&Array.isArray(v.steps||[]); }
+async function ladeJson(url){ try{ const r=await fetch(url,{cache:'no-store'}); if(!r.ok) return null; const j=await r.json(); return j&&Array.isArray(j.videos)?j:null; }catch(e){ return null; } }
 async function loadContentFile(){
   if(!/^https?:/.test(location.protocol)) return;
-  try{ const r=await fetch(SCHULE?'schule.json':'inhalte.json',{cache:'no-store'}); if(!r.ok) return; const j=await r.json(); if(!j||!Array.isArray(j.videos)) return;
-    (j.bereiche||[]).forEach(a=>{ const ex=areaOf(a.id); if(ex) Object.assign(ex,a); else S.areas.push(a); });
-    j.videos=j.videos.filter(validVideo);
-    j.videos.forEach(v=>{ v.quelle='datei'; const ex=videoOf(v.id); if(ex) Object.assign(ex,v); else S.videos.push(v); });
-    (j.geloescht||[]).forEach(id=>{ S.videos=S.videos.filter(v=>v.id!==id); });
-    S.videos.sort((a,b)=>{ const ia=j.videos.findIndex(v=>v.id===a.id), ib=j.videos.findIndex(v=>v.id===b.id); return (ia<0?1e9:ia)-(ib<0?1e9:ib); });
+  // Familie: zuerst alle Schulvideos (gleiche Schritte und Stopps wie in der Schule), dazu die Videos aus inhalte.json, die es nur dort gibt
+  const [sch,fam]=await Promise.all([ladeJson(SCHULE?'schule.json':'schule/schule.json'),SCHULE?null:ladeJson('inhalte.json')]);
+  if(!sch&&!fam) return;
+  try{ const vs=(sch?sch.videos:[]).filter(validVideo), ids=new Set(vs.map(v=>v.id));
+    if(fam) fam.videos.filter(validVideo).forEach(v=>{ if(!ids.has(v.id)){ vs.push(v); ids.add(v.id); return; } const sv=vs.find(x=>x.id===v.id); if(!sv.task&&v.task) sv.task=v.task; });
+    ((sch&&sch.bereiche)||[]).forEach(a=>{ const ex=areaOf(a.id); if(ex) Object.assign(ex,a); else S.areas.push(a); });
+    if(!SCHULE) THEMEN.forEach(t=>{ if(!areaOf(t.id)) S.areas.push(Object.assign({},t)); });
+    vs.forEach(v=>{ v.quelle='datei'; const ex=videoOf(v.id); if(ex) Object.assign(ex,v); else S.videos.push(v); });
+    [...((sch&&sch.geloescht)||[]),...((fam&&fam.geloescht)||[])].forEach(id=>{ S.videos=S.videos.filter(v=>v.id!==id); });
+    const pos=new Map(vs.map((v,i)=>[v.id,i]));
+    S.videos.sort((a,b)=>(pos.has(a.id)?pos.get(a.id):1e9)-(pos.has(b.id)?pos.get(b.id):1e9));
     S.areas.forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; });
-    contentInfo={n:j.videos.length,stand:j.stand||''}; save();
+    contentInfo={n:vs.length,stand:(sch||fam).stand||''}; save();
   }catch(e){}
 }
 SCREENS.boot=app=>{ app.innerHTML='<div class="screen"><p class="muted">Lädt…</p></div>'; };
@@ -923,10 +930,10 @@ const RAEUME=[{id:'hand',name:'Handarbeitszimmer',bild:'figuren/fila-faden',soft
  {id:'werk',name:'Werkraum',bild:'figuren/bibo-holz',soft:'#F6E4C8'}];  // Werkraum: alles, was nicht ins Handarbeitszimmer gehört
 const NIV3=[null,['Erkunden & üben','#DDF1E4','#1F6B45'],['Selbstständig & genau','#DCE8F7','#2B5A8C'],['Gezielt anwenden','#FBE9C9','#9A6A12']];
 const raumOf=aid=>RAEUME[0].themen.includes(aid)?RAEUME[0]:RAEUME[1];
-const raumThemen=r=>S.areas.filter(a=>raumOf(a.id)===r&&videosIn(a.id).length);
+const raumThemen=r=>S.areas.filter(a=>THEMA_ID.has(a.id)&&raumOf(a.id)===r&&videosIn(a.id).length);
 const soft=a=>`color-mix(in oklch,${a.color} 16%,white)`;
 const prSchule=v=>S.progress[S.activeProfile+':'+v.id]||{};
-function v3Kopf(links,titel){ return `<div class="v3-kopf">${links}<span class="v3-logo"><img src="${GRAFIK}figuren/logo.webp" alt=""></span>${titel||'<b class="v3-name">Bibo & Fila</b>'}<span class="grow"></span><button class="v3-pill" data-act="gallery">Unsere Werke${S.works.length?' · '+S.works.length:''}</button></div>`; }
+function v3Kopf(links,titel){ return `<div class="v3-kopf">${links}<span class="v3-logo"><img src="${GRAFIK}figuren/logo.webp" alt=""></span>${titel||'<b class="v3-name">Bibo & Fila</b>'}<span class="grow"></span><button class="v3-pill" data-act="gallery">${SCHULE?'Unsere':'Meine'} Werke${S.works.length?' · '+S.works.length:''}</button></div>`; }
 function weiterMit(r){ const v=videoOf(S.settings.zuletzt); if(!v||raumOf(v.areaId)!==r||!videosIn(v.areaId).includes(v)) return null; const pr=prSchule(v); return !pr.done&&(pr.pos>5||pr.step>0)?{v,a:areaOf(v.areaId),schritt:(pr.step||0)+1}:null; }
 SCREENS.raum=app=>{ const akt=S.settings.raum;
   app.innerHTML=`<div class="v3"><div class="v3-in">${v3Kopf('')}
@@ -937,18 +944,19 @@ SCREENS.raum=app=>{ const akt=S.settings.raum;
 };
 function themaKachel(a){ const vs=videosIn(a.id); const da=[1,2,3].map(n=>vs.some(v=>(+v.niveau||2)===n)); const tip='Niveaus: '+[1,2,3].filter(n=>da[n-1]).map(n=>NIVEAU[n]).join(', ');
   return `<button class="v3-kachel" data-act="area" data-id="${a.id}"><span class="bild" style="background:${soft(a)}"><img src="${GRAFIK}${a.id}.webp" alt="" onerror="this.remove()"></span><b>${esc(a.name)}</b><span class="v3-zeile"><span class="v3-meta">${vs.length} Video${vs.length===1?'':'s'}</span><span class="v3-dots" title="${tip}" aria-label="${tip}">${da.map(x=>`<i${x?' class="an"':''}></i>`).join('')}</span></span></button>`; }
-function homeSchule(app){ const r=RAEUME.find(x=>x.id===S.settings.raum); if(!r){ go('raum'); return; } const k=S.settings.klasse; const themen=raumThemen(r); const w=weiterMit(r);
+function homeSchule(app,rid){ const r=RAEUME.find(x=>x.id===(rid||S.settings.raum)); if(!r){ go(SCHULE?'raum':'home'); return; } const k=S.settings.klasse; const themen=raumThemen(r); const w=weiterMit(r);
   app.innerHTML=`<div class="v3"><div class="v3-in">
-    ${v3Kopf('<button class="v3-rund" data-act="raeume" aria-label="Anderer Raum">←</button>')}
+    ${v3Kopf(`<button class="v3-rund" data-act="raeume" aria-label="${SCHULE?'Anderer Raum':'Zurück'}">←</button>`)}
     <div class="v3-leiste"><div class="v3-schalter" role="group" aria-label="Raum">${RAEUME.map(x=>`<button class="${x===r?'an':''}" data-act="raum" data-id="${x.id}">${x.name}</button>`).join('')}</div>
-      <div class="v3-schalter v3-klassen" role="group" aria-label="Klasse">${STUFEN.map(s=>`<button class="${s===k?'an':''}" data-act="klasse" data-k="${s}" aria-label="${s}. Klasse">${s}.</button>`).join('')}</div></div>
+      <div class="v3-schalter v3-klassen" role="group" aria-label="Klasse"${SCHULE?'':' hidden'}>${STUFEN.map(s=>`<button class="${s===k?'an':''}" data-act="klasse" data-k="${s}" aria-label="${s}. Klasse">${s}.</button>`).join('')}</div></div>
     <div class="v3-titel"><h1 class="v3-h1">${r.name}</h1>${w?`<button class="v3-weiter" data-act="weiter" data-id="${w.v.id}"><span class="bild" style="background:${soft(w.a)}"><img src="${GRAFIK}${w.a.id}.webp" alt=""></span><span class="txt"><small>Weiter mit</small><b>${esc(w.a.name)} · Schritt ${w.schritt}</b></span><span class="play" aria-hidden="true">▶</span></button>`:''}</div>
-    ${k?'':'<p class="v3-sub">Tipp oben auf deine Klasse – dann siehst du nur, was zu dir passt.</p>'}
+    ${k||!SCHULE?'':'<p class="v3-sub">Tipp oben auf deine Klasse – dann siehst du nur, was zu dir passt.</p>'}
     <div class="v3-themen">${themen.map(themaKachel).join('')||`<div class="v3-leer">${figur('nachdenken')}Für diese Klasse ist hier noch nichts da.</div>`}</div>
-    <div class="v3-fuss"><button class="v3-link" data-act="lehrer">Für Lehrpersonen</button></div></div></div>`;
-  wire(app,{ raeume:()=>go('raum'), raum:b=>{ S.settings.raum=b.dataset.id; save(); render(); }, klasse:b=>{ S.settings.klasse=+b.dataset.k; save(); render(); },
+    ${SCHULE?'<div class="v3-fuss"><button class="v3-link" data-act="lehrer">Für Lehrpersonen</button></div>':''}</div></div>`;
+  wire(app,{ raeume:()=>go(SCHULE?'raum':'home'), raum:b=>{ if(!SCHULE){ go('zimmer',{r:b.dataset.id}); return; } S.settings.raum=b.dataset.id; save(); render(); }, klasse:b=>{ S.settings.klasse=+b.dataset.k; save(); render(); },
     area:b=>go('area',{id:b.dataset.id}), weiter:b=>go('player',{videoId:b.dataset.id}), lehrer:()=>go('lehrer'), gallery:()=>go('gallery') });
 }
+SCREENS.zimmer=(app,{r})=>homeSchule(app,r);   // Familie: Handarbeit oder Werkraum aus dem Regal
 function areaSchule(app,a){ const vs=[1,2,3].flatMap(n=>videoOrdnung(videosIn(a.id)).filter(v=>(+v.niveau||2)===n)); const jetzt=vs.find(v=>v.id===S.settings.zuletzt&&!prSchule(v).done)||vs.find(v=>!prSchule(v).done); let nr=0;
   const zeile=v=>{ nr++; const pr=prSchule(v); const [cls,sym]=pr.done?['fertig','✓']:v===jetzt?['jetzt',nr]:['offen',nr]; const th=thumbOf(v);
     const auf=v.task&&v.task.text&&v.task.deliverable!=='keine'?`<button class="v3-lektion aufgabe" data-act="video" data-id="${v.id}"><span class="th stern" aria-hidden="true">★</span><span class="grow"><b>${esc(v.task.text)}</b><span class="v3-meta">Aufgabe${v.task.deliverable==='foto'?' · Foto machen':''}</span></span><span class="v3-badge aufgabe">★</span></button>`:'';
@@ -962,7 +970,7 @@ function areaSchule(app,a){ const vs=[1,2,3].flatMap(n=>videoOrdnung(videosIn(a.
         ${mat.length?`<div class="v3-karte"><h2>Du brauchst</h2><div class="v3-mat">${mat.map(id=>`<div><span class="pik">${matIcon(id)}</span><b>${esc(matName(id))}</b></div>`).join('')}</div></div>`:''}</div>
       <div class="v3-liste">${liste||`<div class="v3-leer">${figur('nachdenken')}Hier ist noch nichts drin.</div>`}${werkeHtml(WERKE.filter(w=>w.bereich===a.id))}</div>
     </div></div></div>`;
-  wire(app,{ back:()=>go('home'), andere:zeigeWerk, video:b=>go('player',{videoId:b.dataset.id}), gallery:()=>go('gallery') });
+  wire(app,{ back:()=>SCHULE?go('home'):go('zimmer',{r:raumOf(a.id).id}), andere:zeigeWerk, video:b=>go('player',{videoId:b.dataset.id}), gallery:()=>go('gallery') });
 }
 SCREENS.lehrer=app=>{ const n=abend();
   const vids=S.videos.slice().sort((a,b)=>(a.areaId+a.title).localeCompare(b.areaId+b.title,'de'));
@@ -974,12 +982,12 @@ SCREENS.lehrer=app=>{ const n=abend();
 };
 
 /* ============================== Kind: Werkstatt (Start) ============================== */
-function dingHtml(a,kind){ const vids=videosIn(a.id), nvid=vids.length; const pid=S.activeProfile; const done=pid?vids.filter(v=>(S.progress[pid+':'+v.id]||{}).done).length:0; const alle=!SCHULE&&nvid&&done===nvid; const zaehl=nvid?`<span class="zaehl${alle?' alle':''}" aria-label="${SCHULE?nvid+' Videos':done+' von '+nvid+' gemacht'}">${alle?'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="'+ICONS.check+'"/></svg>':''}${SCHULE?nvid:done+'/'+nvid}</span>`:''; return `<button class="ding${nvid?'':' leer'}" data-act="area" data-id="${a.id}">${dingSvg(a.ding,a.emoji)}<span class="tag">${kind==='spass'?`<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color:#F2B705"><path d="${ICONS.star}"/></svg>`:''}${esc(a.name)}${zaehl}</span></button>`; }
+function dingHtml(a,kind){ const vids=a.raum?raumThemen(a.raum).flatMap(t=>videosIn(t.id)):videosIn(a.id), nvid=vids.length; const pid=S.activeProfile; const done=pid?vids.filter(v=>(S.progress[pid+':'+v.id]||{}).done).length:0; const alle=!SCHULE&&nvid&&done===nvid; const zaehl=nvid?`<span class="zaehl${alle?' alle':''}" aria-label="${SCHULE?nvid+' Videos':done+' von '+nvid+' gemacht'}">${alle?'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="'+ICONS.check+'"/></svg>':''}${SCHULE?nvid:done+'/'+nvid}</span>`:''; return `<button class="ding${nvid?'':' leer'}" data-act="area" data-id="${a.id}">${dingSvg(a.ding,a.emoji)}<span class="tag">${kind==='spass'?`<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color:#F2B705"><path d="${ICONS.star}"/></svg>`:''}${esc(a.name)}${zaehl}</span></button>`; }
 SCREENS.home=app=>{
   if(SCHULE){ return homeSchule(app); }
   const p=profile(); if(!p){ go('firstrun'); return; } const n=abend();
   const newFb=S.works.filter(w=>w.profileId===p.id&&w.feedback&&!w.fbSeen).length;
-  const spass=S.settings.spass?S.areas.filter(a=>a.kind==='spass'&&videosIn(a.id).length):[], lern=S.areas.filter(a=>a.kind!=='spass'&&videosIn(a.id).length);
+  const spass=S.settings.spass?S.areas.filter(a=>a.kind==='spass'&&videosIn(a.id).length):[], lern=[...RAEUME.filter(r=>raumThemen(r).length).map(r=>({id:'raum:'+r.id,name:r.id==='hand'?'Handarbeit':'Werkraum',ding:r.id==='hand'?'wolle':'schere',raum:r})),...S.areas.filter(a=>a.kind!=='spass'&&!THEMA_ID.has(a.id)&&videosIn(a.id).length)];
   app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${fenster(n)}
     <div class="inner kopf mitfenster">
       <div class="schild hallo${S.profiles.length>1?' tipp':''}" data-act="who" role="button"><h1>Hallo ${esc(p.name)}!</h1><div class="sub">${S.profiles.length>1?'Nicht du? Tipp hier':'Was nimmst du heute?'}</div></div>
@@ -989,11 +997,11 @@ SCREENS.home=app=>{
     <div class="inner regal-wrap"><div class="regal">${lern.map(a=>dingHtml(a,'lern')).join('')||`<div class="empty zettel">${figur('nachdenken')}Noch keine Videos – Eltern: Schloss oben rechts</div>`}</div></div>
     ${bank()}
   </div>`;
-  wire(app,{ area:b=>go('area',{id:b.dataset.id}), gallery:()=>go('gallery'), parent:()=>go('parent',{tab:'videos'}), who:()=>{ if(S.profiles.length>1) go('profiles'); } });
+  wire(app,{ area:b=>{ const id=b.dataset.id; if(id.startsWith('raum:')) go('zimmer',{r:id.slice(5)}); else go('area',{id}); }, gallery:()=>go('gallery'), parent:()=>go('parent',{tab:'videos'}), who:()=>{ if(S.profiles.length>1) go('profiles'); } });
 };
 
 SCREENS.area=(app,{id})=>{
-  const a=areaOf(id); if(!a){ go('home'); return; } if(SCHULE) return areaSchule(app,a); const p=profile(); const vids=videoOrdnung(videosIn(id)); const gruppen=vids.some(v=>v.grundtechnik)&&vids.some(v=>!v.grundtechnik); const st=starState(p.id); const left=starsLeft(p.id); const n=abend();
+  const a=areaOf(id); if(!a){ go('home'); return; } if(SCHULE||THEMA_ID.has(id)) return areaSchule(app,a); const p=profile(); const vids=videoOrdnung(videosIn(id)); const gruppen=vids.some(v=>v.grundtechnik)&&vids.some(v=>!v.grundtechnik); const st=starState(p.id); const left=starsLeft(p.id); const n=abend();
   app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${kopf(a.name,{back:true,right:S.settings.spass?glasSterne(p.id,true):''})}
     <div class="inner">${vids.length?`<div class="pinwand">${vids.map((v,i)=>{ const grp=gruppen&&(i===0||!!vids[i-1].grundtechnik!==!!v.grundtechnik)?`<h2 class="pw-grp">${v.grundtechnik?'Grundtechniken':'Projekte'}</h2>`:''; const pr=S.progress[p.id+':'+v.id]; const th=thumbOf(v); const locked=a.kind==='spass'&&!st.unlocked.includes(v.id)&&left<=0;
       return `${grp}<button class="vcard${locked?' disabled':''}" data-act="video" data-id="${v.id}"><div class="th">${th?`<img src="${th}" alt="" loading="lazy">`:'🎬'}${v.grundtechnik?'<span class="gt">Grundtechnik</span>':''}${niveauHtml(v)}${pr&&pr.done?`<span class="badge">${ico('check')} fertig</span>`:pr&&(pr.pos>5||pr.step>0)?`<span class="badge prog">angefangen</span>`:''}${v.zeit?`<span class="zeit">⏱ ${v.zeit} Min.</span>`:''}${locked?`<span class="lock">😴</span>`:''}</div><div class="tt"><span class="grow">${esc(v.title)}</span>${a.kind==='spass'&&!st.unlocked.includes(v.id)?`<span class="stern">${ico('star')}</span>`:''}</div></button>`; }).join('')}</div>`
@@ -1047,7 +1055,7 @@ function buildVideoSteps(v){ const s=(v.steps||[]).slice().sort((a,b)=>a.t-b.t);
 SCREENS.anleitung=(app,{v,school})=>{
   const a=v.areaId?areaOf(v.areaId):null; const steps=v.steps; const n=steps.length; const pr=prog(v.id);
   pr.gesehen=pr.gesehen||{}; pr.antworten=pr.antworten||{}; pr.max=Math.max(pr.max||0,pr.step||0);
-  if(SCHULE&&!school){ S.settings.zuletzt=v.id; save(); }
+  if(!school){ S.settings.zuletzt=v.id; save(); }
   let i=-1; // -1 = Start (Material), n = fertig
   ORT=()=>({video:v.id,titel:v.title||'',schritt:Math.max(0,Math.min(i+1,n))});
   const wer=SCHULE?'Die Lehrperson':'Ein Erwachsener';
@@ -1098,7 +1106,7 @@ SCREENS.player=(app,{videoId,school})=>{
   if(v.source&&v.source.type==='bilder') return SCREENS.anleitung(app,{v,school:!!school});
   const a=v.areaId?areaOf(v.areaId):null; const p=school?null:profile(); const n=abend();
   const steps=buildVideoSteps(v); const pr=school?{pos:0,step:0,done:false,slow:false}:prog(v.id);
-  if(SCHULE&&!school){ S.settings.zuletzt=v.id; save(); }
+  if(!school){ S.settings.zuletzt=v.id; save(); }
   app.innerHTML=`<div class="${kidClass('pl'+(S.settings.kino&&!school?' kino':''))}">${girlande(n)}
     <div class="inner kopf pl-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a><div class="schild"><h1>${esc(v.title)}</h1></div><div class="kopf-rechts"><span class="zettel" id="zettel"></span>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}</div></div>
     <div class="inner panes">
@@ -1445,7 +1453,8 @@ function tabSettings(root,acts){
   root.innerHTML=`<h2>Einstellungen</h2>
   <div class="panel"><h3>Werkstatt</h3>
     ${tog('spass','Spass-Bereiche zeigen','Lustiges und Lieder im Regal, mit Sternen als Tageslimit. Aus = nur Lern-Bereiche, kein Sterneglas.')}
-    <div class="field"><label for="st-abend">Abendwerkstatt (dunkle Wand, Lichterkette)</label><select class="inp" id="st-abend" data-set="abend"><option value="auto" ${s.abend==='auto'?'selected':''}>Automatisch ab 18 Uhr bis 6 Uhr</option><option value="tag" ${s.abend==='tag'?'selected':''}>Immer Tag</option><option value="abend" ${s.abend==='abend'?'selected':''}>Immer Abend</option></select></div></div>
+    <div class="field"><label for="st-abend">Abendwerkstatt (dunkle Wand, Lichterkette)</label><select class="inp" id="st-abend" data-set="abend"><option value="auto" ${s.abend==='auto'?'selected':''}>Automatisch ab 18 Uhr bis 6 Uhr</option><option value="tag" ${s.abend==='tag'?'selected':''}>Immer Tag</option><option value="abend" ${s.abend==='abend'?'selected':''}>Immer Abend</option></select></div>
+    <div class="field"><label for="st-schrift">Schrift</label><select class="inp" id="st-schrift" data-set="schrift"><option value="gross" ${s.schrift!=='normal'?'selected':''}>GROSSBUCHSTABEN (für Leseanfänger)</option><option value="normal" ${s.schrift==='normal'?'selected':''}>Normale Schrift (wie in der Schule ab 3. Klasse)</option></select></div></div>
   <div class="panel"><h3>Sterne</h3>
     <div class="field"><label for="st-n">Sterne pro Tag (für Spass-Videos)</label><select class="inp" id="st-n" data-set="starsPerDay">${[1,2,3,4,5,6].map(n=>`<option ${n===s.starsPerDay?'selected':''}>${n}</option>`).join('')}</select></div>
     ${tog('earnStar','Stern verdienen','Wer eine Aufgabe abgibt, bekommt heute einen Stern dazu (höchstens einen pro Tag).')}</div>
@@ -1458,7 +1467,7 @@ function tabSettings(root,acts){
     ${SR?tog('voiceControl','Sprachsteuerung (experimentell)','«Stopp», «Weiter», «Nochmal» rufen. Braucht Mikrofon-Erlaubnis und Internet; auf dem iPad nicht immer zuverlässig.'):''}</div>
   <div class="panel"><h3>PIN</h3><p class="small muted">${s.pin==='1234'?'Noch die Standard-PIN 1234 – bitte ändern.':'Eigene PIN gesetzt.'}</p><div class="row" style="flex-wrap:nowrap"><input class="inp" id="st-pin" inputmode="numeric" maxlength="4" placeholder="Neue 4-stellige PIN"><button class="btn" data-act="pin">Ändern</button></div></div>
   <div class="panel"><h3>iPad-Tipps</h3><ul class="small muted" style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px"><li>Seite in Safari öffnen → Teilen → «Zum Home-Bildschirm» → läuft dann als Vollbild-App. Wichtig: Safari-Tab und Home-App haben getrennte Speicher – erst hinzufügen, dann dort einrichten.</li><li>«Geführter Zugriff» (Einstellungen → Bedienungshilfen) sperrt das Kind in der App ein; Dreifachklick auf die Seitentaste beendet ihn.</li><li>YouTube ohne Werbung nur, wenn in diesem Browser ein Premium-Konto angemeldet ist.</li></ul></div>`;
-  root.onchange=e=>{ const el=e.target.closest('[data-set]'); if(!el) return; const k=el.dataset.set; s[k]=(k==='voice'||k==='abend')?el.value:+el.value; save(); };
+  root.onchange=e=>{ const el=e.target.closest('[data-set]'); if(!el) return; const k=el.dataset.set; s[k]=(k==='voice'||k==='abend'||k==='schrift')?el.value:+el.value; save(); };
   Object.assign(acts,{ tog:b=>{ s[b.dataset.k]=!s[b.dataset.k]; save(); b.classList.toggle('on',s[b.dataset.k]); b.setAttribute('aria-checked',String(!!s[b.dataset.k])); },
     testvoice:()=>{ unlockTTS(); speak('Hallo! Jetzt du: Papier falten.'); },
     pin:()=>{ const v=$('#st-pin').value.trim(); if(!/^\d{4}$/.test(v)){ toast('Genau 4 Ziffern'); return; } s.pin=v; save(); $('#st-pin').value=''; toast('PIN geändert'); } });
@@ -1467,7 +1476,7 @@ function tabSettings(root,acts){
 /* ---- Daten ---- */
 function tabData(root,acts){
   root.innerHTML=`<h2>Daten</h2>
-  <div class="panel"><h3>Inhaltsdatei</h3><p class="small muted">${contentInfo?`<b>inhalte.json</b> geladen: ${contentInfo.n} Videos${contentInfo.stand?', Stand '+esc(contentInfo.stand):''}. Diese Videos werden aus der Datei gepflegt.`:/^https?:/.test(location.protocol)?'Keine <b>inhalte.json</b> neben der App gefunden – Videos werden nur hier im Elternbereich gepflegt.':'Die App wurde direkt als Datei geöffnet; <b>inhalte.json</b> wird nur geladen, wenn die App über einen Server (http/https) läuft.'}</p></div>
+  <div class="panel"><h3>Inhaltsdatei</h3><p class="small muted">${contentInfo?`Schulvideos und <b>inhalte.json</b> geladen: ${contentInfo.n} Videos${contentInfo.stand?', Stand '+esc(contentInfo.stand):''}. Diese Videos werden aus der Datei gepflegt.`:/^https?:/.test(location.protocol)?'Keine <b>inhalte.json</b> neben der App gefunden – Videos werden nur hier im Elternbereich gepflegt.':'Die App wurde direkt als Datei geöffnet; <b>inhalte.json</b> wird nur geladen, wenn die App über einen Server (http/https) läuft.'}</p></div>
   <div class="panel"><h3>Sichern und übertragen</h3><p class="small muted">Kinder, Sterne, Fortschritt und Werke liegen nur in diesem Browser auf diesem Gerät. Zum Übertragen auf ein anderes Gerät: hier exportieren, dort importieren. Werke (Bilder, Aufnahmen) bleiben auf dem Gerät.</p>
     <div class="row"><button class="btn" data-act="export">Videos & Einstellungen exportieren</button><label class="btn" for="imp">Importieren</label><input type="file" id="imp" accept="application/json,.json" hidden></div><div id="storage" class="small muted"></div></div>
   <div class="panel"><h3>Zurücksetzen</h3><button class="btn danger" data-act="reset" style="align-self:flex-start">Alles löschen</button></div>`;
