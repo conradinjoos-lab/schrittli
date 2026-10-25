@@ -9,6 +9,11 @@
 3. python werkzeug/vorschau.py bauen [id …]   → vorschau/<YouTube-ID>.webp (480×270) und vorschau/vorschau.json
                                                Kontrolle: werkzeug/cache/_vorschau/echt/<id>.jpg (ohne Freistellen) und uebersicht-*.jpg
 
+Für neue Videos (/schritte, Schritt 5; Briefe für die Agenten: werkzeug/VORSCHAU-WAEHLEN.md und VORSCHAU-PRUEFEN.md):
+   python werkzeug/vorschau.py neu [id …]          Videos ohne Wahl: Bogen + Listen werkzeug/cache/_vorschau/wahl/liste-N.txt
+   python werkzeug/vorschau.py probe <id> <t> [x0,y0,x1,y1]   genau das spätere Bild → werkzeug/cache/_vorschau/probe/<id>_<t>.jpg
+   python werkzeug/vorschau.py uebernehmen [datei …]   wahl-*.json in auswahl.json eintragen, bauen, Prüflisten pruefen-N.txt
+
 Regeln für die Wahl (die Bilder sind öffentlich): fertiges Werkstück, ruhig und scharf; nichts von einem Menschen im Bild, auch keine
 Hand und keinen Finger am Rand; keine eingeblendete Schrift, keine Logos. Freistellen (rembg, lokal, nichts geht ins Internet) nur bei einem einzelnen Werkstück, das niemand in der Hand hält.
 Braucht die Einzelbilder und video.mp4 im Cache (holen.py), ffmpeg, opencv-python, numpy, Pillow; fürs Freistellen rembg.
@@ -95,6 +100,26 @@ def bild_bei(video, t):
     return cv2.imdecode(np.frombuffer(r.stdout, np.uint8), cv2.IMREAD_COLOR) if r.stdout else None
 
 
+def standbild(video, t):
+    """Das schärfste Bild im Umkreis von ±0.4 s, aber nicht über einen Schnitt, ohne schwarze Ränder."""
+    kand = [f for f in (bild_bei(video, t + d) for d in (0, -0.4, -0.2, 0.2, 0.4)) if f is not None]
+    if not kand: return None
+    klein = lambda f: cv2.resize(cv2.cvtColor(f, cv2.COLOR_BGR2GRAY), (160, 90)).astype(np.int16)
+    kand = [f for f in kand if np.abs(klein(f) - klein(kand[0])).mean() < 10]
+    return ränder_weg(max(kand, key=lambda f: schärfe(cv2.cvtColor(f, cv2.COLOR_BGR2GRAY))))
+
+
+def zuschneiden(img, aus):
+    """Gesicht, Hand, Bauchbinde oder Untertitel wegschneiden; aus = Anteile des Bildes nach ränder_weg."""
+    if not aus: return img
+    x0, y0, x1, y1 = aus; h, b = img.shape[:2]
+    return img[int(y0 * h):int(y1 * h), int(x0 * b):int(x1 * b)]
+
+
+def auf_480(img):
+    return cv2.resize(auf_16_9(img), (B, H), interpolation=cv2.INTER_AREA if img.shape[1] >= B else cv2.INTER_LANCZOS4)
+
+
 def ränder_weg(img, schwelle=18):
     g = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     zeilen, spalten = np.where(g.max(1) > schwelle)[0], np.where(g.max(0) > schwelle)[0]
@@ -166,16 +191,10 @@ def bauen(ids):
         video = next((p for p in (CACHE / yt).glob('video.*') if p.suffix in ('.mp4', '.webm', '.mkv')), None)
         if not video: print(v['id'], 'kein video.mp4 im Cache'); continue
         t = float(w['t'])
-        kand = [f for f in (bild_bei(video, t + d) for d in (0, -0.4, -0.2, 0.2, 0.4)) if f is not None]
-        if not kand: print(v['id'], 'kein Bild bei', t); continue
-        klein = lambda f: cv2.resize(cv2.cvtColor(f, cv2.COLOR_BGR2GRAY), (160, 90)).astype(np.int16)
-        kand = [f for f in kand if np.abs(klein(f) - klein(kand[0])).mean() < 10]     # im Umkreis das schärfste, aber nicht über einen Schnitt
-        roh = ränder_weg(max(kand, key=lambda f: schärfe(cv2.cvtColor(f, cv2.COLOR_BGR2GRAY))))
-        if w.get('aus'):                         # Gesicht, Bauchbinde oder Untertitel wegschneiden
-            x0, y0, x1, y1 = w['aus']; h, b = roh.shape[:2]
-            roh = roh[int(y0 * h):int(y1 * h), int(x0 * b):int(x1 * b)]
-        schön = verschönern(roh)
-        echt = cv2.resize(auf_16_9(schön), (B, H), interpolation=cv2.INTER_AREA if schön.shape[1] >= B else cv2.INTER_LANCZOS4)
+        ganz = standbild(video, t)
+        if ganz is None: print(v['id'], 'kein Bild bei', t); continue
+        schön = verschönern(zuschneiden(ganz, w.get('aus')))
+        echt = auf_480(schön)
         cv2.imwrite(str(ARBEIT / 'echt' / f"{v['id']}.jpg"), echt, [cv2.IMWRITE_JPEG_QUALITY, 90])
         fertig = echt
         if w.get('frei'):
@@ -205,6 +224,66 @@ def übersicht():
         blatt.save(ARBEIT / f'uebersicht-{n // 24 + 1}.jpg', quality=85)
 
 
+# ----------------------------------------------------------------- 3. Ablauf für neue Videos (/schritte, Schritt 5)
+WAHL = ARBEIT / 'wahl'
+
+
+def neu(ids):
+    """Videos ohne Eintrag in auswahl.json: Bogen machen und Listen für die Wähl-Agenten schreiben (je 25 pro Liste)."""
+    wahl = json.loads(AUSWAHL.read_text(encoding='utf-8')) if AUSWAHL.exists() else {}
+    offen = [v for v in videos() if v['id'] not in wahl and (not ids or v['id'] in ids)]
+    WAHL.mkdir(parents=True, exist_ok=True)
+    for alt in WAHL.glob('*'): alt.unlink()
+    if not offen: print('Alle Videos haben schon eine Wahl in vorschau/auswahl.json.'); return
+    bogen({v['id'] for v in offen})
+    bereit = [v for v in offen if (ARBEIT / 'bogen' / f"{v['id']}.jpg").exists() and (CACHE / v['source']['id'] / 'f').is_dir()]
+    for n in range(0, len(bereit), 25):
+        (WAHL / f'liste-{n // 25 + 1}.txt').write_text(
+            ''.join(f"{v['id']}\t{v['source']['id']}\t{v.get('title', '')}\n" for v in bereit[n:n + 25]), encoding='utf-8')
+    print(len(offen), 'ohne Wahl,', len(bereit), 'bereit →', (len(bereit) + 24) // 25, 'Listen in', WAHL)
+
+
+def probe(app, t, aus):
+    """Genau das Bild, das bauen machen würde, daneben das ganze Bild (nach Randentfernung) mit 10-%-Raster für den Ausschnitt."""
+    v = next(v for v in videos() if v['id'] == app)
+    video = next(p for p in (CACHE / v['source']['id']).glob('video.*') if p.suffix in ('.mp4', '.webm', '.mkv'))
+    ganz = standbild(video, t)
+    echt = auf_480(verschönern(zuschneiden(ganz, aus)))
+    h, b = ganz.shape[:2]; voll = ganz.copy()
+    for k in range(1, 10):
+        cv2.line(voll, (b * k // 10, 0), (b * k // 10, h), (0, 255, 255), 1); cv2.line(voll, (0, h * k // 10), (b, h * k // 10), (0, 255, 255), 1)
+    voll = cv2.resize(voll, (int(b * H / h), H))
+    (ARBEIT / 'probe').mkdir(parents=True, exist_ok=True)
+    ziel = ARBEIT / 'probe' / f'{app}_{t:g}.jpg'
+    cv2.imwrite(str(ziel), np.hstack([echt, np.full((H, 8, 3), 255, np.uint8), voll]))
+    print(ziel)
+
+
+def übernehmen(dateien):
+    """Ergebnisse der Agenten (Standard: alle wahl-*.json, ältere zuerst) in auswahl.json eintragen, bauen, Prüflisten schreiben."""
+    dateien = [Path(d) for d in dateien] or sorted(WAHL.glob('wahl-*.json'), key=lambda p: p.stat().st_mtime)
+    wahl = json.loads(AUSWAHL.read_text(encoding='utf-8')) if AUSWAHL.exists() else {}
+    bekannt = {v['id'] for v in videos()}
+    neu_ = {}
+    for d in dateien:
+        for k, w in json.loads(d.read_text(encoding='utf-8')).items():
+            if k not in bekannt: print(k, 'nicht in schule.json – übersprungen'); continue
+            neu_[k] = {f: w.get(f) for f in ('t', 'aus', 'frei', 'schwach', 'notiz')}
+    if not neu_: print('Nichts zu übernehmen.'); return
+    wahl.update(neu_)
+    AUSWAHL.write_text(json.dumps(wahl, ensure_ascii=False, indent=1), encoding='utf-8')
+    bauen(set(neu_))
+    mit = [v for v in videos() if neu_.get(v['id'], {}).get('t') is not None]
+    for alt in WAHL.glob('pruefen-*.txt'): alt.unlink()
+    for n in range(0, len(mit), 50):
+        (WAHL / f'pruefen-{n // 50 + 1}.txt').write_text(
+            ''.join(f"{v['id']}\t{ZIEL / (v['source']['id'] + '.webp')}\n" for v in mit[n:n + 50]), encoding='utf-8')
+    print(len(neu_), 'übernommen,', len(mit), 'mit Bild →', (len(mit) + 49) // 50, 'Prüflisten in', WAHL)
+
+
 if __name__ == '__main__':
-    if len(sys.argv) < 2 or sys.argv[1] not in ('bogen', 'bauen'): sys.exit(__doc__)
-    (bogen if sys.argv[1] == 'bogen' else bauen)(set(sys.argv[2:]))
+    befehl, rest = (sys.argv[1], sys.argv[2:]) if len(sys.argv) > 1 else ('', [])
+    if befehl == 'probe' and len(rest) >= 2: probe(rest[0], float(rest[1]), [float(x) for x in rest[2].split(',')] if len(rest) > 2 else None)
+    elif befehl in ('bogen', 'bauen', 'neu'): {'bogen': bogen, 'bauen': bauen, 'neu': neu}[befehl](set(rest))
+    elif befehl in ('übernehmen', 'uebernehmen'): übernehmen(rest)
+    else: sys.exit(__doc__)
