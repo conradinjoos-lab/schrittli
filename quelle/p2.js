@@ -187,9 +187,9 @@ const blobs={db:null,mem:new Map(),urls:new Map(),
   del(k){ this.urls.delete(k); if(!this.db){this.mem.delete(k);return Promise.resolve();} return new Promise(res=>{ const r=this.tx('readwrite').delete(k); r.onsuccess=()=>res(); r.onerror=()=>res(); }); },
   async url(k){ if(this.urls.has(k)) return this.urls.get(k); const b=await this.get(k); if(!b) return null; const u=URL.createObjectURL(b); this.urls.set(k,u); return u; }
 };
-async function saveWork({type,blob,videoId}){
+async function saveWork({type,blob,videoId,name,klasse}){
   const id=uid(); try{ await blobs.put(id,blob); }catch(e){ toast('Konnte nicht speichern – sag es deinen Eltern',4000); throw e; }
-  S.works.unshift({id,profileId:S.activeProfile,videoId:videoId||null,type,createdAt:Date.now(),feedback:null,fbSeen:true});
+  S.works.unshift({id,profileId:S.activeProfile,videoId:videoId||null,type,createdAt:Date.now(),feedback:null,fbSeen:true,name:name||null,klasse:klasse||null});
   let star=false;
   if(videoId&&S.activeProfile){ const p=prog(videoId); if(!p.done){ p.done=true; if(S.settings.earnStar) star=earnStar(); } }
   save(); return star;
@@ -618,8 +618,22 @@ function updatePlayerUI(){ if(!P) return;
 }
 document.addEventListener('visibilitychange',()=>{ if(document.hidden&&P&&P.mode==='playing'&&P.api.ready) userPause(); });
 
+/* Nach dem Foto: Name (immer Grossbuchstaben) und Klasse dazuschreiben. Bleibt wie das Foto nur auf diesem Gerät. */
+const werText=(w,kid)=>[w.name||(kid?kid.name:''),w.klasse?klasseName(w.klasse):''].filter(Boolean).join(' · ');
+function nameUndKlasse(fertig){
+  const p=profile(), vorK=S.settings.fotoKlasse||(SCHULE?S.settings.klasse:0)||0; let schon=false;
+  kidModal(`<h2>Wer hat das gemacht?</h2><div class="namen"><input class="inp" id="fn-name" maxlength="30" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="NAME" aria-label="Name" value="${esc(!SCHULE&&p?p.name.toUpperCase():'')}">
+    <select class="inp" id="fn-klasse" aria-label="Klasse"><option value="">Klasse wählen</option>${STUFEN.map(k=>`<option value="${k}"${k===vorK?' selected':''}>${klasseName(k)}</option>`).join('')}</select></div>
+    <button class="kbtn primary" data-act="ok">${ico('check')} Fertig</button>`,{ ok:(b,close)=>{ close(); weiter(); } });
+  const bg=document.body.lastElementChild, nm=$('#fn-name',bg), kl=$('#fn-klasse',bg);
+  const weiter=()=>{ if(schon) return; schon=true; const klasse=+kl.value||null; if(klasse){ S.settings.fotoKlasse=klasse; save(); } fertig({name:nm.value.trim().toUpperCase()||null,klasse}); };
+  nm.addEventListener('input',()=>{ const s=nm.selectionStart; nm.value=nm.value.toUpperCase(); try{ nm.setSelectionRange(s,s); }catch(e){} });
+  nm.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); bg.remove(); weiter(); } });
+  bg.addEventListener('click',e=>{ if(e.target===bg) weiter(); },true);   // daneben tippen: Foto trotzdem behalten
+  setTimeout(()=>nm.focus(),50);
+}
 function takePhoto(videoId,nachher){
-  const done=async b=>{ let star=false; try{ star=await saveWork({type:'foto',blob:b,videoId}); }catch(e){ return; } confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Foto gespeichert!'); if(nachher) nachher(); else if(P) updatePlayerUI(); };
+  const done=async b=>{ let star=false; const wer=await new Promise(nameUndKlasse); try{ star=await saveWork({type:'foto',blob:b,videoId,...wer}); }catch(e){ return; } confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Foto gespeichert!'); if(nachher) nachher(); else if(P) updatePlayerUI(); };
   const inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.setAttribute('capture','environment');
   inp.onchange=()=>{ const f=inp.files[0]; if(!f) return; const img=new Image(); const u=URL.createObjectURL(f);
     img.onload=()=>{ const max=1400, sc=Math.min(1,max/Math.max(img.width,img.height)); const c=document.createElement('canvas'); c.width=Math.round(img.width*sc); c.height=Math.round(img.height*sc); c.getContext('2d').drawImage(img,0,0,c.width,c.height); URL.revokeObjectURL(u); c.toBlob(b=>done(b),'image/jpeg',.85); };
@@ -676,7 +690,7 @@ SCREENS.record=(app,pr)=>{
 SCREENS.gallery=(app,{school}={})=>{
   const p=profile(); const pid=p?p.id:null; const ws=S.works.filter(w=>w.profileId===pid); const n=abend();
   app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${kopf(SCHULE?'Unsere Werke':'Meine Werke',{back:true,right:SCHULE||school?'':`<button class="btn" data-act="malen">${ico('brush')} Malen</button><button class="btn" data-act="ton">${ico('mic')} Aufnehmen</button>`})}
-    <div class="inner">${ws.length?`<div class="kork">${ws.map(w=>`<button class="foto" data-act="open" data-id="${w.id}" aria-label="Werk öffnen"><div class="bild">${w.type==='ton'?'🎧':`<img data-blob="${w.id}" alt="">`}</div><span class="dt">${dateDE(w.createdAt)}</span>${w.feedback?`<span class="fb${w.fbSeen?'':' new'}">${w.feedback.emoji}</span>`:''}</button>`).join('')}</div>`:`<div class="empty" style="margin-top:20px">${figur('foto')}Noch keine Werke.<br><span class="small">Mal etwas, nimm etwas auf oder mach ein Foto nach einem Video.</span></div>`}</div>${bank()}</div>`;
+    <div class="inner">${ws.length?`<div class="kork">${ws.map(w=>`<button class="foto" data-act="open" data-id="${w.id}" aria-label="Werk öffnen"><div class="bild">${w.type==='ton'?'🎧':`<img data-blob="${w.id}" alt="">`}</div><span class="dt">${w.name?esc(w.name):dateDE(w.createdAt)}</span>${w.feedback?`<span class="fb${w.fbSeen?'':' new'}">${w.feedback.emoji}</span>`:''}</button>`).join('')}</div>`:`<div class="empty" style="margin-top:20px">${figur('foto')}Noch keine Werke.<br><span class="small">Mal etwas, nimm etwas auf oder mach ein Foto nach einem Video.</span></div>`}</div>${bank()}</div>`;
   fillThumbs(app);
   wire(app,{ back:()=>school?go('school',{video:school}):go('home'), who:()=>{}, malen:()=>go('paint',{back:'gallery'}), ton:()=>go('record',{back:'gallery'}), open:b=>openWork(b.dataset.id,false) });
 };
@@ -684,7 +698,7 @@ async function openWork(id,parentMode){
   const w=S.works.find(x=>x.id===id); if(!w) return; const u=await blobs.url(id); const v=w.videoId?videoOf(w.videoId):null; const kid=S.profiles.find(p=>p.id===w.profileId);
   if(w.feedback&&!w.fbSeen&&!parentMode){ w.fbSeen=true; save(); }
   (parentMode?modal:kidModal)(`<div class="viewer">${w.type==='ton'?`<div style="text-align:center;font-size:64px">🎧</div><audio controls src="${u||''}" style="width:100%"></audio>`:`<img src="${u||''}" alt="">`}</div>
-    <p class="muted small">${esc(kid?kid.name+' · ':'')}${dateDE(w.createdAt)}${v?' · '+esc(v.title):''}</p>
+    <p class="muted small">${esc(werText(w,kid)?werText(w,kid)+' · ':'')}${dateDE(w.createdAt)}${v?' · '+esc(v.title):''}</p>
     ${w.feedback?`<div class="bubble"><span class="em">${w.feedback.emoji}</span><span>${esc(w.feedback.text||'')}</span>${!parentMode&&w.feedback.text?`<button class="btn icon" data-act="say" aria-label="Vorlesen" style="margin-left:auto">${ico('speaker')}</button>`:''}</div>`:''}
     <div class="row" style="justify-content:flex-end">${parentMode||SCHULE||!w.profileId?`<button class="btn danger sm" data-act="del">${ico('trash')} Löschen</button>`:''}<button class="btn" data-close>Schliessen</button></div>`,
     {say:()=>{ unlockTTS(); speak(w.feedback&&w.feedback.text||''); }, del:(b,close)=>{ close(); confirmBox('Werk löschen?','Das kann nicht rückgängig gemacht werden.','Löschen',async()=>{ await blobs.del(id); S.works=S.works.filter(x=>x.id!==id); save(); render(); },true); }});
@@ -839,7 +853,7 @@ function tabWorks(root,acts){
   root.innerHTML=`<h2>Werke</h2><p class="small muted">Gib eine kurze Rückmeldung. Das Kind sieht sie an der Korkwand bei «Meine Werke».</p>
     ${S.works.length?`<div class="list">${S.works.map(w=>{ const kid=S.profiles.find(p=>p.id===w.profileId); const v=w.videoId?videoOf(w.videoId):null;
       return `<div class="li" style="align-items:flex-start;flex-wrap:wrap"><button class="th" data-act="open" data-id="${w.id}" style="width:110px;aspect-ratio:1;border-radius:10px">${w.type==='ton'?'🎧':`<img data-blob="${w.id}" alt="">`}</button>
-        <div class="grow" style="min-width:200px"><div class="t">${esc(kid?kid.name:'?')} · ${({bild:'Bild',foto:'Foto',ton:'Tonaufnahme'})[w.type]}</div><div class="small muted">${dateDE(w.createdAt)}${v?' · '+esc(v.title):''}</div>
+        <div class="grow" style="min-width:200px"><div class="t">${esc(werText(w,kid)||'?')} · ${({bild:'Bild',foto:'Foto',ton:'Tonaufnahme'})[w.type]}</div><div class="small muted">${dateDE(w.createdAt)}${v?' · '+esc(v.title):''}</div>
           <div class="row" style="margin-top:8px;gap:6px">${EMO.map(e=>`<button class="btn icon sm ${w.feedback&&w.feedback.emoji===e?'primary':''}" data-act="emo" data-id="${w.id}" data-v="${e}" style="width:40px;min-height:40px;font-size:20px">${e}</button>`).join('')}</div>
           <div class="row" style="margin-top:8px;flex-wrap:nowrap"><input class="inp" data-fbtext="${w.id}" value="${esc(w.feedback?w.feedback.text:'')}" placeholder="Kurzer Satz (optional)"><button class="btn sm" data-act="fbsend" data-id="${w.id}" style="flex:none">Senden</button></div></div></div>`; }).join('')}</div>`:'<div class="empty">Noch keine Werke.</div>'}`;
   fillThumbs(root);
