@@ -1,0 +1,444 @@
+[
+ {
+  "id": "lbuchstabea",
+  "name": "Buchstabe A",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wwuuuww",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuuuuuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabeb",
+  "name": "Buchstabe B",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wuuuuww",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuuuuww",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuuuuww",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabec",
+  "name": "Buchstabe C",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wwuuuww",
+   "wuwwwuw",
+   "wuwwwww",
+   "wuwwwww",
+   "wuwwwww",
+   "wuwwwuw",
+   "wwuuuww",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabed",
+  "name": "Buchstabe D",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wuuuuww",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuuuuww",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabee",
+  "name": "Buchstabe E",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wuuuuuw",
+   "wuwwwww",
+   "wuwwwww",
+   "wuuuuww",
+   "wuwwwww",
+   "wuwwwww",
+   "wuuuuuw",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabef",
+  "name": "Buchstabe F",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wuuuuuw",
+   "wuwwwww",
+   "wuwwwww",
+   "wuuuuww",
+   "wuwwwww",
+   "wuwwwww",
+   "wuwwwww",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabeg",
+  "name": "Buchstabe G",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wwuuuww",
+   "wuwwwuw",
+   "wuwwwww",
+   "wuwuuuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wwuuuuw",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabeh",
+  "name": "Buchstabe H",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuuuuuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabei",
+  "name": "Buchstabe I",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wwuuuww",
+   "wwwuwww",
+   "wwwuwww",
+   "wwwuwww",
+   "wwwuwww",
+   "wwwuwww",
+   "wwuuuww",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabej",
+  "name": "Buchstabe J",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wwwuuuw",
+   "wwwwuww",
+   "wwwwuww",
+   "wwwwuww",
+   "wwwwuww",
+   "wuwwuww",
+   "wwuuwww",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabek",
+  "name": "Buchstabe K",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wuwwwuw",
+   "wuwwuww",
+   "wuwuwww",
+   "wuuwwww",
+   "wuwuwww",
+   "wuwwuww",
+   "wuwwwuw",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabel",
+  "name": "Buchstabe L",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wuwwwww",
+   "wuwwwww",
+   "wuwwwww",
+   "wuwwwww",
+   "wuwwwww",
+   "wuwwwww",
+   "wuuuuuw",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabem",
+  "name": "Buchstabe M",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wuwwwuw",
+   "wuuwuuw",
+   "wuwuwuw",
+   "wuwuwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstaben",
+  "name": "Buchstabe N",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuuwwuw",
+   "wuwuwuw",
+   "wuwwuuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabeo",
+  "name": "Buchstabe O",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wwuuuww",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wwuuuww",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabep",
+  "name": "Buchstabe P",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wuuuuww",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuuuuww",
+   "wuwwwww",
+   "wuwwwww",
+   "wuwwwww",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabeq",
+  "name": "Buchstabe Q",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wwuuuww",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwuwuw",
+   "wuwwuww",
+   "wwuuwuw",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstaber",
+  "name": "Buchstabe R",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wuuuuww",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuuuuww",
+   "wuwuwww",
+   "wuwwuww",
+   "wuwwwuw",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabes",
+  "name": "Buchstabe S",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wwuuuuw",
+   "wuwwwww",
+   "wuwwwww",
+   "wwuuuww",
+   "wwwwwuw",
+   "wwwwwuw",
+   "wuuuuww",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabet",
+  "name": "Buchstabe T",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wuuuuuw",
+   "wwwuwww",
+   "wwwuwww",
+   "wwwuwww",
+   "wwwuwww",
+   "wwwuwww",
+   "wwwuwww",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabeu",
+  "name": "Buchstabe U",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wwuuuww",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabev",
+  "name": "Buchstabe V",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wwuwuww",
+   "wwwuwww",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabew",
+  "name": "Buchstabe W",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wuwuwuw",
+   "wuwuwuw",
+   "wuwuwuw",
+   "wwuwuww",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabex",
+  "name": "Buchstabe X",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wwuwuww",
+   "wwwuwww",
+   "wwuwuww",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabey",
+  "name": "Buchstabe Y",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wuwwwuw",
+   "wuwwwuw",
+   "wwuwuww",
+   "wwwuwww",
+   "wwwuwww",
+   "wwwuwww",
+   "wwwuwww",
+   "wwwww"
+  ]
+ },
+ {
+  "id": "lbuchstabez",
+  "name": "Buchstabe Z",
+  "gruppe": "Buchstaben",
+  "stufe": "leicht",
+  "rows": [
+   "wwwww",
+   "wuuuuuw",
+   "wwwwwuw",
+   "wwwwuww",
+   "wwwuwww",
+   "wwuwwww",
+   "wuwwwww",
+   "wuuuuuw",
+   "wwwww"
+  ]
+ }
+]

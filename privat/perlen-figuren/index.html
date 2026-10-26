@@ -1,0 +1,1050 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Perlentiere · Figuren (privat)</title>
+<meta name="description" content="Flache Perlentiere aus Draht: Tier wählen, Muster drucken, Reihe für Reihe nachfädeln. Eigene Vorlagen für den TTG-Unterricht.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<style>
+:root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--papier:#FFFFFF;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
+h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
+h1{font-size:28px}
+h2{font-size:17px;margin-bottom:10px}
+a{color:var(--acc)}
+.kopf{max-width:1200px;margin:0 auto;padding:20px 16px 8px}
+.kopf p{margin:4px 0 0;color:var(--muted)}
+main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:20px;align-items:start}
+.karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
+.karte h3{font:600 15px Fredoka,Nunito,sans-serif;color:var(--muted);margin:16px 0 8px}.karte h3:first-child{margin-top:0}
+.raster{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+.tier{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px 8px;border:2px solid var(--line);border-radius:14px;background:var(--surface2);color:var(--ink);font:inherit;font-size:14px;cursor:pointer}
+.tier svg{width:72px;height:96px}
+.tier small{color:var(--muted);font-size:12px}
+.tier[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
+.tier:hover{border-color:var(--acc)}
+.tier:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.leiste{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:12px}.leiste h2,.leiste h3{margin:0}
+.suche{flex:1 1 180px;max-width:280px;margin-left:auto;font:inherit;font-size:15px;padding:8px 14px;border:2px solid var(--line);border-radius:999px;background:var(--surface2);color:var(--ink)}
+.suche:focus{outline:none;border-color:var(--acc)}
+.themen{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.thema{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 8px 10px;border:2px solid var(--line);border-radius:16px;background:var(--surface2);color:var(--ink);font:inherit;cursor:pointer;text-align:center}
+.thema:hover{border-color:var(--acc)}
+.thema .bilder{display:flex;justify-content:center;align-items:flex-end;gap:2px;height:62px;margin-bottom:4px}
+.thema .bilder svg{width:38px;height:62px}
+.thema b{font:600 16px/1.2 Fredoka,Nunito,sans-serif}
+.thema small{color:var(--muted);font-size:12px}
+.thema:focus-visible,.suche:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.seite-rechts{position:sticky;top:12px;display:flex;flex-direction:column;gap:14px}
+.feld{margin-bottom:14px}
+.lbl{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:14px;padding:6px 12px;border-radius:999px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--acc)}
+.chip[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
+.drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
+.drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
+.info{font-size:15px;margin:10px 0 0}
+.hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
+.vorschau svg{display:block;width:100%;height:auto;background:var(--papier);border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+@media (max-width:860px){main{grid-template-columns:minmax(0,1fr)}.seite-rechts{position:static}h1{font-size:24px}}
+@media (max-width:480px){.raster{grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}.tier svg{width:56px;height:76px}}
+#druck{display:none}
+@page{size:A4 portrait;margin:0}
+@media print{
+  body{background:#fff}
+  .kopf,main{display:none!important}
+  #druck{display:block}
+  #druck svg{display:block;width:210mm;height:297mm;break-after:page}
+}
+</style>
+</head>
+<body>
+<header class="kopf">
+  <h1>Perlentiere: Figuren</h1>
+  <p>Flache Tiere aus Perlen und Draht, eine Lage. Tier wählen, Muster drucken, Reihe für Reihe nachfädeln. Nur für den Unterricht.</p>
+</header>
+<main>
+  <section class="karte" aria-label="Tier wählen">
+    <div class="leiste"><h2>Tier oder Figur wählen</h2><input type="search" id="suche" class="suche" placeholder="Figur suchen …" aria-label="Figur suchen" autocomplete="off"></div>
+    <div id="tiere"></div>
+  </section>
+  <div class="seite-rechts">
+    <section class="karte" aria-label="Einstellungen">
+      <div class="feld">
+        <span class="lbl" id="lbl-perle">Perlen</span>
+        <div class="chips" role="group" aria-labelledby="lbl-perle" id="perlen"></div>
+      </div>
+      <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
+      <p class="info" id="info" aria-live="polite"></p>
+      <p class="hinweis">Das Muster zeigt jede Perle. Die Zahl rechts sagt, wie viele Perlen in die Reihe kommen. Immer von «Start» nach unten fädeln. Die blaue Linie ist der Draht: so läuft er durch jede Reihe.</p>
+    </section>
+    <section class="karte" aria-label="Vorschau">
+      <h2>Vorschau</h2>
+      <div class="vorschau" id="vorschau"></div>
+    </section>
+  </div>
+</main>
+<div id="druck"></div>
+<script>
+// Eigene Muster von Schritt für Schritt. Jede Reihe ist eine Zeichenkette, ein Buchstabe pro Perle (Farbe).
+// Beine: nach Reihe r mit jedem Drahtende n Perlen und f Fussperlen auffädeln, zurück durch die n Perlen.
+// a = Winkel in Grad (positiv: nach vorne/oben), w = Wort im Muster.
+const FARBE={g:['#3FA34D','grün'],d:['#1F6B35','dunkelgrün'],h:['#B5DE7A','hellgrün'],s:['#1C2430','schwarz'],w:['#FFFFFF','weiss'],r:['#D7352E','rot'],y:['#F4C430','gelb'],o:['#F08A24','orange'],b:['#2A6FDB','blau'],l:['#9CD0F5','hellblau'],p:['#F6AFC6','rosa'],q:['#D9487A','pink'],k:['#8A5A35','braun'],c:['#E2BC72','ocker'],n:['#A7B1BE','grau'],v:['#7B4FC9','violett'],f:['#F3C9A0','hautfarben'],t:['#2BB3B1','türkis'],u:['#1F3A7A','dunkelblau'],m:['#B79CE6','flieder'],e:['#8E1B1B','dunkelrot']};
+const TIERE=[
+  // ── Private Figuren: nur für den eigenen Unterricht, nicht veröffentlichen ──
+  {id:'pikachu',name:'Pikachu',art:'privat',gruppe:'Pokémon',stufe:'mittel',rows:['yyyy','yyyyyy','yyyyyyyy','yysyyysyy','ryyyyyyyr','yyysyyy','yyyyy','yyyyyyy','yyyyyyy','yyyyyyy','yyyyy'],
+    beine:[{r:1,n:3,f:1,a:62,c:'y',fc:'s',w:'Ohren'},{r:8,n:2,f:1,a:-25,c:'y',fc:'y',w:'Arme'},{r:11,n:1,f:3,a:-70,c:'y',fc:'y',w:'Füsse'}]},
+  {id:'mario',name:'Mario',art:'privat',gruppe:'Super Mario',stufe:'schwer',rows:['rrrr','rrrrrr','rrrwrrr','rrrrrrrrr','kfsfffsfk','fffffffff','fkkkkkf','fffff','rrbrbrr','rbybbybr','bbbbbbb','bbbbbbb','bbbbb'],
+    beine:[{r:9,n:2,f:1,a:-30,c:'r',fc:'w',w:'Arme'},{r:13,n:1,f:3,a:-70,c:'b',fc:'k',w:'Schuhe'}]},
+  {id:'luma',name:'Luma',art:'privat',gruppe:'Super Mario',stufe:'leicht',rows:['y','yy','yyy','yyyyyyyyy','ysyyysy','ysyyysy','yyyyy'],
+    beine:[{r:7,n:2,f:1,a:-55,c:'y',fc:'y',w:'Zacken'}]},
+  {id:'bluey',name:'Bluey',art:'privat',gruppe:'Bluey',stufe:'mittel',rows:['bbbb','bllllb','llllllll','lsllllsl','llwwwwll','lwwsswwl','wwwwww','wwww','llllll','lwwwwl','lwwwwl','llll'],
+    beine:[{r:1,n:2,f:1,a:65,c:'b',fc:'b',w:'Ohren'},{r:9,n:2,f:1,a:-35,c:'l',fc:'b',w:'Arme'},{r:12,n:1,f:3,a:-70,c:'l',fc:'b',w:'Füsse'}]},
+  {id:'bingo',name:'Bingo',art:'privat',gruppe:'Bluey',stufe:'mittel',rows:['cccc','coooooc','oooooooo','osoooso','oowwwwoo','owwsswwo','wwwwww','wwww','oooooo','owwwwo','owwwwo','oooo'],
+    beine:[{r:1,n:2,f:1,a:65,c:'o',fc:'k',w:'Ohren'},{r:9,n:2,f:1,a:-35,c:'o',fc:'o',w:'Arme'},{r:12,n:1,f:3,a:-70,c:'o',fc:'c',w:'Füsse'}]},
+  {id:'hellokitty',name:'Hello Kitty',art:'privat',gruppe:'Sanrio',stufe:'mittel',rows:['wwwrrr','wwwwwryr','wwwwwwrrw','wwwwwwwwwww','wwswwwwwsww','nwwwwywwwwn','wwwwwwwww','wwwwwww','rrrrr','rrrrrr','rrrrrrr'],
+    beine:[{r:2,n:2,f:1,a:65,c:'w',fc:'w',w:'Ohren'},{r:9,n:2,f:1,a:-35,c:'w',fc:'w',w:'Arme'},{r:11,n:1,f:1,a:-75,c:'w',fc:'w',w:'Beine'}]},
+  {id:'r2d2',name:'R2-D2',art:'privat',gruppe:'Star Wars',stufe:'mittel',rows:['nnn','nbnbn','nnnsnnn','bnnrnnb','nnnnnnn','wwbbbww','wwwbwww','wbbwbbw','wwwbwww','wbwwwbw','wwwww'],
+    beine:[{r:6,n:4,f:3,a:-82,c:'w',fc:'b',w:'Beine'}]},
+  {id:'glumanda',name:'Glumanda',art:'privat',gruppe:'Pokémon',stufe:'mittel',rows:['ooo','ooooo','ooooooo','osoooso','ooooooo','oooooo','oooo','ooccoo','occccco','occccco','ooccoo','oooo','oo','o','y','r'],
+    beine:[{r:8,n:2,f:1,a:-20,c:'o',fc:'w',w:'Arme'},{r:12,n:1,f:3,a:-70,c:'o',fc:'o',w:'Füsse'}]},
+  {id:'ferkel',name:'Ferkel',art:'privat',gruppe:'Cartoons',stufe:'leicht',rows:['ppp','ppppp','psppsp','ppqqpp','pppp','qqqqqq','vvvvvvv','qqqqqqq','vvvvvvv','qqqqqq'],
+    beine:[{r:1,n:2,f:1,a:70,c:'p',fc:'q',w:'Ohren'},{r:6,n:2,f:1,a:-30,c:'p',fc:'p',w:'Arme'},{r:10,n:1,f:1,a:-75,c:'p',fc:'p',w:'Beine'}]},
+  {id:'mymelody',name:'My Melody',art:'privat',gruppe:'Sanrio',stufe:'mittel',rows:['pppp','pppppp','pppppppp','ppwwwwpp','pwswwswp','pwwywwp','ppwwwpp','ppppp','ppppp','pppppp','ppppppp'],
+    beine:[{r:1,n:4,f:1,a:75,c:'p',fc:'q',w:'Ohren'},{r:9,n:2,f:1,a:-35,c:'w',fc:'w',w:'Arme'},{r:11,n:1,f:1,a:-75,c:'w',fc:'w',w:'Beine'}]},
+  {id:'erdbeerchen',name:'Erdbeerchen',art:'privat',gruppe:'Cartoons',stufe:'schwer',rows:['ppppp','ppprppp','ppppppppp','ofsfffsfo','ofqfffqfo','offrffo','offfo','ppppp','ppppppp','prppprp','ppppppppp'],
+    beine:[{r:8,n:2,f:1,a:-35,c:'f',fc:'f',w:'Arme'},{r:11,n:2,f:1,a:-80,c:'g',fc:'r',w:'Beine'}]},
+  {id:'plankton',name:'Plankton',art:'privat',gruppe:'Cartoons',stufe:'leicht',rows:['ggg','gsssg','ggwwwgg','gwrsrwg','gwwwwwg','ggwwwgg','ggggggg','ggsssgg','ggggg','ggg'],
+    beine:[{r:1,n:3,f:1,a:75,c:'g',fc:'g',w:'Fühler'},{r:7,n:2,f:1,a:-20,c:'g',fc:'g',w:'Arme'},{r:10,n:2,f:1,a:-75,c:'g',fc:'g',w:'Beine'}]},
+  {id:'gameboy',name:'Gameboy',art:'privat',gruppe:'Weitere Games',stufe:'mittel',rows:['nnnnnnnnn','nsssssssn','nshhhhhsn','nshhhhhsn','nshhhhhsn','nsssssssn','nnnnnnnnn','nnsnnnnqn','nsssnnqnn','nnsnnnnnn','nnnnnnnnn','nnnsnsnnn','nnnnnnnnn']},
+  // ── neue Figuren (teile/) ──
+  {id:'pokeball',name:'Pokéball',art:'privat',gruppe:'Pokémon',stufe:'leicht',rows:['rrrrr','rrrrrrrrr','rrrrsssrrrr','ssssswsssss','wwwwssswwww','wwwwwwwww','wwwww']},
+  {id:'digda',name:'Digda',art:'privat',gruppe:'Pokémon',stufe:'leicht',rows:['kkk','kkkkk','kkkkkkk','kkskskk','kkskskk','kkqqqkk','kkkqkkk','kkkkkkk','nnnnnnnnn']},
+  {id:'voltilamm',name:'Voltilamm',art:'privat',gruppe:'Pokémon',stufe:'mittel',rows:['www','wllw','lllll','lslllsl','lllllll','lllll','wwwwwww','wwwwwwwww','wwwwwwwwwww','wwwwwwwwwww','wwwwwwwww','wwwwwww'],
+    beine:[{r:4,n:2,f:1,a:15,c:'y',fc:'s',w:'Ohren'},{r:12,n:2,f:1,a:-75,c:'l',fc:'l',w:'Beine'}]},
+  {id:'pikachukopf',name:'Pikachu-Kopf',art:'privat',gruppe:'Pokémon',stufe:'mittel',rows:['yyyyyyy','yyyyyyyyyyy','yyswyyyyyswyy','yyssyyyyyssyy','rryyyysyyyyrr','rryyysysyyyrr','yyyyyyyyyyy','yyyyyyy'],
+    beine:[{r:1,n:4,f:1,a:70,c:'y',fc:'s',w:'Ohren'}]},
+  {id:'evoli',name:'Evoli',art:'privat',gruppe:'Pokémon',stufe:'mittel',rows:['kkk','kkkkk','kkkkkkk','kskkksk','kkkkkkk','kkkskkk','ckkkkkc','ccccccccc','ccccccc','kkcckk','kkkkk','kkkkk'],
+    beine:[{r:2,n:4,f:1,a:65,c:'k',fc:'s',w:'Ohren'},{r:12,n:1,f:3,a:-70,c:'k',fc:'k',w:'Füsse'}]},
+  {id:'schiggy',name:'Schiggy',art:'privat',gruppe:'Pokémon',stufe:'mittel',rows:['lllll','lllllll','lswlwsl','lllllll','lllllll','lllll','kccccck','kccccccck','kccccccck','kccccck','lllll','lllll'],
+    beine:[{r:7,n:2,f:1,a:-30,c:'l',fc:'l',w:'Arme'},{r:12,n:1,f:3,a:-70,c:'l',fc:'l',w:'Füsse'}]},
+  {id:'bisasam',name:'Bisasam',art:'privat',gruppe:'Pokémon',stufe:'mittel',rows:['ggg','gdgdg','ggdgdgg','ttgggtt','ttttttttt','trwtttwrt','ttttttttt','ttttttt','tdtttdt','ttdtdtt','ttttt'],
+    beine:[{r:5,n:1,f:1,a:65,c:'t',fc:'t',w:'Ohren'},{r:11,n:1,f:3,a:-70,c:'t',fc:'w',w:'Füsse'}]},
+  {id:'gengar',name:'Gengar',art:'privat',gruppe:'Pokémon',stufe:'mittel',rows:['vvvvv','vvvvvvvvv','vvvvvvvvvvv','vvrrvvvrrvv','vvvrvvvrvvv','vwwwwwwwwwv','vvwwwwwwwvv','vvvvvvvvvvv','vvvvvvvvv','vvvvvvv'],
+    beine:[{r:1,n:2,f:1,a:70,c:'v',fc:'v',w:'Ohren'},{r:6,n:2,f:1,a:-25,c:'v',fc:'w',w:'Arme'},{r:10,n:1,f:3,a:-70,c:'v',fc:'w',w:'Füsse'}]},
+  {id:'glurak',name:'Glurak',art:'privat',gruppe:'Pokémon',stufe:'schwer',rows:['ooo','ooooo','osooso','ooooo','ooo','ooooo','occcco','occccco','occcccco','occccco','occcco','ooooo','o','y','r'],
+    beine:[{r:1,n:1,f:1,a:70,c:'o',fc:'c',w:'Hörner'},{r:6,n:4,f:1,a:35,c:'t',fc:'o',w:'Flügel'},{r:12,n:1,f:3,a:-70,c:'o',fc:'w',w:'Füsse'}]},
+  {id:'lucario',name:'Lucario',art:'privat',gruppe:'Pokémon',stufe:'schwer',rows:['bbb','bbbbb','bsrbrsb','bbbbbbb','bbbbb','bbb','bcccccb','cccwccc','bcccccb','bbbbb','sssss','sssss','bbbb'],
+    beine:[{r:1,n:3,f:1,a:70,c:'b',fc:'s',w:'Ohren'},{r:7,n:2,f:1,a:-30,c:'b',fc:'w',w:'Arme'},{r:13,n:1,f:3,a:-70,c:'b',fc:'b',w:'Füsse'}]},
+  {id:'mewtu',name:'Mewtu',art:'privat',gruppe:'Pokémon',stufe:'schwer',rows:['nnn','nnnnn','nvnvn','nnnnn','nnn','nnnnn','nnnnnnn','nnvvvnn','nvvvvvn','nnvvvnn','nnnnn','nnnn'],
+    beine:[{r:1,n:1,f:1,a:65,c:'n',fc:'n',w:'Hörner'},{r:6,n:3,f:1,a:-35,c:'n',fc:'n',w:'Arme'},{r:12,n:2,f:3,a:-75,c:'n',fc:'n',w:'Beine'}]},
+  {id:'superpilz',name:'Super-Pilz',art:'privat',gruppe:'Super Mario',stufe:'leicht',rows:['rrr','rwwwr','rrwwwrr','wwrrrrrww','wwrrrrrww','rrrrrrrrr','ffsfsff','fffff']},
+  {id:'feuerblume',name:'Feuerblume',art:'privat',gruppe:'Super Mario',stufe:'mittel',rows:['rrr','rooor','roywyor','roswsor','roywyor','rooor','rrr','g','g','g'],
+    beine:[{r:10,n:2,f:1,a:35,c:'g',fc:'g',w:'Blätter'}]},
+  {id:'yoshiei',name:'Yoshi-Ei',art:'privat',gruppe:'Super Mario',stufe:'leicht',rows:['www','wgggw','wwgggww','gwwwwwg','ggwwwwwgg','gwwwgwwwg','wwwgggwww','wwgggww','wwwww']},
+  {id:'muenze',name:'Münze',art:'privat',gruppe:'Super Mario',stufe:'leicht',rows:['ooo','oyyyo','oywoyyo','oywoyyo','oywoyyo','oywoyyo','oywoyyo','oyyyo','ooo']},
+  {id:'goomba',name:'Goomba',art:'privat',gruppe:'Super Mario',stufe:'mittel',rows:['kkk','kkkkk','kkkkkkk','kkssksskk','kkwskswkk','kkwwkwwkk','kkkkkkkkkkk','kkkwkkkwkkk','fffff','fffff'],
+    beine:[{r:10,n:0,f:3,a:-70,c:'s',fc:'s',w:'Füsse'}]},
+  {id:'mariokopf',name:'Mario-Kopf 8-Bit',art:'privat',gruppe:'Super Mario',stufe:'schwer',rows:['rrrrr','rrrwrrr','rrrrrrrrr','rrrrrrrrrrr','kkfsfffsfkk','kffsfffsffk','kfffffffffk','fkkkkkkkf','fffffff','fffff']},
+  {id:'luigi',name:'Luigi',art:'privat',gruppe:'Super Mario',stufe:'schwer',rows:['gggg','gggggg','gggwggg','gggggggg','kfsffsfk','fffffff','fkkkkkf','fffff','ggugugg','guyuyug','uuuuuu','uuuuu','uuuuu','uuuu'],
+    beine:[{r:9,n:2,f:1,a:-30,c:'g',fc:'w',w:'Arme'},{r:14,n:1,f:3,a:-70,c:'u',fc:'k',w:'Schuhe'}]},
+  {id:'yoshi',name:'Yoshi',art:'privat',gruppe:'Super Mario',stufe:'schwer',rows:['wwgww','wsgsw','ggggggg','ggggggggg','gggsgsggg','wwwwwww','wwwww','gwwwg','rgwwwgr','rgwwwgr','gwwwg','ggggg'],
+    beine:[{r:8,n:2,f:1,a:-30,c:'g',fc:'g',w:'Arme'},{r:12,n:1,f:3,a:-70,c:'g',fc:'o',w:'Schuhe'}]},
+  {id:'toad',name:'Toad',art:'privat',gruppe:'Super Mario',stufe:'schwer',rows:['wwrww','wwrrrww','rwwrrrwwr','rrwwwwwwwrr','wwwwwwwwwww','ffsfsff','ffsfsff','fffff','bywyb','bywyb','wwwww'],
+    beine:[{r:9,n:2,f:1,a:-35,c:'f',fc:'f',w:'Arme'},{r:11,n:1,f:3,a:-70,c:'w',fc:'k',w:'Schuhe'}]},
+  {id:'peach',name:'Peach',art:'privat',gruppe:'Super Mario',stufe:'schwer',rows:['yby','yyyyy','yyyyyyy','yfffffy','yfbfbfy','yffqffy','yyfffyy','yypbpyy','ppppp','ppppppp','ppppppppp','qqqqqqqqqqq'],
+    beine:[{r:8,n:2,f:1,a:-35,c:'p',fc:'w',w:'Arme'}]},
+  {id:'bowser',name:'Bowser',art:'privat',gruppe:'Super Mario',stufe:'schwer',rows:['rrr','yrrry','yrryrry','ywsyswy','yycccccyy','ycwcccwcy','ycccccy','ggcccgg','wgcccccgw','ggcccccgg','wgcccccgw','gcccccg','yyyyy'],
+    beine:[{r:2,n:2,f:1,a:60,c:'c',fc:'w',w:'Hörner'},{r:9,n:2,f:1,a:-30,c:'y',fc:'s',w:'Arme'},{r:13,n:1,f:3,a:-70,c:'y',fc:'w',w:'Füsse'}]},
+  {id:'sonic',name:'Sonic',art:'privat',gruppe:'Sonic',stufe:'schwer',rows:['bbb','bbbbb','bbbbbbbbb','bbbbbbb','bbbwwwwwbbb','bbwgwgwbb','bbbfffffbbb','bffsffb','bfffb','bfffb','bbbb'],
+    beine:[{r:1,n:1,f:1,a:65,c:'b',fc:'f',w:'Ohren'},{r:9,n:2,f:1,a:-35,c:'b',fc:'w',w:'Arme'},{r:11,n:1,f:3,a:-70,c:'b',fc:'r',w:'Schuhe'}]},
+  {id:'tails',name:'Tails',art:'privat',gruppe:'Sonic',stufe:'schwer',rows:['ooo','ooooo','ooooooo','owwowwo','owbobwo','wwwwwwwww','wwwswww','wwwww','owwwo','ooooo','oooo'],
+    beine:[{r:1,n:2,f:1,a:65,c:'o',fc:'w',w:'Ohren'},{r:10,n:4,f:1,a:25,c:'o',fc:'w',w:'Schwänze'},{r:11,n:1,f:3,a:-70,c:'o',fc:'r',w:'Schuhe'}]},
+  {id:'knuckles',name:'Knuckles',art:'privat',gruppe:'Sonic',stufe:'schwer',rows:['rrr','rrrrr','rrrrrrr','rrwwwwwrr','rrwvwvwrr','rrfffffrr','rffsffr','fffff','wrrrw','rwwwr','rrrr'],
+    beine:[{r:6,n:3,f:1,a:-65,c:'r',fc:'r',w:'Stacheln'},{r:9,n:2,f:3,a:-30,c:'r',fc:'w',w:'Fäuste'},{r:11,n:1,f:3,a:-70,c:'r',fc:'g',w:'Schuhe'}]},
+  {id:'shadow',name:'Shadow',art:'privat',gruppe:'Sonic',stufe:'schwer',rows:['sss','sssss','rsssssssr','sssssss','rsswwwwwssr','sswrwrwss','rssfffffssr','sffsffs','wwwww','swwws','ssss'],
+    beine:[{r:1,n:1,f:1,a:65,c:'s',fc:'s',w:'Ohren'},{r:9,n:2,f:1,a:-35,c:'s',fc:'w',w:'Arme'},{r:11,n:1,f:3,a:-70,c:'s',fc:'w',w:'Schuhe'}]},
+  {id:'eggman',name:'Dr. Eggman',art:'privat',gruppe:'Sonic',stufe:'schwer',rows:['fff','fffff','fffffff','slsfsls','fffffff','kkkkkkkkkkk','rrrrrrrrr','rrrrrrrrrrr','rrrrrrrrrrr','rryyyyyrr','sssssss','sssss'],
+    beine:[{r:8,n:2,f:1,a:-30,c:'r',fc:'w',w:'Arme'},{r:12,n:1,f:3,a:-70,c:'s',fc:'s',w:'Stiefel'}]},
+  {id:'mccreeper',name:'Creeper',art:'privat',gruppe:'Minecraft',stufe:'leicht',rows:['ggggggggg','gssgggssg','gssgggssg','gggsssggg','ggsssssgg','ggsgggsgg','ggggggggg']},
+  {id:'mctnt',name:'TNT',art:'privat',gruppe:'Minecraft',stufe:'mittel',rows:['rrrrrrrrrrrr','rrrrrrrrrrrr','ssswswwswsss','wswwsswswwsw','wswwswsswwsw','wswwswwswwsw','rrrrrrrrrrrr','rrrrrrrrrrrr']},
+  {id:'mcspitzhacke',name:'Diamant-Spitzhacke',art:'privat',gruppe:'Minecraft',stufe:'leicht',rows:['lllllll','ttttktttt','tkt','k','k','k','k','k','k'],
+    beine:[{r:2,n:2,f:1,a:-35,c:'t',fc:'l',w:'Spitzen'}]},
+  {id:'mcschwert',name:'Diamantschwert',art:'privat',gruppe:'Minecraft',stufe:'leicht',rows:['l','tlt','tlt','tlt','tlt','tlt','tlt','utttttu','k','k','k','ttt']},
+  {id:'mcsteve',name:'Steve',art:'privat',gruppe:'Minecraft',stufe:'schwer',rows:['kkkkkkkk','kffffffk','fwbffbwf','fffccfff','ffkkkkff','ffffffff','tttffttt','tttttttt','tttttttt','uuuuuuuu','uuuuuuuu','uuuuuuuu','nnnnnnnn'],
+    beine:[{r:7,n:3,f:1,a:-72,c:'f',fc:'f',w:'Arme'}]},
+  {id:'mcalex',name:'Alex',art:'privat',gruppe:'Minecraft',stufe:'schwer',rows:['oooooooo','ooooffoo','offffffo','owgffgwo','offffffo','offppffo','oggffggo','gggggggg','gggggggg','kkkkkkkk','kkkkkkkk','kkkkkkkk','nnnnnnnn'],
+    beine:[{r:7,n:3,f:1,a:-72,c:'f',fc:'f',w:'Arme'}]},
+  {id:'mcenderman',name:'Enderman',art:'privat',gruppe:'Minecraft',stufe:'mittel',rows:['ssssssss','ssssssss','vmvssvmv','ssssssss','ssssss','ssss','ssss','ssss'],
+    beine:[{r:5,n:5,f:1,a:-78,c:'s',fc:'s',w:'Arme'},{r:8,n:5,f:1,a:-84,c:'s',fc:'s',w:'Beine'}]},
+  {id:'mcschwein',name:'Schwein',art:'privat',gruppe:'Minecraft',stufe:'leicht',rows:['pppppppp','pppppppp','pwsppswp','ppqqqqpp','ppeqqepp','ppqqqqpp','pppppppp']},
+  {id:'mczombie',name:'Zombie',art:'privat',gruppe:'Minecraft',stufe:'schwer',rows:['dddddddd','gggggggg','gssggssg','gggddggg','ggddddgg','gggggggg','tttttttt','tttttttt','tttttttt','uuuuuuuu','uuuuuuuu','uuuuuuuu','nnnnnnnn'],
+    beine:[{r:7,n:3,f:1,a:-5,c:'g',fc:'g',w:'Arme'}]},
+  {id:'pacman',name:'Pac-Man',art:'privat',gruppe:'Pac-Man',stufe:'mittel',rows:['yyyyy','yyyyyyyss','yyyysyyssss','yyyyyyyssss','yyyyyysssss','yyyyyyyssss','yyyyyyyyyyy','yyyyyyyyy','yyyyy']},
+  {id:'blinky',name:'Blinky',art:'privat',gruppe:'Pac-Man',stufe:'mittel',rows:['rrrr','rrrrrrrr','rrrrrrrrrr','rwwrrrrwwr','rwbrrrrwbr','rrrrrrrrrr','rrrrrrrrrr','rrrrrrrrrr','rr'],
+    beine:[{r:8,n:1,f:1,a:-80,c:'r',fc:'r',w:'Zipfel'}]},
+  {id:'pinky',name:'Pinky',art:'privat',gruppe:'Pac-Man',stufe:'mittel',rows:['pppp','pppppppp','pppppppppp','pwwppppwwp','pwbppppwbp','pppppppppp','pppppppppp','pppppppppp','pp'],
+    beine:[{r:8,n:1,f:1,a:-80,c:'p',fc:'p',w:'Zipfel'}]},
+  {id:'inky',name:'Inky',art:'privat',gruppe:'Pac-Man',stufe:'mittel',rows:['tttt','tttttttt','tttttttttt','twwttttwwt','twbttttwbt','tttttttttt','tttttttttt','tttttttttt','tt'],
+    beine:[{r:8,n:1,f:1,a:-80,c:'t',fc:'t',w:'Zipfel'}]},
+  {id:'clyde',name:'Clyde',art:'privat',gruppe:'Pac-Man',stufe:'mittel',rows:['oooo','oooooooo','oooooooooo','owwoooowwo','owboooowbo','oooooooooo','oooooooooo','oooooooooo','oo'],
+    beine:[{r:8,n:1,f:1,a:-80,c:'o',fc:'o',w:'Zipfel'}]},
+  {id:'amongusrot',name:'Among Us rot',art:'privat',gruppe:'Weitere Games',stufe:'mittel',rows:['rrrr','rrrrrr','rrrwllll','eerlllll','eerrrrrr','eerrrrrr','eerrrrrr','rrrrrrrr'],
+    beine:[{r:8,n:1,f:1,a:-85,c:'r',fc:'r',w:'Beine'}]},
+  {id:'amongusblau',name:'Among Us blau',art:'privat',gruppe:'Weitere Games',stufe:'mittel',rows:['bbbb','bbbbbb','bbbwllll','uublllll','uubbbbbb','uubbbbbb','uubbbbbb','bbbbbbbb'],
+    beine:[{r:8,n:1,f:1,a:-85,c:'b',fc:'b',w:'Beine'}]},
+  {id:'amongusgelb',name:'Among Us gelb',art:'privat',gruppe:'Weitere Games',stufe:'mittel',rows:['yyyy','yyyyyy','yyywllll','ooylllll','ooyyyyyy','ooyyyyyy','ooyyyyyy','yyyyyyyy'],
+    beine:[{r:8,n:1,f:1,a:-85,c:'y',fc:'y',w:'Beine'}]},
+  {id:'robloxnoob',name:'Roblox-Noob',art:'privat',gruppe:'Weitere Games',stufe:'schwer',rows:['yyyyyy','yyyyyyyy','yysyysyy','ysyyyysy','yyssssyy','yyyyyy','bbbbbbbbbb','bbbbbbbbbb','bbbbbbbbbb','bbbbbbbbbb','gggggggggg','gggggggggg','gggggggggg'],
+    beine:[{r:7,n:3,f:1,a:-75,c:'y',fc:'y',w:'Arme'}]},
+  {id:'lloyd',name:'Lloyd (Ninjago)',art:'privat',gruppe:'Ninjago',stufe:'mittel',rows:['ggggg','gggyggg','gggyyyggg','ggggggggg','gfffffffg','gfsfffsfg','ggggggggg','ggggggggg','ggggggg','ggggg']},
+  {id:'kai',name:'Kai (Ninjago)',art:'privat',gruppe:'Ninjago',stufe:'mittel',rows:['rrrrr','rrryrrr','rrryyyrrr','rrrrrrrrr','rfffffffr','rfsfffsfr','rrrrrrrrr','rrrrrrrrr','rrrrrrr','rrrrr']},
+  {id:'jay',name:'Jay (Ninjago)',art:'privat',gruppe:'Ninjago',stufe:'mittel',rows:['bbbbb','bbbybbb','bbbyyybbb','bbbbbbbbb','bfffffffb','bfsfffsfb','bbbbbbbbb','bbbbbbbbb','bbbbbbb','bbbbb']},
+  {id:'zane',name:'Zane (Ninjago)',art:'privat',gruppe:'Ninjago',stufe:'mittel',rows:['wwwww','wwwlwww','wwwlllwww','wwwwwwwww','wfffffffw','wfsfffsfw','wwwwwwwww','wwwwwwwww','wwwwwww','wwwww']},
+  {id:'cole',name:'Cole (Ninjago)',art:'privat',gruppe:'Ninjago',stufe:'mittel',rows:['sssss','sssnsss','sssnnnsss','sssssssss','sfffffffs','sfsfffsfs','sssssssss','sssssssss','sssssss','sssss']},
+  {id:'nya',name:'Nya (Ninjago)',art:'privat',gruppe:'Ninjago',stufe:'mittel',rows:['ttttt','tttettt','ttteeettt','ttttttttt','tffffffft','tfsfffsft','ttttttttt','ttttttttt','ttttttt','ttttt']},
+  {id:'ladybugmuster',name:'Ladybug-Muster',art:'privat',gruppe:'Miraculous',stufe:'mittel',rows:['rrrrr','rrrrsrr','rsrrrrrrr','rrrrrrrsr','rrrsrrrrrrr','rrrrrrrrrrr','rrrrrrrsrrr','rsrrrrrrr','rrrrsrrrr','rrrrrrr','rrrrr']},
+  {id:'catnoirpfote',name:'Cat-Noir-Pfote',art:'privat',gruppe:'Miraculous',stufe:'mittel',rows:['sssss','ssggsggss','sssggsggsss','sgsssssssgs','sgssgggssgs','sssgggggsss','ssgggggggss','ssgggggggss','ssgggggss','sssssss','sssss']},
+  {id:'ladybug',name:'Ladybug',art:'privat',gruppe:'Miraculous',stufe:'schwer',rows:['uuuuu','uuuuuuu','uuuuuuuuu','uufffffuu','ursrrrsru','urbrrrbru','ufffffffu','ufffrfffu','fffffff','fffff'],
+    beine:[{r:3,n:1,f:3,a:10,c:'r',fc:'u',w:'Zöpfe'}]},
+  {id:'tikki',name:'Tikki',art:'privat',gruppe:'Miraculous',stufe:'mittel',rows:['rrrrr','rrrsrrr','rrrrrrrrr','rwbrrrbwr','rbbrrrbbr','rrrrrrrrr','rrrrrrr','rrrrr','rrrrr','rrr'],
+    beine:[{r:1,n:1,f:1,a:70,c:'r',fc:'s',w:'Fühler'},{r:8,n:1,f:1,a:-30,c:'r',fc:'r',w:'Arme'},{r:10,n:0,f:3,a:-70,c:'r',fc:'r',w:'Füsse'}]},
+  {id:'plagg',name:'Plagg',art:'privat',gruppe:'Miraculous',stufe:'mittel',rows:['sssss','sssssss','sssssssss','shhssshhs','shdsssdhs','sssspssss','sssssss','sssss','sssss','sss'],
+    beine:[{r:1,n:1,f:1,a:70,c:'s',fc:'s',w:'Ohren'},{r:8,n:1,f:1,a:-30,c:'s',fc:'s',w:'Arme'},{r:10,n:0,f:3,a:-70,c:'s',fc:'s',w:'Füsse'}]},
+  {id:'konoha',name:'Konoha-Stirnband',art:'privat',gruppe:'Anime',stufe:'mittel',rows:['nnnnnnnnnnn','nnnnsssnnnn','nnnsnnnsnnn','nnsnnssnsnn','nnsnsnnsnnn','nnssnsssnnn','nsssnnnnnnn','nnnnnnnnnnn'],
+    beine:[{r:3,n:3,f:1,a:0,c:'u',fc:'u',w:'Band'},{r:6,n:3,f:1,a:0,c:'u',fc:'u',w:'Band'}]},
+  {id:'onepiece',name:'Strohhut-Totenkopf',art:'privat',gruppe:'Anime',stufe:'mittel',rows:['yyyyy','rrrrrrr','yyyyyyyyyyy','wwwwwwwww','wsswwwssw','wsswwwssw','wwwwswwww','wwwwwww','wswswsw','wwwww'],
+    beine:[{r:5,n:2,f:3,a:35,c:'w',fc:'w',w:'Knochen'},{r:9,n:2,f:3,a:-35,c:'w',fc:'w',w:'Knochen'}]},
+  {id:'chopper',name:'Chopper',art:'privat',gruppe:'Anime',stufe:'mittel',rows:['qqqqq','qwqwq','qqwqq','qwqwq','qqqqqqqqq','kccccccck','kcscccsck','kcccbccck','kccccck','kkkkk'],
+    beine:[{r:6,n:2,f:1,a:60,c:'k',fc:'k',w:'Geweih'}]},
+  {id:'totoro',name:'Totoro',art:'privat',gruppe:'Anime',stufe:'schwer',rows:['nnnnn','nnnnnnn','nwsnnnswn','nnnnsnnnn','nnnnnnnnnnn','nnnwwwwwnnn','nnwwnwnwwnn','nwwnwnwnwwn','nwwwwwwwwwn','nwwwwwwwn','nnnnnnn'],
+    beine:[{r:1,n:2,f:1,a:75,c:'n',fc:'n',w:'Ohren'},{r:4,n:2,f:1,a:5,c:'s',fc:'s',w:'Schnurrhaare'},{r:11,n:0,f:3,a:-70,c:'n',fc:'n',w:'Füsse'}]},
+  {id:'sadaharu',name:'Sadaharu',art:'privat',gruppe:'Anime',stufe:'mittel',rows:['wwwww','wwwwwww','wwwwwwwww','wwswwwsww','wwwwwwwww','wwwssswww','wwwqwww','wwwww','wwwwwww','wwwwwww','wwwwwww','wwwww'],
+    beine:[{r:1,n:2,f:1,a:65,c:'w',fc:'w',w:'Ohren'},{r:9,n:2,f:1,a:-60,c:'w',fc:'w',w:'Vorderbeine'},{r:12,n:0,f:3,a:-70,c:'w',fc:'w',w:'Pfoten'}]},
+  {id:'naruto',name:'Naruto',art:'privat',gruppe:'Anime',stufe:'schwer',rows:['yyy','yyyyy','yyyyyyy','yyyyyyyyy','uunnsnnuu','yfffffffy','ffbfffbff','fssfffssf','fffffffff','ffsssff','fffff','ooooooo','oosssoo'],
+    beine:[{r:3,n:1,f:1,a:45,c:'y',fc:'y',w:'Haarspitzen'},{r:12,n:2,f:1,a:-30,c:'o',fc:'f',w:'Arme'}]},
+  {id:'luffy',name:'Ruffy',art:'privat',gruppe:'Anime',stufe:'schwer',rows:['yyyyy','rrrrrrr','yyyyyyyyyyy','sssssssss','ssfffffss','sfsfffsfs','ffffffeff','fswwwwwsf','ffsssff','fffff','rrfffrr','rrfffrr'],
+    beine:[{r:11,n:2,f:1,a:-30,c:'f',fc:'f',w:'Arme'}]},
+  {id:'zoro',name:'Zorro',art:'privat',gruppe:'Anime',stufe:'schwer',rows:['ggggg','ggggggg','ggggggggg','gfffffffg','fssfffssf','fsfffffsf','fffffffff','fsssssf','fffff','wwwwwww','wwwwwww','ggggggg'],
+    beine:[{r:8,n:3,f:1,a:0,c:'n',fc:'s',w:'Schwert'},{r:10,n:2,f:1,a:-30,c:'f',fc:'f',w:'Arme'}]},
+  {id:'kakashi',name:'Kakashi',art:'privat',gruppe:'Anime',stufe:'schwer',rows:['nww','wwwww','wwwwwww','wwwwwwwww','uunnsnnuu','fsfffuuuu','uuuuuuuuu','uuuuuuuuu','uuuuuuu','uuuuu','ddddddd','ddddddd'],
+    beine:[{r:11,n:2,f:1,a:-30,c:'u',fc:'f',w:'Arme'}]},
+  {id:'goku',name:'Goku',art:'privat',gruppe:'Anime',stufe:'schwer',rows:['s','sss','sssss','sssssss','sssssssss','sfsfsfsfs','sfsfffsfs','fffffff','fffff','oouuuoo','ooouooo','bbbbbbb','ooooooo','ooooo'],
+    beine:[{r:4,n:2,f:1,a:40,c:'s',fc:'s',w:'Haarspitzen'},{r:10,n:2,f:1,a:-30,c:'f',fc:'b',w:'Arme'},{r:14,n:0,f:3,a:-70,c:'u',fc:'u',w:'Stiefel'}]},
+  {id:'spongebob',name:'SpongeBob',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['yyyyyyyyy','ywwwywwwy','ywbwywbwy','ywwwywwwy','yyyyyyyyy','ysyyyyysy','yysssssyy','yyywywyyy','wwwwrwwww','kkkkrkkkk','kkkkkkkkk'],
+    beine:[{r:9,n:2,f:1,a:-30,c:'w',fc:'y',w:'Arme'},{r:11,n:2,f:3,a:-75,c:'y',fc:'s',w:'Beine'}]},
+  {id:'patrick',name:'Patrick',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['p','ppp','ppppp','psppsp','ppppppp','ppsssspp','ppppppppp','ggvgggvgg','gggggggg'],
+    beine:[{r:7,n:3,f:1,a:15,c:'p',fc:'p',w:'Arme'},{r:9,n:3,f:1,a:-70,c:'p',fc:'p',w:'Beine'}]},
+  {id:'gumball',name:'Gumball',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['lllll','lllllll','lwwllwwl','lwsllswl','lllllll','llsssll','lwwl','kkkkkk','kkkkkkk','nnnnnn','nnnnn'],
+    beine:[{r:1,n:2,f:1,a:65,c:'l',fc:'l',w:'Ohren'},{r:8,n:2,f:1,a:-35,c:'k',fc:'l',w:'Arme'},{r:11,n:1,f:3,a:-75,c:'n',fc:'l',w:'Füsse'}]},
+  {id:'darwin',name:'Darwin',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['o','ooo','ooooo','owwowwo','owsowso','ooooooo','oossoo','ooooo','ooo'],
+    beine:[{r:6,n:2,f:1,a:-20,c:'o',fc:'o',w:'Arme'},{r:8,n:2,f:3,a:-75,c:'o',fc:'w',w:'Beine'}]},
+  {id:'starbutterfly',name:'Star Butterfly',art:'privat',gruppe:'Cartoons',stufe:'schwer',rows:['yyyyy','yyyyyyy','yffffffy','yfsffsfy','yqffffqy','yffrffy','yyffyy','yttttty','ytttttty','ttttttttt','tttttttttt'],
+    beine:[{r:1,n:1,f:1,a:75,c:'r',fc:'r',w:'Hörnchen'},{r:8,n:2,f:1,a:-35,c:'f',fc:'f',w:'Arme'},{r:11,n:2,f:1,a:-80,c:'f',fc:'v',w:'Beine'}]},
+  {id:'grizz',name:'Grizz',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['kkkkk','kkkkkkk','kskkksk','kkcsckk','kkccckk','kkkkkkkk','kkkkkkkkk','kkkkkkkkk','kkkkkkk'],
+    beine:[{r:1,n:1,f:1,a:60,c:'k',fc:'k',w:'Ohren'},{r:6,n:2,f:1,a:-35,c:'k',fc:'k',w:'Arme'},{r:9,n:1,f:3,a:-75,c:'k',fc:'k',w:'Füsse'}]},
+  {id:'wbbpanda',name:'Panda',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['wwwww','wwwwwww','wsswwssw','wwwswww','wwwwww','sswwwwss','wwwwwwwww','wwwwwwwww','wwwwwww'],
+    beine:[{r:1,n:1,f:1,a:60,c:'s',fc:'s',w:'Ohren'},{r:6,n:2,f:1,a:-35,c:'s',fc:'s',w:'Arme'},{r:9,n:1,f:3,a:-75,c:'s',fc:'s',w:'Füsse'}]},
+  {id:'chloe',name:'Chloe',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['sssss','sssssss','ssffffss','sfsffsfs','sffffffs','sffrffs','sffffs','ffff','qqqqqq','qqqqqqq','bbbbbb','bbbbb'],
+    beine:[{r:9,n:2,f:1,a:-35,c:'q',fc:'f',w:'Arme'},{r:12,n:2,f:3,a:-75,c:'f',fc:'s',w:'Beine'}]},
+  {id:'eisbaer',name:'Ice Bear',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['wwwww','wwwwwww','wswwwsw','wwwswww','wwwww','wwwwwwww','wwwwwwwww','wwwwwwwww','wwwwwww'],
+    beine:[{r:1,n:1,f:1,a:60,c:'w',fc:'w',w:'Ohren'},{r:6,n:2,f:1,a:-35,c:'w',fc:'w',w:'Arme'},{r:9,n:1,f:3,a:-75,c:'w',fc:'w',w:'Füsse'}]},
+  {id:'keroppi',name:'Keroppi',art:'privat',gruppe:'Sanrio',stufe:'mittel',rows:['wwwgwww','wswgwsw','gggggggg','gqgggggqg','gggsssggg','ggggggg','ggggg','ggggg'],
+    beine:[{r:7,n:1,f:1,a:-35,c:'g',fc:'g',w:'Arme'},{r:8,n:1,f:3,a:-75,c:'g',fc:'g',w:'Füsse'}]},
+  {id:'kuromi',name:'Kuromi',art:'privat',gruppe:'Sanrio',stufe:'mittel',rows:['sssss','ssqqqss','sssqqsss','swwwwwws','swswwsws','swwqwws','sswwwss','ssssss','sssssss','sssssss'],
+    beine:[{r:1,n:4,f:1,a:60,c:'s',fc:'s',w:'Ohren'},{r:8,n:2,f:1,a:-35,c:'s',fc:'w',w:'Arme'},{r:10,n:1,f:1,a:-75,c:'s',fc:'w',w:'Beine'}]},
+  {id:'cinnamoroll',name:'Cinnamoroll',art:'privat',gruppe:'Sanrio',stufe:'mittel',rows:['wwwww','wwwwwww','wwwwwwwww','wwbwwwbww','wpwwwwwpw','wwwwwww','wwwww','wwwwww'],
+    beine:[{r:3,n:4,f:1,a:-15,c:'w',fc:'w',w:'Ohren'},{r:7,n:1,f:1,a:-35,c:'w',fc:'w',w:'Arme'},{r:8,n:0,f:3,a:-75,c:'w',fc:'w',w:'Füsse'}]},
+  {id:'pompompurin',name:'Pompompurin',art:'privat',gruppe:'Sanrio',stufe:'mittel',rows:['k','kkkkk','yyyyyyy','yyyyyyyyy','yysyyysyy','yyyykyyyy','yyyyyyy','yyyyy','yyyyyyy'],
+    beine:[{r:3,n:3,f:1,a:-70,c:'k',fc:'k',w:'Ohren'},{r:8,n:1,f:1,a:-35,c:'y',fc:'y',w:'Arme'},{r:9,n:0,f:3,a:-75,c:'y',fc:'y',w:'Füsse'}]},
+  {id:'gudetama',name:'Gudetama',art:'privat',gruppe:'Sanrio',stufe:'leicht',rows:['yyy','yyyyy','yyyyyyy','yysyysyy','yyysyyy','wwwwwwwww','wwwwwwwwwww','wwwwwwwww']},
+  {id:'stitch',name:'Stitch',art:'privat',gruppe:'Stitch',stufe:'schwer',rows:['bbbbb','bbbbbbb','blllblllb','blssbsslb','bbbbubbbb','bbsssbb','bbllbb','blllllb','bbllbb','bbbb'],
+    beine:[{r:2,n:4,f:1,a:40,c:'b',fc:'q',w:'Ohren'},{r:7,n:2,f:1,a:-35,c:'b',fc:'b',w:'Arme'},{r:10,n:1,f:3,a:-75,c:'b',fc:'b',w:'Füsse'}]},
+  {id:'angel',name:'Angel',art:'privat',gruppe:'Stitch',stufe:'schwer',rows:['qqqqq','qqqqqqq','qpppqpppq','qpssqsspq','qqqqeqqqq','qqsssqq','qqppqq','qpppppq','qqppqq','qqqq'],
+    beine:[{r:1,n:3,f:1,a:75,c:'q',fc:'q',w:'Fühler'},{r:3,n:4,f:1,a:-30,c:'q',fc:'p',w:'Ohren'},{r:7,n:2,f:1,a:-35,c:'q',fc:'q',w:'Arme'}]},
+  {id:'cam',name:'Cam',art:'privat',gruppe:'Squishmallows',stufe:'mittel',rows:['nnnnn','nnnnnnn','nnnnnnnnn','nnsnnnsnn','nqnnpnnqn','nnnwwwnnn','nnwwwwwnn','nnwwwwwnn','nnnwwwnnn','nnnnnnn','nnnnn'],
+    beine:[{r:1,n:1,f:1,a:65,c:'n',fc:'p',w:'Ohren'}]},
+  {id:'archie',name:'Archie',art:'privat',gruppe:'Squishmallows',stufe:'mittel',rows:['ppppp','ppppppp','ppppppppp','ppspppspp','pqppsppqp','pppwwwppp','ppwwwwwpp','ppwwwwwpp','pppwwwppp','ppppppp','ppppp'],
+    beine:[{r:2,n:2,f:1,a:50,c:'q',fc:'q',w:'Kiemen'},{r:3,n:2,f:1,a:15,c:'q',fc:'q',w:'Kiemen'},{r:4,n:2,f:1,a:-20,c:'q',fc:'q',w:'Kiemen'}]},
+  {id:'batman',name:'Batman-Logo',art:'privat',gruppe:'Superhelden',stufe:'mittel',rows:['yyyyyyyyy','yyyyysysyyyyy','ysyyysssyyysy','ysssssssssssy','ysssssssssssy','yyssysssyssyy','yyyyysyyyyy','yyyyyyy']},
+  {id:'superman',name:'Superman-Schild',art:'privat',gruppe:'Superhelden',stufe:'mittel',rows:['rrrrrrrrr','ryyyyyyyyyr','ryrrrrrrryr','ryrryyyyyyr','ryyrrrrrryr','ryyyyyrrr','rrrrrrr','ryyyr','rrr','r']},
+  {id:'captainamerica',name:'Captain-America-Schild',art:'privat',gruppe:'Superhelden',stufe:'mittel',rows:['rrrrrrr','rrwwwwwwwrr','rwwrrrrrrrwwr','rwrrbbwbbrrwr','rwrbwwwwwbrwr','rwrbbwwwbbrwr','rwrrbwbwbrrwr','rwwrrrrrrrwwr','rrwwwwwwwrr','rrrrrrr']},
+  {id:'spiderman',name:'Spider-Man',art:'privat',gruppe:'Superhelden',stufe:'mittel',rows:['rrrrr','rrrsrrr','rwwswwr','rrwswrr','rrrsrrr','rrsrr','brrsrrb','brsssrb','brrsrrb','bbbbb','bbbbb'],
+    beine:[{r:7,n:3,f:1,a:-30,c:'b',fc:'r',w:'Arme'},{r:11,n:2,f:3,a:-75,c:'b',fc:'r',w:'Beine'}]},
+  {id:'milesmorales',name:'Miles Morales',art:'privat',gruppe:'Superhelden',stufe:'mittel',rows:['sssss','sssrsss','swwrwws','sswrwss','sssrsss','ssrss','ssrrrss','srrrrrs','sssrsss','sssss','sssss'],
+    beine:[{r:7,n:3,f:1,a:-30,c:'s',fc:'r',w:'Arme'},{r:11,n:2,f:3,a:-75,c:'s',fc:'w',w:'Beine'}]},
+  {id:'groot',name:'Groot',art:'privat',gruppe:'Superhelden',stufe:'mittel',rows:['gkg','kkkkk','kkckckk','kkkkkkk','kskkksk','kkkkkkk','kkssskk','kkkkk','kkk','kkckk','kkckk','kkkkk'],
+    beine:[{r:10,n:3,f:1,a:-35,c:'k',fc:'k',w:'Arme'},{r:12,n:2,f:3,a:-75,c:'k',fc:'k',w:'Beine'}]},
+  {id:'ironman',name:'Iron Man',art:'privat',gruppe:'Superhelden',stufe:'mittel',rows:['rrrrr','rrrrrrr','rryyyyyrr','ryyyyyyyr','rywwywwyr','ryyyyyyyr','rryyyyyrr','rysssyr','rryyyrr','rrrrr']},
+  {id:'stuart',name:'Stuart',art:'privat',gruppe:'Minions',stufe:'mittel',rows:['sss','yyyyy','yyyyyyy','ssnnnss','snwswns','ssnnnss','yyyyyyy','yysssyy','yybbbyy','bbbbbbb','bbbbbbb','bbbbb'],
+    beine:[{r:9,n:2,f:1,a:-30,c:'y',fc:'s',w:'Arme'},{r:12,n:1,f:3,a:-75,c:'b',fc:'s',w:'Beine'}]},
+  {id:'bob',name:'Bob',art:'privat',gruppe:'Minions',stufe:'mittel',rows:['yyyyy','yyyyyyy','snnnsnnns','snwsnswns','snnnsnnns','yyyyyyyyy','yyysssyyy','yybbbbbyy','bbbbbbbbb','bbbbbbb','bbbbb'],
+    beine:[{r:8,n:2,f:1,a:-30,c:'y',fc:'s',w:'Arme'},{r:11,n:0,f:3,a:-75,c:'b',fc:'s',w:'Füsse'}]},
+  {id:'kevin',name:'Kevin',art:'privat',gruppe:'Minions',stufe:'mittel',rows:['yyy','yyyyy','yyyyyyy','yyyyyyy','snnsnns','nwsnswn','snnsnns','yyyyyyy','yysssyy','yyyyyyy','yybbbyy','bbbbbbb','bbbbbbb','bbbbbbb','bbbbb'],
+    beine:[{r:1,n:1,f:1,a:75,c:'s',fc:'s',w:'Haare'},{r:11,n:3,f:1,a:-30,c:'y',fc:'s',w:'Arme'},{r:15,n:2,f:3,a:-75,c:'b',fc:'s',w:'Beine'}]},
+  {id:'freude',name:'Freude',art:'privat',gruppe:'Inside Out',stufe:'mittel',rows:['bbbbb','bbbbbbb','bbbbbbbbb','bbyyyyybb','bysyyysyb','byyyyyyyb','ysyyysy','ysssy','yyy','hhhhhhh','hhhhhhh','hhhhhhhhh','hhhhhhhhh'],
+    beine:[{r:10,n:3,f:1,a:-30,c:'y',fc:'y',w:'Arme'},{r:13,n:2,f:3,a:-75,c:'y',fc:'y',w:'Beine'}]},
+  {id:'kummer',name:'Kummer',art:'privat',gruppe:'Inside Out',stufe:'mittel',rows:['uuuuu','uuuuuuu','uuuuuuuuu','ulllllllu','lssslsssl','lswslswsl','lllllllll','llsssll','lllll','wwwwwww','wwwwwww','wwwwwww','wwwww'],
+    beine:[{r:10,n:2,f:1,a:-35,c:'w',fc:'l',w:'Arme'},{r:13,n:1,f:3,a:-75,c:'l',fc:'l',w:'Füsse'}]},
+  {id:'wut',name:'Wut',art:'privat',gruppe:'Inside Out',stufe:'schwer',rows:['y','oro','rrrrrrrrr','rsssrsssr','rrsrrrsrr','rrrrrrrrr','rrswwwsrr','rrrrrrrrr','wwwwewwww','wwwwewwww','wwwwewwww','kkkkkkkkk','kkkkkkkkk'],
+    beine:[{r:9,n:2,f:1,a:-35,c:'r',fc:'r',w:'Arme'},{r:13,n:1,f:3,a:-75,c:'k',fc:'s',w:'Beine'}]},
+  {id:'ekel',name:'Ekel',art:'privat',gruppe:'Inside Out',stufe:'schwer',rows:['ddddd','ddddddd','dddhhhddd','dhhhhhhhd','dswhhhswd','dhhhhhhhd','hhhhhhh','hhhshhh','hhhhh','hhh','qqqqqqq','ggqgqgg','ggggggg','gqgggqggg','ggggggggg'],
+    beine:[{r:12,n:3,f:1,a:-35,c:'h',fc:'h',w:'Arme'},{r:15,n:2,f:3,a:-75,c:'h',fc:'g',w:'Beine'}]},
+  {id:'angst',name:'Angst',art:'privat',gruppe:'Inside Out',stufe:'mittel',rows:['s','vvvvv','vvvvvvv','vwwvwwv','vwsvswv','vvvvvvv','vwwwv','vvv','vvv','rrerr','mmmmm','mmmmm','uuuuu'],
+    beine:[{r:11,n:3,f:1,a:-35,c:'v',fc:'v',w:'Arme'},{r:13,n:3,f:3,a:-75,c:'u',fc:'s',w:'Beine'}]},
+  {id:'zweifel',name:'Zweifel',art:'privat',gruppe:'Inside Out',stufe:'schwer',rows:['eeeeeee','eeeeeeeeeee','eeeoooooeee','eowwooowwoe','eowsoooswoe','eoooooooe','oswwwwwso','oosssoo','ooo','kkkkk','kkkkk','kkkkk','kkkkk'],
+    beine:[{r:10,n:3,f:1,a:-35,c:'o',fc:'o',w:'Arme'},{r:13,n:2,f:3,a:-75,c:'o',fc:'s',w:'Beine'}]},
+  {id:'grogu',name:'Grogu',art:'privat',gruppe:'Star Wars',stufe:'mittel',rows:['hhhhh','hhhhhhh','hhhhhhhhh','hswhhhswh','hsshhhssh','hhhhhhh','hhhhh','ccccccc','ccccccc','ccccccc','ccccccc','ccccc'],
+    beine:[{r:3,n:3,f:1,a:15,c:'h',fc:'p',w:'Ohren'},{r:9,n:2,f:1,a:-35,c:'c',fc:'h',w:'Arme'}]},
+  {id:'darthvader',name:'Darth-Vader-Helm',art:'privat',gruppe:'Star Wars',stufe:'mittel',rows:['sssssss','sssssssss','sssssssssss','sssnnnnnsss','sssssnsssss','ssnnnsnnnss','ssssnnnssss','ssssnsnsnssss','sssssssssssss']},
+  {id:'pfschweiz',name:'Schweiz',art:'privat',gruppe:'Flaggen',stufe:'leicht',rows:['rrrrrrrrrrr','rrrrwwwrrrr','rrwwwwwwwrr','rrwwwwwwwrr','rrrrwwwrrrr','rrrrrrrrrrr']},
+  {id:'pfdeutschland',name:'Deutschland',art:'privat',gruppe:'Flaggen',stufe:'leicht',rows:['sssssssssssss','sssssssssssss','rrrrrrrrrrrrr','rrrrrrrrrrrrr','yyyyyyyyyyyyy','yyyyyyyyyyyyy']},
+  {id:'pfoesterreich',name:'Österreich',art:'privat',gruppe:'Flaggen',stufe:'leicht',rows:['rrrrrrrrrrrrr','rrrrrrrrrrrrr','wwwwwwwwwwwww','wwwwwwwwwwwww','rrrrrrrrrrrrr','rrrrrrrrrrrrr']},
+  {id:'pfitalien',name:'Italien',art:'privat',gruppe:'Flaggen',stufe:'leicht',rows:['ggggwwwwrrrr','ggggwwwwrrrr','ggggwwwwrrrr','ggggwwwwrrrr','ggggwwwwrrrr']},
+  {id:'pffrankreich',name:'Frankreich',art:'privat',gruppe:'Flaggen',stufe:'leicht',rows:['uuuuwwwwrrrr','uuuuwwwwrrrr','uuuuwwwwrrrr','uuuuwwwwrrrr','uuuuwwwwrrrr']},
+  {id:'pfspanien',name:'Spanien',art:'privat',gruppe:'Flaggen',stufe:'mittel',rows:['rrrrrrrrrrr','yyyeryyyyyy','yyyreyyyyyy','yyyeeyyyyyy','rrrrrrrrrrr']},
+  {id:'pfserbien',name:'Serbien',art:'privat',gruppe:'Flaggen',stufe:'mittel',rows:['rrryyyrrrrrrr','rrrewerrrrrrr','uuurwruuuuuuu','uuurwruuuuuuu','wwwwrwwwwwwww','wwwwwwwwwwwww']},
+  {id:'pfukraine',name:'Ukraine',art:'privat',gruppe:'Flaggen',stufe:'leicht',rows:['bbbbbbbbbbbbb','bbbbbbbbbbbbb','bbbbbbbbbbbbb','yyyyyyyyyyyyy','yyyyyyyyyyyyy','yyyyyyyyyyyyy']},
+  {id:'pfniederlande',name:'Niederlande',art:'privat',gruppe:'Flaggen',stufe:'leicht',rows:['rrrrrrrrrrrrr','rrrrrrrrrrrrr','wwwwwwwwwwwww','wwwwwwwwwwwww','uuuuuuuuuuuuu','uuuuuuuuuuuuu']},
+  {id:'pfengland',name:'England',art:'privat',gruppe:'Flaggen',stufe:'leicht',rows:['wwwwwwrwwwwww','wwwwwwrwwwwww','rrrrrrrrrrrrr','wwwwwwrwwwwww','wwwwwwrwwwwww']},
+  {id:'pfjapan',name:'Japan',art:'privat',gruppe:'Flaggen',stufe:'leicht',rows:['wwwwwwwwwwwww','wwwwwrrrwwwww','wwwwrrrrrwwww','wwwwrrrrrwwww','wwwwwrrrwwwww','wwwwwwwwwwwww']},
+  {id:'pfliechtenstein',name:'Liechtenstein',art:'privat',gruppe:'Flaggen',stufe:'mittel',rows:['uuuyuuuuuuuuu','uyuyuyuuuuuuu','uyyyyyuuuuuuu','rrrrrrrrrrrrr','rrrrrrrrrrrrr','rrrrrrrrrrrrr']},
+  {id:'pfportugal',name:'Portugal',art:'privat',gruppe:'Flaggen',stufe:'mittel',rows:['gggggrrrrrrrr','ggggyyrrrrrrr','gggywwyrrrrrr','gggywwyrrrrrr','ggggyyrrrrrrr','gggggrrrrrrrr']},
+  {id:'pfkosovo',name:'Kosovo',art:'privat',gruppe:'Flaggen',stufe:'mittel',rows:['bbbwbwbwbwbbb','bwbbbbbbbbbwb','bbbbbyyybbbbb','bbbbyyyyybbbb','bbbbbbyybbbbb','bbbbbbbbbbbbb']},
+  {id:'pfalbanien',name:'Albanien',art:'privat',gruppe:'Flaggen',stufe:'mittel',rows:['rrrrrsrsrrrrr','rrsrrsssrrsrr','rrsssssssssrr','rrrsssssssrrr','rrrrrsssrrrrr','rrrrssrssrrrr']},
+  {id:'pfnordmazedonien',name:'Nordmazedonien',art:'privat',gruppe:'Flaggen',stufe:'mittel',rows:['yyrrrryrrrryy','rryrryyyrryrr','yyyryyyyyryyy','rryrryyyrryrr','yyrrrryrrrryy']},
+  {id:'pfbosnien',name:'Bosnien und Herzegowina',art:'privat',gruppe:'Flaggen',stufe:'mittel',rows:['uuwyyyyyyyuuu','uuuwyyyyyyuuu','uuuuwyyyyyuuu','uuuuuwyyyyuuu','uuuuuuwyyyuuu','uuuuuuuwyyuuu']},
+  {id:'pfkroatien',name:'Kroatien',art:'privat',gruppe:'Flaggen',stufe:'mittel',rows:['rrrrrbbbrrrrr','rrrrrwrwrrrrr','wwwwwrwrwwwww','wwwwwwrwwwwww','uuuuurwruuuuu','uuuuuuruuuuuu']},
+  {id:'pftuerkei',name:'Türkei',art:'privat',gruppe:'Flaggen',stufe:'mittel',rows:['rrrrrrrrrrrrr','rrrwwwrrrrrrr','rrwwrrrrwrrrr','rrwwrrrwwwrrr','rrrwwwrrwrrrr','rrrrrrrrrrrrr']},
+  {id:'pfbrasilien',name:'Brasilien',art:'privat',gruppe:'Flaggen',stufe:'mittel',rows:['gggggyyyggggg','gggyyyyyyyggg','gyyybbbbbyyyg','gyyybwwwbyyyg','gggyyyyyyyggg','gggggyyyggggg']},
+  {id:'pfargentinien',name:'Argentinien',art:'privat',gruppe:'Flaggen',stufe:'leicht',rows:['lllllllllllll','lllllllllllll','wwwwwyyywwwww','wwwwwyyywwwww','lllllllllllll','lllllllllllll']},
+  {id:'pfsrilanka',name:'Sri Lanka',art:'privat',gruppe:'Flaggen',stufe:'mittel',rows:['yyyyyyyyyyyyy','ygoyeeeeeeeey','ygoyeyyeeeeey','ygoyeyyyyyeey','ygoyeyeeeyeey','yyyyyyyyyyyyy']},
+  {id:'pferitrea',name:'Eritrea',art:'privat',gruppe:'Flaggen',stufe:'mittel',rows:['rrggggggggggg','rryrrrrgggggg','ryryrrrrrrrgg','ryryrrrrrrrbb','rryrrrrbbbbbb','rrbbbbbbbbbbb']},
+  {id:'lsuperball',name:'Superball',art:'privat',gruppe:'Pokémon',stufe:'mittel',rows:['bbbbb','brbbbbbrb','brrbbbbbrrb','bbbbsssbbbb','ssssswsssss','wwwwssswwww','wwwwwwwww','wwwww']},
+  {id:'lhyperball',name:'Hyperball',art:'privat',gruppe:'Pokémon',stufe:'mittel',rows:['ysssy','yyysssyyy','yyyysssyyyy','yyyysssyyyy','ssssswsssss','wwwwssswwww','wwwwwwwww','wwwww']},
+  {id:'lpummeluff',name:'Pummeluff',art:'privat',gruppe:'Pokémon',stufe:'mittel',rows:['pqp','ppqpppp','ppppppppp','pptwppptwpp','ppttpppttpp','pppppqppppp','ppppppppp','ppppppp','ppppp'],
+    beine:[{r:2,n:2,f:1,a:65,c:'p',fc:'s',w:'Ohren'},{r:9,n:0,f:3,a:-70,c:'p',fc:'p',w:'Füsse'}]},
+  {id:'lmauzi',name:'Mauzi',art:'privat',gruppe:'Pokémon',stufe:'mittel',rows:['cyyyc','ccyoycc','ccccycccc','cccscccsccc','ccccccccccc','ccccsrscccc','ccccccccc','ccccccc'],
+    beine:[{r:1,n:3,f:1,a:65,c:'s',fc:'k',w:'Ohren'},{r:5,n:3,f:1,a:10,c:'w',fc:'w',w:'Schnurrhaare'}]},
+  {id:'lrelaxo',name:'Relaxo',art:'privat',gruppe:'Pokémon',stufe:'schwer',rows:['uuuuuuu','uucccccuu','ucsscccsscu','uccwcccwccu','uuuucccuuuu','uuucccccccuuu','uucccccccccuu','uucccccccccuu','uuucccccccuuu','wccccuuuccccw','ckkkcuuuckkkc','cccccuuuccccc'],
+    beine:[{r:1,n:2,f:1,a:65,c:'u',fc:'u',w:'Ohren'},{r:6,n:2,f:1,a:-20,c:'u',fc:'w',w:'Arme'}]},
+  {id:'lfelori',name:'Felori',art:'privat',gruppe:'Pokémon',stufe:'mittel',rows:['hhdhh','hhdddhh','hhhdddhhh','hherhdhrehh','hhhhhphhhhh','whhhhhhhw','wwhhhww','ddhdd'],
+    beine:[{r:1,n:3,f:1,a:65,c:'h',fc:'d',w:'Ohren'}]},
+  {id:'lkrokel',name:'Krokel',art:'privat',gruppe:'Pokémon',stufe:'mittel',rows:['y','ccccc','ccscccscc','ccccccccccc','cweeeeeeewc','rrrrrrrrr','rrryyyrrr','rrryyyrrr','rrrrrrr'],
+    beine:[{r:6,n:2,f:1,a:-30,c:'r',fc:'r',w:'Arme'},{r:9,n:0,f:3,a:-70,c:'r',fc:'s',w:'Füsse'}]},
+  {id:'lkwaks',name:'Kwaks',art:'privat',gruppe:'Pokémon',stufe:'mittel',rows:['lllll','lllllll','llwlwlwll','lllllllll','lwbwwwbwl','lwyyyyywl','wwyyyww','wwwwwww','wwwwwwwww','wwwwwwwww','wwwwwww'],
+    beine:[{r:9,n:2,f:1,a:-30,c:'w',fc:'w',w:'Flügel'},{r:11,n:0,f:3,a:-70,c:'l',fc:'l',w:'Füsse'}]},
+  {id:'lmew',name:'Mew',art:'privat',gruppe:'Pokémon',stufe:'mittel',rows:['ppppp','ppppppp','ppppppppp','ppwbpppbwpp','ppbbpppbbpp','ppppppppp','ppppppp','ppppp','ppppp','ppp'],
+    beine:[{r:1,n:2,f:1,a:65,c:'p',fc:'p',w:'Ohren'},{r:8,n:1,f:1,a:-30,c:'p',fc:'p',w:'Arme'},{r:10,n:2,f:3,a:-70,c:'p',fc:'p',w:'Füsse'}]},
+  {id:'llugia',name:'Lugia',art:'privat',gruppe:'Pokémon',stufe:'schwer',rows:['www','wwwww','wuswsuw','wwwww','www','wwwwwww','wwwlwww','wwwlllwww','wwwlllwww','wwlllww','wwlww','www','w','uuu'],
+    beine:[{r:6,n:5,f:1,a:35,c:'w',fc:'u',w:'Flügel'},{r:10,n:1,f:3,a:-70,c:'w',fc:'w',w:'Füsse'}]},
+  {id:'lhooh',name:'Ho-Oh',art:'privat',gruppe:'Pokémon',stufe:'schwer',rows:['yyy','rrrrr','rsrsr','ryyyr','y','rrrrr','rrwwwrr','rrwwwrr','rrwwwrr','rrwrr','rrr','ooooo','yyyyyyy','hhhhh'],
+    beine:[{r:6,n:5,f:1,a:45,c:'r',fc:'h',w:'Flügel'},{r:8,n:4,f:1,a:10,c:'o',fc:'y',w:'Flügel unten'}]},
+  {id:'l1uppilz',name:'1-Up-Pilz',art:'privat',gruppe:'Super Mario',stufe:'mittel',rows:['ggggg','ggwwwgg','gggwwwggg','wwgggggggww','wwgggggggww','ggggggggggg','ccscscc','ccscscc','ccccc']},
+  {id:'lsuperstern',name:'Superstern',art:'privat',gruppe:'Super Mario',stufe:'leicht',rows:['y','yyy','yyy','yyyyyyyyyyy','yyysysyyy','yysysyy','yyyyyyy','yyyyyyyyy'],
+    beine:[{r:8,n:2,f:1,a:-55,c:'y',fc:'y',w:'Zacken'}]},
+  {id:'lfrageblock',name:'Fragezeichen-Block',art:'privat',gruppe:'Super Mario',stufe:'mittel',rows:['kkkkkkkkkkk','ksoowwwoosk','koowwowwook','kooooowwook','koooowwoook','koooowooook','koooooooook','ksooowooosk','kkkkkkkkkkk']},
+  {id:'lpiranha',name:'Piranha-Pflanze',art:'privat',gruppe:'Super Mario',stufe:'mittel',rows:['rrrrr','rwrrrwr','rrrrrrrrr','wwwwwwwww','wswswswsw','wwwwwwwww','rrwrrrwrr','rrrrrrr','rrr','g','g','g'],
+    beine:[{r:11,n:3,f:1,a:25,c:'g',fc:'g',w:'Blätter'}]},
+  {id:'lboo',name:'Boo',art:'privat',gruppe:'Super Mario',stufe:'mittel',rows:['wwwww','wwwwwww','wwwwwwwww','wwswwwwwsww','wwswwwwwsww','wwwswswswww','wwwsqqqswww','wwwssswww','wwwwwww','wwwww'],
+    beine:[{r:6,n:1,f:1,a:-10,c:'w',fc:'w',w:'Ärmchen'}]},
+  {id:'lshyguy',name:'Shy Guy',art:'privat',gruppe:'Super Mario',stufe:'mittel',rows:['rrr','rrrrr','rwwwwwr','rwswwwswr','rwswwwswr','rwwwswwwr','rwwwwwr','rrrrrrr','sssysss','rrrrrrr','rrrrr'],
+    beine:[{r:8,n:2,f:1,a:-30,c:'r',fc:'r',w:'Arme'},{r:11,n:0,f:3,a:-70,c:'b',fc:'b',w:'Schuhe'}]},
+  {id:'ldonkeykong',name:'Donkey Kong',art:'privat',gruppe:'Super Mario',stufe:'schwer',rows:['kkkkk','kkkkkkk','kkccccckk','kcscccsck','kccccccccck','kcccscsccck','kccccccccck','kccssssscck','kkccccckk','kkkrrrkkk','kkkryrkkk','kkkkrkkkk'],
+    beine:[{r:10,n:3,f:1,a:-35,c:'k',fc:'c',w:'Arme'}]},
+  {id:'lmcgras',name:'Grasblock',art:'privat',gruppe:'Minecraft',stufe:'leicht',rows:['hghgghghg','ggggggggg','gkggkgkgg','kkkkkkkkk','kkckkkkck','kkkkckkkk','kckkkkkkk']},
+  {id:'lmcdiamant',name:'Diamant',art:'privat',gruppe:'Minecraft',stufe:'mittel',rows:['uuuuu','uwwlllu','uwllllttu','ullllltu','ulllltttu','utlltttu','utttttu','uttu','utu','u']},
+  {id:'lmcherz',name:'Herz (Lebensanzeige)',art:'privat',gruppe:'Minecraft',stufe:'mittel',rows:['sssssssss','srrrsrrrs','srwwrrrrrrs','srwrrrrrrrs','srrrrrres','srrrres','srres','ses','s']},
+  {id:'lmcsmaragd',name:'Smaragd-Block',art:'privat',gruppe:'Minecraft',stufe:'mittel',rows:['ddddddddd','dgggggggd','dgghwhggd','dghhhhhgd','dgghhhggd','dgggggggd','ddddddddd']},
+  {id:'lmcschaf',name:'Schaf',art:'privat',gruppe:'Minecraft',stufe:'leicht',rows:['wwwwwwww','wwwwwwww','wccccccw','wwsccsww','wccppccw','wccccccw','wwwwwwww'],
+    beine:[{r:3,n:1,f:1,a:-10,c:'c',fc:'c',w:'Ohren'}]},
+  {id:'lmckuh',name:'Kuh',art:'privat',gruppe:'Minecraft',stufe:'mittel',rows:['kkkkkkkk','kwwkkkkk','kswkkwsk','kkkkkkkk','kcsccsck','kcccccck','kkkkkkww'],
+    beine:[{r:1,n:1,f:1,a:70,c:'c',fc:'w',w:'Hörner'}]},
+  {id:'lmchuhn',name:'Huhn',art:'privat',gruppe:'Minecraft',stufe:'mittel',rows:['wwwwww','wwwwww','wswwsw','woooow','woooow','wwrrww','wwrrww','wwwwww'],
+    beine:[{r:8,n:2,f:3,a:-80,c:'y',fc:'y',w:'Beine'}]},
+  {id:'lmcskelett',name:'Skelett-Gesicht',art:'privat',gruppe:'Minecraft',stufe:'leicht',rows:['wwwwwwww','wwwwwwww','wsswwssw','wsswwssw','wwwsswww','wnnnnnnw','wwwwwwww']},
+  {id:'lmcaxolotl',name:'Axolotl',art:'privat',gruppe:'Minecraft',stufe:'mittel',rows:['ppppppp','ppppppppp','pspppppsp','ppppqpppp','ppppppppp','ppppppp'],
+    beine:[{r:1,n:2,f:1,a:60,c:'q',fc:'q',w:'Kiemen'},{r:3,n:2,f:1,a:10,c:'q',fc:'q',w:'Kiemen'},{r:5,n:2,f:1,a:-35,c:'q',fc:'q',w:'Kiemen'}]},
+  {id:'lmcallay',name:'Allay',art:'privat',gruppe:'Minecraft',stufe:'mittel',rows:['lllllll','lllllll','lulllul','lllllll','ttttt','ttt','ttt','t'],
+    beine:[{r:5,n:3,f:1,a:40,c:'w',fc:'l',w:'Flügel'},{r:6,n:1,f:1,a:-30,c:'t',fc:'l',w:'Arme'}]},
+  {id:'lmcbiene',name:'Biene',art:'privat',gruppe:'Minecraft',stufe:'mittel',rows:['yyyyyyyyy','ywsyyyswy','yssyyyssy','yyyyyyyyy','sssssssss','yyyyyyyyy','sssssssss','yyyyyyy','s'],
+    beine:[{r:1,n:2,f:1,a:70,c:'s',fc:'s',w:'Fühler'},{r:4,n:2,f:1,a:25,c:'w',fc:'w',w:'Flügel'}]},
+  {id:'lmcwither',name:'Wither',art:'privat',gruppe:'Minecraft',stufe:'schwer',rows:['sssss','swsws','sssss','sssssssssss','wswssssswsw','sssssssssss','nnnnnnnnn','nnsnn','nnnnn','nsn','n']},
+  {id:'lmcenderdrache',name:'Enderdrache',art:'privat',gruppe:'Minecraft',stufe:'mittel',rows:['sss','smsms','sssss','sss','sssss','sssssss','sssss','sss','s','s','n'],
+    beine:[{r:1,n:1,f:1,a:70,c:'n',fc:'n',w:'Hörner'},{r:6,n:5,f:1,a:20,c:'s',fc:'n',w:'Flügel'},{r:8,n:1,f:3,a:-60,c:'s',fc:'s',w:'Beine'}]},
+  {id:'lring',name:'Goldener Ring',art:'privat',gruppe:'Sonic',stufe:'leicht',rows:['yyyyy','yyyyyyyyy','yyyywwwyyyy','yyywwwwwyyy','yyywwwwwyyy','yyyywwwyyyy','oyyyyyyyo','ooooo']},
+  {id:'lchaosemerald',name:'Chaos Emerald',art:'privat',gruppe:'Sonic',stufe:'mittel',rows:['yyyyy','oywyyoo','ooyyyoooo','rooooooor','rooooor','rooor','ror','r']},
+  {id:'lamyrose',name:'Amy Rose',art:'privat',gruppe:'Sonic',stufe:'schwer',rows:['ppppp','rrrrrrr','ppppppppp','pwgfffgwp','pfffffffp','pffsffp','ffqff','rrrrr','rrrrrrr','rrrrrrrrr'],
+    beine:[{r:3,n:3,f:1,a:-60,c:'p',fc:'p',w:'Haarstacheln'},{r:8,n:2,f:1,a:-35,c:'f',fc:'w',w:'Arme'},{r:10,n:2,f:3,a:-75,c:'f',fc:'r',w:'Beine'}]},
+  {id:'ltriforce',name:'Triforce',art:'privat',gruppe:'Zelda und Kirby',stufe:'leicht',rows:['y','yyy','yyyyy','ywwwwwy','yyywwwyyy','yyyyywyyyyy']},
+  {id:'lherzcontainer',name:'Herzcontainer',art:'privat',gruppe:'Zelda und Kirby',stufe:'mittel',rows:['sssssssss','srrrsrrrs','srwrrrrrrrs','srrrrrrrrrs','srrrrrrrrrs','srrrrrrrs','srrrrrs','srrrs','srs','s']},
+  {id:'lrubin',name:'Rubin',art:'privat',gruppe:'Zelda und Kirby',stufe:'leicht',rows:['ddd','dghgd','dgghggd','dghhhgd','dghhhgd','dghhhgd','dgghggd','dghgd','ddd']},
+  {id:'llink',name:'Link (8-Bit)',art:'privat',gruppe:'Zelda und Kirby',stufe:'schwer',rows:['ggggg','ggggggg','kkgggggkk','kfsfffsfk','kfffffffk','ggfffgg','ggggggggg','kkkkykkkk','ggggggggg','ggggggg'],
+    beine:[{r:4,n:1,f:1,a:20,c:'f',fc:'f',w:'Ohren'},{r:7,n:2,f:1,a:-35,c:'g',fc:'f',w:'Arme'},{r:10,n:2,f:3,a:-75,c:'k',fc:'k',w:'Beine'}]},
+  {id:'lkorok',name:'Korok',art:'privat',gruppe:'Zelda und Kirby',stufe:'mittel',rows:['ggg','ggggg','ggg','k','kkkkk','kkkkkkk','kcscccsck','kcccsccck','kkkkkkk','ddddd','ddd'],
+    beine:[{r:10,n:2,f:1,a:-30,c:'d',fc:'d',w:'Arme'},{r:11,n:1,f:1,a:-70,c:'d',fc:'k',w:'Beine'}]},
+  {id:'lkirby',name:'Kirby',art:'privat',gruppe:'Zelda und Kirby',stufe:'mittel',rows:['ppppp','ppppppppp','ppppwpwpppp','ppppspspppp','pqqpbpbpqqp','pppppeppppp','ppppppppp','rrrppprrr'],
+    beine:[{r:4,n:1,f:1,a:20,c:'p',fc:'p',w:'Arme'}]},
+  {id:'lwaddledee',name:'Waddle Dee',art:'privat',gruppe:'Zelda und Kirby',stufe:'mittel',rows:['ooooo','ooooooooo','oofffffffoo','offsfffsffo','offsfffsffo','opfffffffpo','oofffffoo','ooooooooo'],
+    beine:[{r:5,n:1,f:1,a:-20,c:'o',fc:'o',w:'Arme'},{r:8,n:0,f:3,a:-60,c:'y',fc:'y',w:'Füsse'}]},
+  {id:'lkirsche',name:'Pac-Man-Kirsche',art:'privat',gruppe:'Pac-Man',stufe:'leicht',rows:['dd','kk','kwk','kwwk','kwwwk','rrrrsrrrr','rwrrsrwrr','rrrrsrrrr','errrsrrre','eeeseee']},
+  {id:'lspaceinvader',name:'Space-Invaders-Alien',art:'privat',gruppe:'Weitere Games',stufe:'leicht',rows:['ggggggg','ggsgggsgg','ggggggggggg','ggggggggg','gg','gg'],
+    beine:[{r:1,n:2,f:1,a:60,c:'g',fc:'g',w:'Fühler'},{r:3,n:2,f:1,a:-80,c:'g',fc:'g',w:'Arme'},{r:4,n:1,f:1,a:-70,c:'g',fc:'g',w:'Beine'}]},
+  {id:'ltetrisi',name:'Tetris-Stein I',art:'privat',gruppe:'Weitere Games',stufe:'leicht',rows:['ltt','ttt','ltt','ttt','ltt','ttt','ltt','ttt']},
+  {id:'ltetrisl',name:'Tetris-Stein L',art:'privat',gruppe:'Weitere Games',stufe:'leicht',rows:['yoowww','ooowww','yoowww','ooowww','yooyoo','oooooo']},
+  {id:'ltetriso',name:'Tetris-Stein O',art:'privat',gruppe:'Weitere Games',stufe:'leicht',rows:['yyyyyy','yyoyyo','yyyyyy','yyoyyo']},
+  {id:'ltetriss',name:'Tetris-Stein S',art:'privat',gruppe:'Weitere Games',stufe:'leicht',rows:['wwwhgghgg','wwwgggggg','hgghggwww','ggggggwww']},
+  {id:'ltetrist',name:'Tetris-Stein T',art:'privat',gruppe:'Weitere Games',stufe:'leicht',rows:['mvvmvvmvv','vvvvvvvvv','mvv','vvv']},
+  {id:'lrobloxlogo',name:'Roblox-Logo',art:'privat',gruppe:'Weitere Games',stufe:'leicht',rows:['rr','rrrrr','rrrwwrrr','rrrrwwwrrrr','rrrrwwwrrrr','rrrwwrrr','rrrrr','rr']},
+  {id:'lfortnitelama',name:'Fortnite-Lama',art:'privat',gruppe:'Weitere Games',stufe:'mittel',rows:['vvvvv','vvvvvvv','vwsvswv','vvvvvvv','sssssss','mmmmm','mwwwm','vvvvv','vvvvv','ttttttt','bbbbbbbbb','vvvvvvvvv','ttttttttt','bbbbbbbbb','vvvvvvv'],
+    beine:[{r:1,n:3,f:1,a:70,c:'v',fc:'v',w:'Ohren'},{r:15,n:3,f:1,a:-75,c:'b',fc:'s',w:'Beine'}]},
+  {id:'lpeely',name:'Peely (Banane)',art:'privat',gruppe:'Weitere Games',stufe:'mittel',rows:['k','k','yyy','yyyyy','yyyyyyy','ysyyysy','ysyyysy','yyyyyyy','ysyyysy','yysssyy','yyyyyyy','yyyyyyy','yyyyy','yyy'],
+    beine:[{r:10,n:3,f:1,a:-35,c:'y',fc:'y',w:'Arme'},{r:14,n:2,f:3,a:-75,c:'y',fc:'k',w:'Beine'}]},
+  {id:'lred',name:'Angry Birds Red',art:'privat',gruppe:'Weitere Games',stufe:'mittel',rows:['ss','rrr','rrrrrrr','rrrrrrrrr','rsrrrrrrrsr','rwssrrrsswr','rwswyyywswr','rrrryyyrrrr','rrwwwowwwrr','rwwwwwwwr','rwwwwwr','rrrrr']},
+  {id:'lchuck',name:'Angry Birds Chuck',art:'privat',gruppe:'Weitere Games',stufe:'mittel',rows:['s','ss','yyy','yyyyy','yssyssy','yywsyswyy','yyyoooyyy','yyyyoooyyyy','yyyyyoyyyyy','ywwwwwwwwwy','wwwwwwwwwww']},
+  {id:'lbomb',name:'Angry Birds Bomb',art:'privat',gruppe:'Weitere Games',stufe:'mittel',rows:['y','s','s','sss','sssssss','sssssssss','srrsssssrrs','swwssssswws','swssooossws','ssssoeossss','sssssosssss','ssnnnnnnnss','snnnnnnns','sssssss']},
+  {id:'lcuphead',name:'Cuphead',art:'privat',gruppe:'Weitere Games',stufe:'schwer',rows:['r','w','r','w','wnnnrnnnw','wwwwwwwww','wwswwwsww','wwswrwsww','wwwwwwwww','wswwwwwsw','wwsssssww','wwwwwww','sssss','sssss','rrrrr'],
+    beine:[{r:13,n:3,f:1,a:-35,c:'s',fc:'w',w:'Arme'},{r:15,n:2,f:3,a:-75,c:'w',fc:'r',w:'Beine'}]},
+  {id:'lcontroller',name:'Controller',art:'privat',gruppe:'Weitere Games',stufe:'mittel',rows:['nnnnnnnnnnn','wwswwwwwwwbww','wssswnwnwgwrw','wwswwwwwwwyww','nnnnnnnnnnn']},
+  {id:'lbrawllogo',name:'Brawl-Stars-Totenkopf',art:'privat',gruppe:'Brawl Stars und Handy-Games',stufe:'mittel',rows:['o','ooo','oosssssoo','osyyyyyyyso','osyssyssyso','osyssyssyso','osyyysyyyso','ossyyyyysso','oosssssoo','ooooo','ooo','o'],
+    beine:[{r:4,n:1,f:1,a:25,c:'o',fc:'o',w:'Zacken'},{r:9,n:1,f:1,a:-30,c:'o',fc:'o',w:'Zacken'}]},
+  {id:'lspike',name:'Spike (Kaktus)',art:'privat',gruppe:'Brawl Stars und Handy-Games',stufe:'mittel',rows:['qqq','qqqqqqq','gdgggggdg','gdssgssdg','gdssgssdg','gdgggggdg','gdgsssgdg','gdgsssgdg','gdgggggdg','ggggggggg']},
+  {id:'lleon',name:'Leon',art:'privat',gruppe:'Brawl Stars und Handy-Games',stufe:'mittel',rows:['ggyyygg','gggyyyggg','ggggyyygggg','ggggsssgggg','gggsqqqsggg','ggssqqqssgg','ggsfffffsgg','ggfwwwwwfgg','ggsfffffsgg','gggsssggg'],
+    beine:[{r:3,n:1,f:3,a:20,c:'b',fc:'b',w:'Ohren'}]},
+  {id:'lelprimo',name:'El Primo',art:'privat',gruppe:'Brawl Stars und Handy-Games',stufe:'mittel',rows:['bbbbb','bbbbbbb','bbbbbbbbb','bssbbbssb','bssbbbssb','bbbbbbbbb','booooooob','oowwwwwoo','ooooooooo','ooooooo','ooooo']},
+  {id:'lbarbar',name:'Clash-Barbar',art:'privat',gruppe:'Brawl Stars und Handy-Games',stufe:'mittel',rows:['yyyyy','yyyyyyy','yyyyyyyyy','yyfffffyy','yfssfssfy','yfwsfswfy','yffffffffy','yyyyyyyyyyy','yyfsssfyy','fffffff','fffff'],
+    beine:[{r:8,n:1,f:1,a:-25,c:'y',fc:'y',w:'Schnauzspitzen'}]},
+  {id:'lclashkoenig',name:'Clash-Royale-König',art:'privat',gruppe:'Brawl Stars und Handy-Games',stufe:'mittel',rows:['yyy','yyyryyy','sfffffffs','fwsfffswf','ffffqffff','sssssssss','ssssrssss','sssssssss','sssssss','sssss','sss'],
+    beine:[{r:2,n:1,f:1,a:75,c:'y',fc:'y',w:'Kronenzacken'}]},
+  {id:'lhaydayhuhn',name:'Hay-Day-Huhn',art:'privat',gruppe:'Brawl Stars und Handy-Games',stufe:'mittel',rows:['rrr','wwwww','wwwwwww','wswwwsw','wwyyyww','wwwrwww','wwwwwwwww','wwwwwwwww','wwwwwww','wwwww'],
+    beine:[{r:8,n:1,f:1,a:-20,c:'w',fc:'w',w:'Flügel'},{r:10,n:2,f:1,a:-75,c:'o',fc:'o',w:'Beine'}]},
+  {id:'ljake',name:'Subway-Surfers-Jake',art:'privat',gruppe:'Brawl Stars und Handy-Games',stufe:'schwer',rows:['rrrrr','rrrrrrr','kfffffk','fsfffsf','fffffff','ffsssff','fffff','nnnnnnn','nnnnnnn','nnnnnnn','bbbbbbb','bbbbbbb','bbbbbbb'],
+    beine:[{r:8,n:3,f:1,a:-40,c:'n',fc:'f',w:'Arme'},{r:13,n:1,f:3,a:-80,c:'b',fc:'r',w:'Beine'}]},
+  {id:'lcrossyhuhn',name:'Crossy-Road-Huhn',art:'privat',gruppe:'Brawl Stars und Handy-Games',stufe:'leicht',rows:['rrr','wwwwwww','wswwwsw','wwoooww','wwwrwww','wwwwwww','wwwwwww','wwwwwww'],
+    beine:[{r:8,n:2,f:1,a:-80,c:'o',fc:'o',w:'Beine'}]},
+  {id:'lerdbeere',name:'Fruit-Ninja-Erdbeere',art:'privat',gruppe:'Brawl Stars und Handy-Games',stufe:'mittel',rows:['d','ddd','ggggggg','rrgrgrgrr','rcrrrrrcr','rrrrcrrrr','rcrrrrcr','rrrcrrr','rcrrcr','rrcrr','rrr','r']},
+  {id:'lsplatoon',name:'Splatoon-Tintenfisch',art:'privat',gruppe:'Weitere Games',stufe:'mittel',rows:['h','hhh','hhhhh','hhhhhhh','hhhhhhhhh','hhhhhhhhhhh','hswsssswh','hhssssshh','hhhhhhh','hhhhhhh','hhh','h'],
+    beine:[{r:10,n:3,f:1,a:-75,c:'h',fc:'h',w:'Tentakel'}]},
+  {id:'linkling',name:'Inkling',art:'privat',gruppe:'Weitere Games',stufe:'mittel',rows:['ooooo','ooooooo','ooooooooo','oofffffoo','sswssswss','offfffffo','offfsfffo','oofffoo'],
+    beine:[{r:6,n:1,f:1,a:10,c:'f',fc:'f',w:'Ohren'},{r:8,n:3,f:1,a:-80,c:'o',fc:'o',w:'Tentakel'}]},
+  {id:'lacblatt',name:'Animal-Crossing-Blatt',art:'privat',gruppe:'Weitere Games',stufe:'leicht',rows:['d','d','ggggg','ggggggg','ggggggggg','ggggggggg','ggggggwwg','gggggwwwg','gggggwwg','ggg']},
+  {id:'ltomnook',name:'Tom Nook',art:'privat',gruppe:'Weitere Games',stufe:'schwer',rows:['kkkkk','kkkkkkk','kkkkkkkkk','keskkksek','keekkkeek','kkccscckk','kccccccck','ccccccc','dwwrwwd','ddwrwdd','ddddddd','ddddddd'],
+    beine:[{r:2,n:0,f:3,a:60,c:'k',fc:'k',w:'Ohren'},{r:9,n:2,f:1,a:-40,c:'w',fc:'k',w:'Arme'},{r:12,n:1,f:3,a:-80,c:'k',fc:'k',w:'Beine'}]},
+  {id:'lkkslider',name:'K.K. Slider',art:'privat',gruppe:'Weitere Games',stufe:'schwer',rows:['wwwww','wwwwwww','wsswwwssw','wwswwwsww','wwwwswwww','wwwwwwwww','wwwwwww','wwwkwww','wwckcww','wccsccw','wcccccw','wwcccww'],
+    beine:[{r:3,n:3,f:1,a:-70,c:'n',fc:'n',w:'Ohren'},{r:8,n:2,f:1,a:-40,c:'w',fc:'w',w:'Arme'},{r:12,n:1,f:3,a:-80,c:'w',fc:'w',w:'Beine'}]},
+  {id:'lfallguy',name:'Fall Guy',art:'privat',gruppe:'Weitere Games',stufe:'mittel',rows:['ppp','ppppp','ppppppp','pwwwwwp','pwswswp','pwswswp','pwwwwwp','ppppppp','ppppppp','ppppppp','ppppp'],
+    beine:[{r:8,n:2,f:1,a:-40,c:'p',fc:'p',w:'Arme'},{r:11,n:1,f:3,a:-80,c:'p',fc:'p',w:'Beine'}]},
+  {id:'lstardewhuhn',name:'Stardew-Huhn',art:'privat',gruppe:'Weitere Games',stufe:'mittel',rows:['rr','kwwk','yswwk','kwwwwkk','kwwwwwwwk','kwwwwcwwk','kwwwccwwk','kwwwwwwk','kkkkkkk'],
+    beine:[{r:9,n:1,f:1,a:-80,c:'y',fc:'y',w:'Beine'}]},
+  {id:'ljunimo',name:'Junimo',art:'privat',gruppe:'Weitere Games',stufe:'mittel',rows:['s','s','ggsgg','ggggggg','ggggggggg','ggggggggg','ggggggggg','ggsgggsgg','gppgggppg','ggggggg'],
+    beine:[{r:8,n:1,f:1,a:-30,c:'s',fc:'s',w:'Arme'},{r:10,n:1,f:1,a:-80,c:'s',fc:'s',w:'Beine'}]},
+  {id:'lpixelstern',name:'Pixel-Stern',art:'privat',gruppe:'Weitere Games',stufe:'leicht',rows:['y','yyy','yyy','yyyyyyyyyyy','yyysysyyy','yysysyy','yyyyyyy','yyyyyyyyy'],
+    beine:[{r:8,n:2,f:1,a:-55,c:'y',fc:'y',w:'Zacken'}]},
+  {id:'laugenlloyd',name:'Ninja-Augen Lloyd',art:'privat',gruppe:'Ninjago',stufe:'mittel',rows:['ggggg','gggyggg','ggggygggg','gfssfffssfg','gfswfffswfg','ggggggggggg','ggggggggg','ggggggg','ggggg']},
+  {id:'laugenkai',name:'Ninja-Augen Kai',art:'privat',gruppe:'Ninjago',stufe:'mittel',rows:['rrrrr','rrrrrrr','ssssyssss','rfssfffssfr','rfswfffswfr','rrrrrrrrrrr','rrrrrrrrr','rrrrrrr','rrrrr']},
+  {id:'laugenjay',name:'Ninja-Augen Jay',art:'privat',gruppe:'Ninjago',stufe:'mittel',rows:['bbbbb','bbbybbb','bbbbybbbb','bfssfffssfb','bfswfffswfb','bbbbbbbbbbb','bbbbbbbbb','bbbbbbb','bbbbb']},
+  {id:'laugenzane',name:'Ninja-Augen Zane',art:'privat',gruppe:'Ninjago',stufe:'mittel',rows:['wwwww','wwwlwww','wwwwlwwww','wfssfffssfw','wfswfffswfw','wwwwwwwwwww','wwwwwwwww','wwwwwww','wwwww']},
+  {id:'laugencole',name:'Ninja-Augen Cole',art:'privat',gruppe:'Ninjago',stufe:'mittel',rows:['sssss','sssnsss','ssssnssss','sfssfffssfs','sfswfffswfs','sssssssssss','sssssssss','sssssss','sssss']},
+  {id:'laugennya',name:'Ninja-Augen Nya',art:'privat',gruppe:'Ninjago',stufe:'mittel',rows:['eeeee','eeeteee','eeeeteeee','efssfffssfe','efswfffswfe','eeeeeeeeeee','eeeeeeeee','eeeeeee','eeeee']},
+  {id:'lninjagologo',name:'Ninjago-Symbol',art:'privat',gruppe:'Ninjago',stufe:'mittel',rows:['eeeee','eeeeeee','eeyeeeyee','eeyyeeyee','eeyeyeyee','eeyeeyyee','eeyeeeyee','eeeeeee','eeeee']},
+  {id:'lshuriken',name:'Shuriken',art:'privat',gruppe:'Ninjago',stufe:'leicht',rows:['n','nn','nnn','nnnsnnn','nnnnnswsnnnnn','nnnsnnn','nnn','nn','n']},
+  {id:'lgoldenerdrache',name:'Goldener Drache',art:'privat',gruppe:'Ninjago',stufe:'schwer',rows:['yyyyy','yyyyyyy','yooyyyooy','ysyyyyysy','yyyyyyyyy','oyyyyyyyo','yyyyyyy','ysyyysy','yyyyy','ywywy','yyy'],
+    beine:[{r:2,n:3,f:1,a:65,c:'o',fc:'o',w:'Hörner'},{r:8,n:3,f:1,a:-20,c:'o',fc:'y',w:'Barteln'}]},
+  {id:'lohrring',name:'Miraculous-Ohrring',art:'privat',gruppe:'Miraculous',stufe:'leicht',rows:['rrrrrrr','rsrrrrrsr','rrrrrrrrrrr','rrrrrsrrrrr','rrrrrrrrrrr','rsrrrrrsr','rrrrrrr']},
+  {id:'lcatnoir',name:'Cat Noir',art:'privat',gruppe:'Miraculous',stufe:'schwer',rows:['yyyyy','yyyyyyy','yyyyyyyyy','yfyfyfyfy','sssssssss','sggsssggs','fssfffssf','fffffff','ffsssff','fffff','sssysss'],
+    beine:[{r:1,n:2,f:1,a:70,c:'s',fc:'s',w:'Ohren'}]},
+  {id:'lakatsuki',name:'Akatsuki-Wolke',art:'privat',gruppe:'Anime',stufe:'mittel',rows:['sssswwwwsss','sswwwrrrrwsss','swrrrwrrrrwss','swrrrrrrwrrws','swrrrrrrrrrws','sswrrrrrrrwss','ssswwwwwsss']},
+  {id:'ldragonball',name:'Dragon-Ball (4 Sterne)',art:'privat',gruppe:'Anime',stufe:'leicht',rows:['ooooooo','oyooroooo','oyooooooooo','ooorooorooo','ooooooooooo','ooooroooo','ooooooo']},
+  {id:'lkittyschleife',name:'Hello-Kitty-Schleife',art:'privat',gruppe:'Sanrio',stufe:'leicht',rows:['rrrsssrrr','rrrrsrsrrrr','rrrrsrsrrrr','rrrrsrsrrrr','rrrsssrrr'],
+    beine:[{r:5,n:2,f:1,a:-60,c:'r',fc:'r',w:'Bänder'}]},
+  {id:'lbadtzmaru',name:'Badtz-Maru',art:'privat',gruppe:'Sanrio',stufe:'mittel',rows:['s','sss','sssssssss','sssssssssss','swswssswsws','swwwsyswwws','swwyyywws','sssysss','sssss'],
+    beine:[{r:2,n:2,f:1,a:70,c:'s',fc:'s',w:'Zacken'},{r:3,n:2,f:1,a:40,c:'s',fc:'s',w:'Zacken'}]},
+  {id:'lpochacco',name:'Pochacco',art:'privat',gruppe:'Sanrio',stufe:'leicht',rows:['wwwww','wwwwwww','wwwwwwwww','wwwwwwwww','wwswwwsww','wwwwswwww','wwwwwwwww','wwwwwww','wwwww'],
+    beine:[{r:2,n:3,f:1,a:-60,c:'s',fc:'s',w:'Ohren'}]},
+  {id:'lhangyodon',name:'Hangyodon',art:'privat',gruppe:'Sanrio',stufe:'mittel',rows:['lll','ttttt','ttttttt','twwwtwwwt','twswtwswt','ttttttttt','ppppppppp','tttrrrttt','ttttttt','ttttt'],
+    beine:[{r:5,n:1,f:1,a:0,c:'l',fc:'l',w:'Flossen'},{r:10,n:0,f:3,a:-70,c:'t',fc:'t',w:'Füsse'}]},
+  {id:'lchococat',name:'Chococat',art:'privat',gruppe:'Sanrio',stufe:'mittel',rows:['sssss','sssssss','sssssssss','swwwssswwws','swswssswsws','swwwskswwws','sssssssss','bbbbbbb','sssss','sssss'],
+    beine:[{r:1,n:2,f:1,a:65,c:'s',fc:'c',w:'Ohren'},{r:6,n:2,f:1,a:-5,c:'s',fc:'s',w:'Schnurrhaare'},{r:10,n:0,f:3,a:-70,c:'s',fc:'s',w:'Füsse'}]},
+  {id:'lkiki',name:'Kiki (Little Twin Stars)',art:'privat',gruppe:'Sanrio',stufe:'schwer',rows:['lll','lllll','lllllll','lllllllll','llfflffll','lfsfffsfl','lpfffffpl','fffrfff','wwwwwww','ppppqpppp','wwwwwwwww','wwwwwww'],
+    beine:[{r:10,n:2,f:1,a:-30,c:'w',fc:'f',w:'Arme'},{r:12,n:0,f:3,a:-70,c:'f',fc:'f',w:'Füsse'}]},
+  {id:'llala',name:'Lala (Little Twin Stars)',art:'privat',gruppe:'Sanrio',stufe:'schwer',rows:['ppp','ppppp','ppppypp','ppppppppp','ppffpffpp','pfsfffsfp','pqfffffqp','pfffrfffp','pwwwwwwwp','pwwwwwwwp','wwwwwwwwwww','wwwwwwwww'],
+    beine:[{r:10,n:2,f:1,a:-30,c:'w',fc:'f',w:'Arme'},{r:12,n:0,f:3,a:-70,c:'f',fc:'f',w:'Füsse'}]},
+  {id:'lthaddaeus',name:'Thaddäus',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['ttttt','ttttttt','ttttttttt','ttttttttttt','tyyytttyyyt','tyeytttyeyt','tyyytttyyyt','ttttttttt','tttsssttt','ttttttt','ttt','ooooo','ooooooo','ooooooo','ttttt'],
+    beine:[{r:13,n:2,f:1,a:-30,c:'t',fc:'t',w:'Arme'},{r:15,n:3,f:3,a:-75,c:'t',fc:'l',w:'Beine'}]},
+  {id:'lgary',name:'Gary die Schnecke',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['ppppp','ppppbpp','ppprrrppp','pprppprpp','bprprprpp','pprprrppp','pprpppppb','ppprppppp','ppppppp','lllllllll','lllllllllll','hhhhhhhhh'],
+    beine:[{r:10,n:3,f:1,a:45,c:'l',fc:'y',w:'Stielaugen'}]},
+  {id:'lpfotenlogo',name:'Paw-Patrol-Pfote',art:'privat',gruppe:'Cartoons',stufe:'leicht',rows:['nnnnnnnnnnn','nrrrrrrrrrn','nrrrwrwrrrn','nrwrrrrrwrn','nrrwwwwwrrn','nrrwwwrrn','nrrrrrn','nrrrn','nnn','n']},
+  {id:'lchase',name:'Chase (Kopf)',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['bbbbb','bbbnbbb','bbbbbbbbb','sssssssss','kkccccckk','kcswkwsck','kccccccck','kkccscckk','kcsqsck','ccccc'],
+    beine:[{r:3,n:2,f:1,a:60,c:'k',fc:'k',w:'Ohren'}]},
+  {id:'lmarshall',name:'Marshall (Kopf)',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['rrrrr','rrrnrrr','rrrrrrrrr','rrrrrrrrrrr','wwwwwwsww','wlswwwslw','wwwwwwwww','swwwswwsw','wwsqsww','wwwww'],
+    beine:[{r:5,n:3,f:1,a:-30,c:'w',fc:'s',w:'Ohren'}]},
+  {id:'lskye',name:'Skye (Kopf)',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['ccc','qqqqq','qqqqqqq','qqfffffqq','qfsfffsfq','qfffsfffq','ffsqsff','fffff'],
+    beine:[{r:4,n:3,f:1,a:-25,c:'c',fc:'c',w:'Ohren'}]},
+  {id:'lpeppa',name:'Peppa Wutz',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['ppppp','ppppppp','pswpppwsp','pppqqqppp','qppsqsppq','pppqqqppp','ppssspp','ppppp','rrrrr','rrrrrrr','rrrrrrrrr','rrrrrrrrr'],
+    beine:[{r:1,n:1,f:1,a:70,c:'p',fc:'p',w:'Ohren'},{r:9,n:2,f:1,a:20,c:'p',fc:'p',w:'Arme'},{r:12,n:2,f:3,a:-80,c:'p',fc:'s',w:'Beine'}]},
+  {id:'lfinn',name:'Finn (Adventure Time)',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['wwwwwww','wwwwwwwww','wwfffffww','wfsfffsfw','wffsssffw','wwwwwwwww','lhlllhl','lhlllhl','lllllll','bbbbbbb','bbbbbbb'],
+    beine:[{r:1,n:1,f:1,a:70,c:'w',fc:'w',w:'Mützenohren'},{r:7,n:3,f:1,a:-30,c:'l',fc:'f',w:'Arme'},{r:11,n:2,f:3,a:-80,c:'f',fc:'s',w:'Beine'}]},
+  {id:'ljakehund',name:'Jake der Hund',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['yyyyy','yyyyyyy','ywwyyywwy','ywsyyyswy','yyyysyyyy','yyysysyyy','yyyyyyyyy','yyyyyyyyy','yyyyyyyyy','yyyyyyy'],
+    beine:[{r:7,n:2,f:1,a:-35,c:'y',fc:'y',w:'Arme'},{r:10,n:3,f:1,a:-80,c:'y',fc:'y',w:'Beine'}]},
+  {id:'ldipper',name:'Dipper-Mütze',art:'privat',gruppe:'Cartoons',stufe:'leicht',rows:['bwwwwwb','bwwwbwwwb','bbwwbbbwwbb','bwwbbbbbwwb','bwwwbbbwwwb','bwwbbbbbwwb','bwwwwbwwwwb','bbbbbbbbbbb','uuuuuuuuu']},
+  {id:'lteletubbysonne',name:'Teletubbies-Sonne',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['yoyoy','oyyyyyo','yyfffffyy','oyfsfffsfyo','yyfffffffyy','oyqfffffqyo','yyffrrrffyy','oyfffffyo','yyyyyyy','oyoyo']},
+  {id:'lteletubbypo',name:'Po (Teletubby)',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['rrr','r','rrrrr','rrrrrrr','rrfffffrr','rfsfffsfr','rfffffffr','rrfsssfrr','rrrrrrr','rrrrrrrrr','rrnnnnnrr','rrnnnnnrr','rrnnnnnrr','rrrrrrrrr','rrrrrrr'],
+    beine:[{r:10,n:2,f:1,a:-30,c:'r',fc:'r',w:'Arme'},{r:15,n:1,f:3,a:-80,c:'r',fc:'r',w:'Beine'}]},
+  {id:'lsendungmaus',name:'Die Maus (Sendung mit der Maus)',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['ooooo','ooooooo','ooooooooo','owswowswo','sooosooos','ooooooooo','ooooooooo','ooooooooo','ooooooooo','ooooooooo','ooooooo'],
+    beine:[{r:1,n:2,f:1,a:70,c:'k',fc:'k',w:'Ohren'},{r:6,n:3,f:1,a:-30,c:'k',fc:'k',w:'Arme'},{r:11,n:2,f:3,a:-80,c:'k',fc:'k',w:'Beine'}]},
+  {id:'lsendungelefant',name:'Der Elefant (Sendung mit der Maus)',art:'privat',gruppe:'Cartoons',stufe:'mittel',rows:['bbbbb','bbbbbbb','bbbbbbbbbbb','bbbbwwbwwbbbb','bbbbwsbswbbbb','bbbbbbbbbbbbb','bbbbbbbbbbb','bbbbbbb','bbb','bbb','b','b']},
+  {id:'lpingu',name:'Pingu',art:'privat',gruppe:'Cartoons',stufe:'leicht',rows:['sssss','sssssss','sswssswss','sssssssss','swwrrrwws','swwwrwwws','swwwwwwws','swwwwwwws','swwwwws','sssss'],
+    beine:[{r:6,n:2,f:1,a:-40,c:'s',fc:'s',w:'Flossen'},{r:10,n:0,f:3,a:-80,c:'o',fc:'o',w:'Füsse'}]},
+  {id:'lflash',name:'Flash-Blitz',art:'privat',gruppe:'Superhelden',stufe:'mittel',rows:['rrrrrrr','rwwwwwyyr','rwwwwyyywwr','rwwwyyywwwr','rwwyyyyyywr','rwwwwyyywwr','rwwwyyywwwr','rwwyyywwwwr','rwyywwwwr','rrrrrrr']},
+  {id:'lhulkfaust',name:'Hulk-Faust',art:'privat',gruppe:'Superhelden',stufe:'mittel',rows:['ggggggggg','ggdggdggdgg','ggdggdggdgg','ggdggdggdgg','gdddddddddg','ggggggggggg','gggggggdggg','gdddddddggg','ggggggggg','vvvvvvv','vvvvvvv']},
+  {id:'lspidergwen',name:'Spider-Gwen-Maske',art:'privat',gruppe:'Superhelden',stufe:'mittel',rows:['wwwww','wwwswww','wwwwswwww','wswwwswwwsw','qqqwwswwqqq','qwwqqsqqwwq','wqwwqsqwwqw','wwqqqsqqqww','wswwwswwwsw','wwwwswwww','wwwswww','wwsww']},
+  {id:'lmjoelnir',name:'Thor-Hammer',art:'privat',gruppe:'Superhelden',stufe:'leicht',rows:['nnnnnnnnn','nnnnnnnnnnn','nnnnnnnnnnn','nnnnnnnnnnn','nnnnnnnnn','kkk','kck','kkk','kck','kkk','nnnnn','k']},
+  {id:'lwonderwoman',name:'Wonder-Woman-Logo',art:'privat',gruppe:'Superhelden',stufe:'mittel',rows:['yyyrryyyrryyy','yyyryyyryyy','yyryyyryy','yyyryyy','yyyyy','yyy']},
+  {id:'ldeadpool',name:'Deadpool-Maske',art:'privat',gruppe:'Superhelden',stufe:'mittel',rows:['rrrrrrr','rrrrrrrrr','rrrrrrrrrrr','rsssrrrsssr','rswwsrswwsr','rsssrrrsssr','rrssrrrssrr','rrrrrrrrr','rrrrrrr','rrrrr']},
+  {id:'llegostein',name:'LEGO-Stein 2×4',art:'privat',gruppe:'Spielzeug',stufe:'leicht',rows:['rrrrrrrrrrr','rrererererr','rrrrrrrrrrr','rrrrrrrrrrr','rrererererr','rrrrrrrrrrr']},
+  {id:'llegokopf',name:'LEGO-Minifigur-Kopf',art:'privat',gruppe:'Spielzeug',stufe:'leicht',rows:['yyyyy','yyyyyyyyy','yyyyyyyyy','yysyyysyy','yyyyyyyyy','yysyyysyy','yyysssyyy','yyyyyyyyy','yyyyyyy']},
+  {id:'lbarbieherz',name:'Barbie-Herz',art:'privat',gruppe:'Spielzeug',stufe:'leicht',rows:['qqqwwwqqq','qqqqqwqqqqq','qqqqqqqqqqq','qqqqqqqqqqq','qqqqqqqqq','qqqqqqq','qqqqq','qqq','q']},
+  {id:'lzauberwuerfel',name:'Zauberwürfel',art:'privat',gruppe:'Spielzeug',stufe:'mittel',rows:['sssssssssss','syyyrrrbbbs','syyyrrrbbbs','sgggwwwooos','sgggwwwooos','sooobbbyyys','sooobbbyyys','sssssssssss']},
+  {id:'lunokarte',name:'Uno-Karte +4',art:'privat',gruppe:'Spielzeug',stufe:'mittel',rows:['wwwwwwwww','wsssssssw','wsssssssw','wsssrbssw','wssrrbbsw','wssyyggsw','wsssygssw','wsssssssw','wsssssssw','wwwwwwwww']},
+  {id:'lwuerfel',name:'Spielwürfel',art:'privat',gruppe:'Spielzeug',stufe:'leicht',rows:['wwwwwww','wswwwwwsw','wwwwwwwww','wwwwswwww','wwwwwwwww','wswwwwwsw','wwwwwww']},
+  {id:'lspringer',name:'Schach-Springer',art:'privat',gruppe:'Spielzeug',stufe:'mittel',rows:['ss','ssss','sswsss','sssssss','sssssssss','wwssssss','wwsssss','sssss','sssss','sssssss','sssssssss']},
+  {id:'lplaymobil',name:'Playmobil-Figur',art:'privat',gruppe:'Spielzeug',stufe:'mittel',rows:['kkkkk','kkkkkkk','kkfffffkk','kfsfffsfk','kfffffffk','fffsssfff','fffffff','rrrrrrrrr','rrrrrrrrr','rrrrrrrrr','bbbbbbbbb','bbbbbbb'],
+    beine:[{r:8,n:3,f:3,a:-55,c:'r',fc:'f',w:'Arme'},{r:12,n:1,f:3,a:-75,c:'b',fc:'k',w:'Beine'}]},
+  {id:'llilaminion',name:'Lila Minion',art:'privat',gruppe:'Minions',stufe:'schwer',rows:['vvv','vvvvv','vvvvvvv','vvvvvvvvv','snnnsnnns','nwsnsnswn','snnnsnnns','vvvvvvvvv','vvwwwwwvv','vvvsssvvv','vvbbbbbvv','bbbbbbbbb','bbbbbbb'],
+    beine:[{r:9,n:3,f:1,a:-35,c:'v',fc:'s',w:'Arme'},{r:13,n:1,f:3,a:-75,c:'b',fc:'s',w:'Beine'}]},
+  {id:'lgru',name:'Gru',art:'privat',gruppe:'Minions',stufe:'schwer',rows:['fffff','fffffff','fffffffff','ffsfffsff','ffffcffff','fffcccfff','fffffff','snsnsnsns','sssssssssss','ssnsssssnss','sssssssssss','ssnsssssnss','sssssssss'],
+    beine:[{r:13,n:4,f:1,a:-80,c:'s',fc:'s',w:'Beine'}]},
+  {id:'lminionbrille',name:'Minion-Brille',art:'privat',gruppe:'Minions',stufe:'leicht',rows:['nnnnnnn','nnwwwwwnn','nwwwwwwwwwn','nwwwssswwwn','nwwwssswwwn','nwwwwwwwwwn','nnwwwwwnn','nnnnnnn'],
+    beine:[{r:4,n:2,f:1,a:0,c:'s',fc:'s',w:'Band'},{r:5,n:2,f:1,a:0,c:'s',fc:'s',w:'Band'}]},
+  {id:'lwinston',name:'Squishmallow Winston (Eule)',art:'privat',gruppe:'Trends',stufe:'mittel',rows:['ttttttt','ttttttttt','ttstttttstt','tttttottttt','tptttttttpt','tccccccccct','tccccccct','ttttttt'],
+    beine:[{r:1,n:1,f:1,a:70,c:'t',fc:'t',w:'Ohren'},{r:8,n:0,f:3,a:-75,c:'o',fc:'o',w:'Füsse'}]},
+  {id:'lcapybara',name:'Capybara',art:'privat',gruppe:'Trends',stufe:'mittel',rows:['d','ooo','ooooo','ccccccc','ccccccccc','ccscccscc','ccccccccc','ccckkkccc','ccccccc','ccccc'],
+    beine:[{r:4,n:1,f:1,a:60,c:'k',fc:'k',w:'Ohren'}]},
+  {id:'lpilzfrosch',name:'Frosch mit Pilzhut',art:'privat',gruppe:'Trends',stufe:'mittel',rows:['rrrrr','rrrwrrr','rwrrrrrwr','rrrrrwrrrrr','ggggggggg','gwsgggswg','ggggggggg','gpgsssgpg','ggggggg'],
+    beine:[{r:9,n:0,f:3,a:-75,c:'g',fc:'g',w:'Füsse'}]},
+  {id:'lmeltingsmiley',name:'Melting Smiley',art:'privat',gruppe:'Trends',stufe:'mittel',rows:['yyyyy','yyyyyyy','yysyyysyy','yyyyyyyyy','ysyyyyysy','yyysssyyy','yyyyyyyyyyy','yyyyyyyyyyyyy','yyyyyyyyyyy']},
+  {id:'lflammenherz',name:'Herz mit Flammen',art:'privat',gruppe:'Trends',stufe:'mittel',rows:['y','yyy','yyoyy','yrryoyrry','yrrrrorrrry','rrrrrrrrrrr','rrrrrrrrrrr','rrrrrrrrr','rrrrrrr','rrrr','r'],
+    beine:[{r:6,n:1,f:1,a:60,c:'y',fc:'o',w:'Flammen'}]},
+  {id:'lregenbogenherz',name:'Regenbogenherz',art:'privat',gruppe:'Trends',stufe:'mittel',rows:['rrrwrrr','rrrrrrrrrrr','ooooooooooo','yyyyyyyyyyy','ggggggggg','bbbbbbb','vvvv','v']},
+  {id:'ldango',name:'Dango-Spiess',art:'privat',gruppe:'Trends',stufe:'mittel',rows:['k','ppppp','ppppppp','ppppppp','ppppp','wwwww','wwwwwww','wwwwwww','wwwww','hhhhh','hhhhhhh','hhhhhhh','hhhhh','k','k']},
+  {id:'lboba',name:'Bubble Tea',art:'privat',gruppe:'Trends',stufe:'mittel',rows:['m','m','lllllllll','lllllllllll','ccccmcccc','ccccmcccc','cccccccc','cscccsc','csccsc','scscs']},
+  {id:'lerdbeerkuh',name:'Erdbeerkuh',art:'privat',gruppe:'Trends',stufe:'mittel',rows:['ppppppp','pqqpppppp','qqqppppqq','pqspppspp','ppppppppp','pwwwwwwwwwp','pwwqwwwqwwp','wwwwwwwww','wwwwwww'],
+    beine:[{r:1,n:1,f:1,a:70,c:'m',fc:'m',w:'Hörner'},{r:3,n:2,f:1,a:-15,c:'p',fc:'q',w:'Ohren'}]},
+  {id:'llabubu',name:'Labubu',art:'privat',gruppe:'Trends',stufe:'mittel',rows:['kkkkk','kkkkkkkkk','kkfffffffkk','kfssfffssfk','kfffffffffk','kfwswswswfk','kkfffffffkk','kkkkkkkkk','kkkkkkk'],
+    beine:[{r:1,n:4,f:1,a:75,c:'k',fc:'k',w:'Ohren'}]},
+  {id:'lpusheen',name:'Pusheen',art:'privat',gruppe:'Trends',stufe:'mittel',rows:['nnsnsnn','nnnnnnnnn','nnsnnnnnsnn','nnnnnsnnnnn','nnnnnnnnnnn','nnnnnnnnnnn','nnnnnnnnn'],
+    beine:[{r:1,n:1,f:1,a:65,c:'n',fc:'n',w:'Ohren'},{r:4,n:2,f:1,a:5,c:'s',fc:'s',w:'Schnurrhaare'},{r:7,n:1,f:1,a:-80,c:'n',fc:'n',w:'Füsse'}]},
+  {id:'ltamagotchi',name:'Tamagotchi',art:'privat',gruppe:'Trends',stufe:'mittel',rows:['ppppp','ppppppp','pphhhhhpp','pphhshhpp','pphssshpp','pphhhhhpp','ppypypypp','ppppppp','ppppp']},
+  {id:'lerinnerung',name:'Erinnerungskugel',art:'privat',gruppe:'Inside Out',stufe:'leicht',rows:['yyyyy','ywwyyyy','ywyyyyyyy','yyyyyyyyy','yyyyyyyoy','yyyyooy','yyyyy']},
+  {id:'lbingbong',name:'Bing Bong',art:'privat',gruppe:'Inside Out',stufe:'mittel',rows:['vvvvv','vvvvv','bbbbbbb','vvvvvvvvvvv','ppppppppp','ppvvpppvvpp','pppdpppdppp','ppppppppppp','pqqqqqqqqqp','ppppppppp','ppppp','ppp','q'],
+    beine:[{r:7,n:2,f:1,a:-30,c:'p',fc:'p',w:'Ohren'}]},
+  {id:'llichtschwert',name:'Lichtschwert',art:'privat',gruppe:'Star Wars',stufe:'leicht',rows:['h','hwh','hwh','hwh','hwh','hwh','hwh','hwh','hwh','nnnnn','sns','nnn','sss','nnn','sss','nnn']},
+  {id:'lrebellen',name:'Rebellen-Symbol',art:'privat',gruppe:'Star Wars',stufe:'mittel',rows:['rwwrwwr','rwrrrrrwr','rrwwwrwwwrr','rrwwwrwwwrr','rrrwwrwwrrr','rrrrrrrrrrr','rrrrrrrrr','rrrrrrr']},
+  {id:'limperium',name:'Imperiums-Symbol',art:'privat',gruppe:'Star Wars',stufe:'mittel',rows:['nnnnnnn','nwwwnwwwn','nwnnnwnnnwn','nwnwnwwwnwnwn','nwnnwwwwwnnwn','nwnwnwwwnwnwn','nwnnnwnnnwn','nwwwnwwwn','nnnnnnn']},
+  {id:'lstormtrooper',name:'Stormtrooper-Helm',art:'privat',gruppe:'Star Wars',stufe:'mittel',rows:['wwwww','wwwwwwwww','wwwwwwwwwww','wssswwwsssw','wwsswwwssww','wwwwwwwwwww','nwssssssswn','nsswwwwwssn','wwswwwsww','wwwwwww']},
+  {id:'lbb8',name:'BB-8',art:'privat',gruppe:'Star Wars',stufe:'mittel',rows:['wwwww','wwwswww','wowwwow','nnnnnnn','wwwww','wwoooooww','wwowwnwwoww','wwownnnwoww','wwowwnwwoww','wwoooooww','wwwww']},
+  {id:'lchewbacca',name:'Chewbacca',art:'privat',gruppe:'Star Wars',stufe:'schwer',rows:['kkkkk','kkkkkkk','kskkksk','kkkskkk','kkcecck','kkkkkkk','ksnkkkkkk','kksnkkkkk','kkksnkkkk','kkkksnkkk','kkkkksnkk','kkkkkksnk'],
+    beine:[{r:8,n:3,f:1,a:-40,c:'k',fc:'k',w:'Arme'},{r:12,n:3,f:3,a:-75,c:'k',fc:'k',w:'Beine'}]},
+  {id:'ltodesstern',name:'Todesstern',art:'privat',gruppe:'Star Wars',stufe:'mittel',rows:['nnnnnnn','nnnnnsssn','nnnnnnsnsnn','nnnnnnnsnnn','sssssssssss','nnnnnnnnnnn','nnnnnnnnn','nnnnnnn']},
+  {id:'lyoda',name:'Yoda',art:'privat',gruppe:'Star Wars',stufe:'mittel',rows:['hhhhh','hhhhhhh','hshhhsh','hhhhhhh','hhhhh','ccckccc','cccckcccc','cccckcccc','ccccccccc','ccccccc'],
+    beine:[{r:2,n:3,f:1,a:15,c:'h',fc:'h',w:'Ohren'},{r:7,n:2,f:1,a:-30,c:'c',fc:'h',w:'Arme'}]},
+  {id:'lmickey',name:'Mickey-Silhouette',art:'privat',gruppe:'Disney und Pixar',stufe:'leicht',rows:['sssss','sssssss','sssssssss','sssssssss','sssssssss','sssssss','sssss'],
+    beine:[{r:2,n:1,f:3,a:60,c:'s',fc:'s',w:'Ohren'}]},
+  {id:'lminnie',name:'Minnie mit Schleife',art:'privat',gruppe:'Disney und Pixar',stufe:'mittel',rows:['rwrerwr','rrrerrr','sssssss','sssssssss','sssssssss','sssssssss','sssssss','sssss'],
+    beine:[{r:3,n:1,f:3,a:60,c:'s',fc:'s',w:'Ohren'}]},
+  {id:'lnemo',name:'Nemo',art:'privat',gruppe:'Disney und Pixar',stufe:'mittel',rows:['ooo','ooooo','owwowwo','owsoswo','ooooooo','swwwwwwws','ooooooooo','ooooooooo','swwwwwws','ooooooo','ooooo','swwws','ooo','ooooo','sooooos'],
+    beine:[{r:7,n:2,f:1,a:-20,c:'o',fc:'s',w:'Flossen'}]},
+  {id:'ldorie',name:'Dorie',art:'privat',gruppe:'Disney und Pixar',stufe:'mittel',rows:['bbb','bbbbb','bwwbwwb','bwsbswb','bbbbbbb','bbbuuubbb','bbuubuubb','buubbbuub','bbuuuuubb','bbbbbbb','bbbbb','yyy','yyyyy','uyyyyyu'],
+    beine:[{r:7,n:2,f:1,a:-20,c:'y',fc:'y',w:'Flossen'}]},
+  {id:'lolaf',name:'Olaf',art:'privat',gruppe:'Disney und Pixar',stufe:'mittel',rows:['k','www','wwwww','wswwwsw','wwwowww','wwsssww','wwwww','www','wwwww','wwwswww','wwwwwww','wwwww','wwwwswwww','wwwwwwwww','wwwwwww'],
+    beine:[{r:2,n:2,f:1,a:75,c:'k',fc:'k',w:'Haare'},{r:10,n:3,f:1,a:20,c:'k',fc:'k',w:'Arme'},{r:15,n:0,f:3,a:-75,c:'w',fc:'w',w:'Füsse'}]},
+  {id:'lelsa',name:'Elsa',art:'privat',gruppe:'Disney und Pixar',stufe:'schwer',rows:['yyy','yyyyy','yyfffyy','yfsfsfy','yfffffy','yyfffyy','fff','ftttf','ttttt','ttt','ttttt','ltttttl','lltttttll','llttttttll','lltttttttll'],
+    beine:[{r:8,n:3,f:1,a:-30,c:'l',fc:'f',w:'Arme'}]},
+  {id:'lanna',name:'Anna',art:'privat',gruppe:'Disney und Pixar',stufe:'schwer',rows:['kkk','kkkkk','kkfffkk','kfsfsfk','kfffffk','kkfrfkk','fff','qsssq','qsssq','quuuq','quuuuuq','qquuuuuqq','qquuuuuuuqq'],
+    beine:[{r:5,n:4,f:1,a:-80,c:'k',fc:'k',w:'Zöpfe'},{r:9,n:3,f:1,a:-30,c:'q',fc:'f',w:'Arme'}]},
+  {id:'lsimba',name:'Simba (Kopf)',art:'privat',gruppe:'Disney und Pixar',stufe:'mittel',rows:['ooo','yyyyy','yyyyyyy','yyyyyyyyy','yyswyyyswyy','yyycckccyyy','yycccccyy','yyccccyy','yyyyy'],
+    beine:[{r:3,n:1,f:3,a:50,c:'y',fc:'o',w:'Ohren'}]},
+  {id:'lmcqueen',name:'Lightning McQueen',art:'privat',gruppe:'Disney und Pixar',stufe:'mittel',rows:['rrrrr','rwwrwwr','rwbrbwr','rrrrrrrrr','ryrrrrryr','rrswwwsrr','rrrsssrrr','sssssssss'],
+    beine:[{r:8,n:0,f:3,a:-75,c:'s',fc:'s',w:'Räder'}]},
+  {id:'ltsalien',name:'Toy-Story-Alien',art:'privat',gruppe:'Disney und Pixar',stufe:'mittel',rows:['h','h','hhhhh','hhhhhhh','hhwhwhwhh','hhshshshh','hhhhhhhhh','hhhssshhh','hhhhhhh','vvvvvvv','bbbbbbb','bbbbbbb','bbbbb'],
+    beine:[{r:6,n:2,f:1,a:30,c:'h',fc:'h',w:'Ohren'},{r:11,n:2,f:1,a:-20,c:'b',fc:'h',w:'Arme'},{r:13,n:0,f:3,a:-75,c:'b',fc:'u',w:'Füsse'}]},
+  {id:'lsheriffstern',name:'Woodys Sheriffstern',art:'privat',gruppe:'Disney und Pixar',stufe:'leicht',rows:['o','y','yyy','oyyyyyyyyyo','yyyyyyyyy','yyoooyy','yyyyyyyyy','oyyyyyyyyyo','yyy','y','o']},
+  {id:'lbuzz',name:'Buzz Lightyear (Kopf)',art:'privat',gruppe:'Disney und Pixar',stufe:'mittel',rows:['vvvvv','vvvvvvv','vvkkkkkvv','vfwsfswfv','vfffffffv','vffsssffv','vvffkffvv','nnnnnnnnnnn','whhhhhhhhhw']},
+  {id:'lhibiskus',name:'Vaiana-Hibiskus',art:'privat',gruppe:'Disney und Pixar',stufe:'mittel',rows:['rrr','rrrrr','rrrrerrrr','rrrreyerrrr','rrrreeerrrr','rrrrerrrr','rrrrrrr','rrrrr','g','g','g'],
+    beine:[{r:10,n:2,f:1,a:20,c:'d',fc:'g',w:'Blätter'}]},
+  {id:'lencantofalter',name:'Encanto-Schmetterling',art:'privat',gruppe:'Disney und Pixar',stufe:'mittel',rows:['ggggsgggg','gyoyysyyoyg','gyooysyooyg','gyyyysyyyyg','ggyysyygg','gysyg','gtyysyytg','gttysyttg','gtysytg','ggsgg','s'],
+    beine:[{r:1,n:2,f:1,a:70,c:'s',fc:'s',w:'Fühler'}]},
+  {id:'lencantokerze',name:'Encanto-Kerze',art:'privat',gruppe:'Disney und Pixar',stufe:'mittel',rows:['o','ooo','oyo','oyo','wwwww','wwcww','cwwwc','wwwww','wwwww','nnnnnnnnn','nnnnnnnnnnn','nnnnnnn','nnnnn']},
+  {id:'lwinnie',name:'Winnie Puuh (Kopf)',art:'privat',gruppe:'Disney und Pixar',stufe:'mittel',rows:['yyyyy','yyyyyyy','yyyyyyyyy','yysyyysyy','yyyyyyyyy','yyysssyyy','yysyyysyy','yysssyy','rrrrrrrrr','rrrrrrrrrrr'],
+    beine:[{r:2,n:1,f:3,a:55,c:'y',fc:'y',w:'Ohren'}]},
+  {id:'lhpbrille',name:'Harry-Potter-Brille mit Blitz',art:'privat',gruppe:'Harry Potter und Filme',stufe:'mittel',rows:['wwwwwwyww','wwwwwyyywww','wssssyywssssw','swwwwssswwwws','swwwwswswwwws','wsssswwwssssw'],
+    beine:[{r:4,n:1,f:1,a:20,c:'s',fc:'s',w:'Bügel'}]},
+  {id:'lblitznarbe',name:'Blitz-Narbe',art:'privat',gruppe:'Harry Potter und Filme',stufe:'mittel',rows:['sssssss','sssssssss','sssssssssss','sssfsssfsss','sffffffeffs','sfffffefffs','sffffeeeffs','sfffffefffs','sffffeffffs','sfffefffffs','ssssfffssss','fffffffff']},
+  {id:'lhogwartsschal',name:'Hogwarts-Schal (Streifen)',art:'privat',gruppe:'Harry Potter und Filme',stufe:'leicht',rows:['yeyey','eeeee','eeeee','yyyyy','eeeee','yyyyy','eeeee','eeeee','yyyyy','eeeee','yyyyy','eeeee','eeeee','yeyey']},
+  {id:'lschnatz',name:'Goldener Schnatz',art:'privat',gruppe:'Harry Potter und Filme',stufe:'leicht',rows:['yyy','yyyyy','yyyyyyy','ccccccc','yyyyyyy','yyyyy','yyy'],
+    beine:[{r:3,n:4,f:1,a:40,c:'w',fc:'w',w:'Flügel'},{r:4,n:3,f:1,a:15,c:'w',fc:'w',w:'Flügel'}]},
+  {id:'lhedwig',name:'Hedwig',art:'privat',gruppe:'Harry Potter und Filme',stufe:'mittel',rows:['wwwww','wwwwwww','wwwwwwwww','wyywwwyyw','wysywysyw','wyywswyyw','nwwwwwwwn','nwswwwswn','nwwwswwwn','nwswwwswn','wwwwwww','wwwww'],
+    beine:[{r:12,n:0,f:3,a:-75,c:'s',fc:'s',w:'Krallen'}]},
+  {id:'lsprechenderhut',name:'Sprechender Hut',art:'privat',gruppe:'Harry Potter und Filme',stufe:'mittel',rows:['k','kk','kkk','kkkk','kkkkk','kkkckk','ksskssk','kkkkkkkk','kksssskkk','kkkkkkkkkkkkk','kkkkkkkkkkk']},
+  {id:'lhogwartswappen',name:'Hogwarts-Wappen',art:'privat',gruppe:'Harry Potter und Filme',stufe:'schwer',rows:['ccccccccccc','crrrrcggggc','crrrscsgggc','crrrsssgggc','cyyyscsbbbc','cyyyycbbbbc','cyyycbbbc','cyycbbc','cycbc','ccc','c'],
+    beine:[{r:1,n:1,f:3,a:40,c:'c',fc:'c',w:'Rollen'}]},
+  {id:'lshrek',name:'Shrek (Kopf)',art:'privat',gruppe:'Harry Potter und Filme',stufe:'mittel',rows:['hhhhh','hhhhhhh','hkkhhhkkh','hwkhhhkwh','hhhhghhhh','hhhhggghhhh','hhhhhhhhhhh','hhhssssshhh','hhhhhhhhh','kkccccckk','kkkccccckkk'],
+    beine:[{r:3,n:1,f:3,a:40,c:'h',fc:'h',w:'Ohren'}]},
+  {id:'lkungfupo',name:'Po (Kung Fu Panda)',art:'privat',gruppe:'Harry Potter und Filme',stufe:'mittel',rows:['wwwww','wwwwwww','wsswwwssw','wsgwwwgsw','wwwwsswww','wwwwwww','sswwwwwss','sswwwwwss','kkkkkkkkk','ccccccccc','ccccccc'],
+    beine:[{r:1,n:1,f:3,a:60,c:'s',fc:'s',w:'Ohren'},{r:11,n:0,f:3,a:-75,c:'s',fc:'s',w:'Füsse'}]},
+  {id:'lohnezahn',name:'Ohnezahn',art:'privat',gruppe:'Harry Potter und Filme',stufe:'mittel',rows:['sssssss','sssssssss','sssssssssss','shhhssshhhs','shshssshshs','shhhssshhhs','sssssssss','sssssss','sssssss','sssss'],
+    beine:[{r:2,n:3,f:1,a:40,c:'s',fc:'s',w:'Ohren'},{r:4,n:2,f:1,a:5,c:'s',fc:'s',w:'Ohren'}]},
+  {id:'lstern',name:'Stern',art:'privat',gruppe:'Zeitlos',stufe:'leicht',rows:['y','yy','yyy','yyyyyyyyyyyyy','yyyyyyyyyyy','yyyyyyyyy','yyyyyyy','yyyyyyy'],
+    beine:[{r:8,n:3,f:1,a:-55,c:'y',fc:'y',w:'Zacken'}]},
+  {id:'lblume',name:'Blume',art:'privat',gruppe:'Zeitlos',stufe:'leicht',rows:['qqq','qqqqq','qqyyyqq','qqqyyyqqq','qqyyyqq','qqqqq','qqq','g','g','g'],
+    beine:[{r:9,n:2,f:1,a:35,c:'g',fc:'g',w:'Blätter'}]},
+  {id:'lregenbogen',name:'Regenbogen',art:'privat',gruppe:'Zeitlos',stufe:'mittel',rows:['rrrrrrr','rrooooooorr','rooyyyyyyyoor','royygggggyyor','roygbbbbbgyor','roygbvvvbgyor','roygbvwvbgyor','wwwwwwwwwwwww','wwwwwwwwwww']},
+  {id:'lbiene',name:'Biene',art:'privat',gruppe:'Zeitlos',stufe:'mittel',rows:['yyyyy','ysyyysy','yysssyy','sssssssss','yyyyyyyyy','sssssssss','yyyyyyy','sssss','yyy','s'],
+    beine:[{r:1,n:2,f:1,a:70,c:'s',fc:'s',w:'Fühler'},{r:4,n:3,f:1,a:40,c:'w',fc:'w',w:'Flügel'}]},
+  {id:'lpandakopf',name:'Panda-Kopf',art:'privat',gruppe:'Zeitlos',stufe:'mittel',rows:['wwwwwww','wwwwwwwww','wwsswwwssww','wssswwwsssw','wsswwswwssw','wwwswswww','wwwwwww','wwwww'],
+    beine:[{r:1,n:1,f:3,a:60,c:'s',fc:'s',w:'Ohren'}]},
+  {id:'leinhorn',name:'Einhorn-Kopf',art:'privat',gruppe:'Zeitlos',stufe:'mittel',rows:['y','yy','yyy','qvwwwvq','qvwwwwwvq','qvswwwsvq','qvwwwwwvq','vpwwwwwpv','wwwwwww','wnwwwnw','wwwww'],
+    beine:[{r:4,n:2,f:1,a:60,c:'w',fc:'p',w:'Ohren'}]},
+  {id:'lfussball',name:'Fussball',art:'privat',gruppe:'Zeitlos',stufe:'leicht',rows:['wsssw','wwwwswwww','swwwwwwwwws','sswwssswwss','swwwssswwws','wsswwwssw','swwws']},
+  {id:'ledelweiss',name:'Edelweiss',art:'privat',gruppe:'Zeitlos',stufe:'leicht',rows:['w','ww','www','wwwwyyywwww','wwwwwyyywwwww','wwwwyyywwww','www','ww','w'],
+    beine:[{r:4,n:3,f:1,a:45,c:'w',fc:'w',w:'Blütenblätter'},{r:6,n:3,f:1,a:-45,c:'w',fc:'w',w:'Blütenblätter'}]},
+  {id:'ldonut',name:'Donut',art:'privat',gruppe:'Zeitlos',stufe:'mittel',rows:['qqqqq','qyqqlqqrq','qqlqwwwqqyq','cqqqwwwqqqc','ccqyqqqlqcc','ccccccccc','ccccc']},
+  {id:'lpizza',name:'Pizza-Stück',art:'privat',gruppe:'Zeitlos',stufe:'mittel',rows:['ccccccccccc','yyyyyyyyyy','yrryyyrry','yrryyrry','yyyyyyy','yyrryy','yrryy','yyyy','yyy','yy','y']},
+  {id:'lbuchstabea',name:'Buchstabe A',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wwuuuww','wuwwwuw','wuwwwuw','wuuuuuw','wuwwwuw','wuwwwuw','wuwwwuw','wwwww']},
+  {id:'lbuchstabeb',name:'Buchstabe B',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wuuuuww','wuwwwuw','wuwwwuw','wuuuuww','wuwwwuw','wuwwwuw','wuuuuww','wwwww']},
+  {id:'lbuchstabec',name:'Buchstabe C',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wwuuuww','wuwwwuw','wuwwwww','wuwwwww','wuwwwww','wuwwwuw','wwuuuww','wwwww']},
+  {id:'lbuchstabed',name:'Buchstabe D',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wuuuuww','wuwwwuw','wuwwwuw','wuwwwuw','wuwwwuw','wuwwwuw','wuuuuww','wwwww']},
+  {id:'lbuchstabee',name:'Buchstabe E',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wuuuuuw','wuwwwww','wuwwwww','wuuuuww','wuwwwww','wuwwwww','wuuuuuw','wwwww']},
+  {id:'lbuchstabef',name:'Buchstabe F',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wuuuuuw','wuwwwww','wuwwwww','wuuuuww','wuwwwww','wuwwwww','wuwwwww','wwwww']},
+  {id:'lbuchstabeg',name:'Buchstabe G',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wwuuuww','wuwwwuw','wuwwwww','wuwuuuw','wuwwwuw','wuwwwuw','wwuuuuw','wwwww']},
+  {id:'lbuchstabeh',name:'Buchstabe H',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wuwwwuw','wuwwwuw','wuwwwuw','wuuuuuw','wuwwwuw','wuwwwuw','wuwwwuw','wwwww']},
+  {id:'lbuchstabei',name:'Buchstabe I',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wwuuuww','wwwuwww','wwwuwww','wwwuwww','wwwuwww','wwwuwww','wwuuuww','wwwww']},
+  {id:'lbuchstabej',name:'Buchstabe J',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wwwuuuw','wwwwuww','wwwwuww','wwwwuww','wwwwuww','wuwwuww','wwuuwww','wwwww']},
+  {id:'lbuchstabek',name:'Buchstabe K',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wuwwwuw','wuwwuww','wuwuwww','wuuwwww','wuwuwww','wuwwuww','wuwwwuw','wwwww']},
+  {id:'lbuchstabel',name:'Buchstabe L',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wuwwwww','wuwwwww','wuwwwww','wuwwwww','wuwwwww','wuwwwww','wuuuuuw','wwwww']},
+  {id:'lbuchstabem',name:'Buchstabe M',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wuwwwuw','wuuwuuw','wuwuwuw','wuwuwuw','wuwwwuw','wuwwwuw','wuwwwuw','wwwww']},
+  {id:'lbuchstaben',name:'Buchstabe N',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wuwwwuw','wuwwwuw','wuuwwuw','wuwuwuw','wuwwuuw','wuwwwuw','wuwwwuw','wwwww']},
+  {id:'lbuchstabeo',name:'Buchstabe O',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wwuuuww','wuwwwuw','wuwwwuw','wuwwwuw','wuwwwuw','wuwwwuw','wwuuuww','wwwww']},
+  {id:'lbuchstabep',name:'Buchstabe P',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wuuuuww','wuwwwuw','wuwwwuw','wuuuuww','wuwwwww','wuwwwww','wuwwwww','wwwww']},
+  {id:'lbuchstabeq',name:'Buchstabe Q',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wwuuuww','wuwwwuw','wuwwwuw','wuwwwuw','wuwuwuw','wuwwuww','wwuuwuw','wwwww']},
+  {id:'lbuchstaber',name:'Buchstabe R',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wuuuuww','wuwwwuw','wuwwwuw','wuuuuww','wuwuwww','wuwwuww','wuwwwuw','wwwww']},
+  {id:'lbuchstabes',name:'Buchstabe S',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wwuuuuw','wuwwwww','wuwwwww','wwuuuww','wwwwwuw','wwwwwuw','wuuuuww','wwwww']},
+  {id:'lbuchstabet',name:'Buchstabe T',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wuuuuuw','wwwuwww','wwwuwww','wwwuwww','wwwuwww','wwwuwww','wwwuwww','wwwww']},
+  {id:'lbuchstabeu',name:'Buchstabe U',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wuwwwuw','wuwwwuw','wuwwwuw','wuwwwuw','wuwwwuw','wuwwwuw','wwuuuww','wwwww']},
+  {id:'lbuchstabev',name:'Buchstabe V',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wuwwwuw','wuwwwuw','wuwwwuw','wuwwwuw','wuwwwuw','wwuwuww','wwwuwww','wwwww']},
+  {id:'lbuchstabew',name:'Buchstabe W',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wuwwwuw','wuwwwuw','wuwwwuw','wuwuwuw','wuwuwuw','wuwuwuw','wwuwuww','wwwww']},
+  {id:'lbuchstabex',name:'Buchstabe X',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wuwwwuw','wuwwwuw','wwuwuww','wwwuwww','wwuwuww','wuwwwuw','wuwwwuw','wwwww']},
+  {id:'lbuchstabey',name:'Buchstabe Y',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wuwwwuw','wuwwwuw','wwuwuww','wwwuwww','wwwuwww','wwwuwww','wwwuwww','wwwww']},
+  {id:'lbuchstabez',name:'Buchstabe Z',art:'privat',gruppe:'Buchstaben',stufe:'leicht',rows:['wwwww','wuuuuuw','wwwwwuw','wwwwuww','wwwuwww','wwuwwww','wuwwwww','wuuuuuw','wwwww']},
+  {id:'pglobi',name:'Globi',art:'privat',gruppe:'Schweizer Figuren',stufe:'schwer',rows:['s','sssss','sssssssss','bbbbbbb','bwsbswb','byyyyyb','bbyyybb','bbbbb','bbbbbbb','bbbbbbbbb','bbbbbbbbb','rsrsrsrsr','srsrsrsrs','rsrsrsrsr','srsrsrs'],
+    beine:[{r:10,n:3,f:1,a:-35,c:'b',fc:'b',w:'Arme'},{r:15,n:2,f:3,a:-75,c:'y',fc:'y',w:'Beine'}]},
+  {id:'ppapamoll',name:'Papa Moll',art:'privat',gruppe:'Schweizer Figuren',stufe:'schwer',rows:['s','fffff','fffffff','fffffffff','fnsnfnsnf','fffffffff','ffsssssff','fffffff','fffff','sswrwss','ssswwrwwsss','ssswwrwwsss','ssswwwwwsss','sssssssss','nnnnnnn'],
+    beine:[{r:10,n:3,f:1,a:-35,c:'s',fc:'f',w:'Arme'},{r:15,n:2,f:3,a:-75,c:'n',fc:'s',w:'Beine'}]},
+  {id:'pschellenursli',name:'Schellen-Ursli',art:'privat',gruppe:'Schweizer Figuren',stufe:'schwer',rows:['r','rr','rrr','rrrrr','wwwwwww','kfffffk','kfsfsfk','fffrfff','fffff','bbbbbbbbb','bbbbsbbbb','bbbcccbbb','bbcycccbb','bcycccccb','cyccccccccc','nnnnnnnnnnn','s'],
+    beine:[{r:10,n:3,f:1,a:-30,c:'b',fc:'f',w:'Arme'},{r:16,n:1,f:3,a:-75,c:'k',fc:'s',w:'Beine'}]},
+  {id:'pglocke',name:'Glocke',art:'privat',gruppe:'Schweizer Figuren',stufe:'mittel',rows:['rrrrr','rrwrr','rrrrr','nnn','ccccc','cyccccc','cyccccc','cyccccccc','cyccccccc','cyccccccccc','ccccccccccc','yyyyyyyyyyy','s']},
+  {id:'pheidi',name:'Heidi',art:'privat',gruppe:'Schweizer Figuren',stufe:'schwer',rows:['kkk','kkkkk','kkkkkkk','kfffffk','kfsfsfk','fpfrfpf','fffff','wwwww','wrrrrrw','rrwwwrr','rrwwwwwrr','rrwwwwwrr','rrwwwwwwwrr','rrrrrrrrrrr'],
+    beine:[{r:4,n:4,f:1,a:-70,c:'k',fc:'r',w:'Zöpfe'},{r:9,n:3,f:1,a:-35,c:'w',fc:'f',w:'Arme'},{r:14,n:2,f:3,a:-75,c:'w',fc:'s',w:'Beine'}]},
+  {id:'pschwaenli',name:'Geiss Schwänli',art:'privat',gruppe:'Schweizer Figuren',stufe:'mittel',rows:['www','wwwww','wwwwwww','wswwwsw','wwwwwww','wwpww','www','rrryrrr','wwwwwwwww','wwwwwwwww','wwwwwwwww','wwwwwww'],
+    beine:[{r:1,n:3,f:1,a:65,c:'n',fc:'n',w:'Hörner'},{r:3,n:2,f:1,a:-10,c:'w',fc:'p',w:'Ohren'},{r:12,n:2,f:1,a:-80,c:'w',fc:'s',w:'Beine'}]},
+  {id:'pbaerli',name:'Geiss Bärli',art:'privat',gruppe:'Schweizer Figuren',stufe:'mittel',rows:['kkk','kkkkk','kkkkkkk','kskkksk','kkkkkkk','kcscc','ccc','bbbybbb','kkkkkkkkk','kkcccccck','kkcccckkk','kkkkkkk'],
+    beine:[{r:1,n:3,f:1,a:65,c:'n',fc:'n',w:'Hörner'},{r:3,n:2,f:1,a:-10,c:'k',fc:'c',w:'Ohren'},{r:12,n:2,f:1,a:-80,c:'k',fc:'s',w:'Beine'}]},
+  {id:'pkasperli',name:'Kasperli',art:'privat',gruppe:'Schweizer Figuren',stufe:'schwer',rows:['y','r','rr','rrr','rrrr','rrrrr','rrrrrrr','kfffffk','fsfffsf','fpfrfpf','ffsssff','fffff','wwwwwwwww','rrrrsyyyy','rrrrsyyyy','rrrrsyyyy','rrrryyyy'],
+    beine:[{r:14,n:3,f:1,a:-30,c:'r',fc:'f',w:'Arme'},{r:17,n:2,f:3,a:-75,c:'y',fc:'s',w:'Beine'}]},
+  {id:'pzipfelmuetze',name:'Zipfelmütze',art:'privat',gruppe:'Schweizer Figuren',stufe:'leicht',rows:['www','wwww','www','r','rr','rrr','rrrr','rrrrr','rrrrrr','rrrrrrr','wwwwwwwww','wwwwwwwww']},
+  {id:'pknorrli',name:'Knorrli',art:'privat',gruppe:'Schweizer Figuren',stufe:'mittel',rows:['r','rrr','rrrrr','rrrrrrrrr','yyyyyyy','ysyyysy','yyyoyyy','yysssyy','yyyyy','yyyyy','yyyyy','yyyyy'],
+    beine:[{r:10,n:3,f:1,a:-35,c:'y',fc:'y',w:'Arme'},{r:12,n:2,f:3,a:-75,c:'y',fc:'r',w:'Beine'}]},
+  {id:'pbarry',name:'Barry',art:'privat',gruppe:'Schweizer Figuren',stufe:'schwer',rows:['kkwkk','kkkwkkk','kswwwsk','kwwwwwk','wwsww','www','rrrrrrr','wwncccnww','kwcccccwk','kwncccnwk','kkwwwwwkk','kkkwwwkkk'],
+    beine:[{r:2,n:3,f:1,a:-60,c:'k',fc:'k',w:'Ohren'},{r:12,n:2,f:3,a:-80,c:'w',fc:'w',w:'Beine'}]},
+  {id:'pwappensh',name:'Wappen Schaffhausen',art:'privat',gruppe:'Heimat Schweiz',stufe:'mittel',rows:['yyyyyyyyyyy','yyssyyyyyyy','ysyysyyyyyy','ysssssyyyyy','sssssyyyyyy','yyyssyyyyyy','yyyssssssyy','ysssssssssy','yyyysssssss','yyyysyyysyy','yyysyyysy','yyyyyyy','yyyyy','yyy']},
+  {id:'pwappenti',name:'Wappen Tessin',art:'privat',gruppe:'Heimat Schweiz',stufe:'leicht',rows:['rrrrrbbbbb','rrrrrbbbbb','rrrrrbbbbb','rrrrrbbbbb','rrrrrbbbbb','rrrrbbbb','rrrbbb','rrbb','rb']},
+  {id:'pwappenlu',name:'Wappen Luzern',art:'privat',gruppe:'Heimat Schweiz',stufe:'leicht',rows:['bbbbbwwwww','bbbbbwwwww','bbbbbwwwww','bbbbbwwwww','bbbbbwwwww','bbbbwwww','bbbwww','bbww','bw']},
+  {id:'pmatterhorn',name:'Matterhorn',art:'privat',gruppe:'Heimat Schweiz',stufe:'mittel',rows:['llllnllllll','lllnnwlllll','lllnnwwllll','llnnnnwllll','llnnnnwwlll','lnnnnnnwwll','lnnnnnnnwwl','nnnnnnnnnww','nnnnnnnnnnw','gnnnnnnnnng','ggggggggggg']},
+  {id:'pkuh',name:'Kuh mit Glocke',art:'privat',gruppe:'Heimat Schweiz',stufe:'mittel',rows:['wwwww','wwwwwww','wswwwsw','wwwwwww','ppppppp','pspsp','kkkkk','wwwyyywww','swwyyyyywws','sswwwswwwss','wwwwwwwwwww','wsswwwwwssw','wwwwwwwww'],
+    beine:[{r:1,n:2,f:1,a:55,c:'c',fc:'c',w:'Hörner'},{r:3,n:1,f:1,a:5,c:'w',fc:'p',w:'Ohren'},{r:13,n:2,f:3,a:-75,c:'w',fc:'s',w:'Beine'}]},
+  {id:'pkuhglocke',name:'Kuhglocke',art:'privat',gruppe:'Heimat Schweiz',stufe:'mittel',rows:['rrrrrrrrr','rrwrrrwrr','rrrrrrrrr','kkk','yyyyy','yyyyyy','ywyyyyy','ywyyyyyy','ywyyyyyyy','yyyyyyyyyy','yyyyyyyyyyy','nnn']},
+  {id:'psteinbock',name:'Steinbock',art:'privat',gruppe:'Heimat Schweiz',stufe:'mittel',rows:['nnn','nnnnn','nsnnnsn','nnnnnnn','nnnnn','nnsnn','nnsnn','nnnnnnn','nnnnnnnnn','nnncccnnn','nnnnnnnnn','nnnnnnn'],
+    beine:[{r:1,n:5,f:1,a:75,c:'k',fc:'k',w:'Hörner'},{r:2,n:1,f:1,a:15,c:'n',fc:'n',w:'Ohren'},{r:12,n:2,f:3,a:-75,c:'n',fc:'s',w:'Beine'}]},
+  {id:'pmurmeli',name:'Murmeltier',art:'privat',gruppe:'Heimat Schweiz',stufe:'mittel',rows:['kkk','kkkkk','kkkkkkk','kskkksk','kkcscck','kcwwck','kkkkk','kkcccck','kkcccccck','kkcccccck','kkcccck','kkkkk'],
+    beine:[{r:2,n:0,f:1,a:40,c:'k',fc:'k',w:'Ohren'},{r:8,n:2,f:1,a:-30,c:'k',fc:'s',w:'Arme'},{r:12,n:1,f:3,a:-70,c:'k',fc:'s',w:'Füsse'}]},
+  {id:'palphorn',name:'Alphorn',art:'privat',gruppe:'Heimat Schweiz',stufe:'leicht',rows:['ss','kk','kk','cc','kk','kk','kk','cc','kk','kk','kkk','kkkk','kkkkk','krwrk','kkkkkkk','ccccccc']},
+  {id:'penzian',name:'Enzian',art:'privat',gruppe:'Heimat Schweiz',stufe:'mittel',rows:['bubbbbbub','ubbbbbbbu','bbbbbbbbb','ubbbbbbu','bbbbbbb','ubbbbu','bbbbb','hhhh','ggg','dgd','ggg'],
+    beine:[{r:9,n:3,f:1,a:10,c:'g',fc:'g',w:'Blätter'}]},
+  {id:'ptellapfel',name:'Tell-Apfel mit Pfeil',art:'privat',gruppe:'Heimat Schweiz',stufe:'mittel',rows:['k','kd','rrrrr','rwrrrrr','rwrrrrrrr','wwkkkkkkkkkkn','rrrrrrrrr','rrrrrrr','rrrrr']},
+  {id:'parmbrust',name:'Armbrust',art:'privat',gruppe:'Heimat Schweiz',stufe:'mittel',rows:['n','nkn','nnnnnnnnnnn','skkkkks','skkks','nkn','kkk','kkk','kkk','kkkkk','kkkkk'],
+    beine:[{r:3,n:1,f:1,a:-25,c:'n',fc:'s',w:'Bogen'}]},
+  {id:'plampion',name:'1.-August-Lampion',art:'privat',gruppe:'Heimat Schweiz',stufe:'mittel',rows:['n','sss','rrrrrrr','rrrrrrrrr','rrrrrwrrrrr','rrrrrwrrrrr','rrwwwwwwwrr','rrrrrwrrrrr','rrrrrwrrrrr','rrrrrrrrr','rrrrrrr','sss']},
+  {id:'ppostauto',name:'Postauto',art:'privat',gruppe:'Heimat Schweiz',stufe:'mittel',rows:['yyyyyyyyyyy','ylllylllyllly','ylllylllyllly','yyyyyyyyyyyyy','ryyyyyyyyyyyw','sssssssssssss'],
+    beine:[{r:6,n:0,f:3,a:-80,c:'s',fc:'s',w:'Räder'}]},
+  {id:'puhr',name:'SBB-Bahnhofsuhr',art:'privat',gruppe:'Heimat Schweiz',stufe:'mittel',rows:['sssssss','swwwswwws','swwwwswwwws','sswwwssswss','swwwwrwwwws','swwrrrwws','sssssss']},
+  {id:'pfondue',name:'Fondue-Caquelon mit Gabel',art:'privat',gruppe:'Heimat Schweiz',stufe:'mittel',rows:['b','n','n','ncn','yyyyyyyyy','rrrrrrrrrrr','rwrrrwrrrwr','rrrrrrrrrrr','rrrrrrrrr','rrrrrrr','sssssssss','sooos','sssssss']},
+  {id:'pschoggi',name:'Schoggi-Dreiecksriegel',art:'privat',gruppe:'Heimat Schweiz',stufe:'mittel',rows:['ckk','cckkk','ccckkkk','ckk','cckkk','ccckkkk','ckk','cckkk','ccckkkk','ckk','cckkk','ccckkkk','yyyyyyy','rrrrrrr','yyyyyyy']},
+  {id:'psennenhund',name:'Berner Sennenhund',art:'privat',gruppe:'Heimat Schweiz',stufe:'schwer',rows:['sssss','sssssss','ssoswsoss','sswswswss','sowwwwwos','owwswwo','wwwww','swwws','sswwwss','ssswwwsss','sssswssss','sssssssss'],
+    beine:[{r:2,n:3,f:1,a:-60,c:'s',fc:'s',w:'Ohren'},{r:12,n:2,f:3,a:-75,c:'o',fc:'w',w:'Pfoten'}]},
+  {id:'pfasnacht',name:'Fasnachtsmaske',art:'privat',gruppe:'Heimat Schweiz',stufe:'mittel',rows:['yryby','ybyryyy','yyyyyyyyy','wwwwwwwww','wswwrwwsw','wwwwrwwww','wqwrrrwqw','wwwrrrwww','wwsssww','wwwww'],
+    beine:[{r:2,n:2,f:1,a:30,c:'y',fc:'r',w:'Haarbüschel'}]},
+  {id:'pgaemse',name:'Gämse am Berg',art:'privat',gruppe:'Heimat Schweiz',stufe:'schwer',rows:['kwwwk','wswsw','wswsw','wwsww','www','kkkkk','kkkkkkk','kkkkkkk','ksnsk','nsnnnsn','nnnnnnnnn','wnnnnnnnnnw','ddddddddddddd'],
+    beine:[{r:1,n:2,f:1,a:80,c:'s',fc:'s',w:'Hörner'},{r:2,n:1,f:1,a:30,c:'k',fc:'k',w:'Ohren'}]},
+  {id:'ptrikotschweiz',name:'Fussballtrikot Schweiz',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['rrrwwwrrr','rrrrrrrrrrrrr','rrrrrrrrrrrrr','rrrrrrrrr','rrrrwrrrr','rrwwwwwrr','rrrrwrrrr','rrrrrrrrr','rrrrrrrrr']},
+  {id:'ptrikotstreifen',name:'Fussballtrikot gestreift',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['swswwwsws','swswswswswsws','swswswswswsws','swswswsws','swswswsws','swswswsws','swswswsws','swswswsws','swswswsws']},
+  {id:'ptrikot10',name:'Fussballtrikot mit Rückennummer 10',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['bbbwwwbbb','bbbbbbbbbbbbb','bbbbbbbbbbbbb','bbbbbbbbb','bbwbbwwwb','bwwbbwbwb','bbwbbwbwb','bbwbbwbwb','bwwwbwwwb','bbbbbbbbb']},
+  {id:'pfussballschuh',name:'Fussballschuh mit Stollen',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['ggggggggg','gbbbggggggg','gbbbbwggggg','gbbbbbwbbgg','gbbbbbbbbbg','gsssssssssg','gngngngng']},
+  {id:'pfussballtor',name:'Fussballtor mit Ball',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['wwwwwwwwwww','wnsnsnsnsnw','wnnnnnnnnnw','wnsnsnsnsnw','wnnnwwwnnnw','wnnwwswwnnw','wnnwswswnnw','wnnnwwwnnnw','ggggggggggg']},
+  {id:'ppokal',name:'Pokal',art:'privat',gruppe:'Sport',stufe:'leicht',rows:['yyyyyyyyy','ywyyyyyyy','ywyyyyy','yyyyyyy','yyyyy','yyy','yy','yyy','yyyyy','kkkkkkk'],
+    beine:[{r:2,n:1,f:3,a:-10,c:'y',fc:'y',w:'Henkel'}]},
+  {id:'pmedaille',name:'Goldmedaille mit Band',art:'privat',gruppe:'Sport',stufe:'leicht',rows:['rwr','yyyyy','yyooyyy','yyyyoyyyy','yyyyoyyyy','yyoooyy','yyyyy'],
+    beine:[{r:1,n:5,f:1,a:70,c:'r',fc:'r',w:'Band'}]},
+  {id:'ppodest',name:'Siegerpodest 1-2-3',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['yyyyy','yysyy','yssyy','yysyy','yysyy','nnnysssyooo','sssyyyyysss','nnsyyyyyoos','sssyyyyysss','snnyyyyyoos','sssyyyyysss','nnnyyyyyooo']},
+  {id:'peishockey',name:'Eishockeyschläger mit Puck',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['lllllkk','lllllkkll','lllllkkllll','llllkklllll','lllkkllllll','lssssllllll','llllllssssl','lllllssss','lllllll']},
+  {id:'pgoaliemaske',name:'Eishockey-Goalie-Maske',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['rrrrr','rrrrrrr','rrrrwrrrr','rrrrwrrrr','nnnnnnnnn','nsnsnsnsn','nsnsnsnsn','nnnnnnnnn','rnsnsnsnr','rnnnnnr','rnsnsnr','nnnnn']},
+  {id:'punihockey',name:'Unihockeystock mit Lochball',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['ssccccc','ccssccccc','ccccssccccc','cccccsscccc','ccccccssccc','ccccccqqqqc','cccwwwcqqqc','ccwnwnwcccc','cwnwnwccc','cwwwccc']},
+  {id:'pbasketball',name:'Basketball',art:'privat',gruppe:'Sport',stufe:'leicht',rows:['oosoo','osoosooso','ooosososooo','sssssssssss','ooosososooo','osoosooso','oosoo']},
+  {id:'pvolleyball',name:'Volleyball',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['yyyyy','yyyywwwww','yyywwwwwwww','yyywwbbbwww','byyyybbbbww','bbyyyyybbbw','bbbbbbbbb','bbbbb']},
+  {id:'ptennisschlaeger',name:'Tennisschläger mit Ball',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['hhh','hhhh','hhh','bbbbb','bbwwwbb','bwwwwwwwb','bwwwwwwwb','bwwwwwwwb','bwwwwwwwb','bwwwwwwwb','bbwwwbb','bbbbb','bwb','bb','ss','ss','ss','ss','ss']},
+  {id:'ppingpong',name:'Pingpong-Schläger mit Ball',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['ooo','ooo','rrrrr','rrrrrrr','rrrrrrrrr','rrrrrrrrr','rrrrrrrrr','rrrrrrr','rrrrr','kkk','kkk','kkk','kkk']},
+  {id:'pski',name:'Ski mit Stöcken',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['sswss','rywyr','rywyr','rywyr','rywyr','rywyr','nnwnn','nnwnn','rywyr','rywyr','rywyr','rywyr','rywyr','rywyr','sswss'],
+    beine:[{r:2,n:13,f:1,a:-81,c:'n',fc:'s',w:'Stöcke'}]},
+  {id:'psnowboard',name:'Snowboard',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['bbb','bbbbb','byyyb','bbbbb','sssss','sssss','bbbbb','booob','bbbbb','sssss','sssss','bbbbb','byyyb','bbbbb','bbb']},
+  {id:'pschlitten',name:'Schlitten (Davoser)',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['kkkkkkkkkkk','ccccccccccc','wkwwkwwwkwwkw','skwwkwwwkwwks','kkkkkkkkkkkkk','sssssssssss']},
+  {id:'pskateboard',name:'Skateboard',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['ooo','ooooo','onnno','ooooo','ooooo','oyyyo','ooooo','ooooo','oyyyo','ooooo','ooooo','onnno','ooooo','ooo'],
+    beine:[{r:3,n:0,f:3,a:0,c:'s',fc:'s',w:'Räder'},{r:12,n:0,f:3,a:0,c:'s',fc:'s',w:'Räder'}]},
+  {id:'ptrottinett',name:'Trottinett',art:'privat',gruppe:'Sport',stufe:'leicht',rows:['ssnnnnnss','r','r','r','r','r','r','r','r','r','rrrrrrrrrrr'],
+    beine:[{r:11,n:0,f:3,a:-40,c:'s',fc:'s',w:'Räder'}]},
+  {id:'pvelo',name:'Velo',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['kkwwwss','rrrrr','ssswrwrwsss','ssnssrrrssnss','ssswwswwsss']},
+  {id:'pturnschuh',name:'Turnschuh',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['wwwww','rrrrwrr','rwrrrrwrr','rrrrrrrrwrr','rrrrrrrrrrwww','wwwwwwwwwwwww','nnnnnnnnnnnnn']},
+  {id:'pstoppuhr',name:'Stoppuhr',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['nnn','n','sssss','swwwswwws','swwwwrwwwws','sswwwswwwss','swwwwwwwwws','swwwswwws','sssss'],
+    beine:[{r:4,n:0,f:1,a:50,c:'n',fc:'n',w:'Knöpfe'}]},
+  {id:'pschwingerhose',name:'Schwingerhose (Zwilchhose)',art:'privat',gruppe:'Sport',stufe:'mittel',rows:['kkkkkkkkk','ccccccccc','ccccccccccc','cccccwccccc','ccccwwwcccc','cccccwwwccccc','ccccwwwwwcccc','kkkkwwwwwkkkk']},
+  // ── Ende neue Figuren ──
+  {id:'schlange',name:'Schlange',stufe:'leicht',rows:['r','ggg','sgggs','ggg','gg','gyg','ggg','yyy','ggg','gyg','ggg','yyy','ggg','gyg','gg','yy','gg','g','y','g']},
+  {id:'eidechse',name:'Eidechse',stufe:'leicht',rows:['ggg','sgggs','ggg','gg','gghgg','gghgg','ghhhg','gghgg','gghgg','ggg','gg','gg','g','g','h'],
+    beine:[{r:5,n:2,f:3,a:22,c:'g',fc:'h',w:'Beine'},{r:9,n:2,f:3,a:-22,c:'g',fc:'h',w:'Beine'}]},
+  {id:'marienkaefer',name:'Marienkäfer',stufe:'leicht',rows:['sss','swsws','rrsrr','rrrsrrr','rsrsrsr','rrrsrrr','srrsrrs','rrsrr','rsr'],
+    beine:[{r:4,n:2,f:1,a:25,c:'s',fc:'s',w:'Beine'},{r:6,n:2,f:1,a:0,c:'s',fc:'s',w:'Beine'},{r:8,n:2,f:1,a:-25,c:'s',fc:'s',w:'Beine'}]},
+  {id:'fisch',name:'Clownfisch',stufe:'leicht',rows:['oo','soos','oooo','wwwww','ooooo','ooooo','wwww','oooo','ooo','ww','oo','ooo','ooooo','oowoo'],
+    beine:[{r:5,n:0,f:3,a:-10,c:'o',fc:'o',w:'Flossen'}]},
+  {id:'schildkroete',name:'Schildkröte',stufe:'mittel',rows:['gg','sggs','gg','kkkk','kkckk','kckkck','kkkckkk','kckkkck','kkkckkk','kckkck','kkckk','kkkk','g'],
+    beine:[{r:5,n:1,f:3,a:28,c:'g',fc:'g',w:'Beine'},{r:11,n:1,f:3,a:-28,c:'g',fc:'g',w:'Beine'}]},
+  {id:'krokodil',name:'Krokodil',stufe:'mittel',rows:['gg','gg','ggg','ggg','gggg','sggggs','gggg','ggg','ggdgg','gdgdg','ggdgg','gdgdg','ggdgg','gdg','ggg','gdg','gg','gd','g','g','d'],
+    beine:[{r:9,n:2,f:3,a:22,c:'g',fc:'d',w:'Beine'},{r:13,n:2,f:3,a:-22,c:'g',fc:'d',w:'Beine'}]},
+  {id:'libelle',name:'Libelle',stufe:'mittel',rows:['bb','sbbs','bb','bbb','bbb','bb','b','l','b','l','b','l','b'],
+    beine:[{r:4,n:1,f:9,a:28,c:'b',fc:'l',w:'Flügel'},{r:5,n:1,f:8,a:-28,c:'b',fc:'l',w:'Flügel'}]},
+  {id:'axolotl',name:'Axolotl',stufe:'mittel',rows:['ppp','ppppp','psppsp','pppppp','pppp','pppp','ppqpp','ppqpp','ppqpp','pppp','ppp','pp','pq','p','q'],
+    beine:[{r:2,n:2,f:1,a:55,c:'q',fc:'q',w:'Kiemen'},{r:3,n:2,f:1,a:18,c:'q',fc:'q',w:'Kiemen'},{r:7,n:2,f:3,a:15,c:'p',fc:'p',w:'Beine'},{r:10,n:2,f:3,a:-22,c:'p',fc:'p',w:'Beine'}]},
+  {id:'schmetterling',name:'Schmetterling',stufe:'schwer',rows:['kk','rkr','rrkrr','rrrkrrr','rryrkryrr','rrrrkrrrr','rrrkrrr','rkr','yykyy','yyykyyy','yrykyry','yykyy','k'],
+    beine:[{r:1,n:3,f:1,a:62,c:'k',fc:'k',w:'Fühler'}]},
+  {id:'frosch',name:'Frosch',stufe:'mittel',rows:['wggw','swggws','gggggg','ggrrgg','gggg','ghhhg','ghhhhg','ghhhhg','ghhhg','gggg','gg'],
+    beine:[{r:6,n:2,f:3,a:20,c:'g',fc:'y',w:'Arme'},{r:10,n:3,f:3,a:-35,c:'g',fc:'y',w:'Beine'}]},
+  {id:'spinne',name:'Spinne',stufe:'mittel',rows:['sss','swsws','sssss','sss','sssss','sssssss','sssrsss','ssrrrss','sssrsss','sssss','sss'],
+    beine:[{r:3,n:3,f:1,a:45,c:'s',fc:'s',w:'Beine'},{r:5,n:4,f:1,a:12,c:'s',fc:'s',w:'Beine'},{r:7,n:4,f:1,a:-15,c:'s',fc:'s',w:'Beine'},{r:9,n:3,f:1,a:-42,c:'s',fc:'s',w:'Beine'}]},
+  {id:'affe',name:'Affe',stufe:'mittel',rows:['kkk','kkkkk','kcscsck','kccccck','kcssck','kkkk','kkk','kkckk','kcccck','kcccck','kkckk','kkkk'],
+    beine:[{r:3,n:0,f:3,a:0,c:'k',fc:'c',w:'Ohren'},{r:8,n:4,f:3,a:5,c:'k',fc:'c',w:'Arme'},{r:12,n:4,f:3,a:-60,c:'k',fc:'c',w:'Beine'}]},
+  {id:'baer',name:'Teddybär',stufe:'mittel',rows:['kkkk','kkkkkk','kskksk','kkcckk','kcsck','kkkk','kkkkkk','kkcckk','kcccck','kkcckk','kkkk'],
+    beine:[{r:1,n:0,f:3,a:40,c:'k',fc:'k',w:'Ohren'},{r:8,n:2,f:3,a:10,c:'k',fc:'c',w:'Arme'},{r:11,n:1,f:3,a:-60,c:'k',fc:'c',w:'Beine'}]},
+  {id:'maus',name:'Maus',stufe:'leicht',rows:['q','nnn','snnns','nnnnn','nnnnnn','nnnnnnn','nnnnnnn','nnnnnn','nnnn','nn','q','q','q','q','q'],
+    beine:[{r:4,n:0,f:3,a:35,c:'n',fc:'p',w:'Ohren'},{r:9,n:1,f:1,a:-40,c:'n',fc:'p',w:'Füsse'}]},
+  {id:'eule',name:'Eule',stufe:'mittel',rows:['kkkk','kkkkkk','kwwkwwk','kwskswk','kkkokkk','kccccck','kckckck','kccccck','kckckck','kkcckk','kkkk'],
+    beine:[{r:1,n:1,f:1,a:65,c:'k',fc:'k',w:'Federohren'},{r:11,n:0,f:3,a:-70,c:'o',fc:'o',w:'Füsse'}]},
+  {id:'fuchs',name:'Fuchskopf',stufe:'leicht',rows:['oooooo','oooooooo','wosoosow','wwooooww','wwwoowww','wwwwww','wwww','ss'],
+    beine:[{r:1,n:2,f:1,a:60,c:'o',fc:'s',w:'Ohren'}]},
+  {id:'hund',name:'Hund',stufe:'mittel',rows:['www','wwwww','wswwsw','wwwwww','wwsww','www','rrrr','wwwww','wwwwww','wwwwww','wwwww','ww'],
+    beine:[{r:2,n:2,f:1,a:-60,c:'s',fc:'s',w:'Ohren'},{r:8,n:2,f:1,a:-5,c:'w',fc:'w',w:'Pfoten'},{r:11,n:2,f:1,a:-70,c:'w',fc:'w',w:'Beine'}]},
+  {id:'kuh',name:'Kuh',stufe:'mittel',rows:['wwww','wwwwww','wswwsw','wppppw','pspsp','wwww','wsswwww','wsswwsw','wwwwssw','swwwssw','wwwww','ww'],
+    beine:[{r:1,n:1,f:1,a:55,c:'c',fc:'c',w:'Hörner'},{r:7,n:3,f:1,a:20,c:'w',fc:'s',w:'Beine'},{r:11,n:3,f:1,a:-40,c:'w',fc:'s',w:'Beine'}]},
+  {id:'schaf',name:'Schaf',stufe:'leicht',rows:['www','wwwww','wwcccww','wcscscw','wcccccw','wwcpcww','wwwwwww','wwwwwww','wwwwwww','wwwww','www'],
+    beine:[{r:4,n:1,f:1,a:0,c:'c',fc:'c',w:'Ohren'},{r:10,n:2,f:1,a:-70,c:'s',fc:'s',w:'Beine'}]},
+  {id:'hase',name:'Hase',stufe:'mittel',rows:['www','wwwww','wswwsw','wwqww','wwww','wwwwww','wwppww','wwpppww','wwppww','wwww'],
+    beine:[{r:1,n:4,f:1,a:75,c:'w',fc:'p',w:'Ohren'},{r:6,n:2,f:1,a:0,c:'w',fc:'w',w:'Arme'},{r:10,n:2,f:3,a:-60,c:'w',fc:'w',w:'Beine'}]},
+  {id:'schwein',name:'Schwein',stufe:'leicht',rows:['ppp','ppppp','psppsp','ppqqqpp','pqsqsqp','ppqqqpp','ppppp','pppppp','ppppppp','pppppp','pppp'],
+    beine:[{r:1,n:0,f:3,a:50,c:'p',fc:'q',w:'Ohren'},{r:8,n:2,f:1,a:0,c:'p',fc:'q',w:'Arme'},{r:11,n:2,f:1,a:-70,c:'p',fc:'q',w:'Beine'}]},
+  {id:'papagei',name:'Papagei',stufe:'mittel',rows:['ggg','ggggg','gsggsg','ggoogg','ggogg','bggggb','bryyrb','bryyrb','bggggb','gyyg','gggg','gbbg','ggg','gbg','gg','bb','gg','b','g']},
+  {id:'fledermaus',name:'Fledermaus',stufe:'mittel',rows:['sss','shshs','sssss','swsws','ssss','sssss','ssss','sss','ss','s'],
+    beine:[{r:1,n:1,f:1,a:65,c:'s',fc:'s',w:'Ohren'},{r:6,n:1,f:9,a:5,c:'s',fc:'n',w:'Flügel'}]},
+  // Comic-Figuren
+  {id:'smiley',name:'Smiley',art:'figur',stufe:'leicht',rows:['yyy','yyyyy','yyyyyyy','yysyysyy','yysyysyy','yyyyyyyy','ysyyyysy','yysssyy','yyyyy','yyy']},
+  {id:'geist',name:'Geist',art:'figur',stufe:'leicht',rows:['www','wwwww','wwwwwww','wswwwsw','wswwwsw','wwwwwww','wwwqwww','wwwwwww','wwwwwww','wwwwwww','wwwww'],
+    beine:[{r:6,n:2,f:1,a:20,c:'w',fc:'w',w:'Arme'},{r:11,n:1,f:1,a:-65,c:'w',fc:'w',w:'Zipfel'}]},
+  {id:'pilz',name:'Pilzli',art:'figur',stufe:'leicht',rows:['rrr','rrwrr','rwrrrwr','rrrrwrrrr','rrrrrrrrr','www','wswsw','wwwww','wwww']},
+  {id:'monster',name:'Monster',art:'figur',stufe:'mittel',rows:['bbbb','bbbbbb','bbwwwbb','bbwswbb','bbwwwbb','bbbbbbb','bswswsb','bbbbbbb','bbbbb'],
+    beine:[{r:1,n:2,f:1,a:70,c:'w',fc:'w',w:'Hörner'},{r:7,n:2,f:3,a:5,c:'b',fc:'b',w:'Arme'},{r:9,n:2,f:3,a:-70,c:'b',fc:'b',w:'Beine'}]},
+  {id:'alien',name:'Alien',art:'figur',stufe:'mittel',rows:['hhh','hhhhh','hhhhhhh','hsshssh','hsshssh','hhhhhhh','hhssshh','hhhhh','hhh','gg','gggg','gggg','gggg','gg'],
+    beine:[{r:1,n:2,f:1,a:65,c:'h',fc:'y',w:'Fühler'},{r:11,n:2,f:1,a:5,c:'g',fc:'h',w:'Arme'},{r:14,n:2,f:1,a:-65,c:'g',fc:'h',w:'Beine'}]},
+  {id:'roboter',name:'Roboter',art:'figur',stufe:'mittel',rows:['nnnn','nnnnnn','nlnnln','nnnnnn','nrrrrn','nnnnnn','nn','nnnnnn','nnbbnn','nnbbnn','nnnnnn','nnnn'],
+    beine:[{r:1,n:2,f:1,a:70,c:'n',fc:'r',w:'Antennen'},{r:8,n:2,f:1,a:-10,c:'n',fc:'r',w:'Arme'},{r:12,n:2,f:1,a:-70,c:'n',fc:'s',w:'Beine'}]},
+  {id:'pinguin',name:'Pinguin',art:'figur',stufe:'mittel',rows:['sss','sssss','swwwws','wswwsw','swwoows','swwwws','sswwwss','sswwwss','swwwws','sswwss','swws'],
+    beine:[{r:7,n:2,f:1,a:-30,c:'s',fc:'s',w:'Flügel'},{r:11,n:0,f:3,a:-60,c:'o',fc:'o',w:'Füsse'}]},
+  {id:'katze',name:'Katze',art:'figur',stufe:'mittel',rows:['ooooo','ooooooo','oosoosoo','oooooooo','oooqqooo','ooooooo','ooooo','ooo'],
+    beine:[{r:1,n:1,f:1,a:60,c:'o',fc:'q',w:'Ohren'},{r:5,n:2,f:1,a:8,c:'s',fc:'s',w:'Schnurrhaare'}]},
+  {id:'rakete',name:'Rakete',art:'figur',stufe:'mittel',rows:['r','rr','rrr','wwww','wllw','wllw','wwww','wwww','rwwr','oyyo','oyo','y'],
+    beine:[{r:9,n:2,f:1,a:-40,c:'r',fc:'r',w:'Flossen'}]},
+  {id:'totenkopf',name:'Totenkopf',art:'figur',stufe:'leicht',rows:['www','wwwww','wwwwwww','wsswssw','wsswssw','wwwswww','wwwww','wswsw','www']},
+  // Essen und Sachen
+  {id:'glace',name:'Glace',art:'ding',stufe:'leicht',rows:['r','ppp','pbpyp','ppyppbp','pwpwpwp','ckcckc','ccccc','ckkc','ccc','cc','c']},
+  {id:'melone',name:'Wassermelone',art:'ding',stufe:'leicht',rows:['r','rr','rsr','rrrr','rrsrr','rsrrsr','rrrsrrr','rsrrrrsr','wwwwwwwww','gggggggggg']},
+  {id:'herz',name:'Herz',art:'ding',stufe:'leicht',rows:['rrrrrr','rrrrrrr','rwrrrrrr','rrrrrrr','rrrrrr','rrrrr','rrrr','rrr','rr','r'],
+    beine:[{r:1,n:0,f:3,a:60,c:'r',fc:'r',w:'Bögen'}]},
+  {id:'tanne',name:'Tannenbaum',art:'ding',stufe:'leicht',rows:['y','g','gg','grg','gggg','ggbgg','gggggg','grgggyg','gggggggg','kk','kk']},
+  {id:'apfel',name:'Apfel',art:'ding',stufe:'leicht',rows:['k','rrrr','rrrrrr','rwrrrrr','rwrrrrrr','rrrrrrrr','rrrrrrr','rrrrrr','rrrr'],
+    beine:[{r:1,n:0,f:3,a:30,c:'g',fc:'g',w:'Blätter'}]},
+  {id:'muffin',name:'Muffin',art:'ding',stufe:'leicht',rows:['r','ppp','pbpyp','pppppp','ppppppp','ckckckc','ckckck','ckckc']},
+  {id:'tennisball',name:'Tennisball',art:'ding',stufe:'leicht',rows:['hhh','hhhhh','whhhhhw','hwhhhwh','hhwhwhh','hhwhwhh','hwhhhwh','whhhhhw','hhhhh','hhh']},
+  {id:'trikot',name:'Fussballtrikot',art:'ding',stufe:'mittel',rows:['rrrrwwwrrrr','wrrrrrwrrrrrw','wrrrrrrrrrrrw','wrrrrrrrrrrrw','rrrrrrrrr','rrwrwwwrr','rwwrwrwrr','rrwrwrwrr','rrwrwrwrr','rrwrwwwrr','rrrrrrrrr','wwwwwwwww']},
+];
+// Perle: l = Länge auf dem Draht, d = Durchmesser (cm). Rocailles sind kurze Röhrchen: von der Seite 2 mm breit, 3 mm hoch.
+const PERLEN={r3:{name:'Rocailles 3 mm',l:.2,d:.3,draht:'0,3 mm'},roc:{name:'Rocailles 4 mm',l:.3,d:.4,draht:'0,3–0,4 mm'},pony:{name:'Ponyperlen 9 mm',l:.6,d:.9,draht:'0,6–0,8 mm'}};
+const $=id=>document.getElementById(id);
+const S={tier:'pikachu',perle:'r3'};
+
+// Einheit = Perlendurchmesser (Reihenabstand). q = Perlenlänge auf dem Draht. r = Drehung der Perle (Grad, Richtung des Drahts).
+// luft: Abstand nach einer Reihe mit Beinen. Das Bein liegt dann zwischen den Reihen, so sieht man den Draht.
+function geometrie(t,q=2/3,luft=0){
+  const P=[],W=[],L=[],gr=180/Math.PI,n=t.rows.length,mitBein=new Set((t.beine||[]).map(b=>b.r-1)),ry=[];
+  for(let i=0,y=0;i<=n;i++){ry.push(y);y+=1+(mitBein.has(i)?luft:0)}
+  const rand=k=>k<n?t.rows[k].length/2*q:0;
+  t.rows.forEach((r,i)=>{const n=r.length,e=(n-1)/2;for(let j=0;j<n;j++)P.push({x:(j-e)*q,y:ry[i],c:r[j],r:0});W.push([[-e*q-q/2-.05,ry[i]],[e*q+q/2+.05,ry[i]]])});
+  for(const b of t.beine||[]){
+    const i=b.r-1,e=(t.rows[i].length-1)/2*q,a=b.a*Math.PI/180;
+    const ly=luft?ry[i]+(1+luft)/2:ry[i],bx=luft?Math.max(rand(i),rand(i+1))+.5:e+q/2;
+    for(const sx of[-1,1]){
+      const u=[sx*Math.cos(a),-Math.sin(a)],v=[-u[1]*sx,u[0]*sx],ru=Math.atan2(u[1],u[0])*gr;   // v zeigt auf beiden Seiten nach unten: hinaus oben, zurück unten
+      // Gleiches Drahtende: hinaus durch das Bein, durch die quer liegende Endperle (oder die Fussschlaufe) und zurück durch die Beinperlen zur nächsten Reihe
+      const S=[sx*e,ry[i]],E=[sx*bx,ly],o=.15,at=(p_,a_,b_)=>[p_[0]+u[0]*a_+v[0]*b_,p_[1]+u[1]*a_+v[1]*b_],bp=[];
+      const k0=q/2+.12;   // erste Beinperle knapp neben der Randperle
+      let p=null;
+      for(let k=0;k<b.n;k++){p=at(E,k0+k*q,0);P.push({x:p[0],y:p[1],c:b.c,r:ru});bp.push(p)}
+      const ende=p?at(p,q/2,0):at(E,.12,0);   // äusseres Ende des Beins
+      const hin=bp.map(q_=>at(q_,0,-o)),zur=bp.slice().reverse().map(q_=>at(q_,0,o));
+      let fuss;
+      if(b.f===1){const c=at(ende,.55,0),h=q/2+.17;P.push({x:c[0],y:c[1],c:b.fc,r:ru+90});
+        fuss=[at(ende,0,-o),at(ende,0,-h+.1),at(ende,.1,-h),at(c,0,-h),at(c,0,h),at(ende,.1,h),at(ende,0,h-.1),at(ende,0,o)]}   // Endperle liegt quer: der Draht geht seitlich durch ihr Loch und gleich wieder zurück ins Bein
+      else{
+        const f=b.f,s=f>=6?1.7:1,pp=f>=6?.8:1,R=f>=6?f*(q+.1)/(2*Math.PI*Math.sqrt((s*s+pp*pp)/2)):(q+.35)/(2*Math.sin(Math.PI/f)),t0=R*Math.cos(Math.PI/f)*s+.45;
+        const m=at(ende,t0,0),ring=[];
+        for(let k=0;k<f;k++){const ph=Math.PI+(k+.5)*2*Math.PI/f,lx=R*s*Math.cos(ph),ly=R*pp*Math.sin(ph);
+          const tx=-R*s*Math.sin(ph),ty=R*pp*Math.cos(ph);   // Tangente: so liegt die Perle auf dem Draht
+          const q_=at(m,lx,ly);ring.push(q_);P.push({x:q_[0],y:q_[1],c:b.fc,r:Math.atan2(u[1]*tx+v[1]*ty,u[0]*tx+v[0]*ty)*gr})}
+        fuss=ring;
+      }
+      const pts=[at(E,0,-o),...hin,...fuss,...zur,at(E,0,o)];
+      W.push([S,E,...pts,E,S]);L.push({i,sx,u,pts});
+    }
+  }
+  const xs=P.map(q_=>q_.x),ys=P.map(q_=>q_.y);
+  return {P,W,L,q,ry,x0:Math.min(...xs)-.5,x1:Math.max(...xs)+.5,y0:Math.min(...ys)-.5,y1:Math.max(Math.max(...ys)+.5,ry[n]-.5)};
+}
+
+function zaehlen(t){
+  const z={};let n=0;
+  const add=(c,k)=>{z[c]=(z[c]||0)+k;n+=k};
+  for(const r of t.rows)for(const c of r)add(c,1);
+  for(const b of t.beine||[]){add(b.c,2*b.n);add(b.fc,2*b.f)}
+  return {z,n};
+}
+function draht(t,pe){
+  let cm=0;
+  for(const r of t.rows)cm+=(2*r.length+1)*pe.l;
+  for(const b of t.beine||[])cm+=2*(2*b.n+b.f+1)*pe.l;
+  return Math.ceil((cm*1.15+30)/10)*10;
+}
+const f1=x=>(Math.round(x*2)/2).toLocaleString('de-CH');
+const lang=cm=>cm>=100?`${(cm/100).toLocaleString('de-CH')} m`:`${cm} cm`;
+
+function perlen(g,sk,ox,oy,kreis=.45,grau=true){
+  const pfad=!grau?'':g.W.map(l=>'M'+l.map(q=>`${(ox+q[0]*sk).toFixed(2)} ${(oy+q[1]*sk).toFixed(2)}`).join('L')).join('');
+  return (grau?`<path d="${pfad}" fill="none" stroke="#9aa4b1" stroke-width="${(sk*.08).toFixed(2)}" stroke-linejoin="round"/>`:'')+
+    g.P.map(q=>{const w=g.q*sk*.94,h=sk*.94;   // Rocaille von der Seite: kurzes Röhrchen mit runden Kanten
+      return `<rect x="${(-w/2).toFixed(2)}" y="${(-h/2).toFixed(2)}" width="${w.toFixed(2)}" height="${h.toFixed(2)}" rx="${(w*.36).toFixed(2)}" ry="${(h*.26).toFixed(2)}" transform="translate(${(ox+q.x*sk).toFixed(2)} ${(oy+q.y*sk).toFixed(2)})${q.r?` rotate(${q.r.toFixed(1)})`:''}" fill="${FARBE[q.c][0]}" stroke="#1c2430" stroke-width="${(sk*.05).toFixed(2)}"/>`}).join('');
+}
+
+function mini(t){
+  const g=geometrie(t),w=g.x1-g.x0,h=g.y1-g.y0;
+  return `<svg viewBox="${g.x0} ${g.y0} ${w} ${h}" aria-hidden="true" preserveAspectRatio="xMidYMid meet">${perlen(g,1,0,0)}</svg>`;
+}
+
+// Technik-Bilder (eigene Zeichnungen). Ein Draht, eine Farbe: A und B sind nur die zwei Enden.
+const A='#2A6FDB',B=A;
+function perle(x,y,r=2.1,f='#E8EDF3',dr=0){return `<rect x="${-r*.68}" y="${-r}" width="${r*1.36}" height="${2*r}" rx="1" ry="1.1" transform="translate(${x} ${y})${dr?` rotate(${dr})`:''}" fill="${f}" stroke="#1c2430" stroke-width=".3"/>`}
+function technik(x,y){
+  const L=(d,c)=>`<path d="${d}" fill="none" stroke="${c}" stroke-width=".6" stroke-linecap="round"/>`;
+  const T=(tx,ty,s,nr)=>`<circle cx="${tx}" cy="${ty-1.1}" r="2.4" fill="#17997A"/><text x="${tx}" y="${ty}" font-size="3" font-weight="800" fill="#fff" text-anchor="middle">${nr}</text>`+
+    s.map((z,k)=>`<text x="${tx+4}" y="${ty+k*3.6}" font-size="2.9" fill="#1c2430">${z}</text>`).join('');
+  let o=`<g transform="translate(${x} ${y})">`;
+  // 1: Reihe 1 in die Mitte
+  o+=T(1.5,3,['Reihe 1 auffädeln und in die','Mitte des Drahts schieben.'],1);
+  o+=L('M6 13H32',A)+L('M32 13H58',B)+perle(29.8,13)+perle(34.2,13)+
+    `<text x="5" y="11" font-size="2.6" font-weight="800" fill="${A}">Ende A</text><text x="59" y="11" font-size="2.6" font-weight="800" fill="${B}" text-anchor="end">Ende B</text>`;
+  // 2: Reihe 2 auf A, B gegengleich durch
+  const y2=22;
+  o+=T(1.5,y2,['Reihe 2 auf Ende A fädeln. Ende B','von der anderen Seite durch','dieselben Perlen stecken.'],2);
+  o+=`<g transform="translate(0 ${y2+10})">`+
+    L('M29.8 4C20 4 18 13.4 26 13.4H56',A)+L('M34.2 4C44 4 46 14.6 38 14.6H9',B)+
+    perle(29.8,4)+perle(34.2,4)+perle(27.6,14)+perle(32,14)+perle(36.4,14)+`</g>`;
+  // 3: festziehen
+  const y3=y2+31;
+  o+=T(1.5,y3,['An beiden Enden gleich fest ziehen.','Reihe 2 liegt jetzt unter Reihe 1.'],3);
+  o+=`<g transform="translate(0 ${y3+6})">`+
+    L('M29.8 4C25 4 24 8.6 27 8.6H38.5C42 8.6 46 12 52 15',A)+L('M34.2 4C39 4 40 9.4 37 9.4H25.5C22 9.4 18 12 12 15',B)+
+    perle(29.8,4)+perle(34.2,4)+perle(27.6,9)+perle(32,9)+perle(36.4,9)+`</g>`;
+  // 4: Bein mit quer liegender Endperle
+  const y4=y3+27;
+  o+=T(1.5,y4,['Bein: Perlen auf ein Ende, dann zurück','durch die Beinperlen. Die Endperle liegt','quer. Bei 3 Fussperlen: eine Schlaufe.'],4);
+  o+=`<g transform="translate(0 ${y4+11})">`+
+    L('M12 5.4H38.6C40.2 5.4 39.6 2.4 41.3 2.4V9.6C39.6 9.6 40.2 6.6 38.6 6.6H26',A)+
+    perle(14,6)+perle(18.4,6)+perle(22.8,6)+perle(28.6,6,2.1,'#cfe7dc')+perle(33,6,2.1,'#cfe7dc')+perle(37.4,6,2.1,'#cfe7dc')+
+    perle(41.3,6,2.1,'#fde0c8',90)+
+    `<text x="31" y="12.8" font-size="2.4" fill="#5b6573" text-anchor="middle">Bein</text><text x="43.5" y="12.8" font-size="2.4" fill="#5b6573" text-anchor="middle">Endperle quer</text></g>`;
+  // 5: Ende
+  const y5=y4+30;
+  o+=T(1.5,y5,['Am Schluss die Enden 3-mal verdrehen,','abknipsen und die Spitze nach innen','biegen. Fertig!'],5);
+  return o+'</g>';
+}
+
+// Drahtweg im Muster: Ende A trägt die Perlen, Ende B geht gegengleich durch. Die Seiten wechseln jede Reihe.
+function draehte(t,g,sk,ox,oy){
+  const X=x=>(ox+x*sk).toFixed(2),Y=y=>(oy+y*sk).toFixed(2),d=.14,n=t.rows.length;
+  const w=k=>((t.rows[k].length-1)/2+.5)*g.q,li=k=>k%2?B:A,ri=k=>k%2?A:B;   // li/ri: Ende, das nach Reihe k links/rechts austritt
+  const ry=g.ry,yl=k=>k?ry[k]+d:0,yr=k=>k?ry[k]-d:0,wege=[],Z=ry[n];
+  const weg=(c,d_)=>wege.push([c,d_]);
+  const P_=p=>`${X(p[0])} ${Y(p[1])}`,bein={};
+  for(const l of g.L)bein[l.i+':'+l.sx]=l;
+  // Vom Reihenende p0 zur nächsten Reihe. Hat die Reihe ein Bein, geht der Draht zuerst hinaus durchs Bein und zurück.
+  const bogen=(sx,k,p0,rest)=>{const l=bein[k+':'+sx];if(!l)return null;
+    const a=l.pts[0],z=l.pts[l.pts.length-1],u=l.u;
+    return `M${P_(p0)}C${X(p0[0]+sx*.9)} ${Y(p0[1])} ${X(a[0]-u[0]*.5)} ${Y(a[1]-u[1]*.5)} ${P_(a)}L${l.pts.slice(1).map(P_).join('L')}`+rest(z,[z[0]-u[0]*.4,z[1]-u[1]*.4])};
+  for(let k=0;k<n;k++){
+    const e=w(k);
+    if(!k){weg(A,`M${X(0)} ${Y(0)}L${X(-e)} ${Y(0)}`);weg(B,`M${X(0)} ${Y(0)}L${X(e)} ${Y(0)}`)}
+    else{weg(ri(k),`M${X(-e)} ${Y(ry[k]-d)}L${X(e)} ${Y(ry[k]-d)}`);weg(li(k),`M${X(e)} ${Y(ry[k]+d)}L${X(-e)} ${Y(ry[k]+d)}`)}
+    for(const sx of[-1,1]){
+      const p0=[sx*e,sx<0?yl(k):yr(k)],c=sx<0?li(k):ri(k);
+      let rest;
+      if(k<n-1){const f=w(k+1),p1=[sx*f,ry[k+1]+sx*d],m=Math.max(e,f)+.12;   // kurzer Bogen um die äussere Perle herum
+        rest=(z,c1)=>`C${X(c1[0])} ${Y(c1[1])} ${X(p1[0]+sx*.45)} ${Y(p1[1])} ${P_(p1)}`;
+        weg(c,bogen(sx,k,p0,rest)||`M${P_(p0)}C${X(sx*(m+.3))} ${Y(p0[1])} ${X(sx*(m+.3))} ${Y(p1[1])} ${P_(p1)}`)}
+      else{   // Enden unten zusammen und verdrehen
+        const dreh=`${X(sx*.4)} ${Y(Z-.2)} ${X(sx*.1)} ${Y(Z)}L${X(-sx*.1)} ${Y(Z+.2)}L${X(sx*.1)} ${Y(Z+.4)}L${X(-sx*.1)} ${Y(Z+.6)}`;
+        rest=(z,c1)=>`C${X(c1[0])} ${Y(c1[1])} ${dreh}`;
+        weg(c,bogen(sx,k,p0,rest)||`M${P_(p0)}C${X(p0[0]+sx*.6)} ${Y(p0[1]+.3)} ${dreh}`)}
+    }
+  }
+  const sw=sk*.06;
+  return wege.map(([c,p])=>`<path d="${p}" fill="none" stroke="#fff" stroke-width="${(sw*2).toFixed(2)}" stroke-linecap="round" stroke-linejoin="round"/>`).join('')+
+    wege.map(([c,p])=>`<path d="${p}" fill="none" stroke="${c}" stroke-width="${sw.toFixed(2)}" stroke-linecap="round" stroke-linejoin="round"/>`).join('');
+}
+
+function blatt(t,pe){
+  const {z,n}=zaehlen(t),g0=geometrie(t,pe.l/pe.d),g=geometrie(t,pe.l/pe.d,1);   // g0: echte Grösse, g: mit Abstand bei den Beinen
+  const breit=(g0.x1-g0.x0-1+g0.q)*pe.d,hoch=(g0.y1-g0.y0)*pe.d;
+  g.x0-=.35;g.x1+=.35;g.y1+=1.3;   // Platz für Drahtbögen und Enden
+  // Muster-Feld rechts
+  const F={x:84,y:34,w:116,h:186};
+  const lr=10,rr=26,bw=g.x1-g.x0,bh=g.y1-g.y0;
+  const sk=Math.min((F.w-lr-rr)/bw,(F.h-8)/bh,10);
+  const ox=F.x+lr+((F.w-lr-rr)-bw*sk)/2-g.x0*sk,oy=F.y+8-g.y0*sk;
+  const fs=Math.min(3.4,sk*.62);
+  const bein={};for(const b of t.beine||[])bein[b.r]=b;
+  let lab='';
+  t.rows.forEach((r,i)=>{
+    const y=(oy+g.ry[i]*sk+fs*.36).toFixed(2),b=bein[i+1];
+    const lx=ox+g.x0*sk-2.5,kb=Math.min(3,sk*.55);
+    lab+=`<rect x="${(lx-fs*1.6-kb).toFixed(2)}" y="${(oy+g.ry[i]*sk-kb/2).toFixed(2)}" width="${kb.toFixed(2)}" height="${kb.toFixed(2)}" rx=".4" fill="none" stroke="#9aa4b1" stroke-width=".3"/>`+
+      `<text x="${lx.toFixed(2)}" y="${y}" font-size="${fs.toFixed(2)}" fill="#5b6573" text-anchor="end">${i+1}</text>`+
+      `<text x="${(ox+g.x1*sk+2.5).toFixed(2)}" y="${y}" font-size="${fs.toFixed(2)}" font-weight="800" fill="#1c2430">${r.length}${b?`<tspan font-weight="600" fill="#17997A"> + ${b.w} ${b.n}+${b.f}</tspan>`:''}</text>`;
+  });
+  const sx=ox,top=oy+g.y0*sk;
+  // Start: grüner Rahmen um Reihe 1 und ein Schild «Start» darauf
+  // Hat Reihe 1 Ohren oder Beine, steht das Schild über der ganzen Figur, mit einem Strich zum Rahmen
+  const r1=(t.rows[0].length/2*g.q+.2)*sk,ry=oy-.64*sk,pw=11,ph=4.4,pb=bein[1]?top-.8:ry;
+  const start=`<rect x="${(sx-r1).toFixed(2)}" y="${ry.toFixed(2)}" width="${(2*r1).toFixed(2)}" height="${(1.28*sk).toFixed(2)}" rx="${(.32*sk).toFixed(2)}" fill="none" stroke="#17997A" stroke-width=".7"/>`+
+    (pb<ry?`<path d="M${sx.toFixed(2)} ${pb.toFixed(2)}V${ry.toFixed(2)}" stroke="#17997A" stroke-width=".7"/>`:'')+
+    `<rect x="${(sx-pw/2).toFixed(2)}" y="${(pb-ph).toFixed(2)}" width="${pw}" height="${ph}" rx="${ph/2}" fill="#17997A"/>`+
+    `<text x="${sx.toFixed(2)}" y="${(pb-1.15).toFixed(2)}" font-size="3.2" font-weight="800" fill="#fff" text-anchor="middle">Start</text>`;
+  const kopf=`<text x="${(ox+g.x0*sk-2.5).toFixed(2)}" y="${(top-1).toFixed(2)}" font-size="2.6" fill="#5b6573" text-anchor="end">Reihe</text>`+
+    `<text x="${(ox+g.x1*sk+2.5).toFixed(2)}" y="${(top-1).toFixed(2)}" font-size="2.6" fill="#5b6573">Perlen</text>`;
+  const legende=`<path d="M128 225.5h6" stroke="${A}" stroke-width=".8"/><text x="135.5" y="226.5" font-size="2.9" fill="#1c2430">Draht</text>`;
+  // Felder zum Bereitlegen
+  const farben=Object.keys(z).sort((a,b)=>z[b]-z[a]),fb=(190-(farben.length-1)*4)/farben.length;
+  let feld=`<text x="10" y="232" font-size="4.2" font-weight="800" fill="#1c2430">Perlen bereitlegen</text><text x="200" y="232" font-size="3" fill="#5b6573" text-anchor="end">Leg jede Farbe auf ihr Feld.</text>`;
+  farben.forEach((c,k)=>{const fx=10+k*(fb+4);
+    feld+=`<rect x="${fx.toFixed(2)}" y="236" width="${fb.toFixed(2)}" height="38" rx="4" fill="#F5F8FB" stroke="#D5DEE9" stroke-width=".4"/>`+
+      `<rect x="${(fx+3.6).toFixed(2)}" y="239" width="2.8" height="4" rx=".9" fill="${FARBE[c][0]}" stroke="#1c2430" stroke-width=".3"/><text x="${(fx+9).toFixed(2)}" y="242.1" font-size="3.1" fill="#1c2430"><tspan font-weight="800">${z[c]}</tspan> × ${FARBE[c][1]}</text>`});
+  // Material links
+  let mat=`<text x="10" y="36" font-size="4.2" font-weight="800" fill="#1c2430">Du brauchst</text>`,y=42.5;
+  for(const c of Object.keys(z).sort((a,b)=>z[b]-z[a])){
+    mat+=`<rect x="10.9" y="${y-2.8}" width="2.6" height="3.6" rx=".8" fill="${FARBE[c][0]}" stroke="#1c2430" stroke-width=".3"/><text x="16" y="${y}" font-size="3.3" fill="#1c2430"><tspan font-weight="800">${z[c]}</tspan> × ${FARBE[c][1]}</text>`;y+=5;
+  }
+  const lang_=draht(t,pe);
+  mat+=`<text x="10" y="${y+.5}" font-size="3.1" fill="#1c2430"><tspan font-weight="800">${lang(lang_)}</tspan> Draht, ${pe.draht} dick</text>`+
+    `<text x="10" y="${y+5}" font-size="3.1" fill="#1c2430">Seitenschneider</text>`;
+  y+=13;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 297" width="210mm" height="297mm" font-family="Nunito,Arial,sans-serif" role="img" aria-label="Perlentier ${t.name}: Fädelmuster">`+
+    `<rect width="210" height="297" fill="#fff"/>`+
+    `<text x="10" y="17" font-size="7.5" font-weight="800" fill="#1c2430" font-family="Fredoka,Nunito,Arial,sans-serif">Perlentier: ${t.name}</text>`+
+    `<text x="10" y="23.5" font-size="3.4" fill="#5b6573">Flach, eine Lage · ${n} ${pe.name} · fertig etwa ${f1(breit)} × ${f1(hoch)} cm · ${t.stufe}</text>`+
+    `<line x1="10" y1="27" x2="200" y2="27" stroke="#D5DEE9" stroke-width=".4"/>`+
+    mat+`<text x="10" y="${y}" font-size="4.2" font-weight="800" fill="#1c2430">So geht's</text>`+technik(10,y+6)+
+    kopf+start+perlen(g,sk,ox,oy,.45,false)+draehte(t,g,sk,ox,oy)+lab+legende+feld+
+    `<text x="200" y="286" font-size="2.6" fill="#5b6573" text-anchor="end">Schritt für Schritt · nur für den eigenen Unterricht, nicht weitergeben</text></svg>`;
+}
+
+// Themenbereiche: private Figuren nach Franchise (gruppe) in der Reihenfolge des ersten Auftretens, dann die Grundmuster der Schrittli-Seite
+function bereiche(){
+  const privat=TIERE.filter(t=>t.art==='privat'),gruppen=[...new Set(privat.map(t=>t.gruppe||'Weitere Figuren'))];
+  return [...gruppen.map(g=>({name:g,privat:true,l:privat.filter(t=>(t.gruppe||'Weitere Figuren')===g)})),
+    {name:'Tiere',l:TIERE.filter(t=>!t.art)},{name:'Comic-Figuren',l:TIERE.filter(t=>t.art==='figur')},{name:'Essen und Sachen',l:TIERE.filter(t=>t.art==='ding')}].filter(b=>b.l.length);
+}
+const BEREICHE=bereiche();
+// Übersicht als Kacheln; erst ein Klick auf eine Kachel zeigt (und zeichnet) die Figuren dieses Bereichs
+function liste(){
+  const knopf=t=>`<button type="button" class="tier" data-id="${t.id}" aria-pressed="${t.id===S.tier}">${mini(t)}<span>${t.name}</span><small>${zaehlen(t).n} Perlen · ${t.stufe}</small></button>`;
+  const raster=l=>`<div class="raster">${l.map(knopf).join('')}</div>`;
+  const kachel=b=>`<button type="button" class="thema" data-b="${b.name}"><span class="bilder">${b.l.slice(0,3).map(mini).join('')}</span><b>${b.name}</b><small>${b.l.length} ${b.l.length===1?'Figur':'Figuren'}</small></button>`;
+  const such=$('suche').value.trim().toLowerCase(),b=BEREICHE.find(x=>x.name===S.bereich);
+  if(such){const l=TIERE.filter(t=>`${t.name} ${t.gruppe||''}`.toLowerCase().includes(such));
+    $('tiere').innerHTML=`<p class="hinweis">${l.length} Treffer für «${such.replace(/[<&"]/g,'')}»</p>`+raster(l)}
+  else if(b)$('tiere').innerHTML=`<div class="leiste"><button type="button" class="chip" data-zurueck>← Alle Themen</button><h3>${b.name}</h3></div>`+raster(b.l);
+  else $('tiere').innerHTML=`<h3>Eigene Figuren (nur privat)</h3><div class="themen">${BEREICHE.filter(x=>x.privat).map(kachel).join('')}</div>`+
+    `<h3>Grundmuster der Schrittli-Seite</h3><div class="themen">${BEREICHE.filter(x=>!x.privat).map(kachel).join('')}</div>`;
+}
+function adresse(){
+  const p=new URLSearchParams({tier:S.tier});if(S.perle!=='r3')p.set('perle',S.perle);if(S.bereich)p.set('thema',S.bereich);
+  try{history.replaceState(null,'','?'+p)}catch(e){}
+}
+function start(){
+  $('tiere').addEventListener('click',e=>{
+    const th=e.target.closest('.thema');
+    if(th||e.target.closest('[data-zurueck]')){S.bereich=th?th.dataset.b:null;liste();adresse();const o=$('tiere').parentElement;if(o.getBoundingClientRect().top<0)o.scrollIntoView({block:'start'});return}
+    const k=e.target.closest('.tier');if(!k)return;S.tier=k.dataset.id;zeichnen();
+    if(matchMedia('(max-width:860px)').matches)$('vorschau').scrollIntoView({behavior:'smooth',block:'start'})});
+  $('suche').addEventListener('input',liste);
+  $('perlen').innerHTML=Object.entries(PERLEN).map(([k,p])=>`<button type="button" class="chip" data-p="${k}" aria-pressed="false">${p.name}</button>`).join('');
+  $('perlen').addEventListener('click',e=>{const k=e.target.closest('.chip');if(!k)return;S.perle=k.dataset.p;zeichnen()});
+}
+function zeichnen(){
+  const t=TIERE.find(x=>x.id===S.tier)||TIERE[1],pe=PERLEN[S.perle];
+  document.querySelectorAll('.tier').forEach(k=>k.setAttribute('aria-pressed',k.dataset.id===t.id));
+  document.querySelectorAll('.chip').forEach(k=>k.setAttribute('aria-pressed',k.dataset.p===S.perle));
+  const svg=blatt(t,pe);
+  $('vorschau').innerHTML=svg;$('druck').innerHTML=svg;
+  $('info').textContent=`${t.name}: ${t.rows.length} Reihen, ${zaehlen(t).n} Perlen, ${lang(draht(t,pe))} Draht`;
+  adresse();
+  document.title=`Perlentier ${t.name} (privat)`;
+}
+const q=new URLSearchParams(location.search);
+if(TIERE.some(t=>t.id===q.get('tier')))S.tier=q.get('tier');
+if(PERLEN[q.get('perle')])S.perle=q.get('perle');
+if(BEREICHE.some(b=>b.name===q.get('thema')))S.bereich=q.get('thema');
+start();liste();zeichnen();
+// ?alle=1: alle privaten Figuren hintereinander drucken (eine Seite pro Figur)
+if(q.get('alle'))$('druck').innerHTML=TIERE.filter(t=>t.art==='privat').map(t=>blatt(t,PERLEN[S.perle])).join('');
+$('drucken').addEventListener('click',()=>window.print());
+</script>
+</body>
+</html>

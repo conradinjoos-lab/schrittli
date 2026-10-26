@@ -1,0 +1,17 @@
+[
+{"id":"lkirsche","name":"Pac-Man-Kirsche","gruppe":"Pac-Man","stufe":"leicht","rows":["dd","kk","kwk","kwwk","kwwwk","rrrrsrrrr","rwrrsrwrr","rrrrsrrrr","errrsrrre","eeeseee"]},
+{"id":"lspaceinvader","name":"Space-Invaders-Alien","gruppe":"Weitere Games","stufe":"leicht","rows":["ggggggg","ggsgggsgg","ggggggggggg","ggggggggg","gg","gg"],"beine":[{"r":1,"n":2,"f":1,"a":60,"c":"g","fc":"g","w":"Fühler"},{"r":3,"n":2,"f":1,"a":-80,"c":"g","fc":"g","w":"Arme"},{"r":4,"n":1,"f":1,"a":-70,"c":"g","fc":"g","w":"Beine"}]},
+{"id":"ltetrisi","name":"Tetris-Stein I","gruppe":"Weitere Games","stufe":"leicht","rows":["ltt","ttt","ltt","ttt","ltt","ttt","ltt","ttt"]},
+{"id":"ltetrisl","name":"Tetris-Stein L","gruppe":"Weitere Games","stufe":"leicht","rows":["yoowww","ooowww","yoowww","ooowww","yooyoo","oooooo"]},
+{"id":"ltetriso","name":"Tetris-Stein O","gruppe":"Weitere Games","stufe":"leicht","rows":["yyyyyy","yyoyyo","yyyyyy","yyoyyo"]},
+{"id":"ltetriss","name":"Tetris-Stein S","gruppe":"Weitere Games","stufe":"leicht","rows":["wwwhgghgg","wwwgggggg","hgghggwww","ggggggwww"]},
+{"id":"ltetrist","name":"Tetris-Stein T","gruppe":"Weitere Games","stufe":"leicht","rows":["mvvmvvmvv","vvvvvvvvv","mvv","vvv"]},
+{"id":"lrobloxlogo","name":"Roblox-Logo","gruppe":"Weitere Games","stufe":"leicht","rows":["rr","rrrrr","rrrwwrrr","rrrrwwwrrrr","rrrrwwwrrrr","rrrwwrrr","rrrrr","rr"]},
+{"id":"lfortnitelama","name":"Fortnite-Lama","gruppe":"Weitere Games","stufe":"mittel","rows":["vvvvv","vvvvvvv","vwsvswv","vvvvvvv","sssssss","mmmmm","mwwwm","vvvvv","vvvvv","ttttttt","bbbbbbbbb","vvvvvvvvv","ttttttttt","bbbbbbbbb","vvvvvvv"],"beine":[{"r":1,"n":3,"f":1,"a":70,"c":"v","fc":"v","w":"Ohren"},{"r":15,"n":3,"f":1,"a":-75,"c":"b","fc":"s","w":"Beine"}]},
+{"id":"lpeely","name":"Peely (Banane)","gruppe":"Weitere Games","stufe":"mittel","rows":["k","k","yyy","yyyyy","yyyyyyy","ysyyysy","ysyyysy","yyyyyyy","ysyyysy","yysssyy","yyyyyyy","yyyyyyy","yyyyy","yyy"],"beine":[{"r":10,"n":3,"f":1,"a":-35,"c":"y","fc":"y","w":"Arme"},{"r":14,"n":2,"f":3,"a":-75,"c":"y","fc":"k","w":"Beine"}]},
+{"id":"lred","name":"Angry Birds Red","gruppe":"Weitere Games","stufe":"mittel","rows":["ss","rrr","rrrrrrr","rrrrrrrrr","rsrrrrrrrsr","rwssrrrsswr","rwswyyywswr","rrrryyyrrrr","rrwwwowwwrr","rwwwwwwwr","rwwwwwr","rrrrr"]},
+{"id":"lchuck","name":"Angry Birds Chuck","gruppe":"Weitere Games","stufe":"mittel","rows":["s","ss","yyy","yyyyy","yssyssy","yywsyswyy","yyyoooyyy","yyyyoooyyyy","yyyyyoyyyyy","ywwwwwwwwwy","wwwwwwwwwww"]},
+{"id":"lbomb","name":"Angry Birds Bomb","gruppe":"Weitere Games","stufe":"mittel","rows":["y","s","s","sss","sssssss","sssssssss","srrsssssrrs","swwssssswws","swssooossws","ssssoeossss","sssssosssss","ssnnnnnnnss","snnnnnnns","sssssss"]},
+{"id":"lcuphead","name":"Cuphead","gruppe":"Weitere Games","stufe":"schwer","rows":["r","w","r","w","wnnnrnnnw","wwwwwwwww","wwswwwsww","wwswrwsww","wwwwwwwww","wswwwwwsw","wwsssssww","wwwwwww","sssss","sssss","rrrrr"],"beine":[{"r":13,"n":3,"f":1,"a":-35,"c":"s","fc":"w","w":"Arme"},{"r":15,"n":2,"f":3,"a":-75,"c":"w","fc":"r","w":"Beine"}]},
+{"id":"lcontroller","name":"Controller","gruppe":"Weitere Games","stufe":"mittel","rows":["nnnnnnnnnnn","wwswwwwwwwbww","wssswnwnwgwrw","wwswwwwwwwyww","nnnnnnnnnnn"]}
+]

@@ -1,0 +1,14 @@
+[
+{"id":"pvolleyball","name":"Volleyball","gruppe":"Sport","stufe":"mittel","rows":["yyyyy","yyyywwwww","yyywwwwwwww","yyywwbbbwww","byyyybbbbww","bbyyyyybbbw","bbbbbbbbb","bbbbb"]},
+{"id":"ptennisschlaeger","name":"Tennisschläger mit Ball","gruppe":"Sport","stufe":"mittel","rows":["hhh","hhhh","hhh","bbbbb","bbwwwbb","bwwwwwwwb","bwwwwwwwb","bwwwwwwwb","bwwwwwwwb","bwwwwwwwb","bbwwwbb","bbbbb","bwb","bb","ss","ss","ss","ss","ss"]},
+{"id":"ppingpong","name":"Pingpong-Schläger mit Ball","gruppe":"Sport","stufe":"mittel","rows":["ooo","ooo","rrrrr","rrrrrrr","rrrrrrrrr","rrrrrrrrr","rrrrrrrrr","rrrrrrr","rrrrr","kkk","kkk","kkk","kkk"]},
+{"id":"pski","name":"Ski mit Stöcken","gruppe":"Sport","stufe":"mittel","rows":["sswss","rywyr","rywyr","rywyr","rywyr","rywyr","nnwnn","nnwnn","rywyr","rywyr","rywyr","rywyr","rywyr","rywyr","sswss"],"beine":[{"r":2,"n":13,"f":1,"a":-81,"c":"n","fc":"s","w":"Stöcke"}]},
+{"id":"psnowboard","name":"Snowboard","gruppe":"Sport","stufe":"mittel","rows":["bbb","bbbbb","byyyb","bbbbb","sssss","sssss","bbbbb","booob","bbbbb","sssss","sssss","bbbbb","byyyb","bbbbb","bbb"]},
+{"id":"pschlitten","name":"Schlitten (Davoser)","gruppe":"Sport","stufe":"mittel","rows":["kkkkkkkkkkk","ccccccccccc","wkwwkwwwkwwkw","skwwkwwwkwwks","kkkkkkkkkkkkk","sssssssssss"]},
+{"id":"pskateboard","name":"Skateboard","gruppe":"Sport","stufe":"mittel","rows":["ooo","ooooo","onnno","ooooo","ooooo","oyyyo","ooooo","ooooo","oyyyo","ooooo","ooooo","onnno","ooooo","ooo"],"beine":[{"r":3,"n":0,"f":3,"a":0,"c":"s","fc":"s","w":"Räder"},{"r":12,"n":0,"f":3,"a":0,"c":"s","fc":"s","w":"Räder"}]},
+{"id":"ptrottinett","name":"Trottinett","gruppe":"Sport","stufe":"leicht","rows":["ssnnnnnss","r","r","r","r","r","r","r","r","r","rrrrrrrrrrr"],"beine":[{"r":11,"n":0,"f":3,"a":-40,"c":"s","fc":"s","w":"Räder"}]},
+{"id":"pvelo","name":"Velo","gruppe":"Sport","stufe":"mittel","rows":["kkwwwss","rrrrr","ssswrwrwsss","ssnssrrrssnss","ssswwswwsss"]},
+{"id":"pturnschuh","name":"Turnschuh","gruppe":"Sport","stufe":"mittel","rows":["wwwww","rrrrwrr","rwrrrrwrr","rrrrrrrrwrr","rrrrrrrrrrwww","wwwwwwwwwwwww","nnnnnnnnnnnnn"]},
+{"id":"pstoppuhr","name":"Stoppuhr","gruppe":"Sport","stufe":"mittel","rows":["nnn","n","sssss","swwwswwws","swwwwrwwwws","sswwwswwwss","swwwwwwwwws","swwwswwws","sssss"],"beine":[{"r":4,"n":0,"f":1,"a":50,"c":"n","fc":"n","w":"Knöpfe"}]},
+{"id":"pschwingerhose","name":"Schwingerhose (Zwilchhose)","gruppe":"Sport","stufe":"mittel","rows":["kkkkkkkkk","ccccccccc","ccccccccccc","cccccwccccc","ccccwwwcccc","cccccwwwccccc","ccccwwwwwcccc","kkkkwwwwwkkkk"]}
+]

@@ -1,0 +1,470 @@
+[
+{
+"id": "mccreeper",
+"name": "Creeper",
+"gruppe": "Minecraft",
+"stufe": "leicht",
+"rows": [
+"ggggggggg",
+"gssgggssg",
+"gssgggssg",
+"gggsssggg",
+"ggsssssgg",
+"ggsgggsgg",
+"ggggggggg"
+]
+},
+{
+"id": "mctnt",
+"name": "TNT",
+"gruppe": "Minecraft",
+"stufe": "mittel",
+"rows": [
+"rrrrrrrrrrrr",
+"rrrrrrrrrrrr",
+"ssswswwswsss",
+"wswwsswswwsw",
+"wswwswsswwsw",
+"wswwswwswwsw",
+"rrrrrrrrrrrr",
+"rrrrrrrrrrrr"
+]
+},
+{
+"id": "mcspitzhacke",
+"name": "Diamant-Spitzhacke",
+"gruppe": "Minecraft",
+"stufe": "leicht",
+"rows": [
+"lllllll",
+"ttttktttt",
+"tkt",
+"k",
+"k",
+"k",
+"k",
+"k",
+"k"
+],
+"beine": [
+{
+"r": 2,
+"n": 2,
+"f": 1,
+"a": -35,
+"c": "t",
+"fc": "l",
+"w": "Spitzen"
+}
+]
+},
+{
+"id": "mcschwert",
+"name": "Diamantschwert",
+"gruppe": "Minecraft",
+"stufe": "leicht",
+"rows": [
+"l",
+"tlt",
+"tlt",
+"tlt",
+"tlt",
+"tlt",
+"tlt",
+"utttttu",
+"k",
+"k",
+"k",
+"ttt"
+]
+},
+{
+"id": "mcsteve",
+"name": "Steve",
+"gruppe": "Minecraft",
+"stufe": "schwer",
+"rows": [
+"kkkkkkkk",
+"kffffffk",
+"fwbffbwf",
+"fffccfff",
+"ffkkkkff",
+"ffffffff",
+"tttffttt",
+"tttttttt",
+"tttttttt",
+"uuuuuuuu",
+"uuuuuuuu",
+"uuuuuuuu",
+"nnnnnnnn"
+],
+"beine": [
+{
+"r": 7,
+"n": 3,
+"f": 1,
+"a": -72,
+"c": "f",
+"fc": "f",
+"w": "Arme"
+}
+]
+},
+{
+"id": "mcalex",
+"name": "Alex",
+"gruppe": "Minecraft",
+"stufe": "schwer",
+"rows": [
+"oooooooo",
+"ooooffoo",
+"offffffo",
+"owgffgwo",
+"offffffo",
+"offppffo",
+"oggffggo",
+"gggggggg",
+"gggggggg",
+"kkkkkkkk",
+"kkkkkkkk",
+"kkkkkkkk",
+"nnnnnnnn"
+],
+"beine": [
+{
+"r": 7,
+"n": 3,
+"f": 1,
+"a": -72,
+"c": "f",
+"fc": "f",
+"w": "Arme"
+}
+]
+},
+{
+"id": "mcenderman",
+"name": "Enderman",
+"gruppe": "Minecraft",
+"stufe": "mittel",
+"rows": [
+"ssssssss",
+"ssssssss",
+"vmvssvmv",
+"ssssssss",
+"ssssss",
+"ssss",
+"ssss",
+"ssss"
+],
+"beine": [
+{
+"r": 5,
+"n": 5,
+"f": 1,
+"a": -78,
+"c": "s",
+"fc": "s",
+"w": "Arme"
+},
+{
+"r": 8,
+"n": 5,
+"f": 1,
+"a": -84,
+"c": "s",
+"fc": "s",
+"w": "Beine"
+}
+]
+},
+{
+"id": "mcschwein",
+"name": "Schwein",
+"gruppe": "Minecraft",
+"stufe": "leicht",
+"rows": [
+"pppppppp",
+"pppppppp",
+"pwsppswp",
+"ppqqqqpp",
+"ppeqqepp",
+"ppqqqqpp",
+"pppppppp"
+]
+},
+{
+"id": "mczombie",
+"name": "Zombie",
+"gruppe": "Minecraft",
+"stufe": "schwer",
+"rows": [
+"dddddddd",
+"gggggggg",
+"gssggssg",
+"gggddggg",
+"ggddddgg",
+"gggggggg",
+"tttttttt",
+"tttttttt",
+"tttttttt",
+"uuuuuuuu",
+"uuuuuuuu",
+"uuuuuuuu",
+"nnnnnnnn"
+],
+"beine": [
+{
+"r": 7,
+"n": 3,
+"f": 1,
+"a": -5,
+"c": "g",
+"fc": "g",
+"w": "Arme"
+}
+]
+},
+{
+"id": "pacman",
+"name": "Pac-Man",
+"gruppe": "Pac-Man",
+"stufe": "mittel",
+"rows": [
+"yyyyy",
+"yyyyyyyss",
+"yyyysyyssss",
+"yyyyyyyssss",
+"yyyyyysssss",
+"yyyyyyyssss",
+"yyyyyyyyyyy",
+"yyyyyyyyy",
+"yyyyy"
+]
+},
+{
+"id": "blinky",
+"name": "Blinky",
+"gruppe": "Pac-Man",
+"stufe": "mittel",
+"rows": [
+"rrrr",
+"rrrrrrrr",
+"rrrrrrrrrr",
+"rwwrrrrwwr",
+"rwbrrrrwbr",
+"rrrrrrrrrr",
+"rrrrrrrrrr",
+"rrrrrrrrrr",
+"rr"
+],
+"beine": [
+{
+"r": 8,
+"n": 1,
+"f": 1,
+"a": -80,
+"c": "r",
+"fc": "r",
+"w": "Zipfel"
+}
+]
+},
+{
+"id": "pinky",
+"name": "Pinky",
+"gruppe": "Pac-Man",
+"stufe": "mittel",
+"rows": [
+"pppp",
+"pppppppp",
+"pppppppppp",
+"pwwppppwwp",
+"pwbppppwbp",
+"pppppppppp",
+"pppppppppp",
+"pppppppppp",
+"pp"
+],
+"beine": [
+{
+"r": 8,
+"n": 1,
+"f": 1,
+"a": -80,
+"c": "p",
+"fc": "p",
+"w": "Zipfel"
+}
+]
+},
+{
+"id": "inky",
+"name": "Inky",
+"gruppe": "Pac-Man",
+"stufe": "mittel",
+"rows": [
+"tttt",
+"tttttttt",
+"tttttttttt",
+"twwttttwwt",
+"twbttttwbt",
+"tttttttttt",
+"tttttttttt",
+"tttttttttt",
+"tt"
+],
+"beine": [
+{
+"r": 8,
+"n": 1,
+"f": 1,
+"a": -80,
+"c": "t",
+"fc": "t",
+"w": "Zipfel"
+}
+]
+},
+{
+"id": "clyde",
+"name": "Clyde",
+"gruppe": "Pac-Man",
+"stufe": "mittel",
+"rows": [
+"oooo",
+"oooooooo",
+"oooooooooo",
+"owwoooowwo",
+"owboooowbo",
+"oooooooooo",
+"oooooooooo",
+"oooooooooo",
+"oo"
+],
+"beine": [
+{
+"r": 8,
+"n": 1,
+"f": 1,
+"a": -80,
+"c": "o",
+"fc": "o",
+"w": "Zipfel"
+}
+]
+},
+{
+"id": "amongusrot",
+"name": "Among Us rot",
+"gruppe": "Weitere Games",
+"stufe": "mittel",
+"rows": [
+"rrrr",
+"rrrrrr",
+"rrrwllll",
+"eerlllll",
+"eerrrrrr",
+"eerrrrrr",
+"eerrrrrr",
+"rrrrrrrr"
+],
+"beine": [
+{
+"r": 8,
+"n": 1,
+"f": 1,
+"a": -85,
+"c": "r",
+"fc": "r",
+"w": "Beine"
+}
+]
+},
+{
+"id": "amongusblau",
+"name": "Among Us blau",
+"gruppe": "Weitere Games",
+"stufe": "mittel",
+"rows": [
+"bbbb",
+"bbbbbb",
+"bbbwllll",
+"uublllll",
+"uubbbbbb",
+"uubbbbbb",
+"uubbbbbb",
+"bbbbbbbb"
+],
+"beine": [
+{
+"r": 8,
+"n": 1,
+"f": 1,
+"a": -85,
+"c": "b",
+"fc": "b",
+"w": "Beine"
+}
+]
+},
+{
+"id": "amongusgelb",
+"name": "Among Us gelb",
+"gruppe": "Weitere Games",
+"stufe": "mittel",
+"rows": [
+"yyyy",
+"yyyyyy",
+"yyywllll",
+"ooylllll",
+"ooyyyyyy",
+"ooyyyyyy",
+"ooyyyyyy",
+"yyyyyyyy"
+],
+"beine": [
+{
+"r": 8,
+"n": 1,
+"f": 1,
+"a": -85,
+"c": "y",
+"fc": "y",
+"w": "Beine"
+}
+]
+},
+{
+"id": "robloxnoob",
+"name": "Roblox-Noob",
+"gruppe": "Weitere Games",
+"stufe": "schwer",
+"rows": [
+"yyyyyy",
+"yyyyyyyy",
+"yysyysyy",
+"ysyyyysy",
+"yyssssyy",
+"yyyyyy",
+"bbbbbbbbbb",
+"bbbbbbbbbb",
+"bbbbbbbbbb",
+"bbbbbbbbbb",
+"gggggggggg",
+"gggggggggg",
+"gggggggggg"
+],
+"beine": [
+{
+"r": 7,
+"n": 3,
+"f": 1,
+"a": -75,
+"c": "y",
+"fc": "y",
+"w": "Arme"
+}
+]
+}
+]

@@ -1,0 +1,14 @@
+[
+{"id":"ptrikotschweiz","name":"Fussballtrikot Schweiz","gruppe":"Sport","stufe":"mittel","rows":["rrrwwwrrr","rrrrrrrrrrrrr","rrrrrrrrrrrrr","rrrrrrrrr","rrrrwrrrr","rrwwwwwrr","rrrrwrrrr","rrrrrrrrr","rrrrrrrrr"]},
+{"id":"ptrikotstreifen","name":"Fussballtrikot gestreift","gruppe":"Sport","stufe":"mittel","rows":["swswwwsws","swswswswswsws","swswswswswsws","swswswsws","swswswsws","swswswsws","swswswsws","swswswsws","swswswsws"]},
+{"id":"ptrikot10","name":"Fussballtrikot mit Rückennummer 10","gruppe":"Sport","stufe":"mittel","rows":["bbbwwwbbb","bbbbbbbbbbbbb","bbbbbbbbbbbbb","bbbbbbbbb","bbwbbwwwb","bwwbbwbwb","bbwbbwbwb","bbwbbwbwb","bwwwbwwwb","bbbbbbbbb"]},
+{"id":"pfussballschuh","name":"Fussballschuh mit Stollen","gruppe":"Sport","stufe":"mittel","rows":["ggggggggg","gbbbggggggg","gbbbbwggggg","gbbbbbwbbgg","gbbbbbbbbbg","gsssssssssg","gngngngng"]},
+{"id":"pfussballtor","name":"Fussballtor mit Ball","gruppe":"Sport","stufe":"mittel","rows":["wwwwwwwwwww","wnsnsnsnsnw","wnnnnnnnnnw","wnsnsnsnsnw","wnnnwwwnnnw","wnnwwswwnnw","wnnwswswnnw","wnnnwwwnnnw","ggggggggggg"]},
+{"id":"ppokal","name":"Pokal","gruppe":"Sport","stufe":"leicht","rows":["yyyyyyyyy","ywyyyyyyy","ywyyyyy","yyyyyyy","yyyyy","yyy","yy","yyy","yyyyy","kkkkkkk"],"beine":[{"r":2,"n":1,"f":3,"a":-10,"c":"y","fc":"y","w":"Henkel"}]},
+{"id":"pmedaille","name":"Goldmedaille mit Band","gruppe":"Sport","stufe":"leicht","rows":["rwr","yyyyy","yyooyyy","yyyyoyyyy","yyyyoyyyy","yyoooyy","yyyyy"],"beine":[{"r":1,"n":5,"f":1,"a":70,"c":"r","fc":"r","w":"Band"}]},
+{"id":"ppodest","name":"Siegerpodest 1-2-3","gruppe":"Sport","stufe":"mittel","rows":["yyyyy","yysyy","yssyy","yysyy","yysyy","nnnysssyooo","sssyyyyysss","nnsyyyyyoos","sssyyyyysss","snnyyyyyoos","sssyyyyysss","nnnyyyyyooo"]},
+{"id":"peishockey","name":"Eishockeyschläger mit Puck","gruppe":"Sport","stufe":"mittel","rows":["lllllkk","lllllkkll","lllllkkllll","llllkklllll","lllkkllllll","lssssllllll","llllllssssl","lllllssss","lllllll"]},
+{"id":"pgoaliemaske","name":"Eishockey-Goalie-Maske","gruppe":"Sport","stufe":"mittel","rows":["rrrrr","rrrrrrr","rrrrwrrrr","rrrrwrrrr","nnnnnnnnn","nsnsnsnsn","nsnsnsnsn","nnnnnnnnn","rnsnsnsnr","rnnnnnr","rnsnsnr","nnnnn"]},
+{"id":"punihockey","name":"Unihockeystock mit Lochball","gruppe":"Sport","stufe":"mittel","rows":["ssccccc","ccssccccc","ccccssccccc","cccccsscccc","ccccccssccc","ccccccqqqqc","cccwwwcqqqc","ccwnwnwcccc","cwnwnwccc","cwwwccc"]},
+{"id":"pbasketball","name":"Basketball","gruppe":"Sport","stufe":"leicht","rows":["oosoo","osoosooso","ooosososooo","sssssssssss","ooosososooo","osoosooso","oosoo"]}
+]

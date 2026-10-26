@@ -1,0 +1,19 @@
+[
+{"id":"lflash","name":"Flash-Blitz","gruppe":"Superhelden","stufe":"mittel","rows":["rrrrrrr","rwwwwwyyr","rwwwwyyywwr","rwwwyyywwwr","rwwyyyyyywr","rwwwwyyywwr","rwwwyyywwwr","rwwyyywwwwr","rwyywwwwr","rrrrrrr"]},
+{"id":"lhulkfaust","name":"Hulk-Faust","gruppe":"Superhelden","stufe":"mittel","rows":["ggggggggg","ggdggdggdgg","ggdggdggdgg","ggdggdggdgg","gdddddddddg","ggggggggggg","gggggggdggg","gdddddddggg","ggggggggg","vvvvvvv","vvvvvvv"]},
+{"id":"lspidergwen","name":"Spider-Gwen-Maske","gruppe":"Superhelden","stufe":"mittel","rows":["wwwww","wwwswww","wwwwswwww","wswwwswwwsw","qqqwwswwqqq","qwwqqsqqwwq","wqwwqsqwwqw","wwqqqsqqqww","wswwwswwwsw","wwwwswwww","wwwswww","wwsww"]},
+{"id":"lmjoelnir","name":"Thor-Hammer","gruppe":"Superhelden","stufe":"leicht","rows":["nnnnnnnnn","nnnnnnnnnnn","nnnnnnnnnnn","nnnnnnnnnnn","nnnnnnnnn","kkk","kck","kkk","kck","kkk","nnnnn","k"]},
+{"id":"lwonderwoman","name":"Wonder-Woman-Logo","gruppe":"Superhelden","stufe":"mittel","rows":["yyyrryyyrryyy","yyyryyyryyy","yyryyyryy","yyyryyy","yyyyy","yyy"]},
+{"id":"ldeadpool","name":"Deadpool-Maske","gruppe":"Superhelden","stufe":"mittel","rows":["rrrrrrr","rrrrrrrrr","rrrrrrrrrrr","rsssrrrsssr","rswwsrswwsr","rsssrrrsssr","rrssrrrssrr","rrrrrrrrr","rrrrrrr","rrrrr"]},
+{"id":"llegostein","name":"LEGO-Stein 2×4","gruppe":"Spielzeug","stufe":"leicht","rows":["rrrrrrrrrrr","rrererererr","rrrrrrrrrrr","rrrrrrrrrrr","rrererererr","rrrrrrrrrrr"]},
+{"id":"llegokopf","name":"LEGO-Minifigur-Kopf","gruppe":"Spielzeug","stufe":"leicht","rows":["yyyyy","yyyyyyyyy","yyyyyyyyy","yysyyysyy","yyyyyyyyy","yysyyysyy","yyysssyyy","yyyyyyyyy","yyyyyyy"]},
+{"id":"lbarbieherz","name":"Barbie-Herz","gruppe":"Spielzeug","stufe":"leicht","rows":["qqqwwwqqq","qqqqqwqqqqq","qqqqqqqqqqq","qqqqqqqqqqq","qqqqqqqqq","qqqqqqq","qqqqq","qqq","q"]},
+{"id":"lzauberwuerfel","name":"Zauberwürfel","gruppe":"Spielzeug","stufe":"mittel","rows":["sssssssssss","syyyrrrbbbs","syyyrrrbbbs","sgggwwwooos","sgggwwwooos","sooobbbyyys","sooobbbyyys","sssssssssss"]},
+{"id":"lunokarte","name":"Uno-Karte +4","gruppe":"Spielzeug","stufe":"mittel","rows":["wwwwwwwww","wsssssssw","wsssssssw","wsssrbssw","wssrrbbsw","wssyyggsw","wsssygssw","wsssssssw","wsssssssw","wwwwwwwww"]},
+{"id":"lwuerfel","name":"Spielwürfel","gruppe":"Spielzeug","stufe":"leicht","rows":["wwwwwww","wswwwwwsw","wwwwwwwww","wwwwswwww","wwwwwwwww","wswwwwwsw","wwwwwww"]},
+{"id":"lspringer","name":"Schach-Springer","gruppe":"Spielzeug","stufe":"mittel","rows":["ss","ssss","sswsss","sssssss","sssssssss","wwssssss","wwsssss","sssss","sssss","sssssss","sssssssss"]},
+{"id":"lplaymobil","name":"Playmobil-Figur","gruppe":"Spielzeug","stufe":"mittel","rows":["kkkkk","kkkkkkk","kkfffffkk","kfsfffsfk","kfffffffk","fffsssfff","fffffff","rrrrrrrrr","rrrrrrrrr","rrrrrrrrr","bbbbbbbbb","bbbbbbb"],"beine":[{"r":8,"n":3,"f":3,"a":-55,"c":"r","fc":"f","w":"Arme"},{"r":12,"n":1,"f":3,"a":-75,"c":"b","fc":"k","w":"Beine"}]},
+{"id":"llilaminion","name":"Lila Minion","gruppe":"Minions","stufe":"schwer","rows":["vvv","vvvvv","vvvvvvv","vvvvvvvvv","snnnsnnns","nwsnsnswn","snnnsnnns","vvvvvvvvv","vvwwwwwvv","vvvsssvvv","vvbbbbbvv","bbbbbbbbb","bbbbbbb"],"beine":[{"r":9,"n":3,"f":1,"a":-35,"c":"v","fc":"s","w":"Arme"},{"r":13,"n":1,"f":3,"a":-75,"c":"b","fc":"s","w":"Beine"}]},
+{"id":"lgru","name":"Gru","gruppe":"Minions","stufe":"schwer","rows":["fffff","fffffff","fffffffff","ffsfffsff","ffffcffff","fffcccfff","fffffff","snsnsnsns","sssssssssss","ssnsssssnss","sssssssssss","ssnsssssnss","sssssssss"],"beine":[{"r":13,"n":4,"f":1,"a":-80,"c":"s","fc":"s","w":"Beine"}]},
+{"id":"lminionbrille","name":"Minion-Brille","gruppe":"Minions","stufe":"leicht","rows":["nnnnnnn","nnwwwwwnn","nwwwwwwwwwn","nwwwssswwwn","nwwwssswwwn","nwwwwwwwwwn","nnwwwwwnn","nnnnnnn"],"beine":[{"r":4,"n":2,"f":1,"a":0,"c":"s","fc":"s","w":"Band"},{"r":5,"n":2,"f":1,"a":0,"c":"s","fc":"s","w":"Band"}]}
+]
