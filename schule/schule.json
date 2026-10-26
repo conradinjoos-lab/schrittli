@@ -339,6 +339,12 @@
     "wolle",
     "karton",
     "schere"
+   ],
+   "vorlagen": [
+    {
+     "datei": "?form=knuepfscheibe&b=10",
+     "name": "Knüpfscheibe, 10 cm"
+    }
    ]
   },
   {
@@ -400,6 +406,12 @@
     "wolle",
     "schere",
     "stopfnadel"
+   ],
+   "vorlagen": [
+    {
+     "datei": "?form=webrahmen&h=12",
+     "name": "Mini-Webrahmen 9 × 12 cm"
+    }
    ]
   },
   {
@@ -1582,6 +1594,12 @@
    "material": [
     "papier",
     "schere"
+   ],
+   "vorlagen": [
+    {
+     "datei": "?form=rechteck&b=7.5&h=15",
+     "name": "Papier 7,5 × 15 cm"
+    }
    ]
   },
   {
@@ -1945,6 +1963,12 @@
     "nadel",
     "garn",
     "schere"
+   ],
+   "vorlagen": [
+    {
+     "datei": "?liste=baer:10x12:1,oval:5x6:1",
+     "name": "Bär 12 cm hoch und Bauch"
+    }
    ]
   },
   {
@@ -2747,6 +2771,12 @@
     "nadel",
     "garn",
     "schere"
+   ],
+   "vorlagen": [
+    {
+     "datei": "?form=elefant&b=12&n=2",
+     "name": "Elefant, 12 cm breit, 2×"
+    }
    ]
   },
   {
@@ -3047,6 +3077,12 @@
     "nadel",
     "garn",
     "schere"
+   ],
+   "vorlagen": [
+    {
+     "datei": "?form=baer&h=12&n=2",
+     "name": "Bär, 12 cm hoch, 2×"
+    }
    ]
   },
   {
@@ -3271,7 +3307,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=herz&b=6",
+     "name": "Herz, 6 cm breit"
+    }
+   ]
   },
   {
    "id": "zw-kartoffeldruck",
@@ -3650,7 +3692,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=webquadrat&b=15",
+     "name": "Webblatt 15 cm, Streifen 1,5 cm"
+    }
+   ]
   },
   {
    "id": "zw-webrahmen-karton",
@@ -3731,7 +3779,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=webrahmen&h=16",
+     "name": "Webrahmen 12 × 16 cm, Kerben alle 1 cm"
+    }
+   ]
   },
   {
    "id": "zw-lama-weben",
@@ -3814,8 +3868,8 @@
    },
    "vorlagen": [
     {
-     "datei": "?form=lama&h=15",
-     "name": "Lama, 15 cm hoch"
+     "datei": "?form=lamarahmen&h=15",
+     "name": "Lama-Webrahmen, 15 cm hoch, mit Kerben"
     }
    ]
   },
@@ -3955,7 +4009,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=kreis&b=6",
+     "name": "Kreis, 6 cm"
+    }
+   ]
   },
   {
    "id": "zw-kreuzanschlag",
@@ -6527,7 +6587,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=flocke-falt&h=10",
+     "name": "Schneeflocke zum Falten, 10 cm"
+    }
+   ]
   },
   {
    "id": "zw-blaetterente",
@@ -6825,7 +6891,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=maennchen&h=10",
+     "name": "Männchen, 10 cm, auf gefaltetes Papier legen"
+    }
+   ]
   },
   {
    "id": "zw-stoecke-schnitzen-1",
@@ -8082,7 +8154,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=webscheibe&b=18",
+     "name": "Webscheibe, 18 cm, 9 Schlitze"
+    }
+   ]
   },
   {
    "id": "zw-traumfaenger-pappteller",
@@ -8164,7 +8242,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=traumfaenger&b=19",
+     "name": "Traumfänger-Ring, 19 cm"
+    }
+   ]
   },
   {
    "id": "zw-quaste",
@@ -9255,7 +9339,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=knuepfscheibe&b=9",
+     "name": "Knüpfscheibe, 9 cm"
+    }
+   ]
   },
   {
    "id": "zw-freundschaftsband-streifen",
@@ -9565,7 +9655,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=knuepfscheibe&b=9",
+     "name": "Knüpfscheibe, 9 cm"
+    }
+   ]
   },
   {
    "id": "zw-rundzopf-vier-faeden",
@@ -9870,7 +9966,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=feder&h=20",
+     "name": "Feder, 20 cm"
+    }
+   ]
   },
   {
    "id": "zw-quaste-karton",
@@ -10036,7 +10138,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=knuepfscheibe&b=9",
+     "name": "Knüpfscheibe, 9 cm"
+    }
+   ]
   },
   {
    "id": "zw-perlenweben",
@@ -10425,7 +10533,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=perlenraster&h=18&n=3",
+     "name": "Entwurfsblatt, 5 Perlen breit, 3×"
+    }
+   ]
   },
   {
    "id": "zw-perlenwebrahmen-karton",
@@ -10511,7 +10625,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=perlenwebrahmen&h=24",
+     "name": "Perlen-Webrahmen 10 × 24 cm, je 8 Schlitze"
+    }
+   ]
   },
   {
    "id": "zw-perlenarmband-schachtel",
@@ -12504,7 +12624,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=kreis&b=8&n=2",
+     "name": "Kreis, 8 cm, 2×"
+    }
+   ]
   },
   {
    "id": "zw-knopf-ohne-knoten",
@@ -13480,7 +13606,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=blume&b=14",
+     "name": "Blume, 14 cm breit"
+    }
+   ]
   },
   {
    "id": "zw-pusteblume-deko",
@@ -13697,7 +13829,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?liste=kreis:9.5x9.5:1,kreis:3.5x3.5:1",
+     "name": "Kreise 9,5 cm und 3,5 cm"
+    }
+   ]
   },
   {
    "id": "zw-hase-haekeln-oberkoerper",
@@ -13878,7 +14016,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=flamme&h=6",
+     "name": "Kerzenflamme, 6 cm"
+    }
+   ]
   },
   {
    "id": "zw-becher-eindrueckform",
@@ -14203,7 +14347,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?liste=flamingo:5x12:1,ring:7x7:2",
+     "name": "Flamingo-Kopf 12 cm und zwei Bommel-Ringe 7 cm"
+    }
+   ]
   },
   {
    "id": "zw-taschengriff-cobra",
@@ -14724,7 +14874,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=kiesel&b=14",
+     "name": "Kieselform, 14 cm breit"
+    }
+   ]
   },
   {
    "id": "zw-teller-sechseck-ton",
@@ -16444,7 +16600,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?liste=kreis:19x19:2,kreis:15x15:2",
+     "name": "Kreise 19 cm und 15 cm, je 2×"
+    }
+   ]
   },
   {
    "id": "zw-drahtvogel",
@@ -16779,6 +16941,10 @@
     {
      "datei": "?form=herz&b=7",
      "name": "Herz, 7 cm breit"
+    },
+    {
+     "datei": "?form=webquadrat&b=10",
+     "name": "Webquadrat 10 cm, Linien alle 1 cm"
     }
    ]
   },
@@ -16854,7 +17020,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?liste=kreis:7x7:1,kreis:3x3:4",
+     "name": "Kopf 7 cm und 4 Kreise 3 cm"
+    }
+   ]
   },
   {
    "id": "zw-geldschein-schmetterling",
@@ -17079,7 +17251,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=kreis&b=8&n=4",
+     "name": "Kreis, 8 cm, 4×"
+    }
+   ]
   },
   {
    "id": "zw-nadelkissen-maus",
@@ -17156,8 +17334,8 @@
    },
    "vorlagen": [
     {
-     "datei": "?form=kreis&b=10",
-     "name": "Kreis, 10 cm"
+     "datei": "?liste=webscheibe:10x10:1,kreis:10x10:1",
+     "name": "Webscheibe und Filzkreis, je 10 cm"
     }
    ]
   },
@@ -17481,7 +17659,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=feder&h=8&n=3",
+     "name": "Feder, 8 cm, 3×"
+    }
+   ]
   },
   {
    "id": "zw-kleines-ei-eindrueckform",
@@ -17633,7 +17817,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=clown&h=10",
+     "name": "Clownkopf, 10 cm"
+    }
+   ]
   },
   {
    "id": "zw-glasur-effektverstaerker",
@@ -20140,7 +20330,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=hand&h=15",
+     "name": "Hand, 15 cm hoch"
+    }
+   ]
   },
   {
    "id": "zw-memoscheibe-tshirt",
@@ -20222,7 +20418,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=kreis&b=15&linie=zugabe&zugabe=20",
+     "name": "Kreis 15 cm, Stoff mit 2 cm Zugabe"
+    }
+   ]
   },
   {
    "id": "ex-fallschirm",
@@ -20287,7 +20489,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=fallschirm&b=19",
+     "name": "Viertel für einen 38-cm-Schirm, Papier zweimal falten"
+    }
+   ]
   },
   {
    "id": "zw-weihnachtsmann-holzring",
@@ -21108,7 +21316,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=monstera&b=18",
+     "name": "Monstera-Blatt, 18 cm breit"
+    }
+   ]
   },
   {
    "id": "zw-lesezeichen-herz-falten",
@@ -21875,7 +22089,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=feder&h=20",
+     "name": "Feder, 20 cm"
+    }
+   ]
   },
   {
    "id": "zw-gartenkugel-blaetter",
@@ -22018,7 +22238,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=blatt&h=18",
+     "name": "Blatt, 18 cm hoch"
+    }
+   ]
   },
   {
    "id": "zw-haekeln-anfaenger",
@@ -22171,7 +22397,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=webblume&b=19",
+     "name": "Webblume, 19 cm, 13 Zacken"
+    }
+   ]
   },
   {
    "id": "zw-wichtel-stempel-folie",
@@ -23644,7 +23876,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=blume&b=18",
+     "name": "Blume, 18 cm breit"
+    }
+   ]
   },
   {
    "id": "zw-wichtel-wolle",
@@ -23809,7 +24047,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=kreis&b=12",
+     "name": "Kreis, 12 cm"
+    }
+   ]
   },
   {
    "id": "zw-gipsmaske-fasnacht",
@@ -23974,6 +24218,10 @@
     {
      "datei": "?form=kreis&b=15",
      "name": "Kreis, 15 cm"
+    },
+    {
+     "datei": "?form=wolf&h=10",
+     "name": "Heulender Wolf, 10 cm"
     }
    ]
   },
@@ -24757,7 +25005,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=herz&b=15",
+     "name": "Herz, 15 cm breit"
+    }
+   ]
   },
   {
    "id": "zw-nagelbild-igel",
@@ -24848,7 +25102,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=igel&b=19&linie=naht&naht=5&punkte=15",
+     "name": "Igel 19 cm breit mit Nagelpunkten alle 1,5 cm"
+    }
+   ]
   },
   {
    "id": "zw-baumscheibe-glassteine",
@@ -25065,7 +25325,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=hase&h=15",
+     "name": "Hase, 15 cm hoch"
+    }
+   ]
   },
   {
    "id": "zw-perlendrache",
@@ -25849,7 +26115,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?liste=igel:20x14:1,blatt:8x12:2",
+     "name": "Igel 20 cm und 2 Blätter"
+    }
+   ]
   },
   {
    "id": "zw-haselnussmaennchen",
@@ -26251,7 +26523,13 @@
    "task": {
     "text": "",
     "deliverable": "keine"
-   }
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=nagelbrett&b=15",
+     "name": "Nagelbrett 15 × 15 cm mit Nagelpunkten"
+    }
+   ]
   },
   {
    "id": "zw-hammer-zangen",

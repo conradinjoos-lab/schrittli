@@ -135,6 +135,7 @@ Jedes Video bekommt `material: ["id", "id", …]`. Nur diese IDs verwenden (Spal
 | reissverschluss | Reissverschluss | teilbar, mit Schieber |
 | baumwollband | Baumwollband | Schlaufe, z. B. am Etui |
 | naehmaschine | Nähmaschine |  |
+| buegeleisen | Bügeleisen |  |
 | vlieseline | Vlieseline | Polster-Einlage, Verstärkung |
 
 Fehlt etwas Wichtiges, darf eine neue id ergänzt werden – dann bitte im Bericht nennen (id + Name).

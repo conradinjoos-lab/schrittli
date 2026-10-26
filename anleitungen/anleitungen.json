@@ -12,7 +12,7 @@
    "vorlagen": [{"datei": "vorlage-startrampe-a3.pdf", "name": "Vorlage Startrampe", "format": "A3"}],
    "material": ["holzbrett", "papier", "schere", "leim", "saege", "ahle", "schleifpapier", "stab", "bohrer", "schraubzwinge", "gummiband"],
    "steps": [
-    {"text": "Hol bei der Lehrperson die Vorlage. Schneide alle Papierformen mit der Schere grob aus.", "bilder": ["ausschneiden.webp"], "vorlage": true},
+    {"text": "Druck die Vorlage unten aus. Schneide alle Papierformen mit der Schere grob aus.", "bilder": ["ausschneiden.webp"], "vorlage": true},
     {"text": "Klebe die Papierformen mit dem Klebestift auf das Holz.", "bilder": ["aufkleben.webp"],
      "achtung": ["Trage den Klebstoff nur den Strichen entlang auf.", "Klebe die Formen so auf, dass wenig Holz übrig bleibt."],
      "zeigen": "Zeig der Lehrperson, wie du die Papierformen aufgeklebt hast."},
@@ -58,7 +58,7 @@
    "vorlagen": [{"datei": "vorlage-rakete-a4.pdf", "name": "Vorlage Papierrakete", "format": "A4"}],
    "material": ["papier", "schere", "stab", "schraubstock", "leim", "klebeband", "farbe", "pinsel"],
    "steps": [
-    {"text": "Hol bei der Lehrperson die Vorlage für die Papierrakete. Schneide alle Teile mit der Schere aus.", "bilder": ["vorlage.webp"], "vorlage": true},
+    {"text": "Druck die Vorlage für die Papierrakete unten aus. Schneide alle Teile mit der Schere aus.", "bilder": ["vorlage.webp"], "vorlage": true},
     {"text": "Spanne ein Rundholz (20 mm) in den Schraubstock. Wickle das Papier darum und klebe es mit dem Klebestift zu.", "bilder": ["wickeln.webp"],
      "achtung": ["Nicht zu eng wickeln! Die Rakete muss gut über den Holzstab rutschen."],
      "tipp": ["Die Nähte kannst du mit Klebeband verstärken."]},
@@ -132,6 +132,32 @@
      "tipp": ["Geradstich, Stichlänge 2, Nadel links."]}
    ],
    "fertig": "Wende dein Etui durch den Reissverschluss. Bravo! Dein gefüttertes Stifteetui ist fertig."
+  },
+  {
+   "id": "buchtasche",
+   "title": "Buchtasche",
+   "areaId": "naehen",
+   "gruppe": "Kleine Projekte",
+   "stufen": [5, 6],
+   "niveau": 2,
+   "titelbild": "fertig.webp",
+   "material": ["stoff", "lineal", "bleistift", "schere", "stecknadeln", "naehmaschine", "garn", "buegeleisen", "nadel"],
+   "steps": [
+    {"text": "Schneide aus Aussenstoff und Innenstoff je ein Stück zu, 28 × 44 cm. Schneide aus dem Aussenstoff zwei Henkel, 9 × 48 cm.", "bilder": ["zuschneiden.webp"],
+     "tipp": ["Miss genau mit dem Lineal und zeichne die Linien zuerst vor."]},
+    {"text": "Falte jedes grosse Stück, schön auf schön. Nähe die offene Seite zu, 1 cm vom Rand.", "bilder": ["seiten.webp"],
+     "achtung": ["Beim Innenstoff lässt du in der Mitte 10 cm offen. Das ist die Wendeöffnung."]},
+    {"text": "Leg den Stoff so hin, dass die Naht in der Mitte liegt. Nähe unten die Bodennaht zu, 1 cm vom Rand.", "bilder": ["boden.webp"]},
+    {"text": "Falte jeden Henkel der Länge nach in der Mitte. Klapp ihn auf und falte beide Ränder zur Mitte. Bügle alles glatt und steppe 3 mm vom Rand ab.", "bilder": ["henkel.webp"],
+     "achtung": ["Das Bügeleisen ist heiss!"]},
+    {"text": "Dreh die Aussentasche auf die schöne Seite. Stecke die Henkel oben am Rand fest, auf jeder Seite einen.", "bilder": ["henkel-anstecken.webp"],
+     "achtung": ["Die Henkel sind nicht verdreht, liegen genau übereinander und sind gleich lang."],
+     "zeigen": "Zeig der Lehrperson, wie du die Henkel angesteckt hast."},
+    {"text": "Steck die Aussentasche in die Innentasche, schön auf schön. Nähe oben rundherum zu, 1 cm vom Rand.", "bilder": ["zusammennaehen.webp"],
+     "tipp": ["Die Henkel liegen dabei zwischen den zwei Taschen."]},
+    {"text": "Wende die Tasche durch die Wendeöffnung. Schliess die Öffnung von Hand mit dem Matratzenstich. Stoss die Innentasche nach innen.", "bilder": ["wenden.webp"]}
+   ],
+   "fertig": "Bravo! Deine Wende-Büchertasche ist fertig. Du kannst sie von beiden Seiten tragen."
   }
  ]
 }
