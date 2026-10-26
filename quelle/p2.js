@@ -483,7 +483,7 @@ SCREENS.player=(app,{videoId,school})=>{
   app.innerHTML=`<div class="${kidClass('pl'+(S.settings.kino&&!school?' kino':''))}">${girlande(n)}
     <div class="inner kopf pl-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a><div class="schild"><h1>${esc(v.title)}</h1></div><div class="kopf-rechts"><button type="button" class="fm-pill" data-act="melden" title="Fehler melden">${ico('flag')}<span>Fehler melden</span></button><span class="zettel" id="zettel"></span>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}</div></div>
     <div class="inner panes">
-      <div class="pane"><div class="plabel"><i class="punkt" style="background:#4C6EF5"></i>Schau zu</div><div class="video-box"><div class="host" id="host"></div><div class="shield" id="shield" data-act="shield"></div><div class="overlay" id="overlay"></div><span class="modebadge" id="modebadge" hidden></span></div><div class="fuss"></div></div>
+      <div class="pane"><div class="plabel"><i class="punkt" style="background:#4C6EF5"></i>Schau zu</div><div class="video-box"><div class="host" id="host"></div><div class="shield" id="shield" data-act="shield"></div><div class="overlay" id="overlay"></div><span class="modebadge" id="modebadge" hidden></span><span class="marke" id="marke" hidden><img src="${GRAFIK}figuren/logo.webp" alt=""><b>Stop <i>&amp;</i> Mach</b></span></div><div class="fuss"></div></div>
       <div class="pane"><div class="plabel"><i class="punkt" style="background:#E8554E"></i><span id="zettel2">Die Schritte</span></div><div class="schritte" id="schritte"></div></div>
     </div>
     <div class="pl-bank"><div class="inner"><div class="steuer"><div class="controls" id="controls"></div><div class="kino-step" id="kinostep" data-act="liste" role="button"></div><div class="auftrag" id="task"></div></div></div></div>
@@ -563,6 +563,7 @@ function updatePlayerUI(){ if(!P) return;
   ov.hidden=!show; ov.classList.toggle('transparent',transparent); ov.innerHTML=html;
   sh.hidden=P.needsTap||S.settings.passTouches||show;
   const mb=$('#modebadge'); if(mb){ mb.hidden=!(m==='paused'||m==='stepdone'); const jetzt=m==='stepdone'&&!/^(zuschauen|schau )/i.test(curStep().label); mb.innerHTML=jetzt?figur('jetzt-du')+'Jetzt du':m==='stepdone'?'Weiter?':'Pause'; }
+  const mk=$('#marke'); if(mk){ mk.hidden=m==='playing'||m==='error'; mk.classList.toggle('ov',show); }
   const z=$('#zettel'); if(z) z.textContent=n?`Schritt ${P.idx+1} von ${n}`:'Frei schauen';
   // Schritte als Knöpfe rechts neben dem Video
   const sl=$('#schritte');

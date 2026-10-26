@@ -636,6 +636,14 @@ body:has(.v3){background:#F5F6F8}
 .an-ende .figur{height:190px;margin:0 auto}
 .modebadge .figur{height:50px;margin:-8px -2px -6px -12px}
 .kid.pl.kino .modebadge .figur{height:58px}
+.marke{position:absolute;right:12px;bottom:10px;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 4px;border-radius:999px;background:#F1E3CB;color:#1C4A63;border:2px solid #1C4A63;box-shadow:2px 3px 0 rgba(0,0,0,.3);pointer-events:none}
+.marke img{width:36px;height:36px;border-radius:50%;object-fit:cover;object-position:50% 6%;background:#fff}
+.marke b{font-family:var(--display);font-size:18px;font-weight:700;letter-spacing:-.01em;white-space:nowrap}
+.marke i{font-style:normal;color:#E07A3F}
+.kid.pl.kino .marke{right:16px;bottom:14px;height:50px}
+.kid.pl.kino .marke img{width:42px;height:42px}
+.kid.pl.kino .marke b{font-size:21px}
+@media (max-width:520px){.marke{height:34px;padding:0 10px 0 3px;gap:6px;right:8px;bottom:6px}.marke img{width:28px;height:28px}.marke b{font-size:14px}.marke.ov{display:none}}
 @media (max-width:640px){.fig-gruss{flex-direction:column;align-items:center;gap:6px}.fig-gruss .figur,.papier .fig-gruss .figur{height:100px;margin:0}}
 .fm-knopf{position:fixed;left:calc(10px + env(safe-area-inset-left,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:65;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--surface);color:#8A8178;box-shadow:var(--shadow-sm);border:2px solid #D64545;color:#D64545}
 .fm-knopf:hover,.fm-knopf:focus-visible{opacity:1;color:#D64545}.fm-knopf .ico{width:20px;height:20px;fill:currentColor}
@@ -1143,7 +1151,7 @@ SCREENS.player=(app,{videoId,school})=>{
   app.innerHTML=`<div class="${kidClass('pl'+(S.settings.kino&&!school?' kino':''))}">${girlande(n)}
     <div class="inner kopf pl-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a><div class="schild"><h1>${esc(v.title)}</h1></div><div class="kopf-rechts"><button type="button" class="fm-pill" data-act="melden" title="Fehler melden">${ico('flag')}<span>Fehler melden</span></button><span class="zettel" id="zettel"></span>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}</div></div>
     <div class="inner panes">
-      <div class="pane"><div class="plabel"><i class="punkt" style="background:#4C6EF5"></i>Schau zu</div><div class="video-box"><div class="host" id="host"></div><div class="shield" id="shield" data-act="shield"></div><div class="overlay" id="overlay"></div><span class="modebadge" id="modebadge" hidden></span></div><div class="fuss"></div></div>
+      <div class="pane"><div class="plabel"><i class="punkt" style="background:#4C6EF5"></i>Schau zu</div><div class="video-box"><div class="host" id="host"></div><div class="shield" id="shield" data-act="shield"></div><div class="overlay" id="overlay"></div><span class="modebadge" id="modebadge" hidden></span><span class="marke" id="marke" hidden><img src="${GRAFIK}figuren/logo.webp" alt=""><b>Stop <i>&amp;</i> Mach</b></span></div><div class="fuss"></div></div>
       <div class="pane"><div class="plabel"><i class="punkt" style="background:#E8554E"></i><span id="zettel2">Die Schritte</span></div><div class="schritte" id="schritte"></div></div>
     </div>
     <div class="pl-bank"><div class="inner"><div class="steuer"><div class="controls" id="controls"></div><div class="kino-step" id="kinostep" data-act="liste" role="button"></div><div class="auftrag" id="task"></div></div></div></div>
@@ -1223,6 +1231,7 @@ function updatePlayerUI(){ if(!P) return;
   ov.hidden=!show; ov.classList.toggle('transparent',transparent); ov.innerHTML=html;
   sh.hidden=P.needsTap||S.settings.passTouches||show;
   const mb=$('#modebadge'); if(mb){ mb.hidden=!(m==='paused'||m==='stepdone'); const jetzt=m==='stepdone'&&!/^(zuschauen|schau )/i.test(curStep().label); mb.innerHTML=jetzt?figur('jetzt-du')+'Jetzt du':m==='stepdone'?'Weiter?':'Pause'; }
+  const mk=$('#marke'); if(mk){ mk.hidden=m==='playing'||m==='error'; mk.classList.toggle('ov',show); }
   const z=$('#zettel'); if(z) z.textContent=n?`Schritt ${P.idx+1} von ${n}`:'Frei schauen';
   // Schritte als Knöpfe rechts neben dem Video
   const sl=$('#schritte');
