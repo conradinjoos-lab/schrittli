@@ -77,6 +77,7 @@ Jedes Video bekommt `material: ["id", "id", …]`. Nur diese IDs verwenden (Spal
 | schnitzhandschuh | Schnitzhandschuh | Schnittschutz, für die Haltehand |
 | holzklotz | Holzklotz | Kantholz, Holzrest |
 | wackelaugen | Wackelaugen |  |
+| sticker | Sticker | Aufkleber, Glitzersteine, Strasssteine |
 | holzraeder | Holzräder | fertige Holzräder aus dem Bastelladen |
 | schrauben | Schrauben |  |
 | schraubendreher | Schraubendreher |  |
