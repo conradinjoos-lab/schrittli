@@ -7,7 +7,7 @@ Aufruf: python bild.py                 – alle Bilder aus BILDER
 import os, sys, json
 import numpy as np, cv2
 from scipy import ndimage
-from shapely.geometry import Polygon, MultiPolygon, LineString, MultiLineString
+from shapely.geometry import LinearRing, Polygon, MultiPolygon, LineString, MultiLineString
 from shapely.ops import unary_union, linemerge
 from shapely import affinity
 from shapely.geometry.polygon import orient
@@ -83,12 +83,31 @@ def polygone(binaer, skala, ursprung):
     return out
 
 
-def ringe(g, tol):
+def runden(pts, n=2):
+    """Chaikin: Ecken eines geschlossenen Rings abschneiden → weiche Kurve statt Knicke."""
+    p = np.asarray(pts, float)
+    for _ in range(n):
+        q = np.roll(p, -1, 0)
+        n2 = np.empty((2*len(p), 2)); n2[0::2] = .75*p + .25*q; n2[1::2] = .25*p + .75*q
+        p = n2
+    return p
+
+
+def ring_koord(r, tol, rund=True):
+    """LinearRing → vereinfachen, runden, Kleinstzacken weg, auf 2 Stellen."""
+    pts = np.asarray(r.coords)[:-1]
+    if tol: pts = np.asarray(LinearRing(pts).simplify(tol, preserve_topology=True).coords)[:-1]
+    if rund and len(pts) >= 3:                                        # Pixelfiguren (glatt=0) behalten ihre Ecken
+        pts = runden(pts, 2)
+        pts = np.asarray(LinearRing(pts).simplify(tol*.4 if tol else .05, preserve_topology=True).coords)[:-1]
+    return [[round(x, 2), round(y, 2)] for x, y in pts]
+
+
+def ringe(g, tol, rund=True):
     """Polygon → Ringe [[x,y],…] (aussen, dann Löcher), vereinfacht und gerundet."""
-    g = g.simplify(tol, preserve_topology=True)
     if g.is_empty or g.geom_type != 'Polygon': return []
     if g.interiors: g = orient(g)
-    return [[[round(x, 2), round(y, 2)] for x, y in np.asarray(r.coords)[:-1]] for r in [g.exterior, *g.interiors]]
+    return [ring_koord(r, tol, rund) for r in [g.exterior, *g.interiors]]
 
 
 def quantisieren(rgb, maske, k, glatt):
@@ -161,14 +180,15 @@ def form(fid, name, pfad, k, glatt):
     ys, xs = np.nonzero(maske)
     x0, y0, x1, y1 = xs.min(), ys.min(), xs.max() + 1, ys.max() + 1
     skala = 100/max(x1 - x0, y1 - y0)                                   # Bildpunkte → 100er-Einheiten
-    tol = .25 if not glatt else .35
+    tol = .25 if not glatt else .18
 
     # Umriss
     umr = polygone(maske, skala, (x0, y0))
     g = max(umr, key=lambda p: p.area)
     if glatt: g = g.buffer(glatt, 16).buffer(-2*glatt, 16).buffer(glatt, 16)   # Pixeltreppen weg, Ecken rund
-    g = g.simplify(tol, preserve_topology=True)
-    d = ringe(g, 0)
+    g = g.simplify(tol, preserve_topology=True).buffer(0)             # buffer(0): doppelte Punkte raus
+    if g.geom_type != 'Polygon': g = max(g.geoms, key=lambda p: p.area)
+    d = ringe(g, 0, bool(glatt))
     bx0, by0, bx1, by1 = g.bounds
 
     # Farbflächen, grosse zuerst (kleine liegen beim Zeichnen oben), Schwarz (Umrisslinien) zuoberst
@@ -184,14 +204,14 @@ def form(fid, name, pfad, k, glatt):
         elif glatt:                                                     # Linien nur schliessen, nie verdünnen
             weich = [p.buffer(glatt*.3, 8).buffer(-glatt*.3, 8) for p in teile]
             teile = [t for q in weich for t in getattr(q, 'geoms', [q]) if not t.is_empty]
-        teile = [p.intersection(g) for p in teile]
+        teile = [p.buffer(0).intersection(g) for p in teile if not p.is_empty]
         return [t for p in teile for t in getattr(p, 'geoms', [p]) if t.geom_type == 'Polygon' and t.area > (.05 if linien else .2)]
 
     farben, grenzen = [], []
     for i in reihenfolge:
         if not (etik == i).any(): continue
         teile = flaechen(etik, i, i == si)
-        rr = [r for t in teile for r in ringe(t, tol*.5 if i == si else tol)]
+        rr = [r for t in teile for r in ringe(t, tol*.5 if i == si else tol, bool(glatt))]
         if rr: farben.append(dict(f=hexf(palette[i]), d=rr))
     # Grenzen für die Innenlinien aus dem Bild ohne dünne Linien (sonst lägen sie doppelt an beiden Linienrändern)
     for i in range(len(palette)):
@@ -203,8 +223,15 @@ def form(fid, name, pfad, k, glatt):
     det = []
     for l in getattr(li, 'geoms', [li]):
         if l.is_empty or l.length < 1.5: continue
-        l = l.simplify(tol)
-        det.append([[round(x, 2), round(y, 2)] for x, y in np.asarray(l.coords)])
+        pts = np.asarray(l.simplify(tol).coords)
+        if glatt and len(pts) >= 3:                                     # offene Linie runden, Enden festhalten
+            p = pts
+            for _ in range(2):
+                a, b = p[:-1], p[1:]
+                m = np.empty((2*len(a), 2)); m[0::2] = .75*a + .25*b; m[1::2] = .25*a + .75*b
+                p = np.vstack([pts[:1], m, pts[-1:]])
+            pts = np.asarray(LineString(p).simplify(tol*.4).coords)
+        det.append([[round(x, 2), round(y, 2)] for x, y in pts])
 
     # Verschieben, damit der Umriss bei 0/0 beginnt
     dx, dy = -bx0, -by0
