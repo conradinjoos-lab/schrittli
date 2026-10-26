@@ -449,6 +449,12 @@ a.btn{text-decoration:none;color:inherit}
 .lrow:last-child{border-bottom:0}
 .lrow .stufen{display:inline-flex;gap:3px}.lrow .stufen b{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:6px;background:var(--kink);color:#fff;font-size:13px}
 .lrow .btn.sm{flex:none}
+.lp-chip{flex:none;border:1.5px solid rgba(43,35,32,.35);background:transparent;color:inherit;border-radius:999px;padding:1px 8px;font:inherit;font-size:11px;font-weight:700;letter-spacing:.03em;cursor:pointer;opacity:.55}
+.lp-chip:hover,.lp-chip[aria-expanded="true"]{opacity:1;border-color:var(--kink)}
+.lp-panel{margin:0 0 8px;padding:8px 12px;border-left:3px solid var(--kink);background:rgba(255,255,255,.45);border-radius:0 8px 8px 0;font-size:14px;line-height:1.35}
+.lp-k+.lp-k{margin-top:8px}.lp-k a{color:inherit;text-decoration:none}.lp-k a:hover{text-decoration:underline}
+.lp-s{margin-top:2px;opacity:.85}.lp-s span{display:block;font-size:11px;font-weight:700;opacity:.7}
+.lp-info{font-size:13px;opacity:.75;margin:-6px 0 14px;line-height:1.35}
 .kid.pl .lehrer-zeile{display:none}
 .kid:not(.pl) .inner.kopf{margin-top:14px}
 .kid .regal-wrap:first-of-type{margin-top:48px}
@@ -765,6 +771,12 @@ const ANL_BASE=SCHULE?'../anleitungen/':'anleitungen/';
 async function loadAnleitungen(){ if(!/^https?:/.test(location.protocol)) return; try{ const r=await fetch(ANL_BASE+'anleitungen.json',{cache:'no-store'}); if(!r.ok) return; const j=await r.json();
   const neu=(j.anleitungen||[]).filter(x=>x&&typeof x.id==='string'&&typeof x.title==='string'&&Array.isArray(x.steps)&&x.steps.length).map(x=>({...x,areaId:SCHULE||areaOf(x.areaId)?x.areaId:'werken',source:{type:'bilder'},quelle:'anleitung',bildpfad:ANL_BASE+(x.ordner||x.id)+'/',thumb:x.titelbild?ANL_BASE+(x.ordner||x.id)+'/'+x.titelbild:null}));
   S.videos=S.videos.filter(v=>v.quelle!=='anleitung').concat(neu); }catch(e){} }
+let LP21=null, LP21_LADEN=null; // schule/lp21.json: LP21-TTG-Kompetenzen pro Video und Anleitung (werkzeug/lp21.py), nur bei «Für Lehrpersonen»
+function loadLp21(){ if(!/^https?:/.test(location.protocol)) return Promise.resolve(); return LP21_LADEN||(LP21_LADEN=fetch(SCHULE?'lp21.json':'schule/lp21.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{ if(j&&j.zuordnung&&j.kompetenzen) LP21=j; }).catch(()=>{})); }
+function lpCode(c){ return c.replace(/^TTG\./,''); }
+// Kompetenzen eines Videos mit den Stufentexten der Zyklen, für die es gedacht ist (Klasse 1–2 = Zyklus 1, 3–6 = Zyklus 2)
+function lpPanel(v){ const st=v.stufen||[]; const zyk=[st.some(s=>s<=2)&&1,st.some(s=>s>=3)&&2].filter(Boolean); if(!zyk.length) zyk.push(1,2);
+  return `<div class="lp-panel">${(LP21.zuordnung[v.id]||[]).map(c=>{ const k=LP21.kompetenzen[c]; if(!k) return ''; return `<div class="lp-k"><a href="${esc(k.link)}" target="_blank" rel="noopener"><b>${lpCode(c)}</b> ${esc(k.titel)}</a>${k.stufen.filter(s=>zyk.includes(s.zyklus)).map(s=>`<div class="lp-s"><span>${lpCode(s.code)} · ${s.zyklus}. Zyklus</span>${esc(s.text)}</div>`).join('')}</div>`; }).join('')}</div>`; }
 function werkeHtml(ws){ return ws.length?`<h2 class="pw-grp andere-titel">Das haben andere gemacht</h2><div class="kork andere">${ws.map(w=>`<button class="foto" data-act="andere" data-i="${WERKE.indexOf(w)}"><div class="bild"><img src="${WERKE_BASE}${esc(w.bild)}" alt="" loading="lazy" onerror="this.closest('.foto').remove()"></div><span class="nm">${esc(w.titel)}</span></button>`).join('')}</div>`:''; }
 function zeigeWerk(b){ const w=WERKE[+b.dataset.i]; if(!w) return; kidModal(`<img class="andere-gross" src="${WERKE_BASE}${esc(w.bild)}" alt=""><h2 style="font-size:20px;margin:10px 0 0">${esc(w.titel)}</h2><div class="row center" style="margin-top:12px"><button class="kbtn ghost" data-close>Schliessen</button></div>`); }
 const VORL_BASE=SCHULE?'../vorlagen/':'vorlagen/';   // eigene Vorlagen zu Videos, z. B. vorlagen/vorlage-nikolausstiefel-a4.pdf
@@ -1031,13 +1043,17 @@ SCREENS.werkzeuge=app=>{
   wire(app,{ back:()=>go('home') });
 };
 SCREENS.lehrer=app=>{ const n=abend();
+  if(!LP21) loadLp21().then(()=>{ if(LP21&&view.name==='lehrer') render(); });
   const vids=S.videos.slice().sort((a,b)=>(a.areaId+a.title).localeCompare(b.areaId+b.title,'de'));
   app.innerHTML=`<div class="${kidClass()} schrift-normal">${girlande(n)}${kopf('Für Lehrpersonen',{back:true})}
     <div class="inner"><div class="lehrer-info">Ohne Anmeldung. Fotos von fertigen Werken bleiben nur auf diesem Gerät. Pro Video gibt es einen QR-Code: Kinder scannen ihn und landen direkt im Player mit den Schritten – auch von zuhause. Klassenzuordnung und neue Videos: Link an Conradin.</div>
+    ${LP21?`<div class="lp-info">«LP21» bei jedem Eintrag zeigt die Kompetenzen aus dem Lehrplan 21 (TTG), die das Werkstück abdeckt – zugeordnet nach Techniken und Material, bitte prüfen. Bei jedem Werkstück dazu: ${Object.keys(LP21.kompetenzen).filter(c=>LP21.kompetenzen[c].immer).map(c=>`${lpCode(c)} ${esc(LP21.kompetenzen[c].titel)}`).join(' · ')}.</div>`:''}
     ${genKarten()}
-    <div class="lehrer-liste">${S.areas.map(a=>{ const vs=vids.filter(v=>v.areaId===a.id); if(!vs.length) return ''; return `<h2 style="color:${a.color};margin:14px 0 6px">${a.emoji} ${esc(a.name)}</h2>${vs.map(v=>`<div class="lrow"><span class="grow">${esc(v.title)}${v.grundtechnik?' <span class="gt">Grundtechnik</span>':''}</span>${niveauHtml(v)}<span class="stufen">${(v.stufen||[]).map(s=>`<b>${s}</b>`).join('')}</span><span class="muted small">${v.zeit?`⏱ ${v.zeit} Min. · `:''}${(v.steps||[]).length?v.steps.length+' Schritte':'ohne Schritte'}${(v.material||[]).length?' · '+v.material.map(matName).join(', '):''}</span><button class="btn sm" data-act="qr" data-id="${v.id}">QR-Code</button></div>`).join('')}`; }).join('')}</div></div>
+    <div class="lehrer-liste">${S.areas.map(a=>{ const vs=vids.filter(v=>v.areaId===a.id); if(!vs.length) return ''; return `<h2 style="color:${a.color};margin:14px 0 6px">${a.emoji} ${esc(a.name)}</h2>${vs.map(v=>`<div class="lrow"><span class="grow">${esc(v.title)}${v.grundtechnik?' <span class="gt">Grundtechnik</span>':''}</span>${niveauHtml(v)}<span class="stufen">${(v.stufen||[]).map(s=>`<b>${s}</b>`).join('')}</span><span class="muted small">${v.zeit?`⏱ ${v.zeit} Min. · `:''}${(v.steps||[]).length?v.steps.length+' Schritte':'ohne Schritte'}${(v.material||[]).length?' · '+v.material.map(matName).join(', '):''}</span>${LP21&&LP21.zuordnung[v.id]?`<button class="lp-chip" data-act="lp" data-id="${v.id}" aria-expanded="false" title="LP21-Kompetenzen anzeigen">LP21</button>`:''}<button class="btn sm" data-act="qr" data-id="${v.id}">QR-Code</button></div>`).join('')}`; }).join('')}</div></div>
     ${bank()}</div>`;
-  wire(app,{ back:()=>go('home'), qr:async b=>{ const v=videoOf(b.dataset.id); const link=schoolLink(v); kidModal(`<h2 style="font-size:20px">${esc(v.title)}</h2><div class="qr" id="qr" style="margin:10px auto"></div><code style="font-size:11px;word-break:break-all;display:block;max-width:360px">${esc(link)}</code><div class="row center" style="margin-top:12px"><button class="btn sm" data-act="copylink" data-link="${esc(link)}">Link kopieren</button><button class="kbtn ghost" data-close>Schliessen</button></div>`,{copylink:(b2)=>{ navigator.clipboard&&navigator.clipboard.writeText(b2.dataset.link).then(()=>toast('Kopiert')).catch(()=>toast('Kopieren nicht möglich')); }}); try{ if(!window.QRCode) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'); new QRCode($('#qr'),{text:link,width:240,height:240,correctLevel:QRCode.CorrectLevel.L}); }catch(e){ const q=$('#qr'); if(q) q.textContent='QR-Code konnte nicht geladen werden.'; } } });
+  wire(app,{ back:()=>go('home'),
+    lp:b=>{ const row=b.closest('.lrow'), nx=row.nextElementSibling; if(nx&&nx.classList.contains('lp-panel')){ nx.remove(); b.setAttribute('aria-expanded','false'); return; } row.insertAdjacentHTML('afterend',lpPanel(videoOf(b.dataset.id))); b.setAttribute('aria-expanded','true'); },
+    qr:async b=>{ const v=videoOf(b.dataset.id); const link=schoolLink(v); kidModal(`<h2 style="font-size:20px">${esc(v.title)}</h2><div class="qr" id="qr" style="margin:10px auto"></div><code style="font-size:11px;word-break:break-all;display:block;max-width:360px">${esc(link)}</code><div class="row center" style="margin-top:12px"><button class="btn sm" data-act="copylink" data-link="${esc(link)}">Link kopieren</button><button class="kbtn ghost" data-close>Schliessen</button></div>`,{copylink:(b2)=>{ navigator.clipboard&&navigator.clipboard.writeText(b2.dataset.link).then(()=>toast('Kopiert')).catch(()=>toast('Kopieren nicht möglich')); }}); try{ if(!window.QRCode) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'); new QRCode($('#qr'),{text:link,width:240,height:240,correctLevel:QRCode.CorrectLevel.L}); }catch(e){ const q=$('#qr'); if(q) q.textContent='QR-Code konnte nicht geladen werden.'; } } });
 };
 
 /* ============================== Kind: Werkstatt (Start) ============================== */

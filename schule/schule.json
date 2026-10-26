@@ -3824,9 +3824,9 @@
    "areaId": "holz",
    "gruppe": "Werkzeug kennenlernen",
    "stufen": [
-    3,
-    4,
-    5
+    1,
+    2,
+    3
    ],
    "niveau": 1,
    "grundtechnik": true,
@@ -3901,9 +3901,9 @@
    "areaId": "holz",
    "gruppe": "Werkzeug kennenlernen",
    "stufen": [
+    2,
     3,
-    4,
-    5
+    4
    ],
    "niveau": 2,
    "grundtechnik": true,
@@ -5069,8 +5069,9 @@
    "areaId": "formen",
    "gruppe": "Ton: erste Schritte",
    "stufen": [
-    3,
-    4
+    1,
+    2,
+    3
    ],
    "niveau": 1,
    "techniken": [
@@ -5498,9 +5499,9 @@
    "areaId": "holz",
    "gruppe": "Werkzeug kennenlernen",
    "stufen": [
+    2,
     3,
-    4,
-    5
+    4
    ],
    "niveau": 3,
    "grundtechnik": true,
@@ -6078,9 +6079,9 @@
    "gruppe": "Knöpfe",
    "zeit": 10,
    "stufen": [
-    2,
     3,
-    4
+    4,
+    5
    ],
    "niveau": 2,
    "grundtechnik": true,
@@ -7028,6 +7029,8 @@
    "areaId": "schnitzen",
    "gruppe": "Erste Schritte",
    "stufen": [
+    1,
+    2,
     3,
     4,
     5,
@@ -9181,9 +9184,9 @@
    "areaId": "knuepfen",
    "gruppe": "Freundschaftsbänder",
    "stufen": [
+    3,
     4,
-    5,
-    6
+    5
    ],
    "niveau": 2,
    "techniken": [
@@ -9259,9 +9262,9 @@
    "areaId": "knuepfen",
    "gruppe": "Freundschaftsbänder",
    "stufen": [
+    3,
     4,
-    5,
-    6
+    5
    ],
    "niveau": 2,
    "techniken": [
@@ -9330,9 +9333,9 @@
    "areaId": "knuepfen",
    "gruppe": "Freundschaftsbänder",
    "stufen": [
+    3,
     4,
-    5,
-    6
+    5
    ],
    "niveau": 2,
    "techniken": [
@@ -9402,9 +9405,9 @@
    "areaId": "knuepfen",
    "gruppe": "Freundschaftsbänder",
    "stufen": [
+    3,
     4,
-    5,
-    6
+    5
    ],
    "niveau": 2,
    "techniken": [
@@ -9483,9 +9486,9 @@
    "areaId": "knuepfen",
    "gruppe": "Freundschaftsbänder",
    "stufen": [
+    3,
     4,
-    5,
-    6
+    5
    ],
    "niveau": 2,
    "techniken": [
@@ -9713,9 +9716,9 @@
    "areaId": "knuepfen",
    "gruppe": "Freundschaftsbänder",
    "stufen": [
+    3,
     4,
-    5,
-    6
+    5
    ],
    "niveau": 2,
    "techniken": [
@@ -9793,9 +9796,9 @@
    "areaId": "knuepfen",
    "gruppe": "Makramee",
    "stufen": [
+    3,
     4,
-    5,
-    6
+    5
    ],
    "niveau": 2,
    "techniken": [
@@ -9874,9 +9877,9 @@
    "areaId": "wickeln",
    "gruppe": "Quasten",
    "stufen": [
-    4,
-    5,
-    6
+    2,
+    3,
+    4
    ],
    "niveau": 1,
    "grundtechnik": true,
@@ -9953,9 +9956,9 @@
    "areaId": "knuepfen",
    "gruppe": "Flechten und Kordeln",
    "stufen": [
-    4,
-    5,
-    6
+    2,
+    3,
+    4
    ],
    "niveau": 2,
    "techniken": [
@@ -11665,9 +11668,9 @@
    "gruppe": "Tiere",
    "zeit": 10,
    "stufen": [
-    4,
-    5,
-    6
+    2,
+    3,
+    4
    ],
    "niveau": 1,
    "techniken": [
@@ -11814,9 +11817,9 @@
    "areaId": "falten",
    "gruppe": "Sterne und Deko",
    "stufen": [
-    4,
-    5,
-    6
+    2,
+    3,
+    4
    ],
    "niveau": 1,
    "techniken": [
@@ -12957,9 +12960,9 @@
    "areaId": "stricken",
    "gruppe": "Fingerstricken",
    "stufen": [
+    3,
     4,
-    5,
-    6
+    5
    ],
    "niveau": 2,
    "techniken": [
@@ -13033,9 +13036,9 @@
    "areaId": "stricken",
    "gruppe": "Fingerstricken",
    "stufen": [
-    4,
-    5,
-    6
+    2,
+    3,
+    4
    ],
    "niveau": 1,
    "grundtechnik": true,
@@ -18324,9 +18327,9 @@
    "areaId": "formen",
    "gruppe": "Draht und Metall",
    "stufen": [
+    2,
     3,
-    4,
-    5
+    4
    ],
    "niveau": 2,
    "grundtechnik": false,
@@ -20430,10 +20433,10 @@
    "areaId": "formen",
    "gruppe": "Ton: erste Schritte",
    "stufen": [
+    2,
     3,
     4,
-    5,
-    6
+    5
    ],
    "niveau": 1,
    "grundtechnik": true,
@@ -21794,9 +21797,9 @@
    "areaId": "knuepfen",
    "gruppe": "Makramee",
    "stufen": [
+    3,
     4,
-    5,
-    6
+    5
    ],
    "niveau": 2,
    "grundtechnik": false,
@@ -21953,9 +21956,9 @@
    "areaId": "knuepfen",
    "gruppe": "Makramee",
    "stufen": [
+    3,
     4,
-    5,
-    6
+    5
    ],
    "niveau": 2,
    "grundtechnik": false,
@@ -26255,9 +26258,9 @@
    "areaId": "holz",
    "gruppe": "Werkzeug kennenlernen",
    "stufen": [
-    3,
-    4,
-    5
+    1,
+    2,
+    3
    ],
    "niveau": 2,
    "grundtechnik": true,

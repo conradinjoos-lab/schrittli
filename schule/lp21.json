@@ -1,0 +1,738 @@
+{
+ "quelle": "Lehrplan 21, Textiles und Technisches Gestalten (Fassung Kanton Zürich, zh.lehrplan.ch). Stufen: Zyklus 1 = Kindergarten bis 2. Klasse, Zyklus 2 = 3. bis 6. Klasse.",
+ "hinweis": "Zuordnung von Claude nach Techniken, Material und Projektart (werkzeug/lp21.py), von der Lehrperson zu prüfen. Der LP21 setzt im TTG keine Orientierungspunkte pro Klasse.",
+ "kompetenzen": {
+  "TTG.2.A.2": {
+   "titel": "Experimentieren und Produktideen entwickeln",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|2|1|2",
+   "stufen": [
+    {
+     "code": "TTG.2.A.2.a",
+     "zyklus": 1,
+     "text": "können Materialien und Objekte aus ihrer Lebenswelt spielerisch und forschend erkunden und eigene Produktideen entwickeln. können bewusst einen Aspekt der Gestaltung in ihr Vorhaben integrieren (z.B. zu Funktion, Konstruktion, Gestaltungselemente, Verfahren, Material)."
+    },
+    {
+     "code": "TTG.2.A.2.b",
+     "zyklus": 2,
+     "text": "können zu ausgewählten Aspekten Lösungen suchen und eigene Produktideen entwickeln (z.B. Funktion, Konstruktion, Gestaltungselementen, Verfahren, Material). können Lösungen für eigene Produktideen aus Experimentierreihen ableiten."
+    }
+   ]
+  },
+  "TTG.2.B.1.1": {
+   "titel": "Funktion und Konstruktion: Spiel und Freizeit",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|2|2|1",
+   "stufen": [
+    {
+     "code": "TTG.2.B.1.1a",
+     "zyklus": 1,
+     "text": "können Spielobjekte je nach Situation verändern und ergänzen."
+    },
+    {
+     "code": "TTG.2.B.1.1b",
+     "zyklus": 2,
+     "text": "können Figuren erfinden und gestalten (z.B. Puppen, Figuren für das Rollenspiel, Stofftiere) können für ihre eigenen Spielideen Objekte erfinden und herstellen (z.B. Geschicklichkeitsspiel, Windspiel, Spielplan)."
+    },
+    {
+     "code": "TTG.2.B.1.1c",
+     "zyklus": 2,
+     "text": "können Funktionen und Konstruktionen von Spiel- und Freizeitobjekten erkennen und für eigene Spielideen nutzen (z.B. Flugdrachen, technisches Spielzeug, Pausenplatzgestaltung)."
+    }
+   ]
+  },
+  "TTG.2.B.1.2": {
+   "titel": "Funktion und Konstruktion: Mode und Bekleidung",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|2|2|1",
+   "stufen": [
+    {
+     "code": "TTG.2.B.1.2a",
+     "zyklus": 1,
+     "text": "können Funktionen alltäglicher und spezifischer Kleidungsstücke in ihr Spiel integrieren. können mit Tüchern und Alttextilien spielen und experimentieren."
+    },
+    {
+     "code": "TTG.2.B.1.2b",
+     "zyklus": 2,
+     "text": "können über Funktionen von Kleidungsstücken nachdenken, diese spielerisch verändern und sich verkleiden (z.B. Schmuck, Schutz)."
+    },
+    {
+     "code": "TTG.2.B.1.2c",
+     "zyklus": 2,
+     "text": "können Funktionen von Kleidungsstücken oder Accessoires erkennen, deuten und daraus Ideen für eigene Vorhaben ableiten."
+    }
+   ]
+  },
+  "TTG.2.B.1.3": {
+   "titel": "Funktion und Konstruktion: Bau und Wohnbereich",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|2|2|1",
+   "stufen": [
+    {
+     "code": "TTG.2.B.1.3a",
+     "zyklus": 1,
+     "text": "können Funktionen von Bauwerken aus ihrer Fantasie und Lebenswelt in ihr Spiel integrieren. können Funktionen von Objekten im alltäglichen Wohnen spielerisch verwandeln. können mit Materialien spielen und einfache Bauten konstruieren (z.B. Verpackungsmaterial, Steine, Dachlatten, Seile, Tücher)."
+    },
+    {
+     "code": "TTG.2.B.1.3b",
+     "zyklus": 2,
+     "text": "können den Zusammenhang zwischen Funktion und Konstruktion von Gefässen und Behältern erkennen und in alltäglichen Situationen nutzen. können für den Wohnbereich oder den Arbeitsplatz funktionale Objekte erfinden und mit einfachen Konstruktionen umsetzen (z.B. Sammelkiste, Bilderrahmen)."
+    },
+    {
+     "code": "TTG.2.B.1.3c",
+     "zyklus": 2,
+     "text": "können Funktionen von stabilisierenden Elementen in Konstruktionen und Bauten erkennen und anwenden (z.B. Stütze, Verspannung, Verstrebung, Profil). können eigene Bedürfnisse zu Einrichtungsgegenständen formulieren und ihre Ideen mit einfachen Konstruktionen unter Anleitung umsetzen (z.B. Kissen, Gefässe, Behälter)."
+    }
+   ]
+  },
+  "TTG.2.B.1.4": {
+   "titel": "Funktion und Konstruktion: Mechanik und Transport",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|2|2|1",
+   "stufen": [
+    {
+     "code": "TTG.2.B.1.4a",
+     "zyklus": 1,
+     "text": "sammeln Erfahrungen mit rollenden, schwimmenden, schwebenden und fliegenden Objekten."
+    },
+    {
+     "code": "TTG.2.B.1.4b",
+     "zyklus": 2,
+     "text": "können mit beweglichen Konstruktionen experimentieren (z.B. Kugelbahn, Floss, Fallschirm). können Erfahrungen mit Hebel und Kraftübertragung sammeln (z.B. Wippe, Hammer, Zange)."
+    },
+    {
+     "code": "TTG.2.B.1.4c",
+     "zyklus": 2,
+     "text": "kennen die Funktion und Konstruktion von Antrieben und können diese anwenden (Gummiantrieb, Luftschraube, Rückstoss). setzen sich mit mechanisch-technischen Grundlagen auseinander und können diese funktional und konstruktiv anwenden (Fachbildung beim Weben, Rad, Getriebe)."
+    }
+   ]
+  },
+  "TTG.2.B.1.5": {
+   "titel": "Funktion und Konstruktion: Elektrizität und Energie",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|2|2|1",
+   "stufen": [
+    {
+     "code": "TTG.2.B.1.5a",
+     "zyklus": 1,
+     "text": "kennen Sicherheitsregeln im Umgang mit Haushaltstrom (Steckdose) und Schwachstrom (Batterie). machen spielerisch Erfahrungen mit Lichtquellen (z.B. Kerze, Taschenlampe)."
+    },
+    {
+     "code": "TTG.2.B.1.5b",
+     "zyklus": 2,
+     "text": "können eine batteriebetriebene Beleuchtung mit Ein-/Ausschaltfunktion verwenden. machen Erfahrungen zu Wind- oder Wasserkraft an einem Beispiel (z.B. Wasserrad bewegt Hammerwerk)."
+    },
+    {
+     "code": "TTG.2.B.1.5c",
+     "zyklus": 2,
+     "text": "setzen sich mit Eigenschaften von Stromkreisen auseinander (Leuchtdioden, Serie- und Parallelschaltung) und können diese in eigenen Produkten einsetzen."
+    }
+   ]
+  },
+  "TTG.2.C.1.1": {
+   "titel": "Gestaltungselemente: Material und Oberfläche",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|2|3|1",
+   "stufen": [
+    {
+     "code": "TTG.2.C.1.1a",
+     "zyklus": 1,
+     "text": "können Wirkungen von Materialien und Oberflächen untersuchen, erzählend beschreiben und Analogien dazu finden (z.B. rau, glänzend, Analogie Vorhangstoff/Gitter)"
+    },
+    {
+     "code": "TTG.2.C.1.1b",
+     "zyklus": 2,
+     "text": "können Wirkungen von Materialien und Oberflächen treffend beschreiben und für das eigene Produkt bewusst auswählen."
+    }
+   ]
+  },
+  "TTG.2.C.1.2": {
+   "titel": "Gestaltungselemente: Form",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|2|3|1",
+   "stufen": [
+    {
+     "code": "TTG.2.C.1.2a",
+     "zyklus": 1,
+     "text": "können Formen, Grössen, Ordnungen und Muster unterscheiden und erzählend beschreiben."
+    },
+    {
+     "code": "TTG.2.C.1.2b",
+     "zyklus": 2,
+     "text": "können Formen entwerfen und auf der Fläche bewusst anordnen (z.B. reihen, spiegeln, streuen, konzentrieren). können dreidimensionale Formen in ihren Produkten bewusst einsetzen (z.B. geometrische, organische, unregelmässige Formen)."
+    }
+   ]
+  },
+  "TTG.2.C.1.3": {
+   "titel": "Gestaltungselemente: Farbe",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|2|3|1",
+   "stufen": [
+    {
+     "code": "TTG.2.C.1.3a",
+     "zyklus": 1,
+     "text": "können Farben unterscheiden und benennen und zu einfachen Aufträgen gezielt auswählen."
+    },
+    {
+     "code": "TTG.2.C.1.3b",
+     "zyklus": 2,
+     "text": "können eigene Farbkombinationen zusammenstellen und für die Gestaltung der Produkte auswählen (z.B. Hell-Dunkel, Komplementärkontrast, Qualitätskontrast, Quantitätskontrast)."
+    }
+   ]
+  },
+  "TTG.2.D.1.1": {
+   "titel": "Verfahren: Trennen",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|2|4|1",
+   "stufen": [
+    {
+     "code": "TTG.2.D.1.1a",
+     "zyklus": 1,
+     "text": "angeleitet nachvollziehen und üben: - schneiden, reissen, lochen (Papier, Filz, Stoffe, Styropor); - sägen, bohren (Holzleisten, Sperrholz)."
+    },
+    {
+     "code": "TTG.2.D.1.1b",
+     "zyklus": 2,
+     "text": "zunehmend selbstständig und genau ausführen und üben: - schneiden (Karton, Textilien, Polystyrol, PET); - sägen, bohren (Weichholz, Holzwerkstoffe)."
+    }
+   ]
+  },
+  "TTG.2.D.1.2": {
+   "titel": "Verfahren: Umformen",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|2|4|1",
+   "stufen": [
+    {
+     "code": "TTG.2.D.1.2a",
+     "zyklus": 1,
+     "text": "angeleitet nachvollziehen und üben: - fadenverstärkende Verfahren anwenden (z.B. knüpfen, dinteln, zwirnen); - falten (z.B. Papier), raspeln, feilen und schleifen (Holz); - modellieren (z.B. Sand, Papiermaché, Ton)."
+    },
+    {
+     "code": "TTG.2.D.1.2b",
+     "zyklus": 2,
+     "text": "zunehmend selbstständig und genau ausführen und üben: - feilen, schleifen (z.B. Holzwerkstoffe); - biegen (Polystyrol), giessen (z.B. Zinn, Gips); - modellieren (z.B. Plattentechnik)."
+    }
+   ]
+  },
+  "TTG.2.D.1.3": {
+   "titel": "Verfahren: Verbinden",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|2|4|1",
+   "stufen": [
+    {
+     "code": "TTG.2.D.1.3a",
+     "zyklus": 1,
+     "text": "angeleitet nachvollziehen und üben: - nähen von Hand (Papier, Textilien); - nageln, kleben (Papier, Karton, Holz)."
+    },
+    {
+     "code": "TTG.2.D.1.3b",
+     "zyklus": 2,
+     "text": "zunehmend selbstständig und genau ausführen und üben: - nähen (Naht, Randabschlüsse, Verschlüsse, verstürzen); - kleben (Polystyrol), schrauben, popnieten, weichlöten."
+    }
+   ]
+  },
+  "TTG.2.D.1.4": {
+   "titel": "Verfahren: Flächen bilden (textil)",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|2|4|1",
+   "stufen": [
+    {
+     "code": "TTG.2.D.1.4a",
+     "zyklus": 1,
+     "text": "angeleitet nachvollziehen und üben: - bilden Flächen (z.B. Strickröhre, flechten, filzen, kaschieren)."
+    },
+    {
+     "code": "TTG.2.D.1.4b",
+     "zyklus": 2,
+     "text": "zunehmend selbstständig und genau ausführen und üben: - stricken (z.B. Strickbrett), häkeln und weben."
+    }
+   ]
+  },
+  "TTG.2.D.1.5": {
+   "titel": "Verfahren: Oberfläche verändern",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|2|4|1",
+   "stufen": [
+    {
+     "code": "TTG.2.D.1.5a",
+     "zyklus": 1,
+     "text": "angeleitet nachvollziehen und üben: - kaschieren, sticken, nadelfilzen; - perforieren; - ölen, wachsen, lackieren (Acryllack), drucken (z.B. mit Fundstücken), bemalen."
+    },
+    {
+     "code": "TTG.2.D.1.5b",
+     "zyklus": 2,
+     "text": "zunehmend selbstständig und genau ausführen und üben: - sticken (z.B. von Hand), applizieren (z.B. textile Materialien); - färben, lasieren, drucken (z.B. Schablonendruck, mit eigenem Druckstock)."
+    }
+   ]
+  },
+  "TTG.2.E.1.1": {
+   "titel": "Material",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|2|5|1",
+   "stufen": [
+    {
+     "code": "TTG.2.E.1.1a",
+     "zyklus": 1,
+     "text": "kennen ausgewählte Materialien und können damit gestalten (Papier, Karton, Holz, Ton, Styropor, Textilien)."
+    },
+    {
+     "code": "TTG.2.E.1.1b",
+     "zyklus": 2,
+     "text": "können Eigenschaften von Materialien benennen und diese bewusst einsetzen (Holzwerkstoffe, Polystyrol, Draht, dünne Bleche, Leder, textile Materialien)."
+    }
+   ]
+  },
+  "TTG.2.E.1.2": {
+   "titel": "Werkzeuge und Maschinen",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|2|5|1",
+   "stufen": [
+    {
+     "code": "TTG.2.E.1.2a",
+     "zyklus": 1,
+     "text": "können ihrer feinmotorischen Entwicklung entsprechend Werkzeuge und einfache technische Geräte unter Anleitung und Aufsicht verwenden (Schere, Handsäge, Handbohrer, Thermoschneider, Einspannvorrichtung). können dabei Druck, Kraft, Geschwindigkeit und Ausdauer steuern und auf die Arbeitssicherheit achten."
+    },
+    {
+     "code": "TTG.2.E.1.2b",
+     "zyklus": 2,
+     "text": "können Werkzeuge und Maschinen verantwortungsbewusst und der feinmotorischen Entwicklung entsprechend korrekt einsetzen (Nähmaschine, Webgeräte, Decoupiersäge, Akku- und Ständerbohrmaschine)."
+    }
+   ]
+  },
+  "TTG.3.B.2": {
+   "titel": "Materialgewinnung und Entsorgung",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|3|2|2",
+   "stufen": [
+    {
+     "code": "TTG.3.B.2.a",
+     "zyklus": 1,
+     "text": "können Aussagen zu Gewinnung und Herstellung verschiedener Materialien machen, die im Unterricht verwendet werden (Papier, Wolle, Holz). können an Beispielen erklären, weshalb Materialien im Alltag oder für ein Gestaltungsvorhaben eingesetzt und wie sie sachgerecht entsorgt werden (z.B. Papier, Glas, Textilien, Farbe)."
+    },
+    {
+     "code": "TTG.3.B.2.b",
+     "zyklus": 2,
+     "text": "können die Gewinnung und die Herstellung von Materialien beschreiben und Schlüsse für die Verwendung im Alltag ziehen (Holzwerkstoffe, Kunststoffe, Textilien). können Materialien unterscheiden und ausgewählten Entsorgungsgruppen zuordnen (Batterie, Farbe, Lösungsmittel, Leuchtmittel, PET)."
+    }
+   ]
+  },
+  "TTG.3.B.4": {
+   "titel": "Geräte sicher bedienen",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|3|2|4",
+   "stufen": [
+    {
+     "code": "TTG.3.B.4.a",
+     "zyklus": 1,
+     "text": "können Alltagsgeräte sachgemäss und sicher bedienen (z.B. Heissleimpistole, Föhn, Batterie einsetzen)."
+    },
+    {
+     "code": "TTG.3.B.4.b",
+     "zyklus": 2,
+     "text": "können technische Geräte und einfache Produkte mit Unterstützung in Betrieb nehmen und sich an der Bedienungsanleitung orientieren (z.B. Digital- und Videokamera, technisches Spielzeug, Experimentierkasten)."
+    }
+   ]
+  },
+  "TTG.2.A.3": {
+   "titel": "Planen und herstellen",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|2|1|3",
+   "stufen": [
+    {
+     "code": "TTG.2.A.3.a",
+     "zyklus": 1,
+     "text": "können in einem Prozess angeleitete Schritte mit eigenen Ideen verbinden. können individuelle Produkte unter vorgegebenen Bedingungen und mit Unterstützung herstellen."
+    },
+    {
+     "code": "TTG.2.A.3.b",
+     "zyklus": 2,
+     "text": "können die formalen, funktionalen und konstruktiven Bedingungen der Aufgabenstellung berücksichtigen und für die Planung des Prozesses verwenden (z.B. Skizze, Plan, Arbeitsablauf, Schnittmuster, Modell). können das geplante Produkt mit punktueller Unterstützung herstellen."
+    }
+   ],
+   "immer": true
+  },
+  "TTG.1.B.1": {
+   "titel": "Prozess und Produkt begutachten und weiterentwickeln",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|1|2|1",
+   "stufen": [
+    {
+     "code": "TTG.1.B.1.1a",
+     "zyklus": 1,
+     "text": "können über eigene Prozessschritte sprechen und diese mit Vorgehensweisen anderer vergleichen. können vorhandene und neu erworbene Fertigkeiten und Erkenntnisse aufzeigen."
+    },
+    {
+     "code": "TTG.1.B.1.1b",
+     "zyklus": 2,
+     "text": "können eigene Designprozesse mit denen von anderen vergleichen, Unterschiede beschreiben und Entwicklungsmöglichkeiten formulieren."
+    },
+    {
+     "code": "TTG.1.B.1.2a",
+     "zyklus": 1,
+     "text": "erzählen, ob und warum sie mit dem eigenen Produkt zufrieden sind. können einzelne Aspekte ihres Produkts begutachten und konkrete Verbesserungen nennen."
+    },
+    {
+     "code": "TTG.1.B.1.2b",
+     "zyklus": 2,
+     "text": "können Erwartungen an das eigene Produkt mit dem erzielten Resultat und den Kriterien der Aufgabenstellung vergleichen und Optimierungen formulieren."
+    }
+   ],
+   "immer": true
+  },
+  "TTG.1.B.2": {
+   "titel": "Prozess und Produkt dokumentieren und präsentieren",
+   "link": "https://zh.lehrplan.ch/index.php?code=a|7|2|1|2|2",
+   "stufen": [
+    {
+     "code": "TTG.1.B.2.a",
+     "zyklus": 1,
+     "text": "können über den erlebten Prozess berichten und ihre Produkte zeigen (z.B. Portfolio, Lernjournal, Ausstellung). können erste Fachbegriffe verwenden (z.B. Werkzeuge, Material, Raumbeziehungen, Form, Farbe, Oberflächenbeschaffenheit)."
+    },
+    {
+     "code": "TTG.1.B.2.b",
+     "zyklus": 2,
+     "text": "können die Phasen des Designprozesses festhalten, veranschaulichen und die Produkte vorstellen (z.B. Portfolio, Lernjournal, Ausstellung). kennen die Fachbegriffe der im Prozess verwendeten Werkzeuge, Maschinen, Materialien und Verfahren und können diese anwenden."
+    }
+   ],
+   "immer": true
+  }
+ },
+ "zuordnung": {
+  "wl-fingerstricken": ["TTG.2.B.1.2", "TTG.2.D.1.2", "TTG.2.D.1.4"],
+  "wl-kiludo-fingerstricken": ["TTG.2.D.1.4"],
+  "wl-strickliesel": ["TTG.2.D.1.4"],
+  "wl-wickeldrache": ["TTG.2.B.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "wl-armband-karton": ["TTG.2.B.1.2", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.4"],
+  "wl-webrahmen-karton": ["TTG.2.D.1.4", "TTG.2.E.1.2"],
+  "wl-vorstich": ["TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "wl-zopf": ["TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.4"],
+  "wl-flechten": ["TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.4"],
+  "wl-armband-zwei": ["TTG.2.B.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "wl-fingerhaekeln": ["TTG.2.B.1.2", "TTG.2.D.1.4"],
+  "ex-ballonrakete": ["TTG.2.A.2", "TTG.2.B.1.4", "TTG.2.D.1.3"],
+  "ex-brauserakete": ["TTG.2.A.2", "TTG.2.B.1.4"],
+  "ex-luft-wiegt": ["TTG.2.A.2", "TTG.2.B.1.4", "TTG.2.D.1.2"],
+  "ex-hefeballon": ["TTG.2.A.2"],
+  "ex-moos": ["TTG.2.A.2", "TTG.2.C.1.1"],
+  "ex-pfeffer-salz": ["TTG.2.A.2", "TTG.2.D.1.1"],
+  "ex-starke-eier": ["TTG.2.A.2"],
+  "ex-tag-nacht": ["TTG.2.A.2"],
+  "ex-wasserfilter": ["TTG.2.A.2"],
+  "ex-ballon-essig": ["TTG.2.A.2"],
+  "ex-magnet": ["TTG.2.A.2", "TTG.2.B.1.5"],
+  "kat-papierschiff": ["TTG.2.B.1.1", "TTG.2.B.1.4", "TTG.2.D.1.2"],
+  "kat-papierflieger": ["TTG.2.B.1.1", "TTG.2.B.1.4", "TTG.2.D.1.2"],
+  "kat-frosch": ["TTG.2.B.1.1", "TTG.2.B.1.4", "TTG.2.D.1.2"],
+  "srf-geist": ["TTG.2.B.1.1", "TTG.2.B.1.3", "TTG.2.D.1.1", "TTG.2.D.1.3"],
+  "zw-luftmaschen": ["TTG.2.D.1.4"],
+  "zw-rueckstich": ["TTG.2.D.1.5"],
+  "zw-kordel": ["TTG.2.D.1.2"],
+  "zw-steppstich": ["TTG.2.D.1.3", "TTG.2.D.1.5"],
+  "zw-fadenbild": ["TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-maschenanschlag": ["TTG.2.D.1.4"],
+  "zw-himmel-hoelle": ["TTG.2.B.1.1", "TTG.2.B.1.4", "TTG.2.D.1.2"],
+  "zw-abketten": ["TTG.2.D.1.4"],
+  "zw-filzkugel-kinder": ["TTG.2.C.1.1", "TTG.2.D.1.4"],
+  "zw-filzkugeln": ["TTG.2.C.1.1", "TTG.2.D.1.4"],
+  "zw-feste-maschen-kurz": ["TTG.2.D.1.4"],
+  "zw-schleife": ["TTG.2.B.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-maschen-aufnehmen": ["TTG.2.D.1.4"],
+  "zw-nagelbild": ["TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-schlingstich": ["TTG.2.D.1.3"],
+  "zw-pompon": ["TTG.2.D.1.1", "TTG.2.D.1.2"],
+  "zw-feste-maschen": ["TTG.2.D.1.4"],
+  "zw-fangbecher": ["TTG.2.B.1.1", "TTG.2.B.1.4", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-ueberwendling": ["TTG.2.D.1.3"],
+  "zw-daumenschale": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.E.1.1"],
+  "zw-tonwulst-vase": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.E.1.1"],
+  "zw-salzteig-herz": ["TTG.2.B.1.3", "TTG.2.C.1.1", "TTG.2.C.1.2", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.5"],
+  "zw-kartoffeldruck": ["TTG.2.C.1.1", "TTG.2.C.1.3", "TTG.2.D.1.1", "TTG.2.D.1.5"],
+  "zw-kartoffeldruck-kacheln": ["TTG.2.C.1.3", "TTG.2.D.1.1", "TTG.2.D.1.5"],
+  "zw-moosgummi-stempel": ["TTG.2.C.1.3", "TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.D.1.5"],
+  "zw-polystyroldruck": ["TTG.2.C.1.3", "TTG.2.D.1.5"],
+  "zw-papierweben": ["TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.D.1.4"],
+  "zw-webrahmen-karton": ["TTG.2.D.1.3", "TTG.2.D.1.4", "TTG.2.E.1.2"],
+  "zw-lama-weben": ["TTG.2.D.1.3", "TTG.2.D.1.4"],
+  "zw-laubsaege-erste-schnitte": ["TTG.2.D.1.1", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-saegen": ["TTG.2.D.1.1", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-kreuzanschlag": ["TTG.2.D.1.4"],
+  "zw-rechte-masche": ["TTG.2.D.1.4"],
+  "zw-eulen-kartoffelstempel": ["TTG.2.C.1.3", "TTG.2.D.1.3", "TTG.2.D.1.5"],
+  "zw-frottage-buchstaben": ["TTG.2.C.1.3", "TTG.2.D.1.5"],
+  "zw-blumenwiese-monotypie": ["TTG.2.C.1.3", "TTG.2.D.1.5"],
+  "zw-blaetterdruck": ["TTG.2.C.1.3", "TTG.2.D.1.5", "TTG.3.B.2"],
+  "zw-blaetterdruck-anhaenger": ["TTG.2.B.1.2", "TTG.2.C.1.3", "TTG.2.D.1.1", "TTG.2.D.1.5", "TTG.3.B.2"],
+  "zw-papier-becher": ["TTG.2.B.1.3", "TTG.2.D.1.2"],
+  "zw-origami-katze": ["TTG.2.B.1.1", "TTG.2.D.1.2"],
+  "zw-origami-hund": ["TTG.2.B.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-melonenfaecher": ["TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-filzseife": ["TTG.2.C.1.1", "TTG.2.D.1.4"],
+  "zw-osternest": ["TTG.2.B.1.3", "TTG.2.C.1.1", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.4"],
+  "zw-eierwaermer-filzen": ["TTG.2.C.1.1", "TTG.2.D.1.4"],
+  "zw-zauberstein": ["TTG.2.C.1.1", "TTG.2.D.1.2", "TTG.2.D.1.4"],
+  "zw-ton-regeln": ["TTG.2.D.1.2", "TTG.2.E.1.1"],
+  "zw-kleister-pappmache": ["TTG.2.D.1.2", "TTG.2.E.1.1"],
+  "zw-ton-schildkroete": ["TTG.2.B.1.1", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.E.1.1"],
+  "zw-fadenring": ["TTG.2.D.1.4"],
+  "zw-fadenring-linkshaender": ["TTG.2.D.1.4"],
+  "zw-luftmaschen-linkshaender": ["TTG.2.D.1.4"],
+  "zw-feilen-teelichthalter": ["TTG.2.D.1.2", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-holzauto": ["TTG.2.B.1.4", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-igel-holz": ["TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-schiebeknoten": ["TTG.2.B.1.2", "TTG.2.D.1.2"],
+  "zw-scoubidou-rund": ["TTG.2.D.1.4"],
+  "zw-fadenspiel-stern": ["TTG.2.B.1.1", "TTG.2.D.1.2"],
+  "zw-brezelknoten": ["TTG.2.B.1.1", "TTG.2.D.1.2"],
+  "zw-fadenspiel-maus": ["TTG.2.B.1.1", "TTG.2.D.1.2"],
+  "zw-knopf-annaehen": ["TTG.2.D.1.3"],
+  "zw-nadel-einfaedeln": ["TTG.2.D.1.3", "TTG.2.E.1.2"],
+  "zw-anfangsknoten": ["TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-filzmaeppchen": ["TTG.2.B.1.3", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-blaetter-tiere": ["TTG.2.B.1.1", "TTG.2.D.1.3", "TTG.3.B.2"],
+  "zw-schneeflocke": ["TTG.2.D.1.1", "TTG.2.D.1.2"],
+  "zw-blaetterente": ["TTG.2.B.1.1", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "zw-scherenschnitt-blume": ["TTG.2.D.1.1", "TTG.2.D.1.2"],
+  "zw-tischlaterne": ["TTG.2.B.1.3", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-menschenkette": ["TTG.2.D.1.1", "TTG.2.D.1.2"],
+  "zw-stoecke-schnitzen-1": ["TTG.2.D.1.1", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "zw-zauberstab": ["TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "zw-eule-schnitzen": ["TTG.2.D.1.1", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "zw-schnitzregeln": ["TTG.2.D.1.1", "TTG.2.E.1.2"],
+  "zw-stock-spitzen": ["TTG.2.D.1.1", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "zw-wassermuehle": ["TTG.2.B.1.4", "TTG.2.D.1.1", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "zw-astdose": ["TTG.2.B.1.3", "TTG.2.D.1.1", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "zw-knoetchenstich": ["TTG.2.D.1.5"],
+  "zw-stielstich": ["TTG.2.D.1.5"],
+  "zw-kreuzstich": ["TTG.2.D.1.5"],
+  "zw-kettenstich": ["TTG.2.D.1.5"],
+  "zw-langettenstich": ["TTG.2.D.1.3", "TTG.2.D.1.5"],
+  "zw-strickgabel-schnur": ["TTG.2.D.1.4"],
+  "zw-fingerstricken-offen": ["TTG.2.D.1.4"],
+  "zw-linke-masche": ["TTG.2.D.1.4"],
+  "zw-webschiffchen-umwickeln": ["TTG.2.D.1.2", "TTG.2.D.1.4"],
+  "zw-zeitungskorb": ["TTG.2.B.1.3", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.4", "TTG.3.B.2"],
+  "zw-pappteller-weben": ["TTG.2.B.1.3", "TTG.2.D.1.1", "TTG.2.D.1.4"],
+  "zw-traumfaenger-pappteller": ["TTG.2.B.1.3", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-quaste": ["TTG.2.D.1.2"],
+  "zw-pompon-gabel": ["TTG.2.D.1.2"],
+  "zw-wollgespenst": ["TTG.2.B.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-windrad-falten": ["TTG.2.B.1.1", "TTG.2.B.1.4", "TTG.2.D.1.2"],
+  "zw-paracord-schluesselanhaenger": ["TTG.2.B.1.2", "TTG.2.D.1.2"],
+  "zw-paracord-fischgraet": ["TTG.2.B.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-paracord-armband": ["TTG.2.B.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-paracord-karabiner": ["TTG.2.B.1.2", "TTG.2.D.1.2"],
+  "zw-survival-armband": ["TTG.2.B.1.2", "TTG.2.D.1.2"],
+  "zw-affenfaust": ["TTG.2.B.1.2", "TTG.2.D.1.2"],
+  "zw-affenfaust-kordel": ["TTG.2.B.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-paracord-armband-einfach": ["TTG.2.B.1.2", "TTG.2.D.1.2"],
+  "zw-scoubidou-eckig": ["TTG.2.D.1.4"],
+  "zw-freundschaftsband-kartonscheibe": ["TTG.2.B.1.2", "TTG.2.D.1.1", "TTG.2.D.1.4"],
+  "zw-freundschaftsband-streifen": ["TTG.2.B.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-spiralknoten-armband": ["TTG.2.B.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-perlenarmband-kreuzknoten": ["TTG.2.B.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-drehscheiben-baendeli": ["TTG.2.B.1.2", "TTG.2.D.1.1", "TTG.2.D.1.4"],
+  "zw-rundzopf-vier-faeden": ["TTG.2.D.1.3", "TTG.2.D.1.4"],
+  "zw-nestelband": ["TTG.2.B.1.3", "TTG.2.D.1.3", "TTG.2.D.1.4"],
+  "zw-schiebeknoten-armband": ["TTG.2.B.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-makramee-feder": ["TTG.2.D.1.1", "TTG.2.D.1.2"],
+  "zw-quaste-karton": ["TTG.2.D.1.2"],
+  "zw-kordel-kartonscheibe": ["TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.4"],
+  "zw-perlenweben": ["TTG.2.D.1.4", "TTG.2.E.1.2"],
+  "zw-perlenwebrahmen-bespannen": ["TTG.2.D.1.2", "TTG.2.D.1.4", "TTG.2.E.1.2"],
+  "zw-perlenweben-vernaehen": ["TTG.2.D.1.3", "TTG.2.D.1.4", "TTG.2.E.1.2"],
+  "zw-perlenband-weben": ["TTG.2.D.1.4", "TTG.2.E.1.2"],
+  "zw-perlenweben-rahmen": ["TTG.2.D.1.3", "TTG.2.D.1.4", "TTG.2.E.1.2"],
+  "zw-perlenwebrahmen-karton": ["TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.D.1.4", "TTG.2.E.1.2"],
+  "zw-perlenarmband-schachtel": ["TTG.2.B.1.2", "TTG.2.B.1.3", "TTG.2.D.1.3", "TTG.2.D.1.4"],
+  "zw-perlenfisch": ["TTG.2.B.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-perlenkrokodil": ["TTG.2.B.1.1", "TTG.2.D.1.3"],
+  "zw-perlen-flechtarmband": ["TTG.2.B.1.2", "TTG.2.D.1.3", "TTG.2.D.1.4"],
+  "zw-blumenarmband-perlen": ["TTG.2.B.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-schachtel-deckel": ["TTG.2.B.1.3", "TTG.2.D.1.2"],
+  "zw-origami-schachtel": ["TTG.2.B.1.3", "TTG.2.D.1.2"],
+  "zw-sternbox": ["TTG.2.B.1.3", "TTG.2.D.1.2"],
+  "zw-origami-kranich": ["TTG.2.B.1.1", "TTG.2.D.1.2"],
+  "zw-origami-schmetterling": ["TTG.2.B.1.1", "TTG.2.D.1.2", "TTG.3.B.2"],
+  "zw-schmetterling-einfach": ["TTG.2.B.1.1", "TTG.2.D.1.1", "TTG.2.D.1.2"],
+  "zw-origami-herz": ["TTG.2.D.1.2"],
+  "zw-froebelstern-wiemann": ["TTG.2.D.1.2"],
+  "zw-mini-papierstern-streifen": ["TTG.2.D.1.2"],
+  "zw-eckenlesezeichen-origami": ["TTG.2.B.1.3", "TTG.2.D.1.2"],
+  "zw-origami-fuchskopf": ["TTG.2.B.1.1", "TTG.2.D.1.2"],
+  "zw-origami-tulpe-mit-blaettern": ["TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-hexentreppe-papierstreifen": ["TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-origami-fisch-kreativecke": ["TTG.2.B.1.1", "TTG.2.D.1.2"],
+  "zw-briefumschlag-a4": ["TTG.2.B.1.3", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-origami-pinguin-stehend": ["TTG.2.B.1.1", "TTG.2.D.1.2"],
+  "zw-fliegenstich": ["TTG.2.D.1.5"],
+  "zw-federstich-geschlossen": ["TTG.2.D.1.5"],
+  "zw-kettenstich-schrift": ["TTG.2.D.1.5"],
+  "zw-knopflochstich": ["TTG.2.D.1.3", "TTG.2.D.1.5"],
+  "zw-schlingstich-filzrand": ["TTG.2.D.1.3"],
+  "zw-knopf-ohne-knoten": ["TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-blindstich-saum-v": ["TTG.2.D.1.3"],
+  "zw-hexenstich-saum": ["TTG.2.D.1.3"],
+  "zw-zaubersaum-schlaufen": ["TTG.2.D.1.3"],
+  "zw-granny-square-bunt": ["TTG.2.D.1.4"],
+  "zw-topflappen-halbstaebchen": ["TTG.2.D.1.4"],
+  "zw-fingerstricken-loopschal": ["TTG.2.D.1.2", "TTG.2.D.1.4"],
+  "zw-fingerstricken-grundtechnik": ["TTG.2.D.1.4"],
+  "zw-brettchenweben-perlen": ["TTG.2.B.1.2", "TTG.2.D.1.4", "TTG.2.E.1.2"],
+  "zw-mandala-hochdruck": ["TTG.2.C.1.3", "TTG.2.D.1.3", "TTG.2.D.1.5"],
+  "zw-schneiden-trennen-loecher": ["TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.E.1.2"],
+  "zw-schmetterling-nadelfilz": ["TTG.2.C.1.1", "TTG.2.D.1.2", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-blumensieb-kurz": ["TTG.2.B.1.3", "TTG.2.C.1.1", "TTG.2.C.1.2", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-pusteblume-deko": ["TTG.2.C.1.1", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2", "TTG.3.B.4"],
+  "zw-tonkugel-lochmuster": ["TTG.2.D.1.1", "TTG.2.E.1.1"],
+  "zw-eierbecher-ton": ["TTG.2.B.1.3", "TTG.2.C.1.1", "TTG.2.C.1.2", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-hase-haekeln-oberkoerper": ["TTG.2.B.1.1", "TTG.2.D.1.4"],
+  "zw-kerze-holz-keramik": ["TTG.2.B.1.3", "TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.4"],
+  "zw-becher-eindrueckform": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-hase-haekeln-beine": ["TTG.2.B.1.1", "TTG.2.D.1.4"],
+  "zw-wackeltier-tonpapier": ["TTG.2.B.1.1", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-flamingo-bommel": ["TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-taschengriff-cobra": ["TTG.2.B.1.2", "TTG.2.D.1.2"],
+  "zw-papierflieger": ["TTG.2.B.1.1", "TTG.2.B.1.4", "TTG.2.D.1.2"],
+  "zw-wandhaken-ton": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.C.1.3", "TTG.2.D.1.2", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-hase-haekeln-ohren-arme": ["TTG.2.B.1.1", "TTG.2.D.1.4"],
+  "zw-olla-ton": ["TTG.2.B.1.3", "TTG.2.C.1.1", "TTG.2.C.1.2", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "ex-eier-zwiebelschalen": ["TTG.2.C.1.3", "TTG.2.D.1.5", "TTG.3.B.2"],
+  "zw-seifenschale-toepfern": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-teller-sechseck-ton": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.E.1.1"],
+  "zw-hase-haekeln-zusammennaehen": ["TTG.2.B.1.1", "TTG.2.D.1.3", "TTG.2.D.1.4"],
+  "zw-tonkugel-gipsform": ["TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-gartenkugel-ton": ["TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-armband-nassfilzen": ["TTG.2.B.1.2", "TTG.2.C.1.1", "TTG.2.D.1.4"],
+  "zw-origami-hemd": ["TTG.2.B.1.3", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-glasieren-pinsel": ["TTG.2.B.1.3", "TTG.2.C.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-mini-bommel-waescheklammer": ["TTG.2.D.1.2"],
+  "zw-trick-track-wuerfelspiel": ["TTG.2.B.1.1", "TTG.2.D.1.1", "TTG.2.D.1.3"],
+  "zw-herzballon-ton": ["TTG.2.B.1.1", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-tonkugel-styropor": ["TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.E.1.1"],
+  "zw-strickgabel-schmetterling": ["TTG.2.D.1.2", "TTG.2.D.1.4", "TTG.2.E.1.1"],
+  "zw-hase-ton": ["TTG.2.B.1.1", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-fuchstasse-glasieren": ["TTG.2.C.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-nikolausstiefel-papier": ["TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-pfauenmuster-glasur": ["TTG.2.B.1.3", "TTG.2.C.1.3", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-schrumpffolie-schluesselanhaenger": ["TTG.2.B.1.1", "TTG.2.B.1.2", "TTG.2.C.1.1", "TTG.2.C.1.3", "TTG.2.D.1.5"],
+  "zw-gecko-eindrueckform": ["TTG.2.B.1.1", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.E.1.1"],
+  "ex-papier-propeller": ["TTG.2.B.1.4", "TTG.2.D.1.1", "TTG.2.D.1.2"],
+  "zw-blumenstecker-herz-filzen": ["TTG.2.C.1.1", "TTG.2.D.1.5"],
+  "zw-fuchsmotiv-henkel": ["TTG.2.B.1.3", "TTG.2.C.1.1", "TTG.2.C.1.3", "TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-schmetterling-fleece": ["TTG.2.D.1.3"],
+  "zw-drahtvogel": ["TTG.2.D.1.2", "TTG.2.E.1.1"],
+  "zw-nisthilfe-wildbienen": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.C.1.3", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.4", "TTG.2.D.1.5", "TTG.2.E.1.2"],
+  "zw-heissluftballon-futterhaus": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-karte-herz-weben": ["TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.D.1.4"],
+  "zw-becherpuppe-zappelt": ["TTG.2.B.1.1", "TTG.2.B.1.4", "TTG.2.D.1.3"],
+  "zw-geldschein-schmetterling": ["TTG.2.B.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-hohles-herz-ton": ["TTG.2.B.1.1", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-regenbogenspirale": ["TTG.2.D.1.3", "TTG.2.E.1.2", "TTG.3.B.4"],
+  "zw-nadelkissen-maus": ["TTG.2.B.1.3", "TTG.2.D.1.3", "TTG.2.D.1.4"],
+  "zw-schnappi-fangspiel": ["TTG.2.B.1.1", "TTG.2.B.1.4", "TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.E.1.2"],
+  "zw-schale-stellring-ton": ["TTG.2.B.1.3", "TTG.2.C.1.1", "TTG.2.C.1.2", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-tulpenkarte-aquarell": ["TTG.2.C.1.3", "TTG.2.D.1.5"],
+  "zw-traumfaenger-ton": ["TTG.2.B.1.1", "TTG.2.C.1.2", "TTG.2.C.1.3", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-kleines-ei-eindrueckform": ["TTG.2.B.1.1", "TTG.2.C.1.2", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-clown-hampelfigur-papier": ["TTG.2.B.1.1", "TTG.2.B.1.4", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-glasur-effektverstaerker": ["TTG.2.B.1.3", "TTG.2.C.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-sternteller-ton": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.C.1.3", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-gartenstecker-ton": ["TTG.2.C.1.2", "TTG.2.C.1.3", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-crictor-papierschlange": ["TTG.2.B.1.1", "TTG.2.B.1.4", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-schale-staebchenablage-ton": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.D.1.4", "TTG.2.E.1.1"],
+  "zw-acrylic-pouring": ["TTG.2.C.1.3", "TTG.2.D.1.5"],
+  "zw-hahn-nadelfilzen": ["TTG.2.C.1.1", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.3.B.4"],
+  "ex-elektromotor": ["TTG.2.B.1.4", "TTG.2.B.1.5", "TTG.2.D.1.2", "TTG.2.E.1.1"],
+  "zw-insektentraenke-ton": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.C.1.3", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-batik-murmeln": ["TTG.2.C.1.3", "TTG.2.D.1.5"],
+  "zw-fische-metallpraegen": ["TTG.2.C.1.1", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-kiwi-untersetzer-filzen": ["TTG.2.B.1.3", "TTG.2.C.1.1", "TTG.2.D.1.4"],
+  "zw-teller-blaetter-ton": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.C.1.3", "TTG.2.D.1.2", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-kreisel-wellkarton": ["TTG.2.B.1.1", "TTG.2.B.1.4", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.2"],
+  "zw-mosaik-untersetzer": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.D.1.3"],
+  "zw-kieselteller-ueberform": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.C.1.3", "TTG.2.D.1.2", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-plastikgarn-tueten": ["TTG.2.D.1.4", "TTG.3.B.2"],
+  "zw-gartenstele-ammonit": ["TTG.2.C.1.3", "TTG.2.D.1.1", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-schriftzug-glasieren": ["TTG.2.C.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-froebelstern-streifen": ["TTG.2.C.1.2", "TTG.2.D.1.2"],
+  "zw-glocke-ton": ["TTG.2.B.1.1", "TTG.2.C.1.2", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.E.1.1"],
+  "zw-blumenstecker-granulat": ["TTG.2.B.1.3", "TTG.2.C.1.1", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.2", "TTG.3.B.4"],
+  "zw-kerze-papierform": ["TTG.2.B.1.3", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-regenmacher": ["TTG.2.B.1.1", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-karton-biegen-verstaerken": ["TTG.2.B.1.3", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-gartenwurm-ton": ["TTG.2.B.1.1", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-blumenstecker-ton-margerite": ["TTG.2.C.1.1", "TTG.2.C.1.2", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-kerze-klorolle": ["TTG.2.B.1.3", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.3.B.2"],
+  "zw-zaunhocker-huhn-ton": ["TTG.2.B.1.1", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-kartenbuch-papierweben": ["TTG.2.D.1.3", "TTG.2.D.1.4"],
+  "ex-stromkreis-kupferband": ["TTG.2.A.2", "TTG.2.B.1.5"],
+  "zw-wichtel-holzring": ["TTG.2.B.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-qualle-ton": ["TTG.2.B.1.1", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.E.1.1"],
+  "zw-raeucherhalter-hand-ton": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.C.1.3", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.4", "TTG.2.D.1.5", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-memoscheibe-tshirt": ["TTG.2.C.1.1", "TTG.2.D.1.3", "TTG.3.B.2"],
+  "ex-fallschirm": ["TTG.2.B.1.4", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-weihnachtsmann-holzring": ["TTG.2.B.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-stern-papiertueten": ["TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.3.B.2"],
+  "zw-schlicker-herstellen": ["TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-sinterengobe-muster": ["TTG.2.C.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-crossboccia-socken": ["TTG.2.B.1.1", "TTG.2.C.1.3", "TTG.2.D.1.5", "TTG.3.B.2"],
+  "zw-mischpalette-ton": ["TTG.2.B.1.3", "TTG.2.C.1.1", "TTG.2.C.1.2", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-tonkugel-haekelmuster": ["TTG.2.C.1.2", "TTG.2.C.1.3", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.4", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-dreieck-saeckchen": ["TTG.2.B.1.1", "TTG.2.B.1.3", "TTG.2.D.1.3", "TTG.2.E.1.2", "TTG.3.B.4"],
+  "zw-ammonit-toepfern": ["TTG.2.B.1.1", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-glasuren-kombinieren": ["TTG.2.C.1.3", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-blattschale-monstera": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.C.1.3", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-lesezeichen-herz-falten": ["TTG.2.B.1.3", "TTG.2.D.1.1", "TTG.2.D.1.2"],
+  "zw-klappen-drehteile-karton": ["TTG.2.B.1.4", "TTG.2.D.1.3"],
+  "zw-stoffmotte-perlen": ["TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-papiertueten-blume": ["TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.3.B.2"],
+  "zw-hase-haekeln-kopf": ["TTG.2.B.1.1", "TTG.2.D.1.4"],
+  "zw-gespenst-wolle": ["TTG.2.B.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-glasur-abkleben": ["TTG.2.C.1.3", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-mohnkapsel-ton": ["TTG.2.B.1.1", "TTG.2.C.1.1", "TTG.2.C.1.2", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-baum-toepfern": ["TTG.2.B.1.1", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-makramee-feder-kamm": ["TTG.2.D.1.2"],
+  "zw-gartenkugel-blaetter": ["TTG.2.C.1.2", "TTG.2.C.1.3", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1", "TTG.3.B.2"],
+  "zw-makramee-blatt": ["TTG.2.D.1.2"],
+  "zw-haekeln-anfaenger": ["TTG.2.D.1.3", "TTG.2.D.1.4"],
+  "zw-sonnenblume-weben": ["TTG.2.B.1.3", "TTG.2.D.1.3", "TTG.2.D.1.4", "TTG.3.B.4"],
+  "zw-wichtel-stempel-folie": ["TTG.2.B.1.1", "TTG.2.C.1.1", "TTG.2.C.1.3", "TTG.2.D.1.1", "TTG.2.D.1.5"],
+  "zw-popup-karte-tannenbaum": ["TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3"],
+  "zw-grosse-tonkugel-lebensbaum": ["TTG.2.C.1.2", "TTG.2.C.1.3", "TTG.2.D.1.2", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-drahtschmetterling-ast": ["TTG.2.D.1.2", "TTG.2.E.1.1", "TTG.3.B.2"],
+  "zw-libellenbecher-ton": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.C.1.3", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-schneemann-papierdraht": ["TTG.2.B.1.1", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.3.B.4"],
+  "zw-punktemuster-keramik": ["TTG.2.C.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-glasieren-grundlagen": ["TTG.2.C.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-grosses-ei-ton": ["TTG.2.B.1.1", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-stern-toepfern": ["TTG.2.B.1.1", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-garnschale-ton": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.E.1.1"],
+  "zw-oktopus-haekeln": ["TTG.2.D.1.4"],
+  "zw-nadelfilzen-schmetterling-form": ["TTG.2.C.1.1", "TTG.2.D.1.1", "TTG.2.D.1.5"],
+  "zw-zaunhocker-fisch-ton": ["TTG.2.B.1.1", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-blubberglasur-schale": ["TTG.2.C.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-teller-ueberform-ton": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.E.1.1"],
+  "zw-grosse-schuessel-ton": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.E.1.1"],
+  "zw-fliegenpilz-ton": ["TTG.2.B.1.1", "TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-tonblume-traenke": ["TTG.2.B.1.3", "TTG.2.C.1.1", "TTG.2.C.1.3", "TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-wichtel-wolle": ["TTG.2.B.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.3.B.4"],
+  "zw-kochloeffelablage-marmor": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.C.1.3", "TTG.2.D.1.2", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-gipsmaske-fasnacht": ["TTG.2.B.1.2", "TTG.2.B.1.3", "TTG.2.C.1.3", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1", "TTG.3.B.4"],
+  "zw-wolf-aquarell-kreis": ["TTG.2.C.1.3", "TTG.2.D.1.3", "TTG.2.D.1.5"],
+  "zw-osterei-blueten-ton": ["TTG.2.B.1.1", "TTG.2.C.1.1", "TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-vogeltraenke-blatt": ["TTG.2.B.1.3", "TTG.2.C.1.2", "TTG.2.C.1.3", "TTG.2.D.1.2", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-balancier-schmetterling": ["TTG.2.B.1.1", "TTG.2.B.1.4", "TTG.2.D.1.1", "TTG.2.D.1.3"],
+  "zw-ammonitenbecher-ton": ["TTG.2.B.1.3", "TTG.2.C.1.1", "TTG.2.C.1.2", "TTG.2.C.1.3", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1"],
+  "zw-perlenschlange": ["TTG.2.B.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-kastanienring": ["TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "zw-perlenschildkroete": ["TTG.2.B.1.1", "TTG.2.D.1.3"],
+  "zw-perlenfisch-anhaenger": ["TTG.2.B.1.1", "TTG.2.B.1.2", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-hammer-naegel": ["TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-nagelherz": ["TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-nagelbild-igel": ["TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-baumscheibe-glassteine": ["TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "zw-haselkranz": ["TTG.2.C.1.2", "TTG.2.D.1.2", "TTG.2.E.1.1", "TTG.3.B.2"],
+  "zw-nagelbild-faden": ["TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-perlendrache": ["TTG.2.B.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-leim-zwingen": ["TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-libelle-perlen": ["TTG.2.B.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-haselmaus": ["TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "zw-segelschiff": ["TTG.2.B.1.4", "TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-kreisel-schnitzen": ["TTG.2.B.1.1", "TTG.2.B.1.4", "TTG.2.D.1.1", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "zw-sonnenfaenger": ["TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.4"],
+  "zw-nusskranz": ["TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.3.B.2", "TTG.3.B.4"],
+  "zw-perlen-axolotl": ["TTG.2.B.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-holz-igel": ["TTG.2.C.1.3", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.2.E.1.1", "TTG.3.B.2"],
+  "zw-haselnussmaennchen": ["TTG.2.B.1.2", "TTG.2.C.1.3", "TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.D.1.5", "TTG.3.B.2"],
+  "zw-sonnenfaenger-leim": ["TTG.2.C.1.3", "TTG.2.D.1.2", "TTG.2.D.1.5"],
+  "zw-perlen-eidechse": ["TTG.2.B.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1"],
+  "zw-wichteltuer": ["TTG.2.B.1.1", "TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2", "TTG.3.B.4"],
+  "zw-nagelbrett": ["TTG.2.B.1.1", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-hammer-zangen": ["TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "zw-maipfeife": ["TTG.2.D.1.1", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "raketenstation-1": ["TTG.2.B.1.4", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "raketenstation-2": ["TTG.2.B.1.4", "TTG.2.C.1.3", "TTG.2.D.1.3", "TTG.2.D.1.5"],
+  "stifteetui-ungefuettert": ["TTG.2.B.1.3", "TTG.2.C.1.1", "TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.E.1.2", "TTG.3.B.4"],
+  "stifteetui-gefuettert": ["TTG.2.B.1.3", "TTG.2.C.1.1", "TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.E.1.2", "TTG.3.B.4"]
+ }
+}
