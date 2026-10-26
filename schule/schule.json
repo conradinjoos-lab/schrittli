@@ -1,5 +1,5 @@
 {
- "stand": "2026-10-25",
+ "stand": "2026-10-26",
  "hinweis": "Schulversion: Ordnung nach Verfahren (areaId): naehen, sticken, haekeln, stricken, weben, knuepfen, wickeln, filzen, falten, schneiden, holz, formen, drucken, experimente. Klassen in 'stufen' (1-6).",
  "videos": [
   {
@@ -23945,6 +23945,2118 @@
     {
      "t": 101.0,
      "label": "Fertig – schau deinen Becher an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-perlenschlange",
+   "areaId": "weben",
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "niveau": 2,
+   "grundtechnik": false,
+   "techniken": [
+    "perlen fädeln",
+    "draht kreuzen"
+   ],
+   "title": "Schlange aus Perlen",
+   "source": {
+    "type": "youtube",
+    "id": "0yF4xZnXSVE"
+   },
+   "kanal": "B CreaKidz",
+   "dauer": "6:05",
+   "alter": "ab 8",
+   "sprache": "ohne Sprache",
+   "hinweis": "Rocailles 4.5 mm (rot, gelb, schwarz, grün), Myrthendraht 0.35 mm und eine ausgedruckte Perlenvorlage; jede Reihe kommt auf ein Drahtende, das andere Ende wird gegengleich durch dieselben Perlen gezogen – das Video zeigt das nur mit kurzen Texteinblendungen, darum die erste Reihe gemeinsam vormachen.",
+   "material": [
+    "perle",
+    "draht",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Perlen, Draht, Schere, Vorlage"
+    },
+    {
+     "t": 22.0,
+     "label": "Rote Perle in die Mitte des Drahts"
+    },
+    {
+     "t": 37.5,
+     "label": "Zweite rote Perle, Drahtenden gegengleich durchfädeln"
+    },
+    {
+     "t": 47.0,
+     "label": "Gelbe Kopfreihen nach Vorlage auffädeln"
+    },
+    {
+     "t": 91.5,
+     "label": "Reihe mit schwarzen Augen auffädeln"
+    },
+    {
+     "t": 132.0,
+     "label": "Restliche Kopfreihen nach Vorlage auffädeln"
+    },
+    {
+     "t": 200.0,
+     "label": "Grüne Reihen für den Körper auffädeln"
+    },
+    {
+     "t": 241.5,
+     "label": "Weiter bis zur gewünschten Länge, Schwanz schmaler"
+    },
+    {
+     "t": 302.5,
+     "label": "Drahtenden fest zusammendrehen"
+    },
+    {
+     "t": 320.5,
+     "label": "Restlichen Draht abschneiden"
+    },
+    {
+     "t": 327.0,
+     "label": "Fertig – schau deine Schlange an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   },
+   "vorlagen": [
+    {
+     "datei": "perlen/?tier=schlange",
+     "name": "Eigenes Zählmuster: Schlange"
+    }
+   ]
+  },
+  {
+   "id": "zw-kastanienring",
+   "areaId": "formen",
+   "zeit": 15,
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "niveau": 1,
+   "grundtechnik": false,
+   "techniken": [
+    "vorstechen",
+    "verdrehen",
+    "kleben"
+   ],
+   "title": "Ring aus einer Kastanie",
+   "source": {
+    "type": "youtube",
+    "id": "1iWq2KBciXA"
+   },
+   "kanal": "Kinderoutdoor Kinderoutdoor",
+   "dauer": "2:03",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Frische, weiche Kastanien nehmen; die Löcher mit der Ahle sticht am besten eine erwachsene Person vor, gebraucht werden ausserdem Pfeifenputzer und kleine Pompons.",
+   "material": [
+    "draht",
+    "ahle",
+    "leim",
+    "zange"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Kastanie, Pfeifenputzer, Ahle, Pompons, Leim"
+    },
+    {
+     "t": 40.0,
+     "label": "Mit der Ahle zwei Löcher stechen"
+    },
+    {
+     "t": 43.5,
+     "label": "Pfeifenputzer durch die Löcher stecken"
+    },
+    {
+     "t": 57.7,
+     "label": "Enden zum Ring verdrehen, Rest abzwicken"
+    },
+    {
+     "t": 68.7,
+     "label": "Bunte Pompons auf die Kastanie kleben"
+    },
+    {
+     "t": 77.8,
+     "label": "Fertig – schau deinen Ring an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-perlenschildkroete",
+   "areaId": "weben",
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "niveau": 2,
+   "grundtechnik": false,
+   "techniken": [
+    "perlen faedeln",
+    "ueberkreuz faedeln"
+   ],
+   "title": "Schildkröte aus Perlen",
+   "source": {
+    "type": "youtube",
+    "id": "2NIM-vYNYsQ"
+   },
+   "kanal": "Emily Donnelly",
+   "dauer": "8:18",
+   "alter": "ab 8",
+   "sprache": "Englisch",
+   "hinweis": "Grosse Ponyperlen in Grün, Braun und zwei Schwarze, eine lange Kunststoffschnur und ein Karabiner; das Überkreuzfädeln (beide Enden gegengleich durch dieselbe Reihe) zuerst vorzeigen und den Perlenplan pro Reihe aufzeichnen, weil das Video englisch und ohne Untertitel ist.",
+   "material": [
+    "perle",
+    "schnur",
+    "schluesselring",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Schnur, Perlen, Karabiner, Schere"
+    },
+    {
+     "t": 50.7,
+     "label": "Schnur abschneiden, am Karabiner einhängen"
+    },
+    {
+     "t": 71.0,
+     "label": "Perlen auffädeln, Enden überkreuz durchziehen"
+    },
+    {
+     "t": 120.8,
+     "label": "Augenreihe mit zwei schwarzen Perlen"
+    },
+    {
+     "t": 150.5,
+     "label": "Zwei grüne Reihen unter den Augen"
+    },
+    {
+     "t": 186.5,
+     "label": "Erste braune Reihe für den Panzer"
+    },
+    {
+     "t": 214.5,
+     "label": "Vorderbeine auffädeln und zurückfädeln"
+    },
+    {
+     "t": 278.0,
+     "label": "Braune Panzerreihen weiterfädeln"
+    },
+    {
+     "t": 318.4,
+     "label": "Hinterbeine gleich wie Vorderbeine machen"
+    },
+    {
+     "t": 366.2,
+     "label": "Schwanz mit grünen Perlen fädeln"
+    },
+    {
+     "t": 390.5,
+     "label": "Fadenenden zurückfädeln und verknoten"
+    },
+    {
+     "t": 455.0,
+     "label": "Fertig – schau deine Schildkröte an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   },
+   "vorlagen": [
+    {
+     "datei": "perlen/?tier=schildkroete&perle=pony",
+     "name": "Eigenes Zählmuster: Schildkröte"
+    }
+   ]
+  },
+  {
+   "id": "zw-perlenfisch-anhaenger",
+   "areaId": "weben",
+   "stufen": [
+    5,
+    6
+   ],
+   "niveau": 3,
+   "grundtechnik": false,
+   "techniken": [
+    "perlen faedeln"
+   ],
+   "title": "Perlenfisch als Anhänger",
+   "source": {
+    "type": "youtube",
+    "id": "46NKddYfSA4"
+   },
+   "kanal": "Totally Stitchcraft - Sarah",
+   "dauer": "10:29",
+   "alter": "ab 10",
+   "sprache": "Englisch",
+   "hinweis": "Dünner Schmuckdraht (ca. 0.3 mm), 3-mm-Rocailles, 2 Augenperlen, ein kleiner Ring und ein Karabiner; die Farben stehen in der Vorlage bei 5:12, die Lehrperson zeigt sie am besten ausgedruckt, und die beiden Drahtenden müssen nach jeder Reihe gleich straff gezogen werden.",
+   "material": [
+    "perle",
+    "draht",
+    "schluesselring",
+    "zange",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Perlen, Augenperlen, Draht, Karabiner"
+    },
+    {
+     "t": 62.2,
+     "label": "Draht abmessen und abschneiden"
+    },
+    {
+     "t": 79.7,
+     "label": "Ring auffädeln, in die Mitte schieben"
+    },
+    {
+     "t": 117.2,
+     "label": "Mund: rosa Perlen, Drähte überkreuz durch"
+    },
+    {
+     "t": 204.6,
+     "label": "Nächste Reihen mit rosa und blauen Perlen"
+    },
+    {
+     "t": 256.5,
+     "label": "Reihe mit dem Auge fädeln"
+    },
+    {
+     "t": 298.6,
+     "label": "Weitere Reihen nach der Vorlage fädeln"
+    },
+    {
+     "t": 373.3,
+     "label": "Reihe für Reihe weiter bis zum Schwanz"
+    },
+    {
+     "t": 452.3,
+     "label": "Untere Flosse aus grünen Perlen, Draht abschneiden"
+    },
+    {
+     "t": 546.7,
+     "label": "Obere Flosse mit dem anderen Draht"
+    },
+    {
+     "t": 587.3,
+     "label": "Drahtenden verstecken und abschneiden"
+    },
+    {
+     "t": 608.3,
+     "label": "Fertig – schau deinen Perlenfisch an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   },
+   "vorlagen": [
+    {
+     "datei": "perlen/?tier=fisch",
+     "name": "Eigenes Zählmuster: Clownfisch"
+    }
+   ]
+  },
+  {
+   "id": "zw-hammer-naegel",
+   "areaId": "holz",
+   "stufen": [
+    1,
+    2
+   ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "nageln",
+    "hammer halten"
+   ],
+   "title": "Nageln üben mit Styropor",
+   "source": {
+    "type": "youtube",
+    "id": "5Rtj8cdeQKk"
+   },
+   "kanal": "Kindergarten St. Klara",
+   "dauer": "7:33",
+   "alter": "ab 5",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Weiches Übungsmaterial (Styropor, Schwimmnudel, Isomatte) sammeln lassen und darauf achten, dass die Nägel lang genug sind und die Wäscheklammer die Finger schützt.",
+   "material": [
+    "hammer",
+    "naegel",
+    "styropor",
+    "waescheklammer",
+    "schaumstoff"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Styropor, Schwimmnudel, Nägel, Hammer, Wäscheklammer"
+    },
+    {
+     "t": 147.5,
+     "label": "Grossen Nagel ins Styropor schlagen"
+    },
+    {
+     "t": 201.5,
+     "label": "Nagel mit Wäscheklammer halten, einschlagen"
+    },
+    {
+     "t": 237.5,
+     "label": "Isomatte auflegen, unten festnageln"
+    },
+    {
+     "t": 269.0,
+     "label": "Andere Seite mit kleinerem Nagel festnageln"
+    },
+    {
+     "t": 292.5,
+     "label": "Nudelstück ansetzen, Nagellänge prüfen"
+    },
+    {
+     "t": 348.5,
+     "label": "Längeren Nagel nehmen, Nudelstück festnageln"
+    },
+    {
+     "t": 377.0,
+     "label": "Spielsachen dazustellen und damit spielen"
+    },
+    {
+     "t": 433.0,
+     "label": "Fertig – schau deine Spiellandschaft an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-nagelherz",
+   "areaId": "holz",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "niveau": 2,
+   "grundtechnik": false,
+   "techniken": [
+    "nageln",
+    "fadenbild"
+   ],
+   "title": "Herz aus Nägeln und Wolle",
+   "source": {
+    "type": "youtube",
+    "id": "7e_edv-4F4E"
+   },
+   "kanal": "Margit Luz",
+   "dauer": "2:41",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Nagel mit zwei Fingern halten und zuerst sanft anklopfen; beim Hämmern braucht es anfangs oft Hilfe.",
+   "material": [
+    "holzbrett",
+    "naegel",
+    "hammer",
+    "wolle",
+    "bleistift"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Brett, Hammer, Nägel, Wolle, Stift"
+    },
+    {
+     "t": 49.0,
+     "label": "Grosses Herz aufs Brett zeichnen"
+    },
+    {
+     "t": 61,
+     "label": "Ersten Nagel halten und einschlagen"
+    },
+    {
+     "t": 86,
+     "label": "Nächsten Nagel zwei Finger weiter einschlagen"
+    },
+    {
+     "t": 103,
+     "label": "Rund ums Herz weiter Nägel einschlagen"
+    },
+    {
+     "t": 121.5,
+     "label": "Wolle an einen Nagel knoten"
+    },
+    {
+     "t": 130.5,
+     "label": "Wolle von Nagel zu Nagel spannen"
+    },
+    {
+     "t": 154.2,
+     "label": "Fertig – schau dein Herz an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-nagelbild-igel",
+   "areaId": "holz",
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "niveau": 2,
+   "grundtechnik": false,
+   "techniken": [
+    "nageln",
+    "faden spannen",
+    "knoten"
+   ],
+   "title": "Nagelbild Igel mit Faden",
+   "source": {
+    "type": "youtube",
+    "id": "7PcMLM1flmA"
+   },
+   "kanal": "Karoline Deutinger",
+   "dauer": "8:51",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Igel-Vorlage mit Punkten kopieren, Schleifpapier, Pinsel und Heisskleber (nur mit Erwachsenen) bereitlegen; das Einschlagen der Nägel zeigt das Video nicht, und unten am Igel acht Nägel abzählen braucht Hilfe.",
+   "material": [
+    "holzbrett",
+    "naegel",
+    "hammer",
+    "garn",
+    "filz",
+    "schere",
+    "farbe",
+    "klebeband"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Brett, Igel-Kopie, Nägel, Faden"
+    },
+    {
+     "t": 28.0,
+     "label": "Brett schleifen, Kreppband mit Namen draufkleben"
+    },
+    {
+     "t": 43.5,
+     "label": "Brett braun anmalen und trocknen lassen"
+    },
+    {
+     "t": 69.5,
+     "label": "Kopie grob ausschneiden, mit Kreppband aufkleben"
+    },
+    {
+     "t": 103.0,
+     "label": "Auf jeden Punkt einen Nagel einschlagen"
+    },
+    {
+     "t": 130.5,
+     "label": "Papier abreissen, merken wo unten ist"
+    },
+    {
+     "t": 209.0,
+     "label": "Faden unten an einem Nagel anknoten"
+    },
+    {
+     "t": 223.5,
+     "label": "Faden zickzack innen und aussen herumwickeln"
+    },
+    {
+     "t": 331.5,
+     "label": "Noch mehr Runden spannen, Faden verknoten"
+    },
+    {
+     "t": 400.5,
+     "label": "Kopf ausschneiden, auf Filz nachzeichnen, ausschneiden"
+    },
+    {
+     "t": 469.0,
+     "label": "Filzkopf, Augen, Nase und Füsse aufkleben"
+    },
+    {
+     "t": 487.0,
+     "label": "Fertig – schau deinen Igel an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-baumscheibe-glassteine",
+   "areaId": "holz",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "niveau": 2,
+   "grundtechnik": false,
+   "techniken": [
+    "bohren",
+    "kleben"
+   ],
+   "title": "Baumscheibe mit bunten Glassteinen",
+   "source": {
+    "type": "youtube",
+    "id": "9-fD47CVaec"
+   },
+   "kanal": "Kinderoutdoor",
+   "dauer": "3:38",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Die Lehrperson bohrt die Löcher passend zur Grösse der Glassteine vor (im Video nicht gezeigt), dazu ein kleines Loch für die Schnur; Steine gut einleimen, damit keiner herausfällt.",
+   "material": [
+    "holzbrett",
+    "steine",
+    "leim",
+    "bohrer",
+    "schnur"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Baumscheibe, Glassteine, Leim, Bohrer, Schnur"
+    },
+    {
+     "t": 49.7,
+     "label": "Mit Erwachsenen Löcher in die Scheibe bohren"
+    },
+    {
+     "t": 79.0,
+     "label": "Glassteine in die Löcher probieren"
+    },
+    {
+     "t": 93.5,
+     "label": "Leim ins Loch, Glasstein fest hineindrücken"
+    },
+    {
+     "t": 100.5,
+     "label": "So weiter: Leim, Stein, Loch für Loch"
+    },
+    {
+     "t": 115.5,
+     "label": "Schnur durchs kleine Loch ziehen, verknoten"
+    },
+    {
+     "t": 121.0,
+     "label": "Fertig – häng deine Baumscheibe ins Licht"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-haselkranz",
+   "areaId": "holz",
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "niveau": 2,
+   "grundtechnik": false,
+   "techniken": [
+    "zweige biegen",
+    "zweige eindrehen"
+   ],
+   "title": "Kranz aus Haselzweigen",
+   "source": {
+    "type": "youtube",
+    "id": "9FvMCuHhBqM"
+   },
+   "kanal": "Mari Gestaltet",
+   "dauer": "4:19",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Braucht etwa 20 frische, biegsame Haselzweige von rund 50 cm (dürre Zweige brechen), etwas Draht und eine Gartenschere, die Erwachsene bedienen oder eng begleiten.",
+   "material": [
+    "ast",
+    "draht",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Haselzweige, Draht, Gartenschere"
+    },
+    {
+     "t": 54.5,
+     "label": "Zwei dicke Äste gegengleich halten"
+    },
+    {
+     "t": 68.1,
+     "label": "Äste ineinander drehen, zum Kreis biegen"
+    },
+    {
+     "t": 93.7,
+     "label": "Enden mit Draht festbinden"
+    },
+    {
+     "t": 141.0,
+     "label": "Enden mit der Gartenschere kürzen"
+    },
+    {
+     "t": 155.7,
+     "label": "Nächsten Ast dazulegen und eindrehen"
+    },
+    {
+     "t": 173.8,
+     "label": "Jeden Ast an anderer Stelle eindrehen"
+    },
+    {
+     "t": 230.7,
+     "label": "Weiterdrehen, bis der Kranz fest ist"
+    },
+    {
+     "t": 250.6,
+     "label": "Übrige Enden abschneiden"
+    },
+    {
+     "t": 255.5,
+     "label": "Fertig – schau deinen Kranz an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-nagelbild-faden",
+   "areaId": "holz",
+   "stufen": [
+    2,
+    3
+   ],
+   "niveau": 2,
+   "grundtechnik": false,
+   "techniken": [
+    "faden spannen",
+    "knoten"
+   ],
+   "title": "Nagelbild: Faden spannen",
+   "source": {
+    "type": "youtube",
+    "id": "B0H9FkH-Nqo"
+   },
+   "kanal": "Grundschule Ludwigsfeld",
+   "dauer": "3:32",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Teil 2 setzt ein fertig genageltes Brett aus Teil 1 voraus; der Faden muss beim Wickeln immer auf Spannung bleiben, sonst rutscht er ab.",
+   "material": [
+    "holzbrett",
+    "naegel",
+    "schnur",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Nagelbrett, Schnur, Schere"
+    },
+    {
+     "t": 23.0,
+     "label": "Papiervorlage vorsichtig abreissen"
+    },
+    {
+     "t": 37.0,
+     "label": "Faden an einen Nagel, dreifacher Knoten"
+    },
+    {
+     "t": 58.5,
+     "label": "Faden aussen um alle Nägel wickeln"
+    },
+    {
+     "t": 100.0,
+     "label": "Figur kreuz und quer füllen"
+    },
+    {
+     "t": 150.0,
+     "label": "Neben dem Anfang einmal um den Nagel"
+    },
+    {
+     "t": 167.0,
+     "label": "Faden straff halten, dreimal verknoten"
+    },
+    {
+     "t": 190.5,
+     "label": "Beide Enden abschneiden"
+    },
+    {
+     "t": 195.0,
+     "label": "Fertig – schau dein Fadenbild an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-perlendrache",
+   "areaId": "weben",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "niveau": 3,
+   "grundtechnik": false,
+   "techniken": [
+    "perlen fädeln",
+    "überkreuz fädeln"
+   ],
+   "title": "Drache aus Perlen und Draht",
+   "source": {
+    "type": "youtube",
+    "id": "BA88K5jd4nI"
+   },
+   "kanal": "KHelga",
+   "dauer": "8:10",
+   "alter": "ab 9",
+   "sprache": "ohne Sprache",
+   "hinweis": "Rocailles 3 mm in zwei Farben und Schmuckdraht 0.3 mm (50 cm für den Körper, 40 cm pro Flügel); jede Reihe wird von beiden Seiten überkreuz durch dieselben Perlen gezogen, das Video zeigt das nur im Bild mit englischen Einblendungen – zuerst an einem Probestreifen üben.",
+   "material": [
+    "perle",
+    "draht",
+    "zange",
+    "lineal",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Perlen, Draht, Zange, Massband"
+    },
+    {
+     "t": 22.9,
+     "label": "Draht 50 cm abmessen und abschneiden"
+    },
+    {
+     "t": 28.9,
+     "label": "Kopf: Perlen auffädeln, Draht überkreuz durchziehen"
+    },
+    {
+     "t": 110.4,
+     "label": "Hörner links und rechts anfädeln"
+    },
+    {
+     "t": 136.3,
+     "label": "Nächste Reihen fädeln, dann Vorderbeine"
+    },
+    {
+     "t": 197.3,
+     "label": "Bauch Reihe um Reihe, dann Hinterbeine"
+    },
+    {
+     "t": 219.4,
+     "label": "Schwanz Reihe um Reihe fädeln"
+    },
+    {
+     "t": 249.5,
+     "label": "Draht zurückfädeln, Enden abschneiden"
+    },
+    {
+     "t": 275.8,
+     "label": "Flügel: 40 cm Draht, erste Reihen fädeln"
+    },
+    {
+     "t": 358.0,
+     "label": "Flügel fertig fädeln, zweiten Flügel gleich"
+    },
+    {
+     "t": 413.3,
+     "label": "Flügel festmachen, Drahtenden abschneiden"
+    },
+    {
+     "t": 478.9,
+     "label": "Fertig – schau deinen Drachen an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-leim-zwingen",
+   "areaId": "holz",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "verleimen",
+    "zwinge ansetzen"
+   ],
+   "title": "Holz leimen mit Zwingen",
+   "source": {
+    "type": "youtube",
+    "id": "FegSAPdXkDM"
+   },
+   "kanal": "Die Werkkiste",
+   "dauer": "3:47",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Wasserfester Holzleim, Schraubzwingen und kleine Feder- oder Holzklemmen bereitlegen; Stolperstein ist zu viel Leim, darum nur eine dünne Schicht und einen feuchten Lappen bereithalten.",
+   "material": [
+    "leim",
+    "holzklotz",
+    "schraubzwinge",
+    "pinsel",
+    "handtuch"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Holzleim, Holzstücke, Zwingen, Klemmen"
+    },
+    {
+     "t": 54.0,
+     "label": "Dünne Schicht Leim aufs kleine Holz"
+    },
+    {
+     "t": 87.0,
+     "label": "Holz aufeinanderlegen, Schraubzwinge zudrehen"
+    },
+    {
+     "t": 108.0,
+     "label": "Zweite Zwinge ansetzen, trocknen lassen"
+    },
+    {
+     "t": 125.4,
+     "label": "Kleine Holzstücke dünn mit Leim bestreichen"
+    },
+    {
+     "t": 142.0,
+     "label": "Zusammendrücken und mit Klemme halten"
+    },
+    {
+     "t": 166.5,
+     "label": "Beide Holzstücke dünn mit Leim bestreichen"
+    },
+    {
+     "t": 183.1,
+     "label": "Aufeinanderlegen, Holzklemme ansetzen"
+    },
+    {
+     "t": 200.0,
+     "label": "Ausgequollenen Leim mit nassem Lappen abwischen"
+    },
+    {
+     "t": 215.0,
+     "label": "Fertig – schau deine Verleimung an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-libelle-perlen",
+   "areaId": "weben",
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "niveau": 2,
+   "grundtechnik": false,
+   "techniken": [
+    "perlen auffaedeln",
+    "draht kreuzen"
+   ],
+   "title": "Libelle aus Perlen",
+   "source": {
+    "type": "youtube",
+    "id": "g-MVhk6D6J8"
+   },
+   "kanal": "MACH MIT BEADS",
+   "dauer": "4:45",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Pro Kind etwa 60 cm Perlendraht, 2 grosse, 5 mittlere, 11 kleine und rund 430 Rocailles; beim Kreuzen beide Drahtenden gleichzeitig straff ziehen, sonst wird der Körper locker.",
+   "material": [
+    "perle",
+    "draht",
+    "zange",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Draht, Perlen, Zange"
+    },
+    {
+     "t": 22.0,
+     "label": "Perlen für den Schwanz auffädeln"
+    },
+    {
+     "t": 41.0,
+     "label": "Körper: Perlen auffädeln, Drähte kreuzen"
+    },
+    {
+     "t": 75.0,
+     "label": "Grosse Augenperlen auffädeln, Draht verdrehen"
+    },
+    {
+     "t": 105.0,
+     "label": "Erster Flügel: 110 Perlen, Schlaufe legen"
+    },
+    {
+     "t": 141.0,
+     "label": "Zweiter Flügel auf der anderen Seite"
+    },
+    {
+     "t": 159.0,
+     "label": "Dritter Flügel: 105 Perlen, Schlaufe legen"
+    },
+    {
+     "t": 195.0,
+     "label": "Vierter Flügel, Draht am Körper festmachen"
+    },
+    {
+     "t": 241.5,
+     "label": "Befestigung mit der Zange machen, abschneiden"
+    },
+    {
+     "t": 280.6,
+     "label": "Fertig – schau deine Libelle an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   },
+   "vorlagen": [
+    {
+     "datei": "perlen/?tier=libelle",
+     "name": "Eigenes Zählmuster: Libelle"
+    }
+   ]
+  },
+  {
+   "id": "zw-haselmaus",
+   "areaId": "formen",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "niveau": 2,
+   "grundtechnik": false,
+   "techniken": [
+    "vorstechen",
+    "biegen",
+    "stecken"
+   ],
+   "title": "Haselmaus aus einer Haselnuss",
+   "source": {
+    "type": "youtube",
+    "id": "IIJKiZP5cF8"
+   },
+   "kanal": "Kinderoutdoor Kinderoutdoor",
+   "dauer": "4:08",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Haselnüsse, Pfeifenputzer und Ahornstiele bereitlegen; das Vorstechen der harten Nuss mit der Ahle braucht Kraft, dabei helfen oder die Löcher vorbohren.",
+   "material": [
+    "ahle",
+    "draht",
+    "zange",
+    "blaetter",
+    "stifte"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Haselnüsse, Pfeifenputzer, Ahle, Zange, Stifte"
+    },
+    {
+     "t": 71.5,
+     "label": "Mit der Ahle alle Löcher stechen"
+    },
+    {
+     "t": 103.6,
+     "label": "Stiele als Beine und Schwanz einstecken, kürzen"
+    },
+    {
+     "t": 125.5,
+     "label": "Pfeifenputzer abzwicken, zum V biegen, einstecken"
+    },
+    {
+     "t": 148.0,
+     "label": "Zweites Ohr genauso machen"
+    },
+    {
+     "t": 166.0,
+     "label": "Augen, Nase und Mund malen"
+    },
+    {
+     "t": 194.0,
+     "label": "Langen Schwanz aus Pfeifenputzer einstecken"
+    },
+    {
+     "t": 202.4,
+     "label": "Wer will: Füsse aus Pfeifenputzer einstecken"
+    },
+    {
+     "t": 217.3,
+     "label": "Fertig – schau deine Haselmaus an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-segelschiff",
+   "areaId": "holz",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "niveau": 3,
+   "grundtechnik": false,
+   "techniken": [
+    "saegen",
+    "bohren",
+    "nageln"
+   ],
+   "title": "Segelschiff aus Holz",
+   "source": {
+    "type": "youtube",
+    "id": "JVVmZ1mFiZI"
+   },
+   "kanal": "Die Werkkiste",
+   "dauer": "4:12",
+   "alter": "ab 9",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Zwei Fichtenbretter, Kantholz, Rundstab, Karton, Holzscheibe, Nägel und Schnur bereitlegen, dazu Hammer, Schleifpapier, Feile und Schraubzwinge; der Bohrer muss gleich dick sein wie der Rundstab, und der Leim braucht etwa 10 Minuten zum Antrocknen.",
+   "material": [
+    "holzbrett",
+    "holzklotz",
+    "stab",
+    "saege",
+    "bohrer",
+    "leim",
+    "naegel",
+    "schnur"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Bretter, Kantholz, Rundstab, Säge"
+    },
+    {
+     "t": 38.8,
+     "label": "Bug und Heck aufzeichnen und aussägen"
+    },
+    {
+     "t": 54.0,
+     "label": "Zweite Form nachzeichnen, sägen, halbieren"
+    },
+    {
+     "t": 88.9,
+     "label": "Alle Kanten glatt schleifen und feilen"
+    },
+    {
+     "t": 101.8,
+     "label": "Kiel an beiden Enden schräg absägen"
+    },
+    {
+     "t": 112.2,
+     "label": "Mastloch bohren, Mast anpassen und absägen"
+    },
+    {
+     "t": 146.3,
+     "label": "Aufbauten und Kiel anleimen, trocknen lassen"
+    },
+    {
+     "t": 177.0,
+     "label": "Nägel für die Reling einschlagen"
+    },
+    {
+     "t": 195.2,
+     "label": "Schnur von Nagel zu Nagel wickeln"
+    },
+    {
+     "t": 207.6,
+     "label": "Mast einleimen, Segel und Mastkorb aufstecken"
+    },
+    {
+     "t": 227.8,
+     "label": "Fertig – schau dein Segelschiff an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-kreisel-schnitzen",
+   "areaId": "schnitzen",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "niveau": 3,
+   "grundtechnik": false,
+   "techniken": [
+    "kerbschnitt",
+    "gegenschnitt"
+   ],
+   "title": "Kreisel aus einem Ast",
+   "source": {
+    "type": "youtube",
+    "id": "KoiWkltkjw0"
+   },
+   "kanal": "Kinderoutdoor",
+   "dauer": "3:22",
+   "alter": "ab 9",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Der Kreisel wird ohne Säge nur mit Messer aus einem frischen, geraden Ast (ca. 2–3 cm dick) geschnitzt; nur mit Erwachsenen, scharfe Klinge, Schnitzhandschuh und vom Körper weg schneiden – heikel ist das Abbrechen und das Feinspitzen des kleinen Stücks in der Hand.",
+   "material": [
+    "ast",
+    "taschenmesser",
+    "messer",
+    "schnitzhandschuh"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Ast, Taschenmesser, Messer, Schnitzhandschuh"
+    },
+    {
+     "t": 24.0,
+     "label": "Am Astende rundherum eine Kerbe schneiden"
+    },
+    {
+     "t": 38.3,
+     "label": "Kurz schneiden, drehen: Stiel herausschnitzen"
+    },
+    {
+     "t": 79.5,
+     "label": "Ast drehen, unter dem Kopf Spitze einschnitzen"
+    },
+    {
+     "t": 103.5,
+     "label": "Mit Gegenschnitten Späne wegschneiden, weiterdrehen"
+    },
+    {
+     "t": 142.0,
+     "label": "Kreisel vom Ast abbrechen"
+    },
+    {
+     "t": 145.5,
+     "label": "Spitze mit der Klinge schön spitz schnitzen"
+    },
+    {
+     "t": 164.0,
+     "label": "Kreisel auf dem Tisch andrehen"
+    },
+    {
+     "t": 172.3,
+     "label": "Fertig – schau deinen Kreisel an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-sonnenfaenger",
+   "areaId": "holz",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "niveau": 2,
+   "grundtechnik": false,
+   "techniken": [
+    "bohren",
+    "kleben"
+   ],
+   "title": "Sonnenfänger aus Holz und Murmeln",
+   "source": {
+    "type": "youtube",
+    "id": "Kpm0JSH9yIA"
+   },
+   "kanal": "Mütter-Kinder-Zentrum Bassum e.V.",
+   "dauer": "1:51",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Baumscheibe, 16-mm-Holzbohrer im Akkuschrauber, Glasmurmeln und Schraubhaken bereitlegen; Bohren und Heisskleber nur mit Erwachsenen, Löcher ganz durchbohren, damit Licht durchscheint.",
+   "material": [
+    "holzbrett",
+    "bohrer",
+    "perle",
+    "heisskleber",
+    "leim",
+    "schrauben"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Baumscheibe, Bohrer, Murmeln, Heisskleber, Haken"
+    },
+    {
+     "t": 29.0,
+     "label": "Viele Löcher in die Baumscheibe bohren"
+    },
+    {
+     "t": 36.3,
+     "label": "Heisskleber in die Löcher geben"
+    },
+    {
+     "t": 45.6,
+     "label": "Murmeln in die Löcher drücken"
+    },
+    {
+     "t": 55.8,
+     "label": "Haken in den Rand drehen"
+    },
+    {
+     "t": 61.7,
+     "label": "Fertig – häng den Sonnenfänger ins Fenster"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-nusskranz",
+   "areaId": "formen",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "niveau": 2,
+   "grundtechnik": false,
+   "techniken": [
+    "heissleim kleben",
+    "knoten"
+   ],
+   "title": "Kranz aus Haselnüssen",
+   "source": {
+    "type": "youtube",
+    "id": "l2XONhSG_iU"
+   },
+   "kanal": "BASTELMANIA",
+   "dauer": "1:48",
+   "alter": "ab 7",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Braucht etwa 9 Haselnüsse und einen Deckel eines Gurkenglases als Form; der Heissleim ist sehr heiss, darum nur mit Erwachsenen und 5 Minuten aushärten lassen, bevor der Kranz aus dem Deckel kommt.",
+   "material": [
+    "heisskleber",
+    "glas",
+    "schnur",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Haselnüsse, Deckel, Bänder, Heissleim"
+    },
+    {
+     "t": 28.5,
+     "label": "Zwei Nüsse mit Heissleim zusammenkleben"
+    },
+    {
+     "t": 38.0,
+     "label": "Nüsse in den Deckel setzen, rundum ankleben"
+    },
+    {
+     "t": 59.5,
+     "label": "Letzte Nuss dazwischen kleben, trocknen lassen"
+    },
+    {
+     "t": 66.5,
+     "label": "Kranz herausnehmen, Bänder mit Schlaufe anknoten"
+    },
+    {
+     "t": 82.5,
+     "label": "Bandenden mit der Schere abschneiden"
+    },
+    {
+     "t": 87.0,
+     "label": "Fertig – schau deinen Nusskranz an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-perlen-axolotl",
+   "areaId": "weben",
+   "stufen": [
+    5,
+    6
+   ],
+   "niveau": 3,
+   "grundtechnik": false,
+   "techniken": [
+    "perlen fädeln",
+    "überkreuz fädeln"
+   ],
+   "title": "Axolotl aus Perlen und Draht",
+   "source": {
+    "type": "youtube",
+    "id": "mnxRg-39j1Q"
+   },
+   "kanal": "KHelga",
+   "dauer": "10:13",
+   "alter": "ab 10",
+   "sprache": "ohne Sprache",
+   "hinweis": "Rocailles 3 mm in Hell- und Dunkelrosa plus 2 schwarze für die Augen, 110 cm Schmuckdraht 0.3 mm und ein Seitenschneider; die lange Abfolge (43 Mini-Schritte, nur Bild mit englischen Einblendungen) vorher mit einem einfachen Perlentier üben.",
+   "material": [
+    "perle",
+    "draht",
+    "zange",
+    "lineal"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten, Draht 110 cm abschneiden"
+    },
+    {
+     "t": 42.0,
+     "label": "Kopf überkreuz fädeln, schwarze Perlen als Augen"
+    },
+    {
+     "t": 95.9,
+     "label": "Kiemen links und rechts aus dunklen Perlen"
+    },
+    {
+     "t": 171.0,
+     "label": "Kopfreihe fädeln, wieder Kiemen beidseitig"
+    },
+    {
+     "t": 217.0,
+     "label": "Nächste Kiemen links und rechts anfädeln"
+    },
+    {
+     "t": 265.9,
+     "label": "Kopfreihe, dann zweimal Kiemen beidseitig"
+    },
+    {
+     "t": 377.5,
+     "label": "Hals: Reihen aus rosa Perlen fädeln"
+    },
+    {
+     "t": 404.0,
+     "label": "Vorderbeine links und rechts fädeln"
+    },
+    {
+     "t": 451.5,
+     "label": "Bauch: Reihe um Reihe überkreuz fädeln"
+    },
+    {
+     "t": 482.0,
+     "label": "Hinterbeine links und rechts fädeln"
+    },
+    {
+     "t": 552.0,
+     "label": "Schwanz fädeln, Draht umwickeln, abschneiden"
+    },
+    {
+     "t": 609.8,
+     "label": "Fertig – schau deinen Axolotl an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   },
+   "vorlagen": [
+    {
+     "datei": "perlen/?tier=axolotl",
+     "name": "Eigenes Zählmuster: Axolotl"
+    }
+   ]
+  },
+  {
+   "id": "zw-holz-igel",
+   "areaId": "holz",
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "niveau": 2,
+   "grundtechnik": false,
+   "techniken": [
+    "schwammtupfen",
+    "holz bemalen"
+   ],
+   "title": "Holz-Igel auf Leinwand",
+   "source": {
+    "type": "youtube",
+    "id": "plQJ6gHwqzk"
+   },
+   "kanal": "CreativeMissD",
+   "dauer": "1:16",
+   "alter": "ab 8",
+   "sprache": "ohne Sprache",
+   "hinweis": "Igel und zwei Blätter müssen vorher aus Holz ausgesägt sein; das Video zeigt nur das Bemalen mit Pinsel und Schwamm, das Aufkleben auf die Leinwand wird nicht gezeigt.",
+   "material": [
+    "holzbrett",
+    "karton",
+    "farbe",
+    "pinsel",
+    "schwamm",
+    "leim"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Holzteile, Leinwand, Farbe, Schwamm"
+    },
+    {
+     "t": 11.5,
+     "label": "Leinwand ganz grün anmalen"
+    },
+    {
+     "t": 17.0,
+     "label": "Mit Schwamm helle Tupfer auf Grün"
+    },
+    {
+     "t": 28.0,
+     "label": "Igel braun, Blätter orange anmalen"
+    },
+    {
+     "t": 39.0,
+     "label": "Blätter mit Schwamm gelb betupfen"
+    },
+    {
+     "t": 44.5,
+     "label": "Oben rote und gelbe Tupfer auf Leinwand"
+    },
+    {
+     "t": 50.0,
+     "label": "Stacheln und Blattadern dunkel nachmalen"
+    },
+    {
+     "t": 55.5,
+     "label": "Feine Zweige oben auf Leinwand malen"
+    },
+    {
+     "t": 61.0,
+     "label": "Fertig – Igel und Blätter aufkleben"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-haselnussmaennchen",
+   "areaId": "formen",
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "niveau": 1,
+   "grundtechnik": false,
+   "techniken": [
+    "bemalen",
+    "kleben",
+    "ausschneiden"
+   ],
+   "title": "Haselnuss-Männchen als Anhänger",
+   "source": {
+    "type": "youtube",
+    "id": "TbOnKoPie2g"
+   },
+   "kanal": "Kinderoutdoor Kinderoutdoor",
+   "dauer": "4:16",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Vorher Haselnüsse sammeln; die Holzkugel hält mit Heisskleber besser, und den Faden durch den Hut sticht am besten eine erwachsene Person mit der Nadel.",
+   "material": [
+    "perle",
+    "stoff",
+    "leim",
+    "schere",
+    "stifte",
+    "nadel",
+    "garn"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Haselnuss, Holzkugel, Stoff, Leim, Stifte"
+    },
+    {
+     "t": 57.0,
+     "label": "Holzkugel auf die Haselnuss kleben"
+    },
+    {
+     "t": 66.9,
+     "label": "Augen, Nase und Mund aufmalen"
+    },
+    {
+     "t": 93.6,
+     "label": "Haare vorsichtig aufmalen"
+    },
+    {
+     "t": 116.6,
+     "label": "Ein Stück Stoff als Umhang abschneiden"
+    },
+    {
+     "t": 137.3,
+     "label": "Umhang um den Hals kleben"
+    },
+    {
+     "t": 144.7,
+     "label": "Rundes Stück Stoff für den Hut ausschneiden"
+    },
+    {
+     "t": 166.5,
+     "label": "Einschneiden, zum Hut falten, aufkleben"
+    },
+    {
+     "t": 190.0,
+     "label": "Mit Nadel und Faden einen Aufhänger machen"
+    },
+    {
+     "t": 208.0,
+     "label": "Fertig – schau dein Haselnuss-Männchen an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-sonnenfaenger-leim",
+   "areaId": "drucken",
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "niveau": 1,
+   "grundtechnik": false,
+   "techniken": [
+    "marmorieren",
+    "giessen"
+   ],
+   "title": "Bunter Sonnenfänger aus Leim",
+   "source": {
+    "type": "youtube",
+    "id": "uSUEINMyVNs"
+   },
+   "kanal": "Pädagogische Dienste - Caritasverband Rastatt",
+   "dauer": "1:24",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Weissleim dick in einen durchsichtigen Plastikdeckel giessen, mit Lebensmittelfarbe marmorieren und zwei Tage trocknen lassen; das Video läuft im Zeitraffer, also langsam arbeiten.",
+   "material": [
+    "leim",
+    "farbe",
+    "teller",
+    "zahnstocher"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Leim, Farbe, Plastikdeckel, Zahnstocher"
+    },
+    {
+     "t": 41.5,
+     "label": "Leim dick in den Plastikdeckel giessen"
+    },
+    {
+     "t": 50.5,
+     "label": "Blaue Tropfen drauf, mit Zahnstocher Sterne ziehen"
+    },
+    {
+     "t": 56.0,
+     "label": "Grüne und rote Tropfen dazu, dann verziehen"
+    },
+    {
+     "t": 65.0,
+     "label": "Strahlen von der Mitte nach aussen ziehen"
+    },
+    {
+     "t": 73.7,
+     "label": "Zwei Tage trocknen lassen, dann vorsichtig ablösen"
+    },
+    {
+     "t": 81.5,
+     "label": "Fertig – häng deinen Sonnenfänger ans Fenster"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-perlen-eidechse",
+   "areaId": "weben",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "niveau": 2,
+   "grundtechnik": false,
+   "techniken": [
+    "perlen fädeln",
+    "draht kreuzen"
+   ],
+   "title": "Perlen-Eidechse aus Draht",
+   "source": {
+    "type": "youtube",
+    "id": "VRNdeLwddo4"
+   },
+   "kanal": "KreativMitMila",
+   "dauer": "6:53",
+   "alter": "ab 9",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Dünner Perlendraht (ca. 50 cm) und Rocailles in zwei Farben; Stolperstein sind die Beine: die blauen Perlen beim Zurückfädeln mit dem Daumen festhalten und den Draht vorsichtig festziehen, er kann in die Finger schneiden.",
+   "material": [
+    "perle",
+    "draht",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Draht, Perlen, Schere"
+    },
+    {
+     "t": 20.9,
+     "label": "Draht 50 cm abschneiden, Schlaufe drehen"
+    },
+    {
+     "t": 39.9,
+     "label": "Kopf: eine Perle, anderen Draht durchziehen"
+    },
+    {
+     "t": 89.0,
+     "label": "Zwei Perlen auffädeln, Draht kreuzen, festziehen"
+    },
+    {
+     "t": 139.9,
+     "label": "Bein: zwei blaue, drei pinke Perlen auffädeln"
+    },
+    {
+     "t": 160.0,
+     "label": "Pinke festhalten, Draht zurück durch blaue Perlen"
+    },
+    {
+     "t": 211.0,
+     "label": "Zweites Vorderbein auf der anderen Seite"
+    },
+    {
+     "t": 231.9,
+     "label": "Körper: drei Perlen, Draht kreuzen, mehrere Reihen"
+    },
+    {
+     "t": 285.2,
+     "label": "Hinterbeine gleich wie die Vorderbeine machen"
+    },
+    {
+     "t": 362.3,
+     "label": "Schwanz: Reihen schmaler, zuletzt je eine Perle"
+    },
+    {
+     "t": 390.8,
+     "label": "Drahtenden zusammendrehen und abschneiden"
+    },
+    {
+     "t": 403.0,
+     "label": "Fertig – schau deine Eidechse an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   },
+   "vorlagen": [
+    {
+     "datei": "perlen/?tier=eidechse",
+     "name": "Eigenes Zählmuster: Eidechse"
+    }
+   ]
+  },
+  {
+   "id": "zw-wichteltuer",
+   "areaId": "holz",
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "niveau": 2,
+   "grundtechnik": false,
+   "techniken": [
+    "kleben",
+    "binden"
+   ],
+   "title": "Wichteltür aus Naturmaterial",
+   "source": {
+    "type": "youtube",
+    "id": "VuiUU23TAc4"
+   },
+   "kanal": "ARD Garten",
+   "dauer": "1:59",
+   "alter": "ab 8",
+   "sprache": "ohne Sprache",
+   "hinweis": "Vorher Birkenrinde, Äste, Holzscheiben, Moos und Nussschalen sammeln; Heissleim und Absägen des Bambus nur mit Erwachsenen.",
+   "material": [
+    "ast",
+    "moos",
+    "heisskleber",
+    "schnur",
+    "saege",
+    "stifte",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Rinde, Äste, Holzscheiben, Moos"
+    },
+    {
+     "t": 17.8,
+     "label": "Äste und Türknopf an Birkenrinde kleben"
+    },
+    {
+     "t": 38.7,
+     "label": "Tür auf ein grosses Rindenstück kleben"
+    },
+    {
+     "t": 46.6,
+     "label": "Tännchen und Stäbchen in die Rinde stecken"
+    },
+    {
+     "t": 51.4,
+     "label": "Bambus absägen, POST draufschreiben"
+    },
+    {
+     "t": 60.4,
+     "label": "Briefkasten auf einen Ast kleben"
+    },
+    {
+     "t": 66.8,
+     "label": "Besen: Zweige zusammenbinden, Stiel hineinstecken"
+    },
+    {
+     "t": 90.6,
+     "label": "Feuerstelle: Hölzchen in eine Nussschale stecken"
+    },
+    {
+     "t": 97.2,
+     "label": "Weg aus Holzscheiben legen, Deko verteilen"
+    },
+    {
+     "t": 104.3,
+     "label": "Fertig – schau deine Wichteltür an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-nagelbrett",
+   "areaId": "holz",
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "niveau": 2,
+   "grundtechnik": false,
+   "techniken": [
+    "nageln",
+    "anzeichnen"
+   ],
+   "title": "Nagelbrett für Gummifiguren",
+   "source": {
+    "type": "youtube",
+    "id": "WNqIk7vIKBE"
+   },
+   "kanal": "heinz waldmann",
+   "dauer": "4:54",
+   "alter": "ab 5",
+   "sprache": "ohne Sprache",
+   "hinweis": "Pappelsperrholz 15x15 cm, 12 mm dick, und Nägel 35 mm; die Nägel nur so weit einschlagen, dass sie fest stehen und gleich hoch herausschauen.",
+   "material": [
+    "holzbrett",
+    "naegel",
+    "hammer",
+    "gummiband",
+    "lineal",
+    "zirkel",
+    "bleistift",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Brett, Nägel, Hammer, Gummi"
+    },
+    {
+     "t": 7.0,
+     "label": "Mit dem Lineal beide Diagonalen zeichnen"
+    },
+    {
+     "t": 28.5,
+     "label": "Mitte jeder Seite abmessen und anzeichnen"
+    },
+    {
+     "t": 80.0,
+     "label": "Gegenüberliegende Mitten mit Linie verbinden"
+    },
+    {
+     "t": 102.5,
+     "label": "Mit dem Zirkel einen Kreis zeichnen"
+    },
+    {
+     "t": 113.5,
+     "label": "Einen Nagel in die Mitte schlagen"
+    },
+    {
+     "t": 139.0,
+     "label": "Aussen auf jede Linie einen Nagel"
+    },
+    {
+     "t": 178.5,
+     "label": "Auf dem Kreis Nägel einschlagen"
+    },
+    {
+     "t": 227.5,
+     "label": "Mit Gummis Figuren spannen"
+    },
+    {
+     "t": 264.5,
+     "label": "Fertig – schau dein Nagelbrett an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-hammer-zangen",
+   "areaId": "holz",
+   "stufen": [
+    3,
+    4,
+    5
+   ],
+   "niveau": 2,
+   "grundtechnik": true,
+   "techniken": [
+    "nageln",
+    "nagel ziehen",
+    "zange"
+   ],
+   "title": "Hämmern und Nägel ziehen",
+   "source": {
+    "type": "youtube",
+    "id": "YIzICLY6-0Q"
+   },
+   "kanal": "Die Werkkiste",
+   "dauer": "7:36",
+   "alter": "ab 8",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Hammer, Kneif- und Kombizange, Seitenschneider, Nägel in drei Längen und zwei Holzlatten bereitlegen; kleine Nägel mit der Kombizange halten, sonst trifft man die Finger.",
+   "material": [
+    "hammer",
+    "naegel",
+    "holzbrett",
+    "zange",
+    "draht"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Hammer, Nägel, Zangen, Holz"
+    },
+    {
+     "t": 61.0,
+     "label": "Nagel unten halten, anklopfen, Hand weg"
+    },
+    {
+     "t": 116.4,
+     "label": "Kleinen Nagel mit der Kombizange halten"
+    },
+    {
+     "t": 138.0,
+     "label": "Nagel wählen: halb ins zweite Holz"
+    },
+    {
+     "t": 197.1,
+     "label": "Brett mit zwei Nägeln festnageln"
+    },
+    {
+     "t": 233.0,
+     "label": "Nagel mit Zange oder Hammer herausrollen"
+    },
+    {
+     "t": 291.4,
+     "label": "Krummen Nagel mit Kombizange gerade biegen"
+    },
+    {
+     "t": 316.7,
+     "label": "Draht mit dem Seitenschneider abknipsen"
+    },
+    {
+     "t": 347.5,
+     "label": "Nagelstelle wählen: kein Astloch, nicht am Rand"
+    },
+    {
+     "t": 388.0,
+     "label": "Schiefen Nagel mit dem Hammer aufrichten"
+    },
+    {
+     "t": 418.4,
+     "label": "Nagel einschlagen, Spitze hinten umklopfen"
+    },
+    {
+     "t": 436.9,
+     "label": "Fertig – schau dein Brett an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   }
+  },
+  {
+   "id": "zw-maipfeife",
+   "areaId": "schnitzen",
+   "stufen": [
+    4,
+    5,
+    6
+   ],
+   "niveau": 3,
+   "grundtechnik": false,
+   "techniken": [
+    "schnitzen",
+    "rinde abklopfen"
+   ],
+   "title": "Maipfeife aus Haselnuss",
+   "source": {
+    "type": "youtube",
+    "id": "YQTEtr48-JY"
+   },
+   "kanal": "Naturfreizeit Philipp",
+   "dauer": "3:33",
+   "alter": "ab 10",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Nur mit frischen, saftigen Haselnussästen im Frühling möglich, Messerarbeit mit Erwachsenen; beim Klopfen reisst die Rinde am Mundstück leicht ein.",
+   "material": [
+    "ast",
+    "taschenmesser",
+    "saege",
+    "stab"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten: Haselnussast, Messer mit Säge, Stock"
+    },
+    {
+     "t": 33.9,
+     "label": "Ästchen abmachen, ein Stück absägen"
+    },
+    {
+     "t": 56.7,
+     "label": "Oben eine Kerbe fürs Mundstück schnitzen"
+    },
+    {
+     "t": 67.0,
+     "label": "Unten die Rinde ringsum einschneiden"
+    },
+    {
+     "t": 82.8,
+     "label": "Mit dem Stock die Rinde rundum klopfen"
+    },
+    {
+     "t": 107.4,
+     "label": "Rinde drehen und vorsichtig abziehen"
+    },
+    {
+     "t": 114.8,
+     "label": "Holz bei der Kerbe abschneiden"
+    },
+    {
+     "t": 127.5,
+     "label": "Vom kleinen Stück ein paar Millimeter abtrennen"
+    },
+    {
+     "t": 139.0,
+     "label": "Rinde aufschieben, Mundstück oben einstecken"
+    },
+    {
+     "t": 152.7,
+     "label": "Fertig – blas in deine Maipfeife"
     }
    ],
    "task": {
