@@ -6,7 +6,8 @@ from shapely.ops import unary_union
 from shapely import affinity
 
 __all__ = ['np', 'Point', 'Polygon', 'LineString', 'box', 'unary_union', 'affinity',
-           'C', 'E', 'L', 'P', 'U', 'hull', 'glatt', 'weich', 'vieleck', 'stern', 'kreislinie', 'bogen', 'R', 'spiegel_x', 'pruefen']
+           'C', 'E', 'L', 'P', 'U', 'hull', 'glatt', 'weich', 'vieleck', 'stern', 'kreislinie', 'bogen', 'R', 'spiegel_x', 'pruefen',
+           'schmalste', 'schwierigkeit']
 
 
 def C(x, y, r): return Point(x, y).buffer(r, 64)                     # Kreis
@@ -27,6 +28,24 @@ def kreislinie(x, y, r): return LineString(C(x, y, r).exterior.coords)   # Detai
 def bogen(x, y, r, von, bis, n=24):
     """Punkte auf einem Kreisbogen (Grad), z.B. für L(bogen(...), breite) oder als Detail-Linie."""
     a = np.radians(np.linspace(von, bis, n)); return list(zip(x + r*np.cos(a), y + r*np.sin(a)))
+
+
+def schmalste(g, k=4):
+    """Breite der schmalsten Stelle (in Einheiten von g): kleinste Strichbreite 2r, bei der das «Öffnen»
+    (erst r schrumpfen, dann r wachsen) ein Stück wegfrisst, das grösser ist als k·r² – also ein Bein, Stiel
+    oder Fühler, nicht bloss eine spitze Ecke."""
+    for r in np.arange(0.5, 30, 0.25):
+        weg = g.difference(g.buffer(-r, 16).buffer(r, 16))
+        if max([t.area for t in getattr(weg, 'geoms', [weg])] + [0]) > k*r*r: return 2*(r - 0.25)
+    return 60.0
+
+
+def schwierigkeit(g, eng):
+    """1 bis 3 Scheren: wie verwinkelt der Umriss ist (Umfang im Vergleich zur Gummiband-Hülle) und wie schmal."""
+    kurvig = g.exterior.length / g.convex_hull.exterior.length
+    if kurvig < 1.15 and eng >= 20: return 1
+    if kurvig > 1.45 or eng < 11: return 3
+    return 2
 
 
 def pruefen(fid, f):

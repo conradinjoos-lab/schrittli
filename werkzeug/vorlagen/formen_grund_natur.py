@@ -70,10 +70,10 @@ def rosette():
 
 def sonne():
     def strahl(a):
-        b = 16
-        fuss = P([(27*np.cos(np.radians(a + s)), 27*np.sin(np.radians(a + s))) for s in (-b, b)] + [(0, 0)])
-        return hull(fuss, C(52*np.cos(np.radians(a)), 52*np.sin(np.radians(a)), 4.5))
-    k = glatt(U(C(0, 0, 31), *[strahl(a) for a in np.arange(8)*45 + 22.5]), 3)
+        b = 17
+        fuss = P([(30*np.cos(np.radians(a + s)), 30*np.sin(np.radians(a + s))) for s in (-b, b)] + [(0, 0)])
+        return hull(fuss, C(50*np.cos(np.radians(a)), 50*np.sin(np.radians(a)), 6.5))
+    k = glatt(U(C(0, 0, 34), *[strahl(a) for a in np.arange(6)*60 + 30]), 3)
     return k, [kreislinie(-10, 7, 3), kreislinie(10, 7, 3), LineString(bogen(0, 2, 14, 215, 325, 16))]
 
 
@@ -84,15 +84,10 @@ def regenbogen():
 
 
 def schneeflocke():
-    """6 kräftige Arme mit je einem Paar kurzer, dicker Seitenäste (runde Enden)."""
-    teile = [C(0, 0, 12)]
-    s, c = np.sin(np.radians(38)), np.cos(np.radians(38))
-    for a in np.arange(6)*60:
-        arm = U(L([(0, 0), (0, 56)], 13),
-                L([(0, 33), (19*s, 33 + 19*c)], 13),
-                L([(0, 33), (-19*s, 33 + 19*c)], 13))
-        teile.append(R(arm, a))
-    return glatt(U(*teile), 4)
+    """6 dicke Arme mit runden Enden, ohne Seitenäste; die Verzierung ist nur gezeichnet."""
+    k = glatt(U(C(0, 0, 16), *[R(L([(0, 0), (0, 47)], 18), a) for a in np.arange(6)*60]), 5)
+    zier = [R(LineString([(-5, y), (5, y)]), a) for a in np.arange(6)*60 for y in (26, 36)]
+    return k, zier + [LineString(C(0, 0, 8).exterior.coords)]
 
 
 def laubbaum():
@@ -163,7 +158,7 @@ def kastanie():
 def berg():
     k = P([(-52, -32), (-28, 18), (-14, 2), (8, 44), (30, 6), (40, 18), (54, -32)])
     k = glatt(weich(k, 3), 3)
-    schnee = LineString([(0, 25), (4, 30), (8, 24), (12, 30), (16, 25)])
+    schnee = LineString([(-12, 14), (-5, 22), (0, 15), (6, 24), (12, 16), (18, 22), (24, 13)])
     return k, [schnee]
 
 

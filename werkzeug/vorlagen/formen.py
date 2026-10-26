@@ -61,9 +61,12 @@ def vogel():
 
 
 def schmetterling():
-    k = U(E(-30, 18, 30, 21, -30), E(30, 18, 30, 21, 30), E(-20, -20, 19, 14, 35), E(20, -20, 19, 14, -35), E(0, 0, 5, 30))
-    k = glatt(k, 2)
-    return Polygon(k.exterior), [LineString([(-3, 30), (-14, 52)]), LineString([(3, 30), (14, 52)])]
+    """Vier Flügel an einem schmalen Körper mit Kopf; die Fühler sind dicke Bögen mit Knopf, alles in einem Stück."""
+    fl = glatt(U(E(-31, 17, 27, 21, -30), E(-20, -20, 16, 14, 35)), 3)
+    koerper = U(E(0, -4, 8, 31), C(0, 30, 9))
+    fuehler = U(L(bogen(-30, 30, 28, 8, 62, 16), 7.5), C(-16, 55.5, 6))
+    k = glatt(U(fl, spiegel_x(fl), koerper, fuehler, spiegel_x(fuehler)), 4)
+    return k, [LineString([(-7, 19), (-7, -24)]), LineString([(7, 19), (7, -24)])]
 
 
 def schneemann():
@@ -149,7 +152,7 @@ def blume(n=6):
 
 def mond():
     """Symmetrische Sichel, Hörner rund."""
-    return weich(C(0, 0, 50).difference(C(22, 0, 42)), 4.5)
+    return weich(C(0, 0, 50).difference(C(22, 0, 42)), 7)
 
 
 def wolke():
@@ -213,8 +216,12 @@ def export():
         tr = lambda p: [[round((x-x0)*s, 2), round((y1-y)*s, 2)] for x, y in p]    # SVG: y nach unten
         if g.interiors: g = orient(g)                                          # Löcher (Ring) gegenläufig, damit sie frei bleiben
         d = [tr(np.asarray(r.coords)[:-1]) for r in [g.exterior, *g.interiors]]
-        dl = [tr(l) for t in det for l in linien(t.simplify(0.12) if hasattr(t, 'simplify') else t)]
-        out.append(dict(id=fid, name=name, gruppe=gruppe, w=round((x1-x0)*s, 2), h=round((y1-y0)*s, 2), d=d, det=dl))
+        innen = g.buffer(0.3)                                                  # Details nur innerhalb der Schnittlinie, sonst schneidet man sie weg
+        det = [t for t in (t.intersection(innen) for t in det) if not t.is_empty]
+        dl = [tr(l) for t in det for l in linien(t.simplify(0.12)) if len(l) > 1]
+        eng = schmalste(affinity.scale(g, s, s))
+        out.append(dict(id=fid, name=name, gruppe=gruppe, w=round((x1-x0)*s, 2), h=round((y1-y0)*s, 2), d=d, det=dl,
+                        eng=round(eng, 1), schwer=schwierigkeit(g, eng)))
     with open(ZIEL, 'w', encoding='utf-8') as f:
         f.write('// erzeugt von werkzeug/vorlagen/formen.py – nicht von Hand ändern\nwindow.FORMEN=')
         json.dump(out, f, ensure_ascii=False, separators=(',', ':')); f.write(';\n')

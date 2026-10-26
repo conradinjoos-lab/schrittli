@@ -69,10 +69,10 @@ def huf(x0, x1, oben=-4, unten=-42, b0=24, b1=20):
 def igel():
     # Körper als Halbkugel mit 6 grossen Stachel-Zacken, spitze Schnauze nach rechts
     cx, cy, rx, ry = -10, -14, 40, 26
-    k = U(stachelkranz(cx, cy, rx, ry, 195, 35, 6, 22, 6), E(cx, cy, rx, ry).intersection(box(-60, -22, 60, 60)),
+    k = U(stachelkranz(cx, cy, rx, ry, 195, 35, 5, 26, 7), E(cx, cy, rx, ry).intersection(box(-60, -22, 60, 60)),
           E(cx, -20, rx - 2, 9), hull(C(22, -14, 14), C(52, -20, 5)), C(53, -19, 6),
           bein(-28, -22, -38, 13), bein(14, -22, -38, 13))
-    return glatt(k, 4), [kreislinie(32, -8, 2.5)]
+    return glatt(k, 4), [kreislinie(27, -11, 2.5)]
 
 
 def maus():
@@ -113,16 +113,21 @@ def ente():
 
 
 def huhn():
-    koerper = U(E(-2, -2, 28, 23), hull(C(0, 0, 20), C(18, 18, 12)))
-    kopf = C(20, 30, 12)
-    kamm = U(C(12, 41, 6), C(20.5, 44, 6.5), C(29, 40, 6))
-    schnabel = weich(P([(29, 34), (41, 30), (29, 25)]), 1.5)
-    lappen = E(28, 17, 5, 7)
-    schwanz = U(*[hull(C(-20, 8, 6), C(-20 + 27*np.cos(a), 8 + 27*np.sin(a), 8.5)) for a in np.radians([78, 111, 144])])
-    beine = U(L([(-14, -18), (-14, -42)], 11), L([(12, -18), (12, -42)], 11),
-              E(-10, -44, 8, 5), E(16, -44, 8, 5))
+    """Rundes Huhn nach rechts: Kamm mit drei Zacken, spitzer Schnabel, Kehllappen, tief angesetzte Sichelfedern."""
+    def feder(pkt, r0, r1):
+        p = kurve(pkt, 8); return buschig([(x, y, r0 + (r1 - r0)*i/(len(p) - 1)) for i, (x, y) in enumerate(p)])
+    koerper = U(E(-2, -4, 30, 23), hull(C(4, 0, 18), C(20, 20, 11)))
+    kopf = C(22, 28, 12)
+    kamm = weich(P([(12, 34), (11, 50), (17, 43), (22, 56), (27, 43), (33, 50), (32, 33)]), 1.8)
+    schnabel = weich(P([(31, 33), (45, 27.5), (31, 22)]), 1.5)
+    lappen = E(29.5, 16, 4.5, 6.5)
+    schwanz = U(feder([(-24, 8), (-34, 32), (-48, 42), (-60, 40)], 9, 4.5),
+                feder([(-26, 0), (-44, 12), (-58, 10), (-65, 0)], 9, 4.5),
+                feder([(-26, -10), (-40, -12), (-51, -20), (-54, -28)], 8, 4.5))
+    beine = U(L([(-14, -20), (-14, -42)], 10), L([(10, -20), (10, -42)], 10),
+              E(-10, -44, 7, 4.5), E(14, -44, 7, 4.5))
     k = U(koerper, kopf, kamm, schnabel, lappen, schwanz, beine)
-    return glatt(k, 4), [kreislinie(22, 32, 2.5), LineString(bogen(-6, 4, 18, 200, 320))]
+    return glatt(k, 3.5), [kreislinie(24, 30, 2.5), LineString(bogen(-6, 6, 20, 200, 320))]
 
 
 def schaf():
@@ -138,8 +143,8 @@ def schaf():
 def schwein():
     koerper = U(E(-4, 0, 40, 28), C(26, 4, 20))
     ruessel = box(40, -6, 50, 12).buffer(3)
-    ohr = weich(P([(12, 20), (32, 42), (30, 16)]), 3)
-    schwanz = L(kurve([(-40, 6), (-52, 8), (-58, 18), (-52, 28)]), 10)
+    ohr = weich(P([(12, 18), (20, 33), (45, 21), (34, 12)]), 4.5)   # Schlappohr, nach vorn gekippt
+    schwanz = L(kurve([(-40, 6), (-52, 8), (-58, 18), (-52, 28)]), 12)
     beine = U(*[bein(x, -14, -38, 12) for x in (-34, -13, 9, 30)])
     k = U(koerper, ruessel, ohr, schwanz, beine)
     return voll(glatt(k, 3)), [kreislinie(32, 12, 2.5), kreislinie(49, 7, 1.6), kreislinie(49, -1, 1.6)]
@@ -193,8 +198,8 @@ def hirsch():
     hals = hull(C(20, 6, 11), C(32, 28, 8))
     kopf = hull(C(32, 32, 10), C(52, 24, 7))
     ohr = E(20, 36, 9, 5, 20)
-    geweih = U(L(kurve([(29, 38), (22, 56), (12, 72)]), 10), L([(23, 54), (4, 58)], 10),
-               L(kurve([(36, 38), (42, 56), (48, 72)]), 10), L([(41, 54), (60, 58)], 10))
+    geweih = U(L(kurve([(28, 38), (22, 54), (14, 68)]), 13), L([(22, 52), (8, 54)], 12),
+               L(kurve([(37, 38), (43, 54), (51, 68)]), 13), L([(43, 52), (57, 54)], 12))
     schwanz = E(-42, 8, 6, 5, 30)
     beine = U(paar(-30, -4, -48, 13, 11), paar(20, -4, -48, 13, 11))
     k = U(koerper, hals, kopf, ohr, geweih, schwanz, beine)

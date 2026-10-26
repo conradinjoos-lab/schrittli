@@ -278,9 +278,10 @@ function stueck(){
   if(S.linie==='naht'){naht=offset(umriss,-S.naht)}
   else if(S.linie==='zugabe'){schnitt=offset(umriss,S.zugabe);naht=umriss}
   let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
-  schnitt.forEach(r=>r.forEach(([x,y])=>{x0=Math.min(x0,x);y0=Math.min(y0,y);x1=Math.max(x1,x);y1=Math.max(y1,y)}));
+  schnitt.concat(det).forEach(r=>r.forEach(([x,y])=>{x0=Math.min(x0,x);y0=Math.min(y0,y);x1=Math.max(x1,x);y1=Math.max(y1,y)}));
   const verschieben=a=>a.map(r=>r.map(([x,y])=>[x-x0,y-y0]));
-  return {w:x1-x0,h:y1-y0,schnitt:verschieben(schnitt),naht:verschieben(naht),det:verschieben(det)};
+  return {w:x1-x0,h:y1-y0,schnitt:verschieben(schnitt),naht:verschieben(naht),det:verschieben(det),
+    eng:f.eng*Math.min(sx,sy),zerfaellt:S.linie==='naht'&&(naht.length!==umriss.length||f.eng*Math.min(sx,sy)<2*S.naht+3)};
 }
 function platz(w,h){
   const g=BLATT.abstand,sp=Math.floor((NUTZ.w+g)/(w+g)),ze=Math.floor((NUTZ.h+g)/(h+g));
@@ -325,7 +326,7 @@ function blaetter(st,lay){
 
 function zeichnen(){
   document.querySelectorAll('.form').forEach(k=>k.setAttribute('aria-pressed',k.dataset.id===S.id));
-  const st=stueck(),lay=anordnen(st);
+  const f=form(),st=stueck(),lay=anordnen(st);
   let info,ok=lay.pro>0;
   if(!ok){
     info=`<span class="warn">Zu gross für ein A4-Blatt. Höchstens ${cm(NUTZ.w/10)} × ${cm(NUTZ.h/10)} cm.</span>`;
@@ -334,7 +335,11 @@ function zeichnen(){
     const seiten=Math.ceil(S.n/lay.pro),svg=blaetter(st,lay);
     info=`${S.n} Stück · ${lay.pro} pro Blatt · ${seiten} ${seiten===1?'Blatt':'Blätter'}`+
       (seiten>MAXSEITEN?`<br><span class="warn">Es werden nur ${MAXSEITEN} Blätter gedruckt.</span>`:'')+
-      (S.linie==='zugabe'?`<br>Zum Schneiden: ${cm(st.w/10)} × ${cm(st.h/10)} cm`:'');
+      (S.linie==='zugabe'?`<br>Zum Schneiden: ${cm(st.w/10)} × ${cm(st.h/10)} cm`:'')+
+      `<br>Schneiden: <span title="Schwierigkeit ${f.schwer} von 3">${'✂'.repeat(f.schwer)}</span> · empfohlen ab ${cm(Math.max(2,Math.ceil(80/f.eng)/2))} cm`+
+      (f.d.length>1?'<br>Das Loch in der Mitte zuerst ausschneiden: einstechen, dann von innen rundum.':'')+
+      (st.eng<4?`<br><span class="warn">Schmalste Stelle nur ${cm(st.eng)} mm – kaum zu schneiden. Bitte grösser wählen.</span>`:'')+
+      (st.zerfaellt?'<br><span class="warn">Die Nählinie zerfällt oder reicht nicht in die schmalen Stellen – Form grösser wählen oder kleineren Abstand nehmen.</span>':'');
     $('vorschau').innerHTML=svg.slice(0,2).join('')+(svg.length>2?`<p class="mehr">… und ${svg.length-2} weitere Blätter</p>`:'');
     $('druck').innerHTML=svg.join('');
   }

@@ -19,7 +19,7 @@ def mottenfluegel():
     vorne = E(-28, 10, 31, 14, 22)
     hinten = E(-17, -11, 18, 13, -28)
     links = glatt(U(vorne, hinten, E(-3, 0, 7, 17)), 4)
-    return U(links, spiegel_x(links)), [LineString([(0, 22), (0, -26)])]
+    return U(links, spiegel_x(links)), [LineString([(0, 15), (0, -16)])]
 
 
 def saeckchen():

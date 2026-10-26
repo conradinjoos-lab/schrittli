@@ -87,10 +87,11 @@ def osterhase():
 
 
 def kueken():
-    k = U(C(-4, -12, 32), C(16, 22, 20), weich(P([(32, 28), (48, 22), (32, 16)]), 1.5),
-          E(-30, -4, 14, 9, 30), L([(-14, -38), (-14, -48)], 10), L([(14, -38), (14, -48)], 10),
-          E(-12, -50, 11, 6), E(18, -50, 11, 6), L([(14, 38), (13, 47), (19, 53)], 9))
-    return glatt(k, 4), [kreislinie(22, 26, 2.5), LineString(bogen(-14, 0, 20, 190, 300))]
+    """Runder Körper, runder Kopf, deutliches Schnabeldreieck; kurzer Stummelschwanz und zwei Füsse."""
+    k = U(C(-6, -14, 31), C(16, 22, 19), weich(P([(31, 28), (47, 21), (31, 14)]), 1.5),
+          weich(P([(-30, -2), (-46, 8), (-36, -14)]), 3),
+          E(-19, -48, 10, 5.5), E(11, -48, 10, 5.5))
+    return glatt(k, 4), [kreislinie(22, 27, 2.5), LineString(bogen(-14, -2, 20, 190, 300))]
 
 
 def laterne():
@@ -121,8 +122,8 @@ def maske():
 # eigene Ideen
 def torte():
     k = U(box(-44, -46, 44, -4).buffer(3), box(-34, -4, 34, 18).buffer(3),
-          *[box(x - 5, 18, x + 5, 35) for x in (-22, 0, 22)],
-          *[hull(C(x, 40, 7), Point(x, 56)) for x in (-22, 0, 22)])
+          *[box(x - 7, 18, x + 7, 36) for x in (-15, 15)],
+          *[hull(C(x, 43, 9), Point(x, 60)) for x in (-15, 15)])
     return glatt(k, 2.5), [LineString(list(zip(np.linspace(-46, 46, 40), -20 + 4*np.sin(np.linspace(0, 6*np.pi, 40))))),
                            LineString([(-36, 4), (36, 4)])]
 

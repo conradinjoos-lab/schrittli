@@ -23,9 +23,10 @@ def mass(g, f):
 # ---------------------------------------------------------------- Essen
 
 def apfel():
-    oben = glatt(U(L([(0, 24), (4, 48)], 9), blattform(20, 44, 32, 15, 30)), 9)     # Zwickel Stiel/Blatt weit ausrunden
-    k = U(C(-13, 0, 33), C(13, 0, 33), oben)
-    return glatt(k, 4), [LineString([(8, 38), (31, 52)])]
+    stiel = L([(0, 26), (3, 44)], 12)                                   # kurz und dick
+    blatt = blattform(25, 42, 38, 20, 35)                                # eigenes, grosses Blatt neben dem Stiel
+    k = U(C(-13, 0, 33), C(13, 0, 33), stiel, blatt)
+    return glatt(k, 4), [LineString([(12, 33), (38, 51)])]
 
 
 def birne():
@@ -37,7 +38,7 @@ def birne():
 
 def kirschen():
     links = [(-26 + 26*u**1.6, -24 + 64*u) for u in np.linspace(0, 1, 20)]       # sanft gebogener Stiel
-    stiele = glatt(U(L(links, 11), spiegel_x(L(links, 11))), 6)
+    stiele = glatt(U(L(links, 14), spiegel_x(L(links, 14))), 6)
     blatt = blattform(19, 50, 36, 17, 25)
     k = U(C(-26, -38, 19), C(26, -38, 19), stiele, blatt, C(0, 40, 6.5))
     return glatt(k, 4), [LineString([(4, 43), (34, 57)])]
@@ -60,35 +61,33 @@ def zitrone():
 
 def banane():
     t = np.linspace(0, 1, 80); a = np.radians(205 + 130*t)
-    w = 5.5 + 14*np.sin(np.pi*t)**0.7            # halbe Breite
+    w = 5 + 0.5*t + 14*np.sin(np.pi*t)**0.7      # halbe Breite
     m = 80
     aussen = np.c_[(m + w)*np.cos(a), 50 + (m + w)*np.sin(a)]
     innen = np.c_[(m - w)*np.cos(a), 50 + (m - w)*np.sin(a)]
     b = P(np.vstack([aussen, innen[::-1]])).buffer(0)
     e0 = np.array([m*np.cos(a[0]), 50 + m*np.sin(a[0])]); e1 = np.array([m*np.cos(a[-1]), 50 + m*np.sin(a[-1])])
     tang = np.array([-np.sin(a[-1]), np.cos(a[-1])]); norm = np.array([np.cos(a[-1]), np.sin(a[-1])])
-    ecken = [e1 - 6.5*norm - 2*tang, e1 + 6.5*norm - 2*tang, e1 + 6.5*norm + 21*tang, e1 - 6.5*norm + 21*tang]
+    ecken = [e1 - 8*norm - 2*tang, e1 + 8*norm - 2*tang, e1 + 8*norm + 20*tang, e1 - 8*norm + 20*tang]
     stiel = weich(P([tuple(p) for p in ecken]), 2)                 # stumpfer Stiel oben
-    k = glatt(U(b, C(*e0, 6.5), stiel), 4)
-    # Details: Stielende, dunkle Spitze unten, Kante längs
-    t0 = np.array([-np.sin(a[0]), np.cos(a[0])]); n0 = np.array([np.cos(a[0]), np.sin(a[0])])
+    k = glatt(U(b, C(*e0, 5), stiel), 4)                           # unten rund, oben der Stiel
+    # Details: Stielende, Kante längs
     s1 = e1 + 16*tang
-    q = e0 + 7*t0
-    spitze = [LineString([tuple(q - 6*n0), tuple(q + 6*n0)])] + [LineString([tuple(e0 + d*n0 - 3*t0), tuple(e0 + d*n0 + 6*t0)]) for d in (-2.5, 0, 2.5)]
-    det = [LineString([tuple(s1 - 5.5*norm), tuple(s1 + 5.5*norm)]),
-           LineString([((m - 2)*np.cos(x), 50 + (m - 2)*np.sin(x)) for x in np.radians(np.linspace(222, 318, 30))])] + spitze
+    det = [LineString([tuple(s1 - 7*norm), tuple(s1 + 7*norm)]),
+           LineString([((m - 2)*np.cos(x), 50 + (m - 2)*np.sin(x)) for x in np.radians(np.linspace(222, 318, 30))])]
     f = lambda g: mass(R(g, 12), 0.75)
     return f(k), [f(d.intersection(k.buffer(-1))) for d in det]
 
 
 def karotte():
+    """Rübe mit drei langen Kraut-Blättern; die Blattrippen sind nur gezeichnet."""
     ruebe = hull(C(0, 20, 20), C(0, -50, 7))
-    def bueschel(a):
-        r = np.array([np.sin(np.radians(a)), np.cos(np.radians(a))])
-        return hull(C(*(np.array([0, 30]) + 4*r), 6), C(*(np.array([0, 30]) + 32*r), 10))
-    kraut = glatt(U(*[bueschel(a) for a in (-52, 0, 52)]), 4)
-    k = glatt(U(ruebe, kraut), 4)
-    linien = [LineString([(-15, 10), (-6, 10)]), LineString([(5, -8), (12, -8)]), LineString([(-8, -26), (-2, -26)])]
+    blaetter = [(25*np.cos(np.radians(r)), 34 + 25*np.sin(np.radians(r)), 48, 16, r) for r in (138, 90, 42)]   # Blätter strahlen vom Rübenkopf aus
+    kraut = U(*[blattform(x, y, l, b, r) for x, y, l, b, r in blaetter])
+    k = glatt(U(ruebe, kraut), 5)
+    rippen = [LineString([(x - l/2*0.8*np.cos(np.radians(r)), y - l/2*0.8*np.sin(np.radians(r))),
+                          (x + l/2*0.8*np.cos(np.radians(r)), y + l/2*0.8*np.sin(np.radians(r)))]) for x, y, l, b, r in blaetter]
+    linien = [LineString([(-15, 10), (-6, 10)]), LineString([(5, -8), (12, -8)]), LineString([(-8, -26), (-2, -26)])] + rippen
     return R(k, -20), [R(l, -20) for l in linien]
 
 
@@ -200,8 +199,8 @@ def schirm():
     dach = C(0, 0, 52).intersection(box(-60, 0, 60, 60))
     for x in (-34.7, 0, 34.7):
         dach = dach.difference(E(x, 0, 17.3, 7))
-    stock = L([(0, 4), (0, -38)] + bogen(-14, -38, 14, 0, -180)[1:], 11)
-    k = glatt(U(dach, stock, L([(0, 48), (0, 58)], 10)), 3)
+    stock = L([(0, 4), (0, -36)] + bogen(-16, -36, 16, 0, -180)[1:], 14)   # dicker Griff, weiter Haken
+    k = glatt(U(dach, stock, L([(0, 48), (0, 58)], 12)), 3)
     return k, [LineString([(0, 50), (-17.3, 7)]), LineString([(0, 50), (17.3, 7)])]
 
 

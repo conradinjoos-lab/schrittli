@@ -34,8 +34,7 @@ def innen(g, linie, d=1.5):
 
 
 def marienkaefer():
-    stummel = [L([(-24, 18), (-40, 24)], 12), L([(-30, -6), (-46, -6)], 12), L([(-24, -30), (-38, -40)], 12)]
-    k = U(E(0, -6, 34, 40), C(0, 30, 17), L([(-7, 42), (-14, 56)], 11), C(-15, 58, 7), *stummel)
+    k = U(E(0, -6, 34, 40), C(0, 30, 17), L([(-7, 42), (-14, 56)], 11), C(-15, 58, 7))   # ohne Beine: leichter zu schneiden
     k = glatt(sym(k), 4)
     schale = E(0, -6, 34, 40)
     det = [LineString(np.asarray(schale.exterior.coords)[(np.asarray(schale.exterior.coords)[:, 1] > 22)]),
@@ -101,7 +100,8 @@ def dino():
 
 
 def giraffe():
-    k = U(E(-6, 0, 28, 15), L([(-22, -6), (-23, -46)], 14), L([(10, -6), (11, -46)], 14),
+    block = lambda x: weich(hull(E(x, -4, 11, 8), box(x - 9, -46, x + 9, -40)), 3)   # je Beinpaar ein Block
+    k = U(E(-6, 0, 28, 15), block(-22), block(10),
           rohr([(10, 6), (22, 28), (30, 50)], 11, 9), hull(C(35, 56, 11), C(54, 49, 7.5)),
           L([(29, 62), (24, 74)], 12), C(24, 75, 7.5), L([(41, 61), (46, 72)], 12), C(46, 73, 7.5),
           E(21, 53, 8, 5.5, 15),
@@ -153,11 +153,11 @@ def qualle():
     glocke = E(0, 24, 46, 34).intersection(box(-50, 10, 50, 60))
     rand = [C(x, 10, 8) for x in (-40, -34, -12, 12, 34, 40)]
     tent = []
-    for x0 in (-34, -12, 12, 34):
-        y = np.linspace(8, -56, 24); s = (8 - y)/64
-        x = x0*(1 + 0.35*s) + 5*s*np.sin(y*0.15)
-        tent.append(L(list(zip(x, y)), 12))
-    k = glatt(U(glocke, *rand, *tent), 5)
+    for x0 in (-27, 0, 27):
+        y = np.linspace(8, -42, 20); s = (8 - y)/50
+        x = x0*(1 + 0.3*s) + 5*s*np.sin(y*0.15)
+        tent.append(L(list(zip(x, y)), 16))
+    k = glatt(U(glocke, *rand, *tent), 4)
     return k, [kreislinie(-12, 30, 3), kreislinie(12, 30, 3), LineString(bogen(0, 26, 6, 210, 330, 10))]
 
 
@@ -177,14 +177,17 @@ def tatzenbein(x0, x1, oben, unten, r=4):
 
 
 def loewe():
+    """Grosse Mähne, das Gesicht sitzt als Zeichnung mitten in der Mähne; breite Beinpaare, Schwanz mit Quaste."""
     m = (24, 18)
     maehne = glatt(U(C(*m, 25), *[C(m[0] + 23*np.cos(a), m[1] + 23*np.sin(a), 12) for a in np.radians(np.arange(8)*45 + 90)]), 6)
     beine = [tatzenbein(-36, -18, -4, -38), tatzenbein(4, 22, -4, -38)]   # je Paar ein breites Bein
-    k = U(maehne, E(-8, -6, 32, 15), E(46, 10, 14, 10), *beine,
+    k = U(maehne, E(-8, -6, 32, 15), *beine,
           rohr([(-38, -2), (-52, 0), (-60, 10), (-62, 22)], 7, 6.5), E(-62, 27, 8.5, 10.5))
     k = glatt(k, 5)
-    det = [LineString(bogen(28, 18, 16, -80, 80, 20)), kreislinie(38, 20, 2.5),
-           LineString([(54, 12), (58, 12), (56, 8), (54, 12)]), LineString(bogen(50, 6, 6, 230, 320, 8))]
+    x, y = m
+    det = [kreislinie(x, y, 19), kreislinie(x - 7, y + 5, 2.5), kreislinie(x + 7, y + 5, 2.5),
+           LineString([(x - 4, y - 1), (x + 4, y - 1), (x, y - 5), (x - 4, y - 1)]),
+           LineString(bogen(x - 4, y - 5, 4, 200, 340, 8)), LineString(bogen(x + 4, y - 5, 4, 200, 340, 8))]
     return k, det
 
 
@@ -216,5 +219,5 @@ FORMEN = [
     ('qualle', 'Qualle', 'Tiere', qualle()),
     ('seestern', 'Seestern', 'Tiere', seestern()),
     ('loewe', 'Löwe', 'Tiere', loewe()),
-    ('einhorn', 'Einhorn', 'Tiere', einhorn()),
+    ('einhorn', 'Einhorn-Kopf', 'Tiere', einhorn()),
 ]
