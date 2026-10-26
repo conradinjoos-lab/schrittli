@@ -31,13 +31,15 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .kat{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px 10px;border:2px solid var(--line);border-radius:16px;background:var(--surface2);color:var(--ink);font:inherit;cursor:pointer}
 .kat:hover{border-color:var(--acc);background:var(--acc-soft)}
 .k-bilder{display:grid;grid-template-columns:repeat(2,44px);gap:4px}
-.k-bilder svg{width:44px;height:44px}
+.k-bilder svg,.k-bilder img{width:44px;height:44px}
+.kats-titel{grid-column:1/-1;font:700 13px Nunito,sans-serif;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin:10px 0 0}
 .kat b{font:600 17px Fredoka,Nunito,sans-serif}
 .k-n{font-size:13px;color:var(--muted)}
 .zurueck{margin:0 0 12px;font-size:14px;padding:6px 12px}
 .raster{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
 .form{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px 6px;border:2px solid var(--line);border-radius:14px;background:var(--surface2);color:var(--ink);font:inherit;font-size:13px;cursor:pointer;min-height:92px}
-.form svg{width:52px;height:52px}
+.form svg,.form img{width:52px;height:52px;object-fit:contain}
+.form.laedt{opacity:.55;cursor:progress}
 .form svg path,.kat svg path{fill:var(--acc-soft);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 .form[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
 .form[aria-pressed="true"] svg path{fill:var(--surface)}
@@ -108,7 +110,7 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 .vorschau svg{display:block;width:100%;height:auto;background:var(--papier);border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
 .mehr{font-size:14px;color:var(--muted);text-align:center}
 @media (max-width:860px){main{grid-template-columns:minmax(0,1fr)}.seite-rechts{position:static}h1{font-size:24px}}
-@media (max-width:480px){.kats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.k-bilder{grid-template-columns:repeat(2,36px)}.k-bilder svg{width:36px;height:36px}.raster{grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px}.form{min-height:80px;font-size:12px}.form svg{width:40px;height:40px}}
+@media (max-width:480px){.kats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.k-bilder{grid-template-columns:repeat(2,36px)}.k-bilder svg,.k-bilder img{width:36px;height:36px}.raster{grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px}.form{min-height:80px;font-size:12px}.form svg,.form img{width:40px;height:40px}}
 /* Abpausen am Bildschirm: immer hell, damit die Linie durchs Papier scheint */
 .pausen-auf{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:10px;min-height:48px}
 .pausen-auf svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
@@ -238,7 +240,7 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 </div>
 <script src="zurueck.js"></script>
 <script src="formen.js"></script>
-<script src="figuren.js"></script>
+<script src="figuren/index.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/clipper-lib@6.4.2/clipper.js"></script>
 <script>
 (function(){
@@ -249,8 +251,20 @@ const NUTZ={x:BLATT.rand,y:BLATT.oben,w:BLATT.w-2*BLATT.rand,h:BLATT.h-BLATT.obe
 const CHIPS=[2,3,4,5,6,8,10,12,15];
 const PARAM={stern:{label:'Zacken',def:5},vieleck:{label:'Ecken',def:6}};
 const MAXSEITEN=30;
-const FORMEN=(window.FORMEN||[]).concat(window.FORMEN_BILD||[]);
+// Figuren: figuren/index.js kennt nur Name, Welt und Masse; die Umrisse liegen pro Welt in figuren/<welt>.js
+// und werden erst geladen, wenn eine Figur gebraucht wird (alle zusammen wären mehrere MB).
+const FIGUREN=(window.FIGUREN_INDEX||[]).map(f=>Object.assign({figur:true},f));
+const FORMEN=(window.FORMEN||[]).concat(FIGUREN);
 const byId=Object.fromEntries(FORMEN.map(f=>[f.id,f]));
+window.FIGUREN_DAZU=(welt,fs)=>fs.forEach(f=>{const z=byId[f.id];if(z&&z.figur)Object.assign(z,f,{gruppe:z.gruppe})});
+const geladen={};
+function bereit(ids){
+  const dateien=[...new Set(ids.map(id=>byId[id]).filter(f=>f&&f.figur&&!f.d).map(f=>f.datei))];
+  return Promise.all(dateien.map(d=>geladen[d]||(geladen[d]=new Promise((ok,nein)=>{
+    const t=document.createElement('script');t.src='figuren/'+encodeURIComponent(d);
+    t.onload=ok;t.onerror=()=>{delete geladen[d];t.remove();nein(new Error(d))};document.head.appendChild(t);
+  }))));
+}
 
 // Stern und Vieleck mit einstellbarer Zahl
 function normal(rings){
@@ -338,6 +352,7 @@ const einfach=s=>s.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace
 const BEISPIELE={Grundformen:['herz','stern','kreis','dreieck'],Natur:['blume','baum','sonne','pilz'],Essen:['apfel','erdbeere','banane','glace'],
   Dinge:['haus','rakete','auto','segelboot'],Feste:['kerze','geschenk','osterhase','kuerbis'],Tiere:['fisch','katze','elefant','schmetterling']};
 function bild(f){
+  if(f.figur)return `<img src="figuren/bilder/${f.id}.webp" alt="" loading="lazy" decoding="async" width="52" height="52">`;
   const p=PARAM[f.id]?paramForm(f.id,PARAM[f.id].def):f,pad=6;
   return `<svg viewBox="${-pad-(100-p.w)/2} ${-pad-(100-p.h)/2} ${100+2*pad} ${100+2*pad}" aria-hidden="true"><path d="${p.d.map(r=>pfad(r,1)).join('')}"/>${(f.farben||[]).map(c=>`<path d="${c.d.map(r=>pfad(r,1)).join('')}" style="fill:${c.f};stroke:${c.f};stroke-width:.4" fill-rule="evenodd"/>`).join('')}</svg>`;
 }
@@ -347,8 +362,11 @@ function auswahl(){
   const kachel=([g,fs])=>{
     const bsp=(BEISPIELE[g]||[]).map(id=>byId[id]).filter(f=>f&&f.gruppe===g);
     fs.forEach(f=>{if(bsp.length<4&&!bsp.includes(f))bsp.push(f)});
-    return `<button type="button" class="kat" data-g="${g}"><span class="k-bilder">${bsp.map(bild).join('')}</span><b>${g}</b><span class="k-n">${fs.length} ${fs.length===1?'Form':'Formen'}</span></button>`;
+    const wort=fs[0].figur?(fs.length===1?'Figur':'Figuren'):(fs.length===1?'Form':'Formen');
+    return (g===ersteWelt?'<h3 class="kats-titel">Figuren</h3>':'')
+      +`<button type="button" class="kat" data-g="${g}"><span class="k-bilder">${bsp.map(bild).join('')}</span><b>${g}</b><span class="k-n">${fs.length} ${wort}</span></button>`;
   };
+  const ersteWelt=(FIGUREN[0]||{}).gruppe;
   $('formen').innerHTML='<div class="suchkopf"><h2>Form</h2><input type="search" id="suche" placeholder="Suchen, z.B. Herz" aria-label="Form suchen" autocomplete="off"></div>'
     +'<div class="kats" id="kats">'+Object.entries(gruppen).map(kachel).join('')+'</div>'
     +'<button type="button" class="knopf zurueck" id="zurueck" hidden>← Alle Kategorien</button>'
@@ -377,12 +395,15 @@ function auswahl(){
     const kat=e.target.closest('.kat');
     if(kat){oeffnen(kat.dataset.g);$('formen').scrollIntoView({behavior:'smooth',block:'start'});return}
     if(e.target.closest('#zurueck')){oeffnen(null);return}
-    const k=e.target.closest('.form');if(!k)return;
-    S.id=k.dataset.id;if(PARAM[S.id])S.param=PARAM[S.id].def;
-    const f=form(),l=Math.max(S.b,S.h);           // längste Seite bleibt, Verhältnis der neuen Form
-    S.lock=true;S.b=l*f.w/100;S.h=l*f.h/100;
-    felder();zeichnen();
-    if(matchMedia('(max-width:860px)').matches)$('b').closest('.karte').scrollIntoView({behavior:'smooth',block:'start'});
+    const k=e.target.closest('.form');if(!k||k.classList.contains('laedt'))return;
+    k.classList.add('laedt');
+    bereit([k.dataset.id]).then(()=>{
+      S.id=k.dataset.id;if(PARAM[S.id])S.param=PARAM[S.id].def;
+      const f=form(),l=Math.max(S.b,S.h);           // längste Seite bleibt, Verhältnis der neuen Form
+      S.lock=true;S.b=l*f.w/100;S.h=l*f.h/100;
+      felder();zeichnen();
+      if(matchMedia('(max-width:860px)').matches)$('b').closest('.karte').scrollIntoView({behavior:'smooth',block:'start'});
+    },()=>alert('Diese Figur konnte nicht geladen werden. Ist das Internet verbunden?')).finally(()=>k.classList.remove('laedt'));
   });
 }
 
@@ -839,9 +860,14 @@ $('p-schloss').addEventListener('pointerdown',e=>{
 });
 ['pointerup','pointercancel','pointerleave'].forEach(t=>$('p-schloss').addEventListener(t,loslassen));
 
-if(S.lock){const f=form();if(q.has('h')&&!q.has('b'))S.b=S.h*f.w/f.h;else S.h=S.b*f.h/f.w}
-auswahl();felder();listeZeigen();zeichnen();
-if(q.get('pausen')==='1')pausenAuf();   // aus der App: «Abpausen» öffnet direkt den Leuchttisch
+// Figuren der gewählten Form und der Liste zuerst nachladen; was nicht kommt, fällt weg
+bereit([S.id,...L.map(e=>e.id)]).catch(()=>{}).then(()=>{
+  if(!form().d)S.id='herz';
+  L=L.filter(e=>form(e).d);
+  if(S.lock){const f=form();if(q.has('h')&&!q.has('b'))S.b=S.h*f.w/f.h;else S.h=S.b*f.h/f.w}
+  auswahl();felder();listeZeigen();zeichnen();
+  if(q.get('pausen')==='1')pausenAuf();   // aus der App: «Abpausen» öffnet direkt den Leuchttisch
+});
 })();
 </script>
 </body>

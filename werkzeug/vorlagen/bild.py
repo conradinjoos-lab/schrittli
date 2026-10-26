@@ -1,10 +1,21 @@
 """Vorlagen aus Bildern (Schrittli): aus einem PNG/WebP/JPG mit hellem oder durchsichtigem Hintergrund werden
 Umriss (Schnittlinie), Farbflächen (zum farbigen Drucken) und die Grenzen zwischen den Farben (Innenlinien
-zum Anmalen) gewonnen. Schreibt vorlagen/figuren.js (window.FORMEN_BILD) im gleichen Format wie formen.js,
-dazu je Form eine Liste `farben` mit [{f:'#rrggbb', d:[Ringe]}].
-Aufruf: python bild.py                 – alle Bilder aus BILDER
-        python bild.py <datei> [<Name>] [<Farben>]  – ein einzelnes Bild probieren (schreibt ebenfalls figuren.js)"""
-import os, sys, json
+zum Anmalen) gewonnen. Gleiches Format wie formen.js, dazu je Form eine Liste `farben` mit [{f:'#rrggbb', d:[Ringe]}].
+
+Die Motive stehen in figuren.json ({welten:[…], figuren:[{id, name, welt, datei, k?, glatt?}]}); die Bilder liegen in
+bilder/. Geschrieben wird nach vorlagen/figuren/:
+  index.js        window.FIGUREN_INDEX – nur Name, Welt, Masse je Figur (klein, wird immer geladen)
+  <welt>.js       FIGUREN_DAZU('<welt>', […]) – die ganzen Formen einer Welt, lädt der Generator erst bei Bedarf
+  bilder/<id>.webp  Vorschaubild für die Auswahl
+k  = Anzahl Farben inkl. Schwarz (fehlt: aus dem Bild geschätzt), glatt = Rundung (0 = eckig lassen wie bei Pixelbildern).
+
+Aufruf: python -I bild.py                 – alle Figuren (parallel)
+        python -I bild.py <id> [<id> …]   – nur diese Figuren neu rechnen, die übrigen bleiben wie sie sind
+        python -I bild.py --datei <bild> [<Farben>] [<glatt>]  – ein einzelnes Bild probieren, schreibt nur ein Vorschaubild"""
+import os, sys, json, re, unicodedata
+HIER = os.path.dirname(os.path.abspath(__file__))
+if HIER not in sys.path: sys.path.insert(0, HIER)                    # zeichnen.py auch beim Aufruf mit -I finden
+for _v in ('OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS'): os.environ.setdefault(_v, '1')   # sonst reserviert jeder Prozess ~1 GB
 import numpy as np, cv2
 from scipy import ndimage
 from shapely.geometry import LinearRing, Polygon, MultiPolygon, LineString, MultiLineString
@@ -13,16 +24,10 @@ from shapely import affinity
 from shapely.geometry.polygon import orient
 from zeichnen import schmalste, schwierigkeit
 
-HIER = os.path.dirname(os.path.abspath(__file__))
-ZIEL = os.path.join(HIER, '..', '..', 'vorlagen', 'figuren.js')
-GRUPPE = 'Figuren'
-
-# id, Name, Datei, Anzahl Farben, Glättung (0 = eckig lassen wie bei Pixelbildern)
-BILDER = [
-    ('creeper', 'Creeper', 'bilder/creeper.png', 3, 0),
-    ('steve', 'Steve', 'bilder/steve.png', 6, 0),
-    ('mario', 'Mario', 'bilder/mario.jpg', 8, 0.8),
-]
+LISTE = os.path.join(HIER, 'figuren.json')
+BILDER = os.path.join(HIER, 'bilder')
+ZIEL = os.path.normpath(os.path.join(HIER, '..', '..', 'vorlagen', 'figuren'))
+GLATT = .8
 
 
 def laden(pfad):
@@ -132,6 +137,8 @@ def quantisieren(rgb, maske, k, glatt):
         schwarz = np.isin(lab_s, np.nonzero(gr >= flaeche*.0003)[0])
     if schwarz.sum() < flaeche*.004: schwarz[:] = False                # zu wenig Schwarz: keine Linien-Ebene
     hat_schwarz = bool(schwarz.any())
+    if hat_schwarz and (maske & ~schwarz).sum() < flaeche*.01:     # ganz schwarze Silhouette: eine Farbe, keine Linien
+        schwarz[:] = False; hat_schwarz = False; k = 1
     kk = max(1, k - 1) if hat_schwarz else k
     rest = maske & ~schwarz
     daten = lab[rest]
@@ -175,8 +182,31 @@ def quantisieren(rgb, maske, k, glatt):
 def hexf(c): return '#%02x%02x%02x' % tuple(int(v) for v in c)
 
 
-def form(fid, name, pfad, k, glatt):
+def farbzahl(rgb, maske):
+    """Wie viele Farben braucht das Bild? k-means mit vielen Gruppen, ähnliche zusammenlegen, kleine nicht zählen.
+    Schwarz (Umrisslinien) zählt als eigene Farbe dazu. Ergebnis 3–9."""
+    bild = cv2.bilateralFilter(rgb.astype(np.uint8), 9, 60, 9)
+    lab = cv2.cvtColor(bild, cv2.COLOR_RGB2LAB).astype(np.float32)
+    chroma = np.hypot(lab[..., 1] - 128, lab[..., 2] - 128)
+    schwarz = maske & (lab[..., 0] < 90) & (chroma < 30)
+    pts = lab[maske & ~schwarz]
+    if len(pts) < 50: return 3
+    if len(pts) > 40000: pts = pts[np.random.default_rng(1).choice(len(pts), 40000, replace=False)]
+    krit = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, .5)
+    _, et, z = cv2.kmeans(pts, 10, None, krit, 3, cv2.KMEANS_PP_CENTERS)
+    n = np.bincount(et.ravel(), minlength=10) / len(pts)
+    behalten = []                                                       # [Zentrum, Anteil], grosse zuerst
+    for i in np.argsort(-n):
+        nah = [b for b in behalten if np.linalg.norm(b[0] - z[i]) < 22]
+        if nah: nah[0][1] += n[i]
+        else: behalten.append([z[i], n[i]])
+    zahl = sum(1 for _, a in behalten if a >= .025)
+    return int(np.clip(zahl + (schwarz.sum() >= maske.sum()*.004), 3, 9))
+
+
+def form(fid, name, gruppe, pfad, k=None, glatt=GLATT):
     rgb, maske = laden(pfad)
+    if not k: k = farbzahl(rgb, maske)
     ys, xs = np.nonzero(maske)
     x0, y0, x1, y1 = xs.min(), ys.min(), xs.max() + 1, ys.max() + 1
     skala = 100/max(x1 - x0, y1 - y0)                                   # Bildpunkte → 100er-Einheiten
@@ -241,25 +271,103 @@ def form(fid, name, pfad, k, glatt):
     w, h = round(bx1 - bx0, 2), round(by1 - by0, 2)
     gm = affinity.scale(g, 1, -1, origin=(0, 0))                          # schmalste/schwierigkeit rechnen in 100er-Einheiten
     eng = schmalste(gm)
-    return dict(id=fid, name=name, gruppe=GRUPPE, w=w, h=h, d=d, det=det, eng=round(eng, 1), schwer=schwierigkeit(gm, eng), farben=farben)
+    return dict(id=fid, name=name, gruppe=gruppe, w=w, h=h, d=d, det=det, eng=round(eng, 1), schwer=schwierigkeit(gm, eng), farben=farben)
 
 
-def export(liste):
-    out = [form(fid, name, os.path.join(HIER, pfad) if not os.path.isabs(pfad) else pfad, k, glatt) for fid, name, pfad, k, glatt in liste]
-    with open(ZIEL, 'w', encoding='utf-8') as f:
-        f.write('// erzeugt von werkzeug/vorlagen/bild.py – nicht von Hand ändern\nwindow.FORMEN_BILD=')
-        json.dump(out, f, ensure_ascii=False, separators=(',', ':')); f.write(';\n')
-    return out
+def vorschau(f, ziel, px=112):
+    """Kleines Bild für die Auswahl: Farbflächen auf weissem Umriss, dunkler Rand (wie die SVG-Bilder der Formen)."""
+    from PIL import Image
+    g = 4; n = px*g; rand = 6
+    s = (n - 2*rand*g)/100
+    ox, oy = (n - f['w']*s)/2, (n - f['h']*s)/2
+    pt = lambda r: np.round(np.array([[ox + x*s, oy + y*s] for x, y in r])*8).astype(np.int32)   # 3 Bit Unterpixel
+    img = np.zeros((n, n, 4), np.uint8)
+    umriss = [pt(r) for r in f['d']]
+    cv2.fillPoly(img, umriss, (255, 255, 255, 255), cv2.LINE_AA, 3)
+    for c in f['farben']:
+        h = c['f'].lstrip('#'); rgb = tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+        cv2.fillPoly(img, [pt(r) for r in c['d']], (*rgb, 255), cv2.LINE_AA, 3)
+    cv2.polylines(img, umriss, True, (34, 34, 34, 255), int(1.6*g), cv2.LINE_AA, 3)
+    Image.fromarray(img).resize((px, px), Image.LANCZOS).save(ziel, 'WEBP', quality=88, method=6)
+
+
+def slug(t):
+    t = unicodedata.normalize('NFD', t.replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue')).encode('ascii', 'ignore').decode()
+    return re.sub(r'[^a-z0-9]+', '-', t.lower()).strip('-')
+
+
+def rechnen(e):
+    """Eine Figur aus der Liste rechnen (läuft in einem eigenen Prozess). Fehler brechen nicht alles ab."""
+    try:
+        f = form(e['id'], e['name'], e['welt'], os.path.join(BILDER, e['datei']), e.get('k'), e.get('glatt', GLATT))
+        vorschau(f, os.path.join(ZIEL, 'bilder', e['id'] + '.webp'))
+        return e['id'], f, None
+    except Exception as x:
+        return e['id'], None, f'{type(x).__name__}: {x}'
+
+
+def runden1(o):
+    """Koordinaten auf eine Stelle (0,1 % der Formgrösse) – reicht für den Druck und halbiert fast die Dateien."""
+    if isinstance(o, float): return round(o, 1)
+    if isinstance(o, list): return [runden1(v) for v in o]
+    if isinstance(o, dict): return {k: (runden1(v) if k in ('d', 'det', 'farben') else v) for k, v in o.items()}
+    return o
+
+
+def schreiben(welt, formen):
+    with open(os.path.join(ZIEL, slug(welt) + '.js'), 'w', encoding='utf-8') as d:
+        d.write('// erzeugt von werkzeug/vorlagen/bild.py – nicht von Hand ändern\nFIGUREN_DAZU(' + json.dumps(welt, ensure_ascii=False) + ',')
+        json.dump([runden1(f) for f in formen], d, ensure_ascii=False, separators=(',', ':')); d.write(');\n')
+
+
+def lesen(welt):
+    """Schon gerechnete Formen einer Welt aus ihrer Datei (für Teil-Läufe)."""
+    p = os.path.join(ZIEL, slug(welt) + '.js')
+    if not os.path.exists(p): return {}
+    t = open(p, encoding='utf-8').read()
+    t = t[t.index(',', t.index('FIGUREN_DAZU(')) + 1:t.rindex(')')]
+    return {f['id']: f for f in json.loads(t)}
+
+
+def export(nur=None):
+    from multiprocessing import Pool
+    liste = json.load(open(LISTE, encoding='utf-8'))
+    figuren = liste['figuren']
+    if nur: figuren_rechnen = [e for e in figuren if e['id'] in nur]
+    else: figuren_rechnen = figuren
+    os.makedirs(os.path.join(ZIEL, 'bilder'), exist_ok=True)
+    fertig, fehler = {}, []
+    with Pool(max(1, min(len(figuren_rechnen), (os.cpu_count() or 2) - 2, 8)), initializer=cv2.setNumThreads, initargs=(1,)) as pool:
+        for i, (fid, f, err) in enumerate(pool.imap_unordered(rechnen, figuren_rechnen), 1):
+            if err: fehler.append((fid, err)); print(f'  FEHLER {fid}: {err}', flush=True)
+            else: fertig[fid] = f
+            if i % 20 == 0: print(f'  {i}/{len(figuren_rechnen)}', flush=True)
+    index = []
+    for welt in liste['welten']:
+        alt = lesen(welt) if nur else {}
+        formen = [fertig.get(e['id']) or alt.get(e['id']) for e in figuren if e['welt'] == welt]
+        formen = [f for f in formen if f]
+        if not formen: continue
+        schreiben(welt, formen)
+        index += [dict(id=f['id'], name=f['name'], gruppe=welt, datei=slug(welt) + '.js', w=f['w'], h=f['h'], eng=f['eng'], schwer=f['schwer'])
+                  for f in formen]
+    with open(os.path.join(ZIEL, 'index.js'), 'w', encoding='utf-8') as d:
+        d.write('// erzeugt von werkzeug/vorlagen/bild.py – nicht von Hand ändern\nwindow.FIGUREN_INDEX=')
+        json.dump(index, d, ensure_ascii=False, separators=(',', ':')); d.write(';\n')
+    return fertig, fehler, index
 
 
 if __name__ == '__main__':
-    liste = BILDER
-    if len(sys.argv) > 1:
-        pfad = sys.argv[1]; name = sys.argv[2] if len(sys.argv) > 2 else os.path.splitext(os.path.basename(pfad))[0].title()
-        k = int(sys.argv[3]) if len(sys.argv) > 3 else 6
-        liste = [(os.path.splitext(os.path.basename(pfad))[0].lower(), name, pfad, k, 1.0)]
-    out = export(liste)
-    for f in out:
-        print(f"{f['name']:10s} {f['w']:6.1f} × {f['h']:6.1f}  Umriss {sum(len(r) for r in f['d'])} Punkte, {len(f['d'])-1} Löcher,"
-              f" {len(f['farben'])} Farben ({sum(len(c['d']) for c in f['farben'])} Flächen), {len(f['det'])} Innenlinien, eng {f['eng']}")
-    print('->', os.path.normpath(ZIEL), f'{os.path.getsize(ZIEL)//1024} KB')
+    try: sys.stdout.reconfigure(encoding='utf-8')
+    except Exception: pass
+    if len(sys.argv) > 2 and sys.argv[1] == '--datei':
+        pfad = sys.argv[2]; k = int(sys.argv[3]) if len(sys.argv) > 3 else None
+        glatt = float(sys.argv[4]) if len(sys.argv) > 4 else GLATT
+        f = form('probe', 'Probe', 'Probe', pfad, k, glatt)
+        vorschau(f, 'probe.webp', 400)
+        print(f"{f['w']:6.1f} × {f['h']:6.1f}  {len(f['farben'])} Farben, {len(f['det'])} Innenlinien, eng {f['eng']} -> probe.webp")
+        sys.exit()
+    fertig, fehler, index = export(set(sys.argv[1:]) or None)
+    gross = sum(os.path.getsize(os.path.join(ZIEL, n)) for n in os.listdir(ZIEL) if n.endswith('.js'))
+    print(f'{len(fertig)} gerechnet, {len(fehler)} Fehler, {len(index)} im Index, zusammen {gross//1024} KB -> {ZIEL}')
+    for fid, err in fehler: print('  ', fid, err)
