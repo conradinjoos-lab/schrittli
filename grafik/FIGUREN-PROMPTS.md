@@ -4,7 +4,7 @@ Zwei Werkstatt-Figuren führen durch die App. Sie sind **keine** Tiere aus der K
 
 | | **Bibo** (Biber) | **Fila** (Spinne) |
 |---|---|---|
-| steht für | Holz, Technisches Gestalten: Sägen, Nageln, Schnitzen, Formen, Falten, Schneiden & Kleben, Drucken, Experimentieren | Faden, Textiles Gestalten: Nähen, Sticken, Häkeln, Stricken, Weben, Flechten & Knüpfen, Wickeln, Filzen |
+| steht für | Holz, Technisches Gestalten: Sägen, Nageln, Schnitzen, Formen, Drucken, Experimentieren | Faden, Textiles Gestalten: Nähen, Sticken, Häkeln, Stricken, Weben, Flechten & Knüpfen, Wickeln, Filzen, Falten, Schneiden & Kleben |
 | Wesen | gemütlich, geduldig, packt an, freut sich laut | flink, genau, neugierig, zeigt Tricks |
 | erkennbar an | blaue Werkschürze, Bleistift hinter dem Ohr, flacher Kellenschwanz | violett-runder Körper, geringelte Beinchen, Wollknäuel |
 | Grösse | gross | klein, sitzt gern auf Bibos Kopf oder Schulter |

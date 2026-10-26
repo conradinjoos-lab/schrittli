@@ -792,6 +792,7 @@ const vlLink=(cls,txt='Vorlagen drucken')=>`<a class="${cls}" href="${VORL_BASE}
 const genKarten=()=>[['','✂️','Vorlagen-Generator','Herz, Stern, Bär und über 100 weitere Formen – Grösse in cm eingeben, ausdrucken.'],
   ['perlen/','🦎','Perlentiere-Zählmuster','Tiere, Comic-Figuren und Sachen – mit Drahtweg, Reihe für Reihe zum Abhaken, für 3-mm-Rocailles.'],
   ['perlentier-bild/','🐞','Perlentier aus eigenem Bild','Bild hineinziehen, Plan für Rocailles mit Drahtweg bekommen. Das Bild bleibt auf dem Gerät.'],
+  ['armbaender/','📿','Armbänder','Handgelenk messen, Art, Muster und Farben wählen. Länge, Perlen und Fäden werden ausgerechnet.'],
   ['einfrieren/','❄️','Abpausen','Bild aufs iPad holen, gross ziehen, einfrieren, Papier drauflegen und abpausen. Nichts einrichten, das Bild bleibt auf dem Gerät.']]
   .map(([pf,sym,t,txt])=>`<a class="lehrer-gen" href="${VORL_BASE}${pf}"${VL_ZIEL}><span class="sym" aria-hidden="true">${sym}</span><span class="grow"><b>${t}</b><br><span class="small">${txt}</span></span><span aria-hidden="true">→</span></a>`).join('');   // Werkzeuge für alle und Lehrer-Ansicht
 const v3Fuss=()=>`<div class="v3-fuss"><button class="v3-werkzeuge" data-act="werkzeuge">🧰 Werkzeuge</button>${SCHULE?'<button class="v3-link" data-act="lehrer">Für Lehrpersonen</button>':''}</div>`;   // unten auf Raum, Start und Thema
@@ -998,7 +999,7 @@ SCREENS.klasse=app=>{ const n=abend();
 /* Variante 3a «Luftig & klar»: zuerst der Raum (wird gemerkt), dann Themen als Kacheln, im Thema die Lektionen nach Niveau */
 const GRAFIK=SCHULE?'../grafik/':'grafik/';
 const figur=(name,cls='')=>`<img class="figur${cls?' '+cls:''}" src="${GRAFIK}figuren/${name}.webp" alt="" onerror="this.remove()">`;  // Bibo & Fila
-const RAEUME=[{id:'hand',name:'Handarbeitszimmer',bild:'figuren/fila-faden',soft:'#FBE3DE',themen:['naehen','sticken','haekeln','stricken','weben','perlen','knuepfen','wickeln','filzen']},
+const RAEUME=[{id:'hand',name:'Handarbeitszimmer',bild:'figuren/fila-faden',soft:'#FBE3DE',themen:['naehen','sticken','haekeln','stricken','weben','perlen','knuepfen','wickeln','filzen','falten','schneiden']},
  {id:'werk',name:'Werkraum',bild:'figuren/bibo-holz',soft:'#F6E4C8'}];  // Werkraum: alles, was nicht ins Handarbeitszimmer gehört
 const raumOf=aid=>RAEUME[0].themen.includes(aid)?RAEUME[0]:RAEUME[1];
 const raumThemen=r=>S.areas.filter(a=>THEMA_ID.has(a.id)&&raumOf(a.id)===r&&videosIn(a.id).length);
