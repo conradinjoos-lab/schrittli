@@ -770,7 +770,8 @@ const VORL_BASE=SCHULE?'../vorlagen/':'vorlagen/';   // eigene Vorlagen zu Video
 const vlLink=(cls,txt='Vorlagen drucken')=>`<a class="${cls}" href="${VORL_BASE}" target="_blank" rel="noopener">${txt}</a>`;   // Vorlagen-Generator (vorlagen/index.html): Form wählen, Grösse in cm, drucken
 const genKarten=()=>[['','✂️','Vorlagen-Generator','Herz, Stern, Bär und über 100 weitere Formen – Grösse in cm eingeben, ausdrucken.'],
   ['perlen/','🦎','Perlentiere-Zählmuster','Tiere, Comic-Figuren und Sachen – mit Drahtweg, Reihe für Reihe zum Abhaken, für 3-mm-Rocailles.'],
-  ['perlentier-bild/','🐞','Perlentier aus eigenem Bild','Bild hineinziehen, Plan für Rocailles mit Drahtweg bekommen. Zeigt, wo der Draht nicht hält, und flickt es. Das Bild bleibt auf dem Gerät.']]
+  ['perlentier-bild/','🐞','Perlentier aus eigenem Bild','Bild hineinziehen, Plan für Rocailles mit Drahtweg bekommen. Zeigt, wo der Draht nicht hält, und flickt es. Das Bild bleibt auf dem Gerät.'],
+  ['einfrieren/','❄️','Abpausen','Bild aufs iPad holen, gross ziehen, einfrieren, Papier drauflegen und abpausen. Nichts einrichten, das Bild bleibt auf dem Gerät.']]
   .map(([pf,sym,t,txt])=>`<a class="lehrer-gen" href="${VORL_BASE}${pf}" target="_blank" rel="noopener"><span class="sym" aria-hidden="true">${sym}</span><span class="grow"><b>${t}</b><br><span class="small">${txt}</span></span><span aria-hidden="true">→</span></a>`).join('');   // Werkzeuge für alle und Lehrer-Ansicht
 const v3Fuss=()=>`<div class="v3-fuss"><button class="v3-werkzeuge" data-act="werkzeuge">🧰 Werkzeuge</button>${SCHULE?'<button class="v3-link" data-act="lehrer">Für Lehrpersonen</button>':''}</div>`;   // unten auf Raum, Start und Thema
 function vorlagenBox(vl,pfad=f=>VORL_BASE+f){ return (vl||[]).length?`<div class="an-box vorlage"><span class="sym" aria-hidden="true">📄</span><div><p>Vorlage zum Ausdrucken</p>${vl.map(x=>x.datei[0]==='?'   // «?form=herz&b=3» öffnet den Generator mit Form und Grösse

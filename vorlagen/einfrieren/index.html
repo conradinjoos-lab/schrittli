@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>❄ Abpausen</title>
+<meta name="description" content="Ein Bild aufs iPad holen, gross ziehen, einfrieren, Papier drauflegen und abpausen. Ohne Einrichten, läuft nur auf dem Gerät.">
+<link rel="icon" href="../../grafik/figuren/icon.png">
+<link rel="apple-touch-icon" href="../../grafik/figuren/icon.png">
+<link rel="manifest" href='data:application/manifest+json,{"name":"Abpausen","short_name":"Abpausen","display":"standalone","start_url":".","background_color":"%23EEF3F8","theme_color":"%2317997A"}'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<style>
+:root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.45 Nunito,system-ui,sans-serif;overscroll-behavior:none}
+h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
+h1{font-size:28px}
+h2{font-size:19px;margin-bottom:10px}
+a{color:var(--acc)}
+.kopf{max-width:1000px;margin:0 auto;padding:20px 16px 8px}
+.kopf p{margin:4px 0 0;color:var(--muted)}
+main{max-width:1000px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+.karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
+.breit{grid-column:1/-1}
+ol{margin:0;padding-left:22px}
+ol li{margin:0 0 8px}
+ol li::marker{font-family:Fredoka,Nunito,sans-serif;color:var(--acc)}
+.knoepfe{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+.gross{display:inline-flex;align-items:center;justify-content:center;gap:10px;flex:1 1 180px;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer;text-decoration:none;padding:0 16px}
+.gross svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round;flex:none}
+.zweit{background:var(--surface2);color:var(--ink);border:2px solid var(--line)}
+.gross:disabled{opacity:.45;cursor:default}
+.hinweis{font-size:14px;color:var(--muted);margin:8px 0 0}
+.code{width:100%;height:64px;margin-top:4px;font:12px/1.3 ui-monospace,Consolas,monospace;padding:8px;border-radius:10px;border:2px solid var(--line);background:var(--surface2);color:var(--muted);resize:none}
+.ablauf{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0;padding:0;list-style:none;counter-reset:s}
+.ablauf li{counter-increment:s;background:var(--surface2);border-radius:14px;padding:12px;font-size:15px}
+.ablauf li::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;margin-bottom:6px;border-radius:50%;background:var(--acc);color:var(--acc-ink);font:600 17px Fredoka,Nunito,sans-serif}
+.leiste{display:inline-flex;align-items:center;gap:6px;padding:2px 10px;border-radius:999px;background:var(--surface2);border:1px solid var(--line);font-size:14px;white-space:nowrap}
+/* Die Bühne: hier liegt das Bild, mit zwei Fingern ziehen und schieben */
+.buehne{position:relative;height:min(70vh,720px);min-height:320px;border-radius:14px;border:2px dashed var(--line);background:#fff;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none}
+.buehne.hat{border-style:solid;cursor:grab}
+.buehne.voll{position:fixed;inset:0;z-index:10;height:auto;min-height:0;border:0;border-radius:0}
+.buehne img{position:absolute;top:0;left:0;transform-origin:0 0;max-width:none;pointer-events:none;-webkit-user-drag:none}
+.buehne .leer{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--muted);padding:20px;pointer-events:none}
+.buehne.hat .leer{display:none}
+.buehne .leer b{display:block;font:600 22px Fredoka,Nunito,sans-serif;color:var(--ink);margin-bottom:4px}
+.buehne.voll .leer{display:none}
+details{margin-top:4px}
+summary{cursor:pointer;font-weight:800;color:var(--acc)}
+details ol{margin-top:10px}
+button:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+@media (max-width:760px){main{grid-template-columns:minmax(0,1fr)}.ablauf{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:24px}}
+</style>
+</head>
+<body>
+<header class="kopf">
+  <h1>❄ Abpausen</h1>
+  <p>Bild holen, gross ziehen, einfrieren, Papier drauflegen. Nichts einrichten, nichts installieren – das Bild bleibt auf dem Gerät. <a href="../">← Schablonen</a></p>
+</header>
+<main>
+  <section class="karte breit" aria-label="Bild">
+    <div class="knoepfe">
+      <label class="gross" for="datei"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 8"/></svg><span>Foto wählen</span></label>
+      <input type="file" id="datei" accept="image/*" hidden>
+      <button type="button" class="gross zweit" id="einfuegen"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg><span>Bild einfügen</span></button>
+      <button type="button" class="gross zweit" id="beispiel">Beispiel</button>
+      <button type="button" class="gross" id="frieren" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Einfrieren</span></button>
+    </div>
+    <div class="buehne" id="buehne">
+      <img id="bild" alt="" hidden>
+      <div class="leer"><div><b>Hier kommt das Bild hin</b>«Foto wählen» oder ein kopiertes Bild einfügen.<br>Am Computer: Bild hineinziehen.</div></div>
+    </div>
+    <p class="hinweis" id="tipp">Mit zwei Fingern gross ziehen und schieben, bis es aufs Papier passt. Dann «Einfrieren»: Die Seite reagiert auf nichts mehr, bis man das Schloss 3 Sekunden drückt.</p>
+  </section>
+
+  <section class="karte breit" aria-label="So geht es">
+    <h2>So geht es im Unterricht</h2>
+    <ol class="ablauf">
+      <li>In Safari ein Bild suchen. Finger draufhalten → <b>«Zu Fotos hinzufügen»</b> (oder «Kopieren»).</li>
+      <li>Diese Seite öffnen, <b>«Foto wählen»</b> und das Bild aussuchen (oder «Bild einfügen»).</li>
+      <li>Mit zwei Fingern gross ziehen und schieben, bis es passt. <b>«Einfrieren»</b> antippen.</li>
+      <li>Papier auflegen und abpausen. Fertig: das Schloss unten rechts 3 Sekunden drücken.</li>
+    </ol>
+  </section>
+
+  <section class="karte" aria-label="Für die Lehrperson">
+    <h2>Für die Lehrperson</h2>
+    <ol>
+      <li>Die Kinder brauchen nur diese Adresse. Am einfachsten einmal pro iPad: Teilen-Knopf <b>⬆</b> → <b>«Zum Home-Bildschirm»</b>. Dann gibt es ein Symbol «Abpausen» wie eine App, ohne Adressleiste.</li>
+      <li><b>☀ Helligkeit ganz hoch</b> (Kontrollzentrum), dann scheint das Bild besser durchs Papier.</li>
+      <li>Papier mit zwei Streifen Malerklebband festmachen, mit Bleistift leicht zeichnen – harte Stifte können das Glas zerkratzen.</li>
+      <li>Das Schloss sperrt nur die Seite. Wer nach oben wischt, kommt trotzdem weg. Ganz dicht sperrt nur der <b>Geführte Zugriff</b> (Einstellungen → Bedienungshilfen, dann dreimal den oberen Knopf drücken).</li>
+      <li>Solange eingefroren ist, geht der Bildschirm nicht von selbst aus.</li>
+    </ol>
+  </section>
+
+  <section class="karte" aria-label="Für Fortgeschrittene">
+    <h2>Für Fortgeschrittene</h2>
+    <p class="hinweis" style="margin-top:0">Wer <b>jede</b> Internetseite direkt einfrieren will, ohne das Bild zuerst zu sichern, kann sich einen Knopf in Safari einrichten. Das ist einmal etwas Fummelei.</p>
+    <details>
+      <summary>Knopf für Safari einrichten</summary>
+      <button type="button" class="gross" id="kopieren" style="width:100%;margin:10px 0"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg><span>1. Knopf-Code kopieren</span></button>
+      <ol start="2">
+        <li>Diese Seite sichern: Teilen-Knopf <b>⬆</b> → «Zu Favoriten hinzufügen» → «Sichern».</li>
+        <li>Lesezeichen öffnen (Buch-Symbol) → Favoriten → «Bearbeiten» → «❄ Abpausen» antippen.</li>
+        <li>Die Adresse ganz löschen, den kopierten Code einfügen → «Fertig».</li>
+        <li>Einstellungen → Apps → Safari → «Favoritenleiste anzeigen» einschalten, dann ist der Knopf immer oben.</li>
+      </ol>
+      <p class="hinweis">Klappt das Kopieren nicht, den Code hier antippen, alles auswählen und kopieren:</p>
+      <textarea class="code" id="code" readonly aria-label="Knopf-Code"></textarea>
+      <p class="hinweis">Am Computer: diesen Knopf in die Lesezeichenleiste ziehen → <a id="ziehen" href="#">❄ Einfrieren</a></p>
+    </details>
+  </section>
+</main>
+<script>
+/* Das Einfrieren selbst: läuft auch als Lesezeichen auf fremden Seiten. Darum alles mit createElement und style.cssText
+   statt innerHTML oder <style> – Seiten wie Google erlauben sonst nichts (Trusted Types, CSP). Keine //-Kommentare darin. */
+function einfrieren(){
+  if(window.__einfrieren){window.__einfrieren();return;}
+  var d=document,ns='http://www.w3.org/2000/svg',wach=null,haltZeit=0,tippZeit=0,ani=null,sx=scrollX,sy=scrollY;
+  var mach=function(tag,css,eltern,svg){var e=svg?d.createElementNS(ns,tag):d.createElement(tag);if(css)e.style.cssText=css;if(eltern)eltern.appendChild(e);return e;};
+  var attr=function(e,a){for(var k in a)e.setAttribute(k,a[k]);return e;};
+  var deckel=mach('div','position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483647;background:transparent;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent');
+  var knopf=mach('div','position:fixed;right:16px;bottom:16px;width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.94);box-shadow:0 0 0 2px #D5DEE9,0 2px 10px rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;touch-action:none;cursor:pointer',deckel);
+  attr(knopf,{role:'button','aria-label':'Eingefroren. Zum Lösen 3 Sekunden drücken'});
+  var ring=attr(mach('svg','position:absolute;top:0;left:0;transform:rotate(-90deg)',knopf,1),{width:60,height:60,viewBox:'0 0 60 60'});
+  var kreis=attr(mach('circle','stroke-dashoffset:176',ring,1),{cx:30,cy:30,r:28,fill:'none',stroke:'#17997A','stroke-width':4,'stroke-dasharray':176});
+  var schloss=attr(mach('svg','',knopf,1),{width:26,height:26,viewBox:'0 0 24 24',fill:'none',stroke:'#17997A','stroke-width':2.4,'stroke-linecap':'round','stroke-linejoin':'round'});
+  attr(mach('rect','',schloss,1),{x:5,y:11,width:14,height:10,rx:2});
+  attr(mach('path','',schloss,1),{d:'M8 11V7a4 4 0 0 1 8 0v4'});
+  var tipp=mach('div','position:fixed;right:88px;bottom:26px;max-width:calc(100vw - 108px);padding:8px 12px;border-radius:12px;background:#17212F;color:#fff;font:600 15px/1.3 system-ui,sans-serif;transition:opacity .3s;pointer-events:none',deckel);
+  tipp.textContent='❄ Eingefroren. Zum Lösen das Schloss 3 Sekunden drücken.';
+  var zeigen=function(){tipp.style.opacity='1';clearTimeout(tippZeit);tippZeit=setTimeout(function(){tipp.style.opacity='0';},2500);};
+  var amKnopf=function(e){return knopf.contains(e.target);};
+  var schlucken=function(e){
+    if(amKnopf(e)&&e.type.indexOf('pointer')===0)return;
+    if(e.cancelable)e.preventDefault();
+    e.stopImmediatePropagation();
+    if((e.type==='touchstart'||e.type==='mousedown')&&!amKnopf(e))zeigen();
+  };
+  var arten=['touchstart','touchmove','touchend','touchcancel','pointerdown','pointermove','pointerup','mousedown','mouseup','click','dblclick','contextmenu','wheel','gesturestart','gesturechange','gestureend','keydown','keyup','keypress','selectstart','dragstart'];
+  var halten=function(){scrollTo(sx,sy);};
+  var wecken=function(){if(d.visibilityState==='visible'&&!wach&&navigator.wakeLock)navigator.wakeLock.request('screen').then(function(s){wach=s;s.addEventListener('release',function(){wach=null;});}).catch(function(){});};
+  var loslassen=function(){clearTimeout(haltZeit);if(ani)ani.cancel();ani=null;};
+  var loesen=function(){
+    loslassen();
+    arten.forEach(function(t){window.removeEventListener(t,schlucken,true);});
+    window.removeEventListener('scroll',halten,true);
+    d.removeEventListener('visibilitychange',wecken);
+    if(wach)wach.release().catch(function(){});
+    deckel.remove();delete window.__einfrieren;
+    if(window.__geloest)window.__geloest();
+  };
+  knopf.addEventListener('pointerdown',function(e){
+    e.preventDefault();
+    if(kreis.animate)ani=kreis.animate([{strokeDashoffset:176},{strokeDashoffset:0}],{duration:3000,fill:'forwards'});
+    haltZeit=setTimeout(loesen,3000);
+  });
+  ['pointerup','pointercancel','pointerleave'].forEach(function(t){knopf.addEventListener(t,loslassen);});
+  arten.forEach(function(t){window.addEventListener(t,schlucken,{capture:true,passive:false});});
+  window.addEventListener('scroll',halten,true);
+  d.addEventListener('visibilitychange',wecken);
+  (d.fullscreenElement||d.webkitFullscreenElement||d.body||d.documentElement).appendChild(deckel);
+  wecken();zeigen();
+  window.__einfrieren=zeigen;
+}
+(()=>{
+const $=id=>document.getElementById(id);
+const buehne=$('buehne'),bild=$('bild'),frieren=$('frieren');
+const BEISPIEL='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 200 150"><rect width="200" height="150" fill="#fff"/><g fill="none" stroke="#17212F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M30 75c25-38 85-48 120-12 0 0 14-14 30-20-6 18-6 46 0 64-16-6-30-20-30-20-35 36-95 26-120-12z"/><circle cx="62" cy="68" r="5"/><path d="M90 50c10 16 10 34 0 50M112 52c8 14 8 32 0 46M92 30c18-8 36-4 46 6"/></g></svg>');
+
+// ---- Bild auf die Bühne: Lage als Verschiebung + Massstab, Ursprung oben links
+let sc=1,tx=0,ty=0,url=null;
+const setzen=()=>{bild.style.transform=`translate(${tx}px,${ty}px) scale(${sc})`};
+const einpassen=()=>{
+  const B=buehne.clientWidth,H=buehne.clientHeight,w=bild.naturalWidth||1,h=bild.naturalHeight||1;
+  sc=Math.min(B/w,H/h)*.92;tx=(B-w*sc)/2;ty=(H-h*sc)/2;setzen();
+};
+function zeigen(quelle){
+  if(url)URL.revokeObjectURL(url);url=null;
+  if(quelle instanceof Blob){url=URL.createObjectURL(quelle);quelle=url}
+  bild.onload=()=>{bild.hidden=false;buehne.classList.add('hat');frieren.disabled=false;einpassen()};
+  bild.onerror=()=>{$('tipp').textContent='Dieses Bild lässt sich nicht öffnen. Bitte ein anderes versuchen.'};
+  bild.src=quelle;
+}
+$('datei').addEventListener('change',e=>{const f=e.target.files[0];if(f)zeigen(f);e.target.value=''});
+$('beispiel').addEventListener('click',()=>zeigen(BEISPIEL));
+
+// Einfügen: aus der Zwischenablage (iPad fragt einmal «Einsetzen erlauben?»), am Computer auch Strg+V und Hineinziehen
+const ausDaten=items=>{for(const it of items){if(it.type&&it.type.startsWith('image/')){const f=it.getAsFile?it.getAsFile():it;if(f){zeigen(f);return true}}}return false};
+$('einfuegen').addEventListener('click',async()=>{
+  try{
+    const teile=await navigator.clipboard.read();
+    for(const t of teile){const typ=t.types.find(x=>x.startsWith('image/'));if(typ){zeigen(await t.getType(typ));return}}
+    $('tipp').textContent='In der Zwischenablage ist kein Bild. Zuerst in Safari den Finger aufs Bild halten → «Kopieren».';
+  }catch(e){$('tipp').textContent='Einfügen ging nicht. Dann das Bild zuerst «Zu Fotos hinzufügen» und hier «Foto wählen».'}
+});
+document.addEventListener('paste',e=>{if(e.clipboardData&&ausDaten(e.clipboardData.items))e.preventDefault()});
+buehne.addEventListener('dragover',e=>e.preventDefault());
+buehne.addEventListener('drop',e=>{e.preventDefault();if(e.dataTransfer)ausDaten(e.dataTransfer.files.length?e.dataTransfer.files:e.dataTransfer.items)});
+
+// Ziehen und mit zwei Fingern zoomen (Pointer-Events, am Computer auch Mausrad)
+const finger=new Map();let start=null;
+const mitte=()=>{const p=[...finger.values()];return p.length>1?{x:(p[0].x+p[1].x)/2,y:(p[0].y+p[1].y)/2,d:Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y)}:{x:p[0].x,y:p[0].y,d:0}};
+const ort=e=>{const r=buehne.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top}};
+const zoomUm=(x,y,f)=>{const neu=Math.min(Math.max(sc*f,.05),40);f=neu/sc;tx=x-(x-tx)*f;ty=y-(y-ty)*f;sc=neu;setzen()};
+buehne.addEventListener('pointerdown',e=>{if(bild.hidden)return;buehne.setPointerCapture(e.pointerId);finger.set(e.pointerId,ort(e));start={m:mitte(),tx,ty,sc}});
+buehne.addEventListener('pointermove',e=>{
+  if(!finger.has(e.pointerId))return;finger.set(e.pointerId,ort(e));
+  const m=mitte();
+  if(finger.size>1&&start.m.d>0){const f=m.d/start.m.d;sc=Math.min(Math.max(start.sc*f,.05),40);const g=sc/start.sc;tx=m.x-(start.m.x-start.tx)*g;ty=m.y-(start.m.y-start.ty)*g}
+  else{tx=start.tx+m.x-start.m.x;ty=start.ty+m.y-start.m.y}
+  setzen();
+});
+const weg=e=>{finger.delete(e.pointerId);if(finger.size)start={m:mitte(),tx,ty,sc}};
+['pointerup','pointercancel'].forEach(t=>buehne.addEventListener(t,weg));
+buehne.addEventListener('wheel',e=>{if(bild.hidden)return;e.preventDefault();const o=ort(e);zoomUm(o.x,o.y,e.deltaY<0?1.1:1/1.1)},{passive:false});
+['touchstart','touchmove','gesturestart','gesturechange'].forEach(t=>buehne.addEventListener(t,e=>{if(e.cancelable)e.preventDefault()},{passive:false}));
+buehne.addEventListener('dblclick',()=>{if(!bild.hidden)einpassen()});
+
+// Einfrieren: Bühne auf den ganzen Bildschirm (wenn möglich echtes Vollbild, dann ist auch die Safari-Leiste weg), dann sperren.
+// Die Lage des Bilds wird mitgenommen: gleiche Mitte, gleicher Massstab in Bildschirm-Pixeln.
+let vorher=null;
+frieren.addEventListener('click',()=>{
+  if(bild.hidden)return;
+  const r=buehne.getBoundingClientRect();vorher={tx,ty,sc,w:r.width,h:r.height};
+  const mx=(tx+bild.naturalWidth*sc/2)-r.width/2,my=(ty+bild.naturalHeight*sc/2)-r.height/2;   // Bildmitte relativ zur Bühnenmitte
+  buehne.classList.add('voll');
+  let fertig=false;
+  const nachher=()=>{if(fertig)return;fertig=true;tx=buehne.clientWidth/2+mx-bild.naturalWidth*sc/2;ty=buehne.clientHeight/2+my-bild.naturalHeight*sc/2;setzen();einfrieren()};
+  // Vollbild anfragen; antwortet der Browser nicht (manche eingebettete Browser), nach einer halben Sekunde trotzdem sperren
+  const voll=buehne.requestFullscreen||buehne.webkitRequestFullscreen;
+  if(voll){try{const p=voll.call(buehne);if(p&&p.then)p.then(()=>setTimeout(nachher,150),nachher)}catch(e){}}
+  setTimeout(nachher,voll?600:0);
+});
+window.__geloest=()=>{
+  buehne.classList.remove('voll');
+  if(document.fullscreenElement||document.webkitFullscreenElement)(document.exitFullscreen||document.webkitExitFullscreen).call(document);
+  if(vorher){tx=vorher.tx;ty=vorher.ty;sc=vorher.sc;setzen();vorher=null}
+};
+// Vollbild von aussen verlassen (Wischen am iPad, Esc am Computer): Bühne wieder klein, Sperre bleibt, bis das Schloss gedrückt wird
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&!window.__einfrieren)buehne.classList.remove('voll')});
+document.addEventListener('webkitfullscreenchange',()=>{if(!document.webkitFullscreenElement&&!window.__einfrieren)buehne.classList.remove('voll')});
+window.addEventListener('resize',()=>{if(!bild.hidden&&!buehne.classList.contains('voll')&&!window.__einfrieren)einpassen()});
+
+// ---- Knopf-Code für Fortgeschrittene (Lesezeichen für jede Seite)
+const knopfCode='javascript:'+encodeURIComponent('('+einfrieren.toString().replace(/\n\s*/g,'')+')()');
+$('code').value=knopfCode;
+$('ziehen').href=knopfCode;
+$('ziehen').addEventListener('click',e=>{e.preventDefault();einfrieren()});
+$('code').addEventListener('focus',()=>$('code').select());
+$('kopieren').addEventListener('click',async()=>{
+  const t=$('kopieren').querySelector('span');
+  try{await navigator.clipboard.writeText(knopfCode);t.textContent='✓ Kopiert – jetzt Schritt 2'}
+  catch(e){$('code').focus();$('code').select();t.textContent='Bitte unten von Hand kopieren'}
+});
+})();
+</script>
+</body>
+</html>
