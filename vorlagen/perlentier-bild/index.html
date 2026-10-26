@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Schritt für Schritt · Perlentier aus Bild</title>
+<meta name="description" content="Bild hineinziehen, Perlentier-Plan für Rocailles mit Drahtweg bekommen: Farben zählen, Probleme am Draht sehen, drucken. Das Bild bleibt auf dem Gerät.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<style>
+:root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--warn-bg:#FDE8E8;--warn-ink:#8E1F2A;--papier:#FFFFFF;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;--warn-bg:#3A1C20;--warn-ink:#FFB4B4;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;--warn-bg:#3A1C20;--warn-ink:#FFB4B4;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
+h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
+h1{font-size:28px}
+h2{font-size:17px;margin-bottom:10px}
+a{color:var(--acc)}
+.kopf{max-width:1200px;margin:0 auto;padding:20px 16px 8px}
+.kopf p{margin:4px 0 0;color:var(--muted)}
+main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,380px);gap:20px;align-items:start}
+.karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
+.zone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:260px;border:3px dashed var(--line);border-radius:16px;padding:24px 16px;text-align:center;background:var(--surface2);cursor:pointer;color:var(--muted)}
+.zone b{color:var(--ink);font:600 20px Fredoka,Nunito,sans-serif}
+.zone svg{width:48px;height:48px;fill:none;stroke:var(--acc);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.zone.ueber,body.ueber .zone{border-color:var(--acc);background:var(--acc-soft)}
+.zone.klein{min-height:0;flex-direction:row;padding:10px 14px;gap:10px;font-size:14px}
+.zone.klein svg{width:24px;height:24px}
+.zone.klein b{font-size:15px}
+.knopf-text{font:inherit;font-size:14px;background:none;border:0;color:var(--acc);text-decoration:underline;cursor:pointer;padding:4px}
+.plan{margin-top:14px;overflow:auto;border-radius:8px}
+.plan svg{display:block;width:100%;max-height:78vh;height:auto;background:var(--papier);border-radius:8px;touch-action:auto}
+.plan.malen svg{cursor:crosshair;touch-action:none}
+.pruefung{margin-top:12px;padding:12px 14px;border-radius:14px;font-size:15px;background:var(--acc-soft)}
+.pruefung.warn{background:var(--warn-bg);color:var(--warn-ink)}
+.pruefung p{margin:0}
+.pruefung ul{margin:6px 0 0;padding-left:20px}
+.pruefung .knopf{margin-top:10px;font:600 16px Fredoka,Nunito,sans-serif;padding:8px 16px;border-radius:12px;border:0;background:var(--warn-ink);color:var(--warn-bg);cursor:pointer}
+.legende{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted);margin:10px 0 0}
+.legende span{display:inline-flex;align-items:center;gap:6px}
+.legende i{display:inline-block;width:18px;height:3px;border-radius:2px}
+.legende i.ring{width:12px;height:12px;border:2.5px solid #E0262B;border-radius:50%}
+.seite-rechts{position:sticky;top:12px;display:flex;flex-direction:column;gap:14px}
+.feld{margin-bottom:14px}
+.lbl{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-bottom:6px}
+.lbl output{color:var(--ink);font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:14px;padding:6px 12px;border-radius:999px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer}
+.chip:hover{border-color:var(--acc)}
+.chip[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
+input[type=range]{width:100%;accent-color:var(--acc)}
+input[type=text]{width:100%;font:inherit;padding:8px 10px;border-radius:10px;border:2px solid var(--line);background:var(--surface2);color:var(--ink)}
+.drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
+.drucken:disabled{opacity:.45;cursor:default}
+.drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
+.info{font-size:15px;margin:10px 0 0}
+.hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
+.farben{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.farbe{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:12px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);font:inherit;font-size:14px;cursor:pointer;text-align:left}
+.farbe[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
+.farbe i{flex:none;width:16px;height:22px;border-radius:6px/5px;border:1.5px solid rgba(0,0,0,.35);display:grid;place-items:center;font:800 11px Nunito,sans-serif;font-style:normal}
+.farbe span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.farbe small{color:var(--muted);font-weight:800}
+details{margin-top:8px}
+summary{cursor:pointer;font-size:14px;color:var(--muted)}
+.alle{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.alle button{width:30px;height:30px;border-radius:50%;border:2px solid rgba(0,0,0,.3);cursor:pointer}
+.alle button[aria-pressed="true"]{outline:3px solid var(--acc);outline-offset:2px}
+button:focus-visible,.zone:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+[hidden]{display:none!important}
+@media (max-width:860px){main{grid-template-columns:minmax(0,1fr)}.seite-rechts{position:static}h1{font-size:24px}}
+#druck{display:none}
+@page{size:A4 portrait;margin:0}
+@media print{
+  body{background:#fff}
+  .kopf,main{display:none!important}
+  #druck{display:block}
+  #druck svg{display:block;width:210mm;height:297mm}
+}
+</style>
+</head>
+<body>
+<header class="kopf">
+  <h1>Perlentier aus eigenem Bild</h1>
+  <p>Bild hineinziehen, Plan für Rocailles mit Drahtweg bekommen. Das Bild wird nur in diesem Browser verarbeitet und nirgends hochgeladen. <a href="../perlen/">Fertige Perlentiere →</a> · <a href="../">← Schablonen</a></p>
+</header>
+<main>
+  <section class="karte" aria-label="Bild und Plan">
+    <div class="zone" id="zone" role="button" tabindex="0" aria-label="Bild wählen oder hineinziehen">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="9" width="36" height="30" rx="4"/><circle cx="17" cy="19" r="3.5"/><path d="M6 33l11-10 9 8 6-5 10 9"/></svg>
+      <b>Bild hierher ziehen</b>
+      <span>oder tippen zum Auswählen · auch Einfügen mit Strg+V geht</span>
+    </div>
+    <p class="hinweis" id="beispiel-zeile">Kein Bild zur Hand? <button type="button" class="knopf-text" id="beispiel">Beispiel ausprobieren</button></p>
+    <input type="file" id="datei" accept="image/*" hidden>
+    <div class="plan" id="plan" aria-live="polite"></div>
+    <p class="legende" id="legende" hidden><span><i style="background:#2A6FDB"></i>Draht</span><span><i class="ring"></i>hält so nicht am Draht</span></p>
+    <div class="pruefung" id="pruefung" hidden><div id="pruefung-text"></div><button type="button" class="knopf" id="flicken">Automatisch flicken</button></div>
+    <p class="hinweis" id="mal-hinweis" hidden>Farbe rechts wählen, dann auf die Perlen tippen oder darüber ziehen. Nochmals auf die Farbe tippen beendet das Malen.</p>
+  </section>
+  <div class="seite-rechts">
+    <section class="karte" aria-label="Einstellungen">
+      <div class="feld">
+        <label class="lbl" for="breite"><span>Breite</span><output id="breite-zahl"></output></label>
+        <input type="range" id="breite" min="5" max="30" step="1" value="13">
+      </div>
+      <div class="feld">
+        <span class="lbl" id="lbl-farben">Höchstens so viele Farben</span>
+        <div class="chips" role="group" aria-labelledby="lbl-farben" id="farbzahl"></div>
+      </div>
+      <div class="feld">
+        <span class="lbl" id="lbl-hg">Hintergrund</span>
+        <div class="chips" role="group" aria-labelledby="lbl-hg" id="hg"></div>
+      </div>
+      <div class="feld">
+        <label class="lbl" for="titel"><span>Titel auf dem Blatt</span></label>
+        <input type="text" id="titel" maxlength="40" value="Mein Tier">
+      </div>
+      <button type="button" class="drucken" id="drucken" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Plan drucken</span></button>
+      <p class="info" id="info"></p>
+      <p class="hinweis">Tipp: Bilder mit klarem Umriss und wenig Farben werden am schönsten. Perlentiere sind klein: 9 bis 17 Perlen breit reicht meistens. Ohren, Beine oder Strahlen, die abstehen, gibt der Plan als Lücke an.</p>
+    </section>
+    <section class="karte" aria-label="Farben" id="farben-karte" hidden>
+      <h2>Farben · zum Korrigieren antippen</h2>
+      <div class="farben" id="farben"></div>
+      <details>
+        <summary>Andere Farbe zum Malen</summary>
+        <div class="alle" id="alle"></div>
+      </details>
+    </section>
+  </div>
+</main>
+<div id="druck"></div>
+<script>
+// Übliche Rocailles-Farben (Näherungswerte, keine Markencodes)
+const PAL=[['weiss','#F4F4F2'],['creme','#F1E4C2'],['gelb','#F7D417'],['orange','#F28C1C'],['rot','#D52B2B'],['dunkelrot','#8E1F2A'],
+  ['rosa','#F4A6C1'],['pink','#E8458B'],['flieder','#B9A3DD'],['violett','#6B3FA0'],['hellblau','#8CC8EC'],['blau','#1F5FBF'],
+  ['dunkelblau','#1D2F6B'],['türkis','#23A8A0'],['hellgrün','#9BD56B'],['grün','#2E9B47'],['dunkelgrün','#1F5B34'],['hautfarben','#F2C7A5'],
+  ['beige','#D9B98C'],['braun','#7A4A2A'],['dunkelbraun','#4A2C1D'],['hellgrau','#BFC4C9'],['grau','#7F868D'],['schwarz','#1B1B1B']];
+// Rocailles 8/0 sind kurze Röhrchen: auf dem Draht 2 mm lang, quer dazu 3 mm hoch. Ein Feld im Plan ist darum Q so breit wie hoch.
+const ML=2,MD=3,Q=ML/MD;
+const FARBZAHL=[3,4,6,8,0];
+// Ein Draht, eine Farbe; DA und DB halten nur die zwei Enden auseinander
+const DA='#2A6FDB',DB='#2A6FDB',ROT='#E0262B';
+const $=id=>document.getElementById(id);
+const S={bild:null,breite:13,farben:6,hg:true,W:0,H:0,grid:null,buch:new Map(),pinsel:null};
+
+// Farbabstand im Lab-Raum
+const lin=v=>(v/=255)<=.04045?v/12.92:((v+.055)/1.055)**2.4;
+function lab(r,g,b){const R=lin(r),G=lin(g),B=lin(b),f=t=>t>.008856?Math.cbrt(t):7.787*t+16/116;
+  const x=f((R*.4124+G*.3576+B*.1805)/.95047),y=f(R*.2126+G*.7152+B*.0722),z=f((R*.0193+G*.1192+B*.9505)/1.08883);
+  return [116*y-16,500*(x-y),200*(y-z)]}
+const hexRgb=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
+const PLAB=PAL.map(p=>lab(...hexRgb(p[1])));
+const ALLE=PAL.map((_,i)=>i);
+const d2=(a,b)=>(a[0]-b[0])**2+(a[1]-b[1])**2+(a[2]-b[2])**2;
+function naechste(L,erlaubt){let b=-1,bd=1e18;for(const i of erlaubt){const d=d2(L,PLAB[i]);if(d<bd){bd=d;b=i}}return b}
+
+// Ausschnitt (sx,sy,sw,sh) des Bilds auf W×H Pixel; vorher schrittweise halbieren, sonst werden Fotos körnig.
+// Teile ausserhalb des Bilds bleiben durchsichtig.
+function verkleinern(img,sx,sy,sw,sh,W,H){
+  let w=img.naturalWidth||img.width,h=img.naturalHeight||img.height,src=img,s=1;
+  while(sw*s/2>=W*2&&sh*s/2>=H*2){w=Math.round(w/2);h=Math.round(h/2);const t=document.createElement('canvas');t.width=w;t.height=h;
+    const x=t.getContext('2d');x.imageSmoothingQuality='high';x.drawImage(src,0,0,w,h);src=t;s/=2}
+  const c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');x.imageSmoothingQuality='high';
+  x.drawImage(src,sx*s,sy*s,sw*s,sh*s,0,0,W,H);
+  return x.getImageData(0,0,W,H).data;
+}
+
+// Hintergrund: die häufigste Randfarbe von aussen her wegfüllen
+function hintergrund(W,H,L,leer){
+  const rand=[];for(let x=0;x<W;x++)rand.push(x,(H-1)*W+x);for(let y=1;y<H-1;y++)rand.push(y*W,y*W+W-1);
+  const opak=rand.filter(i=>!leer[i]);if(!opak.length)return;
+  const z=new Map();for(const i of opak){const k=naechste(L[i],ALLE);if(!z.has(k))z.set(k,[]);z.get(k).push(i)}
+  const l=[...z.values()].sort((a,b)=>b.length-a.length)[0];
+  if(l.length<opak.length*.35)return;
+  const ref=[0,1,2].map(j=>l.reduce((s,i)=>s+L[i][j],0)/l.length);
+  const nah=i=>!leer[i]&&d2(L[i],ref)<196;
+  const q=rand.filter(nah),seen=new Uint8Array(W*H);q.forEach(i=>seen[i]=1);
+  while(q.length){const i=q.pop();leer[i]=1;const x=i%W,y=(i-x)/W;
+    for(const j of[x>0?i-1:-1,x<W-1?i+1:-1,y>0?i-W:-1,y<H-1?i+W:-1])if(j>=0&&!seen[j]&&nah(j)){seen[j]=1;q.push(j)}}
+}
+
+// Auf höchstens max Farben: immer die Farbe streichen, deren Wegfall das Bild am wenigsten verändert
+function reduzieren(idx,L,max){
+  for(;;){
+    const erlaubt=[...new Set(idx.filter(c=>c>=0))];
+    if(!max||erlaubt.length<=max)return;
+    const kosten=new Map(erlaubt.map(c=>[c,0])),zweit=new Int16Array(idx.length).fill(-1);
+    idx.forEach((c,i)=>{if(c<0)return;let b=-1,bd=1e18;for(const k of erlaubt){if(k===c)continue;const d=d2(L[i],PLAB[k]);if(d<bd){bd=d;b=k}}
+      zweit[i]=b;kosten.set(c,kosten.get(c)+Math.sqrt(bd)-Math.sqrt(d2(L[i],PLAB[c])))});
+    const weg=[...kosten].sort((a,b)=>a[1]-b[1])[0][0];
+    idx.forEach((c,i)=>{if(c===weg)idx[i]=zweit[i]});
+  }
+}
+
+// Pro Perle 4×4 Pixel: die häufigste Farbe gewinnt (gibt saubere Umrisse statt Mischfarben)
+function abtasten(sx,sy,sw,sh,W,H){
+  const k=4,d=verkleinern(S.bild,sx,sy,sw,sh,W*k,H*k),n=W*H,L=new Array(n),leer=new Uint8Array(n);
+  for(let i=0;i<n;i++){const x0=(i%W)*k,y0=Math.floor(i/W)*k,st=new Map();let durch=0;
+    for(let dy=0;dy<k;dy++)for(let dx=0;dx<k;dx++){const p=((y0+dy)*W*k+x0+dx)*4,a=d[p+3]/255;if(a<.5){durch++;continue}
+      const l=lab(d[p]*a+255*(1-a),d[p+1]*a+255*(1-a),d[p+2]*a+255*(1-a)),c=naechste(l,ALLE),e=st.get(c)||{n:0,s:[0,0,0]};
+      e.n++;e.s[0]+=l[0];e.s[1]+=l[1];e.s[2]+=l[2];st.set(c,e)}
+    if(durch*2>k*k){leer[i]=1;continue}
+    const b=[...st.values()].sort((a,b)=>b.n-a.n)[0];L[i]=b.s.map(v=>v/b.n)}
+  if(S.hg)hintergrund(W,H,L,leer);
+  let x0=W,x1=-1,y0=H,y1=-1;
+  for(let i=0;i<n;i++)if(!leer[i]){const x=i%W,y=(i-x)/W;x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y)}
+  return {W,H,L,leer,x0,x1,y0,y1};
+}
+
+function berechnen(){
+  if(!S.bild)return;
+  const iw=S.bild.naturalWidth||S.bild.width,ih=S.bild.naturalHeight||S.bild.height;
+  // 1. Durchgang: wo ist die Figur? Dann so zuschneiden, dass die Figur selbst (ohne Hintergrund) die gewählte Breite hat
+  const W1=Math.max(40,S.breite),H1=Math.max(1,Math.round(W1*ih/iw*Q)),a=abtasten(0,0,iw,ih,W1,H1);
+  if(a.x1<0){Object.assign(S,{W:0,H:0,grid:null});$('info').textContent='Auf diesem Bild ist nach dem Weglassen des Hintergrunds nichts mehr übrig.';zeichnen();return}
+  const bx=iw/W1,by=ih/H1,b=(a.x1-a.x0+1)*bx/S.breite;
+  const sx=a.x0*bx-b,sy=a.y0*by-b/Q,sw=(a.x1-a.x0+1)*bx+2*b,sh=(a.y1-a.y0+1)*by+2*b/Q;
+  const W2=S.breite+2,H2=Math.max(3,Math.min(80,Math.round(sh*Q/b))),t=abtasten(sx,sy,sw,sh,W2,H2);
+  if(t.x1<0)return;
+  // auf die Figur zuschneiden
+  const W=t.x1-t.x0+1,H=t.y1-t.y0+1,L=[],idx=[];
+  for(let y=t.y0;y<=t.y1;y++)for(let x=t.x0;x<=t.x1;x++){const i=y*W2+x;L.push(t.L[i]);idx.push(t.leer[i]?-1:naechste(t.L[i],ALLE))}
+  reduzieren(idx,L,S.farben);
+  Object.assign(S,{W,H,grid:idx});
+  // Buchstaben nach Häufigkeit
+  S.buch=new Map(zaehlen().map(([c],k)=>[c,String.fromCharCode(65+k)]));
+  zeichnen();
+}
+
+function zaehlen(){const z=new Map();for(const c of S.grid)if(c>=0)z.set(c,(z.get(c)||0)+1);return [...z].sort((a,b)=>b[1]-a[1])}
+function buchstabe(c){if(!S.buch.has(c)){const frei=[...Array(26)].map((_,k)=>String.fromCharCode(65+k)).find(b=>![...S.buch.values()].includes(b))||'?';S.buch.set(c,frei)}return S.buch.get(c)}
+const hell=c=>PLAB[c][0]>60;
+
+// Rocailles halten nur am Draht: jede Reihe muss ein Stück ohne Lücke sein und mit der Reihe darüber überlappen
+function drahtPruefung(){
+  const {W,H,grid}=S,R=[];
+  for(let y=0;y<H;y++){const seg=[];let a=-1;
+    for(let x=0;x<=W;x++){const voll=x<W&&grid[y*W+x]>=0;if(voll&&a<0)a=x;if(!voll&&a>=0){seg.push([a,x-1]);a=-1}}
+    R.push(seg)}
+  const haupt=R.map(s=>s.length?s.reduce((b,q)=>q[1]-q[0]>b[1]-b[0]?q:b):null),fehler=[],rot=new Set();
+  const erste=haupt.findIndex(Boolean),letzte=erste<0?-1:H-1-[...haupt].reverse().findIndex(Boolean);
+  for(let y=erste;y<=letzte&&erste>=0;y++){const h=haupt[y],v=y>erste?haupt[y-1]:null;
+    if(!h){fehler.push([y,`Reihe ${y+1} ist leer – der Draht hätte nichts zum Festhalten`]);continue}
+    if(R[y].length>1){fehler.push([y,`Reihe ${y+1} hat eine Lücke – abgetrennte Perlen fallen vom Draht`]);
+      R[y].forEach(q=>{if(q!==h)for(let x=q[0];x<=q[1];x++)rot.add(y*W+x)})}
+    if(v&&(h[1]<v[0]||h[0]>v[1])){fehler.push([y,`Reihe ${y+1} liegt nicht unter Reihe ${y} – sie würde wegrutschen`]);
+      for(let x=h[0];x<=h[1];x++)rot.add(y*W+x)}}
+  return {R,haupt,erste,letzte,fehler,rot};
+}
+
+// Flicken: Lücken mit der Farbe links davon füllen, leere Reihen auffüllen, verrutschte Reihen bis unter die Reihe davor verlängern
+function drahtFlicken(){
+  const {W}=S;let P=drahtPruefung();
+  for(let y=P.erste;y<=P.letzte;y++){const s=P.R[y];
+    if(s.length>1)for(let x=s[0][0];x<=s[s.length-1][1];x++)if(S.grid[y*W+x]<0)S.grid[y*W+x]=S.grid[y*W+x-1]}
+  P=drahtPruefung();
+  for(let y=P.erste+1;y<=P.letzte;y++){const h=P.haupt[y],v=P.haupt[y-1];
+    if(!h){const n=P.haupt.slice(y+1).find(Boolean)||v,a=Math.max(v[0],n[0]),b=Math.min(v[1],n[1]),[x0,x1]=a<=b?[a,b]:v;
+      for(let x=x0;x<=x1;x++)S.grid[y*W+x]=S.grid[(y-1)*W+x];P.haupt[y]=[x0,x1];continue}
+    if(h[1]<v[0]){for(let x=h[1]+1;x<=v[0];x++)S.grid[y*W+x]=S.grid[y*W+h[1]];P.haupt[y]=[h[0],v[0]]}
+    else if(h[0]>v[1]){for(let x=v[1];x<h[0];x++)S.grid[y*W+x]=S.grid[y*W+h[0]];P.haupt[y]=[v[1],h[1]]}}
+  zeichnen();
+}
+
+// Drahtweg wie beim Perlentiere-Zählmuster: Reihe 1 auf die Drahtmitte, dann jede Reihe auf ein Ende fädeln
+// und das andere Ende gegengleich durch. Aussen eine Schlaufe zur nächsten Reihe, am Schluss verdrehen.
+function drahtSvg(P,z,ox,oy){
+  const {haupt,erste,letzte}=P;if(erste<0)return '';
+  const d=z*.14,rand=z*(Q/2+.22),f=v=>v.toFixed(2),X=x=>ox+(x+.5)*z*Q,Y=y=>oy+(y+.5)*z,weg={[DA]:'',[DB]:''};
+  const r0=haupt[erste],m0=(X(r0[0])+X(r0[1]))/2;
+  weg[DA]+=`M${f(m0)} ${f(Y(erste))}L${f(X(r0[0])-rand)} ${f(Y(erste))}`;
+  weg[DB]+=`M${f(m0)} ${f(Y(erste))}L${f(X(r0[1])+rand)} ${f(Y(erste))}`;
+  // li/re: welches Ende nach der letzten Reihe links/rechts herauskommt und auf welcher Höhe
+  let li=DA,re=DB,vy=erste,lOff=0,rOff=0;
+  for(let y=erste+1;y<=letzte;y++){const h=haupt[y];if(!h)continue;const v=haupt[vy],xl=X(h[0])-rand,xr=X(h[1])+rand;
+    const kl=Math.min(X(v[0]),X(h[0]))-rand-z*.25,kr=Math.max(X(v[1]),X(h[1]))+rand+z*.25;
+    weg[li]+=`M${f(X(v[0])-rand)} ${f(Y(vy)+lOff)}C${f(kl)} ${f(Y(vy)+lOff)} ${f(kl)} ${f(Y(y)-d)} ${f(xl)} ${f(Y(y)-d)}L${f(xr)} ${f(Y(y)-d)}`;
+    weg[re]+=`M${f(X(v[1])+rand)} ${f(Y(vy)+rOff)}C${f(kr)} ${f(Y(vy)+rOff)} ${f(kr)} ${f(Y(y)+d)} ${f(xr)} ${f(Y(y)+d)}L${f(xl)} ${f(Y(y)+d)}`;
+    [li,re]=[re,li];lOff=d;rOff=-d;vy=y}
+  const h=haupt[vy],mx=(X(h[0])+X(h[1]))/2,yb=Y(vy)+z*.85;
+  weg[li]+=`M${f(X(h[0])-rand)} ${f(Y(vy)+lOff)}C${f(X(h[0])-rand-z*.4)} ${f(Y(vy)+lOff)} ${f(mx-z*.3)} ${f(yb-z*.2)} ${f(mx)} ${f(yb)}`;
+  weg[re]+=`M${f(X(h[1])+rand)} ${f(Y(vy)+rOff)}C${f(X(h[1])+rand+z*.4)} ${f(Y(vy)+rOff)} ${f(mx+z*.3)} ${f(yb-z*.2)} ${f(mx)} ${f(yb)}`;
+  for(let t=0;t<3;t++){const a=yb+t*z*.22;weg[DA]+=`M${f(mx-z*.12)} ${f(a)}L${f(mx+z*.12)} ${f(a+z*.22)}`;weg[DB]+=`M${f(mx+z*.12)} ${f(a)}L${f(mx-z*.12)} ${f(a+z*.22)}`}
+  const sw=z*.07,lin=(dd,c,w)=>`<path d="${dd}" stroke="${c}" stroke-width="${f(w)}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+  // Start: grüner Rahmen um Reihe 1 und ein Schild «Start» darauf
+  const sx0=X(r0[0])-z*Q*.5-z*.18,sx1=X(r0[1])+z*Q*.5+z*.18,sy=Y(erste)-z*.62,pw=z*2.6,ph=z*.95;
+  const st=`<rect x="${f(sx0)}" y="${f(sy)}" width="${f(sx1-sx0)}" height="${f(z*1.24)}" rx="${f(z*.3)}" fill="none" stroke="#17997A" stroke-width="${f(sw*1.3)}"/>`+
+    `<rect x="${f(m0-pw/2)}" y="${f(sy-ph)}" width="${f(pw)}" height="${f(ph)}" rx="${f(ph/2)}" fill="#17997A"/>`+
+    `<text x="${f(m0)}" y="${f(sy-ph*.27)}" font-size="${f(z*.62)}" font-weight="800" fill="#fff" text-anchor="middle">Start</text>`;
+  return lin(weg[DA]+weg[DB],'#fff',sw*2.4)+lin(weg[DA],DA,sw)+lin(weg[DB],DB,sw)+st;
+}
+// Pro Drahtende: durch jede Reihe einmal plus Schlaufe, unten 6 cm zum Verdrehen; gerundet auf 10 cm
+function drahtCm(P){let cm=12;for(let y=P.erste;y<=P.letzte&&P.erste>=0;y++){const h=P.haupt[y];if(h)cm+=2*((h[1]-h[0]+1)*ML/10+.8)}return Math.ceil(cm/10)*10}
+
+// Plan als SVG: Perlen, Drahtweg darüber, rot = hält so nicht. Links Reihennummer (beim Drucken mit Kästchen), rechts Perlen pro Reihe.
+function raster(W,H,z,ox,oy,mitText){
+  const P=drahtPruefung(),f=v=>v.toFixed(2),zb=z*Q,pw=zb*.94,ph=z*.94;let perlen='',text='',ringe='',rand='';
+  for(let i=0;i<W*H;i++){const x=i%W,y=(i-x)/W,cx=ox+(x+.5)*zb,cy=oy+(y+.5)*z,c=S.grid[i];
+    if(c<0){perlen+=`<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(z*.08)}" fill="#C9D2DD"/>`;continue}
+    perlen+=`<rect x="${f(cx-pw/2)}" y="${f(cy-ph/2)}" width="${f(pw)}" height="${f(ph)}" rx="${f(pw*.36)}" ry="${f(ph*.26)}" fill="${PAL[c][1]}" stroke="#1c2430" stroke-opacity=".45" stroke-width="${f(z*.05)}"/>`;
+    if(mitText)text+=`<text x="${f(cx)}" y="${f(cy+z*.19)}" font-size="${f(z*.46)}" font-weight="800" text-anchor="middle" fill="${hell(c)?'#1c2430':'#fff'}" stroke="${PAL[c][1]}" stroke-width="${f(z*.16)}" paint-order="stroke">${buchstabe(c)}</text>`;
+    if(P.rot.has(i))ringe+=`<rect x="${f(cx-zb/2)}" y="${f(cy-z/2)}" width="${f(zb)}" height="${f(z)}" rx="${f(zb*.4)}" fill="none" stroke="${ROT}" stroke-width="${f(z*.12)}"/>`}
+  const fs=Math.min(z*.5,3.4),kb=Math.min(z*.45,3);
+  for(let y=P.erste;y<=P.letzte&&P.erste>=0;y++){const ty=f(oy+(y+.5)*z+fs*.36),n=P.R[y].reduce((s,q)=>s+q[1]-q[0]+1,0),schlecht=P.fehler.some(e=>e[0]===y);
+    rand+=`<text x="${f(ox-z*.75)}" y="${ty}" font-size="${f(fs)}" fill="${schlecht?ROT:'#5b6573'}" text-anchor="end"${schlecht?' font-weight="800"':''}>${y-P.erste+1}</text>`+
+      `<text x="${f(ox+W*zb+z*.6)}" y="${ty}" font-size="${f(fs)}" font-weight="800" fill="#1c2430">${n}</text>`;
+    if(mitText)rand+=`<rect x="${f(ox-z*.75-fs*1.5-kb)}" y="${f(oy+(y+.5)*z-kb/2)}" width="${f(kb)}" height="${f(kb)}" rx="${f(kb*.15)}" fill="none" stroke="#9aa4b1" stroke-width="${f(Math.max(.25,kb*.1))}"/>`}
+  return perlen+ringe+drahtSvg(P,z,ox,oy)+text+rand;
+}
+function planSvg(){
+  const z=10,{W,H}=S,x0=-26,y0=-16,w=W*z*Q+40,h=H*z+32;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${x0} ${y0} ${w} ${h}" font-family="Nunito,Arial,sans-serif" role="img" aria-label="Perlentier-Plan, ${H} Reihen, mit Drahtweg" id="plansvg">`+
+    `<rect x="${x0}" y="${y0}" width="${w}" height="${h}" fill="#fff"/>`+raster(W,H,z,0,0,false)+`</svg>`;
+}
+
+function masse(){const n=S.grid.filter(c=>c>=0).length,P=drahtPruefung();
+  return {n,P,reihen:P.erste<0?0:P.letzte-P.erste+1,cmB:S.W*ML/10,cmH:S.H*MD/10,draht:drahtCm(P)}}
+const cm=x=>(Math.round(x*2)/2).toLocaleString('de-CH');
+
+function blatt(){
+  const {W,H}=S,z=zaehlen(),{n,P,reihen,cmB,cmH,draht}=masse(),titel=esc($('titel').value.trim()||'Mein Tier');
+  const spalten=4,legH=Math.ceil(z.length/spalten)*7+12,fuss=46;
+  // Platz links für Kästchen und Reihennummer, rechts für die Anzahl, unten für das Verdrehen
+  const maxH=297-46-legH-fuss,zelle=Math.min(186/(W*Q+4.2),maxH/(H+3.4),10),gw=W*zelle*Q,gh=H*zelle;
+  const ox=12+zelle*2.6+(186-zelle*(W*Q+4.2))/2,oy=31+Math.max(7,zelle*1.6);
+  const kopf=`<text x="${(ox-zelle*.75).toFixed(2)}" y="${(oy-2).toFixed(2)}" font-size="2.6" fill="#5b6573" text-anchor="end">Reihe</text>`+
+    `<text x="${(ox+gw+zelle*.6).toFixed(2)}" y="${(oy-2).toFixed(2)}" font-size="2.6" fill="#5b6573">Perlen</text>`;
+  const ly=oy+gh+zelle*1.6+6;
+  let leg=`<text x="12" y="${ly}" font-size="4.2" font-weight="800" fill="#1c2430">Perlen bereitlegen</text>`;
+  z.forEach(([c,k],j)=>{const x=12+(j%spalten)*47,y=ly+7+Math.floor(j/spalten)*7;
+    leg+=`<rect x="${x+.8}" y="${y-3.5}" width="3.2" height="4.8" rx="1.15" ry="1.25" fill="${PAL[c][1]}" stroke="#1c2430" stroke-opacity=".5" stroke-width=".3"/>`+
+      `<text x="${x+2.4}" y="${y}" font-size="2.5" font-weight="800" text-anchor="middle" fill="${hell(c)?'#1c2430':'#fff'}">${buchstabe(c)}</text>`+
+      `<text x="${x+6.5}" y="${y}" font-size="3.3" fill="#1c2430"><tspan font-weight="800">${k}</tspan> × ${PAL[c][0]}</text>`});
+  const so=['1  Reihe 1 auffädeln und in die Mitte des Drahts schieben.',
+    '2  Jede neue Reihe auf ein Drahtende fädeln, das andere Ende von der Gegenseite durch dieselben Perlen stecken.',
+    '3  An beiden Enden gleich fest ziehen. Die neue Reihe liegt jetzt unter der letzten. Kästchen abhaken.',
+    '4  Am Schluss die Enden 3-mal verdrehen, abknipsen und die Spitze nach innen biegen.'];
+  const warn=P.fehler.length?`<text x="12" y="250" font-size="3.3" font-weight="800" fill="${ROT}">Achtung: ${P.fehler.length===1?'eine Stelle hält':P.fehler.length+' Stellen halten'} so nicht am Draht (rot). Vor dem Fädeln korrigieren.</text>`:'';
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 297" width="210mm" height="297mm" font-family="Nunito,Arial,sans-serif" role="img" aria-label="Perlentier-Plan ${titel}">`+
+    `<rect width="210" height="297" fill="#fff"/>`+
+    `<text x="12" y="17" font-size="7.5" font-weight="800" fill="#1c2430" font-family="Fredoka,Nunito,Arial,sans-serif">Perlentier: ${titel}</text>`+
+    `<text x="12" y="23.5" font-size="3.4" fill="#5b6573">${reihen} Reihen · ${n} Rocailles 3 mm · fertig etwa ${cm(cmB)} × ${cm(cmH)} cm · Draht 0,3–0,4 mm, etwa ${draht} cm</text>`+
+    `<line x1="12" y1="27" x2="198" y2="27" stroke="#D5DEE9" stroke-width=".4"/>`+
+    kopf+raster(W,H,zelle,ox,oy,zelle>=3.2)+leg+warn+
+    `<path d="M12 257.5h6" stroke="${DA}" stroke-width=".8"/><text x="19.5" y="258.5" font-size="2.9" fill="#1c2430">Draht</text>`+
+    so.map((t,k)=>`<text x="12" y="${266+k*5}" font-size="3.2" fill="#1c2430">${t}</text>`).join('')+
+    `<text x="198" y="292" font-size="2.6" fill="#5b6573" text-anchor="end">Schritt für Schritt · Perlentier aus eigenem Bild</text></svg>`;
+}
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function zeichnen(){
+  $('breite-zahl').textContent=`${S.breite} Perlen`;
+  document.querySelectorAll('#farbzahl .chip').forEach(k=>k.setAttribute('aria-pressed',+k.dataset.n===S.farben));
+  document.querySelectorAll('#hg .chip').forEach(k=>k.setAttribute('aria-pressed',(k.dataset.h==='1')===S.hg));
+  const da=!!S.grid;
+  $('drucken').disabled=!da;$('farben-karte').hidden=!da;$('zone').classList.toggle('klein',da);$('beispiel-zeile').hidden=da&&!!S.bild;
+  $('mal-hinweis').hidden=$('legende').hidden=$('pruefung').hidden=!da;
+  if(!da){$('plan').innerHTML='';return}
+  $('plan').innerHTML=planSvg();$('plan').classList.toggle('malen',S.pinsel!==null);
+  const z=zaehlen(),{n,P,reihen,cmB,cmH,draht}=masse();
+  $('info').textContent=`${reihen} Reihen, ${n} Perlen in ${z.length} Farben, fertig etwa ${cm(cmB)} × ${cm(cmH)} cm, Draht etwa ${draht} cm`;
+  const fe=P.fehler;
+  $('pruefung').classList.toggle('warn',fe.length>0);$('flicken').hidden=!fe.length;
+  $('pruefung-text').innerHTML=fe.length
+    ?`<p><b>So hält es am Draht noch nicht:</b></p><ul>${fe.slice(0,6).map(e=>`<li>${e[1]}</li>`).join('')}${fe.length>6?`<li>und ${fe.length-6} weitere</li>`:''}</ul>`
+    :`<p><b>Jede Reihe hält am Draht.</b> Reihe 1 kommt auf die Drahtmitte, dann geht es Reihe für Reihe nach unten.</p>`;
+  $('farben').innerHTML=z.map(([c,k])=>`<button type="button" class="farbe" data-c="${c}" aria-pressed="${S.pinsel===c}"><i style="background:${PAL[c][1]};color:${hell(c)?'#1c2430':'#fff'}">${buchstabe(c)}</i><span>${PAL[c][0]}</span><small>${k}</small></button>`).join('')+
+    `<button type="button" class="farbe" data-c="-1" aria-pressed="${S.pinsel===-1}"><i style="background:transparent;border-style:dashed"></i><span>leer machen</span></button>`;
+  $('alle').innerHTML=PAL.map(([nm,hx],c)=>`<button type="button" data-c="${c}" style="background:${hx}" title="${nm}" aria-label="${nm}" aria-pressed="${S.pinsel===c}"></button>`).join('');
+}
+
+// Malen auf dem Plan
+let malt=false,plan=0;
+function zelleBei(e){const svg=$('plansvg');if(!svg)return -1;const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;
+  const q=p.matrixTransform(svg.getScreenCTM().inverse()),x=Math.floor(q.x/(10*Q)),y=Math.floor(q.y/10);
+  return x>=0&&y>=0&&x<S.W&&y<S.H?y*S.W+x:-1}
+function malen(e){const i=zelleBei(e);if(i<0||S.grid[i]===S.pinsel)return;S.grid[i]=S.pinsel;if(S.pinsel>=0)buchstabe(S.pinsel);
+  if(!plan)plan=requestAnimationFrame(()=>{plan=0;zeichnen()})}
+$('plan').addEventListener('pointerdown',e=>{if(S.pinsel===null||!S.grid)return;malt=true;e.preventDefault();malen(e)});
+$('plan').addEventListener('pointermove',e=>{if(malt)malen(e)});
+addEventListener('pointerup',()=>malt=false);
+const pinsel=e=>{const b=e.target.closest('[data-c]');if(!b)return;const c=+b.dataset.c;S.pinsel=S.pinsel===c?null:c;zeichnen()};
+$('farben').addEventListener('click',pinsel);$('alle').addEventListener('click',pinsel);
+$('flicken').addEventListener('click',drahtFlicken);
+
+// Bild laden: Datei, Ziehen, Einfügen, Beispiel
+function laden(datei){
+  if(!datei||!datei.type.startsWith('image/'))return;
+  const url=URL.createObjectURL(datei),img=new Image();
+  img.onload=()=>{S.bild=img;S.pinsel=null;const nm=(datei.name||'').replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ').trim();
+    if(nm&&nm!=='image')$('titel').value=nm.slice(0,40);berechnen()};
+  img.onerror=()=>{$('info').textContent='Dieses Bild kann der Browser nicht öffnen. Bitte als JPG oder PNG versuchen.'};
+  img.src=url;
+}
+$('zone').addEventListener('click',()=>$('datei').click());
+$('zone').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();$('datei').click()}});
+$('datei').addEventListener('change',e=>{laden(e.target.files[0]);e.target.value=''});
+addEventListener('dragover',e=>{e.preventDefault();document.body.classList.add('ueber')});
+addEventListener('dragleave',e=>{if(!e.relatedTarget)document.body.classList.remove('ueber')});
+addEventListener('drop',e=>{e.preventDefault();document.body.classList.remove('ueber');laden(e.dataTransfer.files[0])});
+addEventListener('paste',e=>{const f=[...(e.clipboardData?.files||[])].find(f=>f.type.startsWith('image/'));if(f)laden(f)});
+$('beispiel').addEventListener('click',()=>{   // eigenes Beispiel: Marienkäfer von oben, Kopf oben, jede Reihe zusammenhängend
+  const c=document.createElement('canvas');c.width=240;c.height=280;const x=c.getContext('2d');
+  x.fillStyle='#fff';x.fillRect(0,0,240,280);
+  x.fillStyle='#1B1B1B';x.beginPath();x.arc(120,62,40,0,7);x.fill();
+  x.fillStyle='#D52B2B';x.beginPath();x.ellipse(120,165,92,100,0,0,7);x.fill();
+  x.strokeStyle='#1B1B1B';x.lineWidth=16;x.beginPath();x.moveTo(120,70);x.lineTo(120,262);x.stroke();
+  x.fillStyle='#1B1B1B';x.beginPath();for(const [px,py] of[[75,125],[165,125],[68,195],[172,195],[100,232],[140,232]]){x.moveTo(px+17,py);x.arc(px,py,17,0,7)}x.fill();
+  x.fillStyle='#F4F4F2';x.beginPath();x.arc(102,48,10,0,7);x.arc(138,48,10,0,7);x.fill();
+  S.bild=c;S.pinsel=null;S.breite=13;$('breite').value=13;$('titel').value='Marienkäfer';berechnen();
+});
+
+// Einstellungen
+$('farbzahl').innerHTML=FARBZAHL.map(n=>`<button type="button" class="chip" data-n="${n}">${n||'alle'}</button>`).join('');
+$('hg').innerHTML=`<button type="button" class="chip" data-h="1">weglassen</button><button type="button" class="chip" data-h="0">behalten</button>`;
+$('farbzahl').addEventListener('click',e=>{const k=e.target.closest('.chip');if(!k)return;S.farben=+k.dataset.n;berechnen();zeichnen()});
+$('hg').addEventListener('click',e=>{const k=e.target.closest('.chip');if(!k)return;S.hg=k.dataset.h==='1';berechnen();zeichnen()});
+$('breite').addEventListener('input',e=>{S.breite=+e.target.value;$('breite-zahl').textContent=`${S.breite} Perlen`});
+$('breite').addEventListener('change',()=>{berechnen();zeichnen()});
+function drucken(){if(S.grid)$('druck').innerHTML=blatt()}
+addEventListener('beforeprint',drucken);
+$('drucken').addEventListener('click',()=>{drucken();window.print()});
+zeichnen();
+</script>
+</body>
+</html>

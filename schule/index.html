@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Stop & Mach Schule">
+<meta name="apple-mobile-web-app-title" content="Schritt für Schritt · Schule">
 <meta name="theme-color" content="#F1E3CB" id="themecolor">
-<title>Stop & Mach Schule</title>
+<title>Schritt für Schritt · Schule</title>
 <link rel="icon" href="../grafik/figuren/icon.png">
 <link rel="apple-touch-icon" href="../grafik/figuren/icon.png">
-<link rel="manifest" href='data:application/manifest+json,{"name":"Stop %26 Mach Schule","short_name":"Schule","display":"standalone","start_url":".","background_color":"%23F1E3CB","theme_color":"%23C98A4E"}'>
+<link rel="manifest" href='data:application/manifest+json,{"name":"Schritt f%C3%BCr Schritt Schule","short_name":"Schule","display":"standalone","start_url":".","background_color":"%23F1E3CB","theme_color":"%23C98A4E"}'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@700;800;900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
@@ -535,6 +535,7 @@ body:has(.v3){background:#F5F6F8}
 .v3-dots i.an{background:#1C2430}
 .v3-leer{grid-column:1/-1;color:#5B6672;font-weight:800;font-size:18px;padding:40px 0;text-align:center}
 .v3-fuss{text-align:center;margin-top:36px}
+.v3-werkzeuge{display:inline-flex;align-items:center;gap:8px;border:2px solid #1C4A63;background:#EAF3F8;color:#1C4A63;font-family:var(--display);font-weight:700;font-size:17px;border-radius:999px;padding:10px 20px;margin:0 8px 8px;box-shadow:2px 3px 0 var(--sh);cursor:pointer}
 .v3-link{border:0;background:none;color:#5B6672;font-weight:700;font-size:14px;text-decoration:underline;text-underline-offset:3px;padding:8px 12px}
 .v3-thema-titel small{display:block;color:#5B6672;font-weight:700;font-size:14px}
 .v3-thema-titel h1{margin:0;font-weight:900;font-size:30px;line-height:1.1}
@@ -768,6 +769,11 @@ function werkeHtml(ws){ return ws.length?`<h2 class="pw-grp andere-titel">Das ha
 function zeigeWerk(b){ const w=WERKE[+b.dataset.i]; if(!w) return; kidModal(`<img class="andere-gross" src="${WERKE_BASE}${esc(w.bild)}" alt=""><h2 style="font-size:20px;margin:10px 0 0">${esc(w.titel)}</h2><div class="row center" style="margin-top:12px"><button class="kbtn ghost" data-close>Schliessen</button></div>`); }
 const VORL_BASE=SCHULE?'../vorlagen/':'vorlagen/';   // eigene Vorlagen zu Videos, z. B. vorlagen/vorlage-nikolausstiefel-a4.pdf
 const vlLink=(cls,txt='Vorlagen drucken')=>`<a class="${cls}" href="${VORL_BASE}" target="_blank" rel="noopener">${txt}</a>`;   // Vorlagen-Generator (vorlagen/index.html): Form wählen, Grösse in cm, drucken
+const genKarten=()=>[['','✂️','Vorlagen-Generator','Herz, Stern, Bär und über 100 weitere Formen – Grösse in cm eingeben, ausdrucken.'],
+  ['perlen/','🦎','Perlentiere-Zählmuster','Tiere, Comic-Figuren und Sachen – mit Drahtweg, Reihe für Reihe zum Abhaken, für 3-mm-Rocailles.'],
+  ['perlentier-bild/','🐞','Perlentier aus eigenem Bild','Bild hineinziehen, Plan für Rocailles mit Drahtweg bekommen. Zeigt, wo der Draht nicht hält, und flickt es. Das Bild bleibt auf dem Gerät.']]
+  .map(([pf,sym,t,txt])=>`<a class="lehrer-gen" href="${VORL_BASE}${pf}" target="_blank" rel="noopener"><span class="sym" aria-hidden="true">${sym}</span><span class="grow"><b>${t}</b><br><span class="small">${txt}</span></span><span aria-hidden="true">→</span></a>`).join('');   // Werkzeuge für alle und Lehrer-Ansicht
+const v3Fuss=()=>`<div class="v3-fuss"><button class="v3-werkzeuge" data-act="werkzeuge">🧰 Werkzeuge</button>${SCHULE?'<button class="v3-link" data-act="lehrer">Für Lehrpersonen</button>':''}</div>`;   // unten auf Raum, Start und Thema
 function vorlagenBox(vl,pfad=f=>VORL_BASE+f){ return (vl||[]).length?`<div class="an-box vorlage"><span class="sym" aria-hidden="true">📄</span><div><p>Vorlage zum Ausdrucken</p>${vl.map(x=>x.datei[0]==='?'   // «?form=herz&b=3» öffnet den Generator mit Form und Grösse
   ?`<div class="an-paar"><a class="an-laden" href="${esc(VORL_BASE+x.datei)}" target="_blank" rel="noopener">✂ ${esc(x.name)}</a><a class="an-laden zweit" href="${esc(VORL_BASE+x.datei+'&pausen=1')}" target="_blank" rel="noopener" title="Form auf dem Tablet anzeigen und Papier darauflegen">✏️ Abpausen</a></div>`
   :x.datei.includes('/?')   // «perlen/?tier=eidechse» ist eine Seite (Zählmuster), kein Download
@@ -938,7 +944,7 @@ window.addEventListener('hashchange',()=>{ const s=parseSchool(); if(s) go('scho
 SCREENS.firstrun=app=>{
   let emoji=AVATARS[0], color=COLORS[1]; const n=abend();
   app.innerHTML=`<div class="${kidClass()}">${girlande(n)}<div class="inner" style="max-width:600px;margin:30px auto 0;width:100%"><div class="papier">
-    <div class="fig-gruss">${figur(n?'abend':'hallo')}<div class="schild hallo"><h1>Willkommen</h1><div class="sub">bei Stop & Mach</div></div></div>
+    <div class="fig-gruss">${figur(n?'abend':'hallo')}<div class="schild hallo"><h1>Willkommen</h1><div class="sub">bei Schritt für Schritt</div></div></div>
     <p style="text-transform:none;letter-spacing:0">Videos Schritt für Schritt anschauen, nachmachen, zeigen. Zuerst: Für wen ist die App?</p>
     <div class="field"><label for="fr-name" style="color:var(--wmuted)">Name des Kindes</label><input class="inp" id="fr-name" placeholder="z. B. Lina" autocomplete="off"></div>
     <div class="field"><label style="color:var(--wmuted)">Tier</label><div class="emoji-pick" id="fr-em">${AVATARS.map(e=>`<button type="button" data-act="em" data-v="${e}" class="${e===emoji?'on':''}">${e}</button>`).join('')}</div></div>
@@ -976,14 +982,14 @@ const raumOf=aid=>RAEUME[0].themen.includes(aid)?RAEUME[0]:RAEUME[1];
 const raumThemen=r=>S.areas.filter(a=>THEMA_ID.has(a.id)&&raumOf(a.id)===r&&videosIn(a.id).length);
 const soft=a=>`color-mix(in oklch,${a.color} 16%,white)`;
 const prSchule=v=>S.progress[S.activeProfile+':'+v.id]||{};
-function v3Kopf(links,titel){ return `<div class="v3-kopf">${links}<span class="v3-logo"><img src="${GRAFIK}figuren/logo.webp" alt=""></span>${titel||'<b class="v3-name">Stop & Mach</b>'}<span class="grow"></span><button class="v3-pill" data-act="gallery">${SCHULE?'Unsere':'Meine'} Werke${S.works.length?' · '+S.works.length:''}</button></div>`; }
+function v3Kopf(links,titel){ return `<div class="v3-kopf">${links}<span class="v3-logo"><img src="${GRAFIK}figuren/logo.webp" alt=""></span>${titel||'<b class="v3-name">Schritt für Schritt</b>'}<span class="grow"></span><button class="v3-pill" data-act="gallery">${SCHULE?'Unsere':'Meine'} Werke${S.works.length?' · '+S.works.length:''}</button></div>`; }
 function weiterMit(r){ const v=videoOf(S.settings.zuletzt); if(!v||raumOf(v.areaId)!==r||!videosIn(v.areaId).includes(v)) return null; const pr=prSchule(v); return !pr.done&&(pr.pos>5||pr.step>0)?{v,a:areaOf(v.areaId),schritt:(pr.step||0)+1}:null; }
 SCREENS.raum=app=>{ const akt=S.settings.raum;
   app.innerHTML=`<div class="v3"><div class="v3-in">${v3Kopf('')}
     <h1 class="v3-h1 gross">Wo arbeitest du heute?</h1><p class="v3-sub">${akt?'Tipp auf den Raum, in dem du arbeitest.':'Nur beim ersten Start – danach merken sich Bibo & Fila deinen Raum.'}</p>
     <div class="v3-raeume">${RAEUME.map(r=>`<button class="v3-raum${r.id===akt?' an':''}" data-act="r" data-id="${r.id}"><span class="bild" style="background:${r.soft}"><img src="${GRAFIK}${r.bild}.webp" alt=""></span><b>${r.name}</b><span class="v3-meta">${raumThemen(r).length} Themen</span></button>`).join('')}</div>
-    <div class="v3-fuss"><button class="v3-link" data-act="lehrer">Für Lehrpersonen</button>${vlLink('v3-link')}</div></div></div>`;
-  wire(app,{ r:b=>{ S.settings.raum=b.dataset.id; save(); go('home'); }, gallery:()=>go('gallery'), lehrer:()=>go('lehrer') });
+    ${v3Fuss()}</div></div>`;
+  wire(app,{ r:b=>{ S.settings.raum=b.dataset.id; save(); go('home'); }, gallery:()=>go('gallery'), lehrer:()=>go('lehrer'), werkzeuge:()=>go('werkzeuge') });
 };
 function themaKachel(a){ const vs=videosIn(a.id); const da=[1,2,3].map(n=>vs.some(v=>(+v.niveau||2)===n)); const tip='Niveaus: '+[1,2,3].filter(n=>da[n-1]).map(n=>NIVEAU[n]).join(', ');
   return `<button class="v3-kachel" data-act="area" data-id="${a.id}"><span class="bild" style="background:${soft(a)}"><img src="${GRAFIK}${a.id}.webp" alt="" onerror="this.remove()"></span><b>${esc(a.name)}</b><span class="v3-zeile"><span class="v3-meta">${vs.length} Video${vs.length===1?'':'s'}</span><span class="v3-dots" title="${tip}" aria-label="${tip}">${da.map(x=>`<i${x?' class="an"':''}></i>`).join('')}</span></span></button>`; }
@@ -995,9 +1001,9 @@ function homeSchule(app,rid){ const r=RAEUME.find(x=>x.id===(rid||S.settings.rau
     <div class="v3-titel"><h1 class="v3-h1">${r.name}</h1>${w?`<button class="v3-weiter" data-act="weiter" data-id="${w.v.id}"><span class="bild" style="background:${soft(w.a)}"><img src="${GRAFIK}${w.a.id}.webp" alt=""></span><span class="txt"><small>Weiter mit</small><b>${esc(w.a.name)} · Schritt ${w.schritt}</b></span><span class="play" aria-hidden="true">▶</span></button>`:''}</div>
     ${k||!SCHULE?'':'<p class="v3-sub">Tipp oben auf deine Klasse – dann siehst du nur, was zu dir passt.</p>'}
     <div class="v3-themen">${themen.map(themaKachel).join('')||`<div class="v3-leer">${figur('nachdenken')}Für diese Klasse ist hier noch nichts da.</div>`}</div>
-    ${SCHULE?'<div class="v3-fuss"><button class="v3-link" data-act="lehrer">Für Lehrpersonen</button>'+vlLink('v3-link')+'</div>':''}</div></div>`;
+    ${v3Fuss()}</div></div>`;
   wire(app,{ raeume:()=>go(SCHULE?'raum':'home'), raum:b=>{ if(!SCHULE){ go('zimmer',{r:b.dataset.id}); return; } S.settings.raum=b.dataset.id; save(); render(); }, klasse:b=>{ S.settings.klasse=+b.dataset.k; save(); render(); },
-    area:b=>go('area',{id:b.dataset.id}), weiter:b=>go('player',{videoId:b.dataset.id}), lehrer:()=>go('lehrer'), gallery:()=>go('gallery') });
+    area:b=>go('area',{id:b.dataset.id}), weiter:b=>go('player',{videoId:b.dataset.id}), lehrer:()=>go('lehrer'), werkzeuge:()=>go('werkzeuge'), gallery:()=>go('gallery') });
 }
 SCREENS.zimmer=(app,{r})=>homeSchule(app,r);   // Familie: Handarbeit oder Werkraum aus dem Regal
 function gruppenOf(vids){ const m=new Map(); videoOrdnung(vids).forEach(v=>{ const g=v.gruppe||'Weitere Projekte'; if(!m.has(g)) m.set(g,[]); m.get(g).push(v); });   // Projektart im Thema (schule.json «gruppe»)
@@ -1015,15 +1021,19 @@ function areaSchule(app,a){ const gr=gruppenOf(videosIn(a.id)); const vs=gr.flat
       <div class="v3-links"><div class="v3-held" style="background:${soft(a)}"><img src="${GRAFIK}${a.id}.webp" alt="" onerror="this.remove()"></div>
         ${mat.length?`<div class="v3-karte"><h2>Du brauchst</h2><div class="v3-mat">${mat.map(id=>`<div><span class="pik">${matIcon(id)}</span><b>${esc(matName(id))}</b></div>`).join('')}</div></div>`:''}</div>
       <div class="v3-liste">${liste||`<div class="v3-leer">${figur('nachdenken')}Hier ist noch nichts drin.</div>`}${werkeHtml(WERKE.filter(w=>w.bereich===a.id))}</div>
-    </div></div></div>`;
-  wire(app,{ back:()=>SCHULE?go('home'):go('zimmer',{r:raumOf(a.id).id}), andere:zeigeWerk, video:b=>go('player',{videoId:b.dataset.id}), gallery:()=>go('gallery') });
+    </div>${v3Fuss()}</div></div>`;
+  wire(app,{ back:()=>SCHULE?go('home'):go('zimmer',{r:raumOf(a.id).id}), andere:zeigeWerk, video:b=>go('player',{videoId:b.dataset.id}), gallery:()=>go('gallery'), lehrer:()=>go('lehrer'), werkzeuge:()=>go('werkzeuge') });
 }
+SCREENS.werkzeuge=app=>{
+  app.innerHTML=`<div class="${kidClass()} schrift-normal">${kopf('Werkzeuge',{back:true})}
+    <div class="inner"><div class="lehrer-info">Muster und Vorlagen zum Ausdrucken. Sie öffnen sich in einem neuen Fenster.</div>${genKarten()}</div></div>`;
+  wire(app,{ back:()=>go('home') });
+};
 SCREENS.lehrer=app=>{ const n=abend();
   const vids=S.videos.slice().sort((a,b)=>(a.areaId+a.title).localeCompare(b.areaId+b.title,'de'));
   app.innerHTML=`<div class="${kidClass()} schrift-normal">${girlande(n)}${kopf('Für Lehrpersonen',{back:true})}
     <div class="inner"><div class="lehrer-info">Ohne Anmeldung. Fotos von fertigen Werken bleiben nur auf diesem Gerät. Pro Video gibt es einen QR-Code: Kinder scannen ihn und landen direkt im Player mit den Schritten – auch von zuhause. Klassenzuordnung und neue Videos: Link an Conradin.</div>
-    <a class="lehrer-gen" href="${VORL_BASE}" target="_blank" rel="noopener"><span class="sym" aria-hidden="true">✂️</span><span class="grow"><b>Vorlagen-Generator</b><br><span class="small">Herz, Stern, Bär und über 100 weitere Formen – Grösse in cm eingeben, ausdrucken.</span></span><span aria-hidden="true">→</span></a>
-    <a class="lehrer-gen" href="${VORL_BASE}perlen/" target="_blank" rel="noopener"><span class="sym" aria-hidden="true">🦎</span><span class="grow"><b>Perlentiere-Zählmuster</b><br><span class="small">Eidechse, Libelle, Schlange und 6 weitere Tiere – Reihe für Reihe zum Abhaken, für 3-mm-Rocailles.</span></span><span aria-hidden="true">→</span></a>
+    ${genKarten()}
     <div class="lehrer-liste">${S.areas.map(a=>{ const vs=vids.filter(v=>v.areaId===a.id); if(!vs.length) return ''; return `<h2 style="color:${a.color};margin:14px 0 6px">${a.emoji} ${esc(a.name)}</h2>${vs.map(v=>`<div class="lrow"><span class="grow">${esc(v.title)}${v.grundtechnik?' <span class="gt">Grundtechnik</span>':''}</span>${niveauHtml(v)}<span class="stufen">${(v.stufen||[]).map(s=>`<b>${s}</b>`).join('')}</span><span class="muted small">${v.zeit?`⏱ ${v.zeit} Min. · `:''}${(v.steps||[]).length?v.steps.length+' Schritte':'ohne Schritte'}${(v.material||[]).length?' · '+v.material.map(matName).join(', '):''}</span><button class="btn sm" data-act="qr" data-id="${v.id}">QR-Code</button></div>`).join('')}`; }).join('')}</div></div>
     ${bank()}</div>`;
   wire(app,{ back:()=>go('home'), qr:async b=>{ const v=videoOf(b.dataset.id); const link=schoolLink(v); kidModal(`<h2 style="font-size:20px">${esc(v.title)}</h2><div class="qr" id="qr" style="margin:10px auto"></div><code style="font-size:11px;word-break:break-all;display:block;max-width:360px">${esc(link)}</code><div class="row center" style="margin-top:12px"><button class="btn sm" data-act="copylink" data-link="${esc(link)}">Link kopieren</button><button class="kbtn ghost" data-close>Schliessen</button></div>`,{copylink:(b2)=>{ navigator.clipboard&&navigator.clipboard.writeText(b2.dataset.link).then(()=>toast('Kopiert')).catch(()=>toast('Kopieren nicht möglich')); }}); try{ if(!window.QRCode) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'); new QRCode($('#qr'),{text:link,width:240,height:240,correctLevel:QRCode.CorrectLevel.L}); }catch(e){ const q=$('#qr'); if(q) q.textContent='QR-Code konnte nicht geladen werden.'; } } });
@@ -1043,9 +1053,10 @@ SCREENS.home=app=>{
     </div>
     ${spass.length?`<div class="inner regal-wrap"><span class="zettel links"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color:#F2B705"><path d="${ICONS.star}"/></svg>Kostet einen Stern</span><div class="regal">${spass.map(a=>dingHtml(a,'spass')).join('')}</div></div>`:''}
     <div class="inner regal-wrap"><div class="regal">${lern.map(a=>dingHtml(a,'lern')).join('')||`<div class="empty zettel">${figur('nachdenken')}Noch keine Videos – Eltern: Schloss oben rechts</div>`}</div></div>
+    <div class="inner">${v3Fuss()}</div>
     ${bank()}
   </div>`;
-  wire(app,{ area:b=>{ const id=b.dataset.id; if(id.startsWith('raum:')) go('zimmer',{r:id.slice(5)}); else go('area',{id}); }, gallery:()=>go('gallery'), parent:()=>go('parent',{tab:'videos'}), who:()=>{ if(S.profiles.length>1) go('profiles'); } });
+  wire(app,{ area:b=>{ const id=b.dataset.id; if(id.startsWith('raum:')) go('zimmer',{r:id.slice(5)}); else go('area',{id}); }, gallery:()=>go('gallery'), parent:()=>go('parent',{tab:'videos'}), werkzeuge:()=>go('werkzeuge'), who:()=>{ if(S.profiles.length>1) go('profiles'); } });
 };
 
 SCREENS.area=(app,{id})=>{
