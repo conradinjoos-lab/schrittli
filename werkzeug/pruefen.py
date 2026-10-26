@@ -14,7 +14,7 @@ sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 WURZEL = Path(__file__).resolve().parent.parent
 ENTWURF = WURZEL / 'werkzeug' / 'entwurf'
 CACHE = WURZEL / 'werkzeug' / 'cache'
-AREAS = 'naehen sticken haekeln haekeln stricken weben knuepfen wickeln filzen falten schneiden holz schnitzen formen drucken experimente'.split()
+AREAS = 'naehen sticken haekeln haekeln stricken weben perlen knuepfen wickeln filzen falten schneiden holz schnitzen formen drucken experimente'.split()
 
 
 def vokabular():

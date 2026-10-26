@@ -9,6 +9,7 @@ const THEMEN=[
  {id:'haekeln',name:'Häkeln',emoji:'🧶',color:'#9B5DE5',kind:'lern',ding:'kiste'},
  {id:'stricken',name:'Stricken',emoji:'🧶',color:'#2BB3A3',kind:'lern',ding:'wolle'},
  {id:'weben',name:'Weben',emoji:'🧺',color:'#C98A4E',kind:'lern',ding:'kiste'},
+ {id:'perlen',name:'Perlen',emoji:'📿',color:'#2A9DB8',kind:'lern',ding:'kiste'},
  {id:'knuepfen',name:'Flechten & Knüpfen',emoji:'🪢',color:'#F2C12E',kind:'lern',ding:'kiste'},
  {id:'wickeln',name:'Wickeln',emoji:'🪁',color:'#4C6EF5',kind:'lern',ding:'kiste'},
  {id:'filzen',name:'Filzen',emoji:'☁️',color:'#8FB8DE',kind:'lern',ding:'kiste'},
@@ -300,9 +301,8 @@ SCREENS.klasse=app=>{ const n=abend();
 /* Variante 3a «Luftig & klar»: zuerst der Raum (wird gemerkt), dann Themen als Kacheln, im Thema die Lektionen nach Niveau */
 const GRAFIK=SCHULE?'../grafik/':'grafik/';
 const figur=(name,cls='')=>`<img class="figur${cls?' '+cls:''}" src="${GRAFIK}figuren/${name}.webp" alt="" onerror="this.remove()">`;  // Bibo & Fila
-const RAEUME=[{id:'hand',name:'Handarbeitszimmer',bild:'figuren/fila-faden',soft:'#FBE3DE',themen:['naehen','sticken','haekeln','stricken','weben','knuepfen','wickeln','filzen']},
+const RAEUME=[{id:'hand',name:'Handarbeitszimmer',bild:'figuren/fila-faden',soft:'#FBE3DE',themen:['naehen','sticken','haekeln','stricken','weben','perlen','knuepfen','wickeln','filzen']},
  {id:'werk',name:'Werkraum',bild:'figuren/bibo-holz',soft:'#F6E4C8'}];  // Werkraum: alles, was nicht ins Handarbeitszimmer gehört
-const NIV3=[null,['Erkunden & üben','#DDF1E4','#1F6B45'],['Selbstständig & genau','#DCE8F7','#2B5A8C'],['Gezielt anwenden','#FBE9C9','#9A6A12']];
 const raumOf=aid=>RAEUME[0].themen.includes(aid)?RAEUME[0]:RAEUME[1];
 const raumThemen=r=>S.areas.filter(a=>THEMA_ID.has(a.id)&&raumOf(a.id)===r&&videosIn(a.id).length);
 const soft=a=>`color-mix(in oklch,${a.color} 16%,white)`;
@@ -331,11 +331,14 @@ function homeSchule(app,rid){ const r=RAEUME.find(x=>x.id===(rid||S.settings.rau
     area:b=>go('area',{id:b.dataset.id}), weiter:b=>go('player',{videoId:b.dataset.id}), lehrer:()=>go('lehrer'), gallery:()=>go('gallery') });
 }
 SCREENS.zimmer=(app,{r})=>homeSchule(app,r);   // Familie: Handarbeit oder Werkraum aus dem Regal
-function areaSchule(app,a){ const vs=[1,2,3].flatMap(n=>videoOrdnung(videosIn(a.id)).filter(v=>(+v.niveau||2)===n)); const jetzt=vs.find(v=>v.id===S.settings.zuletzt&&!prSchule(v).done)||vs.find(v=>!prSchule(v).done); let nr=0;
+function gruppenOf(vids){ const m=new Map(); videoOrdnung(vids).forEach(v=>{ const g=v.gruppe||'Weitere Projekte'; if(!m.has(g)) m.set(g,[]); m.get(g).push(v); });   // Projektart im Thema (schule.json «gruppe»)
+  const st=v=>v.grundtechnik?0:(+v.niveau||2), mitte=g=>g.reduce((s,v)=>s+st(v),0)/g.length;
+  return [...m].sort((x,y)=>(Math.min(...x[1].map(st))-Math.min(...y[1].map(st)))||(mitte(x[1])-mitte(y[1]))); }   // leichteste Gruppe zuerst, darin leicht → anspruchsvoll
+function areaSchule(app,a){ const gr=gruppenOf(videosIn(a.id)); const vs=gr.flatMap(g=>g[1]); const jetzt=vs.find(v=>v.id===S.settings.zuletzt&&!prSchule(v).done)||vs.find(v=>!prSchule(v).done); let nr=0;
   const zeile=v=>{ nr++; const pr=prSchule(v); const [cls,sym]=pr.done?['fertig','✓']:v===jetzt?['jetzt',nr]:['offen',nr]; const th=thumbOf(v);
     const auf=v.task&&v.task.text&&v.task.deliverable!=='keine'?`<button class="v3-lektion aufgabe" data-act="video" data-id="${v.id}"><span class="th stern" aria-hidden="true">★</span><span class="grow"><b>${esc(v.task.text)}</b><span class="v3-meta">Aufgabe${v.task.deliverable==='foto'?' · Foto machen':''}</span></span><span class="v3-badge aufgabe">★</span></button>`:'';
     return `<button class="v3-lektion${v===jetzt?' jetzt':''}" data-act="video" data-id="${v.id}"><span class="th">${th?`<img src="${th}" alt="" loading="lazy">`:''}<i aria-hidden="true">${v.source.type==='bilder'?'📷':'▶'}</i></span><span class="grow"><b>${esc(v.title)}</b><span class="v3-meta">${[v.source.type==='bilder'?'Foto-Anleitung':'',(v.steps||[]).length?v.steps.length+' Schritte':'',v.zeit?v.zeit+' Min.':'',v.grundtechnik?'Grundtechnik':''].filter(Boolean).join(' · ')}</span></span><span class="v3-badge ${cls}" aria-label="${pr.done?'fertig':v===jetzt?'jetzt dran':'noch offen'}">${sym}</span></button>${auf}`; };
-  const liste=[1,2,3].map(n=>{ const g=vs.filter(v=>(+v.niveau||2)===n); return g.length?`<h2 class="v3-niv" style="--h:${NIV3[n][1]};--d:${NIV3[n][2]}"><span>${n}</span>${NIV3[n][0]}</h2>${g.map(zeile).join('')}`:''; }).join('');
+  const liste=gr.map(([name,g])=>`<h2 class="v3-niv" style="--h:${soft(a)};--d:#1C4A63"><span>${g.length}</span>${esc(name)}</h2>${g.map(zeile).join('')}`).join('');
   const mat=(jetzt||vs[0]||{}).material||[];
   app.innerHTML=`<div class="v3"><div class="v3-in">
     ${v3Kopf('<button class="v3-rund gross" data-act="back" aria-label="Zurück">←</button>',`<div class="v3-thema-titel"><small>${raumOf(a.id).name}</small><h1>${esc(a.name)}</h1></div>`)}

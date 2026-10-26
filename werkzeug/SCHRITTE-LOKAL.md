@@ -37,7 +37,8 @@ Genau eine Datei: `werkzeug/entwurf/<VIDEOID>/video.json`
 ```
 
 - `id`: Kürzel wie im Brief vorgeschlagen (`ex-…` für Experimente, sonst `zw-…`), Kleinbuchstaben, keine Umlaute.
-- `areaId`: eines von naehen, sticken, haekeln, stricken, weben, knuepfen, wickeln, filzen, falten, schneiden, holz, schnitzen, formen, drucken, experimente.
+- `areaId`: eines von naehen, sticken, haekeln, stricken, weben, perlen, knuepfen, wickeln, filzen, falten, schneiden, holz, schnitzen, formen, drucken, experimente. Perlentiere, Perlenweben und Perlenschmuck gehören zu `perlen`.
+- `gruppe`: Projektart innerhalb des Themas, z. B. «Perlentiere aus Draht», «Nagelbilder», «Glasieren». Nimm eine Gruppe, die es im Thema in `schule/schule.json` schon gibt; nur wenn keine passt, eine neue kurze (2–4 Wörter).
 - `zeit` (optional): Arbeitszeit des Projekts in Minuten, nur bei Mini-Projekten setzen, die ein Kind in höchstens 15 Minuten fertig hat (z. B. `"zeit": 10`). Nicht die Videolänge.
 - `stufen`: Klassen 1–6, für die das Video passt (meist 2–3 Werte).
 - `niveau`: Schwierigkeit 1 = leicht (ab 1./2. Klasse, wenige klare Schritte, Schere/Leim/Wolle, kein gefährliches Werkzeug), 2 = mittel (etwa 3./4. Klasse, Nadel und Faden, Grundmaschen, Bohren mit Hilfe), 3 = anspruchsvoll (eher 5./6. Klasse: Säge, Feile, Lötkolben, Bügeleisen, Nähmaschine, Cutter, lange Abfolge). Die App sortiert danach und zeigt 1–3 Punkte.

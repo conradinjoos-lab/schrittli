@@ -13,7 +13,7 @@ from pathlib import Path
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 WURZEL = Path(__file__).resolve().parent.parent
 ANL = WURZEL / 'anleitungen'
-AREAS = 'naehen sticken haekeln stricken weben knuepfen wickeln filzen falten schneiden holz schnitzen formen drucken experimente'.split()
+AREAS = 'naehen sticken haekeln stricken weben perlen knuepfen wickeln filzen falten schneiden holz schnitzen formen drucken experimente'.split()
 FELDER = {'text', 'bilder', 'bildtext', 'achtung', 'tipp', 'frage', 'zeigen', 'vorlage'}
 
 
