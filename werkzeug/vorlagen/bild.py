@@ -92,33 +92,65 @@ def ringe(g, tol):
 
 
 def quantisieren(rgb, maske, k, glatt):
-    """Farben in der Figur auf k Farben reduzieren; gibt Etiketten (−1 = aussen) und die Palette zurück."""
+    """Farben in der Figur auf k Farben reduzieren. Gibt (etik_farbe, etik_linien, palette, schwarz_index) zurück:
+    etik_farbe  – Etiketten fürs farbige Zeichnen (−1 = aussen); schwarze Umrisslinien sind eine eigene Farbe (Index
+                  schwarz_index, None wenn das Bild keine hat) und werden NICHT weggeputzt, damit die Vorlage wie das
+                  Original schwarz umrandete Flächen hat.
+    etik_linien – gleiche Etiketten, aber dünne schwarze Linien der Nachbarfarbe zugeschlagen: daraus werden die
+                  Innenlinien (det) gerechnet, die dann in der Mitte der Linie liegen statt doppelt an ihren Rändern."""
     bild = rgb.astype(np.uint8)
     if glatt: bild = cv2.bilateralFilter(bild, 9, 60, 9)
     else: bild = cv2.medianBlur(bild, 3)
     lab = cv2.cvtColor(bild, cv2.COLOR_RGB2LAB).astype(np.float32)
-    daten = lab[maske]
+    flaeche = maske.sum()
+    # Schwarz: dunkel und farblos (L < 35 von 100, wenig Buntheit) – Umrisslinien, Augen, Schnauz
+    chroma = np.hypot(lab[..., 1] - 128, lab[..., 2] - 128)
+    schwarz = maske & (lab[..., 0] < 90) & (chroma < 30)
+    schwarz = cv2.morphologyEx(schwarz.astype(np.uint8), cv2.MORPH_OPEN, np.ones((3, 3), np.uint8)).astype(bool)
+    lab_s, ns = ndimage.label(schwarz)
+    if ns:
+        gr = np.bincount(lab_s.ravel()); gr[0] = 0
+        schwarz = np.isin(lab_s, np.nonzero(gr >= flaeche*.0003)[0])
+    if schwarz.sum() < flaeche*.004: schwarz[:] = False                # zu wenig Schwarz: keine Linien-Ebene
+    hat_schwarz = bool(schwarz.any())
+    kk = max(1, k - 1) if hat_schwarz else k
+    rest = maske & ~schwarz
+    daten = lab[rest]
     krit = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, .5)
-    _, et, zentren = cv2.kmeans(daten, k, None, krit, 5, cv2.KMEANS_PP_CENTERS)
-    etik = np.full(maske.shape, -1, np.int32); etik[maske] = et.ravel()
-    palette = cv2.cvtColor(zentren.reshape(1, -1, 3).astype(np.uint8), cv2.COLOR_LAB2RGB)[0]
-    # Fitzel weg: jede Farbe öffnen, kleine Stücke löschen, Löcher mit der nächsten Farbe füllen
-    flaeche = maske.sum(); r = max(1, int(round(np.sqrt(flaeche)/120)))
+    _, et, zentren = cv2.kmeans(daten, kk, None, krit, 5, cv2.KMEANS_PP_CENTERS)
+    etik = np.full(maske.shape, -1, np.int32); etik[rest] = et.ravel()
+    palette = list(cv2.cvtColor(zentren.reshape(1, -1, 3).astype(np.uint8), cv2.COLOR_LAB2RGB)[0])
+    si = None
+    if hat_schwarz:
+        si = kk; etik[schwarz] = si
+        palette.append(np.clip(rgb[schwarz].mean(0), 0, 40).astype(np.uint8))   # fast schwarz, Mittel der Linienpixel
+    palette = np.array(palette)
+    # Fitzel weg: jede Farbe öffnen, kleine Stücke löschen, Löcher mit der nächsten Farbe füllen (Schwarz bleibt unangetastet)
+    r = max(1, int(round(np.sqrt(flaeche)/200)))
     kern = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2*r + 1, 2*r + 1))
     gueltig = np.zeros_like(maske)
-    for i in range(k):
+    for i in range(kk):
         m = cv2.morphologyEx((etik == i).astype(np.uint8), cv2.MORPH_OPEN, kern).astype(bool)
         lab_i, n = ndimage.label(m)
         if n:
             gr = np.bincount(lab_i.ravel()); gr[0] = 0
-            m = np.isin(lab_i, np.nonzero(gr >= flaeche*.002)[0])
+            m = np.isin(lab_i, np.nonzero(gr >= flaeche*.0007)[0])
         gueltig |= m; etik[(etik == i) & ~m] = -2
-    # −2 (weggeputzt) bekommt die nächste gültige Farbe
+    # −2 (weggeputzt) bekommt die nächste gültige Farbe (nie Schwarz, sonst würden die Linien dicker)
     _, idx = ndimage.distance_transform_edt(~gueltig, return_indices=True)
     voll = etik[idx[0], idx[1]]
-    etik = np.where(maske, voll, -1)
-    # gleiche Farben nach dem Putzen leer? Palette entsprechend behalten, Reihenfolge nach Fläche
-    return etik, palette
+    etik_farbe = np.where(maske, np.where(schwarz, si if si is not None else -1, voll), -1)
+    etik_linien = etik_farbe
+    if hat_schwarz:
+        # dünne schwarze Linien (schmaler als ~1/60 der Figur) der Nachbarfarbe zuschlagen; dicke schwarze Flächen bleiben
+        t = max(2, int(round(np.sqrt(flaeche)/60)))
+        kern_t = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2*t + 1, 2*t + 1))
+        dick = cv2.morphologyEx(schwarz.astype(np.uint8), cv2.MORPH_OPEN, kern_t).astype(bool)
+        duenn = schwarz & ~dick
+        basis = maske & ~duenn
+        _, idx2 = ndimage.distance_transform_edt(~basis, return_indices=True)
+        etik_linien = np.where(maske, etik_farbe[idx2[0], idx2[1]], -1)
+    return etik_farbe, etik_linien, palette, si
 
 
 def hexf(c): return '#%02x%02x%02x' % tuple(int(v) for v in c)
@@ -139,21 +171,31 @@ def form(fid, name, pfad, k, glatt):
     d = ringe(g, 0)
     bx0, by0, bx1, by1 = g.bounds
 
-    # Farbflächen, grosse zuerst (kleine liegen beim Zeichnen oben)
-    etik, palette = quantisieren(rgb, maske, k, glatt)
-    farben, grenzen = [], []
-    for i in np.argsort(-np.bincount(etik[etik >= 0], minlength=k)):
-        m = etik == i
-        if not m.any(): continue
-        teile = polygone(m, skala, (x0, y0))
-        if glatt:
+    # Farbflächen, grosse zuerst (kleine liegen beim Zeichnen oben), Schwarz (Umrisslinien) zuoberst
+    etik, etik_li, palette, si = quantisieren(rgb, maske, k, glatt)
+    reihenfolge = [i for i in np.argsort(-np.bincount(etik[etik >= 0], minlength=len(palette))) if i != si]
+    if si is not None: reihenfolge.append(si)
+
+    def flaechen(et, i, linien):
+        teile = polygone(et == i, skala, (x0, y0))
+        if glatt and not linien:
             weich = [p.buffer(glatt*.6, 8).buffer(-glatt*.6, 8) for p in teile]
             teile = [t for q in weich for t in getattr(q, 'geoms', [q]) if not t.is_empty]
+        elif glatt:                                                     # Linien nur schliessen, nie verdünnen
+            weich = [p.buffer(glatt*.3, 8).buffer(-glatt*.3, 8) for p in teile]
+            teile = [t for q in weich for t in getattr(q, 'geoms', [q]) if not t.is_empty]
         teile = [p.intersection(g) for p in teile]
-        rr = [r for p in teile for t in getattr(p, 'geoms', [p]) if t.geom_type == 'Polygon' and t.area > .2 for r in ringe(t, tol)]
-        if rr:
-            farben.append(dict(f=hexf(palette[i]), d=rr))
-            grenzen += [t.boundary for p in teile for t in getattr(p, 'geoms', [p]) if t.geom_type == 'Polygon']
+        return [t for p in teile for t in getattr(p, 'geoms', [p]) if t.geom_type == 'Polygon' and t.area > (.05 if linien else .2)]
+
+    farben, grenzen = [], []
+    for i in reihenfolge:
+        if not (etik == i).any(): continue
+        teile = flaechen(etik, i, i == si)
+        rr = [r for t in teile for r in ringe(t, tol*.5 if i == si else tol)]
+        if rr: farben.append(dict(f=hexf(palette[i]), d=rr))
+    # Grenzen für die Innenlinien aus dem Bild ohne dünne Linien (sonst lägen sie doppelt an beiden Linienrändern)
+    for i in range(len(palette)):
+        if (etik_li == i).any(): grenzen += [t.boundary for t in flaechen(etik_li, i, False)]
     # Innenlinien: Grenzen zwischen den Farben, ohne den Umriss selbst
     innen = g.buffer(-.6)
     li = unary_union(grenzen).intersection(innen) if grenzen else LineString()
