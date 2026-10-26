@@ -45,7 +45,10 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .form[aria-pressed="true"] svg path{fill:var(--surface)}
 .form:hover{border-color:var(--acc)}
 .form:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
-.seite-rechts{position:sticky;top:12px;display:flex;flex-direction:column;gap:14px}
+.seite-rechts{display:flex;flex-direction:column;gap:14px;align-self:stretch}
+/* Die Vorschau klebt oben, die Einstellungen laufen darunter durch: das Blatt bleibt beim Einstellen im Blick */
+.karte-vorschau{position:sticky;top:12px;z-index:3;box-shadow:0 -12px 0 6px var(--bg),0 8px 22px rgba(0,0,0,.14)}
+.karte-vorschau h2{margin-bottom:8px}
 .feld{margin-bottom:14px}
 .feld>label,.feld>.lbl{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
 .masse{display:flex;align-items:center;gap:8px}
@@ -106,10 +109,21 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 .farben b{font-weight:700;color:var(--ink);margin-right:2px}
 .hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
 .warn{color:var(--bad)}
-.vorschau{display:flex;flex-direction:column;gap:14px;align-items:center}
-.vorschau svg{display:block;width:100%;height:auto;background:var(--papier);border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
-.mehr{font-size:14px;color:var(--muted);text-align:center}
-@media (max-width:860px){main{grid-template-columns:minmax(0,1fr)}.seite-rechts{position:static}h1{font-size:24px}}
+.vorschau{--hmax:44vh;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:flex-start}
+.vorschau svg{display:block;flex:none;width:min(100%,calc(var(--hmax)*.7071));height:auto;aspect-ratio:210/297;background:var(--papier);border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+.vorschau:has(svg+svg) svg{width:min(calc(50% - 6px),calc(var(--hmax)*.7071))}
+.mehr{flex-basis:100%;margin:0;font-size:14px;color:var(--muted);text-align:center}
+/* Breiter Bildschirm: drei Spalten, das Blatt ganz rechts in voller Höhe */
+@media (min-width:1180px){
+  .kopf{max-width:1500px}
+  main{max-width:1500px;grid-template-columns:minmax(0,1fr) 340px minmax(320px,410px)}
+  .seite-rechts{display:contents}
+  .karte-einst{grid-column:2;grid-row:1}
+  .karte-vorschau{grid-column:3;grid-row:1;align-self:start;max-height:calc(100vh - 24px);overflow-y:auto;box-shadow:none}
+  .vorschau{--hmax:calc(100vh - 110px)}
+  .vorschau:has(svg+svg) svg{width:min(100%,calc(var(--hmax)*.7071))}
+}
+@media (max-width:860px){main{grid-template-columns:minmax(0,1fr)}h1{font-size:24px}.karte-vorschau{top:0;padding:10px 12px;border-radius:0 0 18px 18px}.karte-vorschau h2{font-size:15px;margin-bottom:6px}.vorschau{--hmax:34vh}}
 @media (max-width:480px){.kats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.k-bilder{grid-template-columns:repeat(2,36px)}.k-bilder svg,.k-bilder img{width:36px;height:36px}.raster{grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px}.form{min-height:80px;font-size:12px}.form svg,.form img{width:40px;height:40px}}
 /* Abpausen am Bildschirm: immer hell, damit die Linie durchs Papier scheint */
 .pausen-auf{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:10px;min-height:48px}
@@ -156,7 +170,11 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 <main>
   <section class="karte" aria-label="Form wählen" id="formen"></section>
   <div class="seite-rechts">
-    <section class="karte" aria-label="Einstellungen">
+    <section class="karte karte-vorschau" aria-label="Vorschau">
+      <h2>Vorschau</h2>
+      <div class="vorschau" id="vorschau"></div>
+    </section>
+    <section class="karte karte-einst" aria-label="Einstellungen">
       <div class="feld">
         <span class="lbl" id="lbl-groesse">Grösse (Breite × Höhe)</span>
         <div class="masse" role="group" aria-labelledby="lbl-groesse">
@@ -211,10 +229,6 @@ input[type=range]{width:100%;accent-color:var(--acc)}
       <button type="button" class="knopf pausen-auf" id="pausen-auf"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 8.5c-1.2-1.7-4-1.1-4 1 0 2 2.4 3.6 4 5 1.6-1.4 4-3 4-5 0-2.1-2.8-2.7-4-1z"/></svg><span>Auf dem Bildschirm abpausen</span></button>
       <p class="info" id="info" aria-live="polite"></p>
       <p class="hinweis">Beim Drucken «Tatsächliche Grösse» oder 100 % wählen, nicht «An Seite anpassen». Die 5-cm-Linie unten auf dem Blatt zeigt, ob es stimmt.</p>
-    </section>
-    <section class="karte" aria-label="Vorschau">
-      <h2>Vorschau</h2>
-      <div class="vorschau" id="vorschau"></div>
     </section>
   </div>
 </main>
@@ -402,7 +416,7 @@ function auswahl(){
       const f=form(),l=Math.max(S.b,S.h);           // längste Seite bleibt, Verhältnis der neuen Form
       S.lock=true;S.b=l*f.w/100;S.h=l*f.h/100;
       felder();zeichnen();
-      if(matchMedia('(max-width:860px)').matches)$('b').closest('.karte').scrollIntoView({behavior:'smooth',block:'start'});
+      if(matchMedia('(max-width:860px)').matches)document.querySelector('.seite-rechts').scrollIntoView({behavior:'smooth',block:'start'});
     },()=>alert('Diese Figur konnte nicht geladen werden. Ist das Internet verbunden?')).finally(()=>k.classList.remove('laedt'));
   });
 }
