@@ -2,6 +2,7 @@
 <html lang="de-CH">
 <head>
 <meta charset="utf-8">
+<script src="../../unterricht.js"></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Schritt für Schritt · Perlentiere</title>
 <meta name="description" content="Flache Perlentiere aus Draht: Tier wählen, Muster drucken, Reihe für Reihe nachfädeln. Eigene Vorlagen für den TTG-Unterricht.">
@@ -94,7 +95,7 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 </main>
 <div id="druck"></div>
 <script src="figuren.js?v=3"></script>
-<script src="bearbeiten.js?v=3"></script>
+<script src="bearbeiten.js?v=4"></script>
 <script>
 // Eigene Muster von Schritt für Schritt. Jede Reihe ist eine Zeichenkette, ein Buchstabe pro Perle (Farbe).
 // Beine: nach Reihe r mit jedem Drahtende n Perlen und f Fussperlen auffädeln, zurück durch die n Perlen.
@@ -187,10 +188,10 @@ const S={tier:'eidechse',perle:'r3',klasse:PerlenEditor.klasseLesen()};
 const eigene=new Map();
 const passt=t=>PerlenEditor.reihenbreite(t)<=PerlenEditor.maximum(S.klasse);
 const fuerKlasse=t=>({...t,grundstufe:t.grundstufe||t.stufe,stufe:PerlenEditor.schwierigkeit(t,S.klasse)});
-const speicherKey=t=>'schrittli.perlen.'+t.id+(t.version?'.v'+t.version:'')+'.klasse'+S.klasse;
+const speicherKey=t=>'schrittli.perlen.'+t.id+(t.version?'.v'+t.version:'')+'.klasse'+S.klasse+(window.Unterricht?.active?'.unterricht.'+window.Unterricht.groupId:'');
 function aktuellesTier(){
-  let original=TIERE.find(t=>t.id===S.tier)||TIERE[1];
-  if(!passt(original)){original=TIERE[1];S.tier=original.id}
+  let original=TIERE.find(t=>t.id===S.tier)||TIERE.find(passt);
+  if(!passt(original)){original=TIERE.find(passt);S.tier=original.id}
   const key=speicherKey(original);
   if(!eigene.has(key)){
     try{const t=JSON.parse(localStorage.getItem(key));
@@ -439,7 +440,7 @@ function liste(){
   $('klasse').innerHTML=Object.entries(PerlenEditor.GRENZEN).map(([k,max])=>`<option value="${k}">${k}. Klasse · bis ${max} Perlen pro Reihe</option>`).join('');
   $('klasse').value=String(S.klasse);
   $('klasse').addEventListener('change',()=>{S.klasse=PerlenEditor.klasse($('klasse').value);anzeige=48;try{localStorage.setItem('schrittli.perlen.klasse',S.klasse)}catch(e){}zeichnen();auswahl()});
-  $('gruppe').innerHTML+=[...gruppen].map(g=>`<option>${htmlText(g)}</option>`).join('');
+  $('gruppe').innerHTML+=[...gruppen].filter(g=>TIERE.some(t=>gruppeVon(t)===g)).map(g=>`<option>${htmlText(g)}</option>`).join('');
   $('suche').addEventListener('input',()=>{anzeige=48;auswahl()});
   $('gruppe').addEventListener('change',()=>{anzeige=48;auswahl()});
   $('mehr').addEventListener('click',()=>{anzeige+=48;auswahl()});
@@ -468,10 +469,32 @@ function zeichnen(){
 const q=new URLSearchParams(location.search);
 if(TIERE.some(t=>t.id===q.get('tier')))S.tier=q.get('tier');
 if(PERLEN[q.get('perle')])S.perle=q.get('perle');
-liste();zeichnen();
+function perlenStart(){
+ const p=window.Unterricht?.policy;
+ if(p&&p.mode!=='free'){
+  if(p.mode!=='beads')return;
+  S.klasse=p.grade||S.klasse;
+  TIERE.splice(0,TIERE.length,...TIERE.filter(t=>p.ids.includes(t.id)&&passt(t)));
+  if(!TIERE.length){Unterricht.unavailable();return;}
+  if(!TIERE.some(t=>t.id===S.tier))S.tier=TIERE[0].id;
+  document.querySelector('.kopf p').textContent=p.title;
+  document.querySelectorAll('.kopf a').forEach(a=>a.hidden=true);
+  $('klasse').disabled=true;$('klasse').hidden=true;document.querySelector('label[for=klasse]').hidden=true;
+  if(p.simple){$('gruppe').hidden=true;document.querySelector('label[for=gruppe]').hidden=true;$('suche').hidden=true;document.querySelector('label[for=suche]').hidden=true;}
+  if(p.resize===false)$('perlen').closest('.feld').hidden=true;
+  $('anpassen').textContent=p.resize===false&&p.recolor===false?'Muster gross ansehen':p.resize===false?'Farben ändern · Vollbild':p.recolor===false?'Breite ändern · Vollbild':'Farben und Breite · Vollbild';
+  if(p.simple){$('klassen-grenze').hidden=true;$('figuren-hinweis').hidden=true;}
+  if(p.ids.length===1)document.querySelector('[aria-label="Tier wählen"]').hidden=true;
+ }
+ liste();zeichnen();
+ if(p?.simple)$('vergleich').hidden=true;
+ window.Unterricht?.toolReady();
+}
+if(window.Unterricht?.active)Unterricht.ready.then(perlenStart).catch(()=>Unterricht.unavailable());else perlenStart();
 $('drucken').addEventListener('click',()=>window.print());
 $('anpassen').addEventListener('click',()=>PerlenEditor.oeffnen({
   muster:aktuellesTier(),original:fuerKlasse(TIERE.find(t=>t.id===S.tier)),klasse:S.klasse,palette:FARBE,perle:PERLEN[S.perle],geometrie,draehte,zaehlen,
+  resize:window.Unterricht?.policy?.resize!==false,recolor:window.Unterricht?.policy?.recolor!==false,
   speichern:t=>{if(!passt(t))return false;const key=speicherKey(t);eigene.set(key,t);let ok=true;try{localStorage.setItem(key,JSON.stringify(t))}catch(e){ok=false}zeichnen();return ok;}
 }));
 </script>

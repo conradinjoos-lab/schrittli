@@ -3,10 +3,11 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const root = path.resolve(__dirname, '..');
+require('../werkzeug/unterricht-katalog.cjs')();
 let head = fs.readFileSync(path.join(__dirname, 'p1.html'), 'utf8');
-const code = fs.readFileSync(path.join(__dirname, 'p2.js'), 'utf8').replace(/boot\(\);\s*$/, '') + '\n' + ['rueckmeldung.js', 'schulwerke.js'].map(name => fs.readFileSync(path.join(__dirname, name), 'utf8')).join('\n') + '\nboot();\n';
+const code = fs.readFileSync(path.join(__dirname, 'p2.js'), 'utf8').replace(/boot\(\);\s*$/, '') + '\n' + ['rueckmeldung.js', 'schulwerke.js', 'unterricht.js'].map(name => fs.readFileSync(path.join(__dirname, name), 'utf8')).join('\n') + '\nboot();\n';
 new vm.Script(code, {filename: 'quelle/p2.js'});
-for (const name of ['player-design.css', 'entdecken-design.css', 'rueckmeldung.css', 'schulwerke.css']) {
+for (const name of ['player-design.css', 'entdecken-design.css', 'rueckmeldung.css', 'schulwerke.css', 'unterricht.css']) {
   const file = path.join(__dirname, name);
   if (fs.existsSync(file)) head = head.replace('</style>', '\n' + fs.readFileSync(file, 'utf8') + '\n</style>');
 }
@@ -15,7 +16,8 @@ fs.writeFileSync(path.join(root, 'index.html'), head + code + end);
 const school = head
   .replace('<title>Schritt für Schritt</title>', '<title>Schritt für Schritt · Schule</title>')
   .replace('apple-mobile-web-app-title" content="Schritt für Schritt"', 'apple-mobile-web-app-title" content="Schritt für Schritt · Schule"')
-  .replaceAll('href="grafik/marke/', 'href="../grafik/marke/');
+  .replaceAll('href="grafik/marke/', 'href="../grafik/marke/')
+  .replace('src="unterricht.js"', 'src="../unterricht.js"');
 fs.writeFileSync(path.join(root, 'schule/index.html'), school + 'window.SCHULE=true;\n' + code + end);
 for (const school of [false, true]) {
   const base = school ? '../grafik/marke/' : 'grafik/marke/';

@@ -42,3 +42,8 @@ migrations_dir = "sammlung-migrations"
 name = "SAMMLUNG_LIMIT"
 namespace_id = "2026102702"
 simple = { limit = 120, period = 60 }
+
+[[ratelimits]]
+name = "UNTERRICHT_LIMIT"
+namespace_id = "2026102703"
+simple = { limit = 60, period = 60 }

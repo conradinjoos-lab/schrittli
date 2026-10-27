@@ -15,7 +15,7 @@ async function bounded(req,max){
  const bytes=new Uint8Array(length);let offset=0;for(const c of chunks){bytes.set(c,offset);offset+=c.length;}return bytes;
 }
 async function bodyJSON(req){try{return JSON.parse(new TextDecoder().decode(await bounded(req,4096)));}catch(e){if(e.status)throw e;fail('Ungültige Eingabe.',400);}}
-async function teacher(req){
+export async function teacher(req){
  const token=bearer(req);if(!token||TOKEN.test(token))fail('Bitte mit GitHub anmelden.',401);
  const r=await fetch('https://api.github.com/user',{headers:{Authorization:'Bearer '+token,Accept:'application/vnd.github+json','User-Agent':'schrittli-sammlung'},redirect:'manual',signal:AbortSignal.timeout(10000)});
  if(!r.ok)fail('Bitte erneut anmelden.',r.status===401?401:503);

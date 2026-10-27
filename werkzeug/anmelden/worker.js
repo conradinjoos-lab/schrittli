@@ -22,10 +22,12 @@ async function token(app,felder){
 
 import {handleFeedback,cleanFeedback} from './feedback.js';
 import {handleSammlung} from './sammlung.js';
+import {handleUnterricht} from './unterricht.js';
 export default {async scheduled(event,env){await cleanFeedback(env);},async fetch(req,env){
  const u=new URL(req.url),basis=u.origin,p=u.pathname,q=u.searchParams;
  if(p.startsWith('/feedback/'))return handleFeedback(req,env);
  if(p.startsWith('/sammlung/'))return handleSammlung(req,env);
+ if(p.startsWith('/unterricht/'))return handleUnterricht(req,env);
  const her=req.headers.get('Origin')||'';
  if(req.method==='OPTIONS')return new Response(null,{headers:{'Access-Control-Allow-Origin':MELDE_HER.has(her)?her:SEITE,'Access-Control-Allow-Methods':'GET, POST','Access-Control-Allow-Headers':'Content-Type, Authorization','Access-Control-Max-Age':'86400'}});
  /* Fehler melden aus der App: annehmen ohne Anmeldung (höchstens 20 pro Stunde und Adresse), lesen und abhaken nur mit Schreibrecht auf schrittli */

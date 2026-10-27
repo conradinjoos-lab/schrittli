@@ -183,7 +183,17 @@ const W=(()=>{
   }
  }
 
- return {LOKAL,bereit,abmelden,liste,daten,bild,speichern,veroeffentlichen,jsonText,werke,werkBild,meldungen,erledigt,feedback,sammlung,
+ async function unterricht(pfad,body){
+  if(!/^(gruppen|erstellen|freigabe|geraete|geraet-name|favoriten|favorit|favorit-entfernen)(\?[^#]*)?$/.test(pfad))throw new Error('Ungültiger Unterrichtsaufruf');
+  if(!an.token)throw new Error('Bitte mit GitHub anmelden.');
+  if(an.ablauf&&Date.now()>an.ablauf-120000)await erneuern();
+  for(let i=0;i<2;i++){
+   const r=await fetch(ANMELDEN+'/unterricht/'+pfad,{method:body?'POST':'GET',headers:{Authorization:'Bearer '+an.token,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined,cache:'no-store',credentials:'omit',redirect:'error',referrerPolicy:'no-referrer',signal:AbortSignal.timeout(12000)});
+   if(r.status===401&&i===0&&await erneuern())continue;
+   const d=await r.json();if(!r.ok)throw Object.assign(new Error(d.fehler||'Die Verbindung ist unterbrochen.'),{status:r.status});return d;
+  }
+ }
+ return {LOKAL,bereit,abmelden,liste,daten,bild,speichern,veroeffentlichen,jsonText,werke,werkBild,meldungen,erledigt,feedback,sammlung,unterricht,
   nachPub:LOKAL?'Noch committen und pushen.':'In etwa einer Minute in der Schul-App.',
   pause:LOKAL?1500:6000}  // Autospeichern: online seltener, jeder Stand ist ein Commit
 })();

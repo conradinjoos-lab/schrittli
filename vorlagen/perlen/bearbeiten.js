@@ -106,6 +106,10 @@
       <p class="pe-status" role="status" aria-live="polite"></p></div>`;
     document.body.append(d);d.showModal();
     const el=s=>d.querySelector(s),bild=el('.pe-bild'),regler=el('.pe-regler'),status=el('.pe-status'),slider=el('#pe-breite');
+    if(a.resize===false){slider.disabled=true;slider.hidden=true;el('label[for=pe-breite]').hidden=true;el('#pe-grenze').hidden=true;}
+    if(a.recolor===false){d.querySelectorAll('.pe-farben, #pe-von, #pe-nach, [data-tun=tauschen], label[for=pe-von], label[for=pe-nach], #pe-pinsel, .pe-regler h3').forEach(n=>n.hidden=true);}
+    if(a.resize===false&&a.recolor===false){regler.hidden=true;regler.disabled=true;}
+    if(a.resize===false||a.recolor===false)el('[data-tun=original]').hidden=true;
     function passend(){const svg=bild.querySelector('svg');if(svg)svg.style.width=Math.max(100,Math.min(bild.clientWidth-32,(bild.clientHeight-32)*seitenverhaeltnis))*zoom/100+'px'}
     const beobachter=new ResizeObserver(passend);beobachter.observe(bild);
     function sichern(){behalten=a.speichern(kopie(t))!==false;status.textContent=gesperrt?'Gesperrt · Du kannst das Muster anschauen und vergrössern.':behalten?(a.lokal===false?'Deine Änderungen sind in der Vorschau übernommen.':'Deine Änderungen sind auf diesem Gerät gespeichert.'):'Deine Änderungen gelten für diese Sitzung; der Gerätespeicher ist nicht verfügbar.'}
@@ -148,11 +152,12 @@
     bild.addEventListener('pointermove',e=>{if(malen)faerben(e)});
     const fertigMalen=()=>{if(malen){malen=false;sichern()}};
     bild.addEventListener('pointerup',fertigMalen);bild.addEventListener('pointercancel',fertigMalen);
-    slider.addEventListener('input',()=>{if(gesperrt)return;if(!breitBasis){merken();breitBasis=kopie(t)}t=breite(breitBasis,Math.min(limit,+slider.value));t.stufe=schwierigkeit(t,schulklasse);zeichnen()});
+    slider.addEventListener('input',()=>{if(gesperrt||a.resize===false)return;if(!breitBasis){merken();breitBasis=kopie(t)}t=breite(breitBasis,Math.min(limit,+slider.value));t.stufe=schwierigkeit(t,schulklasse);zeichnen()});
     slider.addEventListener('change',()=>{if(gesperrt)return;breitBasis=null;sichern()});
     function schliessen(){
       if(gesperrt)return;
       sichern();beobachter.disconnect();d.close();d.remove();aktiv=null;
+      window.removeEventListener?.('unterricht:leave',unterrichtWechsel);
       if(!warVollbild&&document.fullscreenElement)document.exitFullscreen?.().catch(()=>{});
       vorFokus?.focus();
     }
@@ -160,11 +165,13 @@
     d.addEventListener('click',e=>{
       const b=e.target.closest('button');if(!b)return;const tun=b.dataset.tun;
       if(tun==='sperren'){
-        gesperrt=!gesperrt;malen=false;breitBasis=null;d.dataset.gesperrt=String(gesperrt);regler.disabled=gesperrt;regler.hidden=gesperrt;
+        gesperrt=!gesperrt;malen=false;breitBasis=null;d.dataset.gesperrt=String(gesperrt);regler.disabled=gesperrt||(a.resize===false&&a.recolor===false);regler.hidden=regler.disabled;
         b.textContent=gesperrt?'Entsperren':'Sperren';el('[data-tun=fertig]').hidden=gesperrt;zeichnen();sichern();return;
       }
       if(tun==='kleiner'||tun==='groesser'){zoom=Math.max(60,Math.min(250,zoom+(tun==='kleiner'?-20:20)));zeichnen();return}
       if(gesperrt)return;
+      if(a.recolor===false&&(b.dataset.farbe||tun==='tauschen'))return;
+      if((a.resize===false||a.recolor===false)&&tun==='original')return;
       if(b.dataset.farbe){pinsel=pinsel===b.dataset.farbe?null:b.dataset.farbe;zeichnen();return}
       if(tun==='tauschen'){const von=el('#pe-von').value,nach=el('#pe-nach').value;if(von===nach)return;merken();t=tauschen(t,von,nach);zeichnen();sichern()}
       if(tun==='zurueck'&&verlauf.length){t=verlauf.pop();breitBasis=null;zeichnen();sichern()}
@@ -172,6 +179,8 @@
       if(tun==='fertig')schliessen();
     });
     zeichnen();el('[data-tun=sperren]').focus();
+    const unterrichtWechsel=()=>{if(aktiv===d){gesperrt=false;schliessen();}};
+    window.addEventListener?.('unterricht:leave',unterrichtWechsel,{once:true});
     if(!warVollbild)document.documentElement.requestFullscreen?.().catch(()=>{});
   }
   window.PerlenEditor={oeffnen,gueltig,breite,tauschen,GRENZEN,klasse,klasseLesen,maximum,reihenbreite,schwierigkeit,begrenzen,einpassen};

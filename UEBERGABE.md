@@ -1,5 +1,14 @@
 # Übergabe «Schritt für Schritt» – Stand 27.10.2026
 
+## Unterrichtsmodus (27.10.2026)
+
+- `unterricht.js` ist das gemeinsame Gate im Kopf beider Apps und aller Vorlagen-Werkzeuge. Eingeschriebene Geräte halten nur ihren Gruppenschlüssel; Freigaben werden nicht aus localStorage vertraut. Abruf alle 5 s, Lease maximal 90 s; offline/reload ohne bestätigte Freigabe geschlossen. Kein Schutz der öffentlichen Quelldateien oder des iPad-Betriebssystems.
+- `quelle/unterricht.js` prüft jeden Routerwechsel und zeigt nur freigegebene Projekte. Templates und Perlentiere filtern die Daten vor der sichtbaren Auswahl; direkte URLs, Druck, Kategorien und Editoren beachten dieselbe Freigabe. Gespeicherte Vorlagenzustände und Perlenarbeiten sind gruppenbezogen. Schulfortschritt bleibt nur bei eingeschriebenen Unterrichtsgeräten über Neuladen erhalten.
+- Lehrperson: `kontrolle/unterricht.html/.js/.css`, gleiche GitHub-Owner-Anmeldung wie die Fotosammlung. Gruppen, atomare Freigabe mit Revisionsprüfung, Favoriten, iPad-Rückmeldungen. `werkzeug/unterricht-katalog.cjs` erzeugt bei jedem App-Build die Metadaten aus den vorhandenen Veröffentlichungen; Klassenbreiten aus `PerlenEditor.GRENZEN`.
+- Backend: `werkzeug/anmelden/unterricht.js`, neue Tabellen in der vorhandenen SAMMLUNG-D1, Migration `0002_unterricht.sql`. Unterrichts- und Fotosammlungsschlüssel sind getrennt. Vor Veröffentlichung Migration remote anwenden, dann Worker deployen und Pages pushen.
+- Prüfungen: `npm run check` in `werkzeug/anmelden`; `node werkzeug/unterricht-ui-pruefen.cjs` mit lokalem Workers/D1 und vier getrennten Browserkontexten; bestehende Schulwerke-, Design- und Perlentests. Browserprüfungen ersetzen keinen echten iPad-Gerätetest. Screenshots unter ignoriertem/lokalem `output/unterricht/`.
+- Beim Beginn dieser Änderung wurden die zwischenzeitlich veröffentlichten Änderungen bis `7be18b3` übernommen, inklusive aktuellem iPad-Player und vereinfachten Perlenmustern. Primärcheckout `C:/Grok Code/schrittli` nicht überschreiben.
+
 ## Aktuell: grafische Überarbeitung vom 27.10.2026
 
 Der Nutzer hat die Umsetzung freigegeben und künstlerische Freiheit erteilt. Priorität: grosse echte Ergebnisbilder, kurze Texte für die 1./2. Klasse, sofort erkennbares Werkstück. Vorhandene Illustrationen dürfen ersetzt werden; Projektfotos sollen natürlich bleiben. Am 27.10.2026 wurde auch der Push auf die bestehende öffentliche GitHub-Pages-Seite ausdrücklich freigegeben. Die Überarbeitung umfasst:

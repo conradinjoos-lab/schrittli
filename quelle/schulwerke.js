@@ -118,7 +118,7 @@ function schulVerbindungsDialog(){
   verbinden:async(b,close,root)=>{const value=$('#sw-link',root).value.trim();const token=value.match(/(?:^|#|&)sammlung=([a-f0-9]{64})(?:&|$)/)?.[1]||value;b.disabled=true;try{await schulVerbinden(token);close();render();}catch(e){$('#sw-connect-error',root).textContent=e.message;b.disabled=false;}}
  });
 }
-function schulLehrerHtml(){return SCHULE?`<section class="panel"><h2>Gemeinsame Fotosammlung</h2><p data-schul-status>${esc(schulStatusText())}</p><div class="row"><button class="btn primary" data-act="schul-verbinden">iPads verbinden</button><a class="btn" href="../kontrolle/sammlung.html">Sammlung verwalten</a></div></section>`:'';}
+function schulLehrerHtml(){return SCHULE?`<section class="panel"><h2>Unterricht steuern</h2><p>Öffne einzelne Projekte, Themen oder ausgewählte Vorlagen auf den iPads deiner Klasse.</p><a class="btn primary" href="../kontrolle/unterricht.html">Unterricht öffnen</a></section><section class="panel"><h2>Gemeinsame Fotosammlung</h2><p data-schul-status>${esc(schulStatusText())}</p><div class="row"><button class="btn primary" data-act="schul-verbinden">iPads verbinden</button><a class="btn" href="../kontrolle/sammlung.html">Sammlung verwalten</a></div></section>`:'';}
 async function schulStart(){
  if(!SCHULE)return;
  try{const c=JSON.parse(localStorage.getItem(SCHULWERKE_KEY)||'null');if(c&&/^[a-f0-9]{64}$/.test(c.token)&&c.id)schulVerbindung=c;}catch{}

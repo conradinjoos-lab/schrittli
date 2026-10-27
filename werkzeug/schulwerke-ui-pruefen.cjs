@@ -4,7 +4,7 @@ const {Miniflare,convertV4MiniflareOptions}=require(process.env.MINIFLARE_MODULE
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'C:/Users/coni/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const root=path.resolve(__dirname,'..'),origin='https://conradinjoos-lab.github.io',base=origin+'/schrittli/',api='https://schrittli-anmelden.conradinjoos.workers.dev';
 (async()=>{
- const mf=new Miniflare(convertV4MiniflareOptions({modules:['worker.js','feedback.js','sammlung.js'].map(name=>({type:'ESModule',path:path.join(__dirname,'anmelden',name),contents:fs.readFileSync(path.join(__dirname,'anmelden',name),'utf8')})),compatibilityDate:'2026-10-01',kvNamespaces:['KV'],d1Databases:['SAMMLUNG'],outboundService:async()=>Response.json({login:'conradinjoos-lab'})}));
+ const mf=new Miniflare(convertV4MiniflareOptions({modules:['worker.js','feedback.js','sammlung.js','unterricht.js'].map(name=>({type:'ESModule',path:path.join(__dirname,'anmelden',name),contents:fs.readFileSync(path.join(__dirname,'anmelden',name),'utf8')})),compatibilityDate:'2026-10-01',kvNamespaces:['KV'],d1Databases:['SAMMLUNG'],outboundService:async()=>Response.json({login:'conradinjoos-lab'})}));
  let browser;const errors=[];
  try{
   const db=await mf.getD1Database('SAMMLUNG');await db.exec(fs.readFileSync(path.join(__dirname,'anmelden/sammlung-migrations/0001_sammlung.sql'),'utf8').replaceAll('\n',' '));

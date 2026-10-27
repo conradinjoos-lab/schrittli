@@ -171,9 +171,9 @@ function defaultState(){
     settings:{starsPerDay:3,earnStar:true,tts:true,autoRead:false,sv:3,spass:false,voice:'',slowRate:0.75,voiceControl:false,passTouches:false,pin:'1234',abend:'auto',schrift:'gross'}};
 }
 let S=load();
-function load(){ try{ const raw=localStorage.getItem(KEY); if(raw){ const s=JSON.parse(raw); const d=defaultState(); const st=Object.assign(d,s,{settings:Object.assign(d.settings,s.settings||{})}); if(SCHULE){ st.progress={}; st.settings.zuletzt=null; st.works=(st.works||[]).filter(w=>w.profileId==='klasse'); st.profiles=d.profiles; st.activeProfile='klasse'; st.areas=THEMEN.map(a=>Object.assign({},a)); st.videos=[]; st.settings.spass=false; st.settings.abend='tag'; return st; } (st.areas||[]).forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; }); st.videos=(st.videos||[]).filter(validVideo); if(!(st.settings.sv>=2)){ st.settings.autoRead=false; st.settings.sv=2; } if(!(st.settings.sv>=3)){ const d3=defaultState().areas; const add=(id,after)=>{ if(st.areas.some(a=>a.id===id)) return; const a=d3.find(x=>x.id===id); const i=st.areas.findIndex(x=>x.id===after); st.areas.splice(i>=0?i+1:st.areas.length,0,a); }; add('werken','basteln'); add('experimente','natur'); st.settings.sv=3; } return st; } }catch(e){} return defaultState(); }
+function load(){ try{ const raw=localStorage.getItem(KEY); if(raw){ const s=JSON.parse(raw); const d=defaultState(); const st=Object.assign(d,s,{settings:Object.assign(d.settings,s.settings||{})}); if(SCHULE){ if(!window.Unterricht?.active){st.progress={}; st.settings.zuletzt=null;} st.works=(st.works||[]).filter(w=>w.profileId==='klasse'); st.profiles=d.profiles; st.activeProfile='klasse'; st.areas=THEMEN.map(a=>Object.assign({},a)); st.videos=[]; st.settings.spass=false; st.settings.abend='tag'; return st; } (st.areas||[]).forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; }); st.videos=(st.videos||[]).filter(validVideo); if(!(st.settings.sv>=2)){ st.settings.autoRead=false; st.settings.sv=2; } if(!(st.settings.sv>=3)){ const d3=defaultState().areas; const add=(id,after)=>{ if(st.areas.some(a=>a.id===id)) return; const a=d3.find(x=>x.id===id); const i=st.areas.findIndex(x=>x.id===after); st.areas.splice(i>=0?i+1:st.areas.length,0,a); }; add('werken','basteln'); add('experimente','natur'); st.settings.sv=3; } return st; } }catch(e){} return defaultState(); }
 let saveT=null;
-function save(){ clearTimeout(saveT); saveT=setTimeout(()=>{ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ toast('Speichern nicht möglich (Speicher voll?)'); } },120); }
+function save(){ clearTimeout(saveT); const write=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ toast('Speichern nicht möglich (Speicher voll?)'); } }; if(window.Unterricht?.active)write();else saveT=setTimeout(write,120); }
 
 const profile=()=>S.profiles.find(p=>p.id===S.activeProfile)||S.profiles[0]||null;
 const areaOf=id=>S.areas.find(a=>a.id===id);
@@ -231,6 +231,7 @@ function modal(html,actions={},cls='',onClose=null){
   if(heading){heading.id='dialog-'+uid();dialog.setAttribute('aria-labelledby',heading.id);}else dialog.setAttribute('aria-label','Schritt für Schritt');
   let closed=false;
   const close=()=>{if(closed)return;closed=true;m.remove();if(onClose)onClose();if(previous&&previous.isConnected)previous.focus({preventScroll:true});};
+  m.unterrichtSchliessen=close;
   const focusable=()=>$$('button:not([disabled]),a[href],input:not([disabled]),textarea:not([disabled]),select:not([disabled]),[tabindex="0"]',m).filter(el=>el.getClientRects().length);
   m.addEventListener('keydown',e=>{
     if(e.key==='Escape'){e.preventDefault();e.stopPropagation();close();return;}
@@ -255,7 +256,7 @@ function fmGeraet(){ const u=navigator.userAgent; const os=/iPad/.test(u)||(/Mac
 function fmKontext(){ const k={app:SCHULE?'Schule':'Familie',seite:view.name,video:'',titel:'',schritt:0,zeit:null};
   try{ if(P&&P.v){ k.video=P.v.id; k.titel=P.v.title||''; k.schritt=P.steps.length?P.idx+1:0; k.zeit=Math.round(P.api.time()); } else if(ORT){ Object.assign(k,ORT()); }
     else { const p=view.params||{}; const v=p.v||p.video||null; if(v&&v.id){ k.video=v.id; k.titel=v.title||''; } else if(p.areaId||p.id) k.titel=String(p.areaId||p.id); } }catch(e){}
-  return {...k,adresse:location.pathname+location.hash.replace(/([#&](?:sammlung|klasse)=)[^&]*/g,'$1[verborgen]'),geraet:fmGeraet(),fenster:innerWidth+'×'+innerHeight}; }
+  return {...k,adresse:location.pathname+location.hash.replace(/([#&](?:sammlung|klasse|unterricht)=)[^&]*/g,'$1[verborgen]'),geraet:fmGeraet(),fenster:innerWidth+'×'+innerHeight}; }
 const FM_ARTEN=[['video','Video läuft nicht'],['stopp','Stopp an falscher Stelle'],['text','Text oder Material falsch'],['anderes','Etwas anderes']];
 function fehlerMelden(){ try{ if(P&&P.api) P.api.pause(); }catch(e){}
   const k=fmKontext(); const zeit=k.zeit!=null?` · ${Math.floor(k.zeit/60)}:${String(k.zeit%60).padStart(2,'0')}`:'';
@@ -275,6 +276,7 @@ function fmKnopf(){ const b=document.createElement('button'); b.className='fm-kn
 /* ============================== Router ============================== */
 const SCREENS={}; let view={name:'boot',params:{}}; let parentOpen=false,playerReturn=null;
 function go(name,params={}){
+  if(typeof unterrichtRoute==='function')({name,params}=unterrichtRoute(name,params));
   if(SCHULE&&(name==='parent'||name==='firstrun'||name==='profiles'))name='home';
   if(name==='player'&&['home','zimmer','area','entdecken','sammlung'].includes(view.name))playerReturn={name:view.name,params:{...view.params},scroll:window.scrollY||0};
   if(name==='school')playerReturn=null;
@@ -287,7 +289,7 @@ function backToIdeas(a,shared){
   if(back)requestAnimationFrame(()=>window.scrollTo(0,back.scroll));
 }
 function leaveScreen(){ if(typeof feedbackCleanup==='function')feedbackCleanup(); if(P){ P._fsLeaving=true; P.destroy(); P=null; } fsExit(); if(ED&&ED.api){ ED.api.destroy(); ED.api=null; } stopListening(); try{ speechSynthesis.cancel(); }catch(e){} }
-function render(){ const app=$('#app'); app.innerHTML=''; app.onclick=null; app.oninput=null; app.onchange=null; (SCREENS[view.name]||SCREENS.home)(app,view.params); if(typeof schulRefreshUI==='function')schulRefreshUI(); }
+function render(){ const app=$('#app'); app.innerHTML=''; app.onclick=null; app.oninput=null; app.onchange=null; (SCREENS[view.name]||SCREENS.home)(app,view.params); if(typeof schulRefreshUI==='function')schulRefreshUI(); if(typeof unterrichtNachRender==='function')unterrichtNachRender(); }
 function wire(app,actions){ app.onclick=e=>{ const b=e.target.closest('[data-act]'); if(!b||!app.contains(b)) return; const fn=actions[b.dataset.act]||(b.dataset.act==='schul-verbinden'?schulVerbindungsDialog:null)||(b.dataset.act==='klassewahl'?klasseWaehlen:b.dataset.act==='app-speichern'?appSpeichern:null); if(fn){ e.preventDefault(); fn(b,e); } }; }
 function kopf(title,{back,right='',sub=''}={}){ return `<div class="inner kopf" style="padding-left:max(16px,env(safe-area-inset-left,0px))">${back?`<a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a>`:''}<div class="schild"><h1>${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:''}</div><div class="kopf-rechts">${right}</div></div>`; }
 function bank(opts={}){ return `<div class="bank"><div class="inner deko-reihe"><span class="grow"></span></div><div class="platte"></div><div class="front"></div></div>`; }
@@ -317,6 +319,8 @@ SCREENS.boot=app=>{app.innerHTML=`<main class="v3"><div class="v3-loading" role=
 async function boot(){
   try{
   render();
+  if(window.Unterricht)await Unterricht.ready;
+  if(SCHULE&&window.Unterricht?.policy?.grade){S.settings.klasse=Unterricht.policy.grade;save();}
   await blobs.open();
   await Promise.all([loadContentFile().then(loadAnleitungen),loadMatFotos(),loadVorschau(),loadLp21()]);
   const school=parseSchool(); if(school){ go('school',{video:school}); return; }

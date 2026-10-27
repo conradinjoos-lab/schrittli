@@ -12,6 +12,17 @@ Kinder, Fortschritt und Familienwerke liegen im Browser des Geräts (localStorag
 
 ## Starten
 
+### Unterrichtsmodus für verbundene iPads
+
+Unter **Für Lehrpersonen → Unterricht öffnen** (`kontrolle/unterricht.html`) mit der bestehenden GitHub-Anmeldung anmelden. Eine Klasse/iPad-Gruppe erstellen und deren Gruppenlink oder QR-Code einmal auf jedem Kinder-iPad öffnen. Die Steuerseite bleibt auf dem Lehrpersonen-Gerät. Unverbundene Geräte behalten die normale Ansicht.
+
+Jede Gruppe startet geschlossen. Einzelnes Projekt, Thema, eigene Projektauswahl, Vorlagen-Kategorie oder Perlentiere auswählen; die Vorschau zeigt den Entwurf. Erst **Freigeben** übernimmt ihn auf die verbundenen iPads. Einzelne Inhalte öffnen direkt, mehrere bleiben eine begrenzte Auswahl. **Alles schliessen** zeigt die Warteseite; **Freies Entdecken** gibt die normale Anwendung frei. Favoriten werden online gespeichert. Grösse/Breite, Farbänderungen und die ganze Fotosammlung sind separat einstellbar.
+
+Die Freigabe wird alle fünf Sekunden geprüft. Die Lehrperson sieht die Übernahme je iPad und kann Gerätenamen vergeben. Ohne Internet läuft eine zuvor bestätigte Freigabe höchstens 90 Sekunden weiter; danach erscheint die Warteseite. Neuladen ohne Verbindung bleibt geschlossen. Fortschritt und gespeicherte Arbeiten bleiben erhalten. Bei einer Änderung während eines Perlen-Editors wird der Entwurf zuerst gespeichert.
+
+Der Gruppenlink erlaubt nur die Teilnahme; Steuerung und Favoriten verlangen die Lehrpersonen-Anmeldung. Gruppenlinks werden nur beim Erstellen ausgegeben und im Browser der Lehrperson gemerkt – für andere Geräte separat aufbewahren. Die Begrenzung steuert die Anwendung und ersetzt weder den geführten Zugriff des iPads noch Zugriffsschutz für die weiterhin öffentlichen statischen Dateien.
+
+
 - **Bauen:** `node quelle/bauen.cjs` erzeugt beide Ausgaben aus `quelle/p1.html`, `quelle/p2.js` und `quelle/player-design.css`. Auch `bash quelle/bauen.sh` verwendet denselben Build. Die erzeugten HTML-Dateien nicht direkt bearbeiten.
 - **Lokale Vorschau:** `node werkzeug/vorschau-server.cjs` starten. Familie: `http://127.0.0.1:8766/`, Schule: `http://127.0.0.1:8766/schule/`. Die Vorschau ist nur auf diesem Computer erreichbar; private Arbeitsordner werden nicht ausgeliefert.
 - **Prüfen:** `node werkzeug/design-pruefen.cjs --built` prüft Inhalte, lokale Bilder, beide Ausgaben, Filter und die Schrittlogik ohne Netzwerk. Ein echter Browser-/iPad-Test ist zusätzlich erforderlich.

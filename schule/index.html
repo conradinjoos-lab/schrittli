@@ -2,6 +2,7 @@
 <html lang="de-CH">
 <head>
 <meta charset="utf-8">
+<script src="../unterricht.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1268,6 +1269,12 @@ body:has(.v3){background:var(--werk-paper);color:var(--werk-ink);color-scheme:li
 .sw-projekt{display:flex;flex-direction:column;gap:6px;margin-top:12px;border-top:1px solid #deddd2;padding-top:10px;font-size:14px;text-transform:none;letter-spacing:0}
 .sw-projekt:empty{display:none}.sw-gemacht,.sw-mehr{color:#52675f;font-size:12px}.sw-person{display:flex;justify-content:space-between;gap:8px;align-items:center}.sw-person>span:first-child{overflow-wrap:anywhere}.sw-sterne{color:#96620c;white-space:nowrap;letter-spacing:1px;font-size:18px}.sw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px;margin:20px 0}.sw-werk{font:inherit;text-align:left;display:flex;flex-direction:column;gap:8px;border:1px solid #d9ded4;border-radius:20px;background:#fffdf7;padding:12px;color:#233f37;cursor:pointer;min-width:0}.sw-werk .sw-person{width:100%;flex-wrap:wrap}.sw-werk small{font-size:13px;color:#52675f}.sw-bild{display:block;aspect-ratio:1;background:#eeeee5;border-radius:12px;overflow:hidden}.sw-bild img{width:100%;height:100%;object-fit:contain}.sw-status{font-size:15px;color:#52675f;line-height:1.5}.sw-filter{display:flex;align-items:center;gap:12px;max-width:300px}.sw-label{display:block;margin:18px 0 8px}.sw-rating{border:0;padding:0;margin:24px 0 12px}.sw-rating legend{font-weight:700;line-height:1.4}.sw-rating-buttons{display:flex;gap:5px;margin-top:12px}.sw-star{font:inherit;font-size:38px;min-width:48px;min-height:54px;border:1px solid #c9cfc4;background:#fff9e7;color:#96620c;border-radius:12px;cursor:pointer}.sw-star[aria-pressed=true]{outline:3px solid #22594b;outline-offset:2px}.sw-rating p{font-size:14px}.sw-werk:focus-visible,.sw-star:focus-visible{outline:3px solid #22594b;outline-offset:4px}#sw-error,#sw-connect-error{color:#a22e20;font-size:15px}.sw-project-works{margin:24px auto;max-width:1180px;padding:0 20px}.kino .sw-project-works{display:none}@media(max-width:400px){.sw-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.sw-werk{padding:8px;font-size:14px}.sw-star{min-width:43px;font-size:32px}.sw-rating-buttons{gap:3px}}
 
+
+.u-klasse{max-width:650px;margin:60px auto;padding:24px;text-align:center;font-family:var(--font-body,system-ui)}
+.u-klasse h1{font-size:clamp(26px,5vw,40px);margin:12px 0}.u-klasse p{font-size:20px;line-height:1.5}.u-klasse>.btn{margin:10px}
+.u-kopf{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:16px 0 32px;color:#52675f}
+.u-kopf .btn{font-size:14px}html.u-aktiv [hidden]{display:none!important}
+
 </style>
 </head>
 <body>
@@ -1448,9 +1455,9 @@ function defaultState(){
     settings:{starsPerDay:3,earnStar:true,tts:true,autoRead:false,sv:3,spass:false,voice:'',slowRate:0.75,voiceControl:false,passTouches:false,pin:'1234',abend:'auto',schrift:'gross'}};
 }
 let S=load();
-function load(){ try{ const raw=localStorage.getItem(KEY); if(raw){ const s=JSON.parse(raw); const d=defaultState(); const st=Object.assign(d,s,{settings:Object.assign(d.settings,s.settings||{})}); if(SCHULE){ st.progress={}; st.settings.zuletzt=null; st.works=(st.works||[]).filter(w=>w.profileId==='klasse'); st.profiles=d.profiles; st.activeProfile='klasse'; st.areas=THEMEN.map(a=>Object.assign({},a)); st.videos=[]; st.settings.spass=false; st.settings.abend='tag'; return st; } (st.areas||[]).forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; }); st.videos=(st.videos||[]).filter(validVideo); if(!(st.settings.sv>=2)){ st.settings.autoRead=false; st.settings.sv=2; } if(!(st.settings.sv>=3)){ const d3=defaultState().areas; const add=(id,after)=>{ if(st.areas.some(a=>a.id===id)) return; const a=d3.find(x=>x.id===id); const i=st.areas.findIndex(x=>x.id===after); st.areas.splice(i>=0?i+1:st.areas.length,0,a); }; add('werken','basteln'); add('experimente','natur'); st.settings.sv=3; } return st; } }catch(e){} return defaultState(); }
+function load(){ try{ const raw=localStorage.getItem(KEY); if(raw){ const s=JSON.parse(raw); const d=defaultState(); const st=Object.assign(d,s,{settings:Object.assign(d.settings,s.settings||{})}); if(SCHULE){ if(!window.Unterricht?.active){st.progress={}; st.settings.zuletzt=null;} st.works=(st.works||[]).filter(w=>w.profileId==='klasse'); st.profiles=d.profiles; st.activeProfile='klasse'; st.areas=THEMEN.map(a=>Object.assign({},a)); st.videos=[]; st.settings.spass=false; st.settings.abend='tag'; return st; } (st.areas||[]).forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; }); st.videos=(st.videos||[]).filter(validVideo); if(!(st.settings.sv>=2)){ st.settings.autoRead=false; st.settings.sv=2; } if(!(st.settings.sv>=3)){ const d3=defaultState().areas; const add=(id,after)=>{ if(st.areas.some(a=>a.id===id)) return; const a=d3.find(x=>x.id===id); const i=st.areas.findIndex(x=>x.id===after); st.areas.splice(i>=0?i+1:st.areas.length,0,a); }; add('werken','basteln'); add('experimente','natur'); st.settings.sv=3; } return st; } }catch(e){} return defaultState(); }
 let saveT=null;
-function save(){ clearTimeout(saveT); saveT=setTimeout(()=>{ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ toast('Speichern nicht möglich (Speicher voll?)'); } },120); }
+function save(){ clearTimeout(saveT); const write=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ toast('Speichern nicht möglich (Speicher voll?)'); } }; if(window.Unterricht?.active)write();else saveT=setTimeout(write,120); }
 
 const profile=()=>S.profiles.find(p=>p.id===S.activeProfile)||S.profiles[0]||null;
 const areaOf=id=>S.areas.find(a=>a.id===id);
@@ -1508,6 +1515,7 @@ function modal(html,actions={},cls='',onClose=null){
   if(heading){heading.id='dialog-'+uid();dialog.setAttribute('aria-labelledby',heading.id);}else dialog.setAttribute('aria-label','Schritt für Schritt');
   let closed=false;
   const close=()=>{if(closed)return;closed=true;m.remove();if(onClose)onClose();if(previous&&previous.isConnected)previous.focus({preventScroll:true});};
+  m.unterrichtSchliessen=close;
   const focusable=()=>$$('button:not([disabled]),a[href],input:not([disabled]),textarea:not([disabled]),select:not([disabled]),[tabindex="0"]',m).filter(el=>el.getClientRects().length);
   m.addEventListener('keydown',e=>{
     if(e.key==='Escape'){e.preventDefault();e.stopPropagation();close();return;}
@@ -1532,7 +1540,7 @@ function fmGeraet(){ const u=navigator.userAgent; const os=/iPad/.test(u)||(/Mac
 function fmKontext(){ const k={app:SCHULE?'Schule':'Familie',seite:view.name,video:'',titel:'',schritt:0,zeit:null};
   try{ if(P&&P.v){ k.video=P.v.id; k.titel=P.v.title||''; k.schritt=P.steps.length?P.idx+1:0; k.zeit=Math.round(P.api.time()); } else if(ORT){ Object.assign(k,ORT()); }
     else { const p=view.params||{}; const v=p.v||p.video||null; if(v&&v.id){ k.video=v.id; k.titel=v.title||''; } else if(p.areaId||p.id) k.titel=String(p.areaId||p.id); } }catch(e){}
-  return {...k,adresse:location.pathname+location.hash.replace(/([#&](?:sammlung|klasse)=)[^&]*/g,'$1[verborgen]'),geraet:fmGeraet(),fenster:innerWidth+'×'+innerHeight}; }
+  return {...k,adresse:location.pathname+location.hash.replace(/([#&](?:sammlung|klasse|unterricht)=)[^&]*/g,'$1[verborgen]'),geraet:fmGeraet(),fenster:innerWidth+'×'+innerHeight}; }
 const FM_ARTEN=[['video','Video läuft nicht'],['stopp','Stopp an falscher Stelle'],['text','Text oder Material falsch'],['anderes','Etwas anderes']];
 function fehlerMelden(){ try{ if(P&&P.api) P.api.pause(); }catch(e){}
   const k=fmKontext(); const zeit=k.zeit!=null?` · ${Math.floor(k.zeit/60)}:${String(k.zeit%60).padStart(2,'0')}`:'';
@@ -1552,6 +1560,7 @@ function fmKnopf(){ const b=document.createElement('button'); b.className='fm-kn
 /* ============================== Router ============================== */
 const SCREENS={}; let view={name:'boot',params:{}}; let parentOpen=false,playerReturn=null;
 function go(name,params={}){
+  if(typeof unterrichtRoute==='function')({name,params}=unterrichtRoute(name,params));
   if(SCHULE&&(name==='parent'||name==='firstrun'||name==='profiles'))name='home';
   if(name==='player'&&['home','zimmer','area','entdecken','sammlung'].includes(view.name))playerReturn={name:view.name,params:{...view.params},scroll:window.scrollY||0};
   if(name==='school')playerReturn=null;
@@ -1564,7 +1573,7 @@ function backToIdeas(a,shared){
   if(back)requestAnimationFrame(()=>window.scrollTo(0,back.scroll));
 }
 function leaveScreen(){ if(typeof feedbackCleanup==='function')feedbackCleanup(); if(P){ P._fsLeaving=true; P.destroy(); P=null; } fsExit(); if(ED&&ED.api){ ED.api.destroy(); ED.api=null; } stopListening(); try{ speechSynthesis.cancel(); }catch(e){} }
-function render(){ const app=$('#app'); app.innerHTML=''; app.onclick=null; app.oninput=null; app.onchange=null; (SCREENS[view.name]||SCREENS.home)(app,view.params); if(typeof schulRefreshUI==='function')schulRefreshUI(); }
+function render(){ const app=$('#app'); app.innerHTML=''; app.onclick=null; app.oninput=null; app.onchange=null; (SCREENS[view.name]||SCREENS.home)(app,view.params); if(typeof schulRefreshUI==='function')schulRefreshUI(); if(typeof unterrichtNachRender==='function')unterrichtNachRender(); }
 function wire(app,actions){ app.onclick=e=>{ const b=e.target.closest('[data-act]'); if(!b||!app.contains(b)) return; const fn=actions[b.dataset.act]||(b.dataset.act==='schul-verbinden'?schulVerbindungsDialog:null)||(b.dataset.act==='klassewahl'?klasseWaehlen:b.dataset.act==='app-speichern'?appSpeichern:null); if(fn){ e.preventDefault(); fn(b,e); } }; }
 function kopf(title,{back,right='',sub=''}={}){ return `<div class="inner kopf" style="padding-left:max(16px,env(safe-area-inset-left,0px))">${back?`<a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a>`:''}<div class="schild"><h1>${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:''}</div><div class="kopf-rechts">${right}</div></div>`; }
 function bank(opts={}){ return `<div class="bank"><div class="inner deko-reihe"><span class="grow"></span></div><div class="platte"></div><div class="front"></div></div>`; }
@@ -1594,6 +1603,8 @@ SCREENS.boot=app=>{app.innerHTML=`<main class="v3"><div class="v3-loading" role=
 async function boot(){
   try{
   render();
+  if(window.Unterricht)await Unterricht.ready;
+  if(SCHULE&&window.Unterricht?.policy?.grade){S.settings.klasse=Unterricht.policy.grade;save();}
   await blobs.open();
   await Promise.all([loadContentFile().then(loadAnleitungen),loadMatFotos(),loadVorschau(),loadLp21()]);
   const school=parseSchool(); if(school){ go('school',{video:school}); return; }
@@ -2676,7 +2687,7 @@ function schulVerbindungsDialog(){
   verbinden:async(b,close,root)=>{const value=$('#sw-link',root).value.trim();const token=value.match(/(?:^|#|&)sammlung=([a-f0-9]{64})(?:&|$)/)?.[1]||value;b.disabled=true;try{await schulVerbinden(token);close();render();}catch(e){$('#sw-connect-error',root).textContent=e.message;b.disabled=false;}}
  });
 }
-function schulLehrerHtml(){return SCHULE?`<section class="panel"><h2>Gemeinsame Fotosammlung</h2><p data-schul-status>${esc(schulStatusText())}</p><div class="row"><button class="btn primary" data-act="schul-verbinden">iPads verbinden</button><a class="btn" href="../kontrolle/sammlung.html">Sammlung verwalten</a></div></section>`:'';}
+function schulLehrerHtml(){return SCHULE?`<section class="panel"><h2>Unterricht steuern</h2><p>Öffne einzelne Projekte, Themen oder ausgewählte Vorlagen auf den iPads deiner Klasse.</p><a class="btn primary" href="../kontrolle/unterricht.html">Unterricht öffnen</a></section><section class="panel"><h2>Gemeinsame Fotosammlung</h2><p data-schul-status>${esc(schulStatusText())}</p><div class="row"><button class="btn primary" data-act="schul-verbinden">iPads verbinden</button><a class="btn" href="../kontrolle/sammlung.html">Sammlung verwalten</a></div></section>`:'';}
 async function schulStart(){
  if(!SCHULE)return;
  try{const c=JSON.parse(localStorage.getItem(SCHULWERKE_KEY)||'null');if(c&&/^[a-f0-9]{64}$/.test(c.token)&&c.id)schulVerbindung=c;}catch{}
@@ -2699,6 +2710,54 @@ async function schulFotoKomprimieren(canvas){
  }
  throw new Error('Foto zu gross');
 }
+
+/* School router adapter. The gate also applies to direct links and imported shared projects. */
+function unterrichtRoute(name,params){
+ const u=window.Unterricht,p=u?.policy;if(!p||p.mode==='free')return {name,params};
+ if(p.mode==='projects'){
+  const id=params.videoId||params.video?.id||params.v?.id;
+  if(['player','school','anleitung'].includes(name)&&p.ids.includes(id)&&videoOf(id))return {name:'player',params:{videoId:id}};
+  if(name==='feedback'&&p.ids.includes(id))return {name,params:{videoId:id}};
+  if(name==='gallery'&&(p.gallery||p.ids.includes(params.videoId)))return {name,params};
+  if(p.ids.length===1&&videoOf(p.ids[0]))return {name:'player',params:{videoId:p.ids[0]}};
+ }
+ return {name:'unterricht',params:{}};
+}
+function unterrichtNachRender(){
+ const p=window.Unterricht?.policy;if(!p||p.mode==='free')return;
+ const root=$('#app');
+ Unterricht.allowResources(p.mode==='projects'&&p.ids.includes(view.params.videoId)?[...root.querySelectorAll('a[href]')].map(a=>a.href):[]);
+ for(const a of root.querySelectorAll('a[href]'))if(!a.getAttribute('href').startsWith('#')&&!Unterricht.permitted(a.href))a.hidden=true;
+ for(const b of root.querySelectorAll('[data-act="malen"],[data-act="ton"],[data-act="klassewahl"],[data-act="naechste"]'))b.hidden=true;
+ for(const b of root.querySelectorAll('[data-act="gallery"],[data-act="werke"]'))if(!p.gallery)b.hidden=true;
+ for(const b of root.querySelectorAll('[data-act="back"]')){
+  if(p.mode==='projects'&&p.ids.length===1&&['player','school'].includes(view.name))b.hidden=true;
+ }
+}
+SCREENS.unterricht=app=>{
+ const p=window.Unterricht?.policy||{mode:'closed'},u=window.Unterricht;
+ const teacher=`<a class="btn ghost" href="${esc(u.control)}">Für Lehrpersonen</a>`;
+ if(p.mode==='templates'||p.mode==='beads'){
+  const href=new URL(p.mode==='templates'?'vorlagen/':'vorlagen/perlen/',u.base).href;
+  app.innerHTML=`<main class="u-klasse"><h1>${esc(p.title)}</h1><p>Deine Aufgabe wird geöffnet …</p><a class="btn primary" href="${esc(href)}">Aufgabe öffnen</a>${teacher}</main>`;
+  location.replace(href);return;
+ }
+ const vs=p.mode==='projects'?p.ids.map(videoOf).filter(Boolean):[];
+ app.innerHTML=`<main class="v3"><div class="v3-in"><header class="u-kopf"><span>${esc(u?.name||'Deine Klasse')}</span>${teacher}</header>${vs.length?`<h1>Heute: ${esc(p.title)}</h1><p class="v3-sub">Wähle deine Aufgabe.</p><div class="v3-projects">${vs.map(projectCard).join('')}</div>`:`<section class="u-klasse"><h1>Gleich geht’s los.</h1><p>${esc(u.error||'Deine Lehrperson öffnet eure Aufgabe.')}</p></section>`}</div></main>`;
+ wire(app,{video:b=>go('player',{videoId:b.dataset.id})});
+};
+window.addEventListener('unterricht:change',()=>{
+ if(view.name==='boot')return;
+ const p=window.Unterricht.policy;
+ if(p?.grade&&SCHULE){S.settings.klasse=p.grade;save();}
+ // Close modal work before switching, so a camera/editor cannot cover the new lesson.
+ document.querySelectorAll('dialog[open]').forEach(d=>d.close());
+ document.querySelectorAll('.modal-bg').forEach(d=>d.unterrichtSchliessen?.());
+ const target=unterrichtRoute(p?.mode==='free'&&view.name==='unterricht'?'home':view.name,view.params);
+ if(view.name==='player'&&target.name===view.name&&target.params.videoId===view.params.videoId&&p?.mode==='projects'){unterrichtNachRender();return;}
+ go(target.name,target.params);
+});
+new MutationObserver(()=>{if(window.Unterricht?.active)unterrichtNachRender();}).observe(document.getElementById('app'),{childList:true,subtree:true});
 
 boot();
 </script>
