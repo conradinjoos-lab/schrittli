@@ -2,32 +2,34 @@
 
 Die App heisst seit 26.10.2026 «Schritt für Schritt» (vorher «Schrittli», danach «Bibo & Fila» und «Stop & Mach»). Bibo und Fila sind die Figuren in der App. Intern bleibt `schrittli`: Repo, Speicher im Browser, Exportdateien. So gehen keine Fortschritte verloren.
 
-Zwei Dateien, die zusammen in einem Ordner liegen müssen:
+Die App besteht aus den erzeugten HTML-Dateien und den zugehörigen Inhalts- und Bilderordnern:
 
-- `schrittli.html` – die App. Keine Installation, kein Server-Code.
-- `inhalte.json` – Bereiche, Videos, Schritte, Aufgaben. Wird beim Start geladen (nur über http/https, nicht per Doppelklick). Diese Datei pflegt Claude: Link schicken, Claude holt das Transkript, schreibt Schritte und Aufgabe, legt das Video in der passenden Kategorie ab.
+- `index.html` und `schule/index.html` – Familien- und Schulausgabe.
+- `schule/schule.json`, `inhalte.json` und `anleitungen/anleitungen.json` – Videos, Schritte und Foto-Anleitungen. Inhalte werden über http/https geladen.
+- `grafik/`, `vorschau/`, `material/`, `anleitungen/` und `vorlagen/` – Bilder und Unterlagen, die zusammen mit der App verfügbar sein müssen.
 
 Kinder, Sterne, Fortschritt und Werke liegen im Browser des Geräts (localStorage + IndexedDB).
 
 ## Starten
 
-- **Schnell am PC:** Datei doppelklicken. Oberfläche, Malen, Elternbereich laufen. YouTube-Player und Mikrofon brauchen aber `http(s)`, nicht `file://`.
-- **Lokal richtig:** im Ordner `npx serve` (oder `python -m http.server 8080`) → `http://localhost:8080/schrittli.html`.
-- **Fürs iPad / für die Schule:** Datei auf einen https-Host legen (GitHub Pages, Netlify Drop, Cloudflare Pages – alle gratis für eine Datei). Mikrofon und Kamera gehen auf dem iPad nur über https. Der Schul-Link (QR) funktioniert nur mit gehosteter Version.
+- **Bauen:** `node quelle/bauen.cjs` erzeugt beide Ausgaben aus `quelle/p1.html`, `quelle/p2.js` und `quelle/player-design.css`. Auch `bash quelle/bauen.sh` verwendet denselben Build. Die erzeugten HTML-Dateien nicht direkt bearbeiten.
+- **Lokale Vorschau:** `node werkzeug/vorschau-server.cjs` starten. Familie: `http://127.0.0.1:8766/`, Schule: `http://127.0.0.1:8766/schule/`. Die Vorschau ist nur auf diesem Computer erreichbar; private Arbeitsordner werden nicht ausgeliefert.
+- **Prüfen:** `node werkzeug/design-pruefen.cjs --built` prüft Inhalte, lokale Bilder, beide Ausgaben, Filter und die Schrittlogik ohne Netzwerk. Ein echter Browser-/iPad-Test ist zusätzlich erforderlich.
+- **Für andere Geräte:** Die bestehende GitHub-Pages-Adresse ist öffentlich. Der Push der grafischen Überarbeitung wurde am 27.10.2026 freigegeben. Ein HTTPS-Host mit echtem Zugangsschutz ist weiterhin vorgesehen; der Eltern-PIN schützt nur die Bedienoberfläche. Hosting und privater Zugang sind noch separat umzusetzen.
 
 ## Erster Start
 
 1. Name und Tier des Kindes eingeben.
-2. Die Videos aus `inhalte.json` liegen schon in allen Lern-Bereichen (49 Videos: Zeichnen, Werken, Experimente, Basteln, Natur, Geschichten, Lesen & Zahlen). Spass-Videos (Lustiges, Lieder) holt man bei Bedarf aus dem Katalog.
-3. Elternbereich (Schloss oben rechts), PIN **1234**: Sterne, Kinder, Rückmeldungen zu Werken. Videos kann man dort auch von Hand anlegen; Videos aus `inhalte.json` werden aber beim nächsten Laden wieder aus der Datei genommen.
+2. Die Startseite zeigt ausgewählte Ergebnisfotos und die verfügbaren Themen. «Alle Ideen» öffnet den Katalog mit Suche. Handarbeit und Werkraum lassen sich oben auswählen.
+3. Elternbereich («Für Eltern» unten), PIN **1234**: Sterne, Kinder, Rückmeldungen zu Werken. Videos kann man dort auch von Hand anlegen; Einträge aus den Inhaltsdateien werden beim nächsten Laden aktualisiert.
 
-## Werkstatt-Look
+## Die Ideenwerkstatt
 
-- Kinderseite als Werkstatt: Lochwand, ein Regal mit den Bereichen als Gegenstände, Werkbank unten. Alles in Grossbuchstaben. Bewusst wenig drauf: Es erscheinen nur Bereiche, die Videos haben.
-- Spass-Bereiche (Lustiges, Lieder – kosten einen Stern) sind standardmässig ausgeblendet; Einstellungen → «Spass-Bereiche zeigen» holt sie aufs oberste Regalbrett, zusammen mit dem Sterneglas.
-- Kind wechseln: Tipp aufs Hallo-Schild (nur wenn mehrere Kinder angelegt sind).
-- Abendwerkstatt ab 18 Uhr (dunkle Wand, Lichterkette); im Elternbereich umstellbar.
-- Player: links das Video («Schau zu»), rechts die Schritte als grosse Knöpfe – erledigte grün, der aktuelle gelb, Tipp auf einen Schritt springt dorthin.
+- Warmer heller Hintergrund, grosse echte Werkstückfotos und kurze Namen. Video-Karten haben keine laufenden Nummern, Schrittanzahlen oder wiederholte Technikangaben. Hochformatige Foto-Anleitungen zeigen das ganze Werkstück.
+- «Alle Ideen»: nach Begriff suchen oder «Selber machen», «Üben» und «Mit Fotos» auswählen. Zurück aus einer Anleitung führt zur vorherigen Auswahl mit Suchbegriff und Scrollposition.
+- Spass-Bereiche und Sterne bleiben standardmässig ausgeblendet. Sind sie eingeschaltet, erscheinen sie unter «Deine Pause».
+- Kind wechseln: «Profil wechseln» unten, wenn mehrere Kinder angelegt sind.
+- Der Lernbereich zeigt das Video und genau den aktuellen Schritt. «Alle Schritte» klappt die Übersicht auf. Vorlesen, Wiederholen, langsames Tempo und grosse Tasten helfen beim selbständigen Arbeiten.
 - Kino-Modus: Knopf ⤢ in der Player-Leiste. Video füllt den Bildschirm (auf dem iPad echtes Vollbild), unten ein schwarzes Band mit Steuerung und dem aktuellen Schritt; Tipp aufs Band klappt alle Schritte auf. Die Wahl wird gemerkt; am Videoende geht es zurück zur normalen Ansicht mit der Aufgabe.
 - Regal: jeder Bereich zeigt «gemacht/alle» (z. B. 2/10), grün mit Haken, wenn alles gemacht ist.
 - Elternbereich → Tab «Katalog»: Vorauswahl aus `katalog.json` (SRF Kids, Die Maus, Schwiizergoofe, Werklehrerin, Stiftung Kinder forschen …), pro Video «Hinzufügen». 57 Einträge, davon Werken (Fingerstricken, Weben, Nähen, Knüpfen, Flechten) und Experimente (kleine Versuche mit Haushaltsmaterial) komplett mit Schritten.

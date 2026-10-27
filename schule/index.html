@@ -2,11 +2,11 @@
 <html lang="de-CH">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Schritt für Schritt · Schule">
-<meta name="theme-color" content="#F1E3CB" id="themecolor">
+<meta name="theme-color" content="#FAF7F0" id="themecolor">
 <title>Schritt für Schritt · Schule</title>
 <link rel="icon" href="../grafik/figuren/icon.png">
 <link rel="apple-touch-icon" href="../grafik/figuren/icon.png">
@@ -569,18 +569,22 @@ body:has(.v3){background:#F5F6F8}
 .v3-mat .pik .mat-ico>*{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .v3-mat .pik .mat-emoji{display:grid;place-items:center;font-size:30px}
 .v3-mat b{font-weight:800;font-size:12px;line-height:1.15;max-width:100%;hyphens:auto;overflow-wrap:anywhere}
-.v3-liste{display:flex;flex-direction:column;gap:10px;min-width:0}
+/* Videos wie bei YouTube: grosses Vorschaubild, Titel darunter */
+.v3-liste{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px 14px;align-items:start;min-width:0}
+.v3-liste>:not(.v3-lektion){grid-column:1/-1}
 .v3-niv{display:flex;align-items:center;gap:10px;margin:14px 0 2px;font-weight:900;font-size:16px;color:var(--d)}
 .v3-niv:first-child{margin-top:0}
 .v3-niv span{width:22px;height:22px;border-radius:50%;background:var(--h);color:var(--d);display:grid;place-items:center;font-size:13px}
-.v3-lektion{display:flex;align-items:center;gap:14px;border:3px solid #fff;background:#fff;border-radius:18px;padding:8px 12px 8px 8px;text-align:left;box-shadow:0 2px 10px rgba(28,36,48,.06)}
+.v3-lektion{display:flex;flex-direction:column;gap:10px;border:3px solid #fff;background:#fff;border-radius:18px;padding:6px 6px 12px;text-align:left;box-shadow:0 2px 10px rgba(28,36,48,.06);min-width:0}
 .v3-lektion.jetzt{border-color:#1C2430}
-.v3-lektion .th{position:relative;width:112px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#1C2430;flex:none;display:grid;place-items:center}
-.v3-lektion .th img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:normal;opacity:.85}
-.v3-lektion .th i{position:relative;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.92);color:#1C2430;display:grid;place-items:center;font-style:normal;font-size:12px;padding-left:2px}
-.v3-lektion .th.stern{background:#FBE9C9;color:#9A6A12;font-size:30px}
-.v3-lektion .grow{display:flex;flex-direction:column;gap:2px;min-width:0}
-.v3-lektion b{font-weight:900;font-size:18px;line-height:1.2}
+.v3-lektion .th{position:relative;width:100%;aspect-ratio:16/9;border-radius:13px;overflow:hidden;background:#1C2430;flex:none}
+.v3-lektion .th img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.v3-lektion .th.stern{background:#FBE9C9;color:#9A6A12;font-size:54px;display:grid;place-items:center}
+.v3-lektion .th .v3-badge{position:absolute;left:8px;top:8px;width:34px;height:34px;font-size:15px;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.v3-lektion .th .v3-badge.offen{background:rgba(255,255,255,.92);color:#5B6672}
+.v3-lektion .th .dauer{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.75);color:#fff;font-size:13px;font-weight:800;padding:2px 7px;border-radius:6px}
+.v3-lektion .grow{display:flex;flex-direction:column;gap:3px;min-width:0;padding:0 6px}
+.v3-lektion b{font-weight:900;font-size:18px;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .v3-badge{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:16px;flex:none}
 .v3-badge.fertig{background:#DDF1E4;color:#1F6B45}
 .v3-badge.jetzt{background:#1C2430;color:#fff}
@@ -638,7 +642,7 @@ body:has(.v3){background:#F5F6F8}
 @media (max-width:1100px){.v3-themen{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (max-width:820px){.v3-thema{grid-template-columns:1fr}.v3-links{position:static;display:grid;grid-template-columns:160px 1fr;align-items:start}.v3-mat{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (max-width:640px){.v3-themen{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.v3-raeume{grid-template-columns:1fr;gap:14px}.v3-raum b{font-size:min(26px,6.2cqi)}.v3-h1{font-size:30px}.v3-h1.gross{font-size:34px;margin-top:20px}
- .v3-links{grid-template-columns:96px 1fr;gap:12px}.v3-mat{grid-template-columns:repeat(3,minmax(0,1fr))}.v3-lektion .th{width:84px}.v3-lektion b{font-size:16px}.v3-pill{padding:10px 14px;font-size:14px}.v3-name{display:none}}
+ .v3-links{grid-template-columns:96px 1fr;gap:12px}.v3-mat{grid-template-columns:repeat(3,minmax(0,1fr))}.v3-lektion b{font-size:17px}.v3-pill{padding:10px 14px;font-size:14px}.v3-name{display:none}}
 /* Bibo & Fila: freigestellte Figuren (grafik/figuren/*.webp) */
 .figur{display:block;width:auto;max-width:100%;object-fit:contain;pointer-events:none;user-select:none;-webkit-user-drag:none}
 .fig-gruss{display:flex;align-items:flex-end;justify-content:center;gap:12px;margin:0 auto;max-width:100%}
@@ -675,6 +679,432 @@ body:has(.kid.pl:not(.kino)) .fm-knopf{display:none}
 .modal-bg:has(.fm){z-index:80}.fm h2{margin:0}.fm-arten{display:flex;flex-direction:column;gap:8px}.fm-arten label{display:flex;align-items:center;gap:10px;font-size:16px;cursor:pointer}
 .fm-arten input{width:20px;height:20px;accent-color:var(--lern)}.fm-text{font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;resize:vertical;width:100%;background:var(--surface2);color:var(--ink)}
 .fm-hinweis{margin:0;font-size:13px;color:var(--muted)}.fm-fehler{margin:0;color:#D64545;font-weight:600}
+/* Schritt für Schritt · Bildwerkstatt
+   Fotos führen, Farbe gibt Orientierung. Alle zusätzlichen Angaben bleiben leise. */
+:root{--werk-paper:#FAF7F0;--werk-ink:#183D3A;--werk-green:#22645B;--werk-muted:#586C65;--werk-line:#DEDCD1;--werk-sage:#E6EFE6;--werk-sun:#F5CD65;--werk-coral:#EF967B;--werk-shadow:0 5px 20px rgba(40,58,46,.055)}
+body:has(.v3){background:var(--werk-paper);color:var(--werk-ink);color-scheme:light}
+.v3{background:var(--werk-paper);color:var(--werk-ink);padding:24px max(24px,env(safe-area-inset-left,0px)) calc(44px + env(safe-area-inset-bottom,0px));font-family:'Nunito',system-ui,sans-serif;--ink:var(--werk-ink);--muted:var(--werk-muted);--surface:#fff;--surface2:#F1F3EB;--line:var(--werk-line);--lern:var(--werk-green);--lern-soft:var(--werk-sage);--display:'Nunito',system-ui,sans-serif;--sh:rgba(40,58,46,.08)}
+.v3-in{max-width:1320px}
+.v3 h1,.v3 h2,.v3 h3{font-family:'Nunito',system-ui,sans-serif;color:var(--werk-ink);letter-spacing:-.025em;font-weight:900;line-height:1.15}
+.v3.caps,.v3.caps h1,.v3.caps h2,.v3.caps button,.v3.caps a{letter-spacing:.005em}
+.v3 img{mix-blend-mode:normal}
+.v3 button{color:inherit}
+.v3 :is(button,a,input,summary):focus-visible,.kid:not(.pl) :is(button,a,input,summary):focus-visible{outline:3px solid #22645B;outline-offset:5px}
+.v3 :is(button,a){touch-action:manipulation}
+.v3 :is(button,a){-webkit-tap-highlight-color:transparent}
+.v3-kopf{gap:14px;min-height:62px;padding-bottom:18px;border-bottom:1px solid var(--werk-line);flex-wrap:wrap}
+.v3-kopf .grow{min-width:0}
+.v3-logo{width:50px;height:50px;background:#F2E9D4;border-radius:18px;box-shadow:none}
+.v3-logo img{object-fit:cover;object-position:center 8%}
+.v3-name{display:block;font-size:20px;line-height:1.05;letter-spacing:-.025em;max-width:180px}
+.v3-brand{display:inline-flex;align-items:center;gap:12px;text-align:left;min-height:52px;border:0;background:transparent;border-radius:18px;text-decoration:none;color:var(--werk-ink);font-weight:900;max-width:100%}
+.v3-brand .v3-name{display:block}
+.v3-brand>img{width:50px;height:50px;object-fit:cover;border-radius:18px;flex:none}
+.v3-pill,.v3-rund{background:#fff;border:1px solid var(--werk-line);box-shadow:none;min-height:48px;color:var(--werk-ink);transition:background .16s,transform .16s,box-shadow .16s}
+.v3-pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;font-size:15px;font-weight:800}
+.v3-rund{width:48px;height:48px;font-size:24px;border-radius:17px}
+.v3-rund.gross{width:54px;height:54px;border-radius:19px}
+.v3-pill .ico{width:20px;height:20px}
+.v3-pill:active,.v3-rund:active{transform:translateY(2px)}
+.v3-h1{font-size:clamp(32px,3.4vw,48px);line-height:1.1;letter-spacing:-.04em}
+.v3-h1.gross{font-size:clamp(36px,4vw,54px);margin-top:32px}
+.v3-sub{color:var(--werk-muted);font-size:17px;font-weight:700;line-height:1.5;margin-top:12px}
+.v3-meta{color:var(--werk-muted);font-size:14px;font-weight:700}
+.v3-hero{position:relative;display:flex;align-items:center;justify-content:space-between;gap:28px;min-height:200px;padding:26px 36px;margin:28px 0 30px;border-radius:30px;background:#E8EEDC;isolation:isolate;overflow:hidden}
+.v3-hero::after{content:"";width:240px;height:240px;position:absolute;right:25px;top:15px;border-radius:50%;background:#F7D577;z-index:-1}
+.v3-hero-copy{max-width:760px;min-width:0;position:relative;z-index:1}
+.v3-hero-copy h1{font-size:clamp(34px,4.3vw,56px);line-height:1.06;max-width:18ch;margin:0;text-wrap:balance;letter-spacing:-.04em}
+.v3-hero-copy p{color:var(--werk-muted);font-size:18px;line-height:1.45;margin-top:14px;max-width:44ch}
+.v3-hero>.figur,.v3-hero>img{width:230px;height:190px;object-fit:contain;flex:0 0 230px;align-self:flex-end;margin:-12px -8px -20px 0;transform:rotate(3deg);position:relative;z-index:0}
+.v3-eyebrow{display:block;color:var(--werk-green);font-size:13px;letter-spacing:.09em;font-weight:900;margin-bottom:10px}
+.v3-leiste{gap:12px;align-items:center;margin-top:22px;flex-wrap:wrap}
+.v3-schalter{padding:5px;background:#EAEDE3;border:0;box-shadow:none;max-width:100%;gap:3px;overflow-x:auto;scrollbar-width:none}
+.v3-schalter::-webkit-scrollbar{display:none}
+.v3-schalter button{min-height:46px;white-space:nowrap;flex:none;padding:0 20px;color:var(--werk-muted);font-size:16px}
+.v3-schalter button.an{background:var(--werk-ink);color:#fff;box-shadow:0 2px 5px rgba(24,61,58,.12)}
+.v3-titel{margin-top:28px}
+.v3-section-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:30px 0 18px;flex-wrap:wrap}
+.v3-section-head h2{font-size:clamp(23px,2.4vw,29px);margin:0}
+.v3-section-head a,.v3-section-head button{font-weight:800}
+.v3-raeume{gap:24px;margin-top:28px}
+.v3-raum{gap:12px;border:1px solid var(--werk-line);padding:12px 12px 22px;border-radius:30px;box-shadow:var(--werk-shadow);transition:transform .2s,box-shadow .2s,border-color .2s}
+.v3-raum .bild{border-radius:22px;aspect-ratio:16/10;margin:0;position:relative}
+.v3-raum .bild img{height:92%;width:80%;object-fit:contain;transition:transform .24s}
+.v3-raum b{font-size:clamp(23px,3vw,34px);line-height:1.15;padding:0 12px;overflow-wrap:break-word}
+.v3-raum .v3-meta{font-size:16px;padding:0 12px}
+.v3-raum.an{border-color:var(--werk-green);box-shadow:0 0 0 2px var(--werk-green)}
+.v3-themen{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:0}
+.v3-kachel{border:1px solid var(--werk-line);border-radius:25px;gap:12px;padding:10px 10px 17px;box-shadow:var(--werk-shadow);min-width:0;position:relative;transition:transform .2s,box-shadow .2s,border-color .2s}
+.v3-kachel .bild{aspect-ratio:4/3;max-height:none;border-radius:18px;isolation:isolate}
+.v3-kachel .bild::after{content:"";position:absolute;width:66%;height:66%;left:17%;top:17%;border-radius:50%;background:rgba(255,255,255,.35);z-index:-1}
+.v3-kachel .bild img{inset:5% 9%;width:82%;height:90%;object-fit:contain;transition:transform .24s}
+.v3-kachel b{font-size:clamp(19px,2vw,25px);font-weight:900;line-height:1.12;min-height:0;padding:0 7px;overflow-wrap:break-word;hyphens:auto}
+.v3-kachel .v3-zeile{padding:0 7px;margin-top:auto}
+.v3-dots{gap:5px}.v3-dots i{width:8px;height:8px;background:#E2E4D8}.v3-dots i.an{background:#598078}
+.v3-weiter{background:#fff;border:1px solid #D3DED0;border-radius:22px;gap:12px;padding:8px 10px 8px 8px;box-shadow:var(--werk-shadow);max-width:100%}
+.v3-weiter .bild{width:72px;height:58px;border-radius:14px;flex:none;background:#E6EFE6}
+.v3-weiter .bild img{width:100%;height:100%;object-fit:cover}
+.v3-weiter .txt{min-width:0}
+.v3-weiter small{font-size:12px;color:var(--werk-muted)}
+.v3-weiter b{font-size:17px;line-height:1.2}
+.v3-weiter .play{background:var(--werk-green);width:48px;height:48px;font-size:18px}
+.v3-thema{display:block;margin-top:24px}
+.v3-thema>.v3-links{display:none}
+.v3-thema-titel{min-width:0;flex:1}
+.v3-thema-titel small{color:var(--werk-muted);font-size:13px;line-height:1.35;margin-bottom:3px}
+.v3-thema-titel h1{font-size:clamp(26px,3vw,38px);overflow-wrap:break-word}
+.v3-filters{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:22px 0 24px}
+.v3-filter{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:9px 18px;border:1px solid var(--werk-line);border-radius:999px;background:#fff;font-size:15px;font-weight:800;white-space:nowrap}
+.v3-filter.an,.v3-filter[aria-pressed="true"]{background:var(--werk-ink);border-color:var(--werk-ink);color:#fff}
+.v3-search{position:relative;display:flex;align-items:center;gap:9px;min-height:48px;max-width:100%;background:#fff;border:1px solid var(--werk-line);border-radius:999px;color:var(--werk-muted);padding:0 16px;margin-left:auto;flex:0 1 290px;font-size:16px}
+.v3-search .ico{width:20px;height:20px;flex:none}
+.v3-search input{width:100%;min-width:0;border:0;background:transparent;min-height:46px;font:inherit;font-weight:700;color:var(--werk-ink);padding:4px 0;border-radius:8px;outline-offset:0}
+.v3-search input::placeholder{color:#68786D;opacity:1}
+.v3-search:focus-within{outline:3px solid var(--werk-green);outline-offset:3px}
+.v3-search input:focus-visible{outline:none}
+.v3-liste,.v3-projects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px 22px;align-items:start;min-width:0}
+.v3-liste>:not(.v3-lektion),.v3-projects>:not(.v3-lektion){grid-column:1/-1}
+.v3-niv{margin:10px 0 -10px;gap:12px;color:var(--werk-ink);font-size:23px;font-weight:900;line-height:1.2}
+.v3-niv:first-child{margin-top:0}
+.v3-niv::after{content:"";height:1px;background:var(--werk-line);flex:1;margin-left:6px}
+.v3-niv span{background:var(--werk-sage);color:var(--werk-green);width:28px;height:28px;font-size:14px}
+.v3-lektion{gap:0;border:1px solid #E3E3D9;border-radius:25px;padding:8px 8px 18px;background:#fff;box-shadow:var(--werk-shadow);overflow:hidden;position:relative;transition:transform .2s,box-shadow .2s,border-color .2s;height:100%;min-width:0;align-self:stretch}
+.v3-lektion.jetzt{border-color:#86A79B;box-shadow:0 0 0 1px #86A79B}
+.v3-lektion .th{aspect-ratio:16/9;border-radius:18px;background:#E8EAE1;isolation:isolate;min-width:0;overflow:hidden}
+.v3-lektion .th img{width:100%;height:100%;object-fit:cover;transition:transform .35s;mix-blend-mode:normal}
+.v3-lektion.foto-anleitung .th{background:#F1F2EB}
+.v3-lektion.foto-anleitung .th img{object-fit:contain;padding:6px}
+.v3-lektion .th.stern{background:#FAE8BA;color:#986412;min-height:160px}
+.v3-lektion .grow{padding:15px 9px 0;gap:7px;width:100%;flex:1}
+.v3-lektion b{font-size:22px;line-height:1.22;letter-spacing:-.015em;font-weight:900;overflow-wrap:break-word;hyphens:auto;-webkit-line-clamp:2}
+.v3-lektion .v3-meta{font-size:13px;color:var(--werk-muted)}
+.v3-card-kind{position:absolute;left:12px;top:12px;display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:9px;background:rgba(255,255,255,.96);color:#28433C;font-size:12px;line-height:1.3;font-weight:900;letter-spacing:.02em;box-shadow:0 1px 5px rgba(24,61,58,.07)}
+.v3-card-kind .ico{width:15px;height:15px}
+.v3-card-play{position:absolute;bottom:12px;right:12px;display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:#fff;color:var(--werk-ink);font-size:19px;box-shadow:0 3px 12px rgba(24,61,58,.14);transition:background .2s,transform .2s}
+.v3-card-play .ico{width:24px;height:24px}
+.v3-card-progress{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;border-radius:999px;background:#E6EFE6;color:#275C42;padding:4px 9px;font-size:12px;font-weight:900;line-height:1.4;max-width:100%}
+.v3-card-progress .ico{width:16px;height:16px}
+.v3-lektion .th .v3-card-progress{position:absolute;bottom:12px;left:12px;background:rgba(255,255,255,.96);max-width:calc(100% - 82px)}
+.v3-lektion .th .dauer{right:12px;bottom:12px;line-height:1.2;font-size:12px;background:rgba(24,42,38,.85)}
+.v3-lektion .th .v3-badge{width:32px;height:32px;top:10px;left:10px;box-shadow:none}
+.v3-badge.fertig{background:#E2F0DF;color:#2C6245}.v3-badge.jetzt{background:var(--werk-green)}
+.v3-liste .andere-titel{color:var(--werk-ink);font-size:26px}
+.v3-karte{border:1px solid var(--werk-line);border-radius:24px;padding:20px;box-shadow:var(--werk-shadow)}
+.v3-karte h2{font-size:21px;margin-bottom:16px}
+.v3-mat .pik{background:#F1F2EB;border-radius:16px}
+.v3-mat b{font-size:13px;font-weight:800;line-height:1.25;color:var(--werk-ink)}
+.v3-leer{padding:36px 16px;background:#F1F2E9;border:1px dashed #D5D9CC;border-radius:25px;color:var(--werk-muted);font-size:18px;font-weight:800}
+.v3-leer .figur{max-height:130px}
+.v3-fuss{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;margin-top:46px;padding-top:24px;border-top:1px solid var(--werk-line)}
+.v3-werkzeuge{min-height:46px;padding:9px 16px;border:1px solid #D3DED1;border-radius:999px;background:#E9EEE3;color:#365B47;font-family:inherit;font-size:15px;font-weight:800;box-shadow:none;margin:0}
+.v3-link{color:var(--werk-muted);font-size:14px;min-height:44px;padding:10px 14px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.v3-link:hover{text-decoration:underline;text-underline-offset:4px}
+.v3-home-links{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:24px}
+.v3-class-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;max-width:820px;margin:26px auto 0}
+.v3-class-choice{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;min-height:154px;padding:16px;border:1px solid #DEDCD1;border-radius:26px;background:#fff;color:var(--werk-ink);box-shadow:var(--werk-shadow);font-weight:900;transition:transform .18s,box-shadow .18s}
+.v3-class-choice:nth-child(3n+1){background:#F9E9BA}.v3-class-choice:nth-child(3n+2){background:#E8EEDC}.v3-class-choice:nth-child(3n){background:#F6DFD4}
+.v3-class-choice .z,.v3-class-choice>strong,.v3-class-choice>span:first-child{font-size:58px;line-height:1;font-weight:900}
+.v3-class-choice .w,.v3-class-choice>b{font-size:17px;font-weight:800}
+.v3-class-choice[aria-pressed="true"]{border:3px solid var(--werk-green)}
+.v3 .kork{border:0;border-radius:24px;background:#EBEEDF;box-shadow:none;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;padding:24px;margin-top:0}
+.v3 .foto{border:0;border-radius:12px;padding:7px 7px 26px;box-shadow:0 4px 10px rgba(38,49,35,.09)}
+.v3 .foto .bild{border-radius:7px}.v3 .foto::before{width:32px;height:13px;border:0;border-radius:2px;background:#F5CD65;top:-5px;opacity:.9;transform:translateX(-50%) rotate(-8deg)}
+.v3 .foto:nth-child(2n)::before{background:#E6AC8C}.v3 .foto:nth-child(3n)::before{background:#A8C5A8}
+.v3 .foto .dt{color:var(--werk-muted);font-size:11px}
+/* Nebenräume gehören zur selben ruhigen Werkstatt. Den Videoplayer gestaltet seine eigene Ebene. */
+.kid:not(.pl){--wall:#FAF7F0;--wtext:#183D3A;--wmuted:#586C65;--paper:#fff;--sign:#F5CD65;--kink:#183D3A;--wood:#E8EEDC;--wood2:#C7D3BE;--wood3:#F4E9C7;--sh:rgba(40,58,46,.08);--ink:#183D3A;--muted:#586C65;--surface:#fff;--surface2:#F1F3EB;--line:#DEDCD1;--lern:#22645B;--lern-soft:#E6EFE6;background:var(--werk-paper);color:var(--werk-ink);color-scheme:light;font-family:'Nunito',system-ui,sans-serif;letter-spacing:0;min-height:100vh;padding-top:26px}
+.kid:not(.pl)>.girlande,.kid:not(.pl)>.fenster,.kid:not(.pl)>.fensterbank,.kid:not(.pl)>.fenster-pflanze,.kid:not(.pl)>.bank{display:none}
+.kid:not(.pl)>.inner{width:100%;max-width:1320px;margin-left:auto;margin-right:auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.kid:not(.pl) .kopf{padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));min-height:70px;align-items:center;margin:0 auto 24px;max-width:1320px;width:100%}
+.kid:not(.pl) .schild{border:0;border-radius:0;background:transparent;color:var(--werk-ink);box-shadow:none;padding:0;min-height:48px;text-align:left;align-items:flex-start}
+.kid:not(.pl) .schild h1{color:var(--werk-ink);letter-spacing:-.025em;font-family:'Nunito',system-ui,sans-serif;font-weight:900;font-size:32px;line-height:1.15}
+.kid:not(.pl) .schild .sub{color:var(--werk-muted);font-size:16px;letter-spacing:0;margin-top:7px;opacity:1}
+.kid:not(.pl) .schild.hallo{margin-left:0}
+.kid:not(.pl) .schild-btn,.kid:not(.pl) .btn,.kid:not(.pl) .kbtn{border:1px solid var(--werk-line);box-shadow:none;font-family:'Nunito',system-ui,sans-serif;font-weight:800;border-radius:16px}
+.kid:not(.pl) .kbtn.round,.kid:not(.pl) .btn.icon{border-radius:50%}
+.kid:not(.pl) .kbtn.primary,.kid:not(.pl) .btn.primary{background:var(--werk-green);color:#fff;border-color:var(--werk-green)}
+.kid:not(.pl) .kbtn.ghost,.kid:not(.pl) .btn.ghost{background:transparent;color:var(--werk-muted);border-color:transparent}
+.kid:not(.pl) .papier,.kid:not(.pl) .lehrer-liste{border:1px solid var(--werk-line);border-radius:26px;padding:24px;background:#fff;box-shadow:var(--werk-shadow)}
+.kid:not(.pl) .fig-gruss .figur{height:135px}
+.kid:not(.pl) .klassen{margin:30px auto 20px;gap:18px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.kid:not(.pl) .klasse-btn{min-height:150px;border:1px solid var(--werk-line);border-radius:26px;box-shadow:var(--werk-shadow);background:#E8EEDC}
+.kid:not(.pl) .klasse-btn:nth-child(3n+1){background:#F9E9BA}.kid:not(.pl) .klasse-btn:nth-child(3n){background:#F6DFD4}
+.kid:not(.pl) .klasse-btn .z{font-size:56px}
+.kid:not(.pl) .klasse-btn .w{color:var(--werk-ink);font-size:16px;letter-spacing:0}
+.kid:not(.pl) .werke-btn,.kid:not(.pl) .glas-sterne{border:1px solid var(--werk-line);border-radius:18px;background:#fff;box-shadow:none;font-size:16px;font-weight:800}
+.kid:not(.pl) .regal-wrap,.kid:not(.pl) .regal-wrap:first-of-type{margin-top:22px}
+.kid:not(.pl) .regal{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:20px;margin-top:20px;align-items:stretch}
+.kid:not(.pl) .ding{background:#fff;border:1px solid var(--werk-line);border-radius:26px;padding:22px 16px;justify-content:center;gap:12px;box-shadow:var(--werk-shadow);min-height:215px}
+.kid:not(.pl) .ding::after,.kid:not(.pl) .tag::before{display:none}
+.kid:not(.pl) .ding svg.obj{width:170px;height:130px}
+.kid:not(.pl) .ding .tag{margin:0;border:0;background:transparent;box-shadow:none;font-size:21px;letter-spacing:0;font-weight:900;min-height:34px;height:auto;white-space:normal;text-align:center;justify-content:center}
+.kid:not(.pl) .pinwand{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.kid:not(.pl) .vcard{transform:none;border:1px solid var(--werk-line);border-radius:24px;box-shadow:var(--werk-shadow);padding:8px 8px 16px;gap:14px}
+.kid:not(.pl) .vcard::before{display:none}.kid:not(.pl) .vcard .th{aspect-ratio:16/10;border-radius:17px}
+.kid:not(.pl) .vcard .tt{font:900 22px/1.2 'Nunito',system-ui,sans-serif;padding:0 8px}
+.kid:not(.pl) .vcard .th .niv,.kid:not(.pl) .vcard .th .gt{display:none}
+.kid:not(.pl) .kork{background:#E9EDDF;background-image:none;border:0;border-radius:26px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:28px;padding:28px}
+.kid:not(.pl) .foto{border:0;border-radius:12px;box-shadow:0 4px 13px rgba(35,54,40,.11)}
+.kid:not(.pl) .foto .bild{border-radius:7px}.kid:not(.pl) .foto::before{border:0;width:32px;height:13px;border-radius:2px;background:#F5CD65;top:-5px;transform:translateX(-50%) rotate(-8deg)}
+.kid:not(.pl) .lehrer-gen{border:1px solid #D1DFD0;background:#E8EFE3;color:#345A43;border-radius:20px;box-shadow:none;padding:18px;min-height:74px}
+.kid:not(.pl) .avatar-btn{border:1px solid var(--werk-line);border-radius:24px;box-shadow:var(--werk-shadow);padding:22px 14px}
+.kid:not(.pl) .avatar-btn .em{border:0}
+.modal.kid:not(.pl){background:var(--werk-paper);border:1px solid var(--werk-line);color:var(--werk-ink);border-radius:28px;box-shadow:0 24px 80px rgba(15,40,30,.18);padding:28px;min-height:0}
+.modal.kid:not(.pl) .kbtn{border:1px solid var(--werk-line);box-shadow:none}
+.modal.kid:not(.pl) .namen .inp{border:1px solid #BDCABE;color:var(--werk-ink);border-radius:16px}
+.kid:not(.pl) .inp{border-color:#C7D3BE;border-radius:14px;color:var(--werk-ink);background:#fff}
+.kid:not(.pl) .lrow .lmeta{color:var(--werk-muted)}
+.fm-knopf{width:44px;height:44px;border:1px solid #D8DCD1;background:#fff;color:#6A756A;box-shadow:var(--werk-shadow);opacity:.85}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.v3-loading{min-height:75vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;text-align:center}
+.v3-loading .figur{width:140px;height:140px;object-fit:contain}
+.v3-loading p{font-size:20px;font-weight:800;color:var(--werk-muted)}
+.v3-loading-dots{display:flex;gap:8px}.v3-loading-dots i{width:10px;height:10px;border-radius:50%;background:var(--werk-green);animation:ideen-laden 1s ease-in-out infinite alternate}.v3-loading-dots i:nth-child(2){animation-delay:.2s;background:var(--werk-sun)}.v3-loading-dots i:nth-child(3){animation-delay:.4s;background:var(--werk-coral)}
+@keyframes ideen-laden{to{transform:translateY(-7px);opacity:.5}}
+.v3-image-fallback{position:absolute;inset:0;display:grid;place-items:center;font-size:64px;line-height:1;background:#E8EEDF;color:var(--werk-green)}
+.v3-lektion .th img{background:#F1F2EB}
+.v3-kachel .v3-image-fallback{background:transparent;font-size:clamp(48px,6vw,80px)}
+.v3-filters>.v3-schalter{flex-wrap:wrap;gap:5px;overflow:visible;border-radius:23px;min-width:0}
+.v3-filters>.v3-schalter>.v3-filter{min-width:0;flex:1 1 auto;border:0}
+.v3-weiter>span:not(.bild):not(.play){min-width:0;flex:1}
+.v3-weiter b{display:block;overflow-wrap:break-word}
+.modal.v3-dialog{--surface:#fff;--surface2:#F1F3EB;--ink:#183D3A;--muted:#586C65;--display:'Nunito',system-ui,sans-serif;--lern:#22645B;--line:#DEDCD1;font-family:'Nunito',system-ui,sans-serif;color:var(--werk-ink);background:var(--werk-paper);color-scheme:light;max-width:620px;border-radius:28px;border:1px solid var(--werk-line);box-shadow:0 24px 80px rgba(15,40,30,.2);padding:28px;gap:18px;max-height:calc(100dvh - 32px)}
+.v3-dialog h2{font-family:inherit;font-size:28px;font-weight:900;letter-spacing:-.02em}
+.v3-dialog .v3-class-grid{width:100%;margin:0;gap:12px}
+.v3-dialog .v3-class-choice{min-height:116px;border-radius:20px;padding:12px}
+.v3-dialog .v3-class-choice>span:first-child{font-size:46px}
+.v3-dialog .v3-class-choice>b{font-size:15px}
+.v3-dialog .btn{min-height:48px;border-radius:16px;font:800 16px 'Nunito',system-ui,sans-serif;color:var(--werk-muted)}
+.v3-dialog :is(button,a):focus-visible{outline:3px solid var(--werk-green);outline-offset:4px}
+@media (hover:hover){.v3-kachel:hover,.v3-raum:hover,.v3-lektion:hover,.v3-class-choice:hover{transform:translateY(-4px);box-shadow:0 10px 26px rgba(40,58,46,.11);border-color:#BFCDB9}.v3-kachel:hover .bild img,.v3-raum:hover .bild img{transform:scale(1.04)}.v3-lektion:hover .th img{transform:none}.v3-lektion:hover .v3-card-play{background:var(--werk-sun);transform:scale(1.06)}.v3-pill:hover,.v3-rund:hover{background:#EDF2E6}.v3-filter:not(.an):not([aria-pressed="true"]):hover{background:#EDF2E6}.v3-brand:hover{color:var(--werk-green)}}
+@media (max-width:1119px){.v3-liste,.v3-projects,.kid:not(.pl) .pinwand{grid-template-columns:repeat(2,minmax(0,1fr))}.v3-themen{grid-template-columns:repeat(3,minmax(0,1fr))}.v3-hero{padding:26px 30px}.v3-hero-copy h1{font-size:42px}.v3-hero>img,.v3-hero>.figur{width:190px;flex-basis:190px;height:175px}.v3-hero::after{width:205px;height:205px;right:12px;top:16px}.v3 .kork{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:820px){.v3-themen{grid-template-columns:repeat(2,minmax(0,1fr))}.v3-leiste{gap:10px}.v3-schalter button{font-size:15px;padding:0 16px}.v3-search{flex-basis:100%;margin-left:0}.v3-class-grid{gap:14px}.v3-hero-copy h1{font-size:36px}.v3-hero>img,.v3-hero>.figur{width:155px;flex-basis:155px;height:160px}.v3-hero::after{width:170px;height:170px;top:22px}.v3-hero{gap:16px;min-height:185px;padding:24px}.v3-lektion b{font-size:21px}.v3 .kork{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:619px){.v3{padding:16px max(16px,env(safe-area-inset-left,0px)) calc(32px + env(safe-area-inset-bottom,0px))}.v3-kopf{gap:10px;min-height:56px;padding-bottom:14px}.v3-kopf>.v3-pill{font-size:13px;padding:9px 12px}.v3-logo,.v3-brand>img{width:42px;height:42px;border-radius:15px}.v3-name,.v3-brand .v3-name{font-size:16px;max-width:125px}.v3-brand{gap:8px}.v3-kopf .v3-thema-titel{margin-left:0}.v3-thema-titel h1{font-size:26px}.v3-thema-titel small{font-size:12px}.v3-kopf:has(.v3-thema-titel)>.v3-pill{margin-left:auto}.v3-pill{font-size:14px;padding:10px 14px}.v3-h1{font-size:32px}.v3-h1.gross{font-size:36px}.v3-hero{padding:24px 20px;min-height:180px;margin:20px 0 24px;border-radius:25px;gap:8px;align-items:center}.v3-hero-copy h1{font-size:31px;letter-spacing:-.03em;max-width:12ch}.v3-hero-copy p{font-size:15px;max-width:24ch;margin-top:10px}.v3-hero>img,.v3-hero>.figur{width:115px;flex-basis:115px;height:142px;align-self:flex-end;margin:0 -6px -20px -12px}.v3-hero::after{width:145px;height:145px;right:-17px;top:auto;bottom:-20px}.v3-eyebrow{font-size:11px;letter-spacing:.06em}.v3-section-head{gap:10px;margin:26px 0 15px}.v3-section-head h2{font-size:23px}.v3-section-head .v3-pill{font-size:13px;min-height:44px}.v3-themen{gap:13px}.v3-kachel{padding:7px 7px 14px;border-radius:21px;gap:11px}.v3-kachel .bild{border-radius:15px;aspect-ratio:1.1}.v3-kachel b{font-size:19px;padding:0 5px}.v3-kachel .v3-zeile{padding:0 5px}.v3-raeume{grid-template-columns:1fr;gap:18px}.v3-raum b{font-size:27px}.v3-raum .bild{aspect-ratio:16/8;max-height:230px}.v3-leiste{margin-top:16px}.v3-schalter{width:auto;max-width:100%;border-radius:20px}.v3-schalter button{font-size:14px;padding:0 13px;min-height:44px}.v3-liste,.v3-projects,.kid:not(.pl) .pinwand{grid-template-columns:minmax(0,1fr);gap:24px}.v3-lektion{padding:8px 8px 18px;border-radius:25px}.v3-lektion .th{aspect-ratio:16/9;border-radius:18px}.v3-lektion b{font-size:23px}.v3-lektion .grow{padding:15px 9px 0}.v3-niv{font-size:21px;margin:10px 0 -7px}.v3-filters{gap:8px;margin:20px 0}.v3-filter{font-size:14px;padding:9px 15px}.v3-card-play{width:48px;height:48px;right:14px;bottom:14px}.v3-card-kind{left:14px;top:14px;font-size:12px}.v3-fuss{margin-top:34px;padding-top:20px;gap:4px}.v3-werkzeuge{font-size:14px}.v3-class-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:20px}.v3-class-choice{min-height:138px;border-radius:23px}.v3-class-choice .z,.v3-class-choice>strong{font-size:52px}.v3-class-choice .w,.v3-class-choice>span:last-child{font-size:15px}.v3 .kork{gap:18px;padding:18px}.v3-weiter{width:100%}.v3-weiter .txt{flex:1}.kid:not(.pl){padding-top:18px}.kid:not(.pl)>.inner,.kid:not(.pl) .kopf{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.kid:not(.pl) .schild h1{font-size:28px}.kid:not(.pl) .schild .sub{font-size:15px}.kid:not(.pl) .kopf{gap:10px;margin-bottom:16px}.kid:not(.pl) .klassen{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:26px}.kid:not(.pl) .klasse-btn{min-height:135px}.kid:not(.pl) .papier{padding:20px}.kid:not(.pl) .regal{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.kid:not(.pl) .ding{padding:16px 10px;min-height:185px;border-radius:22px}.kid:not(.pl) .ding svg.obj{width:130px;height:110px}.kid:not(.pl) .ding .tag{font-size:18px;padding:0}.kid:not(.pl) .kork{grid-template-columns:repeat(2,minmax(0,1fr));padding:18px;gap:20px}.modal.kid:not(.pl){padding:20px;border-radius:24px}}
+@media (max-width:359px){.v3-hero-copy h1{font-size:27px}.v3-hero>img,.v3-hero>.figur{flex-basis:90px;width:90px;height:120px}.v3-brand .v3-name{max-width:108px;font-size:14px}.v3-kopf{gap:7px}.v3-kachel b{font-size:17px}.v3-schalter button{font-size:13px;padding:0 10px}}
+@media (max-width:619px){
+ .v3-kopf:has(>[data-act="gallery"]){display:grid;grid-template-columns:max-content minmax(0,1fr);gap:10px;align-items:center}
+ .v3-kopf:has(>[data-act="gallery"])>.grow{display:none}
+ .v3-kopf:has(>[data-act="gallery"])>:is(.v3-logo,.v3-rund){grid-column:1;grid-row:1;justify-self:start}
+ .v3-kopf:has(>[data-act="gallery"])>:is(.v3-name,.v3-thema-titel){grid-column:2;grid-row:1;max-width:none;width:100%;min-width:0}
+ .v3-kopf:has(>[data-act="gallery"])>.v3-pill{grid-row:2;max-width:100%;margin:0;white-space:normal;min-height:46px;line-height:1.2}
+ .v3-kopf:has(>[data-act="gallery"])>[data-act="klassewahl"]{grid-column:1;justify-self:start}
+ .v3-kopf:has(>[data-act="gallery"])>[data-act="gallery"]{grid-column:2;justify-self:end}
+ .v3-kopf:has(>[data-act="gallery"]):not(:has(>[data-act="klassewahl"]))>[data-act="gallery"]{grid-column:1/-1}
+ .v3-schalter{flex-wrap:wrap;overflow:visible;gap:3px}
+ .v3-schalter button{flex:1 1 auto;min-width:0}
+ .v3-filters>.v3-schalter{width:100%;padding:5px;gap:5px}
+ .v3-filters>.v3-schalter>.v3-filter{flex:1 1 calc(50% - 5px);padding:9px 8px;white-space:normal;line-height:1.2}
+ .v3-class-choice>span:first-child{font-size:52px}.v3-class-choice>b{font-size:15px}
+ .modal.v3-dialog{padding:22px;gap:16px}.v3-dialog h2{font-size:25px}.v3-dialog .v3-class-choice>span:first-child{font-size:42px}.v3-dialog .v3-class-choice{min-height:108px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.v3-kachel:hover,.v3-raum:hover,.v3-lektion:hover,.v3-class-choice:hover{transform:none}}
+
+/* Der Lernraum: ein Bild, ein Schritt, eine klare nächste Handlung. */
+.kid.pl.lernraum{
+  --kink:#183D3A;--wtext:#183D3A;--wmuted:#586E68;--paper-muted:#586E68;
+  --paper:#FFF;--sign:#F5CD65;--sh:rgba(24,61,58,.08);--screen:#183D3A;
+  color:#183D3A;background:#FAF7F0;background-image:none;
+  font-family:'Nunito',system-ui,sans-serif;letter-spacing:0;
+}
+.kid.pl.lernraum:not(.kino){height:auto;min-height:100vh;min-height:100dvh;overflow:visible;gap:0;padding-bottom:0}
+.kid.pl.lernraum .inner{width:100%;max-width:1320px;margin-left:auto;margin-right:auto;padding-inline:max(24px,env(safe-area-inset-left,0px))}
+.kid.pl.lernraum .pl-top{margin:0 auto;padding-block:24px 28px;gap:18px;min-height:96px;flex-wrap:nowrap;align-items:center}
+.kid.pl.lernraum .schild-btn{width:52px;height:52px;min-width:52px;border:1px solid #DDE4DB;border-radius:50%;background:#FFF;color:#183D3A;box-shadow:none;transform:none;display:grid;place-items:center}
+.kid.pl.lernraum .schild-btn::before,.kid.pl.lernraum .schild-btn::after{display:none}
+.kid.pl.lernraum .pl-heading{min-width:0;flex:1}
+.kid.pl.lernraum .pl-heading small{display:block;color:#586E68;font-size:13px;font-weight:800;line-height:1.3;margin-bottom:5px}
+.kid.pl.lernraum .pl-heading h1{font-family:inherit;font-size:clamp(20px,2.4vw,29px);font-weight:900;line-height:1.2;overflow-wrap:anywhere}
+.kid.pl.lernraum .kopf-rechts{margin-left:auto;flex:none}
+.kid.pl.lernraum .fm-pill{min-width:44px;min-height:44px;width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:#586E68;box-shadow:none;padding:10px;display:grid;place-items:center}
+.kid.pl.lernraum .fm-pill .ico{width:20px;height:20px}
+.kid.pl.lernraum:not(.kino) .panes{flex:none;grid-template-columns:minmax(0,2.15fr) minmax(270px,1fr);gap:28px;align-items:start;margin-top:0}
+.kid.pl.lernraum:not(.kino) .video-box{width:100%;max-width:none;margin:0;border:0;border-radius:28px;box-shadow:0 12px 36px rgba(24,61,58,.11);background:#183D3A;isolation:isolate}
+.kid.pl.lernraum .overlay{background:#183D3A;color:#FFF;border:0;gap:12px}
+.kid.pl.lernraum .overlay h2{font-family:inherit;color:#FFF;font-weight:900;font-size:clamp(22px,2.8vw,34px)}
+.kid.pl.lernraum .overlay .figur{max-height:140px;height:26%;width:auto}
+.kid.pl.lernraum .overlay .kbtn{border:0;box-shadow:none;border-radius:18px;font-family:inherit;font-weight:900;letter-spacing:0}
+.kid.pl.lernraum .overlay .kbtn.primary{background:#F5CD65;color:#183D3A}
+.kid.pl.lernraum .overlay .kbtn.ghost{color:#FFF;border:1px solid #ffffff45;background:#ffffff0d;font-size:15px;min-height:44px}
+.kid.pl.lernraum .overlay .kbtn.round{border-radius:50%;width:82px;min-height:82px;font-size:36px;background:#FFF;color:#183D3A;box-shadow:0 8px 32px #0003}
+.kid.pl.lernraum .overlay .lbl{font-size:20px;font-weight:900;line-height:1.2;color:#FFF}
+.kid.pl.lernraum .overlay.pl-start{padding:0}
+.kid.pl.lernraum .pl-preview{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.76}
+.kid.pl.lernraum .pl-start::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 25%,#102E2B70);pointer-events:none}
+.kid.pl.lernraum .pl-intro-actions{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px}
+.kid.pl.lernraum .modebadge{left:16px;top:16px;background:#F5CD65;color:#183D3A;border:0;box-shadow:0 2px 14px #0002;border-radius:999px;font-family:inherit;font-weight:900;letter-spacing:0;font-size:15px;height:38px}
+.kid.pl.lernraum .pl-guide{gap:12px}
+.kid.pl.lernraum .pl-current{background:#FFF;border:1px solid #E3E9DF;border-radius:26px;padding:24px;box-shadow:0 4px 18px rgba(24,61,58,.03);min-width:0}
+.kid.pl.lernraum .pl-current-top{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px;font-weight:900;color:#586E68;margin-bottom:17px}
+.kid.pl.lernraum .pl-step-count{display:inline-flex;align-items:center;justify-content:center;min-width:42px;height:34px;padding:0 10px;border-radius:999px;background:#E6EFE6;color:#22645B;font-size:14px;white-space:nowrap}
+.kid.pl.lernraum .pl-current h2{font-family:inherit;font-size:clamp(21px,2.25vw,29px);font-weight:900;line-height:1.25;text-wrap:pretty;overflow-wrap:anywhere;text-align:left}
+.kid.pl.lernraum .pl-current>.figur{height:90px;width:auto;margin:0 auto 16px;display:block}
+.kid.pl.lernraum .pl-small{font-size:16px;color:#586E68;font-weight:700;line-height:1.5;margin-top:14px}
+.kid.pl.lernraum .pl-read{display:inline-flex;gap:8px;align-items:center;margin-top:17px;min-height:44px;padding:0 14px;border-radius:999px;background:#F1F5EE;color:#22645B;font-family:inherit;font-size:14px;font-weight:800;text-transform:none}
+.kid.pl.lernraum .pl-read .ico{width:20px;height:20px}
+.kid.pl.lernraum .pl-track{height:7px;background:#EBEFE8;border-radius:999px;overflow:hidden;margin-top:24px}
+.kid.pl.lernraum .pl-track i{display:block;height:100%;border-radius:inherit;background:#22645B;transition:width .25s ease}
+.kid.pl.lernraum .pl-material{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 10px;margin-top:18px}
+.kid.pl.lernraum .pl-material>div{min-width:0;display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center}
+.kid.pl.lernraum .pl-material>div>span{display:grid;place-items:center;width:100%;aspect-ratio:1;background:#F5F6F0;border-radius:16px;overflow:hidden}
+.kid.pl.lernraum .pl-material>div>span>.mat-svg{width:82%;height:82%}
+.kid.pl.lernraum .pl-material .mat-ico{display:block;position:relative;width:82%;height:82%}
+.kid.pl.lernraum .pl-material .mat-ico>*{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.kid.pl.lernraum .pl-material .mat-emoji{display:grid;place-items:center;font-size:36px}
+.kid.pl.lernraum .pl-material b{font-size:12px;line-height:1.2;overflow-wrap:anywhere;font-weight:800}
+.kid.pl.lernraum .pl-current .an-box.vorlage{margin-top:20px;padding:12px;font-size:14px;background:#F1F5EE;color:#22645B}
+.kid.pl.lernraum .pl-current .an-laden{background:#22645B;font-size:13px;min-height:44px;padding:0 12px}
+.kid.pl.lernraum .pl-safety{display:flex;gap:12px;align-items:center;background:#FFF1D1;color:#654B12;padding:14px;border-radius:16px;margin-top:18px}
+.kid.pl.lernraum .pl-safety>span{font-size:36px;line-height:1;flex:none}
+.kid.pl.lernraum .pl-safety b{font-size:15px;line-height:1.3}
+.kid.pl.lernraum .pl-steps-toggle{display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;width:100%;font-family:inherit;font-size:14px;font-weight:900;color:#586E68;background:transparent;border:1px solid #DFE5DA;border-radius:16px}
+.kid.pl.lernraum .pl-steps-toggle .ico:last-child{margin-left:auto}
+.kid.pl.lernraum .pl-steps-toggle .ico:first-child{margin-left:16px}
+.kid.pl.lernraum .pl-steps-toggle .ico:last-child{margin-right:16px}
+.kid.pl.lernraum .pl-steps-toggle[aria-expanded=true] .ico:last-child{transform:rotate(180deg)}
+.kid.pl.lernraum:not(.kino) .schritte{height:auto;max-height:360px;aspect-ratio:auto;padding:8px;background:#FFF;border:1px solid #DFE5DA;box-shadow:none;border-radius:20px;scrollbar-width:thin}
+.kid.pl.lernraum .sbtn{font-family:inherit;font-size:14px;min-height:52px;border:0;border-radius:12px;background:#F7F8F4;color:#183D3A;padding:10px;gap:10px;box-shadow:none}
+.kid.pl.lernraum .sbtn.cur{background:#E6EFE6;border:1px solid #B7CEC1;font-size:14px;box-shadow:none}
+.kid.pl.lernraum .sbtn .num{width:28px;height:28px;font-size:12px;font-weight:900;background:#E6EFE6;color:#22645B}
+.kid.pl.lernraum .sbtn.cur .num{background:#22645B;color:#FFF}
+.kid.pl.lernraum:not(.kino) .pl-bank{position:relative;z-index:1;background:transparent;box-shadow:none;border:0;margin-top:8px;padding:10px 0 calc(18px + env(safe-area-inset-bottom,0px));flex:none}
+.kid.pl.lernraum:not(.kino) .steuer{margin:0;flex-wrap:wrap;gap:16px;align-items:center}
+.kid.pl.lernraum .controls{gap:10px;flex-wrap:nowrap;width:100%}
+.kid.pl.lernraum:not(.kino) .controls{max-width:none}
+.kid.pl.lernraum .controls .kbtn{border:1px solid #DDE4DB;background:#FFF;box-shadow:none;min-height:58px;color:#183D3A;border-radius:18px;font-family:inherit;font-weight:900}
+.kid.pl.lernraum .controls .kbtn.round{width:58px;min-height:58px;font-size:24px;flex:none}
+.kid.pl.lernraum .controls .pl-main-action{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#22645B;color:#FFF;border-color:#22645B;padding:0 24px;min-width:170px;min-height:64px;font-size:19px;white-space:nowrap}
+.kid.pl.lernraum .controls .pl-main-action .ico{width:23px;height:23px}
+.kid.pl.lernraum .pl-controls-space{flex:1;min-width:0}
+.kid.pl.lernraum .controls .speed{display:flex;flex-direction:column;justify-content:center;gap:1px;min-height:58px;padding:5px 12px;min-width:58px;border:1px solid #DDE4DB;border-radius:18px;box-shadow:none;background:#FFF;font-size:23px;font-family:inherit;line-height:1.15}
+.kid.pl.lernraum .controls .speed.slow{background:#E6EFE6;border-color:#B7CEC1}
+.kid.pl.lernraum .controls .speed .lab{font-size:10px;color:#586E68;letter-spacing:0}
+.kid.pl.lernraum .controls button:disabled{opacity:.34;cursor:default}
+.kid.pl.lernraum:not(.kino) .auftrag{flex:0 0 100%;min-width:0;max-width:none;margin:0;padding:18px;border:1px solid #DDE4DB;border-radius:20px;box-shadow:none;background:#FFF;transform:none;gap:10px}
+.kid.pl.lernraum .auftrag .k{color:#586E68;font-size:12px}
+.kid.pl.lernraum .auftrag .txt{font-size:18px;line-height:1.4}
+.kid.pl.lernraum .auftrag .kbtn{background:#22645B;color:#FFF;border:0;box-shadow:none;font-family:inherit;border-radius:14px}
+.kid.pl.lernraum.kino .pl-current,.kid.pl.lernraum.kino .pl-steps-toggle{display:none}
+.kid.pl.lernraum.kino .controls{width:auto;flex:none}
+.kid.pl.lernraum.kino .controls .pl-main-action{min-width:124px;min-height:58px;padding-inline:16px}
+.kid.pl.lernraum.kino .pl-controls-space{display:none}
+.kid.pl.lernraum.kino .kinostep{border:0}
+.kid.pl.lernraum.kino .kino-step .lbl{font-family:inherit;font-size:20px}
+.kid.pl.lernraum.kino .modebadge{left:50%;transform:translateX(-50%)}
+/* Foto-Anleitungen verwenden dieselbe ruhige Sprache und dieselben Formen. */
+.v3.an .an-progress{display:flex;align-items:center;gap:18px;margin:22px 0 8px;color:#586E68;font-size:13px;font-weight:900}
+.v3.an .an-progress>span{white-space:nowrap}
+.v3.an .an-track{height:7px;background:#E4E9DD;border-radius:999px;overflow:hidden;flex:1}
+.v3.an .an-track i{display:block;height:100%;border-radius:inherit;background:#22645B}
+.v3.an .an-start{grid-template-columns:minmax(0,1.4fr) minmax(260px,1fr);gap:40px;margin-top:32px;align-items:center}
+.v3.an .an-start-copy{gap:20px;padding:16px 0}
+.v3.an .an-start-copy .an-eyebrow{font-size:13px;font-weight:900;color:#586E68}
+.v3.an .an-start-copy h2{font-family:inherit;font-size:clamp(30px,4vw,44px);font-weight:900;line-height:1.12;margin:0}
+.v3.an .an-intro-line{font-size:18px;font-weight:700;color:#586E68}
+.v3.an .an-held{background:#FFF;padding:14px;border-radius:30px;box-shadow:0 8px 26px rgba(24,61,58,.05);border:1px solid #E3E9DF;overflow:hidden}
+.v3.an .an-held img{width:100%;height:100%;max-height:62vh;min-height:240px;object-fit:contain;display:block;border-radius:20px;background:#FFF}
+.v3.an .an-material{border-top:1px solid #DDE4DB;padding-top:8px}
+.v3.an .an-material summary{display:flex;gap:10px;align-items:center;cursor:pointer;list-style:none;min-height:52px;font-size:16px;font-weight:900;color:#22645B}
+.v3.an .an-material summary::-webkit-details-marker{display:none}
+.v3.an .an-material summary>span{margin-left:auto;background:#E6EFE6;padding:3px 10px;border-radius:999px;font-size:12px}
+.v3.an .an-material summary::after{content:'+';font-size:23px;margin-left:2px}
+.v3.an .an-material[open] summary::after{content:'−'}
+.v3.an .an-material .v3-mat{margin-top:12px;padding-bottom:16px}
+.v3.an .an-schritt{grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr);gap:30px;margin-top:22px}
+.v3.an .an-bilder{background:#FFF;border:1px solid #E3E9DF;box-shadow:0 8px 26px rgba(24,61,58,.04);padding:12px;border-radius:26px}
+.v3.an .an-bilder button{background:#FAFAF6;border-radius:18px}
+.v3.an .an-bilder img{max-height:68vh}
+.v3.an .an-text{position:relative;display:block;background:#FFF;border:1px solid #E3E9DF;box-shadow:none;padding:24px;border-radius:24px}
+.v3.an .an-text .an-nr{width:36px;height:36px;font-size:16px;background:#E6EFE6;color:#22645B;margin-bottom:18px}
+.v3.an .an-text p{font-size:clamp(21px,2.15vw,27px);font-weight:900;line-height:1.35;margin:0;text-wrap:pretty}
+.v3.an .an-text .v3-rund{position:absolute;right:20px;top:20px;background:#F1F5EE;color:#22645B;box-shadow:none}
+.v3.an .an-box{font-size:16px;padding:16px;border-radius:18px;line-height:1.45}
+.v3.an .an-box.achtung{background:#FFF1D1;color:#654B12}
+.v3.an .an-box.tipp{background:#F2EEE3;color:#586047}
+.v3.an .an-box.frage{background:#EAF1F0;color:#285650}
+.v3.an .an-box.vorlage{background:#EAF1F0;color:#22645B}
+.v3.an .an-box.zeigen{border:1px solid #E9C285;background:#FFF8E7;color:#684D14}
+.v3.an .an-box.zeigen.ok{border-color:#B7CEC1;background:#E6EFE6;color:#22645B}
+.v3.an .an-box.zeigen .sym{font-size:36px;line-height:1.1}
+.v3.an details.an-box{display:block}
+.v3.an .an-extra summary{cursor:pointer;min-height:32px;font-size:15px;font-weight:900;line-height:1.5}
+.v3.an .an-extra summary span{margin-right:5px}
+.v3.an .an-extra[open]>div{margin-top:12px}
+.v3.an .achtung .an-extra{margin-top:8px}
+.v3.an .achtung .an-extra p{margin-top:8px}
+.v3.an .an-laden,.v3.an .an-gesehen,.v3.an .an-weiter{background:#22645B;color:#FFF!important;border-radius:16px;font-family:inherit;box-shadow:none;display:inline-flex;align-items:center;justify-content:center;gap:10px}
+.v3.an .an-weiter{font-weight:900;min-height:62px;min-width:160px;font-size:20px}
+.v3.an .an-nav .v3-pill{min-height:62px;border:1px solid #DDE4DB;border-radius:16px;box-shadow:none;background:#FFF}
+.v3.an .an-nav{gap:10px;margin-top:4px}
+.v3.an .an-gesehen{font-size:15px;min-height:44px;margin-top:12px}
+.v3.an .an-box.zeigen.ok .an-gesehen{background:#22645B}
+.v3.an .an-ende{border-radius:30px;background:#FFF;border:1px solid #E3E9DF;box-shadow:none;padding:36px}
+.v3.an .an-ende h2{font-size:30px;line-height:1.2}
+@media(max-width:1050px){
+  .kid.pl.lernraum:not(.kino) .panes{grid-template-columns:minmax(0,1.8fr) minmax(250px,1fr);gap:20px}
+  .kid.pl.lernraum .pl-current{padding:20px}
+  .kid.pl.lernraum:not(.kino) .controls{max-width:none}
+  .kid.pl.lernraum .pl-current h2{font-size:22px}
+}
+@media(max-width:800px){
+  .kid.pl.lernraum .inner{padding-inline:max(18px,env(safe-area-inset-left,0px))}
+  .kid.pl.lernraum .pl-top{padding-block:18px 22px;gap:12px;min-height:84px}
+  .kid.pl.lernraum:not(.kino) .panes{grid-template-columns:1fr;gap:18px}
+  .kid.pl.lernraum .pl-current h2{font-size:23px}
+  .kid.pl.lernraum .pl-current>.figur{float:right;height:88px;margin:0 0 0 16px}
+  .kid.pl.lernraum .pl-material{grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:12px;max-width:660px}
+  .kid.pl.lernraum .pl-material>div>span{max-width:100px}
+  .kid.pl.lernraum:not(.kino) .pl-bank{margin-top:20px;padding-block:12px calc(12px + env(safe-area-inset-bottom,0px))}
+  .v3.an .an-start,.v3.an .an-schritt{grid-template-columns:1fr;gap:20px;margin-top:20px}
+  .v3.an .an-start-copy{gap:16px;padding:0}
+  .v3.an .an-held img{max-height:46vh;min-height:200px}
+  .v3.an .an-bilder img{max-height:46vh}
+  .v3.an .an-text{padding:20px}
+  .v3.an .an-text .an-nr{margin-bottom:14px}
+  .v3.an .an-text p{font-size:22px}
+  .v3.an .an-progress{margin-top:18px}
+}
+@media(max-width:520px){
+  .kid.pl.lernraum .inner{padding-inline:max(14px,env(safe-area-inset-left,0px))}
+  .kid.pl.lernraum .pl-top{gap:10px;padding-block:14px 18px}
+  .kid.pl.lernraum .pl-heading h1{font-size:20px}
+  .kid.pl.lernraum .pl-heading small{font-size:11px}
+  .kid.pl.lernraum .schild-btn{width:44px;height:44px;min-width:44px}
+  .kid.pl.lernraum:not(.kino) .video-box{border-radius:20px}
+  .kid.pl.lernraum .pl-current{padding:18px;border-radius:20px}
+  .kid.pl.lernraum .pl-current-top{margin-bottom:12px}
+  .kid.pl.lernraum .pl-current h2{font-size:21px}
+  .kid.pl.lernraum .pl-track{margin-top:17px}
+  .kid.pl.lernraum .pl-material{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+  .kid.pl.lernraum .pl-material b{font-size:10px}
+  .kid.pl.lernraum .controls{gap:7px;flex-wrap:wrap;justify-content:center}
+  .kid.pl.lernraum .controls .kbtn.round{width:46px;min-height:48px;border-radius:15px;font-size:21px}
+  .kid.pl.lernraum .controls .pl-main-action{flex:1;min-width:130px;min-height:54px;padding:0 14px;font-size:17px;border-radius:16px}
+  .kid.pl.lernraum .controls .speed{min-width:46px;min-height:48px;padding:4px 8px;border-radius:15px;font-size:21px}
+  .kid.pl.lernraum .controls .speed .lab{display:none}
+  .kid.pl.lernraum .pl-controls-space{display:none}
+  .kid.pl.lernraum .modebadge{left:10px;top:10px;height:30px;padding:0 10px;font-size:12px}
+  .kid.pl.lernraum .overlay .kbtn.round{width:64px;min-height:64px;font-size:28px}
+  .kid.pl.lernraum .overlay .lbl{font-size:16px}
+  .kid.pl.lernraum .pl-intro-actions{gap:7px;padding:10px}
+  .kid.pl.lernraum .overlay .kbtn.ghost{font-size:12px;min-height:36px}
+  .kid.pl.lernraum.kino .controls .pl-main-action{flex:none;min-width:110px}
+  .v3.an .an-start-copy h2{font-size:31px}
+  .v3.an .an-progress{gap:10px;font-size:12px}
+  .v3.an .an-text p{font-size:21px}
+  .v3.an .an-bilder.zwei{grid-template-columns:1fr}
+  .v3.an .an-weiter{min-width:120px;padding-inline:16px;font-size:18px}
+  .v3.an .an-nav .v3-pill{padding-inline:16px}
+}
+@media(orientation:landscape) and (max-height:500px){
+  .kid.pl.lernraum.kino .controls{flex-wrap:wrap;width:100%;gap:7px}
+  .kid.pl.lernraum.kino .controls .pl-main-action{order:-1;flex:0 0 100%;min-width:0;min-height:48px;font-size:16px;padding-inline:8px}
+  .kid.pl.lernraum.kino .controls .kbtn.round{width:44px;min-height:44px;font-size:20px}
+  .kid.pl.lernraum.kino .controls .speed{min-width:44px;min-height:44px;padding:4px 6px}
+  .kid.pl.lernraum.kino .controls .speed .lab{display:none}
+}
+@media(min-height:501px){.kid.pl.lernraum.kino .pl-bank{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}}
+@media(prefers-reduced-motion:reduce){.kid.pl.lernraum .pl-track i{transition:none}}
+
 </style>
 </head>
 <body>
@@ -768,12 +1198,9 @@ const MAT_BASE=SCHULE?'../material/':'material/';
 const MAT_FOTOS=new Map(); // id -> Dateiname, aus material/fotos.json
 function matIcon(id,foto=true){ const svg=MAT_SVG[id]||(id==='wolle'?DINGE.wolle:id==='schere'?DINGE.schere:null); const m=MATERIAL[id]; const pikto=svg?`<svg class="mat-svg" viewBox="0 0 120 110" aria-hidden="true">${svg}</svg>`:`<span class="mat-emoji" aria-hidden="true">${m?m[1]:'📦'}</span>`; if(foto&&MAT_FOTOS.has(id)) return `<span class="mat-ico"><img class="mat-foto" src="${MAT_BASE}${MAT_FOTOS.get(id)}" alt="" loading="lazy" onerror="this.remove()">${pikto}</span>`; return pikto; }
 async function loadMatFotos(){ if(!/^https?:/.test(location.protocol)) return; try{ const r=await fetch(MAT_BASE+'fotos.json',{cache:'no-store'}); if(!r.ok) return; const j=await r.json(); (j.fotos||j||[]).forEach(x=>{ const f=String(x); MAT_FOTOS.set(f.replace(/\.[a-z0-9]+$/i,''),f); }); }catch(e){} }
-const WERKE_BASE=SCHULE?'../werke/':'werke/';
 const VOR_BASE=SCHULE?'../vorschau/':'vorschau/'; const VORSCHAU=new Set();   // ruhige Standbilder statt YouTube-Vorschau (werkzeug/vorschau.py)
 async function loadVorschau(){ if(!/^https?:/.test(location.protocol)) return; try{ const r=await fetch(VOR_BASE+'vorschau.json',{cache:'no-store'}); if(!r.ok) return; const j=await r.json(); (j.bilder||[]).forEach(x=>VORSCHAU.add(String(x))); }catch(e){} }
-function ytThumb(id){ return VORSCHAU.has(id)?`${VOR_BASE}${id}.webp`:`https://i.ytimg.com/vi/${id}/mqdefault.jpg`; }
-let WERKE=[]; // {bild,titel,bereich}, aus werke/werke.json: Fotos fertiger Arbeiten («Das haben andere gemacht»)
-async function loadWerke(){ if(!/^https?:/.test(location.protocol)) return; try{ const r=await fetch(WERKE_BASE+'werke.json',{cache:'no-store'}); if(!r.ok) return; const j=await r.json(); WERKE=(j.werke||[]).filter(w=>w&&w.bild); }catch(e){} }
+function ytThumb(id){ return VORSCHAU.has(id)?`${VOR_BASE}${id}.webp`:`https://i.ytimg.com/vi/${id}/hqdefault.jpg`; }
 const ANL_BASE=SCHULE?'../anleitungen/':'anleitungen/';
 // Foto-Anleitungen aus anleitungen/anleitungen.json: Schritte mit Fotos statt Video, laufen als source.type 'bilder' bei den Videos mit
 async function loadAnleitungen(){ if(!/^https?:/.test(location.protocol)) return; try{ const r=await fetch(ANL_BASE+'anleitungen.json',{cache:'no-store'}); if(!r.ok) return; const j=await r.json();
@@ -785,8 +1212,8 @@ function lpCode(c){ return c.replace(/^TTG\./,''); }
 // Kompetenzen eines Videos mit den Stufentexten der Zyklen, für die es gedacht ist (Klasse 1–2 = Zyklus 1, 3–6 = Zyklus 2)
 function lpPanel(v){ const st=v.stufen||[]; const zyk=[st.some(s=>s<=2)&&1,st.some(s=>s>=3)&&2].filter(Boolean); if(!zyk.length) zyk.push(1,2);
   return `<div class="lp-panel">${(LP21.zuordnung[v.id]||[]).map(c=>{ const k=LP21.kompetenzen[c]; if(!k) return ''; return `<div class="lp-k"><a href="${esc(k.link)}" target="_blank" rel="noopener"><b>${lpCode(c)}</b> ${esc(k.titel)}</a>${k.stufen.filter(s=>zyk.includes(s.zyklus)).map(s=>`<div class="lp-s"><span>${lpCode(s.code)} · ${s.zyklus}. Zyklus</span>${esc(s.text)}</div>`).join('')}</div>`; }).join('')}</div>`; }
-function werkeHtml(ws){ return ws.length?`<h2 class="pw-grp andere-titel">Das haben andere gemacht</h2><div class="kork andere">${ws.map(w=>`<button class="foto" data-act="andere" data-i="${WERKE.indexOf(w)}"><div class="bild"><img src="${WERKE_BASE}${esc(w.bild)}" alt="" loading="lazy" onerror="this.closest('.foto').remove()"></div><span class="nm">${esc(w.titel)}</span></button>`).join('')}</div>`:''; }
-function zeigeWerk(b){ const w=WERKE[+b.dataset.i]; if(!w) return; kidModal(`<img class="andere-gross" src="${WERKE_BASE}${esc(w.bild)}" alt=""><h2 style="font-size:20px;margin:10px 0 0">${esc(w.titel)}</h2><div class="row center" style="margin-top:12px"><button class="kbtn ghost" data-close>Schliessen</button></div>`); }
+function werkeHtml(areaId){ const ws=S.works.filter(w=>w.type!=='ton'&&w.videoId&&videoOf(w.videoId)&&videoOf(w.videoId).areaId===areaId); return ws.length?`<h2 class="pw-grp andere-titel">Das haben andere gemacht</h2><div class="kork andere">${ws.map(w=>`<button class="foto" data-act="andere" data-id="${w.id}"><div class="bild"><img data-blob="${w.id}" alt=""></div><span class="nm">${esc(videoOf(w.videoId).title)}</span></button>`).join('')}</div>`:''; } // Fotos, die in der App zu Videos dieses Themas gemacht wurden
+async function zeigeWerk(b){ const w=S.works.find(x=>x.id===b.dataset.id); if(!w) return; const u=await blobs.url(w.id); const v=videoOf(w.videoId); kidModal(`<img class="andere-gross" src="${u||''}" alt="">${v?`<h2 style="font-size:20px;margin:10px 0 0">${esc(v.title)}</h2>`:''}<div class="row center" style="margin-top:12px"><button class="kbtn ghost" data-close>Schliessen</button></div>`); } // nur anschauen, kein Löschen
 try{ localStorage.setItem('schrittli.app',SCHULE?'schule':'familie'); }catch(e){}   // für «← Zurück zur App» auf den Vorlagen-Seiten (vorlagen/zurueck.js)
 const VL_ZIEL=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true?'':' target="_blank" rel="noopener"';   // App auf dem Home-Bildschirm: Vorlagen im selben Fenster, sonst neuer Tab
 const VORL_BASE=SCHULE?'../vorlagen/':'vorlagen/';   // eigene Vorlagen zu Videos, z. B. vorlagen/vorlage-nikolausstiefel-a4.pdf
@@ -893,7 +1320,25 @@ function stopListening(){ if(rec){ try{ rec.onend=null; rec.stop(); }catch(e){} 
 
 /* ============================== UI-Helfer ============================== */
 function toast(msg,ms=2200){ const t=document.createElement('div'); t.className='toast'; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),ms); }
-function modal(html,actions={},cls=''){ const m=document.createElement('div'); m.className='modal-bg'; if(/kid/.test(cls)&&schriftNormal()) cls+=' schrift-normal'; m.innerHTML=`<div class="modal ${cls}">${html}</div>`; document.body.appendChild(m); const close=()=>m.remove(); m.addEventListener('click',e=>{ if(e.target===m){close();return;} const b=e.target.closest('[data-act],[data-close]'); if(!b) return; if(b.hasAttribute('data-close')){close();return;} const fn=actions[b.dataset.act]; if(fn) fn(b,close,m); }); return close; }
+function modal(html,actions={},cls=''){
+  const previous=document.activeElement,m=document.createElement('div');m.className='modal-bg';
+  if(/\bkid\b/.test(cls)&&schriftNormal())cls+=' schrift-normal';
+  m.innerHTML='<div class="modal '+cls+'" role="dialog" aria-modal="true" tabindex="-1">'+html+'</div>';
+  document.body.appendChild(m);
+  const dialog=$('.modal',m),heading=$('h2',m);
+  if(heading){heading.id='dialog-'+uid();dialog.setAttribute('aria-labelledby',heading.id);}else dialog.setAttribute('aria-label','Schritt für Schritt');
+  let closed=false;
+  const close=()=>{if(closed)return;closed=true;m.remove();if(previous&&previous.isConnected)previous.focus({preventScroll:true});};
+  const focusable=()=>$$('button:not([disabled]),a[href],input:not([disabled]),textarea:not([disabled]),select:not([disabled]),[tabindex="0"]',m).filter(el=>el.getClientRects().length);
+  m.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){e.preventDefault();e.stopPropagation();close();return;}
+    if(e.key!=='Tab')return;const items=focusable(),first=items[0],last=items[items.length-1];
+    if(!first){e.preventDefault();dialog.focus();}else if(e.shiftKey&&(document.activeElement===first||document.activeElement===dialog)){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+  });
+  m.addEventListener('click',e=>{if(e.target===m){close();return;}const b=e.target.closest('[data-act],[data-close]');if(!b)return;if(b.hasAttribute('data-close')){close();return;}const fn=actions[b.dataset.act];if(fn)fn(b,close,m);});
+  requestAnimationFrame(()=>{if(!closed)(focusable()[0]||dialog).focus({preventScroll:true});});
+  return close;
+}
 function confirmBox(title,text,okLabel,onOk,danger){ modal(`<h2>${esc(title)}</h2><p>${esc(text)}</p><div class="row" style="justify-content:flex-end"><button class="btn ghost" data-close>Abbrechen</button><button class="btn ${danger?'danger':'primary'}" data-act="ok">${esc(okLabel)}</button></div>`,{ok:(b,close)=>{close();onOk();}}); }
 function confetti(){ if(reduced) return; const c=$('#confetti'),ctx=c.getContext('2d'); c.width=innerWidth; c.height=innerHeight; c.style.display='block'; const ps=[]; for(let i=0;i<110;i++) ps.push({x:innerWidth/2,y:innerHeight*.45,vx:(Math.random()-.5)*16,vy:-Math.random()*13-4,r:Math.random()*7+4,c:['#F3B51B','#E8554E','#3BB273','#4C6EF5','#9B5DE5','#F28C28'][i%6],a:Math.random()*6,s:Math.random()*.2+.05}); const t0=performance.now(); (function f(t){ ctx.clearRect(0,0,c.width,c.height); ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.35;p.vx*=.99;p.a+=p.s;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.a);ctx.fillStyle=p.c;ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*.6);ctx.restore();}); if(t-t0<2200) requestAnimationFrame(f); else{ c.style.display='none'; } })(t0); }
 function starsHtml(pid,sm){ const st=starState(pid); const total=S.settings.starsPerDay+st.bonus, left=total-st.used; let h=`<div class="stars${sm?' sm':''}" aria-label="${left} von ${total} Sternen">`; for(let i=0;i<total;i++) h+=`<span class="st${i<left?' on':''}">${ico('star')}</span>`; return h+'</div>'; }
@@ -926,11 +1371,22 @@ function fehlerMelden(){ try{ if(P&&P.api) P.api.pause(); }catch(e){}
 function fmKnopf(){ const b=document.createElement('button'); b.className='fm-knopf'; b.type='button'; b.title='Fehler melden'; b.setAttribute('aria-label','Fehler melden'); b.innerHTML=ico('flag'); b.onclick=fehlerMelden; document.body.appendChild(b); }
 
 /* ============================== Router ============================== */
-const SCREENS={}; let view={name:'boot',params:{}}; let parentOpen=false;
-function go(name,params={}){ if(SCHULE&&(name==='parent'||name==='firstrun'||name==='profiles')) name='home'; leaveScreen(); ORT=null; if(name!=='parent') parentOpen=false; view={name,params}; render(); window.scrollTo(0,0); }
+const SCREENS={}; let view={name:'boot',params:{}}; let parentOpen=false,playerReturn=null;
+function go(name,params={}){
+  if(SCHULE&&(name==='parent'||name==='firstrun'||name==='profiles'))name='home';
+  if(name==='player'&&['home','zimmer','area','entdecken'].includes(view.name))playerReturn={name:view.name,params:{...view.params},scroll:window.scrollY||0};
+  if(name==='school')playerReturn=null;
+  leaveScreen();ORT=null;if(name!=='parent')parentOpen=false;view={name,params};render();window.scrollTo(0,0);
+  const heading=$('#app h1');if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true});}
+}
+function backToIdeas(a,shared){
+  if(shared){history.replaceState(null,'',location.pathname+location.search);playerReturn=null;go('home');return;}
+  const back=playerReturn;go(back?back.name:a?'area':'home',back?{...back.params}:a?{id:a.id}:{});
+  if(back)requestAnimationFrame(()=>window.scrollTo(0,back.scroll));
+}
 function leaveScreen(){ if(P){ P._fsLeaving=true; P.destroy(); P=null; } fsExit(); if(ED&&ED.api){ ED.api.destroy(); ED.api=null; } stopListening(); try{ speechSynthesis.cancel(); }catch(e){} }
 function render(){ const app=$('#app'); app.innerHTML=''; app.onclick=null; app.oninput=null; app.onchange=null; (SCREENS[view.name]||SCREENS.home)(app,view.params); }
-function wire(app,actions){ app.onclick=e=>{ const b=e.target.closest('[data-act]'); if(!b||!app.contains(b)) return; const fn=actions[b.dataset.act]; if(fn){ e.preventDefault(); fn(b,e); } }; }
+function wire(app,actions){ app.onclick=e=>{ const b=e.target.closest('[data-act]'); if(!b||!app.contains(b)) return; const fn=actions[b.dataset.act]||(b.dataset.act==='klassewahl'?klasseWaehlen:null); if(fn){ e.preventDefault(); fn(b,e); } }; }
 function kopf(title,{back,right='',sub=''}={}){ return `<div class="inner kopf" style="padding-left:max(16px,env(safe-area-inset-left,0px))">${back?`<a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a>`:''}<div class="schild"><h1>${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:''}</div><div class="kopf-rechts">${right}</div></div>`; }
 function bank(opts={}){ return `<div class="bank"><div class="inner deko-reihe"><span class="grow"></span></div><div class="platte"></div><div class="front"></div></div>`; }
 
@@ -955,9 +1411,11 @@ async function loadContentFile(){
     contentInfo={n:vs.length,stand:(sch||fam).stand||''}; save();
   }catch(e){}
 }
-SCREENS.boot=app=>{ app.innerHTML='<div class="screen"><p class="muted">Lädt…</p></div>'; };
+SCREENS.boot=app=>{app.innerHTML=`<main class="v3"><div class="v3-loading" role="status">${figur('hallo')}<p>Deine Ideen laden …</p><span class="v3-loading-dots" aria-hidden="true"><i></i><i></i><i></i></span></div></main>`;};
 async function boot(){
-  await blobs.open(); await Promise.all([loadContentFile(),loadMatFotos(),loadWerke(),loadAnleitungen(),loadVorschau()]);
+  render();
+  await blobs.open();
+  await Promise.all([loadContentFile().then(loadAnleitungen),loadMatFotos(),loadVorschau()]);
   const school=parseSchool(); if(school){ go('school',{video:school}); return; }
   if(SCHULE){ go(S.settings.klasse?'home':'klasse'); return; }
   if(!S.profiles.length){ go('firstrun'); return; }
@@ -991,12 +1449,12 @@ SCREENS.profiles=app=>{
 };
 
 /* ============================== Schule ============================== */
-SCREENS.klasse=app=>{ const n=abend();
-  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${fenster(n)}
-    <div class="inner kopf mitfenster"><div class="fig-gruss">${figur(n?'abend':'hallo')}<div class="schild hallo"><h1>Hallo!</h1><div class="sub">In welche Klasse gehst du?</div></div></div></div>
-    <div class="inner"><div class="klassen">${STUFEN.map(k=>`<button class="klasse-btn" data-act="k" data-k="${k}"><span class="z">${k}.</span><span class="w">Klasse</span></button>`).join('')}</div></div>
-    ${bank()}</div>`;
-  wire(app,{ k:b=>{ S.settings.klasse=+b.dataset.k; save(); go('home'); } });
+SCREENS.klasse=app=>{
+  app.innerHTML=`<main class="v3"><div class="v3-in">${v3Kopf('')}
+    <section class="v3-hero v3-home-hero"><div class="v3-hero-copy"><span class="v3-eyebrow">Deine Ideenwerkstatt</span><h1>Hallo, schön bist du da!</h1><p>In welche Klasse gehst du?</p></div>${figur('hallo')}</section>
+    <div class="v3-class-grid">${STUFEN.map(k=>`<button class="v3-class-choice" data-act="k" data-k="${k}"><span>${k}</span><b>Klasse</b></button>`).join('')}</div>
+    </div></main>`;
+  wire(app,{ k:b=>{ S.settings.klasse=+b.dataset.k; save(); go('home'); }, gallery:()=>go('gallery') });
 };
 /* Variante 3a «Luftig & klar»: zuerst der Raum (wird gemerkt), dann Themen als Kacheln, im Thema die Lektionen nach Niveau */
 const GRAFIK=SCHULE?'../grafik/':'grafik/';
@@ -1007,7 +1465,38 @@ const raumOf=aid=>RAEUME[0].themen.includes(aid)?RAEUME[0]:RAEUME[1];
 const raumThemen=r=>S.areas.filter(a=>THEMA_ID.has(a.id)&&raumOf(a.id)===r&&videosIn(a.id).length);
 const soft=a=>`color-mix(in oklch,${a.color} 16%,white)`;
 const prSchule=v=>S.progress[S.activeProfile+':'+v.id]||{};
-function v3Kopf(links,titel){ return `<div class="v3-kopf">${links}<span class="v3-logo"><img src="${GRAFIK}figuren/logo.webp" alt=""></span>${titel||'<b class="v3-name">Schritt für Schritt</b>'}<span class="grow"></span><button class="v3-pill" data-act="gallery">${SCHULE?'Unsere':'Meine'} Werke${S.works.length?' · '+S.works.length:''}</button></div>`; }
+function v3Kopf(links,titel){ return `<header class="v3-kopf">${links}<span class="v3-logo"><img src="${GRAFIK}figuren/icon.png" alt=""></span>${titel||'<b class="v3-name">Schritt für Schritt</b>'}<span class="grow"></span>${SCHULE&&S.settings.klasse?`<button class="v3-pill" data-act="klassewahl" aria-label="Klasse ändern: ${S.settings.klasse}. Klasse">${S.settings.klasse}. Klasse</button>`:''}<button class="v3-pill" data-act="gallery">${ico('gallery')} <span>${SCHULE?'Unsere':'Meine'} Werke</span></button></header>`; }
+function klasseWaehlen(){
+  modal(`<h2>Deine Klasse</h2><div class="v3-class-grid">${STUFEN.map(k=>`<button class="v3-class-choice${S.settings.klasse===k?' an':''}" data-act="klasse" data-k="${k}" aria-pressed="${S.settings.klasse===k}"><span>${k}</span><b>Klasse</b></button>`).join('')}</div><button class="btn ghost" data-close>Schliessen</button>`,{klasse:(b,close)=>{S.settings.klasse=+b.dataset.k;save();close();render();}},'v3-dialog');
+}
+// Kurze, von Hand gewählte Namen. Die vollständigen Titel bleiben in den Quelldaten.
+const PROJECT_TITLES={
+  'wl-wickeldrache':'Wickeldrachen', 'zw-igel-holz':'Holzigel', 'zw-fadenbild':'Fadenherz',
+  'zw-karte-herz-weben':'Herzkarte weben', 'zw-wollgespenst':'Wollgespenster',
+  'zw-eulen-kartoffelstempel':'Eulen stempeln', 'zw-filzseife':'Filzseife',
+  'zw-steppstich':'Bärenbauch annähen', 'raketenstation-1':'Startrampe', 'raketenstation-2':'Rakete'
+};
+function projectTitle(v){return PROJECT_TITLES[v.id]||v.title;}
+function projectCard(v){
+  const pr=prSchule(v), photo=v.source.type==='bilder', th=thumbOf(v), a=areaOf(v.areaId);
+  const started=!pr.done&&(pr.pos>5||pr.step>0), title=projectTitle(v);
+  return `<button class="v3-lektion${photo?' foto-anleitung':''}${started?' begonnen':''}" data-act="video" data-id="${esc(v.id)}" aria-label="${esc(title)}${pr.done?' – geschafft':started?' – weitermachen':''}">
+    <span class="th"><span class="v3-image-fallback" aria-hidden="true">${a?esc(a.emoji):'✂️'}</span>${th?`<img src="${esc(th)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`:''}
+      ${photo?'<span class="v3-card-kind">Fotos</span>':''}<span class="v3-card-play" aria-hidden="true">${ico(photo?'next':'play')}</span>
+      ${pr.done?`<span class="v3-card-progress fertig">${ico('check')} Geschafft</span>`:started?'<span class="v3-card-progress">Weitermachen</span>':''}</span>
+    <span class="grow"><b>${esc(title)}</b></span></button>`;
+}
+const FEATURED_PROJECTS=['wl-wickeldrache','zw-igel-holz','zw-karte-herz-weben','zw-filzseife','zw-fadenbild','zw-wollgespenst','zw-eulen-kartoffelstempel','flieger-windhover','stifteetui-ungefuettert','buchtasche'];
+function featuredProjects(vs,limit=6){
+  const eligible=vs.filter(v=>!v.grundtechnik&&thumbOf(v));
+  const picks=FEATURED_PROJECTS.map(id=>eligible.find(v=>v.id===id)).filter(Boolean);
+  // Verifizierte Ergebnisfotos zuerst; weitere Foto-Anleitungen nur bei wenigen passenden Ideen.
+  const seen=new Set(picks.map(v=>v.id));
+  for(const v of eligible.filter(v=>v.source.type==='bilder')) if(!seen.has(v.id)){picks.push(v);seen.add(v.id);}
+  return picks.slice(0,limit);
+}
+function discoverVideos(room){return S.areas.filter(a=>a.kind!=='spass'&&(!room||raumOf(a.id).id===room)).flatMap(a=>videosIn(a.id));}
+function roomTabs(selected){return `<div class="v3-schalter" role="group" aria-label="Werkstatt wählen">${[['','Alles'],['hand','Handarbeit'],['werk','Werkraum']].map(([id,label])=>`<button class="${selected===id?'an':''}" aria-pressed="${selected===id}" data-act="raum" data-id="${id}">${label}</button>`).join('')}</div>`;}
 function weiterMit(r){ const v=videoOf(S.settings.zuletzt); if(!v||raumOf(v.areaId)!==r||!videosIn(v.areaId).includes(v)) return null; const pr=prSchule(v); return !pr.done&&(pr.pos>5||pr.step>0)?{v,a:areaOf(v.areaId),schritt:(pr.step||0)+1}:null; }
 SCREENS.raum=app=>{ const akt=S.settings.raum;
   app.innerHTML=`<div class="v3${schriftNormal()?'':' caps'}"><div class="v3-in">${v3Kopf('')}
@@ -1016,39 +1505,58 @@ SCREENS.raum=app=>{ const akt=S.settings.raum;
     ${v3Fuss()}</div></div>`;
   wire(app,{ r:b=>{ S.settings.raum=b.dataset.id; save(); go('home'); }, gallery:()=>go('gallery'), lehrer:()=>go('lehrer'), werkzeuge:()=>go('werkzeuge') });
 };
-function themaKachel(a){ const vs=videosIn(a.id); const da=[1,2,3].map(n=>vs.some(v=>(+v.niveau||2)===n)); const tip='Niveaus: '+[1,2,3].filter(n=>da[n-1]).map(n=>NIVEAU[n]).join(', ');
-  return `<button class="v3-kachel" data-act="area" data-id="${a.id}"><span class="bild" style="background:${soft(a)}"><img src="${GRAFIK}${a.id}.webp" alt="" onerror="this.remove()"></span><b>${esc(a.name)}</b><span class="v3-zeile"><span class="v3-meta">${vs.length} Video${vs.length===1?'':'s'}</span><span class="v3-dots" title="${tip}" aria-label="${tip}">${da.map(x=>`<i${x?' class="an"':''}></i>`).join('')}</span></span></button>`; }
-function homeSchule(app,rid){ const r=RAEUME.find(x=>x.id===(rid||S.settings.raum)); if(!r){ go(SCHULE?'raum':'home'); return; } const k=S.settings.klasse; const themen=raumThemen(r); const w=weiterMit(r);
-  app.innerHTML=`<div class="v3${schriftNormal()?'':' caps'}"><div class="v3-in">
-    ${v3Kopf(`<button class="v3-rund" data-act="raeume" aria-label="${SCHULE?'Anderer Raum':'Zurück'}">←</button>`)}
-    <div class="v3-leiste"><div class="v3-schalter" role="group" aria-label="Raum">${RAEUME.map(x=>`<button class="${x===r?'an':''}" data-act="raum" data-id="${x.id}">${x.name}</button>`).join('')}</div>
-      <div class="v3-schalter v3-klassen" role="group" aria-label="Klasse"${SCHULE?'':' hidden'}>${STUFEN.map(s=>`<button class="${s===k?'an':''}" data-act="klasse" data-k="${s}" aria-label="${s}. Klasse">${s}.</button>`).join('')}</div></div>
-    <div class="v3-titel"><h1 class="v3-h1">${r.name}</h1>${w?`<button class="v3-weiter" data-act="weiter" data-id="${w.v.id}"><span class="bild" style="background:${soft(w.a)}"><img src="${GRAFIK}${w.a.id}.webp" alt=""></span><span class="txt"><small>Weiter mit</small><b>${esc(w.a.name)} · Schritt ${w.schritt}</b></span><span class="play" aria-hidden="true">▶</span></button>`:''}</div>
-    ${k||!SCHULE?'':'<p class="v3-sub">Tipp oben auf deine Klasse – dann siehst du nur, was zu dir passt.</p>'}
-    <div class="v3-themen">${themen.map(themaKachel).join('')||`<div class="v3-leer">${figur('nachdenken')}Für diese Klasse ist hier noch nichts da.</div>`}</div>
-    ${v3Fuss()}</div></div>`;
-  wire(app,{ raeume:()=>go(SCHULE?'raum':'home'), raum:b=>{ if(!SCHULE){ go('zimmer',{r:b.dataset.id}); return; } S.settings.raum=b.dataset.id; save(); render(); }, klasse:b=>{ S.settings.klasse=+b.dataset.k; save(); render(); },
-    area:b=>go('area',{id:b.dataset.id}), weiter:b=>go('player',{videoId:b.dataset.id}), lehrer:()=>go('lehrer'), werkzeuge:()=>go('werkzeuge'), gallery:()=>go('gallery') });
+function themaKachel(a){return `<button class="v3-kachel" data-act="area" data-id="${esc(a.id)}"><span class="bild" style="background:${soft(a)}">${THEMA_ID.has(a.id)?`<img src="${GRAFIK}${a.id}.webp" alt="" loading="lazy" onerror="this.remove()">`:`<span class="v3-image-fallback">${esc(a.emoji||'✂️')}</span>`}</span><b>${esc(a.name)}</b></button>`;}
+function homeSchule(app,rid){
+  const room=rid??S.settings.raum??'', r=RAEUME.find(x=>x.id===room), vs=discoverVideos(r?r.id:'');
+  const themen=S.areas.filter(a=>a.kind!=='spass'&&(!r||raumOf(a.id)===r)&&videosIn(a.id).length);
+  const featured=featuredProjects(vs), last=videoOf(S.settings.zuletzt), pr=last?prSchule(last):{};
+  const continuing=last&&vs.includes(last)&&!pr.done&&(pr.pos>5||pr.step>0);
+  const family=!SCHULE, p=profile();
+  app.innerHTML=`<main class="v3${schriftNormal()?'':' caps'}"><div class="v3-in">${v3Kopf('')}
+    <section class="v3-hero v3-home-hero"><div class="v3-hero-copy"><span class="v3-eyebrow">Deine Ideenwerkstatt</span><h1>${family&&p?'Hallo '+esc(p.name)+'!':'Was machst du heute?'}</h1><p>Aussuchen. Anschauen. Selber machen.</p></div>${figur(r?r.id==='hand'?'fila-faden':'bibo-holz':'hallo')}</section>
+    <div class="v3-leiste">${roomTabs(r?r.id:'')}${continuing?`<button class="v3-weiter" data-act="video" data-id="${esc(last.id)}"><span class="bild"><img src="${esc(thumbOf(last)||'')}" alt=""></span><span><small>Weitermachen</small><b>${esc(projectTitle(last))}</b></span><span class="play">${ico('play')}</span></button>`:''}</div>
+    <div class="v3-section-head"><h2>Das kannst du machen</h2><button class="v3-pill" data-act="entdecken">Alle Ideen ${ico('next')}</button></div>
+    <div class="v3-projects">${featured.map(projectCard).join('')||`<div class="v3-leer">${figur('nachdenken')}Wähle unten ein Thema.</div>`}</div>
+    <div class="v3-section-head"><h2>Was möchtest du lernen?</h2></div><div class="v3-themen">${themen.map(themaKachel).join('')}</div>
+    ${family&&S.settings.spass?`<div class="v3-section-head"><h2>Deine Pause</h2>${glasSterne(p.id,true)}</div><div class="v3-themen">${S.areas.filter(a=>a.kind==='spass'&&videosIn(a.id).length).map(themaKachel).join('')}</div>`:''}
+    ${v3Fuss()}${family?`<div class="v3-home-links">${S.profiles.length>1?'<button class="v3-link" data-act="who">Profil wechseln</button>':''}<button class="v3-link" data-act="parent">${ico('lock')} Für Eltern</button></div>`:''}</div></main>`;
+  wire(app,{raum:b=>{S.settings.raum=b.dataset.id;save();if(view.name==='zimmer')view.params.r=b.dataset.id;render();},klassewahl:klasseWaehlen,
+    area:b=>go('area',{id:b.dataset.id}),video:b=>go('player',{videoId:b.dataset.id}),entdecken:()=>go('entdecken',{room:r?r.id:''}),
+    lehrer:()=>go('lehrer'),werkzeuge:()=>go('werkzeuge'),gallery:()=>go('gallery'),parent:()=>go('parent',{tab:'videos'}),who:()=>go('profiles')});
 }
 SCREENS.zimmer=(app,{r})=>homeSchule(app,r);   // Familie: Handarbeit oder Werkraum aus dem Regal
 function gruppenOf(vids){ const m=new Map(); videoOrdnung(vids).forEach(v=>{ const g=v.gruppe||'Weitere Projekte'; if(!m.has(g)) m.set(g,[]); m.get(g).push(v); });   // Projektart im Thema (schule.json «gruppe»)
   const st=v=>v.grundtechnik?0:(+v.niveau||2), mitte=g=>g.reduce((s,v)=>s+st(v),0)/g.length;
   return [...m].sort((x,y)=>(Math.min(...x[1].map(st))-Math.min(...y[1].map(st)))||(mitte(x[1])-mitte(y[1]))); }   // leichteste Gruppe zuerst, darin leicht → anspruchsvoll
-function areaSchule(app,a){ const gr=gruppenOf(videosIn(a.id)); const vs=gr.flatMap(g=>g[1]); const jetzt=vs.find(v=>v.id===S.settings.zuletzt&&!prSchule(v).done)||vs.find(v=>!prSchule(v).done); let nr=0;
-  const zeile=v=>{ nr++; const pr=prSchule(v); const [cls,sym]=pr.done?['fertig','✓']:v===jetzt?['jetzt',nr]:['offen',nr]; const th=thumbOf(v);
-    const auf=v.task&&v.task.text&&v.task.deliverable!=='keine'?`<button class="v3-lektion aufgabe" data-act="video" data-id="${v.id}"><span class="th stern" aria-hidden="true">★</span><span class="grow"><b>${esc(v.task.text)}</b><span class="v3-meta">Aufgabe${v.task.deliverable==='foto'?' · Foto machen':''}</span></span><span class="v3-badge aufgabe">★</span></button>`:'';
-    return `<button class="v3-lektion${v===jetzt?' jetzt':''}" data-act="video" data-id="${v.id}"><span class="th">${th?`<img src="${th}" alt="" loading="lazy">`:''}<i aria-hidden="true">${v.source.type==='bilder'?'📷':'▶'}</i></span><span class="grow"><b>${esc(v.title)}</b><span class="v3-meta">${[v.source.type==='bilder'?'Foto-Anleitung':'',(v.steps||[]).length?v.steps.length+' Schritte':'',v.zeit?v.zeit+' Min.':'',v.grundtechnik?'Grundtechnik':''].filter(Boolean).join(' · ')}</span></span><span class="v3-badge ${cls}" aria-label="${pr.done?'fertig':v===jetzt?'jetzt dran':'noch offen'}">${sym}</span></button>${auf}`; };
-  const liste=gr.map(([name,g])=>`<h2 class="v3-niv" style="--h:${soft(a)};--d:#1C4A63"><span>${g.length}</span>${esc(name)}</h2>${g.map(zeile).join('')}`).join('');
-  const mat=(jetzt||vs[0]||{}).material||[];
-  app.innerHTML=`<div class="v3${schriftNormal()?'':' caps'}"><div class="v3-in">
-    ${v3Kopf('<button class="v3-rund gross" data-act="back" aria-label="Zurück">←</button>',`<div class="v3-thema-titel"><small>${raumOf(a.id).name}</small><h1>${esc(a.name)}</h1></div>`)}
-    <div class="v3-thema">
-      <div class="v3-links"><div class="v3-held" style="background:${soft(a)}"><img src="${GRAFIK}${a.id}.webp" alt="" onerror="this.remove()"></div>
-        ${mat.length?`<div class="v3-karte"><h2>Du brauchst</h2><div class="v3-mat">${mat.map(id=>`<div><span class="pik">${matIcon(id)}</span><b>${esc(matName(id))}</b></div>`).join('')}</div></div>`:''}</div>
-      <div class="v3-liste">${liste||`<div class="v3-leer">${figur('nachdenken')}Hier ist noch nichts drin.</div>`}${werkeHtml(WERKE.filter(w=>w.bereich===a.id))}</div>
-    </div>${v3Fuss()}</div></div>`;
-  wire(app,{ back:()=>SCHULE?go('home'):go('zimmer',{r:raumOf(a.id).id}), andere:zeigeWerk, video:b=>go('player',{videoId:b.dataset.id}), gallery:()=>go('gallery'), lehrer:()=>go('lehrer'), werkzeuge:()=>go('werkzeuge') });
+function catalogueMatches(v,query,kind){
+  if(kind==='projekte'&&v.grundtechnik||kind==='lernen'&&!v.grundtechnik||kind==='foto'&&v.source.type!=='bilder')return false;
+  const normalize=s=>String(s).toLocaleLowerCase('de-CH').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ß/g,'ss');
+  const hay=normalize([projectTitle(v),v.title,v.gruppe,v.areaId,areaOf(v.areaId)?.name,...(v.techniken||[])].join(' '));
+  return normalize(query).trim().split(/\s+/).every(word=>hay.includes(word));
 }
+function showCatalogue(app,{area=null,room=''}={}){
+  const vs=area?videosIn(area.id):discoverVideos(room);
+  let query=view.params.query||'',kind=view.params.kind||'alle';
+  app.innerHTML=`<main class="v3${schriftNormal()?'':' caps'}"><div class="v3-in">${v3Kopf('<button class="v3-rund gross" data-act="back" aria-label="Zurück">'+ico('back')+'</button>',`<div class="v3-thema-titel"><small>${area?'Deine Werkstatt':'Entdecken'}</small><h1>${area?esc(area.name):'Finde deine Idee'}</h1></div>`)}
+    <div class="v3-filters"><div class="v3-schalter" role="group" aria-label="Anleitungen filtern">${[['alle','Alles'],['projekte','Selber machen'],['lernen','Üben'],['foto','Mit Fotos']].filter(([id])=>id!=='lernen'||vs.some(v=>v.grundtechnik)).map(([id,label])=>`<button class="v3-filter${kind===id?' an':''}" data-act="filter" data-kind="${id}" aria-pressed="${kind===id}">${label}</button>`).join('')}</div>
+    <label class="v3-search"><span aria-hidden="true">⌕</span><input type="search" id="ideen-suche" placeholder="Idee suchen" aria-label="Idee suchen" value="${esc(query)}" autocomplete="off"></label></div>
+    <p class="sr-only" id="such-status" role="status" aria-live="polite"></p><div class="v3-thema"><div class="v3-liste" id="ideen-liste"></div></div>${area?`<div class="v3-werke">${werkeHtml(area.id)}</div>`:''}${v3Fuss()}</div></main>`;
+  const paint=()=>{
+    const found=vs.filter(v=>catalogueMatches(v,query,kind));
+    const groups=gruppenOf(found).sort((x,y)=>Number(x[1].every(v=>v.grundtechnik))-Number(y[1].every(v=>v.grundtechnik)));
+    $('#ideen-liste',app).innerHTML=(query.trim()?found.map(projectCard).join(''):groups.map(([name,g])=>`<h2 class="v3-niv">${esc(name)}</h2>${g.map(projectCard).join('')}`).join(''))||`<div class="v3-leer">${figur('nachdenken')}Keine Idee gefunden.<br><button class="v3-pill" data-act="reset">Alles zeigen</button></div>`;
+    $('#such-status',app).textContent=found.length+' Anleitungen gefunden';
+    $$('.v3-filter',app).forEach(b=>{b.classList.toggle('an',b.dataset.kind===kind);b.setAttribute('aria-pressed',String(b.dataset.kind===kind));});
+    view.params.query=query;view.params.kind=kind;
+  };
+  paint();fillThumbs(app);
+  app.oninput=e=>{if(e.target.id==='ideen-suche'){query=e.target.value;paint();}};
+  wire(app,{back:()=>go('home'),klassewahl:klasseWaehlen,filter:b=>{kind=b.dataset.kind;paint();},reset:()=>{kind='alle';query='';$('#ideen-suche',app).value='';paint();},
+    andere:zeigeWerk,video:b=>{const v=videoOf(b.dataset.id);if(area?.kind==='spass')gateSpass(v,()=>go('player',{videoId:v.id}));else go('player',{videoId:v.id});},
+    gallery:()=>go('gallery'),lehrer:()=>go('lehrer'),werkzeuge:()=>go('werkzeuge')});
+}
+function areaSchule(app,a){return showCatalogue(app,{area:a});}
+SCREENS.entdecken=(app,params)=>showCatalogue(app,{room:params.room||''});
 SCREENS.werkzeuge=app=>{
   app.innerHTML=`<div class="${kidClass()} schrift-normal">${kopf('Werkzeuge',{back:true})}
     <div class="inner">${genKarten()}</div></div>`;
@@ -1069,31 +1577,12 @@ SCREENS.lehrer=app=>{ const n=abend();
 /* ============================== Kind: Werkstatt (Start) ============================== */
 function dingHtml(a,kind){ const vids=a.raum?raumThemen(a.raum).flatMap(t=>videosIn(t.id)):videosIn(a.id), nvid=vids.length; const pid=S.activeProfile; const done=pid?vids.filter(v=>(S.progress[pid+':'+v.id]||{}).done).length:0; const alle=!SCHULE&&nvid&&done===nvid; const zaehl=nvid?`<span class="zaehl${alle?' alle':''}" aria-label="${SCHULE?nvid+' Videos':done+' von '+nvid+' gemacht'}">${alle?'<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="'+ICONS.check+'"/></svg>':''}${SCHULE?nvid:done+'/'+nvid}</span>`:''; return `<button class="ding${nvid?'':' leer'}" data-act="area" data-id="${a.id}">${dingSvg(a.ding,a.emoji)}<span class="tag">${kind==='spass'?`<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color:#F2B705"><path d="${ICONS.star}"/></svg>`:''}${esc(a.name)}${zaehl}</span></button>`; }
 SCREENS.home=app=>{
-  if(SCHULE){ return homeSchule(app); }
-  const p=profile(); if(!p){ go('firstrun'); return; } const n=abend();
-  const newFb=S.works.filter(w=>w.profileId===p.id&&w.feedback&&!w.fbSeen).length;
-  const spass=S.settings.spass?S.areas.filter(a=>a.kind==='spass'&&videosIn(a.id).length):[], lern=[...RAEUME.filter(r=>raumThemen(r).length).map(r=>({id:'raum:'+r.id,name:r.id==='hand'?'Handarbeit':'Werkraum',ding:r.id==='hand'?'wolle':'schere',raum:r})),...S.areas.filter(a=>a.kind!=='spass'&&!THEMA_ID.has(a.id)&&videosIn(a.id).length)];
-  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${fenster(n)}
-    <div class="inner kopf mitfenster">
-      <div class="schild hallo${S.profiles.length>1?' tipp':''}" data-act="who" role="button"><h1>Hallo ${esc(p.name)}!</h1><div class="sub">${S.profiles.length>1?'Nicht du? Tipp hier':'Was nimmst du heute?'}</div></div>
-      <div class="kopf-rechts">${S.settings.spass?glasSterne(p.id):''}<button class="werke-btn" data-act="gallery"><span class="fotos"><i></i><i></i></span>Meine Werke${newFb?`<span class="neu">${newFb}</span>`:''}</button><button class="lock-btn" data-act="parent" aria-label="Elternbereich">${ico('lock')}</button></div>
-    </div>
-    ${spass.length?`<div class="inner regal-wrap"><span class="zettel links"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color:#F2B705"><path d="${ICONS.star}"/></svg>Kostet einen Stern</span><div class="regal">${spass.map(a=>dingHtml(a,'spass')).join('')}</div></div>`:''}
-    <div class="inner regal-wrap"><div class="regal">${lern.map(a=>dingHtml(a,'lern')).join('')||`<div class="empty zettel">${figur('nachdenken')}Noch keine Videos – Eltern: Schloss oben rechts</div>`}</div></div>
-    <div class="inner">${v3Fuss()}</div>
-    ${bank()}
-  </div>`;
-  wire(app,{ area:b=>{ const id=b.dataset.id; if(id.startsWith('raum:')) go('zimmer',{r:id.slice(5)}); else go('area',{id}); }, gallery:()=>go('gallery'), parent:()=>go('parent',{tab:'videos'}), werkzeuge:()=>go('werkzeuge'), who:()=>{ if(S.profiles.length>1) go('profiles'); } });
+  if(!SCHULE&&!profile()){go('firstrun');return;}
+  return homeSchule(app);
 };
-
 SCREENS.area=(app,{id})=>{
-  const a=areaOf(id); if(!a){ go('home'); return; } if(SCHULE||THEMA_ID.has(id)) return areaSchule(app,a); const p=profile(); const vids=videoOrdnung(videosIn(id)); const gruppen=vids.some(v=>v.grundtechnik)&&vids.some(v=>!v.grundtechnik); const st=starState(p.id); const left=starsLeft(p.id); const n=abend();
-  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${kopf(a.name,{back:true,right:S.settings.spass?glasSterne(p.id,true):''})}
-    <div class="inner">${vids.length?`<div class="pinwand">${vids.map((v,i)=>{ const grp=gruppen&&(i===0||!!vids[i-1].grundtechnik!==!!v.grundtechnik)?`<h2 class="pw-grp">${v.grundtechnik?'Grundtechniken':'Projekte'}</h2>`:''; const pr=S.progress[p.id+':'+v.id]; const th=thumbOf(v); const locked=a.kind==='spass'&&!st.unlocked.includes(v.id)&&left<=0;
-      return `${grp}<button class="vcard${locked?' disabled':''}" data-act="video" data-id="${v.id}"><div class="th">${th?`<img src="${th}" alt="" loading="lazy">`:'🎬'}${v.grundtechnik?'<span class="gt">Grundtechnik</span>':''}${niveauHtml(v)}${pr&&pr.done?`<span class="badge">${ico('check')} fertig</span>`:pr&&(pr.pos>5||pr.step>0)?`<span class="badge prog">angefangen</span>`:''}${v.zeit?`<span class="zeit">⏱ ${v.zeit} Min.</span>`:''}${locked?`<span class="lock">😴</span>`:''}</div><div class="tt"><span class="grow">${esc(v.title)}</span>${a.kind==='spass'&&!st.unlocked.includes(v.id)?`<span class="stern">${ico('star')}</span>`:''}</div></button>`; }).join('')}</div>`
-      :`<div class="empty" style="margin-top:20px">Hier ist noch nichts drin.</div>`}${werkeHtml(WERKE.filter(w=>w.bereich===id))}</div>
-    ${bank()}</div>`;
-  wire(app,{ back:()=>go('home'), who:()=>{}, andere:zeigeWerk, video:b=>{ const v=videoOf(b.dataset.id); if(a.kind==='spass') gateSpass(v,()=>go('player',{videoId:v.id})); else go('player',{videoId:v.id}); } });
+  const a=areaOf(id);if(!a){go('home');return;}
+  return areaSchule(app,a);
 };
 function gateSpass(v,then){
   const p=profile(); const st=starState(p.id); if(st.unlocked.includes(v.id)) return then();
@@ -1150,37 +1639,37 @@ SCREENS.anleitung=(app,{v,school})=>{
   const vorlageHtml=()=>vorlagenBox(v.vorlagen,bild);
   const vorlesen=s=>[s.text,...(s.achtung||[]).map(x=>'Achtung: '+x),...(s.tipp||[]).map(x=>'Tipp: '+x),s.frage?'Frage: '+s.frage:'',s.zeigen||''].filter(Boolean).join(' ');
   const zeichne=()=>{ const s=steps[i]; const gesperrt=s&&s.zeigen&&!pr.gesehen[i];
-    const kopfHtml=`<div class="v3-kopf"><button class="v3-rund gross" data-act="back" aria-label="Zurück">←</button><div class="v3-thema-titel"><small>${a?esc(a.name)+' · ':''}Foto-Anleitung</small><h1>${esc(v.title)}</h1></div><span class="grow"></span>${s?`<span class="v3-pill an-zahl">Schritt ${i+1} von ${n}</span>`:''}</div>`;
-    const balken=`<div class="an-balken" role="group" aria-label="Schritte">${steps.map((x,k)=>`<button data-act="geh" data-i="${k}" class="${k===i?'jetzt':k<=pr.max?'an':''}" ${k>pr.max?'disabled':''} aria-label="Schritt ${k+1}"></button>`).join('')}</div>`;
+    const kopfHtml=`<div class="v3-kopf"><button class="v3-rund gross" data-act="back" aria-label="Zurück zu den Ideen">${ico('back')}</button><div class="v3-thema-titel"><small>${a?esc(a.name):'Schritt für Schritt'}</small><h1>${esc(typeof projectTitle==='function'?projectTitle(v):v.title)}</h1></div><span class="grow"></span>${s?`<span class="v3-pill an-zahl">${i+1} / ${n}</span>`:''}</div>`;
+    const balken=`<div class="an-progress"><span>Schritt ${i+1} von ${n}</span><div class="an-track" role="progressbar" aria-label="Dein Fortschritt" aria-valuemin="0" aria-valuemax="${n}" aria-valuenow="${i+1}"><i style="width:${(i+1)/n*100}%"></i></div></div>`;
     let inhalt='';
     if(i<0){ const weiter=!pr.done&&pr.step>0;
-      inhalt=`<div class="an-start"><div class="an-held"><img src="${esc(v.thumb||'')}" alt=""></div><div class="an-spalte">
-        <p class="v3-sub" style="margin:0">${n} Schritte mit Fotos. Lies jeden Schritt, schau das Foto an und mach es nach.</p>
+      inhalt=`<div class="an-start"><div class="an-held"><img src="${esc(v.thumb||'')}" alt="${esc(v.title)}"></div><div class="an-spalte an-start-copy">
+        <span class="an-eyebrow">Deine nächste Idee</span><h2>Das machst du!</h2><p class="an-intro-line">Foto anschauen. Selber machen.</p>
         ${vorlageHtml()}
-        <div class="an-nav">${weiter?`<button class="an-weiter" data-act="geh" data-i="${pr.step}">Weiter bei Schritt ${pr.step+1} →</button><button class="v3-pill" data-act="geh" data-i="0">Von vorne</button>`:`<button class="an-weiter" data-act="geh" data-i="0">Los geht's →</button>`}</div>
-        ${(v.material||[]).length?`<div class="v3-karte"><h2>Du brauchst</h2><div class="v3-mat">${v.material.map(id=>`<div><span class="pik">${matIcon(id)}</span><b>${esc(matName(id))}</b></div>`).join('')}</div></div>`:''}</div></div>`; }
+        <div class="an-nav">${weiter?`<button class="an-weiter" data-act="geh" data-i="${pr.step}">Weitermachen ${ico('next')}</button><button class="v3-pill" data-act="geh" data-i="0">Von vorne</button>`:`<button class="an-weiter" data-act="geh" data-i="0">Los geht's ${ico('next')}</button>`}</div>
+        ${(v.material||[]).length?`<details class="an-material"><summary>${ico('gallery')} Das brauchst du <span>${v.material.length}</span></summary><div class="v3-mat">${v.material.map(id=>`<div><span class="pik">${matIcon(id)}</span><b>${esc(matName(id))}</b></div>`).join('')}</div></details>`:''}</div></div>`; }
     else if(i>=n){ inhalt=`<div class="an-ende v3-karte">${figur('geschafft')}<h2>${esc(v.fertig||'Bravo! Geschafft.')}</h2>
         <div class="an-nav mitte">${naechste?`<button class="an-weiter" data-act="naechste">Weiter: ${esc(naechste.title.replace(/^.*?:\s*/,''))} →</button>`:''}<button class="${naechste?'v3-pill':'an-weiter'}" data-act="foto">📷 Foto von deinem Werk</button>${S.works.some(w=>w.videoId===v.id&&w.profileId===S.activeProfile)?`<button class="v3-pill" data-act="werke">${SCHULE?'Unsere':'Meine'} Werke</button>`:''}<button class="v3-pill" data-act="geh" data-i="0">Nochmal anschauen</button></div></div>`; }
     else { const bt=s.bildtext||[];
-      inhalt=`<div class="an-schritt"><div class="an-bilder${(s.bilder||[]).length>1?' zwei':''}">${(s.bilder||[]).map((f,k)=>`<figure><button data-act="gross" data-src="${esc(bild(f))}" aria-label="Foto gross anzeigen"><img src="${esc(bild(f))}" alt=""></button>${bt[k]?`<figcaption>${esc(bt[k])}</figcaption>`:''}</figure>`).join('')}</div>
-        <div class="an-spalte"><div class="an-text"><span class="an-nr">${i+1}</span><p>${esc(s.text)}</p><button class="v3-rund" data-act="lies" aria-label="Vorlesen">🔊</button></div>
-        ${(s.achtung||[]).length?`<div class="an-box achtung"><span class="sym" aria-hidden="true">⚠️</span><div>${s.achtung.map(x=>`<p>${esc(x)}</p>`).join('')}</div></div>`:''}
-        ${(s.tipp||[]).length?`<div class="an-box tipp"><span class="sym" aria-hidden="true">💡</span><div>${s.tipp.map(x=>`<p>${esc(x)}</p>`).join('')}</div></div>`:''}
-        ${s.frage?`<div class="an-box frage"><span class="sym" aria-hidden="true">❓</span><div><p>${esc(s.frage)}</p><label class="an-antwort"><span>Deine Antwort</span><textarea id="an-antwort" rows="2">${esc(pr.antworten[i]||'')}</textarea></label></div></div>`:''}
+      inhalt=`<div class="an-schritt"><div class="an-bilder${(s.bilder||[]).length>1?' zwei':''}">${(s.bilder||[]).map((f,k)=>`<figure><button data-act="gross" data-src="${esc(bild(f))}" aria-label="Foto zu Schritt ${i+1} gross anzeigen"><img src="${esc(bild(f))}" alt="${esc(bt[k]||s.text)}"></button>${bt[k]?`<figcaption>${esc(bt[k])}</figcaption>`:''}</figure>`).join('')}</div>
+        <div class="an-spalte"><div class="an-text"><span class="an-nr" aria-hidden="true">${i+1}</span><p id="an-step-text" tabindex="-1">${esc(s.text)}</p><button class="v3-rund" data-act="lies" aria-label="Schritt vorlesen">${ico('speaker')}</button></div>
+        ${(s.achtung||[]).length?`<div class="an-box achtung"><span class="sym" aria-hidden="true">☝️</span><div><p>${esc(s.achtung[0])}</p>${s.achtung.length>1?`<details class="an-extra"><summary>Gut zu wissen</summary>${s.achtung.slice(1).map(x=>`<p>${esc(x)}</p>`).join('')}</details>`:''}</div></div>`:''}
+        ${(s.tipp||[]).length?`<details class="an-extra an-box tipp"><summary><span aria-hidden="true">💡</span> Ein Tipp für dich</summary><div>${s.tipp.map(x=>`<p>${esc(x)}</p>`).join('')}</div></details>`:''}
+        ${s.frage?`<details class="an-extra an-box frage"><summary><span aria-hidden="true">💭</span> Denk mit</summary><div><p>${esc(s.frage)}</p><label class="an-antwort"><span>Deine Antwort</span><textarea id="an-antwort" rows="2">${esc(pr.antworten[i]||'')}</textarea></label></div></details>`:''}
         ${s.vorlage?vorlageHtml():''}
-        ${s.zeigen?`<div class="an-box zeigen${gesperrt?'':' ok'}"><span class="sym" aria-hidden="true">👀</span><div><p>${esc(s.zeigen)}</p><button class="an-gesehen" data-act="gesehen" aria-pressed="${!gesperrt}">${gesperrt?'☐':'☑'} ${wer} hat es gesehen</button></div></div>`:''}
+        ${s.zeigen?`<div class="an-box zeigen${gesperrt?'':' ok'}"><span class="sym" aria-hidden="true">${gesperrt?'🙋':'✓'}</span><div><p>${esc(s.zeigen)}</p><button class="an-gesehen" data-act="gesehen" aria-pressed="${!gesperrt}" aria-label="${wer} hat es gesehen">${ico('check')} ${gesperrt?'Gezeigt?':'Gezeigt!'}</button></div></div>`:''}
         <div class="an-nav"><button class="v3-pill" data-act="geh" data-i="${i-1}">← Zurück</button><button class="an-weiter" data-act="geh" data-i="${i+1}" ${gesperrt?'disabled':''}>${i===n-1?'Fertig ✓':'Weiter →'}</button></div>
-        ${gesperrt?`<p class="an-hinweis">Erst zeigen, dann geht es weiter.</p>`:''}</div></div>`; }
+        </div></div>`; }
     app.innerHTML=`<div class="v3 an${schriftNormal()?'':' caps'}"><div class="v3-in">${kopfHtml}${i>=0&&i<n?balken:''}${inhalt}</div></div>`;
     const ta=$('#an-antwort'); if(ta) ta.oninput=()=>{ pr.antworten[i]=ta.value; save(); };
     if(s&&S.settings.autoRead) speak(vorlesen(s)); };
   const geh=k=>{ k=Math.max(-1,Math.min(n,k)); try{ speechSynthesis.cancel(); }catch(e){}
     if(k>=n){ if(!pr.done){ pr.done=true; confetti(); } pr.step=0; }
     else if(k>=0){ pr.step=k; pr.max=Math.max(pr.max||0,k); }
-    i=k; save(); zeichne(); window.scrollTo(0,0); };
-  wire(app,{ back:()=>school||!a?go('home'):go('area',{id:a.id}),
-    geh:b=>{ const k=+b.dataset.i; if(k>i&&k<n&&steps[i]&&steps[i].zeigen&&!pr.gesehen[i]) return; geh(k); },
-    gesehen:()=>{ pr.gesehen[i]=!pr.gesehen[i]; save(); zeichne(); },
+    i=k; save(); zeichne(); window.scrollTo(0,0); const text=$('#an-step-text'); if(text) text.focus({preventScroll:true}); };
+  wire(app,{ back:()=>backToIdeas(a,school),
+    geh:b=>{ const k=+b.dataset.i; if(k>i&&steps[i]&&steps[i].zeigen&&!pr.gesehen[i]) return; geh(k); },
+    gesehen:()=>{ pr.gesehen[i]=!pr.gesehen[i]; save(); zeichne(); const check=$('[data-act="gesehen"]'); if(check) check.focus({preventScroll:true}); },
     lies:()=>{ unlockTTS(); speak(vorlesen(steps[i])); },
     gross:b=>kidModal(`<img class="andere-gross" src="${esc(b.dataset.src)}" alt=""><div class="row center" style="margin-top:12px"><button class="kbtn ghost" data-close>Schliessen</button></div>`),
     foto:()=>takePhoto(v.id,()=>{ if(view.name==='anleitung'||view.name==='player'||view.name==='school') zeichne(); }),
@@ -1193,22 +1682,21 @@ SCREENS.player=(app,{videoId,school})=>{
   const a=v.areaId?areaOf(v.areaId):null; const p=school?null:profile(); const n=abend();
   const steps=buildVideoSteps(v); const pr=school?{pos:0,step:0,done:false,slow:false}:prog(v.id);
   if(!school){ S.settings.zuletzt=v.id; save(); }
-  app.innerHTML=`<div class="${kidClass('pl'+(S.settings.kino&&!school?' kino':''))}">${girlande(n)}
-    <div class="inner kopf pl-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a><div class="schild"><h1>${esc(v.title)}</h1></div><div class="kopf-rechts"><button type="button" class="fm-pill" data-act="melden" title="Fehler melden">${ico('flag')}<span>Fehler melden</span></button><span class="zettel" id="zettel"></span>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}</div></div>
+  app.innerHTML=`<div class="${kidClass('pl lernraum'+(S.settings.kino&&!school?' kino':''))}">
+    <div class="inner kopf pl-top"><button class="schild-btn" data-act="back" aria-label="Zurück zu den Ideen">${ico('back')}</button><div class="pl-heading"><small>${a?esc(a.name):'Schritt für Schritt'}</small><h1>${esc(typeof projectTitle==='function'?projectTitle(v):v.title)}</h1></div><div class="kopf-rechts"><button type="button" class="fm-pill" data-act="melden" aria-label="Problem mit diesem Video melden" title="Problem melden">${ico('flag')}</button>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}</div></div>
     <div class="inner panes">
-      <div class="pane"><div class="plabel"><i class="punkt" style="background:#4C6EF5"></i>Schau zu</div><div class="video-box"><div class="host" id="host"></div><div class="shield" id="shield" data-act="shield"></div><div class="overlay" id="overlay"></div><span class="modebadge" id="modebadge" hidden></span><span class="marke" id="marke" hidden><img src="${GRAFIK}figuren/logo.webp" alt=""><b>Stop <i>&amp;</i> Mach</b></span></div><div class="fuss"></div></div>
-      <div class="pane"><div class="plabel"><i class="punkt" style="background:#E8554E"></i><span id="zettel2">Die Schritte</span></div><div class="schritte" id="schritte"></div></div>
+      <div class="pane pl-video"><div class="video-box"><div class="host" id="host"></div><div class="shield" id="shield" data-act="shield"></div><div class="overlay" id="overlay"></div><span class="modebadge" id="modebadge" hidden></span></div><div class="pl-bank"><div class="steuer"><div class="controls" id="controls"></div><button class="kino-step" id="kinostep" data-act="liste" aria-controls="schritte" aria-expanded="false"></button><div class="auftrag" id="task"></div></div></div></div>
+      <div class="pane pl-guide"><div id="pl-current" class="pl-current" aria-live="polite"></div><button class="pl-steps-toggle" id="pl-steps-toggle" data-act="liste" aria-expanded="false" aria-controls="schritte">${ico('gallery')} Alle Schritte ${ico('down')}</button><div class="schritte" id="schritte" hidden></div></div>
     </div>
-    <div class="pl-bank"><div class="inner"><div class="steuer"><div class="controls" id="controls"></div><div class="kino-step" id="kinostep" data-act="liste" role="button"></div><div class="auftrag" id="task"></div></div></div></div>
   </div>`;
-  P={v,steps,pr,school,idx:Math.min(pr.step||0,Math.max(0,steps.length-1)),mode:'start',needsTap:false,err:null,playAt:0,api:null,tick:null,lastSave:0,
+  P={v,steps,pr,school,idx:Math.max(0,Math.min(pr.step||0,Math.max(0,steps.length-1))),mode:'start',needsTap:false,err:null,playAt:0,api:null,tick:null,lastSave:0,
     destroy(){ clearInterval(this.tick); if(this.api) this.api.destroy(); if(!school) save(); }};
   P.api=makePlayer($('#host'),v.source,{
     onReady:()=>{ P.api.rate(pr.slow?S.settings.slowRate:1); },
     onState:s=>{ if(!P) return;
       if(s==='playing'){ P.needsTap=false; if(P.mode==='paused'||P.mode==='start'||P.mode==='buffering') P.mode='playing'; if(P.steps.length&&P.seekTarget!=null&&Date.now()-P.seekAt<6000&&Math.abs(P.api.time()-P.seekTarget)>3) seekTo(P.seekTarget); }
       else if(s==='paused'){ if(P.mode==='playing') P.mode='paused'; }
-      else if(s==='ended'){ P.mode='ended'; if(!school){ pr.pos=0; pr.step=0; } if(!(v.task&&v.task.text&&v.task.deliverable!=='keine')&&!school){ pr.done=true; } if(!school){ setTimeout(()=>{ const t=$('#task'); if(t&&!t.hidden) t.scrollIntoView({behavior:'smooth',block:'center'}); },300); } }
+      else if(s==='ended'){ P.mode='ended'; if(!school){ pr.pos=0; pr.step=0; } if(!(v.task&&v.task.text&&v.task.deliverable!=='keine')&&!school){ pr.done=true; } if(!school){ save(); setTimeout(()=>{ const t=$('#task'); if(t&&!t.hidden) t.scrollIntoView({behavior:'smooth',block:'center'}); },300); } }
       updatePlayerUI(); },
     onError:()=>{ if(!P) return; P.err=true; P.mode='error'; updatePlayerUI(); }
   });
@@ -1216,16 +1704,16 @@ SCREENS.player=(app,{videoId,school})=>{
   setTimeout(()=>{ if(P&&P.v===v&&!P.api.ready&&P.mode==='start'){ P.mode='error'; updatePlayerUI(); } },12000);
   updatePlayerUI();
   wire(app,{
-    back:()=>{ if(school) history.replaceState(null,'',location.pathname+location.search); go(a&&!school?'area':'home',a&&!school?{id:a.id}:{}); },
-    shield:()=>{ const k=$('.kid.pl.liste'); if(k){ k.classList.remove('liste'); return; } if(P.mode==='playing') userPause(); else if(P.mode==='paused') userPlay(); else if(P.mode==='stepdone') nextStep(); },
-    melden:()=>fehlerMelden(), kino:()=>toggleKino(), liste:()=>{ const k=$('.kid.pl'); if(k) k.classList.toggle('liste'); },
+    back:()=>backToIdeas(a,school),
+    shield:()=>{ const k=$('.kid.pl.liste'); if(k){ k.classList.remove('liste'); updatePlayerUI(); return; } if(P.mode==='playing') userPause(); else if(P.mode==='paused') userPlay(); else if(P.mode==='stepdone') nextStep(); },
+    melden:()=>fehlerMelden(), kino:()=>toggleKino(), liste:()=>{ const k=$('.kid.pl'); if(k) k.classList.toggle('liste'); updatePlayerUI(); },
     start:()=>startPlaying(false), resume:()=>startPlaying(true), play:()=>userPlay(), pause:()=>userPause(),
     toggle:()=>{ if(P.mode==='playing') userPause(); else if(P.mode==='paused') userPlay(); else if(P.mode==='material') nextStep(); else if(P.mode==='start') startPlaying(!!(pr.step||pr.pos>3)); else if(P.mode==='stepdone') nextStep(); else if(P.mode==='ended') startPlaying(false); },
     replay:()=>replayStep(), next:()=>nextStep(), prevstep:()=>{ if(P.idx>0){ P.idx--; jumpStep(); } },
-    dot:b=>{ P.idx=+b.dataset.i; const k=$('.kid.pl'); if(k) k.classList.remove('liste'); jumpStep(); },
+    dot:b=>{ P.idx=+b.dataset.i; const k=$('.kid.pl'); if(k) k.classList.remove('liste'); jumpStep(); const control=$(k&&k.classList.contains('kino')?'#kinostep':'#pl-steps-toggle'); if(control) control.focus({preventScroll:true}); },
     back10:()=>{ P.api.seek(Math.max(0,P.api.time()-10)); }, fwd10:()=>{ P.api.seek(P.api.time()+10); },
-    speed:()=>{ pr.slow=!pr.slow; P.api.rate(pr.slow?S.settings.slowRate:1); updatePlayerUI(); },
-    say:b=>speak(b.dataset.text), restart:()=>{ P.idx=0; startPlaying(false); },
+    speed:()=>{ pr.slow=!pr.slow; P.api.rate(pr.slow?S.settings.slowRate:1); if(!school) save(); updatePlayerUI(); },
+    say:b=>speak(b.dataset.text), restart:()=>{ P.idx=0; startPlaying(false); }, retry:()=>go('player',{videoId:v.id,school}),
     foto:()=>takePhoto(v.id), malen:()=>go('paint',{videoId:v.id,back:'player'}), ton:()=>go('record',{videoId:v.id,back:'player'}),
     fertig:()=>{ if(school){ confetti(); toast('Super gemacht!'); return; } const first=!pr.done; const ohne=(v.task&&v.task.deliverable)!=='fertig'; pr.done=true; let star=false; if(first&&!ohne&&S.settings.earnStar) star=earnStar(); save(); confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Super gemacht!'); updatePlayerUI(); },
     gallery:()=>go('gallery',school?{school}:{})
@@ -1233,70 +1721,88 @@ SCREENS.player=(app,{videoId,school})=>{
   if(S.settings.voiceControl) startListening();
 };
 function curStep(){ return P.steps[P.idx]; }
-function fitPlayer(){ const el=$('.kid.pl'); if(!el||el.classList.contains('kino')) return; const panes=$('.panes',el), pane=$('.pane',el); if(!panes||!pane) return; if(!matchMedia('(min-width:900px) and (min-height:540px)').matches){ el.style.removeProperty('--pl-avail'); return; } const lab=$('.plabel',pane), fuss=$('.fuss',pane); const h=panes.clientHeight-(lab?lab.offsetHeight+8:0)-(fuss?fuss.offsetHeight+8:0); el.style.setProperty('--pl-avail',Math.max(180,Math.floor(h))+'px'); }
+function fitPlayer(){ const el=$('.kid.pl'); if(!el||el.classList.contains('kino')) return; if(el.classList.contains('lernraum')){ el.style.removeProperty('--pl-avail'); return; } const panes=$('.panes',el), pane=$('.pane',el); if(!panes||!pane) return; if(!matchMedia('(min-width:900px) and (min-height:540px)').matches){ el.style.removeProperty('--pl-avail'); return; } const lab=$('.plabel',pane), fuss=$('.fuss',pane); const h=panes.clientHeight-(lab?lab.offsetHeight+8:0)-(fuss?fuss.offsetHeight+8:0); el.style.setProperty('--pl-avail',Math.max(180,Math.floor(h))+'px'); }
 window.addEventListener('resize',()=>{ if(P) fitPlayer(); });
 function toggleKino(on){ const el=$('.kid.pl'); if(!el||(P&&P.school)) return; const want=on==null?!el.classList.contains('kino'):!!on; el.classList.toggle('kino',want); el.classList.remove('liste'); if(S.settings.kino!==want){ S.settings.kino=want; save(); } if(want) fsEnter(); else fsExit(); if(P) updatePlayerUI(); }
 function fsEnter(){ try{ const d=document.documentElement; if(document.fullscreenElement||document.webkitFullscreenElement) return; const f=d.requestFullscreen||d.webkitRequestFullscreen; if(f){ const r=f.call(d,{navigationUI:'hide'}); if(r&&r.catch) r.catch(()=>{}); } }catch(e){} }
 function fsExit(){ try{ if(document.fullscreenElement||document.webkitFullscreenElement){ const r=(document.exitFullscreen||document.webkitExitFullscreen).call(document); if(r&&r.catch) r.catch(()=>{}); } }catch(e){} }
 ['fullscreenchange','webkitfullscreenchange'].forEach(ev=>document.addEventListener(ev,()=>{ if(!document.fullscreenElement&&!document.webkitFullscreenElement){ const el=$('.kid.pl.kino'); if(el&&P&&!P._fsLeaving){ el.classList.remove('kino','liste'); S.settings.kino=false; save(); updatePlayerUI(); } } }));
 function stepEnd(){ return P.idx<P.steps.length-1?P.steps[P.idx+1].t:Infinity; }
+function rememberPlayerPosition(t){ if(!P||P.school) return; P.pr.step=P.idx; if(Number.isFinite(t)) P.pr.pos=Math.max(0,t); P.lastSave=Date.now(); save(); }
 function startPlaying(resume){ unlockTTS(); if($('.kid.pl.kino')) fsEnter(); if(!P.api.ready){ toast('Video lädt noch…',1200); return; }
-  if(P.steps.length){ if(!resume) P.idx=P.steps[0].material?1:0; if(curStep().material){ jumpStep(); return; } seekTo(curStep().t); } else { seekTo(resume?P.pr.pos:0); }
+  if(P.steps.length){ if(!resume) P.idx=P.steps[0].material&&P.steps.length>1?1:0; if(curStep().material){ jumpStep(); return; } seekTo(curStep().t); rememberPlayerPosition(curStep().t); } else { const target=resume?P.pr.pos||0:0; seekTo(target); rememberPlayerPosition(target); }
   P.mode='playing'; P.playAt=Date.now(); P.needsTap=false; P.api.play(); updatePlayerUI(); }
-function userPause(){ P.mode='paused'; P.api.pause(); updatePlayerUI(); }
+function userPause(){ P.mode='paused'; P.api.pause(); rememberPlayerPosition(P.api.time()); updatePlayerUI(); }
 function userPlay(){ P.mode='playing'; P.playAt=Date.now(); P.api.play(); updatePlayerUI(); }
-function jumpStep(){ const s=curStep(); if(s.material){ P.mode='material'; try{ P.api.pause(); const nx=P.steps[P.idx+1]; if(nx) P.api.seek(nx.t); }catch(e){} updatePlayerUI(); return; } P.mode='playing'; P.playAt=Date.now(); seekTo(s.t); P.api.play(); updatePlayerUI(); }
+function jumpStep(){ const s=curStep(); if(!s){ startPlaying(false); return; } rememberPlayerPosition(s.t); if(s.material){ P.mode='material'; try{ P.api.pause(); const nx=P.steps[P.idx+1]; if(nx) P.api.seek(nx.t); }catch(e){} updatePlayerUI(); return; } P.mode='playing'; P.playAt=Date.now(); P.needsTap=false; seekTo(s.t); P.api.play(); updatePlayerUI(); }
 function seekTo(t){ P.seekAt=Date.now(); P.seekTarget=t; P.api.seek(t); }
 function seekSettled(){ if(!P.seekAt) return true; if(Date.now()-P.seekAt>900) return true; return Math.abs(P.api.time()-P.seekTarget)<1.5; }
 function replayStep(){ jumpStep(); }
-function nextStep(){ if(P.idx<P.steps.length-1){ P.idx++; jumpStep(); } else { P.mode='ended'; updatePlayerUI(); } }
+function nextStep(){ if(P.idx<P.steps.length-1){ P.idx++; jumpStep(); } else { P.mode='ended'; rememberPlayerPosition(P.api.time()); updatePlayerUI(); } }
 function tickPlayer(){ if(!P||!P.api.ready) return;
   const t=P.api.time();
   if(P.mode==='playing'){
-    if(P.steps.length&&seekSettled()&&t>=stepEnd()-0.08){ P.mode='stepdone'; P.api.pause(); updatePlayerUI(); if(S.settings.autoRead) speak(/^(zuschauen|schau )/i.test(curStep().label)?'Weiter?':'Jetzt du: '+curStep().label); return; }
+    if(P.steps.length&&seekSettled()&&t>=stepEnd()-0.08){ P.mode='stepdone'; P.api.pause(); rememberPlayerPosition(t); updatePlayerUI(); if(S.settings.autoRead) speak(/^(zuschauen|schau )/i.test(curStep().label)?'Weiter?':'Jetzt du: '+curStep().label); return; }
     if(!P.needsTap&&P.api.state()!=='playing'&&Date.now()-P.playAt>3500&&P.api.state()!=='buffering'){ P.needsTap=true; updatePlayerUI(); }
     if(Date.now()-P.lastSave>2000){ P.lastSave=Date.now(); if(!P.school){ P.pr.pos=t; P.pr.step=P.idx; save(); } }
     const cap=$('#captime'); if(cap) cap.textContent=fmt(t)+' / '+fmt(P.api.duration());
   }
 }
+// Nur vorhandene Sicherheitshinweise, dort wo das betreffende Werkzeug benutzt wird.
+function playerSafety(v,s){
+  const hint=v.hinweis||'', label=s&&s.label||'';
+  if(!/(erwachsen|aufsicht|lehrperson)/i.test(hint)||!/(schnitz|messer|säg|saeg|bohr|heiss|heiß|lö[t]|loet)/i.test(label)) return '';
+  return `<div class="pl-safety"><span aria-hidden="true">🙋</span><b>${SCHULE?'Lehrperson holen':'Zusammen mit Erwachsenen'}</b></div>`;
+}
 function updatePlayerUI(){ if(!P) return;
   const ov=$('#overlay'), sh=$('#shield'), v=P.v, steps=P.steps, n=steps.length, m=P.mode, pr=P.pr;
+  const focusAct=document.activeElement&&document.activeElement.closest('#controls button,#pl-current button'); const focusName=focusAct&&focusAct.dataset.act;
   const kinoEl=$('.kid.pl.kino'); if(kinoEl&&(m==='ended'||m==='error')){ kinoEl.classList.remove('kino','liste'); fsExit(); }
   const isKino=!!$('.kid.pl.kino');
   const bigPlay=(act,label)=>`<button class="kbtn round big" data-act="${act}" aria-label="${label}">${ico('play')}</button><div class="lbl">${label}</div>`;
   let html='', show=true, transparent=false;
-  if(m==='error'){ html=`${figur('nachdenken')}<h2>Dieses Video geht hier nicht</h2><div class="hint">Sag es deinen Eltern.</div>`; }
-  else if(m==='start'&&steps[0]&&steps[0].material){ const canResume=pr.step>1; html=matCard(steps[0].material,`<button class="kbtn primary" data-act="start">${ico('check')} Habe ich alles – los!</button>${canResume?`<button class="kbtn ghost" data-act="resume">Weiter bei Schritt ${pr.step+1}</button>`:''}`,v.vorlagen); }
-  else if(m==='material'){ html=matCard(curStep().material,`<button class="kbtn primary" data-act="next">${ico('check')} Habe ich alles – weiter</button>`,v.vorlagen); }
-  else if(m==='start'){ const canResume=n?pr.step>0:pr.pos>3;
-    html=`${bigPlay(canResume?'resume':'start',canResume?(n?`Weiter bei Schritt ${pr.step+1}`:'Weiter schauen'):'Los geht\'s')}${canResume?`<button class="kbtn ghost" data-act="start">Von vorne</button>`:''}`; }
+  if(m==='error'){ html=`${figur('nachdenken')}<h2>Das Video lädt nicht.</h2><button class="kbtn primary" data-act="retry">${ico('replay')} Nochmal versuchen</button>`; }
+  else if(m==='start'||m==='material'){ const canResume=m==='start'&&((n&&pr.step>(steps[0]?.material?1:0))||pr.pos>3), preview=thumbOf(v);
+    html=`${preview?`<img class="pl-preview" src="${esc(preview)}" alt="">`:''}<div class="pl-intro-actions">${bigPlay(m==='material'?'next':canResume?'resume':'start',canResume?'Weitermachen':"Los geht's")}${canResume?`<button class="kbtn ghost" data-act="start">Von vorne</button>`:''}</div>`; }
   else if(m==='playing'){ if(P.needsTap){ transparent=true; html=`<div class="lbl" style="background:rgba(0,0,0,.5);padding:10px 18px;border-radius:14px">Tippe auf das Video ▶</div>`; } else show=false; }
   else if(m==='paused'||m==='stepdone'){ show=false; }
-  else if(m==='ended'){ html=`${figur('geschafft')}<h2>Fertig geschaut!</h2>${v.task&&v.task.text&&v.task.deliverable!=='keine'?`<div class="hint">Jetzt kommt deine Aufgabe ↓</div>`:''}${!SCHULE&&v.task&&v.task.text&&v.task.deliverable==='foto'?'':`<button class="kbtn primary" data-act="foto">${ico('camera')} Foto von deinem Werk</button>`}${S.works.some(w=>w.videoId===v.id&&w.profileId===S.activeProfile)?`<button class="kbtn ghost" data-act="gallery">${ico('gallery')} ${SCHULE?'Unsere':'Meine'} Werke</button>`:''}<button class="kbtn ghost" data-act="restart">${ico('replay')} Nochmal von vorne</button>`; }
+  else if(m==='ended'){ html=`${figur('geschafft')}<h2>Geschafft!</h2>${!SCHULE&&v.task&&v.task.text&&v.task.deliverable==='foto'?'':`<button class="kbtn primary" data-act="foto">${ico('camera')} Mein Werk zeigen</button>`}${S.works.some(w=>w.videoId===v.id&&w.profileId===S.activeProfile)?`<button class="kbtn ghost" data-act="gallery">${ico('gallery')} ${SCHULE?'Unsere':'Meine'} Werke</button>`:''}<button class="kbtn ghost" data-act="restart">${ico('replay')} Nochmal</button>`; }
+  ov.classList.toggle('pl-start',m==='start'||m==='material');
   ov.hidden=!show; ov.classList.toggle('transparent',transparent); ov.innerHTML=html;
   sh.hidden=P.needsTap||S.settings.passTouches||show;
-  const mb=$('#modebadge'); if(mb){ mb.hidden=!(m==='paused'||m==='stepdone'); const jetzt=m==='stepdone'&&!/^(zuschauen|schau )/i.test(curStep().label); mb.innerHTML=jetzt?figur('jetzt-du')+'Jetzt du':m==='stepdone'?'Weiter?':'Pause'; }
+  const mb=$('#modebadge'); if(mb){ mb.hidden=!(m==='paused'||m==='stepdone'); const jetzt=m==='stepdone'&&!/^(zuschauen|schau )/i.test(curStep()?.label||''); mb.innerHTML=jetzt?'Jetzt du!':m==='stepdone'?'Weiter?':'Pause'; }
   const mk=$('#marke'); if(mk){ mk.hidden=m==='playing'||m==='error'; mk.classList.toggle('ov',show); }
   const z=$('#zettel'); if(z) z.textContent=n?`Schritt ${P.idx+1} von ${n}`:'Frei schauen';
-  // Schritte als Knöpfe rechts neben dem Video
+  // Ein Schritt im Blick. Die ganze Liste wird nur auf Wunsch eingeblendet.
+  const current=$('#pl-current'), s=curStep(), preparation=(m==='start'&&steps[0]?.material)||(m==='material'&&s?.material);
+  const stepLabel=s?s.label:v.title, stepNumber=n?`${P.idx+1} / ${n}`:'';
+  if(current){
+    if(preparation){ current.innerHTML=`<div class="pl-current-top"><span>Alles bereit?</span><span class="pl-step-count">${ico('check')}</span></div><h2>Das brauchst du</h2><div class="pl-material">${preparation.map(id=>`<div><span>${matIcon(id)}</span><b>${esc(matName(id))}</b></div>`).join('')}</div>${vorlagenBox(v.vorlagen)}`; }
+    else if(m==='ended'){ current.innerHTML=`<div class="pl-current-top"><span>Du kannst das!</span><span class="pl-step-count">${ico('check')}</span></div><h2>Jetzt ist dein Werk dran.</h2><p class="pl-small">Mach ein Foto, wenn du fertig bist.</p>`; }
+    else{ current.innerHTML=`<div class="pl-current-top"><span>${m==='stepdone'?'Jetzt du!':m==='paused'?'Dein Tempo':"Schau zu"}</span><span class="pl-step-count">${stepNumber||ico('play')}</span></div>${m==='stepdone'?figur('jetzt-du'):''}<h2>${esc(stepLabel)}</h2><button class="pl-read" data-act="say" data-text="${esc(stepLabel)}" aria-label="Schritt vorlesen">${ico('speaker')} Vorlesen</button>${playerSafety(v,s)}${n?`<div class="pl-track" role="progressbar" aria-label="Dein Fortschritt" aria-valuemin="0" aria-valuemax="${n}" aria-valuenow="${P.idx+1}"><i style="width:${(P.idx+1)/n*100}%"></i></div>`:''}`; }
+  }
   const sl=$('#schritte');
-  if(n){ sl.innerHTML=steps.map((s,i)=>`<button class="sbtn${i===P.idx?' cur':i<P.idx?' done':''}" data-act="dot" data-i="${i}"><span class="num">${i<P.idx?ico('check'):i+1}</span><span class="lbl">${esc(s.label)}${s.material?`<span class="mats">${s.material.map(id=>matIcon(id,false)).join('')}</span>`:''}</span>${i===P.idx&&!s.material?`<span class="say" data-act="say" data-text="${esc('Schritt '+(i+1)+': '+s.label)}" aria-label="Vorlesen">${ico('speaker')}</span>`:''}</button>`).join('');
-    const cur=$('.sbtn.cur',sl); if(cur) cur.scrollIntoView({block:'nearest'}); }
+  const listOpen=!!$('.kid.pl.liste'); sl.hidden=!listOpen;
+  const listToggle=$('#pl-steps-toggle'); if(listToggle){ listToggle.hidden=!n; listToggle.setAttribute('aria-expanded',String(listOpen)); }
+  if(n){ sl.innerHTML=steps.map((s,i)=>`<button class="sbtn${i===P.idx?' cur':''}" data-act="dot" data-i="${i}" ${i===P.idx?'aria-current="step"':''}><span class="num">${i+1}</span><span class="lbl">${esc(s.label)}</span></button>`).join('');
+    const cur=$('.sbtn.cur',sl); if(cur&&listOpen) sl.scrollTop=Math.max(0,cur.offsetTop-sl.offsetTop-sl.clientHeight/3); }
   else sl.innerHTML=`<div class="frei"><div class="zeit" id="captime">${fmt(P.api.time())} / ${fmt(P.api.duration())}</div></div>`;
   // Steuerung
-  const playing=m==='playing'; const mid=`<button class="kbtn round big primary" data-act="toggle" aria-label="${playing?'Pause':(m==='stepdone'||m==='material')?'Weiter':'Abspielen'}">${ico(playing?'pause':(m==='stepdone'||m==='material')?'next':'play')}</button>`;
-  const spd=`<button class="speed${pr.slow?' slow':''}" data-act="speed" aria-label="Langsam oder normal">${pr.slow?'🐢':'🐇'}<span class="lab">${pr.slow?'langsam':'normal'}</span></button>`+(P.school?'':`<button class="kbtn round kino-btn" data-act="kino" aria-label="${isKino?'Klein':'Gross'}">${ico(isKino?'compress':'expand')}</button>`);
-  const ks=$('#kinostep'); if(ks){ ks.innerHTML=n?`<span class="k">Schritt ${P.idx+1} von ${n}${isKino?' · Tipp für alle Schritte':''}</span><span class="lbl">${esc(curStep().label)}</span>`:`<span class="k">Frei schauen</span><span class="lbl">${esc(v.title)}</span>`; }
-  $('#controls').innerHTML=n?`<button class="kbtn round" data-act="prevstep" aria-label="Schritt zurück" ${P.idx===0?'disabled':''}>${ico('prev')}</button>${mid}<button class="kbtn round" data-act="replay" aria-label="Schritt nochmal">${ico('replay')}</button>${spd}`
+  const playing=m==='playing', mainLabel=playing?'Pause':m==='stepdone'||m==='material'?'Weiter':m==='paused'?'Weiter schauen':m==='ended'?'Nochmal':"Los geht's";
+  const mid=`<button class="kbtn primary pl-main-action" data-act="${m==='error'?'retry':'toggle'}" aria-label="${m==='error'?'Nochmal versuchen':mainLabel}">${ico(m==='error'?'replay':playing?'pause':m==='stepdone'||m==='material'?'next':'play')}<span>${m==='error'?'Nochmal':mainLabel}</span></button>`;
+  const spd=`<button class="speed${pr.slow?' slow':''}" data-act="speed" aria-label="${pr.slow?'Normales Tempo einschalten':'Langsames Tempo einschalten'}" aria-pressed="${!!pr.slow}"><span aria-hidden="true">${pr.slow?'🐢':'🐇'}</span><span class="lab">${pr.slow?'Langsam':'Tempo'}</span></button>`+(P.school?'':`<button class="kbtn round kino-btn" data-act="kino" aria-label="${isKino?'Vollbild verlassen':'Video gross anzeigen'}">${ico(isKino?'compress':'expand')}</button>`);
+  const ks=$('#kinostep'); if(ks){ ks.setAttribute('aria-expanded',String(listOpen)); ks.innerHTML=n?`<span class="k">Schritt ${P.idx+1} von ${n} · Alle Schritte</span><span class="lbl">${esc(stepLabel)}</span>`:`<span class="k">Frei schauen</span><span class="lbl">${esc(v.title)}</span>`; }
+  $('#controls').innerHTML=n?`<button class="kbtn round" data-act="prevstep" aria-label="Schritt zurück" ${P.idx===0?'disabled':''}>${ico('prev')}</button>${mid}<button class="kbtn round" data-act="replay" aria-label="Schritt nochmal">${ico('replay')}</button><span class="pl-controls-space"></span>${spd}`
     :`<button class="kbtn round" data-act="back10" aria-label="10 Sekunden zurück">${ico('replay')}</button>${mid}<button class="kbtn round" data-act="fwd10" aria-label="10 Sekunden vor">${ico('next')}</button>${spd}`;
   // Auftrag
   const tk=$('#task'); const task=(SCHULE?null:v.task)||{text:'',deliverable:'keine'};
-  if(!task.text||task.deliverable==='keine'){ tk.hidden=true; }
+  if(!task.text||task.deliverable==='keine'||m!=='ended'){ tk.hidden=true; }
   else { tk.hidden=false; const d=task.deliverable;
     const btns={foto:`<button class="kbtn primary" data-act="foto">${ico('camera')} Foto</button>`,bild:`<button class="kbtn primary" data-act="malen">${ico('brush')} Malen</button>`,ton:`<button class="kbtn primary" data-act="ton">${ico('mic')} Aufnehmen</button>`,fertig:`<button class="kbtn primary" data-act="fertig">${ico('check')} Fertig</button>`};
     tk.innerHTML=`<div class="row between"><span class="k">Am Schluss</span><button class="btn icon" data-act="say" data-text="${esc(task.text)}" aria-label="Aufgabe vorlesen" style="width:40px;min-height:40px">${ico('speaker')}</button></div><div class="txt">${esc(task.text)}</div>
       ${pr.done?`<div class="done">${ico('check')} Abgegeben – super!</div>${P.school?'':`<button class="btn" data-act="gallery">${ico('gallery')} Meine Werke</button>`}<div class="btn-grid">${btns[d]||''}</div>`
       :`<div class="btn-grid">${btns[d]||''}</div>${d!=='fertig'&&m==='ended'?`<button class="btn ghost sm" data-act="fertig">Ohne Abgabe fertig</button>`:''}`}`; }
+  if(focusName){ const nextFocus=$(`[data-act="${focusName}"]`,$('#controls'))||$(`[data-act="${focusName}"]`,current)||$('.pl-main-action',$('#controls')); if(nextFocus) nextFocus.focus({preventScroll:true}); }
   fitPlayer();
 }
 document.addEventListener('visibilitychange',()=>{ if(document.hidden&&P&&P.mode==='playing'&&P.api.ready) userPause(); });

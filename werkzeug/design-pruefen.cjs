@@ -1,0 +1,366 @@
+/* Offline smoke checks for both app editions. Does not replace visual/device tests. */
+'use strict';
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
+const root = path.resolve(__dirname, '..');
+const read = p => fs.readFileSync(path.join(root, p), 'utf8');
+const json = p => JSON.parse(read(p));
+const source = read('quelle/p2.js').replace(/(?:render\(\);\s*)?fmKnopf\(\);\s*(?:render\(\);\s*)?boot\(\);\s*$/, '');
+const reports = [];
+
+function element() {
+  const classes = new Set();
+  return {
+    innerHTML: '', hidden: false, dataset: {}, style: { setProperty() {}, removeProperty() {} },
+    classList: { add: x => classes.add(x), remove: (...xs) => xs.forEach(x => classes.delete(x)), contains: x => classes.has(x), toggle(x, v) { if (v ?? !classes.has(x)) classes.add(x); else classes.delete(x); } },
+    querySelector: () => null, querySelectorAll: () => [], contains: () => true,
+    setAttribute() {}, removeAttribute() {}, addEventListener() {}, appendChild() {},
+    remove() {}, scrollIntoView() {}, focus() {},
+  };
+}
+
+function runtime(school, delayedContent = false) {
+  const app = element();
+  const nodes = new Map([['#app', app], ['#themecolor', element()]]);
+  const children = new Map();
+  let appHtml = '';
+  Object.defineProperty(app, 'innerHTML', { get: () => appHtml, set: value => { appHtml = value; children.clear(); } });
+  app.querySelector = selector => {
+    if (!/^#[\w-]+$/.test(selector) || !appHtml.includes(`id="${selector.slice(1)}"`)) return null;
+    if (!children.has(selector)) children.set(selector, element());
+    return children.get(selector);
+  };
+  const listeners = new Map();
+  const context = {
+    console, URL, Blob, TextEncoder, TextDecoder, Math, Date, Promise,
+    setTimeout: () => 1, clearTimeout() {}, setInterval: () => 1, clearInterval() {},
+    requestAnimationFrame: () => 1, cancelAnimationFrame() {},
+    innerWidth: 1024, innerHeight: 768, devicePixelRatio: 1,
+    location: { protocol: 'http:', pathname: school ? '/schule/' : '/', origin: 'http://localhost', search: '', hash: '' },
+    navigator: { userAgent: 'Offline smoke test', maxTouchPoints: 0 },
+    history: { replaceState() {}, pushState() {} },
+    matchMedia: () => ({ matches: false, addEventListener() {} }),
+    localStorage: { getItem: () => null, setItem() {}, removeItem() {} },
+    document: {
+      querySelector: s => nodes.get(s) || app.querySelector(s),
+      querySelectorAll: () => [], createElement: element,
+      head: element(), body: element(), documentElement: element(),
+      addEventListener: (name, fn) => listeners.set(name, fn),
+    },
+    addEventListener: (name, fn) => listeners.set(name, fn), scrollTo() {},
+    fetch: async uri => {
+      if (delayedContent && /(?:^|\/)schule\.json$/.test(uri)) await new Promise(resolve => setImmediate(resolve));
+      const base = school ? path.join(root, 'schule') : root;
+      const target = path.resolve(base, String(uri));
+      if (!target.startsWith(root + path.sep) || !fs.existsSync(target)) return { ok: false };
+      return { ok: true, json: async () => JSON.parse(fs.readFileSync(target, 'utf8')) };
+    },
+    SCHULE: school,
+  };
+  context.window = context;
+  vm.createContext(context);
+  vm.runInContext(source, context, { filename: 'quelle/p2.js' });
+  return { app, context, run: code => vm.runInContext(code, context), nodes };
+}
+
+function click(rt, act, data = {}) {
+  const button = { dataset: { act, ...data } };
+  rt.app.onclick({ target: { closest: () => button }, preventDefault() {} });
+}
+
+function rendered(rt) {
+  return rt.app.innerHTML + (rt.app.querySelector('#ideen-liste')?.innerHTML || '');
+}
+
+function localAssets(html, school, label) {
+  for (const [, value] of html.matchAll(/\b(?:src|href)="([^"]+)"/g)) {
+    if (/^(https?:|data:|blob:|#)/.test(value) || !/\.(?:webp|png|jpg|jpeg|svg|pdf)(?:$|[?#])/.test(value)) continue;
+    const target = path.resolve(root, school ? 'schule' : '', decodeURIComponent(value.split(/[?#]/)[0]));
+    assert(fs.existsSync(target), `${label}: missing local asset ${value}`);
+  }
+}
+
+async function checkEdition(school) {
+  const rt = runtime(school, true), name = school ? 'School' : 'Family';
+  await rt.run('boot()');
+  assert(rt.run('S.videos.length') >= 380, `${name}: content was not completely loaded`);
+  for (const photo of json('anleitungen/anleitungen.json').anleitungen) {
+    assert.equal(rt.run(`videoOf(${JSON.stringify(photo.id)}).areaId`), photo.areaId, `${name}: photo category lost during parallel loading: ${photo.id}`);
+  }
+  if (!school) rt.run("S.profiles=[{id:'test',name:'Lina',emoji:'🐱',color:'#f5cf64'}];S.activeProfile='test';");
+  let screens = 0, cards = 0;
+  for (const grade of school ? [1, 2, 3, 4, 5, 6] : [0]) {
+    rt.run(`S.settings.klasse=${grade};`);
+    for (const room of ['hand', 'werk']) {
+      rt.run(`S.settings.raum=${JSON.stringify(room)}; homeSchule(document.querySelector('#app'));`);
+      assert(rt.app.innerHTML.length > 200, `${name} home empty`);
+      assert(!/\bundefined\b|\[object Object\]/.test(rt.app.innerHTML), `${name} home has invalid text`);
+      localAssets(rt.app.innerHTML, school, `${name} home grade ${grade}`);
+      const eligible = rt.run(`discoverVideos(${JSON.stringify(room)}).map(v=>v.id)`);
+      const featured = rt.run(`featuredProjects(discoverVideos(${JSON.stringify(room)})).map(v=>({id:v.id,technique:!!v.grundtechnik,stufen:v.stufen}))`);
+      assert(featured.length <= 6, `${name} featured row exceeds six choices`);
+      assert.equal(new Set(featured.map(v => v.id)).size, featured.length, 'Duplicate featured projects');
+      for (const project of featured) {
+        assert(eligible.includes(project.id), `${name} featured project from wrong room/class: ${project.id}`);
+        assert(!project.technique, `${name} basic technique featured as complete project: ${project.id}`);
+        if (school) assert(project.stufen.includes(grade), `${name} featured grade mismatch: ${project.id}`);
+      }
+      screens++;
+    }
+    const areas = rt.run('S.areas.map(a=>a.id)');
+    for (const area of areas) {
+      rt.run(`areaSchule(document.querySelector('#app'),areaOf(${JSON.stringify(area)}));`);
+      const html = rendered(rt);
+      localAssets(html, school, `${name} ${area}`);
+      const expected = rt.run(`videosIn(${JSON.stringify(area)}).map(v=>v.id)`);
+      const actual = [...html.matchAll(/<button\b[^>]*\bdata-act="video"[^>]*\bdata-id="([^"]+)"/g)].map(m => m[1]);
+      for (const id of expected) assert(actual.includes(id), `${name} ${area} grade ${grade}: video omitted ${id}`);
+      for (const id of actual) assert(expected.includes(id), `${name} ${area} grade ${grade}: unexpected video ${id}`);
+      cards += actual.length; screens++;
+    }
+  }
+  rt.run("view.params={};S.settings.klasse=2;showCatalogue(document.querySelector('#app'),{room:'hand'});");
+  click(rt, 'filter', { kind: 'foto' });
+  assert(rt.run("S.videos.filter(v=>v.source.type==='bilder').length") > 0);
+  const photoIds = [...rendered(rt).matchAll(/<button\b[^>]*\bdata-act="video"[^>]*\bdata-id="([^"]+)"/g)].map(m => m[1]);
+  for (const id of photoIds) assert.equal(rt.run(`videoOf(${JSON.stringify(id)}).source.type`), 'bilder', 'Photo filter includes video');
+  click(rt, 'reset');
+  rt.app.oninput({ target: { id: 'ideen-suche', value: 'Wickeldrachen' } });
+  assert(rendered(rt).includes('data-id="wl-wickeldrache"'), 'Search must find shortened project titles');
+  rt.app.oninput({ target: { id: 'ideen-suche', value: 'zzzz-keine-idee' } });
+  assert(!/data-act="video"/.test(rendered(rt)), 'Unknown search must not show projects');
+  assert(rendered(rt).includes('data-act="reset"'), 'Empty search needs an escape action');
+  click(rt, 'reset');
+  assert(/data-act="video"/.test(rendered(rt)), 'Reset must restore project cards');
+  assert(rt.run("catalogueMatches({id:'qa',title:'Nähen üben',source:{type:'youtube'},grundtechnik:true},'nahen','lernen')"), 'Search must tolerate accents');
+  assert(!rt.run("catalogueMatches({id:'qa',title:'Nähen',source:{type:'youtube'},grundtechnik:true},'','projekte')"), 'Projects filter must exclude basic techniques');
+  if (!school) {
+    const funVideo = rt.run("S.videos.find(v=>areaOf(v.areaId)?.kind==='spass')?.id");
+    if (funVideo) {
+      rt.run(`view.params={};showCatalogue(document.querySelector('#app'),{area:areaOf(videoOf(${JSON.stringify(funVideo)}).areaId)});let qaGate=0;gateSpass=()=>qaGate++;`);
+      click(rt, 'video', { id: funVideo });
+      assert.equal(rt.run('qaGate'), 1, 'Family leisure video must still pass the star gate');
+    }
+  }
+  reports.push(`${name}: ${screens} rendered screens, ${cards} checked project buttons; class filtering and local assets valid.`);
+  reports.push(`${name}: curated features respect room/class, exclude basic techniques; search, photo filter and empty-state reset work.`);
+  return rt;
+}
+
+function checkPhotoAssets() {
+  let count = 0;
+  for (const a of json('anleitungen/anleitungen.json').anleitungen) {
+    const dir = path.join(root, 'anleitungen', a.ordner || a.id);
+    const files = [a.titelbild, ...(a.vorlagen || []).map(x => x.datei), ...a.steps.flatMap(s => s.bilder || [])].filter(Boolean);
+    for (const f of files) {
+      assert(fs.existsSync(path.join(dir, f)), `${a.id}: missing ${f}`); count++;
+    }
+  }
+  for (const id of json('vorschau/vorschau.json').bilder) assert(fs.existsSync(path.join(root, 'vorschau', id + '.webp')), `Missing video cover ${id}`);
+  reports.push(`Photo instructions: ${count} image/template references valid; all registered video covers exist.`);
+}
+
+function checkVideoData() {
+  const ids = new Set();
+  const videos = json('schule/schule.json').videos;
+  for (const video of videos) {
+    assert(!ids.has(video.id), `Duplicate school project ID: ${video.id}`);
+    ids.add(video.id);
+    if (video.source.type === 'youtube') assert(/^[A-Za-z0-9_-]{11}$/.test(video.source.id), `${video.id}: invalid YouTube ID`);
+    for (const [index, step] of video.steps.entries()) {
+      assert(Number.isFinite(step.t) && step.t >= 0, `${video.id}: invalid step timestamp`);
+      if (index) assert(step.t >= video.steps[index - 1].t, `${video.id}: steps out of order`);
+    }
+  }
+  reports.push(`${videos.length} video records: unique IDs, valid source IDs and ordered step times.`);
+}
+
+function checkPlayer(rt) {
+  rt.run(`
+    updatePlayerUI=()=>{}; speak=()=>{};
+    let clock=0, pauses=0, played=0;
+    P={steps:[{t:0,label:'Falten'},{t:10,label:'Drehen'},{t:25,label:'Fertig'}],idx:0,mode:'playing',school:false,pr:{},lastSave:0,playAt:Date.now(),needsTap:false,
+      api:{ready:true,time:()=>clock,duration:()=>40,state:()=>'playing',pause:()=>pauses++,play:()=>played++,seek:t=>{clock=t}}};
+    clock=9; tickPlayer();
+  `);
+  assert.equal(rt.run('P.mode'), 'playing', 'Player must not stop before a step boundary');
+  rt.run('clock=10; tickPlayer();');
+  assert.equal(rt.run('P.mode'), 'stepdone', 'Player must pause at the next step');
+  assert.equal(rt.run('pauses'), 1);
+  rt.run('nextStep();');
+  assert.equal(rt.run('P.idx'), 1);
+  assert.equal(rt.run('P.mode'), 'playing');
+  assert.equal(rt.run('clock'), 10);
+  assert.equal(rt.run('P.pr.step'), 1, 'Next must immediately persist the selected step');
+  assert.equal(rt.run('P.pr.pos'), 10, 'Next must immediately persist the seek position');
+  rt.run('clock=25;P.seekAt=0;tickPlayer();');
+  assert.equal(rt.run('P.mode'), 'stepdone');
+  rt.run('replayStep();');
+  assert.equal(rt.run('P.idx'), 1, 'Replay must stay on the current step');
+  assert.equal(rt.run('clock'), 10, 'Replay must seek to the current step start');
+  assert.equal(rt.run('P.pr.step'), 1);
+  assert.equal(rt.run('P.pr.pos'), 10);
+  rt.run('P.pr.done=false;P.idx=2;jumpStep();');
+  assert.equal(rt.run('P.pr.step'), 2, 'Jump must immediately persist the selected step');
+  assert.equal(rt.run('P.pr.pos'), 25);
+  assert.equal(rt.run('P.pr.done'), false, 'Jumping to the final step must not complete the video');
+  rt.run('clock=27;userPause();');
+  assert.equal(rt.run('P.pr.pos'), 27, 'Pause must retain the exact playback position');
+  rt.run("P.steps=[{t:-1,label:'Material',material:['papier']}];P.idx=0;P.mode='start';startPlaying(false);");
+  assert.equal(rt.run('P.mode'), 'material', 'Material-only imported video must not index beyond its only step');
+  reports.push('Video engine: boundary pause, next/replay and immediate progress retention work; jumping does not imply completion.');
+}
+
+function checkBuiltPages() {
+  const js = read('quelle/p2.js').trim();
+  const playerCssPath = path.join(root, 'quelle/player-design.css');
+  for (const file of ['index.html', 'schule/index.html']) {
+    const html = read(file);
+    assert(html.includes(js), `${file}: stale or incomplete JavaScript build`);
+    assert(!/maximum-scale=1|user-scalable=no/.test(html), `${file}: pinch zoom is still disabled`);
+    if (fs.existsSync(playerCssPath)) assert(html.includes(fs.readFileSync(playerCssPath, 'utf8').trim()), `${file}: player stylesheet missing from build`);
+    if (file.startsWith('schule/')) assert(html.includes('window.SCHULE=true;'), `${file}: school edition flag missing`);
+    new vm.Script(html.slice(html.lastIndexOf('<script>') + '<script>'.length, html.lastIndexOf('</script>')), { filename: file });
+  }
+  reports.push('Both generated pages contain current JavaScript and player CSS, parse successfully and allow zoom.');
+}
+
+function checkPhotoFlow() {
+  const rt = runtime(true);
+  let historyUrl = null;
+  rt.context.history.replaceState = (_state, _title, url) => { historyUrl = url; };
+  rt.run(`
+    confetti=()=>{};
+    let qaRoute='';go=(name)=>{qaRoute=name;};
+    const qaPhoto={id:'qa-final-check',title:'Mein Werk',areaId:'holz',source:{type:'bilder'},quelle:'anleitung',bildpfad:'',steps:[{text:'Zeig dein Werk.',bilder:[],zeigen:'Zeig es deiner Lehrperson.'}]};
+    S.videos.push(qaPhoto);
+    SCREENS.anleitung(document.querySelector('#app'),{v:qaPhoto,school:true});
+  `);
+  assert(rt.app.innerHTML.includes('data-act="geh"'), 'Photo intro must offer a start action');
+  click(rt, 'geh', { i: '0' });
+  assert(rt.app.innerHTML.includes('data-act="gesehen"'), 'Teacher checkpoint must be visible');
+  click(rt, 'geh', { i: '1' });
+  assert(!rt.run("prog('qa-final-check').done"), 'Final teacher checkpoint must prevent completion');
+  click(rt, 'gesehen');
+  click(rt, 'geh', { i: '1' });
+  assert(rt.run("prog('qa-final-check').done"), 'Confirmed final checkpoint must allow completion');
+  click(rt, 'back');
+  assert.equal(historyUrl, '/schule/', 'Shared photo back must remove the QR hash');
+  assert.equal(rt.run('qaRoute'), 'home');
+  reports.push('Photo flow: final teacher checkpoint enforced, confirmation completes guide, shared-link back clears the hash.');
+}
+
+function checkPlayerScreens() {
+  let states = 0;
+  for (const withSteps of [true, false]) {
+    const rt = runtime(true);
+    rt.run(`
+      makePlayer=()=>({ready:true,time:()=>0,duration:()=>40,state:()=>'paused',play(){},pause(){},seek(){},rate(){},destroy(){}});
+      const qaVideo={id:'qa-player',title:'Fadenherz',areaId:'holz',source:{type:'youtube',id:'IONISsDIxMI'},steps:${withSteps ? "[{t:0,label:'Faden spannen'},{t:10,label:'Fertig'}]" : '[]'},material:[]};
+      S.videos.push(qaVideo);
+      SCREENS.player(document.querySelector('#app'),{videoId:qaVideo.id});
+    `);
+    for (const mode of ['start', 'playing', 'paused', 'stepdone', 'ended', 'error']) {
+      rt.run(`P.mode=${JSON.stringify(mode)};updatePlayerUI();`);
+      const overlay = rt.app.querySelector('#overlay');
+      const controls = rt.app.querySelector('#controls');
+      assert(controls.innerHTML.includes('<button'), `Player controls missing in ${mode}`);
+      assert(!/undefined|NaN/.test(controls.innerHTML), `Invalid player control output in ${mode}`);
+      assert(rt.app.querySelector('#schritte').hidden, 'Full step list must start collapsed');
+      if (mode === 'playing') assert(overlay.hidden, 'Overlay must not obscure playback');
+      if (mode === 'error') assert(overlay.innerHTML.includes('data-act="retry"'), 'Video error needs retry action');
+      if (mode === 'stepdone') assert(rt.app.querySelector('#pl-current').innerHTML.includes('Jetzt du!'), 'Step stop needs make-it prompt');
+      states++;
+    }
+    if (withSteps) {
+      rt.run("P.pr.step=1;P.idx=1;P.mode='start';updatePlayerUI();");
+      assert(rt.app.querySelector('#overlay').innerHTML.includes('data-act="resume"'), 'Second step in a video without materials must offer resume');
+    }
+  }
+  reports.push(`Video interface: ${states} state renders with/without steps, collapsed list, visible retry and watch/do prompts.`);
+}
+
+function checkReturnNavigation() {
+  const rt = runtime(true), scrolls = [];
+  rt.context.scrollY = 611;
+  rt.context.scrollTo = (_x, y) => { scrolls.push(y); rt.context.scrollY = y; };
+  rt.context.requestAnimationFrame = callback => { callback(); return 1; };
+  rt.run(`
+    render=()=>{};leaveScreen=()=>{};
+    view={name:'entdecken',params:{room:'hand',query:'Herz',kind:'projekte'}};
+    go('player',{videoId:'zw-karte-herz-weben'});
+  `);
+  assert.equal(rt.run('playerReturn.name'), 'entdecken', 'Opening a project must remember its catalogue');
+  assert.equal(rt.run('playerReturn.params.query'), 'Herz');
+  assert.equal(rt.run('playerReturn.scroll'), 611);
+  rt.run("backToIdeas(areaOf('weben'),false);");
+  assert.equal(rt.run('view.name'), 'entdecken', 'Back must return to discovery rather than the category');
+  assert.equal(rt.run('view.params.query'), 'Herz', 'Back must preserve the search');
+  assert.equal(rt.run('view.params.kind'), 'projekte', 'Back must preserve the chosen filter');
+  assert.equal(rt.run('view.params.room'), 'hand', 'Back must preserve the chosen room');
+  assert.equal(scrolls.at(-1), 611, 'Back must restore catalogue scroll position');
+  rt.run("playerReturn=null;backToIdeas(areaOf('weben'),false);");
+  assert.equal(rt.run('view.name'), 'area', 'Directly opened project must fall back to its category');
+  assert.equal(rt.run('view.params.id'), 'weben');
+  reports.push('Navigation: return preserves discovery room, query, filter and scroll; direct links fall back to the category.');
+}
+
+function checkModalKeyboard() {
+  const rt = runtime(true), events = new Map(), frames = [], attributes = new Map();
+  const doc = rt.context.document;
+  let removed = false, restoreCount = 0;
+  const previous = { isConnected: true, focus() { doc.activeElement = this; restoreCount++; } };
+  const focusTarget = () => ({ getClientRects: () => [{}], focus() { doc.activeElement = this; } });
+  const first = focusTarget(), last = focusTarget(), dialog = focusTarget(), heading = {};
+  dialog.setAttribute = (key, value) => attributes.set(key, value);
+  const backdrop = element();
+  backdrop.querySelector = selector => selector === '.modal' ? dialog : selector === 'h2' ? heading : null;
+  backdrop.querySelectorAll = () => [first, last];
+  backdrop.addEventListener = (name, callback) => events.set(name, callback);
+  backdrop.remove = () => { removed = true; };
+  doc.createElement = () => backdrop;
+  doc.activeElement = previous;
+  rt.context.requestAnimationFrame = callback => { frames.push(callback); return frames.length; };
+  rt.run("modal('<h2>Deine Klasse</h2><button>Erste</button><button>Letzte</button>');");
+  assert(backdrop.innerHTML.includes('role="dialog"') && backdrop.innerHTML.includes('aria-modal="true"'), 'Modal needs dialog semantics');
+  assert.equal(attributes.get('aria-labelledby'), heading.id, 'Modal needs its visible heading as label');
+  frames.shift()();
+  assert.equal(doc.activeElement, first, 'Opening modal must focus its first control');
+  const key = (name, shiftKey = false) => {
+    let prevented = false;
+    events.get('keydown')({ key: name, shiftKey, preventDefault() { prevented = true; }, stopPropagation() {} });
+    return prevented;
+  };
+  doc.activeElement = last;
+  assert(key('Tab') && doc.activeElement === first, 'Tab at the end must stay inside the modal');
+  assert(key('Tab', true) && doc.activeElement === last, 'Shift+Tab at the beginning must stay inside the modal');
+  assert(key('Escape'), 'Escape must be handled by the modal');
+  assert(removed, 'Escape must close the modal');
+  assert.equal(doc.activeElement, previous, 'Closing modal must restore the trigger focus');
+  key('Escape');
+  assert.equal(restoreCount, 1, 'Closing an already closed modal must not move focus again');
+  reports.push('Modal keyboard: named dialog, initial focus, Tab/Shift+Tab containment, Escape and trigger-focus restoration work.');
+}
+
+(async () => {
+  if (process.argv.includes('--engine')) {
+    checkPlayer(runtime(true));
+    checkPhotoFlow();
+    checkPlayerScreens();
+    console.log(reports.join('\n'));
+    return;
+  }
+  checkVideoData();
+  checkPhotoAssets();
+  await checkEdition(false);
+  const school = await checkEdition(true);
+  checkPlayer(school);
+  checkPhotoFlow();
+  checkPlayerScreens();
+  checkReturnNavigation();
+  checkModalKeyboard();
+  if (process.argv.includes('--built')) checkBuiltPages();
+  console.log(reports.join('\n'));
+})().catch(error => { console.error(error.stack || error); process.exitCode = 1; });
