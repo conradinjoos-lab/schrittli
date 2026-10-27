@@ -110,7 +110,22 @@ const genKarten=()=>[['','✂️','Vorlagen-Generator','Herz, Stern, Bär und ü
   ['armbaender/','📿','Armbänder','Handgelenk messen, Art, Muster und Farben wählen. Länge, Perlen und Fäden werden ausgerechnet.'],
   ['einfrieren/','❄️','Abpausen','Bild aufs iPad holen, gross ziehen, einfrieren, Papier drauflegen und abpausen. Nichts einrichten, das Bild bleibt auf dem Gerät.']]
   .map(([pf,sym,t,txt])=>`<a class="lehrer-gen" href="${VORL_BASE}${pf}"${VL_ZIEL}><span class="sym" aria-hidden="true">${sym}</span><span class="grow"><b>${t}</b><br><span class="small">${txt}</span></span><span aria-hidden="true">→</span></a>`).join('');   // Werkzeuge für alle und Lehrer-Ansicht
-const v3Fuss=()=>`<div class="v3-fuss"><button class="v3-werkzeuge" data-act="werkzeuge">🧰 Werkzeuge</button>${SCHULE?'<button class="v3-link" data-act="lehrer">Für Lehrpersonen</button>':''}</div>`;   // unten auf Raum, Start und Thema
+const appEigenstaendig=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+let appInstallPrompt=null,appInstalliert=false;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();appInstallPrompt=e;});
+window.addEventListener('appinstalled',()=>{appInstallPrompt=null;appInstalliert=true;$$('[data-act="app-speichern"]').forEach(b=>b.remove());});
+const v3Fuss=()=>`<div class="v3-fuss"><button class="v3-werkzeuge" data-act="werkzeuge">🧰 Werkzeuge</button>${SCHULE?'<button class="v3-link" data-act="lehrer">Für Lehrpersonen</button>':''}${!appEigenstaendig()&&!appInstalliert?'<button class="v3-link" data-act="app-speichern">App speichern</button>':''}</div>`;
+async function appSpeichern(){
+  if(appInstallPrompt){
+    const prompt=appInstallPrompt;appInstallPrompt=null;
+    try{await prompt.prompt();await prompt.userChoice;return;}catch(e){/* Ohne Browserdialog die Anleitung zeigen. */}
+  }
+  const apple=/iPad|iPhone|iPod/.test(navigator.userAgent)||(/Macintosh/.test(navigator.userAgent)&&navigator.maxTouchPoints>1);
+  const android=/Android/.test(navigator.userAgent);
+  const schritte=apple?['In Safari auf <b>Teilen</b> tippen.','<b>Zum Home-Bildschirm</b> wählen.<br><small>Bei Bedarf zuerst «Mehr anzeigen» öffnen.</small>','<b>Als Web-App öffnen</b> einschalten und <b>Hinzufügen</b> tippen.']:['In Chrome das Menü <b>⋮</b> öffnen.','<b>Installieren und Verknüpfung erstellen</b> oder <b>Zum Startbildschirm hinzufügen</b> wählen.','Mit <b>Installieren</b> oder <b>Hinzufügen</b> bestätigen.'];
+  const hilfe=apple||android?`<ol class="app-speichern-schritte">${schritte.map(t=>`<li><span>${t}</span></li>`).join('')}</ol>`:'<div class="app-speichern-hilfe"><p><b>iPad / iPhone</b><br>In Safari: Teilen → Zum Home-Bildschirm → Hinzufügen. «Als Web-App öffnen» einschalten.</p><p><b>Android-Tablet</b><br>In Chrome: Menü ⋮ → Installieren und Verknüpfung erstellen → Installieren.</p><p><b>Am Computer</b><br>Im Browser-Menü nach «App installieren» suchen.</p></div>';
+  modal(`<div class="app-speichern-kopf"><img src="${GRAFIK}marke/icon-180.png" alt="" width="76" height="76"><h2>Dein Symbol.<br>Immer dabei.</h2></div>${hilfe}<div class="row" style="justify-content:flex-end"><button class="btn primary" data-close>Verstanden</button></div>`,{},'v3-dialog');
+}
 function vorlagenBox(vl,pfad=f=>VORL_BASE+f){ return (vl||[]).length?`<div class="an-box vorlage"><span class="sym" aria-hidden="true">📄</span><div><p>Vorlage zum Ausdrucken</p>${vl.map(x=>x.datei[0]==='?'   // «?form=herz&b=3» öffnet den Generator mit Form und Grösse
   ?`<div class="an-paar"><a class="an-laden" href="${esc(VORL_BASE+x.datei)}"${VL_ZIEL}>✂ ${esc(x.name)}</a><a class="an-laden zweit" href="${esc(VORL_BASE+x.datei+'&pausen=1')}"${VL_ZIEL} title="Form auf dem Tablet anzeigen und Papier darauflegen">✏️ Abpausen</a></div>`
   :x.datei.includes('/?')   // «perlen/?tier=eidechse» ist eine Seite (Zählmuster), kein Download
@@ -272,7 +287,7 @@ function backToIdeas(a,shared){
 }
 function leaveScreen(){ if(P){ P._fsLeaving=true; P.destroy(); P=null; } fsExit(); if(ED&&ED.api){ ED.api.destroy(); ED.api=null; } stopListening(); try{ speechSynthesis.cancel(); }catch(e){} }
 function render(){ const app=$('#app'); app.innerHTML=''; app.onclick=null; app.oninput=null; app.onchange=null; (SCREENS[view.name]||SCREENS.home)(app,view.params); }
-function wire(app,actions){ app.onclick=e=>{ const b=e.target.closest('[data-act]'); if(!b||!app.contains(b)) return; const fn=actions[b.dataset.act]||(b.dataset.act==='klassewahl'?klasseWaehlen:null); if(fn){ e.preventDefault(); fn(b,e); } }; }
+function wire(app,actions){ app.onclick=e=>{ const b=e.target.closest('[data-act]'); if(!b||!app.contains(b)) return; const fn=actions[b.dataset.act]||(b.dataset.act==='klassewahl'?klasseWaehlen:b.dataset.act==='app-speichern'?appSpeichern:null); if(fn){ e.preventDefault(); fn(b,e); } }; }
 function kopf(title,{back,right='',sub=''}={}){ return `<div class="inner kopf" style="padding-left:max(16px,env(safe-area-inset-left,0px))">${back?`<a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a>`:''}<div class="schild"><h1>${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:''}</div><div class="kopf-rechts">${right}</div></div>`; }
 function bank(opts={}){ return `<div class="bank"><div class="inner deko-reihe"><span class="grow"></span></div><div class="platte"></div><div class="front"></div></div>`; }
 
@@ -351,7 +366,7 @@ const raumOf=aid=>RAEUME[0].themen.includes(aid)?RAEUME[0]:RAEUME[1];
 const raumThemen=r=>S.areas.filter(a=>THEMA_ID.has(a.id)&&raumOf(a.id)===r&&videosIn(a.id).length);
 const soft=a=>`color-mix(in oklch,${a.color} 16%,white)`;
 const prSchule=v=>S.progress[S.activeProfile+':'+v.id]||{};
-function v3Kopf(links,titel){ return `<header class="v3-kopf">${links}<span class="v3-logo"><img src="${GRAFIK}figuren/icon.png" alt=""></span>${titel||'<b class="v3-name">Schritt für Schritt</b>'}<span class="grow"></span>${SCHULE&&S.settings.klasse?`<button class="v3-pill" data-act="klassewahl" aria-label="Klasse ändern: ${S.settings.klasse}. Klasse">${S.settings.klasse}. Klasse</button>`:''}<button class="v3-pill" data-act="gallery">${ico('gallery')} <span>${SCHULE?'Unsere':'Meine'} Werke</span></button></header>`; }
+function v3Kopf(links,titel){ return `<header class="v3-kopf">${links}<span class="v3-logo"><img src="${GRAFIK}marke/icon-192.png" alt="" width="50" height="50"></span>${titel||'<b class="v3-name">Schritt für Schritt</b>'}<span class="grow"></span>${SCHULE&&S.settings.klasse?`<button class="v3-pill" data-act="klassewahl" aria-label="Klasse ändern: ${S.settings.klasse}. Klasse">${S.settings.klasse}. Klasse</button>`:''}<button class="v3-pill" data-act="gallery">${ico('gallery')} <span>${SCHULE?'Unsere':'Meine'} Werke</span></button></header>`; }
 function klasseWaehlen(){
   modal(`<h2>Deine Klasse</h2><div class="v3-class-grid">${STUFEN.map(k=>`<button class="v3-class-choice${S.settings.klasse===k?' an':''}" data-act="klasse" data-k="${k}" aria-pressed="${S.settings.klasse===k}"><span>${k}</span><b>Klasse</b></button>`).join('')}</div><button class="btn ghost" data-close>Schliessen</button>`,{klasse:(b,close)=>{S.settings.klasse=+b.dataset.k;save();close();render();}},'v3-dialog');
 }

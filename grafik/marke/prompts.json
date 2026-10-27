@@ -1,0 +1,21 @@
+{
+  "mode": "built-in image generation",
+  "created": "2026-10-27",
+  "assets": [
+    {
+      "file": "icon-1024.png",
+      "prompt": "Use case: logo-brand. Create ONE finished square app icon for the Swiss children's craft-learning app 'Schritt für Schritt'. This is the actual installable icon asset, not a mockup, not a presentation sheet. Elegant simple graphic design with a warm human-designed paper-cut sensibility, entirely flat, crisp solid shapes, no texture or AI illustration look. A memorable compact mark made of three broad softly rounded stair steps ascending from lower left to upper right, suggesting small achievements and making things step by step. The three steps have warm cream #FAF7F0, soft coral #EF967B and sunny yellow #F5CD65, on a completely solid deep petrol #183D3A background filling the square edge to edge. Distinct friendly silhouette, balanced optical spacing, deliberately simple enough to read at 32 pixels. Main mark occupies about 62 percent of canvas and is fully contained in the central safe circle of radius 39 percent so tablet/Android masks cannot crop it. The steps may fit together as one distinctive playful zigzag construction, not a bar chart. No numbers, no letters, no text, no gradients, no shadows, no glow, no tools, no hands, no eyes, no mascot, no extra decoration, no outside border, no rounded outer canvas corners (the device applies its own mask). Perfectly square, 1024 by 1024 pixels. Premium friendly educational identity."
+    },
+    {
+      "file": "schritt-fuer-schritt-logo.png",
+      "prompt": "Use case: logo-brand. Create the matching horizontal LOGO wordmark for the app named exactly 'Schritt für Schritt'. The attached square icon is the approved brand reference, not a canvas that should remain square. Preserve the reference's distinctive three connected rounded ascending shapes in cream, coral and sunny yellow; use this small mark at the left. To its right typeset exactly the words 'Schritt für Schritt', arranged in two generous lines: first line 'Schritt', second line 'für Schritt'. Deep petrol #183D3A friendly bold rounded sans-serif typography, correct umlaut ü, carefully optically balanced kerning, custom professional brand identity rather than a generic AI illustration. Warm cream background #FAF7F0 across a wide canvas. Keep the reference mark on a small deep-petrol rounded-square tile at left to retain contrast of the cream lower step. Large clean lettering, restrained, joyful and very readable for schoolchildren. This is a flat finished logo asset, no presentation mockup, no paper texture, no shadow, no gradient, no slogans, no extra letters or decorative shapes. Wide aspect approximately 3:1 with sensible clear space all around. Exactly one logo, no alternatives.",
+      "reference": "icon-1024.png"
+    },
+    {
+      "file": "icon-maskable-512.png",
+      "prompt": "Use case: precise-object-edit. Platform export variant of the attached approved app icon. Keep exactly its three connected rounded ascending steps, their cream/coral/yellow colors, shape proportions and solid deep-petrol background. ONLY make the central three-step mark about 18 percent smaller around the exact canvas center, extending the same completely uniform deep-petrol background around it. This extra breathing room is needed for an Android maskable app icon: ALL non-background pixels must fit inside a circle centered at the canvas center with radius 36 percent of the square width. Full square opaque background goes to every edge, no rounded canvas corners, no white border, no new shapes, no letters, no texture, no shadows, no gradients, no redesign. Square output.",
+      "reference": "icon-1024.png"
+    }
+  ],
+  "exports": "Platform sizes downsampled with Lanczos; icons exported as opaque RGB PNG."
+}

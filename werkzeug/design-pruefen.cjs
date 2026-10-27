@@ -62,7 +62,7 @@ function runtime(school, delayedContent = false) {
   context.window = context;
   vm.createContext(context);
   vm.runInContext(source, context, { filename: 'quelle/p2.js' });
-  return { app, context, run: code => vm.runInContext(code, context), nodes };
+  return { app, context, run: code => vm.runInContext(code, context), nodes, listeners };
 }
 
 function click(rt, act, data = {}) {
@@ -227,6 +227,74 @@ function checkBuiltPages() {
   reports.push('Both generated pages contain current JavaScript and player CSS, parse successfully and allow zoom.');
 }
 
+function checkAppAssets() {
+  const identities = new Set();
+  const png = (file, size) => {
+    const bytes = fs.readFileSync(file);
+    assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', `Not a PNG: ${file}`);
+    assert.equal(bytes.readUInt32BE(16), size, `Wrong icon width: ${file}`);
+    assert.equal(bytes.readUInt32BE(20), size, `Wrong icon height: ${file}`);
+    assert.equal(bytes[25], 2, `Home screen icon must use opaque RGB: ${file}`);
+  };
+  for (const school of [false, true]) {
+    const prefix = school ? 'schule/' : '';
+    const manifestUrl = new URL(prefix + 'manifest.webmanifest', 'https://example.test/schrittli/');
+    const manifest = json(prefix + 'manifest.webmanifest');
+    const start = new URL(manifest.start_url, manifestUrl), scope = new URL(manifest.scope, manifestUrl);
+    assert.equal(start.pathname, '/schrittli/' + prefix, 'Installation must launch the correct app edition');
+    assert.equal(start.origin, scope.origin);
+    assert(start.pathname.startsWith(scope.pathname), 'Start URL must be inside app scope');
+    identities.add(new URL(manifest.id, start).href);
+    assert.equal(manifest.display, 'standalone');
+    for (const size of [192, 512]) assert(manifest.icons.some(i => i.sizes === `${size}x${size}` && i.purpose === 'any'));
+    assert(manifest.icons.some(i => i.purpose === 'maskable'), 'Android adaptive icon missing');
+    for (const icon of manifest.icons) {
+      const file = path.resolve(root, prefix, icon.src);
+      assert(file.startsWith(root + path.sep), 'Icon outside the project');
+      png(file, Number(icon.sizes.split('x')[0]));
+    }
+    const html = read(prefix + 'index.html');
+    assert(html.includes('<link rel="manifest" href="manifest.webmanifest">'), 'App manifest not linked');
+    const apple = html.match(/<link rel="apple-touch-icon" sizes="180x180" href="([^"]+)"/);
+    assert(apple, 'Apple home screen icon not linked');
+    png(path.resolve(root, prefix, apple[1]), 180);
+    localAssets(html.slice(0, html.indexOf('</head>')), school, prefix + 'index.html');
+  }
+  assert.equal(identities.size, 2, 'Family and school must have separate install identities');
+  png(path.join(root, 'grafik/marke/icon-32.png'), 32);
+  reports.push('Home screen assets: both manifests launch the correct edition; Apple, Android and favicon PNG dimensions/opacity and links verified.');
+}
+
+async function checkInstallFlow() {
+  const rt = runtime(true);
+  let shown = '';
+  rt.context.captureInstall = html => { shown = html; };
+  rt.run('modal=html=>captureInstall(html);');
+  for (const [agent, touches, expected] of [
+    ['iPad', 5, 'Zum Home-Bildschirm'], ['iPhone', 5, 'Zum Home-Bildschirm'], ['Macintosh', 5, 'Zum Home-Bildschirm'],
+    ['Android', 5, 'Installieren und Verknüpfung erstellen'], ['Desktop', 0, 'Am Computer']
+  ]) {
+    rt.context.navigator.userAgent = agent;
+    rt.context.navigator.maxTouchPoints = touches;
+    await rt.run('appSpeichern()');
+    assert(shown.includes(expected), `Install instructions missing for ${agent}`);
+    localAssets(shown, true, 'Install dialog');
+  }
+  rt.context.navigator.standalone = true;
+  assert(!rt.run('v3Fuss()').includes('app-speichern'), 'Do not offer saving when already running as an app');
+  rt.context.navigator.standalone = false;
+  let prompted = 0, prevented = false;
+  shown = '';
+  rt.listeners.get('beforeinstallprompt')({preventDefault() {prevented = true;}, async prompt() {prompted++;}, userChoice: Promise.resolve({outcome:'dismissed'})});
+  await rt.run('appSpeichern()');
+  assert(prevented && prompted === 1 && !shown, 'Use the available native install prompt once');
+  await rt.run('appSpeichern()');
+  assert(shown, 'After dismissal, the saving guide must still be available');
+  rt.listeners.get('appinstalled')();
+  assert(!rt.run('v3Fuss()').includes('app-speichern'), 'Hide saving after successful installation');
+  reports.push('Saving flow: iPad desktop mode, iPhone/iPad, Android and desktop guidance; native prompt, dismissal and installed state checked.');
+}
+
 function checkPhotoFlow() {
   const rt = runtime(true);
   let historyUrl = null;
@@ -361,6 +429,7 @@ function checkModalKeyboard() {
   checkPlayerScreens();
   checkReturnNavigation();
   checkModalKeyboard();
-  if (process.argv.includes('--built')) checkBuiltPages();
+  await checkInstallFlow();
+  if (process.argv.includes('--built')) { checkBuiltPages(); checkAppAssets(); }
   console.log(reports.join('\n'));
 })().catch(error => { console.error(error.stack || error); process.exitCode = 1; });

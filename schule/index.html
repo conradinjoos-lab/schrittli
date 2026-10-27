@@ -8,9 +8,10 @@
 <meta name="apple-mobile-web-app-title" content="Schritt für Schritt · Schule">
 <meta name="theme-color" content="#FAF7F0" id="themecolor">
 <title>Schritt für Schritt · Schule</title>
-<link rel="icon" href="../grafik/figuren/icon.png">
-<link rel="apple-touch-icon" href="../grafik/figuren/icon.png">
-<link rel="manifest" href='data:application/manifest+json,{"name":"Schritt f%C3%BCr Schritt Schule","short_name":"Schule","display":"standalone","start_url":".","background_color":"%23F1E3CB","theme_color":"%23C98A4E"}'>
+<link rel="icon" type="image/png" sizes="32x32" href="../grafik/marke/icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../grafik/marke/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../grafik/marke/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@700;800;900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
@@ -508,7 +509,7 @@ body:has(.v3){background:#F5F6F8}
 .v3 .grow{flex:1}
 .v3-kopf{display:flex;align-items:center;gap:12px;min-height:52px}
 .v3-logo{width:44px;height:44px;border-radius:14px;background:#F3E8D4;overflow:hidden;flex:none;box-shadow:0 2px 8px rgba(28,36,48,.08)}
-.v3-logo img{width:100%;height:100%;object-fit:cover;object-position:50% 6%;display:block}
+.v3-logo img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .v3-name{font-weight:900;font-size:20px}
 .v3-pill{border:0;background:#fff;border-radius:999px;padding:10px 18px;font-weight:800;font-size:15px;box-shadow:0 2px 8px rgba(28,36,48,.08);white-space:nowrap}
 .v3-rund{width:44px;height:44px;border-radius:50%;border:0;background:#fff;font-size:22px;font-weight:900;box-shadow:0 2px 8px rgba(28,36,48,.08);flex:none;display:grid;place-items:center}
@@ -694,8 +695,8 @@ body:has(.v3){background:var(--werk-paper);color:var(--werk-ink);color-scheme:li
 .v3 :is(button,a){-webkit-tap-highlight-color:transparent}
 .v3-kopf{gap:14px;min-height:62px;padding-bottom:18px;border-bottom:1px solid var(--werk-line);flex-wrap:wrap}
 .v3-kopf .grow{min-width:0}
-.v3-logo{width:50px;height:50px;background:#F2E9D4;border-radius:18px;box-shadow:none}
-.v3-logo img{object-fit:cover;object-position:center 8%}
+.v3-logo{width:50px;height:50px;background:#183D3A;border-radius:14px;box-shadow:none}
+.v3-logo img{object-fit:cover;object-position:center}
 .v3-name{display:block;font-size:20px;line-height:1.05;letter-spacing:-.025em;max-width:180px}
 .v3-brand{display:inline-flex;align-items:center;gap:12px;text-align:left;min-height:52px;border:0;background:transparent;border-radius:18px;text-decoration:none;color:var(--werk-ink);font-weight:900;max-width:100%}
 .v3-brand .v3-name{display:block}
@@ -796,6 +797,14 @@ body:has(.v3){background:var(--werk-paper);color:var(--werk-ink);color-scheme:li
 .v3-leer{padding:36px 16px;background:#F1F2E9;border:1px dashed #D5D9CC;border-radius:25px;color:var(--werk-muted);font-size:18px;font-weight:800}
 .v3-leer .figur{max-height:130px}
 .v3-fuss{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;margin-top:46px;padding-top:24px;border-top:1px solid var(--werk-line)}
+.app-speichern-kopf{display:flex;align-items:center;gap:18px}
+.app-speichern-kopf img{width:76px;height:76px;border-radius:20px;flex:none}
+.app-speichern-kopf h2{margin:0}
+.app-speichern-schritte{list-style:none;counter-reset:install;margin:0;padding:0;display:grid;gap:14px}
+.app-speichern-schritte li{counter-increment:install;display:flex;align-items:center;gap:12px;font-size:17px;line-height:1.45}
+.app-speichern-schritte li::before{content:counter(install);display:grid;place-items:center;width:32px;height:32px;flex:none;border-radius:50%;background:#E8EEDB;color:#183D3A;font-weight:800}
+.app-speichern-hilfe{display:grid;gap:14px;font-size:16px;line-height:1.55}
+.app-speichern-hilfe p{margin:0}
 .v3-werkzeuge{min-height:46px;padding:9px 16px;border:1px solid #D3DED1;border-radius:999px;background:#E9EEE3;color:#365B47;font-family:inherit;font-size:15px;font-weight:800;box-shadow:none;margin:0}
 .v3-link{color:var(--werk-muted);font-size:14px;min-height:44px;padding:10px 14px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
 .v3-link:hover{text-decoration:underline;text-underline-offset:4px}
@@ -1224,7 +1233,22 @@ const genKarten=()=>[['','✂️','Vorlagen-Generator','Herz, Stern, Bär und ü
   ['armbaender/','📿','Armbänder','Handgelenk messen, Art, Muster und Farben wählen. Länge, Perlen und Fäden werden ausgerechnet.'],
   ['einfrieren/','❄️','Abpausen','Bild aufs iPad holen, gross ziehen, einfrieren, Papier drauflegen und abpausen. Nichts einrichten, das Bild bleibt auf dem Gerät.']]
   .map(([pf,sym,t,txt])=>`<a class="lehrer-gen" href="${VORL_BASE}${pf}"${VL_ZIEL}><span class="sym" aria-hidden="true">${sym}</span><span class="grow"><b>${t}</b><br><span class="small">${txt}</span></span><span aria-hidden="true">→</span></a>`).join('');   // Werkzeuge für alle und Lehrer-Ansicht
-const v3Fuss=()=>`<div class="v3-fuss"><button class="v3-werkzeuge" data-act="werkzeuge">🧰 Werkzeuge</button>${SCHULE?'<button class="v3-link" data-act="lehrer">Für Lehrpersonen</button>':''}</div>`;   // unten auf Raum, Start und Thema
+const appEigenstaendig=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+let appInstallPrompt=null,appInstalliert=false;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();appInstallPrompt=e;});
+window.addEventListener('appinstalled',()=>{appInstallPrompt=null;appInstalliert=true;$$('[data-act="app-speichern"]').forEach(b=>b.remove());});
+const v3Fuss=()=>`<div class="v3-fuss"><button class="v3-werkzeuge" data-act="werkzeuge">🧰 Werkzeuge</button>${SCHULE?'<button class="v3-link" data-act="lehrer">Für Lehrpersonen</button>':''}${!appEigenstaendig()&&!appInstalliert?'<button class="v3-link" data-act="app-speichern">App speichern</button>':''}</div>`;
+async function appSpeichern(){
+  if(appInstallPrompt){
+    const prompt=appInstallPrompt;appInstallPrompt=null;
+    try{await prompt.prompt();await prompt.userChoice;return;}catch(e){/* Ohne Browserdialog die Anleitung zeigen. */}
+  }
+  const apple=/iPad|iPhone|iPod/.test(navigator.userAgent)||(/Macintosh/.test(navigator.userAgent)&&navigator.maxTouchPoints>1);
+  const android=/Android/.test(navigator.userAgent);
+  const schritte=apple?['In Safari auf <b>Teilen</b> tippen.','<b>Zum Home-Bildschirm</b> wählen.<br><small>Bei Bedarf zuerst «Mehr anzeigen» öffnen.</small>','<b>Als Web-App öffnen</b> einschalten und <b>Hinzufügen</b> tippen.']:['In Chrome das Menü <b>⋮</b> öffnen.','<b>Installieren und Verknüpfung erstellen</b> oder <b>Zum Startbildschirm hinzufügen</b> wählen.','Mit <b>Installieren</b> oder <b>Hinzufügen</b> bestätigen.'];
+  const hilfe=apple||android?`<ol class="app-speichern-schritte">${schritte.map(t=>`<li><span>${t}</span></li>`).join('')}</ol>`:'<div class="app-speichern-hilfe"><p><b>iPad / iPhone</b><br>In Safari: Teilen → Zum Home-Bildschirm → Hinzufügen. «Als Web-App öffnen» einschalten.</p><p><b>Android-Tablet</b><br>In Chrome: Menü ⋮ → Installieren und Verknüpfung erstellen → Installieren.</p><p><b>Am Computer</b><br>Im Browser-Menü nach «App installieren» suchen.</p></div>';
+  modal(`<div class="app-speichern-kopf"><img src="${GRAFIK}marke/icon-180.png" alt="" width="76" height="76"><h2>Dein Symbol.<br>Immer dabei.</h2></div>${hilfe}<div class="row" style="justify-content:flex-end"><button class="btn primary" data-close>Verstanden</button></div>`,{},'v3-dialog');
+}
 function vorlagenBox(vl,pfad=f=>VORL_BASE+f){ return (vl||[]).length?`<div class="an-box vorlage"><span class="sym" aria-hidden="true">📄</span><div><p>Vorlage zum Ausdrucken</p>${vl.map(x=>x.datei[0]==='?'   // «?form=herz&b=3» öffnet den Generator mit Form und Grösse
   ?`<div class="an-paar"><a class="an-laden" href="${esc(VORL_BASE+x.datei)}"${VL_ZIEL}>✂ ${esc(x.name)}</a><a class="an-laden zweit" href="${esc(VORL_BASE+x.datei+'&pausen=1')}"${VL_ZIEL} title="Form auf dem Tablet anzeigen und Papier darauflegen">✏️ Abpausen</a></div>`
   :x.datei.includes('/?')   // «perlen/?tier=eidechse» ist eine Seite (Zählmuster), kein Download
@@ -1386,7 +1410,7 @@ function backToIdeas(a,shared){
 }
 function leaveScreen(){ if(P){ P._fsLeaving=true; P.destroy(); P=null; } fsExit(); if(ED&&ED.api){ ED.api.destroy(); ED.api=null; } stopListening(); try{ speechSynthesis.cancel(); }catch(e){} }
 function render(){ const app=$('#app'); app.innerHTML=''; app.onclick=null; app.oninput=null; app.onchange=null; (SCREENS[view.name]||SCREENS.home)(app,view.params); }
-function wire(app,actions){ app.onclick=e=>{ const b=e.target.closest('[data-act]'); if(!b||!app.contains(b)) return; const fn=actions[b.dataset.act]||(b.dataset.act==='klassewahl'?klasseWaehlen:null); if(fn){ e.preventDefault(); fn(b,e); } }; }
+function wire(app,actions){ app.onclick=e=>{ const b=e.target.closest('[data-act]'); if(!b||!app.contains(b)) return; const fn=actions[b.dataset.act]||(b.dataset.act==='klassewahl'?klasseWaehlen:b.dataset.act==='app-speichern'?appSpeichern:null); if(fn){ e.preventDefault(); fn(b,e); } }; }
 function kopf(title,{back,right='',sub=''}={}){ return `<div class="inner kopf" style="padding-left:max(16px,env(safe-area-inset-left,0px))">${back?`<a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a>`:''}<div class="schild"><h1>${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:''}</div><div class="kopf-rechts">${right}</div></div>`; }
 function bank(opts={}){ return `<div class="bank"><div class="inner deko-reihe"><span class="grow"></span></div><div class="platte"></div><div class="front"></div></div>`; }
 
@@ -1465,7 +1489,7 @@ const raumOf=aid=>RAEUME[0].themen.includes(aid)?RAEUME[0]:RAEUME[1];
 const raumThemen=r=>S.areas.filter(a=>THEMA_ID.has(a.id)&&raumOf(a.id)===r&&videosIn(a.id).length);
 const soft=a=>`color-mix(in oklch,${a.color} 16%,white)`;
 const prSchule=v=>S.progress[S.activeProfile+':'+v.id]||{};
-function v3Kopf(links,titel){ return `<header class="v3-kopf">${links}<span class="v3-logo"><img src="${GRAFIK}figuren/icon.png" alt=""></span>${titel||'<b class="v3-name">Schritt für Schritt</b>'}<span class="grow"></span>${SCHULE&&S.settings.klasse?`<button class="v3-pill" data-act="klassewahl" aria-label="Klasse ändern: ${S.settings.klasse}. Klasse">${S.settings.klasse}. Klasse</button>`:''}<button class="v3-pill" data-act="gallery">${ico('gallery')} <span>${SCHULE?'Unsere':'Meine'} Werke</span></button></header>`; }
+function v3Kopf(links,titel){ return `<header class="v3-kopf">${links}<span class="v3-logo"><img src="${GRAFIK}marke/icon-192.png" alt="" width="50" height="50"></span>${titel||'<b class="v3-name">Schritt für Schritt</b>'}<span class="grow"></span>${SCHULE&&S.settings.klasse?`<button class="v3-pill" data-act="klassewahl" aria-label="Klasse ändern: ${S.settings.klasse}. Klasse">${S.settings.klasse}. Klasse</button>`:''}<button class="v3-pill" data-act="gallery">${ico('gallery')} <span>${SCHULE?'Unsere':'Meine'} Werke</span></button></header>`; }
 function klasseWaehlen(){
   modal(`<h2>Deine Klasse</h2><div class="v3-class-grid">${STUFEN.map(k=>`<button class="v3-class-choice${S.settings.klasse===k?' an':''}" data-act="klasse" data-k="${k}" aria-pressed="${S.settings.klasse===k}"><span>${k}</span><b>Klasse</b></button>`).join('')}</div><button class="btn ghost" data-close>Schliessen</button>`,{klasse:(b,close)=>{S.settings.klasse=+b.dataset.k;save();close();render();}},'v3-dialog');
 }

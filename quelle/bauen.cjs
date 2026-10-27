@@ -15,7 +15,22 @@ fs.writeFileSync(path.join(root, 'index.html'), head + code + end);
 const school = head
   .replace('<title>Schritt für Schritt</title>', '<title>Schritt für Schritt · Schule</title>')
   .replace('apple-mobile-web-app-title" content="Schritt für Schritt"', 'apple-mobile-web-app-title" content="Schritt für Schritt · Schule"')
-  .replace('"name":"Schritt f%C3%BCr Schritt","short_name":"Schritt f%C3%BCr Schritt"', '"name":"Schritt f%C3%BCr Schritt Schule","short_name":"Schule"')
-  .replaceAll('href="grafik/figuren/icon.png"', 'href="../grafik/figuren/icon.png"');
+  .replaceAll('href="grafik/marke/', 'href="../grafik/marke/');
 fs.writeFileSync(path.join(root, 'schule/index.html'), school + 'window.SCHULE=true;\n' + code + end);
+for (const school of [false, true]) {
+  const base = school ? '../grafik/marke/' : 'grafik/marke/';
+  const manifest = {
+    id: './', name: 'Schritt für Schritt' + (school ? ' · Schule' : ''),
+    short_name: school ? 'Schritt · Schule' : 'Schritt für Schritt', lang: 'de-CH',
+    description: 'Entdecken, ausprobieren, selber machen. Kreative Projekte Schritt für Schritt.',
+    start_url: './', scope: './', display: 'standalone',
+    background_color: '#FAF7F0', theme_color: '#FAF7F0',
+    icons: [
+      {src: base + 'icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any'},
+      {src: base + 'icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any'},
+      {src: base + 'icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable'}
+    ]
+  };
+  fs.writeFileSync(path.join(root, school ? 'schule/manifest.webmanifest' : 'manifest.webmanifest'), JSON.stringify(manifest, null, 2) + '\n');
+}
 console.log('Gebaut: Familie und Schule');
