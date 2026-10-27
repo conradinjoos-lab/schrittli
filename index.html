@@ -1157,9 +1157,61 @@ body:has(.v3){background:var(--werk-paper);color:var(--werk-ink);color-scheme:li
 .v3-worktime{display:block;font-size:13px;font-weight:700;color:var(--werk-muted);margin-top:7px;text-transform:none}
 .v3-discover .v3-schalter{flex-wrap:wrap;justify-content:flex-start}
 .v3-discover .v3-filters{align-items:flex-start}
+/* Ein sichtbares Thema statt einer versteckten Untergruppe im Falten-Katalog. */
+.v3-collection-entry{display:grid;grid-template-columns:minmax(210px,29%) minmax(0,1fr) 56px;align-items:center;gap:24px;width:100%;margin:22px 0 26px;padding:10px 24px 10px 10px;border:1px solid #C9DCDD;border-radius:28px;background:#EFF7F5;color:var(--werk-ink);text-align:left;overflow:hidden;box-shadow:0 5px 18px rgba(24,61,58,.055);transition:transform .18s,box-shadow .18s}
+.v3-collection-entry .bild{display:grid;place-items:center;width:100%;aspect-ratio:4/3;border-radius:20px;background:#DCECF1;overflow:hidden;font-size:72px}
+.v3-collection-entry .bild img{display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:normal}
+.v3-collection-copy{display:flex;flex-direction:column;gap:10px;min-width:0;padding:12px 0}
+.v3-collection-copy b{font:900 clamp(29px,3.6vw,45px)/1.1 'Nunito',sans-serif;letter-spacing:-.025em;overflow-wrap:break-word}
+.v3-collection-copy>span{font:700 18px/1.35 'Nunito',sans-serif;color:#46625B}
+.v3-collection-arrow{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--werk-green);color:#fff;flex:none}
+.v3-collection-arrow .ico{width:27px;height:27px}
+.v3-discover .v3-collection-entry{margin-top:24px;grid-template-columns:190px minmax(0,1fr) 56px}
+.v3-discover .v3-collection-copy b{font-size:32px}
+.v3-collection-levels{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 30px}
+.v3-level-choice{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;min-width:96px;padding:12px 21px;border:1px solid #CBD6C9;border-radius:18px;background:#fff;color:var(--werk-ink);font:800 17px/1.2 'Nunito',sans-serif}
+.v3-level-choice.an{background:var(--werk-ink);border-color:var(--werk-ink);color:#fff}
+.v3-level-dots,.v3-niv .v3-level-dots{display:inline-flex;align-items:center;gap:5px;width:auto;height:auto;background:none;color:inherit;flex:none;border-radius:0}
+.v3-level-dots i{display:block;width:9px;height:9px;border:1.5px solid currentColor;border-radius:50%;background:transparent}
+.v3-level-dots i.an{background:currentColor}
+.v3-collection-heading{gap:12px}
+.v3-collection .v3-lektion .th{aspect-ratio:4/3}
+.v3-collection .v3-lektion .th img{object-fit:contain}
+.v3-collection-list .v3-leer .v3-pill{margin-top:16px}
+@media(hover:hover){.v3-collection-entry:hover{transform:translateY(-3px);box-shadow:0 9px 24px rgba(24,61,58,.11);border-color:#8BB3AC}.v3-level-choice:not(.an):hover{background:#E9EEE3;border-color:#76907D}}
+@media(max-width:819px){.v3-collection-entry{grid-template-columns:190px minmax(0,1fr) 48px;gap:18px;padding-right:18px}.v3-collection-copy b{font-size:31px}.v3-collection-copy>span{font-size:16px}.v3-collection-arrow{width:48px;height:48px}.v3-discover .v3-collection-entry{grid-template-columns:160px minmax(0,1fr) 48px}.v3-discover .v3-collection-copy b{font-size:28px}}
+@media(max-width:619px){.v3-collection-entry,.v3-discover .v3-collection-entry{grid-template-columns:minmax(0,1fr) 48px;gap:12px 14px;padding:9px 9px 18px;margin:20px 0 24px;border-radius:25px}.v3-collection-entry .bild{grid-column:1/-1;aspect-ratio:16/10;border-radius:18px}.v3-collection-copy{gap:7px;padding:2px 0 0 9px}.v3-collection-copy b,.v3-discover .v3-collection-copy b{font-size:27px}.v3-collection-copy>span{font-size:15px}.v3-collection-arrow{width:44px;height:44px;margin-right:4px}.v3-collection-arrow .ico{width:23px;height:23px}.v3-collection-levels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:21px 0 25px}.v3-level-choice{min-width:0;padding:12px 10px;gap:8px;font-size:16px;min-height:54px;border-radius:17px}.v3-level-dots i{width:8px;height:8px}.v3-level-dots{gap:4px}.v3-collection .v3-lektion .th{aspect-ratio:4/3}}
+@media(max-width:359px){.v3-collection-copy b,.v3-discover .v3-collection-copy b,.v3-collection .v3-thema-titel h1{font-size:23px}.v3-collection-copy>span{font-size:14px}}
 @media(max-width:1050px){.v3-procedure-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.v3-topic-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:719px){.v3-procedure-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.v3-time-card{flex-direction:column;gap:9px;padding:16px 8px}.v3-time-card b{font-size:21px}.v3-time-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.v3-basics-banner{padding:20px;gap:17px}.v3-basics-banner>img{width:100px;height:110px}.v3-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:479px){.v3-home-title{margin-top:21px}.v3-section-nav{gap:5px}.v3-section-nav button{font-size:13px;padding:8px 12px}.v3-procedure-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.v3-home-section .v3-section-head h2{font-size:22px}.v3-basics-banner{gap:12px;padding:18px 14px}.v3-basics-banner>img{width:76px;height:95px}.v3-basics-banner h2{font-size:24px}.v3-basics-banner p{font-size:15px}.v3-time-card svg{width:56px;height:56px}.v3-time-card b{font-size:18px}.v3-topic-card b{font-size:18px}.v3-refine label{min-width:135px}.v3-home-section h2{scroll-margin-top:120px}}
+
+
+/* Zwei grosse Bildfragen statt eines Formulars. */
+.v3.fb{color:#183D3A;background:#FAF7F0;font-family:'Nunito',system-ui,sans-serif;min-height:100vh;min-height:100dvh;padding-block:24px 36px}
+.fb-in{max-width:920px;margin:0 auto;padding-inline:max(20px,env(safe-area-inset-left,0px))}
+.fb-head{display:flex;align-items:center;gap:18px;margin-bottom:32px}
+.fb-head>div{flex:1;min-width:0}.fb-head small{display:block;font-size:13px;font-weight:800;color:#586E68;margin-bottom:5px;overflow-wrap:anywhere}
+.fb-head h1{font-family:inherit;font-size:38px;line-height:1.15;font-weight:900;margin:0}.fb-head .v3-rund{background:#FFF;color:#22645B;border:1px solid #DDE4DB;box-shadow:none}
+.fb-questions{display:grid;grid-template-columns:1fr 1fr;gap:24px}.fb-question{margin:0;min-width:0;padding:20px;border:1px solid #E0E6DB;background:#FFF;border-radius:26px}
+.fb-question legend{float:left;width:100%;padding:0 0 22px;font-size:23px;font-weight:900;line-height:1.25;text-wrap:balance}.fb-question legend+.fb-choices{clear:both}
+.fb-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.fb-choice{position:relative;display:flex;align-items:center;justify-content:flex-start;flex-direction:column;gap:14px;min-height:158px;min-width:0;border:2px solid transparent;border-radius:20px;background:#F4F5EE;padding:18px 8px 26px;color:#36534B;font-family:inherit;font-size:15px;font-weight:900;line-height:1.15;text-align:center}
+.fb-choice-symbol{font-size:47px;line-height:1.2;filter:saturate(.92)}.fb-choice.selected{border-color:#22645B;background:#E6EFE6;color:#183D3A}.fb-choice i{position:absolute;right:6px;top:6px;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;font-size:14px;font-style:normal;background:transparent}.fb-choice.selected i{color:#FFF;background:#22645B}.fb-choice:active:not(:disabled){transform:scale(.97)}
+.fb-grade{border:0;padding:0;margin:24px 0}.fb-grade legend{font-size:18px;font-weight:900;padding:0 0 12px}.fb-grade>div{display:flex;gap:10px;flex-wrap:wrap}.fb-grade button{width:54px;height:54px;border-radius:16px;background:#FFF;border:1px solid #DDE4DB;color:#22645B;font-family:inherit;font-size:23px;font-weight:900}.fb-grade button[aria-pressed=true]{background:#22645B;color:#FFF;border-color:#22645B}
+.fb-voice{margin-top:24px;padding:0}.fb-record{display:flex;align-items:center;gap:18px;text-align:left;width:100%;min-height:98px;padding:20px 24px;background:#F1EBDD;color:#183D3A;border:1px solid #E5DDCB;border-radius:24px;font-family:inherit}.fb-mic-icon{display:grid;place-items:center;width:58px;height:58px;font-size:36px;background:#FFF8E8;border-radius:18px;flex:none}.fb-record>span:nth-child(2){flex:1;min-width:0}.fb-record b{display:block;font-size:20px;font-weight:900;line-height:1.25}.fb-record small{display:block;margin-top:5px;font-size:13px;color:#706B56;font-weight:800}.fb-record-plus{font-size:32px;font-weight:700}
+.fb-recording{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:22px;border-radius:24px;background:#FFF1D1;border:1px solid #E9D494}.fb-recording b,.fb-recording p{font-size:18px;font-weight:900}.fb-recording p{flex:1;min-width:150px}.fb-record-dot{height:18px;width:18px;background:#B64831;border-radius:50%;box-shadow:0 0 0 7px #B6483117;flex:none;animation:fb-pulse 1.3s ease-in-out infinite}.fb-clock{font-size:15px;white-space:nowrap;font-weight:900;color:#706132;font-variant-numeric:tabular-nums}
+.fb-stop{display:flex;align-items:center;justify-content:center;gap:10px;min-height:54px;margin-left:auto;padding:0 22px;border-radius:16px;background:#22645B;color:#FFF;font-family:inherit;font-size:18px;font-weight:900}.fb-stop>span{font-size:19px}
+.fb-audio-ready{display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:22px;border:1px solid #D5E1D2;border-radius:24px;background:#E6EFE6}.fb-audio-title{display:flex;align-items:center;gap:10px;flex:1 0 100%}.fb-audio-title>span:first-child{font-size:32px}.fb-audio-title b{font-size:19px;font-weight:900}.fb-audio-title>span:last-child{margin-left:auto;font-size:13px;font-weight:800;color:#586E68}.fb-audio-ready audio{flex:1;width:100%;min-width:180px;height:48px}.fb-audio-ready .fb-small-button{min-height:48px;background:#FFF}
+.fb-voice-note{display:flex;gap:10px;align-items:center;padding:18px 20px;font-size:14px;font-weight:800;line-height:1.5;color:#586E68;background:#F0F1E9;border-radius:18px}.fb-audio-error,.fb-send-error{margin:14px 0 0;padding:14px 18px;border-radius:16px;background:#FFF1D1;color:#654B12;font-size:15px;font-weight:800;line-height:1.4}
+.fb-actions{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:28px}.fb-small-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 14px;border-radius:14px;font-family:inherit;font-size:14px;font-weight:800;color:#586E68;line-height:1.25;background:transparent}
+.fb-send{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:66px;min-width:180px;border:0;border-radius:20px;background:#22645B;color:#FFF;padding:0 26px;font-family:inherit;font-size:21px;font-weight:900}.fb-send:disabled{background:#CDD7CC;color:#4F645B;cursor:default}.fb button:disabled{cursor:default}.fb-choice:disabled,.fb-grade button:disabled{opacity:.72}.fb-choice.selected:disabled,.fb-grade button[aria-pressed=true]:disabled{opacity:1}.fb-recipient{margin:18px 0 0;text-align:right;font-size:12px;color:#586E68;font-weight:700;line-height:1.4}
+.fb-not-connected{max-width:600px;margin:44px auto 0;text-align:center;background:#FFF;border:1px solid #E0E6DB;border-radius:30px;padding:40px 26px}.fb-not-connected>span{font-size:72px;display:block;margin-bottom:20px}.fb-not-connected h2{font-size:27px;font-weight:900;font-family:inherit;line-height:1.25}.fb-not-connected p{font-size:18px;color:#586E68;margin:14px 0 28px}.fb-not-connected .fb-send{font-size:18px}
+.fb-setup{font-family:'Nunito',system-ui,sans-serif;color:#183D3A;display:flex;flex-direction:column;gap:16px}.fb-setup-icon{font-size:56px;line-height:1}.fb-setup h2{font-family:inherit;font-size:28px;font-weight:900}.fb-setup p{font-size:16px;line-height:1.45}.fb-setup-name{display:block;background:#E6EFE6;padding:16px;border-radius:16px;font-size:22px;font-weight:900;overflow-wrap:anywhere}.fb-setup .fb-setup-note{font-size:14px;color:#586E68}.fb-setup .row{justify-content:flex-end;margin-top:4px}.fb-setup .btn.primary{background:#22645B;color:#FFF}.fb-setup-error{color:#843925;font-weight:800}
+.fb-link-label{display:flex;flex-direction:column;gap:8px;font-size:14px;font-weight:800}.fb-link-label .inp{font-size:16px;font-weight:400;background:#FAF7F0;border-color:#CBD9CC;min-height:52px;letter-spacing:0;text-transform:none}
+@keyframes fb-pulse{50%{box-shadow:0 0 0 10px #B6483107}}
+@media(max-width:760px){.fb-questions{grid-template-columns:1fr;gap:20px}.fb-head{margin-bottom:26px}.fb-head h1{font-size:33px}.fb-choice{min-height:132px;font-size:17px;padding:12px 12px 20px;gap:10px}.fb-choice-symbol{font-size:50px}.fb-question{padding:20px}.fb-question legend{font-size:23px;padding-bottom:18px}.fb-in{max-width:620px}.fb-record b{font-size:19px}.fb-recording{gap:12px}.fb-actions{gap:12px}.fb-send{min-width:150px}}
+@media(max-width:430px){.v3.fb{padding-block:16px 26px}.fb-in{padding-inline:14px}.fb-head{gap:12px;margin-bottom:23px}.fb-head small{font-size:11px}.fb-head h1{font-size:30px}.fb-head .v3-rund.gross{width:46px;height:46px}.fb-question{padding:17px;border-radius:22px}.fb-question legend{font-size:21px}.fb-choices{gap:8px}.fb-choice{min-height:124px;border-radius:16px;font-size:14px;padding-inline:5px}.fb-choice-symbol{font-size:43px}.fb-choice i{width:19px;height:19px;font-size:12px;right:4px;top:4px}.fb-record{padding:16px;gap:12px;border-radius:20px}.fb-record b{font-size:17px}.fb-record small{font-size:12px}.fb-mic-icon{width:48px;height:48px;font-size:31px;border-radius:14px}.fb-record-plus{display:none}.fb-stop{width:100%;margin-left:0}.fb-actions{flex-direction:column-reverse;align-items:stretch;margin-top:22px;gap:6px}.fb-send{width:100%;min-height:62px;font-size:20px}.fb-recipient{text-align:center;margin-top:10px}.fb-audio-ready{padding:16px;gap:12px}.fb-audio-ready .fb-small-button{flex:1}.fb-not-connected{margin-top:26px;padding:28px 20px}.fb-not-connected h2{font-size:24px}}
+@media(prefers-reduced-motion:reduce){.fb-record-dot{animation:none}.fb-choice:active:not(:disabled){transform:none}}
 
 </style>
 </head>
@@ -1444,7 +1496,7 @@ function fmKnopf(){ const b=document.createElement('button'); b.className='fm-kn
 const SCREENS={}; let view={name:'boot',params:{}}; let parentOpen=false,playerReturn=null;
 function go(name,params={}){
   if(SCHULE&&(name==='parent'||name==='firstrun'||name==='profiles'))name='home';
-  if(name==='player'&&['home','zimmer','area','entdecken'].includes(view.name))playerReturn={name:view.name,params:{...view.params},scroll:window.scrollY||0};
+  if(name==='player'&&['home','zimmer','area','entdecken','sammlung'].includes(view.name))playerReturn={name:view.name,params:{...view.params},scroll:window.scrollY||0};
   if(name==='school')playerReturn=null;
   leaveScreen();ORT=null;if(name!=='parent')parentOpen=false;view={name,params};render();window.scrollTo(0,0);
   const heading=$('#app h1');if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true});}
@@ -1454,7 +1506,7 @@ function backToIdeas(a,shared){
   const back=playerReturn;go(back?back.name:a?'area':'home',back?{...back.params}:a?{id:a.id}:{});
   if(back)requestAnimationFrame(()=>window.scrollTo(0,back.scroll));
 }
-function leaveScreen(){ if(P){ P._fsLeaving=true; P.destroy(); P=null; } fsExit(); if(ED&&ED.api){ ED.api.destroy(); ED.api=null; } stopListening(); try{ speechSynthesis.cancel(); }catch(e){} }
+function leaveScreen(){ if(typeof feedbackCleanup==='function')feedbackCleanup(); if(P){ P._fsLeaving=true; P.destroy(); P=null; } fsExit(); if(ED&&ED.api){ ED.api.destroy(); ED.api=null; } stopListening(); try{ speechSynthesis.cancel(); }catch(e){} }
 function render(){ const app=$('#app'); app.innerHTML=''; app.onclick=null; app.oninput=null; app.onchange=null; (SCREENS[view.name]||SCREENS.home)(app,view.params); }
 function wire(app,actions){ app.onclick=e=>{ const b=e.target.closest('[data-act]'); if(!b||!app.contains(b)) return; const fn=actions[b.dataset.act]||(b.dataset.act==='klassewahl'?klasseWaehlen:b.dataset.act==='app-speichern'?appSpeichern:null); if(fn){ e.preventDefault(); fn(b,e); } }; }
 function kopf(title,{back,right='',sub=''}={}){ return `<div class="inner kopf" style="padding-left:max(16px,env(safe-area-inset-left,0px))">${back?`<a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a>`:''}<div class="schild"><h1>${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:''}</div><div class="kopf-rechts">${right}</div></div>`; }
@@ -1483,6 +1535,7 @@ async function loadContentFile(){
 }
 SCREENS.boot=app=>{app.innerHTML=`<main class="v3"><div class="v3-loading" role="status">${figur('hallo')}<p>Deine Ideen laden …</p><span class="v3-loading-dots" aria-hidden="true"><i></i><i></i><i></i></span></div></main>`;};
 async function boot(){
+  try{
   render();
   await blobs.open();
   await Promise.all([loadContentFile().then(loadAnleitungen),loadMatFotos(),loadVorschau(),loadLp21()]);
@@ -1491,8 +1544,9 @@ async function boot(){
   if(!S.profiles.length){ go('firstrun'); return; }
   if(!S.activeProfile||!profile()) S.activeProfile=S.profiles[0].id;
   go(S.profiles.length>1?'profiles':'home');
+  }finally{if(typeof feedbackStart==='function')await feedbackStart($('#app'));}
 }
-window.addEventListener('hashchange',()=>{ const s=parseSchool(); if(s) go('school',{video:s}); });
+window.addEventListener('hashchange',()=>{ if(/^#klasse=/.test(location.hash)&&typeof feedbackStart==='function'){feedbackStart($('#app'));return;} const s=parseSchool(); if(s) go('school',{video:s}); });
 
 SCREENS.firstrun=app=>{
   let emoji=AVATARS[0], color=COLORS[1]; const n=abend();
@@ -1592,6 +1646,42 @@ function themenfeldKachel(f,vs){
   const eligible=vs.filter(v=>inThemenfeld(v,f.id)),cover=featuredProjects(eligible,1)[0]||eligible.find(v=>thumbOf(v)),th=cover&&thumbOf(cover);
   return `<button class="v3-topic-card" data-act="themenfeld" data-id="${f.id}"><span class="bild">${th?`<img src="${esc(th)}" alt="" loading="lazy" decoding="async">`:`<span aria-hidden="true">${f.emoji}</span>`}</span><b>${f.name}</b></button>`;
 }
+// Diese ausdrückliche Themenwahl zeigt alle Modelle. Die Klassenfilter der übrigen Übersicht bleiben erhalten.
+function sammlungVideos(id){
+  if(id!=='papierflieger')return [];
+  return S.videos.filter(v=>v.areaId==='falten'&&(/^flieger-/.test(v.id)||/papierflieger/i.test(v.title)));
+}
+const SAMMLUNG_NIVEAUS=[{id:1,name:'Leicht'},{id:2,name:'Mittel'},{id:3,name:'Knifflig'}];
+function sammlungNiveau(v){const n=Number(v.niveau);return n>=1&&n<=3&&Number.isInteger(n)?n:2;}
+function niveauPunkte(n){return `<span class="v3-level-dots" aria-hidden="true">${[1,2,3].map(i=>`<i${i<=n?' class="an"':''}></i>`).join('')}</span>`;}
+function sammlungEinstieg(){
+  const vs=sammlungVideos('papierflieger');if(!vs.length)return '';
+  const cover=vs.find(v=>v.id==='flieger-windhover')||vs.find(v=>v.source.type==='bilder'&&thumbOf(v))||vs.find(v=>thumbOf(v));
+  const th=cover&&thumbOf(cover);
+  return `<button class="v3-collection-entry" data-act="sammlung" data-id="papierflieger" aria-label="Papierflieger: alle Modelle von leicht bis knifflig"><span class="bild">${th?`<img src="${esc(th)}" alt="" decoding="async" onerror="this.remove()">`:'<span aria-hidden="true">✈️</span>'}</span><span class="v3-collection-copy"><b>Papierflieger</b><span>Leicht bis knifflig</span></span><span class="v3-collection-arrow" aria-hidden="true">${ico('next')}</span></button>`;
+}
+function oeffneSammlung(id){
+  go('sammlung',{id,from:{name:view.name,params:{...view.params},scroll:window.scrollY||0}});
+}
+SCREENS.sammlung=(app,params={})=>{
+  const id=params.id||'papierflieger';if(id!=='papierflieger'){go('home');return;}
+  const vs=sammlungVideos(id);let niveau=Number(params.niveau)||0;if(!SAMMLUNG_NIVEAUS.some(n=>n.id===niveau))niveau=0;
+  app.innerHTML=`<main class="v3 v3-collection${schriftNormal()?'':' caps'}"><div class="v3-in">${v3Kopf('<button class="v3-rund gross" data-act="back" aria-label="Zurück zur Übersicht">'+ico('back')+'</button>','<div class="v3-thema-titel"><small>Falten & fliegen</small><h1>Papierflieger</h1></div>')}
+    <div class="v3-collection-levels" role="group" aria-label="Schwierigkeit wählen"><button class="v3-level-choice${niveau===0?' an':''}" data-act="niveau" data-niveau="0" aria-pressed="${niveau===0}">Alle</button>${SAMMLUNG_NIVEAUS.map(n=>`<button class="v3-level-choice${niveau===n.id?' an':''}" data-act="niveau" data-niveau="${n.id}" aria-pressed="${niveau===n.id}">${niveauPunkte(n.id)}<span>${n.name}</span></button>`).join('')}</div>
+    <p class="sr-only" id="sammlung-status" role="status" aria-live="polite"></p><div class="v3-liste v3-collection-list" id="sammlung-liste"></div>${v3Fuss()}</div></main>`;
+  const paint=()=>{
+    const groups=SAMMLUNG_NIVEAUS.filter(n=>!niveau||niveau===n.id).map(n=>({n,items:vs.filter(v=>sammlungNiveau(v)===n.id).sort((a,b)=>Number(b.source.type==='bilder')-Number(a.source.type==='bilder'))}));
+    const count=groups.reduce((sum,g)=>sum+g.items.length,0);
+    $('#sammlung-liste',app).innerHTML=groups.filter(g=>g.items.length).map(({n,items})=>`${!niveau?`<h2 class="v3-niv v3-collection-heading">${niveauPunkte(n.id)}${n.name}</h2>`:''}${items.map(projectCard).join('')}`).join('')||`<div class="v3-leer">${figur('nachdenken')}Hier ist noch kein Flieger.<br><button class="v3-pill" data-act="niveau" data-niveau="0">Alle zeigen</button></div>`;
+    $('#sammlung-status',app).textContent=count+' Papierflieger'+(niveau?' · '+SAMMLUNG_NIVEAUS.find(n=>n.id===niveau).name:'');
+    $$('.v3-level-choice',app).forEach(b=>{const active=Number(b.dataset.niveau)===niveau;b.classList.toggle('an',active);b.setAttribute('aria-pressed',String(active));});
+    view.params.niveau=niveau;
+  };
+  paint();fillThumbs(app);
+  wire(app,{back:()=>{const from=params.from;const valid=from&&['home','zimmer','area','entdecken','grundlagen'].includes(from.name);go(valid?from.name:'home',valid?{...from.params}:{});if(valid)requestAnimationFrame(()=>window.scrollTo(0,from.scroll||0));},
+    niveau:b=>{const next=Number(b.dataset.niveau);niveau=SAMMLUNG_NIVEAUS.some(n=>n.id===next)?next:0;paint();},video:b=>go('player',{videoId:b.dataset.id}),
+    klassewahl:klasseWaehlen,gallery:()=>go('gallery'),lehrer:()=>go('lehrer'),werkzeuge:()=>go('werkzeuge')});
+};
 function homeSchule(app,rid){
   // Die Startübersicht zeigt alle Verfahren; ein früher gewählter Raum versteckt nichts.
   const room=rid||'',r=RAEUME.find(x=>x.id===room),vs=discoverVideos(r?r.id:'');
@@ -1603,6 +1693,7 @@ function homeSchule(app,rid){
   const sections=[['verfahren','Verfahren'],...(basics?[['grundlagen','Grundlagen']]:[]),...(zeiten.length?[['zeit','Zeit']]:[]),...(felder.length?[['themen','Themen']]:[])];
   app.innerHTML=`<main class="v3 v3-home${schriftNormal()?'':' caps'}"><div class="v3-in">${v3Kopf('')}
     <div class="v3-home-title"><h1>Was möchtest du machen?</h1>${r?`<p>${esc(r.name)}</p>`:''}</div>
+    ${sammlungEinstieg()}
     <nav class="v3-section-nav" aria-label="Wege zu deiner Anleitung">${sections.map(([id,name])=>`<button data-act="abschnitt" data-id="${id}">${name}</button>`).join('')}</nav>
     <section class="v3-home-section" id="verfahren" aria-labelledby="verfahren-titel"><div class="v3-section-head"><h2 id="verfahren-titel" tabindex="-1">Wähle ein Verfahren</h2><button class="v3-pill" data-act="entdecken">Alle Ideen ${ico('next')}</button></div>
       <div class="v3-themen v3-procedure-grid">${verfahren.map(themaKachel).join('')}</div></section>
@@ -1613,7 +1704,7 @@ function homeSchule(app,rid){
     ${family&&S.settings.spass?`<div class="v3-section-head"><h2>Deine Pause</h2>${glasSterne(p.id,true)}</div><div class="v3-themen">${S.areas.filter(a=>a.kind==='spass'&&videosIn(a.id).length).map(themaKachel).join('')}</div>`:''}
     ${v3Fuss()}${family?`<div class="v3-home-links">${S.profiles.length>1?'<button class="v3-link" data-act="who">Profil wechseln</button>':''}<button class="v3-link" data-act="parent">${ico('lock')} Für Eltern</button></div>`:''}</div></main>`;
   wire(app,{abschnitt:b=>{const h=$('#'+b.dataset.id+'-titel',app);h?.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});h?.focus({preventScroll:true});},klassewahl:klasseWaehlen,
-    area:b=>go('area',{id:b.dataset.id}),video:b=>go('player',{videoId:b.dataset.id}),entdecken:()=>go('entdecken',{room}),
+    sammlung:b=>oeffneSammlung(b.dataset.id),area:b=>go('area',{id:b.dataset.id}),video:b=>go('player',{videoId:b.dataset.id}),entdecken:()=>go('entdecken',{room}),
     grundlagen:()=>go('grundlagen',{room}),zeit:b=>go('entdecken',{room,zeit:b.dataset.zeit,kind:'projekte',sort:'zeit'}),themenfeld:b=>go('entdecken',{room,thema:b.dataset.id,kind:'projekte'}),
     lehrer:()=>go('lehrer'),werkzeuge:()=>go('werkzeuge'),gallery:()=>go('gallery'),parent:()=>go('parent',{tab:'videos'}),who:()=>go('profiles')});
 }
@@ -1639,6 +1730,7 @@ function showCatalogue(app,{area=null,room=''}={}){
   if(zeit&&zeit!=='offen'&&!zeiten.includes(Number(zeit)))zeiten.push(Number(zeit));
   const feld=THEMENFELDER.find(f=>f.id===thema);
   app.innerHTML=`<main class="v3 v3-discover${schriftNormal()?'':' caps'}"><div class="v3-in">${v3Kopf('<button class="v3-rund gross" data-act="back" aria-label="Zur Übersicht">'+ico('back')+'</button>',`<div class="v3-thema-titel"><small>${area?'Dein Verfahren':'Entdecken'}</small><h1 id="katalog-titel">${area?esc(area.name):feld?feld.name:'Finde deine Idee'}</h1></div>`)}
+    ${area?.id==='falten'?sammlungEinstieg():''}
     ${area&&hasBasics?'<div class="v3-beginner" id="grundlagen-einstieg"><span>Zum ersten Mal?</span><button class="v3-pill" data-act="filter" data-kind="lernen">Grundlagen lernen '+ico('next')+'</button></div>':''}
     <div class="v3-filters"><div class="v3-schalter" role="group" aria-label="Anleitungen filtern">${[['alle','Alles'],['projekte','Projekte'],['lernen','Grundlagen'],['foto','Mit Fotos']].filter(([id])=>id!=='lernen'||hasBasics).map(([id,label])=>`<button class="v3-filter${kind===id?' an':''}" data-act="filter" data-kind="${id}" aria-pressed="${kind===id}">${label}</button>`).join('')}</div>
     <label class="v3-search"><span aria-hidden="true">⌕</span><input type="search" id="ideen-suche" placeholder="Idee suchen" aria-label="Idee suchen" value="${esc(query)}" autocomplete="off"></label></div>
@@ -1663,7 +1755,7 @@ function showCatalogue(app,{area=null,room=''}={}){
   paint();fillThumbs(app);
   app.oninput=e=>{if(e.target.id==='ideen-suche'){query=e.target.value;paint();}};
   app.onchange=e=>{if(e.target.id==='ideen-zeit')zeit=e.target.value;else if(e.target.id==='ideen-thema')thema=e.target.value;else if(e.target.id==='ideen-sortierung')sort=e.target.value;else return;paint();};
-  wire(app,{back:()=>go(view.params.fromBasics?'grundlagen':'home',{room}),klassewahl:klasseWaehlen,filter:b=>{kind=b.dataset.kind;if(kind==='lernen'){zeit='';thema='';$('#ideen-zeit',app).value='';const t=$('#ideen-thema',app);if(t)t.value='';}paint();},reset:()=>{kind='alle';query='';zeit='';thema='';sort='leicht';$('#ideen-suche',app).value='';$('#ideen-zeit',app).value='';$('#ideen-sortierung',app).value='leicht';const t=$('#ideen-thema',app);if(t)t.value='';paint();},
+  wire(app,{back:()=>go(view.params.fromBasics?'grundlagen':'home',{room}),sammlung:b=>oeffneSammlung(b.dataset.id),klassewahl:klasseWaehlen,filter:b=>{kind=b.dataset.kind;if(kind==='lernen'){zeit='';thema='';$('#ideen-zeit',app).value='';const t=$('#ideen-thema',app);if(t)t.value='';}paint();},reset:()=>{kind='alle';query='';zeit='';thema='';sort='leicht';$('#ideen-suche',app).value='';$('#ideen-zeit',app).value='';$('#ideen-sortierung',app).value='leicht';const t=$('#ideen-thema',app);if(t)t.value='';paint();},
     andere:zeigeWerk,video:b=>{const v=videoOf(b.dataset.id);if(area?.kind==='spass')gateSpass(v,()=>go('player',{videoId:v.id}));else go('player',{videoId:v.id});},
     gallery:()=>go('gallery'),lehrer:()=>go('lehrer'),werkzeuge:()=>go('werkzeuge')});
 }
@@ -1671,7 +1763,7 @@ function areaSchule(app,a){return showCatalogue(app,{area:a});}
 SCREENS.entdecken=(app,params)=>showCatalogue(app,{room:params.room||''});
 SCREENS.werkzeuge=app=>{
   app.innerHTML=`<div class="${kidClass()} schrift-normal">${kopf('Werkzeuge',{back:true})}
-    <div class="inner">${genKarten()}</div></div>`;
+    <div class="inner"><section class="panel"><h2>Rückmeldungen deiner Klasse</h2><p class="small muted">Verbinde jedes Tablet einmal. Die Kinder bewerten ihr Projekt mit zwei Bildfragen und können freiwillig etwas aufnehmen.</p><div class="row"><button class="btn primary" data-act="feedback-verbinden">Tablet verbinden</button><a class="btn" href="${SCHULE?'../':''}kontrolle/rueckmeldungen.html">Rückmeldungen ansehen</a></div></section>${genKarten()}</div></div>`;
   wire(app,{ back:()=>go('home') });
 };
 SCREENS.lehrer=app=>{ const n=abend();
@@ -1682,6 +1774,7 @@ SCREENS.lehrer=app=>{ const n=abend();
     <div class="lehrer-liste">${S.areas.map(a=>{ const vs=vids.filter(v=>v.areaId===a.id); if(!vs.length) return ''; return `<h2 style="color:${a.color};margin:14px 0 6px">${a.emoji} ${esc(a.name)}</h2>${vs.map(v=>`<div class="lrow"><span class="ltitel"><b>${esc(v.title)}</b>${v.grundtechnik?' <span class="gt">Grundtechnik</span>':''}<span class="lmeta">${v.zeit?`⏱ ${v.zeit} Min. · `:''}${(v.steps||[]).length?v.steps.length+' Schritte':'ohne Schritte'}${(v.material||[]).length?' · '+v.material.map(matName).join(', '):''}</span></span>${niveauHtml(v)}<span class="stufen">${(v.stufen||[]).map(s=>`<b>${s}</b>`).join('')}</span>${LP21&&LP21.zuordnung[v.id]?`<button class="lp-chip" data-act="lp" data-id="${v.id}" aria-expanded="false" title="LP21-Kompetenzen anzeigen">LP21</button>`:''}<button class="btn sm" data-act="qr" data-id="${v.id}"><span class="lang">QR-Code</span><span class="kurz">QR</span></button></div>`).join('')}`; }).join('')}</div></div>
     ${bank()}</div>`;
   wire(app,{ back:()=>go('home'),
+    'feedback-verbinden':()=>feedbackEinrichten(),
     lp:b=>{ const row=b.closest('.lrow'), nx=row.nextElementSibling; if(nx&&nx.classList.contains('lp-panel')){ nx.remove(); b.setAttribute('aria-expanded','false'); return; } row.insertAdjacentHTML('afterend',lpPanel(videoOf(b.dataset.id))); b.setAttribute('aria-expanded','true'); },
     qr:async b=>{ const v=videoOf(b.dataset.id); const link=schoolLink(v); kidModal(`<h2 style="font-size:20px">${esc(v.title)}</h2><div class="qr" id="qr" style="margin:10px auto"></div><code style="font-size:11px;word-break:break-all;display:block;max-width:360px">${esc(link)}</code><div class="row center" style="margin-top:12px"><button class="btn sm" data-act="copylink" data-link="${esc(link)}">Link kopieren</button><button class="kbtn ghost" data-close>Schliessen</button></div>`,{copylink:(b2)=>{ navigator.clipboard&&navigator.clipboard.writeText(b2.dataset.link).then(()=>toast('Kopiert')).catch(()=>toast('Kopieren nicht möglich')); }}); try{ if(!window.QRCode) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'); new QRCode($('#qr'),{text:link,width:240,height:240,correctLevel:QRCode.CorrectLevel.L}); }catch(e){ const q=$('#qr'); if(q) q.textContent='QR-Code konnte nicht geladen werden.'; } } });
 };
@@ -1761,7 +1854,7 @@ SCREENS.anleitung=(app,{v,school})=>{
         <div class="an-nav">${weiter?`<button class="an-weiter" data-act="geh" data-i="${pr.step}">Weitermachen ${ico('next')}</button><button class="v3-pill" data-act="geh" data-i="0">Von vorne</button>`:`<button class="an-weiter" data-act="geh" data-i="0">Los geht's ${ico('next')}</button>`}</div>
         ${(v.material||[]).length?`<details class="an-material"><summary>${ico('gallery')} Das brauchst du <span>${v.material.length}</span></summary><div class="v3-mat">${v.material.map(id=>`<div><span class="pik">${matIcon(id)}</span><b>${esc(matName(id))}</b></div>`).join('')}</div></details>`:''}</div></div>`; }
     else if(i>=n){ inhalt=`<div class="an-ende v3-karte">${figur('geschafft')}<h2>${esc(v.fertig||'Bravo! Geschafft.')}</h2>
-        <div class="an-nav mitte">${naechste?`<button class="an-weiter" data-act="naechste">Weiter: ${esc(naechste.title.replace(/^.*?:\s*/,''))} →</button>`:''}<button class="${naechste?'v3-pill':'an-weiter'}" data-act="foto">📷 Foto von deinem Werk</button>${S.works.some(w=>w.videoId===v.id&&w.profileId===S.activeProfile)?`<button class="v3-pill" data-act="werke">${SCHULE?'Unsere':'Meine'} Werke</button>`:''}<button class="v3-pill" data-act="geh" data-i="0">Nochmal anschauen</button></div></div>`; }
+        <div class="an-nav mitte"><button class="an-weiter" data-act="feedback">🙂 Wie war’s?</button>${naechste?`<button class="an-weiter" data-act="naechste">Weiter: ${esc(naechste.title.replace(/^.*?:\s*/,''))} →</button>`:''}<button class="${naechste?'v3-pill':'an-weiter'}" data-act="foto">📷 Foto von deinem Werk</button>${S.works.some(w=>w.videoId===v.id&&w.profileId===S.activeProfile)?`<button class="v3-pill" data-act="werke">${SCHULE?'Unsere':'Meine'} Werke</button>`:''}<button class="v3-pill" data-act="geh" data-i="0">Nochmal anschauen</button></div></div>`; }
     else { const bt=s.bildtext||[];
       inhalt=`<div class="an-schritt"><div class="an-bilder${(s.bilder||[]).length>1?' zwei':''}">${(s.bilder||[]).map((f,k)=>`<figure><button data-act="gross" data-src="${esc(bild(f))}" aria-label="Foto zu Schritt ${i+1} gross anzeigen"><img src="${esc(bild(f))}" alt="${esc(bt[k]||s.text)}"></button>${bt[k]?`<figcaption>${esc(bt[k])}</figcaption>`:''}</figure>`).join('')}</div>
         <div class="an-spalte"><div class="an-text"><span class="an-nr" aria-hidden="true">${i+1}</span><p id="an-step-text" tabindex="-1">${esc(s.text)}</p><button class="v3-rund" data-act="lies" aria-label="Schritt vorlesen">${ico('speaker')}</button></div>
@@ -1780,6 +1873,7 @@ SCREENS.anleitung=(app,{v,school})=>{
     else if(k>=0){ pr.step=k; pr.max=Math.max(pr.max||0,k); }
     i=k; save(); zeichne(); window.scrollTo(0,0); const text=$('#an-step-text'); if(text) text.focus({preventScroll:true}); };
   wire(app,{ back:()=>backToIdeas(a,school),
+    feedback:()=>go('feedback',{videoId:v.id,school:school?v:null}),
     geh:b=>{ const k=+b.dataset.i; if(k>i&&steps[i]&&steps[i].zeigen&&!pr.gesehen[i]) return; geh(k); },
     gesehen:()=>{ pr.gesehen[i]=!pr.gesehen[i]; save(); zeichne(); const check=$('[data-act="gesehen"]'); if(check) check.focus({preventScroll:true}); },
     lies:()=>{ unlockTTS(); speak(vorlesen(steps[i])); },
@@ -1817,6 +1911,7 @@ SCREENS.player=(app,{videoId,school})=>{
   updatePlayerUI();
   wire(app,{
     back:()=>backToIdeas(a,school),
+    feedback:()=>go('feedback',{videoId:v.id,school}),
     shield:()=>{ const k=$('.kid.pl.liste'); if(k){ k.classList.remove('liste'); updatePlayerUI(); return; } if(P.mode==='playing') userPause(); else if(P.mode==='paused') userPlay(); else if(P.mode==='stepdone') nextStep(); },
     melden:()=>fehlerMelden(), kino:()=>toggleKino(), liste:()=>{ const k=$('.kid.pl'); if(k) k.classList.toggle('liste'); updatePlayerUI(); },
     start:()=>startPlaying(false), resume:()=>startPlaying(true), play:()=>userPlay(), pause:()=>userPause(),
@@ -1878,7 +1973,7 @@ function updatePlayerUI(){ if(!P) return;
     html=`${preview?`<img class="pl-preview" src="${esc(preview)}" alt="">`:''}<div class="pl-intro-actions">${bigPlay(m==='material'?'next':canResume?'resume':'start',canResume?'Weitermachen':"Los geht's")}${canResume?`<button class="kbtn ghost" data-act="start">Von vorne</button>`:''}</div>`; }
   else if(m==='playing'){ if(P.needsTap){ transparent=true; html=`<div class="lbl" style="background:rgba(0,0,0,.5);padding:10px 18px;border-radius:14px">Tippe auf das Video ▶</div>`; } else show=false; }
   else if(m==='paused'||m==='stepdone'){ show=false; }
-  else if(m==='ended'){ html=`${figur('geschafft')}<h2>Geschafft!</h2>${!SCHULE&&v.task&&v.task.text&&v.task.deliverable==='foto'?'':`<button class="kbtn primary" data-act="foto">${ico('camera')} Mein Werk zeigen</button>`}${S.works.some(w=>w.videoId===v.id&&w.profileId===S.activeProfile)?`<button class="kbtn ghost" data-act="gallery">${ico('gallery')} ${SCHULE?'Unsere':'Meine'} Werke</button>`:''}<button class="kbtn ghost" data-act="restart">${ico('replay')} Nochmal</button>`; }
+  else if(m==='ended'){ html=`${figur('geschafft')}<h2>Geschafft!</h2><button class="kbtn primary" data-act="feedback">🙂 Wie war’s?</button>${!SCHULE&&v.task&&v.task.text&&v.task.deliverable==='foto'?'':`<button class="kbtn primary" data-act="foto">${ico('camera')} Mein Werk zeigen</button>`}${S.works.some(w=>w.videoId===v.id&&w.profileId===S.activeProfile)?`<button class="kbtn ghost" data-act="gallery">${ico('gallery')} ${SCHULE?'Unsere':'Meine'} Werke</button>`:''}<button class="kbtn ghost" data-act="restart">${ico('replay')} Nochmal</button>`; }
   ov.classList.toggle('pl-start',m==='start'||m==='material');
   ov.hidden=!show; ov.classList.toggle('transparent',transparent); ov.innerHTML=html;
   sh.hidden=P.needsTap||S.settings.passTouches||show;
@@ -2207,6 +2302,180 @@ function tabData(root,acts){
 
 fmKnopf();
 boot();
+
+/* Rückmeldungen: zwei Bildfragen und eine freiwillige Sprachnachricht.
+   Aufnahmen bleiben nur im Arbeitsspeicher; Klassenlinks speichern nur den Sendeschlüssel. */
+const RUECKMELDUNG_API='https://schrittli-anmelden.conradinjoos.workers.dev';
+const RUECKMELDUNG_KEY='schrittli.feedback.klasse';
+const RUECKMELDUNG_MAX_AUDIO=1048576;
+let feedbackSession=null, feedbackSetup=null;
+function feedbackKlassenlinkAbholen(){
+  const hash=String(location.hash||'');if(!/^#klasse=/.test(hash))return null;
+  const token=new URLSearchParams(hash.slice(1)).get('klasse')||'';
+  history.replaceState(null,'',location.pathname+location.search);return {token};
+}
+// Bereits beim Laden aus der Adresse nehmen, bevor boot() die Projektdateien abwartet.
+let feedbackInitialLink=feedbackKlassenlinkAbholen();
+
+function feedbackVerbindung(){
+  try{ const value=JSON.parse(localStorage.getItem(RUECKMELDUNG_KEY)||'null');
+    if(value&&/^[a-f0-9]{64}$/i.test(value.token||''))return {token:value.token,name:String(value.name||'Deine Klasse').slice(0,80)};
+  }catch(e){}
+  return null;
+}
+function feedbackUuid(){
+  if(globalThis.crypto&&typeof crypto.randomUUID==='function')return crypto.randomUUID();
+  const bytes=new Uint8Array(16); if(globalThis.crypto&&crypto.getRandomValues)crypto.getRandomValues(bytes);else for(let i=0;i<16;i++)bytes[i]=Math.floor(Math.random()*256);
+  bytes[6]=(bytes[6]&15)|64;bytes[8]=(bytes[8]&63)|128;
+  const hex=Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
+}
+function feedbackCleanup(){
+  if(feedbackSession){feedbackSession.destroy();feedbackSession=null;}
+  if(feedbackSetup){feedbackSetup.active=false;feedbackSetup.controller.abort();clearTimeout(feedbackSetup.timer);if(feedbackSetup.close)feedbackSetup.close();feedbackSetup=null;}
+}
+function feedbackTokenAusEingabe(value){
+  const text=String(value||'').trim();if(/^[a-f0-9]{64}$/i.test(text))return text;
+  try{const url=new URL(text);if(url.origin!=='https://conradinjoos-lab.github.io'||!/^\/schrittli\/schule\/?$/.test(url.pathname)||url.username||url.password||url.search)return '';
+    const hash=new URLSearchParams(url.hash.slice(1)),entries=[...hash.entries()];return entries.length===1&&entries[0][0]==='klasse'&&/^[a-f0-9]{64}$/i.test(entries[0][1])?entries[0][1]:'';
+  }catch(e){return '';}
+}
+function feedbackEinrichten(){
+  modal(`<div class="fb-setup"><span class="fb-setup-icon" aria-hidden="true">🏫</span><h2>Dieses Tablet verbinden</h2><p>Füge den Klassenlink hier ein. So funktioniert die Verbindung auch in der installierten App.</p><label class="fb-link-label" for="fb-class-link">Klassenlink oder Sendeschlüssel<input class="inp" id="fb-class-link" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="320" placeholder="Klassenlink einfügen"></label><p class="fb-setup-error" role="alert" hidden></p><div class="row"><button class="btn" data-close>Abbrechen</button><button class="btn primary" data-act="pruefen">Klasse prüfen</button></div></div>`,{
+    pruefen:(button,close,m)=>{const input=$('#fb-class-link',m),error=$('.fb-setup-error',m),token=feedbackTokenAusEingabe(input&&input.value);if(!token){if(error){error.textContent='Bitte füge einen gültigen Klassenlink von Schritt für Schritt oder den 64-stelligen Sendeschlüssel ein.';error.hidden=false;}if(input)input.focus();return;}
+      try{history.replaceState(null,'',location.pathname+location.search+'#klasse='+token);}catch(e){if(error){error.textContent='Der Klassenlink konnte hier nicht geöffnet werden. Bitte versuche es nochmals.';error.hidden=false;}return;}
+      close();feedbackStart($('#app'));
+    }
+  });
+}
+async function feedbackStart(app){
+  const link=feedbackKlassenlinkAbholen()||feedbackInitialLink;feedbackInitialLink=null;if(!link)return false;
+  const token=link.token;
+  if(feedbackSetup){feedbackSetup.active=false;feedbackSetup.controller.abort();clearTimeout(feedbackSetup.timer);if(feedbackSetup.close)feedbackSetup.close();}
+  const setup={active:true,controller:new AbortController(),timer:null,close:null};feedbackSetup=setup;
+  const finish=()=>{setup.active=false;clearTimeout(setup.timer);if(feedbackSetup===setup)feedbackSetup=null;};
+  const failure=message=>{if(!setup.active)return;setup.close=modal(`<div class="fb-setup"><span class="fb-setup-icon" aria-hidden="true">🏫</span><h2>Tablet verbinden</h2><p>${esc(message)}</p><button class="btn primary" data-close>Verstanden</button></div>`);};
+  if(!/^[a-f0-9]{64}$/i.test(token)){failure('Dieser Klassenlink ist ungültig. Bitte öffne einen neuen Link deiner Lehrperson.');return true;}
+  try{
+    setup.timer=setTimeout(()=>setup.controller.abort(),15000);
+    const response=await fetch(RUECKMELDUNG_API+'/feedback/klasse',{headers:{Authorization:'Bearer '+token},cache:'no-store',signal:setup.controller.signal});
+    if(!setup.active)return true;
+    clearTimeout(setup.timer);
+    if(!response.ok){failure(response.status===401||response.status===403?'Dieser Klassenlink gilt nicht mehr. Bitte nimm einen neuen Link.':'Die Klasse ist gerade nicht erreichbar. Öffne den Klassenlink später nochmals.');return true;}
+    const data=await response.json();if(!setup.active)return true;
+    const name=String(data.name||'Deine Klasse').slice(0,80);
+    setup.close=modal(`<div class="fb-setup"><span class="fb-setup-icon" aria-hidden="true">🏫</span><h2>Tablet verbinden?</h2><p>Rückmeldungen von diesem Tablet gehen an:</p><strong class="fb-setup-name">${esc(name)}</strong><p class="fb-setup-note">Bitte von der Lehrperson bestätigen lassen.</p><p class="fb-setup-error" role="alert" hidden></p><div class="row"><button class="btn" data-act="abbrechen">Abbrechen</button><button class="btn primary" data-act="verbinden">Tablet verbinden</button></div></div>`,{
+      abbrechen:(button,close)=>{close();finish();},
+      verbinden:(button,close,m)=>{if(!setup.active)return;try{localStorage.setItem(RUECKMELDUNG_KEY,JSON.stringify({token,name}));}catch(e){const error=$('.fb-setup-error',m);if(error){error.textContent='Die Verbindung konnte auf diesem Tablet nicht gespeichert werden.';error.hidden=false;}return;}close();finish();toast('Mit '+name+' verbunden.');}
+    });
+  }catch(e){if(setup.active)failure('Die Klasse ist gerade nicht erreichbar. Öffne den Klassenlink später nochmals.');}
+  finally{clearTimeout(setup.timer);}
+  return true;
+}
+
+const FEEDBACK_FRAGEN=[
+  {id:'schwierigkeit',title:'Wie war es für dich?',choices:[[1,'🪶','Leicht'],[2,'👌','Genau richtig'],[3,'💪','Schwierig']]},
+  {id:'spass',title:'Hat es Spass gemacht?',choices:[[1,'😕','Wenig'],[2,'🙂','Okay'],[3,'🤩','Viel']]}
+];
+
+SCREENS.feedback=(app,{videoId,school}={})=>{
+  if(feedbackSession)feedbackSession.destroy();
+  const video=school&&typeof school==='object'?school:videoOf(videoId);
+  if(!video){go('home');return;}
+  const connection=feedbackVerbindung(), area=video.areaId?areaOf(video.areaId):null;
+  const storedGrade=Number(S.settings.klasse),klasse=Number.isInteger(storedGrade)&&storedGrade>=1&&storedGrade<=6?storedGrade:0;
+  const state={active:true,connection,id:feedbackUuid(),values:{schwierigkeit:0,spass:0,klasse:klasse>=1&&klasse<=6?klasse:0},
+    stage:'idle',recordGeneration:0,stream:null,recorder:null,chunks:[],audio:null,audioUrl:null,recordStarted:0,seconds:0,
+    tick:null,limit:null,micWait:null,uploadTimer:null,upload:null,sending:false,attempt:null,error:'',audioError:'',audioRejected:false,invalidConnection:false};
+  feedbackSession=state;
+  const stopTracks=stream=>{if(stream)for(const track of stream.getTracks())try{track.stop();}catch(e){}};
+  const clearRecordingTimers=()=>{clearInterval(state.tick);clearTimeout(state.limit);clearTimeout(state.micWait);state.tick=state.limit=state.micWait=null;};
+  const releaseAudio=()=>{const player=$('#fb-audio',app);if(player)try{player.pause();player.removeAttribute('src');player.load();}catch(e){}if(state.audioUrl)URL.revokeObjectURL(state.audioUrl);state.audioUrl=null;state.audio=null;};
+  const cancelRecorder=()=>{state.recordGeneration++;clearRecordingTimers();const recorder=state.recorder;state.recorder=null;if(recorder){recorder.ondataavailable=recorder.onstop=recorder.onerror=null;try{if(recorder.state!=='inactive')recorder.stop();}catch(e){}}stopTracks(state.stream);state.stream=null;state.chunks=[];};
+  const visibilityChanged=()=>{if(!document.hidden||!state.active)return;if(state.stage==='recording')stopRecording();else if(state.stage==='requesting'){cancelRecorder();state.stage='idle';render();}};
+  document.addEventListener('visibilitychange',visibilityChanged);
+  state.destroy=()=>{if(!state.active)return;state.active=false;document.removeEventListener('visibilitychange',visibilityChanged);cancelRecorder();if(state.upload)state.upload.abort();clearTimeout(state.uploadTimer);releaseAudio();state.attempt=null;};
+  const leave=()=>backToIdeas(area,school);
+  const canRecord=()=>!!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&window.MediaRecorder);
+  const valid=()=>['schwierigkeit','spass'].every(key=>Number.isInteger(state.values[key])&&state.values[key]>=1&&state.values[key]<=3)&&Number.isInteger(state.values.klasse)&&state.values.klasse>=1&&state.values.klasse<=6;
+  const label=typeof projectTitle==='function'?projectTitle(video):video.title;
+  const read=()=>{unlockTTS();speak('Wie war es für dich? Leicht, genau richtig oder schwierig? Hat es Spass gemacht? Wenig, okay oder viel? Wenn du magst, kannst du noch etwas erzählen.');};
+  const render=()=>{
+    if(!state.active)return;
+    const focused=document.activeElement&&app.contains(document.activeElement)?document.activeElement.dataset:null;
+    const locked=!!state.attempt||state.sending, busy=['requesting','recording','stopping'].includes(state.stage);
+    const questions=FEEDBACK_FRAGEN.map(question=>`<fieldset class="fb-question" id="fb-${question.id}"><legend>${question.title}</legend><div class="fb-choices">${question.choices.map(([value,symbol,text])=>`<button type="button" class="fb-choice${state.values[question.id]===value?' selected':''}" data-act="waehlen" data-key="${question.id}" data-value="${value}" aria-pressed="${state.values[question.id]===value}" ${locked?'disabled':''}><span class="fb-choice-symbol" aria-hidden="true">${symbol}</span><span>${text}</span><i aria-hidden="true">${state.values[question.id]===value?'✓':''}</i></button>`).join('')}</div></fieldset>`).join('');
+    let voice='';
+    if(state.stage==='requesting')voice=`<div class="fb-recording"><span class="fb-mic-icon" aria-hidden="true">🎙️</span><p>Erlaube das Mikrofon auf diesem Tablet.</p><button class="fb-small-button" data-act="aufnahme-abbrechen">Abbrechen</button></div>`;
+    else if(state.stage==='recording')voice=`<div class="fb-recording"><span class="fb-record-dot" aria-hidden="true"></span><b>Ich höre zu …</b><span class="fb-clock" id="fb-clock" role="timer" aria-label="Aufnahmedauer">${state.seconds} / 60 s</span><button class="fb-stop" data-act="aufnahme-stopp"><span aria-hidden="true">■</span> Fertig erzählt</button></div>`;
+    else if(state.stage==='stopping')voice=`<p class="fb-voice-note" role="status">Deine Nachricht wird bereitgemacht …</p>`;
+    else if(state.audio)voice=`<div class="fb-audio-ready"><div class="fb-audio-title"><span aria-hidden="true">🎧</span><b>Deine Nachricht</b><span>${state.seconds} s</span></div><audio id="fb-audio" controls preload="metadata" src="${esc(state.audioUrl)}" aria-label="Deine Sprachnachricht anhören"></audio><button class="fb-small-button" data-act="aufnahme-verwerfen" ${locked?'disabled':''}>${ico('trash')} Verwerfen</button></div>`;
+    else if(canRecord())voice=`<button class="fb-record" data-act="aufnahme" ${locked?'disabled':''}><span class="fb-mic-icon" aria-hidden="true">🎙️</span><span><b>Magst du noch etwas erzählen?</b><small>Freiwillig · bis 1 Minute</small></span><span class="fb-record-plus" aria-hidden="true">+</span></button>`;
+    else voice=`<p class="fb-voice-note">${ico('mic')} Auf diesem Tablet ist keine Sprachaufnahme möglich.</p>`;
+    app.innerHTML=`<div class="v3 fb${typeof schriftNormal==='function'&&!schriftNormal()?' caps':''}"><div class="fb-in"><header class="fb-head"><button class="v3-rund gross" data-act="weiter" aria-label="Zurück zu den Ideen">${ico('back')}</button><div><small>${esc(label)}</small><h1>Wie war's?</h1></div><button class="v3-rund" data-act="vorlesen" aria-label="Fragen vorlesen">${ico('speaker')}</button></header>
+      ${!connection?`<section class="fb-not-connected"><span aria-hidden="true">🏫</span><h2>Tablet noch nicht verbunden.</h2><p>Zeig es deiner Lehrperson.</p><button class="fb-send" data-act="weiter">Weiter zu den Ideen ${ico('next')}</button></section>`:`<div class="fb-questions">${questions}</div>
+      ${!klasse||klasse<1||klasse>6?`<fieldset class="fb-grade"><legend>Deine Klasse</legend><div>${[1,2,3,4,5,6].map(value=>`<button data-act="klasse" data-value="${value}" aria-label="${value}. Klasse" aria-pressed="${state.values.klasse===value}" ${locked?'disabled':''}>${value}</button>`).join('')}</div></fieldset>`:''}
+      <section class="fb-voice" aria-label="Freiwillige Sprachnachricht">${voice}<p class="fb-audio-error" role="status" ${state.audioError?'':'hidden'}>${esc(state.audioError)}</p></section>
+      <p class="fb-send-error" role="alert" ${state.error?'':'hidden'}>${esc(state.error)}</p><footer class="fb-actions"><button class="fb-small-button" data-act="weiter">Ohne Rückmeldung weiter</button><button class="fb-send" data-act="senden" ${!valid()||busy||state.sending||state.invalidConnection||(state.audioRejected&&state.audio)?'disabled':''}>${ico(state.sending?'up':'check')} ${state.sending?'Wird gesendet …':state.attempt?'Nochmals senden':'Senden'}</button></footer><p class="fb-recipient">Für deine Lehrperson · ${esc(connection.name)}</p>`}
+      </div></div>`;
+    if(focused&&focused.act){const query=focused.act==='waehlen'?`[data-act="waehlen"][data-key="${focused.key}"][data-value="${focused.value}"]`:focused.act==='klasse'?`[data-act="klasse"][data-value="${focused.value}"]`:`[data-act="${focused.act}"]`;const next=$(query,app);if(next&&!next.disabled)next.focus({preventScroll:true});}
+  };
+  const stopRecording=()=>{if(!state.active||state.stage!=='recording')return;clearRecordingTimers();state.seconds=Math.min(60,Math.max(1,Math.round((Date.now()-state.recordStarted)/1000)));state.stage='stopping';render();try{state.recorder.stop();}catch(e){cancelRecorder();state.stage='idle';state.audioError='Das hat nicht geklappt. Du kannst es nochmals versuchen.';render();}stopTracks(state.stream);state.stream=null;};
+  const record=async()=>{
+    if(!state.active||state.attempt||state.stage!=='idle'||!canRecord())return;
+    releaseAudio();state.audioError='';state.audioRejected=false;state.error='';state.stage='requesting';const generation=++state.recordGeneration;render();
+    state.micWait=setTimeout(()=>{if(state.active&&state.stage==='requesting'&&state.recordGeneration===generation){state.recordGeneration++;state.stage='idle';state.audioError='Das Mikrofon ist noch nicht bereit. Du kannst auch ohne Nachricht senden.';render();}},30000);
+    let stream;
+    try{
+      stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true},video:false});
+      if(!state.active||state.recordGeneration!==generation){stopTracks(stream);return;}
+      clearTimeout(state.micWait);state.micWait=null;state.stream=stream;
+      const types=['audio/webm;codecs=opus','audio/mp4','audio/webm','audio/ogg;codecs=opus'];let recorder=null;
+      for(const mimeType of types){if(typeof MediaRecorder.isTypeSupported==='function'&&!MediaRecorder.isTypeSupported(mimeType))continue;try{recorder=new MediaRecorder(stream,{mimeType,audioBitsPerSecond:64000});break;}catch(e){}}
+      if(!recorder)recorder=new MediaRecorder(stream,{audioBitsPerSecond:64000});
+      state.recorder=recorder;state.chunks=[];state.seconds=0;
+      recorder.ondataavailable=event=>{if(state.active&&state.recordGeneration===generation&&event.data&&event.data.size)state.chunks.push(event.data);};
+      recorder.onerror=()=>{if(!state.active||state.recordGeneration!==generation)return;cancelRecorder();state.stage='idle';state.audioError='Die Aufnahme hat nicht geklappt. Versuch es nochmals oder sende ohne Nachricht.';render();};
+      recorder.onstop=()=>{
+        if(!state.active||state.recordGeneration!==generation)return;
+        clearRecordingTimers();stopTracks(state.stream);state.stream=null;state.recorder=null;
+        state.seconds=Math.min(60,Math.max(1,Math.round((Date.now()-state.recordStarted)/1000)));
+        const mime=String(recorder.mimeType||state.chunks[0]?.type||'').split(';')[0].toLowerCase();
+        if(!/^audio\/(webm|mp4|ogg)$/.test(mime)){state.chunks=[];state.stage='idle';state.audioError='Dieses Aufnahmeformat passt hier leider nicht. Sende deine Bewertung ohne Nachricht.';render();return;}
+        const blob=new Blob(state.chunks,{type:mime});state.chunks=[];state.stage='idle';
+        if(!blob.size){state.audioError='Die Aufnahme war leer. Versuch es nochmals.';render();return;}
+        if(blob.size>RUECKMELDUNG_MAX_AUDIO){state.audioError='Die Nachricht ist zu gross. Nimm sie kürzer auf oder sende ohne Nachricht.';render();return;}
+        state.audio=blob;state.audioUrl=URL.createObjectURL(blob);state.stage='ready';render();
+      };
+      state.recordStarted=Date.now();state.stage='recording';recorder.start(500);
+      state.tick=setInterval(()=>{if(!state.active||state.stage!=='recording')return;state.seconds=Math.min(60,Math.floor((Date.now()-state.recordStarted)/1000));const timer=$('#fb-clock',app);if(timer)timer.textContent=state.seconds+' / 60 s';},250);
+      state.limit=setTimeout(stopRecording,60000);render();
+    }catch(e){stopTracks(stream);if(!state.active||state.recordGeneration!==generation)return;cancelRecorder();state.stage='idle';state.audioError=e&&e.name==='NotAllowedError'?'Das Mikrofon ist nicht freigegeben. Du kannst ohne Nachricht senden.':'Das Mikrofon ist gerade nicht verfügbar. Du kannst ohne Nachricht senden.';render();}
+  };
+  const submit=async()=>{
+    if(!state.active||!state.connection||state.sending||state.invalidConnection||(state.audioRejected&&state.audio)||!valid()||['requesting','recording','stopping'].includes(state.stage))return;
+    if(!state.attempt)state.attempt={data:{id:state.id,videoId:video.id,titel:String(video.title||'').slice(0,160),klasse:state.values.klasse,schwierigkeit:state.values.schwierigkeit,spass:state.values.spass},audio:state.audio};
+    const form=new FormData();form.append('daten',JSON.stringify(state.attempt.data));
+    if(state.attempt.audio){const type=state.attempt.audio.type.split(';')[0],extension=type==='audio/mp4'?'m4a':type==='audio/ogg'?'ogg':'webm';form.append('audio',state.attempt.audio,'nachricht.'+extension);}
+    state.sending=true;state.error='';state.upload=new AbortController();state.uploadTimer=setTimeout(()=>state.upload?.abort(),30000);render();
+    try{
+      const response=await fetch(RUECKMELDUNG_API+'/feedback/abgeben',{method:'POST',headers:{Authorization:'Bearer '+state.connection.token},body:form,signal:state.upload.signal});
+      if(!state.active)return;
+      if(!response.ok){if(response.status===401||response.status===403){state.invalidConnection=true;state.error='Die Verbindung zur Klasse gilt nicht mehr. Zeig es deiner Lehrperson.';}else if(response.status===413){state.attempt=null;releaseAudio();state.stage='idle';state.error='Die Nachricht ist zu gross. Nimm sie kürzer auf oder sende ohne Nachricht.';}else if(response.status===415){state.attempt=null;state.audioRejected=true;state.error='Dieses Audioformat passt hier nicht. Verwirf die Nachricht und sende ohne Ton.';}else if(response.status===400){state.attempt=null;state.error='Die Rückmeldung wurde nicht angenommen. Prüfe deine Auswahl und versuche es nochmals.';}else if(response.status===429)state.error='Gerade kommen viele Antworten an. Versuch es gleich nochmals.';else state.error='Noch keine Bestätigung. Versuch es nochmals.';return;}
+      leave();toast('Danke für deine Rückmeldung!');
+    }catch(e){if(state.active)state.error='Noch keine Bestätigung. Prüfe die Verbindung und versuche es nochmals.';}
+    finally{clearTimeout(state.uploadTimer);state.uploadTimer=null;state.upload=null;if(state.active){state.sending=false;render();}}
+  };
+  wire(app,{
+    weiter:leave,vorlesen:read,
+    waehlen:button=>{const key=button.dataset.key,value=Number(button.dataset.value);if(state.attempt||!['schwierigkeit','spass'].includes(key)||!Number.isInteger(value)||value<1||value>3)return;state.values[key]=value;state.error='';render();},
+    klasse:button=>{const value=Number(button.dataset.value);if(state.attempt||!Number.isInteger(value)||value<1||value>6)return;state.values.klasse=value;render();},
+    aufnahme:record,'aufnahme-stopp':stopRecording,
+    'aufnahme-abbrechen':()=>{if(state.attempt)return;cancelRecorder();state.stage='idle';state.audioError='';render();},
+    'aufnahme-verwerfen':()=>{if(state.attempt)return;cancelRecorder();releaseAudio();state.stage='idle';state.seconds=0;state.audioError='';state.audioRejected=false;state.error='';render();},
+    senden:submit
+  });
+  render();
+};
 </script>
 </body>
 </html>

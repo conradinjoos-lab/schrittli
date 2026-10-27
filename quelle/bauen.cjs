@@ -4,9 +4,9 @@ const path = require('node:path');
 const vm = require('node:vm');
 const root = path.resolve(__dirname, '..');
 let head = fs.readFileSync(path.join(__dirname, 'p1.html'), 'utf8');
-const code = fs.readFileSync(path.join(__dirname, 'p2.js'), 'utf8');
+const code = fs.readFileSync(path.join(__dirname, 'p2.js'), 'utf8') + '\n' + fs.readFileSync(path.join(__dirname, 'rueckmeldung.js'), 'utf8');
 new vm.Script(code, {filename: 'quelle/p2.js'});
-for (const name of ['player-design.css', 'entdecken-design.css']) {
+for (const name of ['player-design.css', 'entdecken-design.css', 'rueckmeldung.css']) {
   const file = path.join(__dirname, name);
   if (fs.existsSync(file)) head = head.replace('</style>', '\n' + fs.readFileSync(file, 'utf8') + '\n</style>');
 }

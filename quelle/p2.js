@@ -275,7 +275,7 @@ function fmKnopf(){ const b=document.createElement('button'); b.className='fm-kn
 const SCREENS={}; let view={name:'boot',params:{}}; let parentOpen=false,playerReturn=null;
 function go(name,params={}){
   if(SCHULE&&(name==='parent'||name==='firstrun'||name==='profiles'))name='home';
-  if(name==='player'&&['home','zimmer','area','entdecken'].includes(view.name))playerReturn={name:view.name,params:{...view.params},scroll:window.scrollY||0};
+  if(name==='player'&&['home','zimmer','area','entdecken','sammlung'].includes(view.name))playerReturn={name:view.name,params:{...view.params},scroll:window.scrollY||0};
   if(name==='school')playerReturn=null;
   leaveScreen();ORT=null;if(name!=='parent')parentOpen=false;view={name,params};render();window.scrollTo(0,0);
   const heading=$('#app h1');if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true});}
@@ -285,7 +285,7 @@ function backToIdeas(a,shared){
   const back=playerReturn;go(back?back.name:a?'area':'home',back?{...back.params}:a?{id:a.id}:{});
   if(back)requestAnimationFrame(()=>window.scrollTo(0,back.scroll));
 }
-function leaveScreen(){ if(P){ P._fsLeaving=true; P.destroy(); P=null; } fsExit(); if(ED&&ED.api){ ED.api.destroy(); ED.api=null; } stopListening(); try{ speechSynthesis.cancel(); }catch(e){} }
+function leaveScreen(){ if(typeof feedbackCleanup==='function')feedbackCleanup(); if(P){ P._fsLeaving=true; P.destroy(); P=null; } fsExit(); if(ED&&ED.api){ ED.api.destroy(); ED.api=null; } stopListening(); try{ speechSynthesis.cancel(); }catch(e){} }
 function render(){ const app=$('#app'); app.innerHTML=''; app.onclick=null; app.oninput=null; app.onchange=null; (SCREENS[view.name]||SCREENS.home)(app,view.params); }
 function wire(app,actions){ app.onclick=e=>{ const b=e.target.closest('[data-act]'); if(!b||!app.contains(b)) return; const fn=actions[b.dataset.act]||(b.dataset.act==='klassewahl'?klasseWaehlen:b.dataset.act==='app-speichern'?appSpeichern:null); if(fn){ e.preventDefault(); fn(b,e); } }; }
 function kopf(title,{back,right='',sub=''}={}){ return `<div class="inner kopf" style="padding-left:max(16px,env(safe-area-inset-left,0px))">${back?`<a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a>`:''}<div class="schild"><h1>${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:''}</div><div class="kopf-rechts">${right}</div></div>`; }
@@ -314,6 +314,7 @@ async function loadContentFile(){
 }
 SCREENS.boot=app=>{app.innerHTML=`<main class="v3"><div class="v3-loading" role="status">${figur('hallo')}<p>Deine Ideen laden …</p><span class="v3-loading-dots" aria-hidden="true"><i></i><i></i><i></i></span></div></main>`;};
 async function boot(){
+  try{
   render();
   await blobs.open();
   await Promise.all([loadContentFile().then(loadAnleitungen),loadMatFotos(),loadVorschau(),loadLp21()]);
@@ -322,8 +323,9 @@ async function boot(){
   if(!S.profiles.length){ go('firstrun'); return; }
   if(!S.activeProfile||!profile()) S.activeProfile=S.profiles[0].id;
   go(S.profiles.length>1?'profiles':'home');
+  }finally{if(typeof feedbackStart==='function')await feedbackStart($('#app'));}
 }
-window.addEventListener('hashchange',()=>{ const s=parseSchool(); if(s) go('school',{video:s}); });
+window.addEventListener('hashchange',()=>{ if(/^#klasse=/.test(location.hash)&&typeof feedbackStart==='function'){feedbackStart($('#app'));return;} const s=parseSchool(); if(s) go('school',{video:s}); });
 
 SCREENS.firstrun=app=>{
   let emoji=AVATARS[0], color=COLORS[1]; const n=abend();
@@ -423,6 +425,42 @@ function themenfeldKachel(f,vs){
   const eligible=vs.filter(v=>inThemenfeld(v,f.id)),cover=featuredProjects(eligible,1)[0]||eligible.find(v=>thumbOf(v)),th=cover&&thumbOf(cover);
   return `<button class="v3-topic-card" data-act="themenfeld" data-id="${f.id}"><span class="bild">${th?`<img src="${esc(th)}" alt="" loading="lazy" decoding="async">`:`<span aria-hidden="true">${f.emoji}</span>`}</span><b>${f.name}</b></button>`;
 }
+// Diese ausdrückliche Themenwahl zeigt alle Modelle. Die Klassenfilter der übrigen Übersicht bleiben erhalten.
+function sammlungVideos(id){
+  if(id!=='papierflieger')return [];
+  return S.videos.filter(v=>v.areaId==='falten'&&(/^flieger-/.test(v.id)||/papierflieger/i.test(v.title)));
+}
+const SAMMLUNG_NIVEAUS=[{id:1,name:'Leicht'},{id:2,name:'Mittel'},{id:3,name:'Knifflig'}];
+function sammlungNiveau(v){const n=Number(v.niveau);return n>=1&&n<=3&&Number.isInteger(n)?n:2;}
+function niveauPunkte(n){return `<span class="v3-level-dots" aria-hidden="true">${[1,2,3].map(i=>`<i${i<=n?' class="an"':''}></i>`).join('')}</span>`;}
+function sammlungEinstieg(){
+  const vs=sammlungVideos('papierflieger');if(!vs.length)return '';
+  const cover=vs.find(v=>v.id==='flieger-windhover')||vs.find(v=>v.source.type==='bilder'&&thumbOf(v))||vs.find(v=>thumbOf(v));
+  const th=cover&&thumbOf(cover);
+  return `<button class="v3-collection-entry" data-act="sammlung" data-id="papierflieger" aria-label="Papierflieger: alle Modelle von leicht bis knifflig"><span class="bild">${th?`<img src="${esc(th)}" alt="" decoding="async" onerror="this.remove()">`:'<span aria-hidden="true">✈️</span>'}</span><span class="v3-collection-copy"><b>Papierflieger</b><span>Leicht bis knifflig</span></span><span class="v3-collection-arrow" aria-hidden="true">${ico('next')}</span></button>`;
+}
+function oeffneSammlung(id){
+  go('sammlung',{id,from:{name:view.name,params:{...view.params},scroll:window.scrollY||0}});
+}
+SCREENS.sammlung=(app,params={})=>{
+  const id=params.id||'papierflieger';if(id!=='papierflieger'){go('home');return;}
+  const vs=sammlungVideos(id);let niveau=Number(params.niveau)||0;if(!SAMMLUNG_NIVEAUS.some(n=>n.id===niveau))niveau=0;
+  app.innerHTML=`<main class="v3 v3-collection${schriftNormal()?'':' caps'}"><div class="v3-in">${v3Kopf('<button class="v3-rund gross" data-act="back" aria-label="Zurück zur Übersicht">'+ico('back')+'</button>','<div class="v3-thema-titel"><small>Falten & fliegen</small><h1>Papierflieger</h1></div>')}
+    <div class="v3-collection-levels" role="group" aria-label="Schwierigkeit wählen"><button class="v3-level-choice${niveau===0?' an':''}" data-act="niveau" data-niveau="0" aria-pressed="${niveau===0}">Alle</button>${SAMMLUNG_NIVEAUS.map(n=>`<button class="v3-level-choice${niveau===n.id?' an':''}" data-act="niveau" data-niveau="${n.id}" aria-pressed="${niveau===n.id}">${niveauPunkte(n.id)}<span>${n.name}</span></button>`).join('')}</div>
+    <p class="sr-only" id="sammlung-status" role="status" aria-live="polite"></p><div class="v3-liste v3-collection-list" id="sammlung-liste"></div>${v3Fuss()}</div></main>`;
+  const paint=()=>{
+    const groups=SAMMLUNG_NIVEAUS.filter(n=>!niveau||niveau===n.id).map(n=>({n,items:vs.filter(v=>sammlungNiveau(v)===n.id).sort((a,b)=>Number(b.source.type==='bilder')-Number(a.source.type==='bilder'))}));
+    const count=groups.reduce((sum,g)=>sum+g.items.length,0);
+    $('#sammlung-liste',app).innerHTML=groups.filter(g=>g.items.length).map(({n,items})=>`${!niveau?`<h2 class="v3-niv v3-collection-heading">${niveauPunkte(n.id)}${n.name}</h2>`:''}${items.map(projectCard).join('')}`).join('')||`<div class="v3-leer">${figur('nachdenken')}Hier ist noch kein Flieger.<br><button class="v3-pill" data-act="niveau" data-niveau="0">Alle zeigen</button></div>`;
+    $('#sammlung-status',app).textContent=count+' Papierflieger'+(niveau?' · '+SAMMLUNG_NIVEAUS.find(n=>n.id===niveau).name:'');
+    $$('.v3-level-choice',app).forEach(b=>{const active=Number(b.dataset.niveau)===niveau;b.classList.toggle('an',active);b.setAttribute('aria-pressed',String(active));});
+    view.params.niveau=niveau;
+  };
+  paint();fillThumbs(app);
+  wire(app,{back:()=>{const from=params.from;const valid=from&&['home','zimmer','area','entdecken','grundlagen'].includes(from.name);go(valid?from.name:'home',valid?{...from.params}:{});if(valid)requestAnimationFrame(()=>window.scrollTo(0,from.scroll||0));},
+    niveau:b=>{const next=Number(b.dataset.niveau);niveau=SAMMLUNG_NIVEAUS.some(n=>n.id===next)?next:0;paint();},video:b=>go('player',{videoId:b.dataset.id}),
+    klassewahl:klasseWaehlen,gallery:()=>go('gallery'),lehrer:()=>go('lehrer'),werkzeuge:()=>go('werkzeuge')});
+};
 function homeSchule(app,rid){
   // Die Startübersicht zeigt alle Verfahren; ein früher gewählter Raum versteckt nichts.
   const room=rid||'',r=RAEUME.find(x=>x.id===room),vs=discoverVideos(r?r.id:'');
@@ -434,6 +472,7 @@ function homeSchule(app,rid){
   const sections=[['verfahren','Verfahren'],...(basics?[['grundlagen','Grundlagen']]:[]),...(zeiten.length?[['zeit','Zeit']]:[]),...(felder.length?[['themen','Themen']]:[])];
   app.innerHTML=`<main class="v3 v3-home${schriftNormal()?'':' caps'}"><div class="v3-in">${v3Kopf('')}
     <div class="v3-home-title"><h1>Was möchtest du machen?</h1>${r?`<p>${esc(r.name)}</p>`:''}</div>
+    ${sammlungEinstieg()}
     <nav class="v3-section-nav" aria-label="Wege zu deiner Anleitung">${sections.map(([id,name])=>`<button data-act="abschnitt" data-id="${id}">${name}</button>`).join('')}</nav>
     <section class="v3-home-section" id="verfahren" aria-labelledby="verfahren-titel"><div class="v3-section-head"><h2 id="verfahren-titel" tabindex="-1">Wähle ein Verfahren</h2><button class="v3-pill" data-act="entdecken">Alle Ideen ${ico('next')}</button></div>
       <div class="v3-themen v3-procedure-grid">${verfahren.map(themaKachel).join('')}</div></section>
@@ -444,7 +483,7 @@ function homeSchule(app,rid){
     ${family&&S.settings.spass?`<div class="v3-section-head"><h2>Deine Pause</h2>${glasSterne(p.id,true)}</div><div class="v3-themen">${S.areas.filter(a=>a.kind==='spass'&&videosIn(a.id).length).map(themaKachel).join('')}</div>`:''}
     ${v3Fuss()}${family?`<div class="v3-home-links">${S.profiles.length>1?'<button class="v3-link" data-act="who">Profil wechseln</button>':''}<button class="v3-link" data-act="parent">${ico('lock')} Für Eltern</button></div>`:''}</div></main>`;
   wire(app,{abschnitt:b=>{const h=$('#'+b.dataset.id+'-titel',app);h?.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});h?.focus({preventScroll:true});},klassewahl:klasseWaehlen,
-    area:b=>go('area',{id:b.dataset.id}),video:b=>go('player',{videoId:b.dataset.id}),entdecken:()=>go('entdecken',{room}),
+    sammlung:b=>oeffneSammlung(b.dataset.id),area:b=>go('area',{id:b.dataset.id}),video:b=>go('player',{videoId:b.dataset.id}),entdecken:()=>go('entdecken',{room}),
     grundlagen:()=>go('grundlagen',{room}),zeit:b=>go('entdecken',{room,zeit:b.dataset.zeit,kind:'projekte',sort:'zeit'}),themenfeld:b=>go('entdecken',{room,thema:b.dataset.id,kind:'projekte'}),
     lehrer:()=>go('lehrer'),werkzeuge:()=>go('werkzeuge'),gallery:()=>go('gallery'),parent:()=>go('parent',{tab:'videos'}),who:()=>go('profiles')});
 }
@@ -470,6 +509,7 @@ function showCatalogue(app,{area=null,room=''}={}){
   if(zeit&&zeit!=='offen'&&!zeiten.includes(Number(zeit)))zeiten.push(Number(zeit));
   const feld=THEMENFELDER.find(f=>f.id===thema);
   app.innerHTML=`<main class="v3 v3-discover${schriftNormal()?'':' caps'}"><div class="v3-in">${v3Kopf('<button class="v3-rund gross" data-act="back" aria-label="Zur Übersicht">'+ico('back')+'</button>',`<div class="v3-thema-titel"><small>${area?'Dein Verfahren':'Entdecken'}</small><h1 id="katalog-titel">${area?esc(area.name):feld?feld.name:'Finde deine Idee'}</h1></div>`)}
+    ${area?.id==='falten'?sammlungEinstieg():''}
     ${area&&hasBasics?'<div class="v3-beginner" id="grundlagen-einstieg"><span>Zum ersten Mal?</span><button class="v3-pill" data-act="filter" data-kind="lernen">Grundlagen lernen '+ico('next')+'</button></div>':''}
     <div class="v3-filters"><div class="v3-schalter" role="group" aria-label="Anleitungen filtern">${[['alle','Alles'],['projekte','Projekte'],['lernen','Grundlagen'],['foto','Mit Fotos']].filter(([id])=>id!=='lernen'||hasBasics).map(([id,label])=>`<button class="v3-filter${kind===id?' an':''}" data-act="filter" data-kind="${id}" aria-pressed="${kind===id}">${label}</button>`).join('')}</div>
     <label class="v3-search"><span aria-hidden="true">⌕</span><input type="search" id="ideen-suche" placeholder="Idee suchen" aria-label="Idee suchen" value="${esc(query)}" autocomplete="off"></label></div>
@@ -494,7 +534,7 @@ function showCatalogue(app,{area=null,room=''}={}){
   paint();fillThumbs(app);
   app.oninput=e=>{if(e.target.id==='ideen-suche'){query=e.target.value;paint();}};
   app.onchange=e=>{if(e.target.id==='ideen-zeit')zeit=e.target.value;else if(e.target.id==='ideen-thema')thema=e.target.value;else if(e.target.id==='ideen-sortierung')sort=e.target.value;else return;paint();};
-  wire(app,{back:()=>go(view.params.fromBasics?'grundlagen':'home',{room}),klassewahl:klasseWaehlen,filter:b=>{kind=b.dataset.kind;if(kind==='lernen'){zeit='';thema='';$('#ideen-zeit',app).value='';const t=$('#ideen-thema',app);if(t)t.value='';}paint();},reset:()=>{kind='alle';query='';zeit='';thema='';sort='leicht';$('#ideen-suche',app).value='';$('#ideen-zeit',app).value='';$('#ideen-sortierung',app).value='leicht';const t=$('#ideen-thema',app);if(t)t.value='';paint();},
+  wire(app,{back:()=>go(view.params.fromBasics?'grundlagen':'home',{room}),sammlung:b=>oeffneSammlung(b.dataset.id),klassewahl:klasseWaehlen,filter:b=>{kind=b.dataset.kind;if(kind==='lernen'){zeit='';thema='';$('#ideen-zeit',app).value='';const t=$('#ideen-thema',app);if(t)t.value='';}paint();},reset:()=>{kind='alle';query='';zeit='';thema='';sort='leicht';$('#ideen-suche',app).value='';$('#ideen-zeit',app).value='';$('#ideen-sortierung',app).value='leicht';const t=$('#ideen-thema',app);if(t)t.value='';paint();},
     andere:zeigeWerk,video:b=>{const v=videoOf(b.dataset.id);if(area?.kind==='spass')gateSpass(v,()=>go('player',{videoId:v.id}));else go('player',{videoId:v.id});},
     gallery:()=>go('gallery'),lehrer:()=>go('lehrer'),werkzeuge:()=>go('werkzeuge')});
 }
@@ -502,7 +542,7 @@ function areaSchule(app,a){return showCatalogue(app,{area:a});}
 SCREENS.entdecken=(app,params)=>showCatalogue(app,{room:params.room||''});
 SCREENS.werkzeuge=app=>{
   app.innerHTML=`<div class="${kidClass()} schrift-normal">${kopf('Werkzeuge',{back:true})}
-    <div class="inner">${genKarten()}</div></div>`;
+    <div class="inner"><section class="panel"><h2>Rückmeldungen deiner Klasse</h2><p class="small muted">Verbinde jedes Tablet einmal. Die Kinder bewerten ihr Projekt mit zwei Bildfragen und können freiwillig etwas aufnehmen.</p><div class="row"><button class="btn primary" data-act="feedback-verbinden">Tablet verbinden</button><a class="btn" href="${SCHULE?'../':''}kontrolle/rueckmeldungen.html">Rückmeldungen ansehen</a></div></section>${genKarten()}</div></div>`;
   wire(app,{ back:()=>go('home') });
 };
 SCREENS.lehrer=app=>{ const n=abend();
@@ -513,6 +553,7 @@ SCREENS.lehrer=app=>{ const n=abend();
     <div class="lehrer-liste">${S.areas.map(a=>{ const vs=vids.filter(v=>v.areaId===a.id); if(!vs.length) return ''; return `<h2 style="color:${a.color};margin:14px 0 6px">${a.emoji} ${esc(a.name)}</h2>${vs.map(v=>`<div class="lrow"><span class="ltitel"><b>${esc(v.title)}</b>${v.grundtechnik?' <span class="gt">Grundtechnik</span>':''}<span class="lmeta">${v.zeit?`⏱ ${v.zeit} Min. · `:''}${(v.steps||[]).length?v.steps.length+' Schritte':'ohne Schritte'}${(v.material||[]).length?' · '+v.material.map(matName).join(', '):''}</span></span>${niveauHtml(v)}<span class="stufen">${(v.stufen||[]).map(s=>`<b>${s}</b>`).join('')}</span>${LP21&&LP21.zuordnung[v.id]?`<button class="lp-chip" data-act="lp" data-id="${v.id}" aria-expanded="false" title="LP21-Kompetenzen anzeigen">LP21</button>`:''}<button class="btn sm" data-act="qr" data-id="${v.id}"><span class="lang">QR-Code</span><span class="kurz">QR</span></button></div>`).join('')}`; }).join('')}</div></div>
     ${bank()}</div>`;
   wire(app,{ back:()=>go('home'),
+    'feedback-verbinden':()=>feedbackEinrichten(),
     lp:b=>{ const row=b.closest('.lrow'), nx=row.nextElementSibling; if(nx&&nx.classList.contains('lp-panel')){ nx.remove(); b.setAttribute('aria-expanded','false'); return; } row.insertAdjacentHTML('afterend',lpPanel(videoOf(b.dataset.id))); b.setAttribute('aria-expanded','true'); },
     qr:async b=>{ const v=videoOf(b.dataset.id); const link=schoolLink(v); kidModal(`<h2 style="font-size:20px">${esc(v.title)}</h2><div class="qr" id="qr" style="margin:10px auto"></div><code style="font-size:11px;word-break:break-all;display:block;max-width:360px">${esc(link)}</code><div class="row center" style="margin-top:12px"><button class="btn sm" data-act="copylink" data-link="${esc(link)}">Link kopieren</button><button class="kbtn ghost" data-close>Schliessen</button></div>`,{copylink:(b2)=>{ navigator.clipboard&&navigator.clipboard.writeText(b2.dataset.link).then(()=>toast('Kopiert')).catch(()=>toast('Kopieren nicht möglich')); }}); try{ if(!window.QRCode) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js'); new QRCode($('#qr'),{text:link,width:240,height:240,correctLevel:QRCode.CorrectLevel.L}); }catch(e){ const q=$('#qr'); if(q) q.textContent='QR-Code konnte nicht geladen werden.'; } } });
 };
@@ -592,7 +633,7 @@ SCREENS.anleitung=(app,{v,school})=>{
         <div class="an-nav">${weiter?`<button class="an-weiter" data-act="geh" data-i="${pr.step}">Weitermachen ${ico('next')}</button><button class="v3-pill" data-act="geh" data-i="0">Von vorne</button>`:`<button class="an-weiter" data-act="geh" data-i="0">Los geht's ${ico('next')}</button>`}</div>
         ${(v.material||[]).length?`<details class="an-material"><summary>${ico('gallery')} Das brauchst du <span>${v.material.length}</span></summary><div class="v3-mat">${v.material.map(id=>`<div><span class="pik">${matIcon(id)}</span><b>${esc(matName(id))}</b></div>`).join('')}</div></details>`:''}</div></div>`; }
     else if(i>=n){ inhalt=`<div class="an-ende v3-karte">${figur('geschafft')}<h2>${esc(v.fertig||'Bravo! Geschafft.')}</h2>
-        <div class="an-nav mitte">${naechste?`<button class="an-weiter" data-act="naechste">Weiter: ${esc(naechste.title.replace(/^.*?:\s*/,''))} →</button>`:''}<button class="${naechste?'v3-pill':'an-weiter'}" data-act="foto">📷 Foto von deinem Werk</button>${S.works.some(w=>w.videoId===v.id&&w.profileId===S.activeProfile)?`<button class="v3-pill" data-act="werke">${SCHULE?'Unsere':'Meine'} Werke</button>`:''}<button class="v3-pill" data-act="geh" data-i="0">Nochmal anschauen</button></div></div>`; }
+        <div class="an-nav mitte"><button class="an-weiter" data-act="feedback">🙂 Wie war’s?</button>${naechste?`<button class="an-weiter" data-act="naechste">Weiter: ${esc(naechste.title.replace(/^.*?:\s*/,''))} →</button>`:''}<button class="${naechste?'v3-pill':'an-weiter'}" data-act="foto">📷 Foto von deinem Werk</button>${S.works.some(w=>w.videoId===v.id&&w.profileId===S.activeProfile)?`<button class="v3-pill" data-act="werke">${SCHULE?'Unsere':'Meine'} Werke</button>`:''}<button class="v3-pill" data-act="geh" data-i="0">Nochmal anschauen</button></div></div>`; }
     else { const bt=s.bildtext||[];
       inhalt=`<div class="an-schritt"><div class="an-bilder${(s.bilder||[]).length>1?' zwei':''}">${(s.bilder||[]).map((f,k)=>`<figure><button data-act="gross" data-src="${esc(bild(f))}" aria-label="Foto zu Schritt ${i+1} gross anzeigen"><img src="${esc(bild(f))}" alt="${esc(bt[k]||s.text)}"></button>${bt[k]?`<figcaption>${esc(bt[k])}</figcaption>`:''}</figure>`).join('')}</div>
         <div class="an-spalte"><div class="an-text"><span class="an-nr" aria-hidden="true">${i+1}</span><p id="an-step-text" tabindex="-1">${esc(s.text)}</p><button class="v3-rund" data-act="lies" aria-label="Schritt vorlesen">${ico('speaker')}</button></div>
@@ -611,6 +652,7 @@ SCREENS.anleitung=(app,{v,school})=>{
     else if(k>=0){ pr.step=k; pr.max=Math.max(pr.max||0,k); }
     i=k; save(); zeichne(); window.scrollTo(0,0); const text=$('#an-step-text'); if(text) text.focus({preventScroll:true}); };
   wire(app,{ back:()=>backToIdeas(a,school),
+    feedback:()=>go('feedback',{videoId:v.id,school:school?v:null}),
     geh:b=>{ const k=+b.dataset.i; if(k>i&&steps[i]&&steps[i].zeigen&&!pr.gesehen[i]) return; geh(k); },
     gesehen:()=>{ pr.gesehen[i]=!pr.gesehen[i]; save(); zeichne(); const check=$('[data-act="gesehen"]'); if(check) check.focus({preventScroll:true}); },
     lies:()=>{ unlockTTS(); speak(vorlesen(steps[i])); },
@@ -648,6 +690,7 @@ SCREENS.player=(app,{videoId,school})=>{
   updatePlayerUI();
   wire(app,{
     back:()=>backToIdeas(a,school),
+    feedback:()=>go('feedback',{videoId:v.id,school}),
     shield:()=>{ const k=$('.kid.pl.liste'); if(k){ k.classList.remove('liste'); updatePlayerUI(); return; } if(P.mode==='playing') userPause(); else if(P.mode==='paused') userPlay(); else if(P.mode==='stepdone') nextStep(); },
     melden:()=>fehlerMelden(), kino:()=>toggleKino(), liste:()=>{ const k=$('.kid.pl'); if(k) k.classList.toggle('liste'); updatePlayerUI(); },
     start:()=>startPlaying(false), resume:()=>startPlaying(true), play:()=>userPlay(), pause:()=>userPause(),
@@ -709,7 +752,7 @@ function updatePlayerUI(){ if(!P) return;
     html=`${preview?`<img class="pl-preview" src="${esc(preview)}" alt="">`:''}<div class="pl-intro-actions">${bigPlay(m==='material'?'next':canResume?'resume':'start',canResume?'Weitermachen':"Los geht's")}${canResume?`<button class="kbtn ghost" data-act="start">Von vorne</button>`:''}</div>`; }
   else if(m==='playing'){ if(P.needsTap){ transparent=true; html=`<div class="lbl" style="background:rgba(0,0,0,.5);padding:10px 18px;border-radius:14px">Tippe auf das Video ▶</div>`; } else show=false; }
   else if(m==='paused'||m==='stepdone'){ show=false; }
-  else if(m==='ended'){ html=`${figur('geschafft')}<h2>Geschafft!</h2>${!SCHULE&&v.task&&v.task.text&&v.task.deliverable==='foto'?'':`<button class="kbtn primary" data-act="foto">${ico('camera')} Mein Werk zeigen</button>`}${S.works.some(w=>w.videoId===v.id&&w.profileId===S.activeProfile)?`<button class="kbtn ghost" data-act="gallery">${ico('gallery')} ${SCHULE?'Unsere':'Meine'} Werke</button>`:''}<button class="kbtn ghost" data-act="restart">${ico('replay')} Nochmal</button>`; }
+  else if(m==='ended'){ html=`${figur('geschafft')}<h2>Geschafft!</h2><button class="kbtn primary" data-act="feedback">🙂 Wie war’s?</button>${!SCHULE&&v.task&&v.task.text&&v.task.deliverable==='foto'?'':`<button class="kbtn primary" data-act="foto">${ico('camera')} Mein Werk zeigen</button>`}${S.works.some(w=>w.videoId===v.id&&w.profileId===S.activeProfile)?`<button class="kbtn ghost" data-act="gallery">${ico('gallery')} ${SCHULE?'Unsere':'Meine'} Werke</button>`:''}<button class="kbtn ghost" data-act="restart">${ico('replay')} Nochmal</button>`; }
   ov.classList.toggle('pl-start',m==='start'||m==='material');
   ov.hidden=!show; ov.classList.toggle('transparent',transparent); ov.innerHTML=html;
   sh.hidden=P.needsTap||S.settings.passTouches||show;

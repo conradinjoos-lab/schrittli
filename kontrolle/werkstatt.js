@@ -153,7 +153,23 @@ const W=(()=>{
  const meldungen=()=>LOKAL?Promise.resolve(null):melde('/meldungen');
  const erledigt=key=>melde('/meldungen/erledigt',{method:'POST',body:JSON.stringify({key})});
 
- return {LOKAL,bereit,abmelden,liste,daten,bild,speichern,veroeffentlichen,jsonText,werke,werkBild,meldungen,erledigt,
+ /* Rückmeldungen: dieselbe Anmeldung, geschützte API auch für Audiodateien. */
+ async function feedback(pfad,opt={},typ='json'){
+  if(!/^\/feedback\/(?:klassen(?:\/sperren)?|liste|audio|loeschen)(?:\?[^#]*)?$/.test(pfad))throw new Error('Ungültiger Rückmeldungsaufruf');
+  if(!['json','blob'].includes(typ))throw new Error('Ungültiges Antwortformat');
+  if(!an.token)throw new Error('Bitte mit GitHub anmelden.');
+  if(an.ablauf&&Date.now()>an.ablauf-120000)await erneuern();
+  for(let versuch=0;versuch<2;versuch++){
+   const headers={...opt.headers,Authorization:'Bearer '+an.token,Accept:typ==='blob'?'audio/*':'application/json'};
+   if(typeof opt.body==='string')headers['Content-Type']='application/json';
+   const r=await fetch(ANMELDEN+pfad,{...opt,headers,cache:'no-store',credentials:'omit',redirect:'error',referrerPolicy:'no-referrer'});
+   if(r.status===401&&versuch===0&&await erneuern())continue;
+   if(!r.ok){const j=await r.json().catch(()=>({}));throw new Error(r.status===401?'Die Anmeldung ist abgelaufen. Bitte neu anmelden.':r.status===403?'Für dieses Konto sind keine Rückmeldungen freigegeben.':String(j.fehler||j.error||'Rückmeldungen konnten nicht geladen werden ('+r.status+').'));}
+   return typ==='blob'?r.blob():r.json();
+  }
+ }
+
+ return {LOKAL,bereit,abmelden,liste,daten,bild,speichern,veroeffentlichen,jsonText,werke,werkBild,meldungen,erledigt,feedback,
   nachPub:LOKAL?'Noch committen und pushen.':'In etwa einer Minute in der Schul-App.',
   pause:LOKAL?1500:6000}  // Autospeichern: online seltener, jeder Stand ist ein Commit
 })();

@@ -7,7 +7,7 @@ const vm = require('node:vm');
 const root = path.resolve(__dirname, '..');
 const read = p => fs.readFileSync(path.join(root, p), 'utf8');
 const json = p => JSON.parse(read(p));
-const source = read('quelle/p2.js').replace(/(?:render\(\);\s*)?fmKnopf\(\);\s*(?:render\(\);\s*)?boot\(\);\s*$/, '');
+const source = read('quelle/p2.js').replace(/(?:render\(\);\s*)?fmKnopf\(\);\s*(?:render\(\);\s*)?boot\(\);\s*$/, '') + '\n' + read('quelle/rueckmeldung.js');
 const reports = [];
 
 function element() {
@@ -272,6 +272,8 @@ function checkBuiltPages() {
     assert(!/maximum-scale=1|user-scalable=no/.test(html), `${file}: pinch zoom is still disabled`);
     if (fs.existsSync(playerCssPath)) assert(html.includes(fs.readFileSync(playerCssPath, 'utf8').trim()), `${file}: player stylesheet missing from build`);
     assert(html.includes(read('quelle/entdecken-design.css').trim()),`${file}: discovery stylesheet missing from build`);
+    assert(html.includes(read('quelle/rueckmeldung.js').trim()),`${file}: feedback code missing from build`);
+    assert(html.includes(read('quelle/rueckmeldung.css').trim()),`${file}: feedback stylesheet missing from build`);
     if (file.startsWith('schule/')) assert(html.includes('window.SCHULE=true;'), `${file}: school edition flag missing`);
     new vm.Script(html.slice(html.lastIndexOf('<script>') + '<script>'.length, html.lastIndexOf('</script>')), { filename: file });
   }
@@ -365,6 +367,8 @@ function checkPhotoFlow() {
   click(rt, 'gesehen');
   click(rt, 'geh', { i: '1' });
   assert(rt.run("prog('qa-final-check').done"), 'Confirmed final checkpoint must allow completion');
+  assert(rt.app.innerHTML.includes('data-act="feedback"'), 'Photo completion must offer feedback');
+  click(rt,'feedback');assert.equal(rt.run('qaRoute'),'feedback','Photo feedback must open the survey');
   click(rt, 'back');
   assert.equal(historyUrl, '/schule/', 'Shared photo back must remove the QR hash');
   assert.equal(rt.run('qaRoute'), 'home');
@@ -466,9 +470,32 @@ function checkModalKeyboard() {
   reports.push('Modal keyboard: named dialog, initial focus, Tab/Shift+Tab containment, Escape and trigger-focus restoration work.');
 }
 
+async function checkPlaneCollection(){
+ for(const school of [false,true]){
+  const rt=runtime(school);await rt.run('boot()');
+  const ids=rt.run("sammlungVideos('papierflieger').map(v=>v.id)");
+  assert.equal(ids.length,25);assert(ids.every(id=>id.startsWith('flieger-')||['kat-papierflieger','zw-papierflieger'].includes(id)));
+  for(let klasse=1;klasse<=6;klasse++){
+   rt.run(`S.settings.klasse=${klasse};go('sammlung',{id:'papierflieger'})`);
+   for(const niveau of [1,2,3]){
+    click(rt,'niveau',{niveau:String(niveau)});
+    const html=rt.app.querySelector('#sammlung-liste').innerHTML;
+    const shown=[...html.matchAll(/data-act="video" data-id="([^"]+)"/g)].map(m=>m[1]);
+    assert(shown.length>0,`Class ${klasse}: no planes at level ${niveau}`);
+    assert(shown.every(id=>ids.includes(id)&&rt.run(`sammlungNiveau(videoOf(${JSON.stringify(id)}))`)===niveau));
+    localAssets(html,school,'Paper planes');
+   }
+  }
+  rt.run("S.settings.klasse=1;go('sammlung',{id:'papierflieger',niveau:1})");
+  click(rt,'video',{id:'flieger-windhover'});click(rt,'back');
+  assert.equal(rt.run('view.name'),'sammlung');assert.equal(rt.run('view.params.niveau'),1);
+ }
+ reports.push('Paper planes: 25 relevant models, all six grades and three difficulty filters, image assets and return navigation checked.');
+}
+
 (async () => {
   if(process.argv.includes('--discovery')) {
-    await checkEdition(false);await checkEdition(true);await checkDiscoveryPaths();checkReturnNavigation();
+    await checkEdition(false);await checkEdition(true);await checkDiscoveryPaths();checkReturnNavigation();await checkPlaneCollection();
     console.log(reports.join('\n'));return;
   }
   if (process.argv.includes('--engine')) {
@@ -488,6 +515,7 @@ function checkModalKeyboard() {
   checkReturnNavigation();
   checkModalKeyboard();
   await checkDiscoveryPaths();
+  await checkPlaneCollection();
   await checkInstallFlow();
   if (process.argv.includes('--built')) { checkBuiltPages(); checkAppAssets(); }
   console.log(reports.join('\n'));
