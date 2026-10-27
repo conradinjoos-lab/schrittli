@@ -417,6 +417,19 @@ const THEMENFELDER=[
   {id:'transport',code:'TTG.2.B.1.4',name:'Bewegen & Transport',emoji:'✈️'},
   {id:'energie',code:'TTG.2.B.1.5',name:'Strom & Energie',emoji:'💡'}
 ];
+// Redaktionell zugeordnete Projekte; eine Technik allein macht noch kein Jahreszeitenthema.
+const JAHRESZEITEN=[
+  {id:'fruehling',name:'Frühling',emoji:'🌷',cover:'zw-blumenwiese-monotypie',ids:['zw-blumenwiese-monotypie','zw-salzteig-herz','zw-osternest','zw-scherenschnitt-blume','zw-origami-schmetterling','zw-schmetterling-einfach','zw-schmetterling-nadelfilz','zw-pusteblume-deko','zw-strickgabel-schmetterling','zw-blumenstecker-herz-filzen','zw-schmetterling-fleece','zw-drahtvogel','zw-kleines-ei-eindrueckform','zw-hahn-nadelfilzen','zw-blumenstecker-granulat','zw-blumenstecker-ton-margerite','zw-papiertueten-blume','zw-drahtschmetterling-ast','zw-osterei-blueten-ton','zw-balancier-schmetterling']},
+  {id:'sommer',name:'Sommer',emoji:'☀️',cover:'zw-windrad-falten',ids:['kat-papierschiff','zw-windrad-falten','zw-perlenfisch','zw-blumenarmband-perlen','zw-origami-fisch-kreativecke','zw-blumensieb-kurz','zw-fische-metallpraegen','zw-sonnenblume-weben','zw-zaunhocker-fisch-ton','zw-tonblume-traenke','zw-vogeltraenke-blatt','zw-perlenfisch-anhaenger','zw-segelschiff','zw-sonnenfaenger','zw-sonnenfaenger-leim']},
+  {id:'herbst',name:'Herbst',emoji:'🍂',cover:'zw-blaetter-tiere',ids:['wl-wickeldrache','zw-eulen-kartoffelstempel','zw-igel-holz','zw-blaetter-tiere','zw-tischlaterne','zw-eule-schnitzen','zw-wollgespenst','zw-gespenst-wolle','zw-makramee-blatt','zw-nagelbild-igel','zw-holz-igel','zw-fliegenpilz-ton','zw-kerze-holz-keramik','zw-kerze-papierform','zw-kerze-klorolle']},
+  {id:'winter',name:'Winter',emoji:'❄️',cover:'zw-schneeflocke',ids:['zw-schneeflocke','zw-sternbox','zw-froebelstern-wiemann','zw-mini-papierstern-streifen','zw-sternteller-ton','zw-froebelstern-streifen','zw-weihnachtsmann-holzring','zw-stern-papiertueten','zw-schneemann-papierdraht','zw-stern-toepfern','zw-heissluftballon-futterhaus','zw-kerze-holz-keramik','zw-kerze-papierform','zw-kerze-klorolle','zw-feilen-teelichthalter']}
+];
+function inJahreszeit(v,id){return !v.grundtechnik&&!!JAHRESZEITEN.find(j=>j.id===id)?.ids.includes(v.id);}
+function jahreszeitKachel(j,vs){
+  const passend=vs.filter(v=>inJahreszeit(v,j.id)),cover=passend.find(v=>v.id===j.cover)||passend.find(v=>thumbOf(v))||videoOf(j.cover),th=cover&&thumbOf(cover);
+  return `<button class="v3-topic-card v3-season-card ${j.id}" data-act="jahreszeit" data-id="${j.id}"><span class="bild">${th?`<img src="${esc(th)}" alt="" loading="lazy" decoding="async">`:`<span aria-hidden="true">${j.emoji}</span>`}</span><b><span aria-hidden="true">${j.emoji}</span> ${j.name}</b></button>`;
+}
+
 function inThemenfeld(v,id){const f=THEMENFELDER.find(f=>f.id===id);return !!f&&!v.grundtechnik&&!!LP21?.zuordnung[v.id]?.includes(f.code);}
 function zeitPasst(v,zeit){const n=arbeitszeit(v);return !zeit||(zeit==='offen'?n===null:n!==null&&n<=Number(zeit));}
 function zeitOptionen(vs){return [...new Set([5,10,15,30,45,60,...vs.map(arbeitszeit).filter(Boolean)])].sort((a,b)=>a-b).filter((n,i,all)=>vs.some(v=>arbeitszeit(v)!==null&&arbeitszeit(v)<=n&&(i===0||arbeitszeit(v)>all[i-1])));}
@@ -462,36 +475,32 @@ SCREENS.sammlung=(app,params={})=>{
     klassewahl:klasseWaehlen,gallery:()=>go('gallery'),lehrer:()=>go('lehrer'),werkzeuge:()=>go('werkzeuge')});
 };
 function homeSchule(app,rid){
-  // Die Startübersicht zeigt alle Verfahren; ein früher gewählter Raum versteckt nichts.
   const room=rid||'',r=RAEUME.find(x=>x.id===room),vs=discoverVideos(r?r.id:'');
   const verfahren=S.areas.filter(a=>a.kind!=='spass'&&(!r||raumOf(a.id)===r)&&videosIn(a.id).length);
-  const basics=vs.some(v=>v.grundtechnik),projects=vs.filter(v=>!v.grundtechnik),zeiten=zeitOptionen(projects);
+  const projects=vs.filter(v=>!v.grundtechnik),zeiten=zeitOptionen(projects),offeneZeit=projects.some(v=>arbeitszeit(v)===null);
   const felder=THEMENFELDER.filter(f=>projects.some(v=>inThemenfeld(v,f.id)));
   const last=videoOf(S.settings.zuletzt),pr=last?prSchule(last):{},continuing=last&&vs.includes(last)&&!pr.done&&(pr.pos>5||pr.step>0);
   const family=!SCHULE,p=profile();
-  const sections=[['verfahren','Verfahren'],...(basics?[['grundlagen','Grundlagen']]:[]),...(zeiten.length?[['zeit','Zeit']]:[]),...(felder.length?[['themen','Themen']]:[])];
+  const sections=[['zeit','Zeit'],['verfahren','Techniken'],['jahreszeiten','Jahreszeiten'],['mehr','Mehr']];
   app.innerHTML=`<main class="v3 v3-home${schriftNormal()?'':' caps'}"><div class="v3-in">${v3Kopf('')}
     <div class="v3-home-title"><h1>Was möchtest du machen?</h1>${r?`<p>${esc(r.name)}</p>`:''}</div>
-    ${sammlungEinstieg()}
     <nav class="v3-section-nav" aria-label="Wege zu deiner Anleitung">${sections.map(([id,name])=>`<button data-act="abschnitt" data-id="${id}">${name}</button>`).join('')}</nav>
-    <section class="v3-home-section" id="verfahren" aria-labelledby="verfahren-titel"><div class="v3-section-head"><h2 id="verfahren-titel" tabindex="-1">Wähle ein Verfahren</h2><button class="v3-pill" data-act="entdecken">Alle Ideen ${ico('next')}</button></div>
-      <div class="v3-themen v3-procedure-grid">${verfahren.map(themaKachel).join('')}</div></section>
-    ${continuing?`<button class="v3-weiter v3-home-continue" data-act="video" data-id="${esc(last.id)}"><span class="bild"><img src="${esc(thumbOf(last)||'')}" alt=""></span><span><small>Weitermachen</small><b>${esc(projectTitle(last))}</b></span><span class="play">${ico('play')}</span></button>`:''}
-    ${basics?`<section class="v3-home-section v3-basics-banner" id="grundlagen" aria-labelledby="grundlagen-titel"><img src="${GRAFIK}haekeln.webp" alt="" loading="lazy"><div><h2 id="grundlagen-titel" tabindex="-1">Zum ersten Mal?</h2><p>Lerne die Grundtechniken.</p><button class="v3-pill" data-act="grundlagen">Hier anfangen ${ico('next')}</button></div></section>`:''}
-    ${zeiten.length?`<section class="v3-home-section" id="zeit" aria-labelledby="zeit-titel"><div class="v3-section-head"><h2 id="zeit-titel" tabindex="-1">Wie viel Zeit hast du?</h2></div><p class="v3-section-note">Kleine Projekte · Arbeitszeit grob geschätzt</p><div class="v3-time-grid">${zeiten.map(n=>`<button class="v3-time-card" data-act="zeit" data-zeit="${n}">${uhrBild(n)}<b>Bis ${n} Min.</b></button>`).join('')}</div></section>`:''}
-    ${felder.length?`<section class="v3-home-section" id="themen" aria-labelledby="themen-titel"><div class="v3-section-head"><h2 id="themen-titel" tabindex="-1">Entdecke ein Thema</h2></div><div class="v3-topic-grid">${felder.map(f=>themenfeldKachel(f,projects)).join('')}</div></section>`:''}
-    ${family&&S.settings.spass?`<div class="v3-section-head"><h2>Deine Pause</h2>${glasSterne(p.id,true)}</div><div class="v3-themen">${S.areas.filter(a=>a.kind==='spass'&&videosIn(a.id).length).map(themaKachel).join('')}</div>`:''}
+    <section class="v3-home-section" id="zeit" aria-labelledby="zeit-titel"><div class="v3-section-head"><h2 id="zeit-titel" tabindex="-1">Wie viel Zeit hast du?</h2></div><p class="v3-section-note">Arbeitszeit · grob geschätzt</p><div class="v3-time-grid">${zeiten.map(n=>`<button class="v3-time-card" data-act="zeit" data-zeit="${n}">${uhrBild(n)}<b>Bis ${n} Min.</b></button>`).join('')}${offeneZeit?'<button class="v3-time-card v3-time-open" data-act="zeit" data-zeit="offen"><span class="v3-time-symbol" aria-hidden="true">⏳</span><b>Zeit offen</b></button>':''}${!zeiten.length&&!offeneZeit?'<button class="v3-time-card" data-act="entdecken"><b>Alle Ideen</b></button>':''}</div></section>
+    <section class="v3-home-section" id="verfahren" aria-labelledby="verfahren-titel"><div class="v3-section-head"><h2 id="verfahren-titel" tabindex="-1">Welche Technik?</h2><button class="v3-pill" data-act="entdecken">Alle Ideen ${ico('next')}</button></div><div class="v3-themen v3-procedure-grid">${verfahren.map(themaKachel).join('')}</div></section>
+    <section class="v3-home-section" id="jahreszeiten" aria-labelledby="jahreszeiten-titel"><div class="v3-section-head"><h2 id="jahreszeiten-titel" tabindex="-1">Jahreszeiten</h2></div><div class="v3-season-grid">${JAHRESZEITEN.map(j=>jahreszeitKachel(j,projects)).join('')}</div></section>
+    <section class="v3-home-section v3-more" id="mehr" aria-labelledby="mehr-titel"><div class="v3-section-head"><h2 id="mehr-titel" tabindex="-1">Noch mehr entdecken</h2></div>
+      ${continuing?`<button class="v3-weiter v3-home-continue" data-act="video" data-id="${esc(last.id)}"><span class="bild"><img src="${esc(thumbOf(last)||'')}" alt=""></span><span><small>Weitermachen</small><b>${esc(projectTitle(last))}</b></span><span class="play">${ico('play')}</span></button>`:''}
+      ${felder.length?`<section class="v3-home-section" id="themen" aria-labelledby="themen-titel"><div class="v3-section-head"><h2 id="themen-titel" tabindex="-1">Entdecke ein Thema</h2></div><div class="v3-topic-grid">${felder.map(f=>themenfeldKachel(f,projects)).join('')}</div></section>`:''}
+      <section class="v3-home-section" aria-label="Sammlungen"><div class="v3-section-head"><h2>Sammlungen</h2></div>${sammlungEinstieg()}</section>
+      ${family&&S.settings.spass?`<div class="v3-section-head"><h2>Deine Pause</h2>${glasSterne(p.id,true)}</div><div class="v3-themen">${S.areas.filter(a=>a.kind==='spass'&&videosIn(a.id).length).map(themaKachel).join('')}</div>`:''}
+    </section>
     ${v3Fuss()}${family?`<div class="v3-home-links">${S.profiles.length>1?'<button class="v3-link" data-act="who">Profil wechseln</button>':''}<button class="v3-link" data-act="parent">${ico('lock')} Für Eltern</button></div>`:''}</div></main>`;
   wire(app,{abschnitt:b=>{const h=$('#'+b.dataset.id+'-titel',app);h?.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});h?.focus({preventScroll:true});},klassewahl:klasseWaehlen,
     sammlung:b=>oeffneSammlung(b.dataset.id),area:b=>go('area',{id:b.dataset.id}),video:b=>go('player',{videoId:b.dataset.id}),entdecken:()=>go('entdecken',{room}),
-    grundlagen:()=>go('grundlagen',{room}),zeit:b=>go('entdecken',{room,zeit:b.dataset.zeit,kind:'projekte',sort:'zeit'}),themenfeld:b=>go('entdecken',{room,thema:b.dataset.id,kind:'projekte'}),
+    zeit:b=>go('entdecken',{room,zeit:b.dataset.zeit,kind:'projekte',sort:'zeit'}),jahreszeit:b=>go('entdecken',{room,jahreszeit:b.dataset.id,kind:'projekte'}),themenfeld:b=>go('entdecken',{room,thema:b.dataset.id,kind:'projekte'}),
     lehrer:()=>go('lehrer'),werkzeuge:()=>go('werkzeuge'),gallery:()=>go('gallery'),parent:()=>go('parent',{tab:'videos'}),who:()=>go('profiles')});
 }
-SCREENS.grundlagen=(app,{room=''})=>{
-  const verfahren=S.areas.filter(a=>(!room||raumOf(a.id).id===room)&&videosIn(a.id).some(v=>v.grundtechnik));
-  app.innerHTML=`<main class="v3 v3-home"><div class="v3-in">${v3Kopf('<button class="v3-rund gross" data-act="back" aria-label="Zur Übersicht">'+ico('back')+'</button>', '<div class="v3-thema-titel"><small>Hier fängst du an</small><h1>Grundtechniken</h1></div>')}<p class="v3-section-note">Was möchtest du lernen?</p><div class="v3-themen v3-procedure-grid">${verfahren.map(themaKachel).join('')}</div>${v3Fuss()}</div></main>`;
-  wire(app,{back:()=>go('home'),area:b=>go('area',{id:b.dataset.id,kind:'lernen',fromBasics:true,room}),gallery:()=>go('gallery'),werkzeuge:()=>go('werkzeuge'),lehrer:()=>go('lehrer')});
-};
+
 SCREENS.zimmer=(app,{r})=>homeSchule(app,r);   // Familie: Handarbeit oder Werkraum aus dem Regal
 function gruppenOf(vids){ const m=new Map(); videoOrdnung(vids).forEach(v=>{ const g=v.gruppe||'Weitere Projekte'; if(!m.has(g)) m.set(g,[]); m.get(g).push(v); });   // Projektart im Thema (schule.json «gruppe»)
   const st=v=>v.grundtechnik?0:(+v.niveau||2), mitte=g=>g.reduce((s,v)=>s+st(v),0)/g.length;
@@ -504,37 +513,43 @@ function catalogueMatches(v,query,kind){
 }
 function showCatalogue(app,{area=null,room=''}={}){
   const vs=area?videosIn(area.id):discoverVideos(room);
-  let query=view.params.query||'',kind=view.params.kind||'alle',zeit=view.params.zeit||'',thema=view.params.thema||'',sort=view.params.sort||'leicht';
-  const hasBasics=vs.some(v=>v.grundtechnik),zeiten=zeitOptionen(vs);
+  let query=view.params.query||'',kind=view.params.kind==='foto'?'foto':'projekte',zeit=view.params.zeit||'',thema=view.params.thema||'',jahreszeit=view.params.jahreszeit||'',sort=view.params.sort||'leicht';
+  if(!JAHRESZEITEN.some(j=>j.id===jahreszeit))jahreszeit='';
+  const basics=area?videoOrdnung(vs.filter(v=>v.grundtechnik)):[],projects=vs.filter(v=>!v.grundtechnik),zeiten=zeitOptionen(projects);
+  const basicsOpen=!!view.params.grundlagenOffen;
   if(zeit&&zeit!=='offen'&&!zeiten.includes(Number(zeit)))zeiten.push(Number(zeit));
   const feld=THEMENFELDER.find(f=>f.id===thema);
   app.innerHTML=`<main class="v3 v3-discover${schriftNormal()?'':' caps'}"><div class="v3-in">${v3Kopf('<button class="v3-rund gross" data-act="back" aria-label="Zur Übersicht">'+ico('back')+'</button>',`<div class="v3-thema-titel"><small>${area?'Dein Verfahren':'Entdecken'}</small><h1 id="katalog-titel">${area?esc(area.name):feld?feld.name:'Finde deine Idee'}</h1></div>`)}
+    ${basics.length?`<details class="v3-foundations" id="technik-grundlagen"${basicsOpen?' open':''}><summary><span>Grundtechniken</span>${ico('down')}</summary><div class="v3-liste v3-foundations-list">${basics.map(projectCard).join('')}</div></details>`:''}
+    ${area?'<h2 class="v3-projects-heading" id="projekte-titel">Projekte</h2>':''}
     ${area?.id==='falten'?sammlungEinstieg():''}
-    ${area&&hasBasics?'<div class="v3-beginner" id="grundlagen-einstieg"><span>Zum ersten Mal?</span><button class="v3-pill" data-act="filter" data-kind="lernen">Grundlagen lernen '+ico('next')+'</button></div>':''}
-    <div class="v3-filters"><div class="v3-schalter" role="group" aria-label="Anleitungen filtern">${[['alle','Alles'],['projekte','Projekte'],['lernen','Grundlagen'],['foto','Mit Fotos']].filter(([id])=>id!=='lernen'||hasBasics).map(([id,label])=>`<button class="v3-filter${kind===id?' an':''}" data-act="filter" data-kind="${id}" aria-pressed="${kind===id}">${label}</button>`).join('')}</div>
-    <label class="v3-search"><span aria-hidden="true">⌕</span><input type="search" id="ideen-suche" placeholder="Idee suchen" aria-label="Idee suchen" value="${esc(query)}" autocomplete="off"></label></div>
+    <div class="v3-filters"><div class="v3-schalter" role="group" aria-label="Projekte filtern">${[['projekte','Alle Projekte'],['foto','Mit Fotos']].map(([id,label])=>`<button class="v3-filter${kind===id?' an':''}" data-act="filter" data-kind="${id}" aria-pressed="${kind===id}">${label}</button>`).join('')}</div>
+    <label class="v3-search"><span aria-hidden="true">⌕</span><input type="search" id="ideen-suche" placeholder="Projekt suchen" aria-label="Projekt suchen" value="${esc(query)}" autocomplete="off"></label></div>
     <div class="v3-refine">
       <label>Zeit<select id="ideen-zeit"><option value="">Jede Dauer</option>${zeiten.sort((a,b)=>a-b).map(n=>`<option value="${n}"${zeit===String(n)?' selected':''}>Bis ca. ${n} Min.</option>`).join('')}<option value="offen"${zeit==='offen'?' selected':''}>Ohne Zeitangabe</option></select></label>
-      ${LP21?`<label>Thema<select id="ideen-thema"><option value="">Alle Themen</option>${THEMENFELDER.filter(f=>f.id===thema||vs.some(v=>inThemenfeld(v,f.id))).map(f=>`<option value="${f.id}"${thema===f.id?' selected':''}>${f.name}</option>`).join('')}</select></label>`:''}
+      ${LP21?`<label>Thema<select id="ideen-thema"><option value="">Alle Themen</option>${THEMENFELDER.filter(f=>f.id===thema||projects.some(v=>inThemenfeld(v,f.id))).map(f=>`<option value="${f.id}"${thema===f.id?' selected':''}>${f.name}</option>`).join('')}</select></label>`:''}
+      <label>Jahreszeit<select id="ideen-jahreszeit"><option value="">Das ganze Jahr</option>${JAHRESZEITEN.map(j=>`<option value="${j.id}"${jahreszeit===j.id?' selected':''}>${j.name}</option>`).join('')}</select></label>
       <label>Reihenfolge<select id="ideen-sortierung"><option value="leicht"${sort==='leicht'?' selected':''}>Einfach zuerst</option><option value="zeit"${sort==='zeit'?' selected':''}>Kürzeste zuerst</option></select></label>
     </div><p class="v3-section-note" id="zeit-hinweis"${zeit||sort==='zeit'?'':' hidden'}>Arbeitszeit grob geschätzt. Fehlende Angaben bleiben offen.</p>
     <p class="sr-only" id="such-status" role="status" aria-live="polite"></p><div class="v3-thema"><div class="v3-liste" id="ideen-liste"></div></div>${area?`<div class="v3-werke">${werkeHtml(area.id)}</div>`:''}${v3Fuss()}</div></main>`;
   const paint=()=>{
-    const found=videoOrdnung(vs.filter(v=>catalogueMatches(v,query,kind)&&zeitPasst(v,zeit)&&(!thema||inThemenfeld(v,thema))));
+    const found=projects.filter(v=>catalogueMatches(v,query,kind)&&zeitPasst(v,zeit)&&(!thema||inThemenfeld(v,thema))&&(!jahreszeit||inJahreszeit(v,jahreszeit))).sort((a,b)=>sammlungNiveau(a)-sammlungNiveau(b));
     if(sort==='zeit')found.sort((a,b)=>(arbeitszeit(a)??Infinity)-(arbeitszeit(b)??Infinity));
-    const groups=gruppenOf(found);
-    $('#ideen-liste',app).innerHTML=(query.trim()||sort==='zeit'?found.map(projectCard).join(''):groups.map(([name,g])=>`<h2 class="v3-niv">${esc(name)}</h2>${g.map(projectCard).join('')}`).join(''))||`<div class="v3-leer">${figur('nachdenken')}Keine passende Anleitung.<br><button class="v3-pill" data-act="reset">Filter zurücksetzen</button></div>`;
-    $('#such-status',app).textContent=found.length+' Anleitungen gefunden';
+    const groups=SAMMLUNG_NIVEAUS.map(n=>({n,items:found.filter(v=>sammlungNiveau(v)===n.id)})).filter(g=>g.items.length);
+    const heading=area?'h3':'h2';
+    $('#ideen-liste',app).innerHTML=(sort==='zeit'?found.map(projectCard).join(''):groups.map(({n,items})=>`<${heading} class="v3-niv v3-collection-heading">${niveauPunkte(n.id)}${n.name}</${heading}>${items.map(projectCard).join('')}`).join(''))||`<div class="v3-leer">${figur('nachdenken')}${projects.length?'Kein passendes Projekt.':'Hier gibt es noch keine Projekte.'}${projects.length?'<br><button class="v3-pill" data-act="reset">Filter zurücksetzen</button>':''}</div>`;
+    $('#such-status',app).textContent=found.length+' Projekte gefunden';
     $$('.v3-filter',app).forEach(b=>{b.classList.toggle('an',b.dataset.kind===kind);b.setAttribute('aria-pressed',String(b.dataset.kind===kind));});
-    const intro=$('#grundlagen-einstieg',app);if(intro)intro.hidden=kind==='lernen';
     $('#zeit-hinweis',app).hidden=!zeit&&sort!=='zeit';
-    if(!area)$('#katalog-titel',app).textContent=THEMENFELDER.find(f=>f.id===thema)?.name||'Finde deine Idee';
-    Object.assign(view.params,{query,kind,zeit,thema,sort});
+    if(!area)$('#katalog-titel',app).textContent=JAHRESZEITEN.find(j=>j.id===jahreszeit)?.name||THEMENFELDER.find(f=>f.id===thema)?.name||'Finde deine Idee';
+    Object.assign(view.params,{query,kind,zeit,thema,jahreszeit,sort});
   };
   paint();fillThumbs(app);
+  const disclosure=$('#technik-grundlagen',app),params=view.params;
+  if(disclosure){disclosure.open=basicsOpen;disclosure.ontoggle=()=>{params.grundlagenOffen=disclosure.open;};}
   app.oninput=e=>{if(e.target.id==='ideen-suche'){query=e.target.value;paint();}};
-  app.onchange=e=>{if(e.target.id==='ideen-zeit')zeit=e.target.value;else if(e.target.id==='ideen-thema')thema=e.target.value;else if(e.target.id==='ideen-sortierung')sort=e.target.value;else return;paint();};
-  wire(app,{back:()=>go(view.params.fromBasics?'grundlagen':'home',{room}),sammlung:b=>oeffneSammlung(b.dataset.id),klassewahl:klasseWaehlen,filter:b=>{kind=b.dataset.kind;if(kind==='lernen'){zeit='';thema='';$('#ideen-zeit',app).value='';const t=$('#ideen-thema',app);if(t)t.value='';}paint();},reset:()=>{kind='alle';query='';zeit='';thema='';sort='leicht';$('#ideen-suche',app).value='';$('#ideen-zeit',app).value='';$('#ideen-sortierung',app).value='leicht';const t=$('#ideen-thema',app);if(t)t.value='';paint();},
+  app.onchange=e=>{if(e.target.id==='ideen-zeit')zeit=e.target.value;else if(e.target.id==='ideen-thema')thema=e.target.value;else if(e.target.id==='ideen-jahreszeit')jahreszeit=e.target.value;else if(e.target.id==='ideen-sortierung')sort=e.target.value;else return;paint();};
+  wire(app,{back:()=>go('home',{room}),sammlung:b=>oeffneSammlung(b.dataset.id),klassewahl:klasseWaehlen,filter:b=>{kind=b.dataset.kind==='foto'?'foto':'projekte';paint();},reset:()=>{kind='projekte';query='';zeit='';thema='';jahreszeit='';$('#ideen-jahreszeit',app).value='';sort='leicht';$('#ideen-suche',app).value='';$('#ideen-zeit',app).value='';$('#ideen-sortierung',app).value='leicht';const t=$('#ideen-thema',app);if(t)t.value='';paint();},
     andere:zeigeWerk,video:b=>{const v=videoOf(b.dataset.id);if(area?.kind==='spass')gateSpass(v,()=>go('player',{videoId:v.id}));else go('player',{videoId:v.id});},
     gallery:()=>go('gallery'),lehrer:()=>go('lehrer'),werkzeuge:()=>go('werkzeuge')});
 }
