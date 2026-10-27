@@ -123,6 +123,7 @@ button:focus-visible,.zone:focus-visible{outline:3px solid var(--acc);outline-of
         <input type="text" id="titel" maxlength="40" value="Mein Tier">
       </div>
       <button type="button" class="drucken" id="drucken" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Plan drucken</span></button>
+      <button type="button" class="chip" id="anpassen" disabled style="width:100%;min-height:48px;margin-top:12px">Farben und Breite · Vollbild</button>
       <p class="info" id="info"></p>
       <p class="hinweis">Tipp: Figuren von vorne mit klarem Umriss werden am schönsten. Beim Fädeln liegt jede Reihe mittig unter der vorherigen, darum wird die Figur gerade gerichtet. Ohren, Arme und Beine, die abstehen, kommen als Paare an eine Reihe. Was nur auf einer Seite absteht (z. B. ein Schwanz), fällt weg.</p>
     </section>
@@ -137,6 +138,7 @@ button:focus-visible,.zone:focus-visible{outline:3px solid var(--acc);outline-of
   </div>
 </main>
 <div id="druck"></div>
+<script src="../perlen/bearbeiten.js"></script>
 <script>
 // Perlenfarben wie bei den fertigen Perlentieren (vorlagen/perlen), dazu hautfarben
 const FARBE={g:['#3FA34D','grün'],d:['#1F6B35','dunkelgrün'],h:['#B5DE7A','hellgrün'],s:['#1C2430','schwarz'],w:['#FFFFFF','weiss'],r:['#D7352E','rot'],y:['#F4C430','gelb'],o:['#F08A24','orange'],b:['#2A6FDB','blau'],l:['#9CD0F5','hellblau'],p:['#F6AFC6','rosa'],q:['#D9487A','pink'],k:['#8A5A35','braun'],c:['#E2BC72','ocker'],n:['#A7B1BE','grau'],v:['#7B4FC9','violett'],u:['#F3C9A0','hautfarben']};
@@ -578,6 +580,7 @@ function zeichnen(){
   document.querySelectorAll('#hg .chip').forEach(k=>k.setAttribute('aria-pressed',(k.dataset.h==='1')===S.hg));
   const t=S.t,da=!!t;
   $('drucken').disabled=!da;$('farben-karte').hidden=!da;$('zone').classList.toggle('klein',!!S.bild);$('beispiel-zeile').hidden=!!S.bild;
+  $('anpassen').disabled=!da;
   $('mal-hinweis').hidden=$('legende').hidden=$('pruefung').hidden=!da;
   if(!da){$('plan').innerHTML='';return}
   $('plan').innerHTML=planSvg();$('plan').classList.toggle('malen',S.pinsel!==null);
@@ -654,6 +657,10 @@ $('reihen').addEventListener('change',()=>{berechnen();zeichnen()});
 function drucken(){if(S.t)$('druck').innerHTML=blatt()}
 addEventListener('beforeprint',drucken);
 $('drucken').addEventListener('click',()=>{drucken();window.print()});
+$('anpassen').addEventListener('click',()=>{if(!S.t)return;PerlenEditor.oeffnen({
+  muster:{...S.t,name:$('titel').value||'Mein Tier'},palette:FARBE,perle:PE,geometrie,draehte,zaehlen,lokal:false,
+  speichern:t=>{S.t={rows:t.rows,beine:t.beine||[]};S.pinsel=null;zeichnen();return true;}
+})});
 zeichnen();
 </script>
 </body>

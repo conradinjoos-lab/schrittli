@@ -1,0 +1,17 @@
+{
+  "mario": {
+    "faktor": 1.5,
+    "rows": ["rrrrrrr", "rrrwwwrrr", "rrwwrwwrr", "rrrrrrrrrrr", "kkuuuuuuukk", "kuuwwuwwuuk", "kuuwsuwsuuk", "uuuuuuuuuuu", "uuukkkkkuuu", "uuuukkkuuuu", "kuuuuuuuk", "rrbrrrbrr", "rrbrrrbrr", "rrbybybrr", "bbbbbbbbb", "bbbbbbbbb", "bbbbbbbbb", "kkkbbbkkk", "kkkkkkkkkkk"],
+    "beine": [{"r": 13, "n": 2, "f": 3, "a": -20, "c": "r", "fc": "w", "w": "Arme"}]
+  },
+  "pikachu": {
+    "faktor": 1.5,
+    "rows": ["yyyyyyy", "yyyyyyyyy", "yyyyyyyyyyy", "yyssyyyssyy", "yyswyyywsyy", "rryyysyyyrr", "rryyyyyyyrr", "yyyysssyyyy", "yyyyyyyyy", "yyyyyyy", "yyyyyyyyy", "yyyyyyyyyyy", "yyyyyyyyyyy", "yyyyyyyyyyy", "yyyyyyyyyyy", "yyyyyyyyy", "yyyyyyy"],
+    "beine": [{"r": 1, "n": 5, "f": 1, "a": 70, "c": "y", "fc": "s", "w": "Ohren"}, {"r": 11, "n": 2, "f": 1, "a": -20, "c": "y", "fc": "y", "w": "Arme"}, {"r": 17, "n": 1, "f": 3, "a": -65, "c": "y", "fc": "y", "w": "Füsse"}]
+  },
+  "pikachu-kopf": {
+    "faktor": 1.5,
+    "rows": ["yyyyyyy", "yyyyyyyyy", "yyyyyyyyyyy", "yyssyyyssyy", "yyswyyywsyy", "rryyysyyyrr", "rryyyyyyyrr", "yyyysssyyyy", "yyyyyyyyy", "yyyyyyy", "yyyyy"],
+    "beine": [{"r": 1, "n": 5, "f": 1, "a": 70, "c": "y", "fc": "s", "w": "Ohren"}]
+  }
+}

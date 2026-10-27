@@ -59,6 +59,16 @@ Kinder, Sterne, Fortschritt und Werke liegen im Browser des Geräts (localStorag
 - **Mehrere Kinder:** im Elternbereich anlegen, Auswahl beim Start.
 - **Daten → Export/Import:** Videos und Einstellungen zwischen Geräten übertragen. Werke bleiben auf dem Gerät.
 
+## Perlentiere und Figurenmuster
+
+Unter `vorlagen/perlen/` stehen 41 bisherige Perlentiere und 302 Figurenmuster aus der vorhandenen Bildersammlung zur Auswahl. Suche und Themenfilter helfen beim Finden. Die Figuren sind für flaches Fädeln vereinfacht; Mario und Pikachu haben überarbeitete Frontansichten. Stark ausgesparte Silhouetten mit gefüllten Lücken sind entsprechend gekennzeichnet.
+
+«Farben und Breite · Vollbild» öffnet die Arbeitsansicht: einzelne Perlen färben, alle Perlen einer Farbe tauschen, die Breite über die Perlenzahl verändern und die Ansicht vergrössern. «Rückgängig» und «Original» nehmen Änderungen zurück. «Sperren» blendet die Bearbeitung aus und schützt das Muster vor versehentlichen Änderungen; «Entsperren» öffnet sie wieder. Die Bildschirmansicht passt sich auch an Tablet und Handy an.
+
+Änderungen an fertigen Mustern bleiben pro Motiv auf diesem Gerät gespeichert und gelten auch für den Ausdruck. Derselbe Editor steht bei «Perlentier aus eigenem Bild» zur Verfügung; dort gelten die Änderungen für die aktuelle Sitzung. Eigene Bilder werden weiterhin nur auf dem Gerät verarbeitet.
+
+Pflege: `node werkzeug/vorlagen/perlen.cjs` erzeugt die gespeicherten Muster aus `vorlagen/figuren/` (benötigt `@napi-rs/canvas`); angehängte IDs rechnen nur diese Motive neu. Gezielte Korrekturen stehen in `werkzeug/vorlagen/perlen-korrekturen.json`. `node werkzeug/perlen-pruefen.cjs` prüft Vollständigkeit, Perlenzahlen, Drahtgeometrie, Druckausgaben und Bearbeitungsfunktionen.
+
 ## Bekannte Grenzen
 
 - YouTube-Werbung ohne Premium-Anmeldung im selben Browser ist nicht abschaltbar. Die App blockiert Tipps aufs YouTube-Bild; zum Überspringen von Werbung in den Einstellungen «Tippen ans Video durchlassen» aktivieren.

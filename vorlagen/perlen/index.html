@@ -26,6 +26,10 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .raster{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
 .tier{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px 8px;border:2px solid var(--line);border-radius:14px;background:var(--surface2);color:var(--ink);font:inherit;font-size:14px;cursor:pointer}
 .tier svg{width:72px;height:96px}
+.tier img{width:72px;height:96px;object-fit:contain}
+.suche{display:grid;gap:8px;margin-bottom:14px}
+.suche input,.suche select{width:100%;min-height:44px;padding:8px;border:2px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:inherit}
+.anpassen{width:100%;min-height:48px;margin:0 0 12px;border:2px solid var(--acc);border-radius:12px;background:var(--acc-soft);color:var(--ink);font:inherit;cursor:pointer}
 .tier small{color:var(--muted);font-size:12px}
 .tier[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
 .tier:hover{border-color:var(--acc)}
@@ -58,13 +62,16 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
   <h1>Perlentiere</h1>
-  <p>Flache Tiere aus Perlen und Draht, eine Lage. Tier wählen, Muster drucken, Reihe für Reihe nachfädeln. <a href="../">← Schablonen</a></p>
+  <p>Tiere und bekannte Figuren aus Perlen und Draht. Muster wählen, Farben und Breite anpassen, direkt am Bildschirm nachfädeln oder drucken. <a href="../">← Schablonen</a></p>
 </header>
 <script src="../zurueck.js"></script>
 <main>
   <section class="karte" aria-label="Tier wählen">
     <h2>Tier oder Figur wählen</h2>
+    <div class="suche"><label for="suche">Suchen</label><input id="suche" type="search" placeholder="Zum Beispiel Mario oder Pikachu"><label for="gruppe">Thema</label><select id="gruppe"><option value="">Alle Themen</option></select></div>
+    <p class="hinweis" id="treffer" role="status"></p>
     <div id="tiere"></div>
+    <button type="button" class="anpassen" id="mehr" hidden>Weitere Muster anzeigen</button>
   </section>
   <div class="seite-rechts">
     <section class="karte" aria-label="Einstellungen">
@@ -72,8 +79,10 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
         <span class="lbl" id="lbl-perle">Perlen</span>
         <div class="chips" role="group" aria-labelledby="lbl-perle" id="perlen"></div>
       </div>
+      <button type="button" class="anpassen" id="anpassen">Farben und Breite · Vollbild</button>
       <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
       <p class="info" id="info" aria-live="polite"></p>
+      <p class="hinweis" id="figuren-hinweis"></p>
       <p class="hinweis">Das Muster zeigt jede Perle. Die Zahl rechts sagt, wie viele Perlen in die Reihe kommen. Immer von «Start» nach unten fädeln. Die blaue Linie ist der Draht: so läuft er durch jede Reihe.</p>
     </section>
     <section class="karte" aria-label="Vorschau">
@@ -83,6 +92,8 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
   </div>
 </main>
 <div id="druck"></div>
+<script src="figuren.js"></script>
+<script src="bearbeiten.js"></script>
 <script>
 // Eigene Muster von Schritt für Schritt. Jede Reihe ist eine Zeichenkette, ein Buchstabe pro Perle (Farbe).
 // Beine: nach Reihe r mit jedem Drahtende n Perlen und f Fussperlen auffädeln, zurück durch die n Perlen.
@@ -165,8 +176,19 @@ const TIERE=[
 ];
 // Perle: l = Länge auf dem Draht, d = Durchmesser (cm). Rocailles sind kurze Röhrchen: von der Seite 2 mm breit, 3 mm hoch.
 const PERLEN={r3:{name:'Rocailles 3 mm',l:.2,d:.3,draht:'0,3 mm'},roc:{name:'Rocailles 4 mm',l:.3,d:.4,draht:'0,3–0,4 mm'},pony:{name:'Ponyperlen 9 mm',l:.6,d:.9,draht:'0,6–0,8 mm'}};
+FARBE.u=['#F3C9A0','hautfarben'];
+TIERE.push(...(window.PERLEN_FIGUREN||[]));
 const $=id=>document.getElementById(id);
 const S={tier:'eidechse',perle:'r3'};
+const eigene=new Map();
+function aktuellesTier(){
+  const original=TIERE.find(t=>t.id===S.tier)||TIERE[1];
+  if(!eigene.has(original.id)){
+    try{const t=JSON.parse(localStorage.getItem('schrittli.perlen.'+original.id));
+      if(PerlenEditor.gueltig(t,FARBE))eigene.set(original.id,{...original,rows:t.rows,beine:t.beine});}catch(e){}
+  }
+  return eigene.get(original.id)||original;
+}
 
 // Einheit = Perlendurchmesser (Reihenabstand). q = Perlenlänge auf dem Draht. r = Drehung der Perle (Grad, Richtung des Drahts).
 // luft: Abstand nach einer Reihe mit Beinen. Das Bein liegt dann zwischen den Reihen, so sieht man den Draht.
@@ -322,7 +344,7 @@ function blatt(t,pe){
     const lx=ox+g.x0*sk-2.5,kb=Math.min(3,sk*.55);
     lab+=`<rect x="${(lx-fs*1.6-kb).toFixed(2)}" y="${(oy+g.ry[i]*sk-kb/2).toFixed(2)}" width="${kb.toFixed(2)}" height="${kb.toFixed(2)}" rx=".4" fill="none" stroke="#9aa4b1" stroke-width=".3"/>`+
       `<text x="${lx.toFixed(2)}" y="${y}" font-size="${fs.toFixed(2)}" fill="#5b6573" text-anchor="end">${i+1}</text>`+
-      `<text x="${(ox+g.x1*sk+2.5).toFixed(2)}" y="${y}" font-size="${fs.toFixed(2)}" font-weight="800" fill="#1c2430">${r.length}${b?`<tspan font-weight="600" fill="#17997A"> + ${b.w} ${b.n}+${b.f}</tspan>`:''}</text>`;
+      `<text x="${(ox+g.x1*sk+2.5).toFixed(2)}" y="${y}" font-size="${fs.toFixed(2)}" font-weight="800" fill="#1c2430">${r.length}${b?`<tspan font-weight="600" fill="#17997A"> + ${htmlText(b.w||'Teile')} ${b.n}+${b.f}</tspan>`:''}</text>`;
   });
   const sx=ox,top=oy+g.y0*sk;
   // Start: grüner Rahmen um Reihe 1 und ein Schild «Start» darauf
@@ -336,46 +358,62 @@ function blatt(t,pe){
     `<text x="${(ox+g.x1*sk+2.5).toFixed(2)}" y="${(top-1).toFixed(2)}" font-size="2.6" fill="#5b6573">Perlen</text>`;
   const legende=`<path d="M128 225.5h6" stroke="${A}" stroke-width=".8"/><text x="135.5" y="226.5" font-size="2.9" fill="#1c2430">Draht</text>`;
   // Felder zum Bereitlegen
-  const farben=Object.keys(z).sort((a,b)=>z[b]-z[a]),fb=(190-(farben.length-1)*4)/farben.length;
+  const farben=Object.keys(z).sort((a,b)=>z[b]-z[a]),sp=Math.min(5,farben.length),zr=Math.ceil(farben.length/sp),fb=(190-(sp-1)*4)/sp,fh=(38-(zr-1)*3)/zr;
   let feld=`<text x="10" y="232" font-size="4.2" font-weight="800" fill="#1c2430">Perlen bereitlegen</text><text x="200" y="232" font-size="3" fill="#5b6573" text-anchor="end">Leg jede Farbe auf ihr Feld.</text>`;
-  farben.forEach((c,k)=>{const fx=10+k*(fb+4);
-    feld+=`<rect x="${fx.toFixed(2)}" y="236" width="${fb.toFixed(2)}" height="38" rx="4" fill="#F5F8FB" stroke="#D5DEE9" stroke-width=".4"/>`+
-      `<rect x="${(fx+3.6).toFixed(2)}" y="239" width="2.8" height="4" rx=".9" fill="${FARBE[c][0]}" stroke="#1c2430" stroke-width=".3"/><text x="${(fx+9).toFixed(2)}" y="242.1" font-size="3.1" fill="#1c2430"><tspan font-weight="800">${z[c]}</tspan> × ${FARBE[c][1]}</text>`});
+  farben.forEach((c,k)=>{const fx=10+(k%sp)*(fb+4),fy=236+Math.floor(k/sp)*(fh+3);
+    feld+=`<rect x="${fx.toFixed(2)}" y="${fy.toFixed(2)}" width="${fb.toFixed(2)}" height="${fh.toFixed(2)}" rx="2" fill="#F5F8FB" stroke="#D5DEE9" stroke-width=".4"/>`+
+      `<rect x="${(fx+2).toFixed(2)}" y="${fy+2}" width="2.8" height="4" rx=".9" fill="${FARBE[c][0]}" stroke="#1c2430" stroke-width=".3"/><text x="${(fx+6).toFixed(2)}" y="${fy+5}" font-size="2.6" fill="#1c2430"><tspan font-weight="800">${z[c]}</tspan> × ${FARBE[c][1]}</text>`});
   // Material links
-  let mat=`<text x="10" y="36" font-size="4.2" font-weight="800" fill="#1c2430">Du brauchst</text>`,y=42.5;
-  for(const c of Object.keys(z).sort((a,b)=>z[b]-z[a])){
-    mat+=`<rect x="10.9" y="${y-2.8}" width="2.6" height="3.6" rx=".8" fill="${FARBE[c][0]}" stroke="#1c2430" stroke-width=".3"/><text x="16" y="${y}" font-size="3.3" fill="#1c2430"><tspan font-weight="800">${z[c]}</tspan> × ${FARBE[c][1]}</text>`;y+=5;
-  }
+  const zwei=farben.length>8;let mat=`<text x="10" y="36" font-size="4.2" font-weight="800" fill="#1c2430">Du brauchst</text>`,y=42.5;
+  farben.forEach((c,k)=>{const x=zwei&&k%2?47:10;
+    mat+=`<rect x="${x+.9}" y="${y-2.8}" width="2.6" height="3.6" rx=".8" fill="${FARBE[c][0]}" stroke="#1c2430" stroke-width=".3"/><text x="${x+6}" y="${y}" font-size="3.3" fill="#1c2430"><tspan font-weight="800">${z[c]}</tspan> × ${FARBE[c][1]}</text>`;
+    if(!zwei||k%2||k===farben.length-1)y+=5});
   const lang_=draht(t,pe);
   mat+=`<text x="10" y="${y+.5}" font-size="3.1" fill="#1c2430"><tspan font-weight="800">${lang(lang_)}</tspan> Draht, ${pe.draht} dick</text>`+
     `<text x="10" y="${y+5}" font-size="3.1" fill="#1c2430">Seitenschneider</text>`;
   y+=13;
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 297" width="210mm" height="297mm" font-family="Nunito,Arial,sans-serif" role="img" aria-label="Perlentier ${t.name}: Fädelmuster">`+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 297" width="210mm" height="297mm" font-family="Nunito,Arial,sans-serif" role="img" aria-label="Perlentier ${htmlText(t.name)}: Fädelmuster">`+
     `<rect width="210" height="297" fill="#fff"/>`+
-    `<text x="10" y="17" font-size="7.5" font-weight="800" fill="#1c2430" font-family="Fredoka,Nunito,Arial,sans-serif">Perlentier: ${t.name}</text>`+
+    `<text x="10" y="17" font-size="${Math.min(7.5,330/(t.name.length+12))}" font-weight="800" fill="#1c2430" font-family="Fredoka,Nunito,Arial,sans-serif">Perlentier: ${htmlText(t.name)}</text>`+
     `<text x="10" y="23.5" font-size="3.4" fill="#5b6573">Flach, eine Lage · ${n} ${pe.name} · fertig etwa ${f1(breit)} × ${f1(hoch)} cm · ${t.stufe}</text>`+
     `<line x1="10" y1="27" x2="200" y2="27" stroke="#D5DEE9" stroke-width=".4"/>`+
     mat+`<text x="10" y="${y}" font-size="4.2" font-weight="800" fill="#1c2430">So geht's</text>`+technik(10,y+6)+
     kopf+start+perlen(g,sk,ox,oy,.45,false)+draehte(t,g,sk,ox,oy)+lab+legende+feld+
-    `<text x="200" y="286" font-size="2.6" fill="#5b6573" text-anchor="end">Schritt für Schritt · eigene Vorlage, frei für den Unterricht</text></svg>`;
+    `<text x="200" y="286" font-size="2.6" fill="#5b6573" text-anchor="end">Schritt für Schritt · ${t.quelle?'vereinfachtes Figurenmuster':'Perlentier-Vorlage'}</text></svg>`;
 }
 
+const gruppen=['Tiere','Comic-Figuren','Essen und Sachen',...new Set(TIERE.filter(t=>t.gruppe).map(t=>t.gruppe))];
+const gruppeVon=t=>t.gruppe||(t.art==='figur'?'Comic-Figuren':t.art==='ding'?'Essen und Sachen':'Tiere');
+const htmlText=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let anzeige=48;
+function auswahl(){
+  const such=$('suche').value.trim().toLocaleLowerCase('de-CH'),gruppe=$('gruppe').value;
+  const treffer=TIERE.filter(t=>(!gruppe||gruppeVon(t)===gruppe)&&(!such||(t.name+' '+gruppeVon(t)).toLocaleLowerCase('de-CH').includes(such)));
+  const sichtbar=treffer.slice(0,anzeige);
+  const knopf=t=>`<button type="button" class="tier" data-id="${t.id}" aria-pressed="${t.id===S.tier}">${t.quelle?`<img src="../figuren/bilder/${t.quelle}.webp" alt="" loading="lazy" width="72" height="96">`:mini(t)}<span>${htmlText(t.name)}</span><small>${zaehlen(t).n} Perlen · ${t.stufe}</small></button>`;
+  $('tiere').innerHTML=gruppen.map(h=>{const l=sichtbar.filter(t=>gruppeVon(t)===h);return l.length?`<h3>${htmlText(h)}</h3><div class="raster">${l.map(knopf).join('')}</div>`:''}).join('');
+  $('treffer').textContent=treffer.length?`${treffer.length} Muster · ${sichtbar.length} angezeigt`:'Kein Muster gefunden. Versuche einen anderen Namen.';
+  $('mehr').hidden=treffer.length<=anzeige;
+}
 function liste(){
-  const knopf=t=>`<button type="button" class="tier" data-id="${t.id}" aria-pressed="false">${mini(t)}<span>${t.name}</span><small>${zaehlen(t).n} Perlen · ${t.stufe}</small></button>`;
-  $('tiere').innerHTML=[['Tiere',TIERE.filter(t=>!t.art)],['Comic-Figuren',TIERE.filter(t=>t.art==='figur')],['Essen und Sachen',TIERE.filter(t=>t.art==='ding')]]
-    .map(([h,l])=>`<h3>${h}</h3><div class="raster">${l.map(knopf).join('')}</div>`).join('');
+  $('gruppe').innerHTML+=[...gruppen].map(g=>`<option>${htmlText(g)}</option>`).join('');
+  $('suche').addEventListener('input',()=>{anzeige=48;auswahl()});
+  $('gruppe').addEventListener('change',()=>{anzeige=48;auswahl()});
+  $('mehr').addEventListener('click',()=>{anzeige+=48;auswahl()});
+  auswahl();
   $('tiere').addEventListener('click',e=>{const k=e.target.closest('.tier');if(!k)return;S.tier=k.dataset.id;zeichnen();
     if(matchMedia('(max-width:860px)').matches)$('vorschau').scrollIntoView({behavior:'smooth',block:'start'})});
   $('perlen').innerHTML=Object.entries(PERLEN).map(([k,p])=>`<button type="button" class="chip" data-p="${k}" aria-pressed="false">${p.name}</button>`).join('');
   $('perlen').addEventListener('click',e=>{const k=e.target.closest('.chip');if(!k)return;S.perle=k.dataset.p;zeichnen()});
 }
 function zeichnen(){
-  const t=TIERE.find(x=>x.id===S.tier)||TIERE[1],pe=PERLEN[S.perle];
+  const t=aktuellesTier(),pe=PERLEN[S.perle];
   document.querySelectorAll('.tier').forEach(k=>k.setAttribute('aria-pressed',k.dataset.id===t.id));
   document.querySelectorAll('.chip').forEach(k=>k.setAttribute('aria-pressed',k.dataset.p===S.perle));
   const svg=blatt(t,pe);
   $('vorschau').innerHTML=svg;$('druck').innerHTML=svg;
   $('info').textContent=`${t.name}: ${t.rows.length} Reihen, ${zaehlen(t).n} Perlen, ${lang(draht(t,pe))} Draht`;
+  $('figuren-hinweis').textContent=t.quelle?(t.geschlossen?'Stark vereinfachte Silhouette: Lücken im Motiv sind gefüllt, damit die Reihen am Draht zusammenhalten.':'Vereinfachtes Figurenmuster für flaches Fädeln. Abstehende Teile werden zu Paaren; einzelne Teile wie ein Schwanz können fehlen.'):'';
   const p=new URLSearchParams({tier:t.id});if(S.perle!=='r3')p.set('perle',S.perle);
   try{history.replaceState(null,'','?'+p)}catch(e){}
   document.title=`Schritt für Schritt · Perlentier ${t.name}`;
@@ -385,6 +423,10 @@ if(TIERE.some(t=>t.id===q.get('tier')))S.tier=q.get('tier');
 if(PERLEN[q.get('perle')])S.perle=q.get('perle');
 liste();zeichnen();
 $('drucken').addEventListener('click',()=>window.print());
+$('anpassen').addEventListener('click',()=>PerlenEditor.oeffnen({
+  muster:aktuellesTier(),original:TIERE.find(t=>t.id===S.tier),palette:FARBE,perle:PERLEN[S.perle],geometrie,draehte,zaehlen,
+  speichern:t=>{eigene.set(S.tier,t);let ok=true;try{localStorage.setItem('schrittli.perlen.'+S.tier,JSON.stringify(t))}catch(e){ok=false}zeichnen();return ok;}
+}));
 </script>
 </body>
 </html>
