@@ -6,13 +6,19 @@
   function gueltig(t,palette){
     return !!t&&Array.isArray(t.rows)&&t.rows.length>0&&t.rows.length<=100&&
       t.rows.every(r=>typeof r==='string'&&r.length>0&&r.length<=100&&[...r].every(c=>palette[c]))&&
+      (!t.offsets||Array.isArray(t.offsets)&&Number.isInteger(t.gridWidth)&&t.gridWidth>0&&t.gridWidth<=100&&t.offsets.length===t.rows.length&&t.offsets.every((x,i)=>Number.isInteger(x)&&x>=0&&x+t.rows[i].length<=t.gridWidth)&&!t.beine?.length)&&
       (!t.beine||Array.isArray(t.beine)&&t.beine.length<=20&&t.beine.every(b=>
         Number.isInteger(b.r)&&b.r>0&&b.r<=t.rows.length&&Number.isInteger(b.n)&&b.n>=0&&b.n<=20&&
         Number.isInteger(b.f)&&b.f>0&&b.f<=20&&Number.isFinite(b.a)&&Math.abs(b.a)<=90&&palette[b.c]&&palette[b.fc]));
   }
   function breite(t,max){
-    const aus=kopie(t),vor=Math.max(...t.rows.map(r=>r.length));
+    const aus=kopie(t),vor=t.gridWidth||Math.max(...t.rows.map(r=>r.length));
     max=Math.max(1,Math.min(100,Math.round(max)));
+    if(t.offsets){
+      aus.gridWidth=max;aus.offsets=[];
+      aus.rows=t.rows.map((r,i)=>{const l=Math.min(max-1,Math.round(t.offsets[i]*max/vor)),rechts=Math.max(l+1,Math.round((t.offsets[i]+r.length)*max/vor));aus.offsets.push(l);return Array.from({length:rechts-l},(_,j)=>r[Math.max(0,Math.min(r.length-1,Math.floor((l+j+.5)*vor/max-t.offsets[i])))]).join('')});
+      return aus;
+    }
     aus.rows=t.rows.map(r=>{const n=Math.max(1,Math.round(r.length*max/vor));return Array.from({length:n},(_,j)=>r[Math.min(r.length-1,Math.floor((j+.5)*r.length/n))]).join('')});
     return aus;
   }
@@ -44,6 +50,7 @@
   .pe-farben{display:flex;flex-wrap:wrap;gap:6px}
   .pe-farben button{width:44px;height:44px;padding:0;border:2px solid #718096}
   .pe-farben button[aria-pressed=true]{outline:3px solid var(--acc,#17997a);outline-offset:2px;border-color:#fff}
+  .pe-farben button[data-farbe=t]{border-style:dashed;background:repeating-linear-gradient(135deg,#fff 0 6px,#e4eaf0 6px 8px)!important}
   .pe-aktionen{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
   .pe-status{margin:0;padding:6px 16px;font-size:14px;background:var(--surface,#fff)}
   .pe-dialog[data-gesperrt=true] .pe-inhalt{grid-template-columns:minmax(0,1fr)}
@@ -61,7 +68,7 @@
     const farben=Object.entries(a.palette),optionen=farben.map(([k,[,n]])=>`<option value="${k}">${esc(n)}</option>`).join('');
     d.innerHTML=`<div class="pe-rahmen"><div class="pe-kopf"><strong id="pe-titel">${esc(t.name||'Mein Perlentier')}</strong><button type="button" data-tun="kleiner" aria-label="Ansicht verkleinern">−</button><button type="button" data-tun="groesser" aria-label="Ansicht vergrössern">+</button><button type="button" class="pe-haupt" data-tun="sperren">Sperren</button><button type="button" data-tun="fertig">Fertig</button></div>
       <div class="pe-inhalt"><div class="pe-bild" tabindex="0" aria-label="Perlenmuster"></div><fieldset class="pe-regler"><legend hidden>Perlentier anpassen</legend>
-      <label for="pe-breite">Breite: <output id="pe-mass"></output></label><input id="pe-breite" type="range" min="1" max="100" step="1"><p>Die Breite verändert die Perlenzahl pro Reihe. Die Höhe bleibt gleich.</p>
+      <label for="pe-breite">Breite: <output id="pe-mass"></output></label><input id="pe-breite" type="range" min="1" max="100" step="1"><p>Die Breite verändert die Perlenzahl pro Reihe. Die Höhe bleibt gleich.${t.offsets?' Gestrichelte Perlen sind transparent und werden mitgefädelt.':''}</p>
       <h3>Einzelne Perlen färben</h3><p id="pe-pinsel">Farbe wählen, dann Perlen antippen.</p><div class="pe-farben">${farben.map(([k,[f,n]])=>`<button type="button" data-farbe="${k}" style="background:${f}" aria-label="${esc(n)}" title="${esc(n)}" aria-pressed="false"></button>`).join('')}</div>
       <h3>Eine Farbe überall tauschen</h3><label for="pe-von">Diese Farbe</label><select id="pe-von"></select><label for="pe-nach">wird zu</label><select id="pe-nach">${optionen}</select><button type="button" data-tun="tauschen">Alle Perlen tauschen</button>
       <div class="pe-aktionen"><button type="button" data-tun="zurueck">Rückgängig</button><button type="button" data-tun="original">Original</button></div></fieldset></div>
@@ -80,12 +87,12 @@
       seitenverhaeltnis=w/h;
       const text=(px,py,s)=>`<text x="${px}" y="${py}" font-size=".55" fill="#344054" font-family="Arial,sans-serif">${s}</text>`;
       const reihen=t.rows.map((r,i)=>{const b=(t.beine||[]).find(b=>b.r===i+1);return text(x+.3,geo.ry[i]+.2,i+1)+text(geo.x1+.5,geo.ry[i]+.2,r.length+(b?` + ${esc(b.w||'Teile')} ${b.n}+${b.f}`:''))}).join('');
-      const perlen=geo.P.map(p=>`<rect x="${-q*.47}" y="-.47" width="${q*.94}" height=".94" rx="${q*.28}" transform="translate(${p.x} ${p.y}) rotate(${p.r||0})" fill="${a.palette[p.c][0]}" stroke="#293241" stroke-width=".045"/>`).join('');
-      bild.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${x} ${y} ${w} ${h}" role="img" aria-label="${esc(t.name||'Perlentier')}: ${t.rows.length} Reihen" style="width:${zoom}%">${text(x+.3,y+1,'Reihe')}${text(geo.x1+.5,y+1,'Perlen')}${text(-.6,y+1.6,'Start')}${perlen}${a.draehte(t,geo,1,0,0)}${reihen}</svg>`;
+      const perlen=geo.P.map(p=>`<rect x="${-q*.47}" y="-.47" width="${q*.94}" height=".94" rx="${q*.28}" transform="translate(${p.x} ${p.y}) rotate(${p.r||0})" fill="${a.palette[p.c][0]}" stroke="${p.c==='t'?'#9aa9b5':'#293241'}" ${p.c==='t'?'stroke-dasharray=".09 .09"':''} stroke-width=".045"/>`).join('');
+      bild.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${x} ${y} ${w} ${h}" role="img" aria-label="${esc(t.name||'Perlentier')}: ${t.rows.length} Reihen" style="width:${zoom}%">${text(x+.3,y+1,'Reihe')}${text(geo.x1+.5,y+1,'Perlen')}${text(((geo.links?.[0]||0)+(geo.rechts?.[0]||0))/2-.6,y+1.6,'Start')}${perlen}${a.draehte(t,geo,1,0,0)}${reihen}</svg>`;
       passend();
       const g=a.geometrie(t,a.perle.l/a.perle.d),cm=(g.x1-g.x0-1+g.q)*a.perle.d;
       el('#pe-mass').textContent=`${cm.toLocaleString('de-CH',{maximumFractionDigits:1})} cm`;
-      slider.value=Math.max(...t.rows.map(r=>r.length));
+      slider.value=t.gridWidth||Math.max(...t.rows.map(r=>r.length));
       const {z,n}=a.zaehlen(t),von=el('#pe-von'),alt=von.value;
       von.innerHTML=farben.filter(([k])=>z[k]).map(([k,[,name]])=>`<option value="${k}">${esc(name)} (${z[k]})</option>`).join('');
       if(z[alt])von.value=alt;

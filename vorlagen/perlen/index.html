@@ -54,7 +54,7 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
   body{background:#fff}
   .kopf,main{display:none!important}
   #druck{display:block}
-  #druck svg{display:block;width:210mm;height:297mm}
+  #druck svg{display:block;width:210mm;height:297mm;break-after:page}#druck svg:last-child{break-after:auto}
 }
 </style>
 </head>
@@ -88,12 +88,13 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
     <section class="karte" aria-label="Vorschau">
       <h2>Vorschau</h2>
       <div class="vorschau" id="vorschau"></div>
+      <details id="vergleich" hidden><summary>Mit dem Original vergleichen</summary><div style="display:flex;gap:12px;align-items:center;justify-content:center;padding:12px;background:white"><img id="original-bild" alt="Originalmotiv" style="width:45%;max-height:200px;object-fit:contain"><div id="vergleich-muster" style="width:45%;max-height:200px"></div></div></details>
     </section>
   </div>
 </main>
 <div id="druck"></div>
-<script src="figuren.js"></script>
-<script src="bearbeiten.js"></script>
+<script src="figuren.js?v=2"></script>
+<script src="bearbeiten.js?v=2"></script>
 <script>
 // Eigene Muster von Schritt für Schritt. Jede Reihe ist eine Zeichenkette, ein Buchstabe pro Perle (Farbe).
 // Beine: nach Reihe r mit jedem Drahtende n Perlen und f Fussperlen auffädeln, zurück durch die n Perlen.
@@ -177,15 +178,19 @@ const TIERE=[
 // Perle: l = Länge auf dem Draht, d = Durchmesser (cm). Rocailles sind kurze Röhrchen: von der Seite 2 mm breit, 3 mm hoch.
 const PERLEN={r3:{name:'Rocailles 3 mm',l:.2,d:.3,draht:'0,3 mm'},roc:{name:'Rocailles 4 mm',l:.3,d:.4,draht:'0,3–0,4 mm'},pony:{name:'Ponyperlen 9 mm',l:.6,d:.9,draht:'0,6–0,8 mm'}};
 FARBE.u=['#F3C9A0','hautfarben'];
+Object.assign(FARBE,{e:['#36B8B3','türkis'],a:['#203F86','dunkelblau'],i:['#B7A0D9','flieder'],j:['#FFF0CD','creme'],m:['#593D32','dunkelbraun'],f:['#FFE348','hellgelb'],z:['#555B68','dunkelgrau'],t:['#FFFFFF','transparent']});
+Object.assign(FARBE,{A:['#D5E8BA','pastellgrün'],B:['#005F65','dunkeltürkis'],C:['#00BEE2','cyan'],D:['#664391','dunkelviolett'],E:['#F9E5EC','pastellrosa'],F:['#F9F59A','pastellgelb'],G:['#82BFB7','mint'],H:['#6E8060','olivgrün'],I:['#BB5915','rotbraun'],J:['#3A3030','anthrazit'],K:['#4BCB35','leuchtgrün'],L:['#AB102D','dunkelrot']});
+Object.assign(FARBE,{M:['#183ADE','königsblau'],N:['#731015','weinrot'],O:['#101010','tiefschwarz'],P:['#B3A695','beigegrau'],Q:['#5284AE','jeansblau'],R:['#8C851F','olivgelb'],S:['#855A17','goldbraun']});
 TIERE.push(...(window.PERLEN_FIGUREN||[]));
 const $=id=>document.getElementById(id);
 const S={tier:'eidechse',perle:'r3'};
 const eigene=new Map();
+const speicherKey=t=>'schrittli.perlen.'+t.id+(t.version?'.v'+t.version:'');
 function aktuellesTier(){
   const original=TIERE.find(t=>t.id===S.tier)||TIERE[1];
   if(!eigene.has(original.id)){
-    try{const t=JSON.parse(localStorage.getItem('schrittli.perlen.'+original.id));
-      if(PerlenEditor.gueltig(t,FARBE))eigene.set(original.id,{...original,rows:t.rows,beine:t.beine});}catch(e){}
+    try{const t=JSON.parse(localStorage.getItem(speicherKey(original)));
+      if(PerlenEditor.gueltig(t,FARBE)&&(t.version||1)===(original.version||1))eigene.set(original.id,{...original,rows:t.rows,beine:t.beine,offsets:t.offsets,gridWidth:t.gridWidth});}catch(e){}
   }
   return eigene.get(original.id)||original;
 }
@@ -196,7 +201,9 @@ function geometrie(t,q=2/3,luft=0){
   const P=[],W=[],L=[],gr=180/Math.PI,n=t.rows.length,mitBein=new Set((t.beine||[]).map(b=>b.r-1)),ry=[];
   for(let i=0,y=0;i<=n;i++){ry.push(y);y+=1+(mitBein.has(i)?luft:0)}
   const rand=k=>k<n?t.rows[k].length/2*q:0;
-  t.rows.forEach((r,i)=>{const n=r.length,e=(n-1)/2;for(let j=0;j<n;j++)P.push({x:(j-e)*q,y:ry[i],c:r[j],r:0});W.push([[-e*q-q/2-.05,ry[i]],[e*q+q/2+.05,ry[i]]])});
+  const start=t.rows.map((r,i)=>t.offsets?(t.offsets[i]-(t.gridWidth-1)/2)*q:-(r.length-1)/2*q);
+  const links=start.map(x=>x-q/2),rechts=start.map((x,i)=>x+(t.rows[i].length-.5)*q);
+  t.rows.forEach((r,i)=>{for(let j=0;j<r.length;j++)P.push({x:start[i]+j*q,y:ry[i],c:r[j],r:0});W.push([[links[i]-.05,ry[i]],[rechts[i]+.05,ry[i]]])});
   for(const b of t.beine||[]){
     const i=b.r-1,e=(t.rows[i].length-1)/2*q,a=b.a*Math.PI/180;
     const ly=luft?ry[i]+(1+luft)/2:ry[i],bx=luft?Math.max(rand(i),rand(i+1))+.5:e+q/2;
@@ -225,7 +232,7 @@ function geometrie(t,q=2/3,luft=0){
     }
   }
   const xs=P.map(q_=>q_.x),ys=P.map(q_=>q_.y);
-  return {P,W,L,q,ry,x0:Math.min(...xs)-.5,x1:Math.max(...xs)+.5,y0:Math.min(...ys)-.5,y1:Math.max(Math.max(...ys)+.5,ry[n]-.5)};
+  return {P,W,L,q,ry,links,rechts,x0:Math.min(...xs)-.5,x1:Math.max(...xs)+.5,y0:Math.min(...ys)-.5,y1:Math.max(Math.max(...ys)+.5,ry[n]-.5)};
 }
 
 function zaehlen(t){
@@ -238,6 +245,7 @@ function zaehlen(t){
 function draht(t,pe){
   let cm=0;
   for(const r of t.rows)cm+=(2*r.length+1)*pe.l;
+  if(t.offsets)for(let i=1;i<t.rows.length;i++)cm+=(Math.abs(t.offsets[i]-t.offsets[i-1])+Math.abs(t.offsets[i]+t.rows[i].length-t.offsets[i-1]-t.rows[i-1].length))*pe.l;
   for(const b of t.beine||[])cm+=2*(2*b.n+b.f+1)*pe.l;
   return Math.ceil((cm*1.15+30)/10)*10;
 }
@@ -248,12 +256,12 @@ function perlen(g,sk,ox,oy,kreis=.45,grau=true){
   const pfad=!grau?'':g.W.map(l=>'M'+l.map(q=>`${(ox+q[0]*sk).toFixed(2)} ${(oy+q[1]*sk).toFixed(2)}`).join('L')).join('');
   return (grau?`<path d="${pfad}" fill="none" stroke="#9aa4b1" stroke-width="${(sk*.08).toFixed(2)}" stroke-linejoin="round"/>`:'')+
     g.P.map(q=>{const w=g.q*sk*.94,h=sk*.94;   // Rocaille von der Seite: kurzes Röhrchen mit runden Kanten
-      return `<rect x="${(-w/2).toFixed(2)}" y="${(-h/2).toFixed(2)}" width="${w.toFixed(2)}" height="${h.toFixed(2)}" rx="${(w*.36).toFixed(2)}" ry="${(h*.26).toFixed(2)}" transform="translate(${(ox+q.x*sk).toFixed(2)} ${(oy+q.y*sk).toFixed(2)})${q.r?` rotate(${q.r.toFixed(1)})`:''}" fill="${FARBE[q.c][0]}" stroke="#1c2430" stroke-width="${(sk*.05).toFixed(2)}"/>`}).join('');
+      return `<rect x="${(-w/2).toFixed(2)}" y="${(-h/2).toFixed(2)}" width="${w.toFixed(2)}" height="${h.toFixed(2)}" rx="${(w*.36).toFixed(2)}" ry="${(h*.26).toFixed(2)}" transform="translate(${(ox+q.x*sk).toFixed(2)} ${(oy+q.y*sk).toFixed(2)})${q.r?` rotate(${q.r.toFixed(1)})`:''}" fill="${FARBE[q.c][0]}" stroke="${q.c==='t'?'#9aa9b5':'#1c2430'}" ${q.c==='t'?`stroke-dasharray="${sk*.09} ${sk*.09}"`:''} stroke-width="${(sk*.05).toFixed(2)}"/>`}).join('');
 }
 
 function mini(t){
   const g=geometrie(t),w=g.x1-g.x0,h=g.y1-g.y0;
-  return `<svg viewBox="${g.x0} ${g.y0} ${w} ${h}" aria-hidden="true" preserveAspectRatio="xMidYMid meet">${perlen(g,1,0,0)}</svg>`;
+  return `<svg viewBox="${g.x0} ${g.y0} ${w} ${h}" aria-hidden="true" preserveAspectRatio="xMidYMid meet">${perlen(g,1,0,0,.45,false)}</svg>`;
 }
 
 // Technik-Bilder (eigene Zeichnungen). Ein Draht, eine Farbe: A und B sind nur die zwei Enden.
@@ -296,6 +304,18 @@ function technik(x,y){
 
 // Drahtweg im Muster: Ende A trägt die Perlen, Ende B geht gegengleich durch. Die Seiten wechseln jede Reihe.
 function draehte(t,g,sk,ox,oy){
+  if(t.offsets){
+    const X=x=>(ox+x*sk).toFixed(2),Y=y=>(oy+y*sk).toFixed(2),wege=[],d=.12;
+    for(let i=0;i<t.rows.length;i++){
+      const l=g.links[i],r=g.rechts[i],y=g.ry[i];
+      wege.push(`M${X(l)} ${Y(y-d)}H${X(r)}M${X(l)} ${Y(y+d)}H${X(r)}`);
+      if(i){for(const sx of [-1,1]){const rand=sx<0?g.links:g.rechts,a=rand[i-1],b=rand[i],m=(sx<0?Math.min(a,b):Math.max(a,b))+sx*.45;
+        wege.push(`M${X(a)} ${Y(g.ry[i-1]+sx*d)}C${X(m)} ${Y(g.ry[i-1]+sx*d)} ${X(m)} ${Y(y-sx*d)} ${X(b)} ${Y(y-sx*d)}`)}}
+    }
+    const k=t.rows.length-1,mitte=(g.links[k]+g.rechts[k])/2,y=g.ry[k];
+    for(const sx of [-1,1])wege.push(`M${X(sx<0?g.links[k]:g.rechts[k])} ${Y(y+sx*d)}Q${X(mitte+sx*.6)} ${Y(y+1.1)} ${X(mitte+sx*.1)} ${Y(y+1.3)}L${X(mitte-sx*.1)} ${Y(y+1.5)}`);
+    return `<path d="${wege.join('')}" fill="none" stroke="${A}" stroke-width="${(sk*.045).toFixed(3)}" stroke-linecap="round"/>`;
+  }
   const X=x=>(ox+x*sk).toFixed(2),Y=y=>(oy+y*sk).toFixed(2),d=.14,n=t.rows.length;
   const w=k=>((t.rows[k].length-1)/2+.5)*g.q,li=k=>k%2?B:A,ri=k=>k%2?A:B;   // li/ri: Ende, das nach Reihe k links/rechts austritt
   const ry=g.ry,yl=k=>k?ry[k]+d:0,yr=k=>k?ry[k]-d:0,wege=[],Z=ry[n];
@@ -327,7 +347,15 @@ function draehte(t,g,sk,ox,oy){
     wege.map(([c,p])=>`<path d="${p}" fill="none" stroke="${c}" stroke-width="${sw.toFixed(2)}" stroke-linecap="round" stroke-linejoin="round"/>`).join('');
 }
 
-function blatt(t,pe){
+function blatt(t,pe){return (t.offsets?figurenPlan(t,pe):'')+uebersichtsblatt(t,pe)}
+function figurenPlan(t,pe){
+  const g=geometrie(t,pe.l/pe.d),n=zaehlen(t).n,sk=Math.min(170/(g.x1-g.x0+2),234/(g.y1-g.y0+2)),ox=105-(g.x0+g.x1)/2*sk,oy=37-g.y0*sk;
+  const fs=Math.min(3.2,sk*.65);let zeilen='';
+  t.rows.forEach((r,i)=>{const y=oy+g.ry[i]*sk;zeilen+=`<text x="14" y="${y+fs*.35}" text-anchor="end" font-size="${fs}" fill="#556575">${i+1}</text><text x="195" y="${y+fs*.35}" font-size="${fs}" fill="#17212f">${r.length}</text>`});
+  const start=ox+(g.links[0]+g.rechts[0])/2*sk;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 297" width="210mm" height="297mm" role="img" aria-label="${htmlText(t.name)}: grosser Reihenplan" font-family="Nunito,Arial,sans-serif"><rect width="210" height="297" fill="white"/><text x="10" y="14" font-size="${Math.min(7,320/t.name.length)}" font-weight="800" fill="#17212f">${htmlText(t.name)}</text><text x="10" y="22" font-size="3.4" fill="#556575">${t.rows.length} Reihen · ${n} Perlen · Farben von links nach rechts lesen</text><text x="14" y="30" text-anchor="end" font-size="2.8" fill="#556575">Reihe</text><text x="195" y="30" font-size="2.8" fill="#556575">Perlen</text><text x="${start}" y="${oy-sk*.9}" text-anchor="middle" font-size="3.2" font-weight="800" fill="#17997a">Start</text>${perlen(g,sk,ox,oy,.45,false)}${draehte(t,g,sk,ox,oy)}${zeilen}<text x="10" y="280" font-size="3.2" fill="#17212f">Gestrichelte Perlen sind transparent. Alle Reihen wie gezeigt seitlich versetzen.</text><text x="10" y="287" font-size="3" fill="#556575">Material und Anleitung stehen auf Blatt 2. · Schritt für Schritt · 1/2</text></svg>`;
+}
+function uebersichtsblatt(t,pe){
   const {z,n}=zaehlen(t),g0=geometrie(t,pe.l/pe.d),g=geometrie(t,pe.l/pe.d,1);   // g0: echte Grösse, g: mit Abstand bei den Beinen
   const breit=(g0.x1-g0.x0-1+g0.q)*pe.d,hoch=(g0.y1-g0.y0)*pe.d;
   g.x0-=.35;g.x1+=.35;g.y1+=1.3;   // Platz für Drahtbögen und Enden
@@ -346,7 +374,7 @@ function blatt(t,pe){
       `<text x="${lx.toFixed(2)}" y="${y}" font-size="${fs.toFixed(2)}" fill="#5b6573" text-anchor="end">${i+1}</text>`+
       `<text x="${(ox+g.x1*sk+2.5).toFixed(2)}" y="${y}" font-size="${fs.toFixed(2)}" font-weight="800" fill="#1c2430">${r.length}${b?`<tspan font-weight="600" fill="#17997A"> + ${htmlText(b.w||'Teile')} ${b.n}+${b.f}</tspan>`:''}</text>`;
   });
-  const sx=ox,top=oy+g.y0*sk;
+  const sx=ox+(g.links[0]+g.rechts[0])/2*sk,top=oy+g.y0*sk;
   // Start: grüner Rahmen um Reihe 1 und ein Schild «Start» darauf
   // Hat Reihe 1 Ohren oder Beine, steht das Schild über der ganzen Figur, mit einem Strich zum Rahmen
   const r1=(t.rows[0].length/2*g.q+.2)*sk,ry=oy-.64*sk,pw=11,ph=4.4,pb=bein[1]?top-.8:ry;
@@ -377,9 +405,14 @@ function blatt(t,pe){
     `<text x="10" y="17" font-size="${Math.min(7.5,330/(t.name.length+12))}" font-weight="800" fill="#1c2430" font-family="Fredoka,Nunito,Arial,sans-serif">Perlentier: ${htmlText(t.name)}</text>`+
     `<text x="10" y="23.5" font-size="3.4" fill="#5b6573">Flach, eine Lage · ${n} ${pe.name} · fertig etwa ${f1(breit)} × ${f1(hoch)} cm · ${t.stufe}</text>`+
     `<line x1="10" y1="27" x2="200" y2="27" stroke="#D5DEE9" stroke-width=".4"/>`+
-    mat+`<text x="10" y="${y}" font-size="4.2" font-weight="800" fill="#1c2430">So geht's</text>`+technik(10,y+6)+
+    mat+`<text x="10" y="${y}" font-size="4.2" font-weight="800" fill="#1c2430">So geht's</text>`+(t.offsets?figurenTechnik(y+7,!!z.t):technik(10,y+6))+
     kopf+start+perlen(g,sk,ox,oy,.45,false)+draehte(t,g,sk,ox,oy)+lab+legende+feld+
-    `<text x="200" y="286" font-size="2.6" fill="#5b6573" text-anchor="end">Schritt für Schritt · ${t.quelle?'vereinfachtes Figurenmuster':'Perlentier-Vorlage'}</text></svg>`;
+    `<text x="200" y="286" font-size="2.6" fill="#5b6573" text-anchor="end">Schritt für Schritt · ${t.quelle?'Figurenmuster mit versetzten Reihen':'Perlentier-Vorlage'}</text></svg>`;
+}
+
+function figurenTechnik(y,klar){
+  const zeilen=['1  Erste Reihe auf die Drahtmitte schieben.','2  Neue Reihe von links nach rechts auf','    das links liegende Ende auffädeln.','    Das andere Ende von rechts durch','    dieselben Perlen zurückführen.','3  Jede Reihe so seitlich versetzen,','    wie es im Muster gezeigt ist.','    Flach auf die Vorlage legen und','    den Draht vorsichtig anziehen.','4  Am Ende den Draht verdrehen,','    kürzen und die Spitzen einbiegen.',...(klar?['','Gestrichelte Perlen = transparent.','Sie verbinden getrennte Motivteile.','Diese Perlen ebenfalls auffädeln.']:[]),'','Die vielen Reihen brauchen Geduld.','Bei langen Drähten und beim Abschluss','hilft eine erwachsene Person.'];
+  return zeilen.map((s,i)=>`<text x="10" y="${y+i*4.1}" font-size="3.1" fill="#1c2430">${s}</text>`).join('');
 }
 
 const gruppen=['Tiere','Comic-Figuren','Essen und Sachen',...new Set(TIERE.filter(t=>t.gruppe).map(t=>t.gruppe))];
@@ -390,7 +423,7 @@ function auswahl(){
   const such=$('suche').value.trim().toLocaleLowerCase('de-CH'),gruppe=$('gruppe').value;
   const treffer=TIERE.filter(t=>(!gruppe||gruppeVon(t)===gruppe)&&(!such||(t.name+' '+gruppeVon(t)).toLocaleLowerCase('de-CH').includes(such)));
   const sichtbar=treffer.slice(0,anzeige);
-  const knopf=t=>`<button type="button" class="tier" data-id="${t.id}" aria-pressed="${t.id===S.tier}">${t.quelle?`<img src="../figuren/bilder/${t.quelle}.webp" alt="" loading="lazy" width="72" height="96">`:mini(t)}<span>${htmlText(t.name)}</span><small>${zaehlen(t).n} Perlen · ${t.stufe}</small></button>`;
+  const knopf=t=>`<button type="button" class="tier" data-id="${t.id}" aria-pressed="${t.id===S.tier}">${t.quelle?`<img src="bilder/${t.quelle}.webp?v=2" alt="" loading="lazy" width="72" height="96">`:mini(t)}<span>${htmlText(t.name)}</span><small>${zaehlen(t).n} Perlen · ${t.stufe}</small></button>`;
   $('tiere').innerHTML=gruppen.map(h=>{const l=sichtbar.filter(t=>gruppeVon(t)===h);return l.length?`<h3>${htmlText(h)}</h3><div class="raster">${l.map(knopf).join('')}</div>`:''}).join('');
   $('treffer').textContent=treffer.length?`${treffer.length} Muster · ${sichtbar.length} angezeigt`:'Kein Muster gefunden. Versuche einen anderen Namen.';
   $('mehr').hidden=treffer.length<=anzeige;
@@ -413,7 +446,9 @@ function zeichnen(){
   const svg=blatt(t,pe);
   $('vorschau').innerHTML=svg;$('druck').innerHTML=svg;
   $('info').textContent=`${t.name}: ${t.rows.length} Reihen, ${zaehlen(t).n} Perlen, ${lang(draht(t,pe))} Draht`;
-  $('figuren-hinweis').textContent=t.quelle?(t.geschlossen?'Stark vereinfachte Silhouette: Lücken im Motiv sind gefüllt, damit die Reihen am Draht zusammenhalten.':'Vereinfachtes Figurenmuster für flaches Fädeln. Abstehende Teile werden zu Paaren; einzelne Teile wie ein Schwanz können fehlen.'):'';
+  $('figuren-hinweis').textContent=t.quelle?'Flaches Figurenmuster: Reihen seitlich wie in der Vorlage ausrichten. Gestrichelte Perlen sind transparent und verbinden getrennte Motivteile. Die Figuren brauchen mehr Perlen und Geduld als die einfachen Tiere.':'';
+  $('vergleich').hidden=!t.quelle;
+  if(t.quelle){$('original-bild').src='originale/'+t.quelle+'.webp';$('original-bild').alt='Original: '+t.name;$('vergleich-muster').innerHTML=mini(t)}
   const p=new URLSearchParams({tier:t.id});if(S.perle!=='r3')p.set('perle',S.perle);
   try{history.replaceState(null,'','?'+p)}catch(e){}
   document.title=`Schritt für Schritt · Perlentier ${t.name}`;
@@ -425,7 +460,7 @@ liste();zeichnen();
 $('drucken').addEventListener('click',()=>window.print());
 $('anpassen').addEventListener('click',()=>PerlenEditor.oeffnen({
   muster:aktuellesTier(),original:TIERE.find(t=>t.id===S.tier),palette:FARBE,perle:PERLEN[S.perle],geometrie,draehte,zaehlen,
-  speichern:t=>{eigene.set(S.tier,t);let ok=true;try{localStorage.setItem('schrittli.perlen.'+S.tier,JSON.stringify(t))}catch(e){ok=false}zeichnen();return ok;}
+  speichern:t=>{eigene.set(S.tier,t);let ok=true;try{localStorage.setItem(speicherKey(t),JSON.stringify(t))}catch(e){ok=false}zeichnen();return ok;}
 }));
 </script>
 </body>

@@ -1,0 +1,1223 @@
+{
+  "datum": "2026-10-27",
+  "version": 2,
+  "umfang": 302,
+  "methode": "Alle 302 Originale und die gerenderten Perlenmuster auf 16 Vergleichsbögen visuell gesichtet; zwei vollständige Durchgänge, danach erneute Einzelprüfung von Cuphead, Chopper und Darth Vader. Keine automatische Freigabe aus technischen Tests.",
+  "faedelprobe": false,
+  "grenzen": [
+    "Flache Figurenmuster mit teils vielen transparenten Stützperlen; keine frei stehenden dreidimensionalen Perlentiere.",
+    "Komplexe Motive benötigen deutlich mehr Perlen und Draht als die einfachen Tiere.",
+    "Sehr kleine Schrift, Schattierungen und Details bleiben im Perlenraster vereinfacht."
+  ],
+  "pruefdateien": "node werkzeug/vorlagen/perlen-vergleichen.cjs → output/perlen-vergleich/vergleich-01.png bis vergleich-16.png",
+  "motive": [
+    {
+      "id": "felori",
+      "sha256": "724539cf0dad02c75dadb8a9200c7a6d409fa72884df37cdc48cb034dd60d808"
+    },
+    {
+      "id": "krokel",
+      "sha256": "4916085c586e0614a160507ae53d5d5ee561f4c752bd49aca8988e6d1a7afd21"
+    },
+    {
+      "id": "kwaks",
+      "sha256": "657ed9b5b1cfacd015a075a0351c13310801c1142eb0c7558dcca3c7611f8c26"
+    },
+    {
+      "id": "pokeball",
+      "sha256": "a04c61639448359c0a93734dcaf5fe6424fde717f275e20f38c49f2b845e070a"
+    },
+    {
+      "id": "superball",
+      "sha256": "4457f5447fe8955ff20428d189729d99f6333ddb51554447abcf9a1c1e8e1d8c"
+    },
+    {
+      "id": "hyperball",
+      "sha256": "658fa1f9b767ef3ae04193d8d7c0ec277410550addbff1c679f63d99352d7d5d"
+    },
+    {
+      "id": "digda",
+      "sha256": "d881242ab1dd9fe503c9d15532c45463945dfba2491544af560399c88952851d"
+    },
+    {
+      "id": "voltilamm",
+      "sha256": "14fd0a12dd1903c08569e0bc61fa75561677c58508b8459f52c28ca8cc4e5d5a"
+    },
+    {
+      "id": "evoli",
+      "sha256": "e387229168357704bb3581bfca6e74b0f590a7e81a425b4974a8368670a309ed"
+    },
+    {
+      "id": "schiggy",
+      "sha256": "6bb35380ca40d0220253ba4989e8cbf7d764b3d5fe23e16b69f1f31abeaa41ab"
+    },
+    {
+      "id": "bisasam",
+      "sha256": "51cec5966e401a4b6fa2c5acaaf58d1e57d64e623647a37ad78eb99dfc0b649e"
+    },
+    {
+      "id": "glumanda",
+      "sha256": "aab10cfcabd6c57cb436c71d0c70094193e54812a3af02eac6a35bdd9b35ca0e"
+    },
+    {
+      "id": "gengar",
+      "sha256": "9628b3ad167284b788998daa6110fb509164891db727684ba8dcec1b317066a3"
+    },
+    {
+      "id": "pummeluff",
+      "sha256": "43b087547c103b32778b6abbfcab2aaa2388adad29f7d450b4c0bc02fa474c08"
+    },
+    {
+      "id": "mauzi",
+      "sha256": "97f94e9679adedb2f06ea53ef7ae0f083eff72e91d8cefedb1815d067166d810"
+    },
+    {
+      "id": "glurak",
+      "sha256": "7122ac7e832c9ccc34d93d27484b2d510ce649fd26f6fdb8a499ad3e25ca9f36"
+    },
+    {
+      "id": "lucario",
+      "sha256": "781fff670c5ede79d2fcdb6477320946489c93f0db086cc61391a36bc2b2e5ad"
+    },
+    {
+      "id": "mewtu",
+      "sha256": "b4c2d17c07ba4f9a210bdac10367ef12b43ae5fe1768162ced45dbac7122905e"
+    },
+    {
+      "id": "mew",
+      "sha256": "85864597769e09b22934f0a0d7ab7a473535e0977b4a230129f0c612468b796f"
+    },
+    {
+      "id": "lugia",
+      "sha256": "1eb606c279b9018767b9cd3b04576d3b71a43b753887a5b8a5c5c8f76e1c7734"
+    },
+    {
+      "id": "ho-oh",
+      "sha256": "58bbeb4051bad3d5cafb77323579ca51be19bb1eb9d8ff15365c61fa8cdd1644"
+    },
+    {
+      "id": "relaxo-liegend",
+      "sha256": "9571b8826e4fbe191528a4984fa43acf2c433d88bd40cdeb978a72fd102d4d9b"
+    },
+    {
+      "id": "pikachu",
+      "sha256": "29ea98c1216d7693897075052b983aac4ba7d6806dc56749834a559972036458"
+    },
+    {
+      "id": "pikachu-kopf",
+      "sha256": "7e58475a411057eaf1ef7acbe1b61f7d031b4ad04808147a988d0554b7d78636"
+    },
+    {
+      "id": "goldener-ring",
+      "sha256": "7beb7b756eb5933e187c19a6c0132bb6aaa597f6db0e3d60438094ce310c9f7a"
+    },
+    {
+      "id": "chaos-emerald",
+      "sha256": "e49d7ef1987aaebea9df1bd609a45f34148a8eb1a833ab2e58c68616dcfdcbf3"
+    },
+    {
+      "id": "tails",
+      "sha256": "153309cb6b808dbe46456c4ccae7471b7f4ce3c976aadff9e94fdbfffc4b68ae"
+    },
+    {
+      "id": "amy-rose",
+      "sha256": "9b53e89acadc7bcc1b2b3de25b11b3fb0d9f212ca39cfe1d060fe27afd9f2aa5"
+    },
+    {
+      "id": "knuckles",
+      "sha256": "686c03672d2697d33097b5f4eaa346d35b3a7db72540ff3b140bc943fd3cf9ff"
+    },
+    {
+      "id": "sonic-kopfprofil",
+      "sha256": "2447e8770174826db19baab32145f2131b1fd20ccbf0b0d82eef35d00f79fe05"
+    },
+    {
+      "id": "dr-eggman",
+      "sha256": "420afbf7bdc610512e7650f2a15129107f05859a1b80a091efe57ad4c2461cee"
+    },
+    {
+      "id": "shadow",
+      "sha256": "2ddb29ae46aee36bdfc7cac203ebeae38ccb6d8f4cad7baf560eebe8ad616a9b"
+    },
+    {
+      "id": "super-pilz",
+      "sha256": "368aeb731a89e68a9ae9eeda601ce379bb031fe4f4afd35d8c5a810c3716759b"
+    },
+    {
+      "id": "1-up-pilz",
+      "sha256": "0f7114ee80154be5774f3734fdaaa8795371944c69f12142e8b58aeba9948167"
+    },
+    {
+      "id": "feuerblume",
+      "sha256": "82f2ce207558cf5e89e9a30c5c233eb9deb733ac237c268cb9830753894812ba"
+    },
+    {
+      "id": "muenze",
+      "sha256": "5459d52c46d16df53dd558507b4ab799d1af4173124f18a577df8738618fa39f"
+    },
+    {
+      "id": "yoshi-ei",
+      "sha256": "84105cb60d60d4e3af1db01a602a663afd931633f74648a8f4daef11ea78764a"
+    },
+    {
+      "id": "goomba",
+      "sha256": "f84a509b970941c13195e8535472f08c7a2ae4c3c44dbdd6392629b3a1ddd4e5"
+    },
+    {
+      "id": "stern-superstern",
+      "sha256": "0fc4517c3b3629c8aed245850d2f5109b9405b4029c5f9395b6625495a950054"
+    },
+    {
+      "id": "fragezeichen-block",
+      "sha256": "c948e8e79a5d078c3d4becfd1fc49ba3a4fa198f14e7312a6263a9ff1e516ffb"
+    },
+    {
+      "id": "piranha-pflanze",
+      "sha256": "074c61b18e73825b4a2643bce33c30742173c8c01d13cb214f2a6874b204b0ff"
+    },
+    {
+      "id": "luigi",
+      "sha256": "f1588d51ba8629695afa9e66315b514cedcc0bf8b5adafdc9d6bd7a25b67ddee"
+    },
+    {
+      "id": "yoshi",
+      "sha256": "1f7b500dc59f400810ed13c6dc629646da1fe88d4eff3c0271151325c9f92598"
+    },
+    {
+      "id": "toad",
+      "sha256": "2f7eb62ea4e22ba5218f9c1fba1420bdd0f6a2aa90ce2dae4a00350e20676b52"
+    },
+    {
+      "id": "prinzessin-peach",
+      "sha256": "5065bc26083dd8b2f3f85b590551f734a4e2c0f970d2ccef8f13a67cbc1c6659"
+    },
+    {
+      "id": "boo-geist",
+      "sha256": "8a5a3f100b56772c74c31e6b8d6314f50fe7a7a8178b4361126f0dc80abeed64"
+    },
+    {
+      "id": "shy-guy",
+      "sha256": "f090e5f1995703c93ef2c08ea9c2c24d048cca75a051506191b0af0ac57fc521"
+    },
+    {
+      "id": "bowser",
+      "sha256": "fae530cf8f9f8959103fe123f8535ae4b76d4403fa44e43dd8a2bbb4ac35a139"
+    },
+    {
+      "id": "donkey-kong",
+      "sha256": "c01c370f996cdd77a0bb86128f0e41c3e0353417971ce4ccf2d419b7e469824f"
+    },
+    {
+      "id": "triforce-zelda",
+      "sha256": "6cc31d92b944eb6667a10b9eac36d135f9d2cd549659181be1a61c4b92e88114"
+    },
+    {
+      "id": "rubin-zelda",
+      "sha256": "6ab41b6df4e478c2cb8fa567c9a3d6b775232d3c0e4ed751f461eb45df8afc2a"
+    },
+    {
+      "id": "herzcontainer-zelda",
+      "sha256": "00af0a88fe16ab952db7c53b582c671ea8a178ecc2f7c5d9e681c9f946018728"
+    },
+    {
+      "id": "link-8-bit",
+      "sha256": "c863fbf885d8005196db4dcdb4ffb27b5994faa6e84efd9ecace048db4a4325b"
+    },
+    {
+      "id": "korok",
+      "sha256": "3e40557502d92a0db84f9aad1f449041d9157b60ac75e1466babfd21cf887bf4"
+    },
+    {
+      "id": "kirby",
+      "sha256": "4536d2c61c1456480f41c1045ffc15ca8502a950336af3950dca48c331a38b55"
+    },
+    {
+      "id": "waddle-dee",
+      "sha256": "9ca5d0e9eea35fe9140836115dc7e90ae62c106e1704dc926f5aa3442ebbaccb"
+    },
+    {
+      "id": "game-boy",
+      "sha256": "08f8ff013289745c5289de14902a47595e6b3fe2d4fe9d3e9db34c407905d361"
+    },
+    {
+      "id": "controller",
+      "sha256": "f356a1a0774b2341abbe12369aca04f520bfd135fcc22b4f2ebda5d052d681d4"
+    },
+    {
+      "id": "splatoon-tintenfisch-silhouette",
+      "sha256": "e1754d897fb4c0d7e406b23f4f148ec83b8f6e6e97aa9656415c2ce6087311ac"
+    },
+    {
+      "id": "splatoon-inkling",
+      "sha256": "830554a4c4e5df48d54f6af09df9f5d72c09368d98df645ae93cfa082f05ba62"
+    },
+    {
+      "id": "animal-crossing-blatt-logo",
+      "sha256": "caf8fbb83b0d5a28eb2666182d984e1a83834af2bcec80e3f3e00abdd4a2c40c"
+    },
+    {
+      "id": "animal-crossing-tom-nook",
+      "sha256": "cb8106cb9a11a88abe0eab4745e8961da35e9bf90fb1252078ddee3e1241a397"
+    },
+    {
+      "id": "animal-crossing-k-k-slider",
+      "sha256": "6d93db1a95f59d348705e5e84f3e0183049d58503bbcfb5e3547516ebcf07b60"
+    },
+    {
+      "id": "mario",
+      "sha256": "ebb43c2b8a65e34be67f4f3427b0f0bbcd3ba8eb0ad8311ac2d3859ccfff61ee"
+    },
+    {
+      "id": "tnt-block",
+      "sha256": "f30d3d9e4ccb3f8b56a7f1169fac62dcf92485a467c15d1adc650ce398183606"
+    },
+    {
+      "id": "grasblock",
+      "sha256": "b0e0e5097fc3b352a537844b7d897d2b86c2ef5d0f10f7b2d0e3092d8f9fa3ff"
+    },
+    {
+      "id": "creeper-gesicht",
+      "sha256": "4142eedbff93d55d47251c45fa28fd62a135b14ad0cbc662f353bddf5fafedca"
+    },
+    {
+      "id": "diamant",
+      "sha256": "4c451a65aa804e0725353c83434977cdc3b2b5d25ba217ab3a5f0bc6daafd590"
+    },
+    {
+      "id": "schwert",
+      "sha256": "9e4bed6db01541fcdfee864057c410b1046a6fd56328479dd8fc1584696475c9"
+    },
+    {
+      "id": "diamanten-spitzhacke",
+      "sha256": "96915ca4bc1092de31c006f9fe7480fe3fd161eb6f73ab805cfae8dbe793be4a"
+    },
+    {
+      "id": "herz-lebensanzeige",
+      "sha256": "eeb1c91da6318b338999b6fcc24e849ab8d7daf40f13f612a33be6986b1c44ca"
+    },
+    {
+      "id": "mc-herz",
+      "sha256": "b55e571fbac97fdfde98bb678b1e8dfcf06762285a70b1956ab34377a031e342"
+    },
+    {
+      "id": "erfahrungs-smaragd-block",
+      "sha256": "fbc2d81e9a6f0d15450c42c1453743ad687812870c31ae19fa848c21ab1b51fa"
+    },
+    {
+      "id": "fig-schwein",
+      "sha256": "9ab19ba10b67e4f56134a312d48bec9de7f752f9640718e9c87f16a0ac16b7b8"
+    },
+    {
+      "id": "mc-kuh",
+      "sha256": "7d468a866063085ac04ff65ee6dbda0d425f250444d5f765c53ac0b09eee3849"
+    },
+    {
+      "id": "mc-huhn",
+      "sha256": "39700de4dcb48e4bee9fa7e85e7f2a77b23724f8fa2cc47e26b74e7727d60ce0"
+    },
+    {
+      "id": "mc-schaf",
+      "sha256": "31b59715b363dabd9ea992758b92eb9f56605862ac9bd077f3a7b06b63fad08b"
+    },
+    {
+      "id": "zombie-gesicht",
+      "sha256": "fd316b505b7d196ab0ef1bc42101d8654930b9b352e843bdce8d02e57db00b1b"
+    },
+    {
+      "id": "skelett-gesicht",
+      "sha256": "9e661c616920531585b6803f1fa9a8264afed7db15eb7a0575c277cfe8cb90b5"
+    },
+    {
+      "id": "steve-gesicht",
+      "sha256": "b93cfbe791b9420025c15ac3616308ff305aec340675ab2d2e16d52229fd0b7e"
+    },
+    {
+      "id": "alex-gesicht",
+      "sha256": "905f859b78585dc92d43bcf380e95917d0adef644585efc6c329182919d802de"
+    },
+    {
+      "id": "enderman",
+      "sha256": "ec7137982e6296aa13fede34ad29bdd5528463aafb19443fd8bf973fa5a21c81"
+    },
+    {
+      "id": "axolotl",
+      "sha256": "7a3a3ebf25897ee175d5ce42f049c199d3e5438f320a972b904d9134c9b53e96"
+    },
+    {
+      "id": "mc-biene",
+      "sha256": "20ae2ed0fc66524e16b77be6ca3d8d6a418553b565965157a6efb0c0945f0e93"
+    },
+    {
+      "id": "allay",
+      "sha256": "7000461e6990bb5b16b616aa088a484aabea0b09a71aadb54bd24a72847a5081"
+    },
+    {
+      "id": "wither",
+      "sha256": "adebb750469e827ea2cd485a7aa141d40ce4a87dee25fdc71864536d19145d1b"
+    },
+    {
+      "id": "enderdrache",
+      "sha256": "7d0c02d70f269d12cd81005ff684201c5a3aab2a288f3990ece6a1fbd7463043"
+    },
+    {
+      "id": "mc-stern",
+      "sha256": "252c2b39a099d3c4d6ba071444fa96b7ce95af182ba36a734198dda3ccbc398a"
+    },
+    {
+      "id": "creeper",
+      "sha256": "87ecd973ed60fb922cd79ad5dcd926067e148f5fe08629b6cb2d87e91c711d24"
+    },
+    {
+      "id": "steve",
+      "sha256": "58953b7416b5306828aca6e7ee2d02f71a4ec9927ef857846b670cd139264d68"
+    },
+    {
+      "id": "fall-guys-figur",
+      "sha256": "b896325f69575bcef022d3518a39a6f8664a6d06f21f2846723ec785d7fa0766"
+    },
+    {
+      "id": "junimo",
+      "sha256": "dabc219fa4093f2c8ec0b66e8e43bc4071dec576d91692510541e707e7c0f901"
+    },
+    {
+      "id": "stardew-huhn",
+      "sha256": "85cfb3d9cee49e0b3c2c8436976d9ff703d37cdbc8bf47aefda917c5fb6e6813"
+    },
+    {
+      "id": "pac-man",
+      "sha256": "15cbc5929f359ff72d82015f486eb42f0433f61d39703b3943f5a0f7a410b5b2"
+    },
+    {
+      "id": "blinky",
+      "sha256": "1df1a14d49d8d394dfdab988be69b40bbc956b62516a6450f8d89af53f3e57aa"
+    },
+    {
+      "id": "pinky",
+      "sha256": "108118474651ef67d845199425bff29822272f0abfe05864689813d7d5964042"
+    },
+    {
+      "id": "inky",
+      "sha256": "eace7b8b7b8e73d3aa5e327b90f5a83c2b9957e4a98c63f735006a7fc8a12725"
+    },
+    {
+      "id": "clyde",
+      "sha256": "afc7ee18609f8e29041644655caa493e925fc6292be5b275b4b5eb057fd11247"
+    },
+    {
+      "id": "pac-man-kirsche",
+      "sha256": "fcc0ff9e52508a9ede9b65555d21d130a1b7decea1e0210becdf0b47d42d22d7"
+    },
+    {
+      "id": "space-invaders-alien",
+      "sha256": "b9c57c17bfa20b5abc703cc6d6cc9dc93661dc26f5f5a9a877d13090570795f8"
+    },
+    {
+      "id": "tetris-i",
+      "sha256": "9e0647302f70e965c439fc7cde55dd5f8e98a6c2e5e032d2bdb93dd45ed05d60"
+    },
+    {
+      "id": "tetris-o",
+      "sha256": "d5c75a81963c9d0408adbb8cf1deb826640304d91f66ef8c72be52615c089916"
+    },
+    {
+      "id": "tetris-l",
+      "sha256": "2cc3e4a8966a1af3959fb73e26ea8e5d820bf2855c7830e42425341633e51b7d"
+    },
+    {
+      "id": "tetris-s",
+      "sha256": "b7b347eb29bd5f4d371cc244a36af4b66b00584563d33fbfc87051066e038392"
+    },
+    {
+      "id": "tetris-t",
+      "sha256": "e7531fc81f7605c00d3185cac69704efc1ccc0a7f371e2eb4513801ef3bb550c"
+    },
+    {
+      "id": "among-us-astronaut",
+      "sha256": "18d77f96c7d1d3ea3a9b44005c3f979b089add2216005f2f3c7ef4d6f2f81d38"
+    },
+    {
+      "id": "roblox-noob",
+      "sha256": "c57f3e211803003690b8e97a497acc0c2b7f4c76068602905e175ced307ec7fe"
+    },
+    {
+      "id": "roblox-logo-quadrat",
+      "sha256": "f5b82a2763f8c2040d781570f7695f4ec402f50d9885588de4611c5a122190f4"
+    },
+    {
+      "id": "fortnite-lama",
+      "sha256": "ca3681d732bb34fc4c9176ed01c0f9d6b8aee553f1f1855d4473dc71e75d3f37"
+    },
+    {
+      "id": "fortnite-peely-banane",
+      "sha256": "f2f30f46b0a5a8a2b554c07faa55db9a9bf22b964032f6c505f759e3dd4fb724"
+    },
+    {
+      "id": "red",
+      "sha256": "098642477414775abd261484c89beb5b421e5ade4a8479b8ba6c09de83e14bc2"
+    },
+    {
+      "id": "chuck",
+      "sha256": "844eb2b07c13e0569b5783f3c51fed0b3589e048961fada3b23206b83cf2c345"
+    },
+    {
+      "id": "bomb",
+      "sha256": "f0c4037760bdebb53eca3a72304a9b6c1cd7419b979f19190d53d7c7a7200308"
+    },
+    {
+      "id": "cuphead-tasse",
+      "sha256": "03df50a93091576802db20549ab92a7bbdbb9e1891100d41c738161fa990def2"
+    },
+    {
+      "id": "brawl-stars-logo-totenkopf",
+      "sha256": "bfd71a03b906d51340d3fae77128df57ccd0064cf3c1ed26d90c968b15e3f748"
+    },
+    {
+      "id": "spike-kaktus",
+      "sha256": "2911ed5182313eaa9bd25ce0ca06cc2336b6383b415ed3004fe6febb8960fd63"
+    },
+    {
+      "id": "leon",
+      "sha256": "e47fbbd966a32cc7ecefeff57b207154341bf3908570cc79af4f7de03e6a88a1"
+    },
+    {
+      "id": "el-primo",
+      "sha256": "9930988028643c8497da0eb209e54516960e0160fd8165c2646d5283fc233af3"
+    },
+    {
+      "id": "clash-royale-koenig",
+      "sha256": "499eebf3f8e18869a2e1ecbdf414cde070dfed55942d7aedd00ac385625dafda"
+    },
+    {
+      "id": "clash-of-clans-barbar",
+      "sha256": "d1258821dfadf9d6de97cd86ef62eb094e2a183a47615339406d519e09bd833d"
+    },
+    {
+      "id": "hay-day-huhn",
+      "sha256": "ddeac774eb028fc61f812ed4b0bfcea2fc5f02a1faf00641f476cb785fbc9e67"
+    },
+    {
+      "id": "subway-surfers-jake-kopf-mit-kappe",
+      "sha256": "ba80b89c7bb594deb4045c3f266999f7bc80dd401d5f4869fe33ca8d50fda71c"
+    },
+    {
+      "id": "crossy-road-huhn",
+      "sha256": "6d50fcdb85755af407225f98eec602da4c1cb2e47fba0643ca5cc7274ea0875c"
+    },
+    {
+      "id": "fn-wassermelone",
+      "sha256": "010a2311e0050b1801ab11162676db26f97c81012a15d796bf9302fb4372b392"
+    },
+    {
+      "id": "fn-erdbeere",
+      "sha256": "7bebc179041f28dd41fad45f21ff1ed14bf02efdd67dfde68f721c71cfe9ebbb"
+    },
+    {
+      "id": "lego-stein-24",
+      "sha256": "d4eae9b1b92f48eff93ed5f91c5e934be921761135474f5c66dce1eff8a45ab2"
+    },
+    {
+      "id": "lego-minifigur-kopf",
+      "sha256": "592ee025590c908e7d13445f47de12fae362435ac286887ed91f9b9b478c03fd"
+    },
+    {
+      "id": "barbie-logo-herz-schriftzug-b",
+      "sha256": "8e4a12db01f072239d84a163cfc42aecf5102cee88153b35e610f769d866c31c"
+    },
+    {
+      "id": "rubiks-cube-zauberwuerfel",
+      "sha256": "ab7fb7bcc99baa3c64c75ee6d3a4ca4c15fcdf9253f7cffee2df1a526745c642"
+    },
+    {
+      "id": "uno-karte-4",
+      "sha256": "cef60e83e3d3997fd6157887d779725f84ed6b44dc99355279614097585f36ac"
+    },
+    {
+      "id": "wuerfel-spielwuerfel",
+      "sha256": "8b3a4e85e78b6d2345a525567b5608f0211f8ccd9943b5fb4701a9a48841957e"
+    },
+    {
+      "id": "schachfigur-springer-silhouette",
+      "sha256": "f1f053f237e06317d8c42e8e01cc10d577c1666ec78f10dddf33718fd985edd4"
+    },
+    {
+      "id": "playmobil-figur-silhouette",
+      "sha256": "35d76f91449f2302109227512c2e9797845ea1529f246053567ed7412e09ac7d"
+    },
+    {
+      "id": "ninja-augenpartie-lloyd",
+      "sha256": "1d58ccc78853e328fb10e5b7b6b450d8e39ebfe143a02e0d8e7201693b1c37d3"
+    },
+    {
+      "id": "ninja-augenpartie-kai",
+      "sha256": "5745a1fba2cf0bc27ed7dace8904a42d467cc86ccad02d5d226e791a81981174"
+    },
+    {
+      "id": "shuriken-wurfstern",
+      "sha256": "b63cf5d06bec623cc4e21318755e8e3459d5358f0b288d1d56deb0ab6a8c8f9d"
+    },
+    {
+      "id": "goldener-drache-silhouette",
+      "sha256": "1bb60f2305422375ce5a10c882700071d927b7b837ad9bf769a4d1e0590f387d"
+    },
+    {
+      "id": "ninjago-logo-rotes-symbol",
+      "sha256": "c7814601cddd7c59b77158b5f714d6a70b72a65326cf17c97f2e7d49bb4028ac"
+    },
+    {
+      "id": "ninja-augenpartie-jay",
+      "sha256": "c545ea159d002ddd7728dd7330c751267cf349a0a13f293e60423a78a6af6f7a"
+    },
+    {
+      "id": "ninja-augenpartie-zane",
+      "sha256": "879a6c26a11f959ccf156b6736a85103a99ed124c9ce2a2ee1c25dc81454fcc7"
+    },
+    {
+      "id": "ninja-augenpartie-cole",
+      "sha256": "1a62e54faf28cdfc75ded8055e485fb180659a8fb59e8d60dd471b6b2801f6ea"
+    },
+    {
+      "id": "ninja-augenpartie-nya",
+      "sha256": "8c3b3da2a6a8bbee5e5da8fecfff082ba2e1cf6f768ec22855e91e411ba658e9"
+    },
+    {
+      "id": "cat-noir-pfote",
+      "sha256": "7fc2dbcb0857985f38a7abbe6218cfb0cc5ce2d646f5e40f42bae01d935df679"
+    },
+    {
+      "id": "miraculous-ohrring-5-punkte",
+      "sha256": "1bfc829a4dafc599cceb4aaba6ada40fedd51a0ed6906a9f47bd1b2e31b1dab6"
+    },
+    {
+      "id": "tikki-kwami",
+      "sha256": "7795827ccddf1cc1aae9907edd1a443444b9f5511ce49e8fe3246849649c8ab9"
+    },
+    {
+      "id": "plagg-kwami",
+      "sha256": "b56ec845a64338f5317c42072a109230951b5cf09190547c1f7d3dc10b2a2c79"
+    },
+    {
+      "id": "ladybug-kopf-mit-maske",
+      "sha256": "a9be97d47a4b58ff05e136af4a5b0109c4fa173866947e5655fbc8012e0f42d9"
+    },
+    {
+      "id": "cat-noir-kopf-mit-maske",
+      "sha256": "750861ce01ef230734d5ea91f7d6cd51aeaca9eba79539a1b09178889d83b2a5"
+    },
+    {
+      "id": "konoha-symbol-naruto-stirnband",
+      "sha256": "38f25f5593718bedb3a8d7ca4edd1dc259c70f7a570c78baf64743f58dccfd66"
+    },
+    {
+      "id": "akatsuki-wolke-naruto",
+      "sha256": "8d0a382796382298e23a36d3c08e269844793dba96d44b9f91d73a3f5d0b1437"
+    },
+    {
+      "id": "one-piece-jolly-roger-totenkopf-mit-strohhut",
+      "sha256": "43a9906e6f9a88798d0832aed59284bb2b353b578bb38d6c69fd5c2b24cec4ac"
+    },
+    {
+      "id": "goku",
+      "sha256": "59009272f9cc49e84672a3bf50d95ef306ddbf00016d0e821d458f8d198e38d6"
+    },
+    {
+      "id": "dragon-ball-4-sterne-kugel",
+      "sha256": "c479e18277774159c22e90c6f0142103bf8b10fc621542e51a1a84de9bbbb91f"
+    },
+    {
+      "id": "totoro-ghibli",
+      "sha256": "78152692eaa05d448c90c27f175497681c6c5d905ec37cc0d388e0e555b5448a"
+    },
+    {
+      "id": "calcifer-ghibli",
+      "sha256": "6d5700ef9af7d060cefc192fdcc61e8cd30ef99667ba00b6fa66db321b57e7bf"
+    },
+    {
+      "id": "russpuster-susuwatari-ghibli",
+      "sha256": "0f164200e67c201088a90264cca34d427b3408a216c87102c3f6e9d6928adb44"
+    },
+    {
+      "id": "chopper-one-piece",
+      "sha256": "37641230493af35d3229db561118d60971836c11dcc71befb3b0f9917b8e2033"
+    },
+    {
+      "id": "sadaharu-gintama",
+      "sha256": "68bcbb1e040153a6e79b5e0ad4078112111bb129715c205a4ef5b2ec762505f5"
+    },
+    {
+      "id": "anya-spy-x-family",
+      "sha256": "af13e6f71da84abd5087fedfffa487925cf114c94f18ba36f9d19801a0ab7b93"
+    },
+    {
+      "id": "nezuko-demon-slayer-bei-aelteren",
+      "sha256": "2f749b4356c27c96b8a56ada3f0a3c4aefc605060a3e04cdaf861b135f8a1743"
+    },
+    {
+      "id": "naruto",
+      "sha256": "cc1727d40f7378305bb0535d1cf2d1314e05aafa89d330895804e263e5193576"
+    },
+    {
+      "id": "luffy",
+      "sha256": "891e3675e113dfe86e620471be39567eac9a991c526e04a4892ffbc54c131552"
+    },
+    {
+      "id": "zoro",
+      "sha256": "46c45882a41875ac4eab320be9bf3a40af2aac2cb4784e86a372a618af724936"
+    },
+    {
+      "id": "kakashi",
+      "sha256": "6d7867fe95d3d1d23a282abfc1a7a1442e1f6b2816526f45630838bbd084e6a1"
+    },
+    {
+      "id": "spongebob-gelbes-viereck",
+      "sha256": "7d9238d9fe7ec9c6b9796425f7855334f3ed2daa73c2a61d20e75af9cea8f973"
+    },
+    {
+      "id": "patrick-star",
+      "sha256": "eb4466d7d45dfef56dda072002d777b722c0766b36c7bdbf78f1d55ef7488e0b"
+    },
+    {
+      "id": "thaddaeus",
+      "sha256": "98e423cef8c634af4ae3e61e52330b6326ffe288a9d11f6beb9f56290042014e"
+    },
+    {
+      "id": "gary-die-schnecke",
+      "sha256": "280a1dfa7f399df8074cdd3b24c63a5d70135ddc092124243248b11793e9439a"
+    },
+    {
+      "id": "bluey",
+      "sha256": "86ac67114f3f5b00d68888f47cbfd2e7715ef1966211613db2488812f781925c"
+    },
+    {
+      "id": "bingo",
+      "sha256": "916944f9f4d7ef562bde09c4e76fbf330b16b027f7750524ae4a87e2ca7bd793"
+    },
+    {
+      "id": "paw-patrol-pfoten-logo",
+      "sha256": "aa73a6749270c6c24bbffe42146071e311d19ba5fd73fa049172b2b66847eba6"
+    },
+    {
+      "id": "chase",
+      "sha256": "d8a81a0e61abbc9605a07290177e6806cc4373be76b19435d6adc935548c41d6"
+    },
+    {
+      "id": "marshall",
+      "sha256": "95a5213a1eef5f5f6d095dee804c133fbf4c6a1f71977e83a00635aa63155a39"
+    },
+    {
+      "id": "skye",
+      "sha256": "b492bac9c2cd0dcb6790085d51199a0aac0a6019b3d531aaa7fe6533fc105972"
+    },
+    {
+      "id": "peppa-wutz",
+      "sha256": "6f3d899ce06a28c52c33c5b6dea5655822d26961784341e66c2efda55ad91a34"
+    },
+    {
+      "id": "gumball",
+      "sha256": "db659f95b45c1eebfd486e226a55f406e6f5ea191240b2d33fa955131178a342"
+    },
+    {
+      "id": "darwin",
+      "sha256": "d095ca53e3ccc4e801deb3bdbe40631dab137e940718ab31cfb125b6aa93f112"
+    },
+    {
+      "id": "grizz",
+      "sha256": "3c72259e6065c3707ba4da38707d46641cc1608350d6835c7bb0b597e27a2b92"
+    },
+    {
+      "id": "we-bare-panda",
+      "sha256": "a57dde8ecb9315f280f6654f753c3b5563027e1155e32636a2e8bdea58f83e6f"
+    },
+    {
+      "id": "ice-bear",
+      "sha256": "4c56d30c3f061c4bc92af9225c502a4f70b239715aa6bce412739b096fa8cac5"
+    },
+    {
+      "id": "finn",
+      "sha256": "e8c24143cd4c1036a928d9d06836c651f7701ca9e606f298f38d2b9e6b90a806"
+    },
+    {
+      "id": "jake",
+      "sha256": "7c1b8068be2c022599961bfeb98acf3bf678232db908c095c2aebda84e4f9776"
+    },
+    {
+      "id": "star-butterfly-herz-wangen",
+      "sha256": "daea5111cae42cf8f8fd6cbff76b128a3f961eafbc0fa94e290a698fab8b8e1f"
+    },
+    {
+      "id": "gravity-falls-dipper-muetze-tannenbaum",
+      "sha256": "11de7cf0c4f4b3b8202805411695ec3f48cd3f2518ca11c5db886c7ec1e6096d"
+    },
+    {
+      "id": "teletubbies-sonne",
+      "sha256": "0534bd1280dda6a3c8556a4a02ce42a7af3a71cb25b9ee102d9d364a820580c1"
+    },
+    {
+      "id": "po",
+      "sha256": "56a042d508d9672e8c05fba96079c59efb51d90f08bf01e7f26e7ecb5991ce0f"
+    },
+    {
+      "id": "sendung-maus",
+      "sha256": "198a0d4ec7445b4f1cfc0af7664e3a3748b5d6bf94a7ea7a0901ac948df60160"
+    },
+    {
+      "id": "sendung-elefant",
+      "sha256": "c3107792d30577b871070eafd7744460e49b573bb41ffc667f8062573d26babf"
+    },
+    {
+      "id": "globi",
+      "sha256": "f78a62e311ac23c252519e93792132c504f86b8b84bb18b0e26fb61bdc5b7ddd"
+    },
+    {
+      "id": "pingu",
+      "sha256": "7b828cea4000b37c53b11ffc1b17c27e298f63632134ffb437305042349800f4"
+    },
+    {
+      "id": "einaeugiger-minion-stuart",
+      "sha256": "6afa81640e15fc3c19882e820281c83cf455796f1ae7e53f7f733c6348ca3241"
+    },
+    {
+      "id": "zweiaeugiger-minion-kevin-bob",
+      "sha256": "0a2f77a448a2c1724bb11e3187069bdf6cf209635de2b0b363d842b5c842602a"
+    },
+    {
+      "id": "boeser-lila-minion",
+      "sha256": "458e50102fe2b02ecc25b063433dab575918847b26e1640dc7be52894e94ee32"
+    },
+    {
+      "id": "minion-auge-brille-allein",
+      "sha256": "ec66c07716e811bd2b073a0f0e3f3b556b78569b4e694f70f9d5f9b0def86a83"
+    },
+    {
+      "id": "gru-silhouette-mit-schal",
+      "sha256": "c040c7d1f2a5470622a61e9fd2486dfad92af03dbc3d5a7bb10bc4e93f5f697b"
+    },
+    {
+      "id": "erinnerungskugel",
+      "sha256": "f16940fb5d4ab01b49e275eb41691628ae1e2a1b5b42569cfb86034362bbdf5f"
+    },
+    {
+      "id": "wut-rotes-viereck",
+      "sha256": "fe3916f22553c7a20168d1f07039201d94bb58625cd03ad72dce9816383153ce"
+    },
+    {
+      "id": "kummer",
+      "sha256": "3d44e6eaed1dda7ca483878f091a9266599c02dd3bae9d55fc2f03bd751cca0e"
+    },
+    {
+      "id": "ekel",
+      "sha256": "80edd477bf82eb0998869d0e581df9fdc8f7b3380c86d999ca4321785f465f74"
+    },
+    {
+      "id": "angst",
+      "sha256": "a5ce6c3d788a0ba333a4b5fbf77082d1f553e35edff21908af0c840289263199"
+    },
+    {
+      "id": "zweifel-inside-out-2",
+      "sha256": "112475ac07d22b5d7dd24d7a0ee8198785192d904faec5378ac0a0370d868a6b"
+    },
+    {
+      "id": "bing-bong",
+      "sha256": "c8a61f324bfd7b04479a6c86b4752c6bf3e9be27d4a7612b95600f5db7e7b7c7"
+    },
+    {
+      "id": "freude-silhouette",
+      "sha256": "233c6fc00ba7f6ec5b955299584dfff5782fa5dcfef6df68f689650d1ccce612"
+    },
+    {
+      "id": "hello-kitty",
+      "sha256": "f61a158a01d326372c8767ae7e58d5fef807589d304f495cbe80d83dc3b0b760"
+    },
+    {
+      "id": "kuromi",
+      "sha256": "e15c51b1198ad4ce0a7bc4130016253d07703ef0833f3d6376a2f34ec61af298"
+    },
+    {
+      "id": "badtz-maru-pinguin",
+      "sha256": "aa975d991897ff9f84dd5fefbb927353a62415b809256995b40207447da32638"
+    },
+    {
+      "id": "chococat",
+      "sha256": "388685075ce74fe89fc06e6e53b28792a2b253250a83f8a2d25a4268f25a9265"
+    },
+    {
+      "id": "keroppi-frosch",
+      "sha256": "db36d7ef2640de0d6d51a142183dbac38d930fa4764d80b4b6e69c21b4d147e4"
+    },
+    {
+      "id": "pompompurin",
+      "sha256": "0fa921d7b5089df10fbce8ba128ebbaa128b49525c061153d095af993fb937c0"
+    },
+    {
+      "id": "hangyodon",
+      "sha256": "6af7a19a1e3f87353cec65cff3a6214369ea3641aaaad787d99975da9b8e5926"
+    },
+    {
+      "id": "my-melody",
+      "sha256": "c32753270afe36114c05f05ad8a0a9ba84df4e28ada1fddd7c47947c54efc287"
+    },
+    {
+      "id": "little-twin-stars-kiki-lala",
+      "sha256": "d574d47665a4a498e283b14cfc4fea39c3f38f7479c1648e56c77f1bc0137ee7"
+    },
+    {
+      "id": "gudetama-faules-ei",
+      "sha256": "71d314feb4637d06cf2304551f97be83ed6d0d8a861535c72f381e5102a6f935"
+    },
+    {
+      "id": "pochacco",
+      "sha256": "a082ac56a6c1b8f3df261dfc331e761c0d30e7f38102d180125ba9b5a40516f4"
+    },
+    {
+      "id": "cinnamoroll",
+      "sha256": "a36e461c8d6ead1d7ce324ddee5ae18c15e0524002a52c4af73bed7a24314b0c"
+    },
+    {
+      "id": "hello-kitty-schleife-allein",
+      "sha256": "1fd53a4731350ac55d83609a333815a032b6bc427faad65df4b35bd34c18377e"
+    },
+    {
+      "id": "stitch-kopf",
+      "sha256": "462f4d287ff1daaa468c0a5ed2cac7f34daf9bbc97dc88c6c2645bf95cd46644"
+    },
+    {
+      "id": "angel-rosa-gegenstueck",
+      "sha256": "81b891460134f87f354c86e1700df0f57f7f6390e5fbf600ef1f44e527a83d7e"
+    },
+    {
+      "id": "squishmallow-cam-katze",
+      "sha256": "869c504b7c804abf58835c233919375ed024916c143728f27140d75529c2cd5b"
+    },
+    {
+      "id": "squishmallow-archie-axolotl",
+      "sha256": "667e59f3b85bf4a7954ffec1df8baf76e20e520fc20e59f1a5c26a7b815bdf21"
+    },
+    {
+      "id": "squishmallow-winston-eule-beliebige",
+      "sha256": "255f500600e9bc752e80bcb755095309fa87f77f9051874570da5928efcf2eb3"
+    },
+    {
+      "id": "capybara-trendtier",
+      "sha256": "b16bef9864cebb536e65e2e37dea34e357b6c97cb1f24504b37f3a54bf58477c"
+    },
+    {
+      "id": "axolotl-allgemein",
+      "sha256": "4439b19907d92d541f86fd3b8ddcb5bb2c08cd1995872d4370deaf34bdb79e3e"
+    },
+    {
+      "id": "melting-smiley",
+      "sha256": "bc2120074062e1756951755811870eb04e55e02e710d9e60d189197576ad8d2e"
+    },
+    {
+      "id": "flammenherz",
+      "sha256": "2bfaec1e65f083ad34d749cb6eefcd14d018b95fb404c4a6571771848de38b50"
+    },
+    {
+      "id": "boba-tee-bubble-tea",
+      "sha256": "92668ec5d1f04a59f9d9867f73be6753a56b486d296b60a534b01387146a7867"
+    },
+    {
+      "id": "mochis-dango-spiess",
+      "sha256": "e8dd3f6b9fec5e5a79f8ee89ae1b364b03a5ede734bd2709795fa170a957f8e0"
+    },
+    {
+      "id": "regenbogenherz",
+      "sha256": "3ebd4b5e097843c3a41b095dbdb65e684f15221c85fc241a6880a869f406ce2d"
+    },
+    {
+      "id": "frosch-mit-pilzhut-cottagecore",
+      "sha256": "96a751581c5d63543f1a3851fe134c76b0bcc33f0aa10fbc68cef88f09b75657"
+    },
+    {
+      "id": "erdbeerkuh-strawberry-cow",
+      "sha256": "06b4b3ff8745ee5473dcbea1df978696a2623ef30e4109b01df2b2433a5a1f9b"
+    },
+    {
+      "id": "labubu-trend-2025-26",
+      "sha256": "85079ceb9ca19bc93b1c7c060e7c2797986ad2f59047127c8d4118b4f021c816"
+    },
+    {
+      "id": "pusheen-katze",
+      "sha256": "7a94327cd64eaa8a7c54360678a7cf028b1095c4f07c580113fc29d2158e11bd"
+    },
+    {
+      "id": "tamagotchi-ei-form",
+      "sha256": "56e75888b0c346936db7be28eb0a3ee1a8411662779864c7abb13ba1b23dae1e"
+    },
+    {
+      "id": "batman-logo",
+      "sha256": "6fef58e63e12f0ec8b6adc9d5516b9c357c1327d0b5c5bea8a16aeeb73661262"
+    },
+    {
+      "id": "superman-s",
+      "sha256": "85dfe3e5b6cc524a163d3cab2ecfaf857d3479c5c67069766376f754ee41f789"
+    },
+    {
+      "id": "captain-america-schild",
+      "sha256": "31e2ca04228d5f894bb9cb85a24988d864cf39166c9736ba1c1918cafab8b900"
+    },
+    {
+      "id": "flash-blitz",
+      "sha256": "284d4c280752fe12d22b0ef4ccf1160b0182a4c744e9163e0791d6234ef1c2c0"
+    },
+    {
+      "id": "wonder-woman-logo",
+      "sha256": "d87620b407ff233b598e798c3313d4cfdf62332406e0c0695705e5cb8acde874"
+    },
+    {
+      "id": "spider-man-maske",
+      "sha256": "72724c33bf4d019fea54527178b5ea950842ef25727f75350ae0a8af9e120ed5"
+    },
+    {
+      "id": "miles-morales-maske",
+      "sha256": "568ac0cacd40c4101b5eb88444a235c88d8d0a22e1fa03af32dc9b6a1d7166ad"
+    },
+    {
+      "id": "spider-gwen-maske",
+      "sha256": "3a303e8349863a6a15aa68cf768f1aeea9517b787f6124c1c8eb26acce2fcdbd"
+    },
+    {
+      "id": "iron-man-maske",
+      "sha256": "4dcc7caa0186c10cd389e20ee40ea0bc049b24e7c50799119f84967ff2990971"
+    },
+    {
+      "id": "deadpool-maske-bei-aelteren",
+      "sha256": "2b4679ae73c611f11f56885fed7066cb9e7a476662ebfc7daf0f5698d8fc1107"
+    },
+    {
+      "id": "baby-groot",
+      "sha256": "58f60efe3d9a74ac1d1623675bcf90b8cdc5c6d99b2bc9cfc38519d67c6aa9ba"
+    },
+    {
+      "id": "hulk-faust",
+      "sha256": "cbc45355f95d4eb65f6d2d2db57c97db100cb577e0b0522672c051553d40b83a"
+    },
+    {
+      "id": "thor-hammer-mjoelnir",
+      "sha256": "d70a91cd8f57301a22ca1c5de3677c0cff8cff95a7cdff71444d17669df9d350"
+    },
+    {
+      "id": "rebellen-symbol",
+      "sha256": "f5582373c8dbb3fa6207f5eaaa86fca2162ac2a34b957c285d39ab7941f7efdc"
+    },
+    {
+      "id": "imperium-symbol",
+      "sha256": "ae1a5941b61d57e04a0783aa9a133f1d64ce0186c6f487274c46184db9297117"
+    },
+    {
+      "id": "lichtschwert",
+      "sha256": "62a5f79b05eb20bb5055808ebeb2948f969cb008a226de54b8a4c6f19dc67d2d"
+    },
+    {
+      "id": "stormtrooper-helm",
+      "sha256": "65edd40a0af5eca35590293b62c52bdb337d66796f6065addd664b4cbcb526e3"
+    },
+    {
+      "id": "darth-vader-helm",
+      "sha256": "a2b53fc5f093e547ceff2f9f02fb769fa67407d715e2e07605bb67bf8439a7fa"
+    },
+    {
+      "id": "bb-8",
+      "sha256": "de9a4a3d5ede4051c74251f79a555a94ac919b95dde34ac80098ac1b868b7e86"
+    },
+    {
+      "id": "yoda-klassisch",
+      "sha256": "30281cedf037ad17fe4eba7af6c92c37d5bc0df83e59ae478716612618e35e6e"
+    },
+    {
+      "id": "chewbacca",
+      "sha256": "529e73532845db55c44eab0235de78454bb681207514a3b30ab166ae143724aa"
+    },
+    {
+      "id": "todesstern",
+      "sha256": "ccdd5ce45324fb75f4fd4057e99e63f317ec4e378262e322c8121b6f001d184b"
+    },
+    {
+      "id": "grogu-baby-yoda",
+      "sha256": "3d03d2dcc2f070b4cee080650aed671b2cabc45b82804ec366558537dced2b9a"
+    },
+    {
+      "id": "r2-d2",
+      "sha256": "963df973a3bb65b9aa095fbabfebc9e7710b4f2e2551afa56ed4773790eb641d"
+    },
+    {
+      "id": "mickey-silhouette-3-kreise",
+      "sha256": "53c8859488a4349640526913e5e6b5c54667b46983d6b2d00d7dd2c8c332c668"
+    },
+    {
+      "id": "nemo-clownfisch",
+      "sha256": "d241c150526947bbf52225bad4b6f48d192f072bc30e174b91603dee86042b2a"
+    },
+    {
+      "id": "dorie",
+      "sha256": "77a8f68aa736913f6f85c76a96746848877e8396ecb3c3241729e78468674fd0"
+    },
+    {
+      "id": "olaf-frozen",
+      "sha256": "b079c6cdac4a183bb6c4e98cc882f35a3d5bc55a2911e79b9d3ec65d8027b81d"
+    },
+    {
+      "id": "elsa",
+      "sha256": "f2cbc11b8df7082972d5bc88b9e5dd0e15206a7dfdb0186222de87e1c6895d10"
+    },
+    {
+      "id": "anna",
+      "sha256": "4050aee4def6a44f0ed042db6edbf5ea4d776d7ef0acb95f360147dd01582258"
+    },
+    {
+      "id": "simba-koenig-der-loewen-kopf",
+      "sha256": "85921cbdab66af422b7a8112f765c4558168e2144347ed8c5b18b743d6dfc861"
+    },
+    {
+      "id": "lightning-mcqueen-cars-seitenansicht",
+      "sha256": "334a267236dac39b8818fe597776f636f8c52b6b3f7e4801e10fba7cb77e8eea"
+    },
+    {
+      "id": "toy-story-alien-3-augen",
+      "sha256": "93268a1fd707176d403436bc5f073847fe2e84c2e5d2f86f14a3f05b47519446"
+    },
+    {
+      "id": "buzz-lightyear-kopf",
+      "sha256": "32cb3b76c8fe6cc36ffeb39b49fd34f15f7c2116d7c0daa38ebdd043962a6dab"
+    },
+    {
+      "id": "vaiana-blume-hibiskus",
+      "sha256": "b43890a7401d86f9c13c386c0379140615ca468e6fc4c045ed16a48e74212a6b"
+    },
+    {
+      "id": "winnie-puuh-kopf",
+      "sha256": "239c4c51a91f994b36922d2397f2354bc8d8a04eaa7451af800e3eb477d3ee13"
+    },
+    {
+      "id": "minnie-silhouette-mit-schleife",
+      "sha256": "928105277e39edfddf0037c1ea4b8f7c0f1c2c6ec33f73917ff77919271e66b3"
+    },
+    {
+      "id": "encanto-kerze",
+      "sha256": "6e7de6eee3c284e7f4c1551595eb7e15ed0bc4971e05f35dc43059704f434fa8"
+    },
+    {
+      "id": "encanto-schmetterling",
+      "sha256": "5ff9f36c6761a3df780b6b95f007c7d55d17dead362a388717898861e86cce9f"
+    },
+    {
+      "id": "toy-story-woodys-sheriffstern",
+      "sha256": "4411df5340a42e2dab6797f60ef10920e80bbb3a6811e8bf5fff552cd9c3b932"
+    },
+    {
+      "id": "blitz-narbe-allein",
+      "sha256": "413077b33a7a6efa5705d86548bbc6b9b77cc766e2d452e674af13b351fc302d"
+    },
+    {
+      "id": "hogwarts-wappen-vereinfacht",
+      "sha256": "ef81c5a028340fc04281e53b7c1cbdbf74e8f6d6b9bc009ae64cc286d2b4d79d"
+    },
+    {
+      "id": "drache-ohnezahn-silhouette",
+      "sha256": "5db5d25cf520327f5650bd0d5aa1842e14fc69c05739dc4c04bf4834db3ad273"
+    },
+    {
+      "id": "harry-potter-brille-mit-blitz",
+      "sha256": "19f423cf430a09bc374aa0a1df9dea25c21582c4703cdbe4206a8daada7ecc9c"
+    },
+    {
+      "id": "goldener-schnatz",
+      "sha256": "bba24f881d95cd66c4c44298eeee734e65d475f70d0fa185db7676679702dd03"
+    },
+    {
+      "id": "shrek-kopf-mit-ohren",
+      "sha256": "498fb2ca36b1cbffe3de0c285ad8cf50ec4cbc37851e7ac72a23e0b5734daef9"
+    },
+    {
+      "id": "hedwig-eule",
+      "sha256": "b862105f6900895ecd8ca10511d2028cf1283d3ec6f672fd3bdfbbfd8ec01591"
+    },
+    {
+      "id": "sprechender-hut",
+      "sha256": "0ee47a9af5f4ef5d1a5e8c6b8899cde225120c94fe7a86e253eba21f91c192ac"
+    },
+    {
+      "id": "po-kung-fu-panda",
+      "sha256": "ce86f390041a6d3bd768889938516b40f8df3ee1889b15f6064ccb7470ab2c55"
+    },
+    {
+      "id": "marienkaefer-muster",
+      "sha256": "f14f225d7144ac31983dbfb8c46f0ee5d85a8198d5e8c965376caa1bc9f7fd22"
+    },
+    {
+      "id": "smiley",
+      "sha256": "65161403e875139376f23fe8a688ac86a580fb24da708b869616f9f74c4c7e9f"
+    },
+    {
+      "id": "schweizer-flagge",
+      "sha256": "d41b7ef2d23135eb36027a82cb1d5e020295f7e60bece0a88a31a8c70d268009"
+    },
+    {
+      "id": "fussball",
+      "sha256": "a24b1e11ee3c8263c26fa4052a6a70a3300f03e6c3fc082b66162bcdf05b49a3"
+    },
+    {
+      "id": "donut",
+      "sha256": "73352b8daffe1083ff329e838a6a32ea802279913560a0f64f883384e0507b44"
+    },
+    {
+      "id": "wassermelone-schnitz",
+      "sha256": "43fdf3868454ba828096b9091a38607f4075a98dd70071424fd0c601570014eb"
+    },
+    {
+      "id": "biene",
+      "sha256": "09ad2b011c156f72b6fb3a1a683030ca99196e3ba5266b7bab8991065e5091d2"
+    },
+    {
+      "id": "panda-kopf",
+      "sha256": "cb11bf87656b1527ef141546d43d18f672bcdc7fbbc9bced41b883947d723475"
+    },
+    {
+      "id": "edelweiss",
+      "sha256": "db5d36de40e594907c92e680aae9bd67398c17a689caa77ead8f4d87a29f6f3f"
+    },
+    {
+      "id": "fig-herz",
+      "sha256": "33bdc1df27d738d0fa5aaedc8006a8b2f5bca65b85b5ea02e1ebd5e38a5ba7fd"
+    },
+    {
+      "id": "fig-stern",
+      "sha256": "bc7211f9b5b833343f03a105f35fa9900b1443ff9cbf4000586a6de50b21cd00"
+    },
+    {
+      "id": "fig-blume",
+      "sha256": "43f3166d976df4f57e9d3176c80006cc3d5ef68e0758133ad4bdf2ccebbd76c2"
+    },
+    {
+      "id": "fig-regenbogen",
+      "sha256": "896c1c5a3eb196abeac7f99ac80032c1466139b4a017f594ceae9e3e96da6380"
+    },
+    {
+      "id": "fig-schmetterling",
+      "sha256": "a98b28663d7239ac27b53595e60225837b06100b6d8180a6bbc74a04a7751efe"
+    },
+    {
+      "id": "fig-frosch",
+      "sha256": "e78dd0824befce99ac28607b5c1b1461ff55e662cb3e086e7cf16a7a0db777f4"
+    },
+    {
+      "id": "katze-kopf",
+      "sha256": "bab50234c5a13742a0b8266e254fcb9463614712935552e2eb7ca43f912c0095"
+    },
+    {
+      "id": "hund-kopf",
+      "sha256": "15b5afbe123f1d2bf9b94708849ecc621f091307cf931435e9f06a5b12eea0fa"
+    },
+    {
+      "id": "einhorn-kopf",
+      "sha256": "6197f6a5bedf553356d8ff5cb11b37ee3f8295b3526150f314084a542f3c32bb"
+    },
+    {
+      "id": "fig-glace",
+      "sha256": "84d76472c63f32c9e4d240ed3633f712b96f2d047405a27516e20b840a85d694"
+    },
+    {
+      "id": "pizza-stueck",
+      "sha256": "29cd4974f20009d48aaf9fcf0bd595bde2822706c8b8c62517c785ba511f3be9"
+    }
+  ]
+}
