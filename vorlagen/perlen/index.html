@@ -272,7 +272,7 @@ function mini(t){
 // Technik-Bilder (eigene Zeichnungen). Ein Draht, eine Farbe: A und B sind nur die zwei Enden.
 const A='#2A6FDB',B=A;
 function perle(x,y,r=2.1,f='#E8EDF3',dr=0){return `<rect x="${-r*.68}" y="${-r}" width="${r*1.36}" height="${2*r}" rx="1" ry="1.1" transform="translate(${x} ${y})${dr?` rotate(${dr})`:''}" fill="${f}" stroke="#1c2430" stroke-width=".3"/>`}
-function technik(x,y){
+function technik(x,y,hatTeile=true){
   const L=(d,c)=>`<path d="${d}" fill="none" stroke="${c}" stroke-width=".6" stroke-linecap="round"/>`;
   const T=(tx,ty,s,nr)=>`<circle cx="${tx}" cy="${ty-1.1}" r="2.4" fill="#17997A"/><text x="${tx}" y="${ty}" font-size="3" font-weight="800" fill="#fff" text-anchor="middle">${nr}</text>`+
     s.map((z,k)=>`<text x="${tx+4}" y="${ty+k*3.6}" font-size="2.9" fill="#1c2430">${z}</text>`).join('');
@@ -289,21 +289,23 @@ function technik(x,y){
     perle(29.8,4)+perle(34.2,4)+perle(27.6,14)+perle(32,14)+perle(36.4,14)+`</g>`;
   // 3: festziehen
   const y3=y2+31;
-  o+=T(1.5,y3,['An beiden Enden gleich fest ziehen.','Reihe 2 liegt jetzt unter Reihe 1.'],3);
+  o+=T(1.5,y3,['Festziehen. Alle weiteren Reihen','genauso untereinander fädeln.'],3);
   o+=`<g transform="translate(0 ${y3+6})">`+
     L('M29.8 4C25 4 24 8.6 27 8.6H38.5C42 8.6 46 12 52 15',A)+L('M34.2 4C39 4 40 9.4 37 9.4H25.5C22 9.4 18 12 12 15',B)+
     perle(29.8,4)+perle(34.2,4)+perle(27.6,9)+perle(32,9)+perle(36.4,9)+`</g>`;
   // 4: Bein mit quer liegender Endperle
   const y4=y3+27;
-  o+=T(1.5,y4,['Bein: Perlen auf ein Ende, dann zurück','durch die Beinperlen. Die Endperle liegt','quer. Bei 3 Fussperlen: eine Schlaufe.'],4);
+  if(hatTeile){
+  o+=T(1.5,y4,['Teile: Perlen auf ein Ende, dann zurück','durch die Beinperlen. Die Endperle liegt','quer. Bei 3 Fussperlen: eine Schlaufe.'],4);
   o+=`<g transform="translate(0 ${y4+11})">`+
     L('M12 5.4H38.6C40.2 5.4 39.6 2.4 41.3 2.4V9.6C39.6 9.6 40.2 6.6 38.6 6.6H26',A)+
     perle(14,6)+perle(18.4,6)+perle(22.8,6)+perle(28.6,6,2.1,'#cfe7dc')+perle(33,6,2.1,'#cfe7dc')+perle(37.4,6,2.1,'#cfe7dc')+
     perle(41.3,6,2.1,'#fde0c8',90)+
     `<text x="31" y="12.8" font-size="2.4" fill="#5b6573" text-anchor="middle">Bein</text><text x="43.5" y="12.8" font-size="2.4" fill="#5b6573" text-anchor="middle">Endperle quer</text></g>`;
+  }
   // 5: Ende
-  const y5=y4+30;
-  o+=T(1.5,y5,['Am Schluss die Enden 3-mal verdrehen,','abknipsen und die Spitze nach innen','biegen. Fertig!'],5);
+  const y5=y4+(hatTeile?30:0);
+  o+=T(1.5,y5,['Am Schluss die Enden 3-mal verdrehen,','abknipsen und die Spitze nach innen','biegen. Fertig!'],hatTeile?5:4);
   return o+'</g>';
 }
 
@@ -410,7 +412,7 @@ function uebersichtsblatt(t,pe){
     `<text x="10" y="17" font-size="${Math.min(7.5,330/(t.name.length+12))}" font-weight="800" fill="#1c2430" font-family="Fredoka,Nunito,Arial,sans-serif">Perlentier: ${htmlText(t.name)}</text>`+
     `<text x="10" y="23.5" font-size="3.4" fill="#5b6573">Flach, eine Lage · ${n} ${pe.name} · fertig etwa ${f1(breit)} × ${f1(hoch)} cm · ${t.stufe}</text>`+
     `<line x1="10" y1="27" x2="200" y2="27" stroke="#D5DEE9" stroke-width=".4"/>`+
-    mat+`<text x="10" y="${y}" font-size="4.2" font-weight="800" fill="#1c2430">So geht's</text>`+(t.offsets?figurenTechnik(y+7,!!z.t):technik(10,y+6))+
+    mat+`<text x="10" y="${y}" font-size="4.2" font-weight="800" fill="#1c2430">So geht's</text>`+(t.offsets?figurenTechnik(y+7,!!z.t):technik(10,y+6,!!t.beine?.length))+
     kopf+start+perlen(g,sk,ox,oy,.45,false)+draehte(t,g,sk,ox,oy)+lab+legende+feld+
     `<text x="200" y="286" font-size="2.6" fill="#5b6573" text-anchor="end">Schritt für Schritt · ${t.quelle?'Vereinfachtes Figurenmuster':'Perlentier-Vorlage'}</text></svg>`;
 }

@@ -88,6 +88,7 @@ vm.runInContext(`
   if(resized.offsets[1]!==8||resized.rows[0].length!==4)throw new Error('Breite verändert seitliche Versätze falsch');
   const ball=TIERE.find(t=>t.quelle==='pokeball');
   if(zaehlen(ball).n!==36||PerlenEditor.reihenbreite(ball)!==8||Object.keys(zaehlen(ball).z).sort().join('')!=='rsw')throw new Error('Pokéball muss 36 Perlen, drei Farben und maximal 8 Perlen pro Reihe haben');
+  if(blatt(ball,PERLEN.r3).includes('Beinperlen'))throw new Error('Pokéball braucht keine Anleitung für Beine');
   for(const [k,max] of [[2,8],[3,12],[4,12],[5,14],[6,15]]){
     S.klasse=k;
     if(PerlenEditor.maximum(k)!==max)throw new Error('Klassengrenze: '+k);

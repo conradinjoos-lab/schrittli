@@ -43,7 +43,7 @@ async function main(){
   }
   fs.writeFileSync(path.join(out,'index.json'),JSON.stringify(daten.map(({t},i)=>({nr:i+1,id:t.quelle,name:t.name})),null,2));
   for(const id of ['pokeball','mario','darth-vader-helm']){
-    const svgs=vm.runInContext(`blatt(TIERE.find(t=>t.quelle===${JSON.stringify(id)}),PERLEN.r3)`,ctx).match(/<svg\b[\s\S]*?<\/svg>/g);
+    const svgs=vm.runInContext(`blatt(fuerKlasse(TIERE.find(t=>t.quelle===${JSON.stringify(id)})),PERLEN.r3)`,ctx).match(/<svg\b[\s\S]*?<\/svg>/g);
     for(let i=0;i<svgs.length;i++){fs.writeFileSync(path.join(out,`${id}-druck-${i+1}.svg`),svgs[i]);const img=await loadImage(Buffer.from(svgs[i])),c=createCanvas(840,1188);c.getContext('2d').drawImage(img,0,0,840,1188);fs.writeFileSync(path.join(out,`${id}-druck-${i+1}.png`),c.toBuffer('image/png'))}
   }
   console.log(daten.length+' direkte Bildvergleiche in '+Math.ceil(daten.length/(cols*rows))+' Blättern: '+out);
