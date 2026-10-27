@@ -29,7 +29,7 @@ for(const f of manifest.figuren){
   assert.ok(fs.existsSync(path.join(root,'vorlagen/figuren/bilder',f.id+'.webp')),'Vorschaubild: '+f.id);
   assert.ok(fs.existsSync(path.join(root,'vorlagen/perlen/bilder',f.id+'.webp')),'Tatsächliches Perlenmuster: '+f.id);
   assert.ok(fs.existsSync(path.join(root,'vorlagen/perlen/originale',f.id+'.webp')),'Originalvergleich: '+f.id);
-  assert.equal(ctx.window.PERLEN_FIGUREN.find(t=>t.quelle===f.id).version,2,'Überarbeitete Fassung: '+f.id);
+  assert.equal(ctx.window.PERLEN_FIGUREN.find(t=>t.quelle===f.id).version,3,'Kleine Fassung: '+f.id);
   const t=ctx.window.PERLEN_FIGUREN.find(t=>t.quelle===f.id);
   assert.equal(crypto.createHash('sha256').update(JSON.stringify(t)).digest('hex'),sichtpruefung.motive.find(m=>m.id===f.id)?.sha256,'Muster seit letzter Sichtprüfung verändert: '+f.id);
 }
@@ -54,10 +54,8 @@ vm.runInContext(`
       if(z.z[c]||z.n!==zaehlen(t).n)throw new Error('Farbtausch: '+t.id);
     }
     if(JSON.stringify(t)!==original)throw new Error('Original überschrieben: '+t.id);
-    if(t.version===2){
-      if(!t.offsets||t.beine.length)throw new Error('Versetztes Figurenmuster fehlt: '+t.id);
-      const g=geometrie(t);let p=0;
-      t.rows.forEach((row,i)=>{for(let j=0;j<row.length;j++){const bead=g.P[p++],expected=(t.offsets[i]+j-(t.gridWidth-1)/2)*g.q;if(Math.abs(bead.x-expected)>1e-8)throw new Error('Reihe zentriert statt versetzt: '+t.id)}});
+    if(t.version===3){
+      if(t.offsets||t.rows.some(r=>r.includes('t'))||PerlenEditor.reihenbreite(t)>15||zaehlen(t).n>200||Object.keys(zaehlen(t).z).length>6)throw new Error('Figur zu aufwendig: '+t.id);
       if(speicherKey(t)==='schrittli.perlen.'+t.id)throw new Error('Altes Muster würde neue Fassung überschreiben');
     }
   }
@@ -66,8 +64,8 @@ nodes.get('suche').value='pikachu';vm.runInContext('auswahl()',ctx);
 assert.match(nodes.get('tiere').innerHTML,/figur-pikachu/);
 assert.match(nodes.get('treffer').textContent,/2 Muster/);
 nodes.get('suche').value='gibt-es-nicht-xyz';vm.runInContext('auswahl()',ctx);
-assert.match(nodes.get('treffer').textContent,/Kein Muster/);
-nodes.get('suche').value='';nodes.get('gruppe').value='Mario & Nintendo';vm.runInContext('auswahl()',ctx);
+assert.match(nodes.get('treffer').textContent,/Kein passendes Muster/);
+nodes.get('suche').value='';nodes.get('gruppe').value='Mario & Nintendo';vm.runInContext('S.klasse=3;auswahl()',ctx);
 assert.ok(!nodes.get('tiere').innerHTML.includes('figur-pikachu'));
 assert.ok(nodes.get('tiere').innerHTML.includes('figur-mario'));
 assert.ok(!ctx.PerlenEditor.gueltig({rows:['invalid'],beine:[]},{a:[]}));
@@ -75,13 +73,41 @@ assert.ok(!ctx.PerlenEditor.gueltig({rows:['a'],beine:[{r:9,n:2,f:1,a:0,c:'a',fc
 assert.ok(!ctx.PerlenEditor.gueltig({rows:['aa'],offsets:[2],gridWidth:3},{a:[]}));
 assert.ok(!ctx.PerlenEditor.gueltig({rows:['aa'],offsets:[],gridWidth:3},{a:[]}));
 assert.ok(!ctx.PerlenEditor.gueltig({rows:['aa'],offsets:[NaN],gridWidth:3},{a:[]}));
+const gespeichert=new Map([['schrittli.app','schule'],['schrittli.schule.v1',JSON.stringify({settings:{klasse:5}})],['schrittli.perlen.klasse','3']]);
+ctx.localStorage.getItem=k=>gespeichert.get(k)||null;
+assert.equal(ctx.PerlenEditor.klasseLesen(),5,'Klasse aus der Schulversion übernehmen');
+ctx.location.search='?klasse=4';assert.equal(ctx.PerlenEditor.klasseLesen(),4,'Direktlink hat Vorrang');
+ctx.location.search='';gespeichert.set('schrittli.app','familie');assert.equal(ctx.PerlenEditor.klasseLesen(),3,'Eigene Klassenwahl merken');
+gespeichert.clear();assert.equal(ctx.PerlenEditor.klasseLesen(),2,'Ohne Angabe mit höchstens acht starten');
+assert.equal(ctx.PerlenEditor.schwierigkeit({rows:['rrrrrrr'],stufe:'schwer',grundstufe:'leicht'},2),'leicht','Beim Verkleinern die Maximal-Einstufung zurücknehmen');
 vm.runInContext(`
   const l=TIERE.find(t=>t.id==='figur-tetris-l');
-  if(l.offsets[0]!==l.offsets[l.rows.length-1]||l.rows[0].length>=l.rows.at(-1).length)throw new Error('Tetris-L hat seine linke Kante verloren');
+  if(!l.rows[0].startsWith('oo')||!l.rows[0].endsWith('ww')||!/^o+$/.test(l.rows.at(-1)))throw new Error('Tetris-L muss links stehen');
   const asym={rows:['rr','bb'],offsets:[0,4],gridWidth:6,beine:[]};
   const resized=PerlenEditor.breite(asym,12);
   if(resized.offsets[1]!==8||resized.rows[0].length!==4)throw new Error('Breite verändert seitliche Versätze falsch');
-  for(const id of ['goldener-ring','harry-potter-brille-mit-blitz','roblox-logo-quadrat'])if(!zaehlen(TIERE.find(t=>t.quelle===id)).z.t)throw new Error('Transparente Aussparung fehlt: '+id);
+  const ball=TIERE.find(t=>t.quelle==='pokeball');
+  if(zaehlen(ball).n!==36||PerlenEditor.reihenbreite(ball)!==8||Object.keys(zaehlen(ball).z).sort().join('')!=='rsw')throw new Error('Pokéball muss 36 Perlen, drei Farben und maximal 8 Perlen pro Reihe haben');
+  for(const [k,max] of [[2,8],[3,12],[4,12],[5,14],[6,15]]){
+    S.klasse=k;
+    if(PerlenEditor.maximum(k)!==max)throw new Error('Klassengrenze: '+k);
+    for(const original of TIERE){
+      const angepasst=PerlenEditor.begrenzen(PerlenEditor.breite(original,50),k);
+      if(PerlenEditor.reihenbreite(angepasst)>max||!PerlenEditor.gueltig(angepasst,FARBE))throw new Error('Überbreites gespeichertes Muster: '+original.id);
+      if(PerlenEditor.schwierigkeit(angepasst,k)!=='schwer')throw new Error('Maximalbreite muss schwer sein');
+      const klein=PerlenEditor.einpassen(PerlenEditor.breite(original,50),k);
+      if(!PerlenEditor.gueltig(klein,FARBE)||PerlenEditor.reihenbreite(klein)>max)throw new Error('Eigenes Bild: '+original.id);
+      if(passt(original)){
+        S.tier=original.id;const t=aktuellesTier();
+        if(PerlenEditor.reihenbreite(t)>max||/NaN|undefined|Infinity/.test(blatt(t,PERLEN.r3)))throw new Error('Klassenvorschau oder Druck: '+t.id);
+      }
+    }
+    S.tier='figur-mario';const t=aktuellesTier();if(PerlenEditor.reihenbreite(t)>max)throw new Error('Direktlink überschreitet Grenze');
+  }
+  S.klasse=2;S.tier='figur-pokeball';
+  eigene.set(speicherKey(ball),{...ball,rows:['r'.repeat(50)]});
+  if(PerlenEditor.reihenbreite(aktuellesTier())>8)throw new Error('Veralteter Eintrag überschreitet Klassengrenze');
+  eigene.clear();
 `,ctx);
 for(const p of ['vorlagen/perlen/index.html','vorlagen/perlentier-bild/index.html']){
   const source=read(p);
@@ -90,4 +116,4 @@ for(const p of ['vorlagen/perlen/index.html','vorlagen/perlentier-bild/index.htm
     const src=/src="([^"]+)"/.exec(m[1]);if(src&&!/^https?:/.test(src[1]))assert.ok(fs.existsSync(path.resolve(root,path.dirname(p),src[1].split('?')[0])),'Skript fehlt: '+src[1]);
   }
 }
-console.log(vm.runInContext('TIERE.length',ctx)+' Muster geprüft: Palette, Perlenzahl, Drahtgeometrie, Druck in 3 Grössen, Breitenänderung, Farbtausch, Originalschutz, Suche und Themen.');
+console.log(vm.runInContext('TIERE.length',ctx)+' Muster geprüft: Klassengrenzen 8/12/12/14/15, einfache Figuren, Druck, Breitenänderung, Farbtausch, Originalschutz, Suche und Themen.');

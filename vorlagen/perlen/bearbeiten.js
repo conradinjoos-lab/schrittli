@@ -2,6 +2,35 @@
 (() => {
   'use strict';
   const kopie=t=>JSON.parse(JSON.stringify(t));
+  const GRENZEN=Object.freeze({2:8,3:12,4:12,5:14,6:15});
+  const klasse=k=>Object.hasOwn(GRENZEN,k)?Number(k):2;
+  const maximum=k=>GRENZEN[klasse(k)];
+  const reihenbreite=t=>Math.max(...t.rows.map(r=>r.length));
+  function klasseLesen(){
+    const q=new URLSearchParams(location.search).get('klasse');
+    if(Object.hasOwn(GRENZEN,q))return Number(q);
+    try{
+      if(localStorage.getItem('schrittli.app')==='schule'){
+        const k=JSON.parse(localStorage.getItem('schrittli.schule.v1'))?.settings?.klasse;
+        if(Object.hasOwn(GRENZEN,k))return Number(k);
+      }
+      return klasse(localStorage.getItem('schrittli.perlen.klasse'));
+    }catch(e){return 2}
+  }
+  // Breite ist die Anzahl Perlen in einer Reihe, unabhängig von der Perlengrösse.
+  function schwierigkeit(t,k){return reihenbreite(t)>=maximum(k)?'schwer':t.grundstufe||t.stufe||'mittel'}
+  function begrenzen(t,k){return reihenbreite(t)>maximum(k)?breite(t,maximum(k)):kopie(t)}
+  // Für eigene Bilder: beim Verkleinern auch Höhe und angehängte Teile reduzieren.
+  function einpassen(t,k){
+    const max=maximum(k),vor=reihenbreite(t);if(vor<=max)return kopie(t);
+    const faktor=max/vor,aus=breite(t,max),hoehe=Math.max(1,Math.round(t.rows.length*faktor));
+    const indices=Array.from({length:hoehe},(_,i)=>Math.min(t.rows.length-1,Math.floor((i+.5)*t.rows.length/hoehe)));
+    aus.rows=indices.map(i=>aus.rows[i]);
+    if(aus.offsets)aus.offsets=indices.map(i=>aus.offsets[i]);
+    const belegt=new Set();
+    aus.beine=(t.beine||[]).map(b=>({...b,r:Math.max(1,Math.min(hoehe,Math.round(b.r*hoehe/t.rows.length))),n:Math.max(0,Math.round(b.n*faktor)),f:Math.max(1,Math.round(b.f*faktor))})).filter(b=>{if(belegt.has(b.r))return false;belegt.add(b.r);return true});
+    return aus;
+  }
   const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function gueltig(t,palette){
     return !!t&&Array.isArray(t.rows)&&t.rows.length>0&&t.rows.length<=100&&
@@ -62,13 +91,15 @@
   function oeffnen(a){
     if(aktiv||!gueltig(a.muster,a.palette))return;
     if(!document.getElementById('perlen-editor-stil')){const s=document.createElement('style');s.id='perlen-editor-stil';s.textContent=stil;document.head.append(s)}
-    let t=kopie(a.muster),gesperrt=false,pinsel=null,zoom=100,geo=null,refs=[],malen=false,breitBasis=null;
-    let behalten=true,seitenverhaeltnis=1;const verlauf=[],original=kopie(a.original||t),vorFokus=document.activeElement,warVollbild=!!document.fullscreenElement;
+    const schulklasse=klasse(a.klasse||klasseLesen()),limit=maximum(schulklasse);
+    let t=begrenzen(a.muster,schulklasse),gesperrt=false,pinsel=null,zoom=100,geo=null,refs=[],malen=false,breitBasis=null;
+    t.grundstufe=t.grundstufe||t.stufe||'mittel';
+    let behalten=true,seitenverhaeltnis=1;const verlauf=[],original=begrenzen(a.original||t,schulklasse),vorFokus=document.activeElement,warVollbild=!!document.fullscreenElement;
     const d=document.createElement('dialog');d.className='pe-dialog';d.setAttribute('aria-labelledby','pe-titel');aktiv=d;
     const farben=Object.entries(a.palette),optionen=farben.map(([k,[,n]])=>`<option value="${k}">${esc(n)}</option>`).join('');
     d.innerHTML=`<div class="pe-rahmen"><div class="pe-kopf"><strong id="pe-titel">${esc(t.name||'Mein Perlentier')}</strong><button type="button" data-tun="kleiner" aria-label="Ansicht verkleinern">−</button><button type="button" data-tun="groesser" aria-label="Ansicht vergrössern">+</button><button type="button" class="pe-haupt" data-tun="sperren">Sperren</button><button type="button" data-tun="fertig">Fertig</button></div>
       <div class="pe-inhalt"><div class="pe-bild" tabindex="0" aria-label="Perlenmuster"></div><fieldset class="pe-regler"><legend hidden>Perlentier anpassen</legend>
-      <label for="pe-breite">Breite: <output id="pe-mass"></output></label><input id="pe-breite" type="range" min="1" max="100" step="1"><p>Die Breite verändert die Perlenzahl pro Reihe. Die Höhe bleibt gleich.${t.offsets?' Gestrichelte Perlen sind transparent und werden mitgefädelt.':''}</p>
+      <label for="pe-breite">Perlen pro Reihe: <output id="pe-mass"></output></label><input id="pe-breite" type="range" min="1" max="${limit}" step="1" aria-describedby="pe-grenze"><p id="pe-grenze">${schulklasse}. Klasse: höchstens ${limit} Perlen pro Reihe (${limit} = schwer). Die Höhe bleibt gleich.</p>
       <h3>Einzelne Perlen färben</h3><p id="pe-pinsel">Farbe wählen, dann Perlen antippen.</p><div class="pe-farben">${farben.map(([k,[f,n]])=>`<button type="button" data-farbe="${k}" style="background:${f}" aria-label="${esc(n)}" title="${esc(n)}" aria-pressed="false"></button>`).join('')}</div>
       <h3>Eine Farbe überall tauschen</h3><label for="pe-von">Diese Farbe</label><select id="pe-von"></select><label for="pe-nach">wird zu</label><select id="pe-nach">${optionen}</select><button type="button" data-tun="tauschen">Alle Perlen tauschen</button>
       <div class="pe-aktionen"><button type="button" data-tun="zurueck">Rückgängig</button><button type="button" data-tun="original">Original</button></div></fieldset></div>
@@ -91,8 +122,8 @@
       bild.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${x} ${y} ${w} ${h}" role="img" aria-label="${esc(t.name||'Perlentier')}: ${t.rows.length} Reihen" style="width:${zoom}%">${text(x+.3,y+1,'Reihe')}${text(geo.x1+.5,y+1,'Perlen')}${text(((geo.links?.[0]||0)+(geo.rechts?.[0]||0))/2-.6,y+1.6,'Start')}${perlen}${a.draehte(t,geo,1,0,0)}${reihen}</svg>`;
       passend();
       const g=a.geometrie(t,a.perle.l/a.perle.d),cm=(g.x1-g.x0-1+g.q)*a.perle.d;
-      el('#pe-mass').textContent=`${cm.toLocaleString('de-CH',{maximumFractionDigits:1})} cm`;
-      slider.value=t.gridWidth||Math.max(...t.rows.map(r=>r.length));
+      el('#pe-mass').textContent=`${reihenbreite(t)} · ${schwierigkeit(t,schulklasse)} · ca. ${cm.toLocaleString('de-CH',{maximumFractionDigits:1})} cm`;
+      slider.value=reihenbreite(t);
       const {z,n}=a.zaehlen(t),von=el('#pe-von'),alt=von.value;
       von.innerHTML=farben.filter(([k])=>z[k]).map(([k,[,name]])=>`<option value="${k}">${esc(name)} (${z[k]})</option>`).join('');
       if(z[alt])von.value=alt;
@@ -117,7 +148,7 @@
     bild.addEventListener('pointermove',e=>{if(malen)faerben(e)});
     const fertigMalen=()=>{if(malen){malen=false;sichern()}};
     bild.addEventListener('pointerup',fertigMalen);bild.addEventListener('pointercancel',fertigMalen);
-    slider.addEventListener('input',()=>{if(gesperrt)return;if(!breitBasis){merken();breitBasis=kopie(t)}t=breite(breitBasis,+slider.value);zeichnen()});
+    slider.addEventListener('input',()=>{if(gesperrt)return;if(!breitBasis){merken();breitBasis=kopie(t)}t=breite(breitBasis,Math.min(limit,+slider.value));t.stufe=schwierigkeit(t,schulklasse);zeichnen()});
     slider.addEventListener('change',()=>{if(gesperrt)return;breitBasis=null;sichern()});
     function schliessen(){
       if(gesperrt)return;
@@ -143,5 +174,5 @@
     zeichnen();el('[data-tun=sperren]').focus();
     if(!warVollbild)document.documentElement.requestFullscreen?.().catch(()=>{});
   }
-  window.PerlenEditor={oeffnen,gueltig,breite,tauschen};
+  window.PerlenEditor={oeffnen,gueltig,breite,tauschen,GRENZEN,klasse,klasseLesen,maximum,reihenbreite,schwierigkeit,begrenzen,einpassen};
 })();

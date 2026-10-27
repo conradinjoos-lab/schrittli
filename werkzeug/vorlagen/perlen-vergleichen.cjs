@@ -28,18 +28,21 @@ async function main(){
       x.fillStyle='white';x.fillRect(ox+3,oy+3,cellW-6,cellH-6);
       x.fillStyle='#14212a';x.font='bold 14px Arial';x.fillText(`${i+1}. ${t.name}`,ox+12,oy+23,cellW-24);
       const entry=meta.figuren.find(f=>f.id===t.quelle);
-      const img=await loadImage(path.join(root,'werkzeug/vorlagen/bilder',entry.datei));
+      const img=await loadImage(path.join(root,'vorlagen/perlen/originale',entry.id+'.webp'));
       const s=Math.min(195/img.width,190/img.height);
       x.drawImage(img,ox+8+(200-img.width*s)/2,oy+34+(192-img.height*s)/2,img.width*s,img.height*s);
       const sk=Math.min(202/(g.x1-g.x0),190/(g.y1-g.y0)),dx=ox+220+(202-(g.x1-g.x0)*sk)/2-g.x0*sk,dy=oy+34+(192-(g.y1-g.y0)*sk)/2-g.y0*sk;
       for(const p of g.P){x.save();x.translate(dx+p.x*sk,dy+p.y*sk);x.rotate(p.r*Math.PI/180);x.fillStyle=palette[p.c][0];x.strokeStyle=p.c==='t'?'#b8c3cc':'#404a50';x.lineWidth=.05*sk;if(p.c==='t')x.setLineDash([.09*sk,.09*sk]);x.beginPath();x.roundRect(-g.q*sk*.47,-sk*.47,g.q*sk*.94,sk*.94,.2*sk);x.fill();x.stroke();x.restore()}
-      x.fillStyle='#63717b';x.font='11px Arial';x.fillText(t.quelle,ox+12,oy+240,cellW-24);
+      x.fillStyle='#63717b';x.font='11px Arial';x.fillText(`${t.quelle} · ${Math.max(...t.rows.map(r=>r.length))} breit · ${g.P.length} Perlen`,ox+12,oy+240,cellW-24);
+      const thumb=createCanvas(240,240),tx=thumb.getContext('2d'),ts=Math.min(218/(g.x1-g.x0),218/(g.y1-g.y0));
+      for(const p of g.P){tx.save();tx.translate(120+(p.x-(g.x0+g.x1)/2)*ts,120+(p.y-(g.y0+g.y1)/2)*ts);tx.rotate(p.r*Math.PI/180);tx.fillStyle=palette[p.c][0];tx.strokeStyle='#404a50';tx.lineWidth=.045*ts;tx.beginPath();tx.roundRect(-g.q*ts*.47,-ts*.47,g.q*ts*.94,ts*.94,.2*ts);tx.fill();tx.stroke();tx.restore()}
+      fs.writeFileSync(path.join(root,'vorlagen/perlen/bilder',t.quelle+'.webp'),thumb.toBuffer('image/webp'));
     }
     const name=`vergleich-${String(start/(cols*rows)+1).padStart(2,'0')}.png`;
     fs.writeFileSync(path.join(out,name),c.toBuffer('image/png'));
   }
   fs.writeFileSync(path.join(out,'index.json'),JSON.stringify(daten.map(({t},i)=>({nr:i+1,id:t.quelle,name:t.name})),null,2));
-  for(const id of ['mario','darth-vader-helm']){
+  for(const id of ['pokeball','mario','darth-vader-helm']){
     const svgs=vm.runInContext(`blatt(TIERE.find(t=>t.quelle===${JSON.stringify(id)}),PERLEN.r3)`,ctx).match(/<svg\b[\s\S]*?<\/svg>/g);
     for(let i=0;i<svgs.length;i++){fs.writeFileSync(path.join(out,`${id}-druck-${i+1}.svg`),svgs[i]);const img=await loadImage(Buffer.from(svgs[i])),c=createCanvas(840,1188);c.getContext('2d').drawImage(img,0,0,840,1188);fs.writeFileSync(path.join(out,`${id}-druck-${i+1}.png`),c.toBuffer('image/png'))}
   }

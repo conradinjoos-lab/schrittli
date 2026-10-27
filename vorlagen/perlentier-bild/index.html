@@ -52,7 +52,7 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .chip:hover{border-color:var(--acc)}
 .chip[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
 input[type=range]{width:100%;accent-color:var(--acc)}
-input[type=text]{width:100%;font:inherit;padding:8px 10px;border-radius:10px;border:2px solid var(--line);background:var(--surface2);color:var(--ink)}
+input[type=text],select{width:100%;min-height:44px;font:inherit;padding:8px 10px;border-radius:10px;border:2px solid var(--line);background:var(--surface2);color:var(--ink)}
 .drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
 .drucken:disabled{opacity:.45;cursor:default}
 .drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
@@ -105,6 +105,7 @@ button:focus-visible,.zone:focus-visible{outline:3px solid var(--acc);outline-of
   </section>
   <div class="seite-rechts">
     <section class="karte" aria-label="Einstellungen">
+      <div class="feld"><label class="lbl" for="klasse">Deine Klasse</label><select id="klasse" aria-describedby="klassen-grenze"></select><p class="hinweis" id="klassen-grenze"></p></div>
       <div class="feld">
         <label class="lbl" for="reihen"><span>Grösse</span><output id="reihen-zahl"></output></label>
         <input type="range" id="reihen" min="8" max="24" step="1" value="14">
@@ -138,7 +139,7 @@ button:focus-visible,.zone:focus-visible{outline:3px solid var(--acc);outline-of
   </div>
 </main>
 <div id="druck"></div>
-<script src="../perlen/bearbeiten.js"></script>
+<script src="../perlen/bearbeiten.js?v=3"></script>
 <script>
 // Perlenfarben wie bei den fertigen Perlentieren (vorlagen/perlen), dazu hautfarben
 const FARBE={g:['#3FA34D','grün'],d:['#1F6B35','dunkelgrün'],h:['#B5DE7A','hellgrün'],s:['#1C2430','schwarz'],w:['#FFFFFF','weiss'],r:['#D7352E','rot'],y:['#F4C430','gelb'],o:['#F08A24','orange'],b:['#2A6FDB','blau'],l:['#9CD0F5','hellblau'],p:['#F6AFC6','rosa'],q:['#D9487A','pink'],k:['#8A5A35','braun'],c:['#E2BC72','ocker'],n:['#A7B1BE','grau'],v:['#7B4FC9','violett'],u:['#F3C9A0','hautfarben']};
@@ -148,7 +149,7 @@ const ML=2,MD=3,Q=ML/MD,PE={name:'Rocailles 3 mm',l:.2,d:.3,draht:'0,3 mm'};
 const FARBZAHL=[3,4,6,8,0];
 const A='#2A6FDB',B=A;   // ein Draht, eine Farbe: A und B sind nur die zwei Enden
 const $=id=>document.getElementById(id);
-const S={bild:null,vor:null,reihen:14,farben:8,hg:true,t:null,notiz:null,pinsel:null,ans:null};
+const S={bild:null,vor:null,reihen:14,farben:8,hg:true,t:null,notiz:null,pinsel:null,ans:null,klasse:PerlenEditor.klasseLesen()};
 
 // Farbabstand im Lab-Raum
 const lin=v=>(v/=255)<=.04045?v/12.92:((v+.055)/1.055)**2.4;
@@ -389,7 +390,7 @@ function berechnen(){
     const oben=gy+E.t0*ch,unten=gy+(E.t1+1)*ch;ch=(unten-oben)/S.reihen;gy=oben-Math.ceil((oben-V.y0)/ch-1e-6)*ch;
   }
   if(!best){$('info').textContent='Aus diesem Bild lässt sich keine Figur machen. Bitte ein Bild mit klarem Umriss versuchen.';zeichnen();return}
-  S.t=best.t;S.notiz={weg:best.weg};
+  S.t=PerlenEditor.einpassen(best.t,S.klasse);S.notiz={weg:best.weg};
   zeichnen();
 }
 
@@ -575,7 +576,9 @@ const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&qu
 const hell=k=>PLAB[KEY.indexOf(k)][0]>60;
 
 function zeichnen(){
-  $('reihen-zahl').textContent=`${S.reihen} Reihen`;
+  $('klasse').value=String(S.klasse);
+  $('klassen-grenze').textContent=`${S.klasse}. Klasse: höchstens ${PerlenEditor.maximum(S.klasse)} Perlen pro Reihe (${PerlenEditor.maximum(S.klasse)} = schwer). Grosse Bilder werden verkleinert; feine Details können dabei verloren gehen.`;
+  $('reihen-zahl').textContent=`${S.t?.rows.length||S.reihen} Reihen`;
   document.querySelectorAll('#farbzahl .chip').forEach(k=>k.setAttribute('aria-pressed',+k.dataset.n===S.farben));
   document.querySelectorAll('#hg .chip').forEach(k=>k.setAttribute('aria-pressed',(k.dataset.h==='1')===S.hg));
   const t=S.t,da=!!t;
@@ -585,7 +588,7 @@ function zeichnen(){
   if(!da){$('plan').innerHTML='';return}
   $('plan').innerHTML=planSvg();$('plan').classList.toggle('malen',S.pinsel!==null);
   const {z,n}=zaehlen(t),g0=geometrie(t),fa=Object.keys(z).sort((a,b)=>z[b]-z[a]);
-  $('info').textContent=`${t.rows.length} Reihen, ${n} Perlen in ${fa.length} Farben, fertig etwa ${f1((g0.x1-g0.x0-1+g0.q)*PE.d)} × ${f1((g0.y1-g0.y0)*PE.d)} cm, Draht etwa ${lang(draht(t,PE))}`;
+  $('info').textContent=`Höchstens ${PerlenEditor.reihenbreite(t)} Perlen pro Reihe · ${PerlenEditor.schwierigkeit(t,S.klasse)} · ${t.rows.length} Reihen, ${n} Perlen in ${fa.length} Farben, fertig etwa ${f1((g0.x1-g0.x0-1+g0.q)*PE.d)} × ${f1((g0.y1-g0.y0)*PE.d)} cm, Draht etwa ${lang(draht(t,PE))}`;
   const pa=t.beine.map(b=>b.w),weg=S.notiz?S.notiz.weg:0;
   $('pruefung').innerHTML=`<p><b>Jede Reihe ist ein Stück ohne Lücke und hält am Draht.</b> Reihe 1 kommt auf die Drahtmitte, dann geht es Reihe für Reihe nach unten.</p>`+
     (pa.length||weg?`<ul>${pa.length?`<li>Abstehende Teile als Paare angehängt: ${pa.join(', ')}.</li>`:''}${weg?`<li>${weg===1?'Ein abstehender Teil':weg+' abstehende Teile'} ohne Gegenstück auf der anderen Seite (z. B. ein Schwanz) ${weg===1?'ist':'sind'} weggelassen.</li>`:''}</ul>`:'');
@@ -606,7 +609,7 @@ function malen(e,neu){const h=perleBei(e),t=S.t,c=S.pinsel;if(!h)return;
   if(h.perle){const [art,i,j]=h.perle.ref;
     if(art==='r'){const r=t.rows[i];if(c<0){if(!neu||r.length<2)return;t.rows[i]=r.slice(0,j)+r.slice(j+1)}else{if(r[j]===KEY[c])return;t.rows[i]=r.slice(0,j)+KEY[c]+r.slice(j+1)}}
     else{const b=t.beine[i];if(c<0){if(!neu)return;t.beine.splice(i,1)}else{if(b[j]===KEY[c])return;b[j]=KEY[c]}}}
-  else if(neu&&c>=0){const r=t.rows[h.reihe];t.rows[h.reihe]=h.seite<0?KEY[c]+r:r+KEY[c]}
+  else if(neu&&c>=0){const r=t.rows[h.reihe];if(r.length>=PerlenEditor.maximum(S.klasse)){$('info').textContent=`Die Grenze für die ${S.klasse}. Klasse ist erreicht: ${PerlenEditor.maximum(S.klasse)} Perlen pro Reihe.`;return}t.rows[h.reihe]=h.seite<0?KEY[c]+r:r+KEY[c]}
   else return;
   if(!plan)plan=requestAnimationFrame(()=>{plan=0;zeichnen()})}
 $('plan').addEventListener('pointerdown',e=>{if(S.pinsel===null||!S.t)return;malt=true;e.preventDefault();malen(e,true)});
@@ -616,9 +619,9 @@ const pinsel=e=>{const b=e.target.closest('[data-c]');if(!b)return;const c=+b.da
 $('farben').addEventListener('click',pinsel);$('alle').addEventListener('click',pinsel);
 
 // Bild laden: Datei, Ziehen, Einfügen, Beispiel
-// Neues Bild: Grösse so wählen, dass die Figur etwa 22 Perlen breit wird (12 bis 20 Reihen)
+// Neues Bild: Breite an der Klassengrenze ausrichten; berechnen() begrenzt auch extreme Formate.
 function neuesBild(img){S.bild=img;S.pinsel=null;const V=S.vor=vorbereiten();
-  if(V.x1>=0){S.reihen=Math.max(12,Math.min(20,Math.round(22*(V.y1-V.y0+1)*Q/(V.x1-V.x0+1))));$('reihen').value=S.reihen}
+  if(V.x1>=0){S.reihen=Math.max(8,Math.min(24,Math.round(PerlenEditor.maximum(S.klasse)*(V.y1-V.y0+1)*Q/(V.x1-V.x0+1))));$('reihen').value=S.reihen}
   berechnen()}
 function laden(datei){
   if(!datei||!datei.type.startsWith('image/'))return;
@@ -648,6 +651,8 @@ $('beispiel').addEventListener('click',()=>{   // eigenes Beispiel: Marienkäfer
 });
 
 // Einstellungen
+$('klasse').innerHTML=Object.entries(PerlenEditor.GRENZEN).map(([k,max])=>`<option value="${k}">${k}. Klasse · bis ${max} Perlen pro Reihe</option>`).join('');
+$('klasse').addEventListener('change',()=>{S.klasse=PerlenEditor.klasse($('klasse').value);try{localStorage.setItem('schrittli.perlen.klasse',S.klasse);const q=new URLSearchParams(location.search);q.set('klasse',S.klasse);history.replaceState(null,'','?'+q)}catch(e){}if(S.t)S.t=PerlenEditor.einpassen(S.t,S.klasse);zeichnen()});
 $('farbzahl').innerHTML=FARBZAHL.map(n=>`<button type="button" class="chip" data-n="${n}">${n||'alle'}</button>`).join('');
 $('hg').innerHTML=`<button type="button" class="chip" data-h="1">weglassen</button><button type="button" class="chip" data-h="0">behalten</button>`;
 $('farbzahl').addEventListener('click',e=>{const k=e.target.closest('.chip');if(!k)return;S.farben=+k.dataset.n;berechnen();zeichnen()});
@@ -658,7 +663,7 @@ function drucken(){if(S.t)$('druck').innerHTML=blatt()}
 addEventListener('beforeprint',drucken);
 $('drucken').addEventListener('click',()=>{drucken();window.print()});
 $('anpassen').addEventListener('click',()=>{if(!S.t)return;PerlenEditor.oeffnen({
-  muster:{...S.t,name:$('titel').value||'Mein Tier'},palette:FARBE,perle:PE,geometrie,draehte,zaehlen,lokal:false,
+  muster:{...S.t,name:$('titel').value||'Mein Tier'},klasse:S.klasse,palette:FARBE,perle:PE,geometrie,draehte,zaehlen,lokal:false,
   speichern:t=>{S.t={rows:t.rows,beine:t.beine||[]};S.pinsel=null;zeichnen();return true;}
 })});
 zeichnen();
