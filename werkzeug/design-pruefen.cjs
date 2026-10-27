@@ -171,7 +171,12 @@ async function checkDiscoveryPaths() {
     for(const grade of school?[1,2,3,4,5,6]:[0]) {
       rt.run(`S.settings.klasse=${grade};S.settings.raum='werk';view={name:'home',params:{}};render();`);
       const home=rt.app.innerHTML;
-      assert(home.indexOf('id="verfahren"')<home.indexOf('id="grundlagen"'),'Procedures must precede beginner entry');
+      const positions=['zeit','verfahren','jahreszeiten','mehr'].map(id=>home.indexOf('id="'+id+'"'));
+      assert(positions.every((p,i)=>p>=0&&(!i||p>positions[i-1])),'Home order must be time, techniques, seasons, then the rest');
+      assert(home.indexOf('data-act="sammlung"')>positions[3],'Paper planes must stay in the final section');
+      assert(home.indexOf('id="grundlagen"')>positions[3],'Beginner entry belongs to the remaining offers');
+      assert.equal((home.match(/data-act="jahreszeit"/g)||[]).length,4,'Four season tiles must be visible');
+      localAssets(home,school,'Home with seasons');
       assert(!home.includes('v3-projects'),'Home must not begin with a mixed project feed');
       const areas=rt.run("S.areas.filter(a=>a.kind!=='spass'&&videosIn(a.id).length).map(a=>a.id)");
       for(const id of areas)assert(home.includes(`data-act="area" data-id="${id}"`),`Old room selection hides ${id}`);
@@ -186,6 +191,19 @@ async function checkDiscoveryPaths() {
         assert(ids.length,'Beginner path has no lessons');
         for(const id of ids)assert(rt.run(`videoOf(${JSON.stringify(id)}).grundtechnik`),'Beginner path includes a finished project');
         click(rt,'back');assert.equal(rt.run('view.name'),'grundlagen');
+      }
+      for(const season of rt.run('JAHRESZEITEN.map(j=>j.id)')) {
+        rt.run("go('home')");click(rt,'jahreszeit',{id:season});
+        assert.equal(rt.run('view.params.jahreszeit'),season);
+        let ids=[...rendered(rt).matchAll(/data-act="video" data-id="([^"]+)"/g)].map(m=>m[1]);
+        let expected=rt.run("discoverVideos('').filter(v=>inJahreszeit(v,"+JSON.stringify(season)+")).map(v=>v.id)");
+        assert.deepEqual([...ids].sort(),Array.from(expected).sort(),'Season results must respect project assignment and grade');
+        localAssets(rendered(rt),school,'Season catalogue');
+        rt.app.onchange({target:{id:'ideen-zeit',value:'10'}});
+        ids=[...rendered(rt).matchAll(/data-act="video" data-id="([^"]+)"/g)].map(m=>m[1]);
+        expected=rt.run("discoverVideos('').filter(v=>inJahreszeit(v,"+JSON.stringify(season)+")&&zeitPasst(v,'10')).map(v=>v.id)");
+        assert.deepEqual([...ids].sort(),Array.from(expected).sort(),'Season and work-time filters must combine');
+        click(rt,'reset');assert.equal(rt.run('view.params.jahreszeit'),'');
       }
       for(const topic of ['',...rt.run('THEMENFELDER.map(f=>f.id)')])for(const time of ['','5','10','15','offen']) {
         rt.run(`view={name:'entdecken',params:{thema:${JSON.stringify(topic)},zeit:${JSON.stringify(time)},sort:'zeit',kind:'projekte'}};render();`);
@@ -209,7 +227,7 @@ async function checkDiscoveryPaths() {
     rt.run("LP21=null;view={name:'home',params:{}};render();");
     assert(rt.app.innerHTML.includes('id="verfahren"'),'Missing curriculum data must not break the overview');
   }
-  reports.push(`Discovery: ${combinations} class/topic/time combinations; procedure-first home, all rooms, beginner route, unknown durations and absent curriculum data checked.`);
+  reports.push(`Discovery: ${combinations} class/topic/time combinations; time-first home, four seasons, all rooms, beginner route, unknown durations and absent curriculum data checked.`);
 }
 
 function checkVideoData() {
