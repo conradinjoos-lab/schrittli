@@ -111,13 +111,24 @@ async function checkEdition(school) {
     }
     const areas = rt.run('S.areas.map(a=>a.id)');
     for (const area of areas) {
-      rt.run(`areaSchule(document.querySelector('#app'),areaOf(${JSON.stringify(area)}));`);
+      rt.run(`view.params={};areaSchule(document.querySelector('#app'),areaOf(${JSON.stringify(area)}));`);
       const html = rendered(rt);
       localAssets(html, school, `${name} ${area}`);
       const expected = rt.run(`videosIn(${JSON.stringify(area)}).map(v=>v.id)`);
       const actual = [...html.matchAll(/<button\b[^>]*\bdata-act="video"[^>]*\bdata-id="([^"]+)"/g)].map(m => m[1]);
       for (const id of expected) assert(actual.includes(id), `${name} ${area} grade ${grade}: video omitted ${id}`);
       for (const id of actual) assert(expected.includes(id), `${name} ${area} grade ${grade}: unexpected video ${id}`);
+      const projects = [...rt.app.querySelector('#ideen-liste').innerHTML.matchAll(/data-act="video" data-id="([^"]+)"/g)].map(m => m[1]);
+      let previousLevel = 0;
+      for (const id of projects) {
+        assert(!rt.run(`videoOf(${JSON.stringify(id)}).grundtechnik`), 'Projects must not include basic lessons');
+        const level = rt.run(`sammlungNiveau(videoOf(${JSON.stringify(id)}))`);
+        assert(level >= previousLevel, `${name} ${area}: projects must stay in ascending difficulty across content groups`);
+        previousLevel = level;
+      }
+      const hasBasics = rt.run(`videosIn(${JSON.stringify(area)}).some(v=>v.grundtechnik)`);
+      assert.equal(!!rt.app.querySelector('#technik-grundlagen'), hasBasics, 'Only techniques with basics need a disclosure');
+      if (hasBasics) assert.equal(rt.app.querySelector('#technik-grundlagen').open, false, 'Basics must start collapsed');
       cards += actual.length; screens++;
     }
   }
@@ -174,23 +185,38 @@ async function checkDiscoveryPaths() {
       const positions=['zeit','verfahren','jahreszeiten','mehr'].map(id=>home.indexOf('id="'+id+'"'));
       assert(positions.every((p,i)=>p>=0&&(!i||p>positions[i-1])),'Home order must be time, techniques, seasons, then the rest');
       assert(home.indexOf('data-act="sammlung"')>positions[3],'Paper planes must stay in the final section');
-      assert(home.indexOf('id="grundlagen"')>positions[3],'Beginner entry belongs to the remaining offers');
+      assert(!/id="grundlagen"|data-act="grundlagen"|Zum ersten Mal\?/.test(home),'Basics belong inside techniques, not on the home page');
       assert.equal((home.match(/data-act="jahreszeit"/g)||[]).length,4,'Four season tiles must be visible');
       localAssets(home,school,'Home with seasons');
       assert(!home.includes('v3-projects'),'Home must not begin with a mixed project feed');
       const areas=rt.run("S.areas.filter(a=>a.kind!=='spass'&&videosIn(a.id).length).map(a=>a.id)");
       for(const id of areas)assert(home.includes(`data-act="area" data-id="${id}"`),`Old room selection hides ${id}`);
-      click(rt,'grundlagen');
-      for(const id of [...rt.app.innerHTML.matchAll(/data-act="area" data-id="([^"]+)"/g)].map(m=>m[1])) {
-        assert(rt.run(`videosIn(${JSON.stringify(id)}).some(v=>v.grundtechnik)`),'Empty beginner category');
-      }
       const learningArea=rt.run("S.areas.find(a=>videosIn(a.id).some(v=>v.grundtechnik))?.id");
       if(learningArea) {
         click(rt,'area',{id:learningArea});
-        const ids=[...rendered(rt).matchAll(/data-act="video" data-id="([^"]+)"/g)].map(m=>m[1]);
-        assert(ids.length,'Beginner path has no lessons');
-        for(const id of ids)assert(rt.run(`videoOf(${JSON.stringify(id)}).grundtechnik`),'Beginner path includes a finished project');
-        click(rt,'back');assert.equal(rt.run('view.name'),'grundlagen');
+        const disclosure=rt.app.querySelector('#technik-grundlagen');
+        assert(disclosure&&!disclosure.open,'Entering a technique must leave basics closed');
+        assert(rt.app.innerHTML.indexOf('id="technik-grundlagen"')<rt.app.innerHTML.indexOf('id="projekte-titel"'),'Basics must sit above projects');
+        const basicsHtml=rt.app.innerHTML.match(/<details\b[^>]*id="technik-grundlagen"[^>]*>([\s\S]*?)<\/details>/)?.[1]||'';
+        const ids=[...basicsHtml.matchAll(/data-act="video" data-id="([^"]+)"/g)].map(m=>m[1]);
+        const expected=rt.run(`videosIn(${JSON.stringify(learningArea)}).filter(v=>v.grundtechnik).map(v=>v.id)`);
+        assert.deepEqual(ids.sort(),Array.from(expected).sort(),'Disclosure must contain exactly the eligible basic lessons');
+        const projects=rt.app.querySelector('#ideen-liste').innerHTML;
+        disclosure.open=true;disclosure.ontoggle();
+        assert.equal(rt.run('view.params.grundlagenOffen'),true);
+        disclosure.open=false;disclosure.ontoggle();
+        assert.equal(rt.run('view.params.grundlagenOffen'),false);
+        assert.equal(rt.app.querySelector('#ideen-liste').innerHTML,projects,'Toggling basics must not hide or change projects');
+        disclosure.open=true;disclosure.ontoggle();
+        rt.run('globalThis.qaPlayerScreen=SCREENS.player;SCREENS.player=()=>{};');
+        click(rt,'video',{id:ids[0]});
+        assert.equal(rt.run('playerReturn.params.grundlagenOffen'),true,'Opening a lesson must remember the expanded basics');
+        rt.run(`SCREENS.player=qaPlayerScreen;backToIdeas(areaOf(${JSON.stringify(learningArea)}),false);`);
+        assert.equal(rt.app.querySelector('#technik-grundlagen').open,true,'Return from a lesson must restore the expanded basics');
+        click(rt,'back');assert.equal(rt.run('view.name'),'home');
+        click(rt,'area',{id:learningArea});
+        assert.equal(rt.app.querySelector('#technik-grundlagen').open,false,'A new technique visit must start collapsed');
+        click(rt,'back');
       }
       for(const season of rt.run('JAHRESZEITEN.map(j=>j.id)')) {
         rt.run("go('home')");click(rt,'jahreszeit',{id:season});
@@ -227,7 +253,7 @@ async function checkDiscoveryPaths() {
     rt.run("LP21=null;view={name:'home',params:{}};render();");
     assert(rt.app.innerHTML.includes('id="verfahren"'),'Missing curriculum data must not break the overview');
   }
-  reports.push(`Discovery: ${combinations} class/topic/time combinations; time-first home, four seasons, all rooms, beginner route, unknown durations and absent curriculum data checked.`);
+  reports.push(`Discovery: ${combinations} class/topic/time combinations; time-first home, four seasons, collapsed technique basics, lesson return, unknown durations and absent curriculum data checked.`);
 }
 
 function checkVideoData() {

@@ -45,6 +45,14 @@
 .v3-refine select{width:100%;min-height:48px;border:1px solid #CAD5CA;border-radius:13px;background:#fff;color:var(--werk-ink);padding:10px 34px 10px 13px;font:800 15px 'Nunito',sans-serif;text-transform:none}
 .v3-refine select:focus-visible{outline:3px solid #22645B;outline-offset:3px}
 .v3-worktime{display:block;font-size:13px;font-weight:700;color:var(--werk-muted);margin-top:7px;text-transform:none}
+.v3-foundations{margin:26px 0 30px;border:1px solid #CAD7C4;border-radius:23px;background:#EBEEDC;overflow:hidden}
+.v3-foundations>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:76px;padding:19px 24px;cursor:pointer;list-style:none;font:900 clamp(21px,2.5vw,27px)/1.2 'Nunito',sans-serif;color:var(--werk-ink)}
+.v3-foundations>summary::-webkit-details-marker{display:none}.v3-foundations>summary .ico{width:28px;height:28px;flex:none;transition:transform .15s}.v3-foundations[open]>summary .ico{transform:rotate(180deg)}
+.v3-foundations>summary:focus-visible{outline:3px solid var(--werk-green);outline-offset:-5px;border-radius:22px}
+.v3-foundations-list{padding:0 20px 22px}.v3-foundations .v3-lektion{background:#fff}
+.v3-projects-heading{font:900 clamp(25px,3vw,31px)/1.2 'Nunito',sans-serif;color:var(--werk-ink);margin:30px 0 16px}
+@media(max-width:479px){.v3-foundations{margin:22px 0;border-radius:21px}.v3-foundations>summary{padding:18px;min-height:72px}.v3-foundations-list{padding:0 12px 14px}}
+@media(prefers-reduced-motion:reduce){.v3-foundations>summary .ico{transition:none}}
 .v3-discover .v3-schalter{flex-wrap:wrap;justify-content:flex-start}
 .v3-discover .v3-filters{align-items:flex-start}
 /* Ein sichtbares Thema statt einer versteckten Untergruppe im Falten-Katalog. */
