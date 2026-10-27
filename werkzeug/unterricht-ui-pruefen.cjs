@@ -83,7 +83,10 @@ const root=path.resolve(__dirname,'..'),origin='https://conradinjoos-lab.github.
   await release({mode:'closed',title:'Alles geschlossen',ids:[]});await refresh(one.page);await one.page.waitForFunction(()=>view.name==='unterricht');
   await release({mode:'free',title:'Freies Entdecken',ids:[]});await refresh(one.page);await one.page.waitForFunction(()=>view.name==='home');
   await release({mode:'closed',title:'Alles geschlossen',ids:[]});await refresh(one.page);
+  await one.page.setViewportSize({width:1280,height:800});
   await one.page.goto(base+'vorlagen/');await one.page.getByRole('heading',{name:'Gleich geht’s los.'}).waitFor();
+  assert.equal(await one.page.locator('#unterricht-warten').evaluate(el=>getComputedStyle(el).display),'block','Waiting screen stays readable on wide template layout');
+  await one.page.screenshot({path:path.join(root,'output/unterricht/kinder-warten.png')});
   await release({mode:'templates',title:'Nur Kreis',ids:['kreis'],resize:false,simple:true});await refresh(one.page);await one.page.waitForFunction(()=>!document.documentElement.classList.contains('u-wartet')&&new URLSearchParams(location.search).get('form')==='kreis');
   assert.equal(await one.page.locator('#formen:visible').count(),0);assert(await one.page.locator('#b').isDisabled());
   await teacher.page.locator('#aktuell-laden').click();await teacher.page.locator('#modus').selectOption('templates');await teacher.page.locator('#kategorie').selectOption('Grundformen');

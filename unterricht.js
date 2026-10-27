@@ -84,8 +84,8 @@
  document.documentElement.classList.add('u-wartet');
  const style=document.createElement('style');style.textContent=`
  html.u-wartet body>:not(#unterricht-warten):not(script):not(style){display:none!important}
- #unterricht-warten{box-sizing:border-box;max-width:600px;margin:15vh auto;padding:32px 24px;text-align:center;background:#faf7f0;color:#183d3a;border-radius:24px;font:18px/1.5 system-ui,sans-serif}
- #unterricht-warten h1{font-size:28px}#unterricht-warten a{display:inline-block;color:#185951;padding:14px;margin:8px;font-size:16px}#unterricht-warten .u-lehrer{display:block;font-size:14px}
+ #unterricht-warten{display:block;box-sizing:border-box;max-width:600px;margin:15vh auto;padding:32px 24px;text-align:center;background:#faf7f0;color:#183d3a;border-radius:24px;font:18px/1.5 system-ui,sans-serif}
+ #unterricht-warten h1{font-size:28px;margin:0 0 16px}#unterricht-warten a{display:inline-block;color:#185951;padding:14px;margin:8px;font-size:16px}#unterricht-warten .u-lehrer{display:block;font-size:14px}
  html.u-aktiv .fm-knopf{display:none!important}
  html.u-aktiv [hidden]{display:none!important}
  @media print{html.u-wartet body>*{display:none!important}}
