@@ -92,7 +92,7 @@ const ANL_BASE=SCHULE?'../anleitungen/':'anleitungen/';
 async function loadAnleitungen(){ if(!/^https?:/.test(location.protocol)) return; try{ const r=await fetch(ANL_BASE+'anleitungen.json',{cache:'no-store'}); if(!r.ok) return; const j=await r.json();
   const neu=(j.anleitungen||[]).filter(x=>x&&typeof x.id==='string'&&typeof x.title==='string'&&Array.isArray(x.steps)&&x.steps.length).map(x=>({...x,areaId:SCHULE||areaOf(x.areaId)?x.areaId:'werken',source:{type:'bilder'},quelle:'anleitung',bildpfad:ANL_BASE+(x.ordner||x.id)+'/',thumb:x.titelbild?ANL_BASE+(x.ordner||x.id)+'/'+x.titelbild:null}));
   S.videos=S.videos.filter(v=>v.quelle!=='anleitung').concat(neu); }catch(e){} }
-let LP21=null, LP21_LADEN=null; // schule/lp21.json: LP21-TTG-Kompetenzen pro Video und Anleitung (werkzeug/lp21.py), nur bei «Für Lehrpersonen»
+let LP21=null, LP21_LADEN=null; // Vorhandene LP21-Zuordnungen für Themenfilter und Lehrpersonen.
 function loadLp21(){ if(!/^https?:/.test(location.protocol)) return Promise.resolve(); return LP21_LADEN||(LP21_LADEN=fetch(SCHULE?'lp21.json':'schule/lp21.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(j=>{ if(j&&j.zuordnung&&j.kompetenzen) LP21=j; }).catch(()=>{})); }
 function lpCode(c){ return c.replace(/^TTG\./,''); }
 // Kompetenzen eines Videos mit den Stufentexten der Zyklen, für die es gedacht ist (Klasse 1–2 = Zyklus 1, 3–6 = Zyklus 2)
@@ -316,7 +316,7 @@ SCREENS.boot=app=>{app.innerHTML=`<main class="v3"><div class="v3-loading" role=
 async function boot(){
   render();
   await blobs.open();
-  await Promise.all([loadContentFile().then(loadAnleitungen),loadMatFotos(),loadVorschau()]);
+  await Promise.all([loadContentFile().then(loadAnleitungen),loadMatFotos(),loadVorschau(),loadLp21()]);
   const school=parseSchool(); if(school){ go('school',{video:school}); return; }
   if(SCHULE){ go(S.settings.klasse?'home':'klasse'); return; }
   if(!S.profiles.length){ go('firstrun'); return; }
@@ -357,7 +357,7 @@ SCREENS.klasse=app=>{
     </div></main>`;
   wire(app,{ k:b=>{ S.settings.klasse=+b.dataset.k; save(); go('home'); }, gallery:()=>go('gallery') });
 };
-/* Variante 3a «Luftig & klar»: zuerst der Raum (wird gemerkt), dann Themen als Kacheln, im Thema die Lektionen nach Niveau */
+/* Verfahren zuerst: vier klare Wege zu passenden Anleitungen. */
 const GRAFIK=SCHULE?'../grafik/':'grafik/';
 const figur=(name,cls='')=>`<img class="figur${cls?' '+cls:''}" src="${GRAFIK}figuren/${name}.webp" alt="" onerror="this.remove()">`;  // Bibo & Fila
 const RAEUME=[{id:'hand',name:'Handarbeitszimmer',bild:'figuren/fila-faden',soft:'#FBE3DE',themen:['naehen','sticken','haekeln','stricken','weben','perlen','knuepfen','wickeln','filzen','falten','schneiden']},
@@ -378,6 +378,7 @@ const PROJECT_TITLES={
   'zw-steppstich':'Bärenbauch annähen', 'raketenstation-1':'Startrampe', 'raketenstation-2':'Rakete'
 };
 function projectTitle(v){return PROJECT_TITLES[v.id]||v.title;}
+function arbeitszeit(v){const n=Number(v.zeit);return Number.isFinite(n)&&n>0?n:null;}
 function projectCard(v){
   const pr=prSchule(v), photo=v.source.type==='bilder', th=thumbOf(v), a=areaOf(v.areaId);
   const started=!pr.done&&(pr.pos>5||pr.step>0), title=projectTitle(v);
@@ -385,7 +386,7 @@ function projectCard(v){
     <span class="th"><span class="v3-image-fallback" aria-hidden="true">${a?esc(a.emoji):'✂️'}</span>${th?`<img src="${esc(th)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`:''}
       ${photo?'<span class="v3-card-kind">Fotos</span>':''}<span class="v3-card-play" aria-hidden="true">${ico(photo?'next':'play')}</span>
       ${pr.done?`<span class="v3-card-progress fertig">${ico('check')} Geschafft</span>`:started?'<span class="v3-card-progress">Weitermachen</span>':''}</span>
-    <span class="grow"><b>${esc(title)}</b></span></button>`;
+    <span class="grow"><b>${esc(title)}</b>${arbeitszeit(v)?`<span class="v3-worktime">ca. ${arbeitszeit(v)} Min.</span>`:''}</span></button>`;
 }
 const FEATURED_PROJECTS=['wl-wickeldrache','zw-igel-holz','zw-karte-herz-weben','zw-filzseife','zw-fadenbild','zw-wollgespenst','zw-eulen-kartoffelstempel','flieger-windhover','stifteetui-ungefuettert','buchtasche'];
 function featuredProjects(vs,limit=6){
@@ -407,24 +408,51 @@ SCREENS.raum=app=>{ const akt=S.settings.raum;
   wire(app,{ r:b=>{ S.settings.raum=b.dataset.id; save(); go('home'); }, gallery:()=>go('gallery'), lehrer:()=>go('lehrer'), werkzeuge:()=>go('werkzeuge') });
 };
 function themaKachel(a){return `<button class="v3-kachel" data-act="area" data-id="${esc(a.id)}"><span class="bild" style="background:${soft(a)}">${THEMA_ID.has(a.id)?`<img src="${GRAFIK}${a.id}.webp" alt="" loading="lazy" onerror="this.remove()">`:`<span class="v3-image-fallback">${esc(a.emoji||'✂️')}</span>`}</span><b>${esc(a.name)}</b></button>`;}
+const THEMENFELDER=[
+  {id:'spiel',code:'TTG.2.B.1.1',name:'Spielen & Freizeit',emoji:'🪁'},
+  {id:'mode',code:'TTG.2.B.1.2',name:'Kleidung & Schmuck',emoji:'👕'},
+  {id:'wohnen',code:'TTG.2.B.1.3',name:'Bauen & Wohnen',emoji:'🏠'},
+  {id:'transport',code:'TTG.2.B.1.4',name:'Bewegen & Transport',emoji:'✈️'},
+  {id:'energie',code:'TTG.2.B.1.5',name:'Strom & Energie',emoji:'💡'}
+];
+function inThemenfeld(v,id){const f=THEMENFELDER.find(f=>f.id===id);return !!f&&!v.grundtechnik&&!!LP21?.zuordnung[v.id]?.includes(f.code);}
+function zeitPasst(v,zeit){const n=arbeitszeit(v);return !zeit||(zeit==='offen'?n===null:n!==null&&n<=Number(zeit));}
+function zeitOptionen(vs){return [...new Set([5,10,15,30,45,60,...vs.map(arbeitszeit).filter(Boolean)])].sort((a,b)=>a-b).filter((n,i,all)=>vs.some(v=>arbeitszeit(v)!==null&&arbeitszeit(v)<=n&&(i===0||arbeitszeit(v)>all[i-1])));}
+function uhrBild(min){return `<svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="32" fill="#F5CD65"/><circle cx="40" cy="40" r="25" fill="#FAF7F0"/><path d="M40 19V40L${40+20*Math.sin(min*Math.PI/30)} ${40-20*Math.cos(min*Math.PI/30)}" fill="none" stroke="#183D3A" stroke-width="4" stroke-linecap="round"/><circle cx="40" cy="40" r="3" fill="#183D3A"/></svg>`;}
+function themenfeldKachel(f,vs){
+  const eligible=vs.filter(v=>inThemenfeld(v,f.id)),cover=featuredProjects(eligible,1)[0]||eligible.find(v=>thumbOf(v)),th=cover&&thumbOf(cover);
+  return `<button class="v3-topic-card" data-act="themenfeld" data-id="${f.id}"><span class="bild">${th?`<img src="${esc(th)}" alt="" loading="lazy" decoding="async">`:`<span aria-hidden="true">${f.emoji}</span>`}</span><b>${f.name}</b></button>`;
+}
 function homeSchule(app,rid){
-  const room=rid??S.settings.raum??'', r=RAEUME.find(x=>x.id===room), vs=discoverVideos(r?r.id:'');
-  const themen=S.areas.filter(a=>a.kind!=='spass'&&(!r||raumOf(a.id)===r)&&videosIn(a.id).length);
-  const featured=featuredProjects(vs), last=videoOf(S.settings.zuletzt), pr=last?prSchule(last):{};
-  const continuing=last&&vs.includes(last)&&!pr.done&&(pr.pos>5||pr.step>0);
-  const family=!SCHULE, p=profile();
-  app.innerHTML=`<main class="v3${schriftNormal()?'':' caps'}"><div class="v3-in">${v3Kopf('')}
-    <section class="v3-hero v3-home-hero"><div class="v3-hero-copy"><span class="v3-eyebrow">Deine Ideenwerkstatt</span><h1>${family&&p?'Hallo '+esc(p.name)+'!':'Was machst du heute?'}</h1><p>Aussuchen. Anschauen. Selber machen.</p></div>${figur(r?r.id==='hand'?'fila-faden':'bibo-holz':'hallo')}</section>
-    <div class="v3-leiste">${roomTabs(r?r.id:'')}${continuing?`<button class="v3-weiter" data-act="video" data-id="${esc(last.id)}"><span class="bild"><img src="${esc(thumbOf(last)||'')}" alt=""></span><span><small>Weitermachen</small><b>${esc(projectTitle(last))}</b></span><span class="play">${ico('play')}</span></button>`:''}</div>
-    <div class="v3-section-head"><h2>Das kannst du machen</h2><button class="v3-pill" data-act="entdecken">Alle Ideen ${ico('next')}</button></div>
-    <div class="v3-projects">${featured.map(projectCard).join('')||`<div class="v3-leer">${figur('nachdenken')}Wähle unten ein Thema.</div>`}</div>
-    <div class="v3-section-head"><h2>Was möchtest du lernen?</h2></div><div class="v3-themen">${themen.map(themaKachel).join('')}</div>
+  // Die Startübersicht zeigt alle Verfahren; ein früher gewählter Raum versteckt nichts.
+  const room=rid||'',r=RAEUME.find(x=>x.id===room),vs=discoverVideos(r?r.id:'');
+  const verfahren=S.areas.filter(a=>a.kind!=='spass'&&(!r||raumOf(a.id)===r)&&videosIn(a.id).length);
+  const basics=vs.some(v=>v.grundtechnik),projects=vs.filter(v=>!v.grundtechnik),zeiten=zeitOptionen(projects);
+  const felder=THEMENFELDER.filter(f=>projects.some(v=>inThemenfeld(v,f.id)));
+  const last=videoOf(S.settings.zuletzt),pr=last?prSchule(last):{},continuing=last&&vs.includes(last)&&!pr.done&&(pr.pos>5||pr.step>0);
+  const family=!SCHULE,p=profile();
+  const sections=[['verfahren','Verfahren'],...(basics?[['grundlagen','Grundlagen']]:[]),...(zeiten.length?[['zeit','Zeit']]:[]),...(felder.length?[['themen','Themen']]:[])];
+  app.innerHTML=`<main class="v3 v3-home${schriftNormal()?'':' caps'}"><div class="v3-in">${v3Kopf('')}
+    <div class="v3-home-title"><h1>Was möchtest du machen?</h1>${r?`<p>${esc(r.name)}</p>`:''}</div>
+    <nav class="v3-section-nav" aria-label="Wege zu deiner Anleitung">${sections.map(([id,name])=>`<button data-act="abschnitt" data-id="${id}">${name}</button>`).join('')}</nav>
+    <section class="v3-home-section" id="verfahren" aria-labelledby="verfahren-titel"><div class="v3-section-head"><h2 id="verfahren-titel" tabindex="-1">Wähle ein Verfahren</h2><button class="v3-pill" data-act="entdecken">Alle Ideen ${ico('next')}</button></div>
+      <div class="v3-themen v3-procedure-grid">${verfahren.map(themaKachel).join('')}</div></section>
+    ${continuing?`<button class="v3-weiter v3-home-continue" data-act="video" data-id="${esc(last.id)}"><span class="bild"><img src="${esc(thumbOf(last)||'')}" alt=""></span><span><small>Weitermachen</small><b>${esc(projectTitle(last))}</b></span><span class="play">${ico('play')}</span></button>`:''}
+    ${basics?`<section class="v3-home-section v3-basics-banner" id="grundlagen" aria-labelledby="grundlagen-titel"><img src="${GRAFIK}haekeln.webp" alt="" loading="lazy"><div><h2 id="grundlagen-titel" tabindex="-1">Zum ersten Mal?</h2><p>Lerne die Grundtechniken.</p><button class="v3-pill" data-act="grundlagen">Hier anfangen ${ico('next')}</button></div></section>`:''}
+    ${zeiten.length?`<section class="v3-home-section" id="zeit" aria-labelledby="zeit-titel"><div class="v3-section-head"><h2 id="zeit-titel" tabindex="-1">Wie viel Zeit hast du?</h2></div><p class="v3-section-note">Kleine Projekte · Arbeitszeit grob geschätzt</p><div class="v3-time-grid">${zeiten.map(n=>`<button class="v3-time-card" data-act="zeit" data-zeit="${n}">${uhrBild(n)}<b>Bis ${n} Min.</b></button>`).join('')}</div></section>`:''}
+    ${felder.length?`<section class="v3-home-section" id="themen" aria-labelledby="themen-titel"><div class="v3-section-head"><h2 id="themen-titel" tabindex="-1">Entdecke ein Thema</h2></div><div class="v3-topic-grid">${felder.map(f=>themenfeldKachel(f,projects)).join('')}</div></section>`:''}
     ${family&&S.settings.spass?`<div class="v3-section-head"><h2>Deine Pause</h2>${glasSterne(p.id,true)}</div><div class="v3-themen">${S.areas.filter(a=>a.kind==='spass'&&videosIn(a.id).length).map(themaKachel).join('')}</div>`:''}
     ${v3Fuss()}${family?`<div class="v3-home-links">${S.profiles.length>1?'<button class="v3-link" data-act="who">Profil wechseln</button>':''}<button class="v3-link" data-act="parent">${ico('lock')} Für Eltern</button></div>`:''}</div></main>`;
-  wire(app,{raum:b=>{S.settings.raum=b.dataset.id;save();if(view.name==='zimmer')view.params.r=b.dataset.id;render();},klassewahl:klasseWaehlen,
-    area:b=>go('area',{id:b.dataset.id}),video:b=>go('player',{videoId:b.dataset.id}),entdecken:()=>go('entdecken',{room:r?r.id:''}),
+  wire(app,{abschnitt:b=>{const h=$('#'+b.dataset.id+'-titel',app);h?.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});h?.focus({preventScroll:true});},klassewahl:klasseWaehlen,
+    area:b=>go('area',{id:b.dataset.id}),video:b=>go('player',{videoId:b.dataset.id}),entdecken:()=>go('entdecken',{room}),
+    grundlagen:()=>go('grundlagen',{room}),zeit:b=>go('entdecken',{room,zeit:b.dataset.zeit,kind:'projekte',sort:'zeit'}),themenfeld:b=>go('entdecken',{room,thema:b.dataset.id,kind:'projekte'}),
     lehrer:()=>go('lehrer'),werkzeuge:()=>go('werkzeuge'),gallery:()=>go('gallery'),parent:()=>go('parent',{tab:'videos'}),who:()=>go('profiles')});
 }
+SCREENS.grundlagen=(app,{room=''})=>{
+  const verfahren=S.areas.filter(a=>(!room||raumOf(a.id).id===room)&&videosIn(a.id).some(v=>v.grundtechnik));
+  app.innerHTML=`<main class="v3 v3-home"><div class="v3-in">${v3Kopf('<button class="v3-rund gross" data-act="back" aria-label="Zur Übersicht">'+ico('back')+'</button>', '<div class="v3-thema-titel"><small>Hier fängst du an</small><h1>Grundtechniken</h1></div>')}<p class="v3-section-note">Was möchtest du lernen?</p><div class="v3-themen v3-procedure-grid">${verfahren.map(themaKachel).join('')}</div>${v3Fuss()}</div></main>`;
+  wire(app,{back:()=>go('home'),area:b=>go('area',{id:b.dataset.id,kind:'lernen',fromBasics:true,room}),gallery:()=>go('gallery'),werkzeuge:()=>go('werkzeuge'),lehrer:()=>go('lehrer')});
+};
 SCREENS.zimmer=(app,{r})=>homeSchule(app,r);   // Familie: Handarbeit oder Werkraum aus dem Regal
 function gruppenOf(vids){ const m=new Map(); videoOrdnung(vids).forEach(v=>{ const g=v.gruppe||'Weitere Projekte'; if(!m.has(g)) m.set(g,[]); m.get(g).push(v); });   // Projektart im Thema (schule.json «gruppe»)
   const st=v=>v.grundtechnik?0:(+v.niveau||2), mitte=g=>g.reduce((s,v)=>s+st(v),0)/g.length;
@@ -437,22 +465,36 @@ function catalogueMatches(v,query,kind){
 }
 function showCatalogue(app,{area=null,room=''}={}){
   const vs=area?videosIn(area.id):discoverVideos(room);
-  let query=view.params.query||'',kind=view.params.kind||'alle';
-  app.innerHTML=`<main class="v3${schriftNormal()?'':' caps'}"><div class="v3-in">${v3Kopf('<button class="v3-rund gross" data-act="back" aria-label="Zurück">'+ico('back')+'</button>',`<div class="v3-thema-titel"><small>${area?'Deine Werkstatt':'Entdecken'}</small><h1>${area?esc(area.name):'Finde deine Idee'}</h1></div>`)}
-    <div class="v3-filters"><div class="v3-schalter" role="group" aria-label="Anleitungen filtern">${[['alle','Alles'],['projekte','Selber machen'],['lernen','Üben'],['foto','Mit Fotos']].filter(([id])=>id!=='lernen'||vs.some(v=>v.grundtechnik)).map(([id,label])=>`<button class="v3-filter${kind===id?' an':''}" data-act="filter" data-kind="${id}" aria-pressed="${kind===id}">${label}</button>`).join('')}</div>
+  let query=view.params.query||'',kind=view.params.kind||'alle',zeit=view.params.zeit||'',thema=view.params.thema||'',sort=view.params.sort||'leicht';
+  const hasBasics=vs.some(v=>v.grundtechnik),zeiten=zeitOptionen(vs);
+  if(zeit&&zeit!=='offen'&&!zeiten.includes(Number(zeit)))zeiten.push(Number(zeit));
+  const feld=THEMENFELDER.find(f=>f.id===thema);
+  app.innerHTML=`<main class="v3 v3-discover${schriftNormal()?'':' caps'}"><div class="v3-in">${v3Kopf('<button class="v3-rund gross" data-act="back" aria-label="Zur Übersicht">'+ico('back')+'</button>',`<div class="v3-thema-titel"><small>${area?'Dein Verfahren':'Entdecken'}</small><h1 id="katalog-titel">${area?esc(area.name):feld?feld.name:'Finde deine Idee'}</h1></div>`)}
+    ${area&&hasBasics?'<div class="v3-beginner" id="grundlagen-einstieg"><span>Zum ersten Mal?</span><button class="v3-pill" data-act="filter" data-kind="lernen">Grundlagen lernen '+ico('next')+'</button></div>':''}
+    <div class="v3-filters"><div class="v3-schalter" role="group" aria-label="Anleitungen filtern">${[['alle','Alles'],['projekte','Projekte'],['lernen','Grundlagen'],['foto','Mit Fotos']].filter(([id])=>id!=='lernen'||hasBasics).map(([id,label])=>`<button class="v3-filter${kind===id?' an':''}" data-act="filter" data-kind="${id}" aria-pressed="${kind===id}">${label}</button>`).join('')}</div>
     <label class="v3-search"><span aria-hidden="true">⌕</span><input type="search" id="ideen-suche" placeholder="Idee suchen" aria-label="Idee suchen" value="${esc(query)}" autocomplete="off"></label></div>
+    <div class="v3-refine">
+      <label>Zeit<select id="ideen-zeit"><option value="">Jede Dauer</option>${zeiten.sort((a,b)=>a-b).map(n=>`<option value="${n}"${zeit===String(n)?' selected':''}>Bis ca. ${n} Min.</option>`).join('')}<option value="offen"${zeit==='offen'?' selected':''}>Ohne Zeitangabe</option></select></label>
+      ${LP21?`<label>Thema<select id="ideen-thema"><option value="">Alle Themen</option>${THEMENFELDER.filter(f=>f.id===thema||vs.some(v=>inThemenfeld(v,f.id))).map(f=>`<option value="${f.id}"${thema===f.id?' selected':''}>${f.name}</option>`).join('')}</select></label>`:''}
+      <label>Reihenfolge<select id="ideen-sortierung"><option value="leicht"${sort==='leicht'?' selected':''}>Einfach zuerst</option><option value="zeit"${sort==='zeit'?' selected':''}>Kürzeste zuerst</option></select></label>
+    </div><p class="v3-section-note" id="zeit-hinweis"${zeit||sort==='zeit'?'':' hidden'}>Arbeitszeit grob geschätzt. Fehlende Angaben bleiben offen.</p>
     <p class="sr-only" id="such-status" role="status" aria-live="polite"></p><div class="v3-thema"><div class="v3-liste" id="ideen-liste"></div></div>${area?`<div class="v3-werke">${werkeHtml(area.id)}</div>`:''}${v3Fuss()}</div></main>`;
   const paint=()=>{
-    const found=vs.filter(v=>catalogueMatches(v,query,kind));
-    const groups=gruppenOf(found).sort((x,y)=>Number(x[1].every(v=>v.grundtechnik))-Number(y[1].every(v=>v.grundtechnik)));
-    $('#ideen-liste',app).innerHTML=(query.trim()?found.map(projectCard).join(''):groups.map(([name,g])=>`<h2 class="v3-niv">${esc(name)}</h2>${g.map(projectCard).join('')}`).join(''))||`<div class="v3-leer">${figur('nachdenken')}Keine Idee gefunden.<br><button class="v3-pill" data-act="reset">Alles zeigen</button></div>`;
+    const found=videoOrdnung(vs.filter(v=>catalogueMatches(v,query,kind)&&zeitPasst(v,zeit)&&(!thema||inThemenfeld(v,thema))));
+    if(sort==='zeit')found.sort((a,b)=>(arbeitszeit(a)??Infinity)-(arbeitszeit(b)??Infinity));
+    const groups=gruppenOf(found);
+    $('#ideen-liste',app).innerHTML=(query.trim()||sort==='zeit'?found.map(projectCard).join(''):groups.map(([name,g])=>`<h2 class="v3-niv">${esc(name)}</h2>${g.map(projectCard).join('')}`).join(''))||`<div class="v3-leer">${figur('nachdenken')}Keine passende Anleitung.<br><button class="v3-pill" data-act="reset">Filter zurücksetzen</button></div>`;
     $('#such-status',app).textContent=found.length+' Anleitungen gefunden';
     $$('.v3-filter',app).forEach(b=>{b.classList.toggle('an',b.dataset.kind===kind);b.setAttribute('aria-pressed',String(b.dataset.kind===kind));});
-    view.params.query=query;view.params.kind=kind;
+    const intro=$('#grundlagen-einstieg',app);if(intro)intro.hidden=kind==='lernen';
+    $('#zeit-hinweis',app).hidden=!zeit&&sort!=='zeit';
+    if(!area)$('#katalog-titel',app).textContent=THEMENFELDER.find(f=>f.id===thema)?.name||'Finde deine Idee';
+    Object.assign(view.params,{query,kind,zeit,thema,sort});
   };
   paint();fillThumbs(app);
   app.oninput=e=>{if(e.target.id==='ideen-suche'){query=e.target.value;paint();}};
-  wire(app,{back:()=>go('home'),klassewahl:klasseWaehlen,filter:b=>{kind=b.dataset.kind;paint();},reset:()=>{kind='alle';query='';$('#ideen-suche',app).value='';paint();},
+  app.onchange=e=>{if(e.target.id==='ideen-zeit')zeit=e.target.value;else if(e.target.id==='ideen-thema')thema=e.target.value;else if(e.target.id==='ideen-sortierung')sort=e.target.value;else return;paint();};
+  wire(app,{back:()=>go(view.params.fromBasics?'grundlagen':'home',{room}),klassewahl:klasseWaehlen,filter:b=>{kind=b.dataset.kind;if(kind==='lernen'){zeit='';thema='';$('#ideen-zeit',app).value='';const t=$('#ideen-thema',app);if(t)t.value='';}paint();},reset:()=>{kind='alle';query='';zeit='';thema='';sort='leicht';$('#ideen-suche',app).value='';$('#ideen-zeit',app).value='';$('#ideen-sortierung',app).value='leicht';const t=$('#ideen-thema',app);if(t)t.value='';paint();},
     andere:zeigeWerk,video:b=>{const v=videoOf(b.dataset.id);if(area?.kind==='spass')gateSpass(v,()=>go('player',{videoId:v.id}));else go('player',{videoId:v.id});},
     gallery:()=>go('gallery'),lehrer:()=>go('lehrer'),werkzeuge:()=>go('werkzeuge')});
 }

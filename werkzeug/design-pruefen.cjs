@@ -162,6 +162,56 @@ function checkPhotoAssets() {
   reports.push(`Photo instructions: ${count} image/template references valid; all registered video covers exist.`);
 }
 
+async function checkDiscoveryPaths() {
+  let combinations=0;
+  for(const school of [false,true]) {
+    const rt=runtime(school,true);
+    await rt.run('boot()');
+    if(!school)rt.run("S.profiles=[{id:'test',name:'Lina'}];S.activeProfile='test';");
+    for(const grade of school?[1,2,3,4,5,6]:[0]) {
+      rt.run(`S.settings.klasse=${grade};S.settings.raum='werk';view={name:'home',params:{}};render();`);
+      const home=rt.app.innerHTML;
+      assert(home.indexOf('id="verfahren"')<home.indexOf('id="grundlagen"'),'Procedures must precede beginner entry');
+      assert(!home.includes('v3-projects'),'Home must not begin with a mixed project feed');
+      const areas=rt.run("S.areas.filter(a=>a.kind!=='spass'&&videosIn(a.id).length).map(a=>a.id)");
+      for(const id of areas)assert(home.includes(`data-act="area" data-id="${id}"`),`Old room selection hides ${id}`);
+      click(rt,'grundlagen');
+      for(const id of [...rt.app.innerHTML.matchAll(/data-act="area" data-id="([^"]+)"/g)].map(m=>m[1])) {
+        assert(rt.run(`videosIn(${JSON.stringify(id)}).some(v=>v.grundtechnik)`),'Empty beginner category');
+      }
+      const learningArea=rt.run("S.areas.find(a=>videosIn(a.id).some(v=>v.grundtechnik))?.id");
+      if(learningArea) {
+        click(rt,'area',{id:learningArea});
+        const ids=[...rendered(rt).matchAll(/data-act="video" data-id="([^"]+)"/g)].map(m=>m[1]);
+        assert(ids.length,'Beginner path has no lessons');
+        for(const id of ids)assert(rt.run(`videoOf(${JSON.stringify(id)}).grundtechnik`),'Beginner path includes a finished project');
+        click(rt,'back');assert.equal(rt.run('view.name'),'grundlagen');
+      }
+      for(const topic of ['',...rt.run('THEMENFELDER.map(f=>f.id)')])for(const time of ['','5','10','15','offen']) {
+        rt.run(`view={name:'entdecken',params:{thema:${JSON.stringify(topic)},zeit:${JSON.stringify(time)},sort:'zeit',kind:'projekte'}};render();`);
+        const ids=[...rendered(rt).matchAll(/data-act="video" data-id="([^"]+)"/g)].map(m=>m[1]);
+        const expected=rt.run(`discoverVideos('').filter(v=>!v.grundtechnik&&zeitPasst(v,${JSON.stringify(time)})&&(!${JSON.stringify(topic)}||inThemenfeld(v,${JSON.stringify(topic)}))).map(v=>v.id)`);
+        assert.deepEqual([...ids].sort(),Array.from(expected).sort(),'Combined class/topic/time filters mismatch');
+        let previous=0;
+        for(const id of ids){const minutes=rt.run(`arbeitszeit(videoOf(${JSON.stringify(id)}))`)??Infinity;assert(minutes>=previous,'Known work times must sort before unknown times');previous=minutes;}
+        combinations++;
+      }
+      click(rt,'reset');
+      assert.equal(rt.run('view.params.thema'),'');assert.equal(rt.run('view.params.zeit'),'');
+    }
+    assert.equal(rt.run("arbeitszeit({dauer:'15:00',steps:[{t:900}]})"),null,'Video duration must never become work time');
+    assert(!rt.run("zeitPasst({dauer:'5:00'},'15')"),'Unknown times must not pass a short-project filter');
+    rt.run("view={name:'entdecken',params:{}};render();");
+    rt.app.onchange({target:{id:'ideen-zeit',value:'10'}});
+    rt.app.onchange({target:{id:'ideen-thema',value:'spiel'}});
+    rt.app.onchange({target:{id:'ideen-sortierung',value:'zeit'}});
+    assert.equal(rt.run('view.params.zeit'),'10');assert.equal(rt.run('view.params.thema'),'spiel');assert.equal(rt.run('view.params.sort'),'zeit');
+    rt.run("LP21=null;view={name:'home',params:{}};render();");
+    assert(rt.app.innerHTML.includes('id="verfahren"'),'Missing curriculum data must not break the overview');
+  }
+  reports.push(`Discovery: ${combinations} class/topic/time combinations; procedure-first home, all rooms, beginner route, unknown durations and absent curriculum data checked.`);
+}
+
 function checkVideoData() {
   const ids = new Set();
   const videos = json('schule/schule.json').videos;
@@ -221,6 +271,7 @@ function checkBuiltPages() {
     assert(html.includes(js), `${file}: stale or incomplete JavaScript build`);
     assert(!/maximum-scale=1|user-scalable=no/.test(html), `${file}: pinch zoom is still disabled`);
     if (fs.existsSync(playerCssPath)) assert(html.includes(fs.readFileSync(playerCssPath, 'utf8').trim()), `${file}: player stylesheet missing from build`);
+    assert(html.includes(read('quelle/entdecken-design.css').trim()),`${file}: discovery stylesheet missing from build`);
     if (file.startsWith('schule/')) assert(html.includes('window.SCHULE=true;'), `${file}: school edition flag missing`);
     new vm.Script(html.slice(html.lastIndexOf('<script>') + '<script>'.length, html.lastIndexOf('</script>')), { filename: file });
   }
@@ -357,7 +408,7 @@ function checkReturnNavigation() {
   rt.context.requestAnimationFrame = callback => { callback(); return 1; };
   rt.run(`
     render=()=>{};leaveScreen=()=>{};
-    view={name:'entdecken',params:{room:'hand',query:'Herz',kind:'projekte'}};
+    view={name:'entdecken',params:{room:'hand',query:'Herz',kind:'projekte',zeit:'15',thema:'spiel',sort:'zeit'}};
     go('player',{videoId:'zw-karte-herz-weben'});
   `);
   assert.equal(rt.run('playerReturn.name'), 'entdecken', 'Opening a project must remember its catalogue');
@@ -368,6 +419,9 @@ function checkReturnNavigation() {
   assert.equal(rt.run('view.params.query'), 'Herz', 'Back must preserve the search');
   assert.equal(rt.run('view.params.kind'), 'projekte', 'Back must preserve the chosen filter');
   assert.equal(rt.run('view.params.room'), 'hand', 'Back must preserve the chosen room');
+  assert.equal(rt.run('view.params.zeit'),'15','Back must preserve work time');
+  assert.equal(rt.run('view.params.thema'),'spiel','Back must preserve topic');
+  assert.equal(rt.run('view.params.sort'),'zeit','Back must preserve ordering');
   assert.equal(scrolls.at(-1), 611, 'Back must restore catalogue scroll position');
   rt.run("playerReturn=null;backToIdeas(areaOf('weben'),false);");
   assert.equal(rt.run('view.name'), 'area', 'Directly opened project must fall back to its category');
@@ -413,6 +467,10 @@ function checkModalKeyboard() {
 }
 
 (async () => {
+  if(process.argv.includes('--discovery')) {
+    await checkEdition(false);await checkEdition(true);await checkDiscoveryPaths();checkReturnNavigation();
+    console.log(reports.join('\n'));return;
+  }
   if (process.argv.includes('--engine')) {
     checkPlayer(runtime(true));
     checkPhotoFlow();
@@ -429,6 +487,7 @@ function checkModalKeyboard() {
   checkPlayerScreens();
   checkReturnNavigation();
   checkModalKeyboard();
+  await checkDiscoveryPaths();
   await checkInstallFlow();
   if (process.argv.includes('--built')) { checkBuiltPages(); checkAppAssets(); }
   console.log(reports.join('\n'));
