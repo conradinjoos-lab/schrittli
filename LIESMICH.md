@@ -8,7 +8,7 @@ Die App besteht aus den erzeugten HTML-Dateien und den zugehörigen Inhalts- und
 - `schule/schule.json`, `inhalte.json` und `anleitungen/anleitungen.json` – Videos, Schritte und Foto-Anleitungen. Inhalte werden über http/https geladen.
 - `grafik/`, `vorschau/`, `material/`, `anleitungen/` und `vorlagen/` – Bilder und Unterlagen, die zusammen mit der App verfügbar sein müssen.
 
-Kinder, Sterne, Fortschritt und Werke liegen im Browser des Geräts (localStorage + IndexedDB).
+Kinder, Fortschritt und Familienwerke liegen im Browser des Geräts (localStorage + IndexedDB). Die Schule kann Fotos und Projektbewertungen über eine verbundene Sammlung zwischen iPads teilen.
 
 ## Starten
 
@@ -38,7 +38,7 @@ Kinder, Sterne, Fortschritt und Werke liegen im Browser des Geräts (localStorag
 ## Schulversion (`schule/`)
 
 - Eigener Ordner `schule/` mit `index.html` und `schule.json`; läuft unter `…/schrittli/schule/`. Gleiche Technik, eigener Speicher (die Familienversion bleibt unberührt).
-- Kein Login, keine PIN, keine Sterne, keine Aufgaben, kein Elternbereich. Gespeichert wird nur die zuletzt gewählte Klasse; Fortschritt gilt nur für die laufende Sitzung (geteilte iPads).
+- Kein Kinder-Login, keine PIN, keine Belohnungssterne, keine Aufgaben, kein Elternbereich. Bei Werkfotos bewerten Kinder ihr Projekt mit 1–5 Sternen. Gespeichert wird nur die zuletzt gewählte Klasse; Fortschritt gilt nur für die laufende Sitzung (geteilte iPads).
 - Ablauf: Klasse wählen (1.–6.) → Verfahren mit Videos für diese Klasse → Video → Player mit Schritten, Tempo, Kino-Modus.
 - Grossbuchstaben für 1. und 2. Klasse, ab 3. Klasse normale Schrift.
 - «Für Lehrpersonen» (unten): Liste aller Videos mit Klassenzuordnung und QR-Code pro Video (Schul-Link mit Schritten, auch von zuhause nutzbar).
@@ -52,7 +52,7 @@ Kinder, Sterne, Fortschritt und Werke liegen im Browser des Geräts (localStorag
 - **Schritt-Modus:** Video stoppt automatisch am Ende jedes Schritts (kleines Schild «Jetzt du» im Bild, kein Zwischenbildschirm). Tipp aufs Video oder auf ▶ = Weiter, ↺ = Nochmal. Vorlesen nur auf Knopfdruck (Lautsprecher); automatisches Vorlesen ist in den Einstellungen abschaltbar/einschaltbar, die Stimme hängt vom Gerät ab.
 - **Lern-Bereiche** unbegrenzt, **Spass-Bereiche** kosten einen Stern pro Video und Tag (Anzahl in den Einstellungen). Abgegebene Aufgabe = ein Bonus-Stern pro Tag (abschaltbar).
 - **Aufgabe nach dem Video:** Foto, Bild malen, Tonaufnahme oder nur Fertig-Knopf. Landet in «Meine Werke», Eltern geben Rückmeldung (Emoji + Satz).
-- **Foto vom Werk:** Am Ende jedes Videos (auch Schule und Schul-Link) gibt es «Foto von deinem Werk». Das Foto bleibt nur auf dem Gerät (IndexedDB), nichts wird hochgeladen. In der Schule heisst die Sammlung «Unsere Werke» und überlebt das Neuladen.
+- **Foto vom Werk:** Am Ende jedes Videos (auch Schule und Schul-Link) gibt es «Foto von deinem Werk». In der Familie bleibt das Foto auf dem Gerät (IndexedDB). In der Schule geben Kinder Vorname, Klasse und 1–5 Sterne für das Projekt an. Ist eine gemeinsame Sammlung verbunden, werden neue Fotos automatisch geteilt. «Unsere Werke» zeigt die Sammlung und lässt sich nach Klasse filtern. Unter Projektkarten stehen Namen und Sterne; im Projekt sind alle zugehörigen Werke sichtbar.
 - **Das haben andere gemacht:** Unter den Videos eines Bereichs Fotos fertiger Arbeiten aus `werke/werke.json` (erzeugt von `werkzeug/werke.py`, nur Fotos ohne Kinder, Hände und Screenshots).
 - **Foto-Anleitungen:** Schritt für Schritt mit Fotos statt Video, aus `anleitungen/anleitungen.json` (Fotos in `anleitungen/<ordner>/`, als WebP, max. 1000 px). Pro Schritt Text, ein oder zwei Fotos und wahlweise «Achtung», «Tipp», eine Frage mit Antwortfeld oder «Zeigen» – dann geht es erst weiter, wenn «Die Lehrperson hat es gesehen» angetippt ist. Gehören mehrere Anleitungen zum selben `ordner` (z. B. Raketenstation 1 und 2), führt das Ende von Teil 1 direkt zu Teil 2. In der Schule erscheinen sie im Verfahren (`areaId`) und für die `stufen`, in der Familienversion unter Werken. Prüfen: `python werkzeug/anleitungen.py`. Vorlagen zum Ausdrucken als PDF im selben Ordner unter `vorlagen` (`datei`, `name`, `format`); sie erscheinen beim Start und in jedem Schritt mit `"vorlage": true` als Download-Knopf. Nur Fotos ohne Kinder, Hände und Screenshots.
 - **Schul-Link:** trägt Video, Schritte, Material und Aufgabe im Link selbst. Kind scannt QR, landet direkt im Player. Keine Anmeldung, keine Sterne; nur Fotos vom Werk bleiben auf dem Gerät.
@@ -76,3 +76,17 @@ Pflege: Zuerst `python werkzeug/vorlagen/perlen-quellen.py` mit den Abhängigkei
 - Auf dem iPad muss das erste Abspielen manchmal direkt im YouTube-Bild angetippt werden; die App zeigt dann «Tippe auf das Video».
 - Sprachsteuerung («Stopp», «Weiter») ist experimentell und braucht Internet.
 - Nicht auf echtem iPad und mit echtem YouTube getestet – zuerst mit einem Video ausprobieren.
+
+## Gemeinsame Schulwerke einrichten
+
+1. Nach Bereitstellung des Speichers `kontrolle/sammlung.html` öffnen und mit dem vorhandenen GitHub-Konto anmelden. Eine Sammlung für die Schule erstellen.
+2. Denselben Sammlungslink einmal auf jedem Schul-iPad öffnen oder unter «Für Lehrpersonen → iPads verbinden» einfügen. Beim Einsatz der Home-Bildschirm-App dort verbinden. Der Link erlaubt Lesen und Hinzufügen innerhalb dieser Sammlung.
+3. Kinder fotografieren ihr Werk am Projektende und tragen Vorname, Klasse und Sterne ein. Die anderen geöffneten iPads holen Änderungen alle 8 Sekunden ab. Bei Rückkehr in die App wird sofort aktualisiert.
+
+Offline bleiben neue Fotos und ihre Versandwarteschlange auf dem iPad erhalten. Beim nächsten Öffnen mit Internet werden sie erneut gesendet; eine stabile Werk-ID verhindert doppelte Einträge. Fotos aus der bisherigen lokalen Sammlung bleiben lokal. Neue, noch unverbundene Fotos werden bei der ersten Verbindung geteilt. Fotos aus einer anderen verbundenen Sammlung werden niemals automatisch übernommen.
+
+Die Lehrperson kann unter `kontrolle/sammlung.html` Werke für alle iPads löschen oder einen Sammlungslink sperren. Rückmeldungslinks für die privaten Sprachaufnahmen bleiben getrennt. Fotos und Bewertungen bleiben gespeichert, bis die Lehrperson sie löscht.
+
+Technik: `quelle/schulwerke.js` und `.css`, Worker-Routen `/sammlung/*`, separate D1-Bindung `SAMMLUNG`, Migration `werkzeug/anmelden/sammlung-migrations/0001_sammlung.sql`. Fotos werden auf maximal 600 kB verkleinert. Begrenzung: 2000 Werk-IDs je Sammlung (inklusive gelöschter Einträge), 300 neue Fotos je Tag/Sammlung, 400 MB aktive Fotos insgesamt. Der Speicher `schrittli-werke` wurde am 27.10.2026 mit EU-Jurisdiktion eingerichtet; die Datenbank-ID steht in `wrangler.toml`, die erste Migration ist angewendet. Weitere Schemaänderungen vor dem Worker-Deployment mit `npx wrangler d1 migrations apply SAMMLUNG --remote` einspielen. Die Sammlung «Unsere Schulwerkstatt» ist bereits erstellt. Der private Verbindungslink wird nicht im Repository gespeichert.
+
+Prüfungen: `npm run check` in `werkzeug/anmelden`, `node werkzeug/schulwerke-ui-pruefen.cjs` für zwei getrennte Browserkontexte mit lokaler D1-Datenbank. Der Browsertest verwendet keine echten Kinderfotos und schreibt Screenshots nach `output/schulwerke/`. Kamera und Safari auf einem echten iPad zusätzlich prüfen.

@@ -7,7 +7,7 @@ const vm = require('node:vm');
 const root = path.resolve(__dirname, '..');
 const read = p => fs.readFileSync(path.join(root, p), 'utf8');
 const json = p => JSON.parse(read(p));
-const source = read('quelle/p2.js').replace(/(?:render\(\);\s*)?fmKnopf\(\);\s*(?:render\(\);\s*)?boot\(\);\s*$/, '') + '\n' + read('quelle/rueckmeldung.js');
+const source = read('quelle/p2.js').replace(/(?:render\(\);\s*)?fmKnopf\(\);\s*(?:render\(\);\s*)?boot\(\);\s*$/, '') + '\n' + read('quelle/rueckmeldung.js') + '\n' + read('quelle/schulwerke.js');
 const reports = [];
 
 function element() {
@@ -34,7 +34,7 @@ function runtime(school, delayedContent = false) {
   };
   const listeners = new Map();
   const context = {
-    console, URL, Blob, TextEncoder, TextDecoder, Math, Date, Promise,
+    console, URL, URLSearchParams, Blob, TextEncoder, TextDecoder, Math, Date, Promise,
     setTimeout: () => 1, clearTimeout() {}, setInterval: () => 1, clearInterval() {},
     requestAnimationFrame: () => 1, cancelAnimationFrame() {},
     innerWidth: 1024, innerHeight: 768, devicePixelRatio: 1,
@@ -264,7 +264,7 @@ function checkPlayer(rt) {
 }
 
 function checkBuiltPages() {
-  const js = read('quelle/p2.js').trim();
+  const js = read('quelle/p2.js').replace(/boot\(\);\s*$/, '').trim();
   const playerCssPath = path.join(root, 'quelle/player-design.css');
   for (const file of ['index.html', 'schule/index.html']) {
     const html = read(file);
@@ -274,6 +274,9 @@ function checkBuiltPages() {
     assert(html.includes(read('quelle/entdecken-design.css').trim()),`${file}: discovery stylesheet missing from build`);
     assert(html.includes(read('quelle/rueckmeldung.js').trim()),`${file}: feedback code missing from build`);
     assert(html.includes(read('quelle/rueckmeldung.css').trim()),`${file}: feedback stylesheet missing from build`);
+    assert(html.includes(read('quelle/schulwerke.js').trim()),`${file}: school collection code missing`);
+    assert(html.includes(read('quelle/schulwerke.css').trim()),`${file}: school collection stylesheet missing`);
+    assert(html.lastIndexOf('boot();')>html.indexOf(read('quelle/schulwerke.js').trim()),`${file}: boot must follow module initialization`);
     if (file.startsWith('schule/')) assert(html.includes('window.SCHULE=true;'), `${file}: school edition flag missing`);
     new vm.Script(html.slice(html.lastIndexOf('<script>') + '<script>'.length, html.lastIndexOf('</script>')), { filename: file });
   }

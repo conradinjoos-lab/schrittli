@@ -5,7 +5,7 @@ import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {fileURLToPath} from 'node:url';
 
 test('private feedback in the Workers runtime: roles, audio, retry, revocation, retention',async()=>{
- const mf=new Miniflare(convertV4MiniflareOptions({modules:['worker.js','feedback.js'].map(name=>({type:'ESModule',path:fileURLToPath(new URL(name,import.meta.url)),contents:readFileSync(new URL(name,import.meta.url),'utf8')})),compatibilityDate:'2026-10-01',kvNamespaces:['KV'],d1Databases:['FEEDBACK'],
+ const mf=new Miniflare(convertV4MiniflareOptions({modules:['worker.js','feedback.js','sammlung.js'].map(name=>({type:'ESModule',path:fileURLToPath(new URL(name,import.meta.url)),contents:readFileSync(new URL(name,import.meta.url),'utf8')})),compatibilityDate:'2026-10-01',kvNamespaces:['KV'],d1Databases:['FEEDBACK'],
   outboundService:async req=>{
    assert.equal(new URL(req.url).origin,'https://api.github.com');
    const token=req.headers.get('Authorization');
