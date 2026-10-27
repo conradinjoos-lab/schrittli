@@ -1,28 +1,4 @@
-# Übergabe «Schritt für Schritt» – Stand 27.10.2026
-
-## Unterrichtsmodus (27.10.2026)
-
-- `unterricht.js` ist das gemeinsame Gate im Kopf beider Apps und aller Vorlagen-Werkzeuge. Eingeschriebene Geräte halten nur ihren Gruppenschlüssel; Freigaben werden nicht aus localStorage vertraut. Abruf alle 5 s, Lease maximal 90 s; offline/reload ohne bestätigte Freigabe geschlossen. Kein Schutz der öffentlichen Quelldateien oder des iPad-Betriebssystems.
-- `quelle/unterricht.js` prüft jeden Routerwechsel und zeigt nur freigegebene Projekte. Templates und Perlentiere filtern die Daten vor der sichtbaren Auswahl; direkte URLs, Druck, Kategorien und Editoren beachten dieselbe Freigabe. Gespeicherte Vorlagenzustände und Perlenarbeiten sind gruppenbezogen. Schulfortschritt bleibt nur bei eingeschriebenen Unterrichtsgeräten über Neuladen erhalten.
-- Lehrperson: `kontrolle/unterricht.html/.js/.css`, gleiche GitHub-Owner-Anmeldung wie die Fotosammlung. Gruppen, atomare Freigabe mit Revisionsprüfung, Favoriten, iPad-Rückmeldungen. `werkzeug/unterricht-katalog.cjs` erzeugt bei jedem App-Build die Metadaten aus den vorhandenen Veröffentlichungen; Klassenbreiten aus `PerlenEditor.GRENZEN`.
-- Backend: `werkzeug/anmelden/unterricht.js`, neue Tabellen in der vorhandenen SAMMLUNG-D1, Migration `0002_unterricht.sql`. Unterrichts- und Fotosammlungsschlüssel sind getrennt. Vor Veröffentlichung Migration remote anwenden, dann Worker deployen und Pages pushen.
-- Prüfungen: `npm run check` in `werkzeug/anmelden`; `node werkzeug/unterricht-ui-pruefen.cjs` mit lokalem Workers/D1 und vier getrennten Browserkontexten; bestehende Schulwerke-, Design- und Perlentests. Browserprüfungen ersetzen keinen echten iPad-Gerätetest. Screenshots unter ignoriertem/lokalem `output/unterricht/`.
-- Beim Beginn dieser Änderung wurden die zwischenzeitlich veröffentlichten Änderungen bis `7be18b3` übernommen, inklusive aktuellem iPad-Player und vereinfachten Perlenmustern. Primärcheckout `C:/Grok Code/schrittli` nicht überschreiben.
-
-## Aktuell: grafische Überarbeitung vom 27.10.2026
-
-Der Nutzer hat die Umsetzung freigegeben und künstlerische Freiheit erteilt. Priorität: grosse echte Ergebnisbilder, kurze Texte für die 1./2. Klasse, sofort erkennbares Werkstück. Vorhandene Illustrationen dürfen ersetzt werden; Projektfotos sollen natürlich bleiben. Am 27.10.2026 wurde auch der Push auf die bestehende öffentliche GitHub-Pages-Seite ausdrücklich freigegeben. Die Überarbeitung umfasst:
-
-- Gemeinsame neue Startseite für Familie und Schule mit ausgewählten Projektfotos; Themen bleiben erreichbar. Katalog über volle Breite mit Suche sowie Projekt-/Technik-/Fotofiltern. Klassenfilter bleibt erhalten.
-- Ruhiger Lernbereich mit aktuellem Schritt und aufklappbarer Übersicht; Foto-Anleitungen mit grossen Bildern und zusätzlichen Informationen auf Nachfrage. Fortschritt wird bei Schrittwechseln sofort gespeichert. Zurück führt zur vorherigen Auswahl.
-- Creme, Petrol, Salbei und warme Akzente, grosse Tasten, Tastaturfokus, Dialog-Fokusführung, wieder erlaubtes Zoomen. Echte Rückstich-Vorschau aus dem vorhandenen Video statt Texttitelbild.
-- `node quelle/bauen.cjs` baut beide Ausgaben; `quelle/player-design.css` gehört zum Build. `bauen.sh` delegiert an diesen portablen Build.
-- `node werkzeug/design-pruefen.cjs --built` prüft Inhalte, Bildpfade, Klassen/Filter, beide HTML-Ausgaben und Schrittlogik. Offline-Prüfung umfasst 134 Ansichten und über 1’500 Projektzuordnungen. Kein Ersatz für Gerätetests.
-- Lokale Vorschau: `node werkzeug/vorschau-server.cjs`, nur `127.0.0.1:8766`. Die Browser-Sichtprüfung wurde durch eine gespeicherte Berechtigung blockiert, auch nach erneuter Freigabe im Chat. Nicht als visuell geprüft ausgeben. iPad und reale YouTube-Wiedergabe noch prüfen.
-
-**Weiterhin offen:** Der Nutzer möchte die App nur intern zugänglich machen. Echten Zugangsschutz inklusive Dateien und bisheriger öffentlicher Adresse separat umsetzen; diese grafische Überarbeitung führt keine Zugriffssicherung ein. Keine neuen Buch-/TuD-Inhalte öffentlich veröffentlichen. TuD-Bilder sollen inzwischen nur als Inspiration dienen, keine vollständigen Schrittfolgen mehr. Grok darf für Bildmaterial angesprochen werden, der Zugriff auf Grok Bot wurde jedoch von der App-Berechtigung abgelehnt; keine Nachricht gesendet.
-
-Die älteren Notizen unten dokumentieren die Vorgeschichte. Bei widersprüchlichen Angaben gelten die aktuellen Punkte und `LIESMICH.md`.
+# Übergabe «Bibo & Fila» (vorher «Schrittli») – Stand 24.10.2026, 11:30
 
 Für die nächste Claude-Sitzung (anderes Konto, kein Gedächtnis). Alles Nötige liegt in diesem Repo.
 

@@ -2,7 +2,6 @@
 <html lang="de-CH">
 <head>
 <meta charset="utf-8">
-<script src="../unterricht.js"></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Schritt für Schritt · Vorlagen</title>
 <meta name="description" content="Form wählen, Grösse in cm eingeben, drucken: Schablonen in echter Grösse für den TTG-Unterricht.">
@@ -166,7 +165,7 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 <header class="kopf">
   <a class="zur-app" href="../" data-zur-app>← Zurück zur App</a>
   <h1>Vorlagen-Generator</h1>
-  <p>Form wählen, Grösse eingeben, drucken. Die Vorlage kommt in echter Grösse aus dem Drucker. <a href="perlen/" style="color:var(--acc);font-weight:700">Perlentiere mit Zählmuster →</a> · <a href="buegelperlen/" style="color:var(--acc);font-weight:700">Bügelperlenbilder →</a> · <a href="perlentier-bild/" style="color:var(--acc);font-weight:700">Perlentier aus eigenem Bild →</a> · <a href="armbaender/" style="color:var(--acc);font-weight:700">Armbänder →</a></p>
+  <p>Form wählen, Grösse eingeben, drucken. Die Vorlage kommt in echter Grösse aus dem Drucker. <a href="perlen/" style="color:var(--acc);font-weight:700">Perlentiere mit Zählmuster →</a> · <a href="perlentier-bild/" style="color:var(--acc);font-weight:700">Perlentier aus eigenem Bild →</a> · <a href="armbaender/" style="color:var(--acc);font-weight:700">Armbänder →</a></p>
 </header>
 <main>
   <section class="karte" aria-label="Form wählen" id="formen"></section>
@@ -303,8 +302,7 @@ function paramForm(id,n){
 // Zustand: aus der Adresse, sonst vom letzten Mal
 // punkte: Einstichpunkte an, pabst: ihr Abstand in mm, strich: gestrichelte Nählinie zusätzlich zeigen
 const S={id:'herz',b:5,h:5,lock:true,n:1,linie:'schnitt',naht:5,zugabe:7,det:true,spiegel:false,param:5,farbig:true,punkte:false,pabst:5,strich:true};
-const VKEY='schrittli-vorlagen';
-try{Object.assign(S,JSON.parse(localStorage.getItem(VKEY)||'{}'))}catch(e){}
+try{Object.assign(S,JSON.parse(localStorage.getItem('schrittli-vorlagen')||'{}'))}catch(e){}
 const q=new URLSearchParams(location.search);
 if(q.has('form')&&byId[q.get('form')]){
   S.id=q.get('form');S.lock=!(q.has('b')&&q.has('h'));S.n=1;S.linie='schnitt';S.spiegel=false;S.punkte=false;S.strich=true;
@@ -328,7 +326,7 @@ if(!byId[S.id])S.id='herz';
 // Liste «Aufs Blatt»: mehrere Formen zusammen. In der Adresse als liste=herz:5x5:3,stern:4x3.8:2:z6,fisch:6x3:4:n5:s
 // (Form:Breite×Höhe in cm:Anzahl, dann z=Zacken/Ecken, n=Nählinie mm, a=Nahtzugabe mm, s=gespiegelt,
 //  p=Einstichpunkte alle … mm auf der Nählinie, o=ohne gestrichelte Nählinie, nur Punkte)
-let LKEY='schrittli-vorlagen-liste',stateKey=VKEY;
+const LKEY='schrittli-vorlagen-liste';
 const begrenzt=(v,a,b)=>Math.max(a,Math.min(b,v));
 const punkteAn=e=>e.linie!=='schnitt'&&!!e.punkte;
 function kodieren(e,ohneN){
@@ -396,13 +394,11 @@ function auswahl(){
     $('kats').hidden=!!g;$('zurueck').hidden=!g;
     document.querySelectorAll('#formen .gruppe').forEach(gr=>{gr.hidden=gr.dataset.g!==g;gr.querySelectorAll('.form').forEach(k=>k.hidden=false)});
   };
-  const beschraenkt=window.Unterricht?.policy?.mode==='templates';
-  oeffnen(beschraenkt&&Object.keys(gruppen).length===1?Object.keys(gruppen)[0]:q.has('form')&&byId[S.id]?byId[S.id].gruppe:null);
-  if(beschraenkt&&Object.keys(gruppen).length===1){$('zurueck').style.display='none';$('kats').style.display='none';}
+  oeffnen(q.has('form')&&byId[S.id]?byId[S.id].gruppe:null);       // Link auf eine Form: ihre Kategorie gleich offen
   $('suche').addEventListener('input',e=>{
     const t=einfach(e.target.value.trim());let alle=0;
     if(!t){const g=offen;oeffnen(g);return}
-    if($('kats'))$('kats').hidden=true;if($('zurueck'))$('zurueck').hidden=false;
+    $('kats').hidden=true;$('zurueck').hidden=false;
     document.querySelectorAll('#formen .gruppe').forEach(gr=>{
       let n=0;gr.querySelectorAll('.form').forEach(k=>{const ja=k.dataset.such.includes(t);k.hidden=!ja;n+=ja});
       gr.hidden=!n;alle+=n;
@@ -675,7 +671,7 @@ function zeichnen(){
 }
 
 function speichern(){
-  try{localStorage.setItem(stateKey,JSON.stringify(S))}catch(e){}
+  try{localStorage.setItem('schrittli-vorlagen',JSON.stringify(S))}catch(e){}
   const p=new URLSearchParams({form:S.id,b:+S.b.toFixed(2),h:+S.h.toFixed(2)});
   if(S.n>1)p.set('n',S.n);if(PARAM[S.id])p.set('z',S.param);if(S.linie!=='schnitt')p.set('linie',S.linie);
   if(S.linie==='naht')p.set('naht',S.naht);else if(S.linie==='zugabe')p.set('zugabe',S.zugabe);
@@ -879,38 +875,13 @@ $('p-schloss').addEventListener('pointerdown',e=>{
 ['pointerup','pointercancel','pointerleave'].forEach(t=>$('p-schloss').addEventListener(t,loslassen));
 
 // Figuren der gewählten Form und der Liste zuerst nachladen; was nicht kommt, fällt weg
-async function vorlagenStart(){
-  if(window.Unterricht)await Unterricht.ready;
-  const p=window.Unterricht?.policy;
-  if(p&&p.mode!=='free'){
-    if(p.mode!=='templates')return;
-    const erlaubt=new Set(p.ids);FORMEN.splice(0,FORMEN.length,...FORMEN.filter(f=>erlaubt.has(f.id)));
-    for(const id of Object.keys(byId))if(!erlaubt.has(id))delete byId[id];
-    if(!FORMEN.length){Unterricht.unavailable();return;}
-    stateKey=VKEY+Unterricht.storageSuffix();LKEY='schrittli-vorlagen-liste'+Unterricht.storageSuffix();
-    try{Object.assign(S,JSON.parse(localStorage.getItem(stateKey)||'{}'));L=(JSON.parse(localStorage.getItem(LKEY)||'[]')||[]).map(dekodieren).filter(Boolean);}catch{L=[];}
-    if(q.has('form')&&byId[q.get('form')])S.id=q.get('form');
-    if(!byId[S.id])S.id=FORMEN[0].id;
-    L=L.filter(e=>byId[e.id]);
-    document.querySelector('.kopf p').textContent=p.title;
-    for(const a of document.querySelectorAll('.kopf a'))a.hidden=true;
-    if(p.resize===false){for(const el of [$('b'),$('h'),$('schloss'),$('param')])el.disabled=true;$('b').closest('.feld').hidden=true;$('feld-param').hidden=true;}
-    if(p.simple){document.querySelectorAll('.karte-einst .feld').forEach(el=>{if(!el.contains($('b'))&&!el.contains($('n')))el.hidden=true;});}
-  }
-  await bereit([S.id,...L.map(e=>e.id)]).catch(()=>{});
-  if(!form()?.d){const fallback=FORMEN.find(f=>f.d);if(!fallback){window.Unterricht?.unavailable();return;}S.id=fallback.id;}
+bereit([S.id,...L.map(e=>e.id)]).catch(()=>{}).then(()=>{
+  if(!form().d)S.id='herz';
   L=L.filter(e=>form(e).d);
   if(S.lock){const f=form();if(q.has('h')&&!q.has('b'))S.b=S.h*f.w/f.h;else S.h=S.b*f.h/f.w}
   auswahl();felder();listeZeigen();zeichnen();
-  if(p?.mode==='templates'){
-    if(p.ids.length===1)$('formen').hidden=true;
-    if(p.simple&&p.ids.length<=12){$('suche').hidden=true;document.querySelector('#formen .suchkopf h2').textContent='Wähle deine Form';}
-    if(p.resize===false)$('feld-param').hidden=true;
-  }
   if(q.get('pausen')==='1')pausenAuf();   // aus der App: «Abpausen» öffnet direkt den Leuchttisch
-  window.Unterricht?.toolReady();
-}
-void vorlagenStart().catch(()=>window.Unterricht?.unavailable());
+});
 })();
 </script>
 </body>

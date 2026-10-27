@@ -304,11 +304,11 @@
   "notiz": "Kein Bild: in allen Bildern mit Luftmaschen sind Hände."
  },
  "zw-rueckstich": {
-  "t": 72.5,
+  "t": null,
   "aus": null,
   "frei": false,
   "schwach": false,
-  "notiz": "Echte fertige Rückstichnaht im Stickrahmen. Eine haltende Hand bleibt bewusst sichtbar: Technik erkennbar, keine Titelgrafik oder künstliche Retusche."
+  "notiz": "Daumen liegt immer direkt neben der kurzen Stichlinie; ohne Daumen bleibt nur weisser Stoffstreifen."
  },
  "zw-kordel": {
   "t": null,
