@@ -686,8 +686,8 @@ SCREENS.player=(app,{videoId,school})=>{
   app.innerHTML=`<div class="${kidClass('pl lernraum'+(S.settings.kino&&!school?' kino':''))}">
     <div class="inner kopf pl-top"><button class="schild-btn" data-act="back" aria-label="Zurück zu den Ideen">${ico('back')}</button><div class="pl-heading"><small>${a?esc(a.name):'Schritt für Schritt'}</small><h1>${esc(typeof projectTitle==='function'?projectTitle(v):v.title)}</h1></div><div class="kopf-rechts"><button type="button" class="fm-pill" data-act="melden" aria-label="Problem mit diesem Video melden" title="Problem melden">${ico('flag')}</button>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}</div></div>
     <div class="inner panes">
-      <div class="pane pl-video"><div class="video-box"><div class="host" id="host"></div><div class="shield" id="shield" data-act="shield"></div><div class="overlay" id="overlay"></div><span class="modebadge" id="modebadge" hidden></span></div><div class="pl-bank"><div class="steuer"><div class="controls" id="controls"></div><button class="kino-step" id="kinostep" data-act="liste" aria-controls="schritte" aria-expanded="false"></button><div class="auftrag" id="task"></div></div></div></div>
-      <div class="pane pl-guide"><div id="pl-current" class="pl-current" aria-live="polite"></div><button class="pl-steps-toggle" id="pl-steps-toggle" data-act="liste" aria-expanded="false" aria-controls="schritte">${ico('gallery')} Alle Schritte ${ico('down')}</button><div class="schritte" id="schritte" hidden></div></div>
+      <div class="pane pl-video"><div class="video-box"><div class="host" id="host"></div><div class="shield" id="shield" data-act="shield"></div><div class="overlay" id="overlay"></div><span class="modebadge" id="modebadge" hidden></span></div><div class="pl-bank"><div class="pl-position" id="pl-position" role="status" aria-live="polite" aria-atomic="true"></div><div class="steuer"><div class="controls" id="controls"></div><button class="kino-step" id="kinostep" data-act="liste" aria-controls="schritte" aria-expanded="false"></button><div class="auftrag" id="task"></div></div></div></div>
+      <div class="pane pl-guide"><div id="pl-current" class="pl-current" aria-live="polite"></div><h2 class="pl-steps-heading" id="pl-steps-heading">Arbeitsschritte</h2><div class="schritte" id="schritte" role="navigation" aria-label="Arbeitsschritte"></div></div>
     </div>${SCHULE?`<section class="sw-project-works" data-schul-projekt-liste="${esc(v.id)}"></section>`:''}
   </div>`;
   P={v,steps,pr,school,idx:Math.max(0,Math.min(pr.step||0,Math.max(0,steps.length-1))),mode:'start',needsTap:false,err:null,playAt:0,api:null,tick:null,lastSave:0,
@@ -711,8 +711,8 @@ SCREENS.player=(app,{videoId,school})=>{
     melden:()=>fehlerMelden(), kino:()=>toggleKino(), liste:()=>{ const k=$('.kid.pl'); if(k) k.classList.toggle('liste'); updatePlayerUI(); },
     start:()=>startPlaying(false), resume:()=>startPlaying(true), play:()=>userPlay(), pause:()=>userPause(),
     toggle:()=>{ if(P.mode==='playing') userPause(); else if(P.mode==='paused') userPlay(); else if(P.mode==='material') nextStep(); else if(P.mode==='start') startPlaying(!!(pr.step||pr.pos>3)); else if(P.mode==='stepdone') nextStep(); else if(P.mode==='ended') startPlaying(false); },
-    replay:()=>replayStep(), next:()=>nextStep(), prevstep:()=>{ if(P.idx>0){ P.idx--; jumpStep(); } },
-    dot:b=>{ P.idx=+b.dataset.i; const k=$('.kid.pl'); if(k) k.classList.remove('liste'); jumpStep(); const control=$(k&&k.classList.contains('kino')?'#kinostep':'#pl-steps-toggle'); if(control) control.focus({preventScroll:true}); },
+    replay:()=>replayStep(), next:()=>nextStep(), nextstep:()=>{ if(P.idx<P.steps.length-1) nextStep(); }, prevstep:()=>{ if(P.idx>0){ P.idx--; jumpStep(); } },
+    dot:b=>{ P.idx=+b.dataset.i; const k=$('.kid.pl'); if(k) k.classList.remove('liste'); jumpStep(); const control=$(k&&k.classList.contains('kino')?'#kinostep':'#schritte .sbtn.cur'); if(control) control.focus({preventScroll:true}); },
     back10:()=>{ P.api.seek(Math.max(0,P.api.time()-10)); }, fwd10:()=>{ P.api.seek(P.api.time()+10); },
     speed:()=>{ pr.slow=!pr.slow; P.api.rate(pr.slow?S.settings.slowRate:1); if(!school) save(); updatePlayerUI(); },
     say:b=>speak(b.dataset.text), restart:()=>{ P.idx=0; startPlaying(false); }, retry:()=>go('player',{videoId:v.id,school}),
@@ -723,7 +723,14 @@ SCREENS.player=(app,{videoId,school})=>{
   if(S.settings.voiceControl) startListening();
 };
 function curStep(){ return P.steps[P.idx]; }
-function fitPlayer(){ const el=$('.kid.pl'); if(!el||el.classList.contains('kino')) return; if(el.classList.contains('lernraum')){ el.style.removeProperty('--pl-avail'); return; } const panes=$('.panes',el), pane=$('.pane',el); if(!panes||!pane) return; if(!matchMedia('(min-width:900px) and (min-height:540px)').matches){ el.style.removeProperty('--pl-avail'); return; } const lab=$('.plabel',pane), fuss=$('.fuss',pane); const h=panes.clientHeight-(lab?lab.offsetHeight+8:0)-(fuss?fuss.offsetHeight+8:0); el.style.setProperty('--pl-avail',Math.max(180,Math.floor(h))+'px'); }
+function fitPlayer(){
+  const el=$('.kid.pl'); if(!el) return;
+  const bank=$('.pl-bank',el); if(!bank) return;
+  if(el.classList.contains('kino')){ el.style.setProperty('--pl-bank-height',Math.ceil(bank.getBoundingClientRect().height)+'px'); return; }
+  if(!matchMedia('(min-width:700px) and (min-height:540px)').matches){ el.style.removeProperty('--pl-avail'); return; }
+  const panes=$('.panes',el); if(!panes) return;
+  el.style.setProperty('--pl-avail',Math.max(100,Math.floor(panes.clientHeight-bank.offsetHeight-8))+'px');
+}
 window.addEventListener('resize',()=>{ if(P) fitPlayer(); });
 function toggleKino(on){ const el=$('.kid.pl'); if(!el||(P&&P.school)) return; const want=on==null?!el.classList.contains('kino'):!!on; el.classList.toggle('kino',want); el.classList.remove('liste'); if(S.settings.kino!==want){ S.settings.kino=want; save(); } if(want) fsEnter(); else fsExit(); if(P) updatePlayerUI(); }
 function fsEnter(){ try{ const d=document.documentElement; if(document.fullscreenElement||document.webkitFullscreenElement) return; const f=d.requestFullscreen||d.webkitRequestFullscreen; if(f){ const r=f.call(d,{navigationUI:'hide'}); if(r&&r.catch) r.catch(()=>{}); } }catch(e){} }
@@ -774,8 +781,9 @@ function updatePlayerUI(){ if(!P) return;
   sh.hidden=P.needsTap||S.settings.passTouches||show;
   const mb=$('#modebadge'); if(mb){ mb.hidden=!(m==='paused'||m==='stepdone'); const jetzt=m==='stepdone'&&!/^(zuschauen|schau )/i.test(curStep()?.label||''); mb.innerHTML=jetzt?'Jetzt du!':m==='stepdone'?'Weiter?':'Pause'; }
   const mk=$('#marke'); if(mk){ mk.hidden=m==='playing'||m==='error'; mk.classList.toggle('ov',show); }
-  const z=$('#zettel'); if(z) z.textContent=n?`Schritt ${P.idx+1} von ${n}`:'Frei schauen';
-  // Ein Schritt im Blick. Die ganze Liste wird nur auf Wunsch eingeblendet.
+  const position=n?`Schritt ${P.idx+1} von ${n}`:'Frei schauen';
+  const z=$('#pl-position'); if(z) z.textContent=position;
+  // Die Übersicht bleibt neben dem Video offen; nur im Kino wird sie eingeblendet.
   const current=$('#pl-current'), s=curStep(), preparation=(m==='start'&&steps[0]?.material)||(m==='material'&&s?.material);
   const stepLabel=s?s.label:v.title, stepNumber=n?`${P.idx+1} / ${n}`:'';
   if(current){
@@ -784,8 +792,8 @@ function updatePlayerUI(){ if(!P) return;
     else{ current.innerHTML=`<div class="pl-current-top"><span>${m==='stepdone'?'Jetzt du!':m==='paused'?'Dein Tempo':"Schau zu"}</span><span class="pl-step-count">${stepNumber||ico('play')}</span></div>${m==='stepdone'?figur('jetzt-du'):''}<h2>${esc(stepLabel)}</h2><button class="pl-read" data-act="say" data-text="${esc(stepLabel)}" aria-label="Schritt vorlesen">${ico('speaker')} Vorlesen</button>${playerSafety(v,s)}${n?`<div class="pl-track" role="progressbar" aria-label="Dein Fortschritt" aria-valuemin="0" aria-valuemax="${n}" aria-valuenow="${P.idx+1}"><i style="width:${(P.idx+1)/n*100}%"></i></div>`:''}`; }
   }
   const sl=$('#schritte');
-  const listOpen=!!$('.kid.pl.liste'); sl.hidden=!listOpen;
-  const listToggle=$('#pl-steps-toggle'); if(listToggle){ listToggle.hidden=!n; listToggle.setAttribute('aria-expanded',String(listOpen)); }
+  const listOpen=!isKino||!!$('.kid.pl.liste'); sl.hidden=!listOpen;
+  const listHeading=$('#pl-steps-heading'); if(listHeading) listHeading.hidden=!n;
   if(n){ sl.innerHTML=steps.map((s,i)=>`<button class="sbtn${i===P.idx?' cur':''}" data-act="dot" data-i="${i}" ${i===P.idx?'aria-current="step"':''}><span class="num">${i+1}</span><span class="lbl">${esc(s.label)}</span></button>`).join('');
     const cur=$('.sbtn.cur',sl); if(cur&&listOpen) sl.scrollTop=Math.max(0,cur.offsetTop-sl.offsetTop-sl.clientHeight/3); }
   else sl.innerHTML=`<div class="frei"><div class="zeit" id="captime">${fmt(P.api.time())} / ${fmt(P.api.duration())}</div></div>`;
@@ -793,8 +801,8 @@ function updatePlayerUI(){ if(!P) return;
   const playing=m==='playing', mainLabel=playing?'Pause':m==='stepdone'||m==='material'?'Weiter':m==='paused'?'Weiter schauen':m==='ended'?'Nochmal':"Los geht's";
   const mid=`<button class="kbtn primary pl-main-action" data-act="${m==='error'?'retry':'toggle'}" aria-label="${m==='error'?'Nochmal versuchen':mainLabel}">${ico(m==='error'?'replay':playing?'pause':m==='stepdone'||m==='material'?'next':'play')}<span>${m==='error'?'Nochmal':mainLabel}</span></button>`;
   const spd=`<button class="speed${pr.slow?' slow':''}" data-act="speed" aria-label="${pr.slow?'Normales Tempo einschalten':'Langsames Tempo einschalten'}" aria-pressed="${!!pr.slow}"><span aria-hidden="true">${pr.slow?'🐢':'🐇'}</span><span class="lab">${pr.slow?'Langsam':'Tempo'}</span></button>`+(P.school?'':`<button class="kbtn round kino-btn" data-act="kino" aria-label="${isKino?'Vollbild verlassen':'Video gross anzeigen'}">${ico(isKino?'compress':'expand')}</button>`);
-  const ks=$('#kinostep'); if(ks){ ks.setAttribute('aria-expanded',String(listOpen)); ks.innerHTML=n?`<span class="k">Schritt ${P.idx+1} von ${n} · Alle Schritte</span><span class="lbl">${esc(stepLabel)}</span>`:`<span class="k">Frei schauen</span><span class="lbl">${esc(v.title)}</span>`; }
-  $('#controls').innerHTML=n?`<button class="kbtn round" data-act="prevstep" aria-label="Schritt zurück" ${P.idx===0?'disabled':''}>${ico('prev')}</button>${mid}<button class="kbtn round" data-act="replay" aria-label="Schritt nochmal">${ico('replay')}</button><span class="pl-controls-space"></span>${spd}`
+  const ks=$('#kinostep'); if(ks){ ks.setAttribute('aria-expanded',String(listOpen)); ks.innerHTML=`<span class="k">${position}</span><span class="lbl">${esc(stepLabel)}</span>${n?`<span class="pl-list-hint">${listOpen?'Schritte schliessen':'Alle Schritte'} ${ico('down')}</span>`:''}`; }
+  $('#controls').innerHTML=n?`<button class="kbtn round" data-act="prevstep" aria-label="Schritt zurück" title="Schritt zurück" ${P.idx===0?'disabled':''}>${ico('prev')}</button>${mid}<button class="kbtn round" data-act="nextstep" aria-label="Nächster Schritt" title="Nächster Schritt" ${P.idx===n-1?'disabled':''}>${ico('next')}</button><button class="kbtn round" data-act="replay" aria-label="Schritt nochmal" title="Schritt nochmal">${ico('replay')}</button><span class="pl-controls-space"></span>${spd}`
     :`<button class="kbtn round" data-act="back10" aria-label="10 Sekunden zurück">${ico('replay')}</button>${mid}<button class="kbtn round" data-act="fwd10" aria-label="10 Sekunden vor">${ico('next')}</button>${spd}`;
   // Auftrag
   const tk=$('#task'); const task=(SCHULE?null:v.task)||{text:'',deliverable:'keine'};

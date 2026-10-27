@@ -438,18 +438,35 @@ function checkPlayerScreens() {
       const controls = rt.app.querySelector('#controls');
       assert(controls.innerHTML.includes('<button'), `Player controls missing in ${mode}`);
       assert(!/undefined|NaN/.test(controls.innerHTML), `Invalid player control output in ${mode}`);
-      assert(rt.app.querySelector('#schritte').hidden, 'Full step list must start collapsed');
+      assert(!rt.app.querySelector('#schritte').hidden, 'Step overview must stay visible beside the video');
+      assert.equal(rt.app.querySelector('#pl-position').textContent, withSteps ? 'Schritt 1 von 2' : 'Frei schauen', 'Playback position must remain visible in every state');
+      assert.equal(controls.innerHTML.includes('data-act="nextstep"'), withSteps, 'Step videos need a direct next-step button');
       if (mode === 'playing') assert(overlay.hidden, 'Overlay must not obscure playback');
       if (mode === 'error') assert(overlay.innerHTML.includes('data-act="retry"'), 'Video error needs retry action');
       if (mode === 'stepdone') assert(rt.app.querySelector('#pl-current').innerHTML.includes('Jetzt du!'), 'Step stop needs make-it prompt');
       states++;
     }
     if (withSteps) {
+      for (const mode of ['playing', 'paused', 'stepdone']) {
+        rt.run(`P.idx=0;P.mode=${JSON.stringify(mode)};updatePlayerUI();`);
+        click(rt, 'nextstep');
+        assert.equal(rt.run('P.idx'), 1, `Skip must advance while ${mode}`);
+        assert.equal(rt.run('P.mode'), 'playing', 'Skip must play the selected step');
+        assert.equal(rt.app.querySelector('#pl-position').textContent, 'Schritt 2 von 2');
+        assert.match(rt.app.querySelector('#controls').innerHTML, /data-act="nextstep"[^>]*disabled/, 'Skip must be disabled on the final step');
+        click(rt, 'nextstep');
+        assert.equal(rt.run('P.mode'), 'playing', 'Skipping at the end must not complete an unfinished video');
+        click(rt, 'prevstep');
+        assert.equal(rt.run('P.idx'), 0);
+        assert.equal(rt.app.querySelector('#pl-position').textContent, 'Schritt 1 von 2');
+      }
+      click(rt, 'dot', {i:'1'});
+      assert(!rt.app.querySelector('#schritte').hidden, 'Selecting a step must keep the normal overview open');
       rt.run("P.pr.step=1;P.idx=1;P.mode='start';updatePlayerUI();");
       assert(rt.app.querySelector('#overlay').innerHTML.includes('data-act="resume"'), 'Second step in a video without materials must offer resume');
     }
   }
-  reports.push(`Video interface: ${states} state renders with/without steps, collapsed list, visible retry and watch/do prompts.`);
+  reports.push(`Video interface: ${states} state renders with/without steps, open overview, persistent step count, direct next/back navigation and final-step guard.`);
 }
 
 function checkReturnNavigation() {

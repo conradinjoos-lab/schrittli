@@ -1,4 +1,4 @@
-/* Der Lernraum: ein Bild, ein Schritt, eine klare nächste Handlung. */
+/* Der Lernraum: Video, aktueller Schritt und sichtbare Schrittübersicht. */
 .kid.pl.lernraum{
   --kink:#183D3A;--wtext:#183D3A;--wmuted:#586E68;--paper-muted:#586E68;
   --paper:#FFF;--sign:#F5CD65;--sh:rgba(24,61,58,.08);--screen:#183D3A;
@@ -16,7 +16,8 @@
 .kid.pl.lernraum .kopf-rechts{margin-left:auto;flex:none}
 .kid.pl.lernraum .fm-pill{min-width:44px;min-height:44px;width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:#586E68;box-shadow:none;padding:10px;display:grid;place-items:center}
 .kid.pl.lernraum .fm-pill .ico{width:20px;height:20px}
-.kid.pl.lernraum:not(.kino) .panes{flex:none;grid-template-columns:minmax(0,2.15fr) minmax(270px,1fr);gap:28px;align-items:start;margin-top:0}
+.kid.pl.lernraum:not(.kino) .panes{display:grid;flex:none;grid-template-columns:minmax(0,2.15fr) minmax(240px,1fr);gap:28px;align-items:start;margin-top:0}
+.kid.pl.lernraum:not(.kino) .pane{padding:0;margin:0;min-height:0}
 .kid.pl.lernraum:not(.kino) .video-box{width:100%;max-width:none;margin:0;border:0;border-radius:28px;box-shadow:0 12px 36px rgba(24,61,58,.11);background:#183D3A;isolation:isolate}
 .kid.pl.lernraum .overlay{background:#183D3A;color:#FFF;border:0;gap:12px}
 .kid.pl.lernraum .overlay h2{font-family:inherit;color:#FFF;font-weight:900;font-size:clamp(22px,2.8vw,34px)}
@@ -55,11 +56,8 @@
 .kid.pl.lernraum .pl-safety{display:flex;gap:12px;align-items:center;background:#FFF1D1;color:#654B12;padding:14px;border-radius:16px;margin-top:18px}
 .kid.pl.lernraum .pl-safety>span{font-size:36px;line-height:1;flex:none}
 .kid.pl.lernraum .pl-safety b{font-size:15px;line-height:1.3}
-.kid.pl.lernraum .pl-steps-toggle{display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;width:100%;font-family:inherit;font-size:14px;font-weight:900;color:#586E68;background:transparent;border:1px solid #DFE5DA;border-radius:16px}
-.kid.pl.lernraum .pl-steps-toggle .ico:last-child{margin-left:auto}
-.kid.pl.lernraum .pl-steps-toggle .ico:first-child{margin-left:16px}
-.kid.pl.lernraum .pl-steps-toggle .ico:last-child{margin-right:16px}
-.kid.pl.lernraum .pl-steps-toggle[aria-expanded=true] .ico:last-child{transform:rotate(180deg)}
+.kid.pl.lernraum .pl-steps-heading{font-family:inherit;font-size:14px;font-weight:900;color:#586E68;margin:0;padding-inline:8px;flex:none}
+.kid.pl.lernraum .pl-position{font-size:18px;font-weight:900;line-height:1.3;color:#183D3A;margin-bottom:10px}
 .kid.pl.lernraum:not(.kino) .schritte{height:auto;max-height:360px;aspect-ratio:auto;padding:8px;background:#FFF;border:1px solid #DFE5DA;box-shadow:none;border-radius:20px;scrollbar-width:thin}
 .kid.pl.lernraum .sbtn{font-family:inherit;font-size:14px;min-height:52px;border:0;border-radius:12px;background:#F7F8F4;color:#183D3A;padding:10px;gap:10px;box-shadow:none}
 .kid.pl.lernraum .sbtn.cur{background:#E6EFE6;border:1px solid #B7CEC1;font-size:14px;box-shadow:none}
@@ -67,7 +65,7 @@
 .kid.pl.lernraum .sbtn.cur .num{background:#22645B;color:#FFF}
 .kid.pl.lernraum:not(.kino) .pl-bank{position:relative;z-index:1;background:transparent;box-shadow:none;border:0;margin-top:8px;padding:10px 0 calc(18px + env(safe-area-inset-bottom,0px));flex:none}
 .kid.pl.lernraum:not(.kino) .steuer{margin:0;flex-wrap:wrap;gap:16px;align-items:center}
-.kid.pl.lernraum .controls{gap:10px;flex-wrap:nowrap;width:100%}
+.kid.pl.lernraum .controls{gap:10px;flex-wrap:wrap;width:100%}
 .kid.pl.lernraum:not(.kino) .controls{max-width:none}
 .kid.pl.lernraum .controls .kbtn{border:1px solid #DDE4DB;background:#FFF;box-shadow:none;min-height:58px;color:#183D3A;border-radius:18px;font-family:inherit;font-weight:900}
 .kid.pl.lernraum .controls .kbtn.round{width:58px;min-height:58px;font-size:24px;flex:none}
@@ -82,12 +80,17 @@
 .kid.pl.lernraum .auftrag .k{color:#586E68;font-size:12px}
 .kid.pl.lernraum .auftrag .txt{font-size:18px;line-height:1.4}
 .kid.pl.lernraum .auftrag .kbtn{background:#22645B;color:#FFF;border:0;box-shadow:none;font-family:inherit;border-radius:14px}
-.kid.pl.lernraum.kino .pl-current,.kid.pl.lernraum.kino .pl-steps-toggle{display:none}
+.kid.pl.lernraum.kino .pl-current,.kid.pl.lernraum.kino .pl-steps-heading,.kid.pl.lernraum.kino .pl-position{display:none}
 .kid.pl.lernraum.kino .controls{width:auto;flex:none}
+.kid.pl.lernraum.kino .steuer{width:100%;min-width:0}
 .kid.pl.lernraum.kino .controls .pl-main-action{min-width:124px;min-height:58px;padding-inline:16px}
 .kid.pl.lernraum.kino .pl-controls-space{display:none}
-.kid.pl.lernraum.kino .kinostep{border:0}
+.kid.pl.lernraum.kino .kino-step{border:0;background:transparent}
+.kid.pl.lernraum.kino .kino-step .k{font-family:inherit;font-size:18px;font-weight:900;letter-spacing:0;color:#F5CD65;line-height:1.3}
 .kid.pl.lernraum.kino .kino-step .lbl{font-family:inherit;font-size:20px}
+.kid.pl.lernraum.kino .pl-list-hint{display:flex;align-items:center;gap:6px;font-size:12px;color:#DDD;line-height:1.3}
+.kid.pl.lernraum.kino .pl-list-hint .ico{width:16px;height:16px}
+.kid.pl.lernraum.kino.liste .pl-list-hint .ico{transform:rotate(180deg)}
 .kid.pl.lernraum.kino .modebadge{left:50%;transform:translateX(-50%)}
 /* Foto-Anleitungen verwenden dieselbe ruhige Sprache und dieselben Formen. */
 .v3.an .an-progress{display:flex;align-items:center;gap:18px;margin:22px 0 8px;color:#586E68;font-size:13px;font-weight:900}
@@ -139,20 +142,22 @@
 .v3.an .an-ende{border-radius:30px;background:#FFF;border:1px solid #E3E9DF;box-shadow:none;padding:36px}
 .v3.an .an-ende h2{font-size:30px;line-height:1.2}
 @media(max-width:1050px){
-  .kid.pl.lernraum:not(.kino) .panes{grid-template-columns:minmax(0,1.8fr) minmax(250px,1fr);gap:20px}
+  .kid.pl.lernraum:not(.kino) .panes{grid-template-columns:minmax(0,1.8fr) minmax(230px,1fr);gap:20px}
   .kid.pl.lernraum .pl-current{padding:20px}
-  .kid.pl.lernraum:not(.kino) .controls{max-width:none}
+  .kid.pl.lernraum:not(.kino) .controls{max-width:none;gap:8px}
+  .kid.pl.lernraum:not(.kino) .controls .kbtn.round{width:48px;min-height:48px}
+  .kid.pl.lernraum:not(.kino) .controls .pl-main-action{min-width:130px;min-height:54px;padding-inline:14px;font-size:17px;flex:1}
+  .kid.pl.lernraum:not(.kino) .controls .speed{min-width:48px;min-height:48px;padding:4px 8px}
+  .kid.pl.lernraum:not(.kino) .pl-controls-space{display:none}
   .kid.pl.lernraum .pl-current h2{font-size:22px}
 }
 @media(max-width:800px){
   .kid.pl.lernraum .inner{padding-inline:max(18px,env(safe-area-inset-left,0px))}
   .kid.pl.lernraum .pl-top{padding-block:18px 22px;gap:12px;min-height:84px}
-  .kid.pl.lernraum:not(.kino) .panes{grid-template-columns:1fr;gap:18px}
   .kid.pl.lernraum .pl-current h2{font-size:23px}
   .kid.pl.lernraum .pl-current>.figur{float:right;height:88px;margin:0 0 0 16px}
   .kid.pl.lernraum .pl-material{grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:12px;max-width:660px}
   .kid.pl.lernraum .pl-material>div>span{max-width:100px}
-  .kid.pl.lernraum:not(.kino) .pl-bank{margin-top:20px;padding-block:12px calc(12px + env(safe-area-inset-bottom,0px))}
   .v3.an .an-start,.v3.an .an-schritt{grid-template-columns:1fr;gap:20px;margin-top:20px}
   .v3.an .an-start-copy{gap:16px;padding:0}
   .v3.an .an-held img{max-height:46vh;min-height:200px}
@@ -161,6 +166,22 @@
   .v3.an .an-text .an-nr{margin-bottom:14px}
   .v3.an .an-text p{font-size:22px}
   .v3.an .an-progress{margin-top:18px}
+}
+@media(min-width:700px) and (min-height:540px){
+  .kid.pl.lernraum:not(.kino){height:100vh;height:100dvh;min-height:0;overflow:hidden}
+  .kid.pl.lernraum:not(.kino) .panes{flex:1;min-height:0;align-items:stretch;padding-bottom:12px}
+  .kid.pl.lernraum:not(.kino) .video-box{width:min(100%,calc(var(--pl-avail,360px)*16/9));flex:none;margin:0 auto}
+  .kid.pl.lernraum:not(.kino) .pl-bank{margin-top:0}
+  .kid.pl.lernraum:not(.kino) .pl-guide{height:100%;min-height:0}
+  .kid.pl.lernraum:not(.kino) .pl-current{flex:none;max-height:46%;overflow-y:auto;padding:18px}
+  .kid.pl.lernraum:not(.kino) .pl-current>.figur{display:none}
+  .kid.pl.lernraum:not(.kino) .pl-current-top{margin-bottom:12px}
+  .kid.pl.lernraum:not(.kino) .pl-current h2{font-size:21px}
+  .kid.pl.lernraum:not(.kino) .pl-track{margin-top:14px}
+  .kid.pl.lernraum:not(.kino) .schritte{flex:1;min-height:0;height:auto;max-height:none;overscroll-behavior:contain}
+}
+@media(max-width:699px){
+  .kid.pl.lernraum:not(.kino) .panes{grid-template-columns:1fr;gap:18px}
 }
 @media(max-width:520px){
   .kid.pl.lernraum .inner{padding-inline:max(14px,env(safe-area-inset-left,0px))}
@@ -195,11 +216,26 @@
   .v3.an .an-nav .v3-pill{padding-inline:16px}
 }
 @media(orientation:landscape) and (max-height:500px){
+  .kid.pl.lernraum.kino{--kb:max(190px,calc(100dvw - 100dvh*16/9 - env(safe-area-inset-left,0px)))}
+  .kid.pl.lernraum.kino .kino-step .lbl{font-size:16px}
   .kid.pl.lernraum.kino .controls{flex-wrap:wrap;width:100%;gap:7px}
   .kid.pl.lernraum.kino .controls .pl-main-action{order:-1;flex:0 0 100%;min-width:0;min-height:48px;font-size:16px;padding-inline:8px}
   .kid.pl.lernraum.kino .controls .kbtn.round{width:44px;min-height:44px;font-size:20px}
   .kid.pl.lernraum.kino .controls .speed{min-width:44px;min-height:44px;padding:4px 6px}
   .kid.pl.lernraum.kino .controls .speed .lab{display:none}
 }
-@media(min-height:501px){.kid.pl.lernraum.kino .pl-bank{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}}
+@media(min-height:501px){
+  .kid.pl.lernraum.kino .pl-bank{display:block;min-height:0;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+  .kid.pl.lernraum.kino .steuer{width:100%;flex-wrap:wrap;gap:8px}
+  .kid.pl.lernraum.kino .kino-step{order:-1;flex:0 0 100%;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px;padding:4px 0}
+  .kid.pl.lernraum.kino .kino-step .k{white-space:nowrap}
+  .kid.pl.lernraum.kino .kino-step .lbl{font-size:18px;-webkit-line-clamp:1}
+  .kid.pl.lernraum.kino .controls{width:100%;flex-wrap:wrap;justify-content:center}
+  .kid.pl.lernraum.kino .video-box{width:min(100vw,calc((100vh - var(--pl-bank-height,150px))*16/9));width:min(100dvw,calc((100dvh - var(--pl-bank-height,150px))*16/9));top:max(0px,calc((100dvh - var(--pl-bank-height,150px) - 56.25dvw)/2))}
+  .kid.pl.lernraum.kino .schritte{bottom:calc(var(--pl-bank-height,150px) + 12px)}
+}
+@media(max-width:699px) and (min-height:501px){
+  .kid.pl.lernraum.kino .kino-step{grid-template-columns:minmax(0,1fr) auto;gap:4px 10px}
+  .kid.pl.lernraum.kino .kino-step .lbl{grid-column:1 / -1;grid-row:2;font-size:16px}
+}
 @media(prefers-reduced-motion:reduce){.kid.pl.lernraum .pl-track i{transition:none}}
