@@ -31,3 +31,14 @@ invocation_logs = false
 
 [observability.traces]
 enabled = true
+
+[[d1_databases]]
+binding = "SAMMLUNG"
+database_name = "schrittli-werke"
+database_id = "d0bba524-426e-4259-951f-556fa78974d0"
+migrations_dir = "sammlung-migrations"
+
+[[ratelimits]]
+name = "SAMMLUNG_LIMIT"
+namespace_id = "2026102702"
+simple = { limit = 120, period = 60 }

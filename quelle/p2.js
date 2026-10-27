@@ -195,17 +195,17 @@ function kidClass(extra=''){ const n=abend(); const tc=$('#themecolor'); if(tc) 
 const blobs={db:null,mem:new Map(),urls:new Map(),
   open(){ return new Promise(res=>{ if(!('indexedDB' in window)) return res(); try{ const r=indexedDB.open('schrittli',1); r.onupgradeneeded=()=>r.result.createObjectStore('blobs'); r.onsuccess=()=>{this.db=r.result;res()}; r.onerror=()=>res(); }catch(e){res()} }); },
   tx(mode){ return this.db.transaction('blobs',mode).objectStore('blobs'); },
-  put(k,b){ if(!this.db){this.mem.set(k,b);return Promise.resolve();} return new Promise((res,rej)=>{ const r=this.tx('readwrite').put(b,k); r.onsuccess=()=>res(); r.onerror=()=>rej(r.error); }); },
+  put(k,b){ if(!this.db){this.mem.set(k,b);return Promise.resolve();} return new Promise((res,rej)=>{ const tx=this.db.transaction('blobs','readwrite');tx.objectStore('blobs').put(b,k);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error);tx.onabort=()=>rej(tx.error||new Error('Speichern abgebrochen')); }); },
   get(k){ if(!this.db) return Promise.resolve(this.mem.get(k)||null); return new Promise(res=>{ const r=this.tx('readonly').get(k); r.onsuccess=()=>res(r.result||null); r.onerror=()=>res(null); }); },
-  del(k){ this.urls.delete(k); if(!this.db){this.mem.delete(k);return Promise.resolve();} return new Promise(res=>{ const r=this.tx('readwrite').delete(k); r.onsuccess=()=>res(); r.onerror=()=>res(); }); },
+  del(k){ if(this.urls.has(k))URL.revokeObjectURL(this.urls.get(k));this.urls.delete(k); if(!this.db){this.mem.delete(k);return Promise.resolve();} return new Promise(res=>{ const r=this.tx('readwrite').delete(k); r.onsuccess=()=>res(); r.onerror=()=>res(); }); },
   async url(k){ if(this.urls.has(k)) return this.urls.get(k); const b=await this.get(k); if(!b) return null; const u=URL.createObjectURL(b); this.urls.set(k,u); return u; }
 };
-async function saveWork({type,blob,videoId,name,klasse}){
-  const id=uid(); try{ await blobs.put(id,blob); }catch(e){ toast('Konnte nicht speichern – sag es deinen Eltern',4000); throw e; }
-  S.works.unshift({id,profileId:S.activeProfile,videoId:videoId||null,type,createdAt:Date.now(),feedback:null,fbSeen:true,name:name||null,klasse:klasse||null});
+async function saveWork({type,blob,videoId,name,klasse,sterne}){
+  const id=SCHULE?schulUuid():uid(); if(SCHULE&&!blobs.db){toast('Der Fotospeicher ist nicht verfügbar. Bitte Safari neu öffnen.',5000);throw new Error('Fotospeicher fehlt');} try{ await blobs.put(id,blob); }catch(e){ toast('Konnte nicht speichern – sag es deinen Eltern',4000); throw e; }
+  S.works.unshift({id,profileId:S.activeProfile,videoId:videoId||null,type,createdAt:Date.now(),feedback:null,fbSeen:true,name:name||null,klasse:klasse||null,...(SCHULE?{sterne,schulNeu:true,titel:videoOf(videoId)?.title||P?.v?.title||'Mein Werk',sammlungId:schulVerbindung?.id||null,sync:schulVerbindung?'wartet':'lokal'}:{})});
   let star=false;
   if(videoId&&S.activeProfile){ const p=prog(videoId); if(!p.done){ p.done=true; if(S.settings.earnStar) star=earnStar(); } }
-  save(); return star;
+  if(SCHULE){try{schulDauerhaftSpeichern();}catch(e){toast('Der Speicher ist voll. Bitte deiner Lehrperson zeigen.',5000);throw e;}void schulSync();} save(); return star;
 }
 async function fillThumbs(root){ for(const el of $$('[data-blob]',root)){ const u=await blobs.url(el.dataset.blob); if(u&&el.tagName==='IMG') el.src=u; } }
 
@@ -221,7 +221,7 @@ function stopListening(){ if(rec){ try{ rec.onend=null; rec.stop(); }catch(e){} 
 
 /* ============================== UI-Helfer ============================== */
 function toast(msg,ms=2200){ const t=document.createElement('div'); t.className='toast'; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),ms); }
-function modal(html,actions={},cls=''){
+function modal(html,actions={},cls='',onClose=null){
   const previous=document.activeElement,m=document.createElement('div');m.className='modal-bg';
   if(/\bkid\b/.test(cls)&&schriftNormal())cls+=' schrift-normal';
   m.innerHTML='<div class="modal '+cls+'" role="dialog" aria-modal="true" tabindex="-1">'+html+'</div>';
@@ -229,7 +229,7 @@ function modal(html,actions={},cls=''){
   const dialog=$('.modal',m),heading=$('h2',m);
   if(heading){heading.id='dialog-'+uid();dialog.setAttribute('aria-labelledby',heading.id);}else dialog.setAttribute('aria-label','Schritt für Schritt');
   let closed=false;
-  const close=()=>{if(closed)return;closed=true;m.remove();if(previous&&previous.isConnected)previous.focus({preventScroll:true});};
+  const close=()=>{if(closed)return;closed=true;m.remove();if(onClose)onClose();if(previous&&previous.isConnected)previous.focus({preventScroll:true});};
   const focusable=()=>$$('button:not([disabled]),a[href],input:not([disabled]),textarea:not([disabled]),select:not([disabled]),[tabindex="0"]',m).filter(el=>el.getClientRects().length);
   m.addEventListener('keydown',e=>{
     if(e.key==='Escape'){e.preventDefault();e.stopPropagation();close();return;}
@@ -254,7 +254,7 @@ function fmGeraet(){ const u=navigator.userAgent; const os=/iPad/.test(u)||(/Mac
 function fmKontext(){ const k={app:SCHULE?'Schule':'Familie',seite:view.name,video:'',titel:'',schritt:0,zeit:null};
   try{ if(P&&P.v){ k.video=P.v.id; k.titel=P.v.title||''; k.schritt=P.steps.length?P.idx+1:0; k.zeit=Math.round(P.api.time()); } else if(ORT){ Object.assign(k,ORT()); }
     else { const p=view.params||{}; const v=p.v||p.video||null; if(v&&v.id){ k.video=v.id; k.titel=v.title||''; } else if(p.areaId||p.id) k.titel=String(p.areaId||p.id); } }catch(e){}
-  return {...k,adresse:location.pathname+location.hash,geraet:fmGeraet(),fenster:innerWidth+'×'+innerHeight}; }
+  return {...k,adresse:location.pathname+location.hash.replace(/([#&](?:sammlung|klasse)=)[^&]*/g,'$1[verborgen]'),geraet:fmGeraet(),fenster:innerWidth+'×'+innerHeight}; }
 const FM_ARTEN=[['video','Video läuft nicht'],['stopp','Stopp an falscher Stelle'],['text','Text oder Material falsch'],['anderes','Etwas anderes']];
 function fehlerMelden(){ try{ if(P&&P.api) P.api.pause(); }catch(e){}
   const k=fmKontext(); const zeit=k.zeit!=null?` · ${Math.floor(k.zeit/60)}:${String(k.zeit%60).padStart(2,'0')}`:'';
@@ -286,8 +286,8 @@ function backToIdeas(a,shared){
   if(back)requestAnimationFrame(()=>window.scrollTo(0,back.scroll));
 }
 function leaveScreen(){ if(typeof feedbackCleanup==='function')feedbackCleanup(); if(P){ P._fsLeaving=true; P.destroy(); P=null; } fsExit(); if(ED&&ED.api){ ED.api.destroy(); ED.api=null; } stopListening(); try{ speechSynthesis.cancel(); }catch(e){} }
-function render(){ const app=$('#app'); app.innerHTML=''; app.onclick=null; app.oninput=null; app.onchange=null; (SCREENS[view.name]||SCREENS.home)(app,view.params); }
-function wire(app,actions){ app.onclick=e=>{ const b=e.target.closest('[data-act]'); if(!b||!app.contains(b)) return; const fn=actions[b.dataset.act]||(b.dataset.act==='klassewahl'?klasseWaehlen:b.dataset.act==='app-speichern'?appSpeichern:null); if(fn){ e.preventDefault(); fn(b,e); } }; }
+function render(){ const app=$('#app'); app.innerHTML=''; app.onclick=null; app.oninput=null; app.onchange=null; (SCREENS[view.name]||SCREENS.home)(app,view.params); if(typeof schulRefreshUI==='function')schulRefreshUI(); }
+function wire(app,actions){ app.onclick=e=>{ const b=e.target.closest('[data-act]'); if(!b||!app.contains(b)) return; const fn=actions[b.dataset.act]||(b.dataset.act==='schul-verbinden'?schulVerbindungsDialog:null)||(b.dataset.act==='klassewahl'?klasseWaehlen:b.dataset.act==='app-speichern'?appSpeichern:null); if(fn){ e.preventDefault(); fn(b,e); } }; }
 function kopf(title,{back,right='',sub=''}={}){ return `<div class="inner kopf" style="padding-left:max(16px,env(safe-area-inset-left,0px))">${back?`<a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a>`:''}<div class="schild"><h1>${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:''}</div><div class="kopf-rechts">${right}</div></div>`; }
 function bank(opts={}){ return `<div class="bank"><div class="inner deko-reihe"><span class="grow"></span></div><div class="platte"></div><div class="front"></div></div>`; }
 
@@ -323,9 +323,9 @@ async function boot(){
   if(!S.profiles.length){ go('firstrun'); return; }
   if(!S.activeProfile||!profile()) S.activeProfile=S.profiles[0].id;
   go(S.profiles.length>1?'profiles':'home');
-  }finally{if(typeof feedbackStart==='function')await feedbackStart($('#app'));}
+  }finally{if(typeof schulStart==='function')await schulStart();if(typeof feedbackStart==='function')await feedbackStart($('#app'));}
 }
-window.addEventListener('hashchange',()=>{ if(/^#klasse=/.test(location.hash)&&typeof feedbackStart==='function'){feedbackStart($('#app'));return;} const s=parseSchool(); if(s) go('school',{video:s}); });
+window.addEventListener('hashchange',()=>{ if(/^#sammlung=/.test(location.hash)&&SCHULE){void schulStart();return;} if(/^#klasse=/.test(location.hash)&&typeof feedbackStart==='function'){feedbackStart($('#app'));return;} const s=parseSchool(); if(s) go('school',{video:s}); });
 
 SCREENS.firstrun=app=>{
   let emoji=AVATARS[0], color=COLORS[1]; const n=abend();
@@ -388,7 +388,7 @@ function projectCard(v){
     <span class="th"><span class="v3-image-fallback" aria-hidden="true">${a?esc(a.emoji):'✂️'}</span>${th?`<img src="${esc(th)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`:''}
       ${photo?'<span class="v3-card-kind">Fotos</span>':''}<span class="v3-card-play" aria-hidden="true">${ico(photo?'next':'play')}</span>
       ${pr.done?`<span class="v3-card-progress fertig">${ico('check')} Geschafft</span>`:started?'<span class="v3-card-progress">Weitermachen</span>':''}</span>
-    <span class="grow"><b>${esc(title)}</b>${arbeitszeit(v)?`<span class="v3-worktime">ca. ${arbeitszeit(v)} Min.</span>`:''}</span></button>`;
+    <span class="grow"><b>${esc(title)}</b>${arbeitszeit(v)?`<span class="v3-worktime">ca. ${arbeitszeit(v)} Min.</span>`:''}${typeof schulProjektHtml==='function'?schulProjektHtml(v.id):''}</span></button>`;
 }
 const FEATURED_PROJECTS=['wl-wickeldrache','zw-igel-holz','zw-karte-herz-weben','zw-filzseife','zw-fadenbild','zw-wollgespenst','zw-eulen-kartoffelstempel','flieger-windhover','stifteetui-ungefuettert','buchtasche'];
 function featuredProjects(vs,limit=6){
@@ -549,7 +549,7 @@ SCREENS.lehrer=app=>{ const n=abend();
   if(!LP21) loadLp21().then(()=>{ if(LP21&&view.name==='lehrer') render(); });
   const vids=S.videos.slice().sort((a,b)=>(a.areaId+a.title).localeCompare(b.areaId+b.title,'de'));
   app.innerHTML=`<div class="${kidClass()} schrift-normal">${girlande(n)}${kopf('Für Lehrpersonen',{back:true})}
-    <div class="inner">${genKarten()}
+    <div class="inner">${typeof schulLehrerHtml==='function'?schulLehrerHtml():''}${genKarten()}
     <div class="lehrer-liste">${S.areas.map(a=>{ const vs=vids.filter(v=>v.areaId===a.id); if(!vs.length) return ''; return `<h2 style="color:${a.color};margin:14px 0 6px">${a.emoji} ${esc(a.name)}</h2>${vs.map(v=>`<div class="lrow"><span class="ltitel"><b>${esc(v.title)}</b>${v.grundtechnik?' <span class="gt">Grundtechnik</span>':''}<span class="lmeta">${v.zeit?`⏱ ${v.zeit} Min. · `:''}${(v.steps||[]).length?v.steps.length+' Schritte':'ohne Schritte'}${(v.material||[]).length?' · '+v.material.map(matName).join(', '):''}</span></span>${niveauHtml(v)}<span class="stufen">${(v.stufen||[]).map(s=>`<b>${s}</b>`).join('')}</span>${LP21&&LP21.zuordnung[v.id]?`<button class="lp-chip" data-act="lp" data-id="${v.id}" aria-expanded="false" title="LP21-Kompetenzen anzeigen">LP21</button>`:''}<button class="btn sm" data-act="qr" data-id="${v.id}"><span class="lang">QR-Code</span><span class="kurz">QR</span></button></div>`).join('')}`; }).join('')}</div></div>
     ${bank()}</div>`;
   wire(app,{ back:()=>go('home'),
@@ -644,7 +644,7 @@ SCREENS.anleitung=(app,{v,school})=>{
         ${s.zeigen?`<div class="an-box zeigen${gesperrt?'':' ok'}"><span class="sym" aria-hidden="true">${gesperrt?'🙋':'✓'}</span><div><p>${esc(s.zeigen)}</p><button class="an-gesehen" data-act="gesehen" aria-pressed="${!gesperrt}" aria-label="${wer} hat es gesehen">${ico('check')} ${gesperrt?'Gezeigt?':'Gezeigt!'}</button></div></div>`:''}
         <div class="an-nav"><button class="v3-pill" data-act="geh" data-i="${i-1}">← Zurück</button><button class="an-weiter" data-act="geh" data-i="${i+1}" ${gesperrt?'disabled':''}>${i===n-1?'Fertig ✓':'Weiter →'}</button></div>
         </div></div>`; }
-    app.innerHTML=`<div class="v3 an${schriftNormal()?'':' caps'}"><div class="v3-in">${kopfHtml}${i>=0&&i<n?balken:''}${inhalt}</div></div>`;
+    app.innerHTML=`<div class="v3 an${schriftNormal()?'':' caps'}"><div class="v3-in">${kopfHtml}${i>=0&&i<n?balken:''}${inhalt}${SCHULE?`<section class="sw-project-works" data-schul-projekt-liste="${esc(v.id)}"></section>`:''}</div></div>`; if(SCHULE&&typeof schulRefreshUI==='function')schulRefreshUI();
     const ta=$('#an-antwort'); if(ta) ta.oninput=()=>{ pr.antworten[i]=ta.value; save(); };
     if(s&&S.settings.autoRead) speak(vorlesen(s)); };
   const geh=k=>{ k=Math.max(-1,Math.min(n,k)); try{ speechSynthesis.cancel(); }catch(e){}
@@ -672,7 +672,7 @@ SCREENS.player=(app,{videoId,school})=>{
     <div class="inner panes">
       <div class="pane pl-video"><div class="video-box"><div class="host" id="host"></div><div class="shield" id="shield" data-act="shield"></div><div class="overlay" id="overlay"></div><span class="modebadge" id="modebadge" hidden></span></div><div class="pl-bank"><div class="steuer"><div class="controls" id="controls"></div><button class="kino-step" id="kinostep" data-act="liste" aria-controls="schritte" aria-expanded="false"></button><div class="auftrag" id="task"></div></div></div></div>
       <div class="pane pl-guide"><div id="pl-current" class="pl-current" aria-live="polite"></div><button class="pl-steps-toggle" id="pl-steps-toggle" data-act="liste" aria-expanded="false" aria-controls="schritte">${ico('gallery')} Alle Schritte ${ico('down')}</button><div class="schritte" id="schritte" hidden></div></div>
-    </div>
+    </div>${SCHULE?`<section class="sw-project-works" data-schul-projekt-liste="${esc(v.id)}"></section>`:''}
   </div>`;
   P={v,steps,pr,school,idx:Math.max(0,Math.min(pr.step||0,Math.max(0,steps.length-1))),mode:'start',needsTap:false,err:null,playAt:0,api:null,tick:null,lastSave:0,
     destroy(){ clearInterval(this.tick); if(this.api) this.api.destroy(); if(!school) save(); }};
@@ -808,11 +808,11 @@ function nameUndKlasse(fertig){
   setTimeout(()=>nm.focus(),50);
 }
 function takePhoto(videoId,nachher){
-  const done=async b=>{ let star=false; const wer=await new Promise(nameUndKlasse); try{ star=await saveWork({type:'foto',blob:b,videoId,...wer}); }catch(e){ return; } confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Foto gespeichert!'); if(nachher) nachher(); else if(P) updatePlayerUI(); };
+  const done=async b=>{ if(!b){toast('Das Foto konnte nicht gespeichert werden.');return;} let star=false; const wer=SCHULE?await schulFotoAngaben():await new Promise(nameUndKlasse); if(!wer)return; try{ star=await saveWork({type:'foto',blob:b,videoId,...wer}); }catch(e){ return; } confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':(SCHULE&&schulVerbindung?'Foto gespeichert – wird automatisch geteilt.':'Foto gespeichert!')); if(nachher) nachher(); else if(P) updatePlayerUI(); };
   const inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.setAttribute('capture','environment');
   inp.onchange=()=>{ const f=inp.files[0]; if(!f) return; const img=new Image(); const u=URL.createObjectURL(f);
-    img.onload=()=>{ const max=1400, sc=Math.min(1,max/Math.max(img.width,img.height)); const c=document.createElement('canvas'); c.width=Math.round(img.width*sc); c.height=Math.round(img.height*sc); c.getContext('2d').drawImage(img,0,0,c.width,c.height); URL.revokeObjectURL(u); c.toBlob(b=>done(b),'image/jpeg',.85); };
-    img.onerror=()=>toast('Das Bild konnte nicht gelesen werden'); img.src=u; };
+    img.onload=()=>{ const max=1400, sc=Math.min(1,max/Math.max(img.width,img.height)); const c=document.createElement('canvas'); c.width=Math.round(img.width*sc); c.height=Math.round(img.height*sc); c.getContext('2d').drawImage(img,0,0,c.width,c.height); URL.revokeObjectURL(u); if(SCHULE)schulFotoKomprimieren(c).then(done).catch(()=>toast('Das Foto konnte nicht verkleinert werden.'));else c.toBlob(b=>done(b),'image/jpeg',.85); };
+    img.onerror=()=>{URL.revokeObjectURL(u);toast('Das Bild konnte nicht gelesen werden');}; img.src=u; };
   inp.hidden=true; document.body.appendChild(inp); inp.addEventListener('change',()=>setTimeout(()=>inp.remove(),2000)); inp.click();
 }
 function afterWork(pr,star){ confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Gespeichert!'); if(pr.back==='player'&&pr.videoId) go('player',{videoId:pr.videoId}); else go('gallery'); }
@@ -964,8 +964,8 @@ function tabVideoEditor(root,acts,{videoId}){
 }
 function parseSource(s){ s=(s||'').trim(); if(!s) return null; let m=s.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/); if(m) return {type:'youtube',id:m[1]}; if(/^[A-Za-z0-9_-]{11}$/.test(s)) return {type:'youtube',id:s}; if(/^https?:\/\//.test(s)&&!/youtube|youtu\.be/.test(s)) return {type:'file',url:s}; return null; }
 async function fetchTitle(id){ const url=encodeURIComponent('https://www.youtube.com/watch?v='+id); for(const ep of ['https://www.youtube.com/oembed?format=json&url='+url,'https://noembed.com/embed?url='+url]){ try{ const r=await fetch(ep); if(r.ok){ const j=await r.json(); if(j.title) return j.title; } }catch(e){} } return ''; }
-function schoolLink(v){ if(v.source.type==='bilder') return location.origin.replace('null','')+location.pathname+'#a='+encodeURIComponent(v.id); const payload={t:v.title,s:(v.steps||[]).map(s=>[Math.round(s.t*10)/10,s.label]),a:(v.task&&v.task.text)||''}; if(v.source.type==='youtube') payload.y=v.source.id; else payload.u=v.source.url; const mat=(v.material||[]).filter(Boolean); if(mat.length) payload.m=mat; const b64=btoa(unescape(encodeURIComponent(JSON.stringify(payload)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); return location.origin.replace('null','')+location.pathname+'#s='+b64; }
-function parseSchool(){ const an=location.hash.match(/[#&]a=([A-Za-z0-9_-]+)/); if(an) return videoOf(an[1])||null; const m=location.hash.match(/[#&]s=([A-Za-z0-9_-]+)/); if(!m) return null; try{ let b=m[1].replace(/-/g,'+').replace(/_/g,'/'); while(b.length%4) b+='='; const j=JSON.parse(decodeURIComponent(escape(atob(b)))); return {id:'school',title:j.t||'Video',source:j.y?{type:'youtube',id:j.y}:{type:'file',url:j.u},steps:(j.s||[]).map(([t,label])=>({t:+t,label:String(label)})),task:{text:j.a||'',deliverable:j.a?'fertig':'keine'},material:Array.isArray(j.m)?j.m.map(String).filter(Boolean):[],areaId:null}; }catch(e){ return null; } }
+function schoolLink(v){ if(v.source.type==='bilder') return location.origin.replace('null','')+location.pathname+'#a='+encodeURIComponent(v.id); const payload={id:v.id,t:v.title,s:(v.steps||[]).map(s=>[Math.round(s.t*10)/10,s.label]),a:(v.task&&v.task.text)||''}; if(v.source.type==='youtube') payload.y=v.source.id; else payload.u=v.source.url; const mat=(v.material||[]).filter(Boolean); if(mat.length) payload.m=mat; const b64=btoa(unescape(encodeURIComponent(JSON.stringify(payload)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); return location.origin.replace('null','')+location.pathname+'#s='+b64; }
+function parseSchool(){ const an=location.hash.match(/[#&]a=([A-Za-z0-9_-]+)/); if(an) return videoOf(an[1])||null; const m=location.hash.match(/[#&]s=([A-Za-z0-9_-]+)/); if(!m) return null; try{ let b=m[1].replace(/-/g,'+').replace(/_/g,'/'); while(b.length%4) b+='='; const j=JSON.parse(decodeURIComponent(escape(atob(b)))); const known=S.videos.find(v=>v.id===j.id||(j.y&&v.source?.type==='youtube'&&v.source.id===j.y)); return {id:known?.id||(/^[-\w]{1,100}$/.test(j.id||'')?j.id:j.y?'yt-'+j.y:'school'),title:j.t||'Video',source:j.y?{type:'youtube',id:j.y}:{type:'file',url:j.u},steps:(j.s||[]).map(([t,label])=>({t:+t,label:String(label)})),task:{text:j.a||'',deliverable:j.a?'fertig':'keine'},material:Array.isArray(j.m)?j.m.map(String).filter(Boolean):[],areaId:null}; }catch(e){ return null; } }
 SCREENS.school=(app,{video})=>{ SCREENS.player(app,{school:video}); };
 
 /* ---- Katalog ---- */
