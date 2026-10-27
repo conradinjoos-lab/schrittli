@@ -484,7 +484,7 @@ function homeSchule(app,rid){
   const family=!SCHULE,p=profile();
   const sections=[['zeit','Zeit'],['verfahren','Techniken'],['jahreszeiten','Jahreszeiten'],['mehr','Mehr']];
   app.innerHTML=`<main class="v3 v3-home${schriftNormal()?'':' caps'}"><div class="v3-in">${v3Kopf('')}
-    <div class="v3-home-title"><h1>Was möchtest du machen?</h1>${r?`<p>${esc(r.name)}</p>`:''}</div>
+    ${r?`<div class="v3-home-title"><p>${esc(r.name)}</p></div>`:''}
     <nav class="v3-section-nav" aria-label="Wege zu deiner Anleitung">${sections.map(([id,name])=>`<button data-act="abschnitt" data-id="${id}">${name}</button>`).join('')}</nav>
     <section class="v3-home-section" id="zeit" aria-labelledby="zeit-titel"><div class="v3-section-head"><h2 id="zeit-titel" tabindex="-1">Wie viel Zeit hast du?</h2></div><p class="v3-section-note">Arbeitszeit · grob geschätzt</p><div class="v3-time-grid">${zeiten.map(n=>`<button class="v3-time-card" data-act="zeit" data-zeit="${n}">${uhrBild(n)}<b>Bis ${n} Min.</b></button>`).join('')}${offeneZeit?'<button class="v3-time-card v3-time-open" data-act="zeit" data-zeit="offen"><span class="v3-time-symbol" aria-hidden="true">⏳</span><b>Zeit offen</b></button>':''}${!zeiten.length&&!offeneZeit?'<button class="v3-time-card" data-act="entdecken"><b>Alle Ideen</b></button>':''}</div></section>
     <section class="v3-home-section" id="verfahren" aria-labelledby="verfahren-titel"><div class="v3-section-head"><h2 id="verfahren-titel" tabindex="-1">Welche Technik?</h2><button class="v3-pill" data-act="entdecken">Alle Ideen ${ico('next')}</button></div><div class="v3-themen v3-procedure-grid">${verfahren.map(themaKachel).join('')}</div></section>
