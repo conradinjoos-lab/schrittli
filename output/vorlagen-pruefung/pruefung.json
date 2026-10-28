@@ -1,5 +1,5 @@
 {
-  "figuren": 472,
+  "figuren": 484,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -4248,6 +4248,114 @@
       "pixel": [
         484,
         481
+      ]
+    },
+    {
+      "id": "fig-geburtstagstorte",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        584,
+        800
+      ]
+    },
+    {
+      "id": "fig-geschenk-schleife",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        630,
+        622
+      ]
+    },
+    {
+      "id": "fig-panda-ballons",
+      "farbpixelIdentisch": true,
+      "teile": 6,
+      "pixel": [
+        681,
+        798
+      ]
+    },
+    {
+      "id": "fig-monster-ballons",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        847
+      ]
+    },
+    {
+      "id": "fig-kuchen-monster",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        800,
+        838
+      ]
+    },
+    {
+      "id": "fig-party-pinguin",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        511,
+        800
+      ]
+    },
+    {
+      "id": "fig-partyhut",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        430,
+        800
+      ]
+    },
+    {
+      "id": "fig-muffin-rosa",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        796,
+        800
+      ]
+    },
+    {
+      "id": "fig-muffin-herz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        795
+      ]
+    },
+    {
+      "id": "fig-muffin-schoko",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        617,
+        680
+      ]
+    },
+    {
+      "id": "fig-clown-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        714,
+        800
+      ]
+    },
+    {
+      "id": "fig-partytroete",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        800,
+        784
       ]
     }
   ],

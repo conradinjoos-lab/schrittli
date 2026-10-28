@@ -25,7 +25,8 @@
   "Frühling & Sommer",
   "Buchstaben & Zahlen bunt",
   "Wetter & Himmel",
-  "Emojis & Gefühle"
+  "Emojis & Gefühle",
+  "Geburtstag & Party"
  ],
  "figuren": [
   {
@@ -2925,6 +2926,78 @@
    "name": "Pokal",
    "welt": "Emojis & Gefühle",
    "datei": "emoji-pokal.png"
+  },
+  {
+   "id": "fig-geburtstagstorte",
+   "name": "Geburtstagstorte",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-geburtstagstorte.png"
+  },
+  {
+   "id": "fig-geschenk-schleife",
+   "name": "Geschenk mit Schleife",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-geschenk-schleife.png"
+  },
+  {
+   "id": "fig-panda-ballons",
+   "name": "Panda mit Luftballons",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-panda-ballons.png"
+  },
+  {
+   "id": "fig-monster-ballons",
+   "name": "Monster mit Luftballons",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-monster-ballons.png"
+  },
+  {
+   "id": "fig-kuchen-monster",
+   "name": "Kuchen-Monster",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-kuchen-monster.png"
+  },
+  {
+   "id": "fig-party-pinguin",
+   "name": "Party-Pinguin",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-party-pinguin.png"
+  },
+  {
+   "id": "fig-partyhut",
+   "name": "Partyhut",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-partyhut.png"
+  },
+  {
+   "id": "fig-muffin-rosa",
+   "name": "Muffin rosa",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-muffin-rosa.png"
+  },
+  {
+   "id": "fig-muffin-herz",
+   "name": "Muffin mit Herzen",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-muffin-herz.png"
+  },
+  {
+   "id": "fig-muffin-schoko",
+   "name": "Schoko-Muffin",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-muffin-schoko.png"
+  },
+  {
+   "id": "fig-clown-gesicht",
+   "name": "Clown",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-clown-gesicht.png"
+  },
+  {
+   "id": "fig-partytroete",
+   "name": "Partytöte",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-partytroete.png"
   }
  ]
 }
