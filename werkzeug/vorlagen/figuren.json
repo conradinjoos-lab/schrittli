@@ -5891,6 +5891,138 @@
    "name": "Pinguin schreitet",
    "welt": "Winter",
    "datei": "winter-pinguin-schreitet.png"
+  },
+  {
+   "id": "meer-krake-lila",
+   "name": "Lila Krake",
+   "welt": "Meer",
+   "datei": "meer-krake-lila.png"
+  },
+  {
+   "id": "meer-krake-rot",
+   "name": "Roter Krake",
+   "welt": "Meer",
+   "datei": "meer-krake-rot.png"
+  },
+  {
+   "id": "meer-wal-tuerkis",
+   "name": "Türkiser Wal",
+   "welt": "Meer",
+   "datei": "meer-wal-tuerkis.png"
+  },
+  {
+   "id": "meer-wal-blau",
+   "name": "Blauer Wal",
+   "welt": "Meer",
+   "datei": "meer-wal-blau.png"
+  },
+  {
+   "id": "meer-pottwal-grau",
+   "name": "Grauer Pottwal",
+   "welt": "Meer",
+   "datei": "meer-pottwal-grau.png"
+  },
+  {
+   "id": "meer-wal-hellblau",
+   "name": "Hellblauer Wal",
+   "welt": "Meer",
+   "datei": "meer-wal-hellblau.png"
+  },
+  {
+   "id": "meer-hai-grau",
+   "name": "Grauer Hai",
+   "welt": "Meer",
+   "datei": "meer-hai-grau.png"
+  },
+  {
+   "id": "meer-krabbe-orange",
+   "name": "Orange Krabbe",
+   "welt": "Meer",
+   "datei": "meer-krabbe-orange.png"
+  },
+  {
+   "id": "meer-krabbe-koenig",
+   "name": "Krabbenkönig",
+   "welt": "Meer",
+   "datei": "meer-krabbe-koenig.png"
+  },
+  {
+   "id": "meer-seestern-lachend",
+   "name": "Lachender Seestern",
+   "welt": "Meer",
+   "datei": "meer-seestern-lachend.png"
+  },
+  {
+   "id": "meer-krabbe-rosa",
+   "name": "Rosa Krabbe",
+   "welt": "Meer",
+   "datei": "meer-krabbe-rosa.png"
+  },
+  {
+   "id": "meer-fisch-brummig",
+   "name": "Brummiger Fisch",
+   "welt": "Meer",
+   "datei": "meer-fisch-brummig.png"
+  },
+  {
+   "id": "weltraum-rakete-schraeg",
+   "name": "Rakete im Flug",
+   "welt": "Weltraum",
+   "datei": "weltraum-rakete-schraeg.png"
+  },
+  {
+   "id": "weltraum-rakete-rot",
+   "name": "Rote Rakete",
+   "welt": "Weltraum",
+   "datei": "weltraum-rakete-rot.png"
+  },
+  {
+   "id": "weltraum-rakete-schlank",
+   "name": "Schlanke Rakete",
+   "welt": "Weltraum",
+   "datei": "weltraum-rakete-schlank.png"
+  },
+  {
+   "id": "weltraum-rakete-gelb",
+   "name": "Gelbe Rakete",
+   "welt": "Weltraum",
+   "datei": "weltraum-rakete-gelb.png"
+  },
+  {
+   "id": "weltraum-rakete-bordeaux",
+   "name": "Rakete mit Bullauge",
+   "welt": "Weltraum",
+   "datei": "weltraum-rakete-bordeaux.png"
+  },
+  {
+   "id": "weltraum-astronaut-winkt",
+   "name": "Winkender Astronaut",
+   "welt": "Weltraum",
+   "datei": "weltraum-astronaut-winkt.png"
+  },
+  {
+   "id": "weltraum-astronaut-rot",
+   "name": "Roter Astronaut",
+   "welt": "Weltraum",
+   "datei": "weltraum-astronaut-rot.png"
+  },
+  {
+   "id": "weltraum-astronaut-hupft",
+   "name": "Hüpfender Astronaut",
+   "welt": "Weltraum",
+   "datei": "weltraum-astronaut-hupft.png"
+  },
+  {
+   "id": "weltraum-ufo-lila",
+   "name": "Ufo mit Ausserirdischem",
+   "welt": "Weltraum",
+   "datei": "weltraum-ufo-lila.png"
+  },
+  {
+   "id": "weltraum-ausserirdischer-brummig",
+   "name": "Brummiger Ausserirdischer",
+   "welt": "Weltraum",
+   "datei": "weltraum-ausserirdischer-brummig.png"
   }
  ]
 }

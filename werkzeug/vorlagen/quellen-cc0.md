@@ -409,3 +409,25 @@ Alle Bilder stammen von Openclipart und stehen unter CC0 1.0 (Public Domain Dedi
 | Dicker Pinguin | winter-pinguin-dick | Winter | Cute round cartoon penguin (flat colors) | https://openclipart.org/detail/61207 | CC0 1.0 (Openclipart) | qubodup |
 | Pinguin mit Schürze | winter-pinguin-schuerze | Winter | Penguin with a shirt | https://openclipart.org/detail/95 | CC0 1.0 (Openclipart) | PeterM |
 | Pinguin schreitet | winter-pinguin-schreitet | Winter | Cartoon Penguin | https://openclipart.org/detail/289407 | CC0 1.0 (Openclipart) | GDJ |
+| Lila Krake | meer-krake-lila | Meer | Cartoon octopus | https://openclipart.org/detail/64159 | CC0 1.0 (Openclipart) | laobc |
+| Roter Krake | meer-krake-rot | Meer | Red Cartoon Octopus | https://openclipart.org/detail/204658 | CC0 1.0 (Openclipart) | j4p4n |
+| Türkiser Wal | meer-wal-tuerkis | Meer | Cartoon whale | https://openclipart.org/detail/354655 | CC0 1.0 (Openclipart) | culturalibre |
+| Blauer Wal | meer-wal-blau | Meer | Whale | https://openclipart.org/detail/256551 | CC0 1.0 (Openclipart) | StymShinji |
+| Grauer Pottwal | meer-pottwal-grau | Meer | Small whale | https://openclipart.org/detail/18925 | CC0 1.0 (Openclipart) | lemmling |
+| Hellblauer Wal | meer-wal-hellblau | Meer | Whale | https://openclipart.org/detail/120 | CC0 1.0 (Openclipart) | PeterM |
+| Grauer Hai | meer-hai-grau | Meer | Cartoon shark | https://openclipart.org/detail/354656 | CC0 1.0 (Openclipart) | culturalibre |
+| Orange Krabbe | meer-krabbe-orange | Meer | Cute Crab | https://openclipart.org/detail/284165 | CC0 1.0 (Openclipart) | oksmith |
+| Krabbenkönig | meer-krabbe-koenig | Meer | King Crab remix | https://openclipart.org/detail/263381 | CC0 1.0 (Openclipart) | Arvin61r58 |
+| Lachender Seestern | meer-seestern-lachend | Meer | Starfish | https://openclipart.org/detail/355114 | CC0 1.0 (Openclipart) | AreYouPrepared |
+| Rosa Krabbe | meer-krabbe-rosa | Meer | A Pink Crab | https://openclipart.org/detail/321799 | CC0 1.0 (Openclipart) | hotta |
+| Brummiger Fisch | meer-fisch-brummig | Meer | Simple Big Fish Cartoon | https://openclipart.org/detail/340717 | CC0 1.0 (Openclipart) | miutopia |
+| Rakete im Flug | weltraum-rakete-schraeg | Weltraum | Cartoon Moon Rocket Remix 2 | https://openclipart.org/detail/261323 | CC0 1.0 (Openclipart) | rygle |
+| Rote Rakete | weltraum-rakete-rot | Weltraum | Cartoon Moon Rocket Remix 1 | https://openclipart.org/detail/261322 | CC0 1.0 (Openclipart) | rygle |
+| Schlanke Rakete | weltraum-rakete-schlank | Weltraum | Cartoon Moon Rocket Remix 3 | https://openclipart.org/detail/261324 | CC0 1.0 (Openclipart) | rygle |
+| Gelbe Rakete | weltraum-rakete-gelb | Weltraum | Very simple rocket | https://openclipart.org/detail/26690 | CC0 1.0 (Openclipart) | laobc |
+| Rakete mit Bullauge | weltraum-rakete-bordeaux | Weltraum | Rocket Colour | https://openclipart.org/detail/270273 | CC0 1.0 (Openclipart) | j4p4n |
+| Winkender Astronaut | weltraum-astronaut-winkt | Weltraum | Waving astronaut | https://openclipart.org/detail/304180 | CC0 1.0 (Openclipart) | Firkin |
+| Roter Astronaut | weltraum-astronaut-rot | Weltraum | Astronaut - red space suit | https://openclipart.org/detail/338427 | CC0 1.0 (Openclipart) | Technaturally |
+| Hüpfender Astronaut | weltraum-astronaut-hupft | Weltraum | Spaceman Isolated | https://openclipart.org/detail/325270 | CC0 1.0 (Openclipart) | j4p4n |
+| Ufo mit Ausserirdischem | weltraum-ufo-lila | Weltraum | UFO with Grumpy Alien | https://openclipart.org/detail/338435 | CC0 1.0 (Openclipart) | Technaturally |
+| Brummiger Ausserirdischer | weltraum-ausserirdischer-brummig | Weltraum | Unimpressed alien | https://openclipart.org/detail/270215 | CC0 1.0 (Openclipart) | anarres |
