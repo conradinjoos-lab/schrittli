@@ -6,7 +6,7 @@ Stand 28. Oktober 2026. Analyse der Schablonen und Vorlagen in «Schritt für Sc
 
 | Bereich | Umfang | Wo | Quelle / Pipeline |
 |---|---|---|---|
-| Schablonen-Generator | 302 Formen in 9 Gruppen (Grundformen 20, Natur 22, Essen 11, Dinge 21, Feste 17, Tiere 41, Werkhilfen 109, Nähen 25, Buchstaben 36); 126 Formen bringen eine empfohlene Grösse mit (`cm`) | `vorlagen/` | `werkzeug/vorlagen/formen*.py` → `vorlagen/formen.js` |
+| Schablonen-Generator | 363 Formen in 11 Gruppen (Grundformen 20, Natur 25, Essen 11, Dinge 43, Feste 18, Tiere 53, Masken 13, Schweiz 10, Werkhilfen 109, Nähen 25, Buchstaben 36); 126 Formen bringen eine empfohlene Grösse mit (`cm`) | `vorlagen/` | `werkzeug/vorlagen/formen*.py` → `vorlagen/formen.js` |
 | Figuren aus Bildern | 302 Figuren in 14 Welten (Games 43, Pokémon & Sonic 32, Mario 32, Sanrio 30, Minecraft 26, Cartoons 26, Zeitlos 20, Anime 16, Disney 16, Ninjago 15, Minions 13, Superhelden 13, Star Wars 11, Harry Potter 9) | `vorlagen/figuren/` | `werkzeug/vorlagen/bild.py`, 302 PNG in `werkzeug/vorlagen/bilder/` |
 | Perlentiere | 302 Figuren, alle Stufe «schwer», Breite 30–60 Perlen | `vorlagen/perlen/` | `perlen.cjs`, Editor im Browser |
 | Perlentier aus Bild | eigenes Bild → Rocailles-Plan mit Drahtweg | `vorlagen/perlentier-bild/` | nur lokal |
@@ -79,10 +79,10 @@ Mit Nahtzugabe und Einstichpunkten direkt aus dem Generator. Grosse Teile brauch
 
 1. **Buchstaben und Zahlen als Form.** Alphabet und 0–9 in einer runden Schrift; Name eingeben, alle Buchstaben kommen aufs Blatt. Für Türschilder, Filzbuchstaben, Nagelbilder, Stempel. Grösster einzelner Gewinn, weil jedes Kind seinen Namen will.
 2. **Nummerierte Punkte** auf jeder Form (Fadengrafik, Nagelbild): Punkte durchnummeriert, Abstand wählbar. Baut auf den Einstichpunkten auf.
-3. **Pixel-Editor für Zählmuster:** eigenes Raster zeichnen, drucken als Perlenweb-, Bügelperlen- oder Kreuzstich-Vorlage mit Farbliste. Die privaten Web-Motive bleiben privat, der Editor ist öffentlich.
-4. **Netze mit Massen:** Schachtel oder Körper mit Breite, Tiefe, Höhe eingeben, Klebelaschen automatisch.
-5. **Poster-Modus:** Formen grösser als das Blatt auf mehrere A4 kacheln, mit Passmarken. So gibt es Grossformat auch ohne A3-Drucker.
-6. **Masken mit Augenlöchern** und Gummiband-Markierung als eigene Gruppe.
+3. **Pixel-Editor für Zählmuster:** gibt es schon als `vorlagen/zaehlmuster/` (Raster zeichnen, Kreuzstich und Weben, A4/A3, Farblegende); dasselbe Raster taugt auch für Bügelperlen. Die privaten Web-Motive bleiben privat.
+4. **Netze mit Massen:** eingebaut (Welle 3). In der Gruppe «Werkhilfen» stehen «Quader nach Mass» und «Schachtel offen nach Mass»: Breite × Tiefe × Höhe in cm eingeben, Klebelaschen und Falzlinien kommen automatisch; das Netz wird im Browser gerechnet (Clipper-Union), in der Adresse als `m=8x5x4`, auch in Listen.
+5. **Poster-Modus:** eingebaut (Welle 3). Passt eine Form nicht aufs Blatt, wird sie automatisch auf bis zu 30 Blätter gekachelt (1 cm Überlappung, Passkreuze, Klebestreifen rechts und unten, Schneidelinie links und oben, Übersichtskarte pro Blatt); Grössen-Chips bis 40 cm (A4) bzw. 60 cm (A3).
+6. **Masken mit Augenlöchern** und Gummiband-Löchern: eingebaut (Welle 3) als Gruppe «Masken» (`formen_masken.py`), dazu die Gefühle-Gesichter.
 7. **Mehrteilige Schnittmuster** mit Passzeichen und Fadenlauf-Pfeil.
 8. **Vorlagen-Sammlungen:** fertige Listen pro Klassenprojekt («Lesekissen 5. Klasse» = Link mit `liste=…`), direkt aus der Anleitung aufrufbar.
 
@@ -92,9 +92,9 @@ Mit Nahtzugabe und Einstichpunkten direkt aus dem Generator. Grosse Teile brauch
 |---|---|---|
 | 1 | Erledigt am 28. Oktober 2026: A3-Druck; 113 Werkhilfen, Raster, Netze und Spielbretter aus 3a (`formen_scheiben.py`, `formen_raster.py`, `formen_spiele.py`, `formen_netze.py`, `formen_weitere.py`, dazu die bisherigen Web- und Werkhilfen in der neuen Gruppe «Werkhilfen»); 25 Schnittmuster aus 3b in der Gruppe «Nähen» (`formen_naehen.py`). Nicht als eigene Formen gebaut, weil die Grundformen sie schon abdecken: Ausstech-, Schalen- und Stempel-Schablonen, Prägesterne (Stern mit Zacken-Regler, Spiegeln-Schalter); nummerierte Punkte folgen in Welle 2 | erledigt |
 | 2 | Erledigt am 28. Oktober 2026: Buchstaben A–Z und Zahlen 0–9 als eigene Gruppe «Buchstaben» (`formen_schrift.py`, DejaVu Sans fett, Ecken ausgerundet, mit Wortfeld im Generator: ein Wort tippen, alle Buchstaben gleich hoch aufs Blatt); nummerierte Fadengrafik-Punkte, Winkel-Fadengrafik und Einmaleins-Kreis (`formen_punkte.py`); Saisonmotive Eichenblatt, Kastanienblatt, Tannenzapfen, Flugdrache, Rentier, Schlitten, Faltstern 3D (`formen_saison.py`) | erledigt |
-| 3 | Pixel-Editor; Netz-Generator; Poster-Modus; restliche Motivthemen | länger |
+| 3 | Erledigt am 28. Oktober 2026: Netz-Generator (Quader und offene Schachtel nach Mass, `m=…`), Poster-Modus (bis 30 Blätter, Passkreuze), Pixel-Editor = bestehende `zaehlmuster/`, 61 neue Motive: Gruppen «Masken» (`formen_masken.py`, 13) und «Schweiz» (`formen_schweiz.py`, 10), Themen Weltraum/Meer/Fahrzeuge/Dinos/Fabelwesen/Alltag/Piraten & Ritter/Frühling & Sommer (`formen_themen.py`, 38) | erledigt |
 
-Ziel nach Welle 3: über 300 Formen im Generator, dazu die 302 Figuren und 302 Perlentiere, also rund 900 Vorlagen plus unbegrenzt viele über Editor, Namen und Netze.
+Stand nach Welle 3: 363 Formen im Generator, dazu die 302 Figuren und 302 Perlentiere, also rund 900 Vorlagen plus unbegrenzt viele über Editor, Namen und Netze.
 
 ## 5. A3-Druck (eingebaut)
 
