@@ -156,10 +156,11 @@ input[type=range]{width:100%;accent-color:var(--acc)}
   body{background:#fff}
   .kopf,main{display:none!important}
   #druck{display:block}
-  #druck svg{display:block;width:210mm;height:297mm;break-after:page;page-break-after:always}
+  #druck svg{display:block;width:var(--bw,210mm);height:var(--bh,297mm);break-after:page;page-break-after:always}
   #druck svg:last-child{break-after:auto;page-break-after:auto}
 }
 </style>
+<style id="seite"></style>
 </head>
 <body>
 <header class="kopf">
@@ -189,6 +190,13 @@ input[type=range]{width:100%;accent-color:var(--acc)}
       <div class="feld" id="feld-param" hidden>
         <label for="param" id="lbl-param">Zacken</label>
         <input type="range" id="param" min="3" max="12" step="1">
+      </div>
+      <div class="feld">
+        <span class="lbl" id="lbl-papier">Papier</span>
+        <div class="chips" id="papier" role="group" aria-labelledby="lbl-papier">
+          <button type="button" class="chip" data-papier="a4" aria-pressed="true">A4</button>
+          <button type="button" class="chip" data-papier="a3" aria-pressed="false">A3</button>
+        </div>
       </div>
       <div class="feld">
         <label for="n">Anzahl</label>
@@ -228,7 +236,7 @@ input[type=range]{width:100%;accent-color:var(--acc)}
       <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
       <button type="button" class="knopf pausen-auf" id="pausen-auf"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 8.5c-1.2-1.7-4-1.1-4 1 0 2 2.4 3.6 4 5 1.6-1.4 4-3 4-5 0-2.1-2.8-2.7-4-1z"/></svg><span>Auf dem Bildschirm abpausen</span></button>
       <p class="info" id="info" aria-live="polite"></p>
-      <p class="hinweis">Beim Drucken «Tatsächliche Grösse» oder 100 % wählen, nicht «An Seite anpassen». Die 5-cm-Linie unten auf dem Blatt zeigt, ob es stimmt.</p>
+      <p class="hinweis">Beim Drucken «Tatsächliche Grösse» oder 100 % wählen, nicht «An Seite anpassen». Bei A3 im Druckfenster auch A3 als Papier wählen. Die 5-cm-Linie unten auf dem Blatt zeigt, ob es stimmt.</p>
     </section>
   </div>
 </main>
@@ -260,8 +268,19 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 (function(){
 'use strict';
 const $=id=>document.getElementById(id);
-const BLATT={w:210,h:297,rand:10,oben:24,unten:24,abstand:3};   // mm
+// Papier: A4 oder A3, immer hochkant. BLATT und NUTZ (nutzbare Fläche) stellt papierSetzen() um.
+const PAPIERE={a4:{name:'A4',w:210,h:297},a3:{name:'A3',w:297,h:420}};
+const BLATT={name:'A4',w:210,h:297,rand:10,oben:24,unten:24,abstand:3};   // mm
 const NUTZ={x:BLATT.rand,y:BLATT.oben,w:BLATT.w-2*BLATT.rand,h:BLATT.h-BLATT.oben-BLATT.unten};
+function papierSetzen(id){
+  const p=PAPIERE[id]||PAPIERE.a4;
+  BLATT.name=p.name;BLATT.w=p.w;BLATT.h=p.h;NUTZ.w=p.w-2*BLATT.rand;NUTZ.h=p.h-BLATT.oben-BLATT.unten;
+  $('seite').textContent=`@page{size:${p.name} portrait;margin:0}`;
+  $('druck').style.setProperty('--bw',p.w+'mm');$('druck').style.setProperty('--bh',p.h+'mm');
+}
+// Passt ein Stück (Masse in mm) wenigstens auf A3? Für den Hinweis bei «zu gross».
+const passtA3=st=>{const a=PAPIERE.a3,w=a.w-2*BLATT.rand,h=a.h-BLATT.oben-BLATT.unten;return (st.w<=w&&st.h<=h)||(st.h<=w&&st.w<=h)};
+const a3Tipp=()=>BLATT.name==='A4'?' Mit Papier A3 hat es Platz.':'';
 const CHIPS=[2,3,4,5,6,8,10,12,15];
 const PARAM={stern:{label:'Zacken',def:5},vieleck:{label:'Ecken',def:6}};
 const MAXSEITEN=30;
@@ -306,11 +325,11 @@ function paramForm(id,n){
 
 // Zustand: aus der Adresse, sonst vom letzten Mal
 // punkte: Einstichpunkte an, pabst: ihr Abstand in mm, strich: gestrichelte Nählinie zusätzlich zeigen
-const S={id:'herz',b:5,h:5,lock:true,n:1,linie:'schnitt',naht:5,zugabe:7,det:true,spiegel:false,param:5,farbig:true,punkte:false,pabst:5,strich:true};
+const S={id:'herz',b:5,h:5,papier:'a4',lock:true,n:1,linie:'schnitt',naht:5,zugabe:7,det:true,spiegel:false,param:5,farbig:true,punkte:false,pabst:5,strich:true};
 try{Object.assign(S,JSON.parse(localStorage.getItem('schrittli-vorlagen')||'{}'))}catch(e){}
 const q=new URLSearchParams(location.search);
 if(q.has('form')&&byId[q.get('form')]){
-  S.id=q.get('form');S.lock=!(q.has('b')&&q.has('h'));S.n=1;S.linie='schnitt';S.spiegel=false;S.punkte=false;S.strich=true;
+  S.id=q.get('form');S.lock=!(q.has('b')&&q.has('h'));S.n=1;S.papier='a4';S.linie='schnitt';S.spiegel=false;S.punkte=false;S.strich=true;
   if(PARAM[S.id])S.param=PARAM[S.id].def;
 }
 const zahl=(v,d)=>{const x=parseFloat(String(v).replace(',','.'));return isFinite(x)&&x>0?x:d};
@@ -327,6 +346,9 @@ if(q.has('punkte')){S.punkte=true;S.pabst=mmWert(q.get('punkte'),S.pabst,2,20)} 
 if(q.get('strich')==='0')S.strich=false;                                          // nur Punkte, ohne gestrichelte Nählinie
 S.pabst=mmWert(S.pabst,5,2,20);
 if(!byId[S.id])S.id='herz';
+if(q.has('papier'))S.papier=String(q.get('papier')).toLowerCase();
+if(!PAPIERE[S.papier])S.papier='a4';
+papierSetzen(S.papier);
 
 // Liste «Aufs Blatt»: mehrere Formen zusammen. In der Adresse als liste=herz:5x5:3,stern:4x3.8:2:z6,fisch:6x3:4:n5:s
 // (Form:Breite×Höhe in cm:Anzahl, dann z=Zacken/Ecken, n=Nählinie mm, a=Nahtzugabe mm, s=gespiegelt,
@@ -520,7 +542,7 @@ function legende(strich,punkte){
   if(strich)teile.push(['nähen',x=>`<line x1="${x}" y1="15" x2="${x+10}" y2="15" stroke="#5b6573" stroke-width=".3" stroke-dasharray="2 1.5"/>`]);
   if(punkte)teile.push(['einstechen',x=>`<path d="${punktPfad([[x+1,15],[x+5,15],[x+9,15]],PUNKT_R)}" fill="#1c2430"/>`]);
   const breiten=teile.map(([t])=>12+breit(t,3.2)),gesamt=breiten.reduce((a,b)=>a+b,0)+6*(teile.length-1);
-  let x=200-gesamt;const start=x;
+  let x=BLATT.w-10-gesamt;const start=x;
   const svg=teile.map(([t,zeichen],i)=>{const s=zeichen(+x.toFixed(2))+`<text x="${(x+12).toFixed(2)}" y="16.1">${t}</text>`;x+=breiten[i]+6;return s}).join('');
   return {svg:`<g font-size="3.2" fill="#5b6573">${svg}</g>`,x:start};
 }
@@ -534,12 +556,12 @@ const farbName=hex=>{const a=lab(hex);let best=null,bd=1e9;for(const [n,h] of FA
 const farbListe=f=>{const seen={};return (f.farben||[]).map(c=>{const n=farbName(c.f);seen[n]=(seen[n]||0)+1;return {f:c.f,name:n,k:seen[n]}}).map(c=>Object.assign(c,{text:c.name+(seen[c.name]>1?` ${c.k}`:'')}))};
 // Farbzeile fürs Blatt: Kästchen mit Namen, unten links über der 5-cm-Linie
 const farbZeile=liste=>{if(!liste.length)return '';let x=10,out='';
-  for(const c of liste){out+=`<rect x="${x}" y="274.6" width="3.4" height="3.4" rx=".6" fill="${c.f}" stroke="#5b6573" stroke-width=".2"/><text x="${(x+4.4).toFixed(1)}" y="277.5">${c.text}</text>`;x+=4.4+breit(c.text,3)+3.5;if(x>185)break}
-  return `<g font-size="3" fill="#5b6573"><text x="10" y="272.2" font-weight="700">Farben zum Malen</text>${out}</g>`};
+  for(const c of liste){out+=`<rect x="${x}" y="${BLATT.h-22.4}" width="3.4" height="3.4" rx=".6" fill="${c.f}" stroke="#5b6573" stroke-width=".2"/><text x="${(x+4.4).toFixed(1)}" y="${BLATT.h-19.5}">${c.text}</text>`;x+=4.4+breit(c.text,3)+3.5;if(x>BLATT.w-25)break}
+  return `<g font-size="3" fill="#5b6573"><text x="10" y="${BLATT.h-24.8}" font-weight="700">Farben zum Malen</text>${out}</g>`};
 const linieText=e=>(e.linie==='naht'?` · Nählinie ${e.naht} mm innen`:e.linie==='zugabe'?` · Nahtzugabe ${e.zugabe} mm`:'')+(punkteAn(e)?` · Einstichpunkte alle ${e.pabst} mm`:'');
-const FUSS=`<g stroke="#1c2430" stroke-width=".45"><line x1="10" y1="285" x2="60" y2="285"/><line x1="10" y1="283" x2="10" y2="287"/><line x1="60" y1="283" x2="60" y2="287"/></g>`+
-  `<text x="10" y="281.5" font-size="2.8" fill="#5b6573">Diese Linie muss 5 cm lang sein. Drucke in Originalgrösse (100 %).</text>`+
-  `<text x="200" y="286" font-size="2.6" fill="#5b6573" text-anchor="end">Schritt für Schritt · eigene Vorlage, frei für den Unterricht</text></svg>`;
+const fuss=()=>{const y=BLATT.h-12;return `<g stroke="#1c2430" stroke-width=".45"><line x1="10" y1="${y}" x2="60" y2="${y}"/><line x1="10" y1="${y-2}" x2="10" y2="${y+2}"/><line x1="60" y1="${y-2}" x2="60" y2="${y+2}"/></g>`+
+  `<text x="10" y="${y-3.5}" font-size="2.8" fill="#5b6573">Diese Linie muss 5 cm lang sein. Drucke in Originalgrösse (100 %)${BLATT.name==='A3'?' auf A3':''}.</text>`+
+  `<text x="${BLATT.w-10}" y="${y+1}" font-size="2.6" fill="#5b6573" text-anchor="end">Schritt für Schritt · eigene Vorlage, frei für den Unterricht</text></svg>`};
 const setzen=(x,y,lay)=>`translate(${x.toFixed(2)} ${y.toFixed(2)})${lay.dreh?` rotate(90) translate(0 ${-lay.w})`:''}`;
 function blaetter(st,lay){
   const name=titel();
@@ -557,8 +579,8 @@ function blaetter(st,lay){
     out.push(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${BLATT.w} ${BLATT.h}" width="${BLATT.w}mm" height="${BLATT.h}mm" font-family="Nunito,Arial,sans-serif" role="img" aria-label="Blatt ${s+1}: ${hier} × ${name}">`+
       `<rect width="${BLATT.w}" height="${BLATT.h}" fill="#fff"/>`+
       `<text x="10" y="16.5" font-size="6" font-weight="800" fill="#1c2430">${name}</text>`+
-      `<text x="10" y="21" font-size="3.4" fill="#5b6573">${cm(S.b)} × ${cm(S.h)} cm${linieText(S)}${seiten>1?` · Blatt ${s+1} von ${seiten}`:''}</text>`+
-      leg+teile+farbZeile(farbListe(form()))+FUSS);
+      `<text x="10" y="21" font-size="3.4" fill="#5b6573">${cm(S.b)} × ${cm(S.h)} cm${linieText(S)}${BLATT.name==='A3'?' · A3':''}${seiten>1?` · Blatt ${s+1} von ${seiten}`:''}</text>`+
+      leg+teile+farbZeile(farbListe(form()))+fuss());
   }
   return out;
 }
@@ -608,19 +630,19 @@ function blaetterListe(posten,seiten){
     const mitNaht=da.filter(i=>posten[i].e.linie!=='schnitt');
     const leg=mitNaht.length?legende(mitNaht.some(i=>posten[i].st.strich),mitNaht.some(i=>posten[i].st.punkte.length>0)):null;
     let name=[...new Set(da.map(i=>titel(posten[i].e)))].join(', ');
-    if(breit(name,6)>(leg?leg.x-15:190))name=`${da.length} Formen`;
+    if(breit(name,6)>(leg?leg.x-15:NUTZ.w))name=`${da.length} Formen`;
     const teile=da.map(i=>[posten[i].e.n,seite.teile.filter(t=>t.i===i).length,i]);
     let unter=da.map(i=>`${titel(posten[i].e)} ${masstext(posten[i].e)}`),zu='';
-    const blatt=seiten.length>1?` · Blatt ${s+1} von ${seiten.length}`:'';
-    while(unter.length>1&&breit(unter.join(' · ')+blatt,3.4)>285){unter.pop();zu=' …'}
-    const sub=unter.join(' · ')+zu+blatt,eng=breit(sub,3.4)>190;
+    const blatt=(BLATT.name==='A3'?' · A3':'')+(seiten.length>1?` · Blatt ${s+1} von ${seiten.length}`:'');
+    while(unter.length>1&&breit(unter.join(' · ')+blatt,3.4)>NUTZ.w*1.5){unter.pop();zu=' …'}
+    const sub=unter.join(' · ')+zu+blatt,eng=breit(sub,3.4)>NUTZ.w;
     const x0=NUTZ.x+(NUTZ.w-seite.breite)/2;
     const stuecke=seite.teile.map(t=>`<g transform="${setzen(x0+t.x,NUTZ.y+t.y,posten[t.i].lay)}">${posten[t.i].teil}</g>`).join('');
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${BLATT.w} ${BLATT.h}" width="${BLATT.w}mm" height="${BLATT.h}mm" font-family="Nunito,Arial,sans-serif" role="img" aria-label="Blatt ${s+1}: ${teile.map(([,k,i])=>`${k} × ${titel(posten[i].e)}`).join(', ')}">`+
       `<rect width="${BLATT.w}" height="${BLATT.h}" fill="#fff"/>`+
       `<text x="10" y="16.5" font-size="6" font-weight="800" fill="#1c2430">${name}</text>`+
-      `<text x="10" y="21" font-size="3.4" fill="#5b6573"${eng?' textLength="190" lengthAdjust="spacingAndGlyphs"':''}>${sub}</text>`+
-      (leg?leg.svg:'')+stuecke+farbZeile([...new Map(da.flatMap(i=>farbListe(form(posten[i].e))).map(c=>[c.f,c])).values()])+FUSS;
+      `<text x="10" y="21" font-size="3.4" fill="#5b6573"${eng?` textLength="${NUTZ.w}" lengthAdjust="spacingAndGlyphs"`:''}>${sub}</text>`+
+      (leg?leg.svg:'')+stuecke+farbZeile([...new Map(da.flatMap(i=>farbListe(form(posten[i].e))).map(c=>[c.f,c])).values()])+fuss();
   });
 }
 function zeichnenListe(){
@@ -643,8 +665,8 @@ function zeichnenListe(){
   const svg=blaetterListe(posten,seiten);
   const passt=posten.filter(p=>p.lay.pro),stk=passt.reduce((a,p)=>a+p.e.n,0),z=seiten.length;
   let info=passt.length?`${stk} Stück · ${passt.length} ${passt.length===1?'Form':'Formen'} · ${z} ${z===1?'Blatt':'Blätter'}`:'';
-  const zuGross=posten.filter(p=>!p.lay.pro).map(p=>titel(p.e));
-  if(zuGross.length)info+=(info?'<br>':'')+`<span class="warn">Zu gross für ein A4-Blatt: ${zuGross.join(', ')}. Höchstens ${cm(NUTZ.w/10)} × ${cm(NUTZ.h/10)} cm.</span>`;
+  const zuGross=posten.filter(p=>!p.lay.pro);
+  if(zuGross.length)info+=(info?'<br>':'')+`<span class="warn">Zu gross für ein ${BLATT.name}-Blatt: ${zuGross.map(p=>titel(p.e)).join(', ')}. Höchstens ${cm(NUTZ.w/10)} × ${cm(NUTZ.h/10)} cm.${zuGross.every(p=>passtA3(p.st))?a3Tipp():''}</span>`;
   if(z>MAXSEITEN)info+=`<br><span class="warn">Es werden nur ${MAXSEITEN} Blätter gedruckt.</span>`;
   const schmal=passt.filter(p=>p.st.eng<4).map(p=>titel(p.e)),zerf=passt.filter(p=>p.st.zerfaellt).map(p=>titel(p.e));
   if(schmal.length)info+=`<br><span class="warn">Kaum zu schneiden, bitte grösser wählen: ${schmal.join(', ')}.</span>`;
@@ -663,7 +685,7 @@ function zeichnen(){
   const f=form(),st=stueck(),lay=anordnen(st);
   let info,ok=lay.pro>0;
   if(!ok){
-    info=`<span class="warn">Zu gross für ein A4-Blatt. Höchstens ${cm(NUTZ.w/10)} × ${cm(NUTZ.h/10)} cm.</span>`;
+    info=`<span class="warn">Zu gross für ein ${BLATT.name}-Blatt. Höchstens ${cm(NUTZ.w/10)} × ${cm(NUTZ.h/10)} cm.${passtA3(st)?a3Tipp():''}</span>`;
     $('vorschau').innerHTML='';$('druck').innerHTML='';
   }else{
     const seiten=Math.ceil(S.n/lay.pro),svg=blaetter(st,lay);
@@ -686,7 +708,7 @@ function zeichnen(){
 function speichern(){
   try{localStorage.setItem('schrittli-vorlagen',JSON.stringify(S))}catch(e){}
   const p=new URLSearchParams({form:S.id,b:+S.b.toFixed(2),h:+S.h.toFixed(2)});
-  if(S.n>1)p.set('n',S.n);if(PARAM[S.id])p.set('z',S.param);if(S.linie!=='schnitt')p.set('linie',S.linie);
+  if(S.papier!=='a4')p.set('papier',S.papier);if(S.n>1)p.set('n',S.n);if(PARAM[S.id])p.set('z',S.param);if(S.linie!=='schnitt')p.set('linie',S.linie);
   if(S.linie==='naht')p.set('naht',S.naht);else if(S.linie==='zugabe')p.set('zugabe',S.zugabe);
   if(punkteAn(S)){p.set('punkte',S.pabst);if(!S.strich)p.set('strich','0')}
   const liste=L.map(e=>kodieren(e));
@@ -733,7 +755,8 @@ function felder(){
   $('schloss').setAttribute('aria-pressed',S.lock);$('schloss').innerHTML=S.lock?SCHLOSS_ZU:SCHLOSS_AUF;
   $('schloss').title=S.lock?'Seitenverhältnis behalten (klicken zum Strecken)':'Form wird gestreckt (klicken zum Behalten)';
   const l=Math.max(S.b,S.h);
-  $('chips').innerHTML=CHIPS.map(c=>`<button type="button" class="chip" data-cm="${c}" aria-pressed="${S.lock&&Math.abs(l-c)<.01}">${c} cm</button>`).join('');
+  document.querySelectorAll('#papier .chip').forEach(k=>k.setAttribute('aria-pressed',k.dataset.papier===S.papier));
+  $('chips').innerHTML=(S.papier==='a3'?CHIPS.concat([20,25,30]):CHIPS).map(c=>`<button type="button" class="chip" data-cm="${c}" aria-pressed="${S.lock&&Math.abs(l-c)<.01}">${c} cm</button>`).join('');
   $('feld-param').hidden=!PARAM[S.id];
   if(PARAM[S.id]){$('lbl-param').textContent=`${PARAM[S.id].label}: ${S.param}`;$('param').value=S.param}
   $('n').value=S.n;$('naht').value=S.naht;$('zugabe').value=S.zugabe;
@@ -762,6 +785,10 @@ $('schloss').addEventListener('click',()=>{
   S.lock=!S.lock;
   if(S.lock){const f=form();S.h=S.b*f.h/f.w}
   felder();zeichnen();
+});
+$('papier').addEventListener('click',e=>{
+  const c=e.target.closest('.chip');if(!c||c.dataset.papier===S.papier)return;
+  S.papier=c.dataset.papier;papierSetzen(S.papier);felder();zeichnen();
 });
 $('chips').addEventListener('click',e=>{
   const c=e.target.closest('.chip');if(!c)return;

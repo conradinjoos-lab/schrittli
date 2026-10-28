@@ -1,0 +1,105 @@
+# Vorlagen-Bibliothek: Bestand und Ausbau
+
+Stand 28. Oktober 2026. Analyse der Schablonen und Vorlagen in «Schritt für Schritt» und Ideenkatalog für eine sehr grosse Bibliothek.
+
+## 1. Was wir haben
+
+| Bereich | Umfang | Wo | Quelle / Pipeline |
+|---|---|---|---|
+| Schablonen-Generator | 138 Formen in 6 Gruppen (Grundformen 20, Natur 19, Essen 11, Dinge 30, Feste 17, Tiere 41) | `vorlagen/` | `werkzeug/vorlagen/formen*.py` → `vorlagen/formen.js` |
+| Figuren aus Bildern | 302 Figuren in 14 Welten (Games 43, Pokémon & Sonic 32, Mario 32, Sanrio 30, Minecraft 26, Cartoons 26, Zeitlos 20, Anime 16, Disney 16, Ninjago 15, Minions 13, Superhelden 13, Star Wars 11, Harry Potter 9) | `vorlagen/figuren/` | `werkzeug/vorlagen/bild.py`, 302 PNG in `werkzeug/vorlagen/bilder/` |
+| Perlentiere | 302 Figuren, alle Stufe «schwer», Breite 30–60 Perlen | `vorlagen/perlen/` | `perlen.cjs`, Editor im Browser |
+| Perlentier aus Bild | eigenes Bild → Rocailles-Plan mit Drahtweg | `vorlagen/perlentier-bild/` | nur lokal |
+| Armbänder | 4 Arten (Perlenarmband ab 1., Flechtband ab 1., Freundschaftsband ab 3., Perlen-Webband ab 4.), 13 Muster, Pixel-Schrift für Namen | `vorlagen/armbaender/` | im HTML |
+| Abpausen | Bild vergrössern, Bildschirm einfrieren, abpausen | `vorlagen/einfrieren/` | im HTML |
+| Feste PDFs | Nikolausstiefel A4, Startrampe A3 (Raketenstation) | `vorlagen/`, `anleitungen/` | `nikolausstiefel.py`, Hand |
+| Foto-Anleitungen mit Vorlage | 28 Anleitungen, 2 mit eigener Vorlage (Raketenstation A3 und A4) | `anleitungen/` | `anleitungen.json` |
+| Schulvideos mit Vorlage | 72 von 352 Videos verweisen auf den Generator (`?form=…`) | `schule/schule.json` | Feld `vorlagen` |
+| Privat (nicht im Repo) | Web-Motive als Pixelraster, Perlentier-Entwürfe, Papierflieger | `privat/` | Aufträge in `AUFTRAG.md` |
+
+Was der Generator heute kann: Grösse frei bis 100 cm, Seitenverhältnis sperren, Anzahl und «Blatt füllen», mehrere Formen zusammen auf dem Blatt (MaxRects-Packen), Nählinie innen oder Nahtzugabe aussen, Einstichpunkte, Farbflächen mit Farbliste zum Malen, Spiegeln, Zacken und Ecken bei Stern und Vieleck, 5-cm-Kontrolllinie, Link mit allen Einstellungen, Abpausen am iPad. **Neu seit heute: Papier A4 oder A3.**
+
+Was fehlt im Vergleich zum Unterricht (Wissensspeicher): 84 Einträge im Katalog brauchen eine Vorlage, Schablone oder ein Muster, die meisten davon noch ohne digitale Vorlage. Lücken nach Verfahren: Sticken 1., Stricken 6., Wickeln 5./6., Filzen 1., Sägen & Nageln 1./6., Experimentieren 6.
+
+## 2. Wie die Bibliothek wächst
+
+Drei Wege, vom schnellsten zum aufwendigsten:
+
+1. **Geometrische Formen in Python** (`formen*.py`): ein Eintrag pro Form, shapely-Geometrie, sofort im Generator. Ideal für Werkhilfen, Grundformen, Netze, Raster.
+2. **Motive als PNG mit schwarzer Umrisslinie** (`bild.py`): ein Bild pro Motiv, Pipeline rechnet Umriss, Farbflächen und Details. Ideal für Tiere, Figuren, Saisonmotive. Comic-Stil mit Umriss ist Pflicht.
+3. **Neue Vorlagen-Art** (eigene Seite oder neuer Modus im Generator): Pixelraster, nummerierte Punkte, Abwicklungen mit Massen. Mehr Aufwand, dafür ganze Familien von Vorlagen auf einmal.
+
+## 3. Ideenkatalog
+
+### 3a. Werkhilfen und Raster (Weg 1, schnell)
+
+| Verfahren | Vorlagen |
+|---|---|
+| Knüpfen, Flechten | Knüpfscheibe mit 8, 16 und 32 Kerben; Kumihimo-Quadratscheibe; Flechtstern (5-, 6-, 8-strahlig); Kordelscheibe; Makramee-Federgrund in 3 Grössen |
+| Weben | Webrahmen 8 bis 20 cm mit Kerben alle 0,5 und 1 cm; runde Webscheibe mit 7, 9, 11, 13 Schlitzen; Spinnennetz-Webscheibe; Sternweben-Scheibe; Webblume; Lama-, Igel-, Huhn-Webrahmen (Klassenprojekt Webhuhn, Webigel); Papierweb-Blätter mit Streifen 1, 1,5, 2 cm; Perlenraster 5, 7, 9, 11 Perlen breit |
+| Sticken | Lochkarten mit Punktraster (Quadrat, Kreis, Herz, Stern); Stickkarten mit vorgestochenen Linien (Haus, Boot, Baum); Kreuzstich-Raster 10 × 10 bis 30 × 30; Stickrahmen-Kreis 10, 12, 15 cm als Schnittvorlage für Stoff |
+| Fadengrafik | Kreis mit 24, 36, 48 nummerierten Punkten (Einmaleins-Brett!); Quadrat, Dreieck, Herz, Stern mit nummerierten Punkten; Parabel-Kurven |
+| Holz, Nageln | Nagelbild-Raster (Kreis, Herz, Stern, Buchstaben); Bohrraster für Stiftehalter (3 × 3, 4 × 4, Kreis); Mühle, Tic-Tac-Toe, Solitär, Halma-Spielfelder; Puzzle-Schnittlinien 4 bis 12 Teile |
+| Falten, Schachteln | Netze: Würfel, Quader, Pyramide, Prisma, Zylinder, Kegel (auch als Giessformen für Kerzen); Faltschachtel mit Deckel in 3 Grössen; Briefumschlag; Papierhut; Laternen-Abwicklung mit Fenstern |
+| Papier | Rasterpapier (Karo 5 mm, 1 cm, Punktraster, Isometrie, Linien); Lineal und Massband zum Drucken; Etiketten und Namensschilder; Lochkarte für Lochmuster |
+| Formen, Ton | Ausstech-Schablonen (Blatt, Herz, Stern, Mond); Schalenschablone rund und oval; Tierplatten (Eisbär, Katze, Fuchs) für den Stiftehalter aus Tonplatte |
+| Drucken | Stempelmotive für Moosgummi (einfach, spiegelverkehrt gedruckt); Schablonen zum Schablonieren (Negativformen); Buchstaben und Zahlen als Stempel |
+| Experimentieren | Wärmekarussell-Spirale; Papierhelikopter; Windrad 4- und 8-flüglig; Fallschirm-Kreis; Boot und Katamaran; Zahnräder 8, 12, 16 Zähne; Sonnenuhr; Kreiselscheiben mit Mustern (Newton-Farbkreis, Benham-Scheibe) |
+| Metall | Prägesterne 3 Grössen; Drahtfiguren als Biegevorlage (Herz, Stern, Name); Alufolie-Anhänger |
+
+### 3b. Schnittmuster Nähen und Filzen (Weg 1 und 2)
+
+Mit Nahtzugabe und Einstichpunkten direkt aus dem Generator. Grosse Teile brauchen A3.
+
+- 1.–2. Klasse: Nadelkissen, Filzsäckchen mit Klappe, Eierwärmer, Fingerpuppen (5 Tiere), Schlüsselanhänger, Lavendelsäckli, Nikolausgesicht aus Filz, Handpuppe Grundform.
+- 3.–4. Klasse: Täschli mit Klappe und Knopf, Etui flach und mit Reissverschluss, Topflappen, Wärmekissen, Kuschelmonster (KUMO, 6 Grundkörper), Sockendrache-Teile, Filz-Etui mit Tic-Tac-Toe (Klassenprojekt).
+- 5.–6. Klasse: Turnsack (A3), Lesekissen Knochen (A3), Plüschtier-Fisch (A3), Lunchbag, Utensilo, Kissenhülle 40 × 40, Kabelorganizer, Fleece-Schal mit Fransen (Masse), Leder-Etui, Mütze aus Fleece (4 Segmente).
+- Filzen: Nassfilz-Schablonen (Blume, Ball-Hohlform, Etui), Filzblumen 3 Grössen (Klassenprojekt), Eierwärmer-Hohlform.
+
+### 3c. Motive (Weg 2, Comic-PNG mit Umriss)
+
+| Thema | Motive |
+|---|---|
+| Herbst | Ahorn-, Eichen-, Kastanienblatt, Kastanie, Pilz, Kürbis, Igel, Eichhörnchen, Herbstbaum (Klassenprojekt), Drachen |
+| Advent, Winter | Engel, Tannenbaum, Rentier, Lebkuchenmann, Kerze, Schneemann, Glocke, Zuckerstange, Geschenk, Stern 3D, Schlitten, Pinguin |
+| Fasnacht | Clown, Konfetti-Formen, Maskenfamilie (Katze, Fuchs, Superheld, Schmetterling) mit Augenlöchern |
+| Frühling, Ostern | Osterhase, Ei (glatt, gemustert), Küken, Tulpe, Narzisse, Schmetterling, Marienkäfer, Biene, Regenbogen |
+| Sommer | Sonne, Glace, Boot, Krebs, Muschel, Seestern, Wal, Flip-Flop, Sonnenbrille |
+| Schweiz | Edelweiss, Kuh mit Glocke, Alphorn, Schweizer Kreuz, Berge, Matterhorn, Steinbock, Murmeltier, Fondue-Caquelon |
+| Fahrzeuge | Auto, Lastwagen, Traktor, Flugzeug, Rakete, Heissluftballon, Zug, Bagger, Velo |
+| Dinos, Urzeit | T-Rex, Triceratops, Stegosaurus, Brachiosaurus, Pterodactylus, Mammut |
+| Meer | Clownfisch, Hai, Oktopus, Schildkröte, Delfin, Qualle (Klassenprojekt Kordel-Qualle), Seepferd |
+| Fabelwesen | Drache, Einhorn, Meerjungfrau, Fee, Roboter, Alien, Monster-Familie |
+| Weltraum | Planet mit Ring, Astronaut, Sternschnuppe, Mond mit Gesicht, Ufo |
+| Alltag | Haus, Schlüssel, Krone, Uhr, Brille, Hut, Schuh, Kleid, Hose, T-Shirt, Socke, Fäustling |
+| Gesichter | Emoji-Familie (froh, traurig, wütend, müde) für Gefühle-Stempel |
+| Piraten, Ritter | Schwert (Klassenprojekt, A3), Schild, Krone, Totenkopf-Flagge, Schatztruhe, Helm |
+
+### 3d. Neue Vorlagen-Arten (Weg 3)
+
+1. **Buchstaben und Zahlen als Form.** Alphabet und 0–9 in einer runden Schrift; Name eingeben, alle Buchstaben kommen aufs Blatt. Für Türschilder, Filzbuchstaben, Nagelbilder, Stempel. Grösster einzelner Gewinn, weil jedes Kind seinen Namen will.
+2. **Nummerierte Punkte** auf jeder Form (Fadengrafik, Nagelbild): Punkte durchnummeriert, Abstand wählbar. Baut auf den Einstichpunkten auf.
+3. **Pixel-Editor für Zählmuster:** eigenes Raster zeichnen, drucken als Perlenweb-, Bügelperlen- oder Kreuzstich-Vorlage mit Farbliste. Die privaten Web-Motive bleiben privat, der Editor ist öffentlich.
+4. **Netze mit Massen:** Schachtel oder Körper mit Breite, Tiefe, Höhe eingeben, Klebelaschen automatisch.
+5. **Poster-Modus:** Formen grösser als das Blatt auf mehrere A4 kacheln, mit Passmarken. So gibt es Grossformat auch ohne A3-Drucker.
+6. **Masken mit Augenlöchern** und Gummiband-Markierung als eigene Gruppe.
+7. **Mehrteilige Schnittmuster** mit Passzeichen und Fadenlauf-Pfeil.
+8. **Vorlagen-Sammlungen:** fertige Listen pro Klassenprojekt («Lesekissen 5. Klasse» = Link mit `liste=…`), direkt aus der Anleitung aufrufbar.
+
+## 4. Vorschlag für die Reihenfolge
+
+| Welle | Inhalt | Aufwand |
+|---|---|---|
+| 1 | A3-Druck (erledigt); rund 60 Werkhilfen und Netze aus 3a in `formen*.py`; Schnittmuster 3b für die Klassenprojekte 2026/27 | Tage |
+| 2 | Buchstaben und Zahlen; nummerierte Punkte; Saisonmotive Herbst und Advent (3c) | 1–2 Wochen |
+| 3 | Pixel-Editor; Netz-Generator; Poster-Modus; restliche Motivthemen | länger |
+
+Ziel nach Welle 3: über 300 Formen im Generator, dazu die 302 Figuren und 302 Perlentiere, also rund 900 Vorlagen plus unbegrenzt viele über Editor, Namen und Netze.
+
+## 5. A3-Druck (eingebaut)
+
+- Im Generator unter «Papier» A4 oder A3 wählen. Blatt, Nutzfläche, Legende, Farbliste und Fusszeile richten sich nach dem Papier; die Druckseite stellt sich mit auf A3.
+- Schnellwahl bei A3 zusätzlich 20, 25 und 30 cm. Nutzfläche A3: 27,7 × 37,2 cm.
+- Bei «Zu gross für ein A4-Blatt» steht neu der Hinweis «Mit Papier A3 hat es Platz», wenn es stimmt.
+- Im Link: `?form=herz&b=30&papier=a3`. Links aus der App ohne `papier` bleiben A4.
+- Im Druckfenster muss A3 als Papier gewählt sein und «Tatsächliche Grösse» oder 100 %; die 5-cm-Linie zeigt, ob es stimmt.
