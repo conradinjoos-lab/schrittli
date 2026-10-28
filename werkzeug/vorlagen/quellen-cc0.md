@@ -392,3 +392,20 @@ Alle Bilder stammen von Openclipart und stehen unter CC0 1.0 (Public Domain Dedi
 | Football | sport-football | Sport | Rugby ball | https://openclipart.org/detail/4456 | CC0 1.0 (Openclipart) | molumen |
 | Baseball-Kind | sport-baseball-blau | Sport | Baseball Batter | https://openclipart.org/detail/328274 | CC0 1.0 (Openclipart) | yenlung |
 | Baseball-Kind mit Kappe | sport-baseball-kappe | Sport | Baseball Catcher | https://openclipart.org/detail/328275 | CC0 1.0 (Openclipart) | yenlung |
+| Kind mit Wintermütze | winter-kind-muetze | Winter | Kid 8, blond boy | https://openclipart.org/detail/262306 | CC0 1.0 (Openclipart) | cirenovy |
+| Bär mit Schal | winter-baer-schal | Winter | active bear - coloured | https://openclipart.org/detail/232003 | CC0 1.0 (Openclipart) | frankes |
+| Bär im Bett | winter-baer-bett | Winter | resting bear - coloured | https://openclipart.org/detail/232006 | CC0 1.0 (Openclipart) | frankes |
+| Pinguin im Wintermantel | winter-pinguin-mantel | Winter | Penguin chick | https://openclipart.org/detail/221477 | CC0 1.0 (Openclipart) | Moini |
+| Schneemann mit Besen | winter-schneemann-besen | Winter | Snowman - Remix | https://openclipart.org/detail/337151 | CC0 1.0 (Openclipart) | j4p4n |
+| Schneemann am Feuer | winter-schneemann-feuer | Winter | Food Cravings Can Lead To Dangerous Decisions | https://openclipart.org/detail/313324 | CC0 1.0 (Openclipart) | rpm |
+| Schneemann mit Hut | winter-schneemann-hut | Winter | Two Ball Snowman | https://openclipart.org/detail/301212 | CC0 1.0 (Openclipart) | j4p4n |
+| Schneemann mit rotem Schal | winter-schneemann-schal | Winter | snowman | https://openclipart.org/detail/14208 | CC0 1.0 (Openclipart) | artmaster |
+| Schneemann auf Ski | winter-schneemann-ski | Winter | Skiing Snow Man | https://openclipart.org/detail/241337 | CC0 1.0 (Openclipart) | GDJ |
+| Schneemann mit Bommelmütze | winter-schneemann-bommel | Winter | Snowman | https://openclipart.org/detail/275551 | CC0 1.0 (Openclipart) | j4p4n |
+| Eisbär mit heissem Tee | winter-eisbaer-tasse | Winter | Polar bear | https://openclipart.org/detail/350856 | CC0 1.0 (Openclipart) | culturalibre |
+| Pinguin-Detektiv | winter-pinguin-detektiv | Winter | Sleuth penguin | https://openclipart.org/detail/221475 | CC0 1.0 (Openclipart) | Moini |
+| Pinguin-König | winter-pinguin-koenig | Winter | Oriental Penguin 3 - no mask | https://openclipart.org/detail/188688 | CC0 1.0 (Openclipart) | Moini |
+| Pinguin | winter-pinguin-rund | Winter | Tux the Penguin | https://openclipart.org/detail/103855 | CC0 1.0 (Openclipart) | mairin |
+| Dicker Pinguin | winter-pinguin-dick | Winter | Cute round cartoon penguin (flat colors) | https://openclipart.org/detail/61207 | CC0 1.0 (Openclipart) | qubodup |
+| Pinguin mit Schürze | winter-pinguin-schuerze | Winter | Penguin with a shirt | https://openclipart.org/detail/95 | CC0 1.0 (Openclipart) | PeterM |
+| Pinguin schreitet | winter-pinguin-schreitet | Winter | Cartoon Penguin | https://openclipart.org/detail/289407 | CC0 1.0 (Openclipart) | GDJ |

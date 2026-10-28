@@ -42,7 +42,8 @@
   "Frühling & Garten",
   "Musik",
   "Schule",
-  "Sport"
+  "Sport",
+  "Winter"
  ],
  "figuren": [
   {
@@ -5788,6 +5789,108 @@
    "name": "Baseball-Kind mit Kappe",
    "welt": "Sport",
    "datei": "sport-baseball-kappe.png"
+  },
+  {
+   "id": "winter-kind-muetze",
+   "name": "Kind mit Wintermütze",
+   "welt": "Winter",
+   "datei": "winter-kind-muetze.png"
+  },
+  {
+   "id": "winter-baer-schal",
+   "name": "Bär mit Schal",
+   "welt": "Winter",
+   "datei": "winter-baer-schal.png"
+  },
+  {
+   "id": "winter-baer-bett",
+   "name": "Bär im Bett",
+   "welt": "Winter",
+   "datei": "winter-baer-bett.png"
+  },
+  {
+   "id": "winter-pinguin-mantel",
+   "name": "Pinguin im Wintermantel",
+   "welt": "Winter",
+   "datei": "winter-pinguin-mantel.png"
+  },
+  {
+   "id": "winter-schneemann-besen",
+   "name": "Schneemann mit Besen",
+   "welt": "Winter",
+   "datei": "winter-schneemann-besen.png"
+  },
+  {
+   "id": "winter-schneemann-feuer",
+   "name": "Schneemann am Feuer",
+   "welt": "Winter",
+   "datei": "winter-schneemann-feuer.png"
+  },
+  {
+   "id": "winter-schneemann-hut",
+   "name": "Schneemann mit Hut",
+   "welt": "Winter",
+   "datei": "winter-schneemann-hut.png"
+  },
+  {
+   "id": "winter-schneemann-schal",
+   "name": "Schneemann mit rotem Schal",
+   "welt": "Winter",
+   "datei": "winter-schneemann-schal.png"
+  },
+  {
+   "id": "winter-schneemann-ski",
+   "name": "Schneemann auf Ski",
+   "welt": "Winter",
+   "datei": "winter-schneemann-ski.png"
+  },
+  {
+   "id": "winter-schneemann-bommel",
+   "name": "Schneemann mit Bommelmütze",
+   "welt": "Winter",
+   "datei": "winter-schneemann-bommel.png"
+  },
+  {
+   "id": "winter-eisbaer-tasse",
+   "name": "Eisbär mit heissem Tee",
+   "welt": "Winter",
+   "datei": "winter-eisbaer-tasse.png"
+  },
+  {
+   "id": "winter-pinguin-detektiv",
+   "name": "Pinguin-Detektiv",
+   "welt": "Winter",
+   "datei": "winter-pinguin-detektiv.png"
+  },
+  {
+   "id": "winter-pinguin-koenig",
+   "name": "Pinguin-König",
+   "welt": "Winter",
+   "datei": "winter-pinguin-koenig.png"
+  },
+  {
+   "id": "winter-pinguin-rund",
+   "name": "Pinguin",
+   "welt": "Winter",
+   "datei": "winter-pinguin-rund.png"
+  },
+  {
+   "id": "winter-pinguin-dick",
+   "name": "Dicker Pinguin",
+   "welt": "Winter",
+   "datei": "winter-pinguin-dick.png"
+  },
+  {
+   "id": "winter-pinguin-schuerze",
+   "name": "Pinguin mit Schürze",
+   "welt": "Winter",
+   "datei": "winter-pinguin-schuerze.png"
+  },
+  {
+   "id": "winter-pinguin-schreitet",
+   "name": "Pinguin schreitet",
+   "welt": "Winter",
+   "datei": "winter-pinguin-schreitet.png"
   }
  ]
 }
