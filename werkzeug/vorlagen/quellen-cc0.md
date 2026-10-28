@@ -97,3 +97,43 @@ Alle Bilder stammen von Openclipart und stehen unter CC0 1.0 (Public Domain Dedi
 | Hase | tiere-hase | Tierwelt | Rabbit doodle | https://openclipart.org/detail/319444 | CC0 1.0 (Openclipart) | liftarn |
 | Katze mit Socken | tiere-katze-socken | Tierwelt | Cartoon Cat In Rainbow Socks | https://openclipart.org/detail/23451 | CC0 1.0 (Openclipart) | FunDraw_dot_com |
 | Tanzender Bär | tiere-baer-tanzend | Tierwelt | Cartoon Bear | https://openclipart.org/detail/267847 | CC0 1.0 (Openclipart) | GDJ |
+| Weihnachtsmann mit Baum | weih-weihnachtsmann-baum | Weihnachten | Santa Claus with a Christmas Tree Cartoon | https://openclipart.org/detail/350121 | CC0 1.0 (Openclipart) | smartpc |
+| Weihnachtsmann-Gesicht | weih-weihnachtsmann-gesicht | Weihnachten | Santa line art | https://openclipart.org/detail/1543 | CC0 1.0 (Openclipart) | zeimusu |
+| Weihnachtsmann dunkel | weih-weihnachtsmann-dunkel | Weihnachten | Black Jolly Santa | https://openclipart.org/detail/312281 | CC0 1.0 (Openclipart) | GDJ |
+| Weihnachtsmann mit Glas | weih-weihnachtsmann-prost | Weihnachten | Santa | https://openclipart.org/detail/291584 | CC0 1.0 (Openclipart) | pascallapalme |
+| Weihnachtsmann mit Sack | weih-weihnachtsmann-sack | Weihnachten | Comic Santa Claus | https://openclipart.org/detail/236777 | CC0 1.0 (Openclipart) | GDJ |
+| Panda als Weihnachtsmann | weih-panda-weihnachtsmann | Weihnachten | Santa Panda | https://openclipart.org/detail/93517 | CC0 1.0 (Openclipart) | shu |
+| Tannenbaum mit Kerzen und Geschenken | weih-baum-kerzen | Weihnachten | Christmas tree | https://openclipart.org/detail/2274 | CC0 1.0 (Openclipart) | Machovka |
+| Lachender Tannenbaum | weih-baum-lachend | Weihnachten | xmas tree | https://openclipart.org/detail/325592 | CC0 1.0 (Openclipart) | pascallapalme |
+| Tannenbaum mit Lichterkette | weih-baum-ketten | Weihnachten | CHRISTMAS 005 | https://openclipart.org/detail/93433 | CC0 1.0 (Openclipart) | inky2010 |
+| Panda mit Weihnachtsmütze | weih-panda-muetze | Weihnachten | Funny panda face black and white with Santa Claus hat | https://openclipart.org/detail/101875 | CC0 1.0 (Openclipart) | palomaironique |
+| Katze mit Weihnachtsmütze | weih-katze-muetze | Weihnachten | Funny kitty face with Santa Claus hat | https://openclipart.org/detail/101869 | CC0 1.0 (Openclipart) | palomaironique |
+| Schwein mit Weihnachtsmütze | weih-schwein-muetze | Weihnachten | Funny piggy face with Santa Claus hat | https://openclipart.org/detail/101863 | CC0 1.0 (Openclipart) | palomaironique |
+| Hase mit Weihnachtsmütze | weih-hase-muetze | Weihnachten | Funny bunny face with Santa Claus hat | https://openclipart.org/detail/101851 | CC0 1.0 (Openclipart) | palomaironique |
+| Bär mit Weihnachtsmütze | weih-baer-muetze | Weihnachten | Funny teddy bear face brown with Santa Claus hat | https://openclipart.org/detail/101845 | CC0 1.0 (Openclipart) | palomaironique |
+| Pinguin mit Weihnachtsmütze | weih-pinguin-muetze | Weihnachten | Funny tux face with Santa Claus hat | https://openclipart.org/detail/101881 | CC0 1.0 (Openclipart) | palomaironique |
+| Rentier | weih-rentier | Weihnachten | Reindeer (#1) | https://openclipart.org/detail/312393 | CC0 1.0 (Openclipart) | oksmith |
+| Rentier mit grossen Augen | weih-rentier-grosse-augen | Weihnachten | reindeer with big eyes | https://openclipart.org/detail/28719 | CC0 1.0 (Openclipart) | Lemonade_Jo |
+| Rentier mit Schal | weih-rentier-schal | Weihnachten | Reindeer | https://openclipart.org/detail/334384 | CC0 1.0 (Openclipart) | SunKing2 |
+| Wichtel mit Zuckerstange | weih-wichtel-zuckerstange | Weihnachten | Christmas Elf | https://openclipart.org/detail/233908 | CC0 1.0 (Openclipart) | GDJ |
+| Wichtel | weih-wichtel-gesicht | Weihnachten | Elf | https://openclipart.org/detail/286609 | CC0 1.0 (Openclipart) | snoopingasusual |
+| Schneemann mit Besen | weih-schneemann-besen | Weihnachten | Snowman - Remix | https://openclipart.org/detail/337151 | CC0 1.0 (Openclipart) | j4p4n |
+| Schneemann auf Ski | weih-schneemann-ski | Weihnachten | Skiing Snow Man | https://openclipart.org/detail/241337 | CC0 1.0 (Openclipart) | GDJ |
+| Lebkuchen-König | weih-lebkuchen-koenig | Weihnachten | Gingerbread King (wiseman) | https://openclipart.org/detail/233607 | CC0 1.0 (Openclipart) | barnheartowl |
+| Lebkuchen-Hirte | weih-lebkuchen-hirte | Weihnachten | Gingerbread Shepherd with crook | https://openclipart.org/detail/233606 | CC0 1.0 (Openclipart) | barnheartowl |
+| Lebkuchen-König mit Kragen | weih-lebkuchen-koenig-kragen | Weihnachten | Gingerbread King (collars) | https://openclipart.org/detail/233602 | CC0 1.0 (Openclipart) | barnheartowl |
+| Lebkuchen-Engel | weih-lebkuchen-engel | Weihnachten | Gingerbread Angel (with bows) | https://openclipart.org/detail/233599 | CC0 1.0 (Openclipart) | barnheartowl |
+| Lebkuchen-Mädchen | weih-lebkuchen-maedchen | Weihnachten | Gingerbread Girl | https://openclipart.org/detail/233597 | CC0 1.0 (Openclipart) | barnheartowl |
+| Lebkuchen-Bub | weih-lebkuchen-bub | Weihnachten | Gingerbread Boy | https://openclipart.org/detail/233596 | CC0 1.0 (Openclipart) | barnheartowl |
+| Blaues Geschenk | weih-geschenk-blau | Weihnachten | Raseone Gift | https://openclipart.org/detail/202436 | CC0 1.0 (Openclipart) | raseone |
+| Oranges Geschenk | weih-geschenk-orange | Weihnachten | GIFT | https://openclipart.org/detail/173884 | CC0 1.0 (Openclipart) | cprostire |
+| Nikolausstiefel mit Geschenken | weih-socke-geschenke | Weihnachten | stocking stuffers | https://openclipart.org/detail/290992 | CC0 1.0 (Openclipart) | cactus_cowboy |
+| Socke mit Puppe | weih-socke-puppe | Weihnachten | Rag Doll Stocking | https://openclipart.org/detail/204714 | CC0 1.0 (Openclipart) | Animystik |
+| Socke mit Teddy | weih-socke-teddy | Weihnachten | Teddy Bear Stocking | https://openclipart.org/detail/204687 | CC0 1.0 (Openclipart) | Animystik |
+| Kranz mit Stern | weih-kranz-stern | Weihnachten | Festive Wreath | https://openclipart.org/detail/98527 | CC0 1.0 (Openclipart) | kattekrab |
+| Adventskranz | weih-adventskranz | Weihnachten | Advent wreath. Advent crown | https://openclipart.org/detail/97891 | CC0 1.0 (Openclipart) | Ehecatl1138 |
+| Engel | weih-engel | Weihnachten | Angel 10 | https://openclipart.org/detail/302458 | CC0 1.0 (Openclipart) | Firkin |
+| Engelchen | weih-engel-baby | Weihnachten | Blonde Cartoon Cupid | https://openclipart.org/detail/235645 | CC0 1.0 (Openclipart) | GDJ |
+| Alpaka-Engel | weih-engel-alpaka | Weihnachten | Alpaka angel | https://openclipart.org/detail/284768 | CC0 1.0 (Openclipart) | Bingenberg |
+| Kerze mit Stechpalme | weih-kerze-stechpalme | Weihnachten | CHRISTMAS 0010 | https://openclipart.org/detail/94303 | CC0 1.0 (Openclipart) | inky2010 |
+| Stechpalme | weih-stechpalme | Weihnachten | CHRISTMAS 003 | https://openclipart.org/detail/93463 | CC0 1.0 (Openclipart) | inky2010 |

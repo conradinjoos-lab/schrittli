@@ -27,7 +27,8 @@
   "Wetter & Himmel",
   "Emojis & Gefühle",
   "Geburtstag & Party",
-  "Tierwelt"
+  "Tierwelt",
+  "Weihnachten"
  ],
  "figuren": [
   {
@@ -3155,6 +3156,246 @@
    "name": "Tanzender Bär",
    "welt": "Tierwelt",
    "datei": "tiere-baer-tanzend.png"
+  },
+  {
+   "id": "weih-weihnachtsmann-baum",
+   "name": "Weihnachtsmann mit Baum",
+   "welt": "Weihnachten",
+   "datei": "weih-weihnachtsmann-baum.png"
+  },
+  {
+   "id": "weih-weihnachtsmann-gesicht",
+   "name": "Weihnachtsmann-Gesicht",
+   "welt": "Weihnachten",
+   "datei": "weih-weihnachtsmann-gesicht.png"
+  },
+  {
+   "id": "weih-weihnachtsmann-dunkel",
+   "name": "Weihnachtsmann dunkel",
+   "welt": "Weihnachten",
+   "datei": "weih-weihnachtsmann-dunkel.png"
+  },
+  {
+   "id": "weih-weihnachtsmann-prost",
+   "name": "Weihnachtsmann mit Glas",
+   "welt": "Weihnachten",
+   "datei": "weih-weihnachtsmann-prost.png"
+  },
+  {
+   "id": "weih-weihnachtsmann-sack",
+   "name": "Weihnachtsmann mit Sack",
+   "welt": "Weihnachten",
+   "datei": "weih-weihnachtsmann-sack.png"
+  },
+  {
+   "id": "weih-panda-weihnachtsmann",
+   "name": "Panda als Weihnachtsmann",
+   "welt": "Weihnachten",
+   "datei": "weih-panda-weihnachtsmann.png"
+  },
+  {
+   "id": "weih-baum-kerzen",
+   "name": "Tannenbaum mit Kerzen und Geschenken",
+   "welt": "Weihnachten",
+   "datei": "weih-baum-kerzen.png"
+  },
+  {
+   "id": "weih-baum-lachend",
+   "name": "Lachender Tannenbaum",
+   "welt": "Weihnachten",
+   "datei": "weih-baum-lachend.png"
+  },
+  {
+   "id": "weih-baum-ketten",
+   "name": "Tannenbaum mit Lichterkette",
+   "welt": "Weihnachten",
+   "datei": "weih-baum-ketten.png"
+  },
+  {
+   "id": "weih-panda-muetze",
+   "name": "Panda mit Weihnachtsmütze",
+   "welt": "Weihnachten",
+   "datei": "weih-panda-muetze.png"
+  },
+  {
+   "id": "weih-katze-muetze",
+   "name": "Katze mit Weihnachtsmütze",
+   "welt": "Weihnachten",
+   "datei": "weih-katze-muetze.png"
+  },
+  {
+   "id": "weih-schwein-muetze",
+   "name": "Schwein mit Weihnachtsmütze",
+   "welt": "Weihnachten",
+   "datei": "weih-schwein-muetze.png"
+  },
+  {
+   "id": "weih-hase-muetze",
+   "name": "Hase mit Weihnachtsmütze",
+   "welt": "Weihnachten",
+   "datei": "weih-hase-muetze.png"
+  },
+  {
+   "id": "weih-baer-muetze",
+   "name": "Bär mit Weihnachtsmütze",
+   "welt": "Weihnachten",
+   "datei": "weih-baer-muetze.png"
+  },
+  {
+   "id": "weih-pinguin-muetze",
+   "name": "Pinguin mit Weihnachtsmütze",
+   "welt": "Weihnachten",
+   "datei": "weih-pinguin-muetze.png"
+  },
+  {
+   "id": "weih-rentier",
+   "name": "Rentier",
+   "welt": "Weihnachten",
+   "datei": "weih-rentier.png"
+  },
+  {
+   "id": "weih-rentier-grosse-augen",
+   "name": "Rentier mit grossen Augen",
+   "welt": "Weihnachten",
+   "datei": "weih-rentier-grosse-augen.png"
+  },
+  {
+   "id": "weih-rentier-schal",
+   "name": "Rentier mit Schal",
+   "welt": "Weihnachten",
+   "datei": "weih-rentier-schal.png"
+  },
+  {
+   "id": "weih-wichtel-zuckerstange",
+   "name": "Wichtel mit Zuckerstange",
+   "welt": "Weihnachten",
+   "datei": "weih-wichtel-zuckerstange.png"
+  },
+  {
+   "id": "weih-wichtel-gesicht",
+   "name": "Wichtel",
+   "welt": "Weihnachten",
+   "datei": "weih-wichtel-gesicht.png"
+  },
+  {
+   "id": "weih-schneemann-besen",
+   "name": "Schneemann mit Besen",
+   "welt": "Weihnachten",
+   "datei": "weih-schneemann-besen.png"
+  },
+  {
+   "id": "weih-schneemann-ski",
+   "name": "Schneemann auf Ski",
+   "welt": "Weihnachten",
+   "datei": "weih-schneemann-ski.png"
+  },
+  {
+   "id": "weih-lebkuchen-koenig",
+   "name": "Lebkuchen-König",
+   "welt": "Weihnachten",
+   "datei": "weih-lebkuchen-koenig.png"
+  },
+  {
+   "id": "weih-lebkuchen-hirte",
+   "name": "Lebkuchen-Hirte",
+   "welt": "Weihnachten",
+   "datei": "weih-lebkuchen-hirte.png"
+  },
+  {
+   "id": "weih-lebkuchen-koenig-kragen",
+   "name": "Lebkuchen-König mit Kragen",
+   "welt": "Weihnachten",
+   "datei": "weih-lebkuchen-koenig-kragen.png"
+  },
+  {
+   "id": "weih-lebkuchen-engel",
+   "name": "Lebkuchen-Engel",
+   "welt": "Weihnachten",
+   "datei": "weih-lebkuchen-engel.png"
+  },
+  {
+   "id": "weih-lebkuchen-maedchen",
+   "name": "Lebkuchen-Mädchen",
+   "welt": "Weihnachten",
+   "datei": "weih-lebkuchen-maedchen.png"
+  },
+  {
+   "id": "weih-lebkuchen-bub",
+   "name": "Lebkuchen-Bub",
+   "welt": "Weihnachten",
+   "datei": "weih-lebkuchen-bub.png"
+  },
+  {
+   "id": "weih-geschenk-blau",
+   "name": "Blaues Geschenk",
+   "welt": "Weihnachten",
+   "datei": "weih-geschenk-blau.png"
+  },
+  {
+   "id": "weih-geschenk-orange",
+   "name": "Oranges Geschenk",
+   "welt": "Weihnachten",
+   "datei": "weih-geschenk-orange.png"
+  },
+  {
+   "id": "weih-socke-geschenke",
+   "name": "Nikolausstiefel mit Geschenken",
+   "welt": "Weihnachten",
+   "datei": "weih-socke-geschenke.png"
+  },
+  {
+   "id": "weih-socke-puppe",
+   "name": "Socke mit Puppe",
+   "welt": "Weihnachten",
+   "datei": "weih-socke-puppe.png"
+  },
+  {
+   "id": "weih-socke-teddy",
+   "name": "Socke mit Teddy",
+   "welt": "Weihnachten",
+   "datei": "weih-socke-teddy.png"
+  },
+  {
+   "id": "weih-kranz-stern",
+   "name": "Kranz mit Stern",
+   "welt": "Weihnachten",
+   "datei": "weih-kranz-stern.png"
+  },
+  {
+   "id": "weih-adventskranz",
+   "name": "Adventskranz",
+   "welt": "Weihnachten",
+   "datei": "weih-adventskranz.png"
+  },
+  {
+   "id": "weih-engel",
+   "name": "Engel",
+   "welt": "Weihnachten",
+   "datei": "weih-engel.png"
+  },
+  {
+   "id": "weih-engel-baby",
+   "name": "Engelchen",
+   "welt": "Weihnachten",
+   "datei": "weih-engel-baby.png"
+  },
+  {
+   "id": "weih-engel-alpaka",
+   "name": "Alpaka-Engel",
+   "welt": "Weihnachten",
+   "datei": "weih-engel-alpaka.png"
+  },
+  {
+   "id": "weih-kerze-stechpalme",
+   "name": "Kerze mit Stechpalme",
+   "welt": "Weihnachten",
+   "datei": "weih-kerze-stechpalme.png"
+  },
+  {
+   "id": "weih-stechpalme",
+   "name": "Stechpalme",
+   "welt": "Weihnachten",
+   "datei": "weih-stechpalme.png"
   }
  ]
 }
