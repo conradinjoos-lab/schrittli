@@ -1,5 +1,5 @@
 {
-  "figuren": 612,
+  "figuren": 692,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -5508,6 +5508,726 @@
       "pixel": [
         753,
         800
+      ]
+    },
+    {
+      "id": "weih-weihnachtsmann-baum",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        656,
+        741
+      ]
+    },
+    {
+      "id": "weih-weihnachtsmann-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 18,
+      "pixel": [
+        769,
+        800
+      ]
+    },
+    {
+      "id": "weih-weihnachtsmann-dunkel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        616,
+        769
+      ]
+    },
+    {
+      "id": "weih-weihnachtsmann-prost",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        776,
+        800
+      ]
+    },
+    {
+      "id": "weih-weihnachtsmann-sack",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        680,
+        756
+      ]
+    },
+    {
+      "id": "weih-panda-weihnachtsmann",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        718,
+        800
+      ]
+    },
+    {
+      "id": "weih-baum-kerzen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        627,
+        800
+      ]
+    },
+    {
+      "id": "weih-baum-lachend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        486,
+        735
+      ]
+    },
+    {
+      "id": "weih-baum-ketten",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        523,
+        770
+      ]
+    },
+    {
+      "id": "weih-panda-muetze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        747,
+        507
+      ]
+    },
+    {
+      "id": "weih-katze-muetze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        467
+      ]
+    },
+    {
+      "id": "weih-schwein-muetze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        528
+      ]
+    },
+    {
+      "id": "weih-hase-muetze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        703
+      ]
+    },
+    {
+      "id": "weih-baer-muetze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        622
+      ]
+    },
+    {
+      "id": "weih-pinguin-muetze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        761,
+        535
+      ]
+    },
+    {
+      "id": "weih-rentier",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        547,
+        786
+      ]
+    },
+    {
+      "id": "weih-rentier-grosse-augen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        559,
+        743
+      ]
+    },
+    {
+      "id": "weih-rentier-schal",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        404,
+        707
+      ]
+    },
+    {
+      "id": "weih-wichtel-zuckerstange",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        748,
+        760
+      ]
+    },
+    {
+      "id": "weih-wichtel-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        414,
+        739
+      ]
+    },
+    {
+      "id": "weih-schneemann-besen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        741,
+        779
+      ]
+    },
+    {
+      "id": "weih-schneemann-ski",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        774,
+        716
+      ]
+    },
+    {
+      "id": "weih-lebkuchen-koenig",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        446,
+        800
+      ]
+    },
+    {
+      "id": "weih-lebkuchen-hirte",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        543,
+        800
+      ]
+    },
+    {
+      "id": "weih-lebkuchen-koenig-kragen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        431,
+        800
+      ]
+    },
+    {
+      "id": "weih-lebkuchen-engel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        585,
+        800
+      ]
+    },
+    {
+      "id": "weih-lebkuchen-maedchen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        448,
+        800
+      ]
+    },
+    {
+      "id": "weih-lebkuchen-bub",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        457,
+        800
+      ]
+    },
+    {
+      "id": "weih-geschenk-blau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        741,
+        753
+      ]
+    },
+    {
+      "id": "weih-geschenk-orange",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        788,
+        649
+      ]
+    },
+    {
+      "id": "weih-socke-geschenke",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        529,
+        768
+      ]
+    },
+    {
+      "id": "weih-socke-puppe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        446,
+        762
+      ]
+    },
+    {
+      "id": "weih-socke-teddy",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        453,
+        766
+      ]
+    },
+    {
+      "id": "weih-kranz-stern",
+      "farbpixelIdentisch": true,
+      "teile": 9,
+      "pixel": [
+        690,
+        798
+      ]
+    },
+    {
+      "id": "weih-adventskranz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        790,
+        608
+      ]
+    },
+    {
+      "id": "weih-engel",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        524,
+        800
+      ]
+    },
+    {
+      "id": "weih-engel-baby",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        686,
+        778
+      ]
+    },
+    {
+      "id": "weih-engel-alpaka",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        466,
+        777
+      ]
+    },
+    {
+      "id": "weih-kerze-stechpalme",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        534,
+        768
+      ]
+    },
+    {
+      "id": "weih-stechpalme",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        760,
+        795
+      ]
+    },
+    {
+      "id": "flagge-schweiz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "flagge-deutschland",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-frankreich",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-italien",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-oesterreich",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-liechtenstein",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-eu",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-portugal",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-spanien",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-tuerkei",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-kosovo",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-grossbritannien",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-usa",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-brasilien",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-japan",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-china",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-serbien",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-albanien",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-nordmazedonien",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-ukraine",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "kontinent-globus",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-loewe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        480,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-elefant",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        441
+      ]
+    },
+    {
+      "id": "kontinent-giraffe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        419,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-panda",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        459,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-tiger",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        330
+      ]
+    },
+    {
+      "id": "kontinent-kaenguru",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        480,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-koala",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        355
+      ]
+    },
+    {
+      "id": "kontinent-pinguin",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        440,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-lama",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        428,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-bison",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        405
+      ]
+    },
+    {
+      "id": "kontinent-baer",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        459,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-europa",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        484,
+        337
+      ]
+    },
+    {
+      "id": "kontinent-afrika",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        475,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-asien",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        484,
+        381
+      ]
+    },
+    {
+      "id": "kontinent-nordamerika",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        297
+      ]
+    },
+    {
+      "id": "kontinent-suedamerika",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        346,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-australien",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        484,
+        385
+      ]
+    },
+    {
+      "id": "kontinent-antarktis",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        69
+      ]
+    },
+    {
+      "id": "kontinent-weltkarte",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        484,
+        268
       ]
     }
   ],

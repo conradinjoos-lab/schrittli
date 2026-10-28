@@ -31,7 +31,9 @@
   "Küche & Restaurant",
   "Berge",
   "Städte",
-  "Liebe & Hochzeit"
+  "Liebe & Hochzeit",
+  "Weihnachten",
+  "Flaggen & Kontinente"
  ],
  "figuren": [
   {
@@ -3818,6 +3820,506 @@
    "name": "Pinguin mit Rose",
    "welt": "Liebe & Hochzeit",
    "datei": "pinguin-herz.png"
+  },
+  {
+   "id": "weih-weihnachtsmann-baum",
+   "name": "Weihnachtsmann mit Baum",
+   "welt": "Weihnachten",
+   "datei": "weih-weihnachtsmann-baum.png"
+  },
+  {
+   "id": "weih-weihnachtsmann-gesicht",
+   "name": "Weihnachtsmann-Gesicht",
+   "welt": "Weihnachten",
+   "datei": "weih-weihnachtsmann-gesicht.png"
+  },
+  {
+   "id": "weih-weihnachtsmann-dunkel",
+   "name": "Weihnachtsmann dunkel",
+   "welt": "Weihnachten",
+   "datei": "weih-weihnachtsmann-dunkel.png"
+  },
+  {
+   "id": "weih-weihnachtsmann-prost",
+   "name": "Weihnachtsmann mit Glas",
+   "welt": "Weihnachten",
+   "datei": "weih-weihnachtsmann-prost.png"
+  },
+  {
+   "id": "weih-weihnachtsmann-sack",
+   "name": "Weihnachtsmann mit Sack",
+   "welt": "Weihnachten",
+   "datei": "weih-weihnachtsmann-sack.png"
+  },
+  {
+   "id": "weih-panda-weihnachtsmann",
+   "name": "Panda als Weihnachtsmann",
+   "welt": "Weihnachten",
+   "datei": "weih-panda-weihnachtsmann.png"
+  },
+  {
+   "id": "weih-baum-kerzen",
+   "name": "Tannenbaum mit Kerzen und Geschenken",
+   "welt": "Weihnachten",
+   "datei": "weih-baum-kerzen.png"
+  },
+  {
+   "id": "weih-baum-lachend",
+   "name": "Lachender Tannenbaum",
+   "welt": "Weihnachten",
+   "datei": "weih-baum-lachend.png"
+  },
+  {
+   "id": "weih-baum-ketten",
+   "name": "Tannenbaum mit Lichterkette",
+   "welt": "Weihnachten",
+   "datei": "weih-baum-ketten.png"
+  },
+  {
+   "id": "weih-panda-muetze",
+   "name": "Panda mit Weihnachtsmütze",
+   "welt": "Weihnachten",
+   "datei": "weih-panda-muetze.png"
+  },
+  {
+   "id": "weih-katze-muetze",
+   "name": "Katze mit Weihnachtsmütze",
+   "welt": "Weihnachten",
+   "datei": "weih-katze-muetze.png"
+  },
+  {
+   "id": "weih-schwein-muetze",
+   "name": "Schwein mit Weihnachtsmütze",
+   "welt": "Weihnachten",
+   "datei": "weih-schwein-muetze.png"
+  },
+  {
+   "id": "weih-hase-muetze",
+   "name": "Hase mit Weihnachtsmütze",
+   "welt": "Weihnachten",
+   "datei": "weih-hase-muetze.png"
+  },
+  {
+   "id": "weih-baer-muetze",
+   "name": "Bär mit Weihnachtsmütze",
+   "welt": "Weihnachten",
+   "datei": "weih-baer-muetze.png"
+  },
+  {
+   "id": "weih-pinguin-muetze",
+   "name": "Pinguin mit Weihnachtsmütze",
+   "welt": "Weihnachten",
+   "datei": "weih-pinguin-muetze.png"
+  },
+  {
+   "id": "weih-rentier",
+   "name": "Rentier",
+   "welt": "Weihnachten",
+   "datei": "weih-rentier.png"
+  },
+  {
+   "id": "weih-rentier-grosse-augen",
+   "name": "Rentier mit grossen Augen",
+   "welt": "Weihnachten",
+   "datei": "weih-rentier-grosse-augen.png"
+  },
+  {
+   "id": "weih-rentier-schal",
+   "name": "Rentier mit Schal",
+   "welt": "Weihnachten",
+   "datei": "weih-rentier-schal.png"
+  },
+  {
+   "id": "weih-wichtel-zuckerstange",
+   "name": "Wichtel mit Zuckerstange",
+   "welt": "Weihnachten",
+   "datei": "weih-wichtel-zuckerstange.png"
+  },
+  {
+   "id": "weih-wichtel-gesicht",
+   "name": "Wichtel",
+   "welt": "Weihnachten",
+   "datei": "weih-wichtel-gesicht.png"
+  },
+  {
+   "id": "weih-schneemann-besen",
+   "name": "Schneemann mit Besen",
+   "welt": "Weihnachten",
+   "datei": "weih-schneemann-besen.png"
+  },
+  {
+   "id": "weih-schneemann-ski",
+   "name": "Schneemann auf Ski",
+   "welt": "Weihnachten",
+   "datei": "weih-schneemann-ski.png"
+  },
+  {
+   "id": "weih-lebkuchen-koenig",
+   "name": "Lebkuchen-König",
+   "welt": "Weihnachten",
+   "datei": "weih-lebkuchen-koenig.png"
+  },
+  {
+   "id": "weih-lebkuchen-hirte",
+   "name": "Lebkuchen-Hirte",
+   "welt": "Weihnachten",
+   "datei": "weih-lebkuchen-hirte.png"
+  },
+  {
+   "id": "weih-lebkuchen-koenig-kragen",
+   "name": "Lebkuchen-König mit Kragen",
+   "welt": "Weihnachten",
+   "datei": "weih-lebkuchen-koenig-kragen.png"
+  },
+  {
+   "id": "weih-lebkuchen-engel",
+   "name": "Lebkuchen-Engel",
+   "welt": "Weihnachten",
+   "datei": "weih-lebkuchen-engel.png"
+  },
+  {
+   "id": "weih-lebkuchen-maedchen",
+   "name": "Lebkuchen-Mädchen",
+   "welt": "Weihnachten",
+   "datei": "weih-lebkuchen-maedchen.png"
+  },
+  {
+   "id": "weih-lebkuchen-bub",
+   "name": "Lebkuchen-Bub",
+   "welt": "Weihnachten",
+   "datei": "weih-lebkuchen-bub.png"
+  },
+  {
+   "id": "weih-geschenk-blau",
+   "name": "Blaues Geschenk",
+   "welt": "Weihnachten",
+   "datei": "weih-geschenk-blau.png"
+  },
+  {
+   "id": "weih-geschenk-orange",
+   "name": "Oranges Geschenk",
+   "welt": "Weihnachten",
+   "datei": "weih-geschenk-orange.png"
+  },
+  {
+   "id": "weih-socke-geschenke",
+   "name": "Nikolausstiefel mit Geschenken",
+   "welt": "Weihnachten",
+   "datei": "weih-socke-geschenke.png"
+  },
+  {
+   "id": "weih-socke-puppe",
+   "name": "Socke mit Puppe",
+   "welt": "Weihnachten",
+   "datei": "weih-socke-puppe.png"
+  },
+  {
+   "id": "weih-socke-teddy",
+   "name": "Socke mit Teddy",
+   "welt": "Weihnachten",
+   "datei": "weih-socke-teddy.png"
+  },
+  {
+   "id": "weih-kranz-stern",
+   "name": "Kranz mit Stern",
+   "welt": "Weihnachten",
+   "datei": "weih-kranz-stern.png"
+  },
+  {
+   "id": "weih-adventskranz",
+   "name": "Adventskranz",
+   "welt": "Weihnachten",
+   "datei": "weih-adventskranz.png"
+  },
+  {
+   "id": "weih-engel",
+   "name": "Engel",
+   "welt": "Weihnachten",
+   "datei": "weih-engel.png"
+  },
+  {
+   "id": "weih-engel-baby",
+   "name": "Engelchen",
+   "welt": "Weihnachten",
+   "datei": "weih-engel-baby.png"
+  },
+  {
+   "id": "weih-engel-alpaka",
+   "name": "Alpaka-Engel",
+   "welt": "Weihnachten",
+   "datei": "weih-engel-alpaka.png"
+  },
+  {
+   "id": "weih-kerze-stechpalme",
+   "name": "Kerze mit Stechpalme",
+   "welt": "Weihnachten",
+   "datei": "weih-kerze-stechpalme.png"
+  },
+  {
+   "id": "weih-stechpalme",
+   "name": "Stechpalme",
+   "welt": "Weihnachten",
+   "datei": "weih-stechpalme.png"
+  },
+  {
+   "id": "flagge-schweiz",
+   "name": "Flagge Schweiz",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-schweiz.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-deutschland",
+   "name": "Flagge Deutschland",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-deutschland.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-frankreich",
+   "name": "Flagge Frankreich",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-frankreich.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-italien",
+   "name": "Flagge Italien",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-italien.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-oesterreich",
+   "name": "Flagge Österreich",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-oesterreich.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-liechtenstein",
+   "name": "Flagge Liechtenstein",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-liechtenstein.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-eu",
+   "name": "Flagge Europa (EU)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-eu.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-portugal",
+   "name": "Flagge Portugal",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-portugal.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-spanien",
+   "name": "Flagge Spanien",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-spanien.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-tuerkei",
+   "name": "Flagge Türkei",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-tuerkei.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-kosovo",
+   "name": "Flagge Kosovo",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-kosovo.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-grossbritannien",
+   "name": "Flagge Grossbritannien",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-grossbritannien.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-usa",
+   "name": "Flagge USA",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-usa.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-brasilien",
+   "name": "Flagge Brasilien",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-brasilien.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-japan",
+   "name": "Flagge Japan",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-japan.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-china",
+   "name": "Flagge China",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-china.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-serbien",
+   "name": "Flagge Serbien",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-serbien.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-albanien",
+   "name": "Flagge Albanien",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-albanien.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-nordmazedonien",
+   "name": "Flagge Nordmazedonien",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-nordmazedonien.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-ukraine",
+   "name": "Flagge Ukraine",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-ukraine.png",
+   "glatt": 0
+  },
+  {
+   "id": "kontinent-globus",
+   "name": "Globus Europa und Afrika",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-globus.png"
+  },
+  {
+   "id": "kontinent-loewe",
+   "name": "Löwe (Afrika)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-loewe.png"
+  },
+  {
+   "id": "kontinent-elefant",
+   "name": "Elefant (Afrika)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-elefant.png"
+  },
+  {
+   "id": "kontinent-giraffe",
+   "name": "Giraffe (Afrika)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-giraffe.png"
+  },
+  {
+   "id": "kontinent-panda",
+   "name": "Panda (Asien)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-panda.png"
+  },
+  {
+   "id": "kontinent-tiger",
+   "name": "Tiger (Asien)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-tiger.png"
+  },
+  {
+   "id": "kontinent-kaenguru",
+   "name": "Känguru (Australien)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-kaenguru.png"
+  },
+  {
+   "id": "kontinent-koala",
+   "name": "Koala (Australien)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-koala.png"
+  },
+  {
+   "id": "kontinent-pinguin",
+   "name": "Pinguin (Antarktis)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-pinguin.png"
+  },
+  {
+   "id": "kontinent-lama",
+   "name": "Lama (Südamerika)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-lama.png"
+  },
+  {
+   "id": "kontinent-bison",
+   "name": "Bison (Nordamerika)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-bison.png"
+  },
+  {
+   "id": "kontinent-baer",
+   "name": "Braunbär (Europa)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-baer.png"
+  },
+  {
+   "id": "kontinent-europa",
+   "name": "Europa",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-europa.png"
+  },
+  {
+   "id": "kontinent-afrika",
+   "name": "Afrika",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-afrika.png"
+  },
+  {
+   "id": "kontinent-asien",
+   "name": "Asien",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-asien.png"
+  },
+  {
+   "id": "kontinent-nordamerika",
+   "name": "Nordamerika",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-nordamerika.png"
+  },
+  {
+   "id": "kontinent-suedamerika",
+   "name": "Südamerika",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-suedamerika.png"
+  },
+  {
+   "id": "kontinent-australien",
+   "name": "Australien und Ozeanien",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-australien.png"
+  },
+  {
+   "id": "kontinent-antarktis",
+   "name": "Antarktis",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-antarktis.png"
+  },
+  {
+   "id": "kontinent-weltkarte",
+   "name": "Weltkarte",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-weltkarte.png"
   }
  ]
 }
