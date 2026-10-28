@@ -17,10 +17,10 @@ def main():
     index = jsdaten(ROOT/'vorlagen/figuren/index.js')
     figuren = [f for datei in dict.fromkeys(f['datei'] for f in index) for f in jsdaten(ROOT/'vorlagen/figuren'/datei)]
     formen = jsdaten(ROOT/'vorlagen/formen.js')
-    assert len(index) == len(figuren) == len(meta) == 692
+    assert len(index) == len(figuren) == len(meta) == 735
     assert len(formen) == 363
     assert {f['id'] for f in figuren} == {f['id'] for f in meta}
-    assert len({f['id'] for f in figuren+formen}) == 1055
+    assert len({f['id'] for f in figuren+formen}) == 1098
     nachId = {f['id']:f for f in figuren}
     for f in figuren+formen:
         assert f['w'] > 0 and f['h'] > 0 and f['d'], f['id']
@@ -47,7 +47,7 @@ def main():
         details.append({'id':e['id'], 'farbpixelIdentisch':True, 'teile':f['teile'], 'pixel':[actual.shape[1],actual.shape[0]]})
     assert nachId['mochis-dango-spiess']['teile'] == 2, 'Dango-Spitze fehlt'
     out = ROOT/'output/vorlagen-pruefung';out.mkdir(parents=True,exist_ok=True)
-    (out/'pruefung.json').write_text(json.dumps({'figuren':692,'formen':363,'farbgleichheit':details,'ergebnis':'bestanden'},ensure_ascii=False,indent=2),encoding='utf-8')
-    print(f'{len(figuren)+len(formen)} Vorlagen geprüft; alle 692 Farbvorlagen besitzen exakt die RGB-Werte und Motivteile ihrer bereinigten Quelle.')
+    (out/'pruefung.json').write_text(json.dumps({'figuren':735,'formen':363,'farbgleichheit':details,'ergebnis':'bestanden'},ensure_ascii=False,indent=2),encoding='utf-8')
+    print(f'{len(figuren)+len(formen)} Vorlagen geprüft; alle 735 Farbvorlagen besitzen exakt die RGB-Werte und Motivteile ihrer bereinigten Quelle.')
 
 if __name__ == '__main__': main()

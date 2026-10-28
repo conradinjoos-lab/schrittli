@@ -33,7 +33,8 @@
   "Städte",
   "Liebe & Hochzeit",
   "Weihnachten",
-  "Flaggen & Kontinente"
+  "Flaggen & Kontinente",
+  "Schweizer Feste"
  ],
  "figuren": [
   {
@@ -4320,6 +4321,265 @@
    "name": "Weltkarte",
    "welt": "Flaggen & Kontinente",
    "datei": "kontinent-weltkarte.png"
+  },
+  {
+   "id": "fest-raebe",
+   "name": "Räbe für das Räbeliechtli",
+   "welt": "Schweizer Feste",
+   "datei": "fest-raebe.png"
+  },
+  {
+   "id": "fest-samichlaus",
+   "name": "Samichlaus",
+   "welt": "Schweizer Feste",
+   "datei": "fest-samichlaus.png"
+  },
+  {
+   "id": "fest-geschenk",
+   "name": "Geschenk für den Chlaussack",
+   "welt": "Schweizer Feste",
+   "datei": "fest-geschenk.png"
+  },
+  {
+   "id": "fest-mandarine",
+   "name": "Mandarine",
+   "welt": "Schweizer Feste",
+   "datei": "fest-mandarine.png"
+  },
+  {
+   "id": "fest-nuss",
+   "name": "Erdnuss",
+   "welt": "Schweizer Feste",
+   "datei": "fest-nuss.png"
+  },
+  {
+   "id": "fest-guetzli",
+   "name": "Guetzli",
+   "welt": "Schweizer Feste",
+   "datei": "fest-guetzli.png"
+  },
+  {
+   "id": "fest-kerze",
+   "name": "Kerze",
+   "welt": "Schweizer Feste",
+   "datei": "fest-kerze.png"
+  },
+  {
+   "id": "fest-stern",
+   "name": "Stern",
+   "welt": "Schweizer Feste",
+   "datei": "fest-stern.png"
+  },
+  {
+   "id": "fest-glocke",
+   "name": "Glocke",
+   "welt": "Schweizer Feste",
+   "datei": "fest-glocke.png"
+  },
+  {
+   "id": "fest-lampion",
+   "name": "Lampion",
+   "welt": "Schweizer Feste",
+   "datei": "fest-lampion.png"
+  },
+  {
+   "id": "fest-feuerwerk",
+   "name": "Feuerwerk",
+   "welt": "Schweizer Feste",
+   "datei": "fest-feuerwerk.png"
+  },
+  {
+   "id": "fest-feuerwerk-funken",
+   "name": "Feuerwerk mit Funken",
+   "welt": "Schweizer Feste",
+   "datei": "fest-feuerwerk-funken.png"
+  },
+  {
+   "id": "fest-schweizerfahne",
+   "name": "Schweizerfahne",
+   "welt": "Schweizer Feste",
+   "datei": "fest-schweizerfahne.png",
+   "glatt": 0
+  },
+  {
+   "id": "fest-knallkoerper",
+   "name": "Knallkörper",
+   "welt": "Schweizer Feste",
+   "datei": "fest-knallkoerper.png"
+  },
+  {
+   "id": "fest-osterhase",
+   "name": "Osterhase",
+   "welt": "Schweizer Feste",
+   "datei": "fest-osterhase.png"
+  },
+  {
+   "id": "fest-hase",
+   "name": "Hase",
+   "welt": "Schweizer Feste",
+   "datei": "fest-hase.png"
+  },
+  {
+   "id": "fest-kueken",
+   "name": "Küken",
+   "welt": "Schweizer Feste",
+   "datei": "fest-kueken.png"
+  },
+  {
+   "id": "fest-schlupf",
+   "name": "Küken im Ei",
+   "welt": "Schweizer Feste",
+   "datei": "fest-schlupf.png"
+  },
+  {
+   "id": "fest-ei",
+   "name": "Ei",
+   "welt": "Schweizer Feste",
+   "datei": "fest-ei.png"
+  },
+  {
+   "id": "fest-nest",
+   "name": "Nest mit Eiern",
+   "welt": "Schweizer Feste",
+   "datei": "fest-nest.png"
+  },
+  {
+   "id": "fest-tulpe",
+   "name": "Tulpe",
+   "welt": "Schweizer Feste",
+   "datei": "fest-tulpe.png"
+  },
+  {
+   "id": "fest-kuerbis",
+   "name": "Kürbis",
+   "welt": "Schweizer Feste",
+   "datei": "fest-kuerbis.png"
+  },
+  {
+   "id": "fest-aehre",
+   "name": "Getreideähre",
+   "welt": "Schweizer Feste",
+   "datei": "fest-aehre.png"
+  },
+  {
+   "id": "fest-mais",
+   "name": "Maiskolben",
+   "welt": "Schweizer Feste",
+   "datei": "fest-mais.png"
+  },
+  {
+   "id": "fest-herbstblatt",
+   "name": "Herbstblatt",
+   "welt": "Schweizer Feste",
+   "datei": "fest-herbstblatt.png"
+  },
+  {
+   "id": "fest-apfel",
+   "name": "Apfel",
+   "welt": "Schweizer Feste",
+   "datei": "fest-apfel.png"
+  },
+  {
+   "id": "fest-birne",
+   "name": "Birne",
+   "welt": "Schweizer Feste",
+   "datei": "fest-birne.png"
+  },
+  {
+   "id": "fest-trauben",
+   "name": "Trauben",
+   "welt": "Schweizer Feste",
+   "datei": "fest-trauben.png"
+  },
+  {
+   "id": "fest-pilz",
+   "name": "Pilz",
+   "welt": "Schweizer Feste",
+   "datei": "fest-pilz.png"
+  },
+  {
+   "id": "fest-clown",
+   "name": "Clown",
+   "welt": "Schweizer Feste",
+   "datei": "fest-clown.png"
+  },
+  {
+   "id": "fest-masken",
+   "name": "Theatermasken",
+   "welt": "Schweizer Feste",
+   "datei": "fest-masken.png"
+  },
+  {
+   "id": "fest-konfetti",
+   "name": "Konfetti",
+   "welt": "Schweizer Feste",
+   "datei": "fest-konfetti.png"
+  },
+  {
+   "id": "fest-luftschlangen",
+   "name": "Partyknaller",
+   "welt": "Schweizer Feste",
+   "datei": "fest-luftschlangen.png"
+  },
+  {
+   "id": "fest-trompete",
+   "name": "Trompete",
+   "welt": "Schweizer Feste",
+   "datei": "fest-trompete.png"
+  },
+  {
+   "id": "fest-trommel",
+   "name": "Trommel",
+   "welt": "Schweizer Feste",
+   "datei": "fest-trommel.png"
+  },
+  {
+   "id": "fest-saxofon",
+   "name": "Saxofon",
+   "welt": "Schweizer Feste",
+   "datei": "fest-saxofon.png"
+  },
+  {
+   "id": "fest-luftballon",
+   "name": "Luftballon",
+   "welt": "Schweizer Feste",
+   "datei": "fest-luftballon.png"
+  },
+  {
+   "id": "fest-boeoegg",
+   "name": "Böögg (Schneemann)",
+   "welt": "Schweizer Feste",
+   "datei": "fest-boeoegg.png"
+  },
+  {
+   "id": "fest-sekt",
+   "name": "Sektgläser",
+   "welt": "Schweizer Feste",
+   "datei": "fest-sekt.png"
+  },
+  {
+   "id": "fest-uhr",
+   "name": "Mitternacht",
+   "welt": "Schweizer Feste",
+   "datei": "fest-uhr.png"
+  },
+  {
+   "id": "fest-kleeblatt",
+   "name": "Glücksklee",
+   "welt": "Schweizer Feste",
+   "datei": "fest-kleeblatt.png"
+  },
+  {
+   "id": "fest-glueckssau",
+   "name": "Glücksschwein",
+   "welt": "Schweizer Feste",
+   "datei": "fest-glueckssau.png"
+  },
+  {
+   "id": "fest-marienkaefer",
+   "name": "Glückskäfer",
+   "welt": "Schweizer Feste",
+   "datei": "fest-marienkaefer.png"
   }
  ]
 }
