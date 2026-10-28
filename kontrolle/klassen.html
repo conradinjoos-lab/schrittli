@@ -149,7 +149,7 @@ function lesen(text){
  ergebnis.textContent='';fehler($('#fehler'));
  try{let d;try{d=JSON.parse(text)}catch{throw new Error('Die Datei lässt sich nicht lesen – ist es die klassenlisten.json des Putzämtli-Managers?')}
   const listen=ausPutzaemtli(d);const r=uebernehmen(listen);
-  ergebnis.innerHTML=`<b>${listen.length} Listen</b> mit ${r.kinder} Kindern gelesen${r.ersetzt?` · ${r.ersetzt} bestehende ersetzt`:''}${r.neu?` · ${r.neu} neu`:''}..`;
+  ergebnis.innerHTML=`<b>${listen.length} Listen</b> mit ${r.kinder} Kindern gelesen${r.ersetzt?` · ${r.ersetzt} bestehende ersetzt`:''}${r.neu?` · ${r.neu} neu`:''}.`;
   $('#alle-knopf').scrollIntoView({behavior:'smooth',block:'center'})}
  catch(x){fehler(ergebnis,x)}
 }
