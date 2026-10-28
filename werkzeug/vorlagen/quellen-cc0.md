@@ -288,3 +288,21 @@ Alle Bilder stammen von Openclipart und stehen unter CC0 1.0 (Public Domain Dedi
 | Skizzenbuch | fig-notizbuch | Kreativ & Basteln | Architetto -- Blocco notes | https://openclipart.org/detail/25187 | CC0 1.0 (Openclipart) | francesco_rollandin |
 | Osterhase beim Malen | fig-hase-maler | Kreativ & Basteln | Rabbit Painter | https://openclipart.org/detail/272091 | CC0 1.0 (Openclipart) | GDJ |
 | Rocker-Eule | fig-punk-eule | Kreativ & Basteln | Punk Owl | https://openclipart.org/detail/168874 | CC0 1.0 (Openclipart) | bocian |
+| Robbe | zirkus-robbe | Zirkus | Seal | https://openclipart.org/detail/174437 | CC0 1.0 (Openclipart) | Maw |
+| Jongleur | zirkus-jongleur | Zirkus | juggler clown | https://openclipart.org/detail/172164 | CC0 1.0 (Openclipart) | sammo241 |
+| Zirkusdirektor | zirkus-direktor | Zirkus | Circus chef | https://openclipart.org/detail/103579 | CC0 1.0 (Openclipart) | utrescu |
+| Clown mit Glace | zirkus-clown-eis | Zirkus | Clown with Pie - Colour Remix | https://openclipart.org/detail/344707 | CC0 1.0 (Openclipart) | j4p4n |
+| Clown mit grossen Schuhen | zirkus-clown-gross | Zirkus | big earred clown | https://openclipart.org/detail/2859 | CC0 1.0 (Openclipart) | johnny_automatic |
+| Weisser Clown | zirkus-clown-weiss | Zirkus | simple clown figure | https://openclipart.org/detail/2878 | CC0 1.0 (Openclipart) | johnny_automatic |
+| Zirkuszelt rot | zirkus-zelt-rot | Zirkus | Circus Tent - Colour Remix | https://openclipart.org/detail/329574 | CC0 1.0 (Openclipart) | j4p4n |
+| Hund mit Clownnase | zirkus-hund-nase | Zirkus | clowny dog | https://openclipart.org/detail/192734 | CC0 1.0 (Openclipart) | contactr |
+| Clown mit Doktorhut | zirkus-clown-hut | Zirkus | Clown School Graduate | https://openclipart.org/detail/4406 | CC0 1.0 (Openclipart) | FunDraw_dot_com |
+| Narr mit Laute | zirkus-narr-laute | Zirkus | Jester 4 | https://openclipart.org/detail/281021 | CC0 1.0 (Openclipart) | Firkin |
+| Elefant auf der Kugel | zirkus-elefant-kugel | Zirkus | circus scene | https://openclipart.org/detail/189033 | CC0 1.0 (Openclipart) | johnny_automatic |
+| Elefant auf der Tonne | zirkus-elefant-tonne | Zirkus | Elephant Trainer | https://openclipart.org/detail/218408 | CC0 1.0 (Openclipart) | j4p4n |
+| Zauberer | zirkus-zauberer | Zirkus | Cartoon magician | https://openclipart.org/detail/194339 | CC0 1.0 (Openclipart) | Dog99x |
+| Zaubergiraffe | zirkus-giraffe-zauberer | Zirkus | Giraffe Magician | https://openclipart.org/detail/182033 | CC0 1.0 (Openclipart) | Bingenberg |
+| Jonglierkeulen | zirkus-keulen | Zirkus | clubs juggling | https://openclipart.org/detail/177594 | CC0 1.0 (Openclipart) | aviger |
+| Löwe mit Herzballon | zirkus-loewe-ballon | Zirkus | Lion with Balloon | https://openclipart.org/detail/312502 | CC0 1.0 (Openclipart) | oksmith |
+| Schwein mit Herzballon | zirkus-schwein-ballon | Zirkus | Pig with Balloon | https://openclipart.org/detail/312329 | CC0 1.0 (Openclipart) | oksmith |
+| Elefant mit Herzballon | zirkus-elefant-ballon | Zirkus | Pink Elephant Cartoon | https://openclipart.org/detail/309894 | CC0 1.0 (Openclipart) | j4p4n |

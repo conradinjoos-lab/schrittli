@@ -37,7 +37,8 @@
   "Wald & Wiese",
   "Schweizer Feste",
   "Kreativ & Basteln",
-  "Ostern"
+  "Ostern",
+  "Zirkus"
  ],
  "figuren": [
   {
@@ -5159,6 +5160,114 @@
    "name": "Henne mit Küken und Korb",
    "welt": "Ostern",
    "datei": "ostern-henne-kueken-korb.png"
+  },
+  {
+   "id": "zirkus-robbe",
+   "name": "Robbe",
+   "welt": "Zirkus",
+   "datei": "zirkus-robbe.png"
+  },
+  {
+   "id": "zirkus-jongleur",
+   "name": "Jongleur",
+   "welt": "Zirkus",
+   "datei": "zirkus-jongleur.png"
+  },
+  {
+   "id": "zirkus-direktor",
+   "name": "Zirkusdirektor",
+   "welt": "Zirkus",
+   "datei": "zirkus-direktor.png"
+  },
+  {
+   "id": "zirkus-clown-eis",
+   "name": "Clown mit Glace",
+   "welt": "Zirkus",
+   "datei": "zirkus-clown-eis.png"
+  },
+  {
+   "id": "zirkus-clown-gross",
+   "name": "Clown mit grossen Schuhen",
+   "welt": "Zirkus",
+   "datei": "zirkus-clown-gross.png"
+  },
+  {
+   "id": "zirkus-clown-weiss",
+   "name": "Weisser Clown",
+   "welt": "Zirkus",
+   "datei": "zirkus-clown-weiss.png"
+  },
+  {
+   "id": "zirkus-zelt-rot",
+   "name": "Zirkuszelt rot",
+   "welt": "Zirkus",
+   "datei": "zirkus-zelt-rot.png"
+  },
+  {
+   "id": "zirkus-hund-nase",
+   "name": "Hund mit Clownnase",
+   "welt": "Zirkus",
+   "datei": "zirkus-hund-nase.png"
+  },
+  {
+   "id": "zirkus-clown-hut",
+   "name": "Clown mit Doktorhut",
+   "welt": "Zirkus",
+   "datei": "zirkus-clown-hut.png"
+  },
+  {
+   "id": "zirkus-narr-laute",
+   "name": "Narr mit Laute",
+   "welt": "Zirkus",
+   "datei": "zirkus-narr-laute.png"
+  },
+  {
+   "id": "zirkus-elefant-kugel",
+   "name": "Elefant auf der Kugel",
+   "welt": "Zirkus",
+   "datei": "zirkus-elefant-kugel.png"
+  },
+  {
+   "id": "zirkus-elefant-tonne",
+   "name": "Elefant auf der Tonne",
+   "welt": "Zirkus",
+   "datei": "zirkus-elefant-tonne.png"
+  },
+  {
+   "id": "zirkus-zauberer",
+   "name": "Zauberer",
+   "welt": "Zirkus",
+   "datei": "zirkus-zauberer.png"
+  },
+  {
+   "id": "zirkus-giraffe-zauberer",
+   "name": "Zaubergiraffe",
+   "welt": "Zirkus",
+   "datei": "zirkus-giraffe-zauberer.png"
+  },
+  {
+   "id": "zirkus-keulen",
+   "name": "Jonglierkeulen",
+   "welt": "Zirkus",
+   "datei": "zirkus-keulen.png"
+  },
+  {
+   "id": "zirkus-loewe-ballon",
+   "name": "Löwe mit Herzballon",
+   "welt": "Zirkus",
+   "datei": "zirkus-loewe-ballon.png"
+  },
+  {
+   "id": "zirkus-schwein-ballon",
+   "name": "Schwein mit Herzballon",
+   "welt": "Zirkus",
+   "datei": "zirkus-schwein-ballon.png"
+  },
+  {
+   "id": "zirkus-elefant-ballon",
+   "name": "Elefant mit Herzballon",
+   "welt": "Zirkus",
+   "datei": "zirkus-elefant-ballon.png"
   }
  ]
 }
