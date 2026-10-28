@@ -33,7 +33,8 @@
   "Städte",
   "Liebe & Hochzeit",
   "Weihnachten",
-  "Flaggen & Kontinente"
+  "Flaggen & Kontinente",
+  "Wald & Wiese"
  ],
  "figuren": [
   {
@@ -4320,6 +4321,264 @@
    "name": "Weltkarte",
    "welt": "Flaggen & Kontinente",
    "datei": "kontinent-weltkarte.png"
+  },
+  {
+   "id": "wald-eule",
+   "name": "Eule",
+   "welt": "Wald & Wiese",
+   "datei": "wald-eule.png"
+  },
+  {
+   "id": "wald-eule-schlafend",
+   "name": "Schlafende Eule",
+   "welt": "Wald & Wiese",
+   "datei": "wald-eule-schlafend.png"
+  },
+  {
+   "id": "wald-eule-buch",
+   "name": "Eule auf Buch",
+   "welt": "Wald & Wiese",
+   "datei": "wald-eule-buch.png"
+  },
+  {
+   "id": "wald-fuchs",
+   "name": "Fuchs",
+   "welt": "Wald & Wiese",
+   "datei": "wald-fuchs.png"
+  },
+  {
+   "id": "wald-fuchs-sitzend",
+   "name": "Fuchs sitzend",
+   "welt": "Wald & Wiese",
+   "datei": "wald-fuchs-sitzend.png"
+  },
+  {
+   "id": "wald-fuchs-pfoten",
+   "name": "Fuchs mit Pfoten",
+   "welt": "Wald & Wiese",
+   "datei": "wald-fuchs-pfoten.png"
+  },
+  {
+   "id": "wald-eichhoernchen",
+   "name": "Eichhörnchen",
+   "welt": "Wald & Wiese",
+   "datei": "wald-eichhoernchen.png"
+  },
+  {
+   "id": "wald-eichhoernchen-gross",
+   "name": "Eichhörnchen mit grossem Schwanz",
+   "welt": "Wald & Wiese",
+   "datei": "wald-eichhoernchen-gross.png"
+  },
+  {
+   "id": "wald-eichhoernchen-lesend",
+   "name": "Lesendes Eichhörnchen",
+   "welt": "Wald & Wiese",
+   "datei": "wald-eichhoernchen-lesend.png"
+  },
+  {
+   "id": "wald-igel-stehend",
+   "name": "Igel stehend",
+   "welt": "Wald & Wiese",
+   "datei": "wald-igel-stehend.png"
+  },
+  {
+   "id": "wald-igel",
+   "name": "Igel",
+   "welt": "Wald & Wiese",
+   "datei": "wald-igel.png"
+  },
+  {
+   "id": "wald-igel-laufend",
+   "name": "Igel laufend",
+   "welt": "Wald & Wiese",
+   "datei": "wald-igel-laufend.png"
+  },
+  {
+   "id": "wald-pilzhaus",
+   "name": "Pilzhaus",
+   "welt": "Wald & Wiese",
+   "datei": "wald-pilzhaus.png"
+  },
+  {
+   "id": "wald-fliegenpilz",
+   "name": "Fliegenpilz",
+   "welt": "Wald & Wiese",
+   "datei": "wald-fliegenpilz.png"
+  },
+  {
+   "id": "wald-pilz-raupe",
+   "name": "Raupe auf Pilz",
+   "welt": "Wald & Wiese",
+   "datei": "wald-pilz-raupe.png"
+  },
+  {
+   "id": "wald-pilz-gesicht",
+   "name": "Pilz mit Gesicht",
+   "welt": "Wald & Wiese",
+   "datei": "wald-pilz-gesicht.png"
+  },
+  {
+   "id": "wald-hirsch",
+   "name": "Hirsch",
+   "welt": "Wald & Wiese",
+   "datei": "wald-hirsch.png"
+  },
+  {
+   "id": "wald-elch",
+   "name": "Elch",
+   "welt": "Wald & Wiese",
+   "datei": "wald-elch.png"
+  },
+  {
+   "id": "wald-reh",
+   "name": "Rehkitz",
+   "welt": "Wald & Wiese",
+   "datei": "wald-reh.png"
+  },
+  {
+   "id": "wald-biene-dick",
+   "name": "Dicke Biene",
+   "welt": "Wald & Wiese",
+   "datei": "wald-biene-dick.png"
+  },
+  {
+   "id": "wald-biene",
+   "name": "Biene",
+   "welt": "Wald & Wiese",
+   "datei": "wald-biene.png"
+  },
+  {
+   "id": "wald-biene-waben",
+   "name": "Biene mit Waben",
+   "welt": "Wald & Wiese",
+   "datei": "wald-biene-waben.png"
+  },
+  {
+   "id": "wald-biene-spiegel",
+   "name": "Bienenmädchen",
+   "welt": "Wald & Wiese",
+   "datei": "wald-biene-spiegel.png"
+  },
+  {
+   "id": "wald-schmetterling-rosa",
+   "name": "Rosa Schmetterling",
+   "welt": "Wald & Wiese",
+   "datei": "wald-schmetterling-rosa.png"
+  },
+  {
+   "id": "wald-schmetterling-orange",
+   "name": "Oranger Schmetterling",
+   "welt": "Wald & Wiese",
+   "datei": "wald-schmetterling-orange.png"
+  },
+  {
+   "id": "wald-schmetterling-gruen",
+   "name": "Grüner Schmetterling",
+   "welt": "Wald & Wiese",
+   "datei": "wald-schmetterling-gruen.png"
+  },
+  {
+   "id": "wald-marienkaefer-lachend",
+   "name": "Lachender Marienkäfer",
+   "welt": "Wald & Wiese",
+   "datei": "wald-marienkaefer-lachend.png"
+  },
+  {
+   "id": "wald-marienkaefer",
+   "name": "Marienkäfer",
+   "welt": "Wald & Wiese",
+   "datei": "wald-marienkaefer.png"
+  },
+  {
+   "id": "wald-marienkaefer-paar",
+   "name": "Verliebte Marienkäfer",
+   "welt": "Wald & Wiese",
+   "datei": "wald-marienkaefer-paar.png"
+  },
+  {
+   "id": "wald-marienkaefer-rund",
+   "name": "Runder Marienkäfer",
+   "welt": "Wald & Wiese",
+   "datei": "wald-marienkaefer-rund.png"
+  },
+  {
+   "id": "wald-frosch",
+   "name": "Frosch",
+   "welt": "Wald & Wiese",
+   "datei": "wald-frosch.png"
+  },
+  {
+   "id": "wald-frosch-einfach",
+   "name": "Frosch sitzend",
+   "welt": "Wald & Wiese",
+   "datei": "wald-frosch-einfach.png"
+  },
+  {
+   "id": "wald-froschkoenig",
+   "name": "Froschkönig",
+   "welt": "Wald & Wiese",
+   "datei": "wald-froschkoenig.png"
+  },
+  {
+   "id": "wald-sonnenblume-gesicht",
+   "name": "Sonnenblume mit Gesicht",
+   "welt": "Wald & Wiese",
+   "datei": "wald-sonnenblume-gesicht.png"
+  },
+  {
+   "id": "wald-blume-lachend",
+   "name": "Lachende Blume",
+   "welt": "Wald & Wiese",
+   "datei": "wald-blume-lachend.png"
+  },
+  {
+   "id": "wald-blume-rosa",
+   "name": "Rosa Blume",
+   "welt": "Wald & Wiese",
+   "datei": "wald-blume-rosa.png"
+  },
+  {
+   "id": "wald-blume-blau",
+   "name": "Blaue Blume",
+   "welt": "Wald & Wiese",
+   "datei": "wald-blume-blau.png"
+  },
+  {
+   "id": "wald-blume-einfach",
+   "name": "Blume",
+   "welt": "Wald & Wiese",
+   "datei": "wald-blume-einfach.png"
+  },
+  {
+   "id": "wald-blume-orange",
+   "name": "Orange Blume",
+   "welt": "Wald & Wiese",
+   "datei": "wald-blume-orange.png"
+  },
+  {
+   "id": "wald-sonnenblume",
+   "name": "Sonnenblume",
+   "welt": "Wald & Wiese",
+   "datei": "wald-sonnenblume.png"
+  },
+  {
+   "id": "wald-baum-fruechte",
+   "name": "Baum mit Früchten",
+   "welt": "Wald & Wiese",
+   "datei": "wald-baum-fruechte.png"
+  },
+  {
+   "id": "wald-schnecke-orange",
+   "name": "Schnecke mit orangem Haus",
+   "welt": "Wald & Wiese",
+   "datei": "wald-schnecke-orange.png"
+  },
+  {
+   "id": "wald-schnecke-braun",
+   "name": "Braune Schnecke",
+   "welt": "Wald & Wiese",
+   "datei": "wald-schnecke-braun.png"
   }
  ]
 }
