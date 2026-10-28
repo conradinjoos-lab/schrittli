@@ -352,3 +352,82 @@ Alle Bilder stammen von Openclipart und stehen unter CC0 1.0 (Public Domain Dedi
 | Biene auf Waben | fig-bienen-c | Frühling & Garten | Abeille-Bee-Kawai | https://openclipart.org/detail/191944 | CC0 1.0 (Openclipart) | Martouf |
 | Dicke Biene | fig-bienen-d | Frühling & Garten | Cartoon Bee | https://openclipart.org/detail/69817 | CC0 1.0 (Openclipart) | roland81 |
 | Honigbiene | fig-bienen-honig | Frühling & Garten | Cartoon Honey Bee | https://openclipart.org/detail/222355 | CC0 1.0 (Openclipart) | GDJ |
+| Schulkind Junge | schule-junge | Schule | Cartoon Boy with rather cornery ears and fingers but who does not care | https://openclipart.org/detail/265858 | CC0 1.0 (Openclipart) | The_Martin |
+| Mädchen am Pult | schule-maedchen-pult | Schule | Comic Girl Tini at School | https://openclipart.org/detail/190242 | CC0 1.0 (Openclipart) | frankes |
+| Junge mit Bücherstapel | schule-buecherstapel-junge | Schule | school days | https://openclipart.org/detail/172179 | CC0 1.0 (Openclipart) | sammo241 |
+| Mädchen an der Tafel | schule-tafel-maedchen | Schule | school days | https://openclipart.org/detail/172178 | CC0 1.0 (Openclipart) | sammo241 |
+| Lesen auf dem Bücherstapel | schule-lesen-stapel | Schule | school days | https://openclipart.org/detail/172177 | CC0 1.0 (Openclipart) | sammo241 |
+| Bücherberg | schule-buecherberg | Schule | school days | https://openclipart.org/detail/172174 | CC0 1.0 (Openclipart) | sammo241 |
+| Schulkinder unterwegs | schule-schulweg | Schule | Boy and Girl Students - Colour Remix | https://openclipart.org/detail/329618 | CC0 1.0 (Openclipart) | j4p4n |
+| Kinder in Uniform | schule-kinder-uniform | Schule | Students with backpacks (#2) | https://openclipart.org/detail/302174 | CC0 1.0 (Openclipart) | oksmith |
+| Kinder mit Rucksack | schule-kinder-rucksack | Schule | Students with backpacks (#1) | https://openclipart.org/detail/301454 | CC0 1.0 (Openclipart) | oksmith |
+| Drei Schulkinder | schule-kinder-drei | Schule | Students with backpacks (#3) | https://openclipart.org/detail/317671 | CC0 1.0 (Openclipart) | oksmith |
+| Junge mit Rucksack | schule-junge-rucksack | Schule | Boy with Backpack | https://openclipart.org/detail/287003 | CC0 1.0 (Openclipart) | snoopingasusual |
+| Schulbus | schule-bus-gelb | Schule | Yellow School Bus | https://openclipart.org/detail/226533 | CC0 1.0 (Openclipart) | GDJ |
+| Schulbus mit Stopp | schule-bus-stop | Schule | School Bus | https://openclipart.org/detail/19619 | CC0 1.0 (Openclipart) | schoolfreeware |
+| Bleistift-Männchen | schule-bleistift-figur | Schule | Happy pencil | https://openclipart.org/detail/101707 | CC0 1.0 (Openclipart) | jonata |
+| Heft mit Radiergummi | schule-heft | Schule | Architetto -- Blocco notes | https://openclipart.org/detail/25187 | CC0 1.0 (Openclipart) | francesco_rollandin |
+| Schere | schule-schere | Schule | Scissors | https://openclipart.org/detail/48553 | CC0 1.0 (Openclipart) | gmad |
+| Fussballer | sport-fussballer | Sport | African Boy Playing Soccer | https://openclipart.org/detail/314353 | CC0 1.0 (Openclipart) | j4p4n |
+| Fussball | sport-fussball | Sport | Glossy Football Soccer Ball remix | https://openclipart.org/detail/288976 | CC0 1.0 (Openclipart) | monsterbraingames |
+| Junge mit Fussball | sport-junge-fussball | Sport | Soccer toon 2 | https://openclipart.org/detail/5639 | CC0 1.0 (Openclipart) | kobo |
+| Fussball-Schuss | sport-fussball-schuss | Sport | sport 5 | https://openclipart.org/detail/171998 | CC0 1.0 (Openclipart) | andinuryadin |
+| Fussballerin | sport-fussball-maedchen | Sport | girl playing soccer | https://openclipart.org/detail/723 | CC0 1.0 (Openclipart) | johnny_automatic |
+| Junge mit Jo-Jo | sport-jojo | Sport | 620220 | https://openclipart.org/detail/304495 | CC0 1.0 (Openclipart) | wuhon |
+| Basketball-Wurf | sport-basketball-korb | Sport | Basketball Player | https://openclipart.org/detail/331855 | CC0 1.0 (Openclipart) | GDJ |
+| Wolf mit Basketball | sport-wolf-basketball | Sport | basketball wolf | https://openclipart.org/detail/131917 | CC0 1.0 (Openclipart) | tzunghaor |
+| Panda mit Tennisschläger | sport-panda-tennis | Sport | tennis panda | https://openclipart.org/detail/89125 | CC0 1.0 (Openclipart) | shu |
+| Tennisspieler | sport-tennis | Sport | Cartoon Tennis Player | https://openclipart.org/detail/230022 | CC0 1.0 (Openclipart) | samtux |
+| Tischtennisschläger | sport-tischtennis | Sport | Table Tennis - Colour | https://openclipart.org/detail/305097 | CC0 1.0 (Openclipart) | j4p4n |
+| Nilpferd mit Schnorchel | sport-nilpferd-schnorchel | Sport | SnorkelingHippo | https://openclipart.org/detail/85105 | CC0 1.0 (Openclipart) | TomBrough |
+| Lama als Bademeister | sport-lama-bademeister | Sport | Swimming Alpaka | https://openclipart.org/detail/284780 | CC0 1.0 (Openclipart) | Bingenberg |
+| Schwein auf dem Velo | sport-schwein-velo | Sport | Cycling pig | https://openclipart.org/detail/296457 | CC0 1.0 (Openclipart) | sonichedgehog |
+| Skateboard-Mädchen | sport-skate-maedchen | Sport | Girl Skateboard Remix | https://openclipart.org/detail/354303 | CC0 1.0 (Openclipart) | SunKing2 |
+| Frosch auf dem Skateboard | sport-frosch-skate | Sport | Skateboarding Frog | https://openclipart.org/detail/350704 | CC0 1.0 (Openclipart) | j4p4n |
+| Ratte auf dem Skateboard | sport-ratte-skate | Sport | A Rat on a Skateboard | https://openclipart.org/detail/321882 | CC0 1.0 (Openclipart) | hotta |
+| Katze auf dem Skateboard | sport-katze-skate | Sport | Cat on a skate board | https://openclipart.org/detail/321759 | CC0 1.0 (Openclipart) | hotta |
+| Skater | sport-skater | Sport | Skater | https://openclipart.org/detail/274693 | CC0 1.0 (Openclipart) | snoopingasusual |
+| Skater mit Helm | sport-skater-kind | Sport | Skateboard African Kid | https://openclipart.org/detail/264461 | CC0 1.0 (Openclipart) | j4p4n |
+| Pokal | sport-pokal | Sport | Gold World Cup | https://openclipart.org/detail/171533 | CC0 1.0 (Openclipart) | ksrujana96 |
+| Football | sport-football | Sport | Rugby ball | https://openclipart.org/detail/4456 | CC0 1.0 (Openclipart) | molumen |
+| Baseball-Kind | sport-baseball-blau | Sport | Baseball Batter | https://openclipart.org/detail/328274 | CC0 1.0 (Openclipart) | yenlung |
+| Baseball-Kind mit Kappe | sport-baseball-kappe | Sport | Baseball Catcher | https://openclipart.org/detail/328275 | CC0 1.0 (Openclipart) | yenlung |
+| Kind mit Wintermütze | winter-kind-muetze | Winter | Kid 8, blond boy | https://openclipart.org/detail/262306 | CC0 1.0 (Openclipart) | cirenovy |
+| Bär mit Schal | winter-baer-schal | Winter | active bear - coloured | https://openclipart.org/detail/232003 | CC0 1.0 (Openclipart) | frankes |
+| Bär im Bett | winter-baer-bett | Winter | resting bear - coloured | https://openclipart.org/detail/232006 | CC0 1.0 (Openclipart) | frankes |
+| Pinguin im Wintermantel | winter-pinguin-mantel | Winter | Penguin chick | https://openclipart.org/detail/221477 | CC0 1.0 (Openclipart) | Moini |
+| Schneemann mit Besen | winter-schneemann-besen | Winter | Snowman - Remix | https://openclipart.org/detail/337151 | CC0 1.0 (Openclipart) | j4p4n |
+| Schneemann am Feuer | winter-schneemann-feuer | Winter | Food Cravings Can Lead To Dangerous Decisions | https://openclipart.org/detail/313324 | CC0 1.0 (Openclipart) | rpm |
+| Schneemann mit Hut | winter-schneemann-hut | Winter | Two Ball Snowman | https://openclipart.org/detail/301212 | CC0 1.0 (Openclipart) | j4p4n |
+| Schneemann mit rotem Schal | winter-schneemann-schal | Winter | snowman | https://openclipart.org/detail/14208 | CC0 1.0 (Openclipart) | artmaster |
+| Schneemann auf Ski | winter-schneemann-ski | Winter | Skiing Snow Man | https://openclipart.org/detail/241337 | CC0 1.0 (Openclipart) | GDJ |
+| Schneemann mit Bommelmütze | winter-schneemann-bommel | Winter | Snowman | https://openclipart.org/detail/275551 | CC0 1.0 (Openclipart) | j4p4n |
+| Eisbär mit heissem Tee | winter-eisbaer-tasse | Winter | Polar bear | https://openclipart.org/detail/350856 | CC0 1.0 (Openclipart) | culturalibre |
+| Pinguin-Detektiv | winter-pinguin-detektiv | Winter | Sleuth penguin | https://openclipart.org/detail/221475 | CC0 1.0 (Openclipart) | Moini |
+| Pinguin-König | winter-pinguin-koenig | Winter | Oriental Penguin 3 - no mask | https://openclipart.org/detail/188688 | CC0 1.0 (Openclipart) | Moini |
+| Pinguin | winter-pinguin-rund | Winter | Tux the Penguin | https://openclipart.org/detail/103855 | CC0 1.0 (Openclipart) | mairin |
+| Dicker Pinguin | winter-pinguin-dick | Winter | Cute round cartoon penguin (flat colors) | https://openclipart.org/detail/61207 | CC0 1.0 (Openclipart) | qubodup |
+| Pinguin mit Schürze | winter-pinguin-schuerze | Winter | Penguin with a shirt | https://openclipart.org/detail/95 | CC0 1.0 (Openclipart) | PeterM |
+| Pinguin schreitet | winter-pinguin-schreitet | Winter | Cartoon Penguin | https://openclipart.org/detail/289407 | CC0 1.0 (Openclipart) | GDJ |
+| Lila Krake | meer-krake-lila | Meer | Cartoon octopus | https://openclipart.org/detail/64159 | CC0 1.0 (Openclipart) | laobc |
+| Roter Krake | meer-krake-rot | Meer | Red Cartoon Octopus | https://openclipart.org/detail/204658 | CC0 1.0 (Openclipart) | j4p4n |
+| Türkiser Wal | meer-wal-tuerkis | Meer | Cartoon whale | https://openclipart.org/detail/354655 | CC0 1.0 (Openclipart) | culturalibre |
+| Blauer Wal | meer-wal-blau | Meer | Whale | https://openclipart.org/detail/256551 | CC0 1.0 (Openclipart) | StymShinji |
+| Grauer Pottwal | meer-pottwal-grau | Meer | Small whale | https://openclipart.org/detail/18925 | CC0 1.0 (Openclipart) | lemmling |
+| Hellblauer Wal | meer-wal-hellblau | Meer | Whale | https://openclipart.org/detail/120 | CC0 1.0 (Openclipart) | PeterM |
+| Grauer Hai | meer-hai-grau | Meer | Cartoon shark | https://openclipart.org/detail/354656 | CC0 1.0 (Openclipart) | culturalibre |
+| Orange Krabbe | meer-krabbe-orange | Meer | Cute Crab | https://openclipart.org/detail/284165 | CC0 1.0 (Openclipart) | oksmith |
+| Krabbenkönig | meer-krabbe-koenig | Meer | King Crab remix | https://openclipart.org/detail/263381 | CC0 1.0 (Openclipart) | Arvin61r58 |
+| Lachender Seestern | meer-seestern-lachend | Meer | Starfish | https://openclipart.org/detail/355114 | CC0 1.0 (Openclipart) | AreYouPrepared |
+| Rosa Krabbe | meer-krabbe-rosa | Meer | A Pink Crab | https://openclipart.org/detail/321799 | CC0 1.0 (Openclipart) | hotta |
+| Brummiger Fisch | meer-fisch-brummig | Meer | Simple Big Fish Cartoon | https://openclipart.org/detail/340717 | CC0 1.0 (Openclipart) | miutopia |
+| Rakete im Flug | weltraum-rakete-schraeg | Weltraum | Cartoon Moon Rocket Remix 2 | https://openclipart.org/detail/261323 | CC0 1.0 (Openclipart) | rygle |
+| Rote Rakete | weltraum-rakete-rot | Weltraum | Cartoon Moon Rocket Remix 1 | https://openclipart.org/detail/261322 | CC0 1.0 (Openclipart) | rygle |
+| Schlanke Rakete | weltraum-rakete-schlank | Weltraum | Cartoon Moon Rocket Remix 3 | https://openclipart.org/detail/261324 | CC0 1.0 (Openclipart) | rygle |
+| Gelbe Rakete | weltraum-rakete-gelb | Weltraum | Very simple rocket | https://openclipart.org/detail/26690 | CC0 1.0 (Openclipart) | laobc |
+| Rakete mit Bullauge | weltraum-rakete-bordeaux | Weltraum | Rocket Colour | https://openclipart.org/detail/270273 | CC0 1.0 (Openclipart) | j4p4n |
+| Winkender Astronaut | weltraum-astronaut-winkt | Weltraum | Waving astronaut | https://openclipart.org/detail/304180 | CC0 1.0 (Openclipart) | Firkin |
+| Roter Astronaut | weltraum-astronaut-rot | Weltraum | Astronaut - red space suit | https://openclipart.org/detail/338427 | CC0 1.0 (Openclipart) | Technaturally |
+| Hüpfender Astronaut | weltraum-astronaut-hupft | Weltraum | Spaceman Isolated | https://openclipart.org/detail/325270 | CC0 1.0 (Openclipart) | j4p4n |
+| Ufo mit Ausserirdischem | weltraum-ufo-lila | Weltraum | UFO with Grumpy Alien | https://openclipart.org/detail/338435 | CC0 1.0 (Openclipart) | Technaturally |
+| Brummiger Ausserirdischer | weltraum-ausserirdischer-brummig | Weltraum | Unimpressed alien | https://openclipart.org/detail/270215 | CC0 1.0 (Openclipart) | anarres |

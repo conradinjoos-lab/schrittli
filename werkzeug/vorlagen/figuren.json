@@ -40,7 +40,10 @@
   "Ostern",
   "Zirkus",
   "Frühling & Garten",
-  "Musik"
+  "Musik",
+  "Schule",
+  "Sport",
+  "Winter"
  ],
  "figuren": [
   {
@@ -5546,6 +5549,480 @@
    "name": "Saxofonist",
    "welt": "Musik",
    "datei": "musik-saxofonist.png"
+  },
+  {
+   "id": "schule-junge",
+   "name": "Schulkind Junge",
+   "welt": "Schule",
+   "datei": "schule-junge.png"
+  },
+  {
+   "id": "schule-maedchen-pult",
+   "name": "Mädchen am Pult",
+   "welt": "Schule",
+   "datei": "schule-maedchen-pult.png"
+  },
+  {
+   "id": "schule-buecherstapel-junge",
+   "name": "Junge mit Bücherstapel",
+   "welt": "Schule",
+   "datei": "schule-buecherstapel-junge.png"
+  },
+  {
+   "id": "schule-tafel-maedchen",
+   "name": "Mädchen an der Tafel",
+   "welt": "Schule",
+   "datei": "schule-tafel-maedchen.png"
+  },
+  {
+   "id": "schule-lesen-stapel",
+   "name": "Lesen auf dem Bücherstapel",
+   "welt": "Schule",
+   "datei": "schule-lesen-stapel.png"
+  },
+  {
+   "id": "schule-buecherberg",
+   "name": "Bücherberg",
+   "welt": "Schule",
+   "datei": "schule-buecherberg.png"
+  },
+  {
+   "id": "schule-schulweg",
+   "name": "Schulkinder unterwegs",
+   "welt": "Schule",
+   "datei": "schule-schulweg.png"
+  },
+  {
+   "id": "schule-kinder-uniform",
+   "name": "Kinder in Uniform",
+   "welt": "Schule",
+   "datei": "schule-kinder-uniform.png"
+  },
+  {
+   "id": "schule-kinder-rucksack",
+   "name": "Kinder mit Rucksack",
+   "welt": "Schule",
+   "datei": "schule-kinder-rucksack.png"
+  },
+  {
+   "id": "schule-kinder-drei",
+   "name": "Drei Schulkinder",
+   "welt": "Schule",
+   "datei": "schule-kinder-drei.png"
+  },
+  {
+   "id": "schule-junge-rucksack",
+   "name": "Junge mit Rucksack",
+   "welt": "Schule",
+   "datei": "schule-junge-rucksack.png"
+  },
+  {
+   "id": "schule-bus-gelb",
+   "name": "Schulbus",
+   "welt": "Schule",
+   "datei": "schule-bus-gelb.png"
+  },
+  {
+   "id": "schule-bus-stop",
+   "name": "Schulbus mit Stopp",
+   "welt": "Schule",
+   "datei": "schule-bus-stop.png"
+  },
+  {
+   "id": "schule-bleistift-figur",
+   "name": "Bleistift-Männchen",
+   "welt": "Schule",
+   "datei": "schule-bleistift-figur.png"
+  },
+  {
+   "id": "schule-heft",
+   "name": "Heft mit Radiergummi",
+   "welt": "Schule",
+   "datei": "schule-heft.png"
+  },
+  {
+   "id": "schule-schere",
+   "name": "Schere",
+   "welt": "Schule",
+   "datei": "schule-schere.png"
+  },
+  {
+   "id": "sport-fussballer",
+   "name": "Fussballer",
+   "welt": "Sport",
+   "datei": "sport-fussballer.png"
+  },
+  {
+   "id": "sport-fussball",
+   "name": "Fussball",
+   "welt": "Sport",
+   "datei": "sport-fussball.png"
+  },
+  {
+   "id": "sport-junge-fussball",
+   "name": "Junge mit Fussball",
+   "welt": "Sport",
+   "datei": "sport-junge-fussball.png"
+  },
+  {
+   "id": "sport-fussball-schuss",
+   "name": "Fussball-Schuss",
+   "welt": "Sport",
+   "datei": "sport-fussball-schuss.png"
+  },
+  {
+   "id": "sport-fussball-maedchen",
+   "name": "Fussballerin",
+   "welt": "Sport",
+   "datei": "sport-fussball-maedchen.png"
+  },
+  {
+   "id": "sport-jojo",
+   "name": "Junge mit Jo-Jo",
+   "welt": "Sport",
+   "datei": "sport-jojo.png"
+  },
+  {
+   "id": "sport-basketball-korb",
+   "name": "Basketball-Wurf",
+   "welt": "Sport",
+   "datei": "sport-basketball-korb.png"
+  },
+  {
+   "id": "sport-wolf-basketball",
+   "name": "Wolf mit Basketball",
+   "welt": "Sport",
+   "datei": "sport-wolf-basketball.png"
+  },
+  {
+   "id": "sport-panda-tennis",
+   "name": "Panda mit Tennisschläger",
+   "welt": "Sport",
+   "datei": "sport-panda-tennis.png"
+  },
+  {
+   "id": "sport-tennis",
+   "name": "Tennisspieler",
+   "welt": "Sport",
+   "datei": "sport-tennis.png"
+  },
+  {
+   "id": "sport-tischtennis",
+   "name": "Tischtennisschläger",
+   "welt": "Sport",
+   "datei": "sport-tischtennis.png"
+  },
+  {
+   "id": "sport-nilpferd-schnorchel",
+   "name": "Nilpferd mit Schnorchel",
+   "welt": "Sport",
+   "datei": "sport-nilpferd-schnorchel.png"
+  },
+  {
+   "id": "sport-lama-bademeister",
+   "name": "Lama als Bademeister",
+   "welt": "Sport",
+   "datei": "sport-lama-bademeister.png"
+  },
+  {
+   "id": "sport-schwein-velo",
+   "name": "Schwein auf dem Velo",
+   "welt": "Sport",
+   "datei": "sport-schwein-velo.png"
+  },
+  {
+   "id": "sport-skate-maedchen",
+   "name": "Skateboard-Mädchen",
+   "welt": "Sport",
+   "datei": "sport-skate-maedchen.png"
+  },
+  {
+   "id": "sport-frosch-skate",
+   "name": "Frosch auf dem Skateboard",
+   "welt": "Sport",
+   "datei": "sport-frosch-skate.png"
+  },
+  {
+   "id": "sport-ratte-skate",
+   "name": "Ratte auf dem Skateboard",
+   "welt": "Sport",
+   "datei": "sport-ratte-skate.png"
+  },
+  {
+   "id": "sport-katze-skate",
+   "name": "Katze auf dem Skateboard",
+   "welt": "Sport",
+   "datei": "sport-katze-skate.png"
+  },
+  {
+   "id": "sport-skater",
+   "name": "Skater",
+   "welt": "Sport",
+   "datei": "sport-skater.png"
+  },
+  {
+   "id": "sport-skater-kind",
+   "name": "Skater mit Helm",
+   "welt": "Sport",
+   "datei": "sport-skater-kind.png"
+  },
+  {
+   "id": "sport-pokal",
+   "name": "Pokal",
+   "welt": "Sport",
+   "datei": "sport-pokal.png"
+  },
+  {
+   "id": "sport-football",
+   "name": "Football",
+   "welt": "Sport",
+   "datei": "sport-football.png"
+  },
+  {
+   "id": "sport-baseball-blau",
+   "name": "Baseball-Kind",
+   "welt": "Sport",
+   "datei": "sport-baseball-blau.png"
+  },
+  {
+   "id": "sport-baseball-kappe",
+   "name": "Baseball-Kind mit Kappe",
+   "welt": "Sport",
+   "datei": "sport-baseball-kappe.png"
+  },
+  {
+   "id": "winter-kind-muetze",
+   "name": "Kind mit Wintermütze",
+   "welt": "Winter",
+   "datei": "winter-kind-muetze.png"
+  },
+  {
+   "id": "winter-baer-schal",
+   "name": "Bär mit Schal",
+   "welt": "Winter",
+   "datei": "winter-baer-schal.png"
+  },
+  {
+   "id": "winter-baer-bett",
+   "name": "Bär im Bett",
+   "welt": "Winter",
+   "datei": "winter-baer-bett.png"
+  },
+  {
+   "id": "winter-pinguin-mantel",
+   "name": "Pinguin im Wintermantel",
+   "welt": "Winter",
+   "datei": "winter-pinguin-mantel.png"
+  },
+  {
+   "id": "winter-schneemann-besen",
+   "name": "Schneemann mit Besen",
+   "welt": "Winter",
+   "datei": "winter-schneemann-besen.png"
+  },
+  {
+   "id": "winter-schneemann-feuer",
+   "name": "Schneemann am Feuer",
+   "welt": "Winter",
+   "datei": "winter-schneemann-feuer.png"
+  },
+  {
+   "id": "winter-schneemann-hut",
+   "name": "Schneemann mit Hut",
+   "welt": "Winter",
+   "datei": "winter-schneemann-hut.png"
+  },
+  {
+   "id": "winter-schneemann-schal",
+   "name": "Schneemann mit rotem Schal",
+   "welt": "Winter",
+   "datei": "winter-schneemann-schal.png"
+  },
+  {
+   "id": "winter-schneemann-ski",
+   "name": "Schneemann auf Ski",
+   "welt": "Winter",
+   "datei": "winter-schneemann-ski.png"
+  },
+  {
+   "id": "winter-schneemann-bommel",
+   "name": "Schneemann mit Bommelmütze",
+   "welt": "Winter",
+   "datei": "winter-schneemann-bommel.png"
+  },
+  {
+   "id": "winter-eisbaer-tasse",
+   "name": "Eisbär mit heissem Tee",
+   "welt": "Winter",
+   "datei": "winter-eisbaer-tasse.png"
+  },
+  {
+   "id": "winter-pinguin-detektiv",
+   "name": "Pinguin-Detektiv",
+   "welt": "Winter",
+   "datei": "winter-pinguin-detektiv.png"
+  },
+  {
+   "id": "winter-pinguin-koenig",
+   "name": "Pinguin-König",
+   "welt": "Winter",
+   "datei": "winter-pinguin-koenig.png"
+  },
+  {
+   "id": "winter-pinguin-rund",
+   "name": "Pinguin",
+   "welt": "Winter",
+   "datei": "winter-pinguin-rund.png"
+  },
+  {
+   "id": "winter-pinguin-dick",
+   "name": "Dicker Pinguin",
+   "welt": "Winter",
+   "datei": "winter-pinguin-dick.png"
+  },
+  {
+   "id": "winter-pinguin-schuerze",
+   "name": "Pinguin mit Schürze",
+   "welt": "Winter",
+   "datei": "winter-pinguin-schuerze.png"
+  },
+  {
+   "id": "winter-pinguin-schreitet",
+   "name": "Pinguin schreitet",
+   "welt": "Winter",
+   "datei": "winter-pinguin-schreitet.png"
+  },
+  {
+   "id": "meer-krake-lila",
+   "name": "Lila Krake",
+   "welt": "Meer",
+   "datei": "meer-krake-lila.png"
+  },
+  {
+   "id": "meer-krake-rot",
+   "name": "Roter Krake",
+   "welt": "Meer",
+   "datei": "meer-krake-rot.png"
+  },
+  {
+   "id": "meer-wal-tuerkis",
+   "name": "Türkiser Wal",
+   "welt": "Meer",
+   "datei": "meer-wal-tuerkis.png"
+  },
+  {
+   "id": "meer-wal-blau",
+   "name": "Blauer Wal",
+   "welt": "Meer",
+   "datei": "meer-wal-blau.png"
+  },
+  {
+   "id": "meer-pottwal-grau",
+   "name": "Grauer Pottwal",
+   "welt": "Meer",
+   "datei": "meer-pottwal-grau.png"
+  },
+  {
+   "id": "meer-wal-hellblau",
+   "name": "Hellblauer Wal",
+   "welt": "Meer",
+   "datei": "meer-wal-hellblau.png"
+  },
+  {
+   "id": "meer-hai-grau",
+   "name": "Grauer Hai",
+   "welt": "Meer",
+   "datei": "meer-hai-grau.png"
+  },
+  {
+   "id": "meer-krabbe-orange",
+   "name": "Orange Krabbe",
+   "welt": "Meer",
+   "datei": "meer-krabbe-orange.png"
+  },
+  {
+   "id": "meer-krabbe-koenig",
+   "name": "Krabbenkönig",
+   "welt": "Meer",
+   "datei": "meer-krabbe-koenig.png"
+  },
+  {
+   "id": "meer-seestern-lachend",
+   "name": "Lachender Seestern",
+   "welt": "Meer",
+   "datei": "meer-seestern-lachend.png"
+  },
+  {
+   "id": "meer-krabbe-rosa",
+   "name": "Rosa Krabbe",
+   "welt": "Meer",
+   "datei": "meer-krabbe-rosa.png"
+  },
+  {
+   "id": "meer-fisch-brummig",
+   "name": "Brummiger Fisch",
+   "welt": "Meer",
+   "datei": "meer-fisch-brummig.png"
+  },
+  {
+   "id": "weltraum-rakete-schraeg",
+   "name": "Rakete im Flug",
+   "welt": "Weltraum",
+   "datei": "weltraum-rakete-schraeg.png"
+  },
+  {
+   "id": "weltraum-rakete-rot",
+   "name": "Rote Rakete",
+   "welt": "Weltraum",
+   "datei": "weltraum-rakete-rot.png"
+  },
+  {
+   "id": "weltraum-rakete-schlank",
+   "name": "Schlanke Rakete",
+   "welt": "Weltraum",
+   "datei": "weltraum-rakete-schlank.png"
+  },
+  {
+   "id": "weltraum-rakete-gelb",
+   "name": "Gelbe Rakete",
+   "welt": "Weltraum",
+   "datei": "weltraum-rakete-gelb.png"
+  },
+  {
+   "id": "weltraum-rakete-bordeaux",
+   "name": "Rakete mit Bullauge",
+   "welt": "Weltraum",
+   "datei": "weltraum-rakete-bordeaux.png"
+  },
+  {
+   "id": "weltraum-astronaut-winkt",
+   "name": "Winkender Astronaut",
+   "welt": "Weltraum",
+   "datei": "weltraum-astronaut-winkt.png"
+  },
+  {
+   "id": "weltraum-astronaut-rot",
+   "name": "Roter Astronaut",
+   "welt": "Weltraum",
+   "datei": "weltraum-astronaut-rot.png"
+  },
+  {
+   "id": "weltraum-astronaut-hupft",
+   "name": "Hüpfender Astronaut",
+   "welt": "Weltraum",
+   "datei": "weltraum-astronaut-hupft.png"
+  },
+  {
+   "id": "weltraum-ufo-lila",
+   "name": "Ufo mit Ausserirdischem",
+   "welt": "Weltraum",
+   "datei": "weltraum-ufo-lila.png"
+  },
+  {
+   "id": "weltraum-ausserirdischer-brummig",
+   "name": "Brummiger Ausserirdischer",
+   "welt": "Weltraum",
+   "datei": "weltraum-ausserirdischer-brummig.png"
   }
  ]
 }
