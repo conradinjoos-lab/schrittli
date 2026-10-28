@@ -1,5 +1,5 @@
 {
-  "figuren": 834,
+  "figuren": 862,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -7227,6 +7227,258 @@
       "pixel": [
         778,
         800
+      ]
+    },
+    {
+      "id": "ostern-hase-ei",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        354,
+        672
+      ]
+    },
+    {
+      "id": "ostern-pinguin-hase",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        582,
+        800
+      ]
+    },
+    {
+      "id": "ostern-hase-eier",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        762,
+        490
+      ]
+    },
+    {
+      "id": "ostern-hasenkopf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        468,
+        800
+      ]
+    },
+    {
+      "id": "ostern-ei-lila",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        794,
+        663
+      ]
+    },
+    {
+      "id": "ostern-ei-rot",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        794,
+        663
+      ]
+    },
+    {
+      "id": "ostern-ei-gelb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        794,
+        663
+      ]
+    },
+    {
+      "id": "ostern-ei-zickzack",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        590,
+        800
+      ]
+    },
+    {
+      "id": "ostern-ei-sterne",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        588,
+        800
+      ]
+    },
+    {
+      "id": "ostern-kueken",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        562,
+        800
+      ]
+    },
+    {
+      "id": "ostern-kueken-schoko",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        426,
+        796
+      ]
+    },
+    {
+      "id": "ostern-kueken-eihut",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        431,
+        796
+      ]
+    },
+    {
+      "id": "ostern-kueken-schale",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        799,
+        735
+      ]
+    },
+    {
+      "id": "ostern-kueken-paar",
+      "farbpixelIdentisch": true,
+      "teile": 10,
+      "pixel": [
+        771,
+        755
+      ]
+    },
+    {
+      "id": "ostern-kueken-dick",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        575,
+        719
+      ]
+    },
+    {
+      "id": "ostern-kueken-schluepft",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        698
+      ]
+    },
+    {
+      "id": "ostern-eule-hase",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        553,
+        800
+      ]
+    },
+    {
+      "id": "ostern-korb-gelb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        779,
+        795
+      ]
+    },
+    {
+      "id": "ostern-korb-eier",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        779,
+        795
+      ]
+    },
+    {
+      "id": "ostern-korb-schleife",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        592,
+        671
+      ]
+    },
+    {
+      "id": "ostern-henne-korb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        456,
+        777
+      ]
+    },
+    {
+      "id": "ostern-henne-kueken",
+      "farbpixelIdentisch": true,
+      "teile": 11,
+      "pixel": [
+        564,
+        800
+      ]
+    },
+    {
+      "id": "ostern-hase-schwarz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        541,
+        797
+      ]
+    },
+    {
+      "id": "ostern-pinguin-schild",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        586,
+        784
+      ]
+    },
+    {
+      "id": "ostern-hase-ei-lila",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        510,
+        800
+      ]
+    },
+    {
+      "id": "ostern-hase-malt",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        629,
+        749
+      ]
+    },
+    {
+      "id": "ostern-kueken-korb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        616
+      ]
+    },
+    {
+      "id": "ostern-henne-kueken-korb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        568,
+        774
       ]
     },
     {

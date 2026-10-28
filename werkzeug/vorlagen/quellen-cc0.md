@@ -235,6 +235,34 @@ Alle Bilder stammen von Openclipart und stehen unter CC0 1.0 (Public Domain Dedi
 | Baum mit Früchten | wald-baum-fruechte | Wald & Wiese | tree with fruits | https://openclipart.org/detail/26259 | CC0 1.0 (Openclipart) | Anonymous |
 | Schnecke mit orangem Haus | wald-schnecke-orange | Wald & Wiese | Snail | https://openclipart.org/detail/349739 | CC0 1.0 (Openclipart) | Benjamin_Adams |
 | Braune Schnecke | wald-schnecke-braun | Wald & Wiese | Snail | https://openclipart.org/detail/172493 | CC0 1.0 (Openclipart) | hatso1 |
+| Hase im Osterei | ostern-hase-ei | Ostern | Easter bunny clip art | https://openclipart.org/detail/331223 | CC0 1.0 (Openclipart) | liftarn |
+| Pinguin als Osterhase | ostern-pinguin-hase | Ostern | Bunny Penguin | https://openclipart.org/detail/175339 | CC0 1.0 (Openclipart) | Moini |
+| Hase hinter Eiern | ostern-hase-eier | Ostern | Bunny | https://openclipart.org/detail/63139 | CC0 1.0 (Openclipart) | pianoBrad |
+| Gelber Osterhase | ostern-hasenkopf | Ostern | Easter-Smilie | https://openclipart.org/detail/168803 | CC0 1.0 (Openclipart) | zorro |
+| Osterei lila gestreift | ostern-ei-lila | Ostern | Easter egg 4 | https://openclipart.org/detail/226929 | CC0 1.0 (Openclipart) | floEdelmann |
+| Osterei rot gewellt | ostern-ei-rot | Ostern | Easter egg 3 | https://openclipart.org/detail/226928 | CC0 1.0 (Openclipart) | floEdelmann |
+| Osterei gelb getupft | ostern-ei-gelb | Ostern | Easter egg 1 | https://openclipart.org/detail/226926 | CC0 1.0 (Openclipart) | floEdelmann |
+| Osterei mit Zickzack | ostern-ei-zickzack | Ostern | Easter Egg Yellow | https://openclipart.org/detail/31363 | CC0 1.0 (Openclipart) | skarg |
+| Osterei mit Sternen | ostern-ei-sterne | Ostern | Easter egg (Painted) | https://openclipart.org/detail/15694 | CC0 1.0 (Openclipart) | mystica |
+| Küken | ostern-kueken | Ostern | Chick | https://openclipart.org/detail/299927 | CC0 1.0 (Openclipart) | Firkin |
+| Küken im Schokoladenei | ostern-kueken-schoko | Ostern | Funny Chick Cartoon Newborn | https://openclipart.org/detail/131641 | CC0 1.0 (Openclipart) | palomaironique |
+| Küken mit Eihut | ostern-kueken-eihut | Ostern | Funny Chick Cartoon Newborn Coming Out from the Egg with a Eggshell hat | https://openclipart.org/detail/131623 | CC0 1.0 (Openclipart) | palomaironique |
+| Küken schlüpft | ostern-kueken-schale | Ostern | Funny Chick Cartoon Newborn Coming Out from the Egg | https://openclipart.org/detail/131089 | CC0 1.0 (Openclipart) | palomaironique |
+| Küken-Paar | ostern-kueken-paar | Ostern | Easter Sunday Chicks | https://openclipart.org/detail/128863 | CC0 1.0 (Openclipart) | laurianne |
+| Küken mit dicken Linien | ostern-kueken-dick | Ostern | Chicken icon | https://openclipart.org/detail/23815 | CC0 1.0 (Openclipart) | pitr |
+| Küken im Ei | ostern-kueken-schluepft | Ostern | chick from egg | https://openclipart.org/detail/5481 | CC0 1.0 (Openclipart) | mcol |
+| Eule mit Hasenohren | ostern-eule-hase | Ostern | Easterbunny owl | https://openclipart.org/detail/347775 | CC0 1.0 (Openclipart) | Iyo |
+| Osterkorb gelb | ostern-korb-gelb | Ostern | Easter Basket 3D | https://openclipart.org/detail/300005 | CC0 1.0 (Openclipart) | j4p4n |
+| Korb mit Eiern | ostern-korb-eier | Ostern | Basket of eggs | https://openclipart.org/detail/299928 | CC0 1.0 (Openclipart) | Firkin |
+| Osterkorb mit Schleife | ostern-korb-schleife | Ostern | Easter Icon | https://openclipart.org/detail/93973 | CC0 1.0 (Openclipart) | nicubunu |
+| Henne mit Osterkorb | ostern-henne-korb | Ostern | Funny Chicken with a basket full of Easter Eggs | https://openclipart.org/detail/130909 | CC0 1.0 (Openclipart) | palomaironique |
+| Henne mit Küken | ostern-henne-kueken | Ostern | Funny Chicken and Chicks Cartoon | https://openclipart.org/detail/131035 | CC0 1.0 (Openclipart) | palomaironique |
+| Hase mit Eiern | ostern-hase-schwarz | Ostern | bunney of easter | https://openclipart.org/detail/131977 | CC0 1.0 (Openclipart) | PeterBrough |
+| Pinguin mit Schild | ostern-pinguin-schild | Ostern | Easter Tux | https://openclipart.org/detail/131695 | CC0 1.0 (Openclipart) | Moini |
+| Hase mit lila Ei | ostern-hase-ei-lila | Ostern | Cartoon bunny | https://openclipart.org/detail/23052 | CC0 1.0 (Openclipart) | StudioFibonacci |
+| Hase malt Eier | ostern-hase-malt | Ostern | Osterhase | https://openclipart.org/detail/166666 | CC0 1.0 (Openclipart) | DoppelG |
+| Küken mit Korb | ostern-kueken-korb | Ostern | Funny Chicks Cartoon with Easter eggs in a basket | https://openclipart.org/detail/130687 | CC0 1.0 (Openclipart) | palomaironique |
+| Henne mit Küken und Korb | ostern-henne-kueken-korb | Ostern | Funny Chicken and Chicks Cartoon Easter | https://openclipart.org/detail/130903 | CC0 1.0 (Openclipart) | palomaironique |
 | Elefant als Maler | fig-elefant-maler | Kreativ & Basteln | Artist Elephant | https://openclipart.org/detail/352874 | CC0 1.0 (Openclipart) | j4p4n |
 | Farbtopf mit Pinsel | fig-farbtopf-pinsel | Kreativ & Basteln | Paint can with brush Animation | https://openclipart.org/detail/277892 | CC0 1.0 (Openclipart) | danjiro |
 | Farbpalette | fig-palette-pinsel | Kreativ & Basteln | Paintbrush and Palette | https://openclipart.org/detail/271502 | CC0 1.0 (Openclipart) | j4p4n |
