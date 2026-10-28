@@ -1,4 +1,4 @@
-# Quellen der frei verwendbaren Figurenbilder (Welle 3)
+# Quellen der frei verwendbaren Figurenbilder (Welle 3 und folgende)
 
 Alle Bilder stammen von Openclipart und stehen unter CC0 1.0 (Public Domain Dedication). Datei = `werkzeug/vorlagen/bilder/<Datei>`.
 
@@ -59,3 +59,41 @@ Alle Bilder stammen von Openclipart und stehen unter CC0 1.0 (Public Domain Dedi
 | Narzisse | fig-narzisse | Frühling & Sommer | daffodil | https://openclipart.org/detail/21653 | CC0 1.0 (Openclipart) | johnny_automatic |
 | Ei mit Muster | fig-ei-gemustert | Frühling & Sommer | Decorated egg 9 | https://openclipart.org/detail/284142 | CC0 1.0 (Openclipart) | Firkin |
 | Sonnenbrille | fig-sonnenbrille | Frühling & Sommer | Yellow Sunglasses | https://openclipart.org/detail/322482 | CC0 1.0 (Openclipart) | j4p4n |
+| Geburtstagstorte | fig-geburtstagstorte | Geburtstag & Party | Birthday cake 3 | https://openclipart.org/detail/304095 | CC0 1.0 (Openclipart) | Firkin |
+| Geschenk mit Schleife | fig-geschenk-schleife | Geburtstag & Party | Gift box with white ribbon | https://openclipart.org/detail/329278 | CC0 1.0 (Openclipart) | liftarn |
+| Panda mit Luftballons | fig-panda-ballons | Geburtstag & Party | Panda Party | https://openclipart.org/detail/300657 | CC0 1.0 (Openclipart) | JayNick |
+| Monster mit Luftballons | fig-monster-ballons | Geburtstag & Party | Monster Holding Balloons #2 | https://openclipart.org/detail/351559 | CC0 1.0 (Openclipart) | Benjamin_Adams |
+| Kuchen-Monster | fig-kuchen-monster | Geburtstag & Party | Cake Monster #2 | https://openclipart.org/detail/351558 | CC0 1.0 (Openclipart) | Benjamin_Adams |
+| Party-Pinguin | fig-party-pinguin | Geburtstag & Party | Party Penguin | https://openclipart.org/detail/174110 | CC0 1.0 (Openclipart) | Moini |
+| Partyhut | fig-partyhut | Geburtstag & Party | Green Party Hat | https://openclipart.org/detail/174006 | CC0 1.0 (Openclipart) | qubodup |
+| Muffin rosa | fig-muffin-rosa | Geburtstag & Party | Cake 15 (colour) | https://openclipart.org/detail/289805 | CC0 1.0 (Openclipart) | Firkin |
+| Muffin mit Herzen | fig-muffin-herz | Geburtstag & Party | Cake 13 (colour) | https://openclipart.org/detail/289803 | CC0 1.0 (Openclipart) | Firkin |
+| Schoko-Muffin | fig-muffin-schoko | Geburtstag & Party | Chocolate Muffin | https://openclipart.org/detail/176483 | CC0 1.0 (Openclipart) | rubejar |
+| Clown | fig-clown-gesicht | Geburtstag & Party | Clown Face | https://openclipart.org/detail/193921 | CC0 1.0 (Openclipart) | ksly4ever |
+| Partytöte | fig-partytroete | Geburtstag & Party | Party 1 | https://openclipart.org/detail/171359 | CC0 1.0 (Openclipart) | cyberscooty |
+| Nilpferd | tiere-nilpferd | Tierwelt | Cartoon hippo | https://openclipart.org/detail/22337 | CC0 1.0 (Openclipart) | StudioFibonacci |
+| Nashorn | tiere-nashorn | Tierwelt | Cartoon rhino | https://openclipart.org/detail/22293 | CC0 1.0 (Openclipart) | StudioFibonacci |
+| Elefant | tiere-elefant | Tierwelt | Cartoon elephant | https://openclipart.org/detail/17810 | CC0 1.0 (Openclipart) | lemmling |
+| Katze | tiere-katze | Tierwelt | Cartoon cat | https://openclipart.org/detail/17683 | CC0 1.0 (Openclipart) | lemmling |
+| Löwe | tiere-loewe | Tierwelt | Cartoon lion | https://openclipart.org/detail/22284 | CC0 1.0 (Openclipart) | StudioFibonacci |
+| Leopard | tiere-leopard | Tierwelt | Cartoon leopard | https://openclipart.org/detail/22343 | CC0 1.0 (Openclipart) | StudioFibonacci |
+| Panda | tiere-panda | Tierwelt | Cartoon Panda | https://openclipart.org/detail/28473 | CC0 1.0 (Openclipart) | StudioFibonacci |
+| Bär mit Fisch | tiere-baer | Tierwelt | Cartoon bear | https://openclipart.org/detail/17702 | CC0 1.0 (Openclipart) | lemmling |
+| Eisbär | tiere-eisbaer | Tierwelt | Cartoon Polar Bear | https://openclipart.org/detail/169961 | CC0 1.0 (Openclipart) | StudioFibonacci |
+| Affe | tiere-affe | Tierwelt | Cartoon monkey | https://openclipart.org/detail/22291 | CC0 1.0 (Openclipart) | StudioFibonacci |
+| Affenkopf | tiere-affenkopf | Tierwelt | Monkey head | https://openclipart.org/detail/175261 | CC0 1.0 (Openclipart) | antti_leppa |
+| Strauss | tiere-strauss | Tierwelt | Cartoon ostrich | https://openclipart.org/detail/22289 | CC0 1.0 (Openclipart) | StudioFibonacci |
+| Pfau | tiere-pfau | Tierwelt | Cartoon peacock | https://openclipart.org/detail/22637 | CC0 1.0 (Openclipart) | StudioFibonacci |
+| Giraffe | tiere-giraffe | Tierwelt | Cartoon giraffe | https://openclipart.org/detail/17628 | CC0 1.0 (Openclipart) | lemmling |
+| Schaf | tiere-schaf | Tierwelt | Silly Sheep | https://openclipart.org/detail/245469 | CC0 1.0 (Openclipart) | trian |
+| Lamm | tiere-lamm | Tierwelt | White Stupid & Cute Cartoon Sheep | https://openclipart.org/detail/190148 | CC0 1.0 (Openclipart) | qubodup |
+| Schwein | tiere-schwein | Tierwelt | Pig2 | https://openclipart.org/detail/166836 | CC0 1.0 (Openclipart) | Mat86 |
+| Ferkel | tiere-ferkel | Tierwelt | Cartoon Pig | https://openclipart.org/detail/223797 | CC0 1.0 (Openclipart) | qubodup |
+| Pferd | tiere-pferd | Tierwelt | Horse | https://openclipart.org/detail/354981 | CC0 1.0 (Openclipart) | AreYouPrepared |
+| Einhorn | tiere-einhorn | Tierwelt | cartoon unicorn | https://openclipart.org/detail/184659 | CC0 1.0 (Openclipart) | spacefem |
+| Lama | tiere-lama | Tierwelt | Cartoon llama | https://openclipart.org/detail/23065 | CC0 1.0 (Openclipart) | StudioFibonacci |
+| Hund | tiere-hund | Tierwelt | Brown cartoon dog | https://openclipart.org/detail/328657 | CC0 1.0 (Openclipart) | Dog99x |
+| Hund lachend | tiere-hund-lachend | Tierwelt | Cartoon dog laughing or smiling | https://openclipart.org/detail/190758 | CC0 1.0 (Openclipart) | Schplook |
+| Hase | tiere-hase | Tierwelt | Rabbit doodle | https://openclipart.org/detail/319444 | CC0 1.0 (Openclipart) | liftarn |
+| Katze mit Socken | tiere-katze-socken | Tierwelt | Cartoon Cat In Rainbow Socks | https://openclipart.org/detail/23451 | CC0 1.0 (Openclipart) | FunDraw_dot_com |
+| Tanzender Bär | tiere-baer-tanzend | Tierwelt | Cartoon Bear | https://openclipart.org/detail/267847 | CC0 1.0 (Openclipart) | GDJ |

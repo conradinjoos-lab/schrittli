@@ -26,6 +26,8 @@
   "Buchstaben & Zahlen bunt",
   "Wetter & Himmel",
   "Emojis & Gefühle",
+  "Geburtstag & Party",
+  "Tierwelt",
   "Flaggen & Kontinente"
  ],
  "figuren": [
@@ -2926,6 +2928,234 @@
    "name": "Pokal",
    "welt": "Emojis & Gefühle",
    "datei": "emoji-pokal.png"
+  },
+  {
+   "id": "fig-geburtstagstorte",
+   "name": "Geburtstagstorte",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-geburtstagstorte.png"
+  },
+  {
+   "id": "fig-geschenk-schleife",
+   "name": "Geschenk mit Schleife",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-geschenk-schleife.png"
+  },
+  {
+   "id": "fig-panda-ballons",
+   "name": "Panda mit Luftballons",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-panda-ballons.png"
+  },
+  {
+   "id": "fig-monster-ballons",
+   "name": "Monster mit Luftballons",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-monster-ballons.png"
+  },
+  {
+   "id": "fig-kuchen-monster",
+   "name": "Kuchen-Monster",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-kuchen-monster.png"
+  },
+  {
+   "id": "fig-party-pinguin",
+   "name": "Party-Pinguin",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-party-pinguin.png"
+  },
+  {
+   "id": "fig-partyhut",
+   "name": "Partyhut",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-partyhut.png"
+  },
+  {
+   "id": "fig-muffin-rosa",
+   "name": "Muffin rosa",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-muffin-rosa.png"
+  },
+  {
+   "id": "fig-muffin-herz",
+   "name": "Muffin mit Herzen",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-muffin-herz.png"
+  },
+  {
+   "id": "fig-muffin-schoko",
+   "name": "Schoko-Muffin",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-muffin-schoko.png"
+  },
+  {
+   "id": "fig-clown-gesicht",
+   "name": "Clown",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-clown-gesicht.png"
+  },
+  {
+   "id": "fig-partytroete",
+   "name": "Partytöte",
+   "welt": "Geburtstag & Party",
+   "datei": "fig-partytroete.png"
+  },
+  {
+   "id": "tiere-nilpferd",
+   "name": "Nilpferd",
+   "welt": "Tierwelt",
+   "datei": "tiere-nilpferd.png"
+  },
+  {
+   "id": "tiere-nashorn",
+   "name": "Nashorn",
+   "welt": "Tierwelt",
+   "datei": "tiere-nashorn.png"
+  },
+  {
+   "id": "tiere-elefant",
+   "name": "Elefant",
+   "welt": "Tierwelt",
+   "datei": "tiere-elefant.png"
+  },
+  {
+   "id": "tiere-katze",
+   "name": "Katze",
+   "welt": "Tierwelt",
+   "datei": "tiere-katze.png"
+  },
+  {
+   "id": "tiere-loewe",
+   "name": "Löwe",
+   "welt": "Tierwelt",
+   "datei": "tiere-loewe.png"
+  },
+  {
+   "id": "tiere-leopard",
+   "name": "Leopard",
+   "welt": "Tierwelt",
+   "datei": "tiere-leopard.png"
+  },
+  {
+   "id": "tiere-panda",
+   "name": "Panda",
+   "welt": "Tierwelt",
+   "datei": "tiere-panda.png"
+  },
+  {
+   "id": "tiere-baer",
+   "name": "Bär mit Fisch",
+   "welt": "Tierwelt",
+   "datei": "tiere-baer.png"
+  },
+  {
+   "id": "tiere-eisbaer",
+   "name": "Eisbär",
+   "welt": "Tierwelt",
+   "datei": "tiere-eisbaer.png"
+  },
+  {
+   "id": "tiere-affe",
+   "name": "Affe",
+   "welt": "Tierwelt",
+   "datei": "tiere-affe.png"
+  },
+  {
+   "id": "tiere-affenkopf",
+   "name": "Affenkopf",
+   "welt": "Tierwelt",
+   "datei": "tiere-affenkopf.png"
+  },
+  {
+   "id": "tiere-strauss",
+   "name": "Strauss",
+   "welt": "Tierwelt",
+   "datei": "tiere-strauss.png"
+  },
+  {
+   "id": "tiere-pfau",
+   "name": "Pfau",
+   "welt": "Tierwelt",
+   "datei": "tiere-pfau.png"
+  },
+  {
+   "id": "tiere-giraffe",
+   "name": "Giraffe",
+   "welt": "Tierwelt",
+   "datei": "tiere-giraffe.png"
+  },
+  {
+   "id": "tiere-schaf",
+   "name": "Schaf",
+   "welt": "Tierwelt",
+   "datei": "tiere-schaf.png"
+  },
+  {
+   "id": "tiere-lamm",
+   "name": "Lamm",
+   "welt": "Tierwelt",
+   "datei": "tiere-lamm.png"
+  },
+  {
+   "id": "tiere-schwein",
+   "name": "Schwein",
+   "welt": "Tierwelt",
+   "datei": "tiere-schwein.png"
+  },
+  {
+   "id": "tiere-ferkel",
+   "name": "Ferkel",
+   "welt": "Tierwelt",
+   "datei": "tiere-ferkel.png"
+  },
+  {
+   "id": "tiere-pferd",
+   "name": "Pferd",
+   "welt": "Tierwelt",
+   "datei": "tiere-pferd.png"
+  },
+  {
+   "id": "tiere-einhorn",
+   "name": "Einhorn",
+   "welt": "Tierwelt",
+   "datei": "tiere-einhorn.png"
+  },
+  {
+   "id": "tiere-lama",
+   "name": "Lama",
+   "welt": "Tierwelt",
+   "datei": "tiere-lama.png"
+  },
+  {
+   "id": "tiere-hund",
+   "name": "Hund",
+   "welt": "Tierwelt",
+   "datei": "tiere-hund.png"
+  },
+  {
+   "id": "tiere-hund-lachend",
+   "name": "Hund lachend",
+   "welt": "Tierwelt",
+   "datei": "tiere-hund-lachend.png"
+  },
+  {
+   "id": "tiere-hase",
+   "name": "Hase",
+   "welt": "Tierwelt",
+   "datei": "tiere-hase.png"
+  },
+  {
+   "id": "tiere-katze-socken",
+   "name": "Katze mit Socken",
+   "welt": "Tierwelt",
+   "datei": "tiere-katze-socken.png"
+  },
+  {
+   "id": "tiere-baer-tanzend",
+   "name": "Tanzender Bär",
+   "welt": "Tierwelt",
+   "datei": "tiere-baer-tanzend.png"
   },
   {
    "id": "flagge-schweiz",
