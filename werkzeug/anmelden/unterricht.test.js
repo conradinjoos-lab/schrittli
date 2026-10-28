@@ -37,6 +37,10 @@ test('classroom: teacher-only policy, independent groups, device acknowledgement
   assert.equal((await data(await call('freigabe','teacher',{id:a.id,revision:4,policy:{...p,plan:'ja'}}))).policy.plan,false);
   assert.equal((await data(await call('freigabe','teacher',{id:a.id,revision:5,policy:{mode:'free',title:'Frei',ids:[],plan:true}}))).policy.plan,false);
   assert.equal((await data(await call('freigabe','teacher',{id:a.id,revision:6,policy:p}))).policy.plan,false);
+  /* Vorlagen und Perlentiere brauchen keine Auswahl – nur Aufgaben (projects) verlangen ids */
+  assert.equal((await call('freigabe','teacher',{id:a.id,revision:7,policy:{mode:'templates',title:'Vorlagen',ids:[]}})).status,200);
+  assert.equal((await data(await call('freigabe','teacher',{id:a.id,revision:8,policy:{mode:'beads',title:'Perlentiere',ids:[]}}))).policy.mode,'beads');
+  assert.equal((await call('freigabe','teacher',{id:a.id,revision:9,policy:p})).status,200);
 
   /* Fortschritt: Kind-Endpunkt mit Gruppen-Token, Lehrperson sieht ihn pro iPad */
   const schritte=[true,true,false],fort=(token,patch={})=>call('fortschritt',token,{token,geraet:deviceId,videoId:'flieger-windhover',schritte,...patch});

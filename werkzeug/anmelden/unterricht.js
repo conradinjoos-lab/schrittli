@@ -19,7 +19,7 @@ function policy(p){
  if(!p||!['closed','projects','templates','beads','free'].includes(p.mode))fail('Ungültiger Unterrichtsmodus.');
  if(!Array.isArray(p.ids)||p.ids.length>500||p.ids.some(id=>typeof id!=='string'||!/^[-a-zA-Z0-9_]{1,100}$/.test(id)))fail('Ungültige Auswahl.');
  const ids=[...new Set(p.ids)];
- if(!['closed','free'].includes(p.mode)&&!ids.length)fail('Wähle mindestens einen Inhalt aus.');
+ if(p.mode==='projects'&&!ids.length)fail('Wähle mindestens einen Inhalt aus.');
  if(p.grade!=null&&![1,2,3,4,5,6].includes(p.grade))fail('Ungültige Klasse.');
  return {mode:p.mode,title:name(p.title),ids:['closed','free'].includes(p.mode)?[]:ids,grade:p.grade||null,simple:p.simple!==false,resize:p.resize!==false,recolor:p.recolor!==false,gallery:p.gallery===true,
   selection:['single','topic','custom'].includes(p.selection)?p.selection:'custom',category:typeof p.category==='string'?p.category.slice(0,100):'',
