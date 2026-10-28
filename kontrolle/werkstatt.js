@@ -72,7 +72,6 @@ const W=(()=>{
    const d=document.createElement('dialog');d.style.cssText='border:0;border-radius:18px;padding:24px 26px;max-width:480px;font:15px/1.45 "Atkinson Hyperlegible",system-ui,sans-serif;color:#17212F;box-shadow:0 16px 48px rgba(23,33,47,.25)';
    const knopf='font:700 15px inherit;border:0;border-radius:999px;background:#17997A;color:#fff;padding:10px 20px;cursor:pointer';
    d.innerHTML=`<h3 style="font:600 21px Fredoka,system-ui,sans-serif;margin:0 0 10px">Werkstatt öffnen</h3>
-    <p style="margin:0 0 16px">Die Entwürfe liegen im privaten Repo <b>schrittli-werkstatt</b>. Melde dich einmal pro Gerät mit GitHub an.</p>
     <button class="gh" style="${knopf}">Mit GitHub anmelden</button>
     <p class="f" style="color:#D64545;margin:10px 0 0;min-height:1.2em"></p>
     <details style="margin-top:6px;color:#5B6B80;font-size:13px"><summary style="cursor:pointer">Ohne Anmeldung: Schlüssel einfügen</summary>
