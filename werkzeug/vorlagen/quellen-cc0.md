@@ -192,3 +192,28 @@ Alle Bilder stammen von Openclipart und stehen unter CC0 1.0 (Public Domain Dedi
 | Kuschelbär | fig-teddy-d | Liebe & Hochzeit | Teddy Bear with heart | https://openclipart.org/detail/49015 | CC0 1.0 (Openclipart) | Gerald_G |
 | Teddy mit Herzschild | fig-teddy-e | Liebe & Hochzeit | Happy bear (colour) | https://openclipart.org/detail/281850 | CC0 1.0 (Openclipart) | Firkin |
 | Pinguin mit Rose | fig-pinguin-herz | Liebe & Hochzeit | Valentine Penguin | https://openclipart.org/detail/174544 | CC0 1.0 (Openclipart) | Moini |
+| Elefant als Maler | fig-elefant-maler | Kreativ & Basteln | Artist Elephant | https://openclipart.org/detail/352874 | CC0 1.0 (Openclipart) | j4p4n |
+| Farbtopf mit Pinsel | fig-farbtopf-pinsel | Kreativ & Basteln | Paint can with brush Animation | https://openclipart.org/detail/277892 | CC0 1.0 (Openclipart) | danjiro |
+| Farbpalette | fig-palette-pinsel | Kreativ & Basteln | Paintbrush and Palette | https://openclipart.org/detail/271502 | CC0 1.0 (Openclipart) | j4p4n |
+| Maler-Pinguin | fig-maler-pinguin | Kreativ & Basteln | Painter penguin | https://openclipart.org/detail/174634 | CC0 1.0 (Openclipart) | Moini |
+| Maler an der Staffelei | fig-maler-staffelei | Kreativ & Basteln | Painter (#1) | https://openclipart.org/detail/312470 | CC0 1.0 (Openclipart) | oksmith |
+| Malpalette | fig-palette-braun | Kreativ & Basteln | Palette and brush | https://openclipart.org/detail/152707 | CC0 1.0 (Openclipart) | ejmillan |
+| Wachsmalstifte-Schachtel | fig-wachsmalstifte-box | Kreativ & Basteln | Crayon Box | https://openclipart.org/detail/349836 | CC0 1.0 (Openclipart) | emisue318 |
+| Wachsmalstifte | fig-wachsmalstifte | Kreativ & Basteln | Crayons - Remix | https://openclipart.org/detail/340644 | CC0 1.0 (Openclipart) | j4p4n |
+| Schere | fig-schere-rot | Kreativ & Basteln | Scissors | https://openclipart.org/detail/48553 | CC0 1.0 (Openclipart) | gmad |
+| Klebestift | fig-klebstift | Kreativ & Basteln | Glue Stick | https://openclipart.org/detail/240281 | CC0 1.0 (Openclipart) | sincrosergio |
+| Sprühdose | fig-spraydose | Kreativ & Basteln | Hand Spray Paint - Redder | https://openclipart.org/detail/324462 | CC0 1.0 (Openclipart) | liftarn |
+| Glühbirne mit Idee | fig-gluehbirne-a | Kreativ & Basteln | Anthropomorphic Cartoon Light Bulb | https://openclipart.org/detail/269989 | CC0 1.0 (Openclipart) | GDJ |
+| Staunende Glühbirne | fig-gluehbirne-b | Kreativ & Basteln | Anthropomorphic Light Bulb | https://openclipart.org/detail/241518 | CC0 1.0 (Openclipart) | GDJ |
+| Gelbe Glühbirne | fig-gluehbirne-c | Kreativ & Basteln | I got it | https://openclipart.org/detail/290440 | CC0 1.0 (Openclipart) | StymShinji |
+| Ideen-Glühbirne | fig-gluehbirne-d | Kreativ & Basteln | Light Bulb (#2) | https://openclipart.org/detail/295927 | CC0 1.0 (Openclipart) | oksmith |
+| Blaues Wollknäuel | fig-wolle-blau | Kreativ & Basteln | Yarn Ball | https://openclipart.org/detail/251106 | CC0 1.0 (Openclipart) | tacoplay |
+| Braunes Wollknäuel | fig-wolle-braun | Kreativ & Basteln | Yarn ball | https://openclipart.org/detail/233587 | CC0 1.0 (Openclipart) | spacefem |
+| Strickzeug | fig-wolle-stricken | Kreativ & Basteln | Knitting Yarn and Needles - Colour Remix | https://openclipart.org/detail/338827 | CC0 1.0 (Openclipart) | j4p4n |
+| Stricklieseli-Pinguin | fig-oma-pinguin | Kreativ & Basteln | Grandma Penguin | https://openclipart.org/detail/195809 | CC0 1.0 (Openclipart) | Moini |
+| Lustiger Bleistift | fig-bleistift-lustig | Kreativ & Basteln | Happy Pencil | https://openclipart.org/detail/349812 | CC0 1.0 (Openclipart) | Benjamin_Adams |
+| Gelber Bleistift | fig-bleistift-gelb | Kreativ & Basteln | Cartoon pencil | https://openclipart.org/detail/286583 | CC0 1.0 (Openclipart) | Kib |
+| Tanzender Bleistift | fig-bleistift-tanz | Kreativ & Basteln | Happy pencil | https://openclipart.org/detail/101707 | CC0 1.0 (Openclipart) | jonata |
+| Skizzenbuch | fig-notizbuch | Kreativ & Basteln | Architetto -- Blocco notes | https://openclipart.org/detail/25187 | CC0 1.0 (Openclipart) | francesco_rollandin |
+| Osterhase beim Malen | fig-hase-maler | Kreativ & Basteln | Rabbit Painter | https://openclipart.org/detail/272091 | CC0 1.0 (Openclipart) | GDJ |
+| Rocker-Eule | fig-punk-eule | Kreativ & Basteln | Punk Owl | https://openclipart.org/detail/168874 | CC0 1.0 (Openclipart) | bocian |

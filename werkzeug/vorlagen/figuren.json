@@ -32,7 +32,8 @@
   "Berge",
   "Städte",
   "Liebe & Hochzeit",
-  "Weihnachten"
+  "Weihnachten",
+  "Kreativ & Basteln"
  ],
  "figuren": [
   {
@@ -4059,6 +4060,156 @@
    "name": "Stechpalme",
    "welt": "Weihnachten",
    "datei": "weih-stechpalme.png"
+  },
+  {
+   "id": "fig-elefant-maler",
+   "name": "Elefant als Maler",
+   "welt": "Kreativ & Basteln",
+   "datei": "elefant-maler.png"
+  },
+  {
+   "id": "fig-farbtopf-pinsel",
+   "name": "Farbtopf mit Pinsel",
+   "welt": "Kreativ & Basteln",
+   "datei": "farbtopf-pinsel.png"
+  },
+  {
+   "id": "fig-palette-pinsel",
+   "name": "Farbpalette",
+   "welt": "Kreativ & Basteln",
+   "datei": "palette-pinsel.png"
+  },
+  {
+   "id": "fig-maler-pinguin",
+   "name": "Maler-Pinguin",
+   "welt": "Kreativ & Basteln",
+   "datei": "maler-pinguin.png"
+  },
+  {
+   "id": "fig-maler-staffelei",
+   "name": "Maler an der Staffelei",
+   "welt": "Kreativ & Basteln",
+   "datei": "maler-staffelei.png"
+  },
+  {
+   "id": "fig-palette-braun",
+   "name": "Malpalette",
+   "welt": "Kreativ & Basteln",
+   "datei": "palette-braun.png"
+  },
+  {
+   "id": "fig-wachsmalstifte-box",
+   "name": "Wachsmalstifte-Schachtel",
+   "welt": "Kreativ & Basteln",
+   "datei": "wachsmalstifte-box.png"
+  },
+  {
+   "id": "fig-wachsmalstifte",
+   "name": "Wachsmalstifte",
+   "welt": "Kreativ & Basteln",
+   "datei": "wachsmalstifte.png"
+  },
+  {
+   "id": "fig-schere-rot",
+   "name": "Schere",
+   "welt": "Kreativ & Basteln",
+   "datei": "schere-rot.png"
+  },
+  {
+   "id": "fig-klebstift",
+   "name": "Klebestift",
+   "welt": "Kreativ & Basteln",
+   "datei": "klebstift.png"
+  },
+  {
+   "id": "fig-spraydose",
+   "name": "Sprühdose",
+   "welt": "Kreativ & Basteln",
+   "datei": "spraydose.png"
+  },
+  {
+   "id": "fig-gluehbirne-a",
+   "name": "Glühbirne mit Idee",
+   "welt": "Kreativ & Basteln",
+   "datei": "gluehbirne-a.png"
+  },
+  {
+   "id": "fig-gluehbirne-b",
+   "name": "Staunende Glühbirne",
+   "welt": "Kreativ & Basteln",
+   "datei": "gluehbirne-b.png"
+  },
+  {
+   "id": "fig-gluehbirne-c",
+   "name": "Gelbe Glühbirne",
+   "welt": "Kreativ & Basteln",
+   "datei": "gluehbirne-c.png"
+  },
+  {
+   "id": "fig-gluehbirne-d",
+   "name": "Ideen-Glühbirne",
+   "welt": "Kreativ & Basteln",
+   "datei": "gluehbirne-d.png"
+  },
+  {
+   "id": "fig-wolle-blau",
+   "name": "Blaues Wollknäuel",
+   "welt": "Kreativ & Basteln",
+   "datei": "wolle-blau.png"
+  },
+  {
+   "id": "fig-wolle-braun",
+   "name": "Braunes Wollknäuel",
+   "welt": "Kreativ & Basteln",
+   "datei": "wolle-braun.png"
+  },
+  {
+   "id": "fig-wolle-stricken",
+   "name": "Strickzeug",
+   "welt": "Kreativ & Basteln",
+   "datei": "wolle-stricken.png"
+  },
+  {
+   "id": "fig-oma-pinguin",
+   "name": "Stricklieseli-Pinguin",
+   "welt": "Kreativ & Basteln",
+   "datei": "oma-pinguin.png"
+  },
+  {
+   "id": "fig-bleistift-lustig",
+   "name": "Lustiger Bleistift",
+   "welt": "Kreativ & Basteln",
+   "datei": "bleistift-lustig.png"
+  },
+  {
+   "id": "fig-bleistift-gelb",
+   "name": "Gelber Bleistift",
+   "welt": "Kreativ & Basteln",
+   "datei": "bleistift-gelb.png"
+  },
+  {
+   "id": "fig-bleistift-tanz",
+   "name": "Tanzender Bleistift",
+   "welt": "Kreativ & Basteln",
+   "datei": "bleistift-tanz.png"
+  },
+  {
+   "id": "fig-notizbuch",
+   "name": "Skizzenbuch",
+   "welt": "Kreativ & Basteln",
+   "datei": "notizbuch.png"
+  },
+  {
+   "id": "fig-hase-maler",
+   "name": "Osterhase beim Malen",
+   "welt": "Kreativ & Basteln",
+   "datei": "hase-maler.png"
+  },
+  {
+   "id": "fig-punk-eule",
+   "name": "Rocker-Eule",
+   "welt": "Kreativ & Basteln",
+   "datei": "punk-eule.png"
   }
  ]
 }

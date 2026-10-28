@@ -1,5 +1,5 @@
 {
-  "figuren": 612,
+  "figuren": 677,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -5507,6 +5507,591 @@
       "teile": 1,
       "pixel": [
         753,
+        800
+      ]
+    },
+    {
+      "id": "weih-weihnachtsmann-baum",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        656,
+        741
+      ]
+    },
+    {
+      "id": "weih-weihnachtsmann-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 18,
+      "pixel": [
+        769,
+        800
+      ]
+    },
+    {
+      "id": "weih-weihnachtsmann-dunkel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        616,
+        769
+      ]
+    },
+    {
+      "id": "weih-weihnachtsmann-prost",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        776,
+        800
+      ]
+    },
+    {
+      "id": "weih-weihnachtsmann-sack",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        680,
+        756
+      ]
+    },
+    {
+      "id": "weih-panda-weihnachtsmann",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        718,
+        800
+      ]
+    },
+    {
+      "id": "weih-baum-kerzen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        627,
+        800
+      ]
+    },
+    {
+      "id": "weih-baum-lachend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        486,
+        735
+      ]
+    },
+    {
+      "id": "weih-baum-ketten",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        523,
+        770
+      ]
+    },
+    {
+      "id": "weih-panda-muetze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        747,
+        507
+      ]
+    },
+    {
+      "id": "weih-katze-muetze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        467
+      ]
+    },
+    {
+      "id": "weih-schwein-muetze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        528
+      ]
+    },
+    {
+      "id": "weih-hase-muetze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        703
+      ]
+    },
+    {
+      "id": "weih-baer-muetze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        622
+      ]
+    },
+    {
+      "id": "weih-pinguin-muetze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        761,
+        535
+      ]
+    },
+    {
+      "id": "weih-rentier",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        547,
+        786
+      ]
+    },
+    {
+      "id": "weih-rentier-grosse-augen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        559,
+        743
+      ]
+    },
+    {
+      "id": "weih-rentier-schal",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        404,
+        707
+      ]
+    },
+    {
+      "id": "weih-wichtel-zuckerstange",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        748,
+        760
+      ]
+    },
+    {
+      "id": "weih-wichtel-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        414,
+        739
+      ]
+    },
+    {
+      "id": "weih-schneemann-besen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        741,
+        779
+      ]
+    },
+    {
+      "id": "weih-schneemann-ski",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        774,
+        716
+      ]
+    },
+    {
+      "id": "weih-lebkuchen-koenig",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        446,
+        800
+      ]
+    },
+    {
+      "id": "weih-lebkuchen-hirte",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        543,
+        800
+      ]
+    },
+    {
+      "id": "weih-lebkuchen-koenig-kragen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        431,
+        800
+      ]
+    },
+    {
+      "id": "weih-lebkuchen-engel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        585,
+        800
+      ]
+    },
+    {
+      "id": "weih-lebkuchen-maedchen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        448,
+        800
+      ]
+    },
+    {
+      "id": "weih-lebkuchen-bub",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        457,
+        800
+      ]
+    },
+    {
+      "id": "weih-geschenk-blau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        741,
+        753
+      ]
+    },
+    {
+      "id": "weih-geschenk-orange",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        788,
+        649
+      ]
+    },
+    {
+      "id": "weih-socke-geschenke",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        529,
+        768
+      ]
+    },
+    {
+      "id": "weih-socke-puppe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        446,
+        762
+      ]
+    },
+    {
+      "id": "weih-socke-teddy",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        453,
+        766
+      ]
+    },
+    {
+      "id": "weih-kranz-stern",
+      "farbpixelIdentisch": true,
+      "teile": 9,
+      "pixel": [
+        690,
+        798
+      ]
+    },
+    {
+      "id": "weih-adventskranz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        790,
+        608
+      ]
+    },
+    {
+      "id": "weih-engel",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        524,
+        800
+      ]
+    },
+    {
+      "id": "weih-engel-baby",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        686,
+        778
+      ]
+    },
+    {
+      "id": "weih-engel-alpaka",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        466,
+        777
+      ]
+    },
+    {
+      "id": "weih-kerze-stechpalme",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        534,
+        768
+      ]
+    },
+    {
+      "id": "weih-stechpalme",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        760,
+        795
+      ]
+    },
+    {
+      "id": "fig-elefant-maler",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        743,
+        690
+      ]
+    },
+    {
+      "id": "fig-farbtopf-pinsel",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        729,
+        645
+      ]
+    },
+    {
+      "id": "fig-palette-pinsel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        715
+      ]
+    },
+    {
+      "id": "fig-maler-pinguin",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        747
+      ]
+    },
+    {
+      "id": "fig-maler-staffelei",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        768,
+        776
+      ]
+    },
+    {
+      "id": "fig-palette-braun",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        690,
+        800
+      ]
+    },
+    {
+      "id": "fig-wachsmalstifte-box",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        599,
+        800
+      ]
+    },
+    {
+      "id": "fig-wachsmalstifte",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        456
+      ]
+    },
+    {
+      "id": "fig-schere-rot",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        799
+      ]
+    },
+    {
+      "id": "fig-klebstift",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        325,
+        751
+      ]
+    },
+    {
+      "id": "fig-spraydose",
+      "farbpixelIdentisch": true,
+      "teile": 68,
+      "pixel": [
+        794,
+        800
+      ]
+    },
+    {
+      "id": "fig-gluehbirne-a",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        667,
+        748
+      ]
+    },
+    {
+      "id": "fig-gluehbirne-b",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        458,
+        770
+      ]
+    },
+    {
+      "id": "fig-gluehbirne-c",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        492,
+        800
+      ]
+    },
+    {
+      "id": "fig-gluehbirne-d",
+      "farbpixelIdentisch": true,
+      "teile": 16,
+      "pixel": [
+        696,
+        799
+      ]
+    },
+    {
+      "id": "fig-wolle-blau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        573,
+        557
+      ]
+    },
+    {
+      "id": "fig-wolle-braun",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        770,
+        770
+      ]
+    },
+    {
+      "id": "fig-wolle-stricken",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        766,
+        569
+      ]
+    },
+    {
+      "id": "fig-oma-pinguin",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        634,
+        800
+      ]
+    },
+    {
+      "id": "fig-bleistift-lustig",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        470,
+        800
+      ]
+    },
+    {
+      "id": "fig-bleistift-gelb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        374,
+        800
+      ]
+    },
+    {
+      "id": "fig-bleistift-tanz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        464,
+        728
+      ]
+    },
+    {
+      "id": "fig-notizbuch",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        800,
+        777
+      ]
+    },
+    {
+      "id": "fig-hase-maler",
+      "farbpixelIdentisch": true,
+      "teile": 14,
+      "pixel": [
+        741,
+        762
+      ]
+    },
+    {
+      "id": "fig-punk-eule",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        778,
         800
       ]
     }
