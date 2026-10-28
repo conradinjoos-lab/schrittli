@@ -196,64 +196,85 @@ Flaggen und Tiere: Twemoji (siehe oben); Kontinente und Weltkarte: Openclipart (
 
 ## Berge
 
-Alle 23 Berge sind eigene Zeichnungen (Polygone, schwarz auf durchsichtig, CC0), erzeugt mit `werkzeug/vorlagen/silhouetten.py`; es wurde keine Vorlage kopiert. Elf davon ersetzen frühere Fremdbilder (Vecteezy, nicht CC0) unter denselben Figur-IDs.
+Alle 30 Berge sind eigene Zeichnungen (CC0), es wurde keine Vorlage kopiert: Silhouetten schwarz auf durchsichtig mit `werkzeug/vorlagen/silhouetten.py`, realistische Felsbilder und farbige Comic-Berge mit schwarzen Umrisslinien mit `werkzeug/vorlagen/landschaften.py`. Elf IDs ersetzen frühere Fremdbilder (Vecteezy, nicht CC0).
 
-| Motiv | Figur-ID | URL | Autor | Lizenz |
+| Motiv | Figur-ID | Skript | Autor | Lizenz |
 |---|---|---|---|---|
-| Berg mit Umriss | berg-umriss | – | eigene Zeichnung | CC0 |
-| Bergspitze | berg-spitze | – | eigene Zeichnung | CC0 |
-| Berg Freihand | berg-freihand | – | eigene Zeichnung | CC0 |
-| Fuji | berg-fuji-bild | – | eigene Zeichnung | CC0 |
-| Berg mit Schneekappe | berg-schneekappe | – | eigene Zeichnung | CC0 |
-| Hügel | berg-gruen | – | eigene Zeichnung | CC0 |
-| Berg aus Formen | berg-formen | – | eigene Zeichnung | CC0 |
-| Berge hintereinander | berg-violett | – | eigene Zeichnung | CC0 |
-| Berg mit Tannen und Vögeln | berg-sil-1 | – | eigene Zeichnung | CC0 |
-| Berg im See | berg-sil-2 | – | eigene Zeichnung | CC0 |
-| Berge mit Wolken | berg-sil-3 | – | eigene Zeichnung | CC0 |
-| Doppelgipfel | berg-doppel | – | eigene Zeichnung | CC0 |
-| Drei Berge | berg-dreiecke | – | eigene Zeichnung | CC0 |
-| Vulkanberg | berg-fuji | – | eigene Zeichnung | CC0 |
-| Gipfelkreuz | berg-gipfelkreuz | – | eigene Zeichnung | CC0 |
-| Hochgebirge | berg-hochgebirge | – | eigene Zeichnung | CC0 |
-| Berghütte | berg-huette | – | eigene Zeichnung | CC0 |
-| Bergkette | berg-kette | – | eigene Zeichnung | CC0 |
-| Matterhorn-Spitze | berg-matterhorn-sil | – | eigene Zeichnung | CC0 |
-| Berge mit Mond | berg-mond | – | eigene Zeichnung | CC0 |
-| Berge mit Sonne | berg-sonne | – | eigene Zeichnung | CC0 |
-| Berggipfel | berg-trio | – | eigene Zeichnung | CC0 |
-| Vulkan | berg-vulkan | – | eigene Zeichnung | CC0 |
+| Eiger (realistisch) | berg-umriss | landschaften.py | eigene Zeichnung | CC0 |
+| Matterhorn (realistisch) | berg-spitze | landschaften.py | eigene Zeichnung | CC0 |
+| Alpenpanorama | berg-freihand | landschaften.py | eigene Zeichnung | CC0 |
+| Fuji (Comic) | berg-fuji-bild | landschaften.py | eigene Zeichnung | CC0 |
+| Schneeberge (Comic) | berg-schneekappe | landschaften.py | eigene Zeichnung | CC0 |
+| Alp mit Kuh (Comic) | berg-gruen | landschaften.py | eigene Zeichnung | CC0 |
+| Bergsee mit Spiegelbild | berg-formen | landschaften.py | eigene Zeichnung | CC0 |
+| Berge im Abendrot (Comic) | berg-violett | landschaften.py | eigene Zeichnung | CC0 |
+| Tannengrat | berg-sil-1 | landschaften.py | eigene Zeichnung | CC0 |
+| Vulkan (Comic) | berg-sil-2 | landschaften.py | eigene Zeichnung | CC0 |
+| Gipfel mit Fahne (Comic) | berg-sil-3 | landschaften.py | eigene Zeichnung | CC0 |
+| Doppelgipfel | berg-doppel | silhouetten.py | eigene Zeichnung | CC0 |
+| Drei Berge | berg-dreiecke | silhouetten.py | eigene Zeichnung | CC0 |
+| Vulkanberg | berg-fuji | silhouetten.py | eigene Zeichnung | CC0 |
+| Gipfelkreuz | berg-gipfelkreuz | silhouetten.py | eigene Zeichnung | CC0 |
+| Hochgebirge | berg-hochgebirge | silhouetten.py | eigene Zeichnung | CC0 |
+| Berghütte | berg-huette | silhouetten.py | eigene Zeichnung | CC0 |
+| Bergkette | berg-kette | silhouetten.py | eigene Zeichnung | CC0 |
+| Matterhorn-Spitze | berg-matterhorn-sil | silhouetten.py | eigene Zeichnung | CC0 |
+| Berge mit Mond | berg-mond | silhouetten.py | eigene Zeichnung | CC0 |
+| Berge mit Sonne | berg-sonne | silhouetten.py | eigene Zeichnung | CC0 |
+| Berggipfel | berg-trio | silhouetten.py | eigene Zeichnung | CC0 |
+| Vulkan | berg-vulkan | silhouetten.py | eigene Zeichnung | CC0 |
+| Jungfrau (realistisch) | berg-r-jungfrau | landschaften.py | eigene Zeichnung | CC0 |
+| Bergkamm mit Tannen | berg-r-kamm | landschaften.py | eigene Zeichnung | CC0 |
+| Matterhorn (Comic) | berg-c-matterhorn | landschaften.py | eigene Zeichnung | CC0 |
+| Berghütte (Comic) | berg-c-huette | landschaften.py | eigene Zeichnung | CC0 |
+| Bergsee (Comic) | berg-c-see | landschaften.py | eigene Zeichnung | CC0 |
+| Zelten in den Bergen (Comic) | berg-c-zelt | landschaften.py | eigene Zeichnung | CC0 |
+| Skifahren (Comic) | berg-c-ski | landschaften.py | eigene Zeichnung | CC0 |
 
 ## Städte
 
-Alle 24 Skylines und Wahrzeichen sind eigene Zeichnungen (Polygone, schwarz auf durchsichtig), erzeugt mit `werkzeug/vorlagen/silhouetten.py`; es wurde keine Vorlage kopiert.
+Alle 38 Skylines und Wahrzeichen sind eigene Zeichnungen (CC0), es wurde keine Vorlage kopiert: Silhouetten schwarz auf durchsichtig mit `werkzeug/vorlagen/silhouetten.py` bzw. `landschaften.py`, farbige Comic-Städte (IDs `stadt-c-…`) mit `landschaften.py`.
 
-| Motiv | Figur-ID | URL | Autor | Lizenz |
+| Motiv | Figur-ID | Skript | Autor | Lizenz |
 |---|---|---|---|---|
-| Zürich | stadt-zuerich | – | eigene Zeichnung | CC0 |
-| Bern | stadt-bern | – | eigene Zeichnung | CC0 |
-| Basel | stadt-basel | – | eigene Zeichnung | CC0 |
-| Luzern | stadt-luzern | – | eigene Zeichnung | CC0 |
-| Genf | stadt-genf | – | eigene Zeichnung | CC0 |
-| Paris | stadt-paris | – | eigene Zeichnung | CC0 |
-| New York | stadt-newyork | – | eigene Zeichnung | CC0 |
-| London | stadt-london | – | eigene Zeichnung | CC0 |
-| Rom | stadt-rom | – | eigene Zeichnung | CC0 |
-| Berlin | stadt-berlin | – | eigene Zeichnung | CC0 |
-| Schiefer Turm von Pisa | stadt-pisa | – | eigene Zeichnung | CC0 |
-| Dorf mit Kirche | stadt-dorf-kirche | – | eigene Zeichnung | CC0 |
-| Hochhäuser | stadt-hochhaeuser | – | eigene Zeichnung | CC0 |
-| Burg | stadt-burg | – | eigene Zeichnung | CC0 |
-| Windmühlen | stadt-muehlen | – | eigene Zeichnung | CC0 |
-| Tokio | stadt-tokio | – | eigene Zeichnung | CC0 |
-| Dubai | stadt-dubai | – | eigene Zeichnung | CC0 |
-| Venedig | stadt-venedig | – | eigene Zeichnung | CC0 |
-| Moskau | stadt-moskau | – | eigene Zeichnung | CC0 |
-| Amsterdam | stadt-amsterdam | – | eigene Zeichnung | CC0 |
-| Wien | stadt-wien | – | eigene Zeichnung | CC0 |
-| Athen | stadt-athen | – | eigene Zeichnung | CC0 |
-| Pyramiden | stadt-pyramiden | – | eigene Zeichnung | CC0 |
-| Märchenschloss | stadt-schloss | – | eigene Zeichnung | CC0 |
+| Zürich | stadt-zuerich | silhouetten.py | eigene Zeichnung | CC0 |
+| Bern | stadt-bern | silhouetten.py | eigene Zeichnung | CC0 |
+| Basel | stadt-basel | silhouetten.py | eigene Zeichnung | CC0 |
+| Luzern | stadt-luzern | silhouetten.py | eigene Zeichnung | CC0 |
+| Genf | stadt-genf | silhouetten.py | eigene Zeichnung | CC0 |
+| Paris | stadt-paris | silhouetten.py | eigene Zeichnung | CC0 |
+| New York | stadt-newyork | silhouetten.py | eigene Zeichnung | CC0 |
+| London | stadt-london | silhouetten.py | eigene Zeichnung | CC0 |
+| Rom | stadt-rom | silhouetten.py | eigene Zeichnung | CC0 |
+| Berlin | stadt-berlin | silhouetten.py | eigene Zeichnung | CC0 |
+| Schiefer Turm von Pisa | stadt-pisa | silhouetten.py | eigene Zeichnung | CC0 |
+| Dorf mit Kirche | stadt-dorf-kirche | silhouetten.py | eigene Zeichnung | CC0 |
+| Hochhäuser | stadt-hochhaeuser | silhouetten.py | eigene Zeichnung | CC0 |
+| Burg | stadt-burg | silhouetten.py | eigene Zeichnung | CC0 |
+| Windmühlen | stadt-muehlen | silhouetten.py | eigene Zeichnung | CC0 |
+| Tokio | stadt-tokio | silhouetten.py | eigene Zeichnung | CC0 |
+| Dubai | stadt-dubai | silhouetten.py | eigene Zeichnung | CC0 |
+| Venedig | stadt-venedig | silhouetten.py | eigene Zeichnung | CC0 |
+| Moskau | stadt-moskau | silhouetten.py | eigene Zeichnung | CC0 |
+| Amsterdam | stadt-amsterdam | silhouetten.py | eigene Zeichnung | CC0 |
+| Wien | stadt-wien | silhouetten.py | eigene Zeichnung | CC0 |
+| Athen | stadt-athen | silhouetten.py | eigene Zeichnung | CC0 |
+| Pyramiden | stadt-pyramiden | silhouetten.py | eigene Zeichnung | CC0 |
+| Märchenschloss | stadt-schloss | silhouetten.py | eigene Zeichnung | CC0 |
+| Schaffhausen mit Munot | stadt-schaffhausen | landschaften.py | eigene Zeichnung | CC0 |
+| Rheinfall | stadt-rheinfall | landschaften.py | eigene Zeichnung | CC0 |
+| San Francisco – Golden Gate | stadt-goldengate | landschaften.py | eigene Zeichnung | CC0 |
+| Istanbul | stadt-istanbul | landschaften.py | eigene Zeichnung | CC0 |
+| Prag | stadt-prag | landschaften.py | eigene Zeichnung | CC0 |
+| Barcelona – Sagrada Família | stadt-barcelona | landschaften.py | eigene Zeichnung | CC0 |
+| Schaffhausen (Comic) | stadt-c-schaffhausen | landschaften.py | eigene Zeichnung | CC0 |
+| Zürich (Comic) | stadt-c-zuerich | landschaften.py | eigene Zeichnung | CC0 |
+| Bern (Comic) | stadt-c-bern | landschaften.py | eigene Zeichnung | CC0 |
+| Paris (Comic) | stadt-c-paris | landschaften.py | eigene Zeichnung | CC0 |
+| London (Comic) | stadt-c-london | landschaften.py | eigene Zeichnung | CC0 |
+| New York (Comic) | stadt-c-newyork | landschaften.py | eigene Zeichnung | CC0 |
+| Pisa (Comic) | stadt-c-pisa | landschaften.py | eigene Zeichnung | CC0 |
+| Venedig (Comic) | stadt-c-venedig | landschaften.py | eigene Zeichnung | CC0 |
 
 ## Schweizer Feste
 

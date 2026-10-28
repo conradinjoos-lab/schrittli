@@ -3366,80 +3366,74 @@
   },
   {
    "id": "berg-umriss",
-   "name": "Berg mit Umriss",
+   "name": "Eiger (realistisch)",
    "welt": "Berge",
    "datei": "berg-umriss.png",
    "k": 1
   },
   {
    "id": "berg-spitze",
-   "name": "Bergspitze",
+   "name": "Matterhorn (realistisch)",
    "welt": "Berge",
    "datei": "berg-spitze.png",
    "k": 1
   },
   {
    "id": "berg-freihand",
-   "name": "Berg Freihand",
+   "name": "Alpenpanorama",
    "welt": "Berge",
    "datei": "berg-freihand.png",
    "k": 1
   },
   {
    "id": "berg-fuji-bild",
-   "name": "Fuji",
+   "name": "Fuji (Comic)",
    "welt": "Berge",
-   "datei": "berg-fuji-bild.png",
-   "k": 1
+   "datei": "berg-fuji-bild.png"
   },
   {
    "id": "berg-schneekappe",
-   "name": "Berg mit Schneekappe",
+   "name": "Schneeberge (Comic)",
    "welt": "Berge",
-   "datei": "berg-schneekappe.png",
-   "k": 1
+   "datei": "berg-schneekappe.png"
   },
   {
    "id": "berg-gruen",
-   "name": "Hügel",
+   "name": "Alp mit Kuh (Comic)",
    "welt": "Berge",
-   "datei": "berg-gruen.png",
-   "k": 1
+   "datei": "berg-gruen.png"
   },
   {
    "id": "berg-formen",
-   "name": "Berg aus Formen",
+   "name": "Bergsee mit Spiegelbild",
    "welt": "Berge",
    "datei": "berg-formen.png",
    "k": 1
   },
   {
    "id": "berg-violett",
-   "name": "Berge hintereinander",
+   "name": "Berge im Abendrot (Comic)",
    "welt": "Berge",
-   "datei": "berg-violett.png",
-   "k": 1
+   "datei": "berg-violett.png"
   },
   {
    "id": "berg-sil-1",
-   "name": "Berg mit Tannen und Vögeln",
+   "name": "Tannengrat",
    "welt": "Berge",
    "datei": "berg-sil-1.png",
    "k": 1
   },
   {
    "id": "berg-sil-2",
-   "name": "Berg im See",
+   "name": "Vulkan (Comic)",
    "welt": "Berge",
-   "datei": "berg-sil-2.png",
-   "k": 1
+   "datei": "berg-sil-2.png"
   },
   {
    "id": "berg-sil-3",
-   "name": "Berge mit Wolken",
+   "name": "Gipfel mit Fahne (Comic)",
    "welt": "Berge",
-   "datei": "berg-sil-3.png",
-   "k": 1
+   "datei": "berg-sil-3.png"
   },
   {
    "id": "berg-doppel",
@@ -3524,6 +3518,50 @@
    "welt": "Berge",
    "datei": "berg-vulkan.png",
    "k": 1
+  },
+  {
+   "id": "berg-r-jungfrau",
+   "name": "Jungfrau (realistisch)",
+   "welt": "Berge",
+   "datei": "berg-r-jungfrau.png",
+   "k": 1
+  },
+  {
+   "id": "berg-r-kamm",
+   "name": "Bergkamm mit Tannen",
+   "welt": "Berge",
+   "datei": "berg-r-kamm.png",
+   "k": 1
+  },
+  {
+   "id": "berg-c-matterhorn",
+   "name": "Matterhorn (Comic)",
+   "welt": "Berge",
+   "datei": "berg-c-matterhorn.png"
+  },
+  {
+   "id": "berg-c-huette",
+   "name": "Berghütte (Comic)",
+   "welt": "Berge",
+   "datei": "berg-c-huette.png"
+  },
+  {
+   "id": "berg-c-see",
+   "name": "Bergsee (Comic)",
+   "welt": "Berge",
+   "datei": "berg-c-see.png"
+  },
+  {
+   "id": "berg-c-zelt",
+   "name": "Zelten in den Bergen (Comic)",
+   "welt": "Berge",
+   "datei": "berg-c-zelt.png"
+  },
+  {
+   "id": "berg-c-ski",
+   "name": "Skifahren (Comic)",
+   "welt": "Berge",
+   "datei": "berg-c-ski.png"
   },
   {
    "id": "stadt-zuerich",
@@ -3692,6 +3730,96 @@
    "welt": "Städte",
    "datei": "stadt-schloss.png",
    "k": 1
+  },
+  {
+   "id": "stadt-schaffhausen",
+   "name": "Schaffhausen mit Munot",
+   "welt": "Städte",
+   "datei": "stadt-schaffhausen.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-rheinfall",
+   "name": "Rheinfall",
+   "welt": "Städte",
+   "datei": "stadt-rheinfall.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-goldengate",
+   "name": "San Francisco – Golden Gate",
+   "welt": "Städte",
+   "datei": "stadt-goldengate.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-istanbul",
+   "name": "Istanbul",
+   "welt": "Städte",
+   "datei": "stadt-istanbul.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-prag",
+   "name": "Prag",
+   "welt": "Städte",
+   "datei": "stadt-prag.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-barcelona",
+   "name": "Barcelona – Sagrada Família",
+   "welt": "Städte",
+   "datei": "stadt-barcelona.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-c-schaffhausen",
+   "name": "Schaffhausen (Comic)",
+   "welt": "Städte",
+   "datei": "stadt-c-schaffhausen.png"
+  },
+  {
+   "id": "stadt-c-zuerich",
+   "name": "Zürich (Comic)",
+   "welt": "Städte",
+   "datei": "stadt-c-zuerich.png"
+  },
+  {
+   "id": "stadt-c-bern",
+   "name": "Bern (Comic)",
+   "welt": "Städte",
+   "datei": "stadt-c-bern.png"
+  },
+  {
+   "id": "stadt-c-paris",
+   "name": "Paris (Comic)",
+   "welt": "Städte",
+   "datei": "stadt-c-paris.png"
+  },
+  {
+   "id": "stadt-c-london",
+   "name": "London (Comic)",
+   "welt": "Städte",
+   "datei": "stadt-c-london.png"
+  },
+  {
+   "id": "stadt-c-newyork",
+   "name": "New York (Comic)",
+   "welt": "Städte",
+   "datei": "stadt-c-newyork.png"
+  },
+  {
+   "id": "stadt-c-pisa",
+   "name": "Pisa (Comic)",
+   "welt": "Städte",
+   "datei": "stadt-c-pisa.png"
+  },
+  {
+   "id": "stadt-c-venedig",
+   "name": "Venedig (Comic)",
+   "welt": "Städte",
+   "datei": "stadt-c-venedig.png"
   },
   {
    "id": "fig-herz-pfeil-c",
