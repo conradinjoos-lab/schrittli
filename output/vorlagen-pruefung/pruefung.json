@@ -1,5 +1,5 @@
 {
-  "figuren": 531,
+  "figuren": 557,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -4356,6 +4356,240 @@
       "pixel": [
         800,
         784
+      ]
+    },
+    {
+      "id": "tiere-nilpferd",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        648,
+        800
+      ]
+    },
+    {
+      "id": "tiere-nashorn",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        696,
+        800
+      ]
+    },
+    {
+      "id": "tiere-elefant",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        764
+      ]
+    },
+    {
+      "id": "tiere-katze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        510,
+        800
+      ]
+    },
+    {
+      "id": "tiere-loewe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        513,
+        800
+      ]
+    },
+    {
+      "id": "tiere-leopard",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        506,
+        800
+      ]
+    },
+    {
+      "id": "tiere-panda",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        590,
+        799
+      ]
+    },
+    {
+      "id": "tiere-baer",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        592,
+        800
+      ]
+    },
+    {
+      "id": "tiere-eisbaer",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        592,
+        800
+      ]
+    },
+    {
+      "id": "tiere-affe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        655
+      ]
+    },
+    {
+      "id": "tiere-affenkopf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        714,
+        800
+      ]
+    },
+    {
+      "id": "tiere-strauss",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        537,
+        800
+      ]
+    },
+    {
+      "id": "tiere-pfau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        674
+      ]
+    },
+    {
+      "id": "tiere-giraffe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        426,
+        800
+      ]
+    },
+    {
+      "id": "tiere-schaf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        578,
+        692
+      ]
+    },
+    {
+      "id": "tiere-lamm",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        731
+      ]
+    },
+    {
+      "id": "tiere-schwein",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        494,
+        576
+      ]
+    },
+    {
+      "id": "tiere-ferkel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        780,
+        724
+      ]
+    },
+    {
+      "id": "tiere-pferd",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        706
+      ]
+    },
+    {
+      "id": "tiere-einhorn",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        616,
+        800
+      ]
+    },
+    {
+      "id": "tiere-lama",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        344,
+        800
+      ]
+    },
+    {
+      "id": "tiere-hund",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        480,
+        705
+      ]
+    },
+    {
+      "id": "tiere-hund-lachend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        706,
+        800
+      ]
+    },
+    {
+      "id": "tiere-hase",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        637,
+        800
+      ]
+    },
+    {
+      "id": "tiere-katze-socken",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        702,
+        793
+      ]
+    },
+    {
+      "id": "tiere-baer-tanzend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        626,
+        762
       ]
     },
     {
