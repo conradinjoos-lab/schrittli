@@ -321,3 +321,34 @@ Alle Bilder stammen von Openclipart und stehen unter CC0 1.0 (Public Domain Dedi
 | Grosser Kinderchor | musik-chor-gross | Musik | Children Choral | https://openclipart.org/detail/181714 | CC0 1.0 (Openclipart) | gustavorezende |
 | Grille mit Geige | musik-grille-geige | Musik | Cricket with Violin | https://openclipart.org/detail/300263 | CC0 1.0 (Openclipart) | oksmith |
 | Saxofonist | musik-saxofonist | Musik | Saxophone Player | https://openclipart.org/detail/312332 | CC0 1.0 (Openclipart) | oksmith |
+| Bienen und Tulpen | fig-bienen-tulpen | Frühling & Garten | two bees three flowers | https://openclipart.org/detail/306622 | CC0 1.0 (Openclipart) | The_Martin |
+| Gänseblümchen | fig-gaensebluemchen | Frühling & Garten | Daisy | https://openclipart.org/detail/62689 | CC0 1.0 (Openclipart) | laobc |
+| Lila Blume | fig-blume-lila | Frühling & Garten | Flower 2 purple | https://openclipart.org/detail/256159 | CC0 1.0 (Openclipart) | BAJ |
+| Blauer Schmetterling | fig-falter-blau | Frühling & Garten | Butterfly | https://openclipart.org/detail/354710 | CC0 1.0 (Openclipart) | AreYouPrepared |
+| Lila Schmetterling | fig-falter-lila | Frühling & Garten | Butterfly purple | https://openclipart.org/detail/167489 | CC0 1.0 (Openclipart) | Ana_Paula |
+| Roter Schmetterling | fig-falter-orange | Frühling & Garten | little butterfly | https://openclipart.org/detail/2697 | CC0 1.0 (Openclipart) | Machovka |
+| Bunter Schmetterling | fig-falter-bunt | Frühling & Garten | cartoon-butterfly-cv4 | https://openclipart.org/detail/124639 | CC0 1.0 (Openclipart) | kizzyblue |
+| Marienkäfer-Spinne | fig-kaefer-a | Frühling & Garten | Cartoon ladybug | https://openclipart.org/detail/330117 | CC0 1.0 (Openclipart) | Buggy_muggy |
+| Marienkäfer lachend | fig-kaefer-b | Frühling & Garten | cartoon ladybug | https://openclipart.org/detail/97201 | CC0 1.0 (Openclipart) | Martouf |
+| Verliebte Marienkäfer | fig-kaefer-liebe | Frühling & Garten | lady bugs | https://openclipart.org/detail/2675 | CC0 1.0 (Openclipart) | Machovka |
+| Marienkäfer frech | fig-kaefer-c | Frühling & Garten | Cute ladybug | https://openclipart.org/detail/260320 | CC0 1.0 (Openclipart) | mvolz |
+| Küken mit Wurm | fig-kueken-lachend | Frühling & Garten | Funny Chick Eating Earthworm Cartoon | https://openclipart.org/detail/131041 | CC0 1.0 (Openclipart) | palomaironique |
+| Küken-Gesicht | fig-kueken-gesicht | Frühling & Garten | Funny Chick Face Cartoon | https://openclipart.org/detail/120475 | CC0 1.0 (Openclipart) | palomaironique |
+| Küken schlüpft | fig-kueken-ei | Frühling & Garten | chick from egg | https://openclipart.org/detail/5481 | CC0 1.0 (Openclipart) | mcol |
+| Gelbes Küken | fig-kueken-gelb | Frühling & Garten | Chick flat colors | https://openclipart.org/detail/63199 | CC0 1.0 (Openclipart) | qubodup |
+| Henne mit Küken | fig-henne-kueken | Frühling & Garten | Chicken with chick | https://openclipart.org/detail/299010 | CC0 1.0 (Openclipart) | oksmith |
+| Orange Schnecke | fig-schnecke-orange | Frühling & Garten | Snail | https://openclipart.org/detail/349739 | CC0 1.0 (Openclipart) | Benjamin_Adams |
+| Braune Schnecke | fig-schnecke-braun | Frühling & Garten | Snail | https://openclipart.org/detail/172493 | CC0 1.0 (Openclipart) | hatso1 |
+| Gelbe Schnecke | fig-schnecke-gelb | Frühling & Garten | snail | https://openclipart.org/detail/2680 | CC0 1.0 (Openclipart) | Machovka |
+| Grüne Schnecke | fig-schnecke-gruen | Frühling & Garten | Caracol | https://openclipart.org/detail/23384 | CC0 1.0 (Openclipart) | irinuca |
+| Panda mit Regenschirm | fig-schirm-panda | Frühling & Garten | umbrella panda | https://openclipart.org/detail/137851 | CC0 1.0 (Openclipart) | shu |
+| Garten-Pinguin | fig-giesskanne-pinguin | Frühling & Garten | Garden penguin | https://openclipart.org/detail/193914 | CC0 1.0 (Openclipart) | Moini |
+| Gummistiefel Sterne | fig-stiefel-blau | Frühling & Garten | Wellington boots 5 | https://openclipart.org/detail/298762 | CC0 1.0 (Openclipart) | Firkin |
+| Pinke Gummistiefel | fig-stiefel-pink | Frühling & Garten | Wellington boots 3 | https://openclipart.org/detail/298760 | CC0 1.0 (Openclipart) | Firkin |
+| Gelbe Gummistiefel | fig-stiefel-gelb | Frühling & Garten | Rain Boots | https://openclipart.org/detail/298777 | CC0 1.0 (Openclipart) | j4p4n |
+| Bunte Giraffe | fig-giraffe-bunt | Frühling & Garten | rainbow giraffe | https://openclipart.org/detail/262739 | CC0 1.0 (Openclipart) | cirenovy |
+| Oster-Pinguin | fig-osterpinguin | Frühling & Garten | Bunny Penguin | https://openclipart.org/detail/175339 | CC0 1.0 (Openclipart) | Moini |
+| Biene | fig-bienen-b | Frühling & Garten | Cartoon Bee | https://openclipart.org/detail/221154 | CC0 1.0 (Openclipart) | GDJ |
+| Biene auf Waben | fig-bienen-c | Frühling & Garten | Abeille-Bee-Kawai | https://openclipart.org/detail/191944 | CC0 1.0 (Openclipart) | Martouf |
+| Dicke Biene | fig-bienen-d | Frühling & Garten | Cartoon Bee | https://openclipart.org/detail/69817 | CC0 1.0 (Openclipart) | roland81 |
+| Honigbiene | fig-bienen-honig | Frühling & Garten | Cartoon Honey Bee | https://openclipart.org/detail/222355 | CC0 1.0 (Openclipart) | GDJ |

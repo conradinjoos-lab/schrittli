@@ -39,6 +39,7 @@
   "Kreativ & Basteln",
   "Ostern",
   "Zirkus",
+  "Frühling & Garten",
   "Musik"
  ],
  "figuren": [
@@ -5269,6 +5270,192 @@
    "name": "Elefant mit Herzballon",
    "welt": "Zirkus",
    "datei": "zirkus-elefant-ballon.png"
+  },
+  {
+   "id": "fig-bienen-tulpen",
+   "name": "Bienen und Tulpen",
+   "welt": "Frühling & Garten",
+   "datei": "bienen-tulpen.png"
+  },
+  {
+   "id": "fig-gaensebluemchen",
+   "name": "Gänseblümchen",
+   "welt": "Frühling & Garten",
+   "datei": "gaensebluemchen.png"
+  },
+  {
+   "id": "fig-blume-lila",
+   "name": "Lila Blume",
+   "welt": "Frühling & Garten",
+   "datei": "blume-lila.png"
+  },
+  {
+   "id": "fig-falter-blau",
+   "name": "Blauer Schmetterling",
+   "welt": "Frühling & Garten",
+   "datei": "falter-blau.png"
+  },
+  {
+   "id": "fig-falter-lila",
+   "name": "Lila Schmetterling",
+   "welt": "Frühling & Garten",
+   "datei": "falter-lila.png"
+  },
+  {
+   "id": "fig-falter-orange",
+   "name": "Roter Schmetterling",
+   "welt": "Frühling & Garten",
+   "datei": "falter-orange.png"
+  },
+  {
+   "id": "fig-falter-bunt",
+   "name": "Bunter Schmetterling",
+   "welt": "Frühling & Garten",
+   "datei": "falter-bunt.png"
+  },
+  {
+   "id": "fig-kaefer-a",
+   "name": "Marienkäfer-Spinne",
+   "welt": "Frühling & Garten",
+   "datei": "kaefer-a.png"
+  },
+  {
+   "id": "fig-kaefer-b",
+   "name": "Marienkäfer lachend",
+   "welt": "Frühling & Garten",
+   "datei": "kaefer-b.png"
+  },
+  {
+   "id": "fig-kaefer-liebe",
+   "name": "Verliebte Marienkäfer",
+   "welt": "Frühling & Garten",
+   "datei": "kaefer-liebe.png"
+  },
+  {
+   "id": "fig-kaefer-c",
+   "name": "Marienkäfer frech",
+   "welt": "Frühling & Garten",
+   "datei": "kaefer-c.png"
+  },
+  {
+   "id": "fig-kueken-lachend",
+   "name": "Küken mit Wurm",
+   "welt": "Frühling & Garten",
+   "datei": "kueken-lachend.png"
+  },
+  {
+   "id": "fig-kueken-gesicht",
+   "name": "Küken-Gesicht",
+   "welt": "Frühling & Garten",
+   "datei": "kueken-gesicht.png"
+  },
+  {
+   "id": "fig-kueken-ei",
+   "name": "Küken schlüpft",
+   "welt": "Frühling & Garten",
+   "datei": "kueken-ei.png"
+  },
+  {
+   "id": "fig-kueken-gelb",
+   "name": "Gelbes Küken",
+   "welt": "Frühling & Garten",
+   "datei": "kueken-gelb.png"
+  },
+  {
+   "id": "fig-henne-kueken",
+   "name": "Henne mit Küken",
+   "welt": "Frühling & Garten",
+   "datei": "henne-kueken.png"
+  },
+  {
+   "id": "fig-schnecke-orange",
+   "name": "Orange Schnecke",
+   "welt": "Frühling & Garten",
+   "datei": "schnecke-orange.png"
+  },
+  {
+   "id": "fig-schnecke-braun",
+   "name": "Braune Schnecke",
+   "welt": "Frühling & Garten",
+   "datei": "schnecke-braun.png"
+  },
+  {
+   "id": "fig-schnecke-gelb",
+   "name": "Gelbe Schnecke",
+   "welt": "Frühling & Garten",
+   "datei": "schnecke-gelb.png"
+  },
+  {
+   "id": "fig-schnecke-gruen",
+   "name": "Grüne Schnecke",
+   "welt": "Frühling & Garten",
+   "datei": "schnecke-gruen.png"
+  },
+  {
+   "id": "fig-schirm-panda",
+   "name": "Panda mit Regenschirm",
+   "welt": "Frühling & Garten",
+   "datei": "schirm-panda.png"
+  },
+  {
+   "id": "fig-giesskanne-pinguin",
+   "name": "Garten-Pinguin",
+   "welt": "Frühling & Garten",
+   "datei": "giesskanne-pinguin.png"
+  },
+  {
+   "id": "fig-stiefel-blau",
+   "name": "Gummistiefel Sterne",
+   "welt": "Frühling & Garten",
+   "datei": "stiefel-blau.png"
+  },
+  {
+   "id": "fig-stiefel-pink",
+   "name": "Pinke Gummistiefel",
+   "welt": "Frühling & Garten",
+   "datei": "stiefel-pink.png"
+  },
+  {
+   "id": "fig-stiefel-gelb",
+   "name": "Gelbe Gummistiefel",
+   "welt": "Frühling & Garten",
+   "datei": "stiefel-gelb.png"
+  },
+  {
+   "id": "fig-giraffe-bunt",
+   "name": "Bunte Giraffe",
+   "welt": "Frühling & Garten",
+   "datei": "giraffe-bunt.png"
+  },
+  {
+   "id": "fig-osterpinguin",
+   "name": "Oster-Pinguin",
+   "welt": "Frühling & Garten",
+   "datei": "osterpinguin.png"
+  },
+  {
+   "id": "fig-bienen-b",
+   "name": "Biene",
+   "welt": "Frühling & Garten",
+   "datei": "bienen-b.png"
+  },
+  {
+   "id": "fig-bienen-c",
+   "name": "Biene auf Waben",
+   "welt": "Frühling & Garten",
+   "datei": "bienen-c.png"
+  },
+  {
+   "id": "fig-bienen-d",
+   "name": "Dicke Biene",
+   "welt": "Frühling & Garten",
+   "datei": "bienen-d.png"
+  },
+  {
+   "id": "fig-bienen-honig",
+   "name": "Honigbiene",
+   "welt": "Frühling & Garten",
+   "datei": "bienen-honig.png"
   },
   {
    "id": "musik-krokodil-floete",
