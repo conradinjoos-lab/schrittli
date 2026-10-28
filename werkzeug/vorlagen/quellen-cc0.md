@@ -352,3 +352,19 @@ Alle Bilder stammen von Openclipart und stehen unter CC0 1.0 (Public Domain Dedi
 | Biene auf Waben | fig-bienen-c | Frühling & Garten | Abeille-Bee-Kawai | https://openclipart.org/detail/191944 | CC0 1.0 (Openclipart) | Martouf |
 | Dicke Biene | fig-bienen-d | Frühling & Garten | Cartoon Bee | https://openclipart.org/detail/69817 | CC0 1.0 (Openclipart) | roland81 |
 | Honigbiene | fig-bienen-honig | Frühling & Garten | Cartoon Honey Bee | https://openclipart.org/detail/222355 | CC0 1.0 (Openclipart) | GDJ |
+| Schulkind Junge | schule-junge | Schule | Cartoon Boy with rather cornery ears and fingers but who does not care | https://openclipart.org/detail/265858 | CC0 1.0 (Openclipart) | The_Martin |
+| Mädchen am Pult | schule-maedchen-pult | Schule | Comic Girl Tini at School | https://openclipart.org/detail/190242 | CC0 1.0 (Openclipart) | frankes |
+| Junge mit Bücherstapel | schule-buecherstapel-junge | Schule | school days | https://openclipart.org/detail/172179 | CC0 1.0 (Openclipart) | sammo241 |
+| Mädchen an der Tafel | schule-tafel-maedchen | Schule | school days | https://openclipart.org/detail/172178 | CC0 1.0 (Openclipart) | sammo241 |
+| Lesen auf dem Bücherstapel | schule-lesen-stapel | Schule | school days | https://openclipart.org/detail/172177 | CC0 1.0 (Openclipart) | sammo241 |
+| Bücherberg | schule-buecherberg | Schule | school days | https://openclipart.org/detail/172174 | CC0 1.0 (Openclipart) | sammo241 |
+| Schulkinder unterwegs | schule-schulweg | Schule | Boy and Girl Students - Colour Remix | https://openclipart.org/detail/329618 | CC0 1.0 (Openclipart) | j4p4n |
+| Kinder in Uniform | schule-kinder-uniform | Schule | Students with backpacks (#2) | https://openclipart.org/detail/302174 | CC0 1.0 (Openclipart) | oksmith |
+| Kinder mit Rucksack | schule-kinder-rucksack | Schule | Students with backpacks (#1) | https://openclipart.org/detail/301454 | CC0 1.0 (Openclipart) | oksmith |
+| Drei Schulkinder | schule-kinder-drei | Schule | Students with backpacks (#3) | https://openclipart.org/detail/317671 | CC0 1.0 (Openclipart) | oksmith |
+| Junge mit Rucksack | schule-junge-rucksack | Schule | Boy with Backpack | https://openclipart.org/detail/287003 | CC0 1.0 (Openclipart) | snoopingasusual |
+| Schulbus | schule-bus-gelb | Schule | Yellow School Bus | https://openclipart.org/detail/226533 | CC0 1.0 (Openclipart) | GDJ |
+| Schulbus mit Stopp | schule-bus-stop | Schule | School Bus | https://openclipart.org/detail/19619 | CC0 1.0 (Openclipart) | schoolfreeware |
+| Bleistift-Männchen | schule-bleistift-figur | Schule | Happy pencil | https://openclipart.org/detail/101707 | CC0 1.0 (Openclipart) | jonata |
+| Heft mit Radiergummi | schule-heft | Schule | Architetto -- Blocco notes | https://openclipart.org/detail/25187 | CC0 1.0 (Openclipart) | francesco_rollandin |
+| Schere | schule-schere | Schule | Scissors | https://openclipart.org/detail/48553 | CC0 1.0 (Openclipart) | gmad |

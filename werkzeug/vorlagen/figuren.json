@@ -40,7 +40,8 @@
   "Ostern",
   "Zirkus",
   "Frühling & Garten",
-  "Musik"
+  "Musik",
+  "Schule"
  ],
  "figuren": [
   {
@@ -5546,6 +5547,102 @@
    "name": "Saxofonist",
    "welt": "Musik",
    "datei": "musik-saxofonist.png"
+  },
+  {
+   "id": "schule-junge",
+   "name": "Schulkind Junge",
+   "welt": "Schule",
+   "datei": "schule-junge.png"
+  },
+  {
+   "id": "schule-maedchen-pult",
+   "name": "Mädchen am Pult",
+   "welt": "Schule",
+   "datei": "schule-maedchen-pult.png"
+  },
+  {
+   "id": "schule-buecherstapel-junge",
+   "name": "Junge mit Bücherstapel",
+   "welt": "Schule",
+   "datei": "schule-buecherstapel-junge.png"
+  },
+  {
+   "id": "schule-tafel-maedchen",
+   "name": "Mädchen an der Tafel",
+   "welt": "Schule",
+   "datei": "schule-tafel-maedchen.png"
+  },
+  {
+   "id": "schule-lesen-stapel",
+   "name": "Lesen auf dem Bücherstapel",
+   "welt": "Schule",
+   "datei": "schule-lesen-stapel.png"
+  },
+  {
+   "id": "schule-buecherberg",
+   "name": "Bücherberg",
+   "welt": "Schule",
+   "datei": "schule-buecherberg.png"
+  },
+  {
+   "id": "schule-schulweg",
+   "name": "Schulkinder unterwegs",
+   "welt": "Schule",
+   "datei": "schule-schulweg.png"
+  },
+  {
+   "id": "schule-kinder-uniform",
+   "name": "Kinder in Uniform",
+   "welt": "Schule",
+   "datei": "schule-kinder-uniform.png"
+  },
+  {
+   "id": "schule-kinder-rucksack",
+   "name": "Kinder mit Rucksack",
+   "welt": "Schule",
+   "datei": "schule-kinder-rucksack.png"
+  },
+  {
+   "id": "schule-kinder-drei",
+   "name": "Drei Schulkinder",
+   "welt": "Schule",
+   "datei": "schule-kinder-drei.png"
+  },
+  {
+   "id": "schule-junge-rucksack",
+   "name": "Junge mit Rucksack",
+   "welt": "Schule",
+   "datei": "schule-junge-rucksack.png"
+  },
+  {
+   "id": "schule-bus-gelb",
+   "name": "Schulbus",
+   "welt": "Schule",
+   "datei": "schule-bus-gelb.png"
+  },
+  {
+   "id": "schule-bus-stop",
+   "name": "Schulbus mit Stopp",
+   "welt": "Schule",
+   "datei": "schule-bus-stop.png"
+  },
+  {
+   "id": "schule-bleistift-figur",
+   "name": "Bleistift-Männchen",
+   "welt": "Schule",
+   "datei": "schule-bleistift-figur.png"
+  },
+  {
+   "id": "schule-heft",
+   "name": "Heft mit Radiergummi",
+   "welt": "Schule",
+   "datei": "schule-heft.png"
+  },
+  {
+   "id": "schule-schere",
+   "name": "Schere",
+   "welt": "Schule",
+   "datei": "schule-schere.png"
   }
  ]
 }
