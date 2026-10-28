@@ -34,7 +34,8 @@
   "Liebe & Hochzeit",
   "Weihnachten",
   "Flaggen & Kontinente",
-  "Wald & Wiese"
+  "Wald & Wiese",
+  "Ostern"
  ],
  "figuren": [
   {
@@ -4579,6 +4580,174 @@
    "name": "Braune Schnecke",
    "welt": "Wald & Wiese",
    "datei": "wald-schnecke-braun.png"
+  },
+  {
+   "id": "ostern-hase-ei",
+   "name": "Hase im Osterei",
+   "welt": "Ostern",
+   "datei": "ostern-hase-ei.png"
+  },
+  {
+   "id": "ostern-pinguin-hase",
+   "name": "Pinguin als Osterhase",
+   "welt": "Ostern",
+   "datei": "ostern-pinguin-hase.png"
+  },
+  {
+   "id": "ostern-hase-eier",
+   "name": "Hase hinter Eiern",
+   "welt": "Ostern",
+   "datei": "ostern-hase-eier.png"
+  },
+  {
+   "id": "ostern-hasenkopf",
+   "name": "Gelber Osterhase",
+   "welt": "Ostern",
+   "datei": "ostern-hasenkopf.png"
+  },
+  {
+   "id": "ostern-ei-lila",
+   "name": "Osterei lila gestreift",
+   "welt": "Ostern",
+   "datei": "ostern-ei-lila.png"
+  },
+  {
+   "id": "ostern-ei-rot",
+   "name": "Osterei rot gewellt",
+   "welt": "Ostern",
+   "datei": "ostern-ei-rot.png"
+  },
+  {
+   "id": "ostern-ei-gelb",
+   "name": "Osterei gelb getupft",
+   "welt": "Ostern",
+   "datei": "ostern-ei-gelb.png"
+  },
+  {
+   "id": "ostern-ei-zickzack",
+   "name": "Osterei mit Zickzack",
+   "welt": "Ostern",
+   "datei": "ostern-ei-zickzack.png"
+  },
+  {
+   "id": "ostern-ei-sterne",
+   "name": "Osterei mit Sternen",
+   "welt": "Ostern",
+   "datei": "ostern-ei-sterne.png"
+  },
+  {
+   "id": "ostern-kueken",
+   "name": "Küken",
+   "welt": "Ostern",
+   "datei": "ostern-kueken.png"
+  },
+  {
+   "id": "ostern-kueken-schoko",
+   "name": "Küken im Schokoladenei",
+   "welt": "Ostern",
+   "datei": "ostern-kueken-schoko.png"
+  },
+  {
+   "id": "ostern-kueken-eihut",
+   "name": "Küken mit Eihut",
+   "welt": "Ostern",
+   "datei": "ostern-kueken-eihut.png"
+  },
+  {
+   "id": "ostern-kueken-schale",
+   "name": "Küken schlüpft",
+   "welt": "Ostern",
+   "datei": "ostern-kueken-schale.png"
+  },
+  {
+   "id": "ostern-kueken-paar",
+   "name": "Küken-Paar",
+   "welt": "Ostern",
+   "datei": "ostern-kueken-paar.png"
+  },
+  {
+   "id": "ostern-kueken-dick",
+   "name": "Küken mit dicken Linien",
+   "welt": "Ostern",
+   "datei": "ostern-kueken-dick.png"
+  },
+  {
+   "id": "ostern-kueken-schluepft",
+   "name": "Küken im Ei",
+   "welt": "Ostern",
+   "datei": "ostern-kueken-schluepft.png"
+  },
+  {
+   "id": "ostern-eule-hase",
+   "name": "Eule mit Hasenohren",
+   "welt": "Ostern",
+   "datei": "ostern-eule-hase.png"
+  },
+  {
+   "id": "ostern-korb-gelb",
+   "name": "Osterkorb gelb",
+   "welt": "Ostern",
+   "datei": "ostern-korb-gelb.png"
+  },
+  {
+   "id": "ostern-korb-eier",
+   "name": "Korb mit Eiern",
+   "welt": "Ostern",
+   "datei": "ostern-korb-eier.png"
+  },
+  {
+   "id": "ostern-korb-schleife",
+   "name": "Osterkorb mit Schleife",
+   "welt": "Ostern",
+   "datei": "ostern-korb-schleife.png"
+  },
+  {
+   "id": "ostern-henne-korb",
+   "name": "Henne mit Osterkorb",
+   "welt": "Ostern",
+   "datei": "ostern-henne-korb.png"
+  },
+  {
+   "id": "ostern-henne-kueken",
+   "name": "Henne mit Küken",
+   "welt": "Ostern",
+   "datei": "ostern-henne-kueken.png"
+  },
+  {
+   "id": "ostern-hase-schwarz",
+   "name": "Hase mit Eiern",
+   "welt": "Ostern",
+   "datei": "ostern-hase-schwarz.png"
+  },
+  {
+   "id": "ostern-pinguin-schild",
+   "name": "Pinguin mit Schild",
+   "welt": "Ostern",
+   "datei": "ostern-pinguin-schild.png"
+  },
+  {
+   "id": "ostern-hase-ei-lila",
+   "name": "Hase mit lila Ei",
+   "welt": "Ostern",
+   "datei": "ostern-hase-ei-lila.png"
+  },
+  {
+   "id": "ostern-hase-malt",
+   "name": "Hase malt Eier",
+   "welt": "Ostern",
+   "datei": "ostern-hase-malt.png"
+  },
+  {
+   "id": "ostern-kueken-korb",
+   "name": "Küken mit Korb",
+   "welt": "Ostern",
+   "datei": "ostern-kueken-korb.png"
+  },
+  {
+   "id": "ostern-henne-kueken-korb",
+   "name": "Henne mit Küken und Korb",
+   "welt": "Ostern",
+   "datei": "ostern-henne-kueken-korb.png"
   }
  ]
 }
