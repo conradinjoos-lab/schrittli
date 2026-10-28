@@ -192,3 +192,46 @@ Alle Bilder stammen von Openclipart und stehen unter CC0 1.0 (Public Domain Dedi
 | Kuschelbär | fig-teddy-d | Liebe & Hochzeit | Teddy Bear with heart | https://openclipart.org/detail/49015 | CC0 1.0 (Openclipart) | Gerald_G |
 | Teddy mit Herzschild | fig-teddy-e | Liebe & Hochzeit | Happy bear (colour) | https://openclipart.org/detail/281850 | CC0 1.0 (Openclipart) | Firkin |
 | Pinguin mit Rose | fig-pinguin-herz | Liebe & Hochzeit | Valentine Penguin | https://openclipart.org/detail/174544 | CC0 1.0 (Openclipart) | Moini |
+| Eule | wald-eule | Wald & Wiese | Cartoon owl | https://openclipart.org/detail/329150 | CC0 1.0 (Openclipart) | tsr |
+| Schlafende Eule | wald-eule-schlafend | Wald & Wiese | Cartoon owl - asleep | https://openclipart.org/detail/266931 | CC0 1.0 (Openclipart) | The_Martin |
+| Eule auf Buch | wald-eule-buch | Wald & Wiese | Cartoon owl sitting on a book | https://openclipart.org/detail/17631 | CC0 1.0 (Openclipart) | lemmling |
+| Fuchs | wald-fuchs | Wald & Wiese | Cute Cartoon Fox - Colour Remix | https://openclipart.org/detail/330228 | CC0 1.0 (Openclipart) | j4p4n |
+| Fuchs sitzend | wald-fuchs-sitzend | Wald & Wiese | Fox | https://openclipart.org/detail/154945 | CC0 1.0 (Openclipart) | morits |
+| Fuchs mit Pfoten | wald-fuchs-pfoten | Wald & Wiese | Fox | https://openclipart.org/detail/355069 | CC0 1.0 (Openclipart) | AreYouPrepared |
+| Eichhörnchen | wald-eichhoernchen | Wald & Wiese | Cartoon squirrel | https://openclipart.org/detail/17595 | CC0 1.0 (Openclipart) | lemmling |
+| Eichhörnchen mit grossem Schwanz | wald-eichhoernchen-gross | Wald & Wiese | Squirrel | https://openclipart.org/detail/291418 | CC0 1.0 (Openclipart) | SunKing2 |
+| Lesendes Eichhörnchen | wald-eichhoernchen-lesend | Wald & Wiese | Cartoon Squirrel - Remix | https://openclipart.org/detail/338783 | CC0 1.0 (Openclipart) | j4p4n |
+| Igel stehend | wald-igel-stehend | Wald & Wiese | Disappointed Hedgehog | https://openclipart.org/detail/323814 | CC0 1.0 (Openclipart) | TweaQr |
+| Igel | wald-igel | Wald & Wiese | hedgehog | https://openclipart.org/detail/155773 | CC0 1.0 (Openclipart) | tzunghaor |
+| Igel laufend | wald-igel-laufend | Wald & Wiese | A hedgehog | https://openclipart.org/detail/321766 | CC0 1.0 (Openclipart) | hotta |
+| Pilzhaus | wald-pilzhaus | Wald & Wiese | Mushroom house | https://openclipart.org/detail/17760 | CC0 1.0 (Openclipart) | lemmling |
+| Fliegenpilz | wald-fliegenpilz | Wald & Wiese | Tango Style Mushroom | https://openclipart.org/detail/23484 | CC0 1.0 (Openclipart) | rugby471 |
+| Raupe auf Pilz | wald-pilz-raupe | Wald & Wiese | Caterpillar on a Mushroom | https://openclipart.org/detail/338392 | CC0 1.0 (Openclipart) | j4p4n |
+| Pilz mit Gesicht | wald-pilz-gesicht | Wald & Wiese | A mushroom | https://openclipart.org/detail/307527 | CC0 1.0 (Openclipart) | Gorkhs |
+| Hirsch | wald-hirsch | Wald & Wiese | Deer | https://openclipart.org/detail/355626 | CC0 1.0 (Openclipart) | AreYouPrepared |
+| Elch | wald-elch | Wald & Wiese | Cartoon Moose | https://openclipart.org/detail/169960 | CC0 1.0 (Openclipart) | StudioFibonacci |
+| Rehkitz | wald-reh | Wald & Wiese | Baby Deer | https://openclipart.org/detail/236823 | CC0 1.0 (Openclipart) | GDJ |
+| Dicke Biene | wald-biene-dick | Wald & Wiese | Cartoon Bee | https://openclipart.org/detail/69817 | CC0 1.0 (Openclipart) | roland81 |
+| Biene | wald-biene | Wald & Wiese | Cartoon Bee | https://openclipart.org/detail/221154 | CC0 1.0 (Openclipart) | GDJ |
+| Biene mit Waben | wald-biene-waben | Wald & Wiese | Abeille-Bee-Kawai | https://openclipart.org/detail/191944 | CC0 1.0 (Openclipart) | Martouf |
+| Bienenmädchen | wald-biene-spiegel | Wald & Wiese | Female Bee With Mirror | https://openclipart.org/detail/269986 | CC0 1.0 (Openclipart) | GDJ |
+| Rosa Schmetterling | wald-schmetterling-rosa | Wald & Wiese | Cute Cartoon Butterfly | https://openclipart.org/detail/257286 | CC0 1.0 (Openclipart) | GDJ |
+| Oranger Schmetterling | wald-schmetterling-orange | Wald & Wiese | little butterfly | https://openclipart.org/detail/2697 | CC0 1.0 (Openclipart) | Machovka |
+| Grüner Schmetterling | wald-schmetterling-gruen | Wald & Wiese | butterflygreen | https://openclipart.org/detail/171156 | CC0 1.0 (Openclipart) | angelsonhigh |
+| Lachender Marienkäfer | wald-marienkaefer-lachend | Wald & Wiese | cartoon ladybug | https://openclipart.org/detail/97201 | CC0 1.0 (Openclipart) | Martouf |
+| Marienkäfer | wald-marienkaefer | Wald & Wiese | Ladybug | https://openclipart.org/detail/119 | CC0 1.0 (Openclipart) | PeterM |
+| Verliebte Marienkäfer | wald-marienkaefer-paar | Wald & Wiese | lady bugs | https://openclipart.org/detail/2675 | CC0 1.0 (Openclipart) | Machovka |
+| Runder Marienkäfer | wald-marienkaefer-rund | Wald & Wiese | Ladybug | https://openclipart.org/detail/222387 | CC0 1.0 (Openclipart) | GDJ |
+| Frosch | wald-frosch | Wald & Wiese | Cartoon Frog | https://openclipart.org/detail/349500 | CC0 1.0 (Openclipart) | Benjamin_Adams |
+| Frosch sitzend | wald-frosch-einfach | Wald & Wiese | Simple Cartoon Frog | https://openclipart.org/detail/329954 | CC0 1.0 (Openclipart) | j4p4n |
+| Froschkönig | wald-froschkoenig | Wald & Wiese | Frog Wearing Crown | https://openclipart.org/detail/349448 | CC0 1.0 (Openclipart) | Benjamin_Adams |
+| Sonnenblume mit Gesicht | wald-sonnenblume-gesicht | Wald & Wiese | Cartoon flower - cute | https://openclipart.org/detail/203173 | CC0 1.0 (Openclipart) | lukeb |
+| Lachende Blume | wald-blume-lachend | Wald & Wiese | Cartoon flower, game character | https://openclipart.org/detail/203163 | CC0 1.0 (Openclipart) | lukeb |
+| Rosa Blume | wald-blume-rosa | Wald & Wiese | Raseone Happy Flower | https://openclipart.org/detail/202407 | CC0 1.0 (Openclipart) | raseone |
+| Blaue Blume | wald-blume-blau | Wald & Wiese | blue-flower | https://openclipart.org/detail/27979 | CC0 1.0 (Openclipart) | cie |
+| Blume | wald-blume-einfach | Wald & Wiese | Simple Flower | https://openclipart.org/detail/16629 | CC0 1.0 (Openclipart) | HakanL |
+| Orange Blume | wald-blume-orange | Wald & Wiese | Flower | https://openclipart.org/detail/74 | CC0 1.0 (Openclipart) | PeterM |
+| Sonnenblume | wald-sonnenblume | Wald & Wiese | Flower | https://openclipart.org/detail/293543 | CC0 1.0 (Openclipart) | tadmac |
+| Baum mit Früchten | wald-baum-fruechte | Wald & Wiese | tree with fruits | https://openclipart.org/detail/26259 | CC0 1.0 (Openclipart) | Anonymous |
+| Schnecke mit orangem Haus | wald-schnecke-orange | Wald & Wiese | Snail | https://openclipart.org/detail/349739 | CC0 1.0 (Openclipart) | Benjamin_Adams |
+| Braune Schnecke | wald-schnecke-braun | Wald & Wiese | Snail | https://openclipart.org/detail/172493 | CC0 1.0 (Openclipart) | hatso1 |
