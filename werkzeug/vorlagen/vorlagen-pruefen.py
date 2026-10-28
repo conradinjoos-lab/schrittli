@@ -18,9 +18,9 @@ def main():
     figuren = [f for datei in dict.fromkeys(f['datei'] for f in index) for f in jsdaten(ROOT/'vorlagen/figuren'/datei)]
     formen = jsdaten(ROOT/'vorlagen/formen.js')
     assert len(index) == len(figuren) == len(meta) == 302
-    assert len(formen) == 239
+    assert len(formen) == 251
     assert {f['id'] for f in figuren} == {f['id'] for f in meta}
-    assert len({f['id'] for f in figuren+formen}) == 541
+    assert len({f['id'] for f in figuren+formen}) == 553
     nachId = {f['id']:f for f in figuren}
     for f in figuren+formen:
         assert f['w'] > 0 and f['h'] > 0 and f['d'], f['id']
