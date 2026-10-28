@@ -22,7 +22,15 @@ function policy(p){
  if(!['closed','free'].includes(p.mode)&&!ids.length)fail('Wähle mindestens einen Inhalt aus.');
  if(p.grade!=null&&![1,2,3,4,5,6].includes(p.grade))fail('Ungültige Klasse.');
  return {mode:p.mode,title:name(p.title),ids:['closed','free'].includes(p.mode)?[]:ids,grade:p.grade||null,simple:p.simple!==false,resize:p.resize!==false,recolor:p.recolor!==false,gallery:p.gallery===true,
-  selection:['single','topic','custom'].includes(p.selection)?p.selection:'custom',category:typeof p.category==='string'?p.category.slice(0,100):''};
+  selection:['single','topic','custom'].includes(p.selection)?p.selection:'custom',category:typeof p.category==='string'?p.category.slice(0,100):'',
+  plan:p.mode==='projects'&&p.plan===true};
+}
+/* Lektionsplan-Fortschritt eines iPads: genau drei Schritte (Material richten, Video, Foto). */
+function fortschritt(b){
+ if(!b||typeof b.geraet!=='string'||!b.geraet.trim()||b.geraet.length>64)fail('Ungültiges iPad.');
+ if(typeof b.videoId!=='string'||!/^[-a-zA-Z0-9_]{1,80}$/.test(b.videoId))fail('Ungültige Aufgabe.');
+ if(!Array.isArray(b.schritte)||b.schritte.length!==3||b.schritte.some(x=>typeof x!=='boolean'))fail('Ungültiger Fortschritt.');
+ return {geraet:b.geraet.trim(),videoId:b.videoId,schritte:b.schritte.map(Boolean)};
 }
 export async function handleUnterricht(req,env){
  try{
@@ -42,6 +50,20 @@ export async function handleUnterricht(req,env){
     ON CONFLICT(gruppeId,id) DO UPDATE SET gesehen=excluded.gesehen,revision=excluded.revision`)
     .bind(group.id,b.deviceId,'iPad '+b.deviceId.slice(0,4).toUpperCase(),Date.now(),Math.min(b.revision,group.revision)).run();
    return json({id:group.id,name:group.name,policy:JSON.parse(group.policy),revision:group.revision,leaseMs:90000});
+  }
+  if(p==='/unterricht/fortschritt'&&req.method==='POST'){
+   const b=await body(req),token=typeof b?.token==='string'?b.token:(/^Bearer (\S+)$/.exec(req.headers.get('Authorization')||'')?.[1]||'');
+   if(!TOKEN.test(token))fail('Dieses iPad muss mit einer Klasse verbunden werden.',401);
+   const group=await db.prepare('SELECT id FROM unterricht_gruppen WHERE tokenHash=?').bind(await hash(token)).first();
+   if(!group)fail('Die Verbindung gilt nicht mehr. Bitte deiner Lehrperson zeigen.',401);
+   const f=fortschritt(b);
+   if(env.UNTERRICHT_LIMIT&&!(await env.UNTERRICHT_LIMIT.limit({key:group.id+':'+f.geraet})).success)fail('Bitte kurz warten.',429);
+   const r=await db.prepare(`INSERT INTO unterricht_fortschritt(gruppeId,geraetId,videoId,schritte,stand)
+    SELECT ?1,?2,?3,?4,?5 WHERE EXISTS(SELECT 1 FROM unterricht_fortschritt WHERE gruppeId=?1 AND geraetId=?2 AND videoId=?3) OR (SELECT COUNT(*) FROM unterricht_fortschritt WHERE gruppeId=?1)<2000
+    ON CONFLICT(gruppeId,geraetId,videoId) DO UPDATE SET schritte=excluded.schritte,stand=excluded.stand`)
+    .bind(group.id,f.geraet,f.videoId,JSON.stringify(f.schritte),Date.now()).run();
+   if(!r.meta.changes)fail('Zu viele Einträge in dieser Gruppe.',409);
+   return json({ok:true,stand:Date.now()});
   }
   await teacher(req);
   if(p==='/unterricht/gruppen'&&req.method==='GET'){
@@ -64,7 +86,10 @@ export async function handleUnterricht(req,env){
   if(p==='/unterricht/geraete'&&req.method==='GET'){
    const id=u.searchParams.get('id');if(!UUID.test(id))fail('Ungültige Gruppe.');
    const group=await db.prepare('SELECT revision,policy FROM unterricht_gruppen WHERE id=?').bind(id).first();if(!group)fail('Gruppe nicht gefunden.',404);
-   return json({revision:group.revision,policy:JSON.parse(group.policy),now:Date.now(),geraete:(await db.prepare('SELECT id,name,gesehen,revision FROM unterricht_geraete WHERE gruppeId=? ORDER BY name').bind(id).all()).results});
+   const [devices,progress]=await Promise.all([db.prepare('SELECT id,name,gesehen,revision FROM unterricht_geraete WHERE gruppeId=? ORDER BY name').bind(id).all(),
+    db.prepare('SELECT geraetId,videoId,schritte,stand FROM unterricht_fortschritt WHERE gruppeId=? ORDER BY stand').bind(id).all()]);
+   const byDevice=new Map();for(const f of progress.results){const list=byDevice.get(f.geraetId)||[];list.push({videoId:f.videoId,schritte:JSON.parse(f.schritte),stand:f.stand});byDevice.set(f.geraetId,list);}
+   return json({revision:group.revision,policy:JSON.parse(group.policy),now:Date.now(),geraete:devices.results.map(d=>({...d,fortschritt:byDevice.get(d.id)||[]}))});
   }
   if(p==='/unterricht/geraet-name'&&req.method==='POST'){
    const b=await body(req);if(!UUID.test(b?.id)||!UUID.test(b?.deviceId))fail('Ungültiges iPad.');

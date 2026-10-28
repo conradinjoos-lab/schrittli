@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Schritt für Schritt · Maschenprobe</title>
+<meta name="description" content="Maschenprobe-Rechner fürs Stricken und Häkeln: Maschen und Reihen auf 10 cm zählen, Breite und Höhe wählen – die Seite rechnet Anschlag, Reihen und Garn aus. Mit druckbarem 10 × 10 cm Zettel.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<style>
+:root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--papier:#FFFFFF;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
+h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
+h1{font-size:28px}
+h2{font-size:17px;margin-bottom:10px}
+a{color:var(--acc)}
+.kopf{max-width:1200px;margin:0 auto;padding:20px 16px 8px}
+.kopf p{margin:4px 0 0;color:var(--muted)}
+/* Links die Eingaben, rechts bleibt die Antwort beim Scrollen stehen */
+main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,400px);grid-template-rows:repeat(3,auto) 1fr;grid-template-areas:"projekt rechts" "probe rechts" "garn rechts" "blatt rechts";gap:14px 20px;align-items:start}
+#k-projekt{grid-area:projekt}#k-probe{grid-area:probe}#k-garn{grid-area:garn}#k-blatt{grid-area:blatt}.seite-rechts{grid-area:rechts}
+.karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
+.seite-rechts{position:sticky;top:12px;display:flex;flex-direction:column;gap:14px}
+.feld{margin-bottom:14px}.feld:last-child{margin-bottom:0}
+.lbl{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:14px;padding:6px 12px;border-radius:999px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer;min-height:40px}
+.chip[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
+.chip:hover,.stepper button:hover{border-color:var(--acc)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.zwei{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.stepper{display:flex;align-items:center;gap:6px}
+.stepper button{width:52px;height:52px;border-radius:50%;border:2px solid var(--line);background:var(--surface2);color:var(--ink);font:600 28px/1 Fredoka,Nunito,sans-serif;cursor:pointer;padding:0;flex:none}
+.stepper input{width:84px;height:52px;font:600 28px Fredoka,Nunito,sans-serif;text-align:center;border:2px solid var(--line);border-radius:12px;background:var(--surface2);color:var(--ink);padding:0 4px;-moz-appearance:textfield}
+.stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.stepper input::placeholder{color:var(--muted);font-size:18px}
+.stepper span{font-size:16px;color:var(--muted)}
+.text{width:100%;font:inherit;font-size:18px;border:2px solid var(--line);border-radius:10px;background:var(--surface2);color:var(--ink);padding:8px 10px}
+.drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
+.drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
+.antwort{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+.antwort li{font-size:17px;line-height:1.35}
+.antwort b{font:600 26px/1.1 Fredoka,Nunito,sans-serif;color:var(--acc);white-space:nowrap}
+.antwort .leise{color:var(--muted);font-size:14px;display:block;margin-top:2px}
+.hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
+.blatt svg{display:block;width:100%;height:auto;background:var(--papier);border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+/* 1./2. Klasse: grösser, Garnrechnung weg */
+body.klein .chip{font-size:17px;padding:10px 16px;min-height:48px}
+body.klein .stepper button{width:60px;height:60px;font-size:32px}
+body.klein .stepper input{height:60px;font-size:32px;width:96px}
+body.klein .antwort li{font-size:19px}
+body.klein .gross-nur{display:none!important}
+@media (max-width:860px){
+  main{display:flex;flex-direction:column;align-items:stretch;gap:14px}
+  .seite-rechts{display:contents}
+  #k-projekt{order:1}#k-probe{order:2}#k-antwort{order:3}#k-garn{order:4}#drucken{order:5}#k-blatt{order:6}
+  h1{font-size:24px}
+}
+#druck{display:none}
+@page{size:A4 portrait;margin:0}
+@media print{
+  body{background:#fff}
+  .kopf,main{display:none!important}
+  #druck{display:block}
+  #druck svg{display:block;width:var(--bw,210mm);height:var(--bh,297mm)}
+}
+</style>
+<style id="seite"></style>
+</head>
+<body>
+<header class="kopf">
+  <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
+  <h1>Maschenprobe</h1>
+  <p>Zähle an deinem Probestück die Maschen und Reihen auf 10 cm. Die Seite rechnet aus, wie viele Maschen du anschlägst und wie viel Garn du brauchst. <a href="../">← Schablonen</a></p>
+</header>
+<script src="../zurueck.js"></script>
+<main>
+  <section class="karte" id="k-projekt" aria-label="Projekt">
+    <h2>Was machst du?</h2>
+    <div class="feld"><span class="lbl" id="l-technik">Technik</span><div class="chips" role="group" aria-labelledby="l-technik" id="technik"></div></div>
+    <div class="feld"><span class="lbl" id="l-projekt">Projekt – stellt Breite und Höhe ein</span><div class="chips" role="group" aria-labelledby="l-projekt" id="projekte"></div><p class="hinweis" id="projekt-hinweis"></p></div>
+    <div class="zwei">
+      <div class="feld"><label class="lbl" for="breite" id="l-breite">Breite</label><div class="stepper" data-feld="breite" data-min="3" data-max="200"><button type="button" data-minus aria-label="Breite kleiner">−</button><input type="number" id="breite" min="3" max="200" step="1" inputmode="numeric"><button type="button" data-plus aria-label="Breite grösser">+</button><span>cm</span></div></div>
+      <div class="feld"><label class="lbl" for="hoehe" id="l-hoehe">Höhe</label><div class="stepper" data-feld="hoehe" data-min="3" data-max="300"><button type="button" data-minus aria-label="Höhe kleiner">−</button><input type="number" id="hoehe" min="3" max="300" step="1" inputmode="numeric"><button type="button" data-plus aria-label="Höhe grösser">+</button><span>cm</span></div></div>
+    </div>
+  </section>
+  <section class="karte" id="k-probe" aria-label="Maschenprobe">
+    <h2>Dein Probestück: zähle auf 10 cm</h2>
+    <div class="zwei">
+      <div class="feld"><label class="lbl" for="m10">Maschen auf 10 cm (nebeneinander)</label><div class="stepper" data-feld="m10" data-min="4" data-max="80"><button type="button" data-minus aria-label="Weniger Maschen">−</button><input type="number" id="m10" min="4" max="80" step="1" inputmode="numeric"><button type="button" data-plus aria-label="Mehr Maschen">+</button><span>M</span></div></div>
+      <div class="feld"><label class="lbl" for="r10">Reihen auf 10 cm (übereinander)</label><div class="stepper" data-feld="r10" data-min="4" data-max="120"><button type="button" data-minus aria-label="Weniger Reihen">−</button><input type="number" id="r10" min="4" max="120" step="1" inputmode="numeric"><button type="button" data-plus aria-label="Mehr Reihen">+</button><span>R</span></div></div>
+    </div>
+    <p class="hinweis" id="probe-hinweis">Drucke den Maschenprobe-Zettel, lege dein Probestück auf den Rahmen und zähle, was in die 10 cm passt. Zähle lieber in der Mitte, nicht am Rand.</p>
+  </section>
+  <section class="karte" id="k-garn" aria-label="Garn">
+    <h2>Garn (wenn du magst)</h2>
+    <div class="zwei">
+      <div class="feld"><label class="lbl" for="gew">Dein Probestück 10 × 10 cm wiegt</label><div class="stepper" data-feld="gew" data-min="0" data-max="100"><button type="button" data-minus aria-label="Weniger Gramm">−</button><input type="number" id="gew" min="0" max="100" step="1" inputmode="numeric" placeholder="–"><button type="button" data-plus aria-label="Mehr Gramm">+</button><span>g</span></div></div>
+      <div class="feld gross-nur"><label class="lbl" for="lauf">Lauflänge auf der Banderole (m pro 50 g)</label><div class="stepper" data-feld="lauf" data-min="0" data-max="600" data-schritt="5"><button type="button" data-minus aria-label="Weniger Meter">−</button><input type="number" id="lauf" min="0" max="600" step="5" inputmode="numeric" placeholder="–"><button type="button" data-plus aria-label="Mehr Meter">+</button><span>m</span></div></div>
+    </div>
+    <p class="hinweis">Mit dem Gewicht rechnet die Seite aus, wie viele Knäuel du brauchst. Die Lauflänge steht auf der Banderole, zum Beispiel «125 m / 50 g».</p>
+  </section>
+  <section class="karte" id="k-blatt" aria-label="Maschenprobe-Zettel">
+    <h2>Maschenprobe-Zettel</h2>
+    <div class="zwei">
+      <div class="feld"><span class="lbl" id="lbl-papier">Papier</span><div class="chips" id="papier" role="group" aria-labelledby="lbl-papier"><button type="button" class="chip" data-papier="a4" aria-pressed="true">A4 · 1 Zettel</button><button type="button" class="chip" data-papier="a3" aria-pressed="false">A3 · 4 Zettel</button></div></div>
+      <div class="feld"><span class="lbl" id="lbl-zahlen">Linien</span><div class="chips" id="zahlen" role="group" aria-labelledby="lbl-zahlen"><button type="button" class="chip" data-zahlen="0" aria-pressed="true">Leer zum Ausfüllen</button><button type="button" class="chip" data-zahlen="1" aria-pressed="false">Mit meinen Zahlen</button></div></div>
+    </div>
+    <div class="feld"><label class="lbl" for="name">Dein Name (kommt auf den Zettel)</label><input class="text" id="name" maxlength="30" autocomplete="off" placeholder="Name"></div>
+    <div class="blatt" id="blatt"></div>
+    <p class="hinweis">Der Rahmen muss genau 10 × 10 cm gross sein: beim Drucken «Tatsächliche Grösse» oder 100 % wählen, nicht «An Seite anpassen». Bei A3 im Druckfenster auch A3 als Papier wählen.</p>
+  </section>
+  <div class="seite-rechts">
+    <section class="karte" id="k-antwort" aria-label="Ergebnis" aria-live="polite"><h2>So geht es</h2><ul class="antwort" id="antwort"></ul><p class="hinweis" id="tipp"></p></section>
+    <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Zettel drucken</span></button>
+  </div>
+</main>
+<div id="druck"></div>
+<script>
+// Maschenprobe-Rechner von Schritt für Schritt. Masse in cm, Druck in mm.
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const KEY='schrittli.maschenprobe.v1';
+const PAPIERE={a4:{name:'A4',w:210,h:297},a3:{name:'A3',w:297,h:420}};
+const TECHNIK={stricken:'Stricken',haekeln:'Häkeln'};
+// Typische Masse für Kinderprojekte
+const PROJEKTE={
+  stirnband:{name:'Stirnband',b:10,h:50,txt:'Ein Streifen, 10 cm breit. Du strickst, bis er um den Kopf passt (etwa 50 cm) und nähst die Enden zusammen.'},
+  schal:{name:'Schal',b:15,h:100,txt:'Ein langer Streifen: 15 cm breit und 100 cm lang. Für einen grossen Schal mehr Höhe einstellen.'},
+  topflappen:{name:'Topflappen',b:20,h:20,txt:'Ein Quadrat von 20 × 20 cm. Aus Baumwolle, damit es die Hitze aushält.'},
+  muetze:{name:'Mütze (Umfang)',b:50,h:22,txt:'Die Breite ist der Kopfumfang minus 2 cm, weil die Mütze dehnt. In Runden gestrickt oder flach und hinten zusammengenäht.'},
+  handy:{name:'Handy-Tasche',b:9,h:32,txt:'Ein Streifen, 9 cm breit und 32 cm lang, in der Mitte gefaltet und an den Seiten zusammengenäht: 2 × 16 cm.'},
+  eigenes:{name:'Eigenes',b:0,h:0,txt:'Stelle Breite und Höhe selber ein.'}
+};
+const S={technik:'stricken',projekt:'topflappen',b:20,h:20,m10:20,r10:28,gew:0,lauf:0,papier:'a4',zahlen:false,name:''};
+const clamp=(v,a,b)=>Math.min(b,Math.max(a,Math.round(Number(v)||0)));
+const zahl=(v,d=0)=>Number(v).toLocaleString('de-CH',{maximumFractionDigits:d});
+
+function klasseLesen(){
+  const q=Number(new URLSearchParams(location.search).get('klasse'));
+  if(q>=1&&q<=6)return q;
+  try{ if(localStorage.getItem('schrittli.app')==='schule'){ const k=Number(JSON.parse(localStorage.getItem('schrittli.schule.v1'))?.settings?.klasse); if(k>=1&&k<=6)return k; } }catch(e){}
+  return 0;
+}
+const KLASSE=klasseLesen(), KLEIN=KLASSE>0&&KLASSE<=2;
+if(KLEIN)document.body.classList.add('klein');
+
+function laden(){
+  try{
+    const t=JSON.parse(localStorage.getItem(KEY));
+    if(t&&typeof t==='object'){
+      if(TECHNIK[t.technik])S.technik=t.technik; if(PROJEKTE[t.projekt])S.projekt=t.projekt;
+      S.b=clamp(t.b??S.b,3,200);S.h=clamp(t.h??S.h,3,300);S.m10=clamp(t.m10??S.m10,4,80);S.r10=clamp(t.r10??S.r10,4,120);
+      S.gew=clamp(t.gew??0,0,100);S.lauf=clamp(t.lauf??0,0,600);S.zahlen=!!t.zahlen;S.name=String(t.name||'').slice(0,30);
+      if(PAPIERE[t.papier])S.papier=t.papier;
+    }
+  }catch(e){}
+  const q=new URLSearchParams(location.search);
+  if(PAPIERE[String(q.get('papier')).toLowerCase()])S.papier=String(q.get('papier')).toLowerCase();
+  if(TECHNIK[q.get('technik')])S.technik=q.get('technik');
+}
+function speichern(){ try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){} }
+
+// ---------- Rechnung ----------
+function rechnen(){
+  const anschlag=Math.max(1,Math.round(S.m10/10*S.b));
+  const gerade=anschlag%2?anschlag+1:anschlag;
+  const reihen=Math.max(1,Math.round(S.r10/10*S.h));
+  let gramm=0,knaeuel=0,meter=0;
+  if(S.gew>0){
+    const g=S.gew*(S.b*S.h)/100*1.1;          // 10 % Reserve
+    gramm=Math.max(5,Math.ceil(g/5)*5); knaeuel=Math.ceil(gramm/50);
+    if(S.lauf>0)meter=Math.round(gramm/50*S.lauf/5)*5;
+  }
+  return {anschlag,gerade,reihen,gramm,knaeuel,meter,maschenBreite:10/S.m10,reihenHoehe:10/S.r10};
+}
+
+// ---------- Druckzettel ----------
+// Ein Zettel in ein Feld von w × h mm (A4 ganz oder ein Viertel von A3 = A5). Der Rahmen ist immer 100 × 100 mm.
+function zettel(x0,y0,w,h,R){
+  const gross=w>180, fs=gross?4.4:3.6, zeile=gross?12:9.5, rand=gross?16:10;
+  const l=x0+rand, r=x0+w-rand, breit=r-l;
+  let s='',y=y0+rand+(gross?8:6);
+  s+=`<text x="${l}" y="${y}" font-size="${gross?9:7}" font-family="Fredoka,Nunito,sans-serif" font-weight="600" fill="#1c2430">Maschenprobe</text>`;
+  s+=`<text x="${r}" y="${y}" text-anchor="end" font-size="${fs}" fill="#5b6573">${TECHNIK[S.technik]}</text>`;
+  y+=zeile+2;
+  const linie=(label,wert,yy,x1,x2)=>{
+    const lw=label.length*fs*.55+2;
+    let t=`<text x="${x1}" y="${yy}" font-size="${fs}" fill="#1c2430">${label}</text><line x1="${(x1+lw).toFixed(1)}" y1="${(yy+1).toFixed(1)}" x2="${x2}" y2="${(yy+1).toFixed(1)}" stroke="#1c2430" stroke-width=".3"/>`;
+    if(wert)t+=`<text x="${(x1+lw+2).toFixed(1)}" y="${yy}" font-size="${fs}" fill="#17997A" font-weight="700">${esc(wert)}</text>`;
+    return t;
+  };
+  s+=linie('Name:',S.name,y,l,r); y+=zeile;
+  s+=linie('Garn:','',y,l,l+breit*.48); s+=linie('Nadel:','',y,l+breit*.52,r); y+=zeile-2;
+  // Rahmen 100 × 100 mm, zentriert, mit cm-Strichen und zartem Gitter
+  const fx=x0+(w-100)/2, fy=y+4;
+  let gitter='';
+  for(let i=1;i<10;i++){gitter+=`M${fx+i*10} ${fy}V${fy+100}M${fx} ${fy+i*10}H${fx+100}`;}
+  let striche='';
+  for(let i=0;i<=10;i++){const t=i%5===0?3:2;striche+=`M${fx+i*10} ${fy-t}V${fy}M${fx+i*10} ${fy+100}V${fy+100+t}M${fx-t} ${fy+i*10}H${fx}M${fx+100} ${fy+i*10}H${fx+100+t}`;}
+  s+=`<path d="${gitter}" stroke="#d5dee9" stroke-width=".2" fill="none"/><rect x="${fx}" y="${fy}" width="100" height="100" fill="none" stroke="#1c2430" stroke-width=".5"/><path d="${striche}" stroke="#1c2430" stroke-width=".35" fill="none"/>`;
+  s+=`<text x="${fx+50}" y="${fy+50-2}" text-anchor="middle" font-size="${gross?7:5.5}" fill="#c8d0db" font-family="Fredoka,Nunito,sans-serif" font-weight="600">10 × 10 cm</text>`;
+  s+=`<text x="${fx+50}" y="${fy+50+(gross?6:5)}" text-anchor="middle" font-size="${fs*.85}" fill="#9aa5b4">Probestück hier drauflegen</text>`;
+  // Pfeile: Maschen zählt man quer, Reihen hoch
+  s+=`<text x="${fx+50}" y="${fy+100+(gross?9:7.5)}" text-anchor="middle" font-size="${fs*.9}" fill="#5b6573">← Maschen nebeneinander zählen →</text>`;
+  s+=`<text transform="translate(${(fx-rand*.45).toFixed(1)} ${fy+50}) rotate(-90)" text-anchor="middle" font-size="${fs*.9}" fill="#5b6573">← Reihen übereinander zählen →</text>`;
+  y=fy+100+(gross?22:17);
+  s+=linie('Maschen auf 10 cm:',S.zahlen?String(S.m10):'',y,l,l+breit*.48); s+=linie('Reihen auf 10 cm:',S.zahlen?String(S.r10):'',y,l+breit*.52,r); y+=zeile;
+  s+=linie('Mein Werk:',S.zahlen?`${PROJEKTE[S.projekt].name}, ${S.b} × ${S.h} cm`:'',y,l,r); y+=zeile;
+  s+=linie('Anschlag:',S.zahlen?`${R.anschlag} Maschen`:'',y,l,l+breit*.48); s+=linie('Reihen:',S.zahlen?String(R.reihen):'',y,l+breit*.52,r); y+=zeile;
+  s+=linie('Garn:',S.zahlen&&R.gramm?`ca. ${R.gramm} g = ${R.knaeuel} Knäuel`:'',y,l,r); y+=zeile-1;
+  s+=`<text x="${l}" y="${y}" font-size="${fs*.75}" fill="#9aa5b4">Rechnen: Maschen auf 10 cm ÷ 10 × Breite in cm = Anschlag. Der Rahmen muss 10 cm gross sein (Druck 100 %).</text>`;
+  return s;
+}
+function blatt(R){
+  const P=PAPIERE[S.papier];
+  let s='';
+  if(S.papier==='a4')s=zettel(0,0,P.w,P.h,R);
+  else{
+    const w=P.w/2,h=P.h/2;
+    for(let i=0;i<4;i++)s+=zettel((i%2)*w,Math.floor(i/2)*h,w,h,R);
+    s+=`<path d="M${w} 0V${P.h}M0 ${h}H${P.w}" stroke="#9aa5b4" stroke-width=".3" stroke-dasharray="3 2" fill="none"/>`;
+    s+=`<text x="${w+2}" y="${h-2}" font-size="3" fill="#9aa5b4">✂ auseinanderschneiden</text>`;
+  }
+  return `<svg viewBox="0 0 ${P.w} ${P.h}" width="${P.w}" height="${P.h}" xmlns="http://www.w3.org/2000/svg" font-family="Nunito,system-ui,sans-serif">${s}</svg>`;
+}
+function papierSetzen(){
+  const P=PAPIERE[S.papier];
+  $('seite').textContent=`@page{size:${P.name} portrait;margin:0}`;
+  $('druck').style.setProperty('--bw',P.w+'mm');$('druck').style.setProperty('--bh',P.h+'mm');
+}
+
+// ---------- Anzeige ----------
+function felder(){
+  $('technik').innerHTML=Object.entries(TECHNIK).map(([k,n])=>`<button type="button" class="chip" data-technik="${k}" aria-pressed="${k===S.technik}">${n}</button>`).join('');
+  $('projekte').innerHTML=Object.entries(PROJEKTE).map(([k,p])=>`<button type="button" class="chip" data-projekt="${k}" aria-pressed="${k===S.projekt}">${p.name}</button>`).join('');
+  $('projekt-hinweis').textContent=KLEIN&&S.projekt!=='eigenes'?`${PROJEKTE[S.projekt].name}: ${S.b} × ${S.h} cm.`:PROJEKTE[S.projekt].txt;
+  $('l-breite').textContent=S.projekt==='muetze'?'Breite = Kopfumfang':'Breite';
+  $('breite').value=S.b;$('hoehe').value=S.h;$('m10').value=S.m10;$('r10').value=S.r10;
+  $('gew').value=S.gew||'';$('lauf').value=S.lauf||'';
+  document.querySelectorAll('#papier .chip').forEach(k=>k.setAttribute('aria-pressed',k.dataset.papier===S.papier));
+  document.querySelectorAll('#zahlen .chip').forEach(k=>k.setAttribute('aria-pressed',(k.dataset.zahlen==='1')===S.zahlen));
+  $('name').value=S.name;
+}
+function alles(){
+  felder();
+  const R=rechnen(), haek=S.technik==='haekeln';
+  const li=[];
+  li.push(haek
+    ?`Du häkelst eine Kette mit <b>${R.anschlag} Luftmaschen</b>.<span class="leise">Dazu kommen die Wendeluftmaschen am Anfang jeder Reihe.${R.anschlag!==R.gerade?` Gerade Zahl: ${R.gerade}.`:''}</span>`
+    :`Du schlägst <b>${R.anschlag} Maschen</b> an.<span class="leise">${R.anschlag!==R.gerade?`Braucht dein Muster eine gerade Zahl, nimm ${R.gerade}.`:'Das ist eine gerade Zahl – gut für Muster wie 1 rechts, 1 links.'}${S.projekt==='muetze'?' In Runden stricken: die Maschen schliessen sich zum Kreis.':''}</span>`);
+  li.push(`Du ${haek?'häkelst':'strickst'} <b>${R.reihen} Reihen</b>.<span class="leise">Dann ist dein Werk ${zahl(S.h)} cm hoch. Miss zwischendurch nach!</span>`);
+  li.push(`Dein Werk wird <b>${zahl(S.b)} × ${zahl(S.h)} cm</b>.<span class="leise">Eine Masche ist bei dir etwa ${zahl(R.maschenBreite*10,1)} mm breit, eine Reihe ${zahl(R.reihenHoehe*10,1)} mm hoch.</span>`);
+  if(R.gramm)li.push(`Du brauchst ungefähr <b>${R.gramm} g</b> Garn – das sind <b>${R.knaeuel} ${R.knaeuel===1?'Knäuel':'Knäuel'}</b> à 50 g.<span class="leise">${R.meter?`Das sind etwa ${zahl(R.meter)} m Faden. `:''}Mit 10 % Reserve gerechnet. Nimm lieber eines mehr, damit die Farbe zusammenpasst.</span>`);
+  else li.push(`<span class="leise" style="font-size:15px">Wiege dein Probestück (10 × 10 cm) und gib die Gramm ein – dann rechne ich aus, wie viele Knäuel du brauchst.</span>`);
+  $('antwort').innerHTML=li.map(t=>`<li>${t}</li>`).join('');
+  $('tipp').textContent=KLEIN?'Zähle genau – dann stimmt die Grösse.':'Je genauer du am Probestück zählst, desto besser passt dein Werk. Ein Probestück ist immer etwas grösser als 10 cm, damit du in der Mitte zählen kannst.';
+  const bl=blatt(R);
+  $('blatt').innerHTML=bl;$('druck').innerHTML=bl;papierSetzen();
+  speichern();
+}
+
+// ---------- Bedienung ----------
+$('technik').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;S.technik=c.dataset.technik;alles();});
+$('projekte').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;S.projekt=c.dataset.projekt;const p=PROJEKTE[S.projekt];if(p.b){S.b=p.b;S.h=p.h;}alles();});
+document.querySelectorAll('.stepper').forEach(st=>{
+  const inp=st.querySelector('input'),feld=st.dataset.feld,min=Number(st.dataset.min),max=Number(st.dataset.max),schritt=Number(st.dataset.schritt||1);
+  const setzen=v=>{
+    v=clamp(v,min,max);
+    if(feld==='b'||feld==='breite'){S.b=v;S.projekt=passendesProjekt();}
+    else if(feld==='hoehe'){S.h=v;S.projekt=passendesProjekt();}
+    else S[feld]=v;
+    alles();
+  };
+  st.querySelector('[data-minus]').addEventListener('click',()=>setzen((Number(inp.value)||0)-schritt));
+  st.querySelector('[data-plus]').addEventListener('click',()=>setzen((Number(inp.value)||0)+schritt));
+  inp.addEventListener('change',()=>setzen(inp.value));
+});
+// Wenn Breite oder Höhe von Hand geändert werden, bleibt das Projekt nur, solange die Masse passen
+function passendesProjekt(){ const p=PROJEKTE[S.projekt]; return p.b===S.b&&p.h===S.h?S.projekt:(Object.keys(PROJEKTE).find(k=>PROJEKTE[k].b===S.b&&PROJEKTE[k].h===S.h)||'eigenes'); }
+$('papier').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;S.papier=c.dataset.papier;alles();});
+$('zahlen').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;S.zahlen=c.dataset.zahlen==='1';alles();});
+$('name').addEventListener('input',()=>{S.name=$('name').value.slice(0,30);const bl=blatt(rechnen());$('blatt').innerHTML=bl;$('druck').innerHTML=bl;speichern();});
+$('drucken').addEventListener('click',()=>window.print());
+
+laden();alles();
+</script>
+</body>
+</html>

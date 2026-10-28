@@ -764,6 +764,168 @@ body.u-ohne-galerie [data-act=gallery]{display:none!important}
 /* ---- Spieler: Position über der Schrittliste ---- */
 .plabel .pos{margin-left:auto;background:var(--kink);color:#fff;border-radius:999px;padding:4px 12px;font-size:14px;letter-spacing:.04em;font-variant-numeric:tabular-nums}
 .sbtn[aria-current="step"]{outline:0}
+/* ===== Schule: Schnellzugriff, Restzeit, Führerschein, Beamer, Lektionsplan ===== */
+.v3-schnell{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:18px}
+.v3-schnell-btn{display:flex;align-items:center;gap:14px;border:0;border-radius:20px;padding:14px 18px;text-align:left;background:#fff;color:#1C2430;box-shadow:0 2px 10px rgba(28,36,48,.06);min-height:76px;font:inherit}
+.v3-schnell-btn.zeit{background:#E9F1FF}.v3-schnell-btn.fs{background:#FFF1E6}
+.v3-schnell-btn .sym{font-size:34px;line-height:1;flex:none}
+.v3-schnell-btn .txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.v3-schnell-btn b{font-weight:900;font-size:18px;line-height:1.2}
+.v3-schnell-btn small{font-weight:700;font-size:14px;color:#5B6672}
+.v3-schnell-btn:active{transform:scale(.98)}
+/* Restzeit */
+.rz-wahl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:18px}
+.rz-min{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;border:3px solid #fff;border-radius:18px;background:#fff;color:#1C2430;min-height:84px;box-shadow:0 2px 10px rgba(28,36,48,.06);font:inherit}
+.rz-min b{font-weight:900;font-size:34px;line-height:1}
+.rz-min small{font-weight:800;font-size:13px;color:#5B6672}
+.rz-min.an{border-color:#1C2430;background:#1C2430;color:#fff}.rz-min.an small{color:#C9D3F5}
+.rz-zeile .rz-zeit{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none;min-width:64px;padding:6px 10px;border-radius:14px;background:#E9F1FF;color:#23408E;font-weight:900;font-size:18px;line-height:1.1}
+.rz-zeile .rz-zeit small{font-size:11px;font-weight:800}
+.restzeit .v3-liste{margin-top:14px}
+@media (max-width:520px){.rz-wahl{gap:6px}.rz-min{min-height:70px;border-radius:14px}.rz-min b{font-size:26px}}
+/* Führerschein: Hinweis im Player und in der Foto-Anleitung */
+.fs-hinweis{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:12px;padding:12px 16px;border-radius:16px;background:#FFF1E6;color:#7A4E2D;border:2px solid #E07A3F;font-weight:700;text-transform:none;letter-spacing:0}
+.fs-hinweis .sym{font-size:30px;line-height:1;flex:none}
+.fs-hinweis .grow{display:flex;flex-direction:column;gap:2px;flex:1;min-width:160px}
+.fs-hinweis b{font-weight:900;font-size:17px}
+.fs-hinweis .grow span{font-size:14px}
+.fs-los{border:0;border-radius:999px;background:#1C4A63;color:#fff;font:inherit;font-weight:900;font-size:16px;min-height:48px;padding:0 18px;flex:none}
+.kid .fs-hinweis{box-sizing:border-box;max-width:min(100% - 24px,1100px);margin-left:auto;margin-right:auto}
+.kid.pl.beamer .fs-hinweis{display:none}
+/* Führerschein: Karten */
+.fs .v3-sub{max-width:720px}
+.fs-karten{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
+.fs-karte{display:flex;flex-direction:column;align-items:flex-start;gap:8px;border:3px solid #fff;border-radius:22px;padding:18px;background:var(--f,#fff);color:#1C2430;text-align:left;box-shadow:0 2px 10px rgba(28,36,48,.06);font:inherit;min-height:170px}
+.fs-karte .bild{font-size:52px;line-height:1}
+.fs-karte b{font-weight:900;font-size:20px;line-height:1.2}
+.fs-stand{margin-top:auto;font-weight:800;font-size:14px;color:#5B6672;border-radius:999px;padding:6px 12px;background:rgba(255,255,255,.75)}
+.fs-karte.bestanden{border-color:#E8A33D}.fs-karte.bestanden .fs-stand{color:#7A4E2D}
+.fs-karte.gesehen{border-color:#3BB273}.fs-karte.gesehen .fs-stand{background:#3BB273;color:#fff}
+.fs-karte:active{transform:scale(.98)}
+/* Führerschein: Quiz */
+.fs-balken span{flex:1;height:12px;min-width:0;border-radius:999px;background:#DDE1E6}
+.fs-balken span.an{background:#3BB273}.fs-balken span.jetzt{background:#1C2430}
+.fs-frage{max-width:760px;margin:18px auto 0;display:flex;flex-direction:column;gap:14px}
+.fs-nr{font-weight:800;font-size:14px;color:#5B6672;letter-spacing:.04em}
+.fs-frage h2{margin:0;font-weight:900;font-size:26px;line-height:1.25;background:#fff;border-radius:20px;padding:18px 20px;box-shadow:0 2px 10px rgba(28,36,48,.06)}
+.fs-antworten{display:flex;flex-direction:column;gap:10px}
+.fs-antwort{display:flex;align-items:center;gap:14px;border:3px solid #fff;border-radius:18px;background:#fff;color:#1C2430;padding:12px 16px;text-align:left;font:inherit;font-weight:800;font-size:19px;line-height:1.3;min-height:68px;box-shadow:0 2px 10px rgba(28,36,48,.06)}
+.fs-antwort .buchstabe{flex:none;width:44px;height:44px;border-radius:50%;background:#E9F1FF;color:#23408E;display:grid;place-items:center;font-weight:900;font-size:20px}
+.fs-antwort.richtig{border-color:#3BB273;background:#E6F4EC;color:#1F5C3D}.fs-antwort.richtig .buchstabe{background:#3BB273;color:#fff}
+.fs-antwort.falsch{border-color:#E8554E;background:#FDE8E4;color:#8A2A1C}.fs-antwort.falsch .buchstabe{background:#E8554E;color:#fff}
+.fs-antwort.aus{opacity:.45}
+.fs-antwort:disabled{cursor:default}
+.fs-feedback{min-height:28px;text-align:center;font-weight:800;font-size:18px;color:#5B6672}
+.fs-feedback.gut{color:#1F5C3D}.fs-feedback.nein{color:#8A2A1C}
+.fs-ende{max-width:640px;margin:28px auto 0;text-align:center;padding:28px}
+.fs-ende .figur{height:170px;margin:0 auto}
+.fs-ende h2{font-size:26px;margin:8px 0 6px}
+.fs-ende .v3-sub{margin-bottom:16px}
+.fs-zeigen{text-align:left;margin-bottom:18px}
+.fs-gesehen{font-size:18px;min-height:56px}
+/* Beamer-Knopf im Kopf */
+.beamer-btn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:999px;border:2px solid #1C4A63;background:#EAF3F8;color:#1C4A63;font:inherit;font-size:15px;font-weight:700;cursor:pointer;text-transform:none;letter-spacing:0;flex:none}
+.beamer-btn.an{background:#1C4A63;color:#fff}
+@media (max-width:560px){.beamer-btn{min-height:36px;padding:0 10px;font-size:14px}.beamer-btn span{display:none}}
+/* Beamer-Ansicht im Video-Player: Video gross, Schritte riesig. Kein :has() – muss auf dem iPad laufen. */
+body.beamer{overflow:hidden}
+body.beamer .fm-knopf{display:none}
+.kid.pl.beamer{position:fixed;inset:0;z-index:60;background:#111;color:#fff;overflow:hidden;padding:0;min-height:0;height:100vh;height:100dvh;display:flex;flex-direction:column}
+.kid.pl.beamer .girlande,.kid.pl.beamer .plabel,.kid.pl.beamer .fuss,.kid.pl.beamer .auftrag,.kid.pl.beamer .marke,.kid.pl.beamer .schild-btn,.kid.pl.beamer .fm-pill,.kid.pl.beamer #zettel,.kid.pl.beamer .glas{display:none}
+.kid.pl.beamer .pl-top{display:flex;align-items:center;gap:14px;order:0;flex:none;margin:0;padding:8px 16px;max-width:none;width:auto;min-height:0;background:#000;box-sizing:border-box}
+.kid.pl.beamer .pl-top .schild{flex:1;min-width:0;background:transparent;border:0;box-shadow:none;transform:none;padding:0;min-height:0;color:#fff}
+.kid.pl.beamer .pl-top .schild h1{color:#fff;font-size:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kid.pl.beamer .kopf-rechts{margin-left:auto;flex:none}
+.kid.pl.beamer .beamer-btn{background:#fff;color:#111;border-color:#fff;min-height:44px;font-size:16px}
+.kid.pl.beamer .panes{display:grid;order:1;flex:1;min-height:0;margin:0;padding:10px 16px;max-width:none;width:auto;box-sizing:border-box;gap:16px;grid-template-columns:minmax(0,3fr) minmax(0,2fr);align-items:stretch}
+.kid.pl.beamer .pane{display:flex;flex-direction:column;min-height:0;min-width:0;padding:0;margin:0;order:0}
+.kid.pl.beamer .video-box{width:100%;max-width:calc((100vh - 200px)*16/9);max-width:calc((100dvh - 200px)*16/9);margin:auto;aspect-ratio:16/9;border:0;border-radius:10px;box-shadow:none;transform:none}
+.kid.pl.beamer .schritte{flex:1;min-height:0;height:auto;max-height:none;aspect-ratio:auto;overflow-y:auto;background:#1B1B1B;border:0;border-radius:16px;box-shadow:none;padding:12px;gap:12px;-webkit-overflow-scrolling:touch}
+.kid.pl.beamer .sbtn{font-size:30px;line-height:1.2;padding:14px 16px;min-height:76px;background:#2A2A2A;color:#fff;border-color:#444;border-radius:14px;gap:16px}
+.kid.pl.beamer .sbtn .num{width:52px;height:52px;font-size:24px;background:#555}
+.kid.pl.beamer .sbtn .say{width:48px;height:48px;border-color:#777;background:#333}
+.kid.pl.beamer .sbtn.cur{background:var(--sign,#F7D154);color:#2B2320;border-color:#fff;border-width:3px;box-shadow:none;font-size:34px;min-height:90px}
+.kid.pl.beamer .sbtn.cur .num{background:#2B2320;color:#fff}
+.kid.pl.beamer .sbtn.done{background:#2F6A44;color:#fff}.kid.pl.beamer .sbtn.done .num{background:#1F7A4A}
+.kid.pl.beamer .schritte .frei{color:#fff}.kid.pl.beamer .schritte .zeit{color:#fff;font-size:48px}.kid.pl.beamer .schritte .hint{color:#C9C2B8;font-size:20px}
+.kid.pl.beamer .pl-bank{order:2;flex:none;margin:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:#000;background-image:none;box-shadow:none;min-height:0;box-sizing:border-box}
+.kid.pl.beamer .pl-bank .inner{width:100%;max-width:none;padding:0}
+.kid.pl.beamer .steuer{margin:0;display:flex;align-items:center;gap:20px;flex-wrap:nowrap}
+.kid.pl.beamer .controls{flex:none;flex-wrap:nowrap;gap:14px}
+.kid.pl.beamer .controls .kbtn.round{width:88px;min-height:88px;font-size:36px}
+.kid.pl.beamer .controls .kbtn.round.big{width:110px;min-height:110px;font-size:50px}
+.kid.pl.beamer .speed .lab{display:none}
+.kid.pl.beamer .kino-step{display:flex;flex-direction:column;gap:4px;flex:1;min-width:0;color:#fff;padding:6px 14px;border-radius:12px;text-align:left}
+.kid.pl.beamer .kino-step .k{font-size:16px;letter-spacing:.08em;color:#C9C2B8}
+.kid.pl.beamer .kino-step .lbl{font-size:30px;line-height:1.15;font-weight:700;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.kid.pl.beamer .modebadge{height:44px;font-size:20px;top:14px}
+@media (max-width:899px),(orientation:portrait){
+ .kid.pl.beamer .panes{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:10px;padding:8px 12px}
+ .kid.pl.beamer .video-box{max-width:min(100%,calc((100vh - 420px)*16/9));max-width:min(100%,calc((100dvh - 420px)*16/9));margin:0 auto}
+ .kid.pl.beamer .sbtn{font-size:26px;min-height:68px;padding:12px 14px}.kid.pl.beamer .sbtn.cur{font-size:28px;min-height:76px}
+ .kid.pl.beamer .kino-step{display:none}
+ .kid.pl.beamer .steuer{justify-content:center}
+ .kid.pl.beamer .controls{flex:1;flex-wrap:wrap;justify-content:center;gap:10px}
+ .kid.pl.beamer .controls .kbtn.round{width:72px;min-height:72px;font-size:30px}
+ .kid.pl.beamer .controls .kbtn.round.big{width:92px;min-height:92px;font-size:42px}
+ .kid.pl.beamer .pl-top .schild h1{font-size:18px}
+}
+/* Beamer in der Foto-Anleitung: dunkler Grund, grössere Schrift, breiter */
+.v3.an.beamer{background:#111}
+.v3.an.beamer .v3-in{max-width:1600px}
+.v3.an.beamer .v3-thema-titel h1,.v3.an.beamer .v3-thema-titel small{color:#fff}
+.v3.an.beamer .v3-logo,.v3.an.beamer .v3-fuss{display:none}
+.v3.an.beamer .v3-rund.gross{background:#fff}
+.v3.an.beamer .an-schritt{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:28px}
+.v3.an.beamer .an-text p{font-size:34px;line-height:1.3}
+.v3.an.beamer .an-nr{width:64px;height:64px;font-size:30px}
+.v3.an.beamer .an-box{font-size:24px}
+.v3.an.beamer .an-box .sym{font-size:34px}
+.v3.an.beamer .an-bilder figcaption{font-size:18px}
+.v3.an.beamer .an-weiter{font-size:26px;min-height:76px}
+.v3.an.beamer .an-nav .v3-pill{min-height:76px;font-size:20px}
+.v3.an.beamer .an-hinweis{color:#FFB4A8}
+.v3.an.beamer .v3-sub{color:#C9C2B8}
+.v3.an.beamer .an-balken button{background:#333}.v3.an.beamer .an-balken button.an{background:#777}.v3.an.beamer .an-balken button.jetzt{background:#fff}
+@media (max-width:899px){.v3.an.beamer .an-text p{font-size:28px}}
+/* Lektionsplan im Unterrichtsmodus */
+.plan-liste{grid-template-columns:minmax(0,1fr)}
+.plan-karte{padding:12px 12px 14px}
+.plan-kopf{display:flex;align-items:center;gap:12px}
+.plan-kopf .plan-video{flex:1;min-width:0;box-shadow:none;background:#F5F6F8;border-color:#F5F6F8}
+.plan-ring{position:relative;width:64px;height:64px;flex:none;display:grid;place-items:center}
+.plan-ring svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.plan-ring circle{fill:none;stroke:#E3E7EC;stroke-width:6}
+.plan-ring circle.f{stroke:#3BB273;stroke-linecap:round;transition:stroke-dasharray .3s}
+.plan-ring b{position:relative;font-weight:900;font-size:16px;color:#1C2430}
+.plan-ring.voll b{color:#1F5C3D}
+.plan-schritte{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.plan-schritt{display:flex;align-items:flex-start;gap:12px;border-radius:18px;padding:12px 14px;background:#F5F6F8;border:3px solid #F5F6F8}
+.plan-schritt.jetzt{border-color:#1C2430;background:#fff}
+.plan-schritt.erledigt{background:#E6F4EC;border-color:#E6F4EC}
+.plan-nr{flex:none;width:44px;height:44px;border-radius:50%;background:#1C2430;color:#fff;display:grid;place-items:center;font-weight:900;font-size:22px}
+.plan-schritt.erledigt .plan-nr{background:#3BB273}
+.plan-schritt:not(.jetzt):not(.erledigt) .plan-nr{background:#9AA3AE}
+.plan-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.plan-body>b{font-weight:900;font-size:19px;line-height:1.2}
+.plan-schritt.erledigt .plan-body>b{text-decoration:line-through;text-decoration-thickness:3px;text-decoration-color:#3BB273}
+.plan-mat{display:flex;flex-wrap:wrap;gap:8px}
+.plan-matitem{display:inline-flex;align-items:center;gap:8px;border-radius:999px;background:#fff;border:2px solid #DDE1E6;padding:6px 14px 6px 8px;font-weight:800;font-size:15px;cursor:pointer;min-height:44px}
+.plan-matitem input{width:22px;height:22px;margin:0;accent-color:#3BB273;flex:none}
+.plan-matitem .pik{display:inline-grid;place-items:center;width:30px;height:28px;flex:none}
+.plan-matitem .pik .mat-svg{width:30px;height:28px}.plan-matitem .pik .mat-emoji{font-size:20px}.plan-matitem .pik img{width:28px;height:28px;object-fit:cover;border-radius:6px}
+.plan-matitem.an{border-color:#3BB273;background:#E6F4EC}
+.plan-knoepfe{display:flex;flex-direction:column;gap:8px;flex:none}
+.plan-haken{border:0;border-radius:999px;background:#fff;color:#1C2430;box-shadow:inset 0 0 0 2px #1C2430;font:inherit;font-weight:900;font-size:15px;min-height:48px;padding:0 16px;white-space:nowrap;flex:none}
+.plan-haken.an{background:#3BB273;color:#fff;box-shadow:none}
+.plan-haken.geh{background:#1C2430;color:#fff;box-shadow:none}
+.plan-schritt.erledigt .plan-haken.geh{display:none}
+@media (max-width:600px){
+ .plan-schritt{flex-wrap:wrap}
+ .plan-knoepfe{flex-direction:row;flex-wrap:wrap;width:100%;margin-left:56px}
+ .plan-schritt>.plan-haken{margin-left:56px}
+ .plan-haken{flex:1}
+}
 </style>
 </head>
 <body>

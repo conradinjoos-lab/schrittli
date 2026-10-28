@@ -7,7 +7,7 @@ import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 test('classroom: teacher-only policy, independent groups, device acknowledgement, conflicts, presets and bounded validation',async()=>{
  const mf=new Miniflare(convertV4MiniflareOptions({modules:['worker.js','feedback.js','sammlung.js','unterricht.js','namen.js'].map(name=>({type:'ESModule',path:fileURLToPath(new URL(name,import.meta.url)),contents:readFileSync(new URL(name,import.meta.url),'utf8')})),compatibilityDate:'2026-10-01',kvNamespaces:['KV'],d1Databases:['SAMMLUNG'],outboundService:async req=>Response.json({login:req.headers.get('Authorization')==='Bearer teacher'?'conradinjoos-lab':'someone-else'})}));
  try{
-  const db=await mf.getD1Database('SAMMLUNG');for(const name of ['0001_sammlung.sql','0002_unterricht.sql'])await db.exec(readFileSync(new URL('sammlung-migrations/'+name,import.meta.url),'utf8').replaceAll('\n',' '));
+  const db=await mf.getD1Database('SAMMLUNG');for(const name of ['0001_sammlung.sql','0002_unterricht.sql','0004_fortschritt.sql'])await db.exec(readFileSync(new URL('sammlung-migrations/'+name,import.meta.url),'utf8').replaceAll('\n',' '));
   const call=(path,token='teacher',b,origin='https://conradinjoos-lab.github.io')=>mf.dispatchFetch('https://test.example/unterricht/'+path,{method:b?'POST':'GET',headers:{Origin:origin,Authorization:'Bearer '+token,'Content-Type':'application/json'},body:b?JSON.stringify(b):undefined});
   const data=async r=>{assert(r.ok,await r.clone().text());return r.json();};
   assert.equal((await call('gruppen','')).status,401);assert.equal((await call('gruppen','someone-else')).status,403);
@@ -30,5 +30,24 @@ test('classroom: teacher-only policy, independent groups, device acknowledgement
   await call('favorit-entfernen','teacher',{id:favorite.id});assert.equal((await data(await call('favoriten'))).favoriten.length,0);
   await call('freigabe','teacher',{id:a.id,revision:2,policy:{mode:'closed',title:'Alles geschlossen',ids:[]}});assert.equal((await data(await status(a,2))).policy.mode,'closed');
   const stored=await db.prepare('SELECT tokenHash FROM unterricht_gruppen WHERE id=?').bind(a.id).first();assert.notEqual(stored.tokenHash,a.token);
+
+  /* Lektionsplan: nur mit Aufgaben, sonst false; fehlt die Angabe, bleibt er aus */
+  const planned=await data(await call('freigabe','teacher',{id:a.id,revision:3,policy:{...p,plan:true}}));assert.equal(planned.policy.plan,true);
+  assert.equal((await data(await status(a,3))).policy.plan,true);
+  assert.equal((await data(await call('freigabe','teacher',{id:a.id,revision:4,policy:{...p,plan:'ja'}}))).policy.plan,false);
+  assert.equal((await data(await call('freigabe','teacher',{id:a.id,revision:5,policy:{mode:'free',title:'Frei',ids:[],plan:true}}))).policy.plan,false);
+  assert.equal((await data(await call('freigabe','teacher',{id:a.id,revision:6,policy:p}))).policy.plan,false);
+
+  /* Fortschritt: Kind-Endpunkt mit Gruppen-Token, Lehrperson sieht ihn pro iPad */
+  const schritte=[true,true,false],fort=(token,patch={})=>call('fortschritt',token,{token,geraet:deviceId,videoId:'flieger-windhover',schritte,...patch});
+  assert.equal((await fort(a.token)).status,200);
+  assert.equal((await fort(a.token,{schritte:[true,true,true]})).status,200);
+  const seen=await data(await call('geraete?id='+a.id));assert.deepEqual(seen.geraete[0].fortschritt.map(f=>[f.videoId,f.schritte]),[['flieger-windhover',[true,true,true]]]);assert.equal(typeof seen.geraete[0].fortschritt[0].stand,'number');
+  assert.equal((await fort(a.token,{videoId:'flieger-pfeil'})).status,200);assert.equal((await data(await call('geraete?id='+a.id))).geraete[0].fortschritt.length,2);
+  assert.deepEqual((await data(await call('geraete?id='+b.id))).geraete.map(d=>d.fortschritt),[[]]);
+  assert.equal((await fort('0'.repeat(64))).status,401);assert.equal((await fort('teacher')).status,401);
+  assert.equal((await call('fortschritt','',{geraet:deviceId,videoId:'x',schritte})).status,401);assert.equal((await call('fortschritt','teacher',{geraet:deviceId,videoId:'x',schritte})).status,401);
+  for(const patch of [{geraet:''},{geraet:'x'.repeat(65)},{geraet:7},{videoId:''},{videoId:'x'.repeat(81)},{videoId:'../x'},{schritte:[true,true]},{schritte:[true,true,true,true]},{schritte:[1,1,1]},{schritte:'111'},{schritte:[true,true,null]}])
+   assert.equal((await fort(a.token,patch)).status,400,JSON.stringify(patch));
  }finally{await mf.dispose();}
 });

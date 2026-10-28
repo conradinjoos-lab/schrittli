@@ -111,7 +111,12 @@ const WERKZEUGE=[['','✂️','Vorlagen-Generator','Formen drucken','#FBEDE4','H
   ['perlen/','🦎','Perlentiere-Zählmuster','Reihe für Reihe','#EEF7EC','Tiere, Comic-Figuren und Sachen – mit Drahtweg, Reihe für Reihe zum Abhaken, für 3-mm-Rocailles.'],
   ['perlentier-bild/','🐞','Perlentier aus eigenem Bild','Aus deinem Bild','#FFF6E3','Bild hineinziehen, Plan für Rocailles mit Drahtweg bekommen. Das Bild bleibt auf dem Gerät.'],
   ['armbaender/','📿','Armbänder','Länge ausrechnen','#F6EEF9','Handgelenk messen, Art, Muster und Farben wählen. Länge, Perlen und Fäden werden ausgerechnet.'],
-  ['einfrieren/','❄️','Abpausen','Bild einfrieren','#EAF3F8','Bild aufs iPad holen, gross ziehen, einfrieren, Papier drauflegen und abpausen. Nichts einrichten, das Bild bleibt auf dem Gerät.']];   // Pfad unter vorlagen/, Symbol, Titel, Kurzzeile (Kachel), Farbe (Kachel), Beschreibung (Liste)
+  ['einfrieren/','❄️','Abpausen','Bild einfrieren','#EAF3F8','Bild aufs iPad holen, gross ziehen, einfrieren, Papier drauflegen und abpausen. Nichts einrichten, das Bild bleibt auf dem Gerät.'],
+  ['zaehlmuster/','🧵','Zählmuster','Kreuzstich und Weben','#FDEFF4','Eigenes Muster auf dem Raster zeichnen – für Kreuzstich und Weben, mit Klassenbreite, A4 oder A3.'],
+  ['maschenprobe/','🧶','Maschenprobe','Anschlag ausrechnen','#EEF3FB','Maschen pro 10 cm messen, Anschlag und Garnbedarf ausrechnen.'],
+  ['klasse/','⏱️','Klassen-Werkzeuge','Timer, Aufräumen, Lärmampel','#FFF1E6','Arbeitszeit-Timer, Aufräum-Countdown und Lärmampel – gross für den Beamer.'],
+  ['fachwoerter/','🔤','Fachwort-Karten','Masche, Kettfaden …','#EDF7F6','Fachwörter mit Bild – als Karten oder Plakat, A4 oder A3.'],
+  ['drucksachen/','🖨️','Verfahrenspass & Etiketten','Zum Drucken','#F3F0FA','Verfahrenspass pro Kind und Werk-Etiketten mit Name, Verfahren und Datum, A4 oder A3.']];   // Pfad unter vorlagen/, Symbol, Titel, Kurzzeile (Kachel), Farbe (Kachel), Beschreibung (Liste)
 const genKarten=()=>WERKZEUGE.map(([pf,sym,t,,,txt])=>`<a class="lehrer-gen" href="${VORL_BASE}${pf}"${VL_ZIEL}><span class="sym" aria-hidden="true">${sym}</span><span class="grow"><b>${t}</b><br><span class="small">${txt}</span></span><span aria-hidden="true">→</span></a>`).join('');   // Liste auf «Werkzeuge» und Lehrer-Ansicht
 const werkzeugKacheln=()=>`<h2 class="v3-h2">Werkzeuge</h2><div class="v3-themen">${WERKZEUGE.map(([pf,sym,t,kurz,farbe])=>`<a class="v3-kachel werkzeug" href="${VORL_BASE}${pf}"${VL_ZIEL}><span class="bild" style="background:${farbe}" aria-hidden="true">${sym}</span><b>${t}</b><span class="v3-zeile"><span class="v3-meta">${kurz}</span></span></a>`).join('')}</div>`;   // eigene Kacheln unter den Themen (Raum-Seite)
 const v3Fuss=(mitWerkzeuge=true)=>`<div class="v3-fuss">${mitWerkzeuge?'<button class="v3-werkzeuge" data-act="werkzeuge">🧰 Werkzeuge</button>':''}${SCHULE?'<button class="v3-link" data-act="lehrer">Für Lehrpersonen</button>':''}</div>`;   // unten auf Raum, Start und Thema
@@ -245,7 +250,7 @@ function fmKnopf(){ const b=document.createElement('button'); b.className='fm-kn
 /* ============================== Router ============================== */
 const SCREENS={}; let view={name:'boot',params:{}}; let parentOpen=false;
 function go(name,params={}){ if(SCHULE&&(name==='parent'||name==='firstrun'||name==='profiles')) name='home'; if(uAktiv()){ const z=uRoute(name,params); if(z){ name=z.name; params=z.params; } } leaveScreen(); ORT=null; if(name!=='parent') parentOpen=false; view={name,params}; render(); window.scrollTo(0,0); }
-function leaveScreen(){ if(P){ P._fsLeaving=true; P.destroy(); P=null; } fsExit(); if(ED&&ED.api){ ED.api.destroy(); ED.api=null; } stopListening(); try{ speechSynthesis.cancel(); }catch(e){} }
+function leaveScreen(){ if(P){ P._fsLeaving=true; P.destroy(); P=null; } fsExit(); BEAMER.an=false; document.body.classList.remove('beamer'); if(ED&&ED.api){ ED.api.destroy(); ED.api=null; } stopListening(); try{ speechSynthesis.cancel(); }catch(e){} }
 function render(){ const app=$('#app'); app.innerHTML=''; app.onclick=null; app.oninput=null; app.onchange=null; (SCREENS[view.name]||SCREENS.home)(app,view.params); }
 function wire(app,actions){ app.onclick=e=>{ const b=e.target.closest('[data-act]'); if(!b||!app.contains(b)) return; const fn=actions[b.dataset.act]; if(fn){ e.preventDefault(); fn(b,e); } }; }
 function kopf(title,{back,right='',sub=''}={}){ return `<div class="inner kopf" style="padding-left:max(16px,env(safe-area-inset-left,0px))">${back?`<a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a>`:''}<div class="schild"><h1>${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:''}</div><div class="kopf-rechts">${kindChip('schild-btn wer-chip')}${right}</div></div>`; }
@@ -345,10 +350,12 @@ function homeSchule(app,rid){ const r=RAEUME.find(x=>x.id===(rid||S.settings.rau
     <div class="v3-titel"><h1 class="v3-h1">${r.name}</h1>${w?`<button class="v3-weiter" data-act="weiter" data-id="${w.v.id}"><span class="bild" style="background:${soft(w.a)}"><img src="${GRAFIK}${w.a.id}.webp" alt=""></span><span class="txt"><small>Weiter mit</small><b>${esc(w.a.name)} · Schritt ${w.schritt}</b></span><span class="play" aria-hidden="true">▶</span></button>`:''}</div>
     ${k||!SCHULE?'':'<p class="v3-sub">Tipp oben auf deine Klasse – dann siehst du nur, was zu dir passt.</p>'}
     <div class="v3-themen">${themen.map(themaKachel).join('')+sammlungKachel(r)||`<div class="v3-leer">${figur('nachdenken')}Für diese Klasse ist hier noch nichts da.</div>`}</div>
+    ${schnellBand()}
     ${werkzeugKacheln()}
     ${v3Fuss(false)}</div></div>`;
   wire(app,{ raeume:()=>go(SCHULE?'raum':'home'), raum:b=>{ if(!SCHULE){ go('zimmer',{r:b.dataset.id}); return; } S.settings.raum=b.dataset.id; save(); render(); }, klasse:b=>{ S.settings.klasse=+b.dataset.k; save(); render(); },
-    area:b=>go('area',{id:b.dataset.id}), weiter:b=>go('player',{videoId:b.dataset.id}), katalog:()=>go('katalog'), sammlung:()=>go('sammlung'), lehrer:()=>go('lehrer'), werkzeuge:()=>go('werkzeuge'), gallery:()=>go('gallery') });
+    area:b=>go('area',{id:b.dataset.id}), weiter:b=>go('player',{videoId:b.dataset.id}), katalog:()=>go('katalog'), sammlung:()=>go('sammlung'), lehrer:()=>go('lehrer'), werkzeuge:()=>go('werkzeuge'), gallery:()=>go('gallery'),
+    restzeit:()=>go('restzeit'), fuehrerschein:()=>go('fuehrerschein') });
 }
 SCREENS.zimmer=(app,{r})=>homeSchule(app,r);   // Familie: Handarbeit oder Werkraum aus dem Regal
 function gruppenOf(vids){ const m=new Map(); videoOrdnung(vids).forEach(v=>{ const g=v.gruppe||'Weitere Projekte'; if(!m.has(g)) m.set(g,[]); m.get(g).push(v); });   // Projektart im Thema (schule.json «gruppe»)
@@ -470,13 +477,13 @@ SCREENS.anleitung=(app,{v,school})=>{
   const vorlageHtml=()=>vorlagenBox(v.vorlagen,bild);
   const vorlesen=s=>[s.text,...(s.achtung||[]).map(x=>'Achtung: '+x),...(s.tipp||[]).map(x=>'Tipp: '+x),s.frage?'Frage: '+s.frage:'',s.zeigen||''].filter(Boolean).join(' ');
   const zeichne=()=>{ const s=steps[i]; const gesperrt=s&&s.zeigen&&!pr.gesehen[i];
-    const kopfHtml=`<div class="v3-kopf"><button class="v3-rund gross" data-act="back" aria-label="Zurück">←</button><div class="v3-thema-titel"><small>${a?esc(a.name)+' · ':''}Foto-Anleitung</small><h1>${esc(v.title)}</h1></div><span class="grow"></span>${s?`<span class="v3-pill an-zahl">Schritt ${i+1} von ${n}</span>`:''}</div>`;
+    const kopfHtml=`<div class="v3-kopf"><button class="v3-rund gross" data-act="back" aria-label="Zurück">←</button><div class="v3-thema-titel"><small>${a?esc(a.name)+' · ':''}Foto-Anleitung</small><h1>${esc(v.title)}</h1></div><span class="grow"></span>${s?`<span class="v3-pill an-zahl">Schritt ${i+1} von ${n}</span>`:''}${SCHULE?`<button class="beamer-btn${BEAMER.an?' an':''}" data-act="beamer" aria-pressed="${BEAMER.an}" title="Beamer-Ansicht für die ganze Klasse">📽️<span>${BEAMER.an?'Beamer aus':'Beamer'}</span></button>`:''}</div>`;
     const balken=`<div class="an-balken" role="group" aria-label="Schritte">${steps.map((x,k)=>`<button data-act="geh" data-i="${k}" class="${k===i?'jetzt':k<=pr.max?'an':''}" ${k>pr.max?'disabled':''} aria-label="Schritt ${k+1}"></button>`).join('')}</div>`;
     let inhalt='';
     if(i<0){ const weiter=!pr.done&&pr.step>0;
       inhalt=`<div class="an-start"><div class="an-held"><img src="${esc(v.thumb||'')}" alt=""></div><div class="an-spalte">
         <p class="v3-sub" style="margin:0">${n} Schritte mit Fotos. Lies jeden Schritt, schau das Foto an und mach es nach.</p>
-        ${vorlageHtml()}
+        ${fsHinweisHtml(v)}${vorlageHtml()}
         <div class="an-nav">${weiter?`<button class="an-weiter" data-act="geh" data-i="${pr.step}">Weiter bei Schritt ${pr.step+1} →</button><button class="v3-pill" data-act="geh" data-i="0">Von vorne</button>`:`<button class="an-weiter" data-act="geh" data-i="0">Los geht's →</button>`}</div>
         ${(v.material||[]).length?`<div class="v3-karte"><h2>Du brauchst</h2><div class="v3-mat">${v.material.map(id=>`<div><span class="pik">${matIcon(id)}</span><b>${esc(matName(id))}</b></div>`).join('')}</div></div>`:''}</div></div>`; }
     else if(i>=n){ inhalt=`<div class="an-ende v3-karte">${figur('geschafft')}<h2>${esc(v.fertig||'Bravo! Geschafft.')}</h2>
@@ -491,16 +498,17 @@ SCREENS.anleitung=(app,{v,school})=>{
         ${s.zeigen?`<div class="an-box zeigen${gesperrt?'':' ok'}"><span class="sym" aria-hidden="true">👀</span><div><p>${esc(s.zeigen)}</p><button class="an-gesehen" data-act="gesehen" aria-pressed="${!gesperrt}">${gesperrt?'☐':'☑'} ${wer} hat es gesehen</button></div></div>`:''}
         <div class="an-nav"><button class="v3-pill" data-act="geh" data-i="${i-1}">← Zurück</button><button class="an-weiter" data-act="geh" data-i="${i+1}" ${gesperrt?'disabled':''}>${i===n-1?'Fertig ✓':'Weiter →'}</button></div>
         ${gesperrt?`<p class="an-hinweis">Erst zeigen, dann geht es weiter.</p>`:''}</div></div>`; }
-    app.innerHTML=`<div class="v3 an${schriftNormal()?'':' caps'}"><div class="v3-in">${kopfHtml}${i>=0&&i<n?balken:''}${inhalt}</div></div>`;
+    app.innerHTML=`<div class="v3 an${schriftNormal()?'':' caps'}${BEAMER.an?' beamer':''}"><div class="v3-in">${kopfHtml}${i>=0&&i<n?balken:''}${inhalt}</div></div>`;
     const ta=$('#an-antwort'); if(ta) ta.oninput=()=>{ pr.antworten[i]=ta.value; save(); };
     if(s&&S.settings.autoRead) speak(vorlesen(s)); };
   const geh=k=>{ k=Math.max(-1,Math.min(n,k)); try{ speechSynthesis.cancel(); }catch(e){}
-    if(k>=n){ if(!pr.done){ pr.done=true; confetti(); } pr.step=0; }
+    if(k>=n){ if(!pr.done){ pr.done=true; confetti(); } pr.step=0; planSetzen(v.id,1,true); }
     else if(k>=0){ pr.step=k; pr.max=Math.max(pr.max||0,k); }
     i=k; save(); zeichne(); window.scrollTo(0,0); };
   wire(app,{ back:()=>school||!a?go('home'):go('area',{id:a.id}),
     geh:b=>{ const k=+b.dataset.i; if(k>i&&k<n&&steps[i]&&steps[i].zeigen&&!pr.gesehen[i]) return; geh(k); },
     gesehen:()=>{ pr.gesehen[i]=!pr.gesehen[i]; save(); zeichne(); },
+    beamer:()=>{ BEAMER.an=!BEAMER.an; zeichne(); }, fuehrerschein:b=>go('fuehrerschein',{id:b.dataset.id,zurueck:{name:view.name,params:view.params}}),
     lies:()=>{ unlockTTS(); speak(vorlesen(steps[i])); },
     gross:b=>kidModal(`<img class="andere-gross" src="${esc(b.dataset.src)}" alt=""><div class="row center" style="margin-top:12px"><button class="kbtn ghost" data-close>Schliessen</button></div>`),
     foto:()=>takePhoto(v.id,()=>{ if(view.name==='anleitung'||view.name==='player'||view.name==='school') zeichne(); }),
@@ -514,7 +522,8 @@ SCREENS.player=(app,{videoId,school})=>{
   const steps=buildVideoSteps(v); const pr=school?{pos:0,step:0,done:false,slow:false}:prog(v.id);
   if(!school){ S.settings.zuletzt=v.id; save(); }
   app.innerHTML=`<div class="${kidClass('pl'+(S.settings.kino&&!school?' kino':''))}">${girlande(n)}
-    <div class="inner kopf pl-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a><div class="schild"><h1>${esc(v.title)}</h1></div><div class="kopf-rechts"><button type="button" class="fm-pill" data-act="melden" title="Fehler melden">${ico('flag')}<span>Fehler melden</span></button><span class="zettel" id="zettel"></span>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}</div></div>
+    <div class="inner kopf pl-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a><div class="schild"><h1>${esc(v.title)}</h1></div><div class="kopf-rechts">${SCHULE?`<button type="button" class="beamer-btn" data-act="beamer" aria-pressed="false" title="Beamer-Ansicht für die ganze Klasse">📽️<span>Beamer</span></button>`:''}<button type="button" class="fm-pill" data-act="melden" title="Fehler melden">${ico('flag')}<span>Fehler melden</span></button><span class="zettel" id="zettel"></span>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}</div></div>
+    ${fsHinweisHtml(v)}
     <div class="inner panes">
       <div class="pane"><div class="plabel"><i class="punkt" style="background:#4C6EF5"></i>Schau zu</div><div class="video-box"><div class="host" id="host"></div><div class="shield" id="shield" data-act="shield"></div><div class="overlay" id="overlay"></div><span class="modebadge" id="modebadge" hidden></span><span class="marke" id="marke" hidden><img src="${GRAFIK}figuren/logo.webp" alt=""><b>Stop <i>&amp;</i> Mach</b></span></div><div class="fuss"></div></div>
       <div class="pane"><div class="plabel"><i class="punkt" style="background:#E8554E"></i><span id="zettel2">Die Schritte</span></div><div class="schritte" id="schritte"></div></div>
@@ -528,7 +537,7 @@ SCREENS.player=(app,{videoId,school})=>{
     onState:s=>{ if(!P) return;
       if(s==='playing'){ P.needsTap=false; if(P.mode==='paused'||P.mode==='start'||P.mode==='buffering') P.mode='playing'; if(P.steps.length&&P.seekTarget!=null&&Date.now()-P.seekAt<6000&&Math.abs(P.api.time()-P.seekTarget)>3) seekTo(P.seekTarget); }
       else if(s==='paused'){ if(P.mode==='playing') P.mode='paused'; }
-      else if(s==='ended'){ P.mode='ended'; if(!school){ pr.pos=0; pr.step=0; } if(!(v.task&&v.task.text&&v.task.deliverable!=='keine')&&!school){ pr.done=true; } if(!school){ setTimeout(()=>{ const t=$('#task'); if(t&&!t.hidden) t.scrollIntoView({behavior:'smooth',block:'center'}); },300); } }
+      else if(s==='ended'){ P.mode='ended'; if(!school){ pr.pos=0; pr.step=0; } if(!(v.task&&v.task.text&&v.task.deliverable!=='keine')&&!school){ pr.done=true; } if(!school){ setTimeout(()=>{ const t=$('#task'); if(t&&!t.hidden) t.scrollIntoView({behavior:'smooth',block:'center'}); },300); } planSetzen(v.id,1,true); }
       updatePlayerUI(); },
     onError:()=>{ if(!P) return; P.err=true; P.mode='error'; updatePlayerUI(); }
   });
@@ -538,7 +547,8 @@ SCREENS.player=(app,{videoId,school})=>{
   wire(app,{
     back:()=>{ if(school) history.replaceState(null,'',location.pathname+location.search); go(a&&!school?'area':'home',a&&!school?{id:a.id}:{}); },
     shield:()=>{ const k=$('.kid.pl.liste'); if(k){ k.classList.remove('liste'); return; } if(P.mode==='playing') userPause(); else if(P.mode==='paused') userPlay(); else if(P.mode==='stepdone') nextStep(); },
-    melden:()=>fehlerMelden(), kino:()=>toggleKino(), liste:()=>{ const k=$('.kid.pl'); if(k) k.classList.toggle('liste'); },
+    melden:()=>fehlerMelden(), kino:()=>toggleKino(), liste:()=>{ const k=$('.kid.pl'); if(k) k.classList.toggle('liste'); }, beamer:()=>toggleBeamer(),
+    fuehrerschein:b=>go('fuehrerschein',{id:b.dataset.id,zurueck:{name:view.name,params:view.params}}),
     start:()=>startPlaying(false), resume:()=>startPlaying(true), play:()=>userPlay(), pause:()=>userPause(),
     toggle:()=>{ if(P.mode==='playing') userPause(); else if(P.mode==='paused') userPlay(); else if(P.mode==='material') nextStep(); else if(P.mode==='start') startPlaying(!!(pr.step||pr.pos>3)); else if(P.mode==='stepdone') nextStep(); else if(P.mode==='ended') startPlaying(false); },
     replay:()=>replayStep(), next:()=>nextStep(), prevstep:()=>{ if(P.idx>0){ P.idx--; jumpStep(); } }, nextstep:()=>{ if(P.idx<P.steps.length-1){ P.idx++; jumpStep(); } },
@@ -553,12 +563,12 @@ SCREENS.player=(app,{videoId,school})=>{
   if(S.settings.voiceControl) startListening();
 };
 function curStep(){ return P.steps[P.idx]; }
-function fitPlayer(){ const el=$('.kid.pl'); if(!el||el.classList.contains('kino')) return; const panes=$('.panes',el), pane=$('.pane',el); if(!panes||!pane) return; if(!matchMedia('(min-width:900px) and (min-height:540px)').matches){ el.style.removeProperty('--pl-avail'); return; } const lab=$('.plabel',pane), fuss=$('.fuss',pane); const h=panes.clientHeight-(lab?lab.offsetHeight+8:0)-(fuss?fuss.offsetHeight+8:0); el.style.setProperty('--pl-avail',Math.max(180,Math.floor(h))+'px'); }
+function fitPlayer(){ const el=$('.kid.pl'); if(!el||el.classList.contains('kino')||el.classList.contains('beamer')) return; const panes=$('.panes',el), pane=$('.pane',el); if(!panes||!pane) return; if(!matchMedia('(min-width:900px) and (min-height:540px)').matches){ el.style.removeProperty('--pl-avail'); return; } const lab=$('.plabel',pane), fuss=$('.fuss',pane); const h=panes.clientHeight-(lab?lab.offsetHeight+8:0)-(fuss?fuss.offsetHeight+8:0); el.style.setProperty('--pl-avail',Math.max(180,Math.floor(h))+'px'); }
 window.addEventListener('resize',()=>{ if(P) fitPlayer(); });
 function toggleKino(on){ const el=$('.kid.pl'); if(!el||(P&&P.school)) return; const want=on==null?!el.classList.contains('kino'):!!on; el.classList.toggle('kino',want); el.classList.remove('liste'); if(S.settings.kino!==want){ S.settings.kino=want; save(); } if(want) fsEnter(); else fsExit(); if(P) updatePlayerUI(); }
 function fsEnter(){ try{ const d=document.documentElement; if(document.fullscreenElement||document.webkitFullscreenElement) return; const f=d.requestFullscreen||d.webkitRequestFullscreen; if(f){ const r=f.call(d,{navigationUI:'hide'}); if(r&&r.catch) r.catch(()=>{}); } }catch(e){} }
 function fsExit(){ try{ if(document.fullscreenElement||document.webkitFullscreenElement){ const r=(document.exitFullscreen||document.webkitExitFullscreen).call(document); if(r&&r.catch) r.catch(()=>{}); } }catch(e){} }
-['fullscreenchange','webkitfullscreenchange'].forEach(ev=>document.addEventListener(ev,()=>{ if(!document.fullscreenElement&&!document.webkitFullscreenElement){ const el=$('.kid.pl.kino'); if(el&&P&&!P._fsLeaving){ el.classList.remove('kino','liste'); S.settings.kino=false; save(); updatePlayerUI(); } } }));
+['fullscreenchange','webkitfullscreenchange'].forEach(ev=>document.addEventListener(ev,()=>{ if(!document.fullscreenElement&&!document.webkitFullscreenElement){ const el=$('.kid.pl.kino'); if(el&&P&&!P._fsLeaving){ el.classList.remove('kino','liste'); S.settings.kino=false; save(); updatePlayerUI(); } if($('.kid.pl.beamer')&&P&&!P._fsLeaving) toggleBeamer(false); } }));
 function stepEnd(){ return P.idx<P.steps.length-1?P.steps[P.idx+1].t:Infinity; }
 function startPlaying(resume){ unlockTTS(); if($('.kid.pl.kino')) fsEnter(); if(!P.api.ready){ toast('Video lädt noch…',1200); return; }
   if(P.steps.length){ if(!resume) P.idx=P.steps[0].material?1:0; if(curStep().material){ jumpStep(); return; } seekTo(curStep().t); } else { seekTo(resume?P.pr.pos:0); }
@@ -648,7 +658,7 @@ function kindFertig(kd,fertig){
   bg.addEventListener('click',e=>{ if(e.target===bg) weiter(); },true);
 }
 function takePhoto(videoId,nachher){
-  const done=async b=>{ let star=false; const wer=await new Promise(nameUndKlasse); try{ star=await saveWork({type:'foto',blob:b,videoId,...wer}); }catch(e){ return; } confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Foto gespeichert!'); if(nachher) nachher(); else if(P) updatePlayerUI(); rmNachAbgabe(videoId); };
+  const done=async b=>{ let star=false; const wer=await new Promise(nameUndKlasse); try{ star=await saveWork({type:'foto',blob:b,videoId,...wer}); }catch(e){ return; } planSetzen(videoId,2,true); confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Foto gespeichert!'); if(nachher) nachher(); else if(P) updatePlayerUI(); rmNachAbgabe(videoId); };
   const inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.setAttribute('capture','environment');
   inp.onchange=()=>{ const f=inp.files[0]; if(!f) return; const img=new Image(); const u=URL.createObjectURL(f);
     img.onload=()=>{ const max=1400, sc=Math.min(1,max/Math.max(img.width,img.height)); const c=document.createElement('canvas'); c.width=Math.round(img.width*sc); c.height=Math.round(img.height*sc); c.getContext('2d').drawImage(img,0,0,c.width,c.height); URL.revokeObjectURL(u); c.toBlob(b=>done(b),'image/jpeg',.85); };
@@ -954,6 +964,7 @@ function uLaufen(){ if(U.timer) return;
 }
 /* Wohin darf diese Ansicht? null = erlaubt, sonst das Ziel. */
 function uRoute(name,params){ const p=uPolicy(); if(!p||p.mode==='free'||name==='unterricht'||name==='school'||name==='wer') return null;
+  if(name==='fuehrerschein'&&p.mode!=='closed') return null; if(name==='restzeit'&&p.mode==='projects') return null;
   if(name==='gallery') return p.gallery?null:{name:'unterricht',params:{}};
   if(p.mode==='projects'){ const id=params&&(params.videoId||(params.v&&params.v.id)); if((name==='player'||name==='anleitung')&&id&&p.ids.includes(id)) return null; }
   return {name:'unterricht',params:{}};
@@ -963,7 +974,7 @@ function uWechsel(){ const p=uPolicy(); const b=document.body.classList; b.toggl
   $$('.modal-bg').forEach(m=>m.remove()); try{ window.dispatchEvent(new Event('unterricht:leave')); }catch(e){}
   if(!view) return;
   if(!uAktiv()){ if(view.name==='unterricht') go('home'); else render(); return; }
-  if(p.mode==='projects'&&p.ids.length===1&&videoOf(p.ids[0])&&view.name!=='player'&&view.name!=='anleitung'){ go('player',{videoId:p.ids[0]}); return; }
+  if(p.mode==='projects'&&!p.plan&&p.ids.length===1&&videoOf(p.ids[0])&&view.name!=='player'&&view.name!=='anleitung'){ go('player',{videoId:p.ids[0]}); return; }
   const z=uRoute(view.name,view.params); if(z) go(z.name,z.params); else if(view.name!=='player'&&view.name!=='anleitung') render();
 }
 /* Wartebildschirm im Schul-Look: zeigt, was die Lehrperson gerade freigibt. */
@@ -972,7 +983,7 @@ SCREENS.unterricht=app=>{ const p=uPolicy(); if(!p){ go('home'); return; } const
     return `<button class="v3-lektion u-projekt${pr.done?'':' jetzt'}" data-act="video" data-id="${v.id}"><span class="th">${th?`<img src="${th}" alt="" loading="lazy">`:''}<i aria-hidden="true">${v.source.type==='bilder'?'📷':'▶'}</i></span><span class="grow"><b>${esc(v.title)}</b><span class="v3-meta">${[a?a.name:'',(v.steps||[]).length?v.steps.length+' Schritte':'',v.zeit?v.zeit+' Min.':''].filter(Boolean).join(' · ')}</span></span><span class="v3-badge ${pr.done?'fertig':'jetzt'}" aria-label="${pr.done?'fertig':'jetzt dran'}">${pr.done?'✓':'▶'}</span></button>`; };
   let inhalt='';
   if(p.mode==='projects'){ const vs=p.ids.map(videoOf).filter(Boolean);
-    inhalt=vs.length?`<div class="v3-liste u-liste">${vs.map(zeile).join('')}</div>`:`<div class="v3-leer">${figur('nachdenken')}Die Aufgabe ist noch nicht bereit.</div>`; }
+    inhalt=vs.length?(p.plan?`<div class="v3-liste u-liste plan-liste">${vs.map(planKarte).join('')}</div>`:`<div class="v3-liste u-liste">${vs.map(zeile).join('')}</div>`):`<div class="v3-leer">${figur('nachdenken')}Die Aufgabe ist noch nicht bereit.</div>`; }
   else if(p.mode==='templates'||p.mode==='beads'){ const perlen=p.mode==='beads'; const href=VORL_BASE+(perlen?'perlen/':'')+(k?'?klasse='+k:'');
     inhalt=`<div class="u-karte"><div class="bild" style="background:${perlen?'#F3E6F8':'#FBEDE4'}">${perlen?'📿':'✂️'}</div><div class="grow"><b>${perlen?'Perlentiere':'Vorlagen zum Ausdrucken'}</b><p>${perlen?'Such dir ein Perlentier aus und pass es an.':'Such dir eine Form aus und druck sie aus.'}</p><a class="v3-werkzeuge" href="${href}">${perlen?'📿 Perlentiere öffnen':'✂️ Vorlagen öffnen'}</a></div></div>`; }
   else if(p.mode==='free'){ go('home'); return; }
@@ -988,7 +999,7 @@ SCREENS.unterricht=app=>{ const p=uPolicy(); if(!p){ go('home'); return; } const
   const los=()=>{ clearTimeout(halten); halten=setTimeout(()=>{ tb.classList.remove('haelt'); confirmBox('Verbindung trennen?','Nur für die Lehrperson: Dieses iPad zeigt danach wieder alles.','Trennen',()=>{ U.verb=null; U.policy=null; uSpeichern(); toast('Verbindung getrennt'); uWechsel(); },true); },3000); tb.classList.add('haelt'); };
   const stop=()=>{ clearTimeout(halten); tb.classList.remove('haelt'); };
   tb.addEventListener('pointerdown',los); ['pointerup','pointerleave','pointercancel'].forEach(ev=>tb.addEventListener(ev,stop));
-  wire(app,{ video:b=>go('player',{videoId:b.dataset.id}), gallery:()=>go('gallery'), trennen:()=>{} });
+  wire(app,{ video:b=>go('player',{videoId:b.dataset.id}), gallery:()=>go('gallery'), trennen:()=>{}, ...planAktionen(app) });
 };
 
 /* ============================== Verbindungen der Schul-iPads (Rückmeldungen, Unsere Werke) ==============================
@@ -1244,6 +1255,128 @@ SCREENS.sammlung=(app,params={})=>{ let niv=+params.niveau||0; const alle=!!para
   wire(app,{ back:()=>go('home'), niv:b=>{ niv=+b.dataset.v||0; $$('[data-act=niv]',app).forEach(x=>x.classList.toggle('an',x.dataset.v===b.dataset.v)); zeichnen(); }, alle:b=>go('sammlung',{niveau:niv,alle:!!b.dataset.v}),
     video:b=>go('player',{videoId:b.dataset.id}), gallery:()=>go('gallery'), lehrer:()=>go('lehrer'), werkzeuge:()=>go('werkzeuge') });
 };
+
+/* ============================== Schule: Restzeit, Führerschein, Beamer, Lektionsplan ============================== */
+/* Schnellzugriff auf der Raum-Seite (nur Schule). Im Unterrichtsmodus «closed» kommt die Seite gar nicht dran; sicherheitshalber trotzdem prüfen. */
+function schnellBand(){ if(!SCHULE) return ''; const p=uPolicy(); if(p&&p.mode==='closed') return '';
+  const fs=fsStand(); const n=FUEHRERSCHEINE.filter(f=>fs[f.id]&&fs[f.id].gesehen).length;
+  return `<div class="v3-schnell"><button class="v3-schnell-btn zeit" data-act="restzeit"><span class="sym" aria-hidden="true">⏱️</span><span class="txt"><b>Ich habe noch 10 Minuten</b><small>Kurze Projekte für die Restzeit</small></span></button>
+    <button class="v3-schnell-btn fs" data-act="fuehrerschein"><span class="sym" aria-hidden="true">🪪</span><span class="txt"><b>Werkzeug-Führerschein</b><small>${n?n+' von '+FUEHRERSCHEINE.length+' gemacht':'Schnitzen, Sägen, Heissleim'}</small></span></button></div>`; }
+
+/* ---- «Ich habe noch 10 Minuten»: alle Videos mit zeit ≤ gewählte Minuten, über alle Verfahren, nach Klasse gefiltert ---- */
+const RESTZEIT_WAHL=[5,10,15,20];
+SCREENS.restzeit=(app,params={})=>{ let min=RESTZEIT_WAHL.includes(+params.min)?+params.min:10; const k=S.settings.klasse; const p=uPolicy();
+  app.innerHTML=`<div class="v3${schriftNormal()?'':' caps'} restzeit"><div class="v3-in">
+    ${v3Kopf('<button class="v3-rund gross" data-act="back" aria-label="Zurück">←</button>',`<div class="v3-thema-titel"><small>Kurze Projekte</small><h1>Ich habe noch …</h1></div>`)}
+    <div class="rz-wahl" role="group" aria-label="Minuten">${RESTZEIT_WAHL.map(m=>`<button class="rz-min${m===min?' an':''}" data-act="min" data-m="${m}" aria-pressed="${m===min}"><b>${m}</b><small>Minuten</small></button>`).join('')}</div>
+    <p class="v3-sub" id="rz-zahl" role="status"></p>
+    <div class="v3-liste" id="rz-liste"></div>
+    ${v3Fuss(false)}</div></div>`;
+  const zeichnen=()=>{ let vs=S.videos.filter(v=>v.zeit&&v.zeit<=min&&fuerKlasse(v)); if(p&&p.mode==='projects') vs=vs.filter(v=>p.ids.includes(v.id));
+    vs.sort((a,b)=>(a.zeit-b.zeit)||((+a.niveau||2)-(+b.niveau||2))||a.title.localeCompare(b.title,'de'));
+    $('#rz-liste',app).innerHTML=vs.map(v=>{ const th=thumbOf(v); const a=areaOf(v.areaId); const pr=prSchule(v);
+      return `<button class="v3-lektion rz-zeile" data-act="video" data-id="${v.id}"><span class="th">${th?`<img src="${th}" alt="" loading="lazy">`:''}<i aria-hidden="true">${v.source.type==='bilder'?'📷':'▶'}</i></span><span class="grow"><b>${esc(v.title)}</b><span class="v3-meta">${[a?a.name:'',(v.steps||[]).length?v.steps.length+' Schritte':''].filter(Boolean).join(' · ')}</span></span><span class="rz-zeit" aria-label="${v.zeit} Minuten">⏱ ${v.zeit}<small>Min.</small></span><span class="v3-badge ${pr.done?'fertig':'offen'}" aria-hidden="true">${pr.done?'✓':'▶'}</span></button>`; }).join('')
+      ||`<div class="v3-leer">${figur('nachdenken')}So kurz ist hier nichts${k?' für die '+k+'. Klasse':''}.<br>Wähl mehr Minuten.</div>`;
+    $('#rz-zahl',app).textContent=vs.length?(vs.length===1?'Ein Projekt':vs.length+' Projekte')+' bis '+min+' Minuten':''; view.params.min=min; };
+  zeichnen();
+  wire(app,{ back:()=>go(p&&p.mode==='projects'?'unterricht':'home'), min:b=>{ min=+b.dataset.m; $$('[data-act=min]',app).forEach(x=>{ const an=+x.dataset.m===min; x.classList.toggle('an',an); x.setAttribute('aria-pressed',String(an)); }); zeichnen(); },
+    video:b=>go('player',{videoId:b.dataset.id}), gallery:()=>go('gallery'), lehrer:()=>go('lehrer') });
+};
+
+/* ---- Werkzeug-Führerschein: kleines Quiz vor gefährlichen Werkzeugen ----
+   Frage: {f, a:[3 Antworten], r: Index der richtigen, e: einfacher Text für 1.–2. Klasse (optional)}.
+   Stand in S.settings.fuehrerschein[id] = {datum, gesehen} – bleibt auf dem Gerät wie die Klasse. */
+const FUEHRERSCHEINE=[
+ {id:'schnitzen',titel:'Schnitzmesser',emoji:'🔪',farbe:'#EEF3E2',regex:/schnitz|messer/i,fragen:[
+   {f:'In welche Richtung schnitzt du?',e:'Wohin schnitzt du?',a:['Immer vom Körper weg','Zu mir hin, so sehe ich besser','Egal, Hauptsache schnell'],r:0},
+   {f:'Wie weit sitzt du von anderen Kindern weg?',e:'Wie weit weg sitzt du von den anderen?',a:['Ganz nah, dann können wir reden','Mindestens einen Arm weit – Sicherheitsabstand','Das ist egal'],r:1},
+   {f:'Wie hältst du das Messer?',a:['Mit zwei Fingern an der Klinge','Locker, dann tut es nicht weh','Mit der ganzen Hand fest am Griff'],r:2},
+   {f:'Wann darfst du schnitzen?',a:['Nur im Sitzen und ganz ruhig','Auch im Gehen','Wenn ich schnell bin, immer'],r:0},
+   {f:'Was trägst du an der Hand, die das Holz hält?',e:'Was kommt an die Hand mit dem Holz?',a:['Nichts','Den Schnitzhandschuh','Einen Ring'],r:1},
+   {f:'Was machst du mit dem Messer, wenn du fertig bist?',e:'Du bist fertig. Wohin mit dem Messer?',a:['Offen auf den Tisch legen','Einem Kind zuwerfen','Zuklappen oder in die Hülle stecken'],r:2}]},
+ {id:'saegen',titel:'Laubsäge & Feinsäge',emoji:'🪚',farbe:'#FFF1E6',regex:/säg|saeg/i,fragen:[
+   {f:'Wie muss das Holz liegen, bevor du sägst?',e:'Wie liegt das Holz beim Sägen?',a:['Lose auf dem Tisch','Fest eingespannt mit Zwinge oder Laubsägetisch','Ich halte es in der Luft'],r:1},
+   {f:'Wohin zeigen die Zähne des Laubsägeblatts?',e:'Wohin zeigen die Zähne vom Sägeblatt?',a:['Nach unten zum Griff','Nach oben, weg vom Griff','Das ist egal'],r:0},
+   {f:'Wie sägst du richtig?',a:['Ganz schnell hin und her','Mit viel Kraft drücken','Ruhig auf und ab – die Säge arbeitet, nicht du'],r:2},
+   {f:'Wo ist die Hand, die das Holz hält?',a:['Weit weg vom Sägeblatt, nie davor','Direkt vor dem Sägeblatt','Unter dem Holz'],r:0},
+   {f:'Das Sägeblatt ist gerissen. Was machst du?',e:'Das Sägeblatt ist kaputt. Was machst du?',a:['Einfach weitersägen','Der Lehrperson sagen, dann Blatt wechseln','Heimlich wegwerfen'],r:1}]},
+ {id:'heissleim',titel:'Heissleimpistole',emoji:'♨️',farbe:'#FDEFF4',regex:/heissleim|heisskleb/i,fragen:[
+   {f:'Wo steht die Heissleimpistole, wenn du sie nicht brauchst?',e:'Wohin kommt die Pistole, wenn du sie nicht brauchst?',a:['Liegend auf dem Tisch','In meiner Hand','Auf ihrem Ständer, auf einer Unterlage'],r:2},
+   {f:'Was darfst du nie anfassen?',a:['Die Düse und den frischen Leim','Den Griff','Den Stecker'],r:0},
+   {f:'Du hast heissen Leim am Finger. Was machst du zuerst?',e:'Heisser Leim am Finger! Was tust du zuerst?',a:['Pusten und weiterarbeiten','Sofort unter kaltes Wasser und der Lehrperson sagen','Den Leim abkratzen'],r:1},
+   {f:'Wie viel Leim drückst du heraus?',a:['Ganz viel, dann hält es besser','Mit dem Finger verteilen','Nur kleine Punkte – so viel, wie du brauchst'],r:2},
+   {f:'Wer schaltet die Pistole ein?',a:['Ich, wann ich will','Die Lehrperson – oder du nur mit Erlaubnis','Irgendein Kind'],r:1}]}];
+const fsStand=()=>S.settings.fuehrerschein||(S.settings.fuehrerschein={});
+const fsVon=id=>FUEHRERSCHEINE.find(f=>f.id===id);
+const fsGesehen=id=>!!(fsStand()[id]&&fsStand()[id].gesehen);
+/* Welche Führerscheine braucht dieses Video? Sucht in Techniken, Material und Titel. */
+function fsNoetig(v){ if(!SCHULE||!v) return []; const txt=[v.title,...(v.techniken||[]),...(v.material||[]),...(v.material||[]).map(matName)].filter(Boolean).join(' '); return FUEHRERSCHEINE.filter(f=>f.regex.test(txt)); }
+function fsHinweisHtml(v){ const offen=fsNoetig(v).filter(f=>!fsGesehen(f.id)); if(!offen.length) return '';
+  return `<div class="inner fs-hinweis" role="note"><span class="sym" aria-hidden="true">🪪</span><span class="grow"><b>Zuerst den Führerschein machen</b><span>${esc(offen.map(f=>f.titel).join(' und '))}</span></span>${offen.map(f=>`<button class="fs-los" data-act="fuehrerschein" data-id="${f.id}">${f.emoji} ${esc(f.titel)} →</button>`).join('')}</div>`; }
+SCREENS.fuehrerschein=(app,params={})=>{ const f=fsVon(params.id); const zur=params.zurueck||null; const einfach=SCHULE&&S.settings.klasse&&S.settings.klasse<=2;
+  const zurueck=()=>zur&&zur.name?go(zur.name,zur.params||{}):go(uPolicy()&&uPolicy().mode==='projects'?'unterricht':'home');
+  const kopf=(titel,sub)=>v3Kopf('<button class="v3-rund gross" data-act="back" aria-label="Zurück">←</button>',`<div class="v3-thema-titel"><small>${sub}</small><h1>${titel}</h1></div>`);
+  if(!f){ const st=fsStand();
+    app.innerHTML=`<div class="v3${schriftNormal()?'':' caps'} fs"><div class="v3-in">${kopf('Werkzeug-Führerschein','Erst wissen, dann werken')}
+      <p class="v3-sub">Beantworte die Fragen richtig und zeig es der Lehrperson. Danach darfst du mit dem Werkzeug arbeiten.</p>
+      <div class="fs-karten">${FUEHRERSCHEINE.map(x=>{ const s=st[x.id]||{}; const stand=s.gesehen?'gesehen':s.datum?'bestanden':'offen';
+        return `<button class="fs-karte ${stand}" data-act="quiz" data-id="${x.id}" style="--f:${x.farbe}"><span class="bild" aria-hidden="true">${x.emoji}</span><b>${esc(x.titel)}</b><span class="fs-stand">${stand==='gesehen'?'✓ Von der Lehrperson gesehen'+(s.datum?' · '+dateDE(s.datum):''):stand==='bestanden'?'Quiz geschafft – noch zeigen':x.fragen.length+' Fragen · noch offen'}</span></button>`; }).join('')}</div>
+      ${v3Fuss(false)}</div></div>`;
+    wire(app,{ back:zurueck, quiz:b=>go('fuehrerschein',{id:b.dataset.id,zurueck:zur}), gallery:()=>go('gallery'), lehrer:()=>go('lehrer') });
+    return; }
+  let i=0, gewaehlt=null, richtig=false; const n=f.fragen.length; const s=fsStand()[f.id]||{};
+  const zeichne=()=>{ const q=f.fragen[i]; const fertig=i>=n;
+    const balken=`<div class="an-balken fs-balken" aria-label="Fragen">${f.fragen.map((x,k)=>`<span class="${k<i||fertig?'an':k===i?'jetzt':''}"></span>`).join('')}</div>`;
+    let inhalt='';
+    if(fertig){ const st=fsStand()[f.id]||{}; const ok=!!st.gesehen;
+      inhalt=`<div class="fs-ende v3-karte">${figur(ok?'geschafft':'material')}<h2>${ok?'Bravo! Du hast den Führerschein.':'Alle Fragen richtig!'}</h2>
+        <p class="v3-sub">${ok?'Du darfst mit dem Werkzeug arbeiten. Halte dich an die Regeln.':'Zeig das jetzt deiner Lehrperson. Sie tippt auf den Knopf.'}</p>
+        <div class="an-box zeigen${ok?' ok':''} fs-zeigen"><span class="sym" aria-hidden="true">👀</span><div><p>${ok?'Gesehen am '+dateDE(st.datum||Date.now())+'.':'Nur die Lehrperson tippt hier.'}</p><button class="an-gesehen fs-gesehen" data-act="gesehen" aria-pressed="${ok}">${ok?'☑':'☐'} Die Lehrperson hat es gesehen ✓</button></div></div>
+        <div class="an-nav mitte">${ok?`<button class="an-weiter" data-act="back">${zur&&zur.name?'Weiter zum Video →':'Fertig'}</button>`:''}<button class="v3-pill" data-act="nochmal">Nochmal üben</button></div></div>`; }
+    else { inhalt=`<div class="fs-frage"><div class="fs-nr">Frage ${i+1} von ${n}</div><h2>${esc(einfach&&q.e?q.e:q.f)}</h2>
+        <div class="fs-antworten">${q.a.map((t,k)=>`<button class="fs-antwort${gewaehlt===k?(k===q.r?' richtig':' falsch'):''}${richtig&&k!==q.r?' aus':''}" data-act="antwort" data-k="${k}" ${richtig?'disabled':''}><span class="buchstabe" aria-hidden="true">${gewaehlt===k?(k===q.r?'✓':'✗'):'ABC'[k]}</span><span>${esc(t)}</span></button>`).join('')}</div>
+        <div class="fs-feedback${gewaehlt==null?'':richtig?' gut':' nein'}" role="status" aria-live="polite">${gewaehlt==null?'Tipp auf die richtige Antwort.':richtig?'Richtig! Gut gemerkt.':'Das stimmt nicht. Überleg nochmal und probier es wieder.'}</div>
+        <div class="an-nav mitte">${richtig?`<button class="an-weiter" data-act="weiter">${i===n-1?'Fertig ✓':'Nächste Frage →'}</button>`:''}</div></div>`; }
+    app.innerHTML=`<div class="v3${schriftNormal()?'':' caps'} fs"><div class="v3-in">${kopf(f.titel,'Werkzeug-Führerschein')}${balken}${inhalt}</div></div>`; };
+  wire(app,{ back:()=>{ if(i>=n&&zur&&zur.name&&fsGesehen(f.id)) zurueck(); else go('fuehrerschein',{zurueck:zur}); },
+    antwort:b=>{ if(richtig) return; gewaehlt=+b.dataset.k; richtig=gewaehlt===f.fragen[i].r; zeichne(); if(richtig&&S.settings.autoRead) speak('Richtig!'); },
+    weiter:()=>{ if(!richtig) return; i++; gewaehlt=null; richtig=false; if(i>=n){ const st=fsStand(); const alt=st[f.id]||{}; st[f.id]={datum:alt.gesehen?alt.datum:Date.now(),gesehen:!!alt.gesehen}; save(); confetti(); } zeichne(); window.scrollTo(0,0); },
+    gesehen:()=>{ const st=fsStand(); const alt=st[f.id]||{}; st[f.id]={datum:Date.now(),gesehen:!alt.gesehen}; save(); if(st[f.id].gesehen){ confetti(); toast('Führerschein bestanden!'); } zeichne(); },
+    nochmal:()=>{ i=0; gewaehlt=null; richtig=false; zeichne(); } });
+  if(s.gesehen&&!params.neu) i=n;   // schon bestanden: direkt die Karte zeigen
+  zeichne();
+};
+
+/* ---- Beamer-Ansicht: Video gross, Schritte in grosser Schrift für die ganze Klasse (nur Schule) ---- */
+const BEAMER={an:false};
+function toggleBeamer(on){ const el=$('.kid.pl'); if(!el) return; const want=on==null?!el.classList.contains('beamer'):!!on; el.classList.toggle('beamer',want); el.classList.remove('kino','liste'); document.body.classList.toggle('beamer',want);
+  const b=$('.beamer-btn',el); if(b){ b.setAttribute('aria-pressed',String(want)); b.classList.toggle('an',want); const t=$('span',b); if(t) t.textContent=want?'Beamer aus':'Beamer'; }
+  if(want) fsEnter(); else fsExit(); if(P) updatePlayerUI(); if(!want) setTimeout(fitPlayer,50); }
+document.addEventListener('keydown',e=>{ if(e.key!=='Escape') return; if($('.kid.pl.beamer')) toggleBeamer(false); else if(BEAMER.an){ BEAMER.an=false; render(); } });
+
+/* ---- Lektionsplan (Unterrichtsmodus «projects» mit plan:true): Material richten → Video schauen → Foto/Fertig ----
+   Haken bleiben auf diesem Gerät in S.settings.lektionsplan[videoId] = {s:[bool,bool,bool], mat:{materialId:true}}.
+   Jede Änderung geht gebündelt (1 s) an den Worker: POST /unterricht/fortschritt {token, geraet, videoId, schritte}. Fehler sind egal. */
+const PLAN_SCHRITTE=[['🧺','Material richten'],['▶','Video schauen'],['📷','Foto machen']];
+const planAktiv=()=>{ const p=uPolicy(); return !!(p&&p.plan&&p.mode==='projects'); };
+function planVon(id){ const alle=S.settings.lektionsplan||(S.settings.lektionsplan={}); const e=alle[id]||(alle[id]={s:[false,false,false],mat:{}}); if(!Array.isArray(e.s)||e.s.length!==3) e.s=[false,false,false]; if(!e.mat||typeof e.mat!=='object') e.mat={}; return e; }
+function planSetzen(id,schritt,wert){ if(!SCHULE||!id||!planAktiv()) return; const e=planVon(id); if(e.s[schritt]===!!wert) return; e.s[schritt]=!!wert; save(); planMelden(id); if(view.name==='unterricht') render(); }
+const PLAN_MELD={timer:{}};
+function planMelden(id){ if(!uAktiv()) return; clearTimeout(PLAN_MELD.timer[id]); PLAN_MELD.timer[id]=setTimeout(()=>{ const verb=U.verb; if(!verb) return; const e=planVon(id);
+  try{ fetch(SCHRITTLI_API+'/unterricht/fortschritt',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+verb.token},body:JSON.stringify({token:verb.token,geraet:verb.deviceId,videoId:id,schritte:e.s.slice()}),keepalive:true,cache:'no-store',credentials:'omit'}).catch(()=>{}); }catch(err){} },1000); }
+function planKarte(v){ const e=planVon(v.id); const th=thumbOf(v); const a=areaOf(v.areaId); const mat=(v.material||[]).filter(Boolean); const n=e.s.filter(Boolean).length; const jetzt=e.s.indexOf(false); const alleMat=mat.length&&mat.every(id=>e.mat[id]);
+  const ring=`<span class="plan-ring${n===3?' voll':''}" aria-label="${n} von 3 Schritten"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20"/><circle cx="24" cy="24" r="20" class="f" style="stroke-dasharray:${Math.round(125.66*n/3)} 126"/></svg><b>${n}/3</b></span>`;
+  const schritt=(k,inhalt,knopf)=>`<li class="plan-schritt${e.s[k]?' erledigt':jetzt===k?' jetzt':''}"><span class="plan-nr" aria-hidden="true">${e.s[k]?'✓':['①','②','③'][k]}</span><div class="plan-body"><b>${PLAN_SCHRITTE[k][0]} ${PLAN_SCHRITTE[k][1]}</b>${inhalt}</div>${knopf}</li>`;
+  const hakenBtn=(k,txt)=>`<button class="plan-haken${e.s[k]?' an':''}" data-act="plan" data-id="${v.id}" data-k="${k}" aria-pressed="${e.s[k]}">${e.s[k]?'✓ Erledigt':txt}</button>`;
+  return `<div class="plan-karte v3-karte" data-video="${v.id}"><div class="plan-kopf"><button class="v3-lektion plan-video" data-act="video" data-id="${v.id}"><span class="th">${th?`<img src="${th}" alt="" loading="lazy">`:''}<i aria-hidden="true">${v.source.type==='bilder'?'📷':'▶'}</i></span><span class="grow"><b>${esc(v.title)}</b><span class="v3-meta">${[a?a.name:'',(v.steps||[]).length?v.steps.length+' Schritte':'',v.zeit?v.zeit+' Min.':''].filter(Boolean).join(' · ')}</span></span></button>${ring}</div>
+    <ol class="plan-schritte">
+      ${schritt(0,mat.length?`<div class="plan-mat">${mat.map(id=>`<label class="plan-matitem${e.mat[id]?' an':''}"><input type="checkbox" data-plan-mat="${id}" data-id="${v.id}" ${e.mat[id]?'checked':''}><span class="pik">${matIcon(id,false)}</span><span>${esc(matName(id))}</span></label>`).join('')}</div>`:'<span class="v3-meta">Kein Material nötig.</span>',hakenBtn(0,alleMat?'Alles da ✓':'Alles da'))}
+      ${schritt(1,`<span class="v3-meta">Schau das Video Schritt für Schritt. Am Ende ist das hier von selbst erledigt.</span>`,`<span class="plan-knoepfe"><button class="plan-haken geh" data-act="video" data-id="${v.id}">▶ Video öffnen</button>${hakenBtn(1,'Geschaut')}</span>`)}
+      ${schritt(2,`<span class="v3-meta">Mach ein Foto von deinem Werk – oder tipp auf Fertig.</span>`,`<span class="plan-knoepfe"><button class="plan-haken geh" data-act="planfoto" data-id="${v.id}">📷 Foto</button>${hakenBtn(2,'Fertig')}</span>`)}
+    </ol></div>`; }
+function planAktionen(app){ app.onchange=e=>{ const cb=e.target.closest('[data-plan-mat]'); if(!cb) return; const el=planVon(cb.dataset.id); el.mat[cb.getAttribute('data-plan-mat')]=cb.checked; const lab=cb.closest('.plan-matitem'); if(lab) lab.classList.toggle('an',cb.checked); const v=videoOf(cb.dataset.id); const mat=(v&&v.material||[]).filter(Boolean); const alle=mat.length&&mat.every(id=>el.mat[id]); save(); if(alle&&!el.s[0]) planSetzen(cb.dataset.id,0,true); else if(!alle&&el.s[0]) planSetzen(cb.dataset.id,0,false); };
+  return { plan:b=>{ const e=planVon(b.dataset.id); planSetzen(b.dataset.id,+b.dataset.k,!e.s[+b.dataset.k]); if(e.s.every(Boolean)) confetti(); },
+    planfoto:b=>takePhoto(b.dataset.id,()=>{ if(view.name==='unterricht') render(); }) }; }
 
 fmKnopf();
 boot();

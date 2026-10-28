@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Schritt für Schritt · Klassen-Werkzeuge</title>
+<meta name="description" content="Arbeitszeit-Timer, Aufräum-Countdown und Lärmampel für den Beamer im TTG-Unterricht. Grosse Ziffern, läuft ohne Server auf dem iPad und am PC.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap">
+<style>
+:root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--gruen:#2EA84A;--orange:#F08A24;--rot:#D7352E;--gehaeuse:#1C2430;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;--gruen:#3DCB5E;--orange:#F5A040;--rot:#F04A3E;--gehaeuse:#070B12;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;--gruen:#3DCB5E;--orange:#F5A040;--rot:#F04A3E;--gehaeuse:#070B12;color-scheme:dark}
+*{box-sizing:border-box}
+html{height:100%}
+body{margin:0;min-height:100%;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif;-webkit-text-size-adjust:100%;overflow-x:hidden}
+h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
+h1{font-size:28px}
+h2{font-size:18px;margin-bottom:10px}
+a{color:var(--acc)}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.kopf{width:100%;max-width:1400px;margin:0 auto;padding:20px 16px 4px}
+.kopf p{margin:4px 0 0;color:var(--muted)}
+/* Reiter oben: Chips wie auf den andern Vorlagen-Seiten, rechts der Vollbild-Knopf */
+.nav{width:100%;max-width:1400px;margin:0 auto;padding:8px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:14px;padding:6px 12px;border-radius:999px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
+.chip:hover,.kasten:hover,.knopf:hover{border-color:var(--acc)}
+.nav .chip{font-size:17px;padding:8px 16px;font-weight:700}
+.vollbild-knopf{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:700;padding:8px 14px;border-radius:12px;border:2px solid var(--line);background:var(--surface);color:var(--ink)}
+.vollbild-knopf svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+main{flex:1;display:flex;flex-direction:column;width:100%;max-width:1400px;margin:0 auto;padding:4px 16px 24px}
+.tafel{display:none;flex:1;flex-direction:column;gap:14px}
+.tafel.aktiv{display:flex}
+.karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
+.zeile{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px}
+.chip.zeit{font-size:clamp(17px,2.2vw,24px);padding:10px 18px;font-weight:700;font-family:Fredoka,Nunito,sans-serif}
+.eigen{display:inline-flex;align-items:center;gap:4px;margin-left:8px}
+.eigen .knopf{min-width:52px;min-height:46px;font-size:24px;padding:0 12px}
+.knopf{font:700 18px/1 Nunito,system-ui,sans-serif;padding:12px 18px;border-radius:14px;border:2px solid var(--line);background:var(--surface2);color:var(--ink)}
+.knopf.gross{min-height:68px;min-width:160px;font:600 clamp(20px,2.4vw,28px)/1 Fredoka,Nunito,sans-serif;padding:14px 28px}
+.knopf.haupt{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.knopf.haupt:hover{filter:brightness(1.08)}
+.knopf[hidden]{display:none}
+/* Die Bühne: Ziffern so gross, dass man sie aus 8 Metern liest */
+.buehne{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(8px,2vh,22px);text-align:center;padding:10px 0}
+.ziffern{font:600 min(27vw,40vh)/1 Fredoka,Nunito,sans-serif;letter-spacing:.01em;color:var(--ink);white-space:nowrap;transition:color .4s}
+.ziffern span{display:inline-block;width:.6em;text-align:center}
+.ziffern span.dp{width:.28em}
+.rot .ziffern{color:var(--rot)}
+.orange .ziffern{color:var(--orange)}
+.fertig .ziffern{color:var(--rot);animation:wackeln .8s ease-in-out infinite alternate}
+@keyframes wackeln{from{transform:scale(1)}to{transform:scale(1.04)}}
+.balken{width:min(100%,1100px);height:clamp(18px,4.5vh,44px);background:var(--line);border-radius:999px;overflow:hidden}
+.balken i{display:block;height:100%;width:100%;background:var(--gruen);border-radius:inherit;transition:width .3s linear,background .5s}
+.orange .balken i{background:var(--orange)}
+.rot .balken i{background:var(--rot)}
+.meldung{font:600 clamp(28px,6vw,72px)/1.15 Fredoka,Nunito,sans-serif;color:var(--rot)}
+.meldung[hidden]{display:none}
+.ziel{width:min(100%,900px);font:700 clamp(20px,4vw,44px)/1.2 Nunito,system-ui,sans-serif;text-align:center;border:0;border-bottom:3px dashed var(--line);background:transparent;color:var(--ink);padding:6px 12px}
+.ziel::placeholder{color:var(--muted);opacity:.7;font-weight:600}
+.ziel:focus{border-bottom-color:var(--acc);outline:none}
+.hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
+.schaltung{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+/* Blitzen, wenn die Zeit um ist */
+@keyframes blitz{0%,100%{background:var(--bg)}50%{background:var(--rot)}}
+body.blitz{animation:blitz .7s ease-in-out 4}
+/* Aufräumen: schiefe, lustige Ziffern und grosse Kästchen zum Abhaken */
+.lustig .ziffern{color:var(--acc);transform:rotate(-3deg);text-shadow:.03em .03em 0 var(--line);font-size:min(24vw,34vh)}
+.lustig.orange .ziffern{color:var(--orange)}
+.lustig.rot .ziffern{color:var(--rot)}
+.liste{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px;width:100%}
+.kasten{display:flex;align-items:center;gap:16px;min-height:84px;padding:12px 18px;border:3px solid var(--line);border-radius:18px;background:var(--surface);color:var(--ink);text-align:left;font:700 clamp(20px,2.4vw,34px)/1.15 Nunito,system-ui,sans-serif}
+.kasten .hak{flex:none;width:1.5em;height:1.5em;border:3px solid var(--muted);border-radius:.4em;display:grid;place-items:center;color:#fff;font-size:1em}
+.kasten .hak svg{width:70%;height:70%;fill:none;stroke:currentColor;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;display:none}
+.kasten[aria-pressed="true"]{border-color:var(--gruen);background:var(--acc-soft);color:var(--muted);text-decoration:line-through}
+.kasten[aria-pressed="true"] .hak{background:var(--gruen);border-color:var(--gruen)}
+.kasten[aria-pressed="true"] .hak svg{display:block}
+.bearbeiten .kasten{cursor:default;text-decoration:none;color:var(--ink);background:var(--surface2)}
+.bearbeiten .kasten .hak{display:none}
+.kasten input{flex:1;min-width:0;font:inherit;border:2px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);padding:4px 10px}
+.kasten .weg{flex:none;width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:var(--surface);font-size:22px;line-height:1;padding:0}
+.liste-kopf{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.liste-kopf h2{margin:0}
+.feier{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;background:color-mix(in srgb,var(--bg) 88%,transparent);padding:20px;cursor:pointer;overflow:hidden}
+.feier[hidden]{display:none}
+.feier b{font:600 clamp(40px,10vw,140px)/1.05 Fredoka,Nunito,sans-serif;color:var(--acc)}
+.feier span{font-size:clamp(20px,3vw,40px);color:var(--ink)}
+.feier i{position:absolute;top:-20px;width:14px;height:22px;border-radius:3px;animation:fallen linear forwards}
+@keyframes fallen{to{transform:translateY(110vh) rotate(720deg)}}
+/* Breit: Ziffern links, Aufgabenliste rechts – alles ohne Scrollen auf dem Beamer */
+@media (min-width:1100px){
+  #t-aufraeumen.aktiv{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);grid-template-rows:auto 1fr auto;grid-template-areas:"zeiten liste" "buehne liste" "schaltung liste";column-gap:24px}
+  #auf-zeiten{grid-area:zeiten}#t-aufraeumen .buehne{grid-area:buehne;flex:1 1 auto!important}#t-aufraeumen .schaltung{grid-area:schaltung}#auf-karte{grid-area:liste;align-self:center}
+  #auf-karte .liste{grid-template-columns:1fr}
+  .lustig .ziffern,body.vollbild .lustig .ziffern{font-size:min(16vw,34vh)}
+}
+/* Lärmampel */
+.laerm-raum{flex:1;display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(16px,4vw,56px);align-items:center;justify-items:center}
+.ampel{--a:min(22vw,20vh);display:flex;flex-direction:column;gap:calc(var(--a)*.14);padding:calc(var(--a)*.16);background:var(--gehaeuse);border-radius:calc(var(--a)*.32);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.licht{width:var(--a);height:var(--a);border-radius:50%;background:#2A3340;opacity:.3;transition:opacity .25s,box-shadow .25s}
+.licht.rot{color:var(--rot)}.licht.orange{color:var(--orange)}.licht.gruen{color:var(--gruen)}
+.licht.an{opacity:1;background:currentColor;box-shadow:0 0 calc(var(--a)*.35) currentColor,inset 0 0 calc(var(--a)*.15) rgba(255,255,255,.35)}
+.laerm-seite{width:100%;display:flex;flex-direction:column;gap:14px}
+.pegel{position:relative;height:clamp(28px,6vh,56px);background:var(--line);border-radius:999px;overflow:hidden}
+.pegel i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--gruen);border-radius:inherit;transition:background .3s}
+.pegel.orange i{background:var(--orange)}.pegel.rot i{background:var(--rot)}
+.pegel b{position:absolute;top:0;bottom:0;width:4px;background:var(--ink);opacity:.55;transform:translateX(-2px)}
+.zahlen{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.zahl{background:var(--surface2);border:2px solid var(--line);border-radius:16px;padding:12px 14px;text-align:center}
+.zahl small{display:block;font-size:clamp(14px,1.4vw,20px);color:var(--muted)}
+.zahl b{display:block;font:600 clamp(40px,7vw,110px)/1 Fredoka,Nunito,sans-serif;margin-top:4px}
+.zahl.rot b{color:var(--rot)}.zahl.gruen b{color:var(--gruen)}
+.regler{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px 14px;font-size:16px}
+.regler input{width:100%;accent-color:var(--acc);min-height:32px}
+.regler .wert{min-width:40px;text-align:right;font:600 20px Fredoka,Nunito,sans-serif}
+.laerm-start{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:20px}
+.laerm-start .knopf.gross{min-height:96px;font-size:clamp(28px,4vw,48px);padding:20px 48px}
+.laerm-start .fehler{font-size:clamp(20px,3vw,34px);color:var(--rot);max-width:800px}
+.laerm-start .fehler[hidden]{display:none}
+.laerm-start p{color:var(--muted);margin:0;max-width:640px}
+.laerm-start[hidden],.laerm-raum[hidden]{display:none}
+.klein-zeile{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+/* Vollbild: Kopf weg, Reiter bleiben, Ziffern noch grösser */
+body.vollbild .kopf{display:none}
+body.vollbild .nav{padding-top:10px}
+body.vollbild .ziffern{font-size:min(30vw,48vh)}
+body.vollbild .lustig .ziffern{font-size:min(26vw,40vh)}
+body.vollbild .ampel{--a:min(24vw,23vh)}
+@media (max-width:860px){
+  h1{font-size:24px}
+  .laerm-raum{grid-template-columns:1fr}
+  .ampel{--a:min(20vw,14vh)}
+  .zahl b{font-size:clamp(36px,12vw,64px)}
+  .knopf.gross{min-width:0;flex:1 1 140px}
+  .vollbild-knopf span{display:none}
+}
+@media (prefers-reduced-motion:reduce){.fertig .ziffern,body.blitz{animation:none}.feier i{display:none}}
+</style>
+</head>
+<body>
+<header class="kopf">
+  <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
+  <h1>Klassen-Werkzeuge</h1>
+  <p>Arbeitszeit-Timer, Aufräum-Countdown und Lärmampel für den Beamer. Alles läuft nur auf diesem Gerät. <a href="../">← Schablonen</a></p>
+</header>
+<script src="../zurueck.js"></script>
+<nav class="nav" aria-label="Werkzeug wählen">
+  <div class="chips" role="tablist" id="reiter">
+    <button type="button" class="chip" role="tab" data-tab="timer" aria-pressed="true" aria-controls="t-timer">⏱ Arbeitszeit</button>
+    <button type="button" class="chip" role="tab" data-tab="aufraeumen" aria-pressed="false" aria-controls="t-aufraeumen">🧹 Aufräumen</button>
+    <button type="button" class="chip" role="tab" data-tab="laerm" aria-pressed="false" aria-controls="t-laerm">🚦 Lärmampel</button>
+  </div>
+  <button type="button" class="vollbild-knopf" id="vollbild" aria-pressed="false" title="Vollbild für den Beamer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span>Vollbild</span></button>
+</nav>
+<main>
+
+  <!-- 1 · Arbeitszeit-Timer -->
+  <section class="tafel aktiv" id="t-timer" role="tabpanel" aria-label="Arbeitszeit-Timer">
+    <div class="zeile" id="timer-zeiten"></div>
+    <div class="buehne">
+      <div class="ziffern" id="timer-ziffern">10:00</div>
+      <div class="meldung" id="timer-meldung" hidden>Zeit ist um</div>
+      <div class="balken" aria-hidden="true"><i id="timer-balken"></i></div>
+      <input class="ziel" id="timer-ziel" maxlength="60" autocomplete="off" placeholder="Zwischenziel, z. B. «Jetzt Faden vernähen»" aria-label="Zwischenziel">
+    </div>
+    <div class="schaltung">
+      <button type="button" class="knopf gross haupt" id="timer-start">Start</button>
+      <button type="button" class="knopf gross" id="timer-pause" hidden>Pause</button>
+      <button type="button" class="knopf gross" id="timer-reset">Zurücksetzen</button>
+    </div>
+    <p class="hinweis" style="text-align:center">Leertaste: Start und Pause. Der Timer läuft weiter, auch wenn der Tab im Hintergrund ist.</p>
+  </section>
+
+  <!-- 2 · Aufräum-Countdown -->
+  <section class="tafel lustig" id="t-aufraeumen" role="tabpanel" aria-label="Aufräum-Countdown">
+    <div class="zeile" id="auf-zeiten"></div>
+    <div class="buehne" style="flex:0 1 auto">
+      <div class="ziffern" id="auf-ziffern">3:00</div>
+      <div class="meldung" id="auf-meldung" hidden>Zeit ist um</div>
+      <div class="balken" aria-hidden="true"><i id="auf-balken"></i></div>
+    </div>
+    <div class="schaltung">
+      <button type="button" class="knopf gross haupt" id="auf-start">Start</button>
+      <button type="button" class="knopf gross" id="auf-pause" hidden>Pause</button>
+      <button type="button" class="knopf gross" id="auf-reset">Zurücksetzen</button>
+    </div>
+    <section class="karte" id="auf-karte" aria-label="Aufräum-Aufgaben">
+      <div class="liste-kopf"><h2>Was ist schon erledigt? Antippen!</h2>
+        <div class="klein-zeile"><button type="button" class="knopf" id="auf-plus" hidden>+ Aufgabe</button><button type="button" class="knopf" id="auf-bearbeiten">Aufgaben ändern</button></div></div>
+      <div class="liste" id="auf-liste"></div>
+    </section>
+    <div class="feier" id="auf-feier" hidden><b>Alles aufgeräumt!</b><span id="auf-feier-text"></span><span style="font-size:16px;color:var(--muted)">Antippen zum Schliessen</span></div>
+  </section>
+
+  <!-- 3 · Lärmampel -->
+  <section class="tafel" id="t-laerm" role="tabpanel" aria-label="Lärmampel">
+    <div class="laerm-start" id="laerm-start">
+      <div class="fehler" id="laerm-fehler" hidden></div>
+      <button type="button" class="knopf gross haupt" id="laerm-los">Ampel starten</button>
+      <p>Die Ampel hört über das Mikrofon, wie laut es im Raum ist. Der Ton bleibt auf diesem Gerät – nichts wird aufgenommen oder gesendet.</p>
+    </div>
+    <div class="laerm-raum" id="laerm-raum" hidden>
+      <div class="ampel" role="img" aria-label="Ampel" id="ampel">
+        <div class="licht rot" id="licht-rot"></div>
+        <div class="licht orange" id="licht-orange"></div>
+        <div class="licht gruen an" id="licht-gruen"></div>
+      </div>
+      <div class="laerm-seite">
+        <div class="pegel" id="pegel" aria-label="Lautstärke"><i id="pegel-i"></i><b id="marke-orange"></b><b id="marke-rot"></b></div>
+        <div class="zahlen">
+          <div class="zahl rot"><small>Rote Momente</small><b id="laerm-rot">0</b></div>
+          <div class="zahl gruen"><small>Grün seit</small><b id="laerm-gruen">0:00</b></div>
+          <div class="zahl"><small>Längste grüne Zeit</small><b id="laerm-rekord">0:00</b></div>
+        </div>
+        <section class="karte" aria-label="Empfindlichkeit">
+          <h2>Empfindlichkeit</h2>
+          <div class="regler">
+            <label for="r-orange">Orange ab</label><input type="range" id="r-orange" min="5" max="95" step="1"><span class="wert" id="w-orange"></span>
+            <label for="r-rot">Rot ab</label><input type="range" id="r-rot" min="10" max="100" step="1"><span class="wert" id="w-rot"></span>
+          </div>
+          <p class="hinweis">Schieber nach links: die Ampel reagiert schneller. Die Werte bleiben auf diesem Gerät gespeichert.</p>
+        </section>
+        <div class="klein-zeile">
+          <button type="button" class="knopf" id="laerm-zaehler">Zähler zurücksetzen</button>
+          <button type="button" class="knopf" id="laerm-stopp">Ampel stoppen</button>
+        </div>
+        <p class="hinweis" style="text-align:center">Das Mikrofon läuft nur, solange die Ampel an ist. Der Ton bleibt auf diesem Gerät.</p>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+// Klassen-Werkzeuge: drei Reiter, Zustand im URL-Hash (#timer, #aufraeumen, #laerm).
+const $=id=>document.getElementById(id);
+const MIN=60000;
+let aktiv='timer';   // sichtbarer Reiter
+const lies=(k,s)=>{try{const v=localStorage.getItem(k);return v==null?s:JSON.parse(v)}catch(e){return s}};
+const merk=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const mmss=ms=>{const s=Math.max(0,Math.ceil(ms/1000)),m=Math.floor(s/60);return m+':'+String(s%60).padStart(2,'0')};
+// Ziffern einzeln in gleich breite Kästchen, damit nichts hüpft
+const ziffernHtml=t=>[...t].map(z=>z===':'?'<span class="dp">:</span>':'<span>'+z+'</span>').join('');
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+
+/* ---------- Ton (WebAudio, keine Datei) ---------- */
+let actx=null;
+function audio(){
+  try{
+    if(!actx){const C=window.AudioContext||window.webkitAudioContext;if(C)actx=new C();}
+    if(actx&&actx.state==='suspended')actx.resume();
+  }catch(e){}
+  return actx;
+}
+function ton(f,t0,dauer,vol){
+  const o=actx.createOscillator(),g=actx.createGain();
+  o.type='sine';o.frequency.value=f;
+  g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(vol,t0+.03);g.gain.exponentialRampToValueAtTime(.0001,t0+dauer);
+  o.connect(g).connect(actx.destination);o.start(t0);o.stop(t0+dauer+.05);
+}
+function klang(art){
+  const c=audio();if(!c)return;
+  const t=c.currentTime+.03;
+  if(art==='fertig'){[523.25,659.25,783.99].forEach((f,i)=>ton(f,t+i*.38,1.8,.22));ton(1046.5,t+1.14,2.4,.16);}   // sanfter Dreiklang C–E–G–C
+  else{[523.25,587.33,659.25,783.99,1046.5,1318.5].forEach((f,i)=>ton(f,t+i*.11,.9,.2));}                       // fröhliche Tonleiter hinauf
+}
+
+/* ---------- Bildschirm wach halten, solange eine Uhr läuft ---------- */
+let wach=null;
+async function wachHalten(an){
+  try{
+    if(an&&!wach&&navigator.wakeLock){wach=await navigator.wakeLock.request('screen');wach.addEventListener('release',()=>{wach=null});}
+    else if(!an&&wach){await wach.release();wach=null;}
+  }catch(e){}
+}
+
+/* ---------- Uhr: rechnet aus Zeitstempeln, nicht aus Ticks ---------- */
+function machUhr(o){
+  const U={dauer:o.dauer,rest:o.dauer,ende:0,laeuft:false,fertig:false};
+  U.setDauer=ms=>{const d=ms-U.dauer;U.dauer=ms;if(U.laeuft){U.ende+=d;U.rest=Math.max(0,U.ende-Date.now());}else{U.rest=U.fertig?ms:Math.max(0,U.rest+d);}U.fertig=false;zeige();};
+  U.start=()=>{audio();if(U.laeuft)return;if(U.rest<=0)U.rest=U.dauer;U.fertig=false;U.ende=Date.now()+U.rest;U.laeuft=true;wachHalten(true);zeige();};
+  U.pause=()=>{if(!U.laeuft)return;U.rest=Math.max(0,U.ende-Date.now());U.laeuft=false;wachHalten(laeuftEine());zeige();};
+  U.reset=()=>{U.laeuft=false;U.rest=U.dauer;U.fertig=false;wachHalten(laeuftEine());o.onReset&&o.onReset();zeige();};
+  U.tick=()=>{if(U.laeuft){const r=U.ende-Date.now();if(r<=0){U.rest=0;U.laeuft=false;U.fertig=true;wachHalten(laeuftEine());o.onFertig&&o.onFertig();}else U.rest=r;}zeige();};
+  function zeige(){
+    const t=o.tafel,anteil=U.dauer?U.rest/U.dauer:0;
+    o.ziffern.innerHTML=ziffernHtml(mmss(U.rest));
+    o.balken.style.width=(anteil*100).toFixed(2)+'%';
+    const stufe=U.rest<=MIN?'rot':anteil<=.2?'orange':'gruen';   // grün → orange in den letzten 20 % → rot in der letzten Minute
+    t.classList.toggle('orange',stufe==='orange');t.classList.toggle('rot',stufe==='rot');t.classList.toggle('fertig',U.fertig);
+    o.meldung.hidden=!U.fertig;
+    o.start.hidden=U.laeuft;o.pause.hidden=!U.laeuft;
+    o.start.textContent=U.fertig||U.rest===U.dauer?'Start':'Weiter';
+    o.chips.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',String(+c.dataset.min*MIN===U.dauer)));
+    o.onZeige&&o.onZeige(U);
+  }
+  // Voreinstellungen als Chips, dazu ± 1 Minute für eigene Zeiten
+  o.chips.innerHTML=o.presets.map(m=>`<button type="button" class="chip zeit" data-min="${m}">${m} min</button>`).join('')+
+    (o.eigen?'<span class="eigen"><button type="button" class="knopf" data-d="-1" aria-label="Eine Minute weniger">−</button><button type="button" class="knopf" data-d="1" aria-label="Eine Minute mehr">+</button></span>':'');
+  o.chips.addEventListener('click',e=>{
+    const c=e.target.closest('.chip');if(c){U.setDauer(+c.dataset.min*MIN);return;}
+    const k=e.target.closest('[data-d]');if(k){U.setDauer(Math.min(180*MIN,Math.max(MIN,U.dauer+(+k.dataset.d)*MIN)));}
+  });
+  o.start.addEventListener('click',U.start);o.pause.addEventListener('click',U.pause);o.reset.addEventListener('click',U.reset);
+  U.zeige=zeige;zeige();
+  return U;
+}
+const uhren=[];
+const laeuftEine=()=>uhren.some(u=>u.laeuft);
+setInterval(()=>uhren.forEach(u=>u.tick()),250);
+document.addEventListener('visibilitychange',()=>{uhren.forEach(u=>u.tick());if(!document.hidden&&laeuftEine())wachHalten(true);});
+function blitzen(){document.body.classList.remove('blitz');void document.body.offsetWidth;document.body.classList.add('blitz');setTimeout(()=>document.body.classList.remove('blitz'),3200);}
+
+/* ---------- 1 · Arbeitszeit-Timer ---------- */
+const timer=machUhr({tafel:$('t-timer'),ziffern:$('timer-ziffern'),balken:$('timer-balken'),meldung:$('timer-meldung'),chips:$('timer-zeiten'),
+  start:$('timer-start'),pause:$('timer-pause'),reset:$('timer-reset'),presets:[5,10,15,20,30,45],eigen:true,dauer:10*MIN,
+  onFertig(){klang('fertig');blitzen();},
+  onZeige(U){if(aktiv==='timer')document.title=(U.laeuft?mmss(U.rest)+' · ':'')+'Klassen-Werkzeuge';}});
+uhren.push(timer);
+const ziel=$('timer-ziel');
+ziel.value=lies('schrittli.klasse.ziel','');
+ziel.addEventListener('input',()=>merk('schrittli.klasse.ziel',ziel.value));
+
+/* ---------- 2 · Aufräum-Countdown ---------- */
+const AUFGABEN_STANDARD=['Werkzeug zurück','Boden gewischt','Tisch abgewischt','Material versorgt','Stuhl hochgestellt'];
+let aufgaben=lies('schrittli.klasse.aufraeumen',null);
+if(!Array.isArray(aufgaben)||!aufgaben.length)aufgaben=AUFGABEN_STANDARD.slice();
+let erledigt=aufgaben.map(()=>false),bearbeiten=false,gefeiert=false;
+const liste=$('auf-liste');
+function zeigeListe(){
+  liste.classList.toggle('bearbeiten',bearbeiten);
+  $('auf-plus').hidden=!bearbeiten||aufgaben.length>=8;
+  $('auf-bearbeiten').textContent=bearbeiten?'Fertig':'Aufgaben ändern';
+  if(bearbeiten){
+    liste.innerHTML=aufgaben.map((a,i)=>`<div class="kasten"><input value="${esc(a)}" maxlength="40" data-i="${i}" aria-label="Aufgabe ${i+1}"><button type="button" class="weg" data-weg="${i}" aria-label="Aufgabe löschen" ${aufgaben.length<=1?'disabled':''}>×</button></div>`).join('');
+  }else{
+    liste.innerHTML=aufgaben.map((a,i)=>`<button type="button" class="kasten" data-i="${i}" aria-pressed="${erledigt[i]}"><span class="hak"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg></span><span>${esc(a)}</span></button>`).join('');
+  }
+}
+liste.addEventListener('click',e=>{
+  const w=e.target.closest('[data-weg]');
+  if(w){aufgaben.splice(+w.dataset.weg,1);erledigt.splice(+w.dataset.weg,1);merk('schrittli.klasse.aufraeumen',aufgaben);zeigeListe();return;}
+  const k=e.target.closest('.kasten[data-i]');if(!k||bearbeiten)return;
+  const i=+k.dataset.i;erledigt[i]=!erledigt[i];audio();zeigeListe();
+  if(erledigt.every(Boolean)&&!gefeiert){
+    gefeiert=true;
+    if(auf.laeuft){auf.pause();$('auf-feier-text').textContent='Noch '+mmss(auf.rest)+' übrig – super gemacht!';}
+    else $('auf-feier-text').textContent='Super gemacht!';
+    klang('feier');konfetti();$('auf-feier').hidden=false;
+  }
+});
+liste.addEventListener('input',e=>{const i=e.target.dataset.i;if(i!=null){aufgaben[i]=e.target.value;merk('schrittli.klasse.aufraeumen',aufgaben);}});
+$('auf-bearbeiten').addEventListener('click',()=>{bearbeiten=!bearbeiten;if(!bearbeiten){aufgaben=aufgaben.map(a=>a.trim()).filter(Boolean);if(!aufgaben.length)aufgaben=AUFGABEN_STANDARD.slice();erledigt=aufgaben.map((_,i)=>!!erledigt[i]);merk('schrittli.klasse.aufraeumen',aufgaben);}zeigeListe();});
+$('auf-plus').addEventListener('click',()=>{aufgaben.push('');erledigt.push(false);zeigeListe();const n=liste.querySelector(`input[data-i="${aufgaben.length-1}"]`);n&&n.focus();});
+$('auf-feier').addEventListener('click',()=>{$('auf-feier').hidden=true;});
+function konfetti(){
+  const f=$('auf-feier');f.querySelectorAll('i').forEach(i=>i.remove());
+  const farben=['#D7352E','#F08A24','#F4C430','#3FA34D','#2A6FDB','#7B4FC9','#F6AFC6'];
+  for(let i=0;i<80;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.background=farben[i%farben.length];s.style.animationDuration=(2.5+Math.random()*2.5)+'s';s.style.animationDelay=(Math.random()*1.5)+'s';f.appendChild(s);}
+}
+const auf=machUhr({tafel:$('t-aufraeumen'),ziffern:$('auf-ziffern'),balken:$('auf-balken'),meldung:$('auf-meldung'),chips:$('auf-zeiten'),
+  start:$('auf-start'),pause:$('auf-pause'),reset:$('auf-reset'),presets:[2,3,5],eigen:false,dauer:3*MIN,
+  onFertig(){klang('fertig');blitzen();},
+  onReset(){erledigt=aufgaben.map(()=>false);gefeiert=false;$('auf-feier').hidden=true;zeigeListe();}});
+uhren.push(auf);
+zeigeListe();
+
+/* ---------- 3 · Lärmampel ---------- */
+const L={ctx:null,an:null,strom:null,puffer:null,glatt:0,stufe:'gruen',rote:0,gruenSeit:0,rekord:0,rotRaus:0,raf:0,
+  schwellen:Object.assign({orange:45,rot:65},lies('schrittli.klasse.laerm',{}))};
+const rO=$('r-orange'),rR=$('r-rot');
+function zeigeSchwellen(){
+  rO.value=L.schwellen.orange;rR.value=L.schwellen.rot;
+  $('w-orange').textContent=L.schwellen.orange;$('w-rot').textContent=L.schwellen.rot;
+  $('marke-orange').style.left=L.schwellen.orange+'%';$('marke-rot').style.left=L.schwellen.rot+'%';
+}
+rO.addEventListener('input',()=>{L.schwellen.orange=+rO.value;if(L.schwellen.rot<L.schwellen.orange+5)L.schwellen.rot=Math.min(100,L.schwellen.orange+5);merk('schrittli.klasse.laerm',L.schwellen);zeigeSchwellen();});
+rR.addEventListener('input',()=>{L.schwellen.rot=+rR.value;if(L.schwellen.orange>L.schwellen.rot-5)L.schwellen.orange=Math.max(5,L.schwellen.rot-5);merk('schrittli.klasse.laerm',L.schwellen);zeigeSchwellen();});
+zeigeSchwellen();
+
+async function ampelStart(){
+  const fehler=$('laerm-fehler');fehler.hidden=true;
+  const C=window.AudioContext||window.webkitAudioContext;
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!C){fehler.textContent='Dieser Browser kann die Ampel nicht zeigen. Bitte Safari oder Chrome verwenden.';fehler.hidden=false;return;}
+  try{
+    L.ctx=L.ctx||new C();   // auf dem iPad nur innerhalb einer Berührung möglich – darum hier im Klick
+    if(L.ctx.state==='suspended')await L.ctx.resume();
+    L.strom=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false},video:false});
+  }catch(e){
+    const name=e&&e.name||'';
+    fehler.textContent=name==='NotAllowedError'||name==='SecurityError'?'Mikrofon erlauben, damit die Ampel funktioniert.':name==='NotFoundError'?'Kein Mikrofon gefunden.':'Das Mikrofon konnte nicht gestartet werden.';
+    fehler.hidden=false;$('laerm-los').textContent='Nochmals versuchen';
+    return;
+  }
+  const q=L.ctx.createMediaStreamSource(L.strom);
+  L.an=L.ctx.createAnalyser();L.an.fftSize=2048;L.an.smoothingTimeConstant=0;
+  q.connect(L.an);
+  L.puffer=new Float32Array(L.an.fftSize);
+  L.glatt=0;L.stufe='gruen';L.gruenSeit=Date.now();L.rotRaus=0;
+  ['rot','orange','gruen'].forEach(k=>$('licht-'+k).classList.toggle('an',k==='gruen'));$('pegel').className='pegel gruen';
+  $('laerm-start').hidden=true;$('laerm-raum').hidden=false;
+  cancelAnimationFrame(L.raf);messen();
+}
+function messen(){
+  if(!L.an)return;
+  if(L.an.getFloatTimeDomainData)L.an.getFloatTimeDomainData(L.puffer);
+  else{const b=new Uint8Array(L.puffer.length);L.an.getByteTimeDomainData(b);for(let i=0;i<b.length;i++)L.puffer[i]=(b[i]-128)/128;}
+  let s=0;for(let i=0;i<L.puffer.length;i++)s+=L.puffer[i]*L.puffer[i];
+  const db=20*Math.log10(Math.sqrt(s/L.puffer.length)+1e-8);          // etwa −60 dB (still) … 0 dB (Vollaussteuerung)
+  const pegel=Math.max(0,Math.min(100,(db+60)/60*100));
+  L.glatt+=(pegel-L.glatt)*(pegel>L.glatt?.35:.06);                    // schnell lauter, langsam leiser
+  const jetzt=Date.now(),{orange,rot}=L.schwellen;
+  let stufe=L.stufe;                                                    // mit etwas Spiel, damit die Ampel nicht flackert
+  if(L.glatt>=rot)stufe='rot';
+  else if(L.glatt>=orange)stufe=(stufe==='rot'&&L.glatt>=rot-6)?'rot':'orange';
+  else stufe=(stufe!=='gruen'&&L.glatt>=orange-4)?stufe:'gruen';
+  if(stufe!==L.stufe){
+    if(stufe==='rot'&&jetzt-L.rotRaus>1500){L.rote++;$('laerm-rot').textContent=L.rote;}
+    if(L.stufe==='rot')L.rotRaus=jetzt;
+    if(stufe==='gruen')L.gruenSeit=jetzt;
+    L.stufe=stufe;
+    ['rot','orange','gruen'].forEach(k=>$('licht-'+k).classList.toggle('an',k===stufe));
+    $('pegel').className='pegel '+stufe;
+  }
+  $('pegel-i').style.width=L.glatt.toFixed(1)+'%';
+  const gruenDauer=stufe==='gruen'?jetzt-L.gruenSeit:0;
+  if(gruenDauer>L.rekord){L.rekord=gruenDauer;$('laerm-rekord').textContent=mmss(L.rekord);}
+  $('laerm-gruen').textContent=mmss(gruenDauer);
+  L.raf=requestAnimationFrame(messen);
+}
+function ampelStopp(){
+  cancelAnimationFrame(L.raf);L.raf=0;
+  if(L.strom){L.strom.getTracks().forEach(t=>t.stop());L.strom=null;}
+  L.an=null;
+  $('laerm-raum').hidden=true;$('laerm-start').hidden=false;$('laerm-los').textContent='Ampel starten';
+}
+$('laerm-los').addEventListener('click',ampelStart);
+$('laerm-stopp').addEventListener('click',ampelStopp);
+$('laerm-zaehler').addEventListener('click',()=>{L.rote=0;L.rekord=0;L.gruenSeit=Date.now();$('laerm-rot').textContent='0';$('laerm-rekord').textContent='0:00';});
+
+/* ---------- Reiter und Hash ---------- */
+const TABS=['timer','aufraeumen','laerm'];
+
+function zeigeTab(id){
+  if(!TABS.includes(id))id='timer';
+  aktiv=id;
+  TABS.forEach(t=>$('t-'+t).classList.toggle('aktiv',t===id));
+  document.querySelectorAll('#reiter .chip').forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.tab===id)));
+  if(id!=='laerm'&&L.an)ampelStopp();   // Mikrofon aus, sobald die Ampel nicht mehr sichtbar ist
+  timer.zeige();
+}
+$('reiter').addEventListener('click',e=>{const c=e.target.closest('.chip');if(c)location.hash=c.dataset.tab;});
+addEventListener('hashchange',()=>zeigeTab(location.hash.slice(1)));
+zeigeTab(location.hash.slice(1));
+
+/* ---------- Vollbild: echte API, sonst nur den Kopf verstecken ---------- */
+const istVoll=()=>!!(document.fullscreenElement||document.webkitFullscreenElement);
+function zeigeVollbild(){
+  const an=document.body.classList.contains('vollbild');
+  $('vollbild').setAttribute('aria-pressed',String(an));
+  $('vollbild').querySelector('span').textContent=an?'Vollbild verlassen':'Vollbild';
+}
+function vollbild(){
+  const el=document.documentElement;
+  if(istVoll()){
+    const x=document.exitFullscreen||document.webkitExitFullscreen;try{x.call(document);}catch(e){}
+    document.body.classList.remove('vollbild');
+  }else{
+    const an=document.body.classList.toggle('vollbild');
+    if(an){const r=el.requestFullscreen||el.webkitRequestFullscreen;if(r){try{const p=r.call(el);p&&p.catch&&p.catch(()=>{});}catch(e){}}}
+  }
+  zeigeVollbild();
+}
+$('vollbild').addEventListener('click',vollbild);
+['fullscreenchange','webkitfullscreenchange'].forEach(ev=>document.addEventListener(ev,()=>{if(!istVoll()){document.body.classList.remove('vollbild');zeigeVollbild();}}));
+document.addEventListener('keydown',e=>{
+  if(e.target.matches('input,textarea,[contenteditable]'))return;
+  if(e.key===' '||e.code==='Space'){e.preventDefault();const u=aktiv==='timer'?timer:aktiv==='aufraeumen'?auf:null;if(u)u.laeuft?u.pause():u.start();}
+  else if(e.key==='Escape'&&document.body.classList.contains('vollbild')&&!istVoll())vollbild();
+});
+</script>
+</body>
+</html>

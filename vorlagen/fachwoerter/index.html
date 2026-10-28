@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Schritt für Schritt · Fachwörter</title>
+<meta name="description" content="Fachwort-Karten für den TTG-Unterricht: 48 Wörter aus Nähen, Stricken, Häkeln, Weben, Filzen, Holz und mehr – mit Bild und Erklärung. Als Karten, Plakat oder Memory drucken (A4 oder A3).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<style>
+:root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--papier:#FFFFFF;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
+h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
+h1{font-size:28px}
+h2{font-size:17px;margin-bottom:10px}
+a{color:var(--acc)}
+.kopf{max-width:1200px;margin:0 auto;padding:20px 16px 8px}
+.kopf p{margin:4px 0 0;color:var(--muted)}
+main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,360px);grid-template-areas:"filter rechts" "liste rechts";grid-template-rows:auto 1fr;gap:14px 20px;align-items:start}
+#k-filter{grid-area:filter}#k-liste{grid-area:liste}.seite-rechts{grid-area:rechts;position:sticky;top:12px;display:flex;flex-direction:column;gap:14px}
+.karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
+.feld{margin-bottom:14px}.feld:last-child{margin-bottom:0}
+.lbl{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:14px;padding:6px 12px;border-radius:999px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer}
+.chip i{width:10px;height:10px;border-radius:50%;background:var(--punkt,var(--muted));flex:none}
+.chip[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
+.chip:hover{border-color:var(--acc)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.suche{width:100%;font:inherit;font-size:16px;border:2px solid var(--line);border-radius:10px;background:var(--surface2);color:var(--ink);padding:8px 12px}
+.zeile{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.zeile .suche{flex:1;min-width:180px}
+.treffer{font-size:14px;color:var(--muted);margin:0}
+/* Karten am Bildschirm */
+.raster{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.fw{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 10px 14px;border:2px solid var(--line);border-radius:14px;background:var(--surface2);text-align:center;border-top:6px solid var(--farbe,var(--line))}
+.fw .bild{width:100px;height:100px;background:var(--papier);border-radius:14px;padding:6px}
+.fw .bild svg{width:100%;height:100%}
+.fw .wort{font:600 19px Fredoka,Nunito,sans-serif;line-height:1.15}
+.fw .erkl{font-size:13px;color:var(--muted);margin:0}
+.fw .vf{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.einfach .fw .wort{text-transform:uppercase;font-size:20px;letter-spacing:.03em}
+.ohne .fw .erkl{display:none}
+.pikto{stroke:#1C2430;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.leer{color:var(--muted);padding:20px;text-align:center}
+.drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
+.drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
+.hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
+/* Vorschau: die Druckseiten verkleinert */
+.vorschau{display:flex;flex-direction:column;gap:10px;--s:.5}
+.blatt{width:calc(var(--bw)*var(--s));height:calc(var(--bh)*var(--s));overflow:hidden;border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.18);background:#fff}
+.blatt .seite{transform:scale(var(--s));transform-origin:0 0}
+@media (max-width:860px){
+  main{display:flex;flex-direction:column;align-items:stretch;gap:14px}
+  .seite-rechts{display:contents}
+  #k-filter{order:1}#k-druck{order:2}#k-liste{order:3}#k-vorschau{order:4}
+  h1{font-size:24px}
+  .raster{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+}
+/* ---------- Druckseiten (Masse in mm) ---------- */
+.seite{width:var(--bw,210mm);height:var(--bh,297mm);background:#fff;color:#1C2430;font:600 3.4mm/1.3 Nunito,system-ui,sans-serif;padding:8mm;position:relative;overflow:hidden}
+.seite .pikto{stroke-width:4}
+.gitter{display:grid;width:100%;height:100%;border-top:.3mm dashed #9AA4B1;border-left:.3mm dashed #9AA4B1}
+.gitter>div{border-right:.3mm dashed #9AA4B1;border-bottom:.3mm dashed #9AA4B1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5mm;padding:3mm;text-align:center;min-height:0;overflow:hidden}
+.gitter .wort{font:600 7mm/1.1 Fredoka,Nunito,sans-serif}
+.gitter .bild{height:38%;aspect-ratio:1;flex:none}
+.gitter .bild svg{width:100%;height:100%}
+.gitter .erkl{font-size:3.2mm;color:#3B4654;margin:0;max-width:100%}
+.gitter .vf{position:absolute;left:0;right:0;top:0;height:0;visibility:hidden}
+.gitter .kz{font-size:2.6mm;color:#8A96A8;text-transform:uppercase;letter-spacing:.08em}
+.gitter .memo .wort{font-size:8.5mm}
+.gitter .memo .bild{height:58%}
+.gitter .leerfeld{visibility:hidden}
+.einfach .gitter .wort{text-transform:uppercase}
+.ohne .gitter .erkl{display:none}
+.fuss{position:absolute;left:8mm;right:8mm;bottom:3mm;font-size:2.6mm;color:#9AA4B1;display:flex;justify-content:space-between}
+/* Plakat */
+.plakat .titel{display:flex;align-items:center;gap:4mm;border-bottom:1mm solid var(--farbe,#1C2430);padding-bottom:3mm;margin-bottom:5mm}
+.plakat .titel .em{font-size:12mm;line-height:1}
+.plakat .titel h3{margin:0;font:600 12mm/1 Fredoka,Nunito,sans-serif}
+.plakat .titel small{display:block;font-size:3.4mm;color:#5B6B80;font-weight:600;margin-top:1mm}
+.plakat .kacheln{display:grid;grid-template-columns:repeat(var(--sp,3),1fr);gap:4mm}
+.plakat .kachel{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.5mm;padding:3mm 2mm;border:.5mm solid var(--farbe,#D5DEE9);border-radius:4mm;break-inside:avoid}
+.plakat .kachel .bild{width:70%;aspect-ratio:1}
+.plakat .kachel .bild svg{width:100%;height:100%}
+.plakat .kachel .wort{font:600 6mm/1.1 Fredoka,Nunito,sans-serif}
+.plakat .kachel .erkl{font-size:3mm;color:#3B4654;margin:0}
+.einfach .plakat .wort{text-transform:uppercase}
+#druck{display:none}
+@page{size:A4 portrait;margin:0}
+@media print{
+  body{background:#fff}
+  .kopf,main{display:none!important}
+  #druck{display:block}
+  #druck .seite{break-after:page;page-break-after:always}
+  #druck .seite:last-child{break-after:auto;page-break-after:auto}
+}
+</style>
+<style id="seite"></style>
+</head>
+<body>
+<header class="kopf">
+  <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
+  <h1>Fachwörter</h1>
+  <p>Wörter aus dem Werkraum mit Bild und Erklärung. Zum Lernen, als Karten, Plakat oder Memory. <a href="../">← Vorlagen</a></p>
+</header>
+<script src="../zurueck.js"></script>
+<main>
+  <section class="karte" id="k-filter" aria-label="Filter">
+    <div class="feld"><span class="lbl" id="l-verfahren">Verfahren</span><div class="chips" role="group" aria-labelledby="l-verfahren" id="verfahren"></div></div>
+    <div class="feld zeile">
+      <input class="suche" id="suche" type="search" placeholder="Wort suchen …" aria-label="Wort suchen" autocomplete="off">
+      <button type="button" class="chip" id="erkl" aria-pressed="false">Erklärung verstecken</button>
+      <p class="treffer" id="treffer"></p>
+    </div>
+  </section>
+  <section class="karte" id="k-liste" aria-label="Fachwörter"><div class="raster" id="liste"></div></section>
+  <div class="seite-rechts">
+    <section class="karte" id="k-druck" aria-label="Drucken">
+      <h2>Drucken</h2>
+      <div class="feld"><span class="lbl" id="l-modus">Was drucken?</span><div class="chips" role="group" aria-labelledby="l-modus" id="modus">
+        <button type="button" class="chip" data-modus="karten" aria-pressed="true">Karten</button>
+        <button type="button" class="chip" data-modus="plakat" aria-pressed="false">Plakat</button>
+        <button type="button" class="chip" data-modus="memory" aria-pressed="false">Memory</button></div></div>
+      <div class="feld"><span class="lbl" id="l-papier">Papier</span><div class="chips" role="group" aria-labelledby="l-papier" id="papier">
+        <button type="button" class="chip" data-papier="a4" aria-pressed="true">A4</button>
+        <button type="button" class="chip" data-papier="a3" aria-pressed="false">A3</button></div></div>
+      <p class="hinweis" id="info"></p>
+      <button type="button" class="drucken" id="drucken" style="margin-top:12px"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
+    </section>
+    <section class="karte" id="k-vorschau" aria-label="Vorschau"><h2>Vorschau</h2><div class="vorschau" id="vorschau"></div></section>
+  </div>
+</main>
+<div id="druck"></div>
+
+<!-- Piktogramme: schwarze Umrisse, wenige flache Farben, je 120 × 120 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<pattern id="m-aida" width="14" height="14" patternUnits="userSpaceOnUse"><path d="M14 0V14M0 14H14" stroke="#D9C49A" stroke-width="2"/><circle cx="14" cy="14" r="2.2" fill="#8A96A8"/></pattern>
+<pattern id="m-koern" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.3" fill="#8F5A2E"/><circle cx="6" cy="6" r="1.3" fill="#8F5A2E"/></pattern>
+
+<symbol id="p-nadel" viewBox="0 0 120 120"><g transform="rotate(45 60 60)"><path d="M60 8 L68 26 V96 a8 8 0 0 1 -16 0 V26 Z" fill="#CBD5E1"/><ellipse cx="60" cy="86" rx="3" ry="8" fill="#fff" stroke-width="3"/></g></symbol>
+<symbol id="p-nadeloehr" viewBox="0 0 120 120"><path d="M44 118 V34 a16 16 0 0 1 32 0 V118" fill="#CBD5E1"/><ellipse cx="60" cy="72" rx="8" ry="20" fill="#fff"/><path d="M6 50 C30 50 46 72 60 72 C76 72 84 100 114 104" stroke-width="10"/><path d="M6 50 C30 50 46 72 60 72 C76 72 84 100 114 104" stroke="#E8554E" stroke-width="6"/></symbol>
+<symbol id="p-faden" viewBox="0 0 120 120"><rect x="36" y="30" width="48" height="60" fill="#E8554E"/><path d="M36 42H84M36 54H84M36 66H84M36 78H84" stroke="#8B2E29" stroke-width="2"/><rect x="30" y="18" width="60" height="12" rx="3" fill="#C98A4E"/><rect x="30" y="90" width="60" height="12" rx="3" fill="#C98A4E"/><path d="M84 80 C100 82 104 96 114 112" stroke-width="9"/><path d="M84 80 C100 82 104 96 114 112" stroke="#E8554E" stroke-width="5"/></symbol>
+<symbol id="p-knoten" viewBox="0 0 120 120"><path d="M6 66 C28 66 36 40 56 40 C78 40 84 70 68 74 C52 78 50 54 62 50 C78 46 92 66 114 66" stroke-width="12"/><path d="M6 66 C28 66 36 40 56 40 C78 40 84 70 68 74 C52 78 50 54 62 50 C78 46 92 66 114 66" stroke="#E8554E" stroke-width="7"/></symbol>
+<symbol id="p-vorstich" viewBox="0 0 120 120"><rect x="8" y="30" width="104" height="60" rx="4" fill="#DCEBFA"/><path d="M20 60H100" stroke-width="10" stroke-dasharray="12 16"/><path d="M20 60H100" stroke="#E8554E" stroke-width="6" stroke-dasharray="12 16"/></symbol>
+<symbol id="p-rueckstich" viewBox="0 0 120 120"><rect x="8" y="30" width="104" height="60" rx="4" fill="#DCEBFA"/><path d="M18 60H102" stroke-width="10"/><path d="M18 60H102" stroke="#E8554E" stroke-width="6"/><path d="M32 54V66M46 54V66M60 54V66M74 54V66M88 54V66" stroke-width="3"/></symbol>
+<symbol id="p-ueberwendling" viewBox="0 0 120 120"><rect x="8" y="52" width="104" height="44" rx="3" fill="#DCEBFA"/><rect x="8" y="46" width="104" height="10" rx="3" fill="#9CD0F5"/><path d="M22 74L36 36M40 74L54 36M58 74L72 36M76 74L90 36M94 74L108 36" stroke-width="9"/><path d="M22 74L36 36M40 74L54 36M58 74L72 36M76 74L90 36M94 74L108 36" stroke="#E8554E" stroke-width="5"/></symbol>
+<symbol id="p-stecknadel" viewBox="0 0 120 120"><path d="M26 98 L84 40" stroke-width="10"/><path d="M26 98 L84 40" stroke="#CBD5E1" stroke-width="5"/><circle cx="92" cy="32" r="13" fill="#F2C12E"/></symbol>
+<symbol id="p-schnittmuster" viewBox="0 0 120 120"><rect x="18" y="10" width="84" height="100" rx="3" fill="#fff"/><path d="M36 34 L30 50 L40 54 V92 H80 V54 L90 50 L84 34 L72 30 Q60 40 48 30 Z" fill="#F6AFC6" stroke-dasharray="6 4"/></symbol>
+<symbol id="p-massband" viewBox="0 0 120 120"><rect x="6" y="48" width="108" height="24" rx="4" fill="#F2C12E"/><rect x="6" y="48" width="12" height="24" rx="3" fill="#CBD5E1"/><path d="M26 48V62M34 48V56M42 48V62M50 48V56M58 48V62M66 48V56M74 48V62M82 48V56M90 48V62M98 48V56M106 48V62" stroke-width="2.5"/></symbol>
+<symbol id="p-buegeleisen" viewBox="0 0 120 120"><path d="M30 42 V30 Q30 22 38 22 H82 Q90 22 90 30 V42" stroke-width="9"/><path d="M30 42 V30 Q30 22 38 22 H82 Q90 22 90 30 V42" stroke="#4C6EF5" stroke-width="5"/><path d="M12 84 V62 Q12 42 36 42 H96 L108 84 Z" fill="#9CD0F5"/><rect x="10" y="84" width="100" height="12" rx="3" fill="#8A96A8"/><path d="M34 104q4 6 0 12M54 104q4 6 0 12M74 104q4 6 0 12" stroke="#8A96A8" stroke-width="3"/></symbol>
+<symbol id="p-schere" viewBox="0 0 120 120"><path d="M62 60L108 36M62 60L108 84M62 60L30 46M62 60L30 74" stroke-width="13"/><path d="M62 60L108 36M62 60L108 84" stroke="#CBD5E1" stroke-width="8"/><path d="M62 60L30 46M62 60L30 74" stroke="#E8554E" stroke-width="8"/><ellipse cx="20" cy="40" rx="13" ry="9" fill="#E8554E"/><ellipse cx="20" cy="40" rx="6" ry="3.5" fill="#fff" stroke-width="3"/><ellipse cx="20" cy="80" rx="13" ry="9" fill="#E8554E"/><ellipse cx="20" cy="80" rx="6" ry="3.5" fill="#fff" stroke-width="3"/><circle cx="62" cy="60" r="4" fill="#F2C12E" stroke-width="3"/></symbol>
+<symbol id="p-zickzackschere" viewBox="0 0 120 120"><path d="M6 90 H114 V100 L108 108 L102 100 L96 108 L90 100 L84 108 L78 100 L72 108 L66 100 L60 108 L54 100 L48 108 L42 100 L36 108 L30 100 L24 108 L18 100 L12 108 L6 100 Z" fill="#F6AFC6" stroke-width="3"/><use href="#p-schere" x="10" y="-10" width="100" height="100"/></symbol>
+<symbol id="p-kreuzstich" viewBox="0 0 120 120"><rect x="10" y="22" width="100" height="76" rx="3" fill="#F3E3C3"/><path d="M34 22V98M58 22V98M82 22V98M10 46H110M10 70H110" stroke="#D9C49A" stroke-width="2"/><path d="M14 50L30 66M30 50L14 66M38 50L54 66M54 50L38 66M62 50L78 66M78 50L62 66M86 50L102 66M102 50L86 66" stroke-width="9"/><path d="M14 50L30 66M30 50L14 66M38 50L54 66M54 50L38 66M62 50L78 66M78 50L62 66M86 50L102 66M102 50L86 66" stroke="#E8554E" stroke-width="5"/></symbol>
+<symbol id="p-aida" viewBox="0 0 120 120"><rect x="10" y="16" width="100" height="88" rx="3" fill="#F3E3C3"/><rect x="10" y="16" width="100" height="88" rx="3" fill="url(#m-aida)"/><rect x="10" y="16" width="100" height="88" rx="3"/></symbol>
+<symbol id="p-stickrahmen" viewBox="0 0 120 120"><circle cx="60" cy="64" r="46" fill="#C98A4E"/><circle cx="60" cy="64" r="36" fill="#F3E3C3"/><rect x="52" y="8" width="16" height="14" rx="3" fill="#8A96A8"/><path d="M60 80 C40 66 38 50 50 48 C56 47 60 52 60 56 C60 52 64 47 70 48 C82 50 80 66 60 80 Z" fill="#E8554E" stroke-width="3"/></symbol>
+<symbol id="p-haekelnadel" viewBox="0 0 120 120"><path d="M18 104 L86 36 Q98 24 92 14 Q86 8 80 16" stroke-width="12"/><path d="M18 104 L86 36 Q98 24 92 14 Q86 8 80 16" stroke="#CBD5E1" stroke-width="7"/><ellipse cx="76" cy="48" rx="7" ry="13" transform="rotate(45 76 48)" stroke-width="8"/><ellipse cx="76" cy="48" rx="7" ry="13" transform="rotate(45 76 48)" stroke="#9B5DE5" stroke-width="4"/><path d="M84 56 C100 70 104 90 110 112" stroke-width="8"/><path d="M84 56 C100 70 104 90 110 112" stroke="#9B5DE5" stroke-width="4"/></symbol>
+<symbol id="p-luftmasche" viewBox="0 0 120 120"><g stroke-width="8"><ellipse cx="24" cy="60" rx="13" ry="8"/><ellipse cx="42" cy="60" rx="13" ry="8"/><ellipse cx="60" cy="60" rx="13" ry="8"/><ellipse cx="78" cy="60" rx="13" ry="8"/><ellipse cx="96" cy="60" rx="13" ry="8"/></g><g stroke="#9B5DE5" stroke-width="4"><ellipse cx="24" cy="60" rx="13" ry="8"/><ellipse cx="42" cy="60" rx="13" ry="8"/><ellipse cx="60" cy="60" rx="13" ry="8"/><ellipse cx="78" cy="60" rx="13" ry="8"/><ellipse cx="96" cy="60" rx="13" ry="8"/></g></symbol>
+<symbol id="p-festemasche" viewBox="0 0 120 120"><rect x="12" y="44" width="96" height="62" rx="4" fill="#E9DDF8"/><path d="M18 52L26 64L34 52L42 64L50 52L58 64L66 52L74 64L82 52L90 64L98 52M18 70L26 82L34 70L42 82L50 70L58 82L66 70L74 82L82 70L90 82L98 70M18 88L26 100L34 88L42 100L50 88L58 100L66 88L74 100L82 88L90 100L98 88" stroke-width="8"/><path d="M18 52L26 64L34 52L42 64L50 52L58 64L66 52L74 64L82 52L90 64L98 52M18 70L26 82L34 70L42 82L50 70L58 82L66 70L74 82L82 70L90 82L98 70M18 88L26 100L34 88L42 100L50 88L58 100L66 88L74 100L82 88L90 100L98 88" stroke="#9B5DE5" stroke-width="4"/><ellipse cx="30" cy="30" rx="8" ry="13" stroke-width="8"/><ellipse cx="30" cy="30" rx="8" ry="13" stroke="#9B5DE5" stroke-width="4"/></symbol>
+<symbol id="p-stricknadel" viewBox="0 0 120 120"><path d="M22 104L100 24M98 104L20 24" stroke-width="12"/><path d="M22 104L100 24M98 104L20 24" stroke="#CBD5E1" stroke-width="7"/><circle cx="20" cy="106" r="8" fill="#E8554E"/><circle cx="100" cy="106" r="8" fill="#E8554E"/></symbol>
+<symbol id="p-masche" viewBox="0 0 120 120"><path d="M8 72H112" stroke-width="11"/><path d="M8 72H112" stroke="#CBD5E1" stroke-width="6"/><path d="M40 72 C40 36 80 36 80 72 M40 72 C40 92 28 100 14 112 M80 72 C80 92 94 100 108 112" stroke-width="11"/><path d="M40 72 C40 36 80 36 80 72 M40 72 C40 92 28 100 14 112 M80 72 C80 92 94 100 108 112" stroke="#2BB3A3" stroke-width="6"/></symbol>
+<symbol id="p-rechtemasche" viewBox="0 0 120 120"><rect x="12" y="24" width="96" height="84" rx="4" fill="#D4F1EC"/><path d="M20 30L28 44L36 30M36 30L44 44L52 30M52 30L60 44L68 30M68 30L76 44L84 30M84 30L92 44L100 30M20 48L28 62L36 48M36 48L44 62L52 48M52 48L60 62L68 48M68 48L76 62L84 48M84 48L92 62L100 48M20 66L28 80L36 66M36 66L44 80L52 66M52 66L60 80L68 66M68 66L76 80L84 66M84 66L92 80L100 66M20 84L28 98L36 84M36 84L44 98L52 84M52 84L60 98L68 84M68 84L76 98L84 84M84 84L92 98L100 84" stroke-width="7"/><path d="M20 30L28 44L36 30M36 30L44 44L52 30M52 30L60 44L68 30M68 30L76 44L84 30M84 30L92 44L100 30M20 48L28 62L36 48M36 48L44 62L52 48M52 48L60 62L68 48M68 48L76 62L84 48M84 48L92 62L100 48M20 66L28 80L36 66M36 66L44 80L52 66M52 66L60 80L68 66M68 66L76 80L84 66M84 66L92 80L100 66M20 84L28 98L36 84M36 84L44 98L52 84M52 84L60 98L68 84M68 84L76 98L84 84M84 84L92 98L100 84" stroke="#2BB3A3" stroke-width="3.5"/></symbol>
+<symbol id="p-linkemasche" viewBox="0 0 120 120"><rect x="12" y="24" width="96" height="84" rx="4" fill="#D4F1EC"/><path d="M18 42q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0M18 60q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0M18 78q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0M18 96q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0" stroke-width="7"/><path d="M18 42q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0M18 60q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0M18 78q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0M18 96q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0q7-10 14 0" stroke="#2BB3A3" stroke-width="3.5"/></symbol>
+<symbol id="p-anschlag" viewBox="0 0 120 120"><path d="M8 66H112" stroke-width="11"/><path d="M8 66H112" stroke="#CBD5E1" stroke-width="6"/><path d="M20 66 C20 36 40 36 40 66 C40 36 60 36 60 66 C60 36 80 36 80 66 C80 36 100 36 100 66 C100 86 108 96 114 110" stroke-width="10"/><path d="M20 66 C20 36 40 36 40 66 C40 36 60 36 60 66 C60 36 80 36 80 66 C80 36 100 36 100 66 C100 86 108 96 114 110" stroke="#2BB3A3" stroke-width="5"/></symbol>
+<symbol id="p-abketten" viewBox="0 0 120 120"><rect x="12" y="52" width="96" height="56" rx="4" fill="#D4F1EC"/><path d="M20 66L26 76L32 66L38 76L44 66L50 76L56 66L62 76L68 66L74 76L80 66L86 76L92 66L98 76M20 86L26 96L32 86L38 96L44 86L50 96L56 86L62 96L68 86L74 96L80 86L86 96L92 86L98 96" stroke="#2BB3A3" stroke-width="3"/><g stroke-width="7"><ellipse cx="24" cy="52" rx="10" ry="6"/><ellipse cx="40" cy="52" rx="10" ry="6"/><ellipse cx="56" cy="52" rx="10" ry="6"/><ellipse cx="72" cy="52" rx="10" ry="6"/><ellipse cx="88" cy="52" rx="10" ry="6"/></g><g stroke="#2BB3A3" stroke-width="3.5"><ellipse cx="24" cy="52" rx="10" ry="6"/><ellipse cx="40" cy="52" rx="10" ry="6"/><ellipse cx="56" cy="52" rx="10" ry="6"/><ellipse cx="72" cy="52" rx="10" ry="6"/><ellipse cx="88" cy="52" rx="10" ry="6"/></g><path d="M98 52 C110 52 114 36 112 24" stroke-width="9"/><path d="M98 52 C110 52 114 36 112 24" stroke="#2BB3A3" stroke-width="5"/></symbol>
+<symbol id="p-webrahmen" viewBox="0 0 120 120"><rect x="16" y="14" width="88" height="92" rx="4" stroke-width="14"/><rect x="16" y="14" width="88" height="92" rx="4" stroke="#C98A4E" stroke-width="9"/><path d="M32 23V97M44 23V97M56 23V97M68 23V97M80 23V97M92 23V97" stroke="#5B6B80" stroke-width="2.5"/><rect x="24" y="68" width="72" height="7" fill="#E8554E" stroke-width="2"/><rect x="24" y="75" width="72" height="7" fill="#F2C12E" stroke-width="2"/><rect x="24" y="82" width="72" height="7" fill="#4C6EF5" stroke-width="2"/><rect x="24" y="89" width="72" height="7" fill="#3BB273" stroke-width="2"/></symbol>
+<symbol id="p-kettfaden" viewBox="0 0 120 120"><path d="M24 22V98M42 22V98M60 22V98M78 22V98M96 22V98" stroke-width="9"/><path d="M24 22V98M42 22V98M60 22V98M78 22V98M96 22V98" stroke="#4C6EF5" stroke-width="5"/><rect x="10" y="8" width="100" height="14" rx="3" fill="#C98A4E"/><rect x="10" y="98" width="100" height="14" rx="3" fill="#C98A4E"/></symbol>
+<symbol id="p-schussfaden" viewBox="0 0 120 120"><path d="M20 10V110M36 10V110M52 10V110M68 10V110M84 10V110M100 10V110" stroke="#8A96A8" stroke-width="3"/><path d="M4 60 Q12 44 20 60 T36 60 T52 60 T68 60 T84 60 T100 60 T116 60" stroke-width="10"/><path d="M4 60 Q12 44 20 60 T36 60 T52 60 T68 60 T84 60 T100 60 T116 60" stroke="#E8554E" stroke-width="6"/></symbol>
+<symbol id="p-webschiffchen" viewBox="0 0 120 120"><path d="M8 40 H112 L100 60 L112 80 H8 L20 60 Z" fill="#C98A4E"/><path d="M46 40V80M54 40V80M62 40V80M70 40V80" stroke-width="10"/><path d="M46 40V80M54 40V80M62 40V80M70 40V80" stroke="#E8554E" stroke-width="6"/><path d="M74 76 C86 86 90 100 98 112" stroke-width="9"/><path d="M74 76 C86 86 90 100 98 112" stroke="#E8554E" stroke-width="5"/></symbol>
+<symbol id="p-perlen" viewBox="0 0 120 120"><path d="M4 60H116" stroke-width="3"/><circle cx="22" cy="60" r="11" fill="#E8554E"/><circle cx="41" cy="60" r="11" fill="#F2C12E"/><circle cx="60" cy="60" r="11" fill="#4C6EF5"/><circle cx="79" cy="60" r="11" fill="#3BB273"/><circle cx="98" cy="60" r="11" fill="#E05297"/><path d="M18 56h0M37 56h0M56 56h0M75 56h0M94 56h0" stroke="#fff" stroke-width="4"/></symbol>
+<symbol id="p-nylonfaden" viewBox="0 0 120 120"><circle cx="60" cy="56" r="40" stroke-width="9"/><ellipse cx="60" cy="56" rx="40" ry="28" stroke-width="9"/><path d="M100 56 C112 70 110 96 116 112" stroke-width="9"/><circle cx="60" cy="56" r="40" stroke="#9CD0F5" stroke-width="5"/><ellipse cx="60" cy="56" rx="40" ry="28" stroke="#9CD0F5" stroke-width="5"/><path d="M100 56 C112 70 110 96 116 112" stroke="#9CD0F5" stroke-width="5"/><circle cx="60" cy="96" r="10" fill="#E05297"/></symbol>
+<symbol id="p-zopf" viewBox="0 0 120 120"><ellipse cx="60" cy="18" rx="22" ry="10" transform="rotate(40 60 18)" fill="#E8554E"/><ellipse cx="60" cy="34" rx="22" ry="10" transform="rotate(-40 60 34)" fill="#F2C12E"/><ellipse cx="60" cy="50" rx="22" ry="10" transform="rotate(40 60 50)" fill="#4C6EF5"/><ellipse cx="60" cy="66" rx="22" ry="10" transform="rotate(-40 60 66)" fill="#E8554E"/><ellipse cx="60" cy="82" rx="22" ry="10" transform="rotate(40 60 82)" fill="#F2C12E"/><ellipse cx="60" cy="98" rx="22" ry="10" transform="rotate(-40 60 98)" fill="#4C6EF5"/></symbol>
+<symbol id="p-vorwaertsknoten" viewBox="0 0 120 120"><path d="M72 6V114" stroke-width="11"/><path d="M72 6V114" stroke="#4C6EF5" stroke-width="6"/><path d="M30 6 V54 L94 54 L94 70 L62 70 L62 114" stroke-width="11"/><path d="M30 6 V54 L94 54 L94 70 L62 70 L62 114" stroke="#E8554E" stroke-width="6"/><path d="M72 56V68" stroke-width="11"/><path d="M72 56V68" stroke="#4C6EF5" stroke-width="6"/></symbol>
+<symbol id="p-pompon" viewBox="0 0 120 120"><path d="M60 30V4" stroke-width="3"/><circle cx="60" cy="66" r="36" fill="#F2C12E"/><path d="M92 66L104 66M89.6 78.3L100.7 82.8M82.6 88.6L91.1 97.1M72.2 95.6L76.8 106.7M60 98L60 110M47.8 95.6L43.2 106.7M37.4 88.6L28.9 97.1M30.4 78.3L19.3 82.8M28 66L16 66M30.4 53.7L19.3 49.2M37.4 43.4L28.9 34.9M47.8 36.4L43.2 25.3M60 34L60 22M72.2 36.4L76.8 25.3M82.6 43.4L91.1 34.9M89.6 53.7L100.7 49.2"/></symbol>
+<symbol id="p-filznadel" viewBox="0 0 120 120"><ellipse cx="60" cy="108" rx="34" ry="10" fill="#9CD0F5"/><path d="M60 104 V16 H86" stroke-width="11"/><path d="M60 104 V16 H86" stroke="#CBD5E1" stroke-width="6"/><path d="M60 84l-6-6M60 72l6-6M60 60l-6-6" stroke-width="3"/></symbol>
+<symbol id="p-filzwolle" viewBox="0 0 120 120"><path d="M8 78 Q0 86 10 92 M108 40 Q118 36 112 28 M100 90 Q110 96 104 104" stroke-width="3"/><path d="M22 72 Q6 60 20 48 Q22 28 44 32 Q56 14 76 26 Q98 22 98 44 Q116 54 104 70 Q104 92 82 88 Q66 104 50 90 Q28 96 22 72 Z" fill="#F6AFC6"/></symbol>
+<symbol id="p-walken" viewBox="0 0 120 120"><path d="M6 76 Q18 66 30 76 T54 76 T78 76 T102 76 T126 76 V116 H6 Z" fill="#9CD0F5"/><circle cx="60" cy="62" r="22" fill="#E8554E"/><circle cx="24" cy="48" r="6" fill="#fff" stroke-width="3"/><circle cx="96" cy="52" r="5" fill="#fff" stroke-width="3"/><circle cx="36" cy="32" r="4" fill="#fff" stroke-width="3"/><circle cx="86" cy="30" r="6" fill="#fff" stroke-width="3"/></symbol>
+<symbol id="p-faltlinie" viewBox="0 0 120 120"><path d="M18 14 H60 L102 56 V106 H18 Z" fill="#fff"/><path d="M60 14 L60 56 L102 56 Z" fill="#3BB273"/><path d="M60 56V106" stroke-dasharray="6 5" stroke-width="3"/></symbol>
+<symbol id="p-leim" viewBox="0 0 120 120"><rect x="38" y="36" width="44" height="72" rx="8" fill="#fff"/><rect x="46" y="22" width="28" height="14" rx="3" fill="#EF6C2E"/><path d="M54 22 L60 6 L66 22 Z" fill="#EF6C2E"/><rect x="46" y="56" width="28" height="30" rx="3" fill="#F2C12E" stroke-width="3"/></symbol>
+<symbol id="p-laubsaege" viewBox="0 0 120 120"><path d="M86 18 H24 V102 H86" stroke-width="13"/><path d="M86 18 H24 V102 H86" stroke="#C98A4E" stroke-width="8"/><path d="M86 20V100" stroke-width="3"/><path d="M86 30l-4 3M86 40l-4 3M86 50l-4 3M86 60l-4 3M86 70l-4 3M86 80l-4 3M86 90l-4 3" stroke-width="2.5"/><rect x="80" y="12" width="12" height="10" rx="2" fill="#8A96A8"/><rect x="78" y="100" width="16" height="18" rx="4" fill="#8F5A2E"/></symbol>
+<symbol id="p-schleifpapier" viewBox="0 0 120 120"><path d="M18 22 H90 L102 34 V98 H18 Z" fill="#E2BC72"/><rect x="22" y="38" width="76" height="56" fill="url(#m-koern)" stroke="none"/><rect x="22" y="27" width="62" height="11" fill="url(#m-koern)" stroke="none"/><path d="M90 22 V34 H102" fill="#F3E3C3"/></symbol>
+<symbol id="p-heissleim" viewBox="0 0 120 120"><rect x="6" y="46" width="22" height="12" rx="3" fill="#fff"/><path d="M36 66 L30 106 Q30 112 36 112 H52 Q56 112 56 106 L58 66 Z" fill="#EF6C2E"/><rect x="22" y="38" width="66" height="28" rx="8" fill="#EF6C2E"/><rect x="88" y="46" width="16" height="12" rx="2" fill="#8A96A8"/><path d="M104 48 L114 52 L104 56 Z" fill="#8A96A8"/><path d="M62 66 Q70 78 64 90" stroke-width="5"/><path d="M114 62 Q108 74 114 78 Q120 74 114 62 Z" fill="#fff" stroke-width="3"/></symbol>
+<symbol id="p-schnitzmesser" viewBox="0 0 120 120"><path d="M62 54 H98 Q112 58 110 66 L62 72 Z" fill="#CBD5E1"/><rect x="8" y="52" width="58" height="22" rx="9" fill="#E8554E"/><circle cx="22" cy="63" r="3" fill="#8A96A8" stroke-width="2"/><circle cx="50" cy="63" r="3" fill="#8A96A8" stroke-width="2"/></symbol>
+<symbol id="p-schnitzhandschuh" viewBox="0 0 120 120"><rect x="30" y="44" width="58" height="56" rx="10" fill="#CBD5E1"/><rect x="30" y="14" width="13" height="40" rx="6" fill="#CBD5E1"/><rect x="45" y="8" width="13" height="46" rx="6" fill="#CBD5E1"/><rect x="60" y="10" width="13" height="44" rx="6" fill="#CBD5E1"/><rect x="75" y="18" width="13" height="36" rx="6" fill="#CBD5E1"/><ellipse cx="22" cy="66" rx="9" ry="18" transform="rotate(25 22 66)" fill="#CBD5E1"/><rect x="28" y="96" width="62" height="18" rx="4" fill="#4C6EF5"/></symbol>
+<symbol id="p-ton" viewBox="0 0 120 120"><path d="M28 44 Q24 100 60 100 Q96 100 92 44 Z" fill="#B8794A"/><ellipse cx="60" cy="44" rx="32" ry="8" fill="#8F5A2E"/><ellipse cx="60" cy="44" rx="22" ry="4.5" fill="#6B4328" stroke-width="2"/><ellipse cx="100" cy="102" rx="14" ry="9" fill="#B8794A"/><circle cx="18" cy="102" r="9" fill="#B8794A"/></symbol>
+<symbol id="p-stempel" viewBox="0 0 120 120"><path d="M44 32 Q44 10 60 10 Q76 10 76 32 Z" fill="#C98A4E"/><rect x="26" y="32" width="68" height="22" rx="4" fill="#C98A4E"/><rect x="26" y="54" width="68" height="8" rx="2" fill="#E8554E"/><path d="M60 72 L65 84 L78 85 L68 93 L71 106 L60 99 L49 106 L52 93 L42 85 L55 84 Z" fill="#E8554E" stroke-width="3"/></symbol>
+<symbol id="p-lupe" viewBox="0 0 120 120"><path d="M70 70 L106 106" stroke-width="16"/><path d="M70 70 L106 106" stroke="#C98A4E" stroke-width="10"/><circle cx="48" cy="48" r="30" fill="#DCEBFA" stroke-width="7"/><path d="M34 42 Q36 30 48 28" stroke="#fff" stroke-width="4"/></symbol>
+<symbol id="p-nagel" viewBox="0 0 120 120"><path d="M55 20 H65 L62 104 H58 Z" fill="#CBD5E1"/><rect x="46" y="12" width="28" height="9" rx="2" fill="#8A96A8"/><rect x="8" y="78" width="104" height="32" rx="4" fill="#C98A4E"/><path d="M20 94H50M70 100H100" stroke="#8F5A2E" stroke-width="3"/></symbol>
+</defs></svg>
+
+<script>
+// Fachwörter von Schritt für Schritt. Verfahren wie in der App (quelle/p2.js, THEMEN).
+const VERFAHREN=[
+ {id:'naehen',name:'Nähen',emoji:'🪡',color:'#E8554E'},
+ {id:'sticken',name:'Sticken',emoji:'🧵',color:'#E05297'},
+ {id:'haekeln',name:'Häkeln',emoji:'🧶',color:'#9B5DE5'},
+ {id:'stricken',name:'Stricken',emoji:'🧶',color:'#2BB3A3'},
+ {id:'weben',name:'Weben',emoji:'🧺',color:'#C98A4E'},
+ {id:'perlen',name:'Perlen',emoji:'📿',color:'#2A9DB8'},
+ {id:'knuepfen',name:'Flechten & Knüpfen',emoji:'🪢',color:'#F2C12E'},
+ {id:'wickeln',name:'Wickeln',emoji:'🪁',color:'#4C6EF5'},
+ {id:'filzen',name:'Filzen',emoji:'☁️',color:'#8FB8DE'},
+ {id:'falten',name:'Falten',emoji:'📄',color:'#3BB273'},
+ {id:'schneiden',name:'Schneiden & Kleben',emoji:'✂️',color:'#3BB273'},
+ {id:'holz',name:'Sägen & Nageln',emoji:'🔨',color:'#8F5A2E'},
+ {id:'schnitzen',name:'Schnitzen',emoji:'🪵',color:'#6E8B3D'},
+ {id:'formen',name:'Formen',emoji:'🏺',color:'#B8794A'},
+ {id:'drucken',name:'Drucken',emoji:'🖐️',color:'#EF6C2E'},
+ {id:'experimente',name:'Experimentieren',emoji:'🧪',color:'#9B5DE5'}];
+const VF=Object.fromEntries(VERFAHREN.map(v=>[v.id,v]));
+// wort, Verfahren, Erklärung in einem Satz, Bild = id des Symbols im Sprite
+const WOERTER=[
+ ['Nadel','naehen','Mit der Nadel ziehst du den Faden durch den Stoff.','nadel'],
+ ['Nadelöhr','naehen','Das Nadelöhr ist das Loch in der Nadel, durch das der Faden geht.','nadeloehr'],
+ ['Faden','naehen','Der Faden hält den Stoff zusammen – er kommt von der Garnrolle.','faden'],
+ ['Knoten','naehen','Der Knoten am Fadenende hält den Faden im Stoff fest.','knoten'],
+ ['Vorstich','naehen','Beim Vorstich geht die Nadel immer rauf und runter – es gibt eine gestrichelte Linie.','vorstich'],
+ ['Rückstich','naehen','Beim Rückstich stichst du ein Stück zurück – so wird die Linie durchgehend.','rueckstich'],
+ ['Überwendlingsstich','naehen','Mit dem Überwendlingsstich nähst du zwei Stoffkanten schräg zusammen.','ueberwendling'],
+ ['Stecknadel','naehen','Mit Stecknadeln steckst du den Stoff fest, bevor du nähst.','stecknadel'],
+ ['Schnittmuster','naehen','Das Schnittmuster ist die Papiervorlage, nach der du den Stoff zuschneidest.','schnittmuster'],
+ ['Massband','naehen','Mit dem Massband misst du, wie lang oder breit etwas ist.','massband'],
+ ['Bügeleisen','naehen','Das Bügeleisen macht den Stoff heiss und glatt – nur mit einem Erwachsenen.','buegeleisen'],
+ ['Zickzackschere','naehen','Die Zickzackschere schneidet eine Zackenkante, damit der Stoff nicht ausfranst.','zickzackschere'],
+ ['Kreuzstich','sticken','Zwei schräge Stiche übereinander – fertig ist das Kreuz.','kreuzstich'],
+ ['Aida-Stoff','sticken','Aida-Stoff hat kleine Löcher im Raster, damit du gut zählen kannst.','aida'],
+ ['Stickrahmen','sticken','Der Stickrahmen spannt den Stoff, damit er beim Sticken glatt bleibt.','stickrahmen'],
+ ['Häkelnadel','haekeln','Die Häkelnadel hat vorne einen Haken, der den Faden holt.','haekelnadel'],
+ ['Luftmasche','haekeln','Luftmaschen sind eine Kette aus Schlaufen – so beginnt fast jedes Häkelstück.','luftmasche'],
+ ['Feste Masche','haekeln','Die feste Masche ist die einfachste Häkelmasche und macht ein dichtes Stück.','festemasche'],
+ ['Stricknadel','stricken','Zum Stricken brauchst du zwei Stricknadeln.','stricknadel'],
+ ['Masche','stricken','Jede Schlaufe auf der Nadel ist eine Masche.','masche'],
+ ['Rechte Masche','stricken','Rechte Maschen sehen aus wie kleine V.','rechtemasche'],
+ ['Linke Masche','stricken','Linke Maschen sehen aus wie kleine Wellen oder Hügel.','linkemasche'],
+ ['Anschlag','stricken','Beim Anschlag legst du die ersten Maschen auf die Nadel.','anschlag'],
+ ['Abketten','stricken','Beim Abketten schliesst du die Maschen ab, damit nichts aufgeht.','abketten'],
+ ['Webrahmen','weben','Der Webrahmen spannt die Fäden, auf denen du webst.','webrahmen'],
+ ['Kettfaden','weben','Die Kettfäden sind auf dem Rahmen gespannt – sie laufen von oben nach unten.','kettfaden'],
+ ['Schussfaden','weben','Der Schussfaden läuft quer, immer über und unter den Kettfäden durch.','schussfaden'],
+ ['Webschiffchen','weben','Auf dem Webschiffchen ist der Schussfaden aufgewickelt – damit fädelst du ihn durch.','webschiffchen'],
+ ['Perlen','perlen','Perlen haben ein Loch, damit du sie auffädeln kannst.','perlen'],
+ ['Nylonfaden','perlen','Der Nylonfaden ist dünn, stark und fast durchsichtig – perfekt für Perlen.','nylonfaden'],
+ ['Zopf','knuepfen','Für einen Zopf legst du drei Stränge immer abwechselnd über die Mitte.','zopf'],
+ ['Vorwärtsknoten','knuepfen','Der Vorwärtsknoten sieht aus wie eine 4 – so knüpfst du Freundschaftsbänder.','vorwaertsknoten'],
+ ['Pompon','wickeln','Wolle um einen Ring wickeln, aufschneiden, zusammenbinden – fertig ist der Pompon.','pompon'],
+ ['Filznadel','filzen','Die Filznadel hat kleine Widerhaken – vorsichtig, sie ist sehr spitz.','filznadel'],
+ ['Filzwolle','filzen','Filzwolle ist lockere, gekämmte Wolle, die sich filzen lässt.','filzwolle'],
+ ['Walken','filzen','Beim Walken reibst und knetest du die nasse Wolle mit Seife, bis sie fest wird.','walken'],
+ ['Faltlinie','falten','Die Faltlinie zeigt, wo du das Papier knicken sollst.','faltlinie'],
+ ['Schere','schneiden','Mit der Schere schneidest du Papier, Stoff oder Faden.','schere'],
+ ['Leim','schneiden','Mit Leim klebst du Teile zusammen – wenig Leim hält am besten.','leim'],
+ ['Laubsäge','holz','Mit der Laubsäge sägst du Kurven aus dünnem Holz.','laubsaege'],
+ ['Schleifpapier','holz','Mit Schleifpapier machst du das Holz glatt.','schleifpapier'],
+ ['Nagel','holz','Den Nagel schlägst du mit dem Hammer ins Holz.','nagel'],
+ ['Heissleimpistole','holz','Die Heissleimpistole klebt schnell und stark – der Leim ist sehr heiss.','heissleim'],
+ ['Schnitzmesser','schnitzen','Das Schnitzmesser ist scharf – immer vom Körper weg schnitzen.','schnitzmesser'],
+ ['Schnitzhandschuh','schnitzen','Der Schnitzhandschuh schützt die Hand, die das Holz hält.','schnitzhandschuh'],
+ ['Ton','formen','Ton ist weiche Erde, die du formen kannst – beim Brennen wird er hart.','ton'],
+ ['Stempel','drucken','Mit dem Stempel druckst du das gleiche Bild immer wieder.','stempel'],
+ ['Lupe','experimente','Mit der Lupe siehst du kleine Dinge gross.','lupe']
+].map(([wort,verfahren,erklaerung,bild])=>({wort,verfahren,erklaerung,bild}));
+
+const PAPIERE={a4:{name:'A4',w:210,h:297,karten:[2,4],plakat:3},a3:{name:'A3',w:297,h:420,karten:[3,5],plakat:4}};
+const S={verfahren:'',suche:'',ohne:false,modus:'karten',papier:'a4',klasse:0};
+const $=id=>document.getElementById(id);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+const norm=t=>t.toLowerCase().replace(/ä/g,'a').replace(/ö/g,'o').replace(/ü/g,'u').replace(/[^a-z0-9 ]/g,'');
+const pikto=w=>`<svg class="pikto" viewBox="0 0 120 120" role="img" aria-label="${esc(w.wort)}"><use href="#p-${w.bild}"/></svg>`;
+const mitWoertern=VERFAHREN.filter(v=>WOERTER.some(w=>w.verfahren===v.id));
+
+function auswahl(){
+  const q=norm(S.suche.trim());
+  return WOERTER.filter(w=>(!S.verfahren||w.verfahren===S.verfahren)&&(!q||norm(w.wort).includes(q)||norm(w.erklaerung).includes(q)));
+}
+/* ---------- Bildschirm ---------- */
+function liste(){
+  const ws=auswahl();
+  $('liste').innerHTML=ws.length?ws.map(w=>{const v=VF[w.verfahren];return `<article class="fw" style="--farbe:${v.color}"><div class="bild">${pikto(w)}</div><div class="wort">${esc(w.wort)}</div><p class="erkl">${esc(w.erklaerung)}</p>${S.verfahren?'':`<span class="vf">${esc(v.name)}</span>`}</article>`}).join('')
+    :`<p class="leer">Kein Wort gefunden. Versuche ein anderes Wort oder «Alle».</p>`;
+  $('treffer').textContent=`${ws.length} ${ws.length===1?'Wort':'Wörter'}`;
+  return ws;
+}
+/* ---------- Druckseiten ---------- */
+function seite(inhalt,klasse='',fuss=''){
+  return `<div class="seite ${klasse}">${inhalt}<div class="fuss"><span>Schritt für Schritt · Fachwörter${fuss?' · '+fuss:''}</span><span>Papier ${PAPIERE[S.papier].name}</span></div></div>`;
+}
+const stueck=(a,n)=>{const r=[];for(let i=0;i<a.length;i+=n)r.push(a.slice(i,i+n));return r};
+function kartenSeiten(ws,memory){
+  const [sp,ze]=PAPIERE[S.papier].karten,pro=sp*ze;
+  // Memory: pro Wort zwei Karten (Bild, Wort), Paare bleiben auf derselben Seite
+  const karten=memory?ws.flatMap(w=>[{w,art:'bild'},{w,art:'wort'}]):ws.map(w=>({w,art:'voll'}));
+  return stueck(karten,pro).map((k,i)=>{
+    while(k.length<pro)k.push(null);
+    const felder=k.map(x=>{if(!x)return `<div class="leerfeld"></div>`;const v=VF[x.w.verfahren];
+      if(x.art==='bild')return `<div class="memo"><div class="bild">${pikto(x.w)}</div></div>`;
+      if(x.art==='wort')return `<div class="memo"><div class="wort">${esc(x.w.wort)}</div><span class="kz">${esc(v.name)}</span></div>`;
+      return `<div><div class="wort">${esc(x.w.wort)}</div><div class="bild">${pikto(x.w)}</div><p class="erkl">${esc(x.w.erklaerung)}</p><span class="kz">${esc(v.name)}</span></div>`}).join('');
+    return seite(`<div class="gitter" style="grid-template-columns:repeat(${sp},1fr);grid-template-rows:repeat(${ze},1fr)">${felder}</div>`,'',`${memory?'Memory':'Karten'} · Seite ${i+1}`);
+  });
+}
+function plakatSeiten(ws){
+  const sp=PAPIERE[S.papier].plakat,pro=sp*(S.papier==='a3'?5:4),seiten=[];
+  mitWoertern.forEach(v=>{const eigene=ws.filter(w=>w.verfahren===v.id);if(!eigene.length)return;
+    stueck(eigene,pro).forEach((teil,i,alle)=>{
+      seiten.push(seite(`<div class="plakat" style="--farbe:${v.color};--sp:${sp}"><div class="titel"><span class="em">${v.emoji}</span><div><h3>${esc(v.name)}</h3><small>Fachwörter${alle.length>1?` · Blatt ${i+1} von ${alle.length}`:''}</small></div></div><div class="kacheln">${teil.map(w=>`<div class="kachel"><div class="bild">${pikto(w)}</div><div class="wort">${esc(w.wort)}</div><p class="erkl">${esc(w.erklaerung)}</p></div>`).join('')}</div></div>`,'',`Plakat ${esc(v.name)}`));});});
+  return seiten;
+}
+function druck(ws){
+  const seiten=S.modus==='plakat'?plakatSeiten(ws):kartenSeiten(ws,S.modus==='memory');
+  const html=seiten.join('');
+  $('druck').innerHTML=html;
+  $('vorschau').innerHTML=seiten.map(s=>`<div class="blatt">${s}</div>`).join('')||'<p class="hinweis">Nichts zu drucken.</p>';
+  const p=PAPIERE[S.papier],n=seiten.length;
+  $('info').textContent=!ws.length?'Keine Wörter ausgewählt.':S.modus==='plakat'?`${n} ${n===1?'Plakat':'Plakate'} (je Verfahren ein Blatt ${p.name}).`:S.modus==='memory'?`${ws.length} Paare = ${ws.length*2} Karten auf ${n} ${n===1?'Seite':'Seiten'} ${p.name}. Auf dickes Papier drucken, ausschneiden, Rückseite nach oben mischen.`:`${ws.length} Karten auf ${n} ${n===1?'Seite':'Seiten'} ${p.name} (${p.karten[0]*p.karten[1]} pro Blatt). An den gestrichelten Linien ausschneiden.`;
+  massstab();
+}
+function massstab(){
+  const el=$('vorschau'),b=el.clientWidth;if(!b)return;
+  el.style.setProperty('--s',(b/(PAPIERE[S.papier].w*96/25.4)).toFixed(4));
+}
+function papierSetzen(){
+  const p=PAPIERE[S.papier];
+  $('seite').textContent=`@page{size:${p.name} portrait;margin:0}`;
+  ['druck','vorschau'].forEach(id=>{$(id).style.setProperty('--bw',p.w+'mm');$(id).style.setProperty('--bh',p.h+'mm')});
+}
+/* ---------- Bedienung ---------- */
+function zeichnen(){
+  document.querySelectorAll('#verfahren .chip').forEach(c=>c.setAttribute('aria-pressed',(c.dataset.v||'')===S.verfahren));
+  document.querySelectorAll('#modus .chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.modus===S.modus));
+  document.querySelectorAll('#papier .chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.papier===S.papier));
+  $('erkl').setAttribute('aria-pressed',S.ohne);$('erkl').textContent=S.ohne?'Erklärung zeigen':'Erklärung verstecken';
+  document.body.classList.toggle('ohne',S.ohne);
+  papierSetzen();
+  druck(liste());
+  const p=new URLSearchParams();
+  if(S.verfahren)p.set('verfahren',S.verfahren);if(S.modus!=='karten')p.set('modus',S.modus);if(S.papier!=='a4')p.set('papier',S.papier);if(S.klasse)p.set('klasse',S.klasse);
+  try{history.replaceState(null,'',location.pathname+(String(p)?'?'+p:''))}catch(e){}
+}
+function bedienung(){
+  $('verfahren').innerHTML=`<button type="button" class="chip" data-v="" aria-pressed="true">Alle</button>`+mitWoertern.map(v=>`<button type="button" class="chip" data-v="${v.id}" aria-pressed="false" style="--punkt:${v.color}"><i></i>${esc(v.name)}</button>`).join('');
+  $('verfahren').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;S.verfahren=c.dataset.v||'';zeichnen()});
+  $('modus').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;S.modus=c.dataset.modus;zeichnen()});
+  $('papier').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;S.papier=c.dataset.papier;zeichnen()});
+  $('erkl').addEventListener('click',()=>{S.ohne=!S.ohne;zeichnen()});
+  $('suche').addEventListener('input',e=>{S.suche=e.target.value;druck(liste())});
+  $('drucken').addEventListener('click',()=>window.print());
+  if(window.ResizeObserver)new ResizeObserver(massstab).observe($('vorschau'));else addEventListener('resize',massstab);
+}
+const q=new URLSearchParams(location.search);
+if(VF[q.get('verfahren')])S.verfahren=q.get('verfahren');
+if(['karten','plakat','memory'].includes(q.get('modus')))S.modus=q.get('modus');
+if(PAPIERE[q.get('papier')])S.papier=q.get('papier');
+if(+q.get('klasse')>=1&&+q.get('klasse')<=6){S.klasse=+q.get('klasse');if(S.klasse<=2)document.body.classList.add('einfach')}
+bedienung();zeichnen();
+</script>
+</body>
+</html>

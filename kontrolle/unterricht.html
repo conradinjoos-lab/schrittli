@@ -46,7 +46,56 @@
 .fav{display:inline-flex;align-items:center;gap:4px;background:var(--surface2);border-radius:999px;padding:4px 6px 4px 12px;font:600 13px var(--display);margin:0 6px 6px 0}
 .fav button{border:0;background:transparent;cursor:pointer;font:inherit;padding:2px 4px;border-radius:50%}
 .fav button.laden{color:var(--lern)}
+/* Material und Drucken */
+.material{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+.mat-liste{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.mat{display:inline-flex;align-items:center;gap:6px;background:var(--surface2);border-radius:999px;padding:4px 12px;font-size:13px}
+.mat small{color:var(--muted)}
+.mat-pro{font-size:13px;margin:3px 0;color:var(--muted)}
+.mat-pro b{color:var(--ink);font-weight:600}
+.papier{display:inline-flex;gap:6px;margin-right:4px}
+.papier label{display:flex;align-items:center;background:var(--surface2);border-radius:999px;padding:7px 14px;cursor:pointer;font:600 13px var(--display);border:2px solid transparent}
+.papier label:has(input:checked){background:var(--lern-soft);border-color:var(--lern);color:#0F7A61}
+.papier input{position:absolute;opacity:0;width:0;height:0}
+/* Lektionsplan-Fortschritt pro iPad */
+.plan-zeile{display:flex;align-items:center;gap:8px;font-size:12px;margin:2px 0;white-space:nowrap}
+.plan-zeile span{overflow:hidden;text-overflow:ellipsis;max-width:220px}
+.boxen{display:inline-flex;gap:3px;flex:none}
+.box{width:18px;height:18px;border:2px solid var(--line);border-radius:5px;font-size:11px;line-height:14px;text-align:center;color:var(--muted);font-style:normal}
+.box.an{background:var(--lern);border-color:var(--lern);color:#fff}
+/* Druckbereich: am Bildschirm unsichtbar, beim Drucken das Einzige */
+#druck{display:none}
+@media print{
+ html,body{background:#fff;margin:0}
+ .wrap{display:none}
+ #druck{display:block;color:#000;font:12pt/1.35 var(--body)}
+ .blatt h1{font:600 22pt/1.1 var(--display);margin:0 0 4pt}
+ .blatt .kopf{font-size:11pt;color:#444;margin-bottom:10pt;border-bottom:1.5pt solid #000;padding-bottom:6pt}
+ .blatt h2{font:600 14pt/1.2 var(--display);margin:12pt 0 6pt}
+ .check{list-style:none;margin:0;padding:0;columns:2;column-gap:12mm}
+ .check li{break-inside:avoid;display:flex;gap:7pt;align-items:flex-start;padding:3pt 0;font-size:12.5pt}
+ .check li i{flex:none;width:14pt;height:14pt;border:1.5pt solid #000;border-radius:3pt;margin-top:1pt}
+ .check li small{display:block;font-size:9pt;color:#555}
+ .pro{display:flex;gap:8pt;padding:4pt 0;border-bottom:.5pt solid #bbb;break-inside:avoid;font-size:11.5pt}
+ .pro b{flex:0 0 42%;font-weight:700}
+ .pro span{color:#222}
+ .papier-a3 .check{columns:3}
+ .qr-kopf{display:flex;gap:10mm;align-items:center;border-bottom:1.5pt solid #000;padding-bottom:5mm;margin-bottom:5mm}
+ .qr-kopf canvas{width:34mm;height:34mm;image-rendering:pixelated}
+ .qr-kopf .hinweis{font-size:10pt;color:#444}
+ .qr-gitter{display:grid;grid-template-columns:repeat(2,1fr);gap:4mm}
+ .qr-zelle{height:74mm;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;border:.5pt dashed #999;border-radius:3mm;padding:3mm;break-inside:avoid}
+ .qr-zelle canvas{width:54mm;height:54mm;image-rendering:pixelated}
+ .qr-zelle b{display:block;font:600 14pt/1.15 var(--display);margin-top:2mm}
+ .qr-zelle small{font-size:10.5pt;color:#333}
+ .papier-a3 .qr-gitter{grid-template-columns:repeat(3,1fr);gap:5mm}
+ .papier-a3 .qr-zelle{height:84mm}
+ .papier-a3 .qr-zelle canvas{width:62mm;height:62mm}
+ .papier-a3 .qr-zelle b{font-size:16pt}
+ .papier-a3 .qr-kopf canvas{width:40mm;height:40mm}
+}
 </style>
+<style id="papier-stil">@page{size:A4 portrait;margin:14mm}</style>
 </head>
 <body>
 <div class="wrap">
@@ -93,6 +142,16 @@
    <div class="chips" id="chips"></div>
    <div class="suche"><input type="search" id="suche" placeholder="Titel suchen" autocomplete="off"><select id="thema"><option value="">Alle Themen</option></select><select id="stufe"><option value="">Alle Klassen</option><option value="1">1. Klasse</option><option value="2">2. Klasse</option><option value="3">3. Klasse</option><option value="4">4. Klasse</option><option value="5">5. Klasse</option><option value="6">6. Klasse</option></select></div>
    <div class="videos" id="videos"></div>
+   <div class="material">
+    <h3>Material für diese Lektion</h3>
+    <div id="material"><p class="klein" style="margin:0">Wähle Aufgaben, dann erscheint hier das Material.</p></div>
+    <div class="aktion" style="margin-top:8px">
+     <span class="papier" id="papier" title="Papierformat für den Druck"><label><input type="radio" name="papier" value="A4" checked>A4</label><label><input type="radio" name="papier" value="A3">A3</label></span>
+     <button class="s" id="drucken-material" disabled>🖨 Materialliste drucken</button>
+     <button class="s" id="drucken-qr" disabled>🖨 QR-Blatt drucken</button>
+    </div>
+   </div>
+   <label class="schalter" id="plan-feld"><input type="checkbox" id="plan"> Lektionsplan (Material richten → Video → Foto) – die iPads führen durch die drei Schritte, du siehst unten, wer wo steht</label>
   </div>
   <label class="schalter" id="galerie-feld"><input type="checkbox" id="galerie"> «Unsere Werke» und Fotos bleiben offen</label>
   <div class="aktion"><button class="p" id="freigeben">Freigeben</button><button class="s" id="schliessen">🔒 Alles schliessen</button><button class="s" id="favorit">☆ Als Favorit speichern</button><span class="klein" id="hinweis"></span></div>
@@ -102,6 +161,7 @@
   <div id="geraete"><p class="klein">Noch kein iPad verbunden. Öffne den Gruppenlink auf den iPads.</p></div>
  </div>
 </template>
+<div id="druck" aria-hidden="true"></div>
 <script src="werkstatt.js"></script>
 <script src="qr.js"></script>
 <script>
@@ -109,6 +169,9 @@
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
 const THEMEN={naehen:'🪡 Nähen',sticken:'🧵 Sticken',haekeln:'🧶 Häkeln',stricken:'🧶 Stricken',weben:'🧺 Weben',perlen:'📿 Perlen',knuepfen:'🪢 Flechten & Knüpfen',wickeln:'🪁 Wickeln',filzen:'☁️ Filzen',falten:'📄 Falten',schneiden:'✂️ Schneiden & Kleben',holz:'🔨 Sägen & Nageln',schnitzen:'🪵 Schnitzen',formen:'🏺 Formen',drucken:'🖐️ Drucken',experimente:'🧪 Experimentieren'};
+/* Material-Namen: Kopie von MATERIAL aus quelle/p2.js (nur id → Name), damit die Seite ohne Build-Schritt auskommt. */
+const MATERIAL={wolle:'Wolle',garn:'Garn',schnur:'Schnur',schere:'Schere',karton:'Karton',papier:'Papier',nadel:'Nadel',stopfnadel:'Stumpfe Nadel',filz:'Filz',stoff:'Stoff',leim:'Leim',klebeband:'Klebeband',heisskleber:'Heisskleber',zirkel:'Zirkel',lineal:'Lineal',bleistift:'Bleistift',stifte:'Farbstifte',hammer:'Hammer',naegel:'Nägel',holzbrett:'Holzbrett',zange:'Zange',perle:'Perle',knopf:'Knopf',haekelnadel:'Häkelnadel',stricknadeln:'Stricknadeln',strickliesel:'Strickliesel',filzwolle:'Filzwolle',seife:'Seife',wasser:'Wasser',glas:'Glas',flasche:'Flasche',luftballon:'Luftballon',trinkhalm:'Trinkhalm',waescheklammer:'Wäscheklammer',magnet:'Magnet',bueroklammer:'Büroklammern',taschenlampe:'Taschenlampe',ei:'Eier',buecher:'Bücher',hefe:'Hefe',zucker:'Zucker',loeffel:'Löffel',trichter:'Trichter',backpulver:'Backpulver',essig:'Essig',brausetablette:'Brausetablette',dose:'Dose',moos:'Moos',steine:'Steine',sand:'Sand',watte:'Watte',zahnstocher:'Zahnstocher',frucht:'Apfel oder Orange',schuh:'Schuh',tuerklinke:'Türklinke',salz:'Salz',pfeffer:'Pfeffer',stab:'Stab',schnuersenkel:'Schnürsenkel',handtuch:'Handtuch',holzspatel:'Holzspatel',kerze:'Kerze',eierbecher:'Eierbecher',zuendholzschachtel:'Zündholzschachtel',plastikloeffel:'Plastiklöffel',ton:'Ton',mehl:'Mehl',oel:'Öl',schuessel:'Schüssel',wallholz:'Wallholz',ausstechform:'Ausstechform',blueten:'Blüten',kartoffel:'Kartoffel',messer:'Messer',taschenmesser:'Taschenmesser',schnitzmesser:'Schnitzmesser',ast:'Ast',schnitzhandschuh:'Schnitzhandschuh',farbe:'Farbe',pinsel:'Pinsel',stempelkissen:'Stempelkissen',moosgummi:'Moosgummi',schwamm:'Schwamm',styropor:'Styroporplatte',walze:'Walze',teller:'Teller',saege:'Säge',schraubzwinge:'Schraubzwinge',schraubstock:'Schraubstock',schleifpapier:'Schleifpapier',zuendhoelzer:'Zündhölzer',holzklotz:'Holzklotz',wackelaugen:'Wackelaugen',sticker:'Sticker',holzraeder:'Holzräder',schrauben:'Schrauben',schraubendreher:'Schraubendreher',raspel:'Raspel',feile:'Feile',schwemmholz:'Schwemmholz',feder:'Feder',platte:'Druckplatte',metallplatte:'Metallplatte',bohrer:'Bohrer',schutzbrille:'Schutzbrille',reissnadel:'Reissnadel',koerner:'Körner',ahle:'Ahle',webschiffchen:'Webschiffchen',strickgabel:'Strickgabel',pappteller:'Pappteller',locher:'Locher',gummiband:'Gummiband',stickrahmen:'Stickrahmen',blaetter:'Blätter',gabel:'Gabel',zeitung:'Zeitung',hefter:'Heftapparat',filznadel:'Filznadel',schaumstoff:'Schaumstoffkissen',stecknadeln:'Stecknadeln',noppenfolie:'Noppenfolie',scoubidou:'Scoubidou-Bänder',eisstiel:'Eisstiele',paracord:'Paracord',perlenwebrahmen:'Perlenwebrahmen',schluesselring:'Schlüsselring',feuerzeug:'Feuerzeug',draht:'Draht',steckverschluss:'Steckverschluss',reissverschluss:'Reissverschluss',baumwollband:'Baumwollband',naehmaschine:'Nähmaschine',vlieseline:'Vlieseline',buegeleisen:'Bügeleisen'};
+const matName=id=>MATERIAL[id]||id;
 const MODI=[['closed','🔒','Geschlossen','Die iPads zeigen nur den Wartebildschirm.'],['projects','▶','Aufgaben','Nur die gewählten Aufgaben sind offen.'],['templates','✂️','Vorlagen','Die Vorlagen zum Ausdrucken sind offen.'],['beads','📿','Perlentiere','Der Perlen-Editor ist offen.'],['free','🏠','Alles offen','Die iPads zeigen die ganze App.']];
 const modus=m=>MODI.find(x=>x[0]===m)||MODI[0];
 const fehler=(el,x)=>{el.textContent=x?String(x.message||x):''};
@@ -130,7 +193,7 @@ function zeichneGruppen(){
 }
 $('#neu-form').onsubmit=async e=>{e.preventDefault();const b=e.target.querySelector('button');b.disabled=true;fehler($('#neu-fehler'));
  try{const g=await W.unterricht.erstellen($('#neu-name').value.trim());
-  gruppen.push({id:g.id,name:g.name,policy:{mode:'closed',title:'',ids:[],grade:null,simple:true,resize:true,recolor:true,gallery:false,selection:'custom',category:''},revision:0});
+  gruppen.push({id:g.id,name:g.name,token:g.token,policy:{mode:'closed',title:'',ids:[],grade:null,simple:true,resize:true,recolor:true,gallery:false,selection:'custom',category:'',plan:false},revision:0});
   $('#link').value=W.APP_URL+'#unterricht='+g.token;$('#qr').hidden=true;$('#qr').replaceChildren();$('#neu-link').hidden=false;$('#neu-name').value='';
   waehle(g.id);window.scrollTo({top:0,behavior:'smooth'})}
  catch(x){fehler($('#neu-fehler'),x)}b.disabled=false};
@@ -150,6 +213,7 @@ function waehle(id){
  ['#suche','#thema','#stufe'].forEach(s=>$(s).oninput=zeichneVideos);
  $('#freigeben').onclick=()=>freigeben(ausFormular());
  $('#schliessen').onclick=()=>{fuellen({...aktiv.policy,mode:'closed',title:'',ids:[]});freigeben(ausFormular())};
+ $('#drucken-material').onclick=()=>drucken('material');$('#drucken-qr').onclick=()=>drucken('qr');
  $('#favorit').onclick=async()=>{const p=ausFormular();const name=prompt('Name für diesen Favoriten:',p.title||modus(p.mode)[2]);if(!name)return;
   try{const f=await W.unterricht.favorit(name.trim(),p);favoriten.push(f);zeichneFavoriten()}catch(x){fehler($('#fehler'),x)}};
  geraeteLaden();clearInterval(timer);timer=setInterval(geraeteLaden,15000);
@@ -158,17 +222,66 @@ const vorschlag=()=>{const m=$('input[name=modus]:checked').value;if(m==='projec
 function fuellen(p){
  $(`input[name=modus][value="${modus(p.mode)[0]}"]`).checked=true;$('#projekte').hidden=p.mode!=='projects';
  $('#titel').value=p.title||'';$('#klasse').value=p.grade||'';$('#galerie').checked=!!p.gallery;
+ $('#plan').checked=!!p.plan;
  wahl=new Set((p.ids||[]).filter(videoOf));zeichneChips();zeichneVideos();$('#titel').placeholder=vorschlag();
 }
 function ausFormular(){
  const mode=$('input[name=modus]:checked').value,ids=mode==='projects'?[...wahl]:[];
- return {mode,title:($('#titel').value.trim()||vorschlag()).slice(0,80),ids,grade:+$('#klasse').value||null,simple:true,resize:true,recolor:true,gallery:$('#galerie').checked,selection:ids.length===1?'single':'custom',category:''};
+ return {mode,title:($('#titel').value.trim()||vorschlag()).slice(0,80),ids,grade:+$('#klasse').value||null,simple:true,resize:true,recolor:true,gallery:$('#galerie').checked,selection:ids.length===1?'single':'custom',category:'',plan:mode==='projects'&&$('#plan').checked};
 }
 function zeichneChips(){
  $('#chips').innerHTML=wahl.size?[...wahl].map(id=>`<span class="chip">${esc(videoOf(id).title)}<button data-weg="${id}" title="Entfernen">✕</button></span>`).join(''):'<span class="klein">Noch keine Aufgabe gewählt – unten antippen.</span>';
  $('#chips').querySelectorAll('[data-weg]').forEach(b=>b.onclick=()=>{wahl.delete(b.dataset.weg);zeichneChips();zeichneVideos()});
- $('#titel').placeholder=vorschlag();
+ $('#titel').placeholder=vorschlag();zeichneMaterial();
 }
+/* ---------- Material und Druck ---------- */
+const gewaehlt=()=>[...wahl].map(videoOf).filter(Boolean);
+function materialListe(vs){
+ const m=new Map();vs.forEach(v=>(v.material||[]).filter(Boolean).forEach(id=>{if(!m.has(id))m.set(id,[]);m.get(id).push(v.title)}));
+ return [...m].map(([id,titel])=>({id,name:matName(id),titel})).sort((a,b)=>a.name.localeCompare(b.name,'de'));
+}
+function zeichneMaterial(){
+ const el=$('#material');if(!el)return;const vs=gewaehlt(),liste=materialListe(vs);
+ $('#drucken-material').disabled=$('#drucken-qr').disabled=!vs.length;
+ if(!vs.length){el.innerHTML='<p class="klein" style="margin:0">Wähle Aufgaben, dann erscheint hier das Material.</p>';return}
+ el.innerHTML=(liste.length?`<div class="mat-liste">${liste.map(m=>`<span class="mat" title="${esc(m.titel.join(', '))}">${esc(m.name)}${vs.length>1&&m.titel.length>1?`<small>×${m.titel.length}</small>`:''}</span>`).join('')}</div>`:'<p class="klein">Für diese Aufgaben ist kein Material hinterlegt.</p>')
+  +vs.map(v=>`<div class="mat-pro"><b>${esc(v.title)}</b>: ${(v.material||[]).length?esc((v.material||[]).map(matName).join(', ')):'<i>kein Material angegeben</i>'}</div>`).join('');
+}
+/* Link aufs einzelne Video, gleiches Format wie schoolLink() in quelle/p2.js: Bildanleitungen «#a=<id>», sonst «#s=<base64url-Payload>». */
+function videoLink(v){
+ if(v.source&&v.source.type==='bilder')return W.APP_URL+'#a='+encodeURIComponent(v.id);
+ const payload={t:v.title,s:(v.steps||[]).map(s=>[Math.round(s.t*10)/10,s.label]),a:(v.task&&v.task.text)||''};
+ if(v.source&&v.source.type==='youtube')payload.y=v.source.id;else payload.u=(v.source&&v.source.url)||'';
+ const mat=(v.material||[]).filter(Boolean);if(mat.length)payload.m=mat;
+ const b64=btoa(unescape(encodeURIComponent(JSON.stringify(payload)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+ return W.APP_URL+'#s='+b64;
+}
+const datum=()=>new Date().toLocaleDateString('de-CH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+function drucken(art){
+ const vs=gewaehlt();if(!vs.length)return;
+ const papier=$('input[name=papier]:checked').value,titel=$('#titel').value.trim()||vorschlag(),klasse=+$('#klasse').value||aktiv.policy.grade;
+ $('#papier-stil').textContent=`@page{size:${papier} portrait;margin:14mm}`;document.documentElement.classList.toggle('papier-a3',papier==='A3');
+ const kopf=`<h1>${esc(titel)}</h1><div class="kopf">${esc(aktiv.name)}${klasse?` · ${klasse}. Klasse`:''} · ${esc(datum())}</div>`;
+ const d=$('#druck');d.replaceChildren();
+ if(art==='material'){
+  const liste=materialListe(vs);
+  d.innerHTML=`<div class="blatt">${kopf}<h2>Material richten</h2>${liste.length?`<ul class="check">${liste.map(m=>`<li><i></i><span>${esc(m.name)}${vs.length>1?`<small>${esc(m.titel.join(', '))}</small>`:''}</span></li>`).join('')}</ul>`:'<p>Kein Material hinterlegt.</p>'}
+   <h2>Pro Aufgabe</h2>${vs.map(v=>`<div class="pro"><b>${esc(v.title)}</b><span>${esc((v.material||[]).map(matName).join(', ')||'–')}${v.zeit?` · ${v.zeit} Min.`:''}</span></div>`).join('')}</div>`;
+ }else{
+  const blatt=document.createElement('div');blatt.className='blatt';
+  const k=document.createElement('div');k.className='qr-kopf';
+  if(aktiv.token)k.appendChild(QR.canvas(W.APP_URL+'#unterricht='+aktiv.token,400));
+  k.insertAdjacentHTML('beforeend',`<div>${kopf.replace('class="kopf"','class="kopf" style="border:0;margin:0;padding:0"')}<div class="hinweis">${aktiv.token?'QR links: Gruppenlink für die iPads (einmal pro iPad öffnen). Unten: ein Code pro Aufgabe – mit der Kamera-App des iPads scannen.':'Unten: ein Code pro Aufgabe – mit der Kamera-App des iPads scannen. Der Gruppenlink lässt sich nur direkt nach dem Anlegen der Gruppe drucken; er wird nicht gespeichert.'}</div></div>`);
+  blatt.appendChild(k);
+  const g=document.createElement('div');g.className='qr-gitter';
+  vs.forEach(v=>{const z=document.createElement('div');z.className='qr-zelle';const link=videoLink(v);
+   try{z.appendChild(QR.canvas(link,600,link.length>300?'L':'M'))}catch(x){z.insertAdjacentHTML('beforeend','<p>QR-Code zu gross</p>')}
+   z.insertAdjacentHTML('beforeend',`<b>${esc(v.title)}</b><small>${esc([THEMEN[v.areaId]||v.areaId||'',v.zeit?`${v.zeit} Min.`:''].filter(Boolean).join(' · '))}</small>`);g.appendChild(z)});
+  blatt.appendChild(g);d.appendChild(blatt);
+ }
+ window.print();
+}
+window.addEventListener('afterprint',()=>$('#druck').replaceChildren());
 function zeichneVideos(){
  const q=$('#suche').value.trim().toLowerCase(),t=$('#thema').value,k=+$('#stufe').value;
  const treffer=videos.filter(v=>(!q||v.title.toLowerCase().includes(q)||(v.gruppe||'').toLowerCase().includes(q))&&(!t||v.areaId===t)&&(!k||(v.stufen||[]).includes(k)));
@@ -185,7 +298,7 @@ async function freigeben(p){
 function zeichneJetzt(){
  const p=aktiv.policy,m=modus(p.mode),el=$('#jetzt');if(!el)return;el.classList.toggle('zu',p.mode==='closed');
  const was=p.mode==='projects'?p.ids.map(id=>videoOf(id)?.title).filter(Boolean).join(', ')||'keine Aufgabe gewählt':m[3];
- el.innerHTML=`<div class="klein">Gerade auf den iPads</div><b>${m[1]} ${esc(p.title||m[2])}</b><div class="mute">${esc(was)}${p.grade?` · ${p.grade}. Klasse`:''}${p.gallery?' · Unsere Werke offen':''}</div>`;
+ el.innerHTML=`<div class="klein">Gerade auf den iPads</div><b>${m[1]} ${esc(p.title||m[2])}</b><div class="mute">${esc(was)}${p.grade?` · ${p.grade}. Klasse`:''}${p.gallery?' · Unsere Werke offen':''}${p.plan?' · Lektionsplan':''}</div>`;
 }
 async function geraeteLaden(){
  if(!aktiv||document.hidden)return;
@@ -194,9 +307,12 @@ async function geraeteLaden(){
 function zeichneGeraete(){
  const el=$('#geraete');if(!el||!geraete)return;const g=geraete.geraete;$('#g-anzahl').textContent=g.length?`(${g.filter(d=>geraete.now-d.gesehen<120000).length} von ${g.length} online)`:'';
  if(!g.length){el.innerHTML='<p class="klein">Noch kein iPad verbunden. Öffne den Gruppenlink auf den iPads.</p>';return}
- el.innerHTML=`<table class="geraete"><thead><tr><th>iPad</th><th>Zuletzt gesehen</th><th>Freigabe</th><th></th></tr></thead><tbody>${g.map(d=>{const online=geraete.now-d.gesehen<120000;return `<tr>
+ const p=aktiv.policy,ids=p.mode==='projects'?p.ids:[],mitPlan=ids.length>0&&(p.plan||g.some(d=>(d.fortschritt||[]).some(f=>ids.includes(f.videoId))));
+ const SCHRITTE=['Material richten','Video','Foto'],boxen=d=>ids.map(id=>{const f=(d.fortschritt||[]).find(x=>x.videoId===id),s=f?f.schritte:[false,false,false];
+  return `<div class="plan-zeile"><span class="boxen">${s.map((an,i)=>`<i class="box${an?' an':''}" title="${SCHRITTE[i]}${an?' ✓':''}">${'①②③'[i]}</i>`).join('')}</span><span title="${esc(videoOf(id)?.title||id)}">${esc(videoOf(id)?.title||id)}</span></div>`}).join('');
+ el.innerHTML=`<table class="geraete"><thead><tr><th>iPad</th><th>Zuletzt gesehen</th><th>Freigabe</th>${mitPlan?'<th>Lektionsplan</th>':''}<th></th></tr></thead><tbody>${g.map(d=>{const online=geraete.now-d.gesehen<120000;return `<tr>
   <td><span class="punkt${online?' an':''}"></span>${esc(d.name)}</td><td class="klein">${vor(geraete.now-d.gesehen)}</td>
-  <td class="klein">${d.revision>=geraete.revision?'aktuell ✓':online?'wechselt gleich …':'noch die alte'}</td>
+  <td class="klein">${d.revision>=geraete.revision?'aktuell ✓':online?'wechselt gleich …':'noch die alte'}</td>${mitPlan?`<td>${boxen(d)}</td>`:''}
   <td><button class="x" data-name="${d.id}" title="Umbenennen">✎</button></td></tr>`}).join('')}</tbody></table>`;
  el.querySelectorAll('[data-name]').forEach(b=>b.onclick=async()=>{const d=g.find(x=>x.id===b.dataset.name);const n=prompt('Name für dieses iPad:',d.name);if(!n||!n.trim())return;
   try{await W.unterricht.geraetName(aktiv.id,d.id,n.trim().slice(0,40));d.name=n.trim().slice(0,40);zeichneGeraete()}catch(x){fehler($('#fehler'),x)}});
