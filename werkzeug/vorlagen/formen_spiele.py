@@ -39,15 +39,16 @@ def _knopf(m, y, r, s):
 
 
 def puzzle(nx, ny, w, h):
-    """Puzzle nx × ny Teile auf w × h, Knöpfe abwechselnd."""
-    pw, ph = w/nx, h/ny; r = min(pw, ph)*0.17; det = []
+    """Puzzle nx × ny Teile auf w × h. Jedes Teil hat zwei gegenüberliegende Knöpfe und zwei Löcher,
+    deshalb Vorzeichen bei den senkrechten Linien umgekehrt: sonst stossen die Köpfe an jeder Ecke zusammen."""
+    pw, ph = w/nx, h/ny; r = min(pw, ph)*0.15; det = []
     for j in range(1, ny):
         y = -h/2 + j*ph; pts = [(-w/2, y)]
         for i in range(nx): pts += _knopf(-w/2 + (i + 0.5)*pw, y, r, 1 if (i + j) % 2 else -1)
         det.append(LineString(pts + [(w/2, y)]))
     for i in range(1, nx):
         x = -w/2 + i*pw; pts = [(x, -h/2)]
-        for j in range(ny): pts += [(x + (yy - (-h/2 + (j + 0.5)*ph)), -h/2 + (j + 0.5)*ph + (xx - x)) for xx, yy in _knopf(x, -h/2 + (j + 0.5)*ph, r, 1 if (i + j) % 2 else -1)]
+        for j in range(ny): pts += [(x + (yy - (-h/2 + (j + 0.5)*ph)), -h/2 + (j + 0.5)*ph + (xx - x)) for xx, yy in _knopf(x, -h/2 + (j + 0.5)*ph, r, -1 if (i + j) % 2 else 1)]
         det.append(LineString(pts + [(x, h/2)]))
     return box(-w/2, -h/2, w/2, h/2), det
 

@@ -34,7 +34,16 @@
   "Liebe & Hochzeit",
   "Weihnachten",
   "Flaggen & Kontinente",
-  "Wald & Wiese"
+  "Wald & Wiese",
+  "Schweizer Feste",
+  "Kreativ & Basteln",
+  "Ostern",
+  "Zirkus",
+  "Frühling & Garten",
+  "Musik",
+  "Schule",
+  "Sport",
+  "Winter"
  ],
  "figuren": [
   {
@@ -4707,6 +4716,1441 @@
    "name": "Braune Schnecke",
    "welt": "Wald & Wiese",
    "datei": "wald-schnecke-braun.png"
+  },
+  {
+   "id": "fest-samichlaus",
+   "name": "Samichlaus",
+   "welt": "Schweizer Feste",
+   "datei": "fest-samichlaus.png"
+  },
+  {
+   "id": "fest-geschenk",
+   "name": "Geschenk für den Chlaussack",
+   "welt": "Schweizer Feste",
+   "datei": "fest-geschenk.png"
+  },
+  {
+   "id": "fest-mandarine",
+   "name": "Mandarine",
+   "welt": "Schweizer Feste",
+   "datei": "fest-mandarine.png"
+  },
+  {
+   "id": "fest-nuss",
+   "name": "Erdnuss",
+   "welt": "Schweizer Feste",
+   "datei": "fest-nuss.png"
+  },
+  {
+   "id": "fest-guetzli",
+   "name": "Guetzli",
+   "welt": "Schweizer Feste",
+   "datei": "fest-guetzli.png"
+  },
+  {
+   "id": "fest-kerze",
+   "name": "Kerze",
+   "welt": "Schweizer Feste",
+   "datei": "fest-kerze.png"
+  },
+  {
+   "id": "fest-stern",
+   "name": "Stern",
+   "welt": "Schweizer Feste",
+   "datei": "fest-stern.png"
+  },
+  {
+   "id": "fest-glocke",
+   "name": "Glocke",
+   "welt": "Schweizer Feste",
+   "datei": "fest-glocke.png"
+  },
+  {
+   "id": "fest-lampion",
+   "name": "Lampion",
+   "welt": "Schweizer Feste",
+   "datei": "fest-lampion.png"
+  },
+  {
+   "id": "fest-feuerwerk",
+   "name": "Feuerwerk",
+   "welt": "Schweizer Feste",
+   "datei": "fest-feuerwerk.png"
+  },
+  {
+   "id": "fest-feuerwerk-funken",
+   "name": "Feuerwerk mit Funken",
+   "welt": "Schweizer Feste",
+   "datei": "fest-feuerwerk-funken.png"
+  },
+  {
+   "id": "fest-schweizerfahne",
+   "name": "Schweizerfahne",
+   "welt": "Schweizer Feste",
+   "datei": "fest-schweizerfahne.png",
+   "glatt": 0
+  },
+  {
+   "id": "fest-knallkoerper",
+   "name": "Knallkörper",
+   "welt": "Schweizer Feste",
+   "datei": "fest-knallkoerper.png"
+  },
+  {
+   "id": "fest-osterhase",
+   "name": "Osterhase",
+   "welt": "Schweizer Feste",
+   "datei": "fest-osterhase.png"
+  },
+  {
+   "id": "fest-hase",
+   "name": "Hase",
+   "welt": "Schweizer Feste",
+   "datei": "fest-hase.png"
+  },
+  {
+   "id": "fest-kueken",
+   "name": "Küken",
+   "welt": "Schweizer Feste",
+   "datei": "fest-kueken.png"
+  },
+  {
+   "id": "fest-schlupf",
+   "name": "Küken im Ei",
+   "welt": "Schweizer Feste",
+   "datei": "fest-schlupf.png"
+  },
+  {
+   "id": "fest-ei",
+   "name": "Ei",
+   "welt": "Schweizer Feste",
+   "datei": "fest-ei.png"
+  },
+  {
+   "id": "fest-nest",
+   "name": "Nest mit Eiern",
+   "welt": "Schweizer Feste",
+   "datei": "fest-nest.png"
+  },
+  {
+   "id": "fest-tulpe",
+   "name": "Tulpe",
+   "welt": "Schweizer Feste",
+   "datei": "fest-tulpe.png"
+  },
+  {
+   "id": "fest-kuerbis",
+   "name": "Kürbis",
+   "welt": "Schweizer Feste",
+   "datei": "fest-kuerbis.png"
+  },
+  {
+   "id": "fest-aehre",
+   "name": "Getreideähre",
+   "welt": "Schweizer Feste",
+   "datei": "fest-aehre.png"
+  },
+  {
+   "id": "fest-mais",
+   "name": "Maiskolben",
+   "welt": "Schweizer Feste",
+   "datei": "fest-mais.png"
+  },
+  {
+   "id": "fest-herbstblatt",
+   "name": "Herbstblatt",
+   "welt": "Schweizer Feste",
+   "datei": "fest-herbstblatt.png"
+  },
+  {
+   "id": "fest-apfel",
+   "name": "Apfel",
+   "welt": "Schweizer Feste",
+   "datei": "fest-apfel.png"
+  },
+  {
+   "id": "fest-birne",
+   "name": "Birne",
+   "welt": "Schweizer Feste",
+   "datei": "fest-birne.png"
+  },
+  {
+   "id": "fest-trauben",
+   "name": "Trauben",
+   "welt": "Schweizer Feste",
+   "datei": "fest-trauben.png"
+  },
+  {
+   "id": "fest-pilz",
+   "name": "Pilz",
+   "welt": "Schweizer Feste",
+   "datei": "fest-pilz.png"
+  },
+  {
+   "id": "fest-clown",
+   "name": "Clown",
+   "welt": "Schweizer Feste",
+   "datei": "fest-clown.png"
+  },
+  {
+   "id": "fest-masken",
+   "name": "Theatermasken",
+   "welt": "Schweizer Feste",
+   "datei": "fest-masken.png"
+  },
+  {
+   "id": "fest-konfetti",
+   "name": "Konfetti",
+   "welt": "Schweizer Feste",
+   "datei": "fest-konfetti.png"
+  },
+  {
+   "id": "fest-luftschlangen",
+   "name": "Partyknaller",
+   "welt": "Schweizer Feste",
+   "datei": "fest-luftschlangen.png"
+  },
+  {
+   "id": "fest-trompete",
+   "name": "Trompete",
+   "welt": "Schweizer Feste",
+   "datei": "fest-trompete.png"
+  },
+  {
+   "id": "fest-trommel",
+   "name": "Trommel",
+   "welt": "Schweizer Feste",
+   "datei": "fest-trommel.png"
+  },
+  {
+   "id": "fest-saxofon",
+   "name": "Saxofon",
+   "welt": "Schweizer Feste",
+   "datei": "fest-saxofon.png"
+  },
+  {
+   "id": "fest-luftballon",
+   "name": "Luftballon",
+   "welt": "Schweizer Feste",
+   "datei": "fest-luftballon.png"
+  },
+  {
+   "id": "fest-boeoegg",
+   "name": "Böögg (Schneemann)",
+   "welt": "Schweizer Feste",
+   "datei": "fest-boeoegg.png"
+  },
+  {
+   "id": "fest-sekt",
+   "name": "Sektgläser",
+   "welt": "Schweizer Feste",
+   "datei": "fest-sekt.png"
+  },
+  {
+   "id": "fest-uhr",
+   "name": "Mitternacht",
+   "welt": "Schweizer Feste",
+   "datei": "fest-uhr.png"
+  },
+  {
+   "id": "fest-kleeblatt",
+   "name": "Glücksklee",
+   "welt": "Schweizer Feste",
+   "datei": "fest-kleeblatt.png"
+  },
+  {
+   "id": "fest-glueckssau",
+   "name": "Glücksschwein",
+   "welt": "Schweizer Feste",
+   "datei": "fest-glueckssau.png"
+  },
+  {
+   "id": "fest-marienkaefer",
+   "name": "Glückskäfer",
+   "welt": "Schweizer Feste",
+   "datei": "fest-marienkaefer.png"
+  },
+  {
+   "id": "fest-raebe",
+   "name": "Räbe für das Räbeliechtli",
+   "welt": "Schweizer Feste",
+   "datei": "fest-raebe.png"
+  },
+  {
+   "id": "fig-elefant-maler",
+   "name": "Elefant als Maler",
+   "welt": "Kreativ & Basteln",
+   "datei": "elefant-maler.png"
+  },
+  {
+   "id": "fig-farbtopf-pinsel",
+   "name": "Farbtopf mit Pinsel",
+   "welt": "Kreativ & Basteln",
+   "datei": "farbtopf-pinsel.png"
+  },
+  {
+   "id": "fig-palette-pinsel",
+   "name": "Farbpalette",
+   "welt": "Kreativ & Basteln",
+   "datei": "palette-pinsel.png"
+  },
+  {
+   "id": "fig-maler-pinguin",
+   "name": "Maler-Pinguin",
+   "welt": "Kreativ & Basteln",
+   "datei": "maler-pinguin.png"
+  },
+  {
+   "id": "fig-maler-staffelei",
+   "name": "Maler an der Staffelei",
+   "welt": "Kreativ & Basteln",
+   "datei": "maler-staffelei.png"
+  },
+  {
+   "id": "fig-palette-braun",
+   "name": "Malpalette",
+   "welt": "Kreativ & Basteln",
+   "datei": "palette-braun.png"
+  },
+  {
+   "id": "fig-wachsmalstifte-box",
+   "name": "Wachsmalstifte-Schachtel",
+   "welt": "Kreativ & Basteln",
+   "datei": "wachsmalstifte-box.png"
+  },
+  {
+   "id": "fig-wachsmalstifte",
+   "name": "Wachsmalstifte",
+   "welt": "Kreativ & Basteln",
+   "datei": "wachsmalstifte.png"
+  },
+  {
+   "id": "fig-schere-rot",
+   "name": "Schere",
+   "welt": "Kreativ & Basteln",
+   "datei": "schere-rot.png"
+  },
+  {
+   "id": "fig-klebstift",
+   "name": "Klebestift",
+   "welt": "Kreativ & Basteln",
+   "datei": "klebstift.png"
+  },
+  {
+   "id": "fig-spraydose",
+   "name": "Sprühdose",
+   "welt": "Kreativ & Basteln",
+   "datei": "spraydose.png"
+  },
+  {
+   "id": "fig-gluehbirne-a",
+   "name": "Glühbirne mit Idee",
+   "welt": "Kreativ & Basteln",
+   "datei": "gluehbirne-a.png"
+  },
+  {
+   "id": "fig-gluehbirne-b",
+   "name": "Staunende Glühbirne",
+   "welt": "Kreativ & Basteln",
+   "datei": "gluehbirne-b.png"
+  },
+  {
+   "id": "fig-gluehbirne-c",
+   "name": "Gelbe Glühbirne",
+   "welt": "Kreativ & Basteln",
+   "datei": "gluehbirne-c.png"
+  },
+  {
+   "id": "fig-gluehbirne-d",
+   "name": "Ideen-Glühbirne",
+   "welt": "Kreativ & Basteln",
+   "datei": "gluehbirne-d.png"
+  },
+  {
+   "id": "fig-wolle-blau",
+   "name": "Blaues Wollknäuel",
+   "welt": "Kreativ & Basteln",
+   "datei": "wolle-blau.png"
+  },
+  {
+   "id": "fig-wolle-braun",
+   "name": "Braunes Wollknäuel",
+   "welt": "Kreativ & Basteln",
+   "datei": "wolle-braun.png"
+  },
+  {
+   "id": "fig-wolle-stricken",
+   "name": "Strickzeug",
+   "welt": "Kreativ & Basteln",
+   "datei": "wolle-stricken.png"
+  },
+  {
+   "id": "fig-oma-pinguin",
+   "name": "Stricklieseli-Pinguin",
+   "welt": "Kreativ & Basteln",
+   "datei": "oma-pinguin.png"
+  },
+  {
+   "id": "fig-bleistift-lustig",
+   "name": "Lustiger Bleistift",
+   "welt": "Kreativ & Basteln",
+   "datei": "bleistift-lustig.png"
+  },
+  {
+   "id": "fig-bleistift-gelb",
+   "name": "Gelber Bleistift",
+   "welt": "Kreativ & Basteln",
+   "datei": "bleistift-gelb.png"
+  },
+  {
+   "id": "fig-bleistift-tanz",
+   "name": "Tanzender Bleistift",
+   "welt": "Kreativ & Basteln",
+   "datei": "bleistift-tanz.png"
+  },
+  {
+   "id": "fig-notizbuch",
+   "name": "Skizzenbuch",
+   "welt": "Kreativ & Basteln",
+   "datei": "notizbuch.png"
+  },
+  {
+   "id": "fig-hase-maler",
+   "name": "Osterhase beim Malen",
+   "welt": "Kreativ & Basteln",
+   "datei": "hase-maler.png"
+  },
+  {
+   "id": "fig-punk-eule",
+   "name": "Rocker-Eule",
+   "welt": "Kreativ & Basteln",
+   "datei": "punk-eule.png"
+  },
+  {
+   "id": "ostern-hase-ei",
+   "name": "Hase im Osterei",
+   "welt": "Ostern",
+   "datei": "ostern-hase-ei.png"
+  },
+  {
+   "id": "ostern-pinguin-hase",
+   "name": "Pinguin als Osterhase",
+   "welt": "Ostern",
+   "datei": "ostern-pinguin-hase.png"
+  },
+  {
+   "id": "ostern-hase-eier",
+   "name": "Hase hinter Eiern",
+   "welt": "Ostern",
+   "datei": "ostern-hase-eier.png"
+  },
+  {
+   "id": "ostern-hasenkopf",
+   "name": "Gelber Osterhase",
+   "welt": "Ostern",
+   "datei": "ostern-hasenkopf.png"
+  },
+  {
+   "id": "ostern-ei-lila",
+   "name": "Osterei lila gestreift",
+   "welt": "Ostern",
+   "datei": "ostern-ei-lila.png"
+  },
+  {
+   "id": "ostern-ei-rot",
+   "name": "Osterei rot gewellt",
+   "welt": "Ostern",
+   "datei": "ostern-ei-rot.png"
+  },
+  {
+   "id": "ostern-ei-gelb",
+   "name": "Osterei gelb getupft",
+   "welt": "Ostern",
+   "datei": "ostern-ei-gelb.png"
+  },
+  {
+   "id": "ostern-ei-zickzack",
+   "name": "Osterei mit Zickzack",
+   "welt": "Ostern",
+   "datei": "ostern-ei-zickzack.png"
+  },
+  {
+   "id": "ostern-ei-sterne",
+   "name": "Osterei mit Sternen",
+   "welt": "Ostern",
+   "datei": "ostern-ei-sterne.png"
+  },
+  {
+   "id": "ostern-kueken",
+   "name": "Küken",
+   "welt": "Ostern",
+   "datei": "ostern-kueken.png"
+  },
+  {
+   "id": "ostern-kueken-schoko",
+   "name": "Küken im Schokoladenei",
+   "welt": "Ostern",
+   "datei": "ostern-kueken-schoko.png"
+  },
+  {
+   "id": "ostern-kueken-eihut",
+   "name": "Küken mit Eihut",
+   "welt": "Ostern",
+   "datei": "ostern-kueken-eihut.png"
+  },
+  {
+   "id": "ostern-kueken-schale",
+   "name": "Küken schlüpft",
+   "welt": "Ostern",
+   "datei": "ostern-kueken-schale.png"
+  },
+  {
+   "id": "ostern-kueken-paar",
+   "name": "Küken-Paar",
+   "welt": "Ostern",
+   "datei": "ostern-kueken-paar.png"
+  },
+  {
+   "id": "ostern-kueken-dick",
+   "name": "Küken mit dicken Linien",
+   "welt": "Ostern",
+   "datei": "ostern-kueken-dick.png"
+  },
+  {
+   "id": "ostern-kueken-schluepft",
+   "name": "Küken im Ei",
+   "welt": "Ostern",
+   "datei": "ostern-kueken-schluepft.png"
+  },
+  {
+   "id": "ostern-eule-hase",
+   "name": "Eule mit Hasenohren",
+   "welt": "Ostern",
+   "datei": "ostern-eule-hase.png"
+  },
+  {
+   "id": "ostern-korb-gelb",
+   "name": "Osterkorb gelb",
+   "welt": "Ostern",
+   "datei": "ostern-korb-gelb.png"
+  },
+  {
+   "id": "ostern-korb-eier",
+   "name": "Korb mit Eiern",
+   "welt": "Ostern",
+   "datei": "ostern-korb-eier.png"
+  },
+  {
+   "id": "ostern-korb-schleife",
+   "name": "Osterkorb mit Schleife",
+   "welt": "Ostern",
+   "datei": "ostern-korb-schleife.png"
+  },
+  {
+   "id": "ostern-henne-korb",
+   "name": "Henne mit Osterkorb",
+   "welt": "Ostern",
+   "datei": "ostern-henne-korb.png"
+  },
+  {
+   "id": "ostern-henne-kueken",
+   "name": "Henne mit Küken",
+   "welt": "Ostern",
+   "datei": "ostern-henne-kueken.png"
+  },
+  {
+   "id": "ostern-hase-schwarz",
+   "name": "Hase mit Eiern",
+   "welt": "Ostern",
+   "datei": "ostern-hase-schwarz.png"
+  },
+  {
+   "id": "ostern-pinguin-schild",
+   "name": "Pinguin mit Schild",
+   "welt": "Ostern",
+   "datei": "ostern-pinguin-schild.png"
+  },
+  {
+   "id": "ostern-hase-ei-lila",
+   "name": "Hase mit lila Ei",
+   "welt": "Ostern",
+   "datei": "ostern-hase-ei-lila.png"
+  },
+  {
+   "id": "ostern-hase-malt",
+   "name": "Hase malt Eier",
+   "welt": "Ostern",
+   "datei": "ostern-hase-malt.png"
+  },
+  {
+   "id": "ostern-kueken-korb",
+   "name": "Küken mit Korb",
+   "welt": "Ostern",
+   "datei": "ostern-kueken-korb.png"
+  },
+  {
+   "id": "ostern-henne-kueken-korb",
+   "name": "Henne mit Küken und Korb",
+   "welt": "Ostern",
+   "datei": "ostern-henne-kueken-korb.png"
+  },
+  {
+   "id": "zirkus-robbe",
+   "name": "Robbe",
+   "welt": "Zirkus",
+   "datei": "zirkus-robbe.png"
+  },
+  {
+   "id": "zirkus-jongleur",
+   "name": "Jongleur",
+   "welt": "Zirkus",
+   "datei": "zirkus-jongleur.png"
+  },
+  {
+   "id": "zirkus-direktor",
+   "name": "Zirkusdirektor",
+   "welt": "Zirkus",
+   "datei": "zirkus-direktor.png"
+  },
+  {
+   "id": "zirkus-clown-eis",
+   "name": "Clown mit Glace",
+   "welt": "Zirkus",
+   "datei": "zirkus-clown-eis.png"
+  },
+  {
+   "id": "zirkus-clown-gross",
+   "name": "Clown mit grossen Schuhen",
+   "welt": "Zirkus",
+   "datei": "zirkus-clown-gross.png"
+  },
+  {
+   "id": "zirkus-clown-weiss",
+   "name": "Weisser Clown",
+   "welt": "Zirkus",
+   "datei": "zirkus-clown-weiss.png"
+  },
+  {
+   "id": "zirkus-zelt-rot",
+   "name": "Zirkuszelt rot",
+   "welt": "Zirkus",
+   "datei": "zirkus-zelt-rot.png"
+  },
+  {
+   "id": "zirkus-hund-nase",
+   "name": "Hund mit Clownnase",
+   "welt": "Zirkus",
+   "datei": "zirkus-hund-nase.png"
+  },
+  {
+   "id": "zirkus-clown-hut",
+   "name": "Clown mit Doktorhut",
+   "welt": "Zirkus",
+   "datei": "zirkus-clown-hut.png"
+  },
+  {
+   "id": "zirkus-narr-laute",
+   "name": "Narr mit Laute",
+   "welt": "Zirkus",
+   "datei": "zirkus-narr-laute.png"
+  },
+  {
+   "id": "zirkus-elefant-kugel",
+   "name": "Elefant auf der Kugel",
+   "welt": "Zirkus",
+   "datei": "zirkus-elefant-kugel.png"
+  },
+  {
+   "id": "zirkus-elefant-tonne",
+   "name": "Elefant auf der Tonne",
+   "welt": "Zirkus",
+   "datei": "zirkus-elefant-tonne.png"
+  },
+  {
+   "id": "zirkus-zauberer",
+   "name": "Zauberer",
+   "welt": "Zirkus",
+   "datei": "zirkus-zauberer.png"
+  },
+  {
+   "id": "zirkus-giraffe-zauberer",
+   "name": "Zaubergiraffe",
+   "welt": "Zirkus",
+   "datei": "zirkus-giraffe-zauberer.png"
+  },
+  {
+   "id": "zirkus-keulen",
+   "name": "Jonglierkeulen",
+   "welt": "Zirkus",
+   "datei": "zirkus-keulen.png"
+  },
+  {
+   "id": "zirkus-loewe-ballon",
+   "name": "Löwe mit Herzballon",
+   "welt": "Zirkus",
+   "datei": "zirkus-loewe-ballon.png"
+  },
+  {
+   "id": "zirkus-schwein-ballon",
+   "name": "Schwein mit Herzballon",
+   "welt": "Zirkus",
+   "datei": "zirkus-schwein-ballon.png"
+  },
+  {
+   "id": "zirkus-elefant-ballon",
+   "name": "Elefant mit Herzballon",
+   "welt": "Zirkus",
+   "datei": "zirkus-elefant-ballon.png"
+  },
+  {
+   "id": "fig-bienen-tulpen",
+   "name": "Bienen und Tulpen",
+   "welt": "Frühling & Garten",
+   "datei": "bienen-tulpen.png"
+  },
+  {
+   "id": "fig-gaensebluemchen",
+   "name": "Gänseblümchen",
+   "welt": "Frühling & Garten",
+   "datei": "gaensebluemchen.png"
+  },
+  {
+   "id": "fig-blume-lila",
+   "name": "Lila Blume",
+   "welt": "Frühling & Garten",
+   "datei": "blume-lila.png"
+  },
+  {
+   "id": "fig-falter-blau",
+   "name": "Blauer Schmetterling",
+   "welt": "Frühling & Garten",
+   "datei": "falter-blau.png"
+  },
+  {
+   "id": "fig-falter-lila",
+   "name": "Lila Schmetterling",
+   "welt": "Frühling & Garten",
+   "datei": "falter-lila.png"
+  },
+  {
+   "id": "fig-falter-orange",
+   "name": "Roter Schmetterling",
+   "welt": "Frühling & Garten",
+   "datei": "falter-orange.png"
+  },
+  {
+   "id": "fig-falter-bunt",
+   "name": "Bunter Schmetterling",
+   "welt": "Frühling & Garten",
+   "datei": "falter-bunt.png"
+  },
+  {
+   "id": "fig-kaefer-a",
+   "name": "Marienkäfer-Spinne",
+   "welt": "Frühling & Garten",
+   "datei": "kaefer-a.png"
+  },
+  {
+   "id": "fig-kaefer-b",
+   "name": "Marienkäfer lachend",
+   "welt": "Frühling & Garten",
+   "datei": "kaefer-b.png"
+  },
+  {
+   "id": "fig-kaefer-liebe",
+   "name": "Verliebte Marienkäfer",
+   "welt": "Frühling & Garten",
+   "datei": "kaefer-liebe.png"
+  },
+  {
+   "id": "fig-kaefer-c",
+   "name": "Marienkäfer frech",
+   "welt": "Frühling & Garten",
+   "datei": "kaefer-c.png"
+  },
+  {
+   "id": "fig-kueken-lachend",
+   "name": "Küken mit Wurm",
+   "welt": "Frühling & Garten",
+   "datei": "kueken-lachend.png"
+  },
+  {
+   "id": "fig-kueken-gesicht",
+   "name": "Küken-Gesicht",
+   "welt": "Frühling & Garten",
+   "datei": "kueken-gesicht.png"
+  },
+  {
+   "id": "fig-kueken-ei",
+   "name": "Küken schlüpft",
+   "welt": "Frühling & Garten",
+   "datei": "kueken-ei.png"
+  },
+  {
+   "id": "fig-kueken-gelb",
+   "name": "Gelbes Küken",
+   "welt": "Frühling & Garten",
+   "datei": "kueken-gelb.png"
+  },
+  {
+   "id": "fig-henne-kueken",
+   "name": "Henne mit Küken",
+   "welt": "Frühling & Garten",
+   "datei": "henne-kueken.png"
+  },
+  {
+   "id": "fig-schnecke-orange",
+   "name": "Orange Schnecke",
+   "welt": "Frühling & Garten",
+   "datei": "schnecke-orange.png"
+  },
+  {
+   "id": "fig-schnecke-braun",
+   "name": "Braune Schnecke",
+   "welt": "Frühling & Garten",
+   "datei": "schnecke-braun.png"
+  },
+  {
+   "id": "fig-schnecke-gelb",
+   "name": "Gelbe Schnecke",
+   "welt": "Frühling & Garten",
+   "datei": "schnecke-gelb.png"
+  },
+  {
+   "id": "fig-schnecke-gruen",
+   "name": "Grüne Schnecke",
+   "welt": "Frühling & Garten",
+   "datei": "schnecke-gruen.png"
+  },
+  {
+   "id": "fig-schirm-panda",
+   "name": "Panda mit Regenschirm",
+   "welt": "Frühling & Garten",
+   "datei": "schirm-panda.png"
+  },
+  {
+   "id": "fig-giesskanne-pinguin",
+   "name": "Garten-Pinguin",
+   "welt": "Frühling & Garten",
+   "datei": "giesskanne-pinguin.png"
+  },
+  {
+   "id": "fig-stiefel-blau",
+   "name": "Gummistiefel Sterne",
+   "welt": "Frühling & Garten",
+   "datei": "stiefel-blau.png"
+  },
+  {
+   "id": "fig-stiefel-pink",
+   "name": "Pinke Gummistiefel",
+   "welt": "Frühling & Garten",
+   "datei": "stiefel-pink.png"
+  },
+  {
+   "id": "fig-stiefel-gelb",
+   "name": "Gelbe Gummistiefel",
+   "welt": "Frühling & Garten",
+   "datei": "stiefel-gelb.png"
+  },
+  {
+   "id": "fig-giraffe-bunt",
+   "name": "Bunte Giraffe",
+   "welt": "Frühling & Garten",
+   "datei": "giraffe-bunt.png"
+  },
+  {
+   "id": "fig-osterpinguin",
+   "name": "Oster-Pinguin",
+   "welt": "Frühling & Garten",
+   "datei": "osterpinguin.png"
+  },
+  {
+   "id": "fig-bienen-b",
+   "name": "Biene",
+   "welt": "Frühling & Garten",
+   "datei": "bienen-b.png"
+  },
+  {
+   "id": "fig-bienen-c",
+   "name": "Biene auf Waben",
+   "welt": "Frühling & Garten",
+   "datei": "bienen-c.png"
+  },
+  {
+   "id": "fig-bienen-d",
+   "name": "Dicke Biene",
+   "welt": "Frühling & Garten",
+   "datei": "bienen-d.png"
+  },
+  {
+   "id": "fig-bienen-honig",
+   "name": "Honigbiene",
+   "welt": "Frühling & Garten",
+   "datei": "bienen-honig.png"
+  },
+  {
+   "id": "musik-krokodil-floete",
+   "name": "Krokodil mit Flöte",
+   "welt": "Musik",
+   "datei": "musik-krokodil-floete.png"
+  },
+  {
+   "id": "musik-akkordeon",
+   "name": "Akkordeon",
+   "welt": "Musik",
+   "datei": "musik-akkordeon.png"
+  },
+  {
+   "id": "musik-geiger",
+   "name": "Geiger",
+   "welt": "Musik",
+   "datei": "musik-geiger.png"
+  },
+  {
+   "id": "musik-band",
+   "name": "Blaskapelle",
+   "welt": "Musik",
+   "datei": "musik-band.png"
+  },
+  {
+   "id": "musik-sonne-tamburin",
+   "name": "Sonne mit Tamburin",
+   "welt": "Musik",
+   "datei": "musik-sonne-tamburin.png"
+  },
+  {
+   "id": "musik-marschkapelle",
+   "name": "Marschmusik",
+   "welt": "Musik",
+   "datei": "musik-marschkapelle.png"
+  },
+  {
+   "id": "musik-eule-gitarre",
+   "name": "Eule mit Gitarre",
+   "welt": "Musik",
+   "datei": "musik-eule-gitarre.png"
+  },
+  {
+   "id": "musik-trompete-gelb",
+   "name": "Trompete gelb",
+   "welt": "Musik",
+   "datei": "musik-trompete-gelb.png"
+  },
+  {
+   "id": "musik-trompete-gold",
+   "name": "Trompete golden",
+   "welt": "Musik",
+   "datei": "musik-trompete-gold.png"
+  },
+  {
+   "id": "musik-posthorn",
+   "name": "Posthorn",
+   "welt": "Musik",
+   "datei": "musik-posthorn.png"
+  },
+  {
+   "id": "musik-note-blau",
+   "name": "Blaue Note",
+   "welt": "Musik",
+   "datei": "musik-note-blau.png"
+  },
+  {
+   "id": "musik-chor-kinder",
+   "name": "Kinderchor",
+   "welt": "Musik",
+   "datei": "musik-chor-kinder.png"
+  },
+  {
+   "id": "musik-chor-gross",
+   "name": "Grosser Kinderchor",
+   "welt": "Musik",
+   "datei": "musik-chor-gross.png"
+  },
+  {
+   "id": "musik-grille-geige",
+   "name": "Grille mit Geige",
+   "welt": "Musik",
+   "datei": "musik-grille-geige.png"
+  },
+  {
+   "id": "musik-saxofonist",
+   "name": "Saxofonist",
+   "welt": "Musik",
+   "datei": "musik-saxofonist.png"
+  },
+  {
+   "id": "schule-junge",
+   "name": "Schulkind Junge",
+   "welt": "Schule",
+   "datei": "schule-junge.png"
+  },
+  {
+   "id": "schule-maedchen-pult",
+   "name": "Mädchen am Pult",
+   "welt": "Schule",
+   "datei": "schule-maedchen-pult.png"
+  },
+  {
+   "id": "schule-buecherstapel-junge",
+   "name": "Junge mit Bücherstapel",
+   "welt": "Schule",
+   "datei": "schule-buecherstapel-junge.png"
+  },
+  {
+   "id": "schule-tafel-maedchen",
+   "name": "Mädchen an der Tafel",
+   "welt": "Schule",
+   "datei": "schule-tafel-maedchen.png"
+  },
+  {
+   "id": "schule-lesen-stapel",
+   "name": "Lesen auf dem Bücherstapel",
+   "welt": "Schule",
+   "datei": "schule-lesen-stapel.png"
+  },
+  {
+   "id": "schule-buecherberg",
+   "name": "Bücherberg",
+   "welt": "Schule",
+   "datei": "schule-buecherberg.png"
+  },
+  {
+   "id": "schule-schulweg",
+   "name": "Schulkinder unterwegs",
+   "welt": "Schule",
+   "datei": "schule-schulweg.png"
+  },
+  {
+   "id": "schule-kinder-uniform",
+   "name": "Kinder in Uniform",
+   "welt": "Schule",
+   "datei": "schule-kinder-uniform.png"
+  },
+  {
+   "id": "schule-kinder-rucksack",
+   "name": "Kinder mit Rucksack",
+   "welt": "Schule",
+   "datei": "schule-kinder-rucksack.png"
+  },
+  {
+   "id": "schule-kinder-drei",
+   "name": "Drei Schulkinder",
+   "welt": "Schule",
+   "datei": "schule-kinder-drei.png"
+  },
+  {
+   "id": "schule-junge-rucksack",
+   "name": "Junge mit Rucksack",
+   "welt": "Schule",
+   "datei": "schule-junge-rucksack.png"
+  },
+  {
+   "id": "schule-bus-gelb",
+   "name": "Schulbus",
+   "welt": "Schule",
+   "datei": "schule-bus-gelb.png"
+  },
+  {
+   "id": "schule-bus-stop",
+   "name": "Schulbus mit Stopp",
+   "welt": "Schule",
+   "datei": "schule-bus-stop.png"
+  },
+  {
+   "id": "schule-bleistift-figur",
+   "name": "Bleistift-Männchen",
+   "welt": "Schule",
+   "datei": "schule-bleistift-figur.png"
+  },
+  {
+   "id": "schule-heft",
+   "name": "Heft mit Radiergummi",
+   "welt": "Schule",
+   "datei": "schule-heft.png"
+  },
+  {
+   "id": "schule-schere",
+   "name": "Schere",
+   "welt": "Schule",
+   "datei": "schule-schere.png"
+  },
+  {
+   "id": "sport-fussballer",
+   "name": "Fussballer",
+   "welt": "Sport",
+   "datei": "sport-fussballer.png"
+  },
+  {
+   "id": "sport-fussball",
+   "name": "Fussball",
+   "welt": "Sport",
+   "datei": "sport-fussball.png"
+  },
+  {
+   "id": "sport-junge-fussball",
+   "name": "Junge mit Fussball",
+   "welt": "Sport",
+   "datei": "sport-junge-fussball.png"
+  },
+  {
+   "id": "sport-fussball-schuss",
+   "name": "Fussball-Schuss",
+   "welt": "Sport",
+   "datei": "sport-fussball-schuss.png"
+  },
+  {
+   "id": "sport-fussball-maedchen",
+   "name": "Fussballerin",
+   "welt": "Sport",
+   "datei": "sport-fussball-maedchen.png"
+  },
+  {
+   "id": "sport-jojo",
+   "name": "Junge mit Jo-Jo",
+   "welt": "Sport",
+   "datei": "sport-jojo.png"
+  },
+  {
+   "id": "sport-basketball-korb",
+   "name": "Basketball-Wurf",
+   "welt": "Sport",
+   "datei": "sport-basketball-korb.png"
+  },
+  {
+   "id": "sport-wolf-basketball",
+   "name": "Wolf mit Basketball",
+   "welt": "Sport",
+   "datei": "sport-wolf-basketball.png"
+  },
+  {
+   "id": "sport-panda-tennis",
+   "name": "Panda mit Tennisschläger",
+   "welt": "Sport",
+   "datei": "sport-panda-tennis.png"
+  },
+  {
+   "id": "sport-tennis",
+   "name": "Tennisspieler",
+   "welt": "Sport",
+   "datei": "sport-tennis.png"
+  },
+  {
+   "id": "sport-tischtennis",
+   "name": "Tischtennisschläger",
+   "welt": "Sport",
+   "datei": "sport-tischtennis.png"
+  },
+  {
+   "id": "sport-nilpferd-schnorchel",
+   "name": "Nilpferd mit Schnorchel",
+   "welt": "Sport",
+   "datei": "sport-nilpferd-schnorchel.png"
+  },
+  {
+   "id": "sport-lama-bademeister",
+   "name": "Lama als Bademeister",
+   "welt": "Sport",
+   "datei": "sport-lama-bademeister.png"
+  },
+  {
+   "id": "sport-schwein-velo",
+   "name": "Schwein auf dem Velo",
+   "welt": "Sport",
+   "datei": "sport-schwein-velo.png"
+  },
+  {
+   "id": "sport-skate-maedchen",
+   "name": "Skateboard-Mädchen",
+   "welt": "Sport",
+   "datei": "sport-skate-maedchen.png"
+  },
+  {
+   "id": "sport-frosch-skate",
+   "name": "Frosch auf dem Skateboard",
+   "welt": "Sport",
+   "datei": "sport-frosch-skate.png"
+  },
+  {
+   "id": "sport-ratte-skate",
+   "name": "Ratte auf dem Skateboard",
+   "welt": "Sport",
+   "datei": "sport-ratte-skate.png"
+  },
+  {
+   "id": "sport-katze-skate",
+   "name": "Katze auf dem Skateboard",
+   "welt": "Sport",
+   "datei": "sport-katze-skate.png"
+  },
+  {
+   "id": "sport-skater",
+   "name": "Skater",
+   "welt": "Sport",
+   "datei": "sport-skater.png"
+  },
+  {
+   "id": "sport-skater-kind",
+   "name": "Skater mit Helm",
+   "welt": "Sport",
+   "datei": "sport-skater-kind.png"
+  },
+  {
+   "id": "sport-pokal",
+   "name": "Pokal",
+   "welt": "Sport",
+   "datei": "sport-pokal.png"
+  },
+  {
+   "id": "sport-football",
+   "name": "Football",
+   "welt": "Sport",
+   "datei": "sport-football.png"
+  },
+  {
+   "id": "sport-baseball-blau",
+   "name": "Baseball-Kind",
+   "welt": "Sport",
+   "datei": "sport-baseball-blau.png"
+  },
+  {
+   "id": "sport-baseball-kappe",
+   "name": "Baseball-Kind mit Kappe",
+   "welt": "Sport",
+   "datei": "sport-baseball-kappe.png"
+  },
+  {
+   "id": "winter-kind-muetze",
+   "name": "Kind mit Wintermütze",
+   "welt": "Winter",
+   "datei": "winter-kind-muetze.png"
+  },
+  {
+   "id": "winter-baer-schal",
+   "name": "Bär mit Schal",
+   "welt": "Winter",
+   "datei": "winter-baer-schal.png"
+  },
+  {
+   "id": "winter-baer-bett",
+   "name": "Bär im Bett",
+   "welt": "Winter",
+   "datei": "winter-baer-bett.png"
+  },
+  {
+   "id": "winter-pinguin-mantel",
+   "name": "Pinguin im Wintermantel",
+   "welt": "Winter",
+   "datei": "winter-pinguin-mantel.png"
+  },
+  {
+   "id": "winter-schneemann-besen",
+   "name": "Schneemann mit Besen",
+   "welt": "Winter",
+   "datei": "winter-schneemann-besen.png"
+  },
+  {
+   "id": "winter-schneemann-feuer",
+   "name": "Schneemann am Feuer",
+   "welt": "Winter",
+   "datei": "winter-schneemann-feuer.png"
+  },
+  {
+   "id": "winter-schneemann-hut",
+   "name": "Schneemann mit Hut",
+   "welt": "Winter",
+   "datei": "winter-schneemann-hut.png"
+  },
+  {
+   "id": "winter-schneemann-schal",
+   "name": "Schneemann mit rotem Schal",
+   "welt": "Winter",
+   "datei": "winter-schneemann-schal.png"
+  },
+  {
+   "id": "winter-schneemann-ski",
+   "name": "Schneemann auf Ski",
+   "welt": "Winter",
+   "datei": "winter-schneemann-ski.png"
+  },
+  {
+   "id": "winter-schneemann-bommel",
+   "name": "Schneemann mit Bommelmütze",
+   "welt": "Winter",
+   "datei": "winter-schneemann-bommel.png"
+  },
+  {
+   "id": "winter-eisbaer-tasse",
+   "name": "Eisbär mit heissem Tee",
+   "welt": "Winter",
+   "datei": "winter-eisbaer-tasse.png"
+  },
+  {
+   "id": "winter-pinguin-detektiv",
+   "name": "Pinguin-Detektiv",
+   "welt": "Winter",
+   "datei": "winter-pinguin-detektiv.png"
+  },
+  {
+   "id": "winter-pinguin-koenig",
+   "name": "Pinguin-König",
+   "welt": "Winter",
+   "datei": "winter-pinguin-koenig.png"
+  },
+  {
+   "id": "winter-pinguin-rund",
+   "name": "Pinguin",
+   "welt": "Winter",
+   "datei": "winter-pinguin-rund.png"
+  },
+  {
+   "id": "winter-pinguin-dick",
+   "name": "Dicker Pinguin",
+   "welt": "Winter",
+   "datei": "winter-pinguin-dick.png"
+  },
+  {
+   "id": "winter-pinguin-schuerze",
+   "name": "Pinguin mit Schürze",
+   "welt": "Winter",
+   "datei": "winter-pinguin-schuerze.png"
+  },
+  {
+   "id": "winter-pinguin-schreitet",
+   "name": "Pinguin schreitet",
+   "welt": "Winter",
+   "datei": "winter-pinguin-schreitet.png"
+  },
+  {
+   "id": "meer-krake-lila",
+   "name": "Lila Krake",
+   "welt": "Meer",
+   "datei": "meer-krake-lila.png"
+  },
+  {
+   "id": "meer-krake-rot",
+   "name": "Roter Krake",
+   "welt": "Meer",
+   "datei": "meer-krake-rot.png"
+  },
+  {
+   "id": "meer-wal-tuerkis",
+   "name": "Türkiser Wal",
+   "welt": "Meer",
+   "datei": "meer-wal-tuerkis.png"
+  },
+  {
+   "id": "meer-wal-blau",
+   "name": "Blauer Wal",
+   "welt": "Meer",
+   "datei": "meer-wal-blau.png"
+  },
+  {
+   "id": "meer-pottwal-grau",
+   "name": "Grauer Pottwal",
+   "welt": "Meer",
+   "datei": "meer-pottwal-grau.png"
+  },
+  {
+   "id": "meer-wal-hellblau",
+   "name": "Hellblauer Wal",
+   "welt": "Meer",
+   "datei": "meer-wal-hellblau.png"
+  },
+  {
+   "id": "meer-hai-grau",
+   "name": "Grauer Hai",
+   "welt": "Meer",
+   "datei": "meer-hai-grau.png"
+  },
+  {
+   "id": "meer-krabbe-orange",
+   "name": "Orange Krabbe",
+   "welt": "Meer",
+   "datei": "meer-krabbe-orange.png"
+  },
+  {
+   "id": "meer-krabbe-koenig",
+   "name": "Krabbenkönig",
+   "welt": "Meer",
+   "datei": "meer-krabbe-koenig.png"
+  },
+  {
+   "id": "meer-seestern-lachend",
+   "name": "Lachender Seestern",
+   "welt": "Meer",
+   "datei": "meer-seestern-lachend.png"
+  },
+  {
+   "id": "meer-krabbe-rosa",
+   "name": "Rosa Krabbe",
+   "welt": "Meer",
+   "datei": "meer-krabbe-rosa.png"
+  },
+  {
+   "id": "meer-fisch-brummig",
+   "name": "Brummiger Fisch",
+   "welt": "Meer",
+   "datei": "meer-fisch-brummig.png"
+  },
+  {
+   "id": "weltraum-rakete-schraeg",
+   "name": "Rakete im Flug",
+   "welt": "Weltraum",
+   "datei": "weltraum-rakete-schraeg.png"
+  },
+  {
+   "id": "weltraum-rakete-rot",
+   "name": "Rote Rakete",
+   "welt": "Weltraum",
+   "datei": "weltraum-rakete-rot.png"
+  },
+  {
+   "id": "weltraum-rakete-schlank",
+   "name": "Schlanke Rakete",
+   "welt": "Weltraum",
+   "datei": "weltraum-rakete-schlank.png"
+  },
+  {
+   "id": "weltraum-rakete-gelb",
+   "name": "Gelbe Rakete",
+   "welt": "Weltraum",
+   "datei": "weltraum-rakete-gelb.png"
+  },
+  {
+   "id": "weltraum-rakete-bordeaux",
+   "name": "Rakete mit Bullauge",
+   "welt": "Weltraum",
+   "datei": "weltraum-rakete-bordeaux.png"
+  },
+  {
+   "id": "weltraum-astronaut-winkt",
+   "name": "Winkender Astronaut",
+   "welt": "Weltraum",
+   "datei": "weltraum-astronaut-winkt.png"
+  },
+  {
+   "id": "weltraum-astronaut-rot",
+   "name": "Roter Astronaut",
+   "welt": "Weltraum",
+   "datei": "weltraum-astronaut-rot.png"
+  },
+  {
+   "id": "weltraum-astronaut-hupft",
+   "name": "Hüpfender Astronaut",
+   "welt": "Weltraum",
+   "datei": "weltraum-astronaut-hupft.png"
+  },
+  {
+   "id": "weltraum-ufo-lila",
+   "name": "Ufo mit Ausserirdischem",
+   "welt": "Weltraum",
+   "datei": "weltraum-ufo-lila.png"
+  },
+  {
+   "id": "weltraum-ausserirdischer-brummig",
+   "name": "Brummiger Ausserirdischer",
+   "welt": "Weltraum",
+   "datei": "weltraum-ausserirdischer-brummig.png"
   }
  ]
 }

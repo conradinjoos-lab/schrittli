@@ -3878,9 +3878,9 @@
    "areaId": "holz",
    "gruppe": "Werkzeug kennenlernen",
    "stufen": [
-    1,
     2,
-    3
+    3,
+    4
    ],
    "niveau": 1,
    "grundtechnik": true,
@@ -5816,7 +5816,7 @@
     },
     {
      "t": 57.0,
-     "label": "Normalen Knoten über den oberen Faden machen"
+     "label": "Knoten über den oberen Faden – nur knoten"
     },
     {
      "t": 63.5,
@@ -8424,7 +8424,7 @@
    "dauer": "1:25",
    "alter": "ab 6",
    "sprache": "ohne Sprache",
-   "hinweis": "Mini-Projekt für eine kurze Sequenz (ca. 15 Min.): weisse Wolle, Schere, eine kleine Karte aus Karton und Wackelaugen; die Augen im Video mit Heisskleber (nur Lehrperson), sonst mit Leim ankleben – Video ohne Sprache, nur zuschauen und nachmachen.",
+   "hinweis": "Mini-Projekt für eine kurze Sequenz (ca. 15 Min.): weisse Wolle, Schere, eine Karte aus festem Karton so gross wie eine Kreditkarte (etwa 5 × 8,5 cm, das Gespenst wird so hoch wie die Karte), Wackelaugen. Wolle rund 40 Mal um die Längsseite wickeln, zum Abbinden zwei Fäden von etwa 15 cm. Die Augen im Video mit Heisskleber (nur Lehrperson), sonst mit Leim ankleben – Video ohne Sprache, nur zuschauen und nachmachen.",
    "material": [
     "wolle",
     "karton",
@@ -8439,11 +8439,11 @@
     },
     {
      "t": 12.5,
-     "label": "Wolle viele Male um die Karte wickeln"
+     "label": "Wolle etwa 40 Mal um die Karte wickeln"
     },
     {
      "t": 24.5,
-     "label": "Wolle abschneiden, zwei Fäden abschneiden"
+     "label": "Wolle abschneiden, zwei Fäden à 15 cm schneiden"
     },
     {
      "t": 32.5,
@@ -23908,7 +23908,7 @@
    "dauer": "1:00",
    "alter": "ab 7",
    "sprache": "ohne Sprache",
-   "hinweis": "Kartonrolle, rote und weisse Wolle und eine Holzkugel bereitlegen; Bart und Kugel klebt die Lehrperson mit Heisskleber in die Mütze.",
+   "hinweis": "Kartonrolle, rote und weisse Wolle und eine Holzkugel bereitlegen. Masse: Ring etwa 2 cm breit von der Rolle schneiden, Wollfäden etwa 30 cm lang, rund 30 Stück für die Mütze. Bart und Kugel klebt die Lehrperson mit Heisskleber in die Mütze.",
    "material": [
     "wolle",
     "karton",
@@ -23923,7 +23923,7 @@
     },
     {
      "t": 3.8,
-     "label": "Ring abschneiden, viele Wollfäden schneiden"
+     "label": "Ring abschneiden, viele Fäden à 30 cm schneiden"
     },
     {
      "t": 7.8,

@@ -235,3 +235,199 @@ Alle Bilder stammen von Openclipart und stehen unter CC0 1.0 (Public Domain Dedi
 | Baum mit Früchten | wald-baum-fruechte | Wald & Wiese | tree with fruits | https://openclipart.org/detail/26259 | CC0 1.0 (Openclipart) | Anonymous |
 | Schnecke mit orangem Haus | wald-schnecke-orange | Wald & Wiese | Snail | https://openclipart.org/detail/349739 | CC0 1.0 (Openclipart) | Benjamin_Adams |
 | Braune Schnecke | wald-schnecke-braun | Wald & Wiese | Snail | https://openclipart.org/detail/172493 | CC0 1.0 (Openclipart) | hatso1 |
+| Hase im Osterei | ostern-hase-ei | Ostern | Easter bunny clip art | https://openclipart.org/detail/331223 | CC0 1.0 (Openclipart) | liftarn |
+| Pinguin als Osterhase | ostern-pinguin-hase | Ostern | Bunny Penguin | https://openclipart.org/detail/175339 | CC0 1.0 (Openclipart) | Moini |
+| Hase hinter Eiern | ostern-hase-eier | Ostern | Bunny | https://openclipart.org/detail/63139 | CC0 1.0 (Openclipart) | pianoBrad |
+| Gelber Osterhase | ostern-hasenkopf | Ostern | Easter-Smilie | https://openclipart.org/detail/168803 | CC0 1.0 (Openclipart) | zorro |
+| Osterei lila gestreift | ostern-ei-lila | Ostern | Easter egg 4 | https://openclipart.org/detail/226929 | CC0 1.0 (Openclipart) | floEdelmann |
+| Osterei rot gewellt | ostern-ei-rot | Ostern | Easter egg 3 | https://openclipart.org/detail/226928 | CC0 1.0 (Openclipart) | floEdelmann |
+| Osterei gelb getupft | ostern-ei-gelb | Ostern | Easter egg 1 | https://openclipart.org/detail/226926 | CC0 1.0 (Openclipart) | floEdelmann |
+| Osterei mit Zickzack | ostern-ei-zickzack | Ostern | Easter Egg Yellow | https://openclipart.org/detail/31363 | CC0 1.0 (Openclipart) | skarg |
+| Osterei mit Sternen | ostern-ei-sterne | Ostern | Easter egg (Painted) | https://openclipart.org/detail/15694 | CC0 1.0 (Openclipart) | mystica |
+| Küken | ostern-kueken | Ostern | Chick | https://openclipart.org/detail/299927 | CC0 1.0 (Openclipart) | Firkin |
+| Küken im Schokoladenei | ostern-kueken-schoko | Ostern | Funny Chick Cartoon Newborn | https://openclipart.org/detail/131641 | CC0 1.0 (Openclipart) | palomaironique |
+| Küken mit Eihut | ostern-kueken-eihut | Ostern | Funny Chick Cartoon Newborn Coming Out from the Egg with a Eggshell hat | https://openclipart.org/detail/131623 | CC0 1.0 (Openclipart) | palomaironique |
+| Küken schlüpft | ostern-kueken-schale | Ostern | Funny Chick Cartoon Newborn Coming Out from the Egg | https://openclipart.org/detail/131089 | CC0 1.0 (Openclipart) | palomaironique |
+| Küken-Paar | ostern-kueken-paar | Ostern | Easter Sunday Chicks | https://openclipart.org/detail/128863 | CC0 1.0 (Openclipart) | laurianne |
+| Küken mit dicken Linien | ostern-kueken-dick | Ostern | Chicken icon | https://openclipart.org/detail/23815 | CC0 1.0 (Openclipart) | pitr |
+| Küken im Ei | ostern-kueken-schluepft | Ostern | chick from egg | https://openclipart.org/detail/5481 | CC0 1.0 (Openclipart) | mcol |
+| Eule mit Hasenohren | ostern-eule-hase | Ostern | Easterbunny owl | https://openclipart.org/detail/347775 | CC0 1.0 (Openclipart) | Iyo |
+| Osterkorb gelb | ostern-korb-gelb | Ostern | Easter Basket 3D | https://openclipart.org/detail/300005 | CC0 1.0 (Openclipart) | j4p4n |
+| Korb mit Eiern | ostern-korb-eier | Ostern | Basket of eggs | https://openclipart.org/detail/299928 | CC0 1.0 (Openclipart) | Firkin |
+| Osterkorb mit Schleife | ostern-korb-schleife | Ostern | Easter Icon | https://openclipart.org/detail/93973 | CC0 1.0 (Openclipart) | nicubunu |
+| Henne mit Osterkorb | ostern-henne-korb | Ostern | Funny Chicken with a basket full of Easter Eggs | https://openclipart.org/detail/130909 | CC0 1.0 (Openclipart) | palomaironique |
+| Henne mit Küken | ostern-henne-kueken | Ostern | Funny Chicken and Chicks Cartoon | https://openclipart.org/detail/131035 | CC0 1.0 (Openclipart) | palomaironique |
+| Hase mit Eiern | ostern-hase-schwarz | Ostern | bunney of easter | https://openclipart.org/detail/131977 | CC0 1.0 (Openclipart) | PeterBrough |
+| Pinguin mit Schild | ostern-pinguin-schild | Ostern | Easter Tux | https://openclipart.org/detail/131695 | CC0 1.0 (Openclipart) | Moini |
+| Hase mit lila Ei | ostern-hase-ei-lila | Ostern | Cartoon bunny | https://openclipart.org/detail/23052 | CC0 1.0 (Openclipart) | StudioFibonacci |
+| Hase malt Eier | ostern-hase-malt | Ostern | Osterhase | https://openclipart.org/detail/166666 | CC0 1.0 (Openclipart) | DoppelG |
+| Küken mit Korb | ostern-kueken-korb | Ostern | Funny Chicks Cartoon with Easter eggs in a basket | https://openclipart.org/detail/130687 | CC0 1.0 (Openclipart) | palomaironique |
+| Henne mit Küken und Korb | ostern-henne-kueken-korb | Ostern | Funny Chicken and Chicks Cartoon Easter | https://openclipart.org/detail/130903 | CC0 1.0 (Openclipart) | palomaironique |
+| Elefant als Maler | fig-elefant-maler | Kreativ & Basteln | Artist Elephant | https://openclipart.org/detail/352874 | CC0 1.0 (Openclipart) | j4p4n |
+| Farbtopf mit Pinsel | fig-farbtopf-pinsel | Kreativ & Basteln | Paint can with brush Animation | https://openclipart.org/detail/277892 | CC0 1.0 (Openclipart) | danjiro |
+| Farbpalette | fig-palette-pinsel | Kreativ & Basteln | Paintbrush and Palette | https://openclipart.org/detail/271502 | CC0 1.0 (Openclipart) | j4p4n |
+| Maler-Pinguin | fig-maler-pinguin | Kreativ & Basteln | Painter penguin | https://openclipart.org/detail/174634 | CC0 1.0 (Openclipart) | Moini |
+| Maler an der Staffelei | fig-maler-staffelei | Kreativ & Basteln | Painter (#1) | https://openclipart.org/detail/312470 | CC0 1.0 (Openclipart) | oksmith |
+| Malpalette | fig-palette-braun | Kreativ & Basteln | Palette and brush | https://openclipart.org/detail/152707 | CC0 1.0 (Openclipart) | ejmillan |
+| Wachsmalstifte-Schachtel | fig-wachsmalstifte-box | Kreativ & Basteln | Crayon Box | https://openclipart.org/detail/349836 | CC0 1.0 (Openclipart) | emisue318 |
+| Wachsmalstifte | fig-wachsmalstifte | Kreativ & Basteln | Crayons - Remix | https://openclipart.org/detail/340644 | CC0 1.0 (Openclipart) | j4p4n |
+| Schere | fig-schere-rot | Kreativ & Basteln | Scissors | https://openclipart.org/detail/48553 | CC0 1.0 (Openclipart) | gmad |
+| Klebestift | fig-klebstift | Kreativ & Basteln | Glue Stick | https://openclipart.org/detail/240281 | CC0 1.0 (Openclipart) | sincrosergio |
+| Sprühdose | fig-spraydose | Kreativ & Basteln | Hand Spray Paint - Redder | https://openclipart.org/detail/324462 | CC0 1.0 (Openclipart) | liftarn |
+| Glühbirne mit Idee | fig-gluehbirne-a | Kreativ & Basteln | Anthropomorphic Cartoon Light Bulb | https://openclipart.org/detail/269989 | CC0 1.0 (Openclipart) | GDJ |
+| Staunende Glühbirne | fig-gluehbirne-b | Kreativ & Basteln | Anthropomorphic Light Bulb | https://openclipart.org/detail/241518 | CC0 1.0 (Openclipart) | GDJ |
+| Gelbe Glühbirne | fig-gluehbirne-c | Kreativ & Basteln | I got it | https://openclipart.org/detail/290440 | CC0 1.0 (Openclipart) | StymShinji |
+| Ideen-Glühbirne | fig-gluehbirne-d | Kreativ & Basteln | Light Bulb (#2) | https://openclipart.org/detail/295927 | CC0 1.0 (Openclipart) | oksmith |
+| Blaues Wollknäuel | fig-wolle-blau | Kreativ & Basteln | Yarn Ball | https://openclipart.org/detail/251106 | CC0 1.0 (Openclipart) | tacoplay |
+| Braunes Wollknäuel | fig-wolle-braun | Kreativ & Basteln | Yarn ball | https://openclipart.org/detail/233587 | CC0 1.0 (Openclipart) | spacefem |
+| Strickzeug | fig-wolle-stricken | Kreativ & Basteln | Knitting Yarn and Needles - Colour Remix | https://openclipart.org/detail/338827 | CC0 1.0 (Openclipart) | j4p4n |
+| Stricklieseli-Pinguin | fig-oma-pinguin | Kreativ & Basteln | Grandma Penguin | https://openclipart.org/detail/195809 | CC0 1.0 (Openclipart) | Moini |
+| Lustiger Bleistift | fig-bleistift-lustig | Kreativ & Basteln | Happy Pencil | https://openclipart.org/detail/349812 | CC0 1.0 (Openclipart) | Benjamin_Adams |
+| Gelber Bleistift | fig-bleistift-gelb | Kreativ & Basteln | Cartoon pencil | https://openclipart.org/detail/286583 | CC0 1.0 (Openclipart) | Kib |
+| Tanzender Bleistift | fig-bleistift-tanz | Kreativ & Basteln | Happy pencil | https://openclipart.org/detail/101707 | CC0 1.0 (Openclipart) | jonata |
+| Skizzenbuch | fig-notizbuch | Kreativ & Basteln | Architetto -- Blocco notes | https://openclipart.org/detail/25187 | CC0 1.0 (Openclipart) | francesco_rollandin |
+| Osterhase beim Malen | fig-hase-maler | Kreativ & Basteln | Rabbit Painter | https://openclipart.org/detail/272091 | CC0 1.0 (Openclipart) | GDJ |
+| Rocker-Eule | fig-punk-eule | Kreativ & Basteln | Punk Owl | https://openclipart.org/detail/168874 | CC0 1.0 (Openclipart) | bocian |
+| Robbe | zirkus-robbe | Zirkus | Seal | https://openclipart.org/detail/174437 | CC0 1.0 (Openclipart) | Maw |
+| Jongleur | zirkus-jongleur | Zirkus | juggler clown | https://openclipart.org/detail/172164 | CC0 1.0 (Openclipart) | sammo241 |
+| Zirkusdirektor | zirkus-direktor | Zirkus | Circus chef | https://openclipart.org/detail/103579 | CC0 1.0 (Openclipart) | utrescu |
+| Clown mit Glace | zirkus-clown-eis | Zirkus | Clown with Pie - Colour Remix | https://openclipart.org/detail/344707 | CC0 1.0 (Openclipart) | j4p4n |
+| Clown mit grossen Schuhen | zirkus-clown-gross | Zirkus | big earred clown | https://openclipart.org/detail/2859 | CC0 1.0 (Openclipart) | johnny_automatic |
+| Weisser Clown | zirkus-clown-weiss | Zirkus | simple clown figure | https://openclipart.org/detail/2878 | CC0 1.0 (Openclipart) | johnny_automatic |
+| Zirkuszelt rot | zirkus-zelt-rot | Zirkus | Circus Tent - Colour Remix | https://openclipart.org/detail/329574 | CC0 1.0 (Openclipart) | j4p4n |
+| Hund mit Clownnase | zirkus-hund-nase | Zirkus | clowny dog | https://openclipart.org/detail/192734 | CC0 1.0 (Openclipart) | contactr |
+| Clown mit Doktorhut | zirkus-clown-hut | Zirkus | Clown School Graduate | https://openclipart.org/detail/4406 | CC0 1.0 (Openclipart) | FunDraw_dot_com |
+| Narr mit Laute | zirkus-narr-laute | Zirkus | Jester 4 | https://openclipart.org/detail/281021 | CC0 1.0 (Openclipart) | Firkin |
+| Elefant auf der Kugel | zirkus-elefant-kugel | Zirkus | circus scene | https://openclipart.org/detail/189033 | CC0 1.0 (Openclipart) | johnny_automatic |
+| Elefant auf der Tonne | zirkus-elefant-tonne | Zirkus | Elephant Trainer | https://openclipart.org/detail/218408 | CC0 1.0 (Openclipart) | j4p4n |
+| Zauberer | zirkus-zauberer | Zirkus | Cartoon magician | https://openclipart.org/detail/194339 | CC0 1.0 (Openclipart) | Dog99x |
+| Zaubergiraffe | zirkus-giraffe-zauberer | Zirkus | Giraffe Magician | https://openclipart.org/detail/182033 | CC0 1.0 (Openclipart) | Bingenberg |
+| Jonglierkeulen | zirkus-keulen | Zirkus | clubs juggling | https://openclipart.org/detail/177594 | CC0 1.0 (Openclipart) | aviger |
+| Löwe mit Herzballon | zirkus-loewe-ballon | Zirkus | Lion with Balloon | https://openclipart.org/detail/312502 | CC0 1.0 (Openclipart) | oksmith |
+| Schwein mit Herzballon | zirkus-schwein-ballon | Zirkus | Pig with Balloon | https://openclipart.org/detail/312329 | CC0 1.0 (Openclipart) | oksmith |
+| Elefant mit Herzballon | zirkus-elefant-ballon | Zirkus | Pink Elephant Cartoon | https://openclipart.org/detail/309894 | CC0 1.0 (Openclipart) | j4p4n |
+| Krokodil mit Flöte | musik-krokodil-floete | Musik | Musical crocodile (colour) | https://openclipart.org/detail/283052 | CC0 1.0 (Openclipart) | Firkin |
+| Akkordeon | musik-akkordeon | Musik | Accordion Player | https://openclipart.org/detail/236832 | CC0 1.0 (Openclipart) | GDJ |
+| Geiger | musik-geiger | Musik | Fiddler 2 | https://openclipart.org/detail/128365 | CC0 1.0 (Openclipart) | rones |
+| Blaskapelle | musik-band | Musik | Band by Rones | https://openclipart.org/detail/128389 | CC0 1.0 (Openclipart) | rones |
+| Sonne mit Tamburin | musik-sonne-tamburin | Musik | Mascota Sol | https://openclipart.org/detail/4546 | CC0 1.0 (Openclipart) | egonpin |
+| Marschmusik | musik-marschkapelle | Musik | marching band | https://openclipart.org/detail/959 | CC0 1.0 (Openclipart) | johnny_automatic |
+| Eule mit Gitarre | musik-eule-gitarre | Musik | Punk Owl | https://openclipart.org/detail/168874 | CC0 1.0 (Openclipart) | bocian |
+| Trompete gelb | musik-trompete-gelb | Musik | trumpet coloured | https://openclipart.org/detail/213686 | CC0 1.0 (Openclipart) | frankes |
+| Trompete golden | musik-trompete-gold | Musik | Silly trumpet | https://openclipart.org/detail/58297 | CC0 1.0 (Openclipart) | Gerald_G |
+| Posthorn | musik-posthorn | Musik | Pocket Trumpet | https://openclipart.org/detail/8454 | CC0 1.0 (Openclipart) | Gerald_G |
+| Blaue Note | musik-note-blau | Musik | Musical note | https://openclipart.org/detail/28505 | CC0 1.0 (Openclipart) | mbtwms |
+| Kinderchor | musik-chor-kinder | Musik | Choir singing | https://openclipart.org/detail/195898 | CC0 1.0 (Openclipart) | dear_theophilus |
+| Grosser Kinderchor | musik-chor-gross | Musik | Children Choral | https://openclipart.org/detail/181714 | CC0 1.0 (Openclipart) | gustavorezende |
+| Grille mit Geige | musik-grille-geige | Musik | Cricket with Violin | https://openclipart.org/detail/300263 | CC0 1.0 (Openclipart) | oksmith |
+| Saxofonist | musik-saxofonist | Musik | Saxophone Player | https://openclipart.org/detail/312332 | CC0 1.0 (Openclipart) | oksmith |
+| Bienen und Tulpen | fig-bienen-tulpen | Frühling & Garten | two bees three flowers | https://openclipart.org/detail/306622 | CC0 1.0 (Openclipart) | The_Martin |
+| Gänseblümchen | fig-gaensebluemchen | Frühling & Garten | Daisy | https://openclipart.org/detail/62689 | CC0 1.0 (Openclipart) | laobc |
+| Lila Blume | fig-blume-lila | Frühling & Garten | Flower 2 purple | https://openclipart.org/detail/256159 | CC0 1.0 (Openclipart) | BAJ |
+| Blauer Schmetterling | fig-falter-blau | Frühling & Garten | Butterfly | https://openclipart.org/detail/354710 | CC0 1.0 (Openclipart) | AreYouPrepared |
+| Lila Schmetterling | fig-falter-lila | Frühling & Garten | Butterfly purple | https://openclipart.org/detail/167489 | CC0 1.0 (Openclipart) | Ana_Paula |
+| Roter Schmetterling | fig-falter-orange | Frühling & Garten | little butterfly | https://openclipart.org/detail/2697 | CC0 1.0 (Openclipart) | Machovka |
+| Bunter Schmetterling | fig-falter-bunt | Frühling & Garten | cartoon-butterfly-cv4 | https://openclipart.org/detail/124639 | CC0 1.0 (Openclipart) | kizzyblue |
+| Marienkäfer-Spinne | fig-kaefer-a | Frühling & Garten | Cartoon ladybug | https://openclipart.org/detail/330117 | CC0 1.0 (Openclipart) | Buggy_muggy |
+| Marienkäfer lachend | fig-kaefer-b | Frühling & Garten | cartoon ladybug | https://openclipart.org/detail/97201 | CC0 1.0 (Openclipart) | Martouf |
+| Verliebte Marienkäfer | fig-kaefer-liebe | Frühling & Garten | lady bugs | https://openclipart.org/detail/2675 | CC0 1.0 (Openclipart) | Machovka |
+| Marienkäfer frech | fig-kaefer-c | Frühling & Garten | Cute ladybug | https://openclipart.org/detail/260320 | CC0 1.0 (Openclipart) | mvolz |
+| Küken mit Wurm | fig-kueken-lachend | Frühling & Garten | Funny Chick Eating Earthworm Cartoon | https://openclipart.org/detail/131041 | CC0 1.0 (Openclipart) | palomaironique |
+| Küken-Gesicht | fig-kueken-gesicht | Frühling & Garten | Funny Chick Face Cartoon | https://openclipart.org/detail/120475 | CC0 1.0 (Openclipart) | palomaironique |
+| Küken schlüpft | fig-kueken-ei | Frühling & Garten | chick from egg | https://openclipart.org/detail/5481 | CC0 1.0 (Openclipart) | mcol |
+| Gelbes Küken | fig-kueken-gelb | Frühling & Garten | Chick flat colors | https://openclipart.org/detail/63199 | CC0 1.0 (Openclipart) | qubodup |
+| Henne mit Küken | fig-henne-kueken | Frühling & Garten | Chicken with chick | https://openclipart.org/detail/299010 | CC0 1.0 (Openclipart) | oksmith |
+| Orange Schnecke | fig-schnecke-orange | Frühling & Garten | Snail | https://openclipart.org/detail/349739 | CC0 1.0 (Openclipart) | Benjamin_Adams |
+| Braune Schnecke | fig-schnecke-braun | Frühling & Garten | Snail | https://openclipart.org/detail/172493 | CC0 1.0 (Openclipart) | hatso1 |
+| Gelbe Schnecke | fig-schnecke-gelb | Frühling & Garten | snail | https://openclipart.org/detail/2680 | CC0 1.0 (Openclipart) | Machovka |
+| Grüne Schnecke | fig-schnecke-gruen | Frühling & Garten | Caracol | https://openclipart.org/detail/23384 | CC0 1.0 (Openclipart) | irinuca |
+| Panda mit Regenschirm | fig-schirm-panda | Frühling & Garten | umbrella panda | https://openclipart.org/detail/137851 | CC0 1.0 (Openclipart) | shu |
+| Garten-Pinguin | fig-giesskanne-pinguin | Frühling & Garten | Garden penguin | https://openclipart.org/detail/193914 | CC0 1.0 (Openclipart) | Moini |
+| Gummistiefel Sterne | fig-stiefel-blau | Frühling & Garten | Wellington boots 5 | https://openclipart.org/detail/298762 | CC0 1.0 (Openclipart) | Firkin |
+| Pinke Gummistiefel | fig-stiefel-pink | Frühling & Garten | Wellington boots 3 | https://openclipart.org/detail/298760 | CC0 1.0 (Openclipart) | Firkin |
+| Gelbe Gummistiefel | fig-stiefel-gelb | Frühling & Garten | Rain Boots | https://openclipart.org/detail/298777 | CC0 1.0 (Openclipart) | j4p4n |
+| Bunte Giraffe | fig-giraffe-bunt | Frühling & Garten | rainbow giraffe | https://openclipart.org/detail/262739 | CC0 1.0 (Openclipart) | cirenovy |
+| Oster-Pinguin | fig-osterpinguin | Frühling & Garten | Bunny Penguin | https://openclipart.org/detail/175339 | CC0 1.0 (Openclipart) | Moini |
+| Biene | fig-bienen-b | Frühling & Garten | Cartoon Bee | https://openclipart.org/detail/221154 | CC0 1.0 (Openclipart) | GDJ |
+| Biene auf Waben | fig-bienen-c | Frühling & Garten | Abeille-Bee-Kawai | https://openclipart.org/detail/191944 | CC0 1.0 (Openclipart) | Martouf |
+| Dicke Biene | fig-bienen-d | Frühling & Garten | Cartoon Bee | https://openclipart.org/detail/69817 | CC0 1.0 (Openclipart) | roland81 |
+| Honigbiene | fig-bienen-honig | Frühling & Garten | Cartoon Honey Bee | https://openclipart.org/detail/222355 | CC0 1.0 (Openclipart) | GDJ |
+| Schulkind Junge | schule-junge | Schule | Cartoon Boy with rather cornery ears and fingers but who does not care | https://openclipart.org/detail/265858 | CC0 1.0 (Openclipart) | The_Martin |
+| Mädchen am Pult | schule-maedchen-pult | Schule | Comic Girl Tini at School | https://openclipart.org/detail/190242 | CC0 1.0 (Openclipart) | frankes |
+| Junge mit Bücherstapel | schule-buecherstapel-junge | Schule | school days | https://openclipart.org/detail/172179 | CC0 1.0 (Openclipart) | sammo241 |
+| Mädchen an der Tafel | schule-tafel-maedchen | Schule | school days | https://openclipart.org/detail/172178 | CC0 1.0 (Openclipart) | sammo241 |
+| Lesen auf dem Bücherstapel | schule-lesen-stapel | Schule | school days | https://openclipart.org/detail/172177 | CC0 1.0 (Openclipart) | sammo241 |
+| Bücherberg | schule-buecherberg | Schule | school days | https://openclipart.org/detail/172174 | CC0 1.0 (Openclipart) | sammo241 |
+| Schulkinder unterwegs | schule-schulweg | Schule | Boy and Girl Students - Colour Remix | https://openclipart.org/detail/329618 | CC0 1.0 (Openclipart) | j4p4n |
+| Kinder in Uniform | schule-kinder-uniform | Schule | Students with backpacks (#2) | https://openclipart.org/detail/302174 | CC0 1.0 (Openclipart) | oksmith |
+| Kinder mit Rucksack | schule-kinder-rucksack | Schule | Students with backpacks (#1) | https://openclipart.org/detail/301454 | CC0 1.0 (Openclipart) | oksmith |
+| Drei Schulkinder | schule-kinder-drei | Schule | Students with backpacks (#3) | https://openclipart.org/detail/317671 | CC0 1.0 (Openclipart) | oksmith |
+| Junge mit Rucksack | schule-junge-rucksack | Schule | Boy with Backpack | https://openclipart.org/detail/287003 | CC0 1.0 (Openclipart) | snoopingasusual |
+| Schulbus | schule-bus-gelb | Schule | Yellow School Bus | https://openclipart.org/detail/226533 | CC0 1.0 (Openclipart) | GDJ |
+| Schulbus mit Stopp | schule-bus-stop | Schule | School Bus | https://openclipart.org/detail/19619 | CC0 1.0 (Openclipart) | schoolfreeware |
+| Bleistift-Männchen | schule-bleistift-figur | Schule | Happy pencil | https://openclipart.org/detail/101707 | CC0 1.0 (Openclipart) | jonata |
+| Heft mit Radiergummi | schule-heft | Schule | Architetto -- Blocco notes | https://openclipart.org/detail/25187 | CC0 1.0 (Openclipart) | francesco_rollandin |
+| Schere | schule-schere | Schule | Scissors | https://openclipart.org/detail/48553 | CC0 1.0 (Openclipart) | gmad |
+| Fussballer | sport-fussballer | Sport | African Boy Playing Soccer | https://openclipart.org/detail/314353 | CC0 1.0 (Openclipart) | j4p4n |
+| Fussball | sport-fussball | Sport | Glossy Football Soccer Ball remix | https://openclipart.org/detail/288976 | CC0 1.0 (Openclipart) | monsterbraingames |
+| Junge mit Fussball | sport-junge-fussball | Sport | Soccer toon 2 | https://openclipart.org/detail/5639 | CC0 1.0 (Openclipart) | kobo |
+| Fussball-Schuss | sport-fussball-schuss | Sport | sport 5 | https://openclipart.org/detail/171998 | CC0 1.0 (Openclipart) | andinuryadin |
+| Fussballerin | sport-fussball-maedchen | Sport | girl playing soccer | https://openclipart.org/detail/723 | CC0 1.0 (Openclipart) | johnny_automatic |
+| Junge mit Jo-Jo | sport-jojo | Sport | 620220 | https://openclipart.org/detail/304495 | CC0 1.0 (Openclipart) | wuhon |
+| Basketball-Wurf | sport-basketball-korb | Sport | Basketball Player | https://openclipart.org/detail/331855 | CC0 1.0 (Openclipart) | GDJ |
+| Wolf mit Basketball | sport-wolf-basketball | Sport | basketball wolf | https://openclipart.org/detail/131917 | CC0 1.0 (Openclipart) | tzunghaor |
+| Panda mit Tennisschläger | sport-panda-tennis | Sport | tennis panda | https://openclipart.org/detail/89125 | CC0 1.0 (Openclipart) | shu |
+| Tennisspieler | sport-tennis | Sport | Cartoon Tennis Player | https://openclipart.org/detail/230022 | CC0 1.0 (Openclipart) | samtux |
+| Tischtennisschläger | sport-tischtennis | Sport | Table Tennis - Colour | https://openclipart.org/detail/305097 | CC0 1.0 (Openclipart) | j4p4n |
+| Nilpferd mit Schnorchel | sport-nilpferd-schnorchel | Sport | SnorkelingHippo | https://openclipart.org/detail/85105 | CC0 1.0 (Openclipart) | TomBrough |
+| Lama als Bademeister | sport-lama-bademeister | Sport | Swimming Alpaka | https://openclipart.org/detail/284780 | CC0 1.0 (Openclipart) | Bingenberg |
+| Schwein auf dem Velo | sport-schwein-velo | Sport | Cycling pig | https://openclipart.org/detail/296457 | CC0 1.0 (Openclipart) | sonichedgehog |
+| Skateboard-Mädchen | sport-skate-maedchen | Sport | Girl Skateboard Remix | https://openclipart.org/detail/354303 | CC0 1.0 (Openclipart) | SunKing2 |
+| Frosch auf dem Skateboard | sport-frosch-skate | Sport | Skateboarding Frog | https://openclipart.org/detail/350704 | CC0 1.0 (Openclipart) | j4p4n |
+| Ratte auf dem Skateboard | sport-ratte-skate | Sport | A Rat on a Skateboard | https://openclipart.org/detail/321882 | CC0 1.0 (Openclipart) | hotta |
+| Katze auf dem Skateboard | sport-katze-skate | Sport | Cat on a skate board | https://openclipart.org/detail/321759 | CC0 1.0 (Openclipart) | hotta |
+| Skater | sport-skater | Sport | Skater | https://openclipart.org/detail/274693 | CC0 1.0 (Openclipart) | snoopingasusual |
+| Skater mit Helm | sport-skater-kind | Sport | Skateboard African Kid | https://openclipart.org/detail/264461 | CC0 1.0 (Openclipart) | j4p4n |
+| Pokal | sport-pokal | Sport | Gold World Cup | https://openclipart.org/detail/171533 | CC0 1.0 (Openclipart) | ksrujana96 |
+| Football | sport-football | Sport | Rugby ball | https://openclipart.org/detail/4456 | CC0 1.0 (Openclipart) | molumen |
+| Baseball-Kind | sport-baseball-blau | Sport | Baseball Batter | https://openclipart.org/detail/328274 | CC0 1.0 (Openclipart) | yenlung |
+| Baseball-Kind mit Kappe | sport-baseball-kappe | Sport | Baseball Catcher | https://openclipart.org/detail/328275 | CC0 1.0 (Openclipart) | yenlung |
+| Kind mit Wintermütze | winter-kind-muetze | Winter | Kid 8, blond boy | https://openclipart.org/detail/262306 | CC0 1.0 (Openclipart) | cirenovy |
+| Bär mit Schal | winter-baer-schal | Winter | active bear - coloured | https://openclipart.org/detail/232003 | CC0 1.0 (Openclipart) | frankes |
+| Bär im Bett | winter-baer-bett | Winter | resting bear - coloured | https://openclipart.org/detail/232006 | CC0 1.0 (Openclipart) | frankes |
+| Pinguin im Wintermantel | winter-pinguin-mantel | Winter | Penguin chick | https://openclipart.org/detail/221477 | CC0 1.0 (Openclipart) | Moini |
+| Schneemann mit Besen | winter-schneemann-besen | Winter | Snowman - Remix | https://openclipart.org/detail/337151 | CC0 1.0 (Openclipart) | j4p4n |
+| Schneemann am Feuer | winter-schneemann-feuer | Winter | Food Cravings Can Lead To Dangerous Decisions | https://openclipart.org/detail/313324 | CC0 1.0 (Openclipart) | rpm |
+| Schneemann mit Hut | winter-schneemann-hut | Winter | Two Ball Snowman | https://openclipart.org/detail/301212 | CC0 1.0 (Openclipart) | j4p4n |
+| Schneemann mit rotem Schal | winter-schneemann-schal | Winter | snowman | https://openclipart.org/detail/14208 | CC0 1.0 (Openclipart) | artmaster |
+| Schneemann auf Ski | winter-schneemann-ski | Winter | Skiing Snow Man | https://openclipart.org/detail/241337 | CC0 1.0 (Openclipart) | GDJ |
+| Schneemann mit Bommelmütze | winter-schneemann-bommel | Winter | Snowman | https://openclipart.org/detail/275551 | CC0 1.0 (Openclipart) | j4p4n |
+| Eisbär mit heissem Tee | winter-eisbaer-tasse | Winter | Polar bear | https://openclipart.org/detail/350856 | CC0 1.0 (Openclipart) | culturalibre |
+| Pinguin-Detektiv | winter-pinguin-detektiv | Winter | Sleuth penguin | https://openclipart.org/detail/221475 | CC0 1.0 (Openclipart) | Moini |
+| Pinguin-König | winter-pinguin-koenig | Winter | Oriental Penguin 3 - no mask | https://openclipart.org/detail/188688 | CC0 1.0 (Openclipart) | Moini |
+| Pinguin | winter-pinguin-rund | Winter | Tux the Penguin | https://openclipart.org/detail/103855 | CC0 1.0 (Openclipart) | mairin |
+| Dicker Pinguin | winter-pinguin-dick | Winter | Cute round cartoon penguin (flat colors) | https://openclipart.org/detail/61207 | CC0 1.0 (Openclipart) | qubodup |
+| Pinguin mit Schürze | winter-pinguin-schuerze | Winter | Penguin with a shirt | https://openclipart.org/detail/95 | CC0 1.0 (Openclipart) | PeterM |
+| Pinguin schreitet | winter-pinguin-schreitet | Winter | Cartoon Penguin | https://openclipart.org/detail/289407 | CC0 1.0 (Openclipart) | GDJ |
+| Lila Krake | meer-krake-lila | Meer | Cartoon octopus | https://openclipart.org/detail/64159 | CC0 1.0 (Openclipart) | laobc |
+| Roter Krake | meer-krake-rot | Meer | Red Cartoon Octopus | https://openclipart.org/detail/204658 | CC0 1.0 (Openclipart) | j4p4n |
+| Türkiser Wal | meer-wal-tuerkis | Meer | Cartoon whale | https://openclipart.org/detail/354655 | CC0 1.0 (Openclipart) | culturalibre |
+| Blauer Wal | meer-wal-blau | Meer | Whale | https://openclipart.org/detail/256551 | CC0 1.0 (Openclipart) | StymShinji |
+| Grauer Pottwal | meer-pottwal-grau | Meer | Small whale | https://openclipart.org/detail/18925 | CC0 1.0 (Openclipart) | lemmling |
+| Hellblauer Wal | meer-wal-hellblau | Meer | Whale | https://openclipart.org/detail/120 | CC0 1.0 (Openclipart) | PeterM |
+| Grauer Hai | meer-hai-grau | Meer | Cartoon shark | https://openclipart.org/detail/354656 | CC0 1.0 (Openclipart) | culturalibre |
+| Orange Krabbe | meer-krabbe-orange | Meer | Cute Crab | https://openclipart.org/detail/284165 | CC0 1.0 (Openclipart) | oksmith |
+| Krabbenkönig | meer-krabbe-koenig | Meer | King Crab remix | https://openclipart.org/detail/263381 | CC0 1.0 (Openclipart) | Arvin61r58 |
+| Lachender Seestern | meer-seestern-lachend | Meer | Starfish | https://openclipart.org/detail/355114 | CC0 1.0 (Openclipart) | AreYouPrepared |
+| Rosa Krabbe | meer-krabbe-rosa | Meer | A Pink Crab | https://openclipart.org/detail/321799 | CC0 1.0 (Openclipart) | hotta |
+| Brummiger Fisch | meer-fisch-brummig | Meer | Simple Big Fish Cartoon | https://openclipart.org/detail/340717 | CC0 1.0 (Openclipart) | miutopia |
+| Rakete im Flug | weltraum-rakete-schraeg | Weltraum | Cartoon Moon Rocket Remix 2 | https://openclipart.org/detail/261323 | CC0 1.0 (Openclipart) | rygle |
+| Rote Rakete | weltraum-rakete-rot | Weltraum | Cartoon Moon Rocket Remix 1 | https://openclipart.org/detail/261322 | CC0 1.0 (Openclipart) | rygle |
+| Schlanke Rakete | weltraum-rakete-schlank | Weltraum | Cartoon Moon Rocket Remix 3 | https://openclipart.org/detail/261324 | CC0 1.0 (Openclipart) | rygle |
+| Gelbe Rakete | weltraum-rakete-gelb | Weltraum | Very simple rocket | https://openclipart.org/detail/26690 | CC0 1.0 (Openclipart) | laobc |
+| Rakete mit Bullauge | weltraum-rakete-bordeaux | Weltraum | Rocket Colour | https://openclipart.org/detail/270273 | CC0 1.0 (Openclipart) | j4p4n |
+| Winkender Astronaut | weltraum-astronaut-winkt | Weltraum | Waving astronaut | https://openclipart.org/detail/304180 | CC0 1.0 (Openclipart) | Firkin |
+| Roter Astronaut | weltraum-astronaut-rot | Weltraum | Astronaut - red space suit | https://openclipart.org/detail/338427 | CC0 1.0 (Openclipart) | Technaturally |
+| Hüpfender Astronaut | weltraum-astronaut-hupft | Weltraum | Spaceman Isolated | https://openclipart.org/detail/325270 | CC0 1.0 (Openclipart) | j4p4n |
+| Ufo mit Ausserirdischem | weltraum-ufo-lila | Weltraum | UFO with Grumpy Alien | https://openclipart.org/detail/338435 | CC0 1.0 (Openclipart) | Technaturally |
+| Brummiger Ausserirdischer | weltraum-ausserirdischer-brummig | Weltraum | Unimpressed alien | https://openclipart.org/detail/270215 | CC0 1.0 (Openclipart) | anarres |

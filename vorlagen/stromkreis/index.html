@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Schritt für Schritt · Stromkreis-Baukasten</title>
+<meta name="description" content="Stromkreis zeichnen und ausprobieren: Batterie, Schalter, Taster, LEDs, 3-V-Motor, Lämpchen und Summer auf die Fläche holen, Klemmen verbinden – die Seite zeigt, was leuchtet und was dreht, warnt vor Kurzschluss und schreibt die Materialliste.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<style>
+:root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--warn:#B3412A;--warn-soft:#FBE9E4;--papier:#FFFFFF;--raster:#D5DEE9;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;--warn:#F08A6E;--warn-soft:#3A2420;--papier:#F7F3EA;--raster:#CFC8B8;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;--warn:#F08A6E;--warn-soft:#3A2420;--papier:#F7F3EA;--raster:#CFC8B8;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
+h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
+h1{font-size:28px}
+h2{font-size:17px;margin-bottom:10px}
+a{color:var(--acc)}
+.kopf{max-width:1400px;margin:0 auto;padding:20px 16px 8px}
+.kopf p{margin:4px 0 0;color:var(--muted)}
+main{max-width:1400px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:150px minmax(0,1fr) minmax(260px,330px);grid-template-areas:"teile flaeche rechts";gap:14px 16px;align-items:start}
+#k-teile{grid-area:teile}#k-flaeche{grid-area:flaeche}.seite-rechts{grid-area:rechts;display:flex;flex-direction:column;gap:14px;position:sticky;top:12px}
+.karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
+button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+/* Teile-Liste links */
+.palette{display:flex;flex-direction:column;gap:8px}
+.pt{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px 6px;border:2px solid var(--line);border-radius:14px;background:var(--surface2);color:var(--ink);font:inherit;font-size:13px;cursor:pointer;min-height:80px;touch-action:manipulation}
+.pt:hover{border-color:var(--acc);background:var(--acc-soft)}
+.pt svg{width:92px;height:62px}
+.pt b{font-weight:700;line-height:1.1}
+/* Fläche */
+.leiste{display:flex;flex-wrap:wrap;align-items:center;gap:6px;min-height:44px;margin-bottom:8px}
+.leiste .was{font-size:14px;color:var(--muted);margin-right:4px}
+.leiste b.was{color:var(--ink)}
+.chip,.knopf{font:inherit;font-size:14px;padding:6px 12px;border-radius:999px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer;min-height:38px;touch-action:manipulation}
+.chip[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
+.chip:hover,.knopf:hover{border-color:var(--acc)}
+.chip.weg{color:var(--warn)}
+.chip i{display:inline-block;width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,.3);vertical-align:-2px;margin-right:5px}
+.flaeche{position:relative;background:var(--papier);border:2px solid var(--line);border-radius:14px;overflow:hidden}
+.flaeche svg{display:block;width:100%;height:auto;touch-action:none;user-select:none;-webkit-user-select:none}
+.leer-tipp{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;color:#7A8698;font-size:18px;text-align:center;padding:20px}
+.tipp{font-size:13px;color:var(--muted);margin:8px 0 0}
+.werkzeuge{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+/* rechts */
+.antwort{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.antwort li{font-size:16px;line-height:1.3;display:flex;gap:8px;align-items:flex-start}
+.antwort li .sym{flex:none;width:22px;text-align:center}
+.antwort li.warn{color:var(--warn);background:var(--warn-soft);border-radius:10px;padding:6px 8px}
+.antwort li.leise{color:var(--muted);font-size:14px}
+.liste{margin:0;padding:0;list-style:none}
+.liste li{display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.liste li:last-child{border-bottom:0}
+.liste b{font-family:Fredoka,Nunito,sans-serif;font-weight:600;color:var(--acc);white-space:nowrap}
+.drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
+.drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
+.aktionen{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.name{width:100%;font:600 18px Fredoka,Nunito,sans-serif;color:var(--ink);background:var(--surface2);border:2px solid var(--line);border-radius:12px;padding:7px 10px;margin-bottom:10px}
+.beispiele{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.beispiele button{text-align:left;padding:8px 10px;border-radius:12px;min-height:44px}
+.beispiele small{display:block;color:var(--muted);font-size:12px;font-weight:600}
+.meldung{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:15px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:9}
+.meldung.da{opacity:1}
+@media (max-width:980px){
+  main{grid-template-columns:minmax(0,1fr);grid-template-areas:"teile" "flaeche" "rechts";gap:12px}
+  .seite-rechts{position:static}
+  .palette{flex-direction:row;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+  .pt{flex:none;width:104px}
+  h1{font-size:24px}
+}
+/* Zeichnung */
+.flaeche svg .teil{cursor:grab}
+.flaeche svg .teil.gewaehlt .rahmen{stroke:#17997A;stroke-width:3;stroke-dasharray:6 5;opacity:1}
+.flaeche svg .rahmen{fill:none;stroke:none;opacity:0}
+.flaeche svg .klemme{fill:#FFE58A;stroke:#1F1A17;stroke-width:2.5}
+.flaeche svg .klemme-hit{fill:transparent;cursor:crosshair}
+.flaeche svg .klemme.offen{fill:#FFF;stroke-dasharray:3 2}
+.flaeche svg .klemme.warte{fill:#17997A;stroke:#17997A}
+.flaeche svg .kabel{cursor:pointer}
+.flaeche svg .kabel .aussen{fill:none;stroke:#1F1A17;stroke-width:9;stroke-linecap:round;stroke-linejoin:round}
+.flaeche svg .kabel .innen{fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.flaeche svg .kabel .hit{fill:none;stroke:transparent;stroke-width:22;stroke-linecap:round;stroke-linejoin:round}
+.flaeche svg .kabel.gewaehlt .aussen{stroke:#17997A}
+.flaeche svg .strom{fill:none;stroke:#FFE58A;stroke-width:3;stroke-linecap:round;stroke-dasharray:1 12;animation:fliessen 1s linear infinite;pointer-events:none}
+@keyframes fliessen{to{stroke-dashoffset:-13}}
+.flaeche svg .wp{fill:#17997A;stroke:#FFF;stroke-width:2;cursor:move}
+.flaeche svg .wm{fill:#FFF;stroke:#17997A;stroke-width:2;cursor:copy}
+.flaeche svg .gummi{fill:none;stroke:#17997A;stroke-width:5;stroke-dasharray:8 6;stroke-linecap:round;pointer-events:none}
+.flaeche svg .dreht{animation:drehen 1s linear infinite}
+@keyframes drehen{to{transform:rotate(360deg)}}
+.flaeche svg .dreht.rueck{animation-direction:reverse}
+.flaeche svg .summt{animation:summen .5s ease-in-out infinite alternate}
+@keyframes summen{from{opacity:.35}to{opacity:1}}
+.flaeche svg .warnz{animation:blink .7s steps(2) infinite}
+@keyframes blink{to{opacity:.3}}
+.flaeche svg text{font-family:Nunito,system-ui,sans-serif;font-weight:800;pointer-events:none}
+#druck{display:none}
+@page{size:A4 landscape;margin:12mm}
+@media print{
+  body{background:#fff}
+  .kopf,main,.meldung{display:none!important}
+  #druck{display:block;color:#000;font:600 13px/1.4 Nunito,system-ui,sans-serif}
+  #druck h1{font-size:22px;margin:0 0 6px}
+  #druck .d-svg{width:100%;max-height:150mm}
+  #druck .d-svg svg{width:100%;height:auto;max-height:150mm;display:block}
+  #druck .d-zwei{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  #druck ul{margin:4px 0 0;padding-left:18px}
+  #druck .strom,#druck .dreht,#druck .summt,#druck .warnz{animation:none}
+}
+</style>
+</head>
+<body>
+<header class="kopf">
+  <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
+  <h1>Stromkreis-Baukasten</h1>
+  <p>Hol dir Batterie, Schalter, LED und Motor auf die Fläche und verbinde die gelben Klemmen mit Kabeln. Die Seite zeigt sofort, was leuchtet und was dreht. <a href="../">← Werkzeuge</a></p>
+</header>
+<script src="../zurueck.js"></script>
+<main>
+  <section class="karte" id="k-teile" aria-label="Teile">
+    <h2>Teile</h2>
+    <div class="palette" id="palette"></div>
+  </section>
+
+  <section class="karte" id="k-flaeche" aria-label="Fläche">
+    <div class="leiste" id="leiste"></div>
+    <div class="flaeche" id="flaeche">
+      <svg id="svg" viewBox="0 0 880 560" xmlns="http://www.w3.org/2000/svg"></svg>
+      <div class="leer-tipp" id="leer-tipp" hidden>Tippe links auf ein Teil,<br>dann erscheint es hier.</div>
+    </div>
+    <p class="tipp">Teil ziehen = verschieben. Von Klemme zu Klemme ziehen = Kabel. Schalter antippen = ein/aus. Taster gedrückt halten. Kabel antippen = Knick setzen oder löschen.</p>
+    <div class="werkzeuge">
+      <button class="knopf" id="undo" type="button">↶ Rückgängig</button>
+      <button class="knopf" id="strom" type="button" aria-pressed="true">⚡ Strom zeigen</button>
+      <button class="knopf" id="neu" type="button">🗑 Alles löschen</button>
+    </div>
+  </section>
+
+  <aside class="seite-rechts">
+    <section class="karte" id="k-antwort" aria-label="Was passiert">
+      <h2>Was passiert?</h2>
+      <ul class="antwort" id="antwort"></ul>
+    </section>
+    <section class="karte" id="k-liste" aria-label="Materialliste">
+      <h2>Das brauchst du</h2>
+      <input class="name" id="name" type="text" maxlength="40" placeholder="Name deines Stromkreises" aria-label="Name">
+      <ul class="liste" id="liste"></ul>
+      <div class="aktionen">
+        <button class="drucken" id="drucken" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg>Drucken</button>
+        <button class="knopf" id="bild" type="button">🖼 Als Bild sichern</button>
+        <button class="knopf" id="link" type="button">🔗 Link kopieren</button>
+      </div>
+    </section>
+    <section class="karte" id="k-beispiele" aria-label="Beispiele">
+      <h2>Beispiele</h2>
+      <div class="beispiele" id="beispiele"></div>
+      <p class="tipp">Der Motor kann einen Propeller (Boot), ein Rad (Auto) oder ein Zahnrad antreiben. Zahnräder, Räder und Propeller zum Ausdrucken gibt es im <a href="../">Vorlagen-Generator</a>.</p>
+    </section>
+  </aside>
+</main>
+<div class="meldung" id="meldung" role="status"></div>
+<div id="druck"></div>
+<script>
+'use strict';
+// ---------- Grundlagen ----------
+const W=880,H=560,RASTER=20;                    // Zeichenfläche in Einheiten, Teile rasten auf 20 ein
+const svg=document.getElementById('svg');
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LED_FARBEN={rot:['#E8554E','#FF8A80'],gelb:['#F5C542','#FFE58A'],gruen:['#3FA34D','#8CE39B'],blau:['#4C6EF5','#9DB4FF'],weiss:['#E9EEF5','#FFFFFF']};
+const LED_NAME={rot:'rot',gelb:'gelb',gruen:'grün',blau:'blau',weiss:'weiss'};
+const LED_VF={rot:1.8,gelb:1.9,gruen:2.0,blau:2.6,weiss:2.6};        // Durchlassspannung
+const KABEL_FARBEN={schwarz:'#3A3A3A',rot:'#E8554E',blau:'#4C6EF5',gelb:'#FFD34D'};
+const TYPEN={
+  batterie:{name:'Batterie',klemmen:['−','+']},
+  schalter:{name:'Schalter',klemmen:['','']},
+  taster:{name:'Taster',klemmen:['','']},
+  led:{name:'LED',klemmen:['+','−']},
+  motor:{name:'Motor',klemmen:['','']},
+  lampe:{name:'Lämpchen',klemmen:['','']},
+  summer:{name:'Summer',klemmen:['','']},
+  widerstand:{name:'Widerstand',klemmen:['','']}
+};
+const NEU={batterie:{volt:3},schalter:{an:false},taster:{an:false},led:{farbe:'rot'},motor:{antrieb:'propeller'},lampe:{},summer:{},widerstand:{ohm:100}};
+let S={name:'',teile:[],kabel:[],n:1};           // der Plan
+let Z=null;                                      // Rechenergebnis (Zustand)
+let wahl=null;                                   // {art:'teil'|'kabel', id}
+let warteKlemme=null;                            // Klemme, die auf die zweite wartet (Tipp-Tipp-Verbinden)
+let zeigeStrom=true;
+const verlauf=[];
+const BEISPIELE=[
+  {id:'taschenlampe',name:'Taschenlampe',text:'Batterie, Schalter, eine LED',
+   teile:[{typ:'batterie',x:240,y:420,rot:0},{typ:'schalter',x:480,y:160,rot:0},{typ:'led',x:720,y:300,rot:90,farbe:'gelb'}],
+   kabel:[[0,1,1,0,[[300,160]]],[1,1,2,0,[[720,160]]],[2,1,0,0,[[720,520],[180,520]]]]},
+  {id:'boot',name:'Boot',text:'Motor mit Propeller',
+   teile:[{typ:'batterie',x:240,y:420,rot:0},{typ:'schalter',x:480,y:160,rot:0},{typ:'motor',x:720,y:300,rot:90,antrieb:'propeller'}],
+   kabel:[[0,1,1,0,[[300,160]]],[1,1,2,0,[[720,160]]],[2,1,0,0,[[720,520],[180,520]]]]},
+  {id:'auto',name:'Auto mit Licht',text:'Motor und LED parallel',
+   teile:[{typ:'batterie',x:200,y:440,rot:0},{typ:'schalter',x:440,y:140,rot:0},{typ:'motor',x:660,y:300,rot:90,antrieb:'rad'},{typ:'led',x:800,y:300,rot:90,farbe:'weiss'}],
+   kabel:[[0,1,1,0,[[260,140]]],[1,1,2,0,[[660,140]]],[2,0,3,0,[[660,200],[800,200]]],[3,1,2,1,[[800,400],[660,400]]],[2,1,0,0,[[660,520],[140,520]]]]},
+  {id:'ampel',name:'Ampel',text:'Drei LEDs, drei Schalter',
+   teile:[{typ:'batterie',x:160,y:440,rot:0},{typ:'schalter',x:400,y:120,rot:0},{typ:'schalter',x:400,y:280,rot:0},{typ:'schalter',x:400,y:440,rot:0},{typ:'led',x:680,y:120,rot:0,farbe:'rot'},{typ:'led',x:680,y:280,rot:0,farbe:'gelb'},{typ:'led',x:680,y:440,rot:0,farbe:'gruen'}],
+   kabel:[[0,1,3,0,[]],[0,1,2,0,[[280,440],[280,280]]],[0,1,1,0,[[280,440],[280,120]]],[1,1,4,0,[]],[2,1,5,0,[]],[3,1,6,0,[]],[4,1,0,0,[[800,120],[800,540],[100,540]]],[5,1,0,0,[[800,280],[800,540],[100,540]]],[6,1,0,0,[[800,440],[800,540],[100,540]]]]},
+  {id:'und',name:'Zwei Schalter in Reihe',text:'Beide müssen ein sein (UND)',
+   teile:[{typ:'batterie',x:240,y:420,rot:0},{typ:'schalter',x:400,y:160,rot:0},{typ:'schalter',x:600,y:160,rot:0},{typ:'lampe',x:760,y:300,rot:90}],
+   kabel:[[0,1,1,0,[[300,160]]],[1,1,2,0,[]],[2,1,3,0,[[760,160]]],[3,1,0,0,[[760,520],[180,520]]]]},
+  {id:'oder',name:'Zwei Schalter parallel',text:'Einer reicht (ODER)',
+   teile:[{typ:'batterie',x:240,y:420,rot:0},{typ:'schalter',x:500,y:120,rot:0},{typ:'schalter',x:500,y:240,rot:0},{typ:'summer',x:760,y:340,rot:90}],
+   kabel:[[0,1,1,0,[[300,120]]],[0,1,2,0,[[300,240]]],[1,1,3,0,[[760,120]]],[2,1,3,0,[[640,240],[640,180],[760,180]]],[3,1,0,0,[[760,520],[180,520]]]]}
+];
+
+// ---------- Geometrie ----------
+const dreh=(x,y,rot)=>{ const r=rot*Math.PI/180,c=Math.cos(r),s=Math.sin(r); return [Math.round(x*c-y*s),Math.round(x*s+y*c)]; };
+const klemmePos=(t,k)=>{ const [dx,dy]=dreh(k===0?-60:60,0,t.rot); return [t.x+dx,t.y+dy]; };
+const teil=id=>S.teile.find(t=>t.id===id);
+const kabelPunkte=k=>{ const a=teil(k.a[0]),b=teil(k.b[0]); if(!a||!b) return null; return [klemmePos(a,k.a[1]),...(k.pts||[]),klemmePos(b,k.b[1])]; };
+const snap=v=>Math.round(v/RASTER)*RASTER;
+const begrenz=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+function svgPunkt(e){ const p=svg.createSVGPoint(); p.x=e.clientX; p.y=e.clientY; const q=p.matrixTransform(svg.getScreenCTM().inverse()); return [q.x,q.y]; }
+function freierPlatz(){ const xs=[200,440,680,320,560,140,760],ys=[160,300,440,100,240,380,520]; for(const y of ys) for(const x of xs){ if(!S.teile.some(t=>Math.abs(t.x-x)<110&&Math.abs(t.y-y)<90)) return [x,y]; } return [440,280]; }
+
+// ---------- Rechnen (Knotenanalyse) ----------
+function loesen(A,n){ for(let c=0;c<n;c++){ let p=c; for(let r=c+1;r<n;r++) if(Math.abs(A[r][c])>Math.abs(A[p][c])) p=r; if(p!==c){ const t=A[c]; A[c]=A[p]; A[p]=t; } const d=A[c][c]; if(Math.abs(d)<1e-15) continue; for(let r=0;r<n;r++){ if(r===c) continue; const f=A[r][c]/d; if(!f) continue; for(let j=c;j<=n;j++) A[r][j]-=f*A[c][j]; } } const x=new Float64Array(n); for(let i=0;i<n;i++) x[i]=Math.abs(A[i][i])<1e-15?0:A[i][n]/A[i][i]; return x; }
+function rechnen(){
+  const nid=new Map(); let N=0;
+  S.teile.forEach(t=>{ nid.set(t.id+':0',N++); nid.set(t.id+':1',N++); });
+  const leds=S.teile.filter(t=>t.typ==='led'); const ledAn=new Map(leds.map(l=>[l.id,false]));
+  let x=null,M=0,quellen=[];
+  for(let runde=0;runde<12;runde++){
+    quellen=[]; M=N; const wid=[];
+    S.teile.forEach(t=>{ const a=nid.get(t.id+':0'),b=nid.get(t.id+':1');
+      if(t.typ==='batterie'){ const m=M++; quellen.push({p:b,n:m,V:t.volt,ref:t}); wid.push({a:m,b:a,g:1/0.3}); }        // + ist Klemme 1, Innenwiderstand 0,3 Ω
+      else if(t.typ==='schalter'||t.typ==='taster'){ if(t.an) wid.push({a,b,g:100}); }
+      else if(t.typ==='led'){ if(ledAn.get(t.id)){ const m=M++; quellen.push({p:a,n:m,V:LED_VF[t.farbe],ref:t}); wid.push({a:m,b,g:1/25}); } }
+      else if(t.typ==='motor') wid.push({a,b,g:1/8});
+      else if(t.typ==='lampe') wid.push({a,b,g:1/17});
+      else if(t.typ==='summer') wid.push({a,b,g:1/60});
+      else if(t.typ==='widerstand') wid.push({a,b,g:1/t.ohm}); });
+    S.kabel.forEach(k=>{ const a=nid.get(k.a[0]+':'+k.a[1]),b=nid.get(k.b[0]+':'+k.b[1]); if(a==null||b==null) return; wid.push({a,b,g:100}); });   // Kabel 0,01 Ω
+    const n=M+quellen.length; const A=Array.from({length:n},()=>new Float64Array(n+1));
+    for(let i=0;i<M;i++) A[i][i]+=1e-9;                                   // winziger Ableitstrom, damit freie Klemmen lösbar bleiben
+    wid.forEach(w=>{ A[w.a][w.a]+=w.g; A[w.b][w.b]+=w.g; A[w.a][w.b]-=w.g; A[w.b][w.a]-=w.g; });
+    quellen.forEach((q,k)=>{ const r=M+k; A[q.p][r]+=1; A[q.n][r]-=1; A[r][q.p]+=1; A[r][q.n]-=1; A[r][n]=q.V; });
+    x=loesen(A,n);
+    let anders=false;
+    leds.forEach(l=>{ const a=nid.get(l.id+':0'),c=nid.get(l.id+':1');
+      if(!ledAn.get(l.id)){ if(x[a]-x[c]>LED_VF[l.farbe]+0.02){ ledAn.set(l.id,true); anders=true; } }
+      else { const k=quellen.findIndex(q=>q.ref===l); if(x[M+k]<0){ ledAn.set(l.id,false); anders=true; } } });
+    if(!anders) break;
+  }
+  const ok=x&&Array.from(x).every(v=>Number.isFinite(v)); const v=i=>ok?x[i]:0;
+  const z={teile:new Map(),kabel:new Map(),kurz:false,fliesst:false,batterien:0};
+  S.teile.forEach(t=>{ const a=nid.get(t.id+':0'),b=nid.get(t.id+':1'); const U=v(a)-v(b); const o={U};
+    if(t.typ==='batterie'){ z.batterien++; const k=quellen.findIndex(q=>q.ref===t); o.I=-v(M+k); if(Math.abs(o.I)>2) z.kurz=true; if(Math.abs(o.I)>0.001) z.fliesst=true; }
+    else if(t.typ==='led'){ const k=quellen.findIndex(q=>q.ref===t); o.I=ledAn.get(t.id)?v(M+k):0; o.an=o.I>0.001; o.hell=begrenz(o.I/0.02,0,1); o.zuviel=o.I>0.06; o.verkehrt=!o.an&&(v(b)-v(a))>1; o.zuwenig=!o.an&&U>0.5; }
+    else if(t.typ==='motor'){ o.an=Math.abs(U)>=1; o.tempo=Math.abs(U)/3; o.rueck=U<0; o.zuviel=Math.abs(U)>6; o.zuwenig=!o.an&&Math.abs(U)>0.2; }
+    else if(t.typ==='lampe'){ o.an=Math.abs(U)>=1; o.hell=begrenz(Math.abs(U)/3.5,0,1); o.zuviel=Math.abs(U)>5; o.zuwenig=!o.an&&Math.abs(U)>0.2; }
+    else if(t.typ==='summer'){ o.an=Math.abs(U)>=1.5; o.zuwenig=!o.an&&Math.abs(U)>0.3; }
+    z.teile.set(t.id,o); });
+  S.kabel.forEach(k=>{ const a=nid.get(k.a[0]+':'+k.a[1]),b=nid.get(k.b[0]+':'+k.b[1]); if(a==null||b==null) return; z.kabel.set(k.id,(v(a)-v(b))*100); });
+  return z;
+}
+
+// ---------- Zeichnen ----------
+const LEDgl=0;
+function txt(t,x,y,s,gr=12,farbe='#1F1A17',anker='middle'){ return `<text transform="translate(${x} ${y}) rotate(${-t.rot})" font-size="${gr}" fill="${farbe}" text-anchor="${anker}" dominant-baseline="middle">${esc(s)}</text>`; }
+function antriebSvg(art){
+  if(art==='rad') return '<circle r="20" fill="#2B2320"/><circle r="13" fill="#9AA3AE" stroke="#1F1A17" stroke-width="2"/><path d="M0-13V13M-13 0H13M-9-9L9 9M-9 9L9-9" stroke="#1F1A17" stroke-width="2.5"/><circle r="3" fill="#1F1A17"/>';
+  if(art==='zahnrad'){ let d=''; for(let i=0;i<8;i++){ const a=i*45*Math.PI/180,b=(i*45+22.5)*Math.PI/180; d+=`${i?'L':'M'}${(Math.cos(a-0.18)*21).toFixed(1)} ${(Math.sin(a-0.18)*21).toFixed(1)}L${(Math.cos(a+0.18)*21).toFixed(1)} ${(Math.sin(a+0.18)*21).toFixed(1)}L${(Math.cos(b-0.2)*15).toFixed(1)} ${(Math.sin(b-0.2)*15).toFixed(1)}L${(Math.cos(b+0.2)*15).toFixed(1)} ${(Math.sin(b+0.2)*15).toFixed(1)}`; } return `<path d="${d}Z" fill="#F5C542" stroke="#1F1A17" stroke-width="2.5" stroke-linejoin="round"/><circle r="4" fill="#1F1A17"/>`; }
+  return '<ellipse rx="24" ry="7" fill="#4C6EF5" stroke="#1F1A17" stroke-width="2.5" transform="rotate(20)"/><ellipse rx="24" ry="7" fill="#4C6EF5" stroke="#1F1A17" stroke-width="2.5" transform="rotate(110)"/><circle r="4" fill="#1F1A17"/>';
+}
+function teilInnen(t,o){
+  o=o||{}; const L='#1F1A17'; let s='';
+  const bein=(x1,x2)=>`<path d="M${x1} 0H${x2}" stroke="${L}" stroke-width="3"/>`;
+  if(t.typ==='batterie'){
+    const n=t.volt===9?1:t.volt===4.5?3:2;
+    s+=bein(-60,-50)+bein(50,60);
+    s+=`<rect x="-50" y="-26" width="100" height="52" rx="8" fill="${o.heiss?'#E8554E':'#5B6B80'}" stroke="${L}" stroke-width="3"/>`;
+    if(t.volt===9) s+=`<rect x="-30" y="-16" width="60" height="32" rx="4" fill="#2B2320" stroke="${L}" stroke-width="2"/><rect x="-16" y="-22" width="9" height="6" rx="2" fill="#C9CED6" stroke="${L}" stroke-width="1.5"/><rect x="7" y="-22" width="9" height="6" rx="2" fill="#C9CED6" stroke="${L}" stroke-width="1.5"/>`;
+    else for(let i=0;i<n;i++){ const y=-20+i*(40/n); s+=`<rect x="-42" y="${y+2}" width="84" height="${40/n-4}" rx="4" fill="#F5C542" stroke="${L}" stroke-width="2"/><rect x="36" y="${y+2+(40/n-4)/2-3}" width="6" height="6" fill="#2B2320"/>`; }
+    s+=txt(t,-60,-16,'−',18,'#FFF')+txt(t,60,-16,'+',18,'#E8554E')+txt(t,0,36,`${String(t.volt).replace('.',',')} V`,13,L);
+    if(o.heiss) s+=`<g class="warnz">${txt(t,0,-38,'⚠ Kurzschluss!',14,'#B3412A')}</g>`;
+  } else if(t.typ==='schalter'){
+    s+=bein(-60,-30)+bein(30,60);
+    s+=`<rect x="-44" y="-4" width="88" height="22" rx="6" fill="#D8C6A5" stroke="${L}" stroke-width="3"/>`;
+    s+=`<path d="M-30 0L${t.an?30:22} ${t.an?0:-26}" stroke="${t.an?'#17997A':'#B3412A'}" stroke-width="6" stroke-linecap="round"/>`;
+    s+=`<circle cx="-30" r="5" fill="#C9CED6" stroke="${L}" stroke-width="2"/><circle cx="30" r="5" fill="#C9CED6" stroke="${L}" stroke-width="2"/>`;
+    s+=txt(t,0,32,t.an?'ein':'aus',12,t.an?'#17997A':'#B3412A');
+  } else if(t.typ==='taster'){
+    s+=bein(-60,-30)+bein(30,60);
+    s+=`<rect x="-44" y="-4" width="88" height="22" rx="6" fill="#D8C6A5" stroke="${L}" stroke-width="3"/>`;
+    s+=`<circle cx="-30" r="5" fill="#C9CED6" stroke="${L}" stroke-width="2"/><circle cx="30" r="5" fill="#C9CED6" stroke="${L}" stroke-width="2"/>`;
+    s+=`<path d="M-30 ${t.an?0:-12}H30" stroke="${t.an?'#17997A':L}" stroke-width="5" stroke-linecap="round"/>`;
+    s+=`<rect x="-14" y="${t.an?-24:-34}" width="28" height="14" rx="5" fill="${t.an?'#17997A':'#E8554E'}" stroke="${L}" stroke-width="3"/>`;
+    s+=txt(t,0,32,t.an?'gedrückt':'Taster',12,t.an?'#17997A':L);
+  } else if(t.typ==='led'){
+    const [f,g]=LED_FARBEN[t.farbe]; const hell=o.an?o.hell:0;
+    if(hell>0) s+=`<circle cy="-6" r="34" fill="${g}" opacity="${(0.35+0.55*hell).toFixed(2)}" filter="url(#weich)"/>`;
+    s+=bein(-60,-22)+bein(22,60);
+    s+=`<path d="M-22 14V-6a22 22 0 0 1 44 0V14Z" fill="${hell>0?g:f}" stroke="${L}" stroke-width="3" stroke-linejoin="round"/>`;
+    if(hell>0) s+=`<path d="M-22 14V-6a22 22 0 0 1 44 0V14Z" fill="${f}" opacity="${(0.5-0.4*hell).toFixed(2)}"/>`;
+    s+=`<path d="M-26 14H26" stroke="${L}" stroke-width="3" stroke-linecap="round"/>`;
+    s+=`<path d="M-12 -2 l-2 8 h4z" fill="${L}"/>`;
+    s+=txt(t,-40,-14,'+',16,'#E8554E')+txt(t,40,-14,'−',16,L)+txt(t,0,32,'LED '+LED_NAME[t.farbe],12,L);
+    if(o.zuviel) s+=`<g class="warnz">${txt(t,0,-40,'⚠ zu viel Strom',13,'#B3412A')}</g>`;
+  } else if(t.typ==='motor'){
+    s+=bein(-60,-36)+bein(36,60);
+    s+=`<rect x="-36" y="-8" width="72" height="42" rx="7" fill="#6B7280" stroke="${L}" stroke-width="3"/><path d="M-36 6H36M-36 20H36" stroke="${L}" stroke-width="1.5" opacity=".5"/>`;
+    s+=`<rect x="-5" y="-22" width="10" height="16" fill="#9AA3AE" stroke="${L}" stroke-width="2"/>`;
+    const dauer=o.an?begrenz(1.2/o.tempo,0.35,3):0;
+    s+=`<g transform="translate(0 -26)"><g class="${o.an?'dreht'+(o.rueck?' rueck':''):''}"${o.an?` style="animation-duration:${dauer.toFixed(2)}s;animation-delay:-${(performance.now()/1000%dauer).toFixed(2)}s"`:''}>${antriebSvg(t.antrieb)}</g></g>`;
+    s+=txt(t,0,46,'Motor 3 V',12,L);
+    if(o.zuviel) s+=`<g class="warnz">${txt(t,0,-52,'⚠ zu viel Spannung',13,'#B3412A')}</g>`;
+  } else if(t.typ==='lampe'){
+    const hell=o.an?o.hell:0;
+    if(hell>0) s+=`<circle cy="-10" r="34" fill="#FFE58A" opacity="${(0.4+0.5*hell).toFixed(2)}" filter="url(#weich)"/>`;
+    s+=bein(-60,-30)+bein(30,60);
+    s+=`<path d="M-30 0H-14M14 0H30" stroke="${L}" stroke-width="3"/>`;
+    s+=`<circle cy="-10" r="22" fill="${hell>0?'#FFF3B0':'#EEF2F7'}" stroke="${L}" stroke-width="3"/>`;
+    s+=`<rect x="-12" y="8" width="24" height="16" rx="3" fill="#9AA3AE" stroke="${L}" stroke-width="2.5"/><path d="M-12 14H12M-12 19H12" stroke="${L}" stroke-width="1.5"/>`;
+    s+=`<path d="M-7 8V-6L-3-12L0-6L3-12L7-6V8" fill="none" stroke="${hell>0?'#E8554E':L}" stroke-width="2"/>`;
+    s+=txt(t,0,36,'Lämpchen',12,L);
+    if(o.zuviel) s+=`<g class="warnz">${txt(t,0,-42,'⚠ brennt durch',13,'#B3412A')}</g>`;
+  } else if(t.typ==='summer'){
+    s+=bein(-60,-24)+bein(24,60);
+    s+=`<circle r="26" fill="#2B2320" stroke="${L}" stroke-width="3"/><circle r="5" fill="#9AA3AE"/>`;
+    if(o.an) s+=`<g class="summt"><path d="M32-14a24 24 0 0 1 0 28M40-22a36 36 0 0 1 0 44" fill="none" stroke="#E8554E" stroke-width="3" stroke-linecap="round"/><path d="M-32-14a24 24 0 0 0 0 28M-40-22a36 36 0 0 0 0 44" fill="none" stroke="#E8554E" stroke-width="3" stroke-linecap="round"/></g>`;
+    s+=txt(t,0,38,o.an?'summt!':'Summer',12,o.an?'#E8554E':L);
+  } else if(t.typ==='widerstand'){
+    s+=bein(-60,-36)+bein(36,60);
+    s+=`<path d="M-36 0L-30-12L-18 12L-6-12L6 12L18-12L30 12L36 0" fill="none" stroke="${L}" stroke-width="3.5" stroke-linejoin="round"/>`;
+    s+=txt(t,0,30,`${t.ohm} Ω`,12,L);
+  }
+  return s;
+}
+function teilSvg(t,o,wahlId,warte){
+  const K=TYPEN[t.typ].klemmen;
+  const kl=[0,1].map(k=>{ const x=k?60:-60; const n=S.kabel.filter(c=>(c.a[0]===t.id&&c.a[1]===k)||(c.b[0]===t.id&&c.b[1]===k)).length;
+    return `<circle class="klemme${n?'':' offen'}${warte&&warte[0]===t.id&&warte[1]===k?' warte':''}" cx="${x}" r="7"/><circle class="klemme-hit" data-id="${t.id}" data-k="${k}" cx="${x}" r="18"/>`; }).join('');
+  return `<g class="teil${wahlId===t.id?' gewaehlt':''}" data-id="${t.id}" transform="translate(${t.x} ${t.y}) rotate(${t.rot})"><rect class="rahmen" x="-66" y="-46" width="132" height="92" rx="12"/><rect x="-50" y="-40" width="100" height="80" fill="transparent"/>${teilInnen(t,o)}${kl}</g>`;
+}
+function kabelSvg(k,i,gewaehlt){
+  const P=kabelPunkte(k); if(!P) return '';
+  const pts=P.map(p=>p.join(',')).join(' '); const f=KABEL_FARBEN[k.farbe||'schwarz'];
+  let s=`<g class="kabel${gewaehlt?' gewaehlt':''}" data-id="${k.id}"><polyline class="hit" points="${pts}"/><polyline class="aussen" points="${pts}"/><polyline class="innen" points="${pts}" stroke="${f}"/>`;
+  if(zeigeStrom&&i!=null&&Math.abs(i)>0.001){ const d=begrenz(0.08/Math.abs(i),0.25,2.5); s+=`<polyline class="strom" points="${pts}" style="animation-duration:${d.toFixed(2)}s;animation-direction:${i>0?'normal':'reverse'};animation-delay:-${(performance.now()/1000%d).toFixed(2)}s"/>`; }
+  if(gewaehlt){ for(let j=0;j<P.length-1;j++){ const mx=(P[j][0]+P[j+1][0])/2,my=(P[j][1]+P[j+1][1])/2; s+=`<circle class="wm" data-id="${k.id}" data-seg="${j}" cx="${mx}" cy="${my}" r="7"/>`; } (k.pts||[]).forEach((p,j)=>{ s+=`<circle class="wp" data-id="${k.id}" data-i="${j}" cx="${p[0]}" cy="${p[1]}" r="8"/>`; }); }
+  return s+'</g>';
+}
+function zeichnen(){
+  if(!Z) Z=rechnen();
+  let s=`<defs><filter id="weich" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter><pattern id="raster" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.4" fill="#C9D2DD"/></pattern></defs><rect width="${W}" height="${H}" fill="url(#raster)" data-leer="1"/>`;
+  s+=S.kabel.map(k=>kabelSvg(k,Z.kabel.get(k.id),wahl&&wahl.art==='kabel'&&wahl.id===k.id)).join('');
+  s+=S.teile.map(t=>teilSvg(t,Z.teile.get(t.id),wahl&&wahl.art==='teil'?wahl.id:null,warteKlemme)).join('');
+  s+='<polyline class="gummi" id="gummi" points="" hidden/>';
+  svg.innerHTML=s;
+  $('leer-tipp').hidden=S.teile.length>0;
+  leiste(); antwort(); liste();
+}
+
+// ---------- Leiste über der Fläche ----------
+function leiste(){
+  const L=$('leiste'); let s='';
+  const chip=(act,txt,pressed,extra='')=>`<button class="chip${extra}" type="button" data-act="${act}"${pressed!=null?` aria-pressed="${pressed}"`:''}>${txt}</button>`;
+  if(!wahl){ L.innerHTML='<span class="was">Tippe auf ein Teil oder ein Kabel, um es zu ändern.</span>'; return; }
+  if(wahl.art==='teil'){ const t=teil(wahl.id); if(!t){ wahl=null; return leiste(); }
+    s+=`<b class="was">${esc(TYPEN[t.typ].name)}</b>`;
+    if(t.typ==='batterie') s+=[3,4.5,9].map(v=>chip('volt:'+v,String(v).replace('.',',')+' V',t.volt===v)).join('');
+    if(t.typ==='led') s+=Object.keys(LED_FARBEN).map(f=>chip('farbe:'+f,`<i style="background:${LED_FARBEN[f][0]}"></i>${LED_NAME[f]}`,t.farbe===f)).join('');
+    if(t.typ==='motor') s+=[['propeller','Propeller'],['rad','Rad'],['zahnrad','Zahnrad']].map(([a,n])=>chip('antrieb:'+a,n,t.antrieb===a)).join('');
+    if(t.typ==='widerstand') s+=[100,220,470].map(o=>chip('ohm:'+o,o+' Ω',t.ohm===o)).join('');
+    if(t.typ==='schalter') s+=chip('an',t.an?'Ein':'Aus',t.an);
+    if(t.typ==='led'||t.typ==='motor'||t.typ==='batterie') s+=chip('umdrehen','↔ Umdrehen');
+    s+=chip('drehen','↻ Drehen')+chip('weg','✕ Löschen',null,' weg');
+  } else { const k=S.kabel.find(c=>c.id===wahl.id); if(!k){ wahl=null; return leiste(); }
+    s+='<b class="was">Kabel</b>'+Object.keys(KABEL_FARBEN).map(f=>chip('kfarbe:'+f,`<i style="background:${KABEL_FARBEN[f]}"></i>${f}`,(k.farbe||'schwarz')===f)).join('');
+    if((k.pts||[]).length) s+=chip('gerade','Gerade machen');
+    s+=chip('weg','✕ Löschen',null,' weg');
+  }
+  L.innerHTML=s;
+}
+$('leiste').addEventListener('click',e=>{ const b=e.target.closest('[data-act]'); if(!b) return; const [act,wert]=b.dataset.act.split(':');
+  if(act==='weg'){ merken(); if(wahl.art==='teil') loescheTeil(wahl.id); else S.kabel=S.kabel.filter(k=>k.id!==wahl.id); wahl=null; aendern(); return; }
+  if(wahl.art==='teil'){ const t=teil(wahl.id); merken();
+    if(act==='volt') t.volt=+wert; else if(act==='farbe') t.farbe=wert; else if(act==='antrieb') t.antrieb=wert; else if(act==='ohm') t.ohm=+wert; else if(act==='an') t.an=!t.an; else if(act==='drehen') t.rot=(t.rot+90)%360; else if(act==='umdrehen'){ t.rot=(t.rot+180)%360; S.kabel.forEach(k=>{ if(k.a[0]===t.id) k.a[1]=1-k.a[1]; if(k.b[0]===t.id) k.b[1]=1-k.b[1]; }); }
+  } else { const k=S.kabel.find(c=>c.id===wahl.id); merken(); if(act==='kfarbe') k.farbe=wert; else if(act==='gerade') k.pts=[]; }
+  aendern(); });
+function loescheTeil(id){ S.teile=S.teile.filter(t=>t.id!==id); S.kabel=S.kabel.filter(k=>k.a[0]!==id&&k.b[0]!==id); }
+
+// ---------- Was passiert? und Materialliste ----------
+function antwort(){
+  const A=[]; const li=(sym,txt,cls='')=>A.push(`<li class="${cls}"><span class="sym">${sym}</span><span>${txt}</span></li>`);
+  const bat=S.teile.filter(t=>t.typ==='batterie'); const verbraucher=S.teile.filter(t=>['led','motor','lampe','summer'].includes(t.typ));
+  if(!S.teile.length){ li('👉','Hol dir zuerst eine Batterie, dann einen Schalter und eine LED oder einen Motor.','leise'); }
+  else if(!bat.length){ li('🔋','Ohne Batterie fliesst kein Strom.','leise'); }
+  else if(Z.kurz){ li('⚠️','<b>Kurzschluss!</b> Der Strom fliesst direkt von + nach − zurück, ohne Lampe oder Motor dazwischen. Die Batterie wird heiss – so darfst du es nicht bauen.','warn'); }
+  else if(!Z.fliesst){
+    const offen=S.teile.some(t=>(t.typ==='schalter'||t.typ==='taster')&&!t.an);
+    const lose=S.teile.some(t=>[0,1].some(k=>!S.kabel.some(c=>(c.a[0]===t.id&&c.a[1]===k)||(c.b[0]===t.id&&c.b[1]===k))));
+    const verkehrt=S.teile.find(t=>t.typ==='led'&&Z.teile.get(t.id).verkehrt&&[0,1].every(k=>S.kabel.some(c=>(c.a[0]===t.id&&c.a[1]===k)||(c.b[0]===t.id&&c.b[1]===k))));
+    if(offen&&!lose) li('🔌','Es fliesst kein Strom: Ein Schalter ist offen. Tippe auf den Schalter.','leise');
+    else if(verkehrt&&!lose) li('🔁',`Es fliesst kein Strom: Die ${LED_NAME[verkehrt.farbe]}e LED ist falsch herum eingebaut. Strom fliesst nur von + nach − durch die LED. Tippe auf die LED und auf «Umdrehen».`,'warn');
+    else if(lose) li('🔌','Es fliesst kein Strom. Der Kreis ist noch nicht geschlossen – eine Klemme ist frei (weisser Punkt).','leise');
+    else li('🔌','Es fliesst kein Strom. Der Kreis ist nicht geschlossen.','leise');
+  }
+  if(!Z.kurz&&Z.fliesst) verbraucher.forEach(t=>{ const o=Z.teile.get(t.id); const n=t.typ==='led'?`Die ${LED_NAME[t.farbe]}e LED`:t.typ==='motor'?'Der Motor':t.typ==='lampe'?'Das Lämpchen':'Der Summer';
+    if(t.typ==='led'){ if(o.zuviel) li('⚠️',`${n} bekommt zu viel Strom und geht kaputt. Nimm 3 V oder baue einen Widerstand in Reihe.`,'warn'); else if(o.an) li('💡',`${n} leuchtet${o.hell<0.5?' schwach':''}.`); else if(o.verkehrt) li('🔁',`${n} ist falsch herum eingebaut: + muss zum + der Batterie. Tippe auf die LED und auf «Umdrehen».`,'warn'); else if(o.zuwenig) li('🔋',`${n} bekommt zu wenig Spannung. In Reihe teilen sich die Teile die Spannung – schalte sie parallel.`,'leise'); }
+    else if(t.typ==='motor'){ if(o.zuviel) li('⚠️',`${n} bekommt zu viel Spannung für 3 V.`,'warn'); else if(o.an) li('🌀',`${n} dreht${o.tempo<0.6?' langsam':''}${o.rueck?' – andersherum. Mit «Umdrehen» dreht er in die andere Richtung':''}.`); else if(o.zuwenig) li('🔋',`${n} bekommt zu wenig Spannung und bleibt stehen. Tipp: Motor und LED parallel schalten, nicht in Reihe.`,'leise'); }
+    else if(t.typ==='lampe'){ if(o.zuviel) li('⚠️',`${n} bekommt zu viel Spannung und brennt durch.`,'warn'); else if(o.an) li('🔆',`${n} leuchtet${o.hell<0.5?' schwach':''}.`); else if(o.zuwenig) li('🔋',`${n} bekommt zu wenig Spannung.`,'leise'); }
+    else if(t.typ==='summer'){ if(o.an) li('🔔',`${n} summt.`); else if(o.zuwenig) li('🔋',`${n} bekommt zu wenig Spannung.`,'leise'); } });
+  if(bat.length&&!Z.kurz&&Z.fliesst&&!verbraucher.length) li('🤔','Strom fliesst, aber nichts leuchtet oder dreht: Es fehlt eine LED, ein Motor oder ein Lämpchen.','leise');
+  $('antwort').innerHTML=A.join('');
+}
+function teilName(t){ if(t.typ==='batterie') return `Batterie ${String(t.volt).replace('.',',')} V ${t.volt===3?'(2× AA im Halter)':t.volt===4.5?'(Flachbatterie)':'(Block)'}`; if(t.typ==='schalter') return 'Kippschalter'; if(t.typ==='led') return `LED ${LED_NAME[t.farbe]}`; if(t.typ==='motor') return 'Motor 3 V'+(t.antrieb==='propeller'?' mit Propeller':t.antrieb==='rad'?' mit Rad':' mit Zahnrad'); if(t.typ==='lampe') return 'Lämpchen 3,5 V mit Fassung'; if(t.typ==='widerstand') return `Widerstand ${t.ohm} Ω`; return TYPEN[t.typ].name; }
+function materialliste(){ const m=new Map(); S.teile.forEach(t=>{ const n=teilName(t); m.set(n,(m.get(n)||0)+1); }); if(S.kabel.length) m.set('Kabel (oder Krokodilklemmen)',S.kabel.length); return [...m]; }
+function liste(){ $('liste').innerHTML=materialliste().map(([n,z])=>`<li><span>${esc(n)}</span><b>${z}×</b></li>`).join('')||'<li class="leise">Noch nichts auf der Fläche.</li>'; }
+
+// ---------- Palette ----------
+function palette(){ $('palette').innerHTML=Object.keys(TYPEN).map(typ=>{ const t={id:0,typ,x:0,y:0,rot:0,...NEU[typ]}; if(typ==='schalter') t.an=true; return `<button class="pt" type="button" data-typ="${typ}"><svg viewBox="-64 -46 128 92" aria-hidden="true">${teilInnen(t,typ==='led'?{an:true,hell:1}:{})}</svg><b>${esc(typ==='motor'?'Motor 3 V':TYPEN[typ].name)}</b></button>`; }).join(''); }
+$('palette').addEventListener('click',e=>{ const b=e.target.closest('[data-typ]'); if(!b) return; merken(); const [x,y]=freierPlatz(); const t={id:S.n++,typ:b.dataset.typ,x,y,rot:0,...NEU[b.dataset.typ]}; S.teile.push(t); wahl={art:'teil',id:t.id}; warteKlemme=null; aendern(); });
+
+// ---------- Zeigen und Ziehen ----------
+let drag=null;
+svg.addEventListener('pointerdown',e=>{ if(e.button&&e.button!==0) return; const [x,y]=svgPunkt(e); const el=e.target;
+  const kh=el.closest('.klemme-hit'); const wp=el.closest('.wp'); const wm=el.closest('.wm'); const tg=el.closest('.teil'); const kg=el.closest('.kabel');
+  svg.setPointerCapture(e.pointerId);
+  if(kh){ drag={art:'kabel',von:[+kh.dataset.id,+kh.dataset.k],x,y,bewegt:false}; return; }
+  if(wp){ const k=S.kabel.find(c=>c.id===+wp.dataset.id); merken(); drag={art:'punkt',k,i:+wp.dataset.i,x,y,bewegt:false}; return; }
+  if(wm){ const k=S.kabel.find(c=>c.id===+wm.dataset.id); merken(); k.pts=k.pts||[]; const i=+wm.dataset.seg; k.pts.splice(i,0,[snap(x),snap(y)]); drag={art:'punkt',k,i,x,y,bewegt:true}; zeichnen(); return; }
+  if(tg){ const t=teil(+tg.dataset.id); if(!t) return; drag={art:'teil',t,dx:t.x-x,dy:t.y-y,x,y,bewegt:false,x0:t.x,y0:t.y}; if(t.typ==='taster'){ t.an=true; aendern(false); } return; }
+  if(kg){ wahl={art:'kabel',id:+kg.dataset.id}; warteKlemme=null; zeichnen(); return; }
+  wahl=null; warteKlemme=null; zeichnen(); });
+svg.addEventListener('pointermove',e=>{ if(!drag) return; const [x,y]=svgPunkt(e); if(!drag.bewegt&&Math.hypot(x-drag.x,y-drag.y)<6) return;
+  if(!drag.bewegt){ drag.bewegt=true; if(drag.art==='teil'){ merken(); if(drag.t.typ==='taster'){ drag.t.an=false; Z=null; } } }
+  if(drag.art==='teil'){ drag.t.x=begrenz(snap(x+drag.dx),60,W-60); drag.t.y=begrenz(snap(y+drag.dy),40,H-40); zeichnen(); }
+  else if(drag.art==='punkt'){ drag.k.pts[drag.i]=[begrenz(snap(x),0,W),begrenz(snap(y),0,H)]; zeichnen(); }
+  else if(drag.art==='kabel'){ const g=$('gummi'); const a=klemmePos(teil(drag.von[0]),drag.von[1]); g.hidden=false; g.setAttribute('points',`${a[0]},${a[1]} ${x},${y}`); } });
+function hoch(e){ if(!drag) return; const d=drag; drag=null; const [x,y]=svgPunkt(e);
+  if(d.art==='teil'){ const t=d.t; if(t.typ==='taster'){ t.an=false; }
+    if(!d.bewegt){ if(t.typ==='schalter'){ merken(); t.an=!t.an; } wahl={art:'teil',id:t.id}; warteKlemme=null; }
+    aendern(); return; }
+  if(d.art==='punkt'){ aendern(); return; }
+  if(d.art==='kabel'){ const ziel=naechsteKlemme(x,y,d.von);
+    if(ziel){ verbinde(d.von,ziel); warteKlemme=null; }
+    else if(!d.bewegt){ if(warteKlemme&&!(warteKlemme[0]===d.von[0]&&warteKlemme[1]===d.von[1])){ verbinde(warteKlemme,d.von); warteKlemme=null; } else { warteKlemme=d.von; } }
+    else warteKlemme=null;
+    wahl=null; aendern(); } }
+svg.addEventListener('pointerup',hoch); svg.addEventListener('pointercancel',hoch);
+function naechsteKlemme(x,y,ausser){ let best=null,bd=30; S.teile.forEach(t=>[0,1].forEach(k=>{ if(ausser&&ausser[0]===t.id&&ausser[1]===k) return; const p=klemmePos(t,k); const d=Math.hypot(p[0]-x,p[1]-y); if(d<bd){ bd=d; best=[t.id,k]; } })); return best; }
+function verbinde(a,b){ if(S.kabel.some(k=>(k.a[0]===a[0]&&k.a[1]===a[1]&&k.b[0]===b[0]&&k.b[1]===b[1])||(k.a[0]===b[0]&&k.a[1]===b[1]&&k.b[0]===a[0]&&k.b[1]===a[1]))) return; merken(); S.kabel.push({id:S.n++,a,b,pts:[],farbe:'schwarz'}); }
+document.addEventListener('keydown',e=>{ if(e.target.matches('input')) return; if((e.key==='Delete'||e.key==='Backspace')&&wahl){ e.preventDefault(); merken(); if(wahl.art==='teil') loescheTeil(wahl.id); else S.kabel=S.kabel.filter(k=>k.id!==wahl.id); wahl=null; aendern(); } if(e.key==='z'&&(e.ctrlKey||e.metaKey)){ e.preventDefault(); zurueck(); } });
+
+// ---------- Ändern, Merken, Speichern ----------
+function aendern(speichern=true){ Z=null; zeichnen(); if(speichern) speichere(); }
+function merken(){ verlauf.push(JSON.stringify(S)); if(verlauf.length>40) verlauf.shift(); }
+function zurueck(){ const s=verlauf.pop(); if(!s){ meldung('Nichts zum Rückgängigmachen.'); return; } S=JSON.parse(s); wahl=null; warteKlemme=null; aendern(); }
+$('undo').addEventListener('click',zurueck);
+$('neu').addEventListener('click',()=>{ if(S.teile.length&&!confirm('Alles von der Fläche löschen?')) return; merken(); S={name:S.name,teile:[],kabel:[],n:1}; wahl=null; warteKlemme=null; aendern(); });
+$('strom').addEventListener('click',e=>{ zeigeStrom=!zeigeStrom; e.currentTarget.setAttribute('aria-pressed',zeigeStrom); zeichnen(); });
+$('name').addEventListener('input',e=>{ S.name=e.target.value; speichere(); });
+function speichere(){ try{ localStorage.setItem('schrittli.stromkreis.v1',JSON.stringify(S)); }catch(e){} }
+function ladeBeispiel(b){ const teile=b.teile.map((t,i)=>({id:i+1,...NEU[t.typ],...t})); const kabel=b.kabel.map((k,i)=>({id:100+i,a:[k[0]+1,k[1]],b:[k[2]+1,k[3]],pts:k[4].map(p=>p.slice()),farbe:'schwarz'})); S={name:b.name,teile,kabel,n:200}; S.teile.filter(t=>t.typ==='schalter').forEach(t=>t.an=true); $('name').value=S.name; wahl=null; warteKlemme=null; aendern(); }
+$('beispiele').innerHTML=BEISPIELE.map(b=>`<button class="knopf" type="button" data-b="${b.id}">${esc(b.name)}<small>${esc(b.text)}</small></button>`).join('');
+$('beispiele').addEventListener('click',e=>{ const b=e.target.closest('[data-b]'); if(!b) return; merken(); ladeBeispiel(BEISPIELE.find(x=>x.id===b.dataset.b)); });
+function meldung(t){ const m=$('meldung'); m.textContent=t; m.classList.add('da'); clearTimeout(meldung.t); meldung.t=setTimeout(()=>m.classList.remove('da'),2200); }
+
+// ---------- Teilen, Bild, Drucken ----------
+const b64=s=>btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const unb64=s=>decodeURIComponent(escape(atob(s.replace(/-/g,'+').replace(/_/g,'/'))));
+$('link').addEventListener('click',async()=>{ const url=location.origin+location.pathname+'#p='+b64(JSON.stringify({name:S.name,teile:S.teile,kabel:S.kabel,n:S.n})); try{ await navigator.clipboard.writeText(url); meldung('Link kopiert. Wer ihn öffnet, sieht deinen Stromkreis.'); }catch(e){ prompt('Link zum Kopieren:',url); } });
+function svgText(){ const k=svg.cloneNode(true); k.querySelectorAll('.wm,.wp,#gummi,.klemme-hit').forEach(e=>e.remove()); k.querySelectorAll('.gewaehlt').forEach(e=>e.classList.remove('gewaehlt')); k.querySelectorAll('.strom').forEach(e=>e.remove());
+  const st=document.createElement('style'); st.textContent='.klemme{fill:#FFE58A;stroke:#1F1A17;stroke-width:2.5}.klemme.offen{fill:#FFF;stroke-dasharray:3 2}.kabel .aussen{fill:none;stroke:#1F1A17;stroke-width:9;stroke-linecap:round;stroke-linejoin:round}.kabel .innen{fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.hit,.rahmen{display:none}text{font-family:Nunito,Arial,sans-serif;font-weight:800}'; k.insertBefore(st,k.firstChild);
+  k.setAttribute('width',W); k.setAttribute('height',H); k.insertAdjacentHTML('afterbegin',`<rect width="${W}" height="${H}" fill="#fff"/>`); return new XMLSerializer().serializeToString(k); }
+$('bild').addEventListener('click',()=>{ const img=new Image(); const url=URL.createObjectURL(new Blob([svgText()],{type:'image/svg+xml;charset=utf-8'}));
+  img.onload=()=>{ const c=document.createElement('canvas'); c.width=W*2; c.height=H*2; const g=c.getContext('2d'); g.fillStyle='#fff'; g.fillRect(0,0,c.width,c.height); g.drawImage(img,0,0,c.width,c.height); URL.revokeObjectURL(url);
+    c.toBlob(b=>{ const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=(S.name||'stromkreis').replace(/[^\wäöüÄÖÜ-]+/g,'-').toLowerCase()+'.png'; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },1000); },'image/png'); };
+  img.onerror=()=>meldung('Das Bild konnte nicht erstellt werden.'); img.src=url; });
+function druckFuellen(){ $('druck').innerHTML=`<h1>${esc(S.name||'Mein Stromkreis')}</h1><div class="d-svg">${svgText()}</div><div class="d-zwei"><div><b>Das brauchst du</b><ul>${materialliste().map(([n,z])=>`<li>${z}× ${esc(n)}</li>`).join('')}</ul></div><div><b>Was passiert?</b><ul>${[...$('antwort').querySelectorAll('li')].map(l=>`<li>${l.querySelector('span:last-child').innerHTML}</li>`).join('')}</ul></div></div><p style="margin-top:10px;font-size:11px;color:#555">Schritt für Schritt · Stromkreis-Baukasten</p>`; }
+$('drucken').addEventListener('click',()=>{ druckFuellen(); window.print(); });
+window.addEventListener('beforeprint',druckFuellen);
+
+// ---------- Start ----------
+function start(){
+  palette();
+  const h=new URLSearchParams(location.hash.slice(1)); const q=new URLSearchParams(location.search);
+  let geladen=false;
+  if(h.get('p')){ try{ const p=JSON.parse(unb64(h.get('p'))); if(Array.isArray(p.teile)){ S={name:p.name||'',teile:p.teile,kabel:p.kabel||[],n:p.n||500}; geladen=true; history.replaceState(null,'',location.pathname+location.search); } }catch(e){} }
+  if(!geladen&&q.get('beispiel')){ const b=BEISPIELE.find(x=>x.id===q.get('beispiel')); if(b){ ladeBeispiel(b); return; } }
+  if(!geladen){ try{ const s=JSON.parse(localStorage.getItem('schrittli.stromkreis.v1')); if(s&&Array.isArray(s.teile)){ S=s; geladen=true; } }catch(e){} }
+  if(!geladen){ ladeBeispiel(BEISPIELE[0]); return; }
+  S.teile.forEach(t=>{ if(t.typ==='taster') t.an=false; Object.keys(NEU[t.typ]||{}).forEach(k=>{ if(t[k]===undefined) t[k]=NEU[t.typ][k]; }); });
+  $('name').value=S.name||''; aendern(false);
+}
+start();
+</script>
+</body>
+</html>

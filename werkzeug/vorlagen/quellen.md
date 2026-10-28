@@ -254,3 +254,53 @@ Alle 24 Skylines und Wahrzeichen sind eigene Zeichnungen (Polygone, schwarz auf 
 | Athen | stadt-athen | – | eigene Zeichnung | CC0 |
 | Pyramiden | stadt-pyramiden | – | eigene Zeichnung | CC0 |
 | Märchenschloss | stadt-schloss | – | eigene Zeichnung | CC0 |
+
+## Schweizer Feste
+
+Twemoji (siehe oben) und eine Räbe von Openclipart (CC0), alle mit schwarzem Umriss versehen. Skript: `werkzeug/vorlagen/welle4-feste.py`.
+
+| Motiv | Figur-ID | URL | Autor | Lizenz |
+|---|---|---|---|---|
+| Samichlaus | fest-samichlaus | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f385.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Geschenk für den Chlaussack | fest-geschenk | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f381.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Mandarine | fest-mandarine | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f34a.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Erdnuss | fest-nuss | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f95c.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Guetzli | fest-guetzli | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f36a.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Kerze | fest-kerze | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f56f.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Stern | fest-stern | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/2b50.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Glocke | fest-glocke | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f514.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Lampion | fest-lampion | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f3ee.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Feuerwerk | fest-feuerwerk | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f386.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Feuerwerk mit Funken | fest-feuerwerk-funken | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f387.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Schweizerfahne | fest-schweizerfahne | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1e8-1f1ed.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Knallkörper | fest-knallkoerper | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f9e8.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Osterhase | fest-osterhase | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f430.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Hase | fest-hase | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f407.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Küken | fest-kueken | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f424.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Küken im Ei | fest-schlupf | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f423.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Ei | fest-ei | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f95a.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Nest mit Eiern | fest-nest | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1faba.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Tulpe | fest-tulpe | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f337.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Kürbis | fest-kuerbis | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f383.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Getreideähre | fest-aehre | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f33e.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Maiskolben | fest-mais | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f33d.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Herbstblatt | fest-herbstblatt | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f342.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Apfel | fest-apfel | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f34e.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Birne | fest-birne | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f350.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Trauben | fest-trauben | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f347.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Pilz | fest-pilz | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f344.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Clown | fest-clown | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f921.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Theatermasken | fest-masken | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f3ad.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Konfetti | fest-konfetti | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f38a.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Partyknaller | fest-luftschlangen | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f389.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Trompete | fest-trompete | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f3ba.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Trommel | fest-trommel | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f941.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Saxofon | fest-saxofon | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f3b7.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Luftballon | fest-luftballon | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f388.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Böögg (Schneemann) | fest-boeoegg | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/2603.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Sektgläser | fest-sekt | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f942.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Mitternacht | fest-uhr | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f55b.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Glücksklee | fest-kleeblatt | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f340.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Glücksschwein | fest-glueckssau | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f437.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Glückskäfer | fest-marienkaefer | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f41e.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Räbe für das Räbeliechtli | fest-raebe | https://openclipart.org/detail/84079 | feraliminal | CC0 1.0 |
