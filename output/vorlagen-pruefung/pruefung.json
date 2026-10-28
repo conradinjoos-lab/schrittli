@@ -1,5 +1,5 @@
 {
-  "figuren": 629,
+  "figuren": 652,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -5301,6 +5301,213 @@
       "pixel": [
         2559,
         1351
+      ]
+    },
+    {
+      "id": "fig-herz-pfeil-c",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        799,
+        557
+      ]
+    },
+    {
+      "id": "fig-herz-pfeil-a",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        696,
+        585
+      ]
+    },
+    {
+      "id": "fig-herz-fluegel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        774,
+        461
+      ]
+    },
+    {
+      "id": "fig-amor-a",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        695,
+        800
+      ]
+    },
+    {
+      "id": "fig-brautpaar-a",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        542,
+        800
+      ]
+    },
+    {
+      "id": "fig-brautpaar-e",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        589,
+        766
+      ]
+    },
+    {
+      "id": "fig-braut",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        460,
+        800
+      ]
+    },
+    {
+      "id": "fig-torte-a",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        627,
+        800
+      ]
+    },
+    {
+      "id": "fig-baer-herz-a",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        465,
+        569
+      ]
+    },
+    {
+      "id": "fig-taube-herz",
+      "farbpixelIdentisch": true,
+      "teile": 9,
+      "pixel": [
+        650,
+        766
+      ]
+    },
+    {
+      "id": "fig-schnecken-post",
+      "farbpixelIdentisch": true,
+      "teile": 8,
+      "pixel": [
+        766,
+        359
+      ]
+    },
+    {
+      "id": "fig-lippen-gross",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        580
+      ]
+    },
+    {
+      "id": "fig-rose-a",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        409,
+        724
+      ]
+    },
+    {
+      "id": "fig-rose-b",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        302,
+        800
+      ]
+    },
+    {
+      "id": "fig-rose-d",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        795,
+        780
+      ]
+    },
+    {
+      "id": "fig-ballon-herz-a",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        398,
+        791
+      ]
+    },
+    {
+      "id": "fig-ballon-herz-b",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        588,
+        799
+      ]
+    },
+    {
+      "id": "fig-ballon-katzen",
+      "farbpixelIdentisch": true,
+      "teile": 52,
+      "pixel": [
+        515,
+        800
+      ]
+    },
+    {
+      "id": "fig-teddy-a",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        771,
+        707
+      ]
+    },
+    {
+      "id": "fig-teddy-b",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        771,
+        706
+      ]
+    },
+    {
+      "id": "fig-teddy-d",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        704,
+        800
+      ]
+    },
+    {
+      "id": "fig-teddy-e",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        575,
+        800
+      ]
+    },
+    {
+      "id": "fig-pinguin-herz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        753,
+        800
       ]
     },
     {
