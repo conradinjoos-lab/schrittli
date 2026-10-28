@@ -1,5 +1,5 @@
 {
-  "figuren": 862,
+  "figuren": 880,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -7479,6 +7479,168 @@
       "pixel": [
         568,
         774
+      ]
+    },
+    {
+      "id": "zirkus-robbe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        698,
+        664
+      ]
+    },
+    {
+      "id": "zirkus-jongleur",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        468,
+        755
+      ]
+    },
+    {
+      "id": "zirkus-direktor",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        546,
+        741
+      ]
+    },
+    {
+      "id": "zirkus-clown-eis",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        502,
+        800
+      ]
+    },
+    {
+      "id": "zirkus-clown-gross",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        744,
+        800
+      ]
+    },
+    {
+      "id": "zirkus-clown-weiss",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        712,
+        800
+      ]
+    },
+    {
+      "id": "zirkus-zelt-rot",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        743
+      ]
+    },
+    {
+      "id": "zirkus-hund-nase",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        596,
+        800
+      ]
+    },
+    {
+      "id": "zirkus-clown-hut",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        782,
+        604
+      ]
+    },
+    {
+      "id": "zirkus-narr-laute",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        552,
+        792
+      ]
+    },
+    {
+      "id": "zirkus-elefant-kugel",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        602,
+        769
+      ]
+    },
+    {
+      "id": "zirkus-elefant-tonne",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        685,
+        800
+      ]
+    },
+    {
+      "id": "zirkus-zauberer",
+      "farbpixelIdentisch": true,
+      "teile": 6,
+      "pixel": [
+        534,
+        800
+      ]
+    },
+    {
+      "id": "zirkus-giraffe-zauberer",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        396,
+        800
+      ]
+    },
+    {
+      "id": "zirkus-keulen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        566,
+        800
+      ]
+    },
+    {
+      "id": "zirkus-loewe-ballon",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        636,
+        784
+      ]
+    },
+    {
+      "id": "zirkus-schwein-ballon",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        571,
+        784
+      ]
+    },
+    {
+      "id": "zirkus-elefant-ballon",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        596,
+        791
       ]
     },
     {
