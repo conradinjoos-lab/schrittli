@@ -97,3 +97,35 @@ Alle Bilder stammen von Openclipart und stehen unter CC0 1.0 (Public Domain Dedi
 | Hase | tiere-hase | Tierwelt | Rabbit doodle | https://openclipart.org/detail/319444 | CC0 1.0 (Openclipart) | liftarn |
 | Katze mit Socken | tiere-katze-socken | Tierwelt | Cartoon Cat In Rainbow Socks | https://openclipart.org/detail/23451 | CC0 1.0 (Openclipart) | FunDraw_dot_com |
 | Tanzender Bär | tiere-baer-tanzend | Tierwelt | Cartoon Bear | https://openclipart.org/detail/267847 | CC0 1.0 (Openclipart) | GDJ |
+| Pizzastück | fig-pizzastueck-fett | Küche & Restaurant | Melty Pizza | https://openclipart.org/detail/287866 | CC0 1.0 (Openclipart) | j4p4n |
+| Burger-Mann | fig-burger-mann | Küche & Restaurant | Burger Man | https://openclipart.org/detail/349728 | CC0 1.0 (Openclipart) | Benjamin_Adams |
+| Hamburger | fig-burger-einfach | Küche & Restaurant | Simple Burger | https://openclipart.org/detail/331832 | CC0 1.0 (Openclipart) | j4p4n |
+| Burger mit Augen | fig-burger-augen | Küche & Restaurant | BrrGrr | https://openclipart.org/detail/216346 | CC0 1.0 (Openclipart) | tdlnx |
+| Pommes in der Tüte | fig-pommes-tuete | Küche & Restaurant | French Fries - New Colour Remix | https://openclipart.org/detail/340400 | CC0 1.0 (Openclipart) | j4p4n |
+| Pommes mit Gesicht | fig-pommes-kawaii | Küche & Restaurant | Kawaii Fries - Colour | https://openclipart.org/detail/270290 | CC0 1.0 (Openclipart) | j4p4n |
+| Pommes im Becher | fig-pommes-rot | Küche & Restaurant | French Fries | https://openclipart.org/detail/252388 | CC0 1.0 (Openclipart) | jack7 |
+| Erdbeereis | fig-eis-rosa | Küche & Restaurant | Isolated Ice Cream Cone | https://openclipart.org/detail/320941 | CC0 1.0 (Openclipart) | j4p4n |
+| Eisbecher | fig-eisbecher | Küche & Restaurant | Ice Cream Sundae | https://openclipart.org/detail/320962 | CC0 1.0 (Openclipart) | Deluge |
+| Eis mit Schoko | fig-eis-schoko | Küche & Restaurant | Ice Cream Dessert | https://openclipart.org/detail/308055 | CC0 1.0 (Openclipart) | GDJ |
+| Spaghetti | fig-spaghetti-teller | Küche & Restaurant | Spaghetti and Meatballs Monster SMIL Animation | https://openclipart.org/detail/283822 | CC0 1.0 (Openclipart) | aukipa |
+| Koch mit Pfanne | fig-koch-pfanne | Küche & Restaurant | Chef Cooking Something | https://openclipart.org/detail/349738 | CC0 1.0 (Openclipart) | Benjamin_Adams |
+| Koch | fig-koch-mann | Küche & Restaurant | a cook | https://openclipart.org/detail/83989 | CC0 1.0 (Openclipart) | PeterBrough |
+| Pinguin als Koch | fig-koch-pinguin | Küche & Restaurant | Veggie-Penguin | https://openclipart.org/detail/189178 | CC0 1.0 (Openclipart) | Moini |
+| Eule als Köchin | fig-koch-eule | Küche & Restaurant | Toto | https://openclipart.org/detail/170692 | CC0 1.0 (Openclipart) | eloace |
+| Croissant | fig-croissant-gelb | Küche & Restaurant | Croissant Icon (#2) | https://openclipart.org/detail/296502 | CC0 1.0 (Openclipart) | oksmith |
+| Gipfeli | fig-croissant-braun | Küche & Restaurant | Croissant - Colour | https://openclipart.org/detail/296490 | CC0 1.0 (Openclipart) | j4p4n |
+| Croissant gelb | fig-croissant-baeckerei | Küche & Restaurant | bakery: croissant | https://openclipart.org/detail/22143 | CC0 1.0 (Openclipart) | pitr |
+| Sandwich mit Gesicht | fig-sandwich-kawaii | Küche & Restaurant | Kawaii Sandwich | https://openclipart.org/detail/321519 | CC0 1.0 (Openclipart) | j4p4n |
+| Kaffeetasse mit Gesicht | fig-kaffee-tasse | Küche & Restaurant | Cartoon Coffee Cup | https://openclipart.org/detail/351563 | CC0 1.0 (Openclipart) | Benjamin_Adams |
+| Kaffeetasse | fig-kaffee-icon | Küche & Restaurant | Coffee cup icon | https://openclipart.org/detail/22305 | CC0 1.0 (Openclipart) | pitr |
+| Käse | fig-kaese-stueck | Küche & Restaurant | cheese | https://openclipart.org/detail/2609 | CC0 1.0 (Openclipart) | Machovka |
+| Apfel mit Gesicht | fig-apfel-gesicht | Küche & Restaurant | Cartoon Apple | https://openclipart.org/detail/340802 | CC0 1.0 (Openclipart) | SamsonGillie203 |
+| Erdbeere | fig-erdbeere | Küche & Restaurant | strawberry | https://openclipart.org/detail/20006 | CC0 1.0 (Openclipart) | matou |
+| Birne | fig-birne | Küche & Restaurant | pear | https://openclipart.org/detail/20005 | CC0 1.0 (Openclipart) | matou |
+| Kirschen | fig-kirschen | Küche & Restaurant | cherry | https://openclipart.org/detail/20003 | CC0 1.0 (Openclipart) | matou |
+| Zitrone | fig-zitrone | Küche & Restaurant | lemon | https://openclipart.org/detail/20004 | CC0 1.0 (Openclipart) | matou |
+| Hotdog-Mann | fig-hotdog-mann | Küche & Restaurant | Hot Dog Man | https://openclipart.org/detail/350470 | CC0 1.0 (Openclipart) | algotruneman |
+| Donut-Mädchen rosa | fig-donut-rosa | Küche & Restaurant | Doughnut Head - Remix | https://openclipart.org/detail/353260 | CC0 1.0 (Openclipart) | j4p4n |
+| Donut-Mädchen braun | fig-donut-braun | Küche & Restaurant | Doughnut Head | https://openclipart.org/detail/327177 | CC0 1.0 (Openclipart) | oksmith |
+| Brezel | fig-brezel-braun | Küche & Restaurant | Bavarian pretzel | https://openclipart.org/detail/188586 | CC0 1.0 (Openclipart) | arking |
+| Brezel-Zeichen | fig-brezel-gelb | Küche & Restaurant | Pretzel icon | https://openclipart.org/detail/22714 | CC0 1.0 (Openclipart) | pitr |

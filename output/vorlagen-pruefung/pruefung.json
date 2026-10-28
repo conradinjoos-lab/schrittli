@@ -1,5 +1,5 @@
 {
-  "figuren": 557,
+  "figuren": 542,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -4593,426 +4593,291 @@
       ]
     },
     {
-      "id": "berg-umriss",
-      "farbpixelIdentisch": true,
-      "teile": 6,
-      "pixel": [
-        6351,
-        2473
-      ]
-    },
-    {
-      "id": "berg-spitze",
+      "id": "fig-pizzastueck-fett",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        1120,
-        610
+        747,
+        800
       ]
     },
     {
-      "id": "berg-freihand",
+      "id": "fig-burger-mann",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        10360,
-        2998
+        800,
+        681
       ]
     },
     {
-      "id": "berg-fuji-bild",
+      "id": "fig-burger-einfach",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        2000,
-        928
+        783,
+        618
       ]
     },
     {
-      "id": "berg-schneekappe",
+      "id": "fig-burger-augen",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        2848,
-        1536
+        747,
+        606
       ]
     },
     {
-      "id": "berg-gruen",
+      "id": "fig-pommes-tuete",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        3881,
-        1130
+        697,
+        794
       ]
     },
     {
-      "id": "berg-formen",
+      "id": "fig-pommes-kawaii",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        4803,
-        2034
+        583,
+        800
       ]
     },
     {
-      "id": "berg-violett",
+      "id": "fig-pommes-rot",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        617,
+        767
+      ]
+    },
+    {
+      "id": "fig-eis-rosa",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        448,
+        790
+      ]
+    },
+    {
+      "id": "fig-eisbecher",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        578,
+        740
+      ]
+    },
+    {
+      "id": "fig-eis-schoko",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        610,
+        756
+      ]
+    },
+    {
+      "id": "fig-spaghetti-teller",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        721,
+        373
+      ]
+    },
+    {
+      "id": "fig-koch-pfanne",
       "farbpixelIdentisch": true,
       "teile": 4,
       "pixel": [
-        6353,
-        2634
+        800,
+        565
       ]
     },
     {
-      "id": "berg-sil-1",
-      "farbpixelIdentisch": true,
-      "teile": 1,
-      "pixel": [
-        2749,
-        1973
-      ]
-    },
-    {
-      "id": "berg-sil-2",
-      "farbpixelIdentisch": true,
-      "teile": 1,
-      "pixel": [
-        2460,
-        1984
-      ]
-    },
-    {
-      "id": "berg-sil-3",
+      "id": "fig-koch-mann",
       "farbpixelIdentisch": true,
       "teile": 5,
       "pixel": [
-        3334,
-        2368
+        669,
+        800
       ]
     },
     {
-      "id": "berg-doppel",
+      "id": "fig-koch-pinguin",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        2319,
-        871
+        584,
+        800
       ]
     },
     {
-      "id": "berg-dreiecke",
+      "id": "fig-koch-eule",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        1999,
-        901
+        570,
+        800
       ]
     },
     {
-      "id": "berg-fuji",
+      "id": "fig-croissant-gelb",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        2279,
-        671
+        800,
+        562
       ]
     },
     {
-      "id": "berg-gipfelkreuz",
+      "id": "fig-croissant-braun",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        1879,
-        1059
+        800,
+        436
       ]
     },
     {
-      "id": "berg-hochgebirge",
+      "id": "fig-croissant-baeckerei",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        2560,
-        1121
+        655,
+        597
       ]
     },
     {
-      "id": "berg-huette",
+      "id": "fig-sandwich-kawaii",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        2319,
-        921
+        800,
+        759
       ]
     },
     {
-      "id": "berg-kette",
-      "farbpixelIdentisch": true,
-      "teile": 1,
-      "pixel": [
-        3160,
-        701
-      ]
-    },
-    {
-      "id": "berg-matterhorn-sil",
-      "farbpixelIdentisch": true,
-      "teile": 1,
-      "pixel": [
-        2279,
-        1051
-      ]
-    },
-    {
-      "id": "berg-mond",
+      "id": "fig-kaffee-tasse",
       "farbpixelIdentisch": true,
       "teile": 2,
       "pixel": [
-        2319,
-        1031
+        800,
+        883
       ]
     },
     {
-      "id": "berg-sonne",
+      "id": "fig-kaffee-icon",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        757,
+        683
+      ]
+    },
+    {
+      "id": "fig-kaese-stueck",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        2339,
-        911
+        800,
+        517
       ]
     },
     {
-      "id": "berg-trio",
+      "id": "fig-apfel-gesicht",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        2519,
-        841
+        721,
+        800
       ]
     },
     {
-      "id": "berg-vulkan",
-      "farbpixelIdentisch": true,
-      "teile": 2,
-      "pixel": [
-        1799,
-        1241
-      ]
-    },
-    {
-      "id": "stadt-zuerich",
+      "id": "fig-erdbeere",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        2583,
-        880
+        593,
+        576
       ]
     },
     {
-      "id": "stadt-bern",
+      "id": "fig-birne",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        2585,
-        950
-      ]
-    },
-    {
-      "id": "stadt-basel",
-      "farbpixelIdentisch": true,
-      "teile": 1,
-      "pixel": [
-        2386,
-        950
-      ]
-    },
-    {
-      "id": "stadt-luzern",
-      "farbpixelIdentisch": true,
-      "teile": 3,
-      "pixel": [
-        2583,
+        534,
         770
       ]
     },
     {
-      "id": "stadt-genf",
+      "id": "fig-kirschen",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        2386,
-        950
+        757,
+        695
       ]
     },
     {
-      "id": "stadt-paris",
-      "farbpixelIdentisch": true,
-      "teile": 3,
-      "pixel": [
-        2580,
-        1221
-      ]
-    },
-    {
-      "id": "stadt-newyork",
+      "id": "fig-zitrone",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        2780,
-        1350
+        572,
+        588
       ]
     },
     {
-      "id": "stadt-london",
-      "farbpixelIdentisch": true,
-      "teile": 3,
-      "pixel": [
-        2581,
-        1250
-      ]
-    },
-    {
-      "id": "stadt-rom",
-      "farbpixelIdentisch": true,
-      "teile": 2,
-      "pixel": [
-        2561,
-        735
-      ]
-    },
-    {
-      "id": "stadt-berlin",
-      "farbpixelIdentisch": true,
-      "teile": 4,
-      "pixel": [
-        2580,
-        1350
-      ]
-    },
-    {
-      "id": "stadt-pisa",
+      "id": "fig-hotdog-mann",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        1410,
-        1150
+        788,
+        1307
       ]
     },
     {
-      "id": "stadt-dorf-kirche",
-      "farbpixelIdentisch": true,
-      "teile": 7,
-      "pixel": [
-        2361,
-        860
-      ]
-    },
-    {
-      "id": "stadt-hochhaeuser",
-      "farbpixelIdentisch": true,
-      "teile": 8,
-      "pixel": [
-        2780,
-        1070
-      ]
-    },
-    {
-      "id": "stadt-burg",
+      "id": "fig-donut-rosa",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        2359,
-        1141
+        800,
+        871
       ]
     },
     {
-      "id": "stadt-muehlen",
+      "id": "fig-donut-braun",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        2600,
-        1052
+        734,
+        800
       ]
     },
     {
-      "id": "stadt-tokio",
-      "farbpixelIdentisch": true,
-      "teile": 7,
-      "pixel": [
-        2586,
-        1201
-      ]
-    },
-    {
-      "id": "stadt-dubai",
-      "farbpixelIdentisch": true,
-      "teile": 3,
-      "pixel": [
-        2580,
-        1450
-      ]
-    },
-    {
-      "id": "stadt-venedig",
-      "farbpixelIdentisch": true,
-      "teile": 4,
-      "pixel": [
-        2584,
-        1040
-      ]
-    },
-    {
-      "id": "stadt-moskau",
+      "id": "fig-brezel-braun",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        2001,
-        1060
+        690,
+        800
       ]
     },
     {
-      "id": "stadt-amsterdam",
+      "id": "fig-brezel-gelb",
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        2580,
-        632
-      ]
-    },
-    {
-      "id": "stadt-wien",
-      "farbpixelIdentisch": true,
-      "teile": 2,
-      "pixel": [
-        2560,
-        1356
-      ]
-    },
-    {
-      "id": "stadt-athen",
-      "farbpixelIdentisch": true,
-      "teile": 1,
-      "pixel": [
-        2559,
-        771
-      ]
-    },
-    {
-      "id": "stadt-pyramiden",
-      "farbpixelIdentisch": true,
-      "teile": 1,
-      "pixel": [
-        2299,
-        701
-      ]
-    },
-    {
-      "id": "stadt-schloss",
-      "farbpixelIdentisch": true,
-      "teile": 1,
-      "pixel": [
-        2559,
-        1351
+        765,
+        596
       ]
     }
   ],
