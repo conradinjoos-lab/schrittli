@@ -1,5 +1,5 @@
 {
-  "figuren": 550,
+  "figuren": 582,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -4590,6 +4590,294 @@
       "pixel": [
         626,
         762
+      ]
+    },
+    {
+      "id": "fig-pizzastueck-fett",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        747,
+        800
+      ]
+    },
+    {
+      "id": "fig-burger-mann",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        681
+      ]
+    },
+    {
+      "id": "fig-burger-einfach",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        783,
+        618
+      ]
+    },
+    {
+      "id": "fig-burger-augen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        747,
+        606
+      ]
+    },
+    {
+      "id": "fig-pommes-tuete",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        697,
+        794
+      ]
+    },
+    {
+      "id": "fig-pommes-kawaii",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        583,
+        800
+      ]
+    },
+    {
+      "id": "fig-pommes-rot",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        617,
+        767
+      ]
+    },
+    {
+      "id": "fig-eis-rosa",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        448,
+        790
+      ]
+    },
+    {
+      "id": "fig-eisbecher",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        578,
+        740
+      ]
+    },
+    {
+      "id": "fig-eis-schoko",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        610,
+        756
+      ]
+    },
+    {
+      "id": "fig-spaghetti-teller",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        721,
+        373
+      ]
+    },
+    {
+      "id": "fig-koch-pfanne",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        800,
+        565
+      ]
+    },
+    {
+      "id": "fig-koch-mann",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        669,
+        800
+      ]
+    },
+    {
+      "id": "fig-koch-pinguin",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        584,
+        800
+      ]
+    },
+    {
+      "id": "fig-koch-eule",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        570,
+        800
+      ]
+    },
+    {
+      "id": "fig-croissant-gelb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        562
+      ]
+    },
+    {
+      "id": "fig-croissant-braun",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        436
+      ]
+    },
+    {
+      "id": "fig-croissant-baeckerei",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        655,
+        597
+      ]
+    },
+    {
+      "id": "fig-sandwich-kawaii",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        759
+      ]
+    },
+    {
+      "id": "fig-kaffee-tasse",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        800,
+        883
+      ]
+    },
+    {
+      "id": "fig-kaffee-icon",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        757,
+        683
+      ]
+    },
+    {
+      "id": "fig-kaese-stueck",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        517
+      ]
+    },
+    {
+      "id": "fig-apfel-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        721,
+        800
+      ]
+    },
+    {
+      "id": "fig-erdbeere",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        593,
+        576
+      ]
+    },
+    {
+      "id": "fig-birne",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        534,
+        770
+      ]
+    },
+    {
+      "id": "fig-kirschen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        757,
+        695
+      ]
+    },
+    {
+      "id": "fig-zitrone",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        572,
+        588
+      ]
+    },
+    {
+      "id": "fig-hotdog-mann",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        788,
+        1307
+      ]
+    },
+    {
+      "id": "fig-donut-rosa",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        871
+      ]
+    },
+    {
+      "id": "fig-donut-braun",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        734,
+        800
+      ]
+    },
+    {
+      "id": "fig-brezel-braun",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        690,
+        800
+      ]
+    },
+    {
+      "id": "fig-brezel-gelb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        765,
+        596
       ]
     },
     {
