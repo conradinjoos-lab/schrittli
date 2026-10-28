@@ -5,7 +5,7 @@ import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 import {fileURLToPath} from 'node:url';
 
 test('private feedback in the Workers runtime: roles, audio, retry, revocation, retention',async()=>{
- const mf=new Miniflare(convertV4MiniflareOptions({modules:['worker.js','feedback.js','sammlung.js','unterricht.js'].map(name=>({type:'ESModule',path:fileURLToPath(new URL(name,import.meta.url)),contents:readFileSync(new URL(name,import.meta.url),'utf8')})),compatibilityDate:'2026-10-01',kvNamespaces:['KV'],d1Databases:['FEEDBACK'],
+ const mf=new Miniflare(convertV4MiniflareOptions({modules:['worker.js','feedback.js','sammlung.js','unterricht.js','namen.js'].map(name=>({type:'ESModule',path:fileURLToPath(new URL(name,import.meta.url)),contents:readFileSync(new URL(name,import.meta.url),'utf8')})),compatibilityDate:'2026-10-01',kvNamespaces:['KV'],d1Databases:['FEEDBACK'],
   outboundService:async req=>{
    assert.equal(new URL(req.url).origin,'https://api.github.com');
    const token=req.headers.get('Authorization');
@@ -14,6 +14,7 @@ test('private feedback in the Workers runtime: roles, audio, retry, revocation, 
  try{
   const db=await mf.getD1Database('FEEDBACK');
   await db.exec(readFileSync(new URL('migrations/0001_feedback.sql',import.meta.url),'utf8').replaceAll('\n',' '));
+  await db.exec(readFileSync(new URL('migrations/0002_feedback_name.sql',import.meta.url),'utf8').replaceAll('\n',' '));
   const call=async(path,token='teacher',body,origin='https://conradinjoos-lab.github.io')=>{const req=new Request('https://feedback.example/feedback/'+path,{method:body?'POST':'GET',headers:{Origin:origin,...(token?{Authorization:'Bearer '+token}:{}),...(body&&!(body instanceof FormData)?{'Content-Type':'application/json'}:{})},body:body instanceof FormData?body:body?JSON.stringify(body):undefined});return mf.dispatchFetch(req.url,{method:req.method,headers:Object.fromEntries(req.headers),body:body?await req.arrayBuffer():undefined});};
   assert.equal((await call('liste','')).status,401);
   assert.equal((await call('liste','other')).status,403);

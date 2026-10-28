@@ -175,9 +175,10 @@ const W=(()=>{
   liste:(klasse,cursor)=>api('/feedback/liste'+frage({klasse,cursor})),audio:id=>apiBlob('/feedback/audio'+frage({id})),loeschen:id=>post('/feedback/loeschen',{id})};
  const sammlung={verwaltung:()=>api('/sammlung/verwaltung'),erstellen:name=>post('/sammlung/erstellen',{name}),sperren:id=>post('/sammlung/sperren',{id}),
   werke:id=>api('/sammlung/verwaltung/werke'+frage({id})),foto:id=>apiBlob('/sammlung/verwaltung/foto'+frage({id})),loeschen:id=>post('/sammlung/loeschen',{id})};
+ const namen={klassen:()=>api('/namen/klassen'),speichern:k=>post('/namen/speichern',k),entfernen:id=>post('/namen/entfernen',{id})};   // Vornamen pro Klasse für «Wer bist du?»
  const APP_URL='https://conradinjoos-lab.github.io/schrittli/schule/';   // Links für die Schul-iPads: APP_URL+'#unterricht=…', '#klasse=…', '#sammlung=…'
 
- return {LOKAL,bereit,abmelden,liste,daten,bild,speichern,veroeffentlichen,jsonText,werke,werkBild,meldungen,erledigt,unterricht,feedback,sammlung,APP_URL,
+ return {LOKAL,bereit,abmelden,liste,daten,bild,speichern,veroeffentlichen,jsonText,werke,werkBild,meldungen,erledigt,unterricht,feedback,sammlung,namen,APP_URL,
   nachPub:LOKAL?'Noch committen und pushen.':'In etwa einer Minute in der Schul-App.',
   pause:LOKAL?1500:6000}  // Autospeichern: online seltener, jeder Stand ist ein Commit
 })();

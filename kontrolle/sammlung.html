@@ -16,6 +16,7 @@
   <div><h1>Unsere Werke</h1><div class="unter">Gemeinsame Sammlung der Klasse · alle verbundenen iPads sehen dieselben Fotos in «Unsere Werke»</div></div>
  </header>
  <div class="leiste" id="filter"></div>
+ <div class="leiste" id="kinder" style="top:auto;position:static;padding-top:0" hidden></div>
  <section class="karte hell" id="neu-link" hidden>
   <h2>Sammlung angelegt – Link jetzt sichern</h2>
   <p>Diesen Link öffnest du einmal auf jedem iPad der Klasse. Danach landen Fotos aller Kinder in dieser Sammlung. Der Link wird <b>nur jetzt</b> angezeigt.</p>
@@ -38,7 +39,7 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
 const datum=z=>{const d=new Date(z);return isNaN(d)?'':d.toLocaleDateString('de-CH',{day:'numeric',month:'short',year:'numeric'})};
 const fehler=(el,x)=>{el.textContent=x?String(x.message||x):''};
-let sammlungen=[],aktiv='',werke=[];
+let sammlungen=[],aktiv='',werke=[],kind='';
 try{await W.bereit();sammlungen=(await W.sammlung.verwaltung()).sammlungen}catch(x){$('#liste').innerHTML=`<div class="nichts">Laden ging nicht: ${esc(x.message||x)}</div>`;return}
 if(!aktiv&&sammlungen.length)aktiv=(sammlungen.find(s=>s.aktiv)||sammlungen[0]).id;
 
@@ -61,10 +62,19 @@ $('#qr-knopf').onclick=()=>{const q=$('#qr');q.hidden=false;q.replaceChildren(QR
 
 const sieht=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;sieht.unobserve(e.target);
  W.sammlung.foto(e.target.dataset.id).then(u=>e.target.src=u).catch(()=>{})}),{rootMargin:'300px'});
+function kinder(){
+ const namen=[...new Set(werke.map(w=>w.name).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'de'));
+ if(kind&&!namen.includes(kind))kind='';
+ $('#kinder').hidden=!namen.length;if(!namen.length)return;
+ $('#kinder').innerHTML=`<span class="klein">Pro Kind:</span><button data-n="" class="${kind?'':'on'}">Alle Kinder</button>`+namen.map(n=>`<button data-n="${esc(n)}" class="${kind===n?'on':''}">${esc(n)}<em>${werke.filter(w=>w.name===n).length}</em></button>`).join('');
+ $('#kinder').querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{kind=b.dataset.n;zeichne()});
+}
 function zeichne(){
+ kinder();
  if(!sammlungen.length){$('#liste').innerHTML='<div class="nichts">Lege zuerst eine Sammlung an und öffne den Link auf den iPads.</div>';return}
  if(!werke.length){$('#liste').innerHTML='<div class="nichts">Noch keine Fotos in dieser Sammlung.</div>';return}
- $('#liste').innerHTML=`<p class="klein" style="margin:0 0 8px">${werke.length} Fotos · neuste zuerst</p><div class="gitter">${werke.map(w=>`<div class="werk" data-id="${w.id}">
+ const sicht=kind?werke.filter(w=>w.name===kind):werke;
+ $('#liste').innerHTML=`<p class="klein" style="margin:0 0 8px">${kind?`<b>${esc(kind)}</b> · ${sicht.length} ${sicht.length===1?'Werk':'Werke'}`:werke.length+' Fotos'} · neuste zuerst</p><div class="gitter">${sicht.map(w=>`<div class="werk" data-id="${w.id}">
   <div class="bild"><img data-id="${w.id}" alt="" loading="lazy"></div>
   <div class="text"><div class="titel">${esc(w.titel)}</div><div class="klein">${[w.name?esc(w.name):'',w.klasse?w.klasse+'. Klasse':'',datum(w.erstellt)].filter(Boolean).join(' · ')}${w.sterne?` <span class="sterne">${'★'.repeat(w.sterne)}</span>`:''}</div></div>
   <button class="x" data-weg="${w.id}" title="Foto löschen">✕</button></div>`).join('')}</div>`;

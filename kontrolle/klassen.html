@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Schrittli – Klassen</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="kontrolle.css">
+<style>
+.klassen{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;align-items:start}
+.klassen .karte{margin:0;display:flex;flex-direction:column;gap:10px}
+.klassen .kopf{display:flex;gap:8px;align-items:center}
+.klassen .kopf input{flex:1;min-width:0;font:600 18px var(--display)}
+.klassen select{width:auto}
+textarea{font:15px/1.5 var(--body);padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface2);color:var(--ink);min-height:200px;resize:vertical;width:100%}
+textarea:focus{outline:2px solid var(--lern);outline-offset:1px;background:var(--surface)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 14px var(--display);background:var(--lern-soft);color:var(--ink);padding:4px 10px;border-radius:999px}
+.unten{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.stand{font-size:13px;color:var(--muted);flex:1}
+.stand.ok{color:var(--lern);font-weight:700}
+.vorschau{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.vorschau .ipad{flex:1;min-width:260px;background:var(--ink);border-radius:20px;padding:14px;color:#fff}
+.vorschau .schirm{background:#FFF9EC;color:var(--ink);border-radius:12px;padding:14px 12px 16px;text-align:center}
+.vorschau .schirm b{font:600 20px var(--display);display:block;margin-bottom:10px}
+.vorschau .namen{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.vorschau .namen span{font:600 14px var(--display);background:#fff;border:2px solid var(--ink);border-radius:999px;padding:5px 12px;box-shadow:0 2px 0 var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <header>
+  <a class="zurueck" href="./" title="Zurück zur Kontrolle">←</a>
+  <div class="logo">🧒</div>
+  <div><h1>Klassen</h1><div class="unter">Vornamen der Kinder · die iPads fragen beim Start «Wer bist du?» · Rückmeldungen und Werke tragen dann den Namen</div></div>
+ </header>
+ <section class="karte hell">
+  <div class="vorschau">
+   <div style="flex:2;min-width:260px">
+    <h2>So funktioniert es</h2>
+    <p style="margin:0 0 8px">Trage hier pro Klasse die Vornamen ein, einen pro Zeile. Jedes verbundene iPad (Unterricht, Rückmeldungen oder Unsere Werke) holt die Listen beim Start und zeigt zuerst die Klassen, dann die Vornamen. Das Kind tippt seinen Namen an – fertig. Oben im Kopf der App steht dann, wer gerade dran ist, und lässt sich mit einem Tipp wechseln.</p>
+    <p style="margin:0 0 8px">Beim Foto am Schluss muss niemand mehr etwas eintippen, und in <a href="rueckmeldungen.html"><u>Rückmeldungen</u></a> und <a href="sammlung.html"><u>Unsere Werke</u></a> siehst du, von wem ein Eintrag stammt – auch pro Kind.</p>
+    <p class="klein" style="margin:0">Nur Vornamen, keine weiteren Angaben. Zwei gleiche Vornamen in einer Klasse unterscheidest du mit dem Anfangsbuchstaben des Nachnamens (Lina K., Lina S.). Die Klassenstufe setzt in der App gleich die passende Klasse für Vorlagen und Perlentiere.</p>
+   </div>
+   <div class="ipad"><div class="schirm"><b>Wer bist du?</b><div class="namen"><span>Amira</span><span>Ben</span><span>Elia</span><span>Lina K.</span><span>Lina S.</span><span>Noah</span><span>…</span></div></div></div>
+  </div>
+ </section>
+ <div class="leiste"><span class="klein" id="stand"></span><span class="rechts"></span><button id="neu-knopf" class="on">+ Neue Klasse</button></div>
+ <main id="liste" class="klassen"><div class="nichts">Lade Klassen …</div></main>
+ <p class="fehler" id="fehler"></p>
+</div>
+<script src="werkstatt.js"></script>
+<script>
+(async()=>{
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+const fehler=(el,x)=>{el.textContent=x?String(x.message||x):''};
+const zeilen=t=>t.split(/\r?\n|,|;/).map(s=>s.replace(/\s+/g,' ').trim()).filter(Boolean);
+let klassen=[];
+try{await W.bereit();klassen=(await W.namen.klassen()).klassen}catch(x){$('#liste').innerHTML=`<div class="nichts">Laden ging nicht: ${esc(x.message||x)}</div>`;return}
+
+function karte(k){
+ const el=document.createElement('section');el.className='karte';el.dataset.id=k.id||'';
+ el.innerHTML=`<div class="kopf"><input type="text" class="name" value="${esc(k.name)}" placeholder="Klasse, z. B. 3a" maxlength="80">
+  <select class="stufe" title="Klassenstufe"><option value="">Stufe?</option>${[1,2,3,4,5,6].map(s=>`<option value="${s}" ${k.stufe===s?'selected':''}>${s}. Klasse</option>`).join('')}</select></div>
+  <textarea class="namen" placeholder="Ein Vorname pro Zeile&#10;Lina&#10;Noah&#10;Amira" spellcheck="false">${esc(k.namen.join('\n'))}</textarea>
+  <div class="chips"></div>
+  <div class="unten"><span class="stand"></span><button class="s rot weg" type="button">${k.id?'Klasse entfernen':'Verwerfen'}</button><button class="p speichern" type="button">Speichern</button></div>`;
+ const stand=el.querySelector('.stand'),chips=el.querySelector('.chips'),ta=el.querySelector('.namen');
+ const zeige=()=>{const n=zeilen(ta.value);chips.innerHTML=n.length?n.map(x=>`<span class="chip">${esc(x)}</span>`).join(''):'<span class="klein">Noch keine Vornamen.</span>';
+  stand.className='stand';stand.textContent=n.length?`${n.length} ${n.length===1?'Kind':'Kinder'}${k.id&&(n.join('\n')!==k.namen.join('\n')||el.querySelector('.name').value.trim()!==k.name||(el.querySelector('.stufe').value||null)!=(k.stufe??null))?' · noch nicht gespeichert':''}`:''};
+ el.querySelectorAll('input,select,textarea').forEach(i=>i.addEventListener('input',zeige));zeige();
+ el.querySelector('.speichern').onclick=async()=>{const b=el.querySelector('.speichern');b.disabled=true;fehler($('#fehler'));
+  try{const r=await W.namen.speichern({id:k.id||undefined,name:el.querySelector('.name').value,stufe:el.querySelector('.stufe').value||null,namen:zeilen(ta.value)});
+   Object.assign(k,{id:r.id,name:r.name,stufe:r.stufe,namen:r.namen});el.dataset.id=k.id;ta.value=k.namen.join('\n');el.querySelector('.name').value=k.name;el.querySelector('.weg').textContent='Klasse entfernen';
+   zeige();stand.className='stand ok';stand.textContent=`Gespeichert · ${k.namen.length} ${k.namen.length===1?'Kind':'Kinder'} · die iPads holen die Liste beim nächsten Start`;kopf()}
+  catch(x){stand.className='stand';stand.textContent='';fehler($('#fehler'),x)}b.disabled=false};
+ el.querySelector('.weg').onclick=async()=>{
+  if(!k.id){klassen=klassen.filter(x=>x!==k);el.remove();kopf();leer();return}
+  if(!confirm(`Klasse «${k.name}» mit ${k.namen.length} Vornamen entfernen? Bereits gespeicherte Rückmeldungen und Werke behalten ihren Namen.`))return;
+  try{await W.namen.entfernen(k.id);klassen=klassen.filter(x=>x!==k);el.remove();kopf();leer()}catch(x){fehler($('#fehler'),x)}};
+ return el;
+}
+const leer=()=>{if(!klassen.length)$('#liste').innerHTML='<div class="nichts">Noch keine Klasse. Lege oben eine an und trage die Vornamen ein.</div>'};
+const kopf=()=>{const g=klassen.filter(k=>k.id);$('#stand').textContent=g.length?`${g.length} ${g.length===1?'Klasse':'Klassen'} · ${g.reduce((n,k)=>n+k.namen.length,0)} Kinder`:''};
+function zeichne(){
+ $('#liste').replaceChildren();klassen.forEach(k=>$('#liste').appendChild(karte(k)));leer();kopf();
+}
+$('#neu-knopf').onclick=()=>{const k={id:'',name:'',stufe:null,namen:[]};klassen.unshift(k);const n=$('#liste').querySelector('.nichts');if(n)n.remove();
+ const el=karte(k);$('#liste').prepend(el);el.querySelector('.name').focus()};
+zeichne();
+})();
+</script>
+</body>
+</html>

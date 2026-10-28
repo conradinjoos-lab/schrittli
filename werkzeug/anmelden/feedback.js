@@ -46,6 +46,7 @@ export async function handleFeedback(req,env){
    const raw=await bounded(req,MAX_AUDIO+16384);let form,data;
    try{form=await new Request(req.url,{method:'POST',headers:{'Content-Type':req.headers.get('Content-Type')},body:raw}).formData();data=JSON.parse(form.get('daten'));}catch{fail('Ungültige Abgabe.',400);}
    if(!data||!UUID.test(data.id)||typeof data.videoId!=='string'||!/^[\w-]{1,100}$/.test(data.videoId)||typeof data.titel!=='string'||!data.titel.trim()||data.titel.length>160||![1,2,3,4,5,6].includes(data.klasse)||![1,2,3].includes(data.schwierigkeit)||![1,2,3].includes(data.spass))fail('Bitte beide Fragen beantworten.',400);
+   const vorname=data.name==null||data.name===''?null:String(data.name).replace(/\s+/g,' ').trim();if(vorname!==null&&(!vorname||vorname.length>30))fail('Ungültiger Vorname.',400);
    const old=await db.prepare('SELECT klasseId FROM feedback WHERE id=?').bind(data.id).first();
    if(old){if(old.klasseId!==k.id)fail('Ungültige Abgabe.',409);return json({ok:true,id:data.id});}
    const file=form.get('audio');let audio=null,mime=null;
@@ -56,12 +57,12 @@ export async function handleFeedback(req,env){
    }
    const now=new Date().toISOString(),day=new Date(Date.now()-86400000).toISOString();
    // Unique id, active class and quotas are checked atomically with the INSERT.
-   const result=await db.prepare(`INSERT OR IGNORE INTO feedback(id,klasseId,videoId,titel,klasse,schwierigkeit,spass,zeit,audio,mime)
-    SELECT ?,?,?,?,?,?,?,?,?,? WHERE EXISTS(SELECT 1 FROM klassen WHERE id=? AND aktiv=1)
+   const result=await db.prepare(`INSERT OR IGNORE INTO feedback(id,klasseId,videoId,titel,klasse,schwierigkeit,spass,zeit,audio,mime,name)
+    SELECT ?,?,?,?,?,?,?,?,?,?,? WHERE EXISTS(SELECT 1 FROM klassen WHERE id=? AND aktiv=1)
     AND (SELECT COUNT(*) FROM feedback WHERE klasseId=? AND zeit>?)<300
     AND (SELECT COUNT(*) FROM feedback)<5000
     AND (SELECT COALESCE(SUM(length(audio)),0) FROM feedback)+?<367001600`)
-    .bind(data.id,k.id,data.videoId,data.titel.trim(),data.klasse,data.schwierigkeit,data.spass,now,audio,mime,k.id,k.id,day,audio?.length||0).run();
+    .bind(data.id,k.id,data.videoId,data.titel.trim(),data.klasse,data.schwierigkeit,data.spass,now,audio,mime,vorname,k.id,k.id,day,audio?.length||0).run();
    if(!result.meta.changes){const saved=await db.prepare('SELECT klasseId FROM feedback WHERE id=?').bind(data.id).first();if(saved?.klasseId===k.id)return json({ok:true,id:data.id});fail('Die Abgabe ist gerade nicht möglich. Bitte deiner Lehrperson zeigen.',429);}
    return json({ok:true,id:data.id},201);
   }
@@ -81,7 +82,7 @@ export async function handleFeedback(req,env){
   if(p==='/feedback/liste'&&req.method==='GET'){
    const klasse=u.searchParams.get('klasse')||'',cursor=u.searchParams.get('cursor');if(klasse&&!UUID.test(klasse))fail('Ungültige Klasse.',400);
    let c=null;if(cursor){try{c=JSON.parse(atob(cursor));}catch{fail('Ungültige nächste Seite.',400);}if(!Array.isArray(c)||!/^\d{4}-\d\d-\d\dT[\d:.]+Z$/.test(c[0])||!UUID.test(c[1]))fail('Ungültige nächste Seite.',400);}
-   const q=`SELECT f.id,f.klasseId,k.name AS klassenname,f.videoId,f.titel,f.klasse,f.schwierigkeit,f.spass,f.zeit,(f.audio IS NOT NULL) AS audio
+   const q=`SELECT f.id,f.klasseId,k.name AS klassenname,f.videoId,f.titel,f.klasse,f.schwierigkeit,f.spass,f.zeit,f.name,(f.audio IS NOT NULL) AS audio
     FROM feedback f JOIN klassen k ON f.klasseId=k.id WHERE f.geloescht=0 AND f.zeit>=?${klasse?' AND f.klasseId=?':''}${c?' AND (f.zeit < ? OR (f.zeit=? AND f.id<?))':''} ORDER BY f.zeit DESC,f.id DESC LIMIT 51`;
    const r=await db.prepare(q).bind(cutoff(),...(klasse?[klasse]:[]),...(c?[c[0],c[0],c[1]]:[])).all(),rows=r.results.slice(0,50),last=rows.at(-1);
    return json({eintraege:rows.map(x=>({...x,audio:!!x.audio})),cursor:r.results.length>50?btoa(JSON.stringify([last.zeit,last.id])):null});
@@ -94,7 +95,7 @@ export async function handleFeedback(req,env){
   if(p==='/feedback/loeschen'&&req.method==='POST'){
    const b=await bodyJSON(req);if(!UUID.test(b?.id))fail('Ungültige Rückmeldung.',400);
    // Tombstone prevents a delayed upload retry from restoring deleted contents.
-   await db.prepare("UPDATE feedback SET geloescht=1,audio=NULL,mime=NULL,titel='',videoId='',schwierigkeit=1,spass=1,klasse=1 WHERE id=?").bind(b.id).run();return json({ok:true});
+   await db.prepare("UPDATE feedback SET geloescht=1,audio=NULL,mime=NULL,titel='',videoId='',schwierigkeit=1,spass=1,klasse=1,name=NULL WHERE id=?").bind(b.id).run();return json({ok:true});
   }
   return json({fehler:'Nicht gefunden.'},404);
  }catch(e){return json({fehler:e.status?e.message:'Das Senden klappt gerade nicht. Bitte nochmals versuchen.'},e.status||503);}

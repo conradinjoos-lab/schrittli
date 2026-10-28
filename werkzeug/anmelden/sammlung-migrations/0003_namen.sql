@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS klassenlisten(
+ id TEXT PRIMARY KEY,
+ name TEXT NOT NULL,
+ stufe INTEGER CHECK(stufe BETWEEN 1 AND 6),
+ namen TEXT NOT NULL,
+ erstellt INTEGER NOT NULL,
+ geaendert INTEGER NOT NULL
+);

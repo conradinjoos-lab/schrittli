@@ -5,7 +5,7 @@ import {fileURLToPath} from 'node:url';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
 
 test('classroom: teacher-only policy, independent groups, device acknowledgement, conflicts, presets and bounded validation',async()=>{
- const mf=new Miniflare(convertV4MiniflareOptions({modules:['worker.js','feedback.js','sammlung.js','unterricht.js'].map(name=>({type:'ESModule',path:fileURLToPath(new URL(name,import.meta.url)),contents:readFileSync(new URL(name,import.meta.url),'utf8')})),compatibilityDate:'2026-10-01',kvNamespaces:['KV'],d1Databases:['SAMMLUNG'],outboundService:async req=>Response.json({login:req.headers.get('Authorization')==='Bearer teacher'?'conradinjoos-lab':'someone-else'})}));
+ const mf=new Miniflare(convertV4MiniflareOptions({modules:['worker.js','feedback.js','sammlung.js','unterricht.js','namen.js'].map(name=>({type:'ESModule',path:fileURLToPath(new URL(name,import.meta.url)),contents:readFileSync(new URL(name,import.meta.url),'utf8')})),compatibilityDate:'2026-10-01',kvNamespaces:['KV'],d1Databases:['SAMMLUNG'],outboundService:async req=>Response.json({login:req.headers.get('Authorization')==='Bearer teacher'?'conradinjoos-lab':'someone-else'})}));
  try{
   const db=await mf.getD1Database('SAMMLUNG');for(const name of ['0001_sammlung.sql','0002_unterricht.sql'])await db.exec(readFileSync(new URL('sammlung-migrations/'+name,import.meta.url),'utf8').replaceAll('\n',' '));
   const call=(path,token='teacher',b,origin='https://conradinjoos-lab.github.io')=>mf.dispatchFetch('https://test.example/unterricht/'+path,{method:b?'POST':'GET',headers:{Origin:origin,Authorization:'Bearer '+token,'Content-Type':'application/json'},body:b?JSON.stringify(b):undefined});

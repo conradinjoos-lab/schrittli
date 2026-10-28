@@ -442,6 +442,15 @@ code{font-size:13px;word-break:break-all;background:var(--surface2);padding:2px 
 .klasse-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:118px;border-radius:14px;background:var(--paper);border:3px solid var(--kink);color:var(--kink);box-shadow:4px 6px 0 var(--sh);font:inherit;text-transform:inherit;letter-spacing:inherit}
 .klasse-btn .z{font-size:44px;font-weight:700;line-height:1}.klasse-btn .w{font-size:15px;letter-spacing:.08em;color:var(--wmuted)}
 .klasse-btn:active{transform:translateY(3px);box-shadow:2px 3px 0 var(--sh)}
+.klasse-btn.liste .z{font-size:clamp(22px,4vw,34px);line-height:1.1;padding:0 8px;text-align:center;overflow-wrap:anywhere}
+.namen-wahl{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin:24px auto 10px;max-width:920px}
+.name-btn{min-height:78px;padding:10px 12px;border-radius:14px;background:var(--paper);border:3px solid var(--kink);color:var(--kink);box-shadow:4px 6px 0 var(--sh);font:inherit;font-weight:700;font-size:clamp(20px,3vw,27px);line-height:1.15;text-transform:inherit;letter-spacing:inherit;overflow-wrap:anywhere}
+.name-btn.ich{background:var(--kink);color:var(--paper)}
+.name-btn:active{transform:translateY(3px);box-shadow:2px 3px 0 var(--sh)}
+.wer-fuss{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:22px 0 10px}
+.wer-fuss .kbtn.leise{background:transparent;box-shadow:none;border:3px dashed var(--kink);color:var(--kink);font-size:18px;min-height:54px}
+.schild-btn.wer-chip{width:auto;padding:0 14px;font-weight:700;font-size:18px;white-space:nowrap;text-transform:none}
+.v3-pill.v3-kind{background:#D5F1E8;color:#1C2430}
 .lehrer-zeile{text-align:center;padding:10px 16px 6px;margin-top:auto}
 .kid .lehrer-zeile+.bank{margin-top:0;padding-top:30px}
 .lehrer-link{background:none;border:0;color:var(--wmuted);font:inherit;font-size:13px;letter-spacing:.08em;text-decoration:underline;text-underline-offset:3px;opacity:.8;padding:8px 12px}
@@ -465,7 +474,7 @@ a.btn{text-decoration:none;color:inherit}
 .kid.pl .lehrer-zeile{display:none}
 .kid:not(.pl) .inner.kopf{margin-top:14px}
 .kid .regal-wrap:first-of-type{margin-top:48px}
-@media (min-width:700px){.kid .regal-wrap:first-of-type{margin-top:70px}.klassen{margin-top:120px}}
+@media (min-width:700px){.kid .regal-wrap:first-of-type{margin-top:70px}.klassen{margin-top:120px}.namen-wahl{margin-top:110px}}
 .matkarte{background:var(--paper);color:var(--kink);border:3px solid var(--kink);border-radius:14px;padding:12px 16px 14px;max-width:min(100%,720px);max-height:100%;overflow:auto;box-shadow:4px 6px 0 rgba(0,0,0,.35);text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}
 .matkarte h2{color:var(--kink);font-size:clamp(18px,3.4vw,26px);margin:0}
 .mats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:8px 10px;width:100%;justify-items:center}

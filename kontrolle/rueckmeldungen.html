@@ -25,6 +25,7 @@ audio{height:32px;max-width:220px;vertical-align:middle}
   <div><h1>Rückmeldungen</h1><div class="unter">Was die Kinder nach einer Aufgabe sagen · Klasse verbinden über einen Link auf dem iPad · 90 Tage aufbewahrt</div></div>
  </header>
  <div class="leiste" id="filter"></div>
+ <div class="leiste" id="kinder" style="top:auto;position:static;padding-top:0" hidden></div>
  <section class="karte hell" id="neu-link" hidden>
   <h2>Klasse angelegt – Link jetzt sichern</h2>
   <p>Diesen Link öffnest du einmal auf jedem iPad der Klasse (in Safari, dann «Zum Home-Bildschirm»). Er wird <b>nur jetzt</b> angezeigt; später kannst du die Klasse nur noch sperren.</p>
@@ -49,7 +50,8 @@ const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 const SCHWER={1:['🪶','Leicht'],2:['👌','Genau richtig'],3:['💪','Schwierig']}, SPASS={1:['😕','Wenig'],2:['🙂','Okay'],3:['🤩','Viel']};
 const zeit=z=>{const d=new Date(z);return isNaN(d)?'':d.toLocaleDateString('de-CH',{day:'numeric',month:'short'})+', '+d.toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'})};
 const fehler=(el,x)=>{el.textContent=x?String(x.message||x):''};
-let klassen=[],filter='',eintraege=[],cursor=null;
+let klassen=[],filter='',eintraege=[],cursor=null,kind='';
+const sicht=()=>kind?eintraege.filter(e=>e.name===kind):eintraege;
 try{await W.bereit();klassen=(await W.feedback.klassen()).klassen}catch(x){$('#liste').innerHTML=`<div class="nichts">Laden ging nicht: ${esc(x.message||x)}</div>`;return}
 
 function leiste(){
@@ -72,17 +74,26 @@ $('#neu-form').onsubmit=async e=>{e.preventDefault();const b=e.target.querySelec
 $('#kopieren').onclick=async()=>{try{await navigator.clipboard.writeText($('#link').value);$('#kopieren').textContent='Kopiert ✓';setTimeout(()=>$('#kopieren').textContent='Link kopieren',1500)}catch{$('#link').select()}};
 $('#qr-knopf').onclick=()=>{const q=$('#qr');q.hidden=false;q.replaceChildren(QR.canvas($('#link').value,240))};
 
+function kinder(){
+ const namen=[...new Set(eintraege.map(e=>e.name).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'de'));
+ if(kind&&!namen.includes(kind))kind='';
+ $('#kinder').hidden=!namen.length;if(!namen.length)return;
+ $('#kinder').innerHTML=`<span class="klein">Pro Kind:</span><button data-n="" class="${kind?'':'on'}">Alle Kinder</button>`+namen.map(n=>`<button data-n="${esc(n)}" class="${kind===n?'on':''}">${esc(n)}<em>${eintraege.filter(e=>e.name===n).length}</em></button>`).join('');
+ $('#kinder').querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{kind=b.dataset.n;zeichne()});
+}
 function zusammen(){
- const n=eintraege.length;if(!n){$('#zusammen').innerHTML='';return}
- const anteil=(f,T)=>[1,2,3].map(w=>{const z=eintraege.filter(e=>e[f]===w).length;return `<span title="${T[w][1]}: ${z}"><i>${T[w][0]}</i>${Math.round(100*z/n)} %</span>`}).join('');
- const balken=(f,farben)=>`<div class="balken">${[1,2,3].map((w,i)=>`<i style="width:${100*eintraege.filter(e=>e[f]===w).length/n}%;background:${farben[i]}"></i>`).join('')}</div>`;
- $('#zusammen').innerHTML=`<div class="karte"><div class="klein">Rückmeldungen${cursor?' (geladen)':''}</div><div class="zahl">${n}</div><div class="klein">${eintraege.filter(e=>e.audio).length} mit Tonaufnahme</div></div>
+ const liste=sicht(),n=liste.length;if(!n){$('#zusammen').innerHTML='';return}
+ const anteil=(f,T)=>[1,2,3].map(w=>{const z=liste.filter(e=>e[f]===w).length;return `<span title="${T[w][1]}: ${z}"><i>${T[w][0]}</i>${Math.round(100*z/n)} %</span>`}).join('');
+ const balken=(f,farben)=>`<div class="balken">${[1,2,3].map((w,i)=>`<i style="width:${100*liste.filter(e=>e[f]===w).length/n}%;background:${farben[i]}"></i>`).join('')}</div>`;
+ $('#zusammen').innerHTML=`<div class="karte"><div class="klein">${kind?'Rückmeldungen von '+esc(kind):'Rückmeldungen'}${cursor?' (geladen)':''}</div><div class="zahl">${n}</div><div class="klein">${liste.filter(e=>e.audio).length} mit Tonaufnahme</div></div>
   <div class="karte"><div class="klein">Wie war es für dich?</div>${balken('schwierigkeit',['#9ED9C3','#17997A','#EF6C2E'])}<div class="wahl">${anteil('schwierigkeit',SCHWER)}</div></div>
   <div class="karte"><div class="klein">Hat es Spass gemacht?</div>${balken('spass',['#D5DEE9','#F2C12E','#17997A'])}<div class="wahl">${anteil('spass',SPASS)}</div></div>`;
 }
 function zeichne(){
+ kinder();
  if(!eintraege.length){$('#liste').innerHTML=`<div class="nichts">${klassen.length?'Noch keine Rückmeldungen.':'Lege zuerst eine Klasse an und öffne den Link auf den iPads.'}</div>`;$('#mehr').hidden=true;zusammen();return}
- $('#liste').innerHTML=`<table><thead><tr><th>Aufgabe</th><th>Wie war es?</th><th>Spass</th><th>Klasse</th><th>Wann</th><th>Ton</th><th></th></tr></thead><tbody>${eintraege.map(e=>`<tr data-id="${e.id}">
+ $('#liste').innerHTML=`<table><thead><tr><th>Wer</th><th>Aufgabe</th><th>Wie war es?</th><th>Spass</th><th>Klasse</th><th>Wann</th><th>Ton</th><th></th></tr></thead><tbody>${sicht().map(e=>`<tr data-id="${e.id}">
+  <td class="titel"><b>${e.name?esc(e.name):'<span class="klein">ohne Namen</span>'}</b></td>
   <td class="titel"><b>${esc(e.titel)}</b>${filter?'':`<span class="klein">${esc(e.klassenname||'')}</span>`}</td>
   <td><span class="sym" title="${SCHWER[e.schwierigkeit]?.[1]||''}">${SCHWER[e.schwierigkeit]?.[0]||'–'}</span> <span class="klein">${SCHWER[e.schwierigkeit]?.[1]||''}</span></td>
   <td><span class="sym" title="${SPASS[e.spass]?.[1]||''}">${SPASS[e.spass]?.[0]||'–'}</span> <span class="klein">${SPASS[e.spass]?.[1]||''}</span></td>

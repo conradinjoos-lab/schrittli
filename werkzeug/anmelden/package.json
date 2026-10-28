@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "deploy": "wrangler deploy",
-    "check": "node --test feedback.test.js sammlung.test.js unterricht.test.js",
-    "test": "node --test feedback.test.js sammlung.test.js unterricht.test.js",
+    "check": "node --test feedback.test.js sammlung.test.js unterricht.test.js namen.test.js",
+    "test": "node --test feedback.test.js sammlung.test.js unterricht.test.js namen.test.js",
     "dry-run": "wrangler deploy --dry-run"
   },
   "devDependencies": {
