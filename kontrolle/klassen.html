@@ -26,6 +26,11 @@ textarea:focus{outline:2px solid var(--lern);outline-offset:1px;background:var(-
 .vorschau .schirm b{font:600 20px var(--display);display:block;margin-bottom:10px}
 .vorschau .namen{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
 .vorschau .namen span{font:600 14px var(--display);background:#fff;border:2px solid var(--ink);border-radius:999px;padding:5px 12px;box-shadow:0 2px 0 var(--ink)}
+#putz textarea{min-height:120px}
+#putz .zeile{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
+#putz .ergebnis{font-size:14px}
+#putz .ergebnis b{color:var(--lern)}
+.karte.neu{outline:2px solid var(--lern);outline-offset:2px}
 </style>
 </head>
 <body>
@@ -46,12 +51,53 @@ textarea:focus{outline:2px solid var(--lern);outline-offset:1px;background:var(-
    <div class="ipad"><div class="schirm"><b>Wer bist du?</b><div class="namen"><span>Amira</span><span>Ben</span><span>Elia</span><span>Lina K.</span><span>Lina S.</span><span>Noah</span><span>…</span></div></div></div>
   </div>
  </section>
- <div class="leiste"><span class="klein" id="stand"></span><span class="rechts"></span><button id="neu-knopf" class="on">+ Neue Klasse</button></div>
+ <div class="leiste"><span class="klein" id="stand"></span><span class="rechts"></span><button id="alle-knopf" class="p" hidden>Alle speichern</button><button id="putz-knopf" class="s">Aus Putzämtli-Manager laden</button><button id="neu-knopf" class="on">+ Neue Klasse</button></div>
+ <section class="karte hell" id="putz" hidden>
+  <h2>Klassen aus dem Putzämtli-Manager</h2>
+  <p style="margin:0 0 8px">Der Putzämtli-Manager teilt jede Klasse schon in zwei Halbklassen. Wähle seine Klassenlisten-Datei (<code>klassenlisten.json</code>, im privaten Ordner <code>07_Klassenlisten_PRIVAT</code> oder frisch aus dem Putzämtli-Manager exportiert) – daraus wird pro Halbklasse eine Liste, nur mit den Vornamen. Gleiche Vornamen in einer Halbklasse bekommen den Anfangsbuchstaben des Nachnamens. Die Klassenstufe liest Schrittli aus dem Klassennamen (P3a → 3. Klasse).</p>
+  <p class="klein" style="margin:0 0 8px">Die Datei bleibt in diesem Browser; gespeichert werden nur die Vornamen pro Liste. Eine Liste mit gleichem Namen wird ersetzt, der Rest bleibt stehen. Zum Schluss «Alle speichern» drücken.</p>
+  <div class="zeile"><label class="s" style="cursor:pointer">Datei wählen …<input type="file" id="putz-datei" accept=".json,application/json" hidden></label><span class="klein">oder den Inhalt der Datei unten einfügen</span></div>
+  <textarea id="putz-text" placeholder='{"version":2,"classes":{"P1a":{"hk1":["Vorname Nachname", …],"hk2":[…]}}}' spellcheck="false"></textarea>
+  <div class="zeile"><button class="p" id="putz-lesen" type="button">Einlesen</button><button class="s" id="putz-zu" type="button">Schliessen</button><span class="ergebnis" id="putz-ergebnis"></span></div>
+ </section>
  <main id="liste" class="klassen"><div class="nichts">Lade Klassen …</div></main>
  <p class="fehler" id="fehler"></p>
 </div>
 <script src="werkstatt.js"></script>
 <script>
+/* putz-anfang – Klassenlisten-Export des Putzämtli-Managers (version 2: classes → hk1/hk2 mit «Vorname Nachname») in Schrittli-Listen umbauen. */
+function ausPutzaemtli(d){
+ const classes=d&&typeof d==='object'&&d.classes&&typeof d.classes==='object'?d.classes:null;
+ if(!classes)throw new Error('Das ist keine Klassenlisten-Datei des Putzämtli-Managers (der Teil «classes» fehlt).');
+ const listen=[];
+ for(const [klasse,c] of Object.entries(classes)){
+  if(!c||typeof c!=='object')continue;
+  const halb=['hk1','hk2'].map(h=>Array.isArray(c[h])?c[h]:[]).filter(a=>a.length);
+  const gruppen=halb.length?halb:[['students','schueler','namen','names'].map(f=>c[f]).find(Array.isArray)||[]];
+  const m=/\d/.exec(klasse);const stufe=m&&+m[0]>=1&&+m[0]<=6?+m[0]:null;
+  gruppen.forEach((g,i)=>{const namen=vornamen(g);if(!namen.length)return;
+   listen.push({name:gruppen.length>1?`${klasse} Halbklasse ${i+1}`:klasse,stufe,namen})});
+ }
+ if(!listen.length)throw new Error('In der Datei stehen keine Namen.');
+ return listen;
+}
+/* «Vorname Nachname» → Vorname; kommt ein Vorname mehrmals vor, so viele Buchstaben des Nachnamens anhängen, bis alle verschieden sind. */
+function vornamen(voll){
+ const teile=voll.map(n=>String(n).replace(/\s+/g,' ').trim().split(' ')).filter(t=>t[0]);
+ const nach=t=>t.slice(1).join(' ');
+ const form=(t,l)=>l&&t[1]?`${t[0]} ${nach(t).slice(0,l)}.`:t[0];
+ const laenge=teile.map(()=>0);
+ for(let runde=0;runde<30;runde++){
+  const zaehl={};teile.forEach((t,i)=>{const k=form(t,laenge[i]).toLowerCase();zaehl[k]=(zaehl[k]||0)+1});
+  let offen=false;
+  teile.forEach((t,i)=>{if(zaehl[form(t,laenge[i]).toLowerCase()]>1&&t[1]&&laenge[i]<nach(t).length){laenge[i]++;offen=true}});
+  if(!offen)break;
+ }
+ const aus=[];const gesehen=new Set();
+ teile.forEach((t,i)=>{let v=form(t,laenge[i]).slice(0,30);let n=2;while(gesehen.has(v.toLowerCase()))v=`${form(t,laenge[i]).slice(0,27)} ${n++}`;gesehen.add(v.toLowerCase());aus.push(v)});
+ return aus;
+}
+/* putz-ende */
 (async()=>{
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
@@ -60,35 +106,74 @@ const zeilen=t=>t.split(/\r?\n|,|;/).map(s=>s.replace(/\s+/g,' ').trim()).filter
 let klassen=[];
 try{await W.bereit();klassen=(await W.namen.klassen()).klassen}catch(x){$('#liste').innerHTML=`<div class="nichts">Laden ging nicht: ${esc(x.message||x)}</div>`;return}
 
+/* k = gespeicherter Stand; k.neu = noch nicht gespeicherte Werte (etwa aus dem Putzämtli-Import), die Karte zeigt sie zum Prüfen. */
 function karte(k){
- const el=document.createElement('section');el.className='karte';el.dataset.id=k.id||'';
- el.innerHTML=`<div class="kopf"><input type="text" class="name" value="${esc(k.name)}" placeholder="Klasse, z. B. 3a" maxlength="80">
-  <select class="stufe" title="Klassenstufe"><option value="">Stufe?</option>${[1,2,3,4,5,6].map(s=>`<option value="${s}" ${k.stufe===s?'selected':''}>${s}. Klasse</option>`).join('')}</select></div>
-  <textarea class="namen" placeholder="Ein Vorname pro Zeile&#10;Lina&#10;Noah&#10;Amira" spellcheck="false">${esc(k.namen.join('\n'))}</textarea>
+ const el=document.createElement('section');el.className='karte'+(k.neu?' neu':'');el.dataset.id=k.id||'';
+ const z=k.neu||k;
+ el.innerHTML=`<div class="kopf"><input type="text" class="name" value="${esc(z.name)}" placeholder="Klasse, z. B. 3a" maxlength="80">
+  <select class="stufe" title="Klassenstufe"><option value="">Stufe?</option>${[1,2,3,4,5,6].map(s=>`<option value="${s}" ${z.stufe===s?'selected':''}>${s}. Klasse</option>`).join('')}</select></div>
+  <textarea class="namen" placeholder="Ein Vorname pro Zeile&#10;Lina&#10;Noah&#10;Amira" spellcheck="false">${esc(z.namen.join('\n'))}</textarea>
   <div class="chips"></div>
   <div class="unten"><span class="stand"></span><button class="s rot weg" type="button">${k.id?'Klasse entfernen':'Verwerfen'}</button><button class="p speichern" type="button">Speichern</button></div>`;
  const stand=el.querySelector('.stand'),chips=el.querySelector('.chips'),ta=el.querySelector('.namen');
+ const eingabe=()=>({name:el.querySelector('.name').value,stufe:el.querySelector('.stufe').value||null,namen:zeilen(ta.value)});
+ el.geaendert=()=>{const e=eingabe();return !k.id||e.namen.join('\n')!==k.namen.join('\n')||e.name.trim()!==k.name||(e.stufe??null)!=(k.stufe??null)};
  const zeige=()=>{const n=zeilen(ta.value);chips.innerHTML=n.length?n.map(x=>`<span class="chip">${esc(x)}</span>`).join(''):'<span class="klein">Noch keine Vornamen.</span>';
-  stand.className='stand';stand.textContent=n.length?`${n.length} ${n.length===1?'Kind':'Kinder'}${k.id&&(n.join('\n')!==k.namen.join('\n')||el.querySelector('.name').value.trim()!==k.name||(el.querySelector('.stufe').value||null)!=(k.stufe??null))?' · noch nicht gespeichert':''}`:''};
+  stand.className='stand';stand.textContent=n.length?`${n.length} ${n.length===1?'Kind':'Kinder'}${el.geaendert()?' · noch nicht gespeichert':''}`:'';alleKnopf()};
  el.querySelectorAll('input,select,textarea').forEach(i=>i.addEventListener('input',zeige));zeige();
- el.querySelector('.speichern').onclick=async()=>{const b=el.querySelector('.speichern');b.disabled=true;fehler($('#fehler'));
-  try{const r=await W.namen.speichern({id:k.id||undefined,name:el.querySelector('.name').value,stufe:el.querySelector('.stufe').value||null,namen:zeilen(ta.value)});
-   Object.assign(k,{id:r.id,name:r.name,stufe:r.stufe,namen:r.namen});el.dataset.id=k.id;ta.value=k.namen.join('\n');el.querySelector('.name').value=k.name;el.querySelector('.weg').textContent='Klasse entfernen';
+ el.speichern=async()=>{const b=el.querySelector('.speichern');b.disabled=true;fehler($('#fehler'));
+  try{const r=await W.namen.speichern({id:k.id||undefined,...eingabe()});
+   Object.assign(k,{id:r.id,name:r.name,stufe:r.stufe,namen:r.namen});delete k.neu;el.classList.remove('neu');el.dataset.id=k.id;ta.value=k.namen.join('\n');el.querySelector('.name').value=k.name;el.querySelector('.stufe').value=k.stufe??'';el.querySelector('.weg').textContent='Klasse entfernen';
    zeige();stand.className='stand ok';stand.textContent=`Gespeichert · ${k.namen.length} ${k.namen.length===1?'Kind':'Kinder'} · die iPads holen die Liste beim nächsten Start`;kopf()}
-  catch(x){stand.className='stand';stand.textContent='';fehler($('#fehler'),x)}b.disabled=false};
+  catch(x){stand.className='stand';stand.textContent='';fehler($('#fehler'),x);b.disabled=false;throw x}
+  b.disabled=false};
+ el.querySelector('.speichern').onclick=()=>el.speichern().catch(()=>{});
  el.querySelector('.weg').onclick=async()=>{
-  if(!k.id){klassen=klassen.filter(x=>x!==k);el.remove();kopf();leer();return}
+  if(!k.id){klassen=klassen.filter(x=>x!==k);el.remove();kopf();leer();alleKnopf();return}
   if(!confirm(`Klasse «${k.name}» mit ${k.namen.length} Vornamen entfernen? Bereits gespeicherte Rückmeldungen und Werke behalten ihren Namen.`))return;
-  try{await W.namen.entfernen(k.id);klassen=klassen.filter(x=>x!==k);el.remove();kopf();leer()}catch(x){fehler($('#fehler'),x)}};
+  try{await W.namen.entfernen(k.id);klassen=klassen.filter(x=>x!==k);el.remove();kopf();leer();alleKnopf()}catch(x){fehler($('#fehler'),x)}};
  return el;
 }
 const leer=()=>{if(!klassen.length)$('#liste').innerHTML='<div class="nichts">Noch keine Klasse. Lege oben eine an und trage die Vornamen ein.</div>'};
 const kopf=()=>{const g=klassen.filter(k=>k.id);$('#stand').textContent=g.length?`${g.length} ${g.length===1?'Klasse':'Klassen'} · ${g.reduce((n,k)=>n+k.namen.length,0)} Kinder`:''};
+const offene=()=>[...$('#liste').querySelectorAll('.karte')].filter(el=>el.geaendert&&el.geaendert()&&zeilen(el.querySelector('.namen').value).length);
+const alleKnopf=()=>{const n=offene().length;$('#alle-knopf').hidden=n<2;$('#alle-knopf').textContent=`Alle speichern (${n})`};
 function zeichne(){
- $('#liste').replaceChildren();klassen.forEach(k=>$('#liste').appendChild(karte(k)));leer();kopf();
+ $('#liste').replaceChildren();klassen.forEach(k=>$('#liste').appendChild(karte(k)));leer();kopf();alleKnopf();
 }
 $('#neu-knopf').onclick=()=>{const k={id:'',name:'',stufe:null,namen:[]};klassen.unshift(k);const n=$('#liste').querySelector('.nichts');if(n)n.remove();
  const el=karte(k);$('#liste').prepend(el);el.querySelector('.name').focus()};
+$('#alle-knopf').onclick=async()=>{const b=$('#alle-knopf');b.disabled=true;const karten=offene();let i=0;
+ try{for(const el of karten){i++;b.textContent=`Speichere ${i} von ${karten.length} …`;await el.speichern()}
+  $('#stand').textContent+=` · ${karten.length} Listen gespeichert`}
+ catch(x){}
+ b.disabled=false;alleKnopf()};
+
+/* Putzämtli-Import: Listen in die Karten übernehmen – gleicher Name ersetzt, Neues kommt dazu, gespeichert wird erst mit «Speichern» / «Alle speichern». */
+const sortiert=l=>l.sort((a,b)=>{const x=a.neu||a,y=b.neu||b;return (x.stufe==null)-(y.stufe==null)||(x.stufe||0)-(y.stufe||0)||String(x.name).localeCompare(String(y.name),'de')});
+function uebernehmen(listen){
+ let ersetzt=0,neu=0;
+ klassen=klassen.filter(k=>k.id||k.namen.length);
+ for(const l of listen){
+  const alt=klassen.find(k=>k.id&&k.name.toLowerCase()===l.name.toLowerCase());
+  if(alt){alt.neu=l;ersetzt++}else{klassen.push({id:'',name:l.name,stufe:l.stufe,namen:l.namen,neu:l});neu++}
+ }
+ sortiert(klassen);zeichne();
+ return {ersetzt,neu,kinder:listen.reduce((n,l)=>n+l.namen.length,0)};
+}
+const putz=$('#putz'),ergebnis=$('#putz-ergebnis');
+$('#putz-knopf').onclick=()=>{putz.hidden=!putz.hidden;if(!putz.hidden)putz.scrollIntoView({behavior:'smooth',block:'start'})};
+$('#putz-zu').onclick=()=>{putz.hidden=true};
+function lesen(text){
+ ergebnis.textContent='';fehler($('#fehler'));
+ try{let d;try{d=JSON.parse(text)}catch{throw new Error('Die Datei lässt sich nicht lesen – ist es die klassenlisten.json des Putzämtli-Managers?')}
+  const listen=ausPutzaemtli(d);const r=uebernehmen(listen);
+  ergebnis.innerHTML=`<b>${listen.length} Listen</b> mit ${r.kinder} Kindern gelesen${r.ersetzt?` · ${r.ersetzt} bestehende ersetzt`:''}${r.neu?` · ${r.neu} neu`:''}. Unten prüfen, dann oben «Alle speichern».`;
+  $('#alle-knopf').scrollIntoView({behavior:'smooth',block:'center'})}
+ catch(x){fehler(ergebnis,x)}
+}
+$('#putz-lesen').onclick=()=>lesen($('#putz-text').value);
+$('#putz-datei').onchange=async e=>{const f=e.target.files[0];if(!f)return;$('#putz-text').value=await f.text();lesen($('#putz-text').value);e.target.value=''};
 zeichne();
 })();
 </script>
