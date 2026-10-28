@@ -2,3 +2,11 @@ werkzeug/cache/
 werkzeug/entwurf/
 __pycache__/
 .wrangler/
+/output/perlen-quellen/
+/output/perlen-vergleich/
+/output/perlen-audit/*.png
+/output/perlen-audit/muster.json
+/output/vorlagen-pruefung/nachher/
+/output/vorlagen-pruefung/probe/
+/output/vorlagen-pruefung/vorher/*.png
+/output/vorlagen-pruefung/browser-*.png

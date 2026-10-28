@@ -254,7 +254,7 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 </div>
 <script src="zurueck.js"></script>
 <script src="formen.js"></script>
-<script src="figuren/index.js"></script>
+<script src="figuren/index.js?v=2"></script>
 <script src="https://cdn.jsdelivr.net/npm/clipper-lib@6.4.2/clipper.js"></script>
 <script>
 (function(){
@@ -271,13 +271,18 @@ const FIGUREN=(window.FIGUREN_INDEX||[]).map(f=>Object.assign({figur:true},f));
 const FORMEN=(window.FORMEN||[]).concat(FIGUREN);
 const byId=Object.fromEntries(FORMEN.map(f=>[f.id,f]));
 window.FIGUREN_DAZU=(welt,fs)=>fs.forEach(f=>{const z=byId[f.id];if(z&&z.figur)Object.assign(z,f,{gruppe:z.gruppe})});
-const geladen={};
+const geladen={},originaleGeladen={};
 function bereit(ids){
   const dateien=[...new Set(ids.map(id=>byId[id]).filter(f=>f&&f.figur&&!f.d).map(f=>f.datei))];
   return Promise.all(dateien.map(d=>geladen[d]||(geladen[d]=new Promise((ok,nein)=>{
-    const t=document.createElement('script');t.src='figuren/'+encodeURIComponent(d);
+    const t=document.createElement('script');t.src='figuren/'+encodeURIComponent(d)+'?v=2';
     t.onload=ok;t.onerror=()=>{delete geladen[d];t.remove();nein(new Error(d))};document.head.appendChild(t);
-  }))));
+  })))).then(()=>Promise.all(ids.map(id=>byId[id]).filter(f=>f&&f.original).map(f=>
+    originaleGeladen[f.id]||(originaleGeladen[f.id]=new Promise((ok,nein)=>{
+      const im=new Image();im.onload=ok;im.onerror=()=>{delete originaleGeladen[f.id];nein(new Error(f.id))};
+      im.src='figuren/originale/'+encodeURIComponent(f.original.datei)+'?v=2';
+    }))
+  )));
 }
 
 // Stern und Vieleck mit einstellbarer Zahl
@@ -366,7 +371,7 @@ const einfach=s=>s.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace
 const BEISPIELE={Grundformen:['herz','stern','kreis','dreieck'],Natur:['blume','baum','sonne','pilz'],Essen:['apfel','erdbeere','banane','glace'],
   Dinge:['haus','rakete','auto','segelboot'],Feste:['kerze','geschenk','osterhase','kuerbis'],Tiere:['fisch','katze','elefant','schmetterling']};
 function bild(f){
-  if(f.figur)return `<img src="figuren/bilder/${f.id}.webp" alt="" loading="lazy" decoding="async" width="52" height="52">`;
+  if(f.figur)return `<img src="figuren/bilder/${f.id}.webp?v=2" alt="" loading="lazy" decoding="async" width="52" height="52">`;
   const p=PARAM[f.id]?paramForm(f.id,PARAM[f.id].def):f,pad=6;
   return `<svg viewBox="${-pad-(100-p.w)/2} ${-pad-(100-p.h)/2} ${100+2*pad} ${100+2*pad}" aria-hidden="true"><path d="${p.d.map(r=>pfad(r,1)).join('')}"/>${(f.farben||[]).map(c=>`<path d="${c.d.map(r=>pfad(r,1)).join('')}" style="fill:${c.f};stroke:${c.f};stroke-width:.4" fill-rule="evenodd"/>`).join('')}</svg>`;
 }
@@ -431,9 +436,9 @@ function offset(rings,mm){
 function stueck(e=S){
   const f=form(e),sx=e.b*10/f.w,sy=e.h*10/f.h;
   const tr=([x,y])=>[(e.spiegel?f.w-x:x)*sx,y*sy];
-  const farbig=!!(e.farbig&&f.farben&&f.farben.length);
+  const farbig=!!(e.farbig&&(f.original||f.farben&&f.farben.length));
   const umriss=f.d.map(r=>r.map(tr)),det=e.det&&!farbig?f.det.map(l=>l.map(tr)):[];
-  const farben=farbig?f.farben.map(c=>({f:c.f,d:c.d.map(r=>r.map(tr))})):[];
+  const farben=farbig&&!f.original?f.farben.map(c=>({f:c.f,d:c.d.map(r=>r.map(tr))})):[];
   let schnitt=umriss,naht=[];
   if(e.linie==='naht'){naht=offset(umriss,-e.naht)}
   else if(e.linie==='zugabe'){schnitt=offset(umriss,e.zugabe);naht=umriss}
@@ -442,7 +447,8 @@ function stueck(e=S){
   const verschieben=a=>a.map(r=>r.map(([x,y])=>[x-x0,y-y0]));
   const nahtV=verschieben(naht),pk=punkteAn(e)&&nahtV.length?nahtV.map(r=>einstiche(r,e.pabst)):[];
   const pmin=Math.min(...pk.map(p=>p.min)),pmax=Math.max(0,...pk.map(p=>p.max));
-  return {w:x1-x0,h:y1-y0,schnitt:verschieben(schnitt),naht:nahtV,det:verschieben(det),farben:farben.map(c=>({f:c.f,d:verschieben(c.d)})),
+  const o=f.original,original=farbig&&o?{datei:o.datei,x:(e.spiegel?f.w-o.x-o.w:o.x)*sx-x0,y:o.y*sy-y0,w:o.w*sx,h:o.h*sy,spiegel:e.spiegel}:null;
+  return {w:x1-x0,h:y1-y0,schnitt:verschieben(schnitt),naht:nahtV,det:verschieben(det),farben:farben.map(c=>({f:c.f,d:verschieben(c.d)})),original,
     punkte:[].concat(...pk.map(p=>p.pts)),pabst:isFinite(pmin)?[pmin,pmax]:null,
     strich:!(pk.length&&e.strich===false),
     eng:f.eng*Math.min(sx,sy),zerfaellt:e.linie==='naht'&&(naht.length!==umriss.length||f.eng*Math.min(sx,sy)<2*e.naht+3)};
@@ -496,7 +502,11 @@ function anordnen(st){
 }
 
 // Blätter als SVG in mm
-const farbSvg=(st,sw)=>st.farben.map(c=>`<path d="${c.d.map(r=>pfad(r,1)).join('')}" fill="${c.f}" fill-rule="evenodd" stroke="${c.f}" stroke-width="${sw}" stroke-linejoin="round"/>`).join('');
+const farbSvg=(st,sw)=>{
+  const o=st.original;
+  if(o)return `<image href="figuren/originale/${encodeURIComponent(o.datei)}?v=2" x="${o.x}" y="${o.y}" width="${o.w}" height="${o.h}" preserveAspectRatio="none"${o.spiegel?` transform="translate(${2*o.x+o.w} 0) scale(-1 1)"`:''}/>`;
+  return st.farben.map(c=>`<path d="${c.d.map(r=>pfad(r,1)).join('')}" fill="${c.f}" fill-rule="evenodd" stroke="${c.f}" stroke-width="${sw}" stroke-linejoin="round"/>`).join('');
+};
 // Einstichpunkte als kleine gefüllte Kreise (Radius r in mm), alle in einem Pfad
 const punktPfad=(pts,r)=>pts.map(([x,y])=>`M${(x-r).toFixed(2)} ${y.toFixed(2)}a${r} ${r} 0 1 0 ${2*r} 0a${r} ${r} 0 1 0 ${-2*r} 0`).join('');
 const PUNKT_R=.45;   // 0,9 mm Durchmesser: gut sichtbar, Nadel trifft die Mitte
@@ -639,6 +649,8 @@ function zeichnenListe(){
   const schmal=passt.filter(p=>p.st.eng<4).map(p=>titel(p.e)),zerf=passt.filter(p=>p.st.zerfaellt).map(p=>titel(p.e));
   if(schmal.length)info+=`<br><span class="warn">Kaum zu schneiden, bitte grösser wählen: ${schmal.join(', ')}.</span>`;
   if(zerf.length)info+=`<br><span class="warn">Nählinie zerfällt: ${zerf.join(', ')} – grösser wählen oder kleineren Abstand nehmen.</span>`;
+  const mehrteilig=passt.filter(p=>(form(p.e).teile||1)>1).map(p=>`${titel(p.e)} (${form(p.e).teile} Teile)`);
+  if(mehrteilig.length)info+=`<br>Getrennte Schnittteile: ${mehrteilig.join(', ')}.`;
   $('vorschau').innerHTML=svg.slice(0,2).join('')+(svg.length>2?`<p class="mehr">… und ${svg.length-2} weitere Blätter</p>`:'');
   $('druck').innerHTML=svg.join('');
   $('info').innerHTML=info;$('drucken').disabled=!svg.length;
@@ -660,7 +672,8 @@ function zeichnen(){
       (S.linie==='zugabe'?`<br>Zum Schneiden: ${cm(st.w/10)} × ${cm(st.h/10)} cm`:'')+
       (st.punkte.length?`<br>Einstichpunkte: ${st.punkte.length} pro Stück`+(st.pabst?`, Abstand ${st.pabst[1]-st.pabst[0]<.05?cm(st.pabst[0]):cm(st.pabst[0])+'–'+cm(st.pabst[1])} mm`:''):'')+
       `<br>Schneiden: <span title="Schwierigkeit ${f.schwer} von 3">${'✂'.repeat(f.schwer)}</span> · empfohlen ab ${cm(Math.max(2,Math.ceil(80/f.eng)/2))} cm`+
-      (f.d.length>1?'<br>Das Loch in der Mitte zuerst ausschneiden: einstechen, dann von innen rundum.':'')+
+      (f.d.length>(f.teile||1)?'<br>Innenliegende Aussparungen zuerst ausschneiden: einstechen, dann von innen rundum.':'')+
+      ((f.teile||1)>1?`<br>Dieses Motiv besteht aus ${f.teile} getrennten Schnittteilen.`:'')+
       (st.eng<4?`<br><span class="warn">Schmalste Stelle nur ${cm(st.eng)} mm – kaum zu schneiden. Bitte grösser wählen.</span>`:'')+
       (st.zerfaellt?'<br><span class="warn">Die Nählinie zerfällt oder reicht nicht in die schmalen Stellen – Form grösser wählen oder kleineren Abstand nehmen.</span>':'');
     $('vorschau').innerHTML=svg.slice(0,2).join('')+(svg.length>2?`<p class="mehr">… und ${svg.length-2} weitere Blätter</p>`:'');

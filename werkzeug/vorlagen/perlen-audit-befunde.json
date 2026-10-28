@@ -1,0 +1,622 @@
+{
+  "mewtu": [
+    3,
+    "Augen und Mund gehen im kleinen Kopf verloren.",
+    {
+      "hoehe": 90,
+      "kontur": 0.11
+    }
+  ],
+  "dr-eggman": [
+    3,
+    "Brille, Augen und Schnurrbart verschmelzen im winzigen Gesicht.",
+    {
+      "hoehe": 90,
+      "kontur": 0.12
+    }
+  ],
+  "lego-stein-24": [
+    2,
+    "Die acht Noppen und die obere Fläche sind kaum von der Vorderseite getrennt.",
+    {
+      "hoehe": 48,
+      "farbzahl": 24,
+      "kontur": 0.12
+    }
+  ],
+  "roblox-noob": [
+    3,
+    "Die zwei weissen Augen fehlen fast vollständig.",
+    {
+      "hoehe": 64,
+      "kontur": 0.12
+    }
+  ],
+  "totoro-ghibli": [
+    3,
+    "Die dunklen Winkel auf dem Bauch und die Zahnreihe fehlen.",
+    {
+      "hoehe": 64,
+      "kontur": 0.12,
+      "akzente": [
+        {
+          "farben": [
+            "H",
+            "J",
+            "m",
+            "z"
+          ],
+          "anteil": 0.12,
+          "bereich": [
+            0.25,
+            0.45,
+            0.78,
+            0.65
+          ]
+        }
+      ],
+      "linien": [
+        [
+          0.22999999999999998,
+          0.508,
+          0.3,
+          0.476,
+          "H"
+        ],
+        [
+          0.3,
+          0.476,
+          0.37,
+          0.508,
+          "H"
+        ],
+        [
+          0.43,
+          0.493,
+          0.5,
+          0.46099999999999997,
+          "H"
+        ],
+        [
+          0.5,
+          0.46099999999999997,
+          0.5700000000000001,
+          0.493,
+          "H"
+        ],
+        [
+          0.6399999999999999,
+          0.518,
+          0.7,
+          0.486,
+          "H"
+        ],
+        [
+          0.7,
+          0.486,
+          0.76,
+          0.518,
+          "H"
+        ],
+        [
+          0.19,
+          0.598,
+          0.25,
+          0.566,
+          "H"
+        ],
+        [
+          0.25,
+          0.566,
+          0.31,
+          0.598,
+          "H"
+        ],
+        [
+          0.35,
+          0.5780000000000001,
+          0.41,
+          0.546,
+          "H"
+        ],
+        [
+          0.41,
+          0.546,
+          0.47,
+          0.5780000000000001,
+          "H"
+        ],
+        [
+          0.5049999999999999,
+          0.5680000000000001,
+          0.57,
+          0.536,
+          "H"
+        ],
+        [
+          0.57,
+          0.536,
+          0.635,
+          0.5680000000000001,
+          "H"
+        ],
+        [
+          0.7,
+          0.598,
+          0.76,
+          0.566,
+          "H"
+        ],
+        [
+          0.76,
+          0.566,
+          0.8200000000000001,
+          0.598,
+          "H"
+        ]
+      ]
+    }
+  ],
+  "goku": [
+    2,
+    "Augen, Mund und Gesichtslinien verschwinden unter den Haaren.",
+    {
+      "hoehe": 72,
+      "kontur": 0.15,
+      "farbzahl": 24,
+      "linien": [
+        [
+          0.3,
+          0.674,
+          0.356,
+          0.694,
+          "w"
+        ],
+        [
+          0.423,
+          0.682,
+          0.477,
+          0.666,
+          "w"
+        ],
+        [
+          0.336,
+          0.684,
+          0.336,
+          0.684,
+          "e"
+        ],
+        [
+          0.459,
+          0.675,
+          0.459,
+          0.675,
+          "e"
+        ],
+        [
+          0.39,
+          0.75,
+          0.42,
+          0.751,
+          "m"
+        ]
+      ]
+    }
+  ],
+  "naruto": [
+    3,
+    "Augen, Wangenstriche und Stirnbandzeichen sind stark reduziert.",
+    {
+      "hoehe": 72,
+      "kontur": 0.1
+    }
+  ],
+  "luffy": [
+    3,
+    "Augen und Mund sind zu klein; die Narbe unter dem Auge fehlt.",
+    {
+      "hoehe": 64,
+      "kontur": 0.07,
+      "farbzahl": 20,
+      "linien": [
+        [
+          0.38,
+          0.735,
+          0.42,
+          0.751,
+          "m"
+        ],
+        [
+          0.42,
+          0.751,
+          0.49,
+          0.752,
+          "m"
+        ],
+        [
+          0.49,
+          0.752,
+          0.535,
+          0.739,
+          "m"
+        ],
+        [
+          0.42,
+          0.782,
+          0.467,
+          0.782,
+          "m"
+        ],
+        [
+          0.54,
+          0.703,
+          0.586,
+          0.703,
+          "m"
+        ],
+        [
+          0.556,
+          0.69,
+          0.556,
+          0.715,
+          "m"
+        ],
+        [
+          0.579,
+          0.693,
+          0.579,
+          0.718,
+          "m"
+        ]
+      ]
+    }
+  ],
+  "thaddaeus": [
+    3,
+    "Pupillen, Mundlinie und lange Nase sind kaum getrennt.",
+    {
+      "hoehe": 96,
+      "kontur": 0.12
+    }
+  ],
+  "peppa-wutz": [
+    3,
+    "Nasenlöcher und die zwei Augen sind nicht deutlich getrennt.",
+    {
+      "hoehe": 64,
+      "kontur": 0.12,
+      "akzente": [
+        {
+          "farben": [
+            "T",
+            "U"
+          ],
+          "anteil": 0.16
+        }
+      ],
+      "linien": [
+        [
+          0.797,
+          0.133,
+          0.797,
+          0.133,
+          "U"
+        ],
+        [
+          0.854,
+          0.115,
+          0.854,
+          0.115,
+          "U"
+        ]
+      ]
+    }
+  ],
+  "grizz": [
+    3,
+    "Augen und Zähne sind im braunen Gesicht kaum sichtbar.",
+    {
+      "hoehe": 72,
+      "kontur": 0.12
+    }
+  ],
+  "ice-bear": [
+    3,
+    "Ein Auge und die Mundlinie verschwinden auf dem hellen Kopf.",
+    {
+      "hoehe": 64,
+      "kontur": 0.1
+    }
+  ],
+  "finn": [
+    3,
+    "Der lächelnde Mund geht im kleinen Gesicht verloren.",
+    {
+      "hoehe": 80,
+      "kontur": 0.1
+    }
+  ],
+  "gru-silhouette-mit-schal": [
+    2,
+    "Das Gesicht ist praktisch leer; Augen, Nase und Lächeln fehlen.",
+    {
+      "hoehe": 100,
+      "kontur": 0.1
+    }
+  ],
+  "ekel": [
+    3,
+    "Mund, Nase und die Augen sind zu schwach voneinander getrennt.",
+    {
+      "hoehe": 80,
+      "kontur": 0.12
+    }
+  ],
+  "freude-silhouette": [
+    3,
+    "Augen und Mund verlieren ihre Form im kleinen Gesicht.",
+    {
+      "hoehe": 72,
+      "kontur": 0.1
+    }
+  ],
+  "star-butterfly-herz-wangen": [
+    3,
+    "Die rosa Wangenherzen und das Lächeln sind im Raster kaum sichtbar.",
+    {
+      "hoehe": 90,
+      "kontur": 0.12
+    }
+  ],
+  "einaeugiger-minion-stuart": [
+    3,
+    "Mundbogen und Brustemblem sind im groben Raster stark vereinfacht.",
+    {
+      "hoehe": 64,
+      "kontur": 0.1
+    }
+  ],
+  "zweiaeugiger-minion-kevin-bob": [
+    3,
+    "Mundbogen ist eckig; einzelne Haare fehlen.",
+    {
+      "hoehe": 64,
+      "kontur": 0.1
+    }
+  ],
+  "gudetama-faules-ei": [
+    3,
+    "Die kleinen dunklen Gesichtslinien gehen auf dem Eigelb verloren.",
+    {
+      "hoehe": 64,
+      "kontur": 0.1
+    }
+  ],
+  "cinnamoroll": [
+    3,
+    "Der kleine gebogene Mund fehlt zwischen den blauen Augen.",
+    {
+      "hoehe": 40,
+      "kontur": 0.1
+    }
+  ],
+  "squishmallow-archie-axolotl": [
+    3,
+    "Mund und die dünne Umrandung des hellen Bauchs verschwinden.",
+    {
+      "hoehe": 56,
+      "kontur": 0.1
+    }
+  ],
+  "capybara-trendtier": [
+    3,
+    "Auge und Maullinie sind kaum sichtbar.",
+    {
+      "hoehe": 40,
+      "kontur": 0.1
+    }
+  ],
+  "mochis-dango-spiess": [
+    2,
+    "Das schwarze Stäbchen rechts unter der grünen Kugel fehlt vollständig.",
+    {
+      "hoehe": 48,
+      "teile_erhalten": true
+    }
+  ],
+  "pusheen-katze": [
+    3,
+    "Die geschlossenen Augen und der kleine Mund verschwinden; Gesichtsausdruck verändert.",
+    {
+      "hoehe": 64,
+      "kontur": 0.1
+    }
+  ],
+  "spider-man-maske": [
+    3,
+    "Das dünne schwarze Spinnennetz ist stellenweise unterbrochen.",
+    {
+      "hoehe": 64,
+      "kontur": 0.1
+    }
+  ],
+  "miles-morales-maske": [
+    3,
+    "Das rote Netz geht im schwarzen Hintergrund teilweise verloren.",
+    {
+      "hoehe": 64
+    }
+  ],
+  "baby-groot": [
+    3,
+    "Lächeln und Holzlinien im Gesicht sind zu schwach.",
+    {
+      "hoehe": 80,
+      "kontur": 0.1
+    }
+  ],
+  "yoda-klassisch": [
+    3,
+    "Pupillen, Mund und die charakteristischen Stirnfalten verschwinden.",
+    {
+      "hoehe": 64,
+      "kontur": 0.1,
+      "akzente": [
+        {
+          "farben": [
+            "s",
+            "O",
+            "J",
+            "d",
+            "m"
+          ],
+          "anteil": 0.095,
+          "bereich": [
+            0.12,
+            0.04,
+            0.88,
+            0.5
+          ]
+        }
+      ]
+    }
+  ],
+  "chewbacca": [
+    3,
+    "Augen, Nase und Mund sind kaum voneinander zu unterscheiden.",
+    {
+      "hoehe": 80,
+      "kontur": 0.1
+    }
+  ],
+  "elsa": [
+    2,
+    "Das kleine Gesicht ist fast ohne Augen und Mund.",
+    {
+      "hoehe": 96,
+      "kontur": 0.1
+    }
+  ],
+  "anna": [
+    3,
+    "Augen und Mund sind stark vergröbert; Gesichtsausdruck kaum lesbar.",
+    {
+      "hoehe": 90,
+      "kontur": 0.1
+    }
+  ],
+  "buzz-lightyear-kopf": [
+    3,
+    "Die dünne Mundlinie fehlt; das Kinnzeichen ist kaum sichtbar.",
+    {
+      "hoehe": 64,
+      "kontur": 0.1
+    }
+  ],
+  "minnie-silhouette-mit-schleife": [
+    3,
+    "Die weissen Falten der roten Schleife fehlen.",
+    {
+      "hoehe": 52,
+      "akzente": [
+        {
+          "farben": [
+            "w"
+          ],
+          "anteil": 0.08,
+          "bereich": [
+            0.2,
+            0,
+            0.8,
+            0.45
+          ]
+        }
+      ]
+    }
+  ],
+  "shrek-kopf-mit-ohren": [
+    3,
+    "Die lächelnde Mundlinie und die Nasenlöcher gehen verloren.",
+    {
+      "hoehe": 48,
+      "kontur": 0.1
+    }
+  ],
+  "fig-glace": [
+    3,
+    "Das diagonale Waffelgitter der Eistüte fehlt.",
+    {
+      "hoehe": 64,
+      "akzente": [
+        {
+          "farben": [
+            "X"
+          ],
+          "anteil": 0.12,
+          "bereich": [
+            0,
+            0.5,
+            1,
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "ninja-augenpartie-lloyd": [
+    3,
+    "Schräge Augenbrauen und einzelne Pupillen sind zu stark vereinfacht.",
+    {
+      "hoehe": 60,
+      "kontur": 0.1
+    }
+  ],
+  "ninja-augenpartie-kai": [
+    3,
+    "Schräge Augenbrauen und einzelne Pupillen sind zu stark vereinfacht.",
+    {
+      "hoehe": 60,
+      "kontur": 0.1
+    }
+  ],
+  "ninja-augenpartie-jay": [
+    3,
+    "Schräge Augenbrauen und einzelne Pupillen sind zu stark vereinfacht.",
+    {
+      "hoehe": 60,
+      "kontur": 0.1
+    }
+  ],
+  "ninja-augenpartie-zane": [
+    3,
+    "Schräge Augenbrauen und einzelne Pupillen sind zu stark vereinfacht.",
+    {
+      "hoehe": 60,
+      "kontur": 0.1
+    }
+  ],
+  "ninja-augenpartie-cole": [
+    3,
+    "Schräge Augenbrauen und einzelne Pupillen sind zu stark vereinfacht.",
+    {
+      "hoehe": 60,
+      "kontur": 0.1
+    }
+  ],
+  "ninja-augenpartie-nya": [
+    3,
+    "Schräge Augenbrauen und einzelne Pupillen sind zu stark vereinfacht.",
+    {
+      "hoehe": 60,
+      "kontur": 0.1
+    }
+  ],
+  "winnie-puuh-kopf": [
+    3,
+    "Mundbogen und Augenbrauen fehlen teilweise.",
+    {
+      "hoehe": 64,
+      "kontur": 0.1
+    }
+  ]
+}

@@ -1,0 +1,2725 @@
+{
+  "figuren": 302,
+  "formen": 138,
+  "farbgleichheit": [
+    {
+      "id": "felori",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        321,
+        395
+      ]
+    },
+    {
+      "id": "krokel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        365,
+        442
+      ]
+    },
+    {
+      "id": "kwaks",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        253,
+        397
+      ]
+    },
+    {
+      "id": "pokeball",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        663,
+        663
+      ]
+    },
+    {
+      "id": "superball",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        333,
+        333
+      ]
+    },
+    {
+      "id": "hyperball",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        635,
+        634
+      ]
+    },
+    {
+      "id": "digda",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        793,
+        628
+      ]
+    },
+    {
+      "id": "voltilamm",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        796,
+        764
+      ]
+    },
+    {
+      "id": "evoli",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        623,
+        791
+      ]
+    },
+    {
+      "id": "schiggy",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        793,
+        752
+      ]
+    },
+    {
+      "id": "bisasam",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        768,
+        766
+      ]
+    },
+    {
+      "id": "glumanda",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        687,
+        791
+      ]
+    },
+    {
+      "id": "gengar",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        680,
+        794
+      ]
+    },
+    {
+      "id": "pummeluff",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        712,
+        788
+      ]
+    },
+    {
+      "id": "mauzi",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        688,
+        791
+      ]
+    },
+    {
+      "id": "glurak",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        795,
+        777
+      ]
+    },
+    {
+      "id": "lucario",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        532,
+        793
+      ]
+    },
+    {
+      "id": "mewtu",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        569,
+        793
+      ]
+    },
+    {
+      "id": "mew",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        782,
+        723
+      ]
+    },
+    {
+      "id": "lugia",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        750,
+        793
+      ]
+    },
+    {
+      "id": "ho-oh",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        737,
+        795
+      ]
+    },
+    {
+      "id": "relaxo-liegend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        792,
+        636
+      ]
+    },
+    {
+      "id": "pikachu",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        630,
+        793
+      ]
+    },
+    {
+      "id": "pikachu-kopf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1125,
+        1199
+      ]
+    },
+    {
+      "id": "goldener-ring",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        504,
+        502
+      ]
+    },
+    {
+      "id": "chaos-emerald",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        816,
+        610
+      ]
+    },
+    {
+      "id": "tails",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        958,
+        1200
+      ]
+    },
+    {
+      "id": "amy-rose",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        734,
+        1200
+      ]
+    },
+    {
+      "id": "knuckles",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        858,
+        1200
+      ]
+    },
+    {
+      "id": "sonic-kopfprofil",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        764,
+        668
+      ]
+    },
+    {
+      "id": "dr-eggman",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        333,
+        583
+      ]
+    },
+    {
+      "id": "shadow",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        780,
+        1200
+      ]
+    },
+    {
+      "id": "super-pilz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        804,
+        768
+      ]
+    },
+    {
+      "id": "1-up-pilz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        804,
+        768
+      ]
+    },
+    {
+      "id": "feuerblume",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        262,
+        285
+      ]
+    },
+    {
+      "id": "muenze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        825,
+        968
+      ]
+    },
+    {
+      "id": "yoshi-ei",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        463,
+        566
+      ]
+    },
+    {
+      "id": "goomba",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        803,
+        956
+      ]
+    },
+    {
+      "id": "stern-superstern",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        804,
+        766
+      ]
+    },
+    {
+      "id": "fragezeichen-block",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        790,
+        792
+      ]
+    },
+    {
+      "id": "piranha-pflanze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        789,
+        861
+      ]
+    },
+    {
+      "id": "luigi",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        763,
+        986
+      ]
+    },
+    {
+      "id": "yoshi",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        803,
+        1160
+      ]
+    },
+    {
+      "id": "toad",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        447,
+        676
+      ]
+    },
+    {
+      "id": "prinzessin-peach",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        692,
+        1194
+      ]
+    },
+    {
+      "id": "boo-geist",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        696,
+        628
+      ]
+    },
+    {
+      "id": "shy-guy",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        615,
+        887
+      ]
+    },
+    {
+      "id": "bowser",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        600,
+        684
+      ]
+    },
+    {
+      "id": "donkey-kong",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        804,
+        1047
+      ]
+    },
+    {
+      "id": "triforce-zelda",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        987,
+        858
+      ]
+    },
+    {
+      "id": "rubin-zelda",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        504,
+        754
+      ]
+    },
+    {
+      "id": "herzcontainer-zelda",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        898,
+        778
+      ]
+    },
+    {
+      "id": "link-8-bit",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1130,
+        1200
+      ]
+    },
+    {
+      "id": "korok",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        847,
+        1194
+      ]
+    },
+    {
+      "id": "kirby",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        803,
+        714
+      ]
+    },
+    {
+      "id": "waddle-dee",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        549,
+        555
+      ]
+    },
+    {
+      "id": "game-boy",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        729,
+        1192
+      ]
+    },
+    {
+      "id": "controller",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        804,
+        352
+      ]
+    },
+    {
+      "id": "splatoon-tintenfisch-silhouette",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        492,
+        663
+      ]
+    },
+    {
+      "id": "splatoon-inkling",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1036,
+        1190
+      ]
+    },
+    {
+      "id": "animal-crossing-blatt-logo",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1200,
+        1152
+      ]
+    },
+    {
+      "id": "animal-crossing-tom-nook",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        804,
+        1189
+      ]
+    },
+    {
+      "id": "animal-crossing-k-k-slider",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        418,
+        486
+      ]
+    },
+    {
+      "id": "mario",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2162,
+        2674
+      ]
+    },
+    {
+      "id": "tnt-block",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        516,
+        512
+      ]
+    },
+    {
+      "id": "grasblock",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        601,
+        596
+      ]
+    },
+    {
+      "id": "creeper-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        465,
+        470
+      ]
+    },
+    {
+      "id": "diamant",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        681,
+        554
+      ]
+    },
+    {
+      "id": "schwert",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        489,
+        429
+      ]
+    },
+    {
+      "id": "diamanten-spitzhacke",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        772,
+        1027
+      ]
+    },
+    {
+      "id": "herz-lebensanzeige",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        528,
+        528
+      ]
+    },
+    {
+      "id": "mc-herz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        581,
+        537
+      ]
+    },
+    {
+      "id": "erfahrungs-smaragd-block",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        720,
+        864
+      ]
+    },
+    {
+      "id": "fig-schwein",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        739,
+        613
+      ]
+    },
+    {
+      "id": "mc-kuh",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        457,
+        602
+      ]
+    },
+    {
+      "id": "mc-huhn",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        724,
+        772
+      ]
+    },
+    {
+      "id": "mc-schaf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        584,
+        586
+      ]
+    },
+    {
+      "id": "zombie-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        334,
+        332
+      ]
+    },
+    {
+      "id": "skelett-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        583,
+        507
+      ]
+    },
+    {
+      "id": "steve-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        374,
+        331
+      ]
+    },
+    {
+      "id": "alex-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        614,
+        422
+      ]
+    },
+    {
+      "id": "enderman",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        570,
+        681
+      ]
+    },
+    {
+      "id": "axolotl",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1102,
+        752
+      ]
+    },
+    {
+      "id": "mc-biene",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1125,
+        1113
+      ]
+    },
+    {
+      "id": "allay",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1188,
+        789
+      ]
+    },
+    {
+      "id": "wither",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        924,
+        926
+      ]
+    },
+    {
+      "id": "enderdrache",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1184,
+        1190
+      ]
+    },
+    {
+      "id": "mc-stern",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1048,
+        1048
+      ]
+    },
+    {
+      "id": "creeper",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        620,
+        1113
+      ]
+    },
+    {
+      "id": "steve",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        236,
+        468
+      ]
+    },
+    {
+      "id": "fall-guys-figur",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1155,
+        1161
+      ]
+    },
+    {
+      "id": "junimo",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        536,
+        470
+      ]
+    },
+    {
+      "id": "stardew-huhn",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        750,
+        756
+      ]
+    },
+    {
+      "id": "pac-man",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        804,
+        857
+      ]
+    },
+    {
+      "id": "blinky",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        804,
+        885
+      ]
+    },
+    {
+      "id": "pinky",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        641,
+        715
+      ]
+    },
+    {
+      "id": "inky",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        614,
+        722
+      ]
+    },
+    {
+      "id": "clyde",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        676,
+        715
+      ]
+    },
+    {
+      "id": "pac-man-kirsche",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        804,
+        769
+      ]
+    },
+    {
+      "id": "space-invaders-alien",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        664,
+        484
+      ]
+    },
+    {
+      "id": "tetris-i",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1166,
+        312
+      ]
+    },
+    {
+      "id": "tetris-o",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        598,
+        597
+      ]
+    },
+    {
+      "id": "tetris-l",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        598,
+        882
+      ]
+    },
+    {
+      "id": "tetris-s",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        597,
+        882
+      ]
+    },
+    {
+      "id": "tetris-t",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        882,
+        598
+      ]
+    },
+    {
+      "id": "among-us-astronaut",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        944,
+        1191
+      ]
+    },
+    {
+      "id": "roblox-noob",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        367,
+        528
+      ]
+    },
+    {
+      "id": "roblox-logo-quadrat",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1173,
+        1192
+      ]
+    },
+    {
+      "id": "fortnite-lama",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        772,
+        1173
+      ]
+    },
+    {
+      "id": "fortnite-peely-banane",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        946,
+        1200
+      ]
+    },
+    {
+      "id": "red",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        790,
+        941
+      ]
+    },
+    {
+      "id": "chuck",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        803,
+        714
+      ]
+    },
+    {
+      "id": "bomb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        540,
+        719
+      ]
+    },
+    {
+      "id": "cuphead-tasse",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        802,
+        723
+      ]
+    },
+    {
+      "id": "brawl-stars-logo-totenkopf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1200,
+        1114
+      ]
+    },
+    {
+      "id": "spike-kaktus",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        522,
+        618
+      ]
+    },
+    {
+      "id": "leon",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        657,
+        602
+      ]
+    },
+    {
+      "id": "el-primo",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        556,
+        642
+      ]
+    },
+    {
+      "id": "clash-royale-koenig",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        788,
+        810
+      ]
+    },
+    {
+      "id": "clash-of-clans-barbar",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        788,
+        1151
+      ]
+    },
+    {
+      "id": "hay-day-huhn",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1165,
+        1190
+      ]
+    },
+    {
+      "id": "subway-surfers-jake-kopf-mit-kappe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        550,
+        445
+      ]
+    },
+    {
+      "id": "crossy-road-huhn",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        550,
+        893
+      ]
+    },
+    {
+      "id": "fn-wassermelone",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        671,
+        586
+      ]
+    },
+    {
+      "id": "fn-erdbeere",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        803,
+        1004
+      ]
+    },
+    {
+      "id": "lego-stein-24",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        804,
+        545
+      ]
+    },
+    {
+      "id": "lego-minifigur-kopf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        809,
+        844
+      ]
+    },
+    {
+      "id": "barbie-logo-herz-schriftzug-b",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1114,
+        1200
+      ]
+    },
+    {
+      "id": "rubiks-cube-zauberwuerfel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        550,
+        599
+      ]
+    },
+    {
+      "id": "uno-karte-4",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        534,
+        800
+      ]
+    },
+    {
+      "id": "wuerfel-spielwuerfel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        803,
+        824
+      ]
+    },
+    {
+      "id": "schachfigur-springer-silhouette",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        804,
+        1156
+      ]
+    },
+    {
+      "id": "playmobil-figur-silhouette",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        542,
+        1051
+      ]
+    },
+    {
+      "id": "ninja-augenpartie-lloyd",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        473,
+        553
+      ]
+    },
+    {
+      "id": "ninja-augenpartie-kai",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        473,
+        553
+      ]
+    },
+    {
+      "id": "shuriken-wurfstern",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        944,
+        946
+      ]
+    },
+    {
+      "id": "goldener-drache-silhouette",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        803,
+        805
+      ]
+    },
+    {
+      "id": "ninjago-logo-rotes-symbol",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        453,
+        600
+      ]
+    },
+    {
+      "id": "ninja-augenpartie-jay",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        473,
+        553
+      ]
+    },
+    {
+      "id": "ninja-augenpartie-zane",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        485,
+        565
+      ]
+    },
+    {
+      "id": "ninja-augenpartie-cole",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        473,
+        553
+      ]
+    },
+    {
+      "id": "ninja-augenpartie-nya",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        473,
+        553
+      ]
+    },
+    {
+      "id": "cat-noir-pfote",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        881,
+        881
+      ]
+    },
+    {
+      "id": "miraculous-ohrring-5-punkte",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        996,
+        996
+      ]
+    },
+    {
+      "id": "tikki-kwami",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        738,
+        1003
+      ]
+    },
+    {
+      "id": "plagg-kwami",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        602,
+        675
+      ]
+    },
+    {
+      "id": "ladybug-kopf-mit-maske",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        835,
+        1130
+      ]
+    },
+    {
+      "id": "cat-noir-kopf-mit-maske",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        524,
+        512
+      ]
+    },
+    {
+      "id": "konoha-symbol-naruto-stirnband",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        964,
+        820
+      ]
+    },
+    {
+      "id": "akatsuki-wolke-naruto",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        815,
+        487
+      ]
+    },
+    {
+      "id": "one-piece-jolly-roger-totenkopf-mit-strohhut",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        667,
+        612
+      ]
+    },
+    {
+      "id": "goku",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        846,
+        900
+      ]
+    },
+    {
+      "id": "dragon-ball-4-sterne-kugel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        601,
+        600
+      ]
+    },
+    {
+      "id": "totoro-ghibli",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        802,
+        1052
+      ]
+    },
+    {
+      "id": "calcifer-ghibli",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        559,
+        652
+      ]
+    },
+    {
+      "id": "russpuster-susuwatari-ghibli",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        674,
+        591
+      ]
+    },
+    {
+      "id": "chopper-one-piece",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        541,
+        899
+      ]
+    },
+    {
+      "id": "sadaharu-gintama",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        706,
+        772
+      ]
+    },
+    {
+      "id": "anya-spy-x-family",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        804,
+        778
+      ]
+    },
+    {
+      "id": "nezuko-demon-slayer-bei-aelteren",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        749,
+        732
+      ]
+    },
+    {
+      "id": "naruto",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        769,
+        921
+      ]
+    },
+    {
+      "id": "luffy",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        548,
+        453
+      ]
+    },
+    {
+      "id": "zoro",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        750,
+        760
+      ]
+    },
+    {
+      "id": "kakashi",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        964,
+        1059
+      ]
+    },
+    {
+      "id": "spongebob-gelbes-viereck",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        731,
+        1000
+      ]
+    },
+    {
+      "id": "patrick-star",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        824,
+        1191
+      ]
+    },
+    {
+      "id": "thaddaeus",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        415,
+        1190
+      ]
+    },
+    {
+      "id": "gary-die-schnecke",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        455,
+        397
+      ]
+    },
+    {
+      "id": "bluey",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        324,
+        526
+      ]
+    },
+    {
+      "id": "bingo",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        628,
+        840
+      ]
+    },
+    {
+      "id": "paw-patrol-pfoten-logo",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        395,
+        340
+      ]
+    },
+    {
+      "id": "chase",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        936,
+        1200
+      ]
+    },
+    {
+      "id": "marshall",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        442,
+        406
+      ]
+    },
+    {
+      "id": "skye",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1200,
+        1103
+      ]
+    },
+    {
+      "id": "peppa-wutz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        915,
+        1200
+      ]
+    },
+    {
+      "id": "gumball",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        628,
+        812
+      ]
+    },
+    {
+      "id": "darwin",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        841,
+        962
+      ]
+    },
+    {
+      "id": "grizz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        603,
+        1192
+      ]
+    },
+    {
+      "id": "we-bare-panda",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1109,
+        1190
+      ]
+    },
+    {
+      "id": "ice-bear",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        641,
+        1198
+      ]
+    },
+    {
+      "id": "finn",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        737,
+        1199
+      ]
+    },
+    {
+      "id": "jake",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        830,
+        1199
+      ]
+    },
+    {
+      "id": "star-butterfly-herz-wangen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        802,
+        1200
+      ]
+    },
+    {
+      "id": "gravity-falls-dipper-muetze-tannenbaum",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        778,
+        422
+      ]
+    },
+    {
+      "id": "teletubbies-sonne",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        640,
+        485
+      ]
+    },
+    {
+      "id": "po",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        595,
+        1188
+      ]
+    },
+    {
+      "id": "sendung-maus",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        309,
+        433
+      ]
+    },
+    {
+      "id": "sendung-elefant",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        352,
+        321
+      ]
+    },
+    {
+      "id": "globi",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1200,
+        1173
+      ]
+    },
+    {
+      "id": "pingu",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1092,
+        1200
+      ]
+    },
+    {
+      "id": "einaeugiger-minion-stuart",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        777,
+        1195
+      ]
+    },
+    {
+      "id": "zweiaeugiger-minion-kevin-bob",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        881,
+        1200
+      ]
+    },
+    {
+      "id": "boeser-lila-minion",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        464,
+        725
+      ]
+    },
+    {
+      "id": "minion-auge-brille-allein",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        462,
+        462
+      ]
+    },
+    {
+      "id": "gru-silhouette-mit-schal",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        443,
+        907
+      ]
+    },
+    {
+      "id": "erinnerungskugel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        498,
+        498
+      ]
+    },
+    {
+      "id": "wut-rotes-viereck",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        886,
+        1200
+      ]
+    },
+    {
+      "id": "kummer",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        764,
+        1200
+      ]
+    },
+    {
+      "id": "ekel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        571,
+        920
+      ]
+    },
+    {
+      "id": "angst",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        613,
+        1200
+      ]
+    },
+    {
+      "id": "zweifel-inside-out-2",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        413,
+        835
+      ]
+    },
+    {
+      "id": "bing-bong",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1200,
+        1166
+      ]
+    },
+    {
+      "id": "freude-silhouette",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        743,
+        935
+      ]
+    },
+    {
+      "id": "hello-kitty",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        466,
+        558
+      ]
+    },
+    {
+      "id": "kuromi",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        441,
+        533
+      ]
+    },
+    {
+      "id": "badtz-maru-pinguin",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        370,
+        552
+      ]
+    },
+    {
+      "id": "chococat",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        512,
+        513
+      ]
+    },
+    {
+      "id": "keroppi-frosch",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        455,
+        516
+      ]
+    },
+    {
+      "id": "pompompurin",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        774,
+        795
+      ]
+    },
+    {
+      "id": "hangyodon",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        899,
+        1067
+      ]
+    },
+    {
+      "id": "my-melody",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        368,
+        497
+      ]
+    },
+    {
+      "id": "little-twin-stars-kiki-lala",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        913,
+        893
+      ]
+    },
+    {
+      "id": "gudetama-faules-ei",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        770,
+        1200
+      ]
+    },
+    {
+      "id": "pochacco",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        455,
+        559
+      ]
+    },
+    {
+      "id": "cinnamoroll",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1190,
+        565
+      ]
+    },
+    {
+      "id": "hello-kitty-schleife-allein",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1024,
+        874
+      ]
+    },
+    {
+      "id": "stitch-kopf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        500,
+        512
+      ]
+    },
+    {
+      "id": "angel-rosa-gegenstueck",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1070,
+        1190
+      ]
+    },
+    {
+      "id": "squishmallow-cam-katze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        925,
+        1200
+      ]
+    },
+    {
+      "id": "squishmallow-archie-axolotl",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        550,
+        485
+      ]
+    },
+    {
+      "id": "squishmallow-winston-eule-beliebige",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        460,
+        527
+      ]
+    },
+    {
+      "id": "capybara-trendtier",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        348,
+        261
+      ]
+    },
+    {
+      "id": "axolotl-allgemein",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        617,
+        610
+      ]
+    },
+    {
+      "id": "melting-smiley",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        483,
+        410
+      ]
+    },
+    {
+      "id": "flammenherz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        298,
+        466
+      ]
+    },
+    {
+      "id": "boba-tee-bubble-tea",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        324,
+        466
+      ]
+    },
+    {
+      "id": "mochis-dango-spiess",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        491,
+        491
+      ]
+    },
+    {
+      "id": "regenbogenherz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        497,
+        397
+      ]
+    },
+    {
+      "id": "frosch-mit-pilzhut-cottagecore",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        682,
+        709
+      ]
+    },
+    {
+      "id": "erdbeerkuh-strawberry-cow",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        448,
+        347
+      ]
+    },
+    {
+      "id": "labubu-trend-2025-26",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        335,
+        419
+      ]
+    },
+    {
+      "id": "pusheen-katze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        893,
+        1013
+      ]
+    },
+    {
+      "id": "tamagotchi-ei-form",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1094,
+        1079
+      ]
+    },
+    {
+      "id": "batman-logo",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        960,
+        545
+      ]
+    },
+    {
+      "id": "superman-s",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        912,
+        684
+      ]
+    },
+    {
+      "id": "captain-america-schild",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        922,
+        922
+      ]
+    },
+    {
+      "id": "flash-blitz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        795,
+        1192
+      ]
+    },
+    {
+      "id": "wonder-woman-logo",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        956,
+        443
+      ]
+    },
+    {
+      "id": "spider-man-maske",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        747,
+        1077
+      ]
+    },
+    {
+      "id": "miles-morales-maske",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1037,
+        1042
+      ]
+    },
+    {
+      "id": "spider-gwen-maske",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        743,
+        1073
+      ]
+    },
+    {
+      "id": "iron-man-maske",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        804,
+        1078
+      ]
+    },
+    {
+      "id": "deadpool-maske-bei-aelteren",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        833,
+        1200
+      ]
+    },
+    {
+      "id": "baby-groot",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        643,
+        1033
+      ]
+    },
+    {
+      "id": "hulk-faust",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1001,
+        941
+      ]
+    },
+    {
+      "id": "thor-hammer-mjoelnir",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        804,
+        961
+      ]
+    },
+    {
+      "id": "rebellen-symbol",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        930,
+        949
+      ]
+    },
+    {
+      "id": "imperium-symbol",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        972,
+        972
+      ]
+    },
+    {
+      "id": "lichtschwert",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        986,
+        975
+      ]
+    },
+    {
+      "id": "stormtrooper-helm",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        804,
+        802
+      ]
+    },
+    {
+      "id": "darth-vader-helm",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        804,
+        758
+      ]
+    },
+    {
+      "id": "bb-8",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        644,
+        1010
+      ]
+    },
+    {
+      "id": "yoda-klassisch",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        803,
+        671
+      ]
+    },
+    {
+      "id": "chewbacca",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        896,
+        1192
+      ]
+    },
+    {
+      "id": "todesstern",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        712,
+        713
+      ]
+    },
+    {
+      "id": "grogu-baby-yoda",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1200,
+        840
+      ]
+    },
+    {
+      "id": "r2-d2",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        585,
+        923
+      ]
+    },
+    {
+      "id": "mickey-silhouette-3-kreise",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        960,
+        791
+      ]
+    },
+    {
+      "id": "nemo-clownfisch",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        734,
+        695
+      ]
+    },
+    {
+      "id": "dorie",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        627,
+        828
+      ]
+    },
+    {
+      "id": "olaf-frozen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        334,
+        969
+      ]
+    },
+    {
+      "id": "elsa",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        634,
+        859
+      ]
+    },
+    {
+      "id": "anna",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        357,
+        692
+      ]
+    },
+    {
+      "id": "simba-koenig-der-loewen-kopf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        538,
+        408
+      ]
+    },
+    {
+      "id": "lightning-mcqueen-cars-seitenansicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        631,
+        286
+      ]
+    },
+    {
+      "id": "toy-story-alien-3-augen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        388,
+        340
+      ]
+    },
+    {
+      "id": "buzz-lightyear-kopf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        660,
+        599
+      ]
+    },
+    {
+      "id": "vaiana-blume-hibiskus",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        465,
+        622
+      ]
+    },
+    {
+      "id": "winnie-puuh-kopf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        441,
+        650
+      ]
+    },
+    {
+      "id": "minnie-silhouette-mit-schleife",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1194,
+        1128
+      ]
+    },
+    {
+      "id": "encanto-kerze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        468,
+        665
+      ]
+    },
+    {
+      "id": "encanto-schmetterling",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        600,
+        592
+      ]
+    },
+    {
+      "id": "toy-story-woodys-sheriffstern",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        672,
+        761
+      ]
+    },
+    {
+      "id": "blitz-narbe-allein",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        471,
+        1200
+      ]
+    },
+    {
+      "id": "hogwarts-wappen-vereinfacht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        648,
+        657
+      ]
+    },
+    {
+      "id": "drache-ohnezahn-silhouette",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        639,
+        498
+      ]
+    },
+    {
+      "id": "harry-potter-brille-mit-blitz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        980,
+        565
+      ]
+    },
+    {
+      "id": "goldener-schnatz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1190,
+        416
+      ]
+    },
+    {
+      "id": "shrek-kopf-mit-ohren",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        666,
+        386
+      ]
+    },
+    {
+      "id": "hedwig-eule",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        402,
+        423
+      ]
+    },
+    {
+      "id": "sprechender-hut",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1190,
+        1049
+      ]
+    },
+    {
+      "id": "po-kung-fu-panda",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        575,
+        592
+      ]
+    },
+    {
+      "id": "marienkaefer-muster",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        392,
+        443
+      ]
+    },
+    {
+      "id": "smiley",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        412,
+        412
+      ]
+    },
+    {
+      "id": "schweizer-flagge",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        760,
+        760
+      ]
+    },
+    {
+      "id": "fussball",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        514,
+        514
+      ]
+    },
+    {
+      "id": "donut",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        733,
+        735
+      ]
+    },
+    {
+      "id": "wassermelone-schnitz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        430,
+        430
+      ]
+    },
+    {
+      "id": "biene",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        804,
+        1042
+      ]
+    },
+    {
+      "id": "panda-kopf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        803,
+        579
+      ]
+    },
+    {
+      "id": "edelweiss",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        804,
+        704
+      ]
+    },
+    {
+      "id": "fig-herz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        600,
+        557
+      ]
+    },
+    {
+      "id": "fig-stern",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1200,
+        1141
+      ]
+    },
+    {
+      "id": "fig-blume",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        552,
+        600
+      ]
+    },
+    {
+      "id": "fig-regenbogen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        560,
+        432
+      ]
+    },
+    {
+      "id": "fig-schmetterling",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1190,
+        790
+      ]
+    },
+    {
+      "id": "fig-frosch",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1200,
+        1196
+      ]
+    },
+    {
+      "id": "katze-kopf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        960,
+        699
+      ]
+    },
+    {
+      "id": "hund-kopf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        646,
+        465
+      ]
+    },
+    {
+      "id": "einhorn-kopf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        638,
+        818
+      ]
+    },
+    {
+      "id": "fig-glace",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        765,
+        1200
+      ]
+    },
+    {
+      "id": "pizza-stueck",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1200,
+        977
+      ]
+    }
+  ],
+  "ergebnis": "bestanden"
+}

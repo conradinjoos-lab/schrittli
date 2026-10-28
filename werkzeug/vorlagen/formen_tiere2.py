@@ -138,13 +138,13 @@ def delfin():
 
 def krake():
     teile = [E(0, 30, 30, 30)]
-    for w in np.linspace(-172, -8, 6):
+    for w in np.linspace(-172, -8, 8):
         pkt = []
         for t in np.linspace(0, 1, 9):
             r = 14 + 46*t; a = np.radians(w + (w + 90)*0.4*t**2)
             pkt.append((r*np.cos(a), 6 + r*np.sin(a)))
         teile.append(rohr(pkt, 10, 7, 2))
-    k = glatt(U(*teile), 6)
+    k = glatt(U(*teile), 3)
     det = [kreislinie(-10, 32, 4), kreislinie(10, 32, 4), LineString(bogen(0, 24, 6, 210, 330, 10))]
     return k, det
 

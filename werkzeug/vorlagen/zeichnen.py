@@ -35,7 +35,9 @@ def schmalste(g, k=4):
     (erst r schrumpfen, dann r wachsen) ein Stück wegfrisst, das grösser ist als k·r² – also ein Bein, Stiel
     oder Fühler, nicht bloss eine spitze Ecke."""
     for r in np.arange(0.5, 30, 0.25):
-        weg = g.difference(g.buffer(-r, 16).buffer(r, 16))
+        # Gemeinsames Präzisionsraster verhindert GEOS-Rundungsfehler an Pixelkanten.
+        innen = g.buffer(-r, 16).buffer(r, 16).buffer(0)
+        weg = g.difference(innen, grid_size=.001)
         if max([t.area for t in getattr(weg, 'geoms', [weg])] + [0]) > k*r*r: return 2*(r - 0.25)
     return 60.0
 

@@ -1,0 +1,465 @@
+{
+  "pokeball": {
+    "hoehe": 24
+  },
+  "superball": {
+    "hoehe": 24
+  },
+  "hyperball": {
+    "hoehe": 24
+  },
+  "goldener-ring": {
+    "hoehe": 28,
+    "loecher": [
+      [
+        0.5,
+        0.5
+      ]
+    ]
+  },
+  "tetris-i": {
+    "hoehe": 8,
+    "linien": [
+      [
+        0.25,
+        0,
+        0.25,
+        1,
+        "s"
+      ],
+      [
+        0.5,
+        0,
+        0.5,
+        1,
+        "s"
+      ],
+      [
+        0.75,
+        0,
+        0.75,
+        1,
+        "s"
+      ]
+    ]
+  },
+  "tetris-o": {
+    "hoehe": 20,
+    "linien": [
+      [
+        0.5,
+        0,
+        0.5,
+        1,
+        "s"
+      ],
+      [
+        0,
+        0.5,
+        1,
+        0.5,
+        "s"
+      ]
+    ]
+  },
+  "tetris-l": {
+    "hoehe": 30,
+    "linien": [
+      [
+        0,
+        0.3333333333333333,
+        0.5,
+        0.3333333333333333,
+        "s"
+      ],
+      [
+        0,
+        0.6666666666666666,
+        0.5,
+        0.6666666666666666,
+        "s"
+      ],
+      [
+        0.5,
+        0.6666666666666666,
+        0.5,
+        1,
+        "s"
+      ]
+    ]
+  },
+  "tetris-s": {
+    "hoehe": 20,
+    "linien": [
+      [
+        0,
+        0.3333333333333333,
+        0.5,
+        0.3333333333333333,
+        "s"
+      ],
+      [
+        0.5,
+        0.3333333333333333,
+        0.5,
+        0.6666666666666666,
+        "s"
+      ],
+      [
+        0.5,
+        0.6666666666666666,
+        1,
+        0.6666666666666666,
+        "s"
+      ]
+    ]
+  },
+  "tetris-t": {
+    "hoehe": 20,
+    "linien": [
+      [
+        0.3333333333333333,
+        0,
+        0.3333333333333333,
+        0.5,
+        "s"
+      ],
+      [
+        0.6666666666666666,
+        0,
+        0.6666666666666666,
+        0.5,
+        "s"
+      ],
+      [
+        0.3333333333333333,
+        0.5,
+        0.6666666666666666,
+        0.5,
+        "s"
+      ]
+    ]
+  },
+  "schweizer-flagge": {
+    "hoehe": 24
+  },
+  "mario": {
+    "hoehe": 52
+  },
+  "luigi": {
+    "hoehe": 52
+  },
+  "glurak": {
+    "hoehe": 52
+  },
+  "lucario": {
+    "hoehe": 52
+  },
+  "mewtu": {
+    "hoehe": 52
+  },
+  "ho-oh": {
+    "hoehe": 52
+  },
+  "tails": {
+    "hoehe": 52
+  },
+  "amy-rose": {
+    "hoehe": 52
+  },
+  "knuckles": {
+    "hoehe": 52
+  },
+  "dr-eggman": {
+    "hoehe": 52
+  },
+  "shadow": {
+    "hoehe": 52
+  },
+  "prinzessin-peach": {
+    "hoehe": 52
+  },
+  "donkey-kong": {
+    "hoehe": 52
+  },
+  "korok": {
+    "hoehe": 52
+  },
+  "splatoon-inkling": {
+    "hoehe": 52
+  },
+  "cuphead-tasse": {
+    "hoehe": 52,
+    "kontur": 0.1
+  },
+  "clash-of-clans-barbar": {
+    "hoehe": 52
+  },
+  "goldener-drache-silhouette": {
+    "hoehe": 52
+  },
+  "goku": {
+    "hoehe": 52
+  },
+  "chopper-one-piece": {
+    "hoehe": 52,
+    "kontur": 0.1
+  },
+  "naruto": {
+    "hoehe": 52
+  },
+  "luffy": {
+    "hoehe": 52
+  },
+  "kakashi": {
+    "hoehe": 52
+  },
+  "thaddaeus": {
+    "hoehe": 52
+  },
+  "chase": {
+    "hoehe": 52
+  },
+  "finn": {
+    "hoehe": 48,
+    "kontur": 0.12
+  },
+  "star-butterfly-herz-wangen": {
+    "hoehe": 52
+  },
+  "gru-silhouette-mit-schal": {
+    "hoehe": 52
+  },
+  "zweifel-inside-out-2": {
+    "hoehe": 52
+  },
+  "freude-silhouette": {
+    "hoehe": 52
+  },
+  "axolotl-allgemein": {
+    "hoehe": 52
+  },
+  "baby-groot": {
+    "hoehe": 52
+  },
+  "yoda-klassisch": {
+    "hoehe": 52
+  },
+  "chewbacca": {
+    "hoehe": 52
+  },
+  "r2-d2": {
+    "hoehe": 52
+  },
+  "olaf-frozen": {
+    "hoehe": 52
+  },
+  "anna": {
+    "hoehe": 60,
+    "kontur": 0.14
+  },
+  "shrek-kopf-mit-ohren": {
+    "hoehe": 52
+  },
+  "po-kung-fu-panda": {
+    "hoehe": 52
+  },
+  "elsa": {
+    "hoehe": 64,
+    "kontur": 0.12
+  },
+  "ice-bear": {
+    "hoehe": 48,
+    "kontur": 0.12
+  },
+  "grizz": {
+    "hoehe": 48,
+    "kontur": 0.12
+  },
+  "peppa-wutz": {
+    "hoehe": 48,
+    "kontur": 0.12
+  },
+  "playmobil-figur-silhouette": {
+    "hoehe": 48,
+    "kontur": 0.12
+  },
+  "spider-man-maske": {
+    "hoehe": 48,
+    "kontur": 0.1
+  },
+  "spider-gwen-maske": {
+    "hoehe": 48,
+    "kontur": 0.1
+  },
+  "darth-vader-helm": {
+    "hoehe": 48,
+    "kontrast": [
+      15,
+      1.8
+    ],
+    "tauschen": {
+      "J": "z",
+      "z": "n"
+    }
+  },
+  "enderdrache": {
+    "hoehe": 48,
+    "kontrast": [
+      5,
+      1.5
+    ]
+  },
+  "drache-ohnezahn-silhouette": {
+    "hoehe": 48,
+    "kontrast": [
+      5,
+      1.5
+    ]
+  },
+  "goldener-schnatz": {
+    "hoehe": 24,
+    "kontur": 0.15
+  },
+  "ninjago-logo-rotes-symbol": {
+    "hoehe": 48
+  },
+  "super-pilz": {
+    "hoehe": 28
+  },
+  "1-up-pilz": {
+    "hoehe": 28
+  },
+  "muenze": {
+    "hoehe": 28
+  },
+  "stern-superstern": {
+    "hoehe": 28
+  },
+  "triforce-zelda": {
+    "hoehe": 28,
+    "loecher": [
+      [
+        0.5,
+        0.62
+      ]
+    ]
+  },
+  "rubin-zelda": {
+    "hoehe": 28
+  },
+  "herzcontainer-zelda": {
+    "hoehe": 28
+  },
+  "animal-crossing-blatt-logo": {
+    "hoehe": 28
+  },
+  "grasblock": {
+    "hoehe": 28
+  },
+  "creeper-gesicht": {
+    "hoehe": 28
+  },
+  "herz-lebensanzeige": {
+    "hoehe": 28
+  },
+  "mc-herz": {
+    "hoehe": 28
+  },
+  "erfahrungs-smaragd-block": {
+    "hoehe": 28
+  },
+  "mc-huhn": {
+    "hoehe": 28
+  },
+  "junimo": {
+    "hoehe": 28
+  },
+  "stardew-huhn": {
+    "hoehe": 28
+  },
+  "mc-stern": {
+    "hoehe": 28
+  },
+  "space-invaders-alien": {
+    "hoehe": 28
+  },
+  "roblox-logo-quadrat": {
+    "hoehe": 28,
+    "loecher": [
+      [
+        0.5,
+        0.5
+      ]
+    ]
+  },
+  "schachfigur-springer-silhouette": {
+    "hoehe": 28
+  },
+  "miraculous-ohrring-5-punkte": {
+    "hoehe": 28
+  },
+  "erinnerungskugel": {
+    "hoehe": 28
+  },
+  "mickey-silhouette-3-kreise": {
+    "hoehe": 28
+  },
+  "blitz-narbe-allein": {
+    "hoehe": 28
+  },
+  "fig-herz": {
+    "hoehe": 28
+  },
+  "fig-stern": {
+    "hoehe": 28
+  },
+  "harry-potter-brille-mit-blitz": {
+    "loecher": [
+      [
+        0.24,
+        0.64
+      ],
+      [
+        0.76,
+        0.64
+      ]
+    ]
+  },
+  "donut": {
+    "loecher": [
+      [
+        0.5,
+        0.5
+      ]
+    ]
+  },
+  "shuriken-wurfstern": {
+    "loecher": [
+      [
+        0.5,
+        0.5
+      ]
+    ]
+  },
+  "flash-blitz": {
+    "loecher": [
+      [
+        0.38,
+        0.4
+      ],
+      [
+        0.65,
+        0.65
+      ]
+    ]
+  },
+  "tamagotchi-ei-form": {
+    "loecher": [
+      [
+        0.18,
+        0.3
+      ]
+    ]
+  }
+}

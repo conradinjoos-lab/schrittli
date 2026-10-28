@@ -1,12 +1,14 @@
 """Vorlagen aus Bildern (Schrittli): aus einem PNG/WebP/JPG mit hellem oder durchsichtigem Hintergrund werden
-Umriss (Schnittlinie), Farbflächen (zum farbigen Drucken) und die Grenzen zwischen den Farben (Innenlinien
-zum Anmalen) gewonnen. Gleiches Format wie formen.js, dazu je Form eine Liste `farben` mit [{f:'#rrggbb', d:[Ringe]}].
+Umriss (Schnittlinie), die verlustfreie Originalgrafik (zum farbigen Drucken) und vereinfachte Grenzen
+zwischen den Farben (Innenlinien zum Anmalen) gewonnen. Intern enthalten `farben` die Farbringe;
+exportiert werden die Palette [{f:'#rrggbb'}] und `original` mit Dateiname und geometrischer Position.
 
 Die Motive stehen in figuren.json ({welten:[…], figuren:[{id, name, welt, datei, k?, glatt?}]}); die Bilder liegen in
 bilder/. Geschrieben wird nach vorlagen/figuren/:
   index.js        window.FIGUREN_INDEX – nur Name, Welt, Masse je Figur (klein, wird immer geladen)
   <welt>.js       FIGUREN_DAZU('<welt>', […]) – die ganzen Formen einer Welt, lädt der Generator erst bei Bedarf
   bilder/<id>.webp  Vorschaubild für die Auswahl
+  originale/<id>.webp  Verlustfreie freigestellte Farbvorlage
 k  = Anzahl Farben inkl. Schwarz (fehlt: aus dem Bild geschätzt), glatt = Rundung (0 = eckig lassen wie bei Pixelbildern).
 
 Aufruf: python -I bild.py                 – alle Figuren (parallel)
@@ -27,11 +29,12 @@ from zeichnen import schmalste, schwierigkeit
 LISTE = os.path.join(HIER, 'figuren.json')
 BILDER = os.path.join(HIER, 'bilder')
 ZIEL = os.path.normpath(os.path.join(HIER, '..', '..', 'vorlagen', 'figuren'))
-GLATT = .8
+GLATT = .12
 
 
-def laden(pfad):
+def laden(pfad, alle_teile=True):
     """Bild → RGB (float) und Maske der Figur (True = gehört dazu)."""
+    cv2.setRNGSeed(42)
     im = cv2.imread(pfad, cv2.IMREAD_UNCHANGED)
     if im is None: raise SystemExit(f'kann {pfad} nicht lesen')
     if im.ndim == 2: im = cv2.cvtColor(im, cv2.COLOR_GRAY2BGR)
@@ -54,18 +57,22 @@ def laden(pfad):
             tol = float(np.clip(4*rand[et.ravel() == i].std(0).max(), 6, 30))
         nahe = np.zeros(rgb.shape[:2], bool)
         for c in farben: nahe |= np.abs(rgb.astype(np.float32) - c).max(2) <= tol
-        nahe = cv2.morphologyEx(nahe.astype(np.uint8), cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8))
+        # Dünne Fühler und Schnurrhaare dürfen nicht als Hintergrund geschlossen werden.
+        nahe = nahe.astype(np.uint8)
         h, w = nahe.shape; ff = np.zeros((h + 2, w + 2), np.uint8)
         saum = [(0, x) for x in range(0, w, 8)] + [(h - 1, x) for x in range(0, w, 8)] + [(y, 0) for y in range(0, h, 8)] + [(y, w - 1) for y in range(0, h, 8)]
         for y, x in saum:
             if nahe[y, x] and not ff[y + 1, x + 1]: cv2.floodFill(nahe.copy(), ff, (x, y), 2)
         maske = ~(ff[1:-1, 1:-1] > 0)
-    # kleine Fitzel weg, grösstes Stück behalten (Löcher bleiben erhalten)
-    maske = cv2.morphologyEx(maske.astype(np.uint8), cv2.MORPH_OPEN, np.ones((3, 3), np.uint8)).astype(bool)
-    lab, n = ndimage.label(maske)
+    # Auch getrennte Motivteile gehören zur Vorlage, z.B. die Spitze des Dango-Spiesses.
+    # Nur einzelne Staubpixel entfernen; kein Öffnen, das dünne Striche verschluckt.
+    lab, n = ndimage.label(maske, np.ones((3, 3), np.uint8))
     if n > 1:
-        gross = np.argmax(np.bincount(lab.ravel())[1:]) + 1
-        maske = lab == gross
+        gr = np.bincount(lab.ravel()); gr[0] = 0
+        if alle_teile:
+            maske = np.isin(lab, np.flatnonzero(gr >= max(3, maske.sum()*.00001)))
+        else:
+            maske = lab == gr.argmax()
     return rgb.astype(np.float32), maske
 
 
@@ -110,7 +117,9 @@ def ring_koord(r, tol, rund=True):
 
 def ringe(g, tol, rund=True):
     """Polygon → Ringe [[x,y],…] (aussen, dann Löcher), vereinfacht und gerundet."""
-    if g.is_empty or g.geom_type != 'Polygon': return []
+    if g.is_empty: return []
+    if g.geom_type == 'MultiPolygon': return [r for p in g.geoms for r in ringe(p, tol, rund)]
+    if g.geom_type != 'Polygon': return []
     if g.interiors: g = orient(g)
     return [ring_koord(r, tol, rund) for r in [g.exterior, *g.interiors]]
 
@@ -123,19 +132,16 @@ def quantisieren(rgb, maske, k, glatt):
     etik_linien – gleiche Etiketten, aber dünne schwarze Linien der Nachbarfarbe zugeschlagen: daraus werden die
                   Innenlinien (det) gerechnet, die dann in der Mitte der Linie liegen statt doppelt an ihren Rändern."""
     bild = rgb.astype(np.uint8)
-    if glatt: bild = cv2.bilateralFilter(bild, 9, 60, 9)
-    else: bild = cv2.medianBlur(bild, 3)
+    if glatt: bild = cv2.bilateralFilter(bild, 5, 25, 3)
     lab = cv2.cvtColor(bild, cv2.COLOR_RGB2LAB).astype(np.float32)
     flaeche = maske.sum()
     # Schwarz: dunkel und farblos (L < 35 von 100, wenig Buntheit) – Umrisslinien, Augen, Schnauz
     chroma = np.hypot(lab[..., 1] - 128, lab[..., 2] - 128)
-    schwarz = maske & (lab[..., 0] < 90) & (chroma < 30)
-    schwarz = cv2.morphologyEx(schwarz.astype(np.uint8), cv2.MORPH_OPEN, np.ones((3, 3), np.uint8)).astype(bool)
+    schwarz = maske & (lab[..., 0] < 35) & (chroma < 15)
     lab_s, ns = ndimage.label(schwarz)
     if ns:
         gr = np.bincount(lab_s.ravel()); gr[0] = 0
-        schwarz = np.isin(lab_s, np.nonzero(gr >= flaeche*.0003)[0])
-    if schwarz.sum() < flaeche*.004: schwarz[:] = False                # zu wenig Schwarz: keine Linien-Ebene
+        schwarz = np.isin(lab_s, np.nonzero(gr >= 2)[0])
     hat_schwarz = bool(schwarz.any())
     if hat_schwarz and (maske & ~schwarz).sum() < flaeche*.01:     # ganz schwarze Silhouette: eine Farbe, keine Linien
         schwarz[:] = False; hat_schwarz = False; k = 1
@@ -151,16 +157,14 @@ def quantisieren(rgb, maske, k, glatt):
         si = kk; etik[schwarz] = si
         palette.append(np.clip(rgb[schwarz].mean(0), 0, 40).astype(np.uint8))   # fast schwarz, Mittel der Linienpixel
     palette = np.array(palette)
-    # Fitzel weg: jede Farbe öffnen, kleine Stücke löschen, Löcher mit der nächsten Farbe füllen (Schwarz bleibt unangetastet)
-    r = max(1, int(round(np.sqrt(flaeche)/200)))
-    kern = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2*r + 1, 2*r + 1))
+    # Augen, Sommersprossen und Farbakzente erhalten; nur einzelne Pixel bereinigen.
     gueltig = np.zeros_like(maske)
     for i in range(kk):
-        m = cv2.morphologyEx((etik == i).astype(np.uint8), cv2.MORPH_OPEN, kern).astype(bool)
+        m = etik == i
         lab_i, n = ndimage.label(m)
         if n:
             gr = np.bincount(lab_i.ravel()); gr[0] = 0
-            m = np.isin(lab_i, np.nonzero(gr >= flaeche*.0007)[0])
+            m = np.isin(lab_i, np.nonzero(gr >= 2)[0])
         gueltig |= m; etik[(etik == i) & ~m] = -2
     # −2 (weggeputzt) bekommt die nächste gültige Farbe (nie Schwarz, sonst würden die Linien dicker)
     _, idx = ndimage.distance_transform_edt(~gueltig, return_indices=True)
@@ -206,19 +210,20 @@ def farbzahl(rgb, maske):
 
 def form(fid, name, gruppe, pfad, k=None, glatt=GLATT):
     rgb, maske = laden(pfad)
-    if not k: k = farbzahl(rgb, maske)
+    # Diese Farbflächen dienen dem Ausmalmodus. Farbdruck verwendet die Originalgrafik.
+    if not k: k = max(12, farbzahl(rgb, maske)*2)
     ys, xs = np.nonzero(maske)
     x0, y0, x1, y1 = xs.min(), ys.min(), xs.max() + 1, ys.max() + 1
     skala = 100/max(x1 - x0, y1 - y0)                                   # Bildpunkte → 100er-Einheiten
-    tol = .25 if not glatt else .18
+    tol = .04 if not glatt else .08
 
     # Umriss
     umr = polygone(maske, skala, (x0, y0))
-    g = max(umr, key=lambda p: p.area)
-    if glatt: g = g.buffer(glatt, 16).buffer(-2*glatt, 16).buffer(glatt, 16)   # Pixeltreppen weg, Ecken rund
+    g = unary_union(umr)
+    # Sanft schliessen statt Öffnen: schmale Motivteile nicht abschneiden.
+    if glatt: g = g.buffer(glatt, 8).buffer(-glatt, 8)
     g = g.simplify(tol, preserve_topology=True).buffer(0)             # buffer(0): doppelte Punkte raus
-    if g.geom_type != 'Polygon': g = max(g.geoms, key=lambda p: p.area)
-    d = ringe(g, 0, bool(glatt))
+    d = ringe(g, 0, False)
     bx0, by0, bx1, by1 = g.bounds
 
     # Farbflächen, grosse zuerst (kleine liegen beim Zeichnen oben), Schwarz (Umrisslinien) zuoberst
@@ -235,13 +240,13 @@ def form(fid, name, gruppe, pfad, k=None, glatt=GLATT):
             weich = [p.buffer(glatt*.3, 8).buffer(-glatt*.3, 8) for p in teile]
             teile = [t for q in weich for t in getattr(q, 'geoms', [q]) if not t.is_empty]
         teile = [p.buffer(0).intersection(g) for p in teile if not p.is_empty]
-        return [t for p in teile for t in getattr(p, 'geoms', [p]) if t.geom_type == 'Polygon' and t.area > (.05 if linien else .2)]
+        return [t for p in teile for t in getattr(p, 'geoms', [p]) if t.geom_type == 'Polygon' and t.area > .015]
 
     farben, grenzen = [], []
     for i in reihenfolge:
         if not (etik == i).any(): continue
         teile = flaechen(etik, i, i == si)
-        rr = [r for t in teile for r in ringe(t, tol*.5 if i == si else tol, bool(glatt))]
+        rr = [r for t in teile for r in ringe(t, tol*.5 if i == si else tol, False)]
         if rr: farben.append(dict(f=hexf(palette[i]), d=rr))
     # Grenzen für die Innenlinien aus dem Bild ohne dünne Linien (sonst lägen sie doppelt an beiden Linienrändern)
     for i in range(len(palette)):
@@ -271,7 +276,11 @@ def form(fid, name, gruppe, pfad, k=None, glatt=GLATT):
     w, h = round(bx1 - bx0, 2), round(by1 - by0, 2)
     gm = affinity.scale(g, 1, -1, origin=(0, 0))                          # schmalste/schwierigkeit rechnen in 100er-Einheiten
     eng = schmalste(gm)
-    return dict(id=fid, name=name, gruppe=gruppe, w=w, h=h, d=d, det=det, eng=round(eng, 1), schwer=schwierigkeit(gm, eng), farben=farben)
+    teile = list(getattr(gm, 'geoms', [gm]))
+    return dict(id=fid, name=name, gruppe=gruppe, w=w, h=h, d=d, det=det, eng=round(eng, 1),
+                schwer=max(schwierigkeit(t, eng) for t in teile), farben=farben, revision=2, teile=len(teile),
+                original=dict(datei=fid+'.webp', x=round(-bx0, 4), y=round(-by0, 4),
+                              w=round((x1-x0)*skala, 4), h=round((y1-y0)*skala, 4)))
 
 
 def vorschau(f, ziel, px=112):
@@ -299,8 +308,17 @@ def slug(t):
 def rechnen(e):
     """Eine Figur aus der Liste rechnen (läuft in einem eigenen Prozess). Fehler brechen nicht alles ab."""
     try:
+        cv2.setRNGSeed(42)
         f = form(e['id'], e['name'], e['welt'], os.path.join(BILDER, e['datei']), e.get('k'), e.get('glatt', GLATT))
-        vorschau(f, os.path.join(ZIEL, 'bilder', e['id'] + '.webp'))
+        from PIL import Image
+        rgb, maske = laden(os.path.join(BILDER, e['datei']))
+        ys, xs = np.nonzero(maske)
+        rgba = np.dstack([rgb.astype(np.uint8), maske.astype(np.uint8)*255])
+        im = Image.fromarray(rgba).crop((xs.min(), ys.min(), xs.max()+1, ys.max()+1))
+        im.save(os.path.join(ZIEL, 'originale', e['id']+'.webp'), 'WEBP', lossless=True, method=6)
+        im.thumbnail((100, 100), Image.Resampling.LANCZOS)
+        thumb = Image.new('RGBA', (112, 112)); thumb.alpha_composite(im, ((112-im.width)//2, (112-im.height)//2))
+        thumb.save(os.path.join(ZIEL, 'bilder', e['id']+'.webp'), 'WEBP', quality=95, method=6)
         return e['id'], f, None
     except Exception as x:
         return e['id'], None, f'{type(x).__name__}: {x}'
@@ -315,9 +333,12 @@ def runden1(o):
 
 
 def schreiben(welt, formen):
+    # Im Browser kommt die Farbe aus der Originalgrafik. Nur die Palette für die
+    # Mal-Legende übertragen, nicht zusätzlich ungenutzte Millionen Farbpunkte.
+    ausgabe = [dict(f, farben=[dict(f=c['f']) for c in f['farben']]) if f.get('original') else f for f in formen]
     with open(os.path.join(ZIEL, slug(welt) + '.js'), 'w', encoding='utf-8') as d:
         d.write('// erzeugt von werkzeug/vorlagen/bild.py – nicht von Hand ändern\nFIGUREN_DAZU(' + json.dumps(welt, ensure_ascii=False) + ',')
-        json.dump([runden1(f) for f in formen], d, ensure_ascii=False, separators=(',', ':')); d.write(');\n')
+        json.dump([runden1(f) for f in ausgabe], d, ensure_ascii=False, separators=(',', ':')); d.write(');\n')
 
 
 def lesen(welt):
@@ -336,12 +357,16 @@ def export(nur=None):
     if nur: figuren_rechnen = [e for e in figuren if e['id'] in nur]
     else: figuren_rechnen = figuren
     os.makedirs(os.path.join(ZIEL, 'bilder'), exist_ok=True)
+    os.makedirs(os.path.join(ZIEL, 'originale'), exist_ok=True)
+    unbekannt = (nur or set()) - {e['id'] for e in figuren}
+    if unbekannt: raise ValueError('Unbekannte Figuren: '+', '.join(sorted(unbekannt)))
     fertig, fehler = {}, []
     with Pool(max(1, min(len(figuren_rechnen), (os.cpu_count() or 2) - 2, 8)), initializer=cv2.setNumThreads, initargs=(1,)) as pool:
         for i, (fid, f, err) in enumerate(pool.imap_unordered(rechnen, figuren_rechnen), 1):
             if err: fehler.append((fid, err)); print(f'  FEHLER {fid}: {err}', flush=True)
             else: fertig[fid] = f
             if i % 20 == 0: print(f'  {i}/{len(figuren_rechnen)}', flush=True)
+    if fehler: raise RuntimeError('Keine Vorlagen geschrieben: '+repr(fehler))
     index = []
     for welt in liste['welten']:
         alt = lesen(welt) if nur else {}
