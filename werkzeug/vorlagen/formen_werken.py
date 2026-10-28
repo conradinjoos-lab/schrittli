@@ -31,7 +31,7 @@ def saeckchen():
 
 FORMEN = [
     ('ring', 'Ring', 'Grundformen', ring()),
-    ('kreisel', 'Kreiselscheibe', 'Dinge', kreisel()),
-    ('saeckchen', 'Dreieck-Säckchen', 'Dinge', saeckchen()),
+    ('kreisel', 'Kreiselscheibe', 'Werkhilfen', kreisel(), 8),
+    ('saeckchen', 'Dreieck-Säckchen', 'Nähen', saeckchen(), 20),
     ('motte', 'Mottenflügel', 'Tiere', mottenfluegel()),
 ]

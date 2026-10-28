@@ -6,7 +6,7 @@ Stand 28. Oktober 2026. Analyse der Schablonen und Vorlagen in «Schritt für Sc
 
 | Bereich | Umfang | Wo | Quelle / Pipeline |
 |---|---|---|---|
-| Schablonen-Generator | 138 Formen in 6 Gruppen (Grundformen 20, Natur 19, Essen 11, Dinge 30, Feste 17, Tiere 41) | `vorlagen/` | `werkzeug/vorlagen/formen*.py` → `vorlagen/formen.js` |
+| Schablonen-Generator | 239 Formen in 8 Gruppen (Grundformen 20, Natur 19, Essen 11, Dinge 19, Feste 17, Tiere 40, Werkhilfen 88, Nähen 25); 114 Formen bringen eine empfohlene Grösse mit (`cm`) | `vorlagen/` | `werkzeug/vorlagen/formen*.py` → `vorlagen/formen.js` |
 | Figuren aus Bildern | 302 Figuren in 14 Welten (Games 43, Pokémon & Sonic 32, Mario 32, Sanrio 30, Minecraft 26, Cartoons 26, Zeitlos 20, Anime 16, Disney 16, Ninjago 15, Minions 13, Superhelden 13, Star Wars 11, Harry Potter 9) | `vorlagen/figuren/` | `werkzeug/vorlagen/bild.py`, 302 PNG in `werkzeug/vorlagen/bilder/` |
 | Perlentiere | 302 Figuren, alle Stufe «schwer», Breite 30–60 Perlen | `vorlagen/perlen/` | `perlen.cjs`, Editor im Browser |
 | Perlentier aus Bild | eigenes Bild → Rocailles-Plan mit Drahtweg | `vorlagen/perlentier-bild/` | nur lokal |
@@ -90,7 +90,7 @@ Mit Nahtzugabe und Einstichpunkten direkt aus dem Generator. Grosse Teile brauch
 
 | Welle | Inhalt | Aufwand |
 |---|---|---|
-| 1 | A3-Druck (erledigt); rund 60 Werkhilfen und Netze aus 3a in `formen*.py`; Schnittmuster 3b für die Klassenprojekte 2026/27 | Tage |
+| 1 | Erledigt am 28. Oktober 2026: A3-Druck; 101 Werkhilfen, Raster, Netze und Spielbretter aus 3a (`formen_scheiben.py`, `formen_raster.py`, `formen_spiele.py`, `formen_netze.py`, dazu die bisherigen Web- und Werkhilfen in der neuen Gruppe «Werkhilfen»); 25 Schnittmuster aus 3b in der Gruppe «Nähen» (`formen_naehen.py`). Noch offen aus 3a: nummerierte Punkte, Kordelscheibe, Makramee-Grund, Stickrahmen-Kreise, Papierhut, Stempel- und Ton-Schablonen, Prägesterne, Biegevorlagen, Sonnenuhr, Benham-Scheibe | erledigt |
 | 2 | Buchstaben und Zahlen; nummerierte Punkte; Saisonmotive Herbst und Advent (3c) | 1–2 Wochen |
 | 3 | Pixel-Editor; Netz-Generator; Poster-Modus; restliche Motivthemen | länger |
 

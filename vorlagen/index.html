@@ -331,6 +331,7 @@ const q=new URLSearchParams(location.search);
 if(q.has('form')&&byId[q.get('form')]){
   S.id=q.get('form');S.lock=!(q.has('b')&&q.has('h'));S.n=1;S.papier='a4';S.linie='schnitt';S.spiegel=false;S.punkte=false;S.strich=true;
   if(PARAM[S.id])S.param=PARAM[S.id].def;
+  const f=byId[S.id];if(f.cm&&!q.has('b')&&!q.has('h')){S.b=f.cm*f.w/100;S.h=f.cm*f.h/100}   // empfohlene Grösse der Form
 }
 const zahl=(v,d)=>{const x=parseFloat(String(v).replace(',','.'));return isFinite(x)&&x>0?x:d};
 if(q.has('b'))S.b=zahl(q.get('b'),S.b);
@@ -391,7 +392,8 @@ const pfad=(r,zu)=>'M'+r.map(([x,y])=>x.toFixed(2)+' '+y.toFixed(2)).join('L')+(
 // Formen-Auswahl
 const einfach=s=>s.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').normalize('NFD').replace(/[̀-ͯ]/g,'');
 const BEISPIELE={Grundformen:['herz','stern','kreis','dreieck'],Natur:['blume','baum','sonne','pilz'],Essen:['apfel','erdbeere','banane','glace'],
-  Dinge:['haus','rakete','auto','segelboot'],Feste:['kerze','geschenk','osterhase','kuerbis'],Tiere:['fisch','katze','elefant','schmetterling']};
+  Dinge:['haus','rakete','auto','segelboot'],Feste:['kerze','geschenk','osterhase','kuerbis'],Tiere:['fisch','katze','elefant','schmetterling'],
+  Werkhilfen:['knuepfscheibe','wuerfelnetz','igelrahmen','muehle'],Nähen:['handpuppe','fingerpuppe-hase','turnsack','filzblume-5']};
 function bild(f){
   if(f.figur)return `<img src="figuren/bilder/${f.id}.webp?v=2" alt="" loading="lazy" decoding="async" width="52" height="52">`;
   const p=PARAM[f.id]?paramForm(f.id,PARAM[f.id].def):f,pad=6;
@@ -440,7 +442,7 @@ function auswahl(){
     k.classList.add('laedt');
     bereit([k.dataset.id]).then(()=>{
       S.id=k.dataset.id;if(PARAM[S.id])S.param=PARAM[S.id].def;
-      const f=form(),l=Math.max(S.b,S.h);           // längste Seite bleibt, Verhältnis der neuen Form
+      const f=form(),l=f.cm||Math.max(S.b,S.h);     // empfohlene Grösse der Form, sonst längste Seite bleibt
       S.lock=true;S.b=l*f.w/100;S.h=l*f.h/100;
       felder();zeichnen();
       if(matchMedia('(max-width:860px)').matches)document.querySelector('.seite-rechts').scrollIntoView({behavior:'smooth',block:'start'});

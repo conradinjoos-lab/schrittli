@@ -193,7 +193,7 @@ FORMEN = [
 ]
 
 # weitere Formen aus formen_<bereich>.py (je eine Liste FORMEN wie oben)
-GRUPPEN = ['Grundformen', 'Natur', 'Essen', 'Dinge', 'Feste', 'Tiere']
+GRUPPEN = ['Grundformen', 'Natur', 'Essen', 'Dinge', 'Feste', 'Tiere', 'Werkhilfen', 'Nähen']
 for _m in [] if os.environ.get('NUR_BASIS') else sorted(glob.glob(os.path.join(HIER, 'formen_*.py'))):
     FORMEN += importlib.import_module(os.path.basename(_m)[:-3]).FORMEN
 FORMEN.sort(key=lambda f: GRUPPEN.index(f[2]) if f[2] in GRUPPEN else len(GRUPPEN))
@@ -208,7 +208,7 @@ def linien(g):
 
 def export():
     out = []
-    for fid, name, gruppe, f in FORMEN:
+    for fid, name, gruppe, f, *rest in FORMEN:                                 # rest: empfohlene Grösse in cm (längste Seite)
         g, det = (f if isinstance(f, tuple) else (f, []))
         if g.geom_type == 'MultiPolygon': g = max(g.geoms, key=lambda t: t.area)
         g = g.simplify(0.12)
@@ -221,7 +221,7 @@ def export():
         dl = [tr(l) for t in det for l in linien(t.simplify(0.12)) if len(l) > 1]
         eng = schmalste(affinity.scale(g, s, s))
         out.append(dict(id=fid, name=name, gruppe=gruppe, w=round((x1-x0)*s, 2), h=round((y1-y0)*s, 2), d=d, det=dl,
-                        eng=round(eng, 1), schwer=schwierigkeit(g, eng)))
+                        eng=round(eng, 1), schwer=schwierigkeit(g, eng), **({'cm': rest[0]} if rest else {})))
     with open(ZIEL, 'w', encoding='utf-8') as f:
         f.write('// erzeugt von werkzeug/vorlagen/formen.py – nicht von Hand ändern\nwindow.FORMEN=')
         json.dump(out, f, ensure_ascii=False, separators=(',', ':')); f.write(';\n')

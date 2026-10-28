@@ -116,15 +116,15 @@ def lamarahmen():
 
 
 FORMEN = [
-    ('knuepfscheibe', 'Knüpfscheibe', 'Dinge', knuepfscheibe()),
-    ('webscheibe', 'Rundwebscheibe', 'Dinge', webscheibe()),
-    ('webblume', 'Webblume', 'Dinge', webblume()),
-    ('traumfaenger', 'Traumfänger-Ring', 'Dinge', traumfaenger()),
-    ('fallschirm', 'Fallschirm-Viertel', 'Dinge', fallschirm()),
-    ('webrahmen', 'Webrahmen', 'Dinge', webrahmen()),
-    ('perlenwebrahmen', 'Perlen-Webrahmen', 'Dinge', perlenwebrahmen()),
-    ('webquadrat', 'Webquadrat', 'Dinge', webquadrat()),
-    ('perlenraster', 'Perlen-Raster', 'Dinge', perlenraster()),
-    ('nagelbrett', 'Nagelbrett', 'Dinge', nagelbrett()),
-    ('lamarahmen', 'Lama-Webrahmen', 'Tiere', lamarahmen()),
+    ('knuepfscheibe', 'Knüpfscheibe', 'Werkhilfen', knuepfscheibe(), 10),
+    ('webscheibe', 'Rundwebscheibe', 'Werkhilfen', webscheibe(), 12),
+    ('webblume', 'Webblume', 'Werkhilfen', webblume(), 12),
+    ('traumfaenger', 'Traumfänger-Ring', 'Werkhilfen', traumfaenger(), 20),
+    ('fallschirm', 'Fallschirm-Viertel', 'Werkhilfen', fallschirm(), 19),
+    ('webrahmen', 'Webrahmen', 'Werkhilfen', webrahmen(), 16),
+    ('perlenwebrahmen', 'Perlen-Webrahmen', 'Werkhilfen', perlenwebrahmen(), 24),
+    ('webquadrat', 'Webquadrat', 'Werkhilfen', webquadrat(), 10),
+    ('perlenraster', 'Perlen-Raster', 'Werkhilfen', perlenraster(), 18),
+    ('nagelbrett', 'Nagelbrett', 'Werkhilfen', nagelbrett(), 15),
+    ('lamarahmen', 'Lama-Webrahmen', 'Werkhilfen', lamarahmen(), 16),
 ]
