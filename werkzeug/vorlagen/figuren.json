@@ -41,7 +41,8 @@
   "Zirkus",
   "Frühling & Garten",
   "Musik",
-  "Schule"
+  "Schule",
+  "Sport"
  ],
  "figuren": [
   {
@@ -5643,6 +5644,150 @@
    "name": "Schere",
    "welt": "Schule",
    "datei": "schule-schere.png"
+  },
+  {
+   "id": "sport-fussballer",
+   "name": "Fussballer",
+   "welt": "Sport",
+   "datei": "sport-fussballer.png"
+  },
+  {
+   "id": "sport-fussball",
+   "name": "Fussball",
+   "welt": "Sport",
+   "datei": "sport-fussball.png"
+  },
+  {
+   "id": "sport-junge-fussball",
+   "name": "Junge mit Fussball",
+   "welt": "Sport",
+   "datei": "sport-junge-fussball.png"
+  },
+  {
+   "id": "sport-fussball-schuss",
+   "name": "Fussball-Schuss",
+   "welt": "Sport",
+   "datei": "sport-fussball-schuss.png"
+  },
+  {
+   "id": "sport-fussball-maedchen",
+   "name": "Fussballerin",
+   "welt": "Sport",
+   "datei": "sport-fussball-maedchen.png"
+  },
+  {
+   "id": "sport-jojo",
+   "name": "Junge mit Jo-Jo",
+   "welt": "Sport",
+   "datei": "sport-jojo.png"
+  },
+  {
+   "id": "sport-basketball-korb",
+   "name": "Basketball-Wurf",
+   "welt": "Sport",
+   "datei": "sport-basketball-korb.png"
+  },
+  {
+   "id": "sport-wolf-basketball",
+   "name": "Wolf mit Basketball",
+   "welt": "Sport",
+   "datei": "sport-wolf-basketball.png"
+  },
+  {
+   "id": "sport-panda-tennis",
+   "name": "Panda mit Tennisschläger",
+   "welt": "Sport",
+   "datei": "sport-panda-tennis.png"
+  },
+  {
+   "id": "sport-tennis",
+   "name": "Tennisspieler",
+   "welt": "Sport",
+   "datei": "sport-tennis.png"
+  },
+  {
+   "id": "sport-tischtennis",
+   "name": "Tischtennisschläger",
+   "welt": "Sport",
+   "datei": "sport-tischtennis.png"
+  },
+  {
+   "id": "sport-nilpferd-schnorchel",
+   "name": "Nilpferd mit Schnorchel",
+   "welt": "Sport",
+   "datei": "sport-nilpferd-schnorchel.png"
+  },
+  {
+   "id": "sport-lama-bademeister",
+   "name": "Lama als Bademeister",
+   "welt": "Sport",
+   "datei": "sport-lama-bademeister.png"
+  },
+  {
+   "id": "sport-schwein-velo",
+   "name": "Schwein auf dem Velo",
+   "welt": "Sport",
+   "datei": "sport-schwein-velo.png"
+  },
+  {
+   "id": "sport-skate-maedchen",
+   "name": "Skateboard-Mädchen",
+   "welt": "Sport",
+   "datei": "sport-skate-maedchen.png"
+  },
+  {
+   "id": "sport-frosch-skate",
+   "name": "Frosch auf dem Skateboard",
+   "welt": "Sport",
+   "datei": "sport-frosch-skate.png"
+  },
+  {
+   "id": "sport-ratte-skate",
+   "name": "Ratte auf dem Skateboard",
+   "welt": "Sport",
+   "datei": "sport-ratte-skate.png"
+  },
+  {
+   "id": "sport-katze-skate",
+   "name": "Katze auf dem Skateboard",
+   "welt": "Sport",
+   "datei": "sport-katze-skate.png"
+  },
+  {
+   "id": "sport-skater",
+   "name": "Skater",
+   "welt": "Sport",
+   "datei": "sport-skater.png"
+  },
+  {
+   "id": "sport-skater-kind",
+   "name": "Skater mit Helm",
+   "welt": "Sport",
+   "datei": "sport-skater-kind.png"
+  },
+  {
+   "id": "sport-pokal",
+   "name": "Pokal",
+   "welt": "Sport",
+   "datei": "sport-pokal.png"
+  },
+  {
+   "id": "sport-football",
+   "name": "Football",
+   "welt": "Sport",
+   "datei": "sport-football.png"
+  },
+  {
+   "id": "sport-baseball-blau",
+   "name": "Baseball-Kind",
+   "welt": "Sport",
+   "datei": "sport-baseball-blau.png"
+  },
+  {
+   "id": "sport-baseball-kappe",
+   "name": "Baseball-Kind mit Kappe",
+   "welt": "Sport",
+   "datei": "sport-baseball-kappe.png"
   }
  ]
 }

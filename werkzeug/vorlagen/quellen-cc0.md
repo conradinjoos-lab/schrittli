@@ -368,3 +368,27 @@ Alle Bilder stammen von Openclipart und stehen unter CC0 1.0 (Public Domain Dedi
 | Bleistift-Männchen | schule-bleistift-figur | Schule | Happy pencil | https://openclipart.org/detail/101707 | CC0 1.0 (Openclipart) | jonata |
 | Heft mit Radiergummi | schule-heft | Schule | Architetto -- Blocco notes | https://openclipart.org/detail/25187 | CC0 1.0 (Openclipart) | francesco_rollandin |
 | Schere | schule-schere | Schule | Scissors | https://openclipart.org/detail/48553 | CC0 1.0 (Openclipart) | gmad |
+| Fussballer | sport-fussballer | Sport | African Boy Playing Soccer | https://openclipart.org/detail/314353 | CC0 1.0 (Openclipart) | j4p4n |
+| Fussball | sport-fussball | Sport | Glossy Football Soccer Ball remix | https://openclipart.org/detail/288976 | CC0 1.0 (Openclipart) | monsterbraingames |
+| Junge mit Fussball | sport-junge-fussball | Sport | Soccer toon 2 | https://openclipart.org/detail/5639 | CC0 1.0 (Openclipart) | kobo |
+| Fussball-Schuss | sport-fussball-schuss | Sport | sport 5 | https://openclipart.org/detail/171998 | CC0 1.0 (Openclipart) | andinuryadin |
+| Fussballerin | sport-fussball-maedchen | Sport | girl playing soccer | https://openclipart.org/detail/723 | CC0 1.0 (Openclipart) | johnny_automatic |
+| Junge mit Jo-Jo | sport-jojo | Sport | 620220 | https://openclipart.org/detail/304495 | CC0 1.0 (Openclipart) | wuhon |
+| Basketball-Wurf | sport-basketball-korb | Sport | Basketball Player | https://openclipart.org/detail/331855 | CC0 1.0 (Openclipart) | GDJ |
+| Wolf mit Basketball | sport-wolf-basketball | Sport | basketball wolf | https://openclipart.org/detail/131917 | CC0 1.0 (Openclipart) | tzunghaor |
+| Panda mit Tennisschläger | sport-panda-tennis | Sport | tennis panda | https://openclipart.org/detail/89125 | CC0 1.0 (Openclipart) | shu |
+| Tennisspieler | sport-tennis | Sport | Cartoon Tennis Player | https://openclipart.org/detail/230022 | CC0 1.0 (Openclipart) | samtux |
+| Tischtennisschläger | sport-tischtennis | Sport | Table Tennis - Colour | https://openclipart.org/detail/305097 | CC0 1.0 (Openclipart) | j4p4n |
+| Nilpferd mit Schnorchel | sport-nilpferd-schnorchel | Sport | SnorkelingHippo | https://openclipart.org/detail/85105 | CC0 1.0 (Openclipart) | TomBrough |
+| Lama als Bademeister | sport-lama-bademeister | Sport | Swimming Alpaka | https://openclipart.org/detail/284780 | CC0 1.0 (Openclipart) | Bingenberg |
+| Schwein auf dem Velo | sport-schwein-velo | Sport | Cycling pig | https://openclipart.org/detail/296457 | CC0 1.0 (Openclipart) | sonichedgehog |
+| Skateboard-Mädchen | sport-skate-maedchen | Sport | Girl Skateboard Remix | https://openclipart.org/detail/354303 | CC0 1.0 (Openclipart) | SunKing2 |
+| Frosch auf dem Skateboard | sport-frosch-skate | Sport | Skateboarding Frog | https://openclipart.org/detail/350704 | CC0 1.0 (Openclipart) | j4p4n |
+| Ratte auf dem Skateboard | sport-ratte-skate | Sport | A Rat on a Skateboard | https://openclipart.org/detail/321882 | CC0 1.0 (Openclipart) | hotta |
+| Katze auf dem Skateboard | sport-katze-skate | Sport | Cat on a skate board | https://openclipart.org/detail/321759 | CC0 1.0 (Openclipart) | hotta |
+| Skater | sport-skater | Sport | Skater | https://openclipart.org/detail/274693 | CC0 1.0 (Openclipart) | snoopingasusual |
+| Skater mit Helm | sport-skater-kind | Sport | Skateboard African Kid | https://openclipart.org/detail/264461 | CC0 1.0 (Openclipart) | j4p4n |
+| Pokal | sport-pokal | Sport | Gold World Cup | https://openclipart.org/detail/171533 | CC0 1.0 (Openclipart) | ksrujana96 |
+| Football | sport-football | Sport | Rugby ball | https://openclipart.org/detail/4456 | CC0 1.0 (Openclipart) | molumen |
+| Baseball-Kind | sport-baseball-blau | Sport | Baseball Batter | https://openclipart.org/detail/328274 | CC0 1.0 (Openclipart) | yenlung |
+| Baseball-Kind mit Kappe | sport-baseball-kappe | Sport | Baseball Catcher | https://openclipart.org/detail/328275 | CC0 1.0 (Openclipart) | yenlung |
