@@ -1,6 +1,6 @@
 {
-  "figuren": 302,
-  "formen": 138,
+  "figuren": 357,
+  "formen": 363,
   "farbgleichheit": [
     {
       "id": "felori",
@@ -2718,6 +2718,501 @@
       "pixel": [
         1200,
         977
+      ]
+    },
+    {
+      "id": "fig-maske-katze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        625
+      ]
+    },
+    {
+      "id": "fig-maske-fuchs",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        534,
+        596
+      ]
+    },
+    {
+      "id": "fig-maske-loewe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        728,
+        727
+      ]
+    },
+    {
+      "id": "fig-maske-schmetterling",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        634,
+        429
+      ]
+    },
+    {
+      "id": "fig-maske-baer",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        606
+      ]
+    },
+    {
+      "id": "fig-maske-hase",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        645,
+        776
+      ]
+    },
+    {
+      "id": "fig-maske-superheld",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        367
+      ]
+    },
+    {
+      "id": "fig-gesicht-froh",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        800
+      ]
+    },
+    {
+      "id": "fig-gesicht-traurig",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        800
+      ]
+    },
+    {
+      "id": "fig-gesicht-wuetend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        800
+      ]
+    },
+    {
+      "id": "fig-gesicht-muede",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        716,
+        800
+      ]
+    },
+    {
+      "id": "fig-gesicht-erstaunt",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        800
+      ]
+    },
+    {
+      "id": "fig-alphorn",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        541,
+        800
+      ]
+    },
+    {
+      "id": "fig-kuhglocke",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        708,
+        800
+      ]
+    },
+    {
+      "id": "fig-trychel-kuh",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        787,
+        800
+      ]
+    },
+    {
+      "id": "fig-steinbock",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        934
+      ]
+    },
+    {
+      "id": "fig-murmeltier",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        1029
+      ]
+    },
+    {
+      "id": "fig-fondue-caquelon",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        360
+      ]
+    },
+    {
+      "id": "fig-armbrust",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        616,
+        455
+      ]
+    },
+    {
+      "id": "fig-planet-ring",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        522
+      ]
+    },
+    {
+      "id": "fig-sternschnuppe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        799,
+        320
+      ]
+    },
+    {
+      "id": "fig-ufo",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        679,
+        622
+      ]
+    },
+    {
+      "id": "fig-astronaut",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        672,
+        800
+      ]
+    },
+    {
+      "id": "fig-mond-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        798,
+        800
+      ]
+    },
+    {
+      "id": "fig-krebs",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        785,
+        602
+      ]
+    },
+    {
+      "id": "fig-hai",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        597
+      ]
+    },
+    {
+      "id": "fig-seepferd",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        794,
+        1329
+      ]
+    },
+    {
+      "id": "fig-clownfisch",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        730,
+        421
+      ]
+    },
+    {
+      "id": "fig-muschel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        735,
+        450
+      ]
+    },
+    {
+      "id": "fig-traktor",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        772,
+        633
+      ]
+    },
+    {
+      "id": "fig-lastwagen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        439
+      ]
+    },
+    {
+      "id": "fig-bagger",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        667,
+        800
+      ]
+    },
+    {
+      "id": "fig-velo",
+      "farbpixelIdentisch": true,
+      "teile": 112,
+      "pixel": [
+        800,
+        504
+      ]
+    },
+    {
+      "id": "fig-heissluftballon",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        594,
+        800
+      ]
+    },
+    {
+      "id": "fig-t-rex",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        677,
+        800
+      ]
+    },
+    {
+      "id": "fig-triceratops",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        758
+      ]
+    },
+    {
+      "id": "fig-stegosaurus",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        582
+      ]
+    },
+    {
+      "id": "fig-brachiosaurus",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        417,
+        800
+      ]
+    },
+    {
+      "id": "fig-drache",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        784,
+        545
+      ]
+    },
+    {
+      "id": "fig-alien",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        454,
+        742
+      ]
+    },
+    {
+      "id": "fig-monster",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        773,
+        800
+      ]
+    },
+    {
+      "id": "fig-roboter",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        664,
+        792
+      ]
+    },
+    {
+      "id": "fig-schluessel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        700,
+        800
+      ]
+    },
+    {
+      "id": "fig-uhr",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        801
+      ]
+    },
+    {
+      "id": "fig-brille",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        346
+      ]
+    },
+    {
+      "id": "fig-hut",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        760,
+        618
+      ]
+    },
+    {
+      "id": "fig-hose",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        722,
+        752
+      ]
+    },
+    {
+      "id": "fig-schuh",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        575
+      ]
+    },
+    {
+      "id": "fig-totenkopf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        780,
+        686
+      ]
+    },
+    {
+      "id": "fig-schatztruhe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        752,
+        800
+      ]
+    },
+    {
+      "id": "fig-wappenschild",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        682,
+        800
+      ]
+    },
+    {
+      "id": "fig-honigbiene",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        715,
+        798
+      ]
+    },
+    {
+      "id": "fig-narzisse",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        676,
+        800
+      ]
+    },
+    {
+      "id": "fig-ei-gemustert",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        584,
+        800
+      ]
+    },
+    {
+      "id": "fig-sonnenbrille",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        795,
+        373
       ]
     }
   ],
