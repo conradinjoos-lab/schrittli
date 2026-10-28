@@ -30,7 +30,8 @@
   "Tierwelt",
   "Küche & Restaurant",
   "Berge",
-  "Städte"
+  "Städte",
+  "Liebe & Hochzeit"
  ],
  "figuren": [
   {
@@ -3679,6 +3680,144 @@
    "welt": "Städte",
    "datei": "stadt-schloss.png",
    "k": 1
+  },
+  {
+   "id": "fig-herz-pfeil-c",
+   "name": "Herz mit Pfeil",
+   "welt": "Liebe & Hochzeit",
+   "datei": "herz-pfeil-c.png"
+  },
+  {
+   "id": "fig-herz-pfeil-a",
+   "name": "Love-Herz",
+   "welt": "Liebe & Hochzeit",
+   "datei": "herz-pfeil-a.png"
+  },
+  {
+   "id": "fig-herz-fluegel",
+   "name": "Herz mit Flügeln",
+   "welt": "Liebe & Hochzeit",
+   "datei": "herz-fluegel.png"
+  },
+  {
+   "id": "fig-amor-a",
+   "name": "Amor",
+   "welt": "Liebe & Hochzeit",
+   "datei": "amor-a.png"
+  },
+  {
+   "id": "fig-brautpaar-a",
+   "name": "Brautpaar",
+   "welt": "Liebe & Hochzeit",
+   "datei": "brautpaar-a.png"
+  },
+  {
+   "id": "fig-brautpaar-e",
+   "name": "Brautpaar vor der Kirche",
+   "welt": "Liebe & Hochzeit",
+   "datei": "brautpaar-e.png"
+  },
+  {
+   "id": "fig-braut",
+   "name": "Braut",
+   "welt": "Liebe & Hochzeit",
+   "datei": "braut.png"
+  },
+  {
+   "id": "fig-torte-a",
+   "name": "Hochzeitstorte",
+   "welt": "Liebe & Hochzeit",
+   "datei": "torte-a.png"
+  },
+  {
+   "id": "fig-baer-herz-a",
+   "name": "Bär mit Herz",
+   "welt": "Liebe & Hochzeit",
+   "datei": "baer-herz-a.png"
+  },
+  {
+   "id": "fig-taube-herz",
+   "name": "Friedenstaube im Herz",
+   "welt": "Liebe & Hochzeit",
+   "datei": "taube-herz.png"
+  },
+  {
+   "id": "fig-schnecken-post",
+   "name": "Schneckenpost",
+   "welt": "Liebe & Hochzeit",
+   "datei": "schnecken-post.png"
+  },
+  {
+   "id": "fig-lippen-gross",
+   "name": "Kuss",
+   "welt": "Liebe & Hochzeit",
+   "datei": "lippen-gross.png"
+  },
+  {
+   "id": "fig-rose-a",
+   "name": "Rosa Rose",
+   "welt": "Liebe & Hochzeit",
+   "datei": "rose-a.png"
+  },
+  {
+   "id": "fig-rose-b",
+   "name": "Rote Rose",
+   "welt": "Liebe & Hochzeit",
+   "datei": "rose-b.png"
+  },
+  {
+   "id": "fig-rose-d",
+   "name": "Rosenblüte",
+   "welt": "Liebe & Hochzeit",
+   "datei": "rose-d.png"
+  },
+  {
+   "id": "fig-ballon-herz-a",
+   "name": "Herzballon",
+   "welt": "Liebe & Hochzeit",
+   "datei": "ballon-herz-a.png"
+  },
+  {
+   "id": "fig-ballon-herz-b",
+   "name": "Herzballons",
+   "welt": "Liebe & Hochzeit",
+   "datei": "ballon-herz-b.png"
+  },
+  {
+   "id": "fig-ballon-katzen",
+   "name": "Katzen mit Herzballons",
+   "welt": "Liebe & Hochzeit",
+   "datei": "ballon-katzen.png"
+  },
+  {
+   "id": "fig-teddy-a",
+   "name": "Teddy im Herz",
+   "welt": "Liebe & Hochzeit",
+   "datei": "teddy-a.png"
+  },
+  {
+   "id": "fig-teddy-b",
+   "name": "Teddy im Herzrahmen",
+   "welt": "Liebe & Hochzeit",
+   "datei": "teddy-b.png"
+  },
+  {
+   "id": "fig-teddy-d",
+   "name": "Kuschelbär",
+   "welt": "Liebe & Hochzeit",
+   "datei": "teddy-d.png"
+  },
+  {
+   "id": "fig-teddy-e",
+   "name": "Teddy mit Herzschild",
+   "welt": "Liebe & Hochzeit",
+   "datei": "teddy-e.png"
+  },
+  {
+   "id": "fig-pinguin-herz",
+   "name": "Pinguin mit Rose",
+   "welt": "Liebe & Hochzeit",
+   "datei": "pinguin-herz.png"
   }
  ]
 }
