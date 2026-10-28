@@ -1,5 +1,5 @@
 {
-  "figuren": 717,
+  "figuren": 760,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -6228,6 +6228,393 @@
       "pixel": [
         484,
         268
+      ]
+    },
+    {
+      "id": "wald-eule",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        536,
+        800
+      ]
+    },
+    {
+      "id": "wald-eule-schlafend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        768,
+        783
+      ]
+    },
+    {
+      "id": "wald-eule-buch",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        754
+      ]
+    },
+    {
+      "id": "wald-fuchs",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        746,
+        786
+      ]
+    },
+    {
+      "id": "wald-fuchs-sitzend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        615,
+        774
+      ]
+    },
+    {
+      "id": "wald-fuchs-pfoten",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        1024
+      ]
+    },
+    {
+      "id": "wald-eichhoernchen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        602,
+        800
+      ]
+    },
+    {
+      "id": "wald-eichhoernchen-gross",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        778,
+        800
+      ]
+    },
+    {
+      "id": "wald-eichhoernchen-lesend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        503,
+        701
+      ]
+    },
+    {
+      "id": "wald-igel-stehend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        499,
+        635
+      ]
+    },
+    {
+      "id": "wald-igel",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        655,
+        800
+      ]
+    },
+    {
+      "id": "wald-igel-laufend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        538
+      ]
+    },
+    {
+      "id": "wald-pilzhaus",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        743
+      ]
+    },
+    {
+      "id": "wald-fliegenpilz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        764,
+        798
+      ]
+    },
+    {
+      "id": "wald-pilz-raupe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        589,
+        793
+      ]
+    },
+    {
+      "id": "wald-pilz-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        534,
+        588
+      ]
+    },
+    {
+      "id": "wald-hirsch",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        689
+      ]
+    },
+    {
+      "id": "wald-elch",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        540
+      ]
+    },
+    {
+      "id": "wald-reh",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        456,
+        748
+      ]
+    },
+    {
+      "id": "wald-biene-dick",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        715,
+        798
+      ]
+    },
+    {
+      "id": "wald-biene",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        392,
+        280
+      ]
+    },
+    {
+      "id": "wald-biene-waben",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        800,
+        713
+      ]
+    },
+    {
+      "id": "wald-biene-spiegel",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        766,
+        592
+      ]
+    },
+    {
+      "id": "wald-schmetterling-rosa",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        746,
+        714
+      ]
+    },
+    {
+      "id": "wald-schmetterling-orange",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        712,
+        800
+      ]
+    },
+    {
+      "id": "wald-schmetterling-gruen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        329,
+        345
+      ]
+    },
+    {
+      "id": "wald-marienkaefer-lachend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        635
+      ]
+    },
+    {
+      "id": "wald-marienkaefer",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        539
+      ]
+    },
+    {
+      "id": "wald-marienkaefer-paar",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        704,
+        800
+      ]
+    },
+    {
+      "id": "wald-marienkaefer-rund",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        584,
+        778
+      ]
+    },
+    {
+      "id": "wald-frosch",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        720,
+        509
+      ]
+    },
+    {
+      "id": "wald-frosch-einfach",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        786,
+        743
+      ]
+    },
+    {
+      "id": "wald-froschkoenig",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        787,
+        608
+      ]
+    },
+    {
+      "id": "wald-sonnenblume-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        531,
+        800
+      ]
+    },
+    {
+      "id": "wald-blume-lachend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        474,
+        772
+      ]
+    },
+    {
+      "id": "wald-blume-rosa",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        747,
+        763
+      ]
+    },
+    {
+      "id": "wald-blume-blau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        520,
+        782
+      ]
+    },
+    {
+      "id": "wald-blume-einfach",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        572,
+        800
+      ]
+    },
+    {
+      "id": "wald-blume-orange",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        587,
+        800
+      ]
+    },
+    {
+      "id": "wald-sonnenblume",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        614,
+        800
+      ]
+    },
+    {
+      "id": "wald-baum-fruechte",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        669,
+        800
+      ]
+    },
+    {
+      "id": "wald-schnecke-orange",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        450
+      ]
+    },
+    {
+      "id": "wald-schnecke-braun",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        775,
+        533
       ]
     },
     {
