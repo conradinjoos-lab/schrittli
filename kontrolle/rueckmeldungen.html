@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Schrittli – Rückmeldungen</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="kontrolle.css">
+<style>
+.zusammen{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:14px}
+.zusammen .karte{margin:0}
+.zusammen .zahl{font:600 28px/1 var(--display)}
+.wahl{display:flex;gap:10px;margin-top:8px;font-size:13px;color:var(--muted)}
+.wahl span i{font-style:normal;font-size:18px;margin-right:3px}
+audio{height:32px;max-width:220px;vertical-align:middle}
+.ton{font:600 13px var(--display);border:0;border-radius:999px;background:var(--lern-soft);color:var(--lern);padding:6px 12px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <header>
+  <a class="zurueck" href="./" title="Zurück zur Kontrolle">←</a>
+  <div class="logo">💬</div>
+  <div><h1>Rückmeldungen</h1><div class="unter">Was die Kinder nach einer Aufgabe sagen · Klasse verbinden über einen Link auf dem iPad · 90 Tage aufbewahrt</div></div>
+ </header>
+ <div class="leiste" id="filter"></div>
+ <section class="karte hell" id="neu-link" hidden>
+  <h2>Klasse angelegt – Link jetzt sichern</h2>
+  <p>Diesen Link öffnest du einmal auf jedem iPad der Klasse (in Safari, dann «Zum Home-Bildschirm»). Er wird <b>nur jetzt</b> angezeigt; später kannst du die Klasse nur noch sperren.</p>
+  <div class="link"><input type="text" id="link" readonly><button class="p" id="kopieren">Link kopieren</button><button class="s" id="qr-knopf">QR-Code</button></div>
+  <div class="qr" id="qr" hidden></div>
+ </section>
+ <section class="karte" id="neu" hidden>
+  <form class="reihe" id="neu-form"><input type="text" id="neu-name" placeholder="z. B. 3a Frau Muster" maxlength="80" required class="grow"><button class="p">Klasse anlegen</button><button type="button" class="s" id="neu-abbruch">Abbrechen</button></form>
+  <p class="fehler" id="neu-fehler"></p>
+ </section>
+ <div class="zusammen" id="zusammen"></div>
+ <main id="liste"><div class="nichts">Lade Rückmeldungen …</div></main>
+ <p style="text-align:center;margin-top:14px"><button class="s" id="mehr" hidden>Mehr laden</button></p>
+ <p class="fehler" id="fehler"></p>
+</div>
+<script src="werkstatt.js"></script>
+<script src="qr.js"></script>
+<script>
+(async()=>{
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+const SCHWER={1:['🪶','Leicht'],2:['👌','Genau richtig'],3:['💪','Schwierig']}, SPASS={1:['😕','Wenig'],2:['🙂','Okay'],3:['🤩','Viel']};
+const zeit=z=>{const d=new Date(z);return isNaN(d)?'':d.toLocaleDateString('de-CH',{day:'numeric',month:'short'})+', '+d.toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'})};
+const fehler=(el,x)=>{el.textContent=x?String(x.message||x):''};
+let klassen=[],filter='',eintraege=[],cursor=null;
+try{await W.bereit();klassen=(await W.feedback.klassen()).klassen}catch(x){$('#liste').innerHTML=`<div class="nichts">Laden ging nicht: ${esc(x.message||x)}</div>`;return}
+
+function leiste(){
+ const aktive=klassen.filter(k=>k.aktiv),gesperrt=klassen.filter(k=>!k.aktiv);
+ $('#filter').innerHTML=`<button data-k="" class="${filter?'':'on'}">Alle Klassen</button>`+
+  aktive.map(k=>`<button data-k="${k.id}" class="${filter===k.id?'on':''}">${esc(k.name)}</button>`).join('')+
+  gesperrt.map(k=>`<button data-k="${k.id}" class="${filter===k.id?'on':''}" title="gesperrt">🔒 ${esc(k.name)}</button>`).join('')+
+  `<span class="rechts"></span>${filter&&klassen.find(k=>k.id===filter&&k.aktiv)?'<button id="sperren">Klasse sperren</button>':''}<button id="neu-knopf" class="on">+ Neue Klasse</button>`;
+ $('#filter').querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{filter=b.dataset.k;leiste();laden(true)});
+ $('#neu-knopf').onclick=()=>{$('#neu').hidden=false;$('#neu-link').hidden=true;$('#neu-name').focus()};
+ const sp=$('#sperren');if(sp)sp.onclick=async()=>{const k=klassen.find(k=>k.id===filter);if(!confirm(`«${k.name}» sperren? Die iPads dieser Klasse können danach nichts mehr senden. Das lässt sich nicht rückgängig machen.`))return;
+  try{await W.feedback.sperren(k.id);k.aktiv=0;leiste()}catch(x){fehler($('#fehler'),x)}};
+}
+$('#neu-abbruch').onclick=()=>{$('#neu').hidden=true};
+$('#neu-form').onsubmit=async e=>{e.preventDefault();const b=e.target.querySelector('button');b.disabled=true;fehler($('#neu-fehler'));
+ try{const k=await W.feedback.klasseNeu($('#neu-name').value.trim());klassen.push({id:k.id,name:k.name,aktiv:1,createdAt:new Date().toISOString()});
+  const link=W.APP_URL+'#klasse='+k.token;$('#link').value=link;$('#qr').hidden=true;$('#qr').replaceChildren();$('#neu').hidden=true;$('#neu-link').hidden=false;$('#neu-name').value='';
+  filter=k.id;leiste();laden(true)}
+ catch(x){fehler($('#neu-fehler'),x)}b.disabled=false};
+$('#kopieren').onclick=async()=>{try{await navigator.clipboard.writeText($('#link').value);$('#kopieren').textContent='Kopiert ✓';setTimeout(()=>$('#kopieren').textContent='Link kopieren',1500)}catch{$('#link').select()}};
+$('#qr-knopf').onclick=()=>{const q=$('#qr');q.hidden=false;q.replaceChildren(QR.canvas($('#link').value,240))};
+
+function zusammen(){
+ const n=eintraege.length;if(!n){$('#zusammen').innerHTML='';return}
+ const anteil=(f,T)=>[1,2,3].map(w=>{const z=eintraege.filter(e=>e[f]===w).length;return `<span title="${T[w][1]}: ${z}"><i>${T[w][0]}</i>${Math.round(100*z/n)} %</span>`}).join('');
+ const balken=(f,farben)=>`<div class="balken">${[1,2,3].map((w,i)=>`<i style="width:${100*eintraege.filter(e=>e[f]===w).length/n}%;background:${farben[i]}"></i>`).join('')}</div>`;
+ $('#zusammen').innerHTML=`<div class="karte"><div class="klein">Rückmeldungen${cursor?' (geladen)':''}</div><div class="zahl">${n}</div><div class="klein">${eintraege.filter(e=>e.audio).length} mit Tonaufnahme</div></div>
+  <div class="karte"><div class="klein">Wie war es für dich?</div>${balken('schwierigkeit',['#9ED9C3','#17997A','#EF6C2E'])}<div class="wahl">${anteil('schwierigkeit',SCHWER)}</div></div>
+  <div class="karte"><div class="klein">Hat es Spass gemacht?</div>${balken('spass',['#D5DEE9','#F2C12E','#17997A'])}<div class="wahl">${anteil('spass',SPASS)}</div></div>`;
+}
+function zeichne(){
+ if(!eintraege.length){$('#liste').innerHTML=`<div class="nichts">${klassen.length?'Noch keine Rückmeldungen.':'Lege zuerst eine Klasse an und öffne den Link auf den iPads.'}</div>`;$('#mehr').hidden=true;zusammen();return}
+ $('#liste').innerHTML=`<table><thead><tr><th>Aufgabe</th><th>Wie war es?</th><th>Spass</th><th>Klasse</th><th>Wann</th><th>Ton</th><th></th></tr></thead><tbody>${eintraege.map(e=>`<tr data-id="${e.id}">
+  <td class="titel"><b>${esc(e.titel)}</b>${filter?'':`<span class="klein">${esc(e.klassenname||'')}</span>`}</td>
+  <td><span class="sym" title="${SCHWER[e.schwierigkeit]?.[1]||''}">${SCHWER[e.schwierigkeit]?.[0]||'–'}</span> <span class="klein">${SCHWER[e.schwierigkeit]?.[1]||''}</span></td>
+  <td><span class="sym" title="${SPASS[e.spass]?.[1]||''}">${SPASS[e.spass]?.[0]||'–'}</span> <span class="klein">${SPASS[e.spass]?.[1]||''}</span></td>
+  <td>${e.klasse?e.klasse+'. Klasse':'–'}</td><td class="klein">${zeit(e.zeit)}</td>
+  <td>${e.audio?`<button class="ton" data-ton="${e.id}">▶ Anhören</button>`:'<span class="klein">–</span>'}</td>
+  <td><button class="x" data-weg="${e.id}" title="Löschen">✕</button></td></tr>`).join('')}</tbody></table>`;
+ $('#mehr').hidden=!cursor;zusammen();
+ $('#liste').querySelectorAll('[data-ton]').forEach(b=>b.onclick=async()=>{b.disabled=true;b.textContent='lädt …';
+  try{const url=await W.feedback.audio(b.dataset.ton);const a=document.createElement('audio');a.controls=true;a.src=url;a.autoplay=true;b.replaceWith(a)}catch(x){b.textContent='Fehler';fehler($('#fehler'),x)}});
+ $('#liste').querySelectorAll('[data-weg]').forEach(b=>b.onclick=async()=>{if(!confirm('Diese Rückmeldung endgültig löschen?'))return;
+  try{await W.feedback.loeschen(b.dataset.weg);eintraege=eintraege.filter(e=>e.id!==b.dataset.weg);zeichne()}catch(x){fehler($('#fehler'),x)}});
+}
+async function laden(neu){
+ if(neu){eintraege=[];cursor=null;$('#liste').innerHTML='<div class="nichts">Lade Rückmeldungen …</div>'}
+ fehler($('#fehler'));$('#mehr').disabled=true;
+ try{const r=await W.feedback.liste(filter,cursor);eintraege=eintraege.concat(r.eintraege);cursor=r.cursor||null;zeichne()}catch(x){fehler($('#fehler'),x);if(neu)$('#liste').innerHTML=''}
+ $('#mehr').disabled=false;
+}
+$('#mehr').onclick=()=>laden(false);
+leiste();laden(true);
+})();
+</script>
+</body>
+</html>

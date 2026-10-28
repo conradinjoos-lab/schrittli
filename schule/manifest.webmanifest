@@ -1,0 +1,17 @@
+{
+  "id": "./",
+  "name": "Schritt für Schritt · Schule",
+  "short_name": "Schule",
+  "lang": "de-CH",
+  "description": "Entdecken, ausprobieren, selber machen. Kreative Projekte Schritt für Schritt – Ausgabe für die Schule.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F1E3CB",
+  "theme_color": "#C98A4E",
+  "icons": [
+    { "src": "../grafik/marke/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "../grafik/marke/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "../grafik/marke/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

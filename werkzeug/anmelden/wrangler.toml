@@ -7,3 +7,43 @@ workers_dev = true
 [[kv_namespaces]]
 binding = "KV"
 id = "3bb72c3d0652411db065032eceb611fe"
+
+[[d1_databases]]
+binding = "FEEDBACK"
+database_name = "schrittli-rueckmeldungen"
+database_id = "fd841271-208f-44a1-b581-847ca299a3c9"
+
+[[ratelimits]]
+name = "FEEDBACK_LIMIT"
+namespace_id = "2026102701"
+simple = { limit = 120, period = 60 }
+
+[triggers]
+crons = ["17 3 * * *"]
+
+[observability]
+enabled = true
+head_sampling_rate = 0.1
+
+[observability.logs]
+enabled = true
+invocation_logs = false
+
+[observability.traces]
+enabled = true
+
+[[d1_databases]]
+binding = "SAMMLUNG"
+database_name = "schrittli-werke"
+database_id = "d0bba524-426e-4259-951f-556fa78974d0"
+migrations_dir = "sammlung-migrations"
+
+[[ratelimits]]
+name = "SAMMLUNG_LIMIT"
+namespace_id = "2026102702"
+simple = { limit = 120, period = 60 }
+
+[[ratelimits]]
+name = "UNTERRICHT_LIMIT"
+namespace_id = "2026102703"
+simple = { limit = 60, period = 60 }

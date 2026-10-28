@@ -8,9 +8,10 @@
 <meta name="apple-mobile-web-app-title" content="Schritt für Schritt">
 <meta name="theme-color" content="#F1E3CB" id="themecolor">
 <title>Schritt für Schritt</title>
-<link rel="icon" href="grafik/figuren/icon.png">
-<link rel="apple-touch-icon" href="grafik/figuren/icon.png">
-<link rel="manifest" href='data:application/manifest+json,{"name":"Schritt f%C3%BCr Schritt","short_name":"Schritt f%C3%BCr Schritt","display":"standalone","start_url":".","background_color":"%23F1E3CB","theme_color":"%23C98A4E"}'>
+<link rel="icon" type="image/png" sizes="32x32" href="grafik/marke/icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="grafik/marke/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="grafik/marke/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@700;800;900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
@@ -548,6 +549,8 @@ body:has(.v3){background:#F5F6F8}
 .v3-dots i{width:10px;height:10px;border-radius:50%;background:#DDE1E6}
 .v3-dots i.an{background:#1C2430}
 .v3-leer{grid-column:1/-1;color:#5B6672;font-weight:800;font-size:18px;padding:40px 0;text-align:center}
+.v3-h2{font-weight:900;font-size:26px;line-height:1.1;margin:36px 0 0}
+.v3-kachel.werkzeug{text-decoration:none;color:inherit;cursor:pointer}.v3-kachel.werkzeug .bild{display:grid;place-items:center;font-size:56px;line-height:1}
 .v3-fuss{text-align:center;margin-top:36px}
 .v3-werkzeuge{display:inline-flex;align-items:center;gap:8px;border:2px solid #1C4A63;background:#EAF3F8;color:#1C4A63;font-family:var(--display);font-weight:700;font-size:17px;border-radius:999px;padding:10px 20px;margin:0 8px 8px;box-shadow:2px 3px 0 var(--sh);cursor:pointer}
 .v3-link{border:0;background:none;color:#5B6672;font-weight:700;font-size:14px;text-decoration:underline;text-underline-offset:3px;padding:8px 12px}
@@ -675,6 +678,83 @@ body:has(.kid.pl:not(.kino)) .fm-knopf{display:none}
 .modal-bg:has(.fm){z-index:80}.fm h2{margin:0}.fm-arten{display:flex;flex-direction:column;gap:8px}.fm-arten label{display:flex;align-items:center;gap:10px;font-size:16px;cursor:pointer}
 .fm-arten input{width:20px;height:20px;accent-color:var(--lern)}.fm-text{font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;resize:vertical;width:100%;background:var(--surface2);color:var(--ink)}
 .fm-hinweis{margin:0;font-size:13px;color:var(--muted)}.fm-fehler{margin:0;color:#D64545;font-weight:600}
+/* ---------- Unterricht: iPad ist mit einer Klasse verbunden ---------- */
+body.unterricht .v3-klassen,body.unterricht .v3-link[data-act=lehrer],body.unterricht .lehrer-zeile,body.unterricht .v3-kachel.werkzeug,body.unterricht .v3-werkzeuge[data-act=werkzeuge]{display:none!important}
+body.u-ohne-galerie [data-act=gallery]{display:none!important}
+.u-liste{max-width:760px;margin:24px auto 0}
+.u-karte{display:flex;align-items:center;gap:22px;max-width:760px;margin:28px auto 0;background:#fff;border-radius:22px;padding:20px 24px;box-shadow:0 2px 10px rgba(28,36,48,.08)}
+.u-karte .bild{width:120px;height:120px;border-radius:20px;display:grid;place-items:center;font-size:64px;flex:none}
+.u-karte b{font-weight:900;font-size:24px;line-height:1.15;display:block}
+.u-karte p{margin:6px 0 14px;color:#5B6672;font-weight:700;font-size:16px}
+.u-karte .v3-werkzeuge{text-decoration:none}
+.u-warten{padding:48px 0 24px}.u-warten b{display:block;font-size:30px;color:#1C2430;margin-top:6px}.u-warten span{display:block;font-size:18px;margin-top:8px}
+.u-fehler{color:#B4432F}
+.u-screen .v3-fuss{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 20px;margin-top:48px}
+.u-status{display:inline-flex;align-items:center;gap:8px}
+.u-punkt{width:10px;height:10px;border-radius:50%;background:#B9C0C8;display:inline-block}.u-punkt.an{background:#3BB273}
+.u-trennen{position:relative;overflow:hidden;color:#9AA3AE;text-decoration-color:#C9CFD6;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.u-trennen.haelt{background:linear-gradient(90deg,#E6E9EE 0,#E6E9EE 100%) no-repeat 0 0/0% 100%;animation:u-halten 3s linear forwards;border-radius:10px}
+@keyframes u-halten{to{background-size:100% 100%}}
+@media (max-width:640px){.u-karte{flex-direction:column;text-align:center;padding:20px}.u-karte .bild{width:96px;height:96px;font-size:52px}}
+
+/* ---------- Rückmeldungen und Unsere Werke (Schule) ---------- */
+.rm-titel{margin:-6px 0 14px;font-size:18px;color:var(--wmuted);text-transform:none}
+.rm-frage{margin:14px 0 0;text-align:left}.rm-frage>span{display:block;font-weight:900;font-size:17px;margin-bottom:8px;color:var(--kink)}
+.rm-wahl{display:flex;flex-wrap:wrap;gap:10px}
+.rm-wahl button{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 8px;border:3px solid var(--kink);border-radius:16px;background:#fff;color:var(--kink);font:inherit;font-weight:900;font-size:15px;cursor:pointer;box-shadow:3px 4px 0 var(--kink);transition:transform .08s}
+.rm-wahl button i{font-style:normal;font-size:30px;line-height:1.1}
+.rm-wahl button:active{transform:translate(2px,3px);box-shadow:1px 1px 0 var(--kink)}
+.rm-wahl button.an{background:var(--sign)}
+.rm-wahl.klassen button{flex:0 0 auto;min-width:56px;padding:10px 12px;font-size:20px}
+.rm-ton{margin:18px 0 4px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.rm-ton .kbtn{flex-direction:column;gap:2px;padding:10px 28px;min-height:0}.rm-ton .kbtn small{display:block;font-size:12px;font-weight:700;opacity:.7;text-transform:none;margin-top:2px}
+.rm-ton audio{width:min(100%,320px)}
+.rm-rec{display:inline-flex;align-items:center;gap:10px;font-weight:900;font-size:17px;color:var(--kink)}
+.rm-rec .punkt{width:14px;height:14px;border-radius:50%;background:#D7263D;animation:rm-blink 1s steps(2,start) infinite}
+@keyframes rm-blink{to{visibility:hidden}}
+.rm-fehler{color:#B4432F;font-weight:800;font-size:15px;margin:8px 0 0}
+.rm-hinweis{display:block;margin-top:8px;font-size:13px;font-weight:700;color:var(--wmuted);text-transform:none}
+.sterne-wahl{display:flex;justify-content:center;gap:4px}
+.sterne-wahl .stern{background:none;border:0;font-size:40px;line-height:1;color:#C9B37A;cursor:pointer;padding:2px 4px;font-family:inherit}
+.sterne-wahl .stern.an{color:#F2B705;text-shadow:0 2px 0 rgba(0,0,0,.15)}
+.foto .dt .st{color:#F2B705;letter-spacing:-1px}
+.sw-leiste{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding-top:0}
+.sw-leiste .zettel{margin:0}
+.sw-status{font-size:14px;font-weight:700;color:#5B6672;margin-left:auto}
+.sw-filter{display:inline-flex;gap:6px;flex-wrap:wrap}
+.sw-filter button{border:2px solid #D7DCE2;background:#fff;border-radius:999px;padding:6px 14px;font:inherit;font-weight:900;font-size:15px;cursor:pointer;color:#1C2430}
+.sw-filter button.an{background:#1C2430;border-color:#1C2430;color:#fff}
+.panel.verb{margin-bottom:14px;background:#fff;color:#1C2430;border:2px solid #E6D9B8}.panel.verb h2{margin:0 0 8px;color:#1C2430;font-size:20px}.panel.verb .inp{background:#F5F8FB;color:#1C2430;border:1px solid #D5DEE9}.panel.verb a{color:#1C2430}
+.verb-zeile{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #EEF1F4;flex-wrap:wrap}
+.verb-zeile b{min-width:130px;color:#1C2430}.verb-zeile>span{flex:1;color:#7A8591;font-size:14px}.verb-zeile>span.an{color:#2E7D4F;font-weight:800}
+.panel.verb .row{margin:12px 0 8px}
+@media (max-width:560px){.sw-status{margin-left:0;width:100%}.rm-wahl button i{font-size:28px}}
+
+/* ---- Finde deine Idee (Katalog) und Papierflieger-Sammlung ---- */
+.kat-knopf{margin-left:auto;min-height:54px;padding:0 22px;font-size:16px;align-self:center}
+.kat-suche{display:flex;align-items:center;gap:10px;margin-top:18px;background:#fff;border-radius:999px;padding:6px 10px 6px 20px;box-shadow:0 2px 10px rgba(28,36,48,.08);border:3px solid transparent}
+.kat-suche:focus-within{border-color:#1C4A63}
+.kat-suche span{font-size:22px}
+.kat-suche input{flex:1;min-width:0;border:0;background:none;min-height:50px;font-size:19px;font-weight:700;color:#1C2430;outline:0;font-family:inherit}
+.kat-suche input::placeholder{color:#9AA3AE;font-weight:600}
+.kat-suche input::-webkit-search-cancel-button{display:none}
+.kat-suche button{width:44px;height:44px;border-radius:50%;border:0;background:#F5F6F8;color:#5B6672;font-size:18px;font-weight:900}
+.kat-filter{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.kat-reihe{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.kat-reihe>.v3-meta{flex:0 0 92px;font-weight:800;color:#5B6672}
+.v3-chips{display:flex;flex-wrap:wrap;gap:6px}
+.v3-chips button{border:0;background:#fff;border-radius:999px;min-height:40px;padding:0 16px;font-weight:800;font-size:15px;color:#5B6672;box-shadow:0 2px 8px rgba(28,36,48,.08)}
+.v3-chips button.an{background:#1C2430;color:#fff}
+.v3-schalter .v3-chips{gap:2px}.v3-schalter .v3-chips button{box-shadow:none;min-height:44px;padding:0 18px}
+.kat-zahl{margin:18px 0 10px;min-height:1.2em}
+.v3-kachel.sammlung .bild img{inset:0;width:100%;height:100%;object-fit:cover}
+.v3-kachel.sammlung .bild{display:grid;place-items:center;font-size:56px;line-height:1}
+.caps .kat-suche input{text-transform:none}
+@media (max-width:700px){.kat-reihe>.v3-meta{flex-basis:100%}.kat-knopf{margin-left:0}}
+
+/* ---- Spieler: Position über der Schrittliste ---- */
+.plabel .pos{margin-left:auto;background:var(--kink);color:#fff;border-radius:999px;padding:4px 12px;font-size:14px;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.sbtn[aria-current="step"]{outline:0}
 </style>
 </head>
 <body>

@@ -68,7 +68,7 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 <main>
   <section class="karte" aria-label="Tier wählen">
     <h2>Tier oder Figur wählen</h2>
-    <div class="suche"><label for="suche">Suchen</label><input id="suche" type="search" placeholder="Zum Beispiel Mario oder Pikachu"><label for="gruppe">Thema</label><select id="gruppe"><option value="">Alle Themen</option></select></div>
+    <div class="suche"><label for="klasse">Deine Klasse</label><select id="klasse" aria-describedby="klassen-grenze"></select><p class="hinweis" id="klassen-grenze" style="margin:0"></p><label class="hinweis" style="display:flex;gap:8px;align-items:center;margin:0"><input type="checkbox" id="nur-passend"> Nur Muster bis zur Klassenbreite zeigen</label><label for="suche">Suchen</label><input id="suche" type="search" placeholder="Zum Beispiel Mario oder Pikachu"><label for="gruppe">Thema</label><select id="gruppe"><option value="">Alle Themen</option></select></div>
     <p class="hinweis" id="treffer" role="status"></p>
     <div id="tiere"></div>
     <button type="button" class="anpassen" id="mehr" hidden>Weitere Muster anzeigen</button>
@@ -94,7 +94,7 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 </main>
 <div id="druck"></div>
 <script src="figuren.js?v=3"></script>
-<script src="bearbeiten.js?v=2"></script>
+<script src="bearbeiten.js?v=3"></script>
 <script>
 // Eigene Muster von Schritt für Schritt. Jede Reihe ist eine Zeichenkette, ein Buchstabe pro Perle (Farbe).
 // Beine: nach Reihe r mit jedem Drahtende n Perlen und f Fussperlen auffädeln, zurück durch die n Perlen.
@@ -184,7 +184,10 @@ Object.assign(FARBE,{M:['#183ADE','königsblau'],N:['#731015','weinrot'],O:['#10
 Object.assign(FARBE,{T:['#EB9AC3','mittelrosa'],U:['#C36F9A','altrosa'],V:['#FF0101','leuchtrot'],W:['#AD0101','dunkles Rot'],X:['#AA8337','waffelbraun']});
 TIERE.push(...(window.PERLEN_FIGUREN||[]));
 const $=id=>document.getElementById(id);
-const S={tier:'eidechse',perle:'r3'};
+const S={tier:'eidechse',perle:'r3',klasse:PerlenEditor.klasseLesen(),nurPassend:false};
+try{S.nurPassend=localStorage.getItem('schrittli.perlen.nurPassend')==='1'}catch(e){}
+const passt=t=>PerlenEditor.reihenbreite(t)<=PerlenEditor.maximum(S.klasse);
+const fuerKlasse=t=>({...t,grundstufe:t.grundstufe||t.stufe,stufe:PerlenEditor.schwierigkeit(t,S.klasse)});
 const eigene=new Map();
 const speicherKey=t=>'schrittli.perlen.'+t.id+(t.version?'.v'+t.version:'');
 function aktuellesTier(){
@@ -422,14 +425,19 @@ const htmlText=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"
 let anzeige=48;
 function auswahl(){
   const such=$('suche').value.trim().toLocaleLowerCase('de-CH'),gruppe=$('gruppe').value;
-  const treffer=TIERE.filter(t=>(!gruppe||gruppeVon(t)===gruppe)&&(!such||(t.name+' '+gruppeVon(t)).toLocaleLowerCase('de-CH').includes(such)));
+  const treffer=TIERE.filter(t=>(!S.nurPassend||passt(t))&&(!gruppe||gruppeVon(t)===gruppe)&&(!such||(t.name+' '+gruppeVon(t)).toLocaleLowerCase('de-CH').includes(such)));
   const sichtbar=treffer.slice(0,anzeige);
-  const knopf=t=>`<button type="button" class="tier" data-id="${t.id}" aria-pressed="${t.id===S.tier}">${t.quelle?`<img src="bilder/${t.quelle}.webp?v=${t.version||2}" alt="" loading="lazy" width="72" height="96">`:mini(t)}<span>${htmlText(t.name)}</span><small>${zaehlen(t).n} Perlen · ${t.stufe}</small></button>`;
+  const knopf=t=>`<button type="button" class="tier" data-id="${t.id}" aria-pressed="${t.id===S.tier}">${t.quelle?`<img src="bilder/${t.quelle}.webp?v=${t.version||2}" alt="" loading="lazy" width="72" height="96">`:mini(t)}<span>${htmlText(t.name)}</span><small>${zaehlen(t).n} Perlen · ${PerlenEditor.schwierigkeit(t,S.klasse)}</small><small>${PerlenEditor.reihenbreite(t)} pro Reihe${passt(t)?'':' · breiter als die Klasse'}</small></button>`;
   $('tiere').innerHTML=gruppen.map(h=>{const l=sichtbar.filter(t=>gruppeVon(t)===h);return l.length?`<h3>${htmlText(h)}</h3><div class="raster">${l.map(knopf).join('')}</div>`:''}).join('');
-  $('treffer').textContent=treffer.length?`${treffer.length} Muster · ${sichtbar.length} angezeigt`:'Kein Muster gefunden. Versuche einen anderen Namen.';
+  $('treffer').textContent=treffer.length?`${treffer.length} Muster${S.nurPassend?` bis ${PerlenEditor.maximum(S.klasse)} Perlen pro Reihe`:''} · ${sichtbar.length} angezeigt`:S.nurPassend?'Kein passendes Muster für diese Klassenbreite gefunden. Schalte den Filter aus oder versuche einen anderen Namen.':'Kein Muster gefunden. Versuche einen anderen Namen.';
   $('mehr').hidden=treffer.length<=anzeige;
 }
 function liste(){
+  $('klasse').innerHTML=Object.entries(PerlenEditor.GRENZEN).map(([k,max])=>`<option value="${k}">${k}. Klasse · bis ${max} Perlen pro Reihe</option>`).join('');
+  $('klasse').value=String(S.klasse);
+  $('klasse').addEventListener('change',()=>{S.klasse=PerlenEditor.klasse($('klasse').value);anzeige=48;try{localStorage.setItem('schrittli.perlen.klasse',S.klasse)}catch(e){}zeichnen();auswahl()});
+  $('nur-passend').checked=S.nurPassend;
+  $('nur-passend').addEventListener('change',()=>{S.nurPassend=$('nur-passend').checked;anzeige=48;try{localStorage.setItem('schrittli.perlen.nurPassend',S.nurPassend?'1':'0')}catch(e){}auswahl()});
   $('gruppe').innerHTML+=[...gruppen].map(g=>`<option>${htmlText(g)}</option>`).join('');
   $('suche').addEventListener('input',()=>{anzeige=48;auswahl()});
   $('gruppe').addEventListener('change',()=>{anzeige=48;auswahl()});
@@ -446,11 +454,13 @@ function zeichnen(){
   document.querySelectorAll('.chip').forEach(k=>k.setAttribute('aria-pressed',k.dataset.p===S.perle));
   const svg=blatt(t,pe);
   $('vorschau').innerHTML=svg;$('druck').innerHTML=svg;
-  $('info').textContent=`${t.name}: ${t.rows.length} Reihen, ${zaehlen(t).n} Perlen, ${lang(draht(t,pe))} Draht`;
+  $('klasse').value=String(S.klasse);
+  $('klassen-grenze').textContent=`Höchstens ${PerlenEditor.maximum(S.klasse)} Perlen pro Reihe – diese Breite gilt als schwer. Im Editor lässt sich ein Muster nur bis dahin verbreitern.`;
+  $('info').textContent=`${t.name}: ${PerlenEditor.reihenbreite(t)} Perlen pro Reihe · ${PerlenEditor.schwierigkeit(t,S.klasse)} · ${t.rows.length} Reihen, ${zaehlen(t).n} Perlen, ${lang(draht(t,pe))} Draht`;
   $('figuren-hinweis').textContent=t.quelle?'Flaches Figurenmuster: Reihen seitlich wie in der Vorlage ausrichten. Gestrichelte Perlen sind transparent und verbinden getrennte Motivteile. Die Figuren brauchen mehr Perlen und Geduld als die einfachen Tiere.':(zaehlen(t).z.t?'Gestrichelte Perlen sind transparente Stützperlen. Sie gehören zur Reihe und halten die ausgesparten Zwischenräume offen.':'');
   $('vergleich').hidden=!t.quelle;
   if(t.quelle){$('original-bild').src='originale/'+t.quelle+'.webp?v='+(t.version||2);$('original-bild').alt='Original: '+t.name;$('vergleich-muster').innerHTML=mini(t)}
-  const p=new URLSearchParams({tier:t.id});if(S.perle!=='r3')p.set('perle',S.perle);
+  const p=new URLSearchParams({tier:t.id,klasse:S.klasse});if(S.perle!=='r3')p.set('perle',S.perle);
   try{history.replaceState(null,'','?'+p)}catch(e){}
   document.title=`Schritt für Schritt · Perlentier ${t.name}`;
 }
@@ -460,7 +470,7 @@ if(PERLEN[q.get('perle')])S.perle=q.get('perle');
 liste();zeichnen();
 $('drucken').addEventListener('click',()=>window.print());
 $('anpassen').addEventListener('click',()=>PerlenEditor.oeffnen({
-  muster:aktuellesTier(),original:TIERE.find(t=>t.id===S.tier),palette:FARBE,perle:PERLEN[S.perle],geometrie,draehte,zaehlen,
+  muster:aktuellesTier(),original:TIERE.find(t=>t.id===S.tier),klasse:S.klasse,palette:FARBE,perle:PERLEN[S.perle],geometrie,draehte,zaehlen,
   speichern:t=>{eigene.set(S.tier,t);let ok=true;try{localStorage.setItem(speicherKey(t),JSON.stringify(t))}catch(e){ok=false}zeichnen();return ok;}
 }));
 </script>

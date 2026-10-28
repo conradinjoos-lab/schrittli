@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Schrittli – Unterricht</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="kontrolle.css">
+<style>
+.eintrag .status{font-size:12px;color:var(--muted);display:block}
+.eintrag .status i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--line);margin-right:5px;vertical-align:1px}
+.eintrag .status i.an{background:var(--lern)}
+.modus{display:flex;gap:8px;flex-wrap:wrap}
+.modus label{display:flex;align-items:center;gap:6px;background:var(--surface2);border-radius:999px;padding:8px 14px;cursor:pointer;font:600 14px var(--display);border:2px solid transparent}
+.modus label:has(input:checked){background:var(--lern-soft);border-color:var(--lern);color:#0F7A61}
+.modus input{position:absolute;opacity:0;width:0;height:0}
+.modus i{font-style:normal;font-size:17px}
+.feld{display:flex;flex-direction:column;gap:4px;margin-top:12px}
+.feld>span{font:600 13px var(--display);color:var(--muted)}
+.feld input[type=text]{max-width:520px}
+.zwei{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.schalter{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:14px;cursor:pointer}
+.schalter input{width:18px;height:18px;accent-color:var(--lern)}
+.jetzt{border-left:5px solid var(--lern);padding-left:14px}
+.jetzt.zu{border-color:var(--muted)}
+.jetzt b{font:600 17px var(--display)}
+.aktion{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center}
+/* Video-Auswahl */
+.suche{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.suche input{flex:1;min-width:180px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;min-height:28px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--lern-soft);color:#0F7A61;border-radius:999px;padding:3px 6px 3px 12px;font:600 13px var(--display)}
+.chip button{border:0;background:transparent;color:inherit;cursor:pointer;font-size:14px;line-height:1;padding:2px 4px;border-radius:50%}
+.videos{max-height:380px;overflow:auto;border:1px solid var(--line);border-radius:14px;margin-top:10px;background:var(--surface)}
+.video{display:flex;align-items:center;gap:10px;padding:6px 10px;border-bottom:1px solid var(--line);cursor:pointer}
+.video:last-child{border-bottom:0}
+.video:has(input:checked){background:var(--lern-soft)}
+.video input{width:18px;height:18px;accent-color:var(--lern);flex:none}
+.video .th{width:64px;height:40px;border-radius:8px;background:var(--surface2);object-fit:cover;flex:none;display:grid;place-items:center;font-size:20px}
+.video b{font:600 14px var(--display);display:block}
+.video small{color:var(--muted);font-size:12px}
+.geraete td:first-child{font-weight:700}
+.punkt{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--line);margin-right:6px}
+.punkt.an{background:var(--lern)}
+.fav{display:inline-flex;align-items:center;gap:4px;background:var(--surface2);border-radius:999px;padding:4px 6px 4px 12px;font:600 13px var(--display);margin:0 6px 6px 0}
+.fav button{border:0;background:transparent;cursor:pointer;font:inherit;padding:2px 4px;border-radius:50%}
+.fav button.laden{color:var(--lern)}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <header>
+  <a class="zurueck" href="./" title="Zurück zur Kontrolle">←</a>
+  <div class="logo">🏫</div>
+  <div><h1>Unterricht</h1><div class="unter">Steuert, was die Schul-iPads gerade zeigen · Gruppe anlegen, Link auf die iPads, dann Aufgaben freigeben</div></div>
+ </header>
+ <section class="karte hell" id="neu-link" hidden>
+  <h2>Gruppe angelegt – Link jetzt sichern</h2>
+  <p>Diesen Link öffnest du einmal auf jedem iPad (in Safari, dann «Zum Home-Bildschirm»). Das iPad folgt danach dieser Gruppe. Der Link wird <b>nur jetzt</b> angezeigt – bewahre ihn für weitere iPads auf.</p>
+  <div class="link"><input type="text" id="link" readonly><button class="p" id="kopieren">Link kopieren</button><button class="s" id="qr-knopf">QR-Code</button></div>
+  <div class="qr" id="qr" hidden></div>
+ </section>
+ <div class="spalten">
+  <aside>
+   <div class="karte">
+    <h2>Gruppen</h2>
+    <div class="liste" id="gruppen"></div>
+    <form class="reihe" id="neu-form" style="margin-top:12px"><input type="text" id="neu-name" placeholder="Neue Gruppe, z. B. Klasse 3a" maxlength="80" required class="grow"><button class="p">Anlegen</button></form>
+    <p class="fehler" id="neu-fehler"></p>
+   </div>
+   <div class="karte" id="favoriten-karte">
+    <h2>Favoriten</h2>
+    <p class="klein" style="margin:0 0 8px">Gespeicherte Freigaben – antippen lädt sie in den Editor.</p>
+    <div id="favoriten"></div>
+   </div>
+  </aside>
+  <main id="haupt"><div class="nichts">Lade Gruppen …</div></main>
+ </div>
+ <p class="fehler" id="fehler"></p>
+</div>
+<template id="editor">
+ <div class="karte jetzt" id="jetzt"></div>
+ <div class="karte">
+  <h2>Freigabe für <span id="g-name"></span></h2>
+  <div class="modus" id="modus"></div>
+  <div class="zwei">
+   <label class="feld"><span>Titel auf den iPads</span><input type="text" id="titel" maxlength="80" placeholder="z. B. Heute: Fingerstricken"></label>
+   <label class="feld"><span>Klasse (stellt die iPads um)</span><select id="klasse"><option value="">– unverändert –</option><option value="1">1. Klasse</option><option value="2">2. Klasse</option><option value="3">3. Klasse</option><option value="4">4. Klasse</option><option value="5">5. Klasse</option><option value="6">6. Klasse</option></select></label>
+  </div>
+  <div id="projekte" hidden>
+   <div class="feld"><span>Aufgaben auswählen</span></div>
+   <div class="chips" id="chips"></div>
+   <div class="suche"><input type="search" id="suche" placeholder="Titel suchen" autocomplete="off"><select id="thema"><option value="">Alle Themen</option></select><select id="stufe"><option value="">Alle Klassen</option><option value="1">1. Klasse</option><option value="2">2. Klasse</option><option value="3">3. Klasse</option><option value="4">4. Klasse</option><option value="5">5. Klasse</option><option value="6">6. Klasse</option></select></div>
+   <div class="videos" id="videos"></div>
+  </div>
+  <label class="schalter" id="galerie-feld"><input type="checkbox" id="galerie"> «Unsere Werke» und Fotos bleiben offen</label>
+  <div class="aktion"><button class="p" id="freigeben">Freigeben</button><button class="s" id="schliessen">🔒 Alles schliessen</button><button class="s" id="favorit">☆ Als Favorit speichern</button><span class="klein" id="hinweis"></span></div>
+ </div>
+ <div class="karte">
+  <h2>Verbundene iPads <span class="klein" id="g-anzahl"></span></h2>
+  <div id="geraete"><p class="klein">Noch kein iPad verbunden. Öffne den Gruppenlink auf den iPads.</p></div>
+ </div>
+</template>
+<script src="werkstatt.js"></script>
+<script src="qr.js"></script>
+<script>
+(async()=>{
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+const THEMEN={naehen:'🪡 Nähen',sticken:'🧵 Sticken',haekeln:'🧶 Häkeln',stricken:'🧶 Stricken',weben:'🧺 Weben',perlen:'📿 Perlen',knuepfen:'🪢 Flechten & Knüpfen',wickeln:'🪁 Wickeln',filzen:'☁️ Filzen',falten:'📄 Falten',schneiden:'✂️ Schneiden & Kleben',holz:'🔨 Sägen & Nageln',schnitzen:'🪵 Schnitzen',formen:'🏺 Formen',drucken:'🖐️ Drucken',experimente:'🧪 Experimentieren'};
+const MODI=[['closed','🔒','Geschlossen','Die iPads zeigen nur den Wartebildschirm.'],['projects','▶','Aufgaben','Nur die gewählten Aufgaben sind offen.'],['templates','✂️','Vorlagen','Die Vorlagen zum Ausdrucken sind offen.'],['beads','📿','Perlentiere','Der Perlen-Editor ist offen.'],['free','🏠','Alles offen','Die iPads zeigen die ganze App.']];
+const modus=m=>MODI.find(x=>x[0]===m)||MODI[0];
+const fehler=(el,x)=>{el.textContent=x?String(x.message||x):''};
+const vor=ms=>{const s=Math.round(ms/1000);return s<60?'gerade eben':s<3600?`vor ${Math.round(s/60)} Min.`:s<86400?`vor ${Math.round(s/3600)} Std.`:`vor ${Math.round(s/86400)} Tagen`};
+let gruppen=[],videos=[],favoriten=[],aktiv=null,geraete=null,timer=null,wahl=new Set();
+const videoOf=id=>videos.find(v=>v.id===id);
+try{await W.bereit();
+ const [g,s,a,f]=await Promise.all([W.unterricht.gruppen(),fetch('../schule/schule.json',{cache:'no-store'}).then(r=>r.json()),
+  fetch('../anleitungen/anleitungen.json',{cache:'no-store'}).then(r=>r.ok?r.json():{anleitungen:[]}).catch(()=>({anleitungen:[]})),W.unterricht.favoriten().catch(()=>({favoriten:[]}))]);
+ gruppen=g.gruppen;favoriten=f.favoriten||[];
+ videos=[...s.videos,...a.anleitungen.map(x=>({...x,source:{type:'bilder'}}))];
+}catch(x){$('#haupt').innerHTML=`<div class="nichts">Laden ging nicht: ${esc(x.message||x)}</div>`;return}
+
+/* ---------- Gruppen ---------- */
+function zeichneGruppen(){
+ $('#gruppen').innerHTML=gruppen.length?gruppen.map(g=>{const m=modus(g.policy.mode);return `<button class="eintrag${aktiv&&aktiv.id===g.id?' on':''}" data-id="${g.id}"><span class="grow"><b>${esc(g.name)}</b><span class="status"><i class="${g.policy.mode==='closed'?'':'an'}"></i>${m[1]} ${esc(g.policy.mode==='projects'||g.policy.mode==='closed'?g.policy.title||m[2]:m[2])}</span></span></button>`}).join(''):
+  '<p class="klein">Noch keine Gruppe. Eine Gruppe ist meist eine Klasse oder ein iPad-Koffer.</p>';
+ $('#gruppen').querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>waehle(b.dataset.id));
+}
+$('#neu-form').onsubmit=async e=>{e.preventDefault();const b=e.target.querySelector('button');b.disabled=true;fehler($('#neu-fehler'));
+ try{const g=await W.unterricht.erstellen($('#neu-name').value.trim());
+  gruppen.push({id:g.id,name:g.name,policy:{mode:'closed',title:'',ids:[],grade:null,simple:true,resize:true,recolor:true,gallery:false,selection:'custom',category:''},revision:0});
+  $('#link').value=W.APP_URL+'#unterricht='+g.token;$('#qr').hidden=true;$('#qr').replaceChildren();$('#neu-link').hidden=false;$('#neu-name').value='';
+  waehle(g.id);window.scrollTo({top:0,behavior:'smooth'})}
+ catch(x){fehler($('#neu-fehler'),x)}b.disabled=false};
+$('#kopieren').onclick=async()=>{try{await navigator.clipboard.writeText($('#link').value);$('#kopieren').textContent='Kopiert ✓';setTimeout(()=>$('#kopieren').textContent='Link kopieren',1500)}catch{$('#link').select()}};
+$('#qr-knopf').onclick=()=>{const q=$('#qr');q.hidden=false;q.replaceChildren(QR.canvas($('#link').value,240))};
+
+/* ---------- Editor ---------- */
+function waehle(id){
+ aktiv=gruppen.find(g=>g.id===id);if(!aktiv)return;zeichneGruppen();
+ $('#haupt').replaceChildren($('#editor').content.cloneNode(true));
+ $('#g-name').textContent=aktiv.name;
+ $('#modus').innerHTML=MODI.map(([m,i,t,d])=>`<label title="${d}"><input type="radio" name="modus" value="${m}"><i>${i}</i>${t}</label>`).join('');
+ const themen=[...new Set(videos.map(v=>v.areaId))].filter(t=>THEMEN[t]);
+ $('#thema').innerHTML='<option value="">Alle Themen</option>'+themen.map(t=>`<option value="${t}">${THEMEN[t]}</option>`).join('');
+ fuellen(aktiv.policy);
+ $('#modus').onchange=()=>{$('#projekte').hidden=$('input[name=modus]:checked').value!=='projects';$('#titel').placeholder=vorschlag()};
+ ['#suche','#thema','#stufe'].forEach(s=>$(s).oninput=zeichneVideos);
+ $('#freigeben').onclick=()=>freigeben(ausFormular());
+ $('#schliessen').onclick=()=>{fuellen({...aktiv.policy,mode:'closed',title:'',ids:[]});freigeben(ausFormular())};
+ $('#favorit').onclick=async()=>{const p=ausFormular();const name=prompt('Name für diesen Favoriten:',p.title||modus(p.mode)[2]);if(!name)return;
+  try{const f=await W.unterricht.favorit(name.trim(),p);favoriten.push(f);zeichneFavoriten()}catch(x){fehler($('#fehler'),x)}};
+ geraeteLaden();clearInterval(timer);timer=setInterval(geraeteLaden,15000);
+}
+const vorschlag=()=>{const m=$('input[name=modus]:checked').value;if(m==='projects'&&wahl.size===1)return videoOf([...wahl][0])?.title||'';return modus(m)[2]};
+function fuellen(p){
+ $(`input[name=modus][value="${modus(p.mode)[0]}"]`).checked=true;$('#projekte').hidden=p.mode!=='projects';
+ $('#titel').value=p.title||'';$('#klasse').value=p.grade||'';$('#galerie').checked=!!p.gallery;
+ wahl=new Set((p.ids||[]).filter(videoOf));zeichneChips();zeichneVideos();$('#titel').placeholder=vorschlag();
+}
+function ausFormular(){
+ const mode=$('input[name=modus]:checked').value,ids=mode==='projects'?[...wahl]:[];
+ return {mode,title:($('#titel').value.trim()||vorschlag()).slice(0,80),ids,grade:+$('#klasse').value||null,simple:true,resize:true,recolor:true,gallery:$('#galerie').checked,selection:ids.length===1?'single':'custom',category:''};
+}
+function zeichneChips(){
+ $('#chips').innerHTML=wahl.size?[...wahl].map(id=>`<span class="chip">${esc(videoOf(id).title)}<button data-weg="${id}" title="Entfernen">✕</button></span>`).join(''):'<span class="klein">Noch keine Aufgabe gewählt – unten antippen.</span>';
+ $('#chips').querySelectorAll('[data-weg]').forEach(b=>b.onclick=()=>{wahl.delete(b.dataset.weg);zeichneChips();zeichneVideos()});
+ $('#titel').placeholder=vorschlag();
+}
+function zeichneVideos(){
+ const q=$('#suche').value.trim().toLowerCase(),t=$('#thema').value,k=+$('#stufe').value;
+ const treffer=videos.filter(v=>(!q||v.title.toLowerCase().includes(q)||(v.gruppe||'').toLowerCase().includes(q))&&(!t||v.areaId===t)&&(!k||(v.stufen||[]).includes(k)));
+ $('#videos').innerHTML=treffer.length?treffer.slice(0,120).map(v=>`<label class="video"><input type="checkbox" data-id="${v.id}"${wahl.has(v.id)?' checked':''}>${v.source&&v.source.type==='youtube'?`<img class="th" src="https://i.ytimg.com/vi/${v.source.id}/default.jpg" alt="" loading="lazy">`:'<span class="th">📷</span>'}<span class="grow"><b>${esc(v.title)}</b><small>${[THEMEN[v.areaId]||v.areaId,(v.stufen||[]).length?(v.stufen||[]).join('.–')+'. Klasse':'',(v.steps||[]).length?v.steps.length+' Schritte':''].filter(Boolean).join(' · ')}</small></span></label>`).join('')+(treffer.length>120?`<p class="klein" style="padding:8px 12px">… und ${treffer.length-120} weitere – bitte Suche eingrenzen.</p>`:''):
+  '<p class="klein" style="padding:12px">Nichts gefunden.</p>';
+ $('#videos').querySelectorAll('input[data-id]').forEach(c=>c.onchange=()=>{c.checked?wahl.add(c.dataset.id):wahl.delete(c.dataset.id);zeichneChips()});
+}
+async function freigeben(p){
+ const b=$('#freigeben');b.disabled=true;$('#hinweis').textContent='sende …';fehler($('#fehler'));
+ try{const r=await W.unterricht.freigabe(aktiv.id,aktiv.revision,p);aktiv.policy=r.policy;aktiv.revision=r.revision;$('#hinweis').textContent='Freigegeben ✓ – die iPads wechseln in ein paar Sekunden.';zeichneGruppen();zeichneJetzt();geraeteLaden()}
+ catch(x){if(x.status===409){$('#hinweis').textContent='';fehler($('#fehler'),'Die Gruppe wurde inzwischen von einem anderen Gerät geändert. Die Seite lädt neu.');setTimeout(()=>location.reload(),1800)}else{$('#hinweis').textContent='';fehler($('#fehler'),x)}}
+ b.disabled=false;
+}
+function zeichneJetzt(){
+ const p=aktiv.policy,m=modus(p.mode),el=$('#jetzt');if(!el)return;el.classList.toggle('zu',p.mode==='closed');
+ const was=p.mode==='projects'?p.ids.map(id=>videoOf(id)?.title).filter(Boolean).join(', ')||'keine Aufgabe gewählt':m[3];
+ el.innerHTML=`<div class="klein">Gerade auf den iPads</div><b>${m[1]} ${esc(p.title||m[2])}</b><div class="mute">${esc(was)}${p.grade?` · ${p.grade}. Klasse`:''}${p.gallery?' · Unsere Werke offen':''}</div>`;
+}
+async function geraeteLaden(){
+ if(!aktiv||document.hidden)return;
+ try{const r=await W.unterricht.geraete(aktiv.id);if(r.revision!==aktiv.revision){aktiv.revision=r.revision;aktiv.policy=r.policy;zeichneGruppen()}geraete=r;zeichneGeraete();zeichneJetzt()}catch(x){fehler($('#fehler'),x)}
+}
+function zeichneGeraete(){
+ const el=$('#geraete');if(!el||!geraete)return;const g=geraete.geraete;$('#g-anzahl').textContent=g.length?`(${g.filter(d=>geraete.now-d.gesehen<120000).length} von ${g.length} online)`:'';
+ if(!g.length){el.innerHTML='<p class="klein">Noch kein iPad verbunden. Öffne den Gruppenlink auf den iPads.</p>';return}
+ el.innerHTML=`<table class="geraete"><thead><tr><th>iPad</th><th>Zuletzt gesehen</th><th>Freigabe</th><th></th></tr></thead><tbody>${g.map(d=>{const online=geraete.now-d.gesehen<120000;return `<tr>
+  <td><span class="punkt${online?' an':''}"></span>${esc(d.name)}</td><td class="klein">${vor(geraete.now-d.gesehen)}</td>
+  <td class="klein">${d.revision>=geraete.revision?'aktuell ✓':online?'wechselt gleich …':'noch die alte'}</td>
+  <td><button class="x" data-name="${d.id}" title="Umbenennen">✎</button></td></tr>`}).join('')}</tbody></table>`;
+ el.querySelectorAll('[data-name]').forEach(b=>b.onclick=async()=>{const d=g.find(x=>x.id===b.dataset.name);const n=prompt('Name für dieses iPad:',d.name);if(!n||!n.trim())return;
+  try{await W.unterricht.geraetName(aktiv.id,d.id,n.trim().slice(0,40));d.name=n.trim().slice(0,40);zeichneGeraete()}catch(x){fehler($('#fehler'),x)}});
+}
+/* ---------- Favoriten ---------- */
+function zeichneFavoriten(){
+ $('#favoriten').innerHTML=favoriten.length?favoriten.map(f=>`<span class="fav"><button class="laden" data-fav="${f.id}" title="In den Editor laden">${modus(f.policy.mode)[1]} ${esc(f.name)}</button><button data-weg="${f.id}" title="Favorit entfernen">✕</button></span>`).join(''):'<p class="klein" style="margin:0">Noch keine. Im Editor «Als Favorit speichern» drücken.</p>';
+ $('#favoriten').querySelectorAll('[data-fav]').forEach(b=>b.onclick=()=>{if(!aktiv){fehler($('#fehler'),'Zuerst links eine Gruppe wählen.');return}fuellen(favoriten.find(f=>f.id===b.dataset.fav).policy);$('#hinweis').textContent='Favorit geladen – noch nicht freigegeben.'});
+ $('#favoriten').querySelectorAll('[data-weg]').forEach(b=>b.onclick=async()=>{if(!confirm('Favorit entfernen?'))return;try{await W.unterricht.favoritEntfernen(b.dataset.weg);favoriten=favoriten.filter(f=>f.id!==b.dataset.weg);zeichneFavoriten()}catch(x){fehler($('#fehler'),x)}});
+}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)geraeteLaden()});
+zeichneGruppen();zeichneFavoriten();
+if(gruppen.length)waehle(gruppen[0].id);else $('#haupt').innerHTML='<div class="nichts">Lege links eine Gruppe an.<br><span class="klein">Danach bekommst du den Link für die iPads.</span></div>';
+})();
+</script>
+</body>
+</html>

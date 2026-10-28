@@ -153,7 +153,31 @@ const W=(()=>{
  const meldungen=()=>LOKAL?Promise.resolve(null):melde('/meldungen');
  const erledigt=key=>melde('/meldungen/erledigt',{method:'POST',body:JSON.stringify({key})});
 
- return {LOKAL,bereit,abmelden,liste,daten,bild,speichern,veroeffentlichen,jsonText,werke,werkBild,meldungen,erledigt,
+ /* ---------- Unterricht, Rückmeldungen, Unsere Werke (Worker-Routen, nur mit GitHub-Anmeldung; Fehler kommen als {fehler}) ---------- */
+ async function api(pfad,opt={},nochmals=true){
+  if(an.ablauf&&Date.now()>an.ablauf-120000)await erneuern();
+  const r=await fetch(ANMELDEN+pfad,{cache:'no-store',...opt,headers:{'Content-Type':'application/json',Authorization:'Bearer '+an.token}});
+  if(r.status===401&&nochmals&&await erneuern())return api(pfad,opt,false);
+  if(!r.ok){let t='';try{t=(await r.json()).fehler||''}catch{}throw Object.assign(new Error(t||'Fehler '+r.status),{status:r.status})}
+  return r.status===204?null:r.json()}
+ async function apiBlob(pfad,nochmals=true){   // Audio und Fotos: als Objekt-URL fürs <audio>/<img>
+  if(an.ablauf&&Date.now()>an.ablauf-120000)await erneuern();
+  const r=await fetch(ANMELDEN+pfad,{cache:'no-store',headers:{Authorization:'Bearer '+an.token}});
+  if(r.status===401&&nochmals&&await erneuern())return apiBlob(pfad,false);
+  if(!r.ok)throw new Error('Fehler '+r.status);return URL.createObjectURL(await r.blob())}
+ const post=(pfad,b)=>api(pfad,{method:'POST',body:JSON.stringify(b)});
+ const frage=o=>{const q=new URLSearchParams(Object.entries(o).filter(([,v])=>v!=null&&v!==''));return q.size?'?'+q:''};
+ const unterricht={gruppen:()=>api('/unterricht/gruppen'),erstellen:name=>post('/unterricht/erstellen',{name}),
+  freigabe:(id,revision,policy)=>post('/unterricht/freigabe',{id,revision,policy}),geraete:id=>api('/unterricht/geraete'+frage({id})),
+  geraetName:(id,deviceId,name)=>post('/unterricht/geraet-name',{id,deviceId,name}),favoriten:()=>api('/unterricht/favoriten'),
+  favorit:(name,policy)=>post('/unterricht/favorit',{name,policy}),favoritEntfernen:id=>post('/unterricht/favorit-entfernen',{id})};
+ const feedback={klassen:()=>api('/feedback/klassen'),klasseNeu:name=>post('/feedback/klassen',{name}),sperren:id=>post('/feedback/klassen/sperren',{id}),
+  liste:(klasse,cursor)=>api('/feedback/liste'+frage({klasse,cursor})),audio:id=>apiBlob('/feedback/audio'+frage({id})),loeschen:id=>post('/feedback/loeschen',{id})};
+ const sammlung={verwaltung:()=>api('/sammlung/verwaltung'),erstellen:name=>post('/sammlung/erstellen',{name}),sperren:id=>post('/sammlung/sperren',{id}),
+  werke:id=>api('/sammlung/verwaltung/werke'+frage({id})),foto:id=>apiBlob('/sammlung/verwaltung/foto'+frage({id})),loeschen:id=>post('/sammlung/loeschen',{id})};
+ const APP_URL='https://conradinjoos-lab.github.io/schrittli/schule/';   // Links für die Schul-iPads: APP_URL+'#unterricht=…', '#klasse=…', '#sammlung=…'
+
+ return {LOKAL,bereit,abmelden,liste,daten,bild,speichern,veroeffentlichen,jsonText,werke,werkBild,meldungen,erledigt,unterricht,feedback,sammlung,APP_URL,
   nachPub:LOKAL?'Noch committen und pushen.':'In etwa einer Minute in der Schul-App.',
   pause:LOKAL?1500:6000}  // Autospeichern: online seltener, jeder Stand ist ein Commit
 })();

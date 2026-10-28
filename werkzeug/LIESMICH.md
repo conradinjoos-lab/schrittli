@@ -24,7 +24,13 @@ Läuft nur auf dem Rechner, der Videos erfasst. Die App selbst braucht nichts da
 
 ## Kontrollseite – Bedienung
 
-Die Seiten liegen in `kontrolle/` (index.html, video.html, werkstatt.js), der lokale Server ist `kontrolle.py`.
+Die Seiten liegen in `kontrolle/` (index.html, video.html, werkstatt.js), der lokale Server ist `kontrolle.py`. Dazu kommen drei Seiten für den Unterricht, die nur online (mit GitHub-Anmeldung) funktionieren und über den Worker laufen – gemeinsamer Look in `kontrolle.css`, QR-Codes ohne fremde Bibliothek in `qr.js`:
+
+- `unterricht.html` – **iPads freigeben:** Gruppe anlegen, Link/QR-Code für die iPads (`…/schule/#unterricht=<Token>`), dann pro Gruppe festlegen, was die iPads gerade zeigen (geschlossen, bestimmte Videos, Vorlagen, Perlentiere, alles), Favoriten als Voreinstellungen, Liste der Geräte mit Stand der Freigabe.
+- `rueckmeldungen.html` – **Klassenrückmeldungen:** Klasse anlegen, Link/QR-Code (`…/schule/#klasse=<Token>`), Auswertung «Wie war es?» / «Spass» pro Klasse, Tonaufnahmen anhören, Einträge löschen, Klasse sperren. Einträge werden nach 90 Tagen vom Worker gelöscht (Cron).
+- `sammlung.html` – **Unsere Werke:** Sammlung anlegen, Link/QR-Code (`…/schule/#sammlung=<Token>`), Fotos aller iPads der Klasse ansehen und löschen, Sammlung sperren.
+
+Die Links werden nur einmal angezeigt (das Token steht nur im Link); eine verlorene Gruppe, Klasse oder Sammlung wird gesperrt und neu angelegt.
 
 **Online:** Dieselben Seiten laufen auf GitHub Pages unter https://conradinjoos-lab.github.io/schrittli/kontrolle/. Sie lesen und schreiben über die GitHub-API:
 
@@ -34,7 +40,8 @@ Die Seiten liegen in `kontrolle/` (index.html, video.html, werkstatt.js), der lo
 
 **Anmeldestelle** (`werkzeug/anmelden/`, Cloudflare Worker unter https://schrittli-anmelden.conradinjoos.workers.dev): hält Client-ID und Geheimnis der GitHub App «Schrittli Kontrolle» (Konto conradinjoos-lab, installiert nur auf `schrittli` und `schrittli-werkstatt`, Recht: Contents lesen und schreiben). Zurück zur Seite kommt nur ein Abholschein, der Schlüssel selbst geht per POST, und nur an `conradinjoos-lab.github.io`. Darum lässt sich die Anmeldung lokal nicht testen; lokal braucht es sie auch nicht.
 
-- Ändern: `worker.js` bearbeiten, dann `cd werkzeug/anmelden && npx wrangler deploy` (eigenes Cloudflare-Konto, `npx wrangler login`).
+- Ändern: `worker.js` bearbeiten, dann `cd werkzeug/anmelden && npx wrangler deploy` (eigenes Cloudflare-Konto, `npx wrangler login`). Tests vorher: `npm run check` (Node-Test-Runner mit Miniflare).
+- Der Worker bedient auch die drei Unterrichtsseiten: `feedback.js` (Rückmeldungen, D1 `schrittli-rueckmeldungen`, Migrationen in `migrations/`), `sammlung.js` (Unsere Werke, D1 `schrittli-werke`, Migrationen in `sammlung-migrations/`) und `unterricht.js` (Freigaben, Geräte, Favoriten; gleiche D1 wie die Sammlung). Nach neuen Migrationen einmal `npx wrangler d1 migrations apply schrittli-rueckmeldungen --remote` und `npx wrangler d1 migrations apply schrittli-werke --remote`, dann `npx wrangler deploy`.
 - Weiteres Repo freigeben: GitHub → Settings → Applications → Schrittli Kontrolle → Configure.
 - Neu einrichten (z. B. nach Löschen der App): https://schrittli-anmelden.conradinjoos.workers.dev/einrichten in einem Zug durchklicken, nicht neu laden. Die Seite gilt 15 Minuten; GitHub springt danach von selbst zur Installation.
 

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Schrittli – Unsere Werke</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="kontrolle.css">
+</head>
+<body>
+<div class="wrap">
+ <header>
+  <a class="zurueck" href="./" title="Zurück zur Kontrolle">←</a>
+  <div class="logo">🖼️</div>
+  <div><h1>Unsere Werke</h1><div class="unter">Gemeinsame Sammlung der Klasse · alle verbundenen iPads sehen dieselben Fotos in «Unsere Werke»</div></div>
+ </header>
+ <div class="leiste" id="filter"></div>
+ <section class="karte hell" id="neu-link" hidden>
+  <h2>Sammlung angelegt – Link jetzt sichern</h2>
+  <p>Diesen Link öffnest du einmal auf jedem iPad der Klasse. Danach landen Fotos aller Kinder in dieser Sammlung. Der Link wird <b>nur jetzt</b> angezeigt.</p>
+  <div class="link"><input type="text" id="link" readonly><button class="p" id="kopieren">Link kopieren</button><button class="s" id="qr-knopf">QR-Code</button></div>
+  <div class="qr" id="qr" hidden></div>
+ </section>
+ <section class="karte" id="neu" hidden>
+  <form class="reihe" id="neu-form"><input type="text" id="neu-name" placeholder="z. B. Klasse 4b 2026/27" maxlength="80" required class="grow"><button class="p">Sammlung anlegen</button><button type="button" class="s" id="neu-abbruch">Abbrechen</button></form>
+  <p class="fehler" id="neu-fehler"></p>
+ </section>
+ <main id="liste"><div class="nichts">Lade Sammlungen …</div></main>
+ <p class="fehler" id="fehler"></p>
+</div>
+<dialog id="gross"><img alt=""><div class="unten"><b></b><span class="klein"></span><button class="s">Schliessen</button></div></dialog>
+<script src="werkstatt.js"></script>
+<script src="qr.js"></script>
+<script>
+(async()=>{
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+const datum=z=>{const d=new Date(z);return isNaN(d)?'':d.toLocaleDateString('de-CH',{day:'numeric',month:'short',year:'numeric'})};
+const fehler=(el,x)=>{el.textContent=x?String(x.message||x):''};
+let sammlungen=[],aktiv='',werke=[];
+try{await W.bereit();sammlungen=(await W.sammlung.verwaltung()).sammlungen}catch(x){$('#liste').innerHTML=`<div class="nichts">Laden ging nicht: ${esc(x.message||x)}</div>`;return}
+if(!aktiv&&sammlungen.length)aktiv=(sammlungen.find(s=>s.aktiv)||sammlungen[0]).id;
+
+function leiste(){
+ $('#filter').innerHTML=sammlungen.map(s=>`<button data-s="${s.id}" class="${aktiv===s.id?'on':''}">${s.aktiv?'':'🔒 '}${esc(s.name)}</button>`).join('')+
+  `<span class="rechts"></span>${aktiv&&sammlungen.find(s=>s.id===aktiv&&s.aktiv)?'<button id="sperren">Sammlung sperren</button>':''}<button id="neu-knopf" class="on">+ Neue Sammlung</button>`;
+ $('#filter').querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{aktiv=b.dataset.s;leiste();laden()});
+ $('#neu-knopf').onclick=()=>{$('#neu').hidden=false;$('#neu-link').hidden=true;$('#neu-name').focus()};
+ const sp=$('#sperren');if(sp)sp.onclick=async()=>{const s=sammlungen.find(s=>s.id===aktiv);if(!confirm(`«${s.name}» sperren? Die iPads können danach keine Fotos mehr senden und sehen die Sammlung nicht mehr. Das lässt sich nicht rückgängig machen.`))return;
+  try{await W.sammlung.sperren(s.id);s.aktiv=0;leiste()}catch(x){fehler($('#fehler'),x)}};
+}
+$('#neu-abbruch').onclick=()=>{$('#neu').hidden=true};
+$('#neu-form').onsubmit=async e=>{e.preventDefault();const b=e.target.querySelector('button');b.disabled=true;fehler($('#neu-fehler'));
+ try{const s=await W.sammlung.erstellen($('#neu-name').value.trim());sammlungen.push({id:s.id,name:s.name,aktiv:1,erstellt:new Date().toISOString()});
+  $('#link').value=W.APP_URL+'#sammlung='+s.token;$('#qr').hidden=true;$('#qr').replaceChildren();$('#neu').hidden=true;$('#neu-link').hidden=false;$('#neu-name').value='';
+  aktiv=s.id;leiste();laden()}
+ catch(x){fehler($('#neu-fehler'),x)}b.disabled=false};
+$('#kopieren').onclick=async()=>{try{await navigator.clipboard.writeText($('#link').value);$('#kopieren').textContent='Kopiert ✓';setTimeout(()=>$('#kopieren').textContent='Link kopieren',1500)}catch{$('#link').select()}};
+$('#qr-knopf').onclick=()=>{const q=$('#qr');q.hidden=false;q.replaceChildren(QR.canvas($('#link').value,240))};
+
+const sieht=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;sieht.unobserve(e.target);
+ W.sammlung.foto(e.target.dataset.id).then(u=>e.target.src=u).catch(()=>{})}),{rootMargin:'300px'});
+function zeichne(){
+ if(!sammlungen.length){$('#liste').innerHTML='<div class="nichts">Lege zuerst eine Sammlung an und öffne den Link auf den iPads.</div>';return}
+ if(!werke.length){$('#liste').innerHTML='<div class="nichts">Noch keine Fotos in dieser Sammlung.</div>';return}
+ $('#liste').innerHTML=`<p class="klein" style="margin:0 0 8px">${werke.length} Fotos · neuste zuerst</p><div class="gitter">${werke.map(w=>`<div class="werk" data-id="${w.id}">
+  <div class="bild"><img data-id="${w.id}" alt="" loading="lazy"></div>
+  <div class="text"><div class="titel">${esc(w.titel)}</div><div class="klein">${[w.name?esc(w.name):'',w.klasse?w.klasse+'. Klasse':'',datum(w.erstellt)].filter(Boolean).join(' · ')}${w.sterne?` <span class="sterne">${'★'.repeat(w.sterne)}</span>`:''}</div></div>
+  <button class="x" data-weg="${w.id}" title="Foto löschen">✕</button></div>`).join('')}</div>`;
+ $('#liste').querySelectorAll('img[data-id]').forEach(i=>{sieht.observe(i);i.onclick=()=>{if(!i.src)return;const w=werke.find(w=>w.id===i.dataset.id);const d=$('#gross');d.querySelector('img').src=i.src;d.querySelector('b').textContent=w.titel;d.querySelector('.klein').textContent=[w.name,w.klasse?w.klasse+'. Klasse':'',datum(w.erstellt)].filter(Boolean).join(' · ');d.showModal()}});
+ $('#liste').querySelectorAll('[data-weg]').forEach(b=>b.onclick=async()=>{if(!confirm('Dieses Foto endgültig aus der Sammlung löschen?'))return;
+  try{await W.sammlung.loeschen(b.dataset.weg);werke=werke.filter(w=>w.id!==b.dataset.weg);zeichne()}catch(x){fehler($('#fehler'),x)}});
+}
+async function laden(){
+ fehler($('#fehler'));if(!aktiv){werke=[];zeichne();return}
+ $('#liste').innerHTML='<div class="nichts">Lade Fotos …</div>';
+ try{werke=(await W.sammlung.werke(aktiv)).werke.slice().sort((a,b)=>String(b.erstellt).localeCompare(String(a.erstellt)));zeichne()}catch(x){fehler($('#fehler'),x);$('#liste').innerHTML=''}
+}
+$('#gross button').onclick=()=>$('#gross').close();
+leiste();laden();
+})();
+</script>
+</body>
+</html>
