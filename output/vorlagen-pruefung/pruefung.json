@@ -1,5 +1,5 @@
 {
-  "figuren": 357,
+  "figuren": 431,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -3213,6 +3213,672 @@
       "pixel": [
         795,
         373
+      ]
+    },
+    {
+      "id": "abc-a",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        467
+      ]
+    },
+    {
+      "id": "abc-b",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "abc-c",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        401,
+        484
+      ]
+    },
+    {
+      "id": "abc-d",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        457,
+        484
+      ]
+    },
+    {
+      "id": "abc-e",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        352,
+        484
+      ]
+    },
+    {
+      "id": "abc-f",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        345,
+        484
+      ]
+    },
+    {
+      "id": "abc-g",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        448,
+        484
+      ]
+    },
+    {
+      "id": "abc-h",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        437,
+        484
+      ]
+    },
+    {
+      "id": "abc-i",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        144,
+        484
+      ]
+    },
+    {
+      "id": "abc-j",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        192,
+        484
+      ]
+    },
+    {
+      "id": "abc-k",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        469,
+        484
+      ]
+    },
+    {
+      "id": "abc-l",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        352,
+        484
+      ]
+    },
+    {
+      "id": "abc-m",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        438
+      ]
+    },
+    {
+      "id": "abc-n",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        437,
+        484
+      ]
+    },
+    {
+      "id": "abc-o",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        480,
+        484
+      ]
+    },
+    {
+      "id": "abc-p",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "abc-q",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        413,
+        484
+      ]
+    },
+    {
+      "id": "abc-r",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        437,
+        484
+      ]
+    },
+    {
+      "id": "abc-s",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        374,
+        484
+      ]
+    },
+    {
+      "id": "abc-t",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        448,
+        484
+      ]
+    },
+    {
+      "id": "abc-u",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        413,
+        484
+      ]
+    },
+    {
+      "id": "abc-v",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        467
+      ]
+    },
+    {
+      "id": "abc-w",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        348
+      ]
+    },
+    {
+      "id": "abc-x",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        478,
+        484
+      ]
+    },
+    {
+      "id": "abc-y",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        482
+      ]
+    },
+    {
+      "id": "abc-z",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        425,
+        484
+      ]
+    },
+    {
+      "id": "abc-0",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        389,
+        484
+      ]
+    },
+    {
+      "id": "abc-1",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        349,
+        484
+      ]
+    },
+    {
+      "id": "abc-2",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        353,
+        484
+      ]
+    },
+    {
+      "id": "abc-3",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        358,
+        484
+      ]
+    },
+    {
+      "id": "abc-4",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        406,
+        484
+      ]
+    },
+    {
+      "id": "abc-5",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        364,
+        484
+      ]
+    },
+    {
+      "id": "abc-6",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        378,
+        484
+      ]
+    },
+    {
+      "id": "abc-7",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        371,
+        484
+      ]
+    },
+    {
+      "id": "abc-8",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        373,
+        484
+      ]
+    },
+    {
+      "id": "abc-9",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        378,
+        484
+      ]
+    },
+    {
+      "id": "wetter-sonne",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-sonne-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-sonne-wolke-klein",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-sonne-hinter-wolke",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-sonne-hinter-grosser-wolke",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        382
+      ]
+    },
+    {
+      "id": "wetter-sonne-regen",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-wolke",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        407
+      ]
+    },
+    {
+      "id": "wetter-regenwolke",
+      "farbpixelIdentisch": true,
+      "teile": 6,
+      "pixel": [
+        484,
+        477
+      ]
+    },
+    {
+      "id": "wetter-gewitter",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-blitz-wolke",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-blitz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        407,
+        484
+      ]
+    },
+    {
+      "id": "wetter-schneewolke",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-schneeflocke",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        450,
+        484
+      ]
+    },
+    {
+      "id": "wetter-schneemann",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        450,
+        484
+      ]
+    },
+    {
+      "id": "wetter-schneemann-ohne",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        433,
+        484
+      ]
+    },
+    {
+      "id": "wetter-regenbogen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-regenschirm",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-regenschirm-regen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        469
+      ]
+    },
+    {
+      "id": "wetter-tropfen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        336,
+        483
+      ]
+    },
+    {
+      "id": "wetter-mond",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        483
+      ]
+    },
+    {
+      "id": "wetter-mond-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        400,
+        484
+      ]
+    },
+    {
+      "id": "wetter-vollmond",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-neumond",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-stern",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        464
+      ]
+    },
+    {
+      "id": "wetter-stern-glanz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-sternschnuppe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-funkeln",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        484,
+        470
+      ]
+    },
+    {
+      "id": "wetter-wind",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-windgesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        341
+      ]
+    },
+    {
+      "id": "wetter-nebel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-wirbel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        464
+      ]
+    },
+    {
+      "id": "wetter-tornado",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        408,
+        484
+      ]
+    },
+    {
+      "id": "wetter-sternennacht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-milchstrasse",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-sonnenaufgang",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-sonnenuntergang",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-thermometer",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-welle",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        447
       ]
     }
   ],
