@@ -125,12 +125,13 @@ def ringe(g, tol, rund=True):
 
 
 def quantisieren(rgb, maske, k, glatt):
-    """Farben in der Figur auf k Farben reduzieren. Gibt (etik_farbe, etik_linien, palette, schwarz_index) zurück:
+    """Farben in der Figur auf k Farben reduzieren. Gibt (etik_farbe, etik_linien, palette, schwarz_index, duenn) zurück:
     etik_farbe  – Etiketten fürs farbige Zeichnen (−1 = aussen); schwarze Umrisslinien sind eine eigene Farbe (Index
                   schwarz_index, None wenn das Bild keine hat) und werden NICHT weggeputzt, damit die Vorlage wie das
                   Original schwarz umrandete Flächen hat.
     etik_linien – gleiche Etiketten, aber dünne schwarze Linien der Nachbarfarbe zugeschlagen: daraus werden die
-                  Innenlinien (det) gerechnet, die dann in der Mitte der Linie liegen statt doppelt an ihren Rändern."""
+                  Innenlinien (det) gerechnet, die dann in der Mitte der Linie liegen statt doppelt an ihren Rändern.
+    duenn       – Maske der dünnen schwarzen Striche (für Mittellinien zwischen gleichfarbigen Flächen)."""
     bild = rgb.astype(np.uint8)
     if glatt: bild = cv2.bilateralFilter(bild, 5, 25, 3)
     lab = cv2.cvtColor(bild, cv2.COLOR_RGB2LAB).astype(np.float32)
@@ -170,17 +171,66 @@ def quantisieren(rgb, maske, k, glatt):
     _, idx = ndimage.distance_transform_edt(~gueltig, return_indices=True)
     voll = etik[idx[0], idx[1]]
     etik_farbe = np.where(maske, np.where(schwarz, si if si is not None else -1, voll), -1)
-    etik_linien = etik_farbe
+    # Für die Innenlinien fliegt raus, was nur Linie oder Kantenglättung ist; die Lücken füllt die nächste richtige Farbe.
+    t = max(2, int(round(np.sqrt(flaeche)/60)))
+    weg = np.zeros_like(maske); duenn = np.zeros_like(maske)
     if hat_schwarz:
         # dünne schwarze Linien (schmaler als ~1/60 der Figur) der Nachbarfarbe zuschlagen; dicke schwarze Flächen bleiben
-        t = max(2, int(round(np.sqrt(flaeche)/60)))
         kern_t = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2*t + 1, 2*t + 1))
         dick = cv2.morphologyEx(schwarz.astype(np.uint8), cv2.MORPH_OPEN, kern_t).astype(bool)
-        duenn = schwarz & ~dick
-        basis = maske & ~duenn
+        duenn = schwarz & ~dick; weg |= duenn
+    # Splitter: Farbflecken aus der Kantenglättung entlang der Linien (Mischtöne, die eine eigene Farbe bekamen). Sie sind
+    # winzig oder so schmal, dass Öffnen sie löscht; jeder gäbe sonst eine eigene «Blase» als Innenlinie.
+    r = max(1, t//4)
+    kern_r = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2*r + 1, 2*r + 1))
+    amin = max(6, flaeche*.0004)
+    for i in range(kk):
+        m = etik_farbe == i
+        if not m.any(): continue
+        kern_ok = cv2.morphologyEx(m.astype(np.uint8), cv2.MORPH_OPEN, kern_r).astype(bool)
+        lab_i, n = ndimage.label(m)
+        gr = np.bincount(lab_i.ravel()); gr[0] = 0
+        hat_kern = np.zeros(n + 1, bool); hat_kern[np.unique(lab_i[kern_ok])] = True
+        splitter = np.nonzero((gr < amin) | ~hat_kern)[0]
+        weg |= np.isin(lab_i, splitter[splitter > 0])
+    basis = maske & ~weg
+    if basis.any():
         _, idx2 = ndimage.distance_transform_edt(~basis, return_indices=True)
         etik_linien = np.where(maske, etik_farbe[idx2[0], idx2[1]], -1)
-    return etik_farbe, etik_linien, palette, si
+    else: etik_linien = etik_farbe
+    return etik_farbe, etik_linien, palette, si, duenn
+
+
+def mittellinien(duenn, maske, etik_linien, skala, ursprung):
+    """Dünne schwarze Striche, die zwischen gleichfarbigen Flächen liegen (Falten, Schraffur, Muster), ergeben als
+    Farbgrenze keine Innenlinie. Ihr Skelett wird als Mittellinie geliefert – ohne die Stücke, die ohnehin an einer
+    Farbgrenze oder am Umriss liegen (dort gibt es die Linie schon). Ergebnis: Liste von LineStrings."""
+    if not duenn.any(): return []
+    from skimage.morphology import skeletonize
+    skel = skeletonize(duenn)
+    halb = ndimage.distance_transform_edt(duenn)                         # halbe Strichbreite je Punkt
+    # Farbgrenzen im Bild ohne dünne Striche; Striche am Umriss (Aussenrand der Figur) ebenso ausschliessen
+    e = etik_linien
+    grenze = np.zeros_like(duenn)
+    grenze[:, :-1] |= (e[:, :-1] != e[:, 1:]) & (e[:, :-1] >= 0) & (e[:, 1:] >= 0)
+    grenze[:-1, :] |= (e[:-1, :] != e[1:, :]) & (e[:-1, :] >= 0) & (e[1:, :] >= 0)
+    zu_grenze = ndimage.distance_transform_edt(~grenze)
+    zu_rand = ndimage.distance_transform_edt(maske)
+    frei = skel & (zu_grenze > halb + 2) & (zu_rand > 2*halb + 2)
+    ys, xs = np.nonzero(frei)
+    if len(xs) < 2: return []
+    ox, oy = ursprung
+    pt = lambda x, y: ((x + .5 - ox)*skala, (y + .5 - oy)*skala)
+    H, W = frei.shape; hat = lambda x, y: 0 <= x < W and 0 <= y < H and frei[y, x]
+    segs = []
+    for x, y in zip(xs, ys):                                            # Nachbarn verketten; Diagonale nur ohne Umweg
+        if hat(x + 1, y): segs.append((pt(x, y), pt(x + 1, y)))
+        if hat(x, y + 1): segs.append((pt(x, y), pt(x, y + 1)))
+        if hat(x + 1, y + 1) and not hat(x + 1, y) and not hat(x, y + 1): segs.append((pt(x, y), pt(x + 1, y + 1)))
+        if hat(x - 1, y + 1) and not hat(x - 1, y) and not hat(x, y + 1): segs.append((pt(x, y), pt(x - 1, y + 1)))
+    if not segs: return []
+    li = linemerge(MultiLineString(segs))
+    return [l for l in getattr(li, 'geoms', [li]) if not l.is_empty]
 
 
 def hexf(c): return '#%02x%02x%02x' % tuple(int(v) for v in c)
@@ -227,7 +277,7 @@ def form(fid, name, gruppe, pfad, k=None, glatt=GLATT):
     bx0, by0, bx1, by1 = g.bounds
 
     # Farbflächen, grosse zuerst (kleine liegen beim Zeichnen oben), Schwarz (Umrisslinien) zuoberst
-    etik, etik_li, palette, si = quantisieren(rgb, maske, k, glatt)
+    etik, etik_li, palette, si, duenn = quantisieren(rgb, maske, k, glatt)
     reihenfolge = [i for i in np.argsort(-np.bincount(etik[etik >= 0], minlength=len(palette))) if i != si]
     if si is not None: reihenfolge.append(si)
 
@@ -255,9 +305,12 @@ def form(fid, name, gruppe, pfad, k=None, glatt=GLATT):
     innen = g.buffer(-.6)
     li = unary_union(grenzen).intersection(innen) if grenzen else LineString()
     li = linemerge(li) if li.geom_type == 'MultiLineString' else li
+    # dazu die Mittellinien der dünnen Striche zwischen gleichfarbigen Flächen
+    mitte = unary_union(mittellinien(duenn, maske, etik_li, skala, (x0, y0))).intersection(innen)
+    mitte = linemerge(mitte) if mitte.geom_type == 'MultiLineString' else mitte
     det = []
-    for l in getattr(li, 'geoms', [li]):
-        if l.is_empty or l.length < 1.5: continue
+    for l in list(getattr(li, 'geoms', [li])) + list(getattr(mitte, 'geoms', [mitte])):
+        if l.is_empty or l.geom_type != 'LineString' or l.length < 1.5: continue
         pts = np.asarray(l.simplify(tol).coords)
         if glatt and len(pts) >= 3:                                     # offene Linie runden, Enden festhalten
             p = pts
