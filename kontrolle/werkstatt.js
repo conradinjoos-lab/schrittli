@@ -107,9 +107,11 @@ const W=(()=>{
  async function daten(id){
   if(LOKAL){const r=await fetch('/api/'+id);const j=await r.json();if(!r.ok)throw new Error(j.fehler||'Fehler '+r.status);return j}
   const [a,v,meta,schule,st]=await Promise.all([datei(WERK,id+'/analyse.json'),datei(WERK,id+'/video.json'),datei(WERK,'meta.json'),datei(APP,SCHULE),datei(WERK,id+'/streifen.jpg','blob').then(bildLaden)]);
-  if(!a)throw new Error('Kein analyse.json für '+id+' in der Werkstatt');
+  if(!a){   // App-Kennung (z. B. zw-schiebeknoten aus einer Meldung) statt YouTube-Kennung: über schule.json auflösen
+   const s=JSON.parse(schule).videos.find(x=>x.id===id&&(x.source||{}).id&&x.source.id!==id);if(s)return daten(s.source.id);
+   throw new Error('Kein analyse.json für '+id+' in der Werkstatt')}
   const analyse=JSON.parse(a),m=JSON.parse(meta);streifen=st;anzahl=st?analyse._bilder||(st.naturalHeight/H*SP):0;
-  return {analyse,entwurf:v?JSON.parse(v):null,schule:zuSchule(JSON.parse(schule).videos,id),themen:m.themen,vokabular:m.vokabular}}
+  return {id,analyse,entwurf:v?JSON.parse(v):null,schule:zuSchule(JSON.parse(schule).videos,id),themen:m.themen,vokabular:m.vokabular}}
  /* Einzelbild n (ab 1, wie /f/<id>/<n>) */
  function bild(id,n){
   if(LOKAL)return '/f/'+id+'/'+n;
