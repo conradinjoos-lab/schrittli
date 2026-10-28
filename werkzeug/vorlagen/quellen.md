@@ -9,7 +9,7 @@ Quelle jeder Grafik: `https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg
 
 **Openclipart** (CC0 1.0, https://creativecommons.org/publicdomain/zero/1.0/): keine Nennung nötig, Autor und Seite trotzdem aufgeführt.
 
-Alle Quellen sind frei nutzbar (CC0 oder CC-BY); nichts stammt von Flaticon.
+Alle Quellen sind frei nutzbar (CC0, CC-BY oder Vecteezy Free License mit Nennung); nichts stammt von Flaticon.
 
 ## Buchstaben & Zahlen bunt
 
@@ -146,3 +146,64 @@ Twemoji-Grafiken (siehe oben), mit schwarzem Umriss versehen. Skript: `werkzeug/
 | Geschenk | emoji-geschenk | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f381.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
 | Ballon | emoji-ballon | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f388.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
 | Pokal | emoji-pokal | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f3c6.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+
+## Berge
+
+Elf Bilder von **Vecteezy** (Vecteezy Free License, Nennung «Vecteezy» nötig, Bildseite `https://de.vecteezy.com/png/<Nr>`); die übrigen zwölf Berge sind eigene Zeichnungen (CC0), erzeugt mit `werkzeug/vorlagen/silhouetten.py`.
+
+| Motiv | Figur-ID | URL | Autor | Lizenz |
+|---|---|---|---|---|
+| Berg mit Umriss | berg-umriss | https://de.vecteezy.com/png/36283373 | ilham mubarok | Vecteezy Free License, Nennung Vecteezy |
+| Bergspitze | berg-spitze | https://de.vecteezy.com/png/1206172 | vecteezy-pngs | Vecteezy Free License, Nennung Vecteezy |
+| Berg Freihand | berg-freihand | https://de.vecteezy.com/png/13743555 | Tananuphong Kummaru | Vecteezy Free License, Nennung Vecteezy |
+| Fuji | berg-fuji-bild | https://de.vecteezy.com/png/14037398 | Kumamori bysine | Vecteezy Free License, Nennung Vecteezy |
+| Berg mit Schneekappe | berg-schneekappe | https://de.vecteezy.com/png/23391806 | Alfanudin M | Vecteezy Free License, Nennung Vecteezy |
+| Berg grün | berg-gruen | https://de.vecteezy.com/png/23630074 | Arief Sapta Adjie | Vecteezy Free License, Nennung Vecteezy |
+| Berg Formen | berg-formen | https://de.vecteezy.com/png/35546488 | Sugix Invaders | Vecteezy Free License, Nennung Vecteezy |
+| Berg violett | berg-violett | https://de.vecteezy.com/png/36283377 | ilham mubarok | Vecteezy Free License, Nennung Vecteezy |
+| Berg Silhouette 1 | berg-sil-1 | https://de.vecteezy.com/png/43768271 | Pram Samnak | Vecteezy Free License, Nennung Vecteezy |
+| Berg Silhouette 2 | berg-sil-2 | https://de.vecteezy.com/png/43768281 | Pram Samnak | Vecteezy Free License, Nennung Vecteezy |
+| Berg Silhouette 3 | berg-sil-3 | https://de.vecteezy.com/png/45552009 | Creative Stocks99 | Vecteezy Free License, Nennung Vecteezy |
+| Doppelgipfel | berg-doppel | – | eigene Zeichnung | CC0 |
+| Drei Berge | berg-dreiecke | – | eigene Zeichnung | CC0 |
+| Vulkanberg | berg-fuji | – | eigene Zeichnung | CC0 |
+| Gipfelkreuz | berg-gipfelkreuz | – | eigene Zeichnung | CC0 |
+| Hochgebirge | berg-hochgebirge | – | eigene Zeichnung | CC0 |
+| Berghütte | berg-huette | – | eigene Zeichnung | CC0 |
+| Bergkette | berg-kette | – | eigene Zeichnung | CC0 |
+| Matterhorn-Spitze | berg-matterhorn-sil | – | eigene Zeichnung | CC0 |
+| Berge mit Mond | berg-mond | – | eigene Zeichnung | CC0 |
+| Berge mit Sonne | berg-sonne | – | eigene Zeichnung | CC0 |
+| Berggipfel | berg-trio | – | eigene Zeichnung | CC0 |
+| Vulkan | berg-vulkan | – | eigene Zeichnung | CC0 |
+
+## Städte
+
+Alle 24 Skylines und Wahrzeichen sind eigene Zeichnungen (Polygone, schwarz auf durchsichtig), erzeugt mit `werkzeug/vorlagen/silhouetten.py`; es wurde keine Vorlage kopiert.
+
+| Motiv | Figur-ID | URL | Autor | Lizenz |
+|---|---|---|---|---|
+| Zürich | stadt-zuerich | – | eigene Zeichnung | CC0 |
+| Bern | stadt-bern | – | eigene Zeichnung | CC0 |
+| Basel | stadt-basel | – | eigene Zeichnung | CC0 |
+| Luzern | stadt-luzern | – | eigene Zeichnung | CC0 |
+| Genf | stadt-genf | – | eigene Zeichnung | CC0 |
+| Paris | stadt-paris | – | eigene Zeichnung | CC0 |
+| New York | stadt-newyork | – | eigene Zeichnung | CC0 |
+| London | stadt-london | – | eigene Zeichnung | CC0 |
+| Rom | stadt-rom | – | eigene Zeichnung | CC0 |
+| Berlin | stadt-berlin | – | eigene Zeichnung | CC0 |
+| Schiefer Turm von Pisa | stadt-pisa | – | eigene Zeichnung | CC0 |
+| Dorf mit Kirche | stadt-dorf-kirche | – | eigene Zeichnung | CC0 |
+| Hochhäuser | stadt-hochhaeuser | – | eigene Zeichnung | CC0 |
+| Burg | stadt-burg | – | eigene Zeichnung | CC0 |
+| Windmühlen | stadt-muehlen | – | eigene Zeichnung | CC0 |
+| Tokio | stadt-tokio | – | eigene Zeichnung | CC0 |
+| Dubai | stadt-dubai | – | eigene Zeichnung | CC0 |
+| Venedig | stadt-venedig | – | eigene Zeichnung | CC0 |
+| Moskau | stadt-moskau | – | eigene Zeichnung | CC0 |
+| Amsterdam | stadt-amsterdam | – | eigene Zeichnung | CC0 |
+| Wien | stadt-wien | – | eigene Zeichnung | CC0 |
+| Athen | stadt-athen | – | eigene Zeichnung | CC0 |
+| Pyramiden | stadt-pyramiden | – | eigene Zeichnung | CC0 |
+| Märchenschloss | stadt-schloss | – | eigene Zeichnung | CC0 |
