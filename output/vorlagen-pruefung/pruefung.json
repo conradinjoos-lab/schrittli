@@ -1,5 +1,5 @@
 {
-  "figuren": 582,
+  "figuren": 629,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -4878,6 +4878,429 @@
       "pixel": [
         765,
         596
+      ]
+    },
+    {
+      "id": "berg-umriss",
+      "farbpixelIdentisch": true,
+      "teile": 6,
+      "pixel": [
+        6351,
+        2473
+      ]
+    },
+    {
+      "id": "berg-spitze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1120,
+        610
+      ]
+    },
+    {
+      "id": "berg-freihand",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        10360,
+        2998
+      ]
+    },
+    {
+      "id": "berg-fuji-bild",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2000,
+        928
+      ]
+    },
+    {
+      "id": "berg-schneekappe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2848,
+        1536
+      ]
+    },
+    {
+      "id": "berg-gruen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        3881,
+        1130
+      ]
+    },
+    {
+      "id": "berg-formen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        4803,
+        2034
+      ]
+    },
+    {
+      "id": "berg-violett",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        6353,
+        2634
+      ]
+    },
+    {
+      "id": "berg-sil-1",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2749,
+        1973
+      ]
+    },
+    {
+      "id": "berg-sil-2",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2460,
+        1984
+      ]
+    },
+    {
+      "id": "berg-sil-3",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        3334,
+        2368
+      ]
+    },
+    {
+      "id": "berg-doppel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2319,
+        871
+      ]
+    },
+    {
+      "id": "berg-dreiecke",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1999,
+        901
+      ]
+    },
+    {
+      "id": "berg-fuji",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2279,
+        671
+      ]
+    },
+    {
+      "id": "berg-gipfelkreuz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1879,
+        1059
+      ]
+    },
+    {
+      "id": "berg-hochgebirge",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2560,
+        1121
+      ]
+    },
+    {
+      "id": "berg-huette",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2319,
+        921
+      ]
+    },
+    {
+      "id": "berg-kette",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        3160,
+        701
+      ]
+    },
+    {
+      "id": "berg-matterhorn-sil",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2279,
+        1051
+      ]
+    },
+    {
+      "id": "berg-mond",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        2319,
+        1031
+      ]
+    },
+    {
+      "id": "berg-sonne",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2339,
+        911
+      ]
+    },
+    {
+      "id": "berg-trio",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2519,
+        841
+      ]
+    },
+    {
+      "id": "berg-vulkan",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        1799,
+        1241
+      ]
+    },
+    {
+      "id": "stadt-zuerich",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2583,
+        880
+      ]
+    },
+    {
+      "id": "stadt-bern",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2585,
+        950
+      ]
+    },
+    {
+      "id": "stadt-basel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2386,
+        950
+      ]
+    },
+    {
+      "id": "stadt-luzern",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        2583,
+        770
+      ]
+    },
+    {
+      "id": "stadt-genf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2386,
+        950
+      ]
+    },
+    {
+      "id": "stadt-paris",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        2580,
+        1221
+      ]
+    },
+    {
+      "id": "stadt-newyork",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2780,
+        1350
+      ]
+    },
+    {
+      "id": "stadt-london",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        2581,
+        1250
+      ]
+    },
+    {
+      "id": "stadt-rom",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        2561,
+        735
+      ]
+    },
+    {
+      "id": "stadt-berlin",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        2580,
+        1350
+      ]
+    },
+    {
+      "id": "stadt-pisa",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1410,
+        1150
+      ]
+    },
+    {
+      "id": "stadt-dorf-kirche",
+      "farbpixelIdentisch": true,
+      "teile": 7,
+      "pixel": [
+        2361,
+        860
+      ]
+    },
+    {
+      "id": "stadt-hochhaeuser",
+      "farbpixelIdentisch": true,
+      "teile": 8,
+      "pixel": [
+        2780,
+        1070
+      ]
+    },
+    {
+      "id": "stadt-burg",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2359,
+        1141
+      ]
+    },
+    {
+      "id": "stadt-muehlen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2600,
+        1052
+      ]
+    },
+    {
+      "id": "stadt-tokio",
+      "farbpixelIdentisch": true,
+      "teile": 7,
+      "pixel": [
+        2586,
+        1201
+      ]
+    },
+    {
+      "id": "stadt-dubai",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        2580,
+        1450
+      ]
+    },
+    {
+      "id": "stadt-venedig",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        2584,
+        1040
+      ]
+    },
+    {
+      "id": "stadt-moskau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2001,
+        1060
+      ]
+    },
+    {
+      "id": "stadt-amsterdam",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2580,
+        632
+      ]
+    },
+    {
+      "id": "stadt-wien",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        2560,
+        1356
+      ]
+    },
+    {
+      "id": "stadt-athen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2559,
+        771
+      ]
+    },
+    {
+      "id": "stadt-pyramiden",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2299,
+        701
+      ]
+    },
+    {
+      "id": "stadt-schloss",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2559,
+        1351
       ]
     },
     {

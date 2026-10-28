@@ -29,6 +29,8 @@
   "Geburtstag & Party",
   "Tierwelt",
   "Küche & Restaurant",
+  "Berge",
+  "Städte",
   "Flaggen & Kontinente"
  ],
  "figuren": [
@@ -3349,6 +3351,335 @@
    "name": "Brezel-Zeichen",
    "welt": "Küche & Restaurant",
    "datei": "brezel-gelb.png"
+  },
+  {
+   "id": "berg-umriss",
+   "name": "Berg mit Umriss",
+   "welt": "Berge",
+   "datei": "berg-umriss.png",
+   "k": 2
+  },
+  {
+   "id": "berg-spitze",
+   "name": "Bergspitze",
+   "welt": "Berge",
+   "datei": "berg-spitze.png",
+   "k": 2
+  },
+  {
+   "id": "berg-freihand",
+   "name": "Berg Freihand",
+   "welt": "Berge",
+   "datei": "berg-freihand.png",
+   "k": 2
+  },
+  {
+   "id": "berg-fuji-bild",
+   "name": "Fuji",
+   "welt": "Berge",
+   "datei": "berg-fuji-bild.png",
+   "k": 3
+  },
+  {
+   "id": "berg-schneekappe",
+   "name": "Berg mit Schneekappe",
+   "welt": "Berge",
+   "datei": "berg-schneekappe.png",
+   "k": 3
+  },
+  {
+   "id": "berg-gruen",
+   "name": "Berg grün",
+   "welt": "Berge",
+   "datei": "berg-gruen.png",
+   "k": 3
+  },
+  {
+   "id": "berg-formen",
+   "name": "Berg Formen",
+   "welt": "Berge",
+   "datei": "berg-formen.png",
+   "k": 3
+  },
+  {
+   "id": "berg-violett",
+   "name": "Berg violett",
+   "welt": "Berge",
+   "datei": "berg-violett.png",
+   "k": 3
+  },
+  {
+   "id": "berg-sil-1",
+   "name": "Berg Silhouette 1",
+   "welt": "Berge",
+   "datei": "berg-sil-1.png",
+   "k": 2
+  },
+  {
+   "id": "berg-sil-2",
+   "name": "Berg Silhouette 2",
+   "welt": "Berge",
+   "datei": "berg-sil-2.png",
+   "k": 2
+  },
+  {
+   "id": "berg-sil-3",
+   "name": "Berg Silhouette 3",
+   "welt": "Berge",
+   "datei": "berg-sil-3.png",
+   "k": 2
+  },
+  {
+   "id": "berg-doppel",
+   "name": "Doppelgipfel",
+   "welt": "Berge",
+   "datei": "berg-doppel.png",
+   "k": 1
+  },
+  {
+   "id": "berg-dreiecke",
+   "name": "Drei Berge",
+   "welt": "Berge",
+   "datei": "berg-dreiecke.png",
+   "k": 1
+  },
+  {
+   "id": "berg-fuji",
+   "name": "Vulkanberg",
+   "welt": "Berge",
+   "datei": "berg-fuji.png",
+   "k": 1
+  },
+  {
+   "id": "berg-gipfelkreuz",
+   "name": "Gipfelkreuz",
+   "welt": "Berge",
+   "datei": "berg-gipfelkreuz.png",
+   "k": 1
+  },
+  {
+   "id": "berg-hochgebirge",
+   "name": "Hochgebirge",
+   "welt": "Berge",
+   "datei": "berg-hochgebirge.png",
+   "k": 1
+  },
+  {
+   "id": "berg-huette",
+   "name": "Berghütte",
+   "welt": "Berge",
+   "datei": "berg-huette.png",
+   "k": 1
+  },
+  {
+   "id": "berg-kette",
+   "name": "Bergkette",
+   "welt": "Berge",
+   "datei": "berg-kette.png",
+   "k": 1
+  },
+  {
+   "id": "berg-matterhorn-sil",
+   "name": "Matterhorn-Spitze",
+   "welt": "Berge",
+   "datei": "berg-matterhorn-sil.png",
+   "k": 1
+  },
+  {
+   "id": "berg-mond",
+   "name": "Berge mit Mond",
+   "welt": "Berge",
+   "datei": "berg-mond.png",
+   "k": 1
+  },
+  {
+   "id": "berg-sonne",
+   "name": "Berge mit Sonne",
+   "welt": "Berge",
+   "datei": "berg-sonne.png",
+   "k": 1
+  },
+  {
+   "id": "berg-trio",
+   "name": "Berggipfel",
+   "welt": "Berge",
+   "datei": "berg-trio.png",
+   "k": 1
+  },
+  {
+   "id": "berg-vulkan",
+   "name": "Vulkan",
+   "welt": "Berge",
+   "datei": "berg-vulkan.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-zuerich",
+   "name": "Zürich",
+   "welt": "Städte",
+   "datei": "stadt-zuerich.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-bern",
+   "name": "Bern",
+   "welt": "Städte",
+   "datei": "stadt-bern.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-basel",
+   "name": "Basel",
+   "welt": "Städte",
+   "datei": "stadt-basel.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-luzern",
+   "name": "Luzern",
+   "welt": "Städte",
+   "datei": "stadt-luzern.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-genf",
+   "name": "Genf",
+   "welt": "Städte",
+   "datei": "stadt-genf.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-paris",
+   "name": "Paris",
+   "welt": "Städte",
+   "datei": "stadt-paris.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-newyork",
+   "name": "New York",
+   "welt": "Städte",
+   "datei": "stadt-newyork.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-london",
+   "name": "London",
+   "welt": "Städte",
+   "datei": "stadt-london.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-rom",
+   "name": "Rom",
+   "welt": "Städte",
+   "datei": "stadt-rom.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-berlin",
+   "name": "Berlin",
+   "welt": "Städte",
+   "datei": "stadt-berlin.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-pisa",
+   "name": "Schiefer Turm von Pisa",
+   "welt": "Städte",
+   "datei": "stadt-pisa.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-dorf-kirche",
+   "name": "Dorf mit Kirche",
+   "welt": "Städte",
+   "datei": "stadt-dorf-kirche.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-hochhaeuser",
+   "name": "Hochhäuser",
+   "welt": "Städte",
+   "datei": "stadt-hochhaeuser.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-burg",
+   "name": "Burg",
+   "welt": "Städte",
+   "datei": "stadt-burg.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-muehlen",
+   "name": "Windmühlen",
+   "welt": "Städte",
+   "datei": "stadt-muehlen.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-tokio",
+   "name": "Tokio",
+   "welt": "Städte",
+   "datei": "stadt-tokio.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-dubai",
+   "name": "Dubai",
+   "welt": "Städte",
+   "datei": "stadt-dubai.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-venedig",
+   "name": "Venedig",
+   "welt": "Städte",
+   "datei": "stadt-venedig.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-moskau",
+   "name": "Moskau",
+   "welt": "Städte",
+   "datei": "stadt-moskau.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-amsterdam",
+   "name": "Amsterdam",
+   "welt": "Städte",
+   "datei": "stadt-amsterdam.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-wien",
+   "name": "Wien",
+   "welt": "Städte",
+   "datei": "stadt-wien.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-athen",
+   "name": "Athen",
+   "welt": "Städte",
+   "datei": "stadt-athen.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-pyramiden",
+   "name": "Pyramiden",
+   "welt": "Städte",
+   "datei": "stadt-pyramiden.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-schloss",
+   "name": "Märchenschloss",
+   "welt": "Städte",
+   "datei": "stadt-schloss.png",
+   "k": 1
   },
   {
    "id": "flagge-schweiz",
