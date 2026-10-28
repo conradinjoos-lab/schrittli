@@ -102,11 +102,11 @@
  <header>
   <a class="zurueck" href="./" title="Zurück zur Kontrolle">←</a>
   <div class="logo">🏫</div>
-  <div><h1>Unterricht</h1><div class="unter">Steuert, was die Schul-iPads gerade zeigen · Gruppe anlegen, Link auf die iPads, dann Aufgaben freigeben</div></div>
+  <div><h1>Unterricht</h1></div>
  </header>
  <section class="karte hell" id="neu-link" hidden>
   <h2>Gruppe angelegt – Link jetzt sichern</h2>
-  <p>Diesen Link öffnest du einmal auf jedem iPad (in Safari, dann «Zum Home-Bildschirm»). Das iPad folgt danach dieser Gruppe. Der Link wird <b>nur jetzt</b> angezeigt – bewahre ihn für weitere iPads auf.</p>
+  <p><b>Nur jetzt sichtbar.</b></p>
   <div class="link"><input type="text" id="link" readonly><button class="p" id="kopieren">Link kopieren</button><button class="s" id="qr-knopf">QR-Code</button></div>
   <div class="qr" id="qr" hidden></div>
  </section>
@@ -120,7 +120,6 @@
    </div>
    <div class="karte" id="favoriten-karte">
     <h2>Favoriten</h2>
-    <p class="klein" style="margin:0 0 8px">Gespeicherte Freigaben – antippen lädt sie in den Editor.</p>
     <div id="favoriten"></div>
    </div>
   </aside>
@@ -144,7 +143,7 @@
    <div class="videos" id="videos"></div>
    <div class="material">
     <h3>Material für diese Lektion</h3>
-    <div id="material"><p class="klein" style="margin:0">Wähle Aufgaben, dann erscheint hier das Material.</p></div>
+    <div id="material"></div>
     <div class="aktion" style="margin-top:8px">
      <span class="papier" id="papier" title="Papierformat für den Druck"><label><input type="radio" name="papier" value="A4" checked>A4</label><label><input type="radio" name="papier" value="A3">A3</label></span>
      <button class="s" id="drucken-material" disabled>🖨 Materialliste drucken</button>
@@ -158,7 +157,7 @@
  </div>
  <div class="karte">
   <h2>Verbundene iPads <span class="klein" id="g-anzahl"></span></h2>
-  <div id="geraete"><p class="klein">Noch kein iPad verbunden. Öffne den Gruppenlink auf den iPads.</p></div>
+  <div id="geraete"><p class="klein">Noch kein iPad verbunden.</p></div>
  </div>
 </template>
 <div id="druck" aria-hidden="true"></div>
@@ -188,7 +187,7 @@ try{await W.bereit();
 /* ---------- Gruppen ---------- */
 function zeichneGruppen(){
  $('#gruppen').innerHTML=gruppen.length?gruppen.map(g=>{const m=modus(g.policy.mode);return `<button class="eintrag${aktiv&&aktiv.id===g.id?' on':''}" data-id="${g.id}"><span class="grow"><b>${esc(g.name)}</b><span class="status"><i class="${g.policy.mode==='closed'?'':'an'}"></i>${m[1]} ${esc(g.policy.mode==='projects'||g.policy.mode==='closed'?g.policy.title||m[2]:m[2])}</span></span></button>`}).join(''):
-  '<p class="klein">Noch keine Gruppe. Eine Gruppe ist meist eine Klasse oder ein iPad-Koffer.</p>';
+  '<p class="klein">Noch keine Gruppe.</p>';
  $('#gruppen').querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>waehle(b.dataset.id));
 }
 $('#neu-form').onsubmit=async e=>{e.preventDefault();const b=e.target.querySelector('button');b.disabled=true;fehler($('#neu-fehler'));
@@ -230,7 +229,7 @@ function ausFormular(){
  return {mode,title:($('#titel').value.trim()||vorschlag()).slice(0,80),ids,grade:+$('#klasse').value||null,simple:true,resize:true,recolor:true,gallery:$('#galerie').checked,selection:ids.length===1?'single':'custom',category:'',plan:mode==='projects'&&$('#plan').checked};
 }
 function zeichneChips(){
- $('#chips').innerHTML=wahl.size?[...wahl].map(id=>`<span class="chip">${esc(videoOf(id).title)}<button data-weg="${id}" title="Entfernen">✕</button></span>`).join(''):'<span class="klein">Noch keine Aufgabe gewählt – unten antippen.</span>';
+ $('#chips').innerHTML=wahl.size?[...wahl].map(id=>`<span class="chip">${esc(videoOf(id).title)}<button data-weg="${id}" title="Entfernen">✕</button></span>`).join(''):'';
  $('#chips').querySelectorAll('[data-weg]').forEach(b=>b.onclick=()=>{wahl.delete(b.dataset.weg);zeichneChips();zeichneVideos()});
  $('#titel').placeholder=vorschlag();zeichneMaterial();
 }
@@ -243,8 +242,8 @@ function materialListe(vs){
 function zeichneMaterial(){
  const el=$('#material');if(!el)return;const vs=gewaehlt(),liste=materialListe(vs);
  $('#drucken-material').disabled=$('#drucken-qr').disabled=!vs.length;
- if(!vs.length){el.innerHTML='<p class="klein" style="margin:0">Wähle Aufgaben, dann erscheint hier das Material.</p>';return}
- el.innerHTML=(liste.length?`<div class="mat-liste">${liste.map(m=>`<span class="mat" title="${esc(m.titel.join(', '))}">${esc(m.name)}${vs.length>1&&m.titel.length>1?`<small>×${m.titel.length}</small>`:''}</span>`).join('')}</div>`:'<p class="klein">Für diese Aufgaben ist kein Material hinterlegt.</p>')
+ if(!vs.length){el.innerHTML='';return}
+ el.innerHTML=(liste.length?`<div class="mat-liste">${liste.map(m=>`<span class="mat" title="${esc(m.titel.join(', '))}">${esc(m.name)}${vs.length>1&&m.titel.length>1?`<small>×${m.titel.length}</small>`:''}</span>`).join('')}</div>`:'')
   +vs.map(v=>`<div class="mat-pro"><b>${esc(v.title)}</b>: ${(v.material||[]).length?esc((v.material||[]).map(matName).join(', ')):'<i>kein Material angegeben</i>'}</div>`).join('');
 }
 /* Link aufs einzelne Video, gleiches Format wie schoolLink() in quelle/p2.js: Bildanleitungen «#a=<id>», sonst «#s=<base64url-Payload>». */
@@ -306,7 +305,7 @@ async function geraeteLaden(){
 }
 function zeichneGeraete(){
  const el=$('#geraete');if(!el||!geraete)return;const g=geraete.geraete;$('#g-anzahl').textContent=g.length?`(${g.filter(d=>geraete.now-d.gesehen<120000).length} von ${g.length} online)`:'';
- if(!g.length){el.innerHTML='<p class="klein">Noch kein iPad verbunden. Öffne den Gruppenlink auf den iPads.</p>';return}
+ if(!g.length){el.innerHTML='<p class="klein">Noch kein iPad verbunden.</p>';return}
  const p=aktiv.policy,ids=p.mode==='projects'?p.ids:[],mitPlan=ids.length>0&&(p.plan||g.some(d=>(d.fortschritt||[]).some(f=>ids.includes(f.videoId))));
  const SCHRITTE=['Material richten','Video','Foto'],boxen=d=>ids.map(id=>{const f=(d.fortschritt||[]).find(x=>x.videoId===id),s=f?f.schritte:[false,false,false];
   return `<div class="plan-zeile"><span class="boxen">${s.map((an,i)=>`<i class="box${an?' an':''}" title="${SCHRITTE[i]}${an?' ✓':''}">${'①②③'[i]}</i>`).join('')}</span><span title="${esc(videoOf(id)?.title||id)}">${esc(videoOf(id)?.title||id)}</span></div>`}).join('');
@@ -319,13 +318,13 @@ function zeichneGeraete(){
 }
 /* ---------- Favoriten ---------- */
 function zeichneFavoriten(){
- $('#favoriten').innerHTML=favoriten.length?favoriten.map(f=>`<span class="fav"><button class="laden" data-fav="${f.id}" title="In den Editor laden">${modus(f.policy.mode)[1]} ${esc(f.name)}</button><button data-weg="${f.id}" title="Favorit entfernen">✕</button></span>`).join(''):'<p class="klein" style="margin:0">Noch keine. Im Editor «Als Favorit speichern» drücken.</p>';
+ $('#favoriten').innerHTML=favoriten.length?favoriten.map(f=>`<span class="fav"><button class="laden" data-fav="${f.id}" title="In den Editor laden">${modus(f.policy.mode)[1]} ${esc(f.name)}</button><button data-weg="${f.id}" title="Favorit entfernen">✕</button></span>`).join(''):'';
  $('#favoriten').querySelectorAll('[data-fav]').forEach(b=>b.onclick=()=>{if(!aktiv){fehler($('#fehler'),'Zuerst links eine Gruppe wählen.');return}fuellen(favoriten.find(f=>f.id===b.dataset.fav).policy);$('#hinweis').textContent='Favorit geladen – noch nicht freigegeben.'});
  $('#favoriten').querySelectorAll('[data-weg]').forEach(b=>b.onclick=async()=>{if(!confirm('Favorit entfernen?'))return;try{await W.unterricht.favoritEntfernen(b.dataset.weg);favoriten=favoriten.filter(f=>f.id!==b.dataset.weg);zeichneFavoriten()}catch(x){fehler($('#fehler'),x)}});
 }
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)geraeteLaden()});
 zeichneGruppen();zeichneFavoriten();
-if(gruppen.length)waehle(gruppen[0].id);else $('#haupt').innerHTML='<div class="nichts">Lege links eine Gruppe an.<br><span class="klein">Danach bekommst du den Link für die iPads.</span></div>';
+if(gruppen.length)waehle(gruppen[0].id);else $('#haupt').innerHTML='<div class="nichts">Lege links eine Gruppe an.</div>';
 })();
 </script>
 </body>
