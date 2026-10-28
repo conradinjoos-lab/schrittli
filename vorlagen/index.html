@@ -103,6 +103,19 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 .l-weg{flex:none;width:36px;height:36px;border-radius:10px;border:2px solid transparent;background:none;color:var(--muted);font:700 22px/1 Nunito,sans-serif;cursor:pointer}
 .l-weg:hover{color:var(--bad);border-color:var(--line)}
 .l-hinweis{font-size:12px;color:var(--muted);margin:8px 0 0}
+.l-modus{margin:0 0 8px}
+.liste li{flex-wrap:wrap}
+.l-knopf{flex:none;width:32px;height:32px;border-radius:10px;border:2px solid transparent;background:none;color:var(--muted);font:700 18px/1 Nunito,sans-serif;cursor:pointer}
+.l-knopf:hover{color:var(--acc);border-color:var(--line)}
+.l-knopf[aria-pressed="true"]{color:var(--acc);background:var(--acc-soft)}
+.l-mass{flex-basis:100%;display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;padding:0 0 2px 42px;font-size:13px;color:var(--muted)}
+.l-mass input[type=text]{width:56px;font-size:15px;padding:3px 6px;border-radius:8px;text-align:center}
+.l-mass select{font:inherit;font-size:13px;padding:3px 4px;margin-left:auto;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.vorschau.freimodus svg{touch-action:none}
+.vorschau .frei{cursor:grab}
+.vorschau .frei .rahmen{fill:none;stroke:transparent;stroke-width:.5;pointer-events:all}
+.vorschau .frei:hover .rahmen,.vorschau .frei.aktiv .rahmen{stroke:var(--acc);stroke-dasharray:1.5 1}
+.vorschau .frei .griff{fill:var(--acc);cursor:nwse-resize;pointer-events:all}
 @media (max-width:480px){.liste{padding:8px}.liste li{gap:6px}.l-mal{display:none}.liste li input[type=number]{width:54px}}
 .info{font-size:15px;margin:10px 0 0}
 .farben{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin:2px 0 4px 28px;color:var(--muted)}
@@ -232,7 +245,7 @@ input[type=range]{width:100%;accent-color:var(--acc)}
           <label><input type="checkbox" id="punkte"> Einstichpunkte für die Nadel</label>
           <div class="mm" id="mm-punkte"><label for="pabst" id="lbl-pabst">alle 5 mm</label><input type="range" id="pabst" min="2" max="20" step="1" aria-label="Abstand der Einstichpunkte in mm"></div>
           <p class="p-ort" id="p-ort"></p>
-          <label id="feld-strich"><input type="checkbox" id="strich"> Nählinie zusätzlich gestrichelt</label>
+          <label id="feld-strich"><input type="checkbox" id="strich"> Nählinie dazu gestrichelt zeigen</label>
         </div>
       </div>
       <div class="feld wahl">
@@ -244,8 +257,9 @@ input[type=range]{width:100%;accent-color:var(--acc)}
       <button type="button" class="knopf dazu" id="dazu" title="Diese Form mit Grösse und Anzahl in die Liste nehmen – so kommen mehrere Formen zusammen aufs Blatt">+ Aufs Blatt</button>
       <div class="liste" id="liste" hidden>
         <div class="l-kopf"><b id="l-titel">Auf dem Blatt</b><button type="button" class="l-leeren" id="leeren">Liste leeren</button></div>
+        <div class="chips l-modus" id="modus" role="group" aria-label="Anordnung"><button type="button" class="chip" data-modus="auto" aria-pressed="true">Automatisch packen</button><button type="button" class="chip" data-modus="frei" aria-pressed="false">Frei anordnen</button></div>
         <ul id="l-ul"></ul>
-        <p class="l-hinweis">Vorschau und Druck zeigen alle Formen der Liste. Nächste Form wählen, einstellen, «+ Aufs Blatt».</p>
+        <p class="l-hinweis" id="l-hinweis">Vorschau und Druck zeigen alle Formen der Liste. Nächste Form wählen, einstellen, «+ Aufs Blatt».</p>
       </div>
       <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
       <button type="button" class="knopf pausen-auf" id="pausen-auf"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 8.5c-1.2-1.7-4-1.1-4 1 0 2 2.4 3.6 4 5 1.6-1.4 4-3 4-5 0-2.1-2.8-2.7-4-1z"/></svg><span>Auf dem Bildschirm abpausen</span></button>
@@ -377,12 +391,12 @@ function paramForm(id,n){
 }
 
 // Zustand: aus der Adresse, sonst vom letzten Mal
-// punkte: Einstichpunkte an, pabst: ihr Abstand in mm, strich: gestrichelte Nählinie zusätzlich zeigen
-const S={id:'herz',b:5,h:5,papier:'a4',lock:true,n:1,linie:'schnitt',naht:5,zugabe:7,det:true,spiegel:false,param:5,farbig:true,punkte:false,pabst:5,strich:true,netz:{b:8,t:5,h:4}};
+// punkte: Einstichpunkte an, pabst: ihr Abstand in mm, strich: gestrichelte Nählinie zu den Punkten dazu zeigen, frei: Liste von Hand anordnen
+const S={id:'herz',b:5,h:5,papier:'a4',lock:true,n:1,linie:'schnitt',naht:5,zugabe:7,det:true,spiegel:false,param:5,farbig:true,punkte:false,pabst:5,strich:false,frei:false,netz:{b:8,t:5,h:4}};
 try{Object.assign(S,JSON.parse(localStorage.getItem('schrittli-vorlagen')||'{}'))}catch(e){}
 const q=new URLSearchParams(location.search);
 if(q.has('form')&&byId[q.get('form')]){
-  S.id=q.get('form');S.lock=!(q.has('b')&&q.has('h'));S.n=1;S.papier='a4';S.linie='schnitt';S.spiegel=false;S.punkte=false;S.strich=true;
+  S.id=q.get('form');S.lock=!(q.has('b')&&q.has('h'));S.n=1;S.papier='a4';S.linie='schnitt';S.spiegel=false;S.punkte=false;S.strich=false;
   if(PARAM[S.id])S.param=PARAM[S.id].def;
   const f=byId[S.id];if(f.cm&&!q.has('b')&&!q.has('h')){S.b=f.cm*f.w/100;S.h=f.cm*f.h/100}   // empfohlene Grösse der Form
 }
@@ -397,7 +411,8 @@ const mmWert=(v,d,a,b)=>Math.max(a,Math.min(b,Math.round(zahl(v,d))));
 if(q.has('naht'))S.naht=mmWert(q.get('naht'),S.naht,1,20);
 if(q.has('zugabe'))S.zugabe=mmWert(q.get('zugabe'),S.zugabe,1,20);
 if(q.has('punkte')){S.punkte=true;S.pabst=mmWert(q.get('punkte'),S.pabst,2,20)}   // punkte=4: Einstichpunkte alle 4 mm (bis 20 mm, z.B. für Nägel)
-if(q.get('strich')==='0')S.strich=false;                                          // nur Punkte, ohne gestrichelte Nählinie
+if(q.has('strich'))S.strich=q.get('strich')==='1';                               // strich=1: gestrichelte Nählinie zu den Punkten dazu
+if(q.has('frei')||q.has('liste'))S.frei=q.get('frei')==='1';                     // frei=1: Liste von Hand angeordnet
 S.pabst=mmWert(S.pabst,5,2,20);
 if(!byId[S.id])S.id='herz';
 if(q.has('m')){const t=String(q.get('m')).split('x');S.netz=netzMasse({b:t[0],t:t[1],h:t[2]})}
@@ -409,7 +424,8 @@ papierSetzen(S.papier);
 
 // Liste «Aufs Blatt»: mehrere Formen zusammen. In der Adresse als liste=herz:5x5:3,stern:4x3.8:2:z6,fisch:6x3:4:n5:s
 // (Form:Breite×Höhe in cm:Anzahl, dann z=Zacken/Ecken, n=Nählinie mm, a=Nahtzugabe mm, s=gespiegelt,
-//  p=Einstichpunkte alle … mm auf der Nählinie, o=ohne gestrichelte Nählinie, nur Punkte, m=Breite×Tiefe×Höhe eines Netzes)
+//  p=Einstichpunkte alle … mm auf der Nählinie, l=gestrichelte Nählinie zu den Punkten dazu, m=Breite×Tiefe×Höhe eines Netzes,
+//  f=x×y×Blatt in mm und d=um 90° gedreht: Lage beim freien Anordnen)
 const LKEY='schrittli-vorlagen-liste';
 const begrenzt=(v,a,b)=>Math.max(a,Math.min(b,v));
 const punkteAn=e=>e.linie!=='schnitt'&&!!e.punkte;
@@ -418,13 +434,15 @@ function kodieren(e,ohneN){
   if(PARAM[e.id])s+=':z'+e.param;
   if(NETZE[e.id]&&e.netz)s+=':m'+[e.netz.b,e.netz.t,e.netz.h].join('x');
   if(e.linie==='naht')s+=':n'+e.naht;else if(e.linie==='zugabe')s+=':a'+e.zugabe;
-  if(punkteAn(e))s+=':p'+e.pabst+(e.strich===false?':o':'');
-  return s+(e.spiegel?':s':'');
+  if(punkteAn(e))s+=':p'+e.pabst+(e.strich?':l':'');
+  s+=e.spiegel?':s':'';
+  if(!ohneN&&e.x!=null)s+=':f'+[+e.x.toFixed(1),+e.y.toFixed(1),e.blatt||0].join('x')+(e.dreh?':d':'');
+  return s;
 }
 function dekodieren(t){
   const [id,m,n,...opt]=String(t).split(':');if(!byId[id])return null;
   const [b,h]=String(m||'').split('x').map(v=>zahl(v,0));if(!b||!h)return null;
-  const e={id,b:Math.min(b,100),h:Math.min(h,100),n:begrenzt(Math.round(zahl(n,1)),1,500),linie:'schnitt',naht:5,zugabe:7,spiegel:false,param:PARAM[id]?PARAM[id].def:5,punkte:false,pabst:5,strich:true};
+  const e={id,b:Math.min(b,100),h:Math.min(h,100),n:begrenzt(Math.round(zahl(n,1)),1,500),linie:'schnitt',naht:5,zugabe:7,spiegel:false,param:PARAM[id]?PARAM[id].def:5,punkte:false,pabst:5,strich:false};
   opt.forEach(o=>{
     const k=o.charAt(0),v=Math.round(zahl(o.slice(1),0));
     if(k==='m'&&NETZE[id]){const t=o.slice(1).split('x');e.netz=netzMasse({b:t[0],t:t[1],h:t[2]})}
@@ -433,7 +451,10 @@ function dekodieren(t){
     else if(k==='a'&&v){e.linie='zugabe';e.zugabe=begrenzt(v,1,20)}
     else if(k==='p'&&v){e.punkte=true;e.pabst=begrenzt(v,2,20)}
     else if(o==='o')e.strich=false;
+    else if(o==='l')e.strich=true;
     else if(o==='s')e.spiegel=true;
+    else if(o==='d')e.dreh=true;
+    else if(k==='f'){const t=o.slice(1).split('x').map(parseFloat);if(isFinite(t[0])&&isFinite(t[1])){e.x=begrenzt(t[0],0,500);e.y=begrenzt(t[1],0,500);e.blatt=begrenzt(Math.round(t[2])||0,0,MAXSEITEN-1)}}
   });
   if(NETZE[id]){e.netz=netzMasse(e.netz||NETZE[id].def);const f=netzForm(id,e.netz);e.b=f.mm.w/10;e.h=f.mm.h/10}
   return e;
@@ -535,7 +556,7 @@ function stueck(e=S){
   const o=f.original,original=farbig&&o?{datei:o.datei,x:(e.spiegel?f.w-o.x-o.w:o.x)*sx-x0,y:o.y*sy-y0,w:o.w*sx,h:o.h*sy,spiegel:e.spiegel}:null;
   return {w:x1-x0,h:y1-y0,schnitt:verschieben(schnitt),naht:nahtV,det:verschieben(det),farben:farben.map(c=>({f:c.f,d:verschieben(c.d)})),original,
     punkte:[].concat(...pk.map(p=>p.pts)),pabst:isFinite(pmin)?[pmin,pmax]:null,
-    strich:!(pk.length&&e.strich===false),
+    strich:!(pk.length&&!e.strich),
     eng:f.eng*Math.min(sx,sy),zerfaellt:e.linie==='naht'&&(naht.length!==umriss.length||f.eng*Math.min(sx,sy)<2*e.naht+3)};
 }
 // Einstichpunkte auf einem geschlossenen Ring, ungefähr alle sp mm. Ecken und Spitzen bekommen je einen Punkt,
@@ -732,7 +753,7 @@ function packen(posten){
 }
 const masstext=e=>`${cm(e.b)} × ${cm(e.h)} cm`+(e.linie==='naht'?` (Naht ${e.naht} mm`:e.linie==='zugabe'?` (Zugabe ${e.zugabe} mm`:'')+(e.linie==='schnitt'?'':punkteAn(e)?`, Punkte alle ${e.pabst} mm)`:')');
 const breit=(t,pt)=>t.length*pt*.52;   // ungefähre Textbreite in mm
-function blaetterListe(posten,seiten){
+function blaetterListe(posten,seiten,frei){
   const n=Math.min(MAXSEITEN,seiten.length);
   return seiten.slice(0,n).map((seite,s)=>{
     const da=[...new Set(seite.teile.map(t=>t.i))].sort((a,b)=>a-b);
@@ -746,15 +767,19 @@ function blaetterListe(posten,seiten){
     while(unter.length>1&&breit(unter.join(' · ')+blatt,3.4)>NUTZ.w*1.5){unter.pop();zu=' …'}
     const sub=unter.join(' · ')+zu+blatt,eng=breit(sub,3.4)>NUTZ.w;
     const x0=NUTZ.x+(NUTZ.w-seite.breite)/2;
-    const stuecke=seite.teile.map(t=>`<g transform="${setzen(x0+t.x,NUTZ.y+t.y,posten[t.i].lay)}">${posten[t.i].teil}</g>`).join('');
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${BLATT.w} ${BLATT.h}" width="${BLATT.w}mm" height="${BLATT.h}mm" font-family="Nunito,Arial,sans-serif" role="img" aria-label="Blatt ${s+1}: ${teile.map(([,k,i])=>`${k} × ${titel(posten[i].e)}`).join(', ')}">`+
+    const stuecke=seite.teile.map(t=>{const p=posten[t.i],x=x0+t.x,y=NUTZ.y+t.y;
+      if(!frei)return `<g transform="${setzen(x,y,p.lay)}">${p.teil}</g>`;
+      const l=p.lay;   // zum Verschieben: der Rahmen fängt den Zeiger, der Griff unten rechts streckt
+      return `<g class="frei" data-i="${t.i}" transform="translate(${x.toFixed(2)} ${y.toFixed(2)})"><g transform="${l.dreh?`rotate(90) translate(0 ${-l.w})`:''}">${p.teil}</g><rect class="rahmen" x="0" y="0" width="${l.w.toFixed(2)}" height="${l.h.toFixed(2)}"/>${NETZE[p.e.id]?'':`<path class="griff" d="M${(l.w-4).toFixed(2)} ${l.h.toFixed(2)}L${l.w.toFixed(2)} ${(l.h-4).toFixed(2)}V${l.h.toFixed(2)}Z"/>`}</g>`;
+    }).join('');
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${BLATT.w} ${BLATT.h}" width="${BLATT.w}mm" height="${BLATT.h}mm" font-family="Nunito,Arial,sans-serif" data-blatt="${s}" role="img" aria-label="Blatt ${s+1}: ${teile.map(([,k,i])=>`${k} × ${titel(posten[i].e)}`).join(', ')}">`+
       `<rect width="${BLATT.w}" height="${BLATT.h}" fill="#fff"/>`+
       `<text x="10" y="16.5" font-size="6" font-weight="800" fill="#1c2430">${name}</text>`+
       `<text x="10" y="21" font-size="3.4" fill="#5b6573"${eng?` textLength="${NUTZ.w}" lengthAdjust="spacingAndGlyphs"`:''}>${sub}</text>`+
       (leg?leg.svg:'')+stuecke+farbZeile([...new Map(da.flatMap(i=>farbListe(form(posten[i].e))).map(c=>[c.f,c])).values()])+fuss();
   });
 }
-function zeichnenListe(){
+function layoutAuto(){
   // Wie liegen die Formen? Ein paar einfache Regeln durchprobieren, die mit den wenigsten Blättern gewinnt.
   // Bei Gleichstand bleiben die Formen lieber aufrecht.
   const basis=L.map(e=>{const x=voll(e),st=stueck(x);return {e:x,st,teil:teilSvg(st)}});
@@ -771,7 +796,11 @@ function zeichnenListe(){
     const p=basis.map(b=>Object.assign({},b,{lay:lage(b.st,r(b.st,b.e.n))})),s=packen(p);
     if(!seiten||s.length<seiten.length){posten=p;seiten=s}
   });
-  const svg=blaetterListe(posten,seiten);
+  return {posten,seiten};
+}
+function zeichnenListe(){
+  if(S.frei){zeichnenFrei();return}
+  const {posten,seiten}=layoutAuto(),svg=blaetterListe(posten,seiten);
   const passt=posten.filter(p=>p.lay.pro),stk=passt.reduce((a,p)=>a+p.e.n,0),z=seiten.length;
   let info=passt.length?`${stk} Stück · ${passt.length} ${passt.length===1?'Form':'Formen'} · ${z} ${z===1?'Blatt':'Blätter'}`:'';
   const zuGross=posten.filter(p=>!p.lay.pro);
@@ -788,8 +817,56 @@ function zeichnenListe(){
   $('l-titel').textContent=`Auf dem Blatt: ${stk} Stück`;
 }
 
+// Frei anordnen: jedes Stück liegt dort, wo es hingeschoben wurde (x, y in mm auf dem Blatt, blatt = Nummer ab 0)
+const lageFrei=(st,e)=>{const d=!!e.dreh;return {dreh:d,w:d?st.h:st.w,h:d?st.w:st.h,pro:1}};
+const ueberlappt=(a,b)=>a.x<b.x+b.w-.01&&b.x<a.x+a.w-.01&&a.y<b.y+b.h-.01&&b.y<a.y+a.h-.01;
+const kaesten=ohne=>L.map((e,i)=>{if(i===ohne||e.x==null)return null;const l=lageFrei(stueck(voll(e)),e);return {i,x:e.x,y:e.y,w:l.w,h:l.h,blatt:e.blatt||0}}).filter(Boolean);
+// Platz für ein Stück: wenn möglich rechts neben «neben», sonst die erste Lücke (oben, dann links), notfalls ein neues Blatt
+function freiPlatz(e,ohne,neben){
+  const lay=lageFrei(stueck(voll(e)),e),g=BLATT.abstand,kk=kaesten(ohne);
+  const passt=(x,y,blatt)=>x>=0&&y>=0&&x+lay.w<=NUTZ.w+.01&&y+lay.h<=NUTZ.h+.01&&!kk.some(k=>k.blatt===blatt&&ueberlappt(k,{x,y,w:lay.w,h:lay.h}));
+  const setz=(x,y,blatt)=>{e.x=+x.toFixed(1);e.y=+y.toFixed(1);e.blatt=blatt};
+  const n=kk.find(k=>k.i===neben);   // zuerst rechts daneben, sonst darunter
+  if(n&&passt(n.x+n.w+g,n.y,n.blatt))return setz(n.x+n.w+g,n.y,n.blatt);
+  if(n&&passt(n.x,n.y+n.h+g,n.blatt))return setz(n.x,n.y+n.h+g,n.blatt);
+  const nBl=Math.min(MAXSEITEN,Math.max(0,...kk.map(k=>k.blatt+1))+1);
+  for(let blatt=0;blatt<nBl;blatt++){
+    const kand=[{x:0,y:0}];
+    kk.filter(k=>k.blatt===blatt).forEach(k=>{kand.push({x:k.x+k.w+g,y:k.y});kand.push({x:k.x,y:k.y+k.h+g})});
+    kand.sort((a,b)=>a.y-b.y||a.x-b.x);
+    for(const c of kand)if(passt(c.x,c.y,blatt))return setz(c.x,c.y,blatt);
+  }
+  setz(0,0,nBl-1);   // passt in keine Lücke: oben links aufs letzte Blatt
+}
+function zeichnenFrei(){
+  L.forEach((e,i)=>{if(e.x==null)freiPlatz(e,i)});
+  const da=[...new Set(L.map(e=>e.blatt||0))].sort((a,b)=>a-b);   // leere Blätter fallen weg
+  L.forEach(e=>{e.blatt=da.indexOf(e.blatt||0)});
+  const posten=L.map(e=>{const x=voll(e),st=stueck(x),lay=lageFrei(st,x);
+    x.x=e.x=+begrenzt(e.x,0,Math.max(0,NUTZ.w-lay.w)).toFixed(1);x.y=e.y=+begrenzt(e.y,0,Math.max(0,NUTZ.h-lay.h)).toFixed(1);
+    return {e:x,st,teil:teilSvg(st),lay}});
+  const nBl=Math.min(MAXSEITEN,da.length||1),seiten=Array.from({length:nBl},()=>({teile:[],breite:NUTZ.w}));
+  L.forEach((e,i)=>{e.blatt=Math.min(e.blatt,nBl-1);seiten[e.blatt].teile.push({i,x:e.x,y:e.y})});
+  const svg=blaetterListe(posten,seiten,true),druck=blaetterListe(posten,seiten);
+  let info=`${L.length} Stück · ${nBl} ${nBl===1?'Blatt':'Blätter'} · frei angeordnet`;
+  const namen=ps=>[...new Set(ps.map(p=>titel(p.e)))].join(', ');
+  const zuGross=posten.filter(p=>p.lay.w>NUTZ.w+.01||p.lay.h>NUTZ.h+.01);
+  if(zuGross.length)info+=`<br><span class="warn">Zu gross für ein ${BLATT.name}-Blatt: ${namen(zuGross)}. Höchstens ${cm(NUTZ.w/10)} × ${cm(NUTZ.h/10)} cm.${zuGross.every(p=>passtA3(p.st))?a3Tipp():''}</span>`;
+  const kk=posten.map((p,i)=>({i,x:p.e.x,y:p.e.y,w:p.lay.w,h:p.lay.h,blatt:p.e.blatt})),ueber=new Set();
+  kk.forEach((a,i)=>kk.slice(i+1).forEach(b=>{if(a.blatt===b.blatt&&ueberlappt(a,b)){ueber.add(a.i);ueber.add(b.i)}}));
+  if(ueber.size)info+=`<br>Überlappen sich: ${namen([...ueber].map(i=>posten[i]))} – beim Aneinandersetzen gewollt, sonst verschieben.`;
+  const schmal=posten.filter(p=>p.st.eng<4),zerf=posten.filter(p=>p.st.zerfaellt);
+  if(schmal.length)info+=`<br><span class="warn">Kaum zu schneiden, bitte grösser wählen: ${namen(schmal)}.</span>`;
+  if(zerf.length)info+=`<br><span class="warn">Nählinie zerfällt: ${namen(zerf)} – grösser wählen oder kleineren Abstand nehmen.</span>`;
+  $('vorschau').innerHTML=svg.join('');
+  $('druck').innerHTML=druck.join('');
+  $('info').innerHTML=info;$('drucken').disabled=false;
+  $('l-titel').textContent=`Auf dem Blatt: ${L.length} Stück`;
+}
+
 function zeichnen(){
   document.querySelectorAll('.form').forEach(k=>k.setAttribute('aria-pressed',k.dataset.id===S.id));
+  $('vorschau').classList.toggle('freimodus',!!(S.frei&&L.length));
   if(L.length){zeichnenListe();speichern();return}
   const f=form(),st=stueck(),lay=anordnen(st);
   let info,ok=lay.pro>0;
@@ -827,7 +904,8 @@ function speichern(){
   const p=new URLSearchParams({form:S.id,b:+S.b.toFixed(2),h:+S.h.toFixed(2)});
   if(S.papier!=='a4')p.set('papier',S.papier);if(S.n>1)p.set('n',S.n);if(PARAM[S.id])p.set('z',S.param);if(NETZE[S.id])p.set('m',[S.netz.b,S.netz.t,S.netz.h].join('x'));if(S.linie!=='schnitt')p.set('linie',S.linie);
   if(S.linie==='naht')p.set('naht',S.naht);else if(S.linie==='zugabe')p.set('zugabe',S.zugabe);
-  if(punkteAn(S)){p.set('punkte',S.pabst);if(!S.strich)p.set('strich','0')}
+  if(punkteAn(S)){p.set('punkte',S.pabst);if(S.strich)p.set('strich','1')}
+  if(S.frei&&L.length)p.set('frei','1');
   const liste=L.map(e=>kodieren(e));
   try{localStorage.setItem(LKEY,JSON.stringify(liste))}catch(e){}
   try{history.replaceState(null,'','?'+p+(liste.length?'&liste='+liste.join(','):''))}catch(e){}
@@ -836,30 +914,51 @@ function speichern(){
 // Liste bearbeiten
 function listeZeigen(neu){
   $('liste').hidden=!L.length;
+  const nBl=Math.max(1,...L.map(e=>(e.blatt||0)+1));
   $('l-ul').innerHTML=L.map((e,i)=>{
     const st=stueck(voll(e)),pad=Math.max(st.w,st.h)*.06,name=titel(e);
+    let mitte,unten='',klein=masstext(e);
+    if(S.frei){   // jedes Stück einzeln: Kopie, Drehen, eigene Grösse, Blatt
+      klein=klein.replace(/^[^(]*/,'');
+      mitte=`<button type="button" class="l-knopf l-kopie" data-i="${i}" aria-label="${name} daneben kopieren" title="Kopie gleich daneben setzen">⧉</button>`+
+        `<button type="button" class="l-knopf l-dreh" data-i="${i}" aria-pressed="${!!e.dreh}" aria-label="${name} um 90° drehen" title="Um 90° drehen">↻</button>`;
+      const blaetter=Array.from({length:Math.min(MAXSEITEN,nBl+1)},(_,k)=>`<option value="${k}"${k===(e.blatt||0)?' selected':''}>${k<nBl?'Blatt '+(k+1):'neues Blatt'}</option>`).join('');
+      unten=`<span class="l-mass">`+(NETZE[e.id]?`<span>${masstext(e)}</span>`:`<input type="text" inputmode="decimal" value="${cm(e.b)}" data-i="${i}" data-k="b" aria-label="Breite ${name} in cm"><span aria-hidden="true">×</span><input type="text" inputmode="decimal" value="${cm(e.h)}" data-i="${i}" data-k="h" aria-label="Höhe ${name} in cm"><span>cm</span>`)+
+        `<select data-i="${i}" data-k="blatt" aria-label="Blatt für ${name}">${blaetter}</select></span>`;
+    }else mitte=`<span class="l-mal" aria-hidden="true">×</span><input type="number" min="1" max="500" step="1" inputmode="numeric" value="${e.n}" data-i="${i}" aria-label="Anzahl ${name}">`;
     return `<li${i===neu?' class="neu"':''}><svg viewBox="${(-pad).toFixed(2)} ${(-pad).toFixed(2)} ${(st.w+2*pad).toFixed(2)} ${(st.h+2*pad).toFixed(2)}" aria-hidden="true"><path d="${(e.linie==='zugabe'?st.naht:st.schnitt).map(r=>pfad(r,1)).join('')}"/></svg>`+
-      `<span class="l-text"><b>${name}</b><small>${masstext(e)}${e.spiegel?' · gespiegelt':''}</small></span>`+
-      `<span class="l-mal" aria-hidden="true">×</span><input type="number" min="1" max="500" step="1" inputmode="numeric" value="${e.n}" data-i="${i}" aria-label="Anzahl ${name}">`+
-      `<button type="button" class="l-weg" data-i="${i}" aria-label="${name} entfernen" title="Entfernen">×</button></li>`;
+      `<span class="l-text"><b>${name}</b><small>${klein}${e.spiegel?' · gespiegelt':''}</small></span>`+mitte+
+      `<button type="button" class="l-weg" data-i="${i}" aria-label="${name} entfernen" title="Entfernen">×</button>${unten}</li>`;
   }).join('');
 }
 $('dazu').addEventListener('click',()=>{
   const e={id:S.id,b:+S.b.toFixed(2),h:+S.h.toFixed(2),n:S.n,linie:S.linie,naht:S.naht,zugabe:S.zugabe,spiegel:S.spiegel,param:S.param,punkte:punkteAn(S),pabst:S.pabst,strich:S.strich,netz:NETZE[S.id]?Object.assign({},S.netz):undefined};
-  const k=kodieren(e,true);let i=L.findIndex(x=>kodieren(x,true)===k);   // gleiche Form und Grösse: nur Anzahl erhöhen
-  if(i>=0)L[i].n=Math.min(500,L[i].n+e.n);else{L.push(e);i=L.length-1}
+  let i;
+  if(S.frei){e.n=1;freiPlatz(e,-1,L.length-1);L.push(e);i=L.length-1}   // frei: jedes Stück einzeln, gleich neben das letzte
+  else{const k=kodieren(e,true);i=L.findIndex(x=>kodieren(x,true)===k);   // gleiche Form und Grösse: nur Anzahl erhöhen
+    if(i>=0)L[i].n=Math.min(500,L[i].n+e.n);else{L.push(e);i=L.length-1}}
   listeZeigen(i);zeichnen();
 });
 $('l-ul').addEventListener('input',ev=>{
   const t=ev.target;if(!t.matches('input[data-i]'))return;
-  const e=L[+t.dataset.i],v=zahl(t.value,0);if(!e||!v)return;
+  const e=L[+t.dataset.i],v=zahl(t.value,0),k=t.dataset.k;if(!e||!v)return;
+  if(k==='b'||k==='h'){e[k]=Math.min(v,100);zeichnen();return}
   e.n=begrenzt(Math.round(v),1,500);zeichnen();
 });
-$('l-ul').addEventListener('change',ev=>{const t=ev.target;if(t.matches('input[data-i]')&&L[+t.dataset.i])t.value=L[+t.dataset.i].n});
+$('l-ul').addEventListener('change',ev=>{
+  const t=ev.target,e=L[+t.dataset.i];if(!e||!t.dataset.i)return;
+  if(t.matches('select[data-k=blatt]')){e.blatt=begrenzt(Math.round(+t.value)||0,0,MAXSEITEN-1);zeichnen();listeZeigen();return}
+  if(t.matches('input'))t.value=t.dataset.k==='b'||t.dataset.k==='h'?cm(e[t.dataset.k]):e.n;
+});
 $('l-ul').addEventListener('click',ev=>{
-  const b=ev.target.closest('.l-weg');if(!b)return;
-  L.splice(+b.dataset.i,1);listeZeigen();zeichnen();
-  const rest=$('l-ul').querySelectorAll('.l-weg');(rest[Math.min(+b.dataset.i,rest.length-1)]||$('dazu')).focus();
+  const b=ev.target.closest('button[data-i]');if(!b)return;const i=+b.dataset.i,e=L[i];if(!e)return;
+  if(b.classList.contains('l-kopie')){   // Kopie gleich rechts daneben
+    const k=Object.assign({},e,{n:1,netz:e.netz&&Object.assign({},e.netz)});delete k.x;delete k.y;
+    freiPlatz(k,-1,i);L.splice(i+1,0,k);zeichnen();listeZeigen(i+1);return;
+  }
+  if(b.classList.contains('l-dreh')){e.dreh=!e.dreh;zeichnen();listeZeigen();return}
+  L.splice(i,1);listeZeigen();zeichnen();
+  const rest=$('l-ul').querySelectorAll('.l-weg');(rest[Math.min(i,rest.length-1)]||$('dazu')).focus();
 });
 $('leeren').addEventListener('click',()=>{L=[];listeZeigen();zeichnen();$('dazu').focus()});
 // Wort aus Buchstaben: jedes Zeichen kommt als eigene Form aufs Blatt, alle gleich hoch (so hoch wie der gewählte Buchstabe, sonst 8 cm)
@@ -871,12 +970,68 @@ function wortDazu(){
   const hoch=(byId[S.id]||{}).gruppe==='Buchstaben'?S.h:8;let i=-1;
   ids.forEach(id=>{const f=byId[id];
     const e={id,b:+(hoch*f.w/f.h).toFixed(2),h:+hoch.toFixed(2),n:1,linie:S.linie,naht:S.naht,zugabe:S.zugabe,spiegel:S.spiegel,param:S.param,punkte:false,pabst:S.pabst,strich:S.strich};
+    if(S.frei){freiPlatz(e,-1,i);L.push(e);i=L.length-1;return}   // frei: Buchstaben der Reihe nach nebeneinander
     const k=kodieren(e,true);i=L.findIndex(x=>kodieren(x,true)===k);
     if(i>=0)L[i].n=Math.min(500,L[i].n+1);else{L.push(e);i=L.length-1}});
   listeZeigen(i);zeichnen();feld.value='';
 }
 $('formen').addEventListener('click',ev=>{if(ev.target.closest('#wort-dazu'))wortDazu()});
 $('formen').addEventListener('keydown',ev=>{if(ev.target.id==='wort'&&ev.key==='Enter'){ev.preventDefault();wortDazu()}});
+
+// Anordnung umschalten: automatisch packen oder von Hand
+function modusZeigen(){
+  document.querySelectorAll('#modus .chip').forEach(k=>k.setAttribute('aria-pressed',(k.dataset.modus==='frei')===!!S.frei));
+  $('l-hinweis').textContent=S.frei?'In der Vorschau die Formen mit Finger oder Maus verschieben, auch auf ein anderes Blatt. An der Ecke unten rechts ziehen: strecken. ⧉ setzt eine Kopie gleich daneben, ↻ dreht um 90°.':'Vorschau und Druck zeigen alle Formen der Liste. Nächste Form wählen, einstellen, «+ Aufs Blatt».';
+}
+function freiStarten(){   // Startlage aus der automatischen Packung, jedes Stück einzeln
+  const {posten,seiten}=layoutAuto(),neu=[];
+  seiten.slice(0,MAXSEITEN).forEach((seite,s)=>{const x0=(NUTZ.w-seite.breite)/2;
+    seite.teile.forEach(t=>{const e=L[t.i];neu.push(Object.assign({},e,{n:1,netz:e.netz&&Object.assign({},e.netz),x:+(x0+t.x).toFixed(1),y:+t.y.toFixed(1),blatt:s,dreh:!!posten[t.i].lay.dreh}))})});
+  L.forEach((e,i)=>{if(!posten[i].lay.pro)neu.push(Object.assign({},e,{n:1,x:0,y:0,blatt:0,dreh:false}))});   // zu gross: bleibt trotzdem in der Liste
+  L=neu;
+}
+function autoStarten(){   // gleiche Formen wieder zusammenzählen
+  const neu=[];
+  L.forEach(e=>{const k=Object.assign({},e);delete k.x;delete k.y;delete k.blatt;delete k.dreh;
+    const s=kodieren(k,true),j=neu.findIndex(x=>kodieren(x,true)===s);
+    if(j>=0)neu[j].n=Math.min(500,neu[j].n+k.n);else neu.push(k)});
+  L=neu;
+}
+$('modus').addEventListener('click',ev=>{
+  const c=ev.target.closest('.chip');if(!c)return;const frei=c.dataset.modus==='frei';if(frei===!!S.frei)return;
+  if(frei)freiStarten();else autoStarten();
+  S.frei=frei;modusZeigen();zeichnen();listeZeigen();
+});
+// Verschieben und Strecken in der Vorschau (Maus, Finger oder Stift)
+const mmPunkt=(svg,ev)=>{const p=svg.createSVGPoint();p.x=ev.clientX;p.y=ev.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())};
+let zug=null,zugRaf=0;
+const zugNeu=()=>{if(zugRaf)return;zugRaf=requestAnimationFrame(()=>{zugRaf=0;zeichnenFrei();const g=zug&&$('vorschau').querySelector(`.frei[data-i="${zug.i}"]`);if(g)g.classList.add('aktiv')})};
+$('vorschau').addEventListener('pointerdown',ev=>{
+  if(!S.frei||ev.button)return;
+  const g=ev.target.closest('.frei'),svg=ev.target.closest('svg');if(!g||!svg)return;
+  const i=+g.dataset.i,e=L[i];if(!e)return;
+  const p=mmPunkt(svg,ev),lay=lageFrei(stueck(voll(e)),e),weite=Math.max(4,18/svg.getScreenCTM().a);   // Griff: mindestens 18 Bildschirmpunkte gross
+  const griff=!NETZE[e.id]&&p.x>NUTZ.x+e.x+lay.w-weite&&p.y>NUTZ.y+e.y+lay.h-weite;
+  zug={i,griff,px:p.x,py:p.y,x0:e.x,y0:e.y,b0:e.b,h0:e.h,lay,bewegt:false};
+  ev.preventDefault();try{$('vorschau').setPointerCapture(ev.pointerId)}catch(_){}g.classList.add('aktiv');
+});
+$('vorschau').addEventListener('pointermove',ev=>{
+  if(!zug)return;const e=L[zug.i];if(!e){zug=null;return}
+  const unter=document.elementFromPoint(ev.clientX,ev.clientY),ziel=unter&&unter.closest('#vorschau svg[data-blatt]');
+  const svg=ziel||$('vorschau').querySelector(`svg[data-blatt="${e.blatt||0}"]`);if(!svg)return;
+  const p=mmPunkt(svg,ev),dx=p.x-zug.px,dy=p.y-zug.py;
+  if(!zug.bewegt&&Math.hypot(dx,dy)<.5)return;zug.bewegt=true;
+  if(zug.griff){   // strecken: Breite und Höhe folgen dem Zeiger, bei gedrehten Stücken vertauscht
+    const d=!!e.dreh;e.b=+begrenzt(zug.b0+(d?dy:dx)/10,1,100).toFixed(2);e.h=+begrenzt(zug.h0+(d?dx:dy)/10,1,100).toFixed(2);
+    zugNeu();return;
+  }
+  const blatt=+svg.dataset.blatt,lay=zug.lay;
+  e.x=+begrenzt(zug.x0+dx,0,Math.max(0,NUTZ.w-lay.w)).toFixed(1);e.y=+begrenzt(zug.y0+dy,0,Math.max(0,NUTZ.h-lay.h)).toFixed(1);
+  if(blatt!==(e.blatt||0)){e.blatt=blatt;zugNeu();return}   // auf ein anderes Blatt gezogen
+  const g=svg.querySelector(`.frei[data-i="${zug.i}"]`);if(g)g.setAttribute('transform',`translate(${(NUTZ.x+e.x).toFixed(2)} ${(NUTZ.y+e.y).toFixed(2)})`);
+});
+const zugEnde=()=>{if(!zug)return;const war=zug.bewegt;zug=null;if(war){zeichnen();listeZeigen()}else $('vorschau').querySelectorAll('.aktiv').forEach(g=>g.classList.remove('aktiv'))};
+['pointerup','pointercancel'].forEach(t=>$('vorschau').addEventListener(t,zugEnde));
 
 // Eingaben
 const SCHLOSS_ZU='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
@@ -1063,7 +1218,7 @@ bereit([S.id,...L.map(e=>e.id)]).catch(()=>{}).then(()=>{
   if(!form().d)S.id='herz';
   L=L.filter(e=>form(e).d);
   if(S.lock){const f=form();if(q.has('h')&&!q.has('b'))S.b=S.h*f.w/f.h;else S.h=S.b*f.h/f.w}
-  auswahl();felder();listeZeigen();zeichnen();
+  auswahl();felder();modusZeigen();listeZeigen();zeichnen();
   if(q.get('pausen')==='1')pausenAuf();   // aus der App: «Abpausen» öffnet direkt den Leuchttisch
 });
 })();
