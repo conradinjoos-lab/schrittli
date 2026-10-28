@@ -1218,12 +1218,19 @@ async function boot(){
   const school=parseSchool(); if(school){ go('school',{video:school}); return; }
   uStart(); rmStart(); swStart(); if(uAktiv()) uWechsel(); klStart();
   document.addEventListener('click',e=>{ const b=e.target.closest('[data-wer]'); if(b){ e.preventDefault(); go('wer'); } });   // Namens-Chip im Kopf: Kind wechseln
+  const zk=zurueckStelle(); if(zk){ go(zk.view.name,zk.view.params); hochScrollen(zk.y); return; }   // «← Zurück zur App» aus den Vorlagen: gleiche Seite, gleiche Höhe wie beim Draufklicken
   if(SCHULE){ go(KL.klassen.length&&!kind()?'wer':S.settings.klasse?'home':'klasse'); return; }
   if(!S.profiles.length){ go('firstrun'); return; }
   if(!S.activeProfile||!profile()) S.activeProfile=S.profiles[0].id;
   go(S.profiles.length>1?'profiles':'home');
 }
 window.addEventListener('hashchange',()=>{ const s=parseSchool(); if(s) go('school',{video:s}); });
+// Beim Klick auf einen Vorlagen-Link Seite und Scrollhöhe merken; nur beim Zurückkommen (zurueck.js: history.back() oder Link) wiederherstellen, nicht beim Neuladen
+document.addEventListener('click',e=>{ const a=e.target.closest('a[href]'); if(!a||!/vorlagen\//.test(a.getAttribute('href'))) return; try{ sessionStorage.setItem('schrittli.zurueck',JSON.stringify({view,y:window.scrollY,t:Date.now()})); }catch(err){} },true);
+function hochScrollen(y){ const s=()=>{ if(Math.abs(window.scrollY-y)>2) window.scrollTo(0,y); }; s(); [60,200,500,1000].forEach(t=>setTimeout(s,t)); }   // Bilder und Schrift laden noch, darum mehrmals
+function zurueckStelle(){ try{ const r=sessionStorage.getItem('schrittli.zurueck'); if(!r) return null; sessionStorage.removeItem('schrittli.zurueck'); const z=JSON.parse(r);
+  const nav=performance.getEntriesByType('navigation')[0]; const zurueck=(nav&&nav.type==='back_forward')||/\/vorlagen\//.test(document.referrer);
+  return zurueck&&z.view&&z.view.name&&Date.now()-z.t<36e5?z:null; }catch(err){ return null; } }
 
 SCREENS.firstrun=app=>{
   let emoji=AVATARS[0], color=COLORS[1]; const n=abend();

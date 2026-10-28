@@ -26,6 +26,8 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .suchkopf h2{margin:0}
 .suchkopf input{flex:1;max-width:280px;font:inherit;font-size:16px;color:var(--ink);background:var(--surface2);border:2px solid var(--line);border-radius:12px;padding:7px 12px;min-width:0}
 .gruppe{margin:4px 0 14px}
+.wortfeld{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}
+.wortfeld input{flex:1;min-width:120px;max-width:280px;font:inherit;font-size:16px;color:var(--ink);background:var(--surface2);border:2px solid var(--line);border-radius:12px;padding:7px 12px;text-transform:uppercase}
 .gruppe h3{font:700 13px Nunito,sans-serif;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin:0 0 8px}
 .kats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
 .kat{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px 10px;border:2px solid var(--line);border-radius:16px;background:var(--surface2);color:var(--ink);font:inherit;cursor:pointer}
@@ -166,7 +168,7 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 <header class="kopf">
   <a class="zur-app" href="../" data-zur-app>← Zurück zur App</a>
   <h1>Vorlagen-Generator</h1>
-  <p>Form wählen, Grösse eingeben, drucken. Die Vorlage kommt in echter Grösse aus dem Drucker. <a href="perlen/" style="color:var(--acc);font-weight:700">Perlentiere mit Zählmuster →</a> · <a href="perlentier-bild/" style="color:var(--acc);font-weight:700">Perlentier aus eigenem Bild →</a> · <a href="armbaender/" style="color:var(--acc);font-weight:700">Armbänder →</a> · <a href="zaehlmuster/" style="color:var(--acc);font-weight:700">Zählmuster →</a> · <a href="maschenprobe/" style="color:var(--acc);font-weight:700">Maschenprobe →</a> · <a href="fachwoerter/" style="color:var(--acc);font-weight:700">Fachwort-Karten →</a> · <a href="drucksachen/" style="color:var(--acc);font-weight:700">Verfahrenspass &amp; Etiketten →</a> · <a href="klasse/" style="color:var(--acc);font-weight:700">Klassen-Werkzeuge →</a></p>
+  <p>Form wählen, Grösse eingeben, drucken. Die Vorlage kommt in echter Grösse aus dem Drucker.</p>
 </header>
 <main>
   <section class="karte" aria-label="Form wählen" id="formen"></section>
@@ -393,7 +395,8 @@ const pfad=(r,zu)=>'M'+r.map(([x,y])=>x.toFixed(2)+' '+y.toFixed(2)).join('L')+(
 const einfach=s=>s.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').normalize('NFD').replace(/[̀-ͯ]/g,'');
 const BEISPIELE={Grundformen:['herz','stern','kreis','dreieck'],Natur:['blume','baum','sonne','pilz'],Essen:['apfel','erdbeere','banane','glace'],
   Dinge:['haus','rakete','auto','segelboot'],Feste:['kerze','geschenk','osterhase','kuerbis'],Tiere:['fisch','katze','elefant','schmetterling'],
-  Werkhilfen:['knuepfscheibe','wuerfelnetz','igelrahmen','muehle'],Nähen:['handpuppe','fingerpuppe-hase','turnsack','filzblume-5']};
+  Werkhilfen:['knuepfscheibe','wuerfelnetz','igelrahmen','muehle'],Nähen:['handpuppe','fingerpuppe-hase','turnsack','filzblume-5'],
+  Buchstaben:['buchstabe-a','buchstabe-b','zahl-1','zahl-2']};
 function bild(f){
   if(f.figur)return `<img src="figuren/bilder/${f.id}.webp?v=2" alt="" loading="lazy" decoding="async" width="52" height="52">`;
   const p=PARAM[f.id]?paramForm(f.id,PARAM[f.id].def):f,pad=6;
@@ -414,7 +417,7 @@ function auswahl(){
     +'<div class="kats" id="kats">'+Object.entries(gruppen).map(kachel).join('')+'</div>'
     +'<button type="button" class="knopf zurueck" id="zurueck" hidden>← Alle Kategorien</button>'
     +Object.entries(gruppen).map(([g,fs])=>
-    `<div class="gruppe" data-g="${g}"><h3>${g}</h3><div class="raster">`+fs.map(f=>
+    `<div class="gruppe" data-g="${g}"><h3>${g}</h3>`+(g==='Buchstaben'?'<div class="wortfeld"><input type="text" id="wort" placeholder="Wort, z.B. LEA" aria-label="Wort aus Buchstaben" autocomplete="off" maxlength="30"><button type="button" class="knopf" id="wort-dazu">Wort aufs Blatt</button></div>':'')+`<div class="raster">`+fs.map(f=>
       `<button type="button" class="form" data-id="${f.id}" data-such="${einfach(f.name+' '+f.id+' '+g)}" aria-pressed="false">${bild(f)}${f.name}</button>`
     ).join('')+'</div></div>').join('')+'<p class="hinweis" id="nichts" hidden>Keine passende Form gefunden.</p>';
   let offen=null;
@@ -747,6 +750,21 @@ $('l-ul').addEventListener('click',ev=>{
   const rest=$('l-ul').querySelectorAll('.l-weg');(rest[Math.min(+b.dataset.i,rest.length-1)]||$('dazu')).focus();
 });
 $('leeren').addEventListener('click',()=>{L=[];listeZeigen();zeichnen();$('dazu').focus()});
+// Wort aus Buchstaben: jedes Zeichen kommt als eigene Form aufs Blatt, alle gleich hoch (so hoch wie der gewählte Buchstabe, sonst 8 cm)
+function wortDazu(){
+  const feld=$('wort');if(!feld)return;
+  const text=feld.value.toUpperCase().replace(/Ä/g,'A').replace(/Ö/g,'O').replace(/Ü/g,'U').replace(/ß/g,'SS');
+  const ids=[...text].map(c=>/[A-Z]/.test(c)?'buchstabe-'+c.toLowerCase():/[0-9]/.test(c)?'zahl-'+c:null).filter(id=>id&&byId[id]);
+  if(!ids.length){feld.focus();return}
+  const hoch=(byId[S.id]||{}).gruppe==='Buchstaben'?S.h:8;let i=-1;
+  ids.forEach(id=>{const f=byId[id];
+    const e={id,b:+(hoch*f.w/f.h).toFixed(2),h:+hoch.toFixed(2),n:1,linie:S.linie,naht:S.naht,zugabe:S.zugabe,spiegel:S.spiegel,param:S.param,punkte:false,pabst:S.pabst,strich:S.strich};
+    const k=kodieren(e,true);i=L.findIndex(x=>kodieren(x,true)===k);
+    if(i>=0)L[i].n=Math.min(500,L[i].n+1);else{L.push(e);i=L.length-1}});
+  listeZeigen(i);zeichnen();feld.value='';
+}
+$('formen').addEventListener('click',ev=>{if(ev.target.closest('#wort-dazu'))wortDazu()});
+$('formen').addEventListener('keydown',ev=>{if(ev.target.id==='wort'&&ev.key==='Enter'){ev.preventDefault();wortDazu()}});
 
 // Eingaben
 const SCHLOSS_ZU='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';

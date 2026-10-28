@@ -6,7 +6,7 @@ Stand 28. Oktober 2026. Analyse der Schablonen und Vorlagen in «Schritt für Sc
 
 | Bereich | Umfang | Wo | Quelle / Pipeline |
 |---|---|---|---|
-| Schablonen-Generator | 251 Formen in 8 Gruppen (Grundformen 20, Natur 19, Essen 11, Dinge 19, Feste 17, Tiere 40, Werkhilfen 100, Nähen 25); 126 Formen bringen eine empfohlene Grösse mit (`cm`) | `vorlagen/` | `werkzeug/vorlagen/formen*.py` → `vorlagen/formen.js` |
+| Schablonen-Generator | 302 Formen in 9 Gruppen (Grundformen 20, Natur 22, Essen 11, Dinge 21, Feste 17, Tiere 41, Werkhilfen 109, Nähen 25, Buchstaben 36); 126 Formen bringen eine empfohlene Grösse mit (`cm`) | `vorlagen/` | `werkzeug/vorlagen/formen*.py` → `vorlagen/formen.js` |
 | Figuren aus Bildern | 302 Figuren in 14 Welten (Games 43, Pokémon & Sonic 32, Mario 32, Sanrio 30, Minecraft 26, Cartoons 26, Zeitlos 20, Anime 16, Disney 16, Ninjago 15, Minions 13, Superhelden 13, Star Wars 11, Harry Potter 9) | `vorlagen/figuren/` | `werkzeug/vorlagen/bild.py`, 302 PNG in `werkzeug/vorlagen/bilder/` |
 | Perlentiere | 302 Figuren, alle Stufe «schwer», Breite 30–60 Perlen | `vorlagen/perlen/` | `perlen.cjs`, Editor im Browser |
 | Perlentier aus Bild | eigenes Bild → Rocailles-Plan mit Drahtweg | `vorlagen/perlentier-bild/` | nur lokal |
@@ -91,7 +91,7 @@ Mit Nahtzugabe und Einstichpunkten direkt aus dem Generator. Grosse Teile brauch
 | Welle | Inhalt | Aufwand |
 |---|---|---|
 | 1 | Erledigt am 28. Oktober 2026: A3-Druck; 113 Werkhilfen, Raster, Netze und Spielbretter aus 3a (`formen_scheiben.py`, `formen_raster.py`, `formen_spiele.py`, `formen_netze.py`, `formen_weitere.py`, dazu die bisherigen Web- und Werkhilfen in der neuen Gruppe «Werkhilfen»); 25 Schnittmuster aus 3b in der Gruppe «Nähen» (`formen_naehen.py`). Nicht als eigene Formen gebaut, weil die Grundformen sie schon abdecken: Ausstech-, Schalen- und Stempel-Schablonen, Prägesterne (Stern mit Zacken-Regler, Spiegeln-Schalter); nummerierte Punkte folgen in Welle 2 | erledigt |
-| 2 | Buchstaben und Zahlen; nummerierte Punkte; Saisonmotive Herbst und Advent (3c) | 1–2 Wochen |
+| 2 | Erledigt am 28. Oktober 2026: Buchstaben A–Z und Zahlen 0–9 als eigene Gruppe «Buchstaben» (`formen_schrift.py`, DejaVu Sans fett, Ecken ausgerundet, mit Wortfeld im Generator: ein Wort tippen, alle Buchstaben gleich hoch aufs Blatt); nummerierte Fadengrafik-Punkte, Winkel-Fadengrafik und Einmaleins-Kreis (`formen_punkte.py`); Saisonmotive Eichenblatt, Kastanienblatt, Tannenzapfen, Flugdrache, Rentier, Schlitten, Faltstern 3D (`formen_saison.py`) | erledigt |
 | 3 | Pixel-Editor; Netz-Generator; Poster-Modus; restliche Motivthemen | länger |
 
 Ziel nach Welle 3: über 300 Formen im Generator, dazu die 302 Figuren und 302 Perlentiere, also rund 900 Vorlagen plus unbegrenzt viele über Editor, Namen und Netze.

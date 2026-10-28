@@ -11,7 +11,10 @@
   document.head.appendChild(st);
   const allein=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
   document.querySelectorAll('[data-zur-app]').forEach(a=>{ a.href=ziel;
-    a.addEventListener('click',e=>{   // direkt aus der App in einem neuen Tab geöffnet: Tab schliessen, die App ist im Tab daneben noch offen
-      if(allein||!von||history.length>1) return;
-      e.preventDefault(); window.close(); setTimeout(()=>{ location.href=ziel; },200); }); });
+    a.addEventListener('click',e=>{
+      if(!von) return;                                       // nicht aus der App gekommen: normaler Link
+      e.preventDefault();
+      if(history.length>1){ history.back(); return; }   // zurück an die Stelle im Hauptmenü, wo man draufgeklickt hat (die App stellt die Höhe wieder her)
+      if(allein){ location.href=ziel; return; }
+      window.close(); setTimeout(()=>{ location.href=ziel; },200); }); });   // in einem neuen Tab geöffnet: Tab schliessen, die App ist im Tab daneben noch offen
 })();

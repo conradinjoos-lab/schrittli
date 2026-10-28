@@ -193,7 +193,7 @@ FORMEN = [
 ]
 
 # weitere Formen aus formen_<bereich>.py (je eine Liste FORMEN wie oben)
-GRUPPEN = ['Grundformen', 'Natur', 'Essen', 'Dinge', 'Feste', 'Tiere', 'Werkhilfen', 'Nähen']
+GRUPPEN = ['Grundformen', 'Natur', 'Essen', 'Dinge', 'Feste', 'Tiere', 'Werkhilfen', 'Nähen', 'Buchstaben']
 for _m in [] if os.environ.get('NUR_BASIS') else sorted(glob.glob(os.path.join(HIER, 'formen_*.py'))):
     FORMEN += importlib.import_module(os.path.basename(_m)[:-3]).FORMEN
 FORMEN.sort(key=lambda f: GRUPPEN.index(f[2]) if f[2] in GRUPPEN else len(GRUPPEN))
