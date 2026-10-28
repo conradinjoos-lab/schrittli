@@ -4883,10 +4883,10 @@
     {
       "id": "berg-umriss",
       "farbpixelIdentisch": true,
-      "teile": 6,
+      "teile": 1,
       "pixel": [
-        6351,
-        2473
+        2079,
+        941
       ]
     },
     {
@@ -4894,80 +4894,80 @@
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        1120,
-        610
+        1620,
+        1201
       ]
     },
     {
       "id": "berg-freihand",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 2,
       "pixel": [
-        10360,
-        2998
+        2279,
+        1031
       ]
     },
     {
       "id": "berg-fuji-bild",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 2,
       "pixel": [
-        2000,
-        928
+        2239,
+        1011
       ]
     },
     {
       "id": "berg-schneekappe",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 3,
       "pixel": [
-        2848,
-        1536
+        2519,
+        1181
       ]
     },
     {
       "id": "berg-gruen",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 5,
       "pixel": [
-        3881,
-        1130
+        2400,
+        1030
       ]
     },
     {
       "id": "berg-formen",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 8,
       "pixel": [
-        4803,
-        2034
+        2199,
+        986
       ]
     },
     {
       "id": "berg-violett",
       "farbpixelIdentisch": true,
-      "teile": 4,
+      "teile": 3,
       "pixel": [
-        6353,
-        2634
+        2521,
+        1100
       ]
     },
     {
       "id": "berg-sil-1",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 15,
       "pixel": [
-        2749,
-        1973
+        2319,
+        1218
       ]
     },
     {
       "id": "berg-sil-2",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 16,
       "pixel": [
-        2460,
-        1984
+        2200,
+        1380
       ]
     },
     {
@@ -4975,8 +4975,8 @@
       "farbpixelIdentisch": true,
       "teile": 5,
       "pixel": [
-        3334,
-        2368
+        2519,
+        1216
       ]
     },
     {

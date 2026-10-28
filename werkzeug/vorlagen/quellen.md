@@ -9,7 +9,7 @@ Quelle jeder Grafik: `https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg
 
 **Openclipart** (CC0 1.0, https://creativecommons.org/publicdomain/zero/1.0/): keine Nennung nötig, Autor und Seite trotzdem aufgeführt.
 
-Alle Quellen sind frei nutzbar (CC0, CC-BY oder Vecteezy Free License mit Nennung); nichts stammt von Flaticon.
+Alle Quellen sind frei nutzbar (CC0 oder CC-BY mit Nennung); nichts stammt von Flaticon oder Vecteezy.
 
 ## Buchstaben & Zahlen bunt
 
@@ -196,21 +196,21 @@ Flaggen und Tiere: Twemoji (siehe oben); Kontinente und Weltkarte: Openclipart (
 
 ## Berge
 
-Elf Bilder von **Vecteezy** (Vecteezy Free License, Nennung «Vecteezy» nötig, Bildseite `https://de.vecteezy.com/png/<Nr>`); die übrigen zwölf Berge sind eigene Zeichnungen (CC0), erzeugt mit `werkzeug/vorlagen/silhouetten.py`.
+Alle 23 Berge sind eigene Zeichnungen (Polygone, schwarz auf durchsichtig, CC0), erzeugt mit `werkzeug/vorlagen/silhouetten.py`; es wurde keine Vorlage kopiert. Elf davon ersetzen frühere Fremdbilder (Vecteezy, nicht CC0) unter denselben Figur-IDs.
 
 | Motiv | Figur-ID | URL | Autor | Lizenz |
 |---|---|---|---|---|
-| Berg mit Umriss | berg-umriss | https://de.vecteezy.com/png/36283373 | ilham mubarok | Vecteezy Free License, Nennung Vecteezy |
-| Bergspitze | berg-spitze | https://de.vecteezy.com/png/1206172 | vecteezy-pngs | Vecteezy Free License, Nennung Vecteezy |
-| Berg Freihand | berg-freihand | https://de.vecteezy.com/png/13743555 | Tananuphong Kummaru | Vecteezy Free License, Nennung Vecteezy |
-| Fuji | berg-fuji-bild | https://de.vecteezy.com/png/14037398 | Kumamori bysine | Vecteezy Free License, Nennung Vecteezy |
-| Berg mit Schneekappe | berg-schneekappe | https://de.vecteezy.com/png/23391806 | Alfanudin M | Vecteezy Free License, Nennung Vecteezy |
-| Berg grün | berg-gruen | https://de.vecteezy.com/png/23630074 | Arief Sapta Adjie | Vecteezy Free License, Nennung Vecteezy |
-| Berg Formen | berg-formen | https://de.vecteezy.com/png/35546488 | Sugix Invaders | Vecteezy Free License, Nennung Vecteezy |
-| Berg violett | berg-violett | https://de.vecteezy.com/png/36283377 | ilham mubarok | Vecteezy Free License, Nennung Vecteezy |
-| Berg Silhouette 1 | berg-sil-1 | https://de.vecteezy.com/png/43768271 | Pram Samnak | Vecteezy Free License, Nennung Vecteezy |
-| Berg Silhouette 2 | berg-sil-2 | https://de.vecteezy.com/png/43768281 | Pram Samnak | Vecteezy Free License, Nennung Vecteezy |
-| Berg Silhouette 3 | berg-sil-3 | https://de.vecteezy.com/png/45552009 | Creative Stocks99 | Vecteezy Free License, Nennung Vecteezy |
+| Berg mit Umriss | berg-umriss | – | eigene Zeichnung | CC0 |
+| Bergspitze | berg-spitze | – | eigene Zeichnung | CC0 |
+| Berg Freihand | berg-freihand | – | eigene Zeichnung | CC0 |
+| Fuji | berg-fuji-bild | – | eigene Zeichnung | CC0 |
+| Berg mit Schneekappe | berg-schneekappe | – | eigene Zeichnung | CC0 |
+| Hügel | berg-gruen | – | eigene Zeichnung | CC0 |
+| Berg aus Formen | berg-formen | – | eigene Zeichnung | CC0 |
+| Berge hintereinander | berg-violett | – | eigene Zeichnung | CC0 |
+| Berg mit Tannen und Vögeln | berg-sil-1 | – | eigene Zeichnung | CC0 |
+| Berg im See | berg-sil-2 | – | eigene Zeichnung | CC0 |
+| Berge mit Wolken | berg-sil-3 | – | eigene Zeichnung | CC0 |
 | Doppelgipfel | berg-doppel | – | eigene Zeichnung | CC0 |
 | Drei Berge | berg-dreiecke | – | eigene Zeichnung | CC0 |
 | Vulkanberg | berg-fuji | – | eigene Zeichnung | CC0 |

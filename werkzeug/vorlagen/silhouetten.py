@@ -3,7 +3,7 @@
 Die Motive sind eigene Zeichnungen (frei, keine Fremdrechte). Aufruf: python -I silhouetten.py [<id> …]
 schreibt bilder/<id>.png nach werkzeug/vorlagen/bilder/. Danach: python -I bild.py <id> …"""
 import os, sys, math, random
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFilter, ImageChops, ImageOps
 
 HIER = os.path.dirname(os.path.abspath(__file__))
 BILDER = os.path.join(HIER, 'bilder')
@@ -228,11 +228,151 @@ def b_schlitten():  # Berg mit Skipiste und Lift (Stützen)
     return c
 
 
+# ---- Ebenen, Umriss, Schnee (für die Berge, die früher aus Fremdbildern stammten)
+def _dil(m, r):
+    return m.filter(ImageFilter.GaussianBlur(r*SS/2)).point(lambda v: 255 if v > 6 else 0)
+
+def _ero(m, r):
+    return ImageOps.invert(_dil(ImageOps.invert(m), r))
+
+def ebene(c): return C(c.w, c.h)
+
+def auflegen(c, e, spalt=18):
+    """Legt Ebene e vor c; ein heller Spalt trennt die beiden."""
+    c.m = ImageChops.lighter(ImageChops.subtract(c.m, _dil(e.m, spalt) if spalt else Image.new('L', c.m.size, 0)), e.m)
+    c.d = ImageDraw.Draw(c.m)
+
+def umriss(c, dicke=28):
+    c.m = ImageChops.subtract(c.m, _ero(c.m, dicke)); c.d = ImageDraw.Draw(c.m)
+
+def kappe(c, g, ykappe, seed=2, zack=70, rand=24, x0=0, x1=None):
+    """Schneekappe: heller Bereich oberhalb einer Zackenlinie, ein schwarzer Rand bleibt."""
+    x1 = x1 or c.w
+    lin = [(x0, ykappe)]; rnd = random.Random(seed); x = x0
+    while x < x1:
+        x += rnd.randint(70, 140); lin.append((x, ykappe + (zack if len(lin) % 2 else -zack*.3) + rnd.randint(-15, 15)))
+    e = ebene(c); e.add([(x0, 0)] + lin + [(lin[-1][0], 0)])
+    c.m = ImageChops.subtract(c.m, _ero(ImageChops.darker(e.m, g.m), rand)); c.d = ImageDraw.Draw(c.m)
+
+def linie(c, p0, p1, w, v=255):
+    (x0, y0), (x1, y1) = p0, p1; d = math.hypot(x1-x0, y1-y0); nx, ny = -(y1-y0)/d*w/2, (x1-x0)/d*w/2
+    c.add([(x0+nx, y0+ny), (x1+nx, y1+ny), (x1-nx, y1-ny), (x0-nx, y0-ny)], v)
+
+def wolke(c, cx, cy, s):
+    for dx, dy, r in [(-1.3, .25, .55), (-.55, -.15, .8), (.35, -.35, 1.0), (1.2, -.05, .75), (1.8, .25, .5)]:
+        c.circ(cx+dx*s, cy+dy*s, r*s)
+    c.rect(cx-1.3*s, cy+.2*s, cx+1.8*s, cy+.75*s)
+
+def vogel(c, cx, cy, s):
+    for sg in (-1, 1):
+        c.add([(cx, cy), (cx+sg*s*.55, cy-s*.55), (cx+sg*s*1.1, cy-s*.1), (cx+sg*s*.6, cy-s*.2)])
+
+def huegel(c, y0, amp, per, ph, G):
+    pts = [(x, y0 - amp*math.sin((x/per)*2*math.pi + ph)) for x in range(0, c.w+1, 10)]
+    c.add(pts + [(c.w, G), (0, G)])
+
+# ------------------------------------------------------------------ eigene Ersatzmotive
+def b_umriss():
+    c = C(2200, 1300); G = 1200
+    berg(c, [(60, G), (460, 760), (700, 560), (900, 640), (1250, 260), (1450, 420), (1700, 640), (1900, 840), (2140, G)], G, rau=.1, seed=41)
+    umriss(c, 30); return c
+
+def b_spitze():
+    c = C(1700, 1500); G = 1400
+    g = ebene(c); berg(g, [(40, G), (300, 1060), (560, 800), (860, 200), (1140, 800), (1400, 1060), (1660, G)], G, rau=.05, seed=42)
+    c.m = g.m.copy(); c.d = ImageDraw.Draw(c.m)
+    kappe(c, g, 560, seed=3, zack=110, rand=26, x0=300, x1=1400)
+    return c
+
+def b_freihand():
+    c = C(2400, 1300); G = 1200
+    c.circ(1750, 360, 190); c.circ(1750, 360, 150, 0)
+    e = ebene(c); berg(e, [(60, G), (560, 760), (900, 380), (1180, 700), (1500, 560), (1800, 880), (2340, G)], G, rau=.26, seed=43, tiefe=4)
+    umriss(e, 26); auflegen(c, e, 0)
+    return c
+
+def b_fuji_bild():
+    c = C(2400, 1300); G = 1200
+    c.circ(480, 380, 190)
+    g = ebene(c); g.add([(80, G), (840, 520), (960, 440), (1440, 440), (1560, 520), (2320, G)])
+    auflegen(c, g, 18)
+    kappe(c, g, 560, seed=7, zack=80, rand=26, x0=700, x1=1700)
+    for y, x0, x1 in [(900, 300, 1150), (1010, 1100, 2000)]:
+        c.rect(x0, y, x1, y+50, 0); c.circ(x0, y+25, 25, 0); c.circ(x1, y+25, 25, 0)
+    return c
+
+def b_schneekappe():
+    c = C(2600, 1400); G = 1300
+    for pts, yk, sd in [([(40, G), (500, 780), (760, 520), (1000, G)], 700, 1), ([(1500, G), (1900, 700), (2150, 500), (2560, G)], 760, 2)]:
+        e = ebene(c); berg(e, pts, G, rau=.1, seed=sd)
+        auflegen(c, e, 0)
+        kappe(c, e, yk-60, seed=sd, zack=70, rand=24, x0=pts[0][0], x1=pts[-1][0])
+    e = ebene(c); berg(e, [(560, G), (960, 760), (1220, 300), (1360, 120), (1500, 300), (1760, 740), (2100, G)], G, rau=.06, seed=44)
+    auflegen(c, e, 22)
+    kappe(c, e, 560, seed=5, zack=90, rand=26, x0=900, x1=1800)
+    return c
+
+def b_gruen():
+    c = C(2400, 1300); G = 1220
+    c.circ(1900, 340, 150)
+    for y0, amp, per, ph in [(620, 130, 1500, 0.4), (860, 120, 1200, 2.2), (1100, 90, 1000, 4.0)]:
+        e = ebene(c); huegel(e, y0, amp, per, ph, G); auflegen(c, e, 22)
+    return c
+
+def b_formen():
+    c = C(2400, 1400); G = 1300
+    e = ebene(c); e.add([(100, G), (1000, 300), (1800, G)]); auflegen(c, e, 0)
+    for p0, p1 in [((1000, 300), (780, G)), ((1000, 300), (1160, 900)), ((1160, 900), (1400, G)), ((780, 700), (1160, 900))]:
+        linie(c, p0, p1, 18, 0)
+    e = ebene(c); e.add([(1300, G), (1800, 700), (2300, G)]); auflegen(c, e, 22)
+    linie(c, (1800, 700), (1700, G), 16, 0); linie(c, (1800, 700), (1950, 1050), 16, 0); linie(c, (1950, 1050), (2100, G), 16, 0)
+    return c
+
+def b_violett():
+    c = C(2600, 1400); G = 1320
+    lagen = [(31, [(40, 600), (500, 360), (800, 460), (1200, 220), (1600, 420), (2000, 300), (2560, 560)]),
+             (32, [(40, 840), (420, 640), (900, 780), (1400, 560), (1900, 780), (2200, 660), (2560, 820)]),
+             (33, [(40, 1080), (360, 900), (900, 1060), (1500, 880), (2100, 1080), (2560, 1000)])]
+    for sd, pts in lagen:
+        e = ebene(c); berg(e, pts, G, rau=.2, seed=sd); auflegen(c, e, 24)
+    return c
+
+def b_sil1():
+    c = C(2400, 1400); G = 1300
+    berg(c, [(40, G), (520, 840), (900, 460), (1180, 330), (1420, 540), (1800, 800), (2360, G)], G, rau=.12, seed=45)
+    e = ebene(c)
+    for cx, h in [(300, 360), (480, 300), (2000, 340), (2200, 400)]: tanne(e, cx, G+30, h, 190)
+    auflegen(c, e, 20)
+    for cx, cy, s in [(700, 240, 80), (900, 150, 70), (1060, 280, 60), (1900, 260, 75)]: vogel(c, cx, cy, s)
+    return c
+
+def b_sil2():
+    c = C(2200, 1750); G = 850
+    c.circ(1750, 300, 140)
+    berg(c, [(80, G), (520, 560), (800, 420), (1100, 160), (1250, 260), (1560, 520), (2120, G)], G, rau=.12, seed=46)
+    oben = c.m.crop((0, 0, c.w*SS, G*SS)); c.m.paste(oben.transpose(Image.FLIP_TOP_BOTTOM), (0, (G+60)*SS))
+    y = G + 60; h = 16
+    while y < c.h - 40:
+        c.rect(0, y, c.w, y+h, 0); y += 70; h += 5
+    linie(c, (0, G+30), (c.w, G+30), 22)
+    return c
+
+def b_sil3():
+    c = C(2600, 1400); G = 1300
+    berg(c, [(40, G), (500, 800), (760, 600), (1000, 380), (1180, 520), (1500, 760), (1750, 560), (2000, 400), (2200, 620), (2560, G)], G, rau=.14, seed=47)
+    e = ebene(c); wolke(e, 900, 560, 150); wolke(e, 1950, 700, 120); auflegen(c, e, 22)
+    wolke(c, 480, 220, 100); wolke(c, 1700, 260, 80)
+    return c
+
+
 BERGE = {
     'berg-matterhorn-sil': b_matterhorn, 'berg-trio': b_trio, 'berg-sonne': b_sonne, 
     'berg-gipfelkreuz': b_gipfelkreuz, 'berg-doppel': b_doppel, 'berg-vulkan': b_vulkan, 'berg-kette': b_kette,
     'berg-hochgebirge': b_hochgebirge,  'berg-huette': b_huette, 'berg-mond': b_mond,
-    'berg-fuji': b_fuji, 'berg-dreiecke': b_dreieck,   
+    'berg-fuji': b_fuji, 'berg-dreiecke': b_dreieck,
+    'berg-umriss': b_umriss, 'berg-spitze': b_spitze, 'berg-freihand': b_freihand, 'berg-fuji-bild': b_fuji_bild,
+    'berg-schneekappe': b_schneekappe, 'berg-gruen': b_gruen, 'berg-formen': b_formen, 'berg-violett': b_violett,
+    'berg-sil-1': b_sil1, 'berg-sil-2': b_sil2, 'berg-sil-3': b_sil3,
 }
 
 
