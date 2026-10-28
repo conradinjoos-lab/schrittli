@@ -27,7 +27,8 @@
   "Wetter & Himmel",
   "Emojis & Gefühle",
   "Geburtstag & Party",
-  "Tierwelt"
+  "Tierwelt",
+  "Küche & Restaurant"
  ],
  "figuren": [
   {
@@ -3155,6 +3156,198 @@
    "name": "Tanzender Bär",
    "welt": "Tierwelt",
    "datei": "tiere-baer-tanzend.png"
+  },
+  {
+   "id": "fig-pizzastueck-fett",
+   "name": "Pizzastück",
+   "welt": "Küche & Restaurant",
+   "datei": "pizzastueck-fett.png"
+  },
+  {
+   "id": "fig-burger-mann",
+   "name": "Burger-Mann",
+   "welt": "Küche & Restaurant",
+   "datei": "burger-mann.png"
+  },
+  {
+   "id": "fig-burger-einfach",
+   "name": "Hamburger",
+   "welt": "Küche & Restaurant",
+   "datei": "burger-einfach.png"
+  },
+  {
+   "id": "fig-burger-augen",
+   "name": "Burger mit Augen",
+   "welt": "Küche & Restaurant",
+   "datei": "burger-augen.png"
+  },
+  {
+   "id": "fig-pommes-tuete",
+   "name": "Pommes in der Tüte",
+   "welt": "Küche & Restaurant",
+   "datei": "pommes-tuete.png"
+  },
+  {
+   "id": "fig-pommes-kawaii",
+   "name": "Pommes mit Gesicht",
+   "welt": "Küche & Restaurant",
+   "datei": "pommes-kawaii.png"
+  },
+  {
+   "id": "fig-pommes-rot",
+   "name": "Pommes im Becher",
+   "welt": "Küche & Restaurant",
+   "datei": "pommes-rot.png"
+  },
+  {
+   "id": "fig-eis-rosa",
+   "name": "Erdbeereis",
+   "welt": "Küche & Restaurant",
+   "datei": "eis-rosa.png"
+  },
+  {
+   "id": "fig-eisbecher",
+   "name": "Eisbecher",
+   "welt": "Küche & Restaurant",
+   "datei": "eisbecher.png"
+  },
+  {
+   "id": "fig-eis-schoko",
+   "name": "Eis mit Schoko",
+   "welt": "Küche & Restaurant",
+   "datei": "eis-schoko.png"
+  },
+  {
+   "id": "fig-spaghetti-teller",
+   "name": "Spaghetti",
+   "welt": "Küche & Restaurant",
+   "datei": "spaghetti-teller.png"
+  },
+  {
+   "id": "fig-koch-pfanne",
+   "name": "Koch mit Pfanne",
+   "welt": "Küche & Restaurant",
+   "datei": "koch-pfanne.png"
+  },
+  {
+   "id": "fig-koch-mann",
+   "name": "Koch",
+   "welt": "Küche & Restaurant",
+   "datei": "koch-mann.png"
+  },
+  {
+   "id": "fig-koch-pinguin",
+   "name": "Pinguin als Koch",
+   "welt": "Küche & Restaurant",
+   "datei": "koch-pinguin.png"
+  },
+  {
+   "id": "fig-koch-eule",
+   "name": "Eule als Köchin",
+   "welt": "Küche & Restaurant",
+   "datei": "koch-eule.png"
+  },
+  {
+   "id": "fig-croissant-gelb",
+   "name": "Croissant",
+   "welt": "Küche & Restaurant",
+   "datei": "croissant-gelb.png"
+  },
+  {
+   "id": "fig-croissant-braun",
+   "name": "Gipfeli",
+   "welt": "Küche & Restaurant",
+   "datei": "croissant-braun.png"
+  },
+  {
+   "id": "fig-croissant-baeckerei",
+   "name": "Croissant gelb",
+   "welt": "Küche & Restaurant",
+   "datei": "croissant-baeckerei.png"
+  },
+  {
+   "id": "fig-sandwich-kawaii",
+   "name": "Sandwich mit Gesicht",
+   "welt": "Küche & Restaurant",
+   "datei": "sandwich-kawaii.png"
+  },
+  {
+   "id": "fig-kaffee-tasse",
+   "name": "Kaffeetasse mit Gesicht",
+   "welt": "Küche & Restaurant",
+   "datei": "kaffee-tasse.png"
+  },
+  {
+   "id": "fig-kaffee-icon",
+   "name": "Kaffeetasse",
+   "welt": "Küche & Restaurant",
+   "datei": "kaffee-icon.png"
+  },
+  {
+   "id": "fig-kaese-stueck",
+   "name": "Käse",
+   "welt": "Küche & Restaurant",
+   "datei": "kaese-stueck.png"
+  },
+  {
+   "id": "fig-apfel-gesicht",
+   "name": "Apfel mit Gesicht",
+   "welt": "Küche & Restaurant",
+   "datei": "apfel-gesicht.png"
+  },
+  {
+   "id": "fig-erdbeere",
+   "name": "Erdbeere",
+   "welt": "Küche & Restaurant",
+   "datei": "erdbeere.png"
+  },
+  {
+   "id": "fig-birne",
+   "name": "Birne",
+   "welt": "Küche & Restaurant",
+   "datei": "birne.png"
+  },
+  {
+   "id": "fig-kirschen",
+   "name": "Kirschen",
+   "welt": "Küche & Restaurant",
+   "datei": "kirschen.png"
+  },
+  {
+   "id": "fig-zitrone",
+   "name": "Zitrone",
+   "welt": "Küche & Restaurant",
+   "datei": "zitrone.png"
+  },
+  {
+   "id": "fig-hotdog-mann",
+   "name": "Hotdog-Mann",
+   "welt": "Küche & Restaurant",
+   "datei": "hotdog-mann.png"
+  },
+  {
+   "id": "fig-donut-rosa",
+   "name": "Donut-Mädchen rosa",
+   "welt": "Küche & Restaurant",
+   "datei": "donut-rosa.png"
+  },
+  {
+   "id": "fig-donut-braun",
+   "name": "Donut-Mädchen braun",
+   "welt": "Küche & Restaurant",
+   "datei": "donut-braun.png"
+  },
+  {
+   "id": "fig-brezel-braun",
+   "name": "Brezel",
+   "welt": "Küche & Restaurant",
+   "datei": "brezel-braun.png"
+  },
+  {
+   "id": "fig-brezel-gelb",
+   "name": "Brezel-Zeichen",
+   "welt": "Küche & Restaurant",
+   "datei": "brezel-gelb.png"
   }
  ]
 }

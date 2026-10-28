@@ -1,5 +1,5 @@
 {
-  "figuren": 357,
+  "figuren": 542,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -3213,6 +3213,1671 @@
       "pixel": [
         795,
         373
+      ]
+    },
+    {
+      "id": "abc-a",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        467
+      ]
+    },
+    {
+      "id": "abc-b",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "abc-c",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        401,
+        484
+      ]
+    },
+    {
+      "id": "abc-d",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        457,
+        484
+      ]
+    },
+    {
+      "id": "abc-e",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        352,
+        484
+      ]
+    },
+    {
+      "id": "abc-f",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        345,
+        484
+      ]
+    },
+    {
+      "id": "abc-g",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        448,
+        484
+      ]
+    },
+    {
+      "id": "abc-h",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        437,
+        484
+      ]
+    },
+    {
+      "id": "abc-i",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        144,
+        484
+      ]
+    },
+    {
+      "id": "abc-j",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        192,
+        484
+      ]
+    },
+    {
+      "id": "abc-k",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        469,
+        484
+      ]
+    },
+    {
+      "id": "abc-l",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        352,
+        484
+      ]
+    },
+    {
+      "id": "abc-m",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        438
+      ]
+    },
+    {
+      "id": "abc-n",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        437,
+        484
+      ]
+    },
+    {
+      "id": "abc-o",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        480,
+        484
+      ]
+    },
+    {
+      "id": "abc-p",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "abc-q",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        413,
+        484
+      ]
+    },
+    {
+      "id": "abc-r",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        437,
+        484
+      ]
+    },
+    {
+      "id": "abc-s",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        374,
+        484
+      ]
+    },
+    {
+      "id": "abc-t",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        448,
+        484
+      ]
+    },
+    {
+      "id": "abc-u",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        413,
+        484
+      ]
+    },
+    {
+      "id": "abc-v",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        467
+      ]
+    },
+    {
+      "id": "abc-w",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        348
+      ]
+    },
+    {
+      "id": "abc-x",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        478,
+        484
+      ]
+    },
+    {
+      "id": "abc-y",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        482
+      ]
+    },
+    {
+      "id": "abc-z",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        425,
+        484
+      ]
+    },
+    {
+      "id": "abc-0",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        389,
+        484
+      ]
+    },
+    {
+      "id": "abc-1",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        349,
+        484
+      ]
+    },
+    {
+      "id": "abc-2",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        353,
+        484
+      ]
+    },
+    {
+      "id": "abc-3",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        358,
+        484
+      ]
+    },
+    {
+      "id": "abc-4",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        406,
+        484
+      ]
+    },
+    {
+      "id": "abc-5",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        364,
+        484
+      ]
+    },
+    {
+      "id": "abc-6",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        378,
+        484
+      ]
+    },
+    {
+      "id": "abc-7",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        371,
+        484
+      ]
+    },
+    {
+      "id": "abc-8",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        373,
+        484
+      ]
+    },
+    {
+      "id": "abc-9",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        378,
+        484
+      ]
+    },
+    {
+      "id": "wetter-sonne",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-sonne-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-sonne-wolke-klein",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-sonne-hinter-wolke",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-sonne-hinter-grosser-wolke",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        382
+      ]
+    },
+    {
+      "id": "wetter-sonne-regen",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-wolke",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        407
+      ]
+    },
+    {
+      "id": "wetter-regenwolke",
+      "farbpixelIdentisch": true,
+      "teile": 6,
+      "pixel": [
+        484,
+        477
+      ]
+    },
+    {
+      "id": "wetter-gewitter",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-blitz-wolke",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-blitz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        407,
+        484
+      ]
+    },
+    {
+      "id": "wetter-schneewolke",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-schneeflocke",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        450,
+        484
+      ]
+    },
+    {
+      "id": "wetter-schneemann",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        450,
+        484
+      ]
+    },
+    {
+      "id": "wetter-schneemann-ohne",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        433,
+        484
+      ]
+    },
+    {
+      "id": "wetter-regenbogen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-regenschirm",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-regenschirm-regen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        469
+      ]
+    },
+    {
+      "id": "wetter-tropfen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        336,
+        483
+      ]
+    },
+    {
+      "id": "wetter-mond",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        483
+      ]
+    },
+    {
+      "id": "wetter-mond-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        400,
+        484
+      ]
+    },
+    {
+      "id": "wetter-vollmond",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-neumond",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-stern",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        464
+      ]
+    },
+    {
+      "id": "wetter-stern-glanz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-sternschnuppe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-funkeln",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        484,
+        470
+      ]
+    },
+    {
+      "id": "wetter-wind",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-windgesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        341
+      ]
+    },
+    {
+      "id": "wetter-nebel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-wirbel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        464
+      ]
+    },
+    {
+      "id": "wetter-tornado",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        408,
+        484
+      ]
+    },
+    {
+      "id": "wetter-sternennacht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-milchstrasse",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-sonnenaufgang",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-sonnenuntergang",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-thermometer",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "wetter-welle",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        447
+      ]
+    },
+    {
+      "id": "emoji-froh",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-strahlend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-lachtraenen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-kugelt",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-laechelnd",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-engel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-verliebt",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-herzaugen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-sternaugen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-lecker",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-zunge",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-nachdenklich",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        459,
+        484
+      ]
+    },
+    {
+      "id": "emoji-neutral",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-schlafend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-heulend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-traurig",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-waetend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-sehr-waetend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-schreck",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-erstaunt",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-verlegen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-cool",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-party",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-krank",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-kalt",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-umarmung",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        480,
+        484
+      ]
+    },
+    {
+      "id": "emoji-herz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        436
+      ]
+    },
+    {
+      "id": "emoji-herz-blau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        436
+      ]
+    },
+    {
+      "id": "emoji-herz-gruen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        436
+      ]
+    },
+    {
+      "id": "emoji-herz-lila",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        436
+      ]
+    },
+    {
+      "id": "emoji-herz-gelb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        436
+      ]
+    },
+    {
+      "id": "emoji-herz-gebrochen",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        484,
+        436
+      ]
+    },
+    {
+      "id": "emoji-daumen-hoch",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        436,
+        484
+      ]
+    },
+    {
+      "id": "emoji-daumen-runter",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        436,
+        484
+      ]
+    },
+    {
+      "id": "emoji-klatschen",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        484,
+        483
+      ]
+    },
+    {
+      "id": "emoji-sieg",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        335,
+        484
+      ]
+    },
+    {
+      "id": "emoji-feuer",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        459,
+        484
+      ]
+    },
+    {
+      "id": "emoji-party-knaller",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        484,
+        477
+      ]
+    },
+    {
+      "id": "emoji-geschenk",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        461
+      ]
+    },
+    {
+      "id": "emoji-ballon",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        266,
+        484
+      ]
+    },
+    {
+      "id": "emoji-pokal",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        481
+      ]
+    },
+    {
+      "id": "fig-geburtstagstorte",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        584,
+        800
+      ]
+    },
+    {
+      "id": "fig-geschenk-schleife",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        630,
+        622
+      ]
+    },
+    {
+      "id": "fig-panda-ballons",
+      "farbpixelIdentisch": true,
+      "teile": 6,
+      "pixel": [
+        681,
+        798
+      ]
+    },
+    {
+      "id": "fig-monster-ballons",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        847
+      ]
+    },
+    {
+      "id": "fig-kuchen-monster",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        800,
+        838
+      ]
+    },
+    {
+      "id": "fig-party-pinguin",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        511,
+        800
+      ]
+    },
+    {
+      "id": "fig-partyhut",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        430,
+        800
+      ]
+    },
+    {
+      "id": "fig-muffin-rosa",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        796,
+        800
+      ]
+    },
+    {
+      "id": "fig-muffin-herz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        795
+      ]
+    },
+    {
+      "id": "fig-muffin-schoko",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        617,
+        680
+      ]
+    },
+    {
+      "id": "fig-clown-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        714,
+        800
+      ]
+    },
+    {
+      "id": "fig-partytroete",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        800,
+        784
+      ]
+    },
+    {
+      "id": "tiere-nilpferd",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        648,
+        800
+      ]
+    },
+    {
+      "id": "tiere-nashorn",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        696,
+        800
+      ]
+    },
+    {
+      "id": "tiere-elefant",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        764
+      ]
+    },
+    {
+      "id": "tiere-katze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        510,
+        800
+      ]
+    },
+    {
+      "id": "tiere-loewe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        513,
+        800
+      ]
+    },
+    {
+      "id": "tiere-leopard",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        506,
+        800
+      ]
+    },
+    {
+      "id": "tiere-panda",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        590,
+        799
+      ]
+    },
+    {
+      "id": "tiere-baer",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        592,
+        800
+      ]
+    },
+    {
+      "id": "tiere-eisbaer",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        592,
+        800
+      ]
+    },
+    {
+      "id": "tiere-affe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        655
+      ]
+    },
+    {
+      "id": "tiere-affenkopf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        714,
+        800
+      ]
+    },
+    {
+      "id": "tiere-strauss",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        537,
+        800
+      ]
+    },
+    {
+      "id": "tiere-pfau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        674
+      ]
+    },
+    {
+      "id": "tiere-giraffe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        426,
+        800
+      ]
+    },
+    {
+      "id": "tiere-schaf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        578,
+        692
+      ]
+    },
+    {
+      "id": "tiere-lamm",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        731
+      ]
+    },
+    {
+      "id": "tiere-schwein",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        494,
+        576
+      ]
+    },
+    {
+      "id": "tiere-ferkel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        780,
+        724
+      ]
+    },
+    {
+      "id": "tiere-pferd",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        706
+      ]
+    },
+    {
+      "id": "tiere-einhorn",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        616,
+        800
+      ]
+    },
+    {
+      "id": "tiere-lama",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        344,
+        800
+      ]
+    },
+    {
+      "id": "tiere-hund",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        480,
+        705
+      ]
+    },
+    {
+      "id": "tiere-hund-lachend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        706,
+        800
+      ]
+    },
+    {
+      "id": "tiere-hase",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        637,
+        800
+      ]
+    },
+    {
+      "id": "tiere-katze-socken",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        702,
+        793
+      ]
+    },
+    {
+      "id": "tiere-baer-tanzend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        626,
+        762
+      ]
+    },
+    {
+      "id": "fig-pizzastueck-fett",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        747,
+        800
+      ]
+    },
+    {
+      "id": "fig-burger-mann",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        681
+      ]
+    },
+    {
+      "id": "fig-burger-einfach",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        783,
+        618
+      ]
+    },
+    {
+      "id": "fig-burger-augen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        747,
+        606
+      ]
+    },
+    {
+      "id": "fig-pommes-tuete",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        697,
+        794
+      ]
+    },
+    {
+      "id": "fig-pommes-kawaii",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        583,
+        800
+      ]
+    },
+    {
+      "id": "fig-pommes-rot",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        617,
+        767
+      ]
+    },
+    {
+      "id": "fig-eis-rosa",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        448,
+        790
+      ]
+    },
+    {
+      "id": "fig-eisbecher",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        578,
+        740
+      ]
+    },
+    {
+      "id": "fig-eis-schoko",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        610,
+        756
+      ]
+    },
+    {
+      "id": "fig-spaghetti-teller",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        721,
+        373
+      ]
+    },
+    {
+      "id": "fig-koch-pfanne",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        800,
+        565
+      ]
+    },
+    {
+      "id": "fig-koch-mann",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        669,
+        800
+      ]
+    },
+    {
+      "id": "fig-koch-pinguin",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        584,
+        800
+      ]
+    },
+    {
+      "id": "fig-koch-eule",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        570,
+        800
+      ]
+    },
+    {
+      "id": "fig-croissant-gelb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        562
+      ]
+    },
+    {
+      "id": "fig-croissant-braun",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        436
+      ]
+    },
+    {
+      "id": "fig-croissant-baeckerei",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        655,
+        597
+      ]
+    },
+    {
+      "id": "fig-sandwich-kawaii",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        759
+      ]
+    },
+    {
+      "id": "fig-kaffee-tasse",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        800,
+        883
+      ]
+    },
+    {
+      "id": "fig-kaffee-icon",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        757,
+        683
+      ]
+    },
+    {
+      "id": "fig-kaese-stueck",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        517
+      ]
+    },
+    {
+      "id": "fig-apfel-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        721,
+        800
+      ]
+    },
+    {
+      "id": "fig-erdbeere",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        593,
+        576
+      ]
+    },
+    {
+      "id": "fig-birne",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        534,
+        770
+      ]
+    },
+    {
+      "id": "fig-kirschen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        757,
+        695
+      ]
+    },
+    {
+      "id": "fig-zitrone",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        572,
+        588
+      ]
+    },
+    {
+      "id": "fig-hotdog-mann",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        788,
+        1307
+      ]
+    },
+    {
+      "id": "fig-donut-rosa",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        871
+      ]
+    },
+    {
+      "id": "fig-donut-braun",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        734,
+        800
+      ]
+    },
+    {
+      "id": "fig-brezel-braun",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        690,
+        800
+      ]
+    },
+    {
+      "id": "fig-brezel-gelb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        765,
+        596
       ]
     }
   ],
