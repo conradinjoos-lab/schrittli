@@ -169,3 +169,26 @@ Alle Bilder stammen von Openclipart und stehen unter CC0 1.0 (Public Domain Dedi
 | Donut-Mädchen braun | fig-donut-braun | Küche & Restaurant | Doughnut Head | https://openclipart.org/detail/327177 | CC0 1.0 (Openclipart) | oksmith |
 | Brezel | fig-brezel-braun | Küche & Restaurant | Bavarian pretzel | https://openclipart.org/detail/188586 | CC0 1.0 (Openclipart) | arking |
 | Brezel-Zeichen | fig-brezel-gelb | Küche & Restaurant | Pretzel icon | https://openclipart.org/detail/22714 | CC0 1.0 (Openclipart) | pitr |
+| Herz mit Pfeil | fig-herz-pfeil-c | Liebe & Hochzeit | Pierced Heart | https://openclipart.org/detail/26210 | CC0 1.0 (Openclipart) | bpcomp |
+| Love-Herz | fig-herz-pfeil-a | Liebe & Hochzeit | Heart touched | https://openclipart.org/detail/345740 | CC0 1.0 (Openclipart) | Hyperslower |
+| Herz mit Flügeln | fig-herz-fluegel | Liebe & Hochzeit | Flying Heart Simple 2 | https://openclipart.org/detail/239954 | CC0 1.0 (Openclipart) | GDJ |
+| Amor | fig-amor-a | Liebe & Hochzeit | Cartoon Cupid | https://openclipart.org/detail/28795 | CC0 1.0 (Openclipart) | StudioFibonacci |
+| Brautpaar | fig-brautpaar-a | Liebe & Hochzeit | Brautpaar | https://openclipart.org/detail/173183 | CC0 1.0 (Openclipart) | zorro |
+| Brautpaar vor der Kirche | fig-brautpaar-e | Liebe & Hochzeit | Just Married | https://openclipart.org/detail/284253 | CC0 1.0 (Openclipart) | oksmith |
+| Braut | fig-braut | Liebe & Hochzeit | Bride (#1) | https://openclipart.org/detail/280074 | CC0 1.0 (Openclipart) | oksmith |
+| Hochzeitstorte | fig-torte-a | Liebe & Hochzeit | Cake 1 | https://openclipart.org/detail/24496 | CC0 1.0 (Openclipart) | Anonymous |
+| Bär mit Herz | fig-baer-herz-a | Liebe & Hochzeit | Kerry Smith | https://openclipart.org/detail/346996 | CC0 1.0 (Openclipart) | squareblank |
+| Friedenstaube im Herz | fig-taube-herz | Liebe & Hochzeit | Embrace Peace | https://openclipart.org/detail/271402 | CC0 1.0 (Openclipart) | GDJ |
+| Schneckenpost | fig-schnecken-post | Liebe & Hochzeit | Snail Mail | https://openclipart.org/detail/295127 | CC0 1.0 (Openclipart) | SunKing2 |
+| Kuss | fig-lippen-gross | Liebe & Hochzeit | Lips (#2) | https://openclipart.org/detail/308902 | CC0 1.0 (Openclipart) | oksmith |
+| Rosa Rose | fig-rose-a | Liebe & Hochzeit | pink rose | https://openclipart.org/detail/254960 | CC0 1.0 (Openclipart) | Jasmine2016 |
+| Rote Rose | fig-rose-b | Liebe & Hochzeit | Freehand ROSE | https://openclipart.org/detail/67195 | CC0 1.0 (Openclipart) | aungkarns |
+| Rosenblüte | fig-rose-d | Liebe & Hochzeit | Red rose | https://openclipart.org/detail/4824 | CC0 1.0 (Openclipart) | zeimusu |
+| Herzballon | fig-ballon-herz-a | Liebe & Hochzeit | Heart balloon | https://openclipart.org/detail/302338 | CC0 1.0 (Openclipart) | Firkin |
+| Herzballons | fig-ballon-herz-b | Liebe & Hochzeit | Heart Balloons  | https://openclipart.org/detail/26211 | CC0 1.0 (Openclipart) | bpcomp |
+| Katzen mit Herzballons | fig-ballon-katzen | Liebe & Hochzeit | Cats | https://openclipart.org/detail/339911 | CC0 1.0 (Openclipart) | culturalibre |
+| Teddy im Herz | fig-teddy-a | Liebe & Hochzeit | Teddy Bear Head in Heart v1 Remix | https://openclipart.org/detail/301340 | CC0 1.0 (Openclipart) | Clemens_Ratte-Polle |
+| Teddy im Herzrahmen | fig-teddy-b | Liebe & Hochzeit | Teddy Bear Head in Heart v2 Remix | https://openclipart.org/detail/301339 | CC0 1.0 (Openclipart) | Clemens_Ratte-Polle |
+| Kuschelbär | fig-teddy-d | Liebe & Hochzeit | Teddy Bear with heart | https://openclipart.org/detail/49015 | CC0 1.0 (Openclipart) | Gerald_G |
+| Teddy mit Herzschild | fig-teddy-e | Liebe & Hochzeit | Happy bear (colour) | https://openclipart.org/detail/281850 | CC0 1.0 (Openclipart) | Firkin |
+| Pinguin mit Rose | fig-pinguin-herz | Liebe & Hochzeit | Valentine Penguin | https://openclipart.org/detail/174544 | CC0 1.0 (Openclipart) | Moini |
