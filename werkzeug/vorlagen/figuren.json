@@ -39,7 +39,8 @@
   "Kreativ & Basteln",
   "Ostern",
   "Zirkus",
-  "Frühling & Garten"
+  "Frühling & Garten",
+  "Musik"
  ],
  "figuren": [
   {
@@ -5455,6 +5456,96 @@
    "name": "Honigbiene",
    "welt": "Frühling & Garten",
    "datei": "bienen-honig.png"
+  },
+  {
+   "id": "musik-krokodil-floete",
+   "name": "Krokodil mit Flöte",
+   "welt": "Musik",
+   "datei": "musik-krokodil-floete.png"
+  },
+  {
+   "id": "musik-akkordeon",
+   "name": "Akkordeon",
+   "welt": "Musik",
+   "datei": "musik-akkordeon.png"
+  },
+  {
+   "id": "musik-geiger",
+   "name": "Geiger",
+   "welt": "Musik",
+   "datei": "musik-geiger.png"
+  },
+  {
+   "id": "musik-band",
+   "name": "Blaskapelle",
+   "welt": "Musik",
+   "datei": "musik-band.png"
+  },
+  {
+   "id": "musik-sonne-tamburin",
+   "name": "Sonne mit Tamburin",
+   "welt": "Musik",
+   "datei": "musik-sonne-tamburin.png"
+  },
+  {
+   "id": "musik-marschkapelle",
+   "name": "Marschmusik",
+   "welt": "Musik",
+   "datei": "musik-marschkapelle.png"
+  },
+  {
+   "id": "musik-eule-gitarre",
+   "name": "Eule mit Gitarre",
+   "welt": "Musik",
+   "datei": "musik-eule-gitarre.png"
+  },
+  {
+   "id": "musik-trompete-gelb",
+   "name": "Trompete gelb",
+   "welt": "Musik",
+   "datei": "musik-trompete-gelb.png"
+  },
+  {
+   "id": "musik-trompete-gold",
+   "name": "Trompete golden",
+   "welt": "Musik",
+   "datei": "musik-trompete-gold.png"
+  },
+  {
+   "id": "musik-posthorn",
+   "name": "Posthorn",
+   "welt": "Musik",
+   "datei": "musik-posthorn.png"
+  },
+  {
+   "id": "musik-note-blau",
+   "name": "Blaue Note",
+   "welt": "Musik",
+   "datei": "musik-note-blau.png"
+  },
+  {
+   "id": "musik-chor-kinder",
+   "name": "Kinderchor",
+   "welt": "Musik",
+   "datei": "musik-chor-kinder.png"
+  },
+  {
+   "id": "musik-chor-gross",
+   "name": "Grosser Kinderchor",
+   "welt": "Musik",
+   "datei": "musik-chor-gross.png"
+  },
+  {
+   "id": "musik-grille-geige",
+   "name": "Grille mit Geige",
+   "welt": "Musik",
+   "datei": "musik-grille-geige.png"
+  },
+  {
+   "id": "musik-saxofonist",
+   "name": "Saxofonist",
+   "welt": "Musik",
+   "datei": "musik-saxofonist.png"
   }
  ]
 }

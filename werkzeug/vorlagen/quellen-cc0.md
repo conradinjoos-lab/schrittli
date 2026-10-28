@@ -306,6 +306,21 @@ Alle Bilder stammen von Openclipart und stehen unter CC0 1.0 (Public Domain Dedi
 | Löwe mit Herzballon | zirkus-loewe-ballon | Zirkus | Lion with Balloon | https://openclipart.org/detail/312502 | CC0 1.0 (Openclipart) | oksmith |
 | Schwein mit Herzballon | zirkus-schwein-ballon | Zirkus | Pig with Balloon | https://openclipart.org/detail/312329 | CC0 1.0 (Openclipart) | oksmith |
 | Elefant mit Herzballon | zirkus-elefant-ballon | Zirkus | Pink Elephant Cartoon | https://openclipart.org/detail/309894 | CC0 1.0 (Openclipart) | j4p4n |
+| Krokodil mit Flöte | musik-krokodil-floete | Musik | Musical crocodile (colour) | https://openclipart.org/detail/283052 | CC0 1.0 (Openclipart) | Firkin |
+| Akkordeon | musik-akkordeon | Musik | Accordion Player | https://openclipart.org/detail/236832 | CC0 1.0 (Openclipart) | GDJ |
+| Geiger | musik-geiger | Musik | Fiddler 2 | https://openclipart.org/detail/128365 | CC0 1.0 (Openclipart) | rones |
+| Blaskapelle | musik-band | Musik | Band by Rones | https://openclipart.org/detail/128389 | CC0 1.0 (Openclipart) | rones |
+| Sonne mit Tamburin | musik-sonne-tamburin | Musik | Mascota Sol | https://openclipart.org/detail/4546 | CC0 1.0 (Openclipart) | egonpin |
+| Marschmusik | musik-marschkapelle | Musik | marching band | https://openclipart.org/detail/959 | CC0 1.0 (Openclipart) | johnny_automatic |
+| Eule mit Gitarre | musik-eule-gitarre | Musik | Punk Owl | https://openclipart.org/detail/168874 | CC0 1.0 (Openclipart) | bocian |
+| Trompete gelb | musik-trompete-gelb | Musik | trumpet coloured | https://openclipart.org/detail/213686 | CC0 1.0 (Openclipart) | frankes |
+| Trompete golden | musik-trompete-gold | Musik | Silly trumpet | https://openclipart.org/detail/58297 | CC0 1.0 (Openclipart) | Gerald_G |
+| Posthorn | musik-posthorn | Musik | Pocket Trumpet | https://openclipart.org/detail/8454 | CC0 1.0 (Openclipart) | Gerald_G |
+| Blaue Note | musik-note-blau | Musik | Musical note | https://openclipart.org/detail/28505 | CC0 1.0 (Openclipart) | mbtwms |
+| Kinderchor | musik-chor-kinder | Musik | Choir singing | https://openclipart.org/detail/195898 | CC0 1.0 (Openclipart) | dear_theophilus |
+| Grosser Kinderchor | musik-chor-gross | Musik | Children Choral | https://openclipart.org/detail/181714 | CC0 1.0 (Openclipart) | gustavorezende |
+| Grille mit Geige | musik-grille-geige | Musik | Cricket with Violin | https://openclipart.org/detail/300263 | CC0 1.0 (Openclipart) | oksmith |
+| Saxofonist | musik-saxofonist | Musik | Saxophone Player | https://openclipart.org/detail/312332 | CC0 1.0 (Openclipart) | oksmith |
 | Bienen und Tulpen | fig-bienen-tulpen | Frühling & Garten | two bees three flowers | https://openclipart.org/detail/306622 | CC0 1.0 (Openclipart) | The_Martin |
 | Gänseblümchen | fig-gaensebluemchen | Frühling & Garten | Daisy | https://openclipart.org/detail/62689 | CC0 1.0 (Openclipart) | laobc |
 | Lila Blume | fig-blume-lila | Frühling & Garten | Flower 2 purple | https://openclipart.org/detail/256159 | CC0 1.0 (Openclipart) | BAJ |
