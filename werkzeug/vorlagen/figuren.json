@@ -23,6 +23,8 @@
   "Alltag",
   "Piraten & Ritter",
   "Frühling & Sommer",
+  "Buchstaben & Zahlen bunt",
+  "Wetter & Himmel",
   "Berge",
   "Städte"
  ],
@@ -2198,6 +2200,486 @@
    "name": "Sonnenbrille",
    "welt": "Frühling & Sommer",
    "datei": "sonnenbrille.png"
+  },
+  {
+   "id": "abc-a",
+   "name": "A",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-a.png",
+   "k": 3
+  },
+  {
+   "id": "abc-b",
+   "name": "B",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-b.png",
+   "k": 3
+  },
+  {
+   "id": "abc-c",
+   "name": "C",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-c.png",
+   "k": 3
+  },
+  {
+   "id": "abc-d",
+   "name": "D",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-d.png",
+   "k": 3
+  },
+  {
+   "id": "abc-e",
+   "name": "E",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-e.png",
+   "k": 3
+  },
+  {
+   "id": "abc-f",
+   "name": "F",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-f.png",
+   "k": 3
+  },
+  {
+   "id": "abc-g",
+   "name": "G",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-g.png",
+   "k": 3
+  },
+  {
+   "id": "abc-h",
+   "name": "H",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-h.png",
+   "k": 3
+  },
+  {
+   "id": "abc-i",
+   "name": "I",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-i.png",
+   "k": 3
+  },
+  {
+   "id": "abc-j",
+   "name": "J",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-j.png",
+   "k": 3
+  },
+  {
+   "id": "abc-k",
+   "name": "K",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-k.png",
+   "k": 3
+  },
+  {
+   "id": "abc-l",
+   "name": "L",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-l.png",
+   "k": 3
+  },
+  {
+   "id": "abc-m",
+   "name": "M",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-m.png",
+   "k": 3
+  },
+  {
+   "id": "abc-n",
+   "name": "N",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-n.png",
+   "k": 3
+  },
+  {
+   "id": "abc-o",
+   "name": "O",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-o.png",
+   "k": 3
+  },
+  {
+   "id": "abc-p",
+   "name": "P",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-p.png",
+   "k": 3
+  },
+  {
+   "id": "abc-q",
+   "name": "Q",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-q.png",
+   "k": 3
+  },
+  {
+   "id": "abc-r",
+   "name": "R",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-r.png",
+   "k": 3
+  },
+  {
+   "id": "abc-s",
+   "name": "S",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-s.png",
+   "k": 3
+  },
+  {
+   "id": "abc-t",
+   "name": "T",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-t.png",
+   "k": 3
+  },
+  {
+   "id": "abc-u",
+   "name": "U",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-u.png",
+   "k": 3
+  },
+  {
+   "id": "abc-v",
+   "name": "V",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-v.png",
+   "k": 3
+  },
+  {
+   "id": "abc-w",
+   "name": "W",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-w.png",
+   "k": 3
+  },
+  {
+   "id": "abc-x",
+   "name": "X",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-x.png",
+   "k": 3
+  },
+  {
+   "id": "abc-y",
+   "name": "Y",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-y.png",
+   "k": 3
+  },
+  {
+   "id": "abc-z",
+   "name": "Z",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-z.png",
+   "k": 3
+  },
+  {
+   "id": "abc-0",
+   "name": "0",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-0.png",
+   "k": 3
+  },
+  {
+   "id": "abc-1",
+   "name": "1",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-1.png",
+   "k": 3
+  },
+  {
+   "id": "abc-2",
+   "name": "2",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-2.png",
+   "k": 3
+  },
+  {
+   "id": "abc-3",
+   "name": "3",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-3.png",
+   "k": 3
+  },
+  {
+   "id": "abc-4",
+   "name": "4",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-4.png",
+   "k": 3
+  },
+  {
+   "id": "abc-5",
+   "name": "5",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-5.png",
+   "k": 3
+  },
+  {
+   "id": "abc-6",
+   "name": "6",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-6.png",
+   "k": 3
+  },
+  {
+   "id": "abc-7",
+   "name": "7",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-7.png",
+   "k": 3
+  },
+  {
+   "id": "abc-8",
+   "name": "8",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-8.png",
+   "k": 3
+  },
+  {
+   "id": "abc-9",
+   "name": "9",
+   "welt": "Buchstaben & Zahlen bunt",
+   "datei": "abc-9.png",
+   "k": 3
+  },
+  {
+   "id": "wetter-sonne",
+   "name": "Sonne",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-sonne.png"
+  },
+  {
+   "id": "wetter-sonne-gesicht",
+   "name": "Sonne mit Gesicht",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-sonne-gesicht.png"
+  },
+  {
+   "id": "wetter-sonne-wolke-klein",
+   "name": "Sonne mit kleiner Wolke",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-sonne-wolke-klein.png"
+  },
+  {
+   "id": "wetter-sonne-hinter-wolke",
+   "name": "Sonne hinter Wolke",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-sonne-hinter-wolke.png"
+  },
+  {
+   "id": "wetter-sonne-hinter-grosser-wolke",
+   "name": "Sonne hinter grosser Wolke",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-sonne-hinter-grosser-wolke.png"
+  },
+  {
+   "id": "wetter-sonne-regen",
+   "name": "Sonne hinter Regenwolke",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-sonne-regen.png"
+  },
+  {
+   "id": "wetter-wolke",
+   "name": "Wolke",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-wolke.png"
+  },
+  {
+   "id": "wetter-regenwolke",
+   "name": "Regenwolke",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-regenwolke.png"
+  },
+  {
+   "id": "wetter-gewitter",
+   "name": "Gewitterwolke",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-gewitter.png"
+  },
+  {
+   "id": "wetter-blitz-wolke",
+   "name": "Wolke mit Blitz",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-blitz-wolke.png"
+  },
+  {
+   "id": "wetter-blitz",
+   "name": "Blitz",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-blitz.png"
+  },
+  {
+   "id": "wetter-schneewolke",
+   "name": "Schneewolke",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-schneewolke.png"
+  },
+  {
+   "id": "wetter-schneeflocke",
+   "name": "Schneeflocke",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-schneeflocke.png"
+  },
+  {
+   "id": "wetter-schneemann",
+   "name": "Schneemann",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-schneemann.png"
+  },
+  {
+   "id": "wetter-schneemann-ohne",
+   "name": "Schneemann ohne Schnee",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-schneemann-ohne.png"
+  },
+  {
+   "id": "wetter-regenbogen",
+   "name": "Regenbogen",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-regenbogen.png"
+  },
+  {
+   "id": "wetter-regenschirm",
+   "name": "Regenschirm",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-regenschirm.png"
+  },
+  {
+   "id": "wetter-regenschirm-regen",
+   "name": "Regenschirm im Regen",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-regenschirm-regen.png"
+  },
+  {
+   "id": "wetter-tropfen",
+   "name": "Regentropfen",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-tropfen.png"
+  },
+  {
+   "id": "wetter-mond",
+   "name": "Mondsichel",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-mond.png"
+  },
+  {
+   "id": "wetter-mond-gesicht",
+   "name": "Mond mit Gesicht",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-mond-gesicht.png"
+  },
+  {
+   "id": "wetter-vollmond",
+   "name": "Vollmond",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-vollmond.png"
+  },
+  {
+   "id": "wetter-neumond",
+   "name": "Neumond mit Gesicht",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-neumond.png"
+  },
+  {
+   "id": "wetter-stern",
+   "name": "Stern",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-stern.png"
+  },
+  {
+   "id": "wetter-stern-glanz",
+   "name": "Glitzerstern",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-stern-glanz.png"
+  },
+  {
+   "id": "wetter-sternschnuppe",
+   "name": "Sternschnuppe",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-sternschnuppe.png"
+  },
+  {
+   "id": "wetter-funkeln",
+   "name": "Funkeln",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-funkeln.png"
+  },
+  {
+   "id": "wetter-wind",
+   "name": "Wind",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-wind.png"
+  },
+  {
+   "id": "wetter-windgesicht",
+   "name": "Windgesicht",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-windgesicht.png"
+  },
+  {
+   "id": "wetter-nebel",
+   "name": "Nebel",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-nebel.png"
+  },
+  {
+   "id": "wetter-wirbel",
+   "name": "Wirbel",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-wirbel.png"
+  },
+  {
+   "id": "wetter-tornado",
+   "name": "Wirbelsturm",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-tornado.png"
+  },
+  {
+   "id": "wetter-sternennacht",
+   "name": "Sternennacht",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-sternennacht.png"
+  },
+  {
+   "id": "wetter-milchstrasse",
+   "name": "Milchstrasse",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-milchstrasse.png"
+  },
+  {
+   "id": "wetter-sonnenaufgang",
+   "name": "Sonnenaufgang",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-sonnenaufgang.png"
+  },
+  {
+   "id": "wetter-sonnenuntergang",
+   "name": "Sonnenuntergang",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-sonnenuntergang.png"
+  },
+  {
+   "id": "wetter-thermometer",
+   "name": "Thermometer",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-thermometer.png"
+  },
+  {
+   "id": "wetter-welle",
+   "name": "Welle",
+   "welt": "Wetter & Himmel",
+   "datei": "wetter-welle.png"
   },
   {
    "id": "berg-umriss",
