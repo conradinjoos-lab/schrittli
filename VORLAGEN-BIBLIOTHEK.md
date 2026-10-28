@@ -13,6 +13,7 @@ Stand 28. Oktober 2026. Analyse der Schablonen und Vorlagen in «Schritt für Sc
 | Armbänder | 4 Arten (Perlenarmband ab 1., Flechtband ab 1., Freundschaftsband ab 3., Perlen-Webband ab 4.), 13 Muster, Pixel-Schrift für Namen | `vorlagen/armbaender/` | im HTML |
 | Abpausen | Bild vergrössern, Bildschirm einfrieren, abpausen | `vorlagen/einfrieren/` | im HTML |
 | Bohrvorlage | Lochraster für Platten: Bohrer, Abstand, Rand, versetzt, mehrere Blätter mit Passkreuzen | `vorlagen/bohren/` | im HTML |
+| Stromkreis-Baukasten | Batterie (3/4,5/9 V), Schalter, Taster, LED in 5 Farben, 3-V-Motor mit Propeller/Rad/Zahnrad, Lämpchen, Summer, Widerstand; rechnet den Kreis durch (leuchtet, dreht, Kurzschluss, LED verkehrt, zu wenig Spannung), Materialliste, Drucken, Bild, Link; 6 Beispiele | `vorlagen/stromkreis/` | im HTML |
 | Feste PDFs | Nikolausstiefel A4, Startrampe A3 (Raketenstation) | `vorlagen/`, `anleitungen/` | `nikolausstiefel.py`, Hand |
 | Foto-Anleitungen mit Vorlage | 28 Anleitungen, 2 mit eigener Vorlage (Raketenstation A3 und A4) | `anleitungen/` | `anleitungen.json` |
 | Schulvideos mit Vorlage | 72 von 352 Videos verweisen auf den Generator (`?form=…`) | `schule/schule.json` | Feld `vorlagen` |
