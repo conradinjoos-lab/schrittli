@@ -33,6 +33,7 @@
   "Städte",
   "Liebe & Hochzeit",
   "Weihnachten",
+  "Flaggen & Kontinente",
   "Wald & Wiese"
  ],
  "figuren": [
@@ -4060,6 +4061,266 @@
    "name": "Stechpalme",
    "welt": "Weihnachten",
    "datei": "weih-stechpalme.png"
+  },
+  {
+   "id": "flagge-schweiz",
+   "name": "Flagge Schweiz",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-schweiz.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-deutschland",
+   "name": "Flagge Deutschland",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-deutschland.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-frankreich",
+   "name": "Flagge Frankreich",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-frankreich.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-italien",
+   "name": "Flagge Italien",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-italien.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-oesterreich",
+   "name": "Flagge Österreich",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-oesterreich.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-liechtenstein",
+   "name": "Flagge Liechtenstein",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-liechtenstein.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-eu",
+   "name": "Flagge Europa (EU)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-eu.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-portugal",
+   "name": "Flagge Portugal",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-portugal.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-spanien",
+   "name": "Flagge Spanien",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-spanien.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-tuerkei",
+   "name": "Flagge Türkei",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-tuerkei.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-kosovo",
+   "name": "Flagge Kosovo",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-kosovo.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-grossbritannien",
+   "name": "Flagge Grossbritannien",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-grossbritannien.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-usa",
+   "name": "Flagge USA",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-usa.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-brasilien",
+   "name": "Flagge Brasilien",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-brasilien.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-japan",
+   "name": "Flagge Japan",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-japan.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-china",
+   "name": "Flagge China",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-china.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-serbien",
+   "name": "Flagge Serbien",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-serbien.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-albanien",
+   "name": "Flagge Albanien",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-albanien.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-nordmazedonien",
+   "name": "Flagge Nordmazedonien",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-nordmazedonien.png",
+   "glatt": 0
+  },
+  {
+   "id": "flagge-ukraine",
+   "name": "Flagge Ukraine",
+   "welt": "Flaggen & Kontinente",
+   "datei": "flagge-ukraine.png",
+   "glatt": 0
+  },
+  {
+   "id": "kontinent-globus",
+   "name": "Globus Europa und Afrika",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-globus.png"
+  },
+  {
+   "id": "kontinent-loewe",
+   "name": "Löwe (Afrika)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-loewe.png"
+  },
+  {
+   "id": "kontinent-elefant",
+   "name": "Elefant (Afrika)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-elefant.png"
+  },
+  {
+   "id": "kontinent-giraffe",
+   "name": "Giraffe (Afrika)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-giraffe.png"
+  },
+  {
+   "id": "kontinent-panda",
+   "name": "Panda (Asien)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-panda.png"
+  },
+  {
+   "id": "kontinent-tiger",
+   "name": "Tiger (Asien)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-tiger.png"
+  },
+  {
+   "id": "kontinent-kaenguru",
+   "name": "Känguru (Australien)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-kaenguru.png"
+  },
+  {
+   "id": "kontinent-koala",
+   "name": "Koala (Australien)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-koala.png"
+  },
+  {
+   "id": "kontinent-pinguin",
+   "name": "Pinguin (Antarktis)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-pinguin.png"
+  },
+  {
+   "id": "kontinent-lama",
+   "name": "Lama (Südamerika)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-lama.png"
+  },
+  {
+   "id": "kontinent-bison",
+   "name": "Bison (Nordamerika)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-bison.png"
+  },
+  {
+   "id": "kontinent-baer",
+   "name": "Braunbär (Europa)",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-baer.png"
+  },
+  {
+   "id": "kontinent-europa",
+   "name": "Europa",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-europa.png"
+  },
+  {
+   "id": "kontinent-afrika",
+   "name": "Afrika",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-afrika.png"
+  },
+  {
+   "id": "kontinent-asien",
+   "name": "Asien",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-asien.png"
+  },
+  {
+   "id": "kontinent-nordamerika",
+   "name": "Nordamerika",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-nordamerika.png"
+  },
+  {
+   "id": "kontinent-suedamerika",
+   "name": "Südamerika",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-suedamerika.png"
+  },
+  {
+   "id": "kontinent-australien",
+   "name": "Australien und Ozeanien",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-australien.png"
+  },
+  {
+   "id": "kontinent-antarktis",
+   "name": "Antarktis",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-antarktis.png"
+  },
+  {
+   "id": "kontinent-weltkarte",
+   "name": "Weltkarte",
+   "welt": "Flaggen & Kontinente",
+   "datei": "kontinent-weltkarte.png"
   },
   {
    "id": "wald-eule",

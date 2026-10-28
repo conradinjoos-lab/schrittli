@@ -147,6 +147,53 @@ Twemoji-Grafiken (siehe oben), mit schwarzem Umriss versehen. Skript: `werkzeug/
 | Ballon | emoji-ballon | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f388.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
 | Pokal | emoji-pokal | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f3c6.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
 
+## Flaggen & Kontinente
+
+Flaggen und Tiere: Twemoji (siehe oben); Kontinente und Weltkarte: Openclipart (CC0). Beide mit schwarzem Umriss versehen. Skript: `werkzeug/vorlagen/welle4-flaggen-kontinente.py`.
+
+| Motiv | Figur-ID | URL | Autor | Lizenz |
+|---|---|---|---|---|
+| Flagge Schweiz | flagge-schweiz | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1e8-1f1ed.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge Deutschland | flagge-deutschland | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1e9-1f1ea.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge Frankreich | flagge-frankreich | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1eb-1f1f7.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge Italien | flagge-italien | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1ee-1f1f9.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge Österreich | flagge-oesterreich | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1e6-1f1f9.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge Liechtenstein | flagge-liechtenstein | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1f1-1f1ee.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge Europa (EU) | flagge-eu | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1ea-1f1fa.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge Portugal | flagge-portugal | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1f5-1f1f9.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge Spanien | flagge-spanien | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1ea-1f1f8.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge Türkei | flagge-tuerkei | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1f9-1f1f7.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge Kosovo | flagge-kosovo | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1fd-1f1f0.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge Grossbritannien | flagge-grossbritannien | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1ec-1f1e7.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge USA | flagge-usa | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1fa-1f1f8.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge Brasilien | flagge-brasilien | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1e7-1f1f7.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge Japan | flagge-japan | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1ef-1f1f5.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge China | flagge-china | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1e8-1f1f3.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge Serbien | flagge-serbien | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1f7-1f1f8.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge Albanien | flagge-albanien | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1e6-1f1f1.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge Nordmazedonien | flagge-nordmazedonien | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1f2-1f1f0.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Flagge Ukraine | flagge-ukraine | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f1fa-1f1e6.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Globus Europa und Afrika | kontinent-globus | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f30d.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Löwe (Afrika) | kontinent-loewe | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f981.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Elefant (Afrika) | kontinent-elefant | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f418.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Giraffe (Afrika) | kontinent-giraffe | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f992.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Panda (Asien) | kontinent-panda | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f43c.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Tiger (Asien) | kontinent-tiger | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f405.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Känguru (Australien) | kontinent-kaenguru | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f998.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Koala (Australien) | kontinent-koala | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f428.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Pinguin (Antarktis) | kontinent-pinguin | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f427.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Lama (Südamerika) | kontinent-lama | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f999.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Bison (Nordamerika) | kontinent-bison | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f9ac.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Braunbär (Europa) | kontinent-baer | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f43b.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Europa | kontinent-europa | https://openclipart.org/detail/88915 | Iyo | CC0 1.0 |
+| Afrika | kontinent-afrika | https://openclipart.org/detail/88909 | Iyo | CC0 1.0 |
+| Asien | kontinent-asien | https://openclipart.org/detail/88933 | Iyo | CC0 1.0 |
+| Nordamerika | kontinent-nordamerika | https://openclipart.org/detail/88939 | Iyo | CC0 1.0 |
+| Südamerika | kontinent-suedamerika | https://openclipart.org/detail/88951 | Iyo | CC0 1.0 |
+| Australien und Ozeanien | kontinent-australien | https://openclipart.org/detail/88945 | Iyo | CC0 1.0 |
+| Antarktis | kontinent-antarktis | https://openclipart.org/detail/88921 | Iyo | CC0 1.0 |
+| Weltkarte | kontinent-weltkarte | https://openclipart.org/detail/7068 | bessan | CC0 1.0 |
+
 ## Berge
 
 Elf Bilder von **Vecteezy** (Vecteezy Free License, Nennung «Vecteezy» nötig, Bildseite `https://de.vecteezy.com/png/<Nr>`); die übrigen zwölf Berge sind eigene Zeichnungen (CC0), erzeugt mit `werkzeug/vorlagen/silhouetten.py`.
