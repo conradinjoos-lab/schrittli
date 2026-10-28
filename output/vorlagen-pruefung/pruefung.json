@@ -1,5 +1,5 @@
 {
-  "figuren": 880,
+  "figuren": 995,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -4883,28 +4883,28 @@
     {
       "id": "berg-umriss",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 18,
       "pixel": [
-        2079,
-        941
+        2359,
+        1151
       ]
     },
     {
       "id": "berg-spitze",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 14,
       "pixel": [
-        1620,
-        1201
+        2119,
+        1291
       ]
     },
     {
       "id": "berg-freihand",
       "farbpixelIdentisch": true,
-      "teile": 2,
+      "teile": 8,
       "pixel": [
-        2279,
-        1031
+        2980,
+        1104
       ]
     },
     {
@@ -4912,170 +4912,170 @@
       "farbpixelIdentisch": true,
       "teile": 2,
       "pixel": [
-        2239,
-        1011
+        2099,
+        1069
       ]
     },
     {
       "id": "berg-schneekappe",
       "farbpixelIdentisch": true,
-      "teile": 3,
+      "teile": 1,
       "pixel": [
-        2519,
-        1181
+        2559,
+        1266
       ]
     },
     {
       "id": "berg-gruen",
       "farbpixelIdentisch": true,
-      "teile": 5,
+      "teile": 2,
       "pixel": [
-        2400,
-        1030
+        2388,
+        1297
       ]
     },
     {
       "id": "berg-formen",
       "farbpixelIdentisch": true,
-      "teile": 8,
+      "teile": 16,
       "pixel": [
-        2199,
-        986
+        2380,
+        1510
       ]
     },
     {
       "id": "berg-violett",
       "farbpixelIdentisch": true,
-      "teile": 3,
+      "teile": 1,
       "pixel": [
-        2521,
-        1100
+        2592,
+        1151
       ]
     },
     {
       "id": "berg-sil-1",
       "farbpixelIdentisch": true,
-      "teile": 15,
+      "teile": 6,
       "pixel": [
-        2319,
-        1218
+        2564,
+        1159
       ]
     },
     {
       "id": "berg-sil-2",
       "farbpixelIdentisch": true,
-      "teile": 16,
+      "teile": 1,
       "pixel": [
-        2200,
-        1380
+        2059,
+        1396
       ]
     },
     {
       "id": "berg-sil-3",
       "farbpixelIdentisch": true,
-      "teile": 5,
+      "teile": 3,
       "pixel": [
-        2519,
-        1216
+        2296,
+        1302
       ]
     },
     {
       "id": "berg-doppel",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 7,
       "pixel": [
-        2319,
-        871
+        2600,
+        1182
       ]
     },
     {
       "id": "berg-dreiecke",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 4,
       "pixel": [
-        1999,
-        901
+        2169,
+        1131
       ]
     },
     {
       "id": "berg-fuji",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 11,
       "pixel": [
-        2279,
-        671
+        2800,
+        1122
       ]
     },
     {
       "id": "berg-gipfelkreuz",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 3,
       "pixel": [
-        1879,
-        1059
+        2400,
+        1335
       ]
     },
     {
       "id": "berg-hochgebirge",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 2,
       "pixel": [
-        2560,
-        1121
+        2800,
+        1290
       ]
     },
     {
       "id": "berg-huette",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 7,
       "pixel": [
-        2319,
-        921
+        2600,
+        1181
       ]
     },
     {
       "id": "berg-kette",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 3,
       "pixel": [
-        3160,
-        701
+        3200,
+        971
       ]
     },
     {
       "id": "berg-matterhorn-sil",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 2,
       "pixel": [
-        2279,
-        1051
+        2600,
+        1342
       ]
     },
     {
       "id": "berg-mond",
       "farbpixelIdentisch": true,
-      "teile": 2,
+      "teile": 14,
       "pixel": [
-        2319,
-        1031
+        2600,
+        1329
       ]
     },
     {
       "id": "berg-sonne",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 21,
       "pixel": [
-        2339,
-        911
+        2600,
+        1377
       ]
     },
     {
       "id": "berg-trio",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 2,
       "pixel": [
-        2519,
-        841
+        3000,
+        1195
       ]
     },
     {
@@ -5083,26 +5083,89 @@
       "farbpixelIdentisch": true,
       "teile": 2,
       "pixel": [
-        1799,
-        1241
+        2400,
+        1640
+      ]
+    },
+    {
+      "id": "berg-r-jungfrau",
+      "farbpixelIdentisch": true,
+      "teile": 69,
+      "pixel": [
+        2959,
+        1151
+      ]
+    },
+    {
+      "id": "berg-r-kamm",
+      "farbpixelIdentisch": true,
+      "teile": 75,
+      "pixel": [
+        2759,
+        1119
+      ]
+    },
+    {
+      "id": "berg-c-matterhorn",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        2147,
+        1343
+      ]
+    },
+    {
+      "id": "berg-c-huette",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        2388,
+        1289
+      ]
+    },
+    {
+      "id": "berg-c-see",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2388,
+        1205
+      ]
+    },
+    {
+      "id": "berg-c-zelt",
+      "farbpixelIdentisch": true,
+      "teile": 7,
+      "pixel": [
+        2388,
+        1309
+      ]
+    },
+    {
+      "id": "berg-c-ski",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2314,
+        1298
       ]
     },
     {
       "id": "stadt-zuerich",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 25,
       "pixel": [
-        2583,
-        880
+        2800,
+        1176
       ]
     },
     {
       "id": "stadt-bern",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 16,
       "pixel": [
-        2585,
-        950
+        2900,
+        1279
       ]
     },
     {
@@ -5110,26 +5173,26 @@
       "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        2386,
-        950
+        2900,
+        1440
       ]
     },
     {
       "id": "stadt-luzern",
       "farbpixelIdentisch": true,
-      "teile": 3,
+      "teile": 28,
       "pixel": [
-        2583,
-        770
+        3000,
+        1150
       ]
     },
     {
       "id": "stadt-genf",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 22,
       "pixel": [
-        2386,
-        950
+        3000,
+        1440
       ]
     },
     {
@@ -5137,17 +5200,17 @@
       "farbpixelIdentisch": true,
       "teile": 3,
       "pixel": [
-        2580,
-        1221
+        3200,
+        1570
       ]
     },
     {
       "id": "stadt-newyork",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 11,
       "pixel": [
-        2780,
-        1350
+        3400,
+        1960
       ]
     },
     {
@@ -5155,152 +5218,278 @@
       "farbpixelIdentisch": true,
       "teile": 3,
       "pixel": [
-        2581,
-        1250
+        3400,
+        1399
       ]
     },
     {
       "id": "stadt-rom",
       "farbpixelIdentisch": true,
-      "teile": 2,
+      "teile": 1,
       "pixel": [
-        2561,
-        735
+        3200,
+        1106
       ]
     },
     {
       "id": "stadt-berlin",
       "farbpixelIdentisch": true,
-      "teile": 4,
+      "teile": 11,
       "pixel": [
-        2580,
-        1350
+        3400,
+        1670
       ]
     },
     {
       "id": "stadt-pisa",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 3,
       "pixel": [
-        1410,
-        1150
+        3000,
+        855
       ]
     },
     {
       "id": "stadt-dorf-kirche",
       "farbpixelIdentisch": true,
-      "teile": 7,
+      "teile": 42,
       "pixel": [
-        2361,
-        860
+        2800,
+        900
       ]
     },
     {
       "id": "stadt-hochhaeuser",
       "farbpixelIdentisch": true,
-      "teile": 8,
+      "teile": 60,
       "pixel": [
-        2780,
-        1070
+        3400,
+        1634
       ]
     },
     {
       "id": "stadt-burg",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 7,
       "pixel": [
-        2359,
-        1141
+        3200,
+        1800
       ]
     },
     {
       "id": "stadt-muehlen",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 13,
       "pixel": [
-        2600,
-        1052
+        3200,
+        1737
       ]
     },
     {
       "id": "stadt-tokio",
       "farbpixelIdentisch": true,
-      "teile": 7,
+      "teile": 39,
       "pixel": [
-        2586,
-        1201
+        3400,
+        1610
       ]
     },
     {
       "id": "stadt-dubai",
       "farbpixelIdentisch": true,
-      "teile": 3,
+      "teile": 7,
       "pixel": [
-        2580,
-        1450
+        3400,
+        2192
       ]
     },
     {
       "id": "stadt-venedig",
       "farbpixelIdentisch": true,
-      "teile": 4,
+      "teile": 104,
       "pixel": [
-        2584,
-        1040
+        3400,
+        1740
       ]
     },
     {
       "id": "stadt-moskau",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 2,
       "pixel": [
-        2001,
-        1060
+        3400,
+        1549
       ]
     },
     {
       "id": "stadt-amsterdam",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 60,
       "pixel": [
-        2580,
-        632
+        3400,
+        1802
       ]
     },
     {
       "id": "stadt-wien",
       "farbpixelIdentisch": true,
-      "teile": 2,
+      "teile": 7,
       "pixel": [
-        2560,
-        1356
+        3400,
+        1800
       ]
     },
     {
       "id": "stadt-athen",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 8,
       "pixel": [
-        2559,
-        771
+        3400,
+        1192
       ]
     },
     {
       "id": "stadt-pyramiden",
       "farbpixelIdentisch": true,
-      "teile": 1,
+      "teile": 6,
       "pixel": [
-        2299,
-        701
+        3400,
+        1160
       ]
     },
     {
       "id": "stadt-schloss",
       "farbpixelIdentisch": true,
+      "teile": 6,
+      "pixel": [
+        3200,
+        1930
+      ]
+    },
+    {
+      "id": "stadt-schaffhausen",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        3000,
+        1118
+      ]
+    },
+    {
+      "id": "stadt-rheinfall",
+      "farbpixelIdentisch": true,
+      "teile": 51,
+      "pixel": [
+        2600,
+        1159
+      ]
+    },
+    {
+      "id": "stadt-goldengate",
+      "farbpixelIdentisch": true,
       "teile": 1,
       "pixel": [
-        2559,
-        1351
+        3000,
+        950
+      ]
+    },
+    {
+      "id": "stadt-istanbul",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2800,
+        888
+      ]
+    },
+    {
+      "id": "stadt-prag",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        3000,
+        1300
+      ]
+    },
+    {
+      "id": "stadt-barcelona",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1601,
+        1300
+      ]
+    },
+    {
+      "id": "stadt-c-schaffhausen",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        2994,
+        1395
+      ]
+    },
+    {
+      "id": "stadt-c-zuerich",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        2995,
+        1421
+      ]
+    },
+    {
+      "id": "stadt-c-bern",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        2987,
+        1441
+      ]
+    },
+    {
+      "id": "stadt-c-paris",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        2595,
+        1477
+      ]
+    },
+    {
+      "id": "stadt-c-london",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        2987,
+        1598
+      ]
+    },
+    {
+      "id": "stadt-c-newyork",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        2984,
+        1556
+      ]
+    },
+    {
+      "id": "stadt-c-pisa",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        2588,
+        1403
+      ]
+    },
+    {
+      "id": "stadt-c-venedig",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        2995,
+        1551
       ]
     },
     {
@@ -7920,6 +8109,852 @@
       "pixel": [
         644,
         799
+      ]
+    },
+    {
+      "id": "musik-krokodil-floete",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        788,
+        799
+      ]
+    },
+    {
+      "id": "musik-akkordeon",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        772,
+        570
+      ]
+    },
+    {
+      "id": "musik-geiger",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        556,
+        603
+      ]
+    },
+    {
+      "id": "musik-band",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        680,
+        800
+      ]
+    },
+    {
+      "id": "musik-sonne-tamburin",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        573,
+        763
+      ]
+    },
+    {
+      "id": "musik-marschkapelle",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        800,
+        530
+      ]
+    },
+    {
+      "id": "musik-eule-gitarre",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        778,
+        800
+      ]
+    },
+    {
+      "id": "musik-trompete-gelb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        752,
+        493
+      ]
+    },
+    {
+      "id": "musik-trompete-gold",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        771
+      ]
+    },
+    {
+      "id": "musik-posthorn",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        494
+      ]
+    },
+    {
+      "id": "musik-note-blau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        606,
+        800
+      ]
+    },
+    {
+      "id": "musik-chor-kinder",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        562
+      ]
+    },
+    {
+      "id": "musik-chor-gross",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        800,
+        446
+      ]
+    },
+    {
+      "id": "musik-grille-geige",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        736,
+        793
+      ]
+    },
+    {
+      "id": "musik-saxofonist",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        309,
+        793
+      ]
+    },
+    {
+      "id": "schule-junge",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        411,
+        683
+      ]
+    },
+    {
+      "id": "schule-maedchen-pult",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        585,
+        782
+      ]
+    },
+    {
+      "id": "schule-buecherstapel-junge",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        390,
+        766
+      ]
+    },
+    {
+      "id": "schule-tafel-maedchen",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        506,
+        649
+      ]
+    },
+    {
+      "id": "schule-lesen-stapel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        354,
+        769
+      ]
+    },
+    {
+      "id": "schule-buecherberg",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        490,
+        719
+      ]
+    },
+    {
+      "id": "schule-schulweg",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        799,
+        800
+      ]
+    },
+    {
+      "id": "schule-kinder-uniform",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        800,
+        652
+      ]
+    },
+    {
+      "id": "schule-kinder-rucksack",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        797,
+        691
+      ]
+    },
+    {
+      "id": "schule-kinder-drei",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        800,
+        562
+      ]
+    },
+    {
+      "id": "schule-junge-rucksack",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        416,
+        735
+      ]
+    },
+    {
+      "id": "schule-bus-gelb",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        766,
+        378
+      ]
+    },
+    {
+      "id": "schule-bus-stop",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        799,
+        414
+      ]
+    },
+    {
+      "id": "schule-bleistift-figur",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        464,
+        728
+      ]
+    },
+    {
+      "id": "schule-heft",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        800,
+        777
+      ]
+    },
+    {
+      "id": "schule-schere",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        799
+      ]
+    },
+    {
+      "id": "sport-fussballer",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        538,
+        779
+      ]
+    },
+    {
+      "id": "sport-fussball",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        779,
+        775
+      ]
+    },
+    {
+      "id": "sport-junge-fussball",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        650,
+        800
+      ]
+    },
+    {
+      "id": "sport-fussball-schuss",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        783,
+        799
+      ]
+    },
+    {
+      "id": "sport-fussball-maedchen",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        766,
+        800
+      ]
+    },
+    {
+      "id": "sport-jojo",
+      "farbpixelIdentisch": true,
+      "teile": 17,
+      "pixel": [
+        531,
+        748
+      ]
+    },
+    {
+      "id": "sport-basketball-korb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        635,
+        800
+      ]
+    },
+    {
+      "id": "sport-wolf-basketball",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        635,
+        800
+      ]
+    },
+    {
+      "id": "sport-panda-tennis",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        673
+      ]
+    },
+    {
+      "id": "sport-tennis",
+      "farbpixelIdentisch": true,
+      "teile": 16,
+      "pixel": [
+        800,
+        626
+      ]
+    },
+    {
+      "id": "sport-tischtennis",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        770,
+        561
+      ]
+    },
+    {
+      "id": "sport-nilpferd-schnorchel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        644,
+        800
+      ]
+    },
+    {
+      "id": "sport-lama-bademeister",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        406,
+        800
+      ]
+    },
+    {
+      "id": "sport-schwein-velo",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        739,
+        800
+      ]
+    },
+    {
+      "id": "sport-skate-maedchen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        776,
+        1424
+      ]
+    },
+    {
+      "id": "sport-frosch-skate",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        732,
+        796
+      ]
+    },
+    {
+      "id": "sport-ratte-skate",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        799,
+        792
+      ]
+    },
+    {
+      "id": "sport-katze-skate",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        674
+      ]
+    },
+    {
+      "id": "sport-skater",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        569,
+        676
+      ]
+    },
+    {
+      "id": "sport-skater-kind",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        600,
+        800
+      ]
+    },
+    {
+      "id": "sport-pokal",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        565,
+        797
+      ]
+    },
+    {
+      "id": "sport-football",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        486
+      ]
+    },
+    {
+      "id": "sport-baseball-blau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        708,
+        744
+      ]
+    },
+    {
+      "id": "sport-baseball-kappe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        583,
+        744
+      ]
+    },
+    {
+      "id": "winter-kind-muetze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        419,
+        799
+      ]
+    },
+    {
+      "id": "winter-baer-schal",
+      "farbpixelIdentisch": true,
+      "teile": 9,
+      "pixel": [
+        575,
+        760
+      ]
+    },
+    {
+      "id": "winter-baer-bett",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        737,
+        782
+      ]
+    },
+    {
+      "id": "winter-pinguin-mantel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        653,
+        800
+      ]
+    },
+    {
+      "id": "winter-schneemann-besen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        741,
+        779
+      ]
+    },
+    {
+      "id": "winter-schneemann-feuer",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        693,
+        623
+      ]
+    },
+    {
+      "id": "winter-schneemann-hut",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        622,
+        701
+      ]
+    },
+    {
+      "id": "winter-schneemann-schal",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        485,
+        800
+      ]
+    },
+    {
+      "id": "winter-schneemann-ski",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        774,
+        716
+      ]
+    },
+    {
+      "id": "winter-schneemann-bommel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        460,
+        800
+      ]
+    },
+    {
+      "id": "winter-eisbaer-tasse",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        800,
+        1319
+      ]
+    },
+    {
+      "id": "winter-pinguin-detektiv",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        656,
+        800
+      ]
+    },
+    {
+      "id": "winter-pinguin-koenig",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        600,
+        800
+      ]
+    },
+    {
+      "id": "winter-pinguin-rund",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        626,
+        785
+      ]
+    },
+    {
+      "id": "winter-pinguin-dick",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        799,
+        800
+      ]
+    },
+    {
+      "id": "winter-pinguin-schuerze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        587,
+        764
+      ]
+    },
+    {
+      "id": "winter-pinguin-schreitet",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        508,
+        770
+      ]
+    },
+    {
+      "id": "meer-krake-lila",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        728
+      ]
+    },
+    {
+      "id": "meer-krake-rot",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        743,
+        800
+      ]
+    },
+    {
+      "id": "meer-wal-tuerkis",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        454
+      ]
+    },
+    {
+      "id": "meer-wal-blau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        439
+      ]
+    },
+    {
+      "id": "meer-pottwal-grau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        395
+      ]
+    },
+    {
+      "id": "meer-wal-hellblau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        713,
+        626
+      ]
+    },
+    {
+      "id": "meer-hai-grau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        597
+      ]
+    },
+    {
+      "id": "meer-krabbe-orange",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        799,
+        525
+      ]
+    },
+    {
+      "id": "meer-krabbe-koenig",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        711,
+        664
+      ]
+    },
+    {
+      "id": "meer-seestern-lachend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        765
+      ]
+    },
+    {
+      "id": "meer-krabbe-rosa",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        790,
+        645
+      ]
+    },
+    {
+      "id": "meer-fisch-brummig",
+      "farbpixelIdentisch": true,
+      "teile": 8,
+      "pixel": [
+        800,
+        749
+      ]
+    },
+    {
+      "id": "weltraum-rakete-schraeg",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        762,
+        734
+      ]
+    },
+    {
+      "id": "weltraum-rakete-rot",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        446,
+        780
+      ]
+    },
+    {
+      "id": "weltraum-rakete-schlank",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        195,
+        588
+      ]
+    },
+    {
+      "id": "weltraum-rakete-gelb",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        622,
+        781
+      ]
+    },
+    {
+      "id": "weltraum-rakete-bordeaux",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        504,
+        800
+      ]
+    },
+    {
+      "id": "weltraum-astronaut-winkt",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        672,
+        800
+      ]
+    },
+    {
+      "id": "weltraum-astronaut-rot",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        792,
+        797
+      ]
+    },
+    {
+      "id": "weltraum-astronaut-hupft",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        571,
+        757
+      ]
+    },
+    {
+      "id": "weltraum-ufo-lila",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        780,
+        403
+      ]
+    },
+    {
+      "id": "weltraum-ausserirdischer-brummig",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        765
       ]
     }
   ],
