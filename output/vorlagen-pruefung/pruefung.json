@@ -1,5 +1,5 @@
 {
-  "figuren": 677,
+  "figuren": 717,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -5868,6 +5868,366 @@
       "pixel": [
         760,
         795
+      ]
+    },
+    {
+      "id": "flagge-schweiz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "flagge-deutschland",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-frankreich",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-italien",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-oesterreich",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-liechtenstein",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-eu",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-portugal",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-spanien",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-tuerkei",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-kosovo",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-grossbritannien",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-usa",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-brasilien",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-japan",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-china",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-serbien",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-albanien",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-nordmazedonien",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "flagge-ukraine",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        356
+      ]
+    },
+    {
+      "id": "kontinent-globus",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-loewe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        480,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-elefant",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        441
+      ]
+    },
+    {
+      "id": "kontinent-giraffe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        419,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-panda",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        459,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-tiger",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        330
+      ]
+    },
+    {
+      "id": "kontinent-kaenguru",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        480,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-koala",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        355
+      ]
+    },
+    {
+      "id": "kontinent-pinguin",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        440,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-lama",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        428,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-bison",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        405
+      ]
+    },
+    {
+      "id": "kontinent-baer",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        459,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-europa",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        484,
+        337
+      ]
+    },
+    {
+      "id": "kontinent-afrika",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        475,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-asien",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        484,
+        381
+      ]
+    },
+    {
+      "id": "kontinent-nordamerika",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        297
+      ]
+    },
+    {
+      "id": "kontinent-suedamerika",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        346,
+        484
+      ]
+    },
+    {
+      "id": "kontinent-australien",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        484,
+        385
+      ]
+    },
+    {
+      "id": "kontinent-antarktis",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        69
+      ]
+    },
+    {
+      "id": "kontinent-weltkarte",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        484,
+        268
       ]
     },
     {
