@@ -1,5 +1,5 @@
 {
-  "figuren": 803,
+  "figuren": 834,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -7227,6 +7227,285 @@
       "pixel": [
         778,
         800
+      ]
+    },
+    {
+      "id": "fig-bienen-tulpen",
+      "farbpixelIdentisch": true,
+      "teile": 7,
+      "pixel": [
+        600,
+        799
+      ]
+    },
+    {
+      "id": "fig-gaensebluemchen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        553,
+        796
+      ]
+    },
+    {
+      "id": "fig-blume-lila",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        460,
+        800
+      ]
+    },
+    {
+      "id": "fig-falter-blau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        634,
+        429
+      ]
+    },
+    {
+      "id": "fig-falter-lila",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        767,
+        586
+      ]
+    },
+    {
+      "id": "fig-falter-orange",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        712,
+        800
+      ]
+    },
+    {
+      "id": "fig-falter-bunt",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        749,
+        719
+      ]
+    },
+    {
+      "id": "fig-kaefer-a",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        481,
+        322
+      ]
+    },
+    {
+      "id": "fig-kaefer-b",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        635
+      ]
+    },
+    {
+      "id": "fig-kaefer-liebe",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        704,
+        800
+      ]
+    },
+    {
+      "id": "fig-kaefer-c",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        758,
+        454
+      ]
+    },
+    {
+      "id": "fig-kueken-lachend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        695
+      ]
+    },
+    {
+      "id": "fig-kueken-gesicht",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        614,
+        681
+      ]
+    },
+    {
+      "id": "fig-kueken-ei",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        698
+      ]
+    },
+    {
+      "id": "fig-kueken-gelb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        520,
+        800
+      ]
+    },
+    {
+      "id": "fig-henne-kueken",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        792,
+        695
+      ]
+    },
+    {
+      "id": "fig-schnecke-orange",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        450
+      ]
+    },
+    {
+      "id": "fig-schnecke-braun",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        775,
+        533
+      ]
+    },
+    {
+      "id": "fig-schnecke-gelb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        545
+      ]
+    },
+    {
+      "id": "fig-schnecke-gruen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        496
+      ]
+    },
+    {
+      "id": "fig-schirm-panda",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        713,
+        800
+      ]
+    },
+    {
+      "id": "fig-giesskanne-pinguin",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        674,
+        791
+      ]
+    },
+    {
+      "id": "fig-stiefel-blau",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        755,
+        792
+      ]
+    },
+    {
+      "id": "fig-stiefel-pink",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        793,
+        737
+      ]
+    },
+    {
+      "id": "fig-stiefel-gelb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        791,
+        705
+      ]
+    },
+    {
+      "id": "fig-giraffe-bunt",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        634,
+        795
+      ]
+    },
+    {
+      "id": "fig-osterpinguin",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        582,
+        800
+      ]
+    },
+    {
+      "id": "fig-bienen-b",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        392,
+        280
+      ]
+    },
+    {
+      "id": "fig-bienen-c",
+      "farbpixelIdentisch": true,
+      "teile": 4,
+      "pixel": [
+        800,
+        713
+      ]
+    },
+    {
+      "id": "fig-bienen-d",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        715,
+        798
+      ]
+    },
+    {
+      "id": "fig-bienen-honig",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        644,
+        799
       ]
     }
   ],
