@@ -1,5 +1,5 @@
 {
-  "figuren": 431,
+  "figuren": 472,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -3879,6 +3879,375 @@
       "pixel": [
         484,
         447
+      ]
+    },
+    {
+      "id": "emoji-froh",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-strahlend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-lachtraenen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-kugelt",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-laechelnd",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-engel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-verliebt",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-herzaugen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-sternaugen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-lecker",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-zunge",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-nachdenklich",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        459,
+        484
+      ]
+    },
+    {
+      "id": "emoji-neutral",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-schlafend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-heulend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-traurig",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-waetend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-sehr-waetend",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-schreck",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-erstaunt",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-verlegen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-cool",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-party",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-krank",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-kalt",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "emoji-umarmung",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        480,
+        484
+      ]
+    },
+    {
+      "id": "emoji-herz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        436
+      ]
+    },
+    {
+      "id": "emoji-herz-blau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        436
+      ]
+    },
+    {
+      "id": "emoji-herz-gruen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        436
+      ]
+    },
+    {
+      "id": "emoji-herz-lila",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        436
+      ]
+    },
+    {
+      "id": "emoji-herz-gelb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        436
+      ]
+    },
+    {
+      "id": "emoji-herz-gebrochen",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        484,
+        436
+      ]
+    },
+    {
+      "id": "emoji-daumen-hoch",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        436,
+        484
+      ]
+    },
+    {
+      "id": "emoji-daumen-runter",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        436,
+        484
+      ]
+    },
+    {
+      "id": "emoji-klatschen",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        484,
+        483
+      ]
+    },
+    {
+      "id": "emoji-sieg",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        335,
+        484
+      ]
+    },
+    {
+      "id": "emoji-feuer",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        459,
+        484
+      ]
+    },
+    {
+      "id": "emoji-party-knaller",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        484,
+        477
+      ]
+    },
+    {
+      "id": "emoji-geschenk",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        461
+      ]
+    },
+    {
+      "id": "emoji-ballon",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        266,
+        484
+      ]
+    },
+    {
+      "id": "emoji-pokal",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        481
       ]
     }
   ],

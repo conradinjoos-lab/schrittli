@@ -56,7 +56,7 @@ Selbst erzeugt: Schrift DejaVu Sans Bold (freie Lizenz, Bitstream Vera/Public Do
 
 ## Wetter & Himmel
 
-Twemoji-Grafiken (siehe oben), mit schwarzem Umriss versehen.
+Twemoji-Grafiken (siehe oben), mit schwarzem Umriss versehen. Skript: `werkzeug/vorlagen/welle4-twemoji.py`.
 
 | Motiv | Figur-ID | URL | Autor | Lizenz |
 |---|---|---|---|---|
@@ -98,3 +98,51 @@ Twemoji-Grafiken (siehe oben), mit schwarzem Umriss versehen.
 | Sonnenuntergang | wetter-sonnenuntergang | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f307.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
 | Thermometer | wetter-thermometer | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f321.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
 | Welle | wetter-welle | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f30a.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+
+## Emojis & Gefühle
+
+Twemoji-Grafiken (siehe oben), mit schwarzem Umriss versehen. Skript: `werkzeug/vorlagen/welle4-twemoji.py`.
+
+| Motiv | Figur-ID | URL | Autor | Lizenz |
+|---|---|---|---|---|
+| Froh | emoji-froh | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f600.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Strahlend | emoji-strahlend | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f604.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Lachtränen | emoji-lachtraenen | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f602.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Kugelt sich vor Lachen | emoji-kugelt | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f923.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Lächelnd | emoji-laechelnd | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f642.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Engel | emoji-engel | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f607.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Verliebt | emoji-verliebt | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f970.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Herzaugen | emoji-herzaugen | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f60d.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Sternenaugen | emoji-sternaugen | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f929.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Lecker | emoji-lecker | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f60b.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Zunge raus | emoji-zunge | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f61c.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Nachdenklich | emoji-nachdenklich | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f914.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Neutral | emoji-neutral | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f610.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Schlafend | emoji-schlafend | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f634.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Heulend | emoji-heulend | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f62d.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Traurig | emoji-traurig | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f622.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Wütend | emoji-waetend | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f620.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Sehr wütend | emoji-sehr-waetend | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f621.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Erschrocken | emoji-schreck | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f631.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Erstaunt | emoji-erstaunt | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f632.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Verlegen | emoji-verlegen | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f633.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Cool | emoji-cool | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f60e.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Partygesicht | emoji-party | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f973.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Krank | emoji-krank | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f912.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Friert | emoji-kalt | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f976.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Umarmung | emoji-umarmung | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f917.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Herz rot | emoji-herz | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/2764.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Herz blau | emoji-herz-blau | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f499.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Herz grün | emoji-herz-gruen | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f49a.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Herz lila | emoji-herz-lila | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f49c.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Herz gelb | emoji-herz-gelb | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f49b.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Gebrochenes Herz | emoji-herz-gebrochen | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f494.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Daumen hoch | emoji-daumen-hoch | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f44d.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Daumen runter | emoji-daumen-runter | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f44e.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Klatschen | emoji-klatschen | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f44f.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Victory | emoji-sieg | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/270c.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Feuer | emoji-feuer | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f525.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Partyknaller | emoji-party-knaller | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f389.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Geschenk | emoji-geschenk | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f381.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Ballon | emoji-ballon | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f388.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
+| Pokal | emoji-pokal | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f3c6.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |

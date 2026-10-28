@@ -24,7 +24,8 @@
   "Piraten & Ritter",
   "Frühling & Sommer",
   "Buchstaben & Zahlen bunt",
-  "Wetter & Himmel"
+  "Wetter & Himmel",
+  "Emojis & Gefühle"
  ],
  "figuren": [
   {
@@ -2678,6 +2679,252 @@
    "name": "Welle",
    "welt": "Wetter & Himmel",
    "datei": "wetter-welle.png"
+  },
+  {
+   "id": "emoji-froh",
+   "name": "Froh",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-froh.png"
+  },
+  {
+   "id": "emoji-strahlend",
+   "name": "Strahlend",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-strahlend.png"
+  },
+  {
+   "id": "emoji-lachtraenen",
+   "name": "Lachtränen",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-lachtraenen.png"
+  },
+  {
+   "id": "emoji-kugelt",
+   "name": "Kugelt sich vor Lachen",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-kugelt.png"
+  },
+  {
+   "id": "emoji-laechelnd",
+   "name": "Lächelnd",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-laechelnd.png"
+  },
+  {
+   "id": "emoji-engel",
+   "name": "Engel",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-engel.png"
+  },
+  {
+   "id": "emoji-verliebt",
+   "name": "Verliebt",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-verliebt.png"
+  },
+  {
+   "id": "emoji-herzaugen",
+   "name": "Herzaugen",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-herzaugen.png"
+  },
+  {
+   "id": "emoji-sternaugen",
+   "name": "Sternenaugen",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-sternaugen.png"
+  },
+  {
+   "id": "emoji-lecker",
+   "name": "Lecker",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-lecker.png"
+  },
+  {
+   "id": "emoji-zunge",
+   "name": "Zunge raus",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-zunge.png"
+  },
+  {
+   "id": "emoji-nachdenklich",
+   "name": "Nachdenklich",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-nachdenklich.png"
+  },
+  {
+   "id": "emoji-neutral",
+   "name": "Neutral",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-neutral.png"
+  },
+  {
+   "id": "emoji-schlafend",
+   "name": "Schlafend",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-schlafend.png"
+  },
+  {
+   "id": "emoji-heulend",
+   "name": "Heulend",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-heulend.png"
+  },
+  {
+   "id": "emoji-traurig",
+   "name": "Traurig",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-traurig.png"
+  },
+  {
+   "id": "emoji-waetend",
+   "name": "Wütend",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-waetend.png"
+  },
+  {
+   "id": "emoji-sehr-waetend",
+   "name": "Sehr wütend",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-sehr-waetend.png"
+  },
+  {
+   "id": "emoji-schreck",
+   "name": "Erschrocken",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-schreck.png"
+  },
+  {
+   "id": "emoji-erstaunt",
+   "name": "Erstaunt",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-erstaunt.png"
+  },
+  {
+   "id": "emoji-verlegen",
+   "name": "Verlegen",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-verlegen.png"
+  },
+  {
+   "id": "emoji-cool",
+   "name": "Cool",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-cool.png"
+  },
+  {
+   "id": "emoji-party",
+   "name": "Partygesicht",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-party.png"
+  },
+  {
+   "id": "emoji-krank",
+   "name": "Krank",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-krank.png"
+  },
+  {
+   "id": "emoji-kalt",
+   "name": "Friert",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-kalt.png"
+  },
+  {
+   "id": "emoji-umarmung",
+   "name": "Umarmung",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-umarmung.png"
+  },
+  {
+   "id": "emoji-herz",
+   "name": "Herz rot",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-herz.png"
+  },
+  {
+   "id": "emoji-herz-blau",
+   "name": "Herz blau",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-herz-blau.png"
+  },
+  {
+   "id": "emoji-herz-gruen",
+   "name": "Herz grün",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-herz-gruen.png"
+  },
+  {
+   "id": "emoji-herz-lila",
+   "name": "Herz lila",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-herz-lila.png"
+  },
+  {
+   "id": "emoji-herz-gelb",
+   "name": "Herz gelb",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-herz-gelb.png"
+  },
+  {
+   "id": "emoji-herz-gebrochen",
+   "name": "Gebrochenes Herz",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-herz-gebrochen.png"
+  },
+  {
+   "id": "emoji-daumen-hoch",
+   "name": "Daumen hoch",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-daumen-hoch.png"
+  },
+  {
+   "id": "emoji-daumen-runter",
+   "name": "Daumen runter",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-daumen-runter.png"
+  },
+  {
+   "id": "emoji-klatschen",
+   "name": "Klatschen",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-klatschen.png"
+  },
+  {
+   "id": "emoji-sieg",
+   "name": "Victory",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-sieg.png"
+  },
+  {
+   "id": "emoji-feuer",
+   "name": "Feuer",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-feuer.png"
+  },
+  {
+   "id": "emoji-party-knaller",
+   "name": "Partyknaller",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-party-knaller.png"
+  },
+  {
+   "id": "emoji-geschenk",
+   "name": "Geschenk",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-geschenk.png"
+  },
+  {
+   "id": "emoji-ballon",
+   "name": "Ballon",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-ballon.png"
+  },
+  {
+   "id": "emoji-pokal",
+   "name": "Pokal",
+   "welt": "Emojis & Gefühle",
+   "datei": "emoji-pokal.png"
   }
  ]
 }
