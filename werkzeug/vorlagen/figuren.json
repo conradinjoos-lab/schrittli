@@ -3357,77 +3357,77 @@
    "name": "Berg mit Umriss",
    "welt": "Berge",
    "datei": "berg-umriss.png",
-   "k": 2
+   "k": 1
   },
   {
    "id": "berg-spitze",
    "name": "Bergspitze",
    "welt": "Berge",
    "datei": "berg-spitze.png",
-   "k": 2
+   "k": 1
   },
   {
    "id": "berg-freihand",
    "name": "Berg Freihand",
    "welt": "Berge",
    "datei": "berg-freihand.png",
-   "k": 2
+   "k": 1
   },
   {
    "id": "berg-fuji-bild",
    "name": "Fuji",
    "welt": "Berge",
    "datei": "berg-fuji-bild.png",
-   "k": 3
+   "k": 1
   },
   {
    "id": "berg-schneekappe",
    "name": "Berg mit Schneekappe",
    "welt": "Berge",
    "datei": "berg-schneekappe.png",
-   "k": 3
+   "k": 1
   },
   {
    "id": "berg-gruen",
-   "name": "Berg grün",
+   "name": "Hügel",
    "welt": "Berge",
    "datei": "berg-gruen.png",
-   "k": 3
+   "k": 1
   },
   {
    "id": "berg-formen",
-   "name": "Berg Formen",
+   "name": "Berg aus Formen",
    "welt": "Berge",
    "datei": "berg-formen.png",
-   "k": 3
+   "k": 1
   },
   {
    "id": "berg-violett",
-   "name": "Berg violett",
+   "name": "Berge hintereinander",
    "welt": "Berge",
    "datei": "berg-violett.png",
-   "k": 3
+   "k": 1
   },
   {
    "id": "berg-sil-1",
-   "name": "Berg Silhouette 1",
+   "name": "Berg mit Tannen und Vögeln",
    "welt": "Berge",
    "datei": "berg-sil-1.png",
-   "k": 2
+   "k": 1
   },
   {
    "id": "berg-sil-2",
-   "name": "Berg Silhouette 2",
+   "name": "Berg im See",
    "welt": "Berge",
    "datei": "berg-sil-2.png",
-   "k": 2
+   "k": 1
   },
   {
    "id": "berg-sil-3",
-   "name": "Berg Silhouette 3",
+   "name": "Berge mit Wolken",
    "welt": "Berge",
    "datei": "berg-sil-3.png",
-   "k": 2
+   "k": 1
   },
   {
    "id": "berg-doppel",
