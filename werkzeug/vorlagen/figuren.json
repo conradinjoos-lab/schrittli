@@ -35,6 +35,8 @@
   "Weihnachten",
   "Flaggen & Kontinente",
   "Wald & Wiese",
+  "Schweizer Feste",
+  "Kreativ & Basteln",
   "Ostern"
  ],
  "figuren": [
@@ -4580,6 +4582,415 @@
    "name": "Braune Schnecke",
    "welt": "Wald & Wiese",
    "datei": "wald-schnecke-braun.png"
+  },
+  {
+   "id": "fest-samichlaus",
+   "name": "Samichlaus",
+   "welt": "Schweizer Feste",
+   "datei": "fest-samichlaus.png"
+  },
+  {
+   "id": "fest-geschenk",
+   "name": "Geschenk für den Chlaussack",
+   "welt": "Schweizer Feste",
+   "datei": "fest-geschenk.png"
+  },
+  {
+   "id": "fest-mandarine",
+   "name": "Mandarine",
+   "welt": "Schweizer Feste",
+   "datei": "fest-mandarine.png"
+  },
+  {
+   "id": "fest-nuss",
+   "name": "Erdnuss",
+   "welt": "Schweizer Feste",
+   "datei": "fest-nuss.png"
+  },
+  {
+   "id": "fest-guetzli",
+   "name": "Guetzli",
+   "welt": "Schweizer Feste",
+   "datei": "fest-guetzli.png"
+  },
+  {
+   "id": "fest-kerze",
+   "name": "Kerze",
+   "welt": "Schweizer Feste",
+   "datei": "fest-kerze.png"
+  },
+  {
+   "id": "fest-stern",
+   "name": "Stern",
+   "welt": "Schweizer Feste",
+   "datei": "fest-stern.png"
+  },
+  {
+   "id": "fest-glocke",
+   "name": "Glocke",
+   "welt": "Schweizer Feste",
+   "datei": "fest-glocke.png"
+  },
+  {
+   "id": "fest-lampion",
+   "name": "Lampion",
+   "welt": "Schweizer Feste",
+   "datei": "fest-lampion.png"
+  },
+  {
+   "id": "fest-feuerwerk",
+   "name": "Feuerwerk",
+   "welt": "Schweizer Feste",
+   "datei": "fest-feuerwerk.png"
+  },
+  {
+   "id": "fest-feuerwerk-funken",
+   "name": "Feuerwerk mit Funken",
+   "welt": "Schweizer Feste",
+   "datei": "fest-feuerwerk-funken.png"
+  },
+  {
+   "id": "fest-schweizerfahne",
+   "name": "Schweizerfahne",
+   "welt": "Schweizer Feste",
+   "datei": "fest-schweizerfahne.png",
+   "glatt": 0
+  },
+  {
+   "id": "fest-knallkoerper",
+   "name": "Knallkörper",
+   "welt": "Schweizer Feste",
+   "datei": "fest-knallkoerper.png"
+  },
+  {
+   "id": "fest-osterhase",
+   "name": "Osterhase",
+   "welt": "Schweizer Feste",
+   "datei": "fest-osterhase.png"
+  },
+  {
+   "id": "fest-hase",
+   "name": "Hase",
+   "welt": "Schweizer Feste",
+   "datei": "fest-hase.png"
+  },
+  {
+   "id": "fest-kueken",
+   "name": "Küken",
+   "welt": "Schweizer Feste",
+   "datei": "fest-kueken.png"
+  },
+  {
+   "id": "fest-schlupf",
+   "name": "Küken im Ei",
+   "welt": "Schweizer Feste",
+   "datei": "fest-schlupf.png"
+  },
+  {
+   "id": "fest-ei",
+   "name": "Ei",
+   "welt": "Schweizer Feste",
+   "datei": "fest-ei.png"
+  },
+  {
+   "id": "fest-nest",
+   "name": "Nest mit Eiern",
+   "welt": "Schweizer Feste",
+   "datei": "fest-nest.png"
+  },
+  {
+   "id": "fest-tulpe",
+   "name": "Tulpe",
+   "welt": "Schweizer Feste",
+   "datei": "fest-tulpe.png"
+  },
+  {
+   "id": "fest-kuerbis",
+   "name": "Kürbis",
+   "welt": "Schweizer Feste",
+   "datei": "fest-kuerbis.png"
+  },
+  {
+   "id": "fest-aehre",
+   "name": "Getreideähre",
+   "welt": "Schweizer Feste",
+   "datei": "fest-aehre.png"
+  },
+  {
+   "id": "fest-mais",
+   "name": "Maiskolben",
+   "welt": "Schweizer Feste",
+   "datei": "fest-mais.png"
+  },
+  {
+   "id": "fest-herbstblatt",
+   "name": "Herbstblatt",
+   "welt": "Schweizer Feste",
+   "datei": "fest-herbstblatt.png"
+  },
+  {
+   "id": "fest-apfel",
+   "name": "Apfel",
+   "welt": "Schweizer Feste",
+   "datei": "fest-apfel.png"
+  },
+  {
+   "id": "fest-birne",
+   "name": "Birne",
+   "welt": "Schweizer Feste",
+   "datei": "fest-birne.png"
+  },
+  {
+   "id": "fest-trauben",
+   "name": "Trauben",
+   "welt": "Schweizer Feste",
+   "datei": "fest-trauben.png"
+  },
+  {
+   "id": "fest-pilz",
+   "name": "Pilz",
+   "welt": "Schweizer Feste",
+   "datei": "fest-pilz.png"
+  },
+  {
+   "id": "fest-clown",
+   "name": "Clown",
+   "welt": "Schweizer Feste",
+   "datei": "fest-clown.png"
+  },
+  {
+   "id": "fest-masken",
+   "name": "Theatermasken",
+   "welt": "Schweizer Feste",
+   "datei": "fest-masken.png"
+  },
+  {
+   "id": "fest-konfetti",
+   "name": "Konfetti",
+   "welt": "Schweizer Feste",
+   "datei": "fest-konfetti.png"
+  },
+  {
+   "id": "fest-luftschlangen",
+   "name": "Partyknaller",
+   "welt": "Schweizer Feste",
+   "datei": "fest-luftschlangen.png"
+  },
+  {
+   "id": "fest-trompete",
+   "name": "Trompete",
+   "welt": "Schweizer Feste",
+   "datei": "fest-trompete.png"
+  },
+  {
+   "id": "fest-trommel",
+   "name": "Trommel",
+   "welt": "Schweizer Feste",
+   "datei": "fest-trommel.png"
+  },
+  {
+   "id": "fest-saxofon",
+   "name": "Saxofon",
+   "welt": "Schweizer Feste",
+   "datei": "fest-saxofon.png"
+  },
+  {
+   "id": "fest-luftballon",
+   "name": "Luftballon",
+   "welt": "Schweizer Feste",
+   "datei": "fest-luftballon.png"
+  },
+  {
+   "id": "fest-boeoegg",
+   "name": "Böögg (Schneemann)",
+   "welt": "Schweizer Feste",
+   "datei": "fest-boeoegg.png"
+  },
+  {
+   "id": "fest-sekt",
+   "name": "Sektgläser",
+   "welt": "Schweizer Feste",
+   "datei": "fest-sekt.png"
+  },
+  {
+   "id": "fest-uhr",
+   "name": "Mitternacht",
+   "welt": "Schweizer Feste",
+   "datei": "fest-uhr.png"
+  },
+  {
+   "id": "fest-kleeblatt",
+   "name": "Glücksklee",
+   "welt": "Schweizer Feste",
+   "datei": "fest-kleeblatt.png"
+  },
+  {
+   "id": "fest-glueckssau",
+   "name": "Glücksschwein",
+   "welt": "Schweizer Feste",
+   "datei": "fest-glueckssau.png"
+  },
+  {
+   "id": "fest-marienkaefer",
+   "name": "Glückskäfer",
+   "welt": "Schweizer Feste",
+   "datei": "fest-marienkaefer.png"
+  },
+  {
+   "id": "fest-raebe",
+   "name": "Räbe für das Räbeliechtli",
+   "welt": "Schweizer Feste",
+   "datei": "fest-raebe.png"
+  },
+  {
+   "id": "fig-elefant-maler",
+   "name": "Elefant als Maler",
+   "welt": "Kreativ & Basteln",
+   "datei": "elefant-maler.png"
+  },
+  {
+   "id": "fig-farbtopf-pinsel",
+   "name": "Farbtopf mit Pinsel",
+   "welt": "Kreativ & Basteln",
+   "datei": "farbtopf-pinsel.png"
+  },
+  {
+   "id": "fig-palette-pinsel",
+   "name": "Farbpalette",
+   "welt": "Kreativ & Basteln",
+   "datei": "palette-pinsel.png"
+  },
+  {
+   "id": "fig-maler-pinguin",
+   "name": "Maler-Pinguin",
+   "welt": "Kreativ & Basteln",
+   "datei": "maler-pinguin.png"
+  },
+  {
+   "id": "fig-maler-staffelei",
+   "name": "Maler an der Staffelei",
+   "welt": "Kreativ & Basteln",
+   "datei": "maler-staffelei.png"
+  },
+  {
+   "id": "fig-palette-braun",
+   "name": "Malpalette",
+   "welt": "Kreativ & Basteln",
+   "datei": "palette-braun.png"
+  },
+  {
+   "id": "fig-wachsmalstifte-box",
+   "name": "Wachsmalstifte-Schachtel",
+   "welt": "Kreativ & Basteln",
+   "datei": "wachsmalstifte-box.png"
+  },
+  {
+   "id": "fig-wachsmalstifte",
+   "name": "Wachsmalstifte",
+   "welt": "Kreativ & Basteln",
+   "datei": "wachsmalstifte.png"
+  },
+  {
+   "id": "fig-schere-rot",
+   "name": "Schere",
+   "welt": "Kreativ & Basteln",
+   "datei": "schere-rot.png"
+  },
+  {
+   "id": "fig-klebstift",
+   "name": "Klebestift",
+   "welt": "Kreativ & Basteln",
+   "datei": "klebstift.png"
+  },
+  {
+   "id": "fig-spraydose",
+   "name": "Sprühdose",
+   "welt": "Kreativ & Basteln",
+   "datei": "spraydose.png"
+  },
+  {
+   "id": "fig-gluehbirne-a",
+   "name": "Glühbirne mit Idee",
+   "welt": "Kreativ & Basteln",
+   "datei": "gluehbirne-a.png"
+  },
+  {
+   "id": "fig-gluehbirne-b",
+   "name": "Staunende Glühbirne",
+   "welt": "Kreativ & Basteln",
+   "datei": "gluehbirne-b.png"
+  },
+  {
+   "id": "fig-gluehbirne-c",
+   "name": "Gelbe Glühbirne",
+   "welt": "Kreativ & Basteln",
+   "datei": "gluehbirne-c.png"
+  },
+  {
+   "id": "fig-gluehbirne-d",
+   "name": "Ideen-Glühbirne",
+   "welt": "Kreativ & Basteln",
+   "datei": "gluehbirne-d.png"
+  },
+  {
+   "id": "fig-wolle-blau",
+   "name": "Blaues Wollknäuel",
+   "welt": "Kreativ & Basteln",
+   "datei": "wolle-blau.png"
+  },
+  {
+   "id": "fig-wolle-braun",
+   "name": "Braunes Wollknäuel",
+   "welt": "Kreativ & Basteln",
+   "datei": "wolle-braun.png"
+  },
+  {
+   "id": "fig-wolle-stricken",
+   "name": "Strickzeug",
+   "welt": "Kreativ & Basteln",
+   "datei": "wolle-stricken.png"
+  },
+  {
+   "id": "fig-oma-pinguin",
+   "name": "Stricklieseli-Pinguin",
+   "welt": "Kreativ & Basteln",
+   "datei": "oma-pinguin.png"
+  },
+  {
+   "id": "fig-bleistift-lustig",
+   "name": "Lustiger Bleistift",
+   "welt": "Kreativ & Basteln",
+   "datei": "bleistift-lustig.png"
+  },
+  {
+   "id": "fig-bleistift-gelb",
+   "name": "Gelber Bleistift",
+   "welt": "Kreativ & Basteln",
+   "datei": "bleistift-gelb.png"
+  },
+  {
+   "id": "fig-bleistift-tanz",
+   "name": "Tanzender Bleistift",
+   "welt": "Kreativ & Basteln",
+   "datei": "bleistift-tanz.png"
+  },
+  {
+   "id": "fig-notizbuch",
+   "name": "Skizzenbuch",
+   "welt": "Kreativ & Basteln",
+   "datei": "notizbuch.png"
+  },
+  {
+   "id": "fig-hase-maler",
+   "name": "Osterhase beim Malen",
+   "welt": "Kreativ & Basteln",
+   "datei": "hase-maler.png"
+  },
+  {
+   "id": "fig-punk-eule",
+   "name": "Rocker-Eule",
+   "welt": "Kreativ & Basteln",
+   "datei": "punk-eule.png"
   },
   {
    "id": "ostern-hase-ei",

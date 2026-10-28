@@ -1,5 +1,5 @@
 {
-  "figuren": 735,
+  "figuren": 803,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -6615,6 +6615,618 @@
       "pixel": [
         775,
         533
+      ]
+    },
+    {
+      "id": "fest-samichlaus",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fest-geschenk",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        461
+      ]
+    },
+    {
+      "id": "fest-mandarine",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        482
+      ]
+    },
+    {
+      "id": "fest-nuss",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        483,
+        484
+      ]
+    },
+    {
+      "id": "fest-guetzli",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fest-kerze",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        256,
+        484
+      ]
+    },
+    {
+      "id": "fest-stern",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        464
+      ]
+    },
+    {
+      "id": "fest-glocke",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        407,
+        484
+      ]
+    },
+    {
+      "id": "fest-lampion",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        459,
+        484
+      ]
+    },
+    {
+      "id": "fest-feuerwerk",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fest-feuerwerk-funken",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fest-schweizerfahne",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fest-knallkoerper",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        446,
+        484
+      ]
+    },
+    {
+      "id": "fest-osterhase",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        429,
+        484
+      ]
+    },
+    {
+      "id": "fest-hase",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fest-kueken",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        473
+      ]
+    },
+    {
+      "id": "fest-schlupf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        442,
+        484
+      ]
+    },
+    {
+      "id": "fest-ei",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        348,
+        484
+      ]
+    },
+    {
+      "id": "fest-nest",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        482
+      ]
+    },
+    {
+      "id": "fest-tulpe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        456,
+        484
+      ]
+    },
+    {
+      "id": "fest-kuerbis",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        480
+      ]
+    },
+    {
+      "id": "fest-aehre",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        399,
+        484
+      ]
+    },
+    {
+      "id": "fest-mais",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        472
+      ]
+    },
+    {
+      "id": "fest-herbstblatt",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        482,
+        484
+      ]
+    },
+    {
+      "id": "fest-apfel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        407,
+        484
+      ]
+    },
+    {
+      "id": "fest-birne",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        423,
+        484
+      ]
+    },
+    {
+      "id": "fest-trauben",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        471,
+        484
+      ]
+    },
+    {
+      "id": "fest-pilz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fest-clown",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fest-masken",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fest-konfetti",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        484,
+        478
+      ]
+    },
+    {
+      "id": "fest-luftschlangen",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        484,
+        477
+      ]
+    },
+    {
+      "id": "fest-trompete",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fest-trommel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fest-saxofon",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        421
+      ]
+    },
+    {
+      "id": "fest-luftballon",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        266,
+        484
+      ]
+    },
+    {
+      "id": "fest-boeoegg",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        450,
+        484
+      ]
+    },
+    {
+      "id": "fest-sekt",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        479,
+        484
+      ]
+    },
+    {
+      "id": "fest-uhr",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fest-kleeblatt",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        458,
+        484
+      ]
+    },
+    {
+      "id": "fest-glueckssau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        444
+      ]
+    },
+    {
+      "id": "fest-marienkaefer",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        471
+      ]
+    },
+    {
+      "id": "fest-raebe",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        420,
+        484
+      ]
+    },
+    {
+      "id": "fig-elefant-maler",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        743,
+        690
+      ]
+    },
+    {
+      "id": "fig-farbtopf-pinsel",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        729,
+        645
+      ]
+    },
+    {
+      "id": "fig-palette-pinsel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        715
+      ]
+    },
+    {
+      "id": "fig-maler-pinguin",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        747
+      ]
+    },
+    {
+      "id": "fig-maler-staffelei",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        768,
+        776
+      ]
+    },
+    {
+      "id": "fig-palette-braun",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        690,
+        800
+      ]
+    },
+    {
+      "id": "fig-wachsmalstifte-box",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        599,
+        800
+      ]
+    },
+    {
+      "id": "fig-wachsmalstifte",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        456
+      ]
+    },
+    {
+      "id": "fig-schere-rot",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        800,
+        799
+      ]
+    },
+    {
+      "id": "fig-klebstift",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        325,
+        751
+      ]
+    },
+    {
+      "id": "fig-spraydose",
+      "farbpixelIdentisch": true,
+      "teile": 68,
+      "pixel": [
+        794,
+        800
+      ]
+    },
+    {
+      "id": "fig-gluehbirne-a",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        667,
+        748
+      ]
+    },
+    {
+      "id": "fig-gluehbirne-b",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        458,
+        770
+      ]
+    },
+    {
+      "id": "fig-gluehbirne-c",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        492,
+        800
+      ]
+    },
+    {
+      "id": "fig-gluehbirne-d",
+      "farbpixelIdentisch": true,
+      "teile": 16,
+      "pixel": [
+        696,
+        799
+      ]
+    },
+    {
+      "id": "fig-wolle-blau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        573,
+        557
+      ]
+    },
+    {
+      "id": "fig-wolle-braun",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        770,
+        770
+      ]
+    },
+    {
+      "id": "fig-wolle-stricken",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        766,
+        569
+      ]
+    },
+    {
+      "id": "fig-oma-pinguin",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        634,
+        800
+      ]
+    },
+    {
+      "id": "fig-bleistift-lustig",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        470,
+        800
+      ]
+    },
+    {
+      "id": "fig-bleistift-gelb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        374,
+        800
+      ]
+    },
+    {
+      "id": "fig-bleistift-tanz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        464,
+        728
+      ]
+    },
+    {
+      "id": "fig-notizbuch",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        800,
+        777
+      ]
+    },
+    {
+      "id": "fig-hase-maler",
+      "farbpixelIdentisch": true,
+      "teile": 14,
+      "pixel": [
+        741,
+        762
+      ]
+    },
+    {
+      "id": "fig-punk-eule",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        778,
+        800
       ]
     }
   ],
