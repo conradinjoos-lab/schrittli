@@ -20,6 +20,7 @@
   }
   // Breite = Perlen in der breitesten Reihe, unabhängig von der Perlengrösse.
   const schwierigkeit=(t,k)=>reihenbreite(t)>=maximum(k)?'schwer':t.grundstufe||t.stufe||'mittel';
+  const LAGEN=Object.freeze(['seiten','links','rechts','oben','unten']);
   const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function gueltig(t,palette){
     return !!t&&Array.isArray(t.rows)&&t.rows.length>0&&t.rows.length<=100&&
@@ -27,7 +28,11 @@
       (!t.offsets||Array.isArray(t.offsets)&&Number.isInteger(t.gridWidth)&&t.gridWidth>0&&t.gridWidth<=100&&t.offsets.length===t.rows.length&&t.offsets.every((x,i)=>Number.isInteger(x)&&x>=0&&x+t.rows[i].length<=t.gridWidth)&&!t.beine?.length)&&
       (!t.beine||Array.isArray(t.beine)&&t.beine.length<=20&&t.beine.every(b=>
         Number.isInteger(b.r)&&b.r>0&&b.r<=t.rows.length&&Number.isInteger(b.n)&&b.n>=0&&b.n<=20&&
-        Number.isInteger(b.f)&&b.f>0&&b.f<=20&&Number.isFinite(b.a)&&Math.abs(b.a)<=90&&palette[b.c]&&palette[b.fc]));
+        Number.isInteger(b.f)&&b.f>0&&b.f<=20&&Number.isFinite(b.a)&&Math.abs(b.a)<=90&&palette[b.c]&&palette[b.fc]))&&
+      // Angenähte Teile: eigene kleine Muster ohne Versatz, seitlich (2 × gespiegelt), links, rechts, oben oder unten
+      (!t.teile||Array.isArray(t.teile)&&t.teile.length<=6&&!t.offsets&&t.teile.every(p=>
+        !!p&&typeof p.w==='string'&&p.w.length>0&&p.w.length<=40&&LAGEN.includes(p.lage)&&p.n===(p.lage==='seiten'?2:1)&&
+        Number.isInteger(p.an)&&p.an>0&&p.an<=t.rows.length&&!p.teile&&!p.offsets&&gueltig(p,palette)));
   }
   function breite(t,max){
     const aus=kopie(t),vor=t.gridWidth||Math.max(...t.rows.map(r=>r.length));
@@ -41,8 +46,11 @@
     return aus;
   }
   function tauschen(t,von,nach){
-    const aus=kopie(t);aus.rows=aus.rows.map(r=>r.split(von).join(nach));
-    for(const b of aus.beine||[]){if(b.c===von)b.c=nach;if(b.fc===von)b.fc=nach}
+    const aus=kopie(t);
+    for(const s of [aus,...(aus.teile||[])]){   // auch in den angenähten Teilen
+      s.rows=s.rows.map(r=>r.split(von).join(nach));
+      for(const b of s.beine||[]){if(b.c===von)b.c=nach;if(b.fc===von)b.fc=nach}
+    }
     return aus;
   }
   const stil=`

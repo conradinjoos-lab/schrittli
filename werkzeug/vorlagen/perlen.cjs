@@ -68,10 +68,10 @@ function vorschaubild(t){
   for(let y=0;y<t.rows.length;y++)for(let j=0;j<t.rows[y].length;j++){const key=t.rows[y][j],x=t.offsets[y]+j;c.fillStyle=palette[key][0];c.strokeStyle=key==='t'?'#b8c3cc':'#26323c';c.lineWidth=key==='t'?.35:Math.max(.3,sk*.035);c.setLineDash(key==='t'?[1,1]:[]);c.beginPath();c.roundRect(ox+(x+.03)*q*sk,oy+(y+.03)*sk,.94*q*sk,.94*sk,.18*sk);c.fill();c.stroke()}
   return canvas.toBuffer('image/webp');
 }
-const nur=new Set(process.argv.slice(2)),ziel=path.join(root,'vorlagen/perlen/figuren.js'),alt={window:{}};
+const nur=new Set(process.argv.slice(2)),ziel=path.join(root,'vorlagen/perlen/figuren-gross.js'),alt={window:{}};
 for(const id of nur)if(!liste.figuren.some(f=>f.id===id))throw new Error('Unbekannte Figur: '+id);
 if(nur.size&&fs.existsSync(ziel))vm.runInNewContext(fs.readFileSync(ziel,'utf8'),alt);
-const muster=new Map((alt.window.PERLEN_FIGUREN||[]).map(t=>[t.quelle,t]));
+const muster=new Map((alt.window.PERLEN_FIGUREN_GROSS||[]).map(t=>[t.quelle,t]));
 fs.mkdirSync(path.join(root,'vorlagen/perlen/bilder'),{recursive:true});
 async function main(){let anzahl=0;
 for(const f of liste.figuren){if(nur.size&&!nur.has(f.id))continue;
@@ -81,7 +81,7 @@ for(const f of liste.figuren){if(nur.size&&!nur.has(f.id))continue;
   if(++anzahl%50===0)console.log(anzahl+' Figuren gestaltet');
 }
 const alle=liste.figuren.map(f=>muster.get(f.id)).filter(Boolean);
-fs.writeFileSync(ziel,'// Erzeugt mit werkzeug/vorlagen/perlen.cjs. Version 2: versetzte Reihen, transparente Stützperlen.\nwindow.PERLEN_FIGUREN='+JSON.stringify(alle)+';\n');
+fs.writeFileSync(ziel,'// Grosse Figurenmuster, erzeugt mit werkzeug/vorlagen/perlen.cjs. Version 2: versetzte Reihen, transparente Stützperlen.\nwindow.PERLEN_FIGUREN_GROSS='+JSON.stringify(alle)+';\n');
 console.log(alle.length+' gespeicherte Perlenmuster mit passenden Vorschaubildern');
 }
 main().catch(e=>{console.error(e);process.exitCode=1});

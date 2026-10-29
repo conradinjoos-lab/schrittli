@@ -1,0 +1,38 @@
+// Küche und Restaurant: Pizza, Burger, Pommes, Glace, Köche, Gipfeli, Früchte, Donuts, Brezeln.
+'use strict';
+module.exports=({add,kopf,pinguin,teil,zeilen})=>{
+  const R=(c,n)=>c.repeat(n);
+  add('fig-pizzastueck-fett','yy yyyy yyryyy yyyyyyyy yyyryyryy yyyyyyyyyy yyryyyyyryy kkkkkkkkkkkk','Symbol');
+  const burger=(id,oben,augen)=>add(id,[...zeilen(oben),'cccccccccc',augen||'cccccccccc','gggggggggggg','kkkkkkkkkkkk','yyyyyyyyyyyy','cccccccccc','cccccccc'],'Symbol');
+  burger('fig-burger-mann','cccc cccccccc','ccsccccscc');
+  burger('fig-burger-einfach','cccc cccccccc');
+  burger('fig-burger-augen','cccc ccsccscc');
+  const pommes=(id,tuete='r',augen)=>add(id,['yyyyyy','yyyyyyyy','yyyyyyyy',R(tuete,10),augen||R(tuete,10),R(tuete,10),R(tuete,8),R(tuete,6)],'Symbol');
+  pommes('fig-pommes-tuete');pommes('fig-pommes-kawaii','r','rrsrrrrsrr');pommes('fig-pommes-rot','V');
+  const glace=(id,kugeln)=>add(id,[...zeilen(kugeln),'cccccccc','ccccccc','cccccc','ccccc','cccc','ccc','cc','c'],'Symbol');
+  glace('fig-eis-rosa','pppp pppppppp pppppppppp pppppppppp pppppppp');
+  glace('fig-eis-schoko','mmmm mmmmmmmm mmmmmmmmmm mmmmmmmmmm mmmmmmmm');
+  add('fig-eisbecher','rr pppp pppppppp wwwwwwwwww mmmmmmmmmm nnnnnnnnnnnn nnnnnnnnnn nnnnnnnn nnnnnn','Symbol');
+  add('fig-spaghetti-teller','rrrr rryyrr yryyryyy yyryyryy yyyyyyyyyy wwwwwwwwwwwwww wwwwwwwwwwww','Symbol');
+  const koch=(id,c='u',o={})=>kopf(id,c,{hut:'wwww wwwwwwww wwwwwwww wwwwww',kleid:'w',...o});
+  koch('fig-koch-pfanne','u',{teile:[teil('Pfanne',1,'rechts',9,'ssssss ssss')]});
+  koch('fig-koch-mann','u',{haar:'k',mund:'k'});
+  pinguin('fig-koch-pinguin',{hut:'wwww wwwwwwww wwwwwwww wwwwww'});
+  add('fig-koch-eule','wwww wwwwwwww wwwwww kkkkkk kwwwwwwk kwswwswk kwwoowwk kkwwwwkk kkkkkkkk kkkkkkkk kkkkkk kkkk','Figur');
+  const croissant=(id,c)=>add(id,[R(c,4),R(c,8),R(c,12),R(c,14),R(c,12),R(c,8),R(c,4)],'Symbol');
+  croissant('fig-croissant-gelb','y');croissant('fig-croissant-braun','S');croissant('fig-croissant-baeckerei','c');
+  add('fig-sandwich-kawaii','cccccccccc ccsccccscc gggggggggggg rrrrrrrrrrrr yyyyyyyyyyyy cccccccccc','Symbol');
+  add('fig-kaffee-tasse','nn n wwwwwwwwww wmmmmmmmmw wwwwwwwwww wwwwwwww wwwwww wwwwwwwwwww','Symbol',[{r:4,n:2,f:2,a:0,c:'w',fc:'w',w:'Henkel'}]);
+  add('fig-kaffee-icon','n nn n mmmmmmmmmm mmmmmmmmmm mmmmmmmm mmmmmm','Symbol',[{r:5,n:2,f:2,a:0,c:'m',fc:'m',w:'Henkel'}]);
+  add('fig-kaese-stueck','yy yyyy yyyyyy yyoyyyyy yyyyyoyy yyyyyyyyyy yyoyyyyyyy yyyyyyyyyyyy','Symbol');
+  add('fig-apfel-gesicht','k gkkg rrrrrr rrrrrrrr rrsrrsrr rrrrrrrr rrssssrr rrrrrr rrrr','Symbol');
+  add('fig-erdbeere','gg gggggg rrrrrr rrwrrwrr rrrrrrrr rwrrrrwr rrrrrr rrwrr rrr r','Symbol');
+  add('fig-birne','k kk hhhh hhhhhh hhhhhh hhhhhhhh hhhhhhhhhh hhhhhhhhhh hhhhhhhh hhhhhh','Symbol');
+  add('fig-kirschen','g gg gg gggg rrrrrrrrrr rrrrrrrrrr rrrrrrrr rrrrrr','Symbol');
+  add('fig-zitrone','g yyyy yyyyyyyy yyyyyyyyyy yyyyyyyyyy yyyyyyyy yyyy','Symbol');
+  add('fig-hotdog-mann','cccccccccccc rrrrrrrrrrrr ryryryryryry cccccccccccc cccsccccsccc cccccccccc','Symbol');
+  const donut=(id,c,streusel='w')=>add(id,[R(c,4),R(c,8),c+c+streusel+R(c,4)+streusel+c+c,R(c,10),c+c+R(c,2)+'cc'+R(c,2)+c+c,R(c,10),c+streusel+R(c,6)+streusel+c,R(c,8),R(c,4)],'Symbol');
+  donut('fig-donut-rosa','p','w');donut('fig-donut-braun','m','y');
+  const brezel=(id,c)=>add(id,[R(c,4),R(c,8),R(c,10),c+c+'ww'+c+c+'ww'+c+c,R(c,10),c+c+c+'wwww'+c+c+c,R(c,10),R(c,8),R(c,4)],'Symbol');
+  brezel('fig-brezel-braun','k');brezel('fig-brezel-gelb','y');
+};

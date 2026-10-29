@@ -8,6 +8,7 @@ function context(before=false){
   const nodes=new Map(),el=()=>({value:'',innerHTML:'',textContent:'',hidden:false,dataset:{},classList:{toggle(){}},addEventListener(){},setAttribute(){},scrollIntoView(){}});
   const c=vm.createContext({console,URLSearchParams,window:{},location:{search:'',protocol:'http:'},history:{replaceState(){}},localStorage:{getItem(){return null},setItem(){}},matchMedia:()=>({matches:false}),document:{getElementById(id){if(!nodes.has(id))nodes.set(id,el());return nodes.get(id)},querySelectorAll(){return []}}});
   vm.runInContext(read(before?'output/perlen-audit/vorher/figuren.js':'vorlagen/perlen/figuren.js'),c);
+  if(!before)vm.runInContext(read('vorlagen/perlen/figuren-gross.js'),c);
   vm.runInContext(read('vorlagen/perlen/bearbeiten.js'),c);c.PerlenEditor=c.window.PerlenEditor;
   for(const m of read(before?'output/perlen-audit/vorher/index.html':'vorlagen/perlen/index.html').matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))if(m[1].trim())vm.runInContext(m[1],c);
   return c;

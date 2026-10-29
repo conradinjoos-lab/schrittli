@@ -1,0 +1,33 @@
+// Flaggen (10 breit), Erdkugel, Kontinente als grüne Umrisse.
+'use strict';
+module.exports=({add})=>{
+  const quer=(...f)=>f.flatMap(c=>f.length===2?[c.repeat(10),c.repeat(10),c.repeat(10)]:[c.repeat(10),c.repeat(10)]);
+  const laengs=m=>Array(6).fill(m);
+  const flagge=(id,rows)=>add('flagge-'+id,rows,'Flagge');
+  flagge('schweiz','rrrrrrrr rrrwwrrr rrrwwrrr rwwwwwwr rwwwwwwr rrrwwrrr rrrwwrrr rrrrrrrr');
+  flagge('deutschland',quer('s','r','y'));flagge('oesterreich',quer('r','w','r'));flagge('ukraine',quer('b','y'));flagge('serbien',quer('r','b','w'));
+  flagge('frankreich',laengs('bbbwwwrrr'));flagge('italien',laengs('gggwwwrrr'));
+  flagge('liechtenstein','bbbbbbbbbb bbyybbbbbb bbbbbbbbbb rrrrrrrrrr rrrrrrrrrr rrrrrrrrrr');
+  flagge('eu','bbbbbbbbbb bbbbyybbbb bbbybbybbb bbybbbbybb bbbybbybbb bbbbyybbbb bbbbbbbbbb');
+  flagge('portugal','ggggrrrrrr ggggrrrrrr gggyyrrrrr gggyyrrrrr ggggrrrrrr ggggrrrrrr');
+  flagge('spanien','rrrrrrrrrr rrrrrrrrrr yyyyyyyyyy yyyyyyyyyy yyyyyyyyyy rrrrrrrrrr rrrrrrrrrr');
+  flagge('tuerkei','rrrrrrrrrr rrrwwwrrrr rrwwrrrwrr rrwwrrrrrr rrwwrrrwrr rrrwwwrrrr rrrrrrrrrr');
+  flagge('kosovo','bbbbbbbbbb bbwbwbwbbb bbbbyybbbb bbbyyyybbb bbbyyyybbb bbbbyybbbb bbbbbbbbbb');
+  flagge('grossbritannien','wbbbrrbbbw bwbbrrbbwb wwwwrrwwww rrrrrrrrrr wwwwrrwwww bwbbrrbbwb wbbbrrbbbw');
+  flagge('usa','bbbbrrrrrr bwbwwwwwww bbbbrrrrrr bwbwwwwwww rrrrrrrrrr wwwwwwwwww rrrrrrrrrr');
+  flagge('brasilien','gggggggggg ggggyygggg gggyyyyggg ggyybbyygg gggyyyyggg ggggyygggg gggggggggg');
+  flagge('japan','wwwwwwwwww wwwwrrwwww wwwrrrrwww wwwrrrrwww wwwwrrwwww wwwwwwwwww');
+  flagge('china','rrrrrrrrrr ryrrryrrrr yyyrrrrrrr ryrrryrrrr rrrrrrrrrr rrrrrrrrrr');
+  flagge('albanien','rrrrrrrrrr rrsrrrrsrr rrssssssrr rrrssssrrr rrrrssrrrr rrrrrrrrrr');
+  flagge('nordmazedonien','rrrrrrrrrr ryrryyrryr rryyyyyyrr yyyyyyyyyy rryyyyyyrr ryrryyrryr rrrrrrrrrr');
+  add('kontinent-globus','bbbb bbgbbb bgggbbbb bbgbbbgb bbbbbggb bbggbbbb bbbbbb bbbb','Symbol');
+  const k=(id,rows)=>add('kontinent-'+id,rows,'Umriss');
+  k('europa','ggg ggggggg ggggggggggg gggggggggg ggggggg ggggg gg');
+  k('afrika','ggggggg gggggggggggg ggggggggggggg gggggggggggg ggggggggg ggggggg ggggg ggg g');
+  k('asien','gggggggggggg gggggggggggggg gggggggggggggg ggggggggggggg ggggggggg ggggggg ggggg ggg');
+  k('nordamerika','gggggggggggg ggggggggggggg ggggggggggg ggggggggg ggggggg ggggg ggg gg');
+  k('suedamerika','ggggggg ggggggggggg gggggggggggg ggggggggggg ggggggggg ggggggg ggggg ggg gg g');
+  k('australien','gggggg gggggggggg ggggggggggggg ggggggggggggg gggggggggggg ggggggggg gg');
+  k('antarktis','wwww wwwwwwwww wwwwwwwwwwwww wwwwwwwwwwwwww wwwwwwwwwwww wwwwwwwww wwwww');
+  k('weltkarte','bbgggbbbbgggbb bgggggbbgggggb bbggggbbbggggb bbbgggbbbbgggb bbbbggbbbbbggb bbbbbgbbbbbbbb bbbbbbbbbbbggb bbbbbbbbbbbbbb');
+};
