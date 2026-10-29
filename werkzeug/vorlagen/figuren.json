@@ -43,7 +43,8 @@
   "Musik",
   "Schule",
   "Sport",
-  "Winter"
+  "Winter",
+  "Männchen"
  ],
  "figuren": [
   {
@@ -6430,6 +6431,90 @@
    "name": "Brummiger Ausserirdischer",
    "welt": "Weltraum",
    "datei": "weltraum-ausserirdischer-brummig.png"
+  },
+  {
+   "id": "maennchen-muskeln-orange",
+   "name": "Muskelmann orange",
+   "welt": "Männchen",
+   "datei": "maennchen-muskeln-orange.png"
+  },
+  {
+   "id": "maennchen-okay-gelb",
+   "name": "Okay-Männchen gelb",
+   "welt": "Männchen",
+   "datei": "maennchen-okay-gelb.png"
+  },
+  {
+   "id": "maennchen-gut-gemacht-blau",
+   "name": "Männchen blau «Good Job»",
+   "welt": "Männchen",
+   "datei": "maennchen-gut-gemacht-blau.png"
+  },
+  {
+   "id": "maennchen-sehr-gut",
+   "name": "Männchen «Very Good»",
+   "welt": "Männchen",
+   "datei": "maennchen-sehr-gut.png"
+  },
+  {
+   "id": "maennchen-ausgezeichnet",
+   "name": "Männchen «Excellent» mit Victory",
+   "welt": "Männchen",
+   "datei": "maennchen-ausgezeichnet.png"
+  },
+  {
+   "id": "maennchen-muskeln-umriss",
+   "name": "Muskelmann weiss",
+   "welt": "Männchen",
+   "datei": "maennchen-muskeln-umriss.png"
+  },
+  {
+   "id": "maennchen-good-job-ok",
+   "name": "Männchen «Good Job» mit OK-Händen",
+   "welt": "Männchen",
+   "datei": "maennchen-good-job-ok.png"
+  },
+  {
+   "id": "maennchen-daumen-stern",
+   "name": "Männchen mit Daumen und Stern",
+   "welt": "Männchen",
+   "datei": "maennchen-daumen-stern.png"
+  },
+  {
+   "id": "maennchen-zwei-daumen",
+   "name": "Männchen mit zwei Daumen",
+   "welt": "Männchen",
+   "datei": "maennchen-zwei-daumen.png"
+  },
+  {
+   "id": "maennchen-great-job",
+   "name": "Männchen «Great Job»",
+   "welt": "Männchen",
+   "datei": "maennchen-great-job.png"
+  },
+  {
+   "id": "maennchen-verwirrt",
+   "name": "Verwirrtes Männchen",
+   "welt": "Männchen",
+   "datei": "maennchen-verwirrt.png"
+  },
+  {
+   "id": "maennchen-nachdenklich",
+   "name": "Nachdenkliches Männchen",
+   "welt": "Männchen",
+   "datei": "maennchen-nachdenklich.png"
+  },
+  {
+   "id": "maennchen-laptop",
+   "name": "Männchen am Laptop",
+   "welt": "Männchen",
+   "datei": "maennchen-laptop.png"
+  },
+  {
+   "id": "maennchen-nachdenklich-gelb",
+   "name": "Nachdenkliches Männchen gelb",
+   "welt": "Männchen",
+   "datei": "maennchen-nachdenklich-gelb.png"
   }
  ]
 }
