@@ -565,11 +565,9 @@ function liveBild(R,A){
     return `<g class="griff" data-griff="${act}" tabindex="0" role="button" aria-label="${titel}"${an===undefined?'':` aria-pressed="${!!an}"`} transform="translate(${f(a)} ${f(b)}) scale(${us})"><circle r="20" fill="transparent"/><circle r="13" fill="${rot?'#B3412A':an?OR:'#fff'}" stroke="${hell?'#fff':'#1F1A17'}" stroke-width="2.5"/><path d="${icon}" fill="none" stroke="${hell?'#fff':'#1F1A17'}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><title>${titel}</title></g>`; };
   let g='';
   if(wahl==='wand'){
-    const cx=Math.min(A.x+A.w-92*u,Math.max(A.x+92*u,La/2)), cy=Math.min(A.y+A.h-20*u,Math.max(A.y+20*u,-Ha/2));
-    g+=griff('duenner',cx-74*u,cy,'M-6 0h12','Dünneres Holz');
-    g+=`<g data-feld="d" transform="translate(${f(cx-26*u)} ${f(cy)}) scale(${us})"><rect x="-26" y="-13" width="52" height="26" rx="13" fill="#fff" stroke="#1F1A17" stroke-width="2"/><text class="masst" y="5" font-size="14" text-anchor="middle" style="fill:#1F1A17">${n(d)} mm</text><title>Holzdicke eintippen</title></g>`;
-    g+=griff('dicker',cx+22*u,cy,'M-6 0h12M0-6v12','Dickeres Holz');
-    g+=griff('ecken',cx+74*u,cy,'M-6-3h11l-3-3M6 3h-11l3 3',S.aussen==='lang'?'Stirnseiten aussen':'Längsseiten aussen');
+    // Die Holzdicke gilt für alle Bretter und steht oben bei den mm; hier nur die Ecke tauschen, direkt an der Ecke
+    const [ka,kb]=P(La,0,Ha/2);
+    g+=griff('ecken',ka,kb,'M-6-3h11l-3-3M6 3h-11l3 3',S.aussen==='lang'?'Stirnseiten aussen':'Längsseiten aussen');
   }
   if(wahl==='boden'){
     const [bx,by]=P(La/2,Ba/2,d), mitte=-(Ha+Ha+K*Ba)/2, sichtbar=by<-Ha;
@@ -798,11 +796,6 @@ function setzeMass(k,v){
 }
 // Knöpfe an den Teilen
 function aktion(act){
-  const ds=MATERIAL[S.mat].dicken;
-  if(act==='duenner'||act==='dicker'){
-    const i=act==='dicker'?ds.findIndex(x=>x>S.d):ds.length-1-[...ds].reverse().findIndex(x=>x<S.d);
-    if(i>=0&&i<ds.length) S.d=ds[i];
-  }
   if(act==='ecken') S.aussen=S.aussen==='lang'?'kurz':'lang';
   if(act==='boden') S.boden=S.boden==='unter'?'zwischen':'unter';
   if(act==='deckel'){ S.deckel='ja'; wahl='deckel'; }
