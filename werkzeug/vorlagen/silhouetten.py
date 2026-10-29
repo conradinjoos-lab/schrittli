@@ -1625,6 +1625,33 @@ def s_schloss():
         tanne(v, x_, G+30, 260 + (x_*37 % 140), 120)
     v.rect(0, G, 3200, G+40); auflegen(c, v, 10)
     return c
+def s_munot():
+    """Schaffhausen: Munot über den Dächern der Altstadt, Ansicht von Südwesten (nach Fotos gezeichnet)."""
+    c = C(3000, 1800); G = 1700; H = 1080; T = 640
+    c.add(glatt([(0, G-190), (450, G-250), (850, H+170), (1150, H+30), (2300, H+30), (2650, H+230), (3000, G-200)], 8) + [(3000, G), (0, G)])
+    # Rundbau: breit, flache Krone mit Gesims
+    c.add([(1250, H+80), (1250, T+24), (2236, T+24), (2250, T+60), (2250, H+80)])
+    c.rect(1240, T-6, 2246, T+26)
+    # Treppenturm: Galerie, steiles Zeltdach, Laterne, Helmstange mit Knauf
+    c.rect(1150, T-250, 1350, H+80); c.rect(1132, T-268, 1368, T-232)
+    c.add([(1118, T-262), (1382, T-262), (1268, T-470), (1232, T-470)])
+    c.rect(1232, T-520, 1268, T-462); c.add([(1220, T-516), (1280, T-516), (1250, T-560)])
+    c.rect(1247, T-625, 1253, T-556); c.circ(1250, T-596, 11)
+    # Wehrgang zum Turm hin, Fahne auf dem Rundbau
+    c.add([(960, H+140), (1150, H-140), (1150, H+80)])
+    c.rect(2117, T-170, 2123, T); c.add([(2123, T-170), (2215, T-158), (2210, T-110), (2123, T-118)])
+    # Bäume am Hang, Wachtturm rechts
+    for x_, y_, r in [(2350, H-30, 95), (2440, H-110, 120), (2545, H-20, 90), (2420, H+40, 90), (640, H+250, 80), (740, H+180, 100), (850, H+220, 75)]:
+        c.circ(x_, y_, r)
+    c.rect(2700, H+20, 2780, H+330); c.add([(2690, H+20), (2790, H+20), (2740, H-60)])
+    # Altstadtdächer vorne, mit Kaminen
+    x = -20
+    for w, h, d in [(200, 250, 'sattel'), (170, 290, 'walm'), (230, 240, 'sattel'), (180, 300, 'sattel'), (210, 260, 'walm')]:
+        haus(c, x, w, h, G, d, dh=w*.55); c.rect(x+w*.7, G-h-w*.5, x+w*.7+22, G-h-w*.2); x += w
+    x = 2420
+    for w, h, d in [(190, 300, 'sattel'), (220, 250, 'walm'), (200, 290, 'sattel')]:
+        haus(c, x, w, h, G, d, dh=w*.55); c.rect(x+w*.25, G-h-w*.5, x+w*.25+22, G-h-w*.2); x += w
+    return c
 STAEDTE = {
     'stadt-zuerich': s_zuerich, 'stadt-bern': s_bern, 'stadt-basel': s_basel, 'stadt-luzern': s_luzern, 'stadt-genf': s_genf,
     'stadt-paris': s_paris, 'stadt-newyork': s_newyork, 'stadt-london': s_london, 'stadt-rom': s_rom, 'stadt-berlin': s_berlin,
@@ -1632,6 +1659,7 @@ STAEDTE = {
     'stadt-burg': s_burg, 'stadt-muehlen': s_muehlen, 'stadt-tokio': s_tokio, 'stadt-dubai': s_dubai, 'stadt-venedig': s_venedig,
     'stadt-moskau': s_moskau, 'stadt-amsterdam': s_amsterdam, 'stadt-wien': s_wien, 'stadt-athen': s_athen,
     'stadt-pyramiden': s_pyramiden, 'stadt-schloss': s_schloss,
+    'stadt-wm-schaffhausen-munot': s_munot,
 }
 ALLE = {**BERGE, **STAEDTE}
 
