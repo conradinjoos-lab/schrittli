@@ -26,7 +26,11 @@ main{max-width:1400px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
 button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 /* Teile-Liste links */
-.palette{display:flex;flex-direction:column;gap:8px}
+.palette{display:flex;flex-direction:column;gap:12px}
+.gruppe h3{font-family:Fredoka,Nunito,sans-serif;font-weight:600;font-size:15px;margin:0}
+.gruppe small{display:block;font-size:12px;color:var(--muted);margin:0 0 6px;line-height:1.2}
+.gruppe .reihe{display:flex;flex-direction:column;gap:8px}
+.pt.kabel-info{border-style:dashed}
 .pt{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px 6px;border:2px solid var(--line);border-radius:14px;background:var(--surface2);color:var(--ink);font:inherit;font-size:13px;cursor:pointer;min-height:80px;touch-action:manipulation}
 .pt:hover{border-color:var(--acc);background:var(--acc-soft)}
 .pt svg{width:92px;height:62px}
@@ -79,6 +83,8 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
   main{grid-template-columns:minmax(0,1fr);grid-template-areas:"teile" "flaeche" "rechts";gap:12px}
   .seite-rechts{position:static}
   .palette{flex-direction:row;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+  .gruppe{flex:none}
+  .gruppe .reihe{flex-direction:row}
   .pt{flex:none;width:104px}
   h1{font-size:24px}
 }
@@ -98,6 +104,8 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 .flaeche svg .strom{fill:none;stroke:#FFE58A;stroke-width:3;stroke-linecap:round;stroke-dasharray:1 12;animation:fliessen 1s linear infinite;pointer-events:none}
 @keyframes fliessen{to{stroke-dashoffset:-13}}
 .flaeche svg .wp{fill:#17997A;stroke:#FFF;stroke-width:2;cursor:move}
+.flaeche svg .griff{cursor:pointer}
+.flaeche svg .griff:hover circle+circle{stroke-width:3.5}
 .flaeche svg .wm{fill:#FFF;stroke:#17997A;stroke-width:2;cursor:copy}
 .flaeche svg .gummi{fill:none;stroke:#17997A;stroke-width:5;stroke-dasharray:8 6;stroke-linecap:round;pointer-events:none}
 .flaeche svg .dreht{animation:drehen 1s linear infinite}
@@ -196,7 +204,7 @@ const LED_R=20,LED_I=0.02;                                            // Modellw
 const DIODE={band:{V:7.5,R:75,I:0.06,viel:0.09,zuviel:0.12},kette:{V:2.6,R:16,I:0.025,viel:0.045,zuviel:0.08}};   // Leuchtband 12 V (3 LEDs + Widerstand eingebaut), Lichterkette (Mini-LEDs, für 3 V)
 const DIO_TYPEN=['led','band','kette'];
 const dio=t=>t.typ==='led'?{V:LED_VF[t.farbe],R:LED_R,I:LED_I,viel:0.025,zuviel:0.08}:DIODE[t.typ];
-const dioName=t=>t.typ==='led'?`Die ${LED_NAME[t.farbe]}e LED`:t.typ==='band'?'Das Leuchtband':'Die Lichterkette';
+const dioName=t=>t.typ==='led'?`Die ${LED_NAME[t.farbe]}e LED`:t.typ==='band'?`Das ${LED_NAME[t.farbe||'weiss']}e Leuchtband`:`Die ${LED_NAME[t.farbe||'weiss']}e Lichterkette`;
 const vf=f=>LED_VF[f]+LED_R*LED_I;                                    // Spannung bei 20 mA: rot/gelb 2,2 · grün 3,0 · blau/weiss 3,2 V (wie im Handout)
 const QUELLEN={1.5:{name:'Batterie 1,5 V (1× AA)',kurz:'1× AA',ri:0.3,mah:2000},3:{name:'Batteriekästchen 3 V (2× AA oder AAA)',kurz:'2× AA',ri:0.5,mah:2000},4.5:{name:'Flachbatterie 4,5 V',kurz:'Flachbatterie',ri:0.6,mah:1200},5:{name:'Netzgerät 5 V (USB-Stecker)',kurz:'USB',ri:0.05,mah:0},9:{name:'9-V-Block',kurz:'Block',ri:1.5,mah:500},12:{name:'Netzgerät 12 V',kurz:'Netzgerät',ri:0.05,mah:0}};
 const VOLTS=[1.5,3,4.5,5,9,12];
@@ -225,7 +233,7 @@ const TYPEN={
   summer:{name:'Summer',klemmen:['','']},
   widerstand:{name:'Widerstand',klemmen:['','']}
 };
-const NEU={batterie:{volt:3},schalter:{an:false},taster:{an:false},led:{farbe:'rot'},band:{},kette:{},motor:{antrieb:'propeller',art:'spiel'},lampe:{},summer:{},widerstand:{ohm:220}};
+const NEU={batterie:{volt:3},schalter:{an:false},taster:{an:false},led:{farbe:'rot'},band:{farbe:'weiss'},kette:{farbe:'weiss'},motor:{antrieb:'propeller',art:'spiel'},lampe:{},summer:{},widerstand:{ohm:220}};
 let S={name:'',teile:[],kabel:[],n:1};           // der Plan
 let Z=null;                                      // Rechenergebnis (Zustand)
 let wahl=null;                                   // {art:'teil'|'kabel', id}
@@ -384,22 +392,23 @@ function teilInnen(t,o){
     s+=etikett(t,ob,[],-42,46);
   } else if(t.typ==='band'){
     const hell=o.an?o.hell:0;
-    if(hell>0) s+=`<rect x="-44" y="-24" width="88" height="40" rx="16" fill="#FFE58A" opacity="${(0.35+0.5*hell).toFixed(2)}" filter="url(#weich)"/>`;
+    const [bf,bg]=LED_FARBEN[t.farbe||'weiss'];
+    if(hell>0) s+=`<rect x="-44" y="-24" width="88" height="40" rx="16" fill="${bg}" opacity="${(0.35+0.5*hell).toFixed(2)}" filter="url(#weich)"/>`;
     s+=bein(-60,-40)+bein(40,60);
     s+=`<rect x="-40" y="-11" width="80" height="22" rx="3" fill="#F3F4F6" stroke="${L}" stroke-width="3"/>`;
     s+=`<rect x="-35" y="-3" width="9" height="6" fill="#2B2320"/>`;
-    [-22,-2,18].forEach(x=>{ s+=`<rect x="${x}" y="-6" width="12" height="12" rx="2" fill="${hell>0?'#FFF3B0':'#DDE3EA'}" stroke="${L}" stroke-width="1.5"/>`; });
+    [-22,-2,18].forEach(x=>{ s+=`<rect x="${x}" y="-6" width="12" height="12" rx="2" fill="${hell>0?bg:bf}" stroke="${L}" stroke-width="1.5"/>`; });
     s+=txt(t,-50,-20,'+',15,'#E8554E')+txt(t,50,-20,'−',15,L);
-    const ob=[['Leuchtband 12 V'+(o.an&&o.I!=null?` · ${mA(o.I)} mA`:''),12,L]];
+    const ob=[['Leuchtband '+LED_NAME[t.farbe||'weiss']+' 12 V'+(o.an&&o.I!=null?` · ${mA(o.I)} mA`:''),12,L]];
     if(o.zuviel) ob.push(['⚠ zu viel Spannung – kaputt!',13,'#B3412A',1]); else if(o.viel) ob.push(['⚠ zu viel Spannung',13,'#B3412A',1]); else if(o.verkehrt) ob.push(['falsch herum',12,'#B3412A']);
     s+=etikett(t,ob,[],-32,30);
   } else if(t.typ==='kette'){
-    const hell=o.an?o.hell:0; const pk=[[-40,-8],[-20,8],[0,-8],[20,8],[40,-8]];
-    if(hell>0) pk.forEach(([x,y])=>{ s+=`<circle cx="${x}" cy="${y}" r="13" fill="#FFE58A" opacity="${(0.3+0.5*hell).toFixed(2)}" filter="url(#weich)"/>`; });
+    const hell=o.an?o.hell:0; const pk=[[-40,-8],[-20,8],[0,-8],[20,8],[40,-8]]; const [kf,kg]=LED_FARBEN[t.farbe||'weiss'];
+    if(hell>0) pk.forEach(([x,y])=>{ s+=`<circle cx="${x}" cy="${y}" r="13" fill="${kg}" opacity="${(0.3+0.5*hell).toFixed(2)}" filter="url(#weich)"/>`; });
     s+=`<path d="M-60 0H-50Q-40 -16 -30 0T-10 0T10 0T30 0T50 0H60" fill="none" stroke="#8A7A5A" stroke-width="3"/>`;
-    pk.forEach(([x,y])=>{ s+=`<circle cx="${x}" cy="${y}" r="5" fill="${hell>0?'#FFF3B0':'#DDE3EA'}" stroke="${L}" stroke-width="1.5"/>`; });
+    pk.forEach(([x,y])=>{ s+=`<circle cx="${x}" cy="${y}" r="5" fill="${hell>0?kg:kf}" stroke="${L}" stroke-width="1.5"/>`; });
     s+=txt(t,-54,-14,'+',15,'#E8554E')+txt(t,54,-14,'−',15,L);
-    const ob=[['Lichterkette'+(o.an&&o.I!=null?` · ${mA(o.I)} mA`:''),12,L]];
+    const ob=[['Lichterkette '+LED_NAME[t.farbe||'weiss']+(o.an&&o.I!=null?` · ${mA(o.I)} mA`:''),12,L]];
     if(o.zuviel) ob.push(['⚠ zu viel Strom – kaputt!',13,'#B3412A',1]); else if(o.viel) ob.push(['⚠ zu viel Strom',13,'#B3412A',1]); else if(o.verkehrt) ob.push(['falsch herum',12,'#B3412A']);
     s+=etikett(t,ob,[],-30,30);
   } else if(t.typ==='motor'){
@@ -440,6 +449,16 @@ function teilSvg(t,o,wahlId,warte){
     return `<circle class="klemme${n?'':' offen'}${warte&&warte[0]===t.id&&warte[1]===k?' warte':''}" cx="${x}" r="7"/><circle class="klemme-hit" data-id="${t.id}" data-k="${k}" cx="${x}" r="18"/>`; }).join('');
   return `<g class="teil${wahlId===t.id?' gewaehlt':''}" data-id="${t.id}" transform="translate(${t.x} ${t.y}) rotate(${t.rot})"><rect class="rahmen" x="-66" y="-46" width="132" height="92" rx="12"/><rect x="-50" y="-40" width="100" height="80" fill="transparent"/>${teilInnen(t,o)}${kl}</g>`;
 }
+function griffeSvg(){
+  if(!wahl||wahl.art!=='teil') return ''; const t=teil(wahl.id); if(!t) return '';
+  const quer=t.rot%180!==0, hw=quer?46:66, hh=quer?66:46;
+  const px=v=>begrenz(v,16,W-16), py=v=>begrenz(v,16,H-16);
+  const knopf=(act,x,y,inhalt,titel,farbe='#FFFFFF',rand='#1F1A17')=>`<g class="griff" data-griff="${act}" transform="translate(${px(x)} ${py(y)})"><title>${esc(titel)}</title><circle r="20" fill="transparent"/><circle r="13" fill="${farbe}" stroke="${rand}" stroke-width="2.5"/>${inhalt}</g>`;
+  let s=knopf('weg',t.x+hw,t.y-hh,'<path d="M-5-5L5 5M5-5L-5 5" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>','Löschen','#E8554E');
+  if(DIO_TYPEN.includes(t.typ)||t.typ==='motor'||t.typ==='batterie') s+=knopf('umdrehen',t.x-hw,t.y-hh,'<path d="M-7 0H7M-7 0l4-4M-7 0l4 4M7 0l-4-4M7 0l-4 4" fill="none" stroke="#1F1A17" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>','Umdrehen (+ und − tauschen)');
+  if(DIO_TYPEN.includes(t.typ)) s+=knopf('farbwechsel',t.x+hw,t.y+hh,'<circle r="5" fill="#FFFFFF" opacity=".55"/>','Andere Farbe',LED_FARBEN[t.farbe||'weiss'][0]);
+  return s;
+}
 function kabelSvg(k,i,gewaehlt){
   const P=kabelPunkte(k); if(!P) return '';
   const pts=P.map(p=>p.join(',')).join(' '); const f=KABEL_FARBEN[k.farbe||'schwarz'];
@@ -453,6 +472,7 @@ function zeichnen(){
   let s=`<defs><filter id="weich" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter><pattern id="raster" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.4" fill="#C9D2DD"/></pattern></defs><rect width="${W}" height="${H}" fill="url(#raster)" data-leer="1"/>`;
   s+=S.kabel.map(k=>kabelSvg(k,Z.kabel.get(k.id),wahl&&wahl.art==='kabel'&&wahl.id===k.id)).join('');
   s+=S.teile.map(t=>teilSvg(t,Z.teile.get(t.id),wahl&&wahl.art==='teil'?wahl.id:null,warteKlemme)).join('');
+  s+=griffeSvg();
   s+='<polyline class="gummi" id="gummi" points="" hidden/>';
   svg.innerHTML=s;
   $('leer-tipp').hidden=S.teile.length>0;
@@ -467,6 +487,7 @@ function leiste(){
   if(wahl.art==='teil'){ const t=teil(wahl.id); if(!t){ wahl=null; return leiste(); }
     s+=`<b class="was">${esc(t.typ==='batterie'?'Batterie / Netzgerät':TYPEN[t.typ].name)}</b>`;
     if(t.typ==='batterie') s+=VOLTS.map(v=>chip('volt:'+v,vz(v)+' V'+(QUELLEN[v].mah===0?' '+QUELLEN[v].kurz:''),t.volt===v)).join('');
+    if(t.typ==='band'||t.typ==='kette') s+=Object.keys(LED_FARBEN).map(f=>chip('farbe:'+f,`<i style="background:${LED_FARBEN[f][0]}"></i>${LED_NAME[f]}`,t.farbe===f)).join('');
     if(t.typ==='led') s+=Object.keys(LED_FARBEN).map(f=>chip('farbe:'+f,`<i style="background:${LED_FARBEN[f][0]}"></i>${LED_NAME[f]} ${vz(vf(f))} V`,t.farbe===f)).join('');
     if(t.typ==='motor') s+=Object.keys(MOTOREN).map(k=>chip('motor:'+k,MOTOREN[k].name,(t.art||'spiel')===k)).join('')+'<span class="was">·</span>'+[['propeller','Propeller'],['rad','Rad'],['zahnrad','Zahnrad']].map(([a,n])=>chip('antrieb:'+a,n,t.antrieb===a)).join('');
     if(t.typ==='widerstand') s+=[...new Set([...OHM_CHIPS,t.ohm])].sort((a,b)=>a-b).map(o=>chip('ohm:'+o,ohmText(o),t.ohm===o)).join('');
@@ -480,12 +501,13 @@ function leiste(){
   }
   L.innerHTML=s;
 }
-$('leiste').addEventListener('click',e=>{ const b=e.target.closest('[data-act]'); if(!b) return; const [act,wert]=b.dataset.act.split(':');
+$('leiste').addEventListener('click',e=>{ const b=e.target.closest('[data-act]'); if(!b) return; const [act,wert]=b.dataset.act.split(':'); aktion(act,wert); });
+function aktion(act,wert){ if(!wahl) return;
   if(act==='weg'){ merken(); if(wahl.art==='teil') loescheTeil(wahl.id); else S.kabel=S.kabel.filter(k=>k.id!==wahl.id); wahl=null; aendern(); return; }
   if(wahl.art==='teil'){ const t=teil(wahl.id); merken();
     if(act==='volt') t.volt=+wert; else if(act==='farbe') t.farbe=wert; else if(act==='antrieb') t.antrieb=wert; else if(act==='motor') t.art=wert; else if(act==='ohm') t.ohm=+wert; else if(act==='an') t.an=!t.an; else if(act==='drehen') t.rot=(t.rot+90)%360; else if(act==='umdrehen'){ t.rot=(t.rot+180)%360; S.kabel.forEach(k=>{ if(k.a[0]===t.id) k.a[1]=1-k.a[1]; if(k.b[0]===t.id) k.b[1]=1-k.b[1]; }); }
   } else { const k=S.kabel.find(c=>c.id===wahl.id); merken(); if(act==='kfarbe') k.farbe=wert; else if(act==='gerade') k.pts=[]; }
-  aendern(); });
+  aendern(); }
 function loescheTeil(id){ S.teile=S.teile.filter(t=>t.id!==id); S.kabel=S.kabel.filter(k=>k.a[0]!==id&&k.b[0]!==id); }
 
 // ---------- Was passiert? und Materialliste ----------
@@ -545,18 +567,30 @@ function antwort(){
   }
   $('antwort').innerHTML=A.join('');
 }
-function teilName(t){ if(t.typ==='batterie') return quelle(t.volt).name; if(t.typ==='schalter') return 'Kippschalter'; if(t.typ==='band') return 'Leuchtband 12 V (Stück mit 3 LEDs, Widerstand eingebaut)'; if(t.typ==='kette') return 'Lichterkette (Stück Mini-LEDs ohne Stecker, für 3 V)'; if(t.typ==='led') return `LED ${LED_NAME[t.farbe]} (${vz(vf(t.farbe))} V)`; if(t.typ==='motor') return `${motor(t).name} 3 V`+(t.antrieb==='propeller'?' mit Propeller':t.antrieb==='rad'?' mit Rad':' mit Zahnrad'); if(t.typ==='lampe') return 'Lämpchen 3,5 V mit Fassung'; if(t.typ==='widerstand') return `Widerstand ${ohmText(t.ohm)}`; return TYPEN[t.typ].name; }
+function teilName(t){ if(t.typ==='batterie') return quelle(t.volt).name; if(t.typ==='schalter') return 'Kippschalter'; if(t.typ==='band') return `Leuchtband ${LED_NAME[t.farbe||'weiss']} 12 V (Stück mit 3 LEDs, Widerstand eingebaut)`; if(t.typ==='kette') return `Lichterkette ${LED_NAME[t.farbe||'weiss']} (Stück Mini-LEDs ohne Stecker, für 3 V)`; if(t.typ==='led') return `LED ${LED_NAME[t.farbe]} (${vz(vf(t.farbe))} V)`; if(t.typ==='motor') return `${motor(t).name} 3 V`+(t.antrieb==='propeller'?' mit Propeller':t.antrieb==='rad'?' mit Rad':' mit Zahnrad'); if(t.typ==='lampe') return 'Lämpchen 3,5 V mit Fassung'; if(t.typ==='widerstand') return `Widerstand ${ohmText(t.ohm)}`; return TYPEN[t.typ].name; }
 function materialliste(){ const m=new Map(); S.teile.forEach(t=>{ const n=teilName(t); m.set(n,(m.get(n)||0)+1); }); if(S.kabel.length) m.set('Kabel (oder Krokodilklemmen)',S.kabel.length); return [...m]; }
 function liste(){ $('liste').innerHTML=materialliste().map(([n,z])=>`<li><span>${esc(n)}</span><b>${z}×</b></li>`).join('')||'<li class="leise">Noch nichts auf der Fläche.</li>'; }
 
 // ---------- Palette ----------
-function palette(){ $('palette').innerHTML=Object.keys(TYPEN).map(typ=>{ const t={id:0,typ,x:0,y:0,rot:0,...NEU[typ]}; if(typ==='schalter') t.an=true; return `<button class="pt" type="button" data-typ="${typ}"><svg viewBox="-64 -46 128 92" aria-hidden="true">${teilInnen(t,DIO_TYPEN.includes(typ)?{an:true,hell:1}:{})}</svg><b>${esc(typ==='motor'?'Motor 3 V':typ==='band'?'Leuchtband 12 V':TYPEN[typ].name)}</b></button>`; }).join(''); }
-$('palette').addEventListener('click',e=>{ const b=e.target.closest('[data-typ]'); if(!b) return; merken(); const [x,y]=freierPlatz(); const t={id:S.n++,typ:b.dataset.typ,x,y,rot:0,...NEU[b.dataset.typ]}; S.teile.push(t); wahl={art:'teil',id:t.id}; warteKlemme=null; aendern(); });
+const GRUPPEN=[
+  {name:'Stromquelle',text:'gibt den Strom',teile:[['batterie',{volt:3},'Batterie 3 V'],['batterie',{volt:12},'Netzgerät 12 V']]},
+  {name:'Leitungen',text:'führen den Strom',kabel:true,teile:[['widerstand',{},'Widerstand (bremst)']]},
+  {name:'Schalter',text:'öffnen und schliessen den Kreis',teile:[['schalter'],['taster']]},
+  {name:'Verbraucher',text:'brauchen Strom: leuchten, drehen, piepsen',teile:[['led'],['band',{},'Leuchtband 12 V'],['kette'],['motor',{},'Motor 3 V'],['lampe'],['summer']]}
+];
+function palette(){
+  const knopf=([typ,vor={},name],gi,ti)=>{ const t={id:0,typ,x:0,y:0,rot:0,...NEU[typ],...vor}; if(typ==='schalter') t.an=true; return `<button class="pt" type="button" data-typ="${typ}" data-g="${gi}" data-t="${ti}"><svg viewBox="-64 -46 128 92" aria-hidden="true">${teilInnen(t,DIO_TYPEN.includes(typ)?{an:true,hell:1}:{})}</svg><b>${esc(name||TYPEN[typ].name)}</b></button>`; };
+  const kabel=`<button class="pt kabel-info" type="button" data-kabel="1"><svg viewBox="-64 -46 128 92" aria-hidden="true"><path d="M-44 10C-20-30 20 40 44-10" fill="none" stroke="#E8554E" stroke-width="6" stroke-linecap="round"/><circle cx="-44" cy="10" r="8" fill="#FFE58A" stroke="#1F1A17" stroke-width="2.5"/><circle cx="44" cy="-10" r="8" fill="#FFE58A" stroke="#1F1A17" stroke-width="2.5"/></svg><b>Kabel: Klemme zu Klemme ziehen</b></button>`;
+  $('palette').innerHTML=GRUPPEN.map((g,gi)=>`<div class="gruppe"><h3>${esc(g.name)}</h3><small>${esc(g.text)}</small><div class="reihe">${g.kabel?kabel:''}${g.teile.map((x,ti)=>knopf(x,gi,ti)).join('')}</div></div>`).join('');
+}
+$('palette').addEventListener('click',e=>{ if(e.target.closest('[data-kabel]')){ meldung('Kabel: Von einer gelben Klemme zur nächsten ziehen – oder beide nacheinander antippen.'); return; } const b=e.target.closest('[data-typ]'); if(!b) return; merken(); const [x,y]=freierPlatz(); const vor=GRUPPEN[b.dataset.g].teile[b.dataset.t][1]||{}; const t={id:S.n++,typ:b.dataset.typ,x,y,rot:0,...NEU[b.dataset.typ],...vor}; S.teile.push(t); wahl={art:'teil',id:t.id}; warteKlemme=null; aendern(); });
 
 // ---------- Zeigen und Ziehen ----------
 let drag=null;
 svg.addEventListener('pointerdown',e=>{ if(e.button&&e.button!==0) return; const [x,y]=svgPunkt(e); const el=e.target;
   const kh=el.closest('.klemme-hit'); const wp=el.closest('.wp'); const wm=el.closest('.wm'); const tg=el.closest('.teil'); const kg=el.closest('.kabel');
+  const gr=el.closest('.griff');
+  if(gr){ e.preventDefault(); const a=gr.dataset.griff; if(a==='farbwechsel'){ const t=teil(wahl.id); const f=Object.keys(LED_FARBEN); aktion('farbe',f[(f.indexOf(t.farbe||'weiss')+1)%f.length]); } else aktion(a); return; }
   svg.setPointerCapture(e.pointerId);
   if(kh){ drag={art:'kabel',von:[+kh.dataset.id,+kh.dataset.k],x,y,bewegt:false}; return; }
   if(wp){ const k=S.kabel.find(c=>c.id===+wp.dataset.id); merken(); drag={art:'punkt',k,i:+wp.dataset.i,x,y,bewegt:false}; return; }
@@ -692,7 +726,7 @@ function planBauen(r,name){                                               // bau
 const b64=s=>btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
 const unb64=s=>decodeURIComponent(escape(atob(s.replace(/-/g,'+').replace(/_/g,'/'))));
 $('link').addEventListener('click',async()=>{ const url=location.origin+location.pathname+'#p='+b64(JSON.stringify({name:S.name,teile:S.teile,kabel:S.kabel,n:S.n})); try{ await navigator.clipboard.writeText(url); meldung('Link kopiert. Wer ihn öffnet, sieht deinen Stromkreis.'); }catch(e){ prompt('Link zum Kopieren:',url); } });
-function svgText(){ const k=svg.cloneNode(true); k.querySelectorAll('.wm,.wp,#gummi,.klemme-hit').forEach(e=>e.remove()); k.querySelectorAll('.gewaehlt').forEach(e=>e.classList.remove('gewaehlt')); k.querySelectorAll('.strom').forEach(e=>e.remove());
+function svgText(){ const k=svg.cloneNode(true); k.querySelectorAll('.wm,.wp,#gummi,.klemme-hit,.griff').forEach(e=>e.remove()); k.querySelectorAll('.gewaehlt').forEach(e=>e.classList.remove('gewaehlt')); k.querySelectorAll('.strom').forEach(e=>e.remove());
   const st=document.createElement('style'); st.textContent='.klemme{fill:#FFE58A;stroke:#1F1A17;stroke-width:2.5}.klemme.offen{fill:#FFF;stroke-dasharray:3 2}.kabel .aussen{fill:none;stroke:#1F1A17;stroke-width:9;stroke-linecap:round;stroke-linejoin:round}.kabel .innen{fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.hit,.rahmen{display:none}text{font-family:Nunito,Arial,sans-serif;font-weight:800}'; k.insertBefore(st,k.firstChild);
   k.setAttribute('width',W); k.setAttribute('height',H); k.insertAdjacentHTML('afterbegin',`<rect width="${W}" height="${H}" fill="#fff"/>`); return new XMLSerializer().serializeToString(k); }
 $('bild').addEventListener('click',()=>{ const img=new Image(); const url=URL.createObjectURL(new Blob([svgText()],{type:'image/svg+xml;charset=utf-8'}));
