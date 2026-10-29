@@ -9,17 +9,19 @@ bilder/. Geschrieben wird nach vorlagen/figuren/:
   <welt>.js       FIGUREN_DAZU('<welt>', […]) – die ganzen Formen einer Welt, lädt der Generator erst bei Bedarf
   bilder/<id>.webp  Vorschaubild für die Auswahl
   originale/<id>.webp  Verlustfreie freigestellte Farbvorlage
-k  = Anzahl Farben inkl. Schwarz (fehlt: aus dem Bild geschätzt), glatt = Rundung (0 = eckig lassen wie bei Pixelbildern).
+k  = Anzahl Farben inkl. Schwarz (fehlt: aus dem Bild geschätzt), glatt = Rundung (0 = eckig lassen wie bei Pixelbildern),
+aehnlich = Farbabstand, unter dem Farbtöne für die Innenlinien als eine Farbe gelten (0 = jede Palettenfarbe grenzt ab).
 
 Aufruf: python -I bild.py                 – alle Figuren (parallel)
         python -I bild.py <id> [<id> …]   – nur diese Figuren neu rechnen, die übrigen bleiben wie sie sind
         python -I bild.py --datei <bild> [<Farben>] [<glatt>]  – ein einzelnes Bild probieren, schreibt nur ein Vorschaubild"""
-import os, sys, json, re, unicodedata
+import os, sys, json, re, unicodedata, math
 HIER = os.path.dirname(os.path.abspath(__file__))
 if HIER not in sys.path: sys.path.insert(0, HIER)                    # zeichnen.py auch beim Aufruf mit -I finden
 for _v in ('OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS'): os.environ.setdefault(_v, '1')   # sonst reserviert jeder Prozess ~1 GB
 import numpy as np, cv2
 from scipy import ndimage
+from skimage.morphology import skeletonize
 from shapely.geometry import LinearRing, Polygon, MultiPolygon, LineString, MultiLineString
 from shapely.ops import unary_union, linemerge
 from shapely import affinity
@@ -30,6 +32,52 @@ LISTE = os.path.join(HIER, 'figuren.json')
 BILDER = os.path.join(HIER, 'bilder')
 ZIEL = os.path.normpath(os.path.join(HIER, '..', '..', 'vorlagen', 'figuren'))
 GLATT = .12
+AEHNLICH = 28      # Farbabstand (Lab), unter dem zwei Farbtöne für die Innenlinien als eine Farbe gelten
+SCHARF = 1.2       # Begradigen in Bildpunkten: Pixeltreppen und Zittern unter dieser Abweichung werden zu geraden Stücken
+DICHT = 1.0        # Punktabstand (100er-Einheiten) vor dem Runden, damit echte Ecken nur hauchdünn gerundet werden
+DICK = 1.5         # halbe Strichbreite in t, bis zu der Schwarz als Linie gilt (t ≈ 1/60 der Figur)
+SPALT = 3.0        # grösste halbe Spaltbreite in t, die noch als Spalt zwischen Strich und Füllung gilt
+
+
+def loecher_fuellen(maske, rgb):
+    """Eingeschlossene Löcher der Maske füllen, damit Striche nicht doppelt umrissen werden.
+    Reine Strichzeichnung (fast nur dünnes Schwarz): die Figur ist die Fläche innerhalb der Striche, weiss gefüllt; auch
+    was nur an einer Bildkante kurz offen ist, weil die Figur dort abgeschnitten wurde.
+    Sonst nur schmale Spalten, die an schwarzen Strich UND farbige Füllung grenzen (Handzeichnungen, deren Füllung den
+    Strich nicht berührt); sie bekommen die Farbe der nächsten Füllung. Echte Löcher (Donut, Kranz) bleiben."""
+    lab, n = ndimage.label(~maske)
+    if n == 0: return maske, rgb
+    h, w = maske.shape
+    kontakt = np.stack([np.bincount(z, minlength=n + 1) for z in (lab[0], lab[-1], lab[:, 0], lab[:, -1])], 1)
+    kontakt[0] = 0
+    loch = kontakt.sum(1) == 0; loch[0] = False
+    dunkel = maske & (rgb.max(2) < 90)
+    t = max(2, int(round(math.sqrt(maske.sum())/60)))
+    kern = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (4*t + 1, 4*t + 1))
+    reine = dunkel.sum() > .85*maske.sum() and cv2.erode(dunkel.astype(np.uint8), kern).sum() < .2*dunkel.sum()
+    if reine:
+        leck = ((kontakt > 0).sum(1) == 1) & ((kontakt/np.array([w, w, h, h])).max(1) <= .6)
+        fuellen = loch | leck
+        if not fuellen.any(): return maske, rgb
+        neu = fuellen[lab]
+        rgb = rgb.copy(); rgb[neu] = 255
+    else:
+        if not loch.any(): return maske, rgb
+        lab[~loch[lab]] = 0                                             # nur echte Löcher
+        nb = np.zeros_like(lab)                                         # Loch-Nummer neben jedem Maskenpixel
+        nb[1:] = np.maximum(nb[1:], lab[:-1]); nb[:-1] = np.maximum(nb[:-1], lab[1:])
+        nb[:, 1:] = np.maximum(nb[:, 1:], lab[:, :-1]); nb[:, :-1] = np.maximum(nb[:, :-1], lab[:, 1:])
+        idx = nb[maske]; alle = np.bincount(idx, minlength=n + 1); dk = np.bincount(idx[dunkel[maske]], minlength=n + 1)
+        farbig = alle - dk
+        fuellen = (dk >= .15*alle) & (farbig >= .15*alle) & (alle > 0); fuellen[0] = False
+        if fuellen.any():                                               # nur schmale Spalten, keine echten Löcher
+            breit = ndimage.labeled_comprehension(ndimage.distance_transform_edt(lab > 0), lab, np.flatnonzero(fuellen), np.max, float, 0)
+            fuellen[np.flatnonzero(fuellen)] = breit <= SPALT*t
+        if not fuellen.any(): return maske, rgb
+        neu = fuellen[lab]
+        _, ind = ndimage.distance_transform_edt(~(maske & ~dunkel), return_indices=True)
+        rgb = rgb.copy(); rgb[neu] = rgb[ind[0][neu], ind[1][neu]]
+    return maske | neu, rgb
 
 
 def laden(pfad, alle_teile=True):
@@ -64,6 +112,7 @@ def laden(pfad, alle_teile=True):
         for y, x in saum:
             if nahe[y, x] and not ff[y + 1, x + 1]: cv2.floodFill(nahe.copy(), ff, (x, y), 2)
         maske = ~(ff[1:-1, 1:-1] > 0)
+    maske, rgb = loecher_fuellen(maske, rgb.astype(np.float32))
     # Auch getrennte Motivteile gehören zur Vorlage, z.B. die Spitze des Dango-Spiesses.
     # Nur einzelne Staubpixel entfernen; kein Öffnen, das dünne Striche verschluckt.
     lab, n = ndimage.label(maske, np.ones((3, 3), np.uint8))
@@ -95,13 +144,32 @@ def polygone(binaer, skala, ursprung):
     return out
 
 
-def runden(pts, n=2):
-    """Chaikin: Ecken eines geschlossenen Rings abschneiden → weiche Kurve statt Knicke."""
+def verdichten(pts, abstand, ring):
+    """Zwischenpunkte einfügen, bis kein Stück länger als `abstand` ist. So schneidet das Runden an einer echten Ecke
+    höchstens `abstand`/4 ab, und lange Geraden bleiben gerade."""
     p = np.asarray(pts, float)
+    q = np.roll(p, -1, 0) if ring else p[1:]
+    a = p if ring else p[:-1]
+    out = []
+    for s, e in zip(a, q):
+        n = max(1, int(np.ceil(np.hypot(*(e - s))/abstand)))
+        out.extend(s + (e - s)*(i/n) for i in range(n))
+    if not ring: out.append(p[-1])
+    return np.asarray(out)
+
+
+def runden(pts, n=2, ring=True):
+    """Chaikin: Ecken abschneiden → weiche Kurve statt Knicke. Offene Linien behalten ihre Endpunkte."""
+    p = verdichten(pts, DICHT, ring)
     for _ in range(n):
-        q = np.roll(p, -1, 0)
-        n2 = np.empty((2*len(p), 2)); n2[0::2] = .75*p + .25*q; n2[1::2] = .25*p + .75*q
-        p = n2
+        if ring:
+            q = np.roll(p, -1, 0)
+            n2 = np.empty((2*len(p), 2)); n2[0::2] = .75*p + .25*q; n2[1::2] = .25*p + .75*q
+            p = n2
+        else:
+            a, b = p[:-1], p[1:]
+            m = np.empty((2*len(a), 2)); m[0::2] = .75*a + .25*b; m[1::2] = .25*a + .75*b
+            p = np.vstack([p[:1], m, p[-1:]])
     return p
 
 
@@ -111,7 +179,7 @@ def ring_koord(r, tol, rund=True):
     if tol: pts = np.asarray(LinearRing(pts).simplify(tol, preserve_topology=True).coords)[:-1]
     if rund and len(pts) >= 3:                                        # Pixelfiguren (glatt=0) behalten ihre Ecken
         pts = runden(pts, 2)
-        pts = np.asarray(LinearRing(pts).simplify(tol*.4 if tol else .05, preserve_topology=True).coords)[:-1]
+        pts = np.asarray(LinearRing(pts).simplify(tol*.3 if tol else .05, preserve_topology=True).coords)[:-1]
     return [[round(x, 2), round(y, 2)] for x, y in pts]
 
 
@@ -176,8 +244,19 @@ def quantisieren(rgb, maske, k, glatt):
     weg = np.zeros_like(maske); duenn = np.zeros_like(maske)
     if hat_schwarz:
         # dünne schwarze Linien (schmaler als ~1/60 der Figur) der Nachbarfarbe zuschlagen; dicke schwarze Flächen bleiben
-        kern_t = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2*t + 1, 2*t + 1))
-        dick = cv2.morphologyEx(schwarz.astype(np.uint8), cv2.MORPH_OPEN, kern_t).astype(bool)
+        # Jeder schwarze Bildpunkt bekommt die halbe Breite des Strichs, zu dem er gehört (Abstand des nächsten
+        # Skelettpunkts zum Strichrand). Striche bis zur Breite DICK·t (auch dicke Filzstift-Umrisse) sind Linien und
+        # werden als Mittellinie gezeichnet; nur breitere Flächen (Augen, Silhouetten, Schatten) bleiben Fläche.
+        # Nahe am Aussenrand zählt Schwarz erst ab doppelter Breite als Fläche: der Umriss wird in Rundungen und
+        # Ecken dicker als auf den Geraden und bliebe sonst als Rest stehen (Blasen an den Ecken).
+        skel = skeletonize(schwarz)
+        if skel.any():
+            halb = ndimage.distance_transform_edt(schwarz)
+            _, idx_s = ndimage.distance_transform_edt(~skel, return_indices=True)
+            breite = halb[idx_s[0], idx_s[1]]
+            nah = ndimage.distance_transform_edt(maske) <= 3*t
+            dick = schwarz & (breite > np.where(nah, 2*DICK, DICK)*t)
+        else: dick = np.zeros_like(maske)
         duenn = schwarz & ~dick; weg |= duenn
     # Splitter: Farbflecken aus der Kantenglättung entlang der Linien (Mischtöne, die eine eigene Farbe bekamen). Sie sind
     # winzig oder so schmal, dass Öffnen sie löscht; jeder gäbe sonst eine eigene «Blase» als Innenlinie.
@@ -201,12 +280,55 @@ def quantisieren(rgb, maske, k, glatt):
     return etik_farbe, etik_linien, palette, si, duenn
 
 
+def zusammenlegen(etik, palette, si, aehnlich):
+    """Für die Innenlinien gelten ähnliche Farbtöne (Schattierungen, Pixel-Texturen, Glanz) als eine Farbe: die Etiketten
+    aller Paletteneinträge, die in Lab näher als `aehnlich` beieinanderliegen, werden auf einen Vertreter gesetzt.
+    Schwarz (si) bleibt für sich. Die Palette selbst bleibt (Ausmalmodus)."""
+    n = len(palette)
+    if not aehnlich or n < 2: return etik
+    lab = cv2.cvtColor(np.asarray(palette).reshape(1, -1, 3).astype(np.uint8), cv2.COLOR_RGB2LAB)[0].astype(np.float32)
+    anzahl = np.bincount(etik[etik >= 0], minlength=n)                  # leere Einträge dürfen keine Brücke bilden
+    elt = list(range(n))
+    def wurzel(a):
+        while elt[a] != a: elt[a] = elt[elt[a]]; a = elt[a]
+        return a
+    for i in range(n):
+        for j in range(i + 1, n):
+            if si in (i, j) or not anzahl[i] or not anzahl[j]: continue
+            if np.linalg.norm(lab[i] - lab[j]) < aehnlich: elt[wurzel(i)] = wurzel(j)
+    rep = np.array([wurzel(i) for i in range(n)])
+    return np.where(etik >= 0, rep[np.clip(etik, 0, n - 1)], etik)
+
+
+def kanten(etik, skala, ursprung):
+    """Grenzen zwischen verschiedenen Farben als Linien in der Pixelfuge: jede Grenze genau einmal, statt je Fläche
+    ein Stück um einen Bildpunkt versetzt (das gab doppelte, zittrige Linien). Ergebnis: Liste von LineStrings,
+    an Verzweigungen getrennt."""
+    ok = etik >= 0
+    v = (etik[:, :-1] != etik[:, 1:]) & ok[:, :-1] & ok[:, 1:]        # Fuge rechts von (x, y)
+    h = (etik[:-1, :] != etik[1:, :]) & ok[:-1, :] & ok[1:, :]        # Fuge unter (x, y)
+    ys, xs = np.nonzero(v); segs = [((x + 1, y), (x + 1, y + 1)) for x, y in zip(xs, ys)]
+    ys, xs = np.nonzero(h); segs += [((x, y + 1), (x + 1, y + 1)) for x, y in zip(xs, ys)]
+    if not segs: return []
+    li = linemerge(MultiLineString(segs))                               # ganze Zahlen: Enden treffen sich exakt
+    ox, oy = ursprung
+    li = affinity.affine_transform(li, [skala, 0, 0, skala, -ox*skala, -oy*skala])
+    return [l for l in getattr(li, 'geoms', [li]) if not l.is_empty]
+
+
+def linie_koord(l, tol, rund):
+    """Offene Linie → begradigen (Pixeltreppen weg), bei runden Figuren weich, Enden bleiben (Verzweigungen treffen sich)."""
+    pts = np.asarray(l.simplify(tol).coords)
+    if rund and len(pts) >= 3:
+        pts = np.asarray(LineString(runden(pts, 2, False)).simplify(tol*.3).coords)
+    return [[round(x, 2), round(y, 2)] for x, y in pts]
+
+
 def mittellinien(duenn, maske, etik_linien, skala, ursprung):
     """Dünne schwarze Striche, die zwischen gleichfarbigen Flächen liegen (Falten, Schraffur, Muster), ergeben als
     Farbgrenze keine Innenlinie. Ihr Skelett wird als Mittellinie geliefert – ohne die Stücke, die ohnehin an einer
     Farbgrenze oder am Umriss liegen (dort gibt es die Linie schon). Ergebnis: Liste von LineStrings."""
     if not duenn.any(): return []
-    from skimage.morphology import skeletonize
     skel = skeletonize(duenn)
     halb = ndimage.distance_transform_edt(duenn)                         # halbe Strichbreite je Punkt
     # Farbgrenzen im Bild ohne dünne Striche; Striche am Umriss (Aussenrand der Figur) ebenso ausschliessen
@@ -258,14 +380,14 @@ def farbzahl(rgb, maske):
     return int(np.clip(zahl + (schwarz.sum() >= maske.sum()*.004), 3, 9))
 
 
-def form(fid, name, gruppe, pfad, k=None, glatt=GLATT):
+def form(fid, name, gruppe, pfad, k=None, glatt=GLATT, aehnlich=AEHNLICH):
     rgb, maske = laden(pfad)
     # Diese Farbflächen dienen dem Ausmalmodus. Farbdruck verwendet die Originalgrafik.
     if not k: k = max(12, farbzahl(rgb, maske)*2)
     ys, xs = np.nonzero(maske)
     x0, y0, x1, y1 = xs.min(), ys.min(), xs.max() + 1, ys.max() + 1
     skala = 100/max(x1 - x0, y1 - y0)                                   # Bildpunkte → 100er-Einheiten
-    tol = .04 if not glatt else .08
+    tol = SCHARF*skala                                                  # ~1 Bildpunkt: Treppen und Zittern begradigen
 
     # Umriss
     umr = polygone(maske, skala, (x0, y0))
@@ -273,11 +395,12 @@ def form(fid, name, gruppe, pfad, k=None, glatt=GLATT):
     # Sanft schliessen statt Öffnen: schmale Motivteile nicht abschneiden.
     if glatt: g = g.buffer(glatt, 8).buffer(-glatt, 8)
     g = g.simplify(tol, preserve_topology=True).buffer(0)             # buffer(0): doppelte Punkte raus
-    d = ringe(g, 0, False)
+    d = ringe(g, 0, bool(glatt))                                        # runde Figuren weich, Pixelfiguren eckig
     bx0, by0, bx1, by1 = g.bounds
 
     # Farbflächen, grosse zuerst (kleine liegen beim Zeichnen oben), Schwarz (Umrisslinien) zuoberst
     etik, etik_li, palette, si, duenn = quantisieren(rgb, maske, k, glatt)
+    etik_li = zusammenlegen(etik_li, palette, si, aehnlich)             # Schattierungen geben keine Innenlinie
     reihenfolge = [i for i in np.argsort(-np.bincount(etik[etik >= 0], minlength=len(palette))) if i != si]
     if si is not None: reihenfolge.append(si)
 
@@ -292,18 +415,15 @@ def form(fid, name, gruppe, pfad, k=None, glatt=GLATT):
         teile = [p.buffer(0).intersection(g) for p in teile if not p.is_empty]
         return [t for p in teile for t in getattr(p, 'geoms', [p]) if t.geom_type == 'Polygon' and t.area > .015]
 
-    farben, grenzen = [], []
+    farben = []
     for i in reihenfolge:
         if not (etik == i).any(): continue
         teile = flaechen(etik, i, i == si)
         rr = [r for t in teile for r in ringe(t, tol*.5 if i == si else tol, False)]
         if rr: farben.append(dict(f=hexf(palette[i]), d=rr))
-    # Grenzen für die Innenlinien aus dem Bild ohne dünne Linien (sonst lägen sie doppelt an beiden Linienrändern)
-    for i in range(len(palette)):
-        if (etik_li == i).any(): grenzen += [t.boundary for t in flaechen(etik_li, i, False)]
-    # Innenlinien: Grenzen zwischen den Farben, ohne den Umriss selbst
+    # Innenlinien: Grenzen zwischen den Farben (aus dem Bild ohne dünne Linien), ohne den Umriss selbst
     innen = g.buffer(-.6)
-    li = unary_union(grenzen).intersection(innen) if grenzen else LineString()
+    li = unary_union(kanten(etik_li, skala, (x0, y0))).intersection(innen)
     li = linemerge(li) if li.geom_type == 'MultiLineString' else li
     # dazu die Mittellinien der dünnen Striche zwischen gleichfarbigen Flächen
     mitte = unary_union(mittellinien(duenn, maske, etik_li, skala, (x0, y0))).intersection(innen)
@@ -311,15 +431,7 @@ def form(fid, name, gruppe, pfad, k=None, glatt=GLATT):
     det = []
     for l in list(getattr(li, 'geoms', [li])) + list(getattr(mitte, 'geoms', [mitte])):
         if l.is_empty or l.geom_type != 'LineString' or l.length < 1.5: continue
-        pts = np.asarray(l.simplify(tol).coords)
-        if glatt and len(pts) >= 3:                                     # offene Linie runden, Enden festhalten
-            p = pts
-            for _ in range(2):
-                a, b = p[:-1], p[1:]
-                m = np.empty((2*len(a), 2)); m[0::2] = .75*a + .25*b; m[1::2] = .25*a + .75*b
-                p = np.vstack([pts[:1], m, pts[-1:]])
-            pts = np.asarray(LineString(p).simplify(tol*.4).coords)
-        det.append([[round(x, 2), round(y, 2)] for x, y in pts])
+        det.append(linie_koord(l, tol, bool(glatt)))
 
     # Verschieben, damit der Umriss bei 0/0 beginnt
     dx, dy = -bx0, -by0
@@ -362,7 +474,7 @@ def rechnen(e):
     """Eine Figur aus der Liste rechnen (läuft in einem eigenen Prozess). Fehler brechen nicht alles ab."""
     try:
         cv2.setRNGSeed(42)
-        f = form(e['id'], e['name'], e['welt'], os.path.join(BILDER, e['datei']), e.get('k'), e.get('glatt', GLATT))
+        f = form(e['id'], e['name'], e['welt'], os.path.join(BILDER, e['datei']), e.get('k'), e.get('glatt', GLATT), e.get('aehnlich', AEHNLICH))
         from PIL import Image
         rgb, maske = laden(os.path.join(BILDER, e['datei']))
         ys, xs = np.nonzero(maske)

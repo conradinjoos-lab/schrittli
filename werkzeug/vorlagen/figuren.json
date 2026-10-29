@@ -71,7 +71,8 @@
    "id": "pokeball",
    "name": "Pokéball",
    "welt": "Pokémon & Sonic",
-   "datei": "pokeball.png"
+   "datei": "pokeball.png",
+   "k": 4
   },
   {
    "id": "superball",
@@ -83,7 +84,8 @@
    "id": "hyperball",
    "name": "Hyperball",
    "welt": "Pokémon & Sonic",
-   "datei": "hyperball.png"
+   "datei": "hyperball.png",
+   "k": 5
   },
   {
    "id": "digda",
@@ -300,7 +302,8 @@
    "id": "luigi",
    "name": "Luigi",
    "welt": "Mario & Nintendo",
-   "datei": "luigi.png"
+   "datei": "luigi.png",
+   "aehnlich": 40
   },
   {
    "id": "yoshi",
@@ -405,7 +408,8 @@
    "id": "splatoon-tintenfisch-silhouette",
    "name": "Splatoon-Tintenfisch",
    "welt": "Mario & Nintendo",
-   "datei": "splatoon-tintenfisch-silhouette.png"
+   "datei": "splatoon-tintenfisch-silhouette.png",
+   "aehnlich": 40
   },
   {
    "id": "splatoon-inkling",
@@ -442,7 +446,8 @@
    "name": "TNT-Block",
    "welt": "Minecraft",
    "datei": "tnt-block.png",
-   "glatt": 0
+   "glatt": 0,
+   "aehnlich": 40
   },
   {
    "id": "grasblock",
@@ -456,7 +461,8 @@
    "name": "Creeper-Gesicht",
    "welt": "Minecraft",
    "datei": "creeper-gesicht.png",
-   "glatt": 0
+   "glatt": 0,
+   "aehnlich": 50
   },
   {
    "id": "diamant",
@@ -600,7 +606,8 @@
    "name": "Creeper",
    "welt": "Minecraft",
    "datei": "creeper.png",
-   "glatt": 0
+   "glatt": 0,
+   "aehnlich": 40
   },
   {
    "id": "steve",
@@ -627,7 +634,8 @@
    "name": "Stardew-Huhn",
    "welt": "Games & Spielzeug",
    "datei": "stardew-huhn.png",
-   "glatt": 0
+   "glatt": 0,
+   "aehnlich": 40
   },
   {
    "id": "pac-man",
@@ -730,7 +738,8 @@
    "id": "fortnite-lama",
    "name": "Fortnite-Lama",
    "welt": "Games & Spielzeug",
-   "datei": "fortnite-lama.png"
+   "datei": "fortnite-lama.png",
+   "aehnlich": 36
   },
   {
    "id": "fortnite-peely-banane",
@@ -959,13 +968,15 @@
    "id": "ladybug-kopf-mit-maske",
    "name": "Ladybug",
    "welt": "Ninjago & Miraculous",
-   "datei": "ladybug-kopf-mit-maske.png"
+   "datei": "ladybug-kopf-mit-maske.png",
+   "aehnlich": 45
   },
   {
    "id": "cat-noir-kopf-mit-maske",
    "name": "Cat Noir",
    "welt": "Ninjago & Miraculous",
-   "datei": "cat-noir-kopf-mit-maske.png"
+   "datei": "cat-noir-kopf-mit-maske.png",
+   "aehnlich": 45
   },
   {
    "id": "konoha-symbol-naruto-stirnband",
@@ -989,7 +1000,8 @@
    "id": "goku",
    "name": "Goku",
    "welt": "Anime",
-   "datei": "goku.png"
+   "datei": "goku.png",
+   "aehnlich": 45
   },
   {
    "id": "dragon-ball-4-sterne-kugel",
@@ -1271,7 +1283,8 @@
    "id": "ekel",
    "name": "Ekel",
    "welt": "Minions & Alles steht Kopf",
-   "datei": "ekel.png"
+   "datei": "ekel.png",
+   "aehnlich": 42
   },
   {
    "id": "angst",
@@ -2226,91 +2239,91 @@
    "name": "A",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-a.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-b",
    "name": "B",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-b.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-c",
    "name": "C",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-c.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-d",
    "name": "D",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-d.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-e",
    "name": "E",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-e.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-f",
    "name": "F",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-f.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-g",
    "name": "G",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-g.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-h",
    "name": "H",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-h.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-i",
    "name": "I",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-i.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-j",
    "name": "J",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-j.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-k",
    "name": "K",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-k.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-l",
    "name": "L",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-l.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-m",
    "name": "M",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-m.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-n",
@@ -2324,28 +2337,28 @@
    "name": "O",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-o.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-p",
    "name": "P",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-p.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-q",
    "name": "Q",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-q.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-r",
    "name": "R",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-r.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-s",
@@ -2359,28 +2372,28 @@
    "name": "T",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-t.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-u",
    "name": "U",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-u.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-v",
    "name": "V",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-v.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-w",
    "name": "W",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-w.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-x",
@@ -2394,28 +2407,28 @@
    "name": "Y",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-y.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-z",
    "name": "Z",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-z.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-0",
    "name": "0",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-0.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-1",
    "name": "1",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-1.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-2",
@@ -2429,49 +2442,49 @@
    "name": "3",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-3.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-4",
    "name": "4",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-4.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-5",
    "name": "5",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-5.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-6",
    "name": "6",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-6.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-7",
    "name": "7",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-7.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-8",
    "name": "8",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-8.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "abc-9",
    "name": "9",
    "welt": "Buchstaben & Zahlen bunt",
    "datei": "abc-9.png",
-   "k": 3
+   "k": 2
   },
   {
    "id": "wetter-sonne",
@@ -2573,7 +2586,8 @@
    "id": "wetter-regenschirm",
    "name": "Regenschirm",
    "welt": "Wetter & Himmel",
-   "datei": "wetter-regenschirm.png"
+   "datei": "wetter-regenschirm.png",
+   "aehnlich": 8
   },
   {
    "id": "wetter-regenschirm-regen",
@@ -2597,19 +2611,22 @@
    "id": "wetter-mond-gesicht",
    "name": "Mond mit Gesicht",
    "welt": "Wetter & Himmel",
-   "datei": "wetter-mond-gesicht.png"
+   "datei": "wetter-mond-gesicht.png",
+   "aehnlich": 15
   },
   {
    "id": "wetter-vollmond",
    "name": "Vollmond",
    "welt": "Wetter & Himmel",
-   "datei": "wetter-vollmond.png"
+   "datei": "wetter-vollmond.png",
+   "aehnlich": 15
   },
   {
    "id": "wetter-neumond",
    "name": "Neumond mit Gesicht",
    "welt": "Wetter & Himmel",
-   "datei": "wetter-neumond.png"
+   "datei": "wetter-neumond.png",
+   "aehnlich": 8
   },
   {
    "id": "wetter-stern",
@@ -2651,7 +2668,8 @@
    "id": "wetter-nebel",
    "name": "Nebel",
    "welt": "Wetter & Himmel",
-   "datei": "wetter-nebel.png"
+   "datei": "wetter-nebel.png",
+   "aehnlich": 0
   },
   {
    "id": "wetter-wirbel",
@@ -2945,7 +2963,8 @@
    "id": "emoji-pokal",
    "name": "Pokal",
    "welt": "Emojis & Gefühle",
-   "datei": "emoji-pokal.png"
+   "datei": "emoji-pokal.png",
+   "aehnlich": 15
   },
   {
    "id": "fig-geburtstagstorte",
@@ -2963,7 +2982,8 @@
    "id": "fig-panda-ballons",
    "name": "Panda mit Luftballons",
    "welt": "Geburtstag & Party",
-   "datei": "fig-panda-ballons.png"
+   "datei": "fig-panda-ballons.png",
+   "aehnlich": 40
   },
   {
    "id": "fig-monster-ballons",
@@ -3017,7 +3037,8 @@
    "id": "fig-partytroete",
    "name": "Partytöte",
    "welt": "Geburtstag & Party",
-   "datei": "fig-partytroete.png"
+   "datei": "fig-partytroete.png",
+   "k": 6
   },
   {
    "id": "tiere-nilpferd",
@@ -3053,7 +3074,8 @@
    "id": "tiere-leopard",
    "name": "Leopard",
    "welt": "Tierwelt",
-   "datei": "tiere-leopard.png"
+   "datei": "tiere-leopard.png",
+   "aehnlich": 40
   },
   {
    "id": "tiere-panda",
@@ -3264,7 +3286,8 @@
    "id": "fig-koch-pinguin",
    "name": "Pinguin als Koch",
    "welt": "Küche & Restaurant",
-   "datei": "koch-pinguin.png"
+   "datei": "koch-pinguin.png",
+   "aehnlich": 40
   },
   {
    "id": "fig-koch-eule",
@@ -3336,13 +3359,15 @@
    "id": "fig-kirschen",
    "name": "Kirschen",
    "welt": "Küche & Restaurant",
-   "datei": "kirschen.png"
+   "datei": "kirschen.png",
+   "aehnlich": 50
   },
   {
    "id": "fig-zitrone",
    "name": "Zitrone",
    "welt": "Küche & Restaurant",
-   "datei": "zitrone.png"
+   "datei": "zitrone.png",
+   "aehnlich": 50
   },
   {
    "id": "fig-hotdog-mann",
@@ -3602,13 +3627,15 @@
    "id": "berg-v-abendrot",
    "name": "Alpen im Abendrot",
    "welt": "Berge",
-   "datei": "berg-v-abendrot.png"
+   "datei": "berg-v-abendrot.png",
+   "aehnlich": 40
   },
   {
    "id": "berg-v-eisgipfel",
    "name": "Eisgipfel",
    "welt": "Berge",
-   "datei": "berg-v-eisgipfel.png"
+   "datei": "berg-v-eisgipfel.png",
+   "aehnlich": 40
   },
   {
    "id": "berg-v-schneekette",
@@ -3626,7 +3653,8 @@
    "id": "berg-v-gruener-gipfel",
    "name": "Grüner Gipfel",
    "welt": "Berge",
-   "datei": "berg-v-gruener-gipfel.png"
+   "datei": "berg-v-gruener-gipfel.png",
+   "aehnlich": 40
   },
   {
    "id": "berg-v-wanderer-hund",
@@ -4303,7 +4331,8 @@
    "id": "fig-rose-d",
    "name": "Rosenblüte",
    "welt": "Liebe & Hochzeit",
-   "datei": "rose-d.png"
+   "datei": "rose-d.png",
+   "aehnlich": 40
   },
   {
    "id": "fig-ballon-herz-a",
@@ -4405,7 +4434,8 @@
    "id": "weih-baum-ketten",
    "name": "Tannenbaum mit Lichterkette",
    "welt": "Weihnachten",
-   "datei": "weih-baum-ketten.png"
+   "datei": "weih-baum-ketten.png",
+   "aehnlich": 50
   },
   {
    "id": "weih-panda-muetze",
@@ -4465,7 +4495,8 @@
    "id": "weih-wichtel-zuckerstange",
    "name": "Wichtel mit Zuckerstange",
    "welt": "Weihnachten",
-   "datei": "weih-wichtel-zuckerstange.png"
+   "datei": "weih-wichtel-zuckerstange.png",
+   "aehnlich": 40
   },
   {
    "id": "weih-wichtel-gesicht",
@@ -4561,7 +4592,8 @@
    "id": "weih-adventskranz",
    "name": "Adventskranz",
    "welt": "Weihnachten",
-   "datei": "weih-adventskranz.png"
+   "datei": "weih-adventskranz.png",
+   "aehnlich": 40
   },
   {
    "id": "weih-engel",
@@ -4579,13 +4611,15 @@
    "id": "weih-engel-alpaka",
    "name": "Alpaka-Engel",
    "welt": "Weihnachten",
-   "datei": "weih-engel-alpaka.png"
+   "datei": "weih-engel-alpaka.png",
+   "aehnlich": 50
   },
   {
    "id": "weih-kerze-stechpalme",
    "name": "Kerze mit Stechpalme",
    "welt": "Weihnachten",
-   "datei": "weih-kerze-stechpalme.png"
+   "datei": "weih-kerze-stechpalme.png",
+   "aehnlich": 40
   },
   {
    "id": "weih-stechpalme",
@@ -4761,7 +4795,8 @@
    "id": "kontinent-panda",
    "name": "Panda (Asien)",
    "welt": "Flaggen & Kontinente",
-   "datei": "kontinent-panda.png"
+   "datei": "kontinent-panda.png",
+   "aehnlich": 15
   },
   {
    "id": "kontinent-tiger",
@@ -4869,7 +4904,8 @@
    "id": "wald-eule-buch",
    "name": "Eule auf Buch",
    "welt": "Wald & Wiese",
-   "datei": "wald-eule-buch.png"
+   "datei": "wald-eule-buch.png",
+   "aehnlich": 50
   },
   {
    "id": "wald-fuchs",
@@ -4941,7 +4977,8 @@
    "id": "wald-pilz-raupe",
    "name": "Raupe auf Pilz",
    "welt": "Wald & Wiese",
-   "datei": "wald-pilz-raupe.png"
+   "datei": "wald-pilz-raupe.png",
+   "aehnlich": 50
   },
   {
    "id": "wald-pilz-gesicht",
@@ -4989,7 +5026,8 @@
    "id": "wald-biene-spiegel",
    "name": "Bienenmädchen",
    "welt": "Wald & Wiese",
-   "datei": "wald-biene-spiegel.png"
+   "datei": "wald-biene-spiegel.png",
+   "aehnlich": 40
   },
   {
    "id": "wald-schmetterling-rosa",
@@ -5145,7 +5183,8 @@
    "id": "fest-kerze",
    "name": "Kerze",
    "welt": "Schweizer Feste",
-   "datei": "fest-kerze.png"
+   "datei": "fest-kerze.png",
+   "aehnlich": 18
   },
   {
    "id": "fest-stern",
@@ -5224,7 +5263,8 @@
    "id": "fest-nest",
    "name": "Nest mit Eiern",
    "welt": "Schweizer Feste",
-   "datei": "fest-nest.png"
+   "datei": "fest-nest.png",
+   "k": 6
   },
   {
    "id": "fest-tulpe",
@@ -5272,7 +5312,8 @@
    "id": "fest-trauben",
    "name": "Trauben",
    "welt": "Schweizer Feste",
-   "datei": "fest-trauben.png"
+   "datei": "fest-trauben.png",
+   "aehnlich": 18
   },
   {
    "id": "fest-pilz",
@@ -5518,7 +5559,8 @@
    "id": "fig-punk-eule",
    "name": "Rocker-Eule",
    "welt": "Kreativ & Basteln",
-   "datei": "punk-eule.png"
+   "datei": "punk-eule.png",
+   "aehnlich": 40
   },
   {
    "id": "ostern-hase-ei",
@@ -5548,19 +5590,22 @@
    "id": "ostern-ei-lila",
    "name": "Osterei lila gestreift",
    "welt": "Ostern",
-   "datei": "ostern-ei-lila.png"
+   "datei": "ostern-ei-lila.png",
+   "aehnlich": 50
   },
   {
    "id": "ostern-ei-rot",
    "name": "Osterei rot gewellt",
    "welt": "Ostern",
-   "datei": "ostern-ei-rot.png"
+   "datei": "ostern-ei-rot.png",
+   "aehnlich": 38
   },
   {
    "id": "ostern-ei-gelb",
    "name": "Osterei gelb getupft",
    "welt": "Ostern",
-   "datei": "ostern-ei-gelb.png"
+   "datei": "ostern-ei-gelb.png",
+   "aehnlich": 40
   },
   {
    "id": "ostern-ei-zickzack",
@@ -5704,7 +5749,8 @@
    "id": "zirkus-direktor",
    "name": "Zirkusdirektor",
    "welt": "Zirkus",
-   "datei": "zirkus-direktor.png"
+   "datei": "zirkus-direktor.png",
+   "aehnlich": 45
   },
   {
    "id": "zirkus-clown-eis",
@@ -6022,7 +6068,8 @@
    "id": "musik-eule-gitarre",
    "name": "Eule mit Gitarre",
    "welt": "Musik",
-   "datei": "musik-eule-gitarre.png"
+   "datei": "musik-eule-gitarre.png",
+   "aehnlich": 40
   },
   {
    "id": "musik-trompete-gelb",
@@ -6070,7 +6117,8 @@
    "id": "musik-saxofonist",
    "name": "Saxofonist",
    "welt": "Musik",
-   "datei": "musik-saxofonist.png"
+   "datei": "musik-saxofonist.png",
+   "aehnlich": 18
   },
   {
    "id": "schule-junge",
@@ -6946,13 +6994,15 @@
    "id": "fz-vw-bus",
    "name": "VW-Bus (Bulli)",
    "welt": "Fahrzeuge",
-   "datei": "fz-vw-bus.png"
+   "datei": "fz-vw-bus.png",
+   "aehnlich": 40
   },
   {
    "id": "fz-vw-kaefer",
    "name": "VW Käfer",
    "welt": "Fahrzeuge",
-   "datei": "fz-vw-kaefer.png"
+   "datei": "fz-vw-kaefer.png",
+   "aehnlich": 40
   },
   {
    "id": "fz-citroen-2cv",
@@ -6976,13 +7026,15 @@
    "id": "fz-ferrari",
    "name": "Ferrari 458 Spider",
    "welt": "Fahrzeuge",
-   "datei": "fz-ferrari.png"
+   "datei": "fz-ferrari.png",
+   "aehnlich": 40
   },
   {
    "id": "fz-tesla",
    "name": "Tesla Model S",
    "welt": "Fahrzeuge",
-   "datei": "fz-tesla.png"
+   "datei": "fz-tesla.png",
+   "aehnlich": 40
   },
   {
    "id": "fz-mercedes",
@@ -7024,7 +7076,8 @@
    "id": "fz-formel1",
    "name": "Formel-1-Rennwagen",
    "welt": "Fahrzeuge",
-   "datei": "fz-formel1.png"
+   "datei": "fz-formel1.png",
+   "aehnlich": 40
   },
   {
    "id": "fz-airbus",
@@ -7090,7 +7143,8 @@
    "id": "fz-lok",
    "name": "Lokomotive",
    "welt": "Fahrzeuge",
-   "datei": "fz-lok.png"
+   "datei": "fz-lok.png",
+   "aehnlich": 40
   },
   {
    "id": "fz-dampflok",
@@ -7132,7 +7186,8 @@
    "id": "fz-monstertruck",
    "name": "Monstertruck",
    "welt": "Fahrzeuge",
-   "datei": "fz-monstertruck.png"
+   "datei": "fz-monstertruck.png",
+   "aehnlich": 40
   },
   {
    "id": "fz-glacewagen",
@@ -7156,7 +7211,8 @@
    "id": "fz-taxi",
    "name": "Taxi",
    "welt": "Fahrzeuge",
-   "datei": "fz-taxi.png"
+   "datei": "fz-taxi.png",
+   "aehnlich": 0
   },
   {
    "id": "fz-helikopter",
