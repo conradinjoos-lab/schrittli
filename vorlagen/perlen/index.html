@@ -531,12 +531,12 @@ function liste(){
   $('nur-passend').addEventListener('change',()=>{S.nurPassend=$('nur-passend').checked;try{localStorage.setItem('schrittli.perlen.nurPassend',S.nurPassend?'1':'0')}catch(e){}auswahl()});
   $('suche').addEventListener('input',auswahl);
   $('zurueck').addEventListener('click',()=>oeffnen(null));
-  if(q.has('tier'))offen=gruppeVon(TIERE.find(t=>t.id===S.tier));   // Link auf ein Muster: sein Thema gleich offen
+  if(gewaehlt)offen=gruppeVon(aktuellesTier());   // Link auf ein Muster: sein Thema gleich offen
   auswahl();
   $('tiere').addEventListener('click',e=>{
     const kat=e.target.closest('.kat');
     if(kat){oeffnen(kat.dataset.g);$('zurueck').scrollIntoView({behavior:'smooth',block:'start'});return}
-    const k=e.target.closest('.tier');if(!k)return;S.tier=k.dataset.id;zeichnen();
+    const k=e.target.closest('.tier');if(!k)return;S.tier=k.dataset.id;gewaehlt=true;zeichnen();
     if(matchMedia('(max-width:860px)').matches)$('vorschau').scrollIntoView({behavior:'smooth',block:'start'})});
   $('perlen').innerHTML=Object.entries(PERLEN).map(([k,p])=>`<button type="button" class="chip" data-p="${k}" aria-pressed="false">${p.name}</button>`).join('');
   $('perlen').addEventListener('click',e=>{const k=e.target.closest('.chip');if(!k)return;S.perle=k.dataset.p;zeichnen()});
@@ -555,12 +555,13 @@ function zeichnen(){
   $('figuren-hinweis').textContent=t.offsets?'Flaches Figurenmuster: Reihen seitlich wie in der Vorlage ausrichten. Gestrichelte Perlen sind transparent und verbinden getrennte Motivteile. Die Figuren brauchen mehr Perlen und Geduld als die einfachen Tiere.':t.vereinfachung?`Kleines Motiv, ${ART[t.vereinfachung]||t.vereinfachung}: höchstens 14 Perlen breit, wenige Farben. Jede Reihe liegt mittig unter der vorherigen.`+teileText:(zaehlen(t).z.t?'Gestrichelte Perlen sind transparente Stützperlen. Sie gehören zur Reihe und halten die ausgesparten Zwischenräume offen.':'')+teileText;
   $('vergleich').hidden=!t.quelle;
   if(t.quelle){$('original-bild').src=(t.offsets?'originale/':'../figuren/bilder/')+t.quelle+'.webp?v='+(t.version||2);$('original-bild').alt='Original: '+t.name;$('vergleich-muster').innerHTML=mini(t)}
-  const p=new URLSearchParams({tier:t.id,klasse:S.klasse});if(S.perle!=='r3')p.set('perle',S.perle);
+  const p=new URLSearchParams(gewaehlt?{tier:t.id,klasse:S.klasse}:{klasse:S.klasse});if(S.perle!=='r3')p.set('perle',S.perle);   // ohne Auswahl kein Muster in der Adresse: Neuladen zeigt wieder die Themen
   try{history.replaceState(null,'','?'+p)}catch(e){}
   document.title=`Schritt für Schritt · Perlentier ${t.name}`;
 }
 const q=new URLSearchParams(location.search);
-if(TIERE.some(t=>t.id===q.get('tier')))S.tier=q.get('tier');
+let gewaehlt=TIERE.some(t=>t.id===q.get('tier'));   // Muster gewählt oder verlinkt
+if(gewaehlt)S.tier=q.get('tier');
 if(PERLEN[q.get('perle')])S.perle=q.get('perle');
 liste();zeichnen();
 $('drucken').addEventListener('click',()=>window.print());

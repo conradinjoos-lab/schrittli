@@ -12,9 +12,10 @@ const crypto=require('node:crypto');
 const root=path.resolve(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const nodes=new Map();
-function element(){return {value:'',innerHTML:'',textContent:'',hidden:false,dataset:{},classList:{toggle(){}},addEventListener(){},setAttribute(){},scrollIntoView(){}}}
+function element(){return {value:'',innerHTML:'',textContent:'',hidden:false,dataset:{},on:{},classList:{toggle(){}},addEventListener(t,f){this.on[t]=f},setAttribute(){},scrollIntoView(){}}}
+let adresse='';
 const ctx=vm.createContext({console,URLSearchParams,window:{},location:{search:'',protocol:'http:'},
-  localStorage:{getItem(){return null},setItem(){}},history:{replaceState(){}},matchMedia:()=>({matches:false}),
+  localStorage:{getItem(){return null},setItem(){}},history:{replaceState(a,b,u){adresse=u}},matchMedia:()=>({matches:false}),
   document:{getElementById(id){if(!nodes.has(id))nodes.set(id,element());return nodes.get(id)},querySelectorAll(){return []}},
 });
 vm.runInContext(read('vorlagen/perlen/figuren.js'),ctx);
@@ -23,6 +24,7 @@ vm.runInContext(read('vorlagen/perlen/bearbeiten.js'),ctx);
 ctx.PerlenEditor=ctx.window.PerlenEditor;
 const html=read('vorlagen/perlen/index.html');
 for(const m of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))if(m[1].trim())vm.runInContext(m[1],ctx);
+assert.ok(!adresse.includes('tier='),'Ohne Auswahl kein Muster in der Adresse, damit Neuladen wieder die Themen zeigt');
 const manifest=JSON.parse(read('werkzeug/vorlagen/figuren.json'));
 const sichtpruefung=JSON.parse(read('werkzeug/vorlagen/perlen-sichtpruefung.json'));
 const korrekturen=JSON.parse(read('werkzeug/vorlagen/perlen-korrekturen.json'));
@@ -114,6 +116,13 @@ assert.ok(!nodes.get('tiere').innerHTML.includes('pikachu'));
 assert.ok(nodes.get('tiere').innerHTML.includes('klein-mario'));
 assert.ok(nodes.get('tiere').innerHTML.includes('figur-mario'));
 assert.ok(nodes.get('tiere').innerHTML.indexOf('klein-mario')<nodes.get('tiere').innerHTML.indexOf('figur-mario'),'Kleine Motive vor den grossen');
+// Klick auf eine Themen-Kachel und auf ein Muster wie im Browser
+{const klick=(sel,daten)=>nodes.get('tiere').on.click({target:{closest:s=>s===sel?{dataset:daten}:null}});
+  vm.runInContext('oeffnen(null)',ctx);klick('.kat',{g:'Tiere'});
+  assert.match(nodes.get('treffer').textContent,/Muster im Thema «Tiere»/);assert.ok(!nodes.get('zurueck').hidden);
+  klick('.tier',{id:'klein-mario'});
+  assert.match(adresse,/tier=klein-mario/,'Gewähltes Muster steht in der Adresse');
+  nodes.get('zurueck').on.click();assert.ok(nodes.get('zurueck').hidden&&nodes.get('tiere').innerHTML.includes('class="kat"'),'Zurück zu allen Themen');}
 assert.ok(!ctx.PerlenEditor.gueltig({rows:['invalid'],beine:[]},{a:[]}));
 assert.ok(!ctx.PerlenEditor.gueltig({rows:['a'],beine:[{r:9,n:2,f:1,a:0,c:'a',fc:'a'}]},{a:[]}));
 assert.ok(!ctx.PerlenEditor.gueltig({rows:['aa'],offsets:[2],gridWidth:3},{a:[]}));
