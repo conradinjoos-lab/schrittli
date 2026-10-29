@@ -1627,23 +1627,23 @@ def s_schloss():
     return c
 def s_munot():
     """Schaffhausen: Munot über den Dächern der Altstadt, Ansicht von Südwesten (nach Fotos gezeichnet)."""
-    c = C(3000, 1800); G = 1700; H = 1080; T = 640
-    c.add(glatt([(0, G-190), (450, G-250), (850, H+170), (1150, H+30), (2300, H+30), (2650, H+230), (3000, G-200)], 8) + [(3000, G), (0, G)])
+    c = C(3000, 1800); G = 1700; H = 1080; T = 760; L = 1000; R = 2450   # Rundbau breit und niedrig
+    c.add(glatt([(0, G-190), (300, G-250), (700, H+170), (950, H+30), (2500, H+30), (2800, H+230), (3000, G-200)], 8) + [(3000, G), (0, G)])
     # Rundbau: breit, flache Krone mit Gesims
-    c.add([(1250, H+80), (1250, T+24), (2236, T+24), (2250, T+60), (2250, H+80)])
-    c.rect(1240, T-6, 2246, T+26)
-    # Treppenturm: Galerie, steiles Zeltdach, Laterne, Helmstange mit Knauf
-    c.rect(1150, T-250, 1350, H+80); c.rect(1132, T-268, 1368, T-232)
-    c.add([(1118, T-262), (1382, T-262), (1268, T-470), (1232, T-470)])
-    c.rect(1232, T-520, 1268, T-462); c.add([(1220, T-516), (1280, T-516), (1250, T-560)])
-    c.rect(1247, T-625, 1253, T-556); c.circ(1250, T-596, 11)
+    c.add([(L, H+80), (L, T+24), (R-14, T+24), (R, T+60), (R, H+80)])
+    c.rect(L-10, T-6, R-4, T+26)
+    # Treppenturm: nur wenig höher als der Rundbau, Galerie, Zeltdach, Laterne, Helmstange mit Knauf
+    c.rect(L-100, T-150, L+100, H+80); c.rect(L-118, T-168, L+118, T-132)
+    c.add([(L-132, T-162), (L+132, T-162), (L+18, T-330), (L-18, T-330)])
+    c.rect(L-18, T-375, L+18, T-322); c.add([(L-30, T-371), (L+30, T-371), (L, T-410)])
+    c.rect(L-3, T-470, L+3, T-406); c.circ(L, T-442, 11)
     # Wehrgang zum Turm hin, Fahne auf dem Rundbau
-    c.add([(960, H+140), (1150, H-140), (1150, H+80)])
-    c.rect(2117, T-170, 2123, T); c.add([(2123, T-170), (2215, T-158), (2210, T-110), (2123, T-118)])
+    c.add([(L-290, H+140), (L-100, H-140), (L-100, H+80)])
+    c.rect(R-133, T-170, R-127, T); c.add([(R-127, T-170), (R-35, T-158), (R-40, T-110), (R-127, T-118)])
     # Bäume am Hang, Wachtturm rechts
-    for x_, y_, r in [(2350, H-30, 95), (2440, H-110, 120), (2545, H-20, 90), (2420, H+40, 90), (640, H+250, 80), (740, H+180, 100), (850, H+220, 75)]:
+    for x_, y_, r in [(2560, H-10, 95), (2650, H-90, 115), (2750, H, 90), (2630, H+60, 90), (440, H+250, 80), (540, H+180, 100), (650, H+220, 75)]:
         c.circ(x_, y_, r)
-    c.rect(2700, H+20, 2780, H+330); c.add([(2690, H+20), (2790, H+20), (2740, H-60)])
+    c.rect(2860, H+60, 2940, H+330); c.add([(2850, H+60), (2950, H+60), (2900, H-20)])
     # Altstadtdächer vorne, mit Kaminen
     x = -20
     for w, h, d in [(200, 250, 'sattel'), (170, 290, 'walm'), (230, 240, 'sattel'), (180, 300, 'sattel'), (210, 260, 'walm')]:
