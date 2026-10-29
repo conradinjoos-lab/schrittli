@@ -3690,6 +3690,27 @@
    "k": 1
   },
   {
+   "id": "berg-v-sil-pyramidengipfel",
+   "name": "Pyramidengipfel – Silhouette",
+   "welt": "Berge",
+   "datei": "berg-v-sil-pyramidengipfel.png",
+   "k": 1
+  },
+  {
+   "id": "berg-v-sil-alpengrat",
+   "name": "Alpengrat – Silhouette",
+   "welt": "Berge",
+   "datei": "berg-v-sil-alpengrat.png",
+   "k": 1
+  },
+  {
+   "id": "berg-v-sil-alpenpanorama",
+   "name": "Alpenpanorama – Silhouette",
+   "welt": "Berge",
+   "datei": "berg-v-sil-alpenpanorama.png",
+   "k": 1
+  },
+  {
    "id": "stadt-zuerich",
    "name": "Zürich",
    "welt": "Städte",
@@ -4099,6 +4120,69 @@
    "name": "Grossstadt 4 – Skyline",
    "welt": "Städte",
    "datei": "stadt-oc-grossstadt-4.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-v-zuerich",
+   "name": "Zürich – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-v-zuerich.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-v-bern",
+   "name": "Bern – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-v-bern.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-v-bern-altstadt",
+   "name": "Bern – Altstadt-Skyline",
+   "welt": "Städte",
+   "datei": "stadt-v-bern-altstadt.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-v-bundeshaus",
+   "name": "Bern – Bundeshaus",
+   "welt": "Städte",
+   "datei": "stadt-v-bundeshaus.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-v-genf",
+   "name": "Genf – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-v-genf.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-v-genf-altstadt",
+   "name": "Genf – Altstadt-Skyline",
+   "welt": "Städte",
+   "datei": "stadt-v-genf-altstadt.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-v-lausanne",
+   "name": "Lausanne – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-v-lausanne.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-v-stgallen",
+   "name": "St. Gallen – Stiftskirche",
+   "welt": "Städte",
+   "datei": "stadt-v-stgallen.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-v-schweiz",
+   "name": "Schweizer Städte – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-v-schweiz.png",
    "k": 1
   },
   {

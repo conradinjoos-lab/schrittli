@@ -9,7 +9,7 @@ Quelle jeder Grafik: `https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg
 
 **Openclipart** (CC0 1.0, https://creativecommons.org/publicdomain/zero/1.0/): keine Nennung nötig, Autor und Seite trotzdem aufgeführt.
 
-**Vecteezy** (https://de.vecteezy.com): elf Bilder (zehn Berge, eine Bärentatze) aus den Favoriten der Schule, kostenlos geladen unter der **Vecteezy Free License** (https://www.vecteezy.com/licensing-agreement), nicht CC0: Nennung nötig, Bilder nicht einzeln weiterverkaufen oder als eigene Grafik anbieten. Nennung: «Grafiken von Vecteezy.com», Autor je Bild in der Tabelle. Das Foto «Alpen im Abendrot» wurde für Schrittli freigestellt (Himmel entfernt). Aus acht dieser Bergbilder wurden zusätzlich schwarze Silhouetten abgeleitet (IDs `berg-v-sil-…`); sie stehen unter derselben Lizenz und nennen denselben Autor.
+**Vecteezy** (https://de.vecteezy.com): elf Bilder (zehn Berge, eine Bärentatze) aus den Favoriten der Schule, kostenlos geladen unter der **Vecteezy Free License** (https://www.vecteezy.com/licensing-agreement), nicht CC0: Nennung nötig, Bilder nicht einzeln weiterverkaufen oder als eigene Grafik anbieten. Nennung: «Grafiken von Vecteezy.com», Autor je Bild in der Tabelle. Das Foto «Alpen im Abendrot» wurde für Schrittli freigestellt (Himmel entfernt). Aus acht dieser Bergbilder wurden zusätzlich schwarze Silhouetten abgeleitet (IDs `berg-v-sil-…`); sie stehen unter derselben Lizenz und nennen denselben Autor. Mit dem Pro-Konto der Schule kamen neun Schweizer Skylines (IDs `stadt-v-…`) und drei Bergfotos dazu, aus denen nur schwarze Silhouetten abgeleitet wurden; sie stehen unter der **Vecteezy Pro-Lizenz** (keine Nennung nötig, Autor trotzdem aufgeführt).
 
 Alle übrigen Quellen sind frei nutzbar (CC0 oder CC-BY mit Nennung); nichts stammt von Flaticon.
 
@@ -198,7 +198,7 @@ Flaggen und Tiere: Twemoji (siehe oben); Kontinente und Weltkarte: Openclipart (
 
 ## Berge
 
-Die 30 gezeichneten Berge sind eigene Zeichnungen (CC0), es wurde keine Vorlage kopiert: Silhouetten schwarz auf durchsichtig mit `werkzeug/vorlagen/silhouetten.py`, realistische Felsbilder und farbige Comic-Berge mit schwarzen Umrisslinien mit `werkzeug/vorlagen/landschaften.py`. Elf IDs ersetzen frühere Fremdbilder (Vecteezy, nicht CC0). Dazu kommen zehn Bilder von Vecteezy (IDs `berg-v-…`, Tabelle unten) und acht daraus abgeleitete schwarze Silhouetten (IDs `berg-v-sil-…`).
+Die 30 gezeichneten Berge sind eigene Zeichnungen (CC0), es wurde keine Vorlage kopiert: Silhouetten schwarz auf durchsichtig mit `werkzeug/vorlagen/silhouetten.py`, realistische Felsbilder und farbige Comic-Berge mit schwarzen Umrisslinien mit `werkzeug/vorlagen/landschaften.py`. Elf IDs ersetzen frühere Fremdbilder (Vecteezy, nicht CC0). Dazu kommen zehn Bilder von Vecteezy (IDs `berg-v-…`, Tabelle unten) und acht daraus abgeleitete schwarze Silhouetten (IDs `berg-v-sil-…`), dazu drei Silhouetten aus Vecteezy-Bergfotos (Pro-Lizenz, Gratlinie aus dem Foto nachgezogen).
 
 | Motiv | Figur-ID | Skript | Autor | Lizenz |
 |---|---|---|---|---|
@@ -255,6 +255,9 @@ Von Vecteezy (Vecteezy Free License, nicht CC0):
 | Zackige Bergkette – Silhouette (abgeleitet) | berg-v-sil-schneekette | https://de.vecteezy.com/png/47920960 | Md. Yousuf Ibrahim | Vecteezy Free License, Nennung «Vecteezy.com» |
 | Doppelgipfel – Silhouette (abgeleitet) | berg-v-sil-nebelberge | https://de.vecteezy.com/png/59370248 | Mr Sufi | Vecteezy Free License, Nennung «Vecteezy.com» |
 | Spitzer Gipfel – Silhouette (abgeleitet) | berg-v-sil-gruener-gipfel | https://de.vecteezy.com/png/60120905 | Muhammad Muzamil | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Pyramidengipfel – Silhouette (abgeleitet) | berg-v-sil-pyramidengipfel | https://de.vecteezy.com/foto/68597422 | Adisak Tarisoon | Vecteezy Pro-Lizenz, Nennung «Vecteezy.com» |
+| Alpengrat – Silhouette (abgeleitet) | berg-v-sil-alpengrat | https://de.vecteezy.com/foto/34355840 | Md Imranul Rahman | Vecteezy Pro-Lizenz, Nennung «Vecteezy.com» |
+| Alpenpanorama – Silhouette (abgeleitet) | berg-v-sil-alpenpanorama | https://de.vecteezy.com/foto/39659663 | Gerardo Giuseppe Ramos Granada | Vecteezy Pro-Lizenz, Nennung «Vecteezy.com» |
 
 ## Städte
 
@@ -327,6 +330,20 @@ Dazu kommen 22 Skylines von Openclipart (CC0, IDs `stadt-oc-…`): schwarz gezei
 | Grossstadt 2 – Skyline | stadt-oc-grossstadt-2 | https://openclipart.org/detail/282881 | GDJ | CC0 1.0 |
 | Grossstadt 3 – Skyline | stadt-oc-grossstadt-3 | https://openclipart.org/detail/282544 | GDJ | CC0 1.0 |
 | Grossstadt 4 – Skyline | stadt-oc-grossstadt-4 | https://openclipart.org/detail/281699 | GDJ | CC0 1.0 |
+
+Dazu kommen neun Schweizer Skylines und Wahrzeichen von Vecteezy (Pro-Lizenz, IDs `stadt-v-…`): Schrift, Vögel, Spiegelungen und graue Hintergrundhäuser entfernt, zu einem schwarzen Stück zusammengefasst; St. Gallen aus einer farbigen Illustration als Umriss gewonnen. Skripte im Arbeitsordner der Sitzung (`vzc_sil.py`, `vzc_sg.py`, `vzc_grat.py`, `vzc_berg.py`), nicht im Repo.
+
+| Motiv | Figur-ID | Seite | Autor | Lizenz |
+|---|---|---|---|---|
+| Zürich – Skyline | stadt-v-zuerich | https://de.vecteezy.com/vektorkunst/32208951 | Farwa Hussain | Vecteezy Pro-Lizenz, Nennung «Vecteezy.com» |
+| Bern – Skyline | stadt-v-bern | https://de.vecteezy.com/vektorkunst/32208943 | Farwa Hussain | Vecteezy Pro-Lizenz, Nennung «Vecteezy.com» |
+| Bern – Altstadt-Skyline | stadt-v-bern-altstadt | https://de.vecteezy.com/vektorkunst/17519654 | Igor Sorokin | Vecteezy Pro-Lizenz, Nennung «Vecteezy.com» |
+| Bern – Bundeshaus | stadt-v-bundeshaus | https://de.vecteezy.com/vektorkunst/8124869 | the lastmini | Vecteezy Pro-Lizenz, Nennung «Vecteezy.com» |
+| Genf – Skyline | stadt-v-genf | https://de.vecteezy.com/vektorkunst/42341890 | Marco Livolsi | Vecteezy Pro-Lizenz, Nennung «Vecteezy.com» |
+| Genf – Altstadt-Skyline | stadt-v-genf-altstadt | https://de.vecteezy.com/vektorkunst/88421973 | Iconiz Art | Vecteezy Pro-Lizenz, Nennung «Vecteezy.com» |
+| Lausanne – Skyline | stadt-v-lausanne | https://de.vecteezy.com/vektorkunst/42343238 | Marco Livolsi | Vecteezy Pro-Lizenz, Nennung «Vecteezy.com» |
+| St. Gallen – Stiftskirche | stadt-v-stgallen | https://de.vecteezy.com/vektorkunst/163322 | misfitblue | Vecteezy Pro-Lizenz, Nennung «Vecteezy.com» |
+| Schweizer Städte – Skyline | stadt-v-schweiz | https://de.vecteezy.com/vektorkunst/38513444 | Igor Sorokin | Vecteezy Pro-Lizenz, Nennung «Vecteezy.com» |
 
 ## Schweizer Feste
 

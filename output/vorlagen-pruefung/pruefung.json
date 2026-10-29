@@ -1,5 +1,5 @@
 {
-  "figuren": 1036,
+  "figuren": 1062,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -5322,6 +5322,33 @@
       ]
     },
     {
+      "id": "berg-v-sil-pyramidengipfel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        3200,
+        608
+      ]
+    },
+    {
+      "id": "berg-v-sil-alpengrat",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        3200,
+        720
+      ]
+    },
+    {
+      "id": "berg-v-sil-alpenpanorama",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        3200,
+        448
+      ]
+    },
+    {
       "id": "stadt-zuerich",
       "farbpixelIdentisch": true,
       "teile": 25,
@@ -5859,6 +5886,87 @@
       "pixel": [
         1600,
         249
+      ]
+    },
+    {
+      "id": "stadt-v-zuerich",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        3781,
+        717
+      ]
+    },
+    {
+      "id": "stadt-v-bern",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        3776,
+        1003
+      ]
+    },
+    {
+      "id": "stadt-v-bern-altstadt",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        3750,
+        686
+      ]
+    },
+    {
+      "id": "stadt-v-bundeshaus",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        3338,
+        2186
+      ]
+    },
+    {
+      "id": "stadt-v-genf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        3736,
+        682
+      ]
+    },
+    {
+      "id": "stadt-v-genf-altstadt",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        3840,
+        1147
+      ]
+    },
+    {
+      "id": "stadt-v-lausanne",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        3736,
+        743
+      ]
+    },
+    {
+      "id": "stadt-v-stgallen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1768,
+        1598
+      ]
+    },
+    {
+      "id": "stadt-v-schweiz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        3696,
+        532
       ]
     },
     {
@@ -9324,6 +9432,132 @@
       "pixel": [
         800,
         765
+      ]
+    },
+    {
+      "id": "maennchen-muskeln-orange",
+      "farbpixelIdentisch": true,
+      "teile": 12,
+      "pixel": [
+        506,
+        480
+      ]
+    },
+    {
+      "id": "maennchen-okay-gelb",
+      "farbpixelIdentisch": true,
+      "teile": 11,
+      "pixel": [
+        506,
+        506
+      ]
+    },
+    {
+      "id": "maennchen-gut-gemacht-blau",
+      "farbpixelIdentisch": true,
+      "teile": 10,
+      "pixel": [
+        478,
+        506
+      ]
+    },
+    {
+      "id": "maennchen-sehr-gut",
+      "farbpixelIdentisch": true,
+      "teile": 14,
+      "pixel": [
+        502,
+        506
+      ]
+    },
+    {
+      "id": "maennchen-ausgezeichnet",
+      "farbpixelIdentisch": true,
+      "teile": 15,
+      "pixel": [
+        486,
+        506
+      ]
+    },
+    {
+      "id": "maennchen-muskeln-umriss",
+      "farbpixelIdentisch": true,
+      "teile": 17,
+      "pixel": [
+        506,
+        480
+      ]
+    },
+    {
+      "id": "maennchen-good-job-ok",
+      "farbpixelIdentisch": true,
+      "teile": 11,
+      "pixel": [
+        506,
+        490
+      ]
+    },
+    {
+      "id": "maennchen-daumen-stern",
+      "farbpixelIdentisch": true,
+      "teile": 14,
+      "pixel": [
+        413,
+        500
+      ]
+    },
+    {
+      "id": "maennchen-zwei-daumen",
+      "farbpixelIdentisch": true,
+      "teile": 14,
+      "pixel": [
+        478,
+        506
+      ]
+    },
+    {
+      "id": "maennchen-great-job",
+      "farbpixelIdentisch": true,
+      "teile": 14,
+      "pixel": [
+        428,
+        506
+      ]
+    },
+    {
+      "id": "maennchen-verwirrt",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        438,
+        496
+      ]
+    },
+    {
+      "id": "maennchen-nachdenklich",
+      "farbpixelIdentisch": true,
+      "teile": 5,
+      "pixel": [
+        335,
+        504
+      ]
+    },
+    {
+      "id": "maennchen-laptop",
+      "farbpixelIdentisch": true,
+      "teile": 3,
+      "pixel": [
+        503,
+        414
+      ]
+    },
+    {
+      "id": "maennchen-nachdenklich-gelb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        335,
+        504
       ]
     }
   ],
