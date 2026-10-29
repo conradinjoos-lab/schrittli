@@ -1,5 +1,5 @@
 {
-  "figuren": 995,
+  "figuren": 1006,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -4593,6 +4593,15 @@
       ]
     },
     {
+      "id": "tiere-baerentatze",
+      "farbpixelIdentisch": true,
+      "teile": 11,
+      "pixel": [
+        1296,
+        1399
+      ]
+    },
+    {
       "id": "fig-pizzastueck-fett",
       "farbpixelIdentisch": true,
       "teile": 1,
@@ -5148,6 +5157,96 @@
       "pixel": [
         2314,
         1298
+      ]
+    },
+    {
+      "id": "berg-v-silhouette",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        299
+      ]
+    },
+    {
+      "id": "berg-v-gipfel-wald",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1394,
+        525
+      ]
+    },
+    {
+      "id": "berg-v-schneegipfel-tannen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        514
+      ]
+    },
+    {
+      "id": "berg-v-felsmassiv",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1397,
+        529
+      ]
+    },
+    {
+      "id": "berg-v-abendrot",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        262
+      ]
+    },
+    {
+      "id": "berg-v-eisgipfel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        800
+      ]
+    },
+    {
+      "id": "berg-v-schneekette",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        346
+      ]
+    },
+    {
+      "id": "berg-v-nebelberge",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        538
+      ]
+    },
+    {
+      "id": "berg-v-gruener-gipfel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        1202
+      ]
+    },
+    {
+      "id": "berg-v-wanderer-hund",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        1400,
+        1041
       ]
     },
     {

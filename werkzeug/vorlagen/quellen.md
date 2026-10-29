@@ -9,7 +9,9 @@ Quelle jeder Grafik: `https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg
 
 **Openclipart** (CC0 1.0, https://creativecommons.org/publicdomain/zero/1.0/): keine Nennung nötig, Autor und Seite trotzdem aufgeführt.
 
-Alle Quellen sind frei nutzbar (CC0 oder CC-BY mit Nennung); nichts stammt von Flaticon oder Vecteezy.
+**Vecteezy** (https://de.vecteezy.com): elf Bilder (zehn Berge, eine Bärentatze) aus den Favoriten der Schule, kostenlos geladen unter der **Vecteezy Free License** (https://www.vecteezy.com/licensing-agreement), nicht CC0: Nennung nötig, Bilder nicht einzeln weiterverkaufen oder als eigene Grafik anbieten. Nennung: «Grafiken von Vecteezy.com», Autor je Bild in der Tabelle. Das Foto «Alpen im Abendrot» wurde für Schrittli freigestellt (Himmel entfernt).
+
+Alle übrigen Quellen sind frei nutzbar (CC0 oder CC-BY mit Nennung); nichts stammt von Flaticon.
 
 ## Buchstaben & Zahlen bunt
 
@@ -196,7 +198,7 @@ Flaggen und Tiere: Twemoji (siehe oben); Kontinente und Weltkarte: Openclipart (
 
 ## Berge
 
-Alle 30 Berge sind eigene Zeichnungen (CC0), es wurde keine Vorlage kopiert: Silhouetten schwarz auf durchsichtig mit `werkzeug/vorlagen/silhouetten.py`, realistische Felsbilder und farbige Comic-Berge mit schwarzen Umrisslinien mit `werkzeug/vorlagen/landschaften.py`. Elf IDs ersetzen frühere Fremdbilder (Vecteezy, nicht CC0).
+Die 30 gezeichneten Berge sind eigene Zeichnungen (CC0), es wurde keine Vorlage kopiert: Silhouetten schwarz auf durchsichtig mit `werkzeug/vorlagen/silhouetten.py`, realistische Felsbilder und farbige Comic-Berge mit schwarzen Umrisslinien mit `werkzeug/vorlagen/landschaften.py`. Elf IDs ersetzen frühere Fremdbilder (Vecteezy, nicht CC0). Dazu kommen zehn Bilder von Vecteezy (IDs `berg-v-…`, Tabelle unten).
 
 | Motiv | Figur-ID | Skript | Autor | Lizenz |
 |---|---|---|---|---|
@@ -230,6 +232,21 @@ Alle 30 Berge sind eigene Zeichnungen (CC0), es wurde keine Vorlage kopiert: Sil
 | Bergsee (Comic) | berg-c-see | landschaften.py | eigene Zeichnung | CC0 |
 | Zelten in den Bergen (Comic) | berg-c-zelt | landschaften.py | eigene Zeichnung | CC0 |
 | Skifahren (Comic) | berg-c-ski | landschaften.py | eigene Zeichnung | CC0 |
+
+Von Vecteezy (Vecteezy Free License, nicht CC0):
+
+| Motiv | Figur-ID | URL | Autor | Lizenz |
+|---|---|---|---|---|
+| Bergsilhouette | berg-v-silhouette | https://de.vecteezy.com/png/15224537 | wisnu M | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Felsgipfel mit Wald | berg-v-gipfel-wald | https://de.vecteezy.com/png/26757841 | Pisut Tardging | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Schneegipfel mit Tannen | berg-v-schneegipfel-tannen | https://de.vecteezy.com/png/26772069 | Pisut Tardging | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Felsmassiv | berg-v-felsmassiv | https://de.vecteezy.com/png/26773189 | Pisut Tardging | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Alpen im Abendrot (freigestellt) | berg-v-abendrot | https://de.vecteezy.com/foto/39302541 | Hifzhan Graphics | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Eisgipfel | berg-v-eisgipfel | https://de.vecteezy.com/png/44808904 | Uzair Irfan | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Schneebedeckte Bergkette | berg-v-schneekette | https://de.vecteezy.com/png/47920960 | Md. Yousuf Ibrahim | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Blaue Nebelberge | berg-v-nebelberge | https://de.vecteezy.com/png/59370248 | Mr Sufi | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Grüner Gipfel | berg-v-gruener-gipfel | https://de.vecteezy.com/png/60120905 | Muhammad Muzamil | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Wanderer mit Hund | berg-v-wanderer-hund | https://de.vecteezy.com/png/85853787 | ABUL BASAR SIAM | Vecteezy Free License, Nennung «Vecteezy.com» |
 
 ## Städte
 
@@ -325,3 +342,11 @@ Twemoji (siehe oben) und eine Räbe von Openclipart (CC0), alle mit schwarzem Um
 | Glücksschwein | fest-glueckssau | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f437.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
 | Glückskäfer | fest-marienkaefer | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f41e.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
 | Räbe für das Räbeliechtli | fest-raebe | https://openclipart.org/detail/84079 | feraliminal | CC0 1.0 |
+
+## Tierwelt
+
+Die übrigen 26 Tiere stehen in `quellen-cc0.md`; diese Tatze stammt von Vecteezy.
+
+| Motiv | Figur-ID | URL | Autor | Lizenz |
+|---|---|---|---|---|
+| Bärentatze | tiere-baerentatze | https://de.vecteezy.com/png/86916938 | MDigitalArt Studio | Vecteezy Free License, Nennung «Vecteezy.com» |

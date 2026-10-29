@@ -3173,6 +3173,13 @@
    "datei": "tiere-baer-tanzend.png"
   },
   {
+   "id": "tiere-baerentatze",
+   "name": "Bärentatze",
+   "welt": "Tierwelt",
+   "datei": "tiere-baerentatze.png",
+   "k": 1
+  },
+  {
    "id": "fig-pizzastueck-fett",
    "name": "Pizzastück",
    "welt": "Küche & Restaurant",
@@ -3562,6 +3569,68 @@
    "name": "Skifahren (Comic)",
    "welt": "Berge",
    "datei": "berg-c-ski.png"
+  },
+  {
+   "id": "berg-v-silhouette",
+   "name": "Bergsilhouette",
+   "welt": "Berge",
+   "datei": "berg-v-silhouette.png",
+   "k": 1
+  },
+  {
+   "id": "berg-v-gipfel-wald",
+   "name": "Felsgipfel mit Wald",
+   "welt": "Berge",
+   "datei": "berg-v-gipfel-wald.png"
+  },
+  {
+   "id": "berg-v-schneegipfel-tannen",
+   "name": "Schneegipfel mit Tannen",
+   "welt": "Berge",
+   "datei": "berg-v-schneegipfel-tannen.png"
+  },
+  {
+   "id": "berg-v-felsmassiv",
+   "name": "Felsmassiv",
+   "welt": "Berge",
+   "datei": "berg-v-felsmassiv.png"
+  },
+  {
+   "id": "berg-v-abendrot",
+   "name": "Alpen im Abendrot",
+   "welt": "Berge",
+   "datei": "berg-v-abendrot.png"
+  },
+  {
+   "id": "berg-v-eisgipfel",
+   "name": "Eisgipfel",
+   "welt": "Berge",
+   "datei": "berg-v-eisgipfel.png"
+  },
+  {
+   "id": "berg-v-schneekette",
+   "name": "Schneebedeckte Bergkette",
+   "welt": "Berge",
+   "datei": "berg-v-schneekette.png"
+  },
+  {
+   "id": "berg-v-nebelberge",
+   "name": "Blaue Nebelberge",
+   "welt": "Berge",
+   "datei": "berg-v-nebelberge.png"
+  },
+  {
+   "id": "berg-v-gruener-gipfel",
+   "name": "Grüner Gipfel",
+   "welt": "Berge",
+   "datei": "berg-v-gruener-gipfel.png"
+  },
+  {
+   "id": "berg-v-wanderer-hund",
+   "name": "Wanderer mit Hund",
+   "welt": "Berge",
+   "datei": "berg-v-wanderer-hund.png",
+   "k": 1
   },
   {
    "id": "stadt-zuerich",
