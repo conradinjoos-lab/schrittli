@@ -1,6 +1,6 @@
 // Orte: Berge als Umrisse, Städte als Silhouetten, Schweiz und Alpen, Weltraum.
 'use strict';
-module.exports=({add,kopf,gesicht,ohr,stern})=>{
+module.exports=({add,kopf,gesicht,ohr,stern,teil})=>{
   const R=(c,n)=>c.repeat(n);
   // Berge: Dreiecke mit Schneekappe, Gipfelkreuz, Hütte, See oder Zelt am Fuss.
   const berg=(id,rows,beine=[])=>add('berg-'+id,rows,'Umriss',beine);
@@ -110,4 +110,46 @@ module.exports=({add,kopf,gesicht,ohr,stern})=>{
   rakete('weltraum-rakete-bordeaux','N','n','w');
   add('weltraum-rakete-schlank','w ww ww ww wbw wbw ww ww ww ww oo o','Symbol',[{r:9,n:2,f:1,a:-50,c:'r',fc:'r',w:'Flossen'}]);
   add('weltraum-ausserirdischer-brummig','gggg gggggg gssggssg gssggssg gggggggg ggssssgg gggggg gggg','Kopf',[ohr('g',2,1,80,'y')]);
+  // Berge, zweite Reihe: Fotos als farbige Umrisse, dazu die schwarzen Silhouetten.
+  berg('v-silhouette','ss ssss ssssssss ssssssssssss ssssssssssssss');
+  berg('v-gipfel-wald','n nnn nnnnn nnnnnnn ggggggggg ggggggggggg ddddddddddddd');
+  berg('v-schneegipfel-tannen','w www wwwww nnnnnnn nnnnnnnnn ddddddddddd ddddddddddddd');
+  berg('v-felsmassiv','nn nnnn wnnnnw nnnnnnnn nnnnnnnnnn nnnnnnnnnnnn nnnnnnnnnnnnnn');
+  berg('v-abendrot','p ppp qqqqq qqqqqqq vvvvvvvvv vvvvvvvvvvv vvvvvvvvvvvvv');
+  berg('v-eisgipfel','w www wwwww wlllllw lllllllll bbbbbbbbbbb bbbbbbbbbbbbb');
+  berg('v-schneekette','wnw wwnww wwwwwww nwwwwwwwn nnnwwwwwnnn nnnnnnnnnnnnn');
+  berg('v-nebelberge','b bbb bbbbb bbbbbbb lllllllll lllllllllll lllllllllllll');
+  berg('v-gruener-gipfel','g ggg ggggg hhhhhhh ggggggggg ddddddddddd ddddddddddddd');
+  add('berg-v-wanderer-hund','sssss ss ssss ssssss ssssss ssss ssss ssss ss','Silhouette',[],[teil('Hund',1,'rechts',6,'ss ssssss ssssss ssssss')]);
+  berg('v-sil-gipfel-wald','s sss sssss sssssss sssssssss sssssssssss sssssssssssss');
+  berg('v-sil-schneegipfel-tannen','ss ssss ssssss sssssssss ssssssssssss ssssssssssssss');
+  berg('v-sil-felsmassiv','ss ssss ssssss ssssssss ssssssssss ssssssssssss ssssssssssssss');
+  berg('v-sil-abendrot','ssss ssssssssss ssssssssssssss ssssssssssssss');
+  berg('v-sil-eisgipfel','s ss sss ssss ssssss ssssssss ssssssssss ssssssssssss');
+  berg('v-sil-schneekette','sss sssss sssssss sssssssss sssssssssss sssssssssssss');
+  berg('v-sil-nebelberge','ss sss ssssss ssssssss ssssssssssss ssssssssssssss');
+  berg('v-sil-gruener-gipfel','s s ss sss ssss sssss ssssss sssssss ssssssss');
+  // Skylines: ein Wahrzeichen in der Mitte, weisse Perlen sind Lücken zwischen den Häusern.
+  stadt('oc-berlin','s s sss sss s s s ssssssssss ssssssssssss');
+  stadt('oc-frankfurt','sswwss ssswwsss sssswwssss ssssssssssss ssssssssssssss');
+  stadt('oc-newyork','s s ss ss sswwss sswwss ssssssss ssssssssssss ssssssssssssss');
+  stadt('oc-chicago','swws swws ssss ssss ssssss ssssssss ssssssssssss ssssssssssssss');
+  stadt('oc-sydney','ss ssss ssssss sswsswss ssssssssssss ssssssssssssss');
+  stadt('oc-toronto','s s s sssss sss s s s ssssssss ssssssssssssss');
+  stadt('oc-boston','ss ssss ssssss ssswwsss ssssssssss ssssssssssssss');
+  stadt('oc-peking','ssss sswwss sswwss ssssssss ssssssssssss ssssssssssssss');
+  stadt('oc-singapur','ssssssssssss ssswwsswwsss ssswwsswwsss ssswwsswwsss ssssssssssssss');
+  stadt('oc-moskau','s ss sss ssss ssss sswwss ssssssssss ssssssssssssss');
+  stadt('oc-dubai','s s ss ss sss sss ssss ssss ssssssssss ssssssssssssss');
+  stadt('oc-paris','s ss sss ssss sswwss sswwss ssssssssss ssssssssssssss');
+  stadt('oc-duesseldorf','ss ss sss sss ss ss ss ss ssssssss ssssssssssssss');
+  stadt('oc-montreal','ss ssss ssssss sswwss ssssssss ssssssssssss ssssssssssssss');
+  stadt('oc-miami','ssss ssssss sswwss sswwss ssssssssss ssssssssssssss');
+  stadt('oc-philadelphia','s sss sss sssss ssssssss ssssssssssss ssssssssssssss');
+  stadt('oc-breslau','ss sswwss sswwss sswwss ssssssss ssssssssssssss');
+  stadt('oc-panorama','ss ssss ssswwsss ssssssssss sswwssssswwss ssssssssssssss');
+  stadt('oc-grossstadt-1','ss ssss sswwss sswwss ssssssssss ssssssssssss ssssssssssssss');
+  stadt('oc-grossstadt-2','ssss sswwss sswwss sswwss ssssssssssss ssssssssssssss');
+  stadt('oc-grossstadt-3','s sss sssss sswsswss ssssssssss ssssssssssssss');
+  stadt('oc-grossstadt-4','sss ssswwsss ssswwsss ssswwsss ssssssssssss ssssssssssssss');
 };

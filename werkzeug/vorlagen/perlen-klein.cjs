@@ -53,7 +53,7 @@ const ei='ww wwww wwwwww wwwwwwww wwwwwwww wwwwwwww wwwwww wwww';
 const ball='srrs srrrrs srrrrrrs ssswwsss swwwws swws';
 const geist='cccc cccccc cwccwc cwsccswc cccccccc cccccccc ccwwcc cccc';
 const H={add,farben,ohr,teil,fluegel,kopf,kopfReihen,pinguin,pinguinReihen,pinguinFluegel,maske,ninja,gesicht,zeilen,herz,stern,ei,ball,geist};
-for(const name of ['alt','buchstaben','flaggen','emoji','wetter','tiere','feste','orte','essen','sachen'])require('./perlen-klein/'+name+'.cjs')(H);
+for(const name of ['alt','buchstaben','flaggen','emoji','wetter','tiere','feste','orte','essen','sachen','maennchen'])require('./perlen-klein/'+name+'.cjs')(H);
 
 const PAL=/^[a-su-zA-X]+$/;   // alle Palettenbuchstaben ausser t (transparent)
 const breiteVon=rows=>Math.max(...rows.map(r=>r.length));

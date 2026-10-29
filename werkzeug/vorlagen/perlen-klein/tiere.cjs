@@ -191,4 +191,6 @@ module.exports=({add,kopf,pinguin,gesicht,teil,fluegel,farben,ohr,zeilen})=>{
   biene('fig-bienen-c','yyyy yyyyyy yysyysyy oooooooo yyyyyyyy oooooooo yyyyyy oooo');
   biene('fig-bienen-d',undefined,['pppp','pppppp','gg','gg']);
   biene('fig-bienen-honig',undefined,['cccccc','cccccccc','cccccc']);
+  // Bärentatze: vier Zehen mit Krallen über dem grossen Ballen.
+  add('tiere-baerentatze','swwswwswws sswsswsswss sswsswsswss sssssss sssssssss sssssssssss sssssssss sssssss sssss','Symbol');
 };
