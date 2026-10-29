@@ -6871,6 +6871,78 @@
    "datei": "fb-milan.png"
   },
   {
+   "id": "fb-yb",
+   "name": "BSC Young Boys",
+   "welt": "Fussball",
+   "datei": "fb-yb.png"
+  },
+  {
+   "id": "fb-real",
+   "name": "Real Madrid",
+   "welt": "Fussball",
+   "datei": "fb-real.png"
+  },
+  {
+   "id": "fb-barca",
+   "name": "FC Barcelona",
+   "welt": "Fussball",
+   "datei": "fb-barca.png"
+  },
+  {
+   "id": "fb-atletico",
+   "name": "Atlético Madrid",
+   "welt": "Fussball",
+   "datei": "fb-atletico.png"
+  },
+  {
+   "id": "fb-liverpool",
+   "name": "FC Liverpool",
+   "welt": "Fussball",
+   "datei": "fb-liverpool.png"
+  },
+  {
+   "id": "fb-chelsea",
+   "name": "FC Chelsea",
+   "welt": "Fussball",
+   "datei": "fb-chelsea.png"
+  },
+  {
+   "id": "fb-arsenal",
+   "name": "FC Arsenal",
+   "welt": "Fussball",
+   "datei": "fb-arsenal.png"
+  },
+  {
+   "id": "fb-tottenham",
+   "name": "Tottenham Hotspur",
+   "welt": "Fussball",
+   "datei": "fb-tottenham.png"
+  },
+  {
+   "id": "fb-manutd",
+   "name": "Manchester United",
+   "welt": "Fussball",
+   "datei": "fb-manutd.png"
+  },
+  {
+   "id": "fb-mancity",
+   "name": "Manchester City",
+   "welt": "Fussball",
+   "datei": "fb-mancity.png"
+  },
+  {
+   "id": "fb-psg",
+   "name": "Paris Saint-Germain",
+   "welt": "Fussball",
+   "datei": "fb-psg.png"
+  },
+  {
+   "id": "fb-dortmund",
+   "name": "Borussia Dortmund",
+   "welt": "Fussball",
+   "datei": "fb-dortmund.png"
+  },
+  {
    "id": "fz-vw-bus",
    "name": "VW-Bus (Bulli)",
    "welt": "Fahrzeuge",

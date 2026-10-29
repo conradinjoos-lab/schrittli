@@ -17,10 +17,10 @@ def main():
     index = jsdaten(ROOT/'vorlagen/figuren/index.js')
     figuren = [f for datei in dict.fromkeys(f['datei'] for f in index) for f in jsdaten(ROOT/'vorlagen/figuren'/datei)]
     formen = jsdaten(ROOT/'vorlagen/formen.js')
-    assert len(index) == len(figuren) == len(meta) == 1148
+    assert len(index) == len(figuren) == len(meta) == 1160
     assert len(formen) == 363
     assert {f['id'] for f in figuren} == {f['id'] for f in meta}
-    assert len({f['id'] for f in figuren+formen}) == 1511
+    assert len({f['id'] for f in figuren+formen}) == 1523
     nachId = {f['id']:f for f in figuren}
     for f in figuren+formen:
         assert f['w'] > 0 and f['h'] > 0 and f['d'], f['id']

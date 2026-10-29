@@ -1,5 +1,5 @@
 {
-  "figuren": 1148,
+  "figuren": 1160,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -9953,6 +9953,114 @@
       "teile": 1,
       "pixel": [
         317,
+        484
+      ]
+    },
+    {
+      "id": "fb-yb",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fb-real",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        366,
+        484
+      ]
+    },
+    {
+      "id": "fb-barca",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        479,
+        484
+      ]
+    },
+    {
+      "id": "fb-atletico",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        367,
+        484
+      ]
+    },
+    {
+      "id": "fb-liverpool",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        363,
+        484
+      ]
+    },
+    {
+      "id": "fb-chelsea",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fb-arsenal",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        415,
+        484
+      ]
+    },
+    {
+      "id": "fb-tottenham",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        247,
+        484
+      ]
+    },
+    {
+      "id": "fb-manutd",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        478,
+        484
+      ]
+    },
+    {
+      "id": "fb-mancity",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fb-psg",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fb-dortmund",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
         484
       ]
     },

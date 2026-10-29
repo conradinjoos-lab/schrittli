@@ -1,7 +1,8 @@
 """Welten «Wappen» (Schweiz, 26 Kantone, Neunkirch) und «Fussball» (Vereinslogos) sowie mehr Figuren für «Fahrzeuge» -> bilder/<id>.png und Eintrag in figuren.json.
 Wappen: Wikimedia Commons, Public Domain (SVG «Wappen <Kanton> matt»). Neunkirch: aus «Flag of Neunkirch.gif» (Pascal Gross, Public Domain),
 Kirche geglättet, Blau und Rot an die Kantonswappen angeglichen, in die Schildform gesetzt. Fussball: Commons, Public Domain
-(einfache Schrift- und Formlogos, urheberrechtsfrei; die Marken gehören den Vereinen). Fahrzeuge: Openclipart (CC0), meist von der Seite.
+(einfache Schrift- und Formlogos, urheberrechtsfrei; die Marken gehören den Vereinen); weitere Vereine von logotyp.us bzw. Wikipedia,
+nur für den persönlichen und schulischen Gebrauch in der eigenen Schulapp. Fahrzeuge: Openclipart (CC0), meist von der Seite.
 Alle Bilder erhalten einen schwarzen Umriss (bildhelfer.umriss). Aufruf: python -X utf8 -I wappen-fahrzeuge.py, danach python -I bild.py <ids>."""
 import sys, os, json, urllib.request, urllib.parse
 import numpy as np, cv2
@@ -52,6 +53,20 @@ FUSSBALL = [   # (id, Name, Datei auf Commons); Dortmund rendert schwarz, YB ist
     ('fb-juventus', 'Juventus Turin', 'Juventus FC 2017 icon (black).svg'),
     ('fb-inter', 'Inter Mailand', 'FC Internazionale Milano 2021.svg'),
     ('fb-milan', 'AC Mailand', 'Logo of AC Milan.svg'),
+]
+FUSSBALL_LOGOS = [   # (id, Name, Quelle) – logotyp.us «free for personal and educational use», Wikipedia als vorgerenderte PNG
+    ('fb-yb', 'BSC Young Boys', 'https://logotyp.us/file/young-boys.svg'),
+    ('fb-real', 'Real Madrid', 'https://logotyp.us/file/real-madrid.svg'),
+    ('fb-barca', 'FC Barcelona', 'https://logotyp.us/file/barcelona-fc.svg'),
+    ('fb-atletico', 'Atlético Madrid', 'https://logotyp.us/file/atletico-madrid.svg'),
+    ('fb-liverpool', 'FC Liverpool', 'https://logotyp.us/file/liverpool.svg'),
+    ('fb-chelsea', 'FC Chelsea', 'https://logotyp.us/file/chelsea.svg'),
+    ('fb-arsenal', 'FC Arsenal', 'https://logotyp.us/file/arsenal.svg'),
+    ('fb-tottenham', 'Tottenham Hotspur', 'https://logotyp.us/file/tottenham-hotspur.svg'),
+    ('fb-manutd', 'Manchester United', 'https://en.wikipedia.org/wiki/Special:FilePath/Manchester_United_FC_crest.svg?width=900'),
+    ('fb-mancity', 'Manchester City', 'https://en.wikipedia.org/wiki/Special:FilePath/Manchester_City_FC_badge.svg?width=900'),
+    ('fb-psg', 'Paris Saint-Germain', 'https://logotyp.us/file/paris-saint-germain.svg'),
+    ('fb-dortmund', 'Borussia Dortmund', 'https://en.wikipedia.org/wiki/Special:FilePath/Borussia_Dortmund_logo.svg?width=900'),
 ]
 FAHRZEUGE = [   # (id, Name, Clip-Nr., Autor)
     ('fz-vw-bus', 'VW-Bus (Bulli)', 202006, 'spadassin'),
@@ -125,6 +140,14 @@ def neunkirch():
     C[cv2.morphologyEx(m, cv2.MORPH_GRADIENT, np.ones((7, 7), np.uint8)) > 0] = 0
     return np.dstack([C, m])
 
+def logo(i, url):
+    if url.endswith('.svg'):
+        return bildhelfer.svg_rgba(bildhelfer.holen(url, 'lt-' + url.rsplit('/', 1)[-1]))
+    p = os.path.join(bildhelfer.SP, 'wp-%s.png' % i)
+    if not os.path.exists(p):
+        open(p, 'wb').write(urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=30).read())
+    return np.array(Image.open(p).convert('RGBA'))
+
 def fahrzeug(i, nr):
     im = np.array(Image.open(bildhelfer.holen('https://openclipart.org/image/800px/%d' % nr, 'oc-%d.png' % nr)).convert('RGBA'))
     if i in LOCH:
@@ -143,6 +166,9 @@ if __name__ == '__main__':
     neu.append(('wappen-neunkirch', 'Wappen Neunkirch', 'Wappen'))
     for i, n, datei in FUSSBALL:
         bildhelfer.speichern(bildhelfer.umriss(bildhelfer.svg_rgba(commons(datei))), os.path.join(HIER, 'bilder', i + '.png'))
+        neu.append((i, n, 'Fussball'))
+    for i, n, url in FUSSBALL_LOGOS:
+        bildhelfer.speichern(bildhelfer.umriss(logo(i, url)), os.path.join(HIER, 'bilder', i + '.png'))
         neu.append((i, n, 'Fussball'))
     for i, n, nr, autor in FAHRZEUGE:
         bildhelfer.speichern(bildhelfer.umriss(fahrzeug(i, nr)), os.path.join(HIER, 'bilder', i + '.png'))

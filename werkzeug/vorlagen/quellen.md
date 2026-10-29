@@ -451,7 +451,7 @@ Die übrigen 26 Tiere stehen in `quellen-cc0.md`; diese Tatze stammt von Vecteez
 
 ## Fussball
 
-Vereinslogos von Wikimedia Commons, die dort als gemeinfrei gelten (einfache Schrift- und Formlogos ohne Schöpfungshöhe). Urheberrechtlich frei, die Marken gehören aber den Vereinen: nur zum Ausmalen und Basteln, nicht für Fanartikel zum Verkauf. Nicht dabei: BSC Young Boys (nur CC BY-SA), Borussia Dortmund (SVG lässt sich nicht sauber rendern), Real Madrid, FC Barcelona, Liverpool, Manchester United, Chelsea, Manchester City und Paris Saint-Germain (aktuelle Logos nicht frei auf Commons).
+Vereinslogos von Wikimedia Commons, die dort als gemeinfrei gelten (einfache Schrift- und Formlogos ohne Schöpfungshöhe). Urheberrechtlich frei, die Marken gehören aber den Vereinen: nur zum Ausmalen und Basteln, nicht für Fanartikel zum Verkauf.
 
 | Motiv | Figur-ID | URL | Autor | Lizenz |
 |---|---|---|---|---|
@@ -467,6 +467,23 @@ Vereinslogos von Wikimedia Commons, die dort als gemeinfrei gelten (einfache Sch
 | Juventus Turin | fb-juventus | https://commons.wikimedia.org/wiki/File:Juventus_FC_2017_icon_%28black%29.svg | Wikimedia Commons | Public Domain |
 | Inter Mailand | fb-inter | https://commons.wikimedia.org/wiki/File:FC_Internazionale_Milano_2021.svg | Wikimedia Commons | Public Domain |
 | AC Mailand | fb-milan | https://commons.wikimedia.org/wiki/File:Logo_of_AC_Milan.svg | Wikimedia Commons | Public Domain |
+
+Weitere 12 Vereinslogos von logotyp.us (dort «free for personal and educational use») und als vorgerenderte PNG von der englischen Wikipedia. Nur für den persönlichen und schulischen Gebrauch in der eigenen Schulapp; die Marken gehören den Vereinen.
+
+| Motiv | Figur-ID | URL | Autor | Lizenz |
+|---|---|---|---|---|
+| BSC Young Boys | fb-yb | https://logotyp.us/file/young-boys.svg | BSC Young Boys (Verein), via logotyp.us | persönlicher und schulischer Gebrauch |
+| Real Madrid | fb-real | https://logotyp.us/file/real-madrid.svg | Real Madrid (Verein), via logotyp.us | persönlicher und schulischer Gebrauch |
+| FC Barcelona | fb-barca | https://logotyp.us/file/barcelona-fc.svg | FC Barcelona (Verein), via logotyp.us | persönlicher und schulischer Gebrauch |
+| Atlético Madrid | fb-atletico | https://logotyp.us/file/atletico-madrid.svg | Atlético Madrid (Verein), via logotyp.us | persönlicher und schulischer Gebrauch |
+| FC Liverpool | fb-liverpool | https://logotyp.us/file/liverpool.svg | FC Liverpool (Verein), via logotyp.us | persönlicher und schulischer Gebrauch |
+| FC Chelsea | fb-chelsea | https://logotyp.us/file/chelsea.svg | FC Chelsea (Verein), via logotyp.us | persönlicher und schulischer Gebrauch |
+| FC Arsenal | fb-arsenal | https://logotyp.us/file/arsenal.svg | FC Arsenal (Verein), via logotyp.us | persönlicher und schulischer Gebrauch |
+| Tottenham Hotspur | fb-tottenham | https://logotyp.us/file/tottenham-hotspur.svg | Tottenham Hotspur (Verein), via logotyp.us | persönlicher und schulischer Gebrauch |
+| Manchester United | fb-manutd | https://en.wikipedia.org/wiki/Special:FilePath/Manchester_United_FC_crest.svg?width=900 | Manchester United (Verein), via Wikipedia (en) | persönlicher und schulischer Gebrauch |
+| Manchester City | fb-mancity | https://en.wikipedia.org/wiki/Special:FilePath/Manchester_City_FC_badge.svg?width=900 | Manchester City (Verein), via Wikipedia (en) | persönlicher und schulischer Gebrauch |
+| Paris Saint-Germain | fb-psg | https://logotyp.us/file/paris-saint-germain.svg | Paris Saint-Germain (Verein), via logotyp.us | persönlicher und schulischer Gebrauch |
+| Borussia Dortmund | fb-dortmund | https://en.wikipedia.org/wiki/Special:FilePath/Borussia_Dortmund_logo.svg?width=900 | Borussia Dortmund (Verein), via Wikipedia (en) | persönlicher und schulischer Gebrauch |
 
 ## Fahrzeuge
 
