@@ -513,7 +513,7 @@ function auswahl(){
     `<div class="gruppe" data-g="${g}"><h3>${g}</h3>`+(g==='Buchstaben'?'<div class="wortfeld"><input type="text" id="wort" placeholder="Wort, z.B. LEA" aria-label="Wort aus Buchstaben" autocomplete="off" maxlength="30"><button type="button" class="knopf" id="wort-dazu">Wort aufs Blatt</button></div>':'')+`<div class="raster">`+fs.map(f=>
       `<button type="button" class="form" data-id="${f.id}" data-such="${einfach(f.name+' '+f.id+' '+g)}" aria-pressed="false">${bild(f)}${f.name}</button>`
     ).join('')+'</div></div>').join('')+'<p class="hinweis" id="nichts" hidden>Keine passende Form gefunden.</p>'
-    +'<details class="wunsch" id="wunsch"><summary>Fehlt ein Motiv? Wünsch es dir</summary><form id="wunsch-form" autocomplete="off">'
+    +'<details class="wunsch" id="wunsch" hidden><summary>Fehlt ein Motiv? Wünsch es dir</summary><form id="wunsch-form" autocomplete="off">'
     +'<input type="text" id="w-name" maxlength="40" placeholder="Was fehlt? z.B. Gecko" aria-label="Welches Motiv fehlt?">'
     +'<input type="text" id="w-text" maxlength="200" placeholder="Wie sieht es aus? (freiwillig)" aria-label="Wie soll es aussehen?">'
     +'<button type="submit" class="knopf" id="w-los">Wünschen</button><p class="hinweis" id="w-antwort" role="status"></p></form></details>';
