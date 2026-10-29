@@ -138,7 +138,7 @@ const PROJEKTE={
 };
 const S={technik:'stricken',projekt:'topflappen',b:20,h:20,m10:20,r10:28,gew:0,lauf:0,papier:'a4',zahlen:false,name:''};
 const clamp=(v,a,b)=>Math.min(b,Math.max(a,Math.round(Number(v)||0)));
-const zahl=(v,d=0)=>Number(v).toLocaleString('de-CH',{maximumFractionDigits:d});
+const zahl=(v,d=0)=>Number(v).toLocaleString('de-CH',{maximumFractionDigits:d}).replace('.',',');   // Komma wie in allen Werkzeugen
 
 function klasseLesen(){
   const q=Number(new URLSearchParams(location.search).get('klasse'));

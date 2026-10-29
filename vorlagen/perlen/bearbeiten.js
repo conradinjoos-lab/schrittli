@@ -112,7 +112,7 @@
       bild.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${x} ${y} ${w} ${h}" role="img" aria-label="${esc(t.name||'Perlentier')}: ${t.rows.length} Reihen" style="width:${zoom}%">${text(x+.3,y+1,'Reihe')}${text(geo.x1+.5,y+1,'Perlen')}${text(((geo.links?.[0]||0)+(geo.rechts?.[0]||0))/2-.6,y+1.6,'Start')}${perlen}${a.draehte(t,geo,1,0,0)}${reihen}</svg>`;
       passend();
       const g=a.geometrie(t,a.perle.l/a.perle.d),cm=(g.x1-g.x0-1+g.q)*a.perle.d;
-      el('#pe-mass').textContent=`${reihenbreite(t)} · ${schwierigkeit(t,schulklasse)} · ca. ${cm.toLocaleString('de-CH',{maximumFractionDigits:1})} cm`;
+      el('#pe-mass').textContent=`${reihenbreite(t)} · ${schwierigkeit(t,schulklasse)} · ca. ${cm.toLocaleString('de-CH',{maximumFractionDigits:1}).replace('.',',')} cm`;
       slider.value=reihenbreite(t);
       const {z,n}=a.zaehlen(t),von=el('#pe-von'),alt=von.value;
       von.innerHTML=farben.filter(([k])=>z[k]).map(([k,[,name]])=>`<option value="${k}">${esc(name)} (${z[k]})</option>`).join('');

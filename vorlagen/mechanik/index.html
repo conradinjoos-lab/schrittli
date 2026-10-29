@@ -220,8 +220,8 @@ const S=Object.assign({},STANDARD);
 const f=n=>+n.toFixed(2);
 const begrenzt=(v,a,b)=>Math.min(b,Math.max(a,v));
 const zahl=(v,d)=>{const n=parseFloat(String(v).replace(',','.'));return isFinite(n)?n:d};
-const mm=v=>(Math.round(v*10)/10).toLocaleString('de-CH')+' mm';
-const cmText=v=>(Math.round(v)/10).toLocaleString('de-CH')+' cm';
+const mm=v=>(Math.round(v*10)/10).toLocaleString('de-CH').replace('.',',')+' mm';   // Komma wie in allen Werkzeugen
+const cmText=v=>(Math.round(v)/10).toLocaleString('de-CH').replace('.',',')+' cm';
 function uebernehmen(q,k,v){
   if(v==null)return;
   if(WORTE[k]){if(WORTE[k].includes(v))S[k]=v;return}
@@ -293,7 +293,7 @@ function teileZahn(){
   const zus=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 ${f(bw+8)} ${f(2*rmax+8)}" role="img" aria-label="Zahnräder im Eingriff">${bild}</svg>`;
   // Übersetzung
   const letzte=raeder[raeder.length-1],iGes=stufe?(S.zB/S.zA)*(S.zD/S.zC):letzte.z/S.zA,nL=letzte.name.replace('Zahnrad ','');
-  const dz=v=>v.toLocaleString('de-CH',{maximumFractionDigits:2});
+  const dz=v=>v.toLocaleString('de-CH',{maximumFractionDigits:2}).replace('.',',');
   const wie=iGes>1?`${dz(iGes)}-mal langsamer, dafür kräftiger`:iGes<1?`${dz(1/iGes)}-mal schneller, dafür schwächer`:'gleich schnell';
   const richtung=stufe?'D dreht gleich herum wie A':raeder.length===3?'C dreht gleich herum wie A':'B dreht gegen A';
   const ant=[];

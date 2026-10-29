@@ -177,8 +177,8 @@ const S={modus:'kreuzstich',b:20,h:20,mm:{kreuzstich:{w:5,h:5},weben:{w:8,h:4}},
 let undo=[];
 const leer=(b,h)=>new Array(b*h).fill(-1);
 const clamp=(v,a,b)=>Math.min(b,Math.max(a,Math.round(Number(v)||0)));
-const cm=mm=>(mm/10).toLocaleString('de-CH',{maximumFractionDigits:1});
-const mmTxt=v=>v.toLocaleString('de-CH',{maximumFractionDigits:1});
+const cm=mm=>(mm/10).toLocaleString('de-CH',{maximumFractionDigits:1}).replace('.',',');   // Komma wie in allen Werkzeugen
+const mmTxt=v=>v.toLocaleString('de-CH',{maximumFractionDigits:1}).replace('.',',');
 
 // Klasse: aus der URL (?klasse=2) oder aus der Schul-App. 1./2. Klasse → einfacher und grösser.
 function klasseLesen(){
@@ -243,7 +243,7 @@ function zaehlen(){ const n=new Array(FARBEN.length).fill(0); for(const v of S.z
 function faden(n){
   const mm=S.mm[S.modus]; const proZelle=S.modus==='kreuzstich'?4.8*mm.w:1.5*mm.w;
   const l=n*proZelle*1.3;
-  return l<1000?`${Math.ceil(l/100)*10} cm`:`${(Math.ceil(l/100)/10).toLocaleString('de-CH')} m`;
+  return l<1000?`${Math.ceil(l/100)*10} cm`:`${(Math.ceil(l/100)/10).toLocaleString('de-CH').replace('.',',')} m`;
 }
 
 // ---------- Zeichnen auf dem Bildschirm ----------
@@ -354,7 +354,7 @@ function blatt(){
   });
   if(!z.length)s+=`<text x="${rand}" y="${ly}" font-size="3.6" fill="#5b6573">Noch keine Farbe – male zuerst dein Muster.</text>`;
   ly+=zeilenL*7+2;
-  const massstab=scale<1?`Verkleinert gedruckt: 1 ${M.zelle} = ${mmTxt(cw)} × ${mmTxt(ch)} mm. Dein Werk wird trotzdem ${cm(gw)} × ${cm(gh)} cm.`:`Originalgrösse: 1 ${M.zelle} = ${mm.w} × ${mm.h} mm. Beim Drucken 100 % wählen, nicht «An Seite anpassen».`;
+  const massstab=scale<1?`Verkleinert gedruckt: 1 ${M.zelle} = ${mmTxt(cw)} × ${mmTxt(ch)} mm. Dein Werk wird trotzdem ${cm(gw)} × ${cm(gh)} cm.`:`Originalgrösse: 1 ${M.zelle} = ${mmTxt(mm.w)} × ${mmTxt(mm.h)} mm. Beim Drucken 100 % wählen, nicht «An Seite anpassen».`;
   s+=`<text x="${rand}" y="${ly}" font-size="3" fill="#5b6573">${massstab}</text>`;
   return {svg:`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" font-family="Nunito,system-ui,sans-serif">${s}</svg>`,W,H,quer,scale};
 }
