@@ -80,7 +80,6 @@ svg .griff:hover circle+circle+circle{stroke-width:3.5}
 .druck-karte{display:flex;flex-direction:column;gap:10px}
 .drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
 .drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
-.hinweis{font-size:13px;color:var(--muted);margin:0}
 .blaetter{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-top:12px}
 .blaetter svg{display:block;width:100%;height:auto;background:var(--papier);border-radius:3px;box-shadow:0 1px 6px rgba(0,0,0,.15)}
 @media (max-width:860px){
@@ -109,7 +108,7 @@ svg .griff:hover circle+circle+circle{stroke-width:3.5}
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
   <h1>Bohrvorlage</h1>
-  <p>Ziehen · drucken · ankörnen · bohren &nbsp;<a href="../">←&nbsp;Vorlagen</a></p>
+  <p><a href="../">←&nbsp;Vorlagen</a></p>
 </header>
 <script src="../zurueck.js"></script>
 <main>
@@ -146,15 +145,15 @@ svg .griff:hover circle+circle+circle{stroke-width:3.5}
     <section class="karte druck-karte" aria-label="Drucken">
       <div class="chips" id="papier" role="group" aria-label="Papier"><button type="button" class="chip" data-papier="a4" aria-pressed="true">A4</button><button type="button" class="chip" data-papier="a3" aria-pressed="false">A3</button></div>
       <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
-      <p class="hinweis" id="tipp"></p>
     </section>
   </div>
 </main>
 <div id="druck"></div>
 <script>
 // Bohrvorlage von Schritt für Schritt. Platte in cm, alles andere in mm; die Zeichnung ist 1:1 in mm.
-// Bedienung direkt im Bild: Platte an den Griffen grösser ziehen, in der Lupe Bohrer (Lochrand), Abstand (zweites Loch)
-// und Rand (Lochfeld verschieben) ziehen. Ein angetipptes Loch lässt sich mit × weglassen.
+// Bedienung direkt im Bild: Platte an den Griffen grösser ziehen, in der Lupe Bohrer (Lochrand), Abstand (zweites Loch
+// in der Reihe) und Rand (zweites Loch nach unten) ziehen. Die Löcher selbst verschieben nichts; ein angetipptes Loch
+// lässt sich mit × weglassen.
 (function(){
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -264,8 +263,11 @@ function rechnen(){
   const p0=L.alle[0]||[S.r,S.r];
   const A1=rahmen&&L.ax?L.ax:S.a;
   const p1=[mm(p0[0]+A1),p0[1]];
+  // zweites Loch nach unten: dort sitzt der Griff für den Rand
+  const vs=S.muster==='versetzt', A2=rahmen?(L.ay||S.a):vs?S.a*Math.sqrt(3)/2:S.a;
+  const p2=[mm(p0[0]+(vs?S.a/2:0)),mm(p0[1]+A2)];
   const da=q=>L.alle.some(p=>Math.abs(p[0]-q[0])<.01&&Math.abs(p[1]-q[1])<.01);
-  return {L,W,H,dw,dh,T,P:PAPIERE[S.papier],rand,abst,steg:abst-S.d,kante:rand-S.d/2,p0,p1,A1,p0da:da(p0),p1da:da(p1)};
+  return {L,W,H,dw,dh,T,P:PAPIERE[S.papier],rand,abst,steg:abst-S.d,kante:rand-S.d/2,p0,p1,p2,A1,p0da:da(p0),p1da:da(p1),p2da:da(p2)};
 }
 
 // ---------- Druckzeichnung ----------
@@ -428,17 +430,17 @@ function pvSvg(Z,V){
 // ---------- Lupe (Ecke mit den ersten Löchern) ----------
 function lvLayout(Z){
   const box=$('lv-box'), cw=Math.max(200,Math.min(440,box.clientWidth));
-  const {p0,A1}=Z, D=S.d;
+  const {p0,p2,A1}=Z, D=S.d;
   const g=Math.max(2.2*A1+D,3.2*D,16);
   const zx=p0[0]<=g*.5, zy=p0[1]<=g*.5;          // Plattenkante zeigen, wenn sie nah ist
   const links=zx?-g*.14:p0[0]-g*.32, oben=zy?-g*.14:p0[1]-g*.32;
-  const span=Math.max(g,p0[0]+A1+D/2+g*.22-links,p0[1]+D/2+g*.5-oben);
+  const span=Math.max(g,p0[0]+A1+D/2+g*.22-links,p0[1]+D/2+g*.5-oben,p2[1]+D/2+g*.22-oben);
   return {s:cw/span,x:links+RAHMEN,y:oben+RAHMEN,w:span,h:span};
 }
 function lvSvg(Z,V){
   const {L,p0,p1,A1}=Z, k=1/V.s, R=RAHMEN, D=S.d;
   const sicht={x0:V.x,y0:V.y,x1:V.x+V.w,y1:V.y+V.h};
-  const X0=p0[0]+R,Y0=p0[1]+R,X1=p1[0]+R;
+  const X0=p0[0]+R,Y0=p0[1]+R,X1=p1[0]+R,X2=Z.p2[0]+R,Y2=Z.p2[1]+R;
   let s=`<rect class="grund" x="${r3(V.x)}" y="${r3(V.y)}" width="${r3(V.w)}" height="${r3(V.h)}"/>`;
   s+=`<rect class="holz" x="${R}" y="${R}" width="${Z.W}" height="${Z.H}"/>`;
   s+=weltTeile(L,sicht);
@@ -447,6 +449,7 @@ function lvSvg(Z,V){
   const geist=(x,y)=>`<circle class="geist" cx="${r3(x)}" cy="${r3(y)}" r="${r3(D/2)}" stroke-width="${r3(1.4*k)}" stroke-dasharray="${r3(3*k)} ${r3(2*k)}"/>`;
   if(!Z.p0da) s+=geist(X0,Y0);
   if(!Z.p1da) s+=geist(X1,Y0);
+  if(!Z.p2da) s+=geist(X2,Y2);
   // Mittig: Randlinie zeigen, innerhalb der die Löcher bleiben
   if(S.lage==='mitte'&&S.muster!=='rahmen') s+=`<rect class="randlinie" x="${R+S.r}" y="${R+S.r}" width="${Math.max(0,Z.W-2*S.r)}" height="${Math.max(0,Z.H-2*S.r)}" stroke-width="${r3(1.3*k)}" stroke-dasharray="${r3(5*k)} ${r3(4*k)}"/>`;
   // Rand: Kante bis Lochmitte (links und oben)
@@ -460,12 +463,12 @@ function lvSvg(Z,V){
   const ym=Y0+D/2+18*k;
   s+=`<path class="hilfs" d="M${r3(X0)},${r3(Y0+D/2+3*k)}V${r3(ym+5*k)}M${r3(X1)},${r3(Y0+D/2+3*k)}V${r3(ym+5*k)}" stroke-width="${r3(k)}"/>`;
   s+=pfeil(X0,ym,X1,ym,k,sw)+etikett((X0+X1)/2,ym+16*k,n(Math.round(A1*100)/100),k,sw);
-  // Griffe: Lochfeld verschieben, Bohrer am Lochrand, Abstand am zweiten Loch
+  // Griffe: Bohrer am Lochrand, Abstand am zweiten Loch in der Reihe, Rand am zweiten Loch nach unten
   const rr=Math.max(D/2,40*k), dx=X0+rr*0.7071, dy=Y0-rr*0.7071;
   if(rr>D/2+1e-9) s+=`<path class="hilfs" d="M${r3(X0+D/2*0.7071)},${r3(Y0-D/2*0.7071)}L${r3(dx)},${r3(dy)}" stroke-width="${r3(1.2*k)}"/>`;
   s+=etikett(dx+18*k,dy-10*k,`⌀ ${n(D)}`,k,'','start');
   s+=knopf('a',X1,Y0,'quer','Abstand ziehen',k);
-  s+=knopf('feld',X0,Y0,'feld','Löcher verschieben (Rand)',k);
+  s+=knopf('feld',X2,Y2,'feld','Rand ziehen',k);
   s+=knopf('d',dx,dy,'dick','Bohrer dicker oder dünner',k);
   s+=gewaehltSvg(L,k,sicht);
   return s;
@@ -492,12 +495,11 @@ function werteZeigen(Z){
   $('werte').innerHTML=t.join('');
   let w='';
   if(L.zuViele) w=`⚠ Über ${MAX_LOECHER.toLocaleString('de-CH')} Löcher`;
-  else if(!ok) w='⚠ Kein Loch passt – Rand kleiner';
-  else if(Z.steg<=0) w='⚠ Löcher überschneiden sich';
-  else if(Z.kante<0) w='⚠ Loch schneidet die Kante';
-  else if(Z.steg<S.d) w='⚠ Dünne Stege – können brechen';
+  else if(!ok) w='⚠ Kein Loch passt';
+  else if(Z.steg<=0) w='⚠ Löcher zu nah';
+  else if(Z.kante<0) w='⚠ Loch über Kante';
+  else if(Z.steg<S.d) w='⚠ Steg zu dünn';
   $('warn').textContent=w; $('warn').hidden=!w;
-  $('tipp').textContent=(bl>1?'Nach Nummern auslegen · grüne Kreuze aufeinander · ':'')+'Drucken mit 100 % · 5-cm-Linie nachmessen'+(S.papier==='a3'?' · Papier A3':'');
 }
 
 // ---------- Zeichnen ----------
@@ -552,7 +554,7 @@ function zieh(e){
     if(Math.hypot(dx,dy)*drag.V.s<5) return;
     if(drag.art==='leer'){ drag.art='nichts'; }
     drag.bewegt=true;
-    if(drag.art==='loch') drag.art='feld';
+    if(drag.art==='loch') drag.art='nichts';
     if(drag.art==='feld'){ drag.r0=S.muster!=='rahmen'&&S.lage==='mitte'?Math.min(drag.p0[0],drag.p0[1]):S.r; if(S.muster!=='rahmen') S.lage='rand'; felder(); }
     if(drag.art==='d') drag.dist0=Math.hypot(drag.x-drag.p0[0]-RAHMEN,drag.y-drag.p0[1]-RAHMEN);
     wahl=null;
