@@ -446,7 +446,7 @@ function teilInnen(t,o){
     s+=`<path d="M-11 -16 l-2 7 h4z" fill="${L}" opacity=".7"/>`;
     s+=txt(t,-26,18,'+',17,'#E8554E')+txt(t,26,11,'−',16,L);
     s+=txt(t,-27,41,'lang',9,'#5B6B80')+txt(t,27,30,'kurz',9,'#5B6B80');
-    const ob=[['LED '+LED_NAME[t.farbe]+(o.an&&o.I!=null?` · ${mA(o.I)} mA`:''),12,L]];
+    const ob=[['LED '+LED_NAME[t.farbe]+` · ${vz(vf(t.farbe))} V`+(o.an&&o.I!=null?` · ${mA(o.I)} mA`:''),12,L]];
     if(o.zuviel) ob.push(['⚠ zu viel Strom – kaputt!',13,'#B3412A',1]); else if(o.viel) ob.push(['⚠ zu viel Strom',13,'#B3412A',1]); else if(o.verkehrt) ob.push(['falsch herum',12,'#B3412A']);
     s+=etikett(t,ob,[],-42,46);
   } else if(t.typ==='band'){
@@ -637,7 +637,7 @@ const GRUPPEN=[
   {name:'Stromquelle',text:'gibt den Strom',teile:[['batterie',{volt:3},'Batterie 3 V'],['batterie',{volt:12},'Netzgerät 12 V']]},
   {name:'Leitungen',text:'führen den Strom',kabel:true,teile:[['widerstand',{},'Widerstand (bremst)']]},
   {name:'Schalter',text:'öffnen und schliessen den Kreis',teile:[['schalter'],['taster']]},
-  {name:'Verbraucher',text:'brauchen Strom: leuchten, drehen, piepsen',teile:[['led'],['band',{},'Leuchtband 12 V'],['kette'],['motor',{},'Motor 3 V'],['lampe'],['summer']]}
+  {name:'Verbraucher',text:'brauchen Strom: leuchten, drehen, piepsen',teile:[['led',{},'LED 2,2–3,2 V'],['band',{},'Leuchtband 12 V'],['kette'],['motor',{},'Motor 3 V'],['lampe'],['summer']]}
 ];
 function teilBild(typ,vor={}){ const t={id:0,typ,x:0,y:0,rot:0,...NEU[typ],...vor}; if(typ==='schalter') t.an=true; return `<svg viewBox="-64 -46 128 92" aria-hidden="true">${teilInnen(t,DIO_TYPEN.includes(typ)?{an:true,hell:1}:{})}</svg>`; }
 function palette(){
@@ -648,20 +648,21 @@ function palette(){
 $('palette').addEventListener('click',e=>{ if(e.target.closest('[data-kabel]')){ meldung('Kabel: Von einer gelben Klemme zur nächsten ziehen – oder beide nacheinander antippen.'); return; } const b=e.target.closest('[data-typ]'); if(!b) return; merken(); const [x,y]=freierPlatz(); const vor=GRUPPEN[b.dataset.g].teile[b.dataset.t][1]||{}; const r=AU&&AU.fehlt.find(r=>passtKnopf(r,b.dataset.typ,vor)); const t={id:S.n++,typ:b.dataset.typ,x,y,rot:0,...NEU[b.dataset.typ],...vor,...(r?r.vor:{})}; S.teile.push(t); wahl={art:'teil',id:t.id}; warteKlemme=null; aendern(); });
 
 // ---------- Bauaufträge: Was willst du bauen? ----------
+const ledN=f=>`LED ${LED_NAME[f]} ${vz(vf(f))} V`;
 const B3={typ:'batterie',vor:{volt:3},name:'Batterie 3 V',ok:t=>t.volt<=4.5};
 const SCH={typ:'schalter',name:'Schalter'};
 const PROJEKTE=[
   {id:'auto',bild:'🚗',name:'Auto',text:'Ein Motor dreht die Räder.',loesung:'auto',
-   teile:[B3,SCH,{typ:'motor',vor:{antrieb:'rad'},name:'Motor mit Rad'},{typ:'led',vor:{farbe:'weiss'},name:'LED als Scheinwerfer',extra:true}],
+   teile:[B3,SCH,{typ:'motor',vor:{antrieb:'rad'},name:'Motor mit Rad'},{typ:'led',vor:{farbe:'weiss'},name:ledN('weiss')+' als Scheinwerfer',extra:true}],
    ziele:[{r:2,txt:'Das Rad dreht'},{r:3,txt:'Der Scheinwerfer leuchtet'}]},
   {id:'boot',bild:'⛵',name:'Boot',text:'Ein Propeller schiebt das Boot an.',loesung:'boot',
    teile:[B3,SCH,{typ:'motor',vor:{antrieb:'propeller'},name:'Motor mit Propeller'}],
    ziele:[{r:2,txt:'Der Propeller dreht'}]},
   {id:'taschenlampe',bild:'🔦',name:'Taschenlampe',text:'Schalter ein – Licht an.',loesung:'taschenlampe',
-   teile:[B3,SCH,{typ:'led',vor:{farbe:'weiss'},name:'LED weiss'}],
+   teile:[B3,SCH,{typ:'led',vor:{farbe:'weiss'},name:ledN('weiss')}],
    ziele:[{r:2,txt:'Die LED leuchtet'}]},
   {id:'ampel',bild:'🚦',name:'Ampel',text:'Rot, Gelb und Grün, jede mit eigenem Schalter.',loesung:'ampel',
-   teile:[B3,{...SCH,n:3},{typ:'led',vor:{farbe:'rot'},name:'LED rot'},{typ:'led',vor:{farbe:'gelb'},name:'LED gelb'},{typ:'led',vor:{farbe:'gruen'},name:'LED grün'}],
+   teile:[B3,{...SCH,n:3},{typ:'led',vor:{farbe:'rot'},name:ledN('rot')},{typ:'led',vor:{farbe:'gelb'},name:ledN('gelb')},{typ:'led',vor:{farbe:'gruen'},name:ledN('gruen')}],
    ziele:[{r:2,txt:'Rot leuchtet'},{r:3,txt:'Gelb leuchtet'},{r:4,txt:'Grün leuchtet'}]},
   {id:'klingel',bild:'🔔',name:'Klingel',text:'Taster drücken – es summt.',
    teile:[B3,{typ:'taster',name:'Taster'},{typ:'summer',name:'Summer'}],
