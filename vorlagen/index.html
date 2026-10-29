@@ -103,7 +103,7 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 .l-weg{flex:none;width:36px;height:36px;border-radius:10px;border:2px solid transparent;background:none;color:var(--muted);font:700 22px/1 Nunito,sans-serif;cursor:pointer}
 .l-weg:hover{color:var(--bad);border-color:var(--line)}
 .l-hinweis{font-size:12px;color:var(--muted);margin:8px 0 0}
-.l-modus{margin:0 0 8px}
+.l-modus{margin:0}
 .liste li{flex-wrap:wrap}
 .l-knopf{flex:none;width:32px;height:32px;border-radius:10px;border:2px solid transparent;background:none;color:var(--muted);font:700 18px/1 Nunito,sans-serif;cursor:pointer}
 .l-knopf:hover{color:var(--acc);border-color:var(--line)}
@@ -254,10 +254,13 @@ input[type=range]{width:100%;accent-color:var(--acc)}
         <label id="feld-det"><input type="checkbox" id="det"> Augen und Linien zeigen</label>
         <label><input type="checkbox" id="spiegel"> spiegeln</label>
       </div>
+      <div class="feld" id="feld-modus">
+        <span class="lbl" id="lbl-modus">Anordnung auf dem Blatt</span>
+        <div class="chips l-modus" id="modus" role="group" aria-labelledby="lbl-modus"><button type="button" class="chip" data-modus="auto" aria-pressed="true" title="Alle Formen der Liste werden platzsparend aufs Blatt gelegt">Automatisch packen</button><button type="button" class="chip" data-modus="frei" aria-pressed="false" title="Jede Form einzeln verschieben, drehen und strecken – auch auf ein anderes Blatt">Frei anordnen</button></div>
+      </div>
       <button type="button" class="knopf dazu" id="dazu" title="Diese Form mit Grösse und Anzahl in die Liste nehmen – so kommen mehrere Formen zusammen aufs Blatt">+ Aufs Blatt</button>
       <div class="liste" id="liste" hidden>
         <div class="l-kopf"><b id="l-titel">Auf dem Blatt</b><button type="button" class="l-leeren" id="leeren">Liste leeren</button></div>
-        <div class="chips l-modus" id="modus" role="group" aria-label="Anordnung"><button type="button" class="chip" data-modus="auto" aria-pressed="true">Automatisch packen</button><button type="button" class="chip" data-modus="frei" aria-pressed="false">Frei anordnen</button></div>
         <ul id="l-ul"></ul>
         <p class="l-hinweis" id="l-hinweis">Vorschau und Druck zeigen alle Formen der Liste. Nächste Form wählen, einstellen, «+ Aufs Blatt».</p>
       </div>
@@ -300,6 +303,7 @@ const $=id=>document.getElementById(id);
 const PAPIERE={a4:{name:'A4',w:210,h:297},a3:{name:'A3',w:297,h:420}};
 const BLATT={name:'A4',w:210,h:297,rand:10,oben:24,unten:24,abstand:3};   // mm
 const NUTZ={x:BLATT.rand,y:BLATT.oben,w:BLATT.w-2*BLATT.rand,h:BLATT.h-BLATT.oben-BLATT.unten};
+const nutzFarb=ja=>{NUTZ.h=BLATT.h-BLATT.oben-BLATT.unten-(ja?7:0)};   // die Farbzeile «Farben zum Malen» braucht unten Platz
 function papierSetzen(id){
   const p=PAPIERE[id]||PAPIERE.a4;
   BLATT.name=p.name;BLATT.w=p.w;BLATT.h=p.h;NUTZ.w=p.w-2*BLATT.rand;NUTZ.h=p.h-BLATT.oben-BLATT.unten;
@@ -316,7 +320,9 @@ const MAXSEITEN=30;
 // Diese Umrisse werden hier gerechnet (in mm, Union mit Clipper), nicht in formen.js. In der Adresse als m=8x5x4.
 const NETZE={'netz-quader':{name:'Quader nach Mass',def:{b:8,t:5,h:4}},'netz-schachtel':{name:'Schachtel offen nach Mass',def:{b:8,t:6,h:4}}};
 const netzMasse=o=>{const v=k=>Math.max(1,Math.min(40,Math.round(zahl(o&&o[k],NETZE['netz-quader'].def[k])*10)/10));return {b:v('b'),t:v('t'),h:v('h')}};
+const CLIP=typeof ClipperLib!=='undefined';   // Rechenbibliothek vom CDN; ohne sie gibt es nur die Schnittlinie
 function vereinigen(polys){
+  if(!CLIP)return polys;
   const c=new ClipperLib.Clipper(),sol=new ClipperLib.Paths();
   const pfade=polys.map(r=>r.map(([x,y])=>({X:Math.round(x*100),Y:Math.round(y*100)})));
   pfade.forEach(r=>{if(!ClipperLib.Clipper.Orientation(r))r.reverse()});
@@ -350,7 +356,7 @@ function netzForm(id,m){
   const wmm=bx-ax,hmm=by-ay,sk=100/Math.max(wmm,hmm),tr=r=>r.map(([x,y])=>[(x-ax)*sk,(y-ay)*sk]);
   return {id,name:NETZE[id].name,gruppe:'Werkhilfen',w:wmm*sk,h:hmm*sk,d:d.map(tr),det:det.map(tr),eng:LW*sk,schwer:1,cm:Math.max(wmm,hmm)/10,mm:{w:wmm,h:hmm}};
 }
-const NETZFORMEN=Object.keys(NETZE).map(id=>netzForm(id,NETZE[id].def));
+const NETZFORMEN=CLIP?Object.keys(NETZE).map(id=>netzForm(id,NETZE[id].def)):[];
 // Figuren: figuren/index.js kennt nur Name, Welt und Masse; die Umrisse liegen pro Welt in figuren/<welt>.js
 // und werden erst geladen, wenn eine Figur gebraucht wird (alle zusammen wären mehrere MB).
 const FIGUREN=(window.FIGUREN_INDEX||[]).map(f=>Object.assign({figur:true},f));
@@ -405,8 +411,10 @@ if(q.has('b'))S.b=zahl(q.get('b'),S.b);
 if(q.has('h'))S.h=zahl(q.get('h'),S.h);
 if(q.has('n'))S.n=Math.round(zahl(q.get('n'),1));
 if(q.has('z'))S.param=Math.round(zahl(q.get('z'),S.param));
+S.n=Math.max(1,Math.min(500,Math.round(+S.n)||1));S.param=Math.max(3,Math.min(12,Math.round(+S.param)||5));
 if(q.has('linie'))S.linie=q.get('linie');
 if(!['schnitt','naht','zugabe'].includes(S.linie))S.linie='schnitt';
+if(!CLIP){S.linie='schnitt';S.punkte=false}
 const mmWert=(v,d,a,b)=>Math.max(a,Math.min(b,Math.round(zahl(v,d))));
 if(q.has('naht'))S.naht=mmWert(q.get('naht'),S.naht,1,20);
 if(q.has('zugabe'))S.zugabe=mmWert(q.get('zugabe'),S.zugabe,1,20);
@@ -534,6 +542,7 @@ function auswahl(){
 
 // Geometrie in mm
 function offset(rings,mm){
+  if(!CLIP)return rings;
   const co=new ClipperLib.ClipperOffset(2,5),sol=new ClipperLib.Paths();
   co.AddPaths(rings.map(r=>r.map(([x,y])=>({X:Math.round(x*100),Y:Math.round(y*100)}))),ClipperLib.JoinType.jtRound,ClipperLib.EndType.etClosedPolygon);
   co.Execute(sol,mm*100);
@@ -651,7 +660,7 @@ function blaetter(st,lay){
   const name=titel();
   const seiten=Math.min(MAXSEITEN,Math.ceil(S.n/lay.pro)),g=BLATT.abstand;
   const breite=lay.sp*lay.w+(lay.sp-1)*g,x0=NUTZ.x+(NUTZ.w-breite)/2;
-  const teil=teilSvg(st),leg=S.linie==='schnitt'?'':legende(st.strich,st.punkte.length>0).svg;
+  const lg=S.linie==='schnitt'?{svg:'',x:BLATT.w-10}:legende(st.strich,st.punkte.length>0),teil=teilSvg(st),leg=lg.svg;
   const out=[];let rest=S.n;
   for(let s=0;s<seiten;s++){
     const hier=Math.min(rest,lay.pro);rest-=hier;
@@ -662,8 +671,8 @@ function blaetter(st,lay){
     }
     out.push(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${BLATT.w} ${BLATT.h}" width="${BLATT.w}mm" height="${BLATT.h}mm" font-family="Nunito,Arial,sans-serif" role="img" aria-label="Blatt ${s+1}: ${hier} × ${name}">`+
       `<rect width="${BLATT.w}" height="${BLATT.h}" fill="#fff"/>`+
-      `<text x="10" y="16.5" font-size="6" font-weight="800" fill="#1c2430">${name}</text>`+
-      `<text x="10" y="21" font-size="3.4" fill="#5b6573">${cm(S.b)} × ${cm(S.h)} cm${linieText(S)}${BLATT.name==='A3'?' · A3':''}${seiten>1?` · Blatt ${s+1} von ${seiten}`:''}</text>`+
+      titelSvg(name,lg.x-15)+
+      subSvg(`${cm(S.b)} × ${cm(S.h)} cm${linieText(S)}${BLATT.name==='A3'?' · A3':''}${seiten>1?` · Blatt ${s+1} von ${seiten}`:''}`)+
       leg+teile+farbZeile(farbListe(form()))+fuss());
   }
   return out;
@@ -687,7 +696,7 @@ function poster(st){
   for(let j=1;j<r.ky;j++){const y=j*sy+UEB/2;for(let i=0;i<r.kx;i++)kreuze+=kreuz(i*sx+15,y)+kreuz(i*sx+NUTZ.w-15,y)}
   for(let i=1;i<r.kx;i++)for(let j=1;j<r.ky;j++)kreuze+=kreuz(i*sx+UEB/2,j*sy+UEB/2);
   const leg=S.linie==='schnitt'?{svg:'',x:BLATT.w-10}:legende(st.strich,st.punkte.length>0);
-  const c=Math.min(4,24/r.kx,10/r.ky),mx=leg.x-6-r.kx*c,my=11;   // Übersicht oben rechts, links von der Legende
+  const c=Math.min(4,24/r.kx,9/r.ky),mx=leg.x-6-r.kx*c,my=8;   // Übersicht oben rechts, links von der Legende
   const out=[];let k=0;
   for(let j=0;j<r.ky;j++)for(let i=0;i<r.kx;i++){
     k++;
@@ -706,8 +715,8 @@ function poster(st){
       // Ränder weiss abdecken (statt clipPath: keine doppelten ids zwischen Vorschau und Druck)
       `<g fill="#fff"><rect x="0" y="0" width="${BLATT.w}" height="${y0}"/><rect x="0" y="${y1}" width="${BLATT.w}" height="${BLATT.h-y1}"/><rect x="0" y="0" width="${x0}" height="${BLATT.h}"/><rect x="${x1}" y="0" width="${BLATT.w-x1}" height="${BLATT.h}"/></g>`+
       extra+
-      `<text x="10" y="16.5" font-size="6" font-weight="800" fill="#1c2430">${name}</text>`+
-      `<text x="10" y="21" font-size="3.4" fill="#5b6573">${cm(S.b)} × ${cm(S.h)} cm${linieText(S)}${BLATT.name==='A3'?' · A3':''} · Poster aus ${r.n} Blättern · Blatt ${k} von ${r.n}: Reihe ${j+1}, Spalte ${i+1}</text>`+
+      titelSvg(name,leg.x-15)+
+      subSvg(`${cm(S.b)} × ${cm(S.h)} cm${linieText(S)}${BLATT.name==='A3'?' · A3':''} · Poster aus ${r.n} Blättern · Blatt ${k} von ${r.n}: Reihe ${j+1}, Spalte ${i+1}`)+
       leg.svg+karte+
       `<text x="10" y="${BLATT.h-19.5}" font-size="3" fill="#5b6573">Zusammenkleben: Blätter mit gestrichelter Linie dort abschneiden, Passkreuze auf den Klebestreifen des Nachbarblatts legen, kleben.</text>`+
       fuss());
@@ -753,6 +762,8 @@ function packen(posten){
 }
 const masstext=e=>`${cm(e.b)} × ${cm(e.h)} cm`+(e.linie==='naht'?` (Naht ${e.naht} mm`:e.linie==='zugabe'?` (Zugabe ${e.zugabe} mm`:'')+(e.linie==='schnitt'?'':punkteAn(e)?`, Punkte alle ${e.pabst} mm)`:')');
 const breit=(t,pt)=>t.length*pt*.52;   // ungefähre Textbreite in mm
+const titelSvg=(name,maxW)=>`<text x="10" y="16.5" font-size="6" font-weight="800" fill="#1c2430"${breit(name,6)>maxW?` textLength="${maxW.toFixed(1)}" lengthAdjust="spacingAndGlyphs"`:''}>${name}</text>`;
+const subSvg=sub=>`<text x="10" y="21" font-size="3.4" fill="#5b6573"${breit(sub,3.4)>NUTZ.w?` textLength="${NUTZ.w}" lengthAdjust="spacingAndGlyphs"`:''}>${sub}</text>`;
 function blaetterListe(posten,seiten,frei){
   const n=Math.min(MAXSEITEN,seiten.length);
   return seiten.slice(0,n).map((seite,s)=>{
@@ -774,7 +785,7 @@ function blaetterListe(posten,seiten,frei){
     }).join('');
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${BLATT.w} ${BLATT.h}" width="${BLATT.w}mm" height="${BLATT.h}mm" font-family="Nunito,Arial,sans-serif" data-blatt="${s}" role="img" aria-label="Blatt ${s+1}: ${teile.map(([,k,i])=>`${k} × ${titel(posten[i].e)}`).join(', ')}">`+
       `<rect width="${BLATT.w}" height="${BLATT.h}" fill="#fff"/>`+
-      `<text x="10" y="16.5" font-size="6" font-weight="800" fill="#1c2430">${name}</text>`+
+      titelSvg(name,leg?leg.x-15:NUTZ.w)+
       `<text x="10" y="21" font-size="3.4" fill="#5b6573"${eng?` textLength="${NUTZ.w}" lengthAdjust="spacingAndGlyphs"`:''}>${sub}</text>`+
       (leg?leg.svg:'')+stuecke+farbZeile([...new Map(da.flatMap(i=>farbListe(form(posten[i].e))).map(c=>[c.f,c])).values()])+fuss();
   });
@@ -799,6 +810,7 @@ function layoutAuto(){
   return {posten,seiten};
 }
 function zeichnenListe(){
+  nutzFarb(L.some(e=>farbListe(form(e)).length));
   if(S.frei){zeichnenFrei();return}
   const {posten,seiten}=layoutAuto(),svg=blaetterListe(posten,seiten);
   const passt=posten.filter(p=>p.lay.pro),stk=passt.reduce((a,p)=>a+p.e.n,0),z=seiten.length;
@@ -868,7 +880,8 @@ function zeichnen(){
   document.querySelectorAll('.form').forEach(k=>k.setAttribute('aria-pressed',k.dataset.id===S.id));
   $('vorschau').classList.toggle('freimodus',!!(S.frei&&L.length));
   if(L.length){zeichnenListe();speichern();return}
-  const f=form(),st=stueck(),lay=anordnen(st);
+  const f=form();nutzFarb(farbListe(f).length);
+  const st=stueck(),lay=anordnen(st);
   let info,ok=lay.pro>0;
   const po=ok?null:poster(st);
   if(po){
@@ -895,6 +908,7 @@ function zeichnen(){
     $('vorschau').innerHTML=svg.slice(0,2).join('')+(svg.length>2?`<p class="mehr">… und ${svg.length-2} weitere Blätter</p>`:'');
     $('druck').innerHTML=svg.join('');
   }
+  if(!CLIP)info+='<br><span class="warn">Die Rechenbibliothek konnte nicht geladen werden (kein Internet?): nur Schnittlinie, keine Schachteln nach Mass.</span>';
   $('info').innerHTML=info;$('drucken').disabled=!ok;
   speichern();
 }
@@ -934,7 +948,7 @@ function listeZeigen(neu){
 $('dazu').addEventListener('click',()=>{
   const e={id:S.id,b:+S.b.toFixed(2),h:+S.h.toFixed(2),n:S.n,linie:S.linie,naht:S.naht,zugabe:S.zugabe,spiegel:S.spiegel,param:S.param,punkte:punkteAn(S),pabst:S.pabst,strich:S.strich,netz:NETZE[S.id]?Object.assign({},S.netz):undefined};
   let i;
-  if(S.frei){e.n=1;freiPlatz(e,-1,L.length-1);L.push(e);i=L.length-1}   // frei: jedes Stück einzeln, gleich neben das letzte
+  if(S.frei){const k=Math.min(S.n,50);e.n=1;for(let j=0;j<k;j++){const c=j?Object.assign({},e,{netz:e.netz&&Object.assign({},e.netz)}):e;freiPlatz(c,-1,L.length-1);L.push(c)}i=L.length-1}   // frei: jedes Stück einzeln, gleich neben das letzte
   else{const k=kodieren(e,true);i=L.findIndex(x=>kodieren(x,true)===k);   // gleiche Form und Grösse: nur Anzahl erhöhen
     if(i>=0)L[i].n=Math.min(500,L[i].n+e.n);else{L.push(e);i=L.length-1}}
   listeZeigen(i);zeichnen();
@@ -957,7 +971,7 @@ $('l-ul').addEventListener('click',ev=>{
     freiPlatz(k,-1,i);L.splice(i+1,0,k);zeichnen();listeZeigen(i+1);return;
   }
   if(b.classList.contains('l-dreh')){e.dreh=!e.dreh;zeichnen();listeZeigen();return}
-  L.splice(i,1);listeZeigen();zeichnen();
+  L.splice(i,1);zeichnen();listeZeigen();
   const rest=$('l-ul').querySelectorAll('.l-weg');(rest[Math.min(i,rest.length-1)]||$('dazu')).focus();
 });
 $('leeren').addEventListener('click',()=>{L=[];listeZeigen();zeichnen();$('dazu').focus()});
@@ -1107,6 +1121,7 @@ $('fuellen').addEventListener('click',()=>{
   S.n=Math.max(1,Math.ceil(S.n/lay.pro))*lay.pro;felder();zeichnen();
 });
 document.querySelectorAll('[name=linie]').forEach(r=>r.addEventListener('change',()=>{S.linie=r.value;felder();zeichnen()}));
+if(!CLIP){document.querySelectorAll('[name=linie]').forEach(r=>{if(r.value!=='schnitt'){r.disabled=true;r.closest('label').title='Dafür braucht die Seite Internet'}});$('punkte').disabled=true}
 ['naht','zugabe'].forEach(k=>{
   $(k).addEventListener('input',()=>{S[k]=Math.max(1,Math.min(20,Math.round(zahl($(k).value,S[k]))));felderPunkte();zeichnen()});
   $(k).addEventListener('change',felder);
@@ -1117,7 +1132,7 @@ $('punkte').addEventListener('change',()=>{
   if(S.punkte&&S.linie==='schnitt')S.linie='naht';   // Punkte liegen auf der Nählinie: die braucht es dazu
   felder();zeichnen();
 });
-$('pabst').addEventListener('input',()=>{S.pabst=Math.max(2,Math.min(10,Math.round(+$('pabst').value||5)));$('lbl-pabst').textContent=`alle ${S.pabst} mm`;zeichnen()});
+$('pabst').addEventListener('input',()=>{S.pabst=Math.max(2,Math.min(20,Math.round(+$('pabst').value||5)));$('lbl-pabst').textContent=`alle ${S.pabst} mm`;zeichnen()});
 $('strich').addEventListener('change',()=>{S.strich=$('strich').checked;zeichnen()});
 $('det').addEventListener('change',()=>{S.det=$('det').checked;zeichnen()});
 $('farbig').addEventListener('change',()=>{S.farbig=$('farbig').checked;felder();zeichnen()});

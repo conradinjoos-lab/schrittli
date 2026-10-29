@@ -75,7 +75,7 @@ body.klein .gross-nur{display:none!important}
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
   <h1>Maschenprobe</h1>
-  <p>Zähle an deinem Probestück die Maschen und Reihen auf 10 cm. Die Seite rechnet aus, wie viele Maschen du anschlägst und wie viel Garn du brauchst. <a href="../">← Schablonen</a></p>
+  <p>Zähle an deinem Probestück die Maschen und Reihen auf 10 cm. Die Seite rechnet aus, wie viele Maschen du anschlägst und wie viel Garn du brauchst. <a href="../">←&nbsp;Vorlagen-Generator</a></p>
 </header>
 <script src="../zurueck.js"></script>
 <main>
@@ -149,19 +149,20 @@ function klasseLesen(){
 const KLASSE=klasseLesen(), KLEIN=KLASSE>0&&KLASSE<=2;
 if(KLEIN)document.body.classList.add('klein');
 
+const hat=(o,k)=>k!=null&&Object.prototype.hasOwnProperty.call(o,k);   // nur echte Schlüssel, kein «constructor»
 function laden(){
   try{
     const t=JSON.parse(localStorage.getItem(KEY));
     if(t&&typeof t==='object'){
-      if(TECHNIK[t.technik])S.technik=t.technik; if(PROJEKTE[t.projekt])S.projekt=t.projekt;
+      if(hat(TECHNIK,t.technik))S.technik=t.technik; if(hat(PROJEKTE,t.projekt))S.projekt=t.projekt;
       S.b=clamp(t.b??S.b,3,200);S.h=clamp(t.h??S.h,3,300);S.m10=clamp(t.m10??S.m10,4,80);S.r10=clamp(t.r10??S.r10,4,120);
       S.gew=clamp(t.gew??0,0,100);S.lauf=clamp(t.lauf??0,0,600);S.zahlen=!!t.zahlen;S.name=String(t.name||'').slice(0,30);
-      if(PAPIERE[t.papier])S.papier=t.papier;
+      if(hat(PAPIERE,t.papier))S.papier=t.papier;
     }
   }catch(e){}
   const q=new URLSearchParams(location.search);
-  if(PAPIERE[String(q.get('papier')).toLowerCase()])S.papier=String(q.get('papier')).toLowerCase();
-  if(TECHNIK[q.get('technik')])S.technik=q.get('technik');
+  if(hat(PAPIERE,String(q.get('papier')).toLowerCase()))S.papier=String(q.get('papier')).toLowerCase();
+  if(hat(TECHNIK,q.get('technik')))S.technik=q.get('technik');
 }
 function speichern(){ try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){} }
 
@@ -253,9 +254,9 @@ function alles(){
   li.push(haek
     ?`Du häkelst eine Kette mit <b>${R.anschlag} Luftmaschen</b>.<span class="leise">Dazu kommen die Wendeluftmaschen am Anfang jeder Reihe.${R.anschlag!==R.gerade?` Gerade Zahl: ${R.gerade}.`:''}</span>`
     :`Du schlägst <b>${R.anschlag} Maschen</b> an.<span class="leise">${R.anschlag!==R.gerade?`Braucht dein Muster eine gerade Zahl, nimm ${R.gerade}.`:'Das ist eine gerade Zahl – gut für Muster wie 1 rechts, 1 links.'}${S.projekt==='muetze'?' In Runden stricken: die Maschen schliessen sich zum Kreis.':''}</span>`);
-  li.push(`Du ${haek?'häkelst':'strickst'} <b>${R.reihen} Reihen</b>.<span class="leise">Dann ist dein Werk ${zahl(S.h)} cm hoch. Miss zwischendurch nach!</span>`);
+  li.push(`Du ${haek?'häkelst':'strickst'} <b>${R.reihen} ${S.projekt==='muetze'&&!haek?'Runden':'Reihen'}</b>.<span class="leise">Dann ist dein Werk ${zahl(S.h)} cm hoch. Miss zwischendurch nach!</span>`);
   li.push(`Dein Werk wird <b>${zahl(S.b)} × ${zahl(S.h)} cm</b>.<span class="leise">Eine Masche ist bei dir etwa ${zahl(R.maschenBreite*10,1)} mm breit, eine Reihe ${zahl(R.reihenHoehe*10,1)} mm hoch.</span>`);
-  if(R.gramm)li.push(`Du brauchst ungefähr <b>${R.gramm} g</b> Garn – das sind <b>${R.knaeuel} ${R.knaeuel===1?'Knäuel':'Knäuel'}</b> à 50 g.<span class="leise">${R.meter?`Das sind etwa ${zahl(R.meter)} m Faden. `:''}Mit 10 % Reserve gerechnet. Nimm lieber eines mehr, damit die Farbe zusammenpasst.</span>`);
+  if(R.gramm)li.push(`Du brauchst ungefähr <b>${R.gramm} g</b> Garn – das sind <b>${R.knaeuel} Knäuel</b> à 50 g.<span class="leise">${R.meter?`Das sind etwa ${zahl(R.meter)} m Faden. `:''}Mit 10 % Reserve gerechnet. Nimm lieber eines mehr, damit die Farbe zusammenpasst.</span>`);
   else li.push(`<span class="leise" style="font-size:15px">Wiege dein Probestück (10 × 10 cm) und gib die Gramm ein – dann rechne ich aus, wie viele Knäuel du brauchst.</span>`);
   $('antwort').innerHTML=li.map(t=>`<li>${t}</li>`).join('');
   $('tipp').textContent=KLEIN?'Zähle genau – dann stimmt die Grösse.':'Je genauer du am Probestück zählst, desto besser passt dein Werk. Ein Probestück ist immer etwas grösser als 10 cm, damit du in der Mitte zählen kannst.';
@@ -271,7 +272,7 @@ document.querySelectorAll('.stepper').forEach(st=>{
   const inp=st.querySelector('input'),feld=st.dataset.feld,min=Number(st.dataset.min),max=Number(st.dataset.max),schritt=Number(st.dataset.schritt||1);
   const setzen=v=>{
     v=clamp(v,min,max);
-    if(feld==='b'||feld==='breite'){S.b=v;S.projekt=passendesProjekt();}
+    if(feld==='breite'){S.b=v;S.projekt=passendesProjekt();}
     else if(feld==='hoehe'){S.h=v;S.projekt=passendesProjekt();}
     else S[feld]=v;
     alles();

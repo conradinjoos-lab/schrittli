@@ -80,7 +80,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
   <h1>Armbänder</h1>
-  <p>Handgelenk messen, Art, Muster und Farben wählen. Länge, Perlen und Fäden rechnet die Seite aus. <a href="../">← Schablonen</a></p>
+  <p>Handgelenk messen, Art, Muster und Farben wählen. Länge, Perlen und Fäden rechnet die Seite aus. <a href="../">←&nbsp;Vorlagen-Generator</a></p>
 </header>
 <script src="../zurueck.js"></script>
 <main>
@@ -93,7 +93,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
       <div class="feld" id="f-breite"><span class="lbl" id="l-breite"></span><div class="chips" role="group" aria-labelledby="l-breite" id="breiten"></div></div>
       <div class="feld"><span class="lbl" id="l-muster">Muster</span><div class="chips" role="group" aria-labelledby="l-muster" id="muster"></div></div>
       <div class="feld" id="f-block"><span class="lbl" id="l-block"></span><div class="chips" role="group" aria-labelledby="l-block" id="bloecke"></div></div>
-      <div class="feld" id="f-name"><label class="lbl" for="name">Name (Grossbuchstaben)</label><input class="text" id="name" maxlength="14" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="NAME"></div>
+      <div class="feld" id="f-name"><label class="lbl" for="name">Name (Grossbuchstaben)</label><input class="text" id="name" maxlength="14" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="NAME"><small id="name-hinweis" style="display:block;margin-top:6px;color:var(--muted)">Buchstaben A–Z, Ä Ö Ü, Leerzeichen und Bindestrich.</small></div>
       <div class="feld"><span class="lbl" id="l-farben">Farben – antippen in der Reihenfolge, die du willst</span><div class="farben" role="group" aria-labelledby="l-farben" id="farben"></div>
         <button type="button" class="klein" id="mischen" hidden>Neu mischen</button></div>
     </section>
@@ -180,7 +180,8 @@ function raster(){
     if(S.muster==='herzen'){const n=Math.floor((R+2)/7),start=Math.floor((R-(n*7-2))/2);
       for(let h=0;h<n;h++)HERZ.forEach((z,c)=>[...z].forEach((x,r)=>{if(x==='1')setze(start+h*7+r,oben+c,C2[h%C2.length])}));}
     else{const sp=[];nameZeichen().forEach((z,i)=>{if(i)sp.push(null);if(z===' '){sp.push(null);return}for(let x=0;x<3;x++)sp.push([z,x,i])});
-      const start=Math.floor((R-sp.length)/2);
+      let start=Math.floor((R-sp.length)/2);const zuLang=start<0;if(zuLang){start=0;sp.splice(R)}   // zu lang: so viel wie passt, mit Hinweis
+      $('name-hinweis').textContent=zuLang?'Der Name ist zu lang für dieses Armband: kürzer schreiben oder den Umfang grösser wählen.':'Buchstaben A–Z, Ä Ö Ü, Leerzeichen und Bindestrich.';
       sp.forEach((s,j)=>{if(!s)return;const [z,x,i]=s;for(let y=0;y<5;y++)if(SCHRIFT[z][y*3+x]==='1')setze(start+j,oben+y,C2[i%C2.length])});}
     return g;
   }
@@ -344,7 +345,7 @@ function blatt(){
       g.slice(k*proSp,(k+1)*proSp).forEach((z,i)=>{const r=k*proSp+i,yy=y+4+i*zellY;
         z.forEach((f,c)=>{s+=`<rect x="${(x0+c*zellX).toFixed(2)}" y="${yy.toFixed(2)}" width="${zellX.toFixed(2)}" height="${zellY.toFixed(2)}" fill="${fc(f)}" stroke="#1c2430" stroke-width=".15"/>`});
         if((r+1)%5===0||r===0)s+=`<text x="${x0-1}" y="${(yy+zellY*.8).toFixed(2)}" font-size="${Math.min(2.6,zellY*.95).toFixed(2)}" text-anchor="end" fill="#5b6573">${r+1}</text>`});}
-    const tx=Math.min(ende+8,140),fl=farbListe(tx,y+8,teile);
+    const tx=Math.max(Math.min(ende+8,140),zx+56),fl=farbListe(tx,y+8,teile);
     if(tx<185){s+=`<text x="${tx}" y="${y+2}" font-size="3.6" font-weight="800" fill="#1c2430">Perlen</text>`+fl.s;
       s+=textBlock(tx,fl.y+6,[`**${R} Reihen × ${W} Perlen`,`**Kette: ${W+1} Fäden zu ${fadenCm(L+FADEN.weben.kette)}`,`Schussfaden etwa ${fadenCm(R*(2*W*pe.l+FADEN.weben.schussProReihe)+FADEN.weben.schussZug)}, in Stücken bis 1 m.`,'**So geht es','1. Kettfäden auf den Webrahmen spannen.','2. Schussfaden unten an den äussersten Kettfaden knoten.','3. Perlen der Reihe auffädeln, von oben gelesen links nach rechts.','4. Faden unter den Kettfäden durchziehen, Perlen mit dem Finger zwischen die Fäden drücken.','5. Nadel oben über den Kettfäden zurück durch alle Perlen.','6. Nächste Reihe. Zum Schluss Fäden verknoten oder zu Zöpfen flechten.'],3.4,Math.max(30,185-tx)).s;}
   }else if(S.art==='knuepfen'){
@@ -398,10 +399,10 @@ function bedienung(){
   klick('sitz',b=>{S.sitz=b.dataset.s;zeichnen()});
   klick('farben',b=>{const k=b.dataset.f,i=S.farben.indexOf(k);if(i>=0)S.farben.splice(i,1);else if(S.farben.length<8)S.farben.push(k);zeichnen()});
   $('mischen').addEventListener('click',()=>{S.seed=(S.seed*7+13)%9973;zeichnen()});
-  const umfang=v=>{v=parseFloat(String(v).replace(',','.'));if(!(v>=10&&v<=24))return;S.umfang=Math.round(v*2)/2;zeichnen(true)};
+  const umfang=v=>{v=parseFloat(String(v).replace(',','.'));if(!(v>0))return;S.umfang=Math.round(Math.min(24,Math.max(10,v))*2)/2;$('umfang').value=S.umfang;$('regler').value=S.umfang;zeichnen(true)};
   $('regler').addEventListener('input',e=>umfang(e.target.value));
   $('umfang').addEventListener('change',e=>umfang(e.target.value));
-  $('name').addEventListener('input',e=>{const t=e.target,p=t.selectionStart;t.value=t.value.toUpperCase();try{t.setSelectionRange(p,p)}catch(x){}S.name=t.value;zeichnen(true)});
+  $('name').addEventListener('input',e=>{const t=e.target,p=t.selectionStart;t.value=t.value.toUpperCase().replace(/[^A-ZÄÖÜ \-]/g,'');try{t.setSelectionRange(p,p)}catch(x){}S.name=t.value;zeichnen(true)});
   $('drucken').addEventListener('click',()=>window.print());
 }
 function zeichnen(tippen){
@@ -411,7 +412,7 @@ function zeichnen(tippen){
   if(A.perlen)$('perlen').innerHTML=A.perlen.map(k=>`<button type="button" class="chip" data-p="${k}" aria-pressed="${k===S.perle}">${PERLEN[k].name}</button>`).join('');
   const brt=S.art==='weben'?[5,7,9,11]:S.art==='knuepfen'?[4,6,8,10]:null;
   $('f-breite').hidden=!brt;
-  if(brt){if(S.art==='knuepfen'&&S.muster==='pfeil'&&S.faeden%4&&S.faeden<8){}   // Pfeil geht mit jeder geraden Zahl
+  if(brt){
     $('l-breite').textContent=S.art==='knuepfen'?'Anzahl Fäden':'Breite (Perlen pro Reihe)';
     const akt=S.art==='knuepfen'?S.faeden:S.breite;
     $('breiten').innerHTML=brt.map(w=>`<button type="button" class="chip" data-w="${w}" aria-pressed="${w===akt}">${w}</button>`).join('');}

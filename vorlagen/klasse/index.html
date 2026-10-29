@@ -145,7 +145,7 @@ body.vollbild .ampel{--a:min(24vw,23vh)}
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
   <h1>Klassen-Werkzeuge</h1>
-  <p>Arbeitszeit-Timer, Aufräum-Countdown und Lärmampel für den Beamer. Alles läuft nur auf diesem Gerät. <a href="../">← Schablonen</a></p>
+  <p>Arbeitszeit-Timer, Aufräum-Countdown und Lärmampel für den Beamer. Alles läuft nur auf diesem Gerät. <a href="../">←&nbsp;Vorlagen-Generator</a></p>
 </header>
 <script src="../zurueck.js"></script>
 <nav class="nav" aria-label="Werkzeug wählen">
@@ -165,7 +165,7 @@ body.vollbild .ampel{--a:min(24vw,23vh)}
       <div class="ziffern" id="timer-ziffern">10:00</div>
       <div class="meldung" id="timer-meldung" hidden>Zeit ist um</div>
       <div class="balken" aria-hidden="true"><i id="timer-balken"></i></div>
-      <input class="ziel" id="timer-ziel" maxlength="60" autocomplete="off" placeholder="Zwischenziel, z. B. «Jetzt Faden vernähen»" aria-label="Zwischenziel">
+      <input class="ziel" id="timer-ziel" maxlength="60" autocomplete="off" placeholder="Zwischenziel, z. B. Faden vernähen" aria-label="Zwischenziel">
     </div>
     <div class="schaltung">
       <button type="button" class="knopf gross haupt" id="timer-start">Start</button>
@@ -243,7 +243,7 @@ const merk=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 const mmss=ms=>{const s=Math.max(0,Math.ceil(ms/1000)),m=Math.floor(s/60);return m+':'+String(s%60).padStart(2,'0')};
 // Ziffern einzeln in gleich breite Kästchen, damit nichts hüpft
 const ziffernHtml=t=>[...t].map(z=>z===':'?'<span class="dp">:</span>':'<span>'+z+'</span>').join('');
-const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
 
 /* ---------- Ton (WebAudio, keine Datei) ---------- */
 let actx=null;
@@ -326,7 +326,8 @@ ziel.addEventListener('input',()=>merk('schrittli.klasse.ziel',ziel.value));
 /* ---------- 2 · Aufräum-Countdown ---------- */
 const AUFGABEN_STANDARD=['Werkzeug zurück','Boden gewischt','Tisch abgewischt','Material versorgt','Stuhl hochgestellt'];
 let aufgaben=lies('schrittli.klasse.aufraeumen',null);
-if(!Array.isArray(aufgaben)||!aufgaben.length)aufgaben=AUFGABEN_STANDARD.slice();
+aufgaben=(Array.isArray(aufgaben)?aufgaben:[]).filter(x=>typeof x==='string'&&x.trim()).map(x=>x.slice(0,60));   // kaputte gespeicherte Liste darf die Seite nicht stoppen
+if(!aufgaben.length)aufgaben=AUFGABEN_STANDARD.slice();
 let erledigt=aufgaben.map(()=>false),bearbeiten=false,gefeiert=false;
 const liste=$('auf-liste');
 function zeigeListe(){

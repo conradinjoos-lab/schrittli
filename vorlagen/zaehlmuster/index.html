@@ -35,6 +35,8 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 .farben{display:flex;flex-wrap:wrap;gap:8px}
 .farbe{position:relative;width:44px;height:44px;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0;font:inherit;font-size:22px;line-height:1}
 .farbe[aria-pressed="true"]{border:3px solid var(--ink);box-shadow:0 0 0 3px var(--surface) inset}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .farbe:not([aria-pressed="true"]){border-color:var(--muted)}}
+:root[data-theme="dark"] .farbe:not([aria-pressed="true"]){border-color:var(--muted)}
 .farbe.radierer{background:var(--surface2);color:var(--ink)}
 .werkzeuge{display:flex;flex-wrap:wrap;gap:6px}
 .werkzeug,.klein{font:inherit;font-size:14px;padding:8px 12px;border-radius:12px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer;min-height:44px}
@@ -95,7 +97,7 @@ body.klein .gross-nur{display:none!important}
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
   <h1>Zählmuster</h1>
-  <p>Kästchen anmalen – für den Kreuzstich oder zum Weben. Die Seite zählt die Farben und druckt die Vorlage mit Zahlen. <a href="../">← Schablonen</a></p>
+  <p>Kästchen anmalen – für den Kreuzstich oder zum Weben. Die Seite zählt die Farben und druckt die Vorlage mit Zahlen. <a href="../">←&nbsp;Vorlagen-Generator</a></p>
 </header>
 <script src="../zurueck.js"></script>
 <main>

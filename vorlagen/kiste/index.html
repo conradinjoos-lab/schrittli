@@ -99,7 +99,7 @@ svg .masst{font-family:Fredoka,Nunito,sans-serif;font-weight:600;fill:#9A6B2F}
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
   <h1>Kisten-Planer</h1>
-  <p>Sag, wie gross die Kiste werden soll und aus welchem Holz. Die Seite rechnet alle Teile aus, wählt die richtige Schraube, sagt dir Bohrer und Vorbohrtiefe, zeichnet die Bohrpläne und den Zuschnitt und schreibt die Bauanleitung. <a href="../">← Werkzeuge</a></p>
+  <p>Sag, wie gross die Kiste werden soll und aus welchem Holz. Die Seite rechnet alle Teile aus, wählt die richtige Schraube, sagt dir Bohrer und Vorbohrtiefe, zeichnet die Bohrpläne und den Zuschnitt und schreibt die Bauanleitung. <a href="../">←&nbsp;Vorlagen-Generator</a></p>
 </header>
 <script src="../zurueck.js"></script>
 <main>
@@ -204,12 +204,16 @@ function speichern(){ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e
 // ---------- Schraube, Bohrer, Vorbohren ----------
 // Durchmesser nach Kantendicke (die Kante soll gut doppelt so dick sein wie die Schraube), Länge ≈ 3 × Dicke:
 // einmal durch das Brett, zweimal die Dicke in die Kante hinein. Vorbohren 1 mm dünner als die Schraube.
-function schraube(d){
+function schraube(d,maxEin){
   if(d<6) return {ok:false};
   const dm=d<8?2.5:d<12?3:d<15?3.5:d<18?4:4.5;
   const ls=LAENGEN[dm], ziel=3*d;
-  const len=ls.find(x=>x>=ziel)||ls[ls.length-1];
-  return {ok:true,dm,len,loch:dm,vor:Math.round((dm-1)*10)/10,ein:len-d,tiefe:len-d+2,ziel};
+  let len=ls.find(x=>x>=ziel)||ls[ls.length-1], kurz=false;
+  if(maxEin!=null&&len-d>maxEin){            // in die Kante passen nur maxEin mm: kürzere Schraube nehmen
+    const k=ls.filter(x=>x-d<=maxEin); if(!k.length) return {ok:false,zuLang:true};
+    len=k[k.length-1]; kurz=true;
+  }
+  return {ok:true,dm,len,loch:dm,vor:Math.round((dm-1)*10)/10,ein:len-d,tiefe:len-d+2,ziel,kurz,laengste:len<ziel&&!kurz};
 }
 // Schraubenstellen auf einer Kante der Länge len: vom Rand e weg, dann etwa alle 7 cm, mindestens zwei.
 function stellen(len,e){
@@ -228,7 +232,8 @@ function rechnen(){
   const hw=unter?Ha-d:Ha;                       // Wandhöhe
   const R={d,La,Ba,Ha,Li,Bi,Hi,hw,unter,langAussen,innen,fehler:''};
   if(Li<20||Bi<20||Hi<5){ R.fehler='So geht die Kiste nicht auf: das Holz ist zu dick für diese Masse. Nimm dünneres Holz oder eine grössere Kiste.'; return R; }
-  const sc=schraube(d); R.sc=sc;
+  const sc=schraube(d,unter?hw-3:undefined); R.sc=sc;   // von unten: die Schraube muss in der Wandkante bleiben
+  if(sc.zuLang){ R.fehler=`So flach geht es nicht mit Schrauben von unten: die Wandkante ist nur ${mm(hw)} hoch. Setz den Boden zwischen die Wände oder bau die Kiste höher.`; return R; }
   const e=sc.ok?Math.round(sc.len-d+8):20;    // Randabstand der Schrauben: Boden- und Eckschrauben kreuzen sich so nie
   R.e=e;
   // Teile: Länge × Breite (mm), alle aus dem gleichen Holz
@@ -318,7 +323,7 @@ function kistenBild(R){
   const poly=(pts,cls,fill)=>`<polygon points="${pts.map(p=>pt(...p)).join(' ')}" fill="${fill}" stroke="#4a3a2a" stroke-width=".6" stroke-linejoin="round"${cls?` class="${cls}"`:''}/>`;
   let s='';
   // Boden innen (sichtbar von oben), dann die vier Wände von oben, Vorderseite, rechte Seite
-  const zb=unter?d:d;                                         // Oberkante des Bodens
+  const zb=d;                                         // Oberkante des Bodens
   s+=poly([[d,d,zb],[La-d,d,zb],[La-d,Ba-d,zb],[d,Ba-d,zb]],'','#F1DFC2');
   // Innenflächen der Wände (hinten und links sichtbar)
   s+=poly([[d,Ba-d,zb],[La-d,Ba-d,zb],[La-d,Ba-d,Ha],[d,Ba-d,Ha]],'','#D9B98A');   // hintere Innenwand
@@ -376,13 +381,15 @@ function bohrplan(R,t){
   ys.forEach((y,i)=>{ s+=`<text class="t" font-size="${fs}" x="${-fs*0.5}" y="${h-y+fs*0.35}" text-anchor="end" fill="#2B2320">${n(y)}</text>`; });
   if(xs.length) s+=`<text class="tk" font-size="${fs*0.8}" x="${w/2}" y="${h+fs*(dichtX?3.8:2.5)}" text-anchor="middle" fill="#666">mm vom linken Rand</text>`;
   if(ys.length) s+=`<text class="tk" font-size="${fs*0.8}" transform="translate(${-fs*2.6} ${h/2}) rotate(-90)" text-anchor="middle" fill="#666">mm von unten</text>`;
-  if(!L.length) s+=`<text class="t" font-size="${fs}" x="${w/2}" y="${h/2+fs*0.35}" text-anchor="middle" fill="#666">keine Löcher – wird von aussen angeschraubt</text>`;
-  s+=`<text class="t" font-size="${fs*0.9}" x="${w/2}" y="${-fs*0.6}" text-anchor="middle" fill="#2B2320">${esc(t.name)} ${mm(w)} × ${mm(h)}</text>`;
+  const eng=(txt,pt,max)=>txt.length*pt*0.55>max?` textLength="${max.toFixed(1)}" lengthAdjust="spacingAndGlyphs"`:'';
+  if(!L.length){ const hin=w<fs*24?'keine Löcher':'keine Löcher – wird von aussen angeschraubt'; s+=`<text class="t" font-size="${fs}" x="${w/2}" y="${h/2+fs*0.35}" text-anchor="middle" fill="#666"${eng(hin,fs,w-2)}>${hin}</text>`; }
+  const tit=`${t.name} ${mm(w)} × ${mm(h)}`;
+  s+=`<text class="t" font-size="${fs*0.9}" x="${w/2}" y="${-fs*0.6}" text-anchor="middle" fill="#2B2320"${eng(tit,fs*0.9,w+rand*3)}>${esc(tit)}</text>`;
   const ml=rand+(ys.length?fs*1.5:0), mb=rand+(xs.length?fs*1.5:0);
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${-ml} ${-rand*0.6} ${w+ml+rand*0.4} ${h+rand*0.6+mb}" role="img" aria-label="Bohrplan ${esc(t.name)}">${s}</svg>`;
 }
 function zuschnittBild(Z){
-  const fs=Math.max(4,Math.max(Z.W,Z.H)/45);
+  const fs=Math.max(4,Math.min(Z.W,Z.H)/45);
   let s=`<rect x="0" y="0" width="${Z.W}" height="${Z.H}" fill="#EFE3D0" stroke="#4a3a2a" stroke-width="${fs/8}"/>`;
   Z.teile.forEach(p=>{ s+=`<rect x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" fill="#F3E2C6" stroke="#4a3a2a" stroke-width="${fs/10}"/>`;
     const klein=p.w<fs*7||p.h<fs*2.4;
@@ -415,7 +422,7 @@ function rechnung(R){
   z.push(R.unter?`<p>Boden unter den Wänden: Wandhöhe ${n(R.Ha)} − ${n(d)} = <span class="f">${mm(R.hw)}</span>, Boden so gross wie die Kiste aussen.</p>`:`<p>Boden zwischen den Wänden: Wände volle Höhe <span class="f">${mm(R.hw)}</span>, Boden ${n(R.La)} − 2 × ${n(d)} = ${n(R.Li)} und ${n(R.Ba)} − 2 × ${n(d)} = ${n(R.Bi)} → <span class="f">${mm(R.Li)} × ${mm(R.Bi)}</span>.</p>`);
   z.push(R.langAussen?`<p>Längsseiten aussen: Stirnseiten ${n(R.Ba)} − 2 × ${n(d)} = <span class="f">${mm(R.Bi)}</span> lang.</p>`:`<p>Stirnseiten aussen: Längsseiten ${n(R.La)} − 2 × ${n(d)} = <span class="f">${mm(R.Li)}</span> lang.</p>`);
   if(sc.ok){
-    z.push(`<p>Schraube: Kante ${n(d)} mm dick → <span class="f">${n(sc.dm)} mm</span> dick (die Kante soll gut doppelt so dick sein wie die Schraube). Länge 3 × ${n(d)} = ${n(sc.ziel)} → nächste Länge <span class="f">${sc.len} mm</span>: ${n(d)} mm durch das Brett, ${n(sc.ein)} mm in der Kante.</p>`);
+    z.push(`<p>Schraube: Kante ${n(d)} mm dick → <span class="f">${n(sc.dm)} mm</span> dick (die Kante soll gut doppelt so dick sein wie die Schraube). Länge 3 × ${n(d)} = ${n(sc.ziel)} ${sc.kurz?`→ kürzer, damit sie nicht oben aus der ${mm(R.hw)} hohen Wand kommt:`:sc.laengste?'→ längste Schraube dieser Dicke:':'→ nächste Länge'} <span class="f">${sc.len} mm</span>: ${n(d)} mm durch das Brett, ${n(sc.ein)} mm in der Kante.</p>`);
     z.push(`<p>Bohrer: Durchgangsloch = Schraube <span class="f">${n(sc.loch)} mm</span>. Vorbohren = ${n(sc.dm)} − 1 = <span class="f">${n(sc.vor)} mm</span>. Tiefe = ${sc.len} − ${n(d)} + 2 = <span class="f">${mm(sc.tiefe)}</span>.</p>`);
     z.push(`<p>Rand: ${n(d)} : 2 = <span class="f">${mm(d/2)}</span>. Schrauben etwa alle 7 cm, am Ende ${mm(R.e)} vom Rand – so kreuzen sich Boden- und Eckschrauben nicht.</p>`);
     const bs=R.bodenStellen, teil=R.unter?'durch den Boden':'durch die Wände';
@@ -456,6 +463,8 @@ function schritte(R){
 }
 
 // ---------- Alles neu zeichnen ----------
+const KARTEN=['bild','plaene','zuschnitt','antwort','rechnung','material'].map(id=>$(id).closest('.karte'));
+function kartenZeigen(ja){ KARTEN.forEach(k=>{ if(k) k.style.display=ja?'':'none'; }); }
 function zeichnen(){
   const R=rechnen();
   $('mass-hinweis').textContent=S.mass==='innen'?'Innenmasse: so gross ist der Platz in der Kiste. Die Seite rechnet die Holzdicke dazu.':'Aussenmasse: so gross ist die fertige Kiste von aussen. Innen bleibt etwas weniger Platz.';
@@ -465,9 +474,10 @@ function zeichnen(){
     $('warnung').textContent=R.fehler; $('warnung').hidden=false;
     ['teile','antwort','rechnung','material','schritte','bild','plaene','zuschnitt','druck'].forEach(id=>{ $(id).innerHTML=''; });
     $('plaene-hinweis').textContent=''; $('zuschnitt-hinweis').textContent='';
+    kartenZeigen(false); $('drucken').disabled=true;
     return;
   }
-  $('warnung').hidden=true;
+  $('warnung').hidden=true; kartenZeigen(true); $('drucken').disabled=false;
   $('teile').innerHTML=teileListe(R);
   $('antwort').innerHTML=antwort(R);
   $('rechnung').innerHTML=rechnung(R);

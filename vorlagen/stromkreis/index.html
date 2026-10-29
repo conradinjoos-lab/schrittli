@@ -115,9 +115,9 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
   .kopf,main,.meldung{display:none!important}
   #druck{display:block;color:#000;font:600 13px/1.4 Nunito,system-ui,sans-serif}
   #druck h1{font-size:22px;margin:0 0 6px}
-  #druck .d-svg{width:100%;max-height:150mm}
-  #druck .d-svg svg{width:100%;height:auto;max-height:150mm;display:block}
-  #druck .d-zwei{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+  #druck .d-svg{width:100%;max-height:120mm}
+  #druck .d-svg svg{width:100%;height:auto;max-height:120mm;display:block;margin:0 auto}
+  #druck .d-zwei{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px;break-inside:avoid}
   #druck ul{margin:4px 0 0;padding-left:18px}
   #druck .strom,#druck .dreht,#druck .summt,#druck .warnz{animation:none}
 }
@@ -127,7 +127,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
   <h1>Stromkreis-Baukasten</h1>
-  <p>Hol dir Batterie oder Netzgerät, Schalter, LED, Leuchtband, Lichterkette und Motor auf die Fläche und verbinde die gelben Klemmen mit Kabeln. Die Seite zeigt sofort, was leuchtet und was dreht, wie viel Strom fliesst und welchen Widerstand eine LED braucht. <a href="../">← Werkzeuge</a></p>
+  <p>Hol dir Batterie oder Netzgerät, Schalter, LED, Leuchtband, Lichterkette und Motor auf die Fläche und verbinde die gelben Klemmen mit Kabeln. Die Seite zeigt sofort, was leuchtet und was dreht, wie viel Strom fliesst und welchen Widerstand eine LED braucht. <a href="../">←&nbsp;Vorlagen-Generator</a></p>
 </header>
 <script src="../zurueck.js"></script>
 <main>
@@ -176,7 +176,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
     <section class="karte" id="k-beispiele" aria-label="Beispiele">
       <h2>Beispiele</h2>
       <div class="beispiele" id="beispiele"></div>
-      <p class="tipp">Der Motor kann einen Propeller (Boot), ein Rad (Auto) oder ein Zahnrad antreiben. Zahnräder, Räder und Propeller zum Ausdrucken gibt es im <a href="../">Vorlagen-Generator</a>.</p>
+      <p class="tipp">Der Motor kann einen Propeller (Boot), ein Rad (Auto) oder ein Zahnrad antreiben. Zahnräder, Räder und Propeller zum Ausdrucken gibt es im <a href="../mechanik/">Mechanik-Planer</a>.</p>
     </section>
   </aside>
 </main>

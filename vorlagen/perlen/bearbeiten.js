@@ -56,7 +56,7 @@
   .pe-dialog button:disabled{opacity:.4;cursor:default}
   .pe-dialog .pe-haupt{background:var(--acc,#17997a);border-color:var(--acc,#17997a);color:var(--acc-ink,#fff)}
   .pe-inhalt{display:grid;grid-template-columns:minmax(0,1fr) 290px;flex:1;min-height:0}
-  .pe-bild{overflow:auto;overscroll-behavior:contain;padding:16px;background:#edf1f5;touch-action:pan-x pan-y pinch-zoom}
+  .pe-bild{overflow:auto;overscroll-behavior:contain;padding:16px;background:var(--surface2,#edf1f5);touch-action:pan-x pan-y pinch-zoom}
   .pe-bild svg{display:block;max-width:none;height:auto;margin:auto;background:#fff;border-radius:12px;user-select:none}
   .pe-bild[data-malen=true] svg{touch-action:none;cursor:crosshair}
   .pe-regler{overflow:auto;padding:14px;background:var(--surface,#fff);border:0;border-left:1px solid var(--line,#d5dee9);margin:0;min-width:0}

@@ -68,6 +68,8 @@ details{margin-top:8px}
 summary{cursor:pointer;font-size:14px;color:var(--muted)}
 .alle{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .alle button{width:30px;height:30px;border-radius:50%;border:2px solid rgba(0,0,0,.3);cursor:pointer}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .farbe i,:root:not([data-theme="light"]) .alle button:not([aria-pressed="true"]){border-color:rgba(255,255,255,.4)}}
+:root[data-theme="dark"] .farbe i,:root[data-theme="dark"] .alle button:not([aria-pressed="true"]){border-color:rgba(255,255,255,.4)}
 .alle button[aria-pressed="true"]{outline:3px solid var(--acc);outline-offset:2px}
 button:focus-visible,.zone:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 [hidden]{display:none!important}
@@ -86,7 +88,7 @@ button:focus-visible,.zone:focus-visible{outline:3px solid var(--acc);outline-of
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
   <h1>Perlentier aus eigenem Bild</h1>
-  <p>Bild hineinziehen, Plan für Rocailles mit Drahtweg bekommen. Das Bild wird nur in diesem Browser verarbeitet und nirgends hochgeladen. <a href="../perlen/">Fertige Perlentiere →</a> · <a href="../">← Schablonen</a></p>
+  <p>Bild hineinziehen, Plan für Rocailles mit Drahtweg bekommen. Das Bild wird nur in diesem Browser verarbeitet und nirgends hochgeladen. <a href="../perlen/">Fertige Perlentiere →</a> · <a href="../">←&nbsp;Vorlagen-Generator</a></p>
 </header>
 <script src="../zurueck.js"></script>
 <main>
@@ -99,7 +101,7 @@ button:focus-visible,.zone:focus-visible{outline:3px solid var(--acc);outline-of
     <p class="hinweis" id="beispiel-zeile">Kein Bild zur Hand? <button type="button" class="knopf-text" id="beispiel">Beispiel ausprobieren</button></p>
     <input type="file" id="datei" accept="image/*" hidden>
     <div class="plan" id="plan" aria-live="polite"></div>
-    <p class="legende" id="legende" hidden><span><i style="background:#2A6FDB"></i>Draht</span><span>Grün rechts: abstehende Teile, z. B. «Ohren 4+1» = 4 Perlen und 1 Endperle</span></p>
+    <p class="legende" id="legende" hidden><span><i style="background:#2A6FDB"></i>Draht</span><span id="leg-beine">Grün rechts: abstehende Teile, z. B. «Ohren 4+1» = 4 Perlen und 1 Endperle</span></p>
     <div class="pruefung" id="pruefung" hidden></div>
     <p class="hinweis" id="mal-hinweis" hidden>Zum Korrigieren rechts eine Farbe wählen, dann auf Perlen tippen oder darüber ziehen. Gleich neben das Ende einer Reihe tippen setzt dort eine Perle dazu. «Perle weg» nimmt eine Perle heraus (bei Ohren und Beinen das ganze Paar). Nochmals auf die Farbe tippen beendet das Malen.</p>
   </section>
@@ -501,7 +503,7 @@ const rechtsText=t=>Math.max(...t.rows.map((r,i)=>{const b=t.beine.find(x=>x.r==
 function luftGeo(t){const g=geometrie(t,Q,1);g.x0-=.35;g.x1+=.35;g.y1+=1.3;return g}
 
 function planSvg(){
-  const t=S.t,g=luftGeo(t),sk=10,fs=5.2,links=fs*.74+fs*1.6+Math.min(fs*.9,sk*.55)+3,rechts=fs*.74+rechtsText(t)*fs*.56+4;
+  const t=S.t,g=luftGeo(t),sk=10,fs=5.2,links=fs*.74+fs*1.6+Math.min(fs*.9,sk*.55)+3,rechts=fs*.74+Math.max(rechtsText(t),6)*fs*.56+4;   // mindestens so breit wie die Überschrift «Perlen»
   const ox=links-g.x0*sk,oben=Math.min(g.y0*sk,-.64*sk)-fs*1.3-fs*.6-4,oy=-oben,w=links+(g.x1-g.x0)*sk+rechts,h=oy+g.y1*sk+4;
   S.ans={ox,oy,sk,g};
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w.toFixed(1)} ${h.toFixed(1)}" font-family="Nunito,Arial,sans-serif" role="img" aria-label="Perlentier-Plan, ${t.rows.length} Reihen, mit Drahtweg" id="plansvg">`+
@@ -579,6 +581,7 @@ function zeichnen(){
   const t=S.t,da=!!t;
   $('drucken').disabled=!da;$('farben-karte').hidden=!da;$('zone').classList.toggle('klein',!!S.bild);$('beispiel-zeile').hidden=!!S.bild;
   $('mal-hinweis').hidden=$('legende').hidden=$('pruefung').hidden=!da;
+  $('leg-beine').hidden=!(da&&t.beine&&t.beine.length);
   if(!da){$('plan').innerHTML='';return}
   $('plan').innerHTML=planSvg();$('plan').classList.toggle('malen',S.pinsel!==null);
   const {z,n}=zaehlen(t),g0=geometrie(t),fa=Object.keys(z).sort((a,b)=>z[b]-z[a]);
@@ -618,11 +621,12 @@ function neuesBild(img){S.bild=img;S.pinsel=null;const V=S.vor=vorbereiten();
   if(V.x1>=0){S.reihen=Math.max(12,Math.min(20,Math.round(22*(V.y1-V.y0+1)*Q/(V.x1-V.x0+1))));$('reihen').value=S.reihen}
   berechnen()}
 function laden(datei){
-  if(!datei||!datei.type.startsWith('image/'))return;
+  if(!datei)return;
+  if(!datei.type.startsWith('image/')){$('info').textContent='Das ist kein Bild. Bitte JPG, PNG, GIF oder WebP wählen.';return}
   const url=URL.createObjectURL(datei),img=new Image();
   img.onload=()=>{const nm=(datei.name||'').replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ').trim();
-    if(nm&&nm!=='image')$('titel').value=nm.slice(0,40);neuesBild(img)};
-  img.onerror=()=>{$('info').textContent='Dieses Bild kann der Browser nicht öffnen. Bitte als JPG oder PNG versuchen.'};
+    if(nm&&nm!=='image')$('titel').value=nm.slice(0,40);neuesBild(img);URL.revokeObjectURL(url)};
+  img.onerror=()=>{URL.revokeObjectURL(url);$('info').textContent='Dieses Bild kann der Browser nicht öffnen. Bitte als JPG oder PNG versuchen.'};
   img.src=url;
 }
 $('zone').addEventListener('click',()=>$('datei').click());

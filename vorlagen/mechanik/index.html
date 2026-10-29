@@ -90,7 +90,7 @@ svg .deko{fill:none;stroke:#888;stroke-width:.25;stroke-dasharray:1 .8}
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
   <h1>Mechanik-Planer</h1>
-  <p>Zahnräder, Räder, Kurbeln und Holzautos planen. Die Seite rechnet die Masse aus, zeigt den Rechenweg, schreibt die Bauanleitung und zeichnet alle Teile in echter Grösse – ausdrucken, auf das Holz kleben, aussägen, bohren.</p>
+  <p>Zahnräder, Räder, Kurbeln und Holzautos planen. Die Seite rechnet die Masse aus, zeigt den Rechenweg, schreibt die Bauanleitung und zeichnet alle Teile in echter Grösse – ausdrucken, auf das Holz kleben, aussägen, bohren. <a href="../">←&nbsp;Vorlagen-Generator</a></p>
 </header>
 <script src="../zurueck.js"></script>
 <main>
@@ -343,7 +343,7 @@ function teileRad(){
     if(e+loch/2+4>r)warn.push(`Kurbelscheibe zu klein für Hub ${S.hub} mm – mindestens Ø ${mm(2*(e+loch/2+4))}.`);
     teile.push({name:'Kurbelscheibe',w:sd,h:sd,svg:`<circle cx="${f(r)}" cy="${f(r)}" r="${f(r)}" class="schnitt"/>${lochKreuz(r,r,S.achse,'Achse')}${lochKreuz(r+e,r,loch,'Griff')}`+txt(r,r+loch/2+10,`Kurbelscheibe · Hub ${mm(S.hub)}`)});
     const aw=e+loch+12,ah=loch+12;
-    teile.push({name:'Kurbelarm',w:Math.max(aw,44),h:ah+6,svg:`<rect x="0.2" y="0.2" width="${f(aw-.4)}" height="${f(ah-.4)}" rx="${f(ah/2)}" class="schnitt"/>${lochKreuz(ah/2,ah/2,S.achse)}${lochKreuz(ah/2+e,ah/2,loch)}`+txt(aw/2,ah+4,`Kurbelarm · Hub ${mm(e)}`,'tk')});
+    teile.push({name:'Kurbelarm',w:Math.max(aw,44),h:ah+6,svg:`<rect x="0.2" y="0.2" width="${f(aw-.4)}" height="${f(ah-.4)}" rx="${f(ah/2)}" class="schnitt"/>${lochKreuz(ah/2,ah/2,S.achse)}${lochKreuz(ah/2+e,ah/2,loch)}`+txt(aw/2,ah+4,`Kurbelarm · Hub ${mm(S.hub)}`,'tk')});
     teile.push({name:'Exzenter',w:sd,h:sd,svg:`<circle cx="${f(r)}" cy="${f(r)}" r="${f(r)}" class="schnitt"/>${lochKreuz(r+e,r,S.achse,'Achse')}<path class="kreuz" d="M${f(r-1.5)} ${f(r)}h3M${f(r)} ${f(r-1.5)}v3"/>`+txt(r,r+loch/2+10,`Exzenter · Hub ${mm(S.hub)}`)});
     ant.push(`Kurbel: <b>Hub ${mm(S.hub)}</b><span class="leise">Griffloch ${mm(e)} neben der Mitte · Scheibe Ø ${mm(sd)}</span>`);
     // Bild: Scheibe mit Griff oben und unten, Pfeil für den Hub
@@ -425,10 +425,11 @@ function packen(teile){
   let b,x=0,y=0,zh=0;const neu=()=>{b={teile:[]};blaetter.push(b);x=0;y=0;zh=0};neu();
   teile.forEach(t=>{let w=t.w,h=t.h,rot=false;
     if(w>W&&h<=W&&w<=H){rot=true;[w,h]=[h,w]}
-    if(w>W+.01||h>H+.01)zuGross.push(t.name);
+    if(w>W+.01||h>H+.01){zuGross.push(t.name);return}
     if(x>0&&x+w>W+.01){x=0;y+=zh+LUECKE;zh=0}
     if(y>0&&y+h>H+.01)neu();
     b.teile.push({t,x,y,rot});x+=w+LUECKE;zh=Math.max(zh,h)});
+  if(blaetter.length===1&&!blaetter[0].teile.length)blaetter.length=0;
   return {blaetter,zuGross,P};
 }
 function blattSvg(b,i,n,titel,P){
@@ -445,7 +446,7 @@ function zeigen(){
   const {blaetter,zuGross,P}=packen(E.teile);
   const svgs=blaetter.map((b,i)=>blattSvg(b,i,blaetter.length,E.titel,P));
   $('antwort').innerHTML=E.ant.map(a=>`<li>${a}</li>`).join('');
-  const warn=E.warn.concat(zuGross.length?[`Zu gross für ${P.name}: ${[...new Set(zuGross)].join(', ')}.${S.papier==='a4'?' A3 wählen.':''}`]:[]);
+  const warn=E.warn.concat(zuGross.length?[`Zu gross für ${P.name}, wird nicht gedruckt: ${[...new Set(zuGross)].join(', ')}.${S.papier==='a4'?' A3 wählen.':' Kleineren Modul oder weniger Zähne wählen.'}`]:[]);
   $('warnung').hidden=!warn.length;$('warnung').innerHTML=warn.map(w=>`<span class="warn">${w}</span>`).join('<br>');
   $('k-rechnung').hidden=!(E.rech&&E.rech.length);$('rechnung').innerHTML=(E.rech||[]).join('');
   $('k-bau').hidden=!(E.sch&&E.sch.length);
@@ -454,7 +455,7 @@ function zeigen(){
   $('uebersicht').innerHTML=E.zus;
   $('blaetter').innerHTML=svgs.join('');
   $('druck').innerHTML=svgs.join('');
-  $('info').textContent=`${E.teile.length} Teile auf ${blaetter.length} ${blaetter.length===1?'Blatt':'Blättern'} ${P.name}. Ausdrucken, mit Leimstift auf das Holz kleben, aussägen, Löcher an den Kreuzen bohren.`;
+  $('info').textContent=(blaetter.length?`${E.teile.length-zuGross.length} Teile auf ${blaetter.length} ${blaetter.length===1?'Blatt':'Blättern'} ${P.name}.`:`Kein Teil passt auf ${P.name}.`)+` Ausdrucken, mit Leimstift auf das Holz kleben, aussägen, Löcher an den Kreuzen bohren.`;
   $('seite').textContent=`@page{size:${P.name} portrait;margin:0}#druck{--bw:${P.w}mm;--bh:${P.h}mm}`;
   document.title=`Schritt für Schritt · Mechanik-Planer · ${E.titel}`;
   speichern();
