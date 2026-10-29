@@ -90,8 +90,8 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
       <div class="feld"><label class="lbl" for="r">Randabstand (Kante bis Lochmitte)</label><div class="stepper" data-feld="r" data-min="0" data-max="200"><button type="button" data-minus aria-label="Rand kleiner">−</button><input type="number" id="r" min="0" max="200" step="1" inputmode="decimal"><button type="button" data-plus aria-label="Rand grösser">+</button><span>mm</span></div></div>
     </div>
     <div class="zwei" style="margin-top:12px">
-      <div class="feld"><span class="lbl" id="l-muster">Muster</span><div class="chips" role="group" aria-labelledby="l-muster" id="muster"><button type="button" class="chip" data-muster="raster" aria-pressed="true">Raster</button><button type="button" class="chip" data-muster="versetzt" aria-pressed="false">Versetzt (Waben)</button></div></div>
-      <div class="feld"><span class="lbl" id="l-lage">Anordnung</span><div class="chips" role="group" aria-labelledby="l-lage" id="lage"><button type="button" class="chip" data-lage="rand" aria-pressed="true">Vom Rand aus</button><button type="button" class="chip" data-lage="mitte" aria-pressed="false">Mittig auf der Platte</button></div></div>
+      <div class="feld"><span class="lbl" id="l-muster">Muster</span><div class="chips" role="group" aria-labelledby="l-muster" id="muster"><button type="button" class="chip" data-muster="raster" aria-pressed="true">Raster</button><button type="button" class="chip" data-muster="versetzt" aria-pressed="false">Versetzt (Waben)</button><button type="button" class="chip" data-muster="rahmen" aria-pressed="false">Nur am Rand (Rahmen)</button></div></div>
+      <div class="feld" id="f-lage"><span class="lbl" id="l-lage">Anordnung</span><div class="chips" role="group" aria-labelledby="l-lage" id="lage"><button type="button" class="chip" data-lage="rand" aria-pressed="true">Vom Rand aus</button><button type="button" class="chip" data-lage="mitte" aria-pressed="false">Mittig auf der Platte</button></div></div>
     </div>
     <p class="hinweis" id="muster-hinweis"></p>
   </section>
@@ -130,7 +130,7 @@ const GRENZEN={b:[1,120],h:[1,120],d:[0.5,30],a:[2,200],r:[0,200]};
 try{ const g=JSON.parse(localStorage.getItem(KEY)||'{}'); for(const k in S) if(g[k]!==undefined) S[k]=g[k]; }catch(e){}
 try{ const u=new URL(location.href).searchParams;
   ['b','h','d','a','r'].forEach(k=>{ if(u.has(k)&&!isNaN(parseFloat(u.get(k)))) S[k]=parseFloat(u.get(k)); });
-  if(u.get('muster')==='versetzt'||u.get('muster')==='raster') S.muster=u.get('muster');
+  if(['raster','versetzt','rahmen'].includes(u.get('muster'))) S.muster=u.get('muster');
   if(u.get('lage')==='mitte'||u.get('lage')==='rand') S.lage=u.get('lage');
   if(PAPIERE[u.get('papier')]) S.papier=u.get('papier');
 }catch(e){}
@@ -144,6 +144,18 @@ function loecher(){
   const innenW=W-2*R, innenH=H-2*R;
   const eps=1e-6;
   if(innenW<-eps||innenH<-eps) return {pts:[],nx:0,ny:0,xs:[],ys:[],zuViele:false};
+  if(S.muster==='rahmen'){
+    // Löcher nur dem Rand entlang: in jeder Ecke eines, dazwischen gleichmässig, höchstens A auseinander
+    const segX=Math.max(1,Math.ceil(innenW/A-eps)), segY=Math.max(1,Math.ceil(innenH/A-eps));
+    const nx=innenW>eps?segX+1:1, ny=innenH>eps?segY+1:1;
+    const ax=nx>1?innenW/segX:A, ay=ny>1?innenH/segY:A;
+    if(2*(nx+ny)>MAX_LOECHER) return {pts:[],nx,ny,xs:[],ys:[],zuViele:true};
+    const pts=[],xs=[],ys=[];
+    for(let i=0;i<nx;i++) xs.push(mm(R+i*ax));
+    for(let j=0;j<ny;j++) ys.push(mm(R+j*ay));
+    for(let j=0;j<ny;j++) for(let i=0;i<nx;i++){ if(j===0||j===ny-1||i===0||i===nx-1) pts.push([xs[i],ys[j]]); }
+    return {pts,nx,ny,xs,ys,zuViele:false,ax,ay};
+  }
   const dy=S.muster==='versetzt'?A*Math.sqrt(3)/2:A;
   const nx=Math.floor(innenW/A+eps)+1, ny=Math.floor(innenH/dy+eps)+1;
   if(nx*ny>MAX_LOECHER) return {pts:[],nx,ny,xs:[],ys:[],zuViele:true};
@@ -272,14 +284,15 @@ function zeichnen(){
   const P=PAPIERE[S.papier];
   const lage=T.quer?'quer':'hoch';
   const total=L.pts.length;
-  const steg=S.a-S.d, kante=S.r-S.d/2;
+  const rahmen=S.muster==='rahmen', abst=rahmen&&total?Math.min(L.ax,L.ay):S.a;
+  const steg=abst-S.d, kante=S.r-S.d/2;
   // Antwort rechts
   const li=[];
   if(L.zuViele) li.push(`<li class="warn">Das wären über ${MAX_LOECHER.toLocaleString('de-CH')} Löcher. Nimm einen grösseren Abstand oder eine kleinere Platte.</li>`);
   else if(!total) li.push(`<li class="warn">So passt kein Loch auf die Platte: der Randabstand ist zu gross.</li>`);
   else{
-    li.push(`<li><b>${L.nx} × ${L.ny}</b> Löcher${S.muster==='versetzt'?' (versetzte Reihen etwas weniger)':''}<span class="leise">zusammen ${total} Löcher</span></li>`);
-    li.push(steg>0?`<li><b>${n(steg)} mm</b> Holz zwischen zwei Löchern<span class="leise">${steg<S.d?'Eher wenig: die Stege können brechen.':'Lochmitte zu Lochmitte '+n(S.a)+' mm'}</span></li>`:`<li class="warn"><b>${n(steg)} mm</b> Steg: die Löcher überschneiden sich. Abstand grösser als der Bohrer wählen.</li>`);
+    li.push(rahmen?`<li><b>${total} Löcher</b> dem Rand entlang<span class="leise">${L.nx} oben und unten, ${L.ny} links und rechts${Math.abs(L.ax-S.a)>0.05||Math.abs(L.ay-S.a)>0.05?`, Abstand ${n(Math.round(L.ax*10)/10)} mm quer und ${n(Math.round(L.ay*10)/10)} mm hoch, damit es in den Ecken aufgeht`:''}</span></li>`:`<li><b>${L.nx} × ${L.ny}</b> Löcher${S.muster==='versetzt'?' (versetzte Reihen etwas weniger)':''}<span class="leise">zusammen ${total} Löcher</span></li>`);
+    li.push(steg>0?`<li><b>${n(steg)} mm</b> Holz zwischen zwei Löchern<span class="leise">${steg<S.d?'Eher wenig: die Stege können brechen.':'Lochmitte zu Lochmitte '+n(Math.round(abst*10)/10)+' mm'}</span></li>`:`<li class="warn"><b>${n(steg)} mm</b> Steg: die Löcher überschneiden sich. Abstand grösser als der Bohrer wählen.</li>`);
     li.push(kante>=0?`<li><b>${n(kante)} mm</b> vom Lochrand zur Plattenkante</li>`:`<li class="warn"><b>${n(kante)} mm</b> Lochrand zur Kante: das Loch schneidet die Kante an. Randabstand grösser wählen.</li>`);
   }
   const bl=T.nx*T.ny;
@@ -288,7 +301,10 @@ function zeichnen(){
   $('tipp').textContent=bl>1
     ?'Blätter in der Reihenfolge der Nummern auslegen. Bei jedem Blatt rechts und unten ist ein grauer Klebestreifen; das nächste Blatt oben oder links an der gestrichelten Linie abschneiden und so drauflegen, dass die grünen Kreuze aufeinander liegen. Dann die Vorlage mit Malerband auf die Platte kleben, jedes Kreuz ankörnen, bohren.'
     :'Vorlage ausschneiden oder gleich ganz mit Malerband auf die Platte kleben, jedes Kreuz mit Körner oder Nagel ankörnen, dann bohren. Die Nummern am Rand helfen, keine Reihe zu vergessen.';
-  $('muster-hinweis').textContent=S.muster==='versetzt'
+  $('f-lage').hidden=rahmen;
+  $('muster-hinweis').textContent=rahmen
+    ?'Nur am Rand: eine Lochreihe rundherum beim Randabstand, in jeder Ecke ein Loch. Der Abstand wird so verteilt, dass er in den Ecken aufgeht – nie grösser als eingestellt. Gut für Rahmen, Deckel, Steckwände.'
+    :S.muster==='versetzt'
     ?'Versetzt: jede zweite Reihe ist um einen halben Abstand verschoben, jedes Loch ist gleich weit von allen Nachbarn weg – wie Bienenwaben. Die Reihen rücken dadurch etwas näher zusammen.'
     :'Raster: die Löcher stehen in geraden Reihen und Spalten, oben und seitlich beginnt die erste Reihe beim Randabstand.';
   $('blatt-hinweis').textContent=bl>1?`Die Platte ist grösser als ein Blatt: sie wird auf ${bl} Blätter ${P.name} ${lage} verteilt (grün gestrichelt in der Übersicht).`:`Passt auf ein Blatt ${P.name} ${lage}.`;
