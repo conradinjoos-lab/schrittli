@@ -369,19 +369,22 @@ function formen(G){
     let tip=K[0];for(const i of K)if(dist(i)>dist(tip))tip=i;
     const tl=dist(tip),tx=tip%W,vx=(tx+.5-ex)*sx*ML,vy=(ya-(tip-tx)/W)*MD,fern=K.filter(i=>dist(i)>=tl*.7).length;
     return {ya,tl,n:K.length,a:Math.max(-80,Math.min(80,Math.atan2(vy,Math.max(vx,.5))*180/Math.PI)),f:fern>=4&&fern>=K.length*.45?3:1,z:K.map(i=>[dist(i)/tl,farbe[i]]),kon}};
-  const li=[],re=[];
-  for(const K of teile){const p=mass(K);if(p&&p.tl>=4)(seite(K[0])<0?li:re).push(p)}
+  // Dünne Teile (höchstens 2 Perlen breit, z. B. Fühler) werden Beine am Körper, alles andere ein eigenes Teil zum Annähen
+  const li=[],re=[],lose=[];let weg=0;   // weg: schwebt weit weg vom Körper
+  for(const K of teile){const p=mass(K);if(!p){if(K.length>=4)weg++;continue}p.K=K;
+    const bis=new Map();for(const i of K){const x=i%W,y=(i-x)/W,b=bis.get(y);bis.set(y,b?[Math.min(b[0],x),Math.max(b[1],x)]:[x,x])}
+    if(p.tl>=4&&Math.max(...[...bis.values()].map(b=>b[1]-b[0]+1))<=2)(seite(K[0])<0?li:re).push(p);else if(K.length>=4)lose.push(p)}
   // Paare: links und rechts mit ähnlichem Ansatz, grosse Teile zuerst
   const R=reihen.length,kand=[];
   for(const p of li)for(const q of re)if(Math.abs(p.ya-q.ya)<=Math.max(3,R*.4))kand.push([p,q]);
   kand.sort((a,b)=>Math.abs(a[0].ya-a[1].ya)-Math.abs(b[0].ya-b[1].ya)||Math.min(b[0].n,b[1].n)-Math.min(a[0].n,a[1].n));
   const paare=[],weg_=new Set([...li,...re]);
   for(const [p,q] of kand)if(weg_.has(p)&&weg_.has(q)){weg_.delete(p);weg_.delete(q);paare.push([p,q])}
-  let weg=weg_.size;   // ohne Gegenstück (z. B. ein Schwanz)
+  lose.push(...weg_);   // ohne Gegenstück (z. B. ein Schwanz): wird ein eigenes Teil
   const beine=[],belegt=new Set();
   for(const [p,q] of paare){
     const a=Math.round((p.a+q.a)/10)*5,r0=Math.round((p.ya+q.ya)/2)-t0+1,r=[r0,r0-1,r0+1,r0-2,r0+2].find(r=>r>=1&&r<=R&&!belegt.has(r));
-    if(!r){weg+=2;continue}
+    if(!r){lose.push(p,q);continue}
     belegt.add(r);
     // Perlenfarben: zwei Abschnitte wie beim Basteln, Ärmel dann Handschuh, Hose dann Schuh. Beide Seiten zählen gleich viel.
     const f=p.f===3||q.f===3?3:1,s=f===3?.7:1,tl=(p.tl+q.tl)/2,n=Math.max(1,Math.min(8,Math.round((s*tl-1)/ML)));
@@ -400,7 +403,25 @@ function formen(G){
     beine.push({r,n,f,a,c:c.map(k=>KEY[k]).join(''),fc:KEY[ende],w});
   }
   beine.sort((a,b)=>a.r-b.r);
-  return {t0,t1,t:{rows:reihen.map(z=>z.c.map(k=>KEY[k]).join('')),beine},weg};
+  // Teile zum Annähen: eigene Reihen wie der Körper, Farben genau aus dem Bild. Gefädelt wird von der Spitze her,
+  // die letzte Reihe liegt am Körper: mit ihren zwei Drahtenden wird das Teil dort festgemacht.
+  // r: Körperreihe der ersten Reihe (0 = oberste), d: +1 nach unten, -1 nach oben, x: Mitte (Perlenhöhen, 0 = Achse)
+  const stuecke_=[];
+  for(const p of lose){const z=new Map();
+    for(const i of p.K){const x=i%W,y=(i-x)/W;if(!z.has(y))z.set(y,new Map());z.get(y).set(x,farbe[i])}
+    const Z=[...z.keys()].sort((a,b)=>a-b).map(y=>{const m=z.get(y),xs=[...m.keys()];return {y,l:Math.min(...xs),r:Math.max(...xs),m}}),bz=z=>z.r-z.l+1;
+    while(Z.length>1&&bz(Z[0])*3<bz(Z[1]))Z.shift();
+    while(Z.length>1&&bz(Z[Z.length-1])*3<bz(Z[Z.length-2]))Z.pop();
+    const a=Z.reduce((s,z)=>s+(z.l+z.r+1)/2,0)/Z.length,ziel=Z.map((_,k)=>Math.min(...Z.map((o,j)=>bz(o)+2*Math.abs(k-j))));
+    Z.forEach((z,k)=>{while(bz(z)>ziel[k]){if(a-z.l>z.r+1-a)z.l++;else z.r--}});
+    const rows=Z.map(z=>{const c=[];for(let x=z.l;x<=z.r;x++)c.push(z.m.has(x)?z.m.get(x):-1);
+      if(c.every(k=>k<0))c.fill(z.m.values().next().value);
+      for(let k=0;k<c.length;k++)if(c[k]<0)for(let d=1;;d++){const v=k-d>=0&&c[k-d]>=0?c[k-d]:k+d<c.length&&c[k+d]>=0?c[k+d]:-1;if(v>=0){c[k]=v;break}}
+      return c.map(k=>KEY[k]).join('')});
+    const oben=Z[0].y,unten=Z[Z.length-1].y,vonUnten=Math.abs(p.ya-oben)<Math.abs(p.ya-unten);
+    stuecke_.push(vonUnten?{rows:rows.reverse(),r:unten-t0,d:-1,x:(a-xc)*Q}:{rows,r:oben-t0,d:1,x:(a-xc)*Q});
+  }
+  return {t0,t1,t:{rows:reihen.map(z=>z.c.map(k=>KEY[k]).join('')),beine,teile:stuecke_},weg};
 }
 
 function berechnen(){
@@ -461,20 +482,33 @@ function geometrie(t,q=Q,luft=0){
       W.push([S,E,...pts,E,S]);L.push({i,sx,u,pts});
     }
   });
+  // Teile zum Annähen: an ihrer Stelle im Bild, seitlich so weit hinaus oder herein, dass sie knapp am Körper liegen.
+  // an: Körperperle, an der die zwei Drahtenden der letzten Reihe festgemacht werden
+  const T=[],yr=r=>r<0?ry[0]+r:r>n?ry[n]+r-n:ry[r],koerper=P.filter(b=>b.ref[0]==='r');
+  (t.teile||[]).forEach((p,ti)=>{
+    const m=p.rows.length,sx=p.x<0?-1:1,y0=yr(p.r),hb=k=>p.rows[k].length/2*q;
+    let x=p.x,s=null;
+    for(let k=0;k<m;k++){const r=p.r+p.d*k;if(r<0||r>=n)continue;const v=t.rows[r].length/2*q+.3-(sx*x-hb(k));s=s==null?v:Math.max(s,v)}
+    if(s!=null)x+=sx*s;
+    p.rows.forEach((row,k)=>{const e=(row.length-1)/2;for(let j=0;j<row.length;j++)P.push({x:x+(j-e)*q,y:y0+p.d*k,c:row[j],r:0,ref:['t',ti,k,j]})});
+    const ix=x-sx*hb(m-1),iy=y0+p.d*(m-1);let an=koerper[0],bd=1e9;
+    for(const b of koerper){const d=(b.x-ix)**2+(b.y-iy)**2;if(d<bd){bd=d;an=b}}
+    T.push({x,y0,an});
+  });
   const xs=P.map(q_=>q_.x),ys=P.map(q_=>q_.y);
-  return {P,W,L,q,ry,x0:Math.min(...xs)-.5,x1:Math.max(...xs)+.5,y0:Math.min(...ys)-.5,y1:Math.max(Math.max(...ys)+.5,ry[n]-.5)};
+  return {P,W,L,T,q,ry,x0:Math.min(...xs)-.5,x1:Math.max(...xs)+.5,y0:Math.min(...ys)-.5,y1:Math.max(Math.max(...ys)+.5,ry[n]-.5)};
 }
 function zaehlen(t){
   const z={};let n=0;const add=(c,k)=>{z[c]=(z[c]||0)+k;n+=k};
   for(const r of t.rows)for(const c of r)add(c,1);
   for(const b of t.beine){for(let k=0;k<b.n;k++)add(bc(b,k),2);add(b.fc,2*b.f)}
+  for(const p of t.teile||[])for(const r of p.rows)for(const c of r)add(c,1);
   return {z,n};
 }
+// Draht pro Stück: Körper und jedes Teil einzeln, mit Zugabe zum Verdrehen oder Annähen
 function draht(t,pe){
-  let cm=0;
-  for(const r of t.rows)cm+=(2*r.length+1)*pe.l;
-  for(const b of t.beine)cm+=2*(2*b.n+b.f+1)*pe.l;
-  return Math.ceil((cm*1.15+30)/10)*10;
+  const stueck=(rows,beine=[])=>{let cm=0;for(const r of rows)cm+=(2*r.length+1)*pe.l;for(const b of beine)cm+=2*(2*b.n+b.f+1)*pe.l;return Math.ceil((cm*1.15+30)/10)*10};
+  return stueck(t.rows,t.beine)+(t.teile||[]).reduce((s,p)=>s+stueck(p.rows),0);
 }
 const f1=x=>(Math.round(x*2)/2).toLocaleString('de-CH').replace('.',',');   // Komma wie in allen Werkzeugen
 const lang=cm=>cm>=100?`${(cm/100).toLocaleString('de-CH').replace('.',',')} m`:`${cm} cm`;
@@ -483,8 +517,9 @@ function perlenSvg(g,sk,ox,oy){
     return `<rect x="${(-w/2).toFixed(2)}" y="${(-h/2).toFixed(2)}" width="${w.toFixed(2)}" height="${h.toFixed(2)}" rx="${(w*.36).toFixed(2)}" ry="${(h*.26).toFixed(2)}" transform="translate(${(ox+q.x*sk).toFixed(2)} ${(oy+q.y*sk).toFixed(2)})${q.r?` rotate(${q.r.toFixed(1)})`:''}" fill="${FARBE[q.c][0]}" stroke="#1c2430" stroke-width="${(sk*.05).toFixed(2)}"/>`}).join('');
 }
 // Drahtweg: Ende A trägt die Perlen, Ende B geht gegengleich durch. Die Seiten wechseln jede Reihe.
-function draehte(t,g,sk,ox,oy){
-  const X=x=>(ox+x*sk).toFixed(2),Y=y=>(oy+y*sk).toFixed(2),d=.14,n=t.rows.length;
+// Teil: sy=-1 zeichnet es von unten nach oben, an: Ziel der zwei Enden (statt Verdrehen), alles in Koordinaten des Teils
+function draehte(t,g,sk,ox,oy,sy=1,an=null){
+  const X=x=>(ox+x*sk).toFixed(2),Y=y=>(oy+y*sk*sy).toFixed(2),d=.14,n=t.rows.length;
   const w=k=>((t.rows[k].length-1)/2+.5)*g.q,li=k=>k%2?B:A,ri=k=>k%2?A:B;
   const ry=g.ry,yl=k=>k?ry[k]+d:0,yr=k=>k?ry[k]-d:0,wege=[],Z=ry[n];
   const weg=(c,d_)=>wege.push([c,d_]);
@@ -503,6 +538,7 @@ function draehte(t,g,sk,ox,oy){
       if(k<n-1){const f=w(k+1),p1=[sx*f,ry[k+1]+sx*d],m=Math.max(e,f)+.12;
         rest=(z,c1)=>`C${X(c1[0])} ${Y(c1[1])} ${X(p1[0]+sx*.45)} ${Y(p1[1])} ${P_(p1)}`;
         weg(c,bogen(sx,k,p0,rest)||`M${P_(p0)}C${X(sx*(m+.3))} ${Y(p0[1])} ${X(sx*(m+.3))} ${Y(p1[1])} ${P_(p1)}`)}
+      else if(an)weg(c,`M${P_(p0)}C${X(p0[0]+sx*.7)} ${Y(p0[1])} ${X(an[0]+sx*.5)} ${Y(an[1])} ${P_(an)}`);
       else{
         const dreh=`${X(sx*.4)} ${Y(Z-.2)} ${X(sx*.1)} ${Y(Z)}L${X(-sx*.1)} ${Y(Z+.2)}L${X(sx*.1)} ${Y(Z+.4)}L${X(-sx*.1)} ${Y(Z+.6)}`;
         rest=(z,c1)=>`C${X(c1[0])} ${Y(c1[1])} ${dreh}`;
@@ -529,7 +565,15 @@ function muster(t,g,sk,ox,oy,fs){
     `<text x="${ox.toFixed(2)}" y="${(pb-ph*.26).toFixed(2)}" font-size="${(fs*.94).toFixed(2)}" font-weight="800" fill="#fff" text-anchor="middle">Start</text>`;
   const kopf=`<text x="${(ox+g.x0*sk-gp).toFixed(2)}" y="${(Math.min(top,ry)-fs*.3).toFixed(2)}" font-size="${(fs*.76).toFixed(2)}" fill="#5b6573" text-anchor="end">Reihe</text>`+
     `<text x="${(ox+g.x1*sk+gp).toFixed(2)}" y="${(Math.min(top,ry)-fs*.3).toFixed(2)}" font-size="${(fs*.76).toFixed(2)}" fill="#5b6573">Perlen</text>`;
-  return kopf+start+perlenSvg(g,sk,ox,oy)+draehte(t,g,sk,ox,oy)+lab;
+  return kopf+start+perlenSvg(g,sk,ox,oy)+draehte(t,g,sk,ox,oy)+teile(t,g,sk,ox,oy,lw)+lab;
+}
+// Teile: Drahtweg wie beim Körper, grüner Rahmen um die erste Reihe, die zwei Enden enden mit einem Knoten an der Körperperle
+function teile(t,g,sk,ox,oy,lw){
+  return g.T.map((T,ti)=>{const p=t.teile[ti],m=p.rows.length,pg={ry:[...Array(m+1).keys()],L:[],q:g.q},w=(p.rows[0].length/2*g.q+.2)*sk;
+    const an=[T.an.x-T.x,(T.an.y-T.y0)*p.d],X=ox+T.x*sk,Y=oy+T.y0*sk;
+    return draehte({rows:p.rows,beine:[]},pg,sk,X,Y,p.d,an)+
+      `<circle cx="${(ox+T.an.x*sk).toFixed(2)}" cy="${(oy+T.an.y*sk).toFixed(2)}" r="${(sk*.13).toFixed(2)}" fill="${A}" stroke="#fff" stroke-width="${(sk*.05).toFixed(2)}"/>`+
+      `<rect x="${(X-w).toFixed(2)}" y="${(Y-.64*sk).toFixed(2)}" width="${(2*w).toFixed(2)}" height="${(1.28*sk).toFixed(2)}" rx="${(.32*sk).toFixed(2)}" fill="none" stroke="#17997A" stroke-width="${lw}"/>`}).join('');
 }
 // Platz rechts für die Anzahl: längster Text mal Zeichenbreite
 const rechtsText=t=>Math.max(...t.rows.map((r,i)=>{const b=t.beine.find(x=>x.r===i+1);return `${r.length}${b?` + ${b.w} ${b.n}+${b.f}`:''}`.length}));
@@ -545,7 +589,7 @@ function planSvg(){
 
 // Technik-Bilder (eigene Zeichnungen, wie bei den fertigen Perlentieren)
 function perle(x,y,r=2.1,f='#E8EDF3',dr=0){return `<rect x="${-r*.68}" y="${-r}" width="${r*1.36}" height="${2*r}" rx="1" ry="1.1" transform="translate(${x} ${y})${dr?` rotate(${dr})`:''}" fill="${f}" stroke="#1c2430" stroke-width=".3"/>`}
-function technik(x,y){
+function technik(x,y,naehen=false){
   const L=(d,c)=>`<path d="${d}" fill="none" stroke="${c}" stroke-width=".6" stroke-linecap="round"/>`;
   const T=(tx,ty,s,nr)=>`<circle cx="${tx}" cy="${ty-1.1}" r="2.4" fill="#17997A"/><text x="${tx}" y="${ty}" font-size="3" font-weight="800" fill="#fff" text-anchor="middle">${nr}</text>`+
     s.map((z,k)=>`<text x="${tx+4}" y="${ty+k*3.6}" font-size="2.9" fill="#1c2430">${z}</text>`).join('');
@@ -553,25 +597,32 @@ function technik(x,y){
   o+=T(1.5,3,['Reihe 1 auffädeln und in die','Mitte des Drahts schieben.'],1);
   o+=L('M6 13H32',A)+L('M32 13H58',B)+perle(29.8,13)+perle(34.2,13)+
     `<text x="5" y="11" font-size="2.6" font-weight="800" fill="${A}">Ende A</text><text x="59" y="11" font-size="2.6" font-weight="800" fill="${B}" text-anchor="end">Ende B</text>`;
-  const y2=22;
+  const e=naehen?2:0,y2=22-e;   // mit Annähen etwas enger, sonst reicht der Platz nicht
   o+=T(1.5,y2,['Reihe 2 auf Ende A fädeln. Ende B','von der anderen Seite durch','dieselben Perlen stecken.'],2);
   o+=`<g transform="translate(0 ${y2+10})">`+
     L('M29.8 4C20 4 18 13.4 26 13.4H56',A)+L('M34.2 4C44 4 46 14.6 38 14.6H9',B)+
     perle(29.8,4)+perle(34.2,4)+perle(27.6,14)+perle(32,14)+perle(36.4,14)+`</g>`;
-  const y3=y2+31;
+  const y3=y2+31-e;
   o+=T(1.5,y3,['An beiden Enden gleich fest ziehen.','Reihe 2 liegt jetzt unter Reihe 1.'],3);
   o+=`<g transform="translate(0 ${y3+6})">`+
     L('M29.8 4C25 4 24 8.6 27 8.6H38.5C42 8.6 46 12 52 15',A)+L('M34.2 4C39 4 40 9.4 37 9.4H25.5C22 9.4 18 12 12 15',B)+
     perle(29.8,4)+perle(34.2,4)+perle(27.6,9)+perle(32,9)+perle(36.4,9)+`</g>`;
-  const y4=y3+27;
+  const y4=y3+27-e;
   o+=T(1.5,y4,['Bein: Perlen auf ein Ende, dann zurück','durch die Beinperlen. Die Endperle liegt','quer. Bei 3 Fussperlen: eine Schlaufe.'],4);
   o+=`<g transform="translate(0 ${y4+11})">`+
     L('M12 5.4H38.6C40.2 5.4 39.6 2.4 41.3 2.4V9.6C39.6 9.6 40.2 6.6 38.6 6.6H26',A)+
     perle(14,6)+perle(18.4,6)+perle(22.8,6)+perle(28.6,6,2.1,'#cfe7dc')+perle(33,6,2.1,'#cfe7dc')+perle(37.4,6,2.1,'#cfe7dc')+
     perle(41.3,6,2.1,'#fde0c8',90)+
     `<text x="31" y="12.8" font-size="2.4" fill="#5b6573" text-anchor="middle">Bein</text><text x="43.5" y="12.8" font-size="2.4" fill="#5b6573" text-anchor="middle">Endperle quer</text></g>`;
-  const y5=y4+30;
+  const y5=y4+30-e;
   o+=T(1.5,y5,['Am Schluss die Enden 3-mal verdrehen,','abknipsen und die Spitze nach innen','biegen. Fertig!'],5);
+  // Teile: die zwei Enden der letzten Reihe durch eine Körperperle, dort verdrehen
+  if(naehen)o+=`<g transform="translate(0 ${y5+10})">`+
+    L('M15.6 3C11 3 10 9 13.8 10.6',A)+L('M24.4 3C29 3 30 9 26.2 10.6',B)+L('M13.8 10.6C16 12 18 12 20 11.4C22 12 24 12 26.2 10.6',A)+
+    perle(15.6,3,2.1,'#fde0c8')+perle(20,3,2.1,'#fde0c8')+perle(24.4,3,2.1,'#fde0c8')+
+    perle(36,9)+perle(40.4,9)+perle(44.8,9)+L('M26.2 10.6C30 13 34 12.6 36 11.4',A)+
+    `<circle cx="36" cy="11.2" r=".9" fill="${A}" stroke="#fff" stroke-width=".3"/>`+
+    `<text x="50" y="10" font-size="2.9" font-weight="800" fill="#17997A">Annähen</text></g>`;
   return o+'</g>';
 }
 
@@ -600,7 +651,7 @@ function blatt(){
     `<text x="10" y="17" font-size="7.5" font-weight="800" fill="#1c2430" font-family="Fredoka,Nunito,Arial,sans-serif">Perlentier: ${titel}</text>`+
     `<text x="10" y="23.5" font-size="3.4" fill="#5b6573">Flach, eine Lage · ${t.rows.length} Reihen · ${n} ${PE.name} · fertig etwa ${f1(breit)} × ${f1(hoch)} cm</text>`+
     `<line x1="10" y1="27" x2="200" y2="27" stroke="#D5DEE9" stroke-width=".4"/>`+
-    mat+`<text x="10" y="${y}" font-size="4.2" font-weight="800" fill="#1c2430">So geht's</text>`+technik(10,y+6)+
+    mat+`<text x="10" y="${y}" font-size="4.2" font-weight="800" fill="#1c2430">So geht's</text>`+technik(10,y+6,t.teile.length>0)+
     muster(t,g,sk,ox,oy,fs)+legende+feld+
     `<text x="200" y="286" font-size="2.6" fill="#5b6573" text-anchor="end">Schritt für Schritt · Perlentier aus eigenem Bild</text></svg>`;
 }
@@ -617,7 +668,7 @@ function zeichnen(){
   if(!da){$('plan').innerHTML='';return}
   $('plan').innerHTML=planSvg();$('plan').classList.toggle('malen',S.pinsel!==null);
   const {z,n}=zaehlen(t),g0=geometrie(t),fa=Object.keys(z).sort((a,b)=>z[b]-z[a]);
-  $('info').textContent=`${t.rows.length} Reihen · ${n} Perlen · ${f1((g0.x1-g0.x0-1+g0.q)*PE.d)} × ${f1((g0.y1-g0.y0)*PE.d)} cm · ${lang(draht(t,PE))} Draht`;
+  $('info').textContent=`${t.rows.length} Reihen${t.teile.length?` + ${t.teile.length} Teile`:''} · ${n} Perlen · ${f1((g0.x1-g0.x0-1+g0.q)*PE.d)} × ${f1((g0.y1-g0.y0)*PE.d)} cm · ${lang(draht(t,PE))} Draht`;
   const weg=S.notiz?S.notiz.weg:0;
   $('pruefung').hidden=!weg;$('pruefung').textContent=`✂ ${weg} weg`;
   $('farben').innerHTML=fa.map(k=>`<button type="button" class="farbe" data-c="${KEY.indexOf(k)}" aria-pressed="${S.pinsel===KEY.indexOf(k)}"><i style="background:${FARBE[k][0]}"></i><span>${FARBE[k][1]}</span><small>${z[k]}</small></button>`).join('')+
@@ -636,6 +687,7 @@ function perleBei(e){const svg=$('plansvg');if(!svg||!S.ans)return null;const p=
 function malen(e,neu){const h=perleBei(e),t=S.t,c=S.pinsel;if(!h)return;
   if(h.perle){const [art,i,j,k]=h.perle.ref;
     if(art==='r'){const r=t.rows[i];if(c<0){if(!neu||r.length<2)return;t.rows[i]=r.slice(0,j)+r.slice(j+1)}else{if(r[j]===KEY[c])return;t.rows[i]=r.slice(0,j)+KEY[c]+r.slice(j+1)}}
+    else if(art==='t'){const p=t.teile[i],r=p.rows[j];if(c<0){if(!neu)return;if(r.length>1)p.rows[j]=r.slice(0,k)+r.slice(k+1);else if(p.rows.length>1)p.rows.splice(j,1);else t.teile.splice(i,1)}else{if(r[k]===KEY[c])return;p.rows[j]=r.slice(0,k)+KEY[c]+r.slice(k+1)}}
     else{const b=t.beine[i];if(c<0){if(!neu)return;t.beine.splice(i,1)}
       else if(j==='fc'){if(b.fc===KEY[c])return;b.fc=KEY[c]}
       else{const z=[...Array(b.n)].map((_,m)=>bc(b,m));if(z[k]===KEY[c])return;z[k]=KEY[c];b.c=z.join('')}}}
