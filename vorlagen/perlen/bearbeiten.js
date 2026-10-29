@@ -56,7 +56,7 @@
   .pe-dialog button:disabled{opacity:.4;cursor:default}
   .pe-dialog .pe-haupt{background:var(--acc,#17997a);border-color:var(--acc,#17997a);color:var(--acc-ink,#fff)}
   .pe-inhalt{display:grid;grid-template-columns:minmax(0,1fr) 290px;flex:1;min-height:0}
-  .pe-bild{overflow:auto;overscroll-behavior:contain;padding:16px;background:#edf1f5;touch-action:pan-x pan-y pinch-zoom}
+  .pe-bild{overflow:auto;overscroll-behavior:contain;padding:16px;background:var(--surface2,#edf1f5);touch-action:pan-x pan-y pinch-zoom}
   .pe-bild svg{display:block;max-width:none;height:auto;margin:auto;background:#fff;border-radius:12px;user-select:none}
   .pe-bild[data-malen=true] svg{touch-action:none;cursor:crosshair}
   .pe-regler{overflow:auto;padding:14px;background:var(--surface,#fff);border:0;border-left:1px solid var(--line,#d5dee9);margin:0;min-width:0}
@@ -112,7 +112,7 @@
       bild.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${x} ${y} ${w} ${h}" role="img" aria-label="${esc(t.name||'Perlentier')}: ${t.rows.length} Reihen" style="width:${zoom}%">${text(x+.3,y+1,'Reihe')}${text(geo.x1+.5,y+1,'Perlen')}${text(((geo.links?.[0]||0)+(geo.rechts?.[0]||0))/2-.6,y+1.6,'Start')}${perlen}${a.draehte(t,geo,1,0,0)}${reihen}</svg>`;
       passend();
       const g=a.geometrie(t,a.perle.l/a.perle.d),cm=(g.x1-g.x0-1+g.q)*a.perle.d;
-      el('#pe-mass').textContent=`${reihenbreite(t)} · ${schwierigkeit(t,schulklasse)} · ca. ${cm.toLocaleString('de-CH',{maximumFractionDigits:1})} cm`;
+      el('#pe-mass').textContent=`${reihenbreite(t)} · ${schwierigkeit(t,schulklasse)} · ca. ${cm.toLocaleString('de-CH',{maximumFractionDigits:1}).replace('.',',')} cm`;
       slider.value=reihenbreite(t);
       const {z,n}=a.zaehlen(t),von=el('#pe-von'),alt=von.value;
       von.innerHTML=farben.filter(([k])=>z[k]).map(([k,[,name]])=>`<option value="${k}">${esc(name)} (${z[k]})</option>`).join('');

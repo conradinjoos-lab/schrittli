@@ -57,6 +57,18 @@ svg .tk{font:2.6px Nunito,sans-serif;fill:#555}
 svg .titel{font:600 5px Fredoka,Nunito,sans-serif;fill:#000}
 svg .pfeil{fill:none;stroke:#17997A;stroke-width:.5}
 svg .rad{fill:#eee;stroke:#444;stroke-width:.3}
+svg .deko{fill:none;stroke:#888;stroke-width:.25;stroke-dasharray:1 .8}
+.rechnung{margin:0;padding:12px 14px;border-radius:14px;background:var(--surface2);border:1px solid var(--line);font-size:15px;line-height:1.5}
+.rechnung p{margin:0 0 6px}.rechnung p:last-child{margin:0}
+.rechnung .f{font:600 18px/1.3 Fredoka,Nunito,sans-serif;color:var(--acc)}
+.rechnung .leise{color:var(--muted);font-size:13px}
+.schritte{margin:0;padding-left:22px;font-size:15px;line-height:1.45}
+.schritte li{margin-bottom:6px}
+.schritte .leise{color:var(--muted);font-size:13px;display:block}
+.material{margin:0;padding:0;list-style:none}
+.material li{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.material li:last-child{border-bottom:0}
+.material .n{color:var(--acc);font:600 16px Fredoka,Nunito,sans-serif;white-space:nowrap}
 @media (max-width:860px){
   main{display:flex;flex-direction:column;align-items:stretch}
   .rechts{position:static}
@@ -78,7 +90,7 @@ svg .rad{fill:#eee;stroke:#444;stroke-width:.3}
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
   <h1>Mechanik-Planer</h1>
-  <p>Zahnräder, Räder, Kurbeln und Holzautos planen. Die Seite rechnet die Masse aus und zeichnet alle Teile in echter Grösse – ausdrucken, auf das Holz kleben, aussägen, bohren.</p>
+  <p>Zahnräder, Räder, Kurbeln und Holzautos planen. Die Seite rechnet die Masse aus, zeigt den Rechenweg, schreibt die Bauanleitung und zeichnet alle Teile in echter Grösse – ausdrucken, auf das Holz kleben, aussägen, bohren. <a href="../">←&nbsp;Vorlagen-Generator</a></p>
 </header>
 <script src="../zurueck.js"></script>
 <main>
@@ -94,6 +106,8 @@ svg .rad{fill:#eee;stroke:#444;stroke-width:.3}
 
   <section class="karte modus-teil" data-modus="zahn">
     <h2>Zahnräder</h2>
+    <div class="feld"><span class="lbl">Was soll das Getriebe machen? (setzt die Zähne – du kannst sie danach ändern)</span>
+      <div class="chips" role="group" aria-label="Ziel" data-g="ziel"><button type="button" class="chip" data-v="langsam">Halb so schnell (1 : 2)</button><button type="button" class="chip" data-v="langsam3">3-mal langsamer (1 : 3)</button><button type="button" class="chip" data-v="schnell">Doppelt so schnell (2 : 1)</button><button type="button" class="chip" data-v="gleich">Gleich schnell, andere Richtung</button><button type="button" class="chip" data-v="richtung">Gleiche Richtung (Zwischenrad)</button><button type="button" class="chip" data-v="stufe">Sehr langsam, zweistufig (1 : 9)</button></div></div>
     <div class="feld"><span class="lbl">Modul (Zahngrösse) – alle Räder, die ineinandergreifen, brauchen denselben Modul</span>
       <div class="chips" role="group" aria-label="Modul" data-g="modul"><button type="button" class="chip" data-v="2">2 mm fein</button><button type="button" class="chip" data-v="3">3 mm</button><button type="button" class="chip" data-v="4">4 mm</button><button type="button" class="chip" data-v="5">5 mm</button><button type="button" class="chip" data-v="6">6 mm grob</button></div>
       <p class="hinweis">Zum Aussägen mit der Laubsäge sind 4–6 mm gut. Modul 2–3 nur mit Laser oder sehr sauberer Säge.</p></div>
@@ -101,6 +115,15 @@ svg .rad{fill:#eee;stroke:#444;stroke-width:.3}
       <div class="feld"><label class="lbl" for="zA">Zähne Rad A (Antrieb)</label><div class="zahl"><input type="number" id="zA" data-k="zA" min="8" max="60" step="1" inputmode="numeric"></div></div>
       <div class="feld"><label class="lbl" for="zB">Zähne Rad B</label><div class="zahl"><input type="number" id="zB" data-k="zB" min="8" max="60" step="1" inputmode="numeric"></div></div>
       <div class="feld"><label class="lbl" for="zC">Zähne Rad C (0 = keines)</label><div class="zahl"><input type="number" id="zC" data-k="zC" min="0" max="60" step="1" inputmode="numeric"></div></div>
+      <div class="feld" id="feldD"><label class="lbl" for="zD">Zähne Rad D</label><div class="zahl"><input type="number" id="zD" data-k="zD" min="8" max="60" step="1" inputmode="numeric"></div></div>
+    </div>
+    <div class="feld" id="feldKette"><span class="lbl">Rad C</span>
+      <div class="chips" role="group" aria-label="Anordnung" data-g="kette"><button type="button" class="chip" data-v="reihe">C greift in B (B ist Zwischenrad)</button><button type="button" class="chip" data-v="stufe">C sitzt mit B auf einer Achse und treibt D (zweistufig)</button></div></div>
+    <div class="zwei">
+      <div class="feld"><span class="lbl">Holz für die Zahnräder</span>
+        <div class="chips" role="group" aria-label="Holzdicke" data-g="holz"><button type="button" class="chip" data-v="4">4 mm</button><button type="button" class="chip" data-v="6">6 mm</button><button type="button" class="chip" data-v="8">8 mm</button><button type="button" class="chip" data-v="10">10 mm</button></div></div>
+      <div class="feld"><span class="lbl">Kurbel an Rad A</span>
+        <div class="chips" role="group" aria-label="Kurbel" data-g="kurbel"><button type="button" class="chip" data-v="ja">Ja, mit Kurbelarm</button><button type="button" class="chip" data-v="nein">Nein</button></div></div>
     </div>
     <div class="feld"><span class="lbl">Achse (Rundstab oder Nagel)</span>
       <div class="chips" role="group" aria-label="Achse" data-g="achse"><button type="button" class="chip" data-v="3">3 mm</button><button type="button" class="chip" data-v="4">4 mm</button><button type="button" class="chip" data-v="6">6 mm</button><button type="button" class="chip" data-v="8">8 mm</button><button type="button" class="chip" data-v="10">10 mm</button></div></div>
@@ -158,6 +181,16 @@ svg .rad{fill:#eee;stroke:#444;stroke-width:.3}
     <ul class="antwort" id="antwort"></ul>
     <p class="hinweis" id="warnung" hidden></p>
   </section>
+  <section class="karte" id="k-rechnung" hidden>
+    <h2>So wird gerechnet</h2>
+    <div class="rechnung" id="rechnung"></div>
+  </section>
+  <section class="karte" id="k-bau" hidden>
+    <h2>Das brauchst du</h2>
+    <ul class="material" id="material"></ul>
+    <h2 style="margin-top:14px">So baust du es</h2>
+    <ol class="schritte" id="schritte"></ol>
+  </section>
   <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg> Drucken</button>
   <section class="karte">
     <h2 id="v-titel">Vorschau</h2>
@@ -176,18 +209,19 @@ const KEY='schrittli.mechanik.v1';
 const PAPIER={a4:{name:'A4',w:210,h:297},a3:{name:'A3',w:297,h:420}};
 const RAND=10,LUECKE=6,KOPF=10,FUSS=8;   // mm: Rand, Lücke zwischen Teilen, Titelzeile, Kontrolllinie
 const FORMEN={flitzer:'Flitzer',rennwagen:'Rennwagen',lastwagen:'Lastwagen',bus:'Bus',kaefer:'Käfer',kiste:'Kiste'};
-const STANDARD={modus:'zahn',papier:'a4',modul:4,zA:12,zB:24,zC:0,achse:6,
+const STANDARD={modus:'zahn',papier:'a4',modul:4,zA:12,zB:24,zC:0,zD:36,kette:'reihe',holz:6,kurbel:'ja',ziel:'',achse:6,
   radD:6,radN:4,hub:20,scheibeD:0,fest:'achse',
   autoL:18,autoH:6,autoB:4,autoRad:5,radBreite:18,boden:8,radstand:0,form:'flitzer'};
-const GRENZEN={modul:[2,6],zA:[8,60],zB:[8,60],zC:[0,60],achse:[3,10],radD:[1,30],radN:[1,12],hub:[0,150],scheibeD:[0,200],
+const GRENZEN={modul:[2,6],zA:[8,60],zB:[8,60],zC:[0,60],zD:[8,60],holz:[4,10],achse:[3,10],radD:[1,30],radN:[1,12],hub:[0,150],scheibeD:[0,200],
   autoL:[5,60],autoH:[2,30],autoB:[1,20],autoRad:[1,20],radBreite:[3,60],boden:[0,80],radstand:[0,60]};
-const WORTE={modus:['zahn','rad','auto'],papier:['a4','a3'],fest:['achse','rad'],form:Object.keys(FORMEN)};
+const WORTE={modus:['zahn','rad','auto'],papier:['a4','a3'],fest:['achse','rad'],form:Object.keys(FORMEN),kette:['reihe','stufe'],kurbel:['ja','nein'],ziel:['','langsam','langsam3','schnell','gleich','richtung','stufe']};
+const ZIELE={langsam:{zA:12,zB:24,zC:0,kette:'reihe'},langsam3:{zA:10,zB:30,zC:0,kette:'reihe'},schnell:{zA:24,zB:12,zC:0,kette:'reihe'},gleich:{zA:16,zB:16,zC:0,kette:'reihe'},richtung:{zA:12,zB:12,zC:12,kette:'reihe'},stufe:{zA:10,zB:30,zC:10,zD:30,kette:'stufe'}};
 const S=Object.assign({},STANDARD);
 const f=n=>+n.toFixed(2);
 const begrenzt=(v,a,b)=>Math.min(b,Math.max(a,v));
 const zahl=(v,d)=>{const n=parseFloat(String(v).replace(',','.'));return isFinite(n)?n:d};
-const mm=v=>(Math.round(v*10)/10).toLocaleString('de-CH')+' mm';
-const cmText=v=>(Math.round(v)/10).toLocaleString('de-CH')+' cm';
+const mm=v=>(Math.round(v*10)/10).toLocaleString('de-CH').replace('.',',')+' mm';   // Komma wie in allen Werkzeugen
+const cmText=v=>(Math.round(v)/10).toLocaleString('de-CH').replace('.',',')+' cm';
 function uebernehmen(q,k,v){
   if(v==null)return;
   if(WORTE[k]){if(WORTE[k].includes(v))S[k]=v;return}
@@ -199,7 +233,7 @@ const q=new URLSearchParams(location.search);
 function speichern(){
   try{localStorage.setItem(KEY,JSON.stringify(S))}catch(_){}
   const p=new URLSearchParams();
-  Object.keys(S).forEach(k=>{if(S[k]!==STANDARD[k])p.set(k,String(S[k]))});
+  Object.keys(S).forEach(k=>{if(k!=='ziel'&&S[k]!==STANDARD[k])p.set(k,String(S[k]))});
   const s=p.toString();history.replaceState(null,'',location.pathname+(s?'?'+s:''));
 }
 
@@ -219,7 +253,7 @@ function zahnrad(m,z,loch,off,name){
   for(let i=0;i<z;i++){const t=off+i*p;
     [[-wf,rf],[-wp,r],[-wa,ra],[wa,ra],[wp,r],[wf,rf],[p/2,rf]].forEach(([a,rr])=>pts.push(f(ra+rr*Math.cos(t+a))+' '+f(ra+rr*Math.sin(t+a))))}
   const svg=`<path class="schnitt" d="M${pts.join('L')}Z"/><circle cx="${f(ra)}" cy="${f(ra)}" r="${f(r)}" class="hilf"/>${lochKreuz(ra,ra,loch)}`+
-    txt(ra,ra+loch/2+6,`${name?name+' · ':''}${z} Zähne`)+txt(ra,ra+loch/2+9.5,`Modul ${m} · Ø ${mm(2*ra)}`,'tk');
+    txt(ra,ra+loch/2+6,`${name?name+' · ':''}${z} Zähne`)+txt(ra,ra+loch/2+9.5,`Modul ${m} · Ø ${mm(2*ra)} · Loch ${mm(loch)}`,'tk');
   return {name:`Zahnrad ${name||''}`.trim(),w:2*ra,h:2*ra,r,ra,z,off,svg};
 }
 // Winkel, bei dem Rad «links» einen Zahn genau in Richtung des rechten Nachbarn hat
@@ -232,31 +266,64 @@ function kreisRad(D,loch,name,text){
 }
 
 function teileZahn(){
-  const m=S.modul,loch=lochmass('achse'),A=zahnrad(m,S.zA,loch,0,'A'),B=zahnrad(m,S.zB,loch,gegenOff(0,S.zA,S.zB),'B');
+  const m=S.modul,loch=lochmass('achse'),lochP=lochmass('klotz'),stufe=S.zC>=8&&S.kette==='stufe';
+  const A=zahnrad(m,S.zA,loch,0,'A'),B=zahnrad(m,S.zB,loch,gegenOff(0,S.zA,S.zB),'B');
   const raeder=[A,B];
-  if(S.zC>=8)raeder.push(zahnrad(m,S.zC,loch,gegenOff(B.off,S.zB,S.zC),'C'));
-  const abst=[];for(let i=1;i<raeder.length;i++)abst.push(m*(raeder[i-1].z+raeder[i].z)/2);
-  // Achsplan: Kreuze im richtigen Abstand, zum Bohren der Grundplatte
-  const ges=abst.reduce((a,b)=>a+b,0),pw=ges+40,ph=34;let x=20,plan=`<rect x="0.2" y="0.2" width="${f(pw-.4)}" height="${f(ph-.4)}" rx="3" class="hilf"/>`;
-  const lochP=lochmass('klotz');raeder.forEach((r,i)=>{plan+=lochKreuz(x,14,lochP,'Achse '+['A','B','C'][i]);if(i<abst.length){plan+=`<path class="hilf" d="M${f(x+loch/2+3)} 14H${f(x+abst[i]-loch/2-3)}"/>`+txt(x+abst[i]/2,11,mm(abst[i]),'tk');x+=abst[i]}});
-  plan+=txt(pw/2,ph-3,`Achsplan – Abstände von Mitte zu Mitte, auf die Grundplatte übertragen · Löcher ${mm(lochP)}`,'tk');
-  const teile=raeder.concat([{name:'Achsplan',w:pw,h:ph,svg:plan}]);
-  // Zusammenbau-Bild: alle Mittelpunkte auf einer Höhe
-  const hmax=Math.max(...raeder.map(r=>r.ra)),bw=raeder[0].ra+raeder[raeder.length-1].ra+ges;
-  let bild='',zx=raeder[0].ra;raeder.forEach((r,i)=>{bild+=`<g transform="translate(${f(zx-r.ra)} ${f(hmax-r.ra)})">${r.svg}</g>`;zx+=abst[i]||0});
-  const zus=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 ${f(bw+8)} ${f(2*hmax+8)}" role="img" aria-label="Zahnräder im Eingriff">${bild}</svg>`;
-  // Antworten
-  const iAB=S.zB/S.zA,ant=[];
-  ant.push(`Rad A: <b>Ø ${mm(2*A.ra)}</b><span class="leise">Teilkreis ${mm(2*A.r)} · ${S.zA} Zähne</span>`);
-  ant.push(`Rad B: <b>Ø ${mm(2*B.ra)}</b><span class="leise">Teilkreis ${mm(2*B.r)} · ${S.zB} Zähne</span>`);
-  if(raeder[2])ant.push(`Rad C: <b>Ø ${mm(2*raeder[2].ra)}</b><span class="leise">Teilkreis ${mm(2*raeder[2].r)} · ${S.zC} Zähne</span>`);
-  ant.push(`Achsabstand A–B: <b>${mm(abst[0])}</b>`+(abst[1]?`<span class="leise">B–C: ${mm(abst[1])}</span>`:''));
-  const letzte=raeder[raeder.length-1],iGes=letzte.z/S.zA;
-  const wie=iGes>1?`${iGes.toLocaleString('de-CH',{maximumFractionDigits:2})}-mal langsamer, dafür kräftiger`:iGes<1?`${(1/iGes).toLocaleString('de-CH',{maximumFractionDigits:2})}-mal schneller, dafür schwächer`:'gleich schnell';
-  ant.push(`Übersetzung A → ${['A','B','C'][raeder.length-1]}: <b>${S.zA} : ${letzte.z}</b><span class="leise">Dreht sich A einmal, dreht sich ${['A','B','C'][raeder.length-1]} ${(1/iGes).toLocaleString('de-CH',{maximumFractionDigits:2})}-mal – ${wie}. ${raeder.length===3?'C dreht gleich herum wie A':'B dreht gegen A'}.</span>`);
+  if(S.zC>=8){const C=zahnrad(m,S.zC,loch,stufe?0:gegenOff(B.off,S.zB,S.zC),'C');raeder.push(C);
+    if(stufe)raeder.push(zahnrad(m,S.zD,loch,gegenOff(0,S.zC,S.zD),'D'))}
+  // Achsen: in der Reihe hat jedes Rad eine eigene Achse; zweistufig teilen B und C eine Achse
+  const achsen=stufe?[[A],[B,raeder[2]],[raeder[3]]]:raeder.map(r=>[r]);
+  const namen=achsen.map(g=>g.map(r=>r.name.replace('Zahnrad ','')).join('+'));
+  const abst=[];for(let i=1;i<achsen.length;i++){const links=achsen[i-1][achsen[i-1].length-1],rechts=achsen[i][0];abst.push(m*(links.z+rechts.z)/2)}
+  const ges=abst.reduce((a,b)=>a+b,0);
+  // Grundplatte: Kreuze im richtigen Abstand, rundum Platz für das grösste Rad
+  const rmax=Math.max(...raeder.map(r=>r.ra)),pw=ges+2*rmax+20,ph=2*rmax+24;let x=rmax+10;
+  let plan=`<rect x="0.2" y="0.2" width="${f(pw-.4)}" height="${f(ph-.4)}" rx="4" class="schnitt"/>`;
+  achsen.forEach((g,i)=>{plan+=lochKreuz(x,rmax+10,lochP,'Achse '+namen[i]);g.forEach(r=>{plan+=`<circle cx="${f(x)}" cy="${f(rmax+10)}" r="${f(r.ra)}" class="hilf"/>`});
+    if(i<abst.length){plan+=`<path class="hilf" d="M${f(x+lochP/2+3)} ${f(rmax+10)}H${f(x+abst[i]-lochP/2-3)}"/>`+txt(x+abst[i]/2,rmax+7,mm(abst[i]),'tk');x+=abst[i]}});
+  plan+=txt(pw/2,ph-3,`Grundplatte ${mm(pw)} × ${mm(ph)} · Löcher ${mm(lochP)} · Abstände von Mitte zu Mitte`,'tk');
+  const teile=raeder.concat([{name:'Grundplatte',w:pw,h:ph,svg:plan}]);
+  if(S.kurbel==='ja'){const e=Math.max(20,Math.round(A.r*0.8)),aw=e+loch+14,ah=loch+12,g=lochmass('klotz');
+    teile.push({name:'Kurbelarm',w:Math.max(aw,52),h:ah+6,svg:`<rect x="0.2" y="0.2" width="${f(aw-.4)}" height="${f(ah-.4)}" rx="${f(ah/2)}" class="schnitt"/>${lochKreuz(ah/2,ah/2,S.achse)}${lochKreuz(ah/2+e,ah/2,g)}`+txt(aw/2,ah+4,`Kurbelarm · Achse ${mm(S.achse)} · Griff ${mm(g)}`,'tk')});
+    teile.kurbelE=e}
+  // Zusammenbau-Bild: alle Mittelpunkte auf einer Höhe; zweistufig liegt C auf B
+  let bild='',zx=achsen[0][0].ra;const h0=rmax;
+  achsen.forEach((g,i)=>{g.forEach(r=>{bild+=`<g transform="translate(${f(zx-r.ra)} ${f(h0-r.ra)})">${r.svg}</g>`});zx+=abst[i]||0});
+  const bw=achsen[0][0].ra+achsen[achsen.length-1][0].ra+ges;
+  const zus=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 ${f(bw+8)} ${f(2*rmax+8)}" role="img" aria-label="Zahnräder im Eingriff">${bild}</svg>`;
+  // Übersetzung
+  const letzte=raeder[raeder.length-1],iGes=stufe?(S.zB/S.zA)*(S.zD/S.zC):letzte.z/S.zA,nL=letzte.name.replace('Zahnrad ','');
+  const dz=v=>v.toLocaleString('de-CH',{maximumFractionDigits:2}).replace('.',',');
+  const wie=iGes>1?`${dz(iGes)}-mal langsamer, dafür kräftiger`:iGes<1?`${dz(1/iGes)}-mal schneller, dafür schwächer`:'gleich schnell';
+  const richtung=stufe?'D dreht gleich herum wie A':raeder.length===3?'C dreht gleich herum wie A':'B dreht gegen A';
+  const ant=[];
+  raeder.forEach(r=>ant.push(`Rad ${r.name.replace('Zahnrad ','')}: <b>Ø ${mm(2*r.ra)}</b><span class="leise">Teilkreis ${mm(2*r.r)} · ${r.z} Zähne</span>`));
+  ant.push(`Achsabstand ${namen[0]}–${namen[1]}: <b>${mm(abst[0])}</b>`+(abst[1]?`<span class="leise">${namen[1]}–${namen[2]}: ${mm(abst[1])}</span>`:''));
+  ant.push(`Übersetzung A → ${nL}: <b>1 : ${dz(iGes)}</b><span class="leise">Dreht sich A einmal, dreht sich ${nL} ${dz(1/iGes)}-mal – ${wie}. ${richtung}.</span>`);
   ant.push(`Loch im Zahnrad: <b>${mm(loch)}</b><span class="leise">${S.fest==='rad'?`1 mm grösser als die Achse (${S.achse} mm), das Rad dreht frei. Achse in der Platte festleimen (Loch ${mm(lochP)}).`:`Genau wie die Achse (${S.achse} mm), Rad festleimen. Loch in der Platte ${mm(lochP)}, damit die Achse dreht.`}</span>`);
   const warn=[];if(S.modul<=3)warn.push('Modul 2–3: sehr feine Zähne, zum Aussägen mit der Laubsäge schwierig.');
-  return {teile,zus,ant,warn,titel:`Zahnräder Modul ${m}: ${raeder.map(r=>r.z).join(' / ')} Zähne`};
+  if(stufe&&S.zC>=S.zB)warn.push('Zweistufig wird es nur langsamer, wenn C kleiner ist als B (weniger Zähne).');
+  // Rechenweg
+  const rech=[];
+  rech.push(`<p>Teilkreis = Modul × Zähne: <span class="f">${m} × ${S.zA} = ${mm(2*A.r)}</span> (Rad A) · <span class="f">${m} × ${S.zB} = ${mm(2*B.r)}</span> (Rad B)</p>`);
+  rech.push(`<p>Aussen ist jedes Rad 2 Modul grösser: <span class="f">${mm(2*A.r)} + ${2*m} = ${mm(2*A.ra)}</span> (Rad A)</p>`);
+  rech.push(`<p>Achsabstand = (Teilkreis A + Teilkreis B) : 2 = <span class="f">(${mm(2*A.r)} + ${mm(2*B.r)}) : 2 = ${mm(abst[0])}</span></p>`);
+  rech.push(`<p>Übersetzung = Zähne B : Zähne A = <span class="f">${S.zB} : ${S.zA} = ${dz(S.zB/S.zA)}</span> – dreht A einmal, dreht B ${dz(S.zA/S.zB)}-mal.</p>`);
+  if(S.zC>=8&&!stufe)rech.push(`<p>Rad C greift in B: B ist nur ein Zwischenrad. Es ändert die Richtung, nicht die Übersetzung: <span class="f">${S.zC} : ${S.zA} = ${dz(iGes)}</span></p>`);
+  if(stufe)rech.push(`<p>Zweite Stufe: Zähne D : Zähne C = <span class="f">${S.zD} : ${S.zC} = ${dz(S.zD/S.zC)}</span>. Beide Stufen malnehmen: <span class="f">${dz(S.zB/S.zA)} × ${dz(S.zD/S.zC)} = ${dz(iGes)}</span></p>`);
+  rech.push(`<p class="leise">Merke: Grosses Rad treibt kleines → schneller. Kleines treibt grosses → langsamer, aber kräftiger. Zwei Räder, die ineinandergreifen, drehen immer gegeneinander.</p>`);
+  // Material und Bauanleitung
+  const dicke=S.holz,plattenDicke=10,achsL=plattenDicke+3+achsen.reduce((mx,g)=>Math.max(mx,g.length),0)*(dicke+1)+8+(S.kurbel==='ja'?dicke+2:0);
+  const mat=[[`Sperrholz ${dicke} mm`,`${raeder.length} Zahnräder${S.kurbel==='ja'?' + Kurbelarm':''}`],[`Brett oder Sperrholz 10 mm`,`Grundplatte ${cmText(pw)} × ${cmText(ph)}`],[`Rundstab ${S.achse} mm`,`${achsen.length} × ${mm(achsL)}`],['Unterlagscheiben oder 3-mm-Ringe',`${S.fest==='rad'?raeder.length:achsen.length*2} Stück`],['Holzleim, Laubsäge, Bohrer',`${mm(loch)}${lochP!==loch?' und '+mm(lochP):''}`]];
+  if(S.kurbel==='ja')mat.push([`Rundstab ${mm(lochmass('klotz')-1)} als Griff`,'1 × 40 mm']);
+  const sch=[`Blatt drucken (100 %), 5-cm-Linie nachmessen, mit Leimstift auf das Holz kleben.<span class="leise">Zahnräder auf ${dicke} mm, Grundplatte${S.kurbel==='ja'?' und Kurbelarm':''} auf 10 mm.</span>`,
+    `Zuerst die Löcher an den Kreuzen bohren: Zahnräder ${mm(loch)}, Grundplatte ${mm(lochP)}.<span class="leise">Erst bohren, dann sägen – das Holz hält besser, wenn es noch gross ist.</span>`,
+    `Zahnräder aussägen: immer in die Zahnlücke hinein, dann wieder hinaus. Kanten mit Schleifpapier glätten.`,
+    `Achsen ablängen: ${achsen.length} × ${mm(achsL)}.<span class="leise">Platte ${plattenDicke} + Unterlagscheibe 3 + Rad ${dicke}${achsen.some(g=>g.length>1)?' (+ zweites Rad)':''} + ${S.kurbel==='ja'?'Kurbelarm + ':''}Überstand.</span>`,
+    S.fest==='rad'?`Achsen in die Grundplatte leimen. Unterlagscheibe aufstecken, Zahnrad lose aufstecken, oben ein Tropfen Leim auf ein Abschlussstück (Perle oder Holzscheibe), damit das Rad nicht abfällt.`:`Achsen durch die Grundplatte stecken (sie müssen drehen). Unterlagscheibe aufstecken, Zahnrad festleimen – darauf achten, dass es gerade sitzt.`,
+    `Rad B so einsetzen, dass die Zähne von A in die Lücken von B greifen. Dreht es schwer, ist der Achsabstand zu klein; klappert es, ist er zu gross.`+(stufe?' C sitzt fest auf der Achse von B, D greift in C.':''),
+    S.kurbel==='ja'?`Kurbelarm auf die Achse von A leimen, Griff ins äussere Loch. Drehen und zählen: eine Umdrehung an A – wie oft dreht ${nL}?`:`Rad A drehen und zählen: eine Umdrehung an A – wie oft dreht ${nL}?`];
+  return {teile,zus,ant,warn,rech,mat,sch,titel:`Zahnräder Modul ${m}: ${raeder.map(r=>r.z).join(' / ')} Zähne`};
 }
 
 function lochmass(was){   // Bohrloch: wo etwas drehen soll, 1 mm Spiel
@@ -276,7 +343,7 @@ function teileRad(){
     if(e+loch/2+4>r)warn.push(`Kurbelscheibe zu klein für Hub ${S.hub} mm – mindestens Ø ${mm(2*(e+loch/2+4))}.`);
     teile.push({name:'Kurbelscheibe',w:sd,h:sd,svg:`<circle cx="${f(r)}" cy="${f(r)}" r="${f(r)}" class="schnitt"/>${lochKreuz(r,r,S.achse,'Achse')}${lochKreuz(r+e,r,loch,'Griff')}`+txt(r,r+loch/2+10,`Kurbelscheibe · Hub ${mm(S.hub)}`)});
     const aw=e+loch+12,ah=loch+12;
-    teile.push({name:'Kurbelarm',w:aw,h:ah,svg:`<rect x="0.2" y="0.2" width="${f(aw-.4)}" height="${f(ah-.4)}" rx="${f(ah/2)}" class="schnitt"/>${lochKreuz(ah/2,ah/2,S.achse)}${lochKreuz(ah/2+e,ah/2,loch)}`+txt(aw/2,ah-2,`Kurbelarm · ${mm(e)}`,'tk')});
+    teile.push({name:'Kurbelarm',w:Math.max(aw,44),h:ah+6,svg:`<rect x="0.2" y="0.2" width="${f(aw-.4)}" height="${f(ah-.4)}" rx="${f(ah/2)}" class="schnitt"/>${lochKreuz(ah/2,ah/2,S.achse)}${lochKreuz(ah/2+e,ah/2,loch)}`+txt(aw/2,ah+4,`Kurbelarm · Hub ${mm(S.hub)}`,'tk')});
     teile.push({name:'Exzenter',w:sd,h:sd,svg:`<circle cx="${f(r)}" cy="${f(r)}" r="${f(r)}" class="schnitt"/>${lochKreuz(r+e,r,S.achse,'Achse')}<path class="kreuz" d="M${f(r-1.5)} ${f(r)}h3M${f(r)} ${f(r-1.5)}v3"/>`+txt(r,r+loch/2+10,`Exzenter · Hub ${mm(S.hub)}`)});
     ant.push(`Kurbel: <b>Hub ${mm(S.hub)}</b><span class="leise">Griffloch ${mm(e)} neben der Mitte · Scheibe Ø ${mm(sd)}</span>`);
     // Bild: Scheibe mit Griff oben und unten, Pfeil für den Hub
@@ -288,40 +355,68 @@ function teileRad(){
   return {teile,zus,ant,warn,titel:`${S.radN} Räder Ø ${cmText(D)}${S.hub>0?` · Kurbel Hub ${S.hub} mm`:''}`};
 }
 
-// Seitenansicht Auto: Punkte in Anteilen von Länge L und Höhe H, Boden unten (y = 0), Front rechts
+// Seitenansicht Auto: Umriss in Anteilen von Länge L und Höhe H, Boden unten (y = 0), Front rechts.
+// Q(ctrl,end) = runde Kurve vom letzten Punkt; achsen = wo die Räder sitzen (Anteil der Länge); fenster = Deko-Linien
+const kurve=(p0,c,p1,n=14)=>{const o=[];for(let i=1;i<=n;i++){const t=i/n,u=1-t;o.push([u*u*p0[0]+2*u*t*c[0]+t*t*p1[0],u*u*p0[1]+2*u*t*c[1]+t*t*p1[1]])}return o};
+function umriss(def){const pts=[];def.forEach(d=>{if(d.q){const p0=pts[pts.length-1];pts.push(...kurve(p0,d.q[0],d.q[1]))}else pts.push(d)});return pts}
 const UMRISSE={
-  flitzer:[[0,0],[1,0],[1,.38],[.74,.42],[.6,1],[.26,1],[.14,.48],[0,.42]],
-  rennwagen:[[0,0],[1,0],[1,.22],[.76,.28],[.58,.6],[.44,1],[.32,1],[.3,.5],[.16,.5],[.13,.92],[.03,.92],[0,.5]],
-  lastwagen:[[0,0],[1,0],[1,.55],[.93,.6],[.88,1],[.7,1],[.7,.8],[0,.8]],
-  bus:[[0,0],[1,0],[1,.85],[.97,1],[.03,1],[0,.85]],
-  kiste:[[0,0],[1,0],[1,.7],[.9,.7],[.85,1],[.15,1],[.1,.7],[0,.7]],
-  kaefer:(()=>{const p=[[0,0],[1,0]];for(let i=0;i<=24;i++){const t=1-i/24;p.push([t,Math.pow(Math.sin(Math.PI*t),.55)])}return p})()
+  flitzer:{achsen:[.2,.8],pts:umriss([[0,0],[1,0],[1,.3],{q:[[.98,.42],[.9,.44]]},[.72,.5],{q:[[.64,.52],[.6,.74]]},{q:[[.56,.98],[.42,1]]},[.3,1],{q:[[.2,1],[.16,.7]]},{q:[[.14,.56],[.06,.54]]},[0,.52]]),
+    fenster:[[.5,.58],[.62,.58],[.48,.9],[.36,.9]]},
+  rennwagen:{achsen:[.2,.8],pts:umriss([[0,0],[1,0],[1,.36],{q:[[.9,.42],[.76,.46]]},[.62,.5],{q:[[.56,.52],[.54,.74]]},{q:[[.52,.98],[.44,.98]]},[.4,.98],{q:[[.34,.98],[.33,.62]]},[.14,.62],[.14,1],[.02,1],{q:[[0,1],[0,.9]]},[0,.6]]),
+    fenster:[[.44,.7],[.52,.7],[.49,.9],[.44,.9]]},
+  lastwagen:{achsen:[.2,.78],pts:umriss([[0,0],[1,0],[1,.5],{q:[[1,.6],[.94,.62]]},[.82,.64],[.74,.98],{q:[[.73,1],[.7,1]]},[.56,1],{q:[[.54,1],[.54,.95]]},[.54,.8],[0,.8]]),
+    fenster:[[.6,.7],[.78,.7],[.73,.92],[.6,.92]]},
+  bus:{achsen:[.2,.8],pts:umriss([[0,0],[1,0],[1,.3],{q:[[1,.9],[.9,1]]},[.1,1],{q:[[0,.9],[0,.3]]}]),
+    fenster:[[.1,.6],[.9,.6],[.9,.88],[.1,.88]]},
+  kaefer:{achsen:[.2,.8],pts:umriss([[0,0],[1,0],[1,.2],{q:[[1,.36],[.94,.42]]},{q:[[.8,.6],[.7,.86]]},{q:[[.6,1.02],[.46,1]]},{q:[[.28,.98],[.16,.74]]},{q:[[.08,.5],[0,.4]]},[0,.2]]),
+    fenster:[[.56,.6],[.66,.62],[.6,.9],[.48,.92]]},
+  kiste:{achsen:[.2,.8],pts:umriss([[0,0],[1,0],[1,.6],[.84,.6],[.84,.96],{q:[[.84,1],[.8,1]]},[.2,1],{q:[[.16,1],[.16,.96]]},[.16,.6],[0,.6]]),
+    fenster:[[.22,.68],[.78,.68],[.78,.94],[.22,.94]]}
 };
+// Höhe des Umrisses an der Stelle x (Anteil der Länge): höchster Punkt der Oberkante
+function hoeheBei(pts,x){let h=0;for(let i=0;i<pts.length;i++){const a=pts[i],b=pts[(i+1)%pts.length];if(a[1]===0&&b[1]===0)continue;
+  const lo=Math.min(a[0],b[0]),hi=Math.max(a[0],b[0]);if(x<lo||x>hi)continue;const y=hi-lo<1e-6?Math.max(a[1],b[1]):a[1]+(b[1]-a[1])*(x-a[0])/(b[0]-a[0]);h=Math.max(h,y)}return h}
 function teileAuto(){
-  const L=S.autoL*10,H=S.autoH*10,D=S.autoRad*10,R=D/2,bo=S.boden,lochK=lochmass('klotz'),lochR=lochmass('achse');
-  const ws=S.radstand?S.radstand*10:Math.round(L*0.6),xR=(L-ws)/2,xF=xR+ws,ay=R-bo;   // Achshöhe über der Unterkante
+  const L=S.autoL*10,H=S.autoH*10,D=S.autoRad*10,R=D/2,bo=S.boden,lochK=lochmass('klotz'),lochR=lochmass('achse'),F=UMRISSE[S.form];
+  let xR,xF;if(S.radstand){const ws=S.radstand*10;xR=(L-ws)/2;xF=xR+ws}else{xR=Math.round(F.achsen[0]*L);xF=Math.round(F.achsen[1]*L)}
+  const ws=xF-xR,ay=R-bo;   // Achshöhe über der Unterkante
   const warn=[],ant=[];
   const gh=H+bo;   // Blatt-Teil: Klotz plus Bodenlinie
-  const pfad='M'+UMRISSE[S.form].map(([x,y])=>f(x*L)+' '+f(H-y*H)).join('L')+'Z';
+  const pfad='M'+F.pts.map(([x,y])=>f(x*L)+' '+f(H-y*H)).join('L')+'Z';
   let svg=`<path class="schnitt" d="${pfad}"/>`;
-  [xR,xF].forEach((x,i)=>{svg+=`<circle cx="${f(x)}" cy="${f(H-ay)}" r="${f(R)}" class="hilf"/>`+lochKreuz(x,H-ay,lochK,i?'Vorderachse':'Hinterachse')});
+  if(F.fenster)svg+=`<path class="deko" d="M${F.fenster.map(([x,y])=>f(x*L)+' '+f(H-y*H)).join('L')}Z"/>`;
+  // Lochprüfung: über und neben dem Loch braucht es 3 mm Holz
+  const rand=lochK/2+3;
+  [xR,xF].forEach((x,i)=>{svg+=`<circle cx="${f(x)}" cy="${f(H-ay)}" r="${f(R)}" class="hilf"/>`+lochKreuz(x,H-ay,lochK,i?'Vorderachse':'Hinterachse');
+    const hmin=Math.min(hoeheBei(F.pts,(x-rand)/L),hoeheBei(F.pts,x/L),hoeheBei(F.pts,(x+rand)/L))*H;
+    if(ay+rand>hmin)warn.push(`${i?'Vorderachse':'Hinterachse'}: Der Klotz ist dort nur ${mm(hmin)} hoch, das Loch braucht ${mm(ay+rand)}. Räder kleiner, Bodenfreiheit grösser, Klotz höher oder Radstand ändern.`)});
   svg+=`<path class="hilf" d="M${f(Math.min(0,xR-R))} ${f(gh)}H${f(Math.max(L,xF+R))}"/>`+txt(L/2,gh-1.5,'Boden','tk');
   svg+=txt(L/2,gh+4.5,`${FORMEN[S.form]} · ${cmText(L)} × ${cmText(H)} · Klotz ${cmText(S.autoB*10)} breit · Achslöcher ${mm(lochK)}`);
   const links=Math.min(0,xR-R),breite=Math.max(L,xF+R)-links;
   const teile=[{name:'Karosserie',w:breite,h:gh+6,svg:`<g transform="translate(${f(-links)} 0)">${svg}</g>`}];
   for(let i=0;i<4;i++)teile.push(kreisRad(D,lochR,'Rad',`Ø ${cmText(D)} · Loch ${mm(lochR)}`));
   if(ay<lochK/2+3)warn.push(`Achsloch liegt zu nah an der Unterkante (${mm(ay)} über dem Boden): Räder grösser, Bodenfreiheit kleiner oder Loch von unten als Nut sägen.`);
-  if(ay>H-lochK/2-3)warn.push('Achse liegt über dem Klotz: Räder kleiner oder Klotz höher.');
   if(xR-R<0||xF+R>L)warn.push('Die Räder stehen vorne oder hinten über den Klotz hinaus – Radstand kleiner wählen oder so lassen (sieht bei Rennwagen gut aus).');
   if(xF-xR<D+2)warn.push('Radstand zu klein: die Räder berühren sich.');
   const spiel=2,ueber=S.fest==='rad'?3:0,achsL=S.autoB*10+2*spiel+2*S.radBreite+2*ueber;
   ant.push(`Klotz: <b>${cmText(L)} × ${cmText(H)} × ${cmText(S.autoB*10)}</b><span class="leise">Länge × Höhe × Breite</span>`);
-  ant.push(`Radstand: <b>${cmText(ws)}</b><span class="leise">Achsen ${mm(ay)} über der Unterkante, Loch im Klotz ${mm(lochK)}</span>`);
+  ant.push(`Radstand: <b>${cmText(ws)}</b><span class="leise">Hinterachse ${mm(xR)} von hinten, Achsen ${mm(ay)} über der Unterkante, Loch im Klotz ${mm(lochK)}</span>`);
   ant.push(`Räder: <b>4 × Ø ${cmText(D)}</b><span class="leise">${mm(S.radBreite)} dick · Loch ${mm(lochR)}</span>`);
   ant.push(`Achsen: <b>2 × ${mm(achsL)}</b><span class="leise">Rundstab ${S.achse} mm: Klotz ${cmText(S.autoB*10)} + je ${spiel} mm Spiel + 2 × Rad ${mm(S.radBreite)}${ueber?` + je ${ueber} mm Überstand`:''}</span>`);
   ant.push(`Gesamthöhe mit Rädern: <b>${cmText(H+bo)}</b>`);
+  const rech=[`<p>Achshöhe = Radhalbmesser − Bodenfreiheit = <span class="f">${mm(R)} − ${mm(bo)} = ${mm(ay)}</span> über der Unterkante des Klotzes.</p>`,
+    `<p>Achslänge = Klotz + 2 × Spiel + 2 × Rad${ueber?' + 2 × Überstand':''} = <span class="f">${mm(S.autoB*10)} + ${mm(2*spiel)} + ${mm(2*S.radBreite)}${ueber?' + '+mm(2*ueber):''} = ${mm(achsL)}</span></p>`,
+    `<p>Loch im Klotz ${mm(lochK)}, Loch im Rad ${mm(lochR)}: <span class="f">${S.fest==='rad'?'Rad 1 mm grösser – das Rad dreht auf der festen Achse.':'Klotz 1 mm grösser – die Achse dreht im Klotz, die Räder sitzen fest.'}</span></p>`,
+    `<p class="leise">Merke: Was drehen soll, bekommt 1 mm Spiel. Was fest sitzen soll, wird genau so gross gebohrt wie die Achse und geleimt.</p>`];
+  const mat=[[`Holzklotz (Fichte oder Buche)`,`${cmText(L)} × ${cmText(H)} × ${cmText(S.autoB*10)}`],[`Sperrholz ${mm(S.radBreite)} oder Holzräder Ø ${cmText(D)}`,'4 Räder'],[`Rundstab ${S.achse} mm`,`2 × ${mm(achsL)}`],['Bohrer',`${mm(lochK)}${lochR!==lochK?' und '+mm(lochR):''}`],['Laubsäge oder Dekupiersäge, Schleifpapier, Holzleim','']];
+  const sch=[`Blatt drucken (100 %), 5-cm-Linie nachmessen. Karosserie auf die Seite des Klotzes kleben, Räder auf das Sperrholz.`,
+    `Achslöcher zuerst bohren, ${mm(lochK)}, genau an den Kreuzen und rechtwinklig durch den ganzen Klotz.<span class="leise">Schief gebohrt = das Auto fährt in die Kurve. Ständerbohrmaschine oder Bohrhilfe nehmen.</span>`,
+    `Umriss aussägen, Kanten rund schleifen. Die gestrichelten Fenster kannst du aufmalen oder einbrennen.`,
+    `Räder aussägen oder fertige Holzräder nehmen, Loch ${mm(lochR)} bohren.`,
+    `Achsen auf ${mm(achsL)} ablängen. ${S.fest==='rad'?'Achsen in den Klotz leimen, Räder lose aufstecken, aussen ein Tropfen Leim auf eine Perle oder Scheibe als Abschluss.':'Achsen durch den Klotz stecken (sie müssen drehen), Räder aussen festleimen – gerade halten, bis der Leim hält.'}`,
+    `Probefahrt auf dem Tisch: Rollt es gerade? Sonst Achse prüfen und Räder nachrichten.`];
   const zus=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${f(links-4)} -4 ${f(breite+8)} ${f(gh+12)}" role="img" aria-label="Holzauto von der Seite">${svg}</svg>`;
-  return {teile,zus,ant,warn,titel:`Holzauto «${FORMEN[S.form]}» ${cmText(L)} × ${cmText(H)}`};
+  return {teile,zus,ant,warn,rech,mat,sch,titel:`Holzauto «${FORMEN[S.form]}» ${cmText(L)} × ${cmText(H)}`};
 }
 
 // ---------- Blätter packen ----------
@@ -330,10 +425,11 @@ function packen(teile){
   let b,x=0,y=0,zh=0;const neu=()=>{b={teile:[]};blaetter.push(b);x=0;y=0;zh=0};neu();
   teile.forEach(t=>{let w=t.w,h=t.h,rot=false;
     if(w>W&&h<=W&&w<=H){rot=true;[w,h]=[h,w]}
-    if(w>W+.01||h>H+.01)zuGross.push(t.name);
+    if(w>W+.01||h>H+.01){zuGross.push(t.name);return}
     if(x>0&&x+w>W+.01){x=0;y+=zh+LUECKE;zh=0}
     if(y>0&&y+h>H+.01)neu();
     b.teile.push({t,x,y,rot});x+=w+LUECKE;zh=Math.max(zh,h)});
+  if(blaetter.length===1&&!blaetter[0].teile.length)blaetter.length=0;
   return {blaetter,zuGross,P};
 }
 function blattSvg(b,i,n,titel,P){
@@ -350,12 +446,16 @@ function zeigen(){
   const {blaetter,zuGross,P}=packen(E.teile);
   const svgs=blaetter.map((b,i)=>blattSvg(b,i,blaetter.length,E.titel,P));
   $('antwort').innerHTML=E.ant.map(a=>`<li>${a}</li>`).join('');
-  const warn=E.warn.concat(zuGross.length?[`Zu gross für ${P.name}: ${[...new Set(zuGross)].join(', ')}.${S.papier==='a4'?' A3 wählen.':''}`]:[]);
+  const warn=E.warn.concat(zuGross.length?[`Zu gross für ${P.name}, wird nicht gedruckt: ${[...new Set(zuGross)].join(', ')}.${S.papier==='a4'?' A3 wählen.':' Kleineren Modul oder weniger Zähne wählen.'}`]:[]);
   $('warnung').hidden=!warn.length;$('warnung').innerHTML=warn.map(w=>`<span class="warn">${w}</span>`).join('<br>');
+  $('k-rechnung').hidden=!(E.rech&&E.rech.length);$('rechnung').innerHTML=(E.rech||[]).join('');
+  $('k-bau').hidden=!(E.sch&&E.sch.length);
+  $('material').innerHTML=(E.mat||[]).map(([a,b])=>`<li><span>${a}</span><span class="n">${b}</span></li>`).join('');
+  $('schritte').innerHTML=(E.sch||[]).map(t=>`<li>${t}</li>`).join('');
   $('uebersicht').innerHTML=E.zus;
   $('blaetter').innerHTML=svgs.join('');
   $('druck').innerHTML=svgs.join('');
-  $('info').textContent=`${E.teile.length} Teile auf ${blaetter.length} ${blaetter.length===1?'Blatt':'Blättern'} ${P.name}. Ausdrucken, mit Leimstift auf das Holz kleben, aussägen, Löcher an den Kreuzen bohren.`;
+  $('info').textContent=(blaetter.length?`${E.teile.length-zuGross.length} Teile auf ${blaetter.length} ${blaetter.length===1?'Blatt':'Blättern'} ${P.name}.`:`Kein Teil passt auf ${P.name}.`)+` Ausdrucken, mit Leimstift auf das Holz kleben, aussägen, Löcher an den Kreuzen bohren.`;
   $('seite').textContent=`@page{size:${P.name} portrait;margin:0}#druck{--bw:${P.w}mm;--bh:${P.h}mm}`;
   document.title=`Schritt für Schritt · Mechanik-Planer · ${E.titel}`;
   speichern();
@@ -364,13 +464,16 @@ function felder(){
   document.querySelectorAll('.modus-teil').forEach(s=>{s.hidden=s.dataset.modus!==S.modus});
   document.querySelectorAll('[data-g]').forEach(g=>{const k=g.dataset.g;g.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',String(S[k])===c.dataset.v))});
   document.querySelectorAll('input[data-k]').forEach(i=>{if(document.activeElement!==i)i.value=S[i.dataset.k]});
+  $('feldKette').hidden=S.zC<8;$('feldD').hidden=!(S.zC>=8&&S.kette==='stufe');
 }
 document.querySelectorAll('[data-g]').forEach(g=>g.addEventListener('click',ev=>{
   const c=ev.target.closest('.chip');if(!c)return;const k=g.dataset.g;
-  S[k]=WORTE[k]?c.dataset.v:zahl(c.dataset.v,S[k]);felder();zeigen();
+  S[k]=WORTE[k]?c.dataset.v:zahl(c.dataset.v,S[k]);
+  if(k==='ziel'&&ZIELE[S.ziel])Object.assign(S,ZIELE[S.ziel]);
+  felder();zeigen();
 }));
 document.querySelectorAll('input[data-k]').forEach(i=>{
-  i.addEventListener('input',()=>{const k=i.dataset.k,n=zahl(i.value,NaN);if(!isFinite(n))return;S[k]=begrenzt(n,GRENZEN[k][0],GRENZEN[k][1]);zeigen()});
+  i.addEventListener('input',()=>{const k=i.dataset.k,n=zahl(i.value,NaN);if(!isFinite(n))return;S[k]=begrenzt(n,GRENZEN[k][0],GRENZEN[k][1]);if(k[0]==='z')S.ziel='';felder();zeigen()});
   i.addEventListener('change',()=>{i.value=S[i.dataset.k]});
 });
 $('drucken').addEventListener('click',()=>print());

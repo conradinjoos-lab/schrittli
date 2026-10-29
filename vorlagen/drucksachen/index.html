@@ -78,13 +78,13 @@ textarea{min-height:120px;resize:vertical;line-height:1.5}
 .einfach .pass .vf .kreis{width:14mm;height:14mm}
 .einfach .pass .zeile span b{text-transform:uppercase}
 /* Klassenübersicht */
-.tabelle{padding:10mm;height:100%;display:flex;flex-direction:column}
+.tabelle{padding:7mm;height:100%;display:flex;flex-direction:column}
 .tabelle h3{margin:0 0 1mm;font:600 9mm/1 Fredoka,Nunito,sans-serif}
 .tabelle p.unter{margin:0 0 4mm;color:#5B6B80;font-size:3.4mm}
 .tabelle table{border-collapse:collapse;width:100%;table-layout:fixed}
-.tabelle th,.tabelle td{border:.3mm solid #8A96A8;height:7mm;padding:0 1.5mm;font-size:3.2mm;text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.tabelle th,.tabelle td{border:.3mm solid #8A96A8;height:6mm;padding:0 1.5mm;font-size:3.2mm;text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .tabelle th{font-weight:800;background:#F5F8FB}
-.tabelle th.vf{text-align:center;padding:0;vertical-align:bottom;height:26mm}
+.tabelle th.vf{text-align:center;padding:0;vertical-align:bottom;height:24mm}
 .tabelle th.vf div{writing-mode:vertical-rl;transform:rotate(180deg);margin:1.5mm auto;font-size:3mm;white-space:nowrap}
 .tabelle th.vf .em{display:block;font-size:4.5mm;margin-bottom:1mm}
 .tabelle td.vf{text-align:center}
@@ -124,7 +124,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.5}
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
   <h1>Verfahrenspass &amp; Etiketten</h1>
-  <p>Ein Pass mit Stempelfeldern für jedes Kind, eine Klassenübersicht und Etiketten für fertige Werke. <a href="../">← Vorlagen</a></p>
+  <p>Ein Pass mit Stempelfeldern für jedes Kind, eine Klassenübersicht und Etiketten für fertige Werke. <a href="../">←&nbsp;Vorlagen-Generator</a></p>
 </header>
 <script src="../zurueck.js"></script>
 <main>
@@ -146,7 +146,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.5}
         <div class="feld"><span class="lbl" id="l-stufe">Stufe</span><div class="chips" role="group" aria-labelledby="l-stufe" id="stufe">
           <button type="button" class="chip" data-stufe="0" aria-pressed="true">3.–6. Klasse</button>
           <button type="button" class="chip" data-stufe="1" aria-pressed="false">1./2. Klasse (grössere Felder)</button></div></div>
-        <p class="hinweis">Jedes Kind bekommt einen Pass (A5) mit allen 16 Verfahren. Ist ein Werk fertig, kommt ein Stempel oder das Datum ins Feld. Die Klassenübersicht zeigt alle Kinder auf einem Blatt.</p>
+        <p class="hinweis">Jedes Kind bekommt einen Pass (A5) mit allen 16 Verfahren. Ist ein Werk fertig, kommt ein Stempel oder das Datum ins Feld. Die Klassenübersicht zeigt bis zu 24 Kinder auf einem Blatt A4, 38 auf A3.</p>
       </div>
       <div id="pane-etikett" role="tabpanel" aria-labelledby="tab-etikett" hidden>
         <div class="feld"><span class="lbl" id="l-verfahren">Verfahren</span><div class="chips" role="group" aria-labelledby="l-verfahren" id="verfahren"></div></div>
@@ -222,7 +222,7 @@ function passSeiten(){
 }
 function uebersichtSeiten(){
   const kl=$('klasse').value.trim(),jahr=$('jahr').value.trim()||schuljahr();
-  const proSeite=S.papier==='a3'?40:24;
+  const proSeite=S.papier==='a3'?38:24;   // so viele Zeilen passen samt Legende aufs Blatt
   const liste=namen();const alle=liste.length?liste:Array(proSeite).fill('');
   return stueck(alle,proSeite).map((teil,i,arr)=>seite(`<div class="tabelle">
     <h3>Klassenübersicht Verfahren${kl?' · '+esc(kl):''}</h3><p class="unter">Schuljahr ${esc(jahr)}${arr.length>1?` · Blatt ${i+1} von ${arr.length}`:''} · Schritt für Schritt</p>
@@ -302,9 +302,10 @@ $('jahr').placeholder=schuljahr();
 const q=new URLSearchParams(location.search);
 if(q.get('tab')==='etikett')S.tab='etikett';
 if(q.get('blatt')==='uebersicht')S.passart='uebersicht';
-if(VF[q.get('verfahren')])S.verfahren=q.get('verfahren');
-if(ETIKETTEN[q.get('groesse')])S.groesse=q.get('groesse');
-if(PAPIERE[q.get('papier')])S.papier=q.get('papier');
+const hat=(o,k)=>k!=null&&Object.prototype.hasOwnProperty.call(o,k);   // nur echte Schlüssel, kein «constructor»
+if(hat(VF,q.get('verfahren')))S.verfahren=q.get('verfahren');
+if(hat(ETIKETTEN,q.get('groesse')))S.groesse=q.get('groesse');
+if(hat(PAPIERE,q.get('papier')))S.papier=q.get('papier');
 if(+q.get('klasse')>=1&&+q.get('klasse')<=6){S.klasse=+q.get('klasse');if(S.klasse<=2)S.einfach=true;$('klasse').value=S.klasse+'.'}
 bedienung();zeichnen();
 </script>

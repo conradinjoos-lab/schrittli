@@ -43,7 +43,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 .fw .wort{font:600 19px Fredoka,Nunito,sans-serif;line-height:1.15}
 .fw .erkl{font-size:13px;color:var(--muted);margin:0}
 .fw .vf{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-.einfach .fw .wort{text-transform:uppercase;font-size:20px;letter-spacing:.03em}
+.einfach .fw .wort{text-transform:uppercase;font-size:20px;letter-spacing:.03em;overflow-wrap:anywhere;hyphens:auto}
 .ohne .fw .erkl{display:none}
 .pikto{stroke:#1C2430;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;fill:none}
 .leer{color:var(--muted);padding:20px;text-align:center}
@@ -106,7 +106,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
   <h1>Fachwörter</h1>
-  <p>Wörter aus dem Werkraum mit Bild und Erklärung. Zum Lernen, als Karten, Plakat oder Memory. <a href="../">← Vorlagen</a></p>
+  <p>Wörter aus dem Werkraum mit Bild und Erklärung. Zum Lernen, als Karten, Plakat oder Memory. <a href="../">←&nbsp;Vorlagen-Generator</a></p>
 </header>
 <script src="../zurueck.js"></script>
 <main>
@@ -290,7 +290,7 @@ function seite(inhalt,klasse='',fuss=''){
 }
 const stueck=(a,n)=>{const r=[];for(let i=0;i<a.length;i+=n)r.push(a.slice(i,i+n));return r};
 function kartenSeiten(ws,memory){
-  const [sp,ze]=PAPIERE[S.papier].karten,pro=sp*ze;
+  const [sp,ze]=PAPIERE[S.papier].karten,pro=memory?sp*ze-(sp*ze)%2:sp*ze;   // Memory: gerade Zahl, damit Paare zusammenbleiben
   // Memory: pro Wort zwei Karten (Bild, Wort), Paare bleiben auf derselben Seite
   const karten=memory?ws.flatMap(w=>[{w,art:'bild'},{w,art:'wort'}]):ws.map(w=>({w,art:'voll'}));
   return stueck(karten,pro).map((k,i)=>{
@@ -303,7 +303,7 @@ function kartenSeiten(ws,memory){
   });
 }
 function plakatSeiten(ws){
-  const sp=PAPIERE[S.papier].plakat,pro=sp*(S.papier==='a3'?5:4),seiten=[];
+  const sp=PAPIERE[S.papier].plakat,pro=sp*(S.papier==='a3'?5:3),seiten=[];
   mitWoertern.forEach(v=>{const eigene=ws.filter(w=>w.verfahren===v.id);if(!eigene.length)return;
     stueck(eigene,pro).forEach((teil,i,alle)=>{
       seiten.push(seite(`<div class="plakat" style="--farbe:${v.color};--sp:${sp}"><div class="titel"><span class="em">${v.emoji}</span><div><h3>${esc(v.name)}</h3><small>Fachwörter${alle.length>1?` · Blatt ${i+1} von ${alle.length}`:''}</small></div></div><div class="kacheln">${teil.map(w=>`<div class="kachel"><div class="bild">${pikto(w)}</div><div class="wort">${esc(w.wort)}</div><p class="erkl">${esc(w.erklaerung)}</p></div>`).join('')}</div></div>`,'',`Plakat ${esc(v.name)}`));});});
@@ -350,10 +350,11 @@ function bedienung(){
   $('drucken').addEventListener('click',()=>window.print());
   if(window.ResizeObserver)new ResizeObserver(massstab).observe($('vorschau'));else addEventListener('resize',massstab);
 }
+const hat=(o,k)=>k!=null&&Object.prototype.hasOwnProperty.call(o,k);   // nur echte Schlüssel, kein «constructor»
 const q=new URLSearchParams(location.search);
-if(VF[q.get('verfahren')])S.verfahren=q.get('verfahren');
+if(hat(VF,q.get('verfahren')))S.verfahren=q.get('verfahren');
 if(['karten','plakat','memory'].includes(q.get('modus')))S.modus=q.get('modus');
-if(PAPIERE[q.get('papier')])S.papier=q.get('papier');
+if(hat(PAPIERE,q.get('papier')))S.papier=q.get('papier');
 if(+q.get('klasse')>=1&&+q.get('klasse')<=6){S.klasse=+q.get('klasse');if(S.klasse<=2)document.body.classList.add('einfach')}
 bedienung();zeichnen();
 </script>
