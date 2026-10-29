@@ -44,7 +44,9 @@
   "Schule",
   "Sport",
   "Winter",
-  "Männchen"
+  "Männchen",
+  "Wappen",
+  "Fussball"
  ],
  "figuren": [
   {
@@ -6627,6 +6629,498 @@
    "name": "Nachdenkliches Männchen gelb",
    "welt": "Männchen",
    "datei": "maennchen-nachdenklich-gelb.png"
+  },
+  {
+   "id": "wappen-schweiz",
+   "name": "Wappen Schweiz",
+   "welt": "Wappen",
+   "datei": "wappen-schweiz.png"
+  },
+  {
+   "id": "wappen-aargau",
+   "name": "Wappen Aargau",
+   "welt": "Wappen",
+   "datei": "wappen-aargau.png"
+  },
+  {
+   "id": "wappen-appenzell-ar",
+   "name": "Wappen Appenzell Ausserrhoden",
+   "welt": "Wappen",
+   "datei": "wappen-appenzell-ar.png"
+  },
+  {
+   "id": "wappen-appenzell-ai",
+   "name": "Wappen Appenzell Innerrhoden",
+   "welt": "Wappen",
+   "datei": "wappen-appenzell-ai.png"
+  },
+  {
+   "id": "wappen-basel-land",
+   "name": "Wappen Basel-Landschaft",
+   "welt": "Wappen",
+   "datei": "wappen-basel-land.png"
+  },
+  {
+   "id": "wappen-basel-stadt",
+   "name": "Wappen Basel-Stadt",
+   "welt": "Wappen",
+   "datei": "wappen-basel-stadt.png"
+  },
+  {
+   "id": "wappen-bern",
+   "name": "Wappen Bern",
+   "welt": "Wappen",
+   "datei": "wappen-bern.png"
+  },
+  {
+   "id": "wappen-freiburg",
+   "name": "Wappen Freiburg",
+   "welt": "Wappen",
+   "datei": "wappen-freiburg.png"
+  },
+  {
+   "id": "wappen-genf",
+   "name": "Wappen Genf",
+   "welt": "Wappen",
+   "datei": "wappen-genf.png"
+  },
+  {
+   "id": "wappen-glarus",
+   "name": "Wappen Glarus",
+   "welt": "Wappen",
+   "datei": "wappen-glarus.png"
+  },
+  {
+   "id": "wappen-graubuenden",
+   "name": "Wappen Graubünden",
+   "welt": "Wappen",
+   "datei": "wappen-graubuenden.png"
+  },
+  {
+   "id": "wappen-jura",
+   "name": "Wappen Jura",
+   "welt": "Wappen",
+   "datei": "wappen-jura.png"
+  },
+  {
+   "id": "wappen-luzern",
+   "name": "Wappen Luzern",
+   "welt": "Wappen",
+   "datei": "wappen-luzern.png"
+  },
+  {
+   "id": "wappen-neuenburg",
+   "name": "Wappen Neuenburg",
+   "welt": "Wappen",
+   "datei": "wappen-neuenburg.png"
+  },
+  {
+   "id": "wappen-nidwalden",
+   "name": "Wappen Nidwalden",
+   "welt": "Wappen",
+   "datei": "wappen-nidwalden.png"
+  },
+  {
+   "id": "wappen-obwalden",
+   "name": "Wappen Obwalden",
+   "welt": "Wappen",
+   "datei": "wappen-obwalden.png"
+  },
+  {
+   "id": "wappen-schaffhausen",
+   "name": "Wappen Schaffhausen",
+   "welt": "Wappen",
+   "datei": "wappen-schaffhausen.png"
+  },
+  {
+   "id": "wappen-schwyz",
+   "name": "Wappen Schwyz",
+   "welt": "Wappen",
+   "datei": "wappen-schwyz.png"
+  },
+  {
+   "id": "wappen-solothurn",
+   "name": "Wappen Solothurn",
+   "welt": "Wappen",
+   "datei": "wappen-solothurn.png"
+  },
+  {
+   "id": "wappen-stgallen",
+   "name": "Wappen St. Gallen",
+   "welt": "Wappen",
+   "datei": "wappen-stgallen.png"
+  },
+  {
+   "id": "wappen-thurgau",
+   "name": "Wappen Thurgau",
+   "welt": "Wappen",
+   "datei": "wappen-thurgau.png"
+  },
+  {
+   "id": "wappen-tessin",
+   "name": "Wappen Tessin",
+   "welt": "Wappen",
+   "datei": "wappen-tessin.png"
+  },
+  {
+   "id": "wappen-uri",
+   "name": "Wappen Uri",
+   "welt": "Wappen",
+   "datei": "wappen-uri.png"
+  },
+  {
+   "id": "wappen-wallis",
+   "name": "Wappen Wallis",
+   "welt": "Wappen",
+   "datei": "wappen-wallis.png"
+  },
+  {
+   "id": "wappen-waadt",
+   "name": "Wappen Waadt",
+   "welt": "Wappen",
+   "datei": "wappen-waadt.png"
+  },
+  {
+   "id": "wappen-zug",
+   "name": "Wappen Zug",
+   "welt": "Wappen",
+   "datei": "wappen-zug.png"
+  },
+  {
+   "id": "wappen-zuerich",
+   "name": "Wappen Zürich",
+   "welt": "Wappen",
+   "datei": "wappen-zuerich.png"
+  },
+  {
+   "id": "wappen-neunkirch",
+   "name": "Wappen Neunkirch",
+   "welt": "Wappen",
+   "datei": "wappen-neunkirch.png"
+  },
+  {
+   "id": "fb-basel",
+   "name": "FC Basel",
+   "welt": "Fussball",
+   "datei": "fb-basel.png"
+  },
+  {
+   "id": "fb-zuerich",
+   "name": "FC Zürich",
+   "welt": "Fussball",
+   "datei": "fb-zuerich.png"
+  },
+  {
+   "id": "fb-gc",
+   "name": "Grasshopper Club Zürich",
+   "welt": "Fussball",
+   "datei": "fb-gc.png"
+  },
+  {
+   "id": "fb-stgallen",
+   "name": "FC St. Gallen",
+   "welt": "Fussball",
+   "datei": "fb-stgallen.png"
+  },
+  {
+   "id": "fb-lugano",
+   "name": "FC Lugano",
+   "welt": "Fussball",
+   "datei": "fb-lugano.png"
+  },
+  {
+   "id": "fb-schaffhausen",
+   "name": "FC Schaffhausen",
+   "welt": "Fussball",
+   "datei": "fb-schaffhausen.png"
+  },
+  {
+   "id": "fb-servette",
+   "name": "Servette FC",
+   "welt": "Fussball",
+   "datei": "fb-servette.png"
+  },
+  {
+   "id": "fb-sion",
+   "name": "FC Sion",
+   "welt": "Fussball",
+   "datei": "fb-sion.png"
+  },
+  {
+   "id": "fb-bayern",
+   "name": "FC Bayern München",
+   "welt": "Fussball",
+   "datei": "fb-bayern.png"
+  },
+  {
+   "id": "fb-juventus",
+   "name": "Juventus Turin",
+   "welt": "Fussball",
+   "datei": "fb-juventus.png"
+  },
+  {
+   "id": "fb-inter",
+   "name": "Inter Mailand",
+   "welt": "Fussball",
+   "datei": "fb-inter.png"
+  },
+  {
+   "id": "fb-milan",
+   "name": "AC Mailand",
+   "welt": "Fussball",
+   "datei": "fb-milan.png"
+  },
+  {
+   "id": "fz-vw-bus",
+   "name": "VW-Bus (Bulli)",
+   "welt": "Fahrzeuge",
+   "datei": "fz-vw-bus.png"
+  },
+  {
+   "id": "fz-vw-kaefer",
+   "name": "VW Käfer",
+   "welt": "Fahrzeuge",
+   "datei": "fz-vw-kaefer.png"
+  },
+  {
+   "id": "fz-citroen-2cv",
+   "name": "Citroën 2CV (Ente)",
+   "welt": "Fahrzeuge",
+   "datei": "fz-citroen-2cv.png"
+  },
+  {
+   "id": "fz-porsche-911",
+   "name": "Porsche 911",
+   "welt": "Fahrzeuge",
+   "datei": "fz-porsche-911.png"
+  },
+  {
+   "id": "fz-bmw-kombi",
+   "name": "BMW Kombi",
+   "welt": "Fahrzeuge",
+   "datei": "fz-bmw-kombi.png"
+  },
+  {
+   "id": "fz-ferrari",
+   "name": "Ferrari 458 Spider",
+   "welt": "Fahrzeuge",
+   "datei": "fz-ferrari.png"
+  },
+  {
+   "id": "fz-tesla",
+   "name": "Tesla Model S",
+   "welt": "Fahrzeuge",
+   "datei": "fz-tesla.png"
+  },
+  {
+   "id": "fz-mercedes",
+   "name": "Mercedes-Benz Coupé",
+   "welt": "Fahrzeuge",
+   "datei": "fz-mercedes.png"
+  },
+  {
+   "id": "fz-mitsubishi-pajero",
+   "name": "Mitsubishi Pajero",
+   "welt": "Fahrzeuge",
+   "datei": "fz-mitsubishi-pajero.png"
+  },
+  {
+   "id": "fz-toyota-hilux",
+   "name": "Toyota Hilux",
+   "welt": "Fahrzeuge",
+   "datei": "fz-toyota-hilux.png"
+  },
+  {
+   "id": "fz-toyota-gelaende",
+   "name": "Toyota Geländewagen",
+   "welt": "Fahrzeuge",
+   "datei": "fz-toyota-gelaende.png"
+  },
+  {
+   "id": "fz-jeep",
+   "name": "Jeep",
+   "welt": "Fahrzeuge",
+   "datei": "fz-jeep.png"
+  },
+  {
+   "id": "fz-vespa",
+   "name": "Vespa",
+   "welt": "Fahrzeuge",
+   "datei": "fz-vespa.png"
+  },
+  {
+   "id": "fz-formel1",
+   "name": "Formel-1-Rennwagen",
+   "welt": "Fahrzeuge",
+   "datei": "fz-formel1.png"
+  },
+  {
+   "id": "fz-airbus",
+   "name": "Airbus A320",
+   "welt": "Fahrzeuge",
+   "datei": "fz-airbus.png"
+  },
+  {
+   "id": "fz-jumbo",
+   "name": "Verkehrsflugzeug",
+   "welt": "Fahrzeuge",
+   "datei": "fz-jumbo.png"
+  },
+  {
+   "id": "fz-polizei",
+   "name": "Polizeiauto",
+   "welt": "Fahrzeuge",
+   "datei": "fz-polizei.png"
+  },
+  {
+   "id": "fz-polizei-schwarz",
+   "name": "Polizeiauto schwarz-weiss",
+   "welt": "Fahrzeuge",
+   "datei": "fz-polizei-schwarz.png"
+  },
+  {
+   "id": "fz-krankenwagen",
+   "name": "Krankenwagen",
+   "welt": "Fahrzeuge",
+   "datei": "fz-krankenwagen.png"
+  },
+  {
+   "id": "fz-feuerwehr",
+   "name": "Feuerwehrauto",
+   "welt": "Fahrzeuge",
+   "datei": "fz-feuerwehr.png"
+  },
+  {
+   "id": "fz-feuerwehr-leiter",
+   "name": "Feuerwehr mit Leiter",
+   "welt": "Fahrzeuge",
+   "datei": "fz-feuerwehr-leiter.png"
+  },
+  {
+   "id": "fz-schulbus",
+   "name": "Schulbus",
+   "welt": "Fahrzeuge",
+   "datei": "fz-schulbus.png"
+  },
+  {
+   "id": "fz-bus",
+   "name": "Bus",
+   "welt": "Fahrzeuge",
+   "datei": "fz-bus.png"
+  },
+  {
+   "id": "fz-tram",
+   "name": "Tram",
+   "welt": "Fahrzeuge",
+   "datei": "fz-tram.png"
+  },
+  {
+   "id": "fz-lok",
+   "name": "Lokomotive",
+   "welt": "Fahrzeuge",
+   "datei": "fz-lok.png"
+  },
+  {
+   "id": "fz-dampflok",
+   "name": "Dampflok",
+   "welt": "Fahrzeuge",
+   "datei": "fz-dampflok.png"
+  },
+  {
+   "id": "fz-schnellzug",
+   "name": "Schnellzug",
+   "welt": "Fahrzeuge",
+   "datei": "fz-schnellzug.png"
+  },
+  {
+   "id": "fz-muellwagen",
+   "name": "Müllwagen",
+   "welt": "Fahrzeuge",
+   "datei": "fz-muellwagen.png"
+  },
+  {
+   "id": "fz-autokran",
+   "name": "Autokran",
+   "welt": "Fahrzeuge",
+   "datei": "fz-autokran.png"
+  },
+  {
+   "id": "fz-kranwagen",
+   "name": "Kranwagen",
+   "welt": "Fahrzeuge",
+   "datei": "fz-kranwagen.png"
+  },
+  {
+   "id": "fz-abschleppwagen",
+   "name": "Abschleppwagen",
+   "welt": "Fahrzeuge",
+   "datei": "fz-abschleppwagen.png"
+  },
+  {
+   "id": "fz-monstertruck",
+   "name": "Monstertruck",
+   "welt": "Fahrzeuge",
+   "datei": "fz-monstertruck.png"
+  },
+  {
+   "id": "fz-glacewagen",
+   "name": "Glacewagen",
+   "welt": "Fahrzeuge",
+   "datei": "fz-glacewagen.png"
+  },
+  {
+   "id": "fz-umzugswagen",
+   "name": "Umzugswagen",
+   "welt": "Fahrzeuge",
+   "datei": "fz-umzugswagen.png"
+  },
+  {
+   "id": "fz-pickup",
+   "name": "Pick-up",
+   "welt": "Fahrzeuge",
+   "datei": "fz-pickup.png"
+  },
+  {
+   "id": "fz-taxi",
+   "name": "Taxi",
+   "welt": "Fahrzeuge",
+   "datei": "fz-taxi.png"
+  },
+  {
+   "id": "fz-helikopter",
+   "name": "Helikopter",
+   "welt": "Fahrzeuge",
+   "datei": "fz-helikopter.png"
+  },
+  {
+   "id": "fz-helikopter-gruen",
+   "name": "Helikopter grün",
+   "welt": "Fahrzeuge",
+   "datei": "fz-helikopter-gruen.png"
+  },
+  {
+   "id": "fz-segelboot",
+   "name": "Segelboot",
+   "welt": "Fahrzeuge",
+   "datei": "fz-segelboot.png"
+  },
+  {
+   "id": "fz-segelschiff",
+   "name": "Segelschiff",
+   "welt": "Fahrzeuge",
+   "datei": "fz-segelschiff.png"
+  },
+  {
+   "id": "fz-titanic",
+   "name": "Titanic",
+   "welt": "Fahrzeuge",
+   "datei": "fz-titanic.png"
+  },
+  {
+   "id": "fz-uboot",
+   "name": "Gelbes U-Boot",
+   "welt": "Fahrzeuge",
+   "datei": "fz-uboot.png"
   }
  ]
 }

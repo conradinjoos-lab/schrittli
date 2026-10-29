@@ -413,3 +413,106 @@ Die übrigen 26 Tiere stehen in `quellen-cc0.md`; diese Tatze stammt von Vecteez
 | Motiv | Figur-ID | URL | Autor | Lizenz |
 |---|---|---|---|---|
 | Bärentatze | tiere-baerentatze | https://de.vecteezy.com/png/86916938 | MDigitalArt Studio | Vecteezy Free License, Nennung «Vecteezy.com» |
+
+## Wappen
+
+26 Kantonswappen und das Schweizer Wappen von Wikimedia Commons (amtliche Wappen, gemeinfrei). Das Neunkircher Wappen ist aus der gemeinfreien Gemeindefahne gebaut: Kirche geglättet, Blau und Rot an die Kantonswappen angeglichen, in die Schildform gesetzt (`wappen-fahrzeuge.py`).
+
+| Motiv | Figur-ID | URL | Autor | Lizenz |
+|---|---|---|---|---|
+| Wappen Schweiz | wappen-schweiz | https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Switzerland.svg | Wikimedia Commons | Public Domain |
+| Wappen Aargau | wappen-aargau | https://commons.wikimedia.org/wiki/File:Wappen_Aargau_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Appenzell Ausserrhoden | wappen-appenzell-ar | https://commons.wikimedia.org/wiki/File:Wappen_Appenzell_Ausserrhoden_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Appenzell Innerrhoden | wappen-appenzell-ai | https://commons.wikimedia.org/wiki/File:Wappen_Appenzell_Innerrhoden_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Basel-Landschaft | wappen-basel-land | https://commons.wikimedia.org/wiki/File:Wappen_Basel-Landschaft_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Basel-Stadt | wappen-basel-stadt | https://commons.wikimedia.org/wiki/File:Wappen_Basel-Stadt_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Bern | wappen-bern | https://commons.wikimedia.org/wiki/File:Wappen_Bern_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Freiburg | wappen-freiburg | https://commons.wikimedia.org/wiki/File:Wappen_Freiburg_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Genf | wappen-genf | https://commons.wikimedia.org/wiki/File:Wappen_Genf_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Glarus | wappen-glarus | https://commons.wikimedia.org/wiki/File:Wappen_Glarus_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Graubünden | wappen-graubuenden | https://commons.wikimedia.org/wiki/File:Wappen_Graub%C3%BCnden_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Jura | wappen-jura | https://commons.wikimedia.org/wiki/File:Wappen_Jura_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Luzern | wappen-luzern | https://commons.wikimedia.org/wiki/File:Wappen_Luzern_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Neuenburg | wappen-neuenburg | https://commons.wikimedia.org/wiki/File:Wappen_Neuenburg_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Nidwalden | wappen-nidwalden | https://commons.wikimedia.org/wiki/File:Wappen_Nidwalden_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Obwalden | wappen-obwalden | https://commons.wikimedia.org/wiki/File:Wappen_Obwalden_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Schaffhausen | wappen-schaffhausen | https://commons.wikimedia.org/wiki/File:Wappen_Schaffhausen_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Schwyz | wappen-schwyz | https://commons.wikimedia.org/wiki/File:Wappen_Schwyz_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Solothurn | wappen-solothurn | https://commons.wikimedia.org/wiki/File:Wappen_Solothurn_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen St. Gallen | wappen-stgallen | https://commons.wikimedia.org/wiki/File:Wappen_St._Gallen_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Thurgau | wappen-thurgau | https://commons.wikimedia.org/wiki/File:Wappen_Thurgau_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Tessin | wappen-tessin | https://commons.wikimedia.org/wiki/File:Wappen_Tessin_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Uri | wappen-uri | https://commons.wikimedia.org/wiki/File:Wappen_Uri_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Wallis | wappen-wallis | https://commons.wikimedia.org/wiki/File:Wappen_Wallis_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Waadt | wappen-waadt | https://commons.wikimedia.org/wiki/File:Wappen_Waadt_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Zug | wappen-zug | https://commons.wikimedia.org/wiki/File:Wappen_Zug_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Zürich | wappen-zuerich | https://commons.wikimedia.org/wiki/File:Wappen_Z%C3%BCrich_matt.svg | Wikimedia Commons | Public Domain |
+| Wappen Neunkirch | wappen-neunkirch | https://commons.wikimedia.org/wiki/File:Flag_of_Neunkirch.gif | Pascal Gross (crwflags.com) | Public Domain |
+
+## Fussball
+
+Vereinslogos von Wikimedia Commons, die dort als gemeinfrei gelten (einfache Schrift- und Formlogos ohne Schöpfungshöhe). Urheberrechtlich frei, die Marken gehören aber den Vereinen: nur zum Ausmalen und Basteln, nicht für Fanartikel zum Verkauf. Nicht dabei: BSC Young Boys (nur CC BY-SA), Borussia Dortmund (SVG lässt sich nicht sauber rendern), Real Madrid, FC Barcelona, Liverpool, Manchester United, Chelsea, Manchester City und Paris Saint-Germain (aktuelle Logos nicht frei auf Commons).
+
+| Motiv | Figur-ID | URL | Autor | Lizenz |
+|---|---|---|---|---|
+| FC Basel | fb-basel | https://commons.wikimedia.org/wiki/File:Logo_FC_Basel.svg | Wikimedia Commons | Public Domain |
+| FC Zürich | fb-zuerich | https://commons.wikimedia.org/wiki/File:FC_Zurich_Logo_2022.svg | Wikimedia Commons | Public Domain |
+| Grasshopper Club Zürich | fb-gc | https://commons.wikimedia.org/wiki/File:Grasshoppers_Club_Z%C3%BCrich_Logo.svg | Wikimedia Commons | Public Domain |
+| FC St. Gallen | fb-stgallen | https://commons.wikimedia.org/wiki/File:FC_St._Gallen_logo.svg | Wikimedia Commons | Public Domain |
+| FC Lugano | fb-lugano | https://commons.wikimedia.org/wiki/File:FC_Lugano_logo.svg | Wikimedia Commons | Public Domain |
+| FC Schaffhausen | fb-schaffhausen | https://commons.wikimedia.org/wiki/File:Fc_Schaffhausen.svg | Wikimedia Commons | Public Domain |
+| Servette FC | fb-servette | https://commons.wikimedia.org/wiki/File:Servette_FC.svg | Wikimedia Commons | Public Domain |
+| FC Sion | fb-sion | https://commons.wikimedia.org/wiki/File:FC_Sion.svg | Wikimedia Commons | Public Domain |
+| FC Bayern München | fb-bayern | https://commons.wikimedia.org/wiki/File:FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg | Wikimedia Commons | Public Domain |
+| Juventus Turin | fb-juventus | https://commons.wikimedia.org/wiki/File:Juventus_FC_2017_icon_%28black%29.svg | Wikimedia Commons | Public Domain |
+| Inter Mailand | fb-inter | https://commons.wikimedia.org/wiki/File:FC_Internazionale_Milano_2021.svg | Wikimedia Commons | Public Domain |
+| AC Mailand | fb-milan | https://commons.wikimedia.org/wiki/File:Logo_of_AC_Milan.svg | Wikimedia Commons | Public Domain |
+
+## Fahrzeuge
+
+42 Fahrzeuge, meist von der Seite, von Openclipart (CC0), mit schwarzem Umriss (`wappen-fahrzeuge.py`). Markennamen nur als Bezeichnung; die Zeichnungen stammen von den genannten Openclipart-Autoren.
+
+| Motiv | Figur-ID | URL | Autor | Lizenz |
+|---|---|---|---|---|
+| VW-Bus (Bulli) | fz-vw-bus | https://openclipart.org/detail/202006 | spadassin | CC0 1.0 |
+| VW Käfer | fz-vw-kaefer | https://openclipart.org/detail/228784 | GDJ | CC0 1.0 |
+| Citroën 2CV (Ente) | fz-citroen-2cv | https://openclipart.org/detail/237367 | Firkin | CC0 1.0 |
+| Porsche 911 | fz-porsche-911 | https://openclipart.org/detail/168298 | charlyleprof | CC0 1.0 |
+| BMW Kombi | fz-bmw-kombi | https://openclipart.org/detail/18338 | tormaroe | CC0 1.0 |
+| Ferrari 458 Spider | fz-ferrari | https://openclipart.org/detail/270415 | GDJ | CC0 1.0 |
+| Tesla Model S | fz-tesla | https://openclipart.org/detail/320720 | j4p4n | CC0 1.0 |
+| Mercedes-Benz Coupé | fz-mercedes | https://openclipart.org/detail/304064 | Firkin | CC0 1.0 |
+| Mitsubishi Pajero | fz-mitsubishi-pajero | https://openclipart.org/detail/257151 | derkommander0916 | CC0 1.0 |
+| Toyota Hilux | fz-toyota-hilux | https://openclipart.org/detail/217281 | derkommander0916 | CC0 1.0 |
+| Toyota Geländewagen | fz-toyota-gelaende | https://openclipart.org/detail/8251 | Gerald_G | CC0 1.0 |
+| Jeep | fz-jeep | https://openclipart.org/detail/245105 | GDJ | CC0 1.0 |
+| Vespa | fz-vespa | https://openclipart.org/detail/162301 | protogenoi | CC0 1.0 |
+| Formel-1-Rennwagen | fz-formel1 | https://openclipart.org/detail/221046 | GDJ | CC0 1.0 |
+| Airbus A320 | fz-airbus | https://openclipart.org/detail/183655 | PolyLingua | CC0 1.0 |
+| Verkehrsflugzeug | fz-jumbo | https://openclipart.org/detail/169030 | sagism | CC0 1.0 |
+| Polizeiauto | fz-polizei | https://openclipart.org/detail/298875 | j4p4n | CC0 1.0 |
+| Polizeiauto schwarz-weiss | fz-polizei-schwarz | https://openclipart.org/detail/334859 | algotruneman | CC0 1.0 |
+| Krankenwagen | fz-krankenwagen | https://openclipart.org/detail/272383 | mvolz | CC0 1.0 |
+| Feuerwehrauto | fz-feuerwehr | https://openclipart.org/detail/303079 | klsgfx | CC0 1.0 |
+| Feuerwehr mit Leiter | fz-feuerwehr-leiter | https://openclipart.org/detail/303080 | klsgfx | CC0 1.0 |
+| Schulbus | fz-schulbus | https://openclipart.org/detail/334074 | SunKing2 | CC0 1.0 |
+| Bus | fz-bus | https://openclipart.org/detail/16199 | bobocal | CC0 1.0 |
+| Tram | fz-tram | https://openclipart.org/detail/322937 | Shinnoske | CC0 1.0 |
+| Lokomotive | fz-lok | https://openclipart.org/detail/202469 | aleksmt | CC0 1.0 |
+| Dampflok | fz-dampflok | https://openclipart.org/detail/100015 | manio1 | CC0 1.0 |
+| Schnellzug | fz-schnellzug | https://openclipart.org/detail/154531 | cprostire | CC0 1.0 |
+| Müllwagen | fz-muellwagen | https://openclipart.org/detail/259142 | GDJ | CC0 1.0 |
+| Autokran | fz-autokran | https://openclipart.org/detail/302942 | klsgfx | CC0 1.0 |
+| Kranwagen | fz-kranwagen | https://openclipart.org/detail/263177 | GDJ | CC0 1.0 |
+| Abschleppwagen | fz-abschleppwagen | https://openclipart.org/detail/206127 | developingo | CC0 1.0 |
+| Monstertruck | fz-monstertruck | https://openclipart.org/detail/105607 | netalloy | CC0 1.0 |
+| Glacewagen | fz-glacewagen | https://openclipart.org/detail/215141 | barnheartowl | CC0 1.0 |
+| Umzugswagen | fz-umzugswagen | https://openclipart.org/detail/333428 | j4p4n | CC0 1.0 |
+| Pick-up | fz-pickup | https://openclipart.org/detail/284414 | cactus_cowboy | CC0 1.0 |
+| Taxi | fz-taxi | https://openclipart.org/detail/257780 | NicholasJudy456 | CC0 1.0 |
+| Helikopter | fz-helikopter | https://openclipart.org/detail/172801 | tzunghaor | CC0 1.0 |
+| Helikopter grün | fz-helikopter-gruen | https://openclipart.org/detail/306953 | klsgfx | CC0 1.0 |
+| Segelboot | fz-segelboot | https://openclipart.org/detail/191526 | agomjo | CC0 1.0 |
+| Segelschiff | fz-segelschiff | https://openclipart.org/detail/281053 | j4p4n | CC0 1.0 |
+| Titanic | fz-titanic | https://openclipart.org/detail/175422 | artbejo | CC0 1.0 |
+| Gelbes U-Boot | fz-uboot | https://openclipart.org/detail/350965 | j4p4n | CC0 1.0 |

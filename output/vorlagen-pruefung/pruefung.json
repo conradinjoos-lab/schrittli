@@ -1,5 +1,5 @@
 {
-  "figuren": 1066,
+  "figuren": 1148,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -9594,6 +9594,744 @@
       "pixel": [
         335,
         504
+      ]
+    },
+    {
+      "id": "wappen-schweiz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        439,
+        484
+      ]
+    },
+    {
+      "id": "wappen-aargau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-appenzell-ar",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-appenzell-ai",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-basel-land",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-basel-stadt",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        408,
+        484
+      ]
+    },
+    {
+      "id": "wappen-bern",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-freiburg",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        389,
+        484
+      ]
+    },
+    {
+      "id": "wappen-genf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-glarus",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-graubuenden",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-jura",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-luzern",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-neuenburg",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-nidwalden",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-obwalden",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        402,
+        484
+      ]
+    },
+    {
+      "id": "wappen-schaffhausen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-schwyz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-solothurn",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-stgallen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        389,
+        484
+      ]
+    },
+    {
+      "id": "wappen-thurgau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-tessin",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-uri",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-wallis",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-waadt",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-zug",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-zuerich",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        403,
+        484
+      ]
+    },
+    {
+      "id": "wappen-neunkirch",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        388,
+        484
+      ]
+    },
+    {
+      "id": "fb-basel",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        366,
+        483
+      ]
+    },
+    {
+      "id": "fb-zuerich",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fb-gc",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fb-stgallen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fb-lugano",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fb-schaffhausen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fb-servette",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fb-sion",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        374,
+        484
+      ]
+    },
+    {
+      "id": "fb-bayern",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fb-juventus",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        313,
+        484
+      ]
+    },
+    {
+      "id": "fb-inter",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        484
+      ]
+    },
+    {
+      "id": "fb-milan",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        317,
+        484
+      ]
+    },
+    {
+      "id": "fz-vw-bus",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        242
+      ]
+    },
+    {
+      "id": "fz-vw-kaefer",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        198
+      ]
+    },
+    {
+      "id": "fz-citroen-2cv",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        226
+      ]
+    },
+    {
+      "id": "fz-porsche-911",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        157
+      ]
+    },
+    {
+      "id": "fz-bmw-kombi",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        225
+      ]
+    },
+    {
+      "id": "fz-ferrari",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        211
+      ]
+    },
+    {
+      "id": "fz-tesla",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        219
+      ]
+    },
+    {
+      "id": "fz-mercedes",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        209
+      ]
+    },
+    {
+      "id": "fz-mitsubishi-pajero",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        203
+      ]
+    },
+    {
+      "id": "fz-toyota-hilux",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        195
+      ]
+    },
+    {
+      "id": "fz-toyota-gelaende",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        315
+      ]
+    },
+    {
+      "id": "fz-jeep",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        349
+      ]
+    },
+    {
+      "id": "fz-vespa",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        300
+      ]
+    },
+    {
+      "id": "fz-formel1",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        142
+      ]
+    },
+    {
+      "id": "fz-airbus",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        217
+      ]
+    },
+    {
+      "id": "fz-jumbo",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        179
+      ]
+    },
+    {
+      "id": "fz-polizei",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        188
+      ]
+    },
+    {
+      "id": "fz-polizei-schwarz",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        187
+      ]
+    },
+    {
+      "id": "fz-krankenwagen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        244
+      ]
+    },
+    {
+      "id": "fz-feuerwehr",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        204
+      ]
+    },
+    {
+      "id": "fz-feuerwehr-leiter",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        227
+      ]
+    },
+    {
+      "id": "fz-schulbus",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        175
+      ]
+    },
+    {
+      "id": "fz-bus",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        166
+      ]
+    },
+    {
+      "id": "fz-tram",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        334
+      ]
+    },
+    {
+      "id": "fz-lok",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        154
+      ]
+    },
+    {
+      "id": "fz-dampflok",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        312
+      ]
+    },
+    {
+      "id": "fz-schnellzug",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        106
+      ]
+    },
+    {
+      "id": "fz-muellwagen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        195
+      ]
+    },
+    {
+      "id": "fz-autokran",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        179
+      ]
+    },
+    {
+      "id": "fz-kranwagen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        431
+      ]
+    },
+    {
+      "id": "fz-abschleppwagen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        126
+      ]
+    },
+    {
+      "id": "fz-monstertruck",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        290
+      ]
+    },
+    {
+      "id": "fz-glacewagen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        220
+      ]
+    },
+    {
+      "id": "fz-umzugswagen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        387
+      ]
+    },
+    {
+      "id": "fz-pickup",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        217
+      ]
+    },
+    {
+      "id": "fz-taxi",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        241
+      ]
+    },
+    {
+      "id": "fz-helikopter",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        285
+      ]
+    },
+    {
+      "id": "fz-helikopter-gruen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        291
+      ]
+    },
+    {
+      "id": "fz-segelboot",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        381,
+        484
+      ]
+    },
+    {
+      "id": "fz-segelschiff",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        295
+      ]
+    },
+    {
+      "id": "fz-titanic",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        143
+      ]
+    },
+    {
+      "id": "fz-uboot",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        484,
+        231
       ]
     }
   ],
