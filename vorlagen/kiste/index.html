@@ -254,7 +254,7 @@ function schraube(d,maxEin){
     const k=ls.filter(x=>x-d<=maxEin); if(!k.length) return {ok:false,zuLang:true};
     len=k[k.length-1]; kurz=true;
   }
-  return {ok:true,dm,len,loch:dm,vor:Math.round((dm-1)*10)/10,ein:len-d,tiefe:len-d+2,ziel,kurz,laengste:len<ziel&&!kurz};
+  return {ok:true,dm,len,loch:dm,vor:Math.round((dm-1)*10)/10,senk:2*dm,ein:len-d,tiefe:len-d+2,ziel,kurz,laengste:len<ziel&&!kurz};
 }
 // Schraubenstellen auf einer Kante der Länge len: vom Rand e weg, dazwischen gleichmässig etwa ab mm (10–15 × Schraubendicke).
 function stellen(len,e,ab){
@@ -277,7 +277,7 @@ function rechnen(){
   if(sc.zuLang){ R.fehler=`So flach geht es nicht mit Schrauben von unten: die Wandkante ist nur ${mm(hw)} hoch. Setz den Boden zwischen die Wände oder bau die Kiste höher.`; R.kurz='Zu flach für Schrauben von unten'; return R; }
   const e=sc.ok?Math.max(Math.round(sc.len-d+8),Math.ceil(5*sc.dm)):20;    // Randabstand: Boden- und Eckschrauben kreuzen sich nie, und mindestens 5 × Schraube, sonst spaltet das Brettende
   const ab=sc.ok?12.5*sc.dm:50;                 // Abstand dazwischen: 10–15 × Schraube, zu eng spaltet, zu weit klafft
-  R.e=e; R.ab=ab;
+  R.e=e; R.ab=ab; R.diag=Math.round(Math.hypot(Li,Bi));   // Diagonale innen: gleich lang = rechtwinklig
   // Teile: Länge × Breite (mm), alle aus dem gleichen Holz
   const teile=[];
   teile.push({id:'boden',name:'Boden',n:1,l:unter?La:Li,b:unter?Ba:Bi});
@@ -644,6 +644,7 @@ const FAKT_BILD={
   loch:'<path class="f" d="M3 10h16v10H3zM25 10h16v10H25z"/><path d="M22 2v26M19 24.5l3 3 3-3"/>',
   vor:'<path class="f" d="M13 4h18v24H13z"/><path d="M20 4v13h4V4"/><path d="M22 0v2"/>',
   tiefe:'<path d="M3 13h27"/><path class="f" d="M30 10h11v6H30z"/><path d="M19 9v8" stroke-width="3"/><path d="M3 23h16M3 21v4M19 21v4"/>',
+  senk:'<path class="f" d="M3 10h13l5 6v4H3zM41 10H28l-5 6v4h18z"/><path d="M15 6h14" stroke-width="3"/>',
   rand:'<path class="f" d="M14 3h16v24H14z"/><circle cx="22" cy="11" r="2.5"/><path d="M14 21h8M14 19v4M22 19v4"/>',
   stift:'<path class="f" d="M4 10h5v10H4z"/><path d="M9 15h31"/>'};
 function fakten(R){
@@ -651,6 +652,7 @@ function fakten(R){
   if(!sc.ok) return k('stift','Zu dünn',`Leim + Stifte 1,2 × ${Math.ceil(3*R.d/5)*5} mm`,'Unter 6 mm hält keine Schraube in der Kante: leimen und nageln – oder dickeres Holz nehmen.',true);
   return k('schraube',`${n(sc.dm)} × ${sc.len}`,`mm · ${R.anzahl}×`,`Holzschraube mit Senkkopf, ${R.anzahl} Stück für die ganze Kiste`)
     +k('loch',`⌀ ${n(sc.loch)}`,'durchs Brett','Durchgangsloch: die Schraube soll hier durchrutschen')
+    +k('senk',`⌀ ${n(sc.senk)}`,'senken','Aussen ansenken: so breit wie der Schraubenkopf, dann liegt er bündig')
     +k('vor',`⌀ ${n(sc.vor)}`,'in die Kante','Vorbohren in die Kante, 1 mm dünner als die Schraube')
     +k('tiefe',n(sc.tiefe),'mm tief','Vorbohrtiefe: Klebeband als Marke um den Bohrer – so tief, wie die Schraube hineingeht, plus 2 mm')
     +k('rand',n(R.d/2),'mm vom Rand',`Lochmitte genau in der Mitte der Kante${R.ecken.length===1?' – pro Ecke nur eine Schraube, dazu leimen':''}`);
@@ -663,6 +665,7 @@ function antwort(R){
   }
   li.push(`<li>Schraube <b>${n(sc.dm)} × ${sc.len} mm</b> · ${R.anzahl}×</li>`);
   li.push(`<li>Durchgangsloch <b>⌀ ${n(sc.loch)} mm</b></li>`);
+  li.push(`<li>Senken <b>⌀ ${n(sc.senk)} mm</b></li>`);
   li.push(`<li>Vorbohren <b>⌀ ${n(sc.vor)} mm</b> · ${mm(sc.tiefe)} tief</li>`);
   li.push(`<li>Vom Rand <b>${mm(R.d/2)}</b></li>`);
   const Sch=R.scharnier;
@@ -678,8 +681,9 @@ function rechnung(R){
   z.push(R.langAussen?`<p>Längsseiten aussen: Stirnseiten ${n(R.Ba)} − 2 × ${n(d)} = <span class="f">${mm(R.Bi)}</span> lang.</p>`:`<p>Stirnseiten aussen: Längsseiten ${n(R.La)} − 2 × ${n(d)} = <span class="f">${mm(R.Li)}</span> lang.</p>`);
   if(sc.ok){
     z.push(`<p>Schraube: Kante ${n(d)} mm dick → <span class="f">${n(sc.dm)} mm</span> dick (die Kante soll gut doppelt so dick sein wie die Schraube). Länge 3 × ${n(d)} = ${n(sc.ziel)} ${sc.kurz?`→ kürzer, damit sie nicht oben aus der ${mm(R.hw)} hohen Wand kommt:`:sc.laengste?'→ längste Schraube dieser Dicke:':'→ nächste Länge'} <span class="f">${sc.len} mm</span>: ${n(d)} mm durch das Brett, ${n(sc.ein)} mm in der Kante.</p>`);
-    z.push(`<p>Bohrer: Durchgangsloch = Schraube <span class="f">${n(sc.loch)} mm</span>. Vorbohren = ${n(sc.dm)} − 1 = <span class="f">${n(sc.vor)} mm</span>. Tiefe = ${sc.len} − ${n(d)} + 2 = <span class="f">${mm(sc.tiefe)}</span>.</p>`);
+    z.push(`<p>Bohrer: Durchgangsloch = Schraube <span class="f">${n(sc.loch)} mm</span>. Vorbohren = ${n(sc.dm)} − 1 = <span class="f">${n(sc.vor)} mm</span>. Senken = 2 × ${n(sc.dm)} = <span class="f">${n(sc.senk)} mm</span> (so breit wie der Kopf). Tiefe = ${sc.len} − ${n(d)} + 2 = <span class="f">${mm(sc.tiefe)}</span>.</p>`);
     z.push(`<p>Rand: ${n(d)} : 2 = <span class="f">${mm(d/2)}</span>. Am Ende <span class="f">${mm(R.e)}</span> vom Rand (mindestens 5 × ${n(sc.dm)} = ${mm(5*sc.dm)}) – so spaltet nichts, und Boden- und Eckschrauben kreuzen sich nicht. Dazwischen gleichmässig, etwa 12,5 × ${n(sc.dm)} = <span class="f">${mm(Math.round(R.ab))}</span> (10–15 × Schraube).</p>`);
+    z.push(`<p>Winkel: Diagonale innen √(${n(R.Li)}² + ${n(R.Bi)}²) = <span class="f">${mm(R.diag)}</span> – beide gleich lang, dann ist die Kiste rechtwinklig.</p>`);
     const bs=R.bodenStellen, teil=R.unter?'durch den Boden':'durch die Wände';
     const Sch=R.scharnier;
     if(Sch) z.push(`<p>Scharnier: Lappen höchstens so breit wie das Holz, ${n(d)} mm → <span class="f">${Sch.Lh} × ${Sch.Wh} mm</span> (Lappen ${n(Sch.lap)} mm). Schräubchen kürzer als ${n(d)} mm → <span class="f">2 × ${Sch.ss} mm</span>.${R.zu==='magnet'?` Magnet ⌀ 6 mm: Kante ${n(d)} − 6 = ${n(d-6)} mm Holz bleibt.`:''}</p>`);
@@ -701,7 +705,8 @@ function material(R){
     m.push(`<li><span>Bohrer ${R.zu==='magnet'?'6 mm und ':''}1,5 mm</span><span class="n">je 1×</span></li>`); }
   if(!sc.ok) m.push(`<li><span>Drahtstifte 1,2 × ${Math.ceil(3*R.d/5)*5} mm</span><span class="n">1 Päckchen</span></li>`);
   m.push(`<li><span>Holzleim (weiss)</span><span class="n">1×</span></li>`);
-  if(sc.ok) m.push(`<li><span>Bohrer ${n(sc.loch)} mm und ${n(sc.vor)} mm<span class="leise">Senker · Klebeband</span></span><span class="n">je 1×</span></li>`);
+  m.push(`<li><span>Malerkrepp, Salz</span><span class="n"></span></li>`);
+  if(sc.ok) m.push(`<li><span>Bohrer ${n(sc.loch)} mm und ${n(sc.vor)} mm<span class="leise">Senker ⌀ ${n(sc.senk)} · Klebeband</span></span><span class="n">je 1×</span></li>`);
   m.push(`<li><span>Winkel, Bleistift, Massstab, Körner</span><span class="n"></span></li>`);
   if(R.nut) m.push(`<li><span>Kreissäge, Kerze</span><span class="n"></span></li>`);
   m.push(`<li><span>Schraubzwingen oder ein Helfer</span><span class="n">2×</span></li>`);
@@ -717,12 +722,13 @@ function schritte(R){
   if(N) s.push(`Nut sägen (Kreissäge): Schnitttiefe ${n(N.tn)} mm, Anschlag so, dass die Nut ${n(N.a)} mm unter der Oberkante liegt. Innen durch beide Längsseiten und die linke Stirnseite, ${n(N.t)} mm breit – ist das Sägeblatt dünner, ein zweites Mal daneben sägen. Zuerst an einem Reststück probieren: Der Deckel soll leicht gleiten. Die rechte Stirnseite (${mm(N.hT)} hoch) bekommt keine Nut.`);
   s.push(sc.ok?`Löcher anzeichnen wie auf den Bohrplänen: mit dem Winkel eine Linie ${mm(d/2)} vom Rand ziehen, darauf die Stellen abmessen, jeden Punkt ankörnen.`:`Nagelstellen anzeichnen wie auf den Plänen: mit dem Winkel eine Linie ${mm(d/2)} vom Rand ziehen, darauf die Stellen markieren.`);
   if(sc.ok){
-    s.push(`Durchgangslöcher bohren: Bohrer ${n(sc.loch)} mm, ein Restholz unterlegen, damit nichts ausreisst. Aussen ansenken, damit der Schraubenkopf bündig liegt.`);
-    s.push(`Die ${aussenName} an die ${innenName} halten: Kante bündig, mit Zwinge festklemmen oder ein Helfer hält. Durch das fertige Loch mit dem ${n(sc.vor)}-mm-Bohrer in die Kante vorbohren, ${mm(sc.tiefe)} tief (Klebeband am Bohrer). Gerade halten, sonst kommt die Schraube seitlich heraus!`);
-    s.push(`Leim dünn auf die Kante, Teile wieder zusammenhalten, Schrauben ${n(sc.dm)} × ${sc.len} mm eindrehen. Akkuschrauber auf kleine Stufe, nicht überdrehen – im ${S.mat==='mdf'?'MDF':'Holz'} reisst sonst das Gewinde aus.`);
-    s.push(`Zuerst den Rahmen aus den vier Wänden bauen. Winkel prüfen: beide Diagonalen gleich lang? Dann ${R.unter?'den Rahmen auf den Boden stellen, bündig ausrichten und von unten durch den Boden in die Wandkanten schrauben':'den Boden von unten in den Rahmen schieben, bündig ausrichten und durch die Wände in die Bodenkante schrauben'} – wieder erst vorbohren, dann leimen, dann schrauben.`);
+    s.push(`Durchgangslöcher bohren: Bohrer ${n(sc.loch)} mm, ein Restholz unterlegen, damit nichts ausreisst. Aussen mit dem Senker auf ⌀ ${n(sc.senk)} mm ansenken, damit der Schraubenkopf bündig liegt.`);
+    s.push(`Trocken zusammenbauen, noch ohne Leim: die ${aussenName} an die ${innenName} halten, Kante bündig, mit Zwingen oder Malerkrepp aussen über der Fuge. Beide Diagonalen innen messen: je <b>${mm(R.diag)}</b>? Dann ${R.unter?'den Rahmen auf den Boden stellen und bündig ausrichten':'den Boden in den Rahmen schieben und bündig ausrichten'}.`);
+    s.push(`Durch jedes fertige Loch mit dem ${n(sc.vor)}-mm-Bohrer vorbohren, ${mm(sc.tiefe)} tief (Klebeband am Bohrer). Gerade halten, sonst kommt die Schraube seitlich heraus!`);
+    s.push(`Wieder auseinandernehmen. Leim dünn auf die Kanten und eine feine Prise Salz darauf – dann schwimmt nichts. Zusammensetzen und die Schrauben ${n(sc.dm)} × ${sc.len} mm eindrehen: Sie finden ihre Löcher und ziehen alles genau dorthin zurück. Akkuschrauber auf kleine Stufe, nicht überdrehen – im ${S.mat==='mdf'?'MDF':'Holz'} reisst sonst das Gewinde aus.`);
+    s.push(`Winkel prüfen, solange der Leim nass ist: beide Diagonalen innen <b>${mm(R.diag)}</b>. Ist eine länger, die Kiste an deren zwei Ecken sanft zusammendrücken, bis beide gleich sind. Schnell geht's auch mit einem Winkel in der Innenecke: kein Lichtspalt.`);
   } else {
-    s.push(`Leim dünn auf die Kante, Teile mit Zwingen zusammenhalten und mit den Drahtstiften nageln (Stift leicht schräg, hält besser). Zuerst der Rahmen aus den vier Wänden, Diagonalen prüfen, dann der Boden.`);
+    s.push(`Leim dünn auf die Kante, eine feine Prise Salz darauf, Teile mit Zwingen oder Malerkrepp zusammenhalten und mit den Drahtstiften nageln (Stift leicht schräg, hält besser). Zuerst der Rahmen aus den vier Wänden, beide Diagonalen innen je <b>${mm(R.diag)}</b>, dann der Boden.`);
   }
   const Sch=R.scharnier;
   if(Sch){
