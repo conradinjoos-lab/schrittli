@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Schritt für Schritt · Stromkreis-Baukasten</title>
-<meta name="description" content="Stromkreis zeichnen und ausprobieren: Batterie, Schalter, Taster, LEDs, 3-V-Motor, Lämpchen und Summer auf die Fläche holen, Klemmen verbinden – die Seite zeigt, was leuchtet und was dreht, warnt vor Kurzschluss und schreibt die Materialliste.">
+<meta name="description" content="Stromkreis zeichnen und ausprobieren: Batterie oder Netzgerät, Schalter, Taster, LEDs, Leuchtband, Lichterkette, 3-V-Motor, Lämpchen und Summer auf die Fläche holen, Klemmen verbinden – die Seite zeigt, was leuchtet und was dreht, warnt vor Kurzschluss und schreibt die Materialliste.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
@@ -127,14 +127,14 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
   <h1>Stromkreis-Baukasten</h1>
-  <p>Hol dir Batterie, Schalter, LED und Motor auf die Fläche und verbinde die gelben Klemmen mit Kabeln. Die Seite zeigt sofort, was leuchtet und was dreht, wie viel Strom fliesst und welchen Widerstand eine LED braucht. <a href="../">← Werkzeuge</a></p>
+  <p>Hol dir Batterie oder Netzgerät, Schalter, LED, Leuchtband, Lichterkette und Motor auf die Fläche und verbinde die gelben Klemmen mit Kabeln. Die Seite zeigt sofort, was leuchtet und was dreht, wie viel Strom fliesst und welchen Widerstand eine LED braucht. <a href="../">← Werkzeuge</a></p>
 </header>
 <script src="../zurueck.js"></script>
 <main>
   <section class="karte" id="k-teile" aria-label="Teile">
     <h2>Teile</h2>
     <div class="palette" id="palette"></div>
-    <p class="tipp">LED: langes Beinchen = <b style="color:#E8554E">+</b>, kurzes Beinchen = −. Strom fliesst von + nach −.</p>
+    <p class="tipp">LED: langes Beinchen = <b style="color:#E8554E">+</b>, kurzes Beinchen = − (dort ist der Rand des Köpfchens flach). Falsch herum bleibt sie dunkel, geht aber nicht kaputt. Rotes Kabel vom + weg, schwarzes zurück zum −. Das Leuchtband (12 V) hat den Widerstand eingebaut, die Lichterkette läuft direkt an 3 V.</p>
   </section>
 
   <div class="mitte">
@@ -191,16 +191,20 @@ const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const LED_FARBEN={rot:['#E8554E','#FF8A80'],gelb:['#F5C542','#FFE58A'],gruen:['#3FA34D','#8CE39B'],blau:['#4C6EF5','#9DB4FF'],weiss:['#E9EEF5','#FFFFFF']};
 const LED_NAME={rot:'rot',gelb:'gelb',gruen:'grün',blau:'blau',weiss:'weiss'};
-const LED_VF={rot:1.6,gelb:1.7,gruen:1.8,blau:2.6,weiss:2.6};        // Knickspannung im Modell (LED = Quelle + 20 Ω)
+const LED_VF={rot:1.8,gelb:1.8,gruen:2.6,blau:2.8,weiss:2.8};        // Knickspannung im Modell (LED = Quelle + 20 Ω)
 const LED_R=20,LED_I=0.02;                                            // Modellwiderstand, Nennstrom 20 mA
-const vf=f=>LED_VF[f]+LED_R*LED_I;                                    // Spannung bei 20 mA: rot 2,0 … blau/weiss 3,0 V
-const QUELLEN={1.5:{name:'Batterie 1,5 V (1× AA)',kurz:'1× AA',ri:0.3,mah:2000},3:{name:'Batterie 3 V (2× AA im Halter)',kurz:'2× AA',ri:0.5,mah:2000},4.5:{name:'Flachbatterie 4,5 V',kurz:'Flachbatterie',ri:0.6,mah:1200},5:{name:'USB-Adapter 5 V',kurz:'USB',ri:0.05,mah:0},9:{name:'9-V-Block',kurz:'Block',ri:1.5,mah:500},12:{name:'Netzadapter 12 V',kurz:'Adapter',ri:0.05,mah:0}};
+const DIODE={band:{V:7.5,R:75,I:0.06,viel:0.09,zuviel:0.12},kette:{V:2.6,R:16,I:0.025,viel:0.045,zuviel:0.08}};   // Leuchtband 12 V (3 LEDs + Widerstand eingebaut), Lichterkette (Mini-LEDs, für 3 V)
+const DIO_TYPEN=['led','band','kette'];
+const dio=t=>t.typ==='led'?{V:LED_VF[t.farbe],R:LED_R,I:LED_I,viel:0.025,zuviel:0.08}:DIODE[t.typ];
+const dioName=t=>t.typ==='led'?`Die ${LED_NAME[t.farbe]}e LED`:t.typ==='band'?'Das Leuchtband':'Die Lichterkette';
+const vf=f=>LED_VF[f]+LED_R*LED_I;                                    // Spannung bei 20 mA: rot/gelb 2,2 · grün 3,0 · blau/weiss 3,2 V (wie im Handout)
+const QUELLEN={1.5:{name:'Batterie 1,5 V (1× AA)',kurz:'1× AA',ri:0.3,mah:2000},3:{name:'Batteriekästchen 3 V (2× AA oder AAA)',kurz:'2× AA',ri:0.5,mah:2000},4.5:{name:'Flachbatterie 4,5 V',kurz:'Flachbatterie',ri:0.6,mah:1200},5:{name:'Netzgerät 5 V (USB-Stecker)',kurz:'USB',ri:0.05,mah:0},9:{name:'9-V-Block',kurz:'Block',ri:1.5,mah:500},12:{name:'Netzgerät 12 V',kurz:'Netzgerät',ri:0.05,mah:0}};
 const VOLTS=[1.5,3,4.5,5,9,12];
 const quelle=v=>QUELLEN[v]||{name:`Batterie ${String(v).replace('.',',')} V`,kurz:'Batterie',ri:0.5,mah:1000};
 const MOTOREN={spiel:{name:'Spielzeugmotor',kurz:'schnell',R:12,upm:12000,wofuer:'Rennauto, Boot, Ventilator'},getriebe:{name:'Getriebemotor',kurz:'langsam, kräftig',R:30,upm:100,wofuer:'Seilbahn, Kran, Roboter'},solar:{name:'Solarmotor',kurz:'sparsam',R:75,upm:3000,wofuer:'Mobile, Solarauto'}};
 const motor=t=>MOTOREN[t.art]||MOTOREN.spiel;
 const E12=[10,12,15,18,22,27,33,39,47,56,68,82];
-const OHM_CHIPS=[47,100,150,220,330,470,680,1000];
+const OHM_CHIPS=[47,68,100,150,220,270,330,390,470,680,1000];
 const RING=['#1F1A17','#8B5A2B','#E8554E','#F08A24','#F5C542','#3FA34D','#4C6EF5','#8E44AD','#9AA3AE','#FFFFFF'];
 const vz=(x,d=1)=>String(+(+x).toFixed(d)).replace('.',',');            // Zahl mit Komma
 const mA=i=>Math.round(Math.abs(i)*1000);
@@ -214,12 +218,14 @@ const TYPEN={
   schalter:{name:'Schalter',klemmen:['','']},
   taster:{name:'Taster',klemmen:['','']},
   led:{name:'LED',klemmen:['+','−']},
+  band:{name:'Leuchtband',klemmen:['+','−']},
+  kette:{name:'Lichterkette',klemmen:['+','−']},
   motor:{name:'Motor',klemmen:['','']},
   lampe:{name:'Lämpchen',klemmen:['','']},
   summer:{name:'Summer',klemmen:['','']},
   widerstand:{name:'Widerstand',klemmen:['','']}
 };
-const NEU={batterie:{volt:3},schalter:{an:false},taster:{an:false},led:{farbe:'rot'},motor:{antrieb:'propeller',art:'spiel'},lampe:{},summer:{},widerstand:{ohm:220}};
+const NEU={batterie:{volt:3},schalter:{an:false},taster:{an:false},led:{farbe:'rot'},band:{},kette:{},motor:{antrieb:'propeller',art:'spiel'},lampe:{},summer:{},widerstand:{ohm:220}};
 let S={name:'',teile:[],kabel:[],n:1};           // der Plan
 let Z=null;                                      // Rechenergebnis (Zustand)
 let wahl=null;                                   // {art:'teil'|'kabel', id}
@@ -229,6 +235,13 @@ const verlauf=[];
 const BEISPIELE=[
   {id:'taschenlampe',name:'Taschenlampe',text:'Batterie, Schalter, eine LED',
    teile:[{typ:'batterie',x:240,y:420,rot:0},{typ:'schalter',x:480,y:160,rot:0},{typ:'led',x:720,y:300,rot:90,farbe:'gelb'}],
+   kabel:[[0,1,1,0,[[300,160]]],[1,1,2,0,[[720,160]]],[2,1,0,0,[[720,520],[180,520]]]]},
+  {id:'handout9',name:'LED am 9-V-Block',text:'Batterie, Schalter, Widerstand, rote LED',bau:{was:'led',volt:9,nb:'1',farbe:'rot',n:1,art:'reihe'}},
+  {id:'kette3',name:'Lichterkette an 3 V',text:'Batteriekästchen, Schalter, Mini-LEDs – ohne Widerstand',
+   teile:[{typ:'batterie',x:240,y:420,rot:0,volt:3},{typ:'schalter',x:480,y:160,rot:0},{typ:'kette',x:720,y:300,rot:90}],
+   kabel:[[0,1,1,0,[[300,160]]],[1,1,2,0,[[720,160]]],[2,1,0,0,[[720,520],[180,520]]]]},
+  {id:'band12',name:'Leuchtband am Netzgerät',text:'12 V, Schalter, Leuchtband – Widerstand eingebaut',
+   teile:[{typ:'batterie',x:240,y:420,rot:0,volt:12},{typ:'schalter',x:480,y:160,rot:0},{typ:'band',x:720,y:300,rot:90}],
    kabel:[[0,1,1,0,[[300,160]]],[1,1,2,0,[[720,160]]],[2,1,0,0,[[720,520],[180,520]]]]},
   {id:'boot',name:'Boot',text:'Motor mit Propeller',
    teile:[{typ:'batterie',x:240,y:420,rot:0},{typ:'schalter',x:480,y:160,rot:0},{typ:'motor',x:720,y:300,rot:90,antrieb:'propeller'}],
@@ -265,14 +278,14 @@ function loesen(A,n){ for(let c=0;c<n;c++){ let p=c; for(let r=c+1;r<n;r++) if(M
 function rechnen(){
   const nid=new Map(); let N=0;
   S.teile.forEach(t=>{ nid.set(t.id+':0',N++); nid.set(t.id+':1',N++); });
-  const leds=S.teile.filter(t=>t.typ==='led'); const ledAn=new Map(leds.map(l=>[l.id,false]));
+  const leds=S.teile.filter(t=>DIO_TYPEN.includes(t.typ)); const ledAn=new Map(leds.map(l=>[l.id,false]));
   let x=null,M=0,quellen=[];
   for(let runde=0;runde<12;runde++){
     quellen=[]; M=N; const wid=[];
     S.teile.forEach(t=>{ const a=nid.get(t.id+':0'),b=nid.get(t.id+':1');
       if(t.typ==='batterie'){ const m=M++; quellen.push({p:b,n:m,V:t.volt,ref:t}); wid.push({a:m,b:a,g:1/quelle(t.volt).ri}); }        // + ist Klemme 1, Innenwiderstand je nach Quelle
       else if(t.typ==='schalter'||t.typ==='taster'){ if(t.an) wid.push({a,b,g:100}); }
-      else if(t.typ==='led'){ if(ledAn.get(t.id)){ const m=M++; quellen.push({p:a,n:m,V:LED_VF[t.farbe],ref:t}); wid.push({a:m,b,g:1/LED_R}); } }
+      else if(DIO_TYPEN.includes(t.typ)){ if(ledAn.get(t.id)){ const d=dio(t),m=M++; quellen.push({p:a,n:m,V:d.V,ref:t}); wid.push({a:m,b,g:1/d.R}); } }
       else if(t.typ==='motor') wid.push({a,b,g:1/motor(t).R});
       else if(t.typ==='lampe') wid.push({a,b,g:1/17});
       else if(t.typ==='summer') wid.push({a,b,g:1/60});
@@ -285,7 +298,7 @@ function rechnen(){
     x=loesen(A,n);
     let anders=false;
     leds.forEach(l=>{ const a=nid.get(l.id+':0'),c=nid.get(l.id+':1');
-      if(!ledAn.get(l.id)){ if(x[a]-x[c]>LED_VF[l.farbe]+0.02){ ledAn.set(l.id,true); anders=true; } }
+      if(!ledAn.get(l.id)){ if(x[a]-x[c]>dio(l).V+0.02){ ledAn.set(l.id,true); anders=true; } }
       else { const k=quellen.findIndex(q=>q.ref===l); if(x[M+k]<0){ ledAn.set(l.id,false); anders=true; } } });
     if(!anders) break;
   }
@@ -293,7 +306,7 @@ function rechnen(){
   const z={teile:new Map(),kabel:new Map(),kurz:false,fliesst:false,batterien:0};
   S.teile.forEach(t=>{ const a=nid.get(t.id+':0'),b=nid.get(t.id+':1'); const U=v(a)-v(b); const o={U};
     if(t.typ==='batterie'){ z.batterien++; const k=quellen.findIndex(q=>q.ref===t); o.I=-v(M+k); o.heiss=Math.abs(o.I)>2; if(o.heiss) z.kurz=true; if(Math.abs(o.I)>0.001) z.fliesst=true; }
-    else if(t.typ==='led'){ const k=quellen.findIndex(q=>q.ref===t); o.I=ledAn.get(t.id)?v(M+k):0; o.an=o.I>0.001; o.hell=begrenz(o.I/LED_I,0,1); o.zuviel=o.I>0.08; o.viel=o.I>0.035; o.verkehrt=!o.an&&(v(b)-v(a))>1; o.zuwenig=!o.an&&U>0.5; }
+    else if(DIO_TYPEN.includes(t.typ)){ const d=dio(t),k=quellen.findIndex(q=>q.ref===t); o.I=ledAn.get(t.id)?v(M+k):0; o.an=o.I>0.001; o.hell=begrenz(o.I/d.I,0,1); o.zuviel=o.I>d.zuviel; o.viel=o.I>d.viel; o.verkehrt=!o.an&&(v(b)-v(a))>1; o.zuwenig=!o.an&&U>0.5; }
     else if(t.typ==='motor'){ o.I=Math.abs(U)/motor(t).R; o.an=Math.abs(U)>=1; o.tempo=Math.abs(U)/3; o.rueck=U<0; o.zuviel=Math.abs(U)>4.8; o.zuwenig=!o.an&&Math.abs(U)>0.2; }
     else if(t.typ==='lampe'){ o.an=Math.abs(U)>=1; o.hell=begrenz(Math.abs(U)/3.5,0,1); o.zuviel=Math.abs(U)>5; o.zuwenig=!o.an&&Math.abs(U)>0.2; }
     else if(t.typ==='summer'){ o.an=Math.abs(U)>=1.5; o.zuwenig=!o.an&&Math.abs(U)>0.3; }
@@ -307,8 +320,8 @@ function rechnen(){
 const LEDgl=0;
 function txt(t,x,y,s,gr=12,farbe='#1F1A17',anker='middle'){ return `<text transform="translate(${x} ${y}) rotate(${-t.rot})" font-size="${gr}" fill="${farbe}" text-anchor="${anker}" dominant-baseline="middle">${esc(s)}</text>`; }
 // Beschriftung: bei 0°/180° über/unter dem Teil, bei 90°/270° neben dem Teil (Zeilen an « · » getrennt)
-const AB_MINUS={batterie:26,led:34,motor:50,lampe:32,summer:26,widerstand:11,schalter:26,taster:34};   // Ausdehnung zur lokalen −y-Seite
-const AB_PLUS={batterie:31,led:46,motor:34,lampe:24,summer:32,widerstand:18,schalter:18,taster:18};    // Ausdehnung zur lokalen +y-Seite
+const AB_MINUS={batterie:26,led:34,band:16,kette:18,motor:50,lampe:32,summer:26,widerstand:11,schalter:26,taster:34};   // Ausdehnung zur lokalen −y-Seite
+const AB_PLUS={batterie:31,led:46,band:18,kette:18,motor:34,lampe:24,summer:32,widerstand:18,schalter:18,taster:18};    // Ausdehnung zur lokalen +y-Seite
 function etikett(t,oben,unten,yo,yu,quer){
   const mk=(z,x,y,anker)=>{ const e=txt(t,x,y,z[0],z[1],z[2],anker); return z[3]?`<g class="warnz">${e}</g>`:e; };
   if(t.rot%180===0) return oben.map((z,i)=>mk(z,0,yo-i*15,'middle')).join('')+unten.map((z,i)=>mk(z,0,yu+i*15,'middle')).join('');
@@ -340,7 +353,7 @@ function teilInnen(t,o){
       for(let i=0;i<n;i++){ const h=40/n-4,y=-20+i*(40/n)+2; s+=`<rect x="-42" y="${y}" width="84" height="${h}" rx="4" fill="#F5C542" stroke="${L}" stroke-width="2"/><rect x="36" y="${y+h/2-3}" width="6" height="6" fill="#2B2320"/>`; if(n<3) s+=txt(t,-34,y+h/2+0.5,'−',12,L)+txt(t,27,y+h/2+0.5,'+',12,'#B3412A'); }
     }
     s+=pol(-60,'−')+pol(60,'+');
-    const ob=o.heiss?[['⚠ Kurzschluss!',14,'#B3412A',1]]:adapter?[[t.volt===5?'USB-Adapter':'Netzadapter',12,L]]:[];
+    const ob=o.heiss?[['⚠ Kurzschluss!',14,'#B3412A',1]]:adapter?[[t.volt===5?'USB-Netzgerät':'Netzgerät',12,L]]:[];
     s+=etikett(t,ob,[[`${vz(t.volt)} V`+(o.I>0.0005&&!o.heiss?` · ${mA(o.I)} mA`:''),13,L]],-38,38);
   } else if(t.typ==='schalter'){
     s+=bein(-60,-30)+bein(30,60);
@@ -369,6 +382,26 @@ function teilInnen(t,o){
     const ob=[['LED '+LED_NAME[t.farbe]+(o.an&&o.I!=null?` · ${mA(o.I)} mA`:''),12,L]];
     if(o.zuviel) ob.push(['⚠ zu viel Strom – kaputt!',13,'#B3412A',1]); else if(o.viel) ob.push(['⚠ zu viel Strom',13,'#B3412A',1]); else if(o.verkehrt) ob.push(['falsch herum',12,'#B3412A']);
     s+=etikett(t,ob,[],-42,46);
+  } else if(t.typ==='band'){
+    const hell=o.an?o.hell:0;
+    if(hell>0) s+=`<rect x="-44" y="-24" width="88" height="40" rx="16" fill="#FFE58A" opacity="${(0.35+0.5*hell).toFixed(2)}" filter="url(#weich)"/>`;
+    s+=bein(-60,-40)+bein(40,60);
+    s+=`<rect x="-40" y="-11" width="80" height="22" rx="3" fill="#F3F4F6" stroke="${L}" stroke-width="3"/>`;
+    s+=`<rect x="-35" y="-3" width="9" height="6" fill="#2B2320"/>`;
+    [-22,-2,18].forEach(x=>{ s+=`<rect x="${x}" y="-6" width="12" height="12" rx="2" fill="${hell>0?'#FFF3B0':'#DDE3EA'}" stroke="${L}" stroke-width="1.5"/>`; });
+    s+=txt(t,-50,-20,'+',15,'#E8554E')+txt(t,50,-20,'−',15,L);
+    const ob=[['Leuchtband 12 V'+(o.an&&o.I!=null?` · ${mA(o.I)} mA`:''),12,L]];
+    if(o.zuviel) ob.push(['⚠ zu viel Spannung – kaputt!',13,'#B3412A',1]); else if(o.viel) ob.push(['⚠ zu viel Spannung',13,'#B3412A',1]); else if(o.verkehrt) ob.push(['falsch herum',12,'#B3412A']);
+    s+=etikett(t,ob,[],-32,30);
+  } else if(t.typ==='kette'){
+    const hell=o.an?o.hell:0; const pk=[[-40,-8],[-20,8],[0,-8],[20,8],[40,-8]];
+    if(hell>0) pk.forEach(([x,y])=>{ s+=`<circle cx="${x}" cy="${y}" r="13" fill="#FFE58A" opacity="${(0.3+0.5*hell).toFixed(2)}" filter="url(#weich)"/>`; });
+    s+=`<path d="M-60 0H-50Q-40 -16 -30 0T-10 0T10 0T30 0T50 0H60" fill="none" stroke="#8A7A5A" stroke-width="3"/>`;
+    pk.forEach(([x,y])=>{ s+=`<circle cx="${x}" cy="${y}" r="5" fill="${hell>0?'#FFF3B0':'#DDE3EA'}" stroke="${L}" stroke-width="1.5"/>`; });
+    s+=txt(t,-54,-14,'+',15,'#E8554E')+txt(t,54,-14,'−',15,L);
+    const ob=[['Lichterkette'+(o.an&&o.I!=null?` · ${mA(o.I)} mA`:''),12,L]];
+    if(o.zuviel) ob.push(['⚠ zu viel Strom – kaputt!',13,'#B3412A',1]); else if(o.viel) ob.push(['⚠ zu viel Strom',13,'#B3412A',1]); else if(o.verkehrt) ob.push(['falsch herum',12,'#B3412A']);
+    s+=etikett(t,ob,[],-30,30);
   } else if(t.typ==='motor'){
     s+=bein(-60,-36)+bein(36,60);
     s+=`<rect x="-36" y="-8" width="72" height="42" rx="7" fill="#6B7280" stroke="${L}" stroke-width="3"/><path d="M-36 6H36M-36 20H36" stroke="${L}" stroke-width="1.5" opacity=".5"/>`;
@@ -432,13 +465,13 @@ function leiste(){
   const chip=(act,txt,pressed,extra='')=>`<button class="chip${extra}" type="button" data-act="${act}"${pressed!=null?` aria-pressed="${pressed}"`:''}>${txt}</button>`;
   if(!wahl){ L.innerHTML='<span class="was">Tippe auf ein Teil oder ein Kabel, um es zu ändern.</span>'; return; }
   if(wahl.art==='teil'){ const t=teil(wahl.id); if(!t){ wahl=null; return leiste(); }
-    s+=`<b class="was">${esc(t.typ==='batterie'?'Batterie / Adapter':TYPEN[t.typ].name)}</b>`;
+    s+=`<b class="was">${esc(t.typ==='batterie'?'Batterie / Netzgerät':TYPEN[t.typ].name)}</b>`;
     if(t.typ==='batterie') s+=VOLTS.map(v=>chip('volt:'+v,vz(v)+' V'+(QUELLEN[v].mah===0?' '+QUELLEN[v].kurz:''),t.volt===v)).join('');
     if(t.typ==='led') s+=Object.keys(LED_FARBEN).map(f=>chip('farbe:'+f,`<i style="background:${LED_FARBEN[f][0]}"></i>${LED_NAME[f]} ${vz(vf(f))} V`,t.farbe===f)).join('');
     if(t.typ==='motor') s+=Object.keys(MOTOREN).map(k=>chip('motor:'+k,MOTOREN[k].name,(t.art||'spiel')===k)).join('')+'<span class="was">·</span>'+[['propeller','Propeller'],['rad','Rad'],['zahnrad','Zahnrad']].map(([a,n])=>chip('antrieb:'+a,n,t.antrieb===a)).join('');
     if(t.typ==='widerstand') s+=[...new Set([...OHM_CHIPS,t.ohm])].sort((a,b)=>a-b).map(o=>chip('ohm:'+o,ohmText(o),t.ohm===o)).join('');
     if(t.typ==='schalter') s+=chip('an',t.an?'Ein':'Aus',t.an);
-    if(t.typ==='led'||t.typ==='motor'||t.typ==='batterie') s+=chip('umdrehen','↔ Umdrehen');
+    if(DIO_TYPEN.includes(t.typ)||t.typ==='motor'||t.typ==='batterie') s+=chip('umdrehen','↔ Umdrehen');
     s+=chip('drehen','↻ Drehen')+chip('weg','✕ Löschen',null,' weg');
   } else { const k=S.kabel.find(c=>c.id===wahl.id); if(!k){ wahl=null; return leiste(); }
     s+='<b class="was">Kabel</b>'+Object.keys(KABEL_FARBEN).map(f=>chip('kfarbe:'+f,`<i style="background:${KABEL_FARBEN[f]}"></i>${f}`,(k.farbe||'schwarz')===f)).join('');
@@ -468,10 +501,10 @@ function quellenInfo(){                                                  // wie 
   const summen=new Map(); bat.forEach(b=>{ const k=fk(b.id); summen.set(k,(summen.get(k)||0)+b.volt); }); info.U=Math.max(...summen.values());
   return info;
 }
-function laufzeit(q,I,mehrere){ if(!q.mah) return ' Der Adapter liefert, solange er eingesteckt ist.'; if(I<0.0005) return ''; const h=q.mah/1000/I; const wer=mehrere?'Die Batterien halten':'Die Batterie hält'; return h>48?` ${wer} damit sehr lange.`:` ${wer} damit etwa ${h>=2?Math.round(h)+' Stunden':Math.round(h*60)+' Minuten'}.`; }
+function laufzeit(q,I,mehrere){ if(!q.mah) return ' Das Netzgerät liefert, solange es eingesteckt ist.'; if(I<0.0005) return ''; const h=q.mah/1000/I; const wer=mehrere?'Die Batterien halten':'Die Batterie hält'; return h>48?` ${wer} damit sehr lange.`:` ${wer} damit etwa ${h>=2?Math.round(h)+' Stunden':Math.round(h*60)+' Minuten'}.`; }
 function antwort(){
   const A=[]; const li=(sym,txt,cls='')=>A.push(`<li class="${cls}"><span class="sym">${sym}</span><span>${txt}</span></li>`);
-  const bat=S.teile.filter(t=>t.typ==='batterie'); const verbraucher=S.teile.filter(t=>['led','motor','lampe','summer'].includes(t.typ));
+  const bat=S.teile.filter(t=>t.typ==='batterie'); const verbraucher=S.teile.filter(t=>['led','band','kette','motor','lampe','summer'].includes(t.typ));
   const Q=quellenInfo(); const hatR=S.teile.some(t=>t.typ==='widerstand');
   const ungleich=Q.parallel.find(([a,b])=>a.volt!==b.volt);
   if(ungleich) li('⚠️',`<b>Zwei verschiedene Batterien parallel</b> (${vz(ungleich[0].volt)} V und ${vz(ungleich[1].volt)} V): Die stärkere drückt Strom in die schwächere, beide werden heiss. Parallel nur gleiche Batterien!`,'warn');
@@ -484,22 +517,23 @@ function antwort(){
   else if(!Z.fliesst){
     const offen=S.teile.some(t=>(t.typ==='schalter'||t.typ==='taster')&&!t.an);
     const lose=S.teile.some(t=>[0,1].some(k=>!S.kabel.some(c=>(c.a[0]===t.id&&c.a[1]===k)||(c.b[0]===t.id&&c.b[1]===k))));
-    const verkehrt=S.teile.find(t=>t.typ==='led'&&Z.teile.get(t.id).verkehrt&&[0,1].every(k=>S.kabel.some(c=>(c.a[0]===t.id&&c.a[1]===k)||(c.b[0]===t.id&&c.b[1]===k))));
+    const verkehrt=S.teile.find(t=>DIO_TYPEN.includes(t.typ)&&Z.teile.get(t.id).verkehrt&&[0,1].every(k=>S.kabel.some(c=>(c.a[0]===t.id&&c.a[1]===k)||(c.b[0]===t.id&&c.b[1]===k))));
     if(offen&&!lose) li('🔌','Es fliesst kein Strom: Ein Schalter ist offen. Tippe auf den Schalter.','leise');
-    else if(verkehrt&&!lose) li('🔁',`Es fliesst kein Strom: Die ${LED_NAME[verkehrt.farbe]}e LED ist falsch herum eingebaut. Das lange Beinchen (+) muss zum + der Batterie. Tippe auf die LED und auf «Umdrehen».`,'warn');
+    else if(verkehrt&&!lose) li('🔁',`Es fliesst kein Strom: ${dioName(verkehrt)} ist falsch herum eingebaut. ${verkehrt.typ==='led'?'Das lange Beinchen (+) muss zum + der Batterie.':'Das + des Teils muss zum + der Quelle.'} Kaputt geht dabei nichts – tippe auf das Teil und auf «Umdrehen».`,'warn');
     else if(lose) li('🔌','Es fliesst kein Strom. Der Kreis ist noch nicht geschlossen – eine Klemme ist frei (weisser Punkt).','leise');
     else li('🔌','Es fliesst kein Strom. Der Kreis ist nicht geschlossen.','leise');
   }
   if(!Z.kurz&&Z.fliesst){
     const Ib=Math.max(...bat.map(b=>Math.abs(Z.teile.get(b.id).I||0))); const q=quelle(bat[0].volt);
     li('⚡',`Quelle <b>${vz(Q.U)} V</b> – es fliessen <b>${mA(Ib)} mA</b>.${laufzeit(q,Ib,bat.length>1)}`,'leise');
-    verbraucher.forEach(t=>{ const o=Z.teile.get(t.id); const n=t.typ==='led'?`Die ${LED_NAME[t.farbe]}e LED`:t.typ==='motor'?`Der ${motor(t).name}`:t.typ==='lampe'?'Das Lämpchen':'Der Summer';
-      if(t.typ==='led'){ const R=e12auf((Q.U-vf(t.farbe))/LED_I); const tipp=hatR?`Nimm einen grösseren Widerstand – für eine LED an ${vz(Q.U)} V etwa <b>${ohmText(R)}</b>.`:`Baue einen Widerstand in Reihe – für eine LED an ${vz(Q.U)} V etwa <b>${ohmText(R)}</b> (siehe Rechenbox).`;
-        if(o.zuviel) li('⚠️',`${n} bekommt <b>${mA(o.I)} mA</b> – viel zu viel, sie geht kaputt! ${tipp}`,'warn');
-        else if(o.viel) li('⚠️',`${n} leuchtet, bekommt aber <b>${mA(o.I)} mA</b> statt 20 mA. Das hält sie nicht lange aus. ${tipp}`,'warn');
-        else if(o.an) li('💡',`${n} leuchtet${o.hell<0.5?' schwach':''} (${mA(o.I)} mA).`);
-        else if(o.verkehrt) li('🔁',`${n} ist falsch herum eingebaut: Das lange Beinchen (+) muss zum + der Batterie. Tippe auf die LED und auf «Umdrehen».`,'warn');
-        else if(o.zuwenig) li('🔋',`${n} bekommt zu wenig Spannung: Sie braucht ${vz(vf(t.farbe))} V, hier liegen nur ${vz(Math.max(0,o.U))} V an. In Reihe teilen sich die Teile die Spannung – schalte sie parallel oder nimm eine grössere Batterie.`,'leise'); }
+    verbraucher.forEach(t=>{ const o=Z.teile.get(t.id); const n=DIO_TYPEN.includes(t.typ)?dioName(t):t.typ==='motor'?`Der ${motor(t).name}`:t.typ==='lampe'?'Das Lämpchen':'Der Summer';
+      if(DIO_TYPEN.includes(t.typ)){ const d=dio(t),Ub=d.V+d.R*d.I,R=e12auf((Q.U-Ub)/d.I); const was=t.typ==='led'?'eine LED':t.typ==='band'?'das Leuchtband':'die Lichterkette', es=t.typ==='band'?'es':'sie';
+        const tipp=t.typ==='band'?'Das Leuchtband hat seinen Widerstand schon eingebaut und ist für 12 V gemacht – nimm ein Netzgerät 12 V.':hatR?`Nimm einen grösseren Widerstand – für ${was} an ${vz(Q.U)} V etwa <b>${ohmText(R)}</b>.`:`Baue einen Widerstand in Reihe – für ${was} an ${vz(Q.U)} V etwa <b>${ohmText(R)}</b>${t.typ==='led'?' (siehe Rechenbox)':''}.`;
+        if(o.zuviel) li('⚠️',`${n} bekommt <b>${mA(o.I)} mA</b> – viel zu viel, ${es} geht kaputt! ${tipp}`,'warn');
+        else if(o.viel) li('⚠️',`${n} leuchtet, bekommt aber <b>${mA(o.I)} mA</b> statt ${mA(d.I)} mA. Das hält ${es} nicht lange aus. ${tipp}`,'warn');
+        else if(o.an) li('💡',`${n} leuchtet${o.hell<0.5?' schwach':''} (${mA(o.I)} mA).${t.typ==='band'&&o.hell<0.7?' Richtig hell wird es erst am Netzgerät 12 V.':''}`);
+        else if(o.verkehrt) li('🔁',`${n} ist falsch herum eingebaut: ${t.typ==='led'?'Das lange Beinchen (+) muss zum + der Batterie.':'Das + muss zum + der Quelle.'} Kaputt geht dabei nichts. Tippe auf das Teil und auf «Umdrehen».`,'warn');
+        else if(o.zuwenig) li('🔋',`${n} bekommt zu wenig Spannung: ${t.typ==='band'?'Es braucht 12 V':`Sie braucht ${vz(Ub)} V`}, hier liegen nur ${vz(Math.max(0,o.U))} V an. In Reihe teilen sich die Teile die Spannung – schalte sie parallel oder nimm eine grössere ${t.typ==='band'?'Quelle':'Batterie'}.`,'leise'); }
       else if(t.typ==='motor'){ const U=Math.abs(o.U),proz=Math.round(U/3*100);
         if(o.zuviel) li('⚠️',`${n} bekommt <b>${vz(U)} V</b> – zu viel für einen 3-V-Motor (1,5 bis 4,5 V). Er wird heiss und geht kaputt. Nimm eine kleinere Batterie oder schalte zwei Motoren in Reihe.`,'warn');
         else if(o.an) li('🌀',`${n} dreht mit <b>${vz(U)} V</b> und ${mA(o.I)} mA – ${proz<85?`langsamer als normal (${proz} %)`:proz>115?`schneller als normal (${proz} %)`:'normal schnell'}${o.rueck?'. Er dreht andersherum – mit «Umdrehen» wechselst du die Richtung':''}.`);
@@ -511,12 +545,12 @@ function antwort(){
   }
   $('antwort').innerHTML=A.join('');
 }
-function teilName(t){ if(t.typ==='batterie') return quelle(t.volt).name; if(t.typ==='schalter') return 'Kippschalter'; if(t.typ==='led') return `LED ${LED_NAME[t.farbe]} (${vz(vf(t.farbe))} V)`; if(t.typ==='motor') return `${motor(t).name} 3 V`+(t.antrieb==='propeller'?' mit Propeller':t.antrieb==='rad'?' mit Rad':' mit Zahnrad'); if(t.typ==='lampe') return 'Lämpchen 3,5 V mit Fassung'; if(t.typ==='widerstand') return `Widerstand ${ohmText(t.ohm)}`; return TYPEN[t.typ].name; }
+function teilName(t){ if(t.typ==='batterie') return quelle(t.volt).name; if(t.typ==='schalter') return 'Kippschalter'; if(t.typ==='band') return 'Leuchtband 12 V (Stück mit 3 LEDs, Widerstand eingebaut)'; if(t.typ==='kette') return 'Lichterkette (Stück Mini-LEDs ohne Stecker, für 3 V)'; if(t.typ==='led') return `LED ${LED_NAME[t.farbe]} (${vz(vf(t.farbe))} V)`; if(t.typ==='motor') return `${motor(t).name} 3 V`+(t.antrieb==='propeller'?' mit Propeller':t.antrieb==='rad'?' mit Rad':' mit Zahnrad'); if(t.typ==='lampe') return 'Lämpchen 3,5 V mit Fassung'; if(t.typ==='widerstand') return `Widerstand ${ohmText(t.ohm)}`; return TYPEN[t.typ].name; }
 function materialliste(){ const m=new Map(); S.teile.forEach(t=>{ const n=teilName(t); m.set(n,(m.get(n)||0)+1); }); if(S.kabel.length) m.set('Kabel (oder Krokodilklemmen)',S.kabel.length); return [...m]; }
 function liste(){ $('liste').innerHTML=materialliste().map(([n,z])=>`<li><span>${esc(n)}</span><b>${z}×</b></li>`).join('')||'<li class="leise">Noch nichts auf der Fläche.</li>'; }
 
 // ---------- Palette ----------
-function palette(){ $('palette').innerHTML=Object.keys(TYPEN).map(typ=>{ const t={id:0,typ,x:0,y:0,rot:0,...NEU[typ]}; if(typ==='schalter') t.an=true; return `<button class="pt" type="button" data-typ="${typ}"><svg viewBox="-64 -46 128 92" aria-hidden="true">${teilInnen(t,typ==='led'?{an:true,hell:1}:{})}</svg><b>${esc(typ==='motor'?'Motor 3 V':TYPEN[typ].name)}</b></button>`; }).join(''); }
+function palette(){ $('palette').innerHTML=Object.keys(TYPEN).map(typ=>{ const t={id:0,typ,x:0,y:0,rot:0,...NEU[typ]}; if(typ==='schalter') t.an=true; return `<button class="pt" type="button" data-typ="${typ}"><svg viewBox="-64 -46 128 92" aria-hidden="true">${teilInnen(t,DIO_TYPEN.includes(typ)?{an:true,hell:1}:{})}</svg><b>${esc(typ==='motor'?'Motor 3 V':typ==='band'?'Leuchtband 12 V':TYPEN[typ].name)}</b></button>`; }).join(''); }
 $('palette').addEventListener('click',e=>{ const b=e.target.closest('[data-typ]'); if(!b) return; merken(); const [x,y]=freierPlatz(); const t={id:S.n++,typ:b.dataset.typ,x,y,rot:0,...NEU[b.dataset.typ]}; S.teile.push(t); wahl={art:'teil',id:t.id}; warteKlemme=null; aendern(); });
 
 // ---------- Zeigen und Ziehen ----------
@@ -596,18 +630,19 @@ function rechnerZeigen(){
     const Vf=vz(vf(R.farbe));
     if(e.n===1) z.push(`Die ${LED_NAME[R.farbe]}e LED braucht <b>${Vf} V</b> und 20 mA (= 0,02 A).`);
     else if(e.reihe) z.push(`${e.n} LEDs in Reihe brauchen zusammen ${e.n} × ${Vf} V = <b>${vz(e.Uled)} V</b>. Durch alle fliessen dieselben 20 mA.`);
-    else z.push(`${e.n} LEDs parallel: Jede braucht <b>${Vf} V</b> und 20 mA – und jede bekommt ihren eigenen Widerstand.`);
+    else z.push(`${e.n} LEDs parallel: Jede braucht <b>${Vf} V</b> und 20 mA – und jede bekommt ihren eigenen Widerstand. Nie zwei LEDs an denselben Widerstand hängen, sonst teilen sie den Strom ungleich.`);
     if(e.rest<-0.01) z.push(`<span class="warn">⚠ Zu wenig Spannung! ${vz(e.U)} V reichen nicht für ${vz(e.Uled)} V – die LED${e.n>1?'s bleiben':' bleibt'} dunkel. Nimm eine grössere Batterie${e.n>1&&e.reihe?' oder schalte die LEDs parallel':''}.</span>`);
     else {
       z.push(`Übrig für den Widerstand: ${vz(e.U)} V − ${vz(e.Uled)} V = <b>${vz(e.rest)} V</b>.`);
       if(!e.Rw) z.push(`Es bleibt nichts übrig: Ohne Widerstand leuchtet es gerade so, aber schwach. Mit einer grösseren Batterie und Widerstand wird es hell.`);
-      else { z.push(`<p class="gross">R = ${vz(e.rest)} V : 0,02 A = ${vz(e.Rgenau,0)} Ω → nimm <b>${ohmText(e.Rw)}</b>${ringeSvg(e.Rw)}</p>`);
+      else { z.push(`<p class="gross">R = ${vz(e.rest)} V : 0,02 A = ${vz(e.rest)} × 50 = ${vz(e.Rgenau,0)} Ω → nimm <b>${ohmText(e.Rw)}</b>${ringeSvg(e.Rw)}</p>`);
+        if(Math.abs(e.Rw-e.Rgenau)>0.5) z.push(`Genau ${vz(e.Rgenau,0)} Ω gibt es nicht zu kaufen – nimm immer den nächstgrösseren Wert. Dann leuchtet die LED ein bisschen weniger hell, geht aber sicher nicht kaputt. Zu klein gewählt heisst zu viel Strom: LED kaputt.`);
         if(e.anzR>1) z.push(`Also ${e.anzR} Widerstände mit je ${ohmText(e.Rw)}.`);
         if(e.rest<0.5) z.push(`<span class="warn">Knapp: Wird die Batterie älter, leuchtet es schwächer.</span>`);
         z.push(e.P>0.25?`Der Widerstand wird heiss (${vz(e.P,2)} W) – nimm einen grossen 1-W-Widerstand.`:`Der Widerstand wird nur ${vz(e.P,2)} W warm – ein normaler kleiner Widerstand reicht.`); }
       z.push(`Aus der Quelle fliessen <b>${mA(e.Iges)} mA</b>${e.reihe?'':` (${e.n} × 20 mA)`}.${laufzeit(e.q,e.Iq,e.nb!=='1')}`);
     }
-    z.push(`<p class="merke">Merke: Widerstand = (Spannung der Batterie − Spannung der LED) : 0,02 A. Das lange Beinchen der LED kommt zu +.</p>`);
+    z.push(`<p class="merke">Merke: Widerstand = (Spannung der Batterie − Spannung der LED) : 0,02 A. Rechentrick: «: 0,02» ist dasselbe wie «× 50». Wo der Widerstand sitzt, spielt keine Rolle – vor oder nach der LED bremst er den ganzen Kreis. Das lange Beinchen der LED kommt zu +.</p>`);
   } else {
     const m=e.m;
     z.push(`Der ${m.name} ist ${m.kurz} (${m.wofuer}). Seine Wicklung hat etwa <b>${m.R} Ω</b>. Gebaut ist er für 3 V (1,5 bis 4,5 V).`);
