@@ -88,6 +88,15 @@ svg .deko{fill:none;stroke:#888;stroke-width:.25;stroke-dasharray:1 .8}
 .schritte{margin:0;padding-left:22px;font-size:15px;line-height:1.45}
 .schritte li{margin-bottom:6px}
 .schritte .leise{color:var(--muted);font-size:13px;display:block}
+.zuschnitt{display:flex;flex-direction:column;gap:14px}
+.stoff svg{display:block;width:100%;height:auto;max-height:260px;margin-top:6px}
+.stoff-kopf{display:flex;justify-content:space-between;gap:8px;font-size:15px}
+.stoff-kopf .n,.klein .n{color:var(--acc);font:600 16px Fredoka,Nunito,sans-serif;white-space:nowrap}
+.stoff .za{fill:var(--ink)}
+.stoff .leise{color:var(--muted);font-size:13px}
+.klein{margin:0;padding:0;list-style:none}
+.klein li{display:flex;gap:8px;align-items:center;padding:6px 0;border-top:1px dashed var(--line);font-size:15px}
+.klein li span:nth-child(2){flex:1}
 .material{margin:0;padding:0;list-style:none}
 .material li{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:15px}
 .material li:last-child{border-bottom:0}
@@ -200,6 +209,10 @@ svg .deko{fill:none;stroke:#888;stroke-width:.25;stroke-dasharray:1 .8}
     <ul class="antwort" id="antwort"></ul>
   </section>
   <section class="karte">
+    <h2>🪚 Material und Zuschnitt</h2>
+    <div class="zuschnitt" id="zuschnitt"></div>
+  </section>
+  <section class="karte">
     <button type="button" class="drucken" id="drucken" data-handy><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg> Drucken</button>
     <div class="druckzeile"><div class="chips" role="group" aria-label="Papier" data-g="papier"><button type="button" class="chip" data-v="a4">A4</button><button type="button" class="chip" data-v="a3">A3</button></div><span class="hinweis" id="info"></span></div>
     <div class="blaetter" id="blaetter"></div>
@@ -210,7 +223,6 @@ svg .deko{fill:none;stroke:#888;stroke-width:.25;stroke-dasharray:1 .8}
   </details>
   <details class="karte" id="k-bau" hidden>
     <summary>🔨 Bauen</summary>
-    <ul class="material" id="material"></ul>
     <ol class="schritte" id="schritte"></ol>
   </details>
 </div>
@@ -327,8 +339,6 @@ function teileZahn(){
   rech.push(`<p class="leise">Merke: Grosses Rad treibt kleines → schneller. Kleines treibt grosses → langsamer, aber kräftiger. Zwei Räder, die ineinandergreifen, drehen immer gegeneinander.</p>`);
   // Material und Bauanleitung
   const dicke=S.holz,plattenDicke=10,achsL=plattenDicke+3+achsen.reduce((mx,g)=>Math.max(mx,g.length),0)*(dicke+1)+8+(S.kurbel==='ja'?dicke+2:0);
-  const mat=[[`Sperrholz ${dicke} mm`,`${raeder.length} Zahnräder${S.kurbel==='ja'?' + Kurbelarm':''}`],[`Brett oder Sperrholz 10 mm`,`Grundplatte ${cmText(pw)} × ${cmText(ph)}`],[`Rundstab ${S.achse} mm`,`${achsen.length} × ${mm(achsL)}`],['Unterlagscheiben oder 3-mm-Ringe',`${S.fest==='rad'?raeder.length:achsen.length*2} Stück`],['Holzleim, Laubsäge, Bohrer',`${mm(loch)}${lochP!==loch?' und '+mm(lochP):''}`]];
-  if(S.kurbel==='ja')mat.push([`Rundstab ${mm(lochmass('klotz')-1)} als Griff`,'1 × 40 mm']);
   const sch=[`Blatt drucken (100 %), 5-cm-Linie nachmessen, mit Leimstift auf das Holz kleben.<span class="leise">Zahnräder auf ${dicke} mm, Grundplatte${S.kurbel==='ja'?' und Kurbelarm':''} auf 10 mm.</span>`,
     `Zuerst die Löcher an den Kreuzen bohren: Zahnräder ${mm(loch)}, Grundplatte ${mm(lochP)}.<span class="leise">Erst bohren, dann sägen – das Holz hält besser, wenn es noch gross ist.</span>`,
     `Zahnräder aussägen: immer in die Zahnlücke hinein, dann wieder hinaus. Kanten mit Schleifpapier glätten.`,
@@ -336,7 +346,12 @@ function teileZahn(){
     S.fest==='rad'?`Achsen in die Grundplatte leimen. Unterlagscheibe aufstecken, Zahnrad lose aufstecken, oben ein Tropfen Leim auf ein Abschlussstück (Perle oder Holzscheibe), damit das Rad nicht abfällt.`:`Achsen durch die Grundplatte stecken (sie müssen drehen). Unterlagscheibe aufstecken, Zahnrad festleimen – darauf achten, dass es gerade sitzt.`,
     `Rad B so einsetzen, dass die Zähne von A in die Lücken von B greifen. Dreht es schwer, ist der Achsabstand zu klein; klappert es, ist er zu gross.`+(stufe?' C sitzt fest auf der Achse von B, D greift in C.':''),
     S.kurbel==='ja'?`Kurbelarm auf die Achse von A leimen, Griff ins äussere Loch. Drehen und zählen: eine Umdrehung an A – wie oft dreht ${nL}?`:`Rad A drehen und zählen: eine Umdrehung an A – wie oft dreht ${nL}?`];
-  return {teile,ant,warn,rech,mat,sch,titel:`Zahnräder Modul ${m}: ${raeder.map(r=>r.z).join(' / ')} Zähne`};
+  const zu=[{art:'platte',name:`Sperrholz ${dicke} mm`,teile:teile.filter(t=>t.name!=='Grundplatte').map(t=>t.name==='Kurbelarm'?{w:t.w,h:t.h-6,label:'Kurbel'}:{w:t.w,h:t.h,rund:true,label:`${t.name.replace('Zahnrad ','')} · ${t.z}`})},
+    {art:'platte',name:'Brett oder Sperrholz 10 mm',teile:[{w:pw,h:ph,label:'Grundplatte'}]},
+    {art:'stab',name:`Rundstab ${S.achse} mm`,d:S.achse,stuecke:achsen.map(()=>achsL)}];
+  if(S.kurbel==='ja')zu.push({art:'stab',name:`Rundstab ${mm(lochmass('klotz')-1)} (Griff)`,d:lochmass('klotz')-1,stuecke:[40]});
+  const klein=[['⭕','Unterlagscheiben oder 3-mm-Ringe',`${S.fest==='rad'?raeder.length:achsen.length*2} Stück`],['🔩','Bohrer',`${mm(loch)}${lochP!==loch?' und '+mm(lochP):''}`],['🪚','Laubsäge',''],['🧴','Holzleim, Schleifpapier','']];
+  return {teile,ant,warn,rech,zu,klein,sch,titel:`Zahnräder Modul ${m}: ${raeder.map(r=>r.z).join(' / ')} Zähne`};
 }
 
 function lochmass(was){   // Bohrloch: wo etwas drehen soll, 1 mm Spiel
@@ -359,7 +374,10 @@ function teileRad(){
     teile.push({name:'Exzenter',w:sd,h:sd,svg:`<circle cx="${f(r)}" cy="${f(r)}" r="${f(r)}" class="schnitt"/>${lochKreuz(r+e,r,S.achse,'Achse')}<path class="kreuz" d="M${f(r-1.5)} ${f(r)}h3M${f(r)} ${f(r-1.5)}v3"/>`+txt(r,r+loch/2+10,`Exzenter · Hub ${mm(S.hub)}`)});
     ant.push(`Kurbel: <b>Hub ${mm(S.hub)}</b><span class="leise">Griffloch ${mm(e)} neben der Mitte · Scheibe Ø ${mm(sd)}</span>`);
   }
-  return {teile,ant,warn,titel:`${S.radN} Räder Ø ${cmText(D)}${S.hub>0?` · Kurbel Hub ${S.hub} mm`:''}`};
+  const kurz={Rad:'Ø '+cmText(D),Kurbelscheibe:'Kurbel',Kurbelarm:'Arm',Exzenter:'Exzenter'};
+  const zu=[{art:'platte',name:'Sperrholz 6–10 mm',teile:teile.map(t=>t.name==='Kurbelarm'?{w:t.w,h:t.h-6,label:'Arm'}:{w:t.w,h:t.h,rund:true,label:kurz[t.name]||t.name})}];
+  const klein=[['🔩','Bohrer',`${mm(loch)}${lochmass('klotz')!==loch?' und '+mm(lochmass('klotz')):''}`],['🥢',`Rundstab ${S.achse} mm als Achse`,''],['🪚','Laubsäge, Schleifpapier','']];
+  return {teile,ant,warn,zu,klein,titel:`${S.radN} Räder Ø ${cmText(D)}${S.hub>0?` · Kurbel Hub ${S.hub} mm`:''}`};
 }
 
 // Seitenansicht Auto: Umriss in Anteilen von Länge L und Höhe H, Boden unten (y = 0), Front rechts.
@@ -415,14 +433,76 @@ function teileAuto(){
     `<p>Achslänge = Klotz + 2 × Spiel + 2 × Rad${ueber?' + 2 × Überstand':''} = <span class="f">${mm(S.autoB*10)} + ${mm(2*spiel)} + ${mm(2*S.radBreite)}${ueber?' + '+mm(2*ueber):''} = ${mm(achsL)}</span></p>`,
     `<p>Loch im Klotz ${mm(lochK)}, Loch im Rad ${mm(lochR)}: <span class="f">${S.fest==='rad'?'Rad 1 mm grösser – das Rad dreht auf der festen Achse.':'Klotz 1 mm grösser – die Achse dreht im Klotz, die Räder sitzen fest.'}</span></p>`,
     `<p class="leise">Merke: Was drehen soll, bekommt 1 mm Spiel. Was fest sitzen soll, wird genau so gross gebohrt wie die Achse und geleimt.</p>`];
-  const mat=[[`Holzklotz (Fichte oder Buche)`,`${cmText(L)} × ${cmText(H)} × ${cmText(S.autoB*10)}`],[`Sperrholz ${mm(S.radBreite)} oder Holzräder Ø ${cmText(D)}`,'4 Räder'],[`Rundstab ${S.achse} mm`,`2 × ${mm(achsL)}`],['Bohrer',`${mm(lochK)}${lochR!==lochK?' und '+mm(lochR):''}`],['Laubsäge oder Dekupiersäge, Schleifpapier, Holzleim','']];
   const sch=[`Blatt drucken (100 %), 5-cm-Linie nachmessen. Karosserie auf die Seite des Klotzes kleben, Räder auf das Sperrholz.`,
     `Achslöcher zuerst bohren, ${mm(lochK)}, genau an den Kreuzen und rechtwinklig durch den ganzen Klotz.<span class="leise">Schief gebohrt = das Auto fährt in die Kurve. Ständerbohrmaschine oder Bohrhilfe nehmen.</span>`,
     `Umriss aussägen, Kanten rund schleifen. Die gestrichelten Fenster kannst du aufmalen oder einbrennen.`,
     `Räder aussägen oder fertige Holzräder nehmen, Loch ${mm(lochR)} bohren.`,
     `Achsen auf ${mm(achsL)} ablängen. ${S.fest==='rad'?'Achsen in den Klotz leimen, Räder lose aufstecken, aussen ein Tropfen Leim auf eine Perle oder Scheibe als Abschluss.':'Achsen durch den Klotz stecken (sie müssen drehen), Räder aussen festleimen – gerade halten, bis der Leim hält.'}`,
     `Probefahrt auf dem Tisch: Rollt es gerade? Sonst Achse prüfen und Räder nachrichten.`];
-  return {teile,ant,warn,rech,mat,sch,titel:`Holzauto «${FORMEN[S.form]}» ${cmText(L)} × ${cmText(H)}`};
+  const zu=[{art:'klotz',name:'Holzklotz (Fichte oder Buche)',l:L,h:H,b:S.autoB*10},
+    {art:'platte',name:`Sperrholz ${mm(S.radBreite)}`,teile:Array.from({length:4},()=>({w:D,h:D,rund:true,label:'Ø '+cmText(D)})),notiz:`oder 4 fertige Holzräder Ø ${cmText(D)}`},
+    {art:'stab',name:`Rundstab ${S.achse} mm`,d:S.achse,stuecke:[achsL,achsL]}];
+  const klein=[['🔩','Bohrer',`${mm(lochK)}${lochR!==lochK?' und '+mm(lochR):''}`],['🪚','Laubsäge oder Dekupiersäge',''],['🧴','Holzleim, Schleifpapier','']];
+  return {teile,ant,warn,rech,zu,klein,sch,titel:`Holzauto «${FORMEN[S.form]}» ${cmText(L)} × ${cmText(H)}`};
+}
+
+// ---------- Zuschnitt: welches Holz in welcher Grösse, Teile darauf verteilt (Zeichnung in mm, fs = Schriftgrösse) ----------
+const ZS={holz:'#F3DDB3',teil:'#E3B877',rand:'#6B4A22',text:'#2A1E10'};
+const zt=(x,y,s,fs,anker='middle',fett=600,za=false)=>`<text${za?' class="za"':''} x="${f(x)}" y="${f(y)}" font-size="${f(fs)}" font-weight="${fett}" text-anchor="${anker}" fill="${ZS.text}" font-family="Fredoka,Nunito,sans-serif">${s}</text>`;
+// Teile in Reihen auf eine Platte legen, Platte auf ganze Zentimeter
+function platteLegen(teile){
+  const g=5,liste=teile.slice().sort((a,b)=>b.h-a.h),fl=liste.reduce((s,t)=>s+(t.w+g)*(t.h+g),0);
+  const breit=Math.max(...liste.map(t=>t.w))+2*g,ziel=Math.max(breit,Math.sqrt(fl*1.3));
+  let x=g,y=g,zh=0,maxX=0;const lage=[];
+  liste.forEach(t=>{if(x>g&&x+t.w+g>ziel){x=g;y+=zh+g;zh=0}lage.push({t,x,y});x+=t.w+g;maxX=Math.max(maxX,x);zh=Math.max(zh,t.h)});
+  return {lage,w:Math.ceil(maxX/10)*10,h:Math.ceil((y+zh+g)/10)*10};
+}
+function stoffMass(s){
+  if(s.art==='platte'){const P=platteLegen(s.teile);return `${cmText(P.w)} × ${cmText(P.h)}`}
+  if(s.art==='klotz')return `${cmText(s.l)} × ${cmText(s.h)} × ${cmText(s.b)}`;
+  return `${cmText(stabLaenge(s))} lang`;
+}
+const stabLaenge=s=>Math.ceil((s.stuecke.reduce((a,b)=>a+b,0)+3*s.stuecke.length+10)/10)*10;   // 3 mm Sägeschnitt pro Stück + Rest
+function stoffSvg(s,fs){
+  if(s.art==='platte'){const P=platteLegen(s.teile),m=fs*2.2;
+    let o=`<rect x="0" y="0" width="${P.w}" height="${P.h}" rx="${f(fs*.3)}" fill="${ZS.holz}" stroke="${ZS.rand}" stroke-width="${f(fs*.12)}"/>`;
+    P.lage.forEach(({t,x,y})=>{const cx=x+t.w/2,cy=y+t.h/2;
+      o+=t.rund?`<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(t.w/2)}" fill="${ZS.teil}" stroke="${ZS.rand}" stroke-width="${f(fs*.1)}"/>`
+        :`<rect x="${f(x)}" y="${f(y)}" width="${f(t.w)}" height="${f(t.h)}" rx="${f(Math.min(t.h/2,fs*.4))}" fill="${ZS.teil}" stroke="${ZS.rand}" stroke-width="${f(fs*.1)}"/>`;
+      const g=Math.min(fs,t.h*.4,t.w/Math.max(3,t.label.length*.55));if(g>fs*.45)o+=zt(cx,cy+g*.35,t.label,g)});
+    o+=zt(P.w/2,-fs*.5,cmText(P.w),fs,'middle',600,true)+`<text class="za" x="${f(-fs*.5)}" y="${f(P.h/2)}" font-size="${f(fs)}" font-weight="600" text-anchor="middle" fill="${ZS.text}" font-family="Fredoka,Nunito,sans-serif" transform="rotate(-90 ${f(-fs*.5)} ${f(P.h/2)})">${cmText(P.h)}</text>`;
+    return {w:P.w,h:P.h,x0:-m,y0:-m,x1:P.w+fs*.4,y1:P.h+fs*.4,o}}
+  if(s.art==='klotz'){const {l,h,b}=s,dx=b*.6,dy=b*.4;
+    const o=`<path d="M0 ${f(dy)}L${f(dx)} 0H${f(l+dx)}L${f(l)} ${f(dy)}Z" fill="#F7E6C4" stroke="${ZS.rand}" stroke-width="${f(fs*.12)}" stroke-linejoin="round"/>`+
+      `<path d="M${f(l)} ${f(dy)}L${f(l+dx)} 0V${f(h)}L${f(l)} ${f(h+dy)}Z" fill="#D9B27A" stroke="${ZS.rand}" stroke-width="${f(fs*.12)}" stroke-linejoin="round"/>`+
+      `<rect x="0" y="${f(dy)}" width="${f(l)}" height="${f(h)}" fill="${ZS.holz}" stroke="${ZS.rand}" stroke-width="${f(fs*.12)}"/>`+
+      zt(l/2,h+dy+fs*1.2,cmText(l),fs,'middle',600,true)+zt(-fs*.4,dy+h/2+fs*.35,cmText(h),fs,'end',600,true)+zt(l+dx+fs*.3,dy*.3+fs*.35,cmText(b),fs,'start',600,true);
+    return {w:l+dx,h:h+dy,x0:-fs*3.6,y0:-fs*1.2,x1:l+dx+fs*3.6,y1:h+dy+fs*1.6,o}}
+  // Stab: Stücke nebeneinander mit Sägeschnitten, Rest gestrichelt
+  const L=stabLaenge(s),d=Math.max(s.d,L/45);let x=0,o=`<rect x="0" y="0" width="${L}" height="${f(d)}" rx="${f(d/2)}" fill="#EFD3A3" stroke="${ZS.rand}" stroke-width="${f(fs*.1)}"/>`;
+  s.stuecke.forEach((st,i)=>{o+=`<rect x="${f(x)}" y="0" width="${f(st)}" height="${f(d)}" rx="${f(i?0:d/2)}" fill="${ZS.teil}" stroke="${ZS.rand}" stroke-width="${f(fs*.1)}"/>`+zt(x+st/2,d+fs*1.2,mm(st),fs*.85,'middle',600,true);x+=st+3});
+  o+=`<path d="M${f(x)} ${f(-fs*.3)}V${f(d+fs*.3)}" stroke="${ZS.rand}" stroke-width="${f(fs*.1)}" stroke-dasharray="${f(fs*.3)} ${f(fs*.2)}"/>`;
+  return {w:L,h:d,x0:-fs*.4,y0:-fs*.6,x1:L+fs*.4,y1:d+fs*1.6,o};
+}
+// Bildschirm: eine Zeichnung pro Holz, Schrift etwa 13 px
+function zuschnittHtml(E){
+  return (E.zu||[]).map(s=>{const fs=Math.max(s.art==='stab'?stabLaenge(s):s.art==='klotz'?s.l+s.b:(P=>Math.max(P.w,P.h)*1.6)(platteLegen(s.teile)),40)/24,Z=stoffSvg(s,fs);
+    const vb=`${f(Z.x0)} ${f(Z.y0)} ${f(Z.x1-Z.x0)} ${f(Z.y1-Z.y0)}`;
+    return `<div class="stoff"><div class="stoff-kopf"><span>${s.name}</span><span class="n">${stoffMass(s)}</span></div>`+
+      `<svg viewBox="${vb}" role="img" aria-label="${s.name}: ${stoffMass(s)}">${Z.o}</svg>${s.notiz?`<span class="leise">${s.notiz}</span>`:''}</div>`}).join('')+
+    (E.klein&&E.klein.length?`<ul class="klein">${E.klein.map(([i,a,b])=>`<li><span class="i" aria-hidden="true">${i}</span><span>${a}</span><span class="n">${b||''}</span></li>`).join('')}</ul>`:'');
+}
+// Druck: Materialblatt mit allen Zeichnungen (verkleinert) und Liste
+function materialBlatt(E,P,titel){
+  const W=P.w-2*RAND,n=(E.zu||[]).length,hMax=Math.max(40,Math.min(110,(P.h-2*RAND-KOPF-12-6*(E.klein||[]).length)/Math.max(n,1)-16));let y=RAND+KOPF+4,o='';
+  (E.zu||[]).forEach(s=>{const fs0=3.4;let sc=1,Z=stoffSvg(s,fs0);
+    for(let i=0;i<4;i++){sc=Math.min(1,W/(Z.x1-Z.x0),hMax/(Z.y1-Z.y0));Z=stoffSvg(s,fs0/sc)}
+    o+=`<text x="${RAND}" y="${f(y+4)}" class="t" font-weight="700">${s.name} · ${stoffMass(s)}${sc<.999?' (verkleinert)':''}</text>`;y+=7;
+    o+=`<g transform="translate(${f(RAND-Z.x0*sc)} ${f(y-Z.y0*sc)}) scale(${f(sc)})">${Z.o}</g>`;y+=(Z.y1-Z.y0)*sc+6;
+    if(s.notiz){o+=txt(RAND,y,s.notiz.replace(/<[^>]+>/g,''),'tk','start');y+=6}});
+  (E.klein||[]).forEach(([i,a,b])=>{o+=txt(RAND,y,`• ${a}${b?': '+b:''}`,'t','start');y+=5.5});
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${P.w} ${P.h}" role="img" aria-label="Material und Zuschnitt">`+
+    txt(RAND,RAND+5,`Material & Zuschnitt · ${titel}`,'titel','start')+o+txt(P.w-RAND,P.h-RAND+4,'Schritt für Schritt · Mechanik-Planer','tk','end')+'</svg>';
 }
 
 // ---------- Blätter packen ----------
@@ -519,7 +599,8 @@ function szeneAuto(){
     [xR,xF].forEach(x=>{
       s+=`<g data-h="arad" data-cx="${f(x)}" data-cy="${f(-R)}"><circle class="ks" cx="${f(x)}" cy="${f(-R)}" r="${f(R)}" fill="#2B2F36"/><circle cx="${f(x)}" cy="${f(-R)}" r="${f(R*.55)}" fill="${HOLZ}"/>`+
         `<g data-dreh="0.6" data-cx="${f(x)}" data-cy="${f(-R)}">`+[0,1,2].map(i=>{const a=i*2*Math.PI/3;return `<circle cx="${f(x+R*.3*Math.cos(a))}" cy="${f(-R+R*.3*Math.sin(a))}" r="${f(R*.09)}" fill="#C99A5B"/>`}).join('')+'</g></g>';
-      s+=`<g data-h="achse" data-cx="${f(L/2)}" data-ws="${f(xF-xR)}"><circle class="ks" cx="${f(x)}" cy="${f(-R)}" r="${f(Math.min(8*k,R*.5))}" fill="#FFFFFF"/></g>`});
+      s+=`<g data-h="achse" data-cx="${f(L/2)}" data-ws="${f(xF-xR)}"><circle class="ks" cx="${f(x)}" cy="${f(-R)}" r="${f(Math.min(6*k,R*.3))}" fill="#FFFFFF"/></g>`});
+    s+=knopf(xF+R*.71,-R-R*.71,k,'⤢','aradk',`data-cx="${f(xF)}" data-cy="${f(-R)}" aria-label="Räder grösser ziehen"`);
     // Masse: Länge unten, Höhe links, Rad unter dem Vorderrad
     const yl=36*k,t=5*k;
     s+=`<path class="ml" d="M0 ${f(yl)}H${f(L)}M0 ${f(yl-t)}V${f(yl+t)}M${f(L)} ${f(yl-t)}V${f(yl+t)}"/>`+beschrift(L/2,yl+18*k,k,cmText(L));
@@ -599,10 +680,11 @@ function ziehen(z=zieh){
   else if(h[0]==='scheibe'){if(z.art==='hub')S.hub=begrenzt(Math.round(S0.hub+2*rad()),2,150);else S.scheibeD=begrenzt(Math.round(2*d.r+2*rad()),10,200)}
   else if(h[0]==='laenge')S.autoL=begrenzt(r5(S0.autoL+dx/10),5,60);
   else if(h[0]==='hoehe')S.autoH=begrenzt(r5(S0.autoH-dy/10),2,30);
-  else if(h[0]==='arad')S.autoRad=begrenzt(r5(S0.autoRad+2*rad()/10),1,20);
+  else if(h[0]==='arad'||h[0]==='aradk')S.autoRad=begrenzt(r5(S0.autoRad+2*rad()/10),1,20);
   else if(h[0]==='koerper')S.boden=begrenzt(Math.round(S0.boden-dy),0,80);
   else if(h[0]==='achse')S.radstand=begrenzt(r5((+d.ws+2*seit())/10),1,60);
   else if(h[0]==='breite')S.autoB=begrenzt(r5(S0.autoB+2*seit()/10),1,20);
+  else if(h[0]==='rbreite'&&Math.abs(dy)>Math.abs(dx))S.autoRad=begrenzt(r5(S0.autoRad-dy/10),1,20);
   else if(h[0]==='rbreite')S.radBreite=begrenzt(Math.round(S0.radBreite+seit()),3,60);
   else return;
   $('tipp').hidden=true;
@@ -635,11 +717,12 @@ function zeigen(){
   $('warnung').hidden=!warn.length;$('warnung').innerHTML=warn.map(w=>`<span class="warn">${w}</span>`).join('<br>');
   $('k-rechnung').hidden=!(E.rech&&E.rech.length);$('rechnung').innerHTML=(E.rech||[]).join('');
   $('k-bau').hidden=!(E.sch&&E.sch.length);
-  $('material').innerHTML=(E.mat||[]).map(([a,b])=>`<li><span>${a}</span><span class="n">${b}</span></li>`).join('');
+  $('zuschnitt').innerHTML=zuschnittHtml(E);
   $('schritte').innerHTML=(E.sch||[]).map(t=>`<li>${t}</li>`).join('');
+  if(svgs.length&&E.zu)svgs.push(materialBlatt(E,P,E.titel));
   $('blaetter').innerHTML=svgs.join('');
   $('druck').innerHTML=svgs.join('');
-  $('info').textContent=blaetter.length?`${E.teile.length-zuGross.length} Teile · ${blaetter.length} ${blaetter.length===1?'Blatt':'Blätter'} · 100 %`:`Passt nicht auf ${P.name}`;
+  $('info').textContent=blaetter.length?`${E.teile.length-zuGross.length} Teile · ${blaetter.length} ${blaetter.length===1?'Blatt':'Blätter'}${E.zu?' + Material':''} · 100 %`:`Passt nicht auf ${P.name}`;
   $('seite').textContent=`@page{size:${P.name} portrait;margin:0}#druck{--bw:${P.w}mm;--bh:${P.h}mm}`;
   document.title=`Schritt für Schritt · Mechanik-Planer · ${E.titel}`;
   buehne();
