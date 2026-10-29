@@ -4,15 +4,50 @@
     {
       "name": "kontrolle",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["werkzeug/kontrolle.py", "--port", "8767"],
+      "runtimeArgs": [
+        "werkzeug/kontrolle.py",
+        "--port",
+        "8767"
+      ],
       "port": 8767,
       "autoPort": false
     },
     {
       "name": "app",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "8770", "--bind", "127.0.0.1"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8770",
+        "--bind",
+        "127.0.0.1"
+      ],
       "port": 8770
+    },
+    {
+      "name": "app2",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8779",
+        "--bind",
+        "127.0.0.1"
+      ],
+      "port": 8779,
+      "autoPort": false
+    },
+    {
+      "name": "mechanik",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8783",
+        "--bind",
+        "127.0.0.1"
+      ],
+      "port": 8783
     }
   ]
 }
