@@ -235,7 +235,7 @@ body[data-ansicht="start"] main,body[data-ansicht="bau"] .start{display:none}
       <input class="name" id="name" type="text" maxlength="40" placeholder="Name deines Stromkreises" aria-label="Name">
       <ul class="liste" id="liste"></ul>
       <div class="aktionen">
-        <button class="drucken" id="drucken" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg>Drucken</button>
+        <button class="drucken" id="drucken" type="button" data-handy><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg>Drucken</button>
         <button class="knopf" id="bild" type="button">🖼 Als Bild sichern</button>
         <button class="knopf" id="link" type="button">🔗 Link kopieren</button>
       </div>
@@ -913,7 +913,9 @@ function planBauen(r,name){                                               // bau
 // ---------- Teilen, Bild, Drucken ----------
 const b64=s=>btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
 const unb64=s=>decodeURIComponent(escape(atob(s.replace(/-/g,'+').replace(/_/g,'/'))));
-$('link').addEventListener('click',async()=>{ const url=location.origin+location.pathname+'#p='+b64(JSON.stringify({name:S.name,projekt:S.projekt||undefined,teile:S.teile,kabel:S.kabel,n:S.n})); try{ await navigator.clipboard.writeText(url); meldung('Link kopiert. Wer ihn öffnet, sieht deinen Stromkreis.'); }catch(e){ prompt('Link zum Kopieren:',url); } });
+const teilenLink=()=>location.origin+location.pathname+'#p='+b64(JSON.stringify({name:S.name,projekt:S.projekt||undefined,teile:S.teile,kabel:S.kabel,n:S.n}));
+window.handyLink=teilenLink;   // «Aufs Handy holen» (zurueck.js) nimmt die Schaltung mit
+$('link').addEventListener('click',async()=>{ const url=teilenLink(); try{ await navigator.clipboard.writeText(url); meldung('Link kopiert. Wer ihn öffnet, sieht deinen Stromkreis.'); }catch(e){ prompt('Link zum Kopieren:',url); } });
 function svgText(){ const k=svg.cloneNode(true); k.querySelectorAll('.wm,.wp,#gummi,.klemme-hit,.griff').forEach(e=>e.remove()); k.querySelectorAll('.gewaehlt').forEach(e=>e.classList.remove('gewaehlt')); k.querySelectorAll('.strom').forEach(e=>e.remove());
   const st=document.createElement('style'); st.textContent='.klemme{fill:#FFE58A;stroke:#1F1A17;stroke-width:2.5}.klemme.offen{fill:#FFF;stroke-dasharray:3 2}.kabel .aussen{fill:none;stroke:#1F1A17;stroke-width:9;stroke-linecap:round;stroke-linejoin:round}.kabel .innen{fill:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.hit,.rahmen{display:none}text{font-family:Nunito,Arial,sans-serif;font-weight:800}'; k.insertBefore(st,k.firstChild);
   k.setAttribute('width',W); k.setAttribute('height',H); k.insertAdjacentHTML('afterbegin',`<rect width="${W}" height="${H}" fill="#fff"/>`); return new XMLSerializer().serializeToString(k); }
