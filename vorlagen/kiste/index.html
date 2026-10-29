@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Schritt für Schritt · Kisten-Planer</title>
+<meta name="description" content="Holzkiste planen: Länge, Breite, Höhe und Material (Sperrholz, MDF, Massivholz) eingeben – die Seite rechnet alle Teile aus, wählt Schraube, Bohrer und Vorbohrtiefe, zeichnet die Bohrpläne und den Zuschnitt und schreibt die Bauanleitung.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<style>
+:root{--bg:#F3EFE6;--surface:#FFFFFF;--surface2:#F7F3EC;--ink:#2B2320;--muted:#6B5F58;--line:#DDD3C6;--acc:#9A6B2F;--acc-ink:#FFFFFF;--acc-soft:#F4E6D2;--warn:#B3412A;--papier:#FFFFFF;--holz:#E9C99A;--holz2:#C99A5B;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17130F;--surface:#241E18;--surface2:#1C1712;--ink:#F2EBE2;--muted:#B3A596;--line:#3C322A;--acc:#E0A860;--acc-ink:#17130F;--acc-soft:#3A2C1A;--warn:#F08A6E;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17130F;--surface:#241E18;--surface2:#1C1712;--ink:#F2EBE2;--muted:#B3A596;--line:#3C322A;--acc:#E0A860;--acc-ink:#17130F;--acc-soft:#3A2C1A;--warn:#F08A6E;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
+h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
+h1{font-size:28px}
+h2{font-size:17px;margin-bottom:10px}
+h3{font-size:15px;margin:12px 0 6px}
+a{color:var(--acc)}
+.kopf{max-width:1200px;margin:0 auto;padding:20px 16px 8px}
+.kopf p{margin:4px 0 0;color:var(--muted)}
+main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,400px);gap:14px;align-items:start}
+.links{display:flex;flex-direction:column;gap:14px}
+.karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
+.rechts{position:sticky;top:12px;display:flex;flex-direction:column;gap:14px}
+.feld{margin-bottom:14px}.feld:last-child{margin-bottom:0}
+.lbl{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:14px;padding:6px 12px;border-radius:999px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer;min-height:40px}
+.chip[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
+.chip:hover{border-color:var(--acc)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.zwei{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.zahl{display:flex;align-items:center;gap:6px}
+.zahl input{width:92px;height:48px;font:600 24px Fredoka,Nunito,sans-serif;text-align:center;border:2px solid var(--line);border-radius:12px;background:var(--surface2);color:var(--ink);padding:0 4px}
+.zahl span{font-size:15px;color:var(--muted)}
+.drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
+.drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
+.antwort{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.antwort li{font-size:16px;line-height:1.35}
+.antwort b{font:600 24px/1.1 Fredoka,Nunito,sans-serif;color:var(--acc);white-space:nowrap}
+.antwort .leise{color:var(--muted);font-size:14px;display:block;margin-top:2px}
+.warn{color:var(--warn)}
+.hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
+.rechnung{margin:0;padding:12px 14px;border-radius:14px;background:var(--surface2);border:1px solid var(--line);font-size:15px;line-height:1.5}
+.rechnung p{margin:0 0 6px}.rechnung p:last-child{margin:0}
+.rechnung .f{font:600 18px/1.3 Fredoka,Nunito,sans-serif;color:var(--acc)}
+.rechnung .leise{color:var(--muted);font-size:13px}
+.schritte{margin:0;padding-left:22px;font-size:15px;line-height:1.45}
+.schritte li{margin-bottom:6px}
+.material{margin:0;padding:0;list-style:none}
+.material li{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.material li:last-child{border-bottom:0}
+.material .n{color:var(--acc);font:600 16px Fredoka,Nunito,sans-serif;white-space:nowrap}
+.material .leise{color:var(--muted);font-size:13px;display:block}
+.bild svg{display:block;width:100%;height:auto;max-height:52vh;background:var(--papier);border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.plaene{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.plaene figure{margin:0}
+.plaene figcaption{font-size:14px;margin-bottom:4px}
+.plaene figcaption .leise{color:var(--muted);font-size:12px;display:block}
+.plaene svg{display:block;width:100%;height:auto;background:var(--papier);border-radius:8px;box-shadow:0 1px 6px rgba(0,0,0,.12)}
+[hidden]{display:none!important}
+svg .t,svg .tk{font-family:Nunito,sans-serif;font-weight:600}
+svg .mass{fill:none;stroke:#9A6B2F;stroke-width:.5}
+svg .masst{font-family:Fredoka,Nunito,sans-serif;font-weight:600;fill:#9A6B2F}
+@media (max-width:860px){
+  main{display:flex;flex-direction:column;align-items:stretch}
+  .rechts{position:static}
+  h1{font-size:24px}
+}
+#druck{display:none}
+@page{size:A4 portrait;margin:12mm}
+@media print{
+  body{background:#fff;color:#000;font-size:12px}
+  .kopf,main{display:none!important}
+  #druck{display:block}
+  #druck .seite{break-after:page}
+  #druck .seite:last-child{break-after:auto}
+  #druck h1{font-size:20px;margin-bottom:4px}
+  #druck h2{font-size:14px;margin:10px 0 4px}
+  #druck .bild svg{max-height:75mm;box-shadow:none;border:1px solid #ccc}
+  #druck table{border-collapse:collapse;width:100%;font-size:12px}
+  #druck td,#druck th{border-bottom:1px solid #ccc;padding:3px 6px;text-align:left}
+  #druck .rechnung{background:#fff;border-color:#ccc;color:#000;font-size:12px}
+  #druck .rechnung .f{color:#000;font-size:14px}
+  #druck .schritte{font-size:12px}
+  #druck .plaene{grid-template-columns:1fr 1fr;gap:8px}
+  #druck .plaene svg{box-shadow:none;border:1px solid #ccc}
+  #druck .plaene figcaption{font-size:12px}
+  #druck .fuss{font-size:10px;color:#666;margin-top:8px}
+}
+</style>
+</head>
+<body>
+<header class="kopf">
+  <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
+  <h1>Kisten-Planer</h1>
+  <p>Sag, wie gross die Kiste werden soll und aus welchem Holz. Die Seite rechnet alle Teile aus, wählt die richtige Schraube, sagt dir Bohrer und Vorbohrtiefe, zeichnet die Bohrpläne und den Zuschnitt und schreibt die Bauanleitung. <a href="../">← Werkzeuge</a></p>
+</header>
+<script src="../zurueck.js"></script>
+<main>
+<div class="links">
+  <section class="karte">
+    <h2>Deine Kiste</h2>
+    <div class="zwei">
+      <div class="feld"><label class="lbl" for="l">Länge</label><div class="zahl"><input type="number" id="l" min="4" max="120" step="0.5" inputmode="decimal"><span>cm</span></div></div>
+      <div class="feld"><label class="lbl" for="b">Breite</label><div class="zahl"><input type="number" id="b" min="4" max="120" step="0.5" inputmode="decimal"><span>cm</span></div></div>
+      <div class="feld"><label class="lbl" for="h">Höhe</label><div class="zahl"><input type="number" id="h" min="2" max="80" step="0.5" inputmode="decimal"><span>cm</span></div></div>
+    </div>
+    <div class="feld" style="margin-top:12px"><span class="lbl">Sind das die Masse …</span>
+      <div class="chips" role="group" aria-label="Aussen oder innen" data-g="mass"><button type="button" class="chip" data-v="aussen">aussen (die ganze Kiste)</button><button type="button" class="chip" data-v="innen">innen (was hineinpasst)</button></div></div>
+    <p class="hinweis" id="mass-hinweis"></p>
+  </section>
+  <section class="karte">
+    <h2>Material</h2>
+    <div class="feld"><span class="lbl">Holz</span>
+      <div class="chips" role="group" aria-label="Material" data-g="mat"><button type="button" class="chip" data-v="sperrholz">Sperrholz / Schichtholz</button><button type="button" class="chip" data-v="mdf">MDF</button><button type="button" class="chip" data-v="massiv">Massivholz-Brett</button></div></div>
+    <div class="feld"><span class="lbl">Dicke</span>
+      <div class="chips" role="group" aria-label="Dicke" id="dicken"></div>
+      <div class="zahl" style="margin-top:8px"><input type="number" id="d" min="3" max="30" step="0.5" inputmode="decimal" aria-label="Dicke in mm"><span>mm – oder selber eintippen</span></div></div>
+    <p class="hinweis" id="mat-hinweis"></p>
+  </section>
+  <section class="karte">
+    <h2>Bauart</h2>
+    <div class="feld"><span class="lbl">Boden</span>
+      <div class="chips" role="group" aria-label="Boden" data-g="boden"><button type="button" class="chip" data-v="unter">Boden unter den Wänden</button><button type="button" class="chip" data-v="zwischen">Boden zwischen den Wänden</button></div></div>
+    <div class="feld"><span class="lbl">Welche Wände stehen aussen (in den Ecken)?</span>
+      <div class="chips" role="group" aria-label="Ecken" data-g="aussen"><button type="button" class="chip" data-v="lang">Längsseiten aussen</button><button type="button" class="chip" data-v="kurz">Stirnseiten aussen</button></div></div>
+    <div class="feld"><span class="lbl">Deckel</span>
+      <div class="chips" role="group" aria-label="Deckel" data-g="deckel"><button type="button" class="chip" data-v="nein">Ohne Deckel</button><button type="button" class="chip" data-v="ja">Loser Deckel mit Leisten</button></div></div>
+    <p class="hinweis" id="bau-hinweis"></p>
+  </section>
+  <section class="karte">
+    <h2>So sieht sie aus</h2>
+    <div class="bild" id="bild"></div>
+    <p class="hinweis">Die Schrauben gehen durch das eine Brett in die Kante des anderen – immer in die Mitte der Kante. Leim dazu, dann hält die Kiste doppelt.</p>
+  </section>
+  <section class="karte">
+    <h2>Bohrpläne – wo die Löcher hinkommen</h2>
+    <div class="plaene" id="plaene"></div>
+    <p class="hinweis" id="plaene-hinweis"></p>
+  </section>
+  <section class="karte">
+    <h2>Zuschnitt – so viel Holz brauchst du</h2>
+    <div class="bild" id="zuschnitt"></div>
+    <p class="hinweis" id="zuschnitt-hinweis"></p>
+  </section>
+</div>
+
+<div class="rechts">
+  <section class="karte" aria-live="polite">
+    <h2>Teile zuschneiden</h2>
+    <ul class="material" id="teile"></ul>
+    <p class="hinweis warn" id="warnung" hidden></p>
+  </section>
+  <section class="karte">
+    <h2>Schrauben und Bohren</h2>
+    <ul class="antwort" id="antwort"></ul>
+  </section>
+  <section class="karte">
+    <h2>So wird gerechnet</h2>
+    <div class="rechnung" id="rechnung"></div>
+  </section>
+  <section class="karte">
+    <h2>Das brauchst du sonst noch</h2>
+    <ul class="material" id="material"></ul>
+    <h2 style="margin-top:14px">So baust du die Kiste</h2>
+    <ol class="schritte" id="schritte"></ol>
+  </section>
+  <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg> Plan drucken</button>
+</div>
+</main>
+<div id="druck"></div>
+<script>
+// Kisten-Planer von Schritt für Schritt. Eingaben in cm (Kiste) und mm (Dicke); gerechnet und gezeichnet wird in mm.
+(function(){
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const KEY='schrittli.kiste.v1';
+const n=x=>String(Math.round(x*10)/10).replace('.',',');
+const mm=x=>`${n(x)} mm`;
+const cmT=x=>`${n(x/10)} cm`;
+const KERF=3;      // Sägeschnitt im Zuschnittplan (mm)
+const MATERIAL={
+  sperrholz:{name:'Sperrholz / Schichtholz',dicken:[4,6,8,10,12,15],tipp:'Sperrholz hält Schrauben in der Kante gut – aber nur mit Vorbohren, sonst spaltet sich die Kante in ihre Schichten.'},
+  mdf:{name:'MDF',dicken:[6,8,10,12,16,19],tipp:'MDF-Kanten brechen leicht: immer vorbohren, die Schraube nicht überdrehen, und unbedingt leimen.'},
+  massiv:{name:'Massivholz-Brett',dicken:[12,15,18,20],tipp:'In Massivholz hält die Schraube quer zur Faser gut. Am Brettende (Hirnholz) hält sie weniger – dort leimen und langsam schrauben.'}};
+const LAENGEN={2.5:[12,16,20,25],3:[12,16,20,25,30,35,40],3.5:[16,20,25,30,35,40,45,50],4:[20,25,30,35,40,45,50,60,70],4.5:[25,30,35,40,45,50,60,70,80]};
+const S={l:30,b:20,h:8,mass:'aussen',mat:'sperrholz',d:8,boden:'unter',aussen:'lang',deckel:'nein'};
+const GRENZEN={l:[4,120],b:[4,120],h:[2,80],d:[3,30]};
+try{ const g=JSON.parse(localStorage.getItem(KEY)||'{}'); for(const k in S) if(g[k]!==undefined) S[k]=g[k]; }catch(e){}
+try{ const u=new URL(location.href).searchParams;
+  ['l','b','h','d'].forEach(k=>{ if(u.has(k)&&!isNaN(parseFloat(u.get(k)))) S[k]=parseFloat(u.get(k)); });
+  [['mass',['aussen','innen']],['mat',Object.keys(MATERIAL)],['boden',['unter','zwischen']],['aussen',['lang','kurz']],['deckel',['nein','ja']]].forEach(([k,w])=>{ if(w.includes(u.get(k))) S[k]=u.get(k); });
+}catch(e){}
+for(const k in GRENZEN){ const [lo,hi]=GRENZEN[k]; S[k]=Math.min(hi,Math.max(lo,+S[k]||lo)); }
+if(!MATERIAL[S.mat]) S.mat='sperrholz';
+function speichern(){ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){} }
+
+// ---------- Schraube, Bohrer, Vorbohren ----------
+// Durchmesser nach Kantendicke (die Kante soll gut doppelt so dick sein wie die Schraube), Länge ≈ 3 × Dicke:
+// einmal durch das Brett, zweimal die Dicke in die Kante hinein. Vorbohren 1 mm dünner als die Schraube.
+function schraube(d){
+  if(d<6) return {ok:false};
+  const dm=d<8?2.5:d<12?3:d<15?3.5:d<18?4:4.5;
+  const ls=LAENGEN[dm], ziel=3*d;
+  const len=ls.find(x=>x>=ziel)||ls[ls.length-1];
+  return {ok:true,dm,len,loch:dm,vor:Math.round((dm-1)*10)/10,ein:len-d,tiefe:len-d+2,ziel};
+}
+// Schraubenstellen auf einer Kante der Länge len: vom Rand e weg, dann etwa alle 7 cm, mindestens zwei.
+function stellen(len,e){
+  if(len<2*e+10) return [Math.round(len/2)];
+  const k=Math.max(1,Math.round((len-2*e)/70)), a=(len-2*e)/k, p=[];
+  for(let i=0;i<=k;i++) p.push(Math.round(e+i*a));
+  return p;
+}
+
+// ---------- Rechnen ----------
+function rechnen(){
+  const d=S.d, innen=S.mass==='innen', unter=S.boden==='unter', langAussen=S.aussen==='lang';
+  const L0=S.l*10,B0=S.b*10,H0=S.h*10;
+  const La=innen?L0+2*d:L0, Ba=innen?B0+2*d:B0, Ha=innen?H0+d:H0;
+  const Li=La-2*d, Bi=Ba-2*d, Hi=Ha-d;
+  const hw=unter?Ha-d:Ha;                       // Wandhöhe
+  const R={d,La,Ba,Ha,Li,Bi,Hi,hw,unter,langAussen,innen,fehler:''};
+  if(Li<20||Bi<20||Hi<5){ R.fehler='So geht die Kiste nicht auf: das Holz ist zu dick für diese Masse. Nimm dünneres Holz oder eine grössere Kiste.'; return R; }
+  const sc=schraube(d); R.sc=sc;
+  const e=sc.ok?Math.round(sc.len-d+8):20;    // Randabstand der Schrauben: Boden- und Eckschrauben kreuzen sich so nie
+  R.e=e;
+  // Teile: Länge × Breite (mm), alle aus dem gleichen Holz
+  const teile=[];
+  teile.push({id:'boden',name:'Boden',n:1,l:unter?La:Li,b:unter?Ba:Bi});
+  teile.push({id:'lang',name:'Längsseite',n:2,l:langAussen?La:Li,b:hw});
+  teile.push({id:'kurz',name:'Stirnseite',n:2,l:langAussen?Bi:Ba,b:hw});
+  let leisteB=0;
+  if(S.deckel==='ja'){
+    leisteB=sc.ok?Math.max(20,Math.ceil((sc.len-d+4)/5)*5):20;   // Leiste hochkant: so breit, dass die Schraube nicht durchkommt
+    teile.push({id:'deckel',name:'Deckel',n:1,l:La,b:Ba});
+    teile.push({id:'leiste',name:'Deckelleiste (hochkant)',n:2,l:Li-2,b:leisteB});
+  }
+  R.teile=teile; R.leisteB=leisteB;
+  // Löcher pro Teil: {x,y} in mm vom linken bzw. unteren Rand des Teils, dazu Beschriftung
+  const loecher={}; let anzahl=0;
+  const ecken=stellen(hw,e); R.ecken=ecken;
+  const aussenId=langAussen?'lang':'kurz', aussenTeil=teile.find(t=>t.id===aussenId), innenTeil=teile.find(t=>t.id===(langAussen?'kurz':'lang'));
+  // Eckschrauben: durch die Aussenwand in die Kante der Innenwand, Reihe d/2 vom Wandende
+  loecher[aussenId]=[]; ecken.forEach(y=>{ loecher[aussenId].push({x:d/2,y,art:'ecke'}); loecher[aussenId].push({x:aussenTeil.l-d/2,y,art:'ecke'}); });
+  anzahl+=4*ecken.length;
+  loecher[innenTeil.id]=[];
+  const bodenStellen={};
+  if(unter){
+    // Bodenschrauben: durch den Boden hinauf in die Kanten der vier Wände
+    const bo=teile.find(t=>t.id==='boden'); loecher.boden=[];
+    const sl=langAussen?stellen(La,e):stellen(Li,e).map(x=>x+d);        // der Längsseite entlang (x)
+    const sk=langAussen?stellen(Bi,e).map(y=>y+d):stellen(Ba,e);        // der Stirnseite entlang (y)
+    sl.forEach(x=>{ loecher.boden.push({x,y:d/2,art:'boden'}); loecher.boden.push({x,y:Ba-d/2,art:'boden'}); });
+    sk.forEach(y=>{ loecher.boden.push({x:d/2,y,art:'boden'}); loecher.boden.push({x:La-d/2,y,art:'boden'}); });
+    bodenStellen.lang=sl; bodenStellen.kurz=sk; anzahl+=2*sl.length+2*sk.length;
+  } else {
+    // Boden zwischen den Wänden: durch jede Wand waagrecht in die Bodenkante, Reihe d/2 über der Unterkante
+    const sl=langAussen?stellen(Li,e).map(x=>x+d):stellen(Li,e);
+    const sk=langAussen?stellen(Bi,e):stellen(Bi,e).map(x=>x+d);
+    sl.forEach(x=>loecher.lang.push({x,y:d/2,art:'boden'}));
+    sk.forEach(x=>loecher.kurz.push({x,y:d/2,art:'boden'}));
+    bodenStellen.lang=sl; bodenStellen.kurz=sk; anzahl+=2*sl.length+2*sk.length;
+  }
+  if(S.deckel==='ja'){
+    // Deckelleisten: hochkant unter dem Deckel, 1 mm von der Innenwand weg; von oben durch den Deckel in die Leistenkante
+    loecher.deckel=[]; const sd=stellen(Li-2,e).map(x=>x+d+1), yl=d+1+d/2;
+    sd.forEach(x=>{ loecher.deckel.push({x,y:yl,art:'deckel'}); loecher.deckel.push({x,y:Ba-yl,art:'deckel'}); });
+    bodenStellen.deckel=sd; anzahl+=2*sd.length;
+  }
+  R.loecher=loecher; R.anzahl=anzahl; R.bodenStellen=bodenStellen;
+  R.zuschnitt=zuschnitt(teile);
+  return R;
+}
+
+// ---------- Zuschnittplan: Teile in Reihen auf eine Platte legen, schmalste Platte mit der kleinsten Fläche ----------
+function zuschnitt(teile){
+  const st=[]; teile.forEach(t=>{ for(let i=0;i<t.n;i++) st.push({name:t.name,w:t.l,h:t.b}); });
+  const cands=new Set();
+  const lang=st.map(p=>Math.max(p.w,p.h)).sort((a,b)=>b-a); let acc=0; lang.forEach(w=>{ acc+=w+KERF; cands.add(acc-KERF); });
+  const kurz=st.map(p=>Math.min(p.w,p.h)).sort((a,b)=>b-a); acc=0; kurz.forEach(w=>{ acc+=w+KERF; cands.add(acc-KERF); });
+  st.forEach(p=>{ cands.add(p.w); cands.add(p.h); });
+  const masse=[...new Set(st.flatMap(p=>[p.w,p.h]))];
+  masse.forEach(a=>masse.forEach(b=>{ cands.add(a+KERF+b); masse.forEach(c=>cands.add(a+KERF+b+KERF+c)); }));
+  const alle=[];
+  for(const W of cands){ const r=packen(st,W); if(r) alle.push({W,H:r.H,area:W*r.H,teile:r.plaet}); }
+  const minA=Math.min(...alle.map(a=>a.area));
+  const gut=alle.filter(a=>a.area<=minA*1.08);
+  gut.sort((a,b)=>Math.max(a.W,a.H)-Math.max(b.W,b.H)||a.area-b.area);
+  return gut[0];
+}
+function packen(st,W){
+  const items=[];
+  for(const p of st){ let w=Math.max(p.w,p.h),h=Math.min(p.w,p.h); if(w>W+0.01){ [w,h]=[h,w]; if(w>W+0.01) return null; } items.push({name:p.name,w,h}); }
+  items.sort((a,b)=>b.h-a.h||b.w-a.w);
+  const reihen=[], plaet=[]; let y=0;
+  for(const it of items){
+    let r=reihen.find(s=>s.x+it.w<=W+0.01&&it.h<=s.h+0.01);
+    if(!r){ const q=reihen.find(s=>s.x+it.h<=W+0.01&&it.w<=s.h+0.01); if(q){ r=q; [it.w,it.h]=[it.h,it.w]; } }
+    if(!r){ r={x:0,y,h:it.h}; reihen.push(r); y+=it.h+KERF; }
+    plaet.push({name:it.name,w:it.w,h:it.h,x:r.x,y:r.y}); r.x+=it.w+KERF;
+  }
+  return {H:y-KERF,plaet};
+}
+
+// ---------- Zeichnen ----------
+function kistenBild(R){
+  const {La,Ba,Ha,d,unter,langAussen}=R;
+  const k=0.42;                                              // Schrägbild: Tiefe halb so lang, schräg nach hinten
+  const P=(x,y,z)=>[x+k*y, -(z+k*y)];
+  const pt=(x,y,z)=>{ const [a,b]=P(x,y,z); return `${a.toFixed(1)},${b.toFixed(1)}`; };
+  const poly=(pts,cls,fill)=>`<polygon points="${pts.map(p=>pt(...p)).join(' ')}" fill="${fill}" stroke="#4a3a2a" stroke-width=".6" stroke-linejoin="round"${cls?` class="${cls}"`:''}/>`;
+  let s='';
+  // Boden innen (sichtbar von oben), dann die vier Wände von oben, Vorderseite, rechte Seite
+  const zb=unter?d:d;                                         // Oberkante des Bodens
+  s+=poly([[d,d,zb],[La-d,d,zb],[La-d,Ba-d,zb],[d,Ba-d,zb]],'','#F1DFC2');
+  // Innenflächen der Wände (hinten und links sichtbar)
+  s+=poly([[d,Ba-d,zb],[La-d,Ba-d,zb],[La-d,Ba-d,Ha],[d,Ba-d,Ha]],'','#D9B98A');   // hintere Innenwand
+  s+=poly([[d,d,zb],[d,Ba-d,zb],[d,Ba-d,Ha],[d,d,Ha]],'','#CBA772');               // linke Innenwand
+  // Vorderwand und rechte Wand aussen
+  s+=poly([[0,0,0],[La,0,0],[La,0,Ha],[0,0,Ha]],'','#E9C99A');
+  s+=poly([[La,0,0],[La,Ba,0],[La,Ba,Ha],[La,0,Ha]],'','#C99A5B');
+  // Oberkanten der Wände (Ringe)
+  const oben=`<path d="M${pt(0,0,Ha)} L${pt(La,0,Ha)} L${pt(La,Ba,Ha)} L${pt(0,Ba,Ha)} Z M${pt(d,d,Ha)} L${pt(La-d,d,Ha)} L${pt(La-d,Ba-d,Ha)} L${pt(d,Ba-d,Ha)} Z" fill="#EFD3A8" fill-rule="evenodd" stroke="#4a3a2a" stroke-width=".6"/>`;
+  s+=oben;
+  // Stossfugen in den Ecken oben: zeigen, welche Wand aussen steht
+  let f='';
+  if(langAussen){ [0,Ba-d].forEach(y=>{ f+=`M${pt(d,y,Ha)} L${pt(d,y+d,Ha)} M${pt(La-d,y,Ha)} L${pt(La-d,y+d,Ha)}`; }); }
+  else { [0,La-d].forEach(x=>{ f+=`M${pt(x,d,Ha)} L${pt(x+d,d,Ha)} M${pt(x,Ba-d,Ha)} L${pt(x+d,Ba-d,Ha)}`; }); }
+  s+=`<path d="${f}" fill="none" stroke="#4a3a2a" stroke-width=".5"/>`;
+  // Stossfuge vorne rechts: bei Längsseiten aussen läuft die Vorderwand bis zur Ecke, sonst sieht man die Stirnseite vorne
+  if(langAussen) s+=`<path d="M${pt(La,0,0)} L${pt(La,0,Ha)} M${pt(La,d,0)} L${pt(La,d,Ha)}" fill="none" stroke="#4a3a2a" stroke-width=".5"/>`;
+  else s+=`<path d="M${pt(La-d,0,0)} L${pt(La-d,0,Ha)}" fill="none" stroke="#4a3a2a" stroke-width=".5"/>`;
+  // Bodenkante unter den Wänden
+  if(unter) s+=`<path d="M${pt(0,0,d)} L${pt(La,0,d)} L${pt(La,Ba,d)}" fill="none" stroke="#4a3a2a" stroke-width=".5" stroke-dasharray="2 1.5"/>`;
+  // Schrauben andeuten: Ecken auf der Vorderwand (nur bei Längsseiten aussen) und rechts
+  const sk=(x,y,z)=>{ const [a,b]=P(x,y,z); return `<circle cx="${a.toFixed(1)}" cy="${b.toFixed(1)}" r="${Math.max(1.2,La/120)}" fill="#fff" stroke="#4a3a2a" stroke-width=".5"/>`; };
+  R.ecken.forEach(z=>{ if(langAussen){ s+=sk(d/2,0,z)+sk(La-d/2,0,z); } else { s+=sk(La,d/2,z)+sk(La,Ba-d/2,z); } });
+  if(!unter){ R.bodenStellen.lang.forEach(x=>{ s+=sk(x,0,d/2); }); R.bodenStellen.kurz.forEach(y=>{ s+=sk(La,y,d/2); }); }
+  // Masse
+  const fs=Math.max(5,(La+Ba)/22);
+  const m=(p1,p2,text,dx,dy,rot)=>{ const [a1,b1]=P(...p1),[a2,b2]=P(...p2); const cx=(a1+a2)/2+dx, cy=(b1+b2)/2+dy;
+    return `<path class="mass" d="M${a1.toFixed(1)},${b1.toFixed(1)} L${a2.toFixed(1)},${b2.toFixed(1)}"/><text class="masst" font-size="${fs}" x="${cx.toFixed(1)}" y="${cy.toFixed(1)}" text-anchor="middle"${rot?` transform="rotate(${rot} ${cx.toFixed(1)} ${cy.toFixed(1)})"`:''}>${esc(text)}</text>`; };
+  const ab=fs*1.6;
+  s+=m([0,0,-ab],[La,0,-ab],`${cmT(La)} lang`,0,fs*1.1,0);
+  s+=m([La+ab,0,0],[La+ab,Ba,0],`${cmT(Ba)} breit`,fs*2.2,fs*0.4,-40);
+  s+=m([-ab,0,0],[-ab,0,Ha],`${cmT(Ha)} hoch`,-fs*0.6,0,-90);
+  const xs=[-ab-fs*2.5, La+k*Ba+fs*4], ys=[-(Ha+k*Ba)-fs, ab+fs*2.5];
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${xs[0].toFixed(1)} ${ys[0].toFixed(1)} ${(xs[1]-xs[0]).toFixed(1)} ${(ys[1]-ys[0]).toFixed(1)}" role="img" aria-label="Kiste ${cmT(La)} × ${cmT(Ba)} × ${cmT(Ha)}">${s}</svg>`;
+}
+// Bohrplan eines Teils: Rechteck mit allen Löchern, Masse vom linken und vom unteren Rand
+function bohrplan(R,t){
+  const L=R.loecher[t.id]||[]; const w=t.l,h=t.b;
+  const fs=Math.max(3.5,Math.max(w,h)/30), rand=fs*4.2;
+  let s=`<rect x="0" y="0" width="${w}" height="${h}" fill="#F3E2C6" stroke="#4a3a2a" stroke-width="${fs/10}"/>`;
+  // Reihenlinien (d/2 vom Rand) gestrichelt
+  const reihen=new Set(); L.forEach(p=>{ reihen.add('x'+p.x); reihen.add('y'+p.y); });
+  const istReiheX=x=>L.filter(p=>p.x===x).length>1, istReiheY=y=>L.filter(p=>p.y===y).length>1;
+  const gez=new Set();
+  L.forEach(p=>{
+    if(istReiheX(p.x)&&!gez.has('x'+p.x)){ gez.add('x'+p.x); s+=`<line x1="${p.x}" y1="0" x2="${p.x}" y2="${h}" stroke="#9A6B2F" stroke-width="${fs/12}" stroke-dasharray="${fs/2} ${fs/3}"/>`; }
+    if(istReiheY(p.y)&&!gez.has('y'+p.y)){ gez.add('y'+p.y); s+=`<line x1="0" y1="${h-p.y}" x2="${w}" y2="${h-p.y}" stroke="#9A6B2F" stroke-width="${fs/12}" stroke-dasharray="${fs/2} ${fs/3}"/>`; }
+  });
+  const r=Math.max(1.2,fs/2.4);
+  L.forEach(p=>{ const y=h-p.y; s+=`<circle cx="${p.x}" cy="${y}" r="${r}" fill="#fff" stroke="#2B2320" stroke-width="${fs/10}"/><path d="M${p.x-r*1.5},${y}h${r*3}M${p.x},${y-r*1.5}v${r*3}" stroke="#2B2320" stroke-width="${fs/12}"/>`; });
+  // Masse: x-Stellen unten, y-Stellen links (je einmal pro Wert)
+  const xs=[...new Set(L.map(p=>p.x))].sort((a,b)=>a-b), ys=[...new Set(L.map(p=>p.y))].sort((a,b)=>a-b);
+  const dichtX=xs.length>1&&Math.min(...xs.slice(1).map((x,i)=>x-xs[i]))<fs*3.2;
+  xs.forEach((x,i)=>{ const yy=h+fs*(dichtX&&i%2?2.6:1.3); s+=`<text class="t" font-size="${fs}" x="${x}" y="${yy}" text-anchor="middle" fill="#2B2320">${n(x)}</text>`; });
+  ys.forEach((y,i)=>{ s+=`<text class="t" font-size="${fs}" x="${-fs*0.5}" y="${h-y+fs*0.35}" text-anchor="end" fill="#2B2320">${n(y)}</text>`; });
+  if(xs.length) s+=`<text class="tk" font-size="${fs*0.8}" x="${w/2}" y="${h+fs*(dichtX?3.8:2.5)}" text-anchor="middle" fill="#666">mm vom linken Rand</text>`;
+  if(ys.length) s+=`<text class="tk" font-size="${fs*0.8}" transform="translate(${-fs*2.6} ${h/2}) rotate(-90)" text-anchor="middle" fill="#666">mm von unten</text>`;
+  if(!L.length) s+=`<text class="t" font-size="${fs}" x="${w/2}" y="${h/2+fs*0.35}" text-anchor="middle" fill="#666">keine Löcher – wird von aussen angeschraubt</text>`;
+  s+=`<text class="t" font-size="${fs*0.9}" x="${w/2}" y="${-fs*0.6}" text-anchor="middle" fill="#2B2320">${esc(t.name)} ${mm(w)} × ${mm(h)}</text>`;
+  const ml=rand+(ys.length?fs*1.5:0), mb=rand+(xs.length?fs*1.5:0);
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${-ml} ${-rand*0.6} ${w+ml+rand*0.4} ${h+rand*0.6+mb}" role="img" aria-label="Bohrplan ${esc(t.name)}">${s}</svg>`;
+}
+function zuschnittBild(Z){
+  const fs=Math.max(4,Math.max(Z.W,Z.H)/45);
+  let s=`<rect x="0" y="0" width="${Z.W}" height="${Z.H}" fill="#EFE3D0" stroke="#4a3a2a" stroke-width="${fs/8}"/>`;
+  Z.teile.forEach(p=>{ s+=`<rect x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" fill="#F3E2C6" stroke="#4a3a2a" stroke-width="${fs/10}"/>`;
+    const klein=p.w<fs*7||p.h<fs*2.4;
+    s+=`<text class="t" font-size="${klein?fs*0.6:fs*0.85}" x="${p.x+p.w/2}" y="${p.y+p.h/2+fs*0.3}" text-anchor="middle" fill="#2B2320"${p.h<p.w?'':` transform="rotate(-90 ${p.x+p.w/2} ${p.y+p.h/2})"`}>${esc(p.name)} ${n(p.w)}×${n(p.h)}</text>`; });
+  s+=`<text class="t" font-size="${fs}" x="${Z.W/2}" y="${-fs*0.7}" text-anchor="middle" fill="#2B2320">Platte mindestens ${mm(Z.W)} × ${mm(Z.H)}</text>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${-fs} ${-fs*2.2} ${Z.W+2*fs} ${Z.H+fs*3.2}" role="img" aria-label="Zuschnittplan">${s}</svg>`;
+}
+
+// ---------- Texte ----------
+function teileListe(R,print){
+  return R.teile.map(t=>`<li><span>${esc(t.name)}<span class="leise">${mm(t.l)} × ${mm(t.b)} × ${mm(R.d)}</span></span><span class="n">${t.n}×</span></li>`).join('');
+}
+function antwort(R){
+  const sc=R.sc, li=[];
+  if(!sc.ok){
+    li.push(`<li class="warn"><b>Zu dünn</b> für Schrauben in die Kante<span class="leise">Unter 6 mm hält keine Schraube. Leimen und mit Drahtstiften (1,2 × ${Math.ceil(3*R.d/5)*5} mm) nageln – oder dickeres Holz nehmen.</span></li>`);
+    return li.join('');
+  }
+  li.push(`<li>Schraube <b>${n(sc.dm)} × ${sc.len} mm</b><span class="leise">Holzschraube mit Senkkopf (Spax o. ä.), ${R.anzahl} Stück für die ganze Kiste</span></li>`);
+  li.push(`<li>Durchgangsloch <b>${n(sc.loch)} mm</b><span class="leise">durch das Brett bohren – die Schraube soll hier durchrutschen</span></li>`);
+  li.push(`<li>Vorbohren <b>${n(sc.vor)} mm</b><span class="leise">in die Kante, 1 mm dünner als die Schraube</span></li>`);
+  li.push(`<li>Vorbohrtiefe <b>${mm(sc.tiefe)}</b><span class="leise">Klebeband als Marke um den Bohrer – so tief, wie die Schraube hineingeht, plus 2 mm Luft</span></li>`);
+  li.push(`<li>Abstand vom Rand <b>${mm(R.d/2)}</b><span class="leise">Lochmitte genau in der Mitte der Kante${R.ecken.length===1?' – pro Ecke nur eine Schraube, dazu leimen':''}</span></li>`);
+  return li.join('');
+}
+function rechnung(R){
+  const d=R.d, sc=R.sc, z=[];
+  if(R.innen) z.push(`<p>Innen ${cmT(R.Li)} × ${cmT(R.Bi)} × ${cmT(R.Hi)} → aussen: Länge ${n(R.Li)} + 2 × ${n(d)} = <span class="f">${mm(R.La)}</span>, Breite ${n(R.Bi)} + 2 × ${n(d)} = <span class="f">${mm(R.Ba)}</span>, Höhe ${n(R.Hi)} + ${n(d)} = <span class="f">${mm(R.Ha)}</span>.</p>`);
+  else z.push(`<p>Aussen ${cmT(R.La)} × ${cmT(R.Ba)} × ${cmT(R.Ha)} → innen bleibt: Länge ${n(R.La)} − 2 × ${n(d)} = <span class="f">${mm(R.Li)}</span>, Breite ${n(R.Ba)} − 2 × ${n(d)} = <span class="f">${mm(R.Bi)}</span>, Tiefe ${n(R.Ha)} − ${n(d)} = <span class="f">${mm(R.Hi)}</span>.</p>`);
+  z.push(R.unter?`<p>Boden unter den Wänden: Wandhöhe ${n(R.Ha)} − ${n(d)} = <span class="f">${mm(R.hw)}</span>, Boden so gross wie die Kiste aussen.</p>`:`<p>Boden zwischen den Wänden: Wände volle Höhe <span class="f">${mm(R.hw)}</span>, Boden ${n(R.La)} − 2 × ${n(d)} = ${n(R.Li)} und ${n(R.Ba)} − 2 × ${n(d)} = ${n(R.Bi)} → <span class="f">${mm(R.Li)} × ${mm(R.Bi)}</span>.</p>`);
+  z.push(R.langAussen?`<p>Längsseiten aussen: Stirnseiten ${n(R.Ba)} − 2 × ${n(d)} = <span class="f">${mm(R.Bi)}</span> lang.</p>`:`<p>Stirnseiten aussen: Längsseiten ${n(R.La)} − 2 × ${n(d)} = <span class="f">${mm(R.Li)}</span> lang.</p>`);
+  if(sc.ok){
+    z.push(`<p>Schraube: Kante ${n(d)} mm dick → <span class="f">${n(sc.dm)} mm</span> dick (die Kante soll gut doppelt so dick sein wie die Schraube). Länge 3 × ${n(d)} = ${n(sc.ziel)} → nächste Länge <span class="f">${sc.len} mm</span>: ${n(d)} mm durch das Brett, ${n(sc.ein)} mm in der Kante.</p>`);
+    z.push(`<p>Bohrer: Durchgangsloch = Schraube <span class="f">${n(sc.loch)} mm</span>. Vorbohren = ${n(sc.dm)} − 1 = <span class="f">${n(sc.vor)} mm</span>. Tiefe = ${sc.len} − ${n(d)} + 2 = <span class="f">${mm(sc.tiefe)}</span>.</p>`);
+    z.push(`<p>Rand: ${n(d)} : 2 = <span class="f">${mm(d/2)}</span>. Schrauben etwa alle 7 cm, am Ende ${mm(R.e)} vom Rand – so kreuzen sich Boden- und Eckschrauben nicht.</p>`);
+    const bs=R.bodenStellen, teil=R.unter?'durch den Boden':'durch die Wände';
+    z.push(`<p>Schrauben: 4 Ecken × ${R.ecken.length} = ${4*R.ecken.length}, ${teil} 2 × ${bs.lang.length} + 2 × ${bs.kurz.length} = ${2*bs.lang.length+2*bs.kurz.length}${bs.deckel?`, Deckelleisten 2 × ${bs.deckel.length} = ${2*bs.deckel.length}`:''} → <span class="f">${R.anzahl} Schrauben</span>.</p>`);
+  }
+  return z.join('');
+}
+function material(R){
+  const sc=R.sc, m=[];
+  const Z=R.zuschnitt;
+  m.push(`<li><span>${esc(MATERIAL[S.mat].name)} ${n(R.d)} mm<span class="leise">Platte mindestens ${mm(Z.W)} × ${mm(Z.H)} (mit Sägeschnitt)</span></span><span class="n">1×</span></li>`);
+  if(sc.ok) m.push(`<li><span>Holzschrauben ${n(sc.dm)} × ${sc.len} mm<span class="leise">Senkkopf, ein paar Reserve</span></span><span class="n">${R.anzahl}×</span></li>`);
+  else m.push(`<li><span>Drahtstifte 1,2 × ${Math.ceil(3*R.d/5)*5} mm</span><span class="n">1 Päckchen</span></li>`);
+  m.push(`<li><span>Holzleim (weiss)</span><span class="n">1×</span></li>`);
+  if(sc.ok) m.push(`<li><span>Bohrer ${n(sc.loch)} mm und ${n(sc.vor)} mm<span class="leise">dazu Senker, Klebeband als Tiefenmarke</span></span><span class="n">je 1×</span></li>`);
+  m.push(`<li><span>Winkel, Bleistift, Massstab, Körner</span><span class="n"></span></li>`);
+  m.push(`<li><span>Schraubzwingen oder ein Helfer</span><span class="n">2×</span></li>`);
+  m.push(`<li><span>Schleifpapier 120 und Schleifklotz</span><span class="n">1×</span></li>`);
+  return m.join('');
+}
+function schritte(R){
+  const sc=R.sc, d=R.d, s=[];
+  const aussenName=R.langAussen?'Längsseiten':'Stirnseiten', innenName=R.langAussen?'Stirnseiten':'Längsseiten';
+  s.push(`Alle Teile nach der Liste zuschneiden oder zuschneiden lassen. Auf jedes Teil mit Bleistift den Namen schreiben (Innenseite) und die Masse nachmessen.`);
+  s.push(`Kanten mit Schleifklotz und 120er-Papier glätten – nur brechen, nicht abrunden, sonst stimmen die Masse nicht mehr.`);
+  s.push(sc.ok?`Löcher anzeichnen wie auf den Bohrplänen: mit dem Winkel eine Linie ${mm(d/2)} vom Rand ziehen, darauf die Stellen abmessen, jeden Punkt ankörnen.`:`Nagelstellen anzeichnen wie auf den Plänen: mit dem Winkel eine Linie ${mm(d/2)} vom Rand ziehen, darauf die Stellen markieren.`);
+  if(sc.ok){
+    s.push(`Durchgangslöcher bohren: Bohrer ${n(sc.loch)} mm, ein Restholz unterlegen, damit nichts ausreisst. Wer mag, senkt die Löcher aussen leicht an, dann liegt der Schraubenkopf bündig.`);
+    s.push(`Die ${aussenName} an die ${innenName} halten: Kante bündig, mit Zwinge festklemmen oder ein Helfer hält. Durch das fertige Loch mit dem ${n(sc.vor)}-mm-Bohrer in die Kante vorbohren, ${mm(sc.tiefe)} tief (Klebeband am Bohrer). Gerade halten, sonst kommt die Schraube seitlich heraus!`);
+    s.push(`Leim dünn auf die Kante, Teile wieder zusammenhalten, Schrauben ${n(sc.dm)} × ${sc.len} mm eindrehen. Akkuschrauber auf kleine Stufe, nicht überdrehen – im ${S.mat==='mdf'?'MDF':'Holz'} reisst sonst das Gewinde aus.`);
+    s.push(`Zuerst den Rahmen aus den vier Wänden bauen. Winkel prüfen: beide Diagonalen gleich lang? Dann ${R.unter?'den Rahmen auf den Boden stellen, bündig ausrichten und von unten durch den Boden in die Wandkanten schrauben':'den Boden von unten in den Rahmen schieben, bündig ausrichten und durch die Wände in die Bodenkante schrauben'} – wieder erst vorbohren, dann leimen, dann schrauben.`);
+  } else {
+    s.push(`Leim dünn auf die Kante, Teile mit Zwingen zusammenhalten und mit den Drahtstiften nageln (Stift leicht schräg, hält besser). Zuerst der Rahmen aus den vier Wänden, Diagonalen prüfen, dann der Boden.`);
+  }
+  if(S.deckel==='ja') s.push(`Deckel: die zwei Leisten hochkant unter den Deckel leimen und von oben anschrauben, ${mm(d+1)} vom Rand – so passt der Deckel mit 1 mm Luft in die Kiste und rutscht nicht weg.`);
+  s.push(`Leimreste sofort mit feuchtem Lappen abwischen, eine Stunde trocknen lassen. Zum Schluss alles schleifen, Ecken leicht brechen – und wer will, ölt oder bemalt die Kiste.`);
+  return s.map(t=>`<li>${t}</li>`).join('');
+}
+
+// ---------- Alles neu zeichnen ----------
+function zeichnen(){
+  const R=rechnen();
+  $('mass-hinweis').textContent=S.mass==='innen'?'Innenmasse: so gross ist der Platz in der Kiste. Die Seite rechnet die Holzdicke dazu.':'Aussenmasse: so gross ist die fertige Kiste von aussen. Innen bleibt etwas weniger Platz.';
+  $('mat-hinweis').textContent=MATERIAL[S.mat].tipp;
+  $('bau-hinweis').textContent=(S.boden==='unter'?'Boden unter den Wänden: einfach zu bauen, der Boden ist so gross wie die Kiste und man schraubt von unten hinauf. ':'Boden zwischen den Wänden: der Boden ist von aussen nicht sichtbar, man schraubt durch die Wände in die Bodenkante. ')+(S.aussen==='lang'?'Längsseiten aussen: die langen Bretter decken die Stirnseiten ab.':'Stirnseiten aussen: die kurzen Bretter decken die Längsseiten ab.');
+  if(R.fehler){
+    $('warnung').textContent=R.fehler; $('warnung').hidden=false;
+    ['teile','antwort','rechnung','material','schritte','bild','plaene','zuschnitt','druck'].forEach(id=>{ $(id).innerHTML=''; });
+    $('plaene-hinweis').textContent=''; $('zuschnitt-hinweis').textContent='';
+    return;
+  }
+  $('warnung').hidden=true;
+  $('teile').innerHTML=teileListe(R);
+  $('antwort').innerHTML=antwort(R);
+  $('rechnung').innerHTML=rechnung(R);
+  $('material').innerHTML=material(R);
+  $('schritte').innerHTML=schritte(R);
+  $('bild').innerHTML=kistenBild(R);
+  const plaene=R.teile.filter(t=>t.id!=='leiste').map(t=>`<figure><figcaption>${esc(t.name)} <span class="leise">${t.n}× · ${mm(t.l)} × ${mm(t.b)}</span></figcaption>${bohrplan(R,t)}</figure>`).join('');
+  $('plaene').innerHTML=plaene;
+  $('plaene-hinweis').textContent=`Jedes Kreuz ist ${R.sc.ok?'eine Schraube':'ein Drahtstift'}. Die Zahlen sind Millimeter vom linken und vom unteren Rand des Teils. ${R.sc.ok?`Reihe ${mm(R.d/2)} vom Rand: die Schraube trifft so genau die Mitte der ${mm(R.d)} dicken Kante.`:''}`;
+  $('zuschnitt').innerHTML=zuschnittBild(R.zuschnitt);
+  $('zuschnitt-hinweis').textContent=`So könnten die Teile auf der Platte liegen (${KERF} mm Sägeschnitt eingerechnet). Beim Massivholz-Brett nimmst du eine Brettbreite, die zur Wandhöhe passt.`;
+  // Druck: Seite 1 Plan, Seite 2 Bohrpläne und Zuschnitt
+  const titel=`Kiste ${cmT(R.La)} × ${cmT(R.Ba)} × ${cmT(R.Ha)} · ${MATERIAL[S.mat].name} ${n(R.d)} mm`;
+  $('druck').innerHTML=`<div class="seite"><h1>${esc(titel)}</h1><div class="bild">${kistenBild(R)}</div>
+    <h2>Teile zuschneiden</h2><table><tr><th>Teil</th><th>Anzahl</th><th>Länge</th><th>Breite</th><th>Dicke</th></tr>${R.teile.map(t=>`<tr><td>${esc(t.name)}</td><td>${t.n}×</td><td>${mm(t.l)}</td><td>${mm(t.b)}</td><td>${mm(R.d)}</td></tr>`).join('')}</table>
+    <h2>Schrauben und Bohren</h2><ul class="antwort">${antwort(R)}</ul>
+    <h2>So wird gerechnet</h2><div class="rechnung">${rechnung(R)}</div>
+    <p class="fuss">Schritt für Schritt · Kisten-Planer</p></div>
+    <div class="seite"><h2>Bohrpläne – Millimeter vom linken und vom unteren Rand</h2><div class="plaene">${plaene}</div>
+    <h2>Zuschnitt</h2><div class="bild">${zuschnittBild(R.zuschnitt)}</div>
+    <h2>So baust du die Kiste</h2><ol class="schritte">${schritte(R)}</ol>
+    <p class="fuss">Schritt für Schritt · Kisten-Planer</p></div>`;
+}
+
+// ---------- Bedienung ----------
+function dickenChips(){
+  $('dicken').innerHTML=MATERIAL[S.mat].dicken.map(x=>`<button type="button" class="chip" data-d="${x}" aria-pressed="${x===S.d}">${n(x)} mm</button>`).join('');
+  $('dicken').querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{ S.d=+c.dataset.d; felder(); speichern(); zeichnen(); }));
+}
+function felder(){
+  ['l','b','h','d'].forEach(k=>{ $(k).value=S[k]; });
+  document.querySelectorAll('[data-g]').forEach(g=>{ const k=g.dataset.g; g.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.v===S[k]))); });
+  dickenChips();
+}
+document.querySelectorAll('[data-g]').forEach(g=>{ const k=g.dataset.g; g.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{ S[k]=c.dataset.v; if(k==='mat'&&!MATERIAL[S.mat].dicken.includes(S.d)) S.d=MATERIAL[S.mat].dicken.includes(8)?8:MATERIAL[S.mat].dicken[1]; felder(); speichern(); zeichnen(); })); });
+['l','b','h','d'].forEach(k=>{ const inp=$(k), [lo,hi]=GRENZEN[k];
+  const setzen=v=>{ if(isNaN(v)) v=S[k]; S[k]=Math.min(hi,Math.max(lo,Math.round(v*10)/10)); inp.value=S[k]; if(k==='d') dickenChips(); speichern(); zeichnen(); };
+  inp.addEventListener('change',()=>setzen(parseFloat(String(inp.value).replace(',','.'))));
+  inp.addEventListener('input',()=>{ const v=parseFloat(String(inp.value).replace(',','.')); if(!isNaN(v)&&v>=lo&&v<=hi){ S[k]=v; if(k==='d') dickenChips(); speichern(); zeichnen(); } });
+});
+$('drucken').addEventListener('click',()=>window.print());
+felder(); zeichnen();
+})();
+</script>
+</body>
+</html>
