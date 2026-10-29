@@ -70,6 +70,8 @@ svg .masst{font-family:Fredoka,Nunito,sans-serif;font-weight:600;fill:#9A6B2F}
 .chip.ico{width:44px;padding:0;display:inline-grid;place-items:center}
 .chip svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round;display:block}
 .chip svg .f{fill:currentColor;fill-opacity:.3}
+.chip svg .a{stroke:var(--acc);stroke-width:2}.chip svg .a.f{fill:var(--acc);fill-opacity:1;stroke-width:1.2}
+.seg{align-items:center;gap:4px}.seg .gt{font-size:13px;font-weight:700;color:var(--muted);margin-right:2px}
 .chip i{display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid rgba(0,0,0,.35);vertical-align:-2px;margin-right:6px}
 .einheit{font-size:13px;color:var(--muted);align-self:center;margin-left:2px}
 .flaeche{position:relative;background:var(--papier);border:2px solid var(--line);border-radius:14px;overflow:hidden}
@@ -146,21 +148,21 @@ h2 .leise{color:var(--muted);font-size:14px;font-family:Nunito,sans-serif}
 <div class="links">
   <section class="karte buehne">
     <div class="werkzeug">
-      <div class="chips" role="group" aria-label="Masse" data-g="mass">
-        <button type="button" class="chip ico" data-v="aussen" title="Aussenmass: die ganze Kiste" aria-label="Aussenmass"><svg viewBox="0 0 26 26" aria-hidden="true"><rect class="f" x="6" y="10" width="14" height="11" rx="1"/><path d="M3 5h20M3 3v4M23 3v4"/></svg></button>
-        <button type="button" class="chip ico" data-v="innen" title="Innenmass: was hineinpasst" aria-label="Innenmass"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M3 7v15h20V7h-3v12H6V7z"/><path d="M8 14h10M8 12v4M18 12v4"/></svg></button>
+      <div class="chips seg" role="group" aria-label="Mass" data-g="mass"><span class="gt">Mass</span>
+        <button type="button" class="chip ico" data-v="aussen" title="Aussen" aria-label="Aussenmass"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M3 11v12h20V11h-3v9H6v-9z"/><path class="a" d="M3 6h20M3 3.5v5M23 3.5v5"/></svg></button>
+        <button type="button" class="chip ico" data-v="innen" title="Innen" aria-label="Innenmass"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M3 6v17h20V6h-3v14H6V6z"/><path class="a" d="M6 13h14M6 10.5v5M20 10.5v5"/></svg></button>
       </div>
-      <div class="chips" role="group" aria-label="Boden" data-g="boden">
-        <button type="button" class="chip ico" data-v="unter" title="Boden unter den Wänden" aria-label="Boden unter den Wänden"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M3 18h20v4H3zM3 5h3.5v13H3zM19.5 5H23v13h-3.5z"/></svg></button>
-        <button type="button" class="chip ico" data-v="zwischen" title="Boden zwischen den Wänden" aria-label="Boden zwischen den Wänden"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M3 5h3.5v17H3zM19.5 5H23v17h-3.5zM6.5 18h13v4h-13z"/></svg></button>
+      <div class="chips seg" role="group" aria-label="Boden" data-g="boden"><span class="gt">Boden</span>
+        <button type="button" class="chip ico" data-v="unter" title="Unter den Wänden" aria-label="Boden unter den Wänden"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M3 4h3.5v14H3zM19.5 4H23v14h-3.5z"/><path class="a f" d="M3 18h20v4H3z"/></svg></button>
+        <button type="button" class="chip ico" data-v="zwischen" title="Zwischen den Wänden" aria-label="Boden zwischen den Wänden"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M3 4h3.5v18H3zM19.5 4H23v18h-3.5z"/><path class="a f" d="M6.5 18h13v4h-13z"/></svg></button>
       </div>
-      <div class="chips" role="group" aria-label="Ecken" data-g="aussen">
-        <button type="button" class="chip ico" data-v="lang" title="Längsseiten aussen" aria-label="Längsseiten aussen"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M2 6h22v3.5H2zM2 16.5h22V20H2zM2 9.5h3.5v7H2zM20.5 9.5H24v7h-3.5z"/></svg></button>
-        <button type="button" class="chip ico" data-v="kurz" title="Stirnseiten aussen" aria-label="Stirnseiten aussen"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M2 6h3.5v14H2zM20.5 6H24v14h-3.5zM5.5 6h15v3.5h-15zM5.5 16.5h15V20h-15z"/></svg></button>
+      <div class="chips seg" role="group" aria-label="Ecken" data-g="aussen"><span class="gt">Ecken</span>
+        <button type="button" class="chip ico" data-v="lang" title="Längsseiten aussen" aria-label="Längsseiten aussen"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M2 9.5h3.5v7H2zM20.5 9.5H24v7h-3.5z"/><path class="a f" d="M2 6h22v3.5H2zM2 16.5h22V20H2z"/></svg></button>
+        <button type="button" class="chip ico" data-v="kurz" title="Stirnseiten aussen" aria-label="Stirnseiten aussen"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M5.5 6h15v3.5h-15zM5.5 16.5h15V20h-15z"/><path class="a f" d="M2 6h3.5v14H2zM20.5 6H24v14h-3.5z"/></svg></button>
       </div>
-      <div class="chips" role="group" aria-label="Deckel" data-g="deckel">
-        <button type="button" class="chip ico" data-v="nein" title="Ohne Deckel" aria-label="Ohne Deckel"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M4 10v12h18V10h-3v9H7v-9z"/></svg></button>
-        <button type="button" class="chip ico" data-v="ja" title="Loser Deckel mit Leisten" aria-label="Loser Deckel mit Leisten"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M4 12v10h18V12h-3v7H7v-7z"/><path class="f" d="M3 5h20v3H3z"/><path d="M8 8v3M18 8v3"/></svg></button>
+      <div class="chips seg" role="group" aria-label="Deckel" data-g="deckel"><span class="gt">Deckel</span>
+        <button type="button" class="chip ico" data-v="nein" title="Ohne" aria-label="Ohne Deckel"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M4 11v11h18V11h-3v8H7v-8z"/><path d="M4 6.5h18" stroke-dasharray="2 2.5"/></svg></button>
+        <button type="button" class="chip ico" data-v="ja" title="Mit Deckel" aria-label="Mit Deckel"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M4 11v11h18V11h-3v8H7v-8z"/><path class="a f" d="M3 4h20v3H3z"/></svg></button>
       </div>
       <div class="chips" role="group" aria-label="Holz" data-g="mat">
         <button type="button" class="chip" data-v="sperrholz"><i style="background:#E6C48F"></i>Sperrholz</button>
@@ -357,38 +359,45 @@ const P=(x,y,z)=>[x+K*y, -(z+K*y)];
 const pt=(x,y,z)=>{ const [a,b]=P(x,y,z); return `${a.toFixed(1)},${b.toFixed(1)}`; };
 const pts=a=>a.map(p=>pt(...p)).join(' ');
 const poly=(p,fill,lw)=>`<polygon points="${pts(p)}" fill="${fill}" stroke="#4a3a2a" stroke-width="${lw}" stroke-linejoin="round"/>`;
-// Der Kistenkörper, gleich für Bildschirm und Druck: o.lw Kanten, o.thin Fugen, o.sr Schraubenkopf
-function kistenKoerper(R,o){
-  const {La,Ba,Ha,unter,langAussen}=R, lw=o.lw, th=o.thin;
-  const d=Math.max(0.5,Math.min(R.d,La/2-1,Ba/2-1,Ha-1));      // bei zu dickem Holz trotzdem eine Kiste zeichnen
-  const st=`fill="none" stroke="#4a3a2a" stroke-width="${th}"`;
+// Jedes Brett ist ein Quader q=[x0,x1,y0,y1,z0,z1] (mm). dick = Achse der Brettdicke (0 x, 1 y, 2 z), innen = man sieht die Innenseite.
+// Löcher {p:[x,y,z]} gehen durch die Dicke; gezeichnet werden sie auf der sichtbaren Fläche.
+const FARBE={flaeche:['#C99A5B','#E9C99A','#EFD3A8'],kante:['#DDB57E','#F3DDB7','#F7E6C8'],innen:['#B98A50','#D9B98A','#E3C59A']};
+function bretter(R,d){
+  const {La,Ba,Ha,unter,langAussen}=R, z0=unter?d:0, L=R.loecher||{}, B=[];
+  const xl0=langAussen?0:d, xl1=langAussen?La:La-d, yk0=langAussen?d:0, yk1=langAussen?Ba-d:Ba;
+  const lang=L.lang||[], kurz=L.kurz||[];
+  B.push(unter?{q:[0,La,0,Ba,0,d],dick:2,loch:(L.boden||[]).map(h=>[h.x,h.y])}:{q:[d,La-d,d,Ba-d,0,d],dick:2,loch:[]});
+  [[0,true],[Ba-d,false]].forEach(([y,vorn])=>B.push({q:[xl0,xl1,y,y+d,z0,Ha],dick:1,innen:!vorn,loch:lang.map(h=>[xl0+h.x,z0+h.y])}));
+  [[0,true],[La-d,false]].forEach(([x,links])=>B.push({q:[x,x+d,yk0,yk1,z0,Ha],dick:0,innen:links,loch:kurz.map(h=>[yk0+h.x,z0+h.y])}));
+  return B;
+}
+// Malreihenfolge: was weiter hinten liegt, zuerst. Getrennte Quader sind auf einer Achse getrennt, und die sagt, welcher vorne ist.
+function hinter(a,b){ const A=a.q,B=b.q;
+  if(A[1]<=B[0]) return true; if(B[1]<=A[0]) return false;
+  if(A[2]>=B[3]) return true; if(B[2]>=A[3]) return false;
+  return A[5]<=B[4]; }
+function bretterBild(B,o){
+  const rest=[...B], reihe=[];
+  while(rest.length){ const i=rest.findIndex(b=>!rest.some(c=>c!==b&&hinter(c,b))); reihe.push(rest.splice(i<0?0:i,1)[0]); }
   let s='';
-  // Boden innen (sichtbar von oben), dann die vier Wände von oben, Vorderseite, rechte Seite
-  const zb=d;                                         // Oberkante des Bodens
-  s+=poly([[d,d,zb],[La-d,d,zb],[La-d,Ba-d,zb],[d,Ba-d,zb]],'#F1DFC2',lw);
-  // Innenflächen der Wände (hinten und links sichtbar)
-  s+=poly([[d,Ba-d,zb],[La-d,Ba-d,zb],[La-d,Ba-d,Ha],[d,Ba-d,Ha]],'#D9B98A',lw);   // hintere Innenwand
-  s+=poly([[d,d,zb],[d,Ba-d,zb],[d,Ba-d,Ha],[d,d,Ha]],'#CBA772',lw);               // linke Innenwand
-  // Vorderwand und rechte Wand aussen
-  s+=poly([[0,0,0],[La,0,0],[La,0,Ha],[0,0,Ha]],'#E9C99A',lw);
-  s+=poly([[La,0,0],[La,Ba,0],[La,Ba,Ha],[La,0,Ha]],'#C99A5B',lw);
-  // Oberkanten der Wände (Ringe)
-  s+=`<path d="M${pt(0,0,Ha)} L${pt(La,0,Ha)} L${pt(La,Ba,Ha)} L${pt(0,Ba,Ha)} Z M${pt(d,d,Ha)} L${pt(La-d,d,Ha)} L${pt(La-d,Ba-d,Ha)} L${pt(d,Ba-d,Ha)} Z" fill="#EFD3A8" fill-rule="evenodd" stroke="#4a3a2a" stroke-width="${lw}"/>`;
-  // Stossfugen in den Ecken oben: zeigen, welche Wand aussen steht
-  let f='';
-  if(langAussen){ [0,Ba-d].forEach(y=>{ f+=`M${pt(d,y,Ha)} L${pt(d,y+d,Ha)} M${pt(La-d,y,Ha)} L${pt(La-d,y+d,Ha)}`; }); }
-  else { [0,La-d].forEach(x=>{ f+=`M${pt(x,d,Ha)} L${pt(x+d,d,Ha)} M${pt(x,Ba-d,Ha)} L${pt(x+d,Ba-d,Ha)}`; }); }
-  s+=`<path d="${f}" ${st}/>`;
-  // Stossfuge vorne rechts: bei Längsseiten aussen läuft die Vorderwand bis zur Ecke, sonst sieht man die Stirnseite vorne
-  if(langAussen) s+=`<path d="M${pt(La,0,0)} L${pt(La,0,Ha)} M${pt(La,d,0)} L${pt(La,d,Ha)}" ${st}/>`;
-  else s+=`<path d="M${pt(La-d,0,0)} L${pt(La-d,0,Ha)}" ${st}/>`;
-  // Bodenkante unter den Wänden
-  if(unter) s+=`<path d="M${pt(0,0,d)} L${pt(La,0,d)} L${pt(La,Ba,d)}" ${st} stroke-dasharray="${th*4} ${th*3}"/>`;
-  // Schrauben andeuten: Ecken auf der Vorderwand (nur bei Längsseiten aussen) und rechts
-  const sk=(x,y,z)=>{ const [a,b]=P(x,y,z); return `<circle cx="${a.toFixed(1)}" cy="${b.toFixed(1)}" r="${o.sr}" fill="#fff" stroke="#4a3a2a" stroke-width="${th}"/>`; };
-  (R.ecken||[]).forEach(z=>{ if(langAussen){ s+=sk(d/2,0,z)+sk(La-d/2,0,z); } else { s+=sk(La,d/2,z)+sk(La,Ba-d/2,z); } });
-  if(!unter&&R.bodenStellen){ R.bodenStellen.lang.forEach(x=>{ s+=sk(x,0,d/2); }); R.bodenStellen.kurz.forEach(y=>{ s+=sk(La,y,d/2); }); }
+  reihe.forEach(b=>{
+    const [x0,x1,y0,y1,z0,z1]=b.q, pal=a=>(a!==b.dick?FARBE.kante:b.innen?FARBE.innen:FARBE.flaeche)[a];
+    s+=poly([[x1,y0,z0],[x1,y1,z0],[x1,y1,z1],[x1,y0,z1]],pal(0),o.lw);
+    s+=poly([[x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1]],pal(1),o.lw);
+    s+=poly([[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]],pal(2),o.lw);
+    // Löcher: Kreis in der Fläche, schräg gesehen
+    const a=b.dick, fl=[x1,y0,z1][a], r=o.sr;
+    b.loch.forEach(([u,v])=>{ const ring=[];
+      for(let k=0;k<16;k++){ const w=k/16*2*Math.PI, cu=u+r*Math.cos(w), cv=v+r*Math.sin(w);
+        ring.push(a===0?[fl,cu,cv]:a===1?[cu,fl,cv]:[cu,cv,fl]); }
+      s+=`<polygon points="${pts(ring)}" fill="#fff" stroke="#4a3a2a" stroke-width="${o.thin}"/>`; });
+  });
   return s;
+}
+// Der Kistenkörper, gleich für Bildschirm und Druck: o.lw Kanten, o.thin Lochrand, o.sr Lochradius
+function kistenKoerper(R,o){
+  const d=Math.max(0.5,Math.min(R.d,R.La/2-1,R.Ba/2-1,R.Ha-1));      // bei zu dickem Holz trotzdem eine Kiste zeichnen
+  return bretterBild(bretter(R,d),o);
 }
 // Druckbild mit Massen
 function kistenBild(R){
@@ -440,10 +449,9 @@ function liveBild(R,A){
   if(S.deckel==='ja'){
     zl=Ha+deckelLuft(R); const lb=R.leisteB||20, x0=d+1, x1=La-d-1, lw=1.3*u;
     let g=`<path d="M${pt(0,0,Ha)} L${pt(0,0,zl)} M${pt(La,0,Ha)} L${pt(La,0,zl)} M${pt(La,Ba,Ha)} L${pt(La,Ba,zl)}" fill="none" stroke="#8a7a6a" stroke-width="${u}" stroke-dasharray="${4*u} ${3*u}"/>`;
-    if(x1>x0) [Ba-2*d-1,d+1].forEach(y=>{ g+=poly([[x0,y,zl-lb],[x1,y,zl-lb],[x1,y,zl],[x0,y,zl]],'#E9C99A',lw)+poly([[x1,y,zl-lb],[x1,y+d,zl-lb],[x1,y+d,zl],[x1,y,zl]],'#C99A5B',lw); });
-    g+=poly([[0,0,zl],[La,0,zl],[La,0,zl+d],[0,0,zl+d]],'#E9C99A',lw);
-    g+=poly([[La,0,zl],[La,Ba,zl],[La,Ba,zl+d],[La,0,zl+d]],'#C99A5B',lw);
-    g+=poly([[0,0,zl+d],[La,0,zl+d],[La,Ba,zl+d],[0,Ba,zl+d]],'#EFD3A8',lw);
+    const DB=[{q:[0,La,0,Ba,zl,zl+d],dick:2,loch:((R.loecher||{}).deckel||[]).map(h=>[h.x,h.y])}];
+    if(x1>x0) [d+1,Ba-2*d-1].forEach(y=>DB.push({q:[x0,x1,y,y+d,zl-lb,zl],dick:1,loch:[]}));
+    g+=bretterBild(DB,{lw,thin:u,sr:Math.max(3*u,La/120)});
     if(wahl==='deckel') g+=`<polygon points="${pts([[0,0,zl],[La,0,zl],[La,Ba,zl],[La,Ba,zl+d],[0,Ba,zl+d],[0,0,zl+d]])}" fill="none" stroke="${OR}" stroke-width="${3*u}" stroke-linejoin="round"/>`;
     s+=`<g data-t="deckel">${g}<title>Deckel</title></g>`;
   }
