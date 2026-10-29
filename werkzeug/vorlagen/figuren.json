@@ -3633,6 +3633,62 @@
    "k": 1
   },
   {
+   "id": "berg-v-sil-gipfel-wald",
+   "name": "Felsgipfel mit Wald – Silhouette",
+   "welt": "Berge",
+   "datei": "berg-v-sil-gipfel-wald.png",
+   "k": 1
+  },
+  {
+   "id": "berg-v-sil-schneegipfel-tannen",
+   "name": "Gipfel mit Tannen – Silhouette",
+   "welt": "Berge",
+   "datei": "berg-v-sil-schneegipfel-tannen.png",
+   "k": 1
+  },
+  {
+   "id": "berg-v-sil-felsmassiv",
+   "name": "Felsmassiv – Silhouette",
+   "welt": "Berge",
+   "datei": "berg-v-sil-felsmassiv.png",
+   "k": 1
+  },
+  {
+   "id": "berg-v-sil-abendrot",
+   "name": "Alpenkette – Silhouette",
+   "welt": "Berge",
+   "datei": "berg-v-sil-abendrot.png",
+   "k": 1
+  },
+  {
+   "id": "berg-v-sil-eisgipfel",
+   "name": "Eisgipfel – Silhouette",
+   "welt": "Berge",
+   "datei": "berg-v-sil-eisgipfel.png",
+   "k": 1
+  },
+  {
+   "id": "berg-v-sil-schneekette",
+   "name": "Zackige Bergkette – Silhouette",
+   "welt": "Berge",
+   "datei": "berg-v-sil-schneekette.png",
+   "k": 1
+  },
+  {
+   "id": "berg-v-sil-nebelberge",
+   "name": "Doppelgipfel – Silhouette",
+   "welt": "Berge",
+   "datei": "berg-v-sil-nebelberge.png",
+   "k": 1
+  },
+  {
+   "id": "berg-v-sil-gruener-gipfel",
+   "name": "Spitzer Gipfel – Silhouette",
+   "welt": "Berge",
+   "datei": "berg-v-sil-gruener-gipfel.png",
+   "k": 1
+  },
+  {
    "id": "stadt-zuerich",
    "name": "Zürich",
    "welt": "Städte",
@@ -3889,6 +3945,160 @@
    "name": "Venedig (Comic)",
    "welt": "Städte",
    "datei": "stadt-c-venedig.png"
+  },
+  {
+   "id": "stadt-oc-berlin",
+   "name": "Berlin – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-berlin.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-frankfurt",
+   "name": "Frankfurt – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-frankfurt.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-newyork",
+   "name": "New York – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-newyork.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-chicago",
+   "name": "Chicago – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-chicago.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-sydney",
+   "name": "Sydney – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-sydney.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-toronto",
+   "name": "Toronto – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-toronto.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-boston",
+   "name": "Boston – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-boston.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-peking",
+   "name": "Peking – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-peking.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-singapur",
+   "name": "Singapur – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-singapur.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-moskau",
+   "name": "Moskau – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-moskau.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-dubai",
+   "name": "Dubai – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-dubai.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-paris",
+   "name": "Paris – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-paris.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-duesseldorf",
+   "name": "Düsseldorf – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-duesseldorf.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-montreal",
+   "name": "Montreal – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-montreal.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-miami",
+   "name": "Miami – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-miami.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-philadelphia",
+   "name": "Philadelphia – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-philadelphia.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-breslau",
+   "name": "Breslau – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-breslau.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-panorama",
+   "name": "Stadtpanorama – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-panorama.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-grossstadt-1",
+   "name": "Grossstadt 1 – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-grossstadt-1.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-grossstadt-2",
+   "name": "Grossstadt 2 – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-grossstadt-2.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-grossstadt-3",
+   "name": "Grossstadt 3 – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-grossstadt-3.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-oc-grossstadt-4",
+   "name": "Grossstadt 4 – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-oc-grossstadt-4.png",
+   "k": 1
   },
   {
    "id": "fig-herz-pfeil-c",
