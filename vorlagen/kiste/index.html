@@ -44,10 +44,15 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 .antwort .leise{color:var(--muted);font-size:14px;display:block;margin-top:2px}
 .warn{color:var(--warn)}
 .hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
-.rechnung{margin:0;padding:12px 14px;border-radius:14px;background:var(--surface2);border:1px solid var(--line);font-size:15px;line-height:1.5}
-.rechnung p{margin:0 0 6px}.rechnung p:last-child{margin:0}
-.rechnung .f{font:600 18px/1.3 Fredoka,Nunito,sans-serif;color:var(--acc)}
-.rechnung .leise{color:var(--muted);font-size:13px}
+.rechnung{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px;align-items:start}
+.rg{padding:8px 12px 10px;border-radius:14px;background:var(--surface2);border:1px solid var(--line)}
+.rg h4{display:flex;align-items:center;gap:8px;margin:0 0 4px;font:600 16px Fredoka,Nunito,sans-serif}
+.rg h4 svg{width:36px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round;color:var(--muted)}
+.rg h4 svg .f{fill:currentColor;fill-opacity:.3}
+.rz{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:baseline;padding:4px 0;border-top:1px dashed var(--line);font-size:14px}
+.rz .rf{color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.rz b{font:600 17px/1.2 Fredoka,Nunito,sans-serif;color:var(--acc);white-space:nowrap;min-width:64px;text-align:right}
+.rz.total{border-top:2px solid var(--line)}.rz.total b{font-size:20px}
 .schritte{margin:0;padding-left:22px;font-size:15px;line-height:1.45}
 .schritte li{margin-bottom:6px}
 .material{margin:0;padding:0;list-style:none}
@@ -125,15 +130,17 @@ h2 .leise{color:var(--muted);font-size:14px;font-family:Nunito,sans-serif}
   #druck .bild svg{max-height:75mm;box-shadow:none;border:1px solid #ccc}
   #druck table{border-collapse:collapse;width:100%;font-size:12px}
   #druck td,#druck th{border-bottom:1px solid #ccc;padding:3px 6px;text-align:left}
-  #druck .rechnung{background:#fff;border-color:#ccc;color:#000;font-size:12px}
-  #druck .rechnung .f{color:#000;font-size:14px}
+  #druck .rechnung{grid-template-columns:1fr 1fr 1fr;gap:5px}
+  #druck .rg{background:#fff;border-color:#ccc;color:#000;padding:3px 7px 4px;border-radius:6px}
+  #druck .rg h4{font-size:12px;margin:0 0 1px}#druck .rg h4 svg{width:26px;height:17px;color:#555}
+  #druck .rz{font-size:10px;padding:1px 0;gap:5px}#druck .rz .rf{color:#555}#druck .rz b{color:#000;font-size:11px;min-width:0}#druck .rz.total b{font-size:12px}
   #druck .schritte{font-size:11px;line-height:1.35}
   #druck .plaene{grid-template-columns:1fr 1fr 1fr;gap:6px}
   #druck .plaene svg{box-shadow:none;border:1px solid #ccc}
   #druck .plaene figcaption{font-size:12px}
   #druck .fuss{font-size:10px;color:#666;margin-top:8px}
   #druck .antwort{gap:3px}#druck .antwort li{font-size:12px}#druck .antwort b{font-size:15px;color:#000}#druck .antwort .leise{font-size:11px}
-  #druck .bild svg{max-height:62mm}#druck .plaene svg{max-height:44mm}#druck .seite .bild+h2{margin-top:6px}#druck .zu svg{max-height:42mm}#druck .schritte li{margin-bottom:2px}#druck .rechnung p{margin:0 0 2px}
+  #druck .bild svg{max-height:62mm}#druck .plaene svg{max-height:44mm}#druck .seite .bild+h2{margin-top:6px}#druck .zu svg{max-height:42mm}#druck .schritte li{margin-bottom:2px}
 }
 </style>
 </head>
@@ -673,24 +680,62 @@ function antwort(R){
     li.push(R.zu==='magnet'?`<li>Magnet <b>⌀ 6 × 3 mm</b> · 2× · Bohrer ⌀ 6 mm, 3 mm tief</li>`:`<li>Sturmhaken <b>${R.haken.Lk} mm</b> mit Öse · vorbohren ⌀ 1,5 mm</li>`); }
   return li.join('');
 }
+// Rechnung in Gruppen: Bild + Wort, dann je Zeile Name · Rechnung · Ergebnis
+const RECH_BILD={
+  masse:'<path class="f" d="M6 11h32v16H6z"/><path d="M6 5h32M6 2.5v5M38 2.5v5"/>',
+  bretter:'<path class="f" d="M4 5h36v5H4zM4 12.5h36v5H4zM4 20h24v5H4z"/>',
+  winkel:'<path class="f" d="M6 4h32v22H6z"/><path d="M6 4l32 22M38 4L6 26"/>',
+  nut:'<path class="f" d="M4 4h12v22H4zM28 4h12v22H28z"/><path class="f" d="M13 9h18v3H13z"/>',
+  scharnier:'<path class="f" d="M4 8h16v14H4zM24 8h16v14H24z"/><path d="M22 5v20" stroke-width="3"/><circle cx="12" cy="15" r="1.5"/><circle cx="32" cy="15" r="1.5"/>'};
 function rechnung(R){
-  const d=R.d, sc=R.sc, z=[];
-  if(R.innen) z.push(`<p>Innen ${cmT(R.Li)} × ${cmT(R.Bi)} × ${cmT(R.Hi)} → aussen: Länge ${n(R.Li)} + 2 × ${n(d)} = <span class="f">${mm(R.La)}</span>, Breite ${n(R.Bi)} + 2 × ${n(d)} = <span class="f">${mm(R.Ba)}</span>, Höhe ${n(R.Hi)} + ${n(d)} = <span class="f">${mm(R.Ha)}</span>.</p>`);
-  else z.push(`<p>Aussen ${cmT(R.La)} × ${cmT(R.Ba)} × ${cmT(R.Ha)} → innen bleibt: Länge ${n(R.La)} − 2 × ${n(d)} = <span class="f">${mm(R.Li)}</span>, Breite ${n(R.Ba)} − 2 × ${n(d)} = <span class="f">${mm(R.Bi)}</span>, Tiefe ${n(R.Ha)} − ${n(d)} = <span class="f">${mm(R.Hi)}</span>.</p>`);
-  z.push(R.unter?`<p>Boden unter den Wänden: Wandhöhe ${n(R.Ha)} − ${n(d)} = <span class="f">${mm(R.hw)}</span>, Boden so gross wie die Kiste aussen.</p>`:`<p>Boden zwischen den Wänden: Wände volle Höhe <span class="f">${mm(R.hw)}</span>, Boden ${n(R.La)} − 2 × ${n(d)} = ${n(R.Li)} und ${n(R.Ba)} − 2 × ${n(d)} = ${n(R.Bi)} → <span class="f">${mm(R.Li)} × ${mm(R.Bi)}</span>.</p>`);
-  z.push(R.langAussen?`<p>Längsseiten aussen: Stirnseiten ${n(R.Ba)} − 2 × ${n(d)} = <span class="f">${mm(R.Bi)}</span> lang.</p>`:`<p>Stirnseiten aussen: Längsseiten ${n(R.La)} − 2 × ${n(d)} = <span class="f">${mm(R.Li)}</span> lang.</p>`);
+  const d=R.d, sc=R.sc, D=n(d);
+  const z=(name,formel,erg,cls='')=>`<div class="rz${cls}"><span>${name}</span><span class="rf">${formel}</span><b>${erg}</b></div>`;
+  const g=(bild,titel,zeilen)=>`<section class="rg"><h4><svg viewBox="0 0 44 30" aria-hidden="true">${RECH_BILD[bild]||FAKT_BILD[bild]}</svg>${titel}</h4>${zeilen.join('')}</section>`;
+  const G=[];
+  G.push(R.innen
+    ?g('masse','Aussen',[z('Länge',`${n(R.Li)} + 2 × ${D}`,mm(R.La)),z('Breite',`${n(R.Bi)} + 2 × ${D}`,mm(R.Ba)),z('Höhe',`${n(R.Hi)} + ${D}`,mm(R.Ha))])
+    :g('masse','Innen',[z('Länge',`${n(R.La)} − 2 × ${D}`,mm(R.Li)),z('Breite',`${n(R.Ba)} − 2 × ${D}`,mm(R.Bi)),z('Tiefe',`${n(R.Ha)} − ${D}`,mm(R.Hi))]));
+  const kurzN=R.langAussen?'Stirnseite':'Längsseite', kurzL=R.langAussen?R.Bi:R.Li, kurzF=R.langAussen?`${n(R.Ba)} − 2 × ${D}`:`${n(R.La)} − 2 × ${D}`;
+  G.push(g('bretter','Bretter',[
+    z('Wandhöhe',R.unter?`${n(R.Ha)} − ${D}`:'',mm(R.hw)),
+    z(kurzN,kurzF,mm(kurzL)),
+    ...(R.unter?[z('Boden','= aussen',mm(R.La)),z('','',mm(R.Ba))]:[z('Boden',`${n(R.La)} − 2 × ${D}`,mm(R.Li)),z('',`${n(R.Ba)} − 2 × ${D}`,mm(R.Bi))])]));
   if(sc.ok){
-    z.push(`<p>Schraube: Kante ${n(d)} mm dick → <span class="f">${n(sc.dm)} mm</span> dick (die Kante soll gut doppelt so dick sein wie die Schraube). Länge 3 × ${n(d)} = ${n(sc.ziel)} ${sc.kurz?`→ kürzer, damit sie nicht oben aus der ${mm(R.hw)} hohen Wand kommt:`:sc.laengste?'→ längste Schraube dieser Dicke:':'→ nächste Länge'} <span class="f">${sc.len} mm</span>: ${n(d)} mm durch das Brett, ${n(sc.ein)} mm in der Kante.</p>`);
-    z.push(`<p>Bohrer: Durchgangsloch = Schraube <span class="f">${n(sc.loch)} mm</span>. Vorbohren = ${n(sc.dm)} − 1 = <span class="f">${n(sc.vor)} mm</span>. Senken = 2 × ${n(sc.dm)} = <span class="f">${n(sc.senk)} mm</span> (so breit wie der Kopf). Tiefe = ${sc.len} − ${n(d)} + 2 = <span class="f">${mm(sc.tiefe)}</span>.</p>`);
-    z.push(`<p>Rand: ${n(d)} : 2 = <span class="f">${mm(d/2)}</span>. Am Ende <span class="f">${mm(R.e)}</span> vom Rand (mindestens 5 × ${n(sc.dm)} = ${mm(5*sc.dm)}) – so spaltet nichts, und Boden- und Eckschrauben kreuzen sich nicht. Dazwischen gleichmässig, etwa 12,5 × ${n(sc.dm)} = <span class="f">${mm(Math.round(R.ab))}</span> (10–15 × Schraube).</p>`);
-    z.push(`<p>Winkel: Diagonale innen √(${n(R.Li)}² + ${n(R.Bi)}²) = <span class="f">${mm(R.diag)}</span> – beide gleich lang, dann ist die Kiste rechtwinklig.</p>`);
-    const bs=R.bodenStellen, teil=R.unter?'durch den Boden':'durch die Wände';
-    const Sch=R.scharnier;
-    if(Sch) z.push(`<p>Scharnier: Lappen höchstens so breit wie das Holz, ${n(d)} mm → <span class="f">${Sch.Lh} × ${Sch.Wh} mm</span> (Lappen ${n(Sch.lap)} mm). Schräubchen kürzer als ${n(d)} mm → <span class="f">2 × ${Sch.ss} mm</span>.${R.zu==='magnet'?` Magnet ⌀ 6 mm: Kante ${n(d)} − 6 = ${n(d-6)} mm Holz bleibt.`:''}</p>`);
-    if(R.nut){ const N=R.nut; z.push(`<p>Nut: ${n(d)} ÷ 2 → <span class="f">${n(N.tn)} mm</span> tief, ${n(N.t)} mm breit, ${n(N.a)} mm unter der Kante. Deckel ${n(R.La)} − ${n(d)} + ${n(N.tn)} − 1 = <span class="f">${mm(N.Ld)}</span>, ${n(R.Ba)} − 2 × ${n(d)} + 2 × ${n(N.tn)} − 1 = <span class="f">${mm(N.Bd)}</span>. Stirnseite rechts ${n(R.hw)} − ${n(N.a)} − ${n(N.t)} = <span class="f">${mm(N.hT)}</span>.</p>`); }
-    z.push(`<p>Schrauben: 4 Ecken × ${R.ecken.length} = ${4*R.ecken.length}, ${teil} 2 × ${bs.lang.length} + 2 × ${bs.kurz.length} = ${2*bs.lang.length+2*bs.kurz.length}${bs.deckel?`, Deckelleisten 2 × ${bs.deckel.length} = ${2*bs.deckel.length}`:''} → <span class="f">${R.anzahl} Schrauben</span>.</p>`);
+    const pfeil=sc.kurz?`↓ ⚠ ${mm(R.hw)}`:sc.laengste?'↓ max.':'↑';
+    G.push(g('schraube','Schraube',[
+      z('Dicke',`${D} ≥ 2 × ${n(sc.dm)}`,mm(sc.dm)),
+      z('Länge',`3 × ${D} = ${n(sc.ziel)} ${pfeil}`,mm(sc.len)),
+      z('In der Kante',`${sc.len} − ${D}`,mm(sc.ein))]));
+    G.push(g('vor','Bohrer',[
+      z('Durchgang','= Schraube',`⌀ ${n(sc.loch)} mm`),
+      z('Vorbohren',`${n(sc.dm)} − 1`,`⌀ ${n(sc.vor)} mm`),
+      z('Senken',`2 × ${n(sc.dm)}`,`⌀ ${n(sc.senk)} mm`),
+      z('Tiefe',`${sc.len} − ${D} + 2`,mm(sc.tiefe))]));
+    G.push(g('rand','Abstände',[
+      z('Kante',`${D} : 2`,mm(d/2)),
+      z('Ende',`≥ 5 × ${n(sc.dm)} = ${n(5*sc.dm)}`,mm(R.e)),
+      z('Dazwischen',`12,5 × ${n(sc.dm)}`,`≈ ${mm(Math.round(R.ab))}`)]));
   }
-  return z.join('');
+  G.push(g('winkel','Winkel',[z('Diagonale',`√(${n(R.Li)}² + ${n(R.Bi)}²)`,mm(R.diag))]));
+  if(sc.ok){
+    const Sch=R.scharnier;
+    if(Sch){ const zs=[z('Scharnier',`Lappen ${n(Sch.lap)} ≤ ${D}`,`${Sch.Lh} × ${Sch.Wh} mm`),z('Schräubchen',`< ${D}`,`2 × ${Sch.ss} mm`)];
+      if(R.zu==='magnet') zs.push(z('Holz hinter Magnet',`${D} − 6`,mm(d-6)));
+      G.push(g('scharnier','Scharnier',zs)); }
+    if(R.nut){ const N=R.nut;
+      G.push(g('nut','Nut',[
+        z('Tiefe',d/2>5?`${D} : 2, max. 5`:`${D} : 2`,mm(N.tn)),z('Breite','',mm(N.t)),z('Unter Kante','',mm(N.a)),
+        z('Deckel',`${n(R.La)} − ${D} + ${n(N.tn)} − 1`,mm(N.Ld)),
+        z('',`${n(R.Ba)} − 2 × ${D} + 2 × ${n(N.tn)} − 1`,mm(N.Bd)),
+        z('Stirnseite rechts',`${n(R.hw)} − ${n(N.a)} − ${n(N.t)}`,mm(N.hT))])); }
+    const bs=R.bodenStellen;
+    const zs=[z('Ecken',`4 × ${R.ecken.length}`,String(4*R.ecken.length)),
+      z(R.unter?'Boden':'Wände',`2 × ${bs.lang.length} + 2 × ${bs.kurz.length}`,String(2*bs.lang.length+2*bs.kurz.length))];
+    if(bs.deckel) zs.push(z('Deckelleisten',`2 × ${bs.deckel.length}`,String(2*bs.deckel.length)));
+    zs.push(z('Total','',`${R.anzahl} Stück`,' total'));
+    G.push(g('schraube','Anzahl',zs));
+  }
+  return G.join('');
 }
 function material(R){
   const sc=R.sc, m=[];
