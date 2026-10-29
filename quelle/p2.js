@@ -1272,7 +1272,7 @@ SCREENS.sammlung=(app,params={})=>{ let niv=+params.niveau||0; const alle=!!para
 function schnellBand(){ if(!SCHULE) return ''; const p=uPolicy(); if(p&&p.mode==='closed') return '';
   const fs=fsStand(); const n=FUEHRERSCHEINE.filter(f=>fs[f.id]&&fs[f.id].gesehen).length;
   return `<div class="v3-schnell"><button class="v3-schnell-btn zeit" data-act="restzeit"><span class="sym" aria-hidden="true">⏱️</span><span class="txt"><b>Ich habe noch 10 Minuten</b><small>Kurze Projekte für die Restzeit</small></span></button>
-    <button class="v3-schnell-btn fs" data-act="fuehrerschein"><span class="sym" aria-hidden="true">🪪</span><span class="txt"><b>Werkzeug-Führerschein</b><small>${n?n+' von '+FUEHRERSCHEINE.length+' gemacht':'Schnitzen, Sägen, Heissleim'}</small></span></button></div>`; }
+    ${FS_AN?`<button class="v3-schnell-btn fs" data-act="fuehrerschein"><span class="sym" aria-hidden="true">🪪</span><span class="txt"><b>Werkzeug-Führerschein</b><small>${n?n+' von '+FUEHRERSCHEINE.length+' gemacht':'Schnitzen, Sägen, Heissleim'}</small></span></button>`:''}</div>`; }
 
 /* ---- «Ich habe noch 10 Minuten»: alle Videos mit zeit ≤ gewählte Minuten, über alle Verfahren, nach Klasse gefiltert ---- */
 const RESTZEIT_WAHL=[5,10,15,20];
@@ -1297,6 +1297,7 @@ SCREENS.restzeit=(app,params={})=>{ let min=RESTZEIT_WAHL.includes(+params.min)?
 /* ---- Werkzeug-Führerschein: kleines Quiz vor gefährlichen Werkzeugen ----
    Frage: {f, a:[3 Antworten], r: Index der richtigen, e: einfacher Text für 1.–2. Klasse (optional)}.
    Stand in S.settings.fuehrerschein[id] = {datum, gesehen} – bleibt auf dem Gerät wie die Klasse. */
+const FS_AN=false;                                                       // vorerst ausgeblendet: keine Kachel, kein Hinweis im Video
 const FUEHRERSCHEINE=[
  {id:'schnitzen',titel:'Schnitzmesser',emoji:'🔪',farbe:'#EEF3E2',regex:/schnitz|messer/i,fragen:[
    {f:'In welche Richtung schnitzt du?',e:'Wohin schnitzt du?',a:['Immer vom Körper weg','Zu mir hin, so sehe ich besser','Egal, Hauptsache schnell'],r:0},
@@ -1321,7 +1322,7 @@ const fsStand=()=>S.settings.fuehrerschein||(S.settings.fuehrerschein={});
 const fsVon=id=>FUEHRERSCHEINE.find(f=>f.id===id);
 const fsGesehen=id=>!!(fsStand()[id]&&fsStand()[id].gesehen);
 /* Welche Führerscheine braucht dieses Video? Sucht in Techniken, Material und Titel. */
-function fsNoetig(v){ if(!SCHULE||!v) return []; const txt=[v.title,...(v.techniken||[]),...(v.material||[]),...(v.material||[]).map(matName)].filter(Boolean).join(' '); return FUEHRERSCHEINE.filter(f=>f.regex.test(txt)); }
+function fsNoetig(v){ if(!FS_AN||!SCHULE||!v) return []; const txt=[v.title,...(v.techniken||[]),...(v.material||[]),...(v.material||[]).map(matName)].filter(Boolean).join(' '); return FUEHRERSCHEINE.filter(f=>f.regex.test(txt)); }
 function fsHinweisHtml(v){ const offen=fsNoetig(v).filter(f=>!fsGesehen(f.id)); if(!offen.length) return '';
   return `<div class="inner fs-hinweis" role="note"><span class="sym" aria-hidden="true">🪪</span><span class="grow"><b>Zuerst den Führerschein machen</b><span>${esc(offen.map(f=>f.titel).join(' und '))}</span></span>${offen.map(f=>`<button class="fs-los" data-act="fuehrerschein" data-id="${f.id}">${f.emoji} ${esc(f.titel)} →</button>`).join('')}</div>`; }
 SCREENS.fuehrerschein=(app,params={})=>{ const f=fsVon(params.id); const zur=params.zurueck||null; const einfach=SCHULE&&S.settings.klasse&&S.settings.klasse<=2;
