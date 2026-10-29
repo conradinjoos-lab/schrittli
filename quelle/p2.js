@@ -115,8 +115,6 @@ const WERKZEUGE=[['','✂️','Vorlagen-Generator','Formen drucken','#FBEDE4','H
   ['zaehlmuster/','🧵','Zählmuster','Kreuzstich und Weben','#FDEFF4','Eigenes Muster auf dem Raster zeichnen – für Kreuzstich und Weben, mit Klassenbreite, A4 oder A3.'],
   ['maschenprobe/','🧶','Maschen-Planer','Kappe, Stirnband, Armband','#EEF3FB','Häkeln oder stricken: Kappe, Stirnband, Armband und mehr. Messen, Maschenprobe zählen – die Seite sagt, wie viele Maschen und Reihen.'],
   ['klasse/','⏱️','Klassen-Werkzeuge','Timer, Aufräumen, Lärmampel','#FFF1E6','Arbeitszeit-Timer, Aufräum-Countdown und Lärmampel – gross für den Beamer.'],
-  ['fachwoerter/','🔤','Fachwort-Karten','Masche, Kettfaden …','#EDF7F6','Fachwörter mit Bild – als Karten oder Plakat, A4 oder A3.'],
-  ['drucksachen/','🖨️','Verfahrenspass & Etiketten','Zum Drucken','#F3F0FA','Verfahrenspass pro Kind und Werk-Etiketten mit Name, Verfahren und Datum, A4 oder A3.'],
   ['bohren/','🕳️','Bohrvorlage','Löcher im Raster oder am Rand','#EEF2EE','Plattengrösse, Bohrer, Abstand und Rand eingeben, Raster, Waben oder nur am Rand – Bohrvorlage mit Kreuzen in echter Grösse drucken, auch über mehrere Blätter.'],
   ['stromkreis/','🔋','Stromkreis-Baukasten','Batterie, LED, Motor, Widerstand rechnen','#FFF4D6','Batterie oder Netzgerät (1,5–12 V), Schalter, LEDs mit ihrer Spannung, Leuchtband, Lichterkette, drei Motortypen und Widerstände mit Farbringen auf die Fläche holen – die Seite zeigt Plus und Minus, was leuchtet und dreht, und die Rechenbox rechnet Schritt für Schritt den Widerstand aus (Rechentrick: × 50).'],
   ['mechanik/','⚙️','Mechanik-Planer','Zahnräder, Nocken, Holzauto, Windrad, Kreisel','#EEF0FA','Zahnräder mit Ziel (i = 2 bis 9, Zwischenrad, zweistufig, Modul 1–6), Grundplatte mit Achsplan und Kurbelarm, Räder mit Kurbel, Schneckennocke oder Doppelnocke und Stössel, sechs Holzauto-Formen mit Achse in Loch oder Nut, Windrad aus Papier oder PET-Flasche, Kreisel mit Spirale, Benham, Newton-Farben oder Papierturbo – rechnet die Masse vor und druckt alle Teile in echter Grösse.'],
@@ -357,7 +355,7 @@ function homeSchule(app,rid){ const r=RAEUME.find(x=>x.id===(rid||S.settings.rau
   app.innerHTML=`<div class="v3${schriftNormal()?'':' caps'}"><div class="v3-in">
     ${v3Kopf(`<button class="v3-rund" data-act="raeume" aria-label="${SCHULE?'Anderer Raum':'Zurück'}">←</button>`)}
     <div class="v3-leiste"><div class="v3-schalter" role="group" aria-label="Raum">${RAEUME.map(x=>`<button class="${x===r?'an':''}" data-act="raum" data-id="${x.id}">${x.name}</button>`).join('')}</div>
-      <div class="v3-schalter v3-klassen" role="group" aria-label="Klasse"${SCHULE?'':' hidden'}>${STUFEN.map(s=>`<button class="${s===k?'an':''}" data-act="klasse" data-k="${s}" aria-label="${s}. Klasse">${s}.</button>`).join('')}</div><button class="v3-pill kat-knopf" data-act="katalog">🔍 Finde deine Idee</button></div>
+      <div class="v3-schalter v3-klassen" role="group" aria-label="Klasse"${SCHULE?'':' hidden'}>${STUFEN.map(s=>`<button class="${s===k?'an':''}" data-act="klasse" data-k="${s}" aria-label="${s}. Klasse">${s}.</button>`).join('')}</div></div>
     <div class="v3-titel"><h1 class="v3-h1">${r.name}</h1>${w?`<button class="v3-weiter" data-act="weiter" data-id="${w.v.id}"><span class="bild" style="background:${soft(w.a)}"><img src="${GRAFIK}${w.a.id}.webp" alt=""></span><span class="txt"><small>Weiter mit</small><b>${esc(w.a.name)} · Schritt ${w.schritt}</b></span><span class="play" aria-hidden="true">▶</span></button>`:''}</div>
     ${k||!SCHULE?'':'<p class="v3-sub">Tipp oben auf deine Klasse – dann siehst du nur, was zu dir passt.</p>'}
     <div class="v3-themen">${themen.map(themaKachel).join('')+sammlungKachel(r)||`<div class="v3-leer">${figur('nachdenken')}Für diese Klasse ist hier noch nichts da.</div>`}</div>
@@ -365,7 +363,7 @@ function homeSchule(app,rid){ const r=RAEUME.find(x=>x.id===(rid||S.settings.rau
     ${werkzeugKacheln()}
     ${v3Fuss(false)}</div></div>`;
   wire(app,{ raeume:()=>go(SCHULE?'raum':'home'), raum:b=>{ if(!SCHULE){ go('zimmer',{r:b.dataset.id}); return; } S.settings.raum=b.dataset.id; save(); render(); }, klasse:b=>{ S.settings.klasse=+b.dataset.k; save(); render(); },
-    area:b=>go('area',{id:b.dataset.id}), weiter:b=>go('player',{videoId:b.dataset.id}), katalog:()=>go('katalog'), sammlung:()=>go('sammlung'), lehrer:()=>go('lehrer'), werkzeuge:()=>go('werkzeuge'), gallery:()=>go('gallery'),
+    area:b=>go('area',{id:b.dataset.id}), weiter:b=>go('player',{videoId:b.dataset.id}), sammlung:()=>go('sammlung'), lehrer:()=>go('lehrer'), werkzeuge:()=>go('werkzeuge'), gallery:()=>go('gallery'),
     restzeit:()=>go('restzeit'), fuehrerschein:()=>go('fuehrerschein') });
 }
 SCREENS.zimmer=(app,{r})=>homeSchule(app,r);   // Familie: Handarbeit oder Werkraum aus dem Regal
@@ -1202,48 +1200,14 @@ async function verbindungSetzen(art,token){
   else await swVerbinden(token);
   klHolen(); }
 
-/* ============================== Finde deine Idee: Suche, Filter, Sortierung – und die Papierflieger-Sammlung ==============================
-   Beides sind Ansichten im Werkstatt-Look (v3). Die Klassenwahl gilt wie überall in der Schule; mit «Alle Klassen» lässt sie sich hier aufheben. */
-const normTxt=s=>String(s||'').toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').normalize('NFD').replace(/[̀-ͯ]/g,'');
+/* ============================== Papierflieger-Sammlung (Werkstatt-Look v3) ==============================
+   Die Klassenwahl gilt wie überall in der Schule; mit «Alle» lässt sie sich hier aufheben. */
 const fuerKlasse=(v,alle)=>alle||!SCHULE||!S.settings.klasse||(v.stufen||[]).includes(S.settings.klasse);
-const KAT_NIVEAU=[[1,'Leicht'],[2,'Mittel'],[3,'Anspruchsvoll']];
-const KAT_ART=[['video','Video'],['bilder','Foto-Anleitung'],['aufgabe','Mit Aufgabe']];
-const KAT_ZEIT=[[5,'5 Min.'],[10,'10 Min.'],[15,'15 Min.']];
-const KAT_SORT=[['thema','Nach Thema'],['az','A bis Z'],['niveau','Leicht zuerst']];
-/* Eine Zeile wie auf der Themenseite – mit dem Thema als zweite Zeile, weil hier alles durcheinander steht. */
+/* Eine Zeile wie auf der Themenseite, für die Papierflieger-Liste. */
 function katZeile(v,{thema=true}={}){ const pr=prSchule(v); const th=thumbOf(v); const a=areaOf(v.areaId);
   const meta=[thema&&a?a.name:'',v.source.type==='bilder'?'Foto-Anleitung':'',(v.steps||[]).length?v.steps.length+' Schritte':'',v.zeit?v.zeit+' Min.':'',v.task&&v.task.text&&v.task.deliverable!=='keine'?'Aufgabe':''].filter(Boolean).join(' · ');
   return `<button class="v3-lektion" data-act="video" data-id="${v.id}"><span class="th">${th?`<img src="${th}" alt="" loading="lazy">`:''}<i aria-hidden="true">${v.source.type==='bilder'?'📷':'▶'}</i></span><span class="grow"><b>${esc(v.title)}</b><span class="v3-meta">${meta}</span></span>${niveauHtml(v)}<span class="v3-badge ${pr.done?'fertig':'offen'}" aria-label="${pr.done?'fertig':'noch offen'}">${pr.done?'✓':'▶'}</span></button>`; }
-function katSuchtext(v){ if(!v._such){ const a=areaOf(v.areaId); v._such=normTxt([v.title,v.gruppe,a&&a.name,(v.techniken||[]).join(' '),(v.material||[]).map(matName).join(' '),v.task&&v.task.text].filter(Boolean).join(' ')); } return v._such; }
-function katTreffer(f){ const q=normTxt(f.q).split(/\s+/).filter(Boolean);
-  return S.videos.filter(v=>fuerKlasse(v,f.alle)&&(!f.niv||(+v.niveau||2)===f.niv)&&(!f.art||(f.art==='aufgabe'?!!(v.task&&v.task.text&&v.task.deliverable!=='keine'):f.art==='bilder'?v.source.type==='bilder':v.source.type!=='bilder'))&&(!f.zeit||(v.zeit&&v.zeit<=f.zeit))&&q.every(w=>katSuchtext(v).includes(w))); }
-function katSortiert(vs,sort){ const az=(a,b)=>a.title.localeCompare(b.title,'de'); if(sort==='az') return vs.slice().sort(az); if(sort==='niveau') return vs.slice().sort((a,b)=>((+a.niveau||2)-(+b.niveau||2))||az(a,b)); return vs.slice().sort((a,b)=>{ const x=areaOf(a.areaId),y=areaOf(b.areaId); return (S.areas.indexOf(x)-S.areas.indexOf(y))||((+a.niveau||2)-(+b.niveau||2))||az(a,b); }); }
-function katListe(f){ const vs=katSortiert(katTreffer(f),f.sort); if(!vs.length) return {n:0,html:`<div class="v3-leer">${figur('nachdenken')}Dazu finden Bibo &amp; Fila nichts.<br><button class="v3-pill" data-act="leeren">Suche leeren</button></div>`};
-  if(f.sort!=='thema') return {n:vs.length,html:vs.map(v=>katZeile(v)).join('')};
-  const gr=new Map(); vs.forEach(v=>{ if(!gr.has(v.areaId)) gr.set(v.areaId,[]); gr.get(v.areaId).push(v); });
-  return {n:vs.length,html:[...gr].map(([aid,g])=>{ const a=areaOf(aid)||{name:'Weitere',color:'#9AA3AE'}; return `<h2 class="v3-niv" style="--h:${soft(a)};--d:#1C4A63"><span>${g.length}</span>${esc(a.name)}</h2>${g.map(v=>katZeile(v,{thema:false})).join('')}`; }).join('')}; }
 const chips=(act,wahl,akt,alle='Alle')=>`<div class="v3-chips" role="group">${alle?`<button class="${akt?'':'an'}" data-act="${act}" data-v="" aria-pressed="${!akt}">${alle}</button>`:''}${wahl.map(([w,t])=>`<button class="${akt===w?'an':''}" data-act="${act}" data-v="${w}" aria-pressed="${akt===w}">${t}</button>`).join('')}</div>`;
-SCREENS.katalog=(app,params={})=>{ const f={q:params.q||'',niv:+params.niv||0,art:params.art||'',zeit:+params.zeit||0,sort:params.sort||'thema',alle:!!params.alle}; const k=S.settings.klasse;
-  app.innerHTML=`<div class="v3${schriftNormal()?'':' caps'} kat"><div class="v3-in">
-    ${v3Kopf('<button class="v3-rund gross" data-act="back" aria-label="Zurück">←</button>',`<div class="v3-thema-titel"><small>Suchen und stöbern</small><h1>Finde deine Idee</h1></div>`)}
-    <label class="kat-suche"><span aria-hidden="true">🔍</span><input type="search" id="kat-q" placeholder="Was möchtest du machen? Igel, Perlen, falten …" value="${esc(f.q)}" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search"><button type="button" data-act="leeren" aria-label="Suche leeren"${f.q?'':' hidden'}>✕</button></label>
-    <div class="kat-filter">
-      <div class="kat-reihe"><span class="v3-meta">Wie schwer</span>${chips('niv',KAT_NIVEAU,f.niv)}</div>
-      <div class="kat-reihe"><span class="v3-meta">Was</span>${chips('art',KAT_ART,f.art)}</div>
-      <div class="kat-reihe"><span class="v3-meta">Zeit bis</span>${chips('zeit',KAT_ZEIT,f.zeit,'Egal')}</div>
-      <div class="kat-reihe"><span class="v3-meta">Sortieren</span>${chips('sort',KAT_SORT,f.sort,'')}</div>
-      ${SCHULE&&k?`<div class="kat-reihe"><span class="v3-meta">Klasse</span><div class="v3-chips" role="group"><button class="${f.alle?'':'an'}" data-act="alle" data-v="" aria-pressed="${!f.alle}">${k}. Klasse</button><button class="${f.alle?'an':''}" data-act="alle" data-v="1" aria-pressed="${f.alle}">Alle Klassen</button></div></div>`:''}
-    </div>
-    <p class="v3-sub kat-zahl" id="kat-zahl" role="status"></p>
-    <div class="v3-liste" id="kat-liste"></div>
-    ${v3Fuss()}</div></div>`;
-  const zeichnen=()=>{ const {n,html}=katListe(f); $('#kat-liste',app).innerHTML=html; $('#kat-zahl',app).textContent=n?(n===1?'Eine Idee':n+' Ideen')+(f.q?' zu «'+f.q+'»':''):''; const x=$('[data-act=leeren]',$('.kat-suche',app)); if(x) x.hidden=!f.q; Object.assign(view.params,f); };
-  const inp=$('#kat-q',app); inp.addEventListener('input',()=>{ f.q=inp.value; zeichnen(); }); inp.addEventListener('keydown',e=>{ if(e.key==='Enter') inp.blur(); });
-  const setz=(key,b)=>{ const v=b.dataset.v; f[key]=key==='niv'||key==='zeit'?+v||0:key==='alle'?!!v:v; $$(`[data-act=${key}]`,app).forEach(x=>{ const an=x.dataset.v===v; x.classList.toggle('an',an); x.setAttribute('aria-pressed',String(an)); }); zeichnen(); };
-  zeichnen();
-  wire(app,{ back:()=>go('home'), leeren:()=>{ f.q=''; inp.value=''; zeichnen(); inp.focus(); }, niv:b=>setz('niv',b), art:b=>setz('art',b), zeit:b=>setz('zeit',b), sort:b=>setz('sort',b), alle:b=>setz('alle',b),
-    video:b=>go('player',{videoId:b.dataset.id}), gallery:()=>go('gallery'), lehrer:()=>go('lehrer'), werkzeuge:()=>go('werkzeuge') });
-};
 /* ---------- Papierflieger: alle Modelle aus dem Thema Falten, von leicht bis knifflig ---------- */
 const istFlieger=v=>v.areaId==='falten'&&(/^flieger-/.test(v.id)||/papierflieger/i.test(v.title));
 const fliegerVideos=(alle=false)=>S.videos.filter(v=>istFlieger(v)&&fuerKlasse(v,alle));
