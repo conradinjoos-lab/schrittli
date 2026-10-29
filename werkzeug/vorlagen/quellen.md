@@ -9,7 +9,7 @@ Quelle jeder Grafik: `https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg
 
 **Openclipart** (CC0 1.0, https://creativecommons.org/publicdomain/zero/1.0/): keine Nennung nötig, Autor und Seite trotzdem aufgeführt.
 
-**Vecteezy** (https://de.vecteezy.com): elf Bilder (zehn Berge, eine Bärentatze) aus den Favoriten der Schule, kostenlos geladen unter der **Vecteezy Free License** (https://www.vecteezy.com/licensing-agreement), nicht CC0: Nennung nötig, Bilder nicht einzeln weiterverkaufen oder als eigene Grafik anbieten. Nennung: «Grafiken von Vecteezy.com», Autor je Bild in der Tabelle. Das Foto «Alpen im Abendrot» wurde für Schrittli freigestellt (Himmel entfernt). Aus acht dieser Bergbilder wurden zusätzlich schwarze Silhouetten abgeleitet (IDs `berg-v-sil-…`); sie stehen unter derselben Lizenz und nennen denselben Autor. Mit dem Pro-Konto der Schule kamen neun Schweizer Skylines (IDs `stadt-v-…`) und drei Bergfotos dazu, aus denen nur schwarze Silhouetten abgeleitet wurden; sie stehen unter der **Vecteezy Pro-Lizenz** (keine Nennung nötig, Autor trotzdem aufgeführt).
+**Vecteezy** (https://de.vecteezy.com): elf Bilder (zehn Berge, eine Bärentatze) aus den Favoriten der Schule, kostenlos geladen unter der **Vecteezy Free License** (https://www.vecteezy.com/licensing-agreement), nicht CC0: Nennung nötig, Bilder nicht einzeln weiterverkaufen oder als eigene Grafik anbieten. Nennung: «Grafiken von Vecteezy.com», Autor je Bild in der Tabelle. Das Foto «Alpen im Abendrot» wurde für Schrittli freigestellt (Himmel entfernt). Aus acht dieser Bergbilder wurden zusätzlich schwarze Silhouetten abgeleitet (IDs `berg-v-sil-…`); sie stehen unter derselben Lizenz und nennen denselben Autor. Mit dem Pro-Konto der Schule kamen zwölf Schweizer Skylines (IDs `stadt-v-…`) und drei Bergfotos dazu, aus denen nur schwarze Silhouetten abgeleitet wurden; sie stehen unter der **Vecteezy Pro-Lizenz** (keine Nennung nötig, Autor trotzdem aufgeführt).
 
 Alle übrigen Quellen sind frei nutzbar (CC0 oder CC-BY mit Nennung); nichts stammt von Flaticon.
 
@@ -344,6 +344,17 @@ Dazu kommen neun Schweizer Skylines und Wahrzeichen von Vecteezy (Pro-Lizenz, ID
 | Lausanne – Skyline | stadt-v-lausanne | https://de.vecteezy.com/vektorkunst/42343238 | Marco Livolsi | Vecteezy Pro-Lizenz, Nennung «Vecteezy.com» |
 | St. Gallen – Stiftskirche | stadt-v-stgallen | https://de.vecteezy.com/vektorkunst/163322 | misfitblue | Vecteezy Pro-Lizenz, Nennung «Vecteezy.com» |
 | Schweizer Städte – Skyline | stadt-v-schweiz | https://de.vecteezy.com/vektorkunst/38513444 | Igor Sorokin | Vecteezy Pro-Lizenz, Nennung «Vecteezy.com» |
+| Basel – Skyline | stadt-v-basel | https://de.vecteezy.com/vektorkunst/17403569 | Igor Sorokin | Vecteezy Pro-Lizenz, Nennung «Vecteezy.com» |
+| Lugano – Skyline | stadt-v-lugano | https://de.vecteezy.com/vektorkunst/65102765 | Igor Sorokin | Vecteezy Pro-Lizenz, Nennung «Vecteezy.com» |
+| Luzern – Kapellbrücke | stadt-v-luzern-kapellbruecke | https://de.vecteezy.com/vektorkunst/2935496 | smashingstocks | Vecteezy Pro-Lizenz, Nennung «Vecteezy.com» |
+
+Basel, Lugano und die Kapellbrücke kamen später dazu (Skript `vz5_sil.py` im Arbeitsordner): bei Lugano die Sonne hinter den Häusern entfernt, bei der Kapellbrücke Himmel, Wasser und runder Bildrand weggeschnitten.
+
+Dazu eine Silhouette aus einem Foto von Wikimedia Commons: Himmel Spalte für Spalte erkannt, Bäume und Geländer unten flach abgeschnitten (Skript `vz5_com.py` im Arbeitsordner).
+
+| Motiv | Figur-ID | Seite | Autor | Lizenz |
+|---|---|---|---|---|
+| Schaffhausen – Munot | stadt-wm-schaffhausen-munot | https://commons.wikimedia.org/wiki/File:Schaffhausen_Munot_2.jpg | Andreas Praefcke | CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), verändert (Silhouette) |
 
 ## Schweizer Feste
 

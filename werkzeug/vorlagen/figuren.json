@@ -4186,6 +4186,34 @@
    "k": 1
   },
   {
+   "id": "stadt-v-basel",
+   "name": "Basel – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-v-basel.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-v-lugano",
+   "name": "Lugano – Skyline",
+   "welt": "Städte",
+   "datei": "stadt-v-lugano.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-v-luzern-kapellbruecke",
+   "name": "Luzern – Kapellbrücke",
+   "welt": "Städte",
+   "datei": "stadt-v-luzern-kapellbruecke.png",
+   "k": 1
+  },
+  {
+   "id": "stadt-wm-schaffhausen-munot",
+   "name": "Schaffhausen – Munot",
+   "welt": "Städte",
+   "datei": "stadt-wm-schaffhausen-munot.png",
+   "k": 1
+  },
+  {
    "id": "fig-herz-pfeil-c",
    "name": "Herz mit Pfeil",
    "welt": "Liebe & Hochzeit",

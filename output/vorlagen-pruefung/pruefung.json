@@ -1,5 +1,5 @@
 {
-  "figuren": 1062,
+  "figuren": 1066,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -5967,6 +5967,42 @@
       "pixel": [
         3696,
         532
+      ]
+    },
+    {
+      "id": "stadt-v-basel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        3724,
+        1097
+      ]
+    },
+    {
+      "id": "stadt-v-lugano",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        3630,
+        1093
+      ]
+    },
+    {
+      "id": "stadt-v-luzern-kapellbruecke",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2154,
+        2086
+      ]
+    },
+    {
+      "id": "stadt-wm-schaffhausen-munot",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        2483,
+        1437
       ]
     },
     {
