@@ -57,6 +57,12 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 .ergebnis p{margin:4px 0}
 .ergebnis .gross{font-family:Fredoka,Nunito,sans-serif;font-size:21px;color:var(--acc);margin:8px 0}
 .ergebnis .warn{display:inline-block;color:var(--warn);background:var(--warn-soft);border-radius:10px;padding:6px 8px}
+.ergebnis .weg{display:grid;gap:2px;max-width:360px;font-variant-numeric:tabular-nums}
+.ergebnis .weg div{display:flex;justify-content:space-between;gap:16px}
+.ergebnis .weg .summe{border-top:2px solid var(--ink);padding-top:3px;margin-top:2px}
+.ergebnis .klein{font-size:13px;color:var(--muted)}
+.ergebnis .fakten{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.ergebnis .fakten span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:14px}
 .ergebnis .merke{font-size:13px;color:var(--muted);margin-top:8px;border-top:1px dashed var(--line);padding-top:8px}
 .ringe{display:inline-block;vertical-align:middle;width:70px;height:24px;margin-left:8px}
 .werkzeuge{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
@@ -451,9 +457,10 @@ function teilSvg(t,o,wahlId,warte){
 }
 function griffeSvg(){
   if(!wahl||wahl.art!=='teil') return ''; const t=teil(wahl.id); if(!t) return '';
-  const quer=t.rot%180!==0, hw=quer?46:66, hh=quer?66:46;
-  const px=v=>begrenz(v,16,W-16), py=v=>begrenz(v,16,H-16);
-  const knopf=(act,x,y,inhalt,titel,farbe='#FFFFFF',rand='#1F1A17')=>`<g class="griff" data-griff="${act}" transform="translate(${px(x)} ${py(y)})"><title>${esc(titel)}</title><circle r="20" fill="transparent"/><circle r="13" fill="${farbe}" stroke="${rand}" stroke-width="2.5"/>${inhalt}</g>`;
+  const el=document.querySelector('.flaeche svg'), breite=el?el.getBoundingClientRect().width:W, k=begrenz(W/Math.max(breite,1),1.2,2.4);
+  const quer=t.rot%180!==0, hw=(quer?46:66)+(k-1)*10, hh=(quer?66:46)+(k-1)*10;
+  const px=v=>begrenz(v,16*k,W-16*k), py=v=>begrenz(v,16*k,H-16*k);
+  const knopf=(act,x,y,inhalt,titel,farbe='#FFFFFF',rand='#1F1A17')=>`<g class="griff" data-griff="${act}" transform="translate(${px(x)} ${py(y)}) scale(${k.toFixed(2)})"><title>${esc(titel)}</title><circle r="20" fill="transparent"/><circle r="13" fill="${farbe}" stroke="${rand}" stroke-width="2.5"/>${inhalt}</g>`;
   let s=knopf('weg',t.x+hw,t.y-hh,'<path d="M-5-5L5 5M5-5L-5 5" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>','Löschen','#E8554E');
   if(DIO_TYPEN.includes(t.typ)||t.typ==='motor'||t.typ==='batterie') s+=knopf('umdrehen',t.x-hw,t.y-hh,'<path d="M-7 0H7M-7 0l4-4M-7 0l4 4M7 0l-4-4M7 0l-4 4" fill="none" stroke="#1F1A17" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>','Umdrehen (+ und − tauschen)');
   if(DIO_TYPEN.includes(t.typ)) s+=knopf('farbwechsel',t.x+hw,t.y+hh,'<circle r="5" fill="#FFFFFF" opacity=".55"/>','Andere Farbe',LED_FARBEN[t.farbe||'weiss'][0]);
@@ -467,6 +474,7 @@ function kabelSvg(k,i,gewaehlt){
   if(gewaehlt){ for(let j=0;j<P.length-1;j++){ const mx=(P[j][0]+P[j+1][0])/2,my=(P[j][1]+P[j+1][1])/2; s+=`<circle class="wm" data-id="${k.id}" data-seg="${j}" cx="${mx}" cy="${my}" r="7"/>`; } (k.pts||[]).forEach((p,j)=>{ s+=`<circle class="wp" data-id="${k.id}" data-i="${j}" cx="${p[0]}" cy="${p[1]}" r="8"/>`; }); }
   return s+'</g>';
 }
+window.addEventListener('resize',()=>{ if(wahl&&wahl.art==='teil') zeichnen(); });
 function zeichnen(){
   if(!Z) Z=rechnen();
   let s=`<defs><filter id="weich" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter><pattern id="raster" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.4" fill="#C9D2DD"/></pattern></defs><rect width="${W}" height="${H}" fill="url(#raster)" data-leer="1"/>`;
@@ -657,28 +665,28 @@ function rechnerZeigen(){
   s+=`<div class="feld"><span class="lbl">Wie viele ${R.was==='led'?'LEDs':'Motoren'}?</span><div class="chips">${[1,2,3,4].map(n=>chip('n',n,n,R.n===n)).join('')}${R.n>1?'<span class="was" style="margin:0 2px">·</span>'+chip('art','reihe','in Reihe',R.art==='reihe')+chip('art','parallel','parallel',R.art==='parallel'):''}</div></div>`;
   s+='</div>';
   const z=[]; const Uq=`<b>${vz(e.U)} V</b>`;
-  if(e.nb==='reihe') z.push(`Zwei ${e.q.kurz==='Block'?'9-V-Blöcke':'Batterien'} in Reihe (+ an −): ${vz(R.volt)} V + ${vz(R.volt)} V = ${Uq}.`);
-  else if(e.nb==='parallel') z.push(`Zwei Batterien parallel (+ an +, − an −): Die Spannung bleibt ${Uq}, aber sie halten doppelt so lang.`);
-  else z.push(`Quelle: ${Uq} (${e.q.name}).`);
+  const quelleText=()=>{ if(e.nb==='reihe') z.push(`Zwei ${e.q.kurz==='Block'?'9-V-Blöcke':'Batterien'} in Reihe (+ an −): ${vz(R.volt)} V + ${vz(R.volt)} V = ${Uq}.`);
+    else if(e.nb==='parallel') z.push(`Zwei Batterien parallel (+ an +, − an −): Die Spannung bleibt ${Uq}, aber sie halten doppelt so lang.`);
+    else z.push(`Quelle: ${Uq} (${e.q.name}).`); };
   if(R.was==='led'){
-    const Vf=vz(vf(R.farbe));
-    if(e.n===1) z.push(`Die ${LED_NAME[R.farbe]}e LED braucht <b>${Vf} V</b> und 20 mA (= 0,02 A).`);
-    else if(e.reihe) z.push(`${e.n} LEDs in Reihe brauchen zusammen ${e.n} × ${Vf} V = <b>${vz(e.Uled)} V</b>. Durch alle fliessen dieselben 20 mA.`);
-    else z.push(`${e.n} LEDs parallel: Jede braucht <b>${Vf} V</b> und 20 mA – und jede bekommt ihren eigenen Widerstand. Nie zwei LEDs an denselben Widerstand hängen, sonst teilen sie den Strom ungleich.`);
-    if(e.rest<-0.01) z.push(`<span class="warn">⚠ Zu wenig Spannung! ${vz(e.U)} V reichen nicht für ${vz(e.Uled)} V – die LED${e.n>1?'s bleiben':' bleibt'} dunkel. Nimm eine grössere Batterie${e.n>1&&e.reihe?' oder schalte die LEDs parallel':''}.</span>`);
+    const Vf=vz(vf(R.farbe)), led='LED '+LED_NAME[R.farbe], zeile=(a,b,k='')=>`<div class="${k}"><span>${a}</span><b>${b}</b></div>`;
+    const qn=e.nb==='reihe'?`Quelle (2 × ${vz(R.volt)} V)`:e.nb==='parallel'?'Quelle (2 parallel)':`Quelle (${e.q.kurz==='Block'?'9-V-Block':e.q.kurz})`;
+    z.push(`<div class="weg">${zeile(qn,vz(e.U)+' V')}${zeile(e.n>1&&e.reihe?`− ${e.n} × ${led}`:'− '+led,(e.n>1&&e.reihe?`${e.n} × ${Vf} = `:'')+vz(e.Uled)+' V')}${e.rest>=-0.01?zeile('= für den Widerstand',vz(e.rest)+' V','summe'):''}</div>`);
+    if(e.rest<-0.01) z.push(`<span class="warn">⚠ Zu wenig Spannung – die LED${e.n>1?'s bleiben':' bleibt'} dunkel.</span>`);
+    else if(!e.Rw) z.push(`Kein Widerstand nötig – leuchtet aber nur schwach.`);
     else {
-      z.push(`Übrig für den Widerstand: ${vz(e.U)} V − ${vz(e.Uled)} V = <b>${vz(e.rest)} V</b>.`);
-      if(!e.Rw) z.push(`Es bleibt nichts übrig: Ohne Widerstand leuchtet es gerade so, aber schwach. Mit einer grösseren Batterie und Widerstand wird es hell.`);
-      else { z.push(`<p class="gross">R = ${vz(e.rest)} V : 0,02 A = ${vz(e.rest)} × 50 = ${vz(e.Rgenau,0)} Ω → nimm <b>${ohmText(e.Rw)}</b>${ringeSvg(e.Rw)}</p>`);
-        if(Math.abs(e.Rw-e.Rgenau)>0.5) z.push(`Genau ${vz(e.Rgenau,0)} Ω gibt es nicht zu kaufen – nimm immer den nächstgrösseren Wert. Dann leuchtet die LED ein bisschen weniger hell, geht aber sicher nicht kaputt. Zu klein gewählt heisst zu viel Strom: LED kaputt.`);
-        if(e.anzR>1) z.push(`Also ${e.anzR} Widerstände mit je ${ohmText(e.Rw)}.`);
-        if(e.rest<0.5) z.push(`<span class="warn">Knapp: Wird die Batterie älter, leuchtet es schwächer.</span>`);
-        z.push(e.P>0.25?`Der Widerstand wird heiss (${vz(e.P,2)} W) – nimm einen grossen 1-W-Widerstand.`:`Der Widerstand wird nur ${vz(e.P,2)} W warm – ein normaler kleiner Widerstand reicht.`); }
-      z.push(`Aus der Quelle fliessen <b>${mA(e.Iges)} mA</b>${e.reihe?'':` (${e.n} × 20 mA)`}.${laufzeit(e.q,e.Iq,e.nb!=='1')}`);
+      const Ir=e.rest/e.Rw, P=e.rest*Ir, Iq=(e.reihe?Ir:e.n*Ir)/(e.nb==='parallel'?2:1);
+      z.push(`<p class="gross">R = ${vz(e.rest)} V : 0,02 A = ${vz(e.Rgenau,0)} Ω → <b>${ohmText(e.Rw)}</b>${ringeSvg(e.Rw)}</p>`);
+      const k=[]; if(Math.abs(e.Rw-e.Rgenau)>0.5) k.push(`${vz(e.Rgenau,0)} Ω gibt es nicht → nächstgrösseren Wert nehmen.`);
+      if(e.anzR>1) k.push(`Jede LED bekommt ihren eigenen: ${e.anzR} × ${ohmText(e.Rw)}.`);
+      if(k.length) z.push(`<p class="klein">${k.join(' ')}</p>`);
+      const h=e.q.mah?e.q.mah/1000/Iq:0;
+      z.push(`<div class="fakten"><span>⚡ ${e.n>1&&!e.reihe?e.n+' × ':''}${mA(Ir)} mA</span><span>🔥 ${vz(P,2)} W${P>0.25?' – 1-W-Widerstand nehmen':''}</span><span>🔋 ${!e.q.mah?'Netzgerät':h>48?'sehr lange':h>=2?'etwa '+Math.round(h)+' h':'etwa '+Math.round(h*60)+' min'}</span></div>`);
+      if(e.rest<0.5) z.push(`<span class="warn">Knapp: Mit älterer Batterie leuchtet es schwächer.</span>`);
     }
-    z.push(`<p class="merke">Merke: Widerstand = (Spannung der Batterie − Spannung der LED) : 0,02 A. Rechentrick: «: 0,02» ist dasselbe wie «× 50». Wo der Widerstand sitzt, spielt keine Rolle – vor oder nach der LED bremst er den ganzen Kreis. Das lange Beinchen der LED kommt zu +.</p>`);
+    z.push(`<p class="merke">Merke: Widerstand = (Batterie − LED) : 0,02 A. Langes Beinchen zu +.</p>`);
   } else {
-    const m=e.m;
+    quelleText(); const m=e.m;
     z.push(`Der ${m.name} ist ${m.kurz} (${m.wofuer}). Seine Wicklung hat etwa <b>${m.R} Ω</b>. Gebaut ist er für 3 V (1,5 bis 4,5 V).`);
     if(e.n>1) z.push(e.reihe?`${e.n} Motoren in Reihe teilen sich die Spannung: ${vz(e.U)} V : ${e.n} = <b>${vz(e.Um,2)} V</b> für jeden.`:`${e.n} Motoren parallel: Jeder bekommt die vollen <b>${vz(e.U)} V</b>, dafür fliesst ${e.n}-mal so viel Strom.`);
     z.push(`<p class="gross">I = ${vz(e.Um,2)} V : ${m.R} Ω = <b>${mA(e.Im)} mA</b> je Motor</p>`);
@@ -688,7 +696,7 @@ function rechnerZeigen(){
     z.push(`Aus der Quelle fliessen <b>${mA(e.Iges)} mA</b>${e.reihe||e.n===1?'':` (${e.n} × ${mA(e.Im)} mA)`}.${laufzeit(e.q,e.Iq,e.nb!=='1')}${e.q.kurz==='Block'&&e.Iges>0.15?' Ein 9-V-Block ist für Motoren schlecht: Er ist schnell leer. Besser sind AA-Batterien.':''}`);
     z.push(`<p class="merke">Merke: Strom = Spannung : Widerstand (I = U : R). Mehr Spannung = schneller, aber über 4,5 V geht ein 3-V-Motor kaputt. Rennauto und Boot: Spielzeugmotor · Seilbahn und Kran: Getriebemotor · Mobile: Solarmotor.</p>`);
   }
-  s+=`<div class="ergebnis">${z.map(t=>t.startsWith('<p')?t:`<p>${t}</p>`).join('')}</div>`;
+  s+=`<div class="ergebnis">${z.map(t=>/^<(p|div)/.test(t)?t:`<p>${t}</p>`).join('')}</div>`;
   s+=`<div class="aktionen"><button class="knopf" id="bauen" type="button">⬇ Auf die Fläche legen</button></div>`;
   $('rechner').innerHTML=s;
 }
