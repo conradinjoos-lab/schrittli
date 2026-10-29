@@ -18,8 +18,8 @@ h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
 h1{font-size:28px}
 h2{font-size:17px;margin-bottom:10px}
 a{color:var(--acc)}
-.kopf{max-width:1200px;margin:0 auto;padding:20px 16px 8px}
-.kopf p{margin:4px 0 0;color:var(--muted)}
+.kopf{max-width:1200px;margin:0 auto;padding:16px 16px 4px}
+.kopf .neben{font:600 14px Nunito,system-ui,sans-serif;margin-left:8px;vertical-align:middle}
 main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,400px);gap:14px;align-items:start}
 .links{display:flex;flex-direction:column;gap:14px}
 .karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
@@ -41,11 +41,34 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 .antwort{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
 .antwort li{font-size:16px;line-height:1.35}
 .antwort b{font:600 24px/1.1 Fredoka,Nunito,sans-serif;color:var(--acc);white-space:nowrap}
-.antwort .leise{color:var(--muted);font-size:14px;display:block;margin-top:2px}
+.antwort .leise{display:none}
 .warn{color:var(--warn)}
 .hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
-.uebersicht svg{display:block;width:100%;height:auto;max-height:60vh;background:var(--papier);border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
-.blaetter{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-top:12px}
+.blaetter{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+.druckzeile{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:12px 0}
+.druckzeile .hinweis{margin:0}
+/* Bühne: alles im Bild ziehen */
+.buehne-karte{padding:12px}
+.leiste{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-bottom:10px}
+.leiste .chip{min-height:40px;padding:4px 10px}
+.leiste .chip svg{display:block;height:20px;width:40px}
+#formChips .chip svg{height:26px;width:48px}
+.buehne{position:relative;border-radius:14px;background:var(--surface2);border:1px solid var(--line);overflow:hidden}
+#buehne{display:block;width:100%;height:auto;touch-action:none;user-select:none;-webkit-user-select:none}
+#buehne .ks{stroke:#1F1A17;stroke-width:2;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+#buehne .ml{fill:none;stroke:var(--muted);stroke-width:1.5;vector-effect:non-scaling-stroke}
+#buehne .gst{fill:none;stroke:var(--muted);stroke-width:1.5;stroke-dasharray:5 4;vector-effect:non-scaling-stroke}
+#buehne .pf{fill:none;stroke:var(--acc);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+#buehne text{font-family:Fredoka,Nunito,sans-serif;font-weight:600;pointer-events:none}
+#buehne .mt{fill:var(--ink)}
+#buehne [data-h]{cursor:grab}
+#buehne .knopf{cursor:pointer}
+.gross{position:absolute;left:10px;top:10px;font:600 22px Fredoka,Nunito,sans-serif;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:2px 12px;pointer-events:none}
+.spiel{position:absolute;right:8px;top:8px;width:40px;height:40px;border-radius:50%;border:2px solid var(--line);background:var(--surface);color:var(--ink);font-size:15px;cursor:pointer}
+.tipp{position:absolute;right:12px;bottom:8px;font-size:13px;color:var(--muted);pointer-events:none}
+.warnung{margin:8px 0 0;font-size:14px}
+details.karte>summary{cursor:pointer;font:600 17px Fredoka,Nunito,sans-serif}
+details.karte[open]>summary{margin-bottom:12px}
 .blaetter svg{display:block;width:100%;height:auto;background:var(--papier);border-radius:3px;box-shadow:0 1px 6px rgba(0,0,0,.15)}
 [hidden]{display:none!important}
 svg .schnitt{fill:none;stroke:#000;stroke-width:.35;stroke-linejoin:round}
@@ -89,115 +112,107 @@ svg .deko{fill:none;stroke:#888;stroke-width:.25;stroke-dasharray:1 .8}
 <body>
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
-  <h1>Mechanik-Planer</h1>
-  <p>Zahnräder, Räder, Kurbeln und Holzautos planen. Die Seite rechnet die Masse aus, zeigt den Rechenweg, schreibt die Bauanleitung und zeichnet alle Teile in echter Grösse – ausdrucken, auf das Holz kleben, aussägen, bohren. <a href="../">←&nbsp;Vorlagen-Generator</a></p>
+  <h1>⚙️ Mechanik-Planer <a class="neben" href="../">Alle Vorlagen</a></h1>
 </header>
 <script src="../zurueck.js"></script>
 <main>
 <div class="links">
-  <section class="karte">
-    <h2>Was planst du?</h2>
-    <div class="chips modus" role="group" aria-label="Werkstück" data-g="modus">
-      <button type="button" class="chip" data-v="zahn">⚙️ Zahnräder</button>
-      <button type="button" class="chip" data-v="rad">🛞 Räder &amp; Kurbel</button>
-      <button type="button" class="chip" data-v="auto">🚗 Holzauto</button>
+  <div class="chips modus" role="group" aria-label="Werkstück" data-g="modus">
+    <button type="button" class="chip" data-v="zahn">⚙️ Zahnräder</button>
+    <button type="button" class="chip" data-v="rad">🛞 Räder</button>
+    <button type="button" class="chip" data-v="auto">🚗 Auto</button>
+  </div>
+
+  <section class="karte buehne-karte">
+    <div class="leiste modus-teil" data-modus="zahn">
+      <div class="chips" role="group" aria-label="Ziel" data-g="ziel"><button type="button" class="chip" data-v="langsam" title="Halb so schnell">1:2 🐢</button><button type="button" class="chip" data-v="langsam3" title="3-mal langsamer">1:3 🐢</button><button type="button" class="chip" data-v="schnell" title="Doppelt so schnell">2:1 🐇</button><button type="button" class="chip" data-v="gleich" title="Gleich schnell, andere Richtung">1:1 ↻↺</button><button type="button" class="chip" data-v="richtung" title="Gleiche Richtung mit Zwischenrad">1:1 ↻↻</button><button type="button" class="chip" data-v="stufe" title="Sehr langsam, zweistufig">1:9 🐌</button></div>
+      <div class="chips" role="group" aria-label="Zahngrösse (Modul)" data-g="modul" id="modulChips"></div>
     </div>
+    <div class="leiste modus-teil" data-modus="auto">
+      <div class="chips" role="group" aria-label="Form" data-g="form" id="formChips"></div>
+    </div>
+    <div class="buehne">
+      <svg id="buehne" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Werkstück zum Ziehen"></svg>
+      <span class="gross" id="gross" hidden></span>
+      <button type="button" class="spiel" id="spiel" aria-label="Drehen anhalten">⏸</button>
+      <span class="tipp" id="tipp">👆 ziehen</span>
+    </div>
+    <p class="warnung" id="warnung" hidden></p>
   </section>
 
-  <section class="karte modus-teil" data-modus="zahn">
-    <h2>Zahnräder</h2>
-    <div class="feld"><span class="lbl">Was soll das Getriebe machen? (setzt die Zähne – du kannst sie danach ändern)</span>
-      <div class="chips" role="group" aria-label="Ziel" data-g="ziel"><button type="button" class="chip" data-v="langsam">Halb so schnell (1 : 2)</button><button type="button" class="chip" data-v="langsam3">3-mal langsamer (1 : 3)</button><button type="button" class="chip" data-v="schnell">Doppelt so schnell (2 : 1)</button><button type="button" class="chip" data-v="gleich">Gleich schnell, andere Richtung</button><button type="button" class="chip" data-v="richtung">Gleiche Richtung (Zwischenrad)</button><button type="button" class="chip" data-v="stufe">Sehr langsam, zweistufig (1 : 9)</button></div></div>
-    <div class="feld"><span class="lbl">Modul (Zahngrösse) – alle Räder, die ineinandergreifen, brauchen denselben Modul</span>
-      <div class="chips" role="group" aria-label="Modul" data-g="modul"><button type="button" class="chip" data-v="2">2 mm fein</button><button type="button" class="chip" data-v="3">3 mm</button><button type="button" class="chip" data-v="4">4 mm</button><button type="button" class="chip" data-v="5">5 mm</button><button type="button" class="chip" data-v="6">6 mm grob</button></div>
-      <p class="hinweis">Zum Aussägen mit der Laubsäge sind 4–6 mm gut. Modul 2–3 nur mit Laser oder sehr sauberer Säge.</p></div>
-    <div class="zwei">
-      <div class="feld"><label class="lbl" for="zA">Zähne Rad A (Antrieb)</label><div class="zahl"><input type="number" id="zA" data-k="zA" min="8" max="60" step="1" inputmode="numeric"></div></div>
-      <div class="feld"><label class="lbl" for="zB">Zähne Rad B</label><div class="zahl"><input type="number" id="zB" data-k="zB" min="8" max="60" step="1" inputmode="numeric"></div></div>
-      <div class="feld"><label class="lbl" for="zC">Zähne Rad C (0 = keines)</label><div class="zahl"><input type="number" id="zC" data-k="zC" min="0" max="60" step="1" inputmode="numeric"></div></div>
-      <div class="feld" id="feldD"><label class="lbl" for="zD">Zähne Rad D</label><div class="zahl"><input type="number" id="zD" data-k="zD" min="8" max="60" step="1" inputmode="numeric"></div></div>
+  <details class="karte mehr">
+    <summary>⋯ Genau einstellen</summary>
+    <div class="modus-teil" data-modus="zahn">
+      <div class="zwei">
+        <div class="feld"><label class="lbl" for="zA">Zähne A</label><div class="zahl"><input type="number" id="zA" data-k="zA" min="8" max="60" step="1" inputmode="numeric"></div></div>
+        <div class="feld"><label class="lbl" for="zB">Zähne B</label><div class="zahl"><input type="number" id="zB" data-k="zB" min="8" max="60" step="1" inputmode="numeric"></div></div>
+        <div class="feld"><label class="lbl" for="zC">Zähne C (0 = keins)</label><div class="zahl"><input type="number" id="zC" data-k="zC" min="0" max="60" step="1" inputmode="numeric"></div></div>
+        <div class="feld" id="feldD"><label class="lbl" for="zD">Zähne D</label><div class="zahl"><input type="number" id="zD" data-k="zD" min="8" max="60" step="1" inputmode="numeric"></div></div>
+      </div>
+      <div class="feld" id="feldKette"><span class="lbl">Rad C</span>
+        <div class="chips" role="group" aria-label="Anordnung" data-g="kette"><button type="button" class="chip" data-v="reihe">greift in B</button><button type="button" class="chip" data-v="stufe">auf Achse B, treibt D</button></div></div>
+      <div class="zwei">
+        <div class="feld"><span class="lbl">Holz</span>
+          <div class="chips" role="group" aria-label="Holzdicke" data-g="holz"><button type="button" class="chip" data-v="4">4 mm</button><button type="button" class="chip" data-v="6">6 mm</button><button type="button" class="chip" data-v="8">8 mm</button><button type="button" class="chip" data-v="10">10 mm</button></div></div>
+        <div class="feld"><span class="lbl">Kurbel an A</span>
+          <div class="chips" role="group" aria-label="Kurbel" data-g="kurbel"><button type="button" class="chip" data-v="ja">Ja</button><button type="button" class="chip" data-v="nein">Nein</button></div></div>
+      </div>
+      <div class="feld"><span class="lbl">Achse</span>
+        <div class="chips" role="group" aria-label="Achse" data-g="achse"><button type="button" class="chip" data-v="3">3 mm</button><button type="button" class="chip" data-v="4">4 mm</button><button type="button" class="chip" data-v="6">6 mm</button><button type="button" class="chip" data-v="8">8 mm</button><button type="button" class="chip" data-v="10">10 mm</button></div></div>
+      <div class="feld"><span class="lbl">Was dreht?</span>
+        <div class="chips" role="group" aria-label="Lagerung" data-g="fest"><button type="button" class="chip" data-v="achse">Achse dreht</button><button type="button" class="chip" data-v="rad">Rad dreht lose</button></div></div>
     </div>
-    <div class="feld" id="feldKette"><span class="lbl">Rad C</span>
-      <div class="chips" role="group" aria-label="Anordnung" data-g="kette"><button type="button" class="chip" data-v="reihe">C greift in B (B ist Zwischenrad)</button><button type="button" class="chip" data-v="stufe">C sitzt mit B auf einer Achse und treibt D (zweistufig)</button></div></div>
-    <div class="zwei">
-      <div class="feld"><span class="lbl">Holz für die Zahnräder</span>
-        <div class="chips" role="group" aria-label="Holzdicke" data-g="holz"><button type="button" class="chip" data-v="4">4 mm</button><button type="button" class="chip" data-v="6">6 mm</button><button type="button" class="chip" data-v="8">8 mm</button><button type="button" class="chip" data-v="10">10 mm</button></div></div>
-      <div class="feld"><span class="lbl">Kurbel an Rad A</span>
-        <div class="chips" role="group" aria-label="Kurbel" data-g="kurbel"><button type="button" class="chip" data-v="ja">Ja, mit Kurbelarm</button><button type="button" class="chip" data-v="nein">Nein</button></div></div>
-    </div>
-    <div class="feld"><span class="lbl">Achse (Rundstab oder Nagel)</span>
-      <div class="chips" role="group" aria-label="Achse" data-g="achse"><button type="button" class="chip" data-v="3">3 mm</button><button type="button" class="chip" data-v="4">4 mm</button><button type="button" class="chip" data-v="6">6 mm</button><button type="button" class="chip" data-v="8">8 mm</button><button type="button" class="chip" data-v="10">10 mm</button></div></div>
-    <div class="feld"><span class="lbl">Wie drehen die Zahnräder?</span>
-      <div class="chips" role="group" aria-label="Lagerung" data-g="fest"><button type="button" class="chip" data-v="achse">Fest auf der Achse, Achse dreht in der Platte</button><button type="button" class="chip" data-v="rad">Zahnrad dreht auf fester Achse</button></div></div>
-  </section>
 
-  <section class="karte modus-teil" data-modus="rad">
-    <h2>Räder</h2>
-    <div class="zwei">
-      <div class="feld"><label class="lbl" for="radD">Raddurchmesser</label><div class="zahl"><input type="number" id="radD" data-k="radD" min="1" max="30" step="0.5" inputmode="decimal"><span>cm</span></div></div>
-      <div class="feld"><label class="lbl" for="radN">Anzahl Räder</label><div class="zahl"><input type="number" id="radN" data-k="radN" min="1" max="12" step="1" inputmode="numeric"></div></div>
+    <div class="modus-teil" data-modus="rad">
+      <div class="zwei">
+        <div class="feld"><label class="lbl" for="radD">Rad Ø</label><div class="zahl"><input type="number" id="radD" data-k="radD" min="1" max="30" step="0.5" inputmode="decimal"><span>cm</span></div></div>
+        <div class="feld"><label class="lbl" for="radN">Anzahl</label><div class="zahl"><input type="number" id="radN" data-k="radN" min="1" max="12" step="1" inputmode="numeric"></div></div>
+        <div class="feld"><label class="lbl" for="hub">Hub (0 = keine Kurbel)</label><div class="zahl"><input type="number" id="hub" data-k="hub" min="0" max="150" step="1" inputmode="numeric"><span>mm</span></div></div>
+        <div class="feld"><label class="lbl" for="scheibeD">Kurbelscheibe Ø (0 = auto)</label><div class="zahl"><input type="number" id="scheibeD" data-k="scheibeD" min="0" max="200" step="1" inputmode="numeric"><span>mm</span></div></div>
+      </div>
+      <div class="feld"><span class="lbl">Achse</span>
+        <div class="chips" role="group" aria-label="Achse" data-g="achse"><button type="button" class="chip" data-v="3">3 mm</button><button type="button" class="chip" data-v="4">4 mm</button><button type="button" class="chip" data-v="6">6 mm</button><button type="button" class="chip" data-v="8">8 mm</button><button type="button" class="chip" data-v="10">10 mm</button></div></div>
+      <div class="feld"><span class="lbl">Was dreht?</span>
+        <div class="chips" role="group" aria-label="Lagerung" data-g="fest"><button type="button" class="chip" data-v="achse">Achse dreht</button><button type="button" class="chip" data-v="rad">Rad dreht lose</button></div></div>
     </div>
-    <div class="feld"><span class="lbl">Achse</span>
-      <div class="chips" role="group" aria-label="Achse" data-g="achse"><button type="button" class="chip" data-v="3">3 mm</button><button type="button" class="chip" data-v="4">4 mm</button><button type="button" class="chip" data-v="6">6 mm</button><button type="button" class="chip" data-v="8">8 mm</button><button type="button" class="chip" data-v="10">10 mm</button></div></div>
-    <div class="feld"><span class="lbl">Wie dreht das Rad?</span>
-      <div class="chips" role="group" aria-label="Lagerung" data-g="fest"><button type="button" class="chip" data-v="achse">Rad fest auf der Achse, Achse dreht</button><button type="button" class="chip" data-v="rad">Rad dreht auf fester Achse</button></div></div>
-    <h2 style="margin-top:16px">Kurbel</h2>
-    <div class="zwei">
-      <div class="feld"><label class="lbl" for="hub">Hub (so weit geht es auf und ab; 0 = keine Kurbel)</label><div class="zahl"><input type="number" id="hub" data-k="hub" min="0" max="150" step="1" inputmode="numeric"><span>mm</span></div></div>
-      <div class="feld"><label class="lbl" for="scheibeD">Kurbelscheibe Ø (0 = automatisch)</label><div class="zahl"><input type="number" id="scheibeD" data-k="scheibeD" min="0" max="200" step="1" inputmode="numeric"><span>mm</span></div></div>
-    </div>
-    <p class="hinweis">Die Kurbelscheibe sitzt fest auf der Achse; der Griff steckt im äusseren Loch. Der Exzenter ist eine Scheibe mit Loch neben der Mitte – für Automata, die etwas auf und ab bewegen.</p>
-  </section>
 
-  <section class="karte modus-teil" data-modus="auto">
-    <h2>Holzauto</h2>
-    <div class="feld"><span class="lbl">Form</span>
-      <div class="chips" role="group" aria-label="Form" data-g="form"><button type="button" class="chip" data-v="flitzer">Flitzer</button><button type="button" class="chip" data-v="rennwagen">Rennwagen</button><button type="button" class="chip" data-v="lastwagen">Lastwagen</button><button type="button" class="chip" data-v="bus">Bus</button><button type="button" class="chip" data-v="kaefer">Käfer</button><button type="button" class="chip" data-v="kiste">Kiste</button></div></div>
-    <div class="zwei">
-      <div class="feld"><label class="lbl" for="autoL">Länge</label><div class="zahl"><input type="number" id="autoL" data-k="autoL" min="5" max="60" step="0.5" inputmode="decimal"><span>cm</span></div></div>
-      <div class="feld"><label class="lbl" for="autoH">Höhe (ohne Räder)</label><div class="zahl"><input type="number" id="autoH" data-k="autoH" min="2" max="30" step="0.5" inputmode="decimal"><span>cm</span></div></div>
-      <div class="feld"><label class="lbl" for="autoB">Breite (Dicke des Klotzes)</label><div class="zahl"><input type="number" id="autoB" data-k="autoB" min="1" max="20" step="0.5" inputmode="decimal"><span>cm</span></div></div>
-      <div class="feld"><label class="lbl" for="autoRad">Raddurchmesser</label><div class="zahl"><input type="number" id="autoRad" data-k="autoRad" min="1" max="20" step="0.5" inputmode="decimal"><span>cm</span></div></div>
-      <div class="feld"><label class="lbl" for="radBreite">Radbreite</label><div class="zahl"><input type="number" id="radBreite" data-k="radBreite" min="3" max="60" step="1" inputmode="numeric"><span>mm</span></div></div>
-      <div class="feld"><label class="lbl" for="boden">Bodenfreiheit</label><div class="zahl"><input type="number" id="boden" data-k="boden" min="0" max="80" step="1" inputmode="numeric"><span>mm</span></div></div>
-      <div class="feld"><label class="lbl" for="radstand">Radstand (0 = automatisch)</label><div class="zahl"><input type="number" id="radstand" data-k="radstand" min="0" max="60" step="0.5" inputmode="decimal"><span>cm</span></div></div>
+    <div class="modus-teil" data-modus="auto">
+      <div class="zwei">
+        <div class="feld"><label class="lbl" for="autoL">Länge</label><div class="zahl"><input type="number" id="autoL" data-k="autoL" min="5" max="60" step="0.5" inputmode="decimal"><span>cm</span></div></div>
+        <div class="feld"><label class="lbl" for="autoH">Höhe</label><div class="zahl"><input type="number" id="autoH" data-k="autoH" min="2" max="30" step="0.5" inputmode="decimal"><span>cm</span></div></div>
+        <div class="feld"><label class="lbl" for="autoB">Breite</label><div class="zahl"><input type="number" id="autoB" data-k="autoB" min="1" max="20" step="0.5" inputmode="decimal"><span>cm</span></div></div>
+        <div class="feld"><label class="lbl" for="autoRad">Rad Ø</label><div class="zahl"><input type="number" id="autoRad" data-k="autoRad" min="1" max="20" step="0.5" inputmode="decimal"><span>cm</span></div></div>
+        <div class="feld"><label class="lbl" for="radBreite">Radbreite</label><div class="zahl"><input type="number" id="radBreite" data-k="radBreite" min="3" max="60" step="1" inputmode="numeric"><span>mm</span></div></div>
+        <div class="feld"><label class="lbl" for="boden">Bodenfreiheit</label><div class="zahl"><input type="number" id="boden" data-k="boden" min="0" max="80" step="1" inputmode="numeric"><span>mm</span></div></div>
+        <div class="feld"><label class="lbl" for="radstand">Radstand (0 = auto)</label><div class="zahl"><input type="number" id="radstand" data-k="radstand" min="0" max="60" step="0.5" inputmode="decimal"><span>cm</span></div></div>
+      </div>
+      <div class="feld"><span class="lbl">Achse</span>
+        <div class="chips" role="group" aria-label="Achse" data-g="achse"><button type="button" class="chip" data-v="3">3 mm</button><button type="button" class="chip" data-v="4">4 mm</button><button type="button" class="chip" data-v="6">6 mm</button><button type="button" class="chip" data-v="8">8 mm</button><button type="button" class="chip" data-v="10">10 mm</button></div></div>
+      <div class="feld"><span class="lbl">Was dreht?</span>
+        <div class="chips" role="group" aria-label="Lagerung" data-g="fest"><button type="button" class="chip" data-v="achse">Achse dreht</button><button type="button" class="chip" data-v="rad">Räder drehen lose</button></div></div>
     </div>
-    <div class="feld"><span class="lbl">Achse</span>
-      <div class="chips" role="group" aria-label="Achse" data-g="achse"><button type="button" class="chip" data-v="3">3 mm</button><button type="button" class="chip" data-v="4">4 mm</button><button type="button" class="chip" data-v="6">6 mm</button><button type="button" class="chip" data-v="8">8 mm</button><button type="button" class="chip" data-v="10">10 mm</button></div></div>
-    <div class="feld"><span class="lbl">Wie drehen die Räder?</span>
-      <div class="chips" role="group" aria-label="Lagerung" data-g="fest"><button type="button" class="chip" data-v="achse">Räder fest auf der Achse, Achse dreht im Klotz</button><button type="button" class="chip" data-v="rad">Räder drehen auf fester Achse</button></div></div>
-  </section>
-
-  <section class="karte">
-    <h2>Papier</h2>
-    <div class="chips" role="group" aria-label="Papier" data-g="papier"><button type="button" class="chip" data-v="a4">A4</button><button type="button" class="chip" data-v="a3">A3</button></div>
-    <p class="hinweis">Beim Drucken «Tatsächliche Grösse» oder 100 % wählen, nicht «An Seite anpassen». Die 5-cm-Linie unten auf dem Blatt zeigt, ob es stimmt.</p>
-  </section>
+  </details>
 </div>
 
 <div class="rechts">
   <section class="karte">
-    <h2>Masse</h2>
+    <h2>📏 Masse</h2>
     <ul class="antwort" id="antwort"></ul>
-    <p class="hinweis" id="warnung" hidden></p>
   </section>
-  <section class="karte" id="k-rechnung" hidden>
-    <h2>So wird gerechnet</h2>
-    <div class="rechnung" id="rechnung"></div>
-  </section>
-  <section class="karte" id="k-bau" hidden>
-    <h2>Das brauchst du</h2>
-    <ul class="material" id="material"></ul>
-    <h2 style="margin-top:14px">So baust du es</h2>
-    <ol class="schritte" id="schritte"></ol>
-  </section>
-  <button type="button" class="drucken" id="drucken" data-handy><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg> Drucken</button>
   <section class="karte">
-    <h2 id="v-titel">Vorschau</h2>
-    <div class="uebersicht" id="uebersicht"></div>
+    <button type="button" class="drucken" id="drucken" data-handy><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg> Drucken</button>
+    <div class="druckzeile"><div class="chips" role="group" aria-label="Papier" data-g="papier"><button type="button" class="chip" data-v="a4">A4</button><button type="button" class="chip" data-v="a3">A3</button></div><span class="hinweis" id="info"></span></div>
     <div class="blaetter" id="blaetter"></div>
-    <p class="hinweis" id="info"></p>
   </section>
+  <details class="karte" id="k-rechnung" hidden>
+    <summary>🧮 Rechnung</summary>
+    <div class="rechnung" id="rechnung"></div>
+  </details>
+  <details class="karte" id="k-bau" hidden>
+    <summary>🔨 Bauen</summary>
+    <ul class="material" id="material"></ul>
+    <ol class="schritte" id="schritte"></ol>
+  </details>
 </div>
 </main>
 <div id="druck"></div>
@@ -246,13 +261,17 @@ function lochKreuz(cx,cy,d,text){
 const txt=(x,y,s,k='t',anker='middle')=>`<text x="${f(x)}" y="${f(y)}" class="${k}" text-anchor="${anker}">${s}</text>`;
 
 // Zahnrad: Teilkreis d = m·z, Kopfkreis m·(z+2), Fusskreis m·(z−2.5). Zähne als einfache Trapeze – reicht zum Aussägen.
-function zahnrad(m,z,loch,off,name){
+function zahnUmriss(m,z,loch,off,cx,cy){
   const r=m*z/2,ra=r+m,rf=Math.max(r-1.25*m,loch/2+3),p=2*Math.PI/z,sp=Math.PI*m/4;
   const wa=0.5*sp/ra,wp=sp/r,wf=Math.min(1.25*sp/rf,p*0.45);
   const pts=[];
   for(let i=0;i<z;i++){const t=off+i*p;
-    [[-wf,rf],[-wp,r],[-wa,ra],[wa,ra],[wp,r],[wf,rf],[p/2,rf]].forEach(([a,rr])=>pts.push(f(ra+rr*Math.cos(t+a))+' '+f(ra+rr*Math.sin(t+a))))}
-  const svg=`<path class="schnitt" d="M${pts.join('L')}Z"/><circle cx="${f(ra)}" cy="${f(ra)}" r="${f(r)}" class="hilf"/>${lochKreuz(ra,ra,loch)}`+
+    [[-wf,rf],[-wp,r],[-wa,ra],[wa,ra],[wp,r],[wf,rf],[p/2,rf]].forEach(([a,rr])=>pts.push(f(cx+rr*Math.cos(t+a))+' '+f(cy+rr*Math.sin(t+a))))}
+  return {d:'M'+pts.join('L')+'Z',r,ra,rf};
+}
+function zahnrad(m,z,loch,off,name){
+  const r=m*z/2,ra=r+m;
+  const svg=`<path class="schnitt" d="${zahnUmriss(m,z,loch,off,ra,ra).d}"/><circle cx="${f(ra)}" cy="${f(ra)}" r="${f(r)}" class="hilf"/>${lochKreuz(ra,ra,loch)}`+
     txt(ra,ra+loch/2+6,`${name?name+' · ':''}${z} Zähne`)+txt(ra,ra+loch/2+9.5,`Modul ${m} · Ø ${mm(2*ra)} · Loch ${mm(loch)}`,'tk');
   return {name:`Zahnrad ${name||''}`.trim(),w:2*ra,h:2*ra,r,ra,z,off,svg};
 }
@@ -286,14 +305,8 @@ function teileZahn(){
   if(S.kurbel==='ja'){const e=Math.max(20,Math.round(A.r*0.8)),aw=e+loch+14,ah=loch+12,g=lochmass('klotz');
     teile.push({name:'Kurbelarm',w:Math.max(aw,52),h:ah+6,svg:`<rect x="0.2" y="0.2" width="${f(aw-.4)}" height="${f(ah-.4)}" rx="${f(ah/2)}" class="schnitt"/>${lochKreuz(ah/2,ah/2,S.achse)}${lochKreuz(ah/2+e,ah/2,g)}`+txt(aw/2,ah+4,`Kurbelarm · Achse ${mm(S.achse)} · Griff ${mm(g)}`,'tk')});
     teile.kurbelE=e}
-  // Zusammenbau-Bild: alle Mittelpunkte auf einer Höhe; zweistufig liegt C auf B
-  let bild='',zx=achsen[0][0].ra;const h0=rmax;
-  achsen.forEach((g,i)=>{g.forEach(r=>{bild+=`<g transform="translate(${f(zx-r.ra)} ${f(h0-r.ra)})">${r.svg}</g>`});zx+=abst[i]||0});
-  const bw=achsen[0][0].ra+achsen[achsen.length-1][0].ra+ges;
-  const zus=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 ${f(bw+8)} ${f(2*rmax+8)}" role="img" aria-label="Zahnräder im Eingriff">${bild}</svg>`;
   // Übersetzung
   const letzte=raeder[raeder.length-1],iGes=stufe?(S.zB/S.zA)*(S.zD/S.zC):letzte.z/S.zA,nL=letzte.name.replace('Zahnrad ','');
-  const dz=v=>v.toLocaleString('de-CH',{maximumFractionDigits:2}).replace('.',',');
   const wie=iGes>1?`${dz(iGes)}-mal langsamer, dafür kräftiger`:iGes<1?`${dz(1/iGes)}-mal schneller, dafür schwächer`:'gleich schnell';
   const richtung=stufe?'D dreht gleich herum wie A':raeder.length===3?'C dreht gleich herum wie A':'B dreht gegen A';
   const ant=[];
@@ -323,7 +336,7 @@ function teileZahn(){
     S.fest==='rad'?`Achsen in die Grundplatte leimen. Unterlagscheibe aufstecken, Zahnrad lose aufstecken, oben ein Tropfen Leim auf ein Abschlussstück (Perle oder Holzscheibe), damit das Rad nicht abfällt.`:`Achsen durch die Grundplatte stecken (sie müssen drehen). Unterlagscheibe aufstecken, Zahnrad festleimen – darauf achten, dass es gerade sitzt.`,
     `Rad B so einsetzen, dass die Zähne von A in die Lücken von B greifen. Dreht es schwer, ist der Achsabstand zu klein; klappert es, ist er zu gross.`+(stufe?' C sitzt fest auf der Achse von B, D greift in C.':''),
     S.kurbel==='ja'?`Kurbelarm auf die Achse von A leimen, Griff ins äussere Loch. Drehen und zählen: eine Umdrehung an A – wie oft dreht ${nL}?`:`Rad A drehen und zählen: eine Umdrehung an A – wie oft dreht ${nL}?`];
-  return {teile,zus,ant,warn,rech,mat,sch,titel:`Zahnräder Modul ${m}: ${raeder.map(r=>r.z).join(' / ')} Zähne`};
+  return {teile,ant,warn,rech,mat,sch,titel:`Zahnräder Modul ${m}: ${raeder.map(r=>r.z).join(' / ')} Zähne`};
 }
 
 function lochmass(was){   // Bohrloch: wo etwas drehen soll, 1 mm Spiel
@@ -337,7 +350,6 @@ function teileRad(){
   for(let i=0;i<S.radN;i++)teile.push(kreisRad(D,loch,'Rad',`Ø ${cmText(D)} · Loch ${mm(loch)}`));
   ant.push(`Räder: <b>${S.radN} × Ø ${cmText(D)}</b><span class="leise">Loch ${mm(loch)} – ${S.fest==='rad'?'1 mm grösser als die Achse, damit das Rad dreht':'genau wie die Achse, Rad festleimen'}</span>`);
   ant.push(`Loch im Klotz oder Brett: <b>${mm(lochmass('klotz'))}</b><span class="leise">${S.fest==='rad'?'Achse festleimen':'1 mm grösser, damit die Achse dreht'}</span>`);
-  let zus='';
   if(S.hub>0){
     const e=S.hub/2,sd=S.scheibeD||Math.max(30,Math.ceil((S.hub+2*loch+16)/5)*5),r=sd/2;
     if(e+loch/2+4>r)warn.push(`Kurbelscheibe zu klein für Hub ${S.hub} mm – mindestens Ø ${mm(2*(e+loch/2+4))}.`);
@@ -346,13 +358,8 @@ function teileRad(){
     teile.push({name:'Kurbelarm',w:Math.max(aw,44),h:ah+6,svg:`<rect x="0.2" y="0.2" width="${f(aw-.4)}" height="${f(ah-.4)}" rx="${f(ah/2)}" class="schnitt"/>${lochKreuz(ah/2,ah/2,S.achse)}${lochKreuz(ah/2+e,ah/2,loch)}`+txt(aw/2,ah+4,`Kurbelarm · Hub ${mm(S.hub)}`,'tk')});
     teile.push({name:'Exzenter',w:sd,h:sd,svg:`<circle cx="${f(r)}" cy="${f(r)}" r="${f(r)}" class="schnitt"/>${lochKreuz(r+e,r,S.achse,'Achse')}<path class="kreuz" d="M${f(r-1.5)} ${f(r)}h3M${f(r)} ${f(r-1.5)}v3"/>`+txt(r,r+loch/2+10,`Exzenter · Hub ${mm(S.hub)}`)});
     ant.push(`Kurbel: <b>Hub ${mm(S.hub)}</b><span class="leise">Griffloch ${mm(e)} neben der Mitte · Scheibe Ø ${mm(sd)}</span>`);
-    // Bild: Scheibe mit Griff oben und unten, Pfeil für den Hub
-    const bx=r+4,by=r+4;
-    zus=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${f(sd+70)} ${f(sd+8)}" role="img" aria-label="Kurbelscheibe mit Hub"><circle cx="${f(bx)}" cy="${f(by)}" r="${f(r)}" class="schnitt"/>${lochKreuz(bx,by,S.achse)}<circle cx="${f(bx)}" cy="${f(by-e)}" r="${f(loch/2)}" class="loch"/><circle cx="${f(bx)}" cy="${f(by+e)}" r="${f(loch/2)}" class="hilf"/><path class="hilf" d="M${f(bx)} ${f(by-e)}H${f(bx+r+12)}M${f(bx)} ${f(by+e)}H${f(bx+r+12)}"/><path class="pfeil" d="M${f(bx+r+10)} ${f(by-e)}V${f(by+e)}M${f(bx+r+8)} ${f(by-e+3)}l2 -3 2 3M${f(bx+r+8)} ${f(by+e-3)}l2 3 2 -3"/>${txt(bx+r+14,by+1.2,'Hub '+mm(S.hub),'t','start')}${txt(bx+r+14,by+5.5,'= 2 × '+mm(e),'tk','start')}</svg>`;
-  }else{
-    const r=D/2;zus=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 ${f(D+4)} ${f(D+4)}" role="img" aria-label="Rad">${teile[0].svg}</svg>`;
   }
-  return {teile,zus,ant,warn,titel:`${S.radN} Räder Ø ${cmText(D)}${S.hub>0?` · Kurbel Hub ${S.hub} mm`:''}`};
+  return {teile,ant,warn,titel:`${S.radN} Räder Ø ${cmText(D)}${S.hub>0?` · Kurbel Hub ${S.hub} mm`:''}`};
 }
 
 // Seitenansicht Auto: Umriss in Anteilen von Länge L und Höhe H, Boden unten (y = 0), Front rechts.
@@ -415,8 +422,7 @@ function teileAuto(){
     `Räder aussägen oder fertige Holzräder nehmen, Loch ${mm(lochR)} bohren.`,
     `Achsen auf ${mm(achsL)} ablängen. ${S.fest==='rad'?'Achsen in den Klotz leimen, Räder lose aufstecken, aussen ein Tropfen Leim auf eine Perle oder Scheibe als Abschluss.':'Achsen durch den Klotz stecken (sie müssen drehen), Räder aussen festleimen – gerade halten, bis der Leim hält.'}`,
     `Probefahrt auf dem Tisch: Rollt es gerade? Sonst Achse prüfen und Räder nachrichten.`];
-  const zus=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${f(links-4)} -4 ${f(breite+8)} ${f(gh+12)}" role="img" aria-label="Holzauto von der Seite">${svg}</svg>`;
-  return {teile,zus,ant,warn,rech,mat,sch,titel:`Holzauto «${FORMEN[S.form]}» ${cmText(L)} × ${cmText(H)}`};
+  return {teile,ant,warn,rech,mat,sch,titel:`Holzauto «${FORMEN[S.form]}» ${cmText(L)} × ${cmText(H)}`};
 }
 
 // ---------- Blätter packen ----------
@@ -441,6 +447,185 @@ function blattSvg(b,i,n,titel,P){
     txt(P.w-RAND,P.h-RAND+4,'Schritt für Schritt · Mechanik-Planer','tk','end')+'</svg>';
 }
 
+// ---------- Bühne: alles im Bild, Räder und Auto mit der Maus ziehen (Koordinaten in mm, k = mm pro Bildschirmpixel) ----------
+const dz=v=>v.toLocaleString('de-CH',{maximumFractionDigits:2}).replace('.',',');
+const SV=$('buehne'),FARBEN={A:'#F2B544',B:'#4FA3E0',C:'#E8554E',D:'#6CC08B'},HOLZ='#E9C48A',DUNKEL='#1F1A17';
+let VB=null,zieh=null,letztCxF=null,phi=0,tAlt=0,laeuft=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+const r5=v=>Math.round(v*2)/2;
+function knopf(x,y,k,sym,h,extra=''){
+  const rot=sym==='×';
+  return `<g class="knopf" data-h="${h}" ${extra}><circle class="ks" cx="${f(x)}" cy="${f(y)}" r="${f(13*k)}" fill="${rot?'#E8554E':'#FFFFFF'}"/>`+
+    `<text x="${f(x)}" y="${f(y+5.5*k)}" font-size="${f(17*k)}" text-anchor="middle" fill="${rot?'#FFFFFF':DUNKEL}">${sym}</text></g>`;
+}
+const beschrift=(x,y,k,s,anker='middle',gr=14)=>`<text class="mt" x="${f(x)}" y="${f(y)}" font-size="${f(gr*k)}" text-anchor="${anker}">${s}</text>`;
+
+// Zahnräder: Lage, Versatz der Zähne und Drehfaktor gegenüber Rad A
+function getriebe(){
+  const m=S.modul,stufe=S.zC>=8&&S.kette==='stufe';
+  const A={n:'A',z:S.zA,x:0,off:0,f:1},B={n:'B',z:S.zB,x:m*(S.zA+S.zB)/2,off:gegenOff(0,S.zA,S.zB),f:-S.zA/S.zB},G=[A,B];
+  if(S.zC>=8){
+    if(stufe){G.push({n:'C',z:S.zC,x:B.x,off:0,f:B.f});G.push({n:'D',z:S.zD,x:B.x+m*(S.zC+S.zD)/2,off:gegenOff(0,S.zC,S.zD),f:-B.f*S.zC/S.zD})}
+    else G.push({n:'C',z:S.zC,x:B.x+m*(S.zB+S.zC)/2,off:gegenOff(B.off,S.zB,S.zC),f:-B.f*S.zB/S.zC});
+  }
+  return G;
+}
+function szeneZahn(){
+  const m=S.modul,loch=lochmass('achse'),G=getriebe(),ras=G.map(g=>m*g.z/2+m),R=Math.max(...ras);
+  const rechts=Math.max(...G.map((g,i)=>g.x+ras[i]));
+  return {box:[-ras[0],-R,rechts,R],pad:[24,24,S.zC>=8?24:64,24],zeichnen(k){
+    let s='';
+    G.forEach((g,i)=>{const U=zahnUmriss(m,g.z,loch,g.off,g.x,0),hub=Math.max(Math.min(U.rf*.75,17*k),loch/2+1);
+      s+=`<g data-h="z:${g.n}" data-cx="${f(g.x)}" data-cy="0"><g data-dreh="${g.f}" data-cx="${f(g.x)}" data-cy="0"><path class="ks" d="${U.d}" fill="${FARBEN[g.n]}"/></g>`+
+        `<circle class="ks" cx="${f(g.x)}" cy="0" r="${f(hub)}" fill="#FFFFFF"/><text x="${f(g.x)}" y="${f(5.5*k)}" font-size="${f(16*k)}" text-anchor="middle" fill="${DUNKEL}">${g.z}</text></g>`});
+    const C=G.find(g=>g.n==='C');
+    if(C){const ra=m*C.z/2+m;s+=knopf(C.x+ra*.72,-ra*.72,k,'×','knopf','data-tap="wegC" aria-label="Rad C weg"')}
+    else s+=knopf(rechts+34*k,0,k,'+','knopf','data-tap="plusC" aria-label="Rad C dazu"');
+    return s}};
+}
+function szeneRad(){
+  const R=S.radD*5,loch=lochmass('achse'),gap=Math.max(15,R*.3);
+  let e=0,r;if(S.hub>0){e=S.hub/2;r=(S.scheibeD||Math.max(30,Math.ceil((S.hub+2*loch+16)/5)*5))/2}else r=Math.max(12,R*.4);
+  const cx=R+gap+r,H=Math.max(R,r);
+  return {box:[-R,-H,cx+r,H],pad:[54,30,S.hub>0?130:30,80],zeichnen(k){
+    let s=`<g data-h="rad" data-cx="0" data-cy="0"><circle class="ks" cx="0" cy="0" r="${f(R)}" fill="${HOLZ}"/><g data-dreh="1" data-cx="0" data-cy="0">`+
+      [0,1,2].map(i=>{const a=i*2*Math.PI/3;return `<circle cx="${f(R*.5*Math.cos(a))}" cy="${f(R*.5*Math.sin(a))}" r="${f(R*.13)}" fill="#C99A5B"/>`}).join('')+
+      `</g><circle cx="0" cy="0" r="${f(Math.max(loch/2,.8))}" fill="${DUNKEL}"/></g>`;
+    s+=beschrift(0,H+20*k,k,'Ø '+cmText(2*R));
+    const y=H+52*k;
+    s+=knopf(-36*k,y,k,'−','knopf','data-tap="nMinus" aria-label="Ein Rad weniger"')+beschrift(0,y+7*k,k,S.radN+'×','middle',20)+knopf(36*k,y,k,'+','knopf','data-tap="nPlus" aria-label="Ein Rad mehr"');
+    if(S.hub>0){
+      const fx=cx+r+30*k,ax=cx+r+60*k;
+      s+=`<g data-h="scheibe" data-cx="${f(cx)}" data-cy="0" data-e="${f(e)}" data-r="${f(r)}"><circle class="ks" cx="${f(cx)}" cy="0" r="${f(r)}" fill="${FARBEN.A}"/>`+
+        `<circle class="gst" cx="${f(cx)}" cy="0" r="${f(e)}"/><circle cx="${f(cx)}" cy="0" r="${f(S.achse/2)}" fill="${DUNKEL}"/>`+
+        `<g data-dreh="1" data-cx="${f(cx)}" data-cy="0"><circle class="ks" cx="${f(cx+e)}" cy="0" r="${f(Math.max(loch/2+1.5,6*k))}" fill="#E8554E"/></g></g>`;
+      s+=`<path class="gst" d="M${f(fx)} ${f(-e-14*k)}V${f(e+14*k)}"/><line data-stange data-cx="${f(cx)}" data-e="${f(e)}" data-fx="${f(fx)}" x1="${f(cx+e)}" y1="0" x2="${f(fx)}" y2="0" stroke="${DUNKEL}" stroke-width="2" vector-effect="non-scaling-stroke"/>`+
+        `<rect class="ks" data-folg data-e="${f(e)}" x="${f(fx-8*k)}" y="${f(-7*k)}" width="${f(16*k)}" height="${f(14*k)}" rx="${f(3*k)}" fill="${FARBEN.B}"/>`;
+      const a=5*k;
+      s+=`<path class="pf" d="M${f(ax)} ${f(-e)}V${f(e)}M${f(ax-a)} ${f(-e+a)}L${f(ax)} ${f(-e)}L${f(ax+a)} ${f(-e+a)}M${f(ax-a)} ${f(e-a)}L${f(ax)} ${f(e)}L${f(ax+a)} ${f(e-a)}"/>`+beschrift(ax+9*k,5*k,k,mm(S.hub),'start');
+      s+=knopf(cx+r*.72,-r*.72,k,'×','knopf','data-tap="kurbelWeg" aria-label="Kurbel weg"');
+    }else s+=`<g class="knopf" data-h="knopf" data-tap="kurbelDazu" aria-label="Kurbel dazu"><circle class="gst" cx="${f(cx)}" cy="0" r="${f(r)}" fill="transparent"/></g>`+knopf(cx,0,k,'+','knopf','data-tap="kurbelDazu" aria-label="Kurbel dazu"');
+    return s}};
+}
+function szeneAuto(){
+  const L=S.autoL*10,H=S.autoH*10,D=S.autoRad*10,R=D/2,bo=S.boden,F=UMRISSE[S.form],B=S.autoB*10,rb=S.radBreite,sp=2;
+  let xR,xF;if(S.radstand){const ws=S.radstand*10;xR=(L-ws)/2;xF=xR+ws}else{xR=Math.round(F.achsen[0]*L);xF=Math.round(F.achsen[1]*L)}
+  const links=Math.min(0,xR-R),rechts=Math.max(L,xF+R),halb=B/2+sp+rb;
+  const cxF=zieh&&zieh.cxF!=null?zieh.cxF:rechts+Math.max(30,.25*L)+halb;letztCxF=cxF;
+  const oben=Math.min(-(bo+H),-D);
+  return {box:[links,oben,cxF+halb,0],pad:[74,36,24,66],zeichnen(k){
+    const P=([x,y])=>f(x*L)+' '+f(-(bo+y*H));
+    let s=`<path class="gst" d="M${f(links-60*k)} 0H${f(cxF+halb+60*k)}"/>`;
+    s+=`<g data-h="koerper"><path class="ks" d="M${F.pts.map(P).join('L')}Z" fill="${HOLZ}"/>`+(F.fenster?`<path class="ks" d="M${F.fenster.map(P).join('L')}Z" fill="#CFE8F7"/>`:'')+'</g>';
+    [xR,xF].forEach(x=>{
+      s+=`<g data-h="arad" data-cx="${f(x)}" data-cy="${f(-R)}"><circle class="ks" cx="${f(x)}" cy="${f(-R)}" r="${f(R)}" fill="#2B2F36"/><circle cx="${f(x)}" cy="${f(-R)}" r="${f(R*.55)}" fill="${HOLZ}"/>`+
+        `<g data-dreh="0.6" data-cx="${f(x)}" data-cy="${f(-R)}">`+[0,1,2].map(i=>{const a=i*2*Math.PI/3;return `<circle cx="${f(x+R*.3*Math.cos(a))}" cy="${f(-R+R*.3*Math.sin(a))}" r="${f(R*.09)}" fill="#C99A5B"/>`}).join('')+'</g></g>';
+      s+=`<g data-h="achse" data-cx="${f(L/2)}" data-ws="${f(xF-xR)}"><circle class="ks" cx="${f(x)}" cy="${f(-R)}" r="${f(Math.min(8*k,R*.5))}" fill="#FFFFFF"/></g>`});
+    // Masse: Länge unten, Höhe links, Rad unter dem Vorderrad
+    const yl=36*k,t=5*k;
+    s+=`<path class="ml" d="M0 ${f(yl)}H${f(L)}M0 ${f(yl-t)}V${f(yl+t)}M${f(L)} ${f(yl-t)}V${f(yl+t)}"/>`+beschrift(L/2,yl+18*k,k,cmText(L));
+    s+=`<path class="ml" d="M${f(-18*k)} ${f(-bo)}V${f(-(bo+H))}M${f(-18*k-t)} ${f(-bo)}H${f(-18*k+t)}M${f(-18*k-t)} ${f(-(bo+H))}H${f(-18*k+t)}"/>`+beschrift(-26*k,-(bo+H/2)+5*k,k,cmText(H),'end');
+    s+=beschrift(xF,18*k,k,'Ø '+cmText(D));
+    const top=F.pts.reduce((a,p)=>p[1]>a[1]?p:a);
+    s+=knopf(L,-(bo+hoeheBei(F.pts,.99)*H/2),k,'↔','laenge','aria-label="Länge ziehen"')+knopf(top[0]*L,-(bo+H),k,'↕','hoehe','aria-label="Höhe ziehen"');
+    // Ansicht von vorne: Klotzbreite und Räder
+    s+=`<g data-h="breite" data-cx="${f(cxF)}"><rect class="ks" x="${f(cxF-B/2)}" y="${f(-(bo+H))}" width="${f(B)}" height="${f(H)}" rx="${f(Math.min(3,B/4))}" fill="${HOLZ}"/></g>`;
+    s+=`<path d="M${f(cxF-halb)} ${f(-R)}H${f(cxF+halb)}" stroke="#8A6A3D" stroke-width="${f(S.achse)}"/>`;
+    [-1,1].forEach(sg=>{const x0=sg<0?cxF-halb:cxF+B/2+sp;
+      s+=`<g data-h="rbreite" data-cx="${f(cxF)}"><rect class="ks" x="${f(x0)}" y="${f(-D)}" width="${f(rb)}" height="${f(D)}" rx="${f(Math.min(2,rb/4))}" fill="#2B2F36"/></g>`});
+    s+=beschrift(cxF,-(bo+H)-10*k,k,cmText(B))+beschrift(cxF+B/2+sp+rb/2,18*k,k,mm(rb));
+    return s}};
+}
+function buehne(){
+  const Z=S.modus==='zahn'?szeneZahn():S.modus==='rad'?szeneRad():szeneAuto();
+  if(!zieh||!VB){
+    const [pl,pt,pr,pb]=Z.pad,b=Z.box,cw=SV.clientWidth||600,hMax=Math.max(260,innerHeight*.58);
+    const bw=Math.max(b[2]-b[0],1),bh=Math.max(b[3]-b[1],1);
+    let k=Math.max(bw/Math.max(120,cw-pl-pr),.08);
+    if(bh/k+pt+pb>hMax)k=bh/Math.max(80,hMax-pt-pb);
+    const w=cw*k,h=Math.max(bh/k+pt+pb,220)*k;
+    VB={x:b[0]-pl*k-((cw-pl-pr)*k-bw)/2,y:b[1]-pt*k-(h-(pt+pb)*k-bh)/2,w,h,k};
+    SV.setAttribute('viewBox',`${f(VB.x)} ${f(VB.y)} ${f(w)} ${f(h)}`);SV.style.aspectRatio=`${f(w)} / ${f(h)}`;
+  }
+  SV.innerHTML=Z.zeichnen(VB.k);
+  const gr=$('gross');gr.hidden=S.modus!=='zahn';
+  if(S.modus==='zahn'){const G=getriebe(),fl=G[G.length-1].f,i=1/Math.abs(fl);
+    gr.textContent=[`1 : ${dz(i)}`,i>1.01?'🐢':i<.99?'🐇':'',fl>0?'↻↻':'↻↺'].filter(Boolean).join(' ')}
+  drehen();
+}
+// Drehen: Rad A einmal in 6 Sekunden, alle anderen nach Zähnezahl
+function drehen(){
+  SV.querySelectorAll('[data-dreh]').forEach(g=>g.setAttribute('transform',`rotate(${f(phi*g.dataset.dreh)} ${g.dataset.cx} ${g.dataset.cy})`));
+  const a=phi*Math.PI/180;
+  SV.querySelectorAll('[data-folg]').forEach(r=>r.setAttribute('transform',`translate(0 ${f(r.dataset.e*Math.sin(a))})`));
+  SV.querySelectorAll('[data-stange]').forEach(l=>{const e=+l.dataset.e,y=f(e*Math.sin(a));
+    l.setAttribute('x1',f(+l.dataset.cx+e*Math.cos(a)));l.setAttribute('y1',y);l.setAttribute('y2',y)});
+}
+function schritt(t){
+  if(tAlt&&laeuft&&!document.hidden){phi+=Math.min(t-tAlt,100)*.06;drehen()}
+  tAlt=t;requestAnimationFrame(schritt);
+}
+function spielKnopf(){$('spiel').textContent=laeuft?'⏸':'▶';$('spiel').setAttribute('aria-label',laeuft?'Drehen anhalten':'Drehen lassen')}
+$('spiel').addEventListener('click',()=>{laeuft=!laeuft;spielKnopf()});
+
+function punkt(ev){const m=SV.getScreenCTM();if(!m)return {x:0,y:0};const p=new DOMPoint(ev.clientX,ev.clientY).matrixTransform(m.inverse());return {x:p.x,y:p.y}}
+SV.addEventListener('pointerdown',ev=>{
+  const el=ev.target.closest('[data-h]');if(!el||ev.button>0)return;
+  ev.preventDefault();
+  const p=punkt(ev),d=el.dataset;
+  zieh={h:d.h,tap:d.tap||'',d:Object.assign({},d),c:[+d.cx||0,+d.cy||0],p0:p,p,S0:Object.assign({},S),sx:ev.clientX,sy:ev.clientY,weit:false,id:ev.pointerId,cxF:letztCxF,raf:0};
+  if(d.h==='scheibe'){const r0=Math.hypot(p.x-zieh.c[0],p.y-zieh.c[1]);zieh.art=Math.abs(r0-d.e)<Math.abs(r0-d.r)?'hub':'rand'}
+  try{SV.setPointerCapture(ev.pointerId)}catch(_){}
+});
+SV.addEventListener('pointermove',ev=>{
+  if(!zieh||ev.pointerId!==zieh.id)return;
+  if(!zieh.weit&&Math.hypot(ev.clientX-zieh.sx,ev.clientY-zieh.sy)<4)return;
+  zieh.weit=true;zieh.p=punkt(ev);
+  if(!zieh.raf)zieh.raf=requestAnimationFrame(()=>{if(zieh){zieh.raf=0;ziehen()}});
+});
+function ende(ev){
+  if(!zieh||ev.pointerId!==zieh.id)return;
+  const z=zieh;zieh=null;if(z.raf)cancelAnimationFrame(z.raf);
+  if(z.weit)ziehen(z);else if(z.tap&&ev.type==='pointerup')tippen(z.tap);
+  felder();zeigen();
+}
+SV.addEventListener('pointerup',ende);SV.addEventListener('pointercancel',ende);
+function ziehen(z=zieh){
+  const {p,p0,S0,c,d}=z,dx=p.x-p0.x,dy=p.y-p0.y;
+  const rad=()=>Math.hypot(p.x-c[0],p.y-c[1])-Math.hypot(p0.x-c[0],p0.y-c[1]);   // wie weit nach aussen gezogen
+  const seit=()=>Math.abs(p.x-c[0])-Math.abs(p0.x-c[0]);
+  const h=z.h.split(':');
+  if(h[0]==='z'){const key='z'+h[1];S[key]=begrenzt(Math.round(S0[key]+2*rad()/S.modul),8,60);S.ziel=''}
+  else if(h[0]==='rad')S.radD=begrenzt(r5(S0.radD+2*rad()/10),1,30);
+  else if(h[0]==='scheibe'){if(z.art==='hub')S.hub=begrenzt(Math.round(S0.hub+2*rad()),2,150);else S.scheibeD=begrenzt(Math.round(2*d.r+2*rad()),10,200)}
+  else if(h[0]==='laenge')S.autoL=begrenzt(r5(S0.autoL+dx/10),5,60);
+  else if(h[0]==='hoehe')S.autoH=begrenzt(r5(S0.autoH-dy/10),2,30);
+  else if(h[0]==='arad')S.autoRad=begrenzt(r5(S0.autoRad+2*rad()/10),1,20);
+  else if(h[0]==='koerper')S.boden=begrenzt(Math.round(S0.boden-dy),0,80);
+  else if(h[0]==='achse')S.radstand=begrenzt(r5((+d.ws+2*seit())/10),1,60);
+  else if(h[0]==='breite')S.autoB=begrenzt(r5(S0.autoB+2*seit()/10),1,20);
+  else if(h[0]==='rbreite')S.radBreite=begrenzt(Math.round(S0.radBreite+seit()),3,60);
+  else return;
+  $('tipp').hidden=true;
+  if(z===zieh){felder();zeigen()}
+}
+function tippen(a){
+  if(a==='plusC'){S.zC=12;S.kette='reihe';S.ziel=''}
+  else if(a==='wegC'){S.zC=0;S.ziel=''}
+  else if(a==='nMinus')S.radN=Math.max(1,S.radN-1);
+  else if(a==='nPlus')S.radN=Math.min(12,S.radN+1);
+  else if(a==='kurbelWeg')S.hub=0;
+  else if(a==='kurbelDazu'){S.hub=20;S.scheibeD=0}
+}
+addEventListener('resize',()=>{if(!zieh)buehne()});
+
+// Chips mit Bildern statt Wörtern: Zahngrösse als Zahnstange, Autoform als Umriss
+$('modulChips').innerHTML=[2,3,4,5,6].map(m=>{const p=m*1.5+1.5,h=m*1.7;let d='M0 16';
+  for(let x=0;x<40;x+=p)d+=`L${f(x+p*.15)} 16L${f(x+p*.32)} ${f(16-h)}L${f(x+p*.68)} ${f(16-h)}L${f(x+p*.85)} 16`;
+  return `<button type="button" class="chip" data-v="${m}" title="Zahngrösse: Modul ${m} mm" aria-label="Modul ${m} mm"><svg viewBox="0 0 40 18" aria-hidden="true"><path d="${d}L40 16V18H0Z" fill="currentColor"/></svg></button>`}).join('');
+$('formChips').innerHTML=Object.keys(UMRISSE).map(k=>{const F=UMRISSE[k];
+  return `<button type="button" class="chip" data-v="${k}" title="${FORMEN[k]}" aria-label="${FORMEN[k]}"><svg viewBox="0 0 48 26" aria-hidden="true"><path d="M${F.pts.map(([x,y])=>f(2+x*44)+' '+f(19-y*14)).join('L')}Z" fill="currentColor"/>`+
+    F.achsen.map(a=>`<circle cx="${f(2+a*44)}" cy="20" r="5" fill="currentColor" stroke="var(--surface2)" stroke-width="1.5"/>`).join('')+'</svg></button>'}).join('');
+
 function zeigen(){
   const E=S.modus==='zahn'?teileZahn():S.modus==='rad'?teileRad():teileAuto();
   const {blaetter,zuGross,P}=packen(E.teile);
@@ -452,12 +637,12 @@ function zeigen(){
   $('k-bau').hidden=!(E.sch&&E.sch.length);
   $('material').innerHTML=(E.mat||[]).map(([a,b])=>`<li><span>${a}</span><span class="n">${b}</span></li>`).join('');
   $('schritte').innerHTML=(E.sch||[]).map(t=>`<li>${t}</li>`).join('');
-  $('uebersicht').innerHTML=E.zus;
   $('blaetter').innerHTML=svgs.join('');
   $('druck').innerHTML=svgs.join('');
-  $('info').textContent=(blaetter.length?`${E.teile.length-zuGross.length} Teile auf ${blaetter.length} ${blaetter.length===1?'Blatt':'Blättern'} ${P.name}.`:`Kein Teil passt auf ${P.name}.`)+` Ausdrucken, mit Leimstift auf das Holz kleben, aussägen, Löcher an den Kreuzen bohren.`;
+  $('info').textContent=blaetter.length?`${E.teile.length-zuGross.length} Teile · ${blaetter.length} ${blaetter.length===1?'Blatt':'Blätter'} · 100 %`:`Passt nicht auf ${P.name}`;
   $('seite').textContent=`@page{size:${P.name} portrait;margin:0}#druck{--bw:${P.w}mm;--bh:${P.h}mm}`;
   document.title=`Schritt für Schritt · Mechanik-Planer · ${E.titel}`;
+  buehne();
   speichern();
 }
 function felder(){
@@ -477,7 +662,7 @@ document.querySelectorAll('input[data-k]').forEach(i=>{
   i.addEventListener('change',()=>{i.value=S[i.dataset.k]});
 });
 $('drucken').addEventListener('click',()=>print());
-felder();zeigen();
+felder();zeigen();spielKnopf();requestAnimationFrame(schritt);
 })();
 </script>
 </body>
