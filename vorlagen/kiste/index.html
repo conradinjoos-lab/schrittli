@@ -202,7 +202,7 @@ h2 .leise{color:var(--muted);font-size:14px;font-family:Nunito,sans-serif}
     <h2>Schrauben</h2>
     <div class="fakten" id="fakten"></div>
   </section>
-  <button type="button" class="drucken" id="drucken" data-handy><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg> Plan drucken</button>
+  <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg> Plan drucken</button>
   <details class="karte mehr-karte" id="mehr"><summary title="Rechnung, Material, Anleitung">⋯ Rechnung · Material · Anleitung</summary>
     <p class="hinweis" id="mat-hinweis"></p>
     <div class="rechnung" id="rechnung"></div>
@@ -734,8 +734,6 @@ document.querySelectorAll('[data-g="mat"] .chip').forEach(c=>{ c.title=`${MATERI
   inp.addEventListener('change',()=>setzen(parseFloat(String(inp.value).replace(',','.'))));
   inp.addEventListener('input',()=>{ const v=parseFloat(String(inp.value).replace(',','.')); if(!isNaN(v)&&v>=lo&&v<=hi){ S[k]=v; if(k==='d') dickenChips(); speichern(); zeichnen(); } });
 });
-// «Aufs Handy holen»: die Kiste mit allen Einstellungen im Link
-window.handyLink=()=>{ const q=new URLSearchParams(); ['l','b','h','d','mass','mat','boden','aussen','deckel'].forEach(k=>q.set(k,S[k])); return location.origin+location.pathname+'?'+q; };
 $('drucken').addEventListener('click',()=>window.print());
 felder(); zeichnen();
 })();
