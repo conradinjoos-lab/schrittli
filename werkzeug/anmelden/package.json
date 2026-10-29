@@ -4,11 +4,15 @@
   "type": "module",
   "scripts": {
     "deploy": "wrangler deploy",
-    "check": "node --test feedback.test.js sammlung.test.js unterricht.test.js namen.test.js",
-    "test": "node --test feedback.test.js sammlung.test.js unterricht.test.js namen.test.js",
+    "check": "node --test feedback.test.js sammlung.test.js unterricht.test.js namen.test.js wunsch.test.js",
+    "test": "node --test feedback.test.js sammlung.test.js unterricht.test.js namen.test.js wunsch.test.js",
     "dry-run": "wrangler deploy --dry-run"
   },
   "devDependencies": {
+    "esbuild": "^0.28.2",
     "wrangler": "4.153.0"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.3.0"
   }
 }

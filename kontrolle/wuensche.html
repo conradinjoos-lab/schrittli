@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Schrittli – Wünsche</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="kontrolle.css">
+<style>
+.kopf{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:14px}
+.kopf .karte{margin:0}
+.kopf .zahl{font:600 28px/1 var(--display);margin:4px 0}
+.balken{height:8px;border-radius:99px;background:var(--surface2);overflow:hidden;margin:8px 0 6px}
+.balken i{display:block;height:100%;background:var(--lern)}
+.wunsch{display:grid;grid-template-columns:220px 1fr;gap:18px;align-items:start}
+@media(max-width:620px){.wunsch{grid-template-columns:1fr}}
+.wunsch h2{margin:0;font:600 20px var(--display)}
+.bild{aspect-ratio:1;border-radius:14px;background:repeating-conic-gradient(#eef1f4 0 25%,#fff 0 50%) 0 0/20px 20px;display:grid;place-items:center;overflow:hidden}
+.bild img{width:92%;height:92%;object-fit:contain}
+.bild .warte{font:500 15px var(--display);color:#6b7684;text-align:center;padding:10px}
+.status{font:600 12px var(--display);border-radius:999px;padding:3px 10px;background:var(--surface2);color:var(--muted);white-space:nowrap}
+.status.bereit{background:var(--lern-soft);color:var(--lern)}
+.status.fehler,.status.abgelehnt{color:var(--rot)}
+.felder{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+@media(max-width:420px){.felder{grid-template-columns:1fr}}
+.felder label{display:grid;gap:4px;font-size:12px;color:var(--muted)}
+.felder input,.felder select{width:100%;box-sizing:border-box}
+.wunsch .kind{margin:8px 0 0}
+.nochmal{margin-top:10px}
+details.alt>summary{cursor:pointer;font:600 16px var(--display);color:var(--muted);margin:22px 0 10px}
+.zeile{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 0;border-top:1px solid var(--line)}
+.zeile:first-child{border-top:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <header>
+  <a class="zurueck" href="./" title="Zurück zur Kontrolle">←</a>
+  <div class="logo">✨</div>
+  <div><h1>Wünsche</h1></div>
+ </header>
+ <div class="kopf" id="kopf"></div>
+ <section class="karte warm" id="ohne-schluessel" hidden>
+  <h2>Der Claude-Schlüssel fehlt noch</h2>
+  <p>Einmal im Terminal setzen, dann zeichnet Claude die Wünsche von selbst:</p>
+  <p><code>cd werkzeug/anmelden &amp;&amp; npx wrangler secret put ANTHROPIC_API_KEY</code></p>
+ </section>
+ <main id="liste"><div class="nichts">Lade Wünsche …</div></main>
+ <details class="alt" id="alt" hidden><summary id="alt-titel">Abgelehnt, Fehler und aufgeschaltet</summary><section class="karte" id="alt-liste"></section></details>
+ <p class="fehler" id="fehler"></p>
+</div>
+<script src="werkstatt.js"></script>
+<script>
+/* Motiv-Wünsche: Kinder melden im Vorlagen-Generator ein fehlendes Motiv, Claude zeichnet es im Worker (alle 10 Minuten oder hier sofort).
+   «Übernehmen» rechnet die SVG-Zeichnung in ein PNG und schreibt es mit figuren.json und quellen.md ins App-Repo,
+   die Action motive.yml macht daraus die Vorlage. */
+(async()=>{
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+const zeit=z=>{const d=new Date(z);return isNaN(d)?'':d.toLocaleDateString('de-CH',{day:'numeric',month:'short'})+', '+d.toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'})};
+const STATUS={neu:'Wartet auf Claude',zeichnet:'Claude zeichnet',bereit:'Zum Prüfen',fehler:'Fehler',abgelehnt:'Abgelehnt',fertig:'Aufgeschaltet'};
+const PREIS=.25;   // ungefähr pro Zeichnung in USD (Opus 5.5, Denken und SVG)
+let daten=null,urls=[],beschaeftigt=0;
+
+async function laden(){daten=await W.wuensche.liste();zeigen()}
+const mitNs=svg=>/\sxmlns=/.test(svg.slice(0,300))?svg:svg.replace(/^<svg/,'<svg xmlns="http://www.w3.org/2000/svg"');
+function svgUrl(svg){const u=URL.createObjectURL(new Blob([mitNs(svg)],{type:'image/svg+xml'}));urls.push(u);return u}
+
+/* Die Zeichnung als PNG mit durchsichtigem Hintergrund, längste Seite px (wie die übrigen Motive in werkzeug/vorlagen/bilder) */
+async function alsPng(svg,px){
+ const el=new DOMParser().parseFromString(mitNs(svg),'image/svg+xml').documentElement;
+ const vb=(el.getAttribute('viewBox')||'0 0 512 512').trim().split(/[\s,]+/).map(Number),f=px/Math.max(vb[2]||1,vb[3]||1);
+ const b=Math.round((vb[2]||1)*f),h=Math.round((vb[3]||1)*f);el.setAttribute('width',b);el.setAttribute('height',h);
+ const u=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(el)],{type:'image/svg+xml'}));
+ try{
+  const im=new Image();await new Promise((ok,nein)=>{im.onload=ok;im.onerror=()=>nein(new Error('Die Zeichnung lässt sich nicht als Bild öffnen.'));im.src=u});
+  const c=document.createElement('canvas');c.width=b;c.height=h;c.getContext('2d').drawImage(im,0,0,b,h);
+  return c.toDataURL('image/png').split(',')[1]}
+ finally{URL.revokeObjectURL(u)}}
+
+function kopf(){
+ const m=daten.monat,rest=Math.max(0,m.budget-m.usd),offen=daten.wuensche.filter(w=>['neu','zeichnet','bereit'].includes(w.status));
+ $('#kopf').innerHTML=`<div class="karte"><div class="klein">Kosten diesen Monat</div><div class="zahl">${m.usd.toFixed(2)} USD</div>
+   <div class="balken"><i style="width:${m.budget?Math.min(100,m.usd/m.budget*100):100}%"></i></div>
+   <div class="klein">Grenze ${m.budget} USD · reicht noch für etwa ${Math.floor(rest/PREIS)} Zeichnungen</div></div>
+  <div class="karte"><div class="klein">Offene Wünsche</div><div class="zahl">${offen.length}</div>
+   <div class="klein">${offen.filter(w=>w.status==='bereit').length} zum Prüfen. Neue Wünsche zeichnet Claude alle 10 Minuten von selbst.</div></div>`;
+ $('#ohne-schluessel').hidden=daten.schluessel}
+
+function karte(w){
+ const bild=w.svg?`<img src="${svgUrl(w.svg)}" alt="${esc(w.titel||w.name)}">`:`<div class="warte">${w.status==='zeichnet'?'Claude zeichnet …':'Noch keine Zeichnung'}</div>`;
+ const welten=daten.welten.map(x=>`<option${x===(w.welt||'Alltag')?' selected':''}>${esc(x)}</option>`).join('');
+ const info=[w.anzahl>1&&w.anzahl+'× gewünscht',zeit(w.erstellt),w.versuche&&(w.versuche===1?'1 Zeichnung':w.versuche+' Zeichnungen')].filter(Boolean).join(' · ');
+ const knoepfe=w.svg
+  ?`<div class="felder"><label>Name im Generator<input type="text" class="titel" maxlength="40" value="${esc(w.titel||w.name)}"></label>
+    <label>Welt<select class="welt">${welten}</select></label></div>
+   <div class="reihe"><button class="p" data-tun="auf">Übernehmen</button><button class="s" data-tun="nochmal">Nochmals zeichnen</button><button class="s rot" data-tun="ab">Ablehnen</button></div>
+   <form class="reihe nochmal" hidden><input type="text" class="hinweis grow" maxlength="500" placeholder="Was soll anders sein? z.B. dickere Umrisse, freundlicher"><button class="p">Zeichnen</button></form>`
+  :`<div class="reihe"><button class="s" data-tun="jetzt"${w.status==='zeichnet'?' disabled':''}>Jetzt zeichnen</button><button class="s rot" data-tun="ab">Ablehnen</button></div>`;
+ return `<section class="karte wunsch" data-id="${w.id}"><div class="bild">${bild}</div><div>
+  <div class="reihe"><h2 class="grow">«${esc(w.name)}»</h2><span class="status ${w.status}">${STATUS[w.status]||esc(w.status)}</span></div>
+  <p class="klein">${info}</p>${w.text?`<p class="kind">«${esc(w.text)}»</p>`:''}
+  ${w.grund&&w.status!=='abgelehnt'?`<p class="klein">${esc(w.grund)}</p>`:''}${w.hinweis?`<p class="klein">Letzter Hinweis: ${esc(w.hinweis)}</p>`:''}
+  ${knoepfe}<p class="fehler"></p></div></section>`}
+
+function zeile(w){
+ const was=w.status==='fertig'?`als <code>${esc(w.figur)}</code> aufgeschaltet`:esc(w.grund||'');
+ return `<div class="zeile" data-id="${w.id}"><b>«${esc(w.titel||w.name)}»</b><span class="status ${w.status}">${STATUS[w.status]}</span>
+  <span class="klein grow">${was}</span>${w.status==='fertig'?'':'<button class="s" data-tun="jetzt">Doch zeichnen</button>'}<button class="x" data-tun="weg" title="Wunsch löschen">Löschen</button></div>`}
+
+function zeigen(){
+ urls.forEach(URL.revokeObjectURL);urls=[];kopf();
+ const offen=daten.wuensche.filter(w=>['neu','zeichnet','bereit'].includes(w.status)),alt=daten.wuensche.filter(w=>!offen.includes(w));
+ $('#liste').innerHTML=offen.length?offen.map(karte).join(''):'<div class="nichts">Keine offenen Wünsche.<br><span class="klein">Kinder wünschen sich Motive unten im Vorlagen-Generator.</span></div>';
+ $('#alt').hidden=!alt.length;$('#alt-titel').textContent=`Abgelehnt, Fehler und aufgeschaltet (${alt.length})`;
+ $('#alt-liste').innerHTML=alt.map(zeile).join('')}
+
+const finde=id=>daten.wuensche.find(w=>w.id===id);
+async function arbeit(knopf,text,fn){
+ const box=knopf.closest('[data-id]'),f=box.querySelector('.fehler')||$('#fehler'),alt=knopf.textContent;
+ box.querySelectorAll('button,input,select').forEach(e=>e.disabled=true);knopf.textContent=text;f.textContent='';beschaeftigt++;
+ try{await fn();zeigen()}
+ catch(x){f.textContent=String(x.message||x);box.querySelectorAll('button,input,select').forEach(e=>e.disabled=false);knopf.textContent=alt}
+ finally{beschaeftigt--}}
+async function zeichnen(knopf,id,hinweis,bild){
+ await arbeit(knopf,'Claude zeichnet … (1–3 Min.)',async()=>{
+  const r=await W.wuensche.zeichnen(id,hinweis,bild);
+  daten.wuensche=daten.wuensche.map(w=>w.id===id?r.wunsch:w);daten.monat=r.monat})}
+
+document.addEventListener('click',async e=>{
+ const k=e.target.closest('button[data-tun]');if(!k)return;
+ const box=k.closest('[data-id]'),id=box.dataset.id,w=finde(id);if(!w)return;
+ const tun=k.dataset.tun;
+ if(tun==='jetzt')return zeichnen(k,id,'','');
+ if(tun==='nochmal'){const f=box.querySelector('.nochmal');f.hidden=!f.hidden;if(!f.hidden)f.querySelector('input').focus();return}
+ if(tun==='ab'){
+  const grund=prompt('Warum passt «'+w.name+'» nicht? (freiwillig)','');if(grund===null)return;
+  return arbeit(k,'Ablehnen …',async()=>{await W.wuensche.ablehnen(id,grund);Object.assign(w,{status:'abgelehnt',grund:grund||'Von der Lehrperson abgelehnt.'})})}
+ if(tun==='weg'){
+  if(!confirm('Wunsch «'+w.name+'» ganz löschen?'))return;
+  return arbeit(k,'Löschen …',async()=>{await W.wuensche.loeschen(id);daten.wuensche=daten.wuensche.filter(x=>x.id!==id)})}
+ if(tun==='auf'){
+  const name=box.querySelector('.titel').value.trim().replace(/ß/g,'ss'),welt=box.querySelector('.welt').value;
+  if(!name){box.querySelector('.fehler').textContent='Bitte einen Namen eingeben.';return}
+  return arbeit(k,'Schalte auf …',async()=>{
+   const figur=await W.wuensche.aufschalten(id,name,welt,await alsPng(w.svg,800));
+   Object.assign(w,{status:'fertig',figur,titel:name});
+   $('#fehler').textContent='';setTimeout(()=>alert(`«${name}» ist aufgeschaltet (${figur}). In etwa 5 Minuten ist die Vorlage im Generator.`),50)})}
+});
+document.addEventListener('submit',async e=>{
+ const f=e.target.closest('form.nochmal');if(!f)return;e.preventDefault();
+ const box=f.closest('[data-id]'),id=box.dataset.id,w=finde(id),hinweis=f.querySelector('.hinweis').value.trim();
+ let bild='';try{bild=await alsPng(w.svg,512)}catch{}
+ zeichnen(f.querySelector('button'),id,hinweis,bild)});
+
+if(W.LOKAL){$('#liste').innerHTML='<div class="nichts">Die Wünsche gibt es nur online:<br><a href="https://conradinjoos-lab.github.io/schrittli/kontrolle/wuensche.html">Kontrolle online öffnen</a></div>';return}
+try{await W.bereit();await laden()}catch(x){$('#liste').innerHTML=`<div class="nichts">Laden ging nicht: ${esc(x.message||x)}</div>`;return}
+
+/* Neue Wünsche zeichnet der Worker von selbst: ab und zu nachschauen, aber nicht während einer Eingabe */
+setInterval(()=>{
+ if(beschaeftigt||document.hidden||document.querySelector('.wunsch input:focus,.wunsch select:focus,.nochmal:not([hidden])'))return;
+ if(daten&&daten.wuensche.some(w=>w.status==='neu'||w.status==='zeichnet'))laden().catch(()=>{})},60000);
+})();
+</script>
+</body>
+</html>

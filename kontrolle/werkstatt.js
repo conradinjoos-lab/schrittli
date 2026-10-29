@@ -26,13 +26,15 @@ const W=(()=>{
  async function datei(repo,pfad,art='text',ref='main'){
   const r=await gh(`/repos/${repo}/contents/${pfad}?ref=${ref}`,{headers:{Accept:'application/vnd.github.raw'},cache:art==='blob'?'default':'no-store'});
   if(r.status===404)return null;if(!r.ok)throw new Error('GitHub '+r.status+': '+pfad);return r[art]()}
- /* Ein Commit mit mehreren Dateien. dateien(basis) liefert {pfad:text} und wird bei einem Konflikt neu berechnet. */
+ /* Ein Commit mit mehreren Dateien. dateien(basis) liefert {pfad:text oder {base64}} und wird bei einem Konflikt neu berechnet. */
  async function commit(repo,dateien,nachricht){
   for(let v=0;v<4;v++){
    const basis=(await json(`/repos/${repo}/git/ref/heads/main`)).object.sha;
    const c=await json(`/repos/${repo}/git/commits/${basis}`);
    const f=await dateien(basis);
-   const baum=await json(`/repos/${repo}/git/trees`,{method:'POST',body:JSON.stringify({base_tree:c.tree.sha,tree:Object.entries(f).map(([path,content])=>({path,mode:'100644',type:'blob',content}))})});
+   const eintrag=async([path,content])=>typeof content==='string'?{path,mode:'100644',type:'blob',content}   // Text direkt, Bilder ({base64}) als eigener Blob
+    :{path,mode:'100644',type:'blob',sha:(await json(`/repos/${repo}/git/blobs`,{method:'POST',body:JSON.stringify({content:content.base64,encoding:'base64'})})).sha};
+   const baum=await json(`/repos/${repo}/git/trees`,{method:'POST',body:JSON.stringify({base_tree:c.tree.sha,tree:await Promise.all(Object.entries(f).map(eintrag))})});
    const neu=await json(`/repos/${repo}/git/commits`,{method:'POST',body:JSON.stringify({message:nachricht,tree:baum.sha,parents:[basis]})});
    const r=await gh(`/repos/${repo}/git/refs/heads/main`,{method:'PATCH',body:JSON.stringify({sha:neu.sha})});
    if(r.ok)return;if(r.status!==422)throw new Error('GitHub '+r.status+' beim Schreiben')}
@@ -177,9 +179,27 @@ const W=(()=>{
  const sammlung={verwaltung:()=>api('/sammlung/verwaltung'),erstellen:name=>post('/sammlung/erstellen',{name}),sperren:id=>post('/sammlung/sperren',{id}),
   werke:id=>api('/sammlung/verwaltung/werke'+frage({id})),foto:id=>apiBlob('/sammlung/verwaltung/foto'+frage({id})),loeschen:id=>post('/sammlung/loeschen',{id})};
  const namen={klassen:()=>api('/namen/klassen'),speichern:k=>post('/namen/speichern',k),entfernen:id=>post('/namen/entfernen',{id})};   // Vornamen pro Klasse für «Wer bist du?»
+ /* Motiv-Wünsche aus dem Vorlagen-Generator: Claude zeichnet im Worker (werkzeug/anmelden/wunsch.js), aufschalten schreibt Bild,
+    figuren.json und Quelle in einem Commit. Die Vorlage daraus rechnet die Action .github/workflows/motive.yml. Im Repo stehen diese Dateien mit LF. */
+ const FIG='werkzeug/vorlagen/figuren.json',QUELLEN='werkzeug/vorlagen/quellen.md',QK='## Von Claude gezeichnet (Wünsche)';
+ const slug=s=>s.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').normalize('NFD').replace(/\p{M}/gu,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+ const wuensche={liste:()=>api('/wunsch/liste'),zeichnen:(id,hinweis,bild)=>post('/wunsch/zeichnen',{id,hinweis,bild}),
+  ablehnen:(id,grund)=>post('/wunsch/ablehnen',{id,grund}),loeschen:id=>post('/wunsch/loeschen',{id}),
+  async aufschalten(id,name,welt,png){   // png: Base64 ohne «data:»-Vorspann; liefert die neue Figur-ID
+   let figur='';
+   await commit(APP,async basis=>{
+    const [f,q]=await Promise.all([datei(APP,FIG,'text',basis),datei(APP,QUELLEN,'text',basis)]),d=JSON.parse(f),ids=new Set(d.figuren.map(e=>e.id));
+    const s='wu-'+(slug(name)||'motiv');figur=s;for(let i=2;ids.has(figur);i++)figur=s+'-'+i;
+    d.figuren.push({id:figur,name,welt,datei:figur+'.png'});
+    const zeile=`| ${name.replace(/\|/g,'/')} | ${figur} | – | Claude (Anthropic), gewünscht im Vorlagen-Generator, geprüft von der Lehrperson | eigene Zeichnung |`;
+    let t=(q||'').replace(/\s*$/,'\n');const i=t.indexOf(QK);
+    if(i<0)t+=`\n${QK}\n\nKinder wünschen sich im Vorlagen-Generator ein fehlendes Motiv. Claude zeichnet es neu als SVG (ohne Vorlage, kein fremdes Bild), die Lehrperson prüft es vor dem Aufschalten.\n\n| Motiv | Figur-ID | URL | Autor | Lizenz |\n|---|---|---|---|---|\n${zeile}\n`;
+    else{const ende=t.indexOf('\n\n',t.indexOf('\n|---',i)+1);t=ende<0?t+zeile+'\n':t.slice(0,ende+1)+zeile+'\n'+t.slice(ende+1)}
+    return {['werkzeug/vorlagen/bilder/'+figur+'.png']:{base64:png},[FIG]:JSON.stringify(d,null,1)+'\n',[QUELLEN]:t}},'Vorlagen: Wunsch-Motiv «'+name+'» von Claude gezeichnet');
+   await post('/wunsch/fertig',{id,figur,titel:name});return figur}};
  const APP_URL='https://conradinjoos-lab.github.io/schrittli/schule/';   // Links für die Schul-iPads: APP_URL+'#unterricht=…', '#klasse=…', '#sammlung=…'
 
- return {LOKAL,bereit,abmelden,liste,daten,bild,speichern,veroeffentlichen,jsonText,werke,werkBild,meldungen,erledigt,unterricht,feedback,sammlung,namen,APP_URL,
+ return {LOKAL,bereit,abmelden,liste,daten,bild,speichern,veroeffentlichen,jsonText,werke,werkBild,meldungen,erledigt,unterricht,feedback,sammlung,namen,wuensche,APP_URL,
   nachPub:LOKAL?'Noch committen und pushen.':'In etwa einer Minute in der Schul-App.',
   pause:LOKAL?1500:6000}  // Autospeichern: online seltener, jeder Stand ist ein Commit
 })();

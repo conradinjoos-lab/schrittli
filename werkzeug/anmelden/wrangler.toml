@@ -19,7 +19,7 @@ namespace_id = "2026102701"
 simple = { limit = 120, period = 60 }
 
 [triggers]
-crons = ["17 3 * * *"]
+crons = ["17 3 * * *", "*/10 * * * *"]
 
 [observability]
 enabled = true
@@ -47,3 +47,13 @@ simple = { limit = 120, period = 60 }
 name = "UNTERRICHT_LIMIT"
 namespace_id = "2026102703"
 simple = { limit = 60, period = 60 }
+
+[[ratelimits]]
+name = "WUNSCH_LIMIT"
+namespace_id = "2026102704"
+simple = { limit = 10, period = 60 }
+
+# Motiv-Wünsche: so viele USD darf Claude pro Monat fürs Zeichnen brauchen (0 = aus). Den Schlüssel setzt nur die Lehrperson:
+# cd werkzeug/anmelden && npx wrangler secret put ANTHROPIC_API_KEY
+[vars]
+WUNSCH_MONAT_USD = "50"

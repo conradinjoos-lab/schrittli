@@ -2,10 +2,11 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {Miniflare,convertV4MiniflareOptions} from 'miniflare';
+import {werk} from './pruefbau.js';
 import {fileURLToPath} from 'node:url';
 
 test('shared collection: two iPads, isolation, ratings, retries, deletion, revocation',async()=>{
- const mf=new Miniflare(convertV4MiniflareOptions({modules:['worker.js','feedback.js','sammlung.js','unterricht.js','namen.js'].map(name=>({type:'ESModule',path:fileURLToPath(new URL(name,import.meta.url)),contents:readFileSync(new URL(name,import.meta.url),'utf8')})),compatibilityDate:'2026-10-01',kvNamespaces:['KV'],d1Databases:['SAMMLUNG'],outboundService:async req=>Response.json({login:req.headers.get('Authorization')==='Bearer teacher'?'conradinjoos-lab':'another'})}));
+ const mf=new Miniflare(convertV4MiniflareOptions({modules:werk(),compatibilityDate:'2026-10-01',kvNamespaces:['KV'],d1Databases:['SAMMLUNG'],outboundService:async req=>Response.json({login:req.headers.get('Authorization')==='Bearer teacher'?'conradinjoos-lab':'another'})}));
  try{
   const db=await mf.getD1Database('SAMMLUNG');await db.exec(readFileSync(new URL('sammlung-migrations/0001_sammlung.sql',import.meta.url),'utf8').replaceAll('\n',' '));
   const call=async(path,token='teacher',body,origin='https://conradinjoos-lab.github.io')=>{const r=new Request('https://test.example/sammlung/'+path,{method:body?'POST':'GET',headers:{Origin:origin,Authorization:'Bearer '+token,...(body&&!(body instanceof FormData)?{'Content-Type':'application/json'}:{})},body:body instanceof FormData?body:body?JSON.stringify(body):undefined});return mf.dispatchFetch(r.url,{method:r.method,headers:Object.fromEntries(r.headers),body:body?await r.arrayBuffer():undefined});};

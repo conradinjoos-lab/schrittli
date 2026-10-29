@@ -1,0 +1,55 @@
+# Neue Motiv-Bilder zu Vorlagen umrechnen: wenn in werkzeug/vorlagen/bilder ein Motiv ohne fertige Vorlage liegt
+# (zum Beispiel ein Wunsch, den die Lehrperson in kontrolle/wuensche.html übernommen hat), rechnet werkzeug/vorlagen/bild.py
+# nur diese Motive und schreibt vorlagen/figuren. Lokal gerechnete Motive (mit Vorlage im selben Commit) lässt die Action in Ruhe.
+name: Motive rechnen
+on:
+  push:
+    branches: [main]
+    paths: ['werkzeug/vorlagen/bilder/**', 'werkzeug/vorlagen/figuren.json']
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: motive
+  cancel-in-progress: false
+jobs:
+  rechnen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Motive ohne Vorlage suchen
+        id: suche
+        run: |
+          ids=$(python -I -c "import json,os;d=json.load(open('werkzeug/vorlagen/figuren.json',encoding='utf-8'));print(' '.join(f['id'] for f in d['figuren'] if not os.path.exists('vorlagen/figuren/bilder/'+f['id']+'.webp')))")
+          echo "ids=$ids" >> "$GITHUB_OUTPUT"
+          echo "Ohne Vorlage: ${ids:-keine}"
+      - name: Pakete laden
+        if: steps.suche.outputs.ids != ''
+        run: pip install numpy opencv-python-headless scipy shapely pillow
+      - name: Rechnen und aufschalten
+        if: steps.suche.outputs.ids != ''
+        env:
+          IDS: ${{ steps.suche.outputs.ids }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for versuch in 1 2 3; do
+            python -I werkzeug/vorlagen/bild.py $IDS
+            git add vorlagen/figuren
+            if git diff --cached --quiet; then echo 'Nichts Neues'; exit 0; fi
+            git commit -q -m "Vorlagen: $IDS gerechnet"
+            if git push -q origin HEAD:main; then exit 0; fi
+            git fetch -q origin main && git reset -q --hard origin/main   # jemand war schneller: auf dem neuen Stand nochmals
+          done
+          exit 1
+      - name: Seite neu bauen
+        if: steps.suche.outputs.ids != ''
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds"
