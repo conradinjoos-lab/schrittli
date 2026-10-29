@@ -1,5 +1,5 @@
 {
-  "figuren": 995,
+  "figuren": 1036,
   "formen": 363,
   "farbgleichheit": [
     {
@@ -4593,6 +4593,15 @@
       ]
     },
     {
+      "id": "tiere-baerentatze",
+      "farbpixelIdentisch": true,
+      "teile": 11,
+      "pixel": [
+        1296,
+        1399
+      ]
+    },
+    {
       "id": "fig-pizzastueck-fett",
       "farbpixelIdentisch": true,
       "teile": 1,
@@ -5151,6 +5160,168 @@
       ]
     },
     {
+      "id": "berg-v-silhouette",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        299
+      ]
+    },
+    {
+      "id": "berg-v-gipfel-wald",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1394,
+        525
+      ]
+    },
+    {
+      "id": "berg-v-schneegipfel-tannen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        514
+      ]
+    },
+    {
+      "id": "berg-v-felsmassiv",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1397,
+        529
+      ]
+    },
+    {
+      "id": "berg-v-abendrot",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        262
+      ]
+    },
+    {
+      "id": "berg-v-eisgipfel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        800
+      ]
+    },
+    {
+      "id": "berg-v-schneekette",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        346
+      ]
+    },
+    {
+      "id": "berg-v-nebelberge",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        538
+      ]
+    },
+    {
+      "id": "berg-v-gruener-gipfel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        1202
+      ]
+    },
+    {
+      "id": "berg-v-wanderer-hund",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        1400,
+        1041
+      ]
+    },
+    {
+      "id": "berg-v-sil-gipfel-wald",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1394,
+        506
+      ]
+    },
+    {
+      "id": "berg-v-sil-schneegipfel-tannen",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        483
+      ]
+    },
+    {
+      "id": "berg-v-sil-felsmassiv",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1397,
+        481
+      ]
+    },
+    {
+      "id": "berg-v-sil-abendrot",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        209
+      ]
+    },
+    {
+      "id": "berg-v-sil-eisgipfel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        435
+      ]
+    },
+    {
+      "id": "berg-v-sil-schneekette",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        210
+      ]
+    },
+    {
+      "id": "berg-v-sil-nebelberge",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        248
+      ]
+    },
+    {
+      "id": "berg-v-sil-gruener-gipfel",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1400,
+        1114
+      ]
+    },
+    {
       "id": "stadt-zuerich",
       "farbpixelIdentisch": true,
       "teile": 25,
@@ -5490,6 +5661,204 @@
       "pixel": [
         2995,
         1551
+      ]
+    },
+    {
+      "id": "stadt-oc-berlin",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        1572,
+        489
+      ]
+    },
+    {
+      "id": "stadt-oc-frankfurt",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1550,
+        694
+      ]
+    },
+    {
+      "id": "stadt-oc-newyork",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1580,
+        338
+      ]
+    },
+    {
+      "id": "stadt-oc-chicago",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1568,
+        279
+      ]
+    },
+    {
+      "id": "stadt-oc-sydney",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1600,
+        290
+      ]
+    },
+    {
+      "id": "stadt-oc-toronto",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1556,
+        638
+      ]
+    },
+    {
+      "id": "stadt-oc-boston",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1576,
+        320
+      ]
+    },
+    {
+      "id": "stadt-oc-peking",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        1578,
+        261
+      ]
+    },
+    {
+      "id": "stadt-oc-singapur",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1549,
+        564
+      ]
+    },
+    {
+      "id": "stadt-oc-moskau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1540,
+        754
+      ]
+    },
+    {
+      "id": "stadt-oc-dubai",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1600,
+        690
+      ]
+    },
+    {
+      "id": "stadt-oc-paris",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1600,
+        350
+      ]
+    },
+    {
+      "id": "stadt-oc-duesseldorf",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1600,
+        920
+      ]
+    },
+    {
+      "id": "stadt-oc-montreal",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1572,
+        172
+      ]
+    },
+    {
+      "id": "stadt-oc-miami",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1572,
+        270
+      ]
+    },
+    {
+      "id": "stadt-oc-philadelphia",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1582,
+        330
+      ]
+    },
+    {
+      "id": "stadt-oc-breslau",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1600,
+        441
+      ]
+    },
+    {
+      "id": "stadt-oc-panorama",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1600,
+        315
+      ]
+    },
+    {
+      "id": "stadt-oc-grossstadt-1",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1600,
+        316
+      ]
+    },
+    {
+      "id": "stadt-oc-grossstadt-2",
+      "farbpixelIdentisch": true,
+      "teile": 1,
+      "pixel": [
+        1600,
+        222
+      ]
+    },
+    {
+      "id": "stadt-oc-grossstadt-3",
+      "farbpixelIdentisch": true,
+      "teile": 2,
+      "pixel": [
+        1556,
+        202
+      ]
+    },
+    {
+      "id": "stadt-oc-grossstadt-4",
+      "farbpixelIdentisch": true,
+      "teile": 7,
+      "pixel": [
+        1600,
+        249
       ]
     },
     {

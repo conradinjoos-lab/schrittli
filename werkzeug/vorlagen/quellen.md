@@ -9,7 +9,9 @@ Quelle jeder Grafik: `https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg
 
 **Openclipart** (CC0 1.0, https://creativecommons.org/publicdomain/zero/1.0/): keine Nennung nötig, Autor und Seite trotzdem aufgeführt.
 
-Alle Quellen sind frei nutzbar (CC0 oder CC-BY mit Nennung); nichts stammt von Flaticon oder Vecteezy.
+**Vecteezy** (https://de.vecteezy.com): elf Bilder (zehn Berge, eine Bärentatze) aus den Favoriten der Schule, kostenlos geladen unter der **Vecteezy Free License** (https://www.vecteezy.com/licensing-agreement), nicht CC0: Nennung nötig, Bilder nicht einzeln weiterverkaufen oder als eigene Grafik anbieten. Nennung: «Grafiken von Vecteezy.com», Autor je Bild in der Tabelle. Das Foto «Alpen im Abendrot» wurde für Schrittli freigestellt (Himmel entfernt). Aus acht dieser Bergbilder wurden zusätzlich schwarze Silhouetten abgeleitet (IDs `berg-v-sil-…`); sie stehen unter derselben Lizenz und nennen denselben Autor.
+
+Alle übrigen Quellen sind frei nutzbar (CC0 oder CC-BY mit Nennung); nichts stammt von Flaticon.
 
 ## Buchstaben & Zahlen bunt
 
@@ -196,7 +198,7 @@ Flaggen und Tiere: Twemoji (siehe oben); Kontinente und Weltkarte: Openclipart (
 
 ## Berge
 
-Alle 30 Berge sind eigene Zeichnungen (CC0), es wurde keine Vorlage kopiert: Silhouetten schwarz auf durchsichtig mit `werkzeug/vorlagen/silhouetten.py`, realistische Felsbilder und farbige Comic-Berge mit schwarzen Umrisslinien mit `werkzeug/vorlagen/landschaften.py`. Elf IDs ersetzen frühere Fremdbilder (Vecteezy, nicht CC0).
+Die 30 gezeichneten Berge sind eigene Zeichnungen (CC0), es wurde keine Vorlage kopiert: Silhouetten schwarz auf durchsichtig mit `werkzeug/vorlagen/silhouetten.py`, realistische Felsbilder und farbige Comic-Berge mit schwarzen Umrisslinien mit `werkzeug/vorlagen/landschaften.py`. Elf IDs ersetzen frühere Fremdbilder (Vecteezy, nicht CC0). Dazu kommen zehn Bilder von Vecteezy (IDs `berg-v-…`, Tabelle unten) und acht daraus abgeleitete schwarze Silhouetten (IDs `berg-v-sil-…`).
 
 | Motiv | Figur-ID | Skript | Autor | Lizenz |
 |---|---|---|---|---|
@@ -231,9 +233,32 @@ Alle 30 Berge sind eigene Zeichnungen (CC0), es wurde keine Vorlage kopiert: Sil
 | Zelten in den Bergen (Comic) | berg-c-zelt | landschaften.py | eigene Zeichnung | CC0 |
 | Skifahren (Comic) | berg-c-ski | landschaften.py | eigene Zeichnung | CC0 |
 
+Von Vecteezy (Vecteezy Free License, nicht CC0):
+
+| Motiv | Figur-ID | URL | Autor | Lizenz |
+|---|---|---|---|---|
+| Bergsilhouette | berg-v-silhouette | https://de.vecteezy.com/png/15224537 | wisnu M | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Felsgipfel mit Wald | berg-v-gipfel-wald | https://de.vecteezy.com/png/26757841 | Pisut Tardging | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Schneegipfel mit Tannen | berg-v-schneegipfel-tannen | https://de.vecteezy.com/png/26772069 | Pisut Tardging | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Felsmassiv | berg-v-felsmassiv | https://de.vecteezy.com/png/26773189 | Pisut Tardging | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Alpen im Abendrot (freigestellt) | berg-v-abendrot | https://de.vecteezy.com/foto/39302541 | Hifzhan Graphics | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Eisgipfel | berg-v-eisgipfel | https://de.vecteezy.com/png/44808904 | Uzair Irfan | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Schneebedeckte Bergkette | berg-v-schneekette | https://de.vecteezy.com/png/47920960 | Md. Yousuf Ibrahim | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Blaue Nebelberge | berg-v-nebelberge | https://de.vecteezy.com/png/59370248 | Mr Sufi | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Grüner Gipfel | berg-v-gruener-gipfel | https://de.vecteezy.com/png/60120905 | Muhammad Muzamil | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Wanderer mit Hund | berg-v-wanderer-hund | https://de.vecteezy.com/png/85853787 | ABUL BASAR SIAM | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Felsgipfel mit Wald – Silhouette (abgeleitet) | berg-v-sil-gipfel-wald | https://de.vecteezy.com/png/26757841 | Pisut Tardging | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Gipfel mit Tannen – Silhouette (abgeleitet) | berg-v-sil-schneegipfel-tannen | https://de.vecteezy.com/png/26772069 | Pisut Tardging | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Felsmassiv – Silhouette (abgeleitet) | berg-v-sil-felsmassiv | https://de.vecteezy.com/png/26773189 | Pisut Tardging | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Alpenkette – Silhouette (abgeleitet) | berg-v-sil-abendrot | https://de.vecteezy.com/foto/39302541 | Hifzhan Graphics | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Eisgipfel – Silhouette (abgeleitet) | berg-v-sil-eisgipfel | https://de.vecteezy.com/png/44808904 | Uzair Irfan | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Zackige Bergkette – Silhouette (abgeleitet) | berg-v-sil-schneekette | https://de.vecteezy.com/png/47920960 | Md. Yousuf Ibrahim | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Doppelgipfel – Silhouette (abgeleitet) | berg-v-sil-nebelberge | https://de.vecteezy.com/png/59370248 | Mr Sufi | Vecteezy Free License, Nennung «Vecteezy.com» |
+| Spitzer Gipfel – Silhouette (abgeleitet) | berg-v-sil-gruener-gipfel | https://de.vecteezy.com/png/60120905 | Muhammad Muzamil | Vecteezy Free License, Nennung «Vecteezy.com» |
+
 ## Städte
 
-Alle 38 Skylines und Wahrzeichen sind eigene Zeichnungen (CC0), es wurde keine Vorlage kopiert: Silhouetten schwarz auf durchsichtig mit `werkzeug/vorlagen/silhouetten.py` bzw. `landschaften.py`, farbige Comic-Städte (IDs `stadt-c-…`) mit `landschaften.py`.
+Die 38 gezeichneten Skylines und Wahrzeichen sind eigene Zeichnungen (CC0), es wurde keine Vorlage kopiert: Silhouetten schwarz auf durchsichtig mit `werkzeug/vorlagen/silhouetten.py` bzw. `landschaften.py`, farbige Comic-Städte (IDs `stadt-c-…`) mit `landschaften.py`.
 
 | Motiv | Figur-ID | Skript | Autor | Lizenz |
 |---|---|---|---|---|
@@ -275,6 +300,33 @@ Alle 38 Skylines und Wahrzeichen sind eigene Zeichnungen (CC0), es wurde keine V
 | New York (Comic) | stadt-c-newyork | landschaften.py | eigene Zeichnung | CC0 |
 | Pisa (Comic) | stadt-c-pisa | landschaften.py | eigene Zeichnung | CC0 |
 | Venedig (Comic) | stadt-c-venedig | landschaften.py | eigene Zeichnung | CC0 |
+
+Dazu kommen 22 Skylines von Openclipart (CC0, IDs `stadt-oc-…`): schwarz gezeichnete Vorlagen, für Schrittli doppelt so gross gerechnet, zu einem Stück zusammengefasst und unten mit gerader, schmaler Basis abgeschnitten. Skripte im Arbeitsordner der Sitzung (`oc_sil.py`, `oc_kuerzen.py`), nicht im Repo.
+
+| Motiv | Figur-ID | URL | Autor | Lizenz |
+|---|---|---|---|---|
+| Berlin – Skyline | stadt-oc-berlin | https://openclipart.org/detail/311075 | GDJ | CC0 1.0 |
+| Frankfurt – Skyline | stadt-oc-frankfurt | https://openclipart.org/detail/311071 | GDJ | CC0 1.0 |
+| New York – Skyline | stadt-oc-newyork | https://openclipart.org/detail/311067 | GDJ | CC0 1.0 |
+| Chicago – Skyline | stadt-oc-chicago | https://openclipart.org/detail/311072 | GDJ | CC0 1.0 |
+| Sydney – Skyline | stadt-oc-sydney | https://openclipart.org/detail/311066 | GDJ | CC0 1.0 |
+| Toronto – Skyline | stadt-oc-toronto | https://openclipart.org/detail/311064 | GDJ | CC0 1.0 |
+| Boston – Skyline | stadt-oc-boston | https://openclipart.org/detail/311073 | GDJ | CC0 1.0 |
+| Peking – Skyline | stadt-oc-peking | https://openclipart.org/detail/313427 | GDJ | CC0 1.0 |
+| Singapur – Skyline | stadt-oc-singapur | https://openclipart.org/detail/311078 | GDJ | CC0 1.0 |
+| Moskau – Skyline | stadt-oc-moskau | https://openclipart.org/detail/308037 | GDJ | CC0 1.0 |
+| Dubai – Skyline | stadt-oc-dubai | https://openclipart.org/detail/286667 | GDJ | CC0 1.0 |
+| Paris – Skyline | stadt-oc-paris | https://openclipart.org/detail/310593 | Exocet | CC0 1.0 |
+| Düsseldorf – Skyline | stadt-oc-duesseldorf | https://openclipart.org/detail/270683 | GDJ | CC0 1.0 |
+| Montreal – Skyline | stadt-oc-montreal | https://openclipart.org/detail/311068 | GDJ | CC0 1.0 |
+| Miami – Skyline | stadt-oc-miami | https://openclipart.org/detail/313374 | GDJ | CC0 1.0 |
+| Philadelphia – Skyline | stadt-oc-philadelphia | https://openclipart.org/detail/306079 | GDJ | CC0 1.0 |
+| Breslau – Skyline | stadt-oc-breslau | https://openclipart.org/detail/194483 | lothar_ppt | CC0 1.0 |
+| Stadtpanorama – Skyline | stadt-oc-panorama | https://openclipart.org/detail/300394 | GDJ | CC0 1.0 |
+| Grossstadt 1 – Skyline | stadt-oc-grossstadt-1 | https://openclipart.org/detail/286694 | GDJ | CC0 1.0 |
+| Grossstadt 2 – Skyline | stadt-oc-grossstadt-2 | https://openclipart.org/detail/282881 | GDJ | CC0 1.0 |
+| Grossstadt 3 – Skyline | stadt-oc-grossstadt-3 | https://openclipart.org/detail/282544 | GDJ | CC0 1.0 |
+| Grossstadt 4 – Skyline | stadt-oc-grossstadt-4 | https://openclipart.org/detail/281699 | GDJ | CC0 1.0 |
 
 ## Schweizer Feste
 
@@ -325,3 +377,11 @@ Twemoji (siehe oben) und eine Räbe von Openclipart (CC0), alle mit schwarzem Um
 | Glücksschwein | fest-glueckssau | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f437.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
 | Glückskäfer | fest-marienkaefer | https://github.com/jdecked/twemoji/blob/v15.1.0/assets/svg/1f41e.svg | Twitter, Inc. und Mitwirkende (Twemoji) | CC-BY 4.0 |
 | Räbe für das Räbeliechtli | fest-raebe | https://openclipart.org/detail/84079 | feraliminal | CC0 1.0 |
+
+## Tierwelt
+
+Die übrigen 26 Tiere stehen in `quellen-cc0.md`; diese Tatze stammt von Vecteezy.
+
+| Motiv | Figur-ID | URL | Autor | Lizenz |
+|---|---|---|---|---|
+| Bärentatze | tiere-baerentatze | https://de.vecteezy.com/png/86916938 | MDigitalArt Studio | Vecteezy Free License, Nennung «Vecteezy.com» |
