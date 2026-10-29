@@ -130,7 +130,6 @@ body[data-ansicht="start"] main,body[data-ansicht="bau"] .start{display:none}
 .leiste .naechstes{font-size:15px}
 .auftrag .txt .warum{display:block;color:var(--muted);font-size:12.5px;font-weight:600;line-height:1.35;margin-top:2px}
 .auftrag li.ok .txt .warum{display:none}
-.weg-satz{font-size:13px;color:var(--muted);margin:0 0 6px}
 .stromweg b{font-weight:800}
 .mark{fill:none;stroke:#E8554E;stroke-width:4;stroke-dasharray:9 6;pointer-events:none;animation:markieren 1s ease-in-out infinite alternate}
 @keyframes markieren{from{opacity:.3}to{opacity:1}}
@@ -234,9 +233,8 @@ body[data-ansicht="start"] main,body[data-ansicht="bau"] .start{display:none}
     <div class="leiste" id="leiste"></div>
     <div class="flaeche" id="flaeche">
       <svg id="svg" viewBox="0 0 880 560" xmlns="http://www.w3.org/2000/svg"></svg>
-      <div class="leer-tipp" id="leer-tipp" hidden>Tippe links auf ein Teil,<br>dann erscheint es hier.</div>
+      <div class="leer-tipp" id="leer-tipp" hidden>👈 Teil antippen</div>
     </div>
-    <p class="tipp">Teil ziehen = verschieben. Von Klemme zu Klemme ziehen = Kabel. Schalter antippen = ein/aus. Taster gedrückt halten. Kabel antippen = Knick setzen oder löschen.</p>
     <div class="werkzeuge">
       <button class="knopf" id="undo" type="button">↶ Rückgängig</button>
       <button class="knopf" id="strom" type="button" aria-pressed="true">⚡ Strom zeigen</button>
@@ -245,8 +243,7 @@ body[data-ansicht="start"] main,body[data-ansicht="bau"] .start{display:none}
     </div>
   </section>
   <section class="karte" id="k-rechner" aria-label="Rechner">
-    <h2>Rechenbox: Was brauche ich?</h2>
-    <p class="tipp" style="margin:0 0 12px">Welche Batterie, welche LED oder welcher Motor, wie viele? Die Box rechnet Schritt für Schritt vor. Mit «Auf die Fläche legen» baut sie dir den Plan.</p>
+    <h2>🧮 Rechenbox</h2>
     <div id="rechner"></div>
   </section>
   </div>
@@ -626,39 +623,39 @@ function laufzeitH(){                                                    // Stun
   const bs=S.teile.filter(t=>t.typ==='batterie'&&Math.abs((Z.teile.get(t.id)||{}).I||0)>0.0005); if(!bs.length) return null;
   if(bs.some(b=>!quelle(b.volt).mah)) return Infinity;
   return Math.min(...bs.map(b=>quelle(b.volt).mah/1000/Math.abs(Z.teile.get(b.id).I))); }
-const zeitText=h=>h===Infinity?'solange es eingesteckt ist':h>48?'sehr lange':h>=2?`etwa ${Math.round(h)} Stunden`:`etwa ${Math.max(1,Math.round(h*60))} Minuten`;
-function laufzeit(){ const h=laufzeitH(); if(h==null) return ''; if(h===Infinity) return ' Das Netzgerät liefert, solange es eingesteckt ist.'; const n=S.teile.filter(t=>t.typ==='batterie'&&Math.abs(Z.teile.get(t.id).I||0)>0.0005).length; return ` ${n>1?'Die Batterien halten':'Die Batterie hält'} damit ${zeitText(h)}.`; }
+const zeitText=h=>h===Infinity?'∞':h>48?'sehr lange':h>=2?`≈ ${Math.round(h)} Std.`:`≈ ${Math.max(1,Math.round(h*60))} Min.`;
+function laufzeit(){ const h=laufzeitH(); if(h==null) return ''; return ` · ⏳ ${h===Infinity?'∞':zeitText(h)}`; }
 function antwort(){
   const A=[]; const li=(sym,txt,cls='')=>A.push(`<li class="${cls}"><span class="sym">${sym}</span><span>${txt}</span></li>`);
   const bat=S.teile.filter(t=>t.typ==='batterie'); const verbraucher=S.teile.filter(t=>['led','band','kette','motor','lampe','summer'].includes(t.typ));
   const Q=quellenInfo(); const hatR=S.teile.some(t=>t.typ==='widerstand');
   const ungleich=Q.parallel.find(([a,b])=>a.volt!==b.volt);
-  if(ungleich) li('⚠️',`<b>Zwei verschiedene Batterien parallel</b> (${vz(ungleich[0].volt)} V und ${vz(ungleich[1].volt)} V): Die stärkere drückt Strom in die schwächere, beide werden heiss. Parallel nur gleiche Batterien!`,'warn');
-  else if(Q.parallel.length){ const np=new Set(Q.parallel.flat().map(b=>b.id)).size; li('🔋',`${np} Batterien <b>parallel</b> (+ an +, − an −): Die Spannung bleibt <b>${vz(Q.U)} V</b>, aber sie halten ${np===2?'doppelt':np+'-mal'} so lang.`,'leise'); }
-  if(Q.reihe.length){ const ids=new Set(Q.reihe.flat().map(b=>b.id)); const bs=bat.filter(b=>ids.has(b.id)); li('🔋',`${bs.length} Batterien <b>in Reihe</b> (+ an −): Die Spannungen zählen zusammen: ${bs.map(b=>vz(b.volt)+' V').join(' + ')} = <b>${vz(bs.reduce((a,b)=>a+b.volt,0))} V</b>.`,'leise'); }
-  if(!S.teile.length){ li('👉','Hol dir zuerst eine Batterie, dann einen Schalter und eine LED oder einen Motor.','leise'); }
-  else if(!bat.length){ li('🔋','Ohne Batterie fliesst kein Strom.','leise'); }
+  if(ungleich) li('⚠️',`<b>${vz(ungleich[0].volt)} V ≠ ${vz(ungleich[1].volt)} V parallel</b> 🔥`,'warn');
+  else if(Q.parallel.length){ const np=new Set(Q.parallel.flat().map(b=>b.id)).size; li('🔋',`${np}× parallel · <b>${vz(Q.U)} V</b> · ⏳ × ${np}`,'leise'); }
+  if(Q.reihe.length){ const ids=new Set(Q.reihe.flat().map(b=>b.id)); const bs=bat.filter(b=>ids.has(b.id)); li('🔋',`${bs.length}× in Reihe · ${bs.map(b=>vz(b.volt)+' V').join(' + ')} = <b>${vz(bs.reduce((a,b)=>a+b.volt,0))} V</b>`,'leise'); }
+  if(!S.teile.length){ li('👉','🔋 + 🔘 + 💡','leise'); }
+  else if(!bat.length){ li('🔋','<b>fehlt</b>','leise'); }
   else if(Z.kurz||Q.gegen.length||!Z.fliesst){ const d=diagnose(); if(d) li(Z.kurz?'⚠️':'🔍',`<b>${esc(d.txt)}</b> ${d.warum||''}${d.knopf?' '+d.knopf:''}`,Z.kurz||Q.gegen.length?'warn':'');
-    else if(!Z.fliesst) li('🔌','Es fliesst kein Strom. Der Kreis ist nicht geschlossen.','leise'); }
+    else if(!Z.fliesst) li('🔌','Kreis offen','leise'); }
   if(!Z.kurz&&Z.fliesst&&bat.length){
     const Ib=Math.max(...bat.map(b=>Math.abs(Z.teile.get(b.id).I||0)));
-    li('⚡',`Quelle <b>${vz(Q.U)} V</b> – es fliessen <b>${mA(Ib)} mA</b>.${laufzeit()}`,'leise');
+    li('⚡',`<b>${vz(Q.U)} V</b> · <b>${mA(Ib)} mA</b>${laufzeit()}`,'leise');
     verbraucher.forEach(t=>{ const o=Z.teile.get(t.id); const n=DIO_TYPEN.includes(t.typ)?dioName(t):t.typ==='motor'?`Der ${motor(t).name}`:t.typ==='lampe'?'Das Lämpchen':'Der Summer';
-      if(DIO_TYPEN.includes(t.typ)){ const d=dio(t),Ub=d.V+d.R*d.I,R=e12auf((Q.U-Ub)/d.I); const was=t.typ==='led'?'eine LED':t.typ==='band'?'das Leuchtband':'die Lichterkette', es=t.typ==='band'?'es':'sie';
-        const tipp=t.typ==='band'?'Das Leuchtband hat seinen Widerstand schon eingebaut und ist für 12 V gemacht – nimm ein Netzgerät 12 V.':hatR?`Nimm einen grösseren Widerstand – für ${was} an ${vz(Q.U)} V etwa <b>${ohmText(R)}</b>.`:`Baue einen Widerstand in Reihe – für ${was} an ${vz(Q.U)} V etwa <b>${ohmText(R)}</b>${t.typ==='led'?' (siehe Rechenbox)':''}.`;
-        if(o.zuviel) li('⚠️',`${n} bekommt <b>${mA(o.I)} mA</b> – viel zu viel, ${es} geht kaputt! ${tipp}`,'warn');
-        else if(o.viel) li('⚠️',`${n} leuchtet, bekommt aber <b>${mA(o.I)} mA</b> statt ${mA(d.I)} mA. Das hält ${es} nicht lange aus. ${tipp}`,'warn');
-        else if(o.an) li('💡',`${n} leuchtet${o.hell<0.5?' schwach':''} (${mA(o.I)} mA).${t.typ==='band'&&o.hell<0.7?' Richtig hell wird es erst am Netzgerät 12 V.':''}`);
-        else if(o.verkehrt) li('🔁',`${n} ist falsch herum eingebaut: ${t.typ==='led'?'Das lange Beinchen (+) muss zum + der Batterie.':'Das + muss zum + der Quelle.'} Kaputt geht dabei nichts. Tippe auf das Teil und auf «Umdrehen».`,'warn');
-        else if(o.zuwenig) li('🔋',`${n} bekommt zu wenig Spannung: ${t.typ==='band'?'Es braucht 12 V':`Sie braucht ${vz(Ub)} V`}, hier liegen nur ${vz(Math.max(0,o.U))} V an. In Reihe teilen sich die Teile die Spannung – schalte sie parallel oder nimm eine grössere ${t.typ==='band'?'Quelle':'Batterie'}.`,'leise'); }
+      if(DIO_TYPEN.includes(t.typ)){ const d=dio(t),Ub=d.V+d.R*d.I,R=e12auf((Q.U-Ub)/d.I);
+        const tipp=t.typ==='band'?'🔌 12 V':`${hatR?'grösserer':'+'} Widerstand <b>${ohmText(R)}</b>`;
+        if(o.zuviel) li('⚠️',`${n}: <b>${mA(o.I)} mA</b> 🔥 · ${tipp}`,'warn');
+        else if(o.viel) li('⚠️',`${n}: <b>${mA(o.I)} mA</b> statt ${mA(d.I)} mA · ${tipp}`,'warn');
+        else if(o.an) li('💡',`${n} leuchtet${o.hell<0.5?' schwach':''} · ${mA(o.I)} mA${t.typ==='band'&&o.hell<0.7?' · 🔌 12 V':''}`);
+        else if(o.verkehrt) li('🔁',`${n} falsch herum · ${t.typ==='led'?'langes Bein ➜ +':'+ ➜ +'}`,'warn');
+        else if(o.zuwenig) li('🔋',`${n}: nur <b>${vz(Math.max(0,o.U))} V</b> statt ${t.typ==='band'?'12':vz(Ub)} V`,'leise'); }
       else if(t.typ==='motor'){ const U=Math.abs(o.U),proz=Math.round(U/3*100);
-        if(o.zuviel) li('⚠️',`${n} bekommt <b>${vz(U)} V</b> – zu viel für einen 3-V-Motor (1,5 bis 4,5 V). Er wird heiss und geht kaputt. Nimm eine kleinere Batterie oder schalte zwei Motoren in Reihe.`,'warn');
-        else if(o.an) li('🌀',`${n} dreht mit <b>${vz(U)} V</b> und ${mA(o.I)} mA – ${proz<85?`langsamer als normal (${proz} %)`:proz>115?`schneller als normal (${proz} %)`:'normal schnell'}${o.rueck?'. Er dreht andersherum – mit «Umdrehen» wechselst du die Richtung':''}.`);
-        else if(o.zuwenig) li('🔋',`${n} bekommt nur ${vz(U)} V und bleibt stehen. Tipp: Motor und LED parallel schalten, nicht in Reihe.`,'leise'); }
-      else if(t.typ==='lampe'){ if(o.zuviel) li('⚠️',`${n} bekommt zu viel Spannung und brennt durch.`,'warn'); else if(o.an) li('🔆',`${n} leuchtet${o.hell<0.5?' schwach':''}.`); else if(o.zuwenig) li('🔋',`${n} bekommt zu wenig Spannung.`,'leise'); }
-      else if(t.typ==='summer'){ if(o.an) li('🔔',`${n} summt.`); else if(o.zuwenig) li('🔋',`${n} bekommt zu wenig Spannung.`,'leise'); } });
-    S.teile.filter(t=>t.typ==='widerstand').forEach(t=>{ const o=Z.teile.get(t.id); if(o.zuviel) li('🔥',`Der Widerstand ${ohmText(t.ohm)} wird heiss (${vz(o.P,1)} W). Nimm einen grossen 1-W-Widerstand oder einen grösseren Wert.`,'warn'); });
-    if(!verbraucher.length) li('🤔','Strom fliesst, aber nichts leuchtet oder dreht: Es fehlt eine LED, ein Motor oder ein Lämpchen.','leise');
+        if(o.zuviel) li('⚠️',`${n}: <b>${vz(U)} V</b> statt 3 V 🔥`,'warn');
+        else if(o.an) li('🌀',`${n} dreht · <b>${vz(U)} V</b> · ${proz<85?'🐢':proz>115?'🐇':''} ${proz} %${o.rueck?' · ↺':''}`);
+        else if(o.zuwenig) li('🔋',`${n}: nur <b>${vz(U)} V</b> · steht`,'leise'); }
+      else if(t.typ==='lampe'){ if(o.zuviel) li('⚠️',`${n}: zu viel 🔥`,'warn'); else if(o.an) li('🔆',`${n} leuchtet${o.hell<0.5?' schwach':''}`); else if(o.zuwenig) li('🔋',`${n}: zu schwach`,'leise'); }
+      else if(t.typ==='summer'){ if(o.an) li('🔔',`${n} summt`); else if(o.zuwenig) li('🔋',`${n}: zu schwach`,'leise'); } });
+    S.teile.filter(t=>t.typ==='widerstand').forEach(t=>{ const o=Z.teile.get(t.id); if(o.zuviel) li('🔥',`Widerstand ${ohmText(t.ohm)}: <b>${vz(o.P,1)} W</b> · 1-W-Widerstand`,'warn'); });
+    if(!verbraucher.length) li('🤔','💡 / 🌀 fehlt','leise');
   }
   $('antwort').innerHTML=A.join('');
 }
@@ -677,7 +674,7 @@ function teilBild(typ,vor={}){ const t={id:0,typ,x:0,y:0,rot:0,...NEU[typ],...vo
 function palette(){
   const knopf=([typ,vor={},name],gi,ti)=>`<button class="pt" type="button" data-typ="${typ}" data-g="${gi}" data-t="${ti}">${teilBild(typ,vor)}<b>${esc(name||TYPEN[typ].name)}</b></button>`;
   const kabel=`<button class="pt kabel-info" type="button" data-kabel="1"><svg viewBox="-64 -46 128 92" aria-hidden="true"><path d="M-44 10C-20-30 20 40 44-10" fill="none" stroke="#E8554E" stroke-width="6" stroke-linecap="round"/><circle cx="-44" cy="10" r="8" fill="#FFE58A" stroke="#1F1A17" stroke-width="2.5"/><circle cx="44" cy="-10" r="8" fill="#FFE58A" stroke="#1F1A17" stroke-width="2.5"/></svg><b>Kabel: Klemme zu Klemme ziehen</b></button>`;
-  $('palette').innerHTML=GRUPPEN.map((g,gi)=>`<div class="gruppe"><h3>${esc(g.name)}</h3><small>${esc(g.text)}</small><div class="reihe">${g.kabel?kabel:''}${g.teile.map((x,ti)=>knopf(x,gi,ti)).join('')}</div></div>`).join('');
+  $('palette').innerHTML=GRUPPEN.map((g,gi)=>`<div class="gruppe"><h3>${esc(g.name)}</h3><div class="reihe">${g.kabel?kabel:''}${g.teile.map((x,ti)=>knopf(x,gi,ti)).join('')}</div></div>`).join('');
 }
 $('palette').addEventListener('click',e=>{ if(e.target.closest('[data-kabel]')){ meldung('Kabel: Von einer gelben Klemme zur nächsten ziehen – oder beide nacheinander antippen.'); return; } const b=e.target.closest('[data-typ]'); if(!b) return; merken(); const [x,y]=freierPlatz(); const vor=GRUPPEN[b.dataset.g].teile[b.dataset.t][1]||{}; const r=AU&&AU.fehlt.find(r=>passtKnopf(r,b.dataset.typ,vor)); const t={id:S.n++,typ:b.dataset.typ,x,y,rot:0,...NEU[b.dataset.typ],...vor,...(r?r.vor:{})}; S.teile.push(t); wahl={art:'teil',id:t.id}; warteKlemme=null; aendern(); });
 
@@ -709,7 +706,7 @@ const PROJEKTE=[
    ziele:[{r:2,txt:'Die Lichterkette leuchtet'}]},
   {id:'seilbahn',bild:'🚡',name:'Seilbahn',text:'Ein Getriebemotor zieht langsam und kräftig.',
    teile:[B3,SCH,{typ:'motor',vor:{art:'getriebe',antrieb:'zahnrad'},name:'Getriebemotor mit Zahnrad'}],
-   ziele:[{r:2,txt:'Die Bahn fährt'},{r:2,txt:'Sie fährt auch zurück (Motor umdrehen)',beide:true}]}
+   ziele:[{r:2,txt:'Die Bahn fährt'},{r:2,txt:'Sie fährt auch zurück ↺',beide:true}]}
 ];
 let AU=null;                                     // geprüfter Bauauftrag
 const lose=()=>S.teile.reduce((n,t)=>n+[0,1].filter(k=>!S.kabel.some(c=>(c.a[0]===t.id&&c.a[1]===k)||(c.b[0]===t.id&&c.b[1]===k))).length,0);
@@ -745,7 +742,6 @@ const DER={batterie:'die Batterie',schalter:'der Schalter',taster:'der Taster',l
 const DEM={batterie:'der Batterie',schalter:'dem Schalter',taster:'dem Taster',led:'der LED',band:'dem Leuchtband',kette:'der Lichterkette',motor:'dem Motor',lampe:'dem Lämpchen',summer:'dem Summer',widerstand:'dem Widerstand'};
 const gross=s=>s.charAt(0).toUpperCase()+s.slice(1);
 const an=Dm=>Dm.startsWith('dem ')?'am '+Dm.slice(4):'an '+Dm, bei=Dm=>Dm.startsWith('dem ')?'beim '+Dm.slice(4):'bei '+Dm;
-const zuDem=Dm=>Dm.startsWith('dem ')?'zum '+Dm.slice(4):'zur '+Dm.slice(4), vonDem=Dm=>Dm.startsWith('dem ')?'vom '+Dm.slice(4):'von '+Dm;
 function netz(leitet){                                                    // welche Klemmen hängen zusammen? Kabel plus Teile, für die leitet(t) gilt
   const el=new Map(), f=k=>{ while(el.get(k)!==k) k=el.get(k); return k; }, u=(a,b)=>{ a=f(a); b=f(b); if(a!==b) el.set(a,b); };
   S.teile.forEach(t=>{ el.set(t.id+':0',t.id+':0'); el.set(t.id+':1',t.id+':1'); });
@@ -760,40 +756,40 @@ function imKreis(t,offenZaehlt){                                          // gib
 function diagnose(fokus){                                                 // {txt, warum, mark, knopf} – oder null, wenn alles läuft
   const bat=S.teile.filter(t=>t.typ==='batterie');
   fokus=fokus&&fokus.length?fokus:S.teile.filter(t=>VERBR.includes(t.typ));
-  if(!bat.length) return {txt:'Es fehlt eine Batterie.',warum:'Die Batterie ist wie eine Pumpe: Sie schiebt den Strom im Kreis herum. Ohne sie fliesst nichts.'};
+  if(!bat.length) return {txt:'🔋 fehlt',warum:''};
   if(!fokus.length) return null;
   const Q=quellenInfo();
   if(Q.gegen.length){ const [a,b]=Q.gegen[0];
-    return {txt:'Die Batterien drücken gegeneinander.',warum:`Bei dir hängt + an + (oder − an −). Dann schiebt jede Batterie in die andere Richtung, und es bleibt fast nichts übrig: ${vz(a.volt)} V − ${vz(b.volt)} V = ${vz(Math.abs(a.volt-b.volt))} V. Dreh eine Batterie um, dann zählen sie zusammen (in Reihe). Oder verbinde auch − mit −, dann sind sie parallel und halten länger.`,mark:[a.id,b.id],knopf:holChip('dreh:'+b.id,'↔ Batterie umdrehen')}; }
+    return {txt:'⚠ Batterien gegeneinander',warum:`${vz(a.volt)} V − ${vz(b.volt)} V = <b>${vz(Math.abs(a.volt-b.volt))} V</b>`,mark:[a.id,b.id],knopf:holChip('dreh:'+b.id,'↔ Batterie umdrehen')}; }
   if(Z.kurz){ const b=bat.find(b=>(Z.teile.get(b.id)||{}).heiss)||bat[0];
-    return {txt:'Kurzschluss!',warum:'Ein Kabel führt von + direkt zurück zu −, ohne Lampe oder Motor dazwischen. Der Strom nimmt immer den bequemsten Weg – darum bekommt kein Teil etwas ab, und die Batterie wird heiss. Lösch das Kabel, das direkt zurückführt.',mark:[b.id]}; }
+    return {txt:'⚠ Kurzschluss',warum:'+ ➜ − 🔥',mark:[b.id]}; }
   const kurzNetz=netz(x=>(x.typ==='schalter'||x.typ==='taster')&&x.an);
   const ueber=fokus.find(t=>dran(t.id,0)&&dran(t.id,1)&&kurzNetz(t.id+':0')===kurzNetz(t.id+':1'));
-  if(ueber) return {txt:`${gross(DER[ueber.typ])} ist überbrückt.`,warum:`Beide Klemmen hängen am gleichen Draht. Der Strom nimmt den bequemen Weg ${an(DEM[ueber.typ])} vorbei statt hindurch. Löse ein Kabel und führe es zum anderen Pol der Batterie.`,mark:[ueber.id]};
+  if(ueber) return {txt:`${gross(DER[ueber.typ])} überbrückt`,warum:'↷',mark:[ueber.id]};
   for(const t of fokus){ const o=Z.teile.get(t.id)||{}, D=DER[t.typ], Dm=DEM[t.typ];
     if(!imKreis(t,false)){
       if(imKreis(t,true)){ const sch=S.teile.find(x=>(x.typ==='schalter'||x.typ==='taster')&&!x.an&&dran(x.id,0)&&dran(x.id,1));
-        if(sch&&sch.typ==='taster') return {txt:'Taster gedrückt halten.',warum:'Der Taster schliesst den Kreis nur, solange du drückst – wie bei einer Klingel.',mark:[sch.id]};
-        if(sch) return {txt:'Der Schalter ist aus.',warum:'Ein offener Schalter ist wie eine hochgeklappte Brücke: Der Strom kommt nicht hinüber. Schalte ihn ein, dann ist der Kreis geschlossen.',mark:[sch.id],knopf:holChip('ein:'+sch.id,'Einschalten')}; }
+        if(sch&&sch.typ==='taster') return {txt:'👆 Taster drücken',warum:'',mark:[sch.id]};
+        if(sch) return {txt:'Schalter aus',warum:'',mark:[sch.id],knopf:holChip('ein:'+sch.id,'Einschalten')}; }
       const frei=[0,1].filter(k=>!dran(t.id,k));
-      if(frei.length) return {txt:`${gross(an(Dm))} fehlt ${frei.length>1?'noch jedes Kabel':'ein Kabel'}.`,warum:'Der Strom braucht einen geschlossenen Kreis: vom + der Batterie durch das Teil und wieder zurück zum −. Wo eine Klemme frei ist, hört der Weg auf.',mark:frei.map(k=>t.id+':'+k)};
+      if(frei.length) return {txt:`🔌 fehlt ${an(Dm)}`,warum:'',mark:frei.map(k=>t.id+':'+k)};
       const andere=[]; S.teile.forEach(x=>[0,1].forEach(k=>{ if(!dran(x.id,k)) andere.push(x.id+':'+k); }));
       if(andere.length){ const x=teil(+andere[0].split(':')[0]);
-        return {txt:`Der Weg hört ${bei(DEM[x.typ])} auf.`,warum:'Der Strom braucht einen geschlossenen Kreis: vom + der Batterie durch alle Teile und wieder zurück zum −. Eine freie Klemme ist wie eine Brücke, die mitten im Fluss aufhört. Zieh dort ein Kabel weiter.',mark:andere}; }
-      return {txt:`${gross(D)} hat keinen Weg zurück zur Batterie.`,warum:'Fahr mit dem Finger den Kabeln nach: Vom + der Batterie durch das Teil – kommst du wieder beim − an? Wenn beide Kabel zum gleichen Pol führen, fliesst nichts.',mark:[t.id,...bat.map(b=>b.id)]}; }
-    if(o.verkehrt) return {txt:`${gross(D)} ist falsch herum.`,warum:`${t.typ==='led'?'Eine LED':'Sie'} lässt den Strom nur in eine Richtung durch – wie ein Drehkreuz. ${t.typ==='led'?'Das lange Beinchen (+)':'Das +'} muss zum + der Batterie. Kaputt geht dabei nichts.`,mark:[t.id],knopf:holChip('dreh:'+t.id,'↔ Umdrehen')};
-    if(DIO_TYPEN.includes(t.typ)&&(o.viel||o.zuviel)){ if(t.typ==='band') return {txt:'Zu viel Strom.',warum:'Das Leuchtband ist für 12 V gebaut.',mark:[t.id]};
+        return {txt:`⛔ Weg endet ${bei(DEM[x.typ])}`,warum:'',mark:andere}; }
+      return {txt:`${gross(D)}: kein Weg zurück`,warum:'+ ➜ ? ➜ −',mark:[t.id,...bat.map(b=>b.id)]}; }
+    if(o.verkehrt) return {txt:`${gross(D)} falsch herum`,warum:t.typ==='led'?'langes Bein ➜ +':'+ ➜ +',mark:[t.id],knopf:holChip('dreh:'+t.id,'↔ Umdrehen')};
+    if(DIO_TYPEN.includes(t.typ)&&(o.viel||o.zuviel)){ if(t.typ==='band') return {txt:'⚠ Zu viel Strom',warum:'🔌 12 V',mark:[t.id]};
       const d=dio(t),R=e12auf((Q.U-d.V-d.R*d.I)/d.I);
-      return {txt:'Zu viel Strom.',warum:`Die Batterie drückt mehr Strom durch, als ${D} aushält. Ein Widerstand davor bremst den Strom – wie ein enges Rohr bei Wasser.`,mark:[t.id],knopf:holChip('holR:'+R,'+ Widerstand '+ohmText(R))}; }
-    if(o.zuviel) return {txt:'Zu viel Spannung.',warum:t.typ==='motor'?`Der Motor ist für 3 V gebaut und bekommt hier ${vz(Math.abs(o.U))} V. Er dreht wild, wird aber heiss und geht kaputt. ${bat.length>1?'Nimm eine Batterie weg – oder häng sie nebeneinander (+ an +, − an −), dann bleibt die Spannung gleich.':'Nimm eine kleinere Batterie (1,5 bis 4,5 V).'}`:'Nimm eine kleinere Batterie.',mark:[t.id]};
-    if(o.zuwenig) return {txt:'Zu wenig Spannung.',warum:`${gross(an(Dm))} kommen nur ${vz(Math.max(0,Math.abs(o.U||0)))} V an. Wenn Teile hintereinander hängen (in Reihe), teilen sie sich die Spannung. Häng sie nebeneinander (parallel), dann bekommt jedes die volle Spannung. Oder nimm eine stärkere Batterie.`,mark:[t.id]};
-    if(!o.an) return {txt:'Es kommt zu wenig Strom an.',warum:S.teile.some(x=>x.typ==='widerstand')?'Ein Widerstand bremst den Strom. Ist er zu gross, bleibt fast nichts übrig – nimm einen kleineren.':'Prüfe, ob alles richtig verbunden ist.',mark:[t.id]}; }
+      return {txt:'⚠ Zu viel Strom 🔥',warum:'',mark:[t.id],knopf:holChip('holR:'+R,'+ Widerstand '+ohmText(R))}; }
+    if(o.zuviel) return {txt:'⚠ Zu viel 🔥',warum:t.typ==='motor'?`🔋 <b>${vz(Math.abs(o.U))} V</b> ➜ Motor <b>3 V</b> · ${bat.length>1?'➖ 1 Batterie':'kleinere 🔋'}`:'kleinere 🔋',mark:[t.id]};
+    if(o.zuwenig) return {txt:'Zu schwach',warum:`nur <b>${vz(Math.max(0,Math.abs(o.U||0)))} V</b> · stärkere 🔋`,mark:[t.id]};
+    if(!o.an) return {txt:'Zu schwach',warum:S.teile.some(x=>x.typ==='widerstand')?'kleinerer Widerstand':'',mark:[t.id]}; }
   return null;
 }
 function zielTipp(z){                                                    // Hinweis mit Begründung, warum ein Ziel noch nicht klappt
   const d=diagnose(z.teile); if(d) return d;
-  if(z.beide&&z.teile.some(t=>Z.teile.get(t.id).an)) return {txt:'Jetzt in die andere Richtung.',warum:'Dreh den Motor um, dann fliesst der Strom andersherum durch ihn.',knopf:holChip('dreh:'+z.teile[0].id,'↔ Umdrehen')};
-  return {txt:'Fast! Prüfe, ob alles richtig verbunden ist.'};
+  if(z.beide&&z.teile.some(t=>Z.teile.get(t.id).an)) return {txt:'↺ Andersherum',warum:'',knopf:holChip('dreh:'+z.teile[0].id,'↔ Umdrehen')};
+  return {txt:'Fast! 🔍'};
 }
 // Stromweg: bei einfachen Kreisen Glied für Glied von + durch die Teile zurück zu −
 const WEG_NAME={schalter:'Schalter',taster:'Taster',motor:'Motor',led:'LED',band:'Leuchtband',kette:'Lichterkette',summer:'Summer',lampe:'Lämpchen',widerstand:'Widerstand'};
@@ -809,9 +805,7 @@ function stromweg(A){
     rest.splice(rest.indexOf(t),1); glieder.push({a:von,b:[t,k],ok}); von=[t,1-k]; }
   glieder.push({a:von,b:[bat,0],ok:f(von[0].id+':'+von[1])===f(bat.id+':0')});
   const kurz=([t,k])=>t.typ==='batterie'?(k?'Batterie +':'Batterie −'):DIO_TYPEN.includes(t.typ)?`${WEG_NAME[t.typ]} ${k?'−':'+'}`:WEG_NAME[t.typ];
-  const vom=([t,k])=>t.typ==='batterie'?'vom Plus (+) der Batterie':t.typ==='led'?`vom ${k?'kurzen Beinchen (−)':'langen Beinchen (+)'} der LED`:vonDem(DEM[t.typ]);
-  const zum=([t,k])=>t.typ==='batterie'?'zurück zum Minus (−) der Batterie':t.typ==='led'?`zum ${k?'kurzen Beinchen (−)':'langen Beinchen (+)'} der LED`:zuDem(DEM[t.typ]);
-  glieder.forEach(g=>{ g.kurz=`${kurz(g.a)} → ${kurz(g.b)}`; g.tipp=`Zieh ein Kabel ${vom(g.a)} ${zum(g.b)}.`; g.mark=[g.a[0].id+':'+g.a[1],g.b[0].id+':'+g.b[1]]; });
+  glieder.forEach(g=>{ g.kurz=`${kurz(g.a)} → ${kurz(g.b)}`; g.tipp=`🔌 ${kurz(g.a)} ➜ ${kurz(g.b)}`; g.mark=[g.a[0].id+':'+g.a[1],g.b[0].id+':'+g.b[1]]; });
   return {glieder,ok:glieder.every(g=>g.ok)};
 }
 let HILFE=null;                                  // was gerade nicht klappt (auch für die Markierung im Bild)
@@ -819,7 +813,7 @@ function hilfeJetzt(){
   if(AU){ if(AU.fehlt.length) return null;
     if(!AU.verbunden){ if(Z.kurz||quellenInfo().gegen.length) return diagnose();
       const g=AU.weg&&AU.weg.glieder.find(g=>!g.ok); if(g) return {txt:g.tipp,mark:g.mark};
-      const frei=[]; S.teile.forEach(t=>[0,1].forEach(k=>{ if(!dran(t.id,k)) frei.push(t.id+':'+k); })); return {txt:`Noch ${frei.length} Klemme${frei.length===1?'':'n'} frei.`,mark:frei}; }
+      const frei=[]; S.teile.forEach(t=>[0,1].forEach(k=>{ if(!dran(t.id,k)) frei.push(t.id+':'+k); })); return {txt:`${frei.length} ⚪ frei`,mark:frei}; }
     const z=AU.ziele.find(z=>!z.ok); return z?zielTipp(z):null; }
   if(!S.teile.some(t=>t.typ==='batterie')||!S.teile.some(t=>VERBR.includes(t.typ))) return null;
   return diagnose();
@@ -841,19 +835,19 @@ function auftragZeigen(){
   const teile=A.reqs.map(r=>{ const ok=r.da.length>=r.n; const txt=`<span class="txt">${r.extra?'Extra: ':''}${esc(r.name)}${r.n>1?` (${r.da.length}/${r.n})`:''}${!ok&&r.anders&&!r.extra?'<small>Ist schon da, passt aber noch nicht.</small>':''}</span>`;
     return zeile(ok,teilBild(r.typ,r.vor)+txt,r.anders?holChip('anpassen:'+r.i,'Anpassen'):holChip('hol:'+r.i,'+ Holen'),r.extra&&!ok?'extra':''); }).join('');
   const teileOk=!A.fehlt.length;
-  const freiZeile=zeile(!A.lose,`<span class="txt">${A.weg?'Alle anderen Klemmen verbinden':'Alle Klemmen mit Kabeln verbinden'}${A.lose&&teileOk?`<small>Noch ${A.lose} Klemme${A.lose===1?'':'n'} frei (weisser Punkt)</small>`:''}</span>`);
+  const freiZeile=zeile(!A.lose,`<span class="txt">${A.weg?'Restliche Klemmen':'Alle Klemmen'}${A.lose&&teileOk?`<small>${A.lose} ⚪ frei</small>`:''}</span>`);
   const sonder=!A.verbunden&&HILFE&&HILFE.warum?zeile(false,`<span class="txt">${esc(HILFE.txt)}<span class="warum">${HILFE.warum}</span></span>`,HILFE.knopf||''):'';
   let erster=!sonder;
-  const kabel=sonder+(A.weg?A.weg.glieder.map(g=>{ const zeig=!g.ok&&erster; if(!g.ok) erster=false; return zeile(g.ok,`<span class="txt stromweg">${g.kurz.replace(/^(.*) → (.*)$/,'<b>$1</b> → <b>$2</b>')}${zeig?`<small>${esc(g.tipp)}</small>`:''}</span>`); }).join('')+(A.lose&&A.weg.ok?freiZeile:''):freiZeile);
+  const kabel=sonder+(A.weg?A.weg.glieder.map(g=>{ const zeig=!g.ok&&erster; if(!g.ok) erster=false; return zeile(g.ok,`<span class="txt stromweg">${g.kurz.replace(/^(.*) → (.*)$/,'<b>$1</b> → <b>$2</b>')}${zeig?'<small>🔌 fehlt</small>':''}</span>`); }).join('')+(A.lose&&A.weg.ok?freiZeile:''):freiZeile);
   const ziele=A.ziele.map(z=>{ const t=!z.ok&&A.verbunden?zielTipp(z):null; return zeile(z.ok,`<span class="txt">${esc(z.txt)}${t?`<small>${esc(t.txt)}</small>${t.warum?`<span class="warum">${t.warum}</span>`:''}`:''}</span>`,t&&t.knopf||''); }).join('');
   const motorLaeuft=A.ziele.some(z=>z.ok&&z.teile.some(t=>t.typ==='motor'));
   k.innerHTML=`<div class="auftrag-kopf"><h2>${A.p.bild} ${esc(A.p.name)} bauen</h2><button class="knopf" type="button" data-act="projekte">Wechseln</button></div>
     <div class="balken" role="progressbar" aria-label="Fortschritt" aria-valuemin="0" aria-valuemax="${A.alle}" aria-valuenow="${A.fertig}"><i style="width:${Math.round(A.fertig/A.alle*100)}%"></i></div>
     <p class="stand">${A.fertig} von ${A.alle} erledigt</p>
     <div class="schritt"><h3>1 · Teile holen</h3><ul class="auftrag">${teile}</ul></div>
-    <div class="schritt${teileOk?'':' spaeter'}"><h3>2 · Verbinden</h3>${A.weg?'<p class="weg-satz">Der Strom fliesst im Kreis: vom + der Batterie durch alle Teile und zurück zum −.</p>':''}<ul class="auftrag">${kabel}</ul></div>
+    <div class="schritt${teileOk?'':' spaeter'}"><h3>2 · Verbinden</h3><ul class="auftrag">${kabel}</ul></div>
     <div class="schritt${A.verbunden?'':' spaeter'}"><h3>3 · Ausprobieren</h3><ul class="auftrag">${ziele}</ul></div>
-    ${A.geschafft?`<div class="geschafft"><b>🎉 Geschafft!</b>Dein ${esc(A.p.name)} funktioniert.<div class="aktionen">${motorLaeuft?'<button class="knopf" type="button" data-act="forschen">🔬 Jetzt forschen</button>':''}<button class="knopf" type="button" data-act="drucken">🖨 Bauplan drucken</button><button class="knopf" type="button" data-act="projekte">Nächstes Projekt</button></div></div>`:''}
+    ${A.geschafft?`<div class="geschafft"><b>🎉 Geschafft!</b><div class="aktionen">${motorLaeuft?'<button class="knopf" type="button" data-act="forschen">🔬 Jetzt forschen</button>':''}<button class="knopf" type="button" data-act="drucken">🖨 Bauplan drucken</button><button class="knopf" type="button" data-act="projekte">Nächstes Projekt</button></div></div>`:''}
     ${A.p.loesung&&!A.geschafft?'<button class="loesung" type="button" data-act="loesung">Lösung zeigen</button>':''}`;
 }
 function auftragAktion(act,wert){                                        // Knöpfe in der Karte und in der Leiste
@@ -923,13 +917,13 @@ function messen(t){ const o=Z.teile.get(t.id)||{}, U=Math.abs(o.U||0), an=!!o.an
 const MASS={upm:[['weniger','🐢 langsamer'],['gleich','gleich schnell'],['mehr','🐇 schneller']],h:[['weniger','kürzer'],['gleich','gleich lang'],['mehr','länger']],kraft:[['weniger','schwächer'],['gleich','gleich stark'],['mehr','💪 stärker']],rueck:[['gleich','gleich herum'],['mehr','andersherum']]};
 function versuche(t){
   const bs=S.teile.filter(x=>x.typ==='batterie'), b=bs.length===1?bs[0]:null, akku=b&&quelle(b.volt).mah>0, V=[];
-  if(akku&&b.volt<4.5) V.push({id:'flach',frage:'Wie wird er schneller?',was:`Nimm eine Flachbatterie mit 4,5 V statt ${vz(b.volt)} V.`,mass:'upm',tun:()=>{ b.volt=4.5; },warum:'Mehr Spannung drückt mehr Strom durch den Motor – er dreht schneller. Dafür ist die Batterie früher leer. Ein 3-V-Motor verträgt aber höchstens etwa 4,5 V.'});
-  else if(akku&&b.volt===4.5) V.push({id:'neun',frage:'Geht es noch schneller?',was:'Nimm einen 9-V-Block.',mass:'upm',tun:()=>{ b.volt=9; },warum:'Er dreht viel schneller – aber 9 V sind zu viel für einen 3-V-Motor. Er wird heiss und geht bald kaputt. Mehr Spannung hilft nur bis zur Grenze, für die der Motor gebaut ist.'});
-  if(akku) V.push({id:'parallel',frage:'Wie fährt er länger?',was:'Häng eine zweite gleiche Batterie daneben: + an +, − an − (parallel).',mass:'h',tun:()=>{ const [x,y]=freierPlatz(), n={id:S.n++,typ:'batterie',x,y,rot:b.rot,volt:b.volt}; S.teile.push(n); S.kabel.push({id:S.n++,a:[n.id,1],b:[b.id,1],pts:[],farbe:'rot'},{id:S.n++,a:[n.id,0],b:[b.id,0],pts:[],farbe:'schwarz'}); },warum:'Parallel teilen sich die zwei Batterien die Arbeit. Die Spannung bleibt gleich, darum dreht er gleich schnell. Aber jede Batterie liefert nur noch halb so viel Strom und hält doppelt so lang.'});
-  else if(t.art!=='solar') V.push({id:'solar',frage:'Wie fährt er länger?',was:'Nimm einen sparsamen Solarmotor.',mass:'h',tun:()=>{ t.art='solar'; },warum:'Der Solarmotor braucht viel weniger Strom, darum hält die Batterie viel länger. Dafür ist er langsamer und schwächer: sparsam heisst wenig Kraft.'});
-  if(t.art!=='getriebe') V.push({id:'getriebe',frage:'Wie wird er stärker?',was:'Nimm einen Getriebemotor.',mass:'kraft',tun:()=>{ t.art='getriebe'; },warum:'Im Getriebemotor dreht ein kleiner, schneller Motor. Dahinter sitzen viele Zahnräder: Sie machen die Drehung viel langsamer, aber dafür viel stärker – wie der kleine Gang am Velo. Du trittst leicht, kommst aber langsam vorwärts. Schnell und stark zugleich geht nicht. <a href="../mechanik/">Zahnräder selber planen</a>'});
-  else V.push({id:'spiel',frage:'Und wie wird er richtig schnell?',was:'Nimm den Spielzeugmotor ohne Getriebe.',mass:'upm',tun:()=>{ t.art='spiel'; },warum:'Ohne Zahnräder dreht der Motor sehr schnell, hat aber wenig Kraft – wie der grosse Gang am Velo. Für ein Boot oder einen Ventilator passt das, für eine Seilbahn ist er zu schwach.'});
-  V.push({id:'richtung',frage:'Kann er rückwärts?',was:'Dreh den Motor um: + und − tauschen.',mass:'rueck',tun:()=>umdrehen(t),warum:'Fliesst der Strom andersherum durch den Motor, dreht er andersherum. Darum hat die Batterie ein + und ein −.'});
+  if(akku&&b.volt<4.5) V.push({id:'flach',frage:'Wie wird er schneller?',was:`🔋 ${vz(b.volt)} V ➜ 4,5 V`,mass:'upm',tun:()=>{ b.volt=4.5; },warum:'⚡ mehr V = 🐇 schneller, ⏳ kürzer'});
+  else if(akku&&b.volt===4.5) V.push({id:'neun',frage:'Geht es noch schneller?',was:'🔋 4,5 V ➜ 9 V',mass:'upm',tun:()=>{ b.volt=9; },warum:'9 V ➜ Motor 3 V = 🔥'});
+  if(akku) V.push({id:'parallel',frage:'Wie fährt er länger?',was:'🔋🔋 nebeneinander',mass:'h',tun:()=>{ const [x,y]=freierPlatz(), n={id:S.n++,typ:'batterie',x,y,rot:b.rot,volt:b.volt}; S.teile.push(n); S.kabel.push({id:S.n++,a:[n.id,1],b:[b.id,1],pts:[],farbe:'rot'},{id:S.n++,a:[n.id,0],b:[b.id,0],pts:[],farbe:'schwarz'}); },warum:'🔋🔋 = 🐇 gleich, ⏳ × 2'});
+  else if(t.art!=='solar') V.push({id:'solar',frage:'Wie fährt er länger?',was:'☀️ Solarmotor',mass:'h',tun:()=>{ t.art='solar'; },warum:'sparsam = ⏳ länger, 🐢 langsamer'});
+  if(t.art!=='getriebe') V.push({id:'getriebe',frage:'Wie wird er stärker?',was:'⚙️ Getriebemotor',mass:'kraft',tun:()=>{ t.art='getriebe'; },warum:'⚙️ = 🐢 langsam, 💪 stark · 🚲 kleiner Gang <a href="../mechanik/">⚙️ Planen</a>'});
+  else V.push({id:'spiel',frage:'Und wie wird er richtig schnell?',was:'Motor ohne ⚙️',mass:'upm',tun:()=>{ t.art='spiel'; },warum:'ohne ⚙️ = 🐇 schnell, 💪 schwach · 🚲 grosser Gang'});
+  V.push({id:'richtung',frage:'Kann er rückwärts?',was:'+ ↔ −',mass:'rueck',tun:()=>umdrehen(t),warum:'+ ↔ − = ↺'});
   return V;
 }
 function forschen(){
@@ -943,13 +937,13 @@ function forschen(){
   const w={upm:x=>Math.sqrt(x/18000),kraft:x=>Math.sqrt(x/60),h:x=>x==null?0:x===Infinity?1:Math.sqrt(x/30)};
   const zeile=(sym,name,key,txt,heiss)=>{ const pz=x=>Math.round(begrenz(w[key](x),x?0.03:0,1)*100);
     return `<div class="mess"><span>${sym} ${name}</span><span class="mess-b">${v0?`<b style="width:${pz(v0[key])}%"></b>`:''}<i style="width:${pz(m[key])}%"></i></span><span class="mess-w${heiss?' heiss':''}">${txt}</span></div>`; };
-  let s=`<h2>🔬 Forschen</h2><p class="tipp" style="margin:0 0 6px">${v0?'Grau = vorher, grün = jetzt.':'Dein Motor läuft! Was passiert, wenn du etwas änderst?'}</p>`;
+  let s=`<h2>🔬 Forschen</h2>`;
   s+=zeile('🐇','Tempo','upm',m.an?`${tausend(m.upm)} U/min${m.heiss?' ⚠':''}`:'steht',m.heiss)+zeile('💪','Kraft','kraft',kraftWort(m.kraft))+zeile('⏳','Laufzeit','h',zeitKurz(m.h));
   const knopf=(fo,txt,cls='knopf')=>`<button class="${cls}" type="button" data-fo="${fo}">${txt}</button>`;
   if(FO&&FO.nachher){ const T=MASS[FO.v.mass], getippt=(T.find(x=>x[0]===FO.tipp)||[])[1], echt=(T.find(x=>x[0]===FO.erg)||[])[1]||FO.erg;
-    s+=`<div class="fo-box"><span class="gross">${FO.tipp===FO.erg?'✓ Gut vermutet!':'Überraschung!'}</span><p>Du hast getippt: <b>${getippt}</b>. Ergebnis: <b>${echt}</b>${FO.nachher.heiss?' – aber er wird zu heiss ⚠':''}.</p><p>${FO.v.warum}</p><div class="aktionen">${knopf('zurueck','↩ Wie vorher')}${knopf('weiter','Weiter forschen')}</div></div>`; }
+    s+=`<div class="fo-box"><span class="gross">${FO.tipp===FO.erg?'✓ Gut vermutet!':'Überraschung!'}</span><p>🤔 <b>${getippt}</b> · 🔬 <b>${echt}</b>${FO.nachher.heiss?' 🔥':''}</p><p>${FO.v.warum}</p><div class="aktionen">${knopf('zurueck','↩ Wie vorher')}${knopf('weiter','Weiter forschen')}</div></div>`; }
   else if(FO){ const v=FO.v;
-    s+=`<div class="fo-box"><b>${esc(v.frage)}</b><p>${esc(v.was)}<br>Was glaubst du: Wird er dann …</p><div class="chips">${MASS[v.mass].map(([key,txt])=>knopf('t:'+key,txt+'?','chip')).join('')}</div><div class="aktionen">${knopf('weiter','Abbrechen')}</div></div>`; }
+    s+=`<div class="fo-box"><b>${esc(v.frage)}</b><p>${esc(v.was)} 🤔</p><div class="chips">${MASS[v.mass].map(([key,txt])=>knopf('t:'+key,txt+'?','chip')).join('')}</div><div class="aktionen">${knopf('weiter','Abbrechen')}</div></div>`; }
   else s+=`<div class="versuche">${versuche(t).map(v=>`<button class="versuch" type="button" data-fo="w:${v.id}"><b>${esc(v.frage)}</b><span>${esc(v.was)}</span></button>`).join('')}</div>`;
   k.innerHTML=s;
 }
