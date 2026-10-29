@@ -51,6 +51,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 .leiste{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-bottom:10px}
 .leiste .chip{min-height:40px;padding:4px 10px}
 .leiste .chip svg{display:block;height:20px;width:40px}
+#formChips .chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 8px}
 #formChips .chip svg{height:26px;width:48px}
 .buehne{position:relative;border-radius:14px;background:var(--surface2);border:1px solid var(--line);overflow:hidden}
 #buehne{display:block;width:100%;height:auto;touch-action:none;user-select:none;-webkit-user-select:none}
@@ -79,6 +80,8 @@ svg .titel{font:600 5px Fredoka,Nunito,sans-serif;fill:#000}
 svg .pfeil{fill:none;stroke:#17997A;stroke-width:.5}
 svg .rad{fill:#eee;stroke:#444;stroke-width:.3}
 svg .deko{fill:none;stroke:#888;stroke-width:.25;stroke-dasharray:1 .8}
+svg .zier{fill:none;stroke:#9A8F84;stroke-width:.2;stroke-linejoin:round;stroke-linecap:round}
+#buehne .zl{fill:none;stroke:#5C4A38;stroke-width:1;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke;pointer-events:none}
 .rechnung{margin:0;padding:12px 14px;border-radius:14px;background:var(--surface2);border:1px solid var(--line);font-size:15px;line-height:1.5}
 .rechnung p{margin:0 0 6px}.rechnung p:last-child{margin:0}
 .rechnung .f{font:600 18px/1.3 Fredoka,Nunito,sans-serif;color:var(--acc)}
@@ -117,6 +120,8 @@ svg .deko{fill:none;stroke:#888;stroke-width:.25;stroke-dasharray:1 .8}
   <h1>⚙️ Mechanik-Planer <a class="neben" href="../">Alle Vorlagen</a></h1>
 </header>
 <script src="../zurueck.js"></script>
+<script>window.FIGUREN={};window.FIGUREN_DAZU=function(welt,fs){fs.forEach(function(f){window.FIGUREN[f.id]=f})}</script>
+<script src="../figuren/fahrzeuge.js"></script>
 <main>
 <div class="links">
   <div class="chips modus" role="group" aria-label="Werkstück" data-g="modus">
@@ -263,13 +268,32 @@ const KEY='schrittli.mechanik.v1';
 const PAPIER={a4:{name:'A4',w:210,h:297},a3:{name:'A3',w:297,h:420}};
 const RAND=10,LUECKE=6,KOPF=10,FUSS=8;   // mm: Rand, Lücke zwischen Teilen, Titelzeile, Kontrolllinie
 const TAU=2*Math.PI;
-const FORMEN={flitzer:'Flitzer',rennwagen:'Rennwagen',lastwagen:'Lastwagen',bus:'Bus',kaefer:'Käfer',kiste:'Kiste'};
+// Seitenansichten aus vorlagen/figuren/fahrzeuge.js: Achsen 0 = Heck … 1 = Front, Rad = Rad-Ø der Figur in Längen, spiegel = Figur schaut nach links
+const AUTOS={
+  'fz-vw-kaefer':{name:'Käfer',spiegel:1,achsen:[.15,.73],mass:{autoL:18,autoH:7.5,autoRad:3}},
+  'fz-vw-bus':{name:'Bulli',achsen:[.22,.77],mass:{autoL:18,autoH:9,autoRad:3.5}},
+  'fz-citroen-2cv':{name:'Ente',spiegel:1,achsen:[.16,.78],mass:{autoL:18,autoH:8.5,autoRad:3}},
+  'fz-mitsubishi-pajero':{name:'Pajero',spiegel:1,achsen:[.28,.83],mass:{autoL:18,autoH:7.5,autoRad:3.5}},
+  'fz-toyota-hilux':{name:'Hilux',spiegel:1,achsen:[.25,.82],mass:{autoL:20,autoH:8,autoRad:3.5}},
+  'fz-taxi':{name:'Taxi',spiegel:1,achsen:[.2,.76],mass:{autoL:18,autoH:9,autoRad:4}},
+  'fz-polizei':{name:'Polizei',achsen:[.21,.83],mass:{autoL:20,autoH:7.5,autoRad:3.5}},
+  'fz-feuerwehr':{name:'Feuerwehr',spiegel:1,achsen:[.27,.85],mass:{autoL:22,autoH:9,autoRad:3.5}},
+  'fz-feuerwehr-leiter':{name:'Leiterwagen',spiegel:1,achsen:[.27,.85],mass:{autoL:22,autoH:10.5,autoRad:3.5}},
+  'fz-krankenwagen':{name:'Krankenwagen',achsen:[.25,.85],mass:{autoL:20,autoH:10,autoRad:3}},
+  'fz-schulbus':{name:'Schulbus',achsen:[.36,.89],mass:{autoL:24,autoH:8.5,autoRad:4}},
+  'fz-bus':{name:'Bus',achsen:[.22,.74],mass:{autoL:24,autoH:8,autoRad:3.5}},
+  'fz-formel1':{name:'Formel 1',achsen:[.13,.75],mass:{autoL:24,autoH:7,autoRad:5}},
+  'fz-muellwagen':{name:'Müllwagen',achsen:[.31,.9],mass:{autoL:22,autoH:9,autoRad:3}},
+  'fz-abschleppwagen':{name:'Abschleppwagen',achsen:[.26,.91],mass:{autoL:24,autoH:6,autoRad:3}},
+  'fig-lastwagen':{name:'Lastwagen',achsen:[.28,.75],mass:{autoL:20,autoH:11,autoRad:5}}};
+const FORMEN={};Object.keys(AUTOS).forEach(k=>{if(window.FIGUREN&&window.FIGUREN[k])FORMEN[k]=AUTOS[k].name});
+if(!Object.keys(FORMEN).length)FORMEN.klotz='Klotz';
 const NOCKEN={exzenter:'Kurbel',schnecke:'Schneckennocke',doppel:'Doppelnocke'};
 const KART={spirale:'Spirale',benham:'Benham',farben:'Farben',turbo:'Turbo'};
 const NEWTON=['#E8554E','#F28C28','#F2D544','#4CAF50','#2F80ED','#3F51B5','#8E44AD'];
 const STANDARD={modus:'zahn',papier:'a4',modul:4,zA:12,zB:24,zC:0,zD:36,kette:'reihe',holz:6,kurbel:'ja',ziel:'',achse:6,
   radD:6,radN:4,hub:20,scheibeD:0,fest:'achse',nocken:'exzenter',
-  autoL:18,autoH:6,autoB:4,autoRad:5,radBreite:18,boden:8,radstand:0,form:'flitzer',lager:'loch',
+  autoL:18,autoH:7.5,autoB:4,autoRad:3,radBreite:18,boden:8,radstand:0,form:Object.keys(FORMEN)[0],lager:'loch',
   wart:'papier',wSeite:18,wUmfang:28,wHoehe:12,wNabe:70,wFluegel:4,
   kart:'spirale',kD:10,kN:1,kFluegel:8,kStab:'stab'};
 const GRENZEN={modul:[1,6],zA:[8,60],zB:[8,60],zC:[0,60],zD:[8,60],holz:[4,10],achse:[3,10],radD:[1,30],radN:[1,12],hub:[0,150],scheibeD:[0,200],
@@ -375,7 +399,8 @@ function teileZahn(){
   const tier=iGes>1.01?(stufe?'🐌':'🐢'):iGes<.99?'🐇':'',richt=fl>0?'↻↻':'↻↺';
   const ant=raeder.map(r=>`${r.name}: <b>Ø ${mm(2*r.ra)}</b>`);
   abst.forEach((a,i)=>ant.push(`Achsabstand ${namen[i]} – ${namen[i+1]}: <b>${mm(a)}</b>`));
-  ant.push(`${iGes>1.01?'Untersetzung':iGes<.99?'Übersetzung':'Gleich'} A → ${nL}: <b>i = ${dz(iGes)}</b> ${tier} ${richt}`);
+  const d1=v=>v.toLocaleString('de-CH',{maximumFractionDigits:1}).replace('.',','),dreh=iGes>1.01?`${d1(iGes)} ↻ A = 1 ↻ ${nL}`:iGes<.99?`1 ↻ A = ${d1(1/iGes)} ↻ ${nL}`:`1 ↻ A = 1 ↻ ${nL}`;
+  ant.push(`${iGes>1.01?'Untersetzung':iGes<.99?'Übersetzung':'Gleich'}: <b>${dreh}</b> ${tier} ${richt} · i = ${dz(iGes)}`);
   ant.push(`Loch Rad: <b>${mm(loch)}</b>${S.fest==='rad'?' ↻':''}`,`Loch Platte: <b>${mm(lochP)}</b>${S.fest==='achse'?' ↻':''}`);
   const warn=[];
   if(m<=2)warn.push(`🛒 Modul ${m} · fertige Zahnräder`);
@@ -427,62 +452,58 @@ function teileRad(){
 }
 
 // ---------- Holzauto ----------
-const kurve=(p0,c,p1,n=14)=>{const o=[];for(let i=1;i<=n;i++){const t=i/n,u=1-t;o.push([u*u*p0[0]+2*u*t*c[0]+t*t*p1[0],u*u*p0[1]+2*u*t*c[1]+t*t*p1[1]])}return o};
-function umriss(def){const pts=[];def.forEach(d=>{if(d.q){const p0=pts[pts.length-1];pts.push(...kurve(p0,d.q[0],d.q[1]))}else pts.push(d)});return pts}
-const UMRISSE={
-  flitzer:{achsen:[.2,.8],pts:umriss([[0,0],[1,0],[1,.3],{q:[[.98,.42],[.9,.44]]},[.72,.5],{q:[[.64,.52],[.6,.74]]},{q:[[.56,.98],[.42,1]]},[.3,1],{q:[[.2,1],[.16,.7]]},{q:[[.14,.56],[.06,.54]]},[0,.52]]),
-    fenster:[[.5,.58],[.62,.58],[.48,.9],[.36,.9]]},
-  rennwagen:{achsen:[.2,.8],pts:umriss([[0,0],[1,0],[1,.36],{q:[[.9,.42],[.76,.46]]},[.62,.5],{q:[[.56,.52],[.54,.74]]},{q:[[.52,.98],[.44,.98]]},[.4,.98],{q:[[.34,.98],[.33,.62]]},[.14,.62],[.14,1],[.02,1],{q:[[0,1],[0,.9]]},[0,.6]]),
-    fenster:[[.44,.7],[.52,.7],[.49,.9],[.44,.9]]},
-  lastwagen:{achsen:[.2,.78],pts:umriss([[0,0],[1,0],[1,.5],{q:[[1,.6],[.94,.62]]},[.82,.64],[.74,.98],{q:[[.73,1],[.7,1]]},[.56,1],{q:[[.54,1],[.54,.95]]},[.54,.8],[0,.8]]),
-    fenster:[[.6,.7],[.78,.7],[.73,.92],[.6,.92]]},
-  bus:{achsen:[.2,.8],pts:umriss([[0,0],[1,0],[1,.3],{q:[[1,.9],[.9,1]]},[.1,1],{q:[[0,.9],[0,.3]]}]),
-    fenster:[[.1,.6],[.9,.6],[.9,.88],[.1,.88]]},
-  kaefer:{achsen:[.2,.8],pts:umriss([[0,0],[1,0],[1,.2],{q:[[1,.36],[.94,.42]]},{q:[[.8,.6],[.7,.86]]},{q:[[.6,1.02],[.46,1]]},{q:[[.28,.98],[.16,.74]]},{q:[[.08,.5],[0,.4]]},[0,.2]]),
-    fenster:[[.56,.6],[.66,.62],[.6,.9],[.48,.92]]},
-  kiste:{achsen:[.2,.8],pts:umriss([[0,0],[1,0],[1,.6],[.84,.6],[.84,.96],{q:[[.84,1],[.8,1]]},[.2,1],{q:[[.16,1],[.16,.96]]},[.16,.6],[0,.6]]),
-    fenster:[[.22,.68],[.78,.68],[.78,.94],[.22,.94]]}
-};
+const paare=t=>{if(Array.isArray(t)&&t.length&&Array.isArray(t[0]))return t.map(p=>[+p[0],+p[1]]);const m=String(t).match(/-?\d*\.?\d+/g)||[];const o=[];for(let i=0;i+1<m.length;i+=2)o.push([+m[i],+m[i+1]]);return o};
+function figurForm(id,a){const g=window.FIGUREN&&window.FIGUREN[id];if(!g)return null;
+  const ringe=(Array.isArray(g.d)?g.d:[g.d]).map(paare).filter(r=>r.length>2),linien=(g.det||[]).map(paare).filter(r=>r.length>1);
+  let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;ringe.forEach(r=>r.forEach(([x,y])=>{if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}));
+  const w=x1-x0||1,h=y1-y0||1,N=([x,y])=>[f(a.spiegel?1-(x-x0)/w:(x-x0)/w),f((y1-y)/h)];
+  return {achsen:a.achsen,mass:a.mass,pts:ringe[0].map(N),fenster:ringe.slice(1).map(r=>r.map(N)),linien:linien.map(r=>r.map(N)),hw:h/w}}
+const UMRISSE={};Object.keys(FORMEN).forEach(k=>{const u=AUTOS[k]&&figurForm(k,AUTOS[k]);if(u)UMRISSE[k]=u});
+if(!UMRISSE[Object.keys(FORMEN)[0]])UMRISSE.klotz={achsen:[.2,.8],mass:{autoL:18,autoH:6,autoRad:5},pts:[[0,0],[1,0],[1,1],[0,1]],fenster:[],linien:[],hw:.33};
+const zierPfad=(F,P)=>F.fenster.map(p=>'M'+p.map(P).join('L')+'Z').concat(F.linien.map(p=>'M'+p.map(P).join('L'))).join('');
 function hoeheBei(pts,x){let h=0;for(let i=0;i<pts.length;i++){const a=pts[i],b=pts[(i+1)%pts.length];if(a[1]===0&&b[1]===0)continue;
   const lo=Math.min(a[0],b[0]),hi=Math.max(a[0],b[0]);if(x<lo||x>hi)continue;const y=hi-lo<1e-6?Math.max(a[1],b[1]):a[1]+(b[1]-a[1])*(x-a[0])/(b[0]-a[0]);h=Math.max(h,y)}return h}
 function teileAuto(){
-  const L=S.autoL*10,H=S.autoH*10,D=S.autoRad*10,R=D/2,bo=S.boden,lochK=lochmass('klotz'),lochR=lochmass('achse'),F=UMRISSE[S.form],nut=S.lager==='nut';
+  const L=S.autoL*10,H=S.autoH*10,D=S.autoRad*10,bo=S.boden,lochK=lochmass('klotz'),lochR=lochmass('achse'),F=UMRISSE[S.form],nut=S.lager==='nut';
+  const Ds=(F.raeder||[1,1]).map(q=>Math.round(D*q*2)/2),Rs=Ds.map(d=>d/2),ays=Rs.map(r=>r-bo),gleich=Ds[0]===Ds[1];
   let xR,xF;if(S.radstand){const ws=S.radstand*10;xR=(L-ws)/2;xF=xR+ws}else{xR=Math.round(F.achsen[0]*L);xF=Math.round(F.achsen[1]*L)}
-  const ws=xF-xR,ay=R-bo;
+  const ws=xF-xR;
   const warn=[],ant=[],rech=[];
   const gh=H+bo;
   const pfad='M'+F.pts.map(([x,y])=>f(x*L)+' '+f(H-y*H)).join('L')+'Z';
   let svg=`<path class="schnitt" d="${pfad}"/>`;
-  if(F.fenster)svg+=`<path class="deko" d="M${F.fenster.map(([x,y])=>f(x*L)+' '+f(H-y*H)).join('L')}Z"/>`;
+  {const z=zierPfad(F,([x,y])=>f(x*L)+' '+f(H-y*H));if(z)svg+=`<path class="zier" d="${z}"/>`}
   const rand=lochK/2+3;
-  [xR,xF].forEach((x,i)=>{svg+=`<circle cx="${f(x)}" cy="${f(H-ay)}" r="${f(R)}" class="hilf"/>`;
+  [xR,xF].forEach((x,i)=>{const R=Rs[i],ay=ays[i];svg+=`<circle cx="${f(x)}" cy="${f(H-ay)}" r="${f(R)}" class="hilf"/>`;
     if(nut){const w=lochK/2;svg+=`<path class="schnitt" d="M${f(x-w)} ${f(H)}V${f(H-ay)}A${f(w)} ${f(w)} 0 0 1 ${f(x+w)} ${f(H-ay)}V${f(H)}"/>`+txt(x,H-ay-w-2,(i?'Vorderachse':'Hinterachse')+' · Nut '+mm(lochK),'tk')}
     else svg+=lochKreuz(x,H-ay,lochK,i?'Vorderachse':'Hinterachse');
     const hmin=Math.min(hoeheBei(F.pts,(x-rand)/L),hoeheBei(F.pts,x/L),hoeheBei(F.pts,(x+rand)/L))*H;
     if(ay+rand>hmin)warn.push(`⚠ ${i?'Vorderachse':'Hinterachse'}: ${mm(hmin)} < ${mm(ay+rand)}`)});
-  svg+=`<path class="hilf" d="M${f(Math.min(0,xR-R))} ${f(gh)}H${f(Math.max(L,xF+R))}"/>`+txt(L/2,gh-1.5,'Boden','tk');
+  svg+=`<path class="hilf" d="M${f(Math.min(0,xR-Rs[0]))} ${f(gh)}H${f(Math.max(L,xF+Rs[1]))}"/>`+txt(L/2,gh-1.5,'Boden','tk');
   svg+=txt(L/2,gh+4.5,`${FORMEN[S.form]} · ${cmText(L)} × ${cmText(H)} · Klotz ${cmText(S.autoB*10)} breit · ${nut?'Nut':'Achslöcher'} ${mm(lochK)}`);
-  const links=Math.min(0,xR-R),breite=Math.max(L,xF+R)-links;
+  const links=Math.min(0,xR-Rs[0]),breite=Math.max(L,xF+Rs[1])-links;
   const teile=[{name:'Karosserie',w:breite,h:gh+6,svg:`<g transform="translate(${f(-links)} 0)">${svg}</g>`}];
-  for(let i=0;i<4;i++)teile.push(kreisRad(D,lochR,'Rad',`Ø ${cmText(D)} · Loch ${mm(lochR)}`));
-  if(!nut&&ay<lochK/2+3)warn.push(`⚠ Loch ${mm(ay)} über Unterkante`);
-  if(xR-R<0||xF+R>L)warn.push('⚠ Rad über Klotz');
-  if(ws<D+2)warn.push('⚠ Radstand zu klein');
+  Ds.forEach(d=>{for(let i=0;i<2;i++)teile.push(kreisRad(d,lochR,'Rad',`Ø ${cmText(d)} · Loch ${mm(lochR)}`))});
+  const ayMin=Math.min(...ays);
+  if(!nut&&ayMin<lochK/2+3)warn.push(`⚠ Loch ${mm(ayMin)} über Unterkante`);
+  if(xR-Rs[0]<0||xF+Rs[1]>L)warn.push('⚠ Rad über Klotz');
+  if(ws<Rs[0]+Rs[1]+2)warn.push('⚠ Radstand zu klein');
   const spiel=3,ueber=S.fest==='rad'?3:0,achsL=S.autoB*10+2*spiel+2*S.radBreite+2*ueber;
-  ant.push(`Klotz: <b>${cmText(L)} × ${cmText(H)} × ${cmText(S.autoB*10)}</b>`,`Radstand: <b>${cmText(ws)}</b>`,`Räder: <b>4 × Ø ${cmText(D)}</b> · ${mm(S.radBreite)}`,
-    `Achsen: <b>2 × ${mm(achsL)}</b> · Ø ${mm(S.achse)}`,`Achshöhe: <b>${mm(ay)}</b>`,
-    nut?`Nut: <b>${mm(lochK)} × ${mm(ay+lochK/2)}</b>`:`Loch Klotz: <b>${mm(lochK)}</b>${S.fest==='achse'?' ↻':''}`,
+  const radText=gleich?`4 × Ø ${cmText(D)}`:`2 × Ø ${cmText(Ds[0])} + 2 × Ø ${cmText(Ds[1])}`;
+  ant.push(`Klotz: <b>${cmText(L)} × ${cmText(H)} × ${cmText(S.autoB*10)}</b>`,`Radstand: <b>${cmText(ws)}</b>`,`Räder: <b>${radText}</b> · ${mm(S.radBreite)}`,
+    `Achsen: <b>2 × ${mm(achsL)}</b> · Ø ${mm(S.achse)}`,`Achshöhe: <b>${gleich?mm(ays[1]):mm(ays[0])+' · '+mm(ays[1])}</b>`,
+    nut?`Nut: <b>${mm(lochK)} × ${gleich?mm(ays[1]+lochK/2):mm(ays[0]+lochK/2)+' · '+mm(ays[1]+lochK/2)}</b>`:`Loch Klotz: <b>${mm(lochK)}</b>${S.fest==='achse'?' ↻':''}`,
     `Loch Rad: <b>${mm(lochR)}</b>${S.fest==='rad'?' ↻':''}`,`Höhe: <b>${cmText(gh)}</b>`);
-  rech.push(`<p><span class="f">Achshöhe = ${mm(R)} − ${mm(bo)} = ${mm(ay)}</span></p>`,
-    `<p><span class="f">Achse = ${mm(S.autoB*10)} + 2 × ${mm(spiel)} + 2 × ${mm(S.radBreite)}${ueber?` + 2 × ${mm(ueber)}`:''} = ${mm(achsL)}</span></p>`,
+  (gleich?[1]:[0,1]).forEach(i=>rech.push(`<p><span class="f">Achshöhe${gleich?'':i?' vorne':' hinten'} = ${mm(Rs[i])} − ${mm(bo)} = ${mm(ays[i])}</span></p>`));
+  rech.push(`<p><span class="f">Achse = ${mm(S.autoB*10)} + 2 × ${mm(spiel)} + 2 × ${mm(S.radBreite)}${ueber?` + 2 × ${mm(ueber)}`:''} = ${mm(achsL)}</span></p>`,
     `<p><span class="f">Loch ↻ = ${S.achse} + 1 = ${mm(S.achse+1)}</span></p>`);
   const zu=[{art:'klotz',name:'Holzklotz (Fichte oder Buche)',l:L,h:H,b:S.autoB*10},
-    {art:'platte',name:`Sperrholz ${mm(S.radBreite)}`,teile:Array.from({length:4},()=>({w:D,h:D,rund:true,label:'Ø '+cmText(D)}))},
+    {art:'platte',name:`Sperrholz ${mm(S.radBreite)}`,teile:Ds.flatMap(d=>[0,1].map(()=>({w:d,h:d,rund:true,label:'Ø '+cmText(d)})))},
     {art:'stab',name:`Rundstab ${S.achse} mm`,d:S.achse,stuecke:[achsL,achsL]}];
   const klein=[['🔩','Bohrer',`${mm(lochR)}${lochK!==lochR?' · '+mm(lochK):''}`],['🪚','Laubsäge',''],['🧴','Holzleim, Schleifpapier',''],['🥤','Trinkhalm','4 × '+mm(spiel)]];
   if(S.achse<=4&&S.fest==='achse')klein.push(['🔩','Messingröhrchen innen '+mm(S.achse+0.2),'2 × '+cmText(S.autoB*10)]);
   if(nut)klein.push(['🪚','Säge · Nut',mm(lochK)],['🪵','Sperrholzstreifen '+mm(lochK),'2 ×']);
-  klein.push(['🛒','oder Holzräder Ø '+cmText(D),'4 ×']);
+  klein.push(gleich?['🛒','oder Holzräder Ø '+cmText(D),'4 ×']:['🛒',`oder Holzräder Ø ${cmText(Ds[0])} + Ø ${cmText(Ds[1])}`,'2 + 2']);
   return {teile,ant,warn,rech,zu,klein,titel:`Holzauto «${FORMEN[S.form]}» ${cmText(L)} × ${cmText(H)}`};
 }
 
@@ -711,32 +732,34 @@ function szeneRad(){
     return s}};
 }
 function szeneAuto(){
-  const L=S.autoL*10,H=S.autoH*10,D=S.autoRad*10,R=D/2,bo=S.boden,F=UMRISSE[S.form],B=S.autoB*10,rb=S.radBreite,sp=3;
+  const L=S.autoL*10,H=S.autoH*10,D=S.autoRad*10,bo=S.boden,F=UMRISSE[S.form],B=S.autoB*10,rb=S.radBreite,sp=3;
+  const Ds=(F.raeder||[1,1]).map(q=>Math.round(D*q*2)/2),Rs=Ds.map(d=>d/2),iG=Ds[0]>Ds[1]?0:1,DG=Ds[iG],RG=Rs[iG];
   let xR,xF;if(S.radstand){const ws=S.radstand*10;xR=(L-ws)/2;xF=xR+ws}else{xR=Math.round(F.achsen[0]*L);xF=Math.round(F.achsen[1]*L)}
-  const links=Math.min(0,xR-R),rechts=Math.max(L,xF+R),halb=B/2+sp+rb;
+  const links=Math.min(0,xR-Rs[0]),rechts=Math.max(L,xF+Rs[1]),halb=B/2+sp+rb;
   const cxF=zieh&&zieh.cxF!=null?zieh.cxF:rechts+Math.max(30,.25*L)+halb;letztCxF=cxF;
-  const oben=Math.min(-(bo+H),-D);
+  const oben=Math.min(-(bo+H),-DG);
   return {box:[links,oben,cxF+halb,0],pad:[74,36,24,66],zeichnen(k){
     const P=([x,y])=>f(x*L)+' '+f(-(bo+y*H));
     let s=`<path class="gst" d="M${f(links-60*k)} 0H${f(cxF+halb+60*k)}"/>`;
-    s+=`<g data-h="koerper"><path class="ks" d="M${F.pts.map(P).join('L')}Z" fill="${HOLZ}"/>`+(F.fenster?`<path class="ks" d="M${F.fenster.map(P).join('L')}Z" fill="#CFE8F7"/>`:'')+'</g>';
-    [xR,xF].forEach(x=>{
+    s+=`<g data-h="koerper"><path class="ks" d="M${F.pts.map(P).join('L')}Z" fill="${HOLZ}"/>`+(zierPfad(F,P)?`<path class="zl" d="${zierPfad(F,P)}"/>`:'')+'</g>';
+    [xR,xF].forEach((x,i)=>{const R=Rs[i];
       s+=`<g data-h="arad" data-cx="${f(x)}" data-cy="${f(-R)}"><circle class="ks" cx="${f(x)}" cy="${f(-R)}" r="${f(R)}" fill="#2B2F36"/><circle cx="${f(x)}" cy="${f(-R)}" r="${f(R*.55)}" fill="${HOLZ}"/>`+
-        `<g data-dreh="0.6" data-cx="${f(x)}" data-cy="${f(-R)}">`+[0,1,2].map(i=>{const a=i*2*Math.PI/3;return `<circle cx="${f(x+R*.3*Math.cos(a))}" cy="${f(-R+R*.3*Math.sin(a))}" r="${f(R*.09)}" fill="#C99A5B"/>`}).join('')+'</g></g>';
+        `<g data-dreh="0.6" data-cx="${f(x)}" data-cy="${f(-R)}">`+[0,1,2].map(j=>{const a=j*2*Math.PI/3;return `<circle cx="${f(x+R*.3*Math.cos(a))}" cy="${f(-R+R*.3*Math.sin(a))}" r="${f(R*.09)}" fill="#C99A5B"/>`}).join('')+'</g></g>';
       s+=`<g data-h="achse" data-cx="${f(L/2)}" data-ws="${f(xF-xR)}"><circle class="ks" cx="${f(x)}" cy="${f(-R)}" r="${f(Math.min(6*k,R*.3))}" fill="#FFFFFF"/></g>`});
-    s+=knopf(xF+R*.71,-R-R*.71,k,'⤢','aradk',`data-cx="${f(xF)}" data-cy="${f(-R)}" aria-label="Räder grösser ziehen"`);
-    const yl=36*k,t=5*k;
-    s+=`<path class="ml" d="M0 ${f(yl)}H${f(L)}M0 ${f(yl-t)}V${f(yl+t)}M${f(L)} ${f(yl-t)}V${f(yl+t)}"/>`+beschrift(L/2,yl+18*k,k,cmText(L));
-    s+=`<path class="ml" d="M${f(-18*k)} ${f(-bo)}V${f(-(bo+H))}M${f(-18*k-t)} ${f(-bo)}H${f(-18*k+t)}M${f(-18*k-t)} ${f(-(bo+H))}H${f(-18*k+t)}"/>`+beschrift(-26*k,-(bo+H/2)+5*k,k,cmText(H),'end');
-    s+=beschrift(xF,18*k,k,'Ø '+cmText(D));
+    const RF=Rs[1];
+    s+=knopf(xF+RF*.71,-RF-RF*.71,k,'⤢','aradk',`data-cx="${f(xF)}" data-cy="${f(-RF)}" aria-label="Räder grösser ziehen"`);
+    const yl=36*k,tt=5*k;
+    s+=`<path class="ml" d="M0 ${f(yl)}H${f(L)}M0 ${f(yl-tt)}V${f(yl+tt)}M${f(L)} ${f(yl-tt)}V${f(yl+tt)}"/>`+beschrift(L/2,yl+18*k,k,cmText(L));
+    s+=`<path class="ml" d="M${f(-18*k)} ${f(-bo)}V${f(-(bo+H))}M${f(-18*k-tt)} ${f(-bo)}H${f(-18*k+tt)}M${f(-18*k-tt)} ${f(-(bo+H))}H${f(-18*k+tt)}"/>`+beschrift(-26*k,-(bo+H/2)+5*k,k,cmText(H),'end');
+    s+=beschrift(xF,18*k,k,'Ø '+cmText(Ds[1]));
+    if(Ds[0]!==Ds[1])s+=beschrift(xR,18*k,k,'Ø '+cmText(Ds[0]));
     const top=F.pts.reduce((a,p)=>p[1]>a[1]?p:a);
     s+=knopf(L,-(bo+hoeheBei(F.pts,.99)*H/2),k,'↔','laenge','aria-label="Länge ziehen"')+knopf(top[0]*L,-(bo+H),k,'↕','hoehe','aria-label="Höhe ziehen"');
     s+=`<g data-h="breite" data-cx="${f(cxF)}"><rect class="ks" x="${f(cxF-B/2)}" y="${f(-(bo+H))}" width="${f(B)}" height="${f(H)}" rx="${f(Math.min(3,B/4))}" fill="${HOLZ}"/></g>`;
-    if(S.lager==='nut'){const w=lochmass('klotz')/2;s+=`<path class="ks" d="M${f(cxF-B/2-6)} ${f(-R-w)}V${f(-bo-w)}" fill="none" stroke-width="0"/>`+
-      `<path class="gst" d="M${f(cxF-w)} ${f(-bo)}V${f(-R)}A${f(w)} ${f(w)} 0 0 1 ${f(cxF+w)} ${f(-R)}V${f(-bo)}"/>`}
-    s+=`<path d="M${f(cxF-halb)} ${f(-R)}H${f(cxF+halb)}" stroke="#8A6A3D" stroke-width="${f(S.achse)}"/>`;
+    if(S.lager==='nut'){const w=lochmass('klotz')/2;s+=`<path class="gst" d="M${f(cxF-w)} ${f(-bo)}V${f(-RG)}A${f(w)} ${f(w)} 0 0 1 ${f(cxF+w)} ${f(-RG)}V${f(-bo)}"/>`}
+    s+=`<path d="M${f(cxF-halb)} ${f(-RG)}H${f(cxF+halb)}" stroke="#8A6A3D" stroke-width="${f(S.achse)}"/>`;
     [-1,1].forEach(sg=>{const x0=sg<0?cxF-halb:cxF+B/2+sp;
-      s+=`<g data-h="rbreite" data-cx="${f(cxF)}"><rect class="ks" x="${f(x0)}" y="${f(-D)}" width="${f(rb)}" height="${f(D)}" rx="${f(Math.min(2,rb/4))}" fill="#2B2F36"/></g>`});
+      s+=`<g data-h="rbreite" data-cx="${f(cxF)}"><rect class="ks" x="${f(x0)}" y="${f(-DG)}" width="${f(rb)}" height="${f(DG)}" rx="${f(Math.min(2,rb/4))}" fill="#2B2F36"/></g>`});
     s+=beschrift(cxF,-(bo+H)-10*k,k,cmText(B))+beschrift(cxF+B/2+sp+rb/2,18*k,k,mm(rb));
     return s}};
 }
@@ -871,9 +894,9 @@ addEventListener('resize',()=>{if(!zieh)buehne()});
 $('modulChips').innerHTML=[1,2,3,4,5,6].map(m=>{const p=m*1.5+1.5,h=m*1.7;let d='M0 16';
   for(let x=0;x<40;x+=p)d+=`L${f(x+p*.15)} 16L${f(x+p*.32)} ${f(16-h)}L${f(x+p*.68)} ${f(16-h)}L${f(x+p*.85)} 16`;
   return `<button type="button" class="chip" data-v="${m}" title="Modul ${m}" aria-label="Modul ${m}"><svg viewBox="0 0 40 18" aria-hidden="true"><path d="${d}L40 16V18H0Z" fill="currentColor"/></svg></button>`}).join('');
-$('formChips').innerHTML=Object.keys(UMRISSE).map(k=>{const F=UMRISSE[k];
-  return `<button type="button" class="chip" data-v="${k}" title="${FORMEN[k]}" aria-label="${FORMEN[k]}"><svg viewBox="0 0 48 26" aria-hidden="true"><path d="M${F.pts.map(([x,y])=>f(2+x*44)+' '+f(19-y*14)).join('L')}Z" fill="currentColor"/>`+
-    F.achsen.map(a=>`<circle cx="${f(2+a*44)}" cy="20" r="5" fill="currentColor" stroke="var(--surface2)" stroke-width="1.5"/>`).join('')+'</svg></button>'}).join('');
+$('formChips').innerHTML=Object.keys(UMRISSE).map(k=>{const F=UMRISSE[k],sk=Math.min(44,22/F.hw),X=x=>f(24+(x-.5)*sk),Y=y=>f(25-y*sk*F.hw);
+  const d=[F.pts].concat(F.fenster).map(p=>'M'+p.map(([x,y])=>X(x)+' '+Y(y)).join('L')+'Z').join('');
+  return `<button type="button" class="chip" data-v="${k}" aria-label="${FORMEN[k]}"><svg viewBox="0 0 48 26" aria-hidden="true"><path d="${d}" fill="currentColor" fill-rule="evenodd"/></svg>${FORMEN[k]}</button>`}).join('');
 function zeigen(){
   const E=TEILE[S.modus]();
   const {blaetter,zuGross,P}=packen(E.teile);
@@ -904,6 +927,7 @@ document.querySelectorAll('[data-g]').forEach(g=>g.addEventListener('click',ev=>
   const c=ev.target.closest('.chip');if(!c)return;const k=g.dataset.g;
   S[k]=WORTE[k]?c.dataset.v:zahl(c.dataset.v,S[k]);
   if(k==='ziel'&&ZIELE[S.ziel])Object.assign(S,ZIELE[S.ziel]);
+  if(k==='form'&&UMRISSE[S.form].mass)Object.assign(S,UMRISSE[S.form].mass,{radstand:0});
   if(k==='nocken'&&!S.hub){S.hub=20;S.scheibeD=0}
   if(k==='wart')S.wFluegel=S.wart==='papier'?(S.wFluegel>=6?8:4):begrenzt(S.wFluegel,3,8);
   felder();zeigen();
