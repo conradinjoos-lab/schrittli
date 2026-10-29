@@ -91,13 +91,25 @@ vm.runInContext(`
   const gespeichert=new Set(TIERE.map(speicherKey));
   if(gespeichert.size!==TIERE.length)throw new Error('Speicherschlüssel doppelt');
 `,ctx);
+// Ohne Suche zuerst nur Themen-Kacheln (keine lange Liste), jede mit höchstens vier Beispielen
+nodes.get('suche').value='';vm.runInContext('oeffnen(null)',ctx);
+{const h=nodes.get('tiere').innerHTML,themen=(h.match(/class="kat"/g)||[]).length;
+  assert.ok(themen>=40&&!h.includes('class="tier"'),'Startansicht zeigt Themen-Kacheln');
+  assert.ok(nodes.get('zurueck').hidden);
+  assert.match(nodes.get('treffer').textContent,/\d+ Muster in \d+ Themen/);
+  for(const k of h.split('class="kat"').slice(1))assert.ok((k.split('</span><b>')[0].match(/<svg|<img/g)||[]).length<=4,'Höchstens vier Beispiele pro Kachel');}
+// Sehr breite Suche: Kacheln mit Trefferzahl statt endloser Liste
+nodes.get('suche').value='e';vm.runInContext('auswahl()',ctx);
+assert.match(nodes.get('tiere').innerHTML,/class="kat"/);assert.match(nodes.get('treffer').textContent,/Treffer in \d+ Themen/);
 nodes.get('suche').value='pikachu';vm.runInContext('auswahl()',ctx);
 assert.match(nodes.get('tiere').innerHTML,/klein-pikachu/);
 assert.match(nodes.get('tiere').innerHTML,/figur-pikachu/);
-assert.match(nodes.get('treffer').textContent,/\d Muster/);
+assert.match(nodes.get('treffer').textContent,/\d Treffer/);
 nodes.get('suche').value='gibt-es-nicht-xyz';vm.runInContext('auswahl()',ctx);
 assert.match(nodes.get('treffer').textContent,/Kein Muster/);
-nodes.get('suche').value='';nodes.get('gruppe').value='Mario & Nintendo';vm.runInContext('anzeige=10000;auswahl()',ctx);
+vm.runInContext("oeffnen('Mario & Nintendo')",ctx);
+assert.equal(nodes.get('suche').value,'');assert.ok(!nodes.get('zurueck').hidden);
+assert.match(nodes.get('treffer').textContent,/Muster im Thema «Mario & Nintendo»/);
 assert.ok(!nodes.get('tiere').innerHTML.includes('pikachu'));
 assert.ok(nodes.get('tiere').innerHTML.includes('klein-mario'));
 assert.ok(nodes.get('tiere').innerHTML.includes('figur-mario'));

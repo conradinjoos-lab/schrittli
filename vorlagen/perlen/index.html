@@ -24,6 +24,15 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
 .karte h3{font:600 15px Fredoka,Nunito,sans-serif;color:var(--muted);margin:16px 0 8px}.karte h3:first-child{margin-top:0}
 .raster{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+.kats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.kat{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px 10px;border:2px solid var(--line);border-radius:16px;background:var(--surface2);color:var(--ink);font:inherit;cursor:pointer}
+.kat:hover{border-color:var(--acc);background:var(--acc-soft)}
+.kat b{font:600 17px Fredoka,Nunito,sans-serif;text-align:center}
+.k-bilder{display:grid;grid-template-columns:repeat(2,40px);gap:4px}
+.k-bilder svg,.k-bilder img{width:40px;height:52px;object-fit:contain}
+.k-n{font-size:13px;color:var(--muted)}
+.zurueck{margin:10px 0 12px;min-height:40px;padding:6px 14px;border:2px solid var(--line);border-radius:999px;background:var(--surface2);color:var(--ink);font:inherit;font-size:14px;cursor:pointer}
+.zurueck:hover{border-color:var(--acc)}
 .tier{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px 8px;border:2px solid var(--line);border-radius:14px;background:var(--surface2);color:var(--ink);font:inherit;font-size:14px;cursor:pointer}
 .tier svg{width:72px;height:96px}
 .tier img{width:72px;height:96px;object-fit:contain}
@@ -47,7 +56,7 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
 .vorschau svg{display:block;width:100%;height:auto;background:var(--papier);border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
 @media (max-width:860px){main{grid-template-columns:minmax(0,1fr)}.seite-rechts{position:static}h1{font-size:24px}}
-@media (max-width:480px){.raster{grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}.tier svg{width:56px;height:76px}}
+@media (max-width:480px){.raster{grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}.tier svg{width:56px;height:76px}.kats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.k-bilder{grid-template-columns:repeat(2,34px)}.k-bilder svg,.k-bilder img{width:34px;height:44px}}
 #druck{display:none}
 @page{size:A4 portrait;margin:0}
 @media print{
@@ -68,10 +77,10 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 <main>
   <section class="karte" aria-label="Tier wählen">
     <h2>Tier oder Figur wählen</h2>
-    <div class="suche"><label for="klasse">Deine Klasse</label><select id="klasse" aria-describedby="klassen-grenze"></select><p class="hinweis" id="klassen-grenze" style="margin:0"></p><label class="hinweis" style="display:flex;gap:8px;align-items:center;margin:0"><input type="checkbox" id="nur-passend"> Nur Muster bis zur Klassenbreite zeigen</label><label for="suche">Suchen</label><input id="suche" type="search" placeholder="Zum Beispiel Mario oder Pikachu"><label for="gruppe">Thema</label><select id="gruppe"><option value="">Alle Themen</option></select></div>
+    <div class="suche"><label for="klasse">Deine Klasse</label><select id="klasse" aria-describedby="klassen-grenze"></select><p class="hinweis" id="klassen-grenze" style="margin:0"></p><label class="hinweis" style="display:flex;gap:8px;align-items:center;margin:0"><input type="checkbox" id="nur-passend"> Nur Muster bis zur Klassenbreite zeigen</label><label for="suche">Suchen</label><input id="suche" type="search" placeholder="Zum Beispiel Mario oder Pikachu"></div>
     <p class="hinweis" id="treffer" role="status"></p>
+    <button type="button" class="zurueck" id="zurueck" hidden>← Alle Themen</button>
     <div id="tiere"></div>
-    <button type="button" class="anpassen" id="mehr" hidden>Weitere Muster anzeigen</button>
   </section>
   <div class="seite-rechts">
     <section class="karte" aria-label="Einstellungen">
@@ -491,28 +500,43 @@ const ART={Kopf:'nur der Kopf',Gesicht:'nur das Gesicht',Figur:'die ganze Figur 
 const gruppen=['Tiere','Comic-Figuren','Essen und Sachen',...new Set(TIERE.filter(t=>t.gruppe).map(t=>t.gruppe))];
 const gruppeVon=t=>t.gruppe||(t.art==='figur'?'Comic-Figuren':t.art==='ding'?'Essen und Sachen':'Tiere');
 const htmlText=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let anzeige=48;
+let offen=null;                                   // geöffnetes Thema, sonst Kacheln aller Themen
 function auswahl(){
-  const such=$('suche').value.trim().toLocaleLowerCase('de-CH'),gruppe=$('gruppe').value;
-  const treffer=TIERE.filter(t=>(!S.nurPassend||passt(t))&&(!gruppe||gruppeVon(t)===gruppe)&&(!such||(t.name+' '+gruppeVon(t)).toLocaleLowerCase('de-CH').includes(such)));
-  const sichtbar=treffer.slice(0,anzeige);
+  const such=$('suche').value.trim().toLocaleLowerCase('de-CH');
+  const treffer=TIERE.filter(t=>(!S.nurPassend||passt(t))&&(!such||(t.name+' '+gruppeVon(t)).toLocaleLowerCase('de-CH').includes(such)));
+  const bild=t=>t.offsets?`<img src="bilder/${t.quelle}.webp?v=${t.version||2}" alt="" loading="lazy" width="40" height="52">`:mini(t);
   const knopf=t=>`<button type="button" class="tier" data-id="${t.id}" aria-pressed="${t.id===S.tier}">${t.offsets?`<img src="bilder/${t.quelle}.webp?v=${t.version||2}" alt="" loading="lazy" width="72" height="96">`:mini(t)}<span>${htmlText(t.name)}</span><small>${zaehlen(t).n} Perlen · ${PerlenEditor.schwierigkeit(t,S.klasse)}</small><small>${PerlenEditor.reihenbreite(t)} pro Reihe${passt(t)?'':' · breiter als die Klasse'}</small></button>`;
-  $('tiere').innerHTML=gruppen.map(h=>{const l=sichtbar.filter(t=>gruppeVon(t)===h);return l.length?`<h3>${htmlText(h)}</h3><div class="raster">${l.map(knopf).join('')}</div>`:''}).join('');
-  $('treffer').textContent=treffer.length?`${treffer.length} Muster${S.nurPassend?` bis ${PerlenEditor.maximum(S.klasse)} Perlen pro Reihe`:''} · ${sichtbar.length} angezeigt`:S.nurPassend?'Kein passendes Muster für diese Klassenbreite gefunden. Schalte den Filter aus oder versuche einen anderen Namen.':'Kein Muster gefunden. Versuche einen anderen Namen.';
-  $('mehr').hidden=treffer.length<=anzeige;
+  const breite=S.nurPassend?` bis ${PerlenEditor.maximum(S.klasse)} Perlen pro Reihe`:'';
+  const leer=such?'Kein Muster gefunden. Versuche einen anderen Namen.':'Kein passendes Muster für diese Klassenbreite gefunden. Schalte den Filter aus.';
+  // Zuerst Kacheln der Themen mit je vier Beispielen. Ein Klick öffnet das Thema; die Suche geht über alle Themen,
+  // bei sehr vielen Treffern zeigen die Kacheln die Trefferzahl, damit nie eine endlose Liste entsteht.
+  const kacheln=!offen&&(!such||treffer.length>120);
+  $('zurueck').hidden=kacheln;
+  if(kacheln){
+    const themen=gruppen.map(g=>[g,treffer.filter(t=>gruppeVon(t)===g)]).filter(([,l])=>l.length);
+    $('tiere').innerHTML=`<div class="kats">${themen.map(([g,l])=>`<button type="button" class="kat" data-g="${htmlText(g)}"><span class="k-bilder">${l.slice(0,4).map(bild).join('')}</span><b>${htmlText(g)}</b><span class="k-n">${l.length} ${such?'Treffer':'Muster'}</span></button>`).join('')}</div>`;
+    $('treffer').textContent=treffer.length?(such?`${treffer.length} Treffer in ${themen.length} Themen – wähle ein Thema oder tippe weiter`:`${treffer.length} Muster${breite} in ${themen.length} Themen`):leer;
+    return;
+  }
+  const liste=such?treffer:treffer.filter(t=>gruppeVon(t)===offen);
+  $('tiere').innerHTML=(such?gruppen:[offen]).map(h=>{const l=liste.filter(t=>gruppeVon(t)===h);return l.length?`<h3>${htmlText(h)}</h3><div class="raster">${l.map(knopf).join('')}</div>`:''}).join('');
+  $('treffer').textContent=liste.length?`${liste.length} ${such?'Treffer':'Muster'}${breite}${such?'':` im Thema «${offen}»`}`:leer;
 }
+function oeffnen(g){offen=g;$('suche').value='';auswahl()}
 function liste(){
   $('klasse').innerHTML=Object.entries(PerlenEditor.GRENZEN).map(([k,max])=>`<option value="${k}">${k}. Klasse · bis ${max} Perlen pro Reihe</option>`).join('');
   $('klasse').value=String(S.klasse);
-  $('klasse').addEventListener('change',()=>{S.klasse=PerlenEditor.klasse($('klasse').value);anzeige=48;try{localStorage.setItem('schrittli.perlen.klasse',S.klasse)}catch(e){}zeichnen();auswahl()});
+  $('klasse').addEventListener('change',()=>{S.klasse=PerlenEditor.klasse($('klasse').value);try{localStorage.setItem('schrittli.perlen.klasse',S.klasse)}catch(e){}zeichnen();auswahl()});
   $('nur-passend').checked=S.nurPassend;
-  $('nur-passend').addEventListener('change',()=>{S.nurPassend=$('nur-passend').checked;anzeige=48;try{localStorage.setItem('schrittli.perlen.nurPassend',S.nurPassend?'1':'0')}catch(e){}auswahl()});
-  $('gruppe').innerHTML+=[...gruppen].map(g=>`<option>${htmlText(g)}</option>`).join('');
-  $('suche').addEventListener('input',()=>{anzeige=48;auswahl()});
-  $('gruppe').addEventListener('change',()=>{anzeige=48;auswahl()});
-  $('mehr').addEventListener('click',()=>{anzeige+=48;auswahl()});
+  $('nur-passend').addEventListener('change',()=>{S.nurPassend=$('nur-passend').checked;try{localStorage.setItem('schrittli.perlen.nurPassend',S.nurPassend?'1':'0')}catch(e){}auswahl()});
+  $('suche').addEventListener('input',auswahl);
+  $('zurueck').addEventListener('click',()=>oeffnen(null));
+  if(q.has('tier'))offen=gruppeVon(TIERE.find(t=>t.id===S.tier));   // Link auf ein Muster: sein Thema gleich offen
   auswahl();
-  $('tiere').addEventListener('click',e=>{const k=e.target.closest('.tier');if(!k)return;S.tier=k.dataset.id;zeichnen();
+  $('tiere').addEventListener('click',e=>{
+    const kat=e.target.closest('.kat');
+    if(kat){oeffnen(kat.dataset.g);$('zurueck').scrollIntoView({behavior:'smooth',block:'start'});return}
+    const k=e.target.closest('.tier');if(!k)return;S.tier=k.dataset.id;zeichnen();
     if(matchMedia('(max-width:860px)').matches)$('vorschau').scrollIntoView({behavior:'smooth',block:'start'})});
   $('perlen').innerHTML=Object.entries(PERLEN).map(([k,p])=>`<button type="button" class="chip" data-p="${k}" aria-pressed="false">${p.name}</button>`).join('');
   $('perlen').addEventListener('click',e=>{const k=e.target.closest('.chip');if(!k)return;S.perle=k.dataset.p;zeichnen()});
