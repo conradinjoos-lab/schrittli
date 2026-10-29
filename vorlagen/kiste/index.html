@@ -141,7 +141,7 @@ h2 .leise{color:var(--muted);font-size:14px;font-family:Nunito,sans-serif}
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
   <h1>Kisten-Planer</h1>
-  <p>Kiste ziehen, Teile antippen. <a href="../">←&nbsp;Vorlagen</a></p>
+  <p><a href="../">←&nbsp;Vorlagen</a></p>
 </header>
 <script src="../zurueck.js"></script>
 <main>
@@ -162,7 +162,9 @@ h2 .leise{color:var(--muted);font-size:14px;font-family:Nunito,sans-serif}
       </div>
       <div class="chips seg" role="group" aria-label="Deckel" data-g="deckel"><span class="gt">Deckel</span>
         <button type="button" class="chip ico" data-v="nein" title="Ohne" aria-label="Ohne Deckel"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M4 11v11h18V11h-3v8H7v-8z"/><path d="M4 6.5h18" stroke-dasharray="2 2.5"/></svg></button>
-        <button type="button" class="chip ico" data-v="ja" title="Mit Deckel" aria-label="Mit Deckel"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M4 11v11h18V11h-3v8H7v-8z"/><path class="a f" d="M3 4h20v3H3z"/></svg></button>
+        <button type="button" class="chip ico" data-v="ja" title="Lose" aria-label="Deckel lose"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M4 11v11h18V11h-3v8H7v-8z"/><path class="a f" d="M3 4h20v3H3z"/><path class="a f" d="M8 7h2.5v4H8zM15.5 7H18v4h-2.5z"/></svg></button>
+        <button type="button" class="chip ico" data-v="scharnier" title="Scharnier" aria-label="Deckel mit Scharnier"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M4 11v11h18V11h-3v8H7v-8z"/><path class="a f" d="M22.5 10.5L14.8 1.3l-2.3 1.9 7.7 9.2z"/><circle class="a f" cx="21.6" cy="11" r="1.6"/></svg></button>
+        <button type="button" class="chip ico" data-v="nut" title="Nut" aria-label="Schiebedeckel in Nut"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M2 9v13h16V9h-3v10H5V9z"/><path class="a f" d="M6 11h19v2.2H6z"/><path class="a" d="M24 6.5h-7M19.5 4l-2.5 2.5 2.5 2.5"/></svg></button>
       </div>
       <div class="chips" role="group" aria-label="Holz" data-g="mat">
         <button type="button" class="chip" data-v="sperrholz"><i style="background:#E6C48F"></i>Sperrholz</button>
@@ -185,7 +187,7 @@ h2 .leise{color:var(--muted);font-size:14px;font-family:Nunito,sans-serif}
     </details>
   </section>
   <section class="karte">
-    <h2>Bohrpläne <span class="leise">mm von links / unten</span></h2>
+    <h2>Bohrpläne</h2>
     <div class="plaene" id="plaene"></div>
   </section>
   <section class="karte">
@@ -206,7 +208,6 @@ h2 .leise{color:var(--muted);font-size:14px;font-family:Nunito,sans-serif}
   </section>
   <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg> Plan drucken</button>
   <details class="karte mehr-karte" id="mehr"><summary title="Rechnung, Material, Anleitung">⋯ Rechnung · Material · Anleitung</summary>
-    <p class="hinweis" id="mat-hinweis"></p>
     <div class="rechnung" id="rechnung"></div>
     <ul class="material" id="material"></ul>
     <ol class="schritte" id="schritte"></ol>
@@ -228,13 +229,14 @@ const MATERIAL={
   sperrholz:{name:'Sperrholz / Schichtholz',dicken:[4,6,8,10,12,15],tipp:'Sperrholz hält Schrauben in der Kante gut – aber nur mit Vorbohren, sonst spaltet sich die Kante in ihre Schichten.'},
   mdf:{name:'MDF',dicken:[6,8,10,12,16,19],tipp:'MDF-Kanten brechen leicht: immer vorbohren, die Schraube nicht überdrehen, und unbedingt leimen.'},
   massiv:{name:'Massivholz-Brett',dicken:[12,15,18,20],tipp:'In Massivholz hält die Schraube quer zur Faser gut. Am Brettende (Hirnholz) hält sie weniger – dort leimen und langsam schrauben.'}};
+const SCHARNIERE=[[20,16],[25,19],[30,24],[40,30]];   // Kleinscharniere Messing: Länge × offen (mm)
 const LAENGEN={2.5:[12,16,20,25],3:[12,16,20,25,30,35,40],3.5:[16,20,25,30,35,40,45,50],4:[20,25,30,35,40,45,50,60,70],4.5:[25,30,35,40,45,50,60,70,80]};
-const S={l:30,b:20,h:8,mass:'aussen',mat:'sperrholz',d:8,boden:'unter',aussen:'lang',deckel:'nein'};
+const S={l:30,b:20,h:8,mass:'aussen',mat:'sperrholz',d:8,boden:'unter',aussen:'lang',deckel:'nein',zu:'haken'};
 const GRENZEN={l:[4,120],b:[4,120],h:[2,80],d:[3,30]};
 try{ const g=JSON.parse(localStorage.getItem(KEY)||'{}'); for(const k in S) if(g[k]!==undefined) S[k]=g[k]; }catch(e){}
 try{ const u=new URL(location.href).searchParams;
   ['l','b','h','d'].forEach(k=>{ if(u.has(k)&&!isNaN(parseFloat(u.get(k)))) S[k]=parseFloat(u.get(k)); });
-  [['mass',['aussen','innen']],['mat',Object.keys(MATERIAL)],['boden',['unter','zwischen']],['aussen',['lang','kurz']],['deckel',['nein','ja']]].forEach(([k,w])=>{ if(w.includes(u.get(k))) S[k]=u.get(k); });
+  [['mass',['aussen','innen']],['mat',Object.keys(MATERIAL)],['boden',['unter','zwischen']],['aussen',['lang','kurz']],['deckel',['nein','ja','scharnier','nut']],['zu',['haken','magnet']]].forEach(([k,w])=>{ if(w.includes(u.get(k))) S[k]=u.get(k); });
 }catch(e){}
 for(const k in GRENZEN){ const [lo,hi]=GRENZEN[k]; S[k]=Math.min(hi,Math.max(lo,+S[k]||lo)); }
 if(!MATERIAL[S.mat]) S.mat='sperrholz';
@@ -269,7 +271,7 @@ function rechnen(){
   const La=innen?L0+2*d:L0, Ba=innen?B0+2*d:B0, Ha=innen?H0+d:H0;
   const Li=La-2*d, Bi=Ba-2*d, Hi=Ha-d;
   const hw=unter?Ha-d:Ha;                       // Wandhöhe
-  const R={d,La,Ba,Ha,Li,Bi,Hi,hw,unter,langAussen,innen,fehler:''};
+  const R={d,La,Ba,Ha,Li,Bi,Hi,hw,unter,langAussen,innen,fehler:'',deckel:(S.deckel==='scharnier'||S.deckel==='nut')&&d<8?'ja':S.deckel};   // Scharnier und Nut erst ab 8 mm Holz
   if(Li<20||Bi<20||Hi<5){ R.fehler='So geht die Kiste nicht auf: das Holz ist zu dick für diese Masse. Nimm dünneres Holz oder eine grössere Kiste.'; R.kurz='Holz zu dick für diese Kiste'; return R; }
   const sc=schraube(d,unter?hw-3:undefined); R.sc=sc;   // von unten: die Schraube muss in der Wandkante bleiben
   if(sc.zuLang){ R.fehler=`So flach geht es nicht mit Schrauben von unten: die Wandkante ist nur ${mm(hw)} hoch. Setz den Boden zwischen die Wände oder bau die Kiste höher.`; R.kurz='Zu flach für Schrauben von unten'; return R; }
@@ -280,8 +282,11 @@ function rechnen(){
   teile.push({id:'boden',name:'Boden',n:1,l:unter?La:Li,b:unter?Ba:Bi});
   teile.push({id:'lang',name:'Längsseite',n:2,l:langAussen?La:Li,b:hw});
   teile.push({id:'kurz',name:'Stirnseite',n:2,l:langAussen?Bi:Ba,b:hw});
+  const nutT=La>=400||Ba>=300?4:3, nutA=Math.max(4,Math.round(d/2));     // Deckeldicke = Nutbreite, Abstand der Nut von der Oberkante
+  if(R.deckel==='nut'&&hw-nutA-nutT<d+10) R.deckel='ja';                    // zu flach für eine Nut
   let leisteB=0;
-  if(S.deckel==='ja'){
+  if(R.deckel==='scharnier') teile.push({id:'deckel',name:'Deckel',n:1,l:La,b:Ba});
+  if(R.deckel==='ja'){
     leisteB=sc.ok?Math.max(20,Math.ceil((sc.len-d+4)/5)*5):20;   // Leiste hochkant: so breit, dass die Schraube nicht durchkommt
     teile.push({id:'deckel',name:'Deckel',n:1,l:La,b:Ba});
     teile.push({id:'leiste',name:'Deckelleiste (hochkant)',n:2,l:Li-2,b:leisteB});
@@ -312,14 +317,45 @@ function rechnen(){
     sk.forEach(x=>loecher.kurz.push({x,y:d/2,art:'boden'}));
     bodenStellen.lang=sl; bodenStellen.kurz=sk; anzahl+=2*sl.length+2*sk.length;
   }
-  if(S.deckel==='ja'){
+  if(R.deckel==='ja'){
     // Deckelleisten: hochkant unter dem Deckel, 1 mm von der Innenwand weg; von oben durch den Deckel in die Leistenkante
     loecher.deckel=[]; const sd=stellen(Li-2,e).map(x=>x+d+1), yl=d+1+d/2;
     sd.forEach(x=>{ loecher.deckel.push({x,y:yl,art:'deckel'}); loecher.deckel.push({x,y:Ba-yl,art:'deckel'}); });
     bodenStellen.deckel=sd; anzahl+=2*sd.length;
   }
+  if(R.deckel==='scharnier'){
+    // Längsseite hinten bekommt die Scharniere, vorn den Verschluss: darum zwei Bohrpläne
+    const lt=teile.find(t=>t.id==='lang'), xl0=langAussen?0:d;
+    lt.n=1; lt.name='Längsseite vorn';
+    teile.splice(teile.indexOf(lt)+1,0,{id:'hinten',name:'Längsseite hinten',n:1,l:lt.l,b:lt.b});
+    loecher.hinten=loecher.lang.map(h=>({...h}));
+    // Scharniere hinten aufgeschraubt, Gelenk auf der Fuge: ein Lappen auf der Wand, einer auf der Deckelkante (Lappen nicht breiter als das Holz)
+    const [Lh,Wh]=[...SCHARNIERE].reverse().find(([,w])=>w/2<=d)||SCHARNIERE[0], lap=Wh/2;
+    const a=Math.max(Math.round(La/5),Lh/2+d+10), mitten=La>=2*a+Lh?[a,La-a]:[La/2];
+    const ss=d>=12?10:d>=10?8:6;
+    R.scharnier={Lh,Wh,lap,mitten,ss};
+    loecher.deckel=[];
+    mitten.forEach(c=>[c-Lh/4,c+Lh/4].forEach(x=>{ loecher.hinten.push({x:x-xl0,y:hw-lap/2,art:'scharnier'}); loecher.deckel.push({x,y:Ba,art:'scharnier'}); }));
+    // Verschluss vorn in der Mitte: Magnet in Wandkante und Deckel (ab 10 mm), sonst Sturmhaken mit Öse
+    R.zu=S.zu==='magnet'&&d>=10?'magnet':'haken';
+    if(R.zu==='magnet'){ loecher.lang.push({x:La/2-xl0,y:hw,art:'magnet'}); loecher.deckel.push({x:La/2,y:d/2,art:'magnet'}); }
+    else { const Lk=hw>=60?40:30, yo=Math.round(Math.max(hw/2,hw-Lk+d/2+4)); R.haken={Lk,yo};
+      loecher.lang.push({x:La/2-xl0,y:yo,art:'haken'}); loecher.deckel.push({x:La/2,y:0,art:'haken'}); }
+  }
+  if(R.deckel==='nut'){
+    // Schiebedeckel aus dünnem Sperrholz: Nut mit der Kreissäge innen durch beide Längsseiten und die linke Stirnseite.
+    // Die rechte Stirnseite reicht nur bis unter die Nut, dort schiebt man den Deckel hinein.
+    const tn=Math.min(5,Math.floor(d/2)), hT=hw-nutA-nutT;
+    const kt=teile.find(t=>t.id==='kurz'); kt.n=1; kt.name='Stirnseite links';
+    teile.splice(teile.indexOf(kt)+1,0,{id:'tief',name:'Stirnseite rechts',n:1,l:kt.l,b:hT});
+    loecher.tief=loecher.kurz.filter(h=>h.y<=hT-d/2).map(h=>({...h}));
+    anzahl-=loecher.kurz.length-loecher.tief.length;
+    const Ld=La-d+tn-1, Bd=Ba-2*d+2*tn-1;                                 // 1 mm Luft in der Länge, je 0,5 mm in der Breite
+    teile.push({id:'deckel',name:'Schiebedeckel',n:1,l:Ld,b:Bd,dick:nutT});
+    R.nut={t:nutT,tn,a:nutA,hT,Ld,Bd,out:Math.round(Math.min(La*0.3,Ld*0.4))};
+  }
   R.loecher=loecher; R.anzahl=anzahl; R.bodenStellen=bodenStellen;
-  R.zuschnitt=zuschnitt(teile);
+  R.zuschnitt=zuschnitt(teile.filter(t=>!t.dick));   // der dünne Schiebedeckel kommt aus einer anderen Platte
   return R;
 }
 
@@ -362,13 +398,26 @@ const poly=(p,fill,lw)=>`<polygon points="${pts(p)}" fill="${fill}" stroke="#4a3
 // Jedes Brett ist ein Quader q=[x0,x1,y0,y1,z0,z1] (mm). dick = Achse der Brettdicke (0 x, 1 y, 2 z), innen = man sieht die Innenseite.
 // Löcher {p:[x,y,z]} gehen durch die Dicke; gezeichnet werden sie auf der sichtbaren Fläche.
 const FARBE={flaeche:['#C99A5B','#E9C99A','#EFD3A8'],kante:['#DDB57E','#F3DDB7','#F7E6C8'],innen:['#B98A50','#D9B98A','#E3C59A']};
+const MESSING=['#B8902F','#D9B24A','#EBCB6A'];
+// Kreis in einer Ebene: a = Achse senkrecht dazu, fl = Lage der Ebene, (u,v) Mitte in den zwei anderen Achsen
+function kreis(a,fl,u,v,r){ const ring=[];
+  for(let k=0;k<16;k++){ const w=k/16*2*Math.PI, cu=u+r*Math.cos(w), cv=v+r*Math.sin(w); ring.push(a===0?[fl,cu,cv]:a===1?[cu,fl,cv]:[cu,cv,fl]); }
+  return ring; }
 function bretter(R,d){
   const {La,Ba,Ha,unter,langAussen}=R, z0=unter?d:0, L=R.loecher||{}, B=[];
   const xl0=langAussen?0:d, xl1=langAussen?La:La-d, yk0=langAussen?d:0, yk1=langAussen?Ba-d:Ba;
-  const lang=L.lang||[], kurz=L.kurz||[];
+  const sicht=h=>h.art!=='magnet'&&h.art!=='scharnier';      // Magnet in der Kante und Scharnierlöcher hinten sieht man nicht
+  const lang=(L.lang||[]).filter(sicht), hinten=(L.hinten||L.lang||[]).filter(sicht), kurz=L.kurz||[];
+  // Nut: dunkler Streifen auf der Innenfläche, im Schnitt an den Brettenden
+  const N=R.nut, zn=N?[Ha-N.a-N.t,Ha-N.a]:null;
+  const nutX=(x,ya,yb)=>[[x,ya,zn[0]],[x,yb,zn[0]],[x,yb,zn[1]],[x,ya,zn[1]]], nutY=(y,xa,xb)=>[[xa,y,zn[0]],[xb,y,zn[0]],[xb,y,zn[1]],[xa,y,zn[1]]];
   B.push(unter?{q:[0,La,0,Ba,0,d],dick:2,loch:(L.boden||[]).map(h=>[h.x,h.y])}:{q:[d,La-d,d,Ba-d,0,d],dick:2,loch:[]});
-  [[0,true],[Ba-d,false]].forEach(([y,vorn])=>B.push({q:[xl0,xl1,y,y+d,z0,Ha],dick:1,innen:!vorn,loch:lang.map(h=>[xl0+h.x,z0+h.y])}));
-  [[0,true],[La-d,false]].forEach(([x,links])=>B.push({q:[x,x+d,yk0,yk1,z0,Ha],dick:0,innen:links,loch:kurz.map(h=>[yk0+h.x,z0+h.y])}));
+  [[0,true],[Ba-d,false]].forEach(([y,vorn])=>B.push({q:[xl0,xl1,y,y+d,z0,Ha],dick:1,innen:!vorn,loch:(vorn?lang:hinten).map(h=>[xl0+h.x,z0+h.y]),
+    nut:N?(vorn?[nutX(xl1,y+d-N.tn,y+d)]:[nutY(y,xl0,xl1),nutX(xl1,y,y+N.tn)]):null}));
+  [[0,true],[La-d,false]].forEach(([x,links])=>{ const tief=N&&!links;
+    B.push({q:[x,x+d,yk0,yk1,z0,tief?z0+N.hT:Ha],dick:0,innen:links,loch:(tief?L.tief||[]:kurz).map(h=>[yk0+h.x,z0+h.y]),
+      nut:N&&links?[nutX(x+d,yk0,yk1),nutY(yk0,x+d-N.tn,x+d)]:null}); });
+  if(N){ const x1=La+N.out; B.push({q:[Math.max(d,x1-N.Ld),x1,d,Ba-d,zn[0],zn[1]],dick:2,loch:[]}); }   // Schiebedeckel, ein Stück herausgezogen
   return B;
 }
 // Malreihenfolge: was weiter hinten liegt, zuerst. Getrennte Quader sind auf einer Achse getrennt, und die sagt, welcher vorne ist.
@@ -381,16 +430,14 @@ function bretterBild(B,o){
   while(rest.length){ const i=rest.findIndex(b=>!rest.some(c=>c!==b&&hinter(c,b))); reihe.push(rest.splice(i<0?0:i,1)[0]); }
   let s='';
   reihe.forEach(b=>{
-    const [x0,x1,y0,y1,z0,z1]=b.q, pal=a=>(a!==b.dick?FARBE.kante:b.innen?FARBE.innen:FARBE.flaeche)[a];
+    const [x0,x1,y0,y1,z0,z1]=b.q, pal=a=>(b.farbe||(a!==b.dick?FARBE.kante:b.innen?FARBE.innen:FARBE.flaeche))[a];
     s+=poly([[x1,y0,z0],[x1,y1,z0],[x1,y1,z1],[x1,y0,z1]],pal(0),o.lw);
     s+=poly([[x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1]],pal(1),o.lw);
     s+=poly([[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]],pal(2),o.lw);
+    (b.nut||[]).forEach(q=>{ s+=`<polygon points="${pts(q)}" fill="#5a4330"/>`; });
     // Löcher: Kreis in der Fläche, schräg gesehen
     const a=b.dick, fl=[x1,y0,z1][a], r=o.sr;
-    b.loch.forEach(([u,v])=>{ const ring=[];
-      for(let k=0;k<16;k++){ const w=k/16*2*Math.PI, cu=u+r*Math.cos(w), cv=v+r*Math.sin(w);
-        ring.push(a===0?[fl,cu,cv]:a===1?[cu,fl,cv]:[cu,cv,fl]); }
-      s+=`<polygon points="${pts(ring)}" fill="#fff" stroke="#4a3a2a" stroke-width="${o.thin}"/>`; });
+    b.loch.forEach(([u,v])=>{ s+=`<polygon points="${pts(kreis(a,fl,u,v,r))}" fill="#fff" stroke="#4a3a2a" stroke-width="${o.thin}"/>`; });
   });
   return s;
 }
@@ -403,6 +450,8 @@ function kistenKoerper(R,o){
 function kistenBild(R){
   const {La,Ba,Ha}=R;
   let s=kistenKoerper(R,{lw:.6,thin:.5,sr:Math.max(1.2,La/120)});
+  const Sch=R.scharnier;
+  if(Sch) s+=bretterBild([{q:[0,La,Ba,Ba+R.d,Ha,Ha+Ba],dick:1,loch:[]},...Sch.mitten.map(c=>({q:[c-Sch.Lh/2,c+Sch.Lh/2,Ba-1.6,Ba+1.6,Ha-1.6,Ha+1.6],dick:2,farbe:MESSING,loch:[]}))],{lw:.6,thin:.5,sr:0});
   const fs=Math.max(5,(La+Ba)/22);
   const m=(p1,p2,text,dx,dy,rot)=>{ const [a1,b1]=P(...p1),[a2,b2]=P(...p2); const cx=(a1+a2)/2+dx, cy=(b1+b2)/2+dy;
     return `<path class="mass" d="M${a1.toFixed(1)},${b1.toFixed(1)} L${a2.toFixed(1)},${b2.toFixed(1)}"/><text class="masst" font-size="${fs}" x="${cx.toFixed(1)}" y="${cy.toFixed(1)}" text-anchor="middle"${rot?` transform="rotate(${rot} ${cx.toFixed(1)} ${cy.toFixed(1)})"`:''}>${esc(text)}</text>`; };
@@ -410,7 +459,7 @@ function kistenBild(R){
   s+=m([0,0,-ab],[La,0,-ab],`${cmT(La)} lang`,0,fs*1.1,0);
   s+=m([La+ab,0,0],[La+ab,Ba,0],`${cmT(Ba)} breit`,fs*2.2,fs*0.4,-40);
   s+=m([-ab,0,0],[-ab,0,Ha],`${cmT(Ha)} hoch`,-fs*0.6,0,-90);
-  const xs=[-ab-fs*2.5, La+K*Ba+fs*4], ys=[-(Ha+K*Ba)-fs, ab+fs*2.5];
+  const xs=[-ab-fs*2.5, La+K*Ba+fs*4+(R.nut?R.nut.out:0)], ys=[-(Ha+K*Ba+(Sch?Ba+K*R.d:0))-fs, ab+fs*2.5];
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${xs[0].toFixed(1)} ${ys[0].toFixed(1)} ${(xs[1]-xs[0]).toFixed(1)} ${(ys[1]-ys[0]).toFixed(1)}" role="img" aria-label="Kiste ${cmT(La)} × ${cmT(Ba)} × ${cmT(Ha)}">${s}</svg>`;
 }
 
@@ -422,8 +471,9 @@ const MC='#9A6B2F', OR='#E8772E';
 const deckelLuft=R=>(R.leisteB||20)+Math.max(15,R.Ha*0.15);
 function einpassen(R){
   const sw=$('flaeche').clientWidth||600;
-  const top=R.Ha+(S.deckel==='ja'?deckelLuft(R)+R.d:0);
-  const gw=R.La+K*R.Ba, gh=top+K*R.Ba, gy0=-gh;
+  const sch=R.deckel==='scharnier';
+  const top=R.Ha+(R.deckel==='ja'?deckelLuft(R)+R.d:sch?R.Ba+K*R.d+8:0);
+  const gw=R.La+K*(R.Ba+(sch?R.d:0))+(R.nut?R.nut.out:0), gh=top+K*R.Ba, gy0=-gh;
   const shMax=Math.min(560,Math.max(260,innerHeight*0.6));
   const u=Math.max(gw/Math.max(80,sw-RAND.l-RAND.r), gh/(shMax-RAND.t-RAND.b));
   const hpx=Math.max(240,gh/u+RAND.t+RAND.b);
@@ -446,7 +496,36 @@ function liveBild(R,A){
   s+=`<polygon points="${pts(sil)}" fill="transparent" data-t="wand"><title>Wände</title></polygon><g data-t="boden"><polygon points="${pts(bod)}" clip-path="url(#oeff)" fill="transparent"/><polygon points="${pts(kante)}" fill="transparent"/><title>Boden</title></g>`;
   // Deckel schwebt über der Kiste, die Leisten hängen darunter
   let zl=0;
-  if(S.deckel==='ja'){
+  const metall=(ring,lw)=>`<polygon points="${pts(ring)}" fill="#8E979F" stroke="#3a3f45" stroke-width="${lw}"/>`;
+  const draht=d2=>`<path d="${d2}" fill="none" stroke="#4d535a" stroke-width="${1.8*u}" stroke-linecap="round" stroke-linejoin="round"/>`;
+  if(R.deckel==='scharnier'){
+    const zt=Ha+Ba, yb=Ba+d, Sch=R.scharnier, lw=1.3*u, ys=Ba-0.6;
+    // Bogen mit Pfeil: so klappt der Deckel zu
+    const bog=[]; for(let k=16;k>=1;k--){ const w=k/16*Math.PI/2; bog.push(pt(La,Ba-Ba*Math.cos(w),Ha+d+(Ba-d)*Math.sin(w))); }
+    const [ta,tb]=P(La,0,Ha+d);
+    let g=`<path d="M${bog.join(' L')}" fill="none" stroke="#8a7a6a" stroke-width="${1.2*u}" stroke-dasharray="${4*u} ${3*u}"/><path d="M${f(ta-4*u)},${f(tb-8*u)} L${f(ta)},${f(tb)} L${f(ta+4*u)},${f(tb-8*u)}" fill="none" stroke="#8a7a6a" stroke-width="${1.4*u}" stroke-linejoin="round"/>`;
+    g+=bretterBild([{q:[0,La,Ba,yb,Ha,zt],dick:1,loch:[]}],{lw,thin:u,sr:Math.max(3*u,La/120)});
+    if(R.zu==='magnet') g+=metall(kreis(1,ys,La/2,zt-d/2,3),u);
+    else { const Lk=R.haken.Lk, x=La/2, z1=zt-Lk+6;
+      const bo=[]; for(let k=0;k<=8;k++){ const w=Math.PI+k/8*Math.PI; bo.push(pt(x+2.5+2.5*Math.cos(w),ys,z1+2.5*Math.sin(w))); }
+      g+=`<polygon points="${pts(kreis(1,ys,x,zt+2.6,2.2))}" fill="none" stroke="#4d535a" stroke-width="${1.6*u}"/>`+draht(`M${pt(x,ys,zt+0.4)} L${pt(x,ys,z1)} L${bo.join(' L')} L${pt(x+5,ys,z1+2.5)}`); }
+    // Scharniere: Gelenk auf der Fuge hinten
+    const k=Math.max(1.6,2.2*u);
+    g+=bretterBild(Sch.mitten.map(c=>({q:[c-Sch.Lh/2,c+Sch.Lh/2,Ba-k,Ba+k,Ha-k,Ha+k],dick:2,farbe:MESSING,loch:[]})),{lw:u,thin:u,sr:0});
+    if(wahl==='deckel') g+=`<polygon points="${pts([[0,Ba,Ha],[La,Ba,Ha],[La,yb,Ha],[La,yb,zt],[0,yb,zt],[0,Ba,zt]])}" fill="none" stroke="${OR}" stroke-width="${3*u}" stroke-linejoin="round"/>`;
+    s+=`<g data-t="deckel">${g}<title>Deckel</title></g>`;
+    // Gegenstück an der Kiste: Magnet in der Wandkante oder Öse vorn
+    s+=R.zu==='magnet'?metall(kreis(2,Ha,La/2,d/2,3),u):`<polygon points="${pts(kreis(1,0,La/2,(R.unter?d:0)+R.haken.yo,2.4))}" fill="none" stroke="#4d535a" stroke-width="${1.6*u}"/>`;
+  }
+  if(R.deckel==='nut'){
+    const N=R.nut, x1=La+N.out, x0=Math.max(La-d,x1-N.Ld), za=Ha-N.a-N.t, zb=Ha-N.a;
+    const um=[[x0,d,za],[x1,d,za],[x1,Ba-d,za],[x1,Ba-d,zb],[x0,Ba-d,zb],[x0,d,zb]];
+    const pl=Math.min(N.out*0.8,La*0.25), [p1,q1]=P(x1+6+pl,Ba/2,zb), [p2,q2]=P(x1+6,Ba/2,zb);
+    s+=`<path d="M${f(p1)},${f(q1)} L${f(p2)},${f(q2)} M${f(p2+6*u)},${f(q2-5*u)} L${f(p2)},${f(q2)} L${f(p2+6*u)},${f(q2+5*u)}" fill="none" stroke="#8a7a6a" stroke-width="${1.6*u}" stroke-linecap="round" stroke-linejoin="round"/>`;
+    if(wahl==='deckel') s+=`<polygon points="${pts(um)}" fill="none" stroke="${OR}" stroke-width="${3*u}" stroke-linejoin="round"/>`;
+    s+=`<polygon points="${pts(um)}" fill="transparent" data-t="deckel"><title>Deckel</title></polygon>`;
+  }
+  if(R.deckel==='ja'){
     zl=Ha+deckelLuft(R); const lb=R.leisteB||20, x0=d+1, x1=La-d-1, lw=1.3*u;
     let g=`<path d="M${pt(0,0,Ha)} L${pt(0,0,zl)} M${pt(La,0,Ha)} L${pt(La,0,zl)} M${pt(La,Ba,Ha)} L${pt(La,Ba,zl)}" fill="none" stroke="#8a7a6a" stroke-width="${u}" stroke-dasharray="${4*u} ${3*u}"/>`;
     const DB=[{q:[0,La,0,Ba,zl,zl+d],dick:2,loch:((R.loecher||{}).deckel||[]).map(h=>[h.x,h.y])}];
@@ -482,8 +561,8 @@ function liveBild(R,A){
   // Bei kurzen Pfeilen rückt die Zahl vom Ziehgriff weg, damit er sie nicht verdeckt
   s+=zahl('l',Math.min((l0+l1)/2,l1-48*u),ab+fs*1.25)+zahl('h',-ab-fs*0.5,Math.max(-(h0+h1)/2,-h1+42*u),-90)+zahl('b',bm[0],bm[1],-45);
   // Griffe an den Teilen (wie im Stromkreis: runde Knöpfe direkt daneben)
-  const griff=(act,x,y,icon,titel,rot)=>{ const [a,b]=klemm(x,y,16);
-    return `<g class="griff" data-griff="${act}" tabindex="0" role="button" aria-label="${titel}" transform="translate(${f(a)} ${f(b)}) scale(${us})"><circle r="20" fill="transparent"/><circle r="13" fill="${rot?'#B3412A':'#fff'}" stroke="${rot?'#fff':'#1F1A17'}" stroke-width="2.5"/><path d="${icon}" fill="none" stroke="${rot?'#fff':'#1F1A17'}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><title>${titel}</title></g>`; };
+  const griff=(act,x,y,icon,titel,rot,an)=>{ const [a,b]=klemm(x,y,16), hell=rot||an;
+    return `<g class="griff" data-griff="${act}" tabindex="0" role="button" aria-label="${titel}"${an===undefined?'':` aria-pressed="${!!an}"`} transform="translate(${f(a)} ${f(b)}) scale(${us})"><circle r="20" fill="transparent"/><circle r="13" fill="${rot?'#B3412A':an?OR:'#fff'}" stroke="${hell?'#fff':'#1F1A17'}" stroke-width="2.5"/><path d="${icon}" fill="none" stroke="${hell?'#fff':'#1F1A17'}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><title>${titel}</title></g>`; };
   let g='';
   if(wahl==='wand'){
     const cx=Math.min(A.x+A.w-92*u,Math.max(A.x+92*u,La/2)), cy=Math.min(A.y+A.h-20*u,Math.max(A.y+20*u,-Ha/2));
@@ -496,8 +575,15 @@ function liveBild(R,A){
     const [bx,by]=P(La/2,Ba/2,d), mitte=-(Ha+Ha+K*Ba)/2, sichtbar=by<-Ha;
     g+=griff('boden',bx,sichtbar?Math.min(by,mitte):-bz-22*u,'M-3.5-7v14M-6.5 4l3 3 3-3M3.5 7v-14M.5-4l3-3 3 3',S.boden==='unter'?'Boden zwischen die Wände':'Boden unter die Wände');
   }
-  if(S.deckel==='ja'&&wahl==='deckel'){ const [a,b]=P(La,0,zl+d); g+=griff('deckelweg',a+10*u,b-10*u,'M-5-5l10 10M5-5l-10 10','Deckel weg',true); }
-  if(S.deckel!=='ja'){ const [a,b]=P(La/2,Ba,Ha); g+=griff('deckel',a,b-26*u,'M-7-3h14M-7-3v-3h14v3M0 0v7M-3.5 3.5h7','Deckel dazu'); }
+  if(R.deckel==='ja'&&wahl==='deckel'){ const [a,b]=P(La,0,zl+d); g+=griff('deckelweg',a+10*u,b-10*u,'M-5-5l10 10M5-5l-10 10','Deckel weg',true); }
+  if(R.deckel==='nut'&&wahl==='deckel'){ const [a,b]=P(La+R.nut.out,0,Ha); g+=griff('deckelweg',a+14*u,b-14*u,'M-5-5l10 10M5-5l-10 10','Deckel weg',true); }
+  if(R.deckel==='scharnier'&&wahl==='deckel'){
+    const [a,b]=P(La,Ba+d,Ha+Ba); g+=griff('deckelweg',a+10*u,b-10*u,'M-5-5l10 10M5-5l-10 10','Deckel weg',true);
+    if(d>=10){ const [c,e]=P(La/2,Ba+d/2,Ha+Ba);
+      g+=griff('haken',c-17*u,e-28*u,'M-2-7.5a2 2 0 1 0 .01 0M-2-3.5v7a3 3 0 0 0 6 0v-1.5','Haken',false,R.zu==='haken');
+      g+=griff('magnet',c+17*u,e-28*u,'M-5-6v5a5 5 0 0 0 10 0v-5M-7-4h4M3-4h4','Magnet',false,R.zu==='magnet'); }
+  }
+  if(R.deckel==='nein'){ const [a,b]=P(La/2,Ba,Ha); g+=griff('deckel',a,b-26*u,'M-7-3h14M-7-3v-3h14v3M0 0v7M-3.5 3.5h7','Deckel dazu'); }
   s+=g;
   s+=zieh('l',l1,ab,0)+zieh('h',-ab,-h1,90)+zieh('b',...Bp(B1),-45);
   return s;
@@ -507,6 +593,10 @@ function bohrplan(R,t){
   const L=R.loecher[t.id]||[]; const w=t.l,h=t.b;
   const fs=Math.max(3.5,Math.max(w,h)/30), rand=fs*4.2;
   let s=`<rect x="0" y="0" width="${w}" height="${h}" fill="#F3E2C6" stroke="#4a3a2a" stroke-width="${fs/10}"/>`;
+  if(R.nut&&(t.id==='lang'||t.id==='kurz')){ const N=R.nut;
+    s+=`<rect x="0" y="${N.a}" width="${w}" height="${N.t}" fill="#9A6B2F" fill-opacity=".5"/>`;
+    s+=`<text class="t" font-size="${fs*0.8}" x="${w/2}" y="${N.a+N.t+fs*0.95}" text-anchor="middle" fill="#7a4f1f">Nut ${n(N.t)} × ${n(N.tn)}</text>`;
+    s+=`<text class="t" font-size="${fs}" x="${-fs*0.5}" y="${N.a+N.t+fs*0.35}" text-anchor="end" fill="#7a4f1f">${n(N.hT)}</text>`; }
   // Reihenlinien (d/2 vom Rand) gestrichelt
   const reihen=new Set(); L.forEach(p=>{ reihen.add('x'+p.x); reihen.add('y'+p.y); });
   const istReiheX=x=>L.filter(p=>p.x===x).length>1, istReiheY=y=>L.filter(p=>p.y===y).length>1;
@@ -515,17 +605,17 @@ function bohrplan(R,t){
     if(istReiheX(p.x)&&!gez.has('x'+p.x)){ gez.add('x'+p.x); s+=`<line x1="${p.x}" y1="0" x2="${p.x}" y2="${h}" stroke="#9A6B2F" stroke-width="${fs/12}" stroke-dasharray="${fs/2} ${fs/3}"/>`; }
     if(istReiheY(p.y)&&!gez.has('y'+p.y)){ gez.add('y'+p.y); s+=`<line x1="0" y1="${h-p.y}" x2="${w}" y2="${h-p.y}" stroke="#9A6B2F" stroke-width="${fs/12}" stroke-dasharray="${fs/2} ${fs/3}"/>`; }
   });
-  const r=Math.max(1.2,fs/2.4);
-  L.forEach(p=>{ const y=h-p.y; s+=`<circle cx="${p.x}" cy="${y}" r="${r}" fill="#fff" stroke="#2B2320" stroke-width="${fs/10}"/><path d="M${p.x-r*1.5},${y}h${r*3}M${p.x},${y-r*1.5}v${r*3}" stroke="#2B2320" stroke-width="${fs/12}"/>`; });
+  const r0=Math.max(1.2,fs/2.4);
+  const LF={scharnier:'#EBCB6A',haken:'#C3C9CF',magnet:'#8E979F'};
+  L.forEach(p=>{ const y=h-p.y, r=p.art==='magnet'?Math.max(r0,3):r0; s+=`<circle cx="${p.x}" cy="${y}" r="${r}" fill="${LF[p.art]||'#fff'}" stroke="#2B2320" stroke-width="${fs/10}"/><path d="M${p.x-r*1.5},${y}h${r*3}M${p.x},${y-r*1.5}v${r*3}" stroke="#2B2320" stroke-width="${fs/12}"/>`; });
   // Masse: x-Stellen unten, y-Stellen links (je einmal pro Wert)
   const xs=[...new Set(L.map(p=>p.x))].sort((a,b)=>a-b), ys=[...new Set(L.map(p=>p.y))].sort((a,b)=>a-b);
   const dichtX=xs.length>1&&Math.min(...xs.slice(1).map((x,i)=>x-xs[i]))<fs*3.2;
   xs.forEach((x,i)=>{ const yy=h+fs*(dichtX&&i%2?2.6:1.3); s+=`<text class="t" font-size="${fs}" x="${x}" y="${yy}" text-anchor="middle" fill="#2B2320">${n(x)}</text>`; });
   ys.forEach((y,i)=>{ s+=`<text class="t" font-size="${fs}" x="${-fs*0.5}" y="${h-y+fs*0.35}" text-anchor="end" fill="#2B2320">${n(y)}</text>`; });
-  if(xs.length) s+=`<text class="tk" font-size="${fs*0.8}" x="${w/2}" y="${h+fs*(dichtX?3.8:2.5)}" text-anchor="middle" fill="#666">mm vom linken Rand</text>`;
-  if(ys.length) s+=`<text class="tk" font-size="${fs*0.8}" transform="translate(${-fs*2.6} ${h/2}) rotate(-90)" text-anchor="middle" fill="#666">mm von unten</text>`;
+  if(L.length) s+=`<circle cx="0" cy="${h}" r="${fs*0.45}" fill="${OR}"/>`;      // Nullpunkt: hier wird gemessen
   const eng=(txt,pt,max)=>txt.length*pt*0.55>max?` textLength="${max.toFixed(1)}" lengthAdjust="spacingAndGlyphs"`:'';
-  if(!L.length){ const hin=w<fs*24?'keine Löcher':'keine Löcher – wird von aussen angeschraubt'; s+=`<text class="t" font-size="${fs}" x="${w/2}" y="${h/2+fs*0.35}" text-anchor="middle" fill="#666"${eng(hin,fs,w-2)}>${hin}</text>`; }
+  if(!L.length){ const hin='keine Löcher'; s+=`<text class="t" font-size="${fs}" x="${w/2}" y="${h/2+fs*0.35}" text-anchor="middle" fill="#666"${eng(hin,fs,w-2)}>${hin}</text>`; }
   const tit=`${t.name} ${mm(w)} × ${mm(h)}`;
   s+=`<text class="t" font-size="${fs*0.9}" x="${w/2}" y="${-fs*0.6}" text-anchor="middle" fill="#2B2320"${eng(tit,fs*0.9,w+rand*3)}>${esc(tit)}</text>`;
   const ml=rand+(ys.length?fs*1.5:0), mb=rand+(xs.length?fs*1.5:0);
@@ -544,7 +634,7 @@ function zuschnittBild(Z){
 // ---------- Texte ----------
 function teileListe(R){
   return R.teile.map(t=>{ const k=Math.min(34/t.l,20/t.b), w=Math.max(2,t.l*k), h=Math.max(2,t.b*k);
-    return `<li><svg class="mini" viewBox="0 0 36 22" aria-hidden="true"><rect x="${(18-w/2).toFixed(1)}" y="${(11-h/2).toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" rx="1"/></svg><span class="tn">${esc(t.name)}<span class="leise">${mm(t.l)} × ${mm(t.b)}</span></span><span class="n">${t.n}×</span></li>`; }).join('');
+    return `<li><svg class="mini" viewBox="0 0 36 22" aria-hidden="true"><rect x="${(18-w/2).toFixed(1)}" y="${(11-h/2).toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" rx="1"/></svg><span class="tn">${esc(t.name)}<span class="leise">${mm(t.l)} × ${mm(t.b)}${t.dick?` · ${n(t.dick)} mm`:''}</span></span><span class="n">${t.n}×</span></li>`; }).join('');
 }
 // Schrauben und Bohrer als Kacheln: Bild, Zahl, zwei Wörter. Die Erklärung steht im Tooltip.
 const FAKT_BILD={
@@ -569,11 +659,13 @@ function antwort(R){
     li.push(`<li class="warn"><b>Zu dünn</b> für Schrauben in die Kante<span class="leise">Unter 6 mm hält keine Schraube. Leimen und mit Drahtstiften (1,2 × ${Math.ceil(3*R.d/5)*5} mm) nageln – oder dickeres Holz nehmen.</span></li>`);
     return li.join('');
   }
-  li.push(`<li>Schraube <b>${n(sc.dm)} × ${sc.len} mm</b><span class="leise">Holzschraube mit Senkkopf (Spax o. ä.), ${R.anzahl} Stück für die ganze Kiste</span></li>`);
-  li.push(`<li>Durchgangsloch <b>${n(sc.loch)} mm</b><span class="leise">durch das Brett bohren – die Schraube soll hier durchrutschen</span></li>`);
-  li.push(`<li>Vorbohren <b>${n(sc.vor)} mm</b><span class="leise">in die Kante, 1 mm dünner als die Schraube</span></li>`);
-  li.push(`<li>Vorbohrtiefe <b>${mm(sc.tiefe)}</b><span class="leise">Klebeband als Marke um den Bohrer – so tief, wie die Schraube hineingeht, plus 2 mm Luft</span></li>`);
-  li.push(`<li>Abstand vom Rand <b>${mm(R.d/2)}</b><span class="leise">Lochmitte genau in der Mitte der Kante${R.ecken.length===1?' – pro Ecke nur eine Schraube, dazu leimen':''}</span></li>`);
+  li.push(`<li>Schraube <b>${n(sc.dm)} × ${sc.len} mm</b> · ${R.anzahl}×</li>`);
+  li.push(`<li>Durchgangsloch <b>⌀ ${n(sc.loch)} mm</b></li>`);
+  li.push(`<li>Vorbohren <b>⌀ ${n(sc.vor)} mm</b> · ${mm(sc.tiefe)} tief</li>`);
+  li.push(`<li>Vom Rand <b>${mm(R.d/2)}</b></li>`);
+  const Sch=R.scharnier;
+  if(Sch){ li.push(`<li>Scharnier <b>${Sch.Lh} × ${Sch.Wh} mm</b> · ${Sch.mitten.length}× · Schräubchen 2 × ${Sch.ss} mm</li>`);
+    li.push(R.zu==='magnet'?`<li>Magnet <b>⌀ 6 × 3 mm</b> · 2× · Bohrer ⌀ 6 mm, 3 mm tief</li>`:`<li>Sturmhaken <b>${R.haken.Lk} mm</b> mit Öse · vorbohren ⌀ 1,5 mm</li>`); }
   return li.join('');
 }
 function rechnung(R){
@@ -587,6 +679,9 @@ function rechnung(R){
     z.push(`<p>Bohrer: Durchgangsloch = Schraube <span class="f">${n(sc.loch)} mm</span>. Vorbohren = ${n(sc.dm)} − 1 = <span class="f">${n(sc.vor)} mm</span>. Tiefe = ${sc.len} − ${n(d)} + 2 = <span class="f">${mm(sc.tiefe)}</span>.</p>`);
     z.push(`<p>Rand: ${n(d)} : 2 = <span class="f">${mm(d/2)}</span>. Schrauben etwa alle 7 cm, am Ende ${mm(R.e)} vom Rand – so kreuzen sich Boden- und Eckschrauben nicht.</p>`);
     const bs=R.bodenStellen, teil=R.unter?'durch den Boden':'durch die Wände';
+    const Sch=R.scharnier;
+    if(Sch) z.push(`<p>Scharnier: Lappen höchstens so breit wie das Holz, ${n(d)} mm → <span class="f">${Sch.Lh} × ${Sch.Wh} mm</span> (Lappen ${n(Sch.lap)} mm). Schräubchen kürzer als ${n(d)} mm → <span class="f">2 × ${Sch.ss} mm</span>.${R.zu==='magnet'?` Magnet ⌀ 6 mm: Kante ${n(d)} − 6 = ${n(d-6)} mm Holz bleibt.`:''}</p>`);
+    if(R.nut){ const N=R.nut; z.push(`<p>Nut: ${n(d)} ÷ 2 → <span class="f">${n(N.tn)} mm</span> tief, ${n(N.t)} mm breit, ${n(N.a)} mm unter der Kante. Deckel ${n(R.La)} − ${n(d)} + ${n(N.tn)} − 1 = <span class="f">${mm(N.Ld)}</span>, ${n(R.Ba)} − 2 × ${n(d)} + 2 × ${n(N.tn)} − 1 = <span class="f">${mm(N.Bd)}</span>. Stirnseite rechts ${n(R.hw)} − ${n(N.a)} − ${n(N.t)} = <span class="f">${mm(N.hT)}</span>.</p>`); }
     z.push(`<p>Schrauben: 4 Ecken × ${R.ecken.length} = ${4*R.ecken.length}, ${teil} 2 × ${bs.lang.length} + 2 × ${bs.kurz.length} = ${2*bs.lang.length+2*bs.kurz.length}${bs.deckel?`, Deckelleisten 2 × ${bs.deckel.length} = ${2*bs.deckel.length}`:''} → <span class="f">${R.anzahl} Schrauben</span>.</p>`);
   }
   return z.join('');
@@ -595,11 +690,18 @@ function material(R){
   const sc=R.sc, m=[];
   const Z=R.zuschnitt;
   m.push(`<li><span>${esc(MATERIAL[S.mat].name)} ${n(R.d)} mm<span class="leise">Platte mindestens ${mm(Z.W)} × ${mm(Z.H)} (mit Sägeschnitt)</span></span><span class="n">1×</span></li>`);
-  if(sc.ok) m.push(`<li><span>Holzschrauben ${n(sc.dm)} × ${sc.len} mm<span class="leise">Senkkopf, ein paar Reserve</span></span><span class="n">${R.anzahl}×</span></li>`);
-  else m.push(`<li><span>Drahtstifte 1,2 × ${Math.ceil(3*R.d/5)*5} mm</span><span class="n">1 Päckchen</span></li>`);
+  if(sc.ok) m.push(`<li><span>Holzschrauben ${n(sc.dm)} × ${sc.len} mm<span class="leise">Senkkopf</span></span><span class="n">${R.anzahl}×</span></li>`);
+  if(R.nut) m.push(`<li><span>Sperrholz ${n(R.nut.t)} mm<span class="leise">${mm(R.nut.Ld)} × ${mm(R.nut.Bd)}</span></span><span class="n">1×</span></li>`);
+  const Sch=R.scharnier;
+  if(Sch){ m.push(`<li><span>Scharniere ${Sch.Lh} × ${Sch.Wh} mm<span class="leise">Messing</span></span><span class="n">${Sch.mitten.length}×</span></li>`);
+    m.push(`<li><span>Schräubchen 2 × ${Sch.ss} mm</span><span class="n">${4*Sch.mitten.length}×</span></li>`);
+    m.push(R.zu==='magnet'?`<li><span>Magnete ⌀ 6 × 3 mm<span class="leise">Neodym</span></span><span class="n">2×</span></li>`:`<li><span>Sturmhaken ${R.haken.Lk} mm mit Öse</span><span class="n">1×</span></li>`);
+    m.push(`<li><span>Bohrer ${R.zu==='magnet'?'6 mm und ':''}1,5 mm</span><span class="n">je 1×</span></li>`); }
+  if(!sc.ok) m.push(`<li><span>Drahtstifte 1,2 × ${Math.ceil(3*R.d/5)*5} mm</span><span class="n">1 Päckchen</span></li>`);
   m.push(`<li><span>Holzleim (weiss)</span><span class="n">1×</span></li>`);
-  if(sc.ok) m.push(`<li><span>Bohrer ${n(sc.loch)} mm und ${n(sc.vor)} mm<span class="leise">dazu Senker, Klebeband als Tiefenmarke</span></span><span class="n">je 1×</span></li>`);
+  if(sc.ok) m.push(`<li><span>Bohrer ${n(sc.loch)} mm und ${n(sc.vor)} mm<span class="leise">Senker · Klebeband</span></span><span class="n">je 1×</span></li>`);
   m.push(`<li><span>Winkel, Bleistift, Massstab, Körner</span><span class="n"></span></li>`);
+  if(R.nut) m.push(`<li><span>Kreissäge, Kerze</span><span class="n"></span></li>`);
   m.push(`<li><span>Schraubzwingen oder ein Helfer</span><span class="n">2×</span></li>`);
   m.push(`<li><span>Schleifpapier 120 und Schleifklotz</span><span class="n">1×</span></li>`);
   return m.join('');
@@ -609,6 +711,8 @@ function schritte(R){
   const aussenName=R.langAussen?'Längsseiten':'Stirnseiten', innenName=R.langAussen?'Stirnseiten':'Längsseiten';
   s.push(`Alle Teile nach der Liste zuschneiden oder zuschneiden lassen. Auf jedes Teil mit Bleistift den Namen schreiben (Innenseite) und die Masse nachmessen.`);
   s.push(`Kanten mit Schleifklotz und 120er-Papier glätten – nur brechen, nicht abrunden, sonst stimmen die Masse nicht mehr.`);
+  const N=R.nut;
+  if(N) s.push(`Nut sägen (Kreissäge): Schnitttiefe ${n(N.tn)} mm, Anschlag so, dass die Nut ${n(N.a)} mm unter der Oberkante liegt. Innen durch beide Längsseiten und die linke Stirnseite, ${n(N.t)} mm breit – ist das Sägeblatt dünner, ein zweites Mal daneben sägen. Zuerst an einem Reststück probieren: Der Deckel soll leicht gleiten. Die rechte Stirnseite (${mm(N.hT)} hoch) bekommt keine Nut.`);
   s.push(sc.ok?`Löcher anzeichnen wie auf den Bohrplänen: mit dem Winkel eine Linie ${mm(d/2)} vom Rand ziehen, darauf die Stellen abmessen, jeden Punkt ankörnen.`:`Nagelstellen anzeichnen wie auf den Plänen: mit dem Winkel eine Linie ${mm(d/2)} vom Rand ziehen, darauf die Stellen markieren.`);
   if(sc.ok){
     s.push(`Durchgangslöcher bohren: Bohrer ${n(sc.loch)} mm, ein Restholz unterlegen, damit nichts ausreisst. Wer mag, senkt die Löcher aussen leicht an, dann liegt der Schraubenkopf bündig.`);
@@ -618,7 +722,13 @@ function schritte(R){
   } else {
     s.push(`Leim dünn auf die Kante, Teile mit Zwingen zusammenhalten und mit den Drahtstiften nageln (Stift leicht schräg, hält besser). Zuerst der Rahmen aus den vier Wänden, Diagonalen prüfen, dann der Boden.`);
   }
-  if(S.deckel==='ja') s.push(`Deckel: die zwei Leisten hochkant unter den Deckel leimen und von oben anschrauben, ${mm(d+1)} vom Rand – so passt der Deckel mit 1 mm Luft in die Kiste und rutscht nicht weg.`);
+  const Sch=R.scharnier;
+  if(Sch){
+    s.push(`Scharniere: Deckel auf die Kiste legen, hinten bündig. ${Sch.mitten.length===1?'Das Scharnier':`Die ${Sch.mitten.length} Scharniere`} hinten anlegen, das Gelenk genau auf der Fuge. Löcher ⌀ 1,5 mm vorbohren und mit Schräubchen 2 × ${Sch.ss} mm anschrauben.`);
+    s.push(R.zu==='magnet'?`Magnete: ⌀ 6 mm, 3 mm tief vorn in die Wandkante bohren und genau darüber in den Deckel. Zuerst prüfen, ob sie sich anziehen – dann mit Leim einsetzen.`:`Haken: Öse vorn in die Wand drehen, den Haken in die Deckelkante – beide Löcher ⌀ 1,5 mm vorbohren, bei geschlossenem Deckel ausrichten.`);
+  }
+  if(R.deckel==='ja') s.push(`Deckel: die zwei Leisten hochkant unter den Deckel leimen und von oben anschrauben, ${mm(d+1)} vom Rand – so passt der Deckel mit 1 mm Luft in die Kiste und rutscht nicht weg.`);
+  if(N) s.push(`Schiebedeckel: ${mm(N.Ld)} × ${mm(N.Bd)} aus ${n(N.t)}-mm-Sperrholz, Kanten schleifen, mit einer Kerze einreiben und von rechts einschieben – nicht leimen.`);
   s.push(`Leimreste sofort mit feuchtem Lappen abwischen, eine Stunde trocknen lassen. Zum Schluss alles schleifen, Ecken leicht brechen – und wer will, ölt oder bemalt die Kiste.`);
   return s.map(t=>`<li>${t}</li>`).join('');
 }
@@ -631,6 +741,7 @@ function kartenZeigen(ja){ KARTEN.forEach(k=>{ if(k) k.style.display=ja?'':'none
 function bald(){ if(!raf) raf=requestAnimationFrame(()=>{ raf=0; zeichnen(); }); }
 function zeichnen(){
   const R=rechnen();
+  document.querySelectorAll('[data-g="deckel"] .chip').forEach(c=>{ c.setAttribute('aria-pressed',String(c.dataset.v===R.deckel)); if(c.dataset.v==='scharnier'||c.dataset.v==='nut') c.disabled=S.d<8; });
   // Während des Ziehens bleibt der Ausschnitt stehen, sonst läuft die Kiste dem Finger davon
   const A=drag&&ansicht?ansicht:(ansicht=einpassen(R));
   const a=document.activeElement, fokus=svg.contains(a)?(a.dataset.achse?`[data-achse="${a.dataset.achse}"]`:a.dataset.griff?`[data-griff="${a.dataset.griff}"]`:null):null;
@@ -638,7 +749,6 @@ function zeichnen(){
   svg.innerHTML=liveBild(R,A);
   if(fokus){ const el=svg.querySelector(fokus); if(el) el.focus({preventScroll:true}); }
   $('flaeche-warn').textContent=R.kurz||''; $('flaeche-warn').hidden=!R.fehler;
-  $('mat-hinweis').textContent=MATERIAL[S.mat].tipp;
   $('teile-dicke').textContent=`${n(R.d)} mm`;
   if(R.fehler){
     $('warnung').textContent=R.fehler; $('warnung').hidden=false;
@@ -653,7 +763,7 @@ function zeichnen(){
   $('rechnung').innerHTML=rechnung(R);
   $('material').innerHTML=material(R);
   $('schritte').innerHTML=schritte(R);
-  const plaene=R.teile.filter(t=>t.id!=='leiste').map(t=>`<figure><figcaption>${esc(t.name)} <span class="leise">${t.n}× · ${mm(t.l)} × ${mm(t.b)}</span></figcaption>${bohrplan(R,t)}</figure>`).join('');
+  const plaene=R.teile.filter(t=>t.id!=='leiste'&&!t.dick).map(t=>`<figure><figcaption>${esc(t.name)} <span class="leise">${t.n}× · ${mm(t.l)} × ${mm(t.b)}</span></figcaption>${bohrplan(R,t)}</figure>`).join('');
   $('plaene').innerHTML=plaene;
   $('zuschnitt').innerHTML=zuschnittBild(R.zuschnitt);
   $('zuschnitt-hinweis').textContent=`${KERF} mm Sägeschnitt`;
@@ -661,11 +771,11 @@ function zeichnen(){
   // Druck: Seite 1 Plan, Seite 2 Bohrpläne und Zuschnitt
   const titel=`Kiste ${cmT(R.La)} × ${cmT(R.Ba)} × ${cmT(R.Ha)} · ${MATERIAL[S.mat].name} ${n(R.d)} mm`;
   $('druck').innerHTML=`<div class="seite"><h1>${esc(titel)}</h1><div class="bild">${kistenBild(R)}</div>
-    <h2>Teile zuschneiden</h2><table><tr><th>Teil</th><th>Anzahl</th><th>Länge</th><th>Breite</th><th>Dicke</th></tr>${R.teile.map(t=>`<tr><td>${esc(t.name)}</td><td>${t.n}×</td><td>${mm(t.l)}</td><td>${mm(t.b)}</td><td>${mm(R.d)}</td></tr>`).join('')}</table>
+    <h2>Teile zuschneiden</h2><table><tr><th>Teil</th><th>Anzahl</th><th>Länge</th><th>Breite</th><th>Dicke</th></tr>${R.teile.map(t=>`<tr><td>${esc(t.name)}</td><td>${t.n}×</td><td>${mm(t.l)}</td><td>${mm(t.b)}</td><td>${mm(t.dick||R.d)}</td></tr>`).join('')}</table>
     <h2>Schrauben und Bohren</h2><ul class="antwort">${antwort(R)}</ul>
     <h2>So wird gerechnet</h2><div class="rechnung">${rechnung(R)}</div>
     <p class="fuss">Schritt für Schritt · Kisten-Planer</p></div>
-    <div class="seite"><h2>Bohrpläne – Millimeter vom linken und vom unteren Rand</h2><div class="plaene">${plaene}</div>
+    <div class="seite"><h2>Bohrpläne · mm</h2><div class="plaene">${plaene}</div>
     <h2>Zuschnitt</h2><div class="bild zu">${zuschnittBild(R.zuschnitt)}</div>
     <h2>So baust du die Kiste</h2><ol class="schritte">${schritte(R)}</ol>
     <p class="fuss">Schritt für Schritt · Kisten-Planer</p></div>`;
@@ -697,6 +807,7 @@ function aktion(act){
   if(act==='boden') S.boden=S.boden==='unter'?'zwischen':'unter';
   if(act==='deckel'){ S.deckel='ja'; wahl='deckel'; }
   if(act==='deckelweg'){ S.deckel='nein'; wahl=null; }
+  if(act==='haken'||act==='magnet') S.zu=act;
   felder(); speichern(); zeichnen();
 }
 function punkt(e){ const m=svg.getScreenCTM(); if(!m) return {x:0,y:0}; const p=new DOMPoint(e.clientX,e.clientY).matrixTransform(m.inverse()); return {x:p.x,y:p.y}; }
@@ -735,7 +846,7 @@ svg.addEventListener('keydown',e=>{
 });
 document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&wahl){ wahl=null; zeichnen(); } });
 addEventListener('resize',()=>{ if(!drag) bald(); });
-document.querySelectorAll('[data-g]').forEach(g=>{ const k=g.dataset.g; g.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{ S[k]=c.dataset.v; if(k==='mat'&&!MATERIAL[S.mat].dicken.includes(S.d)) S.d=MATERIAL[S.mat].dicken.includes(8)?8:MATERIAL[S.mat].dicken[1]; felder(); speichern(); zeichnen(); })); });
+document.querySelectorAll('[data-g]').forEach(g=>{ const k=g.dataset.g; g.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{ S[k]=c.dataset.v; if(k==='deckel') wahl=S.deckel==='nein'?null:'deckel'; if(k==='mat'&&!MATERIAL[S.mat].dicken.includes(S.d)) S.d=MATERIAL[S.mat].dicken.includes(8)?8:MATERIAL[S.mat].dicken[1]; felder(); speichern(); zeichnen(); })); });
 document.querySelectorAll('[data-g="mat"] .chip').forEach(c=>{ c.title=`${MATERIAL[c.dataset.v].name}: ${MATERIAL[c.dataset.v].tipp}`; });
 ['l','b','h','d'].forEach(k=>{ const inp=$(k), [lo,hi]=GRENZEN[k];
   const setzen=v=>{ if(isNaN(v)) v=S[k]; S[k]=Math.min(hi,Math.max(lo,Math.round(v*10)/10)); inp.value=S[k]; if(k==='d') dickenChips(); speichern(); zeichnen(); };
