@@ -4,55 +4,94 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Schritt für Schritt · Bohrvorlage</title>
-<meta name="description" content="Bohrvorlage zum Ausdrucken: Plattengrösse, Bohrer, Lochabstand und Randabstand wählen – die Seite zeichnet alle Bohrlöcher mit Kreuz zum Ankörnen, auf A4 oder A3. Grosse Platten kommen auf mehrere Blätter zum Zusammenkleben.">
+<meta name="description" content="Bohrvorlage zum Ausdrucken: Platte, Bohrer, Lochabstand und Rand direkt im Bild ziehen – die Seite zeichnet alle Bohrlöcher mit Kreuz zum Ankörnen, auf A4 oder A3. Grosse Platten kommen auf mehrere Blätter zum Zusammenkleben.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
 <style>
-:root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--warn:#B3412A;--papier:#FFFFFF;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;--warn:#F08A6E;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;--warn:#F08A6E;color-scheme:dark}
+:root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--warn:#B3412A;--knapp:#A86A00;--papier:#FFFFFF;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;--warn:#F08A6E;--knapp:#F2C14E;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;--warn:#F08A6E;--knapp:#F2C14E;color-scheme:dark}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
-h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
-h1{font-size:28px}
-h2{font-size:17px;margin-bottom:10px}
+h1{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0;font-size:28px}
 a{color:var(--acc)}
 .kopf{max-width:1200px;margin:0 auto;padding:20px 16px 8px}
-.kopf p{margin:4px 0 0;color:var(--muted)}
-main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,400px);grid-template-rows:repeat(2,auto) 1fr;grid-template-areas:"platte rechts" "loecher rechts" "blatt rechts";gap:14px 20px;align-items:start}
-#k-platte{grid-area:platte}#k-loecher{grid-area:loecher}#k-blatt{grid-area:blatt}.seite-rechts{grid-area:rechts}
-.karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
-.seite-rechts{position:sticky;top:12px;display:flex;flex-direction:column;gap:14px}
-.feld{margin-bottom:14px}.feld:last-child{margin-bottom:0}
-.lbl{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
+.kopf p{margin:2px 0 0;color:var(--muted)}
+main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,360px);gap:16px;align-items:start}
+.karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px}
+.seite-rechts{position:sticky;top:12px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.leiste{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{font:inherit;font-size:14px;padding:6px 12px;border-radius:999px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer;min-height:40px}
+.leiste .chips{gap:2px;padding:3px;border-radius:999px;background:var(--surface2);border:1px solid var(--line)}
+.chip{font:inherit;font-size:15px;padding:6px 14px;border-radius:999px;border:2px solid transparent;background:var(--surface2);color:var(--ink);cursor:pointer;min-height:44px}
+#papier .chip{border-color:var(--line)}
+.chip.ic{width:46px;height:44px;padding:0;display:inline-grid;place-items:center;background:transparent}
+.chip svg{width:26px;height:26px;display:block}
 .chip[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
-.chip:hover,.stepper button:hover{border-color:var(--acc)}
+.chip:hover{border-color:var(--acc)}
+#mehr{margin-left:auto;font-size:22px;line-height:1;width:46px;padding:0;border-color:var(--line)}
+#mehr[aria-expanded="true"]{border-color:var(--acc);background:var(--acc-soft)}
+#zurueckholen{border-color:var(--line)}
 button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
-.zwei{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.stepper{display:flex;align-items:center;gap:6px}
-.stepper button{width:52px;height:52px;border-radius:50%;border:2px solid var(--line);background:var(--surface2);color:var(--ink);font:600 28px/1 Fredoka,Nunito,sans-serif;cursor:pointer;padding:0;flex:none}
-.stepper input{width:84px;height:52px;font:600 28px Fredoka,Nunito,sans-serif;text-align:center;border:2px solid var(--line);border-radius:12px;background:var(--surface2);color:var(--ink);padding:0 4px;-moz-appearance:textfield}
+.zahlen{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px 14px;margin:0 0 12px;padding:12px;border-radius:14px;background:var(--surface2)}
+.lbl{display:block;font-size:13px;color:var(--muted);margin-bottom:4px}
+.stepper{display:flex;align-items:center;gap:5px}
+.stepper button{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:var(--surface);color:var(--ink);font:600 24px/1 Fredoka,Nunito,sans-serif;cursor:pointer;padding:0;flex:none}
+.stepper button:hover{border-color:var(--acc)}
+.stepper input{width:72px;height:44px;font:600 22px Fredoka,Nunito,sans-serif;text-align:center;border:2px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);padding:0 4px;-moz-appearance:textfield}
 .stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-.stepper span{font-size:16px;color:var(--muted)}
+.stepper span{font-size:14px;color:var(--muted)}
+.flaeche{overflow:hidden;border-radius:12px;background:var(--surface2)}
+#pv,#lv{display:block;margin:0 auto;touch-action:none;user-select:none;-webkit-user-select:none}
+#pv{overflow:visible}
+.lupe-karte{padding:8px;position:relative;border:2px dashed var(--acc)}
+.lupe-ic{position:absolute;left:14px;top:12px;width:30px;height:30px;border-radius:50%;background:var(--surface);display:grid;place-items:center;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.lupe-ic svg{width:18px;height:18px;fill:none;stroke:var(--acc);stroke-width:2.6;stroke-linecap:round}
+/* Zeichnung am Bildschirm */
+svg .holz{fill:#F3E2C2}
+svg .loch{fill:none;stroke:#3B2A18;stroke-linecap:round}
+svg .geist{fill:none;stroke:#8C7A62}
+svg .gewaehlt{fill:none;stroke:#E8554E}
+svg .bereich{fill:none;stroke:var(--acc)}
+svg .blattr{fill:none;stroke:var(--acc)}
+svg .blattn{fill:var(--acc);fill-opacity:.28;font-family:Fredoka,Nunito,sans-serif;pointer-events:none}
+svg .mass{fill:none;stroke:var(--acc);stroke-linecap:round;stroke-linejoin:round}
+svg .hilfs{fill:none;stroke:var(--acc);opacity:.6}
+svg .et{font-family:Nunito,system-ui,sans-serif;font-weight:800;fill:var(--ink);stroke:var(--surface2);paint-order:stroke;stroke-linejoin:round;pointer-events:none}
+svg .grund{fill:var(--surface2)}
+#lv .mass,#lv .hilfs{stroke:#0E7A5F}
+#lv .et{fill:#0B4F3E;stroke:#FFF6E6}
+svg .mass.warn,#lv .mass.warn{stroke:#D0392B}
+svg .et.warn,#lv .et.warn{fill:#B3261E}
+svg .randlinie{fill:none;stroke:#0E7A5F;opacity:.55}
+svg .griff{cursor:grab}
+svg .griff[data-griff="weg"]{cursor:pointer}
+svg .griff:hover circle+circle+circle{stroke-width:3.5}
+.werte{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.wert{background:var(--surface2);border-radius:12px;padding:8px 10px;display:flex;align-items:center;gap:8px;min-width:0}
+.wert svg{width:28px;height:28px;flex:none;fill:none;stroke:var(--acc);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.wert b{font:600 21px/1.15 Fredoka,Nunito,sans-serif;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wert small{display:block;color:var(--muted);font-size:13px;line-height:1.2}
+.wert.knapp b{color:var(--knapp)}.wert.knapp svg{stroke:var(--knapp)}
+.wert.warn b{color:var(--warn)}.wert.warn svg{stroke:var(--warn)}
+.warnz{color:var(--warn);font-weight:800;margin:10px 0 0}
+.druck-karte{display:flex;flex-direction:column;gap:10px}
 .drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
 .drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
-.antwort{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
-.antwort li{font-size:17px;line-height:1.35}
-.antwort b{font:600 26px/1.1 Fredoka,Nunito,sans-serif;color:var(--acc);white-space:nowrap}
-.antwort .leise{color:var(--muted);font-size:14px;display:block;margin-top:2px}
-.antwort .warn,.hinweis.warn{color:var(--warn)}
-.hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
-.uebersicht svg{display:block;width:100%;height:auto;max-height:70vh;background:var(--papier);border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
-.blaetter{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px}
+.hinweis{font-size:13px;color:var(--muted);margin:0}
+.blaetter{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-top:12px}
 .blaetter svg{display:block;width:100%;height:auto;background:var(--papier);border-radius:3px;box-shadow:0 1px 6px rgba(0,0,0,.15)}
 @media (max-width:860px){
-  main{display:flex;flex-direction:column;align-items:stretch;gap:14px}
-  .seite-rechts{display:contents}
-  #k-platte{order:1}#k-loecher{order:2}#k-antwort{order:3}#drucken{order:4}#k-blatt{order:5}
+  main{grid-template-columns:minmax(0,1fr);gap:14px}
+  .seite-rechts{position:static}
   h1{font-size:24px}
+}
+@media (max-width:420px){
+  main{padding:8px 12px 32px}
+  .karte{padding:10px}
+  .chip.ic{width:40px}
 }
 #druck{display:none}
 @page{size:A4 portrait;margin:0}
@@ -70,47 +109,52 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
   <h1>Bohrvorlage</h1>
-  <p>Sag, wie gross deine Platte ist, wie dick der Bohrer und wie weit die Löcher auseinander sollen. Die Seite zeichnet jedes Loch mit einem Kreuz zum Ankörnen – ausdrucken, aufkleben, bohren. <a href="../">←&nbsp;Vorlagen-Generator</a></p>
+  <p>Ziehen · drucken · ankörnen · bohren &nbsp;<a href="../">←&nbsp;Vorlagen</a></p>
 </header>
 <script src="../zurueck.js"></script>
 <main>
   <section class="karte" id="k-platte" aria-label="Platte">
-    <h2>Deine Platte</h2>
-    <div class="zwei">
-      <div class="feld"><label class="lbl" for="b">Breite</label><div class="stepper" data-feld="b" data-min="1" data-max="120"><button type="button" data-minus aria-label="Breite kleiner">−</button><input type="number" id="b" min="1" max="120" step="1" inputmode="decimal"><button type="button" data-plus aria-label="Breite grösser">+</button><span>cm</span></div></div>
-      <div class="feld"><label class="lbl" for="h">Höhe</label><div class="stepper" data-feld="h" data-min="1" data-max="120"><button type="button" data-minus aria-label="Höhe kleiner">−</button><input type="number" id="h" min="1" max="120" step="1" inputmode="decimal"><button type="button" data-plus aria-label="Höhe grösser">+</button><span>cm</span></div></div>
+    <div class="leiste">
+      <div class="chips" role="group" aria-label="Muster" id="muster">
+        <button type="button" class="chip ic" data-muster="raster" aria-pressed="true" aria-label="Raster" title="Raster"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="6" cy="6" r="2.2"/><circle cx="12" cy="6" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="6" cy="12" r="2.2"/><circle cx="12" cy="12" r="2.2"/><circle cx="18" cy="12" r="2.2"/><circle cx="6" cy="18" r="2.2"/><circle cx="12" cy="18" r="2.2"/><circle cx="18" cy="18" r="2.2"/></svg></button>
+        <button type="button" class="chip ic" data-muster="versetzt" aria-pressed="false" aria-label="Versetzt (Waben)" title="Versetzt (Waben)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="6.5" r="2.2"/><circle cx="12" cy="6.5" r="2.2"/><circle cx="19" cy="6.5" r="2.2"/><circle cx="8.5" cy="12.5" r="2.2"/><circle cx="15.5" cy="12.5" r="2.2"/><circle cx="5" cy="18.5" r="2.2"/><circle cx="12" cy="18.5" r="2.2"/><circle cx="19" cy="18.5" r="2.2"/></svg></button>
+        <button type="button" class="chip ic" data-muster="rahmen" aria-pressed="false" aria-label="Nur am Rand (Rahmen)" title="Nur am Rand (Rahmen)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="5" r="2.2"/><circle cx="12" cy="5" r="2.2"/><circle cx="19" cy="5" r="2.2"/><circle cx="5" cy="12" r="2.2"/><circle cx="19" cy="12" r="2.2"/><circle cx="5" cy="19" r="2.2"/><circle cx="12" cy="19" r="2.2"/><circle cx="19" cy="19" r="2.2"/></svg></button>
+      </div>
+      <div class="chips" role="group" aria-label="Anordnung" id="lage">
+        <button type="button" class="chip ic" data-lage="rand" aria-pressed="true" aria-label="Vom Rand aus" title="Vom Rand aus"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><g fill="currentColor"><circle cx="7.5" cy="7.5" r="1.9"/><circle cx="12.5" cy="7.5" r="1.9"/><circle cx="7.5" cy="12.5" r="1.9"/><circle cx="12.5" cy="12.5" r="1.9"/></g></svg></button>
+        <button type="button" class="chip ic" data-lage="mitte" aria-pressed="false" aria-label="Mittig auf der Platte" title="Mittig auf der Platte"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><g fill="currentColor"><circle cx="9.5" cy="9.5" r="1.9"/><circle cx="14.5" cy="9.5" r="1.9"/><circle cx="9.5" cy="14.5" r="1.9"/><circle cx="14.5" cy="14.5" r="1.9"/></g></svg></button>
+      </div>
+      <button type="button" class="chip" id="zurueckholen" title="Weggelassene Löcher zurückholen" hidden>↺ <span></span></button>
+      <button type="button" class="chip" id="mehr" aria-expanded="false" aria-controls="zahlen" aria-label="Zahlen eingeben" title="Zahlen eingeben">⋯</button>
     </div>
-    <p class="hinweis">Breite und Höhe der Platte, so wie sie vor dir liegt. Halbe Zentimeter gehen auch, zum Beispiel 12.5.</p>
-  </section>
-  <section class="karte" id="k-loecher" aria-label="Löcher">
-    <h2>Die Löcher</h2>
-    <div class="zwei">
-      <div class="feld"><label class="lbl" for="d">Bohrer (Durchmesser)</label><div class="stepper" data-feld="d" data-min="0.5" data-max="30" data-schritt="0.5"><button type="button" data-minus aria-label="Bohrer dünner">−</button><input type="number" id="d" min="0.5" max="30" step="0.5" inputmode="decimal"><button type="button" data-plus aria-label="Bohrer dicker">+</button><span>mm</span></div></div>
-      <div class="feld"><label class="lbl" for="a">Abstand (Lochmitte zu Lochmitte)</label><div class="stepper" data-feld="a" data-min="2" data-max="200"><button type="button" data-minus aria-label="Abstand kleiner">−</button><input type="number" id="a" min="2" max="200" step="1" inputmode="decimal"><button type="button" data-plus aria-label="Abstand grösser">+</button><span>mm</span></div></div>
-      <div class="feld"><label class="lbl" for="r">Randabstand (Kante bis Lochmitte)</label><div class="stepper" data-feld="r" data-min="0" data-max="200"><button type="button" data-minus aria-label="Rand kleiner">−</button><input type="number" id="r" min="0" max="200" step="1" inputmode="decimal"><button type="button" data-plus aria-label="Rand grösser">+</button><span>mm</span></div></div>
+    <div class="zahlen" id="zahlen" hidden>
+      <div><label class="lbl" for="b">Breite</label><div class="stepper" data-feld="b"><button type="button" data-minus aria-label="Breite kleiner">−</button><input type="number" id="b" min="1" max="120" step="0.5" inputmode="decimal"><button type="button" data-plus aria-label="Breite grösser">+</button><span>cm</span></div></div>
+      <div><label class="lbl" for="h">Höhe</label><div class="stepper" data-feld="h"><button type="button" data-minus aria-label="Höhe kleiner">−</button><input type="number" id="h" min="1" max="120" step="0.5" inputmode="decimal"><button type="button" data-plus aria-label="Höhe grösser">+</button><span>cm</span></div></div>
+      <div><label class="lbl" for="d">Bohrer ⌀</label><div class="stepper" data-feld="d" data-schritt="0.5"><button type="button" data-minus aria-label="Bohrer dünner">−</button><input type="number" id="d" min="0.5" max="30" step="0.5" inputmode="decimal"><button type="button" data-plus aria-label="Bohrer dicker">+</button><span>mm</span></div></div>
+      <div><label class="lbl" for="a">Abstand</label><div class="stepper" data-feld="a"><button type="button" data-minus aria-label="Abstand kleiner">−</button><input type="number" id="a" min="2" max="200" step="0.5" inputmode="decimal"><button type="button" data-plus aria-label="Abstand grösser">+</button><span>mm</span></div></div>
+      <div><label class="lbl" for="r">Rand</label><div class="stepper" data-feld="r"><button type="button" data-minus aria-label="Rand kleiner">−</button><input type="number" id="r" min="0" max="200" step="0.5" inputmode="decimal"><button type="button" data-plus aria-label="Rand grösser">+</button><span>mm</span></div></div>
     </div>
-    <div class="zwei" style="margin-top:12px">
-      <div class="feld"><span class="lbl" id="l-muster">Muster</span><div class="chips" role="group" aria-labelledby="l-muster" id="muster"><button type="button" class="chip" data-muster="raster" aria-pressed="true">Raster</button><button type="button" class="chip" data-muster="versetzt" aria-pressed="false">Versetzt (Waben)</button><button type="button" class="chip" data-muster="rahmen" aria-pressed="false">Nur am Rand (Rahmen)</button></div></div>
-      <div class="feld" id="f-lage"><span class="lbl" id="l-lage">Anordnung</span><div class="chips" role="group" aria-labelledby="l-lage" id="lage"><button type="button" class="chip" data-lage="rand" aria-pressed="true">Vom Rand aus</button><button type="button" class="chip" data-lage="mitte" aria-pressed="false">Mittig auf der Platte</button></div></div>
-    </div>
-    <p class="hinweis" id="muster-hinweis"></p>
-  </section>
-  <section class="karte" id="k-blatt" aria-label="Vorlage">
-    <h2>Vorlage</h2>
-    <div class="feld"><span class="lbl" id="lbl-papier">Papier</span><div class="chips" id="papier" role="group" aria-labelledby="lbl-papier"><button type="button" class="chip" data-papier="a4" aria-pressed="true">A4</button><button type="button" class="chip" data-papier="a3" aria-pressed="false">A3</button></div></div>
-    <div class="uebersicht" id="uebersicht"></div>
-    <p class="hinweis" id="blatt-hinweis"></p>
-    <div class="blaetter" id="blaetter"></div>
-    <p class="hinweis">Beim Drucken «Tatsächliche Grösse» oder 100 % wählen, nicht «An Seite anpassen». Die 5-cm-Linie unten auf dem Blatt nachmessen. Bei A3 im Druckfenster auch A3 als Papier wählen.</p>
+    <div class="flaeche" id="pv-box"><svg id="pv" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Platte"></svg></div>
+    <div class="blaetter" id="blaetter" aria-label="Blätter zum Drucken"></div>
   </section>
   <div class="seite-rechts">
-    <section class="karte" id="k-antwort" aria-label="Ergebnis" aria-live="polite"><h2>So wird es</h2><ul class="antwort" id="antwort"></ul><p class="hinweis" id="tipp"></p></section>
-    <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Vorlage drucken</span></button>
+    <section class="karte lupe-karte" aria-label="Lupe: Bohrer, Abstand und Rand ziehen">
+      <span class="lupe-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="6.5"/><path d="M15 15l6 6"/></svg></span>
+      <div class="flaeche" id="lv-box"><svg id="lv" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lupe"></svg></div>
+    </section>
+    <section class="karte" aria-label="Ergebnis" aria-live="polite"><div class="werte" id="werte"></div><p class="warnz" id="warn" hidden></p></section>
+    <section class="karte druck-karte" aria-label="Drucken">
+      <div class="chips" id="papier" role="group" aria-label="Papier"><button type="button" class="chip" data-papier="a4" aria-pressed="true">A4</button><button type="button" class="chip" data-papier="a3" aria-pressed="false">A3</button></div>
+      <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
+      <p class="hinweis" id="tipp"></p>
+    </section>
   </div>
 </main>
 <div id="druck"></div>
 <script>
 // Bohrvorlage von Schritt für Schritt. Platte in cm, alles andere in mm; die Zeichnung ist 1:1 in mm.
+// Bedienung direkt im Bild: Platte an den Griffen grösser ziehen, in der Lupe Bohrer (Lochrand), Abstand (zweites Loch)
+// und Rand (Lochfeld verschieben) ziehen. Ein angetipptes Loch lässt sich mit × weglassen.
 (function(){
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -123,7 +167,10 @@ const RAHMEN=7;   // Platz um die Platte für die Nummern
 const MAX_LOECHER=40000;
 const n=x=>String(Math.round(x*100)/100).replace('.',',');   // 12.5 → «12,5»
 const mm=x=>Math.round(x*1000)/1000;
-const S={b:50,h:30,d:5,a:10,r:10,muster:'raster',lage:'rand',papier:'a4'};
+const begrenz=(v,lo,hi)=>Math.min(hi,Math.max(lo,v));
+const rund=(v,s)=>Math.round(v/s)*s;
+const schl=p=>p[0]+','+p[1];
+const S={b:50,h:30,d:5,a:10,r:10,muster:'raster',lage:'rand',papier:'a4',weg:[]};
 const GRENZEN={b:[1,120],h:[1,120],d:[0.5,30],a:[2,200],r:[0,200]};
 
 // ---------- Einstellungen laden ----------
@@ -133,11 +180,13 @@ try{ const u=new URL(location.href).searchParams;
   if(['raster','versetzt','rahmen'].includes(u.get('muster'))) S.muster=u.get('muster');
   if(u.get('lage')==='mitte'||u.get('lage')==='rand') S.lage=u.get('lage');
   if(PAPIERE[u.get('papier')]) S.papier=u.get('papier');
+  if(['b','h','d','a','r','muster','lage'].some(k=>u.has(k))) S.weg=[];   // geteilter Link: ganzes Muster
 }catch(e){}
 for(const k in GRENZEN){ const [lo,hi]=GRENZEN[k]; S[k]=Math.min(hi,Math.max(lo,+S[k]||lo)); }
 if(!PAPIERE[S.papier]) S.papier='a4';
 if(!['raster','versetzt','rahmen'].includes(S.muster)) S.muster='raster';
 if(!['rand','mitte'].includes(S.lage)) S.lage='rand';
+S.weg=Array.isArray(S.weg)?S.weg.filter(x=>typeof x==='string').slice(-5000):[];
 function speichern(){ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){} }
 
 // ---------- Löcher berechnen ----------
@@ -196,7 +245,30 @@ function beste(dw,dh){
   return dw>dh?quer:hoch;      // gleich viele Blätter: breite Platten quer
 }
 
-// ---------- Zeichnen ----------
+// ---------- Alles ausrechnen ----------
+// L.alle = ganzes Muster, L.pts = davon gebohrt (ohne die weggelassenen), L.weg = weggelassene
+function rechnen(){
+  const L=loecher(); L.alle=L.pts;
+  const w=new Set(S.weg);
+  L.pts=w.size?L.alle.filter(p=>!w.has(schl(p))):L.alle;
+  L.weg=w.size?L.alle.filter(p=>w.has(schl(p))):[];
+  const W=S.b*10,H=S.h*10, dw=W+2*RAHMEN, dh=H+2*RAHMEN;
+  const T=beste(dw,dh);
+  const rahmen=S.muster==='rahmen', alle=L.alle.length;
+  const abst=rahmen&&alle?Math.min(L.ax,L.ay):S.a;
+  let rand=S.r;
+  if(alle){ let x0=Infinity,x1=-Infinity,y0=Infinity,y1=-Infinity;
+    L.alle.forEach(([x,y])=>{ if(x<x0)x0=x; if(x>x1)x1=x; if(y<y0)y0=y; if(y>y1)y1=y; });
+    rand=mm(Math.min(x0,W-x1,y0,H-y1)); }
+  // Bezugslöcher für die Lupe: erstes Loch und sein rechter Nachbar – auch wenn sie nicht auf die Platte passen
+  const p0=L.alle[0]||[S.r,S.r];
+  const A1=rahmen&&L.ax?L.ax:S.a;
+  const p1=[mm(p0[0]+A1),p0[1]];
+  const da=q=>L.alle.some(p=>Math.abs(p[0]-q[0])<.01&&Math.abs(p[1]-q[1])<.01);
+  return {L,W,H,dw,dh,T,P:PAPIERE[S.papier],rand,abst,steg:abst-S.d,kante:rand-S.d/2,p0,p1,A1,p0da:da(p0),p1da:da(p1)};
+}
+
+// ---------- Druckzeichnung ----------
 // Alles in «Weltkoordinaten»: die Zeichnung ist die Platte plus RAHMEN rundum.
 function weltTeile(L,sicht){
   const W=S.b*10,H=S.h*10,D=S.d,r=D/2;
@@ -229,11 +301,11 @@ function weltTeile(L,sicht){
 let clipN=0;
 function fussText(L,T,i,j){
   const total=L.pts.length;
-  let t=`Bohrvorlage ${n(S.b)} × ${n(S.h)} cm · Bohrer ${n(S.d)} mm · Abstand ${n(S.a)} mm · Rand ${n(S.r)} mm · ${S.muster==='raster'?`${L.nx} × ${L.ny} = `:''}${total} Löcher`;
+  let t=`Bohrvorlage ${n(S.b)} × ${n(S.h)} cm · Bohrer ${n(S.d)} mm · Abstand ${n(S.a)} mm · Rand ${n(S.r)} mm · ${S.muster==='raster'&&!L.weg.length?`${L.nx} × ${L.ny} = `:''}${total} Löcher`;
   if(T.nx*T.ny>1) t+=` · Blatt ${j*T.nx+i+1} von ${T.nx*T.ny} (Reihe ${j+1}, Spalte ${i+1})`;
   return t;
 }
-function blatt(L,T,i,j,vorschau){
+function blatt(L,T,i,j){
   const k=++clipN;
   const tx=mm(T.ox-i*T.stepx), ty=mm(T.oy-j*T.stepy);
   const sicht={x0:M-tx,y0:M-ty,x1:M-tx+T.nw,y1:M-ty+T.nh};
@@ -266,66 +338,256 @@ function blatt(L,T,i,j,vorschau){
   s+=`<text x="${T.Pw-M}" y="${yf+5}" text-anchor="end" font-family="Nunito,Arial,sans-serif" font-size="2.4" fill="#666">Schritt für Schritt · Bohrvorlage</text>`;
   return s+'</svg>';
 }
-function uebersicht(L,T,dw,dh){
-  let s=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 ${dw+4} ${dh+4}" role="img" aria-label="Übersicht der ganzen Platte">`;
-  s+=weltTeile(L,null);
-  if(T.nx*T.ny>1){   // so wird die Zeichnung auf die Blätter verteilt
-    for(let j=0;j<T.ny;j++) for(let i=0;i<T.nx;i++){
-      const x=i*T.stepx+M-T.ox, y=j*T.stepy+M-T.oy;
-      s+=`<rect x="${mm(x)}" y="${mm(y)}" width="${T.nw}" height="${T.nh}" fill="none" stroke="#17997A" stroke-width="0.6" stroke-dasharray="3 2"/>`;
-      s+=`<text x="${mm(x+T.nw/2)}" y="${mm(y+T.nh/2)}" text-anchor="middle" font-family="Fredoka,Nunito,Arial,sans-serif" font-size="${Math.min(T.nh,T.nw)/4}" fill="#17997A" fill-opacity=".25">${j*T.nx+i+1}</text>`;
-    }
-  }
-  return s+'</svg>';
+
+// ---------- Bausteine für die Bildschirm-Zeichnung ----------
+// k = Weltmass pro Bildschirmpixel, damit Pfeile, Schrift und Griffe am Bildschirm immer gleich gross sind
+const r3=v=>Math.round(v*1000)/1000;
+function pfeil(x1,y1,x2,y2,k,cls,offen){
+  const l=Math.hypot(x2-x1,y2-y1); if(l<1e-6) return '';
+  const ux=(x2-x1)/l,uy=(y2-y1)/l,a=Math.min(7*k,l/2.5),b=3.5*k;
+  const kopf=(x,y,sx)=>`M${r3(x+sx*(ux*a-uy*b))},${r3(y+sx*(uy*a+ux*b))}L${r3(x)},${r3(y)}L${r3(x+sx*(ux*a+uy*b))},${r3(y+sx*(uy*a-ux*b))}`;
+  let d=`M${r3(x1)},${r3(y1)}L${r3(x2)},${r3(y2)}`+kopf(x2,y2,-1); if(!offen) d+=kopf(x1,y1,1);
+  return `<path class="mass ${cls||''}" d="${d}" stroke-width="${r3(1.7*k)}"/>`;
+}
+const etikett=(x,y,t,k,cls='',anker='middle',dreh=0)=>`<text class="et ${cls}" x="${r3(x)}" y="${r3(y)}" font-size="${r3(14*k)}" stroke-width="${r3(4*k)}" text-anchor="${anker}"${dreh?` transform="rotate(${dreh} ${r3(x)} ${r3(y)})"`:''}>${esc(t)}</text>`;
+const PF='M-7 0H7M-7 0l3.5-3.5M-7 0l3.5 3.5M7 0l-3.5-3.5M7 0l-3.5 3.5';
+const IC={
+  quer:`<path d="${PF}"/>`,
+  hoch:`<path d="${PF}" transform="rotate(90)"/>`,
+  diag:`<path d="${PF}" transform="rotate(45)"/>`,
+  dick:`<path d="${PF}" transform="rotate(-45)"/>`,
+  feld:'<path d="M-7 0H7M0-7V7M-7 0l3-3M-7 0l3 3M7 0l-3-3M7 0l-3 3M0-7l-3 3M0-7l3 3M0 7l-3-3M0 7l3-3"/>',
+  weg:'<path d="M-5-5L5 5M5-5L-5 5" stroke-width="3"/>'
+};
+function knopf(art,x,y,ic,titel,k,farbe='#17997A'){
+  return `<g class="griff" data-griff="${art}" transform="translate(${r3(x)} ${r3(y)}) scale(${r3(k)})"><title>${esc(titel)}</title><circle r="22" fill="transparent"/><circle r="16" fill="#000" opacity=".18"/><circle r="14" fill="${farbe}" stroke="#FFFFFF" stroke-width="2.5"/><g fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">${IC[ic]}</g></g>`;
+}
+function setzeSicht(svg,V){
+  svg.setAttribute('viewBox',`${r3(V.x)} ${r3(V.y)} ${r3(V.w)} ${r3(V.h)}`);
+  svg.style.width=Math.round(V.w*V.s)+'px'; svg.style.height=Math.round(V.h*V.s)+'px';
+}
+function gewaehltSvg(L,k,sicht){
+  if(!wahl) return '';
+  const p=L.pts.find(q=>schl(q)===wahl); if(!p) return '';
+  const x=p[0]+RAHMEN,y=p[1]+RAHMEN;
+  if(sicht&&(x<sicht.x0||x>sicht.x1||y<sicht.y0||y>sicht.y1)) return '';
+  const rr=Math.max(S.d/2,5*k)+2*k;
+  return `<circle class="gewaehlt" cx="${r3(x)}" cy="${r3(y)}" r="${r3(rr)}" stroke-width="${r3(3*k)}"/>`+knopf('weg',x+rr*0.71+12*k,y-rr*0.71-12*k,'weg','Loch weglassen',k,'#E8554E');
+}
+function geisterSvg(L,k,sicht){
+  let d='';
+  const rr=Math.max(S.d/2,2.5*k);
+  for(const p of L.weg){ const x=p[0]+RAHMEN,y=p[1]+RAHMEN; if(sicht&&(x<sicht.x0-rr||x>sicht.x1+rr||y<sicht.y0-rr||y>sicht.y1+rr)) continue;
+    d+=`M${r3(x-rr)},${r3(y)}a${r3(rr)},${r3(rr)} 0 1 0 ${r3(2*rr)},0a${r3(rr)},${r3(rr)} 0 1 0 ${r3(-2*rr)},0`; }
+  return d?`<path class="geist" d="${d}" stroke-width="${r3(1.4*k)}" stroke-dasharray="${r3(3*k)} ${r3(2*k)}"/>`:'';
 }
 
-function zeichnen(){
-  const L=loecher();
-  const W=S.b*10,H=S.h*10;
-  const dw=W+2*RAHMEN, dh=H+2*RAHMEN;
-  const T=beste(dw,dh);
-  const P=PAPIERE[S.papier];
-  const lage=T.quer?'quer':'hoch';
-  const total=L.pts.length;
-  const rahmen=S.muster==='rahmen', abst=rahmen&&total?Math.min(L.ax,L.ay):S.a;
-  let rand=S.r;
-  if(total){ const W=S.b*10,H=S.h*10; let x0=Infinity,x1=-Infinity,y0=Infinity,y1=-Infinity;
-    L.pts.forEach(([x,y])=>{ if(x<x0)x0=x; if(x>x1)x1=x; if(y<y0)y0=y; if(y>y1)y1=y; });
-    rand=mm(Math.min(x0,W-x1,y0,H-y1)); }
-  const steg=abst-S.d, kante=rand-S.d/2;
-  // Antwort rechts
-  const li=[];
-  if(L.zuViele) li.push(`<li class="warn">Das wären über ${MAX_LOECHER.toLocaleString('de-CH')} Löcher. Nimm einen grösseren Abstand oder eine kleinere Platte.</li>`);
-  else if(!total) li.push(`<li class="warn">So passt kein Loch auf die Platte: der Randabstand ist zu gross.</li>`);
-  else{
-    li.push(rahmen?`<li><b>${total} Löcher</b> dem Rand entlang<span class="leise">${L.nx} oben und unten, ${L.ny} links und rechts${Math.abs(L.ax-S.a)>0.05||Math.abs(L.ay-S.a)>0.05?`, Abstand ${n(Math.round(L.ax*10)/10)} mm quer und ${n(Math.round(L.ay*10)/10)} mm hoch, damit es in den Ecken aufgeht`:''}</span></li>`:`<li><b>${L.nx} × ${L.ny}</b> Löcher${S.muster==='versetzt'?' (versetzte Reihen etwas weniger)':''}<span class="leise">zusammen ${total} Löcher</span></li>`);
-    li.push(steg>0?`<li><b>${n(steg)} mm</b> Holz zwischen zwei Löchern<span class="leise">${steg<S.d?'Eher wenig: die Stege können brechen.':'Lochmitte zu Lochmitte '+n(Math.round(abst*10)/10)+' mm'}</span></li>`:`<li class="warn"><b>${n(steg)} mm</b> Steg: die Löcher überschneiden sich. Abstand grösser als der Bohrer wählen.</li>`);
-    li.push(kante>=0?`<li><b>${n(kante)} mm</b> vom Lochrand zur Plattenkante</li>`:`<li class="warn"><b>${n(kante)} mm</b> Lochrand zur Kante: das Loch schneidet die Kante an. Randabstand grösser wählen.</li>`);
+// ---------- Platte (ganze Fläche) ----------
+let PV=null, LV=null;          // zuletzt benutzte Ansicht {s,x,y,w,h}, s = Pixel pro mm
+function pvLayout(Z){
+  const box=$('pv-box'), cw=Math.max(240,box.clientWidth), schmal=innerWidth<860;
+  const ch=Math.max(240,innerHeight*(schmal?.5:.68));
+  const ml=40,mt=42,mr=28,mb=28;
+  const s=Math.min((cw-ml-mr)/Z.dw,(ch-mt-mb)/Z.dh);
+  return {s,x:-ml/s,y:-mt/s,w:Z.dw+(ml+mr)/s,h:Z.dh+(mt+mb)/s};
+}
+function pvSvg(Z,V){
+  const {L,W,H,T}=Z, k=1/V.s, R=RAHMEN;
+  let s=`<rect class="holz" x="${R}" y="${R}" width="${W}" height="${H}"/>`;
+  s+=`<rect x="${R}" y="${R}" width="${W}" height="${H}" fill="none" stroke="#3B2A18" stroke-width="${r3(1.2*k)}"/>`;
+  // Löcher als dunkle Punkte (Pfad mit runden Enden – schnell, auch bei vielen Löchern)
+  if(L.pts.length){ let d=''; for(const p of L.pts) d+=`M${mm(p[0]+R)} ${mm(p[1]+R)}h0`; s+=`<path class="loch" d="${d}" stroke-width="${r3(Math.max(S.d,1.8*k))}"/>`; }
+  s+=geisterSvg(L,k,null);
+  // so wird die Zeichnung auf die Blätter verteilt
+  if(T.nx*T.ny>1){
+    s+=`<clipPath id="pv-clip"><rect width="${Z.dw}" height="${Z.dh}"/></clipPath><g clip-path="url(#pv-clip)">`;
+    for(let j=0;j<T.ny;j++) for(let i=0;i<T.nx;i++){
+      const x=i*T.stepx+M-T.ox, y=j*T.stepy+M-T.oy;
+      s+=`<rect class="blattr" x="${mm(x)}" y="${mm(y)}" width="${T.nw}" height="${T.nh}" stroke-width="${r3(1.4*k)}" stroke-dasharray="${r3(6*k)} ${r3(4*k)}"/>`;
+      // Nummer in die Mitte des Teils, der auf der Zeichnung liegt
+      const bx0=Math.max(x,0),bx1=Math.min(x+T.nw,Z.dw),by0=Math.max(y,0),by1=Math.min(y+T.nh,Z.dh);
+      s+=`<text class="blattn" x="${mm((bx0+bx1)/2)}" y="${mm((by0+by1)/2)}" text-anchor="middle" dominant-baseline="central" font-size="${r3(Math.min(bx1-bx0,by1-by0,T.nh,T.nw)/2.5)}">${j*T.nx+i+1}</text>`;
+    }
+    s+='</g>';
   }
-  const bl=T.nx*T.ny;
-  li.push(`<li><b>${bl} ${bl===1?'Blatt':'Blätter'}</b> ${P.name} ${lage}${bl>1?`<span class="leise">${T.nx} nebeneinander, ${T.ny} untereinander, zusammenkleben</span>`:''}</li>`);
-  $('antwort').innerHTML=li.join('');
-  $('tipp').textContent=bl>1
-    ?'Blätter in der Reihenfolge der Nummern auslegen. Bei jedem Blatt rechts und unten ist ein grauer Klebestreifen; das nächste Blatt oben oder links an der gestrichelten Linie abschneiden und so drauflegen, dass die grünen Kreuze aufeinander liegen. Dann die Vorlage mit Malerband auf die Platte kleben, jedes Kreuz ankörnen, bohren.'
-    :'Vorlage ausschneiden oder gleich ganz mit Malerband auf die Platte kleben, jedes Kreuz mit Körner oder Nagel ankörnen, dann bohren. Die Nummern am Rand helfen, keine Reihe zu vergessen.';
-  $('f-lage').hidden=rahmen;
-  $('muster-hinweis').textContent=rahmen
-    ?'Nur am Rand: eine Lochreihe rundherum beim Randabstand, in jeder Ecke ein Loch. Der Abstand wird so verteilt, dass er in den Ecken aufgeht – nie grösser als eingestellt. Gut für Rahmen, Deckel, Steckwände.'
-    :S.muster==='versetzt'
-    ?'Versetzt: jede zweite Reihe ist um einen halben Abstand verschoben, jedes Loch ist gleich weit von allen Nachbarn weg – wie Bienenwaben. Die Reihen rücken dadurch etwas näher zusammen.'
-    :'Raster: die Löcher stehen in geraden Reihen und Spalten, oben und seitlich beginnt die erste Reihe beim Randabstand.';
-  $('blatt-hinweis').textContent=bl>1?`Die Platte ist grösser als ein Blatt: sie wird auf ${bl} Blätter ${P.name} ${lage} verteilt (grün gestrichelt in der Übersicht).`:`Passt auf ein Blatt ${P.name} ${lage}.`;
-  // Vorschau und Druck
-  if(L.zuViele){ $('uebersicht').innerHTML=''; $('blaetter').innerHTML=''; $('druck').innerHTML=''; return; }
-  $('uebersicht').innerHTML=uebersicht(L,T,dw,dh);
+  // Ausschnitt der Lupe
+  if(LV) s+=`<rect class="bereich" x="${r3(LV.x)}" y="${r3(LV.y)}" width="${r3(LV.w)}" height="${r3(LV.h)}" rx="${r3(3*k)}" stroke-width="${r3(1.6*k)}" stroke-dasharray="${r3(4*k)} ${r3(3*k)}"/>`;
+  // Masse aussen: Breite oben, Höhe links
+  const yb=R-18*k, xh=R-18*k;
+  s+=`<path class="hilfs" d="M${R},${r3(R-4*k)}V${r3(yb-5*k)}M${R+W},${r3(R-4*k)}V${r3(yb-5*k)}M${r3(R-4*k)},${R}H${r3(xh-5*k)}M${r3(R-4*k)},${R+H}H${r3(xh-5*k)}" stroke-width="${r3(k)}"/>`;
+  s+=pfeil(R,yb,R+W,yb,k)+etikett(R+W/2,yb-6*k,`${n(S.b)} cm`,k);
+  s+=pfeil(xh,R+H,xh,R,k)+etikett(xh-6*k,R+H/2,`${n(S.h)} cm`,k,'','middle',-90);
+  // Griffe zum Grösserziehen
+  if(H*V.s>80) s+=knopf('b',R+W,R+H/2,'quer','Breite ziehen',k);
+  if(W*V.s>80) s+=knopf('h',R+W/2,R+H,'hoch','Höhe ziehen',k);
+  s+=knopf('bh',R+W,R+H,'diag','Grösse ziehen',k);
+  s+=gewaehltSvg(L,k,null);
+  return s;
+}
+
+// ---------- Lupe (Ecke mit den ersten Löchern) ----------
+function lvLayout(Z){
+  const box=$('lv-box'), cw=Math.max(200,Math.min(440,box.clientWidth));
+  const {p0,A1}=Z, D=S.d;
+  const g=Math.max(2.2*A1+D,3.2*D,16);
+  const zx=p0[0]<=g*.5, zy=p0[1]<=g*.5;          // Plattenkante zeigen, wenn sie nah ist
+  const links=zx?-g*.14:p0[0]-g*.32, oben=zy?-g*.14:p0[1]-g*.32;
+  const span=Math.max(g,p0[0]+A1+D/2+g*.22-links,p0[1]+D/2+g*.5-oben);
+  return {s:cw/span,x:links+RAHMEN,y:oben+RAHMEN,w:span,h:span};
+}
+function lvSvg(Z,V){
+  const {L,p0,p1,A1}=Z, k=1/V.s, R=RAHMEN, D=S.d;
+  const sicht={x0:V.x,y0:V.y,x1:V.x+V.w,y1:V.y+V.h};
+  const X0=p0[0]+R,Y0=p0[1]+R,X1=p1[0]+R;
+  let s=`<rect class="grund" x="${r3(V.x)}" y="${r3(V.y)}" width="${r3(V.w)}" height="${r3(V.h)}"/>`;
+  s+=`<rect class="holz" x="${R}" y="${R}" width="${Z.W}" height="${Z.H}"/>`;
+  s+=weltTeile(L,sicht);
+  s+=geisterSvg(L,k,sicht);
+  // Löcher, die (noch) nicht passen, gestrichelt – man kann sie trotzdem ziehen
+  const geist=(x,y)=>`<circle class="geist" cx="${r3(x)}" cy="${r3(y)}" r="${r3(D/2)}" stroke-width="${r3(1.4*k)}" stroke-dasharray="${r3(3*k)} ${r3(2*k)}"/>`;
+  if(!Z.p0da) s+=geist(X0,Y0);
+  if(!Z.p1da) s+=geist(X1,Y0);
+  // Mittig: Randlinie zeigen, innerhalb der die Löcher bleiben
+  if(S.lage==='mitte'&&S.muster!=='rahmen') s+=`<rect class="randlinie" x="${R+S.r}" y="${R+S.r}" width="${Math.max(0,Z.W-2*S.r)}" height="${Math.max(0,Z.H-2*S.r)}" stroke-width="${r3(1.3*k)}" stroke-dasharray="${r3(5*k)} ${r3(4*k)}"/>`;
+  // Rand: Kante bis Lochmitte (links und oben)
+  const kw=Z.kante<0?'warn':'';
+  const xa=Math.max(R,V.x), ya=Math.max(R,V.y);
+  s+=pfeil(xa,Y0,X0,Y0,k,kw,xa>R)+etikett((xa+X0)/2,Y0-7*k,n(p0[0]),k,kw);
+  s+=pfeil(X0,ya,X0,Y0,k,kw,ya>R);
+  if(Math.abs(p0[0]-p0[1])>.01) s+=etikett(X0-7*k,(ya+Y0)/2+5*k,n(p0[1]),k,kw,'end');
+  // Abstand: Lochmitte zu Lochmitte, unter der Reihe
+  const sw=Z.steg<=0?'warn':'';
+  const ym=Y0+D/2+18*k;
+  s+=`<path class="hilfs" d="M${r3(X0)},${r3(Y0+D/2+3*k)}V${r3(ym+5*k)}M${r3(X1)},${r3(Y0+D/2+3*k)}V${r3(ym+5*k)}" stroke-width="${r3(k)}"/>`;
+  s+=pfeil(X0,ym,X1,ym,k,sw)+etikett((X0+X1)/2,ym+16*k,n(Math.round(A1*100)/100),k,sw);
+  // Griffe: Lochfeld verschieben, Bohrer am Lochrand, Abstand am zweiten Loch
+  const rr=Math.max(D/2,40*k), dx=X0+rr*0.7071, dy=Y0-rr*0.7071;
+  if(rr>D/2+1e-9) s+=`<path class="hilfs" d="M${r3(X0+D/2*0.7071)},${r3(Y0-D/2*0.7071)}L${r3(dx)},${r3(dy)}" stroke-width="${r3(1.2*k)}"/>`;
+  s+=etikett(dx+18*k,dy-10*k,`⌀ ${n(D)}`,k,'','start');
+  s+=knopf('a',X1,Y0,'quer','Abstand ziehen',k);
+  s+=knopf('feld',X0,Y0,'feld','Löcher verschieben (Rand)',k);
+  s+=knopf('d',dx,dy,'dick','Bohrer dicker oder dünner',k);
+  s+=gewaehltSvg(L,k,sicht);
+  return s;
+}
+
+// ---------- Ergebnis ----------
+const WI={
+  loch:'<circle cx="12" cy="12" r="7"/><path d="M12 2v20M2 12h20" stroke-width="1.3"/>',
+  steg:'<circle cx="6" cy="12" r="4.2"/><circle cx="18" cy="12" r="4.2"/><path d="M10.2 12h3.6" stroke-width="3"/>',
+  kante:'<path d="M3 3v18" stroke-width="3"/><circle cx="15" cy="12" r="5"/><path d="M5 12h5"/>',
+  blatt:'<path d="M6 2h9l4 4v16H6z"/><path d="M15 2v4h4"/>'
+};
+function werteZeigen(Z){
+  const {L,T,P}=Z, bl=T.nx*T.ny, total=L.pts.length, ok=L.alle.length>0;
+  const kachel=(ic,gross,klein,cls='',titel='')=>`<div class="wert ${cls}"${titel?` title="${esc(titel)}"`:''}><svg viewBox="0 0 24 24" aria-hidden="true">${WI[ic]}</svg><div><b>${gross}</b><small>${klein}</small></div></div>`;
+  const t=[];
+  const raster=S.muster==='raster'&&!L.weg.length&&ok;
+  t.push(kachel('loch',raster?`${L.nx} × ${L.ny}`:String(total),(raster?`${total} Löcher`:'Löcher')+(L.weg.length?` · ${L.weg.length} weg`:''),ok?'':'warn'));
+  if(ok){
+    t.push(kachel('steg',`${n(Z.steg)} mm`,'Steg',Z.steg<=0?'warn':Z.steg<S.d?'knapp':'','Holz zwischen zwei Löchern'));
+    t.push(kachel('kante',`${n(Z.kante)} mm`,'Kante',Z.kante<0?'warn':'','Lochrand bis Plattenkante'));
+  }
+  t.push(kachel('blatt',`${bl} × ${P.name}`,T.quer?'quer':'hoch'));
+  $('werte').innerHTML=t.join('');
+  let w='';
+  if(L.zuViele) w=`⚠ Über ${MAX_LOECHER.toLocaleString('de-CH')} Löcher`;
+  else if(!ok) w='⚠ Kein Loch passt – Rand kleiner';
+  else if(Z.steg<=0) w='⚠ Löcher überschneiden sich';
+  else if(Z.kante<0) w='⚠ Loch schneidet die Kante';
+  else if(Z.steg<S.d) w='⚠ Dünne Stege – können brechen';
+  $('warn').textContent=w; $('warn').hidden=!w;
+  $('tipp').textContent=(bl>1?'Nach Nummern auslegen · grüne Kreuze aufeinander · ':'')+'Drucken mit 100 % · 5-cm-Linie nachmessen'+(S.papier==='a3'?' · Papier A3':'');
+}
+
+// ---------- Zeichnen ----------
+let Z=null, wahl=null, drag=null;
+function zeichnen(voll=true){
+  Z=rechnen();
+  werteZeigen(Z);
+  const lv=$('lv'), pv=$('pv');
+  LV=drag&&drag.LV?drag.LV:lvLayout(Z);
+  PV=drag&&drag.PV?drag.PV:pvLayout(Z);
+  setzeSicht(lv,LV); lv.innerHTML=lvSvg(Z,LV);
+  setzeSicht(pv,PV); pv.innerHTML=pvSvg(Z,PV);
+  pv.setAttribute('aria-label',`Platte ${n(S.b)} × ${n(S.h)} cm, ${Z.L.pts.length} Löcher`);
+  $('lage').hidden=S.muster==='rahmen';
+  const zh=$('zurueckholen'); zh.hidden=!Z.L.weg.length; zh.querySelector('span').textContent=Z.L.weg.length;
+  if(voll) drucksachen(Z);
+}
+function drucksachen(Z){
+  const {L,T,P}=Z, bl=T.nx*T.ny;
+  if(L.zuViele){ $('blaetter').innerHTML=''; $('druck').innerHTML=''; return; }
   let seiten='';
   for(let j=0;j<T.ny;j++) for(let i=0;i<T.nx;i++) seiten+=blatt(L,T,i,j);
   $('druck').innerHTML=seiten;
   $('blaetter').innerHTML=bl>1?seiten:'';
   $('seite').textContent=`@page{size:${P.name} ${T.quer?'landscape':'portrait'};margin:0}#druck{--bw:${T.Pw}mm;--bh:${T.Ph}mm}`;
 }
+let geplant=false;
+function planen(){ if(geplant) return; geplant=true; requestAnimationFrame(()=>{ geplant=false; zeichnen(false); }); }
 
-// ---------- Bedienung ----------
+// ---------- Ziehen im Bild ----------
+function svgPunkt(svg,e){ const p=svg.createSVGPoint(); p.x=e.clientX; p.y=e.clientY; const q=p.matrixTransform(svg.getScreenCTM().inverse()); return [q.x,q.y]; }
+function treffer(x,y,k){
+  const px=x-RAHMEN,py=y-RAHMEN,g=Math.max(S.d/2,14*k); let best=null,bd=g*g;
+  for(const p of Z.L.alle){ const dx=p[0]-px,dy=p[1]-py,q=dx*dx+dy*dy; if(q<bd){ bd=q; best=p; } }
+  if(!best) return null; const key=schl(best); return {key,geist:S.weg.includes(key)};
+}
+function lochWeg(){ if(!wahl) return; if(!S.weg.includes(wahl)) S.weg.push(wahl); wahl=null; speichern(); zeichnen(); }
+function runter(e){
+  if(e.button&&e.button!==0) return;
+  const svg=e.currentTarget, V=svg.id==='pv'?PV:LV, [x,y]=svgPunkt(svg,e), gr=e.target.closest('.griff');
+  e.preventDefault();
+  if(gr&&gr.dataset.griff==='weg'){ lochWeg(); return; }
+  svg.setPointerCapture(e.pointerId);
+  const art=gr?gr.dataset.griff:'leer';
+  const hit=['b','h','bh','d'].includes(art)?null:treffer(x,y,1/V.s);
+  drag={art:art==='leer'&&hit&&!hit.geist?'loch':art,hit,svg,V,x,y,bewegt:false,S0:{...S},p0:Z.p0,A1:Z.A1,PV,LV};
+}
+function zieh(e){
+  if(!drag||drag.svg!==e.currentTarget) return;
+  const [x,y]=svgPunkt(drag.svg,e), dx=x-drag.x, dy=y-drag.y;
+  if(!drag.bewegt){
+    if(Math.hypot(dx,dy)*drag.V.s<5) return;
+    if(drag.art==='leer'){ drag.art='nichts'; }
+    drag.bewegt=true;
+    if(drag.art==='loch') drag.art='feld';
+    if(drag.art==='feld'){ drag.r0=S.muster!=='rahmen'&&S.lage==='mitte'?Math.min(drag.p0[0],drag.p0[1]):S.r; if(S.muster!=='rahmen') S.lage='rand'; felder(); }
+    if(drag.art==='d') drag.dist0=Math.hypot(drag.x-drag.p0[0]-RAHMEN,drag.y-drag.p0[1]-RAHMEN);
+    wahl=null;
+  }
+  const S0=drag.S0;
+  switch(drag.art){
+    case 'b': S.b=begrenz(rund(S0.b+dx/10,.5),1,120); break;
+    case 'h': S.h=begrenz(rund(S0.h+dy/10,.5),1,120); break;
+    case 'bh': S.b=begrenz(rund(S0.b+dx/10,.5),1,120); S.h=begrenz(rund(S0.h+dy/10,.5),1,120); break;
+    case 'a': S.a=begrenz(rund(drag.A1+dx,.5),2,200); break;
+    case 'd': { const dist=Math.hypot(x-drag.p0[0]-RAHMEN,y-drag.p0[1]-RAHMEN); S.d=begrenz(rund(S0.d+2*(dist-drag.dist0),.5),.5,30); break; }
+    case 'feld': { const v=Math.abs(dx)>=Math.abs(dy)?dx:dy; S.r=begrenz(rund(drag.r0+v,.5),0,Math.min(200,S.b*5,S.h*5)); break; }
+    default: return;
+  }
+  ['b','h','d','a','r'].forEach(k=>{ $(k).value=S[k]; });
+  planen();
+}
+function hoch(e){
+  if(!drag||drag.svg!==e.currentTarget) return;
+  const d=drag; drag=null;
+  if(!d.bewegt){
+    if(d.hit){ if(d.hit.geist) S.weg=S.weg.filter(k=>k!==d.hit.key); else wahl=wahl===d.hit.key?null:d.hit.key; }
+    else if(d.art==='leer') wahl=null;
+  }
+  speichern(); felder(); zeichnen();
+}
+['pv','lv'].forEach(id=>{ const svg=$(id);
+  svg.addEventListener('pointerdown',runter); svg.addEventListener('pointermove',zieh);
+  svg.addEventListener('pointerup',hoch); svg.addEventListener('pointercancel',hoch); });
+document.addEventListener('keydown',e=>{ if(e.target.matches('input')) return;
+  if((e.key==='Delete'||e.key==='Backspace')&&wahl){ e.preventDefault(); lochWeg(); }
+  if(e.key==='Escape'&&wahl){ wahl=null; zeichnen(false); } });
+let rz=0; window.addEventListener('resize',()=>{ if(drag) return; cancelAnimationFrame(rz); rz=requestAnimationFrame(()=>zeichnen(false)); });
+
+// ---------- Knöpfe und Zahlenfelder ----------
 function felder(){
   ['b','h','d','a','r'].forEach(k=>{ $(k).value=S[k]; });
   document.querySelectorAll('#muster .chip').forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.muster===S.muster)));
@@ -343,6 +605,8 @@ document.querySelectorAll('.stepper').forEach(st=>{
 document.querySelectorAll('#muster .chip').forEach(c=>c.addEventListener('click',()=>{ S.muster=c.dataset.muster; felder(); speichern(); zeichnen(); }));
 document.querySelectorAll('#lage .chip').forEach(c=>c.addEventListener('click',()=>{ S.lage=c.dataset.lage; felder(); speichern(); zeichnen(); }));
 document.querySelectorAll('#papier .chip').forEach(c=>c.addEventListener('click',()=>{ S.papier=c.dataset.papier; felder(); speichern(); zeichnen(); }));
+$('mehr').addEventListener('click',()=>{ const z=$('zahlen'), auf=z.hidden; z.hidden=!auf; $('mehr').setAttribute('aria-expanded',String(auf)); zeichnen(false); });
+$('zurueckholen').addEventListener('click',()=>{ S.weg=[]; wahl=null; speichern(); zeichnen(); });
 $('drucken').addEventListener('click',()=>window.print());
 felder(); zeichnen();
 })();
