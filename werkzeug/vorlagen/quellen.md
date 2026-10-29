@@ -350,11 +350,11 @@ Dazu kommen neun Schweizer Skylines und Wahrzeichen von Vecteezy (Pro-Lizenz, ID
 
 Basel, Lugano und die Kapellbrücke kamen später dazu (Skript `vz5_sil.py` im Arbeitsordner): bei Lugano die Sonne hinter den Häusern entfernt, bei der Kapellbrücke Himmel, Wasser und runder Bildrand weggeschnitten.
 
-Dazu eine Silhouette aus einem Foto von Wikimedia Commons: Himmel Spalte für Spalte erkannt, Bäume und Geländer unten flach abgeschnitten (Skript `vz5_com.py` im Arbeitsordner).
+Dazu der Munot als eigene Zeichnung (`s_munot` in `silhouetten.py`, nach Fotos gezeichnet, CC0): Rundbau mit Gesims, Treppenturm mit Zeltdach und Laterne, Fahne, Bäume am Hang und Altstadtdächer.
 
 | Motiv | Figur-ID | Seite | Autor | Lizenz |
 |---|---|---|---|---|
-| Schaffhausen – Munot | stadt-wm-schaffhausen-munot | https://commons.wikimedia.org/wiki/File:Schaffhausen_Munot_2.jpg | Andreas Praefcke | CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/), verändert (Silhouette) |
+| Schaffhausen – Munot | stadt-wm-schaffhausen-munot | silhouetten.py | eigene Zeichnung | CC0 |
 
 ## Schweizer Feste
 
