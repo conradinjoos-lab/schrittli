@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
 <style>
-:root{--bg:#F3EFE6;--surface:#FFFFFF;--surface2:#F7F3EC;--ink:#2B2320;--muted:#6B5F58;--line:#DDD3C6;--acc:#9A6B2F;--acc-ink:#FFFFFF;--acc-soft:#F4E6D2;--warn:#B3412A;--papier:#FFFFFF;--holz:#E9C99A;--holz2:#C99A5B;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17130F;--surface:#241E18;--surface2:#1C1712;--ink:#F2EBE2;--muted:#B3A596;--line:#3C322A;--acc:#E0A860;--acc-ink:#17130F;--acc-soft:#3A2C1A;--warn:#F08A6E;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#17130F;--surface:#241E18;--surface2:#1C1712;--ink:#F2EBE2;--muted:#B3A596;--line:#3C322A;--acc:#E0A860;--acc-ink:#17130F;--acc-soft:#3A2C1A;--warn:#F08A6E;color-scheme:dark}
+:root{--bg:#F3EFE6;--surface:#FFFFFF;--surface2:#F7F3EC;--ink:#2B2320;--muted:#6B5F58;--line:#DDD3C6;--acc:#9A6B2F;--acc-ink:#FFFFFF;--acc-soft:#F4E6D2;--warn:#B3412A;--warn-soft:#FBE9E4;--papier:#FFFFFF;--holz:#E9C99A;--holz2:#C99A5B;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17130F;--surface:#241E18;--surface2:#1C1712;--ink:#F2EBE2;--muted:#B3A596;--line:#3C322A;--acc:#E0A860;--acc-ink:#17130F;--acc-soft:#3A2C1A;--warn:#F08A6E;--warn-soft:#3A2420;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17130F;--surface:#241E18;--surface2:#1C1712;--ink:#F2EBE2;--muted:#B3A596;--line:#3C322A;--acc:#E0A860;--acc-ink:#17130F;--acc-soft:#3A2C1A;--warn:#F08A6E;--warn-soft:#3A2420;color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
 h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
@@ -65,10 +65,50 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 svg .t,svg .tk{font-family:Nunito,sans-serif;font-weight:600}
 svg .mass{fill:none;stroke:#9A6B2F;stroke-width:.5}
 svg .masst{font-family:Fredoka,Nunito,sans-serif;font-weight:600;fill:#9A6B2F}
+/* Bühne: die Kiste zum Anfassen */
+.werkzeug{display:flex;flex-wrap:wrap;gap:8px 14px;margin-bottom:10px;align-items:center}
+.chip.ico{width:44px;padding:0;display:inline-grid;place-items:center}
+.chip svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round;display:block}
+.chip svg .f{fill:currentColor;fill-opacity:.3}
+.chip i{display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid rgba(0,0,0,.35);vertical-align:-2px;margin-right:6px}
+.einheit{font-size:13px;color:var(--muted);align-self:center;margin-left:2px}
+.flaeche{position:relative;background:var(--papier);border:2px solid var(--line);border-radius:14px;overflow:hidden}
+.flaeche svg{display:block;width:100%;height:auto;touch-action:none;user-select:none;-webkit-user-select:none}
+.flaeche .zieh{cursor:grab}.flaeche.zieht,.flaeche.zieht .zieh{cursor:grabbing}
+.flaeche .zieh:focus{outline:none}.flaeche .zieh:focus-visible .ring{stroke:#2B2320;stroke-width:3}
+.flaeche [data-t],.flaeche .griff,.flaeche [data-feld]{cursor:pointer}
+.warnband{position:absolute;left:8px;top:8px;margin:0;padding:6px 10px;border-radius:10px;background:var(--warn-soft);color:var(--warn);font-size:14px;max-width:calc(100% - 16px);pointer-events:none}
+.mehr summary,.mehr-karte summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:36px;padding:0 12px;border-radius:999px;border:2px solid var(--line);background:var(--surface2);color:var(--muted);font-size:15px;margin-top:8px}
+.mehr summary::-webkit-details-marker,.mehr-karte summary::-webkit-details-marker{display:none}
+.mehr[open] summary,.mehr-karte[open] summary{border-color:var(--acc);color:var(--ink)}
+.mehr .zwei{margin-top:10px;grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}
+.mehr .lbl{margin-bottom:4px}
+.mehr-karte{padding:12px 16px}
+.mehr-karte>*:not(summary){margin-top:12px}
+.mehr-karte summary{margin-top:0}
+.fakten{display:grid;grid-template-columns:repeat(auto-fill,minmax(98px,1fr));gap:8px}
+.fakt{background:var(--surface2);border:1px solid var(--line);border-radius:14px;padding:8px 6px;text-align:center;line-height:1.15}
+.fakt svg{width:44px;height:30px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round;display:block;margin:0 auto 4px;color:var(--muted)}
+.fakt svg .f{fill:currentColor;fill-opacity:.3}
+.fakt b{display:block;font:600 21px/1.1 Fredoka,Nunito,sans-serif;color:var(--acc);white-space:nowrap}
+.fakt small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.fakt.warn{color:var(--warn);background:var(--warn-soft);grid-column:1/-1}.fakt.warn b{color:var(--warn)}
+.material li .mini{flex:none;width:36px;height:22px;align-self:center}
+.material li .mini rect{fill:var(--holz);stroke:var(--holz2);stroke-width:1}
+.material li .tn{flex:1}
+h2 .leise{color:var(--muted);font-size:14px;font-family:Nunito,sans-serif}
 @media (max-width:860px){
   main{display:flex;flex-direction:column;align-items:stretch}
+  .links{display:contents}
+  .buehne{order:1}.rechts{order:2}.links>.karte:not(.buehne){order:3}
   .rechts{position:static}
   h1{font-size:24px}
+}
+@media (max-width:520px){
+  .kopf{padding:14px 16px 4px}
+  main{padding:6px 16px 32px;gap:12px}
+  .buehne{padding:10px}
+  .werkzeug{gap:6px 10px}
 }
 #druck{display:none}
 @page{size:A4 portrait;margin:10mm}
@@ -99,79 +139,76 @@ svg .masst{font-family:Fredoka,Nunito,sans-serif;font-weight:600;fill:#9A6B2F}
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
   <h1>Kisten-Planer</h1>
-  <p>Sag, wie gross die Kiste werden soll und aus welchem Holz. Die Seite rechnet alle Teile aus, wählt die richtige Schraube, sagt dir Bohrer und Vorbohrtiefe, zeichnet die Bohrpläne und den Zuschnitt und schreibt die Bauanleitung. <a href="../">←&nbsp;Vorlagen-Generator</a></p>
+  <p>Kiste ziehen, Teile antippen. <a href="../">←&nbsp;Vorlagen</a></p>
 </header>
 <script src="../zurueck.js"></script>
 <main>
 <div class="links">
-  <section class="karte">
-    <h2>Deine Kiste</h2>
-    <div class="zwei">
-      <div class="feld"><label class="lbl" for="l">Länge</label><div class="zahl"><input type="number" id="l" min="4" max="120" step="0.5" inputmode="decimal"><span>cm</span></div></div>
-      <div class="feld"><label class="lbl" for="b">Breite</label><div class="zahl"><input type="number" id="b" min="4" max="120" step="0.5" inputmode="decimal"><span>cm</span></div></div>
-      <div class="feld"><label class="lbl" for="h">Höhe</label><div class="zahl"><input type="number" id="h" min="2" max="80" step="0.5" inputmode="decimal"><span>cm</span></div></div>
+  <section class="karte buehne">
+    <div class="werkzeug">
+      <div class="chips" role="group" aria-label="Masse" data-g="mass">
+        <button type="button" class="chip ico" data-v="aussen" title="Aussenmass: die ganze Kiste" aria-label="Aussenmass"><svg viewBox="0 0 26 26" aria-hidden="true"><rect class="f" x="6" y="10" width="14" height="11" rx="1"/><path d="M3 5h20M3 3v4M23 3v4"/></svg></button>
+        <button type="button" class="chip ico" data-v="innen" title="Innenmass: was hineinpasst" aria-label="Innenmass"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M3 7v15h20V7h-3v12H6V7z"/><path d="M8 14h10M8 12v4M18 12v4"/></svg></button>
+      </div>
+      <div class="chips" role="group" aria-label="Boden" data-g="boden">
+        <button type="button" class="chip ico" data-v="unter" title="Boden unter den Wänden" aria-label="Boden unter den Wänden"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M3 18h20v4H3zM3 5h3.5v13H3zM19.5 5H23v13h-3.5z"/></svg></button>
+        <button type="button" class="chip ico" data-v="zwischen" title="Boden zwischen den Wänden" aria-label="Boden zwischen den Wänden"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M3 5h3.5v17H3zM19.5 5H23v17h-3.5zM6.5 18h13v4h-13z"/></svg></button>
+      </div>
+      <div class="chips" role="group" aria-label="Ecken" data-g="aussen">
+        <button type="button" class="chip ico" data-v="lang" title="Längsseiten aussen" aria-label="Längsseiten aussen"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M2 6h22v3.5H2zM2 16.5h22V20H2zM2 9.5h3.5v7H2zM20.5 9.5H24v7h-3.5z"/></svg></button>
+        <button type="button" class="chip ico" data-v="kurz" title="Stirnseiten aussen" aria-label="Stirnseiten aussen"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M2 6h3.5v14H2zM20.5 6H24v14h-3.5zM5.5 6h15v3.5h-15zM5.5 16.5h15V20h-15z"/></svg></button>
+      </div>
+      <div class="chips" role="group" aria-label="Deckel" data-g="deckel">
+        <button type="button" class="chip ico" data-v="nein" title="Ohne Deckel" aria-label="Ohne Deckel"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M4 10v12h18V10h-3v9H7v-9z"/></svg></button>
+        <button type="button" class="chip ico" data-v="ja" title="Loser Deckel mit Leisten" aria-label="Loser Deckel mit Leisten"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="f" d="M4 12v10h18V12h-3v7H7v-7z"/><path class="f" d="M3 5h20v3H3z"/><path d="M8 8v3M18 8v3"/></svg></button>
+      </div>
+      <div class="chips" role="group" aria-label="Holz" data-g="mat">
+        <button type="button" class="chip" data-v="sperrholz"><i style="background:#E6C48F"></i>Sperrholz</button>
+        <button type="button" class="chip" data-v="mdf"><i style="background:#B48A5E"></i>MDF</button>
+        <button type="button" class="chip" data-v="massiv"><i style="background:#D59E5C"></i>Massiv</button>
+      </div>
+      <div class="chips" role="group" aria-label="Dicke in mm" id="dicken"></div>
     </div>
-    <div class="feld" style="margin-top:12px"><span class="lbl">Sind das die Masse …</span>
-      <div class="chips" role="group" aria-label="Aussen oder innen" data-g="mass"><button type="button" class="chip" data-v="aussen">aussen (die ganze Kiste)</button><button type="button" class="chip" data-v="innen">innen (was hineinpasst)</button></div></div>
-    <p class="hinweis" id="mass-hinweis"></p>
+    <div class="flaeche" id="flaeche">
+      <svg id="kiste" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Kiste: Griffe ziehen, Teile antippen"></svg>
+      <p class="warnband" id="flaeche-warn" hidden></p>
+    </div>
+    <details class="mehr" id="zahlen"><summary title="Zahlen eintippen" aria-label="Zahlen eintippen">⋯</summary>
+      <div class="zwei">
+        <div class="feld"><label class="lbl" for="l">↔ Länge</label><div class="zahl"><input type="number" id="l" min="4" max="120" step="0.5" inputmode="decimal"><span>cm</span></div></div>
+        <div class="feld"><label class="lbl" for="b">⤢ Breite</label><div class="zahl"><input type="number" id="b" min="4" max="120" step="0.5" inputmode="decimal"><span>cm</span></div></div>
+        <div class="feld"><label class="lbl" for="h">↕ Höhe</label><div class="zahl"><input type="number" id="h" min="2" max="80" step="0.5" inputmode="decimal"><span>cm</span></div></div>
+        <div class="feld"><label class="lbl" for="d">▮ Dicke</label><div class="zahl"><input type="number" id="d" min="3" max="30" step="0.5" inputmode="decimal"><span>mm</span></div></div>
+      </div>
+    </details>
   </section>
   <section class="karte">
-    <h2>Material</h2>
-    <div class="feld"><span class="lbl">Holz</span>
-      <div class="chips" role="group" aria-label="Material" data-g="mat"><button type="button" class="chip" data-v="sperrholz">Sperrholz / Schichtholz</button><button type="button" class="chip" data-v="mdf">MDF</button><button type="button" class="chip" data-v="massiv">Massivholz-Brett</button></div></div>
-    <div class="feld"><span class="lbl">Dicke</span>
-      <div class="chips" role="group" aria-label="Dicke" id="dicken"></div>
-      <div class="zahl" style="margin-top:8px"><input type="number" id="d" min="3" max="30" step="0.5" inputmode="decimal" aria-label="Dicke in mm"><span>mm – oder selber eintippen</span></div></div>
-    <p class="hinweis" id="mat-hinweis"></p>
-  </section>
-  <section class="karte">
-    <h2>Bauart</h2>
-    <div class="feld"><span class="lbl">Boden</span>
-      <div class="chips" role="group" aria-label="Boden" data-g="boden"><button type="button" class="chip" data-v="unter">Boden unter den Wänden</button><button type="button" class="chip" data-v="zwischen">Boden zwischen den Wänden</button></div></div>
-    <div class="feld"><span class="lbl">Welche Wände stehen aussen (in den Ecken)?</span>
-      <div class="chips" role="group" aria-label="Ecken" data-g="aussen"><button type="button" class="chip" data-v="lang">Längsseiten aussen</button><button type="button" class="chip" data-v="kurz">Stirnseiten aussen</button></div></div>
-    <div class="feld"><span class="lbl">Deckel</span>
-      <div class="chips" role="group" aria-label="Deckel" data-g="deckel"><button type="button" class="chip" data-v="nein">Ohne Deckel</button><button type="button" class="chip" data-v="ja">Loser Deckel mit Leisten</button></div></div>
-    <p class="hinweis" id="bau-hinweis"></p>
-  </section>
-  <section class="karte">
-    <h2>So sieht sie aus</h2>
-    <div class="bild" id="bild"></div>
-    <p class="hinweis">Die Schrauben gehen durch das eine Brett in die Kante des anderen – immer in die Mitte der Kante. Leim dazu, dann hält die Kiste doppelt.</p>
-  </section>
-  <section class="karte">
-    <h2>Bohrpläne – wo die Löcher hinkommen</h2>
+    <h2>Bohrpläne <span class="leise">mm von links / unten</span></h2>
     <div class="plaene" id="plaene"></div>
-    <p class="hinweis" id="plaene-hinweis"></p>
   </section>
   <section class="karte">
-    <h2>Zuschnitt – so viel Holz brauchst du</h2>
+    <h2>Zuschnitt <span class="leise" id="zuschnitt-hinweis"></span></h2>
     <div class="bild" id="zuschnitt"></div>
-    <p class="hinweis" id="zuschnitt-hinweis"></p>
   </section>
 </div>
 
 <div class="rechts">
   <section class="karte" aria-live="polite">
-    <h2>Teile zuschneiden</h2>
+    <h2>Teile <span class="leise" id="teile-dicke"></span></h2>
     <ul class="material" id="teile"></ul>
     <p class="hinweis warn" id="warnung" hidden></p>
   </section>
   <section class="karte">
-    <h2>Schrauben und Bohren</h2>
-    <ul class="antwort" id="antwort"></ul>
+    <h2>Schrauben</h2>
+    <div class="fakten" id="fakten"></div>
   </section>
-  <section class="karte">
-    <h2>So wird gerechnet</h2>
+  <button type="button" class="drucken" id="drucken" data-handy><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg> Plan drucken</button>
+  <details class="karte mehr-karte" id="mehr"><summary title="Rechnung, Material, Anleitung">⋯ Rechnung · Material · Anleitung</summary>
+    <p class="hinweis" id="mat-hinweis"></p>
     <div class="rechnung" id="rechnung"></div>
-  </section>
-  <section class="karte">
-    <h2>Das brauchst du sonst noch</h2>
     <ul class="material" id="material"></ul>
-    <h2 style="margin-top:14px">So baust du die Kiste</h2>
     <ol class="schritte" id="schritte"></ol>
-  </section>
-  <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg> Plan drucken</button>
+  </details>
 </div>
 </main>
 <div id="druck"></div>
@@ -231,9 +268,9 @@ function rechnen(){
   const Li=La-2*d, Bi=Ba-2*d, Hi=Ha-d;
   const hw=unter?Ha-d:Ha;                       // Wandhöhe
   const R={d,La,Ba,Ha,Li,Bi,Hi,hw,unter,langAussen,innen,fehler:''};
-  if(Li<20||Bi<20||Hi<5){ R.fehler='So geht die Kiste nicht auf: das Holz ist zu dick für diese Masse. Nimm dünneres Holz oder eine grössere Kiste.'; return R; }
+  if(Li<20||Bi<20||Hi<5){ R.fehler='So geht die Kiste nicht auf: das Holz ist zu dick für diese Masse. Nimm dünneres Holz oder eine grössere Kiste.'; R.kurz='Holz zu dick für diese Kiste'; return R; }
   const sc=schraube(d,unter?hw-3:undefined); R.sc=sc;   // von unten: die Schraube muss in der Wandkante bleiben
-  if(sc.zuLang){ R.fehler=`So flach geht es nicht mit Schrauben von unten: die Wandkante ist nur ${mm(hw)} hoch. Setz den Boden zwischen die Wände oder bau die Kiste höher.`; return R; }
+  if(sc.zuLang){ R.fehler=`So flach geht es nicht mit Schrauben von unten: die Wandkante ist nur ${mm(hw)} hoch. Setz den Boden zwischen die Wände oder bau die Kiste höher.`; R.kurz='Zu flach für Schrauben von unten'; return R; }
   const e=sc.ok?Math.round(sc.len-d+8):20;    // Randabstand der Schrauben: Boden- und Eckschrauben kreuzen sich so nie
   R.e=e;
   // Teile: Länge × Breite (mm), alle aus dem gleichen Holz
@@ -315,40 +352,48 @@ function packen(st,W){
 }
 
 // ---------- Zeichnen ----------
-function kistenBild(R){
-  const {La,Ba,Ha,d,unter,langAussen}=R;
-  const k=0.42;                                              // Schrägbild: Tiefe halb so lang, schräg nach hinten
-  const P=(x,y,z)=>[x+k*y, -(z+k*y)];
-  const pt=(x,y,z)=>{ const [a,b]=P(x,y,z); return `${a.toFixed(1)},${b.toFixed(1)}`; };
-  const poly=(pts,cls,fill)=>`<polygon points="${pts.map(p=>pt(...p)).join(' ')}" fill="${fill}" stroke="#4a3a2a" stroke-width=".6" stroke-linejoin="round"${cls?` class="${cls}"`:''}/>`;
+const K=0.42;                                              // Schrägbild: Tiefe halb so lang, schräg nach hinten
+const P=(x,y,z)=>[x+K*y, -(z+K*y)];
+const pt=(x,y,z)=>{ const [a,b]=P(x,y,z); return `${a.toFixed(1)},${b.toFixed(1)}`; };
+const pts=a=>a.map(p=>pt(...p)).join(' ');
+const poly=(p,fill,lw)=>`<polygon points="${pts(p)}" fill="${fill}" stroke="#4a3a2a" stroke-width="${lw}" stroke-linejoin="round"/>`;
+// Der Kistenkörper, gleich für Bildschirm und Druck: o.lw Kanten, o.thin Fugen, o.sr Schraubenkopf
+function kistenKoerper(R,o){
+  const {La,Ba,Ha,unter,langAussen}=R, lw=o.lw, th=o.thin;
+  const d=Math.max(0.5,Math.min(R.d,La/2-1,Ba/2-1,Ha-1));      // bei zu dickem Holz trotzdem eine Kiste zeichnen
+  const st=`fill="none" stroke="#4a3a2a" stroke-width="${th}"`;
   let s='';
   // Boden innen (sichtbar von oben), dann die vier Wände von oben, Vorderseite, rechte Seite
   const zb=d;                                         // Oberkante des Bodens
-  s+=poly([[d,d,zb],[La-d,d,zb],[La-d,Ba-d,zb],[d,Ba-d,zb]],'','#F1DFC2');
+  s+=poly([[d,d,zb],[La-d,d,zb],[La-d,Ba-d,zb],[d,Ba-d,zb]],'#F1DFC2',lw);
   // Innenflächen der Wände (hinten und links sichtbar)
-  s+=poly([[d,Ba-d,zb],[La-d,Ba-d,zb],[La-d,Ba-d,Ha],[d,Ba-d,Ha]],'','#D9B98A');   // hintere Innenwand
-  s+=poly([[d,d,zb],[d,Ba-d,zb],[d,Ba-d,Ha],[d,d,Ha]],'','#CBA772');               // linke Innenwand
+  s+=poly([[d,Ba-d,zb],[La-d,Ba-d,zb],[La-d,Ba-d,Ha],[d,Ba-d,Ha]],'#D9B98A',lw);   // hintere Innenwand
+  s+=poly([[d,d,zb],[d,Ba-d,zb],[d,Ba-d,Ha],[d,d,Ha]],'#CBA772',lw);               // linke Innenwand
   // Vorderwand und rechte Wand aussen
-  s+=poly([[0,0,0],[La,0,0],[La,0,Ha],[0,0,Ha]],'','#E9C99A');
-  s+=poly([[La,0,0],[La,Ba,0],[La,Ba,Ha],[La,0,Ha]],'','#C99A5B');
+  s+=poly([[0,0,0],[La,0,0],[La,0,Ha],[0,0,Ha]],'#E9C99A',lw);
+  s+=poly([[La,0,0],[La,Ba,0],[La,Ba,Ha],[La,0,Ha]],'#C99A5B',lw);
   // Oberkanten der Wände (Ringe)
-  const oben=`<path d="M${pt(0,0,Ha)} L${pt(La,0,Ha)} L${pt(La,Ba,Ha)} L${pt(0,Ba,Ha)} Z M${pt(d,d,Ha)} L${pt(La-d,d,Ha)} L${pt(La-d,Ba-d,Ha)} L${pt(d,Ba-d,Ha)} Z" fill="#EFD3A8" fill-rule="evenodd" stroke="#4a3a2a" stroke-width=".6"/>`;
-  s+=oben;
+  s+=`<path d="M${pt(0,0,Ha)} L${pt(La,0,Ha)} L${pt(La,Ba,Ha)} L${pt(0,Ba,Ha)} Z M${pt(d,d,Ha)} L${pt(La-d,d,Ha)} L${pt(La-d,Ba-d,Ha)} L${pt(d,Ba-d,Ha)} Z" fill="#EFD3A8" fill-rule="evenodd" stroke="#4a3a2a" stroke-width="${lw}"/>`;
   // Stossfugen in den Ecken oben: zeigen, welche Wand aussen steht
   let f='';
   if(langAussen){ [0,Ba-d].forEach(y=>{ f+=`M${pt(d,y,Ha)} L${pt(d,y+d,Ha)} M${pt(La-d,y,Ha)} L${pt(La-d,y+d,Ha)}`; }); }
   else { [0,La-d].forEach(x=>{ f+=`M${pt(x,d,Ha)} L${pt(x+d,d,Ha)} M${pt(x,Ba-d,Ha)} L${pt(x+d,Ba-d,Ha)}`; }); }
-  s+=`<path d="${f}" fill="none" stroke="#4a3a2a" stroke-width=".5"/>`;
+  s+=`<path d="${f}" ${st}/>`;
   // Stossfuge vorne rechts: bei Längsseiten aussen läuft die Vorderwand bis zur Ecke, sonst sieht man die Stirnseite vorne
-  if(langAussen) s+=`<path d="M${pt(La,0,0)} L${pt(La,0,Ha)} M${pt(La,d,0)} L${pt(La,d,Ha)}" fill="none" stroke="#4a3a2a" stroke-width=".5"/>`;
-  else s+=`<path d="M${pt(La-d,0,0)} L${pt(La-d,0,Ha)}" fill="none" stroke="#4a3a2a" stroke-width=".5"/>`;
+  if(langAussen) s+=`<path d="M${pt(La,0,0)} L${pt(La,0,Ha)} M${pt(La,d,0)} L${pt(La,d,Ha)}" ${st}/>`;
+  else s+=`<path d="M${pt(La-d,0,0)} L${pt(La-d,0,Ha)}" ${st}/>`;
   // Bodenkante unter den Wänden
-  if(unter) s+=`<path d="M${pt(0,0,d)} L${pt(La,0,d)} L${pt(La,Ba,d)}" fill="none" stroke="#4a3a2a" stroke-width=".5" stroke-dasharray="2 1.5"/>`;
+  if(unter) s+=`<path d="M${pt(0,0,d)} L${pt(La,0,d)} L${pt(La,Ba,d)}" ${st} stroke-dasharray="${th*4} ${th*3}"/>`;
   // Schrauben andeuten: Ecken auf der Vorderwand (nur bei Längsseiten aussen) und rechts
-  const sk=(x,y,z)=>{ const [a,b]=P(x,y,z); return `<circle cx="${a.toFixed(1)}" cy="${b.toFixed(1)}" r="${Math.max(1.2,La/120)}" fill="#fff" stroke="#4a3a2a" stroke-width=".5"/>`; };
-  R.ecken.forEach(z=>{ if(langAussen){ s+=sk(d/2,0,z)+sk(La-d/2,0,z); } else { s+=sk(La,d/2,z)+sk(La,Ba-d/2,z); } });
-  if(!unter){ R.bodenStellen.lang.forEach(x=>{ s+=sk(x,0,d/2); }); R.bodenStellen.kurz.forEach(y=>{ s+=sk(La,y,d/2); }); }
-  // Masse
+  const sk=(x,y,z)=>{ const [a,b]=P(x,y,z); return `<circle cx="${a.toFixed(1)}" cy="${b.toFixed(1)}" r="${o.sr}" fill="#fff" stroke="#4a3a2a" stroke-width="${th}"/>`; };
+  (R.ecken||[]).forEach(z=>{ if(langAussen){ s+=sk(d/2,0,z)+sk(La-d/2,0,z); } else { s+=sk(La,d/2,z)+sk(La,Ba-d/2,z); } });
+  if(!unter&&R.bodenStellen){ R.bodenStellen.lang.forEach(x=>{ s+=sk(x,0,d/2); }); R.bodenStellen.kurz.forEach(y=>{ s+=sk(La,y,d/2); }); }
+  return s;
+}
+// Druckbild mit Massen
+function kistenBild(R){
+  const {La,Ba,Ha}=R;
+  let s=kistenKoerper(R,{lw:.6,thin:.5,sr:Math.max(1.2,La/120)});
   const fs=Math.max(5,(La+Ba)/22);
   const m=(p1,p2,text,dx,dy,rot)=>{ const [a1,b1]=P(...p1),[a2,b2]=P(...p2); const cx=(a1+a2)/2+dx, cy=(b1+b2)/2+dy;
     return `<path class="mass" d="M${a1.toFixed(1)},${b1.toFixed(1)} L${a2.toFixed(1)},${b2.toFixed(1)}"/><text class="masst" font-size="${fs}" x="${cx.toFixed(1)}" y="${cy.toFixed(1)}" text-anchor="middle"${rot?` transform="rotate(${rot} ${cx.toFixed(1)} ${cy.toFixed(1)})"`:''}>${esc(text)}</text>`; };
@@ -356,8 +401,98 @@ function kistenBild(R){
   s+=m([0,0,-ab],[La,0,-ab],`${cmT(La)} lang`,0,fs*1.1,0);
   s+=m([La+ab,0,0],[La+ab,Ba,0],`${cmT(Ba)} breit`,fs*2.2,fs*0.4,-40);
   s+=m([-ab,0,0],[-ab,0,Ha],`${cmT(Ha)} hoch`,-fs*0.6,0,-90);
-  const xs=[-ab-fs*2.5, La+k*Ba+fs*4], ys=[-(Ha+k*Ba)-fs, ab+fs*2.5];
+  const xs=[-ab-fs*2.5, La+K*Ba+fs*4], ys=[-(Ha+K*Ba)-fs, ab+fs*2.5];
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${xs[0].toFixed(1)} ${ys[0].toFixed(1)} ${(xs[1]-xs[0]).toFixed(1)} ${(ys[1]-ys[0]).toFixed(1)}" role="img" aria-label="Kiste ${cmT(La)} × ${cmT(Ba)} × ${cmT(Ha)}">${s}</svg>`;
+}
+
+// ---------- Die Kiste zum Anfassen ----------
+// Einheiten im SVG sind mm; u = mm pro Bildschirmpixel, damit Griffe und Schrift immer gleich gross bleiben.
+const RAND={l:54,r:86,t:50,b:52};               // Platz in px rund um die Kiste für Masspfeile und Griffe
+const NAMEN={l:'Länge',b:'Breite',h:'Höhe'};
+const MC='#9A6B2F', OR='#E8772E';
+const deckelLuft=R=>(R.leisteB||20)+Math.max(15,R.Ha*0.15);
+function einpassen(R){
+  const sw=$('flaeche').clientWidth||600;
+  const top=R.Ha+(S.deckel==='ja'?deckelLuft(R)+R.d:0);
+  const gw=R.La+K*R.Ba, gh=top+K*R.Ba, gy0=-gh;
+  const shMax=Math.min(560,Math.max(260,innerHeight*0.6));
+  const u=Math.max(gw/Math.max(80,sw-RAND.l-RAND.r), gh/(shMax-RAND.t-RAND.b));
+  const hpx=Math.max(240,gh/u+RAND.t+RAND.b);
+  const ex=(sw-RAND.l-RAND.r-gw/u)/2, ey=(hpx-RAND.t-RAND.b-gh/u)/2;
+  return {u, x:-(RAND.l+ex)*u, y:gy0-(RAND.t+ey)*u, w:sw*u, h:hpx*u};
+}
+function liveBild(R,A){
+  const {La,Ba,Ha}=R, d=R.d, u=A.u, f=v=>v.toFixed(1), us=u.toFixed(4);
+  const klemm=(x,y,r)=>[Math.min(A.x+A.w-r*u,Math.max(A.x+r*u,x)), Math.min(A.y+A.h-r*u,Math.max(A.y+r*u,y))];
+  let s=kistenKoerper(R,{lw:1.3*u,thin:u,sr:Math.max(3*u,La/120)});
+  // Antippen: Wände (Umriss) und Boden (nur der Teil, den man durch die Öffnung sieht)
+  const dd=Math.max(0.5,Math.min(d,La/2-1,Ba/2-1));
+  const sil=[[0,0,0],[La,0,0],[La,Ba,0],[La,Ba,Ha],[0,Ba,Ha],[0,0,Ha]];
+  const oeff=[[dd,dd,Ha],[La-dd,dd,Ha],[La-dd,Ba-dd,Ha],[dd,Ba-dd,Ha]], bod=[[dd,dd,dd],[La-dd,dd,dd],[La-dd,Ba-dd,dd],[dd,Ba-dd,dd]];
+  // Bei hohen Kisten ist der Boden ganz verdeckt: dann bleibt die untere Kante zum Antippen
+  const bz=Math.min(Ha,Math.max(d,14*u)), kante=[[0,0,0],[La,0,0],[La,Ba,0],[La,Ba,bz],[La,0,bz],[0,0,bz]];
+  s+=`<clipPath id="oeff"><polygon points="${pts(oeff)}"/></clipPath>`;
+  if(wahl==='wand') s+=`<polygon points="${pts(sil)}" fill="none" stroke="${OR}" stroke-width="${3*u}" stroke-linejoin="round"/><polygon points="${pts(oeff)}" fill="none" stroke="${OR}" stroke-width="${2*u}"/>`;
+  if(wahl==='boden') s+=`<polygon points="${pts(bod)}" clip-path="url(#oeff)" fill="${OR}" fill-opacity=".22" stroke="${OR}" stroke-width="${4*u}" stroke-linejoin="round"/><polygon points="${pts(kante)}" fill="${OR}" fill-opacity=".22" stroke="${OR}" stroke-width="${3*u}" stroke-linejoin="round"/>`;
+  s+=`<polygon points="${pts(sil)}" fill="transparent" data-t="wand"><title>Wände</title></polygon><g data-t="boden"><polygon points="${pts(bod)}" clip-path="url(#oeff)" fill="transparent"/><polygon points="${pts(kante)}" fill="transparent"/><title>Boden</title></g>`;
+  // Deckel schwebt über der Kiste, die Leisten hängen darunter
+  let zl=0;
+  if(S.deckel==='ja'){
+    zl=Ha+deckelLuft(R); const lb=R.leisteB||20, x0=d+1, x1=La-d-1, lw=1.3*u;
+    let g=`<path d="M${pt(0,0,Ha)} L${pt(0,0,zl)} M${pt(La,0,Ha)} L${pt(La,0,zl)} M${pt(La,Ba,Ha)} L${pt(La,Ba,zl)}" fill="none" stroke="#8a7a6a" stroke-width="${u}" stroke-dasharray="${4*u} ${3*u}"/>`;
+    if(x1>x0) [Ba-2*d-1,d+1].forEach(y=>{ g+=poly([[x0,y,zl-lb],[x1,y,zl-lb],[x1,y,zl],[x0,y,zl]],'#E9C99A',lw)+poly([[x1,y,zl-lb],[x1,y+d,zl-lb],[x1,y+d,zl],[x1,y,zl]],'#C99A5B',lw); });
+    g+=poly([[0,0,zl],[La,0,zl],[La,0,zl+d],[0,0,zl+d]],'#E9C99A',lw);
+    g+=poly([[La,0,zl],[La,Ba,zl],[La,Ba,zl+d],[La,0,zl+d]],'#C99A5B',lw);
+    g+=poly([[0,0,zl+d],[La,0,zl+d],[La,Ba,zl+d],[0,Ba,zl+d]],'#EFD3A8',lw);
+    if(wahl==='deckel') g+=`<polygon points="${pts([[0,0,zl],[La,0,zl],[La,Ba,zl],[La,Ba,zl+d],[0,Ba,zl+d],[0,0,zl+d]])}" fill="none" stroke="${OR}" stroke-width="${3*u}" stroke-linejoin="round"/>`;
+    s+=`<g data-t="deckel">${g}<title>Deckel</title></g>`;
+  }
+  // Masspfeile mit Zahl und Ziehgriff am Ende
+  const innen=S.mass==='innen';
+  const ex={l:innen?[d,La-d]:[0,La], b:innen?[d,Ba-d]:[0,Ba], h:innen?[d,Ha]:[0,Ha]};
+  const ab=24*u, tk=6*u, lwm=1.6*u, fs=15*u;
+  const linie=(a,b)=>`M${f(a[0])},${f(a[1])} L${f(b[0])},${f(b[1])}`;
+  const zahl=(k,x,y,rot)=>`<text class="masst" data-feld="${k}" x="${f(x)}" y="${f(y)}" font-size="${f(fs)}" text-anchor="middle" paint-order="stroke" stroke="#fff" stroke-width="${f(5*u)}" stroke-linejoin="round"${rot?` transform="rotate(${rot} ${f(x)} ${f(y)})"`:''}>${n(S[k])} cm<title>${NAMEN[k]} eintippen</title></text>`;
+  const zieh=(k,x,y,rot)=>{ const [a,b]=klemm(x,y,16), [lo,hi]=GRENZEN[k];
+    return `<g class="zieh" data-achse="${k}" tabindex="0" role="slider" aria-label="${NAMEN[k]}" aria-valuemin="${lo}" aria-valuemax="${hi}" aria-valuenow="${S[k]}" aria-valuetext="${n(S[k])} cm" transform="translate(${f(a)} ${f(b)}) scale(${us})"><circle r="24" fill="transparent"/><circle class="ring" r="14" fill="${MC}" stroke="#fff" stroke-width="2.5"/><path d="M-7 0h14M-3.5-3.5L-7 0l3.5 3.5M3.5-3.5L7 0l-3.5 3.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" transform="rotate(${rot})"/><title>${NAMEN[k]}: ziehen</title></g>`; };
+  let m='';
+  // Länge unten
+  const [l0,l1]=ex.l;
+  m+=`<path d="${linie([l0,4*u],[l0,ab+tk])} ${linie([l1,4*u],[l1,ab+tk])}" stroke="${MC}" stroke-width="${u}" opacity=".55"/>`;
+  m+=`<path d="${linie([l0,ab],[l1,ab])}" stroke="${MC}" stroke-width="${lwm}"/>`;
+  // Höhe links
+  const [h0,h1]=ex.h;
+  m+=`<path d="${linie([-4*u,-h0],[-ab-tk,-h0])} ${linie([-4*u,-h1],[-ab-tk,-h1])}" stroke="${MC}" stroke-width="${u}" opacity=".55"/>`;
+  m+=`<path d="${linie([-ab,-h0],[-ab,-h1])}" stroke="${MC}" stroke-width="${lwm}"/>`;
+  // Breite rechts unten, der Tiefe entlang
+  const [b0,b1]=ex.b, o=[ab*0.707,ab*0.707];
+  const B0=P(La,b0,0), B1=P(La,b1,0), Bp=p=>[p[0]+o[0],p[1]+o[1]];
+  m+=`<path d="${linie(B0,[B0[0]+o[0]*1.25,B0[1]+o[1]*1.25])} ${linie(B1,[B1[0]+o[0]*1.25,B1[1]+o[1]*1.25])}" stroke="${MC}" stroke-width="${u}" opacity=".55"/>`;
+  m+=`<path d="${linie(Bp(B0),Bp(B1))}" stroke="${MC}" stroke-width="${lwm}"/>`;
+  s+=`<g fill="none">${m}</g>`;
+  const bm=[(B0[0]+B1[0])/2+o[0]*1.75,(B0[1]+B1[1])/2+o[1]*1.75+fs*0.35];
+  // Bei kurzen Pfeilen rückt die Zahl vom Ziehgriff weg, damit er sie nicht verdeckt
+  s+=zahl('l',Math.min((l0+l1)/2,l1-48*u),ab+fs*1.25)+zahl('h',-ab-fs*0.5,Math.max(-(h0+h1)/2,-h1+42*u),-90)+zahl('b',bm[0],bm[1],-45);
+  // Griffe an den Teilen (wie im Stromkreis: runde Knöpfe direkt daneben)
+  const griff=(act,x,y,icon,titel,rot)=>{ const [a,b]=klemm(x,y,16);
+    return `<g class="griff" data-griff="${act}" tabindex="0" role="button" aria-label="${titel}" transform="translate(${f(a)} ${f(b)}) scale(${us})"><circle r="20" fill="transparent"/><circle r="13" fill="${rot?'#B3412A':'#fff'}" stroke="${rot?'#fff':'#1F1A17'}" stroke-width="2.5"/><path d="${icon}" fill="none" stroke="${rot?'#fff':'#1F1A17'}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><title>${titel}</title></g>`; };
+  let g='';
+  if(wahl==='wand'){
+    const cx=Math.min(A.x+A.w-92*u,Math.max(A.x+92*u,La/2)), cy=Math.min(A.y+A.h-20*u,Math.max(A.y+20*u,-Ha/2));
+    g+=griff('duenner',cx-74*u,cy,'M-6 0h12','Dünneres Holz');
+    g+=`<g data-feld="d" transform="translate(${f(cx-26*u)} ${f(cy)}) scale(${us})"><rect x="-26" y="-13" width="52" height="26" rx="13" fill="#fff" stroke="#1F1A17" stroke-width="2"/><text class="masst" y="5" font-size="14" text-anchor="middle" style="fill:#1F1A17">${n(d)} mm</text><title>Holzdicke eintippen</title></g>`;
+    g+=griff('dicker',cx+22*u,cy,'M-6 0h12M0-6v12','Dickeres Holz');
+    g+=griff('ecken',cx+74*u,cy,'M-6-3h11l-3-3M6 3h-11l3 3',S.aussen==='lang'?'Stirnseiten aussen':'Längsseiten aussen');
+  }
+  if(wahl==='boden'){
+    const [bx,by]=P(La/2,Ba/2,d), mitte=-(Ha+Ha+K*Ba)/2, sichtbar=by<-Ha;
+    g+=griff('boden',bx,sichtbar?Math.min(by,mitte):-bz-22*u,'M-3.5-7v14M-6.5 4l3 3 3-3M3.5 7v-14M.5-4l3-3 3 3',S.boden==='unter'?'Boden zwischen die Wände':'Boden unter die Wände');
+  }
+  if(S.deckel==='ja'&&wahl==='deckel'){ const [a,b]=P(La,0,zl+d); g+=griff('deckelweg',a+10*u,b-10*u,'M-5-5l10 10M5-5l-10 10','Deckel weg',true); }
+  if(S.deckel!=='ja'){ const [a,b]=P(La/2,Ba,Ha); g+=griff('deckel',a,b-26*u,'M-7-3h14M-7-3v-3h14v3M0 0v7M-3.5 3.5h7','Deckel dazu'); }
+  s+=g;
+  s+=zieh('l',l1,ab,0)+zieh('h',-ab,-h1,90)+zieh('b',...Bp(B1),-45);
+  return s;
 }
 // Bohrplan eines Teils: Rechteck mit allen Löchern, Masse vom linken und vom unteren Rand
 function bohrplan(R,t){
@@ -399,8 +534,26 @@ function zuschnittBild(Z){
 }
 
 // ---------- Texte ----------
-function teileListe(R,print){
-  return R.teile.map(t=>`<li><span>${esc(t.name)}<span class="leise">${mm(t.l)} × ${mm(t.b)} × ${mm(R.d)}</span></span><span class="n">${t.n}×</span></li>`).join('');
+function teileListe(R){
+  return R.teile.map(t=>{ const k=Math.min(34/t.l,20/t.b), w=Math.max(2,t.l*k), h=Math.max(2,t.b*k);
+    return `<li><svg class="mini" viewBox="0 0 36 22" aria-hidden="true"><rect x="${(18-w/2).toFixed(1)}" y="${(11-h/2).toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" rx="1"/></svg><span class="tn">${esc(t.name)}<span class="leise">${mm(t.l)} × ${mm(t.b)}</span></span><span class="n">${t.n}×</span></li>`; }).join('');
+}
+// Schrauben und Bohrer als Kacheln: Bild, Zahl, zwei Wörter. Die Erklärung steht im Tooltip.
+const FAKT_BILD={
+  schraube:'<path class="f" d="M4 9h6v12H4z"/><path class="f" d="M10 12.5h25l5 2.5-5 2.5H10z"/><path d="M16 12.5l2 5M22 12.5l2 5M28 12.5l2 5"/>',
+  loch:'<path class="f" d="M3 10h16v10H3zM25 10h16v10H25z"/><path d="M22 2v26M19 24.5l3 3 3-3"/>',
+  vor:'<path class="f" d="M13 4h18v24H13z"/><path d="M20 4v13h4V4"/><path d="M22 0v2"/>',
+  tiefe:'<path d="M3 13h27"/><path class="f" d="M30 10h11v6H30z"/><path d="M19 9v8" stroke-width="3"/><path d="M3 23h16M3 21v4M19 21v4"/>',
+  rand:'<path class="f" d="M14 3h16v24H14z"/><circle cx="22" cy="11" r="2.5"/><path d="M14 21h8M14 19v4M22 19v4"/>',
+  stift:'<path class="f" d="M4 10h5v10H4z"/><path d="M9 15h31"/>'};
+function fakten(R){
+  const sc=R.sc, k=(bild,zahl,klein,titel,warn)=>`<div class="fakt${warn?' warn':''}" title="${esc(titel)}"><svg viewBox="0 0 44 30" aria-hidden="true">${FAKT_BILD[bild]}</svg><b>${zahl}</b><small>${klein}</small></div>`;
+  if(!sc.ok) return k('stift','Zu dünn',`Leim + Stifte 1,2 × ${Math.ceil(3*R.d/5)*5} mm`,'Unter 6 mm hält keine Schraube in der Kante: leimen und nageln – oder dickeres Holz nehmen.',true);
+  return k('schraube',`${n(sc.dm)} × ${sc.len}`,`mm · ${R.anzahl}×`,`Holzschraube mit Senkkopf, ${R.anzahl} Stück für die ganze Kiste`)
+    +k('loch',`⌀ ${n(sc.loch)}`,'durchs Brett','Durchgangsloch: die Schraube soll hier durchrutschen')
+    +k('vor',`⌀ ${n(sc.vor)}`,'in die Kante','Vorbohren in die Kante, 1 mm dünner als die Schraube')
+    +k('tiefe',n(sc.tiefe),'mm tief','Vorbohrtiefe: Klebeband als Marke um den Bohrer – so tief, wie die Schraube hineingeht, plus 2 mm')
+    +k('rand',n(R.d/2),'mm vom Rand',`Lochmitte genau in der Mitte der Kante${R.ecken.length===1?' – pro Ecke nur eine Schraube, dazu leimen':''}`);
 }
 function antwort(R){
   const sc=R.sc, li=[];
@@ -463,32 +616,40 @@ function schritte(R){
 }
 
 // ---------- Alles neu zeichnen ----------
-const KARTEN=['bild','plaene','zuschnitt','antwort','rechnung','material'].map(id=>$(id).closest('.karte'));
+let wahl=null, drag=null, tap=null, ansicht=null, raf=0;
+const svg=$('kiste'), flaeche=$('flaeche');
+const KARTEN=['plaene','zuschnitt','fakten','rechnung'].map(id=>$(id).closest('.karte'));
 function kartenZeigen(ja){ KARTEN.forEach(k=>{ if(k) k.style.display=ja?'':'none'; }); }
+function bald(){ if(!raf) raf=requestAnimationFrame(()=>{ raf=0; zeichnen(); }); }
 function zeichnen(){
   const R=rechnen();
-  $('mass-hinweis').textContent=S.mass==='innen'?'Innenmasse: so gross ist der Platz in der Kiste. Die Seite rechnet die Holzdicke dazu.':'Aussenmasse: so gross ist die fertige Kiste von aussen. Innen bleibt etwas weniger Platz.';
+  // Während des Ziehens bleibt der Ausschnitt stehen, sonst läuft die Kiste dem Finger davon
+  const A=drag&&ansicht?ansicht:(ansicht=einpassen(R));
+  const a=document.activeElement, fokus=svg.contains(a)?(a.dataset.achse?`[data-achse="${a.dataset.achse}"]`:a.dataset.griff?`[data-griff="${a.dataset.griff}"]`:null):null;
+  svg.setAttribute('viewBox',`${A.x.toFixed(1)} ${A.y.toFixed(1)} ${A.w.toFixed(1)} ${A.h.toFixed(1)}`);
+  svg.innerHTML=liveBild(R,A);
+  if(fokus){ const el=svg.querySelector(fokus); if(el) el.focus({preventScroll:true}); }
+  $('flaeche-warn').textContent=R.kurz||''; $('flaeche-warn').hidden=!R.fehler;
   $('mat-hinweis').textContent=MATERIAL[S.mat].tipp;
-  $('bau-hinweis').textContent=(S.boden==='unter'?'Boden unter den Wänden: einfach zu bauen, der Boden ist so gross wie die Kiste und man schraubt von unten hinauf. ':'Boden zwischen den Wänden: der Boden ist von aussen nicht sichtbar, man schraubt durch die Wände in die Bodenkante. ')+(S.aussen==='lang'?'Längsseiten aussen: die langen Bretter decken die Stirnseiten ab.':'Stirnseiten aussen: die kurzen Bretter decken die Längsseiten ab.');
+  $('teile-dicke').textContent=`${n(R.d)} mm`;
   if(R.fehler){
     $('warnung').textContent=R.fehler; $('warnung').hidden=false;
-    ['teile','antwort','rechnung','material','schritte','bild','plaene','zuschnitt','druck'].forEach(id=>{ $(id).innerHTML=''; });
-    $('plaene-hinweis').textContent=''; $('zuschnitt-hinweis').textContent='';
+    ['teile','fakten','rechnung','material','schritte','plaene','zuschnitt','druck'].forEach(id=>{ $(id).innerHTML=''; });
+    $('zuschnitt-hinweis').textContent='';
     kartenZeigen(false); $('drucken').disabled=true;
     return;
   }
   $('warnung').hidden=true; kartenZeigen(true); $('drucken').disabled=false;
   $('teile').innerHTML=teileListe(R);
-  $('antwort').innerHTML=antwort(R);
+  $('fakten').innerHTML=fakten(R);
   $('rechnung').innerHTML=rechnung(R);
   $('material').innerHTML=material(R);
   $('schritte').innerHTML=schritte(R);
-  $('bild').innerHTML=kistenBild(R);
   const plaene=R.teile.filter(t=>t.id!=='leiste').map(t=>`<figure><figcaption>${esc(t.name)} <span class="leise">${t.n}× · ${mm(t.l)} × ${mm(t.b)}</span></figcaption>${bohrplan(R,t)}</figure>`).join('');
   $('plaene').innerHTML=plaene;
-  $('plaene-hinweis').textContent=`Jedes Kreuz ist ${R.sc.ok?'eine Schraube':'ein Drahtstift'}. Die Zahlen sind Millimeter vom linken und vom unteren Rand des Teils. ${R.sc.ok?`Reihe ${mm(R.d/2)} vom Rand: die Schraube trifft so genau die Mitte der ${mm(R.d)} dicken Kante.`:''}`;
   $('zuschnitt').innerHTML=zuschnittBild(R.zuschnitt);
-  $('zuschnitt-hinweis').textContent=`So könnten die Teile auf der Platte liegen (${KERF} mm Sägeschnitt eingerechnet). Beim Massivholz-Brett nimmst du eine Brettbreite, die zur Wandhöhe passt.`;
+  $('zuschnitt-hinweis').textContent=`${KERF} mm Sägeschnitt`;
+  if(drag) return;                                   // die Druckseite erst nach dem Ziehen bauen
   // Druck: Seite 1 Plan, Seite 2 Bohrpläne und Zuschnitt
   const titel=`Kiste ${cmT(R.La)} × ${cmT(R.Ba)} × ${cmT(R.Ha)} · ${MATERIAL[S.mat].name} ${n(R.d)} mm`;
   $('druck').innerHTML=`<div class="seite"><h1>${esc(titel)}</h1><div class="bild">${kistenBild(R)}</div>
@@ -504,7 +665,7 @@ function zeichnen(){
 
 // ---------- Bedienung ----------
 function dickenChips(){
-  $('dicken').innerHTML=MATERIAL[S.mat].dicken.map(x=>`<button type="button" class="chip" data-d="${x}" aria-pressed="${x===S.d}">${n(x)} mm</button>`).join('');
+  $('dicken').innerHTML=MATERIAL[S.mat].dicken.map(x=>`<button type="button" class="chip" data-d="${x}" aria-pressed="${x===S.d}" aria-label="${n(x)} mm">${n(x)}</button>`).join('')+'<span class="einheit">mm</span>';
   $('dicken').querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{ S.d=+c.dataset.d; felder(); speichern(); zeichnen(); }));
 }
 function felder(){
@@ -512,12 +673,69 @@ function felder(){
   document.querySelectorAll('[data-g]').forEach(g=>{ const k=g.dataset.g; g.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.v===S[k]))); });
   dickenChips();
 }
+function setzeMass(k,v){
+  const [lo,hi]=GRENZEN[k]; v=Math.min(hi,Math.max(lo,Math.round(v*2)/2));
+  if(v===S[k]) return false;
+  S[k]=v; $(k).value=v; speichern(); return true;
+}
+// Knöpfe an den Teilen
+function aktion(act){
+  const ds=MATERIAL[S.mat].dicken;
+  if(act==='duenner'||act==='dicker'){
+    const i=act==='dicker'?ds.findIndex(x=>x>S.d):ds.length-1-[...ds].reverse().findIndex(x=>x<S.d);
+    if(i>=0&&i<ds.length) S.d=ds[i];
+  }
+  if(act==='ecken') S.aussen=S.aussen==='lang'?'kurz':'lang';
+  if(act==='boden') S.boden=S.boden==='unter'?'zwischen':'unter';
+  if(act==='deckel'){ S.deckel='ja'; wahl='deckel'; }
+  if(act==='deckelweg'){ S.deckel='nein'; wahl=null; }
+  felder(); speichern(); zeichnen();
+}
+function punkt(e){ const m=svg.getScreenCTM(); if(!m) return {x:0,y:0}; const p=new DOMPoint(e.clientX,e.clientY).matrixTransform(m.inverse()); return {x:p.x,y:p.y}; }
+svg.addEventListener('pointerdown',e=>{
+  if(e.button>0) return;
+  const g=e.target.closest('.griff');
+  if(g){ e.preventDefault(); aktion(g.dataset.griff); return; }
+  const z=e.target.closest('.zieh');
+  if(z){ e.preventDefault(); svg.setPointerCapture(e.pointerId); drag={k:z.dataset.achse,p0:punkt(e),v0:S[z.dataset.achse],id:e.pointerId}; flaeche.classList.add('zieht'); return; }
+  const t=e.target.closest('[data-t]'), fd=e.target.closest('[data-feld]');
+  tap={x:e.clientX,y:e.clientY,id:e.pointerId,t:t?t.dataset.t:null,feld:fd?fd.dataset.feld:null};
+});
+svg.addEventListener('pointermove',e=>{
+  if(!drag||e.pointerId!==drag.id) return;
+  const p=punkt(e), dx=p.x-drag.p0.x, dy=p.y-drag.p0.y;
+  const dmm=drag.k==='l'?dx:drag.k==='h'?-dy:(dx-dy)/(2*K);   // Breite: der Schräge entlang, 1 mm Tiefe = K mm schräg
+  if(setzeMass(drag.k,drag.v0+dmm/10)) bald();
+});
+function los(e,abbruch){
+  if(drag&&e.pointerId===drag.id){ drag=null; flaeche.classList.remove('zieht'); zeichnen(); return; }
+  if(!tap||e.pointerId!==tap.id) return;
+  const t=tap; tap=null;
+  if(abbruch||Math.hypot(e.clientX-t.x,e.clientY-t.y)>8) return;
+  if(t.feld){ $('zahlen').open=true; $(t.feld).focus(); $(t.feld).select(); return; }
+  wahl=t.t&&wahl!==t.t?t.t:null; zeichnen();
+}
+svg.addEventListener('pointerup',e=>los(e,false));
+svg.addEventListener('pointercancel',e=>los(e,true));
+svg.addEventListener('keydown',e=>{
+  const g=e.target.closest('.griff'), z=e.target.closest('.zieh');
+  if(g&&(e.key==='Enter'||e.key===' ')){ e.preventDefault(); aktion(g.dataset.griff); return; }
+  if(!z) return;
+  const st={ArrowRight:1,ArrowUp:1,ArrowLeft:-1,ArrowDown:-1,PageUp:10,PageDown:-10}[e.key]; if(!st) return;
+  e.preventDefault(); const k=z.dataset.achse;
+  if(setzeMass(k,S[k]+st*0.5*(e.shiftKey?10:1))) zeichnen();
+});
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&wahl){ wahl=null; zeichnen(); } });
+addEventListener('resize',()=>{ if(!drag) bald(); });
 document.querySelectorAll('[data-g]').forEach(g=>{ const k=g.dataset.g; g.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{ S[k]=c.dataset.v; if(k==='mat'&&!MATERIAL[S.mat].dicken.includes(S.d)) S.d=MATERIAL[S.mat].dicken.includes(8)?8:MATERIAL[S.mat].dicken[1]; felder(); speichern(); zeichnen(); })); });
+document.querySelectorAll('[data-g="mat"] .chip').forEach(c=>{ c.title=`${MATERIAL[c.dataset.v].name}: ${MATERIAL[c.dataset.v].tipp}`; });
 ['l','b','h','d'].forEach(k=>{ const inp=$(k), [lo,hi]=GRENZEN[k];
   const setzen=v=>{ if(isNaN(v)) v=S[k]; S[k]=Math.min(hi,Math.max(lo,Math.round(v*10)/10)); inp.value=S[k]; if(k==='d') dickenChips(); speichern(); zeichnen(); };
   inp.addEventListener('change',()=>setzen(parseFloat(String(inp.value).replace(',','.'))));
   inp.addEventListener('input',()=>{ const v=parseFloat(String(inp.value).replace(',','.')); if(!isNaN(v)&&v>=lo&&v<=hi){ S[k]=v; if(k==='d') dickenChips(); speichern(); zeichnen(); } });
 });
+// «Aufs Handy holen»: die Kiste mit allen Einstellungen im Link
+window.handyLink=()=>{ const q=new URLSearchParams(); ['l','b','h','d','mass','mat','boden','aussen','deckel'].forEach(k=>q.set(k,S[k])); return location.origin+location.pathname+'?'+q; };
 $('drucken').addEventListener('click',()=>window.print());
 felder(); zeichnen();
 })();
