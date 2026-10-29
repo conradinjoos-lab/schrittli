@@ -29,7 +29,6 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .zone.klein{min-height:0;flex-direction:row;flex-wrap:wrap;padding:10px 14px;gap:4px 10px;font-size:14px}
 .zone.klein svg{width:24px;height:24px;flex:none}
 .zone.klein b{font-size:16px;white-space:nowrap}
-.zone.klein .unter{flex:1 1 100%;font-size:13px}
 .finger{display:none}
 @media (pointer:coarse){.maus{display:none}.finger{display:inline}}
 .knopf-text{font:inherit;font-size:14px;background:none;border:0;color:var(--acc);text-decoration:underline;cursor:pointer;padding:4px}
@@ -37,8 +36,6 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .plan svg{display:block;width:100%;max-height:80vh;height:auto;background:var(--papier);border-radius:8px;touch-action:auto}
 .plan.malen svg{cursor:crosshair;touch-action:none}
 .pruefung{margin-top:12px;padding:12px 14px;border-radius:14px;font-size:15px;background:var(--acc-soft)}
-.pruefung p{margin:0}
-.pruefung ul{margin:6px 0 0;padding-left:20px}
 .legende{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted);margin:10px 0 0}
 .legende span{display:inline-flex;align-items:center;gap:6px}
 .legende i{display:inline-block;width:18px;height:3px;border-radius:2px}
@@ -46,7 +43,8 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .feld{margin-bottom:14px}
 .lbl{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-bottom:6px}
 .lbl output{color:var(--ink);font-weight:800}
-.spanne{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.spanne{display:flex;justify-content:space-between;color:var(--muted)}
+.spanne svg{width:24px;height:16px;fill:currentColor}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font:inherit;font-size:14px;padding:6px 12px;border-radius:999px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer}
 .chip:hover{border-color:var(--acc)}
@@ -88,7 +86,7 @@ button:focus-visible,.zone:focus-visible{outline:3px solid var(--acc);outline-of
 <header class="kopf">
   <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
   <h1>Perlentier aus eigenem Bild</h1>
-  <p>Bild hineinziehen, Plan für Rocailles mit Drahtweg bekommen. Das Bild wird nur in diesem Browser verarbeitet und nirgends hochgeladen. <a href="../perlen/">Fertige Perlentiere →</a> · <a href="../">←&nbsp;Vorlagen-Generator</a></p>
+  <p><a href="../perlen/">Perlentiere →</a> · <a href="../">←&nbsp;Vorlagen</a></p>
 </header>
 <script src="../zurueck.js"></script>
 <main>
@@ -96,24 +94,22 @@ button:focus-visible,.zone:focus-visible{outline:3px solid var(--acc);outline-of
     <div class="zone" id="zone" role="button" tabindex="0" aria-label="Bild wählen oder hineinziehen">
       <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="9" width="36" height="30" rx="4"/><circle cx="17" cy="19" r="3.5"/><path d="M6 33l11-10 9 8 6-5 10 9"/></svg>
       <b><span class="maus">Bild hierher ziehen</span><span class="finger">Bild wählen</span></b>
-      <span class="unter"><span class="maus">oder klicken zum Auswählen · auch Einfügen mit Strg+V geht</span><span class="finger">Foto oder Bild vom Gerät, am besten mit hellem, einfarbigem Hintergrund</span></span>
     </div>
-    <p class="hinweis" id="beispiel-zeile">Kein Bild zur Hand? <button type="button" class="knopf-text" id="beispiel">Beispiel ausprobieren</button></p>
+    <p class="hinweis" id="beispiel-zeile"><button type="button" class="knopf-text" id="beispiel">🐞 Beispiel</button></p>
     <input type="file" id="datei" accept="image/*" hidden>
     <div class="plan" id="plan" aria-live="polite"></div>
-    <p class="legende" id="legende" hidden><span><i style="background:#2A6FDB"></i>Draht</span><span id="leg-beine">Grün rechts: abstehende Teile, z. B. «Ohren 4+1» = 4 Perlen und 1 Endperle</span></p>
+    <p class="legende" id="legende" hidden><span><i style="background:#2A6FDB"></i>Draht</span></p>
     <div class="pruefung" id="pruefung" hidden></div>
-    <p class="hinweis" id="mal-hinweis" hidden>Zum Korrigieren rechts eine Farbe wählen, dann auf Perlen tippen oder darüber ziehen. Gleich neben das Ende einer Reihe tippen setzt dort eine Perle dazu. «Perle weg» nimmt eine Perle heraus (bei Ohren und Beinen das ganze Paar). Nochmals auf die Farbe tippen beendet das Malen.</p>
   </section>
   <div class="seite-rechts">
     <section class="karte" aria-label="Einstellungen">
       <div class="feld">
         <label class="lbl" for="reihen"><span>Grösse</span><output id="reihen-zahl"></output></label>
         <input type="range" id="reihen" min="8" max="24" step="1" value="14">
-        <div class="spanne" aria-hidden="true"><span>kleiner, einfacher</span><span>grösser, mehr Einzelheiten</span></div>
+        <div class="spanne" aria-hidden="true"><svg viewBox="0 0 24 16"><rect x="8" y="5" width="4" height="6" rx="1.5"/><rect x="12" y="5" width="4" height="6" rx="1.5"/></svg><svg viewBox="0 0 24 16"><rect x="2" y="1" width="4" height="6" rx="1.5"/><rect x="6" y="1" width="4" height="6" rx="1.5"/><rect x="10" y="1" width="4" height="6" rx="1.5"/><rect x="14" y="1" width="4" height="6" rx="1.5"/><rect x="18" y="1" width="4" height="6" rx="1.5"/><rect x="4" y="8" width="4" height="6" rx="1.5"/><rect x="8" y="8" width="4" height="6" rx="1.5"/><rect x="12" y="8" width="4" height="6" rx="1.5"/><rect x="16" y="8" width="4" height="6" rx="1.5"/></svg></div>
       </div>
       <div class="feld">
-        <span class="lbl" id="lbl-farben">Höchstens so viele Farben</span>
+        <span class="lbl" id="lbl-farben">Farben</span>
         <div class="chips" role="group" aria-labelledby="lbl-farben" id="farbzahl"></div>
       </div>
       <div class="feld">
@@ -121,18 +117,17 @@ button:focus-visible,.zone:focus-visible{outline:3px solid var(--acc);outline-of
         <div class="chips" role="group" aria-labelledby="lbl-hg" id="hg"></div>
       </div>
       <div class="feld">
-        <label class="lbl" for="titel"><span>Titel auf dem Blatt</span></label>
+        <label class="lbl" for="titel"><span>Titel</span></label>
         <input type="text" id="titel" maxlength="40" value="Mein Tier">
       </div>
-      <button type="button" class="drucken" id="drucken" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Plan drucken</span></button>
+      <button type="button" class="drucken" id="drucken" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
       <p class="info" id="info"></p>
-      <p class="hinweis">Tipp: Figuren von vorne mit klarem Umriss werden am schönsten. Beim Fädeln liegt jede Reihe mittig unter der vorherigen, darum wird die Figur gerade gerichtet. Ohren, Arme und Beine, die abstehen, kommen als Paare an eine Reihe. Was nur auf einer Seite absteht (z. B. ein Schwanz), fällt weg.</p>
     </section>
     <section class="karte" aria-label="Farben" id="farben-karte" hidden>
-      <h2>Farben · zum Korrigieren antippen</h2>
+      <h2>Malen</h2>
       <div class="farben" id="farben"></div>
       <details>
-        <summary>Andere Farbe zum Malen</summary>
+        <summary>Mehr Farben</summary>
         <div class="alle" id="alle"></div>
       </details>
     </section>
@@ -209,7 +204,9 @@ function hintergrund(w,h,Lb,hg){
     const teil=[s];gesehen[s]=1;let rand_=false;
     for(let k=0;k<teil.length;k++){const i=teil[k],x=i%w;
       for(const j of[x>0?i-1:-1,x<w-1?i+1:-1,i-w,i+w]){if(j<0||j>=n)continue;if(hg[j])rand_=true;else if(!gesehen[j]&&nah(j)){gesehen[j]=1;teil.push(j)}}}
-    if(!rand_&&teil.length>=minL)for(const i of teil)hg[i]=1}
+    // nur was im Mittel genau wie der Hintergrund aussieht: weisse Handschuhe oder Augen (leicht grau) bleiben
+    const mi=[0,1,2].map(k=>teil.reduce((s,i)=>s+Lb[3*i+k],0)/teil.length);
+    if(!rand_&&teil.length>=minL&&(mi[0]-ref[0])**2+(mi[1]-ref[1])**2+(mi[2]-ref[2])**2<5)for(const i of teil)hg[i]=1}
 }
 
 // Öffnen einer Maske: bleibt nur, wo ein ganzes Quadrat (2r+1)² hineinpasst. Dünnes fällt weg, Flächen bleiben fast unverändert.
@@ -234,11 +231,11 @@ function oeffnen(w,h,pal,r){
   for(let i=0;i<n;i++)if(aus[i]===-2)aus[i]=pal[i];
   return aus;
 }
-// Körper = Figur ohne abstehende Teile: öffnen mit einem Quadrat von etwa 30 % der Figurgrösse, dann das grösste Stück.
-// Ohren, Arme, Beine und Schwanz fallen so weg und werden später zu Paaren.
+// Körper = Figur ohne abstehende Teile: öffnen mit einem Quadrat von etwa 40 % der Figurgrösse, dann das grösste Stück.
+// Ohren, Arme, Hände, Beine und Schwanz fallen so weg und werden später zu Paaren.
 function koerper(w,h,pal){
   const n=w*h,fig=pal.map(v=>v>=0?1:0);let fl=0;for(const v of fig)fl+=v;
-  for(let k=.3;k>.05;k/=2){
+  for(let k=.4;k>.05;k*=.75){
     const o=oeffneMaske(w,h,fig,Math.max(1,Math.round(k*Math.sqrt(fl)/2))),lbl=new Int32Array(n),gr=[0];
     for(let s=0;s<n;s++){if(!o[s]||lbl[s])continue;const q=[s];lbl[s]=gr.length;
       for(let k=0;k<q.length;k++){const i=q[k],x=i%w;for(const j of[x>0?i-1:-1,x<w-1?i+1:-1,i-w,i+w])if(j>=0&&j<n&&o[j]&&!lbl[j]){lbl[j]=gr.length;q.push(j)}}
@@ -299,9 +296,13 @@ function stamm(segK,segF,xc,H,lu){
   for(let y=0;y<H;y++){const z=zentral(segK[y],lu);if(z){const w=segK[y][z[1]][1]-segK[y][z[0]][0]+1;if(w>bw){bw=w;best=y}}}
   if(best<0)return null;
   const T=new Array(H).fill(null);T[best]=breit(segK[best],zentral(segK[best],lu),null,lu);
+  // Nach unten ohne Lücken überbrücken: dort beginnen die Beine, die werden zu Paaren
   for(const d of[-1,1])for(let y=best+d,v=T[best],fig=false;y>=0&&y<H;y+=d){
-    let s=segK[y],z=fig?null:zentral(s,lu);if(!z){s=segF[y];z=zentral(s,Math.max(lu,Math.round((v[1]-v[0]+1)*.3)));fig=true}
-    if(!z)break;const t=breit(s,z,v[1]-v[0]+1,fig?Math.max(lu,Math.round((v[1]-v[0]+1)*.3)):lu);if(t[1]<v[0]||t[0]>v[1])break;T[y]=t;v=t}
+    const lf=d<0?Math.max(lu,Math.round((v[1]-v[0]+1)*.3)):0;
+    let s=segK[y],z=fig?null:zentral(s,lu);if(!z){s=segF[y];z=zentral(s,lf);fig=true}
+    if(!z)break;const t=breit(s,z,v[1]-v[0]+1,fig?lf:lu);if(t[1]<v[0]||t[0]>v[1])break;
+    if(fig&&d>0&&(t[1]-t[0]>v[1]-v[0]||Math.abs((t[0]+t[1]+1)/2-xc)>1))break;   // unten nur schmaler und mittig: sonst ist es ein Bein
+    T[y]=t;v=t}
   return T;
 }
 function formen(G){
@@ -314,10 +315,19 @@ function formen(G){
     for(let y=0;y<H;y++)for(let x=0;x<W;x++){const i=y*W+x,X=Math.floor(2*a-x-.5);if(X<0||X>=W||!voll(i))continue;const j=y*W+X;if(voll(j))s+=farbe[i]===farbe[j]?2:1}
     if(s>bs){bs=s;xc=a}}
   const T=stamm(segs,segF,xc,H,2);if(!T)return null;
-  // Rand der Figur: pro Seite höchstens eine Zelle über den Körper hinaus, dann seitlich weit Überstehendes kappen (die Reihe wird beim Fädeln ohnehin mittig)
-  T.forEach((t,y)=>{if(!t)return;let [l,r]=t;if(l>0&&voll(y*W+l-1))l--;if(r<W-1&&voll(y*W+r+1))r++;
+  // Rand der Figur: pro Seite höchstens eine Zelle über den Körper hinaus (nur ein schmaler Rand, kein Arm), dann seitlich weit Überstehendes kappen (die Reihe wird beim Fädeln ohnehin mittig)
+  T.forEach((t,y)=>{if(!t)return;let [l,r]=t;
+    if(l>0&&voll(y*W+l-1)&&!(l>1&&voll(y*W+l-2)))l--;if(r<W-1&&voll(y*W+r+1)&&!(r<W-2&&voll(y*W+r+2)))r++;
     const dl=xc-l,dr=r+1-xc;if(dl-dr>1)l=Math.ceil(xc-dr-1);if(dr-dl>1)r=Math.floor(xc+dl+1)-1;T[y]=[l,r]});
-  const t0=T.findIndex(Boolean),t1=H-1-[...T].reverse().findIndex(Boolean);
+  const T0=T.slice();
+  let t0=T.findIndex(Boolean),t1=H-1-[...T].reverse().findIndex(Boolean);
+  // Sanfte Form: einzelne schmale Reihen ganz oben und unten weg, dann von Reihe zu Reihe höchstens eine Perle mehr pro Seite.
+  // Zu breite Reihen werden um die Achse gekürzt.
+  const bw=y=>T[y][1]-T[y][0]+1;
+  while(t1>t0&&bw(t0)*3<bw(t0+1))T[t0++]=null;
+  while(t1>t0&&bw(t1)*3<bw(t1-1))T[t1--]=null;
+  const ziel=[];for(let y=t0;y<=t1;y++){let m=bw(y);for(let j=t0;j<=t1;j++)m=Math.min(m,bw(j)+2*Math.abs(y-j));ziel[y]=m}
+  for(let y=t0;y<=t1;y++){let [l,r]=T[y];while(r-l+1>ziel[y]){if(xc-l>r+1-xc)l++;else r--}T[y]=[l,r]}
   // Reihen: Lücken mit der Farbe darüber füllen, sonst mit der nächsten Farbe in der Reihe
   const reihen=[];let vor=null;
   for(let y=t0;y<=t1;y++){const [l,r]=T[y],c=[];
@@ -332,41 +342,62 @@ function formen(G){
   const bei=(k,u)=>{const z=reihen[k];if(!z)return -1;const j=Math.round(u+(z.c.length-1)/2);return j>=0&&j<z.c.length?z.c[j]:-1};
   reihen.forEach((z,k)=>{const c=z.c,n=c.length;if(n<4)return;
     for(const [j,i,o] of[[0,1,n-1],[n-1,n-2,0]]){const u=j-(n-1)/2;if(c[j]!==c[i]&&c[j]!==c[o]&&bei(k-1,u)!==c[j]&&bei(k+1,u)!==c[j])c[j]=c[i]}});
-  // Teile ausserhalb des Stamms. Paare: nur was auf der anderen Seite gespiegelt ein Gegenstück hat.
-  const drin=(x,y)=>T[y]&&x>=T[y][0]&&x<=T[y][1],rest=new Uint8Array(W*H);
+  // Teile ausserhalb des Stamms (Arme, Beine, Ohren): pro Seite zusammenhängende Stücke.
+  // Links und rechts werden zu Paaren, auch wenn die Figur sie verschieden hält (ein Arm oben, einer seitlich).
+  const drin=(x,y)=>T0[y]&&x>=T0[y][0]&&x<=T0[y][1],rest=new Uint8Array(W*H);
   for(let i=0;i<W*H;i++){const x=i%W;if(voll(i)&&!drin(x,(i-x)/W))rest[i]=1}
-  const seite=i=>{const x=i%W+.5;return x<xc-.01?-1:x>xc+.01?1:0},spx=x=>Math.floor(2*xc-x-.5);
-  const gespiegelt=i=>{const x=i%W,y=(i-x)/W,X=spx(x);for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const a=X+dx,b=y+dy;if(a>=0&&a<W&&b>=0&&b<H&&rest[b*W+a])return true}return false};
-  const sym=rest.map((v,i)=>v&&seite(i)&&gespiegelt(i)?1:0);
+  const seite=i=>i%W+.5<xc?-1:1;
   const komp=(m,gleich)=>{const k=new Int32Array(W*H),L=[];
     for(let s=0;s<W*H;s++){if(!m[s]||k[s])continue;const K=[s];k[s]=L.length+1;
       for(let j=0;j<K.length;j++){const i=K[j],x=i%W,y=(i-x)/W;
         for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const X=x+dx,Y=y+dy,o=Y*W+X;if(X>=0&&X<W&&Y>=0&&Y<H&&m[o]&&!k[o]&&gleich(i,o)){k[o]=L.length+1;K.push(o)}}}
       L.push(K)}
     return [k,L]};
-  // was ohne Gegenstück übrig bleibt (z. B. ein Schwanz), wird gezählt
-  let weg=komp(rest,()=>true)[1].filter(K=>K.length>=3&&K.filter(i=>sym[i]).length<K.length*.3).length;
-  const [kn,teile]=komp(sym,(i,o)=>seite(i)===seite(o));
-  const mode=K=>{const z=new Map();for(const i of K)z.set(farbe[i],(z.get(farbe[i])||0)+1);return [...z].sort((a,b)=>b[1]-a[1])[0][0]};
-  const mass=K=>{const sx=seite(K[0]);let bd=1e9,ya=-1,ex=0;
-    for(let y=t0;y<=t1;y++){const e=sx>0?T[y][1]+1:T[y][0];for(const i of K){const x=i%W,d=Math.hypot((x+.5-e)*ML,((i-x)/W-y)*MD);if(d<bd){bd=d;ya=y;ex=e}}}
-    if(bd>10)return null;   // schwebt weit weg vom Körper
+  const teile=komp(rest,(i,o)=>seite(i)===seite(o))[1].filter(K=>K.length>=3);
+  // Ansatz: wo das Stück den Stamm berührt. Gleiche Farbe auf beiden Seiten (roter Ärmel am roten Hemd) entscheidet.
+  // z: Lage jeder Zelle entlang des Teils (0 = Ansatz, 1 = Spitze) mit ihrer Farbe, daraus die Farben der Perlen
+  const mass=K=>{const sx=seite(K[0]);let gl=[0,0],al=[0,0];const kon=[];
+    for(const i of K){const x=i%W,y=(i-x)/W;let an=0;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const X=x+dx,Y=y+dy;
+      if(Y<t0||Y>t1||X<0||X>=W||!drin(X,Y))continue;an=1;al[0]++;al[1]+=Y;if(farbe[i]===farbe[Y*W+X]){gl[0]++;gl[1]+=Y}}
+      if(an)kon.push(farbe[i])}
+    let ya,ex;
+    if(al[0]){const s=gl[0]?gl:al;ya=Math.round(s[1]/s[0])}
+    else{let bd=1e9;for(let y=t0;y<=t1;y++){const e=sx>0?T[y][1]+1:T[y][0];for(const i of K){const x=i%W,d=Math.hypot((x+.5-e)*ML,((i-x)/W-y)*MD);if(d<bd){bd=d;ya=y}}}
+      if(bd>10)return null}   // schwebt weit weg vom Körper
+    ex=sx>0?T[ya][1]+1:T[ya][0];
     const dist=i=>{const x=i%W;return Math.hypot((x+.5-ex)*ML,((i-x)/W-ya)*MD)};
     let tip=K[0];for(const i of K)if(dist(i)>dist(tip))tip=i;
-    const tl=dist(tip),tx=tip%W,vx=(tx+.5-ex)*sx*ML,vy=(ya-(tip-tx)/W)*MD;
-    const fern=K.filter(i=>dist(i)>=tl*.7),nah=K.filter(i=>dist(i)<tl*.7);
-    return {ya,tl,a:Math.max(-80,Math.min(80,Math.atan2(vy,Math.max(vx,.5))*180/Math.PI)),c:mode(nah.length?nah:K),fc:mode(fern),f:fern.length>=4&&fern.length>=K.length*.45?3:1}};
-  const beine=[],belegt=new Set(),R=reihen.length;
-  for(const K of teile){if(K.length<2||seite(K[0])>0)continue;
-    // Gegenstück rechts: das Teil mit den meisten gespiegelten Zellen
-    const z=new Map();for(const i of K){const x=i%W,y=(i-x)/W,X=spx(x);for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const a=X+dx,b=y+dy;if(a>=0&&a<W&&b>=0&&b<H&&kn[b*W+a])z.set(kn[b*W+a],(z.get(kn[b*W+a])||0)+1)}}
-    const g=[...z].filter(e=>seite(teile[e[0]-1][0])>0).sort((a,b)=>b[1]-a[1])[0];if(!g)continue;
-    const p=mass(K),q=mass(teile[g[0]-1]);if(!p||!q||(p.tl+q.tl)/2<4)continue;
-    const r0=Math.round((p.ya+q.ya)/2)-t0+1,r=[r0,r0-1,r0+1,r0-2,r0+2].find(r=>r>=1&&r<=R&&!belegt.has(r));
+    const tl=dist(tip),tx=tip%W,vx=(tx+.5-ex)*sx*ML,vy=(ya-(tip-tx)/W)*MD,fern=K.filter(i=>dist(i)>=tl*.7).length;
+    return {ya,tl,n:K.length,a:Math.max(-80,Math.min(80,Math.atan2(vy,Math.max(vx,.5))*180/Math.PI)),f:fern>=4&&fern>=K.length*.45?3:1,z:K.map(i=>[dist(i)/tl,farbe[i]]),kon}};
+  const li=[],re=[];
+  for(const K of teile){const p=mass(K);if(p&&p.tl>=4)(seite(K[0])<0?li:re).push(p)}
+  // Paare: links und rechts mit ähnlichem Ansatz, grosse Teile zuerst
+  const R=reihen.length,kand=[];
+  for(const p of li)for(const q of re)if(Math.abs(p.ya-q.ya)<=Math.max(3,R*.4))kand.push([p,q]);
+  kand.sort((a,b)=>Math.abs(a[0].ya-a[1].ya)-Math.abs(b[0].ya-b[1].ya)||Math.min(b[0].n,b[1].n)-Math.min(a[0].n,a[1].n));
+  const paare=[],weg_=new Set([...li,...re]);
+  for(const [p,q] of kand)if(weg_.has(p)&&weg_.has(q)){weg_.delete(p);weg_.delete(q);paare.push([p,q])}
+  let weg=weg_.size;   // ohne Gegenstück (z. B. ein Schwanz)
+  const beine=[],belegt=new Set();
+  for(const [p,q] of paare){
+    const a=Math.round((p.a+q.a)/10)*5,r0=Math.round((p.ya+q.ya)/2)-t0+1,r=[r0,r0-1,r0+1,r0-2,r0+2].find(r=>r>=1&&r<=R&&!belegt.has(r));
     if(!r){weg+=2;continue}
     belegt.add(r);
-    const a=Math.round((p.a+q.a)/10)*5,w=r<=Math.max(2,R*.25)&&a>=20?'Ohren':r>=R*.6&&a<=0?'Beine':'Arme';
-    beine.push({r,n:Math.max(0,Math.min(8,Math.round(((p.tl+q.tl)/2-1)/ML))),f:p.f,a,c:KEY[p.c],fc:KEY[p.fc],w});
+    // Perlenfarben: zwei Abschnitte wie beim Basteln, Ärmel dann Handschuh, Hose dann Schuh. Beide Seiten zählen gleich viel.
+    const f=p.f===3||q.f===3?3:1,s=f===3?.7:1,tl=(p.tl+q.tl)/2,n=Math.max(1,Math.min(8,Math.round((s*tl-1)/ML)));
+    const anteile=(a_,b_)=>{const m=new Map();for(const x of[p,q]){const z=x.z.filter(([t])=>t>=a_&&t<b_);for(const [,c] of z)m.set(c,(m.get(c)||0)+1/z.length)}return m};
+    const top=m=>[...m].sort((x,y)=>y[1]-x[1])[0]?.[0]??-1;
+    // Ansatz: Farbe nahe am Körper, dort wo das Teil anliegt, und die Farbe der Reihen daneben
+    const am=anteile(0,.5);for(const x of[p,q])for(const c of x.kon)am.set(c,(am.get(c)||0)+1/x.kon.length);
+    const nb=new Map();for(let k=r-2;k<=r;k++)for(const c of reihen[k]?.c||[])nb.set(c,(nb.get(c)||0)+1);am.set(top(nb),(am.get(top(nb))||0)+.5);
+    // Ende: Farbe an der Spitze. Ansatz: die stärkste andere Farbe, wenn es eine gibt (ein Arm kann ganz hinter dem Handschuh stecken)
+    const ende=top(anteile(.7,2)),and=[...am].filter(([c,v])=>c!==ende&&v>=.6).sort((x,y)=>y[1]-x[1])[0],basis=and?and[0]:ende;
+    let m=n,gut=-1;
+    if(ende!==basis)for(let j=n;j>=1;j--){let g=0;for(let k=0;k<n;k++){const e=anteile(s*k/n,s*(k+1)/n);g+=(e.get(k<j?basis:ende)||0)}if(g>gut+1e-9){gut=g;m=j}}
+    if(f===3)m=Math.max(m,n-1);
+    const c=[...Array(n)].map((_,k)=>k<m?basis:ende);
+    const w=r<=Math.max(2,R*.25)&&a>=20?'Ohren':r>=R*.6&&a<=0?'Beine':'Arme';
+    beine.push({r,n,f,a,c:c.map(k=>KEY[k]).join(''),fc:KEY[ende],w});
   }
   beine.sort((a,b)=>a.r-b.r);
   return {t0,t1,t:{rows:reihen.map(z=>z.c.map(k=>KEY[k]).join('')),beine},weg};
@@ -376,7 +407,7 @@ function berechnen(){
   if(!S.bild)return;
   const V=S.vor||(S.vor=vorbereiten());
   S.t=null;S.ans=null;
-  if(V.x1<0){$('info').textContent='Auf diesem Bild ist nach dem Weglassen des Hintergrunds nichts mehr übrig.';zeichnen();return}
+  if(V.x1<0){$('info').textContent='⚠ Nichts übrig';zeichnen();return}
   // Die Reihenzahl gilt für den Körper: zuerst grob rechnen, dann so nachstellen, dass der Stamm die gewünschten Reihen hat
   let ch=(V.y1-V.y0+1)/S.reihen,gy=V.y0,best=null;
   for(let pass=0;pass<4;pass++){
@@ -388,7 +419,7 @@ function berechnen(){
     if(n===S.reihen)break;
     const oben=gy+E.t0*ch,unten=gy+(E.t1+1)*ch;ch=(unten-oben)/S.reihen;gy=oben-Math.ceil((oben-V.y0)/ch-1e-6)*ch;
   }
-  if(!best){$('info').textContent='Aus diesem Bild lässt sich keine Figur machen. Bitte ein Bild mit klarem Umriss versuchen.';zeichnen();return}
+  if(!best){$('info').textContent='⚠ Keine Figur';zeichnen();return}
   S.t=best.t;S.notiz={weg:best.weg};
   zeichnen();
 }
@@ -396,7 +427,9 @@ function berechnen(){
 // ---------- Darstellung wie bei den fertigen Perlentieren (vorlagen/perlen) ----------
 // Einheit = Perlendurchmesser (Reihenabstand). q = Perlenlänge auf dem Draht. r = Drehung der Perle (Grad, Richtung des Drahts).
 // luft: Abstand nach einer Reihe mit Beinen. Das Bein liegt dann zwischen den Reihen, so sieht man den Draht.
-// ref: woher die Perle kommt (zum Malen): ['r',Reihe,Perle] oder ['b',Bein,'c'|'fc']
+// ref: woher die Perle kommt (zum Malen): ['r',Reihe,Perle] oder ['b',Bein,'c',Perle|'fc']
+// b.c: eine Farbe pro Beinperle vom Körper weg; ist der Text kürzer, gilt die letzte Farbe
+const bc=(b,k)=>b.c[Math.min(k,b.c.length-1)];
 function geometrie(t,q=Q,luft=0){
   const P=[],W=[],L=[],gr=180/Math.PI,n=t.rows.length,mitBein=new Set(t.beine.map(b=>b.r-1)),ry=[];
   for(let i=0,y=0;i<=n;i++){ry.push(y);y+=1+(mitBein.has(i)?luft:0)}
@@ -410,7 +443,7 @@ function geometrie(t,q=Q,luft=0){
       const S=[sx*e,ry[i]],E=[sx*bx,ly],o=.15,at=(p_,a_,b_)=>[p_[0]+u[0]*a_+v[0]*b_,p_[1]+u[1]*a_+v[1]*b_],bp=[];
       const k0=q/2+.12;   // erste Beinperle knapp neben der Randperle
       let p=null;
-      for(let k=0;k<b.n;k++){p=at(E,k0+k*q,0);P.push({x:p[0],y:p[1],c:b.c,r:ru,ref:['b',bi,'c']});bp.push(p)}
+      for(let k=0;k<b.n;k++){p=at(E,k0+k*q,0);P.push({x:p[0],y:p[1],c:bc(b,k),r:ru,ref:['b',bi,'c',k]});bp.push(p)}
       const ende=p?at(p,q/2,0):at(E,.12,0);
       const hin=bp.map(q_=>at(q_,0,-o)),zur=bp.slice().reverse().map(q_=>at(q_,0,o));
       let fuss;
@@ -434,7 +467,7 @@ function geometrie(t,q=Q,luft=0){
 function zaehlen(t){
   const z={};let n=0;const add=(c,k)=>{z[c]=(z[c]||0)+k;n+=k};
   for(const r of t.rows)for(const c of r)add(c,1);
-  for(const b of t.beine){add(b.c,2*b.n);add(b.fc,2*b.f)}
+  for(const b of t.beine){for(let k=0;k<b.n;k++)add(bc(b,k),2);add(b.fc,2*b.f)}
   return {z,n};
 }
 function draht(t,pe){
@@ -550,7 +583,7 @@ function blatt(){
   const legende=`<path d="M128 225.5h6" stroke="${A}" stroke-width=".8"/><text x="135.5" y="226.5" font-size="2.9" fill="#1c2430">Draht</text>`;
   // Felder zum Bereitlegen, bei vielen Farben in zwei Zeilen
   const farben=Object.keys(z).sort((a,b)=>z[b]-z[a]),sp=Math.min(5,farben.length),zr=Math.ceil(farben.length/sp),fb=(190-(sp-1)*4)/sp,fh=(38-(zr-1)*3)/zr;
-  let feld=`<text x="10" y="232" font-size="4.2" font-weight="800" fill="#1c2430">Perlen bereitlegen</text><text x="200" y="232" font-size="3" fill="#5b6573" text-anchor="end">Leg jede Farbe auf ihr Feld.</text>`;
+  let feld=`<text x="10" y="232" font-size="4.2" font-weight="800" fill="#1c2430">Perlen bereitlegen</text>`;
   farben.forEach((c,k)=>{const fx=10+(k%sp)*(fb+4),fy=236+Math.floor(k/sp)*(fh+3);
     feld+=`<rect x="${fx.toFixed(2)}" y="${fy.toFixed(2)}" width="${fb.toFixed(2)}" height="${fh.toFixed(2)}" rx="4" fill="#F5F8FB" stroke="#D5DEE9" stroke-width=".4"/>`+
       `<rect x="${(fx+3.6).toFixed(2)}" y="${(fy+3).toFixed(2)}" width="2.8" height="4" rx=".9" fill="${FARBE[c][0]}" stroke="#1c2430" stroke-width=".3"/><text x="${(fx+9).toFixed(2)}" y="${(fy+6.1).toFixed(2)}" font-size="3.1" fill="#1c2430"><tspan font-weight="800">${z[c]}</tspan> × ${FARBE[c][1]}</text>`});
@@ -580,17 +613,15 @@ function zeichnen(){
   document.querySelectorAll('#hg .chip').forEach(k=>k.setAttribute('aria-pressed',(k.dataset.h==='1')===S.hg));
   const t=S.t,da=!!t;
   $('drucken').disabled=!da;$('farben-karte').hidden=!da;$('zone').classList.toggle('klein',!!S.bild);$('beispiel-zeile').hidden=!!S.bild;
-  $('mal-hinweis').hidden=$('legende').hidden=$('pruefung').hidden=!da;
-  $('leg-beine').hidden=!(da&&t.beine&&t.beine.length);
+  $('legende').hidden=$('pruefung').hidden=!da;
   if(!da){$('plan').innerHTML='';return}
   $('plan').innerHTML=planSvg();$('plan').classList.toggle('malen',S.pinsel!==null);
   const {z,n}=zaehlen(t),g0=geometrie(t),fa=Object.keys(z).sort((a,b)=>z[b]-z[a]);
-  $('info').textContent=`${t.rows.length} Reihen, ${n} Perlen in ${fa.length} Farben, fertig etwa ${f1((g0.x1-g0.x0-1+g0.q)*PE.d)} × ${f1((g0.y1-g0.y0)*PE.d)} cm, Draht etwa ${lang(draht(t,PE))}`;
-  const pa=t.beine.map(b=>b.w),weg=S.notiz?S.notiz.weg:0;
-  $('pruefung').innerHTML=`<p><b>Jede Reihe ist ein Stück ohne Lücke und hält am Draht.</b> Reihe 1 kommt auf die Drahtmitte, dann geht es Reihe für Reihe nach unten.</p>`+
-    (pa.length||weg?`<ul>${pa.length?`<li>Abstehende Teile als Paare angehängt: ${pa.join(', ')}.</li>`:''}${weg?`<li>${weg===1?'Ein abstehender Teil':weg+' abstehende Teile'} ohne Gegenstück auf der anderen Seite (z. B. ein Schwanz) ${weg===1?'ist':'sind'} weggelassen.</li>`:''}</ul>`:'');
+  $('info').textContent=`${t.rows.length} Reihen · ${n} Perlen · ${f1((g0.x1-g0.x0-1+g0.q)*PE.d)} × ${f1((g0.y1-g0.y0)*PE.d)} cm · ${lang(draht(t,PE))} Draht`;
+  const weg=S.notiz?S.notiz.weg:0;
+  $('pruefung').hidden=!weg;$('pruefung').textContent=`✂ ${weg} weg`;
   $('farben').innerHTML=fa.map(k=>`<button type="button" class="farbe" data-c="${KEY.indexOf(k)}" aria-pressed="${S.pinsel===KEY.indexOf(k)}"><i style="background:${FARBE[k][0]}"></i><span>${FARBE[k][1]}</span><small>${z[k]}</small></button>`).join('')+
-    `<button type="button" class="farbe" data-c="-1" aria-pressed="${S.pinsel===-1}"><i style="background:transparent;border-style:dashed"></i><span>Perle weg</span></button>`;
+    `<button type="button" class="farbe" data-c="-1" aria-pressed="${S.pinsel===-1}"><i style="background:transparent;border-style:dashed"></i><span>weg</span></button>`;
   $('alle').innerHTML=KEY.map((k,c)=>`<button type="button" data-c="${c}" style="background:${FARBE[k][0]}" title="${FARBE[k][1]}" aria-label="${FARBE[k][1]}" aria-pressed="${S.pinsel===c}"></button>`).join('');
 }
 
@@ -603,9 +634,11 @@ function perleBei(e){const svg=$('plansvg');if(!svg||!S.ans)return null;const p=
   const i=S.t.rows.findIndex((_,k)=>Math.abs(g.ry[k]-gy)<.5);if(i<0)return null;
   const e_=S.t.rows[i].length/2*g.q;return Math.abs(gx)>e_&&Math.abs(gx)<e_+g.q*1.5?{reihe:i,seite:gx<0?-1:1}:null}
 function malen(e,neu){const h=perleBei(e),t=S.t,c=S.pinsel;if(!h)return;
-  if(h.perle){const [art,i,j]=h.perle.ref;
+  if(h.perle){const [art,i,j,k]=h.perle.ref;
     if(art==='r'){const r=t.rows[i];if(c<0){if(!neu||r.length<2)return;t.rows[i]=r.slice(0,j)+r.slice(j+1)}else{if(r[j]===KEY[c])return;t.rows[i]=r.slice(0,j)+KEY[c]+r.slice(j+1)}}
-    else{const b=t.beine[i];if(c<0){if(!neu)return;t.beine.splice(i,1)}else{if(b[j]===KEY[c])return;b[j]=KEY[c]}}}
+    else{const b=t.beine[i];if(c<0){if(!neu)return;t.beine.splice(i,1)}
+      else if(j==='fc'){if(b.fc===KEY[c])return;b.fc=KEY[c]}
+      else{const z=[...Array(b.n)].map((_,m)=>bc(b,m));if(z[k]===KEY[c])return;z[k]=KEY[c];b.c=z.join('')}}}
   else if(neu&&c>=0){const r=t.rows[h.reihe];t.rows[h.reihe]=h.seite<0?KEY[c]+r:r+KEY[c]}
   else return;
   if(!plan)plan=requestAnimationFrame(()=>{plan=0;zeichnen()})}
@@ -622,11 +655,11 @@ function neuesBild(img){S.bild=img;S.pinsel=null;const V=S.vor=vorbereiten();
   berechnen()}
 function laden(datei){
   if(!datei)return;
-  if(!datei.type.startsWith('image/')){$('info').textContent='Das ist kein Bild. Bitte JPG, PNG, GIF oder WebP wählen.';return}
+  if(!datei.type.startsWith('image/')){$('info').textContent='⚠ Kein Bild';return}
   const url=URL.createObjectURL(datei),img=new Image();
   img.onload=()=>{const nm=(datei.name||'').replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ').trim();
     if(nm&&nm!=='image')$('titel').value=nm.slice(0,40);neuesBild(img);URL.revokeObjectURL(url)};
-  img.onerror=()=>{URL.revokeObjectURL(url);$('info').textContent='Dieses Bild kann der Browser nicht öffnen. Bitte als JPG oder PNG versuchen.'};
+  img.onerror=()=>{URL.revokeObjectURL(url);$('info').textContent='⚠ Bild defekt'};
   img.src=url;
 }
 $('zone').addEventListener('click',()=>$('datei').click());
