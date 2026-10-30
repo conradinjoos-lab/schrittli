@@ -236,19 +236,20 @@ function fmKontext(){ const k={app:SCHULE?'Schule':'Familie',seite:view.name,vid
     else { const p=view.params||{}; const v=p.v||p.video||null; if(v&&v.id){ k.video=v.id; k.titel=v.title||''; } else if(p.areaId||p.id) k.titel=String(p.areaId||p.id); } }catch(e){}
   return {...k,adresse:location.pathname+location.hash,geraet:fmGeraet(),fenster:innerWidth+'×'+innerHeight}; }
 const FM_ARTEN=[['video','Video läuft nicht'],['stopp','Stopp an falscher Stelle'],['text','Text oder Material falsch'],['anderes','Etwas anderes']];
+const FM_BILDER=[['bild','Bild fehlt'],['text','Text oder Material falsch'],['anderes','Etwas anderes']];
 function fehlerMelden(){ try{ if(P&&P.api) P.api.pause(); }catch(e){}
-  const k=fmKontext(); const zeit=k.zeit!=null?` · ${Math.floor(k.zeit/60)}:${String(k.zeit%60).padStart(2,'0')}`:'';
-  const ort=[k.app,k.titel||k.seite,k.schritt?'Schritt '+k.schritt:''].filter(Boolean).join(' · ')+zeit+' · '+k.geraet;
-  modal(`<h2>Fehler melden</h2><div class="fm-arten" role="radiogroup">${FM_ARTEN.map(([w,t],i)=>`<label><input type="radio" name="fm-art" value="${w}"${i?'':' checked'}> ${esc(t)}</label>`).join('')}</div>
-    <textarea class="fm-text" rows="3" maxlength="600" placeholder="Was ist passiert? (freiwillig)"></textarea>
-    <p class="fm-hinweis">Bitte keine Namen. Mitgeschickt wird: ${esc(ort)}</p><p class="fm-fehler" hidden></p>
-    <div class="row" style="justify-content:flex-end"><button class="btn ghost" data-close>Abbrechen</button><button class="btn primary" data-act="senden">Senden</button></div>`,
+  const {bilder,...k}=fmKontext();
+  modal(`<h2>Fehler melden</h2><div class="fm-arten" role="radiogroup">${(bilder?FM_BILDER:FM_ARTEN).map(([w,t])=>`<label><input type="radio" name="fm-art" value="${w}"> ${esc(t)}</label>`).join('')}</div>
+    <textarea class="fm-text" rows="3" maxlength="600" placeholder="Was ist passiert?"></textarea>
+    <p class="fm-fehler" hidden></p>
+    <div class="row" style="justify-content:flex-end"><button class="btn ghost" data-close>Abbrechen</button><button class="btn primary" data-act="senden" disabled>Senden</button></div>`,
   {senden:async(b,close,m)=>{ const f=$('.fm-fehler',m); b.disabled=true; b.textContent='Sende …'; f.hidden=true;
     const art=($('input[name=fm-art]:checked',m)||{}).value||'anderes', text=$('.fm-text',m).value.trim().slice(0,600);
-    try{ const r=await fetch(MELDEN,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({art,text,...k})}); if(!r.ok) throw new Error(r.status===429?'Gerade zu viele Meldungen – bitte später nochmals.':'Fehler '+r.status);
-      close(); toast('Danke! Die Meldung ist angekommen.',2600); }
-    catch(x){ f.textContent=x.message&&!/fetch|network/i.test(x.message)?x.message:'Nicht gesendet – ist das Gerät online?'; f.hidden=false; b.disabled=false; b.textContent='Nochmals senden'; } }},'fm');
-  setTimeout(()=>{ const t=$('.fm .fm-text'); if(t&&!matchMedia('(pointer:coarse)').matches) t.focus(); },50); }
+    try{ const r=await fetch(MELDEN,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({art,text,...k})}); if(!r.ok) throw new Error(r.status===429?'⚠ Zu viele Meldungen':'⚠ Fehler '+r.status);
+      close(); toast('✓ Gesendet. Danke!',2600); }
+    catch(x){ f.textContent=x.message&&/^⚠/.test(x.message)?x.message:'⚠ Offline'; f.hidden=false; b.disabled=false; b.textContent='Nochmals senden'; } }},'fm');
+  setTimeout(()=>{ const m=$('.fm'); if(!m) return; const b=$('[data-act=senden]',m), t=$('.fm-text',m); m.addEventListener('input',()=>{ b.disabled=!$('input[name=fm-art]:checked',m)&&!t.value.trim(); });
+    if(!matchMedia('(pointer:coarse)').matches) t.focus(); },50); }
 function fmKnopf(){ const b=document.createElement('button'); b.className='fm-knopf'; b.type='button'; b.title='Fehler melden'; b.setAttribute('aria-label','Fehler melden'); b.innerHTML=ico('flag'); b.onclick=fehlerMelden; document.body.appendChild(b); }
 
 /* ============================== Router ============================== */
@@ -481,7 +482,7 @@ SCREENS.anleitung=(app,{v,school})=>{
   pr.gesehen=pr.gesehen||{}; pr.antworten=pr.antworten||{}; pr.max=Math.max(pr.max||0,pr.step||0);
   if(!school){ S.settings.zuletzt=v.id; save(); }
   let i=-1; // -1 = Start (Material), n = fertig
-  ORT=()=>({video:v.id,titel:v.title||'',schritt:Math.max(0,Math.min(i+1,n))});
+  ORT=()=>({video:v.id,titel:v.title||'',schritt:Math.max(0,Math.min(i+1,n)),bilder:true});
   const wer=SCHULE?'Die Lehrperson':'Ein Erwachsener';
   const reihe=v.ordner?S.videos.filter(x=>x.quelle==='anleitung'&&x.ordner===v.ordner):[]; const naechste=school?null:reihe[reihe.findIndex(x=>x.id===v.id)+1]||null;
   const bild=f=>v.bildpfad+encodeURIComponent(f);

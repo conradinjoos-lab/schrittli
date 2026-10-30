@@ -42,7 +42,7 @@ export default {async scheduled(event,env){if(event.cron==='*/10 * * * *')return
   await env.KV.put(rk,String(n+1),{expirationTtl:3700});
   const b=await req.json().catch(()=>null);if(!b||typeof b!=='object')return json({fehler:'leer'},400,her);
   const s=(x,l)=>String(x??'').slice(0,l);
-  const m={zeit:new Date().toISOString(),art:['video','stopp','text','anderes'].includes(b.art)?b.art:'anderes',text:s(b.text,600),app:s(b.app,10),seite:s(b.seite,20),
+  const m={zeit:new Date().toISOString(),art:['video','bild','stopp','text','anderes'].includes(b.art)?b.art:'anderes',text:s(b.text,600),app:s(b.app,10),seite:s(b.seite,20),
    video:s(b.video,60),titel:s(b.titel,120),schritt:Math.max(0,Math.min(99,+b.schritt||0)),zeit_video:b.zeit==null?null:Math.max(0,Math.min(36000,+b.zeit||0)),
    adresse:s(b.adresse,200),geraet:s(b.geraet,40),fenster:s(b.fenster,20)};
   await env.KV.put('meldung:'+String(9e12-Date.now()).padStart(13,'0')+':'+zufall().slice(0,6),JSON.stringify(m),{expirationTtl:180*86400});
