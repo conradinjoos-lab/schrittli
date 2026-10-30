@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Schritt für Schritt · Falt-Generator</title>
+<meta name="description" content="Falt-Generator: Würfel, Box, Schachtel, Pyramide, Haus, Zylinder, Hut, Kissenbox, Sternenschale, Kerze, Hexentreppe und weitere Körper – Masse in cm wählen, Netz mit Falz- und Klebelaschen 1:1 auf A4 oder A3 drucken.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<style>
+:root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--warn:#B3412A;--papier:#FFFFFF;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;--warn:#F08A6E;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;--warn:#F08A6E;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
+h1{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0;font-size:28px}
+a{color:var(--acc)}
+.kopf{max-width:1200px;margin:0 auto;padding:20px 16px 8px}
+.kopf p{margin:2px 0 0;color:var(--muted)}
+main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,360px);gap:16px;align-items:start}
+.karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px}
+.seite-rechts{position:sticky;top:12px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:15px;padding:6px 14px;border-radius:999px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer;min-height:44px;min-width:52px}
+.chip[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
+.chip:hover{border-color:var(--acc)}
+.chip.em{font-size:22px;line-height:1;padding:6px 10px}
+button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.modelle{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:6px;margin-bottom:12px}
+.kachel{font:inherit;font-size:12.5px;line-height:1.15;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px 7px;border-radius:14px;border:2px solid transparent;background:var(--surface2);color:var(--ink);cursor:pointer;min-width:0}
+.kachel canvas{width:56px;height:56px;display:block}
+.kachel span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kachel[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
+.kachel:hover{border-color:var(--acc)}
+.schau{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:start}
+#cv3{display:block;width:100%;aspect-ratio:1;border-radius:12px;background:var(--surface2);touch-action:none;cursor:grab}
+#cv3:active{cursor:grabbing}
+.netz{background:var(--papier);border-radius:12px;padding:8px;border:1px solid var(--line)}
+#netz{display:block;width:100%;height:auto;max-height:560px}
+.zahlen{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px 14px;margin:0 0 4px;padding:12px;border-radius:14px;background:var(--surface2)}
+.lbl{display:block;font-size:13px;color:var(--muted);margin-bottom:4px}
+.stepper{display:flex;align-items:center;gap:5px}
+.stepper button{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:var(--surface);color:var(--ink);font:600 24px/1 Fredoka,Nunito,sans-serif;cursor:pointer;padding:0;flex:none}
+.stepper button:hover{border-color:var(--acc)}
+.stepper input{width:72px;height:44px;font:600 22px Fredoka,Nunito,sans-serif;text-align:center;border:2px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);padding:0 4px}
+.stepper span{font-size:14px;color:var(--muted)}
+.zeile{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+.zeile>.lbl{margin:0;min-width:54px}
+.farbe{width:40px;height:40px;border-radius:50%;border:2px solid var(--line);background:var(--c);cursor:pointer;padding:0}
+.farbe[aria-pressed="true"]{outline:3px solid var(--acc);outline-offset:2px}
+.legende{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.legende div{background:var(--surface2);border-radius:12px;padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.legende .muster{width:100%;height:14px;display:block}
+.legende .ic{width:26px;height:26px;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.werte{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.wert{background:var(--surface2);border-radius:12px;padding:8px 10px;display:flex;align-items:center;gap:8px;min-width:0}
+.wert svg{width:28px;height:28px;flex:none;fill:none;stroke:var(--acc);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.wert b{font:600 21px/1.15 Fredoka,Nunito,sans-serif;display:block;white-space:nowrap}
+.wert small{display:block;color:var(--muted);font-size:13px;line-height:1.2}
+.warnz{color:var(--warn);font-weight:800;margin:0}
+.druck-karte{display:flex;flex-direction:column;gap:10px}
+.drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
+.drucken:disabled{opacity:.45;cursor:default}
+.drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
+.blaetter{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
+.blaetter svg{display:block;width:100%;height:auto;background:var(--papier);border-radius:3px;box-shadow:0 1px 6px rgba(0,0,0,.15)}
+@media (max-width:860px){
+  main{grid-template-columns:minmax(0,1fr);gap:14px}
+  .seite-rechts{position:static}
+  h1{font-size:24px}
+}
+@media (max-width:600px){ .schau{grid-template-columns:minmax(0,1fr)} }
+@media (max-width:420px){
+  main{padding:8px 12px 32px}
+  .karte{padding:10px}
+  .modelle{grid-template-columns:repeat(auto-fill,minmax(74px,1fr))}
+}
+#druck{display:none}
+@page{size:A4 portrait;margin:0}
+@media print{
+  body{background:#fff}
+  .kopf,main{display:none!important}
+  #druck{display:block}
+  #druck svg{display:block;width:var(--bw,210mm);height:var(--bh,297mm);break-after:page}
+  #druck svg:last-child{break-after:auto}
+}
+</style>
+<style id="seite"></style>
+</head>
+<body>
+<header class="kopf">
+  <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
+  <h1>Falt-Generator</h1>
+  <p><a href="../">←&nbsp;Vorlagen</a></p>
+</header>
+<script src="../zurueck.js"></script>
+<main>
+  <section class="karte" aria-label="Modell">
+    <div class="modelle" id="modelle" role="group" aria-label="Modell"></div>
+    <div class="schau">
+      <canvas id="cv3" role="img" aria-label="3D"></canvas>
+      <div class="netz"><svg id="netz" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Netz"></svg></div>
+    </div>
+  </section>
+  <div class="seite-rechts">
+    <section class="karte" aria-label="Masse">
+      <div class="zahlen" id="felder"></div>
+      <div class="zeile"><span class="lbl">Farbe</span><div class="chips" id="farben" role="group" aria-label="Farbe"></div></div>
+      <div class="zeile" id="deko-z"><span class="lbl">Deko</span><div class="chips" id="deko" role="group" aria-label="Deko"></div></div>
+    </section>
+    <section class="karte legende" aria-label="Zeichen">
+      <div><svg class="muster" viewBox="0 0 60 14" aria-hidden="true"><path d="M2 7h56" stroke="currentColor" stroke-width="2.4"/></svg><svg class="ic" viewBox="0 0 24 24" aria-label="Schneiden"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.6 7.6L20 17M8.6 16.4L20 7"/></svg></div>
+      <div><svg class="muster" viewBox="0 0 60 14" aria-hidden="true"><path d="M2 7h56" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/></svg><svg class="ic" viewBox="0 0 24 24" aria-label="Falten"><path d="M3 19h18" stroke-dasharray="3 2.5"/><path d="M6 15c0-7 12-7 12 0"/><path d="M15.5 13.5l2.5 2 2-2.5"/></svg></div>
+      <div><svg class="muster" viewBox="0 0 60 14" aria-hidden="true"><path d="M4 13l8-11h36l8 11z" fill="#D6D6D6" stroke="currentColor" stroke-width="1.2"/></svg><svg class="ic" viewBox="0 0 24 24" aria-label="Kleben"><path d="M12 3c3 5 6 8 6 12a6 6 0 0 1-12 0c0-4 3-7 6-12z"/></svg></div>
+    </section>
+    <section class="karte druck-karte" aria-label="Drucken">
+      <div class="werte" id="werte" aria-live="polite"></div>
+      <p class="warnz" id="warn" hidden></p>
+      <div class="chips" id="papier" role="group" aria-label="Papier"><button type="button" class="chip" data-papier="a4" aria-pressed="true">A4</button><button type="button" class="chip" data-papier="a3" aria-pressed="false">A3</button></div>
+      <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
+      <div class="blaetter" id="blaetter" aria-label="Blätter"></div>
+    </section>
+  </div>
+</main>
+<div id="druck"></div>
+<script>
+// Falt-Generator von Schritt für Schritt. Masse in cm, gerechnet und gezeichnet wird 1:1 in mm.
+// Körper mit ebenen Flächen (Würfel, Pyramide, Haus …) werden aus ihren Ecken abgewickelt: konvexe Hülle → Spannbaum über
+// die Flächen → Flächen in die Ebene klappen → Klebelaschen an jede offene Kante, die beim Zusammenbauen aufeinandertrifft.
+// Runde Sachen (Zylinder, Hut, Kissenbox) und die Ideen aus dem TTG-Material (Sternenschale, Kerze, Hexentreppe) sind
+// eigene Zeichnungen. Eine Kante, die zwei Teile teilen, ist ein Falz (gestrichelt), eine einzelne Kante ein Schnitt.
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const KEY='schrittli.falten.v1';
+const PAPIERE={a4:{name:'A4',w:210,h:297},a3:{name:'A3',w:297,h:420}};
+const M=8, FUSS=14, ABST=4;
+const FARBEN=['#FFFFFF','#FFE08A','#FFB8A8','#BFE3C0','#B9D7F5','#D9C6F2'];
+const LASCHE='#D6D6D6', DACH='#E88D72', TUER='#9A6B4F', FLAMME='#FFC93C', KARTON='#D8B98A', LINIE='#2A2A2A';
+const PHI=(1+Math.sqrt(5))/2;
+const zahl=x=>String(Math.round(x*10)/10).replace('.',',');
+
+// ---------- Vektoren ----------
+const sub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]], add=(a,b)=>[a[0]+b[0],a[1]+b[1],a[2]+b[2]], mul=(a,k)=>[a[0]*k,a[1]*k,a[2]*k];
+const dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2], cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const len=a=>Math.hypot(a[0],a[1],a[2]), norm=a=>mul(a,1/(len(a)||1));
+const mitte=P=>mul(P.reduce((c,p)=>add(c,p),[0,0,0]),1/P.length);
+const newell=P=>{ const n=[0,0,0]; for(let i=0;i<P.length;i++){ const a=P[i],b=P[(i+1)%P.length]; n[0]+=(a[1]-b[1])*(a[2]+b[2]); n[1]+=(a[2]-b[2])*(a[0]+b[0]); n[2]+=(a[0]-b[0])*(a[1]+b[1]); } return norm(n); };
+const s2=(a,b)=>[a[0]-b[0],a[1]-b[1]], a2=(a,b)=>[a[0]+b[0],a[1]+b[1]], m2=(a,k)=>[a[0]*k,a[1]*k], l2=a=>Math.hypot(a[0],a[1]);
+const mitte2=P=>{ let x=0,y=0; for(const p of P){ x+=p[0]; y+=p[1]; } return [x/P.length,y/P.length]; };
+const rect=(x0,y0,x1,y1)=>[[x0,y0],[x1,y0],[x1,y1],[x0,y1]];
+const kreis2=(cx,cy,r,n=64)=>[...Array(n)].map((_,i)=>[cx+r*Math.cos(2*Math.PI*i/n),cy+r*Math.sin(2*Math.PI*i/n)]);
+const bogen2=(cx,cy,r,a0,a1,n=24)=>[...Array(n+1)].map((_,i)=>{ const a=a0+(a1-a0)*i/n; return [cx+r*Math.cos(a),cy+r*Math.sin(a)]; });
+const kreis3=(c,e1,e2,r,n=14)=>[...Array(n)].map((_,i)=>{ const a=2*Math.PI*i/n; return add(c,add(mul(e1,r*Math.cos(a)),mul(e2,r*Math.sin(a)))); });
+// Kreisbogen von A nach B mit Stich e in Richtung o (Endpunkte exakt, damit gemeinsame Kanten erkannt werden)
+const bogen=(A,B,e,o,n=24)=>{ const c=l2(s2(B,A))/2, R=(c*c+e*e)/(2*e), P=[A];
+  for(let i=1;i<n;i++){ const t=i/n, x=(t-0.5)*2*c, y=Math.sqrt(R*R-x*x)-(R-e); P.push([A[0]+(B[0]-A[0])*t+o[0]*y,A[1]+(B[1]-A[1])*t+o[1]*y]); }
+  P.push(B); return P; };
+const mulberry32=a=>()=>{ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; };
+
+// ---------- Konvexe Hülle: Flächen als Eckenlisten, von aussen gesehen gegen den Uhrzeigersinn ----------
+function huelle(V){
+  const F=[], gesehen=new Set(), n=V.length;
+  const sk=Math.max(...V.map(v=>Math.max(Math.abs(v[0]),Math.abs(v[1]),Math.abs(v[2]))))||1, eps=1e-7*sk;
+  for(let i=0;i<n;i++) for(let j=i+1;j<n;j++) for(let k=j+1;k<n;k++){
+    let nn=cross(sub(V[j],V[i]),sub(V[k],V[i])); if(len(nn)<1e-9*sk*sk) continue; nn=norm(nn);
+    let pos=0,neg=0; const auf=[];
+    for(let m=0;m<n;m++){ const s=dot(nn,sub(V[m],V[i])); if(s>eps) pos++; else if(s<-eps) neg++; else auf.push(m); }
+    if(pos&&neg) continue; if(pos) nn=mul(nn,-1);
+    const key=auf.join(','); if(gesehen.has(key)) continue; gesehen.add(key);
+    const c=mitte(auf.map(m=>V[m])), e1=norm(sub(V[auf[0]],c)), e2=cross(nn,e1);
+    const w=m=>Math.atan2(dot(sub(V[m],c),e2),dot(sub(V[m],c),e1));
+    auf.sort((p,q)=>w(p)-w(q)); F.push(auf);
+  }
+  return F;
+}
+
+// ---------- Abwicklung ----------
+function auslegen(V,F,baum,wurzel){
+  const pos=new Array(F.length), tr=new Array(F.length);
+  const abb=(t,v)=>{ const d=sub(v,t.p), a=dot(d,t.u), b=dot(d,t.w); return [t.P[0]+a*t.u2[0]+b*t.w2[0],t.P[1]+a*t.u2[1]+b*t.w2[1]]; };
+  const f0=F[wurzel], n0=newell(f0.map(i=>V[i])), u0=norm(sub(V[f0[1]],V[f0[0]]));
+  tr[wurzel]={p:V[f0[0]],u:u0,w:cross(u0,n0),P:[0,0],u2:[1,0],w2:[0,1]};   // SVG: y nach unten → Aussenseite nicht gespiegelt
+  pos[wurzel]=new Map(f0.map(i=>[i,abb(tr[wurzel],V[i])]));
+  const stapel=[wurzel];
+  while(stapel.length){ const f=stapel.pop();
+    for(const {g,k} of baum[f]){ const [a,b]=k.split('-').map(Number), Pa=pos[f].get(a), Pb=pos[f].get(b);
+      const u=norm(sub(V[b],V[a])), du=s2(Pb,Pa), u2=m2(du,1/l2(du));
+      const cg=mitte(F[g].map(i=>V[i])), r=sub(cg,V[a]), w=norm(sub(r,mul(u,dot(r,u))));
+      const cf=mitte2([...pos[f].values()]); let w2=[-u2[1],u2[0]]; if((cf[0]-Pa[0])*w2[0]+(cf[1]-Pa[1])*w2[1]>0) w2=[-w2[0],-w2[1]];
+      tr[g]={p:V[a],u,w,P:Pa,u2,w2};
+      const m=new Map(F[g].map(i=>[i,abb(tr[g],V[i])])); m.set(a,Pa); m.set(b,Pb);   // gemeinsame Ecken exakt übernehmen
+      pos[g]=m; stapel.push(g); } }
+  return {pos,tr,abb};
+}
+const box2=P=>{ let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity; for(const p of P){ if(p[0]<x0)x0=p[0]; if(p[0]>x1)x1=p[0]; if(p[1]<y0)y0=p[1]; if(p[1]>y1)y1=p[1]; } return [x0,y0,x1,y1]; };
+const boxUeber=(a,b)=>a[0]<b[2]-0.05&&b[0]<a[2]-0.05&&a[1]<b[3]-0.05&&b[1]<a[3]-0.05;
+function sat(A,B,eps=0.05){
+  for(const P of [A,B]) for(let i=0;i<P.length;i++){ const a=P[i], b=P[(i+1)%P.length], nx=a[1]-b[1], ny=b[0]-a[0], l=Math.hypot(nx,ny); if(l<1e-9) continue;
+    let a0=Infinity,a1=-Infinity,b0=Infinity,b1=-Infinity;
+    for(const p of A){ const s=(p[0]*nx+p[1]*ny)/l; if(s<a0)a0=s; if(s>a1)a1=s; }
+    for(const p of B){ const s=(p[0]*nx+p[1]*ny)/l; if(s<b0)b0=s; if(s>b1)b1=s; }
+    if(a1<=b0+eps||b1<=a0+eps) return false; }
+  return true;
+}
+const trifft=(t,listen)=>{ const bt=box2(t); return listen.some(L=>L.some(P=>boxUeber(bt,box2(P))&&sat(t,P))); };
+function lascheAn(P,Q,flaeche,hmax){
+  const d=s2(Q,P), L=l2(d), e=m2(d,1/L); let o=[-e[1],e[0]]; const c=mitte2(flaeche);
+  if((c[0]-P[0])*o[0]+(c[1]-P[1])*o[1]>0) o=[-o[0],-o[1]];
+  const h=Math.min(hmax,L*0.3), i=Math.min(h,L*0.3);
+  return [P,a2(a2(P,m2(o,h)),m2(e,i)),a2(s2(Q,m2(e,i)),m2(o,h)),Q];
+}
+function baumNett(F,nb,V,wurzel){   // Schicht um Schicht, Eltern über die längste gemeinsame Kante
+  const baum=F.map(()=>[]), drin=new Set([wurzel]); let schicht=[wurzel];
+  while(schicht.length){ const neu=new Map();
+    for(const f of schicht) for(const {g,k} of nb[f]) if(!drin.has(g)){ const [a,b]=k.split('-').map(Number), l=len(sub(V[a],V[b])), alt=neu.get(g); if(!alt||l>alt.l+1e-6) neu.set(g,{f,k,l}); }
+    for(const [g,{f,k}] of neu){ baum[f].push({g,k}); drin.add(g); }
+    schicht=[...neu.keys()]; }
+  return baum;
+}
+function baumZufall(F,nb,rnd,tief){
+  const w=Math.floor(rnd()*F.length), baum=F.map(()=>[]), drin=new Set([w]);
+  if(tief){ const st=[w]; while(st.length){ const f=st[st.length-1], frei=nb[f].filter(e=>!drin.has(e.g)); if(!frei.length){ st.pop(); continue; } const e=frei[Math.floor(rnd()*frei.length)]; baum[f].push(e); drin.add(e.g); st.push(e.g); } }
+  else { const rand=[]; const dazu=f=>nb[f].forEach(e=>rand.push([f,e])); dazu(w);
+    while(rand.length){ const i=Math.floor(rnd()*rand.length), [f,e]=rand[i]; rand[i]=rand[rand.length-1]; rand.pop(); if(drin.has(e.g)) continue; baum[f].push(e); drin.add(e.g); dazu(e.g); } }
+  return {baum,w};
+}
+let PLATZ=[192,265];   // nutzbare Fläche des Blatts in mm
+function passt(P){ for(let g=0;g<180;g+=5){ const r=g*Math.PI/180, c=Math.cos(r), si=Math.sin(r); let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;
+    for(const p of P){ const x=p[0]*c-p[1]*si, y=p[0]*si+p[1]*c; if(x<x0)x0=x; if(x>x1)x1=x; if(y<y0)y0=y; if(y>y1)y1=y; }
+    if(x1-x0<=PLATZ[0]&&y1-y0<=PLATZ[1]) return true; }
+  return false; }
+function abwickeln(V,F,wurzel){
+  const kanten=new Map();
+  F.forEach((f,fi)=>f.forEach((a,i)=>{ const b=f[(i+1)%f.length], k=a<b?a+'-'+b:b+'-'+a; if(!kanten.has(k)) kanten.set(k,[]); kanten.get(k).push(fi); }));
+  const nb=F.map(()=>[]); for(const [k,l] of kanten) if(l.length===2){ nb[l[0]].push({g:l[1],k}); nb[l[1]].push({g:l[0],k}); }
+  const probe=(baum,w,egal)=>{ const r=auslegen(V,F,baum,w), f2=F.map((f,i)=>f.map(j=>r.pos[i].get(j))), bb=f2.map(box2);
+    if(!egal) for(let i=0;i<f2.length;i++) for(let j=i+1;j<f2.length;j++) if(boxUeber(bb[i],bb[j])&&sat(f2[i],f2[j])) return null;
+    const g=bb.reduce((a,b)=>[Math.min(a[0],b[0]),Math.min(a[1],b[1]),Math.max(a[2],b[2]),Math.max(a[3],b[3])]);
+    const bw=g[2]-g[0], bh=g[3]-g[1];
+    return {...r,f2,baum,wert:bw*bh*(1+0.25*Math.abs(Math.log(Math.max(bw,bh)/Math.min(bw,bh)/1.41)))}; };
+  const mitLaschen=r=>{ const imBaum=new Set(); r.baum.forEach(l=>l.forEach(e=>imBaum.add(e.k)));
+    const laschen=[]; let z=0;
+    for(const [k,l] of kanten){ if(l.length<2||imBaum.has(k)) continue;
+      const [a,b]=k.split('-').map(Number), kand=(z++%2)?[l[1],l[0]]:[l[0],l[1]]; let ok=false;
+      for(const h of [8,4.5]){ for(const f of kand){ const t=lascheAn(r.pos[f].get(a),r.pos[f].get(b),r.f2[f],h); if(!trifft(t,[r.f2,laschen])){ laschen.push(t); ok=true; break; } } if(ok) break; } }
+    r.laschen=laschen; r.passt=passt([...r.f2.flat(),...laschen.flat()]); return r; };
+  // Die schöne Abwicklung (um den Boden herum) zuerst; überlappt sie oder passt sie nicht aufs Blatt, wird gesucht.
+  const nett=baumNett(F,nb,V,wurzel);
+  let best=probe(nett,wurzel); if(best) mitLaschen(best);
+  if(!best||!best.passt){ const rnd=mulberry32(7);
+    for(let t=0;t<500;t++){ const {baum,w}=baumZufall(F,nb,rnd,t%2===1), r=probe(baum,w); if(!r||(best&&best.passt&&r.wert>=best.wert)) continue;
+      mitLaschen(r); if(!best||(r.passt&&!best.passt)||(r.passt===best.passt&&r.wert<best.wert)) best=r; } }
+  if(!best) best=mitLaschen(probe(nett,wurzel,true));
+  return best;
+}
+
+// ---------- 3D-Netze für die Vorschau ----------
+const M3=offen=>({polys:[],deko:[],offen:!!offen});
+function fl(m,pts,col,innen,glatt){ let n=newell(pts); if(innen&&dot(n,sub(mitte(pts),innen))<0) n=mul(n,-1); m.polys.push({pts,col,n,glatt}); }
+function quader3(m,x0,y0,z0,x1,y1,z1,col){
+  const c=[(x0+x1)/2,(y0+y1)/2,(z0+z1)/2];
+  for(const P of [[[x0,y0,z0],[x1,y0,z0],[x1,y1,z0],[x0,y1,z0]],[[x0,y0,z1],[x1,y0,z1],[x1,y1,z1],[x0,y1,z1]],[[x0,y0,z0],[x1,y0,z0],[x1,y0,z1],[x0,y0,z1]],
+    [[x0,y1,z0],[x1,y1,z0],[x1,y1,z1],[x0,y1,z1]],[[x0,y0,z0],[x0,y1,z0],[x0,y1,z1],[x0,y0,z1]],[[x1,y0,z0],[x1,y1,z0],[x1,y1,z1],[x1,y0,z1]]]) fl(m,P,col,c);
+}
+function zyl3(m,r,z0,z1,col,n=40,deckel=true){
+  const c=[0,0,(z0+z1)/2], P=(a,z)=>[r*Math.cos(a),r*Math.sin(a),z];
+  for(let i=0;i<n;i++){ const a=2*Math.PI*i/n, b=2*Math.PI*(i+1)/n; fl(m,[P(a,z0),P(b,z0),P(b,z1),P(a,z1)],col,c,true); }
+  if(deckel) for(const z of [z0,z1]) fl(m,[...Array(n)].map((_,i)=>P(2*Math.PI*i/n,z)),col,c);
+}
+function stapel3(m,b,n,z0,cols){ const hh=b*0.17, g=b*0.09; for(let i=0;i<n;i++) quader3(m,-b/2,-b/2,z0+i*(hh+g),b/2,b/2,z0+i*(hh+g)+hh,cols[i%2]); return z0+n*(hh+g); }
+
+// ---------- Körper aus Ecken ----------
+function poly(V,{offen=false,deko=[],farbe,col}={}){
+  const F=huelle(V);
+  const zm=f=>mitte(f.map(j=>V[j]))[2];
+  if(offen){ let o=0; F.forEach((f,i)=>{ if(zm(f)>zm(F[o])) o=i; }); F.splice(o,1); }
+  const N=F.map(f=>newell(f.map(i=>V[i]))), fc=i=>farbe?farbe(N[i]):col;
+  let w=0; F.forEach((f,i)=>{ if(zm(f)<zm(F[w])-1e-6) w=i; });
+  const dk=deko.map(d=>({...d,fi:F.findIndex((f,i)=>d.pts.every(p=>Math.abs(dot(N[i],sub(p,V[f[0]])))<0.05))})).filter(d=>d.fi>=0);
+  const net=abwickeln(V,F,w);
+  return {
+    stuecke:[{flaechen:F.map((f,i)=>({pts:net.f2[i],col:fc(i)})),laschen:net.laschen,falz:[],deko:dk.map(d=>({...d,pts:d.pts.map(p=>net.abb(net.tr[d.fi],p))}))}],
+    mesh:{polys:F.map((f,i)=>({pts:f.map(j=>V[j]),col:fc(i),n:N[i]})),deko:dk.map(d=>({...d,n:N[d.fi],pts:d.pts.map(p=>add(p,mul(N[d.fi],0.3)))})),offen}
+  };
+}
+const quaderV=(b,t,h)=>[[0,0,0],[b,0,0],[b,t,0],[0,t,0],[0,0,h],[b,0,h],[b,t,h],[0,t,h]];
+function aufFlaeche(V){   // Körper auf eine Fläche stellen
+  const F=huelle(V), n=newell(F[0].map(i=>V[i])), t=[0,0,-1], c=dot(n,t); let k=cross(n,t); const s=len(k); let R=V;
+  if(s>1e-9){ k=mul(k,1/s); R=V.map(v=>add(add(mul(v,c),mul(cross(k,v),s)),mul(k,dot(k,v)*(1-c)))); } else if(c<0) R=V.map(v=>[v[0],-v[1],-v[2]]);
+  const z0=Math.min(...R.map(v=>v[2])); return R.map(v=>[v[0],v[1],v[2]-z0]);
+}
+function platonV(art,a){
+  let V=[]; const S=[1,-1];
+  if(art==='tetra') V=[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]];
+  else if(art==='okta') V=[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]];
+  else if(art==='ikosa') for(const p of S) for(const q of S) V.push([0,p,q*PHI],[p,q*PHI,0],[q*PHI,0,p]);
+  else { for(const x of S) for(const y of S) for(const z of S) V.push([x,y,z]); for(const p of S) for(const q of S) V.push([0,p/PHI,q*PHI],[p/PHI,q*PHI,0],[q*PHI,0,p/PHI]); }
+  let d0=Infinity; for(let i=0;i<V.length;i++) for(let j=i+1;j<V.length;j++) d0=Math.min(d0,len(sub(V[i],V[j])));
+  return aufFlaeche(V.map(p=>mul(p,a/d0)));
+}
+function wuerfelDeko(a,art){
+  if(art==='gesicht'){ const c=[a/2,0,a/2], e1=[1,0,0], e2=[0,0,1], R=a*0.24;
+    return [{pts:kreis3(add(c,add(mul(e1,-a*0.17),mul(e2,a*0.13))),e1,e2,a*0.06),zu:true,voll:true},{pts:kreis3(add(c,add(mul(e1,a*0.17),mul(e2,a*0.13))),e1,e2,a*0.06),zu:true,voll:true},
+      {pts:[...Array(15)].map((_,i)=>{ const t=(200+140*i/14)*Math.PI/180; return add(c,add(mul(e1,R*Math.cos(t)),mul(e2,R*Math.sin(t)+a*0.06))); })}]; }
+  if(art!=='augen') return [];
+  const AUGEN={1:[[0,0]],2:[[-1,-1],[1,1]],3:[[-1,-1],[0,0],[1,1]],4:[[-1,-1],[1,-1],[-1,1],[1,1]],5:[[-1,-1],[1,-1],[0,0],[-1,1],[1,1]],6:[[-1,-1],[1,-1],[-1,0],[1,0],[-1,1],[1,1]]};
+  const out=[];
+  for(const [n,z] of [[[0,0,1],1],[[0,0,-1],6],[[0,-1,0],2],[[0,1,0],5],[[1,0,0],3],[[-1,0,0],4]]){
+    const c=add([a/2,a/2,a/2],mul(n,a/2)), e1=Math.abs(n[0])<0.5?[1,0,0]:[0,1,0], e2=cross(n,e1);
+    for(const [i,j] of AUGEN[z]) out.push({pts:kreis3(add(c,add(mul(e1,i*a*0.26),mul(e2,j*a*0.26))),e1,e2,a*0.075),zu:true,voll:true}); }
+  return out;
+}
+
+// ---------- Modelle (Masse in mm) ----------
+function box({b,t,h},o){   // Steckbox mit Deckel, Einstecklasche und Staublaschen
+  const k=Math.min(t*0.6,20), c=Math.min(k*0.8,b*0.25), d=Math.min(t*0.5,b*0.45), g=10;
+  const X1=b, X2=b+t, X3=2*b+t, X4=2*b+2*t, boden=rect(X2,h,X3,h+t);
+  const st={flaechen:[rect(0,0,X1,h),rect(X1,0,X2,h),rect(X2,0,X3,h),rect(X3,0,X4,h),rect(0,-t,X1,0),boden,
+      [[0,-t],[c,-t-k],[X1-c,-t-k],[X1,-t]],[[X1,0],[X1+1,-d],[X2-d*0.6,-d],[X2,0]],[[X3,0],[X3+1,-d],[X4-d*0.6,-d],[X4,0]]].map(pts=>({pts,col:o.col})),
+    laschen:[[[X4,0],[X4+g,4],[X4+g,h-4],[X4,h]],lascheAn([X2,h],[X2,h+t],boden,8),lascheAn([X3,h],[X3,h+t],boden,8),lascheAn([X2,h+t],[X3,h+t],boden,8)],falz:[],deko:[]};
+  const m=M3(true), cm=[b/2,t/2,h/2];
+  for(const P of [[[0,0,0],[b,0,0],[b,t,0],[0,t,0]],[[0,0,0],[b,0,0],[b,0,h],[0,0,h]],[[0,t,0],[b,t,0],[b,t,h],[0,t,h]],[[0,0,0],[0,t,0],[0,t,h],[0,0,h]],[[b,0,0],[b,t,0],[b,t,h],[b,0,h]]]) fl(m,P,o.col,cm);
+  const al=115*Math.PI/180, ca=Math.cos(al), sa=Math.sin(al), L=(x,s)=>[x,t-s*ca,h+s*sa], kv=[0,-sa*k,-ca*k];
+  m.polys.push({pts:[L(0,0),L(b,0),L(b,t),L(0,t)],col:o.col,n:[0,sa,ca]},{pts:[L(0,t),L(b,t),add(L(b,t),kv),add(L(0,t),kv)],col:o.col,n:[0,-ca,sa]});
+  return {stuecke:[st],mesh:m};
+}
+function schachtel({b,t,h},o){   // Schale und Deckel (2 mm grösser rundherum)
+  const hl=Math.min(Math.max(h/4,15),h), A=poly(quaderV(b,t,h),{col:o.col,offen:true}), B=poly(quaderV(b+4,t+4,hl),{col:o.col,offen:true});
+  const z0=h+Math.max(12,h*0.35)+hl;
+  B.mesh.polys.forEach(p=>{ p.pts=p.pts.map(q=>[q[0]-2,q[1]-2,z0-q[2]]); p.n=[p.n[0],p.n[1],-p.n[2]]; });
+  return {stuecke:[...A.stuecke,...B.stuecke],mesh:{polys:[...A.mesh.polys,...B.mesh.polys],deko:[],offen:true}};
+}
+function haus({b,t,h,d},o){
+  const V=[...quaderV(b,t,h),[b/2,0,h+d],[b/2,t,h+d]], dw=b*0.14, dh=Math.min(h*0.62,h-3), deko=[{pts:[[b/2-dw,0,0],[b/2-dw,0,dh],[b/2+dw,0,dh],[b/2+dw,0,0]],zu:true,voll:true,col:TUER}];
+  const rf=Math.min(d*0.22,b*0.1); if(rf>2) for(const y of [0,t]) deko.push({pts:kreis3([b/2,y,h+d*0.38],[1,0,0],[0,0,1],rf,20),zu:true});
+  const ws=Math.min(t*0.12,h*0.17), zc=h*0.58;
+  if(ws>2.5) for(const x of [0,b]) for(const yy of [t*0.3,t*0.7]) deko.push({pts:[[x,yy-ws,zc-ws],[x,yy+ws,zc-ws],[x,yy+ws,zc+ws],[x,yy-ws,zc+ws]],zu:true},{pts:[[x,yy,zc-ws],[x,yy,zc+ws]]},{pts:[[x,yy-ws,zc],[x,yy+ws,zc]]});
+  return poly(V,{farbe:n=>n[2]>0.3?DACH:o.col,deko});
+}
+function zylinder({d,h},o){
+  const r=d/2, C=Math.PI*d, n=Math.max(8,Math.round(C/12)), w=C/n, tz=Math.min(7,r*0.35), g=8;
+  const xs=[...Array(n+1)].map((_,i)=>i===n?C:i*w), mantel=[...xs.map(x=>[x,0]),...xs.slice().reverse().map(x=>[x,h])], laschen=[];
+  for(let i=0;i<n;i++){ const a=xs[i], b=xs[i+1], e=w*0.18; laschen.push([[a,0],[a+e,-tz],[b-e,-tz],[b,0]],[[a,h],[a+e,h+tz],[b-e,h+tz],[b,h]]); }
+  laschen.push([[C,0],[C+g,3],[C+g,h-3],[C,h]]);
+  const deko=[];
+  if(o.deko==='gesicht'){ const cx=C/2, cy=h*0.42, s=Math.min(r,h*0.6);
+    deko.push({pts:kreis2(cx-s*0.36,cy-s*0.12,s*0.11,16),zu:true,voll:true},{pts:kreis2(cx+s*0.36,cy-s*0.12,s*0.11,16),zu:true,voll:true},{pts:bogen2(cx,cy,s*0.5,25*Math.PI/180,155*Math.PI/180,16)}); }
+  const auf=p=>{ const f=-1.5*Math.PI+p[0]/r; return [r*Math.cos(f),r*Math.sin(f),h-p[1]]; };
+  const m=M3(false); zyl3(m,r,0,h,o.col);
+  m.deko=deko.map(dd=>({...dd,pts:dd.pts.map(p=>mul(auf(p),1)).map(p=>[p[0]*1.004,p[1]*1.004,p[2]]),n:[0,-1,0]}));
+  const scheibe=()=>({flaechen:[{pts:kreis2(0,0,r,72),col:o.col}],laschen:[],falz:[],deko:[]});
+  return {stuecke:[{flaechen:[{pts:mantel,col:o.col}],laschen,falz:[],deko},scheibe(),scheibe()],mesh:m};
+}
+function hut({d,h},o){
+  const r=d/2; h=Math.max(h,r*0.8); const s=Math.hypot(r,h), th=2*Math.PI*r/s, n=Math.max(24,Math.round(th*s/5)), A=[];
+  for(let i=0;i<=n;i++){ const a=Math.PI/2-th/2+th*i/n; A.push([s*Math.cos(a),s*Math.sin(a)]); }
+  const sektor=[[0,0],...A];
+  const m=M3(true), N=40;
+  for(let i=0;i<N;i++){ const a=2*Math.PI*i/N, b=2*Math.PI*(i+1)/N; fl(m,[[r*Math.cos(a),r*Math.sin(a),0],[r*Math.cos(b),r*Math.sin(b),0],[0,0,h]],o.col,[0,0,h*0.3],true); }
+  return {stuecke:[{flaechen:[{pts:sektor,col:o.col}],laschen:[lascheAn([0,0],A[0],sektor,10)],falz:[],deko:[]}],mesh:m};
+}
+function kissen({b,l},o){   // Kissenbox: zwei Bahnen, Bogenlaschen an beiden Enden
+  const e=b*0.25, fl2=[], falz=[];
+  for(const x0 of [0,b]){ const x1=x0+b; fl2.push({pts:[...bogen([x0,0],[x1,0],e,[0,-1]),...bogen([x1,l],[x0,l],e,[0,1])],col:o.col}); falz.push(bogen([x0,0],[x1,0],e,[0,1]),bogen([x0,l],[x1,l],e,[0,-1])); }
+  const m=M3(false), nu=18, nf=24, A=b*0.47, B=b*0.22, Pk=(u,f)=>{ const t=Math.pow(Math.sin(Math.PI*u/nu),0.55); return [l*u/nu,A*Math.cos(2*Math.PI*f/nf),B+B*t*Math.sin(2*Math.PI*f/nf)]; };
+  for(let u=0;u<nu;u++) for(let f=0;f<nf;f++){ const P=[Pk(u,f),Pk(u+1,f),Pk(u+1,f+1),Pk(u,f+1)]; fl(m,P,o.col,[mitte(P)[0],0,B],true); }
+  return {stuecke:[{flaechen:fl2,laschen:[[[2*b,0],[2*b+10,4],[2*b+10,l-4],[2*b,l]]],falz,deko:[]}],mesh:m};
+}
+const schneide=(P0,d,poly)=>{ const ts=[];
+  for(let i=0;i<poly.length;i++){ const a=poly[i], e=s2(poly[(i+1)%poly.length],a), den=d[0]*e[1]-d[1]*e[0]; if(Math.abs(den)<1e-12) continue;
+    const w=s2(a,P0), t=(w[0]*e[1]-w[1]*e[0])/den, s=(w[0]*d[1]-w[1]*d[0])/den; if(s>=-1e-9&&s<=1+1e-9) ts.push(t); }
+  return [a2(P0,m2(d,Math.min(...ts))),a2(P0,m2(d,Math.max(...ts)))]; };
+function stern({d},o){   // Sternenschale: Fünfeck, Achsen falten, Ecken zur Mitte falten
+  const stuecke=[];
+  for(const f of [1,0.82]){ const R=d/2*f, P=[...Array(5)].map((_,k)=>{ const a=-Math.PI/2+k*2*Math.PI/5; return [R*Math.cos(a),R*Math.sin(a)]; }), falz=[];
+    for(let k=0;k<5;k++){ const u=m2(P[k],1/R); falz.push([P[k],m2(a2(P[(k+2)%5],P[(k+3)%5]),0.5)],schneide(m2(u,R/2),[-u[1],u[0]],P)); }
+    stuecke.push({flaechen:[{pts:P,col:o.col}],laschen:[],falz,deko:[]}); }
+  const m=M3(true), R=d/2, ring=[...Array(10)].map((_,i)=>{ const a=-Math.PI/2+i*Math.PI/5, sp=i%2===0; return [R*(sp?0.8:0.44)*Math.cos(a),R*(sp?0.8:0.44)*Math.sin(a),R*(sp?0.42:0.2)]; });
+  for(let i=0;i<10;i++) fl(m,[[0,0,0],ring[i],ring[(i+1)%10]],o.col,[0,0,R*3]);
+  return {stuecke,mesh:m};
+}
+function streifen(b,l,col,Lmax){   // Hexentreppe: Streifen mit Falzmarken; zu lang → teilen, graue Fläche zum Ankleben
+  const n=Math.max(2,Math.round(l/b)), L=n*b, maxN=Math.max(1,Math.floor((Lmax-b)/b)), seg=Math.ceil(n/Math.ceil(n/maxN))*b, out=[];   // gleich lange Stücke
+  for(let start=0;start<L-0.01;start+=seg){ const lg=Math.min(seg,L-start), falz=[];
+    for(let x=b;x<lg-0.01;x+=b) falz.push([[x,0],[x,b]]);
+    out.push({flaechen:[{pts:rect(0,0,lg,b),col}],laschen:start+lg<L-0.01?[rect(lg,0,lg+b,b)]:[],falz,deko:[]}); }
+  return out;
+}
+function treppe({b,l},o){
+  const m=M3(false); stapel3(m,b,Math.min(24,Math.max(6,Math.round(l/b/2))),0,[o.col,o.col2]);
+  return {stuecke:[...streifen(b,l,o.col,o.Lmax),...streifen(b,l,o.col2,o.Lmax)],mesh:m};
+}
+function kerze({d,b,l},o){
+  const r=d/2, fr=b*0.6, flamme=[...bogen2(0,0,fr,-Math.PI/6,7*Math.PI/6,24),[0,-fr*2.4]];
+  const m=M3(false); zyl3(m,r,0,3,KARTON,48);
+  const zt=stapel3(m,b,Math.min(20,Math.max(6,Math.round(l/b/2))),3,[o.col,o.col2]), fh=b*1.6, rr=b*0.32, N=16;
+  for(let i=0;i<N;i++){ const a=2*Math.PI*i/N, c=2*Math.PI*(i+1)/N, A=[rr*Math.cos(a),rr*Math.sin(a),zt+fh*0.35], B=[rr*Math.cos(c),rr*Math.sin(c),zt+fh*0.35];
+    fl(m,[[0,0,zt],B,A],FLAMME,[0,0,zt+fh*0.35],true); fl(m,[A,B,[0,0,zt+fh]],FLAMME,[0,0,zt+fh*0.35],true); }
+  return {stuecke:[{flaechen:[{pts:kreis2(0,0,r,72),col:KARTON}],laschen:[],falz:[],deko:[]},{flaechen:[{pts:flamme,col:FLAMME}],laschen:[],falz:[],deko:[]},
+    ...streifen(b,l,o.col,o.Lmax),...streifen(b,l,o.col2,o.Lmax)],mesh:m};
+}
+const MODELLE=[
+  {id:'wuerfel',name:'Würfel',felder:[['a','Kante',5,2,12]],deko:['','augen','gesicht'],bau:({a},o)=>poly(quaderV(a,a,a),{col:o.col,deko:wuerfelDeko(a,o.deko)})},
+  {id:'quader',name:'Quader',felder:[['b','Breite',6,2,15],['t','Tiefe',4,2,15],['h','Höhe',8,2,15]],bau:({b,t,h},o)=>poly(quaderV(b,t,h),{col:o.col})},
+  {id:'box',name:'Box',felder:[['b','Breite',6,2,12],['t','Tiefe',4,2,10],['h','Höhe',8,2,15]],bau:box},
+  {id:'schachtel',name:'Schachtel',felder:[['b','Breite',8,3,15],['t','Tiefe',6,3,15],['h','Höhe',4,1.5,10]],bau:schachtel},
+  {id:'pyramide',name:'Pyramide',felder:[['b','Breite',7,2,15],['h','Höhe',6,1,15]],bau:({b,h},o)=>poly([[0,0,0],[b,0,0],[b,b,0],[0,b,0],[b/2,b/2,h]],{col:o.col})},
+  {id:'tetraeder',name:'Tetraeder',felder:[['a','Kante',7,2,15]],bau:({a},o)=>poly(platonV('tetra',a),{col:o.col})},
+  {id:'oktaeder',name:'Oktaeder',felder:[['a','Kante',5,2,10]],bau:({a},o)=>poly(platonV('okta',a),{col:o.col})},
+  {id:'dodekaeder',name:'Dodekaeder',felder:[['a','Kante',3,1.5,6]],bau:({a},o)=>poly(platonV('dodeka',a),{col:o.col})},
+  {id:'ikosaeder',name:'Ikosaeder',felder:[['a','Kante',3.5,1.5,7]],bau:({a},o)=>poly(platonV('ikosa',a),{col:o.col})},
+  {id:'haus',name:'Haus',felder:[['b','Breite',6,2,12],['t','Tiefe',7,2,12],['h','Höhe',5,2,12],['d','Dach',3,0.5,8]],bau:haus},
+  {id:'prisma',name:'Prisma',felder:[['a','Kante',5,2,10],['l','Länge',10,2,20]],bau:({a,l},o)=>poly([[0,0,0],[a,0,0],[a/2,0,a*Math.sqrt(3)/2],[0,l,0],[a,l,0],[a/2,l,a*Math.sqrt(3)/2]],{col:o.col})},
+  {id:'zylinder',name:'Zylinder',felder:[['d','⌀',6,2,12],['h','Höhe',8,2,20]],deko:['','gesicht'],bau:zylinder},
+  {id:'hut',name:'Hut',felder:[['d','⌀',8,3,16],['h','Höhe',12,3,25]],bau:hut},
+  {id:'kissen',name:'Kissen',felder:[['b','Breite',6,3,10],['l','Länge',12,4,20]],bau:kissen},
+  {id:'stern',name:'Stern',felder:[['d','⌀',14,5,19]],bau:stern},
+  {id:'kerze',name:'Kerze',felder:[['d','⌀',8,4,15],['b','Breite',2,1,4],['l','Länge',25,10,60]],bau:kerze},
+  {id:'treppe',name:'Hexentreppe',felder:[['b','Breite',2.5,1,5],['l','Länge',40,10,100]],bau:treppe},
+];
+const MOD=Object.fromEntries(MODELLE.map(m=>[m.id,m]));
+const DEKO={'':'∅',augen:'⚄',gesicht:'🙂'};
+
+// ---------- Kanten einteilen: zweimal benutzt = Falz, einmal = Schnitt ----------
+const pk=p=>Math.round(p[0]*100)+','+Math.round(p[1]*100);
+function klassieren(st){
+  const z=new Map();
+  for(const P of [...st.flaechen.map(f=>f.pts),...st.laschen]) for(let i=0;i<P.length;i++){ const a=P[i], b=P[(i+1)%P.length]; if(l2(s2(a,b))<0.01) continue;
+    const ka=pk(a), kb=pk(b), k=ka<kb?ka+'|'+kb:kb+'|'+ka, e=z.get(k); if(e) e.n++; else z.set(k,{a,b,n:1}); }
+  const falt=[...st.falz], schnitt=[]; for(const e of z.values()) (e.n>1?falt:schnitt).push([e.a,e.b]);
+  return {...st,falt,schnitt};
+}
+
+// ---------- Auf Blätter verteilen ----------
+const punkte=s=>[...s.flaechen.flatMap(f=>f.pts),...s.laschen.flat(),...s.falt.flat()];
+function anordnen(stuecke,UW,UH){
+  const teile=[], gross=[];
+  for(const s of stuecke){ const pts=punkte(s); let best=null;
+    for(let g=0;g<180;g+=5){ const r=g*Math.PI/180, c=Math.cos(r), si=Math.sin(r); let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;
+      for(const p of pts){ const x=p[0]*c-p[1]*si, y=p[0]*si+p[1]*c; if(x<x0)x0=x; if(x>x1)x1=x; if(y<y0)y0=y; if(y>y1)y1=y; }
+      const bw=x1-x0, bh=y1-y0; if(bw>UW+0.01||bh>UH+0.01) continue;
+      const sc=bw*bh*(g%90?1.06:1); if(!best||sc<best.sc-1e-6) best={s,c,si,x0,y0,bw,bh,sc}; }
+    if(best) teile.push(best); else gross.push(s); }
+  teile.sort((a,b)=>b.bh-a.bh);
+  const blaetter=[]; let x=0,y=0,zh=0,hoehe=0;
+  for(const t of teile){
+    if(!blaetter.length) blaetter.push([]);
+    if(x>0&&x+t.bw>UW+0.01){ x=0; y+=zh+ABST; zh=0; }
+    if(y>0&&y+t.bh>UH+0.01){ blaetter.push([]); x=0; y=0; zh=0; }
+    t.dx=x-t.x0; t.dy=y-t.y0; blaetter[blaetter.length-1].push(t); x+=t.bw+ABST; zh=Math.max(zh,t.bh); hoehe=Math.max(hoehe,y+zh); }
+  return {blaetter,gross,hoehe};
+}
+function stueckSVG(t,ox,oy){
+  const T=p=>[p[0]*t.c-p[1]*t.si+t.dx+ox,p[0]*t.si+p[1]*t.c+t.dy+oy], f=p=>{ const q=T(p); return q[0].toFixed(2)+' '+q[1].toFixed(2); };
+  const P=pts=>'M'+pts.map(f).join('L'), s=t.s; let o='';
+  for(const fl of s.flaechen) o+=`<path d="${P(fl.pts)}Z" fill="${fl.col}"/>`;
+  for(const l of s.laschen) o+=`<path d="${P(l)}Z" fill="${LASCHE}"/>`;
+  for(const d of s.deko) o+=`<path d="${P(d.pts)}${d.zu?'Z':''}" fill="${d.voll?(d.col||LINIE):'none'}" stroke="${LINIE}" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+  if(s.falt.length) o+=`<path d="${s.falt.map(P).join('')}" fill="none" stroke="#000" stroke-width="0.3" stroke-dasharray="2 1.4"/>`;
+  if(s.schnitt.length) o+=`<path d="${s.schnitt.map(P).join('')}" fill="none" stroke="#000" stroke-width="0.45" stroke-linecap="round"/>`;
+  return o;
+}
+
+// ---------- 3D zeichnen ----------
+const hex=c=>[parseInt(c.slice(1,3),16),parseInt(c.slice(3,5),16),parseInt(c.slice(5,7),16)];
+const schatt=(c,k)=>'rgb('+hex(c).map(v=>Math.min(255,Math.round(v*k))).join(',')+')';
+function zeichne3D(cv,m,yaw,pitch){
+  const ctx=cv.getContext('2d'), W=cv.width, H=cv.height; ctx.clearRect(0,0,W,H); if(!m||!W) return;
+  if(!m.b){ const all=m.polys.flatMap(p=>p.pts), lo=[0,1,2].map(i=>Math.min(...all.map(p=>p[i]))), hi=[0,1,2].map(i=>Math.max(...all.map(p=>p[i]))), c=mul(add(lo,hi),0.5);
+    m.b={c,r:Math.max(...all.map(p=>len(sub(p,c))))||1}; }
+  const {c,r}=m.b, cy=Math.cos(yaw), sy=Math.sin(yaw), cp=Math.cos(pitch), sp=Math.sin(pitch);
+  const rot=v=>{ const x1=v[0]*cy-v[1]*sy, y1=v[0]*sy+v[1]*cy; return [x1,y1*cp-v[2]*sp,y1*sp+v[2]*cp]; };
+  const D=r*4, s=0.46*Math.min(W,H)*(D-r)/(D*r), cam=[0,-D,0], L=norm([-0.45,-0.6,0.75]);
+  const pr=v=>{ const q=rot(sub(v,c)), f=D/(D+q[1]); return [W/2+q[0]*s*f,H/2-q[2]*s*f,q[1]]; };
+  const liste=m.polys.map(p=>{ const q=p.pts.map(pr), n=rot(p.n), cc=rot(sub(mitte(p.pts),c)); return {p,q,n,sicht:dot(n,sub(cam,cc))>0,z:q.reduce((a,b)=>a+b[2],0)/q.length}; });
+  liste.sort((a,b)=>b.z-a.z);
+  const lw=Math.max(1,W/260); ctx.lineJoin='round'; ctx.lineCap='round';
+  for(const e of liste){ if(!e.sicht&&!m.offen) continue;
+    const n=e.sicht?e.n:mul(e.n,-1), col=schatt(e.p.col,(0.6+0.42*Math.max(0,dot(n,L)))*(e.sicht?1:0.75));
+    ctx.beginPath(); e.q.forEach((pt,i)=>i?ctx.lineTo(pt[0],pt[1]):ctx.moveTo(pt[0],pt[1])); ctx.closePath();
+    ctx.fillStyle=col; ctx.fill(); ctx.strokeStyle=e.p.glatt?col:'rgba(23,33,47,.6)'; ctx.lineWidth=e.p.glatt?0.8:lw; ctx.stroke(); }
+  for(const d of m.deko){ const n=rot(d.n), cc=rot(sub(mitte(d.pts),c)); if(dot(n,sub(cam,cc))<=0) continue;
+    ctx.beginPath(); d.pts.map(pr).forEach((pt,i)=>i?ctx.lineTo(pt[0],pt[1]):ctx.moveTo(pt[0],pt[1])); if(d.zu) ctx.closePath();
+    if(d.voll){ ctx.fillStyle=d.col||LINIE; ctx.fill(); } ctx.strokeStyle=LINIE; ctx.lineWidth=lw; ctx.stroke(); }
+}
+
+// ---------- Zustand ----------
+const S={f:'wuerfel',farbe:0,papier:'a4',deko:{},v:{}};
+try{ const g=JSON.parse(localStorage.getItem(KEY)||'{}'); for(const k in S) if(g[k]!==undefined) S[k]=g[k]; }catch(e){}
+{ const q=new URLSearchParams(location.search), f=q.get('f');
+  if(f&&MOD[f]){ S.f=f; const v=S.v[f]=S.v[f]||{}; for(const [k] of MOD[f].felder) if(q.has(k)) v[k]=parseFloat(q.get(k)); if(q.has('d')&&MOD[f].deko) S.deko[f]=q.get('d'); }
+  if(q.has('c')) S.farbe=+q.get('c')||0; if(PAPIERE[q.get('p')]) S.papier=q.get('p'); }
+if(!MOD[S.f]) S.f='wuerfel'; if(!(S.farbe>=0&&S.farbe<FARBEN.length)) S.farbe=0; if(!PAPIERE[S.papier]) S.papier='a4';
+function werte(m){ const g=S.v[m.id]||{}, o={};
+  for(const [k,,d,lo,hi] of m.felder){ let x=parseFloat(g[k]); if(!isFinite(x)) x=d; o[k]=Math.min(hi,Math.max(lo,Math.round(x*10)/10)); }
+  return o; }
+function speichern(){
+  try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){}
+  const m=MOD[S.f], q=new URLSearchParams({f:S.f,...werte(m)}); if(m.deko&&S.deko[m.id]) q.set('d',S.deko[m.id]); if(S.farbe) q.set('c',S.farbe); if(S.papier!=='a4') q.set('p',S.papier);
+  try{ history.replaceState(null,'','?'+q); }catch(e){}
+}
+function optionen(m,col,P){ const UW=P.w-2*M, UH=P.h-2*M-FUSS, i=FARBEN.indexOf(col);
+  return {col,col2:FARBEN[(Math.max(0,i)+1)%FARBEN.length],deko:m.deko?(S.deko[m.id]||''):'',Lmax:Math.max(UW,UH)-1}; }
+function bauen(m,col,P){ PLATZ=[P.w-2*M-1,P.h-2*M-FUSS-1]; const v=werte(m), mm={}; for(const k in v) mm[k]=v[k]*10; const r=m.bau(mm,optionen(m,col,P)); return {stuecke:r.stuecke.map(klassieren),mesh:r.mesh,v}; }
+
+// ---------- Oberfläche ----------
+const cv=$('cv3'), reduziert=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let yaw=0.6, pitch=0.5, auto=!reduziert, zieh=null, aktuell=null;
+const malen=()=>zeichne3D(cv,aktuell,yaw,pitch);
+function felderBauen(){
+  const m=MOD[S.f], v=werte(m);
+  $('felder').innerHTML=m.felder.map(([k,lbl,,lo,hi])=>`<div><label class="lbl" for="f-${k}">${esc(lbl)}</label><div class="stepper"><button type="button" data-k="${k}" data-d="-0.5" aria-label="${esc(lbl)} −">−</button><input id="f-${k}" data-k="${k}" type="text" inputmode="decimal" autocomplete="off" value="${zahl(v[k])}"><button type="button" data-k="${k}" data-d="0.5" aria-label="${esc(lbl)} +">+</button><span>cm</span></div></div>`).join('');
+  $('deko-z').hidden=!m.deko;
+  if(m.deko) $('deko').innerHTML=m.deko.map(d=>`<button type="button" class="chip em" data-deko="${d}" aria-pressed="${(S.deko[m.id]||'')===d}" aria-label="${d||'ohne'}">${DEKO[d]}</button>`).join('');
+  document.querySelectorAll('.kachel').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===S.f));
+}
+function neu(){
+  const m=MOD[S.f], P=PAPIERE[S.papier], UW=P.w-2*M, UH=P.h-2*M-FUSS, r=bauen(m,FARBEN[S.farbe],P);
+  aktuell=r.mesh; malen();
+  const ganz=anordnen(r.stuecke,UW,Infinity), plan=anordnen(r.stuecke,UW,UH), n=plan.blaetter.length;
+  $('netz').setAttribute('viewBox',`-2 -2 ${UW+4} ${Math.max(10,ganz.hoehe)+4}`);
+  $('netz').innerHTML=ganz.blaetter.flat().map(t=>stueckSVG(t,0,0)).join('');
+  const masse=m.felder.map(f=>zahl(r.v[f[0]])).join(' × ')+' cm';
+  const blatt=(bl,i,druck)=>{ const yf=P.h-M-5;
+    let s=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${P.w} ${P.h}"${druck?` width="${P.w}mm" height="${P.h}mm"`:''}>`;
+    s+=bl.map(t=>stueckSVG(t,M,M)).join('');
+    s+=`<path d="M${M},${yf-2}v4M${M},${yf}h50M${M+50},${yf-2}v4" fill="none" stroke="#000" stroke-width="0.35"/>`;
+    s+=`<text x="${M+25}" y="${yf-3}" text-anchor="middle" font-family="Nunito,Arial,sans-serif" font-size="2.8" fill="#000">5 cm</text>`;
+    s+=`<text x="${P.w-M}" y="${yf+1}" text-anchor="end" font-family="Nunito,Arial,sans-serif" font-size="3" fill="#000">${esc(m.name+' · '+masse+(n>1?' · '+(i+1)+'/'+n:''))}</text>`;
+    s+=`<text x="${P.w-M}" y="${yf+5}" text-anchor="end" font-family="Nunito,Arial,sans-serif" font-size="2.4" fill="#666">Schritt für Schritt · Falt-Generator</text>`;
+    return s+'</svg>'; };
+  $('blaetter').innerHTML=plan.blaetter.map((bl,i)=>blatt(bl,i,false)).join('');
+  $('druck').innerHTML=plan.blaetter.map((bl,i)=>blatt(bl,i,true)).join('');
+  $('seite').textContent=`@page{size:${P.name} portrait;margin:0}#druck{--bw:${P.w}mm;--bh:${P.h}mm}`;
+  const teile=r.stuecke.length;
+  $('werte').innerHTML=`<div class="wert"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg><div><b>${n}</b><small>Blätter</small></div></div>`+
+    `<div class="wert"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.6 7.6L20 17M8.6 16.4L20 7"/></svg><div><b>${teile}</b><small>Teile</small></div></div>`;
+  $('warn').hidden=!plan.gross.length; $('warn').textContent=plan.gross.length?'⚠ Zu gross'+(S.papier==='a4'?' → A3':''):'';
+  $('drucken').disabled=!n;
+  document.querySelectorAll('#papier .chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.papier===S.papier));
+  document.querySelectorAll('#farben .farbe').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.c===S.farbe));
+  speichern();
+}
+
+$('modelle').innerHTML=MODELLE.map(m=>`<button type="button" class="kachel" data-f="${m.id}" aria-pressed="false"><canvas width="112" height="112" data-ic="${m.id}" aria-hidden="true"></canvas><span>${esc(m.name)}</span></button>`).join('');
+$('farben').innerHTML=FARBEN.map((c,i)=>`<button type="button" class="farbe" style="--c:${c}" data-c="${i}" aria-pressed="false" aria-label="Farbe ${i+1}"></button>`).join('');
+$('modelle').addEventListener('click',e=>{ const b=e.target.closest('.kachel'); if(!b||b.dataset.f===S.f) return; S.f=b.dataset.f; felderBauen(); neu(); });
+$('farben').addEventListener('click',e=>{ const b=e.target.closest('.farbe'); if(!b) return; S.farbe=+b.dataset.c; neu(); });
+$('deko').addEventListener('click',e=>{ const b=e.target.closest('[data-deko]'); if(!b) return; S.deko[S.f]=b.dataset.deko; document.querySelectorAll('#deko .chip').forEach(c=>c.setAttribute('aria-pressed',c===b)); neu(); });
+$('papier').addEventListener('click',e=>{ const b=e.target.closest('[data-papier]'); if(!b) return; S.papier=b.dataset.papier; neu(); });
+$('felder').addEventListener('click',e=>{ const b=e.target.closest('button[data-d]'); if(!b) return; const m=MOD[S.f], k=b.dataset.k;
+  (S.v[m.id]=S.v[m.id]||{})[k]=werte(m)[k]+ +b.dataset.d; const v=werte(m); S.v[m.id][k]=v[k]; $('f-'+k).value=zahl(v[k]); neu(); });
+$('felder').addEventListener('input',e=>{ const i=e.target.closest('input[data-k]'); if(!i) return; const x=parseFloat(i.value.replace(',','.')); if(!isFinite(x)) return; (S.v[S.f]=S.v[S.f]||{})[i.dataset.k]=x; neu(); });
+$('felder').addEventListener('change',e=>{ const i=e.target.closest('input[data-k]'); if(i) i.value=zahl(werte(MOD[S.f])[i.dataset.k]); });
+$('drucken').addEventListener('click',()=>window.print());
+
+cv.addEventListener('pointerdown',e=>{ zieh={x:e.clientX,y:e.clientY}; auto=false; cv.setPointerCapture(e.pointerId); });
+cv.addEventListener('pointermove',e=>{ if(!zieh) return; yaw-=(e.clientX-zieh.x)*0.012; pitch=Math.max(-0.3,Math.min(1.4,pitch+(e.clientY-zieh.y)*0.01)); zieh={x:e.clientX,y:e.clientY}; malen(); });
+const loslassen=()=>{ zieh=null; }; cv.addEventListener('pointerup',loslassen); cv.addEventListener('pointercancel',loslassen);
+const groesse=()=>{ const r=cv.getBoundingClientRect(), d=Math.min(2,devicePixelRatio||1); cv.width=Math.round(r.width*d); cv.height=Math.round(r.height*d); malen(); };
+if(window.ResizeObserver) new ResizeObserver(groesse).observe(cv); else addEventListener('resize',groesse);
+const lauf=()=>{ if(auto&&!document.hidden){ yaw+=0.006; malen(); } requestAnimationFrame(lauf); };
+
+felderBauen(); groesse(); neu(); requestAnimationFrame(lauf);
+// Symbole der Kacheln nach und nach zeichnen
+const ICON='#BFE3D6'; let ii=0;
+const icon=()=>{ const m=MODELLE[ii++]; if(!m) return; const c=document.querySelector(`canvas[data-ic="${m.id}"]`);
+  try{ const sv=S.deko; S.deko={}; const r=m.bau(Object.fromEntries(m.felder.map(([k,,d])=>[k,d*10])),{col:ICON,col2:'#FFE08A',deko:'',Lmax:260}); S.deko=sv; zeichne3D(c,r.mesh,0.6,0.5); }catch(e){}
+  setTimeout(icon,0); };
+setTimeout(icon,50);
+})();
+</script>
+</body>
+</html>
