@@ -403,6 +403,24 @@ function kerze({d,b,l},o){
   return {stuecke:[{flaechen:[{pts:kreis2(0,0,r,72),col:KARTON}],laschen:[],falz:[],deko:[]},{flaechen:[{pts:flamme,col:FLAMME}],laschen:[],falz:[],deko:[]},
     ...streifen(b,l,o.col,o.Lmax),...streifen(b,l,o.col2,o.Lmax)],mesh:m};
 }
+function ring(n,R,z,dreh=0){ return [...Array(n)].map((_,k)=>{ const a=dreh+2*Math.PI*k/n; return [R*Math.cos(a),R*Math.sin(a),z]; }); }
+const ecken=(o,n=6)=>+((o.deko||'e'+n).slice(1));
+function kristall({d,l,s},o){   // Säule mit zwei Spitzen
+  const n=ecken(o), u=s*0.5;
+  return poly([[0,0,0],...ring(n,d/2,u),...ring(n,d/2,u+l),[0,0,u+l+s]],{col:o.col});
+}
+function doppelspitze({d,h},o){
+  const n=ecken(o), u=h*0.3;
+  return poly([[0,0,0],...ring(n,d/2,u),[0,0,h]],{col:o.col});
+}
+function diamant({d,h},o){   // Tafel, Krone, Pavillon
+  const R=d/2, p=h*0.7;
+  return poly([[0,0,0],...ring(8,R,p),...ring(8,R*0.55,h,Math.PI/8)],{col:o.col});
+}
+function geokerze({a,h},o){   // Giessform: Antiprisma, oben offen
+  const n=ecken(o,5), R=a/(2*Math.sin(Math.PI/n));
+  return poly([...ring(n,R,0),...ring(n,R,h,Math.PI/n)],{col:o.col,offen:true});
+}
 const MODELLE=[
   {id:'wuerfel',name:'Würfel',felder:[['a','Kante',5,2,12]],deko:['','augen','gesicht'],bau:({a},o)=>poly(quaderV(a,a,a),{col:o.col,deko:wuerfelDeko(a,o.deko)})},
   {id:'quader',name:'Quader',felder:[['b','Breite',6,2,15],['t','Tiefe',4,2,15],['h','Höhe',8,2,15]],bau:({b,t,h},o)=>poly(quaderV(b,t,h),{col:o.col})},
@@ -421,9 +439,13 @@ const MODELLE=[
   {id:'stern',name:'Stern',felder:[['d','⌀',14,5,19]],bau:stern},
   {id:'kerze',name:'Kerze',felder:[['d','⌀',8,4,15],['b','Breite',2,1,4],['l','Länge',25,10,60]],bau:kerze},
   {id:'treppe',name:'Hexentreppe',felder:[['b','Breite',2.5,1,5],['l','Länge',40,10,100]],bau:treppe},
+  {id:'kristall',name:'Kristall',felder:[['d','⌀',4,1.5,8],['l','Länge',8,1,16],['s','Spitze',3,1,8]],deko:['e4','e5','e6'],std:'e6',bau:kristall},
+  {id:'doppelspitze',name:'Doppelspitze',felder:[['d','⌀',5,2,10],['h','Höhe',12,3,24]],deko:['e4','e5','e6'],std:'e6',bau:doppelspitze},
+  {id:'diamant',name:'Diamant',felder:[['d','⌀',10,3,18],['h','Höhe',7,2,14]],bau:diamant},
+  {id:'geokerze',name:'Geokerze',felder:[['a','Kante',4,2,8],['h','Höhe',6,2,12]],deko:['e4','e5','e6'],std:'e5',bau:geokerze},
 ];
 const MOD=Object.fromEntries(MODELLE.map(m=>[m.id,m]));
-const DEKO={'':'∅',augen:'⚄',gesicht:'🙂'};
+const DEKO={'':'∅',augen:'⚄',gesicht:'🙂',e4:'<svg viewBox="-12 -12 24 24" width="1.1em" height="1.1em" aria-hidden="true"><polygon fill="currentColor" points="0.0,-11.0 11.0,0.0 0.0,11.0 -11.0,0.0"/></svg>',e5:'<svg viewBox="-12 -12 24 24" width="1.1em" height="1.1em" aria-hidden="true"><polygon fill="currentColor" points="0.0,-11.0 10.5,-3.4 6.5,8.9 -6.5,8.9 -10.5,-3.4"/></svg>',e6:'<svg viewBox="-12 -12 24 24" width="1.1em" height="1.1em" aria-hidden="true"><polygon fill="currentColor" points="0.0,-11.0 9.5,-5.5 9.5,5.5 0.0,11.0 -9.5,5.5 -9.5,-5.5"/></svg>'};
 
 // ---------- Kanten einteilen: zweimal benutzt = Falz, einmal = Schnitt ----------
 const pk=p=>Math.round(p[0]*100)+','+Math.round(p[1]*100);
@@ -504,7 +526,7 @@ function speichern(){
   try{ history.replaceState(null,'','?'+q); }catch(e){}
 }
 function optionen(m,col,P){ const UW=P.w-2*M, UH=P.h-2*M-FUSS, i=FARBEN.indexOf(col);
-  return {col,col2:FARBEN[(Math.max(0,i)+1)%FARBEN.length],deko:m.deko?(S.deko[m.id]||''):'',Lmax:Math.max(UW,UH)-1}; }
+  return {col,col2:FARBEN[(Math.max(0,i)+1)%FARBEN.length],deko:m.deko?(S.deko[m.id]||m.std||m.deko[0]):'',Lmax:Math.max(UW,UH)-1}; }
 function bauen(m,col,P){ PLATZ=[P.w-2*M-1,P.h-2*M-FUSS-1]; const v=werte(m), mm={}; for(const k in v) mm[k]=v[k]*10; const r=m.bau(mm,optionen(m,col,P)); return {stuecke:r.stuecke.map(klassieren),mesh:r.mesh,v}; }
 
 // ---------- Oberfläche ----------
@@ -514,8 +536,8 @@ const malen=()=>zeichne3D(cv,aktuell,yaw,pitch);
 function felderBauen(){
   const m=MOD[S.f], v=werte(m);
   $('felder').innerHTML=m.felder.map(([k,lbl,,lo,hi])=>`<div><label class="lbl" for="f-${k}">${esc(lbl)}</label><div class="stepper"><button type="button" data-k="${k}" data-d="-0.5" aria-label="${esc(lbl)} −">−</button><input id="f-${k}" data-k="${k}" type="text" inputmode="decimal" autocomplete="off" value="${zahl(v[k])}"><button type="button" data-k="${k}" data-d="0.5" aria-label="${esc(lbl)} +">+</button><span>cm</span></div></div>`).join('');
-  $('deko-z').hidden=!m.deko;
-  if(m.deko) $('deko').innerHTML=m.deko.map(d=>`<button type="button" class="chip em" data-deko="${d}" aria-pressed="${(S.deko[m.id]||'')===d}" aria-label="${d||'ohne'}">${DEKO[d]}</button>`).join('');
+  $('deko-z').hidden=!m.deko; if(m.deko) $('deko-z').querySelector('.lbl').textContent=m.std?'Ecken':'Deko';
+  if(m.deko) $('deko').innerHTML=m.deko.map(d=>`<button type="button" class="chip em" data-deko="${d}" aria-pressed="${(S.deko[m.id]||m.std||m.deko[0])===d}" aria-label="${d?(d[0]==='e'?d.slice(1)+' Ecken':d):'ohne'}">${DEKO[d]}</button>`).join('');
   document.querySelectorAll('.kachel').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===S.f));
 }
 function neu(){
