@@ -8,13 +8,13 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <link rel="stylesheet" href="kontrolle.css">
 <style>
-/* Unterrichtsmaterial aus schrittli-werkstatt/material (Katalog: material/katalog.json) */
+/* Unterrichtsmaterial aus schrittli-werkstatt/material (Katalog: material/katalog.json, eine Kachel pro Dokument oder Thema) */
 #suche{flex:1;min-width:180px;max-width:320px;border-radius:999px;padding:7px 14px;border:0;box-shadow:var(--shadow-sm)}
 .mappe{background:var(--surface);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-sm);border:0;padding:0;text-align:left;font:inherit;color:inherit;cursor:pointer;display:flex;flex-direction:column;transition:transform .12s}
 .mappe:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
 .mappe:focus-visible{outline:3px solid var(--lern);outline-offset:2px}
-.mappe .bild{aspect-ratio:4/3;background:var(--surface2);display:grid;place-items:center;font-size:42px}
-.mappe .bild img{width:100%;height:100%;object-fit:cover;display:block}
+.mappe .bild{aspect-ratio:4/3;position:relative;overflow:hidden;background:var(--surface2);display:grid;place-items:center;font-size:42px}
+.mappe .bild img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;display:block}
 .mappe .text{padding:9px 12px 11px;display:flex;flex-direction:column;gap:4px}
 .mappe .titel{font:600 15px/1.2 var(--display)}
 .mappe .arten{font-size:13px;letter-spacing:1px}
@@ -54,10 +54,10 @@ const ART={pdf:['📄','application/pdf'],jpg:['🖼️','image/jpeg'],jpeg:['�
  md:['📃','text/plain;charset=utf-8'],txt:['📃','text/plain;charset=utf-8'],json:['🧩','application/json'],jsonl:['🧩','text/plain;charset=utf-8'],html:['🌐','text/html;charset=utf-8'],js:['🧩','']};
 const endung=n=>(n.match(/\.([a-z0-9]+)$/i)||[,''])[1].toLowerCase();
 const groesse=b=>b>=1e6?(b/1e6).toFixed(1).replace('.0','')+' MB':Math.max(1,Math.round(b/1e3))+' kB';
-const titel=m=>m.titel.replace(/\s\d{5,}$/,'').replace(/-/g,' ');
 const name=p=>p.split('/').pop().replace(/\.[a-z0-9]+$/i,'').replace(/[_]+/g,' ');
+const voll=(m,p)=>[m.pfad,p].filter(Boolean).join('/');
 let mappen=[],bereich='',suche='';
-try{await W.bereit();mappen=(await W.material.katalog()).mappen}catch(x){$('#liste').innerHTML=`<div class="nichts">⚠ ${esc(x.message||x)}</div>`;return}
+try{await W.bereit();mappen=(await W.material.katalog()).kacheln}catch(x){$('#liste').innerHTML=`<div class="nichts">⚠ ${esc(x.message||x)}</div>`;return}
 const bereiche=[...new Set(mappen.map(m=>m.bereich))];
 const passt=m=>(!bereich||m.bereich===bereich)&&(!suche||(m.titel+' '+m.bereich+' '+m.dateien.map(d=>d[0]).join(' ')).toLowerCase().includes(suche));
 
@@ -71,22 +71,22 @@ function leiste(){
 const beob=new IntersectionObserver(es=>es.forEach(async e=>{
  if(!e.isIntersecting)return;beob.unobserve(e.target);
  const m=mappen[+e.target.dataset.i];if(!m.bild)return;
- try{const b=await W.material.datei(m.pfad+'/'+m.bild);if(b)e.target.querySelector('.bild').innerHTML=`<img alt="" src="${URL.createObjectURL(b)}">`}catch{}
+ try{const b=await W.material.datei(m.bild);if(b)e.target.querySelector('.bild').innerHTML=`<img alt="" src="${URL.createObjectURL(b)}">`}catch{}
 }),{rootMargin:'300px'});
 function zeigen(){
  const gruppen=bereiche.map(b=>[b,mappen.map((m,i)=>[m,i]).filter(([m])=>m.bereich===b&&passt(m))]).filter(([,l])=>l.length);
  $('#liste').innerHTML=gruppen.length?gruppen.map(([b,l])=>`<section class="bereich"><h2>${esc(b.replace(/-/g,' '))}<span>${l.length}</span></h2><div class="gitter">${l.map(([m,i])=>{
    const arten=[...new Set(m.dateien.map(d=>(ART[endung(d[0])]||['📎'])[0]))];
-   return `<button class="mappe" data-i="${i}"><div class="bild">${arten[0]||'📁'}</div><div class="text"><div class="titel">${esc(titel(m))}</div><div class="arten">${arten.join('')} <span class="klein">${m.dateien.length}</span></div></div></button>`}).join('')}</div></section>`).join('')
+   return `<button class="mappe" data-i="${i}"><div class="bild">${arten[0]||'📁'}</div><div class="text">${m.titel?`<div class="titel">${esc(m.titel)}</div>`:''}<div class="arten">${arten.join('')}${m.dateien.length>1?` <span class="klein">${m.dateien.length}</span>`:''}</div></div></button>`}).join('')}</div></section>`).join('')
   :'<div class="nichts">∅</div>';
- $('#liste').querySelectorAll('.mappe').forEach(k=>{beob.observe(k);k.onclick=()=>oeffnen(+k.dataset.i)});
+ $('#liste').querySelectorAll('.mappe').forEach(k=>{beob.observe(k);k.onclick=()=>{const m=mappen[+k.dataset.i];m.dateien.length===1?holen(m,m.dateien[0][0],k):oeffnen(+k.dataset.i)}});
 }
 function oeffnen(i){
  const m=mappen[i],d=$('#mappe');
- d.querySelector('.kopf b').textContent=titel(m);
+ d.querySelector('.kopf b').textContent=m.titel||m.bereich;
  $('#dateien').innerHTML=m.dateien.map(([p,s],j)=>`<button class="datei" data-j="${j}"><span class="sym">${(ART[endung(p)]||['📎'])[0]}</span><span class="n">${esc(name(p))}</span><span class="kb">${groesse(s)}</span></button>`).join('');
  $('#dateien').querySelectorAll('.datei').forEach(b=>b.onclick=()=>holen(m,m.dateien[+b.dataset.j][0],b));
- history.replaceState(null,'','#m='+encodeURIComponent(m.pfad));
+ history.replaceState(null,'','#m='+encodeURIComponent(m.id));
  if(!d.open)d.showModal();
 }
 async function holen(m,p,knopf){
@@ -94,10 +94,10 @@ async function holen(m,p,knopf){
  const fenster=zeigbar?window.open('','_blank'):null;   // sofort öffnen, sonst blockiert Safari das Fenster nach dem Laden
  knopf.classList.add('laedt');$('#fehler').textContent='';
  try{
-  let b=await W.material.datei(m.pfad+'/'+p);if(!b)throw new Error('⚠ Fehlt');
+  let b=await W.material.datei(voll(m,p));if(!b)throw new Error('⚠ Fehlt');
   if(e==='html'){   // kleine Werkzeuge (z. B. Weben-Figuren): Skripte aus demselben Ordner einbetten
    let t=await b.text();const ordner=p.includes('/')?p.slice(0,p.lastIndexOf('/')+1):'';
-   for(const s of [...t.matchAll(/<script src="([^":]+)"><\/script>/g)]){const js=await W.material.datei(m.pfad+'/'+ordner+s[1]);if(js){const code=await js.text();t=t.replace(s[0],()=>'<script>'+code.replace(/<\/script/gi,'<\\/script')+'<\/script>')}}
+   for(const s of [...t.matchAll(/<script src="([^":]+)"><\/script>/g)]){const js=await W.material.datei(voll(m,ordner+s[1]));if(js){const code=await js.text();t=t.replace(s[0],()=>'<script>'+code.replace(/<\/script/gi,'<\\/script')+'<\/script>')}}
    b=new Blob([t],{type:typ})}
   else b=new Blob([b],{type:typ||'application/octet-stream'});
   const url=URL.createObjectURL(b);
@@ -110,7 +110,7 @@ async function holen(m,p,knopf){
 $('#mappe').addEventListener('click',e=>{if(e.target.value==='zu'||e.target===e.currentTarget)e.currentTarget.close()});
 $('#mappe').addEventListener('close',()=>history.replaceState(null,'',location.pathname));
 leiste();zeigen();
-const h=decodeURIComponent((location.hash.match(/^#m=(.+)$/)||[,''])[1]),i=mappen.findIndex(m=>m.pfad===h);
+const h=decodeURIComponent((location.hash.match(/^#m=(.+)$/)||[,''])[1]),i=mappen.findIndex(m=>m.id===h);
 if(i>=0)oeffnen(i);
 })();
 </script>
