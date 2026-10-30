@@ -1,5 +1,5 @@
 {
- "stand": "2026-10-26",
+ "stand": "2026-10-30",
  "hinweis": "Schulversion: Ordnung nach Verfahren (areaId): naehen, sticken, haekeln, stricken, weben, knuepfen, wickeln, filzen, falten, schneiden, holz, formen, drucken, experimente. Klassen in 'stufen' (1-6).",
  "videos": [
   {
@@ -26696,6 +26696,385 @@
     "text": "",
     "deliverable": "keine"
    }
+  },
+  {
+   "id": "zw-muetze-sticken",
+   "areaId": "sticken",
+   "stufen": [
+    2,
+    3,
+    4
+   ],
+   "niveau": 2,
+   "grundtechnik": false,
+   "techniken": [
+    "prickeln",
+    "sticken"
+   ],
+   "title": "Mütze prickeln und sticken",
+   "source": {
+    "type": "youtube",
+    "id": "SHiFh6BrY7c"
+   },
+   "kanal": "die Werklehrerin",
+   "dauer": "0:37",
+   "alter": "ab 7",
+   "sprache": "ohne Sprache",
+   "hinweis": "Vorlage gross drucken, damit die Löcher nicht zu nah beieinander liegen; Filz als Prickelunterlage.",
+   "material": [
+    "papier",
+    "stifte",
+    "schere",
+    "nadel",
+    "wolle",
+    "filz",
+    "leim",
+    "karton"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten"
+    },
+    {
+     "t": 2.8,
+     "label": "Vorlage ausmalen und ausschneiden"
+    },
+    {
+     "t": 8.2,
+     "label": "Löcher mit der Prickelnadel stechen"
+    },
+    {
+     "t": 15.3,
+     "label": "Muster mit Wolle sticken"
+    },
+    {
+     "t": 26.8,
+     "label": "Auf Karton kleben, mit Rand ausschneiden"
+    },
+    {
+     "t": 30.3,
+     "label": "Fertig – schau deine Mütze an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   },
+   "vorlagen": [
+    {
+     "datei": "?form=wintermuetze&b=12",
+     "name": "Wintermütze"
+    }
+   ]
+  },
+  {
+   "id": "zw-apfel-wurm",
+   "areaId": "schneiden",
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "niveau": 1,
+   "grundtechnik": false,
+   "techniken": [
+    "kleben",
+    "hexentreppe"
+   ],
+   "title": "Apfel mit Wurm",
+   "source": {
+    "type": "youtube",
+    "id": "xjRzbwtwan0"
+   },
+   "kanal": "die Werklehrerin",
+   "dauer": "1:23",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Die Birne entsteht gleich wie der Apfel; jede Form genau in der Mitte falten.",
+   "material": [
+    "papier",
+    "leim",
+    "schere",
+    "stifte",
+    "nadel",
+    "garn"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten"
+    },
+    {
+     "t": 3.3,
+     "label": "Sechs Apfelformen in der Mitte falten"
+    },
+    {
+     "t": 10.5,
+     "label": "Hälften aufeinanderkleben, Stiel einkleben"
+    },
+    {
+     "t": 36.0,
+     "label": "Blätter ankleben"
+    },
+    {
+     "t": 43.0,
+     "label": "Wurm: zwei Streifen ineinander falten"
+    },
+    {
+     "t": 59.5,
+     "label": "Gesicht malen, Wurm ankleben"
+    },
+    {
+     "t": 65.8,
+     "label": "Faden zum Aufhängen durchziehen"
+    },
+    {
+     "t": 72.0,
+     "label": "Fertig – schau dein Obst an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   },
+   "vorlagen": [
+    {
+     "datei": "?liste=apfel:8x7.59:6,blatt:2.2x3:2,rechteck:0.8x3:1,rechteck:1.5x20:2",
+     "name": "Apfel mit Wurm"
+    },
+    {
+     "datei": "?liste=birne:4.6x8:6,blatt:2.2x3:2,rechteck:0.8x3:1",
+     "name": "Birne"
+    }
+   ]
+  },
+  {
+   "id": "zw-pustefigur-trinkhalm",
+   "areaId": "schneiden",
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "niveau": 1,
+   "grundtechnik": false,
+   "techniken": [
+    "ausschneiden",
+    "kleben",
+    "papier rollen"
+   ],
+   "title": "Halloween-Figur zum Pusten",
+   "source": {
+    "type": "youtube",
+    "id": "ziyiIm0goIE"
+   },
+   "kanal": "die Werklehrerin",
+   "dauer": "2:14",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Eigene Zeichnungen gehen auch; die Papierrolle muss ganz locker über den Trinkhalm gleiten, sonst fliegt die Figur nicht.",
+   "material": [
+    "papier",
+    "stifte",
+    "schere",
+    "trinkhalm",
+    "leim"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten"
+    },
+    {
+     "t": 8.5,
+     "label": "Vorlage ausmalen, Figuren ausschneiden"
+    },
+    {
+     "t": 18.5,
+     "label": "Papierquadrate ausschneiden"
+    },
+    {
+     "t": 27.0,
+     "label": "Quadrat locker um den Trinkhalm rollen"
+    },
+    {
+     "t": 39.5,
+     "label": "Papierende auf der Rolle festkleben"
+    },
+    {
+     "t": 66.5,
+     "label": "Rolle abziehen, ein Ende flach umknicken, kleben"
+    },
+    {
+     "t": 85.0,
+     "label": "Rolle hinten auf die Figur kleben"
+    },
+    {
+     "t": 103.0,
+     "label": "Trinkhalm einstecken und kräftig pusten"
+    },
+    {
+     "t": 122.7,
+     "label": "Fertig – lass deine Figur fliegen"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   },
+   "vorlagen": [
+    {
+     "datei": "?liste=fledermaus:10x6.2:1,geist:6.16x7:1,kuerbis:8x7.09:1,rechteck:7x7:3",
+     "name": "Halloween-Figuren"
+    }
+   ]
+  },
+  {
+   "id": "zw-fledermaus-klammer",
+   "areaId": "schneiden",
+   "stufen": [
+    1,
+    2,
+    3
+   ],
+   "niveau": 1,
+   "grundtechnik": false,
+   "techniken": [
+    "schneiden",
+    "kleben"
+   ],
+   "title": "Bewegliche Fledermaus",
+   "source": {
+    "type": "youtube",
+    "id": "zok3wJAmvVA"
+   },
+   "kanal": "die Werklehrerin",
+   "dauer": "0:33",
+   "alter": "ab 6",
+   "sprache": "ohne Sprache",
+   "hinweis": "Den Papierstreifen nur an die untere Klammerhälfte kleben, damit die Flügel beim Drücken flattern.",
+   "material": [
+    "papier",
+    "waescheklammer",
+    "leim",
+    "schere",
+    "bleistift",
+    "stifte",
+    "wackelaugen"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten"
+    },
+    {
+     "t": 8.8,
+     "label": "Teile aus schwarzem Papier ausschneiden"
+    },
+    {
+     "t": 10.0,
+     "label": "Leim an die Klammer, Körper aufkleben"
+    },
+    {
+     "t": 16.0,
+     "label": "Papierstreifen an die Klammer kleben"
+    },
+    {
+     "t": 20.3,
+     "label": "Flügel auf den Streifen kleben"
+    },
+    {
+     "t": 26.5,
+     "label": "Augen aufkleben, Gesicht zeichnen"
+    },
+    {
+     "t": 30.4,
+     "label": "Fertig – schau deine Fledermaus an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   },
+   "vorlagen": [
+    {
+     "datei": "?liste=fledermaus-koerper:2.73x6:1,fledermaus-fluegel:15x5.63:1,rechteck:1.5x7:1",
+     "name": "Fledermaus"
+    }
+   ]
+  },
+  {
+   "id": "zw-vorstich-gitter",
+   "areaId": "sticken",
+   "stufen": [
+    1,
+    2
+   ],
+   "title": "Vorstich auf dem Stickgitter",
+   "source": {
+    "type": "youtube",
+    "id": "0aZU0eskxYI"
+   },
+   "kanal": "CCF",
+   "dauer": "2:14",
+   "alter": "ab 6",
+   "sprache": "Hochdeutsch",
+   "hinweis": "Stickgitter aus Kunststoff eignet sich gut für den Anfang: Die Löcher zeigen, wo die Nadel hin muss. Stumpfe Sticknadel verwenden.",
+   "material": [
+    "wolle",
+    "stopfnadel",
+    "schere"
+   ],
+   "steps": [
+    {
+     "t": 0,
+     "label": "Material richten"
+    },
+    {
+     "t": 16,
+     "label": "Wolle einfädeln, Knoten machen"
+    },
+    {
+     "t": 34,
+     "label": "Von hinten nach vorne stechen"
+    },
+    {
+     "t": 52,
+     "label": "Weiter links nach hinten stechen"
+    },
+    {
+     "t": 66,
+     "label": "Wolle ganz durchziehen"
+    },
+    {
+     "t": 76,
+     "label": "Immer abwechselnd hinten und vorne"
+    },
+    {
+     "t": 100,
+     "label": "Weiter um die Ecke sticken"
+    },
+    {
+     "t": 114,
+     "label": "Hinten mehrmals vernähen"
+    },
+    {
+     "t": 126,
+     "label": "Fertig – schau deine Linie an"
+    }
+   ],
+   "task": {
+    "text": "",
+    "deliverable": "keine"
+   },
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": [
+    "vorstich",
+    "einfaedeln",
+    "knoten"
+   ]
   }
  ]
 }
