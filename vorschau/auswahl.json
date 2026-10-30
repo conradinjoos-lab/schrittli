@@ -3443,5 +3443,329 @@
   "frei": false,
   "schwach": false,
   "notiz": "Becher in allen Bildern in der Hand gehalten oder mit Händen glasiert, dazu Werbung-Hinweis"
+ },
+ "zw-hammer-zangen": {
+  "t": 21.0,
+  "aus": [
+   0.05,
+   0.36,
+   1.0,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Drei Hämmer liegen auf der Werkbank, Nahaufnahme; Pulli und Hände oben im Bild weggeschnitten, Probe geprüft."
+ },
+ "zw-maipfeife": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Durchgehend Person oder Hände/Ärmel an der Pfeife, dazu Kanal-Einblendungen; kein Bild ohne Mensch."
+ },
+ "zw-muetze-sticken": {
+  "t": 36.5,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige bestickte Mütze mit Pompon auf weissem Papier, Schlussbild ohne Hand (bei 36.0 noch Finger); unten leicht angeschnitten."
+ },
+ "zw-apfel-wurm": {
+  "t": 57.0,
+  "aus": [
+   0.0,
+   0.1,
+   0.55,
+   0.95
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Fertiger 3D-Papierapfel mit Blatt auf blauem Grund, Hände rechts weggeschnitten; Wurm fehlt noch (Zwischenstand)."
+ },
+ "zw-pustefigur-trinkhalm": {
+  "t": 119.5,
+  "aus": [
+   0.0,
+   0.2,
+   0.8,
+   1.0
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fledermaus, Kürbis und Gespenst als Figuren auf dem Tisch, Trinkhalm oben rechts; Hand und «Werbung» weggeschnitten."
+ },
+ "zw-fledermaus-klammer": {
+  "t": 33.0,
+  "aus": [
+   0.12,
+   0.1,
+   0.98,
+   0.88
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige Fledermaus mit Wackelaugen gross im Bild; «Werbung» oben rechts und Finger unten weggeschnitten."
+ },
+ "zw-vorstich-gitter": {
+  "t": 31.5,
+  "aus": [
+   0.4,
+   0.15,
+   1.0,
+   0.9
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Stickgitter und oranger Faden mit Nadel auf dem Tisch, Hand links weggeschnitten; nur Material, noch kein Vorstich."
+ },
+ "zw-perlenschlange": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Nur mit Vorlagenschrift im Bild."
+ },
+ "zw-kastanienring": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Ringe nur an Kinderhänden oder mit dem Mann im Bild, kein Bild ohne Mensch."
+ },
+ "zw-perlenschildkroete": {
+  "t": 435.0,
+  "aus": [
+   0.34,
+   0,
+   0.8,
+   0.5
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Grüne Perlenschildkröte am Karabiner, gross. Hände unten links und rechts weggeschnitten. Stört: Beine unten angeschnitten, leicht unscharf."
+ },
+ "zw-perlenfisch-anhaenger": {
+  "t": 354.5,
+  "aus": [
+   0.2,
+   0,
+   0.8,
+   0.6
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Drei fertige Perlenfisch-Anhänger, ohne Hand."
+ },
+ "zw-hammer-naegel": {
+  "t": 450.0,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige Styropor-Rutschbahn mit Nägeln und Spielfiguren; nur Hammerkopf und Klammer am Rand, kein Mensch."
+ },
+ "zw-nagelherz": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Die Frau ist immer im Bild, kein Bild ohne Mensch."
+ },
+ "zw-nagelbild-igel": {
+  "t": 370.0,
+  "aus": [
+   0.25,
+   0.1,
+   0.85,
+   0.75
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Brett mit gelbem Igel aus Faden; Hand am rechten Rand weggeschnitten."
+ },
+ "zw-baumscheibe-glassteine": {
+  "t": 204.0,
+  "aus": [
+   0.1,
+   0,
+   0.75,
+   0.66
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige Baumscheibe mit bunten Glassteinen im Baum hängend; eingeblendetes «uns» unten weggeschnitten, kein Mensch."
+ },
+ "zw-haselkranz": {
+  "t": 213.0,
+  "aus": [
+   0.08,
+   0.58,
+   0.52,
+   1
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Kleiner Haselkranz auf dem Werktisch; Frau und Hände oben weggeschnitten. Stört: Kranz klein, Tisch unruhig."
+ },
+ "zw-nagelbild-faden": {
+  "t": 206.0,
+  "aus": [
+   0.15,
+   0.2,
+   0.7,
+   0.88
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Hasen-Fadenbild auf Holzbrett; Beschriftung und Finger weggeschnitten."
+ },
+ "zw-perlendrache": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiger Drache wird immer gehalten, Zwischenstände mit Schrift oder Hand."
+ },
+ "zw-leim-zwingen": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Gezwingtes Holz immer mit Händen und grünem Pulli darüber, sonst nur der Mann in der Werkstatt."
+ },
+ "zw-libelle-perlen": {
+  "t": 282.5,
+  "aus": [
+   0,
+   0.1,
+   0.85,
+   0.95
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Blaue und grüne Perlenlibellen, Zange weggeschnitten, kein Mensch."
+ },
+ "zw-haselmaus": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Hände in jedem Bild."
+ },
+ "zw-segelschiff": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Mann immer hinter dem Schiff, Schluss nur Logo oder Mann sitzend."
+ },
+ "zw-kreisel-schnitzen": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Hände beim Schnitzen, sonst Gesicht in Nahaufnahme."
+ },
+ "zw-sonnenfaenger": {
+  "t": 63.5,
+  "aus": [
+   0.1,
+   0,
+   0.78,
+   0.72
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Holzscheibe mit Murmeln am Fenster hängend; Logo weggeschnitten, Scheibe unten leicht angeschnitten, kein Mensch."
+ },
+ "zw-nusskranz": {
+  "t": 87.0,
+  "aus": [
+   0.15,
+   0.12,
+   0.75,
+   0.88
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertiger Haselnusskranz mit Goldband auf Gelb; Schrift, Like-Knopf und Abonnieren weggeschnitten, keine Hand."
+ },
+ "zw-perlen-axolotl": {
+  "t": 451.0,
+  "aus": [
+   0.2,
+   0.05,
+   0.75,
+   0.82
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Axolotl aus Perlen ohne Hand. Stört: Zwischenstand ohne Schwanz, Drahtenden sichtbar."
+ },
+ "zw-holz-igel": {
+  "t": 64.5,
+  "aus": [
+   0.13,
+   0.3,
+   0.97,
+   0.93
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige Leinwand mit Holz-Igel auf Blättern, kein Mensch."
+ },
+ "zw-haselnussmaennchen": {
+  "t": null,
+  "aus": null,
+  "frei": false,
+  "schwach": false,
+  "notiz": "Hände, Gesicht oder eingeblendete Schrift in jedem Bild."
+ },
+ "zw-sonnenfaenger-leim": {
+  "t": 74.5,
+  "aus": [
+   0.25,
+   0.3,
+   0.95,
+   1
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Getrockneter bunter Leim-Sonnenfänger in der Schale; Figur und Schild oben weggeschnitten, keine Hand."
+ },
+ "zw-perlen-eidechse": {
+  "t": 39.0,
+  "aus": [
+   0.58,
+   0.25,
+   1,
+   0.8
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige Perlen-Eidechse gross, daneben Perlenfisch angeschnitten; Hand unten links weggeschnitten."
+ },
+ "zw-wichteltuer": {
+  "t": 10.0,
+  "aus": [
+   0,
+   0.15,
+   0.85,
+   1
+  ],
+  "frei": false,
+  "schwach": false,
+  "notiz": "Fertige Wichteltür-Szene; Logo weggeschnitten, kein Mensch."
+ },
+ "zw-nagelbrett": {
+  "t": 256.0,
+  "aus": [
+   0.36,
+   0.14,
+   0.8,
+   0.7
+  ],
+  "frei": false,
+  "schwach": true,
+  "notiz": "Nagelbrett mit Gummifigur; Hand und Kleidung weggeschnitten. Stört: Brett angeschnitten, etwas unscharf."
  }
 }
