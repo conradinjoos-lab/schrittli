@@ -67,6 +67,9 @@ input[type=text],input[type=number]{font:inherit;font-size:20px;color:var(--ink)
 .schloss[aria-pressed="true"]{border-color:var(--acc);color:var(--acc)}
 .schloss svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.regler-gr{display:flex;align-items:center;gap:8px;margin-top:10px}
+.regler-gr input{flex:1;min-height:44px}
+.regler-gr svg{flex:none;width:22px;height:22px;fill:none;stroke:var(--muted);stroke-width:2.2}
 .chip{font:inherit;font-size:14px;padding:6px 12px;border-radius:999px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer}
 .chip:hover{border-color:var(--acc)}
 .chip[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
@@ -206,6 +209,7 @@ input[type=range]{width:100%;accent-color:var(--acc)}
           <span class="einheit">cm</span>
           <button type="button" class="schloss" id="schloss" aria-pressed="true" title="Seitenverhältnis behalten"></button>
         </div>
+        <div class="regler-gr" id="regler-gr"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="8" height="8" rx="2"/></svg><input type="range" id="gross" min="1" max="40" step="0.5" aria-label="Grösse"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/></svg></div>
         <div class="chips" id="chips" aria-label="Schnell wählen (längste Seite)"></div>
       </div>
       <div class="feld" id="feld-param" hidden>
@@ -1083,9 +1087,10 @@ function felder(){
   const l=Math.max(S.b,S.h);
   document.querySelectorAll('#papier .chip').forEach(k=>k.setAttribute('aria-pressed',k.dataset.papier===S.papier));
   $('chips').innerHTML=(S.papier==='a3'?CHIPS.concat([20,25,30,40,60]):CHIPS.concat([20,30,40])).map(c=>`<button type="button" class="chip" data-cm="${c}" aria-pressed="${S.lock&&Math.abs(l-c)<.01}">${c} cm</button>`).join('');
+  $('gross').max=S.papier==='a3'?60:40;$('gross').value=Math.round(l*2)/2;
   $('feld-param').hidden=!PARAM[S.id];
   if(PARAM[S.id]){$('lbl-param').textContent=`${PARAM[S.id].label}: ${S.param}`;$('param').value=S.param}
-  const nz=!!NETZE[S.id];$('feld-netz').hidden=!nz;$('chips').hidden=nz;$('b').disabled=$('h').disabled=$('schloss').disabled=nz;
+  const nz=!!NETZE[S.id];$('feld-netz').hidden=!nz;$('chips').hidden=$('regler-gr').hidden=nz;$('b').disabled=$('h').disabled=$('schloss').disabled=nz;
   if(nz){$('nb').value=cm(S.netz.b);$('nt').value=cm(S.netz.t);$('nh').value=cm(S.netz.h)}
   $('n').value=S.n;$('naht').value=S.naht;$('zugabe').value=S.zugabe;
   document.querySelectorAll('[name=linie]').forEach(r=>r.checked=r.value===S.linie);
@@ -1117,6 +1122,12 @@ $('schloss').addEventListener('click',()=>{
 $('papier').addEventListener('click',e=>{
   const c=e.target.closest('.chip');if(!c||c.dataset.papier===S.papier)return;
   S.papier=c.dataset.papier;papierSetzen(S.papier);felder();zeichnen();
+});
+$('gross').addEventListener('input',()=>{
+  const l=+$('gross').value,k=l/Math.max(S.b,S.h);if(!k||NETZE[S.id])return;
+  S.b*=k;S.h*=k;$('b').value=cm(S.b);$('h').value=cm(S.h);
+  document.querySelectorAll('#chips .chip').forEach(c=>c.setAttribute('aria-pressed',S.lock&&Math.abs(l-c.dataset.cm)<.01));
+  zeichnen();
 });
 $('chips').addEventListener('click',e=>{
   const c=e.target.closest('.chip');if(!c)return;
