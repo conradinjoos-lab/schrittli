@@ -197,9 +197,13 @@ const W=(()=>{
     else{const ende=t.indexOf('\n\n',t.indexOf('\n|---',i)+1);t=ende<0?t+zeile+'\n':t.slice(0,ende+1)+zeile+'\n'+t.slice(ende+1)}
     return {['werkzeug/vorlagen/bilder/'+figur+'.png']:{base64:png},[FIG]:JSON.stringify(d,null,1)+'\n',[QUELLEN]:t}},'Vorlagen: Wunsch-Motiv «'+name+'» von Claude gezeichnet');
    await post('/wunsch/fertig',{id,figur,titel:name});return figur}};
+ /* Unterrichtsmaterial (material.html): Dateien unter material/ in der Werkstatt, Liste in material/katalog.json */
+ const mPfad=p=>p.split('/').map(encodeURIComponent).join('/');
+ const material={katalog:async()=>LOKAL?(await fetch('/m/katalog.json',{cache:'no-store'})).json():JSON.parse(await datei(WERK,'material/katalog.json')),
+  datei:async p=>{if(!LOKAL)return datei(WERK,'material/'+mPfad(p),'blob');const r=await fetch('/m/'+mPfad(p));return r.ok?r.blob():null}};
  const APP_URL='https://conradinjoos-lab.github.io/schrittli/schule/';   // Links für die Schul-iPads: APP_URL+'#unterricht=…', '#klasse=…', '#sammlung=…'
 
- return {LOKAL,bereit,abmelden,liste,daten,bild,speichern,veroeffentlichen,jsonText,werke,werkBild,meldungen,erledigt,unterricht,feedback,sammlung,namen,wuensche,APP_URL,
+ return {LOKAL,bereit,abmelden,liste,daten,bild,speichern,veroeffentlichen,jsonText,werke,werkBild,meldungen,erledigt,unterricht,feedback,sammlung,namen,wuensche,material,APP_URL,
   nachPub:LOKAL?'Noch committen und pushen.':'In etwa einer Minute in der Schul-App.',
   pause:LOKAL?1500:6000}  // Autospeichern: online seltener, jeder Stand ist ein Commit
 })();
