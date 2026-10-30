@@ -455,9 +455,13 @@ function lvSvg(Z,V){
   // Rand: Kante bis Lochmitte (links und oben)
   const kw=Z.kante<0?'warn':'';
   const xa=Math.max(R,V.x), ya=Math.max(R,V.y);
-  s+=pfeil(xa,Y0,X0,Y0,k,kw,xa>R)+etikett((xa+X0)/2,Y0-7*k,n(p0[0]),k,kw);
+  // stossen die zwei Zahlen zusammen, rutscht die linke unter den Pfeil
+  const tx=n(p0[0]), ty=n(p0[1]), zw=t=>t.length*8.7*k, hx=(xa+X0)/2;
+  const zwei=Math.abs(p0[0]-p0[1])>.01, yv=Math.min((ya+Y0)/2+5*k,Y0-7*k);
+  const stoss=zwei&&hx+zw(tx)/2>X0-9*k-zw(ty)&&yv+5*k>Y0-18*k;
+  s+=pfeil(xa,Y0,X0,Y0,k,kw,xa>R)+etikett(hx,stoss?Y0+17*k:Y0-7*k,tx,k,kw);
   s+=pfeil(X0,ya,X0,Y0,k,kw,ya>R);
-  if(Math.abs(p0[0]-p0[1])>.01) s+=etikett(X0-7*k,(ya+Y0)/2+5*k,n(p0[1]),k,kw,'end');
+  if(zwei) s+=etikett(X0-7*k,yv,ty,k,kw,'end');
   // Abstand: Lochmitte zu Lochmitte, unter der Reihe
   const sw=Z.steg<=0?'warn':'';
   const ym=Y0+D/2+18*k;
@@ -555,7 +559,7 @@ function zieh(e){
     if(drag.art==='leer'){ drag.art='nichts'; }
     drag.bewegt=true;
     if(drag.art==='loch') drag.art='nichts';
-    if(drag.art==='feld'){ drag.r0=S.muster!=='rahmen'&&S.lage==='mitte'?Math.min(drag.p0[0],drag.p0[1]):S.r; if(S.muster!=='rahmen') S.lage='rand'; felder(); }
+    if(drag.art==='feld') drag.r0=S.r;   // «Mittig» bleibt: der Rand wird rundum grösser oder kleiner
     if(drag.art==='d') drag.dist0=Math.hypot(drag.x-drag.p0[0]-RAHMEN,drag.y-drag.p0[1]-RAHMEN);
     wahl=null;
   }
