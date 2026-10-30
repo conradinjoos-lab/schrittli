@@ -264,7 +264,8 @@ svg .zier{fill:none;stroke:#9A8F84;stroke-width:.2;stroke-linejoin:round;stroke-
 (function(){
 'use strict';
 const $=id=>document.getElementById(id);
-const KEY='schrittli.mechanik.v1';
+const KEY='schrittli.mechanik.v1',KEY_BILD='schrittli.mechanik.bild.v1';
+let BILD=null;try{BILD=JSON.parse(localStorage.getItem(KEY_BILD)||'null');if(!BILD||!Array.isArray(BILD.env)||BILD.env.length!==241||!BILD.mass)BILD=null}catch(_){BILD=null}
 const PAPIER={a4:{name:'A4',w:210,h:297},a3:{name:'A3',w:297,h:420}};
 const RAND=10,LUECKE=6,KOPF=10,FUSS=8;   // mm: Rand, Lücke zwischen Teilen, Titelzeile, Kontrolllinie
 const TAU=2*Math.PI;
@@ -287,6 +288,7 @@ const AUTOS={
   'fz-abschleppwagen':{name:'Abschleppwagen',achsen:[.26,.91],rad:.06,autoL:24},
   'fig-lastwagen':{name:'Lastwagen',achsen:[.28,.75],rad:.113,autoL:20}};
 const FORMEN={};Object.keys(AUTOS).forEach(k=>{if(window.FIGUREN&&window.FIGUREN[k])FORMEN[k]=AUTOS[k].name});
+if(BILD)FORMEN.bild=BILD.name||'Bild';
 if(!Object.keys(FORMEN).length)FORMEN.klotz='Klotz';
 const NOCKEN={exzenter:'Kurbel',schnecke:'Schneckennocke',doppel:'Doppelnocke'};
 const KART={spirale:'Spirale',benham:'Benham',farben:'Farben',turbo:'Turbo'};
@@ -461,16 +463,48 @@ function figurForm(id,a){const g=window.FIGUREN&&window.FIGUREN[id];if(!g)return
   const o=ringe[0].map(N),env=new Array(NE+1).fill(-1);
   for(let i=0;i<o.length;i++){const p=o[i],q=o[(i+1)%o.length],lo=Math.min(p[0],q[0]),hi=Math.max(p[0],q[0]);
     for(let j=Math.ceil(lo*NE-1e-9);j<=Math.floor(hi*NE+1e-9);j++){const x=j/NE,y=hi-lo<1e-9?Math.max(p[1],q[1]):p[1]+(q[1]-p[1])*(x-p[0])/(q[0]-p[0]);if(y>env[j])env[j]=y}}
-  const r=a.rad,raeder=a.achsen.map(x=>({x,r}));
+  return fertig(env,a.achsen,a.rad,hw,ringe.slice(1).map(q=>{const z=q.map(N);return z.concat([z[0]])}).concat(linien.map(q=>q.map(N))),a.autoL)}
+// Hülle fertig machen: Räder und Bodenschatten raus, Lücken füllen, Zierlinien ausserhalb der Räder, Masse
+function fertig(env,achsen,r,hw,linien,L){const raeder=achsen.map(x=>({x,r}));
   for(let j=0;j<=NE;j++){const x=j/NE;if(env[j]<.025){env[j]=-1;continue}
     for(const R of raeder){const dx=x-R.x;if(Math.abs(dx)<R.r*1.3){const t=R.r+Math.sqrt(Math.max(0,R.r*R.r-dx*dx));if(env[j]<=t*1.04+.006)env[j]=-1}}}
   let i0=0,i1=NE;while(i0<NE&&env[i0]<0)i0++;while(i1>i0&&env[i1]<0)i1--;
-  for(let j=i0;j<=i1;j++)if(env[j]<0){let k=j;while(env[k]<0)k++;const l=env[j-1],r=env[k];for(let m=j;m<k;m++)env[m]=l+(r-l)*(m-j+1)/(k-j+1);j=k}
+  for(let j=i0;j<=i1;j++)if(env[j]<0){let k=j;while(env[k]<0)k++;const l=env[j-1],q=env[k];for(let m=j;m<k;m++)env[m]=l+(q-l)*(m-j+1)/(k-j+1);j=k}
   const imRad=([x,y])=>raeder.some(R=>(x-R.x)**2+(y-R.r)**2<(R.r*1.15)**2),zier=[];
-  ringe.slice(1).map(q=>{const z=q.map(N);return z.concat([z[0]])}).concat(linien.map(q=>q.map(N))).forEach(pl=>{let lauf=[];pl.forEach(p=>{if(p[1]>.02&&!imRad(p))lauf.push(p);else{if(lauf.length>1)zier.push(lauf);lauf=[]}});if(lauf.length>1)zier.push(lauf)});
-  const L=a.autoL;
-  return {achsen:a.achsen,rad:r,env,i0,i1,hw,zier,mass:{autoL:L,autoH:Math.round((hw*L-.8)*2)/2,autoRad:Math.ceil(2*r*L*2)/2}}}
+  linien.forEach(pl=>{let lauf=[];pl.forEach(p=>{if(p[1]>.02&&!imRad(p))lauf.push(p);else{if(lauf.length>1)zier.push(lauf);lauf=[]}});if(lauf.length>1)zier.push(lauf)});
+  return {achsen,rad:r,env,i0,i1,hw,zier,mass:{autoL:L,autoH:Math.round((hw*L-.8)*2)/2,autoRad:Math.ceil(2*r*L*2)/2}}}
+// Seitenbild (PNG, JPG, SVG) ausschneiden: grösste zusammenhängende Fläche, obere Hülle, Räder dort, wo die Silhouette den Boden berührt
+function bildForm(img){
+  const W0=img.naturalWidth||600,H0=img.naturalHeight||400,sk=Math.min(1,720/W0,720/H0),W=Math.max(1,Math.round(W0*sk)),H=Math.max(1,Math.round(H0*sk));
+  const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(img,0,0,W,H);
+  let d;try{d=g.getImageData(0,0,W,H).data}catch(_){return null}
+  let klar=0;for(let i=3;i<d.length;i+=28)if(d[i]<128)klar++;
+  const alpha=klar>d.length/28*.02,ecken=[];
+  for(const [x,y] of [[0,0],[W-1,0],[0,H-1],[W-1,H-1]])for(let a=0;a<4;a++)for(let b=0;b<4;b++){const i=(Math.min(H-1,Math.abs(y-b))*W+Math.min(W-1,Math.abs(x-a)))*4;ecken.push([d[i],d[i+1],d[i+2]])}
+  const med=k=>{const v=ecken.map(e=>e[k]).sort((p,q)=>p-q);return v[v.length>>1]},bg=[med(0),med(1),med(2)],n=W*H,mask=new Uint8Array(n);
+  for(let p=0;p<n;p++){const i=p*4;if(alpha)mask[p]=d[i+3]>127?1:0;else{const dr=d[i]-bg[0],dg=d[i+1]-bg[1],db=d[i+2]-bg[2];mask[p]=dr*dr+dg*dg+db*db>3600?1:0}}
+  const lab=new Int32Array(n),st=new Int32Array(n);let best=0,bestN=0,nr=0;
+  for(let p=0;p<n;p++){if(!mask[p]||lab[p])continue;nr++;let sp=0,cnt=0;st[sp++]=p;lab[p]=nr;
+    while(sp){const q=st[--sp];cnt++;const x=q%W,y=(q-x)/W;
+      for(const r of [x>0?q-1:-1,x<W-1?q+1:-1,y>0?q-W:-1,y<H-1?q+W:-1])if(r>=0&&mask[r]&&!lab[r]){lab[r]=nr;st[sp++]=r}}
+    if(cnt>bestN){bestN=cnt;best=nr}}
+  if(bestN<n*.02)return null;
+  let x0=W,x1=-1,y0=H,y1=-1;for(let p=0;p<n;p++)if(lab[p]===best){const x=p%W,y=(p-x)/W;if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}
+  const w=x1-x0+1,hw=(y1-y0+1)/w,env=new Array(NE+1).fill(-1),bot=new Array(NE+1).fill(-1);
+  if(hw>1.2||hw<.12)return null;
+  for(let j=0;j<=NE;j++){const x=x0+Math.round(j/NE*(w-1));let t=-1,b=-1;for(let y=y0;y<=y1;y++)if(lab[y*W+x]===best){if(t<0)t=y;b=y}
+    if(t>=0){env[j]=(y1-t+1)/w;bot[j]=(y1-b)/w}}
+  const laeufe=[];for(let j=0;j<=NE;j++)if(bot[j]>=0&&bot[j]<.015){let k=j;while(k<NE&&bot[k+1]>=0&&bot[k+1]<.015)k++;laeufe.push([j,k]);j=k}
+  const raeder=laeufe.map(([a,b])=>{const xc=(a+b)/2/NE,rs=[];
+    for(const dir of [-1,1]){let prev=0,flach=0;for(let j=Math.round((a+b)/2)+dir;j>=0&&j<=NE;j+=dir){const y=bot[j];if(y<0||y<prev-.01||y>prev+.06||y>.3)break;
+      if(y>.01&&y<=prev){if(++flach>=4)break}else flach=0;
+      const dx=j/NE-xc;if(y>.008)rs.push((dx*dx+y*y)/(2*y));prev=Math.max(prev,y)}}
+    rs.sort((p,q)=>p-q);return {x:xc,r:rs.length?rs[rs.length>>1]:0,n:rs.length}}).filter(R=>R.r>.025&&R.r<.25&&R.n>3);
+  let achsen=[.2,.8],r=.09;
+  if(raeder.length>=2){const A=raeder[0],B=raeder[raeder.length-1];if(B.x-A.x>.15){achsen=[A.x,B.x];r=Math.round((A.r+B.r)/2*1e3)/1e3}}
+  const u=fertig(env,achsen,r,hw,[],18);return u.i1-u.i0<NE*.3?null:u}
 const UMRISSE={};Object.keys(FORMEN).forEach(k=>{const u=AUTOS[k]&&figurForm(k,AUTOS[k]);if(u)UMRISSE[k]=u});
+if(BILD)UMRISSE.bild=BILD;
 if(!UMRISSE[Object.keys(FORMEN)[0]])UMRISSE.klotz={achsen:[.2,.8],rad:.1,env:new Array(NE+1).fill(.33),i0:0,i1:NE,hw:.33,zier:[],mass:{autoL:18,autoH:5,autoRad:4}};
 // Karosserie in mm: x ab Heck, y ab Unterkante Klotz; Figurhöhe = Klotz + Boden
 function koerper(F,L,H,bo){const sy=(H+bo)/F.hw,P=[];for(let j=F.i0;j<=F.i1;j++)P.push([j/NE*L,Math.max(0,F.env[j]*sy-bo)]);
@@ -910,15 +944,27 @@ addEventListener('resize',()=>{if(!zieh)buehne()});
 $('modulChips').innerHTML=[1,2,3,4,5,6].map(m=>{const p=m*1.5+1.5,h=m*1.7;let d='M0 16';
   for(let x=0;x<40;x+=p)d+=`L${f(x+p*.15)} 16L${f(x+p*.32)} ${f(16-h)}L${f(x+p*.68)} ${f(16-h)}L${f(x+p*.85)} 16`;
   return `<button type="button" class="chip" data-v="${m}" title="Modul ${m}" aria-label="Modul ${m}"><svg viewBox="0 0 40 18" aria-hidden="true"><path d="${d}L40 16V18H0Z" fill="currentColor"/></svg></button>`}).join('');
-$('formChips').innerHTML=Object.keys(UMRISSE).map(k=>{const F=UMRISSE[k],Lc=F.mass.autoL*10,Hc=F.mass.autoH*10,bo=8,R=F.mass.autoRad*5,sk=Math.min(44,22*Lc/(Hc+bo)),X=x=>f(24+(x/Lc-.5)*sk),Y=y=>f(25-(y+bo)/Lc*sk);
+function formChips(){$('formChips').innerHTML=Object.keys(UMRISSE).map(k=>{const F=UMRISSE[k],Lc=F.mass.autoL*10,Hc=F.mass.autoH*10,bo=8,R=F.mass.autoRad*5,sk=Math.min(44,22*Lc/(Hc+bo)),X=x=>f(24+(x/Lc-.5)*sk),Y=y=>f(25-(y+bo)/Lc*sk);
   const d='M'+koerper(F,Lc,Hc,bo).map(([x,y])=>X(x)+' '+Y(y)).join('L')+'Z',rad=F.achsen.map(a=>`<circle cx="${X(a*Lc)}" cy="${Y(R-bo)}" r="${f(R/Lc*sk)}"/>`).join('');
-  return `<button type="button" class="chip" data-v="${k}" aria-label="${FORMEN[k]}"><svg viewBox="0 0 48 26" aria-hidden="true" fill="currentColor"><path d="${d}"/>${rad}</svg>${FORMEN[k]}</button>`}).join('');
+  return `<button type="button" class="chip" data-v="${k}" aria-label="${FORMEN[k]}"><svg viewBox="0 0 48 26" aria-hidden="true" fill="currentColor"><path d="${d}"/>${rad}</svg>${FORMEN[k]}</button>`}).join('')+
+  '<button type="button" class="chip" data-bild aria-label="Bild"><svg viewBox="0 0 48 26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="13" y="7" width="22" height="15" rx="2.5"/><path d="M19 7l2.5-3.5h5l2.5 3.5"/><circle cx="24" cy="14.5" r="4"/></svg>Bild</button><input type="file" id="bildDatei" accept="image/*" hidden>'}
+formChips();
+let bildWarn='';
+document.addEventListener('change',ev=>{const inp=ev.target;if(inp.id!=='bildDatei')return;const fl=inp.files&&inp.files[0];inp.value='';if(!fl)return;
+  const url=URL.createObjectURL(fl),img=new Image(),zu=u=>{URL.revokeObjectURL(url);
+    if(!u){bildWarn='⚠ Kein Bild';zeigen();return}
+    u.name=(fl.name.replace(/\.[^.]+$/,'').replace(/[-_]+/g,' ').replace(/[<>&"]/g,'').trim()||'Bild').slice(0,16);
+    BILD=u;UMRISSE.bild=u;FORMEN.bild=u.name;if(!WORTE.form.includes('bild'))WORTE.form.push('bild');
+    try{localStorage.setItem(KEY_BILD,JSON.stringify(Object.assign({},u,{env:u.env.map(v=>Math.round(v*1e4)/1e4)})))}catch(_){}
+    S.form='bild';Object.assign(S,u.mass,{radstand:0});formChips();felder();zeigen()};
+  img.onload=()=>zu(bildForm(img));img.onerror=()=>zu(null);img.src=url});
 function zeigen(){
   const E=TEILE[S.modus]();
   const {blaetter,zuGross,P}=packen(E.teile);
   const svgs=blaetter.map((b,i)=>blattSvg(b,i,blaetter.length,E.titel,P));
   $('antwort').innerHTML=E.ant.map(a=>`<li>${a}</li>`).join('');
   const warn=E.warn.concat(zuGross.length?[`⚠ Zu gross für ${P.name}: ${[...new Set(zuGross)].join(', ')}`]:[]);
+  if(bildWarn){warn.push(bildWarn);bildWarn=''}
   $('warnung').hidden=!warn.length;$('warnung').innerHTML=warn.map(w=>`<span class="warn">${w}</span>`).join('<br>');
   $('k-rechnung').hidden=!(E.rech&&E.rech.length);$('rechnung').innerHTML=(E.rech||[]).join('');
   $('zuschnitt').innerHTML=zuschnittHtml(E);
@@ -941,6 +987,7 @@ function felder(){
 }
 document.querySelectorAll('[data-g]').forEach(g=>g.addEventListener('click',ev=>{
   const c=ev.target.closest('.chip');if(!c)return;const k=g.dataset.g;
+  if('bild' in c.dataset){$('bildDatei').click();return}
   S[k]=WORTE[k]?c.dataset.v:zahl(c.dataset.v,S[k]);
   if(k==='ziel'&&ZIELE[S.ziel])Object.assign(S,ZIELE[S.ziel]);
   if(k==='form'&&UMRISSE[S.form].mass)Object.assign(S,UMRISSE[S.form].mass,{radstand:0});
