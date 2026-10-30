@@ -1,6 +1,6 @@
-# Übergabe «Bibo & Fila» (vorher «Schrittli») – Stand 24.10.2026, 11:30
+# Übergabe «Schritt für Schritt» (intern `schrittli`) – Stand 30.10.2026
 
-Für die nächste Claude-Sitzung (anderes Konto, kein Gedächtnis). Alles Nötige liegt in diesem Repo.
+Für die nächste Claude-Sitzung (anderes Konto, kein Gedächtnis). Alles Nötige liegt in diesem Repo. **Zuerst `AGENTS.md` lesen** (feste Regeln: keine Infotexte, kein «Aufs Handy holen»).
 
 ## Was das ist
 
@@ -20,10 +20,15 @@ Repo: `conradinjoos-lab/schrittli` (GitHub Pages, Branch main, Cache bis 10 Min 
 | `quelle/bauen.sh` | erzeugt `index.html` (Familie) und `schule/index.html` (Schule, mit `window.SCHULE=true`) – **nie die index.html direkt editieren** |
 | `inhalte.json` | Videos der Familienversion (55), wird beim Start geladen und überschreibt gleichnamige IDs |
 | `katalog.json` | Vorauswahl für Eltern (76), im Elternbereich → Katalog mit «Hinzufügen» |
-| `schule/schule.json` | Videos der Schulversion (119 veröffentlicht, 24.10.2026): `areaId` = Verfahren, `stufen` = Klassen [1–6], `material` = IDs, optional `zeit` = Minuten (1–15) für Mini-Projekte |
+| `schule/schule.json` | Videos der Schulversion (357 veröffentlicht, 30.10.2026; optional `vorlagen` = Links in den Vorlagen-Generator): `areaId` = Verfahren, `stufen` = Klassen [1–6], `material` = IDs, optional `zeit` = Minuten (1–15) für Mini-Projekte |
 | `material/` | Material-Fotos `<id>.png/.jpg` + `fotos.json` (Liste der vorhandenen Dateinamen) + `PROMPTS-GROK.md` |
 | `quelle/agenten/` | Briefings für Agenten: Schritte schreiben (`SCHRITTE-BRIEF.md`), Materiallisten, Piktogramme, Vokabular |
 | `LIESMICH.md` | Funktionsbeschreibung für Conradin |
+| `vorlagen/` | Vorlagen-Generator (`?form=…&b=…` oder `?liste=id:BxH:n,…`), Formen in `vorlagen/formen.js`, erzeugt aus `werkzeug/vorlagen/formen*.py` (`python formen.py` im Ordner); Übersicht `VORLAGEN-BIBLIOTHEK.md` |
+| `vorlagen/<werkzeug>/` | Werkzeuge der App, nach Räumen: Perlentiere, Perlentier aus Bild, Armbänder, Abpausen, Zählmuster, Maschen-Planer, Klassen-Werkzeuge, Bohrvorlage, Stromkreis-Baukasten, Mechanik-Planer, Kisten-Planer |
+| `kontrolle/` | Online-Kontrolle: Anmeldung über den Cloudflare Worker `werkzeug/anmelden` und die GitHub App «Schrittli Kontrolle»; Geheimnisse nur im KV des Workers |
+| `vorschau/` | ruhige Vorschaubilder ohne Menschen (`werkzeug/vorschau.py`, Ablauf in der Skill `schritte`, Schritt 5) |
+| `AGENTS.md`, `.agents/skills/` | feste Regeln und die Skill `schritte` für andere Agenten (gleich wie `.claude/skills/`) |
 
 Zustand im Browser: localStorage `schrittli.v1` (Familie) bzw. `schrittli.schule.v1` (Schule, speichert nur die Klasse). Migration über `settings.sv` in `load()`.
 
@@ -40,7 +45,7 @@ Erkenntnis aus dem Pompon-Test: die starken Bildwechsel (scene score ≥ 0.28) l
 
 Alter Ablauf (Chrome-Agenten, Transkript von der Watch-Seite, Canvas-Kontaktblatt) steht noch in `quelle/agenten/SCHRITTE-BRIEF.md`, wird aber nicht mehr gebraucht. `werkzeug/cache/` und `werkzeug/entwurf/` sind gitignored.
 
-Playwright-Smoke-Tests: Chromium unter `/opt/pw-browsers/chromium`, `NODE_PATH=$(npm root -g)`; Ordner per kleinem http-Server ausliefern (YouTube spielt headless nicht, Logik lässt sich aber über `P.mode`/`updatePlayerUI()` testen).
+Playwright-Smoke-Tests (Windows): `NODE_PATH="C:/Grok Code/Steine-App/node_modules"`, `executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe'`; Ordner per kleinem http-Server ausliefern (YouTube spielt headless nicht, Logik lässt sich aber über `P.mode`/`updatePlayerUI()` testen).
 
 ## Wichtige Entscheide von Conradin
 
@@ -57,11 +62,11 @@ Playwright-Smoke-Tests: Chromium unter `/opt/pw-browsers/chromium`, `NODE_PATH=$
 ## Offen (in dieser Reihenfolge sinnvoll)
 
 1. **Material-Fotos**: Conradin erzeugt sie mit Grok nach `material/PROMPTS-GROK.md` und liefert sie. Dann: quadratisch zuschneiden/verkleinern (≈ 512 px), als `material/<id>.png` ablegen, `material/fotos.json` → `{"fotos":["wolle.png",…]}`. App zeigt sie automatisch (Code ist drin, `MAT_FOTOS`).
-2. **Editor-Umbau** (zurückgestellt, 24.10.2026: Inhalt und Kontrolle haben Vorrang; nicht gebaut): Link einfügen → «Prüfen» → grosser Knopf **STOPP HIER** setzt Schritte ohne Tippen (Label optional, sonst «Schritt n»); Schritte verschieben/löschen; **Teilen-Link** eines Videos mit Schritten, den die App beim Einfügen erkennt und übernimmt (für zwei Haushalte; der Schul-Link `#s=` existiert schon und trägt seit 24.10.2026 auch das Material als `m`, `schoolLink()`/`parseSchool()`).
-3. iPad-Test: Vollbild im Kino-Modus (Safari), Materialkarte, Touch.
-4. **Schulvideos veröffentlichen**: 15 Entwürfe mit Schritten sind erarbeitet und Bild für Bild kontrolliert (24.10.2026): Formen 3 (Daumenschale, Tonwulst-Vase, Salzteig-Herz), Drucken 4 (Kartoffeldruck Stoff/Kacheln, Moosgummi-Stempel, Polystyrol), Weben 3 (Papier, Webrahmen Karton, Lama), Holz 2 (Laubsäge, Richtig sägen), Stricken 2 (Kreuzanschlag, rechte Masche) und der Geist (`srf-geist`, ersetzt den Eintrag ohne Schritte). Sie liegen in `werkzeug/entwurf/<ID>/video.json` (gitignored, nur auf Conradins Rechner) und warten auf «Veröffentlichen» in der Kontrollseite → schule.json → push.
-5. Review-Punkte, noch nicht entschieden: Lieder → Lern-Bereich; Bonus-Stern abschaffen; Kurzlabel + langer Vorlesetext pro Schritt; Werke exportieren.
-6. Sprachsteuerung «Stopp» ist experimentell (Web Speech); Alternativen Lautstärke-/Klatsch-Erkennung oder Porcupine wurden nur besprochen.
+2. **iPad-Test auf dem echten Gerät** (Safari): Vollbild im Kino-Modus, Materialkarte, Touch, neuer Editor. Emuliert (Playwright, iPad-Grösse mit Touch) läuft der Editor; echtes Safari-Vollbild lässt sich nur auf dem Gerät prüfen.
+3. Noch nicht entschieden: Experimentieren in der Schulversion behalten?; versteckte Funktionen (Wunschformular, Werkzeug-Führerschein, Fachwort-Karten, Verfahrenspass) zeigen oder weglassen; Lieder → Lern-Bereich; Bonus-Stern abschaffen; Kurzlabel + langer Vorlesetext pro Schritt; Werke exportieren.
+4. Sprachsteuerung «Stopp» ist experimentell (Web Speech); Alternativen Lautstärke-/Klatsch-Erkennung oder Porcupine wurden nur besprochen.
+
+Erledigt seit 24.10.2026: Editor-Umbau (grosser Knopf **STOPP HIER**, Schritte mit − / + verschieben, Teilen-Link `#s=` mit Schritten und Material wird im Link-Feld erkannt und übernommen, `decodeShare()`); alle Entwürfe veröffentlicht (zuletzt fünf Bastelvideos mit eigenen Vorlagen Fledermaus, Geist, Wintermütze).
 
 ## Arbeitsweise mit Conradin
 
