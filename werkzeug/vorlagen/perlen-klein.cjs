@@ -52,8 +52,28 @@ const stern='yy yyyy yyyyyyyyyyyy yyyyyyyyyy yyyyyyyy yyywwyyy yywwwwyy';
 const ei='ww wwww wwwwww wwwwwwww wwwwwwww wwwwwwww wwwwww wwww';
 const ball='srrs srrrrs srrrrrrs ssswwsss swwwws swws';
 const geist='cccc cccccc cwccwc cwsccswc cccccccc cccccccc ccwwcc cccc';
-const H={add,farben,ohr,teil,fluegel,kopf,kopfReihen,pinguin,pinguinReihen,pinguinFluegel,maske,ninja,gesicht,zeilen,herz,stern,ei,ball,geist};
-for(const name of ['alt','buchstaben','flaggen','emoji','wetter','tiere','feste','orte','essen','sachen','maennchen'])require('./perlen-klein/'+name+'.cjs')(H);
+// Schneidet ein rechteckiges Bild mittig auf die Reihenbreiten einer Form zu (Wappenschild, Kreis).
+function form(rows,breiten){
+  rows=zeilen(rows);
+  if(rows.length!==breiten.length||rows.some(r=>(r.length-breiten[0])%2))throw Error('Ungleiche Vorlage: '+rows.join(' '));
+  return rows.map((r,i)=>r.slice((r.length-breiten[i])/2,(r.length+breiten[i])/2));
+}
+// Bild mit Grund: alle Reihen gleich lang, so sitzt jede Farbe genau dort, wo sie gezeichnet ist.
+function kachel(rows){
+  rows=zeilen(rows);
+  if(new Set(rows.map(r=>r.length)).size>1)throw Error('Ungleiche Reihen: '+rows.join(' '));
+  return rows;
+}
+const schild=rows=>form(rows,[14,14,14,14,14,14,14,12,10,8,4]);
+const rund=rows=>form(rows,[6,10,12,14,14,14,14,12,10,6]);
+// Färbt jede Perle am Rand der Form: aussen in der Reihe und dort, wo oben oder unten nichts mehr anschliesst.
+function rand(rows,c){
+  const b=Math.max(...rows.map(r=>r.length));
+  const da=(i,x)=>{const r=rows[i];if(!r)return false;const o=(b-r.length)/2;return x>=o&&x<o+r.length};
+  return rows.map((r,i)=>[...r].map((f,k)=>{const x=(b-r.length)/2+k;return da(i,x-1)&&da(i,x+1)&&da(i-1,x)&&da(i+1,x)?f:c}).join(''));
+}
+const H={add,farben,ohr,teil,fluegel,kopf,kopfReihen,pinguin,pinguinReihen,pinguinFluegel,maske,ninja,gesicht,zeilen,form,kachel,schild,rund,rand,herz,stern,ei,ball,geist};
+for(const name of ['alt','buchstaben','flaggen','emoji','wetter','tiere','feste','orte','essen','sachen','maennchen','wappen','fussball','fahrzeuge'])require('./perlen-klein/'+name+'.cjs')(H);
 
 const PAL=/^[a-su-zA-X]+$/;   // alle Palettenbuchstaben ausser t (transparent)
 const breiteVon=rows=>Math.max(...rows.map(r=>r.length));

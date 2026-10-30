@@ -489,6 +489,8 @@ Weitere 12 Vereinslogos von logotyp.us (dort «free for personal and educational
 
 42 Fahrzeuge, meist von der Seite, von Openclipart (CC0), mit schwarzem Umriss (`wappen-fahrzeuge.py`). Markennamen nur als Bezeichnung; die Zeichnungen stammen von den genannten Openclipart-Autoren.
 
+Die kleinen Perlenmotive (`perlen-klein/fahrzeuge.cjs`) sind von Hand gezeichnet, die Proportionen nach Seitenansichten von dwgLAB (dwglab.com) aus Conradins Ordner.
+
 | Motiv | Figur-ID | URL | Autor | Lizenz |
 |---|---|---|---|---|
 | VW-Bus (Bulli) | fz-vw-bus | https://openclipart.org/detail/202006 | spadassin | CC0 1.0 |

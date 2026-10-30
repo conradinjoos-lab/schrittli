@@ -30,7 +30,7 @@ jobs:
           echo "Ohne Vorlage: ${ids:-keine}"
       - name: Pakete laden
         if: steps.suche.outputs.ids != ''
-        run: pip install numpy opencv-python-headless scipy shapely pillow
+        run: pip install numpy opencv-python-headless scipy scikit-image shapely pillow
       - name: Rechnen und aufschalten
         if: steps.suche.outputs.ids != ''
         env:
