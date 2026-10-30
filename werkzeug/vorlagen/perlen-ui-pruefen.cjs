@@ -16,7 +16,6 @@ async function main(){
   const result=await page.evaluate(()=>{const a=window.PerlenPruefung,parser=new DOMParser();let pages=0;
    for(const t of a.TIERE){const svg=a.blatt(t,a.PERLEN.r3),doc=parser.parseFromString('<main xmlns="http://www.w3.org/1999/xhtml">'+svg+'</main>','application/xml');if(doc.querySelector('parsererror'))throw Error('SVG ungültig: '+t.id);pages+=doc.querySelectorAll('svg').length;}
    return {muster:a.TIERE.length,druckseiten:pages};});
-  assert.match(await page.locator('#figuren-hinweis').innerText(),/transparente Stützperlen/);
   const original=await page.evaluate(()=>JSON.stringify(window.PerlenPruefung.aktuellesTier()));
   await page.locator('#anpassen').click();await page.locator('.pe-dialog').waitFor();
   const oldWidth=await page.locator('#pe-breite').inputValue();

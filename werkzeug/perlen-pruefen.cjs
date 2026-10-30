@@ -152,8 +152,36 @@ vm.runInContext(`
   if(!links.length||links.length!==rechts.length)throw new Error('Fledermaus: Flügel nicht spiegelbildlich');
   const getauscht=PerlenEditor.tauschen(f,'s','b');
   if(getauscht.teile[0].rows.some(r=>r.includes('s'))||f.teile[0].rows.some(r=>r.includes('b')))throw new Error('Farbtausch erfasst die Teile nicht oder verändert das Original');
-  if(!blatt(f,PERLEN.r3).includes('Blatt 2')||!blatt(f,PERLEN.r3).includes('zusammengen'))throw new Error('Teileblatt fehlt');
+  if(!blatt(f,PERLEN.r3).includes('Blatt 2')||!blatt(f,PERLEN.r3).includes('Zusammennähen'))throw new Error('Teileblatt fehlt');
 `,ctx);
+// Zweite Versionen mit angenähten Teilen: direkt hinter dem Original, das Original bleibt, wie es ist.
+vm.runInContext(`
+  const genaeht=TIERE.filter(t=>t.naht?.length);
+  if(genaeht.length<20)throw new Error('Genähte Versionen fehlen');
+  for(const t of genaeht){
+    const o=TIERE[TIERE.indexOf(t)-1];
+    if(t.id!==o.id+'-naht'||o.naht?.length)throw new Error('Genähte Version nicht beim Original: '+t.id);
+    if(gruppeVon(t)!==gruppeVon(o))throw new Error('Genähte Version in anderem Thema: '+t.id);
+    const n=t.naht.reduce((s,p)=>s+p.rows.join('').length,0);
+    if(geometrie(t).P.filter(p=>p.ref[0]==='n').length!==n)throw new Error('Perlen der Teile: '+t.id);
+    if(!(draht(t,PERLEN.r3)>drahtStueck(t,PERLEN.r3)))throw new Error('Draht ohne Teile: '+t.id);
+    if(t.naht.some(p=>p.quer)&&!geometrie(t).P.some(b=>b.ref[0]==='n'&&Math.abs(Math.abs(b.r%180)-90)<45))throw new Error('Seitenteil ohne gedrehte Perlen: '+t.id);
+  }
+  S.klasse=2;if(genaeht.some(passt))throw new Error('Annähen erst ab der 3. Klasse');
+  S.klasse=3;if(!genaeht.some(passt))throw new Error('Genähte Muster ab der 3. Klasse');
+  const lib=TIERE.find(t=>t.id==='libelle-naht'),anders=PerlenEditor.tauschen(lib,'l','b');
+  if(anders.naht.some(p=>p.rows.join('').includes('l'))||!lib.naht[0].rows.join('').includes('l'))throw new Error('Farbtausch erfasst die Teile nicht oder verändert das Original');
+  const breit=PerlenEditor.breite(TIERE.find(t=>t.id==='baer-naht'),24),beine=breit.naht.filter(p=>!p.quer&&p.d<0);
+  if(Math.abs(beine[0].x)<=Math.abs(TIERE.find(t=>t.id==='baer-naht').naht.find(p=>!p.quer&&p.d<0).x))throw new Error('Breite verschiebt die Teile nicht');
+`,ctx);
+vm.runInContext('oeffnen(null)',ctx);
+assert.ok(!vm.runInContext(`TIERE.some(t=>t.naht?.length&&$('tiere').innerHTML.includes(mini(t)))`,ctx),'Themen-Kacheln bleiben ohne genähte Versionen');
+const naht=(o={})=>({rows:['aa','aa'],beine:[],naht:[{rows:['a','aa'],quer:1,x:1,y:.5,an:[0,1],beine:[],...o}]});
+assert.ok(ctx.PerlenEditor.gueltig(naht(),{a:[]}));
+assert.ok(!ctx.PerlenEditor.gueltig(naht({rows:['ab']}),{a:[]}),'Angenähtes Teil mit fremder Farbe');
+assert.ok(!ctx.PerlenEditor.gueltig(naht({quer:2}),{a:[]}),'Seite nur links oder rechts');
+assert.ok(!ctx.PerlenEditor.gueltig(naht({an:[0,7]}),{a:[]}),'Naht ausserhalb des Körpers');
+assert.ok(!ctx.PerlenEditor.gueltig({...naht(),offsets:[0,0],gridWidth:2},{a:[]}),'Versetzte Muster ohne Annähen');
 for(const p of ['vorlagen/perlen/index.html','vorlagen/perlentier-bild/index.html']){
   const source=read(p);
   for(const m of source.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)){

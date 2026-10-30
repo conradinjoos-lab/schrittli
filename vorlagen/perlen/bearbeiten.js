@@ -32,7 +32,12 @@
       // Angenähte Teile: eigene kleine Muster ohne Versatz, seitlich (2 × gespiegelt), links, rechts, oben oder unten
       (!t.teile||Array.isArray(t.teile)&&t.teile.length<=6&&!t.offsets&&t.teile.every(p=>
         !!p&&typeof p.w==='string'&&p.w.length>0&&p.w.length<=40&&LAGEN.includes(p.lage)&&p.n===(p.lage==='seiten'?2:1)&&
-        Number.isInteger(p.an)&&p.an>0&&p.an<=t.rows.length&&!p.teile&&!p.offsets&&gueltig(p,palette)));
+        Number.isInteger(p.an)&&p.an>0&&p.an<=t.rows.length&&!p.teile&&!p.offsets&&gueltig(p,palette)))&&
+      // Mit den Drahtenden angenähte Teile im selben Plan: quer seitlich mit zwei Körperreihen, sonst über oder unter dem Körper
+      (!t.naht||Array.isArray(t.naht)&&t.naht.length<=12&&!t.offsets&&!t.teile?.length&&t.naht.every(p=>
+        !!p&&Array.isArray(p.rows)&&p.rows.length>0&&p.rows.length<=40&&p.rows.every(r=>typeof r==='string'&&r.length>0&&r.length<=40&&[...r].every(c=>palette[c]))&&
+        (p.quer?Math.abs(p.quer)===1&&Number.isFinite(p.y)&&Number.isFinite(p.x)&&Array.isArray(p.an)&&p.an.length===2&&p.an.every(r=>Number.isInteger(r)&&r>=0&&r<t.rows.length):Math.abs(p.d)===1&&Number.isFinite(p.r)&&Number.isFinite(p.x)&&!p.beine?.length)&&
+        (p.beine||[]).every(b=>Number.isInteger(b.k)&&b.k>=0&&b.k<p.rows.length&&Math.abs(b.s)===1&&Number.isInteger(b.n)&&b.n>=0&&b.n<=20&&Number.isInteger(b.f)&&b.f>0&&b.f<=20&&Number.isFinite(b.a)&&palette[b.c]&&palette[b.fc]&&Array.isArray(b.o)&&b.o.length===2&&b.o.every(Number.isFinite))));
   }
   function breite(t,max){
     const aus=kopie(t),vor=t.gridWidth||Math.max(...t.rows.map(r=>r.length));
@@ -43,11 +48,12 @@
       return aus;
     }
     aus.rows=t.rows.map(r=>{const n=Math.max(1,Math.round(r.length*max/vor));return Array.from({length:n},(_,j)=>r[Math.min(r.length-1,Math.floor((j+.5)*r.length/n))]).join('')});
+    for(const p of aus.naht||[])if(!p.quer)p.x=Math.round(p.x*max/vor*100)/100;   // Beine und Ohren bleiben unter dem Körper, Seitenteile rücken von selbst nach
     return aus;
   }
   function tauschen(t,von,nach){
     const aus=kopie(t);
-    for(const s of [aus,...(aus.teile||[])]){   // auch in den angenähten Teilen
+    for(const s of [aus,...(aus.teile||[]),...(aus.naht||[])]){   // auch in den angenähten Teilen
       s.rows=s.rows.map(r=>r.split(von).join(nach));
       for(const b of s.beine||[]){if(b.c===von)b.c=nach;if(b.fc===von)b.fc=nach}
     }
@@ -89,33 +95,31 @@
     if(aktiv||!gueltig(a.muster,a.palette))return;
     if(!document.getElementById('perlen-editor-stil')){const s=document.createElement('style');s.id='perlen-editor-stil';s.textContent=stil;document.head.append(s)}
     const schulklasse=klasse(a.klasse??klasseLesen()),grenze=maximum(schulklasse);
-    let t=kopie(a.muster),gesperrt=false,pinsel=null,zoom=100,geo=null,refs=[],malen=false,breitBasis=null;
+    let t=kopie(a.muster),gesperrt=false,pinsel=null,zoom=100,geo=null,malen=false,breitBasis=null;
     let behalten=true,seitenverhaeltnis=1;const verlauf=[],original=kopie(a.original||t),vorFokus=document.activeElement,warVollbild=!!document.fullscreenElement;
     const breiter=reihenbreite(original)>grenze,limit=Math.max(grenze,reihenbreite(original),reihenbreite(t));
-    const grenzText=breiter?`${schulklasse}. Klasse: empfohlen sind höchstens ${grenze} Perlen pro Reihe. Dieses Muster ist breiter – du kannst es nur schmaler machen.`:`${schulklasse}. Klasse: höchstens ${grenze} Perlen pro Reihe (${grenze} = schwer).`;
+    const grenzText=`${breiter?'⚠ ':''}${schulklasse}. Klasse · ${grenze} Perlen`;
     const d=document.createElement('dialog');d.className='pe-dialog';d.setAttribute('aria-labelledby','pe-titel');aktiv=d;
     const farben=Object.entries(a.palette),optionen=farben.map(([k,[,n]])=>`<option value="${k}">${esc(n)}</option>`).join('');
     d.innerHTML=`<div class="pe-rahmen"><div class="pe-kopf"><strong id="pe-titel">${esc(t.name||'Mein Perlentier')}</strong><button type="button" data-tun="kleiner" aria-label="Ansicht verkleinern">−</button><button type="button" data-tun="groesser" aria-label="Ansicht vergrössern">+</button><button type="button" class="pe-haupt" data-tun="sperren">Sperren</button><button type="button" data-tun="fertig">Fertig</button></div>
       <div class="pe-inhalt"><div class="pe-bild" tabindex="0" aria-label="Perlenmuster"></div><fieldset class="pe-regler"><legend hidden>Perlentier anpassen</legend>
-      <label for="pe-breite">Perlen pro Reihe: <output id="pe-mass"></output></label><input id="pe-breite" type="range" min="1" max="${limit}" step="1" aria-describedby="pe-grenze"><p id="pe-grenze">${grenzText} Die Höhe bleibt gleich.${t.offsets?' Gestrichelte Perlen sind transparent und werden mitgefädelt.':''}</p>
-      <h3>Einzelne Perlen färben</h3><p id="pe-pinsel">Farbe wählen, dann Perlen antippen.</p><div class="pe-farben">${farben.map(([k,[f,n]])=>`<button type="button" data-farbe="${k}" style="background:${f}" aria-label="${esc(n)}" title="${esc(n)}" aria-pressed="false"></button>`).join('')}</div>
-      <h3>Eine Farbe überall tauschen</h3><label for="pe-von">Diese Farbe</label><select id="pe-von"></select><label for="pe-nach">wird zu</label><select id="pe-nach">${optionen}</select><button type="button" data-tun="tauschen">Alle Perlen tauschen</button>
+      <label for="pe-breite">Breite: <output id="pe-mass"></output></label><input id="pe-breite" type="range" min="1" max="${limit}" step="1" aria-describedby="pe-grenze"><p id="pe-grenze">${grenzText}</p>
+      <h3>Färben</h3><p id="pe-pinsel"></p><div class="pe-farben">${farben.map(([k,[f,n]])=>`<button type="button" data-farbe="${k}" style="background:${f}" aria-label="${esc(n)}" title="${esc(n)}" aria-pressed="false"></button>`).join('')}</div>
+      <h3>Tauschen</h3><label for="pe-von">Von</label><select id="pe-von"></select><label for="pe-nach">Nach</label><select id="pe-nach">${optionen}</select><button type="button" data-tun="tauschen">Tauschen</button>
       <div class="pe-aktionen"><button type="button" data-tun="zurueck">Rückgängig</button><button type="button" data-tun="original">Original</button></div></fieldset></div>
       <p class="pe-status" role="status" aria-live="polite"></p></div>`;
     document.body.append(d);d.showModal();
     const el=s=>d.querySelector(s),bild=el('.pe-bild'),regler=el('.pe-regler'),status=el('.pe-status'),slider=el('#pe-breite');
     function passend(){const svg=bild.querySelector('svg');if(svg)svg.style.width=Math.max(100,Math.min(bild.clientWidth-32,(bild.clientHeight-32)*seitenverhaeltnis))*zoom/100+'px'}
     const beobachter=new ResizeObserver(passend);beobachter.observe(bild);
-    function sichern(){behalten=a.speichern(kopie(t))!==false;status.textContent=gesperrt?'Gesperrt · Du kannst das Muster anschauen und vergrössern.':behalten?(a.lokal===false?'Deine Änderungen sind in der Vorschau übernommen.':'Deine Änderungen sind auf diesem Gerät gespeichert.'):'Deine Änderungen gelten für diese Sitzung; der Gerätespeicher ist nicht verfügbar.'}
+    function sichern(){behalten=a.speichern(kopie(t))!==false;status.textContent=gesperrt?'Gesperrt':behalten?'✓ Gespeichert':'⚠ Nicht gespeichert'}
     function merken(){verlauf.push(kopie(t));if(verlauf.length>30)verlauf.shift()}
     function zeichnen(){
-      geo=a.geometrie(t,a.perle.l/a.perle.d,1);refs=[];
-      t.rows.forEach((r,i)=>[...r].forEach((_,j)=>refs.push(['r',i,j])));
-      (t.beine||[]).forEach((b,i)=>{for(let seite=0;seite<2;seite++){for(let k=0;k<b.n;k++)refs.push(['b',i,'c']);for(let k=0;k<b.f;k++)refs.push(['b',i,'fc'])}});
+      geo=a.geometrie(t,a.perle.l/a.perle.d,1);
       const x=geo.x0-3,y=geo.y0-3,w=geo.x1-x+7,h=geo.y1-y+2,q=geo.q;
       seitenverhaeltnis=w/h;
       const text=(px,py,s)=>`<text x="${px}" y="${py}" font-size=".55" fill="#344054" font-family="Arial,sans-serif">${s}</text>`;
-      const reihen=t.rows.map((r,i)=>{const b=(t.beine||[]).find(b=>b.r===i+1);return text(x+.3,geo.ry[i]+.2,i+1)+text(geo.x1+.5,geo.ry[i]+.2,r.length+(b?` + ${esc(b.w||'Teile')} ${b.n}+${b.f}`:''))}).join('');
+      const reihen=t.rows.map((r,i)=>{const b=(t.beine||[]).filter(b=>b.r===i+1);return text(x+.3,geo.ry[i]+.2,i+1)+text(geo.x1+.5,geo.ry[i]+.2,r.length+(b.length?` + ${esc(b[0].w||'Teile')} ${b.map(s=>`${s.n}+${s.f}`).join(' ')}`:''))}).join('');
       const perlen=geo.P.map(p=>`<rect x="${-q*.47}" y="-.47" width="${q*.94}" height=".94" rx="${q*.28}" transform="translate(${p.x} ${p.y}) rotate(${p.r||0})" fill="${a.palette[p.c][0]}" stroke="${p.c==='t'?'#9aa9b5':'#293241'}" ${p.c==='t'?'stroke-dasharray=".09 .09"':''} stroke-width=".045"/>`).join('');
       bild.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="${x} ${y} ${w} ${h}" role="img" aria-label="${esc(t.name||'Perlentier')}: ${t.rows.length} Reihen" style="width:${zoom}%">${text(x+.3,y+1,'Reihe')}${text(geo.x1+.5,y+1,'Perlen')}${text(((geo.links?.[0]||0)+(geo.rechts?.[0]||0))/2-.6,y+1.6,'Start')}${perlen}${a.draehte(t,geo,1,0,0)}${reihen}</svg>`;
       passend();
@@ -126,20 +130,22 @@
       von.innerHTML=farben.filter(([k])=>z[k]).map(([k,[,name]])=>`<option value="${k}">${esc(name)} (${z[k]})</option>`).join('');
       if(z[alt])von.value=alt;
       el('[data-tun=zurueck]').disabled=!verlauf.length;
-      el('#pe-pinsel').textContent=pinsel?`${a.palette[pinsel][1]} · Perlen antippen. Nochmals auf die Farbe tippen zum Verschieben.`:'Farbe wählen, dann Perlen antippen.';
+      el('#pe-pinsel').textContent=pinsel?a.palette[pinsel][1]:'';
       d.querySelectorAll('[data-farbe]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.farbe===pinsel));
       bild.dataset.malen=String(!!pinsel&&!gesperrt);
       el('[data-tun=kleiner]').disabled=zoom<=60;el('[data-tun=groesser]').disabled=zoom>=250;
-      if(!gesperrt)status.textContent=`${t.rows.length} Reihen · ${n} Perlen · ${behalten?'Änderungen übernommen':'nur für diese Sitzung'}`;
+      if(!gesperrt)status.textContent=`${t.rows.length} Reihen · ${n} Perlen${behalten?'':' · ⚠ Nicht gespeichert'}`;
     }
     function faerben(e){
       if(gesperrt||!pinsel)return;
       const svg=bild.querySelector('svg'),pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;
       const m=svg.getScreenCTM();if(!m)return;const p=pt.matrixTransform(m.inverse());
       let k=-1,ab=.32;geo.P.forEach((b,i)=>{const d=(b.x-p.x)**2+(b.y-p.y)**2;if(d<ab){ab=d;k=i}});
-      if(k<0)return;const [art,i,j]=refs[k];
+      if(k<0)return;const [art,i,j,x]=geo.P[k].ref;
       if(art==='r'){const r=t.rows[i];if(r[j]===pinsel)return;t.rows[i]=r.slice(0,j)+pinsel+r.slice(j+1)}
-      else{if(t.beine[i][j]===pinsel)return;t.beine[i][j]=pinsel}
+      else if(art==='b'){if(t.beine[i][j]===pinsel)return;t.beine[i][j]=pinsel}
+      else if(art==='n'){const r=t.naht[i].rows,s=r[j];if(s[x]===pinsel)return;r[j]=s.slice(0,x)+pinsel+s.slice(x+1)}
+      else{const b=t.naht[i].beine[j];if(b[x]===pinsel)return;b[x]=pinsel}
       zeichnen();
     }
     bild.addEventListener('pointerdown',e=>{if(gesperrt||!pinsel||e.button!==0)return;e.preventDefault();merken();malen=true;bild.setPointerCapture(e.pointerId);faerben(e)});
