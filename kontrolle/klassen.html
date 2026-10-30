@@ -53,11 +53,10 @@ function ausPutzaemtli(d){
  const listen=[];
  for(const [klasse,c] of Object.entries(classes)){
   if(!c||typeof c!=='object')continue;
-  const halb=['hk1','hk2'].map(h=>Array.isArray(c[h])?c[h]:[]).filter(a=>a.length);
-  const gruppen=halb.length?halb:[['students','schueler','namen','names'].map(f=>c[f]).find(Array.isArray)||[]];
+  const halb=['hk1','hk2'].flatMap(h=>Array.isArray(c[h])?c[h]:[]);
+  const namen=vornamen(halb.length?halb:['students','schueler','namen','names'].map(f=>c[f]).find(Array.isArray)||[]);
   const m=/\d/.exec(klasse);const stufe=m&&+m[0]>=1&&+m[0]<=6?+m[0]:null;
-  gruppen.forEach((g,i)=>{const namen=vornamen(g);if(!namen.length)return;
-   listen.push({name:gruppen.length>1?`${klasse} Halbklasse ${i+1}`:klasse,stufe,namen})});
+  if(namen.length)listen.push({name:klasse,stufe,namen});
  }
  if(!listen.length)throw new Error('In der Datei stehen keine Namen.');
  return listen;
@@ -104,7 +103,9 @@ function karte(k){
  el.querySelectorAll('input,select,textarea').forEach(i=>i.addEventListener('input',zeige));zeige();
  el.speichern=async()=>{const b=el.querySelector('.speichern');b.disabled=true;fehler($('#fehler'));
   try{const r=await W.namen.speichern({id:k.id||undefined,...eingabe()});
-   Object.assign(k,{id:r.id,name:r.name,stufe:r.stufe,namen:r.namen});delete k.neu;el.classList.remove('neu');el.dataset.id=k.id;ta.value=k.namen.join('\n');el.querySelector('.name').value=k.name;el.querySelector('.stufe').value=k.stufe??'';el.querySelector('.weg').textContent='Klasse entfernen';
+   Object.assign(k,{id:r.id,name:r.name,stufe:r.stufe,namen:r.namen});delete k.neu;el.classList.remove('neu');
+   /* Die ganze Klasse ist gespeichert: alte Listen «… Halbklasse N» derselben Klasse fallen weg. */
+   for(const h of klassen.filter(x=>x.id&&x.name.toLowerCase().replace(/\s+halbklasse\s+\d+$/,'')===k.name.toLowerCase()&&x!==k)){await W.namen.entfernen(h.id);klassen=klassen.filter(x=>x!==h);$('#liste').querySelector(`[data-id="${h.id}"]`)?.remove()}el.dataset.id=k.id;ta.value=k.namen.join('\n');el.querySelector('.name').value=k.name;el.querySelector('.stufe').value=k.stufe??'';el.querySelector('.weg').textContent='Klasse entfernen';
    zeige();stand.className='stand ok';stand.textContent=`Gespeichert · ${k.namen.length} ${k.namen.length===1?'Kind':'Kinder'} · die iPads holen die Liste beim nächsten Start`;kopf()}
   catch(x){stand.className='stand';stand.textContent='';fehler($('#fehler'),x);b.disabled=false;throw x}
   b.disabled=false};

@@ -56,7 +56,16 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .seite-rechts{display:flex;flex-direction:column;gap:14px;align-self:stretch}
 /* Die Vorschau klebt oben, die Einstellungen laufen darunter durch: das Blatt bleibt beim Einstellen im Blick */
 .karte-vorschau{position:sticky;top:12px;z-index:3;box-shadow:0 -12px 0 6px var(--bg),0 8px 22px rgba(0,0,0,.14)}
-.karte-vorschau h2{margin-bottom:8px}
+.v-kopf{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:0 0 10px}
+.seg{display:inline-flex;border:2px solid var(--line);border-radius:12px;background:var(--surface2);padding:2px;gap:2px}
+.seg button{display:inline-flex;align-items:center;gap:5px;min-height:34px;min-width:38px;justify-content:center;padding:3px 10px;border:0;border-radius:9px;background:none;color:var(--muted);font:700 14px Nunito,sans-serif;cursor:pointer}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--acc);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.seg svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.v-rechts{margin-left:auto;display:flex;align-items:center;gap:6px}
+.rueck{width:42px;height:42px;display:grid;place-items:center;padding:0;border-radius:12px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer}
+.rueck:hover{border-color:var(--acc);color:var(--acc)}
+.rueck svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .feld{margin-bottom:14px}
 .feld>label,.feld>.lbl{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
 .masse{display:flex;align-items:center;gap:8px}
@@ -77,19 +86,37 @@ input[type=text],input[type=number]{font:inherit;font-size:20px;color:var(--ink)
 .zeile input[type=number]{width:96px}
 .knopf{font:inherit;font-size:15px;padding:9px 14px;border-radius:12px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer}
 .knopf:hover{border-color:var(--acc)}
-.wahl{display:flex;flex-direction:column;gap:6px}
-.wahl label{display:flex;align-items:center;gap:8px;font-size:15px;cursor:pointer}
-.wahl input{accent-color:var(--acc);width:18px;height:18px}
-.mm{display:flex;align-items:center;gap:6px;margin:4px 0 0 26px;font-size:14px;color:var(--muted)}
+.wahl{display:flex;flex-wrap:wrap;gap:6px}
+.mm{display:flex;align-items:center;gap:6px;margin:8px 0 0;font-size:14px;color:var(--muted)}
 .mm input{width:70px;font-size:16px;padding:5px 8px}
-.punkte{display:flex;flex-direction:column;gap:6px;margin-top:4px;padding-top:8px;border-top:1px dashed var(--line)}
-.punkte .mm{flex-wrap:wrap}
-.wahl .mm input[type=range]{flex:1;width:auto;height:auto;min-width:120px;max-width:220px;padding:0}
-.p-ort{margin:0 0 0 26px;font-size:12px;color:var(--muted)}
-.wahl .mm label{display:inline;font-size:14px;cursor:default}
+.mm input[type=range]{flex:1;width:auto;min-width:110px;max-width:220px;padding:0}
+.mm-r{margin:0}
+.mm b{min-width:3.4em;color:var(--ink);font-size:13px}
+/* Schalter: Häkchenfeld als Pille mit Symbol */
+.schalter{position:relative;display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:5px 12px;border:2px solid var(--line);border-radius:999px;background:var(--surface2);font-size:14px;cursor:pointer;user-select:none}
+.schalter:hover{border-color:var(--acc)}
+.schalter input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.schalter:has(input:checked){border-color:var(--acc);background:var(--acc-soft);color:var(--ink)}
+.schalter:has(input:checked) svg{color:var(--acc)}
+.schalter:has(input:focus-visible){outline:3px solid var(--acc);outline-offset:2px}
+.schalter:has(input:disabled){opacity:.45;cursor:not-allowed}
+.schalter svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.schalter svg .f{fill:currentColor;fill-opacity:.14}
+.schalter svg .p{fill:currentColor;stroke:none}
+.linien{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.linien .schalter{flex-direction:column;justify-content:center;gap:2px;border-radius:14px;padding:8px 4px 6px;font-size:13px}
+.linien .schalter svg{width:34px;height:34px;stroke-width:1.6}
+.mit-punkten{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px}
 input[type=range]{width:100%;accent-color:var(--acc)}
 .drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
 .drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
+.hundert{font:800 12px Nunito,sans-serif;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.24)}
+.nm{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px}
+.nm small{font-size:12px;color:var(--muted)}
+.netz-masse{align-items:flex-start}
+.netz-masse .einheit{line-height:48px}
+.deckel{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:6px 12px}
+.deckel svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round}
 .drucken:disabled{opacity:.45;cursor:not-allowed}
 .dazu{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-bottom:12px;border-style:dashed;color:var(--acc);font-weight:800}
 .dazu:hover{background:var(--acc-soft)}
@@ -111,23 +138,41 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 .l-mal{color:var(--muted);font-size:13px}
 .l-weg{flex:none;width:36px;height:36px;border-radius:10px;border:2px solid transparent;background:none;color:var(--muted);font:700 22px/1 Nunito,sans-serif;cursor:pointer}
 .l-weg:hover{color:var(--bad);border-color:var(--line)}
-.l-hinweis{font-size:12px;color:var(--muted);margin:8px 0 0}
-.l-modus{margin:0}
 .liste li{flex-wrap:wrap}
+.liste li.sel{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.l-text{cursor:pointer}
 .l-knopf{flex:none;width:32px;height:32px;border-radius:10px;border:2px solid transparent;background:none;color:var(--muted);font:700 18px/1 Nunito,sans-serif;cursor:pointer}
 .l-knopf:hover{color:var(--acc);border-color:var(--line)}
 .l-knopf[aria-pressed="true"]{color:var(--acc);background:var(--acc-soft)}
 .l-mass{flex-basis:100%;display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;padding:0 0 2px 42px;font-size:13px;color:var(--muted)}
 .l-mass input[type=text]{width:56px;font-size:15px;padding:3px 6px;border-radius:8px;text-align:center}
 .l-mass select{font:inherit;font-size:13px;padding:3px 4px;margin-left:auto;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+/* Formen am Blatt anfassen: Rahmen fängt den Zeiger, die ausgewählte Form hat Griff und Werkzeugleiste */
 .vorschau.freimodus svg{touch-action:none}
 .vorschau .frei{cursor:grab}
-.vorschau .frei .rahmen{fill:none;stroke:transparent;stroke-width:.5;pointer-events:all}
-.vorschau .frei:hover .rahmen,.vorschau .frei.aktiv .rahmen{stroke:var(--acc);stroke-dasharray:1.5 1}
-.vorschau .frei .griff{fill:var(--acc);cursor:nwse-resize;pointer-events:all}
+.vorschau .stk{cursor:pointer}
+.vorschau .rahmen{fill:none;stroke:transparent;stroke-width:1.5px;vector-effect:non-scaling-stroke;pointer-events:all}
+.vorschau .frei:hover .rahmen,.vorschau .stk:hover .rahmen{stroke:var(--acc);stroke-dasharray:5 4;opacity:.7}
+.vorschau .frei.sel .rahmen{stroke:var(--acc);stroke-dasharray:none;stroke-width:2px;opacity:1}
+.vorschau .frei.ueber .rahmen{stroke:var(--bad);stroke-dasharray:5 4;opacity:1}
+.vorschau .frei.aktiv{cursor:grabbing}
+.vorschau .griff{fill:#fff;stroke:var(--acc);stroke-width:2.5px;vector-effect:non-scaling-stroke;cursor:nwse-resize;pointer-events:all}
+.vorschau .hilfe-l{stroke:#E8554E;stroke-width:1px;vector-effect:non-scaling-stroke;stroke-dasharray:4 3;pointer-events:none}
+.werkzeug{position:absolute;z-index:4;display:flex;gap:2px;padding:3px;border-radius:12px;background:var(--surface);border:1px solid var(--line);box-shadow:0 4px 14px rgba(0,0,0,.22)}
+.werkzeug button{width:38px;height:38px;display:grid;place-items:center;border:0;border-radius:9px;background:none;color:var(--ink);cursor:pointer;padding:0}
+.werkzeug button:hover{background:var(--acc-soft);color:var(--acc)}
+.werkzeug button[data-w=weg]:hover{background:none;color:var(--bad)}
+.werkzeug svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.werkzeug{transition:opacity .12s}
+.werkzeug.weg{opacity:0;pointer-events:none;visibility:hidden}
 @media (max-width:480px){.liste{padding:8px}.liste li{gap:6px}.l-mal{display:none}.liste li input[type=number]{width:54px}}
-.info{font-size:15px;margin:10px 0 0}
-.farben{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin:2px 0 4px 28px;color:var(--muted)}
+.info{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;font-size:14px;margin:10px 0 0}
+.info:empty{display:none}
+.pille{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;background:var(--surface2);border:1px solid var(--line);color:var(--ink)}
+.pille.warn{color:var(--bad);border-color:currentColor;background:transparent}
+button.pille{font:inherit;cursor:pointer;border-width:2px;border-color:var(--acc);color:var(--acc);background:var(--acc-soft)}
+button.pille:hover{background:var(--acc);color:var(--acc-ink)}
+.farben{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin:10px 0 0;color:var(--muted)}
 .farben span{display:inline-flex;align-items:center;gap:6px}
 .farben i{width:16px;height:16px;border-radius:4px;border:1px solid rgba(0,0,0,.25);flex:none}
 .farben b{font-weight:700;color:var(--ink);margin-right:2px}
@@ -136,7 +181,13 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 .vorschau{--hmax:44vh;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:flex-start}
 .vorschau svg{display:block;flex:none;width:min(100%,calc(var(--hmax)*.7071));height:auto;aspect-ratio:210/297;background:var(--papier);border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
 .vorschau:has(svg+svg) svg{width:min(calc(50% - 6px),calc(var(--hmax)*.7071))}
-.mehr{flex-basis:100%;margin:0;font-size:14px;color:var(--muted);text-align:center}
+.vorschau.quer svg{aspect-ratio:297/210;width:min(100%,calc(var(--hmax)*1.4142))}
+.vorschau.quer:has(svg+svg) svg{width:min(calc(50% - 6px),calc(var(--hmax)*1.4142))}
+/* Ausrichtung wechseln: das Blatt dreht sich sichtbar mit */
+.vorschau.kipp svg{animation:kippen .42s cubic-bezier(.2,.8,.3,1)}
+@keyframes kippen{from{transform:rotate(var(--kipp,90deg)) scale(.72);opacity:.5}}
+@media (prefers-reduced-motion:reduce){.vorschau.kipp svg{animation:none}}
+.mehr{flex-basis:100%;margin:0;font-size:15px;font-weight:800;color:var(--muted);text-align:center}
 /* Breiter Bildschirm: drei Spalten, das Blatt ganz rechts in voller Höhe */
 @media (min-width:1180px){
   .kopf{max-width:1500px}
@@ -146,8 +197,9 @@ input[type=range]{width:100%;accent-color:var(--acc)}
   .karte-vorschau{grid-column:3;grid-row:1;align-self:start;max-height:calc(100vh - 24px);overflow-y:auto;box-shadow:none}
   .vorschau{--hmax:calc(100vh - 110px)}
   .vorschau:has(svg+svg) svg{width:min(100%,calc(var(--hmax)*.7071))}
+  .vorschau.quer:has(svg+svg) svg{width:min(100%,calc(var(--hmax)*1.4142))}
 }
-@media (max-width:860px){main{grid-template-columns:minmax(0,1fr)}h1{font-size:24px}.karte-vorschau{top:0;padding:10px 12px;border-radius:0 0 18px 18px}.karte-vorschau h2{font-size:15px;margin-bottom:6px}.vorschau{--hmax:34vh}}
+@media (max-width:860px){main{grid-template-columns:minmax(0,1fr)}h1{font-size:24px}.karte-vorschau{top:0;padding:10px 12px;border-radius:0 0 18px 18px}.v-kopf{margin-bottom:8px}.vorschau{--hmax:34vh}}
 @media (max-width:480px){.kats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.k-bilder{grid-template-columns:repeat(2,36px)}.k-bilder svg,.k-bilder img{width:36px;height:36px}.raster{grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px}.form{min-height:80px;font-size:12px}.form svg,.form img{width:40px;height:40px}}
 /* Abpausen am Bildschirm: immer hell, damit die Linie durchs Papier scheint */
 .pausen-auf{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:10px;min-height:48px}
@@ -161,10 +213,8 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 #pausen .knopf{background:#fff;color:#17212F;border-color:#D5DEE9}
 #pausen .knopf.p-sperren{background:#17997A;color:#fff;border-color:#17997A}
 #pausen .knopf:disabled{opacity:.45}
-.p-hilfe{position:absolute;left:12px;right:12px;bottom:10px;margin:0;font-size:13px;color:#5B6B80;background:rgba(255,255,255,.9)}
-.p-hilfe b{color:#17212F}
+.p-hilfe{position:absolute;left:12px;bottom:12px;margin:0;padding:6px 14px;border-radius:999px;font-size:16px;font-weight:800;color:#17212F;background:#FFF3C4}
 .p-eichung{position:absolute;inset:0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:16px;text-align:center}
-.p-eichung p{margin:0;max-width:460px}
 .p-karte{border:2px solid #17212F;background:#F5F8FB}
 .p-regler{display:flex;align-items:center;gap:10px;width:min(460px,100%)}
 .p-regler .knopf{width:48px;font-size:22px;padding:4px 0}
@@ -173,7 +223,7 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 .p-schloss svg{grid-area:1/1;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
 .p-schloss svg.ring{width:56px;height:56px;transform:rotate(-90deg);stroke:#17997A;stroke-width:4;stroke-dasharray:163.4;stroke-dashoffset:163.4}
 .p-schloss.halten svg.ring{stroke-dashoffset:0;transition:stroke-dashoffset 3s linear}
-.p-tipp{position:absolute;right:76px;bottom:24px;margin:0;font-size:14px;color:#5B6B80;background:#fff}
+.p-tipp{position:absolute;right:76px;bottom:26px;margin:0;font-size:15px;font-weight:800;color:#5B6B80;background:#fff}
 #druck{display:none}
 @page{size:A4 portrait;margin:0}
 @media print{
@@ -195,46 +245,62 @@ input[type=range]{width:100%;accent-color:var(--acc)}
   <section class="karte" aria-label="Form wählen" id="formen"></section>
   <div class="seite-rechts">
     <section class="karte karte-vorschau" aria-label="Vorschau">
-      <h2>Vorschau</h2>
+      <div class="v-kopf">
+        <div class="seg" id="papier" role="group" aria-label="Papier">
+          <button type="button" data-papier="a4" aria-pressed="true">A4</button>
+          <button type="button" data-papier="a3" aria-pressed="false">A3</button>
+        </div>
+        <div class="seg" id="lage" role="group" aria-label="Ausrichtung">
+          <button type="button" data-quer="0" aria-pressed="true" aria-label="Hochformat" title="Hochformat"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="3" width="11" height="18" rx="2"/></svg></button>
+          <button type="button" data-quer="1" aria-pressed="false" aria-label="Querformat" title="Querformat"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6.5" width="18" height="11" rx="2"/></svg></button>
+        </div>
+        <div class="v-rechts">
+          <button type="button" class="rueck" id="rueck" aria-label="Rückgängig" title="Rückgängig" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button>
+          <div class="seg seg-modus" id="modus" role="group" aria-label="Anordnung">
+            <button type="button" data-modus="auto" aria-pressed="true" title="Automatisch"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg><span>Auto</span></button>
+            <button type="button" data-modus="frei" aria-pressed="false" title="Frei"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M9 6l3-3 3 3M9 18l3 3 3-3M6 9l-3 3 3 3M18 9l3 3-3 3"/></svg><span>Frei</span></button>
+          </div>
+        </div>
+      </div>
       <div class="vorschau" id="vorschau"></div>
+      <div class="info" id="info" aria-live="polite"></div>
+      <div class="werkzeug weg" id="werkzeug" role="toolbar" aria-label="Form">
+        <button type="button" data-w="kopie" aria-label="Kopieren" title="Kopieren"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg></button>
+        <button type="button" data-w="dreh" aria-label="Drehen" title="Drehen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg></button>
+        <button type="button" data-w="spiegel" aria-label="Spiegeln" title="Spiegeln"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18" stroke-dasharray="2 2.5"/><path d="M9 7 4 17h5zM15 7l5 10h-5z"/></svg></button>
+        <button type="button" data-w="weg" aria-label="Löschen" title="Löschen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></button>
+      </div>
     </section>
     <section class="karte karte-einst" aria-label="Einstellungen">
       <div class="feld">
-        <span class="lbl" id="lbl-groesse">Grösse (Breite × Höhe)</span>
+        <span class="lbl" id="lbl-groesse">Grösse</span>
         <div class="masse" role="group" aria-labelledby="lbl-groesse">
           <input type="text" inputmode="decimal" id="b" aria-label="Breite in cm">
           <span class="einheit">×</span>
           <input type="text" inputmode="decimal" id="h" aria-label="Höhe in cm">
           <span class="einheit">cm</span>
-          <button type="button" class="schloss" id="schloss" aria-pressed="true" title="Seitenverhältnis behalten"></button>
+          <button type="button" class="schloss" id="schloss" aria-pressed="true"></button>
         </div>
         <div class="regler-gr" id="regler-gr"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="8" height="8" rx="2"/></svg><input type="range" id="gross" min="1" max="40" step="0.5" aria-label="Grösse"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/></svg></div>
-        <div class="chips" id="chips" aria-label="Schnell wählen (längste Seite)"></div>
+        <div class="chips" id="chips" aria-label="Grösse wählen"></div>
       </div>
       <div class="feld" id="feld-param" hidden>
         <label for="param" id="lbl-param">Zacken</label>
         <input type="range" id="param" min="3" max="12" step="1">
       </div>
       <div class="feld" id="feld-netz" hidden>
-        <span class="lbl" id="lbl-netz">Masse der Schachtel (Breite × Tiefe × Höhe)</span>
-        <div class="masse" role="group" aria-labelledby="lbl-netz">
-          <input type="text" inputmode="decimal" id="nb" aria-label="Breite der Schachtel in cm">
+        <span class="lbl" id="lbl-netz">Schachtel</span>
+        <div class="masse netz-masse" role="group" aria-labelledby="lbl-netz">
+          <label class="nm"><input type="text" inputmode="decimal" id="nb" aria-label="Breite in cm"><small>Breite</small></label>
           <span class="einheit">×</span>
-          <input type="text" inputmode="decimal" id="nt" aria-label="Tiefe der Schachtel in cm">
+          <label class="nm"><input type="text" inputmode="decimal" id="nt" aria-label="Tiefe in cm"><small>Tiefe</small></label>
           <span class="einheit">×</span>
-          <input type="text" inputmode="decimal" id="nh" aria-label="Höhe der Schachtel in cm">
+          <label class="nm"><input type="text" inputmode="decimal" id="nh" aria-label="Höhe in cm"><small>Höhe</small></label>
           <span class="einheit">cm</span>
         </div>
-        <p class="hinweis">Klebelaschen und Falzlinien kommen automatisch dazu. Für einen Stülpdeckel die offene Schachtel 2 mm breiter und tiefer und wenige cm hoch machen.</p>
+        <button type="button" class="knopf deckel" id="deckel" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h18v4H3zM5 12v8h14v-8"/></svg>Deckel</button>
       </div>
-      <div class="feld">
-        <span class="lbl" id="lbl-papier">Papier</span>
-        <div class="chips" id="papier" role="group" aria-labelledby="lbl-papier">
-          <button type="button" class="chip" data-papier="a4" aria-pressed="true">A4</button>
-          <button type="button" class="chip" data-papier="a3" aria-pressed="false">A3</button>
-        </div>
-      </div>
-      <div class="feld">
+      <div class="feld" id="feld-n">
         <label for="n">Anzahl</label>
         <div class="zeile">
           <input type="number" id="n" min="1" max="500" step="1" inputmode="numeric">
@@ -243,40 +309,34 @@ input[type=range]{width:100%;accent-color:var(--acc)}
       </div>
       <div class="feld">
         <span class="lbl">Linien</span>
-        <div class="wahl" role="radiogroup" aria-label="Linien">
-          <label><input type="radio" name="linie" value="schnitt"> nur Schnittlinie</label>
-          <label><input type="radio" name="linie" value="naht"> mit Nählinie innen</label>
-          <div class="mm" id="mm-naht"><label for="naht">Abstand zum Rand</label> <input type="number" id="naht" min="1" max="20" step="1" inputmode="numeric" aria-label="Abstand der Nählinie zum Rand in mm"> mm</div>
-          <label><input type="radio" name="linie" value="zugabe"> mit Nahtzugabe aussen</label>
-          <div class="mm" id="mm-zugabe"><label for="zugabe">Nahtzugabe</label> <input type="number" id="zugabe" min="1" max="20" step="1" inputmode="numeric" aria-label="Nahtzugabe in mm (Abstand Schnittlinie zu Nählinie)"> mm dazu</div>
+        <div class="linien" role="radiogroup" aria-label="Linien">
+          <label class="schalter"><input type="radio" name="linie" value="schnitt"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="f" x="5" y="5" width="14" height="14" rx="3.5"/></svg>Schnitt</label>
+          <label class="schalter"><input type="radio" name="linie" value="naht"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="f" x="3.5" y="3.5" width="17" height="17" rx="4"/><rect x="7.5" y="7.5" width="9" height="9" rx="1.5" stroke-dasharray="2.2 2"/></svg>Naht</label>
+          <label class="schalter"><input type="radio" name="linie" value="zugabe"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><rect class="f" x="6.5" y="6.5" width="11" height="11" rx="2" stroke-dasharray="2.2 2"/></svg>Zugabe</label>
         </div>
-        <div class="wahl punkte">
-          <label><input type="checkbox" id="punkte"> Einstichpunkte für die Nadel</label>
-          <div class="mm" id="mm-punkte"><label for="pabst" id="lbl-pabst">alle 5 mm</label><input type="range" id="pabst" min="2" max="20" step="1" aria-label="Abstand der Einstichpunkte in mm"></div>
-          <p class="p-ort" id="p-ort"></p>
-          <label id="feld-strich"><input type="checkbox" id="strich"> Nählinie dazu gestrichelt zeigen</label>
+        <div class="mm" id="mm-naht"><label for="naht">Abstand</label><input type="number" id="naht" min="1" max="20" step="1" inputmode="numeric">mm</div>
+        <div class="mm" id="mm-zugabe"><label for="zugabe">Zugabe</label><input type="number" id="zugabe" min="1" max="20" step="1" inputmode="numeric">mm</div>
+        <div class="mit-punkten">
+          <label class="schalter"><input type="checkbox" id="punkte"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="p" cx="5" cy="12" r="1.8"/><circle class="p" cx="12" cy="12" r="1.8"/><circle class="p" cx="19" cy="12" r="1.8"/></svg>Punkte</label>
+          <span class="mm mm-r" id="mm-punkte"><input type="range" id="pabst" min="2" max="20" step="1" aria-label="Abstand der Punkte in mm"><b id="lbl-pabst">5 mm</b></span>
+          <label class="schalter" id="feld-strich"><input type="checkbox" id="strich"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h20" stroke-dasharray="3.5 2.5"/></svg>Gestrichelt</label>
         </div>
       </div>
-      <div class="feld wahl">
-        <label id="feld-farbig" hidden><input type="checkbox" id="farbig"> farbig (ohne Häkchen: Silhouette)</label>
+      <div class="feld">
+        <div class="wahl">
+          <label class="schalter" id="feld-farbig" hidden><input type="checkbox" id="farbig"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.7-.9 1.3-1.8-.5-1.2.3-2.4 1.7-2.4H17a4 4 0 0 0 4-4C21 7.2 17 3 12 3z"/><circle cx="7.5" cy="11.5" r="1.2"/><circle cx="10.5" cy="7.5" r="1.2"/><circle cx="15.2" cy="8" r="1.2"/></svg>Farbig</label>
+          <label class="schalter" id="feld-det"><input type="checkbox" id="det"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.8"/></svg>Details</label>
+          <label class="schalter"><input type="checkbox" id="spiegel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18" stroke-dasharray="2 2.5"/><path d="M9 7 4 17h5zM15 7l5 10h-5z"/></svg>Spiegeln</label>
+        </div>
         <div class="farben" id="farben" hidden></div>
-        <label id="feld-det"><input type="checkbox" id="det"> Augen und Linien zeigen</label>
-        <label><input type="checkbox" id="spiegel"> spiegeln</label>
       </div>
-      <div class="feld" id="feld-modus">
-        <span class="lbl" id="lbl-modus">Anordnung auf dem Blatt</span>
-        <div class="chips l-modus" id="modus" role="group" aria-labelledby="lbl-modus"><button type="button" class="chip" data-modus="auto" aria-pressed="true" title="Alle Formen der Liste werden platzsparend aufs Blatt gelegt">Automatisch packen</button><button type="button" class="chip" data-modus="frei" aria-pressed="false" title="Jede Form einzeln verschieben, drehen und strecken – auch auf ein anderes Blatt">Frei anordnen</button></div>
-      </div>
-      <button type="button" class="knopf dazu" id="dazu" title="Diese Form mit Grösse und Anzahl in die Liste nehmen – so kommen mehrere Formen zusammen aufs Blatt">+ Aufs Blatt</button>
+      <button type="button" class="knopf dazu" id="dazu">+ Aufs Blatt</button>
       <div class="liste" id="liste" hidden>
-        <div class="l-kopf"><b id="l-titel">Auf dem Blatt</b><button type="button" class="l-leeren" id="leeren">Liste leeren</button></div>
+        <div class="l-kopf"><b id="l-titel"></b><button type="button" class="l-leeren" id="leeren">Leeren</button></div>
         <ul id="l-ul"></ul>
-        <p class="l-hinweis" id="l-hinweis">Vorschau und Druck zeigen alle Formen der Liste. Nächste Form wählen, einstellen, «+ Aufs Blatt».</p>
       </div>
-      <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
-      <button type="button" class="knopf pausen-auf" id="pausen-auf"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 8.5c-1.2-1.7-4-1.1-4 1 0 2 2.4 3.6 4 5 1.6-1.4 4-3 4-5 0-2.1-2.8-2.7-4-1z"/></svg><span>Auf dem Bildschirm abpausen</span></button>
-      <p class="info" id="info" aria-live="polite"></p>
-      <p class="hinweis">Beim Drucken «Tatsächliche Grösse» oder 100 % wählen, nicht «An Seite anpassen». Bei A3 im Druckfenster auch A3 als Papier wählen. Die 5-cm-Linie unten auf dem Blatt zeigt, ob es stimmt.</p>
+      <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span><small class="hundert">100 %</small></button>
+      <button type="button" class="knopf pausen-auf" id="pausen-auf"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 8.5c-1.2-1.7-4-1.1-4 1 0 2 2.4 3.6 4 5 1.6-1.4 4-3 4-5 0-2.1-2.8-2.7-4-1z"/></svg><span>Abpausen</span></button>
     </section>
   </div>
 </main>
@@ -289,12 +349,11 @@ input[type=range]{width:100%;accent-color:var(--acc)}
     <button type="button" class="knopf" id="p-eichen">Grösse prüfen</button>
     <button type="button" class="knopf p-sperren" id="p-sperren">Sperren</button>
   </div>
-  <p class="p-hilfe" id="p-hilfe"><b>☀ Helligkeit ganz hoch:</b> oben rechts nach unten wischen, Regler ganz hinauf. Dann «Sperren» drücken und Papier auflegen. Ganz sicher sperren: Einstellungen → Bedienungshilfen → Geführter Zugriff.</p>
-  <button type="button" class="p-schloss" id="p-schloss" hidden aria-label="Zum Entsperren 3 Sekunden drücken"><svg class="ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
-  <p class="p-tipp" id="p-tipp" hidden>Gesperrt. Zum Entsperren das Schloss 3 Sekunden drücken.</p>
+  <p class="p-hilfe" id="p-hilfe" aria-label="Helligkeit 100 %">☀ 100 %</p>
+  <button type="button" class="p-schloss" id="p-schloss" hidden aria-label="Entsperren: 3 s halten"><svg class="ring" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
+  <p class="p-tipp" id="p-tipp" hidden>⏱ 3 s</p>
   <div class="p-eichung" id="p-eichung" hidden>
-    <h2>Stimmt die Grösse?</h2>
-    <p>Leg eine Bankkarte oder einen Ausweis auf den Rahmen. Mach den Rahmen genau gleich gross wie die Karte.</p>
+    <h2>💳 Karte auflegen</h2>
     <div class="p-karte" id="p-karte"></div>
     <div class="p-regler"><button type="button" class="knopf" id="p-minus" aria-label="Kleiner">−</button><input type="range" id="p-regler" min="25" max="90" step="0.05" aria-label="Grösse anpassen"><button type="button" class="knopf" id="p-plus" aria-label="Grösser">+</button></div>
     <button type="button" class="drucken" id="p-ok">Passt</button>
