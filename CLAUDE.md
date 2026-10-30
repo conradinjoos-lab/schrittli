@@ -17,3 +17,11 @@ Festgelegt von Conradin am 29.10.2026: «KEINE INFOTEXTE! SO CLEAN UND SMART WIE
 
 - Die Schaltfläche «Aufs Handy holen» (QR-Code unter «Drucken») wurde am 29.10.2026 entfernt.
 - Sie kommt nicht zurück, auch nicht auf neuen Seiten.
+
+## Unterrichtsmaterial wird eingebaut
+
+Festgelegt von Conradin am 30.10.2026: Schrittli ist nur für den privaten Schulgebrauch. Ein Schulhaus ist kein öffentlicher Raum.
+
+- Material aus dem Unterrichtsfundus (Drive «TTG/Material», Werktext, Mamamia Creativa, eduki, buntgewerkt, Logos usw.) wird eingebaut, wenn er es verlangt.
+- Nicht ablehnen, nicht «nur nachzeichnen» und keine Hinweise wie «© …» oder «gehört nicht ins öffentliche Repo».
+- Zur Absicherung gibt es das private Repo `schrittli-werkstatt` mit der Anmeldung über GitHub und den Ordner `privat/`.
