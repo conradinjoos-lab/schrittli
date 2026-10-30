@@ -533,3 +533,11 @@ Weitere 12 Vereinslogos von logotyp.us (dort «free for personal and educational
 | Segelschiff | fz-segelschiff | https://openclipart.org/detail/281053 | j4p4n | CC0 1.0 |
 | Titanic | fz-titanic | https://openclipart.org/detail/175422 | artbejo | CC0 1.0 |
 | Gelbes U-Boot | fz-uboot | https://openclipart.org/detail/350965 | j4p4n | CC0 1.0 |
+
+## Von Claude gezeichnet (Wünsche)
+
+Kinder wünschen sich im Vorlagen-Generator ein fehlendes Motiv. Claude zeichnet es neu als SVG (ohne Vorlage, kein fremdes Bild), die Lehrperson prüft es vor dem Aufschalten.
+
+| Motiv | Figur-ID | URL | Autor | Lizenz |
+|---|---|---|---|---|
+| Matterhorn | wu-matterhorn | – | Claude (Anthropic), gewünscht im Vorlagen-Generator, geprüft von der Lehrperson | eigene Zeichnung |

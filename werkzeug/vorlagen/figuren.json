@@ -7249,6 +7249,12 @@
    "name": "Gelbes U-Boot",
    "welt": "Fahrzeuge",
    "datei": "fz-uboot.png"
+  },
+  {
+   "id": "wu-matterhorn",
+   "name": "Matterhorn",
+   "welt": "Schweiz & Alpen",
+   "datei": "wu-matterhorn.png"
   }
  ]
 }
