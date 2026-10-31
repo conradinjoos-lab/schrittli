@@ -1,6 +1,6 @@
 // Orte: Berge als Umrisse, Städte als Silhouetten, Schweiz und Alpen, Weltraum.
 'use strict';
-module.exports=({add,kopf,gesicht,ohr,stern,teil})=>{
+module.exports=({add,kachel,kopf,gesicht,ohr,stern,teil})=>{
   const R=(c,n)=>c.repeat(n);
   // Berge: Dreiecke mit Schneekappe, Gipfelkreuz, Hütte, See oder Zelt am Fuss.
   const berg=(id,rows,beine=[])=>add('berg-'+id,rows,'Umriss',beine);
@@ -35,6 +35,11 @@ module.exports=({add,kopf,gesicht,ohr,stern,teil})=>{
   berg('c-see',grund+' bbbbbbbbbbbbbb bbbbbbbbbbbb');
   berg('c-zelt',grund+' gggggggggggggg oo oooo oooooo');
   berg('c-ski',grund+' wwwwwwwwwwwwww bbbb bbbbbb');
+  // Lange Grate: Himmel (l) als Grund, damit mehrere Spitzen und schiefe Linien möglich sind.
+  berg('v-sil-pyramidengipfel',kachel('llllllslllllll llllllssllllll lllllsssslllll lllllsssssllll ssllssssssllls ssssssssssllss ssssssssssssss'));
+  berg('v-sil-alpengrat',kachel('llllllllllllls llllllllllllss lllllllllsllss lllllllllsslss llllslllssssss sllsssssssssss sslsssssssssss ssssssssssssss'));
+  berg('v-sil-alpenpanorama',kachel('lllllllsllllll lllllslsslllll lslllssssslssl ssssssssssssss ssssssssssssss'));
+  add('wu-matterhorn',kachel('lllllllwwlllll llllllwwwlllll llllllwwwzllll lllllPPwzzzlll lllllPPPzzzlll llllwwPPzzzzll lllPPPPPzzzwll llPPPPPPzzzzzl lgdPgPPdzgzdgl ggdggggdgggdgg'),'Umriss');
   // Städte: ein Wahrzeichen pro Stadt als Silhouette.
   const stadt=(id,rows,beine=[])=>add('stadt-'+id,rows,'Silhouette',beine);
   const zuerich='kkkkkkkkkk kwwkkkkwwk kwwkkkkwwk kkkkkkkkkk kkkwwwwkkk kkkwwwwkkk kkkkkkkkkk';
@@ -129,6 +134,21 @@ module.exports=({add,kopf,gesicht,ohr,stern,teil})=>{
   berg('v-sil-schneekette','sss sssss sssssss sssssssss sssssssssss sssssssssssss');
   berg('v-sil-nebelberge','ss sss ssssss ssssssss ssssssssssss ssssssssssssss');
   berg('v-sil-gruener-gipfel','s s ss sss ssss sssss ssssss sssssss ssssssss');
+  // Schweizer Städte als Panorama: Himmel (l) als Grund, damit Türme links oder rechts der Mitte stehen können.
+  const panorama=(id,rows)=>stadt(id,kachel(rows));
+  panorama('v-zuerich','llsslsslllslll llsslsslllslll llsslsslllslll llsslsslllslsl llsslsslllslsl llssssslllsssl sssssssllsssss sssssssllsssss sssssssbbsssss');
+  panorama('v-bern','llllslllllllll llllslllllllll llllslllllslll llslslllslslsl llslslllsssssl lsssssllsssssl lsssssllsssssl lsssssslsssssl ssssssssssssss');
+  panorama('v-bern-altstadt','llllllssllllll lllllsssslllll llslsssssslsll llslsssssslsll llslsssssslsss sslssssssslsss sslssssssslsss sslssssssslsss ssssssssssssss');
+  stadt('v-bundeshaus','ss ssssss ssssssss ssssssss ssssssssssss ssssssssssss ssssssssssss ssssssssssssss');
+  panorama('v-genf','llllllsllllwwl llllllslllllwl llllslslslllwl llllslslslsswl lllsssssslsswl lslsssssslsswl lslsssssslsswl sslsssssslsswl sslsssssslsswl ssssssssssssbb');
+  panorama('v-genf-altstadt','lllsllllllllll lllsllllllllll lllsllllllllll lllsllllllllll llssslllllllll llsssllsslllll llssslsssslsll ssssslsssslssl ssssssssssssss');
+  panorama('v-lausanne','lllllllsllllll llllsslsllllll llllsslsllllll llllssssllslsl slslssssllslsl ssslsssslsssss ssslsssslsssss ssslsssslsssss ssssssssssssss');
+  panorama('v-stgallen','lllssllllsslll lllssllllsslll lllsslsslsslll lllsslsslsslll lllsssssssslll lllsssssssslll lslsssssssslsl sslsssssssslss sslsssssssslss ssssssssssssss');
+  panorama('v-schweiz','llllllllslllll llllllllsllsls llssslllsllsls lssssslssslsss llsssllssslsss lllslllssslsss sssssslssslsss ssssssssssssss');
+  panorama('v-basel','llllllslslllll llllllslslllll llllllslslllll lllsslssslslsl lllsslssslsssl lsssslssslssss lsssslssslssss ssssssssssssss');
+  panorama('v-lugano','lllllllsllllll llllslssslllsl llllslsssllssl llllslssslsssl llssssssslsssl ssssssssslsssl ssssssssslssss ssssssssslssss bbbbbbbbbbbbbb');
+  panorama('v-luzern-kapellbruecke','lllllllllsslll llllllllssssll lllllllssssssl llllllllssssll llllllllssssll llllllllssssll ssssssssssssss ssssssssssssss slslslslslslsl bbbbbbbbbbbbbb');
+  panorama('wm-schaffhausen-munot','lllllsllllllll llllssslllsssl lllsssssllslll llllssssssssll lllsssssssssls llssssssssslss ssssssssssslss ssssssssssssss');
   // Skylines: ein Wahrzeichen in der Mitte, weisse Perlen sind Lücken zwischen den Häusern.
   stadt('oc-berlin','s s sss sss s s s ssssssssss ssssssssssss');
   stadt('oc-frankfurt','sswwss ssswwsss sssswwssss ssssssssssss ssssssssssssss');
