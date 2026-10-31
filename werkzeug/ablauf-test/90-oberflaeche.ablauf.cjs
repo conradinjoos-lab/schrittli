@@ -77,7 +77,7 @@ const zoom=art=>async t=>{ const schlecht=[]; for(const [b,h,wo] of ZOOM){ const
   t.pruefe(!schlecht.length,schlecht.length+' Stellen:\n'+schlecht.join('\n')); };
 /* Zoomen bleibt erlaubt. Einzige Ausnahme: die Sperre im Einfrieren-Werkzeug */
 const NUR_EINFRIEREN=/\/vorlagen\/einfrieren\/$/;
-const zoomFrei=async t=>{ const {SEITEN}=require('./20-melden-seiten.ablauf.cjs'), k=await t.kontext(); for(const s of ['/','/schule/',...SEITEN.filter(x=>/^\/(vorlagen|kontrolle)\//.test(x))]){ const p=await k.seite(s); await p.waitForLoadState('domcontentloaded'); const z=await p.evaluate(()=>({m:(document.querySelector('meta[name=viewport]')||{}).content||'',a:getComputedStyle(document.documentElement).touchAction,b:getComputedStyle(document.body).touchAction}));
+const zoomFrei=async t=>{ const {SEITEN}=require('./20-melden-seiten.ablauf.cjs'), k=await t.kontext(); for(const s of ['/familie.html','/schule/',...SEITEN.filter(x=>/^\/(vorlagen|kontrolle)\//.test(x))]){ const p=await k.seite(s); await p.waitForLoadState('domcontentloaded'); const z=await p.evaluate(()=>({m:(document.querySelector('meta[name=viewport]')||{}).content||'',a:getComputedStyle(document.documentElement).touchAction,b:getComputedStyle(document.body).touchAction}));
     if(!NUR_EINFRIEREN.test(s)){ t.pruefe(!/user-scalable\s*=\s*(no|0)|maximum-scale/i.test(z.m),s+': '+z.m); t.pruefe(z.a!=='none'&&z.b!=='none',s+': touch-action'); } await p.close(); } };
 
 /* Querformat 844×390: Bild und die drei festen Knöpfe in jeder Spielphase ganz im Blick */

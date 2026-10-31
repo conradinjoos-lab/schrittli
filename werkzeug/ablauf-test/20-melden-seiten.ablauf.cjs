@@ -4,7 +4,7 @@ const {execSync}=require('node:child_process'), path=require('node:path');
 const WERKZEUGE=['armbaender','bohren','drucksachen','einfrieren','fachwoerter','falten','kiste','klasse','maschenprobe','mechanik','perlen','perlentier-bild','stromkreis','zaehlmuster'].map(n=>`/vorlagen/${n}/`);
 const SEITEN=['/vorlagen/',...WERKZEUGE,...['index','klassen','material','rueckmeldungen','sammlung','unterricht','video','werke','wuensche'].map(n=>`/kontrolle/${n}.html`),'/privat/perlen-figuren/','/output/perlen-audit/','/output/perlen-audit/vorher/','/output/pruefung-gesamt/','/output/vorlagen-pruefung/'];
 /* Neue Seite im Repo ohne Eintrag hier: Ablauf scheitert */
-const OHNE=new Set(['index.html','schule/index.html','quelle/p1.html']);
+const OHNE=new Set(['index.html','familie.html','schule/index.html','quelle/p1.html','quelle/weiter.html']);
 const fehltInListe=()=>execSync('git ls-files -co --exclude-standard *.html',{cwd:path.resolve(__dirname,'..','..'),encoding:'utf-8'}).split('\n').map(s=>s.trim()).filter(s=>s&&!OHNE.has(s)&&!SEITEN.includes('/'+s)&&!SEITEN.includes('/'+s.replace(/index\.html$/,'')));
 const fenster=p=>p.evaluate(()=>{ const r=document.querySelector('#melden-flagge').shadowRoot; return {offen:!!r.querySelector('.fenster'),arten:[...r.querySelectorAll('input[name=art]')].map(i=>i.value),gewaehlt:r.querySelectorAll('input:checked').length,senden:r.querySelector('.ja')?r.querySelector('.ja').disabled:null}; });
 const lauf=async t=>{ const k=await t.kontext(); const fehlt=[]; const neu=fehltInListe(); t.pruefe(!neu.length,'nicht in der Liste: '+neu.join(', '));

@@ -33,6 +33,10 @@ Kinder, Sterne, Fortschritt und Werke liegen im Browser des Geräts (localStorag
 - Elternbereich → Tab «Katalog»: Vorauswahl aus `katalog.json` (SRF Kids, Die Maus, Schwiizergoofe, Werklehrerin, Stiftung Kinder forschen …), pro Video «Hinzufügen». 57 Einträge, davon Werken (Fingerstricken, Weben, Nähen, Knüpfen, Flechten) und Experimente (kleine Versuche mit Haushaltsmaterial) komplett mit Schritten.
 - Bereiche ab Werk: Basteln, Werken, Zeichnen, Natur, Experimente, Geschichten, Lesen & Zahlen (Lern) sowie Lustiges, Lieder (Spass). Neue Bereiche kommen bei bestehenden Geräten beim nächsten Laden automatisch dazu.
 
+## Familienversion vorerst weggenommen
+
+Seit 31.10.2026 führt die Hauptadresse (`index.html`) zur Schule. Die Familienversion liegt ohne Link in `familie.html` und wird weiter gebaut und getestet. Zurückholen: siehe `quelle/bauen.sh`.
+
 ## Schulversion (`schule/`)
 
 - Eigener Ordner `schule/` mit `index.html` und `schule.json`; läuft unter `…/schrittli/schule/`. Gleiche Technik, eigener Speicher (die Familienversion bleibt unberührt).
@@ -41,6 +45,7 @@ Kinder, Sterne, Fortschritt und Werke liegen im Browser des Geräts (localStorag
 - **Fehler melden:** Die Flagge steht auf jeder Seite der App, der Vorlagen, der Werkzeuge und der Kontrolle. Einzige Ausnahme ist die Einfrieren-Sperre des Unterrichtsmodus. Neue Seiten laden `vorlagen/melden.js` über `vorlagen/zurueck.js`.
 - Grossbuchstaben für 1. und 2. Klasse, ab 3. Klasse normale Schrift.
 - «Für Lehrpersonen» (unten): Liste aller Videos mit Klassenzuordnung und QR-Code pro Video (Schul-Link mit Schritten, auch von zuhause nutzbar).
+- «Admin» (unten, im Unterrichtsmodus ausgeblendet): führt zur Online-Kontrolle. Dort steht die Anmeldung mit GitHub; wer schon angemeldet ist, kommt direkt hinein.
 - Ordnung nach TTG-Verfahren: Nähen, Sticken, Häkeln, Stricken, Weben, Flechten & Knüpfen, Wickeln, Filzen, Falten, Schneiden & Kleben, Sägen & Nageln, Formen, Drucken, Experimentieren. Gedacht vor allem als Zwischenarbeiten für Kinder, die früher fertig sind.
 - Pflege: `schule/schule.json` – pro Video `areaId` (Verfahren) und `stufen` (Liste 1–6). Klassenzuordnung ist ein Vorschlag von Claude und soll von der Lehrperson geprüft werden.
 - Neue Videos halbautomatisch erfassen (Transkript, Bildwechsel, Schritte-Entwurf, Kontrollseite zum Feinstellen der Stopps): siehe `werkzeug/LIESMICH.md`. Braucht nur der Rechner, der Videos erfasst – die App selbst nicht.

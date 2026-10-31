@@ -67,4 +67,50 @@ const kurzBleibt=async t=>{ const k=await t.kontext({touch:false,breite:1280,hoe
   const py=require('node:child_process').spawnSync('python',['-B','-c',KURZ_PY],{cwd:wurzel,encoding:'utf8',env:{...process.env,PYTHONIOENCODING:'utf-8'}}); t.pruefe(py.status===0,'Python: '+py.stderr);
   const [steps,mit,ohne]=JSON.parse(py.stdout); t.pruefe(steps[0].kurz==='A kurz','Gleiches label behält kurz: '+py.stdout); t.pruefe(!('kurz' in steps[1]),'Anderes label ohne kurz: '+py.stdout); t.pruefe(steps[2].kurz==='C neu','Neuer kurz gewinnt: '+py.stdout); t.pruefe(mit.kurz==='b'&&!('kurz' in ohne),'Speichern behält kurz: '+py.stdout); };
 
-module.exports=[{name:'Kontrolle Sammlung',lauf:sammlung},{name:'Kontrolle Werke',lauf:werkeSeite},{name:'Kontrolle kurz',lauf:kurzBleibt}];
+/* 🗑 nur bei Videos ohne Entwurf: zweiter Tipp löscht, Fehler lassen die Karte stehen. Online und lokal: Was Schritte hat oder in der App steht, bleibt. */
+const LISTE=[{id:'leerleerlee',title:'Leer',entwurf:false,brief:true,status:[]},{id:'fehlfehlfeh',title:'Fehler',entwurf:false,brief:false,status:[]},{id:'drindrindri',title:'Drin',entwurf:true,drin:true,schritte:3,status:[1,1,1]},{id:'offenoffeno',title:'Offen',entwurf:true,schritte:3,status:[1,1,0]}];
+const LOESCH_ATTRAPPE=`window.__ab=[];const W={LOKAL:true,bereit:async()=>{},meldungen:async()=>[],liste:async()=>({themen:[],videos:${JSON.stringify(LISTE)}.map(e=>({...e,vorschau:''}))}),loeschen:async id=>{__ab.push(id);if(id==='fehlfehlfeh')throw new Error('nein');return{ok:true}}};`;
+const LOESCH_PY=`
+import json, pathlib, sys, tempfile
+sys.path.insert(0, 'werkzeug')
+import kontrolle as k
+d = pathlib.Path(tempfile.mkdtemp()); k.ENTWURF = d; k.CACHE = d / 'cache'; k.SCHULE = d / 'schule.json'
+k.SCHULE.write_text(json.dumps({'videos': [{'id': 'zw-x', 'source': {'id': 'drindrindri'}}]}), encoding='utf-8')
+for v, f in (('leerleerlee', 'brief.md'), ('offenoffeno', 'video.json'), ('drindrindri', 'brief.md')):
+    (d / v).mkdir(); (d / v / f).write_text('{}', encoding='utf-8')
+(d / 'nurordner00').mkdir()
+aus = []
+for v in ('leerleerlee', 'offenoffeno', 'drindrindri'):
+    try: k.loeschen(v); aus.append(True)
+    except ValueError: aus.append(False)
+print(json.dumps([aus, [(d / v).exists() for v in ('leerleerlee', 'offenoffeno', 'drindrindri')], sorted(e['id'] for e in k.liste())]))
+`;
+const loeschen=async t=>{ const k=await t.kontext({touch:false,breite:1280,hoehe:800}); await k.c.route('**/kontrolle/werkstatt.js',r=>r.fulfill({status:200,contentType:'text/javascript',body:LOESCH_ATTRAPPE})); const p=await k.seite('/kontrolle/index.html');
+  await p.waitForSelector('#filter button'); await p.locator('[data-f=alle]').click(); await p.waitForSelector('.karte');
+  t.pruefe(await p.locator('.ab').count()===2,'Knopf nur ohne Entwurf'); const ab=id=>p.locator(`[data-ab="${id}"]`), ruf=()=>p.evaluate(()=>window.__ab);
+  await ab('leerleerlee').click(); t.pruefe(p.url().endsWith('/kontrolle/index.html'),'Tipp öffnet die Karte nicht: '+p.url()); t.pruefe((await ruf()).length===0,'Erster Tipp löscht nicht'); t.pruefe(await ab('leerleerlee').textContent()==='Löschen?','Rot mit Frage');
+  await p.waitForFunction(()=>document.querySelector('[data-ab=leerleerlee]').textContent==='🗑',null,{timeout:4000}); t.pruefe((await ruf()).length===0,'Warten löscht nicht');
+  await ab('leerleerlee').click(); await ab('leerleerlee').click(); await p.waitForFunction(()=>!document.querySelector('[data-ab=leerleerlee]')); t.pruefe((await ruf()).join()==='leerleerlee','Gelöscht: '+await ruf());
+  t.pruefe(await p.locator('.karte').count()===3,'Karte weg'); t.pruefe((await p.locator('[data-f=leer]').textContent()).endsWith('1'),'Zahl sinkt: '+await p.locator('[data-f=leer]').textContent());
+  await ab('fehlfehlfeh').click(); await ab('fehlfehlfeh').click(); await p.waitForFunction(()=>document.querySelector('[data-ab=fehlfehlfeh]').textContent==='⚠'); t.pruefe(await p.locator('.karte').count()===3,'Fehler lässt die Karte stehen');
+  t.keineFehler(k);
+  const fs=require('node:fs'), path=require('node:path'), wurzel=path.resolve(__dirname,'..','..');
+  const py=require('node:child_process').spawnSync('python',['-B','-c',LOESCH_PY],{cwd:wurzel,encoding:'utf8',env:{...process.env,PYTHONIOENCODING:'utf-8'}}); t.pruefe(py.status===0,'Python: '+py.stderr);
+  const [aus,da,liste]=JSON.parse(py.stdout); t.pruefe(aus.join()==='true,false,false'&&da.join()==='false,true,true','Lokal: '+py.stdout); t.pruefe(liste.join()==='drindrindri,offenoffeno','Leere Ordner fehlen in der Liste: '+py.stdout);
+  /* Online-Weg mit echter werkstatt.js gegen eine GitHub-Attrappe: Ein Commit nimmt den Ordner und die Zeile in liste.json weg */
+  const online=async(id,mitEntwurf,inApp)=>{ const baum=[], json=(o,s=200)=>new Response(JSON.stringify(o),{status:s}), lauf=[];
+    const f=async(u,o={})=>{ const a=u.replace('https://api.github.com/repos/','').split('?')[0], m=o.method||'GET'; lauf.push(m+' '+a);
+      if(a.endsWith('/git/ref/heads/main')) return json({object:{sha:'b'}}); if(a.includes('/git/commits/')) return json({tree:{sha:'t'}});
+      if(a.endsWith('/git/trees')){ baum.push(...JSON.parse(o.body).tree); return json({sha:'n'}); } if(a.endsWith('/git/commits')) return json({sha:'c'}); if(a.endsWith('/git/refs/heads/main')) return json({});
+      if(a.endsWith('/contents/schule/schule.json')) return new Response(JSON.stringify({videos:inApp?[{source:{id}}]:[]}));
+      if(a.endsWith('/contents/liste.json')) return new Response(JSON.stringify([{id},{id:'andereseins'}]));
+      if(a.endsWith('/contents/'+id)) return mitEntwurf===null?json({},404):json(['brief.md','analyse.json',...(mitEntwurf?['video.json']:[])].map(n=>({path:id+'/'+n})));
+      throw new Error('Unerwartet: '+m+' '+a); };
+    const Wo=new Function('location','localStorage','sessionStorage','fetch',fs.readFileSync(path.join(wurzel,'kontrolle','werkstatt.js'),'utf8')+';return W')({hostname:'conradinjoos-lab.github.io',hash:'',pathname:'/'},{getItem:()=>'{"token":"t","ablauf":0}',setItem(){},removeItem(){}},{},f);
+    let fehler=''; try{ await Wo.loeschen(id); }catch(x){ fehler=x.message; } return {baum,fehler,lauf}; };
+  const ok=await online('leerleerlee',false,false); t.pruefe(!ok.fehler,'Online: '+ok.fehler); t.pruefe(ok.baum.filter(x=>x.sha===null).map(x=>x.path).join()==='leerleerlee/brief.md,leerleerlee/analyse.json','Ordner im Commit: '+JSON.stringify(ok.baum));
+  const zeile=ok.baum.find(x=>x.path==='liste.json'); t.pruefe(zeile&&JSON.parse(zeile.content).map(x=>x.id).join()==='andereseins','Zeile weg: '+JSON.stringify(zeile));
+  const nurZeile=await online('leerleerlee',null,false); t.pruefe(!nurZeile.fehler&&nurZeile.baum.length===1&&nurZeile.baum[0].path==='liste.json','Leerer Ordner: nur die Zeile: '+JSON.stringify(nurZeile.baum));
+  for(const [m,a,w] of [[true,false,'Entwurf'],[false,true,'App']]){ const x=await online('leerleerlee',m,a); t.pruefe(x.fehler==='Hat einen Entwurf'&&!x.baum.length&&!x.lauf.some(l=>l.startsWith('PATCH')),w+' bleibt: '+x.fehler); } };
+
+module.exports=[{name:'Kontrolle Sammlung',lauf:sammlung},{name:'Kontrolle Werke',lauf:werkeSeite},{name:'Kontrolle kurz',lauf:kurzBleibt},{name:'Kontrolle löschen',lauf:loeschen}];

@@ -26,13 +26,13 @@ const W=(()=>{
  async function datei(repo,pfad,art='text',ref='main'){
   const r=await gh(`/repos/${repo}/contents/${pfad}?ref=${ref}`,{headers:{Accept:'application/vnd.github.raw'},cache:art==='blob'?'default':'no-store'});
   if(r.status===404)return null;if(!r.ok)throw new Error('GitHub '+r.status+': '+pfad);return r[art]()}
- /* Ein Commit mit mehreren Dateien. dateien(basis) liefert {pfad:text oder {base64}} und wird bei einem Konflikt neu berechnet. */
+ /* Ein Commit mit mehreren Dateien. dateien(basis) liefert {pfad:text, {base64} oder null zum Löschen} und wird bei einem Konflikt neu berechnet. */
  async function commit(repo,dateien,nachricht){
   for(let v=0;v<4;v++){
    const basis=(await json(`/repos/${repo}/git/ref/heads/main`)).object.sha;
    const c=await json(`/repos/${repo}/git/commits/${basis}`);
    const f=await dateien(basis);
-   const eintrag=async([path,content])=>typeof content==='string'?{path,mode:'100644',type:'blob',content}   // Text direkt, Bilder ({base64}) als eigener Blob
+   const eintrag=async([path,content])=>content===null?{path,mode:'100644',type:'blob',sha:null}:typeof content==='string'?{path,mode:'100644',type:'blob',content}   // Text direkt, Bilder ({base64}) als eigener Blob
     :{path,mode:'100644',type:'blob',sha:(await json(`/repos/${repo}/git/blobs`,{method:'POST',body:JSON.stringify({content:content.base64,encoding:'base64'})})).sha};
    const baum=await json(`/repos/${repo}/git/trees`,{method:'POST',body:JSON.stringify({base_tree:c.tree.sha,tree:await Promise.all(Object.entries(f).map(eintrag))})});
    const neu=await json(`/repos/${repo}/git/commits`,{method:'POST',body:JSON.stringify({message:nachricht,tree:baum.sha,parents:[basis]})});
@@ -139,6 +139,17 @@ const W=(()=>{
    d.stand=new Date().toLocaleDateString('sv-SE');const i=d.videos.findIndex(x=>x.id===eintrag.id||(x.source||{}).id===id);
    if(i>=0)d.videos[i]=eintrag;else d.videos.push(eintrag);anzahl=d.videos.length;return {[SCHULE]:jsonText(d,alt)}},'Schule: «'+(e.title||id)+'» veröffentlicht');
   return {anzahl}}
+ /* Nur Videos ohne Entwurf: Was Schritte hat oder in der App steht, bleibt. Zurück geht es mit holen.py. */
+ function loeschen(id){
+  if(LOKAL)return lokalPost(id,'loeschen',{});
+  const p=kette.then(()=>commit(WERK,async basis=>{
+   const [ordner,schule]=await Promise.all([gh(`/repos/${WERK}/contents/${id}?ref=${basis}`),datei(APP,SCHULE)]);
+   if(!ordner.ok&&ordner.status!==404)throw new Error('GitHub '+ordner.status+': '+id);
+   const pfade=ordner.ok?(await ordner.json()).map(x=>x.path):[];
+   if(pfade.includes(id+'/video.json')||zuSchule(JSON.parse(schule).videos,id))throw new Error('Hat einen Entwurf');
+   const l=JSON.parse(await datei(WERK,'liste.json','text',basis)||'[]').filter(x=>x.id!==id);
+   return {...Object.fromEntries(pfade.map(x=>[x,null])),'liste.json':jsonText(l)}},'Kontrolle: '+id+' gelöscht'));
+  kette=p.catch(()=>{});return p}
 
  /* ---------- Hall of Fame (werke/ in der Werkstatt, siehe werkzeug/werke.py) ---------- */
  async function werke(){
@@ -203,7 +214,7 @@ const W=(()=>{
   datei:async p=>{if(!LOKAL)return datei(WERK,'material/'+mPfad(p),'blob');const r=await fetch('/m/'+mPfad(p));return r.ok?r.blob():null}};
  const APP_URL='https://conradinjoos-lab.github.io/schrittli/schule/';   // Links für die Schul-iPads: APP_URL+'#unterricht=…', '#klasse=…', '#sammlung=…'
 
- return {LOKAL,bereit,abmelden,liste,daten,bild,speichern,veroeffentlichen,jsonText,werke,werkBild,meldungen,erledigt,unterricht,feedback,sammlung,namen,wuensche,material,APP_URL,
+ return {LOKAL,bereit,abmelden,liste,daten,bild,speichern,veroeffentlichen,loeschen,jsonText,werke,werkBild,meldungen,erledigt,unterricht,feedback,sammlung,namen,wuensche,material,APP_URL,
   nachPub:LOKAL?'Noch committen und pushen.':'In etwa einer Minute in der Schul-App.',
   pause:LOKAL?1500:6000}  // Autospeichern: online seltener, jeder Stand ist ein Commit
 })();

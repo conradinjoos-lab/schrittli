@@ -581,6 +581,7 @@ body:has(.v3){background:#F5F6F8}
 .v3-fuss{text-align:center;margin-top:36px}
 .v3-werkzeuge{display:inline-flex;align-items:center;gap:8px;border:2px solid #1C4A63;background:#EAF3F8;color:#1C4A63;font-family:var(--display);font-weight:700;font-size:17px;border-radius:999px;padding:10px 20px;margin:0 8px 8px;box-shadow:2px 3px 0 var(--sh);cursor:pointer}
 .v3-link{border:0;background:none;color:#5B6672;font-weight:700;font-size:14px;text-decoration:underline;text-underline-offset:3px;padding:8px 12px;min-height:48px}
+.v3-admin{display:inline-block;line-height:32px;color:inherit}.v3-admin .ico{width:16px;height:16px;margin-right:5px;vertical-align:-3px}
 .v3-thema-titel h1{margin:0;font-weight:900;font-size:30px;line-height:1.1}
 .v3-kopf .v3-thema-titel{margin-left:4px}
 .v3-kopf:has(.v3-thema-titel) .v3-logo{display:none}
@@ -705,7 +706,7 @@ body:has(.kid.pl:not(.kino):not(.beamer)) .fm-knopf{display:none}
 .fm-arten input{width:20px;height:20px;accent-color:var(--lern)}.fm-text{font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;resize:vertical;width:100%;background:var(--surface2);color:var(--ink)}
 .fm-fehler{margin:0;color:#D64545;font-weight:600}.fm-ende{margin:0;padding:24px 0;text-align:center;font-size:30px;font-weight:800;color:#D64545}.fm-ende.gut{font-size:64px;line-height:1;color:#3BB273}.fm [data-act=senden]:disabled{opacity:.4;cursor:default}
 /* ---------- Unterricht: iPad ist mit einer Klasse verbunden ---------- */
-body.unterricht .v3-klassen,body.unterricht .v3-link[data-act=lehrer],body.unterricht .lehrer-zeile,body.unterricht .v3-kachel.werkzeug,body.unterricht .v3-werkzeuge[data-act=werkzeuge]{display:none!important}
+body.unterricht .v3-klassen,body.unterricht .v3-link[data-act=lehrer],body.unterricht .v3-admin,body.unterricht .lehrer-zeile,body.unterricht .v3-kachel.werkzeug,body.unterricht .v3-werkzeuge[data-act=werkzeuge]{display:none!important}
 body.u-ohne-galerie [data-act=gallery]{display:none!important}
 .u-liste{max-width:760px;margin:24px auto 0}
 .u-karte{display:flex;align-items:center;gap:22px;max-width:760px;margin:28px auto 0;background:#fff;border-radius:22px;padding:20px 24px;box-shadow:0 2px 10px rgba(28,36,48,.08)}
