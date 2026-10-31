@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="../planer.css">
 <style>
 :root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--warn:#B3412A;--knapp:#A86A00;--papier:#FFFFFF;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;--warn:#F08A6E;--knapp:#F2C14E;color-scheme:dark}}
@@ -15,18 +16,14 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
-h1{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0;font-size:28px}
 a{color:var(--acc)}
-.kopf{max-width:1200px;margin:0 auto;padding:20px 16px 8px}
-.kopf p{margin:2px 0 0;color:var(--muted)}
 main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,360px);gap:16px;align-items:start}
 .karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px}
-.seite-rechts{position:sticky;top:12px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.seite-rechts{position:sticky;top:calc(var(--kopf-h) + 12px);display:flex;flex-direction:column;gap:14px;min-width:0}
 .leiste{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .leiste .chips{gap:2px;padding:3px;border-radius:999px;background:var(--surface2);border:1px solid var(--line)}
 .chip{font:inherit;font-size:15px;padding:6px 14px;border-radius:999px;border:2px solid transparent;background:var(--surface2);color:var(--ink);cursor:pointer;min-height:44px}
-#papier .chip{border-color:var(--line)}
 .chip.ic{width:46px;height:44px;padding:0;display:inline-grid;place-items:center;background:transparent}
 .chip svg{width:26px;height:26px;display:block}
 .chip[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
@@ -77,15 +74,13 @@ svg .griff:hover circle+circle+circle{stroke-width:3.5}
 .wert.knapp b{color:var(--knapp)}.wert.knapp svg{stroke:var(--knapp)}
 .wert.warn b{color:var(--warn)}.wert.warn svg{stroke:var(--warn)}
 .warnz{color:var(--warn);font-weight:800;margin:10px 0 0}
-.druck-karte{display:flex;flex-direction:column;gap:10px}
-.drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
-.drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
-.blaetter{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-top:12px}
-.blaetter svg{display:block;width:100%;height:auto;background:var(--papier);border-radius:3px;box-shadow:0 1px 6px rgba(0,0,0,.15)}
 @media (max-width:860px){
-  main{grid-template-columns:minmax(0,1fr);gap:14px}
+  main{display:flex;flex-direction:column;align-items:stretch;gap:14px}
   .seite-rechts{position:static}
-  h1{font-size:24px}
+  /* Die Platte bleibt sichtbar, während Muster und Zahlen eingestellt werden: haftet an main, nicht an der Karte */
+  #k-platte{display:contents}
+  #pv-box{order:-1}
+  .leiste,.zahlen{margin:0}
 }
 @media (max-width:420px){
   main{padding:8px 12px 32px}
@@ -105,12 +100,15 @@ svg .griff:hover circle+circle+circle{stroke-width:3.5}
 <style id="seite"></style>
 </head>
 <body>
-<header class="kopf">
-  <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
+<header class="pk">
+  <a class="zur-app" href="../../" data-zur-app aria-label="Zurück zur App"><span>App</span></a>
   <h1>Bohrvorlage</h1>
-  <p><a href="../">←&nbsp;Vorlagen</a></p>
+  <a class="pk-vorlagen" href="../" aria-label="Vorlagen" title="Vorlagen"><span>Vorlagen</span></a>
+  <button class="pk-rueck" id="p-rueck" type="button" disabled aria-label="Rückgängig" title="Rückgängig"></button>
+  <button class="pk-druck" id="drucken" type="button" aria-label="Drucken, 100 %"><span>Drucken</span></button>
 </header>
 <script src="../zurueck.js"></script>
+<script src="../planer.js"></script>
 <main>
   <section class="karte" id="k-platte" aria-label="Platte">
     <div class="leiste">
@@ -133,8 +131,8 @@ svg .griff:hover circle+circle+circle{stroke-width:3.5}
       <div><label class="lbl" for="a">Abstand</label><div class="stepper" data-feld="a"><button type="button" data-minus aria-label="Abstand kleiner">−</button><input type="number" id="a" min="2" max="200" step="0.5" inputmode="decimal"><button type="button" data-plus aria-label="Abstand grösser">+</button><span>mm</span></div></div>
       <div><label class="lbl" for="r">Rand</label><div class="stepper" data-feld="r"><button type="button" data-minus aria-label="Rand kleiner">−</button><input type="number" id="r" min="0" max="200" step="0.5" inputmode="decimal"><button type="button" data-plus aria-label="Rand grösser">+</button><span>mm</span></div></div>
     </div>
-    <div class="flaeche" id="pv-box"><svg id="pv" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Platte"></svg></div>
-    <div class="blaetter" id="blaetter" aria-label="Blätter zum Drucken"></div>
+    <div class="flaeche pl-haft" id="pv-box"><svg id="pv" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Platte"></svg></div>
+    <div id="blaetter" aria-label="Blätter"></div>
   </section>
   <div class="seite-rechts">
     <section class="karte lupe-karte" aria-label="Lupe: Bohrer, Abstand und Rand ziehen">
@@ -142,10 +140,7 @@ svg .griff:hover circle+circle+circle{stroke-width:3.5}
       <div class="flaeche" id="lv-box"><svg id="lv" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lupe"></svg></div>
     </section>
     <section class="karte" aria-label="Ergebnis" aria-live="polite"><div class="werte" id="werte"></div><p class="warnz" id="warn" hidden></p></section>
-    <section class="karte druck-karte" aria-label="Drucken">
-      <div class="chips" id="papier" role="group" aria-label="Papier"><button type="button" class="chip" data-papier="a4" aria-pressed="true">A4</button><button type="button" class="chip" data-papier="a3" aria-pressed="false">A3</button></div>
-      <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
-    </section>
+    <section class="karte" aria-label="Papier"><div id="papier"></div></section>
   </div>
 </main>
 <div id="druck"></div>
@@ -157,8 +152,8 @@ svg .griff:hover circle+circle+circle{stroke-width:3.5}
 (function(){
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const KEY='schrittli.bohren.v1';
-const PAPIERE={a4:{name:'A4',w:210,h:297},a3:{name:'A3',w:297,h:420}};
+const SP=Planer.speicher('schrittli.bohren.v1');
+const PAPIERE=Planer.PAPIERE;
 const M=8;        // Druckrand des Blatts (mm)
 const FUSS=14;    // Platz für Kontrolllinie und Text unten
 const UEB=10;     // Überlappung beim Zusammenkleben
@@ -173,7 +168,7 @@ const S={b:50,h:30,d:5,a:10,r:10,muster:'raster',lage:'rand',papier:'a4',weg:[]}
 const GRENZEN={b:[1,120],h:[1,120],d:[0.5,30],a:[2,200],r:[0,200]};
 
 // ---------- Einstellungen laden ----------
-try{ const g=JSON.parse(localStorage.getItem(KEY)||'{}'); for(const k in S) if(g[k]!==undefined) S[k]=g[k]; }catch(e){}
+{ const g=SP.lies()||{}; for(const k in S) if(g[k]!==undefined) S[k]=g[k]; }
 try{ const u=new URL(location.href).searchParams;
   ['b','h','d','a','r'].forEach(k=>{ if(u.has(k)&&!isNaN(parseFloat(u.get(k)))) S[k]=parseFloat(u.get(k)); });
   if(['raster','versetzt','rahmen'].includes(u.get('muster'))) S.muster=u.get('muster');
@@ -186,7 +181,7 @@ if(!PAPIERE[S.papier]) S.papier='a4';
 if(!['raster','versetzt','rahmen'].includes(S.muster)) S.muster='raster';
 if(!['rand','mitte'].includes(S.lage)) S.lage='rand';
 S.weg=Array.isArray(S.weg)?S.weg.filter(x=>typeof x==='string').slice(-5000):[];
-function speichern(){ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){} }
+function speichern(){ SP.schreibe(S); }
 
 // ---------- Löcher berechnen ----------
 // Gibt die Lochmitten in Plattenkoordinaten (mm, Ursprung links oben) zurück, dazu Spalten und Reihen.
@@ -303,9 +298,15 @@ function weltTeile(L,sicht){
 let clipN=0;
 function fussText(L,T,i,j){
   const total=L.pts.length;
-  let t=`Bohrvorlage ${n(S.b)} × ${n(S.h)} cm · Bohrer ${n(S.d)} mm · Abstand ${n(S.a)} mm · Rand ${n(S.r)} mm · ${S.muster==='raster'&&!L.weg.length?`${L.nx} × ${L.ny} = `:''}${total} Löcher`;
-  if(T.nx*T.ny>1) t+=` · Blatt ${j*T.nx+i+1} von ${T.nx*T.ny} (Reihe ${j+1}, Spalte ${i+1})`;
+  let t=`${n(S.b)} × ${n(S.h)} cm · ⌀ ${n(S.d)} mm · Abstand ${n(S.a)} mm · Rand ${n(S.r)} mm · ${S.muster==='raster'&&!L.weg.length?`${L.nx} × ${L.ny} = `:''}${total} Löcher`;
+  if(T.nx*T.ny>1) t+=` · Blatt ${j*T.nx+i+1}/${T.nx*T.ny}`;
   return t;
+}
+// Kleiner Plan im Fuss: wo dieses Blatt beim Zusammenkleben liegt
+function blattPlan(T,i,j,x,y){
+  const g=Math.min(3,9/T.ny,22/T.nx); let s='';
+  for(let b=0;b<T.ny;b++) for(let a=0;a<T.nx;a++) s+=`<rect x="${mm(x+a*g)}" y="${mm(y+b*g)}" width="${mm(g-.3)}" height="${mm(g-.3)}" fill="${a===i&&b===j?'#17997A':'#fff'}" stroke="#17997A" stroke-width=".2"/>`;
+  return s;
 }
 function blatt(L,T,i,j){
   const k=++clipN;
@@ -327,17 +328,16 @@ function blatt(L,T,i,j){
   s+=`</g></g>`;
   if(mehr){
     const f='font-family="Nunito,Arial,sans-serif" font-size="3" fill="#666" paint-order="stroke" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"';
-    if(i<T.nx-1) s+=`<text ${f} transform="translate(${T.nw+M-UEB/2+1},${M+T.nh/2}) rotate(90)" text-anchor="middle">Klebestreifen – das nächste Blatt hier drauf</text>`;
-    if(j<T.ny-1) s+=`<text ${f} x="${M+T.nw/2}" y="${T.nh+M-UEB/2+1}" text-anchor="middle">Klebestreifen – das nächste Blatt hier drauf</text>`;
-    if(i>0) s+=`<line x1="${M+UEB}" y1="${M}" x2="${M+UEB}" y2="${M+T.nh}" stroke="#17997A" stroke-width="0.3" stroke-dasharray="2 1.5"/><text ${f} fill="#17997A" transform="translate(${M+UEB-1.2},${M+T.nh/2}) rotate(-90)" text-anchor="middle">✂ links abschneiden</text>`;
-    if(j>0) s+=`<line x1="${M}" y1="${M+UEB}" x2="${M+T.nw}" y2="${M+UEB}" stroke="#17997A" stroke-width="0.3" stroke-dasharray="2 1.5"/><text ${f} fill="#17997A" x="${M+T.nw/2}" y="${M+UEB-1.2}" text-anchor="middle">✂ oben abschneiden</text>`;
+    if(i<T.nx-1) s+=`<text ${f} transform="translate(${T.nw+M-UEB/2+1},${M+T.nh/2}) rotate(90)" text-anchor="middle">Kleben</text>`;
+    if(j<T.ny-1) s+=`<text ${f} x="${M+T.nw/2}" y="${T.nh+M-UEB/2+1}" text-anchor="middle">Kleben</text>`;
+    if(i>0) s+=`<line x1="${M+UEB}" y1="${M}" x2="${M+UEB}" y2="${M+T.nh}" stroke="#17997A" stroke-width="0.3" stroke-dasharray="2 1.5"/><text ${f} fill="#17997A" transform="translate(${M+UEB-1.2},${M+T.nh/2}) rotate(-90)" text-anchor="middle">✂</text>`;
+    if(j>0) s+=`<line x1="${M}" y1="${M+UEB}" x2="${M+T.nw}" y2="${M+UEB}" stroke="#17997A" stroke-width="0.3" stroke-dasharray="2 1.5"/><text ${f} fill="#17997A" x="${M+T.nw/2}" y="${M+UEB-1.2}" text-anchor="middle">✂</text>`;
   }
-  // Fuss: 5-cm-Kontrolllinie und Beschriftung
+  // Fuss: 5-cm-Kontrolllinie, Lage des Blatts und Zahlen
   const yf=T.Ph-M-5;
-  s+=`<path d="M${M},${yf-2}v4M${M},${yf}h50M${M+50},${yf-2}v4" fill="none" stroke="#000" stroke-width="0.35"/>`;
-  s+=`<text x="${M+25}" y="${yf-3}" text-anchor="middle" font-family="Nunito,Arial,sans-serif" font-size="2.8" fill="#000">5 cm – nachmessen!</text>`;
+  s+=Planer.kontrolle(M,yf,{farbe:'#000'});
+  if(mehr) s+=blattPlan(T,i,j,M+56,yf-5);
   s+=`<text x="${T.Pw-M}" y="${yf+1}" text-anchor="end" font-family="Nunito,Arial,sans-serif" font-size="3" fill="#000">${esc(fussText(L,T,i,j))}</text>`;
-  s+=`<text x="${T.Pw-M}" y="${yf+5}" text-anchor="end" font-family="Nunito,Arial,sans-serif" font-size="2.4" fill="#666">Schritt für Schritt · Bohrvorlage</text>`;
   return s+'</svg>';
 }
 
@@ -388,7 +388,7 @@ function geisterSvg(L,k,sicht){
 let PV=null, LV=null;          // zuletzt benutzte Ansicht {s,x,y,w,h}, s = Pixel pro mm
 function pvLayout(Z){
   const box=$('pv-box'), cw=Math.max(240,box.clientWidth), schmal=innerWidth<860;
-  const ch=Math.max(240,innerHeight*(schmal?.5:.68));
+  const ch=schmal?Math.max(190,innerHeight*.34):Math.max(240,innerHeight*.68);
   const ml=40,mt=42,mr=28,mb=28;
   const s=Math.min((cw-ml-mr)/Z.dw,(ch-mt-mb)/Z.dh);
   return {s,x:-ml/s,y:-mt/s,w:Z.dw+(ml+mr)/s,h:Z.dh+(mt+mb)/s};
@@ -424,6 +424,9 @@ function pvSvg(Z,V){
   if(W*V.s>80) s+=knopf('h',R+W/2,R+H,'hoch','Höhe ziehen',k);
   s+=knopf('bh',R+W,R+H,'diag','Grösse ziehen',k);
   s+=gewaehltSvg(L,k,null);
+  // Geänderte Kante leuchtet kurz
+  if(hebe==='b') s+=`<path class="pl-kante" style="stroke-width:${r3(4*k)}" d="M${R+W},${R}v${H}"/>`;
+  if(hebe==='h') s+=`<path class="pl-kante" style="stroke-width:${r3(4*k)}" d="M${R},${R+H}h${W}"/>`;
   return s;
 }
 
@@ -507,7 +510,7 @@ function werteZeigen(Z){
 }
 
 // ---------- Zeichnen ----------
-let Z=null, wahl=null, drag=null;
+let Z=null, wahl=null, drag=null, hebe=null;
 function zeichnen(voll=true){
   Z=rechnen();
   werteZeigen(Z);
@@ -523,12 +526,13 @@ function zeichnen(voll=true){
 }
 function drucksachen(Z){
   const {L,T,P}=Z, bl=T.nx*T.ny;
-  if(L.zuViele){ $('blaetter').innerHTML=''; $('druck').innerHTML=''; return; }
-  let seiten='';
-  for(let j=0;j<T.ny;j++) for(let i=0;i<T.nx;i++) seiten+=blatt(L,T,i,j);
-  $('druck').innerHTML=seiten;
-  $('blaetter').innerHTML=bl>1?seiten:'';
-  $('seite').textContent=`@page{size:${P.name} ${T.quer?'landscape':'portrait'};margin:0}#druck{--bw:${T.Pw}mm;--bh:${T.Ph}mm}`;
+  if(L.zuViele){ Planer.blaetter('#blaetter',[]); $('druck').innerHTML=''; kopf.zeige({papier:S.papier,quer:T.quer,blaetter:0}); return; }
+  const seiten=[];
+  for(let j=0;j<T.ny;j++) for(let i=0;i<T.nx;i++) seiten.push(blatt(L,T,i,j));
+  $('druck').innerHTML=seiten.join('');
+  Planer.blaetter('#blaetter',seiten,{spalten:T.nx});
+  Planer.seite({papier:S.papier,quer:T.quer});
+  kopf.zeige({papier:S.papier,quer:T.quer,blaetter:bl,nx:T.nx});
 }
 let geplant=false;
 function planen(){ if(geplant) return; geplant=true; requestAnimationFrame(()=>{ geplant=false; zeichnen(false); }); }
@@ -540,7 +544,7 @@ function treffer(x,y,k){
   for(const p of Z.L.alle){ const dx=p[0]-px,dy=p[1]-py,q=dx*dx+dy*dy; if(q<bd){ bd=q; best=p; } }
   if(!best) return null; const key=schl(best); return {key,geist:S.weg.includes(key)};
 }
-function lochWeg(){ if(!wahl) return; if(!S.weg.includes(wahl)) S.weg.push(wahl); wahl=null; speichern(); zeichnen(); }
+function lochWeg(){ if(!wahl) return; Planer.merke(); if(!S.weg.includes(wahl)) S.weg.push(wahl); wahl=null; speichern(); zeichnen(); }
 function runter(e){
   if(e.button&&e.button!==0) return;
   const svg=e.currentTarget, V=svg.id==='pv'?PV:LV, [x,y]=svgPunkt(svg,e), gr=e.target.closest('.griff');
@@ -561,6 +565,7 @@ function zieh(e){
     if(drag.art==='loch') drag.art='nichts';
     if(drag.art==='feld') drag.r0=S.r;   // «Mittig» bleibt: der Rand wird rundum grösser oder kleiner
     if(drag.art==='d') drag.dist0=Math.hypot(drag.x-drag.p0[0]-RAHMEN,drag.y-drag.p0[1]-RAHMEN);
+    if(drag.art!=='nichts') Planer.merke(drag.S0);
     wahl=null;
   }
   const S0=drag.S0;
@@ -580,7 +585,7 @@ function hoch(e){
   if(!drag||drag.svg!==e.currentTarget) return;
   const d=drag; drag=null;
   if(!d.bewegt){
-    if(d.hit){ if(d.hit.geist) S.weg=S.weg.filter(k=>k!==d.hit.key); else wahl=wahl===d.hit.key?null:d.hit.key; }
+    if(d.hit){ if(d.hit.geist){ Planer.merke(); S.weg=S.weg.filter(k=>k!==d.hit.key); } else wahl=wahl===d.hit.key?null:d.hit.key; }
     else if(d.art==='leer') wahl=null;
   }
   speichern(); felder(); zeichnen();
@@ -598,21 +603,22 @@ function felder(){
   ['b','h','d','a','r'].forEach(k=>{ $(k).value=S[k]; });
   document.querySelectorAll('#muster .chip').forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.muster===S.muster)));
   document.querySelectorAll('#lage .chip').forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.lage===S.lage)));
-  document.querySelectorAll('#papier .chip').forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.papier===S.papier)));
 }
+Planer.verlauf({hole:()=>S,setze(z){ Object.assign(S,z); wahl=null; felder(); speichern(); zeichnen(); }});
 document.querySelectorAll('.stepper').forEach(st=>{
   const k=st.dataset.feld, inp=st.querySelector('input'), [lo,hi]=GRENZEN[k], schritt=+st.dataset.schritt||1;
-  const setzen=v=>{ if(isNaN(v)) v=S[k]; S[k]=Math.min(hi,Math.max(lo,Math.round(v*100)/100)); inp.value=S[k]; speichern(); zeichnen(); };
+  const zeige=()=>{ hebe=k; zeichnen(); hebe=null; if(k==='d'||k==='a'||k==='r')Planer.leuchte('#lv-box'); };
+  const setzen=v=>{ if(isNaN(v)) v=S[k]; const neu=Math.min(hi,Math.max(lo,Math.round(v*100)/100)); if(neu!==S[k])Planer.merke(null,'feld-'+k); S[k]=neu; inp.value=S[k]; speichern(); zeige(); };
   st.querySelector('[data-minus]').addEventListener('click',()=>setzen(S[k]-schritt));
   st.querySelector('[data-plus]').addEventListener('click',()=>setzen(S[k]+schritt));
   inp.addEventListener('change',()=>setzen(parseFloat(String(inp.value).replace(',','.'))));
-  inp.addEventListener('input',()=>{ const v=parseFloat(String(inp.value).replace(',','.')); if(!isNaN(v)&&v>=lo&&v<=hi){ S[k]=v; speichern(); zeichnen(); } });
+  inp.addEventListener('input',()=>{ const v=parseFloat(String(inp.value).replace(',','.')); if(!isNaN(v)&&v>=lo&&v<=hi&&v!==S[k]){ Planer.merke(null,'feld-'+k); S[k]=v; speichern(); zeige(); } });
 });
-document.querySelectorAll('#muster .chip').forEach(c=>c.addEventListener('click',()=>{ S.muster=c.dataset.muster; felder(); speichern(); zeichnen(); }));
-document.querySelectorAll('#lage .chip').forEach(c=>c.addEventListener('click',()=>{ S.lage=c.dataset.lage; felder(); speichern(); zeichnen(); }));
-document.querySelectorAll('#papier .chip').forEach(c=>c.addEventListener('click',()=>{ S.papier=c.dataset.papier; felder(); speichern(); zeichnen(); }));
+document.querySelectorAll('#muster .chip').forEach(c=>c.addEventListener('click',()=>{ Planer.merke(); S.muster=c.dataset.muster; felder(); speichern(); zeichnen(); }));
+document.querySelectorAll('#lage .chip').forEach(c=>c.addEventListener('click',()=>{ Planer.merke(); S.lage=c.dataset.lage; felder(); speichern(); zeichnen(); }));
+const kopf=Planer.druckkopf('#papier',{papier:S.papier,wahl({papier}){ Planer.merke(); S.papier=papier; speichern(); zeichnen(); }});
 $('mehr').addEventListener('click',()=>{ const z=$('zahlen'), auf=z.hidden; z.hidden=!auf; $('mehr').setAttribute('aria-expanded',String(auf)); zeichnen(false); });
-$('zurueckholen').addEventListener('click',()=>{ S.weg=[]; wahl=null; speichern(); zeichnen(); });
+$('zurueckholen').addEventListener('click',()=>{ Planer.merke(); S.weg=[]; wahl=null; speichern(); zeichnen(); });
 $('drucken').addEventListener('click',()=>window.print());
 felder(); zeichnen();
 })();

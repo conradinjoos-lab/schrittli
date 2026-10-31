@@ -67,17 +67,18 @@ const rueck=async t=>{ const k=await t.kontext({breite:1180,hoehe:800,touch:fals
 const HANDLUNG=[
   ['falten/?f=wuerfel',p=>klick(p,'[data-pl-papier=a3]')],
   ['zaehlmuster/',p=>klick(p,'#modi .chip:not([aria-pressed=true])')],
-  ['armbaender/',p=>p.fill('#name','Lea')],
+  ['armbaender/',p=>klick(p,'main .chip:visible:not([aria-pressed=true])')],
   ['bohren/',p=>klick(p,'[data-pl-papier=a3]')],
   ['drucksachen/',p=>klick(p,'.tab:not([aria-selected=true]):not(.an)')],
   ['fachwoerter/',p=>klick(p,'#erkl')],
-  ['klasse/',p=>p.evaluate(()=>document.getElementById('auf-plus').click())],
+  ['klasse/',p=>klick(p,'.kasten'),p=>klick(p,'[data-tab=aufraeumen]')],
   ['maschenprobe/',p=>klick(p,'[data-technik]')],
   ['perlentier-bild/',p=>klick(p,'#beispiel')],
   ['einfrieren/',async p=>{ const gif=Buffer.from('R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==','base64'); await p.setInputFiles('input[type=file]',{name:'a.gif',mimeType:'image/gif',buffer:gif}); }],
 ];
-const stand=p=>p.evaluate(()=>[document.getElementById('seite')?.textContent||'',document.getElementById('druck')?.innerHTML||'',document.querySelector('main').innerText,[...document.querySelectorAll('main input:not([type=file])')].map(e=>e.type==='checkbox'?e.checked:e.value).join('|'),[...document.querySelectorAll('main img')].map(e=>e.hidden?'':e.getAttribute('src')).join('|')].join('\n§'));
-const seitenRueck=async t=>{ for(const [s,tue] of HANDLUNG){ const k=await t.kontext({breite:1180,hoehe:800,touch:false}), p=await k.seite('/vorlagen/'+s); await t.warte(300);
+const stand=p=>p.evaluate(()=>[document.getElementById('seite')?.textContent||'',(document.getElementById('druck')?.innerHTML||'').replace(/(id="|url\(#|href="#)([a-z-]*)\d+/gi,'$1$2'),document.querySelector('main').innerText,[...document.querySelectorAll('main input:not([type=file])')].map(e=>e.type==='checkbox'?e.checked:e.value).join('|'),[...document.querySelectorAll('main img')].map(e=>e.hidden?'':e.getAttribute('src')).join('|'),[...document.querySelectorAll('main [aria-pressed]')].filter(e=>e.checkVisibility()).map(e=>e.getAttribute('aria-pressed')).join('|')].join('\n§'));
+const seitenRueck=async t=>{ for(const [s,tue,zuerst] of HANDLUNG){ const k=await t.kontext({breite:1180,hoehe:800,touch:false}), p=await k.seite('/vorlagen/'+s); await t.warte(300);
+    if(zuerst){ await zuerst(p); await t.warte(200); }
     const vor=await stand(p); await tue(p); await t.warte(900); t.pruefe(await stand(p)!==vor,s+': Handlung ohne Wirkung'); t.pruefe(!await p.$eval('#p-rueck',e=>e.disabled),s+': Rückgängig bleibt grau');
     await klick(p,'#p-rueck'); await t.warte(400); t.pruefe(await stand(p)===vor,s+': nicht zurück'); t.pruefe(await p.$eval('#p-rueck',e=>e.disabled),s+': Stapel nicht leer');
     t.keineFehler(k); } };

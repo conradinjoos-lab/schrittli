@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="../planer.css">
 <style>
 :root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--papier:#FFFFFF;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;color-scheme:dark}}
@@ -15,14 +16,11 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
 h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
-h1{font-size:28px}
 h2{font-size:17px;margin-bottom:10px}
 a{color:var(--acc)}
-.kopf{max-width:1200px;margin:0 auto;padding:20px 16px 8px}
-.kopf p{margin:4px 0 0;color:var(--muted)}
 main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:20px;align-items:start}
 .seite-links{display:flex;flex-direction:column;gap:14px}
-.seite-rechts{position:sticky;top:12px}
+.seite-rechts{position:sticky;top:calc(var(--kopf-h) + 12px)}
 .karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
 .feld{margin-bottom:14px}.feld:last-child{margin-bottom:0}
 .lbl{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
@@ -38,17 +36,17 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px soli
 .eingabe,textarea{width:100%;font:inherit;font-size:16px;border:2px solid var(--line);border-radius:10px;background:var(--surface2);color:var(--ink);padding:8px 12px}
 textarea{min-height:120px;resize:vertical;line-height:1.5}
 .zwei{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
-.drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
-.hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
 [hidden]{display:none!important}
 .vorschau{display:flex;flex-direction:column;gap:10px;--s:.5}
 .blatt{width:calc(var(--bw)*var(--s));height:calc(var(--bh)*var(--s));overflow:hidden;border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.18);background:#fff}
 .blatt .seite{transform:scale(var(--s));transform-origin:0 0}
 @media (max-width:860px){
   main{display:flex;flex-direction:column;align-items:stretch}
-  .seite-rechts{position:static}
-  h1{font-size:24px}
+  /* Die Vorschau bleibt beim Einstellen sichtbar */
+  .seite-rechts{order:-1;position:sticky;top:var(--kopf-h);z-index:10;padding:8px;box-shadow:0 8px 16px rgba(0,0,0,.12)}
+  .seite-rechts h2{display:none}
+  .vorschau{flex-direction:row;align-items:flex-start;overflow-x:auto}
+  .blatt{flex:none}
   .zwei{grid-template-columns:1fr}
 }
 /* ---------- Druckseiten ---------- */
@@ -61,7 +59,6 @@ textarea{min-height:120px;resize:vertical;line-height:1.5}
 .pass .band{border-radius:4mm;background:#17997A;color:#fff;padding:3.5mm 5mm;display:flex;align-items:center;gap:3mm}
 .pass .band .em{font-size:9mm;line-height:1}
 .pass .band h3{margin:0;font:600 8.5mm/1 Fredoka,Nunito,sans-serif}
-.pass .band small{display:block;font-size:3mm;opacity:.9;margin-top:1mm}
 .pass .zeile{display:flex;gap:4mm;font-size:3.6mm}
 .pass .zeile span{flex:1;border-bottom:.4mm solid #1C2430;padding:1mm 0 .5mm;min-height:7.5mm;display:flex;align-items:flex-end;gap:2mm;white-space:nowrap;overflow:hidden}
 .pass .zeile span b{font:600 5mm Fredoka,Nunito,sans-serif;color:#17212F}
@@ -71,7 +68,6 @@ textarea{min-height:120px;resize:vertical;line-height:1.5}
 .pass .vf .em{font-size:6mm;line-height:1}
 .pass .vf .nm{font:600 3.3mm/1.1 Fredoka,Nunito,sans-serif;color:#1C2430}
 .pass .vf .kreis{width:12mm;height:12mm;border-radius:50%;border:.5mm dashed #8A96A8;display:flex;align-items:center;justify-content:center;font-size:2.2mm;color:#8A96A8;line-height:1.1;text-align:center;background:#fff}
-.pass .fuss{margin-top:auto;font-size:2.6mm;color:#8A96A8;text-align:center}
 .einfach .pass .felder{gap:3mm}
 .einfach .pass .vf .em{font-size:7.5mm}
 .einfach .pass .vf .nm{font-size:3.8mm;text-transform:uppercase;letter-spacing:.03em}
@@ -121,12 +117,15 @@ textarea{min-height:120px;resize:vertical;line-height:1.5}
 <style id="seite"></style>
 </head>
 <body>
-<header class="kopf">
-  <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
+<header class="pk">
+  <a class="zur-app" href="../../" data-zur-app aria-label="Zurück zur App"><span>App</span></a>
   <h1>Verfahrenspass &amp; Etiketten</h1>
-  <p>Ein Pass mit Stempelfeldern für jedes Kind, eine Klassenübersicht und Etiketten für fertige Werke. <a href="../">←&nbsp;Vorlagen-Generator</a></p>
+  <a class="pk-vorlagen" href="../" aria-label="Vorlagen" title="Vorlagen"><span>Vorlagen</span></a>
+  <button class="pk-rueck" id="p-rueck" type="button" disabled aria-label="Rückgängig" title="Rückgängig"></button>
+  <button class="pk-druck" id="drucken" type="button" aria-label="Drucken, 100 %"><span>Drucken</span></button>
 </header>
 <script src="../zurueck.js"></script>
+<script src="../planer.js"></script>
 <main>
   <div class="seite-links">
     <section class="karte">
@@ -134,9 +133,9 @@ textarea{min-height:120px;resize:vertical;line-height:1.5}
         <button type="button" class="tab" role="tab" id="tab-pass" aria-selected="true" aria-controls="pane-pass" data-tab="pass">Verfahrenspass</button>
         <button type="button" class="tab" role="tab" id="tab-etikett" aria-selected="false" aria-controls="pane-etikett" data-tab="etikett">Werk-Etiketten</button>
       </div>
-      <div class="feld"><label class="lbl" for="namen">Vornamen (ein Name pro Zeile)</label><textarea id="namen" placeholder="Lea&#10;Noah&#10;Mia&#10;…&#10;&#10;Leer lassen für Blanko zum Ausfüllen von Hand"></textarea></div>
+      <div class="feld"><label class="lbl" for="namen">Vornamen</label><textarea id="namen" placeholder="Lea&#10;Noah&#10;Mia"></textarea></div>
       <div class="feld zwei">
-        <div><label class="lbl" for="klasse">Klasse</label><input class="eingabe" id="klasse" placeholder="z. B. 3a"></div>
+        <div><label class="lbl" for="klasse">Klasse</label><input class="eingabe" id="klasse" placeholder="3a"></div>
         <div><label class="lbl" for="jahr">Schuljahr</label><input class="eingabe" id="jahr"></div>
       </div>
       <div id="pane-pass" role="tabpanel" aria-labelledby="tab-pass">
@@ -145,29 +144,21 @@ textarea{min-height:120px;resize:vertical;line-height:1.5}
           <button type="button" class="chip" data-passart="uebersicht" aria-pressed="false">Klassenübersicht</button></div></div>
         <div class="feld"><span class="lbl" id="l-stufe">Stufe</span><div class="chips" role="group" aria-labelledby="l-stufe" id="stufe">
           <button type="button" class="chip" data-stufe="0" aria-pressed="true">3.–6. Klasse</button>
-          <button type="button" class="chip" data-stufe="1" aria-pressed="false">1./2. Klasse (grössere Felder)</button></div></div>
-        <p class="hinweis">Jedes Kind bekommt einen Pass (A5) mit allen 16 Verfahren. Ist ein Werk fertig, kommt ein Stempel oder das Datum ins Feld. Die Klassenübersicht zeigt bis zu 24 Kinder auf einem Blatt A4, 38 auf A3.</p>
+          <button type="button" class="chip" data-stufe="1" aria-pressed="false">1./2. Klasse</button></div></div>
       </div>
       <div id="pane-etikett" role="tabpanel" aria-labelledby="tab-etikett" hidden>
         <div class="feld"><span class="lbl" id="l-verfahren">Verfahren</span><div class="chips" role="group" aria-labelledby="l-verfahren" id="verfahren"></div></div>
         <div class="feld zwei">
-          <div><label class="lbl" for="werk">Werk-Titel (optional)</label><input class="eingabe" id="werk" placeholder="z. B. Mein Nadelkissen"></div>
+          <div><label class="lbl" for="werk">Werk</label><input class="eingabe" id="werk" placeholder="Nadelkissen"></div>
           <div><label class="lbl" for="datum">Datum</label><input class="eingabe" id="datum" type="date"></div>
         </div>
         <div class="feld"><span class="lbl" id="l-groesse">Grösse</span><div class="chips" role="group" aria-labelledby="l-groesse" id="groesse">
           <button type="button" class="chip" data-groesse="klein" aria-pressed="true">klein</button>
           <button type="button" class="chip" data-groesse="mittel" aria-pressed="false">mittel</button>
           <button type="button" class="chip" data-groesse="gross" aria-pressed="false">gross</button></div></div>
-        <p class="hinweis" id="et-hinweis"></p>
       </div>
     </section>
-    <section class="karte">
-      <div class="feld"><span class="lbl" id="l-papier">Papier</span><div class="chips" role="group" aria-labelledby="l-papier" id="papier">
-        <button type="button" class="chip" data-papier="a4" aria-pressed="true">A4</button>
-        <button type="button" class="chip" data-papier="a3" aria-pressed="false">A3</button></div></div>
-      <p class="hinweis" id="info"></p>
-      <button type="button" class="drucken" id="drucken" style="margin-top:12px"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
-    </section>
+    <section class="karte" aria-label="Papier"><div id="papier"></div></section>
   </div>
   <section class="karte seite-rechts" aria-label="Vorschau"><h2>Vorschau</h2><div class="vorschau" id="vorschau"></div></section>
 </main>
@@ -209,10 +200,10 @@ function schnitt(felder,[sp,ze]){const pro=sp*ze;const f=felder.slice();while(f.
 function pass(name){
   const kl=$('klasse').value.trim(),jahr=$('jahr').value.trim()||schuljahr();
   return `<div class="pass">
-    <div class="band"><span class="em">🎫</span><div><h3>Mein Verfahrenspass</h3><small>Schritt für Schritt · Textiles und Technisches Gestalten</small></div></div>
+    <div class="band"><span class="em">🎫</span><div><h3>Mein Verfahrenspass</h3></div></div>
     <div class="zeile"><span><small>Name</small> <b>${esc(name)}</b></span><span style="flex:.5"><small>Klasse</small> <b>${esc(kl)}</b></span><span style="flex:.7"><small>Schuljahr</small> <b>${esc(jahr)}</b></span></div>
     <div class="felder">${VERFAHREN.map(v=>`<div class="vf" style="--c:${v.color};--c-hell:${hell(v.color)}"><span class="em">${v.emoji}</span><span class="nm">${esc(v.kurz)}</span><span class="kreis">Stempel<br>Datum</span></div>`).join('')}</div>
-    <div class="fuss">Für jedes fertige Werk gibt es einen Stempel oder das Datum. ✂ An den gestrichelten Linien schneiden.</div>
+
   </div>`;
 }
 function passSeiten(){
@@ -225,10 +216,10 @@ function uebersichtSeiten(){
   const proSeite=S.papier==='a3'?38:24;   // so viele Zeilen passen samt Legende aufs Blatt
   const liste=namen();const alle=liste.length?liste:Array(proSeite).fill('');
   return stueck(alle,proSeite).map((teil,i,arr)=>seite(`<div class="tabelle">
-    <h3>Klassenübersicht Verfahren${kl?' · '+esc(kl):''}</h3><p class="unter">Schuljahr ${esc(jahr)}${arr.length>1?` · Blatt ${i+1} von ${arr.length}`:''} · Schritt für Schritt</p>
+    <h3>Klassenübersicht Verfahren${kl?' · '+esc(kl):''}</h3><p class="unter">Schuljahr ${esc(jahr)}${arr.length>1?` · Blatt ${i+1} von ${arr.length}`:''}</p>
     <table><thead><tr><th class="name">Name</th>${VERFAHREN.map(v=>`<th class="vf"><div><span class="em">${v.emoji}</span>${esc(v.kurz)}</div></th>`).join('')}</tr></thead>
     <tbody>${teil.map(n=>`<tr><td class="name">${esc(n)}</td>${VERFAHREN.map(()=>'<td class="vf"><i></i></td>').join('')}</tr>`).join('')}</tbody></table>
-    <div class="legende"><span>○ offen · ✔ Werk fertig · Datum oder Kürzel eintragen</span><span>${VERFAHREN.length} Verfahren</span></div>
+    <div class="legende"><span>○ offen · ✔ fertig</span><span>${VERFAHREN.length} Verfahren</span></div>
   </div>`));
 }
 /* ---------- Werk-Etiketten ---------- */
@@ -256,20 +247,16 @@ function papierSetzen(){
   return w;
 }
 function massstab(){
-  const el=$('vorschau'),b=el.clientWidth;if(!b)return;
-  const p=PAPIERE[S.papier],w=ausrichtung()==='landscape'?p.h:p.w;
+  const el=$('vorschau');let b=el.clientWidth;if(!b)return;
+  const p=PAPIERE[S.papier],quer=ausrichtung()==='landscape',w=quer?p.h:p.w,h=quer?p.w:p.h;
+  if(innerWidth<=860)b=Math.min(b,innerHeight*.3*w/h);   // schmal: höchstens ein knappes Drittel der Höhe
   el.style.setProperty('--s',(b/(w*96/25.4)).toFixed(4));
 }
 function druck(){
   const seiten=S.tab==='etikett'?etikettSeiten():S.passart==='uebersicht'?uebersichtSeiten():passSeiten();
   $('druck').innerHTML=seiten.join('');
   $('vorschau').innerHTML=seiten.map(s=>`<div class="blatt">${s}</div>`).join('');
-  const n=seiten.length,k=namen().length,p=PAPIERE[S.papier].name;
-  let t;
-  if(S.tab==='etikett'){const r=ETIKETTEN[S.groesse][S.papier];t=`${k?k+' Etiketten':'Blanko-Etiketten'} auf ${n} ${n===1?'Blatt':'Blättern'} ${p} (${r[0]*r[1]} pro Blatt).`}
-  else if(S.passart==='uebersicht')t=`${k?k+' Kinder':'Leere Übersicht'} auf ${n} ${n===1?'Blatt':'Blättern'} ${p} quer.`;
-  else{const r=PASSRASTER[S.papier];t=`${k?k+' Pässe':'Blanko-Pässe'} auf ${n} ${n===1?'Blatt':'Blättern'} ${p} (${r[0]*r[1]} pro Blatt, je A5).`}
-  $('info').textContent=t;
+  kopf.zeige({papier:S.papier,quer:ausrichtung()==='landscape',blaetter:seiten.length});
   massstab();
 }
 function zeichnen(){
@@ -279,20 +266,22 @@ function zeichnen(){
   document.querySelectorAll('#stufe .chip').forEach(c=>c.setAttribute('aria-pressed',(c.dataset.stufe==='1')===S.einfach));
   document.querySelectorAll('#verfahren .chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.v===S.verfahren));
   document.querySelectorAll('#groesse .chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.groesse===S.groesse));
-  document.querySelectorAll('#papier .chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.papier===S.papier));
-  $('et-hinweis').textContent={klein:'Klein: passt auf kleine Werke wie Nadelkissen oder Armbänder.',mittel:'Mittel: für Taschen, Webstücke oder Holzarbeiten.',gross:'Gross: ein halbes Blatt, zum Beispiel für die Ausstellung.'}[S.groesse];
   papierSetzen();druck();
   const q=new URLSearchParams();
   if(S.tab!=='pass')q.set('tab',S.tab);if(S.passart!=='pass')q.set('blatt',S.passart);if(S.tab==='etikett'){q.set('verfahren',S.verfahren);if(S.groesse!=='klein')q.set('groesse',S.groesse)}
   if(S.papier!=='a4')q.set('papier',S.papier);if(S.klasse)q.set('klasse',S.klasse);
   try{history.replaceState(null,'',location.pathname+(String(q)?'?'+q:''))}catch(e){}
 }
+const FELDER=['namen','klasse','jahr','werk','datum'];
+let kopf=null;
 function bedienung(){
+  Planer.verlauf({hole:()=>({s:S,f:Object.fromEntries(FELDER.map(id=>[id,$(id).value]))}),setze(z){Object.assign(S,z.s);FELDER.forEach(id=>{$(id).value=z.f[id]});zeichnen()}});
+  kopf=Planer.druckkopf('#papier',{papier:S.papier,wahl({papier}){Planer.merke();S.papier=papier;zeichnen()}});
   $('verfahren').innerHTML=VERFAHREN.map(v=>`<button type="button" class="chip" data-v="${v.id}" aria-pressed="false" style="--punkt:${v.color}"><i></i>${esc(v.name)}</button>`).join('');
-  const chips=(id,key,fn)=>$(id).addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;fn(c.dataset[key]);zeichnen()});
-  chips('passart','passart',v=>S.passart=v);chips('stufe','stufe',v=>S.einfach=v==='1');chips('verfahren','v',v=>S.verfahren=v);chips('groesse','groesse',v=>S.groesse=v);chips('papier','papier',v=>S.papier=v);
-  document.querySelector('.tabs').addEventListener('click',e=>{const t=e.target.closest('.tab');if(!t)return;S.tab=t.dataset.tab;zeichnen()});
-  ['namen','klasse','jahr','werk','datum'].forEach(id=>$(id).addEventListener('input',druck));
+  const chips=(id,key,fn)=>$(id).addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;Planer.merke();fn(c.dataset[key]);zeichnen()});
+  chips('passart','passart',v=>S.passart=v);chips('stufe','stufe',v=>S.einfach=v==='1');chips('verfahren','v',v=>S.verfahren=v);chips('groesse','groesse',v=>S.groesse=v);
+  document.querySelector('.tabs').addEventListener('click',e=>{const t=e.target.closest('.tab');if(!t)return;Planer.merke();S.tab=t.dataset.tab;zeichnen()});
+  FELDER.forEach(id=>{$(id).addEventListener('beforeinput',()=>Planer.merke(null,'text-'+id));$(id).addEventListener('input',druck)});
   $('drucken').addEventListener('click',()=>window.print());
   if(window.ResizeObserver)new ResizeObserver(massstab).observe($('vorschau'));else addEventListener('resize',massstab);
 }

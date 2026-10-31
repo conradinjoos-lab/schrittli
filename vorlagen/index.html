@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="planer.css">
 <style>
 :root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--bad:#D64545;--papier:#FFFFFF;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;color-scheme:dark}}
@@ -16,10 +17,7 @@
 [hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
 h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
-h1{font-size:28px}
 h2{font-size:17px;margin-bottom:10px}
-.kopf{max-width:1200px;margin:0 auto;padding:20px 16px 8px}
-.kopf p{margin:4px 0 0;color:var(--muted)}
 main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:20px;align-items:start}
 .karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
 .suchkopf{display:flex;align-items:center;gap:12px;margin-bottom:10px}
@@ -55,7 +53,7 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .form:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 .seite-rechts{display:flex;flex-direction:column;gap:14px;align-self:stretch}
 /* Die Vorschau klebt oben, die Einstellungen laufen darunter durch: das Blatt bleibt beim Einstellen im Blick */
-.karte-vorschau{position:sticky;top:12px;z-index:3;box-shadow:0 -12px 0 6px var(--bg),0 8px 22px rgba(0,0,0,.14)}
+.karte-vorschau{position:sticky;top:calc(var(--kopf-h) + 12px);z-index:3;box-shadow:0 -12px 0 6px var(--bg),0 8px 22px rgba(0,0,0,.14)}
 .v-kopf{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:0 0 10px}
 .seg{display:inline-flex;border:2px solid var(--line);border-radius:12px;background:var(--surface2);padding:2px;gap:2px}
 .seg button{display:inline-flex;align-items:center;gap:5px;min-height:34px;min-width:38px;justify-content:center;padding:3px 10px;border:0;border-radius:9px;background:none;color:var(--muted);font:700 14px Nunito,sans-serif;cursor:pointer}
@@ -63,9 +61,6 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .seg button[aria-pressed="true"]{background:var(--surface);color:var(--acc);box-shadow:0 1px 3px rgba(0,0,0,.18)}
 .seg svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
 .v-rechts{margin-left:auto;display:flex;align-items:center;gap:6px}
-.rueck{width:42px;height:42px;display:grid;place-items:center;padding:0;border-radius:12px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer}
-.rueck:hover{border-color:var(--acc);color:var(--acc)}
-.rueck svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .feld{margin-bottom:14px}
 .feld>label,.feld>.lbl{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
 .masse{display:flex;align-items:center;gap:8px}
@@ -110,7 +105,6 @@ input[type=text],input[type=number]{font:inherit;font-size:20px;color:var(--ink)
 input[type=range]{width:100%;accent-color:var(--acc)}
 .drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
 .drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
-.hundert{font:800 12px Nunito,sans-serif;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.24)}
 .nm{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px}
 .nm small{font-size:12px;color:var(--muted)}
 .netz-masse{align-items:flex-start}
@@ -168,6 +162,7 @@ input[type=range]{width:100%;accent-color:var(--acc)}
 @media (max-width:480px){.liste{padding:8px}.liste li{gap:6px}.l-mal{display:none}.liste li input[type=number]{width:54px}}
 .info{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;font-size:14px;margin:10px 0 0}
 .info:empty{display:none}
+#gross-wahl{margin:0 0 10px}
 .pille{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;background:var(--surface2);border:1px solid var(--line);color:var(--ink)}
 .pille.warn{color:var(--bad);border-color:currentColor;background:transparent}
 button.pille{font:inherit;cursor:pointer;border-width:2px;border-color:var(--acc);color:var(--acc);background:var(--acc-soft)}
@@ -190,16 +185,15 @@ button.pille:hover{background:var(--acc);color:var(--acc-ink)}
 .mehr{flex-basis:100%;margin:0;font-size:15px;font-weight:800;color:var(--muted);text-align:center}
 /* Breiter Bildschirm: drei Spalten, das Blatt ganz rechts in voller Höhe */
 @media (min-width:1180px){
-  .kopf{max-width:1500px}
   main{max-width:1500px;grid-template-columns:minmax(0,1fr) 340px minmax(320px,410px)}
   .seite-rechts{display:contents}
   .karte-einst{grid-column:2;grid-row:1}
-  .karte-vorschau{grid-column:3;grid-row:1;align-self:start;max-height:calc(100vh - 24px);overflow-y:auto;box-shadow:none}
-  .vorschau{--hmax:calc(100vh - 110px)}
+  .karte-vorschau{grid-column:3;grid-row:1;align-self:start;max-height:calc(100vh - var(--kopf-h) - 24px);overflow-y:auto;box-shadow:none}
+  .vorschau{--hmax:calc(100vh - var(--kopf-h) - 110px)}
   .vorschau:has(svg+svg) svg{width:min(100%,calc(var(--hmax)*.7071))}
   .vorschau.quer:has(svg+svg) svg{width:min(100%,calc(var(--hmax)*1.4142))}
 }
-@media (max-width:860px){main{grid-template-columns:minmax(0,1fr)}h1{font-size:24px}.karte-vorschau{top:0;padding:10px 12px;border-radius:0 0 18px 18px}.v-kopf{margin-bottom:8px}.vorschau{--hmax:34vh}}
+@media (max-width:860px){main{grid-template-columns:minmax(0,1fr)}.karte-vorschau{top:var(--kopf-h);padding:10px 12px;border-radius:0 0 18px 18px}.v-kopf{margin-bottom:8px}.vorschau{--hmax:26vh}.info{margin-top:6px;font-size:13px}}
 @media (max-width:480px){.kats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.k-bilder{grid-template-columns:repeat(2,36px)}.k-bilder svg,.k-bilder img{width:36px;height:36px}.raster{grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px}.form{min-height:80px;font-size:12px}.form svg,.form img{width:40px;height:40px}}
 /* Abpausen am Bildschirm: immer hell, damit die Linie durchs Papier scheint */
 .pausen-auf{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:10px;min-height:48px}
@@ -237,31 +231,26 @@ button.pille:hover{background:var(--acc);color:var(--acc-ink)}
 <style id="seite"></style>
 </head>
 <body>
-<header class="kopf">
-  <a class="zur-app" href="../" data-zur-app>← Zurück zur App</a>
+<header class="pk">
+  <a class="zur-app" href="../" data-zur-app aria-label="Zurück zur App"><span>App</span></a>
   <h1>Vorlagen-Generator</h1>
+  <button class="pk-rueck" id="p-rueck" type="button" disabled aria-label="Rückgängig" title="Rückgängig"></button>
+  <button class="pk-druck" id="drucken" type="button" aria-label="Drucken, 100 %"><span>Drucken</span></button>
 </header>
 <main>
   <section class="karte" aria-label="Form wählen" id="formen"></section>
   <div class="seite-rechts">
     <section class="karte karte-vorschau" aria-label="Vorschau">
       <div class="v-kopf">
-        <div class="seg" id="papier" role="group" aria-label="Papier">
-          <button type="button" data-papier="a4" aria-pressed="true">A4</button>
-          <button type="button" data-papier="a3" aria-pressed="false">A3</button>
-        </div>
-        <div class="seg" id="lage" role="group" aria-label="Ausrichtung">
-          <button type="button" data-quer="0" aria-pressed="true" aria-label="Hochformat" title="Hochformat"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="3" width="11" height="18" rx="2"/></svg></button>
-          <button type="button" data-quer="1" aria-pressed="false" aria-label="Querformat" title="Querformat"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6.5" width="18" height="11" rx="2"/></svg></button>
-        </div>
+        <div id="papier"></div>
         <div class="v-rechts">
-          <button type="button" class="rueck" id="rueck" aria-label="Rückgängig" title="Rückgängig" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button>
           <div class="seg seg-modus" id="modus" role="group" aria-label="Anordnung">
             <button type="button" data-modus="auto" aria-pressed="true" title="Automatisch"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg><span>Auto</span></button>
             <button type="button" data-modus="frei" aria-pressed="false" title="Frei"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18M9 6l3-3 3 3M9 18l3 3 3-3M6 9l-3 3 3 3M18 9l3 3-3 3"/></svg><span>Frei</span></button>
           </div>
         </div>
       </div>
+      <div id="gross-wahl" hidden></div>
       <div class="vorschau" id="vorschau"></div>
       <div class="info" id="info" aria-live="polite"></div>
       <div class="werkzeug weg" id="werkzeug" role="toolbar" aria-label="Form">
@@ -335,7 +324,6 @@ button.pille:hover{background:var(--acc);color:var(--acc-ink)}
         <div class="l-kopf"><b id="l-titel"></b><button type="button" class="l-leeren" id="leeren">Leeren</button></div>
         <ul id="l-ul"></ul>
       </div>
-      <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span><small class="hundert">100 %</small></button>
       <button type="button" class="knopf pausen-auf" id="pausen-auf"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 8.5c-1.2-1.7-4-1.1-4 1 0 2 2.4 3.6 4 5 1.6-1.4 4-3 4-5 0-2.1-2.8-2.7-4-1z"/></svg><span>Abpausen</span></button>
     </section>
   </div>
@@ -360,6 +348,7 @@ button.pille:hover{background:var(--acc);color:var(--acc-ink)}
   </div>
 </div>
 <script src="zurueck.js"></script>
+<script src="planer.js"></script>
 <script src="formen.js"></script>
 <script src="figuren/index.js?v=2"></script>
 <script src="https://cdn.jsdelivr.net/npm/clipper-lib@6.4.2/clipper.js"></script>
@@ -367,20 +356,19 @@ button.pille:hover{background:var(--acc);color:var(--acc-ink)}
 (function(){
 'use strict';
 const $=id=>document.getElementById(id);
-// Papier: A4 oder A3, immer hochkant. BLATT und NUTZ (nutzbare Fläche) stellt papierSetzen() um.
+// Papier: A4 oder A3, hoch oder quer. BLATT und NUTZ (nutzbare Fläche) stellt papierSetzen() um.
 const PAPIERE={a4:{name:'A4',w:210,h:297},a3:{name:'A3',w:297,h:420}};
 const BLATT={name:'A4',w:210,h:297,rand:10,oben:24,unten:24,abstand:3};   // mm
 const NUTZ={x:BLATT.rand,y:BLATT.oben,w:BLATT.w-2*BLATT.rand,h:BLATT.h-BLATT.oben-BLATT.unten};
 const nutzFarb=ja=>{NUTZ.h=BLATT.h-BLATT.oben-BLATT.unten-(ja?7:0)};   // die Farbzeile «Farben zum Malen» braucht unten Platz
-function papierSetzen(id){
-  const p=PAPIERE[id]||PAPIERE.a4;
-  BLATT.name=p.name;BLATT.w=p.w;BLATT.h=p.h;NUTZ.w=p.w-2*BLATT.rand;NUTZ.h=p.h-BLATT.oben-BLATT.unten;
-  $('seite').textContent=`@page{size:${p.name} portrait;margin:0}`;
-  $('druck').style.setProperty('--bw',p.w+'mm');$('druck').style.setProperty('--bh',p.h+'mm');
+function papierSetzen(id,quer){
+  const p=Planer.seite({papier:id,quer}),w=quer?p.h:p.w,h=quer?p.w:p.h;
+  BLATT.name=p.name;BLATT.w=w;BLATT.h=h;NUTZ.w=w-2*BLATT.rand;NUTZ.h=h-BLATT.oben-BLATT.unten;
+  $('vorschau').classList.toggle('quer',!!quer);
 }
-// Passt ein Stück (Masse in mm) wenigstens auf A3? Für den Hinweis bei «zu gross».
+// Passt ein Stück (Masse in mm) wenigstens auf A3? Dann gibt es bei «zu gross» die direkte Wahl.
 const passtA3=st=>{const a=PAPIERE.a3,w=a.w-2*BLATT.rand,h=a.h-BLATT.oben-BLATT.unten;return (st.w<=w&&st.h<=h)||(st.h<=w&&st.w<=h)};
-const a3Tipp=()=>BLATT.name==='A4'?' Mit Papier A3 hat es Platz.':'';
+const grossWahl=(an,a3)=>Planer.zuGross('#gross-wahl',an?{wahl:a3&&BLATT.name==='A4'?['a3']:[],tue(){Planer.merke();S.papier='a3';papierSetzen('a3',S.quer);felder();zeichnen()}}:null);
 const CHIPS=[2,3,4,5,6,8,10,12,15];
 const PARAM={stern:{label:'Zacken',def:5},vieleck:{label:'Ecken',def:6}};
 const MAXSEITEN=30;
@@ -466,8 +454,9 @@ function paramForm(id,n){
 
 // Zustand: aus der Adresse, sonst vom letzten Mal
 // punkte: Einstichpunkte an, pabst: ihr Abstand in mm, strich: gestrichelte Nählinie zu den Punkten dazu zeigen, frei: Liste von Hand anordnen
-const S={id:'herz',b:5,h:5,papier:'a4',lock:true,n:1,linie:'schnitt',naht:5,zugabe:7,det:true,spiegel:false,param:5,farbig:true,punkte:false,pabst:5,strich:false,frei:false,netz:{b:8,t:5,h:4}};
-try{Object.assign(S,JSON.parse(localStorage.getItem('schrittli-vorlagen')||'{}'))}catch(e){}
+const S={id:'herz',b:5,h:5,papier:'a4',lock:true,n:1,linie:'schnitt',naht:5,zugabe:7,det:true,spiegel:false,param:5,farbig:true,punkte:false,pabst:5,strich:false,frei:false,netz:{b:8,t:5,h:4},quer:false};
+const spS=Planer.speicher('schrittli-vorlagen'),spL=Planer.speicher('schrittli-vorlagen-liste');
+{const alt=spS.lies();if(alt&&typeof alt==='object')Object.assign(S,alt)}
 const q=new URLSearchParams(location.search);
 if(q.has('form')&&byId[q.get('form')]){
   S.id=q.get('form');S.lock=!(q.has('b')&&q.has('h'));S.n=1;S.papier='a4';S.linie='schnitt';S.spiegel=false;S.punkte=false;S.strich=false;
@@ -496,13 +485,13 @@ S.netz=netzMasse(S.netz);
 if(NETZE[S.id]){const f=netzForm(S.id,S.netz);S.b=f.mm.w/10;S.h=f.mm.h/10;S.lock=true}   // Netz: die Grösse folgt aus den Massen
 if(q.has('papier'))S.papier=String(q.get('papier')).toLowerCase();
 if(!PAPIERE[S.papier])S.papier='a4';
-papierSetzen(S.papier);
+S.quer=q.has('quer')?q.get('quer')==='1':!q.has('form')&&!q.has('liste')&&!!S.quer;   // Links ohne quer=1 bleiben hochkant
+papierSetzen(S.papier,S.quer);
 
 // Liste «Aufs Blatt»: mehrere Formen zusammen. In der Adresse als liste=herz:5x5:3,stern:4x3.8:2:z6,fisch:6x3:4:n5:s
 // (Form:Breite×Höhe in cm:Anzahl, dann z=Zacken/Ecken, n=Nählinie mm, a=Nahtzugabe mm, s=gespiegelt,
 //  p=Einstichpunkte alle … mm auf der Nählinie, l=gestrichelte Nählinie zu den Punkten dazu, m=Breite×Tiefe×Höhe eines Netzes,
 //  f=x×y×Blatt in mm und d=um 90° gedreht: Lage beim freien Anordnen)
-const LKEY='schrittli-vorlagen-liste';
 const begrenzt=(v,a,b)=>Math.max(a,Math.min(b,v));
 const punkteAn=e=>e.linie!=='schnitt'&&!!e.punkte;
 function kodieren(e,ohneN){
@@ -537,7 +526,7 @@ function dekodieren(t){
 }
 let L=[];
 if(q.has('liste'))L=q.get('liste').split(',').map(dekodieren).filter(Boolean);
-else if(!location.search){try{L=(JSON.parse(localStorage.getItem(LKEY)||'[]')||[]).map(dekodieren).filter(Boolean)}catch(e){L=[]}}
+else if(!location.search){try{L=(spL.lies()||[]).map(dekodieren).filter(Boolean)}catch(e){L=[]}}
 
 const form=(e=S)=>PARAM[e.id]?paramForm(e.id,e.param):NETZE[e.id]?netzForm(e.id,e.netz||NETZE[e.id].def):byId[e.id];
 const titel=(e=S)=>{if(NETZE[e.id]){const n=e.netz||NETZE[e.id].def;return `${form(e).name.replace(' nach Mass','')} ${cm(n.b)} × ${cm(n.t)} × ${cm(n.h)} cm`}return form(e).name+(PARAM[e.id]?` (${e.param} ${PARAM[e.id].label})`:'')};
@@ -568,11 +557,11 @@ function auswahl(){
       +`<button type="button" class="kat" data-g="${g}"><span class="k-bilder">${bsp.map(bild).join('')}</span><b>${g}</b><span class="k-n">${fs.length} ${wort}</span></button>`;
   };
   const ersteWelt=(FIGUREN[0]||{}).gruppe;
-  $('formen').innerHTML='<div class="suchkopf"><h2>Form</h2><input type="search" id="suche" placeholder="Suchen, z.B. Herz" aria-label="Form suchen" autocomplete="off"></div>'
+  $('formen').innerHTML='<div class="suchkopf"><h2>Form</h2><input type="search" id="suche" placeholder="Suchen" aria-label="Form suchen" autocomplete="off"></div>'
     +'<div class="kats" id="kats">'+Object.entries(gruppen).map(kachel).join('')+'</div>'
     +'<button type="button" class="knopf zurueck" id="zurueck" hidden>← Alle Kategorien</button>'
     +Object.entries(gruppen).map(([g,fs])=>
-    `<div class="gruppe" data-g="${g}"><h3>${g}</h3>`+(g==='Buchstaben'?'<div class="wortfeld"><input type="text" id="wort" placeholder="Wort, z.B. LEA" aria-label="Wort aus Buchstaben" autocomplete="off" maxlength="30"><button type="button" class="knopf" id="wort-dazu">Wort aufs Blatt</button></div>':'')+`<div class="raster">`+fs.map(f=>
+    `<div class="gruppe" data-g="${g}"><h3>${g}</h3>`+(g==='Buchstaben'?'<div class="wortfeld"><input type="text" id="wort" placeholder="Wort" aria-label="Wort aus Buchstaben" autocomplete="off" maxlength="30"><button type="button" class="knopf" id="wort-dazu">Aufs Blatt</button></div>':'')+`<div class="raster">`+fs.map(f=>
       `<button type="button" class="form" data-id="${f.id}" data-such="${einfach(f.name+' '+f.id+' '+g)}" aria-pressed="false">${bild(f)}${f.name}</button>`
     ).join('')+'</div></div>').join('')+'<p class="hinweis" id="nichts" hidden>Nicht gefunden</p>'
     +'<details class="wunsch" id="wunsch"><summary>✨ Motiv wünschen</summary><form id="wunsch-form" autocomplete="off">'
@@ -617,12 +606,12 @@ function auswahl(){
     const k=e.target.closest('.form');if(!k||k.classList.contains('laedt'))return;
     k.classList.add('laedt');
     bereit([k.dataset.id]).then(()=>{
-      S.id=k.dataset.id;if(PARAM[S.id])S.param=PARAM[S.id].def;
+      Planer.merke();S.id=k.dataset.id;if(PARAM[S.id])S.param=PARAM[S.id].def;
       const f=form(),l=f.cm||Math.max(S.b,S.h);     // empfohlene Grösse der Form, sonst längste Seite bleibt
       S.lock=true;S.b=l*f.w/100;S.h=l*f.h/100;
       felder();zeichnen();
       if(matchMedia('(max-width:860px)').matches)document.querySelector('.seite-rechts').scrollIntoView({behavior:'smooth',block:'start'});
-    },()=>alert('Diese Figur konnte nicht geladen werden. Ist das Internet verbunden?')).finally(()=>k.classList.remove('laedt'));
+    },()=>alert('⚠ Offline')).finally(()=>k.classList.remove('laedt'));
   });
 }
 
@@ -736,11 +725,9 @@ const farbListe=f=>{const seen={};return (f.farben||[]).map(c=>{const n=farbName
 // Farbzeile fürs Blatt: Kästchen mit Namen, unten links über der 5-cm-Linie
 const farbZeile=liste=>{if(!liste.length)return '';let x=10,out='';
   for(const c of liste){out+=`<rect x="${x}" y="${BLATT.h-22.4}" width="3.4" height="3.4" rx=".6" fill="${c.f}" stroke="#5b6573" stroke-width=".2"/><text x="${(x+4.4).toFixed(1)}" y="${BLATT.h-19.5}">${c.text}</text>`;x+=4.4+breit(c.text,3)+3.5;if(x>BLATT.w-25)break}
-  return `<g font-size="3" fill="#5b6573"><text x="10" y="${BLATT.h-24.8}" font-weight="700">Farben zum Malen</text>${out}</g>`};
+  return `<g font-size="3" fill="#5b6573"><text x="10" y="${BLATT.h-24.8}" font-weight="700">Farben</text>${out}</g>`};
 const linieText=e=>(e.linie==='naht'?` · Nählinie ${e.naht} mm innen`:e.linie==='zugabe'?` · Nahtzugabe ${e.zugabe} mm`:'')+(punkteAn(e)?` · Einstichpunkte alle ${e.pabst} mm`:'');
-const fuss=()=>{const y=BLATT.h-12;return `<g stroke="#1c2430" stroke-width=".45"><line x1="10" y1="${y}" x2="60" y2="${y}"/><line x1="10" y1="${y-2}" x2="10" y2="${y+2}"/><line x1="60" y1="${y-2}" x2="60" y2="${y+2}"/></g>`+
-  `<text x="10" y="${y-3.5}" font-size="2.8" fill="#5b6573">Diese Linie muss 5 cm lang sein. Drucke in Originalgrösse (100 %)${BLATT.name==='A3'?' auf A3':''}.</text>`+
-  `<text x="${BLATT.w-10}" y="${y+1}" font-size="2.6" fill="#5b6573" text-anchor="end">Schritt für Schritt · eigene Vorlage, frei für den Unterricht</text></svg>`};
+const fuss=()=>Planer.kontrolle(10,BLATT.h-12,{farbe:'#1c2430'})+'</svg>';
 const setzen=(x,y,lay)=>`translate(${x.toFixed(2)} ${y.toFixed(2)})${lay.dreh?` rotate(90) translate(0 ${-lay.w})`:''}`;
 function blaetter(st,lay){
   const name=titel();
@@ -803,9 +790,7 @@ function poster(st){
       extra+
       titelSvg(name,leg.x-15)+
       subSvg(`${cm(S.b)} × ${cm(S.h)} cm${linieText(S)}${BLATT.name==='A3'?' · A3':''} · Poster aus ${r.n} Blättern · Blatt ${k} von ${r.n}: Reihe ${j+1}, Spalte ${i+1}`)+
-      leg.svg+karte+
-      `<text x="10" y="${BLATT.h-19.5}" font-size="3" fill="#5b6573">Zusammenkleben: Blätter mit gestrichelter Linie dort abschneiden, Passkreuze auf den Klebestreifen des Nachbarblatts legen, kleben.</text>`+
-      fuss());
+      leg.svg+karte+fuss());
   }
   return {svg:out,kx:r.kx,ky:r.ky,n:r.n};
 }
@@ -902,17 +887,18 @@ function zeichnenListe(){
   const passt=posten.filter(p=>p.lay.pro),stk=passt.reduce((a,p)=>a+p.e.n,0),z=seiten.length;
   let info=passt.length?`${stk} Stück · ${passt.length} ${passt.length===1?'Form':'Formen'} · ${z} ${z===1?'Blatt':'Blätter'}`:'';
   const zuGross=posten.filter(p=>!p.lay.pro);
-  if(zuGross.length)info+=(info?'<br>':'')+`<span class="warn">Zu gross für ein ${BLATT.name}-Blatt: ${zuGross.map(p=>titel(p.e)).join(', ')}. Höchstens ${cm(NUTZ.w/10)} × ${cm(NUTZ.h/10)} cm.${zuGross.every(p=>passtA3(p.st))?a3Tipp():''}</span>`;
-  if(z>MAXSEITEN)info+=`<br><span class="warn">Es werden nur ${MAXSEITEN} Blätter gedruckt.</span>`;
+  if(zuGross.length)info+=(info?'<br>':'')+`<span class="warn">${zuGross.map(p=>titel(p.e)).join(', ')} · max. ${cm(NUTZ.w/10)} × ${cm(NUTZ.h/10)} cm</span>`;
+  grossWahl(zuGross.length>0,zuGross.every(p=>passtA3(p.st)));
+  if(z>MAXSEITEN)info+=`<br><span class="warn">⚠ Max. ${MAXSEITEN} Blätter</span>`;
   const schmal=passt.filter(p=>p.st.eng<4).map(p=>titel(p.e)),zerf=passt.filter(p=>p.st.zerfaellt).map(p=>titel(p.e));
-  if(schmal.length)info+=`<br><span class="warn">Kaum zu schneiden, bitte grösser wählen: ${schmal.join(', ')}.</span>`;
-  if(zerf.length)info+=`<br><span class="warn">Nählinie zerfällt: ${zerf.join(', ')} – grösser wählen oder kleineren Abstand nehmen.</span>`;
+  if(schmal.length)info+=`<br><span class="warn">⚠ Zu schmal: ${schmal.join(', ')}</span>`;
+  if(zerf.length)info+=`<br><span class="warn">⚠ Naht: ${zerf.join(', ')}</span>`;
   const mehrteilig=passt.filter(p=>(form(p.e).teile||1)>1).map(p=>`${titel(p.e)} (${form(p.e).teile} Teile)`);
-  if(mehrteilig.length)info+=`<br>Getrennte Schnittteile: ${mehrteilig.join(', ')}.`;
-  $('vorschau').innerHTML=svg.slice(0,2).join('')+(svg.length>2?`<p class="mehr">… und ${svg.length-2} weitere Blätter</p>`:'');
+  if(mehrteilig.length)info+=`<br>✂ ${mehrteilig.join(', ')}`;
+  $('vorschau').innerHTML=svg.slice(0,2).join('')+(svg.length>2?`<p class="mehr">+${svg.length-2}</p>`:'');
   $('druck').innerHTML=svg.join('');
   $('info').innerHTML=info;$('drucken').disabled=!svg.length;
-  $('l-titel').textContent=`Auf dem Blatt: ${stk} Stück`;
+  $('l-titel').textContent=`${stk} Stück`;
 }
 
 // Frei anordnen: jedes Stück liegt dort, wo es hingeschoben wurde (x, y in mm auf dem Blatt, blatt = Nummer ab 0)
@@ -946,68 +932,72 @@ function zeichnenFrei(){
   const nBl=Math.min(MAXSEITEN,da.length||1),seiten=Array.from({length:nBl},()=>({teile:[],breite:NUTZ.w}));
   L.forEach((e,i)=>{e.blatt=Math.min(e.blatt,nBl-1);seiten[e.blatt].teile.push({i,x:e.x,y:e.y})});
   const svg=blaetterListe(posten,seiten,true),druck=blaetterListe(posten,seiten);
-  let info=`${L.length} Stück · ${nBl} ${nBl===1?'Blatt':'Blätter'} · frei angeordnet`;
+  let info=`${L.length} Stück · ${nBl} ${nBl===1?'Blatt':'Blätter'}`;
   const namen=ps=>[...new Set(ps.map(p=>titel(p.e)))].join(', ');
   const zuGross=posten.filter(p=>p.lay.w>NUTZ.w+.01||p.lay.h>NUTZ.h+.01);
-  if(zuGross.length)info+=`<br><span class="warn">Zu gross für ein ${BLATT.name}-Blatt: ${namen(zuGross)}. Höchstens ${cm(NUTZ.w/10)} × ${cm(NUTZ.h/10)} cm.${zuGross.every(p=>passtA3(p.st))?a3Tipp():''}</span>`;
+  if(zuGross.length)info+=`<br><span class="warn">${namen(zuGross)} · max. ${cm(NUTZ.w/10)} × ${cm(NUTZ.h/10)} cm</span>`;
+  grossWahl(zuGross.length>0,zuGross.every(p=>passtA3(p.st)));
   const kk=posten.map((p,i)=>({i,x:p.e.x,y:p.e.y,w:p.lay.w,h:p.lay.h,blatt:p.e.blatt})),ueber=new Set();
   kk.forEach((a,i)=>kk.slice(i+1).forEach(b=>{if(a.blatt===b.blatt&&ueberlappt(a,b)){ueber.add(a.i);ueber.add(b.i)}}));
-  if(ueber.size)info+=`<br>Überlappen sich: ${namen([...ueber].map(i=>posten[i]))} – beim Aneinandersetzen gewollt, sonst verschieben.`;
+  if(ueber.size)info+=`<br>⚠ Überlappt: ${namen([...ueber].map(i=>posten[i]))}`;
   const schmal=posten.filter(p=>p.st.eng<4),zerf=posten.filter(p=>p.st.zerfaellt);
-  if(schmal.length)info+=`<br><span class="warn">Kaum zu schneiden, bitte grösser wählen: ${namen(schmal)}.</span>`;
-  if(zerf.length)info+=`<br><span class="warn">Nählinie zerfällt: ${namen(zerf)} – grösser wählen oder kleineren Abstand nehmen.</span>`;
+  if(schmal.length)info+=`<br><span class="warn">⚠ Zu schmal: ${namen(schmal)}</span>`;
+  if(zerf.length)info+=`<br><span class="warn">⚠ Naht: ${namen(zerf)}</span>`;
   $('vorschau').innerHTML=svg.join('');
+  [...ueber,...zuGross.map(p=>posten.indexOf(p))].forEach(i=>{const g=$('vorschau').querySelector(`.frei[data-i="${i}"]`);if(g)g.classList.add('ueber')});
   $('druck').innerHTML=druck.join('');
   $('info').innerHTML=info;$('drucken').disabled=false;
-  $('l-titel').textContent=`Auf dem Blatt: ${L.length} Stück`;
+  $('l-titel').textContent=`${L.length} Stück`;
 }
 
 function zeichnen(){
   document.querySelectorAll('.form').forEach(k=>k.setAttribute('aria-pressed',k.dataset.id===S.id));
   $('vorschau').classList.toggle('freimodus',!!(S.frei&&L.length));
-  if(L.length){zeichnenListe();speichern();return}
+  if(L.length){zeichnenListe();kopf.zeige({papier:S.papier,quer:!!S.quer,blaetter:$('druck').children.length,nx:0});speichern();return}
   const f=form();nutzFarb(farbListe(f).length);
   const st=stueck(),lay=anordnen(st);
   let info,ok=lay.pro>0;
   const po=ok?null:poster(st);
   if(po){
     ok=true;
-    info=`Poster: ${po.n} Blätter (${po.kx} × ${po.ky}) mit ${cm(UEB/10)} cm Überlappung zum Zusammenkleben`+(S.n>1?' · nur 1 Stück':'')+(passtA3(st)?a3Tipp():'')+
-      (S.linie==='zugabe'?`<br>Zum Schneiden: ${cm(st.w/10)} × ${cm(st.h/10)} cm`:'')+
-      `<br>Schneiden: <span title="Schwierigkeit ${f.schwer} von 3">${'✂'.repeat(f.schwer)}</span>`;
-    $('vorschau').innerHTML=po.svg.slice(0,2).join('')+(po.svg.length>2?`<p class="mehr">… und ${po.svg.length-2} weitere Blätter</p>`:'');
+    info=`Poster ${po.kx} × ${po.ky} · ${po.n} Blätter`+(S.n>1?' · 1 Stück':'')+
+      (S.linie==='zugabe'?`<br>✂ ${cm(st.w/10)} × ${cm(st.h/10)} cm`:'')+
+      `<br><span title="Schwierigkeit ${f.schwer} von 3">${'✂'.repeat(f.schwer)}</span>`;
+    $('vorschau').innerHTML=po.svg.slice(0,2).join('')+(po.svg.length>2?`<p class="mehr">+${po.svg.length-2}</p>`:'');
     $('druck').innerHTML=po.svg.join('');
   }else if(!ok){
-    info=`<span class="warn">Zu gross für ein ${BLATT.name}-Blatt, auch als Poster (höchstens ${MAXSEITEN} Blätter).${passtA3(st)?a3Tipp():''}</span>`;
+    info=`<span class="warn">Poster max. ${MAXSEITEN} Blätter</span>`;
     $('vorschau').innerHTML='';$('druck').innerHTML='';
   }else{
     const seiten=Math.ceil(S.n/lay.pro),svg=blaetter(st,lay);
     info=`${S.n} Stück · ${lay.pro} pro Blatt · ${seiten} ${seiten===1?'Blatt':'Blätter'}`+
-      (seiten>MAXSEITEN?`<br><span class="warn">Es werden nur ${MAXSEITEN} Blätter gedruckt.</span>`:'')+
-      (S.linie==='zugabe'?`<br>Zum Schneiden: ${cm(st.w/10)} × ${cm(st.h/10)} cm`:'')+
-      (st.punkte.length?`<br>Einstichpunkte: ${st.punkte.length} pro Stück`+(st.pabst?`, Abstand ${st.pabst[1]-st.pabst[0]<.05?cm(st.pabst[0]):cm(st.pabst[0])+'–'+cm(st.pabst[1])} mm`:''):'')+
-      `<br>Schneiden: <span title="Schwierigkeit ${f.schwer} von 3">${'✂'.repeat(f.schwer)}</span>`+(NETZE[S.id]?'':` · empfohlen ab ${cm(Math.max(2,Math.ceil(80/f.eng)/2))} cm`)+
-      (f.d.length>(f.teile||1)?'<br>Innenliegende Aussparungen zuerst ausschneiden: einstechen, dann von innen rundum.':'')+
-      ((f.teile||1)>1?`<br>Dieses Motiv besteht aus ${f.teile} getrennten Schnittteilen.`:'')+
-      (st.eng<4?`<br><span class="warn">Schmalste Stelle nur ${cm(st.eng)} mm – kaum zu schneiden. Bitte grösser wählen.</span>`:'')+
-      (st.zerfaellt?'<br><span class="warn">Die Nählinie zerfällt oder reicht nicht in die schmalen Stellen – Form grösser wählen oder kleineren Abstand nehmen.</span>':'');
-    $('vorschau').innerHTML=svg.slice(0,2).join('')+(svg.length>2?`<p class="mehr">… und ${svg.length-2} weitere Blätter</p>`:'');
+      (seiten>MAXSEITEN?`<br><span class="warn">⚠ Max. ${MAXSEITEN} Blätter</span>`:'')+
+      (S.linie==='zugabe'?`<br>✂ ${cm(st.w/10)} × ${cm(st.h/10)} cm`:'')+
+      (st.punkte.length?`<br>• ${st.punkte.length}`+(st.pabst?` · ${st.pabst[1]-st.pabst[0]<.05?cm(st.pabst[0]):cm(st.pabst[0])+'–'+cm(st.pabst[1])} mm`:''):'')+
+      `<br><span title="Schwierigkeit ${f.schwer} von 3">${'✂'.repeat(f.schwer)}</span>`+(NETZE[S.id]?'':` · ab ${cm(Math.max(2,Math.ceil(80/f.eng)/2))} cm`)+
+      (f.d.length>(f.teile||1)?'<br>✂ Innen zuerst':'')+
+      ((f.teile||1)>1?`<br>✂ ${f.teile} Teile`:'')+
+      (st.eng<4?`<br><span class="warn">⚠ Schmal: ${cm(st.eng)} mm</span>`:'')+
+      (st.zerfaellt?'<br><span class="warn">⚠ Naht</span>':'');
+    $('vorschau').innerHTML=svg.slice(0,2).join('')+(svg.length>2?`<p class="mehr">+${svg.length-2}</p>`:'');
     $('druck').innerHTML=svg.join('');
   }
-  if(!CLIP)info+='<br><span class="warn">Die Rechenbibliothek konnte nicht geladen werden (kein Internet?): nur Schnittlinie, keine Schachteln nach Mass.</span>';
+  grossWahl(!lay.pro&&(!po||passtA3(st)),passtA3(st));
+  if(!CLIP)info+='<br><span class="warn">⚠ Offline</span>';
   $('info').innerHTML=info;$('drucken').disabled=!ok;
+  kopf.zeige({papier:S.papier,quer:!!S.quer,blaetter:$('druck').children.length,nx:po?po.kx:0});
   speichern();
 }
 
 function speichern(){
-  try{localStorage.setItem('schrittli-vorlagen',JSON.stringify(S))}catch(e){}
+  spS.schreibe(S);
   const p=new URLSearchParams({form:S.id,b:+S.b.toFixed(2),h:+S.h.toFixed(2)});
-  if(S.papier!=='a4')p.set('papier',S.papier);if(S.n>1)p.set('n',S.n);if(PARAM[S.id])p.set('z',S.param);if(NETZE[S.id])p.set('m',[S.netz.b,S.netz.t,S.netz.h].join('x'));if(S.linie!=='schnitt')p.set('linie',S.linie);
+  if(S.papier!=='a4')p.set('papier',S.papier);if(S.quer)p.set('quer','1');if(S.n>1)p.set('n',S.n);if(PARAM[S.id])p.set('z',S.param);if(NETZE[S.id])p.set('m',[S.netz.b,S.netz.t,S.netz.h].join('x'));if(S.linie!=='schnitt')p.set('linie',S.linie);
   if(S.linie==='naht')p.set('naht',S.naht);else if(S.linie==='zugabe')p.set('zugabe',S.zugabe);
   if(punkteAn(S)){p.set('punkte',S.pabst);if(S.strich)p.set('strich','1')}
   if(S.frei&&L.length)p.set('frei','1');
   const liste=L.map(e=>kodieren(e));
-  try{localStorage.setItem(LKEY,JSON.stringify(liste))}catch(e){}
+  spL.schreibe(liste);
   try{history.replaceState(null,'','?'+p+(liste.length?'&liste='+liste.join(','):''))}catch(e){}
 }
 
@@ -1020,8 +1010,8 @@ function listeZeigen(neu){
     let mitte,unten='',klein=masstext(e);
     if(S.frei){   // jedes Stück einzeln: Kopie, Drehen, eigene Grösse, Blatt
       klein=klein.replace(/^[^(]*/,'');
-      mitte=`<button type="button" class="l-knopf l-kopie" data-i="${i}" aria-label="${name} daneben kopieren" title="Kopie gleich daneben setzen">⧉</button>`+
-        `<button type="button" class="l-knopf l-dreh" data-i="${i}" aria-pressed="${!!e.dreh}" aria-label="${name} um 90° drehen" title="Um 90° drehen">↻</button>`;
+      mitte=`<button type="button" class="l-knopf l-kopie" data-i="${i}" aria-label="${name} daneben kopieren" title="Kopieren">⧉</button>`+
+        `<button type="button" class="l-knopf l-dreh" data-i="${i}" aria-pressed="${!!e.dreh}" aria-label="${name} um 90° drehen" title="Drehen">↻</button>`;
       const blaetter=Array.from({length:Math.min(MAXSEITEN,nBl+1)},(_,k)=>`<option value="${k}"${k===(e.blatt||0)?' selected':''}>${k<nBl?'Blatt '+(k+1):'neues Blatt'}</option>`).join('');
       unten=`<span class="l-mass">`+(NETZE[e.id]?`<span>${masstext(e)}</span>`:`<input type="text" inputmode="decimal" value="${cm(e.b)}" data-i="${i}" data-k="b" aria-label="Breite ${name} in cm"><span aria-hidden="true">×</span><input type="text" inputmode="decimal" value="${cm(e.h)}" data-i="${i}" data-k="h" aria-label="Höhe ${name} in cm"><span>cm</span>`)+
         `<select data-i="${i}" data-k="blatt" aria-label="Blatt für ${name}">${blaetter}</select></span>`;
@@ -1032,7 +1022,7 @@ function listeZeigen(neu){
   }).join('');
 }
 $('dazu').addEventListener('click',()=>{
-  const e={id:S.id,b:+S.b.toFixed(2),h:+S.h.toFixed(2),n:S.n,linie:S.linie,naht:S.naht,zugabe:S.zugabe,spiegel:S.spiegel,param:S.param,punkte:punkteAn(S),pabst:S.pabst,strich:S.strich,netz:NETZE[S.id]?Object.assign({},S.netz):undefined};
+  Planer.merke();const e={id:S.id,b:+S.b.toFixed(2),h:+S.h.toFixed(2),n:S.n,linie:S.linie,naht:S.naht,zugabe:S.zugabe,spiegel:S.spiegel,param:S.param,punkte:punkteAn(S),pabst:S.pabst,strich:S.strich,netz:NETZE[S.id]?Object.assign({},S.netz):undefined};
   let i;
   if(S.frei){const k=Math.min(S.n,50);e.n=1;for(let j=0;j<k;j++){const c=j?Object.assign({},e,{netz:e.netz&&Object.assign({},e.netz)}):e;freiPlatz(c,-1,L.length-1);L.push(c)}i=L.length-1}   // frei: jedes Stück einzeln, gleich neben das letzte
   else{const k=kodieren(e,true);i=L.findIndex(x=>kodieren(x,true)===k);   // gleiche Form und Grösse: nur Anzahl erhöhen
@@ -1041,17 +1031,17 @@ $('dazu').addEventListener('click',()=>{
 });
 $('l-ul').addEventListener('input',ev=>{
   const t=ev.target;if(!t.matches('input[data-i]'))return;
-  const e=L[+t.dataset.i],v=zahl(t.value,0),k=t.dataset.k;if(!e||!v)return;
+  const e=L[+t.dataset.i],v=zahl(t.value,0),k=t.dataset.k;if(!e||!v)return;Planer.merke(null,'liste');
   if(k==='b'||k==='h'){e[k]=Math.min(v,100);zeichnen();return}
   e.n=begrenzt(Math.round(v),1,500);zeichnen();
 });
 $('l-ul').addEventListener('change',ev=>{
   const t=ev.target,e=L[+t.dataset.i];if(!e||!t.dataset.i)return;
-  if(t.matches('select[data-k=blatt]')){e.blatt=begrenzt(Math.round(+t.value)||0,0,MAXSEITEN-1);zeichnen();listeZeigen();return}
+  if(t.matches('select[data-k=blatt]')){Planer.merke();e.blatt=begrenzt(Math.round(+t.value)||0,0,MAXSEITEN-1);zeichnen();listeZeigen();return}
   if(t.matches('input'))t.value=t.dataset.k==='b'||t.dataset.k==='h'?cm(e[t.dataset.k]):e.n;
 });
 $('l-ul').addEventListener('click',ev=>{
-  const b=ev.target.closest('button[data-i]');if(!b)return;const i=+b.dataset.i,e=L[i];if(!e)return;
+  const b=ev.target.closest('button[data-i]');if(!b)return;const i=+b.dataset.i,e=L[i];if(!e)return;Planer.merke();
   if(b.classList.contains('l-kopie')){   // Kopie gleich rechts daneben
     const k=Object.assign({},e,{n:1,netz:e.netz&&Object.assign({},e.netz)});delete k.x;delete k.y;
     freiPlatz(k,-1,i);L.splice(i+1,0,k);zeichnen();listeZeigen(i+1);return;
@@ -1060,14 +1050,14 @@ $('l-ul').addEventListener('click',ev=>{
   L.splice(i,1);zeichnen();listeZeigen();
   const rest=$('l-ul').querySelectorAll('.l-weg');(rest[Math.min(i,rest.length-1)]||$('dazu')).focus();
 });
-$('leeren').addEventListener('click',()=>{L=[];listeZeigen();zeichnen();$('dazu').focus()});
+$('leeren').addEventListener('click',()=>{Planer.merke();L=[];listeZeigen();zeichnen();$('dazu').focus()});
 // Wort aus Buchstaben: jedes Zeichen kommt als eigene Form aufs Blatt, alle gleich hoch (so hoch wie der gewählte Buchstabe, sonst 8 cm)
 function wortDazu(){
   const feld=$('wort');if(!feld)return;
   const text=feld.value.toUpperCase().replace(/Ä/g,'A').replace(/Ö/g,'O').replace(/Ü/g,'U').replace(/ß/g,'SS');
   const ids=[...text].map(c=>/[A-Z]/.test(c)?'buchstabe-'+c.toLowerCase():/[0-9]/.test(c)?'zahl-'+c:null).filter(id=>id&&byId[id]);
   if(!ids.length){feld.focus();return}
-  const hoch=(byId[S.id]||{}).gruppe==='Buchstaben'?S.h:8;let i=-1;
+  Planer.merke();const hoch=(byId[S.id]||{}).gruppe==='Buchstaben'?S.h:8;let i=-1;
   ids.forEach(id=>{const f=byId[id];
     const e={id,b:+(hoch*f.w/f.h).toFixed(2),h:+hoch.toFixed(2),n:1,linie:S.linie,naht:S.naht,zugabe:S.zugabe,spiegel:S.spiegel,param:S.param,punkte:false,pabst:S.pabst,strich:S.strich};
     if(S.frei){freiPlatz(e,-1,i);L.push(e);i=L.length-1;return}   // frei: Buchstaben der Reihe nach nebeneinander
@@ -1080,8 +1070,7 @@ $('formen').addEventListener('keydown',ev=>{if(ev.target.id==='wort'&&ev.key==='
 
 // Anordnung umschalten: automatisch packen oder von Hand
 function modusZeigen(){
-  document.querySelectorAll('#modus .chip').forEach(k=>k.setAttribute('aria-pressed',(k.dataset.modus==='frei')===!!S.frei));
-  $('l-hinweis').textContent=S.frei?'In der Vorschau die Formen mit Finger oder Maus verschieben, auch auf ein anderes Blatt. An der Ecke unten rechts ziehen: strecken. ⧉ setzt eine Kopie gleich daneben, ↻ dreht um 90°.':'Vorschau und Druck zeigen alle Formen der Liste. Nächste Form wählen, einstellen, «+ Aufs Blatt».';
+  document.querySelectorAll('#modus button').forEach(k=>k.setAttribute('aria-pressed',(k.dataset.modus==='frei')===!!S.frei));
 }
 function freiStarten(){   // Startlage aus der automatischen Packung, jedes Stück einzeln
   const {posten,seiten}=layoutAuto(),neu=[];
@@ -1098,8 +1087,8 @@ function autoStarten(){   // gleiche Formen wieder zusammenzählen
   L=neu;
 }
 $('modus').addEventListener('click',ev=>{
-  const c=ev.target.closest('.chip');if(!c)return;const frei=c.dataset.modus==='frei';if(frei===!!S.frei)return;
-  if(frei)freiStarten();else autoStarten();
+  const c=ev.target.closest('button');if(!c)return;const frei=c.dataset.modus==='frei';if(frei===!!S.frei)return;
+  Planer.merke();if(frei)freiStarten();else autoStarten();
   S.frei=frei;modusZeigen();zeichnen();listeZeigen();
 });
 // Verschieben und Strecken in der Vorschau (Maus, Finger oder Stift)
@@ -1120,7 +1109,7 @@ $('vorschau').addEventListener('pointermove',ev=>{
   const unter=document.elementFromPoint(ev.clientX,ev.clientY),ziel=unter&&unter.closest('#vorschau svg[data-blatt]');
   const svg=ziel||$('vorschau').querySelector(`svg[data-blatt="${e.blatt||0}"]`);if(!svg)return;
   const p=mmPunkt(svg,ev),dx=p.x-zug.px,dy=p.y-zug.py;
-  if(!zug.bewegt&&Math.hypot(dx,dy)<.5)return;zug.bewegt=true;
+  if(!zug.bewegt&&Math.hypot(dx,dy)<.5)return;if(!zug.bewegt)Planer.merke();zug.bewegt=true;
   if(zug.griff){   // strecken: Breite und Höhe folgen dem Zeiger, bei gedrehten Stücken vertauscht
     const d=!!e.dreh;e.b=+begrenzt(zug.b0+(d?dy:dx)/10,1,100).toFixed(2);e.h=+begrenzt(zug.h0+(d?dx:dy)/10,1,100).toFixed(2);
     zugNeu();return;
@@ -1140,9 +1129,8 @@ function felder(){
   const f=form();
   $('b').value=cm(S.b);$('h').value=cm(S.h);
   $('schloss').setAttribute('aria-pressed',S.lock);$('schloss').innerHTML=S.lock?SCHLOSS_ZU:SCHLOSS_AUF;
-  $('schloss').title=S.lock?'Seitenverhältnis behalten (klicken zum Strecken)':'Form wird gestreckt (klicken zum Behalten)';
+  $('schloss').title=S.lock?'Seitenverhältnis':'Strecken';
   const l=Math.max(S.b,S.h);
-  document.querySelectorAll('#papier .chip').forEach(k=>k.setAttribute('aria-pressed',k.dataset.papier===S.papier));
   $('chips').innerHTML=(S.papier==='a3'?CHIPS.concat([20,25,30,40,60]):CHIPS.concat([20,30,40])).map(c=>`<button type="button" class="chip" data-cm="${c}" aria-pressed="${S.lock&&Math.abs(l-c)<.01}">${c} cm</button>`).join('');
   $('gross').max=S.papier==='a3'?60:40;$('gross').value=Math.round(l*2)/2;
   $('feld-param').hidden=!PARAM[S.id];
@@ -1152,19 +1140,18 @@ function felder(){
   $('n').value=S.n;$('naht').value=S.naht;$('zugabe').value=S.zugabe;
   document.querySelectorAll('[name=linie]').forEach(r=>r.checked=r.value===S.linie);
   $('mm-naht').hidden=S.linie!=='naht';$('mm-zugabe').hidden=S.linie!=='zugabe';
-  const pk=punkteAn(S);$('punkte').checked=pk;$('mm-punkte').hidden=$('p-ort').hidden=$('feld-strich').hidden=!pk;
+  const pk=punkteAn(S);$('punkte').checked=pk;$('mm-punkte').hidden=$('feld-strich').hidden=!pk;
   $('pabst').value=S.pabst;$('lbl-pabst').textContent=`alle ${S.pabst} mm`;$('strich').checked=S.strich;
-  felderPunkte();
   $('feld-farbig').hidden=!(f.farben&&f.farben.length);$('farbig').checked=S.farbig;
   const fl=farbListe(f);$('farben').hidden=!fl.length;
-  $('farben').innerHTML=fl.length?`<b>Farben zum Malen:</b>`+fl.map(c=>`<span><i style="background:${c.f}"></i>${c.text}</span>`).join(''):'';
+  $('farben').innerHTML=fl.length?fl.map(c=>`<span><i style="background:${c.f}"></i>${c.text}</span>`).join(''):'';
   $('feld-det').hidden=!f.det.length||(f.farben&&f.farben.length&&S.farbig);$('det').checked=S.det;$('spiegel').checked=S.spiegel;
 }
 function mass(welche){
   const f=form(),v=zahl($(welche).value,null);if(!v||NETZE[S.id])return;
-  S[welche]=Math.min(v,100);
+  Planer.merke(null,'mass');S[welche]=Math.min(v,100);
   if(S.lock){if(welche==='b')S.h=S.b*f.h/f.w;else S.b=S.h*f.w/f.h}
-  zeichnen();
+  zeichnen();Planer.leuchte('#vorschau');
 }
 ['b','h'].forEach(k=>{
   $(k).addEventListener('input',()=>mass(k));
@@ -1172,65 +1159,65 @@ function mass(welche){
   $(k).addEventListener('focus',e=>e.target.select());
 });
 $('schloss').addEventListener('click',()=>{
-  S.lock=!S.lock;
+  Planer.merke();S.lock=!S.lock;
   if(S.lock){const f=form();S.h=S.b*f.h/f.w}
   felder();zeichnen();
 });
-$('papier').addEventListener('click',e=>{
-  const c=e.target.closest('.chip');if(!c||c.dataset.papier===S.papier)return;
-  S.papier=c.dataset.papier;papierSetzen(S.papier);felder();zeichnen();
-});
+const kopf=Planer.druckkopf('#papier',{lage:true,papier:S.papier,quer:!!S.quer,wahl(w){
+  if(w.papier===S.papier&&w.quer===!!S.quer)return;
+  Planer.merke();S.papier=w.papier;S.quer=w.quer;papierSetzen(S.papier,S.quer);felder();zeichnen();Planer.leuchte('#vorschau');
+}});
 $('gross').addEventListener('input',()=>{
-  const l=+$('gross').value,k=l/Math.max(S.b,S.h);if(!k||NETZE[S.id])return;
+  const l=+$('gross').value,k=l/Math.max(S.b,S.h);if(!k||NETZE[S.id])return;Planer.merke(null,'gross');
   S.b*=k;S.h*=k;$('b').value=cm(S.b);$('h').value=cm(S.h);
   document.querySelectorAll('#chips .chip').forEach(c=>c.setAttribute('aria-pressed',S.lock&&Math.abs(l-c.dataset.cm)<.01));
   zeichnen();
 });
 $('chips').addEventListener('click',e=>{
   const c=e.target.closest('.chip');if(!c)return;
-  const f=form(),l=+c.dataset.cm;S.lock=true;
+  Planer.merke();const f=form(),l=+c.dataset.cm;S.lock=true;
   if(f.w>=f.h){S.b=l;S.h=l*f.h/f.w}else{S.h=l;S.b=l*f.w/f.h}
   felder();zeichnen();
 });
 ['nb','nt','nh'].forEach(k=>{
   $(k).addEventListener('input',()=>{
-    const v=zahl($(k).value,null);if(!v||!NETZE[S.id])return;
+    const v=zahl($(k).value,null);if(!v||!NETZE[S.id])return;Planer.merke(null,'netz');
     S.netz=netzMasse(Object.assign({},S.netz,{[k.slice(1)]:v}));
     const f=form();S.b=f.mm.w/10;S.h=f.mm.h/10;S.lock=true;
-    $('b').value=cm(S.b);$('h').value=cm(S.h);zeichnen();
+    $('b').value=cm(S.b);$('h').value=cm(S.h);zeichnen();Planer.leuchte('#vorschau');
   });
   $(k).addEventListener('change',felder);
   $(k).addEventListener('focus',e=>e.target.select());
 });
 $('param').addEventListener('input',()=>{
-  S.param=+$('param').value;const f=form();
+  Planer.merke(null,'param');S.param=+$('param').value;const f=form();
   if(S.lock)S.h=S.b*f.h/f.w;
   felder();zeichnen();
 });
-$('n').addEventListener('input',()=>{S.n=Math.max(1,Math.min(500,Math.round(zahl($('n').value,S.n))));zeichnen()});
+$('n').addEventListener('input',()=>{Planer.merke(null,'n');S.n=Math.max(1,Math.min(500,Math.round(zahl($('n').value,S.n))));zeichnen();Planer.leuchte('#vorschau')});
 $('n').addEventListener('change',felder);
 $('fuellen').addEventListener('click',()=>{
   const lay=anordnen(stueck());if(!lay.pro)return;
-  S.n=Math.max(1,Math.ceil(S.n/lay.pro))*lay.pro;felder();zeichnen();
+  Planer.merke();S.n=Math.max(1,Math.ceil(S.n/lay.pro))*lay.pro;felder();zeichnen();
 });
-document.querySelectorAll('[name=linie]').forEach(r=>r.addEventListener('change',()=>{S.linie=r.value;felder();zeichnen()}));
-if(!CLIP){document.querySelectorAll('[name=linie]').forEach(r=>{if(r.value!=='schnitt'){r.disabled=true;r.closest('label').title='Dafür braucht die Seite Internet'}});$('punkte').disabled=true}
+document.querySelectorAll('[name=linie]').forEach(r=>r.addEventListener('change',()=>{Planer.merke();S.linie=r.value;felder();zeichnen()}));
+if(!CLIP){document.querySelectorAll('[name=linie]').forEach(r=>{if(r.value!=='schnitt'){r.disabled=true;r.closest('label').title='Offline'}});$('punkte').disabled=true}
 ['naht','zugabe'].forEach(k=>{
-  $(k).addEventListener('input',()=>{S[k]=Math.max(1,Math.min(20,Math.round(zahl($(k).value,S[k]))));felderPunkte();zeichnen()});
+  $(k).addEventListener('input',()=>{Planer.merke(null,k);S[k]=Math.max(1,Math.min(20,Math.round(zahl($(k).value,S[k]))));zeichnen()});
   $(k).addEventListener('change',felder);
 });
-const felderPunkte=()=>{if(punkteAn(S))$('p-ort').textContent=S.linie==='zugabe'?`Auf der Nählinie (Umriss der Form), ${S.zugabe} mm innerhalb der Schnittlinie.`:`Auf der Nählinie, ${S.naht} mm vom Rand.`};
 $('punkte').addEventListener('change',()=>{
-  S.punkte=$('punkte').checked;
+  Planer.merke();S.punkte=$('punkte').checked;
   if(S.punkte&&S.linie==='schnitt')S.linie='naht';   // Punkte liegen auf der Nählinie: die braucht es dazu
   felder();zeichnen();
 });
-$('pabst').addEventListener('input',()=>{S.pabst=Math.max(2,Math.min(20,Math.round(+$('pabst').value||5)));$('lbl-pabst').textContent=`alle ${S.pabst} mm`;zeichnen()});
-$('strich').addEventListener('change',()=>{S.strich=$('strich').checked;zeichnen()});
-$('det').addEventListener('change',()=>{S.det=$('det').checked;zeichnen()});
-$('farbig').addEventListener('change',()=>{S.farbig=$('farbig').checked;felder();zeichnen()});
-$('spiegel').addEventListener('change',()=>{S.spiegel=$('spiegel').checked;zeichnen()});
+$('pabst').addEventListener('input',()=>{Planer.merke(null,'pabst');S.pabst=Math.max(2,Math.min(20,Math.round(+$('pabst').value||5)));$('lbl-pabst').textContent=`alle ${S.pabst} mm`;zeichnen()});
+$('strich').addEventListener('change',()=>{Planer.merke();S.strich=$('strich').checked;zeichnen()});
+$('det').addEventListener('change',()=>{Planer.merke();S.det=$('det').checked;zeichnen()});
+$('farbig').addEventListener('change',()=>{Planer.merke();S.farbig=$('farbig').checked;felder();zeichnen()});
+$('spiegel').addEventListener('change',()=>{Planer.merke();S.spiegel=$('spiegel').checked;zeichnen()});
 $('drucken').addEventListener('click',()=>window.print());
+Planer.verlauf({hole:()=>({s:S,l:L}),setze(z){Object.assign(S,z.s);L=z.l;papierSetzen(S.papier,S.quer);felder();modusZeigen();zeichnen();listeZeigen()}});
 
 // Abpausen: Form in echter Grösse auf dem Bildschirm. Wie viele Bildschirmpunkte ein cm sind, weiss der Browser nicht –
 // darum einmal pro Gerät mit einer Karte (85,6 × 54 mm) eichen. Die Helligkeit kann eine Webseite nicht stellen: nur Hinweis.
@@ -1250,7 +1237,7 @@ function pausenZeichnen(){
   const w=dreh?st.h:st.w,h=dreh?st.w:st.h,ok=w<=fw&&h<=fh;
   $('p-titel').textContent=`${form().name} · ${cm(S.b)} × ${cm(S.h)} cm`;
   $('p-sperren').disabled=!ok;
-  if(!ok){$('p-flaeche').innerHTML=`<p class="warn">Zu gross für diesen Bildschirm. Höchstens etwa ${cm(Math.max(fw,fh)/10)} × ${cm(Math.min(fw,fh)/10)} cm – bitte kleiner wählen oder drucken.</p>`;return}
+  if(!ok){$('p-flaeche').innerHTML=`<p class="warn">⚠ Zu gross · max. ${cm(Math.max(fw,fh)/10)} × ${cm(Math.min(fw,fh)/10)} cm</p>`;return}
   const d=.8;   // Strichdicke in mm
   $('p-flaeche').innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" width="${(w+2*d)*px}" height="${(h+2*d)*px}" viewBox="${-d} ${-d} ${w+2*d} ${h+2*d}" role="img" aria-label="${form().name} in echter Grösse"><g${dreh?` transform="rotate(90) translate(0 ${-st.h})"`:''}>`+
     farbSvg(st,.3)+(st.det.length?`<path d="${st.det.map(l=>pfad(l,0)).join('')}" fill="none" stroke="#8a8178" stroke-width=".5" stroke-linecap="round"/>`:'')+

@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="../planer.css">
 <style>
 :root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--warn:#B3412A;--papier:#FFFFFF;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;--warn:#F08A6E;color-scheme:dark}}
@@ -15,13 +16,10 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
-h1{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0;font-size:28px}
 a{color:var(--acc)}
-.kopf{max-width:1200px;margin:0 auto;padding:20px 16px 8px}
-.kopf p{margin:2px 0 0;color:var(--muted)}
 main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,360px);gap:16px;align-items:start}
 .karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px}
-.seite-rechts{position:sticky;top:12px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.seite-rechts{position:sticky;top:calc(var(--kopf-h) + 12px);display:flex;flex-direction:column;gap:14px;min-width:0}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font:inherit;font-size:15px;padding:6px 14px;border-radius:999px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer;min-height:44px;min-width:52px}
 .chip[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
@@ -59,22 +57,22 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 .wert svg{width:28px;height:28px;flex:none;fill:none;stroke:var(--acc);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .wert b{font:600 21px/1.15 Fredoka,Nunito,sans-serif;display:block;white-space:nowrap}
 .wert small{display:block;color:var(--muted);font-size:13px;line-height:1.2}
-.warnz{color:var(--warn);font-weight:800;margin:0}
 .druck-karte{display:flex;flex-direction:column;gap:10px}
-.drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
-.drucken:disabled{opacity:.45;cursor:default}
-.drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
-.blaetter{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
-.blaetter svg{display:block;width:100%;height:auto;background:var(--papier);border-radius:3px;box-shadow:0 1px 6px rgba(0,0,0,.15)}
 @media (max-width:860px){
   main{grid-template-columns:minmax(0,1fr);gap:14px}
-  .seite-rechts{position:static}
-  h1{font-size:24px}
+  /* Schmal: 3D und Netz haften unter dem Kopf, darunter laufen Modelle und Einstellungen durch */
+  .k-modell,.seite-rechts{display:contents}
+  .schau{order:-1;position:sticky;top:var(--kopf-h);z-index:10;margin:-8px -16px 0;padding:8px 16px;background:var(--bg);box-shadow:0 6px 10px -6px rgba(0,0,0,.25)}
+  #cv3,.netz{height:170px}
+  #cv3{aspect-ratio:auto}
+  .netz{padding:6px}
+  #netz{height:100%;max-height:none}
+  .modelle{margin:0;padding:10px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
 }
-@media (max-width:600px){ .schau{grid-template-columns:minmax(0,1fr)} }
 @media (max-width:420px){
   main{padding:8px 12px 32px}
   .karte{padding:10px}
+  .schau{margin:-8px -12px 0;padding:8px 12px}
   .modelle{grid-template-columns:repeat(auto-fill,minmax(74px,1fr))}
 }
 #druck{display:none}
@@ -90,14 +88,17 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 <style id="seite"></style>
 </head>
 <body>
-<header class="kopf">
-  <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
+<header class="pk">
+  <a class="zur-app" href="../../" data-zur-app aria-label="Zurück zur App"><span>App</span></a>
   <h1>Falt-Generator</h1>
-  <p><a href="../">←&nbsp;Vorlagen</a></p>
+  <a class="pk-vorlagen" href="../" aria-label="Vorlagen" title="Vorlagen"><span>Vorlagen</span></a>
+  <button class="pk-rueck" id="p-rueck" type="button" disabled aria-label="Rückgängig" title="Rückgängig"></button>
+  <button class="pk-druck" id="drucken" type="button" aria-label="Drucken, 100 %"><span>Drucken</span></button>
 </header>
 <script src="../zurueck.js"></script>
+<script src="../planer.js"></script>
 <main>
-  <section class="karte" aria-label="Modell">
+  <section class="karte k-modell" aria-label="Modell">
     <div class="modelle" id="modelle" role="group" aria-label="Modell"></div>
     <div class="schau">
       <canvas id="cv3" role="img" aria-label="3D"></canvas>
@@ -117,10 +118,9 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
     </section>
     <section class="karte druck-karte" aria-label="Drucken">
       <div class="werte" id="werte" aria-live="polite"></div>
-      <p class="warnz" id="warn" hidden></p>
-      <div class="chips" id="papier" role="group" aria-label="Papier"><button type="button" class="chip" data-papier="a4" aria-pressed="true">A4</button><button type="button" class="chip" data-papier="a3" aria-pressed="false">A3</button></div>
-      <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
-      <div class="blaetter" id="blaetter" aria-label="Blätter"></div>
+      <div id="warn" hidden></div>
+      <div id="papier"></div>
+      <div id="blaetter" aria-label="Blätter"></div>
     </section>
   </div>
 </main>
@@ -136,7 +136,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const KEY='schrittli.falten.v1';
-const PAPIERE={a4:{name:'A4',w:210,h:297},a3:{name:'A3',w:297,h:420}};
+const PAPIERE=Planer.PAPIERE, SP=Planer.speicher(KEY);
 const M=8, FUSS=14, ABST=4;
 const FARBEN=['#FFFFFF','#FFE08A','#FFB8A8','#BFE3C0','#B9D7F5','#D9C6F2'];
 const LASCHE='#D6D6D6', DACH='#E88D72', TUER='#9A6B4F', FLAMME='#FFC93C', KARTON='#D8B98A', LINIE='#2A2A2A';
@@ -468,14 +468,15 @@ function anordnen(stuecke,UW,UH){
       const sc=bw*bh*(g%90?1.06:1); if(!best||sc<best.sc-1e-6) best={s,c,si,x0,y0,bw,bh,sc}; }
     if(best) teile.push(best); else gross.push(s); }
   teile.sort((a,b)=>b.bh-a.bh);
-  const blaetter=[]; let x=0,y=0,zh=0,hoehe=0;
+  const blaetter=[]; let x=0,y=0,zh=0,hoehe=0,breite=0;
   for(const t of teile){
     if(!blaetter.length) blaetter.push([]);
     if(x>0&&x+t.bw>UW+0.01){ x=0; y+=zh+ABST; zh=0; }
     if(y>0&&y+t.bh>UH+0.01){ blaetter.push([]); x=0; y=0; zh=0; }
-    t.dx=x-t.x0; t.dy=y-t.y0; blaetter[blaetter.length-1].push(t); x+=t.bw+ABST; zh=Math.max(zh,t.bh); hoehe=Math.max(hoehe,y+zh); }
-  return {blaetter,gross,hoehe};
+    t.dx=x-t.x0; t.dy=y-t.y0; blaetter[blaetter.length-1].push(t); breite=Math.max(breite,x+t.bw); x+=t.bw+ABST; zh=Math.max(zh,t.bh); hoehe=Math.max(hoehe,y+zh); }
+  return {blaetter,gross,hoehe,breite};
 }
+const flaeche=P=>Math.abs(P.reduce((a,p,i)=>{ const q=P[(i+1)%P.length]; return a+p[0]*q[1]-q[0]*p[1]; },0));
 function stueckSVG(t,ox,oy){
   const T=p=>[p[0]*t.c-p[1]*t.si+t.dx+ox,p[0]*t.si+p[1]*t.c+t.dy+oy], f=p=>{ const q=T(p); return q[0].toFixed(2)+' '+q[1].toFixed(2); };
   const P=pts=>'M'+pts.map(f).join('L'), s=t.s; let o='';
@@ -484,6 +485,7 @@ function stueckSVG(t,ox,oy){
   for(const d of s.deko) o+=`<path d="${P(d.pts)}${d.zu?'Z':''}" fill="${d.voll?(d.col||LINIE):'none'}" stroke="${LINIE}" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>`;
   if(s.falt.length) o+=`<path d="${s.falt.map(P).join('')}" fill="none" stroke="#000" stroke-width="0.3" stroke-dasharray="2 1.4"/>`;
   if(s.schnitt.length) o+=`<path d="${s.schnitt.map(P).join('')}" fill="none" stroke="#000" stroke-width="0.45" stroke-linecap="round"/>`;
+  if(s.nr!=null){ const g=s.flaechen.reduce((a,b)=>flaeche(b.pts)>flaeche(a.pts)?b:a), q=T([g.pts.reduce((v,p)=>v+p[0],0)/g.pts.length,g.pts.reduce((v,p)=>v+p[1],0)/g.pts.length]); o+=Planer.teilMarke(q[0],q[1],s.nr); }   // Buchstabe in Vorschau und Ausdruck
   return o;
 }
 
@@ -512,7 +514,7 @@ function zeichne3D(cv,m,yaw,pitch){
 
 // ---------- Zustand ----------
 const S={f:'wuerfel',farbe:0,papier:'a4',deko:{},v:{}};
-try{ const g=JSON.parse(localStorage.getItem(KEY)||'{}'); for(const k in S) if(g[k]!==undefined) S[k]=g[k]; }catch(e){}
+{ const g=SP.lies()||{}; for(const k in S) if(g[k]!==undefined) S[k]=g[k]; }
 { const q=new URLSearchParams(location.search), f=q.get('f');
   if(f&&MOD[f]){ S.f=f; const v=S.v[f]=S.v[f]||{}; for(const [k] of MOD[f].felder) if(q.has(k)) v[k]=parseFloat(q.get(k)); if(q.has('d')&&MOD[f].deko) S.deko[f]=q.get('d'); }
   if(q.has('c')) S.farbe=+q.get('c')||0; if(PAPIERE[q.get('p')]) S.papier=q.get('p'); }
@@ -521,7 +523,7 @@ function werte(m){ const g=S.v[m.id]||{}, o={};
   for(const [k,,d,lo,hi] of m.felder){ let x=parseFloat(g[k]); if(!isFinite(x)) x=d; o[k]=Math.min(hi,Math.max(lo,Math.round(x*10)/10)); }
   return o; }
 function speichern(){
-  try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){}
+  SP.schreibe(S);
   const m=MOD[S.f], q=new URLSearchParams({f:S.f,...werte(m)}); if(m.deko&&S.deko[m.id]) q.set('d',S.deko[m.id]); if(S.farbe) q.set('c',S.farbe); if(S.papier!=='a4') q.set('p',S.papier);
   try{ history.replaceState(null,'','?'+q); }catch(e){}
 }
@@ -543,40 +545,39 @@ function felderBauen(){
 function neu(){
   const m=MOD[S.f], P=PAPIERE[S.papier], UW=P.w-2*M, UH=P.h-2*M-FUSS, r=bauen(m,FARBEN[S.farbe],P);
   aktuell=r.mesh; malen();
-  const ganz=anordnen(r.stuecke,UW,Infinity), plan=anordnen(r.stuecke,UW,UH), n=plan.blaetter.length;
-  $('netz').setAttribute('viewBox',`-2 -2 ${UW+4} ${Math.max(10,ganz.hoehe)+4}`);
-  $('netz').innerHTML=ganz.blaetter.flat().map(t=>stueckSVG(t,0,0)).join('');
+  if(r.stuecke.length>1) r.stuecke.forEach((s,i)=>{ s.nr=i; });
+  const plan=anordnen(r.stuecke,UW,UH), n=plan.blaetter.length, gross=new Set(plan.gross), ganz=anordnen(r.stuecke,gross.size?Infinity:UW,Infinity);
+  $('netz').setAttribute('viewBox',`-2 -2 ${Math.max(UW,ganz.breite)+4} ${Math.max(10,ganz.hoehe)+4}`);
+  $('netz').innerHTML=ganz.blaetter.flat().map(t=>gross.has(t.s)?`<g class="pl-zugross">${stueckSVG(t,0,0)}</g>`:stueckSVG(t,0,0)).join('');
   const masse=m.felder.map(f=>zahl(r.v[f[0]])).join(' × ')+' cm';
   const blatt=(bl,i,druck)=>{ const yf=P.h-M-5;
     let s=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${P.w} ${P.h}"${druck?` width="${P.w}mm" height="${P.h}mm"`:''}>`;
     s+=bl.map(t=>stueckSVG(t,M,M)).join('');
-    s+=`<path d="M${M},${yf-2}v4M${M},${yf}h50M${M+50},${yf-2}v4" fill="none" stroke="#000" stroke-width="0.35"/>`;
-    s+=`<text x="${M+25}" y="${yf-3}" text-anchor="middle" font-family="Nunito,Arial,sans-serif" font-size="2.8" fill="#000">5 cm</text>`;
+    s+=Planer.kontrolle(M,yf,{farbe:'#000'});
     s+=`<text x="${P.w-M}" y="${yf+1}" text-anchor="end" font-family="Nunito,Arial,sans-serif" font-size="3" fill="#000">${esc(m.name+' · '+masse+(n>1?' · '+(i+1)+'/'+n:''))}</text>`;
-    s+=`<text x="${P.w-M}" y="${yf+5}" text-anchor="end" font-family="Nunito,Arial,sans-serif" font-size="2.4" fill="#666">Schritt für Schritt · Falt-Generator</text>`;
     return s+'</svg>'; };
-  $('blaetter').innerHTML=plan.blaetter.map((bl,i)=>blatt(bl,i,false)).join('');
+  Planer.blaetter('#blaetter',plan.blaetter.map((bl,i)=>blatt(bl,i,false)),{ab:1,spalten:3});
   $('druck').innerHTML=plan.blaetter.map((bl,i)=>blatt(bl,i,true)).join('');
-  $('seite').textContent=`@page{size:${P.name} portrait;margin:0}#druck{--bw:${P.w}mm;--bh:${P.h}mm}`;
-  const teile=r.stuecke.length;
-  $('werte').innerHTML=`<div class="wert"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg><div><b>${n}</b><small>Blätter</small></div></div>`+
-    `<div class="wert"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.6 7.6L20 17M8.6 16.4L20 7"/></svg><div><b>${teile}</b><small>Teile</small></div></div>`;
-  $('warn').hidden=!plan.gross.length; $('warn').textContent=plan.gross.length?'⚠ Zu gross'+(S.papier==='a4'?' → A3':''):'';
+  Planer.seite({papier:S.papier});
+  $('werte').innerHTML=`<div class="wert"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.6 7.6L20 17M8.6 16.4L20 7"/></svg><div><b>${r.stuecke.length}</b><small>Teile</small></div></div>`;
+  const a3Hilft=S.papier==='a4'&&gross.size&&!anordnen(bauen(m,FARBEN[S.farbe],PAPIERE.a3).stuecke,PAPIERE.a3.w-2*M,PAPIERE.a3.h-2*M-FUSS).gross.length;
+  Planer.zuGross('#warn',gross.size?{wahl:a3Hilft?['a3']:[],tue(){ Planer.merke(); S.papier='a3'; neu(); }}:null);
   $('drucken').disabled=!n;
-  document.querySelectorAll('#papier .chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.papier===S.papier));
+  kopf.zeige({papier:S.papier,blaetter:n});
   document.querySelectorAll('#farben .farbe').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.c===S.farbe));
   speichern();
 }
 
 $('modelle').innerHTML=MODELLE.map(m=>`<button type="button" class="kachel" data-f="${m.id}" aria-pressed="false"><canvas width="112" height="112" data-ic="${m.id}" aria-hidden="true"></canvas><span>${esc(m.name)}</span></button>`).join('');
 $('farben').innerHTML=FARBEN.map((c,i)=>`<button type="button" class="farbe" style="--c:${c}" data-c="${i}" aria-pressed="false" aria-label="Farbe ${i+1}"></button>`).join('');
-$('modelle').addEventListener('click',e=>{ const b=e.target.closest('.kachel'); if(!b||b.dataset.f===S.f) return; S.f=b.dataset.f; felderBauen(); neu(); });
-$('farben').addEventListener('click',e=>{ const b=e.target.closest('.farbe'); if(!b) return; S.farbe=+b.dataset.c; neu(); });
-$('deko').addEventListener('click',e=>{ const b=e.target.closest('[data-deko]'); if(!b) return; S.deko[S.f]=b.dataset.deko; document.querySelectorAll('#deko .chip').forEach(c=>c.setAttribute('aria-pressed',c===b)); neu(); });
-$('papier').addEventListener('click',e=>{ const b=e.target.closest('[data-papier]'); if(!b) return; S.papier=b.dataset.papier; neu(); });
-$('felder').addEventListener('click',e=>{ const b=e.target.closest('button[data-d]'); if(!b) return; const m=MOD[S.f], k=b.dataset.k;
-  (S.v[m.id]=S.v[m.id]||{})[k]=werte(m)[k]+ +b.dataset.d; const v=werte(m); S.v[m.id][k]=v[k]; $('f-'+k).value=zahl(v[k]); neu(); });
-$('felder').addEventListener('input',e=>{ const i=e.target.closest('input[data-k]'); if(!i) return; const x=parseFloat(i.value.replace(',','.')); if(!isFinite(x)) return; (S.v[S.f]=S.v[S.f]||{})[i.dataset.k]=x; neu(); });
+const kopf=Planer.druckkopf('#papier',{papier:S.papier,wahl({papier}){ Planer.merke(); S.papier=papier; neu(); }});
+Planer.verlauf({hole:()=>S,setze(z){ Object.assign(S,z); felderBauen(); neu(); }});
+$('modelle').addEventListener('click',e=>{ const b=e.target.closest('.kachel'); if(!b||b.dataset.f===S.f) return; Planer.merke(); S.f=b.dataset.f; felderBauen(); neu(); });
+$('farben').addEventListener('click',e=>{ const b=e.target.closest('.farbe'); if(!b) return; Planer.merke(); S.farbe=+b.dataset.c; neu(); });
+$('deko').addEventListener('click',e=>{ const b=e.target.closest('[data-deko]'); if(!b) return; Planer.merke(); S.deko[S.f]=b.dataset.deko; document.querySelectorAll('#deko .chip').forEach(c=>c.setAttribute('aria-pressed',c===b)); neu(); });
+$('felder').addEventListener('click',e=>{ const b=e.target.closest('button[data-d]'); if(!b) return; const m=MOD[S.f], k=b.dataset.k; Planer.merke(null,'feld-'+k);
+  (S.v[m.id]=S.v[m.id]||{})[k]=werte(m)[k]+ +b.dataset.d; const v=werte(m); S.v[m.id][k]=v[k]; $('f-'+k).value=zahl(v[k]); neu(); Planer.leuchte('.netz'); });
+$('felder').addEventListener('input',e=>{ const i=e.target.closest('input[data-k]'); if(!i) return; const x=parseFloat(i.value.replace(',','.')); if(!isFinite(x)) return; Planer.merke(null,'feld-'+i.dataset.k); (S.v[S.f]=S.v[S.f]||{})[i.dataset.k]=x; neu(); Planer.leuchte('.netz'); });
 $('felder').addEventListener('change',e=>{ const i=e.target.closest('input[data-k]'); if(i) i.value=zahl(werte(MOD[S.f])[i.dataset.k]); });
 $('drucken').addEventListener('click',()=>window.print());
 

@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="../planer.css">
 <style>
 :root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;color-scheme:dark}}
@@ -18,11 +19,8 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.45 Nunito,system-ui,sans-serif;overscroll-behavior:none}
 h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
-h1{font-size:28px}
 h2{font-size:19px;margin-bottom:10px}
 a{color:var(--acc)}
-.kopf{max-width:1000px;margin:0 auto;padding:20px 16px 8px}
-.kopf p{margin:4px 0 0;color:var(--muted)}
 main{max-width:1000px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
 .karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
 .breit{grid-column:1/-1}
@@ -34,35 +32,44 @@ ol li::marker{font-family:Fredoka,Nunito,sans-serif;color:var(--acc)}
 .gross svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round;flex:none}
 .zweit{background:var(--surface2);color:var(--ink);border:2px solid var(--line)}
 .gross:disabled{opacity:.45;cursor:default}
-.hinweis{font-size:14px;color:var(--muted);margin:8px 0 0}
+.warnz{color:var(--warn,#B3412A);font-weight:800;margin:8px 0 0}
+[hidden]{display:none!important}
 .code{width:100%;height:64px;margin-top:4px;font:12px/1.3 ui-monospace,Consolas,monospace;padding:8px;border-radius:10px;border:2px solid var(--line);background:var(--surface2);color:var(--muted);resize:none}
-.ablauf{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0;padding:0;list-style:none;counter-reset:s}
-.ablauf li{counter-increment:s;background:var(--surface2);border-radius:14px;padding:12px;font-size:15px}
-.ablauf li::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;margin-bottom:6px;border-radius:50%;background:var(--acc);color:var(--acc-ink);font:600 17px Fredoka,Nunito,sans-serif}
-.leiste{display:inline-flex;align-items:center;gap:6px;padding:2px 10px;border-radius:999px;background:var(--surface2);border:1px solid var(--line);font-size:14px;white-space:nowrap}
+.ablauf{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:10px;margin:0;padding:0;list-style:none;counter-reset:s}
+.ablauf li{position:relative;counter-increment:s;display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--surface2);border-radius:14px;padding:14px 8px 10px;font-weight:800;font-size:15px;text-align:center}
+.ablauf li::before{content:counter(s);position:absolute;left:6px;top:6px;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--acc);color:var(--acc-ink);font:600 14px Fredoka,Nunito,sans-serif}
+.ablauf svg{width:40px;height:40px;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.marken{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.marken li{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--surface2);font-weight:800;font-size:15px}
+.schritte{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px;padding:0;list-style:none;counter-reset:s 1}
+.schritte li{counter-increment:s;display:inline-flex;align-items:center;gap:6px;padding:6px 12px 6px 6px;border-radius:999px;background:var(--surface2);font-weight:800;font-size:15px}
+.schritte li::before{content:counter(s);display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--acc);color:var(--acc-ink);font:600 14px Fredoka,Nunito,sans-serif}
 /* Die Bühne: hier liegt das Bild, mit zwei Fingern ziehen und schieben */
 .buehne{position:relative;height:min(70vh,720px);min-height:320px;border-radius:14px;border:2px dashed var(--line);background:#fff;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none}
 .buehne.hat{border-style:solid;cursor:grab}
-.buehne.voll{position:fixed;inset:0;z-index:10;height:auto;min-height:0;border:0;border-radius:0}
+.buehne.voll{position:fixed;inset:0;z-index:2147483646;height:auto;min-height:0;border:0;border-radius:0}
 .buehne img{position:absolute;top:0;left:0;transform-origin:0 0;max-width:none;pointer-events:none;-webkit-user-drag:none}
-.buehne .leer{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#5B6676;padding:20px;pointer-events:none}
+.buehne .leer{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.buehne .leer svg{width:88px;height:88px;fill:none;stroke:#A9B6C6;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .buehne.hat .leer{display:none}
-.buehne .leer b{display:block;font:600 22px Fredoka,Nunito,sans-serif;color:#17212F;margin-bottom:4px}
 .buehne.voll .leer{display:none}
 details{margin-top:4px}
 summary{cursor:pointer;font-weight:800;color:var(--acc)}
-details ol{margin-top:10px}
+
 button:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
-@media (max-width:760px){main{grid-template-columns:minmax(0,1fr)}.ablauf{grid-template-columns:repeat(2,minmax(0,1fr))}h1{font-size:24px}}
+@media (max-width:760px){main{grid-template-columns:minmax(0,1fr)}.knoepfe .gross{flex-basis:calc(50% - 5px);font-size:17px;padding:0 10px}}
 </style>
 </head>
 <body>
-<header class="kopf">
-  <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
+<header class="pk">
+  <a class="zur-app" href="../../" data-zur-app aria-label="Zurück zur App"><span>App</span></a>
   <h1>❄ Abpausen</h1>
-  <p>Bild holen, gross ziehen, einfrieren, Papier drauflegen. Nichts einrichten, nichts installieren – das Bild bleibt auf dem Gerät. <a href="../">←&nbsp;Vorlagen-Generator</a></p>
+  <a class="pk-vorlagen" href="../" aria-label="Vorlagen" title="Vorlagen"><span>Vorlagen</span></a>
+  <button class="pk-rueck" id="p-rueck" type="button" disabled aria-label="Rückgängig" title="Rückgängig"></button>
+  <span class="pk-leer"></span>
 </header>
 <script src="../zurueck.js"></script>
+<script src="../planer.js"></script>
 <main>
   <section class="karte breit" aria-label="Bild">
     <div class="knoepfe">
@@ -74,47 +81,44 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset
     </div>
     <div class="buehne" id="buehne">
       <img id="bild" alt="" hidden>
-      <div class="leer"><div><b>Hier kommt das Bild hin</b>«Foto wählen» oder ein kopiertes Bild einfügen.<br>Am Computer: Bild hineinziehen.</div></div>
+      <div class="leer"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 8"/></svg></div>
     </div>
-    <p class="hinweis" id="tipp">Mit zwei Fingern gross ziehen und schieben, bis es aufs Papier passt. Dann «Einfrieren»: Die Seite reagiert auf nichts mehr, bis man das Schloss 3 Sekunden drückt.</p>
+    <p class="warnz" id="tipp" role="status" hidden></p>
   </section>
 
-  <section class="karte breit" aria-label="So geht es">
-    <h2>So geht es im Unterricht</h2>
+  <section class="karte breit" aria-label="Ablauf">
     <ol class="ablauf">
-      <li>In Safari ein Bild suchen. Finger draufhalten → <b>«Zu Fotos hinzufügen»</b> (oder «Kopieren»).</li>
-      <li>Diese Seite öffnen, <b>«Foto wählen»</b> und das Bild aussuchen (oder «Bild einfügen»).</li>
-      <li>Mit zwei Fingern gross ziehen und schieben, bis es passt. <b>«Einfrieren»</b> antippen.</li>
-      <li>Papier auflegen und abpausen. Fertig: das Schloss unten rechts 3 Sekunden drücken.</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 8"/></svg>Foto</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l6 6M4 4v5M4 4h5M20 20l-6-6M20 20v-5M20 20h-5"/></svg>Ziehen</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Einfrieren</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1-4L16 5l3 3L8 19z"/><path d="M14 7l3 3"/></svg>Abpausen</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>3 s drücken</li>
     </ol>
   </section>
 
-  <section class="karte" aria-label="Für die Lehrperson">
-    <h2>Für die Lehrperson</h2>
-    <ol>
-      <li>Die Kinder brauchen nur diese Adresse. Am einfachsten einmal pro iPad: Teilen-Knopf <b>⬆</b> → <b>«Zum Home-Bildschirm»</b>. Dann gibt es ein Symbol «Abpausen» wie eine App, ohne Adressleiste.</li>
-      <li><b>☀ Helligkeit ganz hoch</b> (Kontrollzentrum), dann scheint das Bild besser durchs Papier.</li>
-      <li>Papier mit zwei Streifen Malerklebband festmachen, mit Bleistift leicht zeichnen – harte Stifte können das Glas zerkratzen.</li>
-      <li>Das Schloss sperrt nur die Seite. Wer nach oben wischt, kommt trotzdem weg. Ganz dicht sperrt nur der <b>Geführte Zugriff</b> (Einstellungen → Bedienungshilfen, dann dreimal den oberen Knopf drücken).</li>
-      <li>Solange eingefroren ist, geht der Bildschirm nicht von selbst aus.</li>
-    </ol>
+  <section class="karte" aria-label="Lehrperson">
+    <h2>Lehrperson</h2>
+    <ul class="marken">
+      <li>⬆ Home-Bildschirm</li>
+      <li>☀ Helligkeit 100 %</li>
+      <li>▭ Malerklebband</li>
+      <li>✏ Bleistift</li>
+      <li>🔒 Geführter Zugriff</li>
+    </ul>
   </section>
 
-  <section class="karte" aria-label="Für Fortgeschrittene">
-    <h2>Für Fortgeschrittene</h2>
-    <p class="hinweis" style="margin-top:0">Wer <b>jede</b> Internetseite direkt einfrieren will, ohne das Bild zuerst zu sichern, kann sich einen Knopf in Safari einrichten. Das ist einmal etwas Fummelei.</p>
+  <section class="karte" aria-label="Safari-Knopf">
     <details>
-      <summary>Knopf für Safari einrichten</summary>
-      <button type="button" class="gross" id="kopieren" style="width:100%;margin:10px 0"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg><span>1. Knopf-Code kopieren</span></button>
-      <ol start="2">
-        <li>Diese Seite sichern: Teilen-Knopf <b>⬆</b> → «Zu Favoriten hinzufügen» → «Sichern».</li>
-        <li>Lesezeichen öffnen (Buch-Symbol) → Favoriten → «Bearbeiten» → «❄ Abpausen» antippen.</li>
-        <li>Die Adresse ganz löschen, den kopierten Code einfügen → «Fertig».</li>
-        <li>Einstellungen → Apps → Safari → «Favoritenleiste anzeigen» einschalten, dann ist der Knopf immer oben.</li>
+      <summary>Safari-Knopf</summary>
+      <button type="button" class="gross" id="kopieren" style="width:100%;margin:10px 0"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg><span>1 Code kopieren</span></button>
+      <ol class="schritte">
+        <li>⬆ Favorit sichern</li>
+        <li>Favoriten bearbeiten</li>
+        <li>Adresse → Code</li>
+        <li>Favoritenleiste ein</li>
       </ol>
-      <p class="hinweis">Klappt das Kopieren nicht, den Code hier antippen, alles auswählen und kopieren:</p>
       <textarea class="code" id="code" readonly aria-label="Knopf-Code"></textarea>
-      <p class="hinweis">Am Computer: diesen Knopf in die Lesezeichenleiste ziehen → <a id="ziehen" href="#">❄ Einfrieren</a></p>
+      <p><a id="ziehen" href="#">❄ Einfrieren</a></p>
     </details>
   </section>
 </main>
@@ -135,7 +139,7 @@ function einfrieren(){
   attr(mach('rect','',schloss,1),{x:5,y:11,width:14,height:10,rx:2});
   attr(mach('path','',schloss,1),{d:'M8 11V7a4 4 0 0 1 8 0v4'});
   var tipp=mach('div','position:fixed;right:88px;bottom:26px;max-width:calc(100vw - 108px);padding:8px 12px;border-radius:12px;background:#17212F;color:#fff;font:600 15px/1.3 system-ui,sans-serif;transition:opacity .3s;pointer-events:none',deckel);
-  tipp.textContent='❄ Eingefroren. Zum Lösen das Schloss 3 Sekunden drücken.';
+  tipp.textContent='❄ 3 s drücken';
   var zeigen=function(){tipp.style.opacity='1';clearTimeout(tippZeit);tippZeit=setTimeout(function(){tipp.style.opacity='0';},2500);};
   var amKnopf=function(e){return knopf.contains(e.target);};
   var schlucken=function(e){
@@ -176,17 +180,25 @@ const buehne=$('buehne'),bild=$('bild'),frieren=$('frieren');
 const BEISPIEL='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 200 150"><rect width="200" height="150" fill="#fff"/><g fill="none" stroke="#17212F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M30 75c25-38 85-48 120-12 0 0 14-14 30-20-6 18-6 46 0 64-16-6-30-20-30-20-35 36-95 26-120-12z"/><circle cx="62" cy="68" r="5"/><path d="M90 50c10 16 10 34 0 50M112 52c8 14 8 32 0 46M92 30c18-8 36-4 46 6"/></g></svg>');
 
 // ---- Bild auf die Bühne: Lage als Verschiebung + Massstab, Ursprung oben links
-let sc=1,tx=0,ty=0,url=null;
+let sc=1,tx=0,ty=0;
 const setzen=()=>{bild.style.transform=`translate(${tx}px,${ty}px) scale(${sc})`};
+const fehler=t=>{$('tipp').textContent=t;$('tipp').hidden=!t};
+Planer.verlauf({hole:()=>({tx,ty,sc}),setze(z){({tx,ty,sc}=z);setzen()}});
 const einpassen=()=>{
   const B=buehne.clientWidth,H=buehne.clientHeight,w=bild.naturalWidth||1,h=bild.naturalHeight||1;
   sc=Math.min(B/w,H/h)*.92;tx=(B-w*sc)/2;ty=(H-h*sc)/2;setzen();
 };
-function zeigen(quelle){
-  if(url)URL.revokeObjectURL(url);url=null;
-  if(quelle instanceof Blob){url=URL.createObjectURL(quelle);quelle=url}
-  bild.onload=()=>{bild.hidden=false;buehne.classList.add('hat');frieren.disabled=false;einpassen()};
-  bild.onerror=()=>{$('tipp').textContent='Dieses Bild lässt sich nicht öffnen. Bitte ein anderes versuchen.'};
+// Rückgängig holt das vorherige Bild mit seiner Lage zurück; darum bleiben die Bild-Adressen gültig
+function bildMerken(){
+  const q=bild.hidden?null:bild.src,a={tx,ty,sc};
+  Planer.merke(()=>{ if(q)zeigen(q,a); else{bild.hidden=true;bild.removeAttribute('src');buehne.classList.remove('hat');frieren.disabled=true} });
+}
+function zeigen(quelle,lage){
+  fehler('');
+  if(quelle instanceof Blob)quelle=URL.createObjectURL(quelle);
+  if(!lage)bildMerken();
+  bild.onload=()=>{bild.hidden=false;buehne.classList.add('hat');frieren.disabled=false;if(lage){({tx,ty,sc}=lage);setzen()}else einpassen()};
+  bild.onerror=()=>fehler('⚠ Bild defekt');
   bild.src=quelle;
 }
 $('datei').addEventListener('change',e=>{const f=e.target.files[0];if(f)zeigen(f);e.target.value=''});
@@ -198,19 +210,19 @@ $('einfuegen').addEventListener('click',async()=>{
   try{
     const teile=await navigator.clipboard.read();
     for(const t of teile){const typ=t.types.find(x=>x.startsWith('image/'));if(typ){zeigen(await t.getType(typ));return}}
-    $('tipp').textContent='In der Zwischenablage ist kein Bild. Zuerst in Safari den Finger aufs Bild halten → «Kopieren».';
-  }catch(e){$('tipp').textContent='Einfügen ging nicht. Dann das Bild zuerst «Zu Fotos hinzufügen» und hier «Foto wählen».'}
+    fehler('⚠ Kein Bild');
+  }catch(e){fehler('⚠ Einfügen gesperrt')}
 });
 document.addEventListener('paste',e=>{if(e.clipboardData&&ausDaten(e.clipboardData.items))e.preventDefault()});
 buehne.addEventListener('dragover',e=>e.preventDefault());
 buehne.addEventListener('drop',e=>{e.preventDefault();if(e.dataTransfer)ausDaten(e.dataTransfer.files.length?e.dataTransfer.files:e.dataTransfer.items)});
 
 // Ziehen und mit zwei Fingern zoomen (Pointer-Events, am Computer auch Mausrad)
-const finger=new Map();let start=null;
+const finger=new Map();let start=null,vorGriff=null;
 const mitte=()=>{const p=[...finger.values()];return p.length>1?{x:(p[0].x+p[1].x)/2,y:(p[0].y+p[1].y)/2,d:Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y)}:{x:p[0].x,y:p[0].y,d:0}};
 const ort=e=>{const r=buehne.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top}};
 const zoomUm=(x,y,f)=>{const neu=Math.min(Math.max(sc*f,.05),40);f=neu/sc;tx=x-(x-tx)*f;ty=y-(y-ty)*f;sc=neu;setzen()};
-buehne.addEventListener('pointerdown',e=>{if(bild.hidden)return;buehne.setPointerCapture(e.pointerId);finger.set(e.pointerId,ort(e));start={m:mitte(),tx,ty,sc}});
+buehne.addEventListener('pointerdown',e=>{if(bild.hidden)return;buehne.setPointerCapture(e.pointerId);finger.set(e.pointerId,ort(e));start={m:mitte(),tx,ty,sc};if(finger.size===1)vorGriff={tx,ty,sc}});
 buehne.addEventListener('pointermove',e=>{
   if(!finger.has(e.pointerId))return;finger.set(e.pointerId,ort(e));
   const m=mitte();
@@ -218,11 +230,11 @@ buehne.addEventListener('pointermove',e=>{
   else{tx=start.tx+m.x-start.m.x;ty=start.ty+m.y-start.m.y}
   setzen();
 });
-const weg=e=>{finger.delete(e.pointerId);if(finger.size)start={m:mitte(),tx,ty,sc}};
+const weg=e=>{if(!finger.delete(e.pointerId))return;if(finger.size)start={m:mitte(),tx,ty,sc};else if(vorGriff&&(vorGriff.tx!==tx||vorGriff.ty!==ty||vorGriff.sc!==sc)){Planer.merke(vorGriff);vorGriff=null}};
 ['pointerup','pointercancel'].forEach(t=>buehne.addEventListener(t,weg));
-buehne.addEventListener('wheel',e=>{if(bild.hidden)return;e.preventDefault();const o=ort(e);zoomUm(o.x,o.y,e.deltaY<0?1.1:1/1.1)},{passive:false});
+buehne.addEventListener('wheel',e=>{if(bild.hidden)return;e.preventDefault();Planer.merke(null,'rad');const o=ort(e);zoomUm(o.x,o.y,e.deltaY<0?1.1:1/1.1)},{passive:false});
 ['touchstart','touchmove','gesturestart','gesturechange'].forEach(t=>buehne.addEventListener(t,e=>{if(e.cancelable)e.preventDefault()},{passive:false}));
-buehne.addEventListener('dblclick',()=>{if(!bild.hidden)einpassen()});
+buehne.addEventListener('dblclick',()=>{if(!bild.hidden){Planer.merke();einpassen()}});
 
 // Einfrieren: Bühne auf den ganzen Bildschirm (wenn möglich echtes Vollbild, dann ist auch die Safari-Leiste weg), dann sperren.
 // Die Lage des Bilds wird mitgenommen: gleiche Mitte, gleicher Massstab in Bildschirm-Pixeln.
@@ -257,8 +269,8 @@ $('ziehen').addEventListener('click',e=>{e.preventDefault();einfrieren()});
 $('code').addEventListener('focus',()=>$('code').select());
 $('kopieren').addEventListener('click',async()=>{
   const t=$('kopieren').querySelector('span');
-  try{await navigator.clipboard.writeText(knopfCode);t.textContent='✓ Kopiert – jetzt Schritt 2'}
-  catch(e){$('code').focus();$('code').select();t.textContent='Bitte unten von Hand kopieren'}
+  try{await navigator.clipboard.writeText(knopfCode);t.textContent='✓ Kopiert'}
+  catch(e){$('code').focus();$('code').select();t.textContent='⚠ Von Hand'}
 });
 })();
 </script>
