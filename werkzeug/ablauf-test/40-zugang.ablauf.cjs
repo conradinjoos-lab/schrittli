@@ -1,7 +1,7 @@
 /* Punkt 17: Zoom, Tastatur, Fenster, Trefferflächen, echte Schaltflächen. Der Player gehört in eine eigene Ablauf-Datei. */
 'use strict';
 const VIDEO='wl-fingerstricken', GR=[[1024,768,'iPad quer'],[768,1024,'iPad hoch'],[844,390,'Handy quer'],[390,844,'Handy hoch']];
-const SCHIRME={schule:[['home'],['klasse'],['werkzeuge'],['lehrer'],['gallery'],['sammlung'],['restzeit'],['fuehrerschein'],['paint',{videoId:VIDEO}],['record',{videoId:VIDEO}]],familie:[['home'],['profiles'],['gallery'],['paint',{videoId:VIDEO}]]};
+const SCHIRME={schule:[['home'],['klasse'],['werkzeuge'],['lehrer'],['gallery'],['sammlung'],['restzeit'],['suche'],['projekt',{videoId:VIDEO}],['fuehrerschein'],['paint',{videoId:VIDEO}],['record',{videoId:VIDEO}]],familie:[['home'],['profiles'],['gallery'],['paint',{videoId:VIDEO}]]};
 const zeige=([n,a])=>n+(a?' '+JSON.stringify(a):'');
 const offen=async(p,n,a)=>{ await p.evaluate(([n,a])=>{ document.querySelectorAll('.modal-bg,.ww').forEach(e=>e.remove()); if(n==='home'&&a===undefined) go('home'); else go(n,a||{}); },[n,a]); await new Promise(f=>setTimeout(f,180)); };
 

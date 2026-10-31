@@ -54,7 +54,7 @@ const ohneName=async t=>{ const {k,p}=await ipad(t);
 
 const migration=async t=>{ const alt=JSON.stringify({v:1,profiles:[{id:'klasse'}],activeProfile:'klasse',progress:{[`klasse:${ANLEITUNG}`]:{pos:0,step:3,done:false,slow:false}},stars:{},works:[{id:'w1',profileId:'klasse',type:'foto',createdAt:1,name:'MIA',klasse:3}],settings:{sv:3,klasse:3,kind:{liste:'k3a',name:'Mia'}}});
   const {k,p}=await ipad(t,{mehr:{'schrittli.schule.v1':alt}});
-  t.pruefe(await p.evaluate(a=>S.settings.sv===4&&S.settings.kind===undefined&&S.settings.kinder[0].name==='Mia'&&S.arbeit._ohne[a].step===3&&Array.isArray(S.arbeit._ohne[a].erledigt)&&S.works.length===1,ANLEITUNG),'Alter Stand'); t.pruefe(await p.evaluate(()=>kinder()[0].key==='3a/Mia'&&localStorage.getItem('schrittli.kind')==='3a/Mia'),'Kind übernommen');
+  t.pruefe(await p.evaluate(a=>S.settings.sv===5&&S.settings.kind===undefined&&S.settings.kinder[0].name==='Mia'&&S.arbeit._ohne[a].step===3&&Array.isArray(S.arbeit._ohne[a].erledigt)&&S.works.length===1,ANLEITUNG),'Alter Stand'); t.pruefe(await p.evaluate(()=>kinder()[0].key==='3a/Mia'&&localStorage.getItem('schrittli.kind')==='3a/Mia'),'Kind übernommen');
   await p.waitForTimeout(160); await neuLaden(p); t.pruefe(await p.evaluate(a=>S.arbeit._ohne[a].step===3&&!S.arbeit['3a/Mia'],ANLEITUNG),'Einmalig'); t.keineFehler(k); };
 
 /* Werkzeuge schreiben über Planer.speicher: jeder Stand beim richtigen Kind, Gruppen auf alle, die Karte führt zum Werkzeug */
@@ -75,9 +75,9 @@ const start=async(t,mitListe)=>{ const s=sammlung(), v=speicher(s,{'schrittli.sc
 
 /* Der Lektionsplan gehört dem Gerät: Kinderwechsel und Neuladen ändern ihn nicht, und er landet nicht in der Kinderarbeit */
 const lektionsplan=async t=>{ const {k,p}=await ipad(t); const plan=()=>p.evaluate(a=>JSON.stringify(planVon(a)),ANLEITUNG);
-  await kinderWahl(p,['Mia']); await p.evaluate(a=>{ U.verb={token:'b'.repeat(64),deviceId:'d'}; U.policy={mode:'projects',plan:true}; U.deadline=Date.now()+6e4; planMelden=()=>{}; planSetzen(a,0,true); planVon(a).mat.Schere=true; U.verb=null; U.policy=null; saveJetzt(); },ANLEITUNG).catch(e=>{ throw new Error('Plan setzen: '+e.message); }); const vorher=await plan(); t.pruefe(JSON.parse(vorher).s[0]===true,'Plan gesetzt');
+  await kinderWahl(p,['Mia']); await p.evaluate(a=>{ U.verb={token:'b'.repeat(64),deviceId:'d'}; U.policy={mode:'projects',plan:true}; U.deadline=Date.now()+6e4; planMelden=()=>{}; planSetzen(a,0,true); U.verb=null; U.policy=null; saveJetzt(); },ANLEITUNG).catch(e=>{ throw new Error('Plan setzen: '+e.message); }); const vorher=await plan(); t.pruefe(JSON.parse(vorher).s[0]===true,'Plan gesetzt');
   await oeffne(p); await p.waitForSelector('.an-start'); await schritte(p,2); await p.evaluate(()=>go('home')); await kinderWahl(p,['Noah']); t.pruefe(await plan()===vorher,'Wechsel ändert Plan');
-  await neuLaden(p); t.pruefe(await plan()===vorher,'Neuladen ändert Plan'); t.pruefe(await p.evaluate(()=>!/lektionsplan|Schere/.test(JSON.stringify(S.arbeit))),'Plan in der Kinderarbeit');
+  await neuLaden(p); t.pruefe(await plan()===vorher,'Neuladen ändert Plan'); t.pruefe(await p.evaluate(()=>!/lektionsplan/.test(JSON.stringify(S.arbeit))),'Plan in der Kinderarbeit');
   await oeffne(p); await p.waitForSelector('.an-start'); await schritte(p,2); t.pruefe((await stand(p,NOAH)).step===1&&await plan()===vorher,'Arbeit ändert Plan'); t.keineFehler(k); };
 
 module.exports=[{name:'Kinderwechsel',lauf:kinderwechsel},{name:'Start mit Namensliste',lauf:t=>start(t,true)},{name:'Start ohne Namensliste',lauf:t=>start(t,false)},{name:'Lektionsplan bleibt',lauf:lektionsplan},{name:'Wiederaufnahme',lauf:wiederaufnahme},{name:'Gruppe am iPad',lauf:gruppe},{name:'Ohne Name',lauf:ohneName},{name:'Migration Arbeitsstand',lauf:migration},{name:'Werkzeugstand je Kind',lauf:werkzeuge}];
