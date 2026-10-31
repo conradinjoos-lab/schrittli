@@ -67,7 +67,7 @@ const ende=async t=>{ for(const [b,h] of [[1024,768],[768,1024],[390,844]]){ con
 
 /* Punkt 6 */
 const KURZ='Masche ziehen';
-const kurz=async t=>{ const setze=id=>{ videoOf(id).steps[3].kurz='Masche ziehen'; };
+const kurz=async t=>{ const setze=id=>{ const s=videoOf(id).steps; s[3].kurz='Masche ziehen'; delete s[4].kurz; };
   let {k,p}=await auf(t,{vorher:setze}); const lang=await p.evaluate(()=>P.steps[3].text||P.steps[3].label), titel=await p.evaluate(()=>{ const s=P.steps[4]; return s.label||s.text; }); await los(p); await ohr(p);
   await klick(p,'.sbtn[data-i="3"]'); await p.waitForFunction(()=>P.idx===3); t.pruefe((await text(p,'.sbtn[data-i="3"] .lbl')).trim()===KURZ,'Liste zeigt kurz'); t.pruefe((await text(p,'#kinostep .lbl')).trim()===KURZ,'Schrittfeld zeigt kurz'); t.pruefe((await text(p,'.sbtn[data-i="4"] .lbl')).trim()===titel,'Ohne kurz der Titel');
   t.pruefe((await p.locator('.say').first().getAttribute('data-text')).endsWith(lang),'Lautsprecher langer Text'); await klick(p,'.say'); await p.waitForFunction(()=>window.__gesagt.join('').trim().length>0); t.pruefe((await p.evaluate(()=>window.__gesagt.join(' '))).includes(lang),'Gesagt: '+await p.evaluate(()=>window.__gesagt.join('|'))); await stopp(p); t.pruefe((await p.evaluate(()=>P.mode))==='stepdone','Standbild am Stopp'); t.keineFehler(k); await p.close();
