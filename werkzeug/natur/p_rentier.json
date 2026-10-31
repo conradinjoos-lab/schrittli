@@ -1,0 +1,25 @@
+[
+ {
+  "id": "natur-walnuss-rentier",
+  "title": "Walnuss-Rentier",
+  "areaId": "holz",
+  "gruppe": "Naturmaterial",
+  "stufen": [3, 4],
+  "niveau": 2,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "8", "t": 19, "aus": [0, 180, 720, 900]},
+  "material": ["astscheibe", "walnuss", "papier", "wackelaugen", "pompon", "filz", "tannenzweig", "baumwollband", "heisskleber", "bleistift", "schere", "schnur"],
+  "steps": [
+   {"text": "Öffne die Walnuss an der Naht. Hol den Kern heraus.", "bild": {"reel": "8", "t": 5, "aus": [0, 300, 720, 900]}, "achtung": ["Nur mit Lehrperson"]},
+   {"text": "Lege die Astscheibe aufs Papier. Fahre rundherum.", "bild": {"reel": "8", "t": 6.3, "aus": [0, 200, 720, 900]}},
+   {"text": "Schneide den Kreis etwas kleiner aus.", "bild": {"reel": "8", "t": 7, "aus": [0, 200, 720, 900]}},
+   {"text": "Klebe das Papier auf die Scheibe.", "bild": {"reel": "8", "t": 8, "aus": [0, 200, 720, 900]}},
+   {"text": "Klebe die Nuss, Augen, Nase und Filzohren auf.", "bild": {"reel": "8", "t": 9.5, "aus": [0, 200, 720, 900]}, "achtung": ["Leim heiss!"]},
+   {"text": "Klebe zwei Ästchen als Geweih hinter die Nuss.", "bild": {"reel": "8", "t": 12, "aus": [0, 300, 720, 900]}},
+   {"text": "Klebe unten Tannenzweige an.", "bild": {"reel": "8", "t": 15, "aus": [0, 300, 720, 900]}},
+   {"text": "Klebe die Masche in die Mitte.", "bild": {"reel": "8", "t": 17, "aus": [0, 300, 720, 900]}},
+   {"text": "Klebe hinten eine Schlaufe an.", "bild": {"reel": "8", "t": 20, "aus": [0, 100, 720, 900]}}
+  ],
+  "fertig": "Bravo! Dein Rentier ist fertig."
+ }
+]

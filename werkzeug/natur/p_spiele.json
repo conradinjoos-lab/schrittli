@@ -1,0 +1,119 @@
+[
+ {
+  "id": "natur-holz-jojo",
+  "title": "Holz-Jojo",
+  "areaId": "holz",
+  "gruppe": "Naturmaterial",
+  "stufen": [4, 5],
+  "niveau": 3,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "6", "t": 0.5, "aus": [0, 330, 720, 900]},
+  "material": ["ast", "stab", "schnur", "leim", "lineal", "bleistift", "bohrer", "saege", "schraubzwinge"],
+  "steps": [
+   {"text": "Die Lehrperson sägt zwei Scheiben. Je 1,5 cm dick.", "bild": [{"reel": "6", "t": 6.4, "aus": [0, 100, 720, 900]}, {"reel": "6", "t": 7.0, "aus": [0, 200, 720, 900]}], "achtung": ["Nur mit Lehrperson"]},
+   {"text": "Zeichne auf beiden Scheiben die Mitte an.", "bild": {"reel": "6", "t": 8.3, "aus": [60, 520, 600, 675]}},
+   {"text": "Bohre in jede Mitte ein Loch. Nicht ganz durch!", "bild": {"reel": "6", "t": 9.25, "aus": [0, 220, 720, 900]}, "achtung": ["Einspannen!"]},
+   {"text": "Gib Leim ins Loch. Stecke den Stab hinein.", "bild": {"reel": "6", "t": 10.6, "aus": [40, 420, 640, 750]}},
+   {"text": "Markiere den Stab 1,5 cm neben der Scheibe. Säge ihn ab.", "bild": {"reel": "6", "t": 12.3, "aus": [60, 480, 600, 675]}, "achtung": ["Einspannen!"]},
+   {"text": "Knote die Schnur um den Stab.", "bild": {"reel": "6", "t": 13.5, "aus": [60, 560, 600, 675]}},
+   {"text": "Gib Leim auf das Stabende.", "bild": {"reel": "6", "t": 14.4, "aus": [0, 300, 720, 900]}},
+   {"text": "Drücke die zweite Scheibe auf. Lass 3 bis 5 mm Spalt.", "bild": {"reel": "6", "t": 16.0, "aus": [40, 420, 640, 750]}},
+   {"text": "Wickle die Schnur auf. Knote oben eine Fingerschlaufe.", "bild": {"reel": "6", "t": 4.0, "aus": [0, 460, 720, 820]}}
+  ],
+  "fertig": "Bravo! Dein Jojo ist fertig."
+ },
+ {
+  "id": "natur-knobel-brettchen",
+  "title": "Knobelrätsel Ring auf Brettchen",
+  "areaId": "holz",
+  "gruppe": "Naturmaterial",
+  "stufen": [4, 5],
+  "niveau": 2,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "2", "t": 1.8, "aus": [0, 200, 720, 900]},
+  "material": ["holzbrett", "holzring", "schnur", "perle", "bohrer", "schraubzwinge", "schere"],
+  "steps": [
+   {"text": "Bohre in jede Ecke ein Loch.", "bild": {"reel": "2", "t": 2.8, "aus": [0, 240, 720, 900]}, "achtung": ["Einspannen!"]},
+   {"text": "Knote eine Perle ans Schnurende.", "bild": {"reel": "2", "t": 14.6, "aus": [0, 250, 720, 900]}},
+   {"text": "Spanne die Schnur schräg von Loch zu Loch.", "bild": {"reel": "2", "t": 6.5, "aus": [60, 380, 600, 675]}},
+   {"text": "Führe sie hinten zum Loch daneben. Hol sie vorne heraus.", "bild": {"reel": "2", "t": 8.0, "aus": [60, 380, 600, 675]}},
+   {"text": "Lege den Ring auf. Führe das Ende unter der Schnur durch.", "bild": [{"reel": "2", "t": 9.8, "aus": [60, 380, 600, 675]}, {"reel": "2", "t": 11.5, "aus": [60, 380, 600, 675]}]},
+   {"text": "Führe das Ende über den Ring ins letzte Loch.", "bild": {"reel": "2", "t": 12.2, "aus": [60, 380, 600, 675]}},
+   {"text": "Knote die zweite Perle an.", "bild": {"reel": "2", "t": 16.0, "aus": [0, 300, 720, 900]}},
+   {"text": "Lösung: Ziehe die Schnur im Ring zu einer Schlaufe hoch.", "bild": {"reel": "2", "t": 18.0, "aus": [40, 160, 600, 750]}},
+   {"text": "Schiebe die Schlaufe ins letzte Loch. Stecke die Perle hindurch.", "bild": {"reel": "2", "t": 23.3, "aus": [60, 280, 600, 750]}},
+   {"text": "Ziehe die Schlaufe zurück. Nimm den Ring ab.", "bild": {"reel": "2", "t": 26.8, "aus": [60, 240, 600, 750]}}
+  ],
+  "fertig": "Bravo! Dein Knobelrätsel ist fertig."
+ },
+ {
+  "id": "natur-knobel-ast",
+  "title": "Knobelrätsel Ring am Ast",
+  "areaId": "holz",
+  "gruppe": "Naturmaterial",
+  "stufen": [3, 4],
+  "niveau": 2,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "17", "t": 6.0, "aus": [120, 480, 600, 750]},
+  "material": ["ast", "holzring", "schnur", "bohrer", "schraubzwinge", "schere"],
+  "steps": [
+   {"text": "Bohre nahe am Astende ein Loch.", "bild": {"reel": "17", "t": 10.5, "aus": [180, 380, 480, 600]}, "achtung": ["Einspannen!"]},
+   {"text": "Schiebe den Ring auf den Ast. Führe die Schnur durch Loch und Ring.", "bild": {"reel": "17", "t": 4.0, "aus": [120, 380, 600, 750]}},
+   {"text": "Knote die Schnur zu einer kurzen Schlaufe.", "bild": {"reel": "18", "t": 19.3, "aus": [170, 300, 340, 425]}},
+   {"text": "Lösung: Schiebe den Ring hoch zum Loch.", "bild": {"reel": "18", "t": 4.3, "aus": [130, 300, 480, 600]}},
+   {"text": "Ziehe die Schlaufe durch den Ring.", "bild": [{"reel": "18", "t": 5.3, "aus": [130, 300, 480, 600]}, {"reel": "18", "t": 6.8, "aus": [130, 300, 480, 600]}]},
+   {"text": "Kippe den Ring durch die Schlaufe.", "bild": [{"reel": "18", "t": 8.2, "aus": [130, 300, 480, 600]}, {"reel": "18", "t": 9.2, "aus": [130, 300, 480, 600]}]},
+   {"text": "Stülpe den Ring über die Astspitze.", "bild": {"reel": "18", "t": 11.4, "aus": [130, 300, 480, 600]}},
+   {"text": "Lass ihn am Ast hinuntergleiten.", "bild": {"reel": "18", "t": 14.5, "aus": [130, 300, 480, 600]}},
+   {"text": "Drehe ihn waagrecht. Schiebe ihn nach oben.", "bild": {"reel": "18", "t": 16.0, "aus": [130, 300, 480, 600]}},
+   {"text": "Hebe ihn über die Spitze ab.", "bild": [{"reel": "18", "t": 18.5, "aus": [130, 60, 560, 700]}, {"reel": "18", "t": 19.9, "aus": [130, 280, 480, 600]}]}
+  ],
+  "fertig": "Bravo! Dein Knobelrätsel ist fertig."
+ },
+ {
+  "id": "natur-jakobsleiter",
+  "title": "Jakobsleiter",
+  "areaId": "holz",
+  "gruppe": "Bauen mit Holz",
+  "stufen": [4, 5],
+  "niveau": 3,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "12", "t": 50.0, "aus": [0, 130, 720, 900]},
+  "material": ["holzklotz", "baumwollband", "naegel", "hammer", "stifte", "schere"],
+  "steps": [
+   {"text": "Male ein Bild auf das erste Klötzchen.", "bild": {"reel": "12", "t": 5.1, "aus": [60, 520, 600, 675]}},
+   {"text": "Nagle zwei rosa Bänder an die Schmalseite.", "bild": {"reel": "12", "t": 9.5, "aus": [0, 420, 720, 860]}},
+   {"text": "Drehe es um. Nagle Grün an die andere Seite.", "bild": {"reel": "12", "t": 14.0, "aus": [0, 420, 720, 860]}},
+   {"text": "Lege es hin. Rosa nach rechts, Grün nach links.", "bild": {"reel": "12", "t": 18.2, "aus": [40, 500, 640, 750]}},
+   {"text": "Lege das zweite Klötzchen darauf.", "bild": {"reel": "12", "t": 19.7, "aus": [40, 500, 640, 750]}},
+   {"text": "Führe Rosa rechts herum und oben nach links.", "bild": {"reel": "12", "t": 22.6, "aus": [40, 480, 640, 750]}},
+   {"text": "Nagle Rosa fest. Nicht zu straff!", "bild": {"reel": "12", "t": 26.0, "aus": [0, 420, 720, 860]}},
+   {"text": "Mach es mit Grün gleich, nur andersherum.", "bild": {"reel": "12", "t": 31.0, "aus": [0, 420, 720, 860]}},
+   {"text": "Lege das nächste Klötzchen auf. Wiederhole alles.", "bild": [{"reel": "12", "t": 36.0, "aus": [40, 480, 640, 750]}, {"reel": "12", "t": 39.7, "aus": [0, 200, 720, 900]}]},
+   {"text": "Halte das oberste Klötzchen. Kippe es hin und her.", "bild": {"reel": "12", "t": 48.5, "aus": [0, 130, 720, 900]}}
+  ],
+  "fertig": "Bravo! Deine Jakobsleiter ist fertig."
+ },
+ {
+  "id": "natur-drehscheibe",
+  "title": "Drehscheibe",
+  "areaId": "holz",
+  "gruppe": "Naturmaterial",
+  "stufen": [3, 4],
+  "niveau": 2,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "15", "t": 2.0, "aus": [0, 130, 720, 900]},
+  "material": ["astscheibe", "stifte", "bohrer", "schraubzwinge", "schnur", "schere"],
+  "steps": [
+   {"text": "Male eine Schnecke auf die Scheibe.", "bild": {"reel": "15", "t": 6.5, "aus": [80, 500, 600, 750]}},
+   {"text": "Male die Fühler.", "bild": {"reel": "15", "t": 11.0, "aus": [80, 500, 600, 750]}},
+   {"text": "Drehe die Scheibe um. Male ein Schneckenhaus.", "bild": [{"reel": "15", "t": 15.5, "aus": [80, 500, 600, 750]}, {"reel": "15", "t": 20.4, "aus": [80, 500, 600, 750]}]},
+   {"text": "Bohre links und rechts ein Loch.", "bild": {"reel": "15", "t": 22.5, "aus": [0, 280, 720, 900]}, "achtung": ["Einspannen!"]},
+   {"text": "Schneide zwei Schnüre ab. Je 50 cm.", "bild": {"reel": "15", "t": 24.6, "aus": [60, 480, 600, 675]}},
+   {"text": "Fädle je eine Schnur durch ein Loch.", "bild": {"reel": "15", "t": 26.3, "aus": [60, 480, 600, 675]}},
+   {"text": "Knote jede Schnur zu einer Schlaufe.", "bild": {"reel": "15", "t": 27.2, "aus": [60, 480, 600, 675]}},
+   {"text": "Halte die Schlaufen. Drehe die Scheibe auf und ziehe.", "bild": [{"reel": "15", "t": 28.2, "aus": [60, 480, 600, 675]}, {"reel": "15", "t": 31.0, "aus": [0, 130, 720, 900]}]}
+  ],
+  "fertig": "Bravo! Deine Drehscheibe ist fertig."
+ }
+]

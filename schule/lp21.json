@@ -763,6 +763,26 @@
   "flieger-froggy": ["TTG.2.B.1.4", "TTG.2.D.1.3"],
   "flieger-flying-bird": ["TTG.2.B.1.4", "TTG.2.D.1.3"],
   "flieger-wolken-jet": ["TTG.2.B.1.4", "TTG.2.D.1.3"],
-  "fingerstricken": ["TTG.2.D.1.4"]
+  "fingerstricken": ["TTG.2.D.1.4"],
+  "natur-hui-stab": ["TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "natur-propeller": ["TTG.2.B.1.4", "TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "natur-libelle": ["TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.3.B.2", "TTG.3.B.4"],
+  "natur-astdose": ["TTG.2.B.1.3", "TTG.2.D.1.1", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "natur-herbstring": ["TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2", "TTG.3.B.4"],
+  "natur-suncatcher": ["TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "natur-mosaik-suncatcher": ["TTG.2.C.1.2", "TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "natur-kastanienherz": ["TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "natur-kastanien-stern": ["TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2", "TTG.3.B.4"],
+  "natur-walnuss-rentier": ["TTG.2.D.1.2", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.3.B.2", "TTG.3.B.4"],
+  "natur-holz-jojo": ["TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "natur-knobel-brettchen": ["TTG.2.D.1.1", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "natur-knobel-ast": ["TTG.2.D.1.1", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "natur-jakobsleiter": ["TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "natur-drehscheibe": ["TTG.2.D.1.1", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "natur-eichelpfeife": ["TTG.2.E.1.1", "TTG.3.B.2"],
+  "natur-astfloete": ["TTG.2.D.1.1", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "natur-schwirrholz": ["TTG.2.D.1.1", "TTG.2.D.1.2", "TTG.2.E.1.1", "TTG.2.E.1.2"],
+  "natur-zugscheibe": ["TTG.2.D.1.1", "TTG.2.D.1.3", "TTG.2.E.1.1", "TTG.2.E.1.2", "TTG.3.B.2"],
+  "natur-schaumscheibe": ["TTG.2.A.2", "TTG.2.C.1.1"]
  }
 }

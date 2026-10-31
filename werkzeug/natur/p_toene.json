@@ -1,0 +1,109 @@
+[
+ {
+  "id": "natur-eichelpfeife",
+  "title": "Eichelhütchen-Pfeife",
+  "areaId": "holz",
+  "gruppe": "Naturmaterial",
+  "stufen": [3, 4],
+  "niveau": 1,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "0", "t": 6.75, "aus": [230, 790, 280, 280]},
+  "material": ["eichel"],
+  "steps": [
+   {"text": "Nimm ein leeres Eichelhütchen. Die Öffnung zeigt nach aussen.", "bild": {"reel": "1", "t": 5.1, "aus": [0, 380, 720, 900]}},
+   {"text": "Klemme es zwischen die Daumen. Lass oben einen Spalt.", "bild": [{"reel": "1", "t": 6.9, "aus": [0, 380, 720, 900]}, {"reel": "1", "t": 8.5, "aus": [0, 380, 720, 900]}]},
+   {"text": "Lege die Lippen an die Daumen. Blase kräftig über den Spalt.", "bild": {"reel": "1", "t": 1.5, "aus": [230, 610, 380, 380]}},
+   {"text": "Zweiter Griff: Klemme es zwischen zwei Finger. Mach eine Faust und blase.", "bild": [{"reel": "0", "t": 12.25, "aus": [100, 760, 520, 400]}, {"reel": "0", "t": 16.75, "aus": [130, 640, 380, 380]}]}
+  ],
+  "fertig": "Bravo! Deine Eichelhütchen-Pfeife ist fertig."
+ },
+ {
+  "id": "natur-astfloete",
+  "title": "Ast-Flöte",
+  "areaId": "schnitzen",
+  "gruppe": "Projekte",
+  "stufen": [5, 6],
+  "niveau": 3,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "24", "t": 58.7, "aus": [120, 400, 520, 520]},
+  "material": ["ast", "taschenmesser", "schnitzhandschuh", "saege", "bohrer", "schraubstock", "stab"],
+  "steps": [
+   {"text": "Säge einen geraden Ast ab.", "bild": {"reel": "24", "t": 7.0, "aus": [230, 200, 490, 700]}, "achtung": ["Nur mit Lehrperson"]},
+   {"text": "Spanne den Ast ein. Säge ein Stück von 12 cm ab.", "bild": {"reel": "24", "t": 8.3, "aus": [0, 200, 720, 900]}, "achtung": ["Einspannen!"]},
+   {"text": "Stosse das weiche Mark mit einem Stab heraus.", "bild": {"reel": "24", "t": 11.5, "aus": [0, 500, 720, 780]}},
+   {"text": "Bohre das Loch der Länge nach grösser.", "bild": {"reel": "24", "t": 14.5, "aus": [0, 200, 720, 900]}, "achtung": ["Einspannen!"]},
+   {"text": "Schneide an einem Ende die Rinde ringsum weg.", "bild": {"reel": "24", "t": 18, "aus": [0, 200, 720, 900]}},
+   {"text": "Schnitze eine Kerbe ins helle Holz.", "bild": {"reel": "24", "t": 25.3, "aus": [0, 200, 720, 900]}},
+   {"text": "Schnitze weiter, bis ein Fenster zum Loch entsteht.", "bild": [{"reel": "24", "t": 32.3, "aus": [0, 200, 720, 900]}, {"reel": "24", "t": 29.8, "aus": [0, 200, 720, 900]}]},
+   {"text": "Schnitze zwei runde Grifflöcher.", "bild": {"reel": "24", "t": 40, "aus": [0, 200, 720, 900]}},
+   {"text": "Schnitze aus einem Zweig einen Zapfen. Eine Seite wird flach.", "bild": [{"reel": "24", "t": 48.3, "aus": [0, 200, 720, 900]}, {"reel": "24", "t": 55.5, "aus": [0, 200, 720, 900]}]},
+   {"text": "Stecke den Zapfen ins Loch. Die flache Seite schaut zum Fenster.", "bild": [{"reel": "24", "t": 58.7, "aus": [0, 200, 720, 900]}, {"reel": "24", "t": 62.5, "aus": [0, 200, 720, 900]}]}
+  ],
+  "fertig": "Bravo! Deine Ast-Flöte ist fertig."
+ },
+ {
+  "id": "natur-schwirrholz",
+  "title": "Schwirrholz",
+  "areaId": "schnitzen",
+  "gruppe": "Projekte",
+  "stufen": [4, 5],
+  "niveau": 2,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "16", "t": 8.0, "aus": [120, 330, 540, 675]},
+  "material": ["holzbrett", "schnur", "taschenmesser", "schnitzhandschuh", "schleifpapier", "bohrer", "schraubzwinge"],
+  "steps": [
+   {"text": "Nimm ein flaches Stück Holz von 20 cm.", "bild": {"reel": "16", "t": 11.7, "aus": [120, 560, 600, 600]}},
+   {"text": "Schnitze die Kanten rund.", "bild": {"reel": "16", "t": 14, "aus": [0, 380, 720, 900]}},
+   {"text": "Schleife das Holz glatt.", "bild": {"reel": "16", "t": 19.7, "aus": [0, 380, 720, 900]}},
+   {"text": "Spanne das Holz ein. Bohre an einem Ende ein Loch.", "bild": {"reel": "16", "t": 21.3, "aus": [0, 380, 720, 900]}, "achtung": ["Einspannen!"]},
+   {"text": "Fädle die Schnur durchs Loch.", "bild": {"reel": "16", "t": 22.9, "aus": [0, 380, 720, 900]}},
+   {"text": "Mach einen festen Knoten.", "bild": {"reel": "16", "t": 24.4, "aus": [0, 120, 720, 900]}},
+   {"text": "Halte die Schnur fest. Schwinge das Holz im Kreis.", "bild": {"reel": "16", "t": 25.6, "aus": [0, 410, 720, 620]}, "achtung": ["Abstand halten!"]}
+  ],
+  "fertig": "Bravo! Dein Schwirrholz ist fertig."
+ },
+ {
+  "id": "natur-zugscheibe",
+  "title": "Zug-Scheibe",
+  "areaId": "holz",
+  "gruppe": "Naturmaterial",
+  "stufen": [4, 5],
+  "niveau": 2,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "25", "t": 47.9, "aus": [0, 120, 720, 900]},
+  "material": ["astscheibe", "holzbrett", "stab", "schnur", "perle", "leim", "stifte", "bohrer", "schraubzwinge", "wolle", "schere", "lineal"],
+  "steps": [
+   {"text": "Male bunte Punkte auf die Astscheibe.", "bild": {"reel": "25", "t": 7.0, "aus": [0, 200, 720, 900]}},
+   {"text": "Spanne die Scheibe ein. Bohre ein Loch in die Mitte.", "bild": {"reel": "25", "t": 8.6, "aus": [0, 200, 720, 900]}, "achtung": ["Einspannen!"]},
+   {"text": "Bohre ein Loch in die Leiste.", "bild": {"reel": "25", "t": 13.4, "aus": [0, 200, 720, 900]}, "achtung": ["Einspannen!"]},
+   {"text": "Bohre ein kleines Loch quer durch den Rundstab.", "bild": {"reel": "25", "t": 17.3, "aus": [0, 200, 720, 900]}, "achtung": ["Einspannen!"]},
+   {"text": "Fädle 30 cm Schnur durchs Querloch. Mach einen Knoten.", "bild": [{"reel": "25", "t": 26, "aus": [0, 200, 720, 900]}, {"reel": "25", "t": 29.5, "aus": [0, 200, 720, 900]}]},
+   {"text": "Stecke Perle, Leiste und zweite Perle auf den Stab.", "bild": [{"reel": "25", "t": 31.5, "aus": [0, 200, 720, 900]}, {"reel": "25", "t": 33.8, "aus": [0, 200, 720, 900]}]},
+   {"text": "Gib Leim ans Stabende. Stecke die Scheibe auf.", "bild": [{"reel": "25", "t": 35.0, "aus": [0, 200, 720, 900]}, {"reel": "25", "t": 36.9, "aus": [0, 200, 720, 900]}]},
+   {"text": "Stecke vorne und hinten eine Perle auf.", "bild": [{"reel": "25", "t": 39.0, "aus": [0, 200, 720, 900]}, {"reel": "25", "t": 44, "aus": [0, 200, 720, 900]}]},
+   {"text": "Umwickle den Griff mit Wolle.", "bild": {"reel": "25", "t": 3.8, "aus": [240, 700, 480, 580]}},
+   {"text": "Wickle die Schnur auf. Halte den Griff und zieh.", "bild": [{"reel": "25", "t": 50.0, "aus": [0, 520, 720, 760]}, {"reel": "25", "t": 5.0, "aus": [0, 520, 720, 760]}]}
+  ],
+  "fertig": "Bravo! Deine Zug-Scheibe ist fertig."
+ },
+ {
+  "id": "natur-schaumscheibe",
+  "title": "Schaum-Scheibe",
+  "areaId": "experimente",
+  "gruppe": "Wasser, Natur und Stoffe",
+  "stufen": [3, 4],
+  "niveau": 1,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "26", "t": 9.0, "aus": [200, 780, 520, 440]},
+  "material": ["astscheibe", "seife"],
+  "steps": [
+   {"text": "Giesse Seifenblasenwasser auf die Astscheibe.", "bild": {"reel": "26", "t": 1.0, "aus": [0, 760, 720, 500]}},
+   {"text": "Lass es abtropfen.", "bild": {"reel": "26", "t": 2.5, "aus": [0, 760, 720, 500]}},
+   {"text": "Halte die Scheibe an den Mund.", "bild": {"reel": "26", "t": 3.5, "aus": [200, 650, 520, 520]}},
+   {"text": "Blase kräftig durchs Holz.", "bild": {"reel": "26", "t": 5.5, "aus": [200, 650, 520, 520]}},
+   {"text": "Der Schaum kommt heraus.", "bild": {"reel": "26", "t": 6.5, "aus": [200, 650, 520, 520]}},
+   {"text": "Halte die Scheibe flach. Schau die Schaumwolke an.", "bild": {"reel": "26", "t": 8.5, "aus": [200, 780, 520, 440]}}
+  ],
+  "fertig": "Bravo! Deine Schaum-Scheibe ist fertig."
+ }
+]

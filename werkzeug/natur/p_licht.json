@@ -1,0 +1,116 @@
+[
+ {
+  "id": "natur-herbstring",
+  "title": "Herbstring mit Drahtschrift",
+  "areaId": "holz",
+  "gruppe": "Naturmaterial",
+  "stufen": [4, 5],
+  "niveau": 3,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "3", "t": 20, "aus": [0, 130, 720, 900]},
+  "material": ["holzring", "ast", "draht", "perle", "moos", "eichel", "papier", "bleistift", "zange", "bohrer", "schraubzwinge", "heisskleber"],
+  "steps": [
+   {"text": "Schreibe ein Wort gross auf Papier.", "bild": {"reel": "3", "t": 6.7, "aus": [300, 240, 420, 525]}},
+   {"text": "Biege den Draht (1 mm) der Schrift nach.", "bild": {"reel": "3", "t": 5.6, "aus": [80, 390, 640, 800]}},
+   {"text": "Forme kleine Schlaufen mit der Zange.", "bild": {"reel": "3", "t": 6.7, "aus": [0, 200, 720, 900]}},
+   {"text": "Halte das Wort an die Vorlage. Vergleiche.", "bild": {"reel": "3", "t": 8, "aus": [0, 150, 720, 900]}},
+   {"text": "Fädle Perlen auf kurze Drähte. Mach mehrere Ketten.", "bild": {"reel": "3", "t": 9.4, "aus": [0, 380, 720, 900]}},
+   {"text": "Bohre unten Löcher in den Ast.", "bild": {"reel": "3", "t": 10.3, "aus": [430, 680, 290, 362]}, "achtung": ["Einspannen!"]},
+   {"text": "Binde den Ast quer in den Ring (30–40 cm).", "bild": {"reel": "3", "t": 12, "aus": [0, 250, 720, 900]}},
+   {"text": "Befestige die Schrift mit dünnem Draht am Ast.", "bild": {"reel": "3", "t": 14.1, "aus": [0, 600, 528, 660]}},
+   {"text": "Drehe oben eine Perlenkette zum Aufhängen fest.", "bild": {"reel": "3", "t": 13.8, "aus": [0, 0, 720, 900]}},
+   {"text": "Klebe unten Moos, Beeren und Eicheln in den Ring.", "bild": [{"reel": "3", "t": 15, "aus": [0, 380, 720, 900]}, {"reel": "3", "t": 15.9, "aus": [0, 0, 720, 900]}], "achtung": ["Leim heiss!"]}
+  ],
+  "fertig": "Bravo! Dein Herbstring ist fertig."
+ },
+ {
+  "id": "natur-suncatcher",
+  "title": "Suncatcher aus Astscheiben",
+  "areaId": "holz",
+  "gruppe": "Naturmaterial",
+  "stufen": [4, 5],
+  "niveau": 2,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "7", "t": 0.7, "aus": [0, 0, 720, 900]},
+  "material": ["astscheibe", "glasnugget", "schnur", "perle", "bohrer", "schraubzwinge", "leim"],
+  "steps": [
+   {"text": "Spanne eine Astscheibe ein: 8–10 cm breit, 2 cm dick.", "bild": {"reel": "7", "t": 1.8, "aus": [160, 340, 560, 700]}, "achtung": ["Einspannen!"]},
+   {"text": "Bohre ein Loch, knapp kleiner als der Nugget.", "bild": {"reel": "7", "t": 2.5, "aus": [0, 0, 720, 900]}, "achtung": ["Nur mit Lehrperson"]},
+   {"text": "Bohre oben am Rand ein kleines Loch.", "bild": {"reel": "7", "t": 5, "aus": [200, 530, 300, 375]}, "achtung": ["Einspannen!"]},
+   {"text": "Wähle einen Glasnugget aus.", "bild": {"reel": "7", "t": 4.3, "aus": [100, 380, 560, 700]}},
+   {"text": "Drücke ihn ins Loch. Locker? Ein Tropfen Leim hilft.", "bild": {"reel": "7", "t": 6.7, "aus": [40, 430, 640, 800]}},
+   {"text": "Ziehe eine Schnur durch. Knote eine Perle an.", "bild": {"reel": "7", "t": 7.9, "aus": [0, 0, 720, 900]}},
+   {"text": "Hänge ihn ins Licht.", "bild": {"reel": "7", "t": 9.8, "aus": [0, 0, 720, 900]}}
+  ],
+  "fertig": "Bravo! Dein Suncatcher ist fertig."
+ },
+ {
+  "id": "natur-mosaik-suncatcher",
+  "title": "Mosaik-Suncatcher",
+  "areaId": "holz",
+  "gruppe": "Naturmaterial",
+  "stufen": [4, 5],
+  "niveau": 2,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "19", "t": 1.8, "aus": [0, 100, 720, 900]},
+  "material": ["astscheibe", "glasnugget", "schnur", "perle", "bohrer", "schraubzwinge", "schleifpapier", "leim", "glaskugel"],
+  "steps": [
+   {"text": "Nimm eine grosse Astscheibe, etwa 15 cm breit.", "bild": {"reel": "21", "t": 6.4, "aus": [0, 40, 720, 900]}},
+   {"text": "Lass die Lehrperson viele Löcher bohren. Oben eines für die Schnur.", "bild": {"reel": "19", "t": 3.3, "aus": [120, 230, 520, 650]}, "achtung": ["Nur mit Lehrperson", "Einspannen!"]},
+   {"text": "Schleife die Lochränder glatt.", "bild": {"reel": "21", "t": 9.5, "aus": [0, 40, 720, 900]}},
+   {"text": "Wähle kleine Glasnuggets aus.", "bild": {"reel": "19", "t": 4.3, "aus": [0, 280, 720, 900]}},
+   {"text": "Gib etwas Leim ins Loch.", "bild": {"reel": "21", "t": 11, "aus": [0, 40, 720, 900]}},
+   {"text": "Drücke die Nuggets in die Löcher.", "bild": {"reel": "19", "t": 5.6, "aus": [0, 300, 640, 800]}},
+   {"text": "Oder: Klebe eine Glaskugel ins grosse Loch.", "bild": [{"reel": "21", "t": 21, "aus": [0, 0, 720, 900]}, {"reel": "21", "t": 26.8, "aus": [0, 30, 720, 900]}]},
+   {"text": "Ziehe eine Schnur durch. Knote eine Perle an.", "bild": {"reel": "19", "t": 7.6, "aus": [0, 0, 720, 900]}},
+   {"text": "Hänge ihn ins Licht.", "bild": {"reel": "19", "t": 11.3, "aus": [0, 100, 720, 900]}}
+  ],
+  "fertig": "Bravo! Dein Mosaik-Suncatcher ist fertig."
+ },
+ {
+  "id": "natur-kastanienherz",
+  "title": "Kastanienherz im Ring",
+  "areaId": "holz",
+  "gruppe": "Naturmaterial",
+  "stufen": [3, 4],
+  "niveau": 2,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "13", "t": 3, "aus": [0, 130, 720, 900]},
+  "material": ["kastanie", "draht", "holzring", "glaskugel", "perle", "schnur", "bohrer", "schraubstock", "zange", "schere"],
+  "steps": [
+   {"text": "Spanne eine Kastanie ein. Bohre ein Loch durch.", "bild": {"reel": "9", "t": 7.9, "aus": [0, 280, 720, 900]}, "achtung": ["Einspannen!"]},
+   {"text": "Fädle 20 bis 30 Kastanien auf einen Draht (80 cm).", "bild": {"reel": "13", "t": 8.6, "aus": [0, 380, 720, 900]}},
+   {"text": "Biege die Kette zu einem Herz.", "bild": {"reel": "13", "t": 12.6, "aus": [0, 380, 720, 900]}},
+   {"text": "Drehe die Drahtenden mit der Zange zusammen.", "bild": {"reel": "13", "t": 14.5, "aus": [0, 380, 720, 900]}},
+   {"text": "Biege das Drahtende nach innen.", "bild": {"reel": "13", "t": 24, "aus": [0, 380, 720, 900]}},
+   {"text": "Hänge die Glaskugel an einen dünnen Draht.", "bild": {"reel": "13", "t": 29.6, "aus": [0, 330, 720, 900]}},
+   {"text": "Binde Herz und Glaskugel oben am Ring (30 cm) fest.", "bild": [{"reel": "13", "t": 33, "aus": [0, 280, 720, 900]}, {"reel": "13", "t": 36.3, "aus": [0, 280, 720, 900]}]},
+   {"text": "Binde oben Schnur und Perlen an. Hänge das Herz auf.", "bild": {"reel": "13", "t": 39.5, "aus": [0, 180, 720, 900]}}
+  ],
+  "fertig": "Bravo! Dein Kastanienherz ist fertig."
+ },
+ {
+  "id": "natur-kastanien-stern",
+  "title": "Kastanien-Stern",
+  "areaId": "holz",
+  "gruppe": "Naturmaterial",
+  "stufen": [3, 4, 5],
+  "niveau": 2,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "9", "t": 3, "aus": [0, 100, 720, 900]},
+  "material": ["kastanie", "zahnstocher", "wolle", "perle", "bohrer", "schraubstock", "schere", "heisskleber", "schnur", "eichel", "stifte"],
+  "steps": [
+   {"text": "Spanne eine Kastanie ein. Bohre 6 bis 8 Löcher rundherum.", "bild": [{"reel": "9", "t": 6.3, "aus": [0, 280, 720, 900]}, {"reel": "9", "t": 8.3, "aus": [0, 280, 720, 900]}], "achtung": ["Einspannen!"]},
+   {"text": "Stecke in jedes Loch einen Zahnstocher.", "bild": {"reel": "11", "t": 7.9, "aus": [0, 300, 720, 900]}},
+   {"text": "Knote Wolle in der Mitte fest. Schneide das kurze Ende ab.", "bild": {"reel": "11", "t": 10.5, "aus": [0, 200, 720, 900]}},
+   {"text": "Wickle die Wolle um jeden Zahnstocher, immer rundherum.", "bild": {"reel": "9", "t": 11.4, "aus": [0, 180, 720, 900]}},
+   {"text": "Wickle weiter, bis der Stern gross ist. Knote die Wolle fest.", "bild": {"reel": "11", "t": 16.8, "aus": [0, 250, 720, 900]}},
+   {"text": "Klebe auf jede Spitze eine Perle.", "bild": {"reel": "9", "t": 18.6, "aus": [0, 290, 720, 900]}, "achtung": ["Leim heiss!"]},
+   {"text": "Binde eine Schnur an. Hänge den Stern auf.", "bild": {"reel": "9", "t": 20.7, "aus": [0, 0, 720, 900]}},
+   {"text": "Oder: Klebe eine Eichel auf die Kastanie.", "bild": {"reel": "11", "t": 27.7, "aus": [0, 200, 720, 900]}, "achtung": ["Leim heiss!"]},
+   {"text": "Klebe Holzperle, Eichelhut und Ahornflügel an. Male ein Gesicht.", "bild": [{"reel": "11", "t": 32, "aus": [0, 100, 720, 900]}, {"reel": "11", "t": 37.4, "aus": [0, 260, 720, 900]}], "achtung": ["Leim heiss!"]},
+   {"text": "Drehe die Figur wie einen Kreisel.", "bild": {"reel": "11", "t": 41.4, "aus": [0, 380, 720, 900]}}
+  ],
+  "fertig": "Bravo! Dein Kastanien-Stern ist fertig."
+ }
+]

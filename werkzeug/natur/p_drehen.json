@@ -1,0 +1,97 @@
+[
+ {
+  "id": "natur-hui-stab",
+  "title": "Hui-Stab",
+  "areaId": "schnitzen",
+  "gruppe": "Projekte",
+  "stufen": [4, 5],
+  "niveau": 3,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "27", "t": 60, "aus": [120, 240, 600, 750]},
+  "material": ["stab", "lineal", "bleistift", "feile", "taschenmesser", "schnitzhandschuh", "schleifpapier", "leim", "wolle", "holzbrett", "schere", "bohrer", "schraubzwinge", "stifte", "hammer", "naegel", "ast"],
+  "steps": [
+   {"text": "Nimm einen Stab, 22 cm lang. Zeichne alle 1 cm einen Strich.", "bild": {"reel": "27", "t": 14.5, "aus": [0, 190, 720, 900]}},
+   {"text": "Feile bei jedem Strich eine Kerbe, etwa 0,5 cm tief.", "bild": {"reel": "27", "t": 19.5, "aus": [0, 190, 720, 900]}},
+   {"text": "Schnitze das Griffende rund. Schleife es glatt.", "bild": [{"reel": "27", "t": 28.5, "aus": [60, 400, 600, 750]}, {"reel": "27", "t": 31, "aus": [100, 480, 600, 750]}], "achtung": ["Handschuh an!"]},
+   {"text": "Streiche Leim auf den Griff. Wickle Wolle darum.", "bild": [{"reel": "27", "t": 33, "aus": [0, 300, 720, 900]}, {"reel": "27", "t": 35, "aus": [40, 520, 600, 750]}]},
+   {"text": "Schneide vom Holzspatel ein Stück ab, 7 cm lang.", "bild": {"reel": "27", "t": 39.5, "aus": [0, 190, 720, 900]}},
+   {"text": "Zeichne die Diagonalen. Bohre in der Mitte ein Loch.", "bild": [{"reel": "27", "t": 41.5, "aus": [0, 190, 720, 900]}, {"reel": "27", "t": 45, "aus": [0, 190, 720, 900]}], "achtung": ["Einspannen!"]},
+   {"text": "Schleife das Stück. Male den Propeller an.", "bild": [{"reel": "27", "t": 48, "aus": [0, 190, 720, 900]}, {"reel": "27", "t": 55.5, "aus": [0, 190, 720, 900]}]},
+   {"text": "Zeichne die Mitte aufs Stabende. Bohre dort ein kleines Loch.", "bild": [{"reel": "27", "t": 51, "aus": [0, 190, 720, 900]}, {"reel": "27", "t": 53.5, "aus": [200, 220, 520, 650]}], "achtung": ["Einspannen!"]},
+   {"text": "Nagle den Propeller locker ans Stabende.", "bild": {"reel": "27", "t": 56.6, "aus": [0, 0, 720, 900]}},
+   {"text": "Reibe mit dem Ast über die Kerben. Drücke seitlich. Der Propeller dreht.", "bild": [{"reel": "23", "t": 6, "aus": [0, 380, 720, 900]}, {"reel": "23", "t": 12, "aus": [0, 380, 720, 900]}]}
+  ],
+  "fertig": "Bravo! Dein Hui-Stab ist fertig."
+ },
+ {
+  "id": "natur-propeller",
+  "title": "Zieh-Propeller",
+  "areaId": "holz",
+  "gruppe": "Naturmaterial",
+  "stufen": [4, 5],
+  "niveau": 3,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "22", "t": 66.5, "aus": [0, 190, 720, 900]},
+  "material": ["astscheibe", "stab", "eisstiel", "perle", "schnur", "ast", "leim", "bohrer", "schraubstock", "zange", "lineal", "bleistift", "schere"],
+  "steps": [
+   {"text": "Die Lehrperson sägt vom Ast ein dickes Stück ab.", "bild": {"reel": "22", "t": 5.2, "aus": [0, 190, 720, 900]}, "achtung": ["Nur mit Lehrperson"]},
+   {"text": "Spanne das Holz ein. Bohre oben und seitlich ein Loch.", "bild": [{"reel": "22", "t": 8.2, "aus": [0, 190, 720, 900]}, {"reel": "22", "t": 11.1, "aus": [0, 0, 720, 900]}], "achtung": ["Einspannen!"]},
+   {"text": "Die Lehrperson glättet die Lochränder.", "bild": {"reel": "22", "t": 13.5, "aus": [0, 380, 720, 900]}, "achtung": ["Nur mit Lehrperson"]},
+   {"text": "Bohre in zwei Glacestiele mittig ein Loch.", "bild": {"reel": "22", "t": 15.5, "aus": [0, 190, 720, 900]}, "achtung": ["Einspannen!"]},
+   {"text": "Stecke den Stab durchs Loch. Kürze ihn mit der Zange.", "bild": [{"reel": "22", "t": 18, "aus": [0, 380, 720, 900]}, {"reel": "22", "t": 19.5, "aus": [0, 380, 720, 900]}]},
+   {"text": "Klebe Perle, Stiele über Kreuz und rote Perle auf den Stab.", "bild": [{"reel": "22", "t": 22.7, "aus": [0, 380, 720, 900]}, {"reel": "22", "t": 35.3, "aus": [0, 380, 720, 900]}]},
+   {"text": "Markiere die Stelle am Seitenloch. Bohre dort quer durch den Stab.", "bild": [{"reel": "22", "t": 42, "aus": [0, 380, 720, 900]}, {"reel": "22", "t": 46.7, "aus": [0, 380, 720, 900]}], "achtung": ["Einspannen!"]},
+   {"text": "Schneide 20 cm Schnur ab. Zieh sie seitlich durchs Holz nach oben.", "bild": [{"reel": "22", "t": 50.2, "aus": [0, 380, 720, 900]}, {"reel": "22", "t": 55.5, "aus": [0, 380, 720, 900]}]},
+   {"text": "Knote die Schnur im Stabloch fest. Stecke den Stab ein.", "bild": {"reel": "22", "t": 60, "aus": [0, 380, 720, 900]}},
+   {"text": "Klebe unten eine Perle an. Binde ein Ästchen an die Schnur. Zieh!", "bild": [{"reel": "22", "t": 63.6, "aus": [0, 380, 720, 900]}, {"reel": "22", "t": 67, "aus": [0, 190, 720, 900]}]}
+  ],
+  "fertig": "Bravo! Dein Propeller ist fertig."
+ },
+ {
+  "id": "natur-libelle",
+  "title": "Blas-Libelle",
+  "areaId": "holz",
+  "gruppe": "Naturmaterial",
+  "stufen": [3, 4],
+  "niveau": 2,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "20", "t": 2.5, "aus": [0, 120, 720, 900]},
+  "material": ["papier", "trinkhalm", "ahornsamen", "glitter", "leim", "stifte", "bueroklammer", "heisskleber"],
+  "steps": [
+   {"text": "Rolle den Papierstreifen eng um den Trinkhalm.", "bild": [{"reel": "20", "t": 3.8, "aus": [0, 380, 720, 900]}, {"reel": "20", "t": 9.5, "aus": [0, 380, 720, 900]}]},
+   {"text": "Zieh das Röhrchen ab. Klebe die Naht zu.", "bild": [{"reel": "20", "t": 11, "aus": [0, 380, 720, 900]}, {"reel": "20", "t": 13, "aus": [0, 380, 720, 900]}]},
+   {"text": "Gib oben Leim hinein. Drücke das Ende zu und klemme es.", "bild": [{"reel": "20", "t": 19, "aus": [0, 380, 720, 900]}, {"reel": "20", "t": 23, "aus": [0, 380, 720, 900]}]},
+   {"text": "Streiche Leim auf die Ahornsamen. Streue Glitter darauf.", "bild": [{"reel": "20", "t": 25, "aus": [0, 380, 720, 900]}, {"reel": "20", "t": 26.5, "aus": [0, 380, 720, 900]}]},
+   {"text": "Male mit dem Stift Muster auf das zweite Paar.", "bild": {"reel": "20", "t": 28, "aus": [0, 300, 720, 900]}},
+   {"text": "Nimm die Klammer ab. Male ein Gesicht.", "bild": {"reel": "20", "t": 38, "aus": [0, 300, 720, 900]}},
+   {"text": "Zieh zwei feine Stiele vom Ahornsamen ab.", "bild": [{"reel": "20", "t": 41.3, "aus": [0, 200, 720, 900]}, {"reel": "20", "t": 43.5, "aus": [0, 300, 720, 900]}]},
+   {"text": "Klebe die Fühler oben in den Kopf.", "bild": [{"reel": "20", "t": 46.5, "aus": [0, 280, 720, 900]}, {"reel": "20", "t": 48.5, "aus": [0, 380, 720, 900]}], "achtung": ["Leim heiss!"]},
+   {"text": "Klebe die Flügel hinten an den Körper.", "bild": [{"reel": "20", "t": 50.3, "aus": [0, 280, 720, 900]}, {"reel": "20", "t": 52.7, "aus": [0, 380, 720, 900]}], "achtung": ["Leim heiss!"]},
+   {"text": "Stecke die Libelle auf den Halm. Blase kräftig!", "bild": [{"reel": "20", "t": 1.2, "aus": [0, 150, 720, 900]}, {"reel": "20", "t": 1.6, "aus": [0, 150, 720, 900]}]}
+  ],
+  "fertig": "Bravo! Deine Libelle ist fertig."
+ },
+ {
+  "id": "natur-astdose",
+  "title": "Astdose mit Drehdeckel",
+  "areaId": "holz",
+  "gruppe": "Naturmaterial",
+  "stufen": [4, 5],
+  "niveau": 3,
+  "kanal": "Helga Gesang",
+  "titelbild": {"reel": "10", "t": 29.5, "aus": [0, 225, 720, 900]},
+  "material": ["ast", "stab", "filz", "schere", "bleistift", "bohrer", "schraubstock", "saege"],
+  "steps": [
+   {"text": "Die Lehrperson sägt vom Ast einen Deckel ab.", "bild": [{"reel": "10", "t": 2.8, "aus": [0, 190, 720, 900]}, {"reel": "10", "t": 5.7, "aus": [0, 300, 720, 900]}], "achtung": ["Nur mit Lehrperson"]},
+   {"text": "Die Lehrperson bohrt die Dose mit dem Forstnerbohrer aus.", "bild": [{"reel": "10", "t": 8.5, "aus": [0, 190, 720, 900]}, {"reel": "10", "t": 12.1, "aus": [0, 190, 720, 900]}], "achtung": ["Nur mit Lehrperson"]},
+   {"text": "Lege den Deckel auf die Dose. Spanne beides ein.", "bild": {"reel": "10", "t": 15, "aus": [0, 190, 720, 900]}, "achtung": ["Einspannen!"]},
+   {"text": "Bohre am Rand ein Loch durch den Deckel in die Dose.", "bild": {"reel": "10", "t": 17.3, "aus": [0, 190, 720, 900]}, "achtung": ["Einspannen!"]},
+   {"text": "Die Lehrperson schleift die Dose innen glatt.", "bild": {"reel": "10", "t": 20.2, "aus": [0, 380, 720, 900]}, "achtung": ["Nur mit Lehrperson"]},
+   {"text": "Stecke den Rundstab ins Loch. Zeichne oben die Länge an.", "bild": {"reel": "10", "t": 24.3, "aus": [0, 380, 720, 900]}},
+   {"text": "Die Lehrperson sägt den Stab ab.", "bild": {"reel": "10", "t": 26, "aus": [0, 380, 720, 900]}, "achtung": ["Nur mit Lehrperson"]},
+   {"text": "Schneide einen Filzkreis aus. Lege ihn in die Dose.", "bild": [{"reel": "10", "t": 27.3, "aus": [0, 380, 720, 900]}, {"reel": "10", "t": 28.5, "aus": [0, 240, 720, 900]}]},
+   {"text": "Stecke den Stab in die Dose. Setze den Deckel auf.", "bild": {"reel": "10", "t": 33.5, "aus": [0, 460, 720, 820]}}
+  ],
+  "fertig": "Bravo! Deine Astdose ist fertig."
+ }
+]

@@ -123,6 +123,7 @@ HAND = {
     'zw-froebelstern-streifen': ['TTG.2.D.1.2', 'TTG.2.C.1.2'],
     'zw-taschengriff-cobra': ['TTG.2.D.1.2', 'TTG.2.B.1.2'],
     'zw-brettchenweben-perlen': ['TTG.2.D.1.4', 'TTG.2.E.1.2', 'TTG.2.B.1.2'],
+    'natur-schaumscheibe': ['TTG.2.A.2', 'TTG.2.C.1.1'],
 }
 
 ORDNUNG = list(TITEL)

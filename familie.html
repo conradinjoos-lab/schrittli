@@ -1070,7 +1070,7 @@ body.beamer .fm-knopf{left:calc(12px + env(safe-area-inset-left,0px));top:calc(8
 .mk-bild{position:relative;width:100%;aspect-ratio:1;border-radius:14px;background:#F5F6F8;display:grid;place-items:center;box-shadow:inset 0 0 0 3px transparent}
 .mk-bild>.mat-ico,.mk-bild>.mat-svg{width:76%;height:76%}
 .mk-bild .mat-emoji{display:grid;place-items:center;font-size:34px}
-.v3 .mk-bild img{mix-blend-mode:normal}
+.v3 .mk-bild img,.v3 .v3-mat .pik img{mix-blend-mode:normal}
 .mk-bild>i{position:absolute;right:-5px;top:-5px;width:32px;height:32px;border-radius:50%;background:#3BB273;color:#fff;display:none;place-items:center;font-style:normal;font-weight:900;font-size:18px}
 .mk.da .mk-bild{background:#E6F4EC;box-shadow:inset 0 0 0 3px #3BB273}
 .mk.da .mk-bild>i{display:grid}
@@ -1418,7 +1418,7 @@ function kidModal(html,actions={}){ return modal(html,actions,'kid'); }
 /* ============================== Fehler melden ============================== */
 /* Knopf auf jeder Seite, auch über Fenstern und in der Kachelwahl. Die Meldung geht mit Ort (Seite, Video, Schritt, Zeit) und Stand an den Worker werkzeug/anmelden (/melden)
    und erscheint in der Online-Kontrolle. Keine Namen, kein Konto, nichts aus dem Profil. Offline bleibt sie in «schrittli.melden.warte» (dieselbe Warteschlange wie vorlagen/melden.js). */
-const MELDEN='https://schrittli-anmelden.conradinjoos.workers.dev/melden', FM_WARTE='schrittli.melden.warte', APP_STAND='2026-10-31-0634f0a';   // __STAND__ ersetzt quelle/bauen.sh
+const MELDEN='https://schrittli-anmelden.conradinjoos.workers.dev/melden', FM_WARTE='schrittli.melden.warte', APP_STAND='2026-10-31-e8bb404';   // __STAND__ ersetzt quelle/bauen.sh
 let ORT=null;   // vom aktuellen Screen gesetzt: ()=>({video,titel,schritt})
 function fmGeraet(){ const u=navigator.userAgent; const os=/iPad/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1)?'iPad':/iPhone/.test(u)?'iPhone':/Android/.test(u)?'Android':/CrOS/.test(u)?'Chromebook':/Windows/.test(u)?'Windows':/Mac/.test(u)?'Mac':'anderes'; const br=/Edg\//.test(u)?'Edge':/Firefox\//.test(u)?'Firefox':/Chrome\//.test(u)?'Chrome':/Safari\//.test(u)?'Safari':''; return (os+' '+br).trim(); }
 function fmAdresse(){ const u=new URL(location.href); for(const k of [...u.searchParams.keys()]) if(/token|schein|schluessel|code|key|name/i.test(k)) u.searchParams.delete(k); return (u.pathname+u.search+u.hash).replace(/[0-9a-f]{32,}/gi,'…'); }

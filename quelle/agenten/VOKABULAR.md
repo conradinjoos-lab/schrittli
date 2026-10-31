@@ -138,5 +138,16 @@ Jedes Video bekommt `material: ["id", "id", …]`. Nur diese IDs verwenden (Spal
 | naehmaschine | Nähmaschine |  |
 | buegeleisen | Bügeleisen |  |
 | vlieseline | Vlieseline | Polster-Einlage, Verstärkung |
+| astscheibe | Astscheibe | Baumscheibe, Holzscheibe mit Rinde |
+| walnuss | Walnuss | ganze Nuss oder Schale |
+| kastanie | Kastanie | Rosskastanie |
+| eichel | Eichel | auch leere Eichelhütchen |
+| ahornsamen | Ahornsamen | Flügel vom Ahorn |
+| tannenzweig | Tannenzweig | |
+| holzring | Holzring | |
+| glasnugget | Glasnugget | flache Glassteine |
+| glaskugel | Glaskugel | kleine Lampe oder Kugel als Anhänger |
+| pompon | Pompon | kleine Bastelkugel |
+| glitter | Glitter | |
 
 Fehlt etwas Wichtiges, darf eine neue id ergänzt werden – dann bitte im Bericht nennen (id + Name).
