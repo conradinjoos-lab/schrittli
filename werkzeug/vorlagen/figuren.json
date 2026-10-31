@@ -7267,6 +7267,12 @@
    "name": "Michael Jackson",
    "welt": "Musik",
    "datei": "wu-michael-jackson.png"
+  },
+  {
+   "id": "wu-fc-neunkirch",
+   "name": "FC Neunkirch",
+   "welt": "Fussball",
+   "datei": "wu-fc-neunkirch.png"
   }
  ]
 }

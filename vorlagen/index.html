@@ -591,8 +591,9 @@ function auswahl(){
     $('nichts').hidden=alle>0;
     if(!alle){$('wunsch').open=true;if(!$('w-name').dataset.selbst)$('w-name').value=e.target.value.trim().slice(0,40)}
   });
-  // Fehlendes Motiv wünschen: Claude zeichnet es, die Lehrperson prüft es und schaltet es auf
+  // Fehlendes Motiv wünschen: Comic zeichnet Claude, Echt sucht es als echtes Bild; die Lehrperson prüft es und schaltet es auf
   $('w-name').addEventListener('input',e=>e.target.dataset.selbst=1);
+  $('w-name').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();$('w-antwort').textContent='⚠ Comic oder Echt?'}});   // sonst nähme die Eingabetaste still den ersten Knopf
   $('wunsch-form').addEventListener('submit',async e=>{
     e.preventDefault();const a=$('w-antwort'),name=$('w-name').value.trim(),stil=e.submitter?.value||'comic',knoepfe=e.target.querySelectorAll('button');
     if(name.length<2){a.textContent='⚠ Motiv fehlt';$('w-name').focus();return}
@@ -600,7 +601,7 @@ function auswahl(){
     try{
       const r=await fetch('https://schrittli-anmelden.conradinjoos.workers.dev/wunsch/neu',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,text:'',stil})});
       const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(r.status===429?'⚠ Später nochmals':'⚠ Nicht geklappt');
-      a.textContent=j.figur&&byId[j.figur]?`✓ Gibt es: ${byId[j.figur].name}`:j.neu?'✓ Wird gezeichnet':'✓ Kommt bald';
+      a.textContent=j.figur&&byId[j.figur]?`✓ Gibt es: ${byId[j.figur].name}`:j.neu?(stil==='echt'?'✓ Wird gesucht':'✓ Wird gezeichnet'):'✓ Kommt bald';
       $('w-name').value='';delete $('w-name').dataset.selbst;
     }catch(err){a.textContent=err instanceof TypeError?'⚠ Offline':err.message}
     finally{knoepfe.forEach(k=>k.disabled=false)}

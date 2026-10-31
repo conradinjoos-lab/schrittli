@@ -545,3 +545,11 @@ Kinder wünschen sich im Vorlagen-Generator ein fehlendes Motiv. Claude zeichnet
 | Matterhorn | wu-matterhorn | – | Claude (Anthropic), gewünscht im Vorlagen-Generator, geprüft von der Lehrperson | eigene Zeichnung |
 | Gecko | wu-gecko | – | Claude (Anthropic), gewünscht im Vorlagen-Generator, geprüft von der Lehrperson | eigene Zeichnung |
 | Michael Jackson | wu-michael-jackson | – | Claude (Anthropic), gewünscht im Vorlagen-Generator, geprüft von der Lehrperson | eigene Zeichnung |
+
+## Echte Bilder (Wünsche)
+
+Logos und Bilder, die die Lehrperson in der Kontrolle unter «Wünsche» einsetzt.
+
+| Motiv | Figur-ID | URL | Autor | Lizenz |
+|---|---|---|---|---|
+| FC Neunkirch | wu-fc-neunkirch | – | Lehrperson, Unterrichtsmaterial | Schulgebrauch |
