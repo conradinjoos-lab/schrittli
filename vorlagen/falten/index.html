@@ -390,9 +390,100 @@ function streifen(b,l,col,Lmax){   // Hexentreppe: Streifen mit Falzmarken; zu l
     out.push({flaechen:[{pts:rect(0,0,lg,b),col}],laschen:start+lg<L-0.01?[rect(lg,0,lg+b,b)]:[],falz,deko:[]}); }
   return out;
 }
+// Hexentreppen-Tiere: alles in Streifenbreiten, y nach unten. Punkte mit drittem Wert sind Ecken, Kopf-Hälften gehen von oben nach unten.
+const cr=(z,a,b,w,n)=>[...Array(n)].map((_,i)=>{ const t=i/n, f=j=>0.5*(2*a[j]+(b[j]-z[j])*t+(2*z[j]-5*a[j]+4*b[j]-w[j])*t*t+(3*a[j]-z[j]-3*b[j]+w[j])*t*t*t); return [f(0),f(1)]; });
+function glatt(P,n=8){ const N=P.length, Q=k=>P[(k+N)%N], out=[];
+  for(let k=0;k<N;k++){ const a=Q(k), b=Q(k+1); out.push(...cr(a[2]?a:Q(k-1),a,b,b[2]?b:Q(k+2),n)); }
+  return out; }
+const linie=(P,n=8)=>[...P.slice(0,-1).flatMap((a,k)=>cr(P[k-1]||a,a,P[k+1],P[k+2]||P[k+1],n)),P[P.length-1]];
+const spiegel=H=>[...H,...H.slice(1,-1).reverse().map(([x,y,s])=>[-x,y,s])];
+function band(P,w0,w1=w0){   // Streifen um eine Mittellinie, beide Enden rund
+  const L=linie(P), N=L.length, A=[], B=[], w=i=>(w0+(w1-w0)*i/(N-1))/2;
+  L.forEach((p,i)=>{ const d=s2(L[Math.min(N-1,i+1)],L[Math.max(0,i-1)]), k=l2(d)||1, q=[-d[1]/k*w(i),d[0]/k*w(i)]; A.push(a2(p,q)); B.push(s2(p,q)); });
+  const kappe=(p,q,r)=>{ const a=Math.atan2(q[1]-p[1],q[0]-p[0]); return bogen2(p[0],p[1],r,a,a-Math.PI,8).slice(1,-1); };
+  return [...A,...kappe(L[N-1],A[N-1],w(N-1)),...B.slice().reverse(),...kappe(L[0],B[0],w(0))];
+}
+const ROSA='#F2A0A0', ROT='#E0524A', WEISS='#FFFFFF';
+const pu=(x,y,r,col)=>({pts:kreis2(x,y,r,18),zu:true,voll:true,col});
+const pl=(col,...P)=>({pts:P,zu:true,voll:true,col});
+const li=(...P)=>({pts:linie(P)});
+const beide=(...D)=>D.flatMap(d=>[d,{...d,pts:d.pts.map(p=>[-p[0],p[1]])}]);
+const augen=(x,y,r)=>beide(pu(x,y,r));
+const kuller=(x,y,r)=>beide(pu(x,y,r,WEISS),pu(x,y+r*0.15,r*0.5));
+const mund=(y,w)=>[li([0,y-0.14],[0,y]),...beide(li([0,y],[w*0.5,y+0.12],[w,y+0.02]))];
+const schnauz=(x,y)=>beide(li([x,y],[x+0.5,y-0.14]),li([x,y+0.12],[x+0.54,y+0.12]));
+const ARME=band([[-1.55,0.5],[-1.15,0.05],[-0.5,-0.1],[0.5,-0.1],[1.15,0.05],[1.55,0.5]],0.32);
+const FUESSE=spiegel([[0,-0.42],[0.26,-0.66],[0.58,-1.12],[0.96,-0.82],[0.9,-0.1],[0.62,0.56],[0,0.58]]);
+const KRALLEN=spiegel([[0,-0.3],[0.46,-0.52],[0.78,-1.22,1],[0.98,-0.72,1],[1.36,-1.02,1],[1.3,-0.5,1],[1.76,-0.5,1],[1.26,0.1],[0.62,0.56],[0,0.58]]);
+const TIERE={
+  katze:{name:'Katze',art:'quer',bein:0.42,kopf:[[0,-0.82],[0.42,-0.85,1],[1.02,-1.42,1],[1.12,-0.5],[1.18,0.1],[0.86,0.66],[0.4,0.88],[0,0.92]],
+    gesicht:[...augen(0.42,-0.12,0.12),pl(ROSA,[-0.1,0.16],[0.1,0.16],[0,0.28]),...mund(0.42,0.26),...schnauz(0.5,0.22)],
+    schwanz:band([[0,0.1],[0.12,-0.7],[0.45,-1.5],[1,-2.1],[1.5,-2.1]],0.42,0.26)},
+  hund:{name:'Hund',art:'quer',bein:0.5,kopf:[[0,-1],[0.5,-0.96],[0.8,-0.84],[1.3,-0.72],[1.56,-0.1],[1.42,0.56],[1.14,0.56],[1,0.1,1],[0.98,0.42],[0.62,0.86],[0,1.02]],
+    gesicht:[...augen(0.4,-0.22,0.12),...beide(li([0.8,-0.84],[0.96,-0.4],[1,0.1])),pl(ROSA,[-0.17,0.66],[0.17,0.66],[0.17,0.82],[0,0.92],[-0.17,0.82]),pu(0,0.16,0.2),li([0,0.34],[0,0.66]),...beide(li([0,0.66],[0.26,0.7],[0.46,0.56]))],
+    schwanz:band([[0,0.1],[0.1,-0.5],[0.42,-1.1],[0.8,-1.42]],0.42,0.22)},
+  baer:{name:'Bär',art:'quer',bein:0.62,kopf:[[0,-1],[0.46,-0.96,1],[0.55,-1.3],[0.9,-1.42],[1.25,-1.15],[1.18,-0.75],[0.96,-0.58,1],[1.12,0],[0.85,0.72],[0.42,0.98],[0,1.02]],
+    gesicht:[...augen(0.4,-0.26,0.11),...beide(li([0.72,-0.86],[0.92,-1.1],[1.02,-0.9])),{pts:kreis2(0,0.32,0.5,24),zu:true,voll:true,col:WEISS},pl(LINIE,[-0.17,0.08],[0.17,0.08],[0.1,0.24],[0,0.3],[-0.1,0.24]),...mund(0.46,0.24)],
+    schwanz:kreis2(0,-0.1,0.34,24)},
+  maus:{name:'Maus',art:'hoch',kopf:[[0,-0.85],[0.38,-0.88,1],[0.5,-1.45],[1,-1.72],[1.52,-1.4],[1.5,-0.85],[0.98,-0.52,1],[0.82,0.05],[0.42,0.72],[0,1.05]],
+    gesicht:[...augen(0.32,-0.12,0.11),pu(0,0.9,0.13,ROSA),...beide(li([0.62,-0.8],[0.9,-1.4],[1.26,-1.12])),...schnauz(0.26,0.5)],
+    arme:ARME,fuesse:FUESSE,schwanz:band([[0,0],[0.7,0.15],[1.3,0.7],[1.9,0.5],[2.5,-0.1]],0.2,0.1)},
+  hase:{name:'Hase',art:'hoch',kopf:[[0,-0.8],[0.16,-0.84,1],[0.12,-1.7],[0.45,-2.6],[0.8,-1.75],[0.72,-0.72,1],[1.02,-0.1],[0.8,0.6],[0.35,0.86],[0,0.88]],
+    gesicht:[...augen(0.38,-0.16,0.11),...beide(li([0.34,-0.95],[0.44,-1.9],[0.56,-1])),pl(ROSA,[-0.1,0.12],[0.1,0.12],[0,0.24]),...mund(0.36,0.24),...beide(pl(WEISS,[0,0.42],[0.1,0.42],[0.1,0.64],[0,0.64])),...schnauz(0.42,0.2)],
+    arme:ARME,fuesse:FUESSE,schwanz:kreis2(0,0,0.5,28)},
+  eichhorn:{name:'Eichhörnchen',art:'hoch',kopf:[[0,-0.8],[0.34,-0.84,1],[0.55,-1.7,1],[0.98,-0.66,1],[1.08,0],[0.72,0.66],[0.3,0.92],[0,0.96]],
+    gesicht:[...augen(0.36,-0.14,0.12),pl(LINIE,[-0.1,0.2],[0.1,0.2],[0,0.32]),...mund(0.46,0.22),...beide(li([0.42,0.26],[0.68,0.2],[0.82,0.02]))],
+    arme:ARME,fuesse:FUESSE,schwanz:glatt([[0,0.3],[0.9,0.4],[1.9,-0.2],[2.25,-1.3],[1.9,-2.6],[1.2,-3.1],[0.5,-3],[0.3,-2.6,1],[0.9,-2.2],[1.1,-1.4],[0.7,-0.6],[0,-0.4]]),schwanzMarke:[1.4,-0.6]},
+  frosch:{name:'Frosch',art:'hoch',kopf:[[0,-0.62],[0.34,-0.66,1],[0.42,-1.1],[0.82,-1.32],[1.22,-1.08],[1.22,-0.58],[1.5,0],[1.22,0.6],[0.6,0.84],[0,0.86]],
+    gesicht:[...kuller(0.82,-0.84,0.3),...augen(0.14,-0.1,0.04),{...pl(ROT),pts:bogen2(0,0.14,1,0,Math.PI,18).map(p=>[p[0],0.14+(p[1]-0.14)*0.58])}],
+    arme:ARME,fuesse:KRALLEN},
+  kueken:{name:'Küken',art:'hoch',kopf:[[0,-1.62,1],[0.16,-1.02,1],[0.46,-1.46,1],[0.52,-0.94,1],[1.02,-0.42],[1.1,0.2],[0.72,0.84],[0.3,1.04],[0,1.06]],
+    gesicht:[...kuller(0.42,-0.2,0.2),pl(FLAMME,[-0.3,0.14],[0.3,0.14],[0,0.58]),li([-0.3,0.14],[0.3,0.14]),...beide(pu(0.72,0.34,0.14,ROSA))],
+    arme:glatt(spiegel([[0,-0.3],[0.9,-0.32],[1.7,0],[1.92,0.46,1],[1.5,0.24,1],[1.36,0.62,1],[1,0.3,1],[0.8,0.56,1],[0.5,0.28],[0,0.3]])),
+    fuesse:KRALLEN,schwanz:glatt(spiegel([[0,-1.3,1],[0.25,-0.7,1],[0.6,-1.05,1],[0.55,-0.35,1],[0.95,-0.5,1],[0.45,0.2],[0,0.3]]))},
+  schlange:{name:'Schlange',art:'lang',l:100,kopf:[[0,-1.1],[0.62,-0.98],[1.02,-0.35],[0.72,0.55],[0.3,1.05],[0.1,1.18,1],[0.1,1.7],[0.3,2,1],[0,1.82,1]],
+    gesicht:[...kuller(0.42,-0.36,0.26),...augen(0.14,0.62,0.04),pl(ROT,[0.1,1.18],[0.1,1.7],[0.3,2],[0,1.82],[-0.3,2],[-0.1,1.7],[-0.1,1.18]),li([-0.5,0.56],[0,0.86],[0.5,0.56])],
+    schwanz:band([[0,0],[0.2,1],[0,2],[0.1,2.9]],1,0.1),schwanzMarke:[0,0.4]},
+  drache:{name:'Drache',art:'quer',l:70,bein:0.5,kopf:[[0,-0.86],[0.28,-0.9,1],[0.5,-1.6,1],[0.72,-0.82,1],[1.02,-1.05,1],[1.06,-0.42],[1.2,0.35],[0.95,0.82],[0.4,0.98],[0,1]],
+    gesicht:[...kuller(0.44,-0.34,0.24),...augen(0.2,0.2,0.05),{pts:[[-0.8,0.48],[-0.6,0.66],[-0.4,0.5],[-0.2,0.68],[0,0.52],[0.2,0.68],[0.4,0.5],[0.6,0.66],[0.8,0.48]]}],
+    schwanz:glatt(spiegel([[0,-2.7,1],[0.58,-1.9,1],[0.18,-1.96,1],[0.3,-1],[0.42,0],[0,0.12]])),
+    fluegel:glatt(spiegel([[0,-0.4],[0.7,-0.98],[1.9,-1.5,1],[1.74,-0.6,1],[1.32,-0.82,1],[1.1,-0.24,1],[0.7,-0.5,1],[0.5,0.2],[0,0.4]]))},
+};
+function stapelY(m,b,n,zm,cols,welle=0,zug=0.26){   // liegende Hexentreppe, Kopf bei -y; zug = Abstand der Lagen
+  const s=b*zug, L=(n*s-b*0.09)/2, x=i=>welle*b*Math.sin(i/(n-1)*Math.PI*2.5);
+  for(let i=0;i<n;i++) quader3(m,x(i)-b/2,-L+i*s,zm-b/2,x(i)+b/2,-L+i*s+b*0.17,zm+b/2,cols[i%2]);
+  return {L,xEnde:x(n-1)};
+}
 function treppe({b,l},o){
-  const m=M3(false); stapel3(m,b,Math.min(24,Math.max(6,Math.round(l/b/2))),0,[o.col,o.col2]);
-  return {stuecke:[...streifen(b,l,o.col,o.Lmax),...streifen(b,l,o.col2,o.Lmax)],mesh:m};
+  const t=TIERE[o.deko], n=Math.min(24,Math.max(6,Math.round(l/b/2))), cols=[o.col,o.col2], m=M3(false), e=0.8, teile=[];
+  const streifen2=[...streifen(b,l,o.col,o.Lmax),...streifen(b,l,o.col2,o.Lmax)];
+  if(!t){ stapel3(m,b,n,0,cols); return {stuecke:streifen2,mesh:m}; }
+  // s zeigt vom Körper weg, st = wievielte Lage auf dem Körper
+  const steh=(x,y,z,s=-1,st=1)=>({f:p=>[x+p[0]*b,y,z-p[1]*b],n:[0,s,0],st}), flach=(x,y,z,s=1,st=1)=>({f:p=>[x+p[0]*b,y+p[1]*b,z],n:[0,0,s],st});
+  const teil=(umriss,lage,deko=[],marke=[0,0])=>{
+    teile.push({flaechen:[{pts:umriss.map(p=>m2(p,b)),col:o.col}],laschen:[],falz:[],deko:deko.map(d=>({...d,pts:d.pts.map(p=>m2(p,b))})),marke:m2(marke,b)});
+    const P=umriss.map(lage.f); fl(m,P,o.col,sub(mitte(P),lage.n)); m.polys[m.polys.length-1].zwei=lage.st;
+    for(const d of deko) m.deko.push({...d,n:lage.n,pts:d.pts.map(p=>add(lage.f(p),mul(lage.n,0.3)))});
+  };
+  const kopf=glatt(spiegel(t.kopf)), hinten=t.schwanzMarke;
+  if(t.art==='quer'){
+    const {L}=stapelY(m,b,n,1.73*b,cols), bogen=glatt(spiegel([[0,-1],[0.7,-1],[1,-0.7],[1,0.55],[1.2,1.2],[1.16,1.4,1],[1-t.bein,1.4,1],[1-t.bein,0.75],[(1-t.bein)*0.62,0.42],[0,0.32]]));
+    teil(kopf,steh(0,-L-2*e,2.6*b,-1,2),t.gesicht,[0,-0.5]);
+    teil(bogen,steh(0,-L-e,1.4*b),[],[0,-0.35]); teil(bogen,steh(0,L+e,1.4*b,1),[],[0,-0.35]);
+    teil(t.schwanz,steh(0,L+2*e,2*b,1,2),[],hinten);
+    if(t.fluegel) teil(t.fluegel,flach(0,0,2.23*b+e));
+  } else if(t.art==='hoch'){
+    const H=stapel3(m,b,n,0,cols);
+    teil(kopf,steh(0,-b/2-2*e,H+0.2*b,-1,2),t.gesicht,[0,-0.5]);
+    teil(t.arme,steh(0,-b/2-e,H*0.62),[],[0,-0.1]);
+    teil(t.fuesse,flach(0,0,-e,-1),[],[0,0.1]);
+    if(t.schwanz) teil(t.schwanz,steh(0,b/2+e,0.45*b,1),[],hinten);
+  } else {
+    const {L,xEnde}=stapelY(m,b,n,0.7*b,cols,0.8,0.45);
+    teil(kopf,steh(0,-L-e,1.75*b),t.gesicht,[0,-0.5]);
+    teil(t.schwanz,flach(xEnde,L,1.2*b+e),[],hinten);
+  }
+  return {stuecke:[...teile,...streifen2],mesh:m};
 }
 function kerze({d,b,l},o){
   const r=d/2, fr=b*0.6, flamme=[...bogen2(0,0,fr,-Math.PI/6,7*Math.PI/6,24),[0,-fr*2.4]];
@@ -438,14 +529,14 @@ const MODELLE=[
   {id:'kissen',name:'Kissen',felder:[['b','Breite',6,3,10],['l','Länge',12,4,20]],bau:kissen},
   {id:'stern',name:'Stern',felder:[['d','⌀',14,5,19]],bau:stern},
   {id:'kerze',name:'Kerze',felder:[['d','⌀',8,4,15],['b','Breite',2,1,4],['l','Länge',25,10,60]],bau:kerze},
-  {id:'treppe',name:'Hexentreppe',felder:[['b','Breite',2.5,1,5],['l','Länge',40,10,100]],bau:treppe},
+  {id:'treppe',name:'Hexentreppe',felder:[['b','Breite',2.5,1,5],['l','Länge',40,10,100]],deko:['ohne',...Object.keys(TIERE)],std:'katze',dekoName:'Tier',bau:treppe},
   {id:'kristall',name:'Kristall',felder:[['d','⌀',4,1.5,8],['l','Länge',8,1,16],['s','Spitze',3,1,8]],deko:['e4','e5','e6'],std:'e6',bau:kristall},
   {id:'doppelspitze',name:'Doppelspitze',felder:[['d','⌀',5,2,10],['h','Höhe',12,3,24]],deko:['e4','e5','e6'],std:'e6',bau:doppelspitze},
   {id:'diamant',name:'Diamant',felder:[['d','⌀',10,3,18],['h','Höhe',7,2,14]],bau:diamant},
   {id:'geokerze',name:'Geokerze',felder:[['a','Kante',4,2,8],['h','Höhe',6,2,12]],deko:['e4','e5','e6'],std:'e5',bau:geokerze},
 ];
 const MOD=Object.fromEntries(MODELLE.map(m=>[m.id,m]));
-const DEKO={'':'∅',augen:'⚄',gesicht:'🙂',e4:'<svg viewBox="-12 -12 24 24" width="1.1em" height="1.1em" aria-hidden="true"><polygon fill="currentColor" points="0.0,-11.0 11.0,0.0 0.0,11.0 -11.0,0.0"/></svg>',e5:'<svg viewBox="-12 -12 24 24" width="1.1em" height="1.1em" aria-hidden="true"><polygon fill="currentColor" points="0.0,-11.0 10.5,-3.4 6.5,8.9 -6.5,8.9 -10.5,-3.4"/></svg>',e6:'<svg viewBox="-12 -12 24 24" width="1.1em" height="1.1em" aria-hidden="true"><polygon fill="currentColor" points="0.0,-11.0 9.5,-5.5 9.5,5.5 0.0,11.0 -9.5,5.5 -9.5,-5.5"/></svg>'};
+const DEKO={'':'∅',ohne:'∅',katze:'🐱',hund:'🐶',baer:'🐻',maus:'🐭',hase:'🐰',eichhorn:'🐿️',frosch:'🐸',kueken:'🐥',schlange:'🐍',drache:'🐲',augen:'⚄',gesicht:'🙂',e4:'<svg viewBox="-12 -12 24 24" width="1.1em" height="1.1em" aria-hidden="true"><polygon fill="currentColor" points="0.0,-11.0 11.0,0.0 0.0,11.0 -11.0,0.0"/></svg>',e5:'<svg viewBox="-12 -12 24 24" width="1.1em" height="1.1em" aria-hidden="true"><polygon fill="currentColor" points="0.0,-11.0 10.5,-3.4 6.5,8.9 -6.5,8.9 -10.5,-3.4"/></svg>',e6:'<svg viewBox="-12 -12 24 24" width="1.1em" height="1.1em" aria-hidden="true"><polygon fill="currentColor" points="0.0,-11.0 9.5,-5.5 9.5,5.5 0.0,11.0 -9.5,5.5 -9.5,-5.5"/></svg>'};
 
 // ---------- Kanten einteilen: zweimal benutzt = Falz, einmal = Schnitt ----------
 const pk=p=>Math.round(p[0]*100)+','+Math.round(p[1]*100);
@@ -485,7 +576,7 @@ function stueckSVG(t,ox,oy){
   for(const d of s.deko) o+=`<path d="${P(d.pts)}${d.zu?'Z':''}" fill="${d.voll?(d.col||LINIE):'none'}" stroke="${LINIE}" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>`;
   if(s.falt.length) o+=`<path d="${s.falt.map(P).join('')}" fill="none" stroke="#000" stroke-width="0.3" stroke-dasharray="2 1.4"/>`;
   if(s.schnitt.length) o+=`<path d="${s.schnitt.map(P).join('')}" fill="none" stroke="#000" stroke-width="0.45" stroke-linecap="round"/>`;
-  if(s.nr!=null){ const g=s.flaechen.reduce((a,b)=>flaeche(b.pts)>flaeche(a.pts)?b:a), q=T([g.pts.reduce((v,p)=>v+p[0],0)/g.pts.length,g.pts.reduce((v,p)=>v+p[1],0)/g.pts.length]); o+=Planer.teilMarke(q[0],q[1],s.nr); }   // Buchstabe in Vorschau und Ausdruck
+  if(s.nr!=null){ const g=s.flaechen.reduce((a,b)=>flaeche(b.pts)>flaeche(a.pts)?b:a), q=T(s.marke||[g.pts.reduce((v,p)=>v+p[0],0)/g.pts.length,g.pts.reduce((v,p)=>v+p[1],0)/g.pts.length]); o+=Planer.teilMarke(q[0],q[1],s.nr); }   // Buchstabe in Vorschau und Ausdruck
   return o;
 }
 
@@ -500,11 +591,11 @@ function zeichne3D(cv,m,yaw,pitch){
   const rot=v=>{ const x1=v[0]*cy-v[1]*sy, y1=v[0]*sy+v[1]*cy; return [x1,y1*cp-v[2]*sp,y1*sp+v[2]*cp]; };
   const D=r*4, s=0.46*Math.min(W,H)*(D-r)/(D*r), cam=[0,-D,0], L=norm([-0.45,-0.6,0.75]);
   const pr=v=>{ const q=rot(sub(v,c)), f=D/(D+q[1]); return [W/2+q[0]*s*f,H/2-q[2]*s*f,q[1]]; };
-  const liste=m.polys.map(p=>{ const q=p.pts.map(pr), n=rot(p.n), cc=rot(sub(mitte(p.pts),c)); return {p,q,n,sicht:dot(n,sub(cam,cc))>0,z:q.reduce((a,b)=>a+b[2],0)/q.length}; });
+  const liste=m.polys.map(p=>{ const q=p.pts.map(pr), n=rot(p.n), cc=rot(sub(mitte(p.pts),c)), sicht=dot(n,sub(cam,cc))>0; return {p,q,n,sicht,z:q.reduce((a,b)=>a+b[2],0)/q.length-(p.zwei||0)*(sicht?9:-9)*r}; });   // aufgeklebte Teile: sichtbare zuletzt, abgewandte zuerst
   liste.sort((a,b)=>b.z-a.z);
   const lw=Math.max(1,W/260); ctx.lineJoin='round'; ctx.lineCap='round';
-  for(const e of liste){ if(!e.sicht&&!m.offen) continue;
-    const n=e.sicht?e.n:mul(e.n,-1), col=schatt(e.p.col,(0.6+0.42*Math.max(0,dot(n,L)))*(e.sicht?1:0.75));
+  for(const e of liste){ if(!e.sicht&&!m.offen&&!e.p.zwei) continue;
+    const n=e.sicht?e.n:mul(e.n,-1), col=schatt(e.p.col,e.p.zwei?1:(0.6+0.42*Math.max(0,dot(n,L)))*(e.sicht?1:0.75));
     ctx.beginPath(); e.q.forEach((pt,i)=>i?ctx.lineTo(pt[0],pt[1]):ctx.moveTo(pt[0],pt[1])); ctx.closePath();
     ctx.fillStyle=col; ctx.fill(); ctx.strokeStyle=e.p.glatt?col:'rgba(23,33,47,.6)'; ctx.lineWidth=e.p.glatt?0.8:lw; ctx.stroke(); }
   for(const d of m.deko){ const n=rot(d.n), cc=rot(sub(mitte(d.pts),c)); if(dot(n,sub(cam,cc))<=0) continue;
@@ -538,8 +629,8 @@ const malen=()=>zeichne3D(cv,aktuell,yaw,pitch);
 function felderBauen(){
   const m=MOD[S.f], v=werte(m);
   $('felder').innerHTML=m.felder.map(([k,lbl,,lo,hi])=>`<div><label class="lbl" for="f-${k}">${esc(lbl)}</label><div class="stepper"><button type="button" data-k="${k}" data-d="-0.5" aria-label="${esc(lbl)} −">−</button><input id="f-${k}" data-k="${k}" type="text" inputmode="decimal" autocomplete="off" value="${zahl(v[k])}"><button type="button" data-k="${k}" data-d="0.5" aria-label="${esc(lbl)} +">+</button><span>cm</span></div></div>`).join('');
-  $('deko-z').hidden=!m.deko; if(m.deko) $('deko-z').querySelector('.lbl').textContent=m.std?'Ecken':'Deko';
-  if(m.deko) $('deko').innerHTML=m.deko.map(d=>`<button type="button" class="chip em" data-deko="${d}" aria-pressed="${(S.deko[m.id]||m.std||m.deko[0])===d}" aria-label="${d?(d[0]==='e'?d.slice(1)+' Ecken':d):'ohne'}">${DEKO[d]}</button>`).join('');
+  $('deko-z').hidden=!m.deko; if(m.deko) $('deko-z').querySelector('.lbl').textContent=m.dekoName||(m.std?'Ecken':'Deko');
+  if(m.deko) $('deko').innerHTML=m.deko.map(d=>`<button type="button" class="chip em" data-deko="${d}" aria-pressed="${(S.deko[m.id]||m.std||m.deko[0])===d}" aria-label="${TIERE[d]?.name||(/^e\d/.test(d)?d.slice(1)+' Ecken':d||'ohne')}">${DEKO[d]}</button>`).join('');
   document.querySelectorAll('.kachel').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===S.f));
 }
 function neu(){
@@ -574,7 +665,8 @@ const kopf=Planer.druckkopf('#papier',{papier:S.papier,wahl({papier}){ Planer.me
 Planer.verlauf({hole:()=>S,setze(z){ Object.assign(S,z); felderBauen(); neu(); }});
 $('modelle').addEventListener('click',e=>{ const b=e.target.closest('.kachel'); if(!b||b.dataset.f===S.f) return; Planer.merke(); S.f=b.dataset.f; felderBauen(); neu(); });
 $('farben').addEventListener('click',e=>{ const b=e.target.closest('.farbe'); if(!b) return; Planer.merke(); S.farbe=+b.dataset.c; neu(); });
-$('deko').addEventListener('click',e=>{ const b=e.target.closest('[data-deko]'); if(!b) return; Planer.merke(); S.deko[S.f]=b.dataset.deko; document.querySelectorAll('#deko .chip').forEach(c=>c.setAttribute('aria-pressed',c===b)); neu(); });
+$('deko').addEventListener('click',e=>{ const b=e.target.closest('[data-deko]'); if(!b) return; Planer.merke(); S.deko[S.f]=b.dataset.deko; document.querySelectorAll('#deko .chip').forEach(c=>c.setAttribute('aria-pressed',c===b));
+  if(S.f==='treppe'){ (S.v.treppe=S.v.treppe||{}).l=TIERE[b.dataset.deko]?.l||40; $('f-l').value=zahl(S.v.treppe.l); } neu(); });
 $('felder').addEventListener('click',e=>{ const b=e.target.closest('button[data-d]'); if(!b) return; const m=MOD[S.f], k=b.dataset.k; Planer.merke(null,'feld-'+k);
   (S.v[m.id]=S.v[m.id]||{})[k]=werte(m)[k]+ +b.dataset.d; const v=werte(m); S.v[m.id][k]=v[k]; $('f-'+k).value=zahl(v[k]); neu(); Planer.leuchte('.netz'); });
 $('felder').addEventListener('input',e=>{ const i=e.target.closest('input[data-k]'); if(!i) return; const x=parseFloat(i.value.replace(',','.')); if(!isFinite(x)) return; Planer.merke(null,'feld-'+i.dataset.k); (S.v[S.f]=S.v[S.f]||{})[i.dataset.k]=x; neu(); Planer.leuchte('.netz'); });
@@ -592,7 +684,7 @@ felderBauen(); groesse(); neu(); requestAnimationFrame(lauf);
 // Symbole der Kacheln nach und nach zeichnen
 const ICON='#BFE3D6'; let ii=0;
 const icon=()=>{ const m=MODELLE[ii++]; if(!m) return; const c=document.querySelector(`canvas[data-ic="${m.id}"]`);
-  try{ const sv=S.deko; S.deko={}; const r=m.bau(Object.fromEntries(m.felder.map(([k,,d])=>[k,d*10])),{col:ICON,col2:'#FFE08A',deko:'',Lmax:260}); S.deko=sv; zeichne3D(c,r.mesh,0.6,0.5); }catch(e){}
+  try{ const sv=S.deko; S.deko={}; const r=m.bau(Object.fromEntries(m.felder.map(([k,,d])=>[k,d*10])),{col:ICON,col2:'#FFE08A',deko:m.std||'',Lmax:260}); S.deko=sv; zeichne3D(c,r.mesh,0.6,0.5); }catch(e){}
   setTimeout(icon,0); };
 setTimeout(icon,50);
 })();
