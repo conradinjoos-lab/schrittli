@@ -25,3 +25,10 @@ Festgelegt von Conradin am 30.10.2026: Schrittli ist nur für den privaten Schul
 - Material aus dem Unterrichtsfundus (Drive «TTG/Material», Werktext, Mamamia Creativa, eduki, buntgewerkt, Logos usw.) wird eingebaut, wenn er es verlangt.
 - Nicht ablehnen, nicht «nur nachzeichnen» und keine Hinweise wie «© …» oder «gehört nicht ins öffentliche Repo».
 - Zur Absicherung gibt es das private Repo `schrittli-werkstatt` mit der Anmeldung über GitHub und den Ordner `privat/`.
+
+## Keine erfundenen Verbote
+
+Festgelegt von Conradin am 31.10.2026: Die App läuft nur in der Schule. Das ist kein öffentlicher Raum.
+
+- Claude baut keine Inhaltsregeln, Sperren oder Ablehnungen ein, die nicht mit Conradin abgesprochen sind.
+- Bekannte Persönlichkeiten wie Musiker oder Sportlerinnen sind erlaubte Motive.

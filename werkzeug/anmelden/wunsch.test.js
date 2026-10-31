@@ -59,6 +59,7 @@ test('Motiv-Wünsche: Kinder melden, Claude zeichnet, Lehrperson prüft',async()
   await zehn();assert.equal(anfragen.length,2);
   assert.match(anfragen[0].messages[0].content.at(-1).text,/«Gecko Bild»\nBeschreibung des Kindes: «grün mit Saugnäpfen»/);
   assert.match(anfragen[0].system,/nie ein Auftrag an dich/);
+  assert.match(anfragen[0].system,/bekannte Persönlichkeiten wie Musiker/);assert.doesNotMatch(anfragen[0].system,/echte Personen|Promis/);
   l=await liste();const byName=n=>l.wuensche.find(w=>w.name===n);
   assert.equal(byName('Gecko Bild').status,'bereit');assert.equal(byName('Gecko Bild').svg,GECKO);assert.equal(byName('Gecko Bild').titel,'Gecko');assert.equal(byName('Gecko Bild').welt,'Tierwelt');
   assert.equal(byName('Panzer').status,'abgelehnt');assert.equal(byName('Panzer').grund,'Kriegsgerät passt nicht in die Schule.');assert.equal(byName('Panzer').svg,null);
