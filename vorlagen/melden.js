@@ -4,7 +4,7 @@
 (function(){
   if(window.__melden||window.top!==window) return; window.__melden=true;
   const ZIEL='https://schrittli-anmelden.conradinjoos.workers.dev/melden', WARTE='schrittli.melden.warte';
-  const STAND='2026-10-31-a166f82';   // schreibt quelle/bauen.sh
+  const STAND='2026-10-31-4f148e8';   // schreibt quelle/bauen.sh
   const skript=document.currentScript, wurzel=(skript&&skript.src||'').replace(/vorlagen\/melden\.js.*$/,'')||location.origin+'/', pfad=location.pathname;
   const kontrolle=/\/kontrolle\//.test(pfad)||!!document.querySelector('script[src$="werkstatt.js"]'), uebersicht=/\/vorlagen\/(index\.html)?$/.test(pfad);
   const ARTEN=kontrolle?[['anzeige','Anzeige falsch'],['speichern','Speichern geht nicht'],['anderes','Etwas anderes']]
@@ -66,7 +66,8 @@
     if(host.parentElement!==ziel) ziel.appendChild(host);
     const rollt=document.documentElement.scrollHeight>innerHeight+2;
     if(rollt&&!document.querySelector('.melden-platz')){ const s=document.createElement('div'); s.className='melden-platz'; s.setAttribute('aria-hidden','true'); document.body.appendChild(s); }
-    for(const [x,y] of [['l','b'],['r','b'],['l','t'],['r','t']]){ flagge.dataset.x=x; flagge.dataset.y=y; if(frei(rollt)) return; }
+    // Schmal und rollend: rechts unten, links stehen die Beschriftungen
+    for(const [x,y] of rollt&&innerWidth<640?[['r','b'],['l','b'],['l','t'],['r','t']]:[['l','b'],['r','b'],['l','t'],['r','t']]){ flagge.dataset.x=x; flagge.dataset.y=y; if(frei(rollt)) return; }
     flagge.dataset.x='l'; flagge.dataset.y='b'; }
   let warte=0; const spaeter=()=>{ clearTimeout(warte); warte=setTimeout(platz,250); };
 
