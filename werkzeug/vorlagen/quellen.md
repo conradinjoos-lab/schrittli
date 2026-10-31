@@ -546,6 +546,7 @@ Kinder wünschen sich im Vorlagen-Generator ein fehlendes Motiv. Claude zeichnet
 | Gecko | wu-gecko | – | Claude (Anthropic), gewünscht im Vorlagen-Generator, geprüft von der Lehrperson | eigene Zeichnung |
 | Michael Jackson | wu-michael-jackson | – | Claude (Anthropic), gewünscht im Vorlagen-Generator, geprüft von der Lehrperson | eigene Zeichnung |
 | Seehund | wu-seehund | – | Claude (Anthropic), gewünscht im Vorlagen-Generator, geprüft von der Lehrperson | eigene Zeichnung |
+| Argentinien-Flagge | wu-argentinien-flagge | – | Claude (Anthropic), gewünscht im Vorlagen-Generator, geprüft von der Lehrperson | eigene Zeichnung |
 
 ## Echte Bilder (Wünsche)
 

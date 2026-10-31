@@ -7291,6 +7291,12 @@
    "name": "Michael Jordan",
    "welt": "Sport",
    "datei": "wu-michael-jordan.png"
+  },
+  {
+   "id": "wu-argentinien-flagge",
+   "name": "Argentinien-Flagge",
+   "welt": "Flaggen & Kontinente",
+   "datei": "wu-argentinien-flagge.png"
   }
  ]
 }
