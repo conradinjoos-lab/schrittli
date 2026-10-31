@@ -22,7 +22,7 @@ a{color:var(--acc)}
 button{touch-action:manipulation}
 button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 .weg,main{max-width:860px;margin:0 auto;padding-left:16px;padding-right:16px}
-/* Der Weg: fünf Schritte. Erledigte zeigen, was man gewählt hat, und führen dorthin zurück. */
+/* Der Weg: sechs Schritte. Erledigte zeigen, was man gewählt hat, und führen dorthin zurück. */
 .weg{display:flex;flex-wrap:wrap;gap:6px;padding-top:10px;padding-bottom:6px}
 .weg button{font:inherit;font-size:14px;min-height:36px;padding:4px 12px;border-radius:999px;border:2px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
 .weg button.fertig{color:var(--ink);border-color:var(--acc)}
@@ -42,7 +42,13 @@ main{padding-top:4px;padding-bottom:48px}
 .bild{display:block;width:100%;max-width:340px;height:auto;margin:0 auto 12px}
 .bild.papier{max-width:340px;border-radius:10px;border:1px solid var(--line);box-shadow:0 2px 10px rgba(0,0,0,.12)}
 .gleich{display:flex;align-items:center;justify-content:center;gap:10px;margin:0 0 8px;font:600 34px Fredoka,Nunito,sans-serif;color:var(--muted)}
-.gleich svg{width:64px;height:64px}
+.gleich svg{width:64px;height:64px;flex:none}
+.gleich .nadel{font-size:22px;color:var(--ink);white-space:nowrap}
+.kachel .mm{color:var(--muted);font-size:17px;white-space:nowrap}
+.plan.auftrag{max-width:460px;margin:0 auto}
+.plan .quadrat{flex:none;width:112px;height:auto}
+.plan .breit-hoch{font:600 30px/1 Fredoka,Nunito,sans-serif;color:var(--acc);white-space:nowrap}
+.plan .weiter.zweit{flex:1 1 auto;width:auto;min-width:0;margin:0;padding:0 10px}
 .mass{display:flex;justify-content:center;gap:16px 32px;flex-wrap:wrap}
 .feld{display:flex;flex-direction:column;align-items:center}
 .lbl{font-size:15px;color:var(--muted);margin-bottom:6px}
@@ -73,6 +79,7 @@ main{padding-top:4px;padding-bottom:48px}
 .plan .cm{margin-left:auto;color:var(--muted);font-size:17px;white-space:nowrap}
 .plan .fertig-bild{display:flex;align-items:center;gap:10px;font:600 28px Fredoka,Nunito,sans-serif;color:var(--muted)}
 .plan .fertig-bild svg{width:56px;height:56px}
+.plan .spitze{flex:1 1 120px;width:100%;max-width:360px;height:auto;display:block;margin:0 auto}
 .werkbild svg{display:block;width:100%;height:auto;max-height:320px}
 .extras{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
 .mehr{font:inherit;font-size:16px;min-height:44px;padding:6px 16px;border-radius:999px;border:2px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
@@ -92,6 +99,8 @@ body.klein .stepper input{height:68px;font-size:36px;width:110px}
   .kacheln{grid-template-columns:repeat(2,minmax(0,1fr))}
   /* Das Werk bleibt sichtbar, während die Grösse eingestellt wird */
   .plan-kopf{display:contents}
+  .plan li:has(.spitze){flex-wrap:wrap}
+  .plan li .spitze{order:1;flex:1 0 100%}
   .werkbild{position:sticky;top:var(--kopf-h);z-index:5;background:var(--bg);margin:10px -16px 0;padding:6px 16px}
   .werkbild svg{max-height:150px}
   h2{font-size:24px}
@@ -122,7 +131,7 @@ body.klein .stepper input{height:68px;font-size:36px;width:110px}
 <main id="main"></main>
 <div id="druck"></div>
 <script>
-// Maschen-Planer von Schritt für Schritt: Häkeln oder Stricken → Werk → Messen → Probestück → Maschen und Reihen zählen → Plan.
+// Maschen-Planer von Schritt für Schritt: Häkeln oder Stricken → Werk → Messen → Wolle → Probestück → Maschen und Reihen zählen → Plan.
 // Immer nur ein Schritt auf dem Bildschirm. Masse in cm, Druck in mm.
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -132,7 +141,7 @@ const PAPIERE=Planer.PAPIERE;
 const TECHNIK={haekeln:'Häkeln',stricken:'Stricken'};
 // Werke für Kinder: was gemessen wird und wie es fertig wird
 const WERKE={
-  kappe:{name:'Kappe',mass:'kopf',fertig:'Hinten zusammennähen, oben zusammenziehen.'},
+  kappe:{name:'Kappe',mass:'kopf',fertig:'Oben zusammenziehen, hinten zusammennähen.'},
   stirnband:{name:'Stirnband',mass:'kopf',fertig:'Die Enden zusammennähen.'},
   armband:{name:'Armband',mass:'handgelenk',fertig:'Mit Knopf oder Bändel schliessen.'},
   pulswaermer:{name:'Pulswärmer',mass:'hand',fertig:'Längs zusammennähen, ein Loch für den Daumen lassen.'},
@@ -152,12 +161,21 @@ const MASSE={
   frei:{titel:'Grösse',felder:[['freiB','Breite',3,200,1],['freiH','Höhe',3,300,1]],bild:()=>bildFrei()}
 };
 const ALLE_FELDER=Object.values(MASSE).flatMap(m=>m.felder);
-const START={technik:null,werk:null,mass:{kopf:52,handgelenk:15,hand:18,laenge:120,seite:20,handyB:7,handyH:15,freiB:20,freiH:20},b:20,h:20,m10:0,r10:0,seite:0,gew:0,papier:'a4',name:'',schritt:0,weit:0};
+// Wolle: Nadel in mm wie auf der Banderole, d = Fadendicke im Bild.
+// m = Anschlag fürs Probestück: auch bei der dichtesten Maschenprobe dieser Wolle gut 11 cm breit, sonst passt das 10-cm-Fenster nicht
+const GARNE={
+  fein:{name:'Fein',nadel:'2.5–3.5',m:36,d:4},
+  mittel:{name:'Mittel',nadel:'4–5',m:28,d:8},
+  dick:{name:'Dick',nadel:'5.5–7',m:20,d:13},
+  sehrdick:{name:'Sehr dick',nadel:'8–12',m:14,d:19}
+};
+const START={technik:null,werk:null,mass:{kopf:52,handgelenk:15,hand:18,laenge:120,seite:20,handyB:7,handyH:15,freiB:20,freiH:20},b:20,h:20,wolle:null,m10:0,r10:0,seite:0,gew:0,papier:'a4',name:'',schritt:0,weit:0,stand:2};
 const S=JSON.parse(JSON.stringify(START));
 const offen={groesse:false,garn:false};
 const clamp=(v,a,b)=>Math.min(b,Math.max(a,Math.round(Number(v)||0)));
 const hat=(o,k)=>k!=null&&Object.prototype.hasOwnProperty.call(o,k);   // nur echte Schlüssel, kein «constructor»
 const haekeln=()=>S.technik==='haekeln';
+const probeZahl=()=>S.wolle?GARNE[S.wolle].m:25;   // so viele Maschen hat das ganze Probestück; 25 bei Plänen von früher
 
 function klasseLesen(){
   const q=Number(new URLSearchParams(location.search).get('klasse'));
@@ -212,7 +230,9 @@ function laden(){
     S.b=clamp(t.b??S.b,2,200);S.h=clamp(t.h??S.h,2,300);
     S.m10=clamp(t.m10,0,80);S.r10=clamp(t.r10,0,120);S.seite=clamp(t.seite,0,30);S.gew=clamp(t.gew,0,100);
     S.name=String(t.name||'').slice(0,30);
-    S.weit=clamp(t.weit,0,6);S.schritt=clamp(t.schritt,0,6);
+    if(hat(GARNE,t.wolle))S.wolle=t.wolle;
+    const stelle=n=>clamp(t.stand!==2&&n>=3?n+1:n,0,7);   // Stände von vor dem Schritt Wolle: ab dem Probestück eins weiter
+    S.weit=stelle(t.weit);S.schritt=stelle(t.schritt);
     if(hat(PAPIERE,t.papier))S.papier=t.papier;
   }
   if(!S.name)S.name=kindName();
@@ -224,7 +244,7 @@ function laden(){
   if(S.technik&&hat(WERKE,qw)&&S.werk!==qw){ werkWaehlen(qw); }
   // Nur Schritte, die mit dem Stand auch gehen
   if(!S.technik)S.weit=0; else if(!S.werk)S.weit=Math.min(S.weit,1);
-  if(S.m10<3)S.weit=Math.min(S.weit,4); else if(S.r10<3)S.weit=Math.min(S.weit,5);
+  if(S.m10<3)S.weit=Math.min(S.weit,S.wolle?5:3); else if(S.r10<3)S.weit=Math.min(S.weit,6);
   S.schritt=Math.min(S.schritt,S.weit);
 }
 function speichern(){ SP.schreibe({...S,zeit:Date.now()}); }
@@ -232,14 +252,32 @@ function speichern(){ SP.schreibe({...S,zeit:Date.now()}); }
 // ---------- Rechnung ----------
 function rechnen(){
   const roh=S.m10/10*S.b;
-  const anschlag=haekeln()?Math.max(1,Math.round(roh)):Math.max(2,2*Math.round(roh/2));   // Stricken: gerade Zahl, passt auch für 1 rechts, 1 links
-  const reihen=Math.max(1,Math.round(S.r10/10*S.h));
+  let anschlag=haekeln()?Math.max(1,Math.round(roh)):Math.max(2,2*Math.round(roh/2));   // Stricken: gerade Zahl, passt auch für 1 rechts, 1 links
+  let reihen=Math.max(1,Math.round(S.r10/10*S.h)), kappe=null;
+  if(S.werk==='kappe'){ kappe=spitze(anschlag,reihen); anschlag=kappe.anschlag; reihen=kappe.reihen; }
   let gramm=0,knaeuel=0;
   if(S.gew>0&&S.seite>0){
     const g=S.gew/(S.seite*S.seite)*S.b*S.h*1.1;   // 10 % Reserve
     gramm=Math.max(5,Math.ceil(g/5)*5); knaeuel=Math.ceil(gramm/50);
   }
-  return {anschlag,reihen,gramm,knaeuel};
+  return {anschlag,reihen,gramm,knaeuel,kappe};
+}
+// Kappe wie die Mützen der Schweizer Familie 1/2012: Bündchen 4 cm, gerader Teil, dann die Spitze in Keilen
+// («n Maschen, 2 zusammen», in jeder 2. Reihe eine Masche weniger bis «2 zusammen»), die letzten Maschen zusammenziehen.
+// r Maschen pro Keil, so dass die Spitze 5–6 cm hoch wird; der Anschlag rückt auf ein Vielfaches von r.
+function spitze(roh,reihen){
+  const haek=haekeln(), r0=clamp(S.r10*.275+1,4,12);
+  let best=null;
+  for(const r of [r0,r0-1,r0+1])for(const dz of [0,-1,1]){
+    if(r<4||r>12)continue;
+    const z=Math.round(roh/r)+dz, a=z*r; if(z<3||(!haek&&a%2))continue;   // Stricken gerade, für 1 rechts 1 links
+    const d=Math.abs(a-roh)+(r===r0?0:.5)+(dz?.25:0);
+    if(!best||d<best.d)best={r,z,a,d};
+  }
+  const {r,z,a}=best||{r:4,z:3,a:12}, k=r-2, keile=[];
+  for(let n=k;n>=0;n--)keile.push({n,rest:z*(n+1)});
+  const sp=2*k+1, buend=haek?0:Math.round(S.r10*.4), gerade=Math.max(2,reihen-buend-sp);
+  return {anschlag:a,r,z,keile,buend,gerade,sp,reihen:buend+gerade+sp};
 }
 
 // ---------- Bilder ----------
@@ -302,9 +340,14 @@ function maschen(sx,sy,sp,zr,an){
   }
   return s;
 }
-function probeBild(){   // Probestück: 25 Maschen breit, ungefähr quadratisch, grösser als das 10-cm-Fenster
-  const {F,n,nr,cw,rh}=gitter(), rand=2, sp=n+2*rand, zr=nr+2*rand, sx=24, sy=16, W=sp*cw, H=zr*rh, fx=sx+rand*cw, fy=sy+rand*rh, uy=sy+H+24;
-  return svg(`0 0 ${f(W+48)} ${f(uy+50)}`,`<rect x="${sx-6}" y="${sy-6}" width="${f(W+12)}" height="${f(H+12)}" rx="12" fill="#FBE3C8" stroke="${WOLLE2}" stroke-width="3"/>${maschen(sx,sy,sp,zr,()=>false)}<rect x="${f(fx)}" y="${f(fy)}" width="${F}" height="${F}" fill="none" stroke="#17212F" stroke-width="3" stroke-dasharray="10 7"/><rect x="${f(fx+F/2-38)}" y="${f(fy+F/2-18)}" width="76" height="34" rx="8" fill="#fff"/><text x="${f(fx+F/2)}" y="${f(fy+F/2+8)}" text-anchor="middle" font-size="22" font-weight="800" fill="#17212F">10 cm</text>${pfeil(sx,uy,sx+W,uy)}<text x="${f(sx+W/2)}" y="${f(uy+38)}" text-anchor="middle" font-size="34" font-weight="800" fill="currentColor">25</text>`,`Probestück: ${haekeln()?'25 Luftmaschen':'25 Maschen'}, ein Quadrat, grösser als 10 mal 10 cm`);
+function garnBild(k){   // Faden und Nadel so dick wie die Wolle
+  const d=GARNE[k].d, n=d*.55+1, weg=haekeln()?'M10 76H84q9 0 8-9':'M16 76H92', faden='M14 36q12-24 24 0t24 0t24 0';
+  const knopf=haekeln()?'':`<circle cx="12" cy="76" r="${f(n/2+5)}" fill="${WOLLE2}" ${LINIE}/>`;
+  return `<svg viewBox="0 0 100 100" aria-hidden="true"><path d="${faden}" fill="none" stroke="currentColor" stroke-width="${d+5}" stroke-linecap="round"/><path d="${faden}" fill="none" stroke="${WOLLE}" stroke-width="${d}" stroke-linecap="round"/><path d="${weg}" fill="none" stroke="currentColor" stroke-width="${f(n+5)}" stroke-linecap="round"/><path d="${weg}" fill="none" stroke="#9DB4D3" stroke-width="${f(n)}" stroke-linecap="round"/>${knopf}</svg>`;
+}
+function quadratBild(){   // Das Probestück wächst nach oben, bis es so hoch wie breit ist
+  const {F:G,n,nr,rh}=gitter(), x=6, y=6, F=100, k=F/G, zr=Math.round(nr*.6), h=zr*rh*k, oben=y+F-h;
+  return svg('0 0 134 134',`<rect x="${x}" y="${y}" width="${F}" height="${F}" rx="5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="7 6"/><rect x="${x}" y="${f(oben)}" width="${F}" height="${f(h)}" rx="3" fill="#FBE3C8" stroke="${WOLLE2}" stroke-width="3"/><g transform="translate(${x} ${f(oben)}) scale(${k.toFixed(3)})">${maschen(0,0,n,zr,()=>false)}</g>${pfeil(x+F/2,oben-4,x+F/2,y+6,false).replace(/currentColor/g,'#17997A').replace('stroke-width="2.5"','stroke-width="4"')}${pfeil(x,y+F+15,x+F,y+F+15)}${pfeil(x+F+15,y,x+F+15,y+F)}`,'Das Stück wächst nach oben, bis es so hoch wie breit ist','quadrat');
 }
 function fensterBild(was){   // Zettel mit ausgeschnittenem Fenster auf dem Probestück, die gezählte Reihe oder Spalte grün und nummeriert
   const {F,n,nr,cw,rh}=gitter(), W=300, H=270, fx=60, fy=46;
@@ -318,24 +361,74 @@ function fensterBild(was){   // Zettel mit ausgeschnittenem Fenster auf dem Prob
     :`${pfeil(fx-22,fy,fx-22,fy+F).replace(/currentColor/g,'#17212F')}<text transform="translate(${fx-30} ${fy+F/2}) rotate(-90)" text-anchor="middle" font-size="16" font-weight="800" fill="#17212F">10 cm</text>`;
   return svg(`0 0 ${W} ${H}`,`<rect x="${fx}" y="${fy}" width="${F}" height="${F}" fill="#FBE3C8"/>${maschen(fx-cw,fy-rh,n+2,nr+2,an)}<path d="M0 0H${W}V${H}H0ZM${fx} ${fy}V${fy+F}H${fx+F}V${fy}Z" fill="#fff" fill-rule="evenodd"/><rect x="${fx}" y="${fy}" width="${F}" height="${F}" fill="none" stroke="#17212F" stroke-width="2.5"/><path d="${striche}" stroke="#17212F" stroke-width="1.5"/>${mass}${nummern}`,was==='m'?'Zählfenster auf dem Probestück: eine Reihe Maschen von links nach rechts zählen':'Zählfenster auf dem Probestück: die Reihen von unten nach oben zählen','bild papier');
 }
-// Nicht das ganze Probestück zählen (25), nur das Fenster
+// Nicht das ganze Probestück zählen, nur das Fenster
 function warnBild(){
   const stoff=(x)=>`<rect x="${x}" y="8" width="44" height="44" rx="4" fill="${WOLLE}" stroke="currentColor" stroke-width="2"/><path d="M${x} 19h44M${x} 30h44M${x} 41h44M${x+11} 8v44M${x+22} 8v44M${x+33} 8v44" stroke="${WOLLE2}" stroke-width="2"/>`;
   return `<svg viewBox="0 0 60 60" aria-hidden="true">${stoff(8)}<path d="M14 14L46 46M46 14L14 46" stroke="#D93B3B" stroke-width="6" stroke-linecap="round"/></svg><svg viewBox="0 0 60 60" aria-hidden="true">${stoff(8)}<path d="M2 2H58V58H2ZM19 19V41H41V19Z" fill="#fff" fill-rule="evenodd" stroke="#9aa5b4" stroke-width="2"/><path d="M22 31l6 6l12-14" fill="none" stroke="#17997A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 }
 // Kleine Bilder für den Plan: Anschlag (Luftmaschenkette oder Nadel mit Maschen), Reihen, Probestück mit Seite
 function planIcon(was){
+  if(was==='fenster')return `<svg class="ic" viewBox="0 0 60 44" aria-hidden="true"><rect x="9" y="3" width="42" height="38" fill="${WOLLE}" stroke="currentColor" stroke-width="2"/><path d="M9 15h42M9 28h42M23 3v38M37 3v38" stroke="${WOLLE2}" stroke-width="2"/><path d="M2 1H58V43H2ZM19 11V33H41V11Z" fill="#fff" fill-rule="evenodd" stroke="#9aa5b4" stroke-width="2"/></svg>`;
   if(was==='anschlag')return haekeln()
     ?`<svg class="ic" viewBox="0 0 60 44" aria-hidden="true"><g fill="none" stroke="#E08A3A" stroke-width="3.5">${[9,21,33,45].map(x=>`<ellipse cx="${x}" cy="24" rx="6.5" ry="4.5"/>`).join('')}</g><path d="M52 24h6" stroke="#E08A3A" stroke-width="3.5" stroke-linecap="round"/></svg>`
     :`<svg class="ic" viewBox="0 0 60 44" aria-hidden="true"><path d="M4 30H54" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><path d="M4 30H54" stroke="#9DB4D3" stroke-width="3.5" stroke-linecap="round"/>${[12,22,32,42].map(x=>`<path d="M${x-4} 14L${x} 30L${x+4} 14" fill="none" stroke="#E08A3A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>`).join('')}</svg>`;
   if(was==='reihen')return `<svg class="ic" viewBox="0 0 60 44" aria-hidden="true"><path d="M6 36h30M6 26h30M6 16h30M6 6h30" stroke="#E08A3A" stroke-width="5" stroke-linecap="round"/>${pfeil(50,40,50,4,false)}</svg>`;
+  if(was==='rippen')return `<svg class="ic" viewBox="0 0 60 44" aria-hidden="true"><path d="M9 6v32M21 6v32M33 6v32M45 6v32" stroke="#E08A3A" stroke-width="5" stroke-linecap="round"/><path d="M15 8v28M27 8v28M39 8v28M51 8v28" stroke="#E08A3A" stroke-width="2.5" stroke-linecap="round" opacity=".55"/></svg>`;
+  if(was==='spitze')return `<svg class="ic" viewBox="0 0 60 44" aria-hidden="true"><path d="M6 40L30 6L54 40Z" fill="#FBE3C8" stroke="#E08A3A" stroke-width="3" stroke-linejoin="round"/><path d="M18 40L30 6M42 40L30 6" stroke="${WOLLE2}" stroke-width="2" opacity=".7"/><circle cx="30" cy="6" r="4.5" fill="#17997A"/></svg>`;
+  if(was==='zieh')return `<svg viewBox="0 0 60 44" aria-hidden="true"><path d="M6 42L22 18H38L54 42Z" fill="#FBE3C8" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>${pfeil(4,18,20,18,false)}${pfeil(56,18,40,18,false)}<circle cx="30" cy="18" r="5" fill="#17997A"/></svg>`;
+  if(was==='naht')return `<svg viewBox="0 0 60 44" aria-hidden="true"><path d="M10 42Q10 4 30 4Q50 4 50 42Z" fill="#FBE3C8" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M30 6V41" stroke="#17997A" stroke-width="3.5" stroke-dasharray="6 4"/></svg>`;
   return `<svg viewBox="0 0 52 40" width="52" height="40" aria-hidden="true"><rect x="8" y="2" width="36" height="24" rx="3" fill="${WOLLE}" stroke="currentColor" stroke-width="2"/>${pfeil(8,34,44,34)}</svg>`;
 }
+// Spitze als Stufenbild: V = Masche, Doppel-V = 2 zusammen (Häkeln: feste Masche, 2 zusammen), grau die Reihe dazwischen, zuoberst das Zusammenziehen.
+// c = Grösse einer Masche (Bildschirm in Einheiten, Druck in mm)
+function spitzeInhalt(K,c,ink='currentColor'){
+  const haek=haekeln(), {keile,z}=K, k=keile.length-1, rh=c*1.6, bw=(k+1)*c, W=Math.max(bw+c*7.8,c*12), H=(keile.length+2)*rh;
+  const v=(x,y,g,F)=>`<path d="M${f(x+c*(.5-g))} ${f(y+c*.15)}L${f(x+c*.5)} ${f(y+c*.85)}L${f(x+c*(.5+g))} ${f(y+c*.15)}" fill="none" stroke="${F}" stroke-width="${f(c*.2)}" stroke-linecap="round" stroke-linejoin="round"/>`;
+  const fm=(x,y,zus,F)=>`<ellipse cx="${f(x+c*.5)}" cy="${f(y+c*.24)}" rx="${f(c*.3)}" ry="${f(c*.13)}" fill="none" stroke="${F}" stroke-width="${f(c*.12)}"/><path d="${zus?`M${f(x+c*.26)} ${f(y+c*.9)}L${f(x+c*.5)} ${f(y+c*.4)}L${f(x+c*.74)} ${f(y+c*.9)}`:`M${f(x+c*.5)} ${f(y+c*.4)}V${f(y+c*.9)}`}" fill="none" stroke="${F}" stroke-width="${f(c*.2)}" stroke-linecap="round" stroke-linejoin="round"/>`;
+  const masche=(x,y,zus)=>{ const F=zus?'#17997A':'#E08A3A'; return haek?fm(x,y,zus,F):zus?v(x,y,.4,F)+v(x,y,.18,F):v(x,y,.34,F); };
+  let s='';
+  keile.forEach((o,i)=>{   // unterste Stufe zuerst, jede Stufe in der Mitte
+    const y=rh+(k-i)*rh, ox=(k-o.n)*c/2;
+    for(let j=0;j<o.n;j++)s+=masche(ox+j*c,y,false);
+    s+=masche(ox+o.n*c,y,true);
+    if(i<k)s+=`<path d="M${f(ox)} ${f(y-c*.3)}h${f((o.n+1)*c)}" stroke="#9aa5b4" stroke-width="${f(c*.1)}" stroke-dasharray="${f(c*.35)} ${f(c*.25)}"/>`;
+    s+=`<text x="${f(bw+c*.8)}" y="${f(y+c*.8)}" font-size="${f(c*.9)}" font-weight="800" fill="#17997A">× ${z}</text><text x="${f(bw+c*4.1)}" y="${f(y+c*.8)}" font-size="${f(c*.9)}" font-weight="700" fill="${ink}">→ ${o.rest}</text>`;
+  });
+  const cx=bw/2, cy=c*.55, r=c*.42; let zieh='';
+  for(let a=0;a<8;a++){ const w=a*Math.PI/4; zieh+=`M${f(cx+r*.95*Math.cos(w))} ${f(cy+r*.95*Math.sin(w))}L${f(cx+r*.3*Math.cos(w))} ${f(cy+r*.3*Math.sin(w))}`; }
+  s+=`<circle cx="${f(cx)}" cy="${f(cy)}" r="${f(r)}" fill="#FBE3C8" stroke="#17997A" stroke-width="${f(c*.12)}"/><path d="${zieh}" stroke="#17997A" stroke-width="${f(c*.1)}" stroke-linecap="round"/>`;
+  const ly=(keile.length+1)*rh+c*.3, klein=`font-size="${f(c*.8)}" font-weight="700" fill="${ink}"`;
+  s+=masche(0,ly,true)+`<text x="${f(c*1.2)}" y="${f(ly+c*.75)}" ${klein}>2 zusammen</text><path d="M${f(c*7)} ${f(ly+c*.5)}h${f(c*1.5)}" stroke="#9aa5b4" stroke-width="${f(c*.1)}" stroke-dasharray="${f(c*.35)} ${f(c*.25)}"/><text x="${f(c*8.9)}" y="${f(ly+c*.75)}" ${klein}>normal</text>`;
+  return {s,W,H};
+}
+// Das flache Teil der Kappe mit den Schrittnummern des Plans; gestrichelt die Naht, oben der Faden zum Zusammenziehen
+function kappeForm(x,y,w,h,K){
+  const cx=x+w/2, hb=h*K.buend/K.reihen, hs=h*K.sp/K.reihen, tw=Math.max(10,w/K.r), ys=y+hs, yb=y+h-hb, m=Math.min(K.z,9);
+  let s=`<path d="M${f(x)} ${f(y+h)}V${f(ys)}L${f(cx-tw/2)} ${f(y)}H${f(cx+tw/2)}L${f(x+w)} ${f(ys)}V${f(y+h)}Z" fill="#FBE3C8" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>`;
+  let keil=''; for(let j=0;j<m;j++){ const t=(j+.5)/m; keil+=`M${f(x+w*t)} ${f(ys)}L${f(cx+tw*(t-.5))} ${f(y+2)}`; }
+  s+=`<path d="${keil}" fill="none" stroke="${WOLLE2}" stroke-width="2" opacity=".6"/><path d="M${f(x)} ${f(ys)}h${f(w)}" stroke="currentColor" stroke-width="1.5" opacity=".5"/>`;
+  if(K.buend){ let ri=''; for(let xx=x+6;xx<x+w-3;xx+=7)ri+=`M${f(xx)} ${f(yb+3)}V${f(y+h-3)}`; s+=`<path d="M${f(x)} ${f(yb)}h${f(w)}" stroke="currentColor" stroke-width="1.5" opacity=".5"/><path d="${ri}" stroke="${WOLLE2}" stroke-width="2.5" opacity=".6"/>`; }
+  s+=`<path d="M${f(x)} ${f(y+h)}h${f(w)}" stroke="#17997A" stroke-width="7" stroke-linecap="round"/><path d="M${f(x+w)} ${f(y+h)}V${f(ys)}L${f(cx+tw/2)} ${f(y)}" fill="none" stroke="#17997A" stroke-width="3.5" stroke-dasharray="7 5"/><circle cx="${f(cx)}" cy="${f(y)}" r="5" fill="#17997A"/>`;
+  if(yb-ys>60)s+=pfeil(cx,yb-10,cx,ys+10,false).replace(/currentColor/g,'#D9792B');
+  const nr=(n,xx,yy)=>`<circle cx="${f(xx)}" cy="${f(yy)}" r="11" fill="#17997A"/><text x="${f(xx)}" y="${f(yy+5)}" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">${n}</text>`;
+  let n=1; s+=nr(n++,cx,y+h);
+  if(K.buend)s+=nr(n++,x+16,(yb+y+h)/2);
+  return s+nr(n++,x+16,(ys+yb)/2)+nr(n++,cx,y+hs*.6)+nr(n,x+w,(ys+yb)/2);
+}
+function spitzeBild(K){
+  const {s,W,H}=spitzeInhalt(K,10);
+  const text=K.keile.map(o=>o.n?`${o.n} Maschen, 2 zusammen`:'immer 2 zusammen').join('; ');
+  return svg(`0 0 ${f(W)} ${f(H)}`,s,`Spitze, ${K.z} Keile, jede 2. Reihe: ${text}; die letzten ${K.z} Maschen zusammenziehen`,'spitze');
+}
 function werkBild(R){   // das Werk flach, mit Maschen unten und Reihen an der Seite
-  const [lb,lh]=achsen(), k=Math.min(220/S.b,200/S.h), w=Math.max(16,S.b*k), h=Math.max(16,S.h*k), innen=Math.max(w,160);
+  const [lb,lh]=achsen(), K=R.kappe, k=Math.min(220/S.b,200/S.h), w=Math.max(16,S.b*k), h=Math.max(16,S.h*k), innen=Math.max(w,160);
   const x=52+(innen-w)/2, y=10, W=52+innen+12, H=y+h+60, cx=x+w/2, cy=y+h/2, haek=haekeln();
-  let s=`<rect x="${f(x)}" y="${y}" width="${f(w)}" height="${f(h)}" rx="4" fill="#FBE3C8" stroke="currentColor" stroke-width="2.5"/><path d="M${f(x)} ${f(y+h)}h${f(w)}" stroke="#17997A" stroke-width="7" stroke-linecap="round"/>`;
-  if(h>80)s+=pfeil(cx,y+h-16,cx,y+20,false).replace(/currentColor/g,'#D9792B');   // so wächst das Werk
+  let s;
+  if(K)s=kappeForm(x,y,w,h,K);
+  else{
+    s=`<rect x="${f(x)}" y="${y}" width="${f(w)}" height="${f(h)}" rx="4" fill="#FBE3C8" stroke="currentColor" stroke-width="2.5"/><path d="M${f(x)} ${f(y+h)}h${f(w)}" stroke="#17997A" stroke-width="7" stroke-linecap="round"/>`;
+    if(h>80)s+=pfeil(cx,y+h-16,cx,y+20,false).replace(/currentColor/g,'#D9792B');   // so wächst das Werk
+  }
   s+=`<text x="${f(cx)}" y="${f(y+h+30)}" text-anchor="middle" font-size="20" font-weight="800" fill="currentColor">${R.anschlag} ${haek?'Luftmaschen':'Maschen'}</text><text x="${f(cx)}" y="${f(y+h+51)}" text-anchor="middle" font-size="16" fill="currentColor" opacity=".7">${lb} ${S.b} cm</text>`;
   s+=`<text transform="translate(${f(x-30)} ${f(cy)}) rotate(-90)" text-anchor="middle" font-size="20" font-weight="800" fill="currentColor">${R.reihen} Reihen</text><text transform="translate(${f(x-11)} ${f(cy)}) rotate(-90)" text-anchor="middle" font-size="16" fill="currentColor" opacity=".7">${lh} ${S.h} cm</text>`;
   return svg(`0 0 ${f(W)} ${f(H)}`,s,`${WERKE[S.werk].name}: ${S.b} mal ${S.h} cm, ${R.anschlag} Maschen, ${R.reihen} Reihen`,'');
@@ -357,7 +450,8 @@ function zettel(x0,y0,w,h,R,zahlen){
     return t;
   };
   s+=linie('Name:',S.name,y,l,r); y+=zeile;
-  s+=linie('Wolle:','',y,l,l+breit*.48); s+=linie('Nadel:','',y,l+breit*.52,r); y+=zeile-2;
+  const G=gross&&S.wolle?GARNE[S.wolle]:null;   // A3: vier Zettel für verschiedene Kinder, darum dort leer
+  s+=linie('Wolle:',G?G.name:'',y,l,l+breit*.48); s+=linie('Nadel:',G?`${G.nadel} mm`:'',y,l+breit*.52,r); y+=zeile-2;
   // Fenster 100 × 100 mm, zentriert, mit cm-Strichen aussen
   const fx=x0+(w-100)/2, fy=y+4;
   let striche='';
@@ -371,8 +465,17 @@ function zettel(x0,y0,w,h,R,zahlen){
   y=fy+100+(gross?22:17);
   s+=linie('Maschen auf 10 cm:',zahlen?String(S.m10):'',y,l,l+breit*.48); s+=linie('Reihen auf 10 cm:',zahlen?String(S.r10):'',y,l+breit*.52,r); y+=zeile;
   s+=linie('Werk:',zahlen&&S.werk?`${WERKE[S.werk].name}, ${S.b} × ${S.h} cm`:'',y,l,r); y+=zeile;
-  s+=linie('Anschlag:',zahlen?`${R.anschlag}${haek?' + 1':''} ${haek?'Luftmaschen':'Maschen'}`:'',y,l,l+breit*.48); s+=linie('Reihen:',zahlen?String(R.reihen):'',y,l+breit*.52,r); y+=zeile;
+  const K=zahlen&&R.kappe;
+  s+=linie('Anschlag:',zahlen?`${R.anschlag}${haek?' + 1':''} ${haek?'Luftmaschen':'Maschen'}`:'',y,l,l+breit*.48);
+  s+=linie('Reihen:',zahlen?(K?`${K.reihen} = ${[K.buend,K.gerade,K.sp].filter(Boolean).join(' + ')}`:String(R.reihen)):'',y,l+breit*.52,r); y+=zeile;
   s+=linie('Menge:',zahlen&&R.gramm?`ca. ${R.gramm} g = ${R.knaeuel} Knäuel`:'',y,l,r);
+  if(K){   // Spitze als Stufenbild im freien Platz über der Kontrolllinie
+    const frei=y0+h-(gross?26:16)-(y+6), c=Math.min(3,frei/((K.keile.length+2)*1.6));
+    if(c>=1.2){
+      const t=.3, kk=Math.min(380/S.b,frei/t/S.h), bw=S.b*kk*t;   // daneben das flache Teil, 0.3 mm pro Bildeinheit
+      s+=`<g transform="translate(${l} ${f(y+6)})">${spitzeInhalt(K,c,'#1c2430').s}</g><g transform="translate(${f(r-bw-4)} ${f(y+8)}) scale(${t})" font-family="Nunito,system-ui,sans-serif">${kappeForm(0,0,S.b*kk,S.h*kk-8,K)}</g>`;
+    }
+  }
   s+=Planer.kontrolle(l,y0+h-(gross?14:6));
   return s;
 }
@@ -395,7 +498,7 @@ function drucken(zahlen,papier=S.papier){
 }
 
 // ---------- Schritte ----------
-// 0 Technik · 1 Werk · 2 Messen · 3 Probestück · 4 Maschen zählen · 5 Reihen zählen · 6 Plan
+// 0 Technik · 1 Werk · 2 Messen · 3 Wolle · 4 Probestück · 5 Maschen zählen · 6 Reihen zählen · 7 Plan
 function stepper(feld,wert,min,max,schritt,einheit,label,sicht=label){   // sicht: was über dem Feld steht (Wort oder Bild)
   return `<div class="feld"><label class="lbl" for="f-${feld}"${sicht!==label?` aria-label="${label}"`:''}>${sicht}</label><div class="stepper" data-feld="${feld}" data-min="${min}" data-max="${max}" data-schritt="${schritt}"><button type="button" data-minus aria-label="${label}: weniger">−</button><input type="number" id="f-${feld}" value="${wert}" min="${min}" max="${max}" step="${schritt}" inputmode="numeric"><button type="button" data-plus aria-label="${label}: mehr">+</button>${einheit?`<span>${einheit}</span>`:''}</div></div>`;
 }
@@ -405,8 +508,13 @@ const SCHRITT=[
   ()=>`<h2 tabindex="-1">Häkeln oder stricken?</h2><div class="kacheln paar">${Object.entries(TECHNIK).map(([k,n])=>`<button type="button" class="kachel" data-technik="${k}" aria-pressed="${k===S.technik}">${ICON[k]}<span>${n}</span></button>`).join('')}</div>`,
   ()=>`${zurueck()}<h2 tabindex="-1">Was ${haekeln()?'häkelst':'strickst'} du?</h2><div class="kacheln">${Object.entries(WERKE).map(([k,w])=>`<button type="button" class="kachel" data-werk="${k}" aria-pressed="${k===S.werk}">${ICON[k]}<span>${w.name}</span></button>`).join('')}</div>`,
   ()=>{ const m=MASSE[WERKE[S.werk].mass]; return `${zurueck()}<h2 tabindex="-1">${m.titel}</h2>${m.bild()}<div class="mass">${m.felder.map(([k,l,min,max,st])=>stepper('mass.'+k,S.mass[k],min,max,st,'cm',l)).join('')}</div>${weiter('weiter')}`; },
-  ()=>`${zurueck()}<h2 tabindex="-1">Probestück</h2>${probeBild()}<div class="gleich" role="img" aria-label="Gleiche Wolle und Nadel wie für das Werk">${ICON[S.technik]}<span aria-hidden="true">=</span>${ICON[S.werk]}</div>${weiter('weiter')}<button type="button" class="weiter zweit" data-act="zettel">🖨 Zählfenster</button><p class="lp"><button type="button" class="link" data-act="zettel-a3" aria-label="Zählfenster: 4 Stück auf A3">🖨 A3 · 4 ×</button></p>`,
-  ()=>`${zurueck()}<h2 tabindex="-1">Maschen zählen</h2>${fensterBild('m')}<div class="mass">${stepper('m10',S.m10,0,80,1,'','Maschen')}</div><p class="warn" id="warn" role="img" aria-label="Nur im Fenster zählen"${S.m10===25?'':' hidden'}>⚠ ${warnBild()}</p>${weiter('weiter','Weiter',S.m10<3)}<p class="lp"><button type="button" class="link" data-act="zettel">🖨 Zählfenster</button></p>`,
+  ()=>`${zurueck()}<h2 tabindex="-1">Welche Wolle?</h2><div class="kacheln">${Object.entries(GARNE).map(([k,g])=>`<button type="button" class="kachel" data-wolle="${k}" aria-pressed="${k===S.wolle}" aria-label="${g.name}, Nadel ${g.nadel} Millimeter">${garnBild(k)}<span>${g.name}</span><span class="mm">${g.nadel} mm</span></button>`).join('')}</div>`,
+  ()=>{ const g=S.wolle&&GARNE[S.wolle], haek=haekeln(); return `${zurueck()}<h2 tabindex="-1">Probestück</h2>${g?`<div class="gleich" role="img" aria-label="Gleiche Wolle und Nadel wie für das Werk, Nadel ${g.nadel} Millimeter">${garnBild(S.wolle)}<span class="nadel" aria-hidden="true">${g.nadel} mm</span><span aria-hidden="true">=</span>${ICON[S.werk]}</div>`:''}<ol class="plan auftrag">
+    <li><span class="nr">1</span>${planIcon('anschlag')}<span><b>${probeZahl()}</b> ${haek?'Luftmaschen':'Maschen'}${haek?' <span class="plus" aria-label="plus 1 zum Wenden">+1</span>':''}</span></li>
+    <li><span class="nr">2</span>${quadratBild()}<span class="breit-hoch" role="img" aria-label="Höhe gleich Breite">↕ = ↔</span></li>
+    <li><span class="nr">3</span>${planIcon('fenster')}<button type="button" class="weiter zweit" data-act="zettel">🖨 Zählfenster</button></li>
+  </ol>${weiter('weiter','Probe fertig')}<p class="lp"><button type="button" class="link" data-act="zettel-a3" aria-label="Zählfenster: 4 Stück auf A3">🖨 A3 · 4 ×</button></p>`; },
+  ()=>`${zurueck()}<h2 tabindex="-1">Maschen zählen</h2>${fensterBild('m')}<div class="mass">${stepper('m10',S.m10,0,80,1,'','Maschen')}</div><p class="warn" id="warn" role="img" aria-label="Nur im Fenster zählen"${S.m10===probeZahl()?'':' hidden'}>⚠ ${warnBild()}</p>${weiter('weiter','Weiter',S.m10<3)}<p class="lp"><button type="button" class="link" data-act="zettel">🖨 Zählfenster</button></p>`,
   ()=>`${zurueck()}<h2 tabindex="-1">Reihen zählen</h2>${fensterBild('r')}<div class="mass">${stepper('r10',S.r10,0,120,1,'','Reihen')}</div>${weiter('weiter','Zum Plan',S.r10<3)}`,
   ()=>{ const [lb,lh]=achsen(); return `${zurueck()}<h2 tabindex="-1">Dein Plan</h2><div class="plan-kopf"><ol class="plan" id="plan"></ol><div class="werkbild" id="werkbild"></div></div>
     <div class="extras"><button type="button" class="mehr" data-act="groesse" aria-expanded="${offen.groesse}" aria-controls="groesse">↔ Grösse</button>${KLEIN?'':`<button type="button" class="mehr" data-act="garn" aria-expanded="${offen.garn}" aria-controls="garn">⚖️ Wolle</button>`}</div>
@@ -416,34 +524,41 @@ const SCHRITT=[
     <button type="button" class="link neu" data-act="neu">↺ Neu</button>`; }
 ];
 function planAktualisieren(){
-  const R=rechnen(), haek=haekeln(), fertig=WERKE[S.werk].fertig;
-  const li=[`${planIcon('anschlag')}<span><b>${R.anschlag}</b> ${haek?'Luftmaschen':'Maschen'}${haek?' <span class="plus" aria-label="plus 1 zum Wenden">+1</span>':''}</span>`,
-    `${planIcon('reihen')}<span><b>${R.reihen}</b> Reihen</span><span class="cm">📏 ${S.h} cm</span>`];
-  if(fertig)li.push(`<span class="fertig-bild" role="img" aria-label="${fertig}"><span aria-hidden="true">🪡</span><span aria-hidden="true">→</span>${ICON[S.werk]}</span>`);   // fertig zeigt das Bild, der Satz nur fürs Vorlesen
+  const R=rechnen(), haek=haekeln(), fertig=WERKE[S.werk].fertig, K=R.kappe, cm=n=>`<span class="cm">📏 ${Math.round(n/S.r10*10)} cm</span>`;
+  const li=[`${planIcon('anschlag')}<span><b>${R.anschlag}</b> ${haek?'Luftmaschen':'Maschen'}${haek?' <span class="plus" aria-label="plus 1 zum Wenden">+1</span>':''}</span>`];
+  if(K){   // Kappe: Bündchen, gerader Teil, Spitze
+    if(K.buend)li.push(`${planIcon('rippen')}<span><b>${K.buend}</b> Reihen</span>${cm(K.buend)}`);
+    li.push(`${planIcon('reihen')}<span><b>${K.gerade}</b> Reihen</span>${cm(K.gerade)}`);
+    li.push(`${planIcon('spitze')}${spitzeBild(K)}${cm(K.sp)}`);
+  }else li.push(`${planIcon('reihen')}<span><b>${R.reihen}</b> Reihen</span><span class="cm">📏 ${S.h} cm</span>`);
+  if(fertig)li.push(`<span class="fertig-bild" role="img" aria-label="${fertig}">${K?`${planIcon('zieh')}<span aria-hidden="true">→</span>${planIcon('naht')}`:'<span aria-hidden="true">🪡</span>'}<span aria-hidden="true">→</span>${ICON[S.werk]}</span>`);   // fertig zeigt das Bild, der Satz nur fürs Vorlesen
   $('plan').innerHTML=li.map((t,i)=>`<li><span class="nr">${i+1}</span>${t}</li>`).join('');
   $('werkbild').innerHTML=werkBild(R);
   const g=$('garn-erg'); if(g)g.innerHTML=R.gramm?`≈ <b>${R.gramm} g</b> = <b>${R.knaeuel}</b> × 🧶 50 g`:'';
 }
-// Der Weg oben: Probe umfasst die Schritte 3 bis 5
+// Der Weg oben: Probe umfasst die Schritte 4 bis 6
 function pillen(){
-  const P=[[0,'Technik',S.technik&&TECHNIK[S.technik]],[1,'Werk',S.werk&&WERKE[S.werk].name],[2,'Messen',S.werk&&massText()],[3,'Probe',`${S.m10} M · ${S.r10} R`],[6,'Plan','']];
+  const P=[[0,'Technik',S.technik&&TECHNIK[S.technik]],[1,'Werk',S.werk&&WERKE[S.werk].name],[2,'Messen',S.werk&&massText()],[3,'Wolle',S.wolle&&`${GARNE[S.wolle].name} · ${GARNE[S.wolle].nadel} mm`],[4,'Probe',`${S.m10} M · ${S.r10} R`],[7,'Plan','']];
   return P.map(([i,name,wahl])=>{
-    const probe=i===3, jetzt=probe?S.schritt>=3&&S.schritt<=5:S.schritt===i, fertig=!jetzt&&S.weit>(probe?5:i);
+    const probe=i===4, jetzt=probe?S.schritt>=4&&S.schritt<=6:S.schritt===i, fertig=!jetzt&&S.weit>(probe?6:i);
     return `<button type="button" data-gehe="${i}"${jetzt?' aria-current="step"':''}${i>S.weit?' disabled':''}${fertig?' class="fertig"':''}>${esc(fertig&&wahl?wahl:name)}</button>`;
   }).join('');
 }
 function zeigen(fokus=true){
   $('weg').innerHTML=pillen();
   $('main').innerHTML=SCHRITT[S.schritt]();
-  if(S.schritt===6)planAktualisieren();
+  if(S.schritt===7)planAktualisieren();
   if(fokus){ window.scrollTo(0,0); $('main').querySelector('h2')?.focus({preventScroll:true}); }
-  $('drucken').disabled=S.schritt<3;   // vorher gibt es noch nichts zu drucken
+  $('drucken').disabled=S.schritt<4;   // vorher gibt es noch nichts zu drucken
   speichern();
 }
 function gehe(i){ S.schritt=i; S.weit=Math.max(S.weit,i); zeigen(); }
 function technikWaehlen(k){
   if(S.technik!==k){ S.technik=k; S.m10=0; S.r10=0; S.seite=0; S.gew=0; S.weit=1; masseSetzen(); }   // andere Technik, andere Maschenprobe
   S.schritt=1; S.weit=Math.max(S.weit,1);
+}
+function wolleWaehlen(k){
+  if(S.wolle!==k){ S.wolle=k; S.m10=0; S.r10=0; S.seite=0; S.gew=0; S.weit=3; }   // andere Wolle, andere Maschenprobe
 }
 function werkWaehlen(k){
   if(S.werk!==k){ S.werk=k; S.weit=2; }
@@ -456,8 +571,8 @@ function feldSchreiben(feld,v){ if(feld.startsWith('mass.'))S.mass[feld.slice(5)
 function geaendert(feld){
   if(feld.startsWith('mass.'))masseSetzen();
   if(feld==='m10'||feld==='r10'){ const b=document.querySelector('[data-act="weiter"]'); if(b)b.disabled=S[feld]<3; }
-  if(feld==='m10'&&$('warn'))$('warn').hidden=S.m10!==25;   // 25 Maschen hat das ganze Probestück
-  if(S.schritt===6){ planAktualisieren(); Planer.leuchte('#werkbild'); }
+  if(feld==='m10'&&$('warn'))$('warn').hidden=S.m10!==probeZahl();
+  if(S.schritt===7){ planAktualisieren(); Planer.leuchte('#werkbild'); }
   $('weg').innerHTML=pillen();
   speichern();
 }
@@ -467,16 +582,17 @@ function setzen(st,v){
   feldSchreiben(st.dataset.feld,v); st.querySelector('input').value=v; geaendert(st.dataset.feld);
 }
 Planer.verlauf({hole:()=>S,setze(z){ Object.assign(S,z); zeigen(false); }});
-$('drucken').addEventListener('click',()=>{ if(S.schritt===6)drucken(true,'a4'); else drucken(false); });
+$('drucken').addEventListener('click',()=>{ if(S.schritt===7)drucken(true,'a4'); else drucken(false); });
 $('weg').addEventListener('click',e=>{
   const b=e.target.closest('[data-gehe]'); if(!b||b.disabled)return;
-  const i=Number(b.dataset.gehe); S.schritt=i===3&&S.weit>=4?4:i; zeigen();   // Probe: gleich zum Zählen, wenn das Probestück schon da ist
+  const i=Number(b.dataset.gehe); S.schritt=i===4&&S.weit>=5?5:i; zeigen();   // Probe: gleich zum Zählen, wenn das Probestück schon da ist
 });
 $('main').addEventListener('click',e=>{
   const pm=e.target.closest('[data-minus],[data-plus]');
   if(pm){ const st=pm.closest('.stepper'); setzen(st,(Number(st.querySelector('input').value)||0)+Number(st.dataset.schritt)*(pm.hasAttribute('data-plus')?1:-1)); return; }
   const t=e.target.closest('[data-technik]'); if(t){ Planer.merke(); technikWaehlen(t.dataset.technik); zeigen(); return; }
   const w=e.target.closest('[data-werk]'); if(w){ Planer.merke(); werkWaehlen(w.dataset.werk); S.weit=Math.max(S.weit,2); zeigen(); return; }
+  const g=e.target.closest('[data-wolle]'); if(g){ Planer.merke(); wolleWaehlen(g.dataset.wolle); gehe(4); return; }
   const a=e.target.closest('[data-act]'); if(!a)return;
   switch(a.dataset.act){
     case 'weiter': if(!a.disabled)gehe(S.schritt+1); break;
@@ -485,7 +601,7 @@ $('main').addEventListener('click',e=>{
     case 'zettel-a3': drucken(false,'a3'); break;
     case 'groesse': case 'garn': {
       const k=a.dataset.act; offen[k]=!offen[k]; a.setAttribute('aria-expanded',offen[k]); $(k).hidden=!offen[k];
-      if(k==='garn'&&offen.garn&&!S.seite){ S.seite=clamp(250/S.m10,5,30); $('f-seite').value=S.seite; geaendert('seite'); }   // 25 Maschen breit, als Quadrat
+      if(k==='garn'&&offen.garn&&!S.seite){ S.seite=clamp(probeZahl()*10/S.m10,5,30); $('f-seite').value=S.seite; geaendert('seite'); }   // das Probestück als Quadrat
       break; }
     case 'neu': { Planer.merke(); const name=kindName()||S.name; Object.assign(S,JSON.parse(JSON.stringify(START)),{name,papier:S.papier}); offen.groesse=offen.garn=false; zeigen(); break; }
   }

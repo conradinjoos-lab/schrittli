@@ -652,6 +652,32 @@
     {"text": "Zeichne einen kleinen Piloten und Wölkchen auf weisses Papier. Schneide sie aus und bemale sie. Klebe die Wolken auf den Flieger und setze den Piloten ins Cockpit.", "bilder": ["schritt-06.webp"], "tipp": ["Die Vorlagen für Pilot und Wolken gibt es auf komet-verlag.de/papierflieger."]}
    ],
    "fertig": "Bravo! Dein Wolken-Jet ist fertig. Der kleine Pilot steuert ihn sicher durch die Luft."
+  },
+  {
+   "id": "fingerstricken",
+   "title": "Fingerstricken",
+   "areaId": "stricken",
+   "gruppe": "Fingerstricken",
+   "stufen": [2, 3, 4, 5, 6],
+   "niveau": 1,
+   "grundtechnik": true,
+   "techniken": ["fingerstricken", "abketten"],
+   "titelbild": "titelbild.webp",
+   "material": ["wolle", "schere"],
+   "steps": [
+    {"text": "Halte das Fadenende mit dem Daumen.", "bilder": ["schritt-01.webp"]},
+    {"text": "Flechte bis zum kleinen Finger: hinter, vor, hinter, um den Finger.", "bilder": ["schritt-02.webp"]},
+    {"text": "Flechte zurück zum Zeigefinger: vor, hinter, um den Finger.", "bilder": ["schritt-03.webp"]},
+    {"text": "Flechte noch einmal hin und zurück.", "bilder": ["schritt-04.webp"]},
+    {"text": "Hebe die untere Schlaufe über den Finger.", "bilder": ["schritt-05.webp"]},
+    {"text": "Mach das bei allen vier Fingern.", "bilder": ["schritt-06.webp", "schritt-06b.webp"]},
+    {"text": "Flechte wieder hin und zurück.", "bilder": ["schritt-07.webp"]},
+    {"text": "Hebe wieder ab. Zieh die Schnur nach unten. Mach so weiter.", "bilder": ["schritt-08.webp"]},
+    {"text": "Hebe die Schlaufe vom kleinen Finger auf den Ringfinger. Hebe die untere drüber.", "bilder": ["schritt-09.webp", "schritt-09b.webp"]},
+    {"text": "Mach so weiter bis zum Zeigefinger.", "bilder": ["schritt-10.webp"]},
+    {"text": "Schneide den Faden ab. Zieh ihn durch die Schlaufe. Zieh fest.", "bilder": ["schritt-11.webp"]}
+   ],
+   "fertig": "Bravo! Deine Strickschnur ist fertig."
   }
  ]
 }
