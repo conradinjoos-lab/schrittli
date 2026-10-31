@@ -553,3 +553,4 @@ Logos und Bilder, die die Lehrperson in der Kontrolle unter «Wünsche» einsetz
 | Motiv | Figur-ID | URL | Autor | Lizenz |
 |---|---|---|---|---|
 | FC Neunkirch | wu-fc-neunkirch | – | Lehrperson, Unterrichtsmaterial | Schulgebrauch |
+| FC Neunkirch | wu-fc-neunkirch-2 | https://fcneunkirch.ch/wp-content/themes/fcneunkirch-fcneunkirch.ch/res/logos/logo.png | Gefunden von Claude, geprüft von der Lehrperson | Schulgebrauch |
