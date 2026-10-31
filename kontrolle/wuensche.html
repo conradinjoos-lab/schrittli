@@ -130,7 +130,7 @@ function karte(w){
  const knoepfe=e||gefunden||w.svg
   ?`<div class="felder"><label>Name im Generator<input type="text" class="titel" maxlength="40" value="${esc(w.titel||w.name)}"></label>
     <label>Welt<select class="welt">${welten}</select></label></div>
-   <div class="reihe"><button class="p" data-tun="auf">Übernehmen</button>${e?'':'<button class="s" data-tun="nochmal">${sucht?'Nochmals suchen':'Nochmals zeichnen'}</button>'}<button class="s" data-tun="bild">🖼 Bild</button><button class="s rot" data-tun="ab">${w.eigen?'Verwerfen':'Ablehnen'}</button></div>
+   <div class="reihe"><button class="p" data-tun="auf">Übernehmen</button>${e?'':`<button class="s" data-tun="nochmal">${sucht?'Nochmals suchen':'Nochmals zeichnen'}</button>`}<button class="s" data-tun="bild">🖼 Bild</button><button class="s rot" data-tun="ab">${w.eigen?'Verwerfen':'Ablehnen'}</button></div>
    ${e?'':`<form class="reihe nochmal" hidden><input type="text" class="hinweis grow" maxlength="500" placeholder="Hinweis"><select class="stil" aria-label="Stil">${Object.entries(STIL).map(([k,t])=>`<option value="${k}"${k===w.stil?' selected':''}>${t}</option>`).join('')}</select><button class="p">Los</button></form>`}`
   :`<div class="reihe"><button class="s" data-tun="jetzt"${w.status==='zeichnet'?' disabled':''}>${sucht?'Jetzt suchen':'Jetzt zeichnen'}</button><button class="s" data-tun="bild">🖼 Bild</button><button class="s rot" data-tun="ab">Ablehnen</button></div>`;
  return `<section class="karte wunsch" data-id="${w.id}"><div><div class="bild">${bild}</div>${wahlen}</div><div>
