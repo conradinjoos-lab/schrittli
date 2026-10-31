@@ -51,7 +51,7 @@ function hilfen(browser,basis,kontexte){
         if(adresse) await p.goto(basis+adresse,{waitUntil:'load'}); return p; };
       return k; },
     /* App laden und warten, bis die Inhalte da sind. Familie braucht ein Profil, Schule eine Klasse. */
-    async app(k,art='schule'){ const p=await k.seite(art==='schule'?'/schule/':'/'); await p.waitForFunction(()=>typeof view!=='undefined'&&view.name&&view.name!=='boot'&&typeof contentInfo!=='undefined'&&contentInfo);
+    async app(k,art='schule'){ const p=await k.seite(art==='schule'?'/schule/':'/familie.html'); await p.waitForFunction(()=>typeof view!=='undefined'&&view.name&&view.name!=='boot'&&typeof contentInfo!=='undefined'&&contentInfo);
       await p.evaluate(a=>{ if(a==='familie'&&!S.profiles.length){ S.profiles.push({id:'p1',name:'Test',emoji:AVATARS[0],color:COLORS[1],stars:0}); S.activeProfile='p1'; } if(!S.settings.klasse) S.settings.klasse=3; if(a==='schule') KL.gefragt=true; save(); go('home'); },art); return p; },
     /* Wirft, wenn etwas nicht stimmt */
     pruefe(wert,text){ if(!wert) throw new Error(text); },

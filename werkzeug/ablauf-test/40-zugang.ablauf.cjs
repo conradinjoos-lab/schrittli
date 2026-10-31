@@ -6,7 +6,7 @@ const zeige=([n,a])=>n+(a?' '+JSON.stringify(a):'');
 const offen=async(p,n,a)=>{ await p.evaluate(([n,a])=>{ document.querySelectorAll('.modal-bg,.ww').forEach(e=>e.remove()); if(n==='home'&&a===undefined) go('home'); else go(n,a||{}); },[n,a]); await new Promise(f=>setTimeout(f,180)); };
 
 const viewport=async t=>{ const k=await t.kontext();
-  for(const a of ['/','/schule/']){ const p=await k.seite(a), inhalt=await p.getAttribute('meta[name=viewport]','content'); t.pruefe(!/user-scalable|maximum-scale/.test(inhalt),a+': '+inhalt); await p.close(); } };
+  for(const a of ['/familie.html','/schule/']){ const p=await k.seite(a), inhalt=await p.getAttribute('meta[name=viewport]','content'); t.pruefe(!/user-scalable|maximum-scale/.test(inhalt),a+': '+inhalt); await p.close(); } };
 
 /* Zwei Finger wie auf dem Gerät; die Zeichenfläche bleibt davon ausgenommen */
 const zoom=async t=>{ const k=await t.kontext({breite:390,hoehe:844}), p=await t.app(k,'schule'), cdp=await k.c.newCDPSession(p); await t.warte(150);
@@ -77,4 +77,12 @@ const malen=async t=>{ for(const [b,h] of [[1024,768],[768,1024],[390,844]]){ co
     const f=await p.locator('#pc').boundingBox(); await p.mouse.move(f.x+30,f.y+30); await p.mouse.down(); await p.mouse.move(f.x+90,f.y+60,{steps:4}); await p.mouse.up(); const vor=await dunkel(); t.pruefe(vor>0,wo+': Strich fehlt');
     await p.setViewportSize({width:h,height:b}); await t.warte(300); const q=await mass(); t.pruefe(q.bild===q.innen,`${wo} gedreht: Bild ${q.bild} statt ${q.innen}`); t.pruefe(q.rahmen!==z.rahmen,wo+': Fläche dreht nicht mit'); t.pruefe(await dunkel()===vor,wo+': Strich verloren'); await p.close(); } };
 
-module.exports=[{name:'Zugang Malen',lauf:malen},{name:'Zugang Zoom erlaubt',lauf:viewport},{name:'Zugang Pinch',lauf:zoom},{name:'Zugang Schrift 16',lauf:schrift},{name:'Zugang Fenster',lauf:fenster},{name:'Zugang Tastatur',lauf:tastatur},{name:'Zugang Treffer',lauf:treffer},{name:'Zugang Marke',lauf:marke}];
+/* Hauptadresse führt zur Schule, Query und Hash bleiben. Admin führt zur Kontrolle, im Unterricht ist er weg, die Familie hat ihn nicht */
+const hauptadresse=async t=>{ const k=await t.kontext(), p=await k.seite('/?v=1#x=2'); await p.waitForURL(/\/schule\/\?v=1#x=2$/,{timeout:3000}); await p.close(); t.keineFehler(k); };
+const admin=async t=>{ const k=await t.kontext(), p=await t.app(k,'schule'), a=p.locator('a.v3-admin');
+  t.pruefe(await a.isVisible(),'Admin fehlt'); t.pruefe(await a.getAttribute('href')==='../kontrolle/','Admin: Ziel'); t.pruefe((await a.boundingBox()).height>=48,'Admin: Höhe');
+  await p.evaluate(()=>document.body.classList.add('unterricht')); t.pruefe(!(await a.isVisible()),'Admin im Unterricht'); await p.evaluate(()=>document.body.classList.remove('unterricht'));
+  await a.click(); await p.waitForURL(/\/kontrolle\/$/,{timeout:3000}); await p.close();
+  const f=await t.kontext(), q=await t.app(f,'familie'); t.pruefe(!(await q.locator('a.v3-admin').count()),'Admin in der Familie'); await q.close(); };
+
+module.exports=[{name:'Zugang Hauptadresse',lauf:hauptadresse},{name:'Zugang Admin',lauf:admin},{name:'Zugang Malen',lauf:malen},{name:'Zugang Zoom erlaubt',lauf:viewport},{name:'Zugang Pinch',lauf:zoom},{name:'Zugang Schrift 16',lauf:schrift},{name:'Zugang Fenster',lauf:fenster},{name:'Zugang Tastatur',lauf:tastatur},{name:'Zugang Treffer',lauf:treffer},{name:'Zugang Marke',lauf:marke}];

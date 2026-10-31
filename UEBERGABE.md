@@ -17,7 +17,7 @@ Repo: `conradinjoos-lab/schrittli` (GitHub Pages, Branch main, Cache bis 10 Min 
 |---|---|
 | `quelle/p1.html` | HTML-Kopf + gesamtes CSS, endet mit `<script>` |
 | `quelle/p2.js` | gesamtes JavaScript (ein File, kein Build-Tool) |
-| `quelle/bauen.sh` | erzeugt `index.html` (Familie) und `schule/index.html` (Schule, mit `window.SCHULE=true`) – **nie die index.html direkt editieren** |
+| `quelle/bauen.sh` | erzeugt `familie.html` (Familie, seit 31.10.2026 ohne Link), `index.html` (Weiterleitung zur Schule aus `quelle/weiter.html`) und `schule/index.html` (Schule, mit `window.SCHULE=true`) – **nie die gebauten Dateien direkt editieren** |
 | `inhalte.json` | Videos der Familienversion (55), wird beim Start geladen und überschreibt gleichnamige IDs |
 | `katalog.json` | Vorauswahl für Eltern (76), im Elternbereich → Katalog mit «Hinzufügen» |
 | `schule/schule.json` | Videos der Schulversion (357 veröffentlicht, 30.10.2026; optional `vorlagen` = Links in den Vorlagen-Generator): `areaId` = Verfahren, `stufen` = Klassen [1–6], `material` = IDs, optional `zeit` = Minuten (1–15) für Mini-Projekte |

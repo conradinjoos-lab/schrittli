@@ -581,6 +581,7 @@ body:has(.v3){background:#F5F6F8}
 .v3-fuss{text-align:center;margin-top:36px}
 .v3-werkzeuge{display:inline-flex;align-items:center;gap:8px;border:2px solid #1C4A63;background:#EAF3F8;color:#1C4A63;font-family:var(--display);font-weight:700;font-size:17px;border-radius:999px;padding:10px 20px;margin:0 8px 8px;box-shadow:2px 3px 0 var(--sh);cursor:pointer}
 .v3-link{border:0;background:none;color:#5B6672;font-weight:700;font-size:14px;text-decoration:underline;text-underline-offset:3px;padding:8px 12px;min-height:48px}
+.v3-admin{display:inline-block;line-height:32px;color:inherit}.v3-admin .ico{width:16px;height:16px;margin-right:5px;vertical-align:-3px}
 .v3-thema-titel h1{margin:0;font-weight:900;font-size:30px;line-height:1.1}
 .v3-kopf .v3-thema-titel{margin-left:4px}
 .v3-kopf:has(.v3-thema-titel) .v3-logo{display:none}
@@ -705,7 +706,7 @@ body:has(.kid.pl:not(.kino):not(.beamer)) .fm-knopf{display:none}
 .fm-arten input{width:20px;height:20px;accent-color:var(--lern)}.fm-text{font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;resize:vertical;width:100%;background:var(--surface2);color:var(--ink)}
 .fm-fehler{margin:0;color:#D64545;font-weight:600}.fm-ende{margin:0;padding:24px 0;text-align:center;font-size:30px;font-weight:800;color:#D64545}.fm-ende.gut{font-size:64px;line-height:1;color:#3BB273}.fm [data-act=senden]:disabled{opacity:.4;cursor:default}
 /* ---------- Unterricht: iPad ist mit einer Klasse verbunden ---------- */
-body.unterricht .v3-klassen,body.unterricht .v3-link[data-act=lehrer],body.unterricht .lehrer-zeile,body.unterricht .v3-kachel.werkzeug,body.unterricht .v3-werkzeuge[data-act=werkzeuge]{display:none!important}
+body.unterricht .v3-klassen,body.unterricht .v3-link[data-act=lehrer],body.unterricht .v3-admin,body.unterricht .lehrer-zeile,body.unterricht .v3-kachel.werkzeug,body.unterricht .v3-werkzeuge[data-act=werkzeuge]{display:none!important}
 body.u-ohne-galerie [data-act=gallery]{display:none!important}
 .u-liste{max-width:760px;margin:24px auto 0}
 .u-karte{display:flex;align-items:center;gap:22px;max-width:760px;margin:28px auto 0;background:#fff;border-radius:22px;padding:20px 24px;box-shadow:0 2px 10px rgba(28,36,48,.08)}
@@ -1255,7 +1256,7 @@ const zustandHtml=art=>`<span class="z-chip${ZUSTAND[art][1]}" role="status">${Z
 /* iPad: Teilen → Plus → Home, gezeichnet */
 const teilenSvg='<svg class="ico" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" aria-hidden="true"><path d="M12 15V3M8 7l4-4 4 4M7 11H5v10h14V11h-2"/></svg>';
 const ipadWeg=(k='')=>`<div class="ipad-weg ${k}" role="img" aria-label="Teilen, Zum Home-Bildschirm">${teilenSvg}<i>→</i><span>➕</span><i>→</i><span>🏠</span></div>`;
-const v3Fuss=(mitWerkzeuge=true)=>`<div class="v3-fuss">${mitWerkzeuge?'<button class="v3-werkzeuge" data-act="werkzeuge">🧰 Werkzeuge</button>':''}${SCHULE?'<button class="v3-link" data-act="lehrer">Für Lehrpersonen</button>':''}</div>`;   // unten auf Raum, Start und Thema
+const v3Fuss=(mitWerkzeuge=true)=>`<div class="v3-fuss">${mitWerkzeuge?'<button class="v3-werkzeuge" data-act="werkzeuge">🧰 Werkzeuge</button>':''}${SCHULE?`<button class="v3-link" data-act="lehrer">Für Lehrpersonen</button><a class="v3-link v3-admin" href="../kontrolle/">${ico('lock')}Admin</a>`:''}</div>`;   // unten auf Raum, Start und Thema
 function vorlagenBox(vl,pfad=f=>VORL_BASE+f){ return (vl||[]).length?`<div class="an-box vorlage"><span class="sym" aria-hidden="true">📄</span><div><p>Vorlage</p>${vl.map(x=>x.datei[0]==='?'   // «?form=herz&b=3» öffnet den Generator mit Form und Grösse
   ?`<div class="an-paar"><a class="an-laden" href="${esc(VORL_BASE+x.datei)}">✂ ${esc(x.name)}</a><a class="an-laden zweit" href="${esc(VORL_BASE+x.datei+'&pausen=1')}">✏️ Abpausen</a></div>`
   :x.datei.includes('/?')   // «perlen/?tier=eidechse» ist eine Seite (Zählmuster), kein Download
@@ -1407,7 +1408,7 @@ function kidModal(html,actions={}){ return modal(html,actions,'kid'); }
 /* ============================== Fehler melden ============================== */
 /* Knopf auf jeder Seite, auch über Fenstern und in der Kachelwahl. Die Meldung geht mit Ort (Seite, Video, Schritt, Zeit) und Stand an den Worker werkzeug/anmelden (/melden)
    und erscheint in der Online-Kontrolle. Keine Namen, kein Konto, nichts aus dem Profil. Offline bleibt sie in «schrittli.melden.warte» (dieselbe Warteschlange wie vorlagen/melden.js). */
-const MELDEN='https://schrittli-anmelden.conradinjoos.workers.dev/melden', FM_WARTE='schrittli.melden.warte', APP_STAND='2026-10-31-c938300';   // __STAND__ ersetzt quelle/bauen.sh
+const MELDEN='https://schrittli-anmelden.conradinjoos.workers.dev/melden', FM_WARTE='schrittli.melden.warte', APP_STAND='2026-10-31-5c25a71';   // __STAND__ ersetzt quelle/bauen.sh
 let ORT=null;   // vom aktuellen Screen gesetzt: ()=>({video,titel,schritt})
 function fmGeraet(){ const u=navigator.userAgent; const os=/iPad/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1)?'iPad':/iPhone/.test(u)?'iPhone':/Android/.test(u)?'Android':/CrOS/.test(u)?'Chromebook':/Windows/.test(u)?'Windows':/Mac/.test(u)?'Mac':'anderes'; const br=/Edg\//.test(u)?'Edge':/Firefox\//.test(u)?'Firefox':/Chrome\//.test(u)?'Chrome':/Safari\//.test(u)?'Safari':''; return (os+' '+br).trim(); }
 function fmAdresse(){ const u=new URL(location.href); for(const k of [...u.searchParams.keys()]) if(/token|schein|schluessel|code|key|name/i.test(k)) u.searchParams.delete(k); return (u.pathname+u.search+u.hash).replace(/[0-9a-f]{32,}/gi,'…'); }

@@ -140,7 +140,7 @@ const zustandHtml=art=>`<span class="z-chip${ZUSTAND[art][1]}" role="status">${Z
 /* iPad: Teilen → Plus → Home, gezeichnet */
 const teilenSvg='<svg class="ico" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" aria-hidden="true"><path d="M12 15V3M8 7l4-4 4 4M7 11H5v10h14V11h-2"/></svg>';
 const ipadWeg=(k='')=>`<div class="ipad-weg ${k}" role="img" aria-label="Teilen, Zum Home-Bildschirm">${teilenSvg}<i>→</i><span>➕</span><i>→</i><span>🏠</span></div>`;
-const v3Fuss=(mitWerkzeuge=true)=>`<div class="v3-fuss">${mitWerkzeuge?'<button class="v3-werkzeuge" data-act="werkzeuge">🧰 Werkzeuge</button>':''}${SCHULE?'<button class="v3-link" data-act="lehrer">Für Lehrpersonen</button>':''}</div>`;   // unten auf Raum, Start und Thema
+const v3Fuss=(mitWerkzeuge=true)=>`<div class="v3-fuss">${mitWerkzeuge?'<button class="v3-werkzeuge" data-act="werkzeuge">🧰 Werkzeuge</button>':''}${SCHULE?`<button class="v3-link" data-act="lehrer">Für Lehrpersonen</button><a class="v3-link v3-admin" href="../kontrolle/">${ico('lock')}Admin</a>`:''}</div>`;   // unten auf Raum, Start und Thema
 function vorlagenBox(vl,pfad=f=>VORL_BASE+f){ return (vl||[]).length?`<div class="an-box vorlage"><span class="sym" aria-hidden="true">📄</span><div><p>Vorlage</p>${vl.map(x=>x.datei[0]==='?'   // «?form=herz&b=3» öffnet den Generator mit Form und Grösse
   ?`<div class="an-paar"><a class="an-laden" href="${esc(VORL_BASE+x.datei)}">✂ ${esc(x.name)}</a><a class="an-laden zweit" href="${esc(VORL_BASE+x.datei+'&pausen=1')}">✏️ Abpausen</a></div>`
   :x.datei.includes('/?')   // «perlen/?tier=eidechse» ist eine Seite (Zählmuster), kein Download
