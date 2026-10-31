@@ -380,7 +380,7 @@ async function boot(){
   await Promise.race([grund,frist(S.videos.length?2000:8000)]); await Promise.race([neben,frist(400)]); spaet=true;
   const school=parseSchool(); if(school){ go('school',{video:school}); return; }
   uStart(); rmStart(); swStart(); if(uAktiv()) uWechsel(); klStart();
-  document.addEventListener('click',e=>{ const b=e.target.closest('[data-wer]'); if(b){ e.preventDefault(); if(SCHULE&&KL.klassen.length) kinderWechsel(); else takePhoto(videoJetzt(),null,true); } });   // Kurzlogin oben rechts: Wechsel führt zum Stand des neuen Kindes
+  document.addEventListener('click',e=>{ const b=e.target.closest('[data-wer]'); if(b){ e.preventDefault(); if(KL.klassen.length) kinderWechsel(); else werLeer(); } });   // Kurzlogin oben rechts: Wechsel führt zum Stand des neuen Kindes
   addEventListener('pagehide',()=>{ if(saveT) saveJetzt(); }); if(SCHULE){ entwuerfeSpiegeln(); document.addEventListener('visibilitychange',()=>{ if(!document.hidden) entwuerfeSpiegeln(); }); }
   const zk=zurueckStelle(); if(zk){ NAV.tiefe=zk.tiefe; go(zk.view.name,zk.view.params); hochScrollen(zk.y); return; }   // Zurück aus den Vorlagen: gleiche Seite, gleiche Höhe wie beim Draufklicken
   if(SCHULE){ go(KL.klassen.length&&!kind()?'wer':S.settings.klasse?'home':'klasse'); return; }
@@ -1361,10 +1361,10 @@ async function klHolen(){ if(!SCHULE||KL.laeuft) return; const token=klToken(); 
     KL.klassen=klGanz(d.klassen.map(k=>({id:String(k.id||''),name:String(k.name||'').slice(0,80),stufe:STUFEN.includes(+k.stufe)?+k.stufe:null,namen:(Array.isArray(k.namen)?k.namen:[]).map(n=>String(n).slice(0,30)).filter(Boolean)})).filter(k=>k.id&&k.namen.length));
     KL.zeit=Date.now(); klSpeichern(); kinderPruefen();
     if(!KL.gefragt&&!kind()&&KL.klassen.length&&['home','klasse','raum','unterricht'].includes(view.name)) go('wer');
-    else if(view.name==='wer'&&!$('[data-act=ich]')&&!$('.ww-stand')||view.name==='lehrer') render();
+    else if(view.name==='wer'&&!$('[data-act=ich]')&&!$('[data-art]')&&!$('.ww-stand')||view.name==='lehrer') render();
   }catch(e){} finally{ z.ende(); KL.laeuft=false; } }
-const chipText=()=>{ const l=kinder(); return '🙂 '+(l.length?l[0].name+(l.length>1?' +'+(l.length-1):''):'Ohne Name'); };
-const kindChip=(cls)=>SCHULE?`<button class="${cls}" data-wer aria-label="Name">${esc(chipText())}</button>`:'';
+const chipText=()=>{ const l=kinder(); return '🙂 '+(l.length?l[0].name+(l.length>1?' +'+(l.length-1):''):'Anmelden'); };
+const kindChip=(cls)=>SCHULE?`<button class="${cls}${kinder().length?'':' wer-leer'}" data-wer>${esc(chipText())}</button>`:'';
 const klasseVon=kd=>{ const l=KL.klassen.find(x=>x.id===kd.liste), s=l&&(l.stufe||+(/[1-6]/.exec(l.name)||[0])[0]); return STUFEN.includes(s)?s:STUFEN.includes(+S.settings.klasse)?+S.settings.klasse:0; };
 /* Kachelwahl über dem ganzen Bildschirm: erst Klassen, dann Namen, immer ohne Scrollen. */
 const wwHtml=(titel,inhalt,{zurueck,zu=true,caps}={})=>`<div class="ww${caps?' caps':''}"><div class="ww-kopf">${zurueck?'<button class="v3-rund gross" data-act="zurueck" aria-label="Zurück">←</button>':'<span></span>'}<h1>${esc(titel)}</h1>${zu?'<button class="v3-rund gross" data-act="zu" aria-label="Schliessen">✕</button>':'<span></span>'}</div>${inhalt}</div>`;
@@ -1378,19 +1378,26 @@ function wwFuellen(r){ wwMessen(r); new ResizeObserver(()=>wwMessen(r)).observe(
 /* Wahl setzen: Stand bleibt beim bisherigen Kind. Geteilte Objekte lösen, das erste Kind behält seines, damit eine offene Ansicht weiterschreibt. */
 function kinderSetzen(neu){ entwuerfeSpiegeln(); kindKeys().slice(1).forEach(k=>{ if(S.arbeit[k]) S.arbeit[k]=JSON.parse(JSON.stringify(S.arbeit[k])); });
   S.settings.kinder=neu.slice(0,6); const e=kind(), s=e&&klasseVon(e); if(s) S.settings.klasse=s; if(e) S.settings.liste=e.liste; kindMerken(); entwurfMerken(); saveJetzt();
-  $$('[data-wer]').forEach(x=>{ x.textContent=chipText(); }); }
+  $$('[data-wer]').forEach(x=>{ x.textContent=chipText(); x.classList.toggle('wer-leer',!kinder().length); }); }
 const gleicheWahl=(a,b)=>a.length===b.length&&a.every((k,i)=>kindKeyVon(k)===kindKeyVon(b[i]));
 const arbeitsSicht=()=>['player','anleitung'].includes(view.name);
-/* Kacheln mit Mehrfachwahl. foto: Kamera-Knopf, die aktuelle Wahl ist schon da. wechsel: leer, damit ein neues Kind nicht zur Gruppe wird. nachtrag: nur bestätigen. */
-function werKacheln(el,{modus,fertig,zu,ohne}){ const ks=KL.klassen, wechsel=modus==='wechsel'; let gew=wechsel?[]:kinder().slice(), k=ks.length===1?ks[0]:ks.find(x=>x.id===((kind()||{}).liste||S.settings.liste))||null;
-  const fuss=()=>{ const n=gew.length; return `<div class="ww-fuss">${wechsel?`<button class="ww-gehe ohne" data-act="ohne">Ohne Name</button>`:''}${modus==='nachtrag'?`<button class="ww-gehe" data-act="ok" aria-label="OK"${n?'':' disabled'}>${ico('check')}${n?` <b>${n}</b>`:''}</button>`:`<button class="ww-kamera" data-act="kamera" aria-label="Foto">📷${n?` <b>${n}</b>`:''}</button>`}${wechsel?`<button class="ww-gehe" data-act="ok" aria-label="Weiter"${n?'':' disabled'}>→${n?` <b>${n}</b>`:''}</button>`:''}</div>`; };
+const WW_ART=[['allein','bibo-hallo','Allein'],['gruppe','beide-highfive','Gruppe']];
+/* Kacheln. wechsel: Klasse, Allein oder Gruppe, dann Namen; leer, damit ein neues Kind nicht zur Gruppe wird. foto: Mehrfachwahl mit Kamera-Knopf, die aktuelle Wahl ist schon da. nachtrag: nur bestätigen. */
+function werKacheln(el,{modus,fertig,zu,ohne}){ const ks=KL.klassen, wechsel=modus==='wechsel'; let gew=wechsel?[]:kinder().slice(), k=ks.length===1?ks[0]:wechsel?null:ks.find(x=>x.id===((kind()||{}).liste||S.settings.liste))||null, art=wechsel?null:'gruppe';
+  const fuss=()=>{ const n=gew.length, zahl=n?` <b>${n}</b>`:'', kam=`<button class="ww-kamera" data-act="kamera" aria-label="Foto">📷${zahl}</button>`, f=t=>`<div class="ww-fuss">${t}</div>`;
+    if(modus==='nachtrag') return f(`<button class="ww-gehe" data-act="ok" aria-label="OK"${n?'':' disabled'}>${ico('check')}${zahl}</button>`);
+    if(modus==='foto') return f(kam);
+    if(k&&art==='gruppe') return f(`<button class="ww-kamera klein" data-act="kamera" aria-label="Foto">📷</button><button class="ww-gehe haupt" data-act="ok" aria-label="Weiter"${n?'':' disabled'}>→${zahl}</button>`);
+    return !art&&(!k||ks.length===1)&&kinder().length?f(`<button class="ww-gehe ohne" data-act="ohne">Abmelden</button>${kam}`):''; };
   const fussNeu=()=>{ const f=$('.ww-fuss',el); if(f) f.outerHTML=fuss(); };
   const zeichne=()=>{ const s=k&&klasseVon({liste:k.id}), ist=n=>gew.some(x=>x.liste===k.id&&x.name===n);
-    el.innerHTML=wwHtml(k?k.name:'Klasse',`<div class="ww-raster">${k?k.namen.map(n=>`<button class="ww-k${ist(n)?' ich':''}" data-act="ich" data-n="${esc(n)}" aria-pressed="${ist(n)}">${esc(n)}</button>`).join('')
-      :ks.map(x=>`<button class="ww-k" data-act="liste" data-id="${esc(x.id)}" data-s="${x.stufe||''}">${esc(x.name)}</button>`).join('')}</div>${fuss()}`,{zurueck:!!k&&ks.length>1,caps:s&&s<3});
-    wwFuellen($('.ww-raster',el)); };
-  wire(el,{ liste:b=>{ k=ks.find(x=>x.id===b.dataset.id); zeichne(); }, zurueck:()=>{ k=null; zeichne(); }, zu,
-    ich:b=>{ const n=b.dataset.n, i=gew.findIndex(x=>x.liste===k.id&&x.name===n); if(i>=0) gew.splice(i,1); else if(gew.length>=6){ toast('⚠ Max. 6'); return; } else gew.push({liste:k.id,name:n,key:kindKeyIn(k,n)}); b.classList.toggle('ich',i<0); b.setAttribute('aria-pressed',String(i<0)); fussNeu(); },
+    el.innerHTML=wwHtml(k?k.name:'Klasse',`${k&&!art?`<div class="ww-art">${WW_ART.map(([a,b,t])=>`<button class="ww-wahl" data-act="art" data-art="${a}"><img src="${GRAFIK}figuren/${b}.webp" alt=""><b>${t}</b></button>`).join('')}</div>`
+      :`<div class="ww-raster">${k?k.namen.map(n=>`<button class="ww-k${ist(n)?' ich':''}" data-act="ich" data-n="${esc(n)}" aria-pressed="${ist(n)}">${esc(n)}</button>`).join('')
+      :ks.map(x=>`<button class="ww-k" data-act="liste" data-id="${esc(x.id)}" data-s="${x.stufe||''}">${esc(x.name)}</button>`).join('')}</div>`}${fuss()}`,{zurueck:!!k&&(ks.length>1||wechsel&&!!art),caps:s&&s<3});
+    const r=$('.ww-raster',el); if(r) wwFuellen(r); };
+  wire(el,{ liste:b=>{ k=ks.find(x=>x.id===b.dataset.id); zeichne(); }, zurueck:()=>{ if(wechsel&&art) art=null; else k=null; zeichne(); }, zu,
+    art:b=>{ art=b.dataset.art; if(art==='allein') gew=[]; zeichne(); },
+    ich:b=>{ const n=b.dataset.n; if(art==='allein'){ fertig([{liste:k.id,name:n,key:kindKeyIn(k,n)}]); return; } const i=gew.findIndex(x=>x.liste===k.id&&x.name===n); if(i>=0) gew.splice(i,1); else if(gew.length>=6){ toast('⚠ Max. 6'); return; } else gew.push({liste:k.id,name:n,key:kindKeyIn(k,n)}); b.classList.toggle('ich',i<0); b.setAttribute('aria-pressed',String(i<0)); fussNeu(); },
     kamera:()=>fertig(wechsel&&!gew.length?kinder():gew,true), ok:()=>{ if(gew.length) fertig(gew); }, ohne:()=>ohne() });
   zeichne(); }
 function werWahl(weiter){ const el=wwAuf(); werKacheln(el,{modus:'foto',fertig:gew=>{ const anders=!gleicheWahl(gew,kinder()); el.remove(); kinderSetzen(gew); if(anders&&arbeitsSicht()) go(view.name,view.params); else if(view.name==='home') render(); weiter(anders); },zu:()=>el.remove()}); }
@@ -1417,6 +1424,9 @@ function standZeigen(el,fertig){ const wz=entwurfKarten(), o=offeneArbeit(); if(
 function kinderWechsel(){ const el=wwAuf(), neu=()=>{ if(arbeitsSicht()){ const {stelle,los,...rest}=view.params; go(view.name,rest,{ersetzen:true}); } else if(['home','raum','area','gallery','unterricht','werkzeuge','projekt','suche','restzeit','sammlung'].includes(view.name)) render(); };
   const stand=gew=>{ kinderSetzen(gew); standZeigen(el,id=>{ el.remove(); if(id) go('player',{videoId:id}); else neu(); }); };
   werKacheln(el,{modus:'wechsel',fertig:(gew,foto)=>{ if(!foto){ stand(gew); return; } const anders=!gleicheWahl(gew,kinder()), id=videoJetzt(); el.remove(); kinderSetzen(gew); if(anders) neu(); kamera(id,null,true); },ohne:()=>stand([]),zu:()=>el.remove()}); }
+/* Ohne Klassenliste gibt es keine Kacheln: der Weg zur Verbindung. Kommt die Liste doch noch, gehen die Kacheln auf. */
+async function werLeer(){ const el=wwAuf(); el.innerHTML=wwHtml(klToken()?'⚠ Keine Klassen':'⚠ Nicht verbunden','<div class="ww-raster"><button class="ww-k" data-act="lehrer">🔗 Verbinden</button></div>'); wwFuellen($('.ww-raster',el));
+  wire(el,{ zu:()=>el.remove(), lehrer:()=>{ el.remove(); go('lehrer'); } }); await klHolen(); if(el.isConnected&&KL.klassen.length){ el.remove(); kinderWechsel(); } }
 SCREENS.wer=app=>{ const weiter=id=>id?go('player',{videoId:id}):go(S.settings.klasse?'home':'klasse'); if(!KL.klassen.length){ weiter(); return; } KL.gefragt=true; const stand=gew=>{ kinderSetzen(gew); standZeigen(app,weiter); };
   werKacheln(app,{modus:'wechsel',fertig:(gew,foto)=>{ if(!foto){ stand(gew); return; } kinderSetzen(gew); weiter(); kamera(null,null,true); },ohne:()=>stand([]),zu:()=>weiter()}); };
 function verbindungenHtml(){ if(!SCHULE) return '';

@@ -42,9 +42,10 @@ const speicher=(s,mehr={})=>({'schrittli.schule.klassenlisten':JSON.stringify({k
 async function ipad(t,{s=null,netz=s,breite=1024,hoehe=768,mehr={}}={}){ const k=await t.kontext({breite,hoehe,speicher:speicher(s,mehr)}); await anbinden(k,netz||sammlung()); const p=await t.app(k,'schule'); await p.waitForFunction(()=>KL.klassen.length>0); return {k,p}; }
 
 /* Kurzlogin oben rechts, dann die Kacheln */
-async function kacheln(p,namen,klasse='k3a'){ if(!await p.locator('.ww-raster').count()) await p.locator('[data-wer]').first().click(); await p.waitForSelector('.ww-raster');
+async function kacheln(p,namen,klasse='k3a'){ if(!await p.locator('.ww-raster,.ww-art').count()) await p.locator('[data-wer]').first().click(); await p.waitForSelector('.ww-raster,.ww-art');
   if(!await p.locator(`.ww [data-act=liste][data-id=${klasse}]`).count()&&await p.locator('.ww [data-act=zurueck]').count()&&await p.evaluate(k=>{ const h=document.querySelector('.ww-kopf h1'); return h&&h.textContent.trim()!==KL.klassen.find(x=>x.id===k).name; },klasse)) await p.locator('.ww [data-act=zurueck]').click();
   if(await p.locator(`.ww [data-act=liste][data-id=${klasse}]`).count()) await p.locator(`.ww [data-act=liste][data-id=${klasse}]`).click();
+  if(await p.locator('.ww [data-art]').count()) await p.locator('.ww [data-art=gruppe]').click();
   for(const n of namen) await p.locator(`.ww-k[data-n="${n}"]`).click(); }
 async function kinderWahl(p,namen,klasse){ await kacheln(p,namen,klasse); await p.locator('.ww [data-act=ok]').click(); await p.waitForFunction(()=>!document.querySelector('.ww-raster')); }
 const karteWeg=async p=>{ await p.waitForTimeout(60); if(await p.locator('.ww-stand').count()) await p.locator('.ww [data-act=zu]').click(); await p.waitForFunction(()=>!document.querySelector('.ww')); };

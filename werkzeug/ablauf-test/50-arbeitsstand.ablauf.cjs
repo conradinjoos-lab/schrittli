@@ -47,8 +47,7 @@ const gruppe=async t=>{ const {k,p}=await ipad(t);
   t.pruefe((await stand(p,'3a/Lea')).step===5&&(await stand(p,MIA)).step===2,'Getrennte Stände'); t.keineFehler(k); };
 
 const ohneName=async t=>{ const {k,p}=await ipad(t);
-  await p.locator('[data-wer]').first().click(); await p.waitForSelector('.ww-raster'); await p.locator('.ww [data-act=liste][data-id=k3a]').click(); await p.locator('.ww [data-act=ohne]').click(); await p.waitForFunction(()=>!document.querySelector('.ww'));
-  t.pruefe((await chip(p)).includes('Ohne Name'),'Chip Ohne Name'); t.pruefe(await kindWert(p)==='','schrittli.kind leer'); await oeffne(p); await p.waitForSelector('.an-start'); await schritte(p,2); t.pruefe((await stand(p,'_ohne')).step===1,'Ohne Name');
+  t.pruefe((await chip(p)).includes('Anmelden'),'Chip Anmelden'); t.pruefe(await kindWert(p)==='','schrittli.kind leer'); await oeffne(p); await p.waitForSelector('.an-start'); await schritte(p,2); t.pruefe((await stand(p,'_ohne')).step===1,'Ohne Name');
   await kinderWahl(p,['Mia']); await p.waitForTimeout(80); t.pruefe(!await p.locator('.ww-stand').count(),'Mia sieht Ohne Name'); t.pruefe(!(await stand(p,MIA)||{}).step,'Mia vermischt');
   await p.locator('[data-wer]').first().click(); await p.waitForSelector('.ww-raster'); await p.locator('.ww [data-act=ohne]').click(); await p.waitForSelector('.ww-stand.eins'); await p.locator('.ww-karte').click(); await p.waitForSelector('.an-start .an-weiter'); t.pruefe(/Schritt 2/.test(await p.locator('.an-start .an-weiter').first().textContent()),'Ohne Name zurück'); t.keineFehler(k); };
 
@@ -68,9 +67,25 @@ const werkzeuge=async t=>{ const {k,p}=await ipad(t); const SCHL='schrittli.falt
 
 /* Echter Start ohne gewähltes Kind: Namensschirm, Kachel, Stand, Weiter. Mit Liste im Speicher sofort, ohne Liste nach dem Laden aus dem Netz. */
 const gespeicherterStand=JSON.stringify({v:1,settings:{sv:4,klasse:3,kinder:[]},arbeit:{[MIA]:{[ANLEITUNG]:{pos:0,step:2,max:2,done:false,slow:false,erledigt:[],material:{},entwuerfe:{},zeit:1000}}}});
+/* Knopf immer oben: Klassen, Allein oder Gruppe, Namen */
+const anmelden=async t=>{ const {k,p}=await ipad(t), knopf=p.locator('[data-wer]').first(), klassen=p.locator('.ww [data-act=liste]');
+  t.pruefe((await chip(p)).includes('Anmelden'),'Chip Anmelden'); t.pruefe(await knopf.evaluate(e=>e.classList.contains('wer-leer')&&e.getBoundingClientRect().height>=56&&getComputedStyle(e).backgroundColor==='rgb(242, 183, 5)'),'Knopf gelb');
+  await p.setViewportSize({width:1024,height:420}); await p.evaluate(()=>scrollTo(0,300)); t.pruefe(await knopf.evaluate(e=>{ const r=e.getBoundingClientRect(); return scrollY>0&&r.top>=0&&e.contains(document.elementFromPoint(r.left+r.width/2,r.top+r.height/2)); }),'Knopf bleibt oben'); await p.evaluate(()=>scrollTo(0,0)); await p.setViewportSize({width:1024,height:768});
+  await knopf.click(); await p.waitForSelector('.ww [data-act=liste]'); t.pruefe(await klassen.count()===await p.evaluate(()=>KL.klassen.length),'Alle Klassen'); t.pruefe(!await p.locator('.ww-fuss').count(),'Fuss vor der Anmeldung');
+  await p.locator('.ww [data-act=liste][data-id=k3a]').click(); await p.waitForFunction(()=>{ const b=[...document.querySelectorAll('.ww-wahl img')]; return b.length===2&&b.every(i=>i.naturalWidth>0); }); await p.locator('.ww [data-act=zurueck]').click(); await p.waitForSelector('.ww [data-act=liste]');
+  await p.locator('.ww [data-act=liste][data-id=k3a]').click(); await p.locator('.ww [data-art=allein]').click(); await p.waitForSelector('.ww-k[data-n=Mia]'); t.pruefe(!await p.locator('.ww-fuss').count(),'Fuss bei Allein'); await p.locator('.ww-k[data-n=Mia]').click(); await karteWeg(p);
+  t.pruefe((await chip(p)).includes('Mia'),'Chip Mia'); t.pruefe(await knopf.evaluate(e=>!e.classList.contains('wer-leer')),'Knopf bleibt gelb');
+  await knopf.click(); await p.waitForSelector('.ww [data-act=liste]'); t.pruefe(!await p.locator('.ww-k[data-n=Mia]').count(),'Beginnt nicht bei den Klassen'); t.pruefe(await p.locator('.ww [data-act=ohne]').textContent()==='Abmelden','Abmelden fehlt');
+  await p.locator('.ww [data-act=liste][data-id=k3a]').click(); await p.locator('.ww [data-art=gruppe]').click(); await p.locator('.ww-k[data-n=Mia]').click(); await p.locator('.ww-k[data-n=Lea]').click(); await p.locator('.ww [data-act=ok]').click(); await karteWeg(p);
+  t.pruefe((await chip(p)).includes('Mia +1'),'Chip Gruppe'); await knopf.click(); await p.locator('.ww [data-act=ohne]').click(); await karteWeg(p);
+  t.pruefe((await chip(p)).includes('Anmelden'),'Abgemeldet'); t.pruefe(await knopf.evaluate(e=>e.classList.contains('wer-leer')),'Knopf wieder gelb'); t.keineFehler(k); };
+/* Ohne Klassenliste: nie die Kamera, sondern der Weg zur Verbindung */
+const ohneListe=async t=>{ const k=await t.kontext(); await anbinden(k,sammlung()); const p=await t.app(k,'schule'); await p.evaluate(()=>{ S.settings.klasse=3; go('home'); });
+  await p.locator('[data-wer]').first().click(); await p.waitForSelector('.ww [data-act=lehrer]'); t.pruefe((await p.locator('.ww-kopf h1').textContent()).includes('Nicht verbunden'),'Titel'); await p.locator('.ww [data-act=lehrer]').click(); await p.waitForFunction(()=>view.name==='lehrer'&&!document.querySelector('.ww')); t.keineFehler(k); };
+
 const start=async(t,mitListe)=>{ const s=sammlung(), v=speicher(s,{'schrittli.schule.v1':gespeicherterStand}); if(!mitListe) delete v['schrittli.schule.klassenlisten']; const k=await t.kontext({speicher:v}); await anbinden(k,s);
   const p=await k.seite('/schule/'); await p.waitForFunction(()=>typeof view!=='undefined'&&view.name==='wer'); await p.waitForSelector('.ww-raster'); t.pruefe(await p.evaluate(()=>!kinder().length),'Niemand vorgewählt');
-  await p.locator('.ww-raster [data-act=liste][data-id=k3a]').click(); await p.locator('.ww-k[data-n=Mia]').click(); await p.locator('[data-act=ok]').click(); await p.waitForSelector('.ww-stand.eins'); t.pruefe(/^3\/\d+$/.test(await p.locator('.ww-karte .ww-z').textContent()),'Zahl beim Start');
+  await p.locator('.ww-raster [data-act=liste][data-id=k3a]').click(); await p.locator('.ww [data-art=allein]').click(); await p.locator('.ww-k[data-n=Mia]').click(); await p.waitForSelector('.ww-stand.eins'); t.pruefe(/^3\/\d+$/.test(await p.locator('.ww-karte .ww-z').textContent()),'Zahl beim Start');
   await p.locator('.ww-karte').click(); await p.waitForSelector('.an-start .an-weiter'); t.pruefe(/Schritt 3/.test(await p.locator('.an-start .an-weiter').first().textContent()),'Weiter beim Start'); t.pruefe(await kindWert(p)===MIA,'schrittli.kind beim Start'); t.keineFehler(k); };
 
 /* Der Lektionsplan gehört dem Gerät: Kinderwechsel und Neuladen ändern ihn nicht, und er landet nicht in der Kinderarbeit */
@@ -91,4 +106,4 @@ const maschenName=async t=>{ const {k,p}=await ipad(t); await kinderWahl(p,['Mia
   const leer=await maschen(k,()=>{ const s=JSON.parse(localStorage.getItem('schrittli.schule.v1')); delete s.settings.kind; localStorage.setItem('schrittli.schule.v1',JSON.stringify(s)); }); t.pruefe(leer.kind==='','Ohne Feld: '+JSON.stringify(leer));
   const fam=await maschen(k,()=>{ const s=JSON.parse(localStorage.getItem('schrittli.schule.v1')); s.settings.kinder=[{name:'Mia'}]; localStorage.setItem('schrittli.schule.v1',JSON.stringify(s)); localStorage.setItem('schrittli.app','familie'); }); t.pruefe(fam.kind==='','Familie: '+JSON.stringify(fam)); };
 
-module.exports=[{name:'Kinderwechsel',lauf:kinderwechsel},{name:'Start mit Namensliste',lauf:t=>start(t,true)},{name:'Start ohne Namensliste',lauf:t=>start(t,false)},{name:'Lektionsplan bleibt',lauf:lektionsplan},{name:'Wiederaufnahme',lauf:wiederaufnahme},{name:'Gruppe am iPad',lauf:gruppe},{name:'Ohne Name',lauf:ohneName},{name:'Migration Arbeitsstand',lauf:migration},{name:'Maschenprobe Name',lauf:maschenName},{name:'Werkzeugstand je Kind',lauf:werkzeuge}];
+module.exports=[{name:'Kinderwechsel',lauf:kinderwechsel},{name:'Anmelden',lauf:anmelden},{name:'Anmelden ohne Liste',lauf:ohneListe},{name:'Start mit Namensliste',lauf:t=>start(t,true)},{name:'Start ohne Namensliste',lauf:t=>start(t,false)},{name:'Lektionsplan bleibt',lauf:lektionsplan},{name:'Wiederaufnahme',lauf:wiederaufnahme},{name:'Gruppe am iPad',lauf:gruppe},{name:'Ohne Name',lauf:ohneName},{name:'Migration Arbeitsstand',lauf:migration},{name:'Maschenprobe Name',lauf:maschenName},{name:'Werkzeugstand je Kind',lauf:werkzeuge}];

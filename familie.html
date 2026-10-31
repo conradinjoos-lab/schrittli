@@ -436,8 +436,10 @@ code{font-size:13px;word-break:break-all;background:var(--surface2);padding:2px 
 .klasse-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:118px;border-radius:14px;background:var(--paper);border:3px solid var(--kink);color:var(--kink);box-shadow:4px 6px 0 var(--sh);font:inherit;text-transform:inherit;letter-spacing:inherit}
 .klasse-btn .z{font-size:44px;font-weight:700;line-height:1}.klasse-btn .w{font-size:15px;letter-spacing:.08em;color:var(--wmuted)}
 .klasse-btn:active{transform:translateY(3px);box-shadow:2px 3px 0 var(--sh)}
-.schild-btn.wer-chip{width:auto;padding:0 14px;font-weight:700;font-size:18px;white-space:nowrap;text-transform:none}
-.v3-pill.v3-kind{background:#D5F1E8;color:#1C2430}
+.schild-btn.wer-chip{width:auto;padding:0 14px;font-weight:800;font-size:18px;white-space:nowrap;text-transform:none;background:#7FD9B8}
+.v3-pill.v3-kind{background:#7FD9B8;color:#1C2430;min-height:52px;font-size:17px;font-weight:900}
+.schild-btn.wer-chip.wer-leer,.v3-pill.v3-kind.wer-leer{background:#F2B705;color:#1C2430;font-weight:900;font-size:20px;padding-inline:22px}
+.v3-pill.v3-kind.wer-leer{min-height:58px;box-shadow:0 3px 0 #B88A00,0 6px 14px rgba(242,183,5,.5)}
 .ww{position:fixed;inset:0;z-index:70;display:flex;flex-direction:column;gap:12px;background:#F5F6F8;color:#1C2430;font-family:'Nunito',system-ui,sans-serif;padding:max(12px,env(safe-area-inset-top,0px)) max(14px,env(safe-area-inset-right,0px)) max(14px,env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px))}
 .ww-kopf{flex:none;display:grid;grid-template-columns:52px 1fr 52px;align-items:center;min-height:52px}
 .ww-kopf h1{margin:0;text-align:center;font-size:32px;font-weight:900;line-height:1.1}
@@ -447,6 +449,13 @@ code{font-size:13px;word-break:break-all;background:var(--surface2);padding:2px 
 .ww-k.ich{background:#1C2430;color:#fff}
 .ww.caps .ww-k{text-transform:uppercase}
 .ww-k[data-s="1"]{background:#FDE3D3}.ww-k[data-s="2"]{background:#FCEFC1}.ww-k[data-s="3"]{background:#D5F1E8}.ww-k[data-s="4"]{background:#D8E6FB}.ww-k[data-s="5"]{background:#E6DDF8}.ww-k[data-s="6"]{background:#F9D9E4}
+.ww-art{flex:1;min-height:0;display:grid;grid-template-columns:repeat(2,minmax(0,440px));grid-template-rows:minmax(0,520px);gap:16px;place-content:center}
+.ww-wahl{display:flex;flex-direction:column;align-items:center;gap:8px;min-height:0;border:0;border-radius:24px;background:#fff;color:#1C2430;font-family:inherit;padding:16px 12px 12px;box-shadow:0 3px 10px rgba(28,36,48,.1);overflow:hidden;touch-action:manipulation}
+.ww-wahl:active{transform:scale(.97)}
+.ww-wahl img{flex:1;min-height:0;width:100%;object-fit:contain}
+.ww-wahl b{flex:none;font-weight:900;font-size:clamp(28px,7vmin,52px);line-height:1.1}
+.ww.caps .ww-wahl b{text-transform:uppercase}
+@media (max-width:560px) and (orientation:portrait){.ww-art{grid-template-columns:minmax(0,1fr);grid-template-rows:repeat(2,minmax(0,1fr))}}
 .ww-foto{flex:1;min-height:0;width:100%;object-fit:contain}
 .ww .sterne-wahl{flex:none;gap:0}.ww .sterne-wahl .stern{font-size:min(16vw,22vh);padding:0 1vw;touch-action:manipulation}
 body:has(.ww) .fm-knopf{z-index:75;top:calc(max(12px,env(safe-area-inset-top,0px)) + 2px);bottom:auto;left:calc(max(14px,env(safe-area-inset-left,0px)) + 60px)}
@@ -458,6 +467,8 @@ body:has(.ww-kopf>span:first-child) .fm-knopf{left:max(14px,env(safe-area-inset-
 .ww-kamera b,.ww-gehe b{display:inline-grid;place-items:center;min-width:40px;height:40px;border-radius:999px;background:#F2B705;color:#1C2430;font-size:24px}
 .ww-gehe{min-width:120px;padding:0 22px;background:#fff;color:#1C2430;font-size:30px}
 .ww-gehe.ohne{font-size:20px}
+.ww-gehe.haupt{flex:1;max-width:460px;background:#1C2430;color:#fff;font-size:44px}
+.ww-kamera.klein{flex:none;min-width:120px;background:#fff;color:#1C2430;font-size:30px}
 .ww-gehe[disabled]{opacity:.35}
 .ww-kamera:active,.ww-gehe:active{transform:scale(.97)}
 .ww-stand{flex:1;min-height:0;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),340px));justify-content:center;align-content:center;overflow:auto;padding:4px}
@@ -536,7 +547,7 @@ body:has(.v3){background:#F5F6F8}
 .v3 button{font-family:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .v3 img{mix-blend-mode:multiply}
 .v3 .grow{flex:1}
-.v3-kopf{display:flex;align-items:center;gap:12px;min-height:52px}
+.v3-kopf{display:flex;align-items:center;gap:12px;min-height:52px;position:sticky;top:0;z-index:20;background:#F5F6F8;padding-block:6px;margin-block:-6px}
 .v3-logo{width:44px;height:44px;border-radius:14px;background:#F3E8D4;overflow:hidden;flex:none;box-shadow:0 2px 8px rgba(28,36,48,.08)}
 .v3-logo img{width:100%;height:100%;object-fit:cover;object-position:50% 6%;display:block}
 .v3-name{font-weight:900;font-size:20px}
@@ -1407,7 +1418,7 @@ function kidModal(html,actions={}){ return modal(html,actions,'kid'); }
 /* ============================== Fehler melden ============================== */
 /* Knopf auf jeder Seite, auch über Fenstern und in der Kachelwahl. Die Meldung geht mit Ort (Seite, Video, Schritt, Zeit) und Stand an den Worker werkzeug/anmelden (/melden)
    und erscheint in der Online-Kontrolle. Keine Namen, kein Konto, nichts aus dem Profil. Offline bleibt sie in «schrittli.melden.warte» (dieselbe Warteschlange wie vorlagen/melden.js). */
-const MELDEN='https://schrittli-anmelden.conradinjoos.workers.dev/melden', FM_WARTE='schrittli.melden.warte', APP_STAND='2026-10-31-5c25a71';   // __STAND__ ersetzt quelle/bauen.sh
+const MELDEN='https://schrittli-anmelden.conradinjoos.workers.dev/melden', FM_WARTE='schrittli.melden.warte', APP_STAND='2026-10-31-0634f0a';   // __STAND__ ersetzt quelle/bauen.sh
 let ORT=null;   // vom aktuellen Screen gesetzt: ()=>({video,titel,schritt})
 function fmGeraet(){ const u=navigator.userAgent; const os=/iPad/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1)?'iPad':/iPhone/.test(u)?'iPhone':/Android/.test(u)?'Android':/CrOS/.test(u)?'Chromebook':/Windows/.test(u)?'Windows':/Mac/.test(u)?'Mac':'anderes'; const br=/Edg\//.test(u)?'Edge':/Firefox\//.test(u)?'Firefox':/Chrome\//.test(u)?'Chrome':/Safari\//.test(u)?'Safari':''; return (os+' '+br).trim(); }
 function fmAdresse(){ const u=new URL(location.href); for(const k of [...u.searchParams.keys()]) if(/token|schein|schluessel|code|key|name/i.test(k)) u.searchParams.delete(k); return (u.pathname+u.search+u.hash).replace(/[0-9a-f]{32,}/gi,'…'); }
@@ -1495,7 +1506,7 @@ async function boot(){
   await Promise.race([grund,frist(S.videos.length?2000:8000)]); await Promise.race([neben,frist(400)]); spaet=true;
   const school=parseSchool(); if(school){ go('school',{video:school}); return; }
   uStart(); rmStart(); swStart(); if(uAktiv()) uWechsel(); klStart();
-  document.addEventListener('click',e=>{ const b=e.target.closest('[data-wer]'); if(b){ e.preventDefault(); if(SCHULE&&KL.klassen.length) kinderWechsel(); else takePhoto(videoJetzt(),null,true); } });   // Kurzlogin oben rechts: Wechsel führt zum Stand des neuen Kindes
+  document.addEventListener('click',e=>{ const b=e.target.closest('[data-wer]'); if(b){ e.preventDefault(); if(KL.klassen.length) kinderWechsel(); else werLeer(); } });   // Kurzlogin oben rechts: Wechsel führt zum Stand des neuen Kindes
   addEventListener('pagehide',()=>{ if(saveT) saveJetzt(); }); if(SCHULE){ entwuerfeSpiegeln(); document.addEventListener('visibilitychange',()=>{ if(!document.hidden) entwuerfeSpiegeln(); }); }
   const zk=zurueckStelle(); if(zk){ NAV.tiefe=zk.tiefe; go(zk.view.name,zk.view.params); hochScrollen(zk.y); return; }   // Zurück aus den Vorlagen: gleiche Seite, gleiche Höhe wie beim Draufklicken
   if(SCHULE){ go(KL.klassen.length&&!kind()?'wer':S.settings.klasse?'home':'klasse'); return; }
@@ -2476,10 +2487,10 @@ async function klHolen(){ if(!SCHULE||KL.laeuft) return; const token=klToken(); 
     KL.klassen=klGanz(d.klassen.map(k=>({id:String(k.id||''),name:String(k.name||'').slice(0,80),stufe:STUFEN.includes(+k.stufe)?+k.stufe:null,namen:(Array.isArray(k.namen)?k.namen:[]).map(n=>String(n).slice(0,30)).filter(Boolean)})).filter(k=>k.id&&k.namen.length));
     KL.zeit=Date.now(); klSpeichern(); kinderPruefen();
     if(!KL.gefragt&&!kind()&&KL.klassen.length&&['home','klasse','raum','unterricht'].includes(view.name)) go('wer');
-    else if(view.name==='wer'&&!$('[data-act=ich]')&&!$('.ww-stand')||view.name==='lehrer') render();
+    else if(view.name==='wer'&&!$('[data-act=ich]')&&!$('[data-art]')&&!$('.ww-stand')||view.name==='lehrer') render();
   }catch(e){} finally{ z.ende(); KL.laeuft=false; } }
-const chipText=()=>{ const l=kinder(); return '🙂 '+(l.length?l[0].name+(l.length>1?' +'+(l.length-1):''):'Ohne Name'); };
-const kindChip=(cls)=>SCHULE?`<button class="${cls}" data-wer aria-label="Name">${esc(chipText())}</button>`:'';
+const chipText=()=>{ const l=kinder(); return '🙂 '+(l.length?l[0].name+(l.length>1?' +'+(l.length-1):''):'Anmelden'); };
+const kindChip=(cls)=>SCHULE?`<button class="${cls}${kinder().length?'':' wer-leer'}" data-wer>${esc(chipText())}</button>`:'';
 const klasseVon=kd=>{ const l=KL.klassen.find(x=>x.id===kd.liste), s=l&&(l.stufe||+(/[1-6]/.exec(l.name)||[0])[0]); return STUFEN.includes(s)?s:STUFEN.includes(+S.settings.klasse)?+S.settings.klasse:0; };
 /* Kachelwahl über dem ganzen Bildschirm: erst Klassen, dann Namen, immer ohne Scrollen. */
 const wwHtml=(titel,inhalt,{zurueck,zu=true,caps}={})=>`<div class="ww${caps?' caps':''}"><div class="ww-kopf">${zurueck?'<button class="v3-rund gross" data-act="zurueck" aria-label="Zurück">←</button>':'<span></span>'}<h1>${esc(titel)}</h1>${zu?'<button class="v3-rund gross" data-act="zu" aria-label="Schliessen">✕</button>':'<span></span>'}</div>${inhalt}</div>`;
@@ -2493,19 +2504,26 @@ function wwFuellen(r){ wwMessen(r); new ResizeObserver(()=>wwMessen(r)).observe(
 /* Wahl setzen: Stand bleibt beim bisherigen Kind. Geteilte Objekte lösen, das erste Kind behält seines, damit eine offene Ansicht weiterschreibt. */
 function kinderSetzen(neu){ entwuerfeSpiegeln(); kindKeys().slice(1).forEach(k=>{ if(S.arbeit[k]) S.arbeit[k]=JSON.parse(JSON.stringify(S.arbeit[k])); });
   S.settings.kinder=neu.slice(0,6); const e=kind(), s=e&&klasseVon(e); if(s) S.settings.klasse=s; if(e) S.settings.liste=e.liste; kindMerken(); entwurfMerken(); saveJetzt();
-  $$('[data-wer]').forEach(x=>{ x.textContent=chipText(); }); }
+  $$('[data-wer]').forEach(x=>{ x.textContent=chipText(); x.classList.toggle('wer-leer',!kinder().length); }); }
 const gleicheWahl=(a,b)=>a.length===b.length&&a.every((k,i)=>kindKeyVon(k)===kindKeyVon(b[i]));
 const arbeitsSicht=()=>['player','anleitung'].includes(view.name);
-/* Kacheln mit Mehrfachwahl. foto: Kamera-Knopf, die aktuelle Wahl ist schon da. wechsel: leer, damit ein neues Kind nicht zur Gruppe wird. nachtrag: nur bestätigen. */
-function werKacheln(el,{modus,fertig,zu,ohne}){ const ks=KL.klassen, wechsel=modus==='wechsel'; let gew=wechsel?[]:kinder().slice(), k=ks.length===1?ks[0]:ks.find(x=>x.id===((kind()||{}).liste||S.settings.liste))||null;
-  const fuss=()=>{ const n=gew.length; return `<div class="ww-fuss">${wechsel?`<button class="ww-gehe ohne" data-act="ohne">Ohne Name</button>`:''}${modus==='nachtrag'?`<button class="ww-gehe" data-act="ok" aria-label="OK"${n?'':' disabled'}>${ico('check')}${n?` <b>${n}</b>`:''}</button>`:`<button class="ww-kamera" data-act="kamera" aria-label="Foto">📷${n?` <b>${n}</b>`:''}</button>`}${wechsel?`<button class="ww-gehe" data-act="ok" aria-label="Weiter"${n?'':' disabled'}>→${n?` <b>${n}</b>`:''}</button>`:''}</div>`; };
+const WW_ART=[['allein','bibo-hallo','Allein'],['gruppe','beide-highfive','Gruppe']];
+/* Kacheln. wechsel: Klasse, Allein oder Gruppe, dann Namen; leer, damit ein neues Kind nicht zur Gruppe wird. foto: Mehrfachwahl mit Kamera-Knopf, die aktuelle Wahl ist schon da. nachtrag: nur bestätigen. */
+function werKacheln(el,{modus,fertig,zu,ohne}){ const ks=KL.klassen, wechsel=modus==='wechsel'; let gew=wechsel?[]:kinder().slice(), k=ks.length===1?ks[0]:wechsel?null:ks.find(x=>x.id===((kind()||{}).liste||S.settings.liste))||null, art=wechsel?null:'gruppe';
+  const fuss=()=>{ const n=gew.length, zahl=n?` <b>${n}</b>`:'', kam=`<button class="ww-kamera" data-act="kamera" aria-label="Foto">📷${zahl}</button>`, f=t=>`<div class="ww-fuss">${t}</div>`;
+    if(modus==='nachtrag') return f(`<button class="ww-gehe" data-act="ok" aria-label="OK"${n?'':' disabled'}>${ico('check')}${zahl}</button>`);
+    if(modus==='foto') return f(kam);
+    if(k&&art==='gruppe') return f(`<button class="ww-kamera klein" data-act="kamera" aria-label="Foto">📷</button><button class="ww-gehe haupt" data-act="ok" aria-label="Weiter"${n?'':' disabled'}>→${zahl}</button>`);
+    return !art&&(!k||ks.length===1)&&kinder().length?f(`<button class="ww-gehe ohne" data-act="ohne">Abmelden</button>${kam}`):''; };
   const fussNeu=()=>{ const f=$('.ww-fuss',el); if(f) f.outerHTML=fuss(); };
   const zeichne=()=>{ const s=k&&klasseVon({liste:k.id}), ist=n=>gew.some(x=>x.liste===k.id&&x.name===n);
-    el.innerHTML=wwHtml(k?k.name:'Klasse',`<div class="ww-raster">${k?k.namen.map(n=>`<button class="ww-k${ist(n)?' ich':''}" data-act="ich" data-n="${esc(n)}" aria-pressed="${ist(n)}">${esc(n)}</button>`).join('')
-      :ks.map(x=>`<button class="ww-k" data-act="liste" data-id="${esc(x.id)}" data-s="${x.stufe||''}">${esc(x.name)}</button>`).join('')}</div>${fuss()}`,{zurueck:!!k&&ks.length>1,caps:s&&s<3});
-    wwFuellen($('.ww-raster',el)); };
-  wire(el,{ liste:b=>{ k=ks.find(x=>x.id===b.dataset.id); zeichne(); }, zurueck:()=>{ k=null; zeichne(); }, zu,
-    ich:b=>{ const n=b.dataset.n, i=gew.findIndex(x=>x.liste===k.id&&x.name===n); if(i>=0) gew.splice(i,1); else if(gew.length>=6){ toast('⚠ Max. 6'); return; } else gew.push({liste:k.id,name:n,key:kindKeyIn(k,n)}); b.classList.toggle('ich',i<0); b.setAttribute('aria-pressed',String(i<0)); fussNeu(); },
+    el.innerHTML=wwHtml(k?k.name:'Klasse',`${k&&!art?`<div class="ww-art">${WW_ART.map(([a,b,t])=>`<button class="ww-wahl" data-act="art" data-art="${a}"><img src="${GRAFIK}figuren/${b}.webp" alt=""><b>${t}</b></button>`).join('')}</div>`
+      :`<div class="ww-raster">${k?k.namen.map(n=>`<button class="ww-k${ist(n)?' ich':''}" data-act="ich" data-n="${esc(n)}" aria-pressed="${ist(n)}">${esc(n)}</button>`).join('')
+      :ks.map(x=>`<button class="ww-k" data-act="liste" data-id="${esc(x.id)}" data-s="${x.stufe||''}">${esc(x.name)}</button>`).join('')}</div>`}${fuss()}`,{zurueck:!!k&&(ks.length>1||wechsel&&!!art),caps:s&&s<3});
+    const r=$('.ww-raster',el); if(r) wwFuellen(r); };
+  wire(el,{ liste:b=>{ k=ks.find(x=>x.id===b.dataset.id); zeichne(); }, zurueck:()=>{ if(wechsel&&art) art=null; else k=null; zeichne(); }, zu,
+    art:b=>{ art=b.dataset.art; if(art==='allein') gew=[]; zeichne(); },
+    ich:b=>{ const n=b.dataset.n; if(art==='allein'){ fertig([{liste:k.id,name:n,key:kindKeyIn(k,n)}]); return; } const i=gew.findIndex(x=>x.liste===k.id&&x.name===n); if(i>=0) gew.splice(i,1); else if(gew.length>=6){ toast('⚠ Max. 6'); return; } else gew.push({liste:k.id,name:n,key:kindKeyIn(k,n)}); b.classList.toggle('ich',i<0); b.setAttribute('aria-pressed',String(i<0)); fussNeu(); },
     kamera:()=>fertig(wechsel&&!gew.length?kinder():gew,true), ok:()=>{ if(gew.length) fertig(gew); }, ohne:()=>ohne() });
   zeichne(); }
 function werWahl(weiter){ const el=wwAuf(); werKacheln(el,{modus:'foto',fertig:gew=>{ const anders=!gleicheWahl(gew,kinder()); el.remove(); kinderSetzen(gew); if(anders&&arbeitsSicht()) go(view.name,view.params); else if(view.name==='home') render(); weiter(anders); },zu:()=>el.remove()}); }
@@ -2532,6 +2550,9 @@ function standZeigen(el,fertig){ const wz=entwurfKarten(), o=offeneArbeit(); if(
 function kinderWechsel(){ const el=wwAuf(), neu=()=>{ if(arbeitsSicht()){ const {stelle,los,...rest}=view.params; go(view.name,rest,{ersetzen:true}); } else if(['home','raum','area','gallery','unterricht','werkzeuge','projekt','suche','restzeit','sammlung'].includes(view.name)) render(); };
   const stand=gew=>{ kinderSetzen(gew); standZeigen(el,id=>{ el.remove(); if(id) go('player',{videoId:id}); else neu(); }); };
   werKacheln(el,{modus:'wechsel',fertig:(gew,foto)=>{ if(!foto){ stand(gew); return; } const anders=!gleicheWahl(gew,kinder()), id=videoJetzt(); el.remove(); kinderSetzen(gew); if(anders) neu(); kamera(id,null,true); },ohne:()=>stand([]),zu:()=>el.remove()}); }
+/* Ohne Klassenliste gibt es keine Kacheln: der Weg zur Verbindung. Kommt die Liste doch noch, gehen die Kacheln auf. */
+async function werLeer(){ const el=wwAuf(); el.innerHTML=wwHtml(klToken()?'⚠ Keine Klassen':'⚠ Nicht verbunden','<div class="ww-raster"><button class="ww-k" data-act="lehrer">🔗 Verbinden</button></div>'); wwFuellen($('.ww-raster',el));
+  wire(el,{ zu:()=>el.remove(), lehrer:()=>{ el.remove(); go('lehrer'); } }); await klHolen(); if(el.isConnected&&KL.klassen.length){ el.remove(); kinderWechsel(); } }
 SCREENS.wer=app=>{ const weiter=id=>id?go('player',{videoId:id}):go(S.settings.klasse?'home':'klasse'); if(!KL.klassen.length){ weiter(); return; } KL.gefragt=true; const stand=gew=>{ kinderSetzen(gew); standZeigen(app,weiter); };
   werKacheln(app,{modus:'wechsel',fertig:(gew,foto)=>{ if(!foto){ stand(gew); return; } kinderSetzen(gew); weiter(); kamera(null,null,true); },ohne:()=>stand([]),zu:()=>weiter()}); };
 function verbindungenHtml(){ if(!SCHULE) return '';
