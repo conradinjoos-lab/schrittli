@@ -459,7 +459,23 @@ code{font-size:13px;word-break:break-all;background:var(--surface2);padding:2px 
 .ww .sterne-wahl{flex:none;gap:0}.ww .sterne-wahl .stern{font-size:min(16vw,22vh);padding:0 1vw;touch-action:manipulation}
 body:has(.ww) .fm-knopf{z-index:75;top:calc(max(12px,env(safe-area-inset-top,0px)) + 2px);bottom:auto;left:calc(max(14px,env(safe-area-inset-left,0px)) + 60px)}
 body:has(.ww-kopf>span:first-child) .fm-knopf{left:max(14px,env(safe-area-inset-left,0px))}
-.ww-kopf h1{padding:0 64px}
+.ww-kopf h1{padding:0 64px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.ww-fuss{flex:none;display:flex;gap:10px;justify-content:center;align-items:stretch}
+.ww-kamera,.ww-gehe{border:0;border-radius:18px;font-family:inherit;font-weight:900;min-height:76px;display:inline-flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 3px 10px rgba(28,36,48,.14)}
+.ww-kamera{flex:1;max-width:460px;background:#1C2430;color:#fff;font-size:44px;line-height:1}
+.ww-kamera b,.ww-gehe b{display:inline-grid;place-items:center;min-width:40px;height:40px;border-radius:999px;background:#F2B705;color:#1C2430;font-size:24px}
+.ww-gehe{min-width:120px;padding:0 22px;background:#fff;color:#1C2430;font-size:30px}
+.ww-gehe.ohne{font-size:20px}
+.ww-gehe[disabled]{opacity:.35}
+.ww-kamera:active,.ww-gehe:active{transform:scale(.97)}
+.ww-stand{flex:1;min-height:0;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),340px));justify-content:center;align-content:center;overflow:auto;padding:4px}
+.ww-stand.eins{grid-template-columns:minmax(0,520px)}
+.ww-karte{display:grid;grid-template-columns:auto 1fr;gap:8px 10px;align-items:center;border:0;border-radius:18px;background:#fff;color:#1C2430;padding:10px;font-family:inherit;text-align:left;text-decoration:none;box-shadow:0 3px 10px rgba(28,36,48,.1)}
+.ww-karte img,.ww-sym{grid-column:1/-1;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;background:#E8ECF1}
+.ww-sym{display:grid;place-items:center;font-size:64px}
+.ww-titel{grid-column:1/-1;font-weight:900;font-size:20px;line-height:1.15}
+.ww-z{font-weight:900;font-size:26px;white-space:nowrap}
+.ww-los{grid-column:2;justify-self:end;background:#1C2430;color:#fff;border-radius:999px;padding:12px 20px;font-weight:900;font-size:18px;white-space:nowrap}
 @media (max-width:560px){.ww-kopf h1{font-size:22px}}
 .beamer [data-wer]{display:none}
 .lehrer-zeile{text-align:center;padding:10px 16px 6px;margin-top:auto}
@@ -746,6 +762,9 @@ body.u-ohne-galerie [data-act=gallery]{display:none!important}
 .sw-filter{display:inline-flex;gap:6px;flex-wrap:wrap}
 .sw-filter button{border:2px solid #D7DCE2;background:#fff;border-radius:999px;min-height:48px;padding:6px 14px;font:inherit;font-weight:900;font-size:15px;cursor:pointer;color:#1C2430}
 .sw-filter button.an{background:#1C2430;border-color:#1C2430;color:#fff}
+.sw-z{position:absolute;left:3px;top:3px;display:inline-flex;align-items:center;min-height:28px;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:900;background:#E8ECF1;color:#1C2430;box-shadow:0 1px 4px rgba(28,36,48,.25);white-space:nowrap}
+.sw-z[data-act]{min-height:48px;min-width:48px;padding:2px 12px;font-size:14px;cursor:pointer}
+.sw-z.geteilt{background:#D5F1E8;color:#14573F}.sw-z.wartet{background:#FCEFC1;color:#5F4A00}.sw-z.fehler{background:#FDE3D3;color:#9C2F0E}
 .panel.verb{margin-bottom:14px;background:#fff;color:#1C2430;border:2px solid #E6D9B8}.panel.verb h2{margin:0 0 8px;color:#1C2430;font-size:20px}.panel.verb .inp{background:#F5F8FB;color:#1C2430;border:1px solid #D5DEE9}.panel.verb a{color:#1C2430}
 .verb-zeile{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #EEF1F4;flex-wrap:wrap}
 .verb-zeile b{min-width:130px;color:#1C2430}.verb-zeile>span{flex:1;color:#7A8591;font-size:14px}.verb-zeile>span.an{color:#2E7D4F;font-weight:800}
@@ -1037,7 +1056,7 @@ function lpPanel(v){ const st=v.stufen||[]; const zyk=[st.some(s=>s<=2)&&1,st.so
   return `<div class="lp-panel">${(LP21.zuordnung[v.id]||[]).map(c=>{ const k=LP21.kompetenzen[c]; if(!k) return ''; return `<div class="lp-k"><a href="${esc(k.link)}" target="_blank" rel="noopener"><b>${lpCode(c)}</b> ${esc(k.titel)}</a>${k.stufen.filter(s=>zyk.includes(s.zyklus)).map(s=>`<div class="lp-s"><span>${lpCode(s.code)} · ${s.zyklus}. Zyklus</span>${esc(s.text)}</div>`).join('')}</div>`; }).join('')}</div>`; }
 function werkeHtml(ws){ return ws.length?`<h2 class="pw-grp andere-titel">Das haben andere gemacht</h2><div class="kork andere">${ws.map(w=>`<button class="foto" data-act="andere" data-i="${WERKE.indexOf(w)}"><div class="bild"><img src="${WERKE_BASE}${esc(w.bild)}" alt="" loading="lazy" onerror="this.closest('.foto').remove()"></div><span class="nm">${esc(w.titel)}</span></button>`).join('')}</div>`:''; }
 function zeigeWerk(b){ const w=WERKE[+b.dataset.i]; if(!w) return; kidModal(`<img class="andere-gross" src="${WERKE_BASE}${esc(w.bild)}" alt=""><h2 style="font-size:20px;margin:10px 0 0">${esc(w.titel)}</h2><div class="row center" style="margin-top:12px"><button class="kbtn ghost" data-close>Schliessen</button></div>`); }
-try{ localStorage.setItem('schrittli.app',SCHULE?'schule':'familie'); }catch(e){}   // für «← Zurück zur App» auf den Vorlagen-Seiten (vorlagen/zurueck.js)
+try{ localStorage.setItem('schrittli.app',SCHULE?'schule':'familie'); if(!SCHULE) localStorage.removeItem('schrittli.kind'); }catch(e){}   // für «← Zurück zur App» auf den Vorlagen-Seiten (vorlagen/zurueck.js); Familie speichert Werkzeuge ohne Kind
 const VL_ZIEL=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true?'':' target="_blank" rel="noopener"';   // App auf dem Home-Bildschirm: Vorlagen im selben Fenster, sonst neuer Tab
 const VORL_BASE=SCHULE?'../vorlagen/':'vorlagen/';   // eigene Vorlagen zu Videos, z. B. vorlagen/vorlage-nikolausstiefel-a4.pdf
 const vlLink=(cls,txt='Vorlagen drucken')=>`<a class="${cls}" href="${VORL_BASE}"${VL_ZIEL}>${txt}</a>`;   // Vorlagen-Generator (vorlagen/index.html): Form wählen, Grösse in cm, drucken
@@ -1086,7 +1105,7 @@ function glasSterne(pid,sm){ const st=starState(pid); const total=S.settings.sta
 
 /* ============================== Zustand ============================== */
 function defaultState(){
-  if(SCHULE) return {v:1,profiles:[{id:'klasse',name:'Klasse',emoji:'🏫',color:'#4C6EF5'}],activeProfile:'klasse',areas:THEMEN.map(a=>Object.assign({},a)),videos:[],progress:{},stars:{},works:[],settings:{starsPerDay:0,earnStar:false,tts:true,autoRead:false,sv:3,spass:false,voice:'',slowRate:0.75,voiceControl:false,passTouches:false,pin:'',abend:'tag',kino:false,klasse:null,kind:null}};
+  if(SCHULE) return {v:1,profiles:[{id:'klasse',name:'Klasse',emoji:'🏫',color:'#4C6EF5'}],activeProfile:'klasse',areas:THEMEN.map(a=>Object.assign({},a)),videos:[],progress:{},arbeit:{},stars:{},works:[],settings:{starsPerDay:0,earnStar:false,tts:true,autoRead:false,sv:4,spass:false,voice:'',slowRate:0.75,voiceControl:false,passTouches:false,pin:'',abend:'tag',kino:false,klasse:null,kinder:[]}};
   return {version:1,profiles:[],activeProfile:null,
     areas:[
       {id:'basteln',name:'Basteln',emoji:'✂️',color:'#3BB273',kind:'lern',ding:'schere'},
@@ -1101,17 +1120,26 @@ function defaultState(){
     videos:[],progress:{},stars:{},works:[],
     settings:{starsPerDay:3,earnStar:true,tts:true,autoRead:false,sv:3,spass:false,voice:'',slowRate:0.75,voiceControl:false,passTouches:false,pin:'1234',abend:'auto',schrift:'gross'}};
 }
+/* Schule: Gerät (S.settings), gewählte Kinder (S.settings.kinder) und Arbeit je Kind (S.arbeit[kindKey][videoId]) sind getrennt. pos und step sind die Position, erledigt die abgehakten Schritte. Ohne Name: eigener Schlüssel. */
+const OHNE='_ohne';
+function arbeitNeu(){ return {pos:0,step:0,max:0,erledigt:[],material:{},entwuerfe:{},zeit:0,done:false,slow:false}; }
 let S=load();
-function load(){ try{ const raw=localStorage.getItem(KEY); if(raw){ const s=JSON.parse(raw); const d=defaultState(); const st=Object.assign(d,s,{settings:Object.assign(d.settings,s.settings||{})}); if(SCHULE){ st.progress={}; st.settings.zuletzt=null; st.works=(st.works||[]).filter(w=>w.profileId==='klasse'); st.profiles=d.profiles; st.activeProfile='klasse'; st.areas=THEMEN.map(a=>Object.assign({},a)); st.videos=[]; st.settings.spass=false; st.settings.abend='tag'; return st; } (st.areas||[]).forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; }); st.videos=(st.videos||[]).filter(validVideo); if(!(st.settings.sv>=2)){ st.settings.autoRead=false; st.settings.sv=2; } if(!(st.settings.sv>=3)){ const d3=defaultState().areas; const add=(id,after)=>{ if(st.areas.some(a=>a.id===id)) return; const a=d3.find(x=>x.id===id); const i=st.areas.findIndex(x=>x.id===after); st.areas.splice(i>=0?i+1:st.areas.length,0,a); }; add('werken','basteln'); add('experimente','natur'); st.settings.sv=3; } return st; } }catch(e){} return defaultState(); }
+function load(){ try{ const raw=localStorage.getItem(KEY); if(raw){ const s=JSON.parse(raw); const d=defaultState(); const st=Object.assign(d,s,{settings:Object.assign(d.settings,s.settings||{})}); if(SCHULE){ if(!st.arbeit||typeof st.arbeit!=='object') st.arbeit={}; if(!((s.settings||{}).sv>=4)){ for(const k of Object.keys(st.progress||{})) if(k.startsWith('klasse:')) (st.arbeit[OHNE]=st.arbeit[OHNE]||{})[k.slice(7)]=Object.assign(arbeitNeu(),st.progress[k]); const alt=st.settings.kind; st.settings.kinder=alt&&alt.name?[{liste:alt.liste,name:alt.name}]:[]; st.settings.sv=4; } delete st.settings.kind; st.progress={}; st.settings.zuletzt=null; st.works=(st.works||[]).filter(w=>w.profileId==='klasse'); st.profiles=d.profiles; st.activeProfile='klasse'; st.areas=THEMEN.map(a=>Object.assign({},a)); st.videos=[]; st.settings.spass=false; st.settings.abend='tag'; return st; } (st.areas||[]).forEach(a=>{ if(!a.ding) a.ding=DING_BY_ID[a.id]||'kiste'; }); st.videos=(st.videos||[]).filter(validVideo); if(!(st.settings.sv>=2)){ st.settings.autoRead=false; st.settings.sv=2; } if(!(st.settings.sv>=3)){ const d3=defaultState().areas; const add=(id,after)=>{ if(st.areas.some(a=>a.id===id)) return; const a=d3.find(x=>x.id===id); const i=st.areas.findIndex(x=>x.id===after); st.areas.splice(i>=0?i+1:st.areas.length,0,a); }; add('werken','basteln'); add('experimente','natur'); st.settings.sv=3; } return st; } }catch(e){} return defaultState(); }
 let saveT=null;
-function save(){ clearTimeout(saveT); saveT=setTimeout(()=>{ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ toast('Speichern nicht möglich (Speicher voll?)'); } },120); }
+function saveJetzt(){ clearTimeout(saveT); saveT=null; try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){ toast('⚠ Speicher voll'); } }
+function save(){ clearTimeout(saveT); saveT=setTimeout(saveJetzt,120); }
 
 const profile=()=>S.profiles.find(p=>p.id===S.activeProfile)||S.profiles[0]||null;
 const areaOf=id=>S.areas.find(a=>a.id===id);
 const videoOf=id=>S.videos.find(v=>v.id===id);
 const videosIn=aid=>S.videos.filter(v=>v.areaId===aid&&(!SCHULE||!S.settings.klasse||(v.stufen||[]).includes(S.settings.klasse)));
 const klasseName=k=>k?`${k}. Klasse`:'';
-function prog(vid){ const k=(S.activeProfile||'school')+':'+vid; return S.progress[k]||(S.progress[k]={pos:0,step:0,done:false,slow:false}); }
+const arbeitRang=a=>(a.done?1e9:0)+(a.step||0)*1e5+(a.pos||0);
+/* Bester Stand der Kinder: Offenes geht vor Fertigem, sonst der weiteste. */
+function arbeitBeste(ks,vid){ const l=ks.map(k=>(S.arbeit[k]||{})[vid]).filter(Boolean), offen=l.filter(a=>!a.done); return (offen.length?offen:l).sort((a,b)=>arbeitRang(b)-arbeitRang(a))[0]||null; }
+/* Schule: Eine Gruppe teilt dasselbe Objekt, so landet jeder Schritt bei allen. Wer schon fertig ist, bleibt fertig. */
+function prog(vid){ if(!SCHULE){ const k=(S.activeProfile||'school')+':'+vid; return S.progress[k]||(S.progress[k]={pos:0,step:0,done:false,slow:false}); }
+  const ks=kindKeys(), o=arbeitBeste(ks,vid)||arbeitNeu(); ks.forEach(k=>{ const b=S.arbeit[k]||(S.arbeit[k]={}); if(!b[vid]||!b[vid].done||o.done) b[vid]=o; }); o.zeit=Date.now(); return o; }
 function starState(pid){ const t=todayStr(); let st=S.stars[pid]; if(!st||st.date!==t){ st=S.stars[pid]={date:t,used:0,bonus:0,unlocked:[]}; } return st; }
 function starsLeft(pid){ const st=starState(pid); return S.settings.starsPerDay+st.bonus-st.used; }
 function earnStar(){ const st=starState(S.activeProfile); if(st.bonus<1){ st.bonus++; return true; } return false; }
@@ -1172,7 +1200,7 @@ function kidModal(html,actions={}){ return modal(html,actions,'kid'); }
 /* ============================== Fehler melden ============================== */
 /* Knopf auf jeder Seite, auch über Fenstern und in der Kachelwahl. Die Meldung geht mit Ort (Seite, Video, Schritt, Zeit) und Stand an den Worker werkzeug/anmelden (/melden)
    und erscheint in der Online-Kontrolle. Keine Namen, kein Konto, nichts aus dem Profil. Offline bleibt sie in «schrittli.melden.warte» (dieselbe Warteschlange wie vorlagen/melden.js). */
-const MELDEN='https://schrittli-anmelden.conradinjoos.workers.dev/melden', FM_WARTE='schrittli.melden.warte', APP_STAND='2026-10-31-a166f82';   // __STAND__ ersetzt quelle/bauen.sh
+const MELDEN='https://schrittli-anmelden.conradinjoos.workers.dev/melden', FM_WARTE='schrittli.melden.warte', APP_STAND='2026-10-31-4f148e8';   // __STAND__ ersetzt quelle/bauen.sh
 let ORT=null;   // vom aktuellen Screen gesetzt: ()=>({video,titel,schritt})
 function fmGeraet(){ const u=navigator.userAgent; const os=/iPad/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1)?'iPad':/iPhone/.test(u)?'iPhone':/Android/.test(u)?'Android':/CrOS/.test(u)?'Chromebook':/Windows/.test(u)?'Windows':/Mac/.test(u)?'Mac':'anderes'; const br=/Edg\//.test(u)?'Edge':/Firefox\//.test(u)?'Firefox':/Chrome\//.test(u)?'Chrome':/Safari\//.test(u)?'Safari':''; return (os+' '+br).trim(); }
 function fmAdresse(){ const u=new URL(location.href); for(const k of [...u.searchParams.keys()]) if(/token|schein|schluessel|code|key|name/i.test(k)) u.searchParams.delete(k); return (u.pathname+u.search+u.hash).replace(/[0-9a-f]{32,}/gi,'…'); }
@@ -1240,7 +1268,8 @@ async function boot(){
   await blobs.open(); await Promise.all([loadContentFile(),loadMatFotos(),loadWerke(),loadAnleitungen(),loadVorschau()]);
   const school=parseSchool(); if(school){ go('school',{video:school}); return; }
   uStart(); rmStart(); swStart(); if(uAktiv()) uWechsel(); klStart();
-  document.addEventListener('click',e=>{ const b=e.target.closest('[data-wer]'); if(b){ e.preventDefault(); takePhoto(videoJetzt(),null,true); } });   // Kurzlogin oben rechts: Klasse, Name, Kamera
+  document.addEventListener('click',e=>{ const b=e.target.closest('[data-wer]'); if(b){ e.preventDefault(); if(SCHULE&&KL.klassen.length) kinderWechsel(); else takePhoto(videoJetzt(),null,true); } });   // Kurzlogin oben rechts: Wechsel führt zum Stand des neuen Kindes
+  addEventListener('pagehide',()=>{ if(saveT) saveJetzt(); }); if(SCHULE){ entwuerfeSpiegeln(); document.addEventListener('visibilitychange',()=>{ if(!document.hidden) entwuerfeSpiegeln(); }); }
   const zk=zurueckStelle(); if(zk){ go(zk.view.name,zk.view.params); hochScrollen(zk.y); return; }   // «← Zurück zur App» aus den Vorlagen: gleiche Seite, gleiche Höhe wie beim Draufklicken
   if(SCHULE){ go(KL.klassen.length&&!kind()?'wer':S.settings.klasse?'home':'klasse'); return; }
   if(!S.profiles.length){ go('firstrun'); return; }
@@ -1295,10 +1324,10 @@ const RAEUME=[{id:'hand',name:'Handarbeitszimmer',bild:'figuren/fila-faden',soft
 const raumOf=aid=>RAEUME[0].themen.includes(aid)?RAEUME[0]:RAEUME[1];
 const raumThemen=r=>S.areas.filter(a=>THEMA_ID.has(a.id)&&raumOf(a.id)===r&&videosIn(a.id).length);
 const soft=a=>`color-mix(in oklch,${a.color} 16%,white)`;
-const prSchule=v=>S.progress[S.activeProfile+':'+v.id]||{};
+const prSchule=v=>SCHULE?arbeitBeste(kindKeys(),v.id)||{}:S.progress[S.activeProfile+':'+v.id]||{};
 function v3Kopf(links,titel){ return `<div class="v3-kopf">${links}<span class="v3-logo"><img src="${GRAFIK}figuren/logo.webp" alt=""></span>${titel||'<b class="v3-name">Schritt für Schritt</b>'}<span class="grow"></span><button class="v3-pill" data-act="gallery">${werkeText()}</button>${kindChip('v3-pill v3-kind')}</div>`; }
 const werkeText=()=>`${SCHULE?'Unsere':'Meine'} Werke${S.works.length?' · '+S.works.length:''}`;
-function weiterMit(r){ const v=videoOf(S.settings.zuletzt); if(!v||raumOf(v.areaId)!==r||!videosIn(v.areaId).includes(v)) return null; const pr=prSchule(v); return !pr.done&&(pr.pos>5||pr.step>0)?{v,a:areaOf(v.areaId),schritt:(pr.step||0)+1}:null; }
+function weiterMit(r){ if(SCHULE){ const o=offeneArbeit().find(o=>raumOf(o.v.areaId)===r&&videosIn(o.v.areaId).includes(o.v)); return o?{v:o.v,a:areaOf(o.v.areaId),schritt:(o.pr.step||0)+1}:null; } const v=videoOf(S.settings.zuletzt); if(!v||raumOf(v.areaId)!==r||!videosIn(v.areaId).includes(v)) return null; const pr=prSchule(v); return !pr.done&&(pr.pos>5||pr.step>0)?{v,a:areaOf(v.areaId),schritt:(pr.step||0)+1}:null; }
 SCREENS.raum=app=>{ const akt=S.settings.raum;
   app.innerHTML=`<div class="v3${schriftNormal()?'':' caps'}"><div class="v3-in">${v3Kopf('')}
     <h1 class="v3-h1 gross">Wo arbeitest du heute?</h1>
@@ -1326,7 +1355,7 @@ SCREENS.zimmer=(app,{r})=>homeSchule(app,r);   // Familie: Handarbeit oder Werkr
 function gruppenOf(vids){ const m=new Map(); videoOrdnung(vids).forEach(v=>{ const g=v.gruppe||'Weitere Projekte'; if(!m.has(g)) m.set(g,[]); m.get(g).push(v); });   // Projektart im Thema (schule.json «gruppe»)
   const st=v=>v.grundtechnik?0:(+v.niveau||2), mitte=g=>g.reduce((s,v)=>s+st(v),0)/g.length;
   return [...m].sort((x,y)=>(Math.min(...x[1].map(st))-Math.min(...y[1].map(st)))||(mitte(x[1])-mitte(y[1]))); }   // leichteste Gruppe zuerst, darin leicht → anspruchsvoll
-function areaSchule(app,a){ const gr=gruppenOf(videosIn(a.id)); const vs=gr.flatMap(g=>g[1]); const jetzt=vs.find(v=>v.id===S.settings.zuletzt&&!prSchule(v).done)||vs.find(v=>!prSchule(v).done); let nr=0;
+function areaSchule(app,a){ const gr=gruppenOf(videosIn(a.id)); const vs=gr.flatMap(g=>g[1]); const letzt=SCHULE?(offeneArbeit()[0]||{}).id:S.settings.zuletzt, jetzt=vs.find(v=>v.id===letzt&&!prSchule(v).done)||vs.find(v=>!prSchule(v).done); let nr=0;
   const zeile=v=>{ nr++; const pr=prSchule(v); const [cls,sym]=pr.done?['fertig','✓']:v===jetzt?['jetzt',nr]:['offen',nr]; const th=thumbOf(v);
     const auf=v.task&&v.task.text&&v.task.deliverable!=='keine'?`<button class="v3-lektion aufgabe" data-act="video" data-id="${v.id}"><span class="th stern" aria-hidden="true">★</span><span class="grow"><b>${esc(v.task.text)}</b><span class="v3-meta">Aufgabe${v.task.deliverable==='foto'?' · Foto machen':''}</span></span><span class="v3-badge aufgabe">★</span></button>`:'';
     return `<button class="v3-lektion${v===jetzt?' jetzt':''}" data-act="video" data-id="${v.id}"><span class="th">${th?`<img src="${th}" alt="" loading="lazy">`:''}<i aria-hidden="true">${v.source.type==='bilder'?'📷':'▶'}</i></span><span class="grow"><b>${esc(v.title)}</b><span class="v3-meta">${[v.source.type==='bilder'?'Foto-Anleitung':'',(v.steps||[]).length?v.steps.length+' Schritte':'',v.zeit?v.zeit+' Min.':'',v.grundtechnik?'Grundtechnik':''].filter(Boolean).join(' · ')}</span></span><span class="v3-badge ${cls}" aria-label="${pr.done?'fertig':v===jetzt?'jetzt dran':'noch offen'}">${sym}</span></button>${auf}`; };
@@ -1601,10 +1630,10 @@ document.addEventListener('visibilitychange',()=>{ if(document.hidden&&P&&P.mode
 /* Nach dem Foto: Name (immer Grossbuchstaben) und Klasse dazuschreiben. Bleibt wie das Foto nur auf diesem Gerät. */
 const werText=(w,kid)=>[w.name||(kid?kid.name:''),w.klasse?klasseName(w.klasse):''].filter(Boolean).join(' · ');
 function nameUndKlasse(fertig,blob){
-  const kd=kind(); if(kd){ kindFertig(kd,fertig,blob); return; }
+  if(kinder().length){ kindFertig(kinder(),fertig,blob); return; }
   const p=profile(), vorK=S.settings.fotoKlasse||(SCHULE?S.settings.klasse:0)||0; let schon=false, sterne=0;
-  kidModal(`<h2>Wer hat das gemacht?</h2><div class="namen"><input class="inp" id="fn-name" maxlength="30" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="NAME" aria-label="Name" value="${esc(!SCHULE&&p?p.name.toUpperCase():'')}">
-    <select class="inp" id="fn-klasse" aria-label="Klasse"><option value="">Klasse wählen</option>${STUFEN.map(k=>`<option value="${k}"${k===vorK?' selected':''}>${klasseName(k)}</option>`).join('')}</select></div>
+  kidModal(`<h2>Wer?</h2><div class="namen"><input class="inp" id="fn-name" maxlength="30" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="NAME" aria-label="Name" value="${esc(!SCHULE&&p?p.name.toUpperCase():'')}">
+    <select class="inp" id="fn-klasse" aria-label="Klasse"><option value="">Klasse</option>${STUFEN.map(k=>`<option value="${k}"${k===vorK?' selected':''}>${klasseName(k)}</option>`).join('')}</select></div>
     ${swSterneHtml()}<button class="kbtn primary" data-act="ok">${ico('check')} Fertig</button>`,{ ok:(b,close)=>{ close(); weiter(); }, stern:(b,close,m)=>{ sterne=swSternWahl(b,m); } });
   const bg=document.body.lastElementChild, nm=$('#fn-name',bg), kl=$('#fn-klasse',bg);
   const weiter=()=>{ if(schon) return; schon=true; const klasse=+kl.value||null; if(klasse){ S.settings.fotoKlasse=klasse; save(); } fertig({name:nm.value.trim().toUpperCase()||null,klasse,sterne}); };
@@ -1613,24 +1642,24 @@ function nameUndKlasse(fertig,blob){
   bg.addEventListener('click',e=>{ if(e.target===bg) weiter(); },true);   // daneben tippen: Foto trotzdem behalten
   setTimeout(()=>nm.focus(),50);
 }
-/* Kind ist gewählt: ohne «Unsere Werke» nichts fragen, sonst Foto und fünf grosse Sterne. Ein Tipp, und das Werk ist abgegeben. */
-function kindFertig(kd,fertig,blob){
-  const vorK=klasseVon(kd); if(!swAktiv()){ fertig({name:kd.name,klasse:vorK||null,sterne:0}); return; }
+/* Namen gewählt: ohne «Unsere Werke» nichts fragen, sonst Foto, fünf Sterne und «Fertig» ohne Sterne. Ein Tipp, und das Werk ist abgegeben. */
+function kindFertig(kds,fertig,blob){
+  const name=namenText(kds), vorK=klasseVon(kds[0]); if(!swAktiv()){ fertig({name,klasse:vorK||null,sterne:0}); return; }
   const el=wwAuf(), u=URL.createObjectURL(blob); let schon=false;
-  const ende=(klasse,sterne)=>{ el.remove(); URL.revokeObjectURL(u); if(!S.settings.klasse){ S.settings.klasse=klasse; save(); } fertig({name:kd.name,klasse,sterne}); };
-  const sterne=klasse=>{ el.innerHTML=wwHtml(kd.name,`<img class="ww-foto" src="${u}" alt=""><div class="sterne-wahl" role="radiogroup" aria-label="Sterne">${swSterne()}</div>`,{zu:false});
-    wire(el,{ stern:b=>{ if(schon) return; schon=true; const n=swSternWahl(b,el); setTimeout(()=>ende(klasse,n),220); } }); };
+  const ende=(klasse,sterne)=>{ el.remove(); URL.revokeObjectURL(u); if(!S.settings.klasse){ S.settings.klasse=klasse; save(); } fertig({name,klasse,sterne}); };
+  const sterne=klasse=>{ el.innerHTML=wwHtml(name,`<img class="ww-foto" src="${u}" alt=""><div class="sterne-wahl" role="radiogroup" aria-label="Sterne">${swSterne()}</div><div class="ww-fuss"><button class="ww-gehe" data-act="ohne">${ico('check')} Fertig</button></div>`,{zu:false});
+    wire(el,{ stern:b=>{ if(schon) return; schon=true; const n=swSternWahl(b,el); setTimeout(()=>ende(klasse,n),220); }, ohne:()=>{ if(schon) return; schon=true; ende(klasse,0); } }); };
   if(vorK){ sterne(vorK); return; }
   el.innerHTML=wwHtml('Klasse',`<div class="ww-raster">${STUFEN.map(s=>`<button class="ww-k" data-act="klasse" data-k="${s}" data-s="${s}">${s}.</button>`).join('')}</div>`,{zu:false}); wwFuellen($('.ww-raster',el));
   wire(el,{ klasse:b=>sterne(+b.dataset.k) });
 }
-/* Schule: erst der Name auf Kacheln. Die Namen-Kachel öffnet gleich die Kamera; iOS erlaubt das nur direkt aus dem Tipp. */
-function takePhoto(videoId,nachher,zwischendurch){ const los=()=>kamera(videoId,nachher,zwischendurch); if(SCHULE&&KL.klassen.length) werWahl(los); else los(); }
+/* Schule: erst die Namen auf Kacheln. Der Kamera-Knopf öffnet die Kamera direkt aus dem Tipp, iOS erlaubt es nur so. */
+function takePhoto(videoId,nachher,zwischendurch){ if(SCHULE&&KL.klassen.length) werWahl(anders=>kamera(videoId,anders?null:nachher,zwischendurch)); else kamera(videoId,nachher,zwischendurch); }
 /* Projektende: dieselben Kacheln kommen von selbst, damit jedes fertige Werk mit Name abgegeben wird. */
 function projektEnde(id,nachher){ if(SCHULE&&KL.klassen.length&&!BEAMER.an&&!$('.ww')) takePhoto(id,nachher); }
 const videoJetzt=()=>{ const p=view.params||{}; return (P&&P.v||p.v||p.video||{}).id||p.videoId||null; };
 function kamera(videoId,nachher,zwischendurch){
-  const done=async b=>{ let star=false; const wer=await new Promise(f=>nameUndKlasse(f,b)); try{ star=await saveWork({type:'foto',blob:b,videoId,zwischendurch,...wer}); }catch(e){ return; } if(!zwischendurch) planSetzen(videoId,2,true); confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Foto gespeichert!'); $$('.v3-pill[data-act=gallery]').forEach(x=>{ x.textContent=werkeText(); }); if(nachher) nachher(); else if(P) updatePlayerUI(); if(!zwischendurch) rmNachAbgabe(videoId); };
+  const done=async b=>{ let star=false; const wer=await new Promise(f=>nameUndKlasse(f,b)); try{ star=await saveWork({type:'foto',blob:b,videoId,zwischendurch,...wer}); }catch(e){ return; } if(!zwischendurch) planSetzen(videoId,2,true); const erster=(kind()||{}).name||null, hatte=kinder().length>0; if(hatte) kinderSetzen([]); confetti(); toast(star?'Super! Du hast einen Stern verdient ⭐':'Foto gespeichert!'); $$('.v3-pill[data-act=gallery]').forEach(x=>{ x.textContent=werkeText(); }); if(hatte&&arbeitsSicht()) go(view.name,view.params); else if(nachher) nachher(); else if(P) updatePlayerUI(); if(!zwischendurch) rmNachAbgabe(videoId,erster); };
   const inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.setAttribute('capture','environment');
   inp.onchange=()=>{ const f=inp.files[0]; if(!f) return; const img=new Image(); const u=URL.createObjectURL(f);
     img.onload=()=>{ const max=1400, sc=Math.min(1,max/Math.max(img.width,img.height)); const c=document.createElement('canvas'); c.width=Math.round(img.width*sc); c.height=Math.round(img.height*sc); c.getContext('2d').drawImage(img,0,0,c.width,c.height); URL.revokeObjectURL(u); c.toBlob(b=>done(b),'image/jpeg',.85); };
@@ -1684,13 +1713,14 @@ SCREENS.record=(app,pr)=>{
 };
 
 /* ============================== Kind: Galerie (Korkwand) ============================== */
-SCREENS.gallery=(app,{school,klasse=0}={})=>{
+SCREENS.gallery=(app,{school,klasse=0,sicht='meine'}={})=>{
   const p=profile(); const pid=p?p.id:null; const n=abend(); const sw=swAktiv(); const alle=sw?swAlle():S.works.filter(w=>w.profileId===pid);
-  const klassen=sw?[...new Set(alle.map(w=>w.klasse).filter(Boolean))].sort((a,b)=>a-b):[]; const ws=sw&&klasse?alle.filter(w=>w.klasse===klasse):alle;
+  const kd=kind(), st=kd?klasseVon(kd):0, klein=t=>String(t).toLocaleLowerCase('de'), meine=w=>w.type==='foto'&&(!st||!w.klasse||w.klasse===st)&&String(w.name||'').split(', ').some(t=>kinder().some(k=>klein(k.name)===klein(t)));
+  const klassen=sw&&!kd?[...new Set(alle.map(w=>w.klasse).filter(Boolean))].sort((a,b)=>a-b):[]; const ws=kd?alle.filter(sicht==='meine'?meine:w=>!st||!w.klasse||w.klasse===st):sw&&klasse?alle.filter(w=>w.klasse===klasse):alle;
   app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${kopf(SCHULE?'Unsere Werke':'Meine Werke',{back:true,right:SCHULE||school?'':`<button class="btn" data-act="malen">${ico('brush')} Malen</button><button class="btn" data-act="ton">${ico('mic')} Aufnehmen</button>`})}
-    ${sw?swLeisteHtml(klassen,klasse):''}<div class="inner">${ws.length?`<div class="kork">${ws.map(w=>`<button class="foto" data-act="open" data-id="${w.id}" aria-label="Werk öffnen"><div class="bild">${w.type==='ton'?'🎧':w.shared?`<img data-sw="${w.id}" alt="">`:`<img data-blob="${w.id}" alt="">`}</div><span class="dt">${w.name?esc(w.name):dateDE(w.createdAt)}${w.sterne?` <span class="st">${'★'.repeat(w.sterne)}</span>`:''}${w.sync==='wartet'?' ⏳':w.sync==='fehler'?' ⚠️':''}</span>${w.feedback?`<span class="fb${w.fbSeen?'':' new'}">${w.feedback.emoji}</span>`:''}</button>`).join('')}</div>`:`<div class="empty" style="margin-top:20px">${figur('foto')}Noch keine Werke.</div>`}</div>${bank()}</div>`;
+    ${sw||kd?swLeisteHtml(klassen,klasse,kd?sicht:null):''}<div class="inner">${ws.length?`<div class="kork">${ws.map(w=>`<button class="foto" data-act="open" data-id="${w.id}" aria-label="Werk öffnen"><div class="bild">${w.type==='ton'?'🎧':w.shared?`<img data-sw="${w.id}" alt="">`:`<img data-blob="${w.id}" alt="">`}</div><span class="dt">${w.name?esc(w.name):dateDE(w.createdAt)}${w.sterne?` <span class="st">${'★'.repeat(w.sterne)}</span>`:''}</span>${SCHULE&&w.type==='foto'?fotoZustandHtml(w):''}${w.feedback?`<span class="fb${w.fbSeen?'':' new'}">${w.feedback.emoji}</span>`:''}</button>`).join('')}</div>`:`<div class="empty" style="margin-top:20px">${figur('foto')}Noch keine Werke.</div>`}</div>${bank()}</div>`;
   fillThumbs(app); if(sw){ swBilder(app); swSync(); }
-  wire(app,{ back:()=>school?go('school',{video:school}):go('home'), who:()=>{}, malen:()=>go('paint',{back:'gallery'}), ton:()=>go('record',{back:'gallery'}), klasse:b=>{ view.params.klasse=+b.dataset.k||0; render(); }, open:b=>S.works.some(x=>x.id===b.dataset.id)?openWork(b.dataset.id,false):swOeffnen(b.dataset.id) });
+  wire(app,{ back:()=>school?go('school',{video:school}):go('home'), who:()=>{}, malen:()=>go('paint',{back:'gallery'}), ton:()=>go('record',{back:'gallery'}), klasse:b=>{ view.params.klasse=+b.dataset.k||0; render(); }, sicht:b=>{ view.params.sicht=b.dataset.k; render(); }, nochmal:b=>{ const w=S.works.find(x=>x.id===b.dataset.id); if(w) swNochmal(w); }, teilen:b=>{ const w=S.works.find(x=>x.id===b.dataset.id); if(w) swNachtragen(w); }, open:b=>S.works.some(x=>x.id===b.dataset.id)?openWork(b.dataset.id,false):swOeffnen(b.dataset.id) });
 };
 async function openWork(id,parentMode){
   const w=S.works.find(x=>x.id===id); if(!w) return; const u=await blobs.url(id); const v=w.videoId?videoOf(w.videoId):null; const kid=S.profiles.find(p=>p.id===w.profileId);
@@ -2003,10 +2033,10 @@ async function rmVerbinden(token){ const z=mitZeit(15000);
 function rmStart(){ if(!SCHULE) return; rmLaden(); const m=location.hash.match(/[#&]klasse=([0-9a-fA-F]{64})(?![0-9a-fA-F])/); if(!m) return;
   history.replaceState(null,'',location.pathname+location.search); rmVerbinden(m[1].toLowerCase()).then(()=>{ klHolen(); if(view.name==='lehrer') render(); }).catch(e=>toast(e.message,6000)); }
 /* Nach einem abgegebenen Werk einmal pro Video fragen – kurz verzögert, damit Konfetti und Hinweis zuerst dran sind. */
-function rmNachAbgabe(videoId){ if(!rmAktiv()||!videoId||RM.gefragt.has(videoId)) return; const v=videoOf(videoId); if(!v) return; RM.gefragt.add(videoId); setTimeout(()=>{ if(rmAktiv()) rmFragen(v); },900); }
+function rmNachAbgabe(videoId,name){ if(!rmAktiv()||!videoId||RM.gefragt.has(videoId)) return; const v=videoOf(videoId); if(!v) return; RM.gefragt.add(videoId); setTimeout(()=>{ if(rmAktiv()) rmFragen(v,name); },900); }
 const RM_FRAGEN=[{f:'schwierigkeit',titel:'Wie war es für dich?',wahl:[[1,'🪶','Leicht'],[2,'👌','Genau richtig'],[3,'💪','Schwierig']]},{f:'spass',titel:'Hat es Spass gemacht?',wahl:[[1,'😕','Wenig'],[2,'🙂','Okay'],[3,'🤩','Viel']]}];
-function rmFragen(v){
-  const st={id:uuid(),name:kind()?kind().name:null,schwierigkeit:0,spass:0,klasse:STUFEN.includes(+S.settings.klasse)?+S.settings.klasse:0,stufe:'idle',audio:null,url:null,rec:null,stream:null,tick:null,sek:0,start:0};
+function rmFragen(v,name){
+  const st={id:uuid(),name:name||null,schwierigkeit:0,spass:0,klasse:STUFEN.includes(+S.settings.klasse)?+S.settings.klasse:0,stufe:'idle',audio:null,url:null,rec:null,stream:null,tick:null,sek:0,start:0};
   const gueltig=()=>st.schwierigkeit&&st.spass&&STUFEN.includes(st.klasse)&&(st.stufe==='idle'||st.stufe==='fertig');
   const pruefen=m=>{ const b=$('[data-act=senden]',m); if(b) b.disabled=!gueltig(); };
   const frage=q=>`<div class="rm-frage"><span>${q.titel}</span><div class="rm-wahl">${q.wahl.map(([w,sym,txt])=>`<button type="button" data-act="wahl" data-f="${q.f}" data-v="${w}" aria-pressed="false"><i aria-hidden="true">${sym}</i>${txt}</button>`).join('')}</div></div>`;
@@ -2072,35 +2102,43 @@ async function swFetch(pfad,opt={},verb=SW.verb){ if(!verb) throw Object.assign(
 async function swVerbinden(token){ const d=await swFetch('verbinden',{},{token}); swBilderFrei(); SW.verb={id:d.id,name:String(d.name||'Unsere Klasse').slice(0,80),token}; swSpeichern(); SW.remote=[]; SW.version=-1; SW.status=''; toast('Werke: verbunden mit «'+SW.verb.name+'»',3500); swLaufen(); swSync(); klHolen(); }
 function swBilderFrei(){ for(const u of SW.urls.values()) URL.revokeObjectURL(u); SW.urls.clear(); SW.laedt.clear(); }
 function swTrennen(melden=true){ SW.verb=null; swSpeichern(); SW.remote=[]; SW.version=-1; swBilderFrei(); if(melden) toast('Werke getrennt'); }
-/* Welche Felder ein neues Foto bekommt, damit es in die gemeinsame Sammlung wandert. Ohne Name, Klasse und Sterne bleibt es nur hier. */
-function swFelder({type,videoId,name,klasse,sterne}){ if(!swAktiv()||type!=='foto'||!name||!STUFEN.includes(+klasse)||!(sterne>=1&&sterne<=5)) return {}; const v=videoId?videoOf(videoId):null; return {sammlungId:SW.verb.id,sync:'wartet',titel:String(v&&v.title||'Werk').slice(0,160),sterne:+sterne}; }
+/* Felder, mit denen ein Foto in die gemeinsame Sammlung wandert. Ohne Name oder Klasse bleibt es hier, Sterne sind freiwillig. */
+function swFelder({type,videoId,name,klasse,sterne}){ if(!swAktiv()||type!=='foto'||!name||!STUFEN.includes(+klasse)) return {}; const v=videoId?videoOf(videoId):null; return {sammlungId:SW.verb.id,sync:'wartet',titel:String(v&&v.title||'Werk').slice(0,160),sterne:sterne>=1&&sterne<=5?+sterne:null}; }
 const swSterne=()=>[1,2,3,4,5].map(n=>`<button type="button" class="stern" data-act="stern" data-n="${n}" aria-label="${n} von 5 Sternen" aria-pressed="false">☆</button>`).join('');
 function swSterneHtml(){ if(!swAktiv()) return ''; return `<div class="rm-frage"><div class="sterne-wahl" role="radiogroup" aria-label="Sterne">${swSterne()}</div></div>`; }
 function swSternWahl(b,m){ const n=+b.dataset.n; $$('.stern',m).forEach(x=>{ const an=+x.dataset.n<=n; x.textContent=an?'★':'☆'; x.classList.toggle('an',an); x.setAttribute('aria-pressed',String(+x.dataset.n===n)); }); return n; }
 function swAlle(){ const map=new Map(S.works.map(w=>[w.id,w])); for(const r of SW.remote){ if(!map.has(r.id)) map.set(r.id,{id:r.id,videoId:r.videoId,titel:r.titel,name:r.name,klasse:r.klasse,sterne:r.sterne,createdAt:+r.erstellt||0,type:'foto',shared:true}); } return [...map.values()].sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)); }
-function swStatusText(){ if(SW.status) return SW.status; const n=S.works.filter(w=>w.sync==='wartet').length; const f=S.works.filter(w=>w.sync==='fehler').length; return n?`${n} ${n===1?'Foto wartet':'Fotos warten'} auf die Übertragung.`:f?`${f} ${f===1?'Foto konnte':'Fotos konnten'} nicht geteilt werden.`:'Fotos erscheinen auf allen verbundenen iPads.'; }
-function swLeisteHtml(klassen,klasse){ return `<div class="inner sw-leiste"><span class="zettel">${esc(SW.verb.name)}</span>${klassen.length>1?`<div class="sw-filter" role="group" aria-label="Klasse"><button class="${klasse?'':'an'}" data-act="klasse" data-k="0">Alle</button>${klassen.map(k=>`<button class="${k===klasse?'an':''}" data-act="klasse" data-k="${k}">${k}.</button>`).join('')}</div>`:''}<span class="sw-status" id="sw-status" role="status">${esc(swStatusText())}</span></div>`; }
+function swStatusText(){ if(SW.status) return SW.status; const n=S.works.filter(w=>fotoZustand(w)==='wartet').length, f=S.works.filter(w=>fotoZustand(w)==='fehler').length; return n?'⏳ '+n:f?'⚠ '+f:'✓'; }
+function swLeisteHtml(klassen,klasse,sicht){ const sw=swAktiv(), seg=(act,an,l)=>`<div class="sw-filter" role="group">${l.map(([w,t])=>`<button class="${w===an?'an':''}" data-act="${act}" data-k="${w}">${t}</button>`).join('')}</div>`;
+  return `<div class="inner sw-leiste">${sw?`<span class="zettel">${esc(SW.verb.name)}</span>`:''}${sicht?seg('sicht',sicht,[['meine','Meine'],['klasse','Klasse']]):klassen.length>1?seg('klasse',klasse,[[0,'Alle'],...klassen.map(k=>[k,k+'.'])]):''}${sw?`<span class="sw-status" id="sw-status" role="status">${esc(swStatusText())}</span>`:''}</div>`; }
+/* Vier Zustände je Foto. Wartet ein Foto auf eine andere Sammlung, liegt es für dieses Gerät nur hier. */
+function fotoZustand(w){ if(w.shared||w.sync==='geteilt') return 'geteilt'; if(w.sync==='fehler') return 'fehler'; return w.sync==='wartet'&&swAktiv()&&w.sammlungId===SW.verb.id?'wartet':'geraet'; }
+function fotoZustandHtml(w){ const z=fotoZustand(w), t={geteilt:'✓ Geteilt',wartet:'⏳ Läuft',fehler:'⚠ Fehler',geraet:'📱 Gerät'}[z], act=z==='fehler'?'nochmal':z==='geraet'&&swAktiv()?'teilen':''; return `<span class="sw-z ${z}"${act?` data-act="${act}" data-id="${w.id}" role="button"`:''}>${t}</span>`; }
+function swNochmal(w){ if(!swAktiv()){ toast('⚠ Offline'); return; } w.sammlungId=SW.verb.id; w.sync='wartet'; delete w.syncFehler; save(); render(); swSync(); }
+/* Foto vom Gerät nachträglich teilen: was fehlt, kommt jetzt über dieselben Kacheln. */
+function swNachtragen(w){ const senden=(name,klasse,sterne)=>{ const f=swFelder({type:'foto',videoId:w.videoId,name,klasse,sterne:w.sterne||sterne}); if(!f.sync){ toast(name?'⚠ Klasse fehlt':'⚠ Name fehlt'); return; } Object.assign(w,{name,klasse},f); save(); render(); swSync(); };
+  if(w.name&&w.klasse){ senden(w.name,w.klasse); return; } if(!KL.klassen.length){ nameUndKlasse(d=>senden(d.name||w.name,d.klasse||w.klasse,d.sterne),new Blob()); return; }
+  const el=wwAuf(); werKacheln(el,{modus:'nachtrag',fertig:gew=>{ el.remove(); senden(namenText(gew),klasseVon(gew[0])); },zu:()=>el.remove()}); }
 async function swVerkleinern(blob){ if(blob.size<=SW_MAX_FOTO&&blob.type==='image/jpeg') return blob;
   const u=URL.createObjectURL(blob); try{ const img=await new Promise((res,rej)=>{ const i=new Image(); i.onload=()=>res(i); i.onerror=rej; i.src=u; });
     for(const max of [1400,1000,700]){ const sc=Math.min(1,max/Math.max(img.width,img.height)); const c=document.createElement('canvas'); c.width=Math.round(img.width*sc); c.height=Math.round(img.height*sc); c.getContext('2d').drawImage(img,0,0,c.width,c.height);
       for(const q of [.82,.65,.45]){ const b=await new Promise(r=>c.toBlob(r,'image/jpeg',q)); if(b&&b.size<=SW_MAX_FOTO) return b; } }
     return null; }catch(e){ return null; } finally{ URL.revokeObjectURL(u); } }
-async function swSync(){ if(!swAktiv()||SW.busy||document.hidden) return; SW.busy=true; const verb=SW.verb;
+async function swSync(){ if(!swAktiv()||SW.busy||document.hidden) return; SW.busy=true; const verb=SW.verb; let neu=false;
   try{
     for(const w of S.works.filter(w=>w.sammlungId===verb.id&&w.sync==='wartet')){ if(SW.verb!==verb) return;
-      const blob=await blobs.get(w.id); if(!blob){ w.sync='fehler'; w.syncFehler='Das Foto fehlt auf diesem iPad.'; save(); continue; }
-      const klein=await swVerkleinern(blob); if(!klein){ w.sync='fehler'; w.syncFehler='Das Foto ist zu gross.'; save(); continue; }
+      const blob=await blobs.get(w.id); if(!blob){ w.sync='fehler'; w.syncFehler='fehlt'; neu=true; save(); continue; }
+      const klein=await swVerkleinern(blob); if(!klein){ w.sync='fehler'; w.syncFehler='gross'; neu=true; save(); continue; }
       const fd=new FormData(); fd.append('daten',JSON.stringify({id:w.id,videoId:w.videoId||'ohne',titel:w.titel||'Werk',name:w.name,klasse:w.klasse,sterne:w.sterne})); fd.append('foto',klein,'werk.jpg');
-      try{ const d=await swFetch('abgeben',{method:'POST',body:fd},verb); if(SW.verb!==verb) return; if(d.geloescht){ S.works=S.works.filter(x=>x.id!==w.id); await blobs.del(w.id); } else { w.sync='geteilt'; delete w.syncFehler; } save(); }
-      catch(e){ if([400,409,413,415].includes(e.status)){ w.sync='fehler'; w.syncFehler=e.message; save(); continue; } throw e; } }
+      try{ const d=await swFetch('abgeben',{method:'POST',body:fd},verb); if(SW.verb!==verb) return; if(d.geloescht){ S.works=S.works.filter(x=>x.id!==w.id); await blobs.del(w.id); } else { w.sync='geteilt'; delete w.syncFehler; } neu=true; save(); }
+      catch(e){ if([400,409,413,415].includes(e.status)){ w.sync='fehler'; w.syncFehler=e.status; neu=true; save(); continue; } throw e; } }
     const d=await swFetch('werke?version='+encodeURIComponent(SW.version),{},verb); if(SW.verb!==verb) return;
-    let neu=false;
     if(!d.unveraendert){ SW.remote=Array.isArray(d.werke)?d.werke:[]; SW.version=d.version; neu=true;
       for(const id of d.geloescht||[]){ if(S.works.some(w=>w.id===id)){ S.works=S.works.filter(w=>w.id!==id); await blobs.del(id); } if(SW.urls.has(id)){ URL.revokeObjectURL(SW.urls.get(id)); SW.urls.delete(id); } }
       save(); }
     SW.status='';
     if(neu&&view.name==='gallery'&&!$('.modal-bg')) render(); else { const s=$('#sw-status'); if(s) s.textContent=swStatusText(); }
-  }catch(e){ if(e.status===401||e.status===403){ swTrennen(false); toast(e.message||'Die Verbindung zu den Werken gilt nicht mehr.',6000); if(view.name==='gallery'||view.name==='lehrer') render(); } else { SW.status='Gerade keine Verbindung. Neue Fotos bleiben hier und werden später gesendet.'; const s=$('#sw-status'); if(s) s.textContent=swStatusText(); } }
+  }catch(e){ if(e.status===401||e.status===403){ swTrennen(false); toast('⚠ Getrennt',6000); if(view.name==='gallery'||view.name==='lehrer') render(); } else { SW.status='⚠ Offline'; const s=$('#sw-status'); if(s) s.textContent=swStatusText(); if(neu&&view.name==='gallery'&&!$('.modal-bg')) render(); } }
   finally{ SW.busy=false; } }
 function swLaufen(){ if(SW.timer) return; SW.timer=setInterval(()=>{ if(!swAktiv()){ clearInterval(SW.timer); SW.timer=null; return; } if(!document.hidden&&(view.name==='gallery'||S.works.some(w=>w.sync==='wartet'))) swSync(); },8000);
   window.addEventListener('online',()=>swSync()); document.addEventListener('visibilitychange',()=>{ if(!document.hidden) swSync(); }); }
@@ -2111,14 +2149,14 @@ async function swFotoUrl(id){ if(SW.urls.has(id)) return SW.urls.get(id); if(SW.
   const p=(async()=>{ try{ const b=await swFetch('foto?id='+encodeURIComponent(id),{blob:true}); const u=URL.createObjectURL(b); SW.urls.set(id,u); return u; }catch(e){ return null; } finally{ SW.laedt.delete(id); } })();
   SW.laedt.set(id,p); return p; }
 function swBilder(root){ const els=$$('[data-sw]',root); let i=0; const lauf=async()=>{ while(i<els.length){ const el=els[i++]; if(!el.isConnected) continue; const u=await swFotoUrl(el.dataset.sw); if(u&&el.isConnected) el.src=u; } }; lauf(); lauf(); lauf(); }
-async function swOeffnen(id){ const w=swAlle().find(x=>x.id===id); if(!w) return; const u=w.shared?await swFotoUrl(id):await blobs.url(id); if(!u){ toast('Das Foto ist gerade nicht da. Versuch es nochmals.'); return; }
+async function swOeffnen(id){ const w=swAlle().find(x=>x.id===id); if(!w) return; const u=w.shared?await swFotoUrl(id):await blobs.url(id); if(!u){ toast('⚠ Foto fehlt'); return; }
   const v=w.videoId?videoOf(w.videoId):null;
   kidModal(`<div class="viewer"><img src="${u}" alt=""></div><p class="muted small">${esc([w.name,w.klasse?klasseName(w.klasse):'',w.sterne?'★'.repeat(w.sterne):'',(v&&v.title)||w.titel||''].filter(Boolean).join(' · '))}</p><div class="row center"><button class="kbtn" data-close>Schliessen</button></div>`); }
 
 /* ---------- Für Lehrpersonen: Verbindungen dieses iPads ---------- */
 /* ============================== Wer bist du? Vornamen der Klassen aus der Kontrolle (kontrolle/klassen.html) ==============================
    Jedes verbundene iPad (Unterricht, Rückmeldungen oder Unsere Werke) holt die Listen mit seinem Token; das Kind tippt beim Start seinen Namen an.
-   Gewähltes Kind: S.settings.kind={liste,name}. Listen liegen zwischengespeichert in localStorage, damit es auch offline klappt. */
+   Gewählte Kinder: S.settings.kinder=[{liste,name,key}]. Listen liegen zwischengespeichert in localStorage, damit es auch offline klappt. */
 const KL_KEY='schrittli.schule.klassenlisten';
 const KL={klassen:[],zeit:0,laeuft:false,gefragt:false};
 /* Halbklassen gibt es hier nicht: «3a Halbklasse 1» und «3a Halbklasse 2» werden zur ganzen 3a, auch in alten Listen. Eine echte Liste «3a» geht vor. */
@@ -2129,20 +2167,32 @@ function klGanz(listen){ const m=new Map();
 function klLaden(){ try{ const v=JSON.parse(localStorage.getItem(KL_KEY)||'null'); if(v&&Array.isArray(v.klassen)){ KL.klassen=klGanz(v.klassen); KL.zeit=v.zeit||0; } }catch(e){} }
 function klSpeichern(){ try{ localStorage.setItem(KL_KEY,JSON.stringify({klassen:KL.klassen,zeit:KL.zeit})); }catch(e){} }
 const klToken=()=>(U.verb&&U.verb.token)||(SW.verb&&SW.verb.token)||(RM.verb&&RM.verb.token)||null;
-const kind=()=>SCHULE&&S.settings.kind&&S.settings.kind.name?S.settings.kind:null;
-/* Gespeichertes Kind an die aktuellen Listen anpassen: gleiche Liste, sonst irgendeine Liste mit dem Namen, sonst weg damit. */
-function kindPruefen(){ const k=kind(); if(!k||!KL.klassen.length) return; const l=KL.klassen.find(x=>x.id===k.liste&&x.namen.includes(k.name))||KL.klassen.find(x=>x.namen.includes(k.name));
-  if(!l){ S.settings.kind=null; save(); return; } if(l.id!==k.liste){ S.settings.kind={liste:l.id,name:k.name}; save(); } }
-function klStart(){ if(!SCHULE) return; klLaden(); kindPruefen(); klHolen(); }
+const kinder=()=>SCHULE?(S.settings.kinder||[]).filter(k=>k&&k.name):[];
+const kind=()=>kinder()[0]||null;
+/* kindKey: Klasse und Name. Gleiche Namen in anderen Klassen bleiben getrennt, Halbklassen zählen als ganze Klasse. */
+const kindKeyVon=k=>k.key||k.liste+'/'+k.name;
+const kindKeys=()=>{ const l=kinder(); return l.length?l.map(kindKeyVon):[OHNE]; };
+const kindKeyIn=(l,name)=>l.name+'/'+name;
+const namenText=kds=>{ let t=''; for(const n of new Set(kds.map(k=>k.name.replace(/\s*,\s*/g,' ').trim()))){ const neu=t?t+', '+n:n; if(neu.length>100) break; t=neu; } return t; };
+/* Werkzeuge lesen schrittli.kind über Planer.speicher: erstes gewähltes Kind, leer ohne Name. */
+function kindMerken(){ const k=kind(); try{ localStorage.setItem('schrittli.kind',k?kindKeyVon(k):''); }catch(e){} }
+/* Klasse umbenannt oder Kind verschoben: Arbeit und Entwürfe ziehen mit. Liegt am Ziel schon etwas, gewinnt je Projekt das Neuere. */
+function arbeitUmziehen(alt,neu){ if(alt===neu) return; const a=S.arbeit[alt]; if(a){ const z=S.arbeit[neu]||(S.arbeit[neu]={}); for(const id in a) if(!z[id]||(a[id].zeit||0)>(z[id].zeit||0)) z[id]=a[id]; delete S.arbeit[alt]; }
+  try{ const h='.kind.'+alt; for(const s of Object.keys(localStorage)) if(s.endsWith(h)){ const n=s.slice(0,-h.length)+'.kind.'+neu; if(localStorage.getItem(n)===null) localStorage.setItem(n,localStorage.getItem(s)); localStorage.removeItem(s); } }catch(e){} }
+function klUmbenannt(){ const m=S.settings.klassenIds||(S.settings.klassenIds={}); for(const l of KL.klassen){ const alt=m[l.id]; if(alt&&alt!==l.name){ for(const k of Object.keys(S.arbeit)) if(k.startsWith(alt+'/')) arbeitUmziehen(k,l.name+k.slice(alt.length)); try{ for(const s of Object.keys(localStorage)){ const i=s.indexOf('.kind.'+alt+'/'); if(i>=0) arbeitUmziehen(s.slice(i+6),l.name+s.slice(i+6+alt.length)); } }catch(e){} (S.settings.kinder||[]).forEach(k=>{ if(k.key&&k.key.startsWith(alt+'/')) k.key=l.name+k.key.slice(alt.length); }); } m[l.id]=l.name; } }
+/* Gewählte Kinder an die aktuellen Listen anpassen: gleiche Liste, sonst irgendeine Liste mit dem Namen, sonst weg damit. */
+function kinderPruefen(){ if(!KL.klassen.length) return; klUmbenannt(); const neu=[]; for(const k of kinder()){ const l=KL.klassen.find(x=>x.id===k.liste&&x.namen.includes(k.name))||KL.klassen.find(x=>x.namen.includes(k.name)); if(!l) continue; const key=kindKeyIn(l,k.name); arbeitUmziehen(kindKeyVon(k),key); neu.push({liste:l.id,name:k.name,key}); } S.settings.kinder=neu; kindMerken(); save(); }
+function klStart(){ if(!SCHULE) return; klLaden(); kinderPruefen(); kindMerken(); klHolen(); }
 async function klHolen(){ if(!SCHULE||KL.laeuft) return; const token=klToken(); if(!token) return; KL.laeuft=true; const z=mitZeit(8000);
   try{ const r=await fetch(SCHRITTLI_API+'/namen/liste',{headers:{Authorization:'Bearer '+token},cache:'no-store',credentials:'omit',signal:z.signal}); if(!r.ok) return;
     const d=await r.json(); if(!d||!Array.isArray(d.klassen)) return;
     KL.klassen=klGanz(d.klassen.map(k=>({id:String(k.id||''),name:String(k.name||'').slice(0,80),stufe:STUFEN.includes(+k.stufe)?+k.stufe:null,namen:(Array.isArray(k.namen)?k.namen:[]).map(n=>String(n).slice(0,30)).filter(Boolean)})).filter(k=>k.id&&k.namen.length));
-    KL.zeit=Date.now(); klSpeichern(); kindPruefen();
+    KL.zeit=Date.now(); klSpeichern(); kinderPruefen();
     if(!KL.gefragt&&!kind()&&KL.klassen.length&&['home','klasse','raum','unterricht'].includes(view.name)) go('wer');
-    else if(view.name==='wer'&&!$('[data-act=ich]')||view.name==='lehrer') render();
+    else if(view.name==='wer'&&!$('[data-act=ich]')&&!$('.ww-stand')||view.name==='lehrer') render();
   }catch(e){} finally{ z.ende(); KL.laeuft=false; } }
-const kindChip=(cls)=>{ if(!SCHULE) return ''; const k=kind(); return `<button class="${cls}" data-wer aria-label="Name">🙂 ${esc(k?k.name:'Name')}</button>`; };
+const chipText=()=>{ const l=kinder(); return '🙂 '+(l.length?l[0].name+(l.length>1?' +'+(l.length-1):''):'Ohne Name'); };
+const kindChip=(cls)=>SCHULE?`<button class="${cls}" data-wer aria-label="Name">${esc(chipText())}</button>`:'';
 const klasseVon=kd=>{ const l=KL.klassen.find(x=>x.id===kd.liste), s=l&&(l.stufe||+(/[1-6]/.exec(l.name)||[0])[0]); return STUFEN.includes(s)?s:STUFEN.includes(+S.settings.klasse)?+S.settings.klasse:0; };
 /* Kachelwahl über dem ganzen Bildschirm: erst Klassen, dann Namen, immer ohne Scrollen. */
 const wwHtml=(titel,inhalt,{zurueck,zu=true,caps}={})=>`<div class="ww${caps?' caps':''}"><div class="ww-kopf">${zurueck?'<button class="v3-rund gross" data-act="zurueck" aria-label="Zurück">←</button>':'<span></span>'}<h1>${esc(titel)}</h1>${zu?'<button class="v3-rund gross" data-act="zu" aria-label="Schliessen">✕</button>':'<span></span>'}</div>${inhalt}</div>`;
@@ -2153,16 +2203,50 @@ function wwMessen(r){ const ks=[...r.children], n=ks.length, W=r.clientWidth, H=
   for(let c=1;c<=n;c++){ const z=Math.ceil(n/c), w=Math.min(440,(W-g*(c-1))/c), h=Math.min(240,(H-g*(z-1))/z), f=Math.floor(Math.min(84,h*.5,(w-20)/(L*breit))); if(!b||f>b.f||f===b.f&&w*h>b.w*b.h) b={c,w,h,f}; }
   r.style.gridTemplateColumns=`repeat(${b.c},${Math.floor(b.w)}px)`; r.style.gridAutoRows=Math.floor(b.h)+'px'; r.style.setProperty('--f',b.f+'px'); }
 function wwFuellen(r){ wwMessen(r); new ResizeObserver(()=>wwMessen(r)).observe(r); }
-function werKacheln(el,gewaehlt,zu){ const ks=KL.klassen, kd=kind(); let k=ks.length===1?ks[0]:kd&&ks.find(x=>x.id===kd.liste)||null;
-  const zeichne=()=>{ const s=k&&klasseVon({liste:k.id});
-    el.innerHTML=wwHtml(k?k.name:'Klasse',`<div class="ww-raster">${k?k.namen.map(n=>`<button class="ww-k${kd&&kd.liste===k.id&&kd.name===n?' ich':''}" data-act="ich" data-n="${esc(n)}">${esc(n)}</button>`).join('')
-      :ks.map(x=>`<button class="ww-k" data-act="liste" data-id="${esc(x.id)}" data-s="${x.stufe||''}">${esc(x.name)}</button>`).join('')}</div>`,{zurueck:!!k&&ks.length>1,caps:s&&s<3});
+/* Wahl setzen: Stand bleibt beim bisherigen Kind. Geteilte Objekte lösen, das erste Kind behält seines, damit eine offene Ansicht weiterschreibt. */
+function kinderSetzen(neu){ entwuerfeSpiegeln(); kindKeys().slice(1).forEach(k=>{ if(S.arbeit[k]) S.arbeit[k]=JSON.parse(JSON.stringify(S.arbeit[k])); });
+  S.settings.kinder=neu.slice(0,6); const e=kind(), s=e&&klasseVon(e); if(s) S.settings.klasse=s; if(e) S.settings.liste=e.liste; kindMerken(); entwurfMerken(); saveJetzt();
+  $$('[data-wer]').forEach(x=>{ x.textContent=chipText(); }); }
+const gleicheWahl=(a,b)=>a.length===b.length&&a.every((k,i)=>kindKeyVon(k)===kindKeyVon(b[i]));
+const arbeitsSicht=()=>['player','anleitung'].includes(view.name);
+/* Kacheln mit Mehrfachwahl. foto: Kamera-Knopf, die aktuelle Wahl ist schon da. wechsel: leer, damit ein neues Kind nicht zur Gruppe wird. nachtrag: nur bestätigen. */
+function werKacheln(el,{modus,fertig,zu,ohne}){ const ks=KL.klassen, wechsel=modus==='wechsel'; let gew=wechsel?[]:kinder().slice(), k=ks.length===1?ks[0]:ks.find(x=>x.id===((kind()||{}).liste||S.settings.liste))||null;
+  const fuss=()=>{ const n=gew.length; return `<div class="ww-fuss">${wechsel?`<button class="ww-gehe ohne" data-act="ohne">Ohne Name</button>`:''}${modus==='nachtrag'?`<button class="ww-gehe" data-act="ok" aria-label="OK"${n?'':' disabled'}>${ico('check')}${n?` <b>${n}</b>`:''}</button>`:`<button class="ww-kamera" data-act="kamera" aria-label="Foto">📷${n?` <b>${n}</b>`:''}</button>`}${wechsel?`<button class="ww-gehe" data-act="ok" aria-label="Weiter"${n?'':' disabled'}>→${n?` <b>${n}</b>`:''}</button>`:''}</div>`; };
+  const fussNeu=()=>{ const f=$('.ww-fuss',el); if(f) f.outerHTML=fuss(); };
+  const zeichne=()=>{ const s=k&&klasseVon({liste:k.id}), ist=n=>gew.some(x=>x.liste===k.id&&x.name===n);
+    el.innerHTML=wwHtml(k?k.name:'Klasse',`<div class="ww-raster">${k?k.namen.map(n=>`<button class="ww-k${ist(n)?' ich':''}" data-act="ich" data-n="${esc(n)}" aria-pressed="${ist(n)}">${esc(n)}</button>`).join('')
+      :ks.map(x=>`<button class="ww-k" data-act="liste" data-id="${esc(x.id)}" data-s="${x.stufe||''}">${esc(x.name)}</button>`).join('')}</div>${fuss()}`,{zurueck:!!k&&ks.length>1,caps:s&&s<3});
     wwFuellen($('.ww-raster',el)); };
   wire(el,{ liste:b=>{ k=ks.find(x=>x.id===b.dataset.id); zeichne(); }, zurueck:()=>{ k=null; zeichne(); }, zu,
-    ich:b=>{ S.settings.kind={liste:k.id,name:b.dataset.n}; const s=klasseVon(S.settings.kind); if(s) S.settings.klasse=s; save(); $$('[data-wer]').forEach(x=>{ x.textContent='🙂 '+b.dataset.n; }); gewaehlt(); } });
+    ich:b=>{ const n=b.dataset.n, i=gew.findIndex(x=>x.liste===k.id&&x.name===n); if(i>=0) gew.splice(i,1); else if(gew.length>=6){ toast('⚠ Max. 6'); return; } else gew.push({liste:k.id,name:n,key:kindKeyIn(k,n)}); b.classList.toggle('ich',i<0); b.setAttribute('aria-pressed',String(i<0)); fussNeu(); },
+    kamera:()=>fertig(wechsel&&!gew.length?kinder():gew,true), ok:()=>{ if(gew.length) fertig(gew); }, ohne:()=>ohne() });
   zeichne(); }
-function werWahl(fertig){ const el=wwAuf(); werKacheln(el,()=>{ el.remove(); if(view.name==='home') render(); fertig(); },()=>el.remove()); }
-SCREENS.wer=app=>{ const weiter=()=>go(S.settings.klasse?'home':'klasse'); if(!KL.klassen.length){ weiter(); return; } KL.gefragt=true; werKacheln(app,weiter,weiter); };
+function werWahl(weiter){ const el=wwAuf(); werKacheln(el,{modus:'foto',fertig:gew=>{ const anders=!gleicheWahl(gew,kinder()); el.remove(); kinderSetzen(gew); if(anders&&arbeitsSicht()) go(view.name,view.params); else if(view.name==='home') render(); weiter(anders); },zu:()=>el.remove()}); }
+/* Offene Arbeit der gewählten Kinder, das Neuste zuerst. */
+function offeneArbeit(){ const m=new Map(); kindKeys().forEach(k=>{ const b=S.arbeit[k]||{}; for(const id in b){ const a=b[id], v=videoOf(id); if(!v||a.done||!(a.pos>5||a.step>0||(a.erledigt||[]).length||Object.keys(a.entwuerfe||{}).length)) continue; const x=m.get(id); if(!x||arbeitRang(a)>arbeitRang(x.pr)) m.set(id,{id,v,pr:a}); } }); return [...m.values()].sort((a,b)=>(b.pr.zeit||0)-(a.pr.zeit||0)); }
+const arbeitZahl=({v,pr})=>{ const n=(v.source&&v.source.type==='bilder'?v.steps||[]:buildVideoSteps(v)||[]).length, i=(pr.erledigt||[]).length||(pr.step||0)+1; return n?`${Math.min(i,n)}/${n}`:''; };
+/* Entwürfe aus den Werkzeugen: Schlüssel von Planer.speicher. Ohne Name liegt der Stand unter dem bestehenden Schlüssel des Werkzeugs. */
+const ENTWURF_BASEN=['schrittli-vorlagen','schrittli-vorlagen-liste','schrittli.bohren.v1','schrittli.falten.v1','schrittli.kiste.v1','schrittli.mechanik.v1','schrittli.maschenprobe.v1','schrittli.zaehlmuster.v1'];
+const entwurfPfad=b=>/^schrittli-vorlagen/.test(b)?'':((/^schrittli\.(\w+)\.v\d+$/.exec(b)||[])[1]||'?')+'/';
+function entwurfBasen(k){ const o=[]; try{ if(k===OHNE) return ENTWURF_BASEN.filter(b=>localStorage.getItem(b)!==null); const h='.kind.'+k; for(const s of Object.keys(localStorage)) if(s.endsWith(h)) o.push(s.slice(0,-h.length)); }catch(e){} return o; }
+const hashText=t=>{ let h=5381; for(let i=0;i<t.length;i++) h=(h*33^t.charCodeAt(i))|0; return h; };
+function entwurfMerken(){ const k=kinder().length>1?kindKeys()[0]:null, m={}; if(k) try{ for(const b of entwurfBasen(k)) m[b]=hashText(localStorage.getItem(b+'.kind.'+k)||''); }catch(e){} S.settings.entwurfBasis=m; }
+/* Werkzeuge schreiben nur beim ersten Kind. Was die Gruppe dort geändert hat, geht an die anderen. */
+function entwuerfeSpiegeln(){ const ks=kindKeys(); if(!SCHULE||ks.length<2) return; const m=S.settings.entwurfBasis||{}; try{ for(const b of entwurfBasen(ks[0])){ const t=localStorage.getItem(b+'.kind.'+ks[0]); if(t===null||m[b]===hashText(t)) continue; ks.slice(1).forEach(k=>localStorage.setItem(b+'.kind.'+k,t)); m[b]=hashText(t); } }catch(e){} S.settings.entwurfBasis=m; save(); }
+/* Vorlagen-Entwürfe an offene Projekte hängen, die den Generator verlinken; der Rest sind eigene Werkzeugkarten. */
+function entwurfKarten(){ const m=new Map(); for(const k of kindKeys()) for(const b of entwurfBasen(k)){ const pf=entwurfPfad(b), w=WERKZEUGE.find(x=>x[0]===pf); if(!w) continue; const a=pf?[]:Object.entries(S.arbeit[k]||{}).filter(([id,r])=>!r.done&&((videoOf(id)||{}).vorlagen||[]).some(x=>String(x.datei)[0]==='?')); if(a.length){ a.forEach(([,r])=>{ (r.entwuerfe=r.entwuerfe||{})[b]=1; }); continue; } m.set(pf,w); } return [...m.values()]; }
+/* Bildkarten mit dem Stand: «Weiter» springt ins Projekt, die Werkzeugkarte öffnet den Entwurf. */
+function standZeigen(el,fertig){ const wz=entwurfKarten(), o=offeneArbeit(); if(!o.length&&!wz.length){ fertig(); return; } const namen=kinder().length?namenText(kinder()):'Ohne Name';
+  const karte=x=>`<button class="ww-karte" data-act="weiter" data-id="${esc(x.id)}"><img src="${esc(thumbOf(x.v)||'')}" alt=""><span class="ww-titel">${esc(x.v.title)}</span><span class="ww-z">${arbeitZahl(x)}</span><span class="ww-los">Weiter ▶</span></button>`;
+  const werkz=([pf,sym,t,,farbe])=>`<a class="ww-karte" href="${VORL_BASE}${pf}"${VL_ZIEL}><span class="ww-sym" style="background:${farbe}" aria-hidden="true">${sym}</span><span class="ww-titel">${t}</span><span class="ww-los">Weiter ▶</span></a>`;
+  el.innerHTML=wwHtml(namen,`<div class="ww-stand${o.length+wz.length===1?' eins':''}">${o.map(karte).join('')}${wz.map(werkz).join('')}</div>`);
+  wire(el,{ weiter:b=>fertig(b.dataset.id), zu:()=>fertig() }); $$('a.ww-karte',el).forEach(a=>a.addEventListener('click',()=>setTimeout(()=>fertig(),0))); }
+/* Kurzlogin: Wahl, dann der Stand. Offene Player und Anleitungen zeichnen sich für das neue Kind neu. */
+function kinderWechsel(){ const el=wwAuf(), neu=()=>{ if(arbeitsSicht()) go(view.name,view.params); else if(['home','raum','area','gallery','unterricht','werkzeuge'].includes(view.name)) render(); };
+  const stand=gew=>{ kinderSetzen(gew); standZeigen(el,id=>{ el.remove(); if(id) go('player',{videoId:id}); else neu(); }); };
+  werKacheln(el,{modus:'wechsel',fertig:(gew,foto)=>{ if(!foto){ stand(gew); return; } const anders=!gleicheWahl(gew,kinder()), id=videoJetzt(); el.remove(); kinderSetzen(gew); if(anders) neu(); kamera(id,null,true); },ohne:()=>stand([]),zu:()=>el.remove()}); }
+SCREENS.wer=app=>{ const weiter=id=>id?go('player',{videoId:id}):go(S.settings.klasse?'home':'klasse'); if(!KL.klassen.length){ weiter(); return; } KL.gefragt=true; const stand=gew=>{ kinderSetzen(gew); standZeigen(app,weiter); };
+  werKacheln(app,{modus:'wechsel',fertig:(gew,foto)=>{ if(!foto){ stand(gew); return; } kinderSetzen(gew); weiter(); kamera(null,null,true); },ohne:()=>stand([]),zu:()=>weiter()}); };
 function verbindungenHtml(){ if(!SCHULE) return '';
   const z=(titel,name,act)=>`<div class="verb-zeile"><b>${titel}</b><span class="${name?'an':''}">${name?'✓ '+esc(name):'–'}</span>${name?`<button class="btn sm" data-act="${act}">Trennen</button>`:''}</div>`;
   return `<div class="panel verb"><h2>Verbindungen dieses iPads</h2>

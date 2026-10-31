@@ -3,6 +3,9 @@
 const GROESSEN=[[1024,768,'iPad quer'],[768,1024,'iPad hoch'],[844,390,'Handy quer'],[390,844,'Handy hoch']];
 const VIDEO='wl-fingerstricken';
 const kacheln=(p,ohneZurueck)=>p.evaluate(o=>{ const d=wwAuf(); d.innerHTML=wwHtml('Klasse',`<div class="ww-raster">${[1,2,3,4,5,6].map(s=>`<button class="ww-k" data-s="${s}">${s}.</button>`).join('')}</div>`,o?{zu:false}:{zurueck:true}); wwFuellen($('.ww-raster',d)); },ohneZurueck);
+/* Namen wie im Schulhaus: viele Kacheln und ein langer Name. Die Klassen stehen nur für diese eine Lage, sonst fragt die App beim nächsten Schirm */
+const KLASSE=[{id:'k',name:'3a',stufe:3,namen:['Ben','Eva','Ida','Lea','Mia','Noah','Tim','Zoe','Ana','Leo','Max','Nina','Olaf','Pia','Sina','Tara','Ueli','Vera','Yara','Maximiliane-Sophie']}];
+const mitNamen=fn=>p=>p.evaluate(([l,f])=>{ KL.klassen=l; try{ (0,eval)(f)(); }finally{ KL.klassen=[]; } },[KLASSE,String(fn)]);
 const LAGEN={
   Schule:{
     'Start':p=>p.evaluate(()=>go('home')),
@@ -18,6 +21,10 @@ const LAGEN={
     'Kamera-Übergang':p=>p.evaluate(()=>nameUndKlasse(()=>{},new Blob())),
     'Kachelwahl mit Zurück':p=>kacheln(p,false),
     'Kachelwahl ohne Zurück':p=>kacheln(p,true),
+    'Namen wechseln':mitNamen(()=>kinderWechsel()),
+    'Namen zum Foto':mitNamen(()=>werWahl(()=>{})),
+    'Sterne nach dem Foto':mitNamen(()=>{ SW.verb={id:'s',name:'Probe',token:'a'.repeat(64)}; kindFertig([{liste:'k',name:'Maximiliane-Sophie'},{liste:'k',name:'Noah'},{liste:'k',name:'Lea'}],()=>{},new Blob()); SW.verb=null; }),
+    'Stand des Kindes':mitNamen(()=>{ kinderSetzen([{liste:'k',name:'Mia',key:'3a/Mia'}]); ['raketenstation-1','raketenstation-2','wl-fingerstricken'].forEach((v,i)=>{ const o=prog(v); o.step=2; o.zeit=i+1; }); standZeigen(wwAuf(),()=>{}); kinderSetzen([]); }),
     'Foto-Anleitung':p=>p.evaluate(()=>go('player',{videoId:'raketenstation-1'})),
     'Foto-Anleitung Beamer':async p=>{ await p.evaluate(()=>{ BEAMER.an=true; go('player',{videoId:'raketenstation-1'}); }); },
     'Malen':p=>p.evaluate(v=>go('paint',{videoId:v}),VIDEO),
