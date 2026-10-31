@@ -7285,6 +7285,12 @@
    "name": "Seehund",
    "welt": "Meer",
    "datei": "wu-seehund.png"
+  },
+  {
+   "id": "wu-michael-jordan",
+   "name": "Michael Jordan",
+   "welt": "Sport",
+   "datei": "wu-michael-jordan.png"
   }
  ]
 }
