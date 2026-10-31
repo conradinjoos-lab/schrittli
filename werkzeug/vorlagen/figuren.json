@@ -7255,6 +7255,12 @@
    "name": "Matterhorn",
    "welt": "Schweiz & Alpen",
    "datei": "wu-matterhorn.png"
+  },
+  {
+   "id": "wu-gecko",
+   "name": "Gecko",
+   "welt": "Tierwelt",
+   "datei": "wu-gecko.png"
   }
  ]
 }

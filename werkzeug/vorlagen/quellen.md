@@ -543,3 +543,4 @@ Kinder wünschen sich im Vorlagen-Generator ein fehlendes Motiv. Claude zeichnet
 | Motiv | Figur-ID | URL | Autor | Lizenz |
 |---|---|---|---|---|
 | Matterhorn | wu-matterhorn | – | Claude (Anthropic), gewünscht im Vorlagen-Generator, geprüft von der Lehrperson | eigene Zeichnung |
+| Gecko | wu-gecko | – | Claude (Anthropic), gewünscht im Vorlagen-Generator, geprüft von der Lehrperson | eigene Zeichnung |
