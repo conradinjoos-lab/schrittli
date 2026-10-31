@@ -1,0 +1,1 @@
+ALTER TABLE wuensche ADD COLUMN stil TEXT NOT NULL DEFAULT 'comic';

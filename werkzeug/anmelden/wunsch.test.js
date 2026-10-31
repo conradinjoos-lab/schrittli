@@ -33,7 +33,7 @@ test('Motiv-Wünsche: Kinder melden, Claude zeichnet, Lehrperson prüft',async()
   }}));
  try{
   const sql=f=>readFileSync(new URL(f,import.meta.url),'utf8').replaceAll('\n',' ');
-  const feedback=await mf.getD1Database('FEEDBACK');for(const f of ['0001_feedback.sql','0002_feedback_name.sql','0003_wuensche.sql'])await feedback.exec(sql('migrations/'+f));
+  const feedback=await mf.getD1Database('FEEDBACK');for(const f of ['0001_feedback.sql','0002_feedback_name.sql','0003_wuensche.sql','0004_wunsch_stil.sql'])await feedback.exec(sql('migrations/'+f));
   const call=(pfad,token,body,origin=ORIGIN)=>mf.dispatchFetch('https://test.example/wunsch/'+pfad,{method:body?'POST':'GET',headers:{Origin:origin,...(token?{Authorization:'Bearer '+token}:{}),...(body?{'Content-Type':'application/json'}:{})},body:body?JSON.stringify(body):undefined});
   const liste=async()=>(await (await call('liste','teacher')).json());
   const worker=await mf.getWorker();const zehn=()=>worker.scheduled({cron:'*/10 * * * *'});
@@ -74,6 +74,45 @@ test('Motiv-Wünsche: Kinder melden, Claude zeichnet, Lehrperson prüft',async()
   const voll=await call('zeichnen','teacher',{id:gecko.id,hinweis:'Schwanz länger'});assert.equal(voll.status,409);assert.match((await voll.json()).fehler,/0.6 USD/);
  }finally{await mf.dispose();}
 });
+test('Motiv-Wünsche: Comic oder Echt',async()=>{
+ const anfragen=[];
+ const mf=new Miniflare(convertV4MiniflareOptions({modules:werk(),compatibilityDate:'2026-10-01',kvNamespaces:['KV'],d1Databases:['FEEDBACK','SAMMLUNG'],bindings:{ANTHROPIC_API_KEY:'sk-test'},
+  outboundService:async req=>{
+   const u=new URL(req.url);
+   if(u.origin==='https://api.github.com')return Response.json({login:'conradinjoos-lab'});
+   anfragen.push(await req.json());
+   return Response.json({id:'m',type:'message',role:'assistant',model:'claude-opus-5-5',content:[{type:'text',text:JSON.stringify({passt:true,grund:'',name:'Gecko',welt:'Tierwelt',svg:GECKO})}],stop_reason:'end_turn',stop_sequence:null,usage:{input_tokens:3000,output_tokens:5000}});
+  }}));
+ try{
+  const sql=f=>readFileSync(new URL(f,import.meta.url),'utf8').replaceAll('\n',' ');
+  const feedback=await mf.getD1Database('FEEDBACK');for(const f of ['0003_wuensche.sql','0004_wunsch_stil.sql'])await feedback.exec(sql('migrations/'+f));
+  const call=(pfad,body)=>mf.dispatchFetch('https://test.example/wunsch/'+pfad,{method:body?'POST':'GET',headers:{Origin:ORIGIN,Authorization:'Bearer teacher',...(body?{'Content-Type':'application/json'}:{})},body:body?JSON.stringify(body):undefined});
+  const liste=async()=>(await (await call('liste')).json()).wuensche;
+  const antwort=async b=>await (await call('neu',b)).json();
+
+  // gleiches Motiv: pro Stil ein Wunsch; ohne oder mit unbekanntem Stil: Comic
+  assert.deepEqual(await antwort({name:'Gecko'}),{ok:true,neu:true});
+  assert.deepEqual(await antwort({name:'gecko',stil:'echt'}),{ok:true,neu:true});
+  assert.deepEqual(await antwort({name:'Gecko Bild',stil:'echt'}),{ok:true,neu:false});
+  assert.deepEqual(await antwort({name:'ein Gecko',stil:'comic'}),{ok:true,neu:false});
+  await antwort({name:'Wal',stil:'constructor'});
+  let l=await liste();const stilVon=n=>l.find(w=>w.name===n).stil;
+  assert.equal(l.length,3);assert.equal(stilVon('Gecko'),'comic');assert.equal(stilVon('gecko'),'echt');assert.equal(stilVon('Wal'),'comic');
+  const comic=l.find(w=>w.name==='Gecko'),echt=l.find(w=>w.name==='gecko');assert.equal(comic.anzahl,2);assert.equal(echt.anzahl,2);
+
+  // Claude bekommt die Regeln des gewählten Stils
+  await call('zeichnen',{id:comic.id});await call('zeichnen',{id:echt.id});
+  assert.match(anfragen[0].system,/Comic-Aufklebers/);assert.match(anfragen[0].system,/Aussenumriss 8 px/);assert.doesNotMatch(anfragen[0].system,/naturgetreu/);
+  assert.match(anfragen[1].system,/naturgetreu/);assert.match(anfragen[1].system,/Aussenumriss 5 px/);assert.doesNotMatch(anfragen[1].system,/Comic-Aufklebers|grosse Augen/);
+
+  // die Lehrperson kann umstellen: neu gezeichnet statt überarbeitet, ohne Angabe bleibt der Stil
+  const r=await (await call('zeichnen',{id:comic.id,bild:'iVBORw0KGgo=',stil:'echt'})).json();
+  assert.equal(r.wunsch.stil,'echt');assert.match(anfragen[2].system,/naturgetreu/);assert.equal(anfragen[2].messages[0].content.length,1);
+  assert.equal((await (await call('zeichnen',{id:comic.id,hinweis:'Schwanz länger'})).json()).wunsch.stil,'echt');
+  assert.match(anfragen[3].system,/naturgetreu/);assert.match(anfragen[3].messages[0].content[0].text,/^Deine letzte Zeichnung als SVG/);
+  assert.equal((await (await call('zeichnen',{id:comic.id,stil:'__proto__'})).json()).wunsch.stil,'echt');
+ }finally{await mf.dispose();}
+});
 test('Motiv-Wünsche: überarbeiten, Fehler, aufschalten',async()=>{
  const anfragen=[];
  const mf=new Miniflare(convertV4MiniflareOptions({modules:werk(),compatibilityDate:'2026-10-01',kvNamespaces:['KV'],d1Databases:['FEEDBACK','SAMMLUNG'],bindings:{ANTHROPIC_API_KEY:'sk-test'},
@@ -86,7 +125,7 @@ test('Motiv-Wünsche: überarbeiten, Fehler, aufschalten',async()=>{
   }}));
  try{
   const sql=f=>readFileSync(new URL(f,import.meta.url),'utf8').replaceAll('\n',' ');
-  const feedback=await mf.getD1Database('FEEDBACK');for(const f of ['0001_feedback.sql','0002_feedback_name.sql','0003_wuensche.sql'])await feedback.exec(sql('migrations/'+f));
+  const feedback=await mf.getD1Database('FEEDBACK');for(const f of ['0001_feedback.sql','0002_feedback_name.sql','0003_wuensche.sql','0004_wunsch_stil.sql'])await feedback.exec(sql('migrations/'+f));
   const call=(pfad,body)=>mf.dispatchFetch('https://test.example/wunsch/'+pfad,{method:body?'POST':'GET',headers:{Origin:ORIGIN,Authorization:'Bearer teacher',...(body?{'Content-Type':'application/json'}:{})},body:body?JSON.stringify(body):undefined});
   await call('neu',{name:'Gecko'});await call('neu',{name:'Wal'});
   let l=(await (await call('liste')).json()).wuensche;const gecko=l.find(w=>w.name==='Gecko'),wal=l.find(w=>w.name==='Wal');

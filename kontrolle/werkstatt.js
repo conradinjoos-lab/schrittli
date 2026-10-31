@@ -183,7 +183,7 @@ const W=(()=>{
     figuren.json und Quelle in einem Commit. Die Vorlage daraus rechnet die Action .github/workflows/motive.yml. Im Repo stehen diese Dateien mit LF. */
  const FIG='werkzeug/vorlagen/figuren.json',QUELLEN='werkzeug/vorlagen/quellen.md',QK='## Von Claude gezeichnet (Wünsche)',QE='## Echte Bilder (Wünsche)';
  const slug=s=>s.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').normalize('NFD').replace(/\p{M}/gu,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
- const wuensche={liste:()=>api('/wunsch/liste'),zeichnen:(id,hinweis,bild)=>post('/wunsch/zeichnen',{id,hinweis,bild}),
+ const wuensche={liste:()=>api('/wunsch/liste'),zeichnen:(id,hinweis,bild,stil)=>post('/wunsch/zeichnen',{id,hinweis,bild,stil}),
   ablehnen:(id,grund)=>post('/wunsch/ablehnen',{id,grund}),loeschen:id=>post('/wunsch/loeschen',{id}),
   async aufschalten(id,name,welt,png,echt){   // png: Base64 ohne «data:»-Vorspann, echt: Bild statt Zeichnung, id leer ohne Wunsch; liefert die neue Figur-ID
    let figur='';
