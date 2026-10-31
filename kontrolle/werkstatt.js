@@ -171,7 +171,7 @@ const W=(()=>{
  const post=(pfad,b)=>api(pfad,{method:'POST',body:JSON.stringify(b)});
  const frage=o=>{const q=new URLSearchParams(Object.entries(o).filter(([,v])=>v!=null&&v!==''));return q.size?'?'+q:''};
  const unterricht={gruppen:()=>api('/unterricht/gruppen'),erstellen:name=>post('/unterricht/erstellen',{name}),
-  freigabe:(id,revision,policy)=>post('/unterricht/freigabe',{id,revision,policy}),geraete:id=>api('/unterricht/geraete'+frage({id})),
+  freigabe:(id,revision,policy)=>post('/unterricht/freigabe',{id,revision,policy}),geraete:id=>api('/unterricht/geraete'+frage({id})),kindstand:id=>api('/unterricht/kindstand'+frage({id})),
   geraetName:(id,deviceId,name)=>post('/unterricht/geraet-name',{id,deviceId,name}),favoriten:()=>api('/unterricht/favoriten'),
   favorit:(name,policy)=>post('/unterricht/favorit',{name,policy}),favoritEntfernen:id=>post('/unterricht/favorit-entfernen',{id})};
  const feedback={klassen:()=>api('/feedback/klassen'),klasseNeu:name=>post('/feedback/klassen',{name}),sperren:id=>post('/feedback/klassen/sperren',{id}),

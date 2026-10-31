@@ -32,6 +32,17 @@ function fortschritt(b){
  if(!Array.isArray(b.schritte)||b.schritte.length!==3||b.schritte.some(x=>typeof x!=='boolean'))fail('Ungültiger Fortschritt.');
  return {geraet:b.geraet.trim(),videoId:b.videoId,schritte:b.schritte.map(Boolean)};
 }
+/* Stand je Kind, getrennt vom Gerät: null heisst unbekannt und ändert nichts Gespeichertes. schritt und max zählen wie in der App ab 0, max ist der höchste erreichte Schritt. */
+const KIND=/^[^\u0000-\u001f\u007f]{1,120}$/;
+const zahl=v=>{if(v==null)return null;if(!Number.isSafeInteger(v)||v<0||v>999)fail('Ungültiger Stand.');return v;};
+const ja=v=>{if(v==null)return null;if(typeof v!=='boolean')fail('Ungültiger Stand.');return v?1:0;};
+function kindstand(s,now){
+ if(typeof s?.kindKey!=='string'||!KIND.test(s.kindKey)||!s.kindKey.trim())fail('Ungültiges Kind.');
+ if(typeof s.videoId!=='string'||!/^[-a-zA-Z0-9_]{1,100}$/.test(s.videoId))fail('Ungültige Aufgabe.');
+ const schritt=zahl(s.schritt),max=zahl(s.max);if(schritt!=null&&max!=null&&schritt>max)fail('Ungültiger Stand.');
+ if(s.zeit!=null&&(!Number.isSafeInteger(s.zeit)||s.zeit<0))fail('Ungültiger Stand.');
+ return {kindKey:s.kindKey.trim(),videoId:s.videoId,schritt,max,videoFertig:ja(s.videoFertig),werkFertig:ja(s.werkFertig),stand:s.zeit==null?now:Math.min(s.zeit,now)};
+}
 export async function handleUnterricht(req,env){
  try{
   if(req.headers.get('Origin')!==ORIGIN)return json({fehler:'Nicht erlaubt.'},403);
@@ -65,6 +76,22 @@ export async function handleUnterricht(req,env){
    if(!r.meta.changes)fail('Zu viele Einträge in dieser Gruppe.',409);
    return json({ok:true,stand:Date.now()});
   }
+  if(p==='/unterricht/kindstand'&&req.method==='POST'){
+   const b=await body(req),token=typeof b?.token==='string'?b.token:(/^Bearer (\S+)$/.exec(req.headers.get('Authorization')||'')?.[1]||'');
+   if(!TOKEN.test(token))fail('Dieses iPad muss mit einer Klasse verbunden werden.',401);
+   const group=await db.prepare('SELECT id FROM unterricht_gruppen WHERE tokenHash=?').bind(await hash(token)).first();
+   if(!group)fail('Die Verbindung gilt nicht mehr. Bitte deiner Lehrperson zeigen.',401);
+   if(!UUID.test(b?.deviceId))fail('Ungültiges iPad.');
+   if(!Array.isArray(b.staende)||!b.staende.length||b.staende.length>40)fail('Ungültiger Stand.');
+   const now=Date.now(),staende=b.staende.map(s=>kindstand(s,now));
+   if(env.UNTERRICHT_LIMIT&&!(await env.UNTERRICHT_LIMIT.limit({key:group.id+':'+b.deviceId})).success)fail('Bitte kurz warten.',429);
+   /* Der neueste Stand gewinnt, auch wenn ein iPad nach dem Offline-Sein Älteres nachliefert. */
+   const eintragen=db.prepare(`INSERT INTO unterricht_kindstand(gruppeId,kindKey,videoId,schritt,max,videoFertig,werkFertig,stand)
+    SELECT ?1,?2,?3,?4,?5,?6,?7,?8 WHERE EXISTS(SELECT 1 FROM unterricht_kindstand WHERE gruppeId=?1 AND kindKey=?2 AND videoId=?3) OR (SELECT COUNT(*) FROM unterricht_kindstand WHERE gruppeId=?1)<5000
+    ON CONFLICT(gruppeId,kindKey,videoId) DO UPDATE SET schritt=COALESCE(excluded.schritt,schritt),max=COALESCE(excluded.max,max),videoFertig=COALESCE(excluded.videoFertig,videoFertig),werkFertig=COALESCE(excluded.werkFertig,werkFertig),stand=excluded.stand WHERE excluded.stand>=stand`);
+   const r=await db.batch(staende.map(s=>eintragen.bind(group.id,s.kindKey,s.videoId,s.schritt,s.max,s.videoFertig,s.werkFertig,s.stand)));
+   return json({ok:true,stand:now,angenommen:r.reduce((n,x)=>n+x.meta.changes,0)});
+  }
   await teacher(req);
   if(p==='/unterricht/gruppen'&&req.method==='GET'){
    const groups=(await db.prepare('SELECT id,name,policy,revision FROM unterricht_gruppen ORDER BY erstellt').all()).results;
@@ -90,6 +117,13 @@ export async function handleUnterricht(req,env){
     db.prepare('SELECT geraetId,videoId,schritte,stand FROM unterricht_fortschritt WHERE gruppeId=? ORDER BY stand').bind(id).all()]);
    const byDevice=new Map();for(const f of progress.results){const list=byDevice.get(f.geraetId)||[];list.push({videoId:f.videoId,schritte:JSON.parse(f.schritte),stand:f.stand});byDevice.set(f.geraetId,list);}
    return json({revision:group.revision,policy:JSON.parse(group.policy),now:Date.now(),geraete:devices.results.map(d=>({...d,fortschritt:byDevice.get(d.id)||[]}))});
+  }
+  if(p==='/unterricht/kindstand'&&req.method==='GET'){
+   const id=u.searchParams.get('id');if(!UUID.test(id))fail('Ungültige Gruppe.');
+   if(!await db.prepare('SELECT 1 FROM unterricht_gruppen WHERE id=?').bind(id).first())fail('Gruppe nicht gefunden.',404);
+   const rows=(await db.prepare('SELECT kindKey,videoId,schritt,max,videoFertig,werkFertig,stand FROM unterricht_kindstand WHERE gruppeId=? ORDER BY stand DESC LIMIT 2000').bind(id).all()).results;
+   const wert=v=>v==null?null:!!v;
+   return json({now:Date.now(),staende:rows.map(r=>({...r,videoFertig:wert(r.videoFertig),werkFertig:wert(r.werkFertig)}))});
   }
   if(p==='/unterricht/geraet-name'&&req.method==='POST'){
    const b=await body(req);if(!UUID.test(b?.id)||!UUID.test(b?.deviceId))fail('Ungültiges iPad.');
