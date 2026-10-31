@@ -7261,6 +7261,12 @@
    "name": "Gecko",
    "welt": "Tierwelt",
    "datei": "wu-gecko.png"
+  },
+  {
+   "id": "wu-michael-jackson",
+   "name": "Michael Jackson",
+   "welt": "Musik",
+   "datei": "wu-michael-jackson.png"
   }
  ]
 }
