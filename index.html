@@ -2,7 +2,7 @@
 <html lang="de-CH">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Schritt für Schritt">
@@ -43,13 +43,13 @@ p{margin:0}
 [hidden]{display:none!important}
 
 #app{min-height:100%}
-.screen{min-height:100%;display:flex;flex-direction:column;gap:18px;max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px calc(28px + env(safe-area-inset-bottom,0px))}
+.screen{min-height:100%;display:flex;flex-direction:column;gap:18px;max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px calc(68px + env(safe-area-inset-bottom,0px))}
 .screen.parent{max-width:820px;gap:14px}
 .topbar{display:flex;align-items:center;gap:10px;min-height:56px;flex-wrap:wrap}
 .topbar h1{font-size:24px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* Knöpfe (neutral, Elternbereich) */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 16px;border-radius:14px;background:var(--surface);box-shadow:var(--shadow-sm);font-family:var(--display);font-weight:600;font-size:17px;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 16px;border-radius:14px;background:var(--surface);box-shadow:var(--shadow-sm);font-family:var(--display);font-weight:600;font-size:17px;white-space:nowrap}
 .btn:active{transform:scale(.97)}
 .btn.primary{background:var(--lern);color:#fff}
 .btn.spass{background:var(--spass);color:#fff}
@@ -58,6 +58,7 @@ p{margin:0}
 .btn.outline{background:transparent;box-shadow:none;border:2px solid var(--line)}
 .btn.icon{width:48px;min-height:48px;padding:0;border-radius:50%;font-size:22px}
 .btn.sm{min-height:36px;font-size:15px;padding:0 12px;border-radius:10px}
+.kid .btn.sm{min-height:48px}
 .kbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:64px;padding:0 24px;border-radius:20px;background:var(--surface);box-shadow:var(--shadow);font-family:var(--display);font-weight:600;font-size:22px}
 .kbtn:active{transform:scale(.96)}
 .kbtn.round{width:72px;min-height:72px;padding:0;border-radius:50%;font-size:30px}
@@ -247,11 +248,11 @@ p{margin:0}
 /* Malen & Aufnehmen */
 .tool-top{margin-top:4px}
 .canvas-wrap{flex:1;min-height:52vh;border-radius:14px;overflow:hidden;background:#fff;border:3px solid var(--kink);box-shadow:4px 5px 0 var(--sh);touch-action:none;position:relative}
-.canvas-wrap canvas{display:block;touch-action:none}
+.canvas-wrap canvas{position:absolute;inset:0;display:block;touch-action:none}   /* darf den Rahmen nicht mitbestimmen, sonst wächst er endlos */
 .palette{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;padding:10px 0}
-.sw{width:46px;height:46px;border-radius:50%;border:3px solid var(--kink);box-shadow:2px 3px 0 var(--sh)}
+.sw{width:48px;height:48px;border-radius:50%;border:3px solid var(--kink);box-shadow:2px 3px 0 var(--sh)}
 .sw.on{outline:4px solid var(--sign);transform:scale(1.12)}
-.sz{width:46px;height:46px;border-radius:50%;background:#fff;border:3px solid var(--kink);display:flex;align-items:center;justify-content:center;box-shadow:2px 3px 0 var(--sh)}
+.sz{width:48px;height:48px;border-radius:50%;background:#fff;border:3px solid var(--kink);display:flex;align-items:center;justify-content:center;box-shadow:2px 3px 0 var(--sh)}
 .sz.on{background:var(--sign)}
 .sz i{display:block;border-radius:50%;background:var(--kink)}
 .sep{width:2px;height:36px;background:var(--wood2);border-radius:2px}
@@ -272,7 +273,7 @@ p{margin:0}
 .emoji-pick button{width:48px;height:48px;border-radius:12px;font-size:28px;background:var(--surface2);border:2px solid transparent}
 .emoji-pick button.on{border-color:var(--lern);background:var(--lern-soft)}
 .color-pick{display:flex;flex-wrap:wrap;gap:8px}
-.color-pick button{width:34px;height:34px;border-radius:50%;border:3px solid transparent}
+.color-pick button{width:48px;height:48px;border-radius:50%;border:3px solid transparent}
 .color-pick button.on{border-color:var(--ink)}
 .ding-pick{display:flex;flex-wrap:wrap;gap:8px}
 .ding-pick button{width:64px;height:64px;border-radius:12px;background:var(--surface2);border:2px solid transparent;display:flex;align-items:center;justify-content:center}
@@ -284,7 +285,7 @@ p{margin:0}
 .panel{background:var(--surface);border-radius:16px;padding:16px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:12px;min-width:0}
 .field{display:flex;flex-direction:column;gap:5px}
 .field label{font-size:14px;font-weight:700;color:var(--muted)}
-.inp{width:100%;min-height:44px;padding:8px 12px;border-radius:10px;border:2px solid var(--line);background:var(--surface2);font-size:16px}
+.inp{width:100%;min-height:48px;padding:8px 12px;border-radius:10px;border:2px solid var(--line);background:var(--surface2);font-size:16px}
 textarea.inp{min-height:80px;resize:vertical}
 .inp:focus{border-color:var(--lern);outline:0}
 .list{display:flex;flex-direction:column;gap:8px}
@@ -320,7 +321,7 @@ code{font-size:13px;word-break:break-all;background:var(--surface2);padding:2px 
 
 /* Modal, Toast, Konfetti */
 .modal-bg{position:fixed;inset:0;background:rgba(10,16,24,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
-.modal{background:var(--surface);border-radius:24px;padding:24px;max-width:460px;width:100%;max-height:92vh;overflow:auto;display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow)}
+.modal{background:var(--surface);border-radius:24px;padding:24px;max-width:460px;width:100%;max-height:min(92vh,100%);overflow:auto;outline:0;display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow)}
 .modal .big-emoji{font-size:72px;line-height:1}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#2B2320;color:#FFF1C9;padding:12px 20px;border-radius:999px;font-family:var(--display);font-size:18px;z-index:60;box-shadow:var(--shadow);max-width:90vw;text-align:center}
 #confetti{position:fixed;inset:0;pointer-events:none;z-index:70;display:none}
@@ -357,11 +358,12 @@ code{font-size:13px;word-break:break-all;background:var(--surface2);padding:2px 
 .ding .tag{flex-wrap:wrap;row-gap:4px;overflow-wrap:anywhere}   /* langer Name + Zähler: Zähler rutscht in die nächste Zeile statt abgeschnitten */
 .tag .zaehl.alle{background:var(--ok,#2f9e44);color:#fff}
 .tag .zaehl .ico{width:14px;height:14px}
-.kid .schild.hallo.tipp{cursor:pointer}
+.kid .schild.hallo.tipp{position:relative}.kid .schild.hallo.tipp button{font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit}.kid .schild.hallo.tipp button::after{content:"";position:absolute;inset:-10px -4px}
 .kid .schild.hallo.tipp:active{transform:translateY(2px)}
 .bank .front{height:70px;background:var(--wood2);background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.08) 0 2px,transparent 2px 160px);box-shadow:inset 0 10px 14px rgba(0,0,0,.25)}
 .kid .empty.zettel{display:inline-block;margin:0 auto}
 .kid.screen{min-height:100vh;min-height:100dvh;padding-bottom:0}
+.kid.screen:not(.pl):not(:has(>.bank)):not(:has(.palette)){padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}   /* Platz für die Flagge am Seitenende */
 .kid .bank{margin-top:auto;padding-top:44px}
 .kid .bank .front{min-height:90px;padding-bottom:calc(28px + env(safe-area-inset-bottom,0px))}
 .kid.pl.kino{position:fixed;inset:0;z-index:60;background:#000;overflow:hidden;padding:0;min-height:0}
@@ -455,7 +457,10 @@ code{font-size:13px;word-break:break-all;background:var(--surface2);padding:2px 
 .ww-k[data-s="1"]{background:#FDE3D3}.ww-k[data-s="2"]{background:#FCEFC1}.ww-k[data-s="3"]{background:#D5F1E8}.ww-k[data-s="4"]{background:#D8E6FB}.ww-k[data-s="5"]{background:#E6DDF8}.ww-k[data-s="6"]{background:#F9D9E4}
 .ww-foto{flex:1;min-height:0;width:100%;object-fit:contain}
 .ww .sterne-wahl{flex:none;gap:0}.ww .sterne-wahl .stern{font-size:min(16vw,22vh);padding:0 1vw;touch-action:manipulation}
-body:has(.ww) .fm-knopf{display:none}
+body:has(.ww) .fm-knopf{z-index:75;top:calc(max(12px,env(safe-area-inset-top,0px)) + 2px);bottom:auto;left:calc(max(14px,env(safe-area-inset-left,0px)) + 60px)}
+body:has(.ww-kopf>span:first-child) .fm-knopf{left:max(14px,env(safe-area-inset-left,0px))}
+.ww-kopf h1{padding:0 64px}
+@media (max-width:560px){.ww-kopf h1{font-size:22px}}
 .beamer [data-wer]{display:none}
 .lehrer-zeile{text-align:center;padding:10px 16px 6px;margin-top:auto}
 .kid .lehrer-zeile+.bank{margin-top:0;padding-top:30px}
@@ -473,7 +478,7 @@ a.btn{text-decoration:none;color:inherit}
 .lrow .btn.sm{flex:none;margin-left:auto}
 .lrow .kurz{display:none}
 @media (max-width:520px){.lrow .lang{display:none}.lrow .kurz{display:inline}.lrow .stufen b{width:22px;height:22px}}
-.lp-chip{flex:none;border:1.5px solid rgba(43,35,32,.35);background:transparent;color:inherit;border-radius:999px;padding:1px 8px;font:inherit;font-size:11px;font-weight:700;letter-spacing:.03em;cursor:pointer;opacity:.55}
+.lp-chip{flex:none;position:relative;border:1.5px solid rgba(43,35,32,.35);background:transparent;color:inherit;border-radius:999px;padding:1px 8px;font:inherit;font-size:11px;font-weight:700;letter-spacing:.03em;cursor:pointer;opacity:.55}.lp-chip::after{content:"";position:absolute;inset:-15px -4px}
 .lp-chip:hover,.lp-chip[aria-expanded="true"]{opacity:1;border-color:var(--kink)}
 .lp-panel{margin:0 0 8px;padding:8px 12px;border-left:3px solid var(--kink);background:rgba(255,255,255,.45);border-radius:0 8px 8px 0;font-size:14px;line-height:1.35}
 .lp-k+.lp-k{margin-top:8px}.lp-k a{color:inherit;text-decoration:none}.lp-k a:hover{text-decoration:underline}
@@ -515,7 +520,7 @@ a.btn{text-decoration:none;color:inherit}
 @media (max-width:420px){.kid .regal.lochwand{grid-template-columns:repeat(2,minmax(0,1fr))}.kid .haken .disc{width:84px;height:84px}.kid .haken .disc svg{width:46px;height:46px}.kid .haken .slot{width:92px;height:92px;margin-left:-49px}}
 /* Schule, Variante 3a «Luftig & klar – mit Bildern»: hell, Nunito, Bilder in weichen Farbflächen */
 body:has(.v3){background:#F5F6F8}
-.v3{min-height:100vh;background:#F5F6F8;color:#1C2430;font-family:'Nunito',system-ui,sans-serif;padding:20px max(16px,env(safe-area-inset-left,0px)) calc(32px + env(safe-area-inset-bottom,0px))}
+.v3{min-height:100vh;background:#F5F6F8;color:#1C2430;font-family:'Nunito',system-ui,sans-serif;padding:20px max(16px,env(safe-area-inset-left,0px)) calc(68px + env(safe-area-inset-bottom,0px))}
 .v3-in{max-width:1240px;margin:0 auto}
 .v3 h1,.v3 h2{font-family:inherit;letter-spacing:normal;text-transform:none}
 .v3.caps,.v3.caps h1,.v3.caps h2,.v3.caps button,.v3.caps a{text-transform:uppercase;letter-spacing:.02em}   /* 1.–2. Klasse: nur Grossbuchstaben */
@@ -527,8 +532,8 @@ body:has(.v3){background:#F5F6F8}
 .v3-logo{width:44px;height:44px;border-radius:14px;background:#F3E8D4;overflow:hidden;flex:none;box-shadow:0 2px 8px rgba(28,36,48,.08)}
 .v3-logo img{width:100%;height:100%;object-fit:cover;object-position:50% 6%;display:block}
 .v3-name{font-weight:900;font-size:20px}
-.v3-pill{border:0;background:#fff;border-radius:999px;padding:10px 18px;font-weight:800;font-size:15px;box-shadow:0 2px 8px rgba(28,36,48,.08);white-space:nowrap}
-.v3-rund{width:44px;height:44px;border-radius:50%;border:0;background:#fff;font-size:22px;font-weight:900;box-shadow:0 2px 8px rgba(28,36,48,.08);flex:none;display:grid;place-items:center}
+.v3-pill{border:0;background:#fff;border-radius:999px;min-height:48px;padding:10px 18px;font-weight:800;font-size:15px;box-shadow:0 2px 8px rgba(28,36,48,.08);white-space:nowrap}
+.v3-rund{width:48px;height:48px;border-radius:50%;border:0;background:#fff;font-size:22px;font-weight:900;box-shadow:0 2px 8px rgba(28,36,48,.08);flex:none;display:grid;place-items:center}
 .v3-rund.gross{width:52px;height:52px}
 .v3-h1{font-weight:900;font-size:36px;line-height:1.1;margin:0}
 .v3-h1.gross{font-size:44px;margin-top:36px}
@@ -543,7 +548,7 @@ body:has(.v3){background:#F5F6F8}
 .v3-raum .v3-meta{font-size:16px;padding:0 6px}
 .v3-leiste{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
 .v3-schalter{display:flex;gap:2px;background:#fff;border-radius:999px;padding:5px;box-shadow:0 2px 8px rgba(28,36,48,.08)}
-.v3-schalter button{border:0;background:none;border-radius:999px;min-height:44px;padding:0 18px;font-weight:800;font-size:15px;color:#5B6672}
+.v3-schalter button{border:0;background:none;border-radius:999px;min-height:48px;padding:0 18px;font-weight:800;font-size:15px;color:#5B6672}
 .v3-klassen button{min-width:52px;padding:0 10px}
 .v3-schalter button.an{background:#1C2430;color:#fff}
 .v3-titel{display:flex;align-items:center;flex-wrap:wrap;gap:16px;margin-top:22px}
@@ -569,7 +574,7 @@ body:has(.v3){background:#F5F6F8}
 .v3-kachel.werkzeug{text-decoration:none;color:inherit;cursor:pointer}.v3-kachel.werkzeug .bild{display:grid;place-items:center;font-size:56px;line-height:1}
 .v3-fuss{text-align:center;margin-top:36px}
 .v3-werkzeuge{display:inline-flex;align-items:center;gap:8px;border:2px solid #1C4A63;background:#EAF3F8;color:#1C4A63;font-family:var(--display);font-weight:700;font-size:17px;border-radius:999px;padding:10px 20px;margin:0 8px 8px;box-shadow:2px 3px 0 var(--sh);cursor:pointer}
-.v3-link{border:0;background:none;color:#5B6672;font-weight:700;font-size:14px;text-decoration:underline;text-underline-offset:3px;padding:8px 12px}
+.v3-link{border:0;background:none;color:#5B6672;font-weight:700;font-size:14px;text-decoration:underline;text-underline-offset:3px;padding:8px 12px;min-height:48px}
 .v3-thema-titel small{display:block;color:#5B6672;font-weight:700;font-size:14px}
 .v3-thema-titel h1{margin:0;font-weight:900;font-size:30px;line-height:1.1}
 .v3-kopf .v3-thema-titel{margin-left:4px}
@@ -657,7 +662,7 @@ body:has(.v3){background:#F5F6F8}
 @media (max-width:1100px){.v3-themen{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (max-width:820px){.v3-thema{grid-template-columns:1fr}.v3-links{position:static;display:grid;grid-template-columns:160px 1fr;align-items:start}.v3-mat{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (max-width:640px){.v3-themen{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.v3-raeume{grid-template-columns:1fr;gap:14px}.v3-raum b{font-size:min(26px,6.2cqi)}.v3-h1{font-size:30px}.v3-h1.gross{font-size:34px;margin-top:20px}
- .v3-links{grid-template-columns:96px 1fr;gap:12px}.v3-mat{grid-template-columns:repeat(3,minmax(0,1fr))}.v3-lektion .th{width:84px}.v3-lektion b{font-size:16px}.v3-pill{padding:10px 14px;font-size:14px}.v3-name{display:none}}
+ .v3-links{grid-template-columns:96px 1fr;gap:12px}.v3-mat{grid-template-columns:repeat(3,minmax(0,1fr))}.v3-lektion .th{width:84px}.v3-lektion b{font-size:16px}.v3-pill{padding:10px 14px;font-size:14px}.v3-name{display:none}.v3-kopf{flex-wrap:wrap;row-gap:8px}.v3-kopf .v3-thema-titel{flex:1 1 200px;min-width:0}}
 /* Bibo & Fila: freigestellte Figuren (grafik/figuren/*.webp) */
 .figur{display:block;width:auto;max-width:100%;object-fit:contain;pointer-events:none;user-select:none;-webkit-user-drag:none}
 .fig-gruss{display:flex;align-items:flex-end;justify-content:center;gap:12px;margin:0 auto;max-width:100%}
@@ -673,27 +678,29 @@ body:has(.v3){background:#F5F6F8}
 .marke{position:absolute;right:12px;bottom:10px;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 4px;border-radius:999px;background:#F1E3CB;color:#1C4A63;border:2px solid #1C4A63;box-shadow:2px 3px 0 rgba(0,0,0,.3);pointer-events:none}
 .marke img{width:36px;height:36px;border-radius:50%;object-fit:cover;object-position:50% 6%;background:#fff}
 .marke b{font-family:var(--display);font-size:18px;font-weight:700;letter-spacing:-.01em;white-space:nowrap}
-.marke i{font-style:normal;color:#E07A3F}
 .kid.pl.kino .marke{right:16px;bottom:14px;height:50px}
 .kid.pl.kino .marke img{width:42px;height:42px}
 .kid.pl.kino .marke b{font-size:21px}
 @media (max-width:520px){.marke{height:34px;padding:0 10px 0 3px;gap:6px;right:8px;bottom:6px}.marke img{width:28px;height:28px}.marke b{font-size:14px}.marke.ov{display:none}}
 @media (max-width:640px){.fig-gruss{flex-direction:column;align-items:center;gap:6px}.fig-gruss .figur,.papier .fig-gruss .figur{height:100px;margin:0}}
-.fm-knopf{position:fixed;left:calc(10px + env(safe-area-inset-left,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:65;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--surface);color:#8A8178;box-shadow:var(--shadow-sm);border:2px solid #D64545;color:#D64545}
-.fm-knopf:hover,.fm-knopf:focus-visible{opacity:1;color:#D64545}.fm-knopf .ico{width:20px;height:20px;fill:currentColor}
-body:has(.kid.pl:not(.kino)) .fm-knopf{left:auto;right:calc(10px + env(safe-area-inset-right,0px))}
+.fm-knopf{position:fixed;left:calc(10px + env(safe-area-inset-left,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:65;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--surface);box-shadow:var(--shadow-sm);border:2px solid #D64545;color:#D64545}
+.fm-knopf:hover,.fm-knopf:focus-visible{opacity:1;color:#D64545}.fm-knopf .ico{width:22px;height:22px;fill:currentColor}
+body:has(.kid.pl:not(.kino):not(.beamer)) .fm-knopf{left:auto;right:calc(10px + env(safe-area-inset-right,0px))}
 body:has(.kid.pl.kino) .fm-knopf{bottom:calc(124px + env(safe-area-inset-bottom,0px));background:rgba(255,255,255,.14);color:#fff}
 @media (max-width:700px){ body:has(.kid.pl.kino) .fm-knopf{bottom:calc(180px + env(safe-area-inset-bottom,0px))} }
-@media (orientation:landscape) and (max-height:500px){ body:has(.kid.pl.kino) .fm-knopf{left:auto;right:calc(8px + env(safe-area-inset-right,0px));bottom:8px;width:34px;height:34px} }
-body:has(.modal-bg) .fm-knopf{display:none}
-body:has(.kid.pl:not(.kino)) .fm-knopf{display:none}
-.fm-pill{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:999px;border:2px solid #D64545;background:#FFF5F3;color:#B83232;font:inherit;font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap}
+@media (orientation:landscape) and (max-height:500px){ body:has(.kid.pl.kino) .fm-knopf{left:auto;right:calc(8px + env(safe-area-inset-right,0px));bottom:8px} }
+body:has(.canvas-wrap) .fm-knopf{top:calc(14px + env(safe-area-inset-top,0px));bottom:auto;left:max(216px,50%)}   /* nicht auf der Zeichenfläche */
+body:has(.modal .fm-arten) .fm-knopf{display:none}
+@media print{.fm-knopf{display:none!important}}
+body:has(.kid.pl:not(.kino):not(.beamer)) .fm-knopf{display:none}
+.fm-pill{display:inline-flex;align-items:center;gap:6px;min-height:48px;padding:0 14px;border-radius:999px;border:2px solid #D64545;background:#FFF5F3;color:#B83232;font:inherit;font-size:15px;font-weight:600;cursor:pointer;white-space:nowrap}
 .fm-pill .ico{width:18px;height:18px;fill:currentColor}
 .fm-pill:hover,.fm-pill:focus-visible{background:#D64545;color:#fff}
-@media (max-width:560px){ .fm-pill{min-height:36px;padding:0 10px;font-size:14px;gap:4px} }
-.modal-bg:has(.fm){z-index:80}.fm h2{margin:0}.fm-arten{display:flex;flex-direction:column;gap:8px}.fm-arten label{display:flex;align-items:center;gap:10px;font-size:16px;cursor:pointer}
+@media (max-width:560px){ .fm-pill{padding:0 10px;font-size:14px;gap:4px}
+ .modal-bg{padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))} }
+.modal-bg:has(.fm){z-index:80}.fm h2{margin:0}.fm-arten{display:flex;flex-direction:column}.fm-arten label{display:flex;align-items:center;gap:10px;min-height:48px;font-size:16px;cursor:pointer}
 .fm-arten input{width:20px;height:20px;accent-color:var(--lern)}.fm-text{font:inherit;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;resize:vertical;width:100%;background:var(--surface2);color:var(--ink)}
-.fm-fehler{margin:0;color:#D64545;font-weight:600}.fm [data-act=senden]:disabled{opacity:.4;cursor:default}
+.fm-fehler{margin:0;color:#D64545;font-weight:600}.fm-ende{margin:0;padding:24px 0;text-align:center;font-size:30px;font-weight:800;color:#D64545}.fm-ende.gut{font-size:64px;line-height:1;color:#3BB273}.fm [data-act=senden]:disabled{opacity:.4;cursor:default}
 /* ---------- Unterricht: iPad ist mit einer Klasse verbunden ---------- */
 body.unterricht .v3-klassen,body.unterricht .v3-link[data-act=lehrer],body.unterricht .lehrer-zeile,body.unterricht .v3-kachel.werkzeug,body.unterricht .v3-werkzeuge[data-act=werkzeuge]{display:none!important}
 body.u-ohne-galerie [data-act=gallery]{display:none!important}
@@ -730,14 +737,14 @@ body.u-ohne-galerie [data-act=gallery]{display:none!important}
 @keyframes rm-blink{to{visibility:hidden}}
 .rm-fehler{color:#B4432F;font-weight:800;font-size:15px;margin:8px 0 0}
 .sterne-wahl{display:flex;justify-content:center;gap:4px}
-.sterne-wahl .stern{background:none;border:0;font-size:40px;line-height:1;color:#C9B37A;cursor:pointer;padding:2px 4px;font-family:inherit}
+.sterne-wahl .stern{background:none;border:0;font-size:40px;line-height:1;color:#C9B37A;cursor:pointer;min-width:48px;min-height:48px;padding:2px 4px;font-family:inherit}
 .sterne-wahl .stern.an{color:#F2B705;text-shadow:0 2px 0 rgba(0,0,0,.15)}
 .foto .dt .st{color:#F2B705;letter-spacing:-1px}
 .sw-leiste{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding-top:0}
 .sw-leiste .zettel{margin:0}
 .sw-status{font-size:14px;font-weight:700;color:#5B6672;margin-left:auto}
 .sw-filter{display:inline-flex;gap:6px;flex-wrap:wrap}
-.sw-filter button{border:2px solid #D7DCE2;background:#fff;border-radius:999px;padding:6px 14px;font:inherit;font-weight:900;font-size:15px;cursor:pointer;color:#1C2430}
+.sw-filter button{border:2px solid #D7DCE2;background:#fff;border-radius:999px;min-height:48px;padding:6px 14px;font:inherit;font-weight:900;font-size:15px;cursor:pointer;color:#1C2430}
 .sw-filter button.an{background:#1C2430;border-color:#1C2430;color:#fff}
 .panel.verb{margin-bottom:14px;background:#fff;color:#1C2430;border:2px solid #E6D9B8}.panel.verb h2{margin:0 0 8px;color:#1C2430;font-size:20px}.panel.verb .inp{background:#F5F8FB;color:#1C2430;border:1px solid #D5DEE9}.panel.verb a{color:#1C2430}
 .verb-zeile{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #EEF1F4;flex-wrap:wrap}
@@ -747,9 +754,9 @@ body.u-ohne-galerie [data-act=gallery]{display:none!important}
 
 /* ---- Papierflieger-Sammlung und Auswahl-Chips ---- */
 .v3-chips{display:flex;flex-wrap:wrap;gap:6px}
-.v3-chips button{border:0;background:#fff;border-radius:999px;min-height:40px;padding:0 16px;font-weight:800;font-size:15px;color:#5B6672;box-shadow:0 2px 8px rgba(28,36,48,.08)}
+.v3-chips button{border:0;background:#fff;border-radius:999px;min-height:48px;padding:0 16px;font-weight:800;font-size:15px;color:#5B6672;box-shadow:0 2px 8px rgba(28,36,48,.08)}
 .v3-chips button.an{background:#1C2430;color:#fff}
-.v3-schalter .v3-chips{gap:2px}.v3-schalter .v3-chips button{box-shadow:none;min-height:44px;padding:0 18px}
+.v3-schalter .v3-chips{gap:2px}.v3-schalter .v3-chips button{box-shadow:none;min-height:48px;padding:0 18px}
 .v3-kachel.sammlung .bild img{inset:0;width:100%;height:100%;object-fit:cover}
 .v3-kachel.sammlung .bild{display:grid;place-items:center;font-size:56px;line-height:1}
 
@@ -816,19 +823,19 @@ body.u-ohne-galerie [data-act=gallery]{display:none!important}
 .fs-zeigen{text-align:left;margin-bottom:18px}
 .fs-gesehen{font-size:18px;min-height:56px}
 /* Beamer-Knopf im Kopf */
-.beamer-btn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:999px;border:2px solid #1C4A63;background:#EAF3F8;color:#1C4A63;font:inherit;font-size:15px;font-weight:700;cursor:pointer;text-transform:none;letter-spacing:0;flex:none}
+.beamer-btn{display:inline-flex;align-items:center;gap:6px;min-height:48px;padding:0 14px;border-radius:999px;border:2px solid #1C4A63;background:#EAF3F8;color:#1C4A63;font:inherit;font-size:15px;font-weight:700;cursor:pointer;text-transform:none;letter-spacing:0;flex:none}
 .beamer-btn.an{background:#1C4A63;color:#fff}
-@media (max-width:560px){.beamer-btn{min-height:36px;padding:0 10px;font-size:14px}.beamer-btn span{display:none}}
+@media (max-width:560px){.beamer-btn{padding:0 10px;font-size:14px}.beamer-btn span{display:none}}
 /* Beamer-Ansicht im Video-Player: Video gross, Schritte riesig. Kein :has() – muss auf dem iPad laufen. */
 body.beamer{overflow:hidden}
-body.beamer .fm-knopf{display:none}
+body.beamer .fm-knopf{left:calc(12px + env(safe-area-inset-left,0px));top:calc(8px + env(safe-area-inset-top,0px));bottom:auto;background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.55)}
 .kid.pl.beamer{position:fixed;inset:0;z-index:60;background:#111;color:#fff;overflow:hidden;padding:0;min-height:0;height:100vh;height:100dvh;display:flex;flex-direction:column}
 .kid.pl.beamer .girlande,.kid.pl.beamer .plabel,.kid.pl.beamer .fuss,.kid.pl.beamer .auftrag,.kid.pl.beamer .marke,.kid.pl.beamer .schild-btn,.kid.pl.beamer .fm-pill,.kid.pl.beamer #zettel,.kid.pl.beamer .glas{display:none}
-.kid.pl.beamer .pl-top{display:flex;align-items:center;gap:14px;order:0;flex:none;margin:0;padding:8px 16px;max-width:none;width:auto;min-height:0;background:#000;box-sizing:border-box}
+.kid.pl.beamer .pl-top{display:flex;align-items:center;gap:14px;order:0;flex:none;margin:0;padding:8px 16px 8px 72px;max-width:none;width:auto;min-height:0;background:#000;box-sizing:border-box}
 .kid.pl.beamer .pl-top .schild{flex:1;min-width:0;background:transparent;border:0;box-shadow:none;transform:none;padding:0;min-height:0;color:#fff}
 .kid.pl.beamer .pl-top .schild h1{color:#fff;font-size:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .kid.pl.beamer .kopf-rechts{margin-left:auto;flex:none}
-.kid.pl.beamer .beamer-btn{background:#fff;color:#111;border-color:#fff;min-height:44px;font-size:16px}
+.kid.pl.beamer .beamer-btn{background:#fff;color:#111;border-color:#fff;font-size:16px}
 .kid.pl.beamer .panes{display:grid;order:1;flex:1;min-height:0;margin:0;padding:10px 16px;max-width:none;width:auto;box-sizing:border-box;gap:16px;grid-template-columns:minmax(0,3fr) minmax(0,2fr);align-items:stretch}
 .kid.pl.beamer .pane{display:flex;flex-direction:column;min-height:0;min-width:0;padding:0;margin:0;order:0}
 .kid.pl.beamer .video-box{width:100%;max-width:calc((100vh - 200px)*16/9);max-width:calc((100dvh - 200px)*16/9);margin:auto;aspect-ratio:16/9;border:0;border-radius:10px;box-shadow:none;transform:none}
@@ -902,7 +909,7 @@ body.beamer .fm-knopf{display:none}
 .plan-body>b{font-weight:900;font-size:19px;line-height:1.2}
 .plan-schritt.erledigt .plan-body>b{text-decoration:line-through;text-decoration-thickness:3px;text-decoration-color:#3BB273}
 .plan-mat{display:flex;flex-wrap:wrap;gap:8px}
-.plan-matitem{display:inline-flex;align-items:center;gap:8px;border-radius:999px;background:#fff;border:2px solid #DDE1E6;padding:6px 14px 6px 8px;font-weight:800;font-size:15px;cursor:pointer;min-height:44px}
+.plan-matitem{display:inline-flex;align-items:center;gap:8px;border-radius:999px;background:#fff;border:2px solid #DDE1E6;padding:6px 14px 6px 8px;font-weight:800;font-size:15px;cursor:pointer;min-height:48px}
 .plan-matitem input{width:22px;height:22px;margin:0;accent-color:#3BB273;flex:none}
 .plan-matitem .pik{display:inline-grid;place-items:center;width:30px;height:28px;flex:none}
 .plan-matitem .pik .mat-svg{width:30px;height:28px}.plan-matitem .pik .mat-emoji{font-size:20px}.plan-matitem .pik img{width:28px;height:28px;object-fit:cover;border-radius:6px}
@@ -1046,7 +1053,7 @@ const WERKZEUGE=[['maschenprobe/','🧶','Maschen-Planer','Kappe, Stirnband, Arm
   ['','✂️','Vorlagen-Generator','Formen drucken','#FBEDE4','Herz, Stern, Bär und über 100 weitere Formen – Grösse in cm eingeben, ausdrucken.',''],
   ['einfrieren/','❄️','Abpausen','Bild einfrieren','#EAF3F8','Bild aufs iPad holen, gross ziehen, einfrieren, Papier drauflegen und abpausen. Nichts einrichten, das Bild bleibt auf dem Gerät.',''],
   ['klasse/','⏱️','Klassen-Werkzeuge','Timer, Aufräumen, Lärmampel','#FFF1E6','Arbeitszeit-Timer, Aufräum-Countdown und Lärmampel – gross für den Beamer.','']];   // Pfad unter vorlagen/, Symbol, Titel, Kurzzeile (Kachel), Farbe (Kachel), Beschreibung (Liste), Raum (hand, werk, leer = beide)
-const genKarte=([pf,sym,t,,,txt])=>`<a class="lehrer-gen" href="${VORL_BASE}${pf}"${VL_ZIEL}><span class="sym" aria-hidden="true">${sym}</span><span class="grow"><b>${t}</b><br><span class="small">${txt}</span></span><span aria-hidden="true">→</span></a>`;
+const genKarte=([pf,sym,t])=>`<a class="lehrer-gen" href="${VORL_BASE}${pf}"${VL_ZIEL}><span class="sym" aria-hidden="true">${sym}</span><span class="grow"><b>${t}</b></span><span aria-hidden="true">→</span></a>`;
 const genKarten=()=>[['hand','Handarbeitszimmer','figuren/fila-faden'],['werk','Werkraum','figuren/bibo-holz'],['','Beide Räume','']].map(([r,name,bild])=>`<h2 class="gen-h2">${bild?`<img src="${GRAFIK}${bild}.webp" alt="" onerror="this.remove()">`:'🧰'}${name}</h2>${WERKZEUGE.filter(w=>w[6]===r).map(genKarte).join('')}`).join('');   // Liste auf «Werkzeuge» und Lehrer-Ansicht, nach Raum
 const werkzeugKacheln=r=>`<h2 class="v3-h2">Werkzeuge</h2><div class="v3-themen">${WERKZEUGE.filter(w=>w[6]===r.id||!w[6]).map(([pf,sym,t,kurz,farbe])=>`<a class="v3-kachel werkzeug" href="${VORL_BASE}${pf}"${VL_ZIEL}><span class="bild" style="background:${farbe}" aria-hidden="true">${sym}</span><b>${t}</b><span class="v3-zeile"><span class="v3-meta">${kurz}</span></span></a>`).join('')}</div>`;   // eigene Kacheln unter den Themen (Raum-Seite): die des Raums, dann die für beide
 const v3Fuss=(mitWerkzeuge=true)=>`<div class="v3-fuss">${mitWerkzeuge?'<button class="v3-werkzeuge" data-act="werkzeuge">🧰 Werkzeuge</button>':''}${SCHULE?'<button class="v3-link" data-act="lehrer">Für Lehrpersonen</button>':''}</div>`;   // unten auf Raum, Start und Thema
@@ -1145,38 +1152,57 @@ function stopListening(){ if(rec){ try{ rec.onend=null; rec.stop(); }catch(e){} 
 
 /* ============================== UI-Helfer ============================== */
 function toast(msg,ms=2200){ const t=document.createElement('div'); t.className='toast'; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),ms); }
-function modal(html,actions={},cls=''){ const m=document.createElement('div'); m.className='modal-bg'; if(/kid/.test(cls)&&schriftNormal()) cls+=' schrift-normal'; m.innerHTML=`<div class="modal ${cls}">${html}</div>`; document.body.appendChild(m); const close=()=>m.remove(); m.addEventListener('click',e=>{ if(e.target===m){close();return;} const b=e.target.closest('[data-act],[data-close]'); if(!b) return; if(b.hasAttribute('data-close')){close();return;} const fn=actions[b.dataset.act]; if(fn) fn(b,close,m); }); return close; }
+const FOKUS='a[href],button:not([disabled]),input:not([disabled]):not([type=hidden]),select:not([disabled]),textarea:not([disabled]),[tabindex="0"]';
+const fokusListe=box=>$$(FOKUS,box).filter(el=>el.getClientRects().length&&!(el.type==='radio'&&!el.checked&&$(`input[type=radio][name="${el.name}"]:checked`,box)));
+/* Fenster: Fokus hinein ohne Tastatur auf dem iPad (Textfelder werden übersprungen), beim Schliessen zurück zum Auslöser. Tab und Escape: siehe unten. */
+function modal(html,actions={},cls=''){ const vorher=document.activeElement, m=document.createElement('div'); m.className='modal-bg'; if(/kid/.test(cls)&&schriftNormal()) cls+=' schrift-normal'; m.innerHTML=`<div class="modal ${cls}" role="dialog" aria-modal="true" tabindex="-1">${html}</div>`; document.body.appendChild(m);
+  const box=m.firstElementChild, titel=$('h1,h2,h3',box); if(titel) box.setAttribute('aria-label',titel.textContent.trim().slice(0,80));
+  (fokusListe(box).find(el=>el.tagName!=='TEXTAREA'&&!(el.tagName==='INPUT'&&el.type!=='radio'&&el.type!=='checkbox'))||box).focus({preventScroll:true});
+  const close=()=>{ const da=m.isConnected; m.remove(); if(da&&vorher&&vorher.isConnected&&vorher!==document.body&&!$('.modal-bg')) try{ vorher.focus({preventScroll:true}); }catch(e){} }; m.addEventListener('click',e=>{ if(e.target===m){close();return;} const b=e.target.closest('[data-act],[data-close]'); if(!b) return; if(b.hasAttribute('data-close')){close();return;} const fn=actions[b.dataset.act]; if(fn) fn(b,close,m); }); return close; }
+document.addEventListener('keydown',e=>{ if(e.key!=='Tab'&&e.key!=='Escape') return; const m=$$('.modal-bg,.ww').pop(); if(!m) return; const fenster=m.classList.contains('modal-bg');
+  if(e.key==='Escape'){ e.preventDefault(); e.stopPropagation(); if(fenster) m.click(); else { const z=$('[data-act=zurueck],[data-act=zu]',m); if(z) z.click(); } return; }   // wie daneben tippen: nameUndKlasse behält so das Foto
+  const fok=fokusListe(m); if(!fenster&&$('.fm-knopf')) fok.push($('.fm-knopf')); const i=fok.indexOf(document.activeElement); if(!fok.length){ e.preventDefault(); return; }
+  if(i<0){ e.preventDefault(); fok[0].focus(); } else if(e.shiftKey&&i===0){ e.preventDefault(); fok[fok.length-1].focus(); } else if(!e.shiftKey&&i===fok.length-1){ e.preventDefault(); fok[0].focus(); } },true);
 function confirmBox(title,text,okLabel,onOk,danger){ modal(`<h2>${esc(title)}</h2><p>${esc(text)}</p><div class="row" style="justify-content:flex-end"><button class="btn ghost" data-close>Abbrechen</button><button class="btn ${danger?'danger':'primary'}" data-act="ok">${esc(okLabel)}</button></div>`,{ok:(b,close)=>{close();onOk();}}); }
 function confetti(){ if(reduced) return; const c=$('#confetti'),ctx=c.getContext('2d'); c.width=innerWidth; c.height=innerHeight; c.style.display='block'; const ps=[]; for(let i=0;i<110;i++) ps.push({x:innerWidth/2,y:innerHeight*.45,vx:(Math.random()-.5)*16,vy:-Math.random()*13-4,r:Math.random()*7+4,c:['#F3B51B','#E8554E','#3BB273','#4C6EF5','#9B5DE5','#F28C28'][i%6],a:Math.random()*6,s:Math.random()*.2+.05}); const t0=performance.now(); (function f(t){ ctx.clearRect(0,0,c.width,c.height); ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.35;p.vx*=.99;p.a+=p.s;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.a);ctx.fillStyle=p.c;ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*.6);ctx.restore();}); if(t-t0<2200) requestAnimationFrame(f); else{ c.style.display='none'; } })(t0); }
 function starsHtml(pid,sm){ const st=starState(pid); const total=S.settings.starsPerDay+st.bonus, left=total-st.used; let h=`<div class="stars${sm?' sm':''}" aria-label="${left} von ${total} Sternen">`; for(let i=0;i<total;i++) h+=`<span class="st${i<left?' on':''}">${ico('star')}</span>`; return h+'</div>'; }
 function loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); }
 function kidModal(html,actions={}){ return modal(html,actions,'kid'); }
 /* ============================== Fehler melden ============================== */
-/* Knopf unten links auf jeder Seite. Die Meldung geht mit Ort (Seite, Video, Schritt, Zeit) an den Worker werkzeug/anmelden (/melden)
-   und erscheint in der Online-Kontrolle. Keine Namen, kein Konto, nichts aus dem Profil. */
-const MELDEN='https://schrittli-anmelden.conradinjoos.workers.dev/melden';
+/* Knopf auf jeder Seite, auch über Fenstern und in der Kachelwahl. Die Meldung geht mit Ort (Seite, Video, Schritt, Zeit) und Stand an den Worker werkzeug/anmelden (/melden)
+   und erscheint in der Online-Kontrolle. Keine Namen, kein Konto, nichts aus dem Profil. Offline bleibt sie in «schrittli.melden.warte» (dieselbe Warteschlange wie vorlagen/melden.js). */
+const MELDEN='https://schrittli-anmelden.conradinjoos.workers.dev/melden', FM_WARTE='schrittli.melden.warte', APP_STAND='2026-10-31-a166f82';   // __STAND__ ersetzt quelle/bauen.sh
 let ORT=null;   // vom aktuellen Screen gesetzt: ()=>({video,titel,schritt})
 function fmGeraet(){ const u=navigator.userAgent; const os=/iPad/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1)?'iPad':/iPhone/.test(u)?'iPhone':/Android/.test(u)?'Android':/CrOS/.test(u)?'Chromebook':/Windows/.test(u)?'Windows':/Mac/.test(u)?'Mac':'anderes'; const br=/Edg\//.test(u)?'Edge':/Firefox\//.test(u)?'Firefox':/Chrome\//.test(u)?'Chrome':/Safari\//.test(u)?'Safari':''; return (os+' '+br).trim(); }
+function fmAdresse(){ const u=new URL(location.href); for(const k of [...u.searchParams.keys()]) if(/token|schein|schluessel|code|key|name/i.test(k)) u.searchParams.delete(k); return (u.pathname+u.search+u.hash).replace(/[0-9a-f]{32,}/gi,'…'); }
 function fmKontext(){ const k={app:SCHULE?'Schule':'Familie',seite:view.name,video:'',titel:'',schritt:0,zeit:null};
   try{ if(P&&P.v){ k.video=P.v.id; k.titel=P.v.title||''; k.schritt=P.steps.length?P.idx+1:0; k.zeit=Math.round(P.api.time()); } else if(ORT){ Object.assign(k,ORT()); }
     else { const p=view.params||{}; const v=p.v||p.video||null; if(v&&v.id){ k.video=v.id; k.titel=v.title||''; } else if(p.areaId||p.id) k.titel=String(p.areaId||p.id); } }catch(e){}
-  return {...k,adresse:location.pathname+location.hash,geraet:fmGeraet(),fenster:innerWidth+'×'+innerHeight}; }
-const FM_ARTEN=[['video','Video läuft nicht'],['stopp','Stopp an falscher Stelle'],['text','Text oder Material falsch'],['anderes','Etwas anderes']];
-const FM_BILDER=[['bild','Bild fehlt'],['text','Text oder Material falsch'],['anderes','Etwas anderes']];
-function fehlerMelden(){ try{ if(P&&P.api) P.api.pause(); }catch(e){}
-  const {bilder,...k}=fmKontext();
-  modal(`<h2>Fehler melden</h2><div class="fm-arten" role="radiogroup">${(bilder?FM_BILDER:FM_ARTEN).map(([w,t])=>`<label><input type="radio" name="fm-art" value="${w}"> ${esc(t)}</label>`).join('')}</div>
-    <textarea class="fm-text" rows="3" maxlength="600" placeholder="Was ist passiert?"></textarea>
+  return {...k,adresse:fmAdresse(),geraet:fmGeraet(),fenster:innerWidth+'×'+innerHeight,stand:APP_STAND+(contentInfo&&contentInfo.stand?' · Inhalt '+contentInfo.stand:'')}; }
+const fmLies=()=>{ try{ const l=JSON.parse(localStorage.getItem(FM_WARTE)||'[]'); return Array.isArray(l)?l:[]; }catch(e){ return []; } };
+const fmMerke=l=>{ try{ if(l.length) localStorage.setItem(FM_WARTE,JSON.stringify(l.slice(-20))); else localStorage.removeItem(FM_WARTE); }catch(e){} };
+async function fmSchick(m){ if(navigator.onLine===false) return 'offline'; const c=new AbortController(), t=setTimeout(()=>c.abort(),8000);
+  try{ const r=await fetch(MELDEN,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(m),signal:c.signal}); return r.ok?'ok':r.status===429?'viele':r.status>=500?'offline':'nein'; }
+  catch(e){ return 'offline'; } finally{ clearTimeout(t); } }
+let fmLaeuft=false;
+async function fmNachsenden(){ if(fmLaeuft) return; fmLaeuft=true;   // bleibt im Speicher, bis der Worker sie angenommen hat
+  try{ for(const m of fmLies()){ const e=await fmSchick(m); if(e==='viele'||e==='offline') break; fmMerke(fmLies().filter(x=>x.erfasst!==m.erfasst)); } } finally{ fmLaeuft=false; } }
+const FM_ARTEN=[['video','Video läuft nicht'],['stopp','Stopp falsch'],['text','Text falsch'],['anderes','Etwas anderes']];
+const FM_BILDER=[['bild','Bild fehlt'],['text','Text falsch'],['anderes','Etwas anderes']];
+const FM_SONST=[['anzeige','Anzeige falsch'],['bild','Bild fehlt'],['text','Text falsch'],['anderes','Etwas anderes']];
+function fehlerMelden(){ if($('.modal .fm-arten')) return; try{ if(P&&P.api) P.api.pause(); }catch(e){}
+  const {bilder,...k}=fmKontext(), arten=bilder?FM_BILDER:P&&P.v?FM_ARTEN:FM_SONST;
+  modal(`<h2>Fehler melden</h2><div class="fm-arten" role="radiogroup" aria-label="Art">${arten.map(([w,t])=>`<label><input type="radio" name="fm-art" value="${w}"> ${esc(t)}</label>`).join('')}</div>
+    <textarea class="fm-text" rows="3" maxlength="600" aria-label="Text" placeholder="✎"></textarea>
     <p class="fm-fehler" hidden></p>
     <div class="row" style="justify-content:flex-end"><button class="btn ghost" data-close>Abbrechen</button><button class="btn primary" data-act="senden" disabled>Senden</button></div>`,
-  {senden:async(b,close,m)=>{ const f=$('.fm-fehler',m); b.disabled=true; b.textContent='Sende …'; f.hidden=true;
-    const art=($('input[name=fm-art]:checked',m)||{}).value||'anderes', text=$('.fm-text',m).value.trim().slice(0,600);
-    try{ const r=await fetch(MELDEN,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({art,text,...k})}); if(!r.ok) throw new Error(r.status===429?'⚠ Zu viele Meldungen':'⚠ Fehler '+r.status);
-      close(); toast('✓ Gesendet. Danke!',2600); }
-    catch(x){ f.textContent=x.message&&/^⚠/.test(x.message)?x.message:'⚠ Offline'; f.hidden=false; b.disabled=false; b.textContent='Nochmals senden'; } }},'fm');
-  setTimeout(()=>{ const m=$('.fm'); if(!m) return; const b=$('[data-act=senden]',m), t=$('.fm-text',m); m.addEventListener('input',()=>{ b.disabled=!$('input[name=fm-art]:checked',m)&&!t.value.trim(); });
-    if(!matchMedia('(pointer:coarse)').matches) t.focus(); },50); }
-function fmKnopf(){ const b=document.createElement('button'); b.className='fm-knopf'; b.type='button'; b.title='Fehler melden'; b.setAttribute('aria-label','Fehler melden'); b.innerHTML=ico('flag'); b.onclick=fehlerMelden; document.body.appendChild(b); }
+  {senden:async(b,close,m)=>{ const f=$('.fm-fehler',m); b.disabled=true; f.hidden=true;
+    const meldung={art:($('input[name=fm-art]:checked',m)||{}).value||'anderes',text:$('.fm-text',m).value.trim().slice(0,600),...k,erfasst:new Date().toISOString()}, e=await fmSchick(meldung);
+    if(e==='nein'){ f.textContent='⚠ Fehler'; f.hidden=false; b.disabled=false; return; }
+    if(e!=='ok') fmMerke(fmLies().concat(meldung));
+    const box=m.firstElementChild; box.innerHTML=`<p class="fm-ende${e==='ok'?' gut':''}">${e==='ok'?'✓':e==='viele'?'⚠ Zu viele':'⚠ Offline'}</p>`; box.focus(); setTimeout(close,1400); }},'fm');
+  const m=$$('.modal-bg').pop(), b=$('[data-act=senden]',m), t=$('.fm-text',m); m.addEventListener('input',()=>{ b.disabled=!$('input[name=fm-art]:checked',m)&&!t.value.trim(); }); }
+function fmKnopf(){ const b=document.createElement('button'); b.className='fm-knopf'; b.type='button'; b.title='Fehler melden'; b.setAttribute('aria-label','Fehler melden'); b.innerHTML=ico('flag'); b.onclick=fehlerMelden; document.body.appendChild(b); addEventListener('online',fmNachsenden); fmNachsenden(); }
 
 /* ============================== Router ============================== */
 const SCREENS={}; let view={name:'boot',params:{}}; let parentOpen=false;
@@ -1184,7 +1210,7 @@ function go(name,params={}){ if(SCHULE&&(name==='parent'||name==='firstrun'||nam
 function leaveScreen(){ if(P){ P._fsLeaving=true; P.destroy(); P=null; } fsExit(); BEAMER.an=false; document.body.classList.remove('beamer'); if(ED&&ED.api){ ED.api.destroy(); ED.api=null; } stopListening(); try{ speechSynthesis.cancel(); }catch(e){} }
 function render(){ const app=$('#app'); app.innerHTML=''; app.onclick=null; app.oninput=null; app.onchange=null; (SCREENS[view.name]||SCREENS.home)(app,view.params); }
 function wire(app,actions){ app.onclick=e=>{ const b=e.target.closest('[data-act]'); if(!b||!app.contains(b)) return; const fn=actions[b.dataset.act]; if(fn){ e.preventDefault(); fn(b,e); } }; }
-function kopf(title,{back,right='',sub=''}={}){ return `<div class="inner kopf" style="padding-left:max(16px,env(safe-area-inset-left,0px))">${back?`<a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a>`:''}<div class="schild"><h1>${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:''}</div><div class="kopf-rechts">${right}${kindChip('schild-btn wer-chip')}</div></div>`; }
+function kopf(title,{back,right='',sub=''}={}){ return `<div class="inner kopf" style="padding-left:max(16px,env(safe-area-inset-left,0px))">${back?`<button type="button" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</button>`:''}<div class="schild"><h1>${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:''}</div><div class="kopf-rechts">${right}${kindChip('schild-btn wer-chip')}</div></div>`; }
 function bank(opts={}){ return `<div class="bank"><div class="inner deko-reihe"><span class="grow"></span></div><div class="platte"></div><div class="front"></div></div>`; }
 
 /* ============================== Inhaltsdatei & Start ============================== */
@@ -1340,7 +1366,7 @@ SCREENS.home=app=>{
   const spass=S.settings.spass?S.areas.filter(a=>a.kind==='spass'&&videosIn(a.id).length):[], lern=[...RAEUME.filter(r=>raumThemen(r).length).map(r=>({id:'raum:'+r.id,name:r.id==='hand'?'Handarbeit':'Werkraum',ding:r.id==='hand'?'wolle':'schere',raum:r})),...S.areas.filter(a=>a.kind!=='spass'&&!THEMA_ID.has(a.id)&&videosIn(a.id).length)];
   app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${fenster(n)}
     <div class="inner kopf mitfenster">
-      <div class="schild hallo${S.profiles.length>1?' tipp':''}" data-act="who" role="button"><h1>Hallo ${esc(p.name)}!</h1><div class="sub">${S.profiles.length>1?'Nicht du? Tipp hier':'Was nimmst du heute?'}</div></div>
+      <div class="schild hallo${S.profiles.length>1?' tipp':''}"><h1>${S.profiles.length>1?`<button type="button" data-act="who">Hallo ${esc(p.name)}!</button>`:`Hallo ${esc(p.name)}!`}</h1></div>
       <div class="kopf-rechts">${S.settings.spass?glasSterne(p.id):''}<button class="werke-btn" data-act="gallery"><span class="fotos"><i></i><i></i></span>Meine Werke${newFb?`<span class="neu">${newFb}</span>`:''}</button><button class="lock-btn" data-act="parent" aria-label="Elternbereich">${ico('lock')}</button></div>
     </div>
     ${spass.length?`<div class="inner regal-wrap"><span class="zettel links"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color:#F2B705"><path d="${ICONS.star}"/></svg>Kostet einen Stern</span><div class="regal">${spass.map(a=>dingHtml(a,'spass')).join('')}</div></div>`:''}
@@ -1460,10 +1486,10 @@ SCREENS.player=(app,{videoId,school})=>{
   const steps=buildVideoSteps(v); const pr=school?{pos:0,step:0,done:false,slow:false}:prog(v.id);
   if(!school){ S.settings.zuletzt=v.id; save(); }
   app.innerHTML=`<div class="${kidClass('pl'+(S.settings.kino&&!school?' kino':''))}">${girlande(n)}
-    <div class="inner kopf pl-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a><div class="schild"><h1>${esc(v.title)}</h1></div><div class="kopf-rechts">${SCHULE?`<button type="button" class="beamer-btn" data-act="beamer" aria-pressed="false" title="Beamer-Ansicht für die ganze Klasse">📽️<span>Beamer</span></button>`:''}<button type="button" class="fm-pill" data-act="melden" title="Fehler melden">${ico('flag')}<span>Fehler melden</span></button><span class="zettel" id="zettel"></span>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}${kindChip('schild-btn wer-chip')}</div></div>
+    <div class="inner kopf pl-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><button type="button" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</button><div class="schild"><h1>${esc(v.title)}</h1></div><div class="kopf-rechts">${SCHULE?`<button type="button" class="beamer-btn" data-act="beamer" aria-pressed="false" title="Beamer-Ansicht für die ganze Klasse">📽️<span>Beamer</span></button>`:''}<button type="button" class="fm-pill" data-act="melden" title="Fehler melden">${ico('flag')}<span>Fehler melden</span></button><span class="zettel" id="zettel"></span>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}${kindChip('schild-btn wer-chip')}</div></div>
     ${fsHinweisHtml(v)}
     <div class="inner panes">
-      <div class="pane"><div class="plabel"><i class="punkt" style="background:#4C6EF5"></i>Schau zu</div><div class="video-box"><div class="host" id="host"></div><div class="shield" id="shield" data-act="shield"></div><div class="overlay" id="overlay"></div><span class="modebadge" id="modebadge" hidden></span><span class="marke" id="marke" hidden><img src="${GRAFIK}figuren/logo.webp" alt=""><b>Stop <i>&amp;</i> Mach</b></span></div><div class="fuss"></div></div>
+      <div class="pane"><div class="plabel"><i class="punkt" style="background:#4C6EF5"></i>Schau zu</div><div class="video-box"><div class="host" id="host"></div><div class="shield" id="shield" data-act="shield"></div><div class="overlay" id="overlay"></div><span class="modebadge" id="modebadge" hidden></span><span class="marke" id="marke" hidden><img src="${GRAFIK}figuren/logo.webp" alt=""><b>Schritt für Schritt</b></span></div><div class="fuss"></div></div>
       <div class="pane"><div class="plabel"><i class="punkt" style="background:#E8554E"></i><span id="zettel2">Die Schritte</span></div><div class="schritte" id="schritte"></div></div>
     </div>
     <div class="pl-bank"><div class="inner"><div class="steuer"><div class="controls" id="controls"></div><div class="kino-step" id="kinostep" data-act="liste" role="button"></div><div class="auftrag" id="task"></div></div></div></div>
@@ -1616,11 +1642,11 @@ function afterWork(pr,star){ confetti(); toast(star?'Super! Du hast einen Stern 
 SCREENS.paint=(app,pr)=>{
   const PAL=['#2B2320','#E8554E','#F28C28','#F2C12E','#3BB273','#2A9DB8','#4C6EF5','#9B5DE5','#8B5A2B','#F5A3C7'];
   const SIZES=[4,10,22]; let color=PAL[0], size=10, eraser=false; const undo=[]; let drawing=false; const n=abend();
-  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}<div class="inner kopf tool-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><a href="#" class="schild-btn" data-act="cancel" aria-label="Abbrechen">${ico('x')}</a><div class="schild"><h1>Malen</h1></div><div class="kopf-rechts"><button class="schild-btn" data-act="undo" aria-label="Rückgängig">${ico('undo')}</button><button class="kbtn primary" data-act="keep" style="min-height:54px;font-size:19px">${ico('check')} Behalten</button></div></div>
+  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}<div class="inner kopf tool-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><button type="button" class="schild-btn" data-act="cancel" aria-label="Abbrechen">${ico('x')}</button><div class="schild"><h1>Malen</h1></div><div class="kopf-rechts"><button class="schild-btn" data-act="undo" aria-label="Rückgängig">${ico('undo')}</button><button class="kbtn primary" data-act="keep" style="min-height:54px;font-size:19px">${ico('check')} Behalten</button></div></div>
     <div class="inner" style="display:flex;flex-direction:column;gap:10px;flex:1;margin-top:12px"><div class="canvas-wrap" id="wrap"><canvas id="pc"></canvas></div>
     <div class="palette">${PAL.map(c=>`<button class="sw${c===color?' on':''}" data-act="color" data-v="${c}" style="background:${c}" aria-label="Farbe"></button>`).join('')}<span class="sep"></span>${SIZES.map(s=>`<button class="sz${s===size?' on':''}" data-act="size" data-v="${s}" aria-label="Pinsel ${s}"><i style="width:${s+6}px;height:${s+6}px"></i></button>`).join('')}<span class="sep"></span><button class="sz" id="eraser" data-act="eraser" aria-label="Radiergummi" style="font-size:22px">🧽</button></div></div></div>`;
   const cv=$('#pc'), wrap=$('#wrap'), ctx=cv.getContext('2d'); let dpr=Math.min(2,devicePixelRatio||1);
-  function fit(){ const r=wrap.getBoundingClientRect(); const snap=cv.width?ctx.getImageData(0,0,cv.width,cv.height):null; cv.width=Math.round(r.width*dpr); cv.height=Math.round(r.height*dpr); cv.style.width=r.width+'px'; cv.style.height=r.height+'px'; ctx.setTransform(1,0,0,1,0,0); ctx.fillStyle='#fff'; ctx.fillRect(0,0,cv.width,cv.height); if(snap) ctx.putImageData(snap,0,0); ctx.setTransform(dpr,0,0,dpr,0,0); ctx.lineCap='round'; ctx.lineJoin='round'; }
+  function fit(){ const r={width:wrap.clientWidth,height:wrap.clientHeight}; const snap=cv.width?ctx.getImageData(0,0,cv.width,cv.height):null; cv.width=Math.round(r.width*dpr); cv.height=Math.round(r.height*dpr); cv.style.width=r.width+'px'; cv.style.height=r.height+'px'; ctx.setTransform(1,0,0,1,0,0); ctx.fillStyle='#fff'; ctx.fillRect(0,0,cv.width,cv.height); if(snap) ctx.putImageData(snap,0,0); ctx.setTransform(dpr,0,0,dpr,0,0); ctx.lineCap='round'; ctx.lineJoin='round'; }
   fit(); const ro=new ResizeObserver(()=>{ if(!drawing) fit(); }); ro.observe(wrap);
   const pos=e=>{ const r=cv.getBoundingClientRect(); return [e.clientX-r.left,e.clientY-r.top]; };
   cv.addEventListener('pointerdown',e=>{ e.preventDefault(); cv.setPointerCapture(e.pointerId); if(undo.length>25) undo.shift(); undo.push(ctx.getImageData(0,0,cv.width,cv.height)); drawing=true; ctx.strokeStyle=eraser?'#fff':color; ctx.lineWidth=eraser?size*3:size; const [x,y]=pos(e); ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+.01,y); ctx.stroke(); });
@@ -1639,7 +1665,7 @@ SCREENS.paint=(app,pr)=>{
 /* ============================== Kind: Aufnehmen ============================== */
 SCREENS.record=(app,pr)=>{
   let state='idle', mr=null, chunks=[], blob=null, url=null, stream=null, t0=0, timer=null; const n=abend();
-  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}<div class="inner kopf tool-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><a href="#" class="schild-btn" data-act="cancel" aria-label="Abbrechen">${ico('x')}</a><div class="schild"><h1>Aufnehmen</h1></div><div class="kopf-rechts"></div></div><div class="inner" style="margin-top:20px"><div class="papier" id="rec" style="align-items:center;gap:22px"></div></div>${bank()}</div>`;
+  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}<div class="inner kopf tool-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><button type="button" class="schild-btn" data-act="cancel" aria-label="Abbrechen">${ico('x')}</button><div class="schild"><h1>Aufnehmen</h1></div><div class="kopf-rechts"></div></div><div class="inner" style="margin-top:20px"><div class="papier" id="rec" style="align-items:center;gap:22px"></div></div>${bank()}</div>`;
   const ui=()=>{ const r=$('#rec'); if(!r) return;
     if(state==='idle') r.innerHTML=`<p style="font-size:22px;text-align:center">Drück den roten Knopf und sprich.</p><button class="recbtn" data-act="start" aria-label="Aufnahme starten">${ico('mic')}</button>`;
     else if(state==='rec') r.innerHTML=`<div class="timer" id="tm">0:00</div><button class="recbtn on" data-act="stop" aria-label="Aufnahme stoppen"><span style="display:block;width:48px;height:48px;background:#fff;border-radius:8px"></span></button><p style="color:var(--wmuted)">Nochmal drücken zum Stoppen</p>`;
@@ -2137,14 +2163,14 @@ function werKacheln(el,gewaehlt,zu){ const ks=KL.klassen, kd=kind(); let k=ks.le
 function werWahl(fertig){ const el=wwAuf(); werKacheln(el,()=>{ el.remove(); if(view.name==='home') render(); fertig(); },()=>el.remove()); }
 SCREENS.wer=app=>{ const weiter=()=>go(S.settings.klasse?'home':'klasse'); if(!KL.klassen.length){ weiter(); return; } KL.gefragt=true; werKacheln(app,weiter,weiter); };
 function verbindungenHtml(){ if(!SCHULE) return '';
-  const z=(titel,name,act,hinweis)=>`<div class="verb-zeile"><b>${titel}</b><span class="${name?'an':''}">${name?'Verbunden mit «'+esc(name)+'»':hinweis}</span>${name?`<button class="btn sm" data-act="${act}">Trennen</button>`:''}</div>`;
+  const z=(titel,name,act)=>`<div class="verb-zeile"><b>${titel}</b><span class="${name?'an':''}">${name?'✓ '+esc(name):'–'}</span>${name?`<button class="btn sm" data-act="${act}">Trennen</button>`:''}</div>`;
   return `<div class="panel verb"><h2>Verbindungen dieses iPads</h2>
-    ${z('Unterricht',U.verb&&(U.verb.name||'Gruppe'),'u-trennen','Die Lehrperson gibt Aufgaben für die iPads frei.')}
-    ${z('Rückmeldungen',RM.verb&&RM.verb.name,'rm-trennen','Die Kinder sagen nach dem Werk, wie es war.')}
-    ${z('Unsere Werke',SW.verb&&SW.verb.name,'sw-trennen','Fotos aller iPads auf einer Korkwand.')}
-    <div class="verb-zeile"><b>Wer bist du?</b><span class="${KL.klassen.length?'an':''}">${KL.klassen.length?`${KL.klassen.length} ${KL.klassen.length===1?'Klasse':'Klassen'} · ${KL.klassen.reduce((n,k)=>n+k.namen.length,0)} Vornamen – die Kinder tippen beim Start ihren Namen an.${kind()?' Gerade dran: '+esc(kind().name):''}`:klToken()?'Noch keine Vornamen – trage sie in der Kontrolle unter «Klassen» ein.':'Kommt mit einer der Verbindungen oben mit.'}</span>${klToken()?`<button class="btn sm" data-act="kl-holen">Neu laden</button>`:''}</div>
-    <div class="row"><input class="inp" id="verb-link" placeholder="Link aus der Kontrolle einfügen" autocomplete="off" spellcheck="false" style="flex:1;min-width:200px"><button class="btn primary" data-act="verbinden">Verbinden</button></div>
-    <p class="muted small" style="margin:0">Die Links erstellst du in der Online-Kontrolle: <a href="../kontrolle/unterricht.html">Unterricht</a> · <a href="../kontrolle/rueckmeldungen.html">Rückmeldungen</a> · <a href="../kontrolle/sammlung.html">Werke</a>. Einmal auf jedem iPad öffnen oder hier einfügen. Die Vornamen pflegst du unter <a href="../kontrolle/klassen.html">Klassen</a>.</p></div>`; }
+    ${z('Unterricht',U.verb&&(U.verb.name||'Gruppe'),'u-trennen')}
+    ${z('Rückmeldungen',RM.verb&&RM.verb.name,'rm-trennen')}
+    ${z('Unsere Werke',SW.verb&&SW.verb.name,'sw-trennen')}
+    <div class="verb-zeile"><b>Klassen</b><span class="${KL.klassen.length?'an':''}">${KL.klassen.length?`✓ ${KL.klassen.length} ${KL.klassen.length===1?'Klasse':'Klassen'} · ${KL.klassen.reduce((n,k)=>n+k.namen.length,0)} Vornamen${kind()?' · '+esc(kind().name):''}`:'–'}</span>${klToken()?`<button class="btn sm" data-act="kl-holen">Neu laden</button>`:''}</div>
+    <div class="row"><input class="inp" id="verb-link" placeholder="Link" autocomplete="off" spellcheck="false" style="flex:1;min-width:200px"><button class="btn primary" data-act="verbinden">Verbinden</button></div>
+    <div class="row verb-links"><a class="btn" href="../kontrolle/unterricht.html">Unterricht</a><a class="btn" href="../kontrolle/rueckmeldungen.html">Rückmeldungen</a><a class="btn" href="../kontrolle/sammlung.html">Werke</a><a class="btn" href="../kontrolle/klassen.html">Klassen</a></div></div>`; }
 function verbindungenAktionen(app){ return {
   'u-trennen':()=>confirmBox('Unterricht trennen?','Dieses iPad zeigt danach wieder alles.','Trennen',()=>{ U.verb=null; U.policy=null; uSpeichern(); uWechsel(); render(); },true),
   'rm-trennen':()=>{ RM.verb=null; rmSpeichern(); toast('Rückmeldungen getrennt'); render(); },

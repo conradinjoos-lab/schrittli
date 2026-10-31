@@ -156,6 +156,8 @@ class H(BaseHTTPRequestHandler):
         p = urlparse(self.path).path
         seite = {'/': 'index.html', '/video.html': 'video.html', '/werke.html': 'werke.html', '/material.html': 'material.html', '/kontrolle.css': 'kontrolle.css', '/werkstatt.js': 'werkstatt.js'}.get(p)
         if seite: return self.send(200, (SEITEN / seite).read_bytes(), 'text/javascript; charset=utf-8' if seite.endswith('.js') else 'text/css; charset=utf-8' if seite.endswith('.css') else 'text/html; charset=utf-8')
+        if p == '/vorlagen/melden.js':  # Flagge «Fehler melden» auf allen Kontrollseiten
+            return self.send(200, (WURZEL / 'vorlagen' / 'melden.js').read_bytes(), 'text/javascript; charset=utf-8')
         if p == '/schule/index.html':  # video.html liest daraus die Material-Piktogramme
             return self.send(200, (WURZEL / 'schule' / 'index.html').read_bytes())
         m = re.fullmatch(r'/material/([A-Za-z0-9_.-]+\.(json|jpg|jpeg|png|webp|svg))', p)

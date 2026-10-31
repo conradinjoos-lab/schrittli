@@ -91,6 +91,7 @@ h1{font:600 30px/1 var(--display);margin:0}
  <main id="liste"></main>
 </div>
 <script src="werkstatt.js"></script>
+<script src="../vorlagen/melden.js" defer></script>
 <script>
 (async()=>{
 const $=s=>document.querySelector(s);
@@ -123,13 +124,14 @@ $('#filter').onclick=ev=>{const b=ev.target.closest('button');if(!b)return;filte
 $('#suche').oninput=zeichne;
 zeichne();
 /* Fehlermeldungen aus der App: oben als Liste, «erledigt» löscht sie im Worker */
-const ARTEN={video:'Video läuft nicht',bild:'Bild fehlt',stopp:'Stopp an falscher Stelle',text:'Text/Material falsch',anderes:'Anderes'};
+const ARTEN={video:'Video läuft nicht',bild:'Bild fehlt',stopp:'Stopp an falscher Stelle',text:'Text/Material falsch',mass:'Mass falsch',druck:'Druck falsch',anzeige:'Anzeige falsch',speichern:'Speichern geht nicht',anderes:'Anderes'};
+const ZEIT={dateStyle:'short',timeStyle:'short'},spaet=m=>m.erfasst&&Math.abs(new Date(m.zeit)-new Date(m.erfasst))>6e5?' · erfasst '+new Date(m.erfasst).toLocaleString('de-CH',ZEIT):'';
 W.meldungen().then(M=>{
  if(!M||!M.length)return;
- const zeile=m=>{const wo=m.video?`<a href="video.html?id=${esc(m.video)}">${esc(m.titel||m.video)}</a>${m.schritt?' · Schritt '+m.schritt:''}${m.zeit_video!=null?' · bei '+(fmt(m.zeit_video)||'0:00'):''}`:esc(m.seite||'');
+ const zeile=m=>{const wo=m.video?`<a href="video.html?id=${esc(m.video)}">${esc(m.titel||m.video)}</a>${m.schritt?' · Schritt '+m.schritt:''}${m.zeit_video!=null?' · bei '+(fmt(m.zeit_video)||'0:00'):''}`:/^\/[^/\\]/.test(m.adresse||'')?`<a href="${esc(m.adresse)}">${esc(m.titel||m.seite||m.adresse)}</a>`:esc(m.titel||m.seite||'');
   return `<div class="meldung"><div class="was"><div class="kopf">${esc(ARTEN[m.art]||m.art)} – ${wo}</div>${m.text?`<div class="wort">${esc(m.text)}</div>`:''}
-  <div class="klein">${esc(new Date(m.zeit).toLocaleString('de-CH',{dateStyle:'short',timeStyle:'short'}))} · ${esc(m.app)} · ${esc(m.geraet)} ${esc(m.fenster)}</div></div><button data-k="${esc(m.key)}">erledigt</button></div>`};
- const zeig=()=>{$('#meldungen').hidden=!M.length;$('#meldungen').innerHTML=`<h2>Meldungen aus der App<span>${M.length}</span></h2>`+M.map(zeile).join('')};
+  <div class="klein">${esc(new Date(m.zeit).toLocaleString('de-CH',ZEIT)+spaet(m))} · ${esc(m.app)} · ${esc(m.seite||'')} · ${esc(m.geraet)} ${esc(m.fenster)}${m.stand?' · '+esc(m.stand):''}</div>${m.adresse?`<div class="klein adr">${esc(m.adresse)}</div>`:''}</div><button data-k="${esc(m.key)}">erledigt</button></div>`};
+ const zeig=()=>{$('#meldungen').hidden=!M.length;$('#meldungen').innerHTML=`<h2>Meldungen<span>${M.length}</span></h2>`+M.map(zeile).join('')};
  zeig();
  $('#meldungen').onclick=async ev=>{const b=ev.target.closest('button[data-k]');if(!b)return;b.disabled=true;
   try{await W.erledigt(b.dataset.k);M=M.filter(m=>m.key!==b.dataset.k);zeig()}catch(x){b.disabled=false;b.textContent='nochmals'}};

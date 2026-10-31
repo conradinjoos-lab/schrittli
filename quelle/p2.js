@@ -120,7 +120,7 @@ const WERKZEUGE=[['maschenprobe/','🧶','Maschen-Planer','Kappe, Stirnband, Arm
   ['','✂️','Vorlagen-Generator','Formen drucken','#FBEDE4','Herz, Stern, Bär und über 100 weitere Formen – Grösse in cm eingeben, ausdrucken.',''],
   ['einfrieren/','❄️','Abpausen','Bild einfrieren','#EAF3F8','Bild aufs iPad holen, gross ziehen, einfrieren, Papier drauflegen und abpausen. Nichts einrichten, das Bild bleibt auf dem Gerät.',''],
   ['klasse/','⏱️','Klassen-Werkzeuge','Timer, Aufräumen, Lärmampel','#FFF1E6','Arbeitszeit-Timer, Aufräum-Countdown und Lärmampel – gross für den Beamer.','']];   // Pfad unter vorlagen/, Symbol, Titel, Kurzzeile (Kachel), Farbe (Kachel), Beschreibung (Liste), Raum (hand, werk, leer = beide)
-const genKarte=([pf,sym,t,,,txt])=>`<a class="lehrer-gen" href="${VORL_BASE}${pf}"${VL_ZIEL}><span class="sym" aria-hidden="true">${sym}</span><span class="grow"><b>${t}</b><br><span class="small">${txt}</span></span><span aria-hidden="true">→</span></a>`;
+const genKarte=([pf,sym,t])=>`<a class="lehrer-gen" href="${VORL_BASE}${pf}"${VL_ZIEL}><span class="sym" aria-hidden="true">${sym}</span><span class="grow"><b>${t}</b></span><span aria-hidden="true">→</span></a>`;
 const genKarten=()=>[['hand','Handarbeitszimmer','figuren/fila-faden'],['werk','Werkraum','figuren/bibo-holz'],['','Beide Räume','']].map(([r,name,bild])=>`<h2 class="gen-h2">${bild?`<img src="${GRAFIK}${bild}.webp" alt="" onerror="this.remove()">`:'🧰'}${name}</h2>${WERKZEUGE.filter(w=>w[6]===r).map(genKarte).join('')}`).join('');   // Liste auf «Werkzeuge» und Lehrer-Ansicht, nach Raum
 const werkzeugKacheln=r=>`<h2 class="v3-h2">Werkzeuge</h2><div class="v3-themen">${WERKZEUGE.filter(w=>w[6]===r.id||!w[6]).map(([pf,sym,t,kurz,farbe])=>`<a class="v3-kachel werkzeug" href="${VORL_BASE}${pf}"${VL_ZIEL}><span class="bild" style="background:${farbe}" aria-hidden="true">${sym}</span><b>${t}</b><span class="v3-zeile"><span class="v3-meta">${kurz}</span></span></a>`).join('')}</div>`;   // eigene Kacheln unter den Themen (Raum-Seite): die des Raums, dann die für beide
 const v3Fuss=(mitWerkzeuge=true)=>`<div class="v3-fuss">${mitWerkzeuge?'<button class="v3-werkzeuge" data-act="werkzeuge">🧰 Werkzeuge</button>':''}${SCHULE?'<button class="v3-link" data-act="lehrer">Für Lehrpersonen</button>':''}</div>`;   // unten auf Raum, Start und Thema
@@ -219,38 +219,57 @@ function stopListening(){ if(rec){ try{ rec.onend=null; rec.stop(); }catch(e){} 
 
 /* ============================== UI-Helfer ============================== */
 function toast(msg,ms=2200){ const t=document.createElement('div'); t.className='toast'; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),ms); }
-function modal(html,actions={},cls=''){ const m=document.createElement('div'); m.className='modal-bg'; if(/kid/.test(cls)&&schriftNormal()) cls+=' schrift-normal'; m.innerHTML=`<div class="modal ${cls}">${html}</div>`; document.body.appendChild(m); const close=()=>m.remove(); m.addEventListener('click',e=>{ if(e.target===m){close();return;} const b=e.target.closest('[data-act],[data-close]'); if(!b) return; if(b.hasAttribute('data-close')){close();return;} const fn=actions[b.dataset.act]; if(fn) fn(b,close,m); }); return close; }
+const FOKUS='a[href],button:not([disabled]),input:not([disabled]):not([type=hidden]),select:not([disabled]),textarea:not([disabled]),[tabindex="0"]';
+const fokusListe=box=>$$(FOKUS,box).filter(el=>el.getClientRects().length&&!(el.type==='radio'&&!el.checked&&$(`input[type=radio][name="${el.name}"]:checked`,box)));
+/* Fenster: Fokus hinein ohne Tastatur auf dem iPad (Textfelder werden übersprungen), beim Schliessen zurück zum Auslöser. Tab und Escape: siehe unten. */
+function modal(html,actions={},cls=''){ const vorher=document.activeElement, m=document.createElement('div'); m.className='modal-bg'; if(/kid/.test(cls)&&schriftNormal()) cls+=' schrift-normal'; m.innerHTML=`<div class="modal ${cls}" role="dialog" aria-modal="true" tabindex="-1">${html}</div>`; document.body.appendChild(m);
+  const box=m.firstElementChild, titel=$('h1,h2,h3',box); if(titel) box.setAttribute('aria-label',titel.textContent.trim().slice(0,80));
+  (fokusListe(box).find(el=>el.tagName!=='TEXTAREA'&&!(el.tagName==='INPUT'&&el.type!=='radio'&&el.type!=='checkbox'))||box).focus({preventScroll:true});
+  const close=()=>{ const da=m.isConnected; m.remove(); if(da&&vorher&&vorher.isConnected&&vorher!==document.body&&!$('.modal-bg')) try{ vorher.focus({preventScroll:true}); }catch(e){} }; m.addEventListener('click',e=>{ if(e.target===m){close();return;} const b=e.target.closest('[data-act],[data-close]'); if(!b) return; if(b.hasAttribute('data-close')){close();return;} const fn=actions[b.dataset.act]; if(fn) fn(b,close,m); }); return close; }
+document.addEventListener('keydown',e=>{ if(e.key!=='Tab'&&e.key!=='Escape') return; const m=$$('.modal-bg,.ww').pop(); if(!m) return; const fenster=m.classList.contains('modal-bg');
+  if(e.key==='Escape'){ e.preventDefault(); e.stopPropagation(); if(fenster) m.click(); else { const z=$('[data-act=zurueck],[data-act=zu]',m); if(z) z.click(); } return; }   // wie daneben tippen: nameUndKlasse behält so das Foto
+  const fok=fokusListe(m); if(!fenster&&$('.fm-knopf')) fok.push($('.fm-knopf')); const i=fok.indexOf(document.activeElement); if(!fok.length){ e.preventDefault(); return; }
+  if(i<0){ e.preventDefault(); fok[0].focus(); } else if(e.shiftKey&&i===0){ e.preventDefault(); fok[fok.length-1].focus(); } else if(!e.shiftKey&&i===fok.length-1){ e.preventDefault(); fok[0].focus(); } },true);
 function confirmBox(title,text,okLabel,onOk,danger){ modal(`<h2>${esc(title)}</h2><p>${esc(text)}</p><div class="row" style="justify-content:flex-end"><button class="btn ghost" data-close>Abbrechen</button><button class="btn ${danger?'danger':'primary'}" data-act="ok">${esc(okLabel)}</button></div>`,{ok:(b,close)=>{close();onOk();}}); }
 function confetti(){ if(reduced) return; const c=$('#confetti'),ctx=c.getContext('2d'); c.width=innerWidth; c.height=innerHeight; c.style.display='block'; const ps=[]; for(let i=0;i<110;i++) ps.push({x:innerWidth/2,y:innerHeight*.45,vx:(Math.random()-.5)*16,vy:-Math.random()*13-4,r:Math.random()*7+4,c:['#F3B51B','#E8554E','#3BB273','#4C6EF5','#9B5DE5','#F28C28'][i%6],a:Math.random()*6,s:Math.random()*.2+.05}); const t0=performance.now(); (function f(t){ ctx.clearRect(0,0,c.width,c.height); ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.35;p.vx*=.99;p.a+=p.s;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.a);ctx.fillStyle=p.c;ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*.6);ctx.restore();}); if(t-t0<2200) requestAnimationFrame(f); else{ c.style.display='none'; } })(t0); }
 function starsHtml(pid,sm){ const st=starState(pid); const total=S.settings.starsPerDay+st.bonus, left=total-st.used; let h=`<div class="stars${sm?' sm':''}" aria-label="${left} von ${total} Sternen">`; for(let i=0;i<total;i++) h+=`<span class="st${i<left?' on':''}">${ico('star')}</span>`; return h+'</div>'; }
 function loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=rej; document.head.appendChild(s); }); }
 function kidModal(html,actions={}){ return modal(html,actions,'kid'); }
 /* ============================== Fehler melden ============================== */
-/* Knopf unten links auf jeder Seite. Die Meldung geht mit Ort (Seite, Video, Schritt, Zeit) an den Worker werkzeug/anmelden (/melden)
-   und erscheint in der Online-Kontrolle. Keine Namen, kein Konto, nichts aus dem Profil. */
-const MELDEN='https://schrittli-anmelden.conradinjoos.workers.dev/melden';
+/* Knopf auf jeder Seite, auch über Fenstern und in der Kachelwahl. Die Meldung geht mit Ort (Seite, Video, Schritt, Zeit) und Stand an den Worker werkzeug/anmelden (/melden)
+   und erscheint in der Online-Kontrolle. Keine Namen, kein Konto, nichts aus dem Profil. Offline bleibt sie in «schrittli.melden.warte» (dieselbe Warteschlange wie vorlagen/melden.js). */
+const MELDEN='https://schrittli-anmelden.conradinjoos.workers.dev/melden', FM_WARTE='schrittli.melden.warte', APP_STAND='__STAND__';   // __STAND__ ersetzt quelle/bauen.sh
 let ORT=null;   // vom aktuellen Screen gesetzt: ()=>({video,titel,schritt})
 function fmGeraet(){ const u=navigator.userAgent; const os=/iPad/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1)?'iPad':/iPhone/.test(u)?'iPhone':/Android/.test(u)?'Android':/CrOS/.test(u)?'Chromebook':/Windows/.test(u)?'Windows':/Mac/.test(u)?'Mac':'anderes'; const br=/Edg\//.test(u)?'Edge':/Firefox\//.test(u)?'Firefox':/Chrome\//.test(u)?'Chrome':/Safari\//.test(u)?'Safari':''; return (os+' '+br).trim(); }
+function fmAdresse(){ const u=new URL(location.href); for(const k of [...u.searchParams.keys()]) if(/token|schein|schluessel|code|key|name/i.test(k)) u.searchParams.delete(k); return (u.pathname+u.search+u.hash).replace(/[0-9a-f]{32,}/gi,'…'); }
 function fmKontext(){ const k={app:SCHULE?'Schule':'Familie',seite:view.name,video:'',titel:'',schritt:0,zeit:null};
   try{ if(P&&P.v){ k.video=P.v.id; k.titel=P.v.title||''; k.schritt=P.steps.length?P.idx+1:0; k.zeit=Math.round(P.api.time()); } else if(ORT){ Object.assign(k,ORT()); }
     else { const p=view.params||{}; const v=p.v||p.video||null; if(v&&v.id){ k.video=v.id; k.titel=v.title||''; } else if(p.areaId||p.id) k.titel=String(p.areaId||p.id); } }catch(e){}
-  return {...k,adresse:location.pathname+location.hash,geraet:fmGeraet(),fenster:innerWidth+'×'+innerHeight}; }
-const FM_ARTEN=[['video','Video läuft nicht'],['stopp','Stopp an falscher Stelle'],['text','Text oder Material falsch'],['anderes','Etwas anderes']];
-const FM_BILDER=[['bild','Bild fehlt'],['text','Text oder Material falsch'],['anderes','Etwas anderes']];
-function fehlerMelden(){ try{ if(P&&P.api) P.api.pause(); }catch(e){}
-  const {bilder,...k}=fmKontext();
-  modal(`<h2>Fehler melden</h2><div class="fm-arten" role="radiogroup">${(bilder?FM_BILDER:FM_ARTEN).map(([w,t])=>`<label><input type="radio" name="fm-art" value="${w}"> ${esc(t)}</label>`).join('')}</div>
-    <textarea class="fm-text" rows="3" maxlength="600" placeholder="Was ist passiert?"></textarea>
+  return {...k,adresse:fmAdresse(),geraet:fmGeraet(),fenster:innerWidth+'×'+innerHeight,stand:APP_STAND+(contentInfo&&contentInfo.stand?' · Inhalt '+contentInfo.stand:'')}; }
+const fmLies=()=>{ try{ const l=JSON.parse(localStorage.getItem(FM_WARTE)||'[]'); return Array.isArray(l)?l:[]; }catch(e){ return []; } };
+const fmMerke=l=>{ try{ if(l.length) localStorage.setItem(FM_WARTE,JSON.stringify(l.slice(-20))); else localStorage.removeItem(FM_WARTE); }catch(e){} };
+async function fmSchick(m){ if(navigator.onLine===false) return 'offline'; const c=new AbortController(), t=setTimeout(()=>c.abort(),8000);
+  try{ const r=await fetch(MELDEN,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(m),signal:c.signal}); return r.ok?'ok':r.status===429?'viele':r.status>=500?'offline':'nein'; }
+  catch(e){ return 'offline'; } finally{ clearTimeout(t); } }
+let fmLaeuft=false;
+async function fmNachsenden(){ if(fmLaeuft) return; fmLaeuft=true;   // bleibt im Speicher, bis der Worker sie angenommen hat
+  try{ for(const m of fmLies()){ const e=await fmSchick(m); if(e==='viele'||e==='offline') break; fmMerke(fmLies().filter(x=>x.erfasst!==m.erfasst)); } } finally{ fmLaeuft=false; } }
+const FM_ARTEN=[['video','Video läuft nicht'],['stopp','Stopp falsch'],['text','Text falsch'],['anderes','Etwas anderes']];
+const FM_BILDER=[['bild','Bild fehlt'],['text','Text falsch'],['anderes','Etwas anderes']];
+const FM_SONST=[['anzeige','Anzeige falsch'],['bild','Bild fehlt'],['text','Text falsch'],['anderes','Etwas anderes']];
+function fehlerMelden(){ if($('.modal .fm-arten')) return; try{ if(P&&P.api) P.api.pause(); }catch(e){}
+  const {bilder,...k}=fmKontext(), arten=bilder?FM_BILDER:P&&P.v?FM_ARTEN:FM_SONST;
+  modal(`<h2>Fehler melden</h2><div class="fm-arten" role="radiogroup" aria-label="Art">${arten.map(([w,t])=>`<label><input type="radio" name="fm-art" value="${w}"> ${esc(t)}</label>`).join('')}</div>
+    <textarea class="fm-text" rows="3" maxlength="600" aria-label="Text" placeholder="✎"></textarea>
     <p class="fm-fehler" hidden></p>
     <div class="row" style="justify-content:flex-end"><button class="btn ghost" data-close>Abbrechen</button><button class="btn primary" data-act="senden" disabled>Senden</button></div>`,
-  {senden:async(b,close,m)=>{ const f=$('.fm-fehler',m); b.disabled=true; b.textContent='Sende …'; f.hidden=true;
-    const art=($('input[name=fm-art]:checked',m)||{}).value||'anderes', text=$('.fm-text',m).value.trim().slice(0,600);
-    try{ const r=await fetch(MELDEN,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({art,text,...k})}); if(!r.ok) throw new Error(r.status===429?'⚠ Zu viele Meldungen':'⚠ Fehler '+r.status);
-      close(); toast('✓ Gesendet. Danke!',2600); }
-    catch(x){ f.textContent=x.message&&/^⚠/.test(x.message)?x.message:'⚠ Offline'; f.hidden=false; b.disabled=false; b.textContent='Nochmals senden'; } }},'fm');
-  setTimeout(()=>{ const m=$('.fm'); if(!m) return; const b=$('[data-act=senden]',m), t=$('.fm-text',m); m.addEventListener('input',()=>{ b.disabled=!$('input[name=fm-art]:checked',m)&&!t.value.trim(); });
-    if(!matchMedia('(pointer:coarse)').matches) t.focus(); },50); }
-function fmKnopf(){ const b=document.createElement('button'); b.className='fm-knopf'; b.type='button'; b.title='Fehler melden'; b.setAttribute('aria-label','Fehler melden'); b.innerHTML=ico('flag'); b.onclick=fehlerMelden; document.body.appendChild(b); }
+  {senden:async(b,close,m)=>{ const f=$('.fm-fehler',m); b.disabled=true; f.hidden=true;
+    const meldung={art:($('input[name=fm-art]:checked',m)||{}).value||'anderes',text:$('.fm-text',m).value.trim().slice(0,600),...k,erfasst:new Date().toISOString()}, e=await fmSchick(meldung);
+    if(e==='nein'){ f.textContent='⚠ Fehler'; f.hidden=false; b.disabled=false; return; }
+    if(e!=='ok') fmMerke(fmLies().concat(meldung));
+    const box=m.firstElementChild; box.innerHTML=`<p class="fm-ende${e==='ok'?' gut':''}">${e==='ok'?'✓':e==='viele'?'⚠ Zu viele':'⚠ Offline'}</p>`; box.focus(); setTimeout(close,1400); }},'fm');
+  const m=$$('.modal-bg').pop(), b=$('[data-act=senden]',m), t=$('.fm-text',m); m.addEventListener('input',()=>{ b.disabled=!$('input[name=fm-art]:checked',m)&&!t.value.trim(); }); }
+function fmKnopf(){ const b=document.createElement('button'); b.className='fm-knopf'; b.type='button'; b.title='Fehler melden'; b.setAttribute('aria-label','Fehler melden'); b.innerHTML=ico('flag'); b.onclick=fehlerMelden; document.body.appendChild(b); addEventListener('online',fmNachsenden); fmNachsenden(); }
 
 /* ============================== Router ============================== */
 const SCREENS={}; let view={name:'boot',params:{}}; let parentOpen=false;
@@ -258,7 +277,7 @@ function go(name,params={}){ if(SCHULE&&(name==='parent'||name==='firstrun'||nam
 function leaveScreen(){ if(P){ P._fsLeaving=true; P.destroy(); P=null; } fsExit(); BEAMER.an=false; document.body.classList.remove('beamer'); if(ED&&ED.api){ ED.api.destroy(); ED.api=null; } stopListening(); try{ speechSynthesis.cancel(); }catch(e){} }
 function render(){ const app=$('#app'); app.innerHTML=''; app.onclick=null; app.oninput=null; app.onchange=null; (SCREENS[view.name]||SCREENS.home)(app,view.params); }
 function wire(app,actions){ app.onclick=e=>{ const b=e.target.closest('[data-act]'); if(!b||!app.contains(b)) return; const fn=actions[b.dataset.act]; if(fn){ e.preventDefault(); fn(b,e); } }; }
-function kopf(title,{back,right='',sub=''}={}){ return `<div class="inner kopf" style="padding-left:max(16px,env(safe-area-inset-left,0px))">${back?`<a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a>`:''}<div class="schild"><h1>${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:''}</div><div class="kopf-rechts">${right}${kindChip('schild-btn wer-chip')}</div></div>`; }
+function kopf(title,{back,right='',sub=''}={}){ return `<div class="inner kopf" style="padding-left:max(16px,env(safe-area-inset-left,0px))">${back?`<button type="button" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</button>`:''}<div class="schild"><h1>${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:''}</div><div class="kopf-rechts">${right}${kindChip('schild-btn wer-chip')}</div></div>`; }
 function bank(opts={}){ return `<div class="bank"><div class="inner deko-reihe"><span class="grow"></span></div><div class="platte"></div><div class="front"></div></div>`; }
 
 /* ============================== Inhaltsdatei & Start ============================== */
@@ -414,7 +433,7 @@ SCREENS.home=app=>{
   const spass=S.settings.spass?S.areas.filter(a=>a.kind==='spass'&&videosIn(a.id).length):[], lern=[...RAEUME.filter(r=>raumThemen(r).length).map(r=>({id:'raum:'+r.id,name:r.id==='hand'?'Handarbeit':'Werkraum',ding:r.id==='hand'?'wolle':'schere',raum:r})),...S.areas.filter(a=>a.kind!=='spass'&&!THEMA_ID.has(a.id)&&videosIn(a.id).length)];
   app.innerHTML=`<div class="${kidClass()}">${girlande(n)}${fenster(n)}
     <div class="inner kopf mitfenster">
-      <div class="schild hallo${S.profiles.length>1?' tipp':''}" data-act="who" role="button"><h1>Hallo ${esc(p.name)}!</h1><div class="sub">${S.profiles.length>1?'Nicht du? Tipp hier':'Was nimmst du heute?'}</div></div>
+      <div class="schild hallo${S.profiles.length>1?' tipp':''}"><h1>${S.profiles.length>1?`<button type="button" data-act="who">Hallo ${esc(p.name)}!</button>`:`Hallo ${esc(p.name)}!`}</h1></div>
       <div class="kopf-rechts">${S.settings.spass?glasSterne(p.id):''}<button class="werke-btn" data-act="gallery"><span class="fotos"><i></i><i></i></span>Meine Werke${newFb?`<span class="neu">${newFb}</span>`:''}</button><button class="lock-btn" data-act="parent" aria-label="Elternbereich">${ico('lock')}</button></div>
     </div>
     ${spass.length?`<div class="inner regal-wrap"><span class="zettel links"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="color:#F2B705"><path d="${ICONS.star}"/></svg>Kostet einen Stern</span><div class="regal">${spass.map(a=>dingHtml(a,'spass')).join('')}</div></div>`:''}
@@ -534,10 +553,10 @@ SCREENS.player=(app,{videoId,school})=>{
   const steps=buildVideoSteps(v); const pr=school?{pos:0,step:0,done:false,slow:false}:prog(v.id);
   if(!school){ S.settings.zuletzt=v.id; save(); }
   app.innerHTML=`<div class="${kidClass('pl'+(S.settings.kino&&!school?' kino':''))}">${girlande(n)}
-    <div class="inner kopf pl-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><a href="#" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</a><div class="schild"><h1>${esc(v.title)}</h1></div><div class="kopf-rechts">${SCHULE?`<button type="button" class="beamer-btn" data-act="beamer" aria-pressed="false" title="Beamer-Ansicht für die ganze Klasse">📽️<span>Beamer</span></button>`:''}<button type="button" class="fm-pill" data-act="melden" title="Fehler melden">${ico('flag')}<span>Fehler melden</span></button><span class="zettel" id="zettel"></span>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}${kindChip('schild-btn wer-chip')}</div></div>
+    <div class="inner kopf pl-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><button type="button" class="schild-btn" data-act="back" aria-label="Zurück">${ico('back')}</button><div class="schild"><h1>${esc(v.title)}</h1></div><div class="kopf-rechts">${SCHULE?`<button type="button" class="beamer-btn" data-act="beamer" aria-pressed="false" title="Beamer-Ansicht für die ganze Klasse">📽️<span>Beamer</span></button>`:''}<button type="button" class="fm-pill" data-act="melden" title="Fehler melden">${ico('flag')}<span>Fehler melden</span></button><span class="zettel" id="zettel"></span>${p&&a&&a.kind==='spass'?glasSterne(p.id,true):''}${kindChip('schild-btn wer-chip')}</div></div>
     ${fsHinweisHtml(v)}
     <div class="inner panes">
-      <div class="pane"><div class="plabel"><i class="punkt" style="background:#4C6EF5"></i>Schau zu</div><div class="video-box"><div class="host" id="host"></div><div class="shield" id="shield" data-act="shield"></div><div class="overlay" id="overlay"></div><span class="modebadge" id="modebadge" hidden></span><span class="marke" id="marke" hidden><img src="${GRAFIK}figuren/logo.webp" alt=""><b>Stop <i>&amp;</i> Mach</b></span></div><div class="fuss"></div></div>
+      <div class="pane"><div class="plabel"><i class="punkt" style="background:#4C6EF5"></i>Schau zu</div><div class="video-box"><div class="host" id="host"></div><div class="shield" id="shield" data-act="shield"></div><div class="overlay" id="overlay"></div><span class="modebadge" id="modebadge" hidden></span><span class="marke" id="marke" hidden><img src="${GRAFIK}figuren/logo.webp" alt=""><b>Schritt für Schritt</b></span></div><div class="fuss"></div></div>
       <div class="pane"><div class="plabel"><i class="punkt" style="background:#E8554E"></i><span id="zettel2">Die Schritte</span></div><div class="schritte" id="schritte"></div></div>
     </div>
     <div class="pl-bank"><div class="inner"><div class="steuer"><div class="controls" id="controls"></div><div class="kino-step" id="kinostep" data-act="liste" role="button"></div><div class="auftrag" id="task"></div></div></div></div>
@@ -690,11 +709,11 @@ function afterWork(pr,star){ confetti(); toast(star?'Super! Du hast einen Stern 
 SCREENS.paint=(app,pr)=>{
   const PAL=['#2B2320','#E8554E','#F28C28','#F2C12E','#3BB273','#2A9DB8','#4C6EF5','#9B5DE5','#8B5A2B','#F5A3C7'];
   const SIZES=[4,10,22]; let color=PAL[0], size=10, eraser=false; const undo=[]; let drawing=false; const n=abend();
-  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}<div class="inner kopf tool-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><a href="#" class="schild-btn" data-act="cancel" aria-label="Abbrechen">${ico('x')}</a><div class="schild"><h1>Malen</h1></div><div class="kopf-rechts"><button class="schild-btn" data-act="undo" aria-label="Rückgängig">${ico('undo')}</button><button class="kbtn primary" data-act="keep" style="min-height:54px;font-size:19px">${ico('check')} Behalten</button></div></div>
+  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}<div class="inner kopf tool-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><button type="button" class="schild-btn" data-act="cancel" aria-label="Abbrechen">${ico('x')}</button><div class="schild"><h1>Malen</h1></div><div class="kopf-rechts"><button class="schild-btn" data-act="undo" aria-label="Rückgängig">${ico('undo')}</button><button class="kbtn primary" data-act="keep" style="min-height:54px;font-size:19px">${ico('check')} Behalten</button></div></div>
     <div class="inner" style="display:flex;flex-direction:column;gap:10px;flex:1;margin-top:12px"><div class="canvas-wrap" id="wrap"><canvas id="pc"></canvas></div>
     <div class="palette">${PAL.map(c=>`<button class="sw${c===color?' on':''}" data-act="color" data-v="${c}" style="background:${c}" aria-label="Farbe"></button>`).join('')}<span class="sep"></span>${SIZES.map(s=>`<button class="sz${s===size?' on':''}" data-act="size" data-v="${s}" aria-label="Pinsel ${s}"><i style="width:${s+6}px;height:${s+6}px"></i></button>`).join('')}<span class="sep"></span><button class="sz" id="eraser" data-act="eraser" aria-label="Radiergummi" style="font-size:22px">🧽</button></div></div></div>`;
   const cv=$('#pc'), wrap=$('#wrap'), ctx=cv.getContext('2d'); let dpr=Math.min(2,devicePixelRatio||1);
-  function fit(){ const r=wrap.getBoundingClientRect(); const snap=cv.width?ctx.getImageData(0,0,cv.width,cv.height):null; cv.width=Math.round(r.width*dpr); cv.height=Math.round(r.height*dpr); cv.style.width=r.width+'px'; cv.style.height=r.height+'px'; ctx.setTransform(1,0,0,1,0,0); ctx.fillStyle='#fff'; ctx.fillRect(0,0,cv.width,cv.height); if(snap) ctx.putImageData(snap,0,0); ctx.setTransform(dpr,0,0,dpr,0,0); ctx.lineCap='round'; ctx.lineJoin='round'; }
+  function fit(){ const r={width:wrap.clientWidth,height:wrap.clientHeight}; const snap=cv.width?ctx.getImageData(0,0,cv.width,cv.height):null; cv.width=Math.round(r.width*dpr); cv.height=Math.round(r.height*dpr); cv.style.width=r.width+'px'; cv.style.height=r.height+'px'; ctx.setTransform(1,0,0,1,0,0); ctx.fillStyle='#fff'; ctx.fillRect(0,0,cv.width,cv.height); if(snap) ctx.putImageData(snap,0,0); ctx.setTransform(dpr,0,0,dpr,0,0); ctx.lineCap='round'; ctx.lineJoin='round'; }
   fit(); const ro=new ResizeObserver(()=>{ if(!drawing) fit(); }); ro.observe(wrap);
   const pos=e=>{ const r=cv.getBoundingClientRect(); return [e.clientX-r.left,e.clientY-r.top]; };
   cv.addEventListener('pointerdown',e=>{ e.preventDefault(); cv.setPointerCapture(e.pointerId); if(undo.length>25) undo.shift(); undo.push(ctx.getImageData(0,0,cv.width,cv.height)); drawing=true; ctx.strokeStyle=eraser?'#fff':color; ctx.lineWidth=eraser?size*3:size; const [x,y]=pos(e); ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+.01,y); ctx.stroke(); });
@@ -713,7 +732,7 @@ SCREENS.paint=(app,pr)=>{
 /* ============================== Kind: Aufnehmen ============================== */
 SCREENS.record=(app,pr)=>{
   let state='idle', mr=null, chunks=[], blob=null, url=null, stream=null, t0=0, timer=null; const n=abend();
-  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}<div class="inner kopf tool-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><a href="#" class="schild-btn" data-act="cancel" aria-label="Abbrechen">${ico('x')}</a><div class="schild"><h1>Aufnehmen</h1></div><div class="kopf-rechts"></div></div><div class="inner" style="margin-top:20px"><div class="papier" id="rec" style="align-items:center;gap:22px"></div></div>${bank()}</div>`;
+  app.innerHTML=`<div class="${kidClass()}">${girlande(n)}<div class="inner kopf tool-top" style="padding-left:max(16px,env(safe-area-inset-left,0px))"><button type="button" class="schild-btn" data-act="cancel" aria-label="Abbrechen">${ico('x')}</button><div class="schild"><h1>Aufnehmen</h1></div><div class="kopf-rechts"></div></div><div class="inner" style="margin-top:20px"><div class="papier" id="rec" style="align-items:center;gap:22px"></div></div>${bank()}</div>`;
   const ui=()=>{ const r=$('#rec'); if(!r) return;
     if(state==='idle') r.innerHTML=`<p style="font-size:22px;text-align:center">Drück den roten Knopf und sprich.</p><button class="recbtn" data-act="start" aria-label="Aufnahme starten">${ico('mic')}</button>`;
     else if(state==='rec') r.innerHTML=`<div class="timer" id="tm">0:00</div><button class="recbtn on" data-act="stop" aria-label="Aufnahme stoppen"><span style="display:block;width:48px;height:48px;background:#fff;border-radius:8px"></span></button><p style="color:var(--wmuted)">Nochmal drücken zum Stoppen</p>`;
@@ -1211,14 +1230,14 @@ function werKacheln(el,gewaehlt,zu){ const ks=KL.klassen, kd=kind(); let k=ks.le
 function werWahl(fertig){ const el=wwAuf(); werKacheln(el,()=>{ el.remove(); if(view.name==='home') render(); fertig(); },()=>el.remove()); }
 SCREENS.wer=app=>{ const weiter=()=>go(S.settings.klasse?'home':'klasse'); if(!KL.klassen.length){ weiter(); return; } KL.gefragt=true; werKacheln(app,weiter,weiter); };
 function verbindungenHtml(){ if(!SCHULE) return '';
-  const z=(titel,name,act,hinweis)=>`<div class="verb-zeile"><b>${titel}</b><span class="${name?'an':''}">${name?'Verbunden mit «'+esc(name)+'»':hinweis}</span>${name?`<button class="btn sm" data-act="${act}">Trennen</button>`:''}</div>`;
+  const z=(titel,name,act)=>`<div class="verb-zeile"><b>${titel}</b><span class="${name?'an':''}">${name?'✓ '+esc(name):'–'}</span>${name?`<button class="btn sm" data-act="${act}">Trennen</button>`:''}</div>`;
   return `<div class="panel verb"><h2>Verbindungen dieses iPads</h2>
-    ${z('Unterricht',U.verb&&(U.verb.name||'Gruppe'),'u-trennen','Die Lehrperson gibt Aufgaben für die iPads frei.')}
-    ${z('Rückmeldungen',RM.verb&&RM.verb.name,'rm-trennen','Die Kinder sagen nach dem Werk, wie es war.')}
-    ${z('Unsere Werke',SW.verb&&SW.verb.name,'sw-trennen','Fotos aller iPads auf einer Korkwand.')}
-    <div class="verb-zeile"><b>Wer bist du?</b><span class="${KL.klassen.length?'an':''}">${KL.klassen.length?`${KL.klassen.length} ${KL.klassen.length===1?'Klasse':'Klassen'} · ${KL.klassen.reduce((n,k)=>n+k.namen.length,0)} Vornamen – die Kinder tippen beim Start ihren Namen an.${kind()?' Gerade dran: '+esc(kind().name):''}`:klToken()?'Noch keine Vornamen – trage sie in der Kontrolle unter «Klassen» ein.':'Kommt mit einer der Verbindungen oben mit.'}</span>${klToken()?`<button class="btn sm" data-act="kl-holen">Neu laden</button>`:''}</div>
-    <div class="row"><input class="inp" id="verb-link" placeholder="Link aus der Kontrolle einfügen" autocomplete="off" spellcheck="false" style="flex:1;min-width:200px"><button class="btn primary" data-act="verbinden">Verbinden</button></div>
-    <p class="muted small" style="margin:0">Die Links erstellst du in der Online-Kontrolle: <a href="../kontrolle/unterricht.html">Unterricht</a> · <a href="../kontrolle/rueckmeldungen.html">Rückmeldungen</a> · <a href="../kontrolle/sammlung.html">Werke</a>. Einmal auf jedem iPad öffnen oder hier einfügen. Die Vornamen pflegst du unter <a href="../kontrolle/klassen.html">Klassen</a>.</p></div>`; }
+    ${z('Unterricht',U.verb&&(U.verb.name||'Gruppe'),'u-trennen')}
+    ${z('Rückmeldungen',RM.verb&&RM.verb.name,'rm-trennen')}
+    ${z('Unsere Werke',SW.verb&&SW.verb.name,'sw-trennen')}
+    <div class="verb-zeile"><b>Klassen</b><span class="${KL.klassen.length?'an':''}">${KL.klassen.length?`✓ ${KL.klassen.length} ${KL.klassen.length===1?'Klasse':'Klassen'} · ${KL.klassen.reduce((n,k)=>n+k.namen.length,0)} Vornamen${kind()?' · '+esc(kind().name):''}`:'–'}</span>${klToken()?`<button class="btn sm" data-act="kl-holen">Neu laden</button>`:''}</div>
+    <div class="row"><input class="inp" id="verb-link" placeholder="Link" autocomplete="off" spellcheck="false" style="flex:1;min-width:200px"><button class="btn primary" data-act="verbinden">Verbinden</button></div>
+    <div class="row verb-links"><a class="btn" href="../kontrolle/unterricht.html">Unterricht</a><a class="btn" href="../kontrolle/rueckmeldungen.html">Rückmeldungen</a><a class="btn" href="../kontrolle/sammlung.html">Werke</a><a class="btn" href="../kontrolle/klassen.html">Klassen</a></div></div>`; }
 function verbindungenAktionen(app){ return {
   'u-trennen':()=>confirmBox('Unterricht trennen?','Dieses iPad zeigt danach wieder alles.','Trennen',()=>{ U.verb=null; U.policy=null; uSpeichern(); uWechsel(); render(); },true),
   'rm-trennen':()=>{ RM.verb=null; rmSpeichern(); toast('Rückmeldungen getrennt'); render(); },

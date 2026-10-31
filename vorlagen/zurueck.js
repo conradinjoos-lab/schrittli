@@ -1,6 +1,7 @@
 // «← Zurück zur App» auf den Vorlagen-Seiten (Links mit data-zur-app). Ziel ist die Version, aus der man kommt:
 // Schule (schule/) oder Familie (Startseite). Die App merkt sich ihre Version in localStorage «schrittli.app».
 (function(){
+  if(document.currentScript){ const m=document.createElement('script'); m.src=document.currentScript.src.replace(/zurueck\.js.*$/,'melden.js'); document.head.appendChild(m); }   // Flagge «Fehler melden» auf jeder Vorlage
   const wurzel=location.pathname.replace(/\/vorlagen\/.*$/,'/');
   let von='';
   try{ const r=new URL(document.referrer); if(r.origin===location.origin){ if(r.pathname.startsWith(wurzel+'schule/')) von='schule'; else if(r.pathname===wurzel||r.pathname===wurzel+'index.html') von='familie'; } }catch(e){}

@@ -62,6 +62,16 @@ Die Links werden nur einmal angezeigt (das Token steht nur im Link); eine verlor
 
 Gespeichert wird automatisch 1.5 s nach jeder Änderung nach `entwurf/<ID>/video.json` («gespeichert HH:MM» im Kopf), `Ctrl+Z` macht rückgängig, Löschen eines Schritts lässt sich 6 s lang per Knopf zurücknehmen. Ohne Entwurf zeigt die Seite den bestehenden Eintrag aus schule.json oder eine leere Vorlage – so lassen sich auch alte Einträge nachjustieren (vorher `holen.py` für das Video laufen lassen).
 
+## Prüfen vor dem Veröffentlichen
+
+`NODE_PATH="C:/Grok Code/Steine-App/node_modules" node werkzeug/ablauf-test/start.cjs [Wort …]` liefert das Repo über einen eigenen kleinen Server aus und spielt die Abläufe in Chrome durch, in iPad-Grösse mit Touch. Ausgabe OK oder FEHLER je Ablauf, Exit-Code 1 sobald einer scheitert. Mit Wörtern laufen nur die passenden Abläufe, zum Beispiel `start.cjs Zugang`. Keine Anfrage verlässt den Rechner: Melden landet in `k.meldungen`, YouTube ist eine Attrappe.
+
+Neue Abläufe sind einzelne Dateien im selben Ordner: `NN-name.ablauf.cjs` exportiert `{name, lauf(t)}` oder eine Liste davon, die Dateien laufen nach Namen sortiert. Das Hilfsobjekt `t` steht in `start.cjs` unter `hilfen()`: `t.kontext({breite, hoehe, speicher, netz, touch})`, `k.seite(adresse)`, `t.app(k, 'schule'|'familie')`, `t.pruefe`, `t.keineFehler`, `t.flagge`, `t.pruefeFlagge`. Eine neue HTML-Seite gehört in die Liste in `20-melden-seiten.ablauf.cjs`, sonst scheitert dieser Ablauf.
+
+`python werkzeug/inhalte-pruefen.py [--alles]` zeigt fehlende Vorschauen, unbekannte Material-IDs, fehlende Schwierigkeit und unplausible Schrittfolgen in `schule/schule.json`. Das Skript ändert nichts und endet immer mit Exit-Code 0.
+
+**Stand einer Meldung:** `quelle/bauen.sh` schreibt Baudatum und kurzen Commit in beide App-Ausgaben und in `vorlagen/melden.js`. Der Commit ist der Stand beim Bauen, also der Vorgänger des Commits, der das Gebaute enthält. Dazu kommt `Inhalt <stand>` aus der Inhaltsdatei. Die Online-Kontrolle zeigt beides zu jeder Meldung.
+
 ## Wie die Stopps gefunden werden
 
 `holen.py` erkennt Bildwechsel (ffmpeg scene score, stark ≥ 0.28, schwach ≥ 0.15) und Sprechbeginne nach Pausen. Beim Pompon-Video lagen die starken Bildwechsel fast genau auf den von Hand gesetzten Stopps – deshalb gilt: Stopp auf den Bildwechsel, der die Handlung einleitet, nicht auf den Sprechbeginn (der hinkt 1–2 s hinterher). Bei Videos mit Musik ist die Pausenerkennung schwach; die Bildwechsel sind das wichtigere Signal.

@@ -4,9 +4,9 @@
    /login             leitet zu GitHub; zurück kommt nur ein Abholschein (60 s gültig), nie der Schlüssel selbst
    /abholen  (POST)   Abholschein gegen Schlüssel tauschen
    /erneuern (POST)   frischer Schlüssel mit dem Refresh-Token (GitHub-App-Schlüssel laufen nach 8 h ab)
-   /melden   (POST)   Fehlermeldung aus der App (ohne Anmeldung), landet im KV unter meldung:…
+   /melden   (POST)   Fehlermeldung aus App, Vorlagen oder Kontrolle (ohne Anmeldung), landet im KV unter meldung:…
    /meldungen         Liste für die Kontrolle (GitHub-Schlüssel mit Schreibrecht auf schrittli), /meldungen/erledigt (POST) löscht eine */
-const SEITE='https://conradinjoos-lab.github.io',MELDE_HER=new Set([SEITE,'http://127.0.0.1:8770','http://localhost:8770']),PFAD=/^\/schrittli\/kontrolle\/[\w.\-]*(\?[\w=&%.\-]*)?$/,STATE=/^[\w-]{16,64}$/;
+const SEITE='https://conradinjoos-lab.github.io',MELDE_HER=new Set([SEITE,'http://127.0.0.1:8770','http://localhost:8770','http://127.0.0.1:8765','http://localhost:8765']),MELDE_ARTEN=['video','bild','stopp','text','anderes','mass','druck','anzeige','speichern'],MELDE_GRENZE=200,PFAD=/^\/schrittli\/kontrolle\/[\w.\-]*(\?[\w=&%.\-]*)?$/,STATE=/^[\w-]{16,64}$/;
 
 const html=(b,code=200)=>new Response(`<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width"><title>Schrittli – Anmelden</title>
 <body style="font:16px/1.5 system-ui,sans-serif;max-width:560px;margin:40px auto;padding:0 16px;color:#17212F">${b}`,{status:code,headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'}});
@@ -34,17 +34,17 @@ export default {async scheduled(event,env){if(event.cron==='*/10 * * * *')return
  if(p.startsWith('/wunsch/'))return handleWunsch(req,env);
  const her=req.headers.get('Origin')||'';
  if(req.method==='OPTIONS')return new Response(null,{headers:{'Access-Control-Allow-Origin':MELDE_HER.has(her)?her:SEITE,'Access-Control-Allow-Methods':'GET, POST','Access-Control-Allow-Headers':'Content-Type, Authorization','Access-Control-Max-Age':'86400'}});
- /* Fehler melden aus der App: annehmen ohne Anmeldung (höchstens 20 pro Stunde und Adresse), lesen und abhaken nur mit Schreibrecht auf schrittli */
+ /* Fehler melden aus App, Vorlagen und Kontrolle: annehmen ohne Anmeldung (höchstens MELDE_GRENZE pro Stunde und Adresse, alle Schul-iPads teilen eine), lesen und abhaken nur mit Schreibrecht auf schrittli */
  if(p==='/melden'&&req.method==='POST'){
   if(!MELDE_HER.has(her))return json({fehler:'nicht erlaubt'},403,her);
   const ip=req.headers.get('CF-Connecting-IP')||'?',rk='rl:'+ip+':'+Math.floor(Date.now()/3600000),n=+(await env.KV.get(rk)||0);
-  if(n>=20)return json({fehler:'zu viele'},429,her);
+  if(n>=MELDE_GRENZE)return json({fehler:'zu viele'},429,her);
   await env.KV.put(rk,String(n+1),{expirationTtl:3700});
   const b=await req.json().catch(()=>null);if(!b||typeof b!=='object')return json({fehler:'leer'},400,her);
   const s=(x,l)=>String(x??'').slice(0,l);
-  const m={zeit:new Date().toISOString(),art:['video','bild','stopp','text','anderes'].includes(b.art)?b.art:'anderes',text:s(b.text,600),app:s(b.app,10),seite:s(b.seite,20),
+  const m={zeit:new Date().toISOString(),art:MELDE_ARTEN.includes(b.art)?b.art:'anderes',text:s(b.text,600),app:s(b.app,12),seite:s(b.seite,60),
    video:s(b.video,60),titel:s(b.titel,120),schritt:Math.max(0,Math.min(99,+b.schritt||0)),zeit_video:b.zeit==null?null:Math.max(0,Math.min(36000,+b.zeit||0)),
-   adresse:s(b.adresse,200),geraet:s(b.geraet,40),fenster:s(b.fenster,20)};
+   adresse:s(b.adresse,500),geraet:s(b.geraet,40),fenster:s(b.fenster,20),stand:s(b.stand,60),erfasst:/^\d{4}-\d\d-\d\dT[\d:.]+Z$/.test(String(b.erfasst))?String(b.erfasst).slice(0,24):''};
   await env.KV.put('meldung:'+String(9e12-Date.now()).padStart(13,'0')+':'+zufall().slice(0,6),JSON.stringify(m),{expirationTtl:180*86400});
   return json({ok:true},200,her)}
  if(p==='/meldungen'||p==='/meldungen/erledigt'){
