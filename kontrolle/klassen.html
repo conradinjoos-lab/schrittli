@@ -26,6 +26,19 @@ textarea:focus{outline:2px solid var(--lern);outline-offset:1px;background:var(-
 #putz .ergebnis b{color:var(--lern)}
 .karte.neu{outline:2px solid var(--lern);outline-offset:2px}
 .karte.gewaehlt{box-shadow:0 0 0 3px var(--lern)}
+.leiste .fehler{margin:0;min-height:0}
+#ordnen{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;align-items:start;user-select:none;-webkit-user-select:none}
+#ordnen .klasse{margin:0;display:flex;flex-direction:column;gap:8px;min-height:96px}
+#ordnen .klasse.leer{opacity:.55}
+#ordnen .klasse.ziel{outline:3px solid var(--lern);outline-offset:2px}
+#ordnen .plus{align-items:center;justify-content:center;font:600 20px var(--display);color:var(--muted);background:none;box-shadow:none;border:2px dashed var(--line);cursor:pointer}
+.griff{display:flex;align-items:center;gap:8px;min-height:36px;font:600 17px var(--display);cursor:grab;touch-action:none}
+.griff i{font-style:normal;color:var(--muted)}
+.griff small{font:500 14px var(--display);color:var(--muted)}
+.griff em{margin-left:auto;font:600 14px var(--display);font-style:normal;background:var(--lern);color:#fff;padding:4px 12px;border-radius:999px}
+#ordnen .chip{border:0;font-size:15px;padding:6px 12px;min-height:34px;cursor:grab;touch-action:pan-y}
+#ordnen .chip.on{background:var(--ink);color:#fff}
+#geist{position:fixed;z-index:50;pointer-events:none;transform:translate(-50%,-130%);font:600 15px var(--display);background:var(--ink);color:#fff;padding:6px 14px;border-radius:999px;box-shadow:var(--shadow-sm)}
 </style>
 </head>
 <body>
@@ -36,7 +49,7 @@ textarea:focus{outline:2px solid var(--lern);outline-offset:1px;background:var(-
   <div><h1>Klassen</h1></div>
   <nav class="k-nav" id="k-nav"></nav>
  </header>
- <div class="leiste"><span class="klein" id="stand"></span><span class="rechts"></span><button id="alle-knopf" class="p" hidden>Alle speichern</button><button id="putz-knopf" class="s">Putzämtli</button><button id="neu-knopf" class="on">+ Neue Klasse</button></div>
+ <div class="leiste"><span class="klein" id="stand"></span><p class="fehler" id="fehler"></p><span class="rechts"></span><button id="alle-knopf" class="p" hidden>Alle speichern</button><button id="ordnen-knopf">⇄ Ordnen</button><button id="putz-knopf" class="s">Putzämtli</button><button id="neu-knopf" class="on">+ Neue Klasse</button></div>
  <section class="karte hell" id="putz" hidden>
   <h2>Putzämtli</h2>
     <div class="zeile"><label class="s" style="cursor:pointer">📁 Datei<input type="file" id="putz-datei" accept=".json,application/json" hidden></label></div>
@@ -44,8 +57,9 @@ textarea:focus{outline:2px solid var(--lern);outline-offset:1px;background:var(-
   <div class="zeile"><button class="p" id="putz-lesen" type="button">Einlesen</button><button class="s" id="putz-zu" type="button">Schliessen</button><span class="ergebnis" id="putz-ergebnis"></span></div>
  </section>
  <main id="liste" class="klassen"><div class="nichts">⏳</div></main>
- <p class="fehler" id="fehler"></p>
+ <main id="ordnen" hidden></main>
 </div>
+<div id="geist" hidden></div>
 <script src="werkstatt.js"></script>
 <script src="klasse.js"></script>
 <script src="../vorlagen/melden.js" defer></script>
@@ -53,7 +67,7 @@ textarea:focus{outline:2px solid var(--lern);outline-offset:1px;background:var(-
 /* putz-anfang – Klassenlisten-Export des Putzämtli-Managers (version 2: classes → hk1/hk2 mit «Vorname Nachname») in Schrittli-Listen umbauen. */
 function ausPutzaemtli(d){
  const classes=d&&typeof d==='object'&&d.classes&&typeof d.classes==='object'?d.classes:null;
- if(!classes)throw new Error('⚠ Falsche Datei');
+ if(!classes)throw new Error('⚠ Keine Klassenliste');
  const listen=[];
  for(const [klasse,c] of Object.entries(classes)){
   if(!c||typeof c!=='object')continue;
@@ -65,12 +79,12 @@ function ausPutzaemtli(d){
  if(!listen.length)throw new Error('⚠ Keine Namen');
  return listen;
 }
-/* «Vorname Nachname» → Vorname; kommt ein Vorname mehrmals vor, so viele Buchstaben des Nachnamens anhängen, bis alle verschieden sind. */
+/* «Vorname Nachname» → «Vorname N.»; sind zwei gleich, so viele Buchstaben des Nachnamens anhängen, bis alle verschieden sind. */
 function vornamen(voll){
  const teile=voll.map(n=>String(n).replace(/\s+/g,' ').trim().split(' ')).filter(t=>t[0]);
  const nach=t=>t.slice(1).join(' ');
  const form=(t,l)=>l&&t[1]?`${t[0]} ${nach(t).slice(0,l)}.`:t[0];
- const laenge=teile.map(()=>0);
+ const laenge=teile.map(t=>t[1]?1:0);
  for(let runde=0;runde<30;runde++){
   const zaehl={};teile.forEach((t,i)=>{const k=form(t,laenge[i]).toLowerCase();zaehl[k]=(zaehl[k]||0)+1});
   let offen=false;
@@ -87,7 +101,7 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
 const fehler=(el,x)=>{el.textContent=!x?'':typeof x==='string'?x:/^⚠/.test(x.message||'')?x.message:KLASSE.warnung(x);el.title=x&&x.message||''};
 const zeilen=t=>t.split(/\r?\n|,|;/).map(s=>s.replace(/\s+/g,' ').trim()).filter(Boolean);
-let klassen=[];
+let klassen=[],ordnen=false;
 KLASSE.nav($('#k-nav'),'klassen.html');
 try{await W.bereit();klassen=(await W.namen.klassen()).klassen}catch(x){$('#liste').innerHTML=`<div class="nichts" title="${esc(x.message||x)}">${KLASSE.warnung(x)}</div>`;return}
 
@@ -97,7 +111,7 @@ function karte(k){
  const z=k.neu||k;
  el.innerHTML=`<div class="kopf"><input type="text" class="name" value="${esc(z.name)}" placeholder="Klasse" maxlength="80">
   <select class="stufe"><option value="">Stufe</option>${[1,2,3,4,5,6].map(s=>`<option value="${s}" ${z.stufe===s?'selected':''}>${s}. Klasse</option>`).join('')}</select></div>
-  <textarea class="namen" placeholder="Namen" spellcheck="false">${esc(z.namen.join('\n'))}</textarea>
+  <textarea class="namen" placeholder="Lina K.&#10;Noah B.&#10;Amira S." spellcheck="false">${esc(z.namen.join('\n'))}</textarea>
   <div class="chips"></div>
   <div class="unten"><span class="stand"></span><button class="s rot weg" type="button">${k.id?'Klasse entfernen':'Verwerfen'}</button><button class="p speichern" type="button">Speichern</button></div>`;
  const stand=el.querySelector('.stand'),chips=el.querySelector('.chips'),ta=el.querySelector('.namen');
@@ -106,6 +120,7 @@ function karte(k){
  const zeige=()=>{const n=zeilen(ta.value);chips.innerHTML=n.length?n.map(x=>`<span class="chip">${esc(x)}</span>`).join(''):'';
   stand.className='stand';stand.textContent=n.length?`${n.length} ${n.length===1?'Kind':'Kinder'}${el.geaendert()?' · ●':''}`:'';alleKnopf()};
  el.querySelectorAll('input,select,textarea').forEach(i=>i.addEventListener('input',zeige));zeige();
+ el.merken=()=>{if(el.geaendert()){const e=eingabe();k.neu={name:e.name.trim(),stufe:e.stufe?+e.stufe:null,namen:e.namen}}};
  el.speichern=async()=>{const b=el.querySelector('.speichern');b.disabled=true;fehler($('#fehler'));
   try{const r=await W.namen.speichern({id:k.id||undefined,...eingabe()});
    Object.assign(k,{id:r.id,name:r.name,stufe:r.stufe,namen:r.namen});delete k.neu;el.classList.remove('neu');
@@ -117,7 +132,7 @@ function karte(k){
  el.querySelector('.speichern').onclick=()=>el.speichern().catch(()=>{});
  el.querySelector('.weg').onclick=async()=>{
   if(!k.id){klassen=klassen.filter(x=>x!==k);el.remove();kopf();leer();alleKnopf();return}
-  if(!confirm(`«${k.name}» entfernen?`))return;
+  if(!confirm(`«${k.name}» · ${k.namen.length} Namen entfernen?`))return;
   try{await W.namen.entfernen(k.id);klassen=klassen.filter(x=>x!==k);el.remove();kopf();leer();alleKnopf()}catch(x){fehler($('#fehler'),x)}};
  el.addEventListener('focusin',()=>{if(k.id){KLASSE.setze(k.name);markiere()}});
  return el;
@@ -126,17 +141,79 @@ const leer=()=>{if(!klassen.length)$('#liste').innerHTML='<div class="nichts">�
 const markiere=()=>{const k=KLASSE.finde(klassen.filter(x=>x.id));$('#liste').querySelectorAll('.karte').forEach(el=>el.classList.toggle('gewaehlt',!!k&&el.dataset.id===k.id));return k};
 const kopf=()=>{const g=klassen.filter(k=>k.id);$('#stand').textContent=g.length?`${g.length} ${g.length===1?'Klasse':'Klassen'} · ${g.reduce((n,k)=>n+k.namen.length,0)} Kinder`:''};
 const offene=()=>[...$('#liste').querySelectorAll('.karte')].filter(el=>el.geaendert&&el.geaendert()&&zeilen(el.querySelector('.namen').value).length);
-const alleKnopf=()=>{const n=offene().length;$('#alle-knopf').hidden=n<2;$('#alle-knopf').textContent=`Alle speichern (${n})`};
+const geleert=()=>klassen.filter(k=>k.neu&&!k.neu.namen.length);
+const alleKnopf=()=>{const n=offene().length+geleert().filter(k=>k.id).length;$('#alle-knopf').hidden=n<(ordnen?1:2);$('#alle-knopf').textContent=`Alle speichern (${n})`};
 function zeichne(){
- $('#liste').replaceChildren();klassen.forEach(k=>$('#liste').appendChild(karte(k)));leer();kopf();alleKnopf();markiere();
+ $('#liste').replaceChildren();klassen.forEach(k=>$('#liste').appendChild(karte(k)));leer();kopf();alleKnopf();markiere();if(ordnen)malen();
 }
 $('#neu-knopf').onclick=()=>{const k={id:'',name:'',stufe:null,namen:[]};klassen.unshift(k);const n=$('#liste').querySelector('.nichts');if(n)n.remove();
  const el=karte(k);$('#liste').prepend(el);el.querySelector('.name').focus()};
 $('#alle-knopf').onclick=async()=>{const b=$('#alle-knopf');b.disabled=true;const karten=offene();let i=0;
  try{for(const el of karten){i++;b.textContent=`⏳ ${i}/${karten.length}`;await el.speichern()}
-  $('#stand').textContent+=` · ✓ ${karten.length}`}
- catch(x){}
+  const weg=geleert();
+  for(const k of weg){if(k.id)await W.namen.entfernen(k.id);klassen=klassen.filter(x=>x!==k)}
+  wahl.clear();zeichne();$('#stand').textContent+=` · ✓ ${karten.length+weg.filter(k=>k.id).length}`}
+ catch(x){fehler($('#fehler'),x)}
  b.disabled=false;alleKnopf()};
+
+/* Ordnen: Namen antippen wählt sie aus, Antippen einer Klasse verschiebt sie dorthin; Ziehen geht auch mit dem Finger. Der Griff ⠿ führt eine ganze Klasse in eine andere.
+   Alles bleibt in k.neu, bis «Alle speichern» die Listen schreibt und leer gewordene Klassen entfernt. */
+const wahl=new Set(),MAX=60;   // wahl: «Klassenindex:Namenindex»
+const stand=k=>k.neu||k,arbeit=k=>k.neu||(k.neu={name:k.name,stufe:k.stufe,namen:[...k.namen]});
+const gleich=(a,b)=>[...a].sort().join('\n')===[...b].sort().join('\n');
+function malen(){
+ $('#ordnen').innerHTML=klassen.map((k,i)=>{const z=stand(k),fremd=[...wahl].filter(w=>+w.split(':')[0]!==i).length;
+  return `<section class="karte klasse${z.namen.length?'':' leer'}" data-i="${i}"><div class="griff"><i>⠿</i>${esc(z.name)}<small>${z.namen.length}</small>${fremd?`<em>⤵ ${fremd}</em>`:''}</div>
+   <div class="chips">${z.namen.map((n,j)=>`<button type="button" class="chip${wahl.has(i+':'+j)?' on':''}" data-j="${j}">${esc(n)}</button>`).join('')}</div></section>`}).join('')
+  +`<section class="karte klasse plus" data-i="neu">+</section>`}
+function neueKlasse(){
+ const name=(prompt('Klasse','')||'').replace(/\s+/g,' ').trim();if(!name)return null;
+ if(klassen.some(k=>stand(k).name.toLowerCase()===name.toLowerCase())){fehler($('#fehler'),'⚠ Gibt es schon');return null}
+ const m=/\d/.exec(name),k={id:'',name,stufe:m&&+m[0]>=1&&+m[0]<=6?+m[0]:null,namen:[]};k.neu={name,stufe:k.stufe,namen:[]};klassen.push(k);return k}
+function schieben(wer,zi){
+ fehler($('#fehler'));
+ const ziel=zi==='neu'?neueKlasse():klassen[+zi];if(!ziel)return;
+ const da=new Set(stand(ziel).namen.map(n=>n.toLowerCase())),weg=[],doppelt=[];
+ for(const [i,j] of wer){
+  const n=stand(klassen[i]).namen[j];if(klassen[i]===ziel)continue;
+  if(da.has(n.toLowerCase())){doppelt.push(n);continue}
+  da.add(n.toLowerCase());weg.push([i,j,n])}
+ if(da.size>MAX){fehler($('#fehler'),'⚠ Zu viele');return zeichne()}
+ const z=arbeit(ziel);z.namen=[...z.namen,...weg.map(w=>w[2])].sort((a,b)=>a.localeCompare(b,'de'));
+ for(const i of new Set(weg.map(w=>w[0]))){const q=arbeit(klassen[i]);q.namen=q.namen.filter((n,j)=>!weg.some(w=>w[0]===i&&w[1]===j))}
+ for(const k of klassen)if(k.id&&k.neu&&k.neu.name===k.name&&k.neu.stufe==k.stufe&&gleich(k.neu.namen,k.namen))delete k.neu;
+ wahl.clear();if(doppelt.length)fehler($('#fehler'),`⚠ Doppelt: ${doppelt.join(', ')}`);
+ zeichne()}
+const auswahl=()=>[...wahl].map(w=>w.split(':').map(Number));
+$('#ordnen-knopf').onclick=()=>{
+ ordnen=!ordnen;wahl.clear();fehler($('#fehler'));
+ if(ordnen){$('#liste').querySelectorAll('.karte').forEach(el=>el.merken());klassen=klassen.filter(k=>k.id||stand(k).namen.length)}
+ $('#ordnen-knopf').classList.toggle('on',ordnen);$('#liste').hidden=ordnen;$('#ordnen').hidden=!ordnen;$('#neu-knopf').hidden=ordnen;zeichne()};
+
+let zug=null;   // laufendes Antippen oder Ziehen
+const geist=$('#geist'),ziele=z=>$('#ordnen').querySelectorAll('.ziel').forEach(el=>el!==z&&el.classList.remove('ziel'));
+const unter=e=>document.elementFromPoint(e.clientX,e.clientY)?.closest('#ordnen .klasse');
+$('#ordnen').addEventListener('pointerdown',e=>{
+ if(e.button)return;
+ const karte=e.target.closest('.klasse');if(!karte)return;
+ zug={x:e.clientX,y:e.clientY,i:karte.dataset.i,chip:e.target.closest('.chip'),griff:e.target.closest('.griff'),weit:false}});
+addEventListener('pointermove',e=>{
+ if(!zug)return;
+ if(!zug.weit){
+  if(Math.hypot(e.clientX-zug.x,e.clientY-zug.y)<8)return;
+  if(!zug.chip&&!zug.griff){zug=null;return}
+  zug.weit=true;const i=+zug.i,sch=zug.chip&&i+':'+zug.chip.dataset.j;
+  zug.wer=zug.griff?stand(klassen[i]).namen.map((n,j)=>[i,j]):wahl.has(sch)?auswahl():[[i,+zug.chip.dataset.j]];
+  geist.textContent=zug.griff?stand(klassen[i]).name:zug.wer.length>1?`${zug.wer.length}`:zug.chip.textContent;geist.hidden=false}
+ geist.style.left=e.clientX+'px';geist.style.top=e.clientY+'px';
+ const z=unter(e);ziele(z);z?.classList.add('ziel');
+ if(e.clientY<70)scrollBy(0,-14);else if(e.clientY>innerHeight-50)scrollBy(0,14)});
+addEventListener('pointerup',e=>{
+ if(!zug)return;const z=zug;zug=null;geist.hidden=true;
+ if(z.weit){const k=unter(e);ziele(null);if(k&&k.dataset.i!==z.i)schieben(z.wer,k.dataset.i);return}
+ if(z.chip){const s=z.i+':'+z.chip.dataset.j;if(wahl.delete(s)||wahl.add(s))malen();return}
+ if(wahl.size||z.i==='neu')schieben(auswahl(),z.i)});
+addEventListener('pointercancel',()=>{zug=null;geist.hidden=true;ziele(null)});
 
 /* Putzämtli-Import: Listen in die Karten übernehmen – gleicher Name ersetzt, Neues kommt dazu, gespeichert wird erst mit «Speichern» / «Alle speichern». */
 const sortiert=l=>l.sort((a,b)=>{const x=a.neu||a,y=b.neu||b;return (x.stufe==null)-(y.stufe==null)||(x.stufe||0)-(y.stufe||0)||String(x.name).localeCompare(String(y.name),'de')});
@@ -155,7 +232,7 @@ $('#putz-knopf').onclick=()=>{putz.hidden=!putz.hidden;if(!putz.hidden)putz.scro
 $('#putz-zu').onclick=()=>{putz.hidden=true};
 function lesen(text){
  ergebnis.textContent='';fehler($('#fehler'));
- try{let d;try{d=JSON.parse(text)}catch{throw new Error('⚠ Falsche Datei')}
+ try{let d;try{d=JSON.parse(text)}catch{throw new Error('⚠ Datei defekt')}
   const listen=ausPutzaemtli(d);const r=uebernehmen(listen);
   ergebnis.innerHTML=`<b>${listen.length} ✓</b> · ${r.kinder} Kinder`;
   $('#alle-knopf').scrollIntoView({behavior:'smooth',block:'center'})}

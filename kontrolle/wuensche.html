@@ -40,10 +40,10 @@ details.alt>summary{cursor:pointer;font:600 16px var(--display);color:var(--mute
   <div class="logo">✨</div>
   <div><h1>Wünsche</h1></div>
  </header>
+ <div class="leiste" id="leiste" hidden><span class="rechts"></span><button id="bild-knopf" class="on">🖼 Bild</button><input type="file" id="bild-datei" accept="image/*" hidden></div>
  <div class="kopf" id="kopf"></div>
  <section class="karte warm" id="ohne-schluessel" hidden>
-  <h2>Der Claude-Schlüssel fehlt noch</h2>
-  <p>Einmal im Terminal setzen, dann zeichnet Claude die Wünsche von selbst:</p>
+  <h2>⚠ Claude-Schlüssel fehlt</h2>
   <p><code>cd werkzeug/anmelden &amp;&amp; npx wrangler secret put ANTHROPIC_API_KEY</code></p>
  </section>
  <main id="liste"><div class="nichts">Lade Wünsche …</div></main>
@@ -55,14 +55,14 @@ details.alt>summary{cursor:pointer;font:600 16px var(--display);color:var(--mute
 <script>
 /* Motiv-Wünsche: Kinder melden im Vorlagen-Generator ein fehlendes Motiv, Claude zeichnet es im Worker (alle 10 Minuten oder hier sofort).
    «Übernehmen» rechnet die SVG-Zeichnung in ein PNG und schreibt es mit figuren.json und quellen.md ins App-Repo,
-   die Action motive.yml macht daraus die Vorlage. */
+   die Action motive.yml macht daraus die Vorlage. «Bild» setzt statt der Zeichnung ein echtes Bild ein (Logo, Foto), zu einem Wunsch oder als eigenes Motiv. */
 (async()=>{
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
 const zeit=z=>{const d=new Date(z);return isNaN(d)?'':d.toLocaleDateString('de-CH',{day:'numeric',month:'short'})+', '+d.toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'})};
 const STATUS={neu:'Wartet auf Claude',zeichnet:'Claude zeichnet',bereit:'Zum Prüfen',fehler:'Fehler',abgelehnt:'Abgelehnt',fertig:'Aufgeschaltet'};
-const PREIS=.25;   // ungefähr pro Zeichnung in USD (Opus 5.5, Denken und SVG)
 let daten=null,urls=[],beschaeftigt=0;
+let echt={},eigene=[],ziel=null,zaehler=0;   // echt: Wunsch-ID → gewähltes Bild (data:-PNG), eigene: Bilder ohne Wunsch
 
 async function laden(){daten=await W.wuensche.liste();zeigen()}
 const mitNs=svg=>/\sxmlns=/.test(svg.slice(0,300))?svg:svg.replace(/^<svg/,'<svg xmlns="http://www.w3.org/2000/svg"');
@@ -80,44 +80,62 @@ async function alsPng(svg,px){
   return c.toDataURL('image/png').split(',')[1]}
  finally{URL.revokeObjectURL(u)}}
 
+/* Ein echtes Bild als PNG, längste Seite px; heller oder durchsichtiger Hintergrund wird in bild.py freigestellt */
+async function bildPng(f,px=800){
+ if(!f.type.startsWith('image/'))throw new Error('⚠ Kein Bild');
+ const u=URL.createObjectURL(f);
+ try{
+  const im=new Image();await new Promise((ok,nein)=>{im.onload=ok;im.onerror=()=>nein(new Error('⚠ Bild defekt'));im.src=u});
+  const g=px/(Math.max(im.naturalWidth,im.naturalHeight)||px),b=Math.round((im.naturalWidth||px)*g),h=Math.round((im.naturalHeight||px)*g);
+  const c=document.createElement('canvas');c.width=b;c.height=h;const z=c.getContext('2d');z.imageSmoothingQuality='high';z.drawImage(im,0,0,b,h);
+  return c.toDataURL('image/png')}
+ finally{URL.revokeObjectURL(u)}}
+async function bildNehmen(f,id){
+ $('#fehler').textContent='';
+ try{const url=await bildPng(f);
+  if(id)echt[id]=url;
+  else{const neu='eigen'+(++zaehler);echt[neu]=url;eigene.unshift({id:neu,eigen:true,name:'',titel:f.name.replace(/\.[^.]*$/,'').replace(/^image$/i,'').replace(/[-_]+/g,' ').trim().slice(0,40),status:'bereit'})}
+  zeigen()}
+ catch(x){$('#fehler').textContent=String(x.message||x)}}
+
 function kopf(){
- const m=daten.monat,rest=Math.max(0,m.budget-m.usd),offen=daten.wuensche.filter(w=>['neu','zeichnet','bereit'].includes(w.status));
+ const m=daten.monat,offen=daten.wuensche.filter(w=>['neu','zeichnet','bereit'].includes(w.status));
  $('#kopf').innerHTML=`<div class="karte"><div class="klein">Kosten diesen Monat</div><div class="zahl">${m.usd.toFixed(2)} USD</div>
    <div class="balken"><i style="width:${m.budget?Math.min(100,m.usd/m.budget*100):100}%"></i></div>
-   <div class="klein">Grenze ${m.budget} USD · reicht noch für etwa ${Math.floor(rest/PREIS)} Zeichnungen</div></div>
+   <div class="klein">Grenze ${m.budget} USD</div></div>
   <div class="karte"><div class="klein">Offene Wünsche</div><div class="zahl">${offen.length}</div>
-   <div class="klein">${offen.filter(w=>w.status==='bereit').length} zum Prüfen. Neue Wünsche zeichnet Claude alle 10 Minuten von selbst.</div></div>`;
+   <div class="klein">${offen.filter(w=>w.status==='bereit').length} zum Prüfen</div></div>`;
  $('#ohne-schluessel').hidden=daten.schluessel}
 
 function karte(w){
- const bild=w.svg?`<img src="${svgUrl(w.svg)}" alt="${esc(w.titel||w.name)}">`:`<div class="warte">${w.status==='zeichnet'?'Claude zeichnet …':'Noch keine Zeichnung'}</div>`;
+ const e=echt[w.id],bild=e?`<img src="${e}" alt="${esc(w.titel||w.name)}">`:w.svg?`<img src="${svgUrl(w.svg)}" alt="${esc(w.titel||w.name)}">`:`<div class="warte">${w.status==='zeichnet'?'Claude zeichnet …':'Noch keine Zeichnung'}</div>`;
  const welten=daten.welten.map(x=>`<option${x===(w.welt||'Alltag')?' selected':''}>${esc(x)}</option>`).join('');
  const info=[w.anzahl>1&&w.anzahl+'× gewünscht',zeit(w.erstellt),w.versuche&&(w.versuche===1?'1 Zeichnung':w.versuche+' Zeichnungen')].filter(Boolean).join(' · ');
- const knoepfe=w.svg
+ const knoepfe=e||w.svg
   ?`<div class="felder"><label>Name im Generator<input type="text" class="titel" maxlength="40" value="${esc(w.titel||w.name)}"></label>
     <label>Welt<select class="welt">${welten}</select></label></div>
-   <div class="reihe"><button class="p" data-tun="auf">Übernehmen</button><button class="s" data-tun="nochmal">Nochmals zeichnen</button><button class="s rot" data-tun="ab">Ablehnen</button></div>
-   <form class="reihe nochmal" hidden><input type="text" class="hinweis grow" maxlength="500" placeholder="Was soll anders sein? z.B. dickere Umrisse, freundlicher"><button class="p">Zeichnen</button></form>`
-  :`<div class="reihe"><button class="s" data-tun="jetzt"${w.status==='zeichnet'?' disabled':''}>Jetzt zeichnen</button><button class="s rot" data-tun="ab">Ablehnen</button></div>`;
+   <div class="reihe"><button class="p" data-tun="auf">Übernehmen</button>${e?'':'<button class="s" data-tun="nochmal">Nochmals zeichnen</button>'}<button class="s" data-tun="bild">🖼 Bild</button><button class="s rot" data-tun="ab">${w.eigen?'Verwerfen':'Ablehnen'}</button></div>
+   ${e?'':'<form class="reihe nochmal" hidden><input type="text" class="hinweis grow" maxlength="500" placeholder="Hinweis"><button class="p">Zeichnen</button></form>'}`
+  :`<div class="reihe"><button class="s" data-tun="jetzt"${w.status==='zeichnet'?' disabled':''}>Jetzt zeichnen</button><button class="s" data-tun="bild">🖼 Bild</button><button class="s rot" data-tun="ab">Ablehnen</button></div>`;
  return `<section class="karte wunsch" data-id="${w.id}"><div class="bild">${bild}</div><div>
-  <div class="reihe"><h2 class="grow">«${esc(w.name)}»</h2><span class="status ${w.status}">${STATUS[w.status]||esc(w.status)}</span></div>
-  <p class="klein">${info}</p>${w.text?`<p class="kind">«${esc(w.text)}»</p>`:''}
+  ${w.eigen?'':`<div class="reihe"><h2 class="grow">«${esc(w.name)}»</h2><span class="status ${e?'bereit':w.status}">${e?'🖼 Bild':STATUS[w.status]||esc(w.status)}</span></div>
+  <p class="klein">${info}</p>`}${w.text?`<p class="kind">«${esc(w.text)}»</p>`:''}
   ${w.grund&&w.status!=='abgelehnt'?`<p class="klein">${esc(w.grund)}</p>`:''}${w.hinweis?`<p class="klein">Letzter Hinweis: ${esc(w.hinweis)}</p>`:''}
   ${knoepfe}<p class="fehler"></p></div></section>`}
 
 function zeile(w){
  const was=w.status==='fertig'?`als <code>${esc(w.figur)}</code> aufgeschaltet`:esc(w.grund||'');
  return `<div class="zeile" data-id="${w.id}"><b>«${esc(w.titel||w.name)}»</b><span class="status ${w.status}">${STATUS[w.status]}</span>
-  <span class="klein grow">${was}</span>${w.status==='fertig'?'':'<button class="s" data-tun="jetzt">Doch zeichnen</button>'}<button class="x" data-tun="weg" title="Wunsch löschen">Löschen</button></div>`}
+  <span class="klein grow">${was}</span>${w.status==='fertig'?'':'<button class="s" data-tun="jetzt">Doch zeichnen</button><button class="s" data-tun="bild">🖼 Bild</button>'}<button class="x" data-tun="weg" title="Wunsch löschen">Löschen</button></div>`}
 
 function zeigen(){
  urls.forEach(URL.revokeObjectURL);urls=[];kopf();
- const offen=daten.wuensche.filter(w=>['neu','zeichnet','bereit'].includes(w.status)),alt=daten.wuensche.filter(w=>!offen.includes(w));
- $('#liste').innerHTML=offen.length?offen.map(karte).join(''):'<div class="nichts">Keine offenen Wünsche.<br><span class="klein">Kinder wünschen sich Motive unten im Vorlagen-Generator.</span></div>';
+ const offen=[...eigene,...daten.wuensche.filter(w=>echt[w.id]||['neu','zeichnet','bereit'].includes(w.status))],alt=daten.wuensche.filter(w=>!offen.includes(w));
+ $('#liste').innerHTML=offen.length?offen.map(karte).join(''):'<div class="nichts">Keine Wünsche</div>';
  $('#alt').hidden=!alt.length;$('#alt-titel').textContent=`Abgelehnt, Fehler und aufgeschaltet (${alt.length})`;
  $('#alt-liste').innerHTML=alt.map(zeile).join('')}
 
-const finde=id=>daten.wuensche.find(w=>w.id===id);
+const finde=id=>eigene.find(w=>w.id===id)||daten.wuensche.find(w=>w.id===id);
 async function arbeit(knopf,text,fn){
  const box=knopf.closest('[data-id]'),f=box.querySelector('.fehler')||$('#fehler'),alt=knopf.textContent;
  box.querySelectorAll('button,input,select').forEach(e=>e.disabled=true);knopf.textContent=text;f.textContent='';beschaeftigt++;
@@ -135,19 +153,21 @@ document.addEventListener('click',async e=>{
  const tun=k.dataset.tun;
  if(tun==='jetzt')return zeichnen(k,id,'','');
  if(tun==='nochmal'){const f=box.querySelector('.nochmal');f.hidden=!f.hidden;if(!f.hidden)f.querySelector('input').focus();return}
+ if(tun==='bild'){ziel=id;$('#bild-datei').click();return}
  if(tun==='ab'){
-  const grund=prompt('Warum passt «'+w.name+'» nicht? (freiwillig)','');if(grund===null)return;
-  return arbeit(k,'Ablehnen …',async()=>{await W.wuensche.ablehnen(id,grund);Object.assign(w,{status:'abgelehnt',grund:grund||'Von der Lehrperson abgelehnt.'})})}
+  if(w.eigen){eigene=eigene.filter(x=>x!==w);delete echt[id];return zeigen()}
+  const grund=prompt('Grund für «'+w.name+'»','');if(grund===null)return;
+  return arbeit(k,'Ablehnen …',async()=>{await W.wuensche.ablehnen(id,grund);delete echt[id];Object.assign(w,{status:'abgelehnt',grund:grund||'Von der Lehrperson abgelehnt.'})})}
  if(tun==='weg'){
   if(!confirm('Wunsch «'+w.name+'» ganz löschen?'))return;
   return arbeit(k,'Löschen …',async()=>{await W.wuensche.loeschen(id);daten.wuensche=daten.wuensche.filter(x=>x.id!==id)})}
  if(tun==='auf'){
   const name=box.querySelector('.titel').value.trim().replace(/ß/g,'ss'),welt=box.querySelector('.welt').value;
-  if(!name){box.querySelector('.fehler').textContent='Bitte einen Namen eingeben.';return}
+  if(!name){box.querySelector('.fehler').textContent='⚠ Name fehlt';return}
   return arbeit(k,'Schalte auf …',async()=>{
-   const figur=await W.wuensche.aufschalten(id,name,welt,await alsPng(w.svg,800));
-   Object.assign(w,{status:'fertig',figur,titel:name});
-   $('#fehler').textContent='';setTimeout(()=>alert(`«${name}» ist aufgeschaltet (${figur}). In etwa 5 Minuten ist die Vorlage im Generator.`),50)})}
+   const e=echt[id],figur=await W.wuensche.aufschalten(w.eigen?null:id,name,welt,e?e.split(',')[1]:await alsPng(w.svg,800),!!e);
+   delete echt[id];if(w.eigen)eigene=eigene.filter(x=>x!==w);else Object.assign(w,{status:'fertig',figur,titel:name});
+   $('#fehler').textContent='';setTimeout(()=>alert(`✓ «${name}» · etwa 5 Min.`),50)})}
 });
 document.addEventListener('submit',async e=>{
  const f=e.target.closest('form.nochmal');if(!f)return;e.preventDefault();
@@ -155,8 +175,16 @@ document.addEventListener('submit',async e=>{
  let bild='';try{bild=await alsPng(w.svg,512)}catch{}
  zeichnen(f.querySelector('button'),id,hinweis,bild)});
 
-if(W.LOKAL){$('#liste').innerHTML='<div class="nichts">Die Wünsche gibt es nur online:<br><a href="https://conradinjoos-lab.github.io/schrittli/kontrolle/wuensche.html">Kontrolle online öffnen</a></div>';return}
-try{await W.bereit();await laden()}catch(x){$('#liste').innerHTML=`<div class="nichts">Laden ging nicht: ${esc(x.message||x)}</div>`;return}
+if(W.LOKAL){$('#liste').innerHTML='<div class="nichts"><a href="https://conradinjoos-lab.github.io/schrittli/kontrolle/wuensche.html">Online öffnen</a></div>';return}
+try{await W.bereit();await laden()}catch(x){$('#liste').innerHTML=`<div class="nichts">⚠ ${esc(x.message||x)}</div>`;return}
+
+/* Echtes Bild: Knopf, Einfügen aus der Zwischenablage oder Hineinziehen (auf einen Wunsch oder daneben für ein eigenes Motiv) */
+$('#leiste').hidden=false;
+$('#bild-knopf').onclick=()=>{ziel=null;$('#bild-datei').click()};
+$('#bild-datei').onchange=e=>{const f=e.target.files[0];e.target.value='';if(f)bildNehmen(f,ziel)};
+document.addEventListener('paste',e=>{if(e.target.closest?.('input,textarea'))return;const f=[...e.clipboardData.files].find(x=>x.type.startsWith('image/'));if(f){e.preventDefault();bildNehmen(f,null)}});
+document.addEventListener('dragover',e=>e.preventDefault());
+document.addEventListener('drop',e=>{e.preventDefault();const f=e.dataTransfer.files[0];if(f)bildNehmen(f,e.target.closest?.('[data-id]')?.dataset.id||null)});
 
 /* Neue Wünsche zeichnet der Worker von selbst: ab und zu nachschauen, aber nicht während einer Eingabe */
 setInterval(()=>{
