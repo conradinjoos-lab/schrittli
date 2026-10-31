@@ -99,4 +99,35 @@ const links=async t=>{ const k=await t.kontext({breite:1180,hoehe:800,touch:fals
   { const p=await k.seite('/vorlagen/maschenprobe/?technik=haekeln&werk=kappe'); await t.warte(200); t.pruefe(await p.evaluate(()=>S.technik==='haekeln'&&S.werk==='kappe'),'technik/werk'); await p.close(); }
   t.keineFehler(k); };
 
-module.exports=[{name:'Planer Kopf',lauf:kopf},{name:'Planer Druck',lauf:druck},{name:'Planer Vorschau haftet',lauf:haften},{name:'Planer Rückgängig Generator',lauf:rueck},{name:'Planer Rückgängig Seiten',lauf:seitenRueck},{name:'Planer Speicher pro Kind',lauf:speicher},{name:'Planer alte Links',lauf:links}];
+// Kappe: Anschlag geht in Keilen auf, die Spitze endet bei einer Masche pro Keil, die Reihen gehen auf
+const kappe=async t=>{ const k=await t.kontext({touch:false,speicher:PLAN}), p=await k.seite('/vorlagen/maschenprobe/'); await t.warte(200);
+  const fall=await p.evaluate(()=>{ const a=[]; for(const technik of ['haekeln','stricken'])for(const [m10,r10] of [[9,12],[14,20],[20,24],[30,30],[40,52]])for(const kopf of [40,46,52,58,64]){
+      Object.assign(S,{technik,m10,r10}); S.mass.kopf=kopf; masseSetzen(); const R=rechnen(), K=R.kappe; a.push({technik,m10,r10,kopf,an:R.anschlag,reihen:R.reihen,r:K.r,z:K.z,letzte:K.keile.at(-1).rest,erste:K.keile[0].rest,sp:K.sp,buend:K.buend,gerade:K.gerade,soll:S.b*m10/10}); } return a; });
+  for(const c of fall){ const n=`${c.technik} ${c.m10}/${c.r10} Kopf ${c.kopf}`;
+    t.pruefe(c.an===c.z*c.r,'Keile gehen nicht auf: '+n);
+    t.pruefe(c.letzte===c.z&&c.erste===c.z*(c.r-1),'Spitze falsch: '+n);
+    t.pruefe(c.reihen===c.buend+c.gerade+c.sp,'Reihen gehen nicht auf: '+n);
+    t.pruefe(Math.abs(c.an-c.soll)<=c.soll*.12+2,'Anschlag zu weit weg: '+n);
+    t.pruefe(c.technik==='haekeln'?c.buend===0:c.an%2===0,'Stricken ungerade: '+n); }
+  t.keineFehler(k); };
+
+// Wolle: bestimmt Nadel und Anschlag, das Probestück ist auch bei der dichtesten Probe breiter als das Fenster, alte Pläne rücken einen Schritt weiter
+const wolle=async t=>{ const k=await t.kontext({breite:390,hoehe:844,touch:false}), p=await k.seite('/vorlagen/maschenprobe/?technik=stricken&werk=kappe'); await t.warte(200);
+  const g=await p.evaluate(()=>GARNE); for(const [n,dichteste] of [['fein',30],['mittel',22],['dick',17],['sehrdick',11]]) t.pruefe(g[n].m/dichteste*10>=11,n+': Probestück zu schmal');
+  await klick(p,'[data-act=weiter]'); await t.warte(150); t.pruefe(await p.locator('[data-wolle]').count()===4,'Keine Wolle zur Wahl');
+  await klick(p,'[data-wolle=dick]'); await t.warte(150);
+  const text=await p.innerText('main'); t.pruefe(/\b20\b/.test(text)&&/5\.5–7 mm/.test(text),'Probestück ohne Anschlag oder Nadel');
+  t.pruefe(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Probestück rollt seitwärts');
+  t.pruefe(await p.isVisible('main .plan [data-act=zettel]'),'Zählfenster nicht im Schritt');
+  await klick(p,'main > .weiter'); await t.warte(150);
+  const warn=async n=>{ await p.fill('#f-m10',String(n)); await t.warte(80); return p.isVisible('#warn'); };
+  t.pruefe(await warn(20),'Keine Warnung beim ganzen Probestück'); t.pruefe(!await warn(25),'Warnung bei 25');
+  t.pruefe(/mm/.test(await p.innerText('#weg')),'Wolle fehlt im Weg');
+  t.keineFehler(k);
+  const alt=await t.kontext({touch:false,speicher:PLAN}), q=await alt.seite('/vorlagen/maschenprobe/'); await t.warte(200);
+  t.pruefe(await q.evaluate(()=>S.schritt===7&&S.weit===7&&probeZahl()===25),'Alter Plan nicht nachgerückt'); t.pruefe(await q.isVisible('#plan'),'Alter Plan zeigt den Plan nicht');
+  t.keineFehler(alt);
+  const leer=await t.kontext({touch:false,speicher:{'schrittli.maschenprobe.v1':JSON.stringify({technik:'haekeln',werk:'schal',schritt:3,weit:3})}}), r=await leer.seite('/vorlagen/maschenprobe/'); await t.warte(200);
+  t.pruefe(await r.locator('[data-wolle]').count()===4,'Altes Probestück ohne Wolle'); t.keineFehler(leer); };
+
+module.exports=[{name:'Maschen-Planer Wolle',lauf:wolle},{name:'Planer Kopf',lauf:kopf},{name:'Planer Druck',lauf:druck},{name:'Planer Vorschau haftet',lauf:haften},{name:'Planer Rückgängig Generator',lauf:rueck},{name:'Planer Rückgängig Seiten',lauf:seitenRueck},{name:'Planer Speicher pro Kind',lauf:speicher},{name:'Planer alte Links',lauf:links},{name:'Maschen-Planer Kappe',lauf:kappe}];
