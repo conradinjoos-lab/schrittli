@@ -168,7 +168,7 @@ function klasseLesen(){
 const KLASSE=klasseLesen(), KLEIN=KLASSE>0&&KLASSE<=2;
 if(KLEIN)document.body.classList.add('klein');
 function kindName(){   // Vorname aus «Wer bist du?» der Schulversion
-  try{ if(localStorage.getItem('schrittli.app')==='schule')return String(JSON.parse(localStorage.getItem('schrittli.schule.v1'))?.settings?.kind?.name||'').slice(0,30); }catch(e){}
+  try{ if(localStorage.getItem('schrittli.app')==='schule'){ const s=JSON.parse(localStorage.getItem('schrittli.schule.v1'))?.settings; return String(s?.kinder?.[0]?.name||s?.kind?.name||'').slice(0,30); } }catch(e){}
   return '';
 }
 

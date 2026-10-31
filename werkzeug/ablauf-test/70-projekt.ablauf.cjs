@@ -1,6 +1,6 @@
 /* Punkt 2: erst Projekte, dann genau das zugehörige Material. Ein Haken gilt für Projektansicht, Lektionsplan und Karte vor dem Video gleich. */
 'use strict';
-const {ipad,kinderWahl,neuLaden}=require('./schule-netz.cjs');
+const {ipad,kinderWahl,neuLaden,karteWeg,sammlung,anbinden,speicher,unterricht,unterrichtAnbinden,VERBINDUNG}=require('./schule-netz.cjs');
 const MIA='3a/Mia', NOAH='3a/Noah';
 
 /* Wache im Browser: bei jeder DOM-Änderung und in jedem Bild prüfen, was gerade im Dokument steht */
@@ -48,4 +48,28 @@ const gruppe=async t=>{ const {k,p}=await ipad(t); await kinderWahl(p,['Mia','No
 const altbestand=async t=>{ const alt=s=>JSON.stringify(s); const id='wl-fingerstricken', stand=alt({v:1,profiles:[{id:'klasse'}],activeProfile:'klasse',progress:{},stars:{},works:[],settings:{sv:4,klasse:3,lektionsplan:{[id]:{s:[true,false,false],mat:{wolle:true}}}},arbeit:{_ohne:{}}});
   const {k,p}=await ipad(t,{mehr:{'schrittli.schule.v1':stand}}); t.pruefe(await p.evaluate(i=>S.settings.sv===5&&planVon(i).mat===undefined&&planVon(i).s[0]===true,id),'Plan ohne Material'); t.pruefe(await p.evaluate(i=>S.arbeit._ohne[i].material.wolle===true,id),'Material übernommen'); t.keineFehler(k); };
 
-module.exports=[{name:'Projektsprung',lauf:projektsprung},{name:'Material Haken',lauf:haken},{name:'Material Karte vor Video',lauf:karteVideo},{name:'Material Lektionsplan',lauf:lektionsplan},{name:'Material Gruppe',lauf:gruppe},{name:'Material Migration',lauf:altbestand}];
+/* Plan des Geräts gegen Material des Kindes: Zeichnen und Kinderwechsel schreiben nichts und melden nichts */
+const PLAN='wl-strickliesel';
+const planGeraet=async t=>{ const sm=sammlung(), u=unterricht({policy:{mode:'projects',ids:[PLAN],plan:true}}), posts=[], k=await t.kontext({breite:1024,hoehe:768,speicher:speicher(sm,{'schrittli.unterricht.verbindung':JSON.stringify(VERBINDUNG)})}); await anbinden(k,sm); await unterrichtAnbinden(k,u); k.c.on('request',r=>{ if(/unterricht\/fortschritt/.test(r.url())&&r.method()==='POST') posts.push(JSON.parse(r.postData()).schritte); }); const p=await t.app(k,'schule'); await p.waitForFunction(()=>KL.klassen.length>0); await p.waitForFunction(()=>U.policy); return {k,p,posts}; };
+const planKind=async(p,name)=>{ await kinderWahl(p,[name]); await karteWeg(p); await p.waitForSelector('.plan-karte'); };
+const planLage=(p,posts)=>p.evaluate(id=>{ const c=document.querySelector('.plan-karte'), st=c.querySelector('.plan-station'); return {s:planVon(id).s.slice(),ring:c.querySelector('.plan-ring b').textContent,spielen:c.querySelector('[data-act=spielen]').disabled,korb:c.querySelectorAll('.plan-korb .mk').length,da:c.querySelectorAll('.plan-korb .mk.da').length,erledigt:st.classList.contains('erledigt'),jetzt:st.classList.contains('jetzt')}; },PLAN).then(l=>({...l,posts:JSON.stringify(posts)}));
+const planTipp=async(t,p,ids)=>{ for(const m of ids){ await p.locator('.plan-korb .mk[data-id="'+m+'"]').click(); await t.warte(40); } };
+const gleich=(t,ist,soll,wo)=>{ for(const f in soll) t.pruefe(JSON.stringify(ist[f])===JSON.stringify(soll[f]),wo+': '+f+' '+JSON.stringify(ist[f])); };
+const planKinder=async t=>{ const {k,p,posts}=await planGeraet(t), mat=await p.evaluate(id=>matListe(videoOf(id)),PLAN); await planKind(p,'Mia'); await planTipp(t,p,mat); await t.warte(1300);
+  gleich(t,await planLage(p,posts),{s:[true,false,false],ring:'1/3',spielen:false,erledigt:true,posts:'[[true,false,false]]'},'Mia fertig');
+  await planKind(p,'Noah'); await t.warte(1300); gleich(t,await planLage(p,posts),{s:[true,false,false],ring:'1/3',spielen:true,korb:mat.length,da:0,erledigt:false,jetzt:true,posts:'[[true,false,false]]'},'Noah gewählt');
+  await planTipp(t,p,mat.slice(0,1)); await t.warte(1300); gleich(t,await planLage(p,posts),{s:[true,false,false],spielen:true,da:1,posts:'[[true,false,false]]'},'Noah ein Stück');
+  await planTipp(t,p,mat.slice(1)); gleich(t,await planLage(p,posts),{spielen:false,erledigt:true},'Noah voll');
+  await planTipp(t,p,mat.slice(0,1)); await t.warte(1300); gleich(t,await planLage(p,posts),{s:[true,false,false],ring:'1/3',spielen:true,erledigt:false,posts:'[[true,false,false]]'},'Noah nimmt weg, Mia hat alles');
+  await planKind(p,'Mia'); await t.warte(1300); gleich(t,await planLage(p,posts),{s:[true,false,false],spielen:false,erledigt:true,posts:'[[true,false,false]]'},'Mia zurück');
+  await planTipp(t,p,mat.slice(1,2)); await t.warte(1300); gleich(t,await planLage(p,posts),{s:[false,false,false],ring:'0/3',spielen:true,posts:'[[true,false,false],[false,false,false]]'},'Mia nimmt weg, niemand hat alles'); t.keineFehler(k); };
+const planUpdate=async t=>{ const {k,p,posts}=await planGeraet(t), mat=await p.evaluate(id=>matListe(videoOf(id)),PLAN); await planKind(p,'Mia');
+  await p.evaluate(id=>{ S.settings.lektionsplan[id]={s:[true,true,false],mat:{}}; saveJetzt(); },PLAN); await neuLaden(p); await p.waitForFunction(()=>U.policy); await p.waitForSelector('.plan-karte'); await p.evaluate(()=>{ render(); render(); }); await t.warte(1300);
+  gleich(t,await planLage(p,posts),{s:[true,true,false],ring:'2/3',spielen:true,korb:mat.length,da:0,erledigt:false,jetzt:true,posts:'[]'},'Nach dem Update');
+  await planTipp(t,p,mat.slice(0,2)); await planTipp(t,p,mat.slice(0,1)); await t.warte(1300); gleich(t,await planLage(p,posts),{s:[true,true,false],spielen:true,posts:'[]'},'Teil-Haken');
+  await planTipp(t,p,[mat[0],...mat.slice(2)]); await t.warte(1300); gleich(t,await planLage(p,posts),{s:[true,true,false],spielen:false,erledigt:true,posts:'[]'},'Korb voll'); t.keineFehler(k); };
+const planAllesDa=async t=>{ const {k,p,posts}=await planGeraet(t); await planKind(p,'Mia'); await p.evaluate(id=>{ prog(id).material=Object.fromEntries(matListe(videoOf(id)).map(m=>[m,true])); render(); },PLAN); await t.warte(1300);
+  gleich(t,await planLage(p,posts),{s:[false,false,false],ring:'0/3',spielen:false,erledigt:false,jetzt:true,posts:'[]'},'Korb voll ohne Plan');
+  await p.locator('.plan-station [data-act=plan][data-k="0"]').click(); await t.warte(1300); gleich(t,await planLage(p,posts),{s:[true,false,false],ring:'1/3',erledigt:true,posts:'[[true,false,false]]'},'Alles da'); t.pruefe(!await p.locator('[data-act=plan][data-k="0"]').count(),'Haken bleibt'); t.keineFehler(k); };
+
+module.exports=[{name:'Projektsprung',lauf:projektsprung},{name:'Material Haken',lauf:haken},{name:'Material Karte vor Video',lauf:karteVideo},{name:'Material Lektionsplan',lauf:lektionsplan},{name:'Material Plan Kinderwechsel',lauf:planKinder},{name:'Material Plan Update',lauf:planUpdate},{name:'Material Plan Alles da',lauf:planAllesDa},{name:'Material Gruppe',lauf:gruppe},{name:'Material Migration',lauf:altbestand}];

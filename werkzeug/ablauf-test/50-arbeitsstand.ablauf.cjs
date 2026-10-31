@@ -80,4 +80,15 @@ const lektionsplan=async t=>{ const {k,p}=await ipad(t); const plan=()=>p.evalua
   await neuLaden(p); t.pruefe(await plan()===vorher,'Neuladen ändert Plan'); t.pruefe(await p.evaluate(()=>!/lektionsplan/.test(JSON.stringify(S.arbeit))),'Plan in der Kinderarbeit');
   await oeffne(p); await p.waitForSelector('.an-start'); await schritte(p,2); t.pruefe((await stand(p,NOAH)).step===1&&await plan()===vorher,'Arbeit ändert Plan'); t.keineFehler(k); };
 
-module.exports=[{name:'Kinderwechsel',lauf:kinderwechsel},{name:'Start mit Namensliste',lauf:t=>start(t,true)},{name:'Start ohne Namensliste',lauf:t=>start(t,false)},{name:'Lektionsplan bleibt',lauf:lektionsplan},{name:'Wiederaufnahme',lauf:wiederaufnahme},{name:'Gruppe am iPad',lauf:gruppe},{name:'Ohne Name',lauf:ohneName},{name:'Migration Arbeitsstand',lauf:migration},{name:'Werkzeugstand je Kind',lauf:werkzeuge}];
+/* Maschenprobe: Name aus settings.kinder, altes settings.kind bis zur Migration, Entwürfe unverändert */
+const maschen=async(k,vorher)=>{ const m=await k.seite('/vorlagen/maschenprobe/'); await m.waitForFunction(()=>typeof kindName==='function'); if(vorher){ await m.evaluate(vorher); await m.reload(); await m.waitForFunction(()=>typeof kindName==='function'); } const r=await m.evaluate(()=>({name:S.name,kind:kindName()})); await m.close(); return r; };
+const maschenName=async t=>{ const {k,p}=await ipad(t); await kinderWahl(p,['Mia']); await p.evaluate(()=>saveJetzt());
+  const mia=await maschen(k); t.pruefe(mia.kind==='Mia'&&mia.name==='Mia','Mia: '+JSON.stringify(mia));
+  await kinderWahl(p,['Noah']); await p.evaluate(()=>{ localStorage.setItem('schrittli.maschenprobe.v1.kind.'+localStorage.getItem('schrittli.kind'),JSON.stringify({name:'Eigen',maschen:20})); saveJetzt(); });
+  const noah=await maschen(k); t.pruefe(noah.kind==='Noah'&&noah.name==='Eigen','Entwurf: '+JSON.stringify(noah));
+  await p.close();
+  const alt=await maschen(k,()=>{ const s=JSON.parse(localStorage.getItem('schrittli.schule.v1')); delete s.settings.kinder; s.settings.kind={liste:'k3a',name:'Lea'}; localStorage.setItem('schrittli.schule.v1',JSON.stringify(s)); }); t.pruefe(alt.kind==='Lea','Altstand: '+JSON.stringify(alt));
+  const leer=await maschen(k,()=>{ const s=JSON.parse(localStorage.getItem('schrittli.schule.v1')); delete s.settings.kind; localStorage.setItem('schrittli.schule.v1',JSON.stringify(s)); }); t.pruefe(leer.kind==='','Ohne Feld: '+JSON.stringify(leer));
+  const fam=await maschen(k,()=>{ const s=JSON.parse(localStorage.getItem('schrittli.schule.v1')); s.settings.kinder=[{name:'Mia'}]; localStorage.setItem('schrittli.schule.v1',JSON.stringify(s)); localStorage.setItem('schrittli.app','familie'); }); t.pruefe(fam.kind==='','Familie: '+JSON.stringify(fam)); };
+
+module.exports=[{name:'Kinderwechsel',lauf:kinderwechsel},{name:'Start mit Namensliste',lauf:t=>start(t,true)},{name:'Start ohne Namensliste',lauf:t=>start(t,false)},{name:'Lektionsplan bleibt',lauf:lektionsplan},{name:'Wiederaufnahme',lauf:wiederaufnahme},{name:'Gruppe am iPad',lauf:gruppe},{name:'Ohne Name',lauf:ohneName},{name:'Migration Arbeitsstand',lauf:migration},{name:'Maschenprobe Name',lauf:maschenName},{name:'Werkzeugstand je Kind',lauf:werkzeuge}];

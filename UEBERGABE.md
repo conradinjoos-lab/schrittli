@@ -40,7 +40,7 @@ Conradin hat nur 3 iPads, oft arbeiten 2–3 Kinder an einem. Der Ablauf heisst:
 - **Foto:** eines für alle gewählten Namen, Wahl nach der Abgabe leer, Sterne freiwillig, Zustand sichtbar (`fotoZustandHtml`). Spalte `bewertet` in `schulwerke` trennt «keine Sterne» von alten Fotos.
 - **Kinderstand:** Die App sendet gebündelt an `POST /unterricht/kindstand`, die Kontrolle liest mit `GET` (Tabelle `unterricht_kindstand`).
 - **Fehlermeldung:** `vorlagen/melden.js` auf jeder Seite. `/melden` nimmt 200 pro Stunde an und speichert `stand`, damit die Kontrolle den Bau kennt. Während der Einfrieren-Sperre gibt es bewusst keine Flagge.
-- **Prüfgerüst:** `werkzeug/ablauf-test/` spielt 130 Abläufe durch, Bedienung in `werkzeug/LIESMICH.md`. Der Lauf ist manuell, kein GitHub Action.
+- **Prüfgerüst:** `werkzeug/ablauf-test/` spielt 137 Abläufe durch, Bedienung in `werkzeug/LIESMICH.md`. Der Lauf ist manuell, kein GitHub Action.
 - **Reihenfolge beim Veröffentlichen:** zuerst Migrationen `0005_bewertet` und `0006_kindstand` (`schrittli-werke`), dann Worker, dann App und Kontrolle.
 
 ## Wie neue Videos entstehen (seit 24.10.2026: `werkzeug/`)

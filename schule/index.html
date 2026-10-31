@@ -350,6 +350,7 @@ code{font-size:13px;word-break:break-all;background:var(--surface2);padding:2px 
 .sbtn .lbl{flex:1;min-width:0}
 .say{flex:none;display:flex;align-items:center;justify-content:center;width:56px;min-height:48px;background:#fff;border:2px solid var(--kink);border-radius:10px;color:var(--kink)}
 .sbtn:focus-visible,.say:focus-visible{outline-offset:-5px}
+.sbtn:disabled{cursor:default}.sbtn:disabled:not(.cur){opacity:.4}
 .sbtn.cur,.sbtn.cur.done{background:var(--sign);border-width:3px;box-shadow:3px 4px 0 var(--kink);font-size:19px;min-height:64px;color:var(--kink)}
 .sbtn.cur .num{background:var(--kink);color:#fff}
 .sbtn.done{background:#BFE8C8;color:#4A4038}.sbtn.done .num{background:#1F7A4A;border-color:#1F7A4A;color:#fff}
@@ -1269,7 +1270,8 @@ function zeitHtml(v){ const t=zeitText(v), tr=v&&v.trocknen, m=+tr>0?+tr+' min':
 const matListe=v=>[...new Set(((v&&v.material)||[]).filter(Boolean))];
 function matStand(v){ if(!SCHULE) return ((S.progress[(S.activeProfile||'school')+':'+v.id]||{}).material)||{}; const m={}; kindKeys().forEach(k=>Object.assign(m,((S.arbeit[k]||{})[v.id]||{}).material)); return m; }
 const matFehlt=v=>{ const s=matStand(v); return matListe(v).filter(id=>!s[id]); };
-function matSetzen(v,id,an){ const m={...matStand(v)}; if(an) m[id]=true; else delete m[id]; prog(v.id).material=m; if(SCHULE) kindKeys().forEach(k=>{ const e=S.arbeit[k]&&S.arbeit[k][v.id]; if(e) e.material=m; }); save(); planSetzen(v.id,0,!matFehlt(v).length); }
+const korbAnderswo=v=>{ const hier=kindKeys(), mat=matListe(v); return Object.keys(S.arbeit||{}).some(k=>{ const a=hier.includes(k)?null:S.arbeit[k][v.id], m=a&&a.material; return !!m&&mat.every(id=>m[id]); }); };   // ein anderes Kind dieses Geräts hat seinen Korb voll
+function matSetzen(v,id,an){ const vor=!matFehlt(v).length, m={...matStand(v)}; if(an) m[id]=true; else delete m[id]; prog(v.id).material=m; if(SCHULE) kindKeys().forEach(k=>{ const e=S.arbeit[k]&&S.arbeit[k][v.id]; if(e) e.material=m; }); save(); const da=!matFehlt(v).length; if(SCHULE&&da!==vor&&(da||!korbAnderswo(v))) planSetzen(v.id,0,da); }
 function matKnoepfe(v){ const s=matStand(v), f=matFehlt(v); return `<div class="mk-raster" data-projekt="${esc(v.id)}">${matListe(v).map(id=>`<button class="mk${s[id]?' da':''}${f[0]===id?' naechst':''}" data-act="mat" data-id="${esc(id)}" aria-pressed="${!!s[id]}"><span class="mk-bild">${matIcon(id)}<i aria-hidden="true">✓</i></span><b>${esc(matName(id))}</b></button>`).join('')}</div>`; }
 function matLuecke(v){ const f=matFehlt(v); return f.length?`<span class="mk-luecke">${matIcon(f[0])}<b>${esc(matName(f[0]))}</b>${f.length>1?`<i>+${f.length-1}</i>`:''}</span>`:''; }
 const matStartHtml=(v,attr,inhalt)=>`<button ${attr} data-matstart${matFehlt(v).length?' disabled':''}><span class="mk-platz">${matLuecke(v)}</span>${inhalt}</button>`;
@@ -1405,7 +1407,7 @@ function kidModal(html,actions={}){ return modal(html,actions,'kid'); }
 /* ============================== Fehler melden ============================== */
 /* Knopf auf jeder Seite, auch über Fenstern und in der Kachelwahl. Die Meldung geht mit Ort (Seite, Video, Schritt, Zeit) und Stand an den Worker werkzeug/anmelden (/melden)
    und erscheint in der Online-Kontrolle. Keine Namen, kein Konto, nichts aus dem Profil. Offline bleibt sie in «schrittli.melden.warte» (dieselbe Warteschlange wie vorlagen/melden.js). */
-const MELDEN='https://schrittli-anmelden.conradinjoos.workers.dev/melden', FM_WARTE='schrittli.melden.warte', APP_STAND='2026-10-31-545fd0f';   // __STAND__ ersetzt quelle/bauen.sh
+const MELDEN='https://schrittli-anmelden.conradinjoos.workers.dev/melden', FM_WARTE='schrittli.melden.warte', APP_STAND='2026-10-31-272e699';   // __STAND__ ersetzt quelle/bauen.sh
 let ORT=null;   // vom aktuellen Screen gesetzt: ()=>({video,titel,schritt})
 function fmGeraet(){ const u=navigator.userAgent; const os=/iPad/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1)?'iPad':/iPhone/.test(u)?'iPhone':/Android/.test(u)?'Android':/CrOS/.test(u)?'Chromebook':/Windows/.test(u)?'Windows':/Mac/.test(u)?'Mac':'anderes'; const br=/Edg\//.test(u)?'Edge':/Firefox\//.test(u)?'Firefox':/Chrome\//.test(u)?'Chrome':/Safari\//.test(u)?'Safari':''; return (os+' '+br).trim(); }
 function fmAdresse(){ const u=new URL(location.href); for(const k of [...u.searchParams.keys()]) if(/token|schein|schluessel|code|key|name/i.test(k)) u.searchParams.delete(k); return (u.pathname+u.search+u.hash).replace(/[0-9a-f]{32,}/gi,'…'); }
@@ -1805,10 +1807,10 @@ SCREENS.player=(app,{videoId,school,los,stelle})=>{
     shield:()=>{ const k=$('.kid.pl.liste'); if(k){ k.classList.remove('liste'); updatePlayerUI(); return; } if(P.mode==='playing') userPause(); else if(P.mode==='paused') userPlay(); else if(P.mode==='stepdone') nextStep(); },
     melden:()=>fehlerMelden(), kino:()=>toggleKino(), liste:()=>{ const k=$('.kid.pl'); if(!k) return; if(k.classList.contains('kino')){ k.classList.toggle('liste'); updatePlayerUI(); if(!k.classList.contains('liste')) return; } const c=$('.sbtn.cur'); if(c){ c.scrollIntoView({block:'nearest'}); c.focus({preventScroll:true}); } }, neu:()=>playerNeu(), beamer:()=>toggleBeamer(),
     fuehrerschein:b=>go('fuehrerschein',{id:b.dataset.id,zurueck:{name:view.name,params:view.params}}),
-    start:()=>startPlaying(false), resume:()=>startPlaying(true), mat:b=>{ matTippen(b,v,$('#overlay')); if(P.mode==='start'){ const aus=!pr.step&&!!matFehlt(v).length; $$('#controls [data-act=toggle],#controls [data-act=replay]').forEach(k=>k.disabled=aus); } }, play:()=>userPlay(), pause:()=>userPause(),
+    start:()=>startPlaying(false), resume:()=>startPlaying(true), mat:b=>{ matTippen(b,v,$('#overlay')); const aus=matAus(), zu=matSperre(); $$('#controls [data-act=toggle],#controls [data-act=replay]').forEach(k=>k.disabled=aus); $$('.sbtn').forEach(k=>k.disabled=zu); }, play:()=>userPlay(), pause:()=>userPause(),
     toggle:()=>{ if(P.mode==='playing') userPause(); else if(P.mode==='paused') userPlay(); else if(P.mode==='material') nextStep(); else if(P.mode==='start') startPlaying(!!(pr.step||pr.pos>3)); else if(P.mode==='stepdone') nextStep(); else if(P.mode==='ended') startPlaying(false); },
     replay:()=>replayStep(), next:()=>nextStep(), prevstep:()=>{ if(P.idx>0){ P.idx--; jumpStep(); } },
-    dot:b=>{ P.idx=+b.dataset.i; const k=$('.kid.pl'); if(k) k.classList.remove('liste'); if(P.mode==='error'||!P.api.ready){ stelleMerken(); updatePlayerUI(); return; } jumpStep(); },
+    dot:b=>{ if(matSperre()) return; P.idx=+b.dataset.i; const k=$('.kid.pl'); if(k) k.classList.remove('liste'); if(P.mode==='error'||!P.api.ready){ stelleMerken(); updatePlayerUI(); return; } jumpStep(); },
     back10:()=>{ P.api.seek(Math.max(0,P.api.time()-10)); }, fwd10:()=>{ P.api.seek(P.api.time()+10); },
     speed:()=>{ pr.slow=!pr.slow; P.api.rate(pr.slow?S.settings.slowRate:1); updatePlayerUI(); },
     say:b=>speak(b.dataset.text), restart:()=>{ P.idx=0; startPlaying(false); },
@@ -1819,6 +1821,11 @@ SCREENS.player=(app,{videoId,school,los,stelle})=>{
   if(S.settings.voiceControl) startListening();
 };
 function curStep(){ return P.steps[P.idx]; }
+/* Material vor dem ersten Schritt. matOffen gilt für den Start; matSperre zusätzlich für Schritte und «Weiter», solange das Kind nicht begonnen hat. Schul-Link und Beamer sind frei. */
+const matOffen=()=>!P.school&&!P.pr.step&&!!P.steps[0]&&!!P.steps[0].material&&matFehlt(P.v).length>0;
+const prBegonnen=pr=>pr.step>0||pr.pos>3||pr.max>0||!!pr.done||!!(pr.erledigt||[]).length;
+const matSperre=()=>matOffen()&&!prBegonnen(P.pr)&&!$('.kid.pl.beamer');
+const matAus=()=>P.mode==='start'?matOffen():P.mode==='material'&&matSperre();
 function fitPlayer(){ const el=$('.kid.pl'); if(!el||el.classList.contains('kino')||el.classList.contains('beamer')) return; const panes=$('.panes',el), pane=$('.pane',el); if(!panes||!pane) return; if(!matchMedia('(min-width:900px) and (min-height:540px)').matches){ el.style.removeProperty('--pl-avail'); return; } const lab=$('.plabel',pane), fuss=$('.fuss',pane); const h=panes.clientHeight-(lab?lab.offsetHeight+8:0)-(fuss?fuss.offsetHeight+8:0); el.style.setProperty('--pl-avail',Math.max(180,Math.floor(h))+'px'); }
 window.addEventListener('resize',()=>{ if(P) fitPlayer(); });
 function toggleKino(on){ const el=$('.kid.pl'); if(!el||(P&&P.school)) return; const want=on==null?!el.classList.contains('kino'):!!on; el.classList.toggle('kino',want); el.classList.remove('liste'); if(S.settings.kino!==want){ S.settings.kino=want; save(); } if(want) fsEnter(); else fsExit(); if(P) updatePlayerUI(); }
@@ -1826,7 +1833,7 @@ function fsEnter(){ try{ const d=document.documentElement; if(document.fullscree
 function fsExit(){ try{ if(document.fullscreenElement||document.webkitFullscreenElement){ const r=(document.exitFullscreen||document.webkitExitFullscreen).call(document); if(r&&r.catch) r.catch(()=>{}); } }catch(e){} }
 ['fullscreenchange','webkitfullscreenchange'].forEach(ev=>document.addEventListener(ev,()=>{ if(!document.fullscreenElement&&!document.webkitFullscreenElement){ const el=$('.kid.pl.kino'); if(el&&P&&!P._fsLeaving){ el.classList.remove('kino','liste'); S.settings.kino=false; save(); updatePlayerUI(); } if($('.kid.pl.beamer')&&P&&!P._fsLeaving) toggleBeamer(false); } }));
 function stepEnd(){ return P.idx<P.steps.length-1?P.steps[P.idx+1].t:Infinity; }
-function startPlaying(resume){ if(!resume&&!P.school&&!P.pr.step&&P.steps[0]&&P.steps[0].material&&matFehlt(P.v).length){ updatePlayerUI(); return; } unlockTTS(); if($('.kid.pl.kino')) fsEnter(); if(!P.api.ready){ toast('⏳ Video',1200); return; }
+function startPlaying(resume){ if(!resume&&matOffen()){ updatePlayerUI(); return; } unlockTTS(); if($('.kid.pl.kino')) fsEnter(); if(!P.api.ready){ toast('⏳ Video',1200); return; }
   if(P.steps.length){ if(!resume){ const m0=P.steps[0].material; if(m0&&!P.school&&!matFehlt(P.v).length) erledigtSetzen(P.pr,0); P.idx=m0&&P.steps.length>1?1:0; } if(curStep().material){ jumpStep(); return; } seekTo(curStep().t); stelleMerken(); } else { seekTo(resume?P.pr.pos:0); }
   P.mode='playing'; P.playAt=Date.now(); P.needsTap=false; P.api.play(); updatePlayerUI(); }
 function userPause(){ P.mode='paused'; P.api.pause(); updatePlayerUI(); }
@@ -1835,7 +1842,7 @@ function jumpStep(){ const s=curStep(); stelleMerken(); P.needsTap=false; if(s.m
 function seekTo(t){ P.seekAt=Date.now(); P.seekOk=false; P.seekTarget=t; P.api.seek(t); }
 function seekSettled(){ if(!P.seekAt||P.seekOk) return true; if(Math.abs(P.api.time()-P.seekTarget)<1.5){ P.seekOk=true; return true; } return Date.now()-P.seekAt>6000; }
 function replayStep(){ if(P.mode==='error'){ playerNeu(); return; } if(P.mode==='start'){ startPlaying(!!(P.pr.step||P.pr.pos>3)); return; } jumpStep(); }
-function nextStep(){ if(P.mode==='stepdone'||P.mode==='material') erledigtSetzen(P.pr,P.idx); if(P.idx<P.steps.length-1){ P.idx++; jumpStep(); } else videoEnde(); }
+function nextStep(){ if(matSperre()){ updatePlayerUI(); return; } if(P.mode==='stepdone'||P.mode==='material') erledigtSetzen(P.pr,P.idx); if(P.idx<P.steps.length-1){ P.idx++; jumpStep(); } else videoEnde(); }
 function stelleMerken(){ if(!P||P.school) return; const pr=P.pr; pr.step=P.idx; pr.max=Math.max(pr.max||0,P.idx); save(); kindMelden(P.v.id); }
 function videoEnde(){ if(P.mode==='ended') return; const v=P.v, pr=P.pr, n=P.steps.length; P.mode='ended'; if(n&&P.idx===n-1) erledigtSetzen(pr,P.idx);
   if(!P.school){ pr.max=Math.max(pr.max||0,P.idx); pr.pos=0; pr.step=0; if(!hatAufgabe(v)) pr.done=true; setTimeout(()=>{ const t=$('#task'); if(t&&!t.hidden) t.scrollIntoView({behavior:'smooth',block:'center'}); },300); }
@@ -1862,7 +1869,7 @@ function updatePlayerUI(){ if(!P) return;
   if(m==='error'){ html=`${figur('nachdenken')}<h2>⚠ Video</h2><div class="row center ov-wahl"><button type="button" class="kbtn primary" data-act="neu">${ico('replay')} Nochmal</button><button type="button" class="kbtn" data-act="back">${ico('back')} Zurück</button><button type="button" class="kbtn" data-act="melden">${ico('flag')} Melden</button></div>`; }
   else if(m==='start'&&steps[0]&&steps[0].material&&P.school){ const canResume=pr.step>1; html=matCard(steps[0].material,`<button class="kbtn primary" data-act="start">${ico('check')} Start</button>${canResume?`<button class="kbtn ghost" data-act="resume">Weiter ${pr.step+1}/${n}</button>`:''}`,v.vorlagen); }
   else if(m==='start'&&steps[0]&&steps[0].material&&!pr.step&&matFehlt(v).length){ html=matCard(steps[0].material,matStartHtml(v,'class="kbtn primary" data-act="start"','▶ Start'),v.vorlagen,v); }
-  else if(m==='material'){ html=matCard(curStep().material,`<button class="kbtn primary" data-act="next">${ico('check')} Weiter</button>`,v.vorlagen,P.school?null:v); }
+  else if(m==='material'){ html=matCard(curStep().material,matSperre()?matStartHtml(v,'class="kbtn primary" data-act="next"',`${ico('check')} Weiter`):`<button class="kbtn primary" data-act="next">${ico('check')} Weiter</button>`,v.vorlagen,P.school?null:v); }
   else if(m==='start'){ const canResume=n?pr.step>0:pr.pos>3;
     html=`${bigPlay(canResume?'resume':'start',canResume?(n?`Weiter ${pr.step+1}/${n}`:'Weiter'):'Los')}${canResume?`<button class="kbtn ghost" data-act="start">Von vorne</button>`:''}`; }
   else if(m==='playing'){ if(P.needsTap){ transparent=true; html=`<div class="tippen" role="img" aria-label="Video tippen">${ico('play')}</div>`; } else show=false; }
@@ -1875,13 +1882,13 @@ function updatePlayerUI(){ if(!P) return;
   const mb=$('#modebadge'); if(mb){ mb.hidden=!(m==='paused'||m==='stepdone'); const jetzt=m==='stepdone'&&!/^(zuschauen|schau )/i.test(curStep().label); mb.innerHTML=jetzt?figur('jetzt-du')+'Jetzt du':m==='stepdone'?'Weiter?':'Pause'; }
   const mk=$('#marke'); if(mk){ mk.hidden=m==='playing'||m==='error'||karte; mk.classList.toggle('ov',show); }
   // Schritte als Knöpfe rechts neben dem Video
-  const sl=$('#schritte');
-  if(n){ sl.innerHTML=steps.map((s,i)=>{ const jetzt=i===P.idx, ok=(pr.erledigt||[]).includes(i); return `<div class="szeile"><button type="button" class="sbtn${jetzt?' cur':''}${ok?' done':''}" data-act="dot" data-i="${i}"${jetzt?' aria-current="step"':''} aria-label="Schritt ${i+1}${ok?', erledigt':''}: ${esc(schrittKurz(s))}"><span class="num">${ok&&!jetzt?ico('check'):i+1}</span><span class="lbl">${esc(schrittKurz(s))}${s.material?`<span class="mats">${s.material.map(id=>matIcon(id,false)).join('')}</span>`:''}</span></button>${jetzt&&!s.material?`<button type="button" class="say" data-act="say" data-text="${esc('Schritt '+(i+1)+': '+schrittLang(s))}" aria-label="Vorlesen">${ico('speaker')}</button>`:''}</div>`; }).join('');
+  const sl=$('#schritte'), zu=matSperre();
+  if(n){ sl.innerHTML=steps.map((s,i)=>{ const jetzt=i===P.idx, ok=(pr.erledigt||[]).includes(i); return `<div class="szeile"><button type="button" class="sbtn${jetzt?' cur':''}${ok?' done':''}" data-act="dot" data-i="${i}"${zu?' disabled':''}${jetzt?' aria-current="step"':''} aria-label="Schritt ${i+1}${ok?', erledigt':''}: ${esc(schrittKurz(s))}"><span class="num">${ok&&!jetzt?ico('check'):i+1}</span><span class="lbl">${esc(schrittKurz(s))}${s.material?`<span class="mats">${s.material.map(id=>matIcon(id,false)).join('')}</span>`:''}</span></button>${jetzt&&!s.material?`<button type="button" class="say" data-act="say" data-text="${esc('Schritt '+(i+1)+': '+schrittLang(s))}" aria-label="Vorlesen">${ico('speaker')}</button>`:''}</div>`; }).join('');
     const cur=$('.sbtn.cur',sl); if(cur&&sl.clientHeight){ const a=sl.getBoundingClientRect(), b=cur.getBoundingClientRect(); if(b.top<a.top+8) sl.scrollTop-=a.top+8-b.top; else if(b.bottom>a.bottom-8) sl.scrollTop+=b.bottom-a.bottom+8; } }
   else sl.innerHTML=`<div class="frei"><div class="zeit" id="captime">${fmt(P.api.time())} / ${fmt(P.api.duration())}</div></div>`;
   // Steuerung
   const knopf=(act,icon,wort,aus,cls='',aria=wort)=>`<button type="button" class="kbtn pos${cls}" data-act="${act}" aria-label="${aria}"${aus?' disabled':''}>${ico(icon)}<span>${wort}</span></button>`;
-  const fehlt=m==='start'&&!P.school&&!pr.step&&steps[0]&&steps[0].material&&matFehlt(v).length;
+  const fehlt=matAus();
   const haupt=m==='playing'?['pause','Pause']:m==='stepdone'||m==='material'?['next','Weiter']:m==='ended'?['replay','Von vorne']:['play','Los'];
   $('#controls').innerHTML=n?knopf('replay','replay','Nochmal',fehlt,'','Schritt nochmal')+knopf('toggle',haupt[0],haupt[1],m==='error'||fehlt,' haupt primary')+knopf('prevstep','prev','Zurück',m==='error'||P.idx===0,'','Schritt zurück')
     :knopf('back10','replay','−10 s',m==='error')+knopf('toggle',haupt[0],haupt[1],m==='error',' haupt primary')+knopf('fwd10','next','+10 s',m==='error');
@@ -2678,6 +2685,7 @@ document.addEventListener('keydown',e=>{ if(e.key!=='Escape') return; if($('.kid
 
 /* ---- Lektionsplan (Unterrichtsmodus «projects» mit plan:true): Material richten → Video schauen → Foto/Fertig ----
    Haken bleiben auf diesem Gerät in S.settings.lektionsplan[videoId] = {s:[bool,bool,bool]}; das Material steht im Arbeitsstand des Kindes.
+   s[] ändert sich nur durch eine Handlung (matSetzen, Plan-Haken, Videoende), nie beim Zeichnen. Ring und Kontrolle zeigen s[], Stationen und Sperre das Material des Kindes.
    Jede Änderung geht gebündelt (1 s) an den Worker: POST /unterricht/fortschritt {token, geraet, videoId, schritte}. Fehler sind egal. */
 const planAktiv=()=>{ const p=uPolicy(); return !!(p&&p.plan&&p.mode==='projects'); };
 function planVon(id){ const alle=S.settings.lektionsplan||(S.settings.lektionsplan={}); const e=alle[id]||(alle[id]={s:[false,false,false]}); if(!Array.isArray(e.s)||e.s.length!==3) e.s=[false,false,false]; return e; }
@@ -2695,14 +2703,13 @@ async function kindSenden(){ const verb=U.verb; if(!uAktiv()||KIND_MELD.laeuft) 
   try{ const r=await fetch(SCHRITTLI_API+'/unterricht/kindstand',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+verb.token},body:JSON.stringify({token:verb.token,deviceId:verb.deviceId,staende}),keepalive:true,cache:'no-store',credentials:'omit'});
     if(r.ok||r.status===400){ teil.forEach(({a},i)=>{ if(a.meld===staende[i].zeit) delete a.meld; }); save(); if(kindOffene().length) setTimeout(kindNachsenden,1000); } }catch(e){}finally{ KIND_MELD.laeuft=false; } }
 const PLAN_KORB={};
-function planKarte(v){ const e=planVon(v.id), th=thumbOf(v), a=areaOf(v.areaId), mat=matListe(v), fehlt=matFehlt(v), korb=!fehlt.length;
-  if(e.s[0]!==korb){ e.s[0]=korb; save(); planMelden(v.id); }   // der Korb folgt dem Material des Kindes
-  const n=e.s.filter(Boolean).length, jetzt=e.s.indexOf(false), offen=mat.length>0&&(PLAN_KORB[v.id]??jetzt===0);
+function planKarte(v){ const e=planVon(v.id), th=thumbOf(v), a=areaOf(v.areaId), mat=matListe(v), fehlt=matFehlt(v), st=[e.s[0]&&!fehlt.length,e.s[1],e.s[2]];
+  const n=e.s.filter(Boolean).length, jetzt=st.indexOf(false), offen=mat.length>0&&(PLAN_KORB[v.id]??fehlt.length>0);
   const ring=`<span class="plan-ring${n===3?' voll':''}" aria-label="${n} von 3"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20"/><circle cx="24" cy="24" r="20" class="f" style="stroke-dasharray:${Math.round(125.66*n/3)} 126"/></svg><b>${n}/3</b></span>`;
-  const station=(k,haupt,haken)=>`<li class="plan-station${e.s[k]?' erledigt':jetzt===k?' jetzt':''}">${haupt}${haken?`<button class="plan-haken${e.s[k]?' an':''}" data-act="plan" data-id="${v.id}" data-k="${k}" aria-pressed="${e.s[k]}" aria-label="${haken}">✓</button>`:e.s[k]?'<span class="plan-haken an" aria-hidden="true">✓</span>':''}</li>`;
+  const station=(k,haupt,haken)=>`<li class="plan-station${st[k]?' erledigt':jetzt===k?' jetzt':''}">${haupt}${haken?`<button class="plan-haken${e.s[k]?' an':''}" data-act="plan" data-id="${v.id}" data-k="${k}" aria-pressed="${e.s[k]}" aria-label="${haken}">✓</button>`:st[k]?'<span class="plan-haken an" aria-hidden="true">✓</span>':''}</li>`;
   return `<div class="plan-karte v3-karte" data-video="${v.id}" data-projekt="${esc(v.id)}"><div class="plan-kopf"><button class="v3-lektion plan-video" data-act="video" data-id="${v.id}"><span class="th">${th?`<img src="${th}" alt="" loading="lazy">`:''}<i aria-hidden="true">${v.source.type==='bilder'?'📷':'▶'}</i></span><span class="grow"><b>${esc(v.title)}</b><span class="v3-meta">${a?esc(a.name):''}${zeitHtml(v)}</span></span></button>${ring}</div>
     <ol class="plan-stationen">
-      ${station(0,`<button class="plan-gross" data-act="korb" data-id="${v.id}" aria-expanded="${offen}"><span class="plan-sym" aria-hidden="true">🧺</span><b>Materialkorb</b><small>${mat.length?mat.length-fehlt.length+'/'+mat.length:'–'}</small></button>`,'')}
+      ${station(0,`<button class="plan-gross" data-act="korb" data-id="${v.id}" aria-expanded="${offen}"><span class="plan-sym" aria-hidden="true">🧺</span><b>Materialkorb</b><small>${mat.length?mat.length-fehlt.length+'/'+mat.length:'–'}</small></button>`,!fehlt.length&&!e.s[0]?'Alles da':'')}
       ${station(1,matStartHtml(v,`class="plan-gross" data-act="spielen" data-id="${v.id}"`,'<span class="plan-sym" aria-hidden="true">▶</span><b>Abspielen</b>'),'Geschaut')}
       ${station(2,`<button class="plan-gross" data-act="planfoto" data-id="${v.id}"><span class="plan-sym" aria-hidden="true">📷</span><b>Kamera</b></button>`,'Fertig')}
     </ol>${offen?`<div class="plan-korb">${matKnoepfe(v)}</div>`:''}</div>`; }
