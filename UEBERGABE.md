@@ -1,4 +1,4 @@
-# Übergabe «Schritt für Schritt» (intern `schrittli`) – Stand 30.10.2026
+# Übergabe «Schritt für Schritt» (intern `schrittli`) – Stand 31.10.2026
 
 Für die nächste Claude-Sitzung (anderes Konto, kein Gedächtnis). Alles Nötige liegt in diesem Repo. **Zuerst `AGENTS.md` lesen** (feste Regeln: keine Infotexte, kein «Aufs Handy holen»).
 
@@ -30,7 +30,18 @@ Repo: `conradinjoos-lab/schrittli` (GitHub Pages, Branch main, Cache bis 10 Min 
 | `vorschau/` | ruhige Vorschaubilder ohne Menschen (`werkzeug/vorschau.py`, Ablauf in der Skill `schritte`, Schritt 5) |
 | `AGENTS.md`, `.agents/skills/` | feste Regeln und die Skill `schritte` für andere Agenten (gleich wie `.claude/skills/`) |
 
-Zustand im Browser: localStorage `schrittli.v1` (Familie) bzw. `schrittli.schule.v1` (Schule, speichert nur die Klasse). Migration über `settings.sv` in `load()`.
+Zustand im Browser: localStorage `schrittli.v1` (Familie) bzw. `schrittli.schule.v1` (Schule). Migration über `settings.sv` in `load()`, Schule steht auf 5.
+
+## Arbeitsablauf der Schule (31.10.2026)
+
+Conradin hat nur 3 iPads, oft arbeiten 2–3 Kinder an einem. Der Ablauf heisst: Projekt wählen → Material richten → arbeiten → später weiterarbeiten → Werk abgeben.
+
+- **Arbeitsstand:** `S.arbeit[kind][videoId]` mit `pos`, `step`, `max`, `erledigt`, `material`, `entwuerfe`, `zeit`, `werkFertig`. Ein Eintrag für jedes gewählte Kind; anonym zählt `_ohne`.
+- **Foto:** eines für alle gewählten Namen, Wahl nach der Abgabe leer, Sterne freiwillig, Zustand sichtbar (`fotoZustandHtml`). Spalte `bewertet` in `schulwerke` trennt «keine Sterne» von alten Fotos.
+- **Kinderstand:** Die App sendet gebündelt an `POST /unterricht/kindstand`, die Kontrolle liest mit `GET` (Tabelle `unterricht_kindstand`).
+- **Fehlermeldung:** `vorlagen/melden.js` auf jeder Seite. `/melden` nimmt 200 pro Stunde an und speichert `stand`, damit die Kontrolle den Bau kennt. Während der Einfrieren-Sperre gibt es bewusst keine Flagge.
+- **Prüfgerüst:** `werkzeug/ablauf-test/` spielt 130 Abläufe durch, Bedienung in `werkzeug/LIESMICH.md`. Der Lauf ist manuell, kein GitHub Action.
+- **Reihenfolge beim Veröffentlichen:** zuerst Migrationen `0005_bewertet` und `0006_kindstand` (`schrittli-werke`), dann Worker, dann App und Kontrolle.
 
 ## Wie neue Videos entstehen (seit 24.10.2026: `werkzeug/`)
 
@@ -57,7 +68,7 @@ Playwright-Smoke-Tests (Windows): `NODE_PATH="C:/Grok Code/Steine-App/node_modul
 - **Schnitzen** ist seit 24.10.2026 ein eigenes Verfahren (`areaId: schnitzen`, Klassen 3–6; jeder `hinweis` nennt Schnitzregeln und Handschuh). **Mini-Projekte** unter 15 Minuten (kurze Reels) tragen das Feld `zeit`; die App zeigt es als Zeitschild auf der Karte und in der Lehrpersonen-Liste, damit Kinder mit wenig Restzeit etwas finden.
 - Schritt 1 ist immer **Material richten** (Materialkarte statt Video). Conradin will dafür **echte Fotos von oben, freigestellt** – nicht Piktogramme. Entscheid: Bilder mit **Grok** erzeugen; die Prompts liegen fertig in `material/PROMPTS-GROK.md` (65 Materialien). Piktogramme (20 gezeichnet + Emoji) bleiben Platzhalter.
 - Für die Ex-Frau muss alles ohne Conradin laufen: kein Server, kein API-Schlüssel. Deshalb liegt die Automatik getrennt in `werkzeug/` (nur auf Conradins Rechner); die App selbst bleibt ohne Server.
-- Material aus `G:\Meine Ablage\01_TTG\40_Bausteine` (buntgewerkt.de, © 2021) darf **nicht** öffentlich ins Repo. Conradins eigene Liste «Ideen 1.–3. Klasse» (70_Fundus/Ideen) bestimmt die Klassenzuordnung der Techniken.
+- Unterrichtsmaterial wird eingebaut, wenn Conradin es verlangt (siehe `CLAUDE.md`). Conradins eigene Liste «Ideen 1.–3. Klasse» (70_Fundus/Ideen) bestimmt die Klassenzuordnung der Techniken.
 
 ## Offen (in dieser Reihenfolge sinnvoll)
 
