@@ -1,0 +1,71 @@
+/* Gemeinsame Bausteine der Planer: Kopf, Druckkopf, Blattübersicht, «Zu gross», Hervorheben. Die Druckregeln der Blätter bleiben auf den Seiten. */
+:root{--kopf-h:56px;--kopf-druck:136px}
+/* Kopf: Rückweg links, Name, rechts immer Rückgängig und Drucken */
+.pk{position:sticky;top:0;z-index:40;box-sizing:border-box;width:100%;height:var(--kopf-h);display:flex;align-items:center;gap:8px;padding:0 12px;background:var(--surface,#fff);color:var(--ink);border-bottom:1px solid var(--line,#ddd)}
+.pk h1{flex:1;min-width:0;margin:0;padding:0;font:600 21px/1.2 Fredoka,Nunito,sans-serif;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pk .zur-app,.pk-vorlagen{flex:none;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:6px;height:44px;min-width:44px;margin:0;padding:0 10px;border-radius:12px;font:700 15px Nunito,sans-serif;color:var(--acc,inherit);text-decoration:none}
+.pk .zur-app:hover,.pk-vorlagen:hover{background:var(--acc-soft);text-decoration:none}
+.pk .zur-app::before{content:"←";font-size:20px;line-height:1}
+.pk-rueck,.pk-druck{flex:none;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:7px;height:44px;margin:0;padding:0;border-radius:12px;font:700 15px Nunito,sans-serif;cursor:pointer}
+.pk-rueck{width:44px;border:2px solid var(--line,#ddd);background:var(--surface2,#f4f4f4);color:var(--ink)}
+.pk-rueck:hover:not(:disabled){border-color:var(--acc);color:var(--acc)}
+.pk-rueck:disabled{opacity:.35;cursor:default}
+.pk-druck{width:var(--kopf-druck);border:0;background:var(--acc);color:var(--acc-ink,#fff)}
+.pk-druck::after{content:"100 %";font-size:12px;opacity:.85}
+.pk-druck:disabled{opacity:.45;cursor:default}
+.pk-leer{flex:none;width:var(--kopf-druck);height:44px}
+.pk-rueck::before,.pk-druck::before,.pk-vorlagen::before{content:"";flex:none;width:22px;height:22px;background:currentColor;-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat}
+.pk-rueck{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 14 4 9l5-5'/%3E%3Cpath d='M4 9h10.5a5.5 5.5 0 0 1 0 11H11'/%3E%3C/svg%3E")}
+.pk-druck{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z'/%3E%3C/svg%3E")}
+.pk-vorlagen{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='7.5' height='7.5' rx='1.5'/%3E%3Crect x='13.5' y='3' width='7.5' height='7.5' rx='1.5'/%3E%3Crect x='3' y='13.5' width='7.5' height='7.5' rx='1.5'/%3E%3Crect x='13.5' y='13.5' width='7.5' height='7.5' rx='1.5'/%3E%3C/svg%3E")}
+.pk a:focus-visible,.pk button:focus-visible,.pl-seg button:focus-visible,.pl-gross button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+@media (max-width:640px){
+  :root{--kopf-druck:84px}
+  .pk{gap:4px;padding:0 6px}
+  .pk h1{font-size:17px}
+  .pk .zur-app span,.pk-vorlagen span,.pk-druck span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .pk .zur-app,.pk-vorlagen{padding:0}
+  .pk-druck{gap:4px}
+}
+
+/* Druckkopf */
+.pl-leiste{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.pl-seg{display:inline-flex;border:2px solid var(--line,#ddd);border-radius:12px;background:var(--surface2,#f4f4f4);padding:2px;gap:2px}
+.pl-seg button{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:38px;min-width:42px;padding:3px 10px;border:0;border-radius:9px;background:none;color:var(--muted);font:700 15px Nunito,sans-serif;cursor:pointer}
+.pl-seg button:hover{color:var(--ink)}
+.pl-seg button[aria-pressed="true"]{background:var(--surface,#fff);color:var(--acc);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.pl-seg svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.pl-zahl{display:inline-flex;align-items:center;gap:6px;font:700 15px Nunito,sans-serif;color:var(--ink)}
+.pl-mini{display:inline-grid;grid-template-columns:repeat(var(--sp,1),var(--mw,10px));gap:2px}
+.pl-mini i{display:block;box-sizing:border-box;width:var(--mw,10px);height:var(--mh,14px);border:1.5px solid var(--acc);border-radius:2px;background:var(--acc-soft)}
+.pl-mini.quer{--mw:14px;--mh:10px}
+
+/* Blattübersicht */
+.pl-blaetter{display:grid;grid-template-columns:repeat(var(--sp,3),minmax(0,1fr));gap:8px;margin:10px 0 0}
+.pl-blaetter[hidden]{display:none}
+.pl-blatt{position:relative;margin:0;min-width:0}
+.pl-blatt svg{display:block;width:100%;height:auto;background:#fff;border:1px solid var(--line,#ddd);border-radius:4px;box-sizing:border-box}
+.pl-blatt figcaption{position:absolute;top:4px;left:4px;min-width:20px;height:20px;padding:0 4px;box-sizing:border-box;display:grid;place-items:center;border-radius:10px;background:var(--acc);color:var(--acc-ink,#fff);font:700 12px Nunito,sans-serif}
+
+/* Zu gross */
+.pl-gross{display:flex;flex-wrap:wrap;align-items:center;gap:6px;color:var(--warn,var(--bad,#D64545));font:800 15px Nunito,sans-serif}
+.pl-gross[hidden]{display:none}
+.pl-gross button{display:inline-flex;align-items:center;gap:5px;min-height:38px;padding:4px 10px;border:2px solid currentColor;border-radius:10px;background:var(--surface,#fff);color:inherit;font:700 14px Nunito,sans-serif;cursor:pointer}
+.pl-gross svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.pl-zugross,.pl-zugross *{stroke:var(--warn,var(--bad,#D64545))!important;stroke-width:1!important;fill:rgba(214,69,69,.14)!important}
+
+/* Geänderter Teil leuchtet kurz */
+@keyframes pl-leucht{0%,55%{outline-color:var(--acc)}100%{outline-color:transparent}}
+.pl-leucht{outline:3px solid transparent;outline-offset:2px;animation:pl-leucht .75s ease-out}
+@keyframes pl-kante{0%,50%{opacity:1}100%{opacity:0}}
+.pl-kante{fill:none;stroke:var(--acc);stroke-width:1.6;stroke-linecap:round;pointer-events:none;animation:pl-kante .9s ease-out forwards}
+@media (prefers-reduced-motion:reduce){.pl-leucht,.pl-kante{animation-duration:.01s}}
+
+/* Schmal: Vorschau haftet unter dem Kopf */
+@media (max-width:860px){
+  .pl-haft{position:sticky;top:var(--kopf-h);z-index:10;box-shadow:0 8px 16px rgba(0,0,0,.12)}
+}
+
+@media print{
+  .pk,.pl-leiste,.pl-blaetter,.pl-gross{display:none!important}
+}

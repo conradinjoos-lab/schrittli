@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="../planer.css">
 <style>
 :root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--warn:#B4541A;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;--warn:#F0A04B;color-scheme:dark}}
@@ -15,14 +16,12 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
 h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
-h1{font-size:26px}
 h2{font-size:28px;line-height:1.2;text-align:center;margin:4px 0 16px}
 h2:focus{outline:none}
 a{color:var(--acc)}
 button{touch-action:manipulation}
 button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
-.kopf,.weg,main{max-width:860px;margin:0 auto;padding-left:16px;padding-right:16px}
-.kopf{padding-top:16px}
+.weg,main{max-width:860px;margin:0 auto;padding-left:16px;padding-right:16px}
 /* Der Weg: fünf Schritte. Erledigte zeigen, was man gewählt hat, und führen dorthin zurück. */
 .weg{display:flex;flex-wrap:wrap;gap:6px;padding-top:10px;padding-bottom:6px}
 .weg button{font:inherit;font-size:14px;min-height:36px;padding:4px 12px;border-radius:999px;border:2px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
@@ -83,7 +82,6 @@ main{padding-top:4px;padding-bottom:48px}
 .garn-erg b{color:var(--acc);font:600 24px Fredoka,Nunito,sans-serif}
 .druckzeile{display:flex;gap:10px;max-width:560px;margin:24px auto 0;flex-wrap:wrap}
 .druckzeile .text{flex:1 1 170px;min-height:60px;font:inherit;font-size:19px;border:2px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);padding:8px 12px}
-.druckzeile .weiter{flex:1 1 220px;margin:0}
 .neu{display:block;margin:18px auto 0}
 /* 1./2. Klasse: grösser, Wolle-Rechnung weg */
 body.klein .kachel{font-size:21px}
@@ -92,7 +90,10 @@ body.klein .stepper button{width:68px;height:68px;font-size:36px}
 body.klein .stepper input{height:68px;font-size:36px;width:110px}
 @media (max-width:640px){
   .kacheln{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .plan-kopf{grid-template-columns:1fr}
+  /* Das Werk bleibt sichtbar, während die Grösse eingestellt wird */
+  .plan-kopf{display:contents}
+  .werkbild{position:sticky;top:var(--kopf-h);z-index:5;background:var(--bg);margin:10px -16px 0;padding:6px 16px}
+  .werkbild svg{max-height:150px}
   h2{font-size:24px}
   .stepper button{width:54px;height:54px}
   .stepper input{width:86px;height:54px}
@@ -109,11 +110,14 @@ body.klein .stepper input{height:68px;font-size:36px;width:110px}
 <style id="seite"></style>
 </head>
 <body>
-<header class="kopf">
-  <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
+<header class="pk">
+  <a class="zur-app" href="../../" data-zur-app aria-label="Zurück zur App"><span>App</span></a>
   <h1>Maschen-Planer</h1>
+  <button class="pk-rueck" id="p-rueck" type="button" disabled aria-label="Rückgängig" title="Rückgängig"></button>
+  <button class="pk-druck" id="drucken" type="button" disabled aria-label="Drucken, 100 %"><span>Drucken</span></button>
 </header>
 <script src="../zurueck.js"></script>
+<script src="../planer.js"></script>
 <nav class="weg" id="weg" aria-label="Schritte"></nav>
 <main id="main"></main>
 <div id="druck"></div>
@@ -123,9 +127,8 @@ body.klein .stepper input{height:68px;font-size:36px;width:110px}
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const f=v=>Math.round(v*10)/10;
-const KEY='schrittli.maschenprobe.v1';
-const FRISCH=2*60*60*1000;   // Nach 2 Stunden beginnt die Seite wieder vorne (geteilte iPads), vorher geht es dort weiter, wo man war
-const PAPIERE={a4:{name:'A4',w:210,h:297},a3:{name:'A3',w:297,h:420}};
+const SP=Planer.speicher('schrittli.maschenprobe.v1');   // Ein laufender Plan verfällt nicht; mit «schrittli.kind» pro Kind getrennt
+const PAPIERE=Planer.PAPIERE;
 const TECHNIK={haekeln:'Häkeln',stricken:'Stricken'};
 // Werke für Kinder: was gemessen wird und wie es fertig wird
 const WERKE={
@@ -165,7 +168,7 @@ function klasseLesen(){
 const KLASSE=klasseLesen(), KLEIN=KLASSE>0&&KLASSE<=2;
 if(KLEIN)document.body.classList.add('klein');
 function kindName(){   // Vorname aus «Wer bist du?» der Schulversion
-  try{ if(localStorage.getItem('schrittli.app')==='schule')return String(JSON.parse(localStorage.getItem('schrittli.schule.v1'))?.settings?.kind?.name||'').slice(0,30); }catch(e){}
+  try{ if(localStorage.getItem('schrittli.app')==='schule'){ const s=JSON.parse(localStorage.getItem('schrittli.schule.v1'))?.settings; return String(s?.kinder?.[0]?.name||s?.kind?.name||'').slice(0,30); } }catch(e){}
   return '';
 }
 
@@ -201,8 +204,8 @@ function massText(){
 
 // ---------- Speichern ----------
 function laden(){
-  let t=null; try{ t=JSON.parse(localStorage.getItem(KEY)); }catch(e){}
-  if(t&&typeof t==='object'&&Date.now()-Number(t.zeit||0)<FRISCH){
+  const t=SP.lies();
+  if(t&&typeof t==='object'){
     if(hat(TECHNIK,t.technik))S.technik=t.technik;
     if(hat(WERKE,t.werk))S.werk=t.werk;
     if(t.mass&&typeof t.mass==='object')for(const [k,,min,max] of ALLE_FELDER)if(t.mass[k]!=null)S.mass[k]=clamp(t.mass[k],min,max);
@@ -224,7 +227,7 @@ function laden(){
   if(S.m10<3)S.weit=Math.min(S.weit,4); else if(S.r10<3)S.weit=Math.min(S.weit,5);
   S.schritt=Math.min(S.schritt,S.weit);
 }
-function speichern(){ try{localStorage.setItem(KEY,JSON.stringify({...S,zeit:Date.now()}))}catch(e){} }
+function speichern(){ SP.schreibe({...S,zeit:Date.now()}); }
 
 // ---------- Rechnung ----------
 function rechnen(){
@@ -370,6 +373,7 @@ function zettel(x0,y0,w,h,R,zahlen){
   s+=linie('Werk:',zahlen&&S.werk?`${WERKE[S.werk].name}, ${S.b} × ${S.h} cm`:'',y,l,r); y+=zeile;
   s+=linie('Anschlag:',zahlen?`${R.anschlag}${haek?' + 1':''} ${haek?'Luftmaschen':'Maschen'}`:'',y,l,l+breit*.48); s+=linie('Reihen:',zahlen?String(R.reihen):'',y,l+breit*.52,r); y+=zeile;
   s+=linie('Menge:',zahlen&&R.gramm?`ca. ${R.gramm} g = ${R.knaeuel} Knäuel`:'',y,l,r);
+  s+=Planer.kontrolle(l,y0+h-(gross?14:6));
   return s;
 }
 function blatt(zahlen,papier){
@@ -385,10 +389,8 @@ function blatt(zahlen,papier){
   return `<svg viewBox="0 0 ${P.w} ${P.h}" width="${P.w}" height="${P.h}" xmlns="http://www.w3.org/2000/svg" font-family="Nunito,system-ui,sans-serif">${s}</svg>`;
 }
 function drucken(zahlen,papier=S.papier){
-  const P=PAPIERE[papier];
   $('druck').innerHTML=blatt(zahlen,papier);
-  $('seite').textContent=`@page{size:${P.name} portrait;margin:0}`;
-  $('druck').style.setProperty('--bw',P.w+'mm');$('druck').style.setProperty('--bh',P.h+'mm');
+  Planer.seite({papier});
   window.print();
 }
 
@@ -410,7 +412,7 @@ const SCHRITT=[
     <div class="extras"><button type="button" class="mehr" data-act="groesse" aria-expanded="${offen.groesse}" aria-controls="groesse">↔ Grösse</button>${KLEIN?'':`<button type="button" class="mehr" data-act="garn" aria-expanded="${offen.garn}" aria-controls="garn">⚖️ Wolle</button>`}</div>
     <div class="ausklapp" id="groesse"${offen.groesse?'':' hidden'}><div class="mass">${stepper('b',S.b,2,200,1,'cm',lb)}${stepper('h',S.h,2,300,1,'cm',lh)}</div></div>
     ${KLEIN?'':`<div class="ausklapp" id="garn"${offen.garn?'':' hidden'}><div class="mass">${stepper('seite',S.seite,0,30,1,'cm','Probestück, Seite',planIcon('probe'))}${stepper('gew',S.gew,0,100,1,'g','Probestück, Gewicht','<span class="emo">⚖️</span>')}</div><p class="garn-erg" id="garn-erg"></p></div>`}
-    <div class="druckzeile"><input class="text" id="name" maxlength="30" autocomplete="off" placeholder="Dein Name" aria-label="Dein Name (kommt auf den Zettel)" value="${esc(S.name)}"><button type="button" class="weiter" data-act="plan-druck">🖨 Drucken</button></div>
+    <div class="druckzeile"><input class="text" id="name" maxlength="30" autocomplete="off" placeholder="Name" aria-label="Name" value="${esc(S.name)}"></div>
     <button type="button" class="link neu" data-act="neu">↺ Neu</button>`; }
 ];
 function planAktualisieren(){
@@ -435,6 +437,7 @@ function zeigen(fokus=true){
   $('main').innerHTML=SCHRITT[S.schritt]();
   if(S.schritt===6)planAktualisieren();
   if(fokus){ window.scrollTo(0,0); $('main').querySelector('h2')?.focus({preventScroll:true}); }
+  $('drucken').disabled=S.schritt<3;   // vorher gibt es noch nichts zu drucken
   speichern();
 }
 function gehe(i){ S.schritt=i; S.weit=Math.max(S.weit,i); zeigen(); }
@@ -454,14 +457,17 @@ function geaendert(feld){
   if(feld.startsWith('mass.'))masseSetzen();
   if(feld==='m10'||feld==='r10'){ const b=document.querySelector('[data-act="weiter"]'); if(b)b.disabled=S[feld]<3; }
   if(feld==='m10'&&$('warn'))$('warn').hidden=S.m10!==25;   // 25 Maschen hat das ganze Probestück
-  if(S.schritt===6)planAktualisieren();
+  if(S.schritt===6){ planAktualisieren(); Planer.leuchte('#werkbild'); }
   $('weg').innerHTML=pillen();
   speichern();
 }
 function setzen(st,v){
   v=clamp(v,Number(st.dataset.min),Number(st.dataset.max));
+  if(v!==feldLesen(st.dataset.feld))Planer.merke(null,'feld-'+st.dataset.feld);
   feldSchreiben(st.dataset.feld,v); st.querySelector('input').value=v; geaendert(st.dataset.feld);
 }
+Planer.verlauf({hole:()=>S,setze(z){ Object.assign(S,z); zeigen(false); }});
+$('drucken').addEventListener('click',()=>{ if(S.schritt===6)drucken(true,'a4'); else drucken(false); });
 $('weg').addEventListener('click',e=>{
   const b=e.target.closest('[data-gehe]'); if(!b||b.disabled)return;
   const i=Number(b.dataset.gehe); S.schritt=i===3&&S.weit>=4?4:i; zeigen();   // Probe: gleich zum Zählen, wenn das Probestück schon da ist
@@ -469,27 +475,26 @@ $('weg').addEventListener('click',e=>{
 $('main').addEventListener('click',e=>{
   const pm=e.target.closest('[data-minus],[data-plus]');
   if(pm){ const st=pm.closest('.stepper'); setzen(st,(Number(st.querySelector('input').value)||0)+Number(st.dataset.schritt)*(pm.hasAttribute('data-plus')?1:-1)); return; }
-  const t=e.target.closest('[data-technik]'); if(t){ technikWaehlen(t.dataset.technik); zeigen(); return; }
-  const w=e.target.closest('[data-werk]'); if(w){ werkWaehlen(w.dataset.werk); S.weit=Math.max(S.weit,2); zeigen(); return; }
+  const t=e.target.closest('[data-technik]'); if(t){ Planer.merke(); technikWaehlen(t.dataset.technik); zeigen(); return; }
+  const w=e.target.closest('[data-werk]'); if(w){ Planer.merke(); werkWaehlen(w.dataset.werk); S.weit=Math.max(S.weit,2); zeigen(); return; }
   const a=e.target.closest('[data-act]'); if(!a)return;
   switch(a.dataset.act){
     case 'weiter': if(!a.disabled)gehe(S.schritt+1); break;
     case 'zurueck': S.schritt=Math.max(0,S.schritt-1); zeigen(); break;
     case 'zettel': drucken(false); break;
     case 'zettel-a3': drucken(false,'a3'); break;
-    case 'plan-druck': drucken(true,'a4'); break;
     case 'groesse': case 'garn': {
       const k=a.dataset.act; offen[k]=!offen[k]; a.setAttribute('aria-expanded',offen[k]); $(k).hidden=!offen[k];
       if(k==='garn'&&offen.garn&&!S.seite){ S.seite=clamp(250/S.m10,5,30); $('f-seite').value=S.seite; geaendert('seite'); }   // 25 Maschen breit, als Quadrat
       break; }
-    case 'neu': { const name=kindName()||S.name; Object.assign(S,JSON.parse(JSON.stringify(START)),{name,papier:S.papier}); offen.groesse=offen.garn=false; zeigen(); break; }
+    case 'neu': { Planer.merke(); const name=kindName()||S.name; Object.assign(S,JSON.parse(JSON.stringify(START)),{name,papier:S.papier}); offen.groesse=offen.garn=false; zeigen(); break; }
   }
 });
 $('main').addEventListener('input',e=>{
-  if(e.target.id==='name'){ S.name=e.target.value.slice(0,30); speichern(); return; }
+  if(e.target.id==='name'){ Planer.merke(null,'name'); S.name=e.target.value.slice(0,30); speichern(); return; }
   const st=e.target.closest('.stepper'); if(!st||e.target.value==='')return;
   const v=Number(e.target.value);   // beim Tippen nur übernehmen, was schon passt; den Rest richtet «change»
-  if(v>=Number(st.dataset.min)&&v<=Number(st.dataset.max)&&v!==feldLesen(st.dataset.feld)){ feldSchreiben(st.dataset.feld,Math.round(v)); geaendert(st.dataset.feld); }
+  if(v>=Number(st.dataset.min)&&v<=Number(st.dataset.max)&&v!==feldLesen(st.dataset.feld)){ Planer.merke(null,'feld-'+st.dataset.feld); feldSchreiben(st.dataset.feld,Math.round(v)); geaendert(st.dataset.feld); }
 });
 $('main').addEventListener('change',e=>{ const st=e.target.closest('.stepper'); if(st)setzen(st,e.target.value); });
 

@@ -5,11 +5,13 @@ const {createCanvas,loadImage}=require('@napi-rs/canvas');
 const root=path.resolve(__dirname,'../..'),out=path.join(root,'output/perlen-audit');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 function context(before=false){
-  const nodes=new Map(),el=()=>({value:'',innerHTML:'',textContent:'',hidden:false,dataset:{},classList:{toggle(){}},addEventListener(){},setAttribute(){},scrollIntoView(){}});
-  const c=vm.createContext({console,URLSearchParams,window:{},location:{search:'',protocol:'http:'},history:{replaceState(){}},localStorage:{getItem(){return null},setItem(){}},matchMedia:()=>({matches:false}),document:{getElementById(id){if(!nodes.has(id))nodes.set(id,el());return nodes.get(id)},querySelectorAll(){return []}}});
+  const nodes=new Map(),el=()=>({value:'',innerHTML:'',textContent:'',hidden:false,dataset:{},style:{setProperty(){}},classList:{toggle(){},add(){},remove(){}},addEventListener(){},setAttribute(){},scrollIntoView(){},querySelector(){return el()},querySelectorAll(){return []},appendChild(){}});
+  const doc={getElementById(id){if(!nodes.has(id))nodes.set(id,el());return nodes.get(id)},querySelector(s){return doc.getElementById(s.slice(1))},querySelectorAll(){return []},addEventListener(){},createElement:el,head:el(),body:el()};
+  const c=vm.createContext({console,URLSearchParams,setTimeout(){return 0},clearTimeout(){},window:{addEventListener(){}},location:{search:'',protocol:'http:'},history:{replaceState(){}},localStorage:{getItem(){return null},setItem(){},removeItem(){}},matchMedia:()=>({matches:false}),document:doc});
   vm.runInContext(read(before?'output/perlen-audit/vorher/figuren.js':'vorlagen/perlen/figuren.js'),c);
   if(!before)vm.runInContext(read('vorlagen/perlen/figuren-gross.js'),c);
   vm.runInContext(read('vorlagen/perlen/bearbeiten.js'),c);c.PerlenEditor=c.window.PerlenEditor;
+  vm.runInContext(read('vorlagen/planer.js'),c);c.Planer=c.window.Planer;
   for(const m of read(before?'output/perlen-audit/vorher/index.html':'vorlagen/perlen/index.html').matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))if(m[1].trim())vm.runInContext(m[1],c);
   return c;
 }

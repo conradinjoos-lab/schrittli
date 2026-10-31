@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="../planer.css">
 <style>
 :root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--papier:#FFFFFF;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;color-scheme:dark}}
@@ -15,11 +16,8 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
 h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
-h1{font-size:28px}
 h2{font-size:17px;margin-bottom:10px}
 a{color:var(--acc)}
-.kopf{max-width:1200px;margin:0 auto;padding:20px 16px 8px}
-.kopf p{margin:4px 0 0;color:var(--muted)}
 /* Links die Einstellungen, rechts bleiben Vorschau und Rechnung beim Scrollen stehen */
 main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);grid-template-rows:repeat(3,auto) 1fr;grid-template-areas:"art rechts" "muster rechts" "hand rechts" "blatt rechts";gap:14px 20px;align-items:start}
 #k-art{grid-area:art}#k-muster{grid-area:muster}#k-hand{grid-area:hand}#k-blatt{grid-area:blatt}.seite-rechts{grid-area:rechts}
@@ -27,11 +25,11 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .arten{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
 .art{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 8px;border:2px solid var(--line);border-radius:14px;background:var(--surface2);color:var(--ink);font:inherit;font-size:15px;cursor:pointer;text-align:center}
 .art svg{width:100%;max-width:130px;height:56px}
-.art small{color:var(--muted);font-size:12px}
+
 .art[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
 .art:hover,.chip:hover,.farbe:hover{border-color:var(--acc)}
 button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
-.seite-rechts{position:sticky;top:12px;display:flex;flex-direction:column;gap:14px}
+.seite-rechts{position:sticky;top:calc(var(--kopf-h) + 12px);display:flex;flex-direction:column;gap:14px}
 .feld{margin-bottom:14px}.feld:last-child{margin-bottom:0}
 .lbl{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -48,23 +46,20 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 .farbe b{position:absolute;right:-6px;top:-6px;min-width:20px;height:20px;border-radius:10px;background:var(--ink);color:var(--surface);font-size:12px;line-height:20px;text-align:center}
 .text{width:100%;font:inherit;font-size:20px;letter-spacing:.06em;text-transform:uppercase;border:2px solid var(--line);border-radius:10px;background:var(--surface2);color:var(--ink);padding:8px 10px}
 .klein{font:inherit;font-size:14px;padding:6px 12px;border-radius:10px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer;margin-top:8px}
-.drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
-.drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
+#name-hinweis{color:#C0392B;font-size:14px;font-weight:800}
 .rechnung{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:15px}
 .rechnung dt{color:var(--muted)}.rechnung dd{margin:0}
 .rechnung .gross{font:600 22px Fredoka,Nunito,sans-serif;color:var(--acc)}
-.hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
 .vorschau svg{display:block;width:100%;max-width:380px;max-height:280px;height:auto;margin:0 auto}
 .blatt svg{display:block;width:100%;height:auto;background:var(--papier);border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
 /* Schmal: eine Spalte, die Vorschau klebt oben, die Einstellungen laufen darunter durch */
 @media (max-width:860px){
   main{display:flex;flex-direction:column;align-items:stretch;gap:14px}
   .seite-rechts{display:contents}
-  #k-art{order:1}#k-vorschau{order:2}#k-muster{order:3}#k-hand{order:4}#k-rechnung{order:5}#drucken{order:6}#k-blatt{order:7}
-  #k-vorschau{position:sticky;top:0;z-index:2;padding:10px 12px;box-shadow:0 6px 16px rgba(0,0,0,.18)}
+  #k-art{order:1}#k-vorschau{order:2}#k-muster{order:3}#k-hand{order:4}#k-rechnung{order:5}#k-blatt{order:7}
+  #k-vorschau{position:sticky;top:var(--kopf-h);z-index:2;padding:10px 12px;box-shadow:0 6px 16px rgba(0,0,0,.18)}
   #k-vorschau h2{display:none}
   .vorschau svg{max-height:150px}
-  h1{font-size:24px}
 }
 #druck{display:none}
 @page{size:A4 portrait;margin:0}
@@ -77,15 +72,18 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 </style>
 </head>
 <body>
-<header class="kopf">
-  <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
+<header class="pk">
+  <a class="zur-app" href="../../" data-zur-app aria-label="Zurück zur App"><span>App</span></a>
   <h1>Armbänder</h1>
-  <p>Handgelenk messen, Art, Muster und Farben wählen. Länge, Perlen und Fäden rechnet die Seite aus. <a href="../">←&nbsp;Vorlagen-Generator</a></p>
+  <a class="pk-vorlagen" href="../" aria-label="Vorlagen" title="Vorlagen"><span>Vorlagen</span></a>
+  <button class="pk-rueck" id="p-rueck" type="button" disabled aria-label="Rückgängig" title="Rückgängig"></button>
+  <button class="pk-druck" id="drucken" type="button" aria-label="Drucken, 100 %"><span>Drucken</span></button>
 </header>
 <script src="../zurueck.js"></script>
+<script src="../planer.js"></script>
 <main>
     <section class="karte" id="k-art" aria-label="Art wählen">
-      <h2>Was für ein Armband?</h2>
+      <h2>Art</h2>
       <div class="arten" id="arten"></div>
     </section>
     <section class="karte" id="k-muster" aria-label="Muster und Farben">
@@ -93,22 +91,20 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
       <div class="feld" id="f-breite"><span class="lbl" id="l-breite"></span><div class="chips" role="group" aria-labelledby="l-breite" id="breiten"></div></div>
       <div class="feld"><span class="lbl" id="l-muster">Muster</span><div class="chips" role="group" aria-labelledby="l-muster" id="muster"></div></div>
       <div class="feld" id="f-block"><span class="lbl" id="l-block"></span><div class="chips" role="group" aria-labelledby="l-block" id="bloecke"></div></div>
-      <div class="feld" id="f-name"><label class="lbl" for="name">Name (Grossbuchstaben)</label><input class="text" id="name" maxlength="14" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="NAME"><small id="name-hinweis" style="display:block;margin-top:6px;color:var(--muted)">Buchstaben A–Z, Ä Ö Ü, Leerzeichen und Bindestrich.</small></div>
-      <div class="feld"><span class="lbl" id="l-farben">Farben – antippen in der Reihenfolge, die du willst</span><div class="farben" role="group" aria-labelledby="l-farben" id="farben"></div>
+      <div class="feld" id="f-name"><label class="lbl" for="name">Name</label><input class="text" id="name" maxlength="14" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="NAME"><span id="name-hinweis" hidden>⚠ Zu lang</span></div>
+      <div class="feld"><span class="lbl" id="l-farben">Farben</span><div class="farben" role="group" aria-labelledby="l-farben" id="farben"></div>
         <button type="button" class="klein" id="mischen" hidden>Neu mischen</button></div>
     </section>
     <section class="karte" id="k-hand" aria-label="Handgelenk">
-      <div class="feld"><label class="lbl" for="umfang">Umfang vom Handgelenk</label>
+      <div class="feld"><label class="lbl" for="umfang">Handgelenk</label>
         <div class="umfang"><input type="range" id="regler" min="10" max="24" step="0.5" aria-label="Umfang mit Schieber"><div class="zahl"><input type="number" id="umfang" min="10" max="24" step="0.5" inputmode="decimal"><span>cm</span></div></div>
-        <p class="hinweis">Messen: Papierstreifen oder Messband vom Blatt eng ums Handgelenk legen und ablesen. Kinder 6–12 Jahre: meist 13–16 cm.</p></div>
+      </div>
       <div class="feld"><span class="lbl" id="l-sitz">Sitz</span><div class="chips" role="group" aria-labelledby="l-sitz" id="sitz"></div></div>
     </section>
     <section class="karte" id="k-blatt" aria-label="Druckblatt"><h2>Druckblatt</h2><div class="blatt" id="blatt"></div></section>
   <div class="seite-rechts">
     <section class="karte" id="k-vorschau" aria-label="Vorschau"><h2>Vorschau</h2><div class="vorschau" id="vorschau"></div></section>
-    <section class="karte" id="k-rechnung" aria-label="Rechnung"><h2>Das brauchst du</h2><dl class="rechnung" id="rechnung"></dl>
-      <p class="hinweis" id="tipp"></p></section>
-    <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
+    <section class="karte" id="k-rechnung" aria-label="Rechnung"><h2>Material</h2><dl class="rechnung" id="rechnung"></dl></section>
   </div>
 </main>
 <div id="druck"></div>
@@ -181,7 +177,7 @@ function raster(){
       for(let h=0;h<n;h++)HERZ.forEach((z,c)=>[...z].forEach((x,r)=>{if(x==='1')setze(start+h*7+r,oben+c,C2[h%C2.length])}));}
     else{const sp=[];nameZeichen().forEach((z,i)=>{if(i)sp.push(null);if(z===' '){sp.push(null);return}for(let x=0;x<3;x++)sp.push([z,x,i])});
       let start=Math.floor((R-sp.length)/2);const zuLang=start<0;if(zuLang){start=0;sp.splice(R)}   // zu lang: so viel wie passt, mit Hinweis
-      $('name-hinweis').textContent=zuLang?'Der Name ist zu lang für dieses Armband: kürzer schreiben oder den Umfang grösser wählen.':'Buchstaben A–Z, Ä Ö Ü, Leerzeichen und Bindestrich.';
+      $('name-hinweis').hidden=!zuLang;
       sp.forEach((s,j)=>{if(!s)return;const [z,x,i]=s;for(let y=0;y<5;y++)if(SCHRIFT[z][y*3+x]==='1')setze(start+j,oben+y,C2[i%C2.length])});}
     return g;
   }
@@ -206,33 +202,33 @@ const knotenReihen=()=>Math.max(4,Math.round(laenge()/.25));   // etwa 2,5 mm pr
 function zaehle(liste){const z={};liste.forEach(k=>{z[k]=(z[k]||0)+1});return Object.entries(z).sort((a,b)=>b[1]-a[1])}
 function rechnung(){
   const L=laenge(),zeilen=[['Armband',`<span class="gross">${cm(L)}</span> <span style="color:var(--muted)">(${cm(S.umfang)} + ${cm(SITZ[S.sitz][1])} ${SITZ[S.sitz][0]})</span>`]];
-  let tipp='',teile=[];
+  let teile=[];
   if(S.art==='gummi'){
     const kt=kette(),pl=kt.filter(p=>p.k),bu=kt.filter(p=>p.z);
     teile=zaehle(pl.map(p=>p.k));
     zeilen.push(['Perlen',`<b>${pl.length}</b> ${PERLEN[S.perle].name}${bu.length?` + ${bu.length} Buchstabenwürfel`:''}`]);
     zeilen.push(['Gummifaden',`${fadenCm(L+FADEN.gummi.zug)} zuschneiden`]);
-    tipp='Gummifaden 0,5–0,8 mm. Vor dem Fädeln zweimal kräftig dehnen, dann leiert das Band später nicht aus. Ende mit Klebeband auf den Tisch kleben, damit nichts herunterrutscht.';
+
   }else if(S.art==='weben'){
     const g=raster(),R=g.length,W=S.breite,pe=PERLEN[S.perle];
     teile=zaehle(g.flat());
     zeilen.push(['Perlen',`<b>${R*W}</b> ${pe.name}`],['Reihen',`${R} Reihen zu ${W} Perlen`],['Breite',cm(W*pe.l)]);
     zeilen.push(['Kettfäden',`${W+1} Fäden zu ${fadenCm(L+FADEN.weben.kette)}`],['Schussfaden',`etwa ${fadenCm(R*(2*W*pe.l+FADEN.weben.schussProReihe)+FADEN.weben.schussZug)}, in Stücken von höchstens 1 m`]);
-    tipp='Kettfäden: immer einer mehr als Perlen in der Reihe. Schussfaden mit Perlennadel: Perlen unter den Kettfäden durchschieben, mit dem Finger zwischen die Fäden drücken, oben zurückfädeln.';
+
   }else if(S.art==='knuepfen'){
     const T=fadenFarben(),f=FADEN.knuepfen,lf=f.faktor*L+f.zug;
     teile=zaehle(T);
     zeilen.push(['Fäden',`<b>${T.length}</b> Stickgarnfäden zu ${fadenCm(lf)}`],['Bindebänder',`je etwa 10 cm geflochten zum Zubinden`]);
-    tipp=S.muster==='pfeil'?'Pfeil: die Fäden liegen gespiegelt. Jede Reihe von aussen zur Mitte knüpfen, in der Mitte die beiden Fäden miteinander verknoten.':'Diagonal: immer der linke Faden knüpft zweimal um jeden anderen Faden nach rechts. Dann ist der nächste Faden links dran.';
+
   }else{
     const C=farben().slice(0,3),f=FADEN.zopf,lf=f.faktor*L+f.zug;
     while(C.length<3)C.push(C[C.length-1]);
     teile=zaehle(C);
     zeilen.push(['Stränge',`3 Stränge zu ${fadenCm(lf)}, je 3–4 Wollfäden oder Stickgarn`]);
-    tipp='Oben mit einem Knoten zusammenbinden und mit Klebeband festkleben. Immer abwechselnd den rechten, dann den linken Strang über den mittleren legen.';
+
   }
   zeilen.push(['Farben',teile.map(([k,n])=>`<span style="display:inline-flex;align-items:center;gap:4px;margin-right:10px"><i style="width:14px;height:14px;border-radius:50%;background:${fc(k)};border:1px solid #8a94a3;display:inline-block"></i>${n} ${fn(k)}</span>`).join('')]);
-  return {zeilen,tipp,teile};
+  return {zeilen,teile};
 }
 
 /* ---------- Zeichnen ---------- */
@@ -312,7 +308,7 @@ function blatt(){
   let s=`<rect width="210" height="297" fill="#fff"/>`;
   s+=`<text x="12" y="18" font-size="7" font-family="Fredoka,Nunito,sans-serif" font-weight="600" fill="#1c2430">${esc(A.name)} · ${esc(MUSTER[S.muster])}</text>`;
   s+=`<text x="12" y="25" font-size="3.6" fill="#5b6573">Handgelenk ${cm(S.umfang)} · Sitz ${SITZ[S.sitz][0]} · Armband ${cm(L)}${S.art==='gummi'||S.art==='weben'?' · '+PERLEN[S.perle].name:''}</text>`;
-  s+=`<text x="12" y="290" font-size="2.8" fill="#9aa4b1">Schritt für Schritt · Armbänder · Messband ausschneiden und ums Handgelenk legen. Grüne Strecke = echte Länge. Drucken in 100 %.</text>`;
+  s+=Planer.kontrolle(12,290);
   s+=messband();
   const steps=[];let y=34;
   if(S.art==='gummi'){
@@ -387,10 +383,11 @@ function artBild(id){
   Object.assign(S,alt);return b;
 }
 function bedienung(){
-  $('arten').innerHTML=Object.entries(ARTEN).map(([id,a])=>`<button type="button" class="art" data-a="${id}" aria-pressed="false">${artBild(id)}<span>${a.name}</span><small>${a.txt} · ${a.stufe}</small></button>`).join('');
+  $('arten').innerHTML=Object.entries(ARTEN).map(([id,a])=>`<button type="button" class="art" data-a="${id}" aria-pressed="false" title="${a.txt} · ${a.stufe}">${artBild(id)}<span>${a.name}</span></button>`).join('');
   $('farben').innerHTML=Object.entries(FARBE).map(([k,[h,n]])=>`<button type="button" class="farbe" data-f="${k}" style="background:${h}" aria-label="${n}" aria-pressed="false"></button>`).join('');
   $('sitz').innerHTML=Object.entries(SITZ).map(([k,[n,z]])=>`<button type="button" class="chip" data-s="${k}" aria-pressed="false">${n} (+${String(z).replace('.',',')} cm)</button>`).join('');
-  const klick=(id,fn)=>$(id).addEventListener('click',e=>{const b=e.target.closest('button');if(b)fn(b)});
+  Planer.verlauf({hole:()=>S,setze(z){Object.assign(S,z);$('name').value=S.name;zeichnen()}});
+  const klick=(id,fn)=>$(id).addEventListener('click',e=>{const b=e.target.closest('button');if(b){Planer.merke();fn(b)}});
   klick('arten',b=>{const a=b.dataset.a;if(a===S.art)return;S.art=a;if(!ARTEN[a].muster.includes(S.muster))S.muster=ARTEN[a].muster[0];if(ARTEN[a].perlen&&!ARTEN[a].perlen.includes(S.perle))S.perle=ARTEN[a].perlen[0];zeichnen()});
   klick('perlen',b=>{S.perle=b.dataset.p;zeichnen()});
   klick('muster',b=>{S.muster=b.dataset.m;zeichnen()});
@@ -398,28 +395,29 @@ function bedienung(){
   klick('breiten',b=>{if(S.art==='knuepfen')S.faeden=+b.dataset.w;else S.breite=+b.dataset.w;zeichnen()});
   klick('sitz',b=>{S.sitz=b.dataset.s;zeichnen()});
   klick('farben',b=>{const k=b.dataset.f,i=S.farben.indexOf(k);if(i>=0)S.farben.splice(i,1);else if(S.farben.length<8)S.farben.push(k);zeichnen()});
-  $('mischen').addEventListener('click',()=>{S.seed=(S.seed*7+13)%9973;zeichnen()});
-  const umfang=v=>{v=parseFloat(String(v).replace(',','.'));if(!(v>0))return;S.umfang=Math.round(Math.min(24,Math.max(10,v))*2)/2;$('umfang').value=S.umfang;$('regler').value=S.umfang;zeichnen(true)};
+  $('mischen').addEventListener('click',()=>{Planer.merke();S.seed=(S.seed*7+13)%9973;zeichnen()});
+  const umfang=v=>{v=parseFloat(String(v).replace(',','.'));if(!(v>0))return;Planer.merke(null,'umfang');S.umfang=Math.round(Math.min(24,Math.max(10,v))*2)/2;$('umfang').value=S.umfang;$('regler').value=S.umfang;zeichnen(true);Planer.leuchte('#vorschau')};
   $('regler').addEventListener('input',e=>umfang(e.target.value));
   $('umfang').addEventListener('change',e=>umfang(e.target.value));
-  $('name').addEventListener('input',e=>{const t=e.target,p=t.selectionStart;t.value=t.value.toUpperCase().replace(/[^A-ZÄÖÜ \-]/g,'');try{t.setSelectionRange(p,p)}catch(x){}S.name=t.value;zeichnen(true)});
+  $('name').addEventListener('input',e=>{const t=e.target,p=t.selectionStart;t.value=t.value.toUpperCase().replace(/[^A-ZÄÖÜ \-]/g,'');try{t.setSelectionRange(p,p)}catch(x){}Planer.merke(null,'name');S.name=t.value;zeichnen(true)});
   $('drucken').addEventListener('click',()=>window.print());
 }
 function zeichnen(tippen){
   const A=ARTEN[S.art];
+  $('name-hinweis').hidden=true;
   document.querySelectorAll('.art').forEach(b=>b.setAttribute('aria-pressed',b.dataset.a===S.art));
   $('f-perle').hidden=!A.perlen;
   if(A.perlen)$('perlen').innerHTML=A.perlen.map(k=>`<button type="button" class="chip" data-p="${k}" aria-pressed="${k===S.perle}">${PERLEN[k].name}</button>`).join('');
   const brt=S.art==='weben'?[5,7,9,11]:S.art==='knuepfen'?[4,6,8,10]:null;
   $('f-breite').hidden=!brt;
   if(brt){
-    $('l-breite').textContent=S.art==='knuepfen'?'Anzahl Fäden':'Breite (Perlen pro Reihe)';
+    $('l-breite').textContent=S.art==='knuepfen'?'Fäden':'Perlen pro Reihe';
     const akt=S.art==='knuepfen'?S.faeden:S.breite;
     $('breiten').innerHTML=brt.map(w=>`<button type="button" class="chip" data-w="${w}" aria-pressed="${w===akt}">${w}</button>`).join('');}
   $('muster').innerHTML=A.muster.map(m=>`<button type="button" class="chip" data-m="${m}" aria-pressed="${m===S.muster}">${MUSTER[m]}</button>`).join('');
   const mitBlock=['streifen','tupfen','zickzack','rauten','karo'].includes(S.muster);
   $('f-block').hidden=!mitBlock;
-  if(mitBlock){$('l-block').textContent=S.muster==='tupfen'?'Tupfen nach jeder … Perle':'Streifenbreite';
+  if(mitBlock){$('l-block').textContent=S.muster==='tupfen'?'Tupfenabstand':'Streifenbreite';
     $('bloecke').innerHTML=[1,2,3,4,5,6].filter(b=>S.muster!=='tupfen'||b>1).map(b=>`<button type="button" class="chip" data-b="${b}" aria-pressed="${b===S.block}">${b}</button>`).join('');}
   $('f-name').hidden=S.muster!=='name';
   $('mischen').hidden=S.muster!=='konfetti';
@@ -429,7 +427,7 @@ function zeichnen(tippen){
   $('vorschau').innerHTML=vorschau();
   const r=rechnung();
   $('rechnung').innerHTML=r.zeilen.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join('');
-  $('tipp').textContent=r.tipp;
+
   const bl=blatt();$('blatt').innerHTML=bl;$('druck').innerHTML=bl;
   const p=new URLSearchParams({art:S.art,u:S.umfang,m:S.muster,f:S.farben.join('')});
   if(S.sitz!=='normal')p.set('sitz',S.sitz);if(A.perlen)p.set('perle',S.perle);

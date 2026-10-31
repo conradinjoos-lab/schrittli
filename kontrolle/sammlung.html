@@ -7,55 +7,92 @@
 <title>Schrittli – Unsere Werke</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <link rel="stylesheet" href="kontrolle.css">
+<style>
+.aktion{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 8px}.aktion .klein{margin-right:auto}.aktion em{font-style:normal;opacity:.75;margin-left:4px}
+.sterne.leer{color:var(--muted);opacity:.45}
+.werk .wahl{position:absolute;left:0;top:0;width:52px;height:52px;display:grid;place-items:center;cursor:pointer}.werk .wahl input{width:24px;height:24px;margin:0;cursor:pointer;accent-color:var(--lern)}
+.werk.gew{outline:3px solid var(--lern);outline-offset:-3px}
+</style>
 </head>
 <body>
 <div class="wrap">
  <header>
-  <a class="zurueck" href="./" title="Zurück zur Kontrolle">←</a>
+  <a class="zurueck" href="./" title="Zurück">←</a>
   <div class="logo">🖼️</div>
   <div><h1>Unsere Werke</h1></div>
+  <nav class="k-nav" id="k-nav"></nav>
  </header>
  <div class="leiste" id="filter"></div>
  <div class="leiste" id="kinder" style="top:auto;position:static;padding-top:0" hidden></div>
  <section class="karte hell" id="neu-link" hidden>
-  <h2>Sammlung angelegt – Link jetzt sichern</h2>
-  <p><b>Nur jetzt sichtbar.</b></p>
+  <h2>🔑 Link sichern</h2>
   <div class="link"><input type="text" id="link" readonly><button class="p" id="kopieren">Link kopieren</button><button class="s" id="qr-knopf">QR-Code</button></div>
   <div class="qr" id="qr" hidden></div>
  </section>
  <section class="karte" id="neu" hidden>
-  <form class="reihe" id="neu-form"><input type="text" id="neu-name" placeholder="z. B. Klasse 4b 2026/27" maxlength="80" required class="grow"><button class="p">Sammlung anlegen</button><button type="button" class="s" id="neu-abbruch">Abbrechen</button></form>
+  <form class="reihe" id="neu-form"><input type="text" id="neu-name" placeholder="Name" maxlength="80" required class="grow"><button class="p">Sammlung anlegen</button><button type="button" class="s" id="neu-abbruch">Abbrechen</button></form>
   <p class="fehler" id="neu-fehler"></p>
  </section>
- <main id="liste"><div class="nichts">Lade Sammlungen …</div></main>
+ <main id="liste"><div class="nichts">⏳</div></main>
  <p class="fehler" id="fehler"></p>
 </div>
 <dialog id="gross"><img alt=""><div class="unten"><b></b><span class="klein"></span><button class="s">Schliessen</button></div></dialog>
 <script src="werkstatt.js"></script>
+<script src="klasse.js"></script>
+<script src="../vorlagen/melden.js" defer></script>
 <script src="qr.js"></script>
 <script>
 (async()=>{
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
 const datum=z=>{const d=new Date(z);return isNaN(d)?'':d.toLocaleDateString('de-CH',{day:'numeric',month:'short',year:'numeric'})};
-const fehler=(el,x)=>{el.textContent=x?String(x.message||x):''};
-let sammlungen=[],aktiv='',werke=[],kind='';
-try{await W.bereit();sammlungen=(await W.sammlung.verwaltung()).sammlungen}catch(x){$('#liste').innerHTML=`<div class="nichts">Laden ging nicht: ${esc(x.message||x)}</div>`;return}
-if(!aktiv&&sammlungen.length)aktiv=(sammlungen.find(s=>s.aktiv)||sammlungen[0]).id;
+const fehler=(el,x)=>{el.textContent=!x?'':typeof x==='string'?x:/^⚠/.test(x.message||'')?x.message:KLASSE.warnung(x);el.title=x&&x.message||''};
+let sammlungen=[],aktiv='',werke=[],kind='';const gew=new Set();
+KLASSE.nav($('#k-nav'),'sammlung.html');
+const namenVon=w=>String(w.name||'').split(', ').map(n=>n.trim()).filter(Boolean);   // gemeinsames Foto: «Mia, Noah, Lea»
+const sterneHtml=w=>{const n=w.sterne||0;return `<span class="sterne${n?'':' leer'}" aria-label="${n}/5">${'★'.repeat(n)}${'☆'.repeat(5-n)}</span>`};
+/* ZIP ohne Kompression, Fotos sind schon JPEG */
+const CRC=Array.from({length:256},(_,n)=>{let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;return c>>>0});
+const crc32=b=>{let c=-1;for(let i=0;i<b.length;i++)c=CRC[(c^b[i])&255]^(c>>>8);return ~c>>>0};
+function zip(dateien){
+ const u=new TextEncoder(),d=new Date(),zeit=d.getHours()<<11|d.getMinutes()<<5|d.getSeconds()>>1,tag=d.getFullYear()-1980<<9|d.getMonth()+1<<5|d.getDate(),teile=[],mitte=[];let pos=0,groesse=0;
+ const kopf=(laenge,werte)=>{const v=new DataView(new ArrayBuffer(laenge));let o=0;for(const [g,w] of werte){g===4?v.setUint32(o,w,true):v.setUint16(o,w,true);o+=g}return new Uint8Array(v.buffer)};
+ for(const x of dateien){const name=u.encode(x.name),crc=crc32(x.daten),gleich=[[2,20],[2,0x0800],[2,0],[2,zeit],[2,tag],[4,crc],[4,x.daten.length],[4,x.daten.length],[2,name.length],[2,0]];
+  teile.push(kopf(30,[[4,0x04034b50],...gleich]),name,x.daten);
+  mitte.push(kopf(46,[[4,0x02014b50],[2,20],...gleich,[2,0],[2,0],[2,0],[4,0],[4,pos]]),name);
+  pos+=30+name.length+x.daten.length;groesse+=46+name.length}
+ return new Blob([...teile,...mitte,kopf(22,[[4,0x06054b50],[2,0],[2,0],[2,dateien.length],[2,dateien.length],[4,groesse],[4,pos],[2,0]])],{type:'application/zip'});
+}
+const dateiName=t=>String(t).replace(/[\\/:*?"<>|\u0000-\u001f]/g,'-').replace(/\s+/g,' ').trim().slice(0,90);
+const csvFeld=t=>{const x=String(t??'');return `"${(/^[=+\-@]/.test(x)?"'":'')+x.replaceAll('"','""')}"`};
+async function exportieren(b){
+ const auswahl=werke.filter(w=>gew.has(w.id)),dateien=[],belegt=new Set();b.disabled=true;fehler($('#fehler'));
+ try{for(const [i,w] of auswahl.entries()){b.textContent=`⏳ ${i+1}/${auswahl.length}`;
+   const url=await W.sammlung.foto(w.id),daten=new Uint8Array(await (await fetch(url)).arrayBuffer());URL.revokeObjectURL(url);
+   const basis=dateiName([w.name,w.titel].filter(Boolean).join(' - '))||'Werk';let name=basis+'.jpg';for(let n=2;belegt.has(name.toLowerCase());n++)name=`${basis} (${n}).jpg`;
+   belegt.add(name.toLowerCase());dateien.push({name,daten,w})}
+  const zeilen=['Datei;Namen;Klasse;Titel;Sterne;Datum',...dateien.map(({name,w})=>[name,w.name,w.klasse,w.titel,w.sterne??'',new Date(w.erstellt).toISOString().slice(0,10)].map(csvFeld).join(';'))];
+  dateien.push({name:'werke.csv',daten:new TextEncoder().encode('\ufeff'+zeilen.join('\r\n'))});
+  const s=sammlungen.find(s=>s.id===aktiv),a=document.createElement('a');a.href=URL.createObjectURL(zip(dateien));a.download=dateiName(`Werke ${s?s.name:''} ${new Date().toISOString().slice(0,10)}`)+'.zip';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),60000)}
+ catch(x){fehler($('#fehler'),'⚠ Export')}
+ aktion();
+}
+try{await W.bereit();sammlungen=(await W.sammlung.verwaltung()).sammlungen}catch(x){$('#liste').innerHTML=`<div class="nichts" title="${esc(x.message||x)}">${KLASSE.warnung(x)}</div>`;return}
+if(!aktiv&&sammlungen.length)aktiv=(KLASSE.finde(sammlungen)||sammlungen.find(s=>s.aktiv)||sammlungen[0]).id;
 
 function leiste(){
  $('#filter').innerHTML=sammlungen.map(s=>`<button data-s="${s.id}" class="${aktiv===s.id?'on':''}">${s.aktiv?'':'🔒 '}${esc(s.name)}</button>`).join('')+
   `<span class="rechts"></span>${aktiv&&sammlungen.find(s=>s.id===aktiv&&s.aktiv)?'<button id="sperren">Sammlung sperren</button>':''}<button id="neu-knopf" class="on">+ Neue Sammlung</button>`;
- $('#filter').querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{aktiv=b.dataset.s;leiste();laden()});
+ $('#filter').querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{aktiv=b.dataset.s;KLASSE.setze(sammlungen.find(s=>s.id===aktiv).name);leiste();laden()});
  $('#neu-knopf').onclick=()=>{$('#neu').hidden=false;$('#neu-link').hidden=true;$('#neu-name').focus()};
- const sp=$('#sperren');if(sp)sp.onclick=async()=>{const s=sammlungen.find(s=>s.id===aktiv);if(!confirm(`«${s.name}» sperren? Die iPads können danach keine Fotos mehr senden und sehen die Sammlung nicht mehr. Das lässt sich nicht rückgängig machen.`))return;
+ const sp=$('#sperren');if(sp)sp.onclick=async()=>{const s=sammlungen.find(s=>s.id===aktiv);if(!confirm(`🔒 «${s.name}» sperren?`))return;
   try{await W.sammlung.sperren(s.id);s.aktiv=0;leiste()}catch(x){fehler($('#fehler'),x)}};
 }
 $('#neu-abbruch').onclick=()=>{$('#neu').hidden=true};
 $('#neu-form').onsubmit=async e=>{e.preventDefault();const b=e.target.querySelector('button');b.disabled=true;fehler($('#neu-fehler'));
  try{const s=await W.sammlung.erstellen($('#neu-name').value.trim());sammlungen.push({id:s.id,name:s.name,aktiv:1,erstellt:new Date().toISOString()});
   $('#link').value=W.APP_URL+'#sammlung='+s.token;$('#qr').hidden=true;$('#qr').replaceChildren();$('#neu').hidden=true;$('#neu-link').hidden=false;$('#neu-name').value='';
-  aktiv=s.id;leiste();laden()}
+  aktiv=s.id;KLASSE.setze(s.name);leiste();laden()}
  catch(x){fehler($('#neu-fehler'),x)}b.disabled=false};
 $('#kopieren').onclick=async()=>{try{await navigator.clipboard.writeText($('#link').value);$('#kopieren').textContent='Kopiert ✓';setTimeout(()=>$('#kopieren').textContent='Link kopieren',1500)}catch{$('#link').select()}};
 $('#qr-knopf').onclick=()=>{const q=$('#qr');q.hidden=false;q.replaceChildren(QR.canvas($('#link').value,240))};
@@ -63,28 +100,38 @@ $('#qr-knopf').onclick=()=>{const q=$('#qr');q.hidden=false;q.replaceChildren(QR
 const sieht=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;sieht.unobserve(e.target);
  W.sammlung.foto(e.target.dataset.id).then(u=>e.target.src=u).catch(()=>{})}),{rootMargin:'300px'});
 function kinder(){
- const namen=[...new Set(werke.map(w=>w.name).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'de'));
+ const namen=[...new Set(werke.flatMap(namenVon))].sort((a,b)=>a.localeCompare(b,'de'));
  if(kind&&!namen.includes(kind))kind='';
  $('#kinder').hidden=!namen.length;if(!namen.length)return;
- $('#kinder').innerHTML=`<span class="klein">Pro Kind:</span><button data-n="" class="${kind?'':'on'}">Alle Kinder</button>`+namen.map(n=>`<button data-n="${esc(n)}" class="${kind===n?'on':''}">${esc(n)}<em>${werke.filter(w=>w.name===n).length}</em></button>`).join('');
+ $('#kinder').innerHTML=`<button data-n="" class="${kind?'':'on'}">Alle Kinder</button>`+namen.map(n=>`<button data-n="${esc(n)}" class="${kind===n?'on':''}">${esc(n)}<em>${werke.filter(w=>namenVon(w).includes(n)).length}</em></button>`).join('');
  $('#kinder').querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{kind=b.dataset.n;zeichne()});
+}
+const sichtbar=()=>kind?werke.filter(w=>namenVon(w).includes(kind)):werke;
+function aktion(){
+ const el=$('#aktion');if(!el)return;const sicht=sichtbar(),alle=sicht.length&&sicht.every(w=>gew.has(w.id));
+ el.innerHTML=`<span class="klein">${kind?`<b>${esc(kind)}</b> · `:''}${sicht.length} 🖼️</span><button class="s" id="alle">${alle?'☐ Keine':'☑ Alle'}</button><button class="p" id="export"${gew.size?'':' disabled'}>⬇ Export${gew.size?`<em>${gew.size}</em>`:''}</button>`;
+ $('#alle').onclick=()=>{sicht.forEach(w=>alle?gew.delete(w.id):gew.add(w.id));$('#liste').querySelectorAll('[data-w]').forEach(i=>{i.checked=gew.has(i.dataset.w);i.closest('.werk').classList.toggle('gew',i.checked)});aktion()};
+ $('#export').onclick=e=>exportieren(e.target);
 }
 function zeichne(){
  kinder();
- if(!sammlungen.length){$('#liste').innerHTML='<div class="nichts">Lege zuerst eine Sammlung an und öffne den Link auf den iPads.</div>';return}
- if(!werke.length){$('#liste').innerHTML='<div class="nichts">Noch keine Fotos in dieser Sammlung.</div>';return}
- const sicht=kind?werke.filter(w=>w.name===kind):werke;
- $('#liste').innerHTML=`<p class="klein" style="margin:0 0 8px">${kind?`<b>${esc(kind)}</b> · ${sicht.length} ${sicht.length===1?'Werk':'Werke'}`:werke.length+' Fotos'} · neuste zuerst</p><div class="gitter">${sicht.map(w=>`<div class="werk" data-id="${w.id}">
+ if(!sammlungen.length){$('#liste').innerHTML='<div class="nichts">🖼️ 0</div>';return}
+ if(!werke.length){$('#liste').innerHTML='<div class="nichts">🖼️ 0</div>';return}
+ const sicht=sichtbar();
+ $('#liste').innerHTML=`<div class="aktion" id="aktion"></div><div class="gitter">${sicht.map(w=>`<div class="werk${gew.has(w.id)?' gew':''}" data-id="${w.id}">
+  <label class="wahl" aria-label="${esc(w.titel)}"><input type="checkbox" data-w="${w.id}"${gew.has(w.id)?' checked':''}></label>
   <div class="bild"><img data-id="${w.id}" alt="" loading="lazy"></div>
-  <div class="text"><div class="titel">${esc(w.titel)}</div><div class="klein">${[w.name?esc(w.name):'',w.klasse?w.klasse+'. Klasse':'',datum(w.erstellt)].filter(Boolean).join(' · ')}${w.sterne?` <span class="sterne">${'★'.repeat(w.sterne)}</span>`:''}</div></div>
+  <div class="text"><div class="titel">${esc(w.titel)}</div><div class="klein">${[w.name?esc(w.name):'',w.klasse?w.klasse+'. Klasse':'',datum(w.erstellt)].filter(Boolean).join(' · ')} ${sterneHtml(w)}</div></div>
   <button class="x" data-weg="${w.id}" title="Foto löschen">✕</button></div>`).join('')}</div>`;
  $('#liste').querySelectorAll('img[data-id]').forEach(i=>{sieht.observe(i);i.onclick=()=>{if(!i.src)return;const w=werke.find(w=>w.id===i.dataset.id);const d=$('#gross');d.querySelector('img').src=i.src;d.querySelector('b').textContent=w.titel;d.querySelector('.klein').textContent=[w.name,w.klasse?w.klasse+'. Klasse':'',datum(w.erstellt)].filter(Boolean).join(' · ');d.showModal()}});
- $('#liste').querySelectorAll('[data-weg]').forEach(b=>b.onclick=async()=>{if(!confirm('Dieses Foto endgültig aus der Sammlung löschen?'))return;
-  try{await W.sammlung.loeschen(b.dataset.weg);werke=werke.filter(w=>w.id!==b.dataset.weg);zeichne()}catch(x){fehler($('#fehler'),x)}});
+ $('#liste').querySelectorAll('[data-weg]').forEach(b=>b.onclick=async()=>{if(!confirm('Foto löschen?'))return;
+  try{await W.sammlung.loeschen(b.dataset.weg);gew.delete(b.dataset.weg);werke=werke.filter(w=>w.id!==b.dataset.weg);zeichne()}catch(x){fehler($('#fehler'),x)}});
+ $('#liste').querySelectorAll('[data-w]').forEach(i=>i.onchange=()=>{i.checked?gew.add(i.dataset.w):gew.delete(i.dataset.w);i.closest('.werk').classList.toggle('gew',i.checked);aktion()});
+ aktion();
 }
 async function laden(){
- fehler($('#fehler'));if(!aktiv){werke=[];zeichne();return}
- $('#liste').innerHTML='<div class="nichts">Lade Fotos …</div>';
+ fehler($('#fehler'));gew.clear();if(!aktiv){werke=[];zeichne();return}
+ $('#liste').innerHTML='<div class="nichts">⏳</div>';
  try{werke=(await W.sammlung.werke(aktiv)).werke.slice().sort((a,b)=>String(b.erstellt).localeCompare(String(a.erstellt)));zeichne()}catch(x){fehler($('#fehler'),x);$('#liste').innerHTML=''}
 }
 $('#gross button').onclick=()=>$('#gross').close();

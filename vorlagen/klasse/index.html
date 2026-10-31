@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="../planer.css">
 <style>
 :root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--gruen:#2EA84A;--orange:#F08A24;--rot:#D7352E;--gehaeuse:#1C2430;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;--gruen:#3DCB5E;--orange:#F5A040;--rot:#F04A3E;--gehaeuse:#070B12;color-scheme:dark}}
@@ -16,13 +17,10 @@
 html{height:100%}
 body{margin:0;min-height:100%;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif;-webkit-text-size-adjust:100%;overflow-x:hidden}
 h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
-h1{font-size:28px}
 h2{font-size:18px;margin-bottom:10px}
 a{color:var(--acc)}
 button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
-.kopf{width:100%;max-width:1400px;margin:0 auto;padding:20px 16px 4px}
-.kopf p{margin:4px 0 0;color:var(--muted)}
 /* Reiter oben: Chips wie auf den andern Vorlagen-Seiten, rechts der Vollbild-Knopf */
 .nav{width:100%;max-width:1400px;margin:0 auto;padding:8px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -63,7 +61,6 @@ main{flex:1;display:flex;flex-direction:column;width:100%;max-width:1400px;margi
 .ziel{width:min(100%,900px);font:700 clamp(20px,4vw,44px)/1.2 Nunito,system-ui,sans-serif;text-align:center;border:0;border-bottom:3px dashed var(--line);background:transparent;color:var(--ink);padding:6px 12px}
 .ziel::placeholder{color:var(--muted);opacity:.7;font-weight:600}
 .ziel:focus{border-bottom-color:var(--acc);outline:none}
-.hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
 .schaltung{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
 /* Blitzen, wenn die Zeit um ist */
 @keyframes blitz{0%,100%{background:var(--bg)}50%{background:var(--rot)}}
@@ -85,7 +82,7 @@ body.blitz{animation:blitz .7s ease-in-out 4}
 .kasten .weg{flex:none;width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:var(--surface);font-size:22px;line-height:1;padding:0}
 .liste-kopf{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
 .liste-kopf h2{margin:0}
-.feier{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;background:color-mix(in srgb,var(--bg) 88%,transparent);padding:20px;cursor:pointer;overflow:hidden}
+.feier{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;background:color-mix(in srgb,var(--bg) 88%,transparent);padding:20px;cursor:pointer;overflow:hidden}
 .feier[hidden]{display:none}
 .feier b{font:600 clamp(40px,10vw,140px)/1.05 Fredoka,Nunito,sans-serif;color:var(--acc)}
 .feier span{font-size:clamp(20px,3vw,40px);color:var(--ink)}
@@ -121,17 +118,15 @@ body.blitz{animation:blitz .7s ease-in-out 4}
 .laerm-start .knopf.gross{min-height:96px;font-size:clamp(28px,4vw,48px);padding:20px 48px}
 .laerm-start .fehler{font-size:clamp(20px,3vw,34px);color:var(--rot);max-width:800px}
 .laerm-start .fehler[hidden]{display:none}
-.laerm-start p{color:var(--muted);margin:0;max-width:640px}
 .laerm-start[hidden],.laerm-raum[hidden]{display:none}
 .klein-zeile{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
 /* Vollbild: Kopf weg, Reiter bleiben, Ziffern noch grösser */
-body.vollbild .kopf{display:none}
+body.vollbild .pk{display:none}
 body.vollbild .nav{padding-top:10px}
 body.vollbild .ziffern{font-size:min(30vw,48vh)}
 body.vollbild .lustig .ziffern{font-size:min(26vw,40vh)}
 body.vollbild .ampel{--a:min(24vw,23vh)}
 @media (max-width:860px){
-  h1{font-size:24px}
   .laerm-raum{grid-template-columns:1fr}
   .ampel{--a:min(20vw,14vh)}
   .zahl b{font-size:clamp(36px,12vw,64px)}
@@ -142,12 +137,15 @@ body.vollbild .ampel{--a:min(24vw,23vh)}
 </style>
 </head>
 <body>
-<header class="kopf">
-  <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
+<header class="pk">
+  <a class="zur-app" href="../../" data-zur-app aria-label="Zurück zur App"><span>App</span></a>
   <h1>Klassen-Werkzeuge</h1>
-  <p>Arbeitszeit-Timer, Aufräum-Countdown und Lärmampel für den Beamer. Alles läuft nur auf diesem Gerät. <a href="../">←&nbsp;Vorlagen-Generator</a></p>
+  <a class="pk-vorlagen" href="../" aria-label="Vorlagen" title="Vorlagen"><span>Vorlagen</span></a>
+  <button class="pk-rueck" id="p-rueck" type="button" disabled aria-label="Rückgängig" title="Rückgängig"></button>
+  <span class="pk-leer"></span>
 </header>
 <script src="../zurueck.js"></script>
+<script src="../planer.js"></script>
 <nav class="nav" aria-label="Werkzeug wählen">
   <div class="chips" role="tablist" id="reiter">
     <button type="button" class="chip" role="tab" data-tab="timer" aria-pressed="true" aria-controls="t-timer">⏱ Arbeitszeit</button>
@@ -165,14 +163,13 @@ body.vollbild .ampel{--a:min(24vw,23vh)}
       <div class="ziffern" id="timer-ziffern">10:00</div>
       <div class="meldung" id="timer-meldung" hidden>Zeit ist um</div>
       <div class="balken" aria-hidden="true"><i id="timer-balken"></i></div>
-      <input class="ziel" id="timer-ziel" maxlength="60" autocomplete="off" placeholder="Zwischenziel, z. B. Faden vernähen" aria-label="Zwischenziel">
+      <input class="ziel" id="timer-ziel" maxlength="60" autocomplete="off" placeholder="Zwischenziel" aria-label="Zwischenziel">
     </div>
     <div class="schaltung">
       <button type="button" class="knopf gross haupt" id="timer-start">Start</button>
       <button type="button" class="knopf gross" id="timer-pause" hidden>Pause</button>
       <button type="button" class="knopf gross" id="timer-reset">Zurücksetzen</button>
     </div>
-    <p class="hinweis" style="text-align:center">Leertaste: Start und Pause. Der Timer läuft weiter, auch wenn der Tab im Hintergrund ist.</p>
   </section>
 
   <!-- 2 · Aufräum-Countdown -->
@@ -189,11 +186,11 @@ body.vollbild .ampel{--a:min(24vw,23vh)}
       <button type="button" class="knopf gross" id="auf-reset">Zurücksetzen</button>
     </div>
     <section class="karte" id="auf-karte" aria-label="Aufräum-Aufgaben">
-      <div class="liste-kopf"><h2>Was ist schon erledigt? Antippen!</h2>
+      <div class="liste-kopf"><h2>Aufgaben</h2>
         <div class="klein-zeile"><button type="button" class="knopf" id="auf-plus" hidden>+ Aufgabe</button><button type="button" class="knopf" id="auf-bearbeiten">Aufgaben ändern</button></div></div>
       <div class="liste" id="auf-liste"></div>
     </section>
-    <div class="feier" id="auf-feier" hidden><b>Alles aufgeräumt!</b><span id="auf-feier-text"></span><span style="font-size:16px;color:var(--muted)">Antippen zum Schliessen</span></div>
+    <div class="feier" id="auf-feier" hidden><b>Alles aufgeräumt!</b><span id="auf-feier-text"></span></div>
   </section>
 
   <!-- 3 · Lärmampel -->
@@ -201,7 +198,6 @@ body.vollbild .ampel{--a:min(24vw,23vh)}
     <div class="laerm-start" id="laerm-start">
       <div class="fehler" id="laerm-fehler" hidden></div>
       <button type="button" class="knopf gross haupt" id="laerm-los">Ampel starten</button>
-      <p>Die Ampel hört über das Mikrofon, wie laut es im Raum ist. Der Ton bleibt auf diesem Gerät – nichts wird aufgenommen oder gesendet.</p>
     </div>
     <div class="laerm-raum" id="laerm-raum" hidden>
       <div class="ampel" role="img" aria-label="Ampel" id="ampel">
@@ -222,13 +218,11 @@ body.vollbild .ampel{--a:min(24vw,23vh)}
             <label for="r-orange">Orange ab</label><input type="range" id="r-orange" min="5" max="95" step="1"><span class="wert" id="w-orange"></span>
             <label for="r-rot">Rot ab</label><input type="range" id="r-rot" min="10" max="100" step="1"><span class="wert" id="w-rot"></span>
           </div>
-          <p class="hinweis">Schieber nach links: die Ampel reagiert schneller. Die Werte bleiben auf diesem Gerät gespeichert.</p>
         </section>
         <div class="klein-zeile">
           <button type="button" class="knopf" id="laerm-zaehler">Zähler zurücksetzen</button>
           <button type="button" class="knopf" id="laerm-stopp">Ampel stoppen</button>
         </div>
-        <p class="hinweis" style="text-align:center">Das Mikrofon läuft nur, solange die Ampel an ist. Der Ton bleibt auf diesem Gerät.</p>
       </div>
     </div>
   </section>
@@ -330,6 +324,7 @@ aufgaben=(Array.isArray(aufgaben)?aufgaben:[]).filter(x=>typeof x==='string'&&x.
 if(!aufgaben.length)aufgaben=AUFGABEN_STANDARD.slice();
 let erledigt=aufgaben.map(()=>false),bearbeiten=false,gefeiert=false;
 const liste=$('auf-liste');
+Planer.verlauf({hole:()=>({aufgaben,erledigt}),setze(z){aufgaben=z.aufgaben;erledigt=z.erledigt;if(!erledigt.every(Boolean))gefeiert=false;merk('schrittli.klasse.aufraeumen',aufgaben);zeigeListe()}});
 function zeigeListe(){
   liste.classList.toggle('bearbeiten',bearbeiten);
   $('auf-plus').hidden=!bearbeiten||aufgaben.length>=8;
@@ -342,19 +337,19 @@ function zeigeListe(){
 }
 liste.addEventListener('click',e=>{
   const w=e.target.closest('[data-weg]');
-  if(w){aufgaben.splice(+w.dataset.weg,1);erledigt.splice(+w.dataset.weg,1);merk('schrittli.klasse.aufraeumen',aufgaben);zeigeListe();return;}
+  if(w){Planer.merke();aufgaben.splice(+w.dataset.weg,1);erledigt.splice(+w.dataset.weg,1);merk('schrittli.klasse.aufraeumen',aufgaben);zeigeListe();return;}
   const k=e.target.closest('.kasten[data-i]');if(!k||bearbeiten)return;
-  const i=+k.dataset.i;erledigt[i]=!erledigt[i];audio();zeigeListe();
+  const i=+k.dataset.i;Planer.merke();erledigt[i]=!erledigt[i];audio();zeigeListe();
   if(erledigt.every(Boolean)&&!gefeiert){
     gefeiert=true;
-    if(auf.laeuft){auf.pause();$('auf-feier-text').textContent='Noch '+mmss(auf.rest)+' übrig – super gemacht!';}
+    if(auf.laeuft){auf.pause();$('auf-feier-text').textContent=mmss(auf.rest)+' übrig';}
     else $('auf-feier-text').textContent='Super gemacht!';
     klang('feier');konfetti();$('auf-feier').hidden=false;
   }
 });
-liste.addEventListener('input',e=>{const i=e.target.dataset.i;if(i!=null){aufgaben[i]=e.target.value;merk('schrittli.klasse.aufraeumen',aufgaben);}});
+liste.addEventListener('input',e=>{const i=e.target.dataset.i;if(i!=null){Planer.merke(null,'text');aufgaben[i]=e.target.value;merk('schrittli.klasse.aufraeumen',aufgaben);}});
 $('auf-bearbeiten').addEventListener('click',()=>{bearbeiten=!bearbeiten;if(!bearbeiten){aufgaben=aufgaben.map(a=>a.trim()).filter(Boolean);if(!aufgaben.length)aufgaben=AUFGABEN_STANDARD.slice();erledigt=aufgaben.map((_,i)=>!!erledigt[i]);merk('schrittli.klasse.aufraeumen',aufgaben);}zeigeListe();});
-$('auf-plus').addEventListener('click',()=>{aufgaben.push('');erledigt.push(false);zeigeListe();const n=liste.querySelector(`input[data-i="${aufgaben.length-1}"]`);n&&n.focus();});
+$('auf-plus').addEventListener('click',()=>{Planer.merke();aufgaben.push('');erledigt.push(false);zeigeListe();const n=liste.querySelector(`input[data-i="${aufgaben.length-1}"]`);n&&n.focus();});
 $('auf-feier').addEventListener('click',()=>{$('auf-feier').hidden=true;});
 function konfetti(){
   const f=$('auf-feier');f.querySelectorAll('i').forEach(i=>i.remove());
@@ -384,15 +379,15 @@ zeigeSchwellen();
 async function ampelStart(){
   const fehler=$('laerm-fehler');fehler.hidden=true;
   const C=window.AudioContext||window.webkitAudioContext;
-  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!C){fehler.textContent='Dieser Browser kann die Ampel nicht zeigen. Bitte Safari oder Chrome verwenden.';fehler.hidden=false;return;}
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!C){fehler.textContent='⚠ Browser';fehler.hidden=false;return;}
   try{
     L.ctx=L.ctx||new C();   // auf dem iPad nur innerhalb einer Berührung möglich – darum hier im Klick
     if(L.ctx.state==='suspended')await L.ctx.resume();
     L.strom=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false},video:false});
   }catch(e){
     const name=e&&e.name||'';
-    fehler.textContent=name==='NotAllowedError'||name==='SecurityError'?'Mikrofon erlauben, damit die Ampel funktioniert.':name==='NotFoundError'?'Kein Mikrofon gefunden.':'Das Mikrofon konnte nicht gestartet werden.';
-    fehler.hidden=false;$('laerm-los').textContent='Nochmals versuchen';
+    fehler.textContent=name==='NotAllowedError'||name==='SecurityError'?'⚠ Mikrofon erlauben':name==='NotFoundError'?'⚠ Kein Mikrofon':'⚠ Mikrofon';
+    fehler.hidden=false;$('laerm-los').textContent='Nochmals';
     return;
   }
   const q=L.ctx.createMediaStreamSource(L.strom);

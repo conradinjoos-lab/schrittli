@@ -8,24 +8,94 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <link rel="stylesheet" href="kontrolle.css">
 <style>
-.eintrag .status{font-size:12px;color:var(--muted);display:block}
-.eintrag .status i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--line);margin-right:5px;vertical-align:1px}
-.eintrag .status i.an{background:var(--lern)}
+#fehler:empty,#neu-fehler:empty{display:none}
+.sym{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sym.voll{fill:currentColor}
+/* Klasse wählen */
+.klassen-leiste{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.klassen-leiste .pill{display:inline-flex;align-items:center;gap:7px;font-weight:600;font-size:15px;padding:9px 16px;color:var(--ink)}
+.klassen-leiste .pill.on{color:#fff}
+.punkt{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--line);flex:none}
+.punkt.an{background:var(--lern)}
+#neu-form{margin-bottom:14px}
+/* Zwei Spalten: links die Freigabe, rechts was im Zimmer läuft */
+.lektion{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:18px;align-items:start}
+.spalte{min-width:0}
+.k-titel{display:flex;align-items:center;gap:8px}
+.k-titel .sym{font-size:24px}
+.k-zahlen{margin-left:auto;display:flex;align-items:center;gap:12px;font:600 14px var(--display);color:var(--muted)}
+.k-zahlen span{display:inline-flex;align-items:center;gap:5px}
+.k-zahlen .sym{font-size:16px}
+/* Was die Kinder sehen */
+.vor-kopf{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.vor-kopf b{font:600 18px/1.2 var(--display);min-width:0}
+.marke{font:600 13px var(--display);padding:3px 10px;border-radius:999px;background:var(--lern-soft);color:#0F7A61;white-space:nowrap}
+.jetzt.entwurf .marke{background:var(--spass-soft);color:#B4481A}
+.jetzt.zu .marke{background:var(--surface2);color:var(--muted)}
+.vor-chip{font:600 13px var(--display);color:var(--muted);background:var(--surface2);border-radius:999px;padding:3px 9px;white-space:nowrap}
+.tablet-rahmen{background:var(--ink);border-radius:18px;padding:10px}
+.jetzt.entwurf .tablet-rahmen{outline:3px dashed var(--spass);outline-offset:2px}
+.vor-bilder{background:var(--bg);border-radius:9px;padding:10px;display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px;min-height:120px;align-content:start}
+.vk{background:var(--surface);border-radius:12px;overflow:hidden;box-shadow:var(--shadow-sm);min-width:0}
+.vk.mehr{display:grid;place-items:center;font:600 18px var(--display);color:var(--muted);min-height:70px}
+.vk.ganz{grid-column:1/-1}
+.vk .th,.fav-k .th{display:grid;place-items:center;width:100%;aspect-ratio:16/10;object-fit:cover;background:var(--surface2);font-size:30px}
+.vk.ganz .th{aspect-ratio:auto;height:96px;font-size:44px}
+.vk b,.fav-k b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font:600 12.5px/1.2 var(--display);padding:5px 7px 6px;overflow-wrap:anywhere}
+.aktion{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+#hinweis{font-size:17px}
+/* Favoriten */
+.fav-reihe{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}
+.fav-k{position:relative;min-width:0;background:var(--surface2);border-radius:12px;overflow:hidden;outline:2px solid transparent}
+.fav-k.on{outline-color:var(--lern);background:var(--lern-soft)}
+.fav-laden{display:block;width:100%;border:0;background:transparent;padding:0;text-align:left;cursor:pointer;color:inherit}
+.fav-weg{position:absolute;right:3px;top:3px;background:rgba(255,255,255,.9);padding:3px 7px}
+/* iPads: nur das Gerät */
+#geraete{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
+.ipad{display:flex;flex-direction:column;align-items:center;gap:1px;min-width:0;background:var(--surface2);border-radius:14px;padding:10px 4px 9px;text-align:center;font-size:12px;color:var(--muted)}
+.ipad.geist{background:transparent;border:2px dashed var(--line);color:var(--line);justify-content:center}
+.ipad-bild{position:relative;display:grid;place-items:center;font-size:54px;line-height:1;color:var(--muted)}
+.ipad.online .ipad-bild{color:var(--ink)}
+.ipad-bild i{position:absolute;font:700 21px/1 var(--display);padding-bottom:3px}
+.ipad.ok .ipad-bild i{color:var(--lern)}
+.ipad.fehlt .ipad-bild i{color:var(--spass)}
+.ipad-name{border:0;background:transparent;font:600 13px var(--display);color:var(--ink);cursor:pointer;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:4px 2px}
+.ipad-on{display:inline-flex;align-items:center;gap:4px}
+.ipad-frei{font-weight:700}
+.ipad.ok .ipad-frei{color:#0F7A61}
+.ipad.fehlt .ipad-frei{color:#B4481A}
+/* Kinder: nur die Arbeit */
+.kv-reihe{display:flex;gap:6px;overflow-x:auto;padding:3px;margin:-3px -3px 8px}
+.kv{flex:none;width:64px;height:42px;border:0;border-radius:9px;padding:0;overflow:hidden;background:var(--surface2);cursor:pointer;display:grid;place-items:center;font-size:20px;opacity:.6}
+.kv.on{outline:3px solid var(--lern);opacity:1}
+.kv .kv-bild{display:grid;place-items:center;width:100%;height:100%;object-fit:cover}
+.kind-z{display:grid;grid-template-columns:minmax(0,1fr) 56px 38px 28px 28px;gap:6px;align-items:center;padding:6px 0;border-top:1px solid var(--line);font-size:14px}
+.kind-z:first-of-type{border-top:0}
+.kn{font-weight:700;overflow-wrap:anywhere;line-height:1.2}
+.kind-z.leer .kn{font-weight:400;color:var(--muted)}
+.kb{display:block;height:8px;border-radius:999px;background:var(--surface2);overflow:hidden}
+.kb i{display:block;height:100%;background:var(--lern)}
+.kx{text-align:right;font:600 13px var(--display);color:var(--muted)}
+.m{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;font-size:15px;color:var(--muted)}
+.m.an{background:var(--lern);color:#fff}
+.m.aus{background:var(--surface2);color:var(--line)}
+.m[data-art=werk].an{background:var(--spass)}
+.kind-leer{text-align:center;color:var(--muted);font:600 20px var(--display);padding:8px 0}
+.werke-streifen{display:flex;align-items:center;gap:6px;margin-top:10px;background:var(--surface2);border-radius:12px;padding:8px 10px;font:600 15px var(--display);min-height:52px}
+.werke-streifen img{width:40px;height:40px;border-radius:8px;object-fit:cover;display:block}
+.werke-streifen .pfeil{margin-left:auto;font-size:20px;color:var(--muted)}
+/* Bearbeiten */
 .modus{display:flex;gap:8px;flex-wrap:wrap}
 .modus label{display:flex;align-items:center;gap:6px;background:var(--surface2);border-radius:999px;padding:8px 14px;cursor:pointer;font:600 14px var(--display);border:2px solid transparent}
 .modus label:has(input:checked){background:var(--lern-soft);border-color:var(--lern);color:#0F7A61}
 .modus input{position:absolute;opacity:0;width:0;height:0}
 .modus i{font-style:normal;font-size:17px}
-.feld{display:flex;flex-direction:column;gap:4px;margin-top:12px}
+.feld{display:flex;flex-direction:column;gap:4px;margin-top:12px;min-width:0}
 .feld>span{font:600 13px var(--display);color:var(--muted)}
-.feld input[type=text]{max-width:520px}
-.zwei{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.schalter{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:14px;cursor:pointer}
+.feld input[type=text],.feld select{width:100%}
+.zwei{display:grid;grid-template-columns:minmax(0,1fr) 100px;gap:12px}
+.schalter{display:flex;align-items:center;gap:8px;margin-top:12px;font:600 14px var(--display);cursor:pointer}
 .schalter input{width:18px;height:18px;accent-color:var(--lern)}
-.jetzt{border-left:5px solid var(--lern);padding-left:14px}
-.jetzt.zu{border-color:var(--muted)}
-.jetzt b{font:600 17px var(--display)}
-.aktion{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center}
 /* Video-Auswahl */
 .suche{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .suche input{flex:1;min-width:180px}
@@ -40,12 +110,6 @@
 .video .th{width:64px;height:40px;border-radius:8px;background:var(--surface2);object-fit:cover;flex:none;display:grid;place-items:center;font-size:20px}
 .video b{font:600 14px var(--display);display:block}
 .video small{color:var(--muted);font-size:12px}
-.geraete td:first-child{font-weight:700}
-.punkt{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--line);margin-right:6px}
-.punkt.an{background:var(--lern)}
-.fav{display:inline-flex;align-items:center;gap:4px;background:var(--surface2);border-radius:999px;padding:4px 6px 4px 12px;font:600 13px var(--display);margin:0 6px 6px 0}
-.fav button{border:0;background:transparent;cursor:pointer;font:inherit;padding:2px 4px;border-radius:50%}
-.fav button.laden{color:var(--lern)}
 /* Material und Drucken */
 .material{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
 .mat-liste{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
@@ -57,12 +121,12 @@
 .papier label{display:flex;align-items:center;background:var(--surface2);border-radius:999px;padding:7px 14px;cursor:pointer;font:600 13px var(--display);border:2px solid transparent}
 .papier label:has(input:checked){background:var(--lern-soft);border-color:var(--lern);color:#0F7A61}
 .papier input{position:absolute;opacity:0;width:0;height:0}
-/* Lektionsplan-Fortschritt pro iPad */
-.plan-zeile{display:flex;align-items:center;gap:8px;font-size:12px;margin:2px 0;white-space:nowrap}
-.plan-zeile span{overflow:hidden;text-overflow:ellipsis;max-width:220px}
-.boxen{display:inline-flex;gap:3px;flex:none}
-.box{width:18px;height:18px;border:2px solid var(--line);border-radius:5px;font-size:11px;line-height:14px;text-align:center;color:var(--muted);font-style:normal}
-.box.an{background:var(--lern);border-color:var(--lern);color:#fff}
+/* Schmal: Vorschau, Favoriten, iPads, Kinder, dann Bearbeiten */
+@media (max-width:900px){
+ .lektion{display:flex;flex-direction:column;align-items:stretch;gap:0}
+ .spalte{display:contents}
+ #karte-vor{order:1}#favoriten-karte{order:2}#karte-ipads{order:3}#karte-kinder{order:4}#karte-edit{order:5}
+}
 /* Druckbereich: am Bildschirm unsichtbar, beim Drucken das Einzige */
 #druck{display:none}
 @media print{
@@ -82,7 +146,6 @@
  .papier-a3 .check{columns:3}
  .qr-kopf{display:flex;gap:10mm;align-items:center;border-bottom:1.5pt solid #000;padding-bottom:5mm;margin-bottom:5mm}
  .qr-kopf canvas{width:34mm;height:34mm;image-rendering:pixelated}
- .qr-kopf .hinweis{font-size:10pt;color:#444}
  .qr-gitter{display:grid;grid-template-columns:repeat(2,1fr);gap:4mm}
  .qr-zelle{height:74mm;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;border:.5pt dashed #999;border-radius:3mm;padding:3mm;break-inside:avoid}
  .qr-zelle canvas{width:54mm;height:54mm;image-rendering:pixelated}
@@ -100,68 +163,79 @@
 <body>
 <div class="wrap">
  <header>
-  <a class="zurueck" href="./" title="Zurück zur Kontrolle">←</a>
+  <a class="zurueck" href="./" title="Zurück">←</a>
   <div class="logo">🏫</div>
   <div><h1>Unterricht</h1></div>
+  <nav class="k-nav" id="k-nav"></nav>
  </header>
  <section class="karte hell" id="neu-link" hidden>
-  <h2>Gruppe angelegt – Link jetzt sichern</h2>
-  <p><b>Nur jetzt sichtbar.</b></p>
-  <div class="link"><input type="text" id="link" readonly><button class="p" id="kopieren">Link kopieren</button><button class="s" id="qr-knopf">QR-Code</button></div>
+  <h2>⚠ Link sichern</h2>
+  <div class="link"><input type="text" id="link" readonly><button class="p" id="kopieren">📋 Kopieren</button><button class="s" id="qr-knopf">QR-Code</button></div>
   <div class="qr" id="qr" hidden></div>
  </section>
- <div class="spalten">
-  <aside>
-   <div class="karte">
-    <h2>Gruppen</h2>
-    <div class="liste" id="gruppen"></div>
-    <form class="reihe" id="neu-form" style="margin-top:12px"><input type="text" id="neu-name" placeholder="Neue Gruppe, z. B. Klasse 3a" maxlength="80" required class="grow"><button class="p">Anlegen</button></form>
-    <p class="fehler" id="neu-fehler"></p>
-   </div>
-   <div class="karte" id="favoriten-karte">
-    <h2>Favoriten</h2>
-    <div id="favoriten"></div>
-   </div>
-  </aside>
-  <main id="haupt"><div class="nichts">Lade Gruppen …</div></main>
- </div>
+ <div class="klassen-leiste" id="gruppen"></div>
+ <form class="reihe" id="neu-form" hidden><input type="text" id="neu-name" placeholder="Name" maxlength="80" required class="grow"><button class="p">Anlegen</button></form>
+ <p class="fehler" id="neu-fehler"></p>
  <p class="fehler" id="fehler"></p>
+ <main id="haupt"><div class="nichts">⏳</div></main>
 </div>
 <template id="editor">
- <div class="karte jetzt" id="jetzt"></div>
- <div class="karte">
-  <h2>Freigabe für <span id="g-name"></span></h2>
-  <div class="modus" id="modus"></div>
-  <div class="zwei">
-   <label class="feld"><span>Titel auf den iPads</span><input type="text" id="titel" maxlength="80" placeholder="z. B. Heute: Fingerstricken"></label>
-   <label class="feld"><span>Klasse (stellt die iPads um)</span><select id="klasse"><option value="">– unverändert –</option><option value="1">1. Klasse</option><option value="2">2. Klasse</option><option value="3">3. Klasse</option><option value="4">4. Klasse</option><option value="5">5. Klasse</option><option value="6">6. Klasse</option></select></label>
-  </div>
-  <div id="projekte" hidden>
-   <div class="feld"><span>Aufgaben auswählen</span></div>
-   <div class="chips" id="chips"></div>
-   <div class="suche"><input type="search" id="suche" placeholder="Titel suchen" autocomplete="off"><select id="thema"><option value="">Alle Themen</option></select><select id="stufe"><option value="">Alle Klassen</option><option value="1">1. Klasse</option><option value="2">2. Klasse</option><option value="3">3. Klasse</option><option value="4">4. Klasse</option><option value="5">5. Klasse</option><option value="6">6. Klasse</option></select></div>
-   <div class="videos" id="videos"></div>
-   <div class="material">
-    <h3>Material für diese Lektion</h3>
-    <div id="material"></div>
-    <div class="aktion" style="margin-top:8px">
-     <span class="papier" id="papier" title="Papierformat für den Druck"><label><input type="radio" name="papier" value="A4" checked>A4</label><label><input type="radio" name="papier" value="A3">A3</label></span>
-     <button class="s" id="drucken-material" disabled>🖨 Materialliste drucken</button>
-     <button class="s" id="drucken-qr" disabled>🖨 QR-Blatt drucken</button>
+ <div class="lektion">
+  <div class="spalte">
+   <section class="karte" id="karte-vor">
+    <div class="jetzt" id="jetzt">
+     <div class="vor-kopf" id="vor-kopf"></div>
+     <div class="tablet-rahmen"><div class="vor-bilder" id="vor-bilder"></div></div>
     </div>
-   </div>
-   <label class="schalter" id="plan-feld"><input type="checkbox" id="plan"> Lektionsplan (Material richten → Video → Foto) – die iPads führen durch die drei Schritte, du siehst unten, wer wo steht</label>
+    <div class="aktion"><button class="p" id="freigeben">Freigeben</button><button class="s" id="schliessen">🔒 Schliessen</button><button class="s" id="favorit">☆ Favorit</button><span id="hinweis"></span></div>
+   </section>
+   <section class="karte" id="favoriten-karte" hidden>
+    <h2>☆ Favoriten</h2>
+    <div class="fav-reihe" id="favoriten"></div>
+   </section>
+   <section class="karte" id="karte-edit">
+    <div class="modus" id="modus"></div>
+    <div class="zwei">
+     <label class="feld"><span>Titel</span><input type="text" id="titel" maxlength="80"></label>
+     <label class="feld"><span>Stufe</span><select id="klasse"><option value="">–</option><option value="1">1.</option><option value="2">2.</option><option value="3">3.</option><option value="4">4.</option><option value="5">5.</option><option value="6">6.</option></select></label>
+    </div>
+    <div id="projekte" hidden>
+     <div class="feld"><span>Aufgaben</span></div>
+     <div class="chips" id="chips"></div>
+     <div class="suche"><input type="search" id="suche" placeholder="Suchen" autocomplete="off"><select id="thema"><option value="">Alle Themen</option></select><select id="stufe"><option value="">Alle Klassen</option><option value="1">1. Klasse</option><option value="2">2. Klasse</option><option value="3">3. Klasse</option><option value="4">4. Klasse</option><option value="5">5. Klasse</option><option value="6">6. Klasse</option></select></div>
+     <div class="videos" id="videos"></div>
+     <div class="material">
+      <h3>Material</h3>
+      <div id="material"></div>
+      <div class="aktion" style="margin-top:8px">
+       <span class="papier" id="papier"><label><input type="radio" name="papier" value="A4" checked>A4</label><label><input type="radio" name="papier" value="A3">A3</label></span>
+       <button class="s" id="drucken-material" disabled>🖨 Material</button>
+       <button class="s" id="drucken-qr" disabled>🖨 QR-Blatt</button>
+      </div>
+     </div>
+     <label class="schalter" id="plan-feld"><input type="checkbox" id="plan"> 🧺 ▶ 📷 Lektionsplan</label>
+    </div>
+    <label class="schalter" id="galerie-feld"><input type="checkbox" id="galerie"> 🖼️ Werke offen</label>
+    <div class="aktion"><button class="p" id="freigeben2" hidden>Freigeben</button></div>
+   </section>
   </div>
-  <label class="schalter" id="galerie-feld"><input type="checkbox" id="galerie"> «Unsere Werke» und Fotos bleiben offen</label>
-  <div class="aktion"><button class="p" id="freigeben">Freigeben</button><button class="s" id="schliessen">🔒 Alles schliessen</button><button class="s" id="favorit">☆ Als Favorit speichern</button><span class="klein" id="hinweis"></span></div>
- </div>
- <div class="karte">
-  <h2>Verbundene iPads <span class="klein" id="g-anzahl"></span></h2>
-  <div id="geraete"><p class="klein">Noch kein iPad verbunden.</p></div>
+  <div class="spalte">
+   <section class="karte" id="karte-ipads">
+    <h2 class="k-titel"><span data-sym="tablet"></span>iPads<span class="k-zahlen" id="g-anzahl"></span></h2>
+    <div id="geraete"></div>
+   </section>
+   <section class="karte" id="karte-kinder">
+    <h2 class="k-titel"><span data-sym="kind"></span>Kinder<span class="k-zahlen" id="k-zahlen"></span></h2>
+    <div id="kinder"></div>
+    <a class="werke-streifen" id="werke-streifen" href="sammlung.html"></a>
+   </section>
+  </div>
  </div>
 </template>
 <div id="druck" aria-hidden="true"></div>
 <script src="werkstatt.js"></script>
+<script src="klasse.js"></script>
+<script src="../vorlagen/melden.js" defer></script>
 <script src="qr.js"></script>
 <script>
 (async()=>{
@@ -171,50 +245,68 @@ const THEMEN={naehen:'🪡 Nähen',sticken:'🧵 Sticken',haekeln:'🧶 Häkeln'
 /* Material-Namen: Kopie von MATERIAL aus quelle/p2.js (nur id → Name), damit die Seite ohne Build-Schritt auskommt. */
 const MATERIAL={wolle:'Wolle',garn:'Garn',schnur:'Schnur',schere:'Schere',karton:'Karton',papier:'Papier',nadel:'Nadel',stopfnadel:'Stumpfe Nadel',filz:'Filz',stoff:'Stoff',leim:'Leim',klebeband:'Klebeband',heisskleber:'Heisskleber',zirkel:'Zirkel',lineal:'Lineal',bleistift:'Bleistift',stifte:'Farbstifte',hammer:'Hammer',naegel:'Nägel',holzbrett:'Holzbrett',zange:'Zange',perle:'Perle',knopf:'Knopf',haekelnadel:'Häkelnadel',stricknadeln:'Stricknadeln',strickliesel:'Strickliesel',filzwolle:'Filzwolle',seife:'Seife',wasser:'Wasser',glas:'Glas',flasche:'Flasche',luftballon:'Luftballon',trinkhalm:'Trinkhalm',waescheklammer:'Wäscheklammer',magnet:'Magnet',bueroklammer:'Büroklammern',taschenlampe:'Taschenlampe',ei:'Eier',buecher:'Bücher',hefe:'Hefe',zucker:'Zucker',loeffel:'Löffel',trichter:'Trichter',backpulver:'Backpulver',essig:'Essig',brausetablette:'Brausetablette',dose:'Dose',moos:'Moos',steine:'Steine',sand:'Sand',watte:'Watte',zahnstocher:'Zahnstocher',frucht:'Apfel oder Orange',schuh:'Schuh',tuerklinke:'Türklinke',salz:'Salz',pfeffer:'Pfeffer',stab:'Stab',schnuersenkel:'Schnürsenkel',handtuch:'Handtuch',holzspatel:'Holzspatel',kerze:'Kerze',eierbecher:'Eierbecher',zuendholzschachtel:'Zündholzschachtel',plastikloeffel:'Plastiklöffel',ton:'Ton',mehl:'Mehl',oel:'Öl',schuessel:'Schüssel',wallholz:'Wallholz',ausstechform:'Ausstechform',blueten:'Blüten',kartoffel:'Kartoffel',messer:'Messer',taschenmesser:'Taschenmesser',schnitzmesser:'Schnitzmesser',ast:'Ast',schnitzhandschuh:'Schnitzhandschuh',farbe:'Farbe',pinsel:'Pinsel',stempelkissen:'Stempelkissen',moosgummi:'Moosgummi',schwamm:'Schwamm',styropor:'Styroporplatte',walze:'Walze',teller:'Teller',saege:'Säge',schraubzwinge:'Schraubzwinge',schraubstock:'Schraubstock',schleifpapier:'Schleifpapier',zuendhoelzer:'Zündhölzer',holzklotz:'Holzklotz',wackelaugen:'Wackelaugen',sticker:'Sticker',holzraeder:'Holzräder',schrauben:'Schrauben',schraubendreher:'Schraubendreher',raspel:'Raspel',feile:'Feile',schwemmholz:'Schwemmholz',feder:'Feder',platte:'Druckplatte',metallplatte:'Metallplatte',bohrer:'Bohrer',schutzbrille:'Schutzbrille',reissnadel:'Reissnadel',koerner:'Körner',ahle:'Ahle',webschiffchen:'Webschiffchen',strickgabel:'Strickgabel',pappteller:'Pappteller',locher:'Locher',gummiband:'Gummiband',stickrahmen:'Stickrahmen',blaetter:'Blätter',gabel:'Gabel',zeitung:'Zeitung',hefter:'Heftapparat',filznadel:'Filznadel',schaumstoff:'Schaumstoffkissen',stecknadeln:'Stecknadeln',noppenfolie:'Noppenfolie',scoubidou:'Scoubidou-Bänder',eisstiel:'Eisstiele',paracord:'Paracord',perlenwebrahmen:'Perlenwebrahmen',schluesselring:'Schlüsselring',feuerzeug:'Feuerzeug',draht:'Draht',steckverschluss:'Steckverschluss',reissverschluss:'Reissverschluss',baumwollband:'Baumwollband',naehmaschine:'Nähmaschine',vlieseline:'Vlieseline',buegeleisen:'Bügeleisen'};
 const matName=id=>MATERIAL[id]||id;
-const MODI=[['closed','🔒','Geschlossen','Die iPads zeigen nur den Wartebildschirm.'],['projects','▶','Aufgaben','Nur die gewählten Aufgaben sind offen.'],['templates','✂️','Vorlagen','Die Vorlagen zum Ausdrucken sind offen.'],['beads','📿','Perlentiere','Der Perlen-Editor ist offen.'],['free','🏠','Alles offen','Die iPads zeigen die ganze App.']];
+const MODI=[['closed','🔒','Geschlossen'],['projects','▶','Aufgaben'],['templates','✂️','Vorlagen'],['beads','📿','Perlentiere'],['free','🏠','Alles offen']];
 const modus=m=>MODI.find(x=>x[0]===m)||MODI[0];
-const fehler=(el,x)=>{el.textContent=x?String(x.message||x):''};
+const IPADS=3,ONLINE_MS=120000;
+const svg=(inhalt,voll)=>`<svg class="sym${voll?' voll':''}" viewBox="0 0 24 24" aria-hidden="true">${inhalt}</svg>`;
+const SYM={tablet:svg('<rect x="4" y="2.5" width="16" height="19" rx="2.5"/><path d="M10.5 18.5h3"/>'),kind:svg('<circle cx="12" cy="7" r="4"/><path d="M4.5 21.5c.6-5 3.6-7.5 7.5-7.5s6.9 2.5 7.5 7.5"/>'),spiel:svg('<path d="M8 5.5v13l11-6.5z"/>',true),werk:svg('<path d="M12 2.8 20 7.3v9.4l-8 4.5-8-4.5V7.3z"/><path d="M4 7.3l8 4.5 8-4.5M12 11.8v9.4"/>')};
+/* Fehler kurz, die volle Meldung steht im title */
+const fehler=(el,x,text)=>{el.textContent=x?text||KLASSE.warnung(x):'';el.title=x?String(x.message||x):''};
 const vor=ms=>{const s=Math.round(ms/1000);return s<60?'gerade eben':s<3600?`vor ${Math.round(s/60)} Min.`:s<86400?`vor ${Math.round(s/3600)} Std.`:`vor ${Math.round(s/86400)} Tagen`};
-let gruppen=[],videos=[],favoriten=[],aktiv=null,geraete=null,timer=null,wahl=new Set();
+const einmal=(el,html)=>{if(el._html!==html){el._html=html;el.innerHTML=html}};
+let gruppen=[],videos=[],favoriten=[],klassen=[],sammlungen=[],VORSCHAU=new Set(),aktiv=null,geraete=null,kindDaten=null,kvideo=null,timer=null,wahl=new Set();
 const videoOf=id=>videos.find(v=>v.id===id);
+KLASSE.nav($('#k-nav'),'unterricht.html');
 try{await W.bereit();
- const [g,s,a,f]=await Promise.all([W.unterricht.gruppen(),fetch('../schule/schule.json',{cache:'no-store'}).then(r=>r.json()),
-  fetch('../anleitungen/anleitungen.json',{cache:'no-store'}).then(r=>r.ok?r.json():{anleitungen:[]}).catch(()=>({anleitungen:[]})),W.unterricht.favoriten().catch(()=>({favoriten:[]}))]);
- gruppen=g.gruppen;favoriten=f.favoriten||[];
+ const [g,s,a,f,k,w,b]=await Promise.all([W.unterricht.gruppen(),fetch('../schule/schule.json',{cache:'no-store'}).then(r=>r.json()),
+  fetch('../anleitungen/anleitungen.json',{cache:'no-store'}).then(r=>r.ok?r.json():{anleitungen:[]}).catch(()=>({anleitungen:[]})),W.unterricht.favoriten().catch(()=>({favoriten:[]})),
+  W.namen.klassen().catch(()=>({klassen:[]})),W.sammlung.verwaltung().catch(()=>({sammlungen:[]})),fetch('../vorschau/vorschau.json').then(r=>r.ok?r.json():{}).catch(()=>({}))]);
+ gruppen=g.gruppen;favoriten=f.favoriten||[];klassen=k.klassen||[];sammlungen=w.sammlungen||[];VORSCHAU=new Set(b.bilder||[]);
  videos=[...s.videos,...a.anleitungen.map(x=>({...x,source:{type:'bilder'}}))];
-}catch(x){$('#haupt').innerHTML=`<div class="nichts">Laden ging nicht: ${esc(x.message||x)}</div>`;return}
+}catch(x){$('#haupt').innerHTML=`<div class="nichts" title="${esc(x.message||x)}">${KLASSE.warnung(x)}</div>`;return}
 
-/* ---------- Gruppen ---------- */
+/* ---------- Bilder ---------- */
+const bild=v=>{const s=v&&v.source;if(v&&v.titelbild)return `../anleitungen/${v.ordner||v.id}/${v.titelbild}`;if(s&&s.type==='youtube')return VORSCHAU.has(s.id)?`../vorschau/${s.id}.webp`:`https://i.ytimg.com/vi/${s.id}/mqdefault.jpg`;return ''};
+const bildTag=(v,cls)=>{const u=bild(v),e=(THEMEN[v&&v.areaId]||'📷').split(' ')[0];return u?`<img class="${cls}" src="${esc(u)}" alt="" loading="lazy" data-e="${e}">`:`<span class="${cls}">${e}</span>`};
+document.addEventListener('error',e=>{const i=e.target;if(i.tagName==='IMG'&&i.dataset.e){const s=document.createElement('span');s.className=i.className;s.textContent=i.dataset.e;i.replaceWith(s)}},true);
+
+/* ---------- Klassen ---------- */
 function zeichneGruppen(){
- $('#gruppen').innerHTML=gruppen.length?gruppen.map(g=>{const m=modus(g.policy.mode);return `<button class="eintrag${aktiv&&aktiv.id===g.id?' on':''}" data-id="${g.id}"><span class="grow"><b>${esc(g.name)}</b><span class="status"><i class="${g.policy.mode==='closed'?'':'an'}"></i>${m[1]} ${esc(g.policy.mode==='projects'||g.policy.mode==='closed'?g.policy.title||m[2]:m[2])}</span></span></button>`}).join(''):
-  '<p class="klein">Noch keine Gruppe.</p>';
+ $('#gruppen').innerHTML=gruppen.map(g=>{const m=modus(g.policy.mode);return `<button class="pill${aktiv&&aktiv.id===g.id?' on':''}" data-id="${g.id}" title="${esc(m[2])}"><i class="punkt${g.policy.mode==='closed'?'':' an'}"></i>${esc(g.name)}<span>${m[1]}</span></button>`}).join('')+'<button class="pill" id="neu-auf" title="Neue Klasse">＋</button>';
  $('#gruppen').querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>waehle(b.dataset.id));
+ $('#neu-auf').onclick=()=>{const f=$('#neu-form');f.hidden=!f.hidden;if(!f.hidden)$('#neu-name').focus()};
 }
 $('#neu-form').onsubmit=async e=>{e.preventDefault();const b=e.target.querySelector('button');b.disabled=true;fehler($('#neu-fehler'));
  try{const g=await W.unterricht.erstellen($('#neu-name').value.trim());
   gruppen.push({id:g.id,name:g.name,token:g.token,policy:{mode:'closed',title:'',ids:[],grade:null,simple:true,resize:true,recolor:true,gallery:false,selection:'custom',category:'',plan:false},revision:0});
-  $('#link').value=W.APP_URL+'#unterricht='+g.token;$('#qr').hidden=true;$('#qr').replaceChildren();$('#neu-link').hidden=false;$('#neu-name').value='';
+  $('#link').value=W.APP_URL+'#unterricht='+g.token;$('#qr').hidden=true;$('#qr').replaceChildren();$('#neu-link').hidden=false;$('#neu-name').value='';$('#neu-form').hidden=true;
   waehle(g.id);window.scrollTo({top:0,behavior:'smooth'})}
  catch(x){fehler($('#neu-fehler'),x)}b.disabled=false};
-$('#kopieren').onclick=async()=>{try{await navigator.clipboard.writeText($('#link').value);$('#kopieren').textContent='Kopiert ✓';setTimeout(()=>$('#kopieren').textContent='Link kopieren',1500)}catch{$('#link').select()}};
+$('#kopieren').onclick=async()=>{try{await navigator.clipboard.writeText($('#link').value);$('#kopieren').textContent='✓';setTimeout(()=>$('#kopieren').textContent='📋 Kopieren',1500)}catch{$('#link').select()}};
 $('#qr-knopf').onclick=()=>{const q=$('#qr');q.hidden=false;q.replaceChildren(QR.canvas($('#link').value,240))};
 
-/* ---------- Editor ---------- */
+/* ---------- Lektion einer Klasse ---------- */
 function waehle(id){
- aktiv=gruppen.find(g=>g.id===id);if(!aktiv)return;zeichneGruppen();
+ aktiv=gruppen.find(g=>g.id===id);if(!aktiv)return;KLASSE.setze(aktiv.name);zeichneGruppen();geraete=null;kindDaten=null;kvideo=null;
  $('#haupt').replaceChildren($('#editor').content.cloneNode(true));
- $('#g-name').textContent=aktiv.name;
- $('#modus').innerHTML=MODI.map(([m,i,t,d])=>`<label title="${d}"><input type="radio" name="modus" value="${m}"><i>${i}</i>${t}</label>`).join('');
+ document.querySelectorAll('#haupt [data-sym]').forEach(e=>e.innerHTML=SYM[e.dataset.sym]);
+ $('#modus').innerHTML=MODI.map(([m,i,t])=>`<label><input type="radio" name="modus" value="${m}"><i>${i}</i>${t}</label>`).join('');
  const themen=[...new Set(videos.map(v=>v.areaId))].filter(t=>THEMEN[t]);
  $('#thema').innerHTML='<option value="">Alle Themen</option>'+themen.map(t=>`<option value="${t}">${THEMEN[t]}</option>`).join('');
  fuellen(aktiv.policy);
  $('#modus').onchange=()=>{$('#projekte').hidden=$('input[name=modus]:checked').value!=='projects';$('#titel').placeholder=vorschlag()};
+ $('#karte-edit').addEventListener('input',zeichneJetzt);$('#karte-edit').addEventListener('change',zeichneJetzt);
  ['#suche','#thema','#stufe'].forEach(s=>$(s).oninput=zeichneVideos);
  $('#freigeben').onclick=()=>freigeben(ausFormular());
+ $('#freigeben2').onclick=()=>freigeben(ausFormular(),true);
  $('#schliessen').onclick=()=>{fuellen({...aktiv.policy,mode:'closed',title:'',ids:[]});freigeben(ausFormular())};
  $('#drucken-material').onclick=()=>drucken('material');$('#drucken-qr').onclick=()=>drucken('qr');
- $('#favorit').onclick=async()=>{const p=ausFormular();const name=prompt('Name für diesen Favoriten:',p.title||modus(p.mode)[2]);if(!name)return;
+ $('#favorit').onclick=async()=>{const p=ausFormular();const name=prompt('Name:',p.title||modus(p.mode)[2]);if(!name)return;
   try{const f=await W.unterricht.favorit(name.trim(),p);favoriten.push(f);zeichneFavoriten()}catch(x){fehler($('#fehler'),x)}};
+ $('#geraete').onclick=async e=>{const b=e.target.closest('[data-name]');if(!b)return;const d=geraete.geraete.find(x=>x.id===b.dataset.name);const n=prompt('Name:',d.name);if(!n||!n.trim())return;
+  try{await W.unterricht.geraetName(aktiv.id,d.id,n.trim().slice(0,40));d.name=n.trim().slice(0,40);zeichneGeraete();zeichneKinder()}catch(x){fehler($('#fehler'),x)}};
+ $('#kinder').onclick=e=>{const b=e.target.closest('[data-v]');if(b){kvideo=b.dataset.v;zeichneKinder()}};
+ zeichneFavoriten();zeichneGeraete();zeichneKinder();zeichneWerke();
  geraeteLaden();clearInterval(timer);timer=setInterval(geraeteLaden,15000);
 }
 const vorschlag=()=>{const m=$('input[name=modus]:checked').value;if(m==='projects'&&wahl.size===1)return videoOf([...wahl][0])?.title||'';return modus(m)[2]};
@@ -231,7 +323,7 @@ function ausFormular(){
 function zeichneChips(){
  $('#chips').innerHTML=wahl.size?[...wahl].map(id=>`<span class="chip">${esc(videoOf(id).title)}<button data-weg="${id}" title="Entfernen">✕</button></span>`).join(''):'';
  $('#chips').querySelectorAll('[data-weg]').forEach(b=>b.onclick=()=>{wahl.delete(b.dataset.weg);zeichneChips();zeichneVideos()});
- $('#titel').placeholder=vorschlag();zeichneMaterial();
+ $('#titel').placeholder=vorschlag();zeichneMaterial();zeichneJetzt();
 }
 /* ---------- Material und Druck ---------- */
 const gewaehlt=()=>[...wahl].map(videoOf).filter(Boolean);
@@ -244,7 +336,7 @@ function zeichneMaterial(){
  $('#drucken-material').disabled=$('#drucken-qr').disabled=!vs.length;
  if(!vs.length){el.innerHTML='';return}
  el.innerHTML=(liste.length?`<div class="mat-liste">${liste.map(m=>`<span class="mat" title="${esc(m.titel.join(', '))}">${esc(m.name)}${vs.length>1&&m.titel.length>1?`<small>×${m.titel.length}</small>`:''}</span>`).join('')}</div>`:'')
-  +vs.map(v=>`<div class="mat-pro"><b>${esc(v.title)}</b>: ${(v.material||[]).length?esc((v.material||[]).map(matName).join(', ')):'<i>kein Material angegeben</i>'}</div>`).join('');
+  +vs.map(v=>`<div class="mat-pro"><b>${esc(v.title)}</b>: ${(v.material||[]).length?esc((v.material||[]).map(matName).join(', ')):'–'}</div>`).join('');
 }
 /* Link aufs einzelne Video, gleiches Format wie schoolLink() in quelle/p2.js: Bildanleitungen «#a=<id>», sonst «#s=<base64url-Payload>». */
 function videoLink(v){
@@ -264,17 +356,17 @@ function drucken(art){
  const d=$('#druck');d.replaceChildren();
  if(art==='material'){
   const liste=materialListe(vs);
-  d.innerHTML=`<div class="blatt">${kopf}<h2>Material richten</h2>${liste.length?`<ul class="check">${liste.map(m=>`<li><i></i><span>${esc(m.name)}${vs.length>1?`<small>${esc(m.titel.join(', '))}</small>`:''}</span></li>`).join('')}</ul>`:'<p>Kein Material hinterlegt.</p>'}
+  d.innerHTML=`<div class="blatt">${kopf}<h2>Material richten</h2>${liste.length?`<ul class="check">${liste.map(m=>`<li><i></i><span>${esc(m.name)}${vs.length>1?`<small>${esc(m.titel.join(', '))}</small>`:''}</span></li>`).join('')}</ul>`:'<p>–</p>'}
    <h2>Pro Aufgabe</h2>${vs.map(v=>`<div class="pro"><b>${esc(v.title)}</b><span>${esc((v.material||[]).map(matName).join(', ')||'–')}${v.zeit?` · ${v.zeit} Min.`:''}</span></div>`).join('')}</div>`;
  }else{
   const blatt=document.createElement('div');blatt.className='blatt';
   const k=document.createElement('div');k.className='qr-kopf';
   if(aktiv.token)k.appendChild(QR.canvas(W.APP_URL+'#unterricht='+aktiv.token,400));
-  k.insertAdjacentHTML('beforeend',`<div>${kopf.replace('class="kopf"','class="kopf" style="border:0;margin:0;padding:0"')}<div class="hinweis">${aktiv.token?'QR links: Gruppenlink für die iPads (einmal pro iPad öffnen). Unten: ein Code pro Aufgabe – mit der Kamera-App des iPads scannen.':'Unten: ein Code pro Aufgabe – mit der Kamera-App des iPads scannen. Der Gruppenlink lässt sich nur direkt nach dem Anlegen der Gruppe drucken; er wird nicht gespeichert.'}</div></div>`);
+  k.insertAdjacentHTML('beforeend',`<div>${kopf.replace('class="kopf"','class="kopf" style="border:0;margin:0;padding:0"')}</div>`);
   blatt.appendChild(k);
   const g=document.createElement('div');g.className='qr-gitter';
   vs.forEach(v=>{const z=document.createElement('div');z.className='qr-zelle';const link=videoLink(v);
-   try{z.appendChild(QR.canvas(link,600,link.length>300?'L':'M'))}catch(x){z.insertAdjacentHTML('beforeend','<p>QR-Code zu gross</p>')}
+   try{z.appendChild(QR.canvas(link,600,link.length>300?'L':'M'))}catch(x){z.insertAdjacentHTML('beforeend','<p>⚠ Zu gross</p>')}
    z.insertAdjacentHTML('beforeend',`<b>${esc(v.title)}</b><small>${esc([THEMEN[v.areaId]||v.areaId||'',v.zeit?`${v.zeit} Min.`:''].filter(Boolean).join(' · '))}</small>`);g.appendChild(z)});
   blatt.appendChild(g);d.appendChild(blatt);
  }
@@ -284,47 +376,107 @@ window.addEventListener('afterprint',()=>$('#druck').replaceChildren());
 function zeichneVideos(){
  const q=$('#suche').value.trim().toLowerCase(),t=$('#thema').value,k=+$('#stufe').value;
  const treffer=videos.filter(v=>(!q||v.title.toLowerCase().includes(q)||(v.gruppe||'').toLowerCase().includes(q))&&(!t||v.areaId===t)&&(!k||(v.stufen||[]).includes(k)));
- $('#videos').innerHTML=treffer.length?treffer.slice(0,120).map(v=>`<label class="video"><input type="checkbox" data-id="${v.id}"${wahl.has(v.id)?' checked':''}>${v.source&&v.source.type==='youtube'?`<img class="th" src="https://i.ytimg.com/vi/${v.source.id}/default.jpg" alt="" loading="lazy">`:'<span class="th">📷</span>'}<span class="grow"><b>${esc(v.title)}</b><small>${[THEMEN[v.areaId]||v.areaId,(v.stufen||[]).length?(v.stufen||[]).join('.–')+'. Klasse':'',(v.steps||[]).length?v.steps.length+' Schritte':''].filter(Boolean).join(' · ')}</small></span></label>`).join('')+(treffer.length>120?`<p class="klein" style="padding:8px 12px">… und ${treffer.length-120} weitere – bitte Suche eingrenzen.</p>`:''):
-  '<p class="klein" style="padding:12px">Nichts gefunden.</p>';
+ $('#videos').innerHTML=treffer.length?treffer.slice(0,120).map(v=>`<label class="video"><input type="checkbox" data-id="${v.id}"${wahl.has(v.id)?' checked':''}>${bildTag(v,'th')}<span class="grow"><b>${esc(v.title)}</b><small>${[THEMEN[v.areaId]||v.areaId,(v.stufen||[]).length?(v.stufen||[]).join('.–')+'. Klasse':'',(v.steps||[]).length?v.steps.length+' Schritte':''].filter(Boolean).join(' · ')}</small></span></label>`).join('')+(treffer.length>120?`<p class="klein" style="padding:8px 12px">+${treffer.length-120}</p>`:''):
+  '<p class="klein" style="padding:12px">🔍 0</p>';
  $('#videos').querySelectorAll('input[data-id]').forEach(c=>c.onchange=()=>{c.checked?wahl.add(c.dataset.id):wahl.delete(c.dataset.id);zeichneChips()});
 }
-async function freigeben(p){
- const b=$('#freigeben');b.disabled=true;$('#hinweis').textContent='sende …';fehler($('#fehler'));
- try{const r=await W.unterricht.freigabe(aktiv.id,aktiv.revision,p);aktiv.policy=r.policy;aktiv.revision=r.revision;$('#hinweis').textContent='Freigegeben ✓ – die iPads wechseln in ein paar Sekunden.';zeichneGruppen();zeichneJetzt();geraeteLaden()}
- catch(x){if(x.status===409){$('#hinweis').textContent='';fehler($('#fehler'),'Die Gruppe wurde inzwischen von einem anderen Gerät geändert. Die Seite lädt neu.');setTimeout(()=>location.reload(),1800)}else{$('#hinweis').textContent='';fehler($('#fehler'),x)}}
+async function freigeben(p,unten){
+ const b=$('#freigeben');b.disabled=true;$('#hinweis').textContent='⏳';fehler($('#fehler'));
+ try{const r=await W.unterricht.freigabe(aktiv.id,aktiv.revision,p);aktiv.policy=r.policy;aktiv.revision=r.revision;$('#hinweis').textContent='✓';zeichneGruppen();zeichneJetzt();geraeteLaden();
+  const ziel=innerWidth<=900?'#karte-ipads':unten?'#karte-vor':'';if(ziel)$(ziel).scrollIntoView({behavior:'smooth',block:'start'})}
+ catch(x){$('#hinweis').textContent='';if(x.status===409){fehler($('#fehler'),x,'⚠ Geändert');setTimeout(()=>location.reload(),1800)}else fehler($('#fehler'),x)}
  b.disabled=false;
 }
+/* ---------- Was die Kinder mit dieser Freigabe sehen ---------- */
+function gleich(a,b){const ids=x=>(x.ids||[]).filter(videoOf).join();
+ return a.mode===b.mode&&(a.grade||null)===(b.grade||null)&&!!a.gallery===!!b.gallery&&!!a.plan===!!b.plan&&(a.mode!=='projects'||ids(a)===ids(b))&&(!a.title||!b.title||a.title===b.title)}
+const karte=(innen,name,cls='')=>`<div class="vk${cls}">${innen}${name?`<b>${esc(name)}</b>`:''}</div>`;
 function zeichneJetzt(){
- const p=aktiv.policy,m=modus(p.mode),el=$('#jetzt');if(!el)return;el.classList.toggle('zu',p.mode==='closed');
- const was=p.mode==='projects'?p.ids.map(id=>videoOf(id)?.title).filter(Boolean).join(', ')||'keine Aufgabe gewählt':m[3];
- el.innerHTML=`<div class="klein">Gerade auf den iPads</div><b>${m[1]} ${esc(p.title||m[2])}</b><div class="mute">${esc(was)}${p.grade?` · ${p.grade}. Klasse`:''}${p.gallery?' · Unsere Werke offen':''}${p.plan?' · Lektionsplan':''}</div>`;
+ const el=$('#jetzt');if(!el)return;const f=ausFormular(),neu=!gleich(f,aktiv.policy),zu=f.mode==='closed',m=modus(f.mode);
+ el.classList.toggle('entwurf',neu);el.classList.toggle('zu',!neu&&zu);$('#freigeben2').hidden=!neu;if(neu)$('#hinweis').textContent='';
+ const chips=[f.grade?f.grade+'.':'',f.plan?'🧺▶📷':'',f.gallery?'🖼️':''].filter(Boolean).map(c=>`<span class="vor-chip">${c}</span>`).join('');
+ einmal($('#vor-kopf'),`<span class="marke">${neu?'✎ Entwurf':zu?'🔒 Zu':'● Offen'}</span><b class="grow">${esc(f.title)}</b>${chips}`);
+ const vs=f.ids.map(videoOf).filter(Boolean),galerie=f.gallery&&!zu?karte('<span class="th">🖼️</span>','Werke'):'';
+ const kacheln=f.mode==='projects'?(vs.length?vs.slice(0,8).map(v=>karte(bildTag(v,'th'),v.title)).join('')+(vs.length>8?karte('',`+${vs.length-8}`).replace('class="vk"','class="vk mehr"').replace(/<\/?b>/g,''):''):karte('<span class="th">▶</span>','–',' ganz')):karte(`<span class="th">${m[1]}</span>`,m[2],' ganz');
+ einmal($('#vor-bilder'),kacheln+galerie);
+ markiereFavoriten(f);
+}
+const favBild=f=>{const v=videoOf((f.policy.ids||[])[0]);return v?bildTag(v,'th'):`<span class="th">${modus(f.policy.mode)[1]}</span>`};
+function markiereFavoriten(f){document.querySelectorAll('[data-fav]').forEach(b=>{const x=favoriten.find(y=>y.id===b.dataset.fav);b.closest('.fav-k').classList.toggle('on',!!x&&gleich(f,x.policy))})}
+/* ---------- iPads ---------- */
+function zeichneGeraete(){
+ const el=$('#geraete');if(!el)return;const n=geraete?geraete.now:0;
+ const liste=(geraete?geraete.geraete:[]).map(d=>({...d,online:n-d.gesehen<ONLINE_MS,ok:d.revision>=geraete.revision})).sort((a,b)=>b.online-a.online||a.name.localeCompare(b.name,'de'));
+ const soll=Math.max(IPADS,liste.length);
+ einmal($('#g-anzahl'),geraete?`<span><i class="punkt an"></i>${liste.filter(d=>d.online).length}/${soll}</span><span>✓ ${liste.filter(d=>d.ok).length}/${soll}</span>`:'<span>–</span>');
+ einmal(el,liste.map(d=>`<div class="ipad ${d.online?'online':'offline'} ${d.ok?'ok':'fehlt'}" data-id="${esc(d.id)}"><span class="ipad-bild">${SYM.tablet}<i>${d.ok?'✓':'↻'}</i></span><button class="ipad-name" data-name="${esc(d.id)}" title="Umbenennen">${esc(d.name)} ✎</button><span class="ipad-on"><i class="punkt${d.online?' an':''}"></i>${d.online?'Online':'Offline'}</span>${d.online?'':`<span>${vor(n-d.gesehen)}</span>`}<span class="ipad-frei">${d.ok?'Übernommen':'Fehlt'}</span></div>`).join('')
+  +`<div class="ipad geist"><span class="ipad-bild">${SYM.tablet}</span></div>`.repeat(Math.max(0,soll-liste.length)));
+}
+/* ---------- Kinder: Arbeitsstand, nie Gerätestatus ---------- */
+const kindName=key=>key==='_ohne'?'Ohne Name':key.slice(key.lastIndexOf('/')+1);
+function kindVideos(){
+ const p=aktiv.policy,offen=p.mode==='projects'?p.ids:[],st=kindDaten?.staende||[],g=geraete?.geraete||[];
+ return [...new Set([...offen,...st.map(s=>s.videoId),...g.flatMap(d=>(d.fortschritt||[]).map(f=>f.videoId))])].filter(videoOf).slice(0,8);
+}
+function kindZeilen(id){
+ const st=(kindDaten?.staende||[]).filter(s=>s.videoId===id),mengen=new Map();
+ /* Was mit demselben Stand ankommt, hat zusammen gearbeitet */
+ st.forEach(s=>{const ohne=s.kindKey==='_ohne',k=ohne?'_ohne':[s.stand,s.schritt,s.max,s.videoFertig,s.werkFertig].join('|');
+  if(!mengen.has(k))mengen.set(k,{key:s.kindKey,namen:[],ohne,schritt:s.max??s.schritt,video:s.videoFertig,werk:s.werkFertig});
+  const z=mengen.get(k);kindName(s.kindKey).split(/,\s*/).filter(Boolean).forEach(n=>{if(!z.namen.includes(n))z.namen.push(n)});
+  if(z.namen.length>1)z.gruppe=true});
+ const zeilen=[...mengen.values()],da=new Set(zeilen.flatMap(z=>z.namen));
+ (KLASSE.finde(klassen,aktiv.name)?.namen||[]).forEach(n=>{if(!da.has(n))zeilen.push({key:n,namen:[n],leer:true,schritt:null,video:null,werk:null})});
+ zeilen.sort((a,b)=>(a.ohne?1:0)-(b.ohne?1:0)||a.namen[0].localeCompare(b.namen[0],'de'));
+ /* Ohne Meldung je Kind bleibt der Lektionsplan: die Gruppe am iPad */
+ const plan=st.length?[]:(geraete?.geraete||[]).flatMap(d=>{const f=(d.fortschritt||[]).find(x=>x.videoId===id);return f?[{key:'ipad:'+d.id,namen:[d.name],gruppe:true,plan:true,material:!!f.schritte[0],video:!!f.schritte[1],werk:!!f.schritte[2],schritt:null}]:[]});
+ return [...plan,...zeilen];
+}
+const marke=(art,w)=>w==null?`<span class="m" data-art="${art}">–</span>`:`<span class="m ${w?'an':'aus'}" data-art="${art}" title="${art==='spiel'?'Video beendet':'Werk fertig'}">${SYM[art]}</span>`;
+function kindZeile(z,y){
+ const x=z.schritt==null?null:y?Math.min(z.schritt+1,y):z.schritt+1;
+ const mitte=z.plan?`<span class="m ${z.material?'an':'aus'}" title="Material">🧺</span>`:x==null?'<span class="kb"></span>':`<span class="kb"><i style="width:${y?Math.round(x/y*100):0}%"></i></span>`;
+ return `<div class="kind-z${z.leer?' leer':''}" data-kind="${esc(z.key)}"><span class="kn">${z.gruppe?'👥 ':''}${esc(z.namen.join(', '))}</span>${mitte}<span class="kx">${x==null?'–':y?`${x}/${y}`:x}</span>${marke('spiel',z.video)}${marke('werk',z.werk)}</div>`;
+}
+function zeichneKinder(){
+ const el=$('#kinder');if(!el)return;const ids=kindVideos();if(!ids.includes(kvideo))kvideo=ids[0]||null;
+ if(!kvideo){einmal($('#k-zahlen'),'');einmal(el,'<div class="kind-leer">–</div>');return}
+ const v=videoOf(kvideo),zs=kindZeilen(kvideo),kinder=zs.filter(z=>!z.plan&&!z.ohne),anzahl=f=>new Set(kinder.filter(f).flatMap(z=>z.namen)).size,N=anzahl(()=>true);
+ const summe=(art,k)=>`<span data-summe="${art}">${SYM[art]}${kinder.some(z=>z[k]!=null)?`${anzahl(z=>z[k])}/${N}`:'–'}</span>`;
+ einmal($('#k-zahlen'),summe('spiel','video')+summe('werk','werk'));
+ const rollen=el.querySelector('.kv-reihe')?.scrollLeft||0;
+ einmal(el,`<div class="kv-reihe">${ids.map(id=>{const t=videoOf(id);return `<button class="kv${id===kvideo?' on':''}" data-v="${esc(id)}" title="${esc(t.title)}">${bildTag(t,'kv-bild')}</button>`}).join('')}</div>${zs.length?zs.map(z=>kindZeile(z,(v.steps||[]).length)).join(''):'<div class="kind-leer">–</div>'}`);
+ const r=el.querySelector('.kv-reihe');if(r)r.scrollLeft=rollen;
+}
+/* ---------- Werke der Klasse ---------- */
+let werkeLauf=0,werkeUrls=[];
+async function zeichneWerke(){
+ const el=$('#werke-streifen'),lauf=++werkeLauf;if(!el)return;
+ werkeUrls.forEach(u=>URL.revokeObjectURL(u));werkeUrls=[];
+ el.setAttribute('href',KLASSE.adresse('sammlung.html',aktiv.name));el.innerHTML='🖼️ <b>–</b><span class="pfeil">›</span>';
+ const s=KLASSE.finde(sammlungen,aktiv.name);if(!s)return;
+ try{const {werke}=await W.sammlung.werke(s.id);if(lauf!==werkeLauf)return;
+  const fotos=(await Promise.all(werke.slice(0,3).map(w=>W.sammlung.foto(w.id).catch(()=>null)))).filter(Boolean);
+  if(lauf!==werkeLauf){fotos.forEach(u=>URL.revokeObjectURL(u));return}
+  werkeUrls=fotos;el.innerHTML=`🖼️ ${fotos.map(u=>`<img src="${esc(u)}" alt="">`).join('')}<b>${werke.length}</b><span class="pfeil">›</span>`}catch{}
 }
 async function geraeteLaden(){
- if(!aktiv||document.hidden)return;
- try{const r=await W.unterricht.geraete(aktiv.id);if(r.revision!==aktiv.revision){aktiv.revision=r.revision;aktiv.policy=r.policy;zeichneGruppen()}geraete=r;zeichneGeraete();zeichneJetzt()}catch(x){fehler($('#fehler'),x)}
-}
-function zeichneGeraete(){
- const el=$('#geraete');if(!el||!geraete)return;const g=geraete.geraete;$('#g-anzahl').textContent=g.length?`(${g.filter(d=>geraete.now-d.gesehen<120000).length} von ${g.length} online)`:'';
- if(!g.length){el.innerHTML='<p class="klein">Noch kein iPad verbunden.</p>';return}
- const p=aktiv.policy,ids=p.mode==='projects'?p.ids:[],mitPlan=ids.length>0&&(p.plan||g.some(d=>(d.fortschritt||[]).some(f=>ids.includes(f.videoId))));
- const SCHRITTE=['Material richten','Video','Foto'],boxen=d=>ids.map(id=>{const f=(d.fortschritt||[]).find(x=>x.videoId===id),s=f?f.schritte:[false,false,false];
-  return `<div class="plan-zeile"><span class="boxen">${s.map((an,i)=>`<i class="box${an?' an':''}" title="${SCHRITTE[i]}${an?' ✓':''}">${'①②③'[i]}</i>`).join('')}</span><span title="${esc(videoOf(id)?.title||id)}">${esc(videoOf(id)?.title||id)}</span></div>`}).join('');
- el.innerHTML=`<table class="geraete"><thead><tr><th>iPad</th><th>Zuletzt gesehen</th><th>Freigabe</th>${mitPlan?'<th>Lektionsplan</th>':''}<th></th></tr></thead><tbody>${g.map(d=>{const online=geraete.now-d.gesehen<120000;return `<tr>
-  <td><span class="punkt${online?' an':''}"></span>${esc(d.name)}</td><td class="klein">${vor(geraete.now-d.gesehen)}</td>
-  <td class="klein">${d.revision>=geraete.revision?'aktuell ✓':online?'wechselt gleich …':'noch die alte'}</td>${mitPlan?`<td>${boxen(d)}</td>`:''}
-  <td><button class="x" data-name="${d.id}" title="Umbenennen">✎</button></td></tr>`}).join('')}</tbody></table>`;
- el.querySelectorAll('[data-name]').forEach(b=>b.onclick=async()=>{const d=g.find(x=>x.id===b.dataset.name);const n=prompt('Name für dieses iPad:',d.name);if(!n||!n.trim())return;
-  try{await W.unterricht.geraetName(aktiv.id,d.id,n.trim().slice(0,40));d.name=n.trim().slice(0,40);zeichneGeraete()}catch(x){fehler($('#fehler'),x)}});
+ const g=aktiv;if(!g||document.hidden)return;
+ try{const [r,k]=await Promise.all([W.unterricht.geraete(g.id),W.unterricht.kindstand(g.id).catch(()=>null)]);if(g!==aktiv)return;
+  if(r.revision!==g.revision){const unberuehrt=gleich(ausFormular(),g.policy);g.revision=r.revision;g.policy=r.policy;zeichneGruppen();if(unberuehrt)fuellen(g.policy)}
+  geraete=r;kindDaten=k;zeichneGeraete();zeichneKinder();zeichneJetzt()}catch(x){if(g===aktiv)fehler($('#fehler'),x)}
 }
 /* ---------- Favoriten ---------- */
 function zeichneFavoriten(){
- $('#favoriten').innerHTML=favoriten.length?favoriten.map(f=>`<span class="fav"><button class="laden" data-fav="${f.id}" title="In den Editor laden">${modus(f.policy.mode)[1]} ${esc(f.name)}</button><button data-weg="${f.id}" title="Favorit entfernen">✕</button></span>`).join(''):'';
- $('#favoriten').querySelectorAll('[data-fav]').forEach(b=>b.onclick=()=>{if(!aktiv){fehler($('#fehler'),'Zuerst links eine Gruppe wählen.');return}fuellen(favoriten.find(f=>f.id===b.dataset.fav).policy);$('#hinweis').textContent='Favorit geladen – noch nicht freigegeben.'});
- $('#favoriten').querySelectorAll('[data-weg]').forEach(b=>b.onclick=async()=>{if(!confirm('Favorit entfernen?'))return;try{await W.unterricht.favoritEntfernen(b.dataset.weg);favoriten=favoriten.filter(f=>f.id!==b.dataset.weg);zeichneFavoriten()}catch(x){fehler($('#fehler'),x)}});
+ const el=$('#favoriten');if(!el)return;$('#favoriten-karte').hidden=!favoriten.length;
+ el.innerHTML=favoriten.map(f=>`<div class="fav-k"><button class="fav-laden" data-fav="${f.id}">${favBild(f)}<b>${esc(f.name)}</b></button><button class="x fav-weg" data-weg="${f.id}" title="Entfernen">✕</button></div>`).join('');
+ el.querySelectorAll('[data-fav]').forEach(b=>b.onclick=()=>{fuellen(favoriten.find(f=>f.id===b.dataset.fav).policy);$('#karte-vor').scrollIntoView({behavior:'smooth',block:'start'})});
+ el.querySelectorAll('[data-weg]').forEach(b=>b.onclick=async()=>{if(!confirm('Favorit entfernen?'))return;try{await W.unterricht.favoritEntfernen(b.dataset.weg);favoriten=favoriten.filter(f=>f.id!==b.dataset.weg);zeichneFavoriten()}catch(x){fehler($('#fehler'),x)}});
+ markiereFavoriten(ausFormular());
 }
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)geraeteLaden()});
-zeichneGruppen();zeichneFavoriten();
-if(gruppen.length)waehle(gruppen[0].id);else $('#haupt').innerHTML='<div class="nichts">Lege links eine Gruppe an.</div>';
+zeichneGruppen();
+if(gruppen.length)waehle((KLASSE.finde(gruppen)||gruppen[0]).id);else{$('#haupt').innerHTML='<div class="nichts">🏫</div>';$('#neu-form').hidden=false}
 })();
 </script>
 </body>

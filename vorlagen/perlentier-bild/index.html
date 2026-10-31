@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="../planer.css">
 <style>
 :root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--papier:#FFFFFF;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;color-scheme:dark}}
@@ -15,11 +16,8 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
 h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
-h1{font-size:28px}
 h2{font-size:17px;margin-bottom:10px}
 a{color:var(--acc)}
-.kopf{max-width:1200px;margin:0 auto;padding:20px 16px 8px}
-.kopf p{margin:4px 0 0;color:var(--muted)}
 main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,380px);gap:20px;align-items:start}
 .karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
 .zone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:240px;border:3px dashed var(--line);border-radius:16px;padding:24px 16px;text-align:center;background:var(--surface2);cursor:pointer;color:var(--muted)}
@@ -39,7 +37,7 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .legende{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted);margin:10px 0 0}
 .legende span{display:inline-flex;align-items:center;gap:6px}
 .legende i{display:inline-block;width:18px;height:3px;border-radius:2px}
-.seite-rechts{position:sticky;top:12px;display:flex;flex-direction:column;gap:14px}
+.seite-rechts{position:sticky;top:calc(var(--kopf-h) + 12px);display:flex;flex-direction:column;gap:14px}
 .feld{margin-bottom:14px}
 .lbl{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-bottom:6px}
 .lbl output{color:var(--ink);font-weight:800}
@@ -51,11 +49,9 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .chip[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
 input[type=range]{width:100%;accent-color:var(--acc)}
 input[type=text]{width:100%;font:inherit;padding:8px 10px;border-radius:10px;border:2px solid var(--line);background:var(--surface2);color:var(--ink)}
-.drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
-.drucken:disabled{opacity:.45;cursor:default}
-.drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
 .info{font-size:15px;margin:10px 0 0}
-.hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
+.beispiele{margin:8px 0 0}
+.zu-perlen{display:inline-block;text-decoration:none;margin-top:10px}
 .farben{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
 .farbe{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:12px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);font:inherit;font-size:14px;cursor:pointer;text-align:left}
 .farbe[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
@@ -71,7 +67,17 @@ summary{cursor:pointer;font-size:14px;color:var(--muted)}
 .alle button[aria-pressed="true"]{outline:3px solid var(--acc);outline-offset:2px}
 button:focus-visible,.zone:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 [hidden]{display:none!important}
-@media (max-width:860px){main{grid-template-columns:minmax(0,1fr)}.seite-rechts{position:static}h1{font-size:24px}}
+@media (max-width:860px){
+  main{display:flex;flex-direction:column;align-items:stretch}
+  .seite-rechts{position:static}
+  /* Der Plan bleibt beim Einstellen sichtbar */
+  #k-plan.da{position:sticky;top:var(--kopf-h);z-index:10;padding:8px;box-shadow:0 8px 16px rgba(0,0,0,.12)}
+  #k-plan.da .plan{margin-top:8px}
+  #k-plan.da .plan svg{max-height:34vh}
+  #k-plan.da .plan.malen svg{max-height:52vh}
+  #k-plan.da .legende{margin-top:4px}
+  #k-plan.da .pruefung{margin-top:4px;padding:4px 10px;font-size:14px}
+}
 #druck{display:none}
 @page{size:A4 portrait;margin:0}
 @media print{
@@ -83,19 +89,22 @@ button:focus-visible,.zone:focus-visible{outline:3px solid var(--acc);outline-of
 </style>
 </head>
 <body>
-<header class="kopf">
-  <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
-  <h1>Perlentier aus eigenem Bild</h1>
-  <p><a href="../perlen/">Perlentiere →</a> · <a href="../">←&nbsp;Vorlagen</a></p>
+<header class="pk">
+  <a class="zur-app" href="../../" data-zur-app aria-label="Zurück zur App"><span>App</span></a>
+  <h1>Perlentier aus Bild</h1>
+  <a class="pk-vorlagen" href="../" aria-label="Vorlagen" title="Vorlagen"><span>Vorlagen</span></a>
+  <button class="pk-rueck" id="p-rueck" type="button" disabled aria-label="Rückgängig" title="Rückgängig"></button>
+  <button class="pk-druck" id="drucken" type="button" disabled aria-label="Drucken, 100 %"><span>Drucken</span></button>
 </header>
 <script src="../zurueck.js"></script>
+<script src="../planer.js"></script>
 <main>
-  <section class="karte" aria-label="Bild und Plan">
+  <section class="karte" id="k-plan" aria-label="Bild und Plan">
     <div class="zone" id="zone" role="button" tabindex="0" aria-label="Bild wählen oder hineinziehen">
       <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="9" width="36" height="30" rx="4"/><circle cx="17" cy="19" r="3.5"/><path d="M6 33l11-10 9 8 6-5 10 9"/></svg>
       <b><span class="maus">Bild hierher ziehen</span><span class="finger">Bild wählen</span></b>
     </div>
-    <p class="hinweis" id="beispiel-zeile"><button type="button" class="knopf-text" id="beispiel">🐞 Beispiel</button> <button type="button" class="knopf-text" id="kolibri">🐦 Kolibri</button></p>
+    <p class="beispiele" id="beispiel-zeile"><button type="button" class="knopf-text" id="beispiel">🐞 Beispiel</button> <button type="button" class="knopf-text" id="kolibri">🐦 Kolibri</button></p>
     <input type="file" id="datei" accept="image/*" hidden>
     <div class="plan" id="plan" aria-live="polite"></div>
     <p class="legende" id="legende" hidden><span><i style="background:#2A6FDB"></i>Draht</span></p>
@@ -120,8 +129,9 @@ button:focus-visible,.zone:focus-visible{outline:3px solid var(--acc);outline-of
         <label class="lbl" for="titel"><span>Titel</span></label>
         <input type="text" id="titel" maxlength="40" value="Mein Tier">
       </div>
-      <button type="button" class="drucken" id="drucken" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
+      <div id="papier"></div>
       <p class="info" id="info"></p>
+      <a class="chip zu-perlen" href="../perlen/">Perlentiere</a>
     </section>
     <section class="karte" aria-label="Farben" id="farben-karte" hidden>
       <h2>Malen</h2>
@@ -143,7 +153,8 @@ const ML=2,MD=3,Q=ML/MD,PE={name:'Rocailles 3 mm',l:.2,d:.3,draht:'0,3 mm'};
 const FARBZAHL=[3,4,6,8,0];
 const A='#2A6FDB',B=A;   // ein Draht, eine Farbe: A und B sind nur die zwei Enden
 const $=id=>document.getElementById(id);
-const S={bild:null,vor:null,reihen:14,farben:8,hg:true,t:null,notiz:null,pinsel:null,ans:null};
+const S={bild:null,nr:-1,vor:null,reihen:14,farben:8,hg:true,t:null,notiz:null,pinsel:null,ans:null};
+const BILDER=[];   // alle geladenen Bilder, damit Rückgängig sie wiederfindet
 
 // Farbabstand im Lab-Raum
 const lin=v=>(v/=255)<=.04045?v/12.92:((v+.055)/1.055)**2.4;
@@ -702,6 +713,7 @@ function blatt(){
     `<text x="10" y="17" font-size="7.5" font-weight="800" fill="#1c2430" font-family="Fredoka,Nunito,Arial,sans-serif">Perlentier: ${titel}</text>`+
     `<text x="10" y="23.5" font-size="3.4" fill="#5b6573">${t.rows.length} Reihen · ${n} ${PE.name} · ${f1(breit)} × ${f1(hoch)} cm</text>`+
     `<line x1="10" y1="27" x2="200" y2="27" stroke="#D5DEE9" stroke-width=".4"/>`+
+    Planer.kontrolle(150,24,{farbe:'#1c2430'})+
     mat+technik(10,y,t.teile.length>0)+
     muster(t,g,sk,ox,oy,fs)+legende+feld+`</svg>`;
 }
@@ -714,7 +726,7 @@ function zeichnen(){
   document.querySelectorAll('#hg .chip').forEach(k=>k.setAttribute('aria-pressed',(k.dataset.h==='1')===S.hg));
   const t=S.t,da=!!t;
   if(da&&!S.bild)$('reihen-zahl').textContent=`${t.rows.length} Reihen`;
-  $('drucken').disabled=!da;$('farben-karte').hidden=!da;$('zone').classList.toggle('klein',da);$('beispiel-zeile').hidden=!!S.bild;
+  $('k-plan').classList.toggle('da',da);$('drucken').disabled=!da;$('farben-karte').hidden=!da;$('zone').classList.toggle('klein',da);$('beispiel-zeile').hidden=!!S.bild;
   $('legende').hidden=$('pruefung').hidden=!da;
   if(!da){$('plan').innerHTML='';return}
   $('plan').innerHTML=planSvg();$('plan').classList.toggle('malen',S.pinsel!==null);
@@ -746,7 +758,7 @@ function malen(e,neu){const h=perleBei(e),t=S.t,c=S.pinsel;if(!h)return;
   else if(neu&&c>=0){const r=t.rows[h.reihe];t.rows[h.reihe]=h.seite<0?KEY[c]+r:r+KEY[c]}
   else return;
   if(!plan)plan=requestAnimationFrame(()=>{plan=0;zeichnen()})}
-$('plan').addEventListener('pointerdown',e=>{if(S.pinsel===null||!S.t)return;malt=true;e.preventDefault();malen(e,true)});
+$('plan').addEventListener('pointerdown',e=>{if(S.pinsel===null||!S.t)return;malt=true;e.preventDefault();Planer.merke();malen(e,true)});
 $('plan').addEventListener('pointermove',e=>{if(malt)malen(e,false)});
 addEventListener('pointerup',()=>malt=false);
 const pinsel=e=>{const b=e.target.closest('[data-c]');if(!b)return;const c=+b.dataset.c;S.pinsel=S.pinsel===c?null:c;zeichnen()};
@@ -754,14 +766,14 @@ $('farben').addEventListener('click',pinsel);$('alle').addEventListener('click',
 
 // Bild laden: Datei, Ziehen, Einfügen, Beispiel
 // Neues Bild: Grösse so wählen, dass die Figur etwa 22 Perlen breit wird (12 bis 20 Reihen)
-function neuesBild(img){S.bild=img;S.pinsel=null;const V=S.vor=vorbereiten();
+function neuesBild(img){S.bild=img;S.nr=BILDER.push(img)-1;S.pinsel=null;const V=S.vor=vorbereiten();
   if(V.x1>=0){S.reihen=Math.max(12,Math.min(20,Math.round(22*(V.y1-V.y0+1)*Q/(V.x1-V.x0+1))));$('reihen').value=S.reihen}
   berechnen()}
 function laden(datei){
   if(!datei)return;
   if(!datei.type.startsWith('image/')){$('info').textContent='⚠ Kein Bild';return}
   const url=URL.createObjectURL(datei),img=new Image();
-  img.onload=()=>{const nm=(datei.name||'').replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ').trim();
+  img.onload=()=>{Planer.merke();const nm=(datei.name||'').replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ').trim();
     if(nm&&nm!=='image')$('titel').value=nm.slice(0,40);neuesBild(img);URL.revokeObjectURL(url)};
   img.onerror=()=>{URL.revokeObjectURL(url);$('info').textContent='⚠ Bild defekt'};
   img.src=url;
@@ -782,25 +794,28 @@ $('beispiel').addEventListener('click',()=>{   // eigenes Beispiel: Marienkäfer
   x.strokeStyle='#1B1B1B';x.lineWidth=16;x.beginPath();x.moveTo(120,90);x.lineTo(120,282);x.stroke();
   x.fillStyle='#1B1B1B';x.beginPath();for(const [px,py] of[[75,145],[165,145],[68,215],[172,215],[100,252],[140,252]]){x.moveTo(px+17,py);x.arc(px,py,17,0,7)}x.fill();
   x.fillStyle='#F4F4F2';x.beginPath();x.arc(102,68,10,0,7);x.arc(138,68,10,0,7);x.fill();
-  $('titel').value='Marienkäfer';neuesBild(c);
+  Planer.merke();$('titel').value='Marienkäfer';neuesBild(c);
 });
 // Kolibri: Flügel quer, an den Reihen 17 und 21 angenäht, Federn am Flügel, Schwanz an der letzten Reihe
 const KOLIBRI=(()=>{const fe=(k,s,n,a,o)=>({k,s,n,f:1,a,c:'l',fc:'l',o});
   const fluegel=x=>({rows:['y','yy','yyy','yyyy'],quer:x,y:18,x:x*4,an:[16,20],beine:[fe(0,-1,9,0,[1.1,-.8]),fe(0,-1,8,-58,[1.9,.25]),fe(0,1,7,-71,[1,1]),fe(0,1,5,-84,[.1,.78]),fe(1,1,4,-90,[-1,1.12]),fe(2,1,4,-90,[-2,1.45])]});
   const sch=(a,o)=>({r:33,n:7,f:1,a,c:'l',fc:'l',w:'Schwanz',o});
   return {rows:['s','s','s','s','s','s','yyy','ppp','wyyyw','pppp','wsyyysw','ppppp','yyyyyyyyy','pwwwwp','yyyyyyy','wwwwwwww','yylyy','wwwwwwwww','yyllyy','wwwwwwwww','yylllyy','wwwwwwwwww','yylllyy','wwwwwwwwwww','yyllyy','wwwwwwwwww','yylyy','wwwwwwww','yyyy','wwwwww','yyy','wwww','y'],beine:[sch(-60,[.3,-.2]),sch(-74,[-.3,.1])],teile:[fluegel(-1),fluegel(1)]}})();
-$('kolibri').addEventListener('click',()=>{S.bild=null;S.vor=null;S.t=JSON.parse(JSON.stringify(KOLIBRI));S.notiz=null;S.pinsel=null;$('titel').value='Kolibri';zeichnen()});
+$('kolibri').addEventListener('click',()=>{Planer.merke();S.bild=null;S.nr=-1;S.vor=null;S.t=JSON.parse(JSON.stringify(KOLIBRI));S.notiz=null;S.pinsel=null;$('titel').value='Kolibri';zeichnen()});
 
 // Einstellungen
 $('farbzahl').innerHTML=FARBZAHL.map(n=>`<button type="button" class="chip" data-n="${n}">${n||'alle'}</button>`).join('');
 $('hg').innerHTML=`<button type="button" class="chip" data-h="1">weglassen</button><button type="button" class="chip" data-h="0">behalten</button>`;
-$('farbzahl').addEventListener('click',e=>{const k=e.target.closest('.chip');if(!k)return;S.farben=+k.dataset.n;berechnen();zeichnen()});
-$('hg').addEventListener('click',e=>{const k=e.target.closest('.chip');if(!k)return;S.hg=k.dataset.h==='1';S.vor=null;berechnen();zeichnen()});
-$('reihen').addEventListener('input',e=>{S.reihen=+e.target.value;$('reihen-zahl').textContent=`${S.reihen} Reihen`});
-$('reihen').addEventListener('change',()=>{berechnen();zeichnen()});
+$('farbzahl').addEventListener('click',e=>{const k=e.target.closest('.chip');if(!k)return;Planer.merke();S.farben=+k.dataset.n;berechnen();zeichnen();Planer.leuchte('#plan')});
+$('hg').addEventListener('click',e=>{const k=e.target.closest('.chip');if(!k)return;Planer.merke();S.hg=k.dataset.h==='1';S.vor=null;berechnen();zeichnen()});
+$('reihen').addEventListener('input',e=>{Planer.merke(null,'reihen');S.reihen=+e.target.value;$('reihen-zahl').textContent=`${S.reihen} Reihen`});
+$('reihen').addEventListener('change',()=>{berechnen();zeichnen();Planer.leuchte('#plan')});
+$('titel').addEventListener('beforeinput',()=>Planer.merke(null,'titel'));
 function drucken(){if(S.t)$('druck').innerHTML=blatt()}
 addEventListener('beforeprint',drucken);
 $('drucken').addEventListener('click',()=>{drucken();window.print()});
+Planer.verlauf({hole:()=>({nr:S.nr,t:S.t,notiz:S.notiz,reihen:S.reihen,farben:S.farben,hg:S.hg,titel:$('titel').value}),setze(z){const b=BILDER[z.nr]||null;if(b!==S.bild||z.hg!==S.hg)S.vor=null;S.bild=b;S.nr=z.nr;Object.assign(S,{t:z.t,notiz:z.notiz,reihen:z.reihen,farben:z.farben,hg:z.hg});$('reihen').value=S.reihen;$('titel').value=z.titel;if(!S.t)$('info').textContent='';zeichnen()}});
+Planer.druckkopf('#papier',{papiere:['a4']});
 zeichnen();
 </script>
 </body>

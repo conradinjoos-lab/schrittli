@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="../planer.css">
 <style>
 :root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--papier:#FFFFFF;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;color-scheme:dark}}
@@ -15,16 +16,13 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
 h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
-h1{font-size:28px}
 h2{font-size:17px;margin-bottom:10px}
 a{color:var(--acc)}
-.kopf{max-width:1200px;margin:0 auto;padding:20px 16px 8px}
-.kopf p{margin:4px 0 0;color:var(--muted)}
 /* Links das Bild, die Grösse und das Druckblatt; rechts bleiben Modus, Farben und Rechnung beim Scrollen stehen */
 main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,360px);grid-template-rows:repeat(2,auto) 1fr;grid-template-areas:"bild rechts" "groesse rechts" "blatt rechts";gap:14px 20px;align-items:start}
 #k-bild{grid-area:bild}#k-groesse{grid-area:groesse}#k-blatt{grid-area:blatt}.seite-rechts{grid-area:rechts}
 .karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
-.seite-rechts{position:sticky;top:12px;display:flex;flex-direction:column;gap:14px}
+.seite-rechts{position:sticky;top:calc(var(--kopf-h) + 12px);display:flex;flex-direction:column;gap:14px}
 .feld{margin-bottom:14px}.feld:last-child{margin-bottom:0}
 .lbl{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -41,7 +39,6 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 .werkzeuge{display:flex;flex-wrap:wrap;gap:6px}
 .werkzeug,.klein{font:inherit;font-size:14px;padding:8px 12px;border-radius:12px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer;min-height:44px}
 .werkzeug[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
-.klein:disabled{opacity:.45;cursor:default}
 .klein.breit{width:100%}
 .leinwand-rahmen{overflow:auto;max-width:100%;-webkit-overflow-scrolling:touch}
 canvas{display:block;border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.15);touch-action:none;cursor:crosshair;background:#fff}
@@ -53,13 +50,12 @@ canvas{display:block;border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.15);tou
 .stepper span{font-size:16px;color:var(--muted)}
 .zwei{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
 .text{width:100%;font:inherit;font-size:18px;border:2px solid var(--line);border-radius:10px;background:var(--surface2);color:var(--ink);padding:8px 10px}
-.drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
-.drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
+#groesse-bild svg{display:block;width:100%;max-width:240px;height:auto;margin:4px auto 0;font:700 14px Nunito,sans-serif;color:var(--ink)}
+#k-blatt .pl-gross{margin-bottom:10px}
 .rechnung{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:15px;align-items:center}
 .rechnung dt{color:var(--muted)}.rechnung dd{margin:0}
 .rechnung .gross{font:600 22px Fredoka,Nunito,sans-serif;color:var(--acc)}
 .rechnung .punkt{display:inline-block;width:16px;height:16px;border-radius:50%;border:1px solid var(--line);vertical-align:-3px;margin-right:6px}
-.hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
 .blatt svg{display:block;width:100%;height:auto;background:var(--papier);border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
 /* 1./2. Klasse: grössere Knöpfe, weniger Einstellungen */
 body.klein .chip{font-size:17px;padding:10px 16px;min-height:48px}
@@ -70,8 +66,8 @@ body.klein .gross-nur{display:none!important}
 @media (max-width:860px){
   main{display:flex;flex-direction:column;align-items:stretch;gap:14px}
   .seite-rechts{display:contents}
-  #k-modus{order:1}#k-farben{order:2}#k-bild{order:3}#k-groesse{order:4}#k-rechnung{order:5}#drucken{order:6}#bild-speichern{order:7}#k-blatt{order:8}
-  #k-farben{position:sticky;top:0;z-index:2;padding:10px 12px;box-shadow:0 6px 16px rgba(0,0,0,.18)}
+  #k-modus{order:1}#k-farben{order:2}#k-bild{order:3}#k-groesse{order:4}#k-rechnung{order:5}#bild-speichern{order:7}#k-blatt{order:8}
+  #k-farben{position:sticky;top:var(--kopf-h);z-index:2;padding:10px 12px;box-shadow:0 6px 16px rgba(0,0,0,.18)}
   #k-farben h2{display:none}
   /* kompakt: Farben und Werkzeuge in je einer Zeile, seitlich wischen */
   #k-farben .farben,#k-farben .werkzeuge{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
@@ -80,7 +76,6 @@ body.klein .gross-nur{display:none!important}
   #k-farben .werkzeug,#k-farben .klein{flex:none;min-height:40px;padding:6px 10px;font-size:14px;white-space:nowrap}
   body.klein #k-farben .farbe{width:42px;height:42px}
   body.klein #k-farben .werkzeug,body.klein #k-farben .klein{font-size:15px;min-height:44px}
-  h1{font-size:24px}
 }
 #druck{display:none}
 @page{size:A4 portrait;margin:0}
@@ -94,44 +89,45 @@ body.klein .gross-nur{display:none!important}
 <style id="seite"></style>
 </head>
 <body>
-<header class="kopf">
-  <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
+<header class="pk">
+  <a class="zur-app" href="../../" data-zur-app aria-label="Zurück zur App"><span>App</span></a>
   <h1>Zählmuster</h1>
-  <p>Kästchen anmalen – für den Kreuzstich oder zum Weben. Die Seite zählt die Farben und druckt die Vorlage mit Zahlen. <a href="../">←&nbsp;Vorlagen-Generator</a></p>
+  <a class="pk-vorlagen" href="../" aria-label="Vorlagen" title="Vorlagen"><span>Vorlagen</span></a>
+  <button class="pk-rueck" id="p-rueck" type="button" disabled aria-label="Rückgängig" title="Rückgängig"></button>
+  <button class="pk-druck" id="drucken" type="button" aria-label="Drucken, 100 %"><span>Drucken</span></button>
 </header>
 <script src="../zurueck.js"></script>
+<script src="../planer.js"></script>
 <main>
   <section class="karte" id="k-bild" aria-label="Muster zeichnen">
     <div class="leinwand-rahmen" id="rahmen"><canvas id="leinwand" aria-label="Zählmuster, Kästchen antippen zum Anmalen"></canvas></div>
-    <p class="hinweis" id="bild-hinweis">Tippe auf ein Kästchen oder ziehe mit dem Finger darüber. Die Zahlen helfen beim Zählen: alle 5 Kästchen eine dicke Linie.</p>
   </section>
   <section class="karte" id="k-groesse" aria-label="Grösse">
-    <h2>Wie gross?</h2>
-    <div class="feld"><span class="lbl" id="l-klasse">Klassenbreite – alle machen gleich breit</span><div class="chips" role="group" aria-labelledby="l-klasse" id="klassenbreiten"></div></div>
+    <h2>Grösse</h2>
+    <div class="feld"><span class="lbl" id="l-klasse">Klassenbreite</span><div class="chips" role="group" aria-labelledby="l-klasse" id="klassenbreiten"></div></div>
     <div class="zwei">
       <div class="feld"><label class="lbl" for="breite" id="l-breite">Breite (Kästchen)</label><div class="stepper" data-feld="b"><button type="button" data-minus aria-label="Breite kleiner">−</button><input type="number" id="breite" min="5" max="60" step="1" inputmode="numeric"><button type="button" data-plus aria-label="Breite grösser">+</button></div></div>
       <div class="feld"><label class="lbl" for="hoehe" id="l-hoehe">Höhe (Kästchen)</label><div class="stepper" data-feld="h"><button type="button" data-minus aria-label="Höhe kleiner">−</button><input type="number" id="hoehe" min="5" max="60" step="1" inputmode="numeric"><button type="button" data-plus aria-label="Höhe grösser">+</button></div></div>
     </div>
     <div class="zwei gross-nur">
-      <div class="feld"><label class="lbl" for="mmw" id="l-mmw">Ein Kästchen ist breit</label><div class="stepper" data-feld="mmw"><button type="button" data-minus aria-label="Kästchen schmaler">−</button><input type="number" id="mmw" min="2" max="20" step="1" inputmode="numeric"><button type="button" data-plus aria-label="Kästchen breiter">+</button><span>mm</span></div></div>
-      <div class="feld" id="f-mmh"><label class="lbl" for="mmh" id="l-mmh">Ein Kästchen ist hoch</label><div class="stepper" data-feld="mmh"><button type="button" data-minus aria-label="Kästchen niedriger">−</button><input type="number" id="mmh" min="2" max="20" step="1" inputmode="numeric"><button type="button" data-plus aria-label="Kästchen höher">+</button><span>mm</span></div></div>
+      <div class="feld"><label class="lbl" for="mmw" id="l-mmw">Kästchen</label><div class="stepper" data-feld="mmw"><button type="button" data-minus aria-label="Kästchen schmaler">−</button><input type="number" id="mmw" min="2" max="20" step="1" inputmode="numeric"><button type="button" data-plus aria-label="Kästchen breiter">+</button><span>mm</span></div></div>
+      <div class="feld" id="f-mmh"><label class="lbl" for="mmh" id="l-mmh">Schussdicke</label><div class="stepper" data-feld="mmh"><button type="button" data-minus aria-label="Kästchen niedriger">−</button><input type="number" id="mmh" min="2" max="20" step="1" inputmode="numeric"><button type="button" data-plus aria-label="Kästchen höher">+</button><span>mm</span></div></div>
     </div>
-    <p class="hinweis" id="groesse-hinweis"></p>
+    <div id="groesse-bild"></div>
   </section>
   <section class="karte" id="k-blatt" aria-label="Druckblatt">
     <h2>Druckblatt</h2>
     <div class="zwei">
-      <div class="feld"><span class="lbl" id="lbl-papier">Papier</span><div class="chips" id="papier" role="group" aria-labelledby="lbl-papier"><button type="button" class="chip" data-papier="a4" aria-pressed="true">A4</button><button type="button" class="chip" data-papier="a3" aria-pressed="false">A3</button></div></div>
-      <div class="feld"><label class="lbl" for="name">Dein Name (kommt aufs Blatt)</label><input class="text" id="name" maxlength="30" autocomplete="off" placeholder="Name"></div>
+      <div class="feld"><div id="papier"></div></div>
+      <div class="feld"><input class="text" id="name" maxlength="30" autocomplete="off" placeholder="Name" aria-label="Name"></div>
     </div>
+    <div id="warn" hidden></div>
     <div class="blatt" id="blatt"></div>
-    <p class="hinweis" id="blatt-hinweis"></p>
   </section>
   <div class="seite-rechts">
     <section class="karte" id="k-modus" aria-label="Technik wählen">
-      <h2>Was machst du?</h2>
+      <h2>Technik</h2>
       <div class="chips" role="group" id="modi"></div>
-      <p class="hinweis" id="modus-hinweis"></p>
     </section>
     <section class="karte" id="k-farben" aria-label="Farben und Werkzeuge">
       <h2>Farben</h2>
@@ -141,16 +137,13 @@ body.klein .gross-nur{display:none!important}
         <button type="button" class="werkzeug gross-nur" data-werkzeug="fuellen" aria-pressed="false">🪣 Füllen</button>
       </div></div>
       <div class="werkzeuge">
-        <button type="button" class="klein" id="rueckgaengig" disabled>↶ Rückgängig</button>
         <button type="button" class="klein" id="spiegeln">↔ Spiegeln</button>
         <button type="button" class="klein gross-nur" id="spiegeln-v">↕ Spiegeln</button>
         <button type="button" class="klein" id="loeschen">Alles löschen</button>
       </div>
     </section>
-    <section class="karte" id="k-rechnung" aria-label="Rechnung"><h2>Das brauchst du</h2><dl class="rechnung" id="rechnung"></dl>
-      <p class="hinweis" id="tipp"></p></section>
-    <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
-    <button type="button" class="klein breit" id="bild-speichern">Als Bild speichern</button>
+    <section class="karte" id="k-rechnung" aria-label="Rechnung"><h2>Material</h2><dl class="rechnung" id="rechnung"></dl></section>
+    <button type="button" class="klein breit" id="bild-speichern">Bild speichern</button>
   </div>
 </main>
 <div id="druck"></div>
@@ -158,23 +151,18 @@ body.klein .gross-nur{display:none!important}
 // Zählmuster-Editor von Schritt für Schritt. Kästchen anmalen, zählen, drucken. Alle Druckmasse in mm.
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const KEY='schrittli.zaehlmuster.v1';
-const PAPIERE={a4:{name:'A4',w:210,h:297},a3:{name:'A3',w:297,h:420}};
+const SP=Planer.speicher('schrittli.zaehlmuster.v1');
+const PAPIERE=Planer.PAPIERE;
 const FARBEN=[['rot','#D7352E'],['orange','#F08A24'],['gelb','#F4C430'],['hellgrün','#B5DE7A'],['grün','#3FA34D'],['hellblau','#9CD0F5'],['blau','#2A6FDB'],['violett','#7B4FC9'],['rosa','#F6AFC6'],['braun','#8A5A35'],['weiss','#FFFFFF'],['schwarz','#1C2430']];
 const WEISS=10;
 // Kreuzstich: quadratische Kästchen wie auf Aida-Stoff (5 mm ≈ 5,5er Aida). Weben: ein Kästchen ist ein Schussfaden über einem Kettfaden, breiter als hoch.
 const MODI={
-  kreuzstich:{name:'Kreuzstich',zelle:'Kreuz',zellen:'Kreuze',zeile:'Reihe',mm:{w:5,h:5},quadrat:true,
-    hinweis:'Jedes Kästchen ist ein Kreuz auf dem Stoff. Gezählt wird von oben links.',
-    einfach:'Jedes Kästchen ist ein Kreuz. Du zählst von oben.'},
-  weben:{name:'Weben',zelle:'Kästchen',zellen:'Kästchen',zeile:'Schussreihe',mm:{w:8,h:4},quadrat:false,
-    hinweis:'Jede Reihe ist ein Schussfaden. Die Breite sind die Kettfäden. Gezählt wird von unten nach oben – so wächst dein Gewebe.',
-    einfach:'Jede Reihe ist ein Faden. Du webst von unten nach oben.'}
+  kreuzstich:{name:'Kreuzstich',zelle:'Kreuz',zellen:'Kreuze',zeile:'Reihe',mm:{w:5,h:5},quadrat:true},
+  weben:{name:'Weben',zelle:'Kästchen',zellen:'Kästchen',zeile:'Schussreihe',mm:{w:8,h:4},quadrat:false}
 };
 const KLASSENBREITEN=[10,15,20,30];
 const GRENZE={min:5,max:60};
 const S={modus:'kreuzstich',b:20,h:20,mm:{kreuzstich:{w:5,h:5},weben:{w:8,h:4}},papier:'a4',farbe:0,werkzeug:'stift',name:'',zellen:[]};
-let undo=[];
 const leer=(b,h)=>new Array(b*h).fill(-1);
 const clamp=(v,a,b)=>Math.min(b,Math.max(a,Math.round(Number(v)||0)));
 const cm=mm=>(mm/10).toLocaleString('de-CH',{maximumFractionDigits:1}).replace('.',',');   // Komma wie in allen Werkzeugen
@@ -191,37 +179,34 @@ const KLASSE=klasseLesen(), KLEIN=KLASSE>0&&KLASSE<=2;
 if(KLEIN)document.body.classList.add('klein');
 
 function laden(){
-  try{
-    const t=JSON.parse(localStorage.getItem(KEY));
-    if(t&&Array.isArray(t.zellen)){
-      S.modus=MODI[t.modus]?t.modus:'kreuzstich';S.b=clamp(t.b,GRENZE.min,GRENZE.max);S.h=clamp(t.h,GRENZE.min,GRENZE.max);
-      S.name=String(t.name||'').slice(0,30);S.papier=PAPIERE[t.papier]?t.papier:'a4';
-      for(const m of Object.keys(MODI)){ if(t.mm&&t.mm[m]){S.mm[m].w=clamp(t.mm[m].w,2,20);S.mm[m].h=clamp(t.mm[m].h,2,20);} }
-      if(t.zellen.length===S.b*S.h)S.zellen=t.zellen.map(v=>v>=0&&v<FARBEN.length?v:-1);
-    }
-  }catch(e){}
+  const t=SP.lies();
+  if(t&&Array.isArray(t.zellen)){
+    S.modus=MODI[t.modus]?t.modus:'kreuzstich';S.b=clamp(t.b,GRENZE.min,GRENZE.max);S.h=clamp(t.h,GRENZE.min,GRENZE.max);
+    S.name=String(t.name||'').slice(0,30);S.papier=PAPIERE[t.papier]?t.papier:'a4';
+    for(const m of Object.keys(MODI)){ if(t.mm&&t.mm[m]){S.mm[m].w=clamp(t.mm[m].w,2,20);S.mm[m].h=clamp(t.mm[m].h,2,20);} }
+    if(t.zellen.length===S.b*S.h)S.zellen=t.zellen.map(v=>v>=0&&v<FARBEN.length?v:-1);
+  }
   const q=new URLSearchParams(location.search);
   if(MODI[q.get('modus')])S.modus=q.get('modus');
   if(PAPIERE[String(q.get('papier')).toLowerCase()])S.papier=String(q.get('papier')).toLowerCase();
   if(S.zellen.length!==S.b*S.h)S.zellen=leer(S.b,S.h);
 }
 let speicherTimer=0;
-function speichern(){ clearTimeout(speicherTimer); speicherTimer=setTimeout(()=>{ try{localStorage.setItem(KEY,JSON.stringify({modus:S.modus,b:S.b,h:S.h,mm:S.mm,papier:S.papier,name:S.name,zellen:S.zellen}))}catch(e){} },150); }
+function speichern(){ clearTimeout(speicherTimer); speicherTimer=setTimeout(()=>{ SP.schreibe({modus:S.modus,b:S.b,h:S.h,mm:S.mm,papier:S.papier,name:S.name,zellen:S.zellen}); },150); }
 
-// Rückgängig: vor jedem Strich, Füllen, Spiegeln, Löschen und Grössenwechsel ein Abbild merken
-function merken(){ undo.push({b:S.b,h:S.h,zellen:S.zellen.slice()}); if(undo.length>50)undo.shift(); $('rueckgaengig').disabled=false; }
-function rueckgaengig(){ const t=undo.pop(); if(!t)return; S.b=t.b;S.h=t.h;S.zellen=t.zellen; $('rueckgaengig').disabled=!undo.length; alles(); }
+// Rückgängig: vor jedem Strich, Füllen, Spiegeln, Löschen und jeder Einstellung ein Abbild merken
+Planer.verlauf({hole:()=>({modus:S.modus,b:S.b,h:S.h,mm:S.mm,papier:S.papier,zellen:S.zellen}),setze(z){ Object.assign(S,z); alles(); }});
 
 // Grösse ändern, der Inhalt bleibt oben links erhalten
 function groesse(b,h){
   b=clamp(b,GRENZE.min,GRENZE.max);h=clamp(h,GRENZE.min,GRENZE.max);
   if(b===S.b&&h===S.h)return;
-  merken(); const n=leer(b,h);
+  Planer.merke(null,'groesse'); const n=leer(b,h);
   for(let z=0;z<Math.min(h,S.h);z++)for(let c=0;c<Math.min(b,S.b);c++)n[z*b+c]=S.zellen[z*S.b+c];
   S.b=b;S.h=h;S.zellen=n; alles();
 }
 function spiegeln(vertikal){
-  merken();
+  Planer.merke();
   if(vertikal){ for(let z=0;z<Math.floor(S.h/2);z++)for(let c=0;c<S.b;c++)S.zellen[(S.h-1-z)*S.b+c]=S.zellen[z*S.b+c]; }
   else{ for(let z=0;z<S.h;z++)for(let c=0;c<Math.floor(S.b/2);c++)S.zellen[z*S.b+S.b-1-c]=S.zellen[z*S.b+c]; }
   alles();
@@ -285,7 +270,7 @@ function zelleBei(e){
 let aktiv=false,letzte=-1;
 cv.addEventListener('pointerdown',e=>{
   if(e.button)return; const i=zelleBei(e); if(i<0)return;
-  e.preventDefault(); merken();
+  e.preventDefault(); Planer.merke();
   if(S.werkzeug==='fuellen'){ fuellen(i,S.farbe); alles(); return; }
   try{cv.setPointerCapture(e.pointerId)}catch(err){}
   aktiv=true;letzte=i;S.zellen[i]=S.farbe;zeichnen();
@@ -345,40 +330,36 @@ function blatt(){
   if(S.modus==='weben')s+=`<path d="M${(gx+GW+3).toFixed(2)} ${(gy+GH).toFixed(2)}V${(gy+2).toFixed(2)}M${(gx+GW+1.5).toFixed(2)} ${(gy+4).toFixed(2)}L${(gx+GW+3).toFixed(2)} ${(gy+1.5).toFixed(2)}L${(gx+GW+4.5).toFixed(2)} ${(gy+4).toFixed(2)}" stroke="#5b6573" stroke-width=".4" fill="none"/>`;
   // Legende
   let ly=gy+GH+num+4;
-  if(S.modus==='weben'){s+=`<text x="${rand}" y="${ly}" font-size="3.8" font-weight="700" fill="#1c2430">Schussfäden von unten nach oben: Reihe 1 ist unten. ${S.b} Kettfäden · ${S.h} Schussreihen.</text>`;ly+=7;}
+  if(S.modus==='weben'){s+=`<text x="${rand}" y="${ly}" font-size="3.8" font-weight="700" fill="#1c2430">↑ Reihe 1 unten · ${S.b} Kettfäden · ${S.h} Schussreihen</text>`;ly+=7;}
   const colW=(W-2*rand)/spalten;
   z.forEach((e,i)=>{
     const x=rand+(i%spalten)*colW,y=ly+Math.floor(i/spalten)*7;
     s+=`<rect x="${x}" y="${(y-4.2).toFixed(2)}" width="5" height="5" rx=".8" fill="${FARBEN[e.f][1]}" stroke="#1c2430" stroke-width=".25"/>`;
     s+=`<text x="${x+7}" y="${y}" font-size="3.6" fill="#1c2430">${FARBEN[e.f][0]} · ${e.n} ${e.n===1?M.zelle:M.zellen} · ca. ${faden(e.n)} Faden</text>`;
   });
-  if(!z.length)s+=`<text x="${rand}" y="${ly}" font-size="3.6" fill="#5b6573">Noch keine Farbe – male zuerst dein Muster.</text>`;
   ly+=zeilenL*7+2;
-  const massstab=scale<1?`Verkleinert gedruckt: 1 ${M.zelle} = ${mmTxt(cw)} × ${mmTxt(ch)} mm. Dein Werk wird trotzdem ${cm(gw)} × ${cm(gh)} cm.`:`Originalgrösse: 1 ${M.zelle} = ${mmTxt(mm.w)} × ${mmTxt(mm.h)} mm. Beim Drucken 100 % wählen, nicht «An Seite anpassen».`;
-  s+=`<text x="${rand}" y="${ly}" font-size="3" fill="#5b6573">${massstab}</text>`;
+  s+=Planer.kontrolle(rand,ly,{farbe:'#1c2430'});
+  s+=`<text x="${rand+56}" y="${ly+1}" font-size="3" font-weight="700" fill="#1c2430">1 ${M.zelle} = ${mmTxt(cw)} × ${mmTxt(ch)} mm${scale<1?` · Werk ${cm(gw)} × ${cm(gh)} cm`:''}</text>`;
   return {svg:`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" font-family="Nunito,system-ui,sans-serif">${s}</svg>`,W,H,quer,scale};
 }
-function papierSetzen(quer){
-  const P=PAPIERE[S.papier];
-  $('seite').textContent=`@page{size:${P.name} ${quer?'landscape':'portrait'};margin:0}`;
-  $('druck').style.setProperty('--bw',(quer?P.h:P.w)+'mm');$('druck').style.setProperty('--bh',(quer?P.w:P.h)+'mm');
+// Werk im richtigen Verhältnis, Breite und Höhe in cm
+function groesseBild(gw,gh){
+  const k=Math.min(130/gw,64/gh),w=+(gw*k).toFixed(1),h=+(gh*k).toFixed(1),x=+((220-w)/2).toFixed(1);
+  return `<svg viewBox="0 0 220 86" role="img" aria-label="${cm(gw)} × ${cm(gh)} cm"><rect x="${x}" y="3" width="${w}" height="${h}" rx="2" fill="var(--acc-soft)" stroke="var(--acc)" stroke-width="2"/><text x="110" y="${h+18}" text-anchor="middle" fill="currentColor">${cm(gw)} cm</text><text x="${x+w+6}" y="${+(h/2+8).toFixed(1)}" fill="currentColor">${cm(gh)} cm</text></svg>`;
 }
 
 // ---------- Anzeige ----------
 function felder(){
   const M=MODI[S.modus],mm=S.mm[S.modus];
   $('modi').innerHTML=Object.entries(MODI).map(([k,m])=>`<button type="button" class="chip" data-modus="${k}" aria-pressed="${k===S.modus}">${m.name}</button>`).join('');
-  $('modus-hinweis').textContent=KLEIN?M.einfach:M.hinweis;
   $('farben').innerHTML=FARBEN.map(([n,c],i)=>`<button type="button" class="farbe" data-farbe="${i}" style="background:${c}" aria-label="${n}" title="${n}" aria-pressed="${i===S.farbe}"></button>`).join('')+`<button type="button" class="farbe radierer" data-farbe="-1" aria-label="Radierer" title="Radierer" aria-pressed="${S.farbe===-1}">⌫</button>`;
   document.querySelectorAll('#werkzeuge .werkzeug').forEach(w=>w.setAttribute('aria-pressed',w.dataset.werkzeug===S.werkzeug));
   $('klassenbreiten').innerHTML=KLASSENBREITEN.map(b=>`<button type="button" class="chip" data-breite="${b}" aria-pressed="${b===S.b}">${b} breit</button>`).join('');
   $('breite').value=S.b;$('hoehe').value=S.h;$('mmw').value=mm.w;$('mmh').value=mm.h;
   $('f-mmh').style.display=M.quadrat?'none':'';
-  $('l-mmw').textContent=M.quadrat?'Ein Kästchen auf dem Stoff':'Abstand der Kettfäden';
-  $('l-mmh').textContent='Dicke eines Schussfadens';
+  $('l-mmw').textContent=M.quadrat?'Kästchen':'Kettabstand';
   $('l-breite').textContent=S.modus==='weben'?'Breite (Kettfäden)':'Breite (Kreuze)';
   $('l-hoehe').textContent=S.modus==='weben'?'Höhe (Schussreihen)':'Höhe (Reihen)';
-  document.querySelectorAll('#papier .chip').forEach(k=>k.setAttribute('aria-pressed',k.dataset.papier===S.papier));
   $('name').value=S.name;
 }
 function alles(){
@@ -386,46 +367,46 @@ function alles(){
   if(M.quadrat)mm.h=mm.w;
   felder();zeichnen();
   const gw=S.b*mm.w,gh=S.h*mm.h;
-  $('groesse-hinweis').textContent=`${S.b} × ${S.h} ${M.zellen} – fertig wird das ${cm(gw)} × ${cm(gh)} cm gross.`+(S.modus==='weben'?` Du brauchst ${S.b} Kettfäden.`:'');
+  $('groesse-bild').innerHTML=groesseBild(gw,gh);
   const z=zaehlen(),total=z.reduce((a,e)=>a+e.n,0);
   let r=`<dt>Grösse</dt><dd class="gross">${cm(gw)} × ${cm(gh)} cm</dd><dt>${M.zellen}</dt><dd>${total} von ${S.b*S.h} angemalt</dd>`;
   if(S.modus==='weben')r+=`<dt>Kettfäden</dt><dd>${S.b}</dd><dt>Schussreihen</dt><dd>${S.h}</dd>`;
   for(const e of z)r+=`<dt><span class="punkt" style="background:${FARBEN[e.f][1]}"></span>${FARBEN[e.f][0]}</dt><dd>${e.n} ${e.n===1?M.zelle:M.zellen} · ca. ${faden(e.n)}</dd>`;
   $('rechnung').innerHTML=r;
-  $('tipp').textContent=z.length?'Der Faden ist grob geschätzt – nimm lieber etwas mehr.':(KLEIN?'Wähle eine Farbe und male Kästchen an.':'Wähle eine Farbe und male Kästchen an. Mit «Spiegeln» wird die linke Hälfte rechts gespiegelt.');
   const bl=blatt();
-  $('blatt').innerHTML=bl.svg;$('druck').innerHTML=bl.svg;papierSetzen(bl.quer);
-  $('blatt-hinweis').textContent=(bl.quer?`Das Blatt wird quer gedruckt (${PAPIERE[S.papier].name}). `:`${PAPIERE[S.papier].name} hochkant. `)+(bl.scale<1?(S.papier==='a4'?'Das Muster ist verkleinert, damit es aufs Blatt passt – mit A3 wird es grösser.':'Das Muster ist verkleinert, damit es aufs Blatt passt.'):'Das Muster ist in Originalgrösse: beim Drucken 100 % wählen.');
+  $('blatt').innerHTML=bl.svg;$('druck').innerHTML=bl.svg;Planer.seite({papier:S.papier,quer:bl.quer});
+  kopf.zeige({papier:S.papier,quer:bl.quer});
+  Planer.zuGross('#warn',bl.scale<1?{wahl:S.papier==='a4'?['a3']:[],tue(){ Planer.merke(); S.papier='a3'; alles(); }}:null);
   speichern();
 }
 
 // ---------- Bedienung ----------
-$('modi').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c||c.dataset.modus===S.modus)return;S.modus=c.dataset.modus;alles();});
+const kopf=Planer.druckkopf('#papier',{papier:S.papier,wahl({papier}){ if(papier===S.papier)return; Planer.merke(); S.papier=papier; alles(); }});
+$('modi').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c||c.dataset.modus===S.modus)return;Planer.merke();S.modus=c.dataset.modus;alles();});
 $('farben').addEventListener('click',e=>{const f=e.target.closest('.farbe');if(!f)return;S.farbe=Number(f.dataset.farbe);felder();});
 $('werkzeuge').addEventListener('click',e=>{const w=e.target.closest('.werkzeug');if(!w)return;S.werkzeug=w.dataset.werkzeug;felder();});
-$('rueckgaengig').addEventListener('click',rueckgaengig);
 $('spiegeln').addEventListener('click',()=>spiegeln(false));
 $('spiegeln-v').addEventListener('click',()=>spiegeln(true));
-$('loeschen').addEventListener('click',()=>{ if(!S.zellen.some(v=>v>=0))return; if(!confirm('Wirklich alles löschen?'))return; merken();S.zellen=leer(S.b,S.h);alles(); });
+$('loeschen').addEventListener('click',()=>{ if(!S.zellen.some(v=>v>=0))return; Planer.merke();S.zellen=leer(S.b,S.h);alles(); });
 $('klassenbreiten').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;groesse(Number(c.dataset.breite),S.h);});
 document.querySelectorAll('.stepper').forEach(st=>{
   const inp=st.querySelector('input'),feld=st.dataset.feld;
   const setzen=v=>{
     if(feld==='b')groesse(v,S.h);else if(feld==='h')groesse(S.b,v);
-    else{const mm=S.mm[S.modus];if(feld==='mmw')mm.w=clamp(v,2,20);else mm.h=clamp(v,2,20);alles();}
+    else{Planer.merke(null,'feld-'+feld);const mm=S.mm[S.modus];if(feld==='mmw')mm.w=clamp(v,2,20);else mm.h=clamp(v,2,20);alles();}
+    Planer.leuchte('#groesse-bild');
   };
   st.querySelector('[data-minus]').addEventListener('click',()=>setzen(Number(inp.value)-1));
   st.querySelector('[data-plus]').addEventListener('click',()=>setzen(Number(inp.value)+1));
   inp.addEventListener('change',()=>setzen(inp.value));
 });
-$('papier').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c||c.dataset.papier===S.papier)return;S.papier=c.dataset.papier;alles();});
 $('name').addEventListener('input',()=>{S.name=$('name').value.slice(0,30);const bl=blatt();$('blatt').innerHTML=bl.svg;$('druck').innerHTML=bl.svg;speichern();});
 $('drucken').addEventListener('click',()=>window.print());
 // Als PNG: das Druckblatt wird in ein Bild gezeichnet; wenn das nicht geht, das Bild vom Bildschirm
 $('bild-speichern').addEventListener('click',()=>{
   const bl=blatt(),px=6;
   const herunterladen=data=>{const a=document.createElement('a');a.href=data;a.download=`zaehlmuster-${S.modus}-${S.b}x${S.h}.png`;document.body.appendChild(a);a.click();a.remove();};
-  const notfall=()=>{try{herunterladen(cv.toDataURL('image/png'))}catch(e){alert('Das Bild konnte nicht gespeichert werden. Mache stattdessen einen Screenshot.')}};
+  const notfall=()=>{try{herunterladen(cv.toDataURL('image/png'))}catch(e){$('bild-speichern').textContent='⚠ Fehler'}};
   try{
     const url=URL.createObjectURL(new Blob([bl.svg],{type:'image/svg+xml;charset=utf-8'})),img=new Image();
     img.onload=()=>{try{const k=document.createElement('canvas');k.width=bl.W*px;k.height=bl.H*px;const g=k.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,k.width,k.height);g.drawImage(img,0,0,k.width,k.height);URL.revokeObjectURL(url);herunterladen(k.toDataURL('image/png'));}catch(e){URL.revokeObjectURL(url);notfall();}};

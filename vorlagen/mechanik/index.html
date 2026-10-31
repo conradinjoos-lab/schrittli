@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../planer.css">
 <style>
 :root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--warn:#B3412A;--papier:#FFFFFF;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;--warn:#F08A6E;color-scheme:dark}}
@@ -15,15 +16,12 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
 h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
-h1{font-size:28px}
 h2{font-size:17px;margin-bottom:10px}
 a{color:var(--acc)}
-.kopf{max-width:1200px;margin:0 auto;padding:16px 16px 4px}
-.kopf .neben{font:600 14px Nunito,system-ui,sans-serif;margin-left:8px;vertical-align:middle}
 main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,400px);gap:14px;align-items:start}
 .links{display:flex;flex-direction:column;gap:14px}
 .karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
-.rechts{position:sticky;top:12px;display:flex;flex-direction:column;gap:14px}
+.rechts{position:sticky;top:calc(var(--kopf-h) + 12px);display:flex;flex-direction:column;gap:14px}
 .feld{margin-bottom:14px}.feld:last-child{margin-bottom:0}
 .lbl{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
@@ -36,16 +34,10 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 .zahl{display:flex;align-items:center;gap:6px}
 .zahl input{width:92px;height:48px;font:600 24px Fredoka,Nunito,sans-serif;text-align:center;border:2px solid var(--line);border-radius:12px;background:var(--surface2);color:var(--ink);padding:0 4px}
 .zahl span{font-size:15px;color:var(--muted)}
-.drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
-.drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
 .antwort{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
 .antwort li{font-size:16px;line-height:1.35}
 .antwort b{font:600 24px/1.1 Fredoka,Nunito,sans-serif;color:var(--acc);white-space:nowrap}
 .warn{color:var(--warn)}
-.hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
-.blaetter{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
-.druckzeile{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:12px 0}
-.druckzeile .hinweis{margin:0}
 /* Bühne: alles im Bild ziehen */
 .buehne-karte{padding:12px}
 .leiste{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-bottom:10px}
@@ -53,8 +45,10 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 .leiste .chip svg{display:block;height:20px;width:40px}
 #formChips .chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 8px}
 #formChips .chip svg{height:26px;width:48px}
+.leiste [data-g="ziel"] .chip{display:inline-flex;align-items:center;gap:4px}
 .buehne{position:relative;border-radius:14px;background:var(--surface2);border:1px solid var(--line);overflow:hidden}
-#buehne{display:block;width:100%;height:auto;touch-action:none;user-select:none;-webkit-user-select:none}
+#buehne{display:block;width:100%;height:auto;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+#buehne [data-h]{touch-action:none}
 #buehne .ks{stroke:#1F1A17;stroke-width:2;stroke-linejoin:round;vector-effect:non-scaling-stroke}
 #buehne .ml{fill:none;stroke:var(--muted);stroke-width:1.5;vector-effect:non-scaling-stroke}
 #buehne .gst{fill:none;stroke:var(--muted);stroke-width:1.5;stroke-dasharray:5 4;vector-effect:non-scaling-stroke}
@@ -63,12 +57,29 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-of
 #buehne .mt{fill:var(--ink)}
 #buehne [data-h]{cursor:grab}
 #buehne .knopf{cursor:pointer}
-.gross{position:absolute;left:10px;top:10px;font:600 22px Fredoka,Nunito,sans-serif;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:2px 12px;pointer-events:none}
+#buehne .ring{fill:none;pointer-events:none}
+#buehne .ring-spur{stroke:rgba(31,26,23,.18)}
+#buehne .ring-lauf{stroke:#1F1A17}
+#buehne .lauf{fill:#1F1A17;pointer-events:none}
+#buehne .kontur{fill:var(--acc);fill-opacity:.22;stroke:var(--acc);stroke-width:3;stroke-linejoin:round;vector-effect:non-scaling-stroke;pointer-events:none}
+#buehne .rk{fill:#2B2F36;fill-opacity:.3;stroke:#1F1A17;stroke-width:2.5;vector-effect:non-scaling-stroke;pointer-events:none}
+#buehne .pl-teil{pointer-events:none}
+#buehne .pl-teil circle{stroke-width:1.5;vector-effect:non-scaling-stroke}
+@keyframes puls{0%,50%{stroke:var(--acc);stroke-width:5}100%{stroke:#1F1A17;stroke-width:2}}
+#buehne .puls{animation:puls .9s ease-out}
+@media (prefers-reduced-motion:reduce){#buehne .puls{animation-duration:.01s}}
+.gross{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:8px;font:600 22px Fredoka,Nunito,sans-serif;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:2px 10px;pointer-events:none}
+.gross b{font-size:30px;line-height:1}
+.gross i{display:inline-block;width:14px;height:14px;border-radius:50%;border:1.5px solid #1F1A17;margin-right:3px}
+.pruef-ok{position:absolute;right:8px;bottom:8px;min-width:56px;height:48px;border-radius:14px;border:0;background:var(--acc);color:var(--acc-ink);font:700 24px Nunito,sans-serif;cursor:pointer}
 .spiel{position:absolute;right:8px;top:8px;width:40px;height:40px;border-radius:50%;border:2px solid var(--line);background:var(--surface);color:var(--ink);font-size:15px;cursor:pointer}
 .warnung{margin:8px 0 0;font-size:14px}
+#zu-gross{margin-top:8px}
+#iZahl{margin-bottom:12px}
+#posterAus{margin-top:8px}
+#blaetter{margin-top:10px}
 details.karte>summary{cursor:pointer;font:600 17px Fredoka,Nunito,sans-serif}
 details.karte[open]>summary{margin-bottom:12px}
-.blaetter svg{display:block;width:100%;height:auto;background:var(--papier);border-radius:3px;box-shadow:0 1px 6px rgba(0,0,0,.15)}
 [hidden]{display:none!important}
 svg .schnitt{fill:none;stroke:#000;stroke-width:.35;stroke-linejoin:round}
 svg .hilf{fill:none;stroke:#777;stroke-width:.25;stroke-dasharray:1.5 1}
@@ -98,15 +109,19 @@ svg .zier{fill:none;stroke:#9A8F84;stroke-width:.2;stroke-linejoin:round;stroke-
 .material li:last-child{border-bottom:0}
 .material .n{color:var(--acc);font:600 16px Fredoka,Nunito,sans-serif;white-space:nowrap}
 @media (max-width:860px){
-  main{display:flex;flex-direction:column;align-items:stretch}
-  .rechts{position:static}
-  h1{font-size:24px}
+  main{display:flex;flex-direction:column;align-items:stretch;gap:12px}
+  .links,.buehne-karte{display:contents}
+  .modus{order:1}
+  .buehne{order:2;position:sticky;top:var(--kopf-h)}
+  .leiste{order:3;margin:0;padding:12px;background:var(--surface);border:1px solid var(--line);border-radius:18px}
+  .warnung,#zu-gross{order:4;margin:0}
+  .mehr{order:5}
+  .rechts{order:6;position:static}
 }
 #druck{display:none}
-@page{size:A4 portrait;margin:0}
 @media print{
   body{background:#fff}
-  .kopf,main{display:none!important}
+  main{display:none!important}
   #druck{display:block}
   #druck svg{display:block;width:var(--bw,210mm);height:var(--bh,297mm);break-after:page}
   #druck svg:last-child{break-after:auto}
@@ -115,11 +130,15 @@ svg .zier{fill:none;stroke:#9A8F84;stroke-width:.2;stroke-linejoin:round;stroke-
 <style id="seite"></style>
 </head>
 <body>
-<header class="kopf">
-  <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
-  <h1>⚙️ Mechanik-Planer <a class="neben" href="../">Alle Vorlagen</a></h1>
+<header class="pk">
+  <a class="zur-app" href="../../" data-zur-app aria-label="Zurück zur App"><span>App</span></a>
+  <h1>Mechanik-Planer</h1>
+  <a class="pk-vorlagen" href="../" aria-label="Vorlagen" title="Vorlagen"><span>Vorlagen</span></a>
+  <button class="pk-rueck" id="p-rueck" type="button" disabled aria-label="Rückgängig" title="Rückgängig"></button>
+  <button class="pk-druck" id="drucken" type="button" aria-label="Drucken, 100 %"><span>Drucken</span></button>
 </header>
 <script src="../zurueck.js"></script>
+<script src="../planer.js"></script>
 <script>window.FIGUREN={};window.FIGUREN_DAZU=function(welt,fs){fs.forEach(function(f){window.FIGUREN[f.id]=f})}</script>
 <script src="../figuren/fahrzeuge.js"></script>
 <main>
@@ -134,7 +153,7 @@ svg .zier{fill:none;stroke:#9A8F84;stroke-width:.2;stroke-linejoin:round;stroke-
 
   <section class="karte buehne-karte">
     <div class="leiste modus-teil" data-modus="zahn">
-      <div class="chips" role="group" aria-label="Ziel" data-g="ziel"><button type="button" class="chip" data-v="langsam" title="Untersetzung">i = 2 🐢</button><button type="button" class="chip" data-v="langsam3" title="Untersetzung">i = 3 🐢</button><button type="button" class="chip" data-v="stufe4" title="Zweistufig">i = 4 🐌</button><button type="button" class="chip" data-v="stufe" title="Zweistufig">i = 9 🐌</button><button type="button" class="chip" data-v="schnell" title="Übersetzung">i = 0,5 🐇</button><button type="button" class="chip" data-v="gleich" title="Gegenläufig">i = 1 ↻↺</button><button type="button" class="chip" data-v="richtung" title="Zwischenrad">i = 1 ↻↻</button></div>
+      <div class="chips" role="group" aria-label="Ziel" data-g="ziel" id="zielChips"></div>
       <div class="chips" role="group" aria-label="Modul" data-g="modul" id="modulChips"></div>
     </div>
     <div class="leiste modus-teil" data-modus="rad">
@@ -142,6 +161,7 @@ svg .zier{fill:none;stroke:#9A8F84;stroke-width:.2;stroke-linejoin:round;stroke-
     </div>
     <div class="leiste modus-teil" data-modus="auto">
       <div class="chips" role="group" aria-label="Form" data-g="form" id="formChips"></div>
+      <button type="button" class="chip" id="bildPruef" hidden>🔍 Prüfen</button>
       <div class="chips" role="group" aria-label="Lager" data-g="lager"><button type="button" class="chip" data-v="loch">🕳️ Loch</button><button type="button" class="chip" data-v="nut">🪚 Nut</button></div>
     </div>
     <div class="leiste modus-teil" data-modus="windrad">
@@ -151,17 +171,20 @@ svg .zier{fill:none;stroke:#9A8F84;stroke-width:.2;stroke-linejoin:round;stroke-
       <div class="chips" role="group" aria-label="Muster" data-g="kart"><button type="button" class="chip" data-v="spirale">🌀 Spirale</button><button type="button" class="chip" data-v="benham">⚫ Benham</button><button type="button" class="chip" data-v="farben">🌈 Farben</button><button type="button" class="chip" data-v="turbo">🌪️ Turbo</button></div>
       <div class="chips" role="group" aria-label="Achse" data-g="kStab"><button type="button" class="chip" data-v="stab">🥢 Rundstab</button><button type="button" class="chip" data-v="reissnagel">📌 Reissnagel</button></div>
     </div>
-    <div class="buehne">
+    <div class="buehne pl-haft">
       <svg id="buehne" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Werkstück zum Ziehen"></svg>
-      <span class="gross" id="gross" hidden></span>
+      <span class="gross" id="gross" role="img" hidden></span>
       <button type="button" class="spiel" id="spiel" aria-label="Drehen anhalten">⏸</button>
+      <button type="button" class="pruef-ok" id="pruefFertig" aria-label="Fertig" hidden>✓</button>
     </div>
+    <div id="zu-gross" hidden></div>
     <p class="warnung" id="warnung" hidden></p>
   </section>
 
   <details class="karte mehr">
     <summary>⋯ Genau einstellen</summary>
     <div class="modus-teil" data-modus="zahn">
+      <div id="iZahl" class="rechnung"></div>
       <div class="zwei">
         <div class="feld"><label class="lbl" for="zA">Zähne A</label><div class="zahl"><input type="number" id="zA" data-k="zA" min="8" max="60" step="1" inputmode="numeric"></div></div>
         <div class="feld"><label class="lbl" for="zB">Zähne B</label><div class="zahl"><input type="number" id="zB" data-k="zB" min="8" max="60" step="1" inputmode="numeric"></div></div>
@@ -249,9 +272,9 @@ svg .zier{fill:none;stroke:#9A8F84;stroke-width:.2;stroke-linejoin:round;stroke-
     <div class="zuschnitt" id="zuschnitt"></div>
   </section>
   <section class="karte">
-    <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg> Drucken</button>
-    <div class="druckzeile"><div class="chips" role="group" aria-label="Papier" data-g="papier"><button type="button" class="chip" data-v="a4">A4</button><button type="button" class="chip" data-v="a3">A3</button></div><span class="hinweis" id="info"></span></div>
-    <div class="blaetter" id="blaetter"></div>
+    <div id="druck-kopf"></div>
+    <button type="button" class="chip" id="posterAus" aria-pressed="true" hidden>Poster</button>
+    <div id="blaetter"></div>
   </section>
   <details class="karte" id="k-rechnung" hidden>
     <summary>🧮 Rechnung</summary>
@@ -265,7 +288,8 @@ svg .zier{fill:none;stroke:#9A8F84;stroke-width:.2;stroke-linejoin:round;stroke-
 'use strict';
 const $=id=>document.getElementById(id);
 const KEY='schrittli.mechanik.v1',KEY_BILD='schrittli.mechanik.bild.v1';
-let BILD=null;try{BILD=JSON.parse(localStorage.getItem(KEY_BILD)||'null');if(!BILD||!Array.isArray(BILD.env)||BILD.env.length!==241||!BILD.mass)BILD=null}catch(_){BILD=null}
+const SP=Planer.speicher(KEY),SB=Planer.speicher(KEY_BILD);
+let BILD=SB.lies();if(!BILD||typeof BILD!=='object'||!Array.isArray(BILD.env)||BILD.env.length!==241||!BILD.mass)BILD=null;
 const PAPIER={a4:{name:'A4',w:210,h:297},a3:{name:'A3',w:297,h:420}};
 const RAND=10,LUECKE=6,KOPF=10,FUSS=8;   // mm: Rand, Lücke zwischen Teilen, Titelzeile, Kontrolllinie
 const TAU=2*Math.PI;
@@ -293,7 +317,7 @@ if(!Object.keys(FORMEN).length)FORMEN.klotz='Klotz';
 const NOCKEN={exzenter:'Kurbel',schnecke:'Schneckennocke',doppel:'Doppelnocke'};
 const KART={spirale:'Spirale',benham:'Benham',farben:'Farben',turbo:'Turbo'};
 const NEWTON=['#E8554E','#F28C28','#F2D544','#4CAF50','#2F80ED','#3F51B5','#8E44AD'];
-const STANDARD={modus:'zahn',papier:'a4',modul:4,zA:12,zB:24,zC:0,zD:36,kette:'reihe',holz:6,kurbel:'ja',ziel:'',achse:6,
+const STANDARD={modus:'zahn',papier:'a4',poster:'nein',modul:4,zA:12,zB:24,zC:0,zD:36,kette:'reihe',holz:6,kurbel:'ja',ziel:'',achse:6,
   radD:6,radN:4,hub:20,scheibeD:0,fest:'achse',nocken:'exzenter',
   autoL:18,autoH:7.5,autoB:4,autoRad:3,radBreite:18,boden:8,radstand:0,form:Object.keys(FORMEN)[0],lager:'loch',
   wart:'papier',wSeite:18,wUmfang:28,wHoehe:12,wNabe:70,wFluegel:4,
@@ -301,7 +325,7 @@ const STANDARD={modus:'zahn',papier:'a4',modul:4,zA:12,zB:24,zC:0,zD:36,kette:'r
 const GRENZEN={modul:[1,6],zA:[8,60],zB:[8,60],zC:[0,60],zD:[8,60],holz:[4,10],achse:[3,10],radD:[1,30],radN:[1,12],hub:[0,150],scheibeD:[0,200],
   autoL:[5,60],autoH:[2,30],autoB:[1,20],autoRad:[1,20],radBreite:[3,60],boden:[0,80],radstand:[0,60],
   wSeite:[8,30],wUmfang:[12,40],wHoehe:[5,25],wNabe:[40,120],wFluegel:[3,8],kD:[5,20],kN:[1,6],kFluegel:[6,16]};
-const WORTE={modus:['zahn','rad','auto','windrad','kreisel'],papier:['a4','a3'],fest:['achse','rad'],form:Object.keys(FORMEN),kette:['reihe','stufe'],kurbel:['ja','nein'],
+const WORTE={modus:['zahn','rad','auto','windrad','kreisel'],papier:['a4','a3'],poster:['nein','ja'],fest:['achse','rad'],form:Object.keys(FORMEN),kette:['reihe','stufe'],kurbel:['ja','nein'],
   ziel:['','langsam','langsam3','schnell','gleich','richtung','stufe','stufe4'],nocken:Object.keys(NOCKEN),lager:['loch','nut'],wart:['papier','pet'],kart:Object.keys(KART),kStab:['stab','reissnagel']};
 const ZIELE={langsam:{zA:12,zB:24,zC:0,kette:'reihe'},langsam3:{zA:10,zB:30,zC:0,kette:'reihe'},schnell:{zA:24,zB:12,zC:0,kette:'reihe'},gleich:{zA:16,zB:16,zC:0,kette:'reihe'},richtung:{zA:12,zB:12,zC:12,kette:'reihe'},
   stufe:{zA:10,zB:30,zC:10,zD:30,kette:'stufe'},stufe4:{zA:10,zB:20,zC:10,zD:20,kette:'stufe'}};
@@ -317,13 +341,13 @@ function uebernehmen(q,k,v){
   if(WORTE[k]){if(WORTE[k].includes(v))S[k]=v;return}
   if(GRENZEN[k]){const n=zahl(v,NaN);if(isFinite(n))S[k]=begrenzt(n,GRENZEN[k][0],GRENZEN[k][1])}
 }
-try{const g=JSON.parse(localStorage.getItem(KEY)||'{}');Object.keys(g).forEach(k=>uebernehmen(null,k,g[k]))}catch(_){}
+const g=SP.lies();if(g&&typeof g==='object')Object.keys(g).forEach(k=>uebernehmen(null,k,g[k]));
 const q=new URLSearchParams(location.search);
 [...q.keys()].forEach(k=>uebernehmen(q,k,q.get(k)));
 if(ZIELE[q.get('ziel')])Object.assign(S,ZIELE[q.get('ziel')]);
 S.ziel=Object.keys(ZIELE).find(k=>Object.keys(ZIELE[k]).every(j=>S[j]===ZIELE[k][j]))||'';
 function speichern(){
-  try{localStorage.setItem(KEY,JSON.stringify(S))}catch(_){}
+  SP.schreibe(S);
   const p=new URLSearchParams();
   Object.keys(S).forEach(k=>{if(k!=='ziel'&&S[k]!==STANDARD[k])p.set(k,String(S[k]))});
   const s=p.toString();history.replaceState(null,'',location.pathname+(s?'?'+s:''));
@@ -402,16 +426,16 @@ function teileZahn(){
   const ant=raeder.map(r=>`${r.name}: <b>Ø ${mm(2*r.ra)}</b>`);
   abst.forEach((a,i)=>ant.push(`Achsabstand ${namen[i]} – ${namen[i+1]}: <b>${mm(a)}</b>`));
   const d1=v=>v.toLocaleString('de-CH',{maximumFractionDigits:1}).replace('.',','),dreh=iGes>1.01?`${d1(iGes)} ↻ A = 1 ↻ ${nL}`:iGes<.99?`1 ↻ A = ${d1(1/iGes)} ↻ ${nL}`:`1 ↻ A = 1 ↻ ${nL}`;
-  ant.push(`${iGes>1.01?'Untersetzung':iGes<.99?'Übersetzung':'Gleich'}: <b>${dreh}</b> ${tier} ${richt} · i = ${dz(iGes)}`);
+  ant.push(`${iGes>1.01?'Untersetzung':iGes<.99?'Übersetzung':'Gleich'}: <b>${dreh}</b> ${tier} ${richt}`);
   ant.push(`Loch Rad: <b>${mm(loch)}</b>${S.fest==='rad'?' ↻':''}`,`Loch Platte: <b>${mm(lochP)}</b>${S.fest==='achse'?' ↻':''}`);
   const warn=[];
   if(m<=2)warn.push(`🛒 Modul ${m} · fertige Zahnräder`);
   if(stufe&&S.zC>=S.zB)warn.push('⚠ Zähne C ≥ Zähne B');
   const rech=[`<p><span class="f">Ø A = ${m} × (${S.zA} + 2) = ${mm(2*A.ra)}</span></p>`,
-    `<p><span class="f">a = ${m} × (${S.zA} + ${S.zB}) : 2 = ${mm(abst[0])}</span></p>`,
-    `<p><span class="f">i = ${S.zB} : ${S.zA} = ${dz(S.zB/S.zA)} ${S.zB>S.zA?'🐢':S.zB<S.zA?'🐇':''} ↻↺</span></p>`];
-  if(S.zC>=8&&!stufe)rech.push(`<p><span class="f">i = ${S.zC} : ${S.zA} = ${dz(S.zC/S.zA)} ↻↻</span></p>`);
-  if(stufe)rech.push(`<p><span class="f">i = ${dz(S.zB/S.zA)} × ${dz(S.zD/S.zC)} = ${dz(iGes)} 🐌</span></p>`);
+    `<p><span class="f">a = ${m} × (${S.zA} + ${S.zB}) : 2 = ${mm(abst[0])}</span></p>`];
+  const iz=[`<p><span class="f">i = ${S.zB} : ${S.zA} = ${dz(S.zB/S.zA)} ${S.zB>S.zA?'🐢':S.zB<S.zA?'🐇':''} ↻↺</span></p>`];
+  if(S.zC>=8&&!stufe)iz.push(`<p><span class="f">i = ${S.zC} : ${S.zA} = ${dz(S.zC/S.zA)} ↻↻</span></p>`);
+  if(stufe)iz.push(`<p><span class="f">i = ${dz(S.zB/S.zA)} × ${dz(S.zD/S.zC)} = ${dz(iGes)} 🐌</span></p>`);
   rech.push(`<p><span class="f">Loch ↻ = ${S.achse} + 1 = ${mm(S.achse+1)}</span></p>`);
   const dicke=S.holz,plattenDicke=10,achsL=plattenDicke+3+achsen.reduce((mx,g)=>Math.max(mx,g.length),0)*(dicke+1)+8+(S.kurbel==='ja'?dicke+2:0);
   const zu=[{art:'platte',name:`Sperrholz ${dicke} mm`,teile:teile.filter(t=>t.name!=='Grundplatte').map(t=>t.name==='Kurbelarm'?{w:t.w,h:t.h-6,label:'Kurbel'}:{w:t.w,h:t.h,rund:true,label:`${t.name.replace('Zahnrad ','')} · ${t.z}`})},
@@ -419,7 +443,7 @@ function teileZahn(){
     {art:'stab',name:`Rundstab ${S.achse} mm`,d:S.achse,stuecke:achsen.map(()=>achsL)}];
   if(S.kurbel==='ja')zu.push({art:'stab',name:`Rundstab ${mm(lochmass('klotz')-1)} (Griff)`,d:lochmass('klotz')-1,stuecke:[40]});
   const klein=[['⭕','Unterlagscheiben',`${S.fest==='rad'?raeder.length:achsen.length*2} ×`],['🔩','Bohrer',`${mm(loch)}${lochP!==loch?' · '+mm(lochP):''}`],['🪚','Laubsäge',''],['🧴','Holzleim, Schleifpapier','']];
-  return {teile,ant,warn,rech,zu,klein,titel:`Zahnräder Modul ${m}: ${raeder.map(r=>r.z).join(' / ')} Zähne`};
+  return {teile,ant,warn,rech,iz,zu,klein,titel:`Zahnräder Modul ${m}: ${raeder.map(r=>r.z).join(' / ')} Zähne`};
 }
 
 // ---------- Räder, Kurbel, Nocken ----------
@@ -503,7 +527,8 @@ function bildForm(img){
     rs.sort((p,q)=>p-q);return {x:xc,r:rs.length?rs[rs.length>>1]:0,n:rs.length}}).filter(R=>R.r>.025&&R.r<.25&&R.n>3);
   let achsen=[.2,.8],r=.09;
   if(raeder.length>=2){const A=raeder[0],B=raeder[raeder.length-1];if(B.x-A.x>.15){achsen=[A.x,B.x];r=Math.round((A.r+B.r)/2*1e3)/1e3}}
-  const u=fertig(env,achsen,r,hw,[],18);return u.i1-u.i0<NE*.3?null:u}
+  const roh=env.slice(),u=fertig(env,achsen,r,hw,[],18);if(u.i1-u.i0<NE*.3)return null;
+  u.roh=roh;u.box={x0,y0,w,h:y1-y0+1,W,H};return u}
 const UMRISSE={};Object.keys(FORMEN).forEach(k=>{const u=AUTOS[k]&&figurForm(k,AUTOS[k]);if(u)UMRISSE[k]=u});
 if(BILD)UMRISSE.bild=BILD;
 if(!UMRISSE[Object.keys(FORMEN)[0]])UMRISSE.klotz={achsen:[.2,.8],rad:.1,env:new Array(NE+1).fill(.33),i0:0,i1:NE,hw:.33,zier:[],mass:{autoL:18,autoH:5,autoRad:4}};
@@ -692,24 +717,32 @@ function materialBlatt(E,P,titel){
 }
 
 // ---------- Blätter packen ----------
+const teilSchl=t=>t.name+'|'+f(t.w);
+function teilNummern(teile){TZ=new Map();teile.forEach(t=>{const k=teilSchl(t);if(!TZ.has(k))TZ.set(k,TZ.size)})}
+// Zu grosses Teil auf Blätter verteilen: 10 mm Überlappung zum Kleben, Hilfslinie zeigt sie
+function kacheln(t,W,H){const U=10,nx=Math.max(1,Math.ceil((t.w-U)/(W-U))),ny=Math.max(1,Math.ceil((t.h-U)/(H-U))),n=nx*ny,o=[];
+  for(let j=0;j<ny;j++)for(let i=0;i<nx;i++){const ox=i*(W-U),oy=j*(H-U),w=Math.min(W,t.w-ox),h=Math.min(H,t.h-oy),id=`ks${++KN}`;
+    o.push({name:t.name,schl:teilSchl(t),w,h,kachel:`${o.length+1}/${n}`,svg:`<clipPath id="${id}"><rect width="${f(w)}" height="${f(h)}"/></clipPath><g clip-path="url(#${id})"><g transform="translate(${f(-ox)} ${f(-oy)})">${t.svg}</g></g>`+(i<nx-1?`<path class="hilf" d="M${f(w-U)} 0V${f(h)}"/>`:'')+(j<ny-1?`<path class="hilf" d="M0 ${f(h-U)}H${f(w)}"/>`:'')})}
+  return o}
 function packen(teile){
-  const P=PAPIER[S.papier],W=P.w-2*RAND,H=P.h-2*RAND-KOPF-FUSS,blaetter=[],zuGross=[];
-  let b,x=0,y=0,zh=0;const neu=()=>{b={teile:[]};blaetter.push(b);x=0;y=0;zh=0};neu();
+  const P=PAPIER[S.papier],W=P.w-2*RAND,H=P.h-2*RAND-KOPF-FUSS,blaetter=[],zuGross=[],A3=PAPIER.a3,W3=A3.w-2*RAND,H3=A3.h-2*RAND-KOPF-FUSS;
+  let b,x=0,y=0,zh=0,poster=false,a3=S.papier==='a4';KN=0;const neu=()=>{b={teile:[]};blaetter.push(b);x=0;y=0;zh=0};neu();
   teile.forEach(t=>{let w=t.w,h=t.h,rot=false;
     if(w>W&&h<=W&&w<=H){rot=true;[w,h]=[h,w]}
-    if(w>W+.01||h>H+.01){zuGross.push(t.name);return}
+    if(w>W+.01||h>H+.01){
+      if(S.poster==='ja'){poster=true;kacheln(t,W,H).forEach(k=>{if(b.teile.length)neu();b.teile.push({t:k,x:0,y:0,rot:false})});neu();return}
+      zuGross.push(t.name);if(!(t.w<=W3&&t.h<=H3||t.h<=W3&&t.w<=H3))a3=false;return}
     if(x>0&&x+w>W+.01){x=0;y+=zh+LUECKE;zh=0}
     if(y>0&&y+h>H+.01)neu();
     b.teile.push({t,x,y,rot});x+=w+LUECKE;zh=Math.max(zh,h)});
-  if(blaetter.length===1&&!blaetter[0].teile.length)blaetter.length=0;
-  return {blaetter,zuGross,P};
+  while(blaetter.length&&!blaetter[blaetter.length-1].teile.length)blaetter.pop();
+  return {blaetter,zuGross,poster,a3,P};
 }
 function blattSvg(b,i,n,titel,P){
   const st=b.teile.map(({t,x,y,rot})=>`<g transform="translate(${f(RAND+x)} ${f(RAND+KOPF+y)})${rot?` rotate(90) translate(0 ${f(-t.h)})`:''}">${t.svg}</g>`).join('');
+  const mk=b.teile.map(({t,x,y})=>Planer.teilMarke(RAND+x-2.9,RAND+KOPF+y+2.6,TZ.get(t.schl||teilSchl(t)),{r:2.6})+(t.kachel?txt(RAND+x-2.9,RAND+KOPF+y+9.5,t.kachel,'tk'):'')).join('');
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${P.w} ${P.h}" role="img" aria-label="Blatt ${i+1} von ${n}: ${titel}">`+
-    txt(RAND,RAND+5,titel,'titel','start')+txt(P.w-RAND,RAND+5,`Blatt ${i+1} von ${n} · ${P.name} · 100 %`,'t','end')+st+
-    `<path class="schnitt" d="M${RAND} ${f(P.h-RAND)}h50M${RAND} ${f(P.h-RAND-2)}v4M${RAND+50} ${f(P.h-RAND-2)}v4"/>`+
-    txt(RAND,P.h-RAND-4,'5 cm · 100 %','tk','start')+
+    txt(RAND,RAND+5,titel,'titel','start')+txt(P.w-RAND,RAND+5,`Blatt ${i+1} von ${n} · ${P.name} · 100 %`,'t','end')+st+mk+Planer.kontrolle(RAND,P.h-RAND)+
     txt(P.w-RAND,P.h-RAND+4,'Schritt für Schritt · Mechanik-Planer','tk','end')+'</svg>';
 }
 
@@ -717,6 +750,9 @@ function blattSvg(b,i,n,titel,P){
 const SV=$('buehne'),FARBEN={A:'#F2B544',B:'#4FA3E0',C:'#E8554E',D:'#6CC08B'},HOLZ='#E9C48A',DUNKEL='#1F1A17';
 const FARB4=[FARBEN.A,FARBEN.B,FARBEN.C,FARBEN.D];
 let VB=null,zieh=null,letztCxF=null,phi=0,tAlt=0,laeuft=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+let pruef=false,halt=0,letzteAnt=null,TZ=new Map(),ZU=[],KN=0;
+const HALT=900;   // ms: nach jeder Umdrehung von A stehen die Räder kurz still
+if(!laeuft){phi=360;halt=1}
 const r5=v=>Math.round(v*2)/2;
 function knopf(x,y,k,sym,h,extra=''){
   const rot=sym==='×';
@@ -737,12 +773,17 @@ function getriebe(){
 function szeneZahn(){
   const m=S.modul,loch=lochmass('achse'),G=getriebe(),ras=G.map(g=>m*g.z/2+m),R=Math.max(...ras);
   const rechts=Math.max(...G.map((g,i)=>g.x+ras[i]));
-  return {box:[-ras[0],-R,rechts,R],pad:[24,24,S.zC>=8?24:64,60],zeichnen(k){
+  return {box:[-ras[0],-R,rechts,R],pad:[24,52,S.zC>=8?24:64,80],zeichnen(k){
     let s='';
-    G.forEach((g,i)=>{const U=zahnUmriss(m,g.z,loch,g.off,g.x,0),hub=Math.max(Math.min(U.rf*.75,17*k),loch/2+1);
-      s+=`<g data-h="z:${g.n}" data-cx="${f(g.x)}" data-cy="0"><g data-dreh="${g.f}" data-cx="${f(g.x)}" data-cy="0"><path class="ks" d="${U.d}" fill="${FARBEN[g.n]}"/></g>`+
-        `<circle class="ks" cx="${f(g.x)}" cy="0" r="${f(hub)}" fill="#FFFFFF"/><text x="${f(g.x)}" y="${f(5.5*k)}" font-size="${f(16*k)}" text-anchor="middle" fill="${DUNKEL}">${g.z}</text></g>`});
-    const xs=[...new Set(G.map(g=>f(g.x)))],yl=R+14*k,t=5*k;
+    G.forEach((g,i)=>{const U=zahnUmriss(m,g.z,loch,g.off,g.x,0),hub=Math.max(Math.min(U.rf*.75,17*k),loch/2+1),rr=Math.max(hub+4*k,Math.min(U.rf-4*k,hub+11*k)),L=TAU*rr,rc=f(rr),gx=f(g.x),o=f(-rr),dir=g.f>0?1:-1;
+      // Ring: Weg seit Beginn der Umdrehung von A; der Punkt dreht mit dem Rad, der Winkel zeigt die Drehrichtung
+      s+=`<g data-h="z:${g.n}" data-cx="${gx}" data-cy="0"><g data-dreh="${g.f}" data-cx="${gx}" data-cy="0"><path class="ks" d="${U.d}" fill="${FARBEN[g.n]}"/></g>`+
+        `<g data-ringbasis="${g.f}" data-cx="${gx}" data-cy="0"><circle class="ring ring-spur" cx="${gx}" cy="0" r="${rc}" stroke-width="${f(5*k)}"/><circle class="ring ring-lauf" data-ring="${g.f}" data-l="${f(L)}" cx="${gx}" cy="0" r="${rc}" stroke-width="${f(5*k)}" stroke-dasharray="0 ${f(L)}" transform="rotate(-90 ${gx} 0)"/>`+
+        `<path class="lauf" d="M${f(g.x+dir*8*k)} ${o}L${gx} ${f(-rr-5*k)}L${gx} ${f(-rr+5*k)}Z"/></g>`+
+        `<circle class="ks" cx="${gx}" cy="0" r="${f(hub)}" fill="#FFFFFF"/><text x="${gx}" y="${f(5.5*k)}" font-size="${f(16*k)}" text-anchor="middle" fill="${DUNKEL}">${g.z}</text>`+
+        `<g data-dreh="${g.f}" data-cx="${gx}" data-cy="0"><circle class="lauf" cx="${gx}" cy="${o}" r="${f(5*k)}"/></g></g>`});
+    const zaehl={};G.forEach(g=>{const x=f(g.x);if(zaehl[x])return;zaehl[x]=1;s+=`<text class="mt" data-zaehl="${g.f}" x="${x}" y="${f(R+22*k)}" font-size="${f(15*k)}" text-anchor="middle"></text>`});
+    const xs=[...new Set(G.map(g=>f(g.x)))],yl=R+34*k,t=5*k;
     for(let i=1;i<xs.length;i++){const a=xs[i-1],b=xs[i];
       s+=`<path class="ml" d="M${a} ${f(yl)}H${b}M${a} ${f(yl-t)}V${f(yl+t)}M${b} ${f(yl-t)}V${f(yl+t)}"/>`+beschrift((a+b)/2,yl+16*k,k,mm(b-a))}
     const C=G.find(g=>g.n==='C');
@@ -846,12 +887,30 @@ function szeneKreisel(){
     if(art==='turbo')s+=zaehler(0,R+102*k,k,'fMinus','fPlus','✂ '+n);
     return s}};
 }
+// Bildprüfung: Foto gross, Kontur darüber, Achsen und Räder ziehen
+const griffPunkt=(x,y,k,sym,h,name)=>`<g class="knopf" data-h="${h}" aria-label="${name}"><circle cx="${f(x)}" cy="${f(y)}" r="${f(24*k)}" fill="transparent"/><circle class="ks" cx="${f(x)}" cy="${f(y)}" r="${f(14*k)}" fill="#FFFFFF"/><text x="${f(x)}" y="${f(y+6*k)}" font-size="${f(18*k)}" text-anchor="middle" fill="${DUNKEL}">${sym}</text></g>`;
+function szenePruef(){const F=BILD,U=1000,hU=F.hw*U,bo=S.boden/(S.autoL*10)*U,P=([x,y])=>f(x)+' '+f(hU-bo-y),r=F.rad*U,b=F.box;
+  return {box:[0,0,U,hU],pad:[30,30,30,44],zeichnen(k){
+    let s='';
+    if(F.url&&b){const m=U/b.w;s+=`<image href="${F.url}" x="${f(-b.x0*m)}" y="${f(-b.y0*m)}" width="${f(b.W*m)}" height="${f(b.H*m)}" preserveAspectRatio="none" opacity=".75"/>`}
+    s+=`<path class="gst" d="M${f(-30*k)} ${f(hU)}H${f(U+30*k)}"/><path class="kontur" d="M${koerper(F,U,hU-bo,bo).map(P).join('L')}Z"/>`;
+    F.achsen.forEach(a=>{s+=`<circle class="rk" cx="${f(a*U)}" cy="${f(hU-r)}" r="${f(r)}"/>`});
+    F.achsen.forEach((a,i)=>{s+=griffPunkt(a*U,hU+16*k,k,'↔','pa:'+i,'Achse')+griffPunkt(a*U,hU-2*r,k,'↕','pr','Rad')});
+    return s}};
+}
 const SZENEN={zahn:szeneZahn,rad:szeneRad,auto:szeneAuto,windrad:szeneWindrad,kreisel:szeneKreisel};
 const TEILE={zahn:teileZahn,rad:teileRad,auto:teileAuto,windrad:teileWindrad,kreisel:teileKreisel};
+const GRIFF={Karosserie:'koerper',Kurbelscheibe:'scheibe',Exzenter:'scheibe',Nocke:'nocke',Windrad:'wind',Flügel:'wind',Kreisel:'kreisel'};
+const griffVon=n=>n.startsWith('Zahnrad ')?'z:'+n.slice(8):n==='Rad'?(S.modus==='auto'?'arad':'rad'):GRIFF[n]||'';
+// Gleiche Buchstaben wie im Ausdruck
+function marken(){const k=VB.k,n={};let s='';
+  TZ.forEach((i,key)=>{const h=griffVon(key.split('|')[0]);if(!h)return;const j=n[h]||0;n[h]=j+1;const el=SV.querySelectorAll(`[data-h="${h}"]`)[j];if(!el)return;
+    try{const b=el.getBBox(),q=h==='koerper'?.5:.15;s+=Planer.teilMarke(b.x+b.width*q,b.y+b.height*q,i,{r:9*k})}catch(_){}});
+  SV.insertAdjacentHTML('beforeend',s)}
 function buehne(){
-  const Z=SZENEN[S.modus]();
+  const an=pruefAn(),Z=an?szenePruef():SZENEN[S.modus]();
   if(!zieh||!VB){
-    const [pl,pt,pr,pb]=Z.pad,b=Z.box,cw=SV.clientWidth||600,hMax=Math.max(260,innerHeight*.58);
+    const [pl,pt,pr,pb]=Z.pad,b=Z.box,cw=SV.clientWidth||600,hMax=innerWidth<=860?Math.max(200,innerHeight*.46):Math.max(260,innerHeight*(an?.72:.58));
     const bw=Math.max(b[2]-b[0],1),bh=Math.max(b[3]-b[1],1);
     let k=Math.max(bw/Math.max(120,cw-pl-pr),.08);
     if(bh/k+pt+pb>hMax)k=bh/Math.max(80,hMax-pt-pb);
@@ -860,10 +919,13 @@ function buehne(){
     SV.setAttribute('viewBox',`${f(VB.x)} ${f(VB.y)} ${f(w)} ${f(h)}`);SV.style.aspectRatio=`${f(w)} / ${f(h)}`;
   }
   SV.innerHTML=Z.zeichnen(VB.k);
-  const gr=$('gross');gr.hidden=S.modus!=='zahn';
-  if(S.modus==='zahn'){const G=getriebe(),fl=G[G.length-1].f,i=1/Math.abs(fl);
-    gr.textContent=[`i = ${dz(i)}`,i>1.01?'🐢':i<.99?'🐇':'',fl>0?'↻↻':'↻↺'].filter(Boolean).join(' ')}
+  const gr=$('gross');gr.hidden=S.modus!=='zahn';$('spiel').hidden=an;$('pruefFertig').hidden=!an;
+  if(S.modus==='zahn'){const G=getriebe(),Z2=G[G.length-1],i=1/Math.abs(Z2.f),tier=i>1.01?(S.zC>=8&&S.kette==='stufe'?'🐌':'🐢'):i<.99?'🐇':'';
+    gr.setAttribute('aria-label',i>1.01?'Langsamer':i<.99?'Schneller':'Gleich');
+    gr.innerHTML=(tier?`<b>${tier}</b>`:'')+`<span><i style="background:${FARBEN.A}"></i>↻</span><span><i style="background:${FARBEN[Z2.n]}"></i>${Z2.f>0?'↻':'↺'}</span>`}
   drehen();
+  if(!an)marken();
+  ZU.forEach(n=>{const h=griffVon(n);if(h)SV.querySelectorAll(`[data-h="${h}"] .ks`).forEach(e=>e.classList.add('pl-zugross'))});
 }
 function drehen(){
   SV.querySelectorAll('[data-dreh]').forEach(g=>g.setAttribute('transform',`rotate(${f(phi*g.dataset.dreh)} ${g.dataset.cx} ${g.dataset.cy})`));
@@ -873,9 +935,20 @@ function drehen(){
     r.setAttribute('transform',`translate(0 ${f(y)})`)});
   SV.querySelectorAll('[data-stange]').forEach(l=>{const e=+l.dataset.e,y=f(e*Math.sin(a));
     l.setAttribute('x1',f(+l.dataset.cx+e*Math.cos(a)));l.setAttribute('y1',y);l.setAttribute('y2',y)});
+  if(S.modus!=='zahn')return;
+  // Eine Umdrehung von A: Ring und Zahl zeigen, wie weit jedes Rad dabei kommt
+  const t=halt>0?1:(phi%360)/360,b=halt>0?phi-360:phi-phi%360;
+  SV.querySelectorAll('[data-ringbasis]').forEach(g=>g.setAttribute('transform',`rotate(${f(b*g.dataset.ringbasis)} ${g.dataset.cx} ${g.dataset.cy})`));
+  SV.querySelectorAll('[data-ring]').forEach(c=>{const fa=+c.dataset.ring,v=Math.abs(fa)*t,r=v>0&&Math.abs(v-Math.round(v))<1e-6?1:v-Math.floor(v),L=+c.dataset.l,bo=r*L;
+    c.setAttribute('stroke-dasharray',`${f(bo)} ${f(L-bo)}`);c.setAttribute('stroke-dashoffset',fa>0?0:f(bo))});
+  SV.querySelectorAll('[data-zaehl]').forEach(x=>{const fa=+x.dataset.zaehl,v=Math.abs(fa)*t;
+    x.textContent=(t===1?dz(v):v.toLocaleString('de-CH',{minimumFractionDigits:1,maximumFractionDigits:1}).replace('.',','))+' '+(fa>0?'↻':'↺')});
 }
 function schritt(t){
-  if(tAlt&&laeuft&&!document.hidden){phi+=Math.min(t-tAlt,100)*.06;drehen()}
+  if(tAlt&&laeuft&&!document.hidden){const d=Math.min(t-tAlt,100);
+    if(S.modus==='zahn'){if(halt>0)halt=Math.max(0,halt-d);else{const n=phi+d*.06,g=(Math.floor(phi/360)+1)*360;if(n>=g){phi=g;halt=HALT}else phi=n}}
+    else{phi+=d*.06;halt=0}
+    drehen()}
   tAlt=t;requestAnimationFrame(schritt);
 }
 function spielKnopf(){$('spiel').textContent=laeuft?'⏸':'▶';$('spiel').setAttribute('aria-label',laeuft?'Drehen anhalten':'Drehen lassen')}
@@ -893,22 +966,27 @@ SV.addEventListener('pointerdown',ev=>{
 SV.addEventListener('pointermove',ev=>{
   if(!zieh||ev.pointerId!==zieh.id)return;
   if(!zieh.weit&&Math.hypot(ev.clientX-zieh.sx,ev.clientY-zieh.sy)<4)return;
+  if(!zieh.weit)Planer.merke(pruefAn()?bildStand():zieh.S0);
   zieh.weit=true;zieh.p=punkt(ev);
   if(!zieh.raf)zieh.raf=requestAnimationFrame(()=>{if(zieh){zieh.raf=0;ziehen()}});
 });
 function ende(ev){
   if(!zieh||ev.pointerId!==zieh.id)return;
   const z=zieh;zieh=null;if(z.raf)cancelAnimationFrame(z.raf);
-  if(z.weit)ziehen(z);else if(z.tap&&ev.type==='pointerup')tippen(z.tap);
+  if(z.weit)ziehen(z);else if(z.tap&&ev.type==='pointerup'){Planer.merke();tippen(z.tap)}
+  if(pruef)formChips();
   felder();zeigen();
 }
 SV.addEventListener('pointerup',ende);SV.addEventListener('pointercancel',ende);
+// Griffe gehören dem Finger, die leere Bühne dem Rollen
+SV.addEventListener('touchstart',ev=>{if(ev.target.closest&&ev.target.closest('[data-h]'))ev.preventDefault()},{passive:false});
 function ziehen(z=zieh){
   const {p,p0,S0,c,d}=z,dx=p.x-p0.x,dy=p.y-p0.y;
   const rad=()=>Math.hypot(p.x-c[0],p.y-c[1])-Math.hypot(p0.x-c[0],p0.y-c[1]);
   const seit=()=>Math.abs(p.x-c[0])-Math.abs(p0.x-c[0]);
   const h=z.h.split(':');
-  if(h[0]==='z'){const key='z'+h[1];S[key]=begrenzt(Math.round(S0[key]+2*rad()/S.modul),8,60);S.ziel=''}
+  if(h[0]==='pa'||h[0]==='pr'){if(!bildAendern(h,p))return}
+  else if(h[0]==='z'){const key='z'+h[1];S[key]=begrenzt(Math.round(S0[key]+2*rad()/S.modul),8,60);S.ziel=''}
   else if(h[0]==='rad')S.radD=begrenzt(r5(S0.radD+2*rad()/10),1,30);
   else if(h[0]==='scheibe'){if(z.art==='hub')S.hub=begrenzt(Math.round(S0.hub+2*rad()),2,150);else S.scheibeD=begrenzt(Math.round(2*d.r+2*rad()),10,200)}
   else if(h[0]==='nocke'){if(z.art==='hub')S.hub=begrenzt(Math.round(S0.hub+rad()),2,150);else S.scheibeD=begrenzt(Math.round(2*d.rb+2*rad()),10,200)}
@@ -942,6 +1020,12 @@ function tippen(a){
 addEventListener('resize',()=>{if(!zieh)buehne()});
 
 // ---------- Bedienung ----------
+const ZIEL_BILD={langsam:['🐢','Langsam'],langsam3:['🐢','Langsamer'],stufe4:['🐌','Sehr langsam'],stufe:['🐌','Am langsamsten'],schnell:['🐇','Schnell'],gleich:['↻↺','Gleich'],richtung:['↻↻','Gleiche Richtung']};
+function zielBild(z){const A=z.zA/2,B=z.zB/2,xB=A+B,c=[[0,A,FARBEN.A],[xB,B,FARBEN.B]];
+  if(z.zC>=8){if(z.kette==='stufe'){c.push([xB,z.zC/2,FARBEN.C]);c.push([xB+z.zC/2+z.zD/2,z.zD/2,FARBEN.D])}else c.push([xB+B+z.zC/2,z.zC/2,FARBEN.C])}
+  const x1=Math.max(...c.map(q=>q[0]+q[1])),R=Math.max(...c.map(q=>q[1]));
+  return `<svg viewBox="${f(-A-1)} ${f(-R-1)} ${f(x1+A+2)} ${f(2*R+2)}" aria-hidden="true">${c.map(q=>`<circle cx="${f(q[0])}" cy="0" r="${f(q[1])}" fill="${q[2]}" stroke="#1F1A17" stroke-width="1" vector-effect="non-scaling-stroke"/>`).join('')}</svg>`}
+$('zielChips').innerHTML=Object.keys(ZIEL_BILD).map(k=>`<button type="button" class="chip" data-v="${k}" aria-label="${ZIEL_BILD[k][1]}" title="${ZIEL_BILD[k][1]}">${zielBild(ZIELE[k])}${ZIEL_BILD[k][0]}</button>`).join('');
 $('modulChips').innerHTML=[1,2,3,4,5,6].map(m=>{const p=m*1.5+1.5,h=m*1.7;let d='M0 16';
   for(let x=0;x<40;x+=p)d+=`L${f(x+p*.15)} 16L${f(x+p*.32)} ${f(16-h)}L${f(x+p*.68)} ${f(16-h)}L${f(x+p*.85)} 16`;
   return `<button type="button" class="chip" data-v="${m}" title="Modul ${m}" aria-label="Modul ${m}"><svg viewBox="0 0 40 18" aria-hidden="true"><path d="${d}L40 16V18H0Z" fill="currentColor"/></svg></button>`}).join('');
@@ -951,29 +1035,47 @@ function formChips(){$('formChips').innerHTML=Object.keys(UMRISSE).map(k=>{const
   '<button type="button" class="chip" data-bild aria-label="Bild"><svg viewBox="0 0 48 26" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="13" y="7" width="22" height="15" rx="2.5"/><path d="M19 7l2.5-3.5h5l2.5 3.5"/><circle cx="24" cy="14.5" r="4"/></svg>Bild</button><input type="file" id="bildDatei" accept="image/*" hidden>'}
 formChips();
 let bildWarn='';
+const pruefAn=()=>pruef&&!!BILD&&S.modus==='auto'&&S.form==='bild';
+function setzeBild(b){BILD=b;
+  if(b){UMRISSE.bild=b;FORMEN.bild=b.name||'Bild';if(!WORTE.form.includes('bild'))WORTE.form.push('bild');
+    const run=a=>a.map(v=>Math.round(v*1e4)/1e4),o=Object.assign({},b,{env:run(b.env)});if(b.roh)o.roh=run(b.roh);delete o.url;delete o.box;SB.schreibe(o)}
+  else{delete UMRISSE.bild;delete FORMEN.bild;const i=WORTE.form.indexOf('bild');if(i>=0)WORTE.form.splice(i,1);SB.weg()}}
+// Bild und Zustand zusammen: das Foto gehört nicht als JSON in den Verlauf
+function bildStand(){const b=BILD,p=pruef,z={...S};return ()=>{pruef=p;setzeBild(b);Object.assign(S,z);formChips();felder();zeigen()}}
+function bildAendern(h,p){const F=BILD,U=1000,hU=F.hw*U;let ach=F.achsen.slice(),r=F.rad;
+  if(h[0]==='pa'){const i=+h[1];let x=begrenzt(p.x/U,.03,.97);x=i?Math.max(x,ach[0]+.15):Math.min(x,ach[1]-.15);ach[i]=Math.round(x*1e3)/1e3}
+  else r=Math.round(begrenzt((hU-p.y)/(2*U),.03,.25)*1e3)/1e3;
+  const n=fertig((F.roh||F.env).slice(),ach,r,F.hw,[],18);if(n.i1-n.i0<NE*.3)return false;
+  ['name','roh','box','url'].forEach(k=>{if(F[k]!=null)n[k]=F[k]});if(!n.roh)n.roh=F.env.slice();
+  setzeBild(n);S.autoRad=begrenzt(Math.ceil(2*n.rad*S.autoL*2)/2,1,20);S.radstand=0;return true}
 document.addEventListener('change',ev=>{const inp=ev.target;if(inp.id!=='bildDatei')return;const fl=inp.files&&inp.files[0];inp.value='';if(!fl)return;
-  const url=URL.createObjectURL(fl),img=new Image(),zu=u=>{URL.revokeObjectURL(url);
-    if(!u){bildWarn='⚠ Kein Bild';zeigen();return}
-    u.name=(fl.name.replace(/\.[^.]+$/,'').replace(/[-_]+/g,' ').replace(/[<>&"]/g,'').trim()||'Bild').slice(0,16);
-    BILD=u;UMRISSE.bild=u;FORMEN.bild=u.name;if(!WORTE.form.includes('bild'))WORTE.form.push('bild');
-    try{localStorage.setItem(KEY_BILD,JSON.stringify(Object.assign({},u,{env:u.env.map(v=>Math.round(v*1e4)/1e4)})))}catch(_){}
-    S.form='bild';Object.assign(S,u.mass,{radstand:0});formChips();felder();zeigen()};
+  const url=URL.createObjectURL(fl),img=new Image(),zu=u=>{
+    if(!u){URL.revokeObjectURL(url);bildWarn='⚠ Kein Bild';zeigen();return}
+    u.name=(fl.name.replace(/\.[^.]+$/,'').replace(/[-_]+/g,' ').replace(/[<>&"]/g,'').trim()||'Bild').slice(0,16);u.url=url;
+    Planer.merke(bildStand());setzeBild(u);
+    S.form='bild';Object.assign(S,u.mass,{radstand:0});pruef=true;formChips();felder();zeigen()};
   img.onload=()=>zu(bildForm(img));img.onerror=()=>zu(null);img.src=url});
 function zeigen(){
-  const E=TEILE[S.modus]();
-  const {blaetter,zuGross,P}=packen(E.teile);
+  const E=TEILE[S.modus]();teilNummern(E.teile);
+  const {blaetter,zuGross,poster,a3,P}=packen(E.teile),an=pruefAn();
   const svgs=blaetter.map((b,i)=>blattSvg(b,i,blaetter.length,E.titel,P));
-  $('antwort').innerHTML=E.ant.map(a=>`<li>${a}</li>`).join('');
-  const warn=E.warn.concat(zuGross.length?[`⚠ Zu gross für ${P.name}: ${[...new Set(zuGross)].join(', ')}`]:[]);
+  const alt=letzteAnt;letzteAnt=E.ant;$('antwort').innerHTML=E.ant.map(a=>`<li>${a}</li>`).join('');
+  if(alt)$('antwort').querySelectorAll('li').forEach((li,i)=>{if(alt[i]!==undefined&&alt[i]!==E.ant[i])Planer.leuchte(li)});
+  const warn=E.warn.concat(zuGross.length?[`⚠ ${[...new Set(zuGross)].join(', ')}`]:[]);
   if(bildWarn){warn.push(bildWarn);bildWarn=''}
   $('warnung').hidden=!warn.length;$('warnung').innerHTML=warn.map(w=>`<span class="warn">${w}</span>`).join('<br>');
   $('k-rechnung').hidden=!(E.rech&&E.rech.length);$('rechnung').innerHTML=(E.rech||[]).join('');
+  $('iZahl').innerHTML=(E.iz||[]).join('');
   $('zuschnitt').innerHTML=zuschnittHtml(E);
+  ZU=zuGross;
+  Planer.zuGross('#zu-gross',zuGross.length&&!an?{wahl:[...(a3?['a3']:[]),'poster'],tue(art){Planer.merke();if(art==='a3')S.papier='a3';else S.poster='ja';felder();zeigen()}}:null);
+  $('posterAus').hidden=!poster;
   if(svgs.length&&E.zu&&E.zu.length)svgs.push(materialBlatt(E,P,E.titel));
-  $('blaetter').innerHTML=svgs.join('');
+  const zeig=an?[]:svgs;   // Prüfen: erst die Kontur, dann die Druckvorlage; #druck bleibt voll, damit Strg+P nie leer druckt
+  Planer.blaetter('#blaetter',zeig,{ab:1});
   $('druck').innerHTML=svgs.join('');
-  $('info').textContent=blaetter.length?`${E.teile.length-zuGross.length} ${E.teile.length-zuGross.length===1?'Teil':'Teile'} · ${blaetter.length} ${blaetter.length===1?'Blatt':'Blätter'}${E.zu&&E.zu.length?' + Material':''} · 100 %`:'⚠ Zu gross';
-  $('seite').textContent=`@page{size:${P.name} portrait;margin:0}#druck{--bw:${P.w}mm;--bh:${P.h}mm}`;
+  druckKopf.zeige({papier:S.papier,blaetter:zeig.length});Planer.seite({papier:S.papier});
+  $('drucken').disabled=!zeig.length;$('bildPruef').hidden=!(S.form==='bild'&&BILD&&!pruef);
   document.title=`Schritt für Schritt · Mechanik-Planer · ${E.titel}`;
   buehne();
   speichern();
@@ -989,6 +1091,8 @@ function felder(){
 document.querySelectorAll('[data-g]').forEach(g=>g.addEventListener('click',ev=>{
   const c=ev.target.closest('.chip');if(!c)return;const k=g.dataset.g;
   if('bild' in c.dataset){$('bildDatei').click();return}
+  Planer.merke(pruefAn()?bildStand():undefined);
+  if(k==='modus'||k==='form')pruef=false;
   S[k]=WORTE[k]?c.dataset.v:zahl(c.dataset.v,S[k]);
   if(k==='ziel'&&ZIELE[S.ziel])Object.assign(S,ZIELE[S.ziel]);
   if(k==='form'&&UMRISSE[S.form].mass)Object.assign(S,UMRISSE[S.form].mass,{radstand:0});
@@ -996,11 +1100,19 @@ document.querySelectorAll('[data-g]').forEach(g=>g.addEventListener('click',ev=>
   if(k==='wart')S.wFluegel=S.wart==='papier'?(S.wFluegel>=6?8:4):begrenzt(S.wFluegel,3,8);
   felder();zeigen();
 }));
+// Zahl geändert: das betroffene Teil auf der Bühne leuchtet kurz
+const PULS={zA:'z:A',zB:'z:B',zC:'z:C',zD:'z:D',radD:'rad',autoL:'koerper',autoH:'koerper',boden:'koerper',autoRad:'arad',radBreite:'rbreite',autoB:'breite',hub:'scheibe,nocke',scheibeD:'scheibe,nocke',wSeite:'wind',wHoehe:'wind',kD:'kreisel'};
 document.querySelectorAll('input[data-k]').forEach(i=>{
-  i.addEventListener('input',()=>{const k=i.dataset.k,n=zahl(i.value,NaN);if(!isFinite(n))return;S[k]=begrenzt(n,GRENZEN[k][0],GRENZEN[k][1]);if(k[0]==='z')S.ziel='';felder();zeigen()});
+  i.addEventListener('input',()=>{const k=i.dataset.k,n=zahl(i.value,NaN);if(!isFinite(n))return;Planer.merke(undefined,'tipp-'+k);S[k]=begrenzt(n,GRENZEN[k][0],GRENZEN[k][1]);if(k[0]==='z')S.ziel='';felder();zeigen();
+    (PULS[k]||'').split(',').forEach(h=>{if(h)SV.querySelectorAll(`[data-h="${h}"] .ks`).forEach(e=>e.classList.add('puls'))})});
   i.addEventListener('change',()=>{i.value=S[i.dataset.k]});
 });
 $('drucken').addEventListener('click',()=>print());
+$('bildPruef').addEventListener('click',()=>{pruef=true;zeigen()});
+$('pruefFertig').addEventListener('click',()=>{pruef=false;zeigen()});
+$('posterAus').addEventListener('click',()=>{Planer.merke();S.poster='nein';felder();zeigen()});
+const druckKopf=Planer.druckkopf('#druck-kopf',{papiere:['a4','a3'],papier:S.papier,wahl({papier}){Planer.merke();S.papier=papier;felder();zeigen()}});
+Planer.verlauf({hole:()=>({...S}),setze:z=>{Object.assign(S,z);if(!pruefAn())pruef=false;felder();zeigen()}});
 felder();zeigen();spielKnopf();requestAnimationFrame(schritt);
 })();
 </script>

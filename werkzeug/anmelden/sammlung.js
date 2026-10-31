@@ -26,7 +26,9 @@ async function collection(req,db){
  const k=await db.prepare('SELECT id,name,version FROM sammlungen WHERE tokenHash=? AND aktiv=1').bind(await hash(token)).first();
  if(!k)fail('Der Sammlungslink gilt nicht mehr. Bitte deiner Lehrperson zeigen.',401);return k;
 }
-const fields='id,videoId,titel,name,klasse,sterne,erstellt';
+const fields='id,videoId,titel,name,klasse,sterne,bewertet,erstellt';
+// Ohne Bewertung steht sterne=1 in der Tabelle, nach aussen ist es null
+const werk=({bewertet,...w})=>bewertet===0?{...w,sterne:null}:w;
 export async function handleSammlung(req,env){
  try{
   if(req.headers.get('Origin')!==ORIGIN)return json({fehler:'Nicht erlaubt.'},403);
@@ -39,7 +41,7 @@ export async function handleSammlung(req,env){
    if(p==='/sammlung/werke'&&req.method==='GET'){
     if(u.searchParams.get('version')===String(k.version))return json({version:k.version,unveraendert:true});
     const rows=await db.prepare(`SELECT ${fields},geloescht FROM schulwerke WHERE sammlungId=? ORDER BY erstellt DESC,id DESC LIMIT 2000`).bind(k.id).all();
-    return json({version:k.version,werke:rows.results.filter(w=>!w.geloescht).map(({geloescht,...w})=>w),geloescht:rows.results.filter(w=>w.geloescht).map(w=>w.id)});
+    return json({version:k.version,werke:rows.results.filter(w=>!w.geloescht).map(({geloescht,...w})=>werk(w)),geloescht:rows.results.filter(w=>w.geloescht).map(w=>w.id)});
    }
    if(p==='/sammlung/foto'&&req.method==='GET'){
     const id=u.searchParams.get('id');if(!UUID.test(id))fail('Ungültiges Foto.',400);
@@ -52,18 +54,18 @@ export async function handleSammlung(req,env){
     if(!/^multipart\/form-data;/.test(req.headers.get('Content-Type')||''))fail('Ungültige Abgabe.',400);
     const bytes=await bounded(req,MAX_PHOTO+16384);let form,data;
     try{form=await new Request(req.url,{method:'POST',headers:{'Content-Type':req.headers.get('Content-Type')},body:bytes}).formData();data=JSON.parse(form.get('daten'));}catch{fail('Ungültige Abgabe.',400);}
-    if(!data||!UUID.test(data.id)||typeof data.videoId!=='string'||!/^[-\w]{1,100}$/.test(data.videoId)||typeof data.titel!=='string'||!data.titel.trim()||data.titel.length>160||typeof data.name!=='string'||!data.name.trim()||data.name.length>30||![1,2,3,4,5,6].includes(data.klasse)||![1,2,3,4,5].includes(data.sterne))fail('Bitte Vorname, Klasse und Sterne angeben.',400);
+    if(!data||!UUID.test(data.id)||typeof data.videoId!=='string'||!/^[-\w]{1,100}$/.test(data.videoId)||typeof data.titel!=='string'||!data.titel.trim()||data.titel.length>160||typeof data.name!=='string'||!data.name.trim()||data.name.length>100||![1,2,3,4,5,6].includes(data.klasse)||(data.sterne!=null&&![1,2,3,4,5].includes(data.sterne)))fail('⚠ Name oder Klasse',400);
     const old=await db.prepare('SELECT sammlungId,geloescht FROM schulwerke WHERE id=?').bind(data.id).first();
     if(old){if(old.sammlungId!==k.id)fail('Ungültige Abgabe.',409);return json({ok:true,id:data.id,geloescht:!!old.geloescht});}
     const photo=form.get('foto');if(!photo||typeof photo==='string'||!photo.size||photo.size>MAX_PHOTO)fail('Das Foto fehlt oder ist zu gross.',413);
     const foto=new Uint8Array(await photo.arrayBuffer());
     if(photo.type!=='image/jpeg'||foto[0]!==255||foto[1]!==216||foto[2]!==255||foto.at(-2)!==255||foto.at(-1)!==217)fail('Bitte ein JPEG-Foto verwenden.',415);
-    const r=await db.prepare(`INSERT OR IGNORE INTO schulwerke(id,sammlungId,videoId,titel,name,klasse,sterne,erstellt,foto)
-     SELECT ?,?,?,?,?,?,?,?,? WHERE EXISTS(SELECT 1 FROM sammlungen WHERE id=? AND aktiv=1)
+    const r=await db.prepare(`INSERT OR IGNORE INTO schulwerke(id,sammlungId,videoId,titel,name,klasse,sterne,bewertet,erstellt,foto)
+     SELECT ?,?,?,?,?,?,?,?,?,? WHERE EXISTS(SELECT 1 FROM sammlungen WHERE id=? AND aktiv=1)
      AND (SELECT COUNT(*) FROM schulwerke WHERE sammlungId=?)<2000
      AND (SELECT COUNT(*) FROM schulwerke WHERE sammlungId=? AND erstellt>?)<300
      AND (SELECT COALESCE(SUM(length(foto)),0) FROM schulwerke)+?<400000000`)
-     .bind(data.id,k.id,data.videoId,data.titel.trim(),data.name.trim(),data.klasse,data.sterne,Date.now(),foto,k.id,k.id,k.id,Date.now()-86400000,foto.length).run();
+     .bind(data.id,k.id,data.videoId,data.titel.trim(),data.name.trim(),data.klasse,data.sterne??1,data.sterne==null?0:1,Date.now(),foto,k.id,k.id,k.id,Date.now()-86400000,foto.length).run();
     if(!r.meta.changes){const saved=await db.prepare('SELECT sammlungId,geloescht FROM schulwerke WHERE id=?').bind(data.id).first();if(saved?.sammlungId===k.id)return json({ok:true,id:data.id,geloescht:!!saved.geloescht});fail('Die Sammlung ist gerade voll. Bitte deiner Lehrperson zeigen.',429);}
     return json({ok:true,id:data.id},201);
    }
@@ -82,7 +84,7 @@ export async function handleSammlung(req,env){
   }
   if(p==='/sammlung/verwaltung/werke'&&req.method==='GET'){
    const id=u.searchParams.get('id');if(!UUID.test(id))fail('Ungültige Sammlung.',400);
-   return json({werke:(await db.prepare(`SELECT ${fields} FROM schulwerke WHERE sammlungId=? AND geloescht=0 ORDER BY erstellt DESC,id DESC LIMIT 2000`).bind(id).all()).results});
+   return json({werke:(await db.prepare(`SELECT ${fields} FROM schulwerke WHERE sammlungId=? AND geloescht=0 ORDER BY erstellt DESC,id DESC LIMIT 2000`).bind(id).all()).results.map(werk)});
   }
   if(p==='/sammlung/verwaltung/foto'&&req.method==='GET'){
    const id=u.searchParams.get('id');if(!UUID.test(id))fail('Ungültiges Foto.',400);
