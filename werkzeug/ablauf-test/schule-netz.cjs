@@ -27,6 +27,16 @@ async function anbinden(k,s){
     if(pfad==='/sammlung/foto') return r.fulfill({status:200,headers:{...CORS,'Content-Type':'image/jpeg'},body:s.bild||Buffer.alloc(0)});
     return json(r,404,{fehler:'unbekannt'}); }); }
 
+/* Unterricht nachgebildet, Prüfung wie im Worker: ein falscher Eintrag lehnt das ganze Paket ab. u.modus 'ok' oder 'offline', u.pakete die angenommenen Körper, u.abgelehnt die übrigen */
+const VERBINDUNG={token:TOKEN,deviceId:'11111111-1111-4111-8111-111111111111',id:'u1',name:'Werkraum'};
+const unterricht=(mehr={})=>({policy:{mode:'free',ids:[]},revision:1,leaseMs:90000,modus:'ok',pakete:[],kopf:[],abgelehnt:[],...mehr});
+const staendeOk=b=>b&&b.token===TOKEN&&/^[0-9a-f-]{36}$/.test(b.deviceId||'')&&Array.isArray(b.staende)&&b.staende.length>=1&&b.staende.length<=40&&b.staende.every(s=>/^[^\u0000-\u001f\u007f]{1,120}$/.test(s.kindKey||'')&&/^[-a-zA-Z0-9_]{1,100}$/.test(s.videoId||'')&&Number.isInteger(s.schritt)&&s.schritt>=0&&s.schritt<=999&&Number.isInteger(s.max)&&s.max>=0&&s.max<=999&&s.schritt<=s.max&&typeof s.videoFertig==='boolean'&&typeof s.werkFertig==='boolean'&&Number.isFinite(s.zeit));
+async function unterrichtAnbinden(k,u){ await k.c.route(a=>a.hostname!=='127.0.0.1'&&/^\/unterricht\//.test(a.pathname),async r=>{ const q=r.request(), pfad=new URL(q.url()).pathname;
+    if(q.method()==='OPTIONS') return r.fulfill({status:204,headers:CORS});
+    if(u.modus==='offline') return r.abort('internetdisconnected');
+    if(pfad==='/unterricht/status') return json(r,200,{id:'u1',name:'Werkraum',policy:u.policy,revision:u.revision,leaseMs:u.leaseMs});
+    if(pfad==='/unterricht/kindstand'){ const b=JSON.parse(q.postData()||'null'); u.kopf.push(q.headers()); if(!staendeOk(b)){ u.abgelehnt.push(b); return json(r,400,{fehler:'Stand'}); } u.pakete.push(b); return json(r,200,{ok:true,stand:Date.now(),angenommen:b.staende.length}); }
+    return json(r,404,{fehler:'unbekannt'}); }); }
 const speicher=(s,mehr={})=>({'schrittli.schule.klassenlisten':JSON.stringify({klassen:LISTE,zeit:Date.now()}),...(s?{'schrittli.schulwerke.verbindung':JSON.stringify({id:s.id,name:s.name,token:TOKEN})}:{}),...mehr});
 /* iPad mit Namenslisten, auf Wunsch an einer Sammlung */
 async function ipad(t,{s=null,netz=s,breite=1024,hoehe=768,mehr={}}={}){ const k=await t.kontext({breite,hoehe,speicher:speicher(s,mehr)}); await anbinden(k,netz||sammlung()); const p=await t.app(k,'schule'); await p.waitForFunction(()=>KL.klassen.length>0); return {k,p}; }
@@ -53,4 +63,4 @@ async function foto(p,bild,klick){ const [wahl]=await Promise.all([p.waitForEven
 /* Fotos ausgelöst, Sterne-Schirm da */
 async function fotoMit(p,bild,namen,klasse){ await kacheln(p,namen,klasse); await foto(p,bild,()=>p.locator('.ww [data-act=kamera]').click()); }
 
-module.exports={TOKEN,LISTE,ANLEITUNG,VIDEO,CORS,sammlung,anbinden,speicher,ipad,kacheln,kinderWahl,karteWeg,schritte,oeffne,stand,gespeichert,neuLaden,testbild,foto,fotoMit};
+module.exports={TOKEN,LISTE,ANLEITUNG,VIDEO,CORS,VERBINDUNG,sammlung,anbinden,unterricht,unterrichtAnbinden,speicher,ipad,kacheln,kinderWahl,karteWeg,schritte,oeffne,stand,gespeichert,neuLaden,testbild,foto,fotoMit};

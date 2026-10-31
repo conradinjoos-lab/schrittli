@@ -4,7 +4,7 @@
 (function(){
   if(window.__melden||window.top!==window) return; window.__melden=true;
   const ZIEL='https://schrittli-anmelden.conradinjoos.workers.dev/melden', WARTE='schrittli.melden.warte';
-  const STAND='2026-10-31-f7aec30';   // schreibt quelle/bauen.sh
+  const STAND='2026-10-31-baedbab';   // schreibt quelle/bauen.sh
   const skript=document.currentScript, wurzel=(skript&&skript.src||'').replace(/vorlagen\/melden\.js.*$/,'')||location.origin+'/', pfad=location.pathname;
   const kontrolle=/\/kontrolle\//.test(pfad)||!!document.querySelector('script[src$="werkstatt.js"]'), uebersicht=/\/vorlagen\/(index\.html)?$/.test(pfad);
   const ARTEN=kontrolle?[['anzeige','Anzeige falsch'],['speichern','Speichern geht nicht'],['anderes','Etwas anderes']]

@@ -14,9 +14,10 @@ const WURZEL=path.resolve(__dirname,'..','..');
 const CHROME=process.env.CHROME||'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const IPAD='Mozilla/5.0 (iPad; CPU OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1';
 const ARTEN={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.cjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.gif':'image/gif','.woff2':'font/woff2','.mp3':'audio/mpeg','.mp4':'video/mp4','.pdf':'application/pdf','.wasm':'application/wasm'};
-// Attrappe der YouTube-Schnittstelle: Player ist sofort bereit, abspielen wechselt nur den Zustand
-const YT_ATTRAPPE=`window.YT={Player:function(el,o){let s=5,z=0;const e=o.events||{},setze=n=>{s=n;if(e.onStateChange)e.onStateChange({data:n});};
-  Object.assign(this,{playVideo(){setze(1);},pauseVideo(){setze(2);},seekTo(t){z=t;},getCurrentTime(){return z;},getDuration(){return 600;},getPlayerState(){return s;},setPlaybackRate(){},unloadModule(){},destroy(){}});
+// Attrappe der YouTube-Schnittstelle: Player ist sofort bereit, abspielen wechselt nur den Zustand. window.__yt steuert sie im Test: fehler(), zustand(n), zeit(s), suche = alle Sprünge
+const YT_ATTRAPPE=`window.YT={Player:function(el,o){let s=5,z=0;const e=o.events||{},setze=n=>{s=n;if(e.onStateChange)e.onStateChange({data:n});},sprung=[];
+  window.__yt={fehler(c){if(e.onError)e.onError({data:c||150});},zustand:setze,zeit(t){z=t;},suche:sprung};
+  Object.assign(this,{playVideo(){setze(1);},pauseVideo(){setze(2);},seekTo(t){z=t;sprung.push(t);},getCurrentTime(){return z;},getDuration(){return 600;},getPlayerState(){return s;},setPlaybackRate(){},unloadModule(){},destroy(){}});
   setTimeout(()=>e.onReady&&e.onReady({target:this}),0);}};setTimeout(()=>window.onYouTubeIframeAPIReady&&window.onYouTubeIframeAPIReady(),0);`;
 
 function server(){ return new Promise(fertig=>{ const s=http.createServer((req,res)=>{
