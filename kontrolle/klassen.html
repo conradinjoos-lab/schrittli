@@ -25,6 +25,19 @@ textarea:focus{outline:2px solid var(--lern);outline-offset:1px;background:var(-
 #putz .ergebnis{font-size:14px}
 #putz .ergebnis b{color:var(--lern)}
 .karte.neu{outline:2px solid var(--lern);outline-offset:2px}
+.leiste .fehler{margin:0;min-height:0}
+#ordnen{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;align-items:start;user-select:none;-webkit-user-select:none}
+#ordnen .klasse{margin:0;display:flex;flex-direction:column;gap:8px;min-height:96px}
+#ordnen .klasse.leer{opacity:.55}
+#ordnen .klasse.ziel{outline:3px solid var(--lern);outline-offset:2px}
+#ordnen .plus{align-items:center;justify-content:center;font:600 20px var(--display);color:var(--muted);background:none;box-shadow:none;border:2px dashed var(--line);cursor:pointer}
+.griff{display:flex;align-items:center;gap:8px;min-height:36px;font:600 17px var(--display);cursor:grab;touch-action:none}
+.griff i{font-style:normal;color:var(--muted)}
+.griff small{font:500 14px var(--display);color:var(--muted)}
+.griff em{margin-left:auto;font:600 14px var(--display);font-style:normal;background:var(--lern);color:#fff;padding:4px 12px;border-radius:999px}
+#ordnen .chip{border:0;font-size:15px;padding:6px 12px;min-height:34px;cursor:grab;touch-action:pan-y}
+#ordnen .chip.on{background:var(--ink);color:#fff}
+#geist{position:fixed;z-index:50;pointer-events:none;transform:translate(-50%,-130%);font:600 15px var(--display);background:var(--ink);color:#fff;padding:6px 14px;border-radius:999px;box-shadow:var(--shadow-sm)}
 </style>
 </head>
 <body>
@@ -34,22 +47,23 @@ textarea:focus{outline:2px solid var(--lern);outline-offset:1px;background:var(-
   <div class="logo">🧒</div>
   <div><h1>Klassen</h1></div>
  </header>
- <div class="leiste"><span class="klein" id="stand"></span><span class="rechts"></span><button id="alle-knopf" class="p" hidden>Alle speichern</button><button id="putz-knopf" class="s">Aus Putzämtli-Manager laden</button><button id="neu-knopf" class="on">+ Neue Klasse</button></div>
+ <div class="leiste"><span class="klein" id="stand"></span><p class="fehler" id="fehler"></p><span class="rechts"></span><button id="alle-knopf" class="p" hidden>Alle speichern</button><button id="ordnen-knopf">⇄ Ordnen</button><button id="putz-knopf" class="s">Putzämtli laden</button><button id="neu-knopf" class="on">+ Neue Klasse</button></div>
  <section class="karte hell" id="putz" hidden>
-  <h2>Klassen aus dem Putzämtli-Manager</h2>
+  <h2>Putzämtli-Manager</h2>
     <div class="zeile"><label class="s" style="cursor:pointer">Datei wählen …<input type="file" id="putz-datei" accept=".json,application/json" hidden></label></div>
-  <textarea id="putz-text" placeholder='{"version":2,"classes":{"P1a":{"hk1":["Vorname Nachname", …],"hk2":[…]}}}' spellcheck="false"></textarea>
+  <textarea id="putz-text" placeholder="{ … }" spellcheck="false"></textarea>
   <div class="zeile"><button class="p" id="putz-lesen" type="button">Einlesen</button><button class="s" id="putz-zu" type="button">Schliessen</button><span class="ergebnis" id="putz-ergebnis"></span></div>
  </section>
  <main id="liste" class="klassen"><div class="nichts">Lade Klassen …</div></main>
- <p class="fehler" id="fehler"></p>
+ <main id="ordnen" hidden></main>
 </div>
+<div id="geist" hidden></div>
 <script src="werkstatt.js"></script>
 <script>
 /* putz-anfang – Klassenlisten-Export des Putzämtli-Managers (version 2: classes → hk1/hk2 mit «Vorname Nachname») in Schrittli-Listen umbauen. */
 function ausPutzaemtli(d){
  const classes=d&&typeof d==='object'&&d.classes&&typeof d.classes==='object'?d.classes:null;
- if(!classes)throw new Error('Das ist keine Klassenlisten-Datei des Putzämtli-Managers (der Teil «classes» fehlt).');
+ if(!classes)throw new Error('⚠ Keine Klassenliste');
  const listen=[];
  for(const [klasse,c] of Object.entries(classes)){
   if(!c||typeof c!=='object')continue;
@@ -58,15 +72,15 @@ function ausPutzaemtli(d){
   const m=/\d/.exec(klasse);const stufe=m&&+m[0]>=1&&+m[0]<=6?+m[0]:null;
   if(namen.length)listen.push({name:klasse,stufe,namen});
  }
- if(!listen.length)throw new Error('In der Datei stehen keine Namen.');
+ if(!listen.length)throw new Error('⚠ Keine Namen');
  return listen;
 }
-/* «Vorname Nachname» → Vorname; kommt ein Vorname mehrmals vor, so viele Buchstaben des Nachnamens anhängen, bis alle verschieden sind. */
+/* «Vorname Nachname» → «Vorname N.»; sind zwei gleich, so viele Buchstaben des Nachnamens anhängen, bis alle verschieden sind. */
 function vornamen(voll){
  const teile=voll.map(n=>String(n).replace(/\s+/g,' ').trim().split(' ')).filter(t=>t[0]);
  const nach=t=>t.slice(1).join(' ');
  const form=(t,l)=>l&&t[1]?`${t[0]} ${nach(t).slice(0,l)}.`:t[0];
- const laenge=teile.map(()=>0);
+ const laenge=teile.map(t=>t[1]?1:0);
  for(let runde=0;runde<30;runde++){
   const zaehl={};teile.forEach((t,i)=>{const k=form(t,laenge[i]).toLowerCase();zaehl[k]=(zaehl[k]||0)+1});
   let offen=false;
@@ -83,53 +97,115 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
 const fehler=(el,x)=>{el.textContent=x?String(x.message||x):''};
 const zeilen=t=>t.split(/\r?\n|,|;/).map(s=>s.replace(/\s+/g,' ').trim()).filter(Boolean);
-let klassen=[];
-try{await W.bereit();klassen=(await W.namen.klassen()).klassen}catch(x){$('#liste').innerHTML=`<div class="nichts">Laden ging nicht: ${esc(x.message||x)}</div>`;return}
+let klassen=[],ordnen=false;
+try{await W.bereit();klassen=(await W.namen.klassen()).klassen}catch(x){$('#liste').innerHTML=`<div class="nichts">⚠ ${esc(x.message||x)}</div>`;return}
 
 /* k = gespeicherter Stand; k.neu = noch nicht gespeicherte Werte (etwa aus dem Putzämtli-Import), die Karte zeigt sie zum Prüfen. */
 function karte(k){
  const el=document.createElement('section');el.className='karte'+(k.neu?' neu':'');el.dataset.id=k.id||'';
  const z=k.neu||k;
- el.innerHTML=`<div class="kopf"><input type="text" class="name" value="${esc(z.name)}" placeholder="Klasse, z. B. 3a" maxlength="80">
+ el.innerHTML=`<div class="kopf"><input type="text" class="name" value="${esc(z.name)}" placeholder="Klasse" maxlength="80">
   <select class="stufe" title="Klassenstufe"><option value="">Stufe?</option>${[1,2,3,4,5,6].map(s=>`<option value="${s}" ${z.stufe===s?'selected':''}>${s}. Klasse</option>`).join('')}</select></div>
-  <textarea class="namen" placeholder="Ein Vorname pro Zeile&#10;Lina&#10;Noah&#10;Amira" spellcheck="false">${esc(z.namen.join('\n'))}</textarea>
+  <textarea class="namen" placeholder="Lina K.&#10;Noah B.&#10;Amira S." spellcheck="false">${esc(z.namen.join('\n'))}</textarea>
   <div class="chips"></div>
   <div class="unten"><span class="stand"></span><button class="s rot weg" type="button">${k.id?'Klasse entfernen':'Verwerfen'}</button><button class="p speichern" type="button">Speichern</button></div>`;
  const stand=el.querySelector('.stand'),chips=el.querySelector('.chips'),ta=el.querySelector('.namen');
  const eingabe=()=>({name:el.querySelector('.name').value,stufe:el.querySelector('.stufe').value||null,namen:zeilen(ta.value)});
  el.geaendert=()=>{const e=eingabe();return !k.id||e.namen.join('\n')!==k.namen.join('\n')||e.name.trim()!==k.name||(e.stufe??null)!=(k.stufe??null)};
  const zeige=()=>{const n=zeilen(ta.value);chips.innerHTML=n.length?n.map(x=>`<span class="chip">${esc(x)}</span>`).join(''):'';
-  stand.className='stand';stand.textContent=n.length?`${n.length} ${n.length===1?'Kind':'Kinder'}${el.geaendert()?' · noch nicht gespeichert':''}`:'';alleKnopf()};
+  stand.className='stand';stand.textContent=n.length?`${n.length} ${n.length===1?'Kind':'Kinder'}${el.geaendert()?' · ungespeichert':''}`:'';alleKnopf()};
  el.querySelectorAll('input,select,textarea').forEach(i=>i.addEventListener('input',zeige));zeige();
+ el.merken=()=>{if(el.geaendert()){const e=eingabe();k.neu={name:e.name.trim(),stufe:e.stufe?+e.stufe:null,namen:e.namen}}};
  el.speichern=async()=>{const b=el.querySelector('.speichern');b.disabled=true;fehler($('#fehler'));
   try{const r=await W.namen.speichern({id:k.id||undefined,...eingabe()});
    Object.assign(k,{id:r.id,name:r.name,stufe:r.stufe,namen:r.namen});delete k.neu;el.classList.remove('neu');
    /* Die ganze Klasse ist gespeichert: alte Listen «… Halbklasse N» derselben Klasse fallen weg. */
    for(const h of klassen.filter(x=>x.id&&x.name.toLowerCase().replace(/\s+halbklasse\s+\d+$/,'')===k.name.toLowerCase()&&x!==k)){await W.namen.entfernen(h.id);klassen=klassen.filter(x=>x!==h);$('#liste').querySelector(`[data-id="${h.id}"]`)?.remove()}el.dataset.id=k.id;ta.value=k.namen.join('\n');el.querySelector('.name').value=k.name;el.querySelector('.stufe').value=k.stufe??'';el.querySelector('.weg').textContent='Klasse entfernen';
-   zeige();stand.className='stand ok';stand.textContent=`Gespeichert · ${k.namen.length} ${k.namen.length===1?'Kind':'Kinder'} · die iPads holen die Liste beim nächsten Start`;kopf()}
+   zeige();stand.className='stand ok';stand.textContent=`Gespeichert · ${k.namen.length} ${k.namen.length===1?'Kind':'Kinder'}`;kopf()}
   catch(x){stand.className='stand';stand.textContent='';fehler($('#fehler'),x);b.disabled=false;throw x}
   b.disabled=false};
  el.querySelector('.speichern').onclick=()=>el.speichern().catch(()=>{});
  el.querySelector('.weg').onclick=async()=>{
   if(!k.id){klassen=klassen.filter(x=>x!==k);el.remove();kopf();leer();alleKnopf();return}
-  if(!confirm(`Klasse «${k.name}» mit ${k.namen.length} Vornamen entfernen? Bereits gespeicherte Rückmeldungen und Werke behalten ihren Namen.`))return;
+  if(!confirm(`«${k.name}» · ${k.namen.length} Namen entfernen?`))return;
   try{await W.namen.entfernen(k.id);klassen=klassen.filter(x=>x!==k);el.remove();kopf();leer();alleKnopf()}catch(x){fehler($('#fehler'),x)}};
  return el;
 }
-const leer=()=>{if(!klassen.length)$('#liste').innerHTML='<div class="nichts">Noch keine Klasse. Lege oben eine an und trage die Vornamen ein.</div>'};
+const leer=()=>{if(!klassen.length)$('#liste').innerHTML='<div class="nichts">Noch keine Klasse</div>'};
 const kopf=()=>{const g=klassen.filter(k=>k.id);$('#stand').textContent=g.length?`${g.length} ${g.length===1?'Klasse':'Klassen'} · ${g.reduce((n,k)=>n+k.namen.length,0)} Kinder`:''};
 const offene=()=>[...$('#liste').querySelectorAll('.karte')].filter(el=>el.geaendert&&el.geaendert()&&zeilen(el.querySelector('.namen').value).length);
-const alleKnopf=()=>{const n=offene().length;$('#alle-knopf').hidden=n<2;$('#alle-knopf').textContent=`Alle speichern (${n})`};
+const geleert=()=>klassen.filter(k=>k.neu&&!k.neu.namen.length);
+const alleKnopf=()=>{const n=offene().length+geleert().filter(k=>k.id).length;$('#alle-knopf').hidden=n<(ordnen?1:2);$('#alle-knopf').textContent=`Alle speichern (${n})`};
 function zeichne(){
- $('#liste').replaceChildren();klassen.forEach(k=>$('#liste').appendChild(karte(k)));leer();kopf();alleKnopf();
+ $('#liste').replaceChildren();klassen.forEach(k=>$('#liste').appendChild(karte(k)));leer();kopf();alleKnopf();if(ordnen)malen();
 }
 $('#neu-knopf').onclick=()=>{const k={id:'',name:'',stufe:null,namen:[]};klassen.unshift(k);const n=$('#liste').querySelector('.nichts');if(n)n.remove();
  const el=karte(k);$('#liste').prepend(el);el.querySelector('.name').focus()};
 $('#alle-knopf').onclick=async()=>{const b=$('#alle-knopf');b.disabled=true;const karten=offene();let i=0;
  try{for(const el of karten){i++;b.textContent=`Speichere ${i} von ${karten.length} …`;await el.speichern()}
-  $('#stand').textContent+=` · ${karten.length} Listen gespeichert`}
- catch(x){}
+  for(const k of geleert()){if(k.id)await W.namen.entfernen(k.id);klassen=klassen.filter(x=>x!==k)}
+  zeichne();$('#stand').textContent+=` · ✓`}
+ catch(x){fehler($('#fehler'),x)}
  b.disabled=false;alleKnopf()};
+
+/* Ordnen: Namen antippen wählt sie aus, Antippen einer Klasse verschiebt sie dorthin; Ziehen geht auch mit dem Finger. Der Griff ⠿ führt eine ganze Klasse in eine andere.
+   Alles bleibt in k.neu, bis «Alle speichern» die Listen schreibt und leer gewordene Klassen entfernt. */
+const wahl=new Set(),MAX=60;   // wahl: «Klassenindex:Namenindex»
+const stand=k=>k.neu||k,arbeit=k=>k.neu||(k.neu={name:k.name,stufe:k.stufe,namen:[...k.namen]});
+const gleich=(a,b)=>[...a].sort().join('\n')===[...b].sort().join('\n');
+function malen(){
+ $('#ordnen').innerHTML=klassen.map((k,i)=>{const z=stand(k),fremd=[...wahl].filter(w=>+w.split(':')[0]!==i).length;
+  return `<section class="karte klasse${z.namen.length?'':' leer'}" data-i="${i}"><div class="griff"><i>⠿</i>${esc(z.name)}<small>${z.namen.length}</small>${fremd?`<em>⤵ ${fremd}</em>`:''}</div>
+   <div class="chips">${z.namen.map((n,j)=>`<button type="button" class="chip${wahl.has(i+':'+j)?' on':''}" data-j="${j}">${esc(n)}</button>`).join('')}</div></section>`}).join('')
+  +`<section class="karte klasse plus" data-i="neu">+</section>`}
+function neueKlasse(){
+ const name=(prompt('Klasse','')||'').replace(/\s+/g,' ').trim();if(!name)return null;
+ if(klassen.some(k=>stand(k).name.toLowerCase()===name.toLowerCase())){fehler($('#fehler'),'⚠ Gibt es schon');return null}
+ const m=/\d/.exec(name),k={id:'',name,stufe:m&&+m[0]>=1&&+m[0]<=6?+m[0]:null,namen:[]};k.neu={name,stufe:k.stufe,namen:[]};klassen.push(k);return k}
+function schieben(wer,zi){
+ fehler($('#fehler'));
+ const ziel=zi==='neu'?neueKlasse():klassen[+zi];if(!ziel)return;
+ const da=new Set(stand(ziel).namen.map(n=>n.toLowerCase())),weg=[],doppelt=[];
+ for(const [i,j] of wer){
+  const n=stand(klassen[i]).namen[j];if(klassen[i]===ziel)continue;
+  if(da.has(n.toLowerCase())){doppelt.push(n);continue}
+  da.add(n.toLowerCase());weg.push([i,j,n])}
+ if(da.size>MAX){fehler($('#fehler'),'⚠ Zu viele');return zeichne()}
+ const z=arbeit(ziel);z.namen=[...z.namen,...weg.map(w=>w[2])].sort((a,b)=>a.localeCompare(b,'de'));
+ for(const i of new Set(weg.map(w=>w[0]))){const q=arbeit(klassen[i]);q.namen=q.namen.filter((n,j)=>!weg.some(w=>w[0]===i&&w[1]===j))}
+ for(const k of klassen)if(k.id&&k.neu&&k.neu.name===k.name&&k.neu.stufe==k.stufe&&gleich(k.neu.namen,k.namen))delete k.neu;
+ wahl.clear();if(doppelt.length)fehler($('#fehler'),`⚠ Doppelt: ${doppelt.join(', ')}`);
+ zeichne()}
+const auswahl=()=>[...wahl].map(w=>w.split(':').map(Number));
+$('#ordnen-knopf').onclick=()=>{
+ ordnen=!ordnen;wahl.clear();fehler($('#fehler'));
+ if(ordnen){$('#liste').querySelectorAll('.karte').forEach(el=>el.merken());klassen=klassen.filter(k=>k.id||stand(k).namen.length)}
+ $('#ordnen-knopf').classList.toggle('on',ordnen);$('#liste').hidden=ordnen;$('#ordnen').hidden=!ordnen;$('#neu-knopf').hidden=ordnen;zeichne()};
+
+let zug=null;   // laufendes Antippen oder Ziehen
+const geist=$('#geist'),ziele=z=>$('#ordnen').querySelectorAll('.ziel').forEach(el=>el!==z&&el.classList.remove('ziel'));
+const unter=e=>document.elementFromPoint(e.clientX,e.clientY)?.closest('#ordnen .klasse');
+$('#ordnen').addEventListener('pointerdown',e=>{
+ if(e.button)return;
+ const karte=e.target.closest('.klasse');if(!karte)return;
+ zug={x:e.clientX,y:e.clientY,i:karte.dataset.i,chip:e.target.closest('.chip'),griff:e.target.closest('.griff'),weit:false}});
+addEventListener('pointermove',e=>{
+ if(!zug)return;
+ if(!zug.weit){
+  if(Math.hypot(e.clientX-zug.x,e.clientY-zug.y)<8)return;
+  if(!zug.chip&&!zug.griff){zug=null;return}
+  zug.weit=true;const i=+zug.i,sch=zug.chip&&i+':'+zug.chip.dataset.j;
+  zug.wer=zug.griff?stand(klassen[i]).namen.map((n,j)=>[i,j]):wahl.has(sch)?auswahl():[[i,+zug.chip.dataset.j]];
+  geist.textContent=zug.griff?stand(klassen[i]).name:zug.wer.length>1?`${zug.wer.length}`:zug.chip.textContent;geist.hidden=false}
+ geist.style.left=e.clientX+'px';geist.style.top=e.clientY+'px';
+ const z=unter(e);ziele(z);z?.classList.add('ziel');
+ if(e.clientY<70)scrollBy(0,-14);else if(e.clientY>innerHeight-50)scrollBy(0,14)});
+addEventListener('pointerup',e=>{
+ if(!zug)return;const z=zug;zug=null;geist.hidden=true;
+ if(z.weit){const k=unter(e);ziele(null);if(k&&k.dataset.i!==z.i)schieben(z.wer,k.dataset.i);return}
+ if(z.chip){const s=z.i+':'+z.chip.dataset.j;if(wahl.delete(s)||wahl.add(s))malen();return}
+ if(wahl.size||z.i==='neu')schieben(auswahl(),z.i)});
+addEventListener('pointercancel',()=>{zug=null;geist.hidden=true;ziele(null)});
 
 /* Putzämtli-Import: Listen in die Karten übernehmen – gleicher Name ersetzt, Neues kommt dazu, gespeichert wird erst mit «Speichern» / «Alle speichern». */
 const sortiert=l=>l.sort((a,b)=>{const x=a.neu||a,y=b.neu||b;return (x.stufe==null)-(y.stufe==null)||(x.stufe||0)-(y.stufe||0)||String(x.name).localeCompare(String(y.name),'de')});
@@ -148,9 +224,9 @@ $('#putz-knopf').onclick=()=>{putz.hidden=!putz.hidden;if(!putz.hidden)putz.scro
 $('#putz-zu').onclick=()=>{putz.hidden=true};
 function lesen(text){
  ergebnis.textContent='';fehler($('#fehler'));
- try{let d;try{d=JSON.parse(text)}catch{throw new Error('Die Datei lässt sich nicht lesen – ist es die klassenlisten.json des Putzämtli-Managers?')}
+ try{let d;try{d=JSON.parse(text)}catch{throw new Error('⚠ Datei defekt')}
   const listen=ausPutzaemtli(d);const r=uebernehmen(listen);
-  ergebnis.innerHTML=`<b>${listen.length} Listen</b> mit ${r.kinder} Kindern gelesen${r.ersetzt?` · ${r.ersetzt} bestehende ersetzt`:''}${r.neu?` · ${r.neu} neu`:''}.`;
+  ergebnis.innerHTML=`<b>${listen.length} Listen</b> · ${r.kinder} Kinder`;
   $('#alle-knopf').scrollIntoView({behavior:'smooth',block:'center'})}
  catch(x){fehler(ergebnis,x)}
 }

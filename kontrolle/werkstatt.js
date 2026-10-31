@@ -181,22 +181,22 @@ const W=(()=>{
  const namen={klassen:()=>api('/namen/klassen'),speichern:k=>post('/namen/speichern',k),entfernen:id=>post('/namen/entfernen',{id})};   // Vornamen pro Klasse für «Wer bist du?»
  /* Motiv-Wünsche aus dem Vorlagen-Generator: Claude zeichnet im Worker (werkzeug/anmelden/wunsch.js), aufschalten schreibt Bild,
     figuren.json und Quelle in einem Commit. Die Vorlage daraus rechnet die Action .github/workflows/motive.yml. Im Repo stehen diese Dateien mit LF. */
- const FIG='werkzeug/vorlagen/figuren.json',QUELLEN='werkzeug/vorlagen/quellen.md',QK='## Von Claude gezeichnet (Wünsche)';
+ const FIG='werkzeug/vorlagen/figuren.json',QUELLEN='werkzeug/vorlagen/quellen.md',QK='## Von Claude gezeichnet (Wünsche)',QE='## Echte Bilder (Wünsche)';
  const slug=s=>s.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').normalize('NFD').replace(/\p{M}/gu,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
  const wuensche={liste:()=>api('/wunsch/liste'),zeichnen:(id,hinweis,bild)=>post('/wunsch/zeichnen',{id,hinweis,bild}),
   ablehnen:(id,grund)=>post('/wunsch/ablehnen',{id,grund}),loeschen:id=>post('/wunsch/loeschen',{id}),
-  async aufschalten(id,name,welt,png){   // png: Base64 ohne «data:»-Vorspann; liefert die neue Figur-ID
+  async aufschalten(id,name,welt,png,echt){   // png: Base64 ohne «data:»-Vorspann, echt: Bild statt Zeichnung, id leer ohne Wunsch; liefert die neue Figur-ID
    let figur='';
    await commit(APP,async basis=>{
     const [f,q]=await Promise.all([datei(APP,FIG,'text',basis),datei(APP,QUELLEN,'text',basis)]),d=JSON.parse(f),ids=new Set(d.figuren.map(e=>e.id));
     const s='wu-'+(slug(name)||'motiv');figur=s;for(let i=2;ids.has(figur);i++)figur=s+'-'+i;
     d.figuren.push({id:figur,name,welt,datei:figur+'.png'});
-    const zeile=`| ${name.replace(/\|/g,'/')} | ${figur} | – | Claude (Anthropic), gewünscht im Vorlagen-Generator, geprüft von der Lehrperson | eigene Zeichnung |`;
-    let t=(q||'').replace(/\s*$/,'\n');const i=t.indexOf(QK);
-    if(i<0)t+=`\n${QK}\n\nKinder wünschen sich im Vorlagen-Generator ein fehlendes Motiv. Claude zeichnet es neu als SVG (ohne Vorlage, kein fremdes Bild), die Lehrperson prüft es vor dem Aufschalten.\n\n| Motiv | Figur-ID | URL | Autor | Lizenz |\n|---|---|---|---|---|\n${zeile}\n`;
+    const zeile=`| ${name.replace(/\|/g,'/')} | ${figur} | – | ${echt?'Lehrperson, Unterrichtsmaterial':'Claude (Anthropic), gewünscht im Vorlagen-Generator, geprüft von der Lehrperson'} | ${echt?'Schulgebrauch':'eigene Zeichnung'} |`;
+    let t=(q||'').replace(/\s*$/,'\n');const QA=echt?QE:QK,i=t.indexOf(QA);
+    if(i<0)t+=`\n${QA}\n\n${echt?'Logos und Bilder, die die Lehrperson in der Kontrolle unter «Wünsche» einsetzt.':'Kinder wünschen sich im Vorlagen-Generator ein fehlendes Motiv. Claude zeichnet es neu als SVG (ohne Vorlage, kein fremdes Bild), die Lehrperson prüft es vor dem Aufschalten.'}\n\n| Motiv | Figur-ID | URL | Autor | Lizenz |\n|---|---|---|---|---|\n${zeile}\n`;
     else{const ende=t.indexOf('\n\n',t.indexOf('\n|---',i)+1);t=ende<0?t+zeile+'\n':t.slice(0,ende+1)+zeile+'\n'+t.slice(ende+1)}
-    return {['werkzeug/vorlagen/bilder/'+figur+'.png']:{base64:png},[FIG]:JSON.stringify(d,null,1)+'\n',[QUELLEN]:t}},'Vorlagen: Wunsch-Motiv «'+name+'» von Claude gezeichnet');
-   await post('/wunsch/fertig',{id,figur,titel:name});return figur}};
+    return {['werkzeug/vorlagen/bilder/'+figur+'.png']:{base64:png},[FIG]:JSON.stringify(d,null,1)+'\n',[QUELLEN]:t}},echt?'Vorlagen: Bild «'+name+'» eingesetzt':'Vorlagen: Wunsch-Motiv «'+name+'» von Claude gezeichnet');
+   if(id)await post('/wunsch/fertig',{id,figur,titel:name});return figur}};
  /* Unterrichtsmaterial (material.html): Dateien unter material/ in der Werkstatt, Liste in material/katalog.json */
  const mPfad=p=>p.split('/').map(encodeURIComponent).join('/');
  const material={katalog:async()=>LOKAL?(await fetch('/m/katalog.json',{cache:'no-store'})).json():JSON.parse(await datei(WERK,'material/katalog.json')),
