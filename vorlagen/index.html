@@ -34,6 +34,10 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .wunsch form{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
 .wunsch input{flex:1 1 160px;max-width:320px;font:inherit;font-size:16px;color:var(--ink);background:var(--surface2);border:2px solid var(--line);border-radius:12px;padding:7px 12px;min-width:0}
 .wunsch p{flex-basis:100%;margin:2px 0 0}
+.w-stil{display:inline-flex;align-items:center;gap:7px;padding:4px 13px 4px 5px;font-weight:700}
+.w-stil svg{width:48px;height:32px;flex:none;background:#fff;border-radius:8px}
+.w-stil:disabled{opacity:.45}
+@media(max-width:560px){.wunsch input{flex-basis:100%;max-width:none}.w-stil{flex:1;justify-content:center}}
 .gruppe h3{font:700 13px Nunito,sans-serif;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin:0 0 8px}
 .kats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
 .kat{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px 10px;border:2px solid var(--line);border-radius:16px;background:var(--surface2);color:var(--ink);font:inherit;cursor:pointer}
@@ -225,7 +229,6 @@ input[type=range]{width:100%;accent-color:var(--acc)}
           <input type="text" inputmode="decimal" id="nh" aria-label="Höhe der Schachtel in cm">
           <span class="einheit">cm</span>
         </div>
-        <p class="hinweis">Klebelaschen und Falzlinien kommen automatisch dazu. Für einen Stülpdeckel die offene Schachtel 2 mm breiter und tiefer und wenige cm hoch machen.</p>
       </div>
       <div class="feld">
         <span class="lbl" id="lbl-papier">Papier</span>
@@ -258,16 +261,16 @@ input[type=range]{width:100%;accent-color:var(--acc)}
         </div>
       </div>
       <div class="feld wahl">
-        <label id="feld-farbig" hidden><input type="checkbox" id="farbig"> farbig (ohne Häkchen: Silhouette)</label>
+        <label id="feld-farbig" hidden><input type="checkbox" id="farbig"> farbig</label>
         <div class="farben" id="farben" hidden></div>
         <label id="feld-det"><input type="checkbox" id="det"> Augen und Linien zeigen</label>
         <label><input type="checkbox" id="spiegel"> spiegeln</label>
       </div>
       <div class="feld" id="feld-modus">
         <span class="lbl" id="lbl-modus">Anordnung auf dem Blatt</span>
-        <div class="chips l-modus" id="modus" role="group" aria-labelledby="lbl-modus"><button type="button" class="chip" data-modus="auto" aria-pressed="true" title="Alle Formen der Liste werden platzsparend aufs Blatt gelegt">Automatisch packen</button><button type="button" class="chip" data-modus="frei" aria-pressed="false" title="Jede Form einzeln verschieben, drehen und strecken – auch auf ein anderes Blatt">Frei anordnen</button></div>
+        <div class="chips l-modus" id="modus" role="group" aria-labelledby="lbl-modus"><button type="button" class="chip" data-modus="auto" aria-pressed="true">Automatisch packen</button><button type="button" class="chip" data-modus="frei" aria-pressed="false">Frei anordnen</button></div>
       </div>
-      <button type="button" class="knopf dazu" id="dazu" title="Diese Form mit Grösse und Anzahl in die Liste nehmen – so kommen mehrere Formen zusammen aufs Blatt">+ Aufs Blatt</button>
+      <button type="button" class="knopf dazu" id="dazu">+ Aufs Blatt</button>
       <div class="liste" id="liste" hidden>
         <div class="l-kopf"><b id="l-titel">Auf dem Blatt</b><button type="button" class="l-leeren" id="leeren">Liste leeren</button></div>
         <ul id="l-ul"></ul>
@@ -276,7 +279,7 @@ input[type=range]{width:100%;accent-color:var(--acc)}
       <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
       <button type="button" class="knopf pausen-auf" id="pausen-auf"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 8.5c-1.2-1.7-4-1.1-4 1 0 2 2.4 3.6 4 5 1.6-1.4 4-3 4-5 0-2.1-2.8-2.7-4-1z"/></svg><span>Auf dem Bildschirm abpausen</span></button>
       <p class="info" id="info" aria-live="polite"></p>
-      <p class="hinweis">Beim Drucken «Tatsächliche Grösse» oder 100 % wählen, nicht «An Seite anpassen». Bei A3 im Druckfenster auch A3 als Papier wählen. Die 5-cm-Linie unten auf dem Blatt zeigt, ob es stimmt.</p>
+      <p class="hinweis">🖨 100 %</p>
     </section>
   </div>
 </main>
@@ -518,7 +521,9 @@ function auswahl(){
     ).join('')+'</div></div>').join('')+'<p class="hinweis" id="nichts" hidden>Nicht gefunden</p>'
     +'<details class="wunsch" id="wunsch"><summary>✨ Motiv wünschen</summary><form id="wunsch-form" autocomplete="off">'
     +'<input type="text" id="w-name" maxlength="40" placeholder="Motiv" aria-label="Motiv">'
-    +'<button type="submit" class="knopf" id="w-los">Wünschen</button><p class="hinweis" id="w-antwort" role="status"></p></form></details>';
+    +'<button type="submit" class="knopf w-stil" value="comic"><svg viewBox="0 0 48 32" aria-hidden="true"><g stroke="#000" stroke-width="2.5" stroke-linejoin="round"><path d="M33 16 45 6v20z" fill="#FFB02E"/><ellipse cx="20" cy="16" rx="16" ry="12.5" fill="#FFB02E"/><circle cx="13" cy="13" r="5.5" fill="#fff" stroke-width="2"/></g><circle cx="12" cy="13" r="2.6"/></svg>Comic</button>'
+    +'<button type="submit" class="knopf w-stil" value="echt"><svg viewBox="0 0 48 32" aria-hidden="true"><g stroke="#000" stroke-linejoin="round"><path d="M37 16c3-3 6-7 10-9-1.500 6-1.500 12 0 18-4-2-7-6-10-9zM17 9c2-3 6-5 9-5 1 2 1 4 1 7z" fill="#6F7F4F"/><path d="M2 17C9 8 27 6 39 16 27 25 9 26 2 17z" fill="#93A56B"/></g><path d="M4 19c9 6 24 4 33-3-8 8-25 10-33 3z" fill="#E6E2C4"/><g fill="#4C5A35"><circle cx="16" cy="13" r="1"/><circle cx="22" cy="12" r="1"/><circle cx="27" cy="14" r="1"/><circle cx="19" cy="17" r="1"/><circle cx="25" cy="18" r="1"/></g><path d="M11 11c2 3 2 8 0 11" fill="none" stroke="#000" stroke-width=".8"/><circle cx="7" cy="15" r="1.600" fill="#F2D16B" stroke="#000" stroke-width=".7"/><circle cx="7" cy="15" r=".7"/></svg>Echt</button>'
+    +'<p class="hinweis" id="w-antwort" role="status"></p></form></details>';
   let offen=null;
   const oeffnen=g=>{
     offen=g;$('suche').value='';$('nichts').hidden=true;
@@ -540,16 +545,16 @@ function auswahl(){
   // Fehlendes Motiv wünschen: Claude zeichnet es, die Lehrperson prüft es und schaltet es auf
   $('w-name').addEventListener('input',e=>e.target.dataset.selbst=1);
   $('wunsch-form').addEventListener('submit',async e=>{
-    e.preventDefault();const a=$('w-antwort'),name=$('w-name').value.trim();
+    e.preventDefault();const a=$('w-antwort'),name=$('w-name').value.trim(),stil=e.submitter?.value||'comic',knoepfe=e.target.querySelectorAll('button');
     if(name.length<2){a.textContent='⚠ Motiv fehlt';$('w-name').focus();return}
-    $('w-los').disabled=true;a.textContent='…';
+    knoepfe.forEach(k=>k.disabled=true);a.textContent='…';
     try{
-      const r=await fetch('https://schrittli-anmelden.conradinjoos.workers.dev/wunsch/neu',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,text:''})});
+      const r=await fetch('https://schrittli-anmelden.conradinjoos.workers.dev/wunsch/neu',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,text:'',stil})});
       const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(r.status===429?'⚠ Später nochmals':'⚠ Nicht geklappt');
       a.textContent=j.figur&&byId[j.figur]?`✓ Gibt es: ${byId[j.figur].name}`:j.neu?'✓ Wird gezeichnet':'✓ Kommt bald';
       $('w-name').value='';delete $('w-name').dataset.selbst;
     }catch(err){a.textContent=err instanceof TypeError?'⚠ Offline':err.message}
-    finally{$('w-los').disabled=false}
+    finally{knoepfe.forEach(k=>k.disabled=false)}
   });
   $('formen').addEventListener('click',e=>{
     const kat=e.target.closest('.kat');

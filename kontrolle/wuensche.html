@@ -60,6 +60,7 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
 const zeit=z=>{const d=new Date(z);return isNaN(d)?'':d.toLocaleDateString('de-CH',{day:'numeric',month:'short'})+', '+d.toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'})};
 const STATUS={neu:'Wartet auf Claude',zeichnet:'Claude zeichnet',bereit:'Zum Prüfen',fehler:'Fehler',abgelehnt:'Abgelehnt',fertig:'Aufgeschaltet'};
+const STIL={comic:'Comic',echt:'Echt'};
 let daten=null,urls=[],beschaeftigt=0;
 let echt={},eigene=[],ziel=null,zaehler=0;   // echt: Wunsch-ID → gewähltes Bild (data:-PNG), eigene: Bilder ohne Wunsch
 
@@ -114,10 +115,10 @@ function karte(w){
   ?`<div class="felder"><label>Name im Generator<input type="text" class="titel" maxlength="40" value="${esc(w.titel||w.name)}"></label>
     <label>Welt<select class="welt">${welten}</select></label></div>
    <div class="reihe"><button class="p" data-tun="auf">Übernehmen</button>${e?'':'<button class="s" data-tun="nochmal">Nochmals zeichnen</button>'}<button class="s" data-tun="bild">🖼 Bild</button><button class="s rot" data-tun="ab">${w.eigen?'Verwerfen':'Ablehnen'}</button></div>
-   ${e?'':'<form class="reihe nochmal" hidden><input type="text" class="hinweis grow" maxlength="500" placeholder="Hinweis"><button class="p">Zeichnen</button></form>'}`
+   ${e?'':`<form class="reihe nochmal" hidden><input type="text" class="hinweis grow" maxlength="500" placeholder="Hinweis"><select class="stil" aria-label="Stil">${Object.entries(STIL).map(([k,t])=>`<option value="${k}"${k===w.stil?' selected':''}>${t}</option>`).join('')}</select><button class="p">Zeichnen</button></form>`}`
   :`<div class="reihe"><button class="s" data-tun="jetzt"${w.status==='zeichnet'?' disabled':''}>Jetzt zeichnen</button><button class="s" data-tun="bild">🖼 Bild</button><button class="s rot" data-tun="ab">Ablehnen</button></div>`;
  return `<section class="karte wunsch" data-id="${w.id}"><div class="bild">${bild}</div><div>
-  ${w.eigen?'':`<div class="reihe"><h2 class="grow">«${esc(w.name)}»</h2><span class="status ${e?'bereit':w.status}">${e?'🖼 Bild':STATUS[w.status]||esc(w.status)}</span></div>
+  ${w.eigen?'':`<div class="reihe"><h2 class="grow">«${esc(w.name)}»</h2>${e?'':`<span class="status">${STIL[w.stil]||STIL.comic}</span>`}<span class="status ${e?'bereit':w.status}">${e?'🖼 Bild':STATUS[w.status]||esc(w.status)}</span></div>
   <p class="klein">${info}</p>`}${w.text?`<p class="kind">«${esc(w.text)}»</p>`:''}
   ${w.grund&&w.status!=='abgelehnt'?`<p class="klein">${esc(w.grund)}</p>`:''}${w.hinweis?`<p class="klein">Letzter Hinweis: ${esc(w.hinweis)}</p>`:''}
   ${knoepfe}<p class="fehler"></p></div></section>`}
@@ -141,9 +142,9 @@ async function arbeit(knopf,text,fn){
  try{await fn();zeigen()}
  catch(x){f.textContent=String(x.message||x);box.querySelectorAll('button,input,select').forEach(e=>e.disabled=false);knopf.textContent=alt}
  finally{beschaeftigt--}}
-async function zeichnen(knopf,id,hinweis,bild){
+async function zeichnen(knopf,id,hinweis,bild,stil){
  await arbeit(knopf,'Claude zeichnet … (1–3 Min.)',async()=>{
-  const r=await W.wuensche.zeichnen(id,hinweis,bild);
+  const r=await W.wuensche.zeichnen(id,hinweis,bild,stil);
   daten.wuensche=daten.wuensche.map(w=>w.id===id?r.wunsch:w);daten.monat=r.monat})}
 
 document.addEventListener('click',async e=>{
@@ -172,7 +173,7 @@ document.addEventListener('submit',async e=>{
  const f=e.target.closest('form.nochmal');if(!f)return;e.preventDefault();
  const box=f.closest('[data-id]'),id=box.dataset.id,w=finde(id),hinweis=f.querySelector('.hinweis').value.trim();
  let bild='';try{bild=await alsPng(w.svg,512)}catch{}
- zeichnen(f.querySelector('button'),id,hinweis,bild)});
+ zeichnen(f.querySelector('button'),id,hinweis,bild,f.querySelector('.stil').value)});
 
 if(W.LOKAL){$('#liste').innerHTML='<div class="nichts"><a href="https://conradinjoos-lab.github.io/schrittli/kontrolle/wuensche.html">Online öffnen</a></div>';return}
 try{await W.bereit();await laden()}catch(x){$('#liste').innerHTML=`<div class="nichts">⚠ ${esc(x.message||x)}</div>`;return}
