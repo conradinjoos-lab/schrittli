@@ -120,7 +120,7 @@ const W=(()=>{
   if(!zuschnitte.has(n))zuschnitte.set(n,zuschnitt(streifen,(n%SP)*B,Math.floor(n/SP)*H,B,H));return zuschnitte.get(n)}
 
  /* ---------- Speichern / Veröffentlichen ---------- */
- function sauber(id,e){e={...e,source:{type:'youtube',id}};e.steps=(e.steps||[]).map(s=>({t:Math.round(+s.t*10)/10,label:String(s.label).trim()})).sort((a,b)=>a.t-b.t);return e}
+ function sauber(id,e){e={...e,source:{type:'youtube',id}};e.steps=(e.steps||[]).map(s=>{const z={t:Math.round(+s.t*10)/10,label:String(s.label).trim()},k=String(s.kurz||'').trim();if(k)z.kurz=k;return z}).sort((a,b)=>a.t-b.t);return e}
  async function lokalPost(id,was,e){const r=await fetch('/api/'+id+'/'+was,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(e)});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.fehler||'Fehler beim Speichern');return j}
  let kette=Promise.resolve();
  function speichern(id,e){

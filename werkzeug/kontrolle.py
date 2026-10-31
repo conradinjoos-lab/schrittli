@@ -126,6 +126,20 @@ def daten(vid):
     return {'analyse': a, 'entwurf': v, 'schule': schul_eintrag(vid), 'themen': themen(), 'vokabular': vokabular(), 'blaetter': blaetter}
 
 
+def schritt(s):
+    z = {'t': round(float(s['t']), 1), 'label': str(s['label']).strip()}
+    kurz = str(s.get('kurz') or '').strip()
+    if kurz: z['kurz'] = kurz
+    return z
+
+
+def kurz_behalten(eintrag, alt):
+    """Entwürfe tragen den Kurztext oft nur in schule.json: Er bleibt, solange das label gleich ist."""
+    bisher = {s['label']: s['kurz'] for s in alt.get('steps') or [] if s.get('kurz')}
+    for s in eintrag.get('steps') or []:
+        if not s.get('kurz') and s.get('label') in bisher: s['kurz'] = bisher[s['label']]
+
+
 def uebernehmen(vid, eintrag=None):
     eintrag = eintrag or lies(ENTWURF / vid / 'video.json')
     if not eintrag: raise ValueError(f'Kein Entwurf für {vid}')
@@ -135,7 +149,7 @@ def uebernehmen(vid, eintrag=None):
     vids = d['videos']
     for i, e in enumerate(vids):
         if e.get('id') == eintrag.get('id') or (e.get('source') or {}).get('id') == vid:
-            vids[i] = eintrag; break
+            kurz_behalten(eintrag, e); vids[i] = eintrag; break
     else:
         vids.append(eintrag)
     schreibe_json(SCHULE, d)
@@ -203,7 +217,7 @@ class H(BaseHTTPRequestHandler):
         try:
             e = json.loads(self.rfile.read(int(self.headers.get('Content-Length', 0))).decode('utf-8'))
             e['source'] = {'type': 'youtube', 'id': vid}
-            e['steps'] = sorted(({'t': round(float(s['t']), 1), 'label': str(s['label']).strip()} for s in e.get('steps', [])), key=lambda s: s['t'])
+            e['steps'] = sorted(map(schritt, e.get('steps', [])), key=lambda s: s['t'])
             (ENTWURF / vid).mkdir(parents=True, exist_ok=True)
             schreibe_json(ENTWURF / vid / 'video.json', e)
             if was == 'uebernehmen':

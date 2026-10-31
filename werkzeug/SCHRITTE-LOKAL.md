@@ -31,7 +31,7 @@ Genau eine Datei: `werkzeug/entwurf/<VIDEOID>/video.json`
  "sprache": "Hochdeutsch",
  "hinweis": "1 Satz für die Lehrperson: Material, Stolperstein.",
  "material": ["wolle", "karton", "schere", "zirkel"],
- "steps": [{"t": 0, "label": "Material richten: Wolle, Schere, Zirkel, Karton"}, {"t": 17.5, "label": "Karton falten, grossen und kleinen Kreis zeichnen"}],
+ "steps": [{"t": 0, "label": "Material richten: Wolle, Schere, Zirkel, Karton", "kurz": "Material richten"}, {"t": 17.5, "label": "Karton falten, grossen und kleinen Kreis zeichnen", "kurz": "Falte Karton, zeichne Kreise"}],
  "task": {"text": "", "deliverable": "keine"}
 }
 ```
@@ -58,6 +58,9 @@ Genau eine Datei: `werkzeug/entwurf/<VIDEOID>/video.json`
 - **Nie ein Schritt «Zuschauen: …»** (Regel der Lehrperson, 25.10.2026). Jeder Schritt ist eine Handlung, die das Kind nachmacht. Tipps, Varianten und Vorführungen mitten im Video gehören zum vorherigen Arbeitsschritt; Varianten oder Vorführungen kurz vor dem Schluss gehören zum Schritt «Fertig – …», der dann dort beginnt.
 - Letzter Schritt am Beginn des Abspanns/Outros: «Fertig – schau dein Werk an» (oder konkret: «Fertig – schau deinen Pompon an»). So verschwindet das Kanal-Geschwätz am Schluss hinter dem Stopp.
 - Labels: höchstens 8 Wörter, Befehlsform oder knappe Beschreibung, Sprache für 1.–3. Klasse, Schweizer Rechtschreibung (ss statt ß), keine Anführungszeichen, kein Emoji. Beispiele: «Faden einfädeln, Knoten ans Ende», «Rechter Faden über die Mitte», «Immer so weiter bis zum Schluss».
+- `kurz`: steht bei jedem Schritt. Die Kinder lesen ihn neben dem Video, das `label` liest der Lautsprecher vor. Höchstens 4 Wörter, Du-Befehl mit dem Verb zuerst, Schweizer Rechtschreibung (ss statt ß), nur was im `label` steht. Beispiele: «Falte Karton, zeichne Kreise», «Fädle den Faden ein».
+- `kurz` ist bei Material immer «Material richten», am Schluss «Fertig – dein Pompon!» mit dem konkreten Werk.
+- `kurz` bei Heissleim, Ofen, Bohren, Bügeln, Cutter und heissem Wachs in der Grundform statt als Du-Befehl: «Löcher bohren», «Mit Heissleim kleben». «Lehrperson» steht nur, wenn das `label` sie nennt.
 - Steht im Brief «Video ist schon erfasst»: Schreibe trotzdem deine eigene Fassung aus dem Material; der bestehende Eintrag ist nur ein Vergleich, nicht die Vorlage.
 
 ## Bericht am Schluss

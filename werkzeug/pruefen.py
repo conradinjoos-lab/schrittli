@@ -5,7 +5,7 @@ Aufruf:  python werkzeug/pruefen.py [<VIDEOID> …]      (ohne Argumente: alle E
 
 Prüft die Regeln aus SCHRITTE-LOKAL.md: Pflichtfelder, areaId, Stufen, Titel ≤ 5 Wörter, Material nur aus dem
 Vokabular (max 8), erster Schritt bei 0, Reihenfolge, Abstand ≥ 3 s, Labels ≤ 8 Wörter / kein ß / keine Anführungszeichen,
-letzter Schritt «Fertig …», Anzahl Schritte zur Dauer. Fehler (!) müssen weg, Hinweise (?) sind eine Prüfbitte.
+kurz vorhanden und ≤ 4 Wörter, letzter Schritt «Fertig …», Anzahl Schritte zur Dauer. Fehler (!) müssen weg, Hinweise (?) sind eine Prüfbitte.
 """
 import json, re, sys
 from pathlib import Path
@@ -37,12 +37,21 @@ def belegt():
     return out
 
 
+def kurztexte():
+    """Video-ID → {label: kurz} aus schule.json; dort stehen die Kurztexte veröffentlichter Videos."""
+    try: schule = json.loads((WURZEL / 'schule' / 'schule.json').read_text(encoding='utf-8'))['videos']
+    except Exception: return {}
+    return {(e.get('source') or {}).get('id'): {s.get('label'): s.get('kurz') for s in e.get('steps') or []} for e in schule}
+
+
 BELEGT = None
+KURZ = None
 
 
 def pruefe(vid, vok):
-    global BELEGT
+    global BELEGT, KURZ
     BELEGT = BELEGT or belegt()
+    KURZ = KURZ if KURZ is not None else kurztexte()
     p = ENTWURF / vid / 'video.json'
     if not p.exists(): return [f'! kein Entwurf ({p.relative_to(WURZEL)})']
     try: v = json.loads(p.read_text(encoding='utf-8'))
@@ -96,6 +105,10 @@ def pruefe(vid, vok):
         if 'ß' in lab: f(f'Schritt {i+1}: ß → ss: {lab}')
         if re.search(r'[«»"„“”‚‘’\']', lab): f(f'Schritt {i+1}: Anführungszeichen: {lab}')
         if re.search(r'[\U0001F300-\U0001FAFF☀-➿]', lab): f(f'Schritt {i+1}: Emoji: {lab}')
+        kurz = (s.get('kurz') or KURZ.get(vid, {}).get(lab) or '').strip()
+        if lab and not kurz and not v.get('_weglassen'): h(f'Schritt {i+1}: kurz fehlt: {lab}')
+        woerter = len([w for w in kurz.split() if re.search(r'\w', w)])  # «Fertig – dein Werk!»: Der Strich ist kein Wort
+        if woerter > 4: h(f'Schritt {i+1}: kurz hat {woerter} Wörter: {kurz}')
         if not isinstance(t, (int, float)) or round(t, 1) != t: f(f'Schritt {i+1}: t {t} nicht auf eine Dezimale')
         if i and isinstance(t, (int, float)) and isinstance(steps[i-1].get('t'), (int, float)):
             d = t - steps[i-1]['t']

@@ -43,7 +43,7 @@ Alles läuft lokal (yt-dlp, ffmpeg, Pillow, opencv). Schritte 1–4 schreiben im
 
 ## Was die Agenten bekommen
 
-`werkzeug/SCHRITTE-LOKAL.md` enthält alle Regeln (Stopp auf den Bildwechsel vor dem Sprechbeginn, 6–10 Schritte, Labels ≤ 8 Wörter, Schweizer Schreibweise, Material-IDs aus `quelle/agenten/VOKABULAR.md`). Nicht zusätzlich umschreiben – bei Regeländerungen die Datei anpassen.
+`werkzeug/SCHRITTE-LOKAL.md` enthält alle Regeln (Stopp auf den Bildwechsel vor dem Sprechbeginn, 6–10 Schritte, Labels ≤ 8 Wörter, `kurz` ≤ 4 Wörter, Schweizer Schreibweise, Material-IDs aus `quelle/agenten/VOKABULAR.md`). Nicht zusätzlich umschreiben – bei Regeländerungen die Datei anpassen.
 
 ## Fehlerbilder
 

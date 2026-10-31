@@ -44,7 +44,6 @@ header h1{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margi
 #arbeit{max-width:1320px;margin:0 auto;padding:16px 18px 60px;display:flex;flex-direction:column;gap:14px}
 .karte{background:#fff;border-radius:18px;box-shadow:var(--shadow-sm);padding:14px 16px}
 .karte h3{font:600 16px var(--display);margin:0 0 8px;display:flex;gap:8px;align-items:baseline}
-.karte h3 .mute{font:400 13px var(--body)}
 
 /* Bühne = so sieht es das Kind in der App */
 .buehne{background:var(--wall);border-radius:22px;padding:12px 14px 14px;display:grid;grid-template-columns:minmax(0,min(100%,calc(46vh * 16 / 9))) minmax(240px,1fr);gap:14px;justify-content:center}
@@ -114,6 +113,8 @@ header h1{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margi
 .enr{flex:none;width:30px;height:30px;border-radius:50%;background:var(--b);color:#fff;display:grid;place-items:center;font:600 15px var(--display)}
 .enr.skip{background:var(--wall);color:var(--kohle)}
 #elabel{flex:1;font-weight:700;font-size:16px}
+.ekurz{display:flex;gap:8px;align-items:center;margin:8px 0 0 38px;font-size:12px;font-weight:700;color:var(--mute)}
+.ekurz input{flex:1;min-width:0}
 .skipnote{margin:8px 0 0;font-size:13px;background:#FFF8E6;border-radius:10px;padding:6px 10px}
 .warn{display:flex;flex-wrap:wrap;gap:4px 12px;margin:8px 0 0 38px;font-size:12px}
 .warn .r{color:var(--r);font-weight:700}.warn .g{color:var(--mute)}
@@ -143,7 +144,6 @@ details summary{cursor:pointer;color:var(--b-dk);font-weight:700;font-size:14px;
 .chip b{cursor:pointer;color:var(--mute);font-weight:400;padding:0 2px}.chip b:hover{color:var(--r)}
 .chip.unk{border-color:var(--o);background:#FFE4D4}
 #matadd{width:100%}
-#mathin{margin:8px 0 0}
 
 /* Abschlussansicht */
 #abschluss{max-width:780px;margin:18px auto 60px;padding:22px 26px 28px;background:#fff;border-radius:18px;box-shadow:var(--shadow-sm)}
@@ -215,7 +215,7 @@ dialog .row{display:flex;gap:4px;justify-content:flex-end;margin-top:16px}
  </div>
 
  <section class="karte">
-  <h3>Zeitleiste <span class="mute">Klick wählt einen Schritt · Grenze ziehen = von/bis verschieben · Doppelklick teilt</span></h3>
+  <h3>Zeitleiste</h3>
   <div class="tlwrap"><div id="tl"></div><div id="achse"></div><div id="tip"><img alt=""><span></span></div></div>
  </section>
 
@@ -225,10 +225,9 @@ dialog .row{display:flex;gap:4px;justify-content:flex-end;margin-top:16px}
    <div id="leer" hidden>Noch keine Schritte.<br><button class="p" id="suggest" style="margin-top:10px">Schritte vorschlagen</button> <button id="add0">Leer beginnen</button></div>
   </section>
   <section class="karte">
-   <h3>Material <span class="mute">wird vor dem Video als Karte gezeigt</span></h3>
+   <h3>Material</h3>
    <div class="chips" id="chips"></div>
    <input id="matadd" list="vok" placeholder="Material tippen, Enter">
-   <p class="mute" id="mathin"></p>
   </section>
  </div>
 </div>
@@ -237,10 +236,8 @@ dialog .row{display:flex;gap:4px;justify-content:flex-end;margin-top:16px}
  <h2>Angaben</h2><div class="meta" id="meta"></div>
  <h2>Fertig?</h2><ul class="check" id="check"></ul>
  <h2>Veröffentlichen</h2>
- <p class="mute" style="margin:0">Der Schul-Link zeigt die Live-App mit genau diesen Schritten und dem Material. Veröffentlichen schreibt den Eintrag in schule.json<span id="pubhin"></span>.</p>
  <div class="pubrow"><button id="link">Schul-Link öffnen</button><button id="take2" class="p">Veröffentlichen…</button></div>
  <h2>Transkript <span id="txart" style="text-transform:none;letter-spacing:0;font-weight:400"></span></h2>
- <p class="mute" style="margin:0 0 6px">Klick auf die Zeit setzt den Beginn des gewählten Schritts auf den Bildwechsel davor; «+» legt dort einen neuen Schritt an. Blauer Rand = ein Stopp liegt mitten in dieser Zeile.</p>
  <div class="tx" id="tx"></div>
  <details id="kapwrap" hidden><summary>YouTube-Kapitel</summary><div class="tx" id="kap"></div></details>
 </div>
@@ -257,8 +254,7 @@ dialog .row{display:flex;gap:4px;justify-content:flex-end;margin-top:16px}
   <div><kbd>Ctrl+Z</kbd> rückgängig</div><div><kbd>Ctrl+S</kbd> speichern</div>
  </div>
  <h3 style="margin-top:16px">Einstellungen</h3>
- <label><input type="checkbox" id="snap" checked> Einrasten: Ziehen in der Zeitleiste springt auf den nächsten Bildwechsel (bis 0.4 s)</label>
- <p class="mute">Ein Schritt geht von seinem Beginn bis zum Beginn des nächsten. Das Video hält 0.08 s davor; dort sollte das Kind das Ergebnis sehen, nicht schon den nächsten Schritt. In den Standbildern: blau = aktueller Wert, orange = Bildwechsel.</p>
+ <label><input type="checkbox" id="snap" checked> Einrasten</label>
  <div class="row"><button id="suggest2">Schritte neu vorschlagen</button><button id="hilfezu" class="p">Schliessen</button></div>
 </dialog>
 <div id="toast"><span></span><button id="undo">Rückgängig</button></div>
@@ -268,7 +264,7 @@ dialog .row{display:flex;gap:4px;justify-content:flex-end;margin-top:16px}
 <script src="../vorlagen/melden.js" defer></script>
 <script>
 let ID=new URLSearchParams(location.search).get('id')||'';   // YouTube-Kennung; eine App-Kennung löst W.daten auf
-let D=null,E=null,sel=0,yt=null,ready=false,testEnde=null,hist=[],fut=[],dirty=false,saveTimer=null,snap=true,ansicht='A',txIdx=-1,drag=null,matSicht=false,PV=[];
+let D=null,E=null,sel=0,vorher=null,yt=null,ready=false,testEnde=null,hist=[],fut=[],dirty=false,saveTimer=null,snap=true,ansicht='A',txIdx=-1,drag=null,matSicht=false,PV=[];
 const $=s=>document.querySelector(s);
 const r1=x=>Math.round(x*10)/10;
 const fmt=t=>{t=Math.max(0,+t||0);const m=Math.floor(t/60),s=t-m*60;return m+':'+(s<10?'0':'')+s.toFixed(1)};
@@ -302,13 +298,13 @@ const matName=id=>(Object.fromEntries(D.vokabular)[id])||(MAT[id]?MAT[id][0]:id)
 
 /* ---------- Laden ---------- */
 async function lade(){
- $('#pubhin').textContent=W.LOKAL?' (danach noch git commit und push)':' – nach etwa einer Minute in der Schul-App';
  ladeBilder();
  try{await W.bereit();D=await W.daten(ID)}catch(x){$('#h1').textContent='Laden ging nicht: '+(x.message||x);return}
  if(D.id&&D.id!==ID){ID=D.id;history.replaceState(null,'','?id='+encodeURIComponent(ID))}
  const a=D.analyse;
  E=D.entwurf||D.schule||{id:'zw-video',areaId:'',stufen:[],title:a.title||'',source:{type:'youtube',id:ID},kanal:a.kanal||'',dauer:fmt(a.dauer).replace(/\.\d$/,''),alter:'ab 6',sprache:'Hochdeutsch',hinweis:'',material:[],steps:[],task:{text:'',deliverable:'keine'}};
- E.steps=(E.steps||[]).map(s=>({t:+s.t,label:String(s.label||'')}));E.material=E.material||[];E.stufen=E.stufen||[];for(const k of ['niveau','techniken','grundtechnik'])if(E['_'+k]!==undefined){if(E[k]===undefined)E[k]=E['_'+k];delete E['_'+k]}  // ältere Agenten-Entwürfe
+ const bisher=new Map(((D.schule||{}).steps||[]).filter(s=>s.kurz).map(s=>[s.label,s.kurz]));   // Entwürfe tragen den Kurztext oft nur in schule.json
+ E.steps=(E.steps||[]).map(s=>({t:+s.t,label:String(s.label||''),kurz:String(s.kurz||bisher.get(s.label)||'')}));E.material=E.material||[];E.stufen=E.stufen||[];for(const k of ['niveau','techniken','grundtechnik'])if(E['_'+k]!==undefined){if(E[k]===undefined)E[k]=E['_'+k];delete E['_'+k]}  // ältere Agenten-Entwürfe
 E.task=E.task||{text:'',deliverable:'keine'};
  $('#h1').textContent=E.title||ID;document.title='Kontrolle – '+(E.title||ID);
  if(D.entwurf)$('#status').textContent='Entwurf geladen';else msg(D.schule?'Kein Entwurf – Eintrag aus schule.json':'Kein Entwurf – leere Vorlage',true);
@@ -324,7 +320,7 @@ function pushHist(){hist.push(JSON.stringify(E.steps));if(hist.length>100)hist.s
 function undo(){if(!hist.length)return;fut.push(JSON.stringify(E.steps));E.steps=JSON.parse(hist.pop());sel=Math.min(sel,E.steps.length-1);markDirty();render();msg('Rückgängig')}
 function redo(){if(!fut.length)return;hist.push(JSON.stringify(E.steps));E.steps=JSON.parse(fut.pop());sel=Math.min(sel,E.steps.length-1);markDirty();render();msg('Wiederholt')}
 function markDirty(){dirty=true;$('#status').textContent='ungespeichert…';clearTimeout(saveTimer);saveTimer=setTimeout(()=>speichern(),W.pause)}
-function nutzlast(){const e=JSON.parse(JSON.stringify(E));e.steps=e.steps.map(s=>({t:r1(s.t),label:s.label.trim()})).sort((a,b)=>a.t-b.t);return e}
+function nutzlast(){const e=JSON.parse(JSON.stringify(E));e.steps=e.steps.map(s=>{const z={t:r1(s.t),label:s.label.trim()},k=(s.kurz||'').trim();if(k)z.kurz=k;return z}).sort((a,b)=>a.t-b.t);return e}
 async function post(fn){try{return await fn(ID,nutzlast())||{}}catch(x){msg(x.message||'Fehler beim Speichern',true);return null}}
 async function speichern(){clearTimeout(saveTimer);$('#status').textContent='speichere…';const stand=JSON.stringify(nutzlast());if(await post(W.speichern)){dirty=JSON.stringify(nutzlast())!==stand;if(dirty)return markDirty();$('#status').textContent='gespeichert '+new Date().toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'})}}
 addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
@@ -353,10 +349,12 @@ function satzBei(t){return D.analyse.transkript.find(([s,e])=>t>s+1.5&&t<e-1.0)}
 function hinweise(i){const s=E.steps[i],w=[];const n=words(s.label);
  if(!s.label.trim())w.push(['Titel fehlt',1]);if(n>8)w.push([n+' Wörter (max. 8)',1]);if(/ß/.test(s.label))w.push(['ß → ss',1]);if(/["«»„“]/.test(s.label))w.push(['Anführungszeichen',1]);
  if(/^\s*zuschau/i.test(s.label))w.push(['«Zuschauen» ist kein Schritt – löschen',1]);if(i===0&&s.t!==0&&!E.material.length)w.push(['erster Schritt nicht bei 0:00',1]);if(i>0&&s.t<=E.steps[i-1].t)w.push(['Zeit nicht aufsteigend',1]);
+ const k=(s.kurz||'').trim();if(s.label.trim()&&!k)w.push(['Kurz fehlt',0]);else{const n=k.split(/\s+/).filter(x=>/[\p{L}\p{N}]/u.test(x)).length;if(n>4)w.push([n+' Wörter (Kurz max. 4)',0])}
  const nx=E.steps[i+1];if(nx&&nx.t-s.t<3&&nx.t>s.t)w.push(['nur '+(nx.t-s.t).toFixed(1)+' s lang',0]);
  if(i>0){const z=satzBei(s.t);if(z)w.push(['beginnt mitten im Satz («'+z[2].slice(0,36)+(z[2].length>36?'…':'')+'» '+fmt(z[0])+'–'+fmt(z[1])+')',0])}
  return w}
 const rotBei=i=>hinweise(i).some(h=>h[1]===1);
+const warnung=h=>h.length?`<div class="warn">${h.map(x=>`<span class="${x[1]?'r':'g'}">${esc(x[0])}</span>`).join('')}</div>`:'';
 const vorlageFehlt=()=>E._vorlage==='fehlt'&&!(E.vorlagen||[]).length;  // eduki-Vorlage: darf nicht in die App, eigene zeichnen (vorlagen/)
 function checkliste(){const names=Object.fromEntries(D.vokabular);return [
  ...(vorlageFehlt()?[['Braucht Vorlage: eigene zeichnen (die im Video ist von eduki)',false]]:[]),
@@ -374,7 +372,7 @@ function renderCheck(){const items=checkliste();const ok=items.filter(x=>x[1]).l
 /* ---------- Vorschau: Schritte wie in der App (buildVideoSteps in schule/index.html) ---------- */
 // Mit Material ersetzt die Materialkarte einen ersten Schritt «Material richten …», dessen Videoteil übersprungen wird.
 const uebersprungen=()=>E.material.length>0&&E.steps.length>0&&/^material richten/i.test(E.steps[0].label||'');
-function vorschauSchritte(){const s=E.steps.map((x,i)=>({ref:i,label:x.label}));
+function vorschauSchritte(){const s=E.steps.map((x,i)=>({ref:i,label:(x.kurz||'').trim()||x.label}));
  if(E.material.length&&s.length){if(uebersprungen())s.shift();s.unshift({ref:'mat',label:'Material richten'})}
  return s}
 function renderVorschau(){PV=vorschauSchritte();
@@ -391,9 +389,10 @@ function renderVorschau(){PV=vorschauSchritte();
 function render(){sel=Math.max(0,Math.min(sel,E.steps.length-1));renderVorschau();renderTl();renderEdit();if(ansicht==='B'){highlightTx();renderCheck()}}
 function renderEdit(){const ed=$('#edit');$('#leer').hidden=E.steps.length>0;ed.hidden=!E.steps.length;if(!E.steps.length)return;
  const i=sel,s=E.steps[i],nx=E.steps[i+1],h=hinweise(i),skip=i===0&&uebersprungen(),offen=$('#fein')?.open;
- ed.innerHTML=`<div class="ehd"><span class="enr ${skip?'skip':''}">${i+1}</span><input id="elabel" value="${esc(s.label)}" placeholder="Was das Kind jetzt macht (max. 8 Wörter)"><button class="x" data-rm="${i}" title="Schritt löschen">✕</button></div>
-  ${skip?'<p class="skipnote">In der App ersetzt die Materialkarte diesen Videoteil – er wird übersprungen.</p>':''}
-  ${h.length?`<div class="warn">${h.map(x=>`<span class="${x[1]?'r':'g'}">${esc(x[0])}</span>`).join('')}</div>`:''}
+ ed.innerHTML=`<div class="ehd"><span class="enr ${skip?'skip':''}">${i+1}</span><input id="elabel" value="${esc(s.label)}" placeholder="Titel"><button class="x" data-rm="${i}" title="Schritt löschen">✕</button></div>
+  <label class="ekurz">Kurz<input id="ekurz" value="${esc(s.kurz||'')}"></label>
+  ${skip?'<p class="skipnote">⏭ Übersprungen</p>':''}
+  <div id="ewarn">${warnung(h)}</div>
   <div class="zeiten">
    <div class="zt"><b>von</b><button class="ic" data-nud="0" data-d="-0.1" title="0.1 s früher (,)">−</button><input id="evon" value="${fmt(s.t)}" title="m:ss.s"><button class="ic" data-nud="0" data-d="0.1" title="0.1 s später (.)">+</button><button data-hier="0" title="aktuelle Spielzeit (S)">Hier</button></div>
    <div class="zt"><b>bis</b>${nx?`<button class="ic" data-nud="1" data-d="-0.1" title="0.1 s früher (;)">−</button><input id="ebis" value="${fmt(nx.t)}" title="m:ss.s = Beginn Schritt ${i+2}"><button class="ic" data-nud="1" data-d="0.1" title="0.1 s später (:)">+</button><button data-hier="1" title="aktuelle Spielzeit (E)">Hier</button>`:`<span class="schluss">${fmt(D.analyse.dauer)} Schluss</span>`}</div>
@@ -429,11 +428,9 @@ function renderTl(){const tl=$('#tl'),dur=D.analyse.dauer,bw=tl.clientWidth||800
 
 /* ---------- Material (Arbeitsansicht) ---------- */
 function renderChips(){const names=Object.fromEntries(D.vokabular);const c=$('#chips');
- c.innerHTML=E.material.map((id,i)=>`<span class="chip ${names[id]?'':'unk'}" draggable="true" data-i="${i}" title="${names[id]?id+' – ziehen zum Sortieren':'nicht im Vokabular – bekommt kein Bild'}">${ico(id)}${esc(names[id]||id)}<b data-rmm="${i}" title="entfernen">✕</b></span>`).join('')||'<span class="mute">noch kein Material – ohne Material zeigt die App keine Karte</span>';
+ c.innerHTML=E.material.map((id,i)=>`<span class="chip ${names[id]?'':'unk'}" draggable="true" data-i="${i}" title="${names[id]?id+' – ziehen zum Sortieren':'nicht im Vokabular – bekommt kein Bild'}">${ico(id)}${esc(names[id]||id)}<b data-rmm="${i}" title="entfernen">✕</b></span>`).join('');
  let from=null;c.querySelectorAll('.chip').forEach(ch=>{ch.ondragstart=()=>{from=+ch.dataset.i;ch.classList.add('drag')};ch.ondragover=e=>e.preventDefault();
-  ch.ondrop=e=>{e.preventDefault();const to=+ch.dataset.i;if(from===null||from===to)return;const [m]=E.material.splice(from,1);E.material.splice(to,0,m);from=null;matGeaendert()};ch.ondragend=()=>ch.classList.remove('drag')});
- $('#mathin').innerHTML=!E.material.length?'':uebersprungen()?'Die Karte ersetzt Schritt 1 «'+esc(E.steps[0].label)+'»; dieser Videoteil wird übersprungen (gestreift in der Zeitleiste).':
-  'Die Karte kommt vor Schritt 1. Tipp: Heisst Schritt 1 «Material richten …», ersetzt die Karte diesen Videoteil.'}
+  ch.ondrop=e=>{e.preventDefault();const to=+ch.dataset.i;if(from===null||from===to)return;const [m]=E.material.splice(from,1);E.material.splice(to,0,m);from=null;matGeaendert()};ch.ondragend=()=>ch.classList.remove('drag')})}
 function matGeaendert(){markDirty();renderChips();render()}
 $('#chips').onclick=e=>{if(e.target.dataset.rmm!==undefined){E.material.splice(+e.target.dataset.rmm,1);matGeaendert()}};
 $('#matadd').onchange=e=>{const v=e.target.value.trim().toLowerCase();if(!v)return;const hit=D.vokabular.find(([i,n])=>i===v||n.toLowerCase()===v);const id=hit?hit[0]:v.replace(/[^a-z]/g,'');
@@ -488,14 +485,15 @@ function oeffnePub(){const fehlt=[];if(!E.title.trim())fehlt.push('Titel');if(!E
  else{h=`<p>Ersetzt den bestehenden Eintrag <b>${esc(alt.title)}</b> (${esc(alt.id)}).</p><ul>`;
   const n=Math.max(alt.steps.length,E.steps.length);for(let i=0;i<n;i++){const a=alt.steps[i],b=E.steps[i];
    if(!a)h+=`<li>+ ${fmt(b.t)} ${esc(b.label)}</li>`;else if(!b)h+=`<li>− ${fmt(a.t)} ${esc(a.label)}</li>`;
-   else if(a.t!==b.t||a.label!==b.label)h+=`<li>${fmt(a.t)} → <b>${fmt(b.t)}</b> ${a.label!==b.label?esc(a.label)+' → <b>'+esc(b.label)+'</b>':esc(b.label)}</li>`}
+   else if(a.t!==b.t||a.label!==b.label)h+=`<li>${fmt(a.t)} → <b>${fmt(b.t)}</b> ${a.label!==b.label?esc(a.label)+' → <b>'+esc(b.label)+'</b>':esc(b.label)}</li>`;
+   else if((a.kurz||'')!==(b.kurz||'').trim())h+=`<li>${fmt(b.t)} ${esc(a.kurz||'–')} → <b>${esc((b.kurz||'').trim()||'–')}</b></li>`}
   if(h.endsWith('<ul>'))h+='<li>Schritte unverändert</li>';h+='</ul>';
   const ma=(alt.material||[]).join(', '),mb=E.material.join(', ');if(ma!==mb)h+=`<p>Material: ${esc(ma||'–')} → <b>${esc(mb||'–')}</b></p>`;
   const sa=(alt.stufen||[]).join(''),sb=E.stufen.join('');if(sa!==sb)h+=`<p>Klassen: ${sa||'–'} → <b>${sb}</b></p>`;
   if((alt.niveau||'')!==(E.niveau||''))h+=`<p>Schwierigkeit: ${alt.niveau||'–'} → <b>${E.niveau||'–'}</b></p>`;
   if(!!alt.grundtechnik!==!!E.grundtechnik)h+=`<p>Grundtechnik: ${alt.grundtechnik?'ja':'nein'} → <b>${E.grundtechnik?'ja':'nein'}</b></p>`}
  const offen=checkliste().filter(x=>!x[1]);if(offen.length)h+=`<p style="color:var(--r)">Noch offen: ${offen.map(x=>esc(x[0])).join(' · ')}</p>`;
- h+=W.LOKAL?'<p class="mute">Danach noch: git commit &amp; push.</p>':'<p class="mute">Geht direkt auf GitHub – die Schul-App zeigt es nach etwa einer Minute.</p>';$('#pubbody').innerHTML=h;$('#pub').showModal()}
+ h+=W.LOKAL?'<p class="mute">⚠ Noch git push</p>':'';$('#pubbody').innerHTML=h;$('#pub').showModal()}
 $('#pubno').onclick=()=>$('#pub').close();
 $('#pubyes').onclick=async()=>{$('#pub').close();clearTimeout(saveTimer);$('#status').textContent='veröffentliche…';const j=await post(W.veroeffentlichen);if(j){dirty=false;D.schule=nutzlast();$('#status').textContent='veröffentlicht';msg('In schule.json – jetzt '+j.anzahl+' Videos. '+W.nachPub)}};
 
@@ -516,12 +514,14 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-pv],[data-
  if(ds.tx){if(!E.steps.length)return;setT(sel,beginnVor(+ds.tx));seek(E.steps[sel].t);return}
  if(ds.new){const t=beginnVor(+ds.new);pushHist();E.steps.push({t,label:''});E.steps.sort((a,b)=>a.t-b.t);sel=E.steps.findIndex(s=>s.t===t);markDirty();zeige('A');render();$('#elabel')?.focus();return}
 });
-$('#edit').addEventListener('focusin',e=>{if(e.target.id==='elabel')pushHist()});
-$('#edit').addEventListener('input',e=>{if(e.target.id==='elabel'){E.steps[sel].label=e.target.value;markDirty();renderVorschau();renderTl()}});
+$('#edit').addEventListener('focusin',e=>{if(e.target.id==='elabel'||e.target.id==='ekurz'){pushHist();vorher={...E.steps[sel]}}});
+$('#edit').addEventListener('input',e=>{const s=E.steps[sel];
+ if(e.target.id==='elabel'){s.label=e.target.value;s.kurz=s.label.trim()===vorher.label.trim()?vorher.kurz||'':'';$('#ekurz').value=s.kurz;markDirty();renderVorschau();renderTl()}   // neuer Titel: alter Kurztext passt nicht mehr
+ if(e.target.id==='ekurz'){s.kurz=e.target.value;markDirty();renderVorschau()}});
 $('#edit').addEventListener('change',e=>{const t=e.target;
- if(t.id==='elabel'){renderEdit();renderChips();return}  // Hinweise neu, Materialkarte kann Schritt 1 ersetzen
+ if(t.id==='elabel'||t.id==='ekurz'){if($('.enr').classList.contains('skip')!==(sel===0&&uebersprungen()))renderEdit();else $('#ewarn').innerHTML=warnung(hinweise(sel));return}  // nur die Hinweise, sonst geht der Fokus im nächsten Feld verloren
  if(t.id==='evon'||t.id==='ebis'){const i=sel+(t.id==='ebis'?1:0),v=parseT(t.value);if(isNaN(v)){t.value=fmt(E.steps[i].t);return}setT(i,v);seek(E.steps[i].t)}});
-$('#edit').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='elabel'){e.preventDefault();e.target.blur();if(E.steps[sel+1]){sel++;render();$('#elabel')?.focus()}}});
+$('#edit').addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.target.id==='elabel'||e.target.id==='ekurz')){e.preventDefault();e.target.blur();if(E.steps[sel+1]){sel++;render();$('#elabel')?.focus()}}});
 $('#pp').onclick=$('#schild').onclick=()=>{if(!ready)return;yt.getPlayerState()===1?yt.pauseVideo():yt.playVideo()};
 $('#test').onclick=()=>testSchritt(sel);
 $('#add0').onclick=()=>{pushHist();E.steps=[{t:0,label:'Material richten: '}];sel=0;markDirty();render();renderChips();$('#elabel')?.focus()};

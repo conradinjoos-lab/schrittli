@@ -27,4 +27,44 @@ const sammlung=async t=>{ const k=await t.kontext({touch:false,breite:1280,hoehe
 /* Hall of Fame: keine Einzelnamen, keine Sterne */
 const werkeSeite=async t=>{ const fs=require('node:fs'), path=require('node:path'); const s=fs.readFileSync(path.resolve(__dirname,'..','..','kontrolle','werke.html'),'utf8'); t.pruefe(!/\bw\.(sterne|name)\b/.test(s),'Hall of Fame liest Name oder Sterne'); };
 
-module.exports=[{name:'Kontrolle Sammlung',lauf:sammlung},{name:'Kontrolle Werke',lauf:werkeSeite}];
+/* kurz bleibt beim Bearbeiten und Übernehmen: Entwürfe haben ihn nicht, schule.json schon. Ein neues label leert ihn. */
+const KURZ_ID='abcdefghijk', LANG=['Erster langer Schritt im Video','Zweiter langer Schritt im Video'];
+const KURZ_DATEN={id:KURZ_ID,analyse:{title:'Test',kanal:'K',dauer:60,fps:2,bildwechsel:[],transkript:[]},themen:[],vokabular:[],blaetter:[],
+  entwurf:{id:'zw-test',source:{type:'youtube',id:KURZ_ID},title:'Test',areaId:'holz',material:[],stufen:[3],steps:[{t:0,label:LANG[0]},{t:10,label:LANG[1]}]},
+  schule:{id:'zw-test',source:{type:'youtube',id:KURZ_ID},title:'Test',material:[],stufen:[],steps:[{t:0,label:LANG[0],kurz:'Mach Schritt eins'},{t:10,label:LANG[1],kurz:'Mach Schritt zwei'}]}};
+const KURZ_ATTRAPPE=`window.__weg=[];const W={bereit:async()=>{},LOKAL:true,pause:10,nachPub:'',bild:()=>'',daten:async()=>(${JSON.stringify(KURZ_DATEN)}),speichern:async(id,e)=>{__weg.push(e);return{}},veroeffentlichen:async(id,e)=>{__weg.push(e);return{anzahl:1}}};`;
+const KURZ_PY=`
+import json, pathlib, sys, tempfile
+sys.path.insert(0, 'werkzeug')
+import kontrolle as k
+d = pathlib.Path(tempfile.mkdtemp()); k.ENTWURF = d; k.SCHULE = d / 'schule.json'
+alt = [{'t': 0, 'label': 'A lang', 'kurz': 'A kurz'}, {'t': 5, 'label': 'B lang', 'kurz': 'B kurz'}, {'t': 9, 'label': 'C lang', 'kurz': 'C kurz'}]
+k.SCHULE.write_text(json.dumps({'videos': [{'id': 'zw-x', 'source': {'id': 'abcdefghijk'}, 'steps': alt}]}), encoding='utf-8')
+(d / 'abcdefghijk').mkdir()
+neu = [{'t': 0, 'label': 'A lang'}, {'t': 5, 'label': 'B anders'}, {'t': 9, 'label': 'C lang', 'kurz': 'C neu'}]
+(d / 'abcdefghijk' / 'video.json').write_text(json.dumps({'id': 'zw-x', 'source': {'id': 'abcdefghijk'}, 'steps': neu}), encoding='utf-8')
+k.uebernehmen('abcdefghijk')
+print(json.dumps([json.loads(k.SCHULE.read_text(encoding='utf-8'))['videos'][0]['steps'], k.schritt({'t': 1.23, 'label': ' a ', 'kurz': ' b '}), k.schritt({'t': 1, 'label': 'a', 'kurz': ' '})]))
+`;
+const kurzBleibt=async t=>{ const k=await t.kontext({touch:false,breite:1280,hoehe:800}); await k.c.route('**/kontrolle/werkstatt.js',r=>r.fulfill({status:200,contentType:'text/javascript',body:KURZ_ATTRAPPE})); const p=await k.seite('/kontrolle/video.html?id='+KURZ_ID);
+  await p.waitForSelector('#ekurz'); const kurz=()=>p.locator('#ekurz').inputValue();
+  t.pruefe(await kurz()==='Mach Schritt eins','Aus schule.json geladen: '+await kurz());
+  await p.locator('#elabel').fill('Neuer Titel'); t.pruefe(await kurz()==='','Neues label leert kurz');
+  await p.locator('#elabel').fill(LANG[0]); t.pruefe(await kurz()==='Mach Schritt eins','Altes label bringt kurz zurück');
+  await p.locator('#elabel').fill('Neuer Titel'); await p.locator('#elabel').press('Tab'); await p.waitForFunction(()=>/Kurz fehlt/.test(document.querySelector('#ewarn').textContent));
+  await p.locator('#ekurz').click(); await p.locator('#ekurz').pressSequentially('Mach neu'); t.pruefe(await p.evaluate(()=>document.activeElement.id)==='ekurz','Fokus bleibt in Kurz');
+  await p.locator('#ekurz').press('Tab'); await p.waitForFunction(()=>!/Kurz fehlt/.test(document.querySelector('#ewarn').textContent));
+  await p.waitForFunction(()=>(window.__weg.at(-1)?.steps[0]||{}).kurz==='Mach neu');
+  const weg=await p.evaluate(()=>window.__weg.at(-1).steps); t.pruefe(weg[0].label==='Neuer Titel'&&weg[1].kurz==='Mach Schritt zwei','Gespeichert: '+JSON.stringify(weg));
+  await p.locator('#ekurz').fill('Fünf Wörter sind hier zuviel'); await p.locator('#ekurz').press('Tab'); await p.waitForFunction(()=>/5 Wörter/.test(document.querySelector('#ewarn').textContent));
+  await p.locator('#ekurz').fill('Fertig – dein Granny Square!'); await p.locator('#ekurz').press('Tab'); await p.waitForFunction(()=>!/Wörter/.test(document.querySelector('#ewarn').textContent)); await p.locator('#ekurz').fill('Fünf Wörter sind hier zuviel'); await p.locator('#ekurz').press('Tab');
+  await p.locator('[data-ins="0"]').first().click(); await p.waitForFunction(()=>document.activeElement.id==='elabel'); t.pruefe(await kurz()==='','Neuer Schritt ohne kurz'); await p.locator('#elabel').fill('Dazwischen'); t.pruefe(await kurz()==='','Neuer Schritt bleibt leer');
+  await p.locator('#zuAngaben').click(); await p.locator('#take2').click(); await p.waitForFunction(()=>document.querySelector('#pub').open); await p.locator('#pubyes').click(); await p.waitForFunction(()=>window.__weg.at(-1).steps.length===3&&document.querySelector('#status').textContent==='veröffentlicht');
+  const pub=await p.evaluate(()=>window.__weg.at(-1).steps); t.pruefe(pub[0].kurz==='Fünf Wörter sind hier zuviel'&&!('kurz' in pub[1])&&pub[2].kurz==='Mach Schritt zwei','Veröffentlicht: '+JSON.stringify(pub));
+  t.keineFehler(k);
+  const fs=require('node:fs'), path=require('node:path'), wurzel=path.resolve(__dirname,'..','..'), sauber=new Function(fs.readFileSync(path.join(wurzel,'kontrolle','werkstatt.js'),'utf8').match(/function sauber\(id,e\)\{.*/)[0]+';return sauber')();
+  const on=sauber('x',{steps:[{t:1.23,label:' a ',kurz:' b '},{t:2,label:'c',kurz:' '}]}).steps; t.pruefe(on[0].kurz==='b'&&!('kurz' in on[1]),'Online: '+JSON.stringify(on));
+  const py=require('node:child_process').spawnSync('python',['-B','-c',KURZ_PY],{cwd:wurzel,encoding:'utf8',env:{...process.env,PYTHONIOENCODING:'utf-8'}}); t.pruefe(py.status===0,'Python: '+py.stderr);
+  const [steps,mit,ohne]=JSON.parse(py.stdout); t.pruefe(steps[0].kurz==='A kurz','Gleiches label behält kurz: '+py.stdout); t.pruefe(!('kurz' in steps[1]),'Anderes label ohne kurz: '+py.stdout); t.pruefe(steps[2].kurz==='C neu','Neuer kurz gewinnt: '+py.stdout); t.pruefe(mit.kurz==='b'&&!('kurz' in ohne),'Speichern behält kurz: '+py.stdout); };
+
+module.exports=[{name:'Kontrolle Sammlung',lauf:sammlung},{name:'Kontrolle Werke',lauf:werkeSeite},{name:'Kontrolle kurz',lauf:kurzBleibt}];
