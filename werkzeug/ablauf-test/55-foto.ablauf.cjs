@@ -35,7 +35,7 @@ const zweitesIpad=async t=>{ const {s,k,p}=await anGeraet(t), b=await ipad(t,{s}
   t.pruefe((await q.locator('.foto .dt').first().textContent()).includes('Mia, Noah'),'Namen auf iPad 2'); await q.waitForFunction(()=>{ const i=document.querySelector('.foto img'); return i&&i.naturalWidth>0; }); t.pruefe(!await q.locator('.foto .st').count(),'Sterne auf iPad 2'); t.keineFehler(k); t.keineFehler(b.k); };
 
 const fehler=async t=>{ const {s,k,p}=await anGeraet(t); s.modus='offline'; await p.evaluate(id=>takePhoto(id),VIDEO); await fotoMit(p,s.bild,['Mia']); await warte(p,'.ww-foto'); await ohneSterne(p); await p.waitForFunction(()=>S.works.length===1); await werkeAuf(p);
-  await warte(p,'.sw-z.wartet'); t.pruefe((await zustand(p))==='⏳ Läuft','Läuft offline'); await p.waitForFunction(()=>document.querySelector('#sw-status').textContent==='⚠ Offline');
+  await warte(p,'.sw-z.wartet'); t.pruefe((await zustand(p))==='⏳ Läuft','Läuft offline'); await p.waitForFunction(()=>document.querySelector('#sw-status').textContent==='⚠ Verbindung');
   /* Nach dem Neuladen wartet es weiter und geht beim nächsten Versuch hinaus */
   await neuLaden(p); await werkeAuf(p); await warte(p,'.sw-z.wartet');
   s.modus='kaputt'; await wieder(p); await p.waitForFunction(()=>!SW.busy); await p.waitForTimeout(80); await warte(p,'.sw-z.wartet'); t.pruefe(s.abgaben>=1,'Versuch');
