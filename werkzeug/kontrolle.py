@@ -11,7 +11,7 @@ dieselben Seiten laufen online auf GitHub Pages, siehe werkstatt.py). Zeigt pro 
 rund um jeden Stopp, das Transkript und die erkannten Bildwechsel. Speichern schreibt video.json;
 «Übernehmen» trägt den Eintrag in schule/schule.json ein (ersetzt einen bestehenden mit gleicher id oder gleichem Video).
 """
-import datetime, json, re, sys
+import datetime, json, re, shutil, sys
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
 from urllib.parse import unquote, urlparse
@@ -106,7 +106,7 @@ def liste():
     out = []
     if not ENTWURF.exists(): return out
     for d in sorted(ENTWURF.iterdir()):
-        if not d.is_dir() or not ID_MUSTER.fullmatch(d.name): continue
+        if not d.is_dir() or not ID_MUSTER.fullmatch(d.name) or not any(d.iterdir()): continue
         a = analyse(d.name) or {}
         v = lies(d / 'video.json')
         s = schul_eintrag(d.name)
@@ -156,6 +156,12 @@ def uebernehmen(vid, eintrag=None):
     return len(vids)
 
 
+def loeschen(vid):
+    """Video ohne Entwurf aus der Werkstatt nehmen; der Cache bleibt, holen.py bringt es zurück."""
+    if schul_eintrag(vid) or (ENTWURF / vid / 'video.json').exists(): raise ValueError('Hat einen Entwurf')
+    shutil.rmtree(ENTWURF / vid)
+
+
 class H(BaseHTTPRequestHandler):
     def log_message(self, f, *a): pass
 
@@ -168,7 +174,7 @@ class H(BaseHTTPRequestHandler):
 
     def do_GET(self):
         p = urlparse(self.path).path
-        seite = {'/': 'index.html', '/video.html': 'video.html', '/werke.html': 'werke.html', '/material.html': 'material.html', '/kontrolle.css': 'kontrolle.css', '/werkstatt.js': 'werkstatt.js'}.get(p)
+        seite = {'/': 'index.html', '/video.html': 'video.html', '/werke.html': 'werke.html', '/material.html': 'material.html', '/kontrolle.css': 'kontrolle.css', '/werkstatt.js': 'werkstatt.js', '/klasse.js': 'klasse.js'}.get(p)
         if seite: return self.send(200, (SEITEN / seite).read_bytes(), 'text/javascript; charset=utf-8' if seite.endswith('.js') else 'text/css; charset=utf-8' if seite.endswith('.css') else 'text/html; charset=utf-8')
         if p == '/vorlagen/melden.js':  # Flagge «Fehler melden» auf allen Kontrollseiten
             return self.send(200, (WURZEL / 'vorlagen' / 'melden.js').read_bytes(), 'text/javascript; charset=utf-8')
@@ -211,6 +217,13 @@ class H(BaseHTTPRequestHandler):
 
     def do_POST(self):
         p = urlparse(self.path).path
+        m = re.fullmatch(r'/api/([A-Za-z0-9_-]{11})/loeschen', p)
+        if m:
+            try:
+                loeschen(m.group(1))
+                return self.js(200, {'ok': True})
+            except Exception as ex:
+                return self.js(400, {'fehler': str(ex)})
         m = re.fullmatch(r'/api/([A-Za-z0-9_-]{11})/(speichern|uebernehmen)', p)
         if not m: return self.js(404, {'fehler': 'unbekannt'})
         vid, was = m.groups()

@@ -107,7 +107,7 @@ def vorschau(liste):
 
 
 def erneuern():
-    vids = sorted(d.name for d in ENTWURF.iterdir() if d.is_dir() and ID_MUSTER.fullmatch(d.name))
+    vids = sorted(d.name for d in ENTWURF.iterdir() if d.is_dir() and ID_MUSTER.fullmatch(d.name) and any(d.iterdir()))  # leer: nicht einbettbar oder online gelöscht
     neu = 0
     for vid in vids:
         a = lies(CACHE / vid / 'analyse.json')

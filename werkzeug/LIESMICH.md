@@ -65,6 +65,8 @@ Die Links werden nur einmal angezeigt (das Token steht nur im Link); eine verlor
 
 Gespeichert wird automatisch 1.5 s nach jeder Änderung nach `entwurf/<ID>/video.json` («gespeichert HH:MM» im Kopf), `Ctrl+Z` macht rückgängig, Löschen eines Schritts lässt sich 6 s lang per Knopf zurücknehmen. Ohne Entwurf zeigt die Seite den bestehenden Eintrag aus schule.json oder eine leere Vorlage – so lassen sich auch alte Einträge nachjustieren (vorher `holen.py` für das Video laufen lassen).
 
+**🗑 auf der Sammlung:** Nur Karten «Ohne Entwurf» haben den Knopf, erster Tipp macht ihn rot, zweiter nimmt den Ordner aus der Werkstatt. Was `video.json` hat oder in `schule.json` steht, bleibt. Zurück holt es `holen.py` oder die Git-Geschichte von `schrittli-werkstatt`.
+
 ## Prüfen vor dem Veröffentlichen
 
 `NODE_PATH="C:/Grok Code/Steine-App/node_modules" node werkzeug/ablauf-test/start.cjs [Wort …]` liefert das Repo über einen eigenen kleinen Server aus und spielt die Abläufe in Chrome durch, in iPad-Grösse mit Touch. Ausgabe OK oder FEHLER je Ablauf, Exit-Code 1 sobald einer scheitert. Mit Wörtern laufen nur die passenden Abläufe, zum Beispiel `start.cjs Zugang`. Keine Anfrage verlässt den Rechner: Melden landet in `k.meldungen`, YouTube ist eine Attrappe.

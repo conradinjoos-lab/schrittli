@@ -49,6 +49,8 @@ h1{font:600 30px/1 var(--display);margin:0}
 .stand.offen{background:var(--spass);color:#fff}
 .stand.leer{background:var(--surface);color:var(--muted)}
 .stand.weg{background:var(--surface2);color:var(--muted)}
+.ab{position:absolute;right:8px;top:8px;min-width:36px;height:36px;padding:0 10px;border:0;border-radius:999px;background:var(--surface);color:var(--ink);font:600 13px var(--display);box-shadow:var(--shadow-sm);cursor:pointer}
+.ab.scharf{background:#D64545;color:#fff}
 .text{padding:10px 14px 12px;display:flex;flex-direction:column;gap:8px;flex:1}
 .titel{font:600 16px/1.2 var(--display)}
 .fuss{display:flex;align-items:center;gap:6px;margin-top:auto;flex-wrap:wrap}
@@ -108,11 +110,12 @@ const FILTER=[['offen','Zu prüfen'],['drin','Veröffentlicht'],...(anzahl.weg?[
 let filter='';try{filter=localStorage.getItem('kontrolle-filter')||''}catch{}
 if(!FILTER.some(f=>f[0]===filter)||(filter==='offen'&&!anzahl.offen))filter=anzahl.offen?'offen':'alle';
 $('#zahlen').innerHTML=`<div class="zahl offen"><b>${anzahl.offen}</b><span>zu prüfen</span></div><div class="zahl drin"><b>${anzahl.drin}</b><span>veröffentlicht</span></div>`;
+const laeuft=new Set();
 function karte(e){
  const a=art(e),stand={drin:'Veröffentlicht',offen:'Zu prüfen',weg:'Weggelassen',leer:e.brief?'Nur Brief':'Kein Entwurf'}[a];
  const pills=(a==='weg'?`<span class="pill weg">${esc(e.weggelassen)}</span>`:e.vorlage_fehlt?'<span class="pill vorlage">📄 braucht Vorlage</span>':'')+(e.entwurf&&a!=='weg'?[[e.status[0],e.schritte+' Schritte'],[e.status[1],'Angaben'],[e.status[2],'geprüft']].map(([ok,t])=>`<span class="pill${ok?' ok':''}">${ok?'✓ ':''}${t}</span>`).join(''):'');
  const farbe=(D.themen.find(t=>t[0]===e.area)||[])[2];
- return `<a class="karte" href="video.html?id=${e.id}"><div class="bild"${farbe?` style="--farbe:${farbe}"`:''}><img loading="lazy" alt="" src="${e.vorschau}" onerror="this.remove()"><span class="stand ${a}">${stand}</span>${e.dauer?`<span class="dauer">${fmt(e.dauer)}</span>`:''}</div>
+ return `<a class="karte" href="video.html?id=${e.id}"><div class="bild"${farbe?` style="--farbe:${farbe}"`:''}><img loading="lazy" alt="" src="${e.vorschau}" onerror="this.remove()"><span class="stand ${a}">${stand}</span>${a==='leer'?`<button class="ab" data-ab="${esc(e.id)}" title="Löschen" aria-label="Löschen">${laeuft.has(e.id)?'⏳':'🗑'}</button>`:''}${e.dauer?`<span class="dauer">${fmt(e.dauer)}</span>`:''}</div>
  <div class="text"><div class="titel">${esc(e.title)}</div><div class="fuss">${pills}<code>${esc(e.id)}</code></div></div></a>`}
 function zeichne(){
  $('#filter').innerHTML=FILTER.map(([k,t])=>`<button data-f="${k}" class="${k===filter?'on':''}">${t}<em>${k==='alle'?D.videos.length:anzahl[k]}</em></button>`).join('');
@@ -124,6 +127,14 @@ function zeichne(){
  $('#liste').innerHTML=html||`<div class="nichts">${q?'🔍 0':filter==='offen'?'✓':'–'}</div>`}
 $('#filter').onclick=ev=>{const b=ev.target.closest('button');if(!b)return;filter=b.dataset.f;try{localStorage.setItem('kontrolle-filter',filter)}catch{}zeichne()};
 $('#suche').oninput=zeichne;
+/* 🗑 bei Videos ohne Entwurf: erster Tipp macht den Knopf rot, zweiter löscht */
+$('#liste').onclick=async ev=>{const b=ev.target.closest('[data-ab]');if(!b)return;ev.preventDefault();
+ const id=b.dataset.ab;if(laeuft.has(id))return;
+ if(!b.classList.contains('scharf')){b.classList.add('scharf');b.textContent='Löschen?';
+  setTimeout(()=>{if(b.classList.contains('scharf')){b.classList.remove('scharf');b.textContent='🗑'}},3000);return}
+ b.classList.remove('scharf');b.textContent='⏳';laeuft.add(id);
+ try{await W.loeschen(id);laeuft.delete(id);D.videos=D.videos.filter(e=>e.id!==id);anzahl.leer--;zeichne()}
+ catch(x){laeuft.delete(id);const k=[...document.querySelectorAll('[data-ab]')].find(y=>y.dataset.ab===id);if(k){k.textContent='⚠';k.title=x.message||String(x)}}};
 zeichne();
 /* Fehlermeldungen aus der App: oben als Liste, «erledigt» löscht sie im Worker */
 const ARTEN={video:'Video läuft nicht',bild:'Bild fehlt',stopp:'Stopp an falscher Stelle',text:'Text/Material falsch',mass:'Mass falsch',druck:'Druck falsch',anzeige:'Anzeige falsch',speichern:'Speichern geht nicht',anderes:'Anderes'};
