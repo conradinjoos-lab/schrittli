@@ -12,16 +12,18 @@ const crypto=require('node:crypto');
 const root=path.resolve(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const nodes=new Map();
-function element(){return {value:'',innerHTML:'',textContent:'',hidden:false,dataset:{},on:{},classList:{toggle(){}},addEventListener(t,f){this.on[t]=f},setAttribute(){},scrollIntoView(){}}}
+function element(){return {value:'',innerHTML:'',textContent:'',hidden:false,dataset:{},on:{},style:{setProperty(){}},classList:{toggle(){},add(){},remove(){}},addEventListener(t,f){this.on[t]=f},setAttribute(){},scrollIntoView(){},querySelector(){return element()},querySelectorAll(){return []},appendChild(){},getBoundingClientRect(){return {width:0,height:0,top:0,left:0}}}}
 let adresse='';
-const ctx=vm.createContext({console,URLSearchParams,window:{},location:{search:'',protocol:'http:'},
-  localStorage:{getItem(){return null},setItem(){}},history:{replaceState(a,b,u){adresse=u}},matchMedia:()=>({matches:false}),
-  document:{getElementById(id){if(!nodes.has(id))nodes.set(id,element());return nodes.get(id)},querySelectorAll(){return []}},
+const dokument={getElementById(id){if(!nodes.has(id))nodes.set(id,element());return nodes.get(id)},querySelector(s){return dokument.getElementById(s.slice(1))},querySelectorAll(){return []},addEventListener(){},createElement:element,head:element(),body:element()};
+const ctx=vm.createContext({console,URLSearchParams,setTimeout(){return 0},clearTimeout(){},window:{addEventListener(){}},location:{search:'',protocol:'http:'},
+  localStorage:{getItem(){return null},setItem(){},removeItem(){}},history:{replaceState(a,b,u){adresse=u}},matchMedia:()=>({matches:false}),
+  document:dokument,
 });
 vm.runInContext(read('vorlagen/perlen/figuren.js'),ctx);
 vm.runInContext(read('vorlagen/perlen/figuren-gross.js'),ctx);
 vm.runInContext(read('vorlagen/perlen/bearbeiten.js'),ctx);
-ctx.PerlenEditor=ctx.window.PerlenEditor;
+vm.runInContext(read('vorlagen/planer.js'),ctx);
+ctx.PerlenEditor=ctx.window.PerlenEditor;ctx.Planer=ctx.window.Planer;
 const html=read('vorlagen/perlen/index.html');
 for(const m of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g))if(m[1].trim())vm.runInContext(m[1],ctx);
 assert.ok(!adresse.includes('tier='),'Ohne Auswahl kein Muster in der Adresse, damit Neuladen wieder die Themen zeigt');
@@ -98,11 +100,11 @@ nodes.get('suche').value='';vm.runInContext('oeffnen(null)',ctx);
 {const h=nodes.get('tiere').innerHTML,themen=(h.match(/class="kat"/g)||[]).length;
   assert.ok(themen>=40&&!h.includes('class="tier"'),'Startansicht zeigt Themen-Kacheln');
   assert.ok(nodes.get('zurueck').hidden);
-  assert.match(nodes.get('treffer').textContent,/\d+ Muster in \d+ Themen/);
+  assert.match(nodes.get('treffer').textContent,/\d+ Muster/);
   for(const k of h.split('class="kat"').slice(1))assert.ok((k.split('</span><b>')[0].match(/<svg|<img/g)||[]).length<=4,'Höchstens vier Beispiele pro Kachel');}
 // Sehr breite Suche: Kacheln mit Trefferzahl statt endloser Liste
 nodes.get('suche').value='e';vm.runInContext('auswahl()',ctx);
-assert.match(nodes.get('tiere').innerHTML,/class="kat"/);assert.match(nodes.get('treffer').textContent,/Treffer in \d+ Themen/);
+assert.match(nodes.get('tiere').innerHTML,/class="kat"/);assert.match(nodes.get('treffer').textContent,/\d+ Treffer/);
 nodes.get('suche').value='pikachu';vm.runInContext('auswahl()',ctx);
 assert.match(nodes.get('tiere').innerHTML,/klein-pikachu/);
 assert.match(nodes.get('tiere').innerHTML,/figur-pikachu/);
@@ -111,7 +113,7 @@ nodes.get('suche').value='gibt-es-nicht-xyz';vm.runInContext('auswahl()',ctx);
 assert.match(nodes.get('treffer').textContent,/Kein Muster/);
 vm.runInContext("oeffnen('Mario & Nintendo')",ctx);
 assert.equal(nodes.get('suche').value,'');assert.ok(!nodes.get('zurueck').hidden);
-assert.match(nodes.get('treffer').textContent,/Muster im Thema «Mario & Nintendo»/);
+assert.match(nodes.get('treffer').textContent,/\d+ Muster/);assert.ok(!nodes.get('zurueck').hidden&&nodes.get('tiere').innerHTML.includes('klein-mario'),'Thema offen');
 assert.ok(!nodes.get('tiere').innerHTML.includes('pikachu'));
 assert.ok(nodes.get('tiere').innerHTML.includes('klein-mario'));
 assert.ok(nodes.get('tiere').innerHTML.includes('figur-mario'));
@@ -119,7 +121,7 @@ assert.ok(nodes.get('tiere').innerHTML.indexOf('klein-mario')<nodes.get('tiere')
 // Klick auf eine Themen-Kachel und auf ein Muster wie im Browser
 {const klick=(sel,daten)=>nodes.get('tiere').on.click({target:{closest:s=>s===sel?{dataset:daten}:null}});
   vm.runInContext('oeffnen(null)',ctx);klick('.kat',{g:'Tiere'});
-  assert.match(nodes.get('treffer').textContent,/Muster im Thema «Tiere»/);assert.ok(!nodes.get('zurueck').hidden);
+  assert.match(nodes.get('treffer').textContent,/\d+ Muster/);assert.ok(!nodes.get('zurueck').hidden);
   klick('.tier',{id:'klein-mario'});
   assert.match(adresse,/tier=klein-mario/,'Gewähltes Muster steht in der Adresse');
   nodes.get('zurueck').on.click();assert.ok(nodes.get('zurueck').hidden&&nodes.get('tiere').innerHTML.includes('class="kat"'),'Zurück zu allen Themen');}

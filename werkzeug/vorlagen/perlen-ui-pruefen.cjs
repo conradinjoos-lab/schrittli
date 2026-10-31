@@ -19,7 +19,7 @@ async function main(){
   const original=await page.evaluate(()=>JSON.stringify(window.PerlenPruefung.aktuellesTier()));
   await page.locator('#anpassen').click();await page.locator('.pe-dialog').waitFor();
   const oldWidth=await page.locator('#pe-breite').inputValue();
-  await page.locator('#pe-breite').fill('25');await page.locator('#pe-breite').dispatchEvent('input');await page.locator('#pe-breite').dispatchEvent('change');
+  await page.locator('#pe-breite').fill('9');await page.locator('#pe-breite').dispatchEvent('input');await page.locator('#pe-breite').dispatchEvent('change');
   assert.notEqual(await page.evaluate(()=>JSON.stringify(window.PerlenPruefung.aktuellesTier())),original);
   await page.locator('[data-tun="original"]').click();assert.equal(await page.locator('#pe-breite').inputValue(),oldWidth);
   await page.locator('#pe-von').selectOption('r');await page.locator('#pe-nach').selectOption('b');await page.locator('[data-tun="tauschen"]').click();

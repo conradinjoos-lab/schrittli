@@ -8,19 +8,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="../planer.css">
 <style>
 :root{--bg:#EEF3F8;--surface:#FFFFFF;--surface2:#F5F8FB;--ink:#17212F;--muted:#5B6B80;--line:#D5DEE9;--acc:#17997A;--acc-ink:#FFFFFF;--acc-soft:#E3F4EF;--papier:#FFFFFF;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#0F1621;--surface:#1A2433;--surface2:#141C28;--ink:#EDF2F8;--muted:#9DACBF;--line:#2B384A;--acc:#2FBF98;--acc-ink:#0F1621;--acc-soft:#16302B;color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:600 16px/1.4 Nunito,system-ui,sans-serif}
-h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;margin:0}
-h1{font-size:28px}
-h2{font-size:17px;margin-bottom:10px}
 a{color:var(--acc)}
-.kopf{max-width:1200px;margin:0 auto;padding:20px 16px 8px}
-.kopf p{margin:4px 0 0;color:var(--muted)}
-main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:20px;align-items:start}
+main{max-width:1200px;margin:0 auto;padding:12px 16px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:20px;align-items:start}
 .karte{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px}
 .karte h3{font:600 15px Fredoka,Nunito,sans-serif;color:var(--muted);margin:16px 0 8px}.karte h3:first-child{margin-top:0}
 .raster{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
@@ -31,7 +27,7 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .k-bilder{display:grid;grid-template-columns:repeat(2,40px);gap:4px}
 .k-bilder svg,.k-bilder img{width:40px;height:52px;object-fit:contain}
 .k-n{font-size:13px;color:var(--muted)}
-.zurueck{margin:10px 0 12px;min-height:40px;padding:6px 14px;border:2px solid var(--line);border-radius:999px;background:var(--surface2);color:var(--ink);font:inherit;font-size:14px;cursor:pointer}
+.zurueck{margin:10px 0 12px;min-height:44px;padding:6px 14px;border:2px solid var(--line);border-radius:999px;background:var(--surface2);color:var(--ink);font:inherit;font-size:14px;cursor:pointer;scroll-margin-top:calc(var(--kopf-h) + 12px)}
 .zurueck:hover{border-color:var(--acc)}
 .tier{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px 8px;border:2px solid var(--line);border-radius:14px;background:var(--surface2);color:var(--ink);font:inherit;font-size:14px;cursor:pointer}
 .tier svg{width:72px;height:96px}
@@ -44,62 +40,188 @@ main{max-width:1200px;margin:0 auto;padding:8px 16px 40px;display:grid;grid-temp
 .tier[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
 .tier:hover{border-color:var(--acc)}
 .tier:focus-visible,button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
-.seite-rechts{position:sticky;top:12px;display:flex;flex-direction:column;gap:14px}
+.seite-rechts{position:sticky;top:calc(var(--kopf-h) + 12px);display:flex;flex-direction:column;gap:14px;max-height:calc(100vh - var(--kopf-h) - 24px);overflow:auto;overscroll-behavior:contain}
 .feld{margin-bottom:14px}
+.ebild{display:inline-flex;align-items:center;gap:7px;min-height:44px;justify-self:start;text-decoration:none;font-weight:700}
+.ebild svg,.faedeln svg,.a-zu svg,#a-vor svg,#a-zurueck svg,.m svg,.a-nadel svg{fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.ebild svg{width:20px;height:20px}
+.treffer{font-size:14px;margin:0 0 8px}
+.papier{display:flex;align-items:center;gap:10px;margin-bottom:10px;font:700 15px Nunito,sans-serif}
+.papier::before{content:"A4"}
+#blaetter{margin:0 0 14px}
+.pl-blatt{cursor:pointer;border-radius:6px}
+.pl-blatt[aria-pressed="true"] svg{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc)}
+.pl-blatt:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.faedeln{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:64px;margin-top:12px;padding:6px 12px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
+.faedeln svg{flex:none;width:30px;height:30px}
+.faedeln b{font:800 16px Nunito,sans-serif}
+.faedeln b:empty{display:none}
+.zeichen-wahl button{min-width:44px}
+.zeichen-wahl .kreis{width:18px;height:18px;border-radius:50%;background:conic-gradient(#D7352E 0 33%,#F4C430 0 66%,#2A6FDB 0)}
+.m{display:inline-flex;align-items:center;gap:4px}
+.m svg{width:18px;height:18px}
+.m i{font-style:normal;color:var(--muted)}
+.m.warn{color:#B4531A;font-weight:800}
 .lbl{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font:inherit;font-size:14px;padding:6px 12px;border-radius:999px;border:2px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer}
 .chip:hover{border-color:var(--acc)}
 .chip[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
-.drucken{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:16px;background:var(--acc);color:var(--acc-ink);font:600 20px Fredoka,Nunito,sans-serif;cursor:pointer}
-.drucken svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linejoin:round}
-.info{font-size:15px;margin:10px 0 0}
-.hinweis{font-size:13px;color:var(--muted);margin:8px 0 0}
-.vorschau svg{display:block;width:100%;height:auto;background:var(--papier);border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
-@media (max-width:860px){main{grid-template-columns:minmax(0,1fr)}.seite-rechts{position:static}h1{font-size:24px}}
+.info{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:15px;margin:10px 0 0}
+.vorschau svg{display:block;height:46vh;width:auto;max-width:100%;margin:0 auto;background:var(--papier);border-radius:4px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+/* Fädeln: Muster gross, eine Reihe hervorgehoben, unten die Folge und die Pfeile. Unten links bleibt frei für die Flagge. */
+#arbeit{display:flex;flex-direction:column;height:calc(100vh - var(--kopf-h));height:calc(100dvh - var(--kopf-h));background:var(--bg)}
+#arbeit[hidden]{display:none}
+body[data-ansicht="arbeit"]{overflow:hidden}
+body[data-ansicht="arbeit"] main,body[data-ansicht="arbeit"] .melden-platz{display:none}
+#a-leiste{flex:none;display:flex;align-items:center;gap:8px;padding:6px 8px;background:var(--surface);border-bottom:1px solid var(--line)}
+.a-zu{flex:none;width:48px;height:48px;display:grid;place-items:center;border:2px solid var(--line);border-radius:12px;background:var(--surface2);color:var(--ink);cursor:pointer}
+.a-zu svg{width:22px;height:22px}
+#a-teile{flex:1;min-width:0;display:flex;gap:6px;padding:2px;overflow-x:auto;scrollbar-width:none}
+#a-teile[hidden]{display:none}
+#a-leiste .zeichen-wahl{flex:none;margin-left:auto}
+.a-chip{position:relative;flex:none;width:66px;height:62px;padding:4px 4px 9px;display:grid;place-items:center;border:2px solid var(--line);border-radius:12px;background:var(--surface2);color:var(--ink);font:inherit;cursor:pointer;overflow:hidden}
+.a-chip svg{display:block;width:44px;height:40px}
+.a-chip[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft);box-shadow:0 0 0 2px var(--acc)}
+.a-bst{position:absolute;top:2px;left:2px;min-width:20px;height:20px;padding:0 3px;display:grid;place-items:center;border-radius:10px;background:var(--surface);border:1px solid var(--ink);font:800 12px Nunito,sans-serif}
+.a-seite{position:absolute;top:1px;right:4px;font:800 15px Nunito,sans-serif}
+.a-ok{position:absolute;right:3px;top:17px;width:20px;height:20px;display:none;place-items:center;border-radius:50%;background:var(--acc);color:var(--acc-ink);font:800 13px Nunito,sans-serif}
+.a-chip.ok .a-ok{display:grid}
+.a-balken{position:absolute;left:4px;right:4px;bottom:3px;height:5px;border-radius:3px;background:var(--line);overflow:hidden}
+.a-balken i{display:block;height:100%;width:0;background:var(--acc)}
+#a-oben{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 240px}
+#a-oben.ohne{grid-template-columns:minmax(0,1fr)}
+#a-oben.ohne #a-gesamt{display:none}
+#a-muster{min-width:0;min-height:0;overflow:auto;background:var(--papier);overscroll-behavior:contain}
+#a-muster svg{display:block}
+.a-r{transition:opacity .2s}
+.a-r.f{opacity:.5}.a-r.o{opacity:.22}
+.a-r:not(.f):not(.o) .a-nr{display:none}
+.a-band{fill:rgba(23,153,122,.13);stroke:#17997A;stroke-width:3}
+.a-marke circle{fill:#17997A}.a-marke text{fill:#fff;font:800 19px Nunito,sans-serif;text-anchor:middle}
+.a-nr{fill:#5B6B80;font:700 13px Nunito,sans-serif;text-anchor:middle}
+#a-gesamt{min-width:0;min-height:0;padding:10px;display:grid;place-items:center;background:var(--surface);border-left:1px solid var(--line);overflow:hidden}
+#a-gesamt svg{display:block;width:100%;height:100%}
+#a-gesamt [data-teil]{cursor:pointer}
+.g-t{opacity:.35;transition:opacity .2s}.g-t.ok,.g-t.ist{opacity:1}
+.g-rahmen{fill:none;stroke:#17997A}
+.g-band{fill:rgba(23,153,122,.25);stroke:#17997A}
+#a-legende{flex:none;display:flex;gap:6px 12px;align-items:center;padding:5px 10px;background:var(--surface);border-top:1px solid var(--line);overflow-x:auto;scrollbar-width:none;font-size:14px;white-space:nowrap}
+#a-legende[hidden]{display:none}
+#a-legende span{display:inline-flex;align-items:center;gap:4px}
+#a-legende svg{display:block;width:17px;height:26px}
+#a-unten{flex:none;display:grid;grid-template-columns:62px 72px minmax(0,1fr) 96px 104px;grid-template-areas:". z f s v";gap:8px;align-items:center;padding:8px 10px;padding-bottom:max(8px,env(safe-area-inset-bottom));background:var(--surface);border-top:1px solid var(--line)}
+#a-zurueck,#a-vor{display:flex;align-items:center;justify-content:center;gap:4px;border-radius:16px;font:800 26px Nunito,sans-serif;cursor:pointer}
+#a-zurueck{grid-area:z;height:72px;border:2px solid var(--line);background:var(--surface2);color:var(--ink)}
+#a-zurueck:disabled{opacity:.35;cursor:default}
+#a-zurueck svg{width:32px;height:32px}
+#a-vor{grid-area:v;height:88px;border:0;background:var(--acc);color:var(--acc-ink)}
+#a-vor svg{width:42px;height:42px;stroke-width:2.6}
+#a-folge{grid-area:f;min-width:0;display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;max-height:30vh;overflow:auto}
+.fg{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border:1px solid var(--line);border-radius:12px;background:var(--surface2)}
+.fg b{font:800 20px Nunito,sans-serif}
+.fg svg{display:block;height:34px;width:auto}
+.fg u{font-weight:800;text-decoration:none;color:var(--muted)}
+.fp{flex:none;width:9px;height:14px;fill:none;stroke:var(--muted);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.fb{display:inline-flex;align-items:center;gap:6px;flex-basis:100%;flex-wrap:wrap}
+.fb>b{font:600 16px Fredoka,Nunito,sans-serif;color:var(--acc)}
+#a-folge.dicht .fg{padding:2px 5px}#a-folge.dicht .fg b{font-size:16px}#a-folge.dicht .fg svg{height:26px}
+.a-nadel{display:inline-flex;align-items:center;gap:8px;font:600 20px Fredoka,Nunito,sans-serif}
+.a-nadel svg{width:30px;height:30px}
+.a-z{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:12px;background:var(--acc-soft);font:800 17px Nunito,sans-serif}
+.a-bm{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 4px;border:2px solid var(--ink);border-radius:13px;background:#fff;color:#1F2933;font:800 15px Nunito,sans-serif}
+.a-ganz{font:800 40px/1 Nunito,sans-serif;color:var(--acc)}
+#a-stand{grid-area:s;min-width:0;display:grid;gap:3px;text-align:center;font-size:15px}
+#a-stand b{font:800 26px Nunito,sans-serif}
+#a-stand i{height:7px;border-radius:4px;background:var(--line);overflow:hidden}
+#a-stand i::after{content:"";display:block;height:100%;width:var(--w,0%);background:var(--acc)}
+@media (max-width:860px){
+  main{display:flex;flex-direction:column;align-items:stretch;gap:12px;padding:8px 10px 40px}
+  .seite-rechts{display:contents}
+  .k-vorschau{order:1;display:flex;align-items:center;gap:10px;padding:8px}
+  .k-vorschau .vorschau{flex:1;min-width:0}
+  .vorschau svg{height:30vh}
+  .faedeln{flex:none;flex-direction:column;width:112px;min-height:112px;margin:0;gap:2px;font-size:18px}
+  .k-einst{order:2}
+  .k-wahl{order:3}
+}
+@media (max-width:640px){
+  #a-oben{grid-template-columns:minmax(0,1fr) 108px}
+  #a-gesamt{padding:6px}
+  #a-oben.ganz{grid-template-columns:minmax(0,1fr)}#a-oben.ganz #a-gesamt{display:none}
+  #a-unten{grid-template-columns:54px 64px minmax(0,1fr) 104px;grid-template-areas:"f f f f" ". z s v";padding:6px 8px;padding-bottom:max(6px,env(safe-area-inset-bottom))}
+  #a-zurueck{height:64px}#a-vor{height:72px}
+  #a-leiste .zeichen-wahl button{min-width:38px;padding:3px 6px}
+  .a-chip{width:60px}
+}
 @media (max-width:480px){.raster{grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}.tier svg{width:56px;height:76px}.kats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.k-bilder{grid-template-columns:repeat(2,34px)}.k-bilder svg,.k-bilder img{width:34px;height:44px}}
 #druck{display:none}
 @page{size:A4 portrait;margin:0}
 @media print{
-  body{background:#fff}
-  .kopf,main{display:none!important}
+  html,body{background:#fff;height:auto!important;overflow:visible!important}
+  #arbeit,main{display:none!important}
   #druck{display:block}
   #druck svg{display:block;width:210mm;height:297mm;break-after:page}#druck svg:last-child{break-after:auto}
 }
 </style>
 </head>
 <body>
-<header class="kopf">
-  <a class="zur-app" href="../../" data-zur-app>← Zurück zur App</a>
-  <h1>Perlentiere</h1>
-  <p><a href="../perlentier-bild/">Eigenes Bild →</a> · <a href="../">←&nbsp;Vorlagen</a></p>
+<header class="pk">
+  <a class="zur-app" href="../../" data-zur-app aria-label="Zurück zur App"><span>App</span></a>
+  <h1 id="titel">Perlentiere</h1>
+  <a class="pk-vorlagen" href="../" aria-label="Vorlagen" title="Vorlagen"><span>Vorlagen</span></a>
+  <button class="pk-rueck" id="p-rueck" type="button" disabled aria-label="Rückgängig" title="Rückgängig"></button>
+  <button class="pk-druck" id="drucken" type="button" aria-label="Drucken, 100 %"><span>Drucken</span></button>
 </header>
 <script src="../zurueck.js"></script>
+<script src="../planer.js"></script>
 <main>
-  <section class="karte" aria-label="Tier wählen">
-    <h2>Tier wählen</h2>
-    <div class="suche"><label for="klasse">Klasse</label><select id="klasse"></select><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="nur-passend"> Nur passende</label><label for="suche">Suchen</label><input id="suche" type="search"></div>
-    <p class="hinweis" id="treffer" role="status"></p>
+  <section class="karte k-wahl" aria-label="Tier wählen">
+    <div class="suche"><label for="klasse">Klasse</label><select id="klasse"></select><label style="display:flex;gap:8px;align-items:center;min-height:44px"><input type="checkbox" id="nur-passend"> Nur passende</label><label for="suche">Suchen</label><input id="suche" type="search"><a class="ebild" href="../perlentier-bild/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg>Eigenes Bild</a></div>
+    <p class="treffer" id="treffer" role="status"></p>
     <button type="button" class="zurueck" id="zurueck" hidden>← Alle Themen</button>
     <div id="tiere"></div>
   </section>
   <div class="seite-rechts">
-    <section class="karte" aria-label="Einstellungen">
+    <section class="karte k-vorschau pl-haft" aria-label="Vorschau">
+      <div class="vorschau" id="vorschau"></div>
+      <button type="button" class="faedeln" id="faedeln" aria-label="Fädeln"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h14"/><path d="M14 7l5 5-5 5"/><path d="M6 8.5v7M10.5 8.500v7"/></svg><span>Fädeln</span><b id="f-stand"></b></button>
+    </section>
+    <section class="karte k-einst" aria-label="Einstellungen">
+      <div class="papier" id="papier"></div>
+      <div id="blaetter" hidden></div>
       <div class="feld">
         <span class="lbl" id="lbl-perle">Perlen</span>
         <div class="chips" role="group" aria-labelledby="lbl-perle" id="perlen"></div>
       </div>
+      <div class="feld">
+        <span class="lbl" id="lbl-zeichen">Zeichen</span>
+        <div class="pl-seg zeichen-wahl" role="group" aria-labelledby="lbl-zeichen"></div>
+      </div>
       <button type="button" class="anpassen" id="anpassen">Anpassen</button>
-      <button type="button" class="drucken" id="drucken"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z"/></svg><span>Drucken</span></button>
-      <p class="info" id="info" aria-live="polite"></p>
-    </section>
-    <section class="karte" aria-label="Vorschau">
-      <h2>Vorschau</h2>
-      <div class="vorschau" id="vorschau"></div>
+      <div class="info" id="info" aria-live="polite"></div>
       <details id="vergleich" hidden><summary>Original</summary><div style="display:flex;gap:12px;align-items:center;justify-content:center;padding:12px;background:var(--papier,#fff)"><img id="original-bild" alt="Originalmotiv" style="width:45%;max-height:200px;object-fit:contain"><div id="vergleich-muster" style="width:45%;max-height:200px"></div></div></details>
     </section>
   </div>
 </main>
+<section id="arbeit" hidden aria-label="Fädeln">
+  <div id="a-leiste">
+    <button type="button" class="a-zu" id="a-zu" aria-label="Schliessen" title="Schliessen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+    <div id="a-teile" role="group" aria-label="Teile" hidden></div>
+    <div class="pl-seg zeichen-wahl" role="group" aria-label="Zeichen"></div>
+  </div>
+  <div id="a-oben">
+    <div id="a-muster" tabindex="-1"></div>
+    <div id="a-gesamt"></div>
+  </div>
+  <div id="a-legende" hidden></div>
+  <div id="a-unten">
+    <button type="button" id="a-zurueck" aria-label="Vorherige Reihe"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V5M5 11l7-7 7 7"/></svg></button>
+    <div id="a-folge"></div>
+    <div id="a-stand"></div>
+    <button type="button" id="a-vor" aria-label="Nächste Reihe"></button>
+  </div>
+</section>
 <div id="druck"></div>
 <script src="figuren.js?v=4"></script>
 <script src="figuren-gross.js?v=4"></script>
@@ -369,11 +491,30 @@ const draht=(t,pe)=>drahtStueck(t,pe)+(t.teile||[]).reduce((s,p)=>s+(p.n||1)*dra
 const f1=x=>(Math.round(x*2)/2).toLocaleString('de-CH').replace('.',',');   // Komma wie in allen Werkzeugen
 const lang=cm=>cm>=100?`${(cm/100).toLocaleString('de-CH').replace('.',',')} m`:`${cm} cm`;
 
-function perlen(g,sk,ox,oy,kreis=.45,grau=true){
+// Zuschaltbar für Farbsehschwäche: pro Farbe ein Buchstabe oder Symbol, in Vorschau, Fädeln und Ausdruck gleich. Symbole im Feld ±5.
+const ZS={a:'',m:null},markenCache=new WeakMap();
+const FORM_VOLL=['M-4.5 0a4.5 4.5 0 1 0 9 0a4.5 4.5 0 1 0-9 0z','M-4-4h8v8h-8z','M0-5L5 4H-5z','M0-5.2L5 0L0 5.2L-5 0z','M0 5L5-4H-5z','M0-5L1.5-1.6L5-1.5L2.3 .7L3.2 4.3L0 2.4L-3.2 4.3L-2.3 .7L-5-1.5L-1.5-1.6z','M-1.6-5h3.2v10h-3.2z','M-5-1.6h10v3.2h-10z'];
+const FORM=[...FORM_VOLL.map(d=>[d,0]),...FORM_VOLL.slice(0,5).map(d=>[d,1]),...['M0-4.6V4.6M-4.6 0H4.6','M-3.6-3.6L3.6 3.6M3.6-3.6L-3.6 3.6','M-4.5 2.5L0-2.5L4.5 2.5','M-4.5-2.5L0 2.5L4.5-2.5','M2.5-4.5L-2.5 0L2.5 4.5','M-2.5-4.5L2.5 0L-2.5 4.5','M-3.8 4.2L3.8-4.2','M-3.8-4.2L3.8 4.2','M-2.2-4.5V4.5M2.2-4.5V4.5','M-4.5-2.2H4.5M-4.5 2.2H4.5','M-4.6 0C-3-4-1.5-4 0 0S3 4 4.6 0'].map(d=>[d,1])];
+function markenVon(t){
+  if(markenCache.has(t))return markenCache.get(t);
+  const {z}=zaehlen(t),M={},frei=new Set('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+  Object.keys(z).sort((a,b)=>z[b]-z[a]||(a<b?-1:1)).forEach((c,i)=>{
+    const wort=[...FARBE[c][1].toUpperCase().replace(/[^A-Z]/g,'')],b=wort.find(x=>frei.has(x))||[...frei][0]||'?',h=parseInt(FARBE[c][0].slice(1),16),hell=.299*(h>>16)+.587*(h>>8&255)+.114*(h&255);
+    frei.delete(b);M[c]={b,s:FORM[i],ink:hell>140?'#17212f':'#fff'}});
+  markenCache.set(t,M);return M;
+}
+const zeichenFuer=t=>{ZS.m=ZS.a?markenVon(t):null};
+function zeichen(c,x,y,w){
+  const m=ZS.m&&ZS.m[c];if(!m)return '';
+  if(ZS.a==='s'&&m.s)return `<path transform="translate(${x.toFixed(2)} ${y.toFixed(2)}) scale(${(w/11).toFixed(3)})" d="${m.s[0]}" ${m.s[1]?`fill="none" stroke="${m.ink}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"`:`fill="${m.ink}"`}/>`;
+  return `<text x="${x.toFixed(2)}" y="${(y+w*.28).toFixed(2)}" font-size="${(w*.78).toFixed(2)}" font-weight="800" text-anchor="middle" fill="${m.ink}">${m.b}</text>`;
+}
+
+function perlen(g,sk,ox,oy,kreis=.45,grau=true,mitZeichen=true){
   const pfad=!grau?'':g.W.map(l=>'M'+l.map(q=>`${(ox+q[0]*sk).toFixed(2)} ${(oy+q[1]*sk).toFixed(2)}`).join('L')).join('');
   return (grau?`<path d="${pfad}" fill="none" stroke="#9aa4b1" stroke-width="${(sk*.08).toFixed(2)}" stroke-linejoin="round"/>`:'')+
     g.P.map(q=>{const w=g.q*sk*.94,h=sk*.94;   // Rocaille von der Seite: kurzes Röhrchen mit runden Kanten
-      return `<rect x="${(-w/2).toFixed(2)}" y="${(-h/2).toFixed(2)}" width="${w.toFixed(2)}" height="${h.toFixed(2)}" rx="${(w*.36).toFixed(2)}" ry="${(h*.26).toFixed(2)}" transform="translate(${(ox+q.x*sk).toFixed(2)} ${(oy+q.y*sk).toFixed(2)})${q.r?` rotate(${q.r.toFixed(1)})`:''}" fill="${FARBE[q.c][0]}" stroke="${q.c==='t'?'#9aa9b5':'#1c2430'}" ${q.c==='t'?`stroke-dasharray="${sk*.09} ${sk*.09}"`:''} stroke-width="${(sk*.05).toFixed(2)}"/>`}).join('');
+      return `<rect x="${(-w/2).toFixed(2)}" y="${(-h/2).toFixed(2)}" width="${w.toFixed(2)}" height="${h.toFixed(2)}" rx="${(w*.36).toFixed(2)}" ry="${(h*.26).toFixed(2)}" transform="translate(${(ox+q.x*sk).toFixed(2)} ${(oy+q.y*sk).toFixed(2)})${q.r?` rotate(${q.r.toFixed(1)})`:''}" fill="${FARBE[q.c][0]}" stroke="${q.c==='t'?'#9aa9b5':'#1c2430'}" ${q.c==='t'?`stroke-dasharray="${sk*.09} ${sk*.09}"`:''} stroke-width="${(sk*.05).toFixed(2)}"/>`+(ZS.m&&mitZeichen&&sk>=2.5?zeichen(q.c,ox+q.x*sk,oy+q.y*sk,w):'')}).join('');
 }
 
 function mini(t){
@@ -474,7 +615,19 @@ function angenaeht(t,g,sk,ox,oy){
         `<circle cx="${(ox+q[3][0]*sk).toFixed(2)}" cy="${(oy+q[3][1]*sk).toFixed(2)}" r="${(sk*.13).toFixed(2)}" fill="${A}" ${rand}/>`).join('')}).join('');
 }
 
-function blatt(t,pe){return (t.offsets?figurenPlan(t,pe):'')+uebersichtsblatt(t,pe)+(t.teile?.length?teileBlatt(t,pe):'')}
+// Alle Blätter, jedes mit der 5-cm-Linie unten rechts. Dort ist auf jedem Blatt frei.
+function blaetterVon(t,pe){
+  zeichenFuer(t);
+  return [...(t.offsets?[figurenPlan(t,pe)]:[]),uebersichtsblatt(t,pe),...(t.teile?.length?[teileBlatt(t,pe)]:[])].map(s=>s.replace(/<\/svg>$/,()=>`<g class="pl-kontrolle">${Planer.kontrolle(150,288)}</g></svg>`));
+}
+function blatt(t,pe){return blaetterVon(t,pe).join('')}
+// Platz für eine Teilmarke neben dem Teil: erster freier Vorschlag, sonst der mit dem grössten Abstand zu den Perlen
+function markePlatz(b,pts,r,box,luft){
+  const m=[(b.x0+b.x1)/2,(b.y0+b.y1)/2],K=[[m[0],b.y0-r-.8],[m[0],b.y1+r+.8],[b.x0-r-.8,m[1]],[b.x1+r+.8,m[1]],[b.x0-r-.8,b.y0-r-.8],[b.x1+r+.8,b.y0-r-.8],[b.x0-r-.8,b.y1+r+.8],[b.x1+r+.8,b.y1+r+.8]].map(([x,y])=>[Math.min(box.x1-r,Math.max(box.x0+r,x)),Math.min(box.y1-r,Math.max(box.y0+r,y))]);
+  const ab=([x,y])=>Math.min(...pts.map(p=>Math.hypot(p[0]-x,p[1]-y)));let best=K[0],bd=-1;
+  for(const k of K){const d=ab(k);if(d>=r+luft)return k;if(d>bd){bd=d;best=k}}
+  return best;
+}
 function figurenPlan(t,pe){
   const g=geometrie(t,pe.l/pe.d),n=zaehlen(t).n,sk=Math.min(170/(g.x1-g.x0+2),234/(g.y1-g.y0+2)),ox=105-(g.x0+g.x1)/2*sk,oy=37-g.y0*sk;
   const fs=Math.min(3.2,sk*.65);let zeilen='';
@@ -513,6 +666,20 @@ function uebersichtsblatt(t,pe){
     (pb<ry?`<path d="M${sx.toFixed(2)} ${pb.toFixed(2)}V${ry.toFixed(2)}" stroke="#17997A" stroke-width=".7"/>`:'')+
     `<rect x="${(sx-pw/2).toFixed(2)}" y="${(pb-ph).toFixed(2)}" width="${pw}" height="${ph}" rx="${ph/2}" fill="#17997A"/>`+
     `<text x="${sx.toFixed(2)}" y="${(pb-1.15).toFixed(2)}" font-size="3.2" font-weight="800" fill="#fff" text-anchor="middle">Start</text>`;
+  // Teile tragen dieselben Buchstaben wie beim Fädeln: Körper neben dem Start-Schild, jedes angesetzte Teil neben seinem Muster
+  const L=arbeitsteile(t);let teilMarken='';
+  if(L.length>1){
+    const mx=x=>ox+x*sk,my=y=>oy+y*sk,punkte=g.P.map(p=>[mx(p.x),my(p.y)]);
+    for(let x=sx-pw/2;x<=sx+pw/2;x+=1.5)punkte.push([x,pb-ph/2]);
+    const kx=sx+pw/2+3.5,ky=pb-ph/2,box={x0:mx(g.x0),x1:mx(g.x1),y0:top-6,y1:Math.min(F.y+F.h+6,my(g.y1))};
+    teilMarken=Planer.teilMarke(kx,ky,0,{r:2.4});punkte.push([kx,ky],[kx+2.4,ky],[kx-2.4,ky]);
+    for(const a of L.filter(a=>a.art==='n')){
+      const bs=g.P.filter(p=>p.ref[0]==='n'&&p.ref[1]===a.i).map(p=>[mx(p.x),my(p.y)]),h=sk*.5;
+      if(!bs.length)continue;
+      const b={x0:Math.min(...bs.map(p=>p[0]))-h,x1:Math.max(...bs.map(p=>p[0]))+h,y0:Math.min(...bs.map(p=>p[1]))-h,y1:Math.max(...bs.map(p=>p[1]))+h},[x,y]=markePlatz(b,punkte,2.4,box,sk*.5);
+      teilMarken+=Planer.teilMarke(x,y,a.b,{r:2.4});punkte.push([x,y],[x+2.4,y],[x-2.4,y],[x,y+2.4],[x,y-2.4]);
+    }
+  }
   const kopf=`<text x="${(ox+g.x0*sk-2.5).toFixed(2)}" y="${(top-1).toFixed(2)}" font-size="2.6" fill="#5b6573" text-anchor="end">Reihe</text>`+
     `<text x="${(ox+g.x1*sk+2.5).toFixed(2)}" y="${(top-1).toFixed(2)}" font-size="2.6" fill="#5b6573">Perlen</text>`;
   const legende=`<path d="M128 225.5h6" stroke="${A}" stroke-width=".8"/><text x="135.5" y="226.5" font-size="2.9" fill="#1c2430">Draht</text>`+(z.t?durchsichtig(150,226.5):'');
@@ -521,19 +688,20 @@ function uebersichtsblatt(t,pe){
   let feld=`<text x="10" y="232" font-size="4.2" font-weight="800" fill="#1c2430">Perlen bereitlegen</text>`;
   farben.forEach((c,k)=>{const fx=10+(k%sp)*(fb+4),fy=236+Math.floor(k/sp)*(fh+3);
     feld+=`<rect x="${fx.toFixed(2)}" y="${fy.toFixed(2)}" width="${fb.toFixed(2)}" height="${fh.toFixed(2)}" rx="2" fill="#F5F8FB" stroke="#D5DEE9" stroke-width=".4"/>`+
-      `<rect x="${(fx+2).toFixed(2)}" y="${fy+2}" width="2.8" height="4" rx=".9" fill="${FARBE[c][0]}" stroke="#1c2430" stroke-width=".3"/><text x="${(fx+6).toFixed(2)}" y="${fy+5}" font-size="2.6" fill="#1c2430"><tspan font-weight="800">${z[c]}</tspan> × ${FARBE[c][1]}</text>`});
+      `<rect x="${(fx+2).toFixed(2)}" y="${fy+2}" width="2.8" height="4" rx=".9" fill="${FARBE[c][0]}" stroke="#1c2430" stroke-width=".3"/>${zeichen(c,fx+3.4,fy+4,2.6)}<text x="${(fx+6).toFixed(2)}" y="${fy+5}" font-size="2.6" fill="#1c2430"><tspan font-weight="800">${z[c]}</tspan> × ${FARBE[c][1]}</text>`});
   // Material links
   const zwei=farben.length>8||((teile||genaeht)&&farben.length>4);let mat=`<text x="10" y="36" font-size="4.2" font-weight="800" fill="#1c2430">Du brauchst</text>`,y=42.5;
   farben.forEach((c,k)=>{const x=zwei&&k%2?47:10;
-    mat+=`<rect x="${x+.9}" y="${y-2.8}" width="2.6" height="3.6" rx=".8" fill="${FARBE[c][0]}" stroke="#1c2430" stroke-width=".3"/><text x="${x+6}" y="${y}" font-size="3.3" fill="#1c2430"><tspan font-weight="800">${z[c]}</tspan> × ${FARBE[c][1]}</text>`;
+    mat+=`<rect x="${x+.9}" y="${y-2.8}" width="2.6" height="3.6" rx=".8" fill="${FARBE[c][0]}" stroke="#1c2430" stroke-width=".3"/>${zeichen(c,x+2.2,y-1,2.4)}<text x="${x+6}" y="${y}" font-size="3.3" fill="#1c2430"><tspan font-weight="800">${z[c]}</tspan> × ${FARBE[c][1]}</text>`;
     if(!zwei||k%2||k===farben.length-1)y+=5});
   const lang_=draht(t,pe);
   mat+=`<text x="10" y="${y+.5}" font-size="3.1" fill="#1c2430"><tspan font-weight="800">${lang(lang_)}</tspan> Draht, ${pe.draht} dick</text>`+
     `<text x="10" y="${y+5}" font-size="3.1" fill="#1c2430">Seitenschneider</text>`;
   y+=9.5;
   const stuecke=new Map();   // Drahtstücke: gleiche Teile zusammen
-  for(const [w,k,cm] of [...(t.teile||[]).map(p=>[p.w,p.n,drahtStueck(p,pe)]),...(t.naht||[]).map(p=>[p.w||'Teil',1,drahtNaht(p,pe)])]){const s=w+'|'+cm,a=stuecke.get(s);if(a)a[1]+=k;else stuecke.set(s,[w,k,cm])}
-  if(stuecke.size)for(const [w,k,cm] of [['Körper',1,drahtStueck(t,pe)],...stuecke.values()]){mat+=`<text x="10" y="${y}" font-size="2.9" fill="#1c2430">${htmlText(w)} ${k>1?k+' × ':''}${lang(cm)}</text>`;y+=4.2}
+  const bst=(art,i)=>L.find(a=>a.art===art&&a.i===i).b;
+  for(const [w,k,cm,b] of [...(t.teile||[]).map((p,i)=>[p.w,p.n,drahtStueck(p,pe),bst('t',i)]),...(t.naht||[]).map((p,i)=>[p.w||'Teil',1,drahtNaht(p,pe),bst('n',i)])]){const s=b+'|'+cm,a=stuecke.get(s);if(a)a[1]+=k;else stuecke.set(s,[w,k,cm,b])}
+  if(stuecke.size)for(const [w,k,cm,b] of [['Körper',1,drahtStueck(t,pe),0],...stuecke.values()]){mat+=`${Planer.teilMarke(7.3,y-1,b,{r:1.7})}<text x="10" y="${y}" font-size="2.9" fill="#1c2430">${htmlText(w)} ${k>1?k+' × ':''}${lang(cm)}</text>`;y+=4.2}
   if(teile){mat+=`<text x="10" y="${y}" font-size="3.1" fill="#1c2430">Nähfaden</text>`;y+=4.5}
   y+=2;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 297" width="210mm" height="297mm" font-family="Nunito,Arial,sans-serif" role="img" aria-label="Perlentier ${htmlText(t.name)}: Fädelmuster">`+
@@ -542,11 +710,11 @@ function uebersichtsblatt(t,pe){
     `<text x="10" y="23.5" font-size="3.4" fill="#5b6573">${t.rows.length} Reihen · ${n} ${pe.name} · ${f1(breit)} × ${f1(hoch)} cm · ${t.stufe}${t.offsets?' · Blatt 2':teile?' · Blatt 1':''}</text>`+
     `<line x1="10" y1="27" x2="200" y2="27" stroke="#D5DEE9" stroke-width=".4"/>`+
     mat+technik(10,y,220-y,teile?'faden':genaeht?'draht':'',!!t.offsets)+
-    kopf+start+perlen(g,sk,ox,oy,.45,false)+draehte(t,g,sk,ox,oy)+lab+legende+feld+`</svg>`;
+    kopf+start+perlen(g,sk,ox,oy,.45,false)+draehte(t,g,sk,ox,oy)+lab+teilMarken+legende+feld+`</svg>`;
 }
 // Blatt 2: jedes angenähte Teil als eigenes Fädelmuster, rechts das zusammengesetzte Tier mit den Nähstellen in Rot.
 function teileBlatt(t,pe){
-  const q=pe.l/pe.d,hoehe=(272-32)/t.teile.length;let o='';
+  const q=pe.l/pe.d,hoehe=(272-32)/t.teile.length,AL=arbeitsteile(t);let o='';
   t.teile.forEach((p,k)=>{
     const n=zaehlen(p).n,g=geometrie(p,q,1);
     g.x0-=.35;g.x1+=.35;g.y1+=1.3;
@@ -559,7 +727,7 @@ function teileBlatt(t,pe){
       lab+=`<text x="${(ox+g.x0*sk-2).toFixed(2)}" y="${y}" font-size="${fs.toFixed(2)}" fill="#5b6573" text-anchor="end">${i+1}</text>`+
         `<text x="${(ox+g.x1*sk+2).toFixed(2)}" y="${y}" font-size="${fs.toFixed(2)}" font-weight="800" fill="#1c2430">${r.length}${b?`<tspan font-weight="600" fill="#17997A"> + ${htmlText(b.w||'Teile')} ${b.n}+${b.f}</tspan>`:''}</text>`});
     const sx=ox+(g.links[0]+g.rechts[0])/2*sk;
-    o+=`<text x="${F.x}" y="${F.y+4.5}" font-size="4.2" font-weight="800" fill="#1c2430">${htmlText(p.w)}</text>`+
+    o+=Planer.teilMarke(7.4,F.y+3,AL.find(a=>a.art==='t'&&a.i===k).b,{r:2.2})+`<text x="${F.x}" y="${F.y+4.5}" font-size="4.2" font-weight="800" fill="#1c2430">${htmlText(p.w)}</text>`+
       `<text x="${F.x}" y="${F.y+9.5}" font-size="2.9" fill="#5b6573">${p.n>1?`${p.n} × gespiegelt`:'1 ×'} · ${n} Perlen · ${lang(drahtStueck(p,pe))} Draht</text>`+
       `<text x="${sx.toFixed(2)}" y="${(F.y+14).toFixed(2)}" font-size="2.8" font-weight="800" fill="#17997A" text-anchor="middle">Start</text>`+
       perlen(g,sk,ox,oy,.45,false)+draehte(p,g,sk,ox,oy)+lab;
@@ -569,12 +737,17 @@ function teileBlatt(t,pe){
   const naehte=ga.naehte.map(s=>{const dx=s.b.x-s.a.x,dy=s.b.y-s.a.y,l=Math.hypot(dx,dy)||1,ux=dx/l*.42,uy=dy/l*.42;return `<path d="M${(ox+(s.a.x-ux)*sk).toFixed(2)} ${(oy+(s.a.y-uy)*sk).toFixed(2)}L${(ox+(s.b.x+ux)*sk).toFixed(2)} ${(oy+(s.b.y+uy)*sk).toFixed(2)}" stroke="#D7352E" stroke-width="${(sk*.22).toFixed(2)}" stroke-linecap="round"/>`}).join('');
   const reihen=[...new Set(ga.naehte.map(s=>s.reihe).filter(Boolean))].sort((a,b)=>a-b);
   const ty=Math.min(G.y+G.h+8,oy+(ga.y1+.3)*sk+8),marke=reihen.length?`<path d="M${G.x} ${(ty-1).toFixed(2)}h6" stroke="#D7352E" stroke-width="1.3" stroke-linecap="round"/><text x="${G.x+8}" y="${ty.toFixed(2)}" font-size="3.1" fill="#1c2430">Reihe ${reihen.join(', ')}</text>`:'';
+  // Im zusammengesetzten Tier dieselben Buchstaben: Körper in der Mitte, die Teile daneben
+  const d=gesamtDaten(t,q),mm=([x,y])=>[ox+x*sk,oy+y*sk],punkte=ga.P.map(b=>mm([b.x,b.y]));let markenG='';
+  for(const a of AL){const c=d.box[a.k];if(!c)continue;const b={x0:ox+c.x0*sk,x1:ox+c.x1*sk,y0:oy+c.y0*sk,y1:oy+c.y1*sk};
+    const [x,y]=a.art==='k'?[(b.x0+b.x1)/2,(b.y0+b.y1)/2]:markePlatz(b,punkte,2.2,{x0:G.x,x1:G.x+G.w,y0:G.y+6,y1:G.y+G.h+2},sk*.5);
+    markenG+=Planer.teilMarke(x,y,a.b,{r:2.2});if(a.art!=='k')punkte.push([x,y],[x+2.2,y],[x-2.2,y])}
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 297" width="210mm" height="297mm" font-family="Nunito,Arial,sans-serif" role="img" aria-label="Perlentier ${htmlText(t.name)}: Teile zum Annähen">`+
     `<rect width="210" height="297" fill="#fff"/>`+
     `<text x="10" y="17" font-size="${Math.min(7.5,330/(t.name.length+20))}" font-weight="800" fill="#1c2430" font-family="Fredoka,Nunito,Arial,sans-serif">Perlentier: ${htmlText(t.name)} · Teile</text>`+
     `<text x="10" y="23.5" font-size="3.4" fill="#5b6573">Blatt 2</text>`+
     `<line x1="10" y1="27" x2="200" y2="27" stroke="#D5DEE9" stroke-width=".4"/>`+o+
-    `<text x="${G.x}" y="${G.y+4.5}" font-size="4.2" font-weight="800" fill="#1c2430">Zusammennähen</text>`+perlen(ga,sk,ox,oy,.45,false)+naehte+marke+`</svg>`;
+    `<text x="${G.x}" y="${G.y+4.5}" font-size="4.2" font-weight="800" fill="#1c2430">Zusammennähen</text>`+perlen(ga,sk,ox,oy,.45,false)+naehte+marke+markenG+`</svg>`;
 }
 
 const ART={Kopf:'nur der Kopf',Gesicht:'nur das Gesicht',Figur:'die ganze Figur vereinfacht',Symbol:'als einfaches Symbol',Maske:'als Maske',Umriss:'als Umriss',Silhouette:'als Silhouette',Buchstabe:'als Buchstabe',Smiley:'als Smiley',Flagge:'als Flagge'};
@@ -586,8 +759,8 @@ function auswahl(){
   const such=$('suche').value.trim().toLocaleLowerCase('de-CH');
   const treffer=TIERE.filter(t=>(!S.nurPassend||passt(t))&&(!such||(t.name+' '+gruppeVon(t)).toLocaleLowerCase('de-CH').includes(such)));
   const bild=t=>t.offsets?`<img src="bilder/${t.quelle}.webp?v=${t.version||2}" alt="" loading="lazy" width="40" height="52">`:mini(t);
-  const knopf=t=>`<button type="button" class="tier" data-id="${t.id}" aria-pressed="${t.id===S.tier}">${t.naht?.length?NADEL:''}${t.offsets?`<img src="bilder/${t.quelle}.webp?v=${t.version||2}" alt="" loading="lazy" width="72" height="96">`:mini(t)}<span>${htmlText(t.name)}</span><small>${zaehlen(t).n} Perlen · ${PerlenEditor.schwierigkeit(t,S.klasse)}</small><small>${PerlenEditor.reihenbreite(t)} pro Reihe${passt(t)?'':' ⚠'}</small></button>`;
-  const breite=S.nurPassend?` bis ${PerlenEditor.maximum(S.klasse)} Perlen`:'';
+  const knopf=t=>`<button type="button" class="tier" data-id="${t.id}" aria-pressed="${t.id===S.tier}">${t.naht?.length?NADEL:''}${t.offsets?`<img src="bilder/${t.quelle}.webp?v=${t.version||2}" alt="" loading="lazy" width="72" height="96">`:mini(t)}<span>${htmlText(t.name)}</span><small>${zaehlen(t).n} Perlen · ${PerlenEditor.schwierigkeit(t,S.klasse)}</small><small>↔ ${PerlenEditor.reihenbreite(t)}${passt(t)?'':' ⚠'}</small></button>`;
+  const breite=S.nurPassend?` · ↔ ${PerlenEditor.maximum(S.klasse)}`:'';
   const leer='⚠ Kein Muster';
   // Zuerst Kacheln der Themen mit je vier Beispielen. Ein Klick öffnet das Thema; die Suche geht über alle Themen,
   // bei sehr vielen Treffern zeigen die Kacheln die Trefferzahl, damit nie eine endlose Liste entsteht.
@@ -596,18 +769,183 @@ function auswahl(){
   if(kacheln){
     const themen=gruppen.map(g=>[g,treffer.filter(t=>gruppeVon(t)===g)]).filter(([,l])=>l.length);
     $('tiere').innerHTML=`<div class="kats">${themen.map(([g,l])=>`<button type="button" class="kat" data-g="${htmlText(g)}"><span class="k-bilder">${l.filter(t=>!t.naht?.length).slice(0,4).map(bild).join('')}</span><b>${htmlText(g)}</b><span class="k-n">${l.length} ${such?'Treffer':'Muster'}</span></button>`).join('')}</div>`;
-    $('treffer').textContent=treffer.length?(such?`${treffer.length} Treffer in ${themen.length} Themen`:`${treffer.length} Muster${breite} in ${themen.length} Themen`):leer;
+    $('treffer').textContent=treffer.length?`${treffer.length} ${such?'Treffer':'Muster'}${breite}`:leer;
     return;
   }
   const liste=such?treffer:treffer.filter(t=>gruppeVon(t)===offen);
   $('tiere').innerHTML=(such?gruppen:[offen]).map(h=>{const l=liste.filter(t=>gruppeVon(t)===h);return l.length?`<h3>${htmlText(h)}</h3><div class="raster">${l.map(knopf).join('')}</div>`:''}).join('');
-  $('treffer').textContent=liste.length?`${liste.length} ${such?'Treffer':'Muster'}${breite}${such?'':` im Thema «${offen}»`}`:leer;
+  $('treffer').textContent=liste.length?`${liste.length} ${such?'Treffer':'Muster'}${breite}`:leer;
 }
+// Fädeln: Teile des Tiers, Stand pro Tier und Kind, eine Reihe nach der anderen. Die Reihenfolge der Teile ist frei wählbar.
+const umkehr=r=>[...r].reverse().join(''),seitenVon=p=>p.lage==='seiten'?[-1,1]:p.lage==='links'?[-1]:p.lage==='rechts'?[1]:[0],arbeitCache=new WeakMap();
+// k: Schlüssel des Stands, b: Nummer des Buchstabens (gleiche Teile gleicher Buchstabe), seite: -1 links, 1 rechts. rows mit der Spitze oben, so wie das Kind sie fädelt.
+function arbeitsteile(t){
+  if(arbeitCache.has(t))return arbeitCache.get(t);
+  const L=[{k:'k',art:'k',w:'Körper',rows:t.rows,beine:t.beine||[],offsets:t.offsets,gridWidth:t.gridWidth,roh:t.rows,seite:0}];
+  (t.naht||[]).forEach((p,i)=>{const kehr=(p.quer||0)<0||(!p.quer&&p.d<0);L.push({k:'n'+i,art:'n',i,w:p.w||'Teil',rows:kehr?p.rows.map(umkehr):p.rows,beine:[],strang:p.beine||[],roh:p.rows,seite:p.quer||Math.sign(p.x||0),quelle:p})});
+  (t.teile||[]).forEach((p,i)=>seitenVon(p).forEach((sx,c)=>L.push({k:'t'+i+'.'+c,art:'t',i,c,w:p.w,rows:sx<0?p.rows.map(umkehr):p.rows,beine:p.beine||[],roh:p.rows,seite:sx,quelle:p})));
+  const nr=new Map();L.forEach(a=>{const s=a.w+'|'+a.roh.join('/');if(!nr.has(s))nr.set(s,nr.size);a.b=nr.get(s)});
+  arbeitCache.set(t,L);return L;
+}
+const schritte=a=>a.rows.length+(a.art==='k'?0:1);   // pos==schritte: fertig; bei Teilen ist pos==rows.length der Annäh-Schritt
+const perlQ=()=>PERLEN[S.perle].l/PERLEN[S.perle].d;
+const AR={offen:false,t:null,L:[],teil:'k',pos:{},bau:'',d:null,dk:'',dt:null,z:null,gm:null};
+const arbeitSp=t=>Planer.speicher('schrittli.perlenarbeit.'+t.id+(t.version?'.v'+t.version:'')),letztSp=Planer.speicher('schrittli.perlenarbeit.letzt'),zeichenSp=Planer.speicher('schrittli.perlenarbeit.zeichen');
+const letztMerken=()=>letztSp.schreibe({tier:S.tier,perle:S.perle,offen:AR.offen});
+const aTeil=()=>AR.L.find(a=>a.k===AR.teil)||AR.L[0],istFertig=a=>AR.pos[a.k]>=schritte(a),alleFertig=()=>AR.L.every(istFertig);
+const modus=a=>alleFertig()?'alles':istFertig(a)?'fertig':a.art!=='k'&&AR.pos[a.k]===a.rows.length?'naehen':'reihe';
+function arbeitLaden(t){
+  const L=arbeitsteile(t),s=arbeitSp(t).lies()||{},pos={};
+  for(const a of L){const v=s.pos?.[a.k];pos[a.k]=Number.isInteger(v)?Math.max(0,Math.min(schritte(a),v)):0}
+  Object.assign(AR,{t,L,teil:L.some(a=>a.k===s.teil)?s.teil:L[0].k,pos,bau:''});
+}
+function vor(){
+  if(alleFertig()){Planer.merke();AR.L.forEach(a=>AR.pos[a.k]=0);AR.teil=AR.L[0].k;arbeitFrisch(true);return}
+  const a=aTeil(),n=schritte(a);Planer.merke();if(AR.pos[a.k]<n)AR.pos[a.k]++;
+  if(AR.pos[a.k]>=n){const i=AR.L.indexOf(a),nx=[...AR.L.slice(i+1),...AR.L.slice(0,i)].find(b=>!istFertig(b));if(nx)AR.teil=nx.k}
+  arbeitFrisch(true);
+}
+function zurueckSchritt(){const a=aTeil();if(!AR.pos[a.k])return;Planer.merke();AR.pos[a.k]--;arbeitFrisch(true)}
+function teilWahl(k){if(k===AR.teil)return;Planer.merke();AR.teil=k;arbeitFrisch(false)}
+function arbeitFrisch(glatt){
+  const a=aTeil(),m=modus(a);arbeitSp(AR.t).schreibe({teil:AR.teil,pos:AR.pos});
+  $('a-oben').classList.toggle('ganz',m!=='reihe');musterMalen(a,glatt);chipsStand(a);gesamtStand(a,m);folgeZeigen(a,m);standZeigen(a,m);knoepfe(a,m);legendeZeigen(a);faedelnStand();
+}
+function arbeitBau(){
+  const t=aktuellesTier();if(AR.t!==t)arbeitLaden(t);
+  const el=$('a-teile');el.hidden=AR.L.length<2;
+  el.innerHTML=AR.L.length<2?'':AR.L.map(a=>`<button type="button" class="a-chip" data-teil="${a.k}" aria-label="${htmlText(a.w)} ${Planer.teil(a.b)}${a.seite<0?' links':a.seite>0?' rechts':''}"><span class="a-bst">${Planer.teil(a.b)}</span>${a.seite?`<span class="a-seite" aria-hidden="true">${a.seite<0?'←':'→'}</span>`:''}${mini({rows:a.rows,beine:a.beine,offsets:a.offsets,gridWidth:a.gridWidth})}<span class="a-ok" aria-hidden="true">✓</span><span class="a-balken"><i></i></span></button>`).join('');
+  gesamtPruefen();gesamtBau();AR.bau='';arbeitFrisch(false);
+}
+function arbeitSicht(){
+  const t=aktuellesTier();$('arbeit').hidden=!AR.offen;document.body.dataset.ansicht=AR.offen?'arbeit':'plan';$('titel').textContent=AR.offen?t.name:'Perlentiere';
+  if(AR.offen){arbeitBau();letztMerken()}
+  else{if(AR.t!==t)arbeitLaden(t);faedelnStand();if(letztSp.lies()?.tier===S.tier)letztMerken()}
+}
+function faedelnStand(){
+  const s=AR.L.reduce((n,a)=>n+AR.pos[a.k],0),n=AR.L.reduce((m,a)=>m+schritte(a),0);
+  $('f-stand').textContent=s>=n?'✓':s?`${s}/${n}`:'';
+}
+function chipsStand(a){
+  document.querySelectorAll('#a-teile .a-chip').forEach(b=>{const c=AR.L.find(x=>x.k===b.dataset.teil),ist=c===a;
+    b.setAttribute('aria-pressed',ist);b.classList.toggle('ok',istFertig(c));b.querySelector('.a-balken i').style.width=Math.round(100*AR.pos[c.k]/schritte(c))+'%';
+    if(ist)b.scrollIntoView?.({block:'nearest',inline:'center'})});
+}
+
+// Grosses Muster: beim Fädeln Reihen auf Abstand, beim Annähen und am Schluss das ganze Tier
+function musterMalen(a,glatt){
+  const box=$('a-muster'),W=box.offsetWidth,H=box.offsetHeight,m=modus(a),key=[a.k,m==='reihe'?'r':m+AR.L.map(b=>istFertig(b)?1:0).join(''),W,H,S.perle,ZS.a].join('|');
+  if(!W||!H)return;
+  if(key!==AR.bau){AR.bau=key;(m==='reihe'?reiheBau:ganzBau)(a,m,W,H);glatt=false}
+  if(m==='reihe')reiheZeigen(AR.pos[a.k],glatt);else box.scrollTo?.(0,0);
+}
+function reiheBau(a,m,W,H){
+  const g=geometrie({rows:a.rows,beine:a.beine,offsets:a.offsets,gridWidth:a.gridWidth},perlQ(),1),lp=46,rp=34,oben=14,unten=18,bw=g.x1-g.x0,bh=g.y1-g.y0;
+  const s=Math.max(22,Math.min(56,(W-lp-rp)/bw,(H-oben-unten)/bh)),breit=Math.max(W,bw*s+lp+rp),hoch=Math.max(H,bh*s+oben+unten),ox=lp-g.x0*s+Math.max(0,(W-lp-rp-bw*s)/2),oy=oben-g.y0*s+Math.max(0,(H-oben-unten-bh*s)/2);
+  const R=a.rows.map(()=>[]);g.P.forEach(p=>R[p.ref[0]==='r'?p.ref[1]:a.beine[p.ref[1]].r-1].push(p));
+  AR.z=a.rows.map((_,i)=>{const b=R[i].filter(p=>p.ref[0]==='r').map(p=>p.x),l=Math.min(...b),h=g.q*s/2+7;return {x:ox+l*s-h,w:(Math.max(...b)-l)*s+2*h,mx:ox+Math.min(...R[i].map(p=>p.x))*s-h-18,y:oy+g.ry[i]*s-s/2-3,h:s+6,my:oy+g.ry[i]*s}});
+  $('a-muster').innerHTML=`<svg width="${breit.toFixed(0)}" height="${hoch.toFixed(0)}" viewBox="0 0 ${breit.toFixed(0)} ${hoch.toFixed(0)}" role="img" aria-label="${htmlText(a.w)}" font-family="Nunito,Arial,sans-serif">${perlen({P:[],W:g.W,q:g.q},s,ox,oy,.45,true)}<rect class="a-band" rx="10"/>${a.rows.map((_,i)=>`<g class="a-r" data-r="${i}">${perlen({P:R[i],q:g.q},s,ox,oy,.45,false)}<text class="a-nr" x="22" y="${(oy+g.ry[i]*s+5).toFixed(1)}">${i+1}</text></g>`).join('')}<g class="a-marke"><circle r="15"/><text y="7"></text></g></svg>`;
+}
+function reiheZeigen(k,glatt){
+  const box=$('a-muster'),z=AR.z[k],band=box.querySelector('.a-band'),mk=box.querySelector('.a-marke');if(!z||!band)return;
+  box.querySelectorAll('.a-r').forEach((e,i)=>e.setAttribute('class','a-r'+(i<k?' f':i>k?' o':'')));
+  band.setAttribute('x',z.x.toFixed(1));band.setAttribute('y',z.y.toFixed(1));band.setAttribute('width',z.w.toFixed(1));band.setAttribute('height',z.h.toFixed(1));
+  mk.setAttribute('transform',`translate(${Math.max(18,z.mx).toFixed(1)} ${z.my.toFixed(1)})`);mk.querySelector('text').textContent=k+1;
+  const leise=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  box.scrollTo?.({top:Math.max(0,z.my-box.clientHeight*.38),left:Math.max(0,z.w>box.clientWidth?z.x-44:z.x+z.w/2-box.clientWidth/2),behavior:glatt&&!leise?'smooth':'auto'});
+}
+function ganzBau(a,m,W,H){
+  const d=gesamtFuer(),g=d.g,rand=18,bw=g.x1-g.x0,bh=g.y1-g.y0,s=Math.min(56,(W-2*rand)/bw,(H-2*rand)/bh),ox=(W-bw*s)/2-g.x0*s,oy=(H-bh*s)/2-g.y0*s;
+  let o=AR.L.map(b=>`<g opacity="${m==='alles'||b===a||istFertig(b)||(m==='naehen'&&b.art==='k')?1:.3}">${perlen({P:d.gr[b.k],q:g.q},s,ox,oy,.45,false,s>=12)}</g>`).join('');
+  if(m==='naehen'){
+    const X=x=>(ox+x*s).toFixed(1),Y=y=>(oy+y*s).toFixed(1);
+    o=zielReihen(a,d).map(r=>`<rect class="a-band" x="${X(d.gt.links[r]-.2)}" y="${Y(d.gt.ry[r]-.56)}" width="${((d.gt.rechts[r]-d.gt.links[r]+.4)*s).toFixed(1)}" height="${(1.12*s).toFixed(1)}" rx="8"/>`).join('')+o;
+    if(a.art==='n')o+=angenaeht({naht:[a.quelle]},{...d.gt,T:[d.gt.T[a.i]]},s,ox,oy);
+    else{const n=g.naehte[teilNaht(a)];if(n){const dx=n.b.x-n.a.x,dy=n.b.y-n.a.y,l=Math.hypot(dx,dy)||1,ux=dx/l*.42,uy=dy/l*.42;o+=`<path d="M${X(n.a.x-ux)} ${Y(n.a.y-uy)}L${X(n.b.x+ux)} ${Y(n.b.y+uy)}" stroke="#D7352E" stroke-width="${(s*.22).toFixed(2)}" stroke-linecap="round"/>`}}
+  }
+  $('a-muster').innerHTML=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${htmlText(AR.t.name)}" font-family="Nunito,Arial,sans-serif">${o}</svg>`;
+}
+const teilNaht=a=>AR.t.teile.slice(0,a.i).reduce((s,p)=>s+seitenVon(p).length,0)+a.c;
+// Körperreihen, an denen ein Teil angesetzt wird (ab 0)
+function zielReihen(a,d){
+  const n=AR.t.rows.length,z=r=>Math.max(0,Math.min(n-1,r)),eins=l=>[...new Set(l)].sort((x,y)=>x-y);
+  if(a.art==='n')return a.quelle.quer?eins(a.quelle.an.map(z)):eins(d.gt.T[a.i].enden.map(e=>d.gt.ry.indexOf(e.p[3][1])).filter(r=>r>=0));
+  const s=d.g.naehte[teilNaht(a)];return s&&s.reihe?[s.reihe-1]:[];
+}
+
+// Gesamtansicht: ganzes Tier aus allen Teilen. gr: Perlen je Teil, box: Rahmen je Teil, rb: Rahmen je Reihe (ohne Beine)
+function gesamtDaten(t,q){
+  const g=zusammen(t,q),gt=geometrie(t,q),gr={},box={},rb={},weit=(b,p)=>{b.x0=Math.min(b.x0,p.x-.5);b.x1=Math.max(b.x1,p.x+.5);b.y0=Math.min(b.y0,p.y-.5);b.y1=Math.max(b.y1,p.y+.5)},neu=()=>({x0:1e9,x1:-1e9,y0:1e9,y1:-1e9});
+  const dazu=(p,k,r,zeile)=>{(gr[k]||=[]).push(p);weit(box[k]||=neu(),p);if(zeile)weit((rb[k]||={})[r]||=neu(),p)};
+  gt.P.forEach((p,i)=>{const [a,b,c]=p.ref,v=g.P[i];
+    if(a==='r')dazu(v,'k',b,true);else if(a==='b')dazu(v,'k',t.beine[b].r-1,false);else if(a==='n')dazu(v,'n'+b,c,true);else dazu(v,'n'+b,t.naht[b].beine[c].k||0,false)});
+  let o=gt.P.length;
+  (t.teile||[]).forEach((p,pi)=>{const gp=geometrie(p,q);seitenVon(p).forEach((sx,c)=>{gp.P.forEach((b,i)=>{const [a,x]=b.ref;dazu(g.P[o+i],'t'+pi+'.'+c,a==='r'?x:p.beine[x].r-1,a==='r')});o+=gp.P.length})});
+  return {g,gt,gr,box,rb};
+}
+function gesamtFuer(){const k=S.perle;if(AR.dk!==k||AR.dt!==AR.t){AR.d=gesamtDaten(AR.t,perlQ());AR.dk=k;AR.dt=AR.t}return AR.d}
+function gesamtBau(){
+  const d=gesamtFuer(),g=d.g,sk=10,W=(g.x1-g.x0)*sk+24,H=(g.y1-g.y0)*sk+24,ox=12-g.x0*sk,oy=12-g.y0*sk,r=Math.max(7,.085*Math.max(W,H));
+  $('a-gesamt').innerHTML=`<svg viewBox="0 0 ${W.toFixed(1)} ${H.toFixed(1)}" aria-hidden="true" preserveAspectRatio="xMidYMid meet">${AR.L.map(a=>{const b=d.box[a.k];return `<g class="g-t" data-teil="${a.k}"><rect x="${(ox+b.x0*sk).toFixed(1)}" y="${(oy+b.y0*sk).toFixed(1)}" width="${((b.x1-b.x0)*sk).toFixed(1)}" height="${((b.y1-b.y0)*sk).toFixed(1)}" fill="transparent"/>${perlen({P:d.gr[a.k],q:g.q},sk,ox,oy,.45,false,false)}</g>`}).join('')}<rect class="g-band" rx="3" stroke-width="${(r*.14).toFixed(2)}"/><rect class="g-rahmen" rx="6" stroke-width="${(r*.28).toFixed(2)}"/>${AR.L.length>1?AR.L.map(a=>{const b=d.box[a.k];return `<g data-teil="${a.k}">${Planer.teilMarke(ox+(b.x0+b.x1)/2*sk,oy+(b.y0+b.y1)/2*sk,a.b,{r})}</g>`}).join(''):''}</svg>`;
+  AR.gm={ox,oy,sk};
+}
+function gesamtStand(a,m){
+  const sv=$('a-gesamt').querySelector('svg');if(!sv)return;
+  sv.querySelectorAll('.g-t').forEach(e=>{const c=AR.L.find(x=>x.k===e.dataset.teil);e.classList.toggle('ist',c===a);e.classList.toggle('ok',istFertig(c))});
+  const d=gesamtFuer(),{ox,oy,sk}=AR.gm,setz=(r,b,luft)=>{if(!b){r.setAttribute('width',0);r.setAttribute('height',0);return}r.setAttribute('x',(ox+(b.x0-luft)*sk).toFixed(1));r.setAttribute('y',(oy+(b.y0-luft)*sk).toFixed(1));r.setAttribute('width',((b.x1-b.x0+2*luft)*sk).toFixed(1));r.setAttribute('height',((b.y1-b.y0+2*luft)*sk).toFixed(1))};
+  setz(sv.querySelector('.g-rahmen'),AR.L.length>1?d.box[a.k]:null,.15);
+  setz(sv.querySelector('.g-band'),m==='reihe'?d.rb[a.k]?.[AR.pos[a.k]]:null,.05);
+}
+function gesamtPruefen(){   // ohne Teile nur, wenn das Muster nicht ganz hineinpasst
+  const o=$('a-oben'),a=AR.L[0],g=geometrie({rows:a.rows,beine:a.beine,offsets:a.offsets,gridWidth:a.gridWidth},perlQ(),1);
+  o.classList.toggle('ohne',AR.L.length<2&&Math.min((o.offsetWidth-80)/(g.x1-g.x0),(o.offsetHeight-32)/(g.y1-g.y0))>=22);
+}
+
+// Reihe als echte Folge: Gruppen gleicher Farbe in Fädelrichtung
+function folge(a,k){const G=[];for(const c of a.rows[k]){const l=G[G.length-1];if(l&&l.c===c)l.n++;else G.push({c,n:1})}return G}
+function perlGruppe(c,n){
+  const q=perlQ(),z=Math.min(n,5),w=z*q*30+10,P=Array.from({length:z},(_,i)=>({x:i*q,y:0,c,r:0}));
+  return `<span class="fg" role="img" aria-label="${n} × ${FARBE[c][1]}"><b>${n}×</b><svg viewBox="0 0 ${w.toFixed(1)} 34" width="${w.toFixed(1)}" height="34" aria-hidden="true" font-family="Nunito,Arial,sans-serif"><path d="M0 17H${w.toFixed(1)}" stroke="#9aa4b1" stroke-width="2"/>${perlen({P,q},30,5+q*15,17,.45,false)}</svg>${n>z?'<u aria-hidden="true">…</u>':''}</span>`;
+}
+const FP='<svg class="fp" viewBox="0 0 9 14" aria-hidden="true"><path d="M2 2l5 5-5 5"/></svg>';
+function folgeZeigen(a,m){
+  const el=$('a-folge'),k=AR.pos[a.k];el.classList.remove('dicht');
+  if(m==='reihe'){
+    const G=folge(a,k);el.classList.toggle('dicht',G.length>8);
+    const beine=[...a.beine.filter(b=>b.r-1===k).map(b=>[b,2]),...(a.strang||[]).filter(b=>b.k===k).map(b=>[b,1])];
+    el.innerHTML=G.map(g=>perlGruppe(g.c,g.n)).join(FP)+beine.map(([b,x])=>`<span class="fb"><b>${htmlText(b.w||'Teil')} ${x}×</b>${[b.n?perlGruppe(b.c,b.n):'',b.f?perlGruppe(b.fc,b.f):''].filter(Boolean).join(FP)}</span>`).join('');
+  }else if(m==='naehen'){
+    const z=zielReihen(a,gesamtFuer());
+    el.innerHTML=`<span class="a-nadel">${NADEL}Annähen</span><span class="a-z"><span class="a-bm">${Planer.teil(a.b)}</span>${FP}<span class="a-bm">A</span>${z.length?` Reihe ${z.map(r=>r+1).join(', ')}`:''}</span>`;
+  }else el.innerHTML='<span class="a-ganz" role="img" aria-label="Fertig">✓</span>';
+}
+function standZeigen(a,m){
+  const n=a.rows.length,k=AR.pos[a.k],el=$('a-stand');
+  el.setAttribute('role','img');el.setAttribute('aria-label',m==='reihe'?`Reihe ${k+1} von ${n}`:`${k} von ${schritte(a)}`);
+  el.innerHTML=`<span><b>${Math.min(k+1,n)}</b>/${n}</span><i style="--w:${Math.round(100*k/schritte(a))}%"></i>${m==='reihe'?`<span>${a.rows[k].length} ${a.rows[k].length===1?'Perle':'Perlen'}</span>`:''}`;
+}
+const PF_AB='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15M5 13l7 7 7-7"/></svg>',PF_NEBEN='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg>',PF_HAKEN='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13l5 6L20 6"/></svg>',PF_NEU='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.5-5.8"/><path d="M20 3v5h-5"/></svg>';
+function knoepfe(a,m){
+  const b=$('a-vor'),k=AR.pos[a.k],n=a.rows.length,letzte=m==='reihe'&&k===n-1,z=$('a-zurueck');
+  z.disabled=!k;z.setAttribute('aria-label',m==='reihe'?'Vorherige Reihe':'Zurück');
+  const [i,w]=m==='alles'?[PF_NEU,'Neu beginnen']:m==='fertig'?[PF_NEBEN,'Nächstes Teil']:m==='naehen'?[PF_HAKEN,'Angenäht']:letzte?(a.art==='k'?[PF_HAKEN,'Fertig']:[NADEL,'Annähen']):[PF_AB+(k+2),'Nächste Reihe'];
+  b.innerHTML=i;b.setAttribute('aria-label',w);
+}
+function legendeZeigen(a){
+  const el=$('a-legende');el.hidden=!ZS.a;if(!ZS.a){el.innerHTML='';return}
+  const cs=[...new Set([...a.rows.join(''),...[...a.beine,...(a.strang||[])].flatMap(b=>[b.n?b.c:'',b.f?b.fc:'']).filter(Boolean)])];
+  el.innerHTML=cs.map(c=>`<span><svg viewBox="0 0 17 26" aria-hidden="true" font-family="Nunito,Arial,sans-serif">${perlen({P:[{x:0,y:0,c,r:0}],q:.62},26,8.5,13,.45,false)}</svg>${FARBE[c][1]}</span>`).join('');
+}
+// Plan: Kennzahlen als Marken, Blattwahl
+const mk=(w,i)=>`<span class="m" role="img" aria-label="${htmlText(String(w))}">${i}</span>`,IC_PERLE='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="4" width="10" height="16" rx="4"/><path d="M12 1v22"/></svg>',IC_DRAHT='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17C8 2 10 22 15 8s6 6 6 6"/></svg>';
+let svgsAkt=[];
+function blattMarken(){document.querySelectorAll('#blaetter .pl-blatt').forEach((el,i)=>{el.dataset.i=i;el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-label','Blatt '+(i+1));el.setAttribute('aria-pressed',i===S.blatt)})}
+function blattZeigen(i){S.blatt=i;$('vorschau').innerHTML=svgsAkt[i];blattMarken()}
 function oeffnen(g){offen=g;$('suche').value='';auswahl()}
 function liste(){
   $('klasse').innerHTML=Object.entries(PerlenEditor.GRENZEN).map(([k,max])=>`<option value="${k}">${k}. Klasse · ${max} Perlen</option>`).join('');
   $('klasse').value=String(S.klasse);
-  $('klasse').addEventListener('change',()=>{S.klasse=PerlenEditor.klasse($('klasse').value);try{localStorage.setItem('schrittli.perlen.klasse',S.klasse)}catch(e){}zeichnen();auswahl()});
+  $('klasse').addEventListener('change',()=>{Planer.merke();S.klasse=PerlenEditor.klasse($('klasse').value);try{localStorage.setItem('schrittli.perlen.klasse',S.klasse)}catch(e){}zeichnen();auswahl()});
   $('nur-passend').checked=S.nurPassend;
   $('nur-passend').addEventListener('change',()=>{S.nurPassend=$('nur-passend').checked;try{localStorage.setItem('schrittli.perlen.nurPassend',S.nurPassend?'1':'0')}catch(e){}auswahl()});
   $('suche').addEventListener('input',auswahl);
@@ -617,36 +955,66 @@ function liste(){
   $('tiere').addEventListener('click',e=>{
     const kat=e.target.closest('.kat');
     if(kat){oeffnen(kat.dataset.g);$('zurueck').scrollIntoView({behavior:'smooth',block:'start'});return}
-    const k=e.target.closest('.tier');if(!k)return;S.tier=k.dataset.id;gewaehlt=true;zeichnen();
-    if(matchMedia('(max-width:860px)').matches)$('vorschau').scrollIntoView({behavior:'smooth',block:'start'})});
+    const k=e.target.closest('.tier');if(!k)return;Planer.merke();S.tier=k.dataset.id;S.blatt=0;gewaehlt=true;zeichnen();Planer.leuchte('#vorschau')});
   $('perlen').innerHTML=Object.entries(PERLEN).map(([k,p])=>`<button type="button" class="chip" data-p="${k}" aria-pressed="false">${p.name}</button>`).join('');
-  $('perlen').addEventListener('click',e=>{const k=e.target.closest('.chip');if(!k)return;S.perle=k.dataset.p;zeichnen()});
+  $('perlen').addEventListener('click',e=>{const k=e.target.closest('.chip');if(!k)return;Planer.merke();S.perle=k.dataset.p;zeichnen();Planer.leuchte('#vorschau')});
+  $('blaetter').addEventListener('click',e=>{const b=e.target.closest('.pl-blatt');if(b)blattZeigen(+b.dataset.i)});
+  $('blaetter').addEventListener('keydown',e=>{const b=e.target.closest('.pl-blatt');if(b&&(e.key==='Enter'||e.key===' ')){e.preventDefault();blattZeigen(+b.dataset.i)}});
 }
 function zeichnen(){
   const t=aktuellesTier(),pe=PERLEN[S.perle];
   document.querySelectorAll('.tier').forEach(k=>k.setAttribute('aria-pressed',k.dataset.id===t.id));
   document.querySelectorAll('.chip').forEach(k=>k.setAttribute('aria-pressed',k.dataset.p===S.perle));
-  const svg=blatt(t,pe);
-  $('vorschau').innerHTML=svg;$('druck').innerHTML=svg;
+  document.querySelectorAll('.zeichen-wahl button').forEach(k=>k.setAttribute('aria-pressed',k.dataset.z===ZS.a));
+  svgsAkt=blaetterVon(t,pe);S.blatt=Math.min(S.blatt||0,svgsAkt.length-1);
+  $('druck').innerHTML=svgsAkt.join('');$('vorschau').innerHTML=svgsAkt[S.blatt];
+  druckK.zeige({blaetter:svgsAkt.length});Planer.blaetter('#blaetter',svgsAkt,{spalten:3});blattMarken();
   $('klasse').value=String(S.klasse);
-  const teile=(t.teile||[]).reduce((s,p)=>s+p.n,0)+(t.naht||[]).length;
-  $('info').textContent=`${PerlenEditor.reihenbreite(t)} Perlen breit · ${t.rows.length} Reihen · ${zaehlen(t).n} Perlen · ${lang(draht(t,pe))} Draht · ${PerlenEditor.schwierigkeit(t,S.klasse)}${teile?` · ${teile===1?'1 Teil':teile+' Teile'}`:''}${zaehlen(t).n>1500||t.rows.length>40?' · ⚠ Sehr gross':''}`;
+  const teile=(t.teile||[]).reduce((s,p)=>s+p.n,0)+(t.naht||[]).length,n=zaehlen(t).n,br=PerlenEditor.reihenbreite(t),st=PerlenEditor.schwierigkeit(t,S.klasse),dl=lang(draht(t,pe));
+  $('info').innerHTML=mk(br+' Perlen breit','<i>↔</i>'+br)+mk(t.rows.length+' Reihen','<i>↕</i>'+t.rows.length)+mk(n+' Perlen',IC_PERLE+n)+mk(dl+' Draht',IC_DRAHT+dl)+mk(st,st)+(teile?mk(teile===1?'1 Teil':teile+' Teile',NADEL+teile):'')+(n>1500||t.rows.length>40?'<span class="m warn">⚠ Sehr gross</span>':'');
   $('vergleich').hidden=!t.quelle;
   if(t.quelle){$('original-bild').src=(t.offsets?'originale/':'../figuren/bilder/')+t.quelle+'.webp?v='+(t.version||2);$('original-bild').alt='Original: '+t.name;$('vergleich-muster').innerHTML=mini(t)}
-  const p=new URLSearchParams(gewaehlt?{tier:t.id,klasse:S.klasse}:{klasse:S.klasse});if(S.perle!=='r3')p.set('perle',S.perle);   // ohne Auswahl kein Muster in der Adresse: Neuladen zeigt wieder die Themen
+  const p=new URLSearchParams(gewaehlt?{tier:t.id,klasse:S.klasse}:{klasse:S.klasse});if(S.perle!=='r3')p.set('perle',S.perle);if(AR.offen)p.set('arbeit','1');   // ohne Auswahl kein Muster in der Adresse: Neuladen zeigt wieder die Themen
   try{history.replaceState(null,'','?'+p)}catch(e){}
   document.title=`Schritt für Schritt · Perlentier ${t.name}`;
+  arbeitSicht();
 }
 const q=new URLSearchParams(location.search);
 let gewaehlt=TIERE.some(t=>t.id===q.get('tier'));   // Muster gewählt oder verlinkt
 if(gewaehlt)S.tier=q.get('tier');
 if(PERLEN[q.get('perle')])S.perle=q.get('perle');
+const letzt=letztSp.lies(),druckK=Planer.druckkopf('#papier',{papiere:['a4']});
+if(letzt&&TIERE.some(t=>t.id===letzt.tier)&&(!gewaehlt||letzt.tier===S.tier)){if(!gewaehlt)S.tier=letzt.tier;if(PERLEN[letzt.perle]&&!q.get('perle'))S.perle=letzt.perle;AR.offen=!!letzt.offen;if(AR.offen)gewaehlt=true}   // Neuladen: dort weiter, wo das Kind war
+if(q.get('arbeit')==='1'&&gewaehlt)AR.offen=true;
+{const z=zeichenSp.lies();if(z==='b'||z==='s')ZS.a=z}
+document.querySelectorAll('.zeichen-wahl').forEach(el=>{el.innerHTML=[['','Nur Farbe','<i class="kreis"></i>'],['b','Buchstaben','A'],['s','Symbole','◆']].map(([z,w,i])=>`<button type="button" data-z="${z}" aria-label="${w}" title="${w}">${i}</button>`).join('')});
+Planer.verlauf({
+  hole(){return {tier:S.tier,perle:S.perle,klasse:S.klasse,gewaehlt,thema:offen,blatt:S.blatt||0,arbeit:AR.offen,stand:arbeitSp(aktuellesTier()).lies()}},
+  setze(z){S.tier=z.tier;S.perle=z.perle;S.klasse=z.klasse;gewaehlt=z.gewaehlt;offen=z.thema;S.blatt=z.blatt;AR.offen=z.arbeit;try{localStorage.setItem('schrittli.perlen.klasse',S.klasse)}catch(e){}
+    const sp=arbeitSp(aktuellesTier());if(z.stand)sp.schreibe(z.stand);else sp.weg();AR.t=null;zeichnen();auswahl()}
+});
 liste();zeichnen();
 $('drucken').addEventListener('click',()=>window.print());
-$('anpassen').addEventListener('click',()=>PerlenEditor.oeffnen({
-  muster:aktuellesTier(),original:TIERE.find(t=>t.id===S.tier),klasse:S.klasse,palette:FARBE,perle:PERLEN[S.perle],geometrie,draehte,zaehlen,
-  speichern:t=>{eigene.set(S.tier,t);let ok=true;try{localStorage.setItem(speicherKey(t),JSON.stringify(t))}catch(e){ok=false}zeichnen();return ok;}
-}));
+$('anpassen').addEventListener('click',()=>{
+  const v=aktuellesTier(),key=speicherKey(v),alt=(()=>{try{return localStorage.getItem(key)}catch(e){return null}})(),hatte=eigene.has(S.tier),altT=eigene.get(S.tier),id=S.tier,sig=x=>JSON.stringify([x.rows,x.beine,x.offsets]),basis=sig(v);let gemerkt=false;
+  PerlenEditor.oeffnen({muster:v,original:TIERE.find(t=>t.id===S.tier),klasse:S.klasse,palette:FARBE,perle:PERLEN[S.perle],geometrie,draehte,zaehlen,
+    speichern:t=>{
+      if(!gemerkt&&sig(t)!==basis){gemerkt=true;Planer.merke(()=>{try{alt===null?localStorage.removeItem(key):localStorage.setItem(key,alt)}catch(e){}if(hatte)eigene.set(id,altT);else eigene.delete(id);AR.t=null;zeichnen()})}
+      eigene.set(S.tier,t);let ok=true;try{localStorage.setItem(speicherKey(t),JSON.stringify(t))}catch(e){ok=false}zeichnen();return ok}});
+});
+$('faedeln').addEventListener('click',()=>{Planer.merke();AR.offen=true;gewaehlt=true;zeichnen()});
+$('a-zu').addEventListener('click',()=>{Planer.merke();AR.offen=false;zeichnen()});
+$('a-vor').addEventListener('click',vor);
+$('a-zurueck').addEventListener('click',zurueckSchritt);
+for(const id of ['a-teile','a-gesamt'])$(id).addEventListener('click',e=>{const b=e.target.closest('[data-teil]');if(b)teilWahl(b.dataset.teil)});
+document.addEventListener('click',e=>{const b=e.target.closest?.('.zeichen-wahl button');if(!b)return;ZS.a=b.dataset.z;zeichenSp.schreibe(ZS.a);zeichnen()});
+document.addEventListener('keydown',e=>{
+  if(!AR.offen||e.ctrlKey||e.metaKey||e.altKey||document.querySelector('dialog[open]'))return;
+  const z=e.composedPath?.()[0]||e.target;if(z.closest?.('input,textarea,select,[contenteditable]'))return;
+  if(e.key==='ArrowDown'||e.key==='ArrowRight'||(e.key===' '&&!z.closest?.('button,a'))){e.preventDefault();vor()}
+  else if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();zurueckSchritt()}
+});
+if(window.ResizeObserver)new ResizeObserver(()=>{if(AR.offen){gesamtPruefen();musterMalen(aTeil(),false)}}).observe($('a-muster'));
 </script>
 </body>
 </html>
